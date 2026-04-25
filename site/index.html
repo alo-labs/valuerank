@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ValueRank v4.3 — AI Model Ranking</title>
+  <title>ValueRank v5.0 — AI Model Ranking</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -599,7 +599,7 @@
 <nav>
   <div class="nav-brand">
     <span class="logo">ValueRank</span>
-    <span class="badge">v4.3</span>
+    <span class="badge">v5.0</span>
   </div>
   <div class="nav-links">
     <a href="#rankings" class="active">Rankings</a>
@@ -609,7 +609,7 @@
     <a href="#faq">FAQ</a>
   </div>
   <div class="nav-right">
-    <div class="nav-meta">April 26, 2026 · 12 models · 18 dimensions</div>
+    <div class="nav-meta">April 26, 2026 · 20 models · 18 dimensions</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
       <i data-lucide="sun" class="icon-sun"></i>
       <i data-lucide="moon" class="icon-moon"></i>
@@ -628,12 +628,12 @@
         <h1 class="hero-title">Which model delivers the most <span>value?</span></h1>
       </div>
       <div>
-        <p class="hero-desc">ValueRank ranks 12 frontier AI models across 18 dimensions using rank-based normalization with a 25% cost weight — designed for production software engineering teams where price, speed, and reliability matter alongside raw capability.</p>
+        <p class="hero-desc">ValueRank ranks 20 frontier AI models across 18 dimensions using rank-based normalization with a 25% cost weight — designed for production software engineering teams where price, speed, and reliability matter alongside raw capability.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><div class="hero-stat-num">12</div><div class="hero-stat-label">Models</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-label">Models</div></div>
           <div class="hero-stat"><div class="hero-stat-num">18</div><div class="hero-stat-label">Dimensions</div></div>
           <div class="hero-stat"><div class="hero-stat-num">25%</div><div class="hero-stat-label">Cost Weight</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">v4.3</div><div class="hero-stat-label">Version</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">v5.0</div><div class="hero-stat-label">Version</div></div>
         </div>
       </div>
       <div class="hero-podium">
@@ -720,8 +720,8 @@
       </div>
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
-        <div class="insight-title">v4.3 Correction</div>
-        <div class="insight-body"><strong>Kimi K2.6</strong> rises #6→#4 (+3.7 pts) after τ²-Bench corrected from 72.4% to 96.0% via primary-source verification. GPT-5.5 LCB reverted to ⊘ (misattribution from multi-AI report).</div>
+        <div class="insight-title">v5.0 Expansion</div>
+        <div class="insight-body"><strong>8 new models</strong> added (Mistral Large 3, Gemma 3 27B, Phi-4, Nova Pro, Grok 3, Maverick, Scout, o3-mini). Cost range expands $73–$4,970 → $0–$4,970, compressing all existing cost scores. ML3/Gemma3/Phi-4 debut #3–#5 via cost arbitrage (12–16 ⊘ quality dims).</div>
       </div>
     </div>
   </div>
@@ -762,7 +762,7 @@
       </div>
       <!-- Heatmap -->
       <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 12 models × 18 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 20 models × 18 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
         <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
       </div>
       <!-- Bubble -->
@@ -920,7 +920,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v4.3 has a <strong>2-model frontier</strong>: <strong>KAT-Coder-Pro-V2</strong> (the only Budget-tier model at $73 eval cost) and <strong>Gemini 3.1 Pro</strong> (quality #1 overall at $892). Every other model is dominated by at least one of these two on at least one axis.
+          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v5.0 has a <strong>6-model frontier</strong>: <strong>Gemma 3 27B</strong> ($0), <strong>Phi-4</strong> ($4), <strong>Mistral Large 3</strong> ($39), <strong>Nova Pro</strong> ($201), <strong>Grok 3</strong> ($312), and <strong>Gemini 3.1 Pro</strong> (quality #1 at $892). Every other model is dominated by at least one frontier model on both quality and cost.
         </div>
       </div>
 
@@ -930,7 +930,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. v4.0 → v4.3 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
+          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. v4.0 → v5.0 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
         </div>
       </div>
 
@@ -940,7 +940,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Quarterly, or whenever a major model launch would materially affect the rankings. v4.3 (April 26, 2026) resolved all provisional data from v4.2. The next scheduled update is <strong>May 2026</strong> or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
+          Quarterly, or whenever a major model launch would materially affect the rankings. v5.0 (April 26, 2026) expanded to 20 models with 8 new entrants. The next scheduled update is <strong>May 2026</strong> (priority: Nova Pro, Gemma3, Phi-4 benchmark gap-fill) or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
         </div>
       </div>
 
@@ -953,7 +953,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v4.3 · April 26, 2026 · 12 models × 18 dimensions · No provisional data · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v5.0 · April 26, 2026 · 20 models × 18 dimensions · No provisional data · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -1229,11 +1229,11 @@ function initCostSlider() {
 // CHART 1: PARETO SCATTER
 // ─────────────────────────────────────────────
 function renderPareto() {
-  const frontier = [{model:MODELS[2],q:41.3},{model:MODELS[0],q:72.7}]; // KAT, Gemini
+  const frontier = [{model:MODELS[2],q:49.4},{model:MODELS[0],q:73.8}]; // ML3, Gemini
 
-  // Step function: x=[73,892,892,6000], y=[41.3,41.3,72.7,72.7]
-  const stepX = [30, 73, 892, 892, 6500];
-  const stepY = [41.3, 41.3, 41.3, 72.7, 72.7];
+  // Step function: x=[38.67,892,892,6000], y=[49.4,49.4,73.8,73.8]
+  const stepX = [10, 38.67, 892, 892, 6500];
+  const stepY = [49.4, 49.4, 49.4, 73.8, 73.8];
 
   const traces = [];
 
@@ -1280,12 +1280,12 @@ function renderPareto() {
   const layout = {
     ...getPlotlyLayout(),
     title:{text:'Quality Sub-Score vs. Eval Cost — Pareto Frontier', font:plotlyTitle(14)},
-    xaxis:{...getPlotlyLayout().xaxis, title:'Eval Cost ($)', type:'log', range:[Math.log10(50),Math.log10(7000)],
-      tickvals:[100,200,500,1000,2000,5000], ticktext:['$100','$200','$500','$1K','$2K','$5K']},
+    xaxis:{...getPlotlyLayout().xaxis, title:'Eval Cost ($)', type:'log', range:[Math.log10(25),Math.log10(7000)],
+      tickvals:[30,100,200,500,1000,2000,5000], ticktext:['$30','$100','$200','$500','$1K','$2K','$5K']},
     yaxis:{...getPlotlyLayout().yaxis, title:'Quality Sub-Score (0–100)', range:[20,80]},
     annotations:[
-      {x:Math.log10(73), y:41.3, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:-20},
-      {x:Math.log10(892), y:72.7, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:16},
+      {x:Math.log10(38.67), y:49.4, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:-20},
+      {x:Math.log10(892), y:73.8, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:16},
       {x:Math.log10(3500), y:58, xref:'x', yref:'y',
         text:'Gemini ($892) dominates<br>all more-expensive models<br>on both quality AND cost',
         font:{color:'#94a3b8',size:10}, showarrow:false,
@@ -1504,8 +1504,8 @@ function renderBubble() {
 // CHART 6: VERSION BUMP CHART
 // ─────────────────────────────────────────────
 function renderBump() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v5.0'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50'];
   const traces = MODELS.map(m => {
     const x=[], y=[];
     vKeys.forEach((vk,i) => {
@@ -1517,7 +1517,7 @@ function renderBump() {
       x, y,
       mode:'lines+markers+text',
       name:m.shortName,
-      text: x.map((v,i) => v === 'v4.3' ? m.shortName : ''),
+      text: x.map((v,i) => v === 'v5.0' ? m.shortName : ''),
       textposition:'middle right',
       textfont:{size:10},
       line:{ color: DEV_COLORS[m.developer] || '#64748b', width: isTop3 ? 2.5 : 1.5, dash: isTop3 ? 'solid' : 'solid' },
@@ -1529,13 +1529,13 @@ function renderBump() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v2.0 to v4.3', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v2.0 to v5.0', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
-    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,12.5],
-      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12']},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,20.5],
+      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14','#15','#16','#17','#18','#19','#20']},
     margin:{...getPlotlyLayout().margin, r:90},
     annotations:[
-      {x:'v4.3', y:4, xref:'x', yref:'y', text:'Kimi +τ² correction', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:50, ay:0}
+      {x:'v5.0', y:3, xref:'x', yref:'y', text:'v5.0: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:50, ay:0}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -1665,8 +1665,8 @@ function renderGaps() {
 // VERSION TABLE
 // ─────────────────────────────────────────────
 function renderVersionTable() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v5.0'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50'];
   const table = document.getElementById('version-table');
   table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
   <tbody>${MODELS.map(m => {
