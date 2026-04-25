@@ -1,5 +1,5 @@
 # AI Model Rankings — Comprehensive Cost-Weighted Analysis
-**Version 4.0 | April 25, 2026 | 12 Models | 18 Dimensions**
+**Version 4.1 | April 26, 2026 | 12 Models | 18 Dimensions**
 
 > **Change log:**
 > **v2.0 → v2.1:** Added GPT-5.5 (launched April 23, 2026). All 15 normalized score columns renormalized.
@@ -9,6 +9,7 @@
 > **v2.3 → v2.4 (full provenance audit):** Systematic cross-check of every benchmark value against authoritative leaderboard sources. All benchmark columns except TB 2.0 corrected from stale late-2024/early-2025 data. Cost column: 9/11 API prices corrected (Claude Opus $30→$10 blended; Gemini $0.75→$4.50; Kimi $0.48→$1.71; etc.). τ²-bench, GPQA, HLE, OSWorld, SWE-bench, SciCode, GDP, Speed, LCB, AIME corrected throughout. Ranking outcome: Gemini #1 (68.3), Kimi #2 (63.1), KAT #3 (59.3), GPT-5.5 drops to #8 (47.7).
 > **v2.4 → v2.5 (cost methodology overhaul):** **Root cause:** API pricing ($/1M tokens) does not represent true cost to users — actual cost = price × token usage, which varies dramatically by model verbosity and task type. **Fix:** Replaced API-price-based cost dimension with **Artificial Analysis Intelligence Index Eval Cost** — the total USD cost to run AA's full standardized benchmark suite on each model. This is the only publicly available, standardized, usage-weighted cost dataset for frontier models (source: artificialanalysis.ai). **Impact:** Cost ranking completely reshuffled. KAT-Coder-Pro-V2 becomes cheapest to run ($73.49 eval cost, rank 1, score 100.0); Claude Opus 4.6 becomes most expensive ($4,969.68, rank 11, score 0.0). GPT-5.5 moves from rank 11 (API price: most expensive) to rank 8 ($3,357 eval cost — cheaper than Sonnet $3,959 and both Opus models), gaining +8.4 pts. GLM 5.1 rises from rank 5→4. Gemini rank 6→5. Kimi drops rank 4→6 ($947.87 eval cost — marginally more expensive than Gemini $892.28 due to higher token usage on benchmark tasks). **GPT-5.5 missing data confirmed still ⊘:** Exhaustive search confirms all 7 missing dimensions (IFBench, SWE-bench Verified, LCB, Speed, LCR, AIME, SciCode) remain unconfirmed as of April 24, 2026 — model launched 24 hours ago; leaderboards not yet updated. **Ranking outcome:** Gemini #1 (71.1), KAT #2 (60.7), GLM #3 (58.9), Kimi #4 (57.5), MiniMax #5 (57.5), GPT-5.5 rises to #6 (56.1). Quality-only unchanged from v2.4: Gemini #1 (74.1), Opus 4.7 #2 (67.8), GPT-5.5 #3 (65.0).
 > **v2.5 → v3.0 (new model + 3 new dimensions + data refresh):** **(1) Added DeepSeek V4-Pro** (released April 24, 2026; Apache 2.0; 1.6T/49B MoE; 1M context). **(2) Activated 3 new scored dimensions:** BrowseComp (3% weight — deep web research agent), SWE-bench Pro (4% — harder SWE variant), MMLU-Pro (2% — graduate-level knowledge breadth). Weight redistribution: Cost 28%→25%, IF 20%→18%, Term 9%→8%, SWE 8%→7%, LCB 7%→6%, LCR 3%→2%; all others unchanged; total remains 100%. **(3) 4 data corrections:** Gemini 3.1 Pro τ²-Bench 95.6%→99.3% (now #1); Kimi K2.6 GDPval ELO 1,484→1,520 (swaps with MiniMax for rank 7); GPT-5.5 IFBench ⊘→75.9% (fills 20%-weight gap); GPT-5.5 SWE-bench Verified ⊘→88.7%† (probable, from OpenAI tech card). **(4) HLE methodology resolved:** canonical Scale Labs leaderboard uses without-tools scores — existing HLE values confirmed correct. **(5) Ranking impact:** GPT-5.5 surges from #6→#2 (64.0 pts, +7.9 pts) as IFBench and SWE-bench gaps fill. KAT drops #2→#3. DeepSeek V4-Pro debuts at #8 (51.1 pts). Quality-only: Gemini #1 (73.1), Opus 4.7 #2 (64.4), GPT-5.4 #3 (62.9).
+> **v4.0 → v4.1 (methodology update, April 26 2026):** No data changes. **(1) IFBench dimension renamed to "Reliability — Instruction Following (IFBench)"** — rationale expanded to reflect production deployment reality: machine consumers, cascade failure costs, FireBench evidence (best frontier model 74.0% on enterprise IF tasks), and BenchLM composite IF plan (IFEval 65% + IFBench 35% when full-cohort data available). **(2) Pareto frontier analysis added (§12.6)** — using quality-only score × AA Eval Cost × Speed (tok/s): only Gemini 3.1 Pro and KAT-Coder-Pro-V2 are Pareto-optimal; 10/12 models are dominated on all three axes. **(3) AA Eval Cost rationale strengthened (§4.1)** — added explicit "why not per-token pricing?" argument citing verbosity divergence and Price of Progress literature. **(4) HELM framework discussion added (§16I)** — ValueRank's deliberate departure from HELM's multi-metric non-aggregation philosophy, with explicit mapping of HELM's 7 metrics to ValueRank dimensions. All 12 final scores, 216 normalized cells, and 216 weighted derivation cells unchanged.
 > **v3.0 → v4.0 (UltraDeep gap-fill research, April 25 2026):** 16 data points filled or corrected via comprehensive leaderboard research. **(1) DeepSeek V4-Pro gaps filled:** SWEPro 55.4%, GDPval ELO 1,554, AA-Omniscience −10 (84%−94%), AA Eval Cost $1,071.28, Speed corrected 33.5→35.8 tok/s, TB 2.0 67.9%†self (self-reported). **(2) GPT-5.5 gaps filled:** Speed 74.7 tok/s; SWE-bench Verified 88.7% dagger removed (now confirmed). **(3) SWE-bench Pro expands 5→9/12:** GLM 58.4%~, Qwen 56.6%~, MiniMax 56.2%~, DeepSeek 55.4% added. **(4) BrowseComp expands 6→8/12:** Opus 4.6 83.7%~, GLM 68%~ added. **(5) MMLU-Pro expands 4→6/12:** Opus 4.7 89.87%~ (new #1), GLM 85.8%~ added. **(6) AA-Omniscience expands 6→8/12:** Kimi +6, DeepSeek −10 added. **(7) Full renormalization:** Cost (n=11→12), Term (n=11→12), GDP (n=11→12), Spd (n=11→12), SWEPro (n=5→9), BC (n=6→8), MMLU (n=4→6), Omni (n=6→8). **(8) Ranking impact:** Gemini #1 (69.5→70.6); GPT-5.5 #2 (64.0→65.2); KAT #3 (58.3→58.4); GLM falls #4 (58.2→56.7, BrowseComp 0.0+MMLU 20.0 hurt); Kimi rises #6→#5 (52.6→54.8, SWEPro+Cost+BC improve); MiniMax falls #5→#6 (55.0→54.0); Qwen rises #9→#8 (49.7→49.0); DeepSeek falls #8→#9 (51.1→48.2, real scores below neutral-50 on Cost/Speed/SWEPro/Omni). Quality-only: Gemini #1 (73.1→72.7), GPT-5.5 rises #4→#2 (62.4→70.9), Opus 4.7 #2→#3 (64.4→68.7). ~ = BenchLM or secondary source (probable); †self = self-reported model card only.
 
 ---
@@ -100,7 +101,7 @@ Time-to-first-token (TTFT) was evaluated for inclusion in v2.0 but excluded from
 | # | Dimension | Abbrev | Weight | Rationale |
 |---|---|---|---|---|
 | 1 | Cost Efficiency (AA Index Eval Cost) | Cost | **25%** | Dominant production selection factor; total USD to run AA's full benchmark suite (price × actual benchmark token usage). Reduced 28%→25% in v3.0 to accommodate 3 new dimensions. |
-| 2 | Instruction Following (IFBench) | IF | **18%** | Critical for agentic reliability; high-weight due to direct task-completion impact. Reduced 20%→18% in v3.0. |
+| 2 | Reliability — Instruction Following (IFBench) | IF | **18%** | Production systems have machine consumers: parsers that cannot tolerate format failures the way a human reader can. A model that follows 90% of constraints is not "90% as useful" — the 10% failure rate requires catch-and-retry logic, human review, or output degradation, multiplying real operational cost non-linearly. IFBench (58 out-of-domain verifiable constraints, Allen AI, NeurIPS 2025) tests generalization beyond IFEval's fixed 26-constraint set. IFBench is unsaturated at 58–76% for current frontier models, making it a live discriminator where MMLU and HellaSwag have lost power. FireBench (arXiv:2603.04857, 2026) confirms the problem is real: no frontier model exceeds 75% on enterprise IF tasks, and top models show 13–25 pp variance across constraint categories — format compliance may rank 1st while item-ranking tasks rank 5th or 6th. Future versions will incorporate IFEval as a composite (IFEval 65% + IFBench 35%, per BenchLM methodology) when full-cohort IFEval data is available. Reduced 20%→18% in v3.0. |
 | 3 | Terminal-Bench 2.0 | Term | **8%** | Primary SE harness benchmark; direct proxy for coding-agent performance. Reduced 9%→8%. |
 | 4 | SWE-bench Verified | SWE | **7%** | Real GitHub issue resolution; industry standard for SE agents. Reduced 8%→7%. |
 | 5 | SWE-bench Pro *(new v3.0)* | SWEPro | **4%** | Harder single-pass SWE variant; complementary to Verified score. |
@@ -145,6 +146,7 @@ Time-to-first-token (TTFT) was evaluated for inclusion in v2.0 but excluded from
 | Claude Opus 4.6 | **$4,969.68** | 67.6× |
 
 > **What is AA Index Eval Cost?** Artificial Analysis runs each model through its full standardized Intelligence Index benchmark suite and records the actual total USD spent — API price × real token consumption across all tasks. This is the only publicly available, standardized, usage-weighted cost dataset for frontier models. Unlike raw $/1M token pricing, eval cost captures true user cost: a verbose model that uses 10× more tokens costs 10× more even at the same token price. Source: artificialanalysis.ai Intelligence Index.
+> **Why not per-token API pricing?** Per-token pricing ($/1M input + $/1M output) ignores verbosity: a model priced at $3/1M tokens that generates 4× as many tokens per task has an effective task cost of $12/1M — more expensive than a $10/1M model that answers correctly in one concise pass. Reasoning models amplify this problem: the "Price of Progress" literature (arXiv:2511.23455) documents that frontier-level *total* costs have risen 3–18× per year even as per-token prices fall, because reasoning-mode token counts dominate spend. AA Eval Cost captures the full price-times-tokens picture by measuring what it actually costs to run a standardized benchmark suite end-to-end. This is why ValueRank switched from raw API pricing to AA Eval Cost in v2.5 — it produced dramatically different rankings (e.g., GPT-5.5 moved from rank 11 by per-token list price to rank 9 by eval cost, because its reasoning throughput per task is more efficient than Anthropic's Opus models despite similar headline prices).
 > **DeepSeek V4-Pro v4.0 update:** AA Eval Cost confirmed at $1,071.28 (source: artificialanalysis.ai/models/deepseek-v4-pro, corroborated by AA article on DeepSeek V4 Pro). Slots between Kimi ($947.87) and GPT-5.4 ($2,851.01) at rank 7/12 — cost score 45.5 (below neutral-50, a negative finding vs. the prior ⊘ neutral assumption).
 
 ### 4.2 Cost Efficiency Tier Summary
@@ -592,6 +594,29 @@ v4.0 significantly expands coverage on three dimensions:
 
 With SWEPro n expanding from 5→9, Kimi's 58.6% improves in rank (from tied 3.5/5 to tied 3.5/9 — but score goes from 37.5 to 68.8 as the denominator grows). This +1.25 pt gain at 4% weight is the single largest per-dimension gain in v4.0 for any model. Combined with Cost score improvement (+1.13 pts at 25% weight), Kimi rises from #6 to #5. The τ²-Bench weakness (0.0, last in field) caps further rise.
 
+### 12.6 Pareto Frontier Analysis — Quality × Cost × Speed
+
+The main ranking integrates cost, reliability, and quality into a single composite score. A complementary view applies strict Pareto dominance across three independent axes: **quality-only score** (§8, equal-weight average of all 17 non-cost dimensions), **AA Eval Cost** (lower is better), and **Speed** (tok/s, higher is better). A model is Pareto-optimal if no other model is simultaneously at least as good on all three axes with strict improvement on at least one.
+
+| Model | Quality Score | AA Eval Cost | Speed (tok/s) | Pareto Status |
+|---|---|---|---|---|
+| **Gemini 3.1 Pro** | **72.7** | $892.28 | **128.0** | **✓ Frontier** |
+| GPT-5.5 | 70.9 | $3,357.00 | 74.7 | ✗ Dominated (Gemini: higher quality, cheaper, faster) |
+| Claude Opus 4.7 | 68.7 | $4,811.04 | 42.0 | ✗ Dominated (Gemini) |
+| GPT-5.4 | 64.4 | $2,851.01 | 74.8 | ✗ Dominated (Gemini) |
+| Kimi K2.6 | 48.9 | $947.87 | 100.4 | ✗ Dominated (Gemini: $892 < $948, 128 > 100.4, 72.7 > 48.9) |
+| DeepSeek V4-Pro | 45.9 | $1,071.28 | 35.8 | ✗ Dominated (Gemini) |
+| **KAT-Coder-Pro-V2** | 41.9 | **$73.49** | 113.5 | **✓ Frontier** |
+| MiniMax M2.7 | 40.9 | $175.51 | 49.0 | ✗ Dominated (KAT: higher quality, cheaper, faster) |
+| Qwen 3.6 Plus | 38.4 | $482.65 | 53.0 | ✗ Dominated (KAT) |
+| GLM 5.1 | 38.1 | $543.95 | 49.0 | ✗ Dominated (KAT) |
+| Claude Opus 4.6 | 37.2 | $4,969.68 | 18.2 | ✗ Dominated (GLM and many others) |
+| Claude Sonnet 4.6 | 32.0 | $3,959.36 | 46.0 | ✗ Dominated (Qwen: higher quality, much cheaper, faster) |
+
+**Result: Only 2 of 12 models hold Pareto-optimal positions.** Gemini 3.1 Pro is Pareto-dominant at the quality apex — it is the fastest model in the field (128.0 tok/s), the highest-quality (72.7), and cheaper to run than 7 of the 12 models by AA Eval Cost ($892.28 slots below Kimi, DeepSeek, all GPT, and all Claude models). No model can beat Gemini on quality without also being more expensive. KAT-Coder-Pro-V2 holds the budget frontier — it is the cheapest model to run ($73.49) while being second-fastest (113.5 tok/s) and maintaining sufficient quality (41.9) to dominate everything cheaper than Gemini. MiniMax M2.7, despite being the second-cheapest model, is dominated by KAT on all three axes simultaneously.
+
+**Implication:** The Pareto analysis sharpens the main ranking's insight. The composite score resolves the quality-cost-speed tradeoff by weighting cost at 25%. The Pareto view shows that the same tradeoff, when left unresolved, yields only two rational choices: Gemini 3.1 Pro (top of quality-speed frontier) or KAT-Coder-Pro-V2 (sole occupant of the cost frontier). Every other model is dominated on all three axes by one of these two.
+
 ### 12.5 The Anthropic Cost Structure Remains the Dominant Constraint
 
 Under the AA Index Eval Cost methodology, all three Anthropic frontier models (Sonnet $3,959, Opus 4.7 $4,811, Opus 4.6 $4,970) remain in the top-4 most expensive to run. At 25% cost weight, Claude Opus 4.7's cost score (9.1) contributes only 2.3 pts vs. Gemini's 15.9 pts — a 13.6 pt cost disadvantage that even quality #3 (68.7 pts) cannot overcome. Opus 4.7 scores 44.3 overall vs. Gemini's 70.6 — a 26-pt gap driven almost entirely by the cost dimension. Teams running cost-unconstrained pipelines where SWEPro or HLE performance matters most should consider Opus 4.7; all production workloads face the structural cost ceiling.
@@ -678,7 +703,7 @@ Both benchmarks remain reserved as scored dimensions pending ≥4 model submissi
 | Benchmark | Dimension | Type | What it Measures | Source |
 |---|---|---|---|---|
 | AA Index Eval Cost | Cost | USD | Total cost to run AA's full Intelligence Index benchmark suite (price × actual token usage) | artificialanalysis.ai |
-| IFBench | IF | Accuracy % | Instruction-following compliance across task types | Artificial Analysis IFBench leaderboard |
+| IFBench | IF (Reliability) | Accuracy % | Reliability dimension: instruction-following generalization across 58 out-of-domain verifiable constraints (Allen AI, NeurIPS 2025). Tests constraint compliance on constraint types not seen in training — unsaturated at 58–76% for current frontier models. Used as the primary Reliability signal; future composite will add IFEval (IFEval 65% + IFBench 35%). | Artificial Analysis IFBench leaderboard; github.com/allenai/IFBench |
 | Terminal-Bench 2.0 | Term | Accuracy % | Terminal/CLI agentic task completion | tbench.ai |
 | SWE-bench Verified | SWE | Accuracy % | Real GitHub issue resolution (verified subset) | swebench.com |
 | SWE-bench Pro | SWEPro | Accuracy % | Harder single-pass GitHub issue resolution; stricter criteria | Scale Labs leaderboard |
@@ -805,6 +830,30 @@ Key sources used for v3.0 data updates (from deep-research pipeline, April 25, 2
 - Scale Labs SWE-bench Pro leaderboard, marc0.dev (SWE-Pro scores for 5 models)
 - Artificial Analysis MMLU-Pro, Kaggle MMLU-Pro leaderboard (MMLU-Pro scores for 4 models)
 
+### 16I. Framework Philosophy: ValueRank vs. HELM
+
+**HELM (Holistic Evaluation of Language Models, Stanford CRFM, 2022)** is the most prominent academic antecedent to multi-dimensional LLM evaluation. HELM evaluates models across 7 metrics — accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency — over 16 diverse scenarios. Its defining design decision is to **refuse to produce a single composite score.** HELM explicitly holds that "no single number can capture the full picture" of model behavior, and that collapsing dimensions into a composite risks masking performance variations that matter for specific use cases.
+
+ValueRank deliberately departs from this stance on two dimensions:
+
+**1. Integration over parallelism.** HELM reports 7 metrics per scenario as parallel columns; practitioners must perform their own weighting. ValueRank argues that leaving integration to the practitioner does not eliminate implicit weighting — it just makes the weighting invisible and inconsistent. A practitioner who mentally weights cost at ~25% when selecting a model is making the same judgment ValueRank makes explicitly. The difference is transparency and reproducibility: explicit weights can be challenged, debated, and adjusted via the sensitivity analysis in §16B; implicit weights cannot.
+
+**2. Financial cost over computational cost.** HELM's efficiency metric measures computational resource requirements (tokens generated, latency, memory), grounded in a 2022 context where the relevant cost question was GPU budget. ValueRank uses AA Eval Cost (total USD per benchmark run) as the primary cost signal, reflecting the 2025–2026 reality where frontier models are API-accessed and the relevant cost question is dollar spend per task. HELM's calibration metric (confidence alignment with correctness) maps directly to ValueRank's AA-Omniscience dimension (accuracy% − hallucination_rate%). HELM's robustness metric (performance under input perturbation) maps philosophically to ValueRank's IFBench Reliability dimension (performance under novel constraint variation).
+
+**Where HELM's philosophy prevails in ValueRank:** The quality-only ranking (§8) and sensitivity analysis (§16B) are ValueRank's concession to HELM's point. §8 strips out cost entirely to show pure capability rankings, and §16B shows how rankings shift at alternative cost weights (15% and 40%). These sections allow practitioners who disagree with the 25% cost weight to recalibrate without abandoning the framework.
+
+**Where ValueRank diverges:** For production deployment decisions — the primary use case of this document — a single ranked output is more actionable than a parallel multi-metric table. The Pareto frontier analysis in §12.6 shows the consequence of HELM's approach applied to our three primary axes: it yields only two rational model choices, leaving 10 of 12 models with no clear positioning. A weighted composite resolves this by encoding the tradeoff explicitly.
+
+### 16J. v4.1 Methodology Sources
+
+Key sources informing v4.1 methodology additions (from ultradeep research pipeline, April 25–26, 2026):
+- Allen AI IFBench GitHub repo + Artificial Analysis IFBench leaderboard (IFBench 58-constraint design; frontier scores 58–76%)
+- FireBench paper arXiv:2603.04857 (enterprise IF: best model 74.0%; 13–25 pp category variance)
+- BenchLM.ai composite IF methodology (IFEval 65% + IFBench 35% rationale)
+- arXiv:2511.23455 "Price of Progress" (per-token vs. task-level cost; reasoning token inflation)
+- DigitalApplied Q2 2026 Efficient Frontier analysis (Pareto methodology: quality × cost × speed)
+- Liang et al. 2022 "Holistic Evaluation of Language Models" arXiv:2211.09110 (HELM 7-metric framework; multi-metric vs. composite philosophy)
+
 ### 16H. v4.0 Research Sources
 
 Key sources used for v4.0 gap-fill updates (from ultradeep research pipeline, April 25, 2026):
@@ -822,3 +871,4 @@ Key sources used for v4.0 gap-fill updates (from ultradeep research pipeline, Ap
 *Report maintained by the Kay project team | Feedback: kay-rankings@alo-exp.dev*
 *Methodology questions: see §16 Appendix | Version history: tracked in git history of this file*
 *Next scheduled update: May 2026 quarterly refresh or next major model launch, whichever comes first*
+*v4.1 methodology additions: Pareto frontier (§12.6), Reliability dimension rename (§3.4), AA Eval Cost rationale (§4.1), HELM philosophy (§16I) — no score changes*
