@@ -506,6 +506,32 @@
       padding: 6px 14px; display: inline-block;
     }
 
+    /* ── FAQ ── */
+    .faq-list {
+      border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .faq-item { background: var(--bg-card); }
+    .faq-item + .faq-item { border-top: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; background: none; border: none; cursor: pointer;
+      font-family: var(--font-heading); font-size: .9375rem; font-weight: 600;
+      color: var(--text-primary); text-align: left; gap: 16px; transition: background .2s;
+    }
+    .faq-q:hover { background: var(--table-row-hover); }
+    .faq-q[aria-expanded="true"] { color: var(--accent-light); }
+    .faq-chevron { flex-shrink: 0; color: var(--text-dim); transition: transform .25s; }
+    .faq-q[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); color: var(--accent-light); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease, padding .3s ease;
+      font-size: .875rem; color: var(--text-secondary); line-height: 1.7;
+      padding: 0 24px;
+    }
+    .faq-a.open { max-height: 400px; padding: 0 24px 20px; }
+    .faq-a strong { color: var(--text-primary); }
+    .faq-a code { font-family: var(--font-mono); font-size: .8125rem; color: var(--accent-light); }
+
     /* ── RESPONSIVE ── */
 
     /* Tablet — hide nav-meta before it crowds */
@@ -580,6 +606,7 @@
     <a href="#charts">Charts</a>
     <a href="#methodology">Methodology</a>
     <a href="#data">Data</a>
+    <a href="#faq">FAQ</a>
   </div>
   <div class="nav-right">
     <div class="nav-meta">April 26, 2026 · 12 models · 18 dimensions</div>
@@ -823,6 +850,100 @@
       <div style="overflow-x:auto;">
         <table class="version-table" id="version-table"></table>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <div class="section-title">Frequently Asked Questions</div>
+      <div class="section-sub">Common questions about how ValueRank works, what the scores mean, and how to interpret results.</div>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What does the overall score actually represent?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          Each model's score is a weighted average of 18 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n</strong> is the number of models with real data in that dimension. A score of <strong>100</strong> = top of pool; <strong>50</strong> = neutral (assigned to missing ⊘ data); <strong>0</strong> = bottom of pool. Final scores are the weighted sum across all 18 dimensions.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Why does cost get 25% of the weight?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          ValueRank is designed for <strong>production software engineering teams</strong>, not academic benchmarking. At scale, a 10× cost difference between similarly capable models is a real operational constraint — not a footnote. The 25% cost weight reflects that price is a first-class factor in the value equation. You can drag the cost weight slider in the Rankings section to 0% to see a pure quality ranking if budget is no constraint.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What does ⊘ mean?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          ⊘ indicates a genuine data gap — the benchmark hasn't been published for that model. Missing cells are treated as <strong>neutral-50</strong> (neither penalized nor rewarded), which prevents unfairly docking models for benchmarks they haven't participated in. See the Gaps tab in the Data section for all current ⊘ cells per model.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What's the difference between Score and Quality Score?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          The <strong>overall Score</strong> includes all 18 dimensions with cost at 25% and speed at 5%. The <strong>Quality Score</strong> is recalculated using only the 16 non-cost, non-speed dimensions (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> — independent of price or throughput. The Rankings table shows both; the Quality Rank column lets you sort by quality alone.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Why is Claude ranked so low despite being a capable model?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          Cost. All three Claude models in the dataset carry the two highest eval costs ($3,959–$4,970 per AA benchmark run). With cost at 25% weight, even a strong quality rank — Claude Opus 4.7 is quality <strong>#3</strong> — can't fully overcome that penalty in the overall score. Drag the cost weight slider to 0% to see Claude Opus 4.7 rise to its pure-quality position.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What is the Pareto frontier?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v4.3 has a <strong>2-model frontier</strong>: <strong>KAT-Coder-Pro-V2</strong> (the only Budget-tier model at $73 eval cost) and <strong>Gemini 3.1 Pro</strong> (quality #1 overall at $892). Every other model is dominated by at least one of these two on at least one axis.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Are scores comparable across ValueRank versions?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. v4.0 → v4.3 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How often is ValueRank updated?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          Quarterly, or whenever a major model launch would materially affect the rankings. v4.3 (April 26, 2026) resolved all provisional data from v4.2. The next scheduled update is <strong>May 2026</strong> or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1596,6 +1717,22 @@ function initTheme() {
 // ─────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────
+function initFaq() {
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-q').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.classList.remove('open');
+      });
+      if (!expanded) {
+        btn.setAttribute('aria-expanded', 'true');
+        btn.nextElementSibling.classList.add('open');
+      }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNav();
@@ -1606,6 +1743,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGaps();
   renderVersionTable();
   renderHeatmap('chart-heatmap-data', 480);
+  initFaq();
   lucide.createIcons();
 });
 </script>
