@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ValueRank v4.3 — AI Model Ranking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    /* ── DESIGN SYSTEM TOKENS — Midnight Indigo (light default, dark override) ── */
+    :root {
+      /* Backgrounds — LIGHT */
+      --bg-page:         #f8f9fc;
+      --bg-card:         #ffffff;
+      --bg-card-hover:   #f1f5f9;
+      --bg-code:         #f1f5f9;
+      --bg-hero:         linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+      --nav-bg:          rgba(248,249,252,.92);
+      --section-alt:     rgba(241,245,249,.6);
+
+      /* Brand accent — indigo (light) */
+      --accent:          #4f46e5;
+      --accent-light:    #6366f1;
+      --accent-glow:     rgba(99,102,241,.1);
+      --accent-a04:      rgba(79,70,229,.04);
+      --accent-a08:      rgba(79,70,229,.08);
+      --accent-a12:      rgba(79,70,229,.12);
+      --accent-a25:      rgba(79,70,229,.25);
+      --accent-a28:      rgba(79,70,229,.28);
+      --accent-a30:      rgba(79,70,229,.30);
+      --accent-a40:      rgba(79,70,229,.40);
+
+      /* Semantic colors — light */
+      --green:           #059669;
+      --amber:           #d97706;
+      --red:             #dc2626;
+      --cyan:            #0891b2;
+
+      /* Medal colors */
+      --gold:            #b45309;
+      --silver:          #64748b;
+      --bronze:          #92400e;
+
+      /* Text — light */
+      --text-primary:    #0f172a;
+      --text-secondary:  #475569;
+      --text-dim:        #94a3b8;
+      --heading-muted:   #1e293b;
+
+      /* Borders — light */
+      --border:          #e2e8f0;
+      --border-hover:    #cbd5e1;
+
+      /* Shadows — light */
+      --shadow-lg:       0 20px 60px rgba(0,0,0,.08);
+      --shadow-glow:     0 0 40px rgba(99,102,241,.06);
+
+      /* Table */
+      --table-row-hover: rgba(79,70,229,.03);
+
+      /* Border radius */
+      --radius-sm:  8px;
+      --radius:     12px;
+      --radius-lg:  20px;
+
+      /* Typography — IBM Plex Sans */
+      --font-heading: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-body:    'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono:    'IBM Plex Mono', monospace;
+
+      /* Aliases */
+      --font: var(--font-body);
+      --mono: var(--font-mono);
+      --bg:      var(--bg-page);
+      --card:    var(--bg-card);
+      --card2:   var(--bg-card-hover);
+      --text:    var(--text-primary);
+      --muted:   var(--text-secondary);
+      --accent2: var(--accent-light);
+      --border2: var(--border-hover);
+      --purple:  var(--accent-light);
+    }
+
+    /* ── DARK OVERRIDES — applied when <html data-theme="dark"> ── */
+    [data-theme="dark"] {
+      --bg-page:         #0a0a0f;
+      --bg-card:         #12121a;
+      --bg-card-hover:   #181825;
+      --bg-code:         #1a1a2e;
+      --bg-hero:         linear-gradient(135deg, #0a0a1a 0%, #0f0f2e 40%, #1a0a2e 100%);
+      --nav-bg:          rgba(10,10,15,.88);
+      --section-alt:     rgba(18,18,26,.5);
+
+      --accent:          #6366f1;
+      --accent-light:    #818cf8;
+      --accent-glow:     rgba(99,102,241,.15);
+      --accent-a04:      rgba(99,102,241,.04);
+      --accent-a08:      rgba(99,102,241,.08);
+      --accent-a12:      rgba(99,102,241,.12);
+      --accent-a25:      rgba(99,102,241,.25);
+      --accent-a28:      rgba(99,102,241,.28);
+      --accent-a30:      rgba(99,102,241,.30);
+      --accent-a40:      rgba(99,102,241,.40);
+
+      --green:           #34d399;
+      --amber:           #fbbf24;
+      --red:             #f87171;
+      --cyan:            #22d3ee;
+
+      --gold:            #f59e0b;
+      --silver:          #94a3b8;
+      --bronze:          #cd7c2e;
+
+      --text-primary:    #e2e8f0;
+      --text-secondary:  #94a3b8;
+      --text-dim:        #64748b;
+      --heading-muted:   #cbd5e1;
+
+      --border:          #1e293b;
+      --border-hover:    #334155;
+
+      --shadow-lg:       0 20px 60px rgba(0,0,0,.4);
+      --shadow-glow:     0 0 40px rgba(99,102,241,.08);
+
+      --table-row-hover: rgba(99,102,241,.04);
+    }
+
+    /* ── BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+
+    /* Transitions for theme-interactive elements */
+    body, nav, section, .bg-card, .card, .insight-card, .gap-card, .podium-card,
+    .filter-btn, .chart-tab, .chart-desc, .method-formula, .seal-note {
+      transition: background .25s, background-color .25s, border-color .25s,
+                  color .25s, box-shadow .25s;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 64px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-brand .logo {
+      font-family: var(--font-heading);
+      font-size: 1.1rem; font-weight: 800;
+      color: var(--text-primary); letter-spacing: -.02em;
+    }
+    .nav-brand .badge {
+      font-family: var(--font-heading);
+      font-size: .7rem; font-weight: 700;
+      background: var(--accent-a12); color: var(--accent-light);
+      border: 1px solid var(--accent-a28);
+      padding: 2px 8px; border-radius: 999px; letter-spacing: .04em;
+    }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a {
+      font-family: var(--font-heading);
+      color: var(--text-secondary); text-decoration: none; padding: 6px 14px;
+      border-radius: var(--radius-sm); font-size: .875rem; font-weight: 500;
+      transition: color .25s, background .25s;
+    }
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-card); }
+    .nav-links a.active { color: var(--accent-light); background: var(--accent-a08); }
+    .nav-meta { font-size: .75rem; color: var(--text-dim); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--bg-card);
+      color: var(--text-secondary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .25s; flex-shrink: 0;
+    }
+    .theme-toggle:hover {
+      border-color: var(--border-hover); color: var(--text-primary);
+      box-shadow: var(--shadow-glow);
+    }
+    .theme-toggle svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    /* Show sun in dark mode, moon in light mode */
+    .icon-sun, i.icon-sun  { display: none; }
+    .icon-moon, i.icon-moon { display: block; }
+    [data-theme="dark"] .icon-sun, [data-theme="dark"] i.icon-sun  { display: block; }
+    [data-theme="dark"] .icon-moon, [data-theme="dark"] i.icon-moon { display: none; }
+
+    /* ── LAYOUT ── */
+    main { padding-top: 64px; }
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--section-alt); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-header { margin-bottom: 40px; }
+    .section-label {
+      font-family: var(--font-heading);
+      font-size: .75rem; font-weight: 700;
+      color: var(--accent-light); letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800; line-height: 1.2; letter-spacing: -.03em;
+      color: var(--heading-muted); margin-bottom: 8px;
+    }
+    .section-sub { color: var(--text-secondary); font-size: .875rem; line-height: 1.6; }
+
+    /* ── HERO ── */
+    #hero {
+      background: var(--bg-hero);
+      padding: 88px 0 72px;
+    }
+    .hero-layout { display: grid; grid-template-columns: 1fr auto; column-gap: 48px; row-gap: 0; align-items: start; }
+    .hero-top { grid-column: 1 / -1; }
+    .hero-eyebrow {
+      font-family: var(--font-heading);
+      font-size: .75rem; font-weight: 700;
+      color: var(--accent-light); letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -.04em;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--accent-light); }
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1rem; max-width: 560px; line-height: 1.7; margin-bottom: 36px;
+    }
+    .hero-stats { display: flex; gap: 36px; }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: var(--font-mono);
+      font-size: 1.75rem; font-weight: 700; color: var(--accent-light);
+    }
+    .hero-stat-label {
+      font-family: var(--font-heading);
+      font-size: .7rem; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: .1em; margin-top: 4px;
+    }
+
+    /* Podium cards */
+    .hero-podium { display: flex; flex-direction: column; gap: 12px; min-width: 300px; }
+    .podium-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px 18px; display: flex; align-items: flex-start; gap: 14px;
+      transition: all .3s;
+    }
+    .podium-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-2px);
+    }
+    .podium-card.gold  { border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.05); }
+    .podium-card.silver{ border-color: rgba(148,163,184,.25); background: rgba(148,163,184,.04); }
+    .podium-card.bronze{ border-color: rgba(205,124,46,.3);  background: rgba(205,124,46,.05); }
+    .podium-medal { width: 22px; height: 22px; flex-shrink: 0; display: block; }
+    .podium-medal svg { width: 22px; height: 22px; }
+    .podium-card.gold   .podium-medal { color: var(--gold); }
+    .podium-card.silver .podium-medal { color: var(--silver); }
+    .podium-card.bronze .podium-medal { color: var(--bronze); }
+    .podium-info { flex: 1; min-width: 0; }
+    .podium-name {
+      font-family: var(--font-heading);
+      font-weight: 600; font-size: .875rem;
+      color: var(--text-primary);
+    }
+    .podium-score { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; }
+    .podium-card.gold   .podium-score { color: var(--gold); }
+    .podium-card.silver .podium-score { color: var(--silver); }
+    .podium-card.bronze .podium-score { color: var(--bronze); }
+    .podium-dev { font-size: .7rem; color: var(--text-dim); margin-top: 2px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px;
+      transition: all .3s;
+    }
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* ── TABLE ── */
+    .table-controls {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
+    }
+    .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-btn {
+      font-family: var(--font-heading);
+      font-size: .75rem; font-weight: 600;
+      padding: 5px 14px; border-radius: 999px;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer; transition: all .25s;
+    }
+    .filter-btn:hover { color: var(--text-primary); border-color: var(--border-hover); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .slider-wrap { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+    .slider-label { font-size: .75rem; color: var(--text-secondary); white-space: nowrap; }
+    .slider-val {
+      font-family: var(--font-mono); font-size: .8rem; font-weight: 600;
+      color: var(--accent-light); min-width: 38px;
+    }
+    input[type=range] {
+      appearance: none; width: 120px; height: 4px; border-radius: 2px;
+      background: var(--border-hover); outline: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none; width: 14px; height: 14px; border-radius: 50%;
+      background: var(--accent); cursor: pointer;
+    }
+
+    .table-wrap { overflow-x: auto; border-radius: var(--radius-lg); }
+    table { width: 100%; border-collapse: collapse; font-size: .8125rem; }
+    thead th {
+      font-family: var(--font-heading);
+      padding: 12px 14px; text-align: left; font-size: .7rem; font-weight: 700;
+      color: var(--text-secondary); text-transform: uppercase; letter-spacing: .06em;
+      border-bottom: 1px solid var(--border); white-space: nowrap;
+      cursor: pointer; user-select: none; transition: color .25s;
+    }
+    thead th:hover { color: var(--text-primary); }
+    thead th.sorted { color: var(--accent-light); }
+    thead th .sort-arrow { margin-left: 4px; opacity: 0.6; }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+    tbody tr:hover { background: var(--table-row-hover); }
+    tbody tr:last-child { border-bottom: none; }
+    td { padding: 13px 14px; vertical-align: middle; }
+
+    .rank-cell { font-family: var(--font-mono); font-weight: 700; font-size: .875rem; color: var(--text-dim); }
+    .rank-cell.r1 { color: var(--gold); }
+    .rank-cell.r2 { color: var(--silver); }
+    .rank-cell.r3 { color: var(--bronze); }
+    .model-name { font-family: var(--font-heading); font-weight: 600; font-size: .8125rem; color: var(--text-primary); }
+    .model-dev { font-size: .7rem; color: var(--text-dim); margin-top: 2px; }
+    .score-val { font-family: var(--font-mono); font-weight: 700; font-size: .875rem; }
+    .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .score-bar { height: 3px; border-radius: 2px; background: var(--border); flex: 1; min-width: 60px; }
+    .score-bar-fill { height: 3px; border-radius: 2px; transition: width .8s ease-out; }
+    .quality-pill {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: .625rem; font-weight: 700;
+      width: 30px; height: 20px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); color: var(--text-dim);
+    }
+    .tier-badge {
+      font-family: var(--font-heading);
+      font-size: .625rem; font-weight: 700; letter-spacing: .04em;
+      padding: 3px 8px; border-radius: 999px; white-space: nowrap;
+    }
+    .delta-cell { font-family: var(--font-mono); font-size: .75rem; font-weight: 600; }
+    .delta-up   { color: var(--green); }
+    .delta-down { color: var(--red); }
+    .delta-same { color: var(--text-dim); }
+    .missing-dots { font-size: .7rem; color: var(--text-dim); font-family: var(--font-mono); }
+
+    /* Cost tier badge colors */
+    .tier-Budget        { background: rgba(52,211,153,.12); color: #6ee7b7; border: 1px solid rgba(52,211,153,.25); }
+    .tier-Near-Budget   { background: rgba(132,204,22,.1);  color: #bef264; border: 1px solid rgba(132,204,22,.25); }
+    .tier-Mid-Range     { background: rgba(251,191,36,.1);  color: #fcd34d; border: 1px solid rgba(251,191,36,.25); }
+    .tier-Premium       { background: rgba(251,146,60,.1);  color: #fdba74; border: 1px solid rgba(251,146,60,.25); }
+    .tier-Expensive     { background: rgba(248,113,113,.1); color: #fca5a5; border: 1px solid rgba(248,113,113,.25); }
+    .tier-Very-Expensive{ background: rgba(220,38,38,.1);   color: #fca5a5; border: 1px solid rgba(220,38,38,.2); }
+    .tier-Ultra-Premium { background: rgba(153,27,27,.15);  color: #fca5a5; border: 1px solid rgba(153,27,27,.35); }
+
+    /* ── CHART TABS ── */
+    .chart-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
+    .chart-tab {
+      font-family: var(--font-heading);
+      font-size: .75rem; font-weight: 600;
+      padding: 6px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer; transition: all .25s;
+    }
+    .chart-tab:hover { color: var(--text-primary); border-color: var(--border-hover); }
+    .chart-tab.active {
+      background: var(--accent-a12); border-color: var(--accent-a28);
+      color: var(--accent-light);
+    }
+    .chart-panel { display: none; }
+    .chart-panel.active { display: block; }
+    .chart-desc {
+      font-size: .8125rem; color: var(--text-secondary);
+      margin-bottom: 20px; line-height: 1.6;
+      padding: 14px 18px;
+      background: var(--bg-code); border-radius: var(--radius);
+      border-left: 3px solid var(--accent);
+    }
+    .chart-desc strong { color: var(--text-primary); }
+    .plotly-chart { width: 100%; border-radius: var(--radius); overflow: hidden; }
+
+    /* ── INSIGHT CALLOUTS ── */
+    .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; margin-top: 28px; }
+    .insight-card {
+      background: var(--bg-card-hover); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 20px 22px;
+      transition: all .3s;
+    }
+    .insight-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-glow); transform: translateY(-2px); }
+    .insight-icon { font-size: 20px; margin-bottom: 10px; }
+    .insight-title {
+      font-family: var(--font-heading);
+      font-size: .7rem; font-weight: 700;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px;
+    }
+    .insight-body { font-size: .8125rem; color: var(--text-primary); line-height: 1.6; }
+    .insight-body strong { color: var(--accent-light); }
+
+    /* ── METHODOLOGY ── */
+    .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .method-formula {
+      font-family: var(--font-mono); font-size: 1rem; font-weight: 500;
+      background: var(--bg-code); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 28px; color: var(--accent-light);
+      text-align: center; margin: 20px 0;
+    }
+    .method-text { font-size: .8125rem; color: var(--text-secondary); line-height: 1.7; }
+    .method-text strong { color: var(--text-primary); }
+    .dim-table { width: 100%; border-collapse: collapse; font-size: .75rem; }
+    .dim-table th {
+      font-family: var(--font-heading);
+      padding: 8px 12px; text-align: left; font-size: .625rem; font-weight: 700;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em;
+      border-bottom: 1px solid var(--border);
+    }
+    .dim-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .dim-table tr:hover td { background: var(--table-row-hover); }
+    .w-bar { display: inline-block; height: 3px; border-radius: 2px; background: var(--accent); vertical-align: middle; margin-right: 6px; }
+    .cat-badge {
+      font-family: var(--font-heading);
+      font-size: .625rem; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+    }
+    .cat-cost  { background: rgba(52,211,153,.12); color: #6ee7b7; }
+    .cat-rely  { background: var(--accent-a12); color: var(--accent-light); }
+    .cat-code  { background: rgba(34,211,238,.1); color: #67e8f9; }
+    .cat-prod  { background: rgba(251,146,60,.1); color: #fdba74; }
+    .cat-intel { background: rgba(251,191,36,.1); color: #fcd34d; }
+
+    /* ── DATA SECTION ── */
+    .heatmap-legend { display: flex; align-items: center; gap: 8px; font-size: .7rem; color: var(--text-dim); margin-bottom: 14px; }
+    .hl-bar { width: 120px; height: 6px; border-radius: 3px; background: linear-gradient(to right, #1e3a8a, var(--accent), #fbbf24); }
+    .gaps-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 12px; margin-top: 20px; }
+    .gap-card {
+      background: var(--bg-card-hover); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 16px;
+      transition: all .3s;
+    }
+    .gap-card:hover { border-color: var(--border-hover); }
+    .gap-model { font-family: var(--font-heading); font-weight: 600; font-size: .8125rem; color: var(--text-primary); margin-bottom: 4px; }
+    .gap-count { font-size: .7rem; color: var(--text-dim); }
+    .gap-dims  { font-size: .7rem; color: var(--text-dim); font-family: var(--font-mono); margin-top: 6px; line-height: 1.5; }
+    .version-table { width: 100%; border-collapse: collapse; font-size: .75rem; }
+    .version-table th {
+      font-family: var(--font-heading);
+      padding: 10px 12px; font-size: .625rem; font-weight: 700;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em;
+      border-bottom: 1px solid var(--border); text-align: center;
+    }
+    .version-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: center; font-family: var(--font-mono); font-size: .75rem; }
+    .version-table td:first-child { text-align: left; font-family: var(--font-body); font-weight: 500; color: var(--text-primary); }
+    .vr-up   { color: var(--green); font-weight: 700; }
+    .vr-down { color: var(--red); font-weight: 700; }
+    .vr-new  { color: var(--accent-light); font-style: italic; font-size: .625rem; }
+    .vr-dash { color: var(--border-hover); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; font-size: .75rem; color: var(--text-dim); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--text-dim); text-decoration: none; transition: color .25s; }
+    .footer-links a:hover { color: var(--text-primary); }
+
+    /* ── UTILITIES ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .mono { font-family: var(--font-mono); }
+    .text-muted  { color: var(--text-secondary); }
+    .text-accent { color: var(--accent-light); }
+    .mb-4 { margin-bottom: 16px; }
+    .mb-6 { margin-bottom: 24px; }
+    .seal-note {
+      font-size: .7rem; color: var(--text-dim);
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 6px 14px; display: inline-block;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    /* Tablet — hide nav-meta before it crowds */
+    @media (max-width: 900px) {
+      .nav-meta { display: none; }
+    }
+
+    /* Mobile — full overhaul */
+    @media (max-width: 768px) {
+      /* Nav wraps: brand+toggle on row 1, links scrollable on row 2 */
+      nav {
+        flex-wrap: wrap; height: auto; padding: 0 16px;
+      }
+      .nav-brand { padding: 13px 0; }
+      .nav-right  { padding: 13px 0; }
+      .nav-links {
+        order: 10; width: 100%;
+        padding: 5px 0 9px; border-top: 1px solid var(--border);
+        overflow-x: auto; -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; gap: 2px;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+
+      /* Push main down to clear the taller 2-row nav (~104px) */
+      main { padding-top: 104px; }
+
+      .container { padding: 0 16px; }
+      section { padding: 56px 0; }
+      #hero { padding: 56px 0 48px; }
+
+      /* Hero: single column, hero-top spans naturally */
+      .hero-layout { grid-template-columns: 1fr; }
+      .hero-top { grid-column: 1; }
+      /* Show podium below stats on mobile */
+      .hero-podium { display: flex; min-width: 0; margin-top: 24px; }
+      .hero-stats { gap: 20px; }
+
+      /* Method */
+      .method-grid { grid-template-columns: 1fr; }
+
+      /* Table controls: stack vertically */
+      .table-controls { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .slider-wrap { margin-left: 0; width: 100%; }
+      input[type=range] { flex: 1; width: 100%; max-width: 100%; }
+
+      /* Footer: stack */
+      .footer-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 12px; }
+    }
+
+    /* Small phones (≤480px) */
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(1.75rem, 8vw, 2.2rem); }
+      .hero-stat-num { font-size: 1.4rem; }
+      .filter-btn, .chart-tab { font-size: .7rem; padding: 4px 10px; }
+      .podium-card { padding: 12px 14px; }
+      .podium-name { font-size: .8rem; }
+      .section-title { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <span class="logo">ValueRank</span>
+    <span class="badge">v4.3</span>
+  </div>
+  <div class="nav-links">
+    <a href="#rankings" class="active">Rankings</a>
+    <a href="#charts">Charts</a>
+    <a href="#methodology">Methodology</a>
+    <a href="#data">Data</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-meta">April 26, 2026 · 12 models · 18 dimensions</div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
+      <i data-lucide="sun" class="icon-sun"></i>
+      <i data-lucide="moon" class="icon-moon"></i>
+    </button>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-top">
+        <div class="hero-eyebrow">Production AI Ranking Framework</div>
+        <h1 class="hero-title">Which model delivers the most <span>value?</span></h1>
+      </div>
+      <div>
+        <p class="hero-desc">ValueRank ranks 12 frontier AI models across 18 dimensions using rank-based normalization with a 25% cost weight — designed for production software engineering teams where price, speed, and reliability matter alongside raw capability.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="hero-stat-num">12</div><div class="hero-stat-label">Models</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">18</div><div class="hero-stat-label">Dimensions</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">25%</div><div class="hero-stat-label">Cost Weight</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">v4.3</div><div class="hero-stat-label">Version</div></div>
+        </div>
+      </div>
+      <div class="hero-podium">
+        <div class="podium-card gold">
+          <i data-lucide="medal" class="podium-medal"></i>
+          <div class="podium-info"><div class="podium-name">Gemini 3.1 Pro</div><div class="podium-dev">Google DeepMind · Premium ($892)</div></div>
+          <div class="podium-score">70.6</div>
+        </div>
+        <div class="podium-card silver">
+          <i data-lucide="medal" class="podium-medal"></i>
+          <div class="podium-info"><div class="podium-name">GPT-5.5</div><div class="podium-dev">OpenAI · Very Expensive ($3,357)</div></div>
+          <div class="podium-score">65.2</div>
+        </div>
+        <div class="podium-card bronze">
+          <i data-lucide="medal" class="podium-medal"></i>
+          <div class="podium-info"><div class="podium-name">KAT-Coder-Pro-V2</div><div class="podium-dev">Kay · Budget ($73)</div></div>
+          <div class="podium-score">58.0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RANKINGS -->
+<section id="rankings">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">Rankings</div>
+      <div class="section-sub">Drag the cost weight slider to see how rankings shift. Click any column header to sort.</div>
+    </div>
+    <div class="table-controls">
+      <div class="filter-group" id="tier-filters">
+        <button class="filter-btn active" data-tier="all">All</button>
+        <button class="filter-btn" data-tier="Budget">Budget</button>
+        <button class="filter-btn" data-tier="Near-Budget">Near-Budget</button>
+        <button class="filter-btn" data-tier="Mid-Range">Mid-Range</button>
+        <button class="filter-btn" data-tier="Premium">Premium</button>
+        <button class="filter-btn" data-tier="Expensive">Expensive+</button>
+      </div>
+      <div class="slider-wrap">
+        <span class="slider-label">Cost weight</span>
+        <input type="range" id="cost-slider" min="0" max="50" value="25" step="1">
+        <span class="slider-val" id="slider-val">25%</span>
+      </div>
+    </div>
+    <div class="card table-wrap">
+      <table id="ranking-table">
+        <thead>
+          <tr>
+            <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
+            <th data-col="name">Model</th>
+            <th data-col="score" class="sorted">Score <span class="sort-arrow">↓</span></th>
+            <th data-col="qualityScore">Quality Score</th>
+            <th data-col="qualityRank">Quality Rank</th>
+            <th data-col="evalCost">Eval Cost ($)</th>
+            <th data-col="costTier">Cost Tier</th>
+            <th data-col="missingCount">⊘ Gaps</th>
+          </tr>
+        </thead>
+        <tbody id="ranking-tbody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+      <span class="seal-note">Scores within ±2.5 pts are statistically tied (SEAL CI band)</span>
+      <span class="seal-note">⊘ = missing data, assigned neutral score of 50.0</span>
+      <span class="seal-note" id="cost-note">Cost weight: 25% (default)</span>
+    </div>
+
+    <div class="insight-grid" style="margin-top:32px;">
+      <div class="insight-card">
+        <div class="insight-icon">🎯</div>
+        <div class="insight-title">Pareto Finding</div>
+        <div class="insight-body">Only <strong>KAT ($73)</strong> and <strong>Gemini ($892)</strong> are Pareto-optimal on quality vs cost. Every model priced above $892 is dominated by Gemini on both dimensions.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">💡</div>
+        <div class="insight-title">Cost Penalty</div>
+        <div class="insight-body"><strong>Claude Opus 4.7</strong> drops 7 places from quality #3 to overall #10 due to its $4,811 eval cost. A 25% cost weight has a dramatic effect on expensive models.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">⚡</div>
+        <div class="insight-title">Sweet Spot</div>
+        <div class="insight-body"><strong>Gemini 3.1 Pro</strong> is both quality #1 and cost-competitive at $892 — cheaper than GPT-5.5 ($3,357), Opus 4.7 ($4,811), and GPT-5.4 ($2,851), while beating all on quality.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">🔬</div>
+        <div class="insight-title">v4.3 Correction</div>
+        <div class="insight-body"><strong>Kimi K2.6</strong> rises #6→#4 (+3.7 pts) after τ²-Bench corrected from 72.4% to 96.0% via primary-source verification. GPT-5.5 LCB reverted to ⊘ (misattribution from multi-AI report).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section id="charts" style="padding-top:32px;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">Visualizations</div>
+      <div class="section-sub">Seven complementary charts exploring quality, cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
+    </div>
+    <div class="chart-tabs">
+      <button class="chart-tab active" data-chart="pareto">Pareto Frontier</button>
+      <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
+      <button class="chart-tab" data-chart="displacement">Rank Displacement</button>
+      <button class="chart-tab" data-chart="heatmap">Dimension Heatmap</button>
+      <button class="chart-tab" data-chart="bubble">Speed × Quality</button>
+      <button class="chart-tab" data-chart="bump">Version History</button>
+      <button class="chart-tab" data-chart="frontier2">Cost Impact</button>
+    </div>
+
+    <div class="card">
+      <!-- Pareto -->
+      <div class="chart-panel active" id="panel-pareto">
+        <div class="chart-desc"><strong>Pareto Frontier:</strong> Which models are undominated on quality vs. eval cost? A model is Pareto-optimal if no other model beats it on <em>both</em> quality and cost simultaneously. The green step function shows the best achievable quality at each budget level.</div>
+        <div id="chart-pareto" class="plotly-chart" style="height:520px;"></div>
+      </div>
+      <!-- Decomposition -->
+      <div class="chart-panel" id="panel-decomp">
+        <div class="chart-desc"><strong>Score Decomposition:</strong> How does each model earn its ValueRank score? Five macro-categories: <strong>Cost</strong> (25%), <strong>Reliability/IF</strong> (18%), <strong>Code/Agentic</strong> (25%), <strong>Production</strong> (24%), <strong>Intelligence</strong> (8%). Bar length = weighted contribution.</div>
+        <div id="chart-decomp" class="plotly-chart" style="height:520px;"></div>
+      </div>
+      <!-- Displacement -->
+      <div class="chart-panel" id="panel-displacement">
+        <div class="chart-desc"><strong>Rank Displacement:</strong> How many places does a 25% cost weight move each model from its quality-only rank? <span style="color:#22c55e">Green (right)</span> = cost bonus (overall rank better than quality rank). <span style="color:#ef4444">Red (left)</span> = cost penalty (expensive models fall).</div>
+        <div id="chart-displacement" class="plotly-chart" style="height:480px;"></div>
+      </div>
+      <!-- Heatmap -->
+      <div class="chart-panel" id="panel-heatmap">
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 12 models × 18 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
+        <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
+      </div>
+      <!-- Bubble -->
+      <div class="chart-panel" id="panel-bubble">
+        <div class="chart-desc"><strong>Speed × Quality × Cost:</strong> Which models are fast AND high-quality AND cheap? Bubble size = eval cost (larger = more expensive). Color = cost tier. Hover for exact values. The top-left "Production Sweet Spot" quadrant is where you want to be.</div>
+        <div id="chart-bubble" class="plotly-chart" style="height:520px;"></div>
+      </div>
+      <!-- Bump -->
+      <div class="chart-panel" id="panel-bump">
+        <div class="chart-desc"><strong>Version History:</strong> How rankings have shifted across ValueRank versions as new data was collected and corrections applied. Crossing lines = rank changes. Notable: Kimi's dramatic journey from #2 → #6 → #4 across versions.</div>
+        <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
+      </div>
+      <!-- Two-frontier / Cost Impact -->
+      <div class="chart-panel" id="panel-frontier2">
+        <div class="chart-desc"><strong>Cost Impact:</strong> Each model shown twice — circle = quality-only score (ignoring cost), diamond = overall score (with 25% cost weight). Lines connect the same model. <span style="color:#22c55e">Lines going up</span> = cost helps. <span style="color:#ef4444">Lines going down</span> = cost hurts. X-axis = eval cost.</div>
+        <div id="chart-frontier2" class="plotly-chart" style="height:520px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="methodology">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">Methodology</div>
+      <div class="section-sub">How scores are calculated, why cost gets 25%, and what ⊘ means.</div>
+    </div>
+    <div class="method-grid">
+      <div>
+        <div class="card mb-4">
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
+          <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
+          <p class="method-text">For each of 18 dimensions, models with real data are ranked 1–n (best to worst). The formula maps rank 1 → 100 pts, rank n → 0 pts, with linear interpolation in between. Tied ranks receive the average of their tied positions. <strong>Missing data (⊘)</strong> receives a neutral 50.0 — neither penalizing nor rewarding models for absent benchmarks.</p>
+          <hr class="divider" style="margin:16px 0;">
+          <p class="method-text">The final ValueRank score is a weighted sum across all 18 dimensions. <strong>Cost weight: 25%.</strong> This reflects production-scale reality: at 1M tokens/day, the cheapest model ($73 eval cost) saves ~$4,900/run vs. the most expensive ($4,970) — a difference that exceeds the annual salary of an engineer at some organizations.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
+          <div class="method-text" style="display:flex;flex-direction:column;gap:10px;">
+            <div><strong>Rank-based (not raw-score-based):</strong> Prevents any single benchmark from dominating due to scale differences. AIME 100% and Arena ELO 1500 are not comparable on raw values; ranks are.</div>
+            <div><strong>Missing data → neutral-50:</strong> Models are not penalized for benchmarks that don't exist yet. A ⊘ cell contributes exactly the median score, preserving the direction of the ranking without fabricating data.</div>
+            <div><strong>SEAL CI band (±2–3 pts):</strong> Due to benchmark variance and missing-data uncertainty, scores within 2–3 pts should be treated as statistically tied. Rankings within this band are effectively co-ranked.</div>
+            <div><strong>Quality sub-score:</strong> The 75% non-cost portion, computed as the weighted sum of all 17 non-cost dimensions. Represents pure capability ranking without cost penalty.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (18 Total)</h3>
+        <table class="dim-table">
+          <thead><tr><th>Dimension</th><th>Weight</th><th>Category</th></tr></thead>
+          <tbody id="dim-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA -->
+<section id="data">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">Raw Data & Coverage</div>
+      <div class="section-sub">Full normalized score matrix and data gaps by model.</div>
+    </div>
+
+    <div class="card mb-6">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (12 × 18)</h3>
+      <div class="heatmap-legend">
+        <span>0 (worst)</span>
+        <div class="hl-bar"></div>
+        <span>100 (best)</span>
+        <span style="margin-left:12px;">Grey cell with ⊘ = missing data (neutral 50)</span>
+      </div>
+      <div id="chart-heatmap-data" style="height:480px;"></div>
+    </div>
+
+    <div class="card mb-6">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Data Gaps by Model</h3>
+      <div class="gaps-grid" id="gaps-grid"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Version History — Rank Changes</h3>
+      <div style="overflow-x:auto;">
+        <table class="version-table" id="version-table"></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>ValueRank v4.3 · April 26, 2026 · 12 models × 18 dimensions · No provisional data · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div class="footer-links">
+        <a href="#methodology">Methodology</a>
+        <a href="#data">Data</a>
+        <a href="https://github.com/alo-labs/valuerank" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const DIM_KEYS  = ['Cost','IF','Term','SWE','SWEPro','LCB','GDP','Spd','Tau2','OSW','BC','LCR','HLE','GPQA','MMLU','AIME','Sci','Omni'];
+const DIM_FULL  = ['Eval Cost','IFBench','Terminal-Bench 2.0','SWE-bench V','SWE-bench Pro','LiveCodeBench v4','GDPval-AA ELO','Speed (tok/s)','τ²-Bench','OSWorld','BrowseComp','RULER/LCR','HLE','GPQA Diamond','MMLU-Pro','AIME 2025','SciCode','AA-Omniscience'];
+const DIM_WEIGHTS = [25,18,8,7,4,6,5,5,4,4,3,2,2,2,2,1,1,1];
+const DIM_CAT   = ['cost','rely','code','code','code','code','prod','prod','prod','prod','prod','prod','intel','intel','intel','intel','intel','prod'];
+
+// Macro-category definitions for decomposition
+const MACRO_CATS = [
+  { key:'cost',  label:'Cost',           color:'#22c55e', dimIdxs:[0] },
+  { key:'rely',  label:'Reliability (IF)',color:'#a78bfa', dimIdxs:[1] },
+  { key:'code',  label:'Code / Agentic', color:'#3b82f6', dimIdxs:[2,3,4,5] },
+  { key:'prod',  label:'Production',     color:'#f97316', dimIdxs:[6,7,8,9,10,11,17] },
+  { key:'intel', label:'Intelligence',   color:'#eab308', dimIdxs:[12,13,14,15,16] },
+];
+
+const TIER_COLORS = {
+  'Budget':'#22c55e','Near-Budget':'#a3e635','Mid-Range':'#fbbf24',
+  'Premium':'#fb923c','Expensive':'#f87171','Very Expensive':'#fca5a5','Ultra-Premium':'#fca5a5'
+};
+const DEV_COLORS = {
+  'Google DeepMind':'#4285F4','OpenAI':'#10a37f','Kay (alo-exp)':'#6366f1',
+  'Moonshot AI':'#8b5cf6','Zhipu AI':'#06b6d4','MiniMax':'#f59e0b',
+  'Alibaba':'#ff6900','DeepSeek':'#64748b','Anthropic':'#d4a574'
+};
+
+// Dims array order: Cost IF Term SWE SWEPro LCB GDP Spd Tau2 OSW BC LCR HLE GPQA MMLU AIME Sci Omni
+// isMissing: 1 = ⊘ cell
+const MODELS = [
+  { rank:1,  name:'Gemini 3.1 Pro',    shortName:'Gemini',    developer:'Google DeepMind', evalCost:892.28,  costTier:'Premium',       overallScore:70.6, qualityScore:72.7, qualityRank:1,  missingCount:2,
+    dims:[63.6,100.0,54.5,61.1,50.0,50.0,9.1,100.0,100.0,50.0,71.4,88.9,90.9,100.0,80.0,30.0,100.0,100.0],
+    isMissing:[0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
+    vRanks:{v20:1,v25:1,v30:1,v40:1,v42:1,v43:1} },
+  { rank:2,  name:'GPT-5.5',           shortName:'GPT-5.5',   developer:'OpenAI',          evalCost:3357.00, costTier:'Very Expensive', overallScore:65.2, qualityScore:70.9, qualityRank:2,  missingCount:5,
+    dims:[27.3,70.0,100.0,100.0,68.8,50.0,100.0,63.6,90.0,100.0,100.0,50.0,81.8,81.8,50.0,50.0,50.0,0.0],
+    isMissing:[0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,1,0],
+    vRanks:{v20:null,v25:6,v30:2,v40:2,v42:2,v43:2} },
+  { rank:3,  name:'KAT-Coder-Pro-V2',  shortName:'KAT',       developer:'Kay (alo-exp)',   evalCost:73.49,   costTier:'Budget',         overallScore:58.0, qualityScore:41.3, qualityRank:7,  missingCount:7,
+    dims:[100.0,30.0,90.9,27.8,50.0,50.0,0.0,90.9,60.0,50.0,50.0,33.3,0.0,9.1,50.0,50.0,11.1,50.0],
+    isMissing:[0,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,1],
+    vRanks:{v20:4,v25:2,v30:3,v40:3,v42:3,v43:3} },
+  { rank:4,  name:'Kimi K2.6',         shortName:'Kimi',      developer:'Moonshot AI',     evalCost:947.87,  costTier:'Premium',        overallScore:57.6, qualityScore:53.0, qualityRank:5,  missingCount:0,
+    dims:[54.5,80.0,36.4,44.4,68.8,75.0,36.4,81.8,70.0,40.0,28.6,61.1,45.5,63.6,0.0,60.0,66.7,42.9],
+    isMissing:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    vRanks:{v20:2,v25:4,v30:6,v40:5,v42:6,v43:4} },
+  { rank:5,  name:'GLM 5.1',           shortName:'GLM',       developer:'Zhipu AI',        evalCost:543.95,  costTier:'Mid-Range',       overallScore:56.7, qualityScore:38.1, qualityRank:10, missingCount:2,
+    dims:[72.7,90.0,63.6,0.0,50.0,50.0,45.5,40.9,80.0,50.0,0.0,22.2,36.4,18.2,20.0,30.0,22.2,28.6],
+    isMissing:[0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0],
+    vRanks:{v20:7,v25:3,v30:4,v40:4,v42:4,v43:5} },
+  { rank:6,  name:'MiniMax M2.7',      shortName:'MiniMax',   developer:'MiniMax',         evalCost:175.51,  costTier:'Near-Budget',     overallScore:53.6, qualityScore:40.3, qualityRank:8,  missingCount:6,
+    dims:[90.9,60.0,0.0,50.0,25.0,50.0,27.3,40.9,35.0,50.0,50.0,44.4,9.1,27.3,50.0,50.0,44.4,71.4],
+    isMissing:[0,0,0,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0],
+    vRanks:{v20:3,v25:5,v30:5,v40:6,v42:5,v43:6} },
+  { rank:7,  name:'GPT-5.4',           shortName:'GPT-5.4',   developer:'OpenAI',          evalCost:2851.01, costTier:'Expensive',       overallScore:51.9, qualityScore:63.8, qualityRank:4,  missingCount:4,
+    dims:[36.4,40.0,81.8,50.0,87.5,0.0,72.7,72.7,50.0,60.0,85.7,100.0,72.7,72.7,50.0,50.0,88.9,50.0],
+    isMissing:[0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1],
+    vRanks:{v20:5,v25:8,v30:7,v40:7,v42:7,v43:7} },
+  { rank:8,  name:'Qwen 3.6 Plus',     shortName:'Qwen',      developer:'Alibaba',         evalCost:482.65,  costTier:'Mid-Range',       overallScore:48.6, qualityScore:37.8, qualityRank:9,  missingCount:5,
+    dims:[81.8,50.0,18.2,11.1,37.5,50.0,18.2,54.5,10.0,50.0,50.0,61.1,18.2,54.5,60.0,50.0,0.0,50.0],
+    isMissing:[0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,1,0,1],
+    vRanks:{v20:6,v25:7,v30:9,v40:8,v42:8,v43:8} },
+  { rank:9,  name:'DeepSeek V4-Pro',   shortName:'DeepSeek',  developer:'DeepSeek',        evalCost:1071.28, costTier:'Premium',         overallScore:48.2, qualityScore:45.9, qualityRank:6,  missingCount:6,
+    dims:[45.5,50.0,45.5,61.1,12.5,100.0,54.5,9.1,50.0,50.0,42.9,50.0,54.5,45.5,40.0,50.0,50.0,14.3],
+    isMissing:[0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,1,1,0],
+    vRanks:{v20:null,v25:null,v30:8,v40:9,v42:9,v43:9} },
+  { rank:10, name:'Claude Opus 4.7',   shortName:'Opus 4.7',  developer:'Anthropic',       evalCost:4811.04, costTier:'Ultra-Premium',   overallScore:43.9, qualityScore:68.1, qualityRank:3,  missingCount:1,
+    dims:[9.1,20.0,72.7,88.9,100.0,50.0,90.9,18.2,0.0,80.0,14.3,77.8,100.0,90.9,100.0,90.0,77.8,85.7],
+    isMissing:[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+    vRanks:{v20:8,v25:9,v30:10,v40:10,v42:10,v43:10} },
+  { rank:11, name:'Claude Sonnet 4.6', shortName:'Sonnet 4.6',developer:'Anthropic',       evalCost:3959.36, costTier:'Very Expensive',  overallScore:25.1, qualityScore:31.4, qualityRank:12, missingCount:5,
+    dims:[18.2,10.0,9.1,27.8,50.0,50.0,81.8,27.3,20.0,0.0,50.0,11.1,27.3,36.4,50.0,0.0,33.3,50.0],
+    isMissing:[0,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,1],
+    vRanks:{v20:10,v25:10,v30:11,v40:11,v42:11,v43:11} },
+  { rank:12, name:'Claude Opus 4.6',   shortName:'Opus 4.6',  developer:'Anthropic',       evalCost:4969.68, costTier:'Ultra-Premium',   overallScore:20.5, qualityScore:36.6, qualityRank:11, missingCount:1,
+    dims:[0.0,0.0,27.3,77.8,0.0,25.0,63.6,0.0,35.0,20.0,57.1,0.0,63.6,0.0,50.0,90.0,55.6,57.1],
+    isMissing:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
+    vRanks:{v20:9,v25:11,v30:12,v40:12,v42:12,v43:12} },
+];
+
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+function computeNewScore(model, costWeightPct) {
+  const cw = costWeightPct / 100;
+  const scaleFactor = (1 - cw) / 0.75;
+  const qualWeights = [0,0.18,0.08,0.07,0.04,0.06,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
+  let score = model.dims[0] * cw;
+  for (let i = 1; i < 18; i++) score += model.dims[i] * qualWeights[i] * scaleFactor;
+  return Math.round(score * 10) / 10;
+}
+
+function getMacroContribs(model) {
+  const weights = [0.25,0.18,0.08,0.07,0.04,0.06,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
+  return MACRO_CATS.map(cat => {
+    let val = 0;
+    cat.dimIdxs.forEach(i => val += model.dims[i] * weights[i]);
+    return Math.round(val * 100) / 100;
+  });
+}
+
+function tierClass(tier) { return 'tier-' + tier.replace(/\s+/g,'-'); }
+
+function rankColor(r) {
+  if (r===1) return 'var(--gold)';
+  if (r===2) return 'var(--silver)';
+  if (r===3) return 'var(--bronze)';
+  return 'var(--muted)';
+}
+
+function scoreColor(s) {
+  if (s >= 65) return '#22c55e';
+  if (s >= 50) return '#3b82f6';
+  if (s >= 35) return '#f59e0b';
+  return '#ef4444';
+}
+
+function getPlotlyLayout() {
+  const s    = getComputedStyle(document.documentElement);
+  const bg   = s.getPropertyValue('--bg-card').trim();
+  const text  = s.getPropertyValue('--text-secondary').trim();
+  const grid  = s.getPropertyValue('--border').trim();
+  return {
+    paper_bgcolor: bg, plot_bgcolor: bg,
+    font:{ family:'IBM Plex Sans,system-ui,sans-serif', color:text, size:12 },
+    margin:{ t:40, r:20, b:60, l:60 },
+    xaxis:{ gridcolor:grid, zerolinecolor:grid, tickfont:{color:text}, titlefont:{color:text} },
+    yaxis:{ gridcolor:grid, zerolinecolor:grid, tickfont:{color:text}, titlefont:{color:text} },
+  };
+}
+function plotlyTitle(size) {
+  const c = getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim();
+  return { color:c, size: size||14 };
+}
+function plotlyDim() {
+  return getComputedStyle(document.documentElement).getPropertyValue('--border-hover').trim();
+}
+const PLOTLY_CONFIG = { responsive:true, displayModeBar:true, modeBarButtonsToRemove:['select2d','lasso2d'], displaylogo:false };
+
+// ─────────────────────────────────────────────
+// TABLE
+// ─────────────────────────────────────────────
+let tableModels = MODELS.map(m => ({...m, score: m.overallScore}));
+let sortCol = 'score', sortDir = 1, tierFilter = 'all';
+
+function renderTable() {
+  let models = tableModels.filter(m => {
+    if (tierFilter === 'all') return true;
+    if (tierFilter === 'Expensive') return ['Expensive','Very Expensive','Ultra-Premium'].includes(m.costTier);
+    return m.costTier === tierFilter;
+  });
+  models.sort((a,b) => sortDir * (a[sortCol] > b[sortCol] ? 1 : a[sortCol] < b[sortCol] ? -1 : 0));
+  if (sortCol === 'rank' || sortCol === 'qualityRank' || sortCol === 'missingCount') {
+    models.sort((a,b) => sortDir * (a[sortCol] - b[sortCol]));
+  }
+  if (sortCol === 'evalCost') models.sort((a,b) => sortDir * (a.evalCost - b.evalCost));
+  if (sortCol === 'score') models.sort((a,b) => sortDir * (b.score - a.score));
+
+  const tbody = document.getElementById('ranking-tbody');
+  tbody.innerHTML = models.map((m, idx) => {
+    const rank = idx + 1;
+    const dispRank = sortCol === 'score' ? m.rank : rank;
+    const rankCls = dispRank===1?'r1':dispRank===2?'r2':dispRank===3?'r3':'';
+    const delta = m.qualityRank - m.rank;
+    const deltaStr = delta > 0 ? `+${delta}▲` : delta < 0 ? `${delta}▼` : '—';
+    const deltaCls = delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : 'delta-same';
+    const barW = Math.round((m.score/100)*100);
+    return `<tr>
+      <td><span class="rank-cell ${rankCls}">${dispRank}</span></td>
+      <td>
+        <div class="model-name">${m.name}</div>
+        <div class="model-dev">${m.developer}</div>
+      </td>
+      <td>
+        <div class="score-bar-wrap">
+          <span class="score-val" style="color:${scoreColor(m.score)}">${m.score.toFixed(1)}</span>
+          <div class="score-bar"><div class="score-bar-fill" style="width:${barW}%;background:${scoreColor(m.score)}"></div></div>
+        </div>
+      </td>
+      <td><span class="mono" style="color:${scoreColor(m.qualityScore)}">${m.qualityScore.toFixed(1)}</span></td>
+      <td><span class="quality-pill">#${m.qualityRank}</span></td>
+      <td><span class="mono">$${m.evalCost.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})}</span></td>
+      <td><span class="tier-badge ${tierClass(m.costTier)}">${m.costTier}</span></td>
+      <td><span class="missing-dots">${m.missingCount > 0 ? '⊘'.repeat(Math.min(m.missingCount,7)) + (m.missingCount > 7 ? '+' : '') + ` ${m.missingCount}` : '✓ Full'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function initTable() {
+  renderTable();
+  document.querySelectorAll('thead th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = 1; }
+      document.querySelectorAll('thead th').forEach(t => { t.classList.remove('sorted'); t.querySelector('.sort-arrow') && (t.querySelector('.sort-arrow').textContent='↕'); });
+      th.classList.add('sorted');
+      const arrow = th.querySelector('.sort-arrow');
+      if (arrow) arrow.textContent = (col === 'score') ? (sortDir === 1 ? '↓' : '↑') : (sortDir === 1 ? '↑' : '↓');
+      renderTable();
+    });
+  });
+  document.querySelectorAll('[data-tier]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tierFilter = btn.dataset.tier;
+      document.querySelectorAll('[data-tier]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTable();
+    });
+  });
+}
+
+function initCostSlider() {
+  const slider = document.getElementById('cost-slider');
+  const valEl  = document.getElementById('slider-val');
+  const noteEl = document.getElementById('cost-note');
+  slider.addEventListener('input', () => {
+    const cw = parseInt(slider.value);
+    valEl.textContent = cw + '%';
+    noteEl.textContent = cw === 25 ? 'Cost weight: 25% (default)' : `Cost weight: ${cw}% (custom — default is 25%)`;
+    tableModels = MODELS.map(m => ({...m, score: computeNewScore(m, cw)}));
+    // Re-assign dynamic ranks
+    const sorted = [...tableModels].sort((a,b) => b.score - a.score);
+    sorted.forEach((m,i) => { m.rank = i+1; });
+    sortCol = 'score'; sortDir = 1;
+    renderTable();
+  });
+}
+
+// ─────────────────────────────────────────────
+// CHART 1: PARETO SCATTER
+// ─────────────────────────────────────────────
+function renderPareto() {
+  const frontier = [{model:MODELS[2],q:41.3},{model:MODELS[0],q:72.7}]; // KAT, Gemini
+
+  // Step function: x=[73,892,892,6000], y=[41.3,41.3,72.7,72.7]
+  const stepX = [30, 73, 892, 892, 6500];
+  const stepY = [41.3, 41.3, 41.3, 72.7, 72.7];
+
+  const traces = [];
+
+  // Frontier step line
+  traces.push({
+    x: stepX, y: stepY,
+    mode:'lines', name:'Pareto Frontier',
+    line:{color:'#22c55e', width:2.5, shape:'linear'},
+    hoverinfo:'skip'
+  });
+
+  // Frontier shading
+  traces.push({
+    x: [...stepX, ...stepX.slice().reverse()],
+    y: [...stepY, stepY.map(()=>0).reverse()],
+    fill:'toself', fillcolor:'rgba(34,197,94,0.06)',
+    mode:'none', name:'Frontier Region', showlegend:false, hoverinfo:'skip'
+  });
+
+  // All models scatter
+  MODELS.forEach(m => {
+    const onFrontier = m === MODELS[0] || m === MODELS[2];
+    traces.push({
+      x:[m.evalCost], y:[m.qualityScore],
+      mode:'markers+text',
+      name: m.shortName,
+      text:[m.shortName],
+      textposition: m.evalCost > 2000 ? 'top center' : 'top right',
+      textfont:{ size:11, color: onFrontier ? plotlyTitle().color : getPlotlyLayout().font.color },
+      marker:{
+        size: onFrontier ? 14 : 10,
+        color: DEV_COLORS[m.developer] || '#64748b',
+        line:{ color: onFrontier ? '#22c55e' : 'transparent', width: onFrontier ? 2.5 : 0 },
+        symbol: onFrontier ? 'circle' : 'circle',
+        opacity: onFrontier ? 1.0 : 0.75
+      },
+      error_y:{ type:'constant', value:2.5, visible:true, color:'rgba(148,163,184,0.25)', thickness:1.5, width:4 },
+      hovertemplate:`<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Eval Cost: $${m.evalCost.toLocaleString()}<br>Overall: ${m.overallScore}<br>⊘ Missing: ${m.missingCount}<extra></extra>`,
+      showlegend:false
+    });
+  });
+
+  // Frontier label annotations
+  const layout = {
+    ...getPlotlyLayout(),
+    title:{text:'Quality Sub-Score vs. Eval Cost — Pareto Frontier', font:plotlyTitle(14)},
+    xaxis:{...getPlotlyLayout().xaxis, title:'Eval Cost ($)', type:'log', range:[Math.log10(50),Math.log10(7000)],
+      tickvals:[100,200,500,1000,2000,5000], ticktext:['$100','$200','$500','$1K','$2K','$5K']},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Quality Sub-Score (0–100)', range:[20,80]},
+    annotations:[
+      {x:Math.log10(73), y:41.3, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:-20},
+      {x:Math.log10(892), y:72.7, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:16},
+      {x:Math.log10(3500), y:58, xref:'x', yref:'y',
+        text:'Gemini ($892) dominates<br>all more-expensive models<br>on both quality AND cost',
+        font:{color:'#94a3b8',size:10}, showarrow:false,
+        bgcolor:getPlotlyLayout().paper_bgcolor, bordercolor:getPlotlyLayout().xaxis.gridcolor, borderwidth:1, borderpad:6}
+    ],
+    legend:{orientation:'h', y:-0.15}
+  };
+  Plotly.newPlot('chart-pareto', traces, layout, PLOTLY_CONFIG);
+}
+
+// ─────────────────────────────────────────────
+// CHART 2: SCORE DECOMPOSITION
+// ─────────────────────────────────────────────
+function renderDecomposition() {
+  const sorted = [...MODELS].sort((a,b) => a.overallScore - b.overallScore);
+  const yLabels = sorted.map(m => m.shortName);
+
+  const traces = MACRO_CATS.map(cat => ({
+    y: yLabels,
+    x: sorted.map(m => {
+      const weights = [0.25,0.18,0.08,0.07,0.04,0.06,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
+      let v = 0; cat.dimIdxs.forEach(i => v += sorted[sorted.indexOf(m)].dims[i] * weights[i]);
+      return Math.round(v * 100) / 100;
+    }),
+    name: cat.label,
+    type:'bar', orientation:'h',
+    marker:{ color: cat.color, opacity: 0.9 },
+    hovertemplate:`<b>${cat.label}</b>: %{x:.2f} pts<extra>%{y}</extra>`,
+  }));
+
+  const layout = {
+    ...getPlotlyLayout(),
+    title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},
+    barmode:'stack',
+    xaxis:{...getPlotlyLayout().xaxis, title:'Score Contribution (pts)', range:[0,80]},
+    yaxis:{...getPlotlyLayout().yaxis, title:''},
+    legend:{orientation:'h', y:1.08, x:0, font:{size:11}},
+    margin:{...getPlotlyLayout().margin, l:90}
+  };
+  Plotly.newPlot('chart-decomp', traces, layout, PLOTLY_CONFIG);
+}
+
+// ─────────────────────────────────────────────
+// CHART 3: RANK DISPLACEMENT
+// ─────────────────────────────────────────────
+function renderDisplacement() {
+  const sorted = [...MODELS].sort((a,b) => a.overallScore - b.overallScore);
+  const displacements = sorted.map(m => m.qualityRank - m.rank);
+  const colors = displacements.map(d => d > 0 ? '#22c55e' : d < 0 ? '#ef4444' : '#64748b');
+  const labels = displacements.map((d,i) => {
+    const m = sorted[i];
+    if (d > 0) return `Cost bonus: rises ${d} places`;
+    if (d < 0) return `Cost penalty: falls ${Math.abs(d)} places`;
+    return 'No change';
+  });
+
+  const traces = [{
+    y: sorted.map(m => m.shortName),
+    x: displacements,
+    type:'bar', orientation:'h',
+    marker:{ color: colors, opacity:0.85 },
+    text: displacements.map(d => d > 0 ? `+${d}` : d === 0 ? '0' : `${d}`),
+    textposition:'outside',
+    textfont:{ size:11, color:'#94a3b8' },
+    hovertemplate: sorted.map((m,i) =>
+      `<b>${m.name}</b><br>Quality rank: #${m.qualityRank}<br>Overall rank: #${m.rank}<br>Displacement: ${displacements[i] > 0 ? '+' : ''}${displacements[i]}<extra></extra>`
+    ),
+  }];
+
+  const layout = {
+    ...getPlotlyLayout(),
+    title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},
+    xaxis:{...getPlotlyLayout().xaxis, title:'Places gained (▶) or lost (◀) due to cost weight', zeroline:true, zerolinecolor:plotlyDim(), zerolinewidth:2, range:[-9,7]},
+    yaxis:{...getPlotlyLayout().yaxis, title:''},
+    margin:{...getPlotlyLayout().margin, l:90},
+    shapes:[{type:'line', x0:0, x1:0, y0:-0.5, y1:sorted.length-0.5, line:{color:plotlyDim(),width:2,dash:'dot'}}],
+    annotations:[
+      {x:4, y:sorted.length-1, xref:'x', yref:'y', text:'← Cost bonus (rose)', font:{color:'#22c55e',size:10}, showarrow:false},
+      {x:-4, y:0, xref:'x', yref:'y', text:'Cost penalty (fell) →', font:{color:'#ef4444',size:10}, showarrow:false},
+    ]
+  };
+  Plotly.newPlot('chart-displacement', traces, layout, PLOTLY_CONFIG);
+}
+
+// ─────────────────────────────────────────────
+// CHART 4: HEATMAP (for charts tab and data tab)
+// ─────────────────────────────────────────────
+function renderHeatmap(elementId, height) {
+  const models = [...MODELS].sort((a,b) => b.overallScore - a.overallScore);
+
+  // Column order: grouped by category
+  const colOrder = [0,1,2,3,4,5,6,7,8,9,10,11,17,12,13,14,15,16];
+  const colLabels = colOrder.map(i => DIM_KEYS[i]);
+  const colFull   = colOrder.map(i => DIM_FULL[i]);
+  const colWeights= colOrder.map(i => DIM_WEIGHTS[i]);
+
+  const z    = models.map(m => colOrder.map(i => m.dims[i]));
+  const customdata = models.map(m => colOrder.map(i => ({
+    model: m.name, dim: DIM_FULL[i], score: m.dims[i].toFixed(1), weight: DIM_WEIGHTS[i], missing: m.isMissing[i]
+  })));
+
+  const trace = {
+    z,
+    type:'heatmap',
+    colorscale:[
+      [0.0, '#1e3a8a'],[0.15,'#2563eb'],[0.35,'#93c5fd'],
+      [0.5, '#cbd5e1'],[0.65,'#fcd34d'],[0.85,'#f59e0b'],[1.0,'#b45309']
+    ],
+    zmin:0, zmax:100,
+    x: colLabels,
+    y: models.map(m => m.shortName),
+    hovertemplate:'<b>%{customdata.model}</b> — %{customdata.dim}<br>Score: %{customdata.score} (weight: %{customdata.weight}%)<br>%{customdata.missing ? "⊘ Missing data (neutral 50)" : "Confirmed data"}<extra></extra>',
+    customdata,
+    showscale:true,
+    colorbar:{
+      title:'Score', thickness:12, len:0.8,
+      tickfont:{color:'#94a3b8',size:10},
+      titlefont:{color:'#94a3b8',size:11}
+    }
+  };
+
+  // Category dividers via shapes
+  // Columns: [Cost(0)] | [IF(1)] | [Term SWE SWEPro LCB = 2,3,4,5] | [GDP Spd Tau2 OSW BC LCR Omni = 6,7,8,9,10,11,12] | [HLE GPQA MMLU AIME Sci = 13,14,15,16,17]
+  const dividers = [0.5, 1.5, 5.5, 12.5]; // after column indexes 0,1,5,12
+  const shapes = dividers.map(x => ({
+    type:'line', xref:'x', yref:'paper',
+    x0: x, x1: x, y0: 0, y1: 1,
+    line:{color:getPlotlyLayout().xaxis.gridcolor, width:2}
+  }));
+
+  const catLabels = [
+    {x:0, text:'Cost 25%', color:'#22c55e'},
+    {x:1, text:'Reliability 18%', color:'#a78bfa'},
+    {x:3.5, text:'Code/Agentic 25%', color:'#3b82f6'},
+    {x:9, text:'Production 24%', color:'#f97316'},
+    {x:15.5, text:'Intelligence 8%', color:'#eab308'},
+  ];
+
+  const catAnnotations = catLabels.map(c => ({
+    x: c.x, y: -0.08, xref:'x', yref:'paper',
+    text:`<b>${c.text}</b>`, font:{color:c.color,size:10}, showarrow:false,
+  }));
+
+  // Per-cell text with legibility-aware color: white on dark blue, dark on light cells
+  const cellAnnotations = [];
+  models.forEach(m => {
+    colLabels.forEach((colLabel, colIdx) => {
+      const ci = colOrder[colIdx];
+      const val = m.dims[ci];
+      const textVal = m.isMissing[ci] ? '⊘' : val.toFixed(0);
+      const textColor = val < 28 ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.72)';
+      cellAnnotations.push({
+        x: colLabel, y: m.shortName,
+        xref:'x', yref:'y',
+        text: textVal, showarrow: false,
+        font: { size: 9, color: textColor, family: 'IBM Plex Mono, monospace' }
+      });
+    });
+  });
+
+  const annotations = [...catAnnotations, ...cellAnnotations];
+
+  const layout = {
+    ...getPlotlyLayout(),
+    title:{text:'Normalized Score Matrix (12 Models × 18 Dimensions)', font:plotlyTitle(14)},
+    xaxis:{...getPlotlyLayout().xaxis, side:'top', tickangle:-30, tickfont:{size:10}},
+    yaxis:{...getPlotlyLayout().yaxis, autorange:'reversed', tickfont:{size:11}},
+    margin:{t:100, r:80, b:80, l:90},
+    shapes, annotations
+  };
+  Plotly.newPlot(elementId, [trace], layout, PLOTLY_CONFIG);
+}
+
+// ─────────────────────────────────────────────
+// CHART 5: SPEED × QUALITY BUBBLE
+// ─────────────────────────────────────────────
+function renderBubble() {
+  const maxCost = Math.max(...MODELS.map(m => m.evalCost));
+  const traces = MODELS.map(m => ({
+    x:[m.dims[7]], y:[m.qualityScore],
+    mode:'markers+text',
+    name:m.shortName,
+    text:[m.shortName],
+    textposition:'top center',
+    textfont:{size:10, color:'#94a3b8'},
+    marker:{
+      size: 10 + (m.evalCost / maxCost) * 30,
+      color: TIER_COLORS[m.costTier] || '#64748b',
+      opacity:0.8,
+      line:{color:'rgba(255,255,255,0.15)',width:1}
+    },
+    hovertemplate:`<b>${m.name}</b><br>Speed (norm): ${m.dims[7].toFixed(1)}<br>Quality: ${m.qualityScore.toFixed(1)}<br>Eval Cost: $${m.evalCost.toLocaleString()}<br>Cost Tier: ${m.costTier}<extra></extra>`,
+    showlegend:false
+  }));
+
+  const layout = {
+    ...getPlotlyLayout(),
+    title:{text:'Speed × Quality × Cost (bubble size = eval cost)', font:plotlyTitle(14)},
+    xaxis:{...getPlotlyLayout().xaxis, title:'Speed — Normalized Score (0=slowest, 100=fastest)', range:[-5,105]},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Quality Sub-Score', range:[25,80]},
+    shapes:[
+      {type:'line', x0:50, x1:50, y0:25, y1:80, line:{color:plotlyDim(),dash:'dot',width:1.5}},
+      {type:'line', x0:-5, x1:105, y0:50, y1:50, line:{color:plotlyDim(),dash:'dot',width:1.5}},
+    ],
+    annotations:[
+      {x:25, y:78, xref:'x', yref:'y', text:'Slow, High Quality', font:{color:'#6b7280',size:9}, showarrow:false},
+      {x:80, y:78, xref:'x', yref:'y', text:'<b>Production Sweet Spot</b>', font:{color:'#22c55e',size:9}, showarrow:false},
+      {x:80, y:32, xref:'x', yref:'y', text:'Fast & Cheap', font:{color:'#6b7280',size:9}, showarrow:false},
+      {x:25, y:32, xref:'x', yref:'y', text:'Avoid', font:{color:'#6b7280',size:9}, showarrow:false},
+    ]
+  };
+  Plotly.newPlot('chart-bubble', traces, layout, PLOTLY_CONFIG);
+}
+
+// ─────────────────────────────────────────────
+// CHART 6: VERSION BUMP CHART
+// ─────────────────────────────────────────────
+function renderBump() {
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43'];
+  const traces = MODELS.map(m => {
+    const x=[], y=[];
+    vKeys.forEach((vk,i) => {
+      const r = m.vRanks[vk];
+      if (r !== null && r !== undefined) { x.push(versions[i]); y.push(r); }
+    });
+    const isTop3 = m.rank <= 3;
+    return {
+      x, y,
+      mode:'lines+markers+text',
+      name:m.shortName,
+      text: x.map((v,i) => v === 'v4.3' ? m.shortName : ''),
+      textposition:'middle right',
+      textfont:{size:10},
+      line:{ color: DEV_COLORS[m.developer] || '#64748b', width: isTop3 ? 2.5 : 1.5, dash: isTop3 ? 'solid' : 'solid' },
+      marker:{ size: isTop3 ? 10 : 7, color: DEV_COLORS[m.developer] || '#64748b', symbol:'circle' },
+      opacity: isTop3 ? 1.0 : 0.65,
+      hovertemplate:`<b>${m.name}</b><br>%{x}: rank #%{y}<extra></extra>`,
+    };
+  });
+
+  const layout = {
+    ...getPlotlyLayout(),
+    title:{text:'Ranking History — v2.0 to v4.3', font:plotlyTitle(14)},
+    xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,12.5],
+      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12']},
+    margin:{...getPlotlyLayout().margin, r:90},
+    annotations:[
+      {x:'v4.3', y:4, xref:'x', yref:'y', text:'Kimi +τ² correction', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:50, ay:0}
+    ]
+  };
+  Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
+}
+
+// ─────────────────────────────────────────────
+// CHART 7: COST IMPACT (two-frontier / dumbbell)
+// ─────────────────────────────────────────────
+function renderFrontier2() {
+  const traces = [];
+
+  // Connector lines
+  MODELS.forEach(m => {
+    const direction = m.overallScore - m.qualityScore;
+    traces.push({
+      x:[m.evalCost, m.evalCost], y:[m.qualityScore, m.overallScore],
+      mode:'lines', showlegend:false, hoverinfo:'skip',
+      line:{ color: direction > 0 ? 'rgba(34,197,94,0.4)' : 'rgba(239,68,68,0.4)', width:1.5 }
+    });
+  });
+
+  // Quality circles
+  traces.push({
+    x: MODELS.map(m => m.evalCost),
+    y: MODELS.map(m => m.qualityScore),
+    mode:'markers+text',
+    name:'Quality Score (no cost)',
+    text: MODELS.map(m => ''),
+    marker:{ size:10, color: MODELS.map(m => DEV_COLORS[m.developer]||'#64748b'), symbol:'circle', opacity:0.7, line:{color:'rgba(255,255,255,0.3)',width:1} },
+    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Cost: $${m.evalCost.toLocaleString()}<extra></extra>`),
+  });
+
+  // Overall diamonds
+  traces.push({
+    x: MODELS.map(m => m.evalCost),
+    y: MODELS.map(m => m.overallScore),
+    mode:'markers+text',
+    name:'Overall Score (with 25% cost)',
+    text: MODELS.map(m => m.shortName),
+    textposition: MODELS.map(m => m.evalCost > 3000 ? 'top center' : 'top right'),
+    textfont:{size:10, color:'#94a3b8'},
+    marker:{ size:10, color: MODELS.map(m => DEV_COLORS[m.developer]||'#64748b'), symbol:'diamond', line:{color:'rgba(255,255,255,0.5)',width:1.5} },
+    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<extra></extra>`),
+  });
+
+  const layout = {
+    ...getPlotlyLayout(),
+    title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of 25% cost weight', font:plotlyTitle(13)},
+    xaxis:{...getPlotlyLayout().xaxis, title:'Eval Cost ($)', type:'log', range:[Math.log10(50),Math.log10(7000)],
+      tickvals:[100,200,500,1000,2000,5000], ticktext:['$100','$200','$500','$1K','$2K','$5K']},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Score (0–100)', range:[15,80]},
+    legend:{orientation:'h', y:-0.15},
+    annotations:[
+      {x:Math.log10(73), y:49.7, xref:'x', yref:'y', text:'KAT +16.7 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},
+      {x:Math.log10(4811), y:56, xref:'x', yref:'y', text:'Opus 4.7 −24.2 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-60, ay:-20},
+    ]
+  };
+  Plotly.newPlot('chart-frontier2', traces, layout, PLOTLY_CONFIG);
+}
+
+// ─────────────────────────────────────────────
+// CHART TABS
+// ─────────────────────────────────────────────
+const chartRenderers = {
+  pareto: renderPareto,
+  decomp: renderDecomposition,
+  displacement: renderDisplacement,
+  heatmap: () => renderHeatmap('chart-heatmap', 540),
+  bubble: renderBubble,
+  bump: renderBump,
+  frontier2: renderFrontier2,
+};
+const rendered = { pareto: false };
+
+function initChartTabs() {
+  renderPareto(); rendered.pareto = true;
+  document.querySelectorAll('.chart-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.chart-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const key = tab.dataset.chart;
+      document.getElementById('panel-' + key).classList.add('active');
+      if (!rendered[key]) { chartRenderers[key](); rendered[key] = true; }
+    });
+  });
+}
+
+// ─────────────────────────────────────────────
+// DIMENSION TABLE (methodology)
+// ─────────────────────────────────────────────
+function renderDimTable() {
+  const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence' };
+  const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel' };
+  const tbody = document.getElementById('dim-table-body');
+  tbody.innerHTML = DIM_KEYS.map((k,i) => `
+    <tr>
+      <td><strong>${DIM_FULL[i]}</strong> <span class="mono text-muted" style="font-size:10px;">(${k})</span></td>
+      <td>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="w-bar" style="width:${DIM_WEIGHTS[i]*3}px;"></div>
+          <span class="mono">${DIM_WEIGHTS[i]}%</span>
+        </div>
+      </td>
+      <td><span class="cat-badge ${catClasses[DIM_CAT[i]]}">${catLabels[DIM_CAT[i]]}</span></td>
+    </tr>`).join('');
+}
+
+// ─────────────────────────────────────────────
+// GAPS GRID
+// ─────────────────────────────────────────────
+function renderGaps() {
+  const dimLabels = DIM_KEYS;
+  const container = document.getElementById('gaps-grid');
+  const sorted = [...MODELS].sort((a,b) => b.missingCount - a.missingCount);
+  container.innerHTML = sorted.map(m => {
+    const missingDims = DIM_KEYS.filter((_,i) => m.isMissing[i]);
+    return `<div class="gap-card">
+      <div class="gap-model">${m.name}</div>
+      <div class="gap-count">${m.missingCount === 0 ? '✓ All dimensions confirmed' : `${m.missingCount} dimension${m.missingCount>1?'s':''} missing`}</div>
+      ${missingDims.length ? `<div class="gap-dims">${missingDims.map(d=>`⊘${d}`).join(' ')}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ─────────────────────────────────────────────
+// VERSION TABLE
+// ─────────────────────────────────────────────
+function renderVersionTable() {
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43'];
+  const table = document.getElementById('version-table');
+  table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
+  <tbody>${MODELS.map(m => {
+    const cells = vKeys.map((vk,i) => {
+      const r = m.vRanks[vk];
+      if (r === null || r === undefined) return `<td class="vr-dash">—</td>`;
+      const prev = i > 0 ? m.vRanks[vKeys[i-1]] : null;
+      const isNew = (prev === null || prev === undefined) && r !== null;
+      if (isNew) return `<td class="vr-new">#${r} new</td>`;
+      if (prev && r < prev) return `<td class="vr-up">#${r} ▲</td>`;
+      if (prev && r > prev) return `<td class="vr-down">#${r} ▼</td>`;
+      return `<td>#${r}</td>`;
+    }).join('');
+    return `<tr><td>${m.name}</td>${cells}</tr>`;
+  }).join('')}</tbody>`;
+}
+
+// ─────────────────────────────────────────────
+// NAV HIGHLIGHT
+// ─────────────────────────────────────────────
+function initNav() {
+  const sections = ['rankings','charts','methodology','data'];
+  const links = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#'+e.target.id); });
+      }
+    });
+  }, {threshold:0.3});
+  sections.forEach(id => { const el=document.getElementById(id); if(el) observer.observe(el); });
+}
+
+// ─────────────────────────────────────────────
+// THEME TOGGLE
+// ─────────────────────────────────────────────
+function getPlotlyThemeUpdate() {
+  const PL = getPlotlyLayout();
+  const title = plotlyTitle().color;
+  return {
+    paper_bgcolor: PL.paper_bgcolor, plot_bgcolor: PL.plot_bgcolor,
+    'font.color': PL.font.color,
+    'title.font.color': title,
+    'xaxis.gridcolor': PL.xaxis.gridcolor, 'xaxis.zerolinecolor': PL.xaxis.gridcolor,
+    'xaxis.tickfont.color': PL.font.color, 'xaxis.titlefont.color': PL.font.color,
+    'yaxis.gridcolor': PL.yaxis.gridcolor, 'yaxis.zerolinecolor': PL.yaxis.gridcolor,
+    'yaxis.tickfont.color': PL.font.color, 'yaxis.titlefont.color': PL.font.color,
+  };
+}
+
+function updatePlotlyTheme() {
+  const update = getPlotlyThemeUpdate();
+  // Update all rendered chart divs
+  const allChartIds = [
+    'chart-pareto','chart-decomp','chart-displacement',
+    'chart-heatmap','chart-bubble','chart-bump','chart-frontier2',
+    'chart-heatmap-data'
+  ];
+  allChartIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.querySelector('.plotly')) Plotly.relayout(el, update);
+  });
+}
+
+function initTheme() {
+  // Default: dark (per design system default; respect saved preference)
+  const saved = localStorage.getItem('vr-theme');
+  const isDark = saved ? saved === 'dark' : false; // default light
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? '' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('vr-theme', next === 'dark' ? 'dark' : 'light');
+    // Re-theme Plotly charts after CSS vars update (next paint)
+    requestAnimationFrame(() => requestAnimationFrame(updatePlotlyTheme));
+  });
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initNav();
+  initTable();
+  initCostSlider();
+  initChartTabs();
+  renderDimTable();
+  renderGaps();
+  renderVersionTable();
+  renderHeatmap('chart-heatmap-data', 480);
+  lucide.createIcons();
+});
+</script>
+</body>
+</html>
