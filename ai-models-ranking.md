@@ -9,7 +9,7 @@
 > **v2.3 → v2.4 (full provenance audit):** Systematic cross-check of every benchmark value against authoritative leaderboard sources. All benchmark columns except TB 2.0 corrected from stale late-2024/early-2025 data. Cost column: 9/11 API prices corrected (Claude Opus $30→$10 blended; Gemini $0.75→$4.50; Kimi $0.48→$1.71; etc.). τ²-bench, GPQA, HLE, OSWorld, SWE-bench, SciCode, GDP, Speed, LCB, AIME corrected throughout. Ranking outcome: Gemini #1 (68.3), Kimi #2 (63.1), KAT #3 (59.3), GPT-5.5 drops to #8 (47.7).
 > **v2.4 → v2.5 (cost methodology overhaul):** **Root cause:** API pricing ($/1M tokens) does not represent true cost to users — actual cost = price × token usage, which varies dramatically by model verbosity and task type. **Fix:** Replaced API-price-based cost dimension with **Artificial Analysis Intelligence Index Eval Cost** — the total USD cost to run AA's full standardized benchmark suite on each model. This is the only publicly available, standardized, usage-weighted cost dataset for frontier models (source: artificialanalysis.ai). **Impact:** Cost ranking completely reshuffled. KAT-Coder-Pro-V2 becomes cheapest to run ($73.49 eval cost, rank 1, score 100.0); Claude Opus 4.6 becomes most expensive ($4,969.68, rank 11, score 0.0). GPT-5.5 moves from rank 11 (API price: most expensive) to rank 8 ($3,357 eval cost — cheaper than Sonnet $3,959 and both Opus models), gaining +8.4 pts. GLM 5.1 rises from rank 5→4. Gemini rank 6→5. Kimi drops rank 4→6 ($947.87 eval cost — marginally more expensive than Gemini $892.28 due to higher token usage on benchmark tasks). **GPT-5.5 missing data confirmed still ⊘:** Exhaustive search confirms all 7 missing dimensions (IFBench, SWE-bench Verified, LCB, Speed, LCR, AIME, SciCode) remain unconfirmed as of April 24, 2026 — model launched 24 hours ago; leaderboards not yet updated. **Ranking outcome:** Gemini #1 (71.1), KAT #2 (60.7), GLM #3 (58.9), Kimi #4 (57.5), MiniMax #5 (57.5), GPT-5.5 rises to #6 (56.1). Quality-only unchanged from v2.4: Gemini #1 (74.1), Opus 4.7 #2 (67.8), GPT-5.5 #3 (65.0).
 > **v2.5 → v3.0 (new model + 3 new dimensions + data refresh):** **(1) Added DeepSeek V4-Pro** (released April 24, 2026; Apache 2.0; 1.6T/49B MoE; 1M context). **(2) Activated 3 new scored dimensions:** BrowseComp (3% weight — deep web research agent), SWE-bench Pro (4% — harder SWE variant), MMLU-Pro (2% — graduate-level knowledge breadth). Weight redistribution: Cost 28%→25%, IF 20%→18%, Term 9%→8%, SWE 8%→7%, LCB 7%→6%, LCR 3%→2%; all others unchanged; total remains 100%. **(3) 4 data corrections:** Gemini 3.1 Pro τ²-Bench 95.6%→99.3% (now #1); Kimi K2.6 GDPval ELO 1,484→1,520 (swaps with MiniMax for rank 7); GPT-5.5 IFBench ⊘→75.9% (fills 20%-weight gap); GPT-5.5 SWE-bench Verified ⊘→88.7%† (probable, from OpenAI tech card). **(4) HLE methodology resolved:** canonical Scale Labs leaderboard uses without-tools scores — existing HLE values confirmed correct. **(5) Ranking impact:** GPT-5.5 surges from #6→#2 (64.0 pts, +7.9 pts) as IFBench and SWE-bench gaps fill. KAT drops #2→#3. DeepSeek V4-Pro debuts at #8 (51.1 pts). Quality-only: Gemini #1 (73.1), Opus 4.7 #2 (64.4), GPT-5.4 #3 (62.9).
-> **v4.0 → v4.1 (methodology update, April 26 2026):** No data changes. **(1) IFBench dimension renamed to "Reliability — Instruction Following (IFBench)"** — rationale expanded to reflect production deployment reality: machine consumers, cascade failure costs, FireBench evidence (best frontier model 74.0% on enterprise IF tasks), and BenchLM composite IF plan (IFEval 65% + IFBench 35% when full-cohort data available). **(2) Pareto frontier analysis added (§12.6)** — using quality-only score × AA Eval Cost × Speed (tok/s): only Gemini 3.1 Pro and KAT-Coder-Pro-V2 are Pareto-optimal; 10/12 models are dominated on all three axes. **(3) AA Eval Cost rationale strengthened (§4.1)** — added explicit "why not per-token pricing?" argument citing verbosity divergence and Price of Progress literature. **(4) HELM framework discussion added (§16I)** — ValueRank's deliberate departure from HELM's multi-metric non-aggregation philosophy, with explicit mapping of HELM's 7 metrics to ValueRank dimensions. All 12 final scores, 216 normalized cells, and 216 weighted derivation cells unchanged.
+> **v4.0 → v4.1 (methodology update, April 26 2026):** No data changes. **(1) IFBench dimension renamed to "Reliability — Instruction Following (IFBench)"** — rationale expanded to reflect production deployment reality: machine consumers, cascade failure costs, FireBench evidence (best frontier model 74.0% on enterprise IF tasks), and BenchLM composite IF plan (IFEval 65% + IFBench 35% when full-cohort data available). **(2) Pareto frontier analysis added (§12.6)** — using quality-only score × AA Eval Cost × Speed (tok/s): only Gemini 3.1 Pro and KAT-Coder-Pro-V2 are Pareto-optimal; 10/12 models are dominated on all three axes. **(3) AA Eval Cost rationale strengthened (§4.1)** — added explicit "why not per-token pricing?" argument citing verbosity divergence and Price of Progress literature. **(4) HELM framework discussion added (§16I)** — ValueRank's deliberate departure from HELM's multi-metric non-aggregation philosophy, with explicit mapping of HELM's 7 metrics to ValueRank dimensions. **(5) BenchLM-like categorical organization added (§3.5)** — 18 dimensions grouped into 5 clusters: Cost & Efficiency (30%), Reliability (18%), Coding & SE Agents (25%), Agentic Tasks (16%), Knowledge & Reasoning (11%). **(6) AA Intelligence Index cross-reference added (§5.3)** — known scores for 5 models; confirms quality-only composites do not differentiate production value (57–60 band vs. 20.9–70.6 ValueRank spread). **(7) Cost-of-Pass analysis added (§12.7)** — expected cost per correct output on SWE-bench Verified and Terminal-Bench 2.0; KAT's cost advantage is 12–42× cheaper per correct answer than frontier peers. **(8) Reliability weight sensitivity added (§16B)** — rankings at IF=10% and IF=25% alongside existing cost weight scenarios. **(9) SEAL statistical confidence note added (§16B)** — adjacent final scores within 2–3 pts should be treated as effectively tied. **(10) FireBench sub-dimension coverage analysis added (§14.10)** — IFEval+IFBench composite covers 5/6 FireBench categories; overconfidence calibration is the structural gap, addressed separately by AA-Omniscience. All 12 final scores, 216 normalized cells, and 216 weighted derivation cells unchanged.
 > **v3.0 → v4.0 (UltraDeep gap-fill research, April 25 2026):** 16 data points filled or corrected via comprehensive leaderboard research. **(1) DeepSeek V4-Pro gaps filled:** SWEPro 55.4%, GDPval ELO 1,554, AA-Omniscience −10 (84%−94%), AA Eval Cost $1,071.28, Speed corrected 33.5→35.8 tok/s, TB 2.0 67.9%†self (self-reported). **(2) GPT-5.5 gaps filled:** Speed 74.7 tok/s; SWE-bench Verified 88.7% dagger removed (now confirmed). **(3) SWE-bench Pro expands 5→9/12:** GLM 58.4%~, Qwen 56.6%~, MiniMax 56.2%~, DeepSeek 55.4% added. **(4) BrowseComp expands 6→8/12:** Opus 4.6 83.7%~, GLM 68%~ added. **(5) MMLU-Pro expands 4→6/12:** Opus 4.7 89.87%~ (new #1), GLM 85.8%~ added. **(6) AA-Omniscience expands 6→8/12:** Kimi +6, DeepSeek −10 added. **(7) Full renormalization:** Cost (n=11→12), Term (n=11→12), GDP (n=11→12), Spd (n=11→12), SWEPro (n=5→9), BC (n=6→8), MMLU (n=4→6), Omni (n=6→8). **(8) Ranking impact:** Gemini #1 (69.5→70.6); GPT-5.5 #2 (64.0→65.2); KAT #3 (58.3→58.4); GLM falls #4 (58.2→56.7, BrowseComp 0.0+MMLU 20.0 hurt); Kimi rises #6→#5 (52.6→54.8, SWEPro+Cost+BC improve); MiniMax falls #5→#6 (55.0→54.0); Qwen rises #9→#8 (49.7→49.0); DeepSeek falls #8→#9 (51.1→48.2, real scores below neutral-50 on Cost/Speed/SWEPro/Omni). Quality-only: Gemini #1 (73.1→72.7), GPT-5.5 rises #4→#2 (62.4→70.9), Opus 4.7 #2→#3 (64.4→68.7). ~ = BenchLM or secondary source (probable); †self = self-reported model card only.
 
 ---
@@ -124,6 +124,23 @@ Time-to-first-token (TTFT) was evaluated for inclusion in v2.0 but excluded from
 
 **Framework slots (collected, not yet scored):** BigCodeBench, GAIA Level 3. As of April 25, 2026, no 2026-era frontier models have submitted to these leaderboards in sufficient numbers for activation. Will be re-evaluated in v4.0.
 
+### 3.5 Dimension Categories (BenchLM-Inspired)
+
+Analogous to BenchLM's categorical organization (Agentic / Coding / Reasoning / Knowledge / IF / Multilingual), the 18 dimensions group into five production-relevant clusters. Category weights reflect the sum of included dimension weights.
+
+| Category | Dimensions | Combined Weight | Rationale |
+|---|---|---|---|
+| **Cost & Efficiency** | Cost, Speed | **30%** | Total financial cost and output throughput — the "price-per-useful-token" axes. Largest combined category by design: production model selection begins with operational economics. |
+| **Reliability** | IFBench (Reliability — IF) | **18%** | Machine-consumer interface quality: parsers, APIs, and downstream pipelines that cannot tolerate format failures. Deliberate standalone category — instruction-following is a systems-integration property, not a reasoning property. |
+| **Coding & SE Agents** | Terminal-Bench 2.0, SWE-bench Verified, SWE-bench Pro, LiveCodeBench v4 | **25%** | Software engineering task completion across four sub-types: terminal/CLI agents, real-world GitHub issue resolution, hard single-pass code repair, and contamination-resistant coding evaluation. |
+| **Agentic Tasks** | GDPval-AA ELO, τ²-Bench, OSWorld, BrowseComp | **16%** | Multi-step autonomous operation beyond pure coding: human preference alignment, tool-use reliability, GUI/desktop automation, and deep web research. |
+| **Knowledge & Reasoning** | HLE, GPQA Diamond, MMLU-Pro, AIME 2025, SciCode, RULER/LCR, AA-Omniscience | **11%** | Expert knowledge breadth, scientific reasoning, mathematical ceilings, domain coding, long-context fidelity, and hallucination-calibrated accuracy. Intentionally the lowest-weight category: these dimensions predict performance on novel hard tasks but have the least production-deployment relevance per the 25% cost anchor. |
+
+**Category notes:**
+- **ValueRank vs. BenchLM:** BenchLM includes Multilingual and Multimodal as first-class categories; ValueRank omits both because the 12-model cohort lacks systematic multilingual and multimodal benchmark coverage. These will be activated as category dimensions when ≥4 cohort models have published scores on a canonical multilingual benchmark.
+- **Reliability as standalone:** BenchLM places IF within a broader evaluation composite at lower relative weight (~6%). ValueRank elevates it to a standalone 18% category — the largest non-cost single dimension — reflecting the production systems argument in §3.4 that machine consumers transform IF failures from inconveniences into operational costs.
+- **Cost & Efficiency at 30%:** No other public ranking framework treats cost as a 30% cluster. DigitalApplied's Q2 2026 efficient frontier analysis and AA's Pareto leaderboard both incorporate cost, but neither weights it above quality in a composite.
+
 ---
 
 ## 4. Cost Analysis
@@ -209,24 +226,25 @@ Time-to-first-token (TTFT) was evaluated for inclusion in v2.0 but excluded from
 
 ### 5.3 Composite / Special Dimensions
 
-| Model | AA-Omniscience (Acc% − Hall%) | Speed (tok/s) | AA Index Eval Cost ($) |
-|---|---|---|---|
-| Gemini 3.1 Pro | +34 (82% acc − 48% hall) | 128.0 | $892.28 |
-| Kimi K2.6 | **+6 (45% acc − 39% hall)** | 100.4 | $947.87 |
-| MiniMax M2.7 | +12 (71% acc − 59% hall) | 49.0 | $175.51 |
-| GPT-5.4 | ⊘ | 74.8 | $2,851.01 |
-| Qwen 3.6 Plus | ⊘ | 53.0 | $482.65 |
-| KAT-Coder-Pro-V2 | ⊘ | 113.5 | $73.49 |
-| GLM 5.1 | −1 (64% acc − 65% hall) | 49.0 | $543.95 |
-| Claude Opus 4.7 | +22 (76% acc − 54% hall) | 42.0 | $4,811.04 |
-| GPT-5.5 | **−29** (57% acc − 86% hall) | **74.7** | $3,357.00 |
-| Claude Sonnet 4.6 | ⊘ | 46.0 | $3,959.36 |
-| Claude Opus 4.6 | +8 (68% acc − 60% hall) | 18.2 | $4,969.68 |
-| DeepSeek V4-Pro | **−10 (84% acc − 94% hall)** | **35.8** | **$1,071.28** |
+| Model | AA-Omniscience (Acc% − Hall%) | Speed (tok/s) | AA Index Eval Cost ($) | AA Intelligence Index |
+|---|---|---|---|---|
+| Gemini 3.1 Pro | +34 (82% acc − 48% hall) | 128.0 | $892.28 | 57 |
+| Kimi K2.6 | **+6 (45% acc − 39% hall)** | 100.4 | $947.87 | ⊘ |
+| MiniMax M2.7 | +12 (71% acc − 59% hall) | 49.0 | $175.51 | ⊘ |
+| GPT-5.4 | ⊘ | 74.8 | $2,851.01 | 57 |
+| Qwen 3.6 Plus | ⊘ | 53.0 | $482.65 | ⊘ |
+| KAT-Coder-Pro-V2 | ⊘ | 113.5 | $73.49 | ⊘ |
+| GLM 5.1 | −1 (64% acc − 65% hall) | 49.0 | $543.95 | ⊘ |
+| Claude Opus 4.7 | +22 (76% acc − 54% hall) | 42.0 | $4,811.04 | 57 |
+| GPT-5.5 | **−29** (57% acc − 86% hall) | **74.7** | $3,357.00 | **60†** |
+| Claude Sonnet 4.6 | ⊘ | 46.0 | $3,959.36 | ⊘ |
+| Claude Opus 4.6 | +8 (68% acc − 60% hall) | 18.2 | $4,969.68 | ⊘ |
+| DeepSeek V4-Pro | **−10 (84% acc − 94% hall)** | **35.8** | **$1,071.28** | ⊘ |
 
 > **AA-Omniscience note (GPT-5.5):** Despite being rated #1 on the AA Intelligence Index v4.0 (score 60 xhigh), GPT-5.5's AA-Omniscience score is −29, the worst of all models with real data. This reflects an 86% hallucination rate at high-confidence assertions — a known characteristic of the xhigh reasoning mode that prioritizes bold inference over calibrated uncertainty.
 > **AA-Omniscience note (DeepSeek V4-Pro):** 94% hallucination rate — when the model doesn't know an answer it responds anyway in 94% of cases. An 11-point improvement over DeepSeek V3.2 (−21). Source: Artificial Analysis article "DeepSeek is back among the leading open weights models." Kimi K2.6 +6 score (39% hall rate) confirms by Artificial Analysis Omniscience data.
 > **Speed note (GPT-5.5):** 74.7 tok/s is the xhigh reasoning mode throughput (primary scoring configuration). GPT-5.5 (high) = 81.9 tok/s. Source: artificialanalysis.ai/models/gpt-5-5. DeepSeek speed corrected from 33.5 to 35.8 tok/s (same source, updated measurement).
+> **AA Intelligence Index note:** Artificial Analysis's composite benchmark score (equal-weighted across Coding, Reasoning, Language, Math at 25% each; 10 benchmarks total; cost explicitly excluded). † GPT-5.5 score 60 is for xhigh reasoning mode; high mode = 59 (source: artificialanalysis.ai/models/gpt-5-5). The 5 known scores span a compressed 57–60 band — masking the wide ValueRank spread of 20.9–70.6. This compression confirms that quality-only composites do not adequately differentiate production value when cost is ignored. ⊘ = score not confirmed from AA leaderboard for this cohort model as of April 26, 2026.
 
 ---
 
@@ -617,6 +635,54 @@ The main ranking integrates cost, reliability, and quality into a single composi
 
 **Implication:** The Pareto analysis sharpens the main ranking's insight. The composite score resolves the quality-cost-speed tradeoff by weighting cost at 25%. The Pareto view shows that the same tradeoff, when left unresolved, yields only two rational choices: Gemini 3.1 Pro (top of quality-speed frontier) or KAT-Coder-Pro-V2 (sole occupant of the cost frontier). Every other model is dominated on all three axes by one of these two.
 
+### 12.7 Cost-of-Pass — Expected Cost Per Correct Output
+
+The Erol et al. 2025 framework (arXiv:2504.13359) defines **cost-of-pass** as the expected monetary cost to obtain one correct answer: `cost_of_pass = (cost per attempt) / (pass_rate)`. Applied to the AA Eval Cost data (§4.1) and benchmark pass rates (§5.1), this metric answers a question the main composite cannot: not "which model scores best relative to its cost?" but "how much does one correct output actually cost?"
+
+**Methodology:** AA Eval Cost captures the total USD to run the full benchmark suite on each model. Treating it as a proxy for cost-per-run across a fixed task set and dividing by benchmark pass rate yields a relative cost-of-correct-output index. Relative comparisons across models on the same benchmark are valid; cross-benchmark comparisons are not (different tasks, different difficulty distributions).
+
+**SWE-bench Verified (10 models with both cost and pass rate data):**
+
+| Model | AA Eval Cost | SWE-V Pass Rate | Cost-of-Pass |
+|---|---|---|---|
+| **KAT-Coder-Pro-V2** | $73.49 | 79.6% | **$92** |
+| Qwen 3.6 Plus | $482.65 | 78.8% | $613 |
+| GLM 5.1 | $543.95 | 77.8% | $699 |
+| Gemini 3.1 Pro | $892.28 | 80.6% | $1,107 |
+| Kimi K2.6 | $947.87 | 80.2% | $1,182 |
+| DeepSeek V4-Pro | $1,071.28 | 80.6% | $1,329 |
+| GPT-5.5 | $3,357.00 | 88.7% | $3,786 |
+| Claude Sonnet 4.6 | $3,959.36 | 79.6% | $4,973 |
+| Claude Opus 4.7 | $4,811.04 | 87.6% | $5,492 |
+| Claude Opus 4.6 | $4,969.68 | 80.8% | $6,151 |
+| MiniMax M2.7 | $175.51 | ⊘ | — |
+| GPT-5.4 | $2,851.01 | ⊘ | — |
+
+**Terminal-Bench 2.0 (all 12 models):**
+
+| Model | AA Eval Cost | TB 2.0 Pass Rate | Cost-of-Pass |
+|---|---|---|---|
+| **KAT-Coder-Pro-V2** | $73.49 | 76.2% | **$96** |
+| MiniMax M2.7 | $175.51 | 57.0% | $308 |
+| Qwen 3.6 Plus | $482.65 | 61.6% | $783 |
+| GLM 5.1 | $543.95 | 69.0% | $788 |
+| Gemini 3.1 Pro | $892.28 | 68.5% | $1,303 |
+| Kimi K2.6 | $947.87 | 66.7% | $1,421 |
+| DeepSeek V4-Pro†self | $1,071.28 | 67.9% | $1,578 |
+| GPT-5.4 | $2,851.01 | 75.1% | $3,797 |
+| GPT-5.5 | $3,357.00 | 82.7% | $4,059 |
+| Claude Sonnet 4.6 | $3,959.36 | 59.1% | $6,700 |
+| Claude Opus 4.7 | $4,811.04 | 69.4% | $6,933 |
+| Claude Opus 4.6 | $4,969.68 | 65.4% | $7,598 |
+
+†self = DeepSeek TB 2.0 is self-reported; treat cost-of-pass as provisional.
+
+**Key findings:**
+1. **KAT's cost advantage compounds.** At SWE-bench Verified, KAT's $92 cost-of-pass is 12× cheaper than Gemini ($1,107), 41× cheaper than GPT-5.5 ($3,786), and 67× cheaper than Claude Opus 4.6 ($6,151) — despite KAT's pass rate (79.6%) being near-equivalent to Gemini's (80.6%). The cost difference is entirely driven by eval cost ($73 vs $892), not quality.
+2. **High pass rates do not offset high prices.** GPT-5.5's 88.7% SWE-V pass rate (best in field) still yields a $3,786 cost-of-pass — 3.4× Gemini's $1,107. Claude Opus 4.7's 87.6% SWE-V pass rate produces a $5,492 cost-of-pass because its $4,811 base cost cannot be overcome by any realistic pass rate advantage.
+3. **Task-type specialization matters.** For Terminal-Bench specifically, MiniMax M2.7 ($308) is the second-cheapest model after KAT — despite its modest 57.0% pass rate. Its $175.51 eval cost dominates. Qwen and GLM cluster at $783–788, making them the natural mid-range choice for terminal workloads. This confirms the Erol et al. finding that cost-of-pass task-type specialization is real: the optimal model for SWE tasks (KAT, Gemini, Kimi) differs from the price-performance leader for terminal tasks (KAT, MiniMax).
+4. **The 25% cost weight is validated by cost-of-pass math.** A 1-percentage-point difference in pass rate is worth approximately $50–$150 in cost-of-pass for budget models and $3,000–$6,000 for ultra-premium models. The cost dimension carries more dollar-value information per weight point than any single quality benchmark.
+
 ### 12.5 The Anthropic Cost Structure Remains the Dominant Constraint
 
 Under the AA Index Eval Cost methodology, all three Anthropic frontier models (Sonnet $3,959, Opus 4.7 $4,811, Opus 4.6 $4,970) remain in the top-4 most expensive to run. At 25% cost weight, Claude Opus 4.7's cost score (9.1) contributes only 2.3 pts vs. Gemini's 15.9 pts — a 13.6 pt cost disadvantage that even quality #3 (68.7 pts) cannot overcome. Opus 4.7 scores 44.3 overall vs. Gemini's 70.6 — a 26-pt gap driven almost entirely by the cost dimension. Teams running cost-unconstrained pipelines where SWEPro or HLE performance matters most should consider Opus 4.7; all production workloads face the structural cost ceiling.
@@ -695,6 +761,23 @@ The 25% cost weight reflects a deliberate choice for production scale optimizati
 ### 14.9 BigCodeBench and GAIA Slots
 
 Both benchmarks remain reserved as scored dimensions pending ≥4 model submissions from the current 12-model inventory. Will be re-evaluated in v4.0.
+
+### 14.10 FireBench Sub-Dimension Coverage and Reliability Roadmap
+
+FireBench (arXiv:2603.04857, 2026) identifies six constraint categories in enterprise instruction-following: **(1) output format compliance**, **(2) ordered responses**, **(3) item ranking**, **(4) overconfidence calibration**, **(5) positive content requirements**, and **(6) negative content requirements**. The current Reliability dimension (IFBench, 18%) and its planned composite (IFEval 65% + IFBench 35%) cover these categories unevenly:
+
+| FireBench Category | IFEval Coverage | IFBench Coverage | Composite Gap |
+|---|---|---|---|
+| Output format compliance | Strong (26 fixed format constraint types) | Partial (novel format phrasings) | Minimal — composite covers well |
+| Ordered responses | Weak (limited fixed ordering tasks) | Moderate (novel ordering constraints) | Partial — IFBench adds generalization signal |
+| Item ranking | None in fixed set | Moderate (novel ranking/priority constraints) | Partial — IFBench adds but does not saturate |
+| Overconfidence calibration | None | None | **Full gap** — not an IF metric; addressed separately by AA-Omniscience (1% weight) |
+| Positive content requirements | Strong (phrase inclusion, keyword requirements) | Strong (out-of-domain generalization) | Minimal — composite covers well |
+| Negative content requirements | Partial (fixed forbidden-phrase patterns) | Moderate (novel exclusion phrasings) | Partial — composite improves but does not saturate |
+
+**Coverage summary:** The IFEval+IFBench composite addresses 5 of 6 FireBench categories (format compliance, positive content well; ordered responses, item ranking, negative content partially). It has zero coverage of overconfidence calibration — the category where models that rank 1st on format compliance often rank 5th or 6th, per FireBench's 13–25 pp cross-category variance finding. ValueRank addresses calibration separately via AA-Omniscience at 1% weight — a defensible design choice because calibration is a distinct epistemic property (does the model know what it doesn't know?) rather than a format-compliance property (does the model follow the stated constraint?).
+
+**Roadmap implications:** Future Reliability dimension upgrades will target the two partially-covered categories — ordered responses and item ranking — which FireBench identifies as particularly discriminative for enterprise use cases such as prioritized task queues and structured report generation. A FireBench-aligned sub-scoring scheme (model-level scores for each of the 6 categories) would allow ValueRank to weight enterprise IF failures by category severity. This upgrade is contingent on FireBench publishing per-model category breakdowns as standard leaderboard output.
 
 ---
 
@@ -776,6 +859,46 @@ At 15% cost weight, GPT-5.5 extends its #2 advantage (quality leads on 5 confirm
 | 5 | Qwen 3.6 Plus | 57.0 |
 
 At 40% cost weight, KAT overtakes Gemini. MiniMax rises to #3. GPT-5.5 drops to #8 (cost 40% weight at 30.0 score = 12.0 pts). Claude Opus 4.6 collapses to #12 (cost score 0.0 at 40% = structurally fatal).
+
+**What if Reliability (IFBench) weight = 10% (reduced from 18%)?**
+
+Freed 8% redistributed proportionally to the 16 remaining quality dimensions (Quality: 57%→65%). Cost fixed at 25%.
+
+| Rank | Model | Score |
+|---|---|---|
+| 1 | Gemini 3.1 Pro | 67.8 |
+| 2 | GPT-5.5 | 66.1 |
+| 3 | KAT-Coder-Pro-V2 | 60.0 |
+| 4 | GPT-5.4 | 54.1 |
+| 5 | GLM 5.1 | 52.7 |
+
+At 10% Reliability weight, GPT-5.4 rises from #7 to #4 — its overall quality (64.4) is strong but its IFBench normalized score (40.0) is weak; lower IF weight rewards the former. GLM drops from #4 to #5 as its IFBench advantage (90.0 normalized) matters less. KAT holds #3 — it is IFBench-weak (30.0 normalized) but cost-dominant (100.0); the cost weight of 25% keeps it well above lower-cost competitors. Gemini and GPT-5.5 remain #1 and #2 regardless of IF weight: Gemini leads IFBench (100.0), GPT-5.5 leads the overall quality distribution.
+
+**What if Reliability (IFBench) weight = 25% (increased from 18%)?**
+
+Added 7% sourced proportionally from the 16 remaining quality dimensions (Quality: 57%→50%). Cost fixed at 25%.
+
+| Rank | Model | Score |
+|---|---|---|
+| 1 | Gemini 3.1 Pro | 73.1 |
+| 2 | GPT-5.5 | 64.5 |
+| 3 | GLM 5.1 | 60.3 |
+| 4 | KAT-Coder-Pro-V2 | 57.1 |
+| 5 | Kimi K2.6 | 57.1 |
+
+At 25% Reliability weight, GLM 5.1 rises from #4 to #3 (IFBench #2 at 90.0 normalized contributes 22.5 pts). Kimi enters the top 5 (IFBench #3 at 80.0 → 20.0 pts at 25% weight). GPT-5.4 drops below top-5 (IFBench 40.0 normalized → only 10.0 pts). Claude Opus 4.7 drops to #10 — its IFBench weakness (52.1% raw, 20.0 normalized) inflicts its largest penalty at 25% weight, offsetting its strong benchmark quality elsewhere. A 25% Reliability weight is defensible for deployment contexts with strictly machine-consumer outputs (APIs, parsers, structured data pipelines) where format failures have zero operational tolerance.
+
+### Statistical Confidence and Rank Uncertainty
+
+The rank-based normalization formula treats all rank separations as equivalent: the gap between rank 1 and rank 2 is scored identically to the gap between rank 6 and rank 7, regardless of the size of the underlying score difference. This is a deliberate choice for scale-invariance (§3.1), but it has a known limitation: **adjacent ranks may be statistically indistinguishable** on the underlying benchmark.
+
+SEAL Leaderboards (Scale Labs) operationalizes this directly: their statistical rank is computed as the count of models that are **statistically significantly better at 95% CI** + 1, rather than the raw ordinal position. Under SEAL methodology, two models with overlapping confidence intervals receive the same statistical rank even when their point estimates differ. In the current ValueRank cohort, this distinction matters most for:
+
+- **IFBench (n=11):** Frontier models cluster at 73–90%. Kimi (82.1%) and GPT-5.5 (75.9%) are raw ranks 3 and 4, but the ~6 pp gap may fall within sampling variability for a 58-item benchmark.
+- **SWE-bench Pro (n=9):** Five models cluster at 55.4–58.6% (DeepSeek, MiniMax, Qwen, GLM, Kimi). The 3.2 pp spread across 5 models likely yields multiple statistical ties under 95% CI testing.
+- **HLE and GPQA Diamond:** Score ranges are wide (HLE: 12.7%–46.9%; GPQA: 84.0%–94.3%), so adjacent-rank uncertainty is lower for these dimensions.
+
+**Practical implication:** ValueRank's rank-based scores are point estimates. Final composite scores within 2–3 points of each other (e.g., Kimi 54.8 vs. MiniMax 54.0 vs. GPT-5.4 52.3) should be treated as effectively tied, pending statistical significance analysis on individual contributing dimensions. The cost and IF weight sensitivity analyses above provide a partial guard: models that consistently appear in the top positions across multiple weight scenarios have more robust rankings than models that appear in only one scenario.
 
 ### 16C. Adding a New Model (Maintenance Protocol)
 
@@ -871,4 +994,4 @@ Key sources used for v4.0 gap-fill updates (from ultradeep research pipeline, Ap
 *Report maintained by the Kay project team | Feedback: kay-rankings@alo-exp.dev*
 *Methodology questions: see §16 Appendix | Version history: tracked in git history of this file*
 *Next scheduled update: May 2026 quarterly refresh or next major model launch, whichever comes first*
-*v4.1 methodology additions: Pareto frontier (§12.6), Reliability dimension rename (§3.4), AA Eval Cost rationale (§4.1), HELM philosophy (§16I) — no score changes*
+*v4.1 methodology additions: Reliability dimension rename (§3.4), BenchLM categories (§3.5), AA Intelligence Index cross-reference (§5.3), Pareto frontier (§12.6), Cost-of-Pass analysis (§12.7), FireBench sub-dimensions (§14.10), AA Eval Cost rationale (§4.1), IF weight sensitivity (§16B), SEAL CI note (§16B), HELM philosophy (§16I) — no score changes*
