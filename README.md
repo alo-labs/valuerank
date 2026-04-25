@@ -1,7 +1,7 @@
 # ValueRank
-**Frontier AI model ranking — 12 models × 18 dimensions, rank-based normalization**
+**Frontier AI model ranking — 20 models × 18 dimensions, rank-based normalization**
 
-**Version 4.2 | April 26, 2026**
+**Version 5.0 | April 26, 2026**
 
 ---
 
@@ -19,42 +19,54 @@
 
 ---
 
-## Ranking Snapshot (v4.2, April 26, 2026)
+## Ranking Snapshot (v5.0, April 26, 2026)
 
 | Rank | Model | Score | Quality | Cost Tier | Developer |
 |---|---|---|---|---|---|
-| 🥇 1 | **Gemini 3.1 Pro** | **70.0** | #2~ | Premium ($892) | Google DeepMind |
-| 🥈 2 | **GPT-5.5** | **67.0~** | #1~ (prov.) | Very Expensive ($3,357) | OpenAI |
-| 🥉 3 | **KAT-Coder-Pro-V2** | **58.4** | #7 | Budget ($73) | Kay (alo-exp) |
-| 4 | GLM 5.1 | 56.7 | #10 | Mid-Range ($544) | Zhipu AI |
-| 5 | MiniMax M2.7 | 54.0 | #8 | Near-Budget ($176) | MiniMax |
-| 6 | Kimi K2.6 | 53.9~ | #5 | Premium ($948) | Moonshot AI |
-| 7 | GPT-5.4 | 52.3 | #4 | Expensive ($2,851) | OpenAI |
-| 8 | Qwen 3.6 Plus | 49.0 | #9 | Mid-Range ($483) | Alibaba |
-| 9 | DeepSeek V4-Pro | 48.2 | #6 | Premium ($1,071) | DeepSeek |
-| 10 | Claude Opus 4.7 | 44.3 | #3 | Ultra-Premium ($4,811) | Anthropic |
-| 11 | Claude Sonnet 4.6 | 25.5 | #12 | Very Expensive ($3,959) | Anthropic |
-| 12 | Claude Opus 4.6 | 20.6 | #11 | Ultra-Premium ($4,970) | Anthropic |
+| 🥇 1 | **Gemini 3.1 Pro** | **64.3** | #1 | Premium ($892) | Google DeepMind |
+| 🥈 2 | **GPT-5.5** | **63.7** | #2 | Very Expensive ($3,357) | OpenAI |
+| 🥉 3 | **Mistral Large 3** | **59.7** | #9 | Ultra-Budget ($39) | Mistral AI |
+| 4 | **Gemma 3 27B** | **59.3** | #13 | Free ($0) | Google DeepMind |
+| 5 | **Phi-4** | **59.2** | #10 | Ultra-Budget ($4) | Microsoft |
+| 6 | Kimi K2.6 | 54.3 | #5 | Premium ($948) | Moonshot AI |
+| 7 | KAT-Coder-Pro-V2 | 54.0 | #11 | Budget ($73) | Kay (alo-exp) |
+| 8 | **Amazon Nova Pro** | **53.3** | #7 | Near-Budget ($201) | Amazon |
+| 9 | **Grok 3** | **53.0** | #6 | Value ($312) | xAI |
+| 10 | GPT-5.4 | 52.2 | #4 | Expensive ($2,851) | OpenAI |
+| 11 | MiniMax M2.7 | 51.4 | #12 | Near-Budget ($176) | MiniMax |
+| 12 | GLM 5.1 | 51.3 | #14 | Mid-Range ($544) | Zhipu AI |
+| 13 | **Llama 4 Maverick** | **47.7** | #17 | Ultra-Budget ($62) | Meta |
+| 14 | **Llama 4 Scout** | **47.1** | #20 | Ultra-Budget ($26) | Meta |
+| 15 | Claude Opus 4.7 | 45.8 | #3 | Ultra-Premium ($4,811) | Anthropic |
+| 16 | DeepSeek V4-Pro | 45.2 | #8 | Premium ($1,071) | DeepSeek |
+| 17 | Qwen 3.6 Plus | 43.8 | #15 | Mid-Range ($483) | Alibaba |
+| 18 | **o3-mini (high)** | **42.7** | #18 | Value ($315) | OpenAI |
+| 19 | Claude Sonnet 4.6 | 27.4 | #19 | Very Expensive ($3,959) | Anthropic |
+| 20 | Claude Opus 4.6 | 24.7 | #16 | Ultra-Premium ($4,970) | Anthropic |
 
-> ~ = includes provisional data (GPT-5.5 LCB ~91.7%~, secondary source). Scores within 2–3 pts are effectively tied per SEAL CI. See [scores.md §10](scores.md#10-ranking-changes-v10--v20--v25--v30--v40) for full version history.
+> **Bold** = v5.0 new entrant. Scores within 2–3 pts are effectively tied per SEAL CI. Ranks 3–5 (ML3/Gemma3/Phi-4, scores 59.7–59.2) are statistically tied — cost arbitrage entries with 12–16 ⊘ quality dims. Nova Pro (#8) has 17 of 18 dims ⊘ — cost-only placement. ~ notation on LCB for 5 new entrants (version ambiguity). See [scores.md §10](scores.md#10-ranking-changes-v40--v43--v50) for full version history.
 
 ---
 
 ## Executive Summary
 
-This report ranks 12 frontier AI models across 18 dimensions — 15 quality benchmarks plus cost efficiency, inference speed (tok/s), and task-level reliability — using rank-based normalization with a 25% cost weight. The framework is designed to reflect the total value equation for production software engineering teams: raw capability matters, but so does price, throughput, and reliability at scale.
+This report ranks 20 frontier AI models across 18 dimensions — 15 quality benchmarks plus cost efficiency, inference speed (tok/s), and task-level reliability — using rank-based normalization with a 25% cost weight. The framework is designed to reflect the total value equation for production software engineering teams: raw capability matters, but so does price, throughput, and reliability at scale.
 
-**v4.0 Headline Finding (UltraDeep gap-fill — 16 data points):** A comprehensive research mission filled 16 ⊘ cells and corrected 1 value across 8 dimensions for newly released models. **DeepSeek V4-Pro's real scores** (Cost $1,071.28, Speed 35.8 tok/s, SWEPro 55.4%, Omni −10) are mostly below the neutral-50 assumptions it held in v3.0 — the model drops from #8 to #9. **GPT-5.5 Speed confirmed** at 74.7 tok/s (xhigh), and SWE-bench Verified 88.7% dagger removed (now multi-source confirmed). **SWE-bench Pro** expands from 5/12 to 9/12 coverage. **BrowseComp** reaches 8/12; **MMLU-Pro** reaches 6/12 with Claude Opus 4.7 taking the new #1 (89.87%). **Key ranking shifts:** Kimi K2.6 rises #6→#5 (SWEPro + cost improve); MiniMax falls #5→#6; GLM falls #4→#4 (score drops 58.2→56.7 from BrowseComp 0.0 + MMLU-Pro 20.0); Qwen rises #9→#8; DeepSeek falls #8→#9. Quality-only: GPT-5.5 surges to #2 (70.9, was #4) as Speed and SWEPro fill in.
+**v5.0 Headline Finding (20-model expansion — 8 new entrants):** Adding 8 models expands the cost range from $73–$4,970 to $0–$4,970, triggering a massive cost score compression for all existing models. Five ultra-cheap entrants (Gemma3 $0, Phi-4 $4, Scout $26, ML3 $39, Maverick $62) dominate cost ranks 1–5, pushing KAT-Coder-Pro-V2 from rank 1 (100.0) to rank 6 (73.7). The result: **cost arbitrage entries ML3/Gemma3/Phi-4 debut at ranks #3–#5** (scores 59.7–59.2, statistically tied) despite 12–16 ⊘ quality dims each — a direct consequence of the 25% cost weight and neutral-50 convention for missing data. **Existing models that score above neutral on quality gain from pool expansions:** GPT-5.4 gains +0.3 pts (LCB 0.0→22.2); Opus 4.7 gains +1.9 pts; Sonnet +2.3 pts; Opus 4.6 +4.2 pts (LCB 25.0→44.4). **Existing models near neutral on quality lose from cost compression alone:** GLM falls #5→#12 (−5.4 pts); KAT falls #3→#7 (−4.0 pts); Qwen falls #8→#17 (−4.8 pts).
 
-**v4.2 update (secondary source fills):** GPT-5.5 LCB provisionally filled at ~91.7%~ (+1.8 pts, 65.2→67.0~); quality #1 provisional (72.7~ vs Gemini 72.1, within SEAL CI). Kimi drops #5→#6~ (53.9, −0.9 pts); MiniMax rises #6→#5 (54.0, +0.1 margin — SEAL CI tied). Three data conflicts flagged in [limitations.md §14.11](limitations.md#1411-external-research-data-conflicts-v42) — not incorporated.
+**v4.3 corrections (carried forward):** Kimi K2.6 τ²-Bench corrected 72.4%→96.0% (primary source confirmed); GPT-5.5 LCB reverted to ⊘ (misattribution resolved). All ~ markers removed from v4.3 scores before v5.0 expansion.
 
-**Top 6 (v4.2):**
-1. 🥇 **Gemini 3.1 Pro** — 70.0 pts (#1 overall; broadest coverage; #1 IFBench, Speed, τ², GPQA, Sci, Omni)
-2. 🥈 **GPT-5.5** — 67.0~ pts (#2 overall; LCB provisional 91.7%~; score +1.8 pts; provisional quality #1 72.7~)
-3. 🥉 **KAT-Coder-Pro-V2** — 58.4 pts (sole cheapest to run, $73.49; #2 Terminal-Bench + Speed)
-4. **GLM 5.1** — 56.7 pts (eval cost rank 4/12; #2 IFBench + #3 τ²-Bench; BrowseComp 0.0 hurts)
-5. **MiniMax M2.7** — 54.0 pts (↑ from #6; near-budget $175.51; passes Kimi by 0.1 pts — SEAL CI tied)
-6. **Kimi K2.6** — 53.9~ pts (↓ from #5; LCB rank compression −0.9 pts; SEAL CI tied with MiniMax)
+**Top 10 (v5.0):**
+1. 🥇 **Gemini 3.1 Pro** — 64.3 pts (#1 overall; quality #1; −6.3 from cost compression; #1 IFBench, τ², GPQA, Sci, Omni)
+2. 🥈 **GPT-5.5** — 63.7 pts (#2 overall; quality #2; −1.5 pts; #1 Terminal, SWE-V, OSWorld, BrowseComp)
+3. 🥉 **Mistral Large 3** — 59.7 pts (new; LCB rank 2/10 at 82.8%~; cost $39; 14 quality dims ⊘)
+4. **Gemma 3 27B** — 59.3 pts (new; $0.00 free tier; only GPQA confirmed at 0.0; 16 dims ⊘)
+5. **Phi-4** — 59.2 pts (new; $4.27; only Speed confirmed below neutral; 16 dims ⊘)
+6. **Kimi K2.6** — 54.3 pts (↓ from #4; −3.3 pts from cost compression; quality #5)
+7. **KAT-Coder-Pro-V2** — 54.0 pts (↓ from #3; −4.0 pts; #2 Terminal-Bench; cost rank 6/20)
+8. **Amazon Nova Pro** — 53.3 pts (new; 17 of 18 dims ⊘; cost-only placement at $201)
+9. **Grok 3** — 53.0 pts (new; LCB 66.7~, Speed 55.6; GPQA 35.3~ below neutral)
+10. **GPT-5.4** — 52.2 pts (↓ from #7; +0.3 pts; LCB 0.0→22.2 from pool expansion; quality #4)
 
 ---
 
@@ -63,17 +75,25 @@ This report ranks 12 frontier AI models across 18 dimensions — 15 quality benc
 | # | Model | Provider | Release | Context | Primary Tier |
 |---|---|---|---|---|---|
 | 1 | Gemini 3.1 Pro | Google DeepMind | 2026-02 | 2M tokens | Frontier |
-| 2 | Kimi K2.6 | Moonshot AI | 2026-01 | 200K tokens | Frontier |
-| 3 | MiniMax M2.7 | MiniMax | 2026-02 | 1M tokens | Frontier |
-| 4 | GPT-5.4 | OpenAI | 2026-03 | 256K tokens | Frontier |
-| 5 | Qwen 3.6 Plus | Alibaba | 2026-02 | 128K tokens | Frontier |
-| 6 | KAT-Coder-Pro-V2 | KAT AI | 2026-01 | 64K tokens | Specialist |
-| 7 | GLM 5.1 | Zhipu AI | 2026-01 | 128K tokens | Frontier |
-| 8 | Claude Opus 4.7 | Anthropic | 2026-03 | 200K tokens | Frontier |
-| 9 | GPT-5.5 | OpenAI | 2026-04-23 | 512K tokens | Frontier |
-| 10 | Claude Sonnet 4.6 | Anthropic | 2026-02 | 200K tokens | Frontier |
-| 11 | Claude Opus 4.6 | Anthropic | 2025-11 | 200K tokens | Frontier |
-| 12 | DeepSeek V4-Pro | DeepSeek | 2026-04-24 | 1M tokens | Frontier (OSS) |
+| 2 | GPT-5.5 | OpenAI | 2026-04-23 | 512K tokens | Frontier |
+| 3 | Mistral Large 3 | Mistral AI | 2025-11 | 128K tokens | Frontier |
+| 4 | Gemma 3 27B | Google DeepMind | 2025-03 | 128K tokens | Open (free tier) |
+| 5 | Phi-4 | Microsoft | 2024-12 | 16K tokens | Compact |
+| 6 | Kimi K2.6 | Moonshot AI | 2026-01 | 200K tokens | Frontier |
+| 7 | KAT-Coder-Pro-V2 | KAT AI | 2026-01 | 64K tokens | Specialist |
+| 8 | Amazon Nova Pro | Amazon | 2024-12 | 300K tokens | Frontier |
+| 9 | Grok 3 | xAI | 2025-02 | 131K tokens | Frontier |
+| 10 | GPT-5.4 | OpenAI | 2026-03 | 256K tokens | Frontier |
+| 11 | MiniMax M2.7 | MiniMax | 2026-02 | 1M tokens | Frontier |
+| 12 | GLM 5.1 | Zhipu AI | 2026-01 | 128K tokens | Frontier |
+| 13 | Llama 4 Maverick | Meta | 2025-04 | 1M tokens | Frontier (OSS) |
+| 14 | Llama 4 Scout | Meta | 2025-04 | 10M tokens | Open (OSS) |
+| 15 | Claude Opus 4.7 | Anthropic | 2026-03 | 200K tokens | Frontier |
+| 16 | DeepSeek V4-Pro | DeepSeek | 2026-04-24 | 1M tokens | Frontier (OSS) |
+| 17 | Qwen 3.6 Plus | Alibaba | 2026-02 | 128K tokens | Frontier |
+| 18 | o3-mini (high) | OpenAI | 2025-01 | 200K tokens | Reasoning |
+| 19 | Claude Sonnet 4.6 | Anthropic | 2026-02 | 200K tokens | Frontier |
+| 20 | Claude Opus 4.6 | Anthropic | 2025-11 | 200K tokens | Frontier |
 
 ---
 
@@ -89,17 +109,18 @@ Full formula, weight rationale, normalization examples, sensitivity analysis, an
 
 ## Research Provenance
 
-The ranking is backed by 3 research runs totaling 60+ web sources:
+The ranking is backed by 4 research runs totaling 80+ web sources:
 
 | Run | Mode | Purpose | Sources |
 |---|---|---|---|
 | 1 | Quick | Initial data: GPT-5.5, DeepSeek V4-Pro, Kimi K2.6 launch | 22 |
 | 2 | Deep | Full 12-model update, 3 new dimensions activated | 25 |
 | 3 | UltraDeep | Gap-fill: all remaining ⊘ cells, 60+ targets | 17 |
+| 4 | Standard | v5.0 expansion: 8 new model benchmark data, cost/speed confirmation | 20+ |
 
 All findings documented in [`research.md`](research.md) with confidence levels (confirmed / probable / unverified) and source URLs.
 
 ---
 
 *Report maintained by the Kay project team | Feedback: kay-rankings@alo-exp.dev*
-*Next scheduled update: May 2026 quarterly refresh or next major model launch, whichever comes first*
+*Next scheduled update: May 2026 quality gap-fill run (priority: Nova Pro, Gemma3, Phi-4 benchmark data) or next major model launch, whichever comes first*
