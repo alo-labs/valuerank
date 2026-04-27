@@ -1,4 +1,4 @@
-# Coding Agent ValueRank — v1.0
+# Coding Agent ValueRank — v0.1.0
 **April 27, 2026 | 22 entries | 2 active benchmark lists**
 
 ---
@@ -21,7 +21,7 @@
 
 ## Executive Summary
 
-Coding Agent ValueRank v1.0 publishes **two separate ranked lists** — one for Terminal-Bench 2.0, one for SWE-bench Verified — rather than a composite score. The data does not support merging them: of 22 cohort entries, only Factory Droid + GPT-5.3-Codex has real scores on both benchmarks (and even that SWE-V score is from a secondary source). The two leaderboards attract entirely different agent populations testing entirely different capabilities. Combining them into a single number would encode a weight-based preference as if it were an empirical finding.
+Coding Agent ValueRank v0.1.0 publishes **two separate ranked lists** — one for Terminal-Bench 2.0, one for SWE-bench Verified — rather than a composite score. The data does not support merging them: of 22 cohort entries, only Factory Droid + GPT-5.3-Codex has real scores on both benchmarks (and even that SWE-V score is from a secondary source). The two leaderboards attract entirely different agent populations testing entirely different capabilities. Combining them into a single number would encode a weight-based preference as if it were an empirical finding.
 
 **TB2.0** tests terminal-native autonomy across 89 tasks: software engineering, biology, security, and gaming in live Docker containers with time-based execution. Its top agents are CLI-first systems built for long-running process management and system-level work. **SWE-bench Verified** tests GitHub issue resolution across 500 Python repository tasks. Its top agents are code-repair specialists tuned for structured file editing and test execution.
 
