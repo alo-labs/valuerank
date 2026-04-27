@@ -593,6 +593,175 @@
       .podium-name { font-size: .8rem; }
       .section-title { font-size: 1.4rem; }
     }
+    /* ── MODE SWITCHER ── */
+    .mode-switcher {
+      display: flex; gap: 2px;
+      background: var(--accent-a08); border: 1px solid var(--accent-a25);
+      border-radius: var(--radius-sm); padding: 3px;
+    }
+    .mode-btn {
+      font-family: var(--font-heading); font-size: .8rem; font-weight: 600;
+      padding: 4px 14px; border-radius: 6px; border: none; cursor: pointer;
+      color: var(--text-secondary); background: transparent;
+      transition: all .2s; white-space: nowrap;
+    }
+    .mode-btn.active {
+      background: var(--bg-card); color: var(--text-primary);
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .ca-nav-links { display: none; gap: 4px; }
+    .ca-nav-links a {
+      font-family: var(--font-heading); color: var(--text-secondary);
+      text-decoration: none; padding: 6px 14px; border-radius: var(--radius-sm);
+      font-size: .875rem; font-weight: 500; transition: color .25s, background .25s;
+    }
+    .ca-nav-links a:hover { color: var(--text-primary); background: var(--bg-card); }
+    .ca-nav-links a.active { color: var(--accent-light); background: var(--accent-a08); }
+    /* ── CODING AGENTS CONTENT ── */
+    #ca-content { display: none; }
+    #ca-content.visible { display: block; }
+    /* CA Hero */
+    .ca-hero {
+      background: var(--bg-hero); border-bottom: 1px solid var(--border);
+      padding: 100px 0 64px; text-align: center;
+    }
+    .ca-hero-kicker {
+      display: inline-block; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--accent-light); background: var(--accent-a08);
+      border: 1px solid var(--accent-a25);
+      padding: 4px 14px; border-radius: 999px; margin-bottom: 20px;
+    }
+    .ca-hero-title {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.03em;
+      color: var(--text-primary); margin-bottom: 16px; line-height: 1.1;
+    }
+    .ca-hero-sub {
+      font-size: 1rem; color: var(--text-secondary); max-width: 620px;
+      margin: 0 auto 36px; line-height: 1.7;
+    }
+    .ca-stats { display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; }
+    .ca-stat { text-align: center; }
+    .ca-stat-num {
+      font-size: 1.9rem; font-weight: 800; color: var(--accent-light);
+      letter-spacing: -.04em; font-family: var(--font-mono);
+    }
+    .ca-stat-label { font-size: .72rem; color: var(--text-dim); margin-top: 2px; text-transform: uppercase; letter-spacing: .06em; }
+    /* CA two-list explainer */
+    .ca-explainer {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 40px;
+    }
+    .ca-explainer-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; text-align: left;
+    }
+    .ca-explainer-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .ca-explainer-label.tb { color: #3b82f6; }
+    .ca-explainer-label.swev { color: #8b5cf6; }
+    .ca-explainer-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .ca-explainer-body { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+    /* CA Section layout */
+    .ca-section { padding: 72px 0; }
+    .ca-section-alt { background: var(--section-alt); }
+    /* CA ranking tables */
+    .ca-table-wrap { overflow-x: auto; margin-top: 28px; }
+    .ca-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ca-table thead th {
+      text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-dim); padding: 10px 16px;
+      border-bottom: 1px solid var(--border); background: var(--bg-card-hover);
+    }
+    .ca-table tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    .ca-table tbody tr:last-child { border-bottom: none; }
+    .ca-table tbody tr:hover { background: var(--table-row-hover); }
+    .ca-table tbody td { padding: 13px 16px; vertical-align: middle; }
+    .ca-rank { font-family: var(--font-mono); font-weight: 700; font-size: 15px; color: var(--text-dim); }
+    .ca-rank.r1 { color: var(--gold); }
+    .ca-rank.r2 { color: var(--silver); }
+    .ca-rank.r3 { color: var(--bronze); }
+    .ca-agent-name { font-weight: 600; color: var(--text-primary); font-size: 13px; }
+    .ca-agent-dev { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    .ca-score-bar-wrap { display: flex; align-items: center; gap: 10px; }
+    .ca-score-val { font-family: var(--font-mono); font-weight: 700; font-size: 15px; min-width: 46px; }
+    .ca-score-bar { flex: 1; height: 5px; background: var(--border); border-radius: 3px; min-width: 80px; max-width: 160px; }
+    .ca-score-bar-fill { height: 100%; border-radius: 3px; }
+    .ca-badge {
+      display: inline-block; font-size: 9px; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 999px;
+    }
+    .ca-badge-secondary { background: rgba(148,163,184,.12); color: var(--text-dim); border: 1px solid var(--border); }
+    .ca-badge-integrity { background: rgba(251,146,60,.1); color: #f97316; border: 1px solid rgba(251,146,60,.25); }
+    .ca-badge-version { background: var(--accent-a08); color: var(--accent-light); border: 1px solid var(--accent-a25); }
+    .ca-note { font-size: 11px; color: var(--text-dim); margin-top: 14px; line-height: 1.6; }
+    /* CA Pareto cards */
+    .ca-pareto-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px; margin-top: 28px;
+    }
+    .ca-pareto-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .ca-pareto-card:hover {
+      border-color: var(--accent-a40); box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .ca-pareto-label {
+      font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 10px;
+    }
+    .ca-pareto-agent { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+    .ca-pareto-sub { font-size: 11px; color: var(--text-dim); margin-bottom: 14px; }
+    .ca-pareto-scores { display: flex; gap: 20px; flex-wrap: wrap; }
+    .ca-pareto-score-item { }
+    .ca-pareto-dim { font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em; }
+    .ca-pareto-val { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; line-height: 1.2; }
+    /* CA Insight cards */
+    .ca-insights-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px; margin-top: 28px;
+    }
+    .ca-insight-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .ca-insight-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .ca-insight-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .ca-insight-num {
+      font-family: var(--font-mono); font-size: 1.8rem; font-weight: 800;
+      display: block; margin-bottom: 6px;
+    }
+    .ca-insight-body { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
+    /* CA Benchmark landscape */
+    .ca-bm-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px; margin-top: 28px;
+    }
+    .ca-bm-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px;
+    }
+    .ca-bm-status { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .ca-bm-status.s-active { color: var(--green); }
+    .ca-bm-status.s-pending { color: var(--amber); }
+    .ca-bm-status.s-watch { color: var(--text-dim); }
+    .ca-bm-status.s-excluded { color: var(--red); }
+    .ca-bm-status.s-ref { color: var(--cyan); }
+    .ca-bm-name { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .ca-bm-detail { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+    /* CA No-data dash */
+    .ca-dash { color: var(--text-dim); font-family: var(--font-mono); }
+    /* Responsive overrides for CA */
+    @media (max-width: 768px) {
+      .ca-explainer { grid-template-columns: 1fr; }
+      .ca-stats { gap: 20px; }
+      .mode-switcher { order: 3; }
+    }
   </style>
 </head>
 <body>
@@ -603,15 +772,26 @@
     <span class="logo">ValueRank</span>
     <span class="badge">v5.0</span>
   </div>
-  <div class="nav-links">
+  <div class="mode-switcher">
+    <button class="mode-btn active" id="btn-llm" onclick="switchMode('llm')">LLM Models</button>
+    <button class="mode-btn" id="btn-ca" onclick="switchMode('ca')">Coding Agents</button>
+  </div>
+  <div class="nav-links" id="llm-nav-links">
     <a href="#rankings" class="active">Rankings</a>
     <a href="#charts">Charts</a>
     <a href="#methodology">Methodology</a>
     <a href="#data">Data</a>
     <a href="#faq">FAQ</a>
   </div>
+  <div class="ca-nav-links" id="ca-nav-links">
+    <a href="#ca-tb20">TB2.0</a>
+    <a href="#ca-swev">SWE-V</a>
+    <a href="#ca-insights">Insights</a>
+    <a href="#ca-benchmarks">Benchmarks</a>
+  </div>
   <div class="nav-right">
-    <div class="nav-meta">April 26, 2026 · 20 models · 18 dimensions</div>
+    <div class="nav-meta" id="nav-meta-llm">April 26, 2026 · 20 models · 18 dimensions</div>
+    <div class="nav-meta" id="nav-meta-ca" style="display:none">April 27, 2026 · 22 entries · 2 active benchmarks</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
       <i data-lucide="sun" class="icon-sun"></i>
       <i data-lucide="moon" class="icon-moon"></i>
@@ -620,6 +800,8 @@
 </nav>
 
 <main>
+
+<div id="llm-content">
 
 <!-- HERO -->
 <section id="hero">
@@ -949,6 +1131,574 @@
     </div>
   </div>
 </section>
+
+</div><!-- /llm-content -->
+
+<!-- ══════════════════════════════════════════════════════════
+     CODING AGENTS SECTION
+     ══════════════════════════════════════════════════════════ -->
+<div id="ca-content">
+
+<!-- CA HERO -->
+<section class="ca-hero">
+  <div class="container">
+    <div class="ca-hero-kicker">Coding Agent ValueRank · v1.0</div>
+    <h1 class="ca-hero-title">Which coding agent delivers real results?</h1>
+    <p class="ca-hero-sub">Two separate ranked lists — Terminal-Bench 2.0 and SWE-bench Verified — because the data doesn't support a composite. The two benchmarks test entirely different capabilities and attract entirely different agent populations.</p>
+    <div class="ca-stats">
+      <div class="ca-stat"><div class="ca-stat-num">22</div><div class="ca-stat-label">Agent entries</div></div>
+      <div class="ca-stat"><div class="ca-stat-num">2</div><div class="ca-stat-label">Active benchmarks</div></div>
+      <div class="ca-stat"><div class="ca-stat-num">11</div><div class="ca-stat-label">TB2.0 entries</div></div>
+      <div class="ca-stat"><div class="ca-stat-num">13</div><div class="ca-stat-label">SWE-V entries</div></div>
+      <div class="ca-stat"><div class="ca-stat-num">1</div><div class="ca-stat-label">Dual-benchmark entry</div></div>
+    </div>
+    <div class="ca-explainer container" style="max-width:720px;margin-top:40px;padding:0;">
+      <div class="ca-explainer-card">
+        <div class="ca-explainer-label tb">Terminal-Bench 2.0</div>
+        <div class="ca-explainer-title">Terminal-native autonomy</div>
+        <div class="ca-explainer-body">89 tasks across software engineering, biology, security, and gaming. Live Docker containers. Time-based execution. Real terminal feedback loops. Best signal for CLI-first, systems-level agents.</div>
+      </div>
+      <div class="ca-explainer-card">
+        <div class="ca-explainer-label swev">SWE-bench Verified</div>
+        <div class="ca-explainer-title">GitHub issue resolution</div>
+        <div class="ca-explainer-body">500 human-validated tasks across 12 Python repositories. Patch-and-test workflow. Best signal for agents specialized in structured code repair, BM25 retrieval, and file editing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CA: TB2.0 RANKING -->
+<section class="ca-section" id="ca-tb20">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" style="color:#3b82f6;">Terminal-Bench 2.0</div>
+      <div class="section-title">TB2.0 Ranking — 11 Entries</div>
+      <div class="section-sub">Terminal-native agents · CLI/Docker environments · Multi-step system tasks · tbench.ai</div>
+    </div>
+    <div class="card ca-table-wrap">
+      <table class="ca-table">
+        <thead>
+          <tr>
+            <th style="width:52px;">Rank</th>
+            <th>Agent + Model</th>
+            <th>Developer</th>
+            <th>TB2.0 Score</th>
+            <th>Flags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ca-rank r1">🥇 1</span></td>
+            <td><div class="ca-agent-name">Codex + GPT-5.5</div></td>
+            <td><div class="ca-agent-dev">OpenAI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">82.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:82%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r2">🥈 2</span></td>
+            <td><div class="ca-agent-name">ForgeCode + GPT-5.4</div></td>
+            <td><div class="ca-agent-dev">Antinomy</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">81.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:81.8%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-integrity">† reward hacking</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r3">🥉 3</span></td>
+            <td><div class="ca-agent-name">TongAgents + Gemini 3.1 Pro</div></td>
+            <td><div class="ca-agent-dev">ByteDance SE Lab</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">80.2%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:80.2%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">4</span></td>
+            <td><div class="ca-agent-name">ForgeCode + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Antinomy</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">79.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:79.8%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-integrity">† reward hacking</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">5–6</span></td>
+            <td><div class="ca-agent-name">SageAgent + GPT-5.3-Codex</div></td>
+            <td><div class="ca-agent-dev">Unknown</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">78.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:78.4%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">5–6</span></td>
+            <td><div class="ca-agent-name">ForgeCode + Gemini 3.1 Pro</div></td>
+            <td><div class="ca-agent-dev">Antinomy</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">78.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:78.4%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-integrity">† reward hacking</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">7</span></td>
+            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;">✦ Only dual-benchmark entry</div></td>
+            <td><div class="ca-agent-dev">Factory AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">77.3%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:77.3%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">8</span></td>
+            <td><div class="ca-agent-name">Junie CLI + Multiple</div></td>
+            <td><div class="ca-agent-dev">JetBrains</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">71.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:71%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">model undisclosed</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">9</span></td>
+            <td><div class="ca-agent-name">Factory Droid + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Factory AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">69.9%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:69.9%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">10</span></td>
+            <td><div class="ca-agent-name">Claude Code + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Anthropic</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">58.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:58%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">11</span></td>
+            <td><div class="ca-agent-name">OpenHands v2 + Claude Opus 4.5</div></td>
+            <td><div class="ca-agent-dev">All Hands AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">51.9%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:51.9%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="ca-note">
+        <strong>†</strong> Post-correction scores per tbench.ai's April 19, 2026 integrity ruling (reward hacking classification — affected trials zeroed, agent retained). &nbsp;
+        <strong>Note:</strong> Ranks 1–7 have overlapping ±confidence intervals and are statistically indistinguishable at 1σ.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CA: SWE-V RANKING -->
+<section class="ca-section ca-section-alt" id="ca-swev">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" style="color:#8b5cf6;">SWE-bench Verified</div>
+      <div class="section-title">SWE-V Ranking — 13 Entries</div>
+      <div class="section-sub">Code-repair agents · GitHub issue resolution · Python repositories · swebench.com/verified.html</div>
+    </div>
+    <div class="card ca-table-wrap">
+      <table class="ca-table">
+        <thead>
+          <tr>
+            <th style="width:52px;">Rank</th>
+            <th>Agent + Model</th>
+            <th>Developer</th>
+            <th>SWE-V Score</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ca-rank r1">🥇 1</span></td>
+            <td><div class="ca-agent-name">Augment Code + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Augment</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">72.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:72%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r2">🥈 2</span></td>
+            <td><div class="ca-agent-name">OpenHands v3 + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">All Hands AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">68.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:68.4%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r3">🥉 3</span></td>
+            <td><div class="ca-agent-name">Amazon Q Developer + Proprietary</div></td>
+            <td><div class="ca-agent-dev">Amazon</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">66.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:66%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">4</span></td>
+            <td><div class="ca-agent-name">Cursor Background Agent + Sonnet 4.6</div></td>
+            <td><div class="ca-agent-dev">Anysphere</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">65.7%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:65.7%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">5</span></td>
+            <td><div class="ca-agent-name">Composio SWE-Kit + Sonnet 4.6</div></td>
+            <td><div class="ca-agent-dev">Composio</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">62.3%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:62.3%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">6</span></td>
+            <td><div class="ca-agent-name">Cline + Claude Sonnet 4.6</div></td>
+            <td><div class="ca-agent-dev">Community (open-source)</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">59.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:59.8%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">7</span></td>
+            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;">✦ Only dual-benchmark entry</div></td>
+            <td><div class="ca-agent-dev">Factory AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">58.1%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:58.1%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">8</span></td>
+            <td><div class="ca-agent-name">Devin 2.0 + Proprietary</div></td>
+            <td><div class="ca-agent-dev">Cognition AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">45.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:45.8%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-version">✓ primary</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">9</span></td>
+            <td><div class="ca-agent-name">OpenHands v2 + Claude Opus 4.5</div></td>
+            <td><div class="ca-agent-dev">All Hands AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">44.7%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:44.7%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">10</span></td>
+            <td><div class="ca-agent-name">SWE-agent v1 + Claude Sonnet 4.5</div></td>
+            <td><div class="ca-agent-dev">Princeton</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">43.2%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:43.2%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">11</span></td>
+            <td><div class="ca-agent-name">AutoCodeRover v2 + GPT-5.2</div></td>
+            <td><div class="ca-agent-dev">NUS</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#ef4444;">38.6%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:38.6%;background:#ef4444;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">12</span></td>
+            <td><div class="ca-agent-name">Agentless v2 + Claude Sonnet 4.5</div></td>
+            <td><div class="ca-agent-dev">Academic</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#ef4444;">34.2%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:34.2%;background:#ef4444;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">13</span></td>
+            <td><div class="ca-agent-name">Aider + Claude Sonnet 4.5</div></td>
+            <td><div class="ca-agent-dev">Community (open-source)</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#ef4444;">31.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:31.4%;background:#ef4444;"></div></div>
+              </div>
+            </td>
+            <td><span class="ca-badge ca-badge-version">✓ primary</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="ca-note">
+        <strong>~</strong> Score from awesomeagents.ai (third-party aggregator, April 19 2026) — secondary source. Primary leaderboard: swebench.com/verified.html. &nbsp;
+        <strong>✓ primary</strong> = sourced directly from cognition.ai (Devin) or swebench.com (Aider). &nbsp;
+        <strong>Contamination notice:</strong> SWE-V scores above ~65% may be partially inflated by training data leakage (same models score ~11 pp lower on SWE-bench Pro).
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CA: PARETO FRONTIER + INSIGHTS -->
+<section class="ca-section" id="ca-insights">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">Cross-Benchmark Pareto Frontier</div>
+      <div class="section-sub">The most honest cross-benchmark statement the data supports. Three entries are not dominated by any other on both dimensions simultaneously.</div>
+    </div>
+    <div class="ca-pareto-grid">
+      <div class="ca-pareto-card">
+        <div class="ca-pareto-label">✓ Pareto Frontier · TB2.0 Leader</div>
+        <div class="ca-pareto-agent">Codex + GPT-5.5</div>
+        <div class="ca-pareto-sub">OpenAI</div>
+        <div class="ca-pareto-scores">
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">TB2.0</div>
+            <div class="ca-pareto-val" style="color:#22c55e;">82.0%</div>
+          </div>
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">SWE-V</div>
+            <div class="ca-pareto-val" style="color:var(--text-dim);">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="ca-pareto-card">
+        <div class="ca-pareto-label">✓ Pareto Frontier · SWE-V Leader</div>
+        <div class="ca-pareto-agent">Augment Code + Claude Opus 4.6</div>
+        <div class="ca-pareto-sub">Augment</div>
+        <div class="ca-pareto-scores">
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">TB2.0</div>
+            <div class="ca-pareto-val" style="color:var(--text-dim);">—</div>
+          </div>
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">SWE-V</div>
+            <div class="ca-pareto-val" style="color:#22c55e;">72.0%~</div>
+          </div>
+        </div>
+      </div>
+      <div class="ca-pareto-card">
+        <div class="ca-pareto-label">✓~ Frontier · Only Dual-Benchmark Entry</div>
+        <div class="ca-pareto-agent">Factory Droid + GPT-5.3-Codex</div>
+        <div class="ca-pareto-sub">Factory AI</div>
+        <div class="ca-pareto-scores">
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">TB2.0</div>
+            <div class="ca-pareto-val" style="color:#3b82f6;">77.3%</div>
+          </div>
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">SWE-V</div>
+            <div class="ca-pareto-val" style="color:#3b82f6;">58.1%~</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;padding:16px 20px;">
+      <div class="ca-note" style="margin-top:0;">
+        <strong>Selection rule:</strong> TB2.0-type work → Codex + GPT-5.5. &nbsp; SWE-V-type work → Augment Code + Opus 4.6. &nbsp; Both → Factory Droid + GPT-5.3-Codex (monitor for primary-source SWE-V confirmation). &nbsp;
+        <strong>~</strong> = secondary source (awesomeagents.ai aggregator).
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:64px;">
+      <div class="section-title">Strategic Insights</div>
+      <div class="section-sub">Four empirical findings that determine how to interpret and use these rankings.</div>
+    </div>
+    <div class="ca-insights-grid">
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon">🏗️</div>
+        <div class="ca-insight-title">Scaffold Engineering Premium</div>
+        <span class="ca-insight-num" style="color:#22c55e;">~10 pp</span>
+        <div class="ca-insight-body">Same model, different scaffold = 10 percentage-point gap at the frontier. ForgeCode + Gemini 3.1 Pro scores 78.4% on TB2.0 while Google's own direct Gemini submission scores ~68.5% — same weights, different scaffold. Choosing the best model is not enough.</div>
+      </div>
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon">🔓</div>
+        <div class="ca-insight-title">Open-Source Near-Parity on SWE-V</div>
+        <span class="ca-insight-num" style="color:#3b82f6;">3.6 pp</span>
+        <div class="ca-insight-body">OpenHands v3 achieves 68.4% vs. Augment Code's 72.0% on the same Claude Opus 4.6 base model. The 3.6 pp gap is the cost of Augment's proprietary BM25 + code-graph retrieval scaffold. For teams preferring BYOK economics, OpenHands is the rational choice.</div>
+      </div>
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon">🏔️</div>
+        <div class="ca-insight-title">Long-Horizon Capability Cliff</div>
+        <span class="ca-insight-num" style="color:#ef4444;">74% → 11%</span>
+        <div class="ca-insight-body">FeatureBench (ICLR 2026): agents scoring 68–74% on SWE-V collapse to 5–13% on multi-file feature development tasks. The cliff is consistent across all tested agents. Current benchmark scores predict contained task performance only — not "implement this 3-week feature across 15 files."</div>
+      </div>
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon">📉</div>
+        <div class="ca-insight-title">Devin 2.0 Brand vs. Benchmark Gap</div>
+        <span class="ca-insight-num" style="color:#f59e0b;">Rank 8</span>
+        <div class="ca-insight-body">Despite Cognition AI's high profile and reported valuation, Devin 2.0 sits at SWE-V rank 8 at 45.8% — 22.6 pp below OpenHands v3 (68.4%) and below three open-source systems. Differentiation is product experience and team workflow tooling, not benchmark performance.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CA: BENCHMARK LANDSCAPE -->
+<section class="ca-section ca-section-alt" id="ca-benchmarks">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">Benchmark Landscape</div>
+      <div class="section-sub">Every evaluated benchmark and why it is or isn't producing a ranked list. 15 benchmarks assessed across 5 classifications.</div>
+    </div>
+    <div class="ca-bm-grid">
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-active">✅ Active</div>
+        <div class="ca-bm-name">Terminal-Bench 2.0</div>
+        <div class="ca-bm-detail">11 cohort entries · 89 tasks · Docker · tbench.ai · Anti-gaming ATIF trajectories</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-active">✅ Active</div>
+        <div class="ca-bm-name">SWE-bench Verified</div>
+        <div class="ca-bm-detail">13 cohort entries · 500 tasks · Python repos · swebench.com · Contamination notice above ~65%</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-pending">⏳ Pending — need ≥4 entries</div>
+        <div class="ca-bm-name">SWE-bench Pro</div>
+        <div class="ca-bm-detail">2 entries · 1,865 tasks · Multi-language · labs.scale.com · High contamination resistance — strongest anti-contamination signal</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-pending">⏳ Pending — need ≥4 entries</div>
+        <div class="ca-bm-name">SWE-bench Multilingual</div>
+        <div class="ca-bm-detail">0 entries · 300 tasks · 9 languages · swebench.com · Cross-lingual generalization signal</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-pending">⏳ Pending — need ≥4 entries</div>
+        <div class="ca-bm-name">Multi-SWE-bench</div>
+        <div class="ca-bm-detail">0 entries · 1,632 tasks · Java/TS/Go/Rust/C/C++ · Enterprise language coverage</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch">🚫 Watch — no live leaderboard</div>
+        <div class="ca-bm-name">FeatureBench</div>
+        <div class="ca-bm-detail">1 exact cohort match · ICLR 2026 · Long-horizon multi-file feature dev · Key finding: 74% → 11% cliff</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch">🚫 Watch — no live leaderboard</div>
+        <div class="ca-bm-name">DevOps-Gym</div>
+        <div class="ca-bm-detail">0 exact matches · ICLR 2026 · Java/Go DevOps · End-to-end pipeline: 0% all agents</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch">🚫 Watch — no live leaderboard</div>
+        <div class="ca-bm-name">SWE-EVO</div>
+        <div class="ca-bm-detail">0 exact matches · 48 long-horizon software evolution tasks · GLM-4p7 leads despite not appearing in TB2.0/SWE-V top tiers</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch">🚫 Watch — access restricted</div>
+        <div class="ca-bm-name">MLE-bench</div>
+        <div class="ca-bm-detail">Submissions frozen as of April 2026 · Kaggle ML competitions · ML engineering signal · Pending v2</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch">🚫 Watch — METR internal</div>
+        <div class="ca-bm-name">RE-Bench / HCAST</div>
+        <div class="ca-bm-detail">No open portal · Predominantly ML research tasks · &lt;25% SWE tasks (HCAST) · No named agent scaffolds</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-excluded">❌ Excluded — model-level</div>
+        <div class="ca-bm-name">SWE-rebench</div>
+        <div class="ca-bm-detail">Standardized 128K ReAct scaffold for all — tests models, not agent scaffolds</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-excluded">❌ Excluded — model-level</div>
+        <div class="ca-bm-name">Aider Polyglot</div>
+        <div class="ca-bm-detail">Aider is the fixed scaffold — tests which model Aider should use, not which agent is best</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-excluded">❌ Excluded — model-level</div>
+        <div class="ca-bm-name">BigCodeBench / LiveCodeBench</div>
+        <div class="ca-bm-detail">Pure model-level function completion / competitive programming — no agent scaffolding component</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status" style="color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">📊 Reference Only</div>
+        <div class="ca-bm-name">PR Arena</div>
+        <div class="ca-bm-detail">Real-world GitHub PR merge rates · No task-difficulty control · Copilot: 1.3M PRs 95.9% merge · Codex: 4.2M PRs 87.2%</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:20px;padding:16px 20px;">
+      <div class="ca-note" style="margin-top:0;">
+        <strong>Activation threshold:</strong> ≥4 exact (agent, model) cohort pairs required. Exact match policy: paper-only benchmarks must match the specific agent scaffold + model version in the current cohort — no approximations.
+        Full benchmark landscape with research provenance: <code>coding-agents-valuerank/benchmarks.md</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /ca-content -->
 
 </main>
 
@@ -1774,6 +2524,63 @@ function initFaq() {
   });
 }
 
+// ─────────────────────────────────────────────
+// MODE SWITCHER (LLM Models ↔ Coding Agents)
+// ─────────────────────────────────────────────
+let currentMode = 'llm';
+
+function switchMode(mode) {
+  currentMode = mode;
+  const llmContent = document.getElementById('llm-content');
+  const caContent  = document.getElementById('ca-content');
+  const llmLinks   = document.getElementById('llm-nav-links');
+  const caLinks    = document.getElementById('ca-nav-links');
+  const btnLlm     = document.getElementById('btn-llm');
+  const btnCa      = document.getElementById('btn-ca');
+  const metaLlm    = document.getElementById('nav-meta-llm');
+  const metaCa     = document.getElementById('nav-meta-ca');
+
+  if (mode === 'ca') {
+    llmContent.style.display = 'none';
+    caContent.classList.add('visible');
+    llmLinks.style.display = 'none';
+    caLinks.style.display = 'flex';
+    btnLlm.classList.remove('active');
+    btnCa.classList.add('active');
+    metaLlm.style.display = 'none';
+    metaCa.style.display = 'block';
+    // Scroll to top of CA content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    llmContent.style.display = 'block';
+    caContent.classList.remove('visible');
+    llmLinks.style.display = 'flex';
+    caLinks.style.display = 'none';
+    btnLlm.classList.add('active');
+    btnCa.classList.remove('active');
+    metaLlm.style.display = 'block';
+    metaCa.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// CA nav active-link highlighting on scroll
+function initCaNav() {
+  const caSections = ['ca-tb20','ca-swev','ca-insights','ca-benchmarks'];
+  const caLinks = document.querySelectorAll('.ca-nav-links a');
+  const observer = new IntersectionObserver(entries => {
+    if (currentMode !== 'ca') return;
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        caLinks.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  caSections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNav();
@@ -1785,6 +2592,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVersionTable();
   renderHeatmap('chart-heatmap-data', 480);
   initFaq();
+  initCaNav();
   lucide.createIcons();
 });
 </script>
