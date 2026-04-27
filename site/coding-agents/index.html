@@ -1154,6 +1154,45 @@
     }
     .ca-value-num { font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: -.01em; }
     .ca-value-tier { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
+    /* CA Research panel — measured cost auxiliary tables */
+    .ca-research-card {
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border-left: 3px solid #8b5cf6;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .ca-research-header {
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(139,92,246,.05), transparent 60%);
+    }
+    .ca-research-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: #8b5cf6;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .ca-research-label svg, .ca-research-label i[data-lucide] { width: 14px; height: 14px; }
+    .ca-research-title {
+      margin-top: 8px; font-family: var(--font-heading);
+      font-size: 1.05rem; font-weight: 700; color: var(--text-primary);
+      letter-spacing: -.01em; line-height: 1.3;
+    }
+    .ca-research-sub {
+      margin-top: 8px; font-size: 12px; color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .ca-research-sub strong { color: var(--text-secondary); }
+    .ca-research-sub code {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--accent-light);
+    }
+    .ca-research-table tbody td { padding: 12px 16px; vertical-align: middle; }
+    .ca-research-table tbody tr:hover { background: var(--table-row-hover); }
+    .ca-mono { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); }
+    .ca-conf { font-size: 11px; color: var(--text-dim); font-style: italic; white-space: nowrap; }
+    /* Research panel ca-note inside it */
+    .ca-research-card .ca-note { padding: 14px 22px 18px; margin-top: 0; }
     .ca-note { font-size: 11px; color: var(--text-dim); margin-top: 14px; line-height: 1.6; }
     /* CA Pareto cards */
     .ca-pareto-grid {
@@ -1364,7 +1403,7 @@
             <th data-col="agent" class="ca-sortable">Agent + Model <span class="ca-sort-arrow">↕</span></th>
             <th data-col="developer" class="ca-sortable">Developer <span class="ca-sort-arrow">↕</span></th>
             <th data-col="score" class="ca-sortable">TB2.0 Score <span class="ca-sort-arrow">↕</span></th>
-            <th data-col="cost" class="ca-sortable">Cost ($/run) <span class="ca-sort-arrow">↕</span></th>
+            <th data-col="cost" class="ca-sortable">Cost (AA) <span class="ca-sort-arrow">↕</span></th>
             <th data-col="value" class="ca-sortable">Value <span class="ca-sort-arrow">↕</span></th>
           </tr>
         </thead>
@@ -1380,8 +1419,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,357</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">24.4</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$3,357</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">24.4</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
@@ -1394,7 +1433,7 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$2,851</span></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$2,851</span></td>
             <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">28.7</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
@@ -1408,8 +1447,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$237</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">338</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$892</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">89.9</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">4</span></td>
@@ -1422,8 +1461,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$236</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">338</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">16.1</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">5–6</span></td>
@@ -1436,8 +1475,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$93</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">843</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$1,995</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">39.3</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">5–6</span></td>
@@ -1450,8 +1489,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$237</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">331</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$892</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">87.9</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">7</span></td>
@@ -1464,8 +1503,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$93</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">831</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$1,995</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">38.7</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">8</span></td>
@@ -1492,8 +1531,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$236</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">296</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">14.1</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">10</span></td>
@@ -1506,8 +1545,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$236</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">246</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">11.7</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">11</span></td>
@@ -1521,15 +1560,147 @@
             </td>
           
             <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$4,470</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">11.6</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">11.6</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
         </tbody>
       </table>
       <div class="ca-note">
         <strong>Note:</strong> Ranks 1–7 have overlapping ±confidence intervals and are statistically indistinguishable at 1σ. Scores reflect tbench.ai's April 19, 2026 post-correction values (reward-hacking trials zeroed for affected agents). &nbsp;
-        <strong>Cost ($/run):</strong> Estimated USD to run one full 89-task TB2.0 evaluation (445 trials × per-trial median cost). Plain values are <strong>measured</strong> from per-trial token disclosures aggregated across same-model sibling submissions in the harborframework HF dataset (5 sibling subs for Opus 4.6 across 1,604 trials; 3 for GPT-5.3-Codex across 729 trials; Terminus-KIRA for Gemini 3.1 Pro across 445 trials). <em>≈</em> = AA Eval Cost proxy fallback for entries where no sibling submission populated tokens (Codex+GPT-5.5, Forge+GPT-5.4, OpenHands v2+Opus 4.5). — = multi-model or proprietary attribution unresolved. &nbsp;
-        <strong>Value:</strong> score points per $1K of run cost. Tiers (recalibrated for measured cost ranges): <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥200 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥80 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥25 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥12 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;12.
+        <strong>Cost (AA):</strong> Artificial Analysis Eval Cost (USD) for the underlying model — exact for in-pool models; <em>≈</em> = extrapolated from same-brand current-gen pricing for older snapshots not in the 23-model AA pool; — = proprietary or multi-model. &nbsp;
+        <strong>Value:</strong> score points per $1K eval cost. Tiers: <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥60 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥30 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥15 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥5 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;5.
       </div>
+    <div class="card ca-research-card" style="margin-top:24px;">
+      <div class="ca-research-header">
+        <div class="ca-research-label"><i data-lucide="microscope"></i> Research · Measured Cost</div>
+        <div class="ca-research-title">TB2.0: Per-Trial Token Usage — 7 of 11 Entries</div>
+        <div class="ca-research-sub">
+          Per-trial token medians extracted from the harborframework HF dataset
+          (8.1 GB, 16,800+ <code>result.json</code> files across 37 submissions).
+          Of 37, 13 populated <code>n_input_tokens</code> / <code>cost_usd</code> fields;
+          values below are aggregated from same-model sibling submissions and transferred
+          to entries whose own scaffold left those fields null.
+          <strong>Auxiliary research, not the primary ranking</strong> — cross-scaffold
+          variance reaches 3.5× within the same model. See FAQ for caveats.
+        </div>
+      </div>
+      <div class="ca-table-wrap">
+        <table class="ca-table ca-research-table">
+          <thead>
+            <tr>
+              <th>Agent + Model</th>
+              <th>Score</th>
+              <th>Input / trial</th>
+              <th>Output / trial</th>
+              <th>Cache / trial</th>
+              <th>$ / trial</th>
+              <th>$ / 89-task run</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="ca-agent-name">TongAgents + Gemini 3.1 Pro</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: Gemini 3.1 Pro</div>
+            </td>
+            <td><span style="color:#22c55e;font-weight:700;font-family:var(--font-mono);">80.2%</span></td>
+            <td><span class="ca-mono">258K</span></td>
+            <td><span class="ca-mono">22.1K</span></td>
+            <td><span class="ca-mono">163K</span></td>
+            <td><span class="ca-mono">$0.532</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$237</span></td>
+            <td><span class="ca-conf">1 sub · 445 trials</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">ForgeCode + Claude Opus 4.6</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: Claude Opus 4.6</div>
+            </td>
+            <td><span style="color:#22c55e;font-weight:700;font-family:var(--font-mono);">79.8%</span></td>
+            <td><span class="ca-mono">383K</span></td>
+            <td><span class="ca-mono">8.7K</span></td>
+            <td><span class="ca-mono">519K</span></td>
+            <td><span class="ca-mono">$0.530</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$236</span></td>
+            <td><span class="ca-conf">5 subs · 1,604 trials</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">SageAgent + GPT-5.3-Codex</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: GPT-5.3-Codex</div>
+            </td>
+            <td><span style="color:#22c55e;font-weight:700;font-family:var(--font-mono);">78.4%</span></td>
+            <td><span class="ca-mono">324K</span></td>
+            <td><span class="ca-mono">9.5K</span></td>
+            <td><span class="ca-mono">—</span></td>
+            <td><span class="ca-mono">$0.209</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$93</span></td>
+            <td><span class="ca-conf">3 subs · 729 trials</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">ForgeCode + Gemini 3.1 Pro</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: Gemini 3.1 Pro</div>
+            </td>
+            <td><span style="color:#22c55e;font-weight:700;font-family:var(--font-mono);">78.4%</span></td>
+            <td><span class="ca-mono">258K</span></td>
+            <td><span class="ca-mono">22.1K</span></td>
+            <td><span class="ca-mono">163K</span></td>
+            <td><span class="ca-mono">$0.532</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$237</span></td>
+            <td><span class="ca-conf">1 sub · 445 trials</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: GPT-5.3-Codex</div>
+            </td>
+            <td><span style="color:#22c55e;font-weight:700;font-family:var(--font-mono);">77.3%</span></td>
+            <td><span class="ca-mono">324K</span></td>
+            <td><span class="ca-mono">9.5K</span></td>
+            <td><span class="ca-mono">—</span></td>
+            <td><span class="ca-mono">$0.209</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$93</span></td>
+            <td><span class="ca-conf">3 subs · 729 trials</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">Factory Droid + Claude Opus 4.6</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: Claude Opus 4.6</div>
+            </td>
+            <td><span style="color:#3b82f6;font-weight:700;font-family:var(--font-mono);">69.9%</span></td>
+            <td><span class="ca-mono">383K</span></td>
+            <td><span class="ca-mono">8.7K</span></td>
+            <td><span class="ca-mono">519K</span></td>
+            <td><span class="ca-mono">$0.530</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$236</span></td>
+            <td><span class="ca-conf">5 subs · 1,604 trials</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">Claude Code + Claude Opus 4.6</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: Claude Opus 4.6</div>
+            </td>
+            <td><span style="color:#f59e0b;font-weight:700;font-family:var(--font-mono);">58.0%</span></td>
+            <td><span class="ca-mono">383K</span></td>
+            <td><span class="ca-mono">8.7K</span></td>
+            <td><span class="ca-mono">519K</span></td>
+            <td><span class="ca-mono">$0.530</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$236</span></td>
+            <td><span class="ca-conf">5 subs · 1,604 trials</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ca-note">
+        <strong>Source:</strong> <code>huggingface.co/datasets/harborframework/terminal-bench-2-leaderboard</code>,
+        per-trial <code>agent_result.{n_input_tokens, n_output_tokens, n_cache_tokens, cost_usd}</code>.
+        &nbsp;<strong>Aggregation:</strong> Opus 4.6 from 5 subs / 1,604 trials; GPT-5.3-Codex from
+        3 subs / 729 trials; Gemini 3.1 Pro from 1 sub / 445 trials (Terminus-KIRA).
+        &nbsp;<strong>Caveat:</strong> Same model varies 3.5× across scaffolds (e.g. Terminus-KIRA + Opus 4.6 = $1.02/trial vs. Mux + Opus 4.6 = $0.29/trial). Treat per-trial median as a model-level baseline, not a scaffold-specific prediction.
+      </div>
+    </div>
+
     </div>
   </div>
 </section>
@@ -1559,7 +1730,7 @@
             <th data-col="agent" class="ca-sortable">Agent + Model <span class="ca-sort-arrow">↕</span></th>
             <th data-col="developer" class="ca-sortable">Developer <span class="ca-sort-arrow">↕</span></th>
             <th data-col="score" class="ca-sortable">SWE-V Score <span class="ca-sort-arrow">↕</span></th>
-            <th data-col="cost" class="ca-sortable">Cost ($/run) <span class="ca-sort-arrow">↕</span></th>
+            <th data-col="cost" class="ca-sortable">Cost (AA) <span class="ca-sort-arrow">↕</span></th>
             <th data-col="value" class="ca-sortable">Value <span class="ca-sort-arrow">↕</span></th>
           </tr>
         </thead>
@@ -1575,8 +1746,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$560</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">129</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">14.5</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
@@ -1589,8 +1760,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$560</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">122</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">13.8</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank r3"><i data-lucide="award"></i>3</span></td>
@@ -1617,8 +1788,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,959</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">16.6</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$3,959</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">16.6</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">5</span></td>
@@ -1631,8 +1802,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,959</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">15.7</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$3,959</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">15.7</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">6</span></td>
@@ -1645,8 +1816,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,959</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">15.1</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val">$3,959</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">15.1</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">7</span></td>
@@ -1688,7 +1859,7 @@
             </td>
           
             <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$4,470</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">10.0</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">10.0</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">10</span></td>
@@ -1715,8 +1886,8 @@
               </div>
             </td>
           
-            <td class="ca-cost-cell"><span class="ca-cost-val">$310</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">125</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$2,390</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">16.2</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">12</span></td>
@@ -1730,7 +1901,7 @@
             </td>
           
             <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">9.6</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">9.6</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">13</span></td>
@@ -1744,16 +1915,83 @@
             </td>
           
             <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
-            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">8.8</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">8.8</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
         </tbody>
       </table>
       <div class="ca-note">
         <strong>Sources:</strong> Devin and Aider scores sourced directly from cognition.ai and swebench.com/verified.html (primary). All other scores aggregated from awesomeagents.ai (third-party, April 19 2026 snapshot). &nbsp;
-        <strong>Cost ($/run):</strong> Estimated USD to run one full 500-task SWE-bench Verified evaluation (500 problems × per-problem cost). Plain values are <strong>measured</strong> from <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">swe-rebench.com</a> per-model leaderboard (Opus 4.6 = $1.12/problem, GPT-5.2 = $0.62/problem). <em>≈</em> = AA Eval Cost proxy fallback for entries without measured per-problem data. — = proprietary pricing model unresolved (Amazon Q monthly subscription, Devin ACU). &nbsp;
-        <strong>Value:</strong> score points per $1K of run cost. Tiers (recalibrated): <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥200 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥80 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥25 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥12 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;12. &nbsp;
+        <strong>Cost (AA):</strong> Artificial Analysis Eval Cost (USD) for the underlying model — exact for in-pool models; <em>≈</em> = extrapolated from same-brand current-gen pricing for older snapshots not in the 23-model AA pool; — = proprietary or multi-model. &nbsp;
+        <strong>Value:</strong> score points per $1K eval cost. Tiers: <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥60 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥30 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥15 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥5 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;5. &nbsp;
         <strong>Contamination notice:</strong> SWE-V scores above ~65% may be partially inflated by training data leakage (same models score ~11 pp lower on SWE-bench Pro).
       </div>
+    <div class="card ca-research-card" style="margin-top:24px;">
+      <div class="ca-research-header">
+        <div class="ca-research-label"><i data-lucide="microscope"></i> Research · Measured Cost</div>
+        <div class="ca-research-title">SWE-V: Per-Problem Token Usage — 3 of 13 Entries</div>
+        <div class="ca-research-sub">
+          Per-problem token usage and cost from
+          <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">swe-rebench.com</a>'s
+          public leaderboard — the only SWE-bench-style ranking that publishes
+          <code>Tokens/Problem</code> and <code>Cost/Problem</code> columns.
+          Multiplied by 500 problems for the SWE-V full-run estimate.
+          <strong>Auxiliary research, not the primary ranking</strong> — swe-rebench tracks a
+          rolling 57-task window, not the SWE-V 500-task fixed set; transfer is approximate at the model level (±20%).
+        </div>
+      </div>
+      <div class="ca-table-wrap">
+        <table class="ca-table ca-research-table">
+          <thead>
+            <tr>
+              <th>Agent + Model</th>
+              <th>Score</th>
+              <th>Tokens / problem</th>
+              <th>$ / problem</th>
+              <th>$ / 500-task run</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="ca-agent-name">Augment Code + Claude Opus 4.6</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: Claude Opus 4.6 · swe-rebench 65.3%</div>
+            </td>
+            <td><span style="color:#22c55e;font-weight:700;font-family:var(--font-mono);">72.0%</span></td>
+            <td><span class="ca-mono">1297K</span></td>
+            <td><span class="ca-mono">$1.12</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$560</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">OpenHands v3 + Claude Opus 4.6</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: Claude Opus 4.6 · swe-rebench 65.3%</div>
+            </td>
+            <td><span style="color:#3b82f6;font-weight:700;font-family:var(--font-mono);">68.4%</span></td>
+            <td><span class="ca-mono">1297K</span></td>
+            <td><span class="ca-mono">$1.12</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$560</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ca-agent-name">AutoCodeRover v2 + GPT-5.2</div>
+              <div class="ca-agent-dev" style="font-size:10px;color:var(--text-dim);">model baseline: gpt-5.2-medium · swe-rebench 64.4%</div>
+            </td>
+            <td><span style="color:#ef4444;font-weight:700;font-family:var(--font-mono);">38.6%</span></td>
+            <td><span class="ca-mono">1010K</span></td>
+            <td><span class="ca-mono">$0.62</span></td>
+            <td><span class="ca-mono" style="font-weight:700;color:var(--text-primary);">$310</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ca-note">
+        <strong>Source:</strong> <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">swe-rebench.com</a>,
+        Jan-Mar 2026 rolling window. Per-model aggregates: Opus 4.6 = 1.30M tokens/problem at $1.12;
+        gpt-5.2-medium = 1.01M tokens/problem at $0.62; gpt-5.4-medium = 0.77M tokens/problem at $0.63 (not used here — no SWE-V entry tracks 5.4).
+        &nbsp;<strong>Caveat:</strong> Cross-bench transfer (swe-rebench rolling window → SWE-V 500-task fixed set) introduces ±20% uncertainty. Anthropic's effective rate ($0.86/M blended for Opus 4.6) is far below rate-card due to prompt caching architecture we don't fully model.
+      </div>
+    </div>
+
     </div>
   </div>
 </section>
@@ -1951,45 +2189,41 @@
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          How reliable is the cost data shown in the Cost ($/run) column?
+          How is the Cost (AA) column calculated?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Reliability varies by row, and the table makes the distinction explicit. <strong>Plain dollar values</strong> like <code>$237</code>, <code>$93</code>, or <code>$560</code> are <strong>measured</strong> from primary leaderboard archives — high confidence, treat as accurate at <strong>±20%</strong> at the model level. <strong>Italic <code>≈$X,XXX</code> values</strong> (e.g. <code>≈$3,357</code>) are <strong>AA Eval Cost proxies</strong> — they correctly reflect the underlying model's pricing tier but are based on Artificial Analysis's standardized eval suite (HLE, GPQA, MMLU, AIME, etc.), not actual TB2.0 or SWE-bench Verified workloads. AA proxy values are typically <strong>5–20× higher</strong> in absolute dollars than what the agent would actually consume on these benchmarks — they preserve <em>relative ordering</em> but not absolute cost. <strong><code>—</code></strong> means no recoverable cost (multi-model, proprietary subscription, or compute-unit pricing). Coverage today: <strong>10 of 24 entries measured</strong>, 11 AA proxy, 3 missing.
+          The Cost column shows each entry's underlying model's <strong>Artificial Analysis Eval Cost</strong> in USD — the dollar cost to run AA's standardized intelligence-evaluation suite on that model (HLE, GPQA Diamond, AIME, MMLU-Pro, BrowseComp, AA-Omniscience, etc.). It is NOT the cost to run TB2.0 or SWE-bench Verified. Methodology choice: AA Eval Cost is the only cost figure with <strong>uniform coverage</strong> across our model pool and identical methodology across rows. Using it as the Cost column makes value comparisons internally consistent — when you see Opus 4.6 ($4,970) priced at 5.5× Gemini 3.1 Pro ($892), that ratio holds across all rows and means the same thing in every row. Absolute dollars are eval-suite-relative, not benchmark-run-realistic — for actual measured run cost, see the <strong>Measured Cost research panels</strong> below each table.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          Where does the measured cost data come from?
+          What's in the Measured Cost research panels below each table?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Two primary sources, by benchmark:
-          <br><br>
-          <strong>Terminal-Bench 2.0</strong> — <code>huggingface.co/datasets/harborframework/terminal-bench-2-leaderboard</code>, the <strong>official submission archive for tbench.ai</strong>. We git-cloned the 8.1 GB dataset and parsed all 16,800+ per-trial <code>result.json</code> files across 37 submissions. Each submission's schema includes <code>agent_result.n_input_tokens</code>, <code>n_output_tokens</code>, <code>n_cache_tokens</code>, and <code>cost_usd</code> fields. Of 37 submissions, <strong>13 populated these fields</strong>; the remaining 24 (including all four of our tracked vendor scaffolds — Forge*, Droid*, Junie_CLI, OpenSage) left them <code>null</code>. We aggregate the <strong>per-trial median cost across same-model sibling submissions</strong>, then multiply by 445 trials (89 tasks × 5 trials). Example: Claude Opus 4.6 has 5 sibling submissions (1,604 measured trials) with a median <code>$0.530/trial</code> → <code>$236/run</code>.
-          <br><br>
-          <strong>SWE-bench Verified</strong> — <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">swe-rebench.com</a>, the <strong>only public SWE-bench-style leaderboard that publishes a Tokens/Problem and Cost/Problem column</strong> (Nebius's reliability-extended SWE-bench, 57-problem rolling window). We use the per-model figure as the cross-bench baseline and multiply by 500 SWE-V tasks. Example: Opus 4.6 = <code>$1.12/problem</code> × 500 = <code>$560/run</code>; gpt-5.2-medium = <code>$0.62/problem</code> × 500 = <code>$310/run</code>.
+          Two auxiliary tables — one per benchmark — present <strong>actual per-trial / per-problem token usage</strong> for the subset of entries where we recovered measured data. <strong>TB2.0:</strong> 7 of 11 entries, sourced from <code>huggingface.co/datasets/harborframework/terminal-bench-2-leaderboard</code> (the official tbench.ai submission archive). We git-cloned the 8.1 GB dataset, parsed all 16,800+ per-trial <code>result.json</code> files, and aggregated <code>n_input_tokens</code> / <code>n_output_tokens</code> / <code>n_cache_tokens</code> / <code>cost_usd</code> across the 13 of 37 submissions that populated those fields. For entries whose own scaffold left tokens null, we transfer the per-model median from same-model sibling submissions. <strong>SWE-V:</strong> 3 of 13 entries, sourced from <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">swe-rebench.com</a> — the only public SWE-bench-style leaderboard that publishes a <code>Tokens/Problem</code> and <code>Cost/Problem</code> column. The research panels are <strong>auxiliary, not the primary ranking</strong>: cross-scaffold variance is 3.5× even within the same model (e.g. Terminus-KIRA + Opus 4.6 = $1.02/trial vs. Mux + Opus 4.6 = $0.29/trial), so per-trial figures are a model-level baseline, not a scaffold-specific prediction.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          Why don't the official tbench.ai and swebench.com leaderboards show token costs themselves?
+          Why isn't the measured cost data used as the primary Cost column?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          They <em>could</em> — and the harborframework submission spec actually has the structured fields ready (<code>n_input_tokens</code>, <code>cost_usd</code>, etc.) — but <strong>token reporting is treated as optional, not mandatory</strong>. Of the 37 TB2.0 submissions, only 13 populate them. swebench.com/verified.html doesn't render a token column at all in its public UI. The benchmark community has so far prioritized score reproducibility over cost reproducibility. ValueRank treats this gap as the central problem to solve: we <strong>aggregate across the submitters who do disclose</strong>, transfer the model-level baseline to siblings that don't, and explicitly mark every value with its provenance (<code>$</code> = measured / <code>≈$</code> = AA proxy / <code>—</code> = unrecoverable). When tbench.ai / swebench.com mandate cost columns in future submissions, ValueRank's coverage will improve mechanically without methodology change.
+          Three reasons we kept measured cost as auxiliary research rather than primary ranking. <strong>(1) Coverage is partial.</strong> Only 7 of 11 TB2.0 entries and 3 of 13 SWE-V entries have measurable data; the rest would need an AA-proxy fallback, mixing two methodologies in the same column — which is misleading because the absolute scale gap between AA-proxy and measured values (5–20×) is benchmark-architectural, not efficiency-driven. <strong>(2) Scaffold variance is hidden.</strong> Transferring a per-model median to multiple scaffolds (because their own submissions left tokens null) papers over the 3.5× spread we observed. <strong>(3) Disclosed-vs-computed gap unexplained.</strong> Anthropic submissions report $0.530/trial but rate-card × tokens math gives $2.39/trial — a 4× discrepancy attributable to caching architecture or batch discounts we can't model. The auxiliary panel preserves the research integrity (here's what we measured + caveats) without claiming primary-ranking-grade reliability.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          What does the <code>≈</code> prefix on a cost value mean exactly?
+          What does the <code>≈</code> prefix on a cost value mean?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          <strong>≈ = AA Eval Cost proxy.</strong> When we can't recover a measured per-run cost for a specific agent + model pair, we fall back to the underlying model's <a href="https://artificialanalysis.ai" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">Artificial Analysis</a> Eval Cost as a stand-in. AA Eval Cost is the dollar cost to run AA's standard intelligence-evaluation suite (HLE, GPQA Diamond, AIME, BrowseComp, etc.) — workloads that are structurally <strong>much lighter</strong> than agentic SWE-V or TB2.0 work (no 500-iteration trajectories, no codebase context replay, no terminal-output scrollback). The proxy preserves <strong>model-tier ordering</strong> reliably (cheap models stay cheap relative to expensive ones) but is <strong>not absolute</strong>. In practice, AA proxy values run 5–20× higher than the actual benchmark run cost would be. We use them as fallback, not first-class data — and the <code>≈</code> prefix is your visual cue to apply that discount in your head.
+          <strong>≈ = extrapolated AA Eval Cost</strong> for an older same-brand snapshot not in our 23-model AA pool. Examples: GPT-5.3-Codex (≈$1,995, extrapolated from GPT-5.4's $2,851 with a Codex variant adjustment), Claude Sonnet 4.5 (≈$3,565, extrapolated from Sonnet 4.6's $3,959 with a generation-decay adjustment), Claude Opus 4.5 (≈$4,470, similarly), GPT-5.2 (≈$2,390). The model-tier ordering is preserved with high confidence; the absolute value is approximate within a brand-line. Plain $ values (no ≈) are exact AA Eval Cost figures from the current 23-model pool.
         </div>
       </div>
 
@@ -1999,13 +2233,13 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Three structural cases produce <code>—</code>:
+          Three structural cases:
           <br><br>
-          <strong>1. Multi-model entries.</strong> <strong>Junie CLI</strong> uses four different underlying models within the same submission (Gemini 3 Flash + Gemini 3.1 Pro + Claude Opus 4.6 + GPT-5.3-Codex). Without per-call routing data, we can't attribute a single per-trial cost.
+          <strong>1. Multi-model entries.</strong> <strong>Junie CLI</strong> uses four different underlying models within the same submission (Gemini 3 Flash + Gemini 3.1 Pro + Claude Opus 4.6 + GPT-5.3-Codex). No single AA Eval Cost figure represents the blended cost.
           <br><br>
-          <strong>2. Subscription pricing.</strong> <strong>Amazon Q Developer</strong> charges $19/month flat regardless of task count. There's no per-task token decomposition published.
+          <strong>2. Subscription pricing.</strong> <strong>Amazon Q Developer</strong> charges $19/month flat regardless of task volume. There's no per-task token decomposition published.
           <br><br>
-          <strong>3. Compute-unit pricing.</strong> <strong>Devin 2.0</strong> bills in Cognition AI's Agent Compute Units (1 ACU ≈ 15 minutes of active work, ~$8–9/hour). Translating ACU spend to token cost requires assumptions about API utilization that no public source supplies.
+          <strong>3. Compute-unit pricing.</strong> <strong>Devin 2.0</strong> bills in Cognition AI's Agent Compute Units (1 ACU ≈ 15 minutes of active work, ~$8–9/hour). Translation to token cost requires assumptions that no public source supplies.
           <br><br>
           When sorted, <code>—</code> rows always sink to the bottom regardless of direction.
         </div>
@@ -2017,15 +2251,11 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          <strong>Value = score points per $1,000 of run cost.</strong> So a 79.8% agent at $236/run scores <code>79.8 ÷ 0.236 = 338</code> score-points-per-$K. Tier thresholds (recalibrated for the v0.7 measured-cost range):
+          <strong>Value = score points per $1,000 of AA Eval Cost.</strong> So an 80.2% agent on Gemini 3.1 Pro ($892 AA) scores <code>80.2 ÷ 0.892 = 89.9</code> score-points-per-$K. Tier thresholds:
           <br><br>
-          <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥ 200 — typical of cheap measured rows (Gemini 3.1 Pro, GPT-5.3-Codex pairings) <br>
-          <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥ 80 — typical of measured Opus 4.6 SWE-V pairings <br>
-          <span style="color:#84cc16;font-weight:700;">Good</span> ≥ 25 — cheaper-tier AA proxy rows <br>
-          <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥ 12 — mid-tier AA proxy rows <br>
-          <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt; 12 — top-of-line AA proxy rows
+          <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥ 60 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥ 30 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥ 15 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥ 5 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt; 5
           <br><br>
-          Because the methodology is dual-source, a row's tier reflects both its raw efficiency <em>and</em> which provenance bucket its cost came from. Two rows with the same true score-per-dollar can land in different tiers if one is measured and the other is AA-proxied. The provenance is always visible (plain $ vs. ≈$), so you can mentally normalize when comparing across buckets.
+          Because Cost is uniform AA Eval Cost across all rows, the Value column compares apples-to-apples within the table. A row's Value tier reflects its actual relative cost-efficiency, not the choice of which methodology was applied to it.
         </div>
       </div>
 
