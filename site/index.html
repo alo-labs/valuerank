@@ -1225,6 +1225,7 @@
   <div class="nav-links">
     <a href="#rankings" class="active">Rankings</a>
     <a href="#swe-rebench">SWE-Rebench</a>
+    <a href="#cross-perspective">Cross-Perspective</a>
     <a href="#charts">Charts</a>
     <a href="#methodology">Methodology</a>
     <a href="#data">Data</a>
@@ -1429,6 +1430,51 @@
       cache reuse with short non-cached deltas; DeepSeek-V3.2 at 17% reflects a no-cache architecture for that submission. &nbsp;
       <strong>Value:</strong> rank-based composite of <code>(1−w) × Resolved-rank + w × Cost-rank</code>,
       where w is the slider weight (default 25%). Cheaper cost ranks higher in the cost dimension.
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-PERSPECTIVE VALUERANK (models in BOTH AA Eval and SWE-Rebench) -->
+<section id="cross-perspective" style="padding-top: 32px;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" style="color:#06b6d4;">Cross-Perspective</div>
+      <div class="section-title">Cross-Perspective ValueRank — 7 Models in Both Rankings</div>
+      <div class="section-sub">
+        The 7 models with strict-name matches in <strong>both</strong> the main 23-model AA Eval pool
+        <em>and</em> the 34-model SWE-Rebench leaderboard.
+        <strong>Combined Cost</strong> = AA Eval Cost + SWE-Rebench Cost-per-Problem × 57 problems
+        (the full evaluation spend across both methodologies).
+        <strong>Combined Value</strong> = average of AA Quality score and SWE-Rebench Resolved Rate, divided by combined cost in $K.
+        Click any header to sort.
+      </div>
+    </div>
+    <div class="card table-wrap">
+      <table id="cross-perspective-table">
+        <thead>
+          <tr>
+            <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
+            <th data-col="model">Model</th>
+            <th data-col="aaQuality">AA Quality <span class="sort-arrow">↕</span></th>
+            <th data-col="sweResolved">SWE-R Resolved <span class="sort-arrow">↕</span></th>
+            <th data-col="aaCost">AA Eval $ <span class="sort-arrow">↕</span></th>
+            <th data-col="sweCostTotal">SWE-R $ × 57 <span class="sort-arrow">↕</span></th>
+            <th data-col="combinedCost">Combined $ <span class="sort-arrow">↕</span></th>
+            <th data-col="value" class="sorted">Combined Value <span class="sort-arrow">↓</span></th>
+          </tr>
+        </thead>
+        <tbody id="cross-perspective-tbody"></tbody>
+      </table>
+    </div>
+    <div class="ca-note" style="margin-top:14px;">
+      <strong>Why this view?</strong> The two source rankings disagree dramatically on Anthropic models
+      (Sonnet 4.6 / Opus 4.6 sit at #22 / #23 on the AA Pool but #3 / #2 on SWE-Rebench)
+      and on Gemma 4 31B Dense (#7 on AA Pool, free-tier driven ↔ #32 on SWE-Rebench, weakest coding score).
+      The combined view shows what each model actually costs to evaluate across <em>both</em> methodologies —
+      useful when you need a single number for budget planning that doesn't depend on which methodology you trust more.
+      &nbsp;<strong>Score formula:</strong> <code>(AA Quality + SWE-R Resolved) ÷ 2</code>. &nbsp;
+      <strong>Cost formula:</strong> <code>AA Eval Cost + SWE-R $/problem × 57</code>. &nbsp;
+      <strong>Value:</strong> <code>avg score × 1000 ÷ combined cost</code> (score points per $1K of total observed eval cost).
     </div>
   </div>
 </section>
@@ -2467,7 +2513,7 @@ function renderVersionTable() {
 // NAV HIGHLIGHT
 // ─────────────────────────────────────────────
 function initNav() {
-  const sections = ['rankings','swe-rebench','charts','methodology','data','faq'];
+  const sections = ['rankings','swe-rebench','cross-perspective','charts','methodology','data','faq'];
   const links = document.querySelectorAll('.nav-links a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -2823,6 +2869,125 @@ function initSweRebench() {
   render();
 }
 
+
+// ─────────────────────────────────────────────
+// CROSS-PERSPECTIVE VALUERANK — 7 models in BOTH AA Eval and SWE-Rebench
+// ─────────────────────────────────────────────
+const CROSS_PERSPECTIVE_DATA = [
+  // Strict-match: same model name in MODELS (AA pool) and SWE_REBENCH_DATA
+  { model:'Gemini 3.1 Pro',     aaQuality:75.5, aaOverallRank:1,  aaQualityRank:1,  sweResolved:59.7, sweRank:5,  aaCost:892.28,  sweCost:0.64 },
+  { model:'GLM 5.1',            aaQuality:49.2, aaOverallRank:9,  aaQualityRank:10, sweResolved:59.7, sweRank:4,  aaCost:543.95,  sweCost:0.68 },
+  { model:'GPT-5.4',            aaQuality:67.3, aaOverallRank:12, aaQualityRank:4,  sweResolved:54.8, sweRank:17, aaCost:2851.01, sweCost:0.64 },
+  { model:'Gemma 4 31B Dense',  aaQuality:40.9, aaOverallRank:7,  aaQualityRank:18, sweResolved:35.8, sweRank:32, aaCost:0.00,    sweCost:0.26 },
+  { model:'MiniMax M2.7',       aaQuality:45.2, aaOverallRank:13, aaQualityRank:14, sweResolved:49.6, sweRank:27, aaCost:175.51,  sweCost:0.19 },
+  { model:'Claude Sonnet 4.6',  aaQuality:37.7, aaOverallRank:22, aaQualityRank:21, sweResolved:60.0, sweRank:3,  aaCost:3959.36, sweCost:1.04 },
+  { model:'Claude Opus 4.6',    aaQuality:42.5, aaOverallRank:23, aaQualityRank:17, sweResolved:63.0, sweRank:2,  aaCost:4969.68, sweCost:1.22 },
+];
+
+function initCrossPerspective() {
+  const tbody = document.getElementById('cross-perspective-tbody');
+  if (!tbody) return;
+
+  // Derive: SWE-R total cost (× 57 problems), Combined Cost, Avg Score, Value
+  CROSS_PERSPECTIVE_DATA.forEach(d => {
+    d.sweCostTotal = d.sweCost * 57;
+    d.combinedCost = d.aaCost + d.sweCostTotal;
+    d.avgScore = (d.aaQuality + d.sweResolved) / 2;
+    d.value = d.combinedCost > 0 ? (d.avgScore * 1000 / d.combinedCost) : 0;
+  });
+
+  let sortCol = 'value';
+  let sortDir = -1;
+
+  function valueColor(v) {
+    if (v >= 500) return '#16a34a';
+    if (v >= 100) return '#22c55e';
+    if (v >= 50)  return '#84cc16';
+    if (v >= 20)  return '#f59e0b';
+    return '#8b5cf6';
+  }
+
+  function valueLabel(v) {
+    if (v >= 500) return 'Outstanding';
+    if (v >= 100) return 'Excellent';
+    if (v >= 50)  return 'Good';
+    if (v >= 20)  return 'Fair';
+    return 'Premium';
+  }
+
+  function fmtMoney(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  }
+
+  function render() {
+    const sorted = [...CROSS_PERSPECTIVE_DATA];
+    if (sortCol === 'rank' || sortCol === 'value') {
+      sorted.sort((a,b) => sortDir * (a.value - b.value));
+    } else if (sortCol === 'model') {
+      sorted.sort((a,b) => sortDir * a.model.localeCompare(b.model));
+    } else {
+      sorted.sort((a,b) => sortDir * (a[sortCol] - b[sortCol]));
+    }
+
+    tbody.innerHTML = sorted.map((d, i) => {
+      const rank = i + 1;
+      const rankCls = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
+      const vc = valueColor(d.value);
+      const vl = valueLabel(d.value);
+      const valStr = d.value >= 100 ? d.value.toFixed(0) : d.value.toFixed(1);
+      return `<tr>
+        <td><span class="rank-cell ${rankCls}">${rank}</span></td>
+        <td>
+          <div class="model-name">${d.model}</div>
+          <div class="model-dev" style="font-size:10px;color:var(--text-dim);">AA #${d.aaOverallRank} · SWE-R #${d.sweRank}</div>
+        </td>
+        <td><span class="mono">${d.aaQuality.toFixed(1)}</span></td>
+        <td><span class="mono">${d.sweResolved.toFixed(1)}%</span></td>
+        <td><span class="mono">${fmtMoney(d.aaCost)}</span></td>
+        <td><span class="mono">${fmtMoney(d.sweCostTotal)}</span></td>
+        <td><span class="mono" style="font-weight:700;color:var(--text-primary);">${fmtMoney(d.combinedCost)}</span></td>
+        <td>
+          <div style="display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.15;">
+            <span style="color:${vc};font-weight:700;font-family:var(--font-mono);font-size:14px;letter-spacing:-.01em;">${valStr}</span>
+            <span style="color:${vc};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.85;">${vl}</span>
+          </div>
+        </td>
+      </tr>`;
+    }).join('');
+
+    // Update sort arrows
+    document.querySelectorAll('#cross-perspective-table thead th').forEach(th => {
+      const col = th.dataset.col;
+      const arrow = th.querySelector('.sort-arrow');
+      if (!arrow) return;
+      if (col === sortCol || (col === 'rank' && sortCol === 'value')) {
+        arrow.textContent = sortDir < 0 ? '↓' : '↑';
+        th.classList.add('sorted');
+      } else {
+        arrow.textContent = '↕';
+        th.classList.remove('sorted');
+      }
+    });
+  }
+
+  // Header click handlers
+  document.querySelectorAll('#cross-perspective-table thead th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      const ascCols = ['model', 'rank', 'aaCost', 'sweCostTotal', 'combinedCost'];
+      if (sortCol === col || (sortCol === 'value' && col === 'rank')) {
+        sortDir *= -1;
+      } else {
+        sortCol = col;
+        sortDir = ascCols.includes(col) ? 1 : -1;
+      }
+      render();
+    });
+  });
+
+  render();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNav();
@@ -2832,6 +2997,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTable();
     initCostSlider();
     initSweRebench();
+    initCrossPerspective();
     initChartTabs();
     renderDimTable();
     renderGaps();
