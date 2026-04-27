@@ -1071,6 +1071,26 @@
     .ca-section-alt { background: var(--section-alt); }
     /* CA ranking tables */
     .ca-table-wrap { overflow-x: auto; margin-top: 28px; }
+    .ca-controls {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+      background: var(--bg-card-hover);
+    }
+    .ca-controls-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+    .ca-controls-hint {
+      font-size: 11px; color: var(--text-dim); flex: 1; min-width: 200px;
+      text-align: right; line-height: 1.5;
+    }
+    .ca-controls .slider-wrap { margin-left: 0; }
+    @media (max-width: 720px) {
+      .ca-controls { flex-direction: column; align-items: stretch; }
+      .ca-controls-hint { text-align: left; }
+      .ca-controls .slider-wrap { width: 100%; }
+      .ca-controls input[type=range] { flex: 1; width: 100%; max-width: 100%; }
+    }
     .ca-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .ca-table thead th {
       text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .08em;
@@ -1680,6 +1700,15 @@
       <div class="section-sub">Terminal-native agents · CLI/Docker environments · Multi-step system tasks · tbench.ai</div>
     </div>
     <div class="card ca-table-wrap">
+      <div class="ca-controls">
+        <div class="ca-controls-label">Re-rank by composite:</div>
+        <div class="slider-wrap">
+          <span class="slider-label">Cost weight</span>
+          <input type="range" class="ca-cost-slider" data-table="ca-tb20" min="0" max="50" value="0" step="5">
+          <span class="slider-val ca-cost-slider-val">0%</span>
+        </div>
+        <div class="ca-controls-hint">At 0%, table reflects raw TB2.0 score. Higher cost weight rewards cheaper agents.</div>
+      </div>
       <table class="ca-table">
         <thead>
           <tr>
@@ -1866,6 +1895,15 @@
       <div class="section-sub">Code-repair agents · GitHub issue resolution · Python repositories · swebench.com/verified.html</div>
     </div>
     <div class="card ca-table-wrap">
+      <div class="ca-controls">
+        <div class="ca-controls-label">Re-rank by composite:</div>
+        <div class="slider-wrap">
+          <span class="slider-label">Cost weight</span>
+          <input type="range" class="ca-cost-slider" data-table="ca-swev" min="0" max="50" value="0" step="5">
+          <span class="slider-val ca-cost-slider-val">0%</span>
+        </div>
+        <div class="ca-controls-hint">At 0%, table reflects raw SWE-V score. Higher cost weight rewards cheaper agents.</div>
+      </div>
       <table class="ca-table">
         <thead>
           <tr>
@@ -3183,6 +3221,76 @@ function switchMode(mode) {
   }
 }
 
+// CA cost-weight sliders — re-rank rows by composite of score + cost
+function initCaValueSliders() {
+  document.querySelectorAll('.ca-cost-slider').forEach(slider => {
+    const sectionId = slider.dataset.table;
+    const section   = document.getElementById(sectionId);
+    if (!section) return;
+    const tbody     = section.querySelector('tbody');
+    const valEl     = slider.parentElement.querySelector('.ca-cost-slider-val');
+    if (!tbody || !valEl) return;
+
+    // Snapshot rows + parse score / cost from DOM
+    const rows = Array.from(tbody.querySelectorAll('tr')).map(tr => {
+      const sm = tr.querySelector('.ca-score-val');
+      const cm = tr.querySelector('.ca-cost-val');
+      const score = sm ? parseFloat((sm.textContent.match(/([\d.]+)/) || [])[1]) : null;
+      const cost  = cm ? parseFloat((cm.textContent.match(/\$([\d,]+)/) || ['',''])[1].replace(/,/g,'')) : null;
+      return { tr, score, cost: isNaN(cost) ? null : cost };
+    });
+
+    // Linear cost normalization within table — cheapest = 100, priciest = 0
+    const costs = rows.map(r => r.cost).filter(c => c != null);
+    const minC = Math.min(...costs), maxC = Math.max(...costs);
+    rows.forEach(r => {
+      if (r.cost == null || maxC === minC) r.costNorm = 50;
+      else r.costNorm = 100 * (maxC - r.cost) / (maxC - minC);
+    });
+
+    function applyRanks() {
+      const w = parseInt(slider.value, 10);
+      valEl.textContent = w + '%';
+      const f = w / 100;
+
+      rows.forEach(r => {
+        if (r.score == null) { r.composite = -1; return; }
+        r.composite = (1 - f) * r.score + f * r.costNorm;
+      });
+
+      // Stable sort by composite desc
+      const sorted = rows.slice().sort((a, b) => b.composite - a.composite);
+
+      // Reattach in new order
+      sorted.forEach(r => tbody.appendChild(r.tr));
+
+      // Re-label rank cells (sequential 1..N, with medal icons for top 3)
+      sorted.forEach((r, i) => {
+        const newRank = i + 1;
+        const cell = r.tr.querySelector('.ca-rank');
+        if (!cell) return;
+        cell.classList.remove('r1', 'r2', 'r3');
+        if (newRank === 1) {
+          cell.classList.add('r1');
+          cell.innerHTML = '<i data-lucide="trophy"></i>1';
+        } else if (newRank === 2) {
+          cell.classList.add('r2');
+          cell.innerHTML = '<i data-lucide="medal"></i>2';
+        } else if (newRank === 3) {
+          cell.classList.add('r3');
+          cell.innerHTML = '<i data-lucide="award"></i>3';
+        } else {
+          cell.textContent = String(newRank);
+        }
+      });
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    slider.addEventListener('input', applyRanks);
+    // Don't run at init when value=0 (DOM already in original order); only apply if user moves it
+  });
+}
+
 // CA nav active-link highlighting on scroll
 function initCaNav() {
   const caSections = ['ca-tb20','ca-swev','ca-insights','ca-benchmarks'];
@@ -3213,6 +3321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHeatmap('chart-heatmap-data', 480);
   initFaq();
   initCaNav();
+  initCaValueSliders();
   lucide.createIcons();
 });
 </script>
