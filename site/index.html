@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ValueRank v5.0 — AI Model Ranking</title>
+  <title>ValueRank v0.5 — AI Model Ranking</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -770,7 +770,7 @@
 <nav>
   <div class="nav-brand">
     <span class="logo">ValueRank</span>
-    <span class="badge">v5.0</span>
+    <span class="badge">v0.5</span>
   </div>
   <div class="mode-switcher">
     <button class="mode-btn active" id="btn-llm" onclick="switchMode('llm')">LLM Models</button>
@@ -817,7 +817,7 @@
           <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-label">Models</div></div>
           <div class="hero-stat"><div class="hero-stat-num">18</div><div class="hero-stat-label">Dimensions</div></div>
           <div class="hero-stat"><div class="hero-stat-num">25%</div><div class="hero-stat-label">Cost Weight</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">v5.0</div><div class="hero-stat-label">Version</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">v0.5</div><div class="hero-stat-label">Version</div></div>
         </div>
       </div>
       <div class="hero-podium">
@@ -890,7 +890,7 @@
       <div class="insight-card">
         <div class="insight-icon">🎯</div>
         <div class="insight-title">Pareto Finding</div>
-        <div class="insight-body">v5.0 has a <strong>6-model frontier</strong>: Gemma3 ($0), Phi-4 ($4), ML3 ($39), Nova Pro ($201), Grok 3 ($312), Gemini ($892). Every model priced above $892 is dominated by Gemini on both quality and cost. KAT ($73) is no longer on the frontier — ML3 is cheaper <em>and</em> higher quality.</div>
+        <div class="insight-body">v0.5 has a <strong>6-model frontier</strong>: Gemma3 ($0), Phi-4 ($4), ML3 ($39), Nova Pro ($201), Grok 3 ($312), Gemini ($892). Every model priced above $892 is dominated by Gemini on both quality and cost. KAT ($73) is no longer on the frontier — ML3 is cheaper <em>and</em> higher quality.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">💡</div>
@@ -904,7 +904,7 @@
       </div>
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
-        <div class="insight-title">v5.0 Expansion</div>
+        <div class="insight-title">v0.5 Expansion</div>
         <div class="insight-body"><strong>8 new models</strong> added (Mistral Large 3, Gemma 3 27B, Phi-4, Nova Pro, Grok 3, Maverick, Scout, o3-mini). Cost range expands $73–$4,970 → $0–$4,970, compressing all existing cost scores. ML3/Gemma3/Phi-4 debut #3–#5 via cost arbitrage (14–16 ⊘ dims each).</div>
       </div>
     </div>
@@ -1104,7 +1104,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v5.0 has a <strong>6-model frontier</strong>: <strong>Gemma 3 27B</strong> ($0), <strong>Phi-4</strong> ($4), <strong>Mistral Large 3</strong> ($39), <strong>Nova Pro</strong> ($201), <strong>Grok 3</strong> ($312), and <strong>Gemini 3.1 Pro</strong> (quality #1 at $892). Every other model is dominated by at least one frontier model on both quality and cost.
+          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v0.5 has a <strong>6-model frontier</strong>: <strong>Gemma 3 27B</strong> ($0), <strong>Phi-4</strong> ($4), <strong>Mistral Large 3</strong> ($39), <strong>Nova Pro</strong> ($201), <strong>Grok 3</strong> ($312), and <strong>Gemini 3.1 Pro</strong> (quality #1 at $892). Every other model is dominated by at least one frontier model on both quality and cost.
         </div>
       </div>
 
@@ -1114,7 +1114,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. v4.0 → v5.0 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
+          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. Prior-version → v0.5 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
         </div>
       </div>
 
@@ -1124,7 +1124,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Quarterly, or whenever a major model launch would materially affect the rankings. v5.0 (April 26, 2026) expanded to 20 models with 8 new entrants. The next scheduled update is <strong>May 2026</strong> (priority: Nova Pro, Gemma3, Phi-4 benchmark gap-fill) or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
+          Quarterly, or whenever a major model launch would materially affect the rankings. v0.5 (April 26, 2026) expanded to 20 models with 8 new entrants. The next scheduled update is <strong>May 2026</strong> (priority: Nova Pro, Gemma3, Phi-4 benchmark gap-fill) or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
         </div>
       </div>
 
@@ -1705,7 +1705,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v5.0 · April 26, 2026 · 20 models × 18 dimensions · No provisional data · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v0.5 · April 26, 2026 · 20 models × 18 dimensions · No provisional data · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -2258,7 +2258,7 @@ function renderBubble() {
 // CHART 6: VERSION BUMP CHART
 // ─────────────────────────────────────────────
 function renderBump() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v5.0'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5'];
   const vKeys = ['v20','v25','v30','v40','v42','v43','v50'];
   const traces = MODELS.map(m => {
     const x=[], y=[];
@@ -2271,7 +2271,7 @@ function renderBump() {
       x, y,
       mode:'lines+markers+text',
       name:m.shortName,
-      text: x.map((v,i) => v === 'v5.0' ? m.shortName : ''),
+      text: x.map((v,i) => v === 'v0.5' ? m.shortName : ''),
       textposition:'middle right',
       textfont:{size:10},
       line:{ color: DEV_COLORS[m.developer] || '#64748b', width: isTop3 ? 2.5 : 1.5, dash: isTop3 ? 'solid' : 'solid' },
@@ -2283,13 +2283,13 @@ function renderBump() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v2.0 to v5.0', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v2.0 to v0.5', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
     yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,20.5],
       tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14','#15','#16','#17','#18','#19','#20']},
     margin:{...getPlotlyLayout().margin, r:90},
     annotations:[
-      {x:'v5.0', y:3, xref:'x', yref:'y', text:'v5.0: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:120, ay:0}
+      {x:'v0.5', y:3, xref:'x', yref:'y', text:'v0.5: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:120, ay:0}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -2423,7 +2423,7 @@ function renderGaps() {
 // VERSION TABLE
 // ─────────────────────────────────────────────
 function renderVersionTable() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v5.0'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5'];
   const vKeys = ['v20','v25','v30','v40','v42','v43','v50'];
   const table = document.getElementById('version-table');
   table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
