@@ -693,10 +693,14 @@
     .ca-table tbody tr:last-child { border-bottom: none; }
     .ca-table tbody tr:hover { background: var(--table-row-hover); }
     .ca-table tbody td { padding: 13px 16px; vertical-align: middle; }
-    .ca-rank { font-family: var(--font-mono); font-weight: 700; font-size: 15px; color: var(--text-dim); }
+    .ca-rank { font-family: var(--font-mono); font-weight: 700; font-size: 15px; color: var(--text-dim); display: inline-flex; align-items: center; gap: 6px; }
     .ca-rank.r1 { color: var(--gold); }
     .ca-rank.r2 { color: var(--silver); }
     .ca-rank.r3 { color: var(--bronze); }
+    .ca-rank svg, .ca-rank i[data-lucide] { width: 16px; height: 16px; }
+    .ca-insight-icon svg, .ca-insight-icon i[data-lucide] { width: 22px; height: 22px; }
+    .ca-bm-status { display: inline-flex; align-items: center; gap: 5px; }
+    .ca-bm-status svg, .ca-bm-status i[data-lucide] { width: 11px; height: 11px; }
     .ca-agent-name { font-weight: 600; color: var(--text-primary); font-size: 13px; }
     .ca-agent-dev { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
     .ca-score-bar-wrap { display: flex; align-items: center; gap: 10px; }
@@ -823,10 +827,10 @@
     <div class="hero-layout">
       <div class="hero-top">
         <div class="hero-eyebrow">Production AI Ranking Framework</div>
-        <h1 class="hero-title">Which model delivers the most <span>value?</span></h1>
+        <h1 class="hero-title">Which AI Model Delivers the Most <span>Value?</span></h1>
       </div>
       <div>
-        <p class="hero-desc">ValueRank ranks 20 frontier AI models across 18 dimensions using rank-based normalization with a 25% cost weight — designed for production software engineering teams where price, speed, and reliability matter alongside raw capability.</p>
+        <p class="hero-desc">ValueRank ranks 23 frontier AI models across 18 dimensions using rank-based normalization with a 25% cost weight — designed for production software engineering teams where price, speed, and reliability matter alongside raw capability.</p>
         <div class="hero-stats">
           <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-label">Models</div></div>
           <div class="hero-stat"><div class="hero-stat-num">18</div><div class="hero-stat-label">Dimensions</div></div>
@@ -1028,7 +1032,7 @@
     </div>
 
     <div class="card mb-6">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (12 × 18)</h3>
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (23 × 18)</h3>
       <div class="heatmap-legend">
         <span>0 (worst)</span>
         <div class="hl-bar"></div>
@@ -1156,8 +1160,7 @@
 <!-- CA HERO -->
 <section class="ca-hero">
   <div class="container">
-    <div class="ca-hero-kicker">Coding Agent ValueRank · v1.0</div>
-    <h1 class="ca-hero-title">Which coding agent delivers real results?</h1>
+    <h1 class="ca-hero-title">Which Coding Agent Delivers Real Results?</h1>
     <p class="ca-hero-sub">Two separate ranked lists — Terminal-Bench 2.0 and SWE-bench Verified — because the data doesn't support a composite. The two benchmarks test entirely different capabilities and attract entirely different agent populations.</p>
     <div class="ca-stats">
       <div class="ca-stat"><div class="ca-stat-num">22</div><div class="ca-stat-label">Agent entries</div></div>
@@ -1169,12 +1172,12 @@
     <div class="ca-explainer container" style="max-width:720px;margin-top:40px;padding:0;">
       <div class="ca-explainer-card">
         <div class="ca-explainer-label tb">Terminal-Bench 2.0</div>
-        <div class="ca-explainer-title">Terminal-native autonomy</div>
+        <div class="ca-explainer-title">Terminal-Native Autonomy</div>
         <div class="ca-explainer-body">89 tasks across software engineering, biology, security, and gaming. Live Docker containers. Time-based execution. Real terminal feedback loops. Best signal for CLI-first, systems-level agents.</div>
       </div>
       <div class="ca-explainer-card">
         <div class="ca-explainer-label swev">SWE-bench Verified</div>
-        <div class="ca-explainer-title">GitHub issue resolution</div>
+        <div class="ca-explainer-title">GitHub Issue Resolution</div>
         <div class="ca-explainer-body">500 human-validated tasks across 12 Python repositories. Patch-and-test workflow. Best signal for agents specialized in structured code repair, BM25 retrieval, and file editing.</div>
       </div>
     </div>
@@ -1202,7 +1205,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="ca-rank r1">🥇 1</span></td>
+            <td><span class="ca-rank r1"><i data-lucide="trophy"></i>1</span></td>
             <td><div class="ca-agent-name">Codex + GPT-5.5</div></td>
             <td><div class="ca-agent-dev">OpenAI</div></td>
             <td>
@@ -1214,7 +1217,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><span class="ca-rank r2">🥈 2</span></td>
+            <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
             <td><div class="ca-agent-name">ForgeCode + GPT-5.4</div></td>
             <td><div class="ca-agent-dev">Antinomy</div></td>
             <td>
@@ -1226,7 +1229,7 @@
             <td><span class="ca-badge ca-badge-integrity">† reward hacking</span></td>
           </tr>
           <tr>
-            <td><span class="ca-rank r3">🥉 3</span></td>
+            <td><span class="ca-rank r3"><i data-lucide="award"></i>3</span></td>
             <td><div class="ca-agent-name">TongAgents + Gemini 3.1 Pro</div></td>
             <td><div class="ca-agent-dev">ByteDance SE Lab</div></td>
             <td>
@@ -1275,7 +1278,7 @@
           </tr>
           <tr>
             <td><span class="ca-rank">7</span></td>
-            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;">✦ Only dual-benchmark entry</div></td>
+            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;display:inline-flex;align-items:center;gap:4px;"><i data-lucide="sparkle" style="width:11px;height:11px;"></i>Only Dual-Benchmark Entry</div></td>
             <td><div class="ca-agent-dev">Factory AI</div></td>
             <td>
               <div class="ca-score-bar-wrap">
@@ -1364,7 +1367,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="ca-rank r1">🥇 1</span></td>
+            <td><span class="ca-rank r1"><i data-lucide="trophy"></i>1</span></td>
             <td><div class="ca-agent-name">Augment Code + Claude Opus 4.6</div></td>
             <td><div class="ca-agent-dev">Augment</div></td>
             <td>
@@ -1376,7 +1379,7 @@
             <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
           </tr>
           <tr>
-            <td><span class="ca-rank r2">🥈 2</span></td>
+            <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
             <td><div class="ca-agent-name">OpenHands v3 + Claude Opus 4.6</div></td>
             <td><div class="ca-agent-dev">All Hands AI</div></td>
             <td>
@@ -1388,7 +1391,7 @@
             <td><span class="ca-badge ca-badge-secondary">~ aggregator</span></td>
           </tr>
           <tr>
-            <td><span class="ca-rank r3">🥉 3</span></td>
+            <td><span class="ca-rank r3"><i data-lucide="award"></i>3</span></td>
             <td><div class="ca-agent-name">Amazon Q Developer + Proprietary</div></td>
             <td><div class="ca-agent-dev">Amazon</div></td>
             <td>
@@ -1437,7 +1440,7 @@
           </tr>
           <tr>
             <td><span class="ca-rank">7</span></td>
-            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;">✦ Only dual-benchmark entry</div></td>
+            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;display:inline-flex;align-items:center;gap:4px;"><i data-lucide="sparkle" style="width:11px;height:11px;"></i>Only Dual-Benchmark Entry</div></td>
             <td><div class="ca-agent-dev">Factory AI</div></td>
             <td>
               <div class="ca-score-bar-wrap">
@@ -1457,7 +1460,7 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:45.8%;background:#f59e0b;"></div></div>
               </div>
             </td>
-            <td><span class="ca-badge ca-badge-version">✓ primary</span></td>
+            <td><span class="ca-badge ca-badge-version" style="display:inline-flex;align-items:center;gap:3px;"><i data-lucide="check" style="width:10px;height:10px;"></i>Primary</span></td>
           </tr>
           <tr>
             <td><span class="ca-rank">9</span></td>
@@ -1517,13 +1520,13 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:31.4%;background:#ef4444;"></div></div>
               </div>
             </td>
-            <td><span class="ca-badge ca-badge-version">✓ primary</span></td>
+            <td><span class="ca-badge ca-badge-version" style="display:inline-flex;align-items:center;gap:3px;"><i data-lucide="check" style="width:10px;height:10px;"></i>Primary</span></td>
           </tr>
         </tbody>
       </table>
       <div class="ca-note">
         <strong>~</strong> Score from awesomeagents.ai (third-party aggregator, April 19 2026) — secondary source. Primary leaderboard: swebench.com/verified.html. &nbsp;
-        <strong>✓ primary</strong> = sourced directly from cognition.ai (Devin) or swebench.com (Aider). &nbsp;
+        <strong>Primary</strong> = sourced directly from cognition.ai (Devin) or swebench.com (Aider). &nbsp;
         <strong>Contamination notice:</strong> SWE-V scores above ~65% may be partially inflated by training data leakage (same models score ~11 pp lower on SWE-bench Pro).
       </div>
     </div>
@@ -1539,7 +1542,7 @@
     </div>
     <div class="ca-pareto-grid">
       <div class="ca-pareto-card">
-        <div class="ca-pareto-label">✓ Pareto Frontier · TB2.0 Leader</div>
+        <div class="ca-pareto-label" style="display:inline-flex;align-items:center;gap:5px;"><i data-lucide="check-circle-2" style="width:11px;height:11px;"></i>Pareto Frontier · TB2.0 Leader</div>
         <div class="ca-pareto-agent">Codex + GPT-5.5</div>
         <div class="ca-pareto-sub">OpenAI</div>
         <div class="ca-pareto-scores">
@@ -1554,7 +1557,7 @@
         </div>
       </div>
       <div class="ca-pareto-card">
-        <div class="ca-pareto-label">✓ Pareto Frontier · SWE-V Leader</div>
+        <div class="ca-pareto-label" style="display:inline-flex;align-items:center;gap:5px;"><i data-lucide="check-circle-2" style="width:11px;height:11px;"></i>Pareto Frontier · SWE-V Leader</div>
         <div class="ca-pareto-agent">Augment Code + Claude Opus 4.6</div>
         <div class="ca-pareto-sub">Augment</div>
         <div class="ca-pareto-scores">
@@ -1569,7 +1572,7 @@
         </div>
       </div>
       <div class="ca-pareto-card">
-        <div class="ca-pareto-label">✓~ Frontier · Only Dual-Benchmark Entry</div>
+        <div class="ca-pareto-label" style="display:inline-flex;align-items:center;gap:5px;"><i data-lucide="check-circle-2" style="width:11px;height:11px;"></i>Frontier · Only Dual-Benchmark Entry</div>
         <div class="ca-pareto-agent">Factory Droid + GPT-5.3-Codex</div>
         <div class="ca-pareto-sub">Factory AI</div>
         <div class="ca-pareto-scores">
@@ -1597,25 +1600,25 @@
     </div>
     <div class="ca-insights-grid">
       <div class="ca-insight-card">
-        <div class="ca-insight-icon">🏗️</div>
+        <div class="ca-insight-icon"><i data-lucide="layers"></i></div>
         <div class="ca-insight-title">Scaffold Engineering Premium</div>
         <span class="ca-insight-num" style="color:#22c55e;">~10 pp</span>
         <div class="ca-insight-body">Same model, different scaffold = 10 percentage-point gap at the frontier. ForgeCode + Gemini 3.1 Pro scores 78.4% on TB2.0 while Google's own direct Gemini submission scores ~68.5% — same weights, different scaffold. Choosing the best model is not enough.</div>
       </div>
       <div class="ca-insight-card">
-        <div class="ca-insight-icon">🔓</div>
+        <div class="ca-insight-icon"><i data-lucide="unlock"></i></div>
         <div class="ca-insight-title">Open-Source Near-Parity on SWE-V</div>
         <span class="ca-insight-num" style="color:#3b82f6;">3.6 pp</span>
         <div class="ca-insight-body">OpenHands v3 achieves 68.4% vs. Augment Code's 72.0% on the same Claude Opus 4.6 base model. The 3.6 pp gap is the cost of Augment's proprietary BM25 + code-graph retrieval scaffold. For teams preferring BYOK economics, OpenHands is the rational choice.</div>
       </div>
       <div class="ca-insight-card">
-        <div class="ca-insight-icon">🏔️</div>
+        <div class="ca-insight-icon"><i data-lucide="mountain"></i></div>
         <div class="ca-insight-title">Long-Horizon Capability Cliff</div>
         <span class="ca-insight-num" style="color:#ef4444;">74% → 11%</span>
         <div class="ca-insight-body">FeatureBench (ICLR 2026): agents scoring 68–74% on SWE-V collapse to 5–13% on multi-file feature development tasks. The cliff is consistent across all tested agents. Current benchmark scores predict contained task performance only — not "implement this 3-week feature across 15 files."</div>
       </div>
       <div class="ca-insight-card">
-        <div class="ca-insight-icon">📉</div>
+        <div class="ca-insight-icon"><i data-lucide="trending-down"></i></div>
         <div class="ca-insight-title">Devin 2.0 Brand vs. Benchmark Gap</div>
         <span class="ca-insight-num" style="color:#f59e0b;">Rank 8</span>
         <div class="ca-insight-body">Despite Cognition AI's high profile and reported valuation, Devin 2.0 sits at SWE-V rank 8 at 45.8% — 22.6 pp below OpenHands v3 (68.4%) and below three open-source systems. Differentiation is product experience and team workflow tooling, not benchmark performance.</div>
@@ -1633,72 +1636,72 @@
     </div>
     <div class="ca-bm-grid">
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-active">✅ Active</div>
+        <div class="ca-bm-status s-active"><i data-lucide="check-circle-2"></i>Active</div>
         <div class="ca-bm-name">Terminal-Bench 2.0</div>
         <div class="ca-bm-detail">11 cohort entries · 89 tasks · Docker · tbench.ai · Anti-gaming ATIF trajectories</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-active">✅ Active</div>
+        <div class="ca-bm-status s-active"><i data-lucide="check-circle-2"></i>Active</div>
         <div class="ca-bm-name">SWE-bench Verified</div>
         <div class="ca-bm-detail">13 cohort entries · 500 tasks · Python repos · swebench.com · Contamination notice above ~65%</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-pending">⏳ Pending — need ≥4 entries</div>
+        <div class="ca-bm-status s-pending"><i data-lucide="clock"></i>Pending — Need ≥4 Entries</div>
         <div class="ca-bm-name">SWE-bench Pro</div>
         <div class="ca-bm-detail">2 entries · 1,865 tasks · Multi-language · labs.scale.com · High contamination resistance — strongest anti-contamination signal</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-pending">⏳ Pending — need ≥4 entries</div>
+        <div class="ca-bm-status s-pending"><i data-lucide="clock"></i>Pending — Need ≥4 Entries</div>
         <div class="ca-bm-name">SWE-bench Multilingual</div>
         <div class="ca-bm-detail">0 entries · 300 tasks · 9 languages · swebench.com · Cross-lingual generalization signal</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-pending">⏳ Pending — need ≥4 entries</div>
+        <div class="ca-bm-status s-pending"><i data-lucide="clock"></i>Pending — Need ≥4 Entries</div>
         <div class="ca-bm-name">Multi-SWE-bench</div>
         <div class="ca-bm-detail">0 entries · 1,632 tasks · Java/TS/Go/Rust/C/C++ · Enterprise language coverage</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-watch">🚫 Watch — no live leaderboard</div>
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — No Live Leaderboard</div>
         <div class="ca-bm-name">FeatureBench</div>
         <div class="ca-bm-detail">1 exact cohort match · ICLR 2026 · Long-horizon multi-file feature dev · Key finding: 74% → 11% cliff</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-watch">🚫 Watch — no live leaderboard</div>
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — No Live Leaderboard</div>
         <div class="ca-bm-name">DevOps-Gym</div>
         <div class="ca-bm-detail">0 exact matches · ICLR 2026 · Java/Go DevOps · End-to-end pipeline: 0% all agents</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-watch">🚫 Watch — no live leaderboard</div>
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — No Live Leaderboard</div>
         <div class="ca-bm-name">SWE-EVO</div>
         <div class="ca-bm-detail">0 exact matches · 48 long-horizon software evolution tasks · GLM-4p7 leads despite not appearing in TB2.0/SWE-V top tiers</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-watch">🚫 Watch — access restricted</div>
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — Access Restricted</div>
         <div class="ca-bm-name">MLE-bench</div>
         <div class="ca-bm-detail">Submissions frozen as of April 2026 · Kaggle ML competitions · ML engineering signal · Pending v2</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-watch">🚫 Watch — METR internal</div>
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — METR Internal</div>
         <div class="ca-bm-name">RE-Bench / HCAST</div>
         <div class="ca-bm-detail">No open portal · Predominantly ML research tasks · &lt;25% SWE tasks (HCAST) · No named agent scaffolds</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-excluded">❌ Excluded — model-level</div>
+        <div class="ca-bm-status s-excluded"><i data-lucide="x-circle"></i>Excluded — Model-Level</div>
         <div class="ca-bm-name">SWE-rebench</div>
         <div class="ca-bm-detail">Standardized 128K ReAct scaffold for all — tests models, not agent scaffolds</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-excluded">❌ Excluded — model-level</div>
+        <div class="ca-bm-status s-excluded"><i data-lucide="x-circle"></i>Excluded — Model-Level</div>
         <div class="ca-bm-name">Aider Polyglot</div>
         <div class="ca-bm-detail">Aider is the fixed scaffold — tests which model Aider should use, not which agent is best</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status s-excluded">❌ Excluded — model-level</div>
+        <div class="ca-bm-status s-excluded"><i data-lucide="x-circle"></i>Excluded — Model-Level</div>
         <div class="ca-bm-name">BigCodeBench / LiveCodeBench</div>
         <div class="ca-bm-detail">Pure model-level function completion / competitive programming — no agent scaffolding component</div>
       </div>
       <div class="ca-bm-card">
-        <div class="ca-bm-status" style="color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">📊 Reference Only</div>
+        <div class="ca-bm-status s-ref" style="color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;"><i data-lucide="bar-chart-3"></i>Reference Only</div>
         <div class="ca-bm-name">PR Arena</div>
         <div class="ca-bm-detail">Real-world GitHub PR merge rates · No task-difficulty control · Copilot: 1.3M PRs 95.9% merge · Codex: 4.2M PRs 87.2%</div>
       </div>
@@ -2229,7 +2232,7 @@ function renderHeatmap(elementId, height) {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Normalized Score Matrix (20 Models × 18 Dimensions)', font:plotlyTitle(14)},
+    title:{text:'Normalized Score Matrix (23 Models × 18 Dimensions)', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, side:'top', tickangle:-30, tickfont:{size:10}},
     yaxis:{...getPlotlyLayout().yaxis, autorange:'reversed', tickfont:{size:11}},
     margin:{t:100, r:80, b:100, l:90},
