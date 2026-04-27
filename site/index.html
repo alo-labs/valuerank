@@ -1224,6 +1224,7 @@
   </div>
   <div class="nav-links">
     <a href="#rankings" class="active">Rankings</a>
+    <a href="#swe-rebench">SWE-Rebench</a>
     <a href="#charts">Charts</a>
     <a href="#methodology">Methodology</a>
     <a href="#data">Data</a>
@@ -1373,6 +1374,61 @@
         <div class="insight-title">v0.6 Refresh</div>
         <div class="insight-body"><strong>4 model swaps</strong> (Gemma 3→4 31B, Nova Pro→Premier, Grok 3→4.20, o3-mini→o4-mini) and <strong>3 additions</strong> (MiMo-V2.5-Pro, Qwen 3.6 Max, Gemma 4 27B MoE). Pool grows 20→23. MiMo debuts at #5; o4-mini #10; Grok 4.20 #14. Opus 4.7 slides quality #3 → overall #18 (cost penalty +3).</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SWE-REBENCH VALUERANK (single-source bonus table) -->
+<section id="swe-rebench" style="padding-top: 32px;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" style="color:#8b5cf6;">SWE-Rebench Single-Source Ranking</div>
+      <div class="section-title">SWE-Rebench ValueRank — 34 Models</div>
+      <div class="section-sub">
+        Bonus ranking based exclusively on the
+        <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">SWE-Rebench</a>
+        leaderboard's uniform-eval methodology (Jan–Mar 2026 rolling 57-task window from 46 repositories).
+        Single source — every model evaluated against the same problems with the same scaffold —
+        which is why it complements rather than competes with the 18-dimension ValueRank above.
+        <strong>Independent ranking</strong>: uses only Resolved Rate (pass@1) and Cost per Problem.
+      </div>
+    </div>
+    <div class="filter-bar" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:20px;">
+      <div style="flex:1;font-size:12px;color:var(--text-dim);min-width:200px;">
+        Click any header to sort. Drag the slider to weight cost in the composite ranking.
+      </div>
+      <div class="slider-wrap">
+        <span class="slider-label">Cost weight</span>
+        <input type="range" id="swe-rebench-slider" min="0" max="50" value="25" step="1">
+        <span class="slider-val" id="swe-rebench-slider-val">25%</span>
+      </div>
+    </div>
+    <div class="card table-wrap">
+      <table id="swe-rebench-table">
+        <thead>
+          <tr>
+            <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
+            <th data-col="model">Model</th>
+            <th data-col="resolved" class="sorted">Resolved <span class="sort-arrow">↓</span></th>
+            <th data-col="pass5">Pass@5 <span class="sort-arrow">↕</span></th>
+            <th data-col="cost">$ / Problem <span class="sort-arrow">↕</span></th>
+            <th data-col="tokens">Tokens / Problem <span class="sort-arrow">↕</span></th>
+            <th data-col="cached">Cached % <span class="sort-arrow">↕</span></th>
+            <th data-col="value">Value <span class="sort-arrow">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="swe-rebench-tbody"></tbody>
+      </table>
+    </div>
+    <div class="ca-note" style="margin-top:14px;">
+      <strong>Source:</strong>
+      <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">swe-rebench.com</a>,
+      Jan–Mar 2026 rolling window · 57 problems from 46 repositories · 34 models with complete metrics. &nbsp;
+      <strong>Resolved Rate:</strong> pass@1 with ±1σ standard error margin shown inline. &nbsp;
+      <strong>Cached %:</strong> share of input tokens served from prompt cache. The ~93–96% on Anthropic models reflects heavy
+      cache reuse with short non-cached deltas; DeepSeek-V3.2 at 17% reflects a no-cache architecture for that submission. &nbsp;
+      <strong>Value:</strong> rank-based composite of <code>(1−w) × Resolved-rank + w × Cost-rank</code>,
+      where w is the slider weight (default 25%). Cheaper cost ranks higher in the cost dimension.
     </div>
   </div>
 </section>
@@ -2411,7 +2467,7 @@ function renderVersionTable() {
 // NAV HIGHLIGHT
 // ─────────────────────────────────────────────
 function initNav() {
-  const sections = ['rankings','charts','methodology','data'];
+  const sections = ['rankings','swe-rebench','charts','methodology','data','faq'];
   const links = document.querySelectorAll('.nav-links a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -2616,6 +2672,154 @@ function initCaNav() {
   caSections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
 }
 
+
+// ─────────────────────────────────────────────
+// SWE-REBENCH VALUERANK — bonus single-source table
+// ─────────────────────────────────────────────
+const SWE_REBENCH_DATA = [
+  { model:'GLM-5',                              resolved:63.0, sem:1.17, pass5:70.4, cost:0.67, tokens:1853498, cached:77.9 },
+  { model:'Claude Opus 4.6',                    resolved:63.0, sem:1.17, pass5:66.7, cost:1.22, tokens:1447696, cached:93.3 },
+  { model:'Claude Sonnet 4.6',                  resolved:60.0, sem:0.74, pass5:66.7, cost:1.04, tokens:2171185, cached:95.4 },
+  { model:'GLM-5.1',                            resolved:59.7, sem:1.26, pass5:63.0, cost:0.68, tokens:1932042, cached:91.9 },
+  { model:'Gemini 3.1 Pro Preview',             resolved:59.7, sem:1.46, pass5:70.4, cost:0.64, tokens:1357708, cached:83.3 },
+  { model:'Cursor',                             resolved:58.0, sem:1.55, pass5:70.4, cost:0.20, tokens: 835487, cached:91.3 },
+  { model:'DeepSeek-V3.2',                      resolved:57.4, sem:2.61, pass5:66.7, cost:0.68, tokens:2804263, cached:17.0 },
+  { model:'Claude Code',                        resolved:57.4, sem:2.48, pass5:66.7, cost:4.43, tokens:2669551, cached:92.3 },
+  { model:'Junie',                              resolved:57.4, sem:2.90, pass5:70.4, cost:0.30, tokens:1685001, cached:77.3 },
+  { model:'GLM-4.7',                            resolved:57.1, sem:1.77, pass5:66.7, cost:0.30, tokens:1955597, cached:92.7 },
+  { model:'Claude Sonnet 4.5',                  resolved:56.9, sem:0.77, pass5:65.4, cost:1.09, tokens:2149160, cached:96.1 },
+  { model:'Step-3.5-Flash',                     resolved:56.9, sem:1.58, pass5:70.4, cost:0.13, tokens:3392672, cached:82.7 },
+  { model:'Qwen3.5-397B-A17B',                  resolved:56.8, sem:1.77, pass5:66.7, cost:0.99, tokens:2459110, cached:93.5 },
+  { model:'Kimi K2 Thinking',                   resolved:56.8, sem:3.16, pass5:70.4, cost:0.52, tokens:2843944, cached:95.6 },
+  { model:'gpt-5.2-2025-12-11-medium',          resolved:56.5, sem:2.05, pass5:63.0, cost:0.61, tokens: 979028, cached:78.4 },
+  { model:'Kimi K2.5',                          resolved:55.2, sem:2.06, pass5:66.7, cost:0.18, tokens:1298836, cached:94.3 },
+  { model:'gpt-5.4-2026-03-05-medium',          resolved:54.8, sem:2.16, pass5:59.3, cost:0.64, tokens: 813462, cached:78.8 },
+  { model:'Qwen3.5-27B',                        resolved:54.8, sem:1.39, pass5:59.3, cost:0.47, tokens:2332250, cached:94.9 },
+  { model:'MiniMax M2.5',                       resolved:54.5, sem:1.38, pass5:63.0, cost:0.12, tokens:1967658, cached:90.5 },
+  { model:'gpt-5.3-codex-xhigh',                resolved:54.1, sem:1.89, pass5:63.0, cost:0.85, tokens:1695651, cached:84.4 },
+  { model:'Qwen3-Coder-Next',                   resolved:53.4, sem:1.08, pass5:66.7, cost:1.58, tokens:7700359, cached:98.5 },
+  { model:'Codex',                              resolved:52.6, sem:0.95, pass5:55.6, cost:0.64, tokens:1541828, cached:94.8 },
+  { model:'Gemini 3 Flash Preview',             resolved:51.5, sem:1.75, pass5:59.3, cost:0.26, tokens:1876948, cached:77.4 },
+  { model:'gpt-5.3-codex',                      resolved:51.5, sem:0.94, pass5:53.8, cost:0.39, tokens: 637366, cached:78.5 },
+  { model:'gpt-5.2-codex',                      resolved:50.8, sem:1.44, pass5:53.8, cost:0.39, tokens: 630712, cached:75.4 },
+  { model:'Qwen3.5-35B-A3B',                    resolved:50.4, sem:3.43, pass5:59.3, cost:0.82, tokens:4838955, cached:94.7 },
+  { model:'MiniMax M2.7',                       resolved:49.6, sem:1.99, pass5:59.3, cost:0.19, tokens:2295364, cached:92.1 },
+  { model:'Devstral-2-123B-Instruct-2512',      resolved:48.9, sem:2.96, pass5:59.3, cost:0.09, tokens:1733949, cached:97.3 },
+  { model:'Qwen3-Coder-480B-A35B-Instruct',     resolved:39.4, sem:1.34, pass5:51.9, cost:0.39, tokens:1939192, cached:30.1 },
+  { model:'Devstral-Small-2-24B-Instruct-2512', resolved:37.6, sem:2.75, pass5:66.7, cost:0.13, tokens:2101976, cached:97.3 },
+  { model:'GLM-4.7 Flash',                      resolved:36.3, sem:3.19, pass5:59.3, cost:0.08, tokens:4693424, cached:89.6 },
+  { model:'Gemma 4 31B',                        resolved:35.8, sem:2.57, pass5:55.6, cost:0.26, tokens:1815518, cached:90.3 },
+  { model:'GLM-4.5 Air',                        resolved:32.6, sem:1.40, pass5:55.6, cost:0.07, tokens:1720746, cached:95.4 },
+  { model:'gpt-oss-120b',                       resolved:31.0, sem:2.75, pass5:48.1, cost:0.19, tokens:1224594, cached:94.4 },
+];
+
+function initSweRebench() {
+  const data = SWE_REBENCH_DATA;
+  const tbody = document.getElementById('swe-rebench-tbody');
+  if (!tbody) return;
+  const n = data.length;
+
+  // Pre-compute resolved-rank (descending) and cost-rank (ascending) → normalized 0-100
+  const sortedByResolved = [...data].sort((a,b) => b.resolved - a.resolved);
+  const sortedByCost     = [...data].sort((a,b) => a.cost - b.cost);
+  data.forEach(d => {
+    d._resolvedRank = sortedByResolved.indexOf(d) + 1;
+    d._costRank     = sortedByCost.indexOf(d) + 1;
+    d._resolvedNorm = ((n - d._resolvedRank) / (n - 1)) * 100;
+    d._costNorm     = ((n - d._costRank) / (n - 1)) * 100;
+  });
+
+  let sortCol = 'resolved';
+  let sortDir = -1; // -1 desc, 1 asc
+  let costWeight = 25;
+
+  function valueColor(v) {
+    if (v >= 65) return '#22c55e';
+    if (v >= 50) return '#3b82f6';
+    if (v >= 35) return '#f59e0b';
+    return '#ef4444';
+  }
+
+  function fmtTokens(t) {
+    if (t >= 1000000) return (t / 1000000).toFixed(2) + 'M';
+    if (t >= 1000)    return (t / 1000).toFixed(0) + 'K';
+    return String(t);
+  }
+
+  function render() {
+    const f = costWeight / 100;
+    data.forEach(d => { d._value = (1 - f) * d._resolvedNorm + f * d._costNorm; });
+
+    const sorted = [...data];
+    const dir = sortDir;
+    if (sortCol === 'rank' || sortCol === 'value') {
+      sorted.sort((a,b) => dir * (a._value - b._value));
+    } else if (sortCol === 'model') {
+      sorted.sort((a,b) => dir * a.model.localeCompare(b.model));
+    } else {
+      sorted.sort((a,b) => dir * (a[sortCol] - b[sortCol]));
+    }
+
+    tbody.innerHTML = sorted.map((d, i) => {
+      const rank = i + 1;
+      const rankCls = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
+      return `<tr>
+        <td><span class="rank-cell ${rankCls}">${rank}</span></td>
+        <td><div class="model-name">${d.model}</div></td>
+        <td><span style="color:${valueColor(d._resolvedNorm)};font-weight:700;font-family:var(--font-mono);">${d.resolved.toFixed(1)}%</span> <span style="color:var(--text-dim);font-size:11px;font-family:var(--font-mono);">±${d.sem.toFixed(2)}</span></td>
+        <td><span class="mono">${d.pass5.toFixed(1)}%</span></td>
+        <td><span class="mono">$${d.cost.toFixed(2)}</span></td>
+        <td><span class="mono">${fmtTokens(d.tokens)}</span></td>
+        <td><span class="mono">${d.cached.toFixed(1)}%</span></td>
+        <td><span style="color:${valueColor(d._value)};font-weight:700;font-family:var(--font-mono);">${d._value.toFixed(1)}</span></td>
+      </tr>`;
+    }).join('');
+
+    // Update sort arrows
+    document.querySelectorAll('#swe-rebench-table thead th').forEach(th => {
+      const col = th.dataset.col;
+      const arrow = th.querySelector('.sort-arrow');
+      if (!arrow) return;
+      if (col === sortCol || (col === 'rank' && sortCol === 'value')) {
+        arrow.textContent = dir < 0 ? '↓' : '↑';
+        th.classList.add('sorted');
+      } else {
+        arrow.textContent = '↕';
+        th.classList.remove('sorted');
+      }
+    });
+  }
+
+  // Header click handlers
+  document.querySelectorAll('#swe-rebench-table thead th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      // Default sort dir per column type
+      const ascCols = ['rank','model','cost','tokens'];
+      if (sortCol === col || (sortCol === 'value' && col === 'rank')) {
+        sortDir *= -1;
+      } else {
+        sortCol = col;
+        sortDir = ascCols.includes(col) ? 1 : -1;
+      }
+      render();
+    });
+  });
+
+  // Slider
+  const slider = document.getElementById('swe-rebench-slider');
+  const sliderVal = document.getElementById('swe-rebench-slider-val');
+  if (slider && sliderVal) {
+    slider.addEventListener('input', () => {
+      costWeight = parseInt(slider.value, 10);
+      sliderVal.textContent = costWeight + '%';
+      render();
+    });
+  }
+
+  render();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNav();
@@ -2624,6 +2828,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderHeroPodium();
     initTable();
     initCostSlider();
+    initSweRebench();
     initChartTabs();
     renderDimTable();
     renderGaps();
