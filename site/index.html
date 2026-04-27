@@ -706,12 +706,12 @@
       <div class="insight-card">
         <div class="insight-icon">🎯</div>
         <div class="insight-title">Pareto Finding</div>
-        <div class="insight-body">Only <strong>KAT ($73)</strong> and <strong>Gemini ($892)</strong> are Pareto-optimal on quality vs cost. Every model priced above $892 is dominated by Gemini on both dimensions.</div>
+        <div class="insight-body">v5.0 has a <strong>6-model frontier</strong>: Gemma3 ($0), Phi-4 ($4), ML3 ($39), Nova Pro ($201), Grok 3 ($312), Gemini ($892). Every model priced above $892 is dominated by Gemini on both quality and cost. KAT ($73) is no longer on the frontier — ML3 is cheaper <em>and</em> higher quality.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">💡</div>
         <div class="insight-title">Cost Penalty</div>
-        <div class="insight-body"><strong>Claude Opus 4.7</strong> drops 7 places from quality #3 to overall #10 due to its $4,811 eval cost. A 25% cost weight has a dramatic effect on expensive models.</div>
+        <div class="insight-body"><strong>Claude Opus 4.7</strong> drops 12 places from quality #3 to overall #15 due to its $4,811 eval cost. A 25% cost weight has a dramatic effect on expensive models.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">⚡</div>
@@ -721,7 +721,7 @@
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
         <div class="insight-title">v5.0 Expansion</div>
-        <div class="insight-body"><strong>8 new models</strong> added (Mistral Large 3, Gemma 3 27B, Phi-4, Nova Pro, Grok 3, Maverick, Scout, o3-mini). Cost range expands $73–$4,970 → $0–$4,970, compressing all existing cost scores. ML3/Gemma3/Phi-4 debut #3–#5 via cost arbitrage (12–16 ⊘ quality dims).</div>
+        <div class="insight-body"><strong>8 new models</strong> added (Mistral Large 3, Gemma 3 27B, Phi-4, Nova Pro, Grok 3, Maverick, Scout, o3-mini). Cost range expands $73–$4,970 → $0–$4,970, compressing all existing cost scores. ML3/Gemma3/Phi-4 debut #3–#5 via cost arbitrage (14–16 ⊘ dims each).</div>
       </div>
     </div>
   </div>
@@ -1007,7 +1007,7 @@ const MODELS = [
     dims:[84.2,50.0,50.0,50.0,50.0,88.9,50.0,44.4,50.0,50.0,50.0,50.0,50.0,5.9,50.0,50.0,50.0,50.0],
     isMissing:[0,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1],
     vRanks:{v50:3} },
-  { rank:4,  name:'Gemma 3 27B',       shortName:'Gemma3',    developer:'Google DeepMind', evalCost:0.00,    costTier:'Free',           overallScore:59.3, qualityScore:44.4, qualityRank:13, missingCount:14,
+  { rank:4,  name:'Gemma 3 27B',       shortName:'Gemma3',    developer:'Google DeepMind', evalCost:0.00,    costTier:'Free',           overallScore:59.3, qualityScore:44.4, qualityRank:13, missingCount:15,
     dims:[100.0,50.0,50.0,50.0,50.0,50.0,50.0,5.6,50.0,50.0,50.0,50.0,50.0,0.0,50.0,50.0,50.0,50.0],
     isMissing:[0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1],
     vRanks:{v50:4} },
@@ -1584,13 +1584,13 @@ function renderFrontier2() {
   const layout = {
     ...getPlotlyLayout(),
     title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of 25% cost weight', font:plotlyTitle(13)},
-    xaxis:{...getPlotlyLayout().xaxis, title:'Eval Cost ($)', type:'log', range:[Math.log10(50),Math.log10(7000)],
-      tickvals:[100,200,500,1000,2000,5000], ticktext:['$100','$200','$500','$1K','$2K','$5K']},
+    xaxis:{...getPlotlyLayout().xaxis, title:'Eval Cost ($)', type:'log', range:[Math.log10(3),Math.log10(7000)],
+      tickvals:[5,30,100,200,500,1000,2000,5000], ticktext:['$5','$30','$100','$200','$500','$1K','$2K','$5K']},
     yaxis:{...getPlotlyLayout().yaxis, title:'Score (0–100)', range:[15,80]},
     legend:{orientation:'h', y:-0.15},
     annotations:[
-      {x:Math.log10(73), y:49.7, xref:'x', yref:'y', text:'KAT +16.7 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},
-      {x:Math.log10(4811), y:56, xref:'x', yref:'y', text:'Opus 4.7 −24.2 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-60, ay:-20},
+      {x:Math.log10(73), y:45.6, xref:'x', yref:'y', text:'KAT +8.4 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},
+      {x:Math.log10(4811), y:56, xref:'x', yref:'y', text:'Opus 4.7 −24.4 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-60, ay:-20},
     ]
   };
   Plotly.newPlot('chart-frontier2', traces, layout, PLOTLY_CONFIG);

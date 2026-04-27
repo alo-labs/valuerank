@@ -44,7 +44,7 @@
 | 19 | Claude Sonnet 4.6 | 27.4 | #19 | Very Expensive ($3,959) | Anthropic |
 | 20 | Claude Opus 4.6 | 24.7 | #16 | Ultra-Premium ($4,970) | Anthropic |
 
-> **Bold** = v5.0 new entrant. Scores within 2–3 pts are effectively tied per SEAL CI. Ranks 3–5 (ML3/Gemma3/Phi-4, scores 59.7–59.2) are statistically tied — cost arbitrage entries with 12–16 ⊘ quality dims. Nova Pro (#8) has 17 of 18 dims ⊘ — cost-only placement. ~ notation on LCB for 5 new entrants (version ambiguity). See [scores.md §10](scores.md#10-ranking-changes-v40--v43--v50) for full version history.
+> **Bold** = v5.0 new entrant. Scores within 2–3 pts are effectively tied per SEAL CI. Ranks 3–5 (ML3/Gemma3/Phi-4, scores 59.7–59.2) are statistically tied — cost arbitrage entries with 14–16 ⊘ dims (ML3=14, Gemma3=15, Phi-4=16). Nova Pro (#8) has 17 of 18 dims ⊘ — cost-only placement. ~ notation on LCB for 5 new entrants (version ambiguity). See [scores.md §10](scores.md#10-ranking-changes-v40--v43--v50) for full version history.
 
 ---
 
@@ -52,7 +52,7 @@
 
 This report ranks 20 frontier AI models across 18 dimensions — 15 quality benchmarks plus cost efficiency, inference speed (tok/s), and task-level reliability — using rank-based normalization with a 25% cost weight. The framework is designed to reflect the total value equation for production software engineering teams: raw capability matters, but so does price, throughput, and reliability at scale.
 
-**v5.0 Headline Finding (20-model expansion — 8 new entrants):** Adding 8 models expands the cost range from $73–$4,970 to $0–$4,970, triggering a massive cost score compression for all existing models. Five ultra-cheap entrants (Gemma3 $0, Phi-4 $4, Scout $26, ML3 $39, Maverick $62) dominate cost ranks 1–5, pushing KAT-Coder-Pro-V2 from rank 1 (100.0) to rank 6 (73.7). The result: **cost arbitrage entries ML3/Gemma3/Phi-4 debut at ranks #3–#5** (scores 59.7–59.2, statistically tied) despite 12–16 ⊘ quality dims each — a direct consequence of the 25% cost weight and neutral-50 convention for missing data. **Existing models that score above neutral on quality gain from pool expansions:** GPT-5.4 gains +0.3 pts (LCB 0.0→22.2); Opus 4.7 gains +1.9 pts; Sonnet +2.3 pts; Opus 4.6 +4.2 pts (LCB 25.0→44.4). **Existing models near neutral on quality lose from cost compression alone:** GLM falls #5→#12 (−5.4 pts); KAT falls #3→#7 (−4.0 pts); Qwen falls #8→#17 (−4.8 pts).
+**v5.0 Headline Finding (20-model expansion — 8 new entrants):** Adding 8 models expands the cost range from $73–$4,970 to $0–$4,970, triggering a massive cost score compression for all existing models. Five ultra-cheap entrants (Gemma3 $0, Phi-4 $4, Scout $26, ML3 $39, Maverick $62) dominate cost ranks 1–5, pushing KAT-Coder-Pro-V2 from rank 1 (100.0) to rank 6 (73.7). The result: **cost arbitrage entries ML3/Gemma3/Phi-4 debut at ranks #3–#5** (scores 59.7–59.2, statistically tied) despite 14–16 ⊘ dims each (ML3=14, Gemma3=15, Phi-4=16) — a direct consequence of the 25% cost weight and neutral-50 convention for missing data. **Existing models that score above neutral on quality gain from pool expansions:** GPT-5.4 gains +0.3 pts (LCB 0.0→22.2); Opus 4.7 gains +1.9 pts; Sonnet +2.3 pts; Opus 4.6 +4.2 pts (LCB 25.0→44.4). **Existing models near neutral on quality lose from cost compression alone:** GLM falls #5→#12 (−5.4 pts); KAT falls #3→#7 (−4.0 pts); Qwen falls #8→#17 (−4.8 pts).
 
 **v4.3 corrections (carried forward):** Kimi K2.6 τ²-Bench corrected 72.4%→96.0% (primary source confirmed); GPT-5.5 LCB reverted to ⊘ (misattribution resolved). All ~ markers removed from v4.3 scores before v5.0 expansion.
 
@@ -60,7 +60,7 @@ This report ranks 20 frontier AI models across 18 dimensions — 15 quality benc
 1. 🥇 **Gemini 3.1 Pro** — 64.3 pts (#1 overall; quality #1; −6.3 from cost compression; #1 IFBench, τ², GPQA, Sci, Omni)
 2. 🥈 **GPT-5.5** — 63.7 pts (#2 overall; quality #2; −1.5 pts; #1 Terminal, SWE-V, OSWorld, BrowseComp)
 3. 🥉 **Mistral Large 3** — 59.7 pts (new; LCB rank 2/10 at 82.8%~; cost $39; 14 quality dims ⊘)
-4. **Gemma 3 27B** — 59.3 pts (new; $0.00 free tier; only GPQA confirmed at 0.0; 16 dims ⊘)
+4. **Gemma 3 27B** — 59.3 pts (new; $0.00 free tier; GPQA and Speed confirmed; 15 dims ⊘)
 5. **Phi-4** — 59.2 pts (new; $4.27; only Speed confirmed below neutral; 16 dims ⊘)
 6. **Kimi K2.6** — 54.3 pts (↓ from #4; −3.3 pts from cost compression; quality #5)
 7. **KAT-Coder-Pro-V2** — 54.0 pts (↓ from #3; −4.0 pts; #2 Terminal-Bench; cost rank 6/20)
