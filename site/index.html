@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- Anti-FOUC: apply saved theme synchronously before first paint. Default = light. -->
+  <script>(function(){var s=localStorage.getItem('vr-theme');if(s==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
   <style>
     /* ── DESIGN SYSTEM TOKENS — Midnight Indigo (light default, dark override) ── */
     :root {
@@ -1732,9 +1734,9 @@ function updatePlotlyTheme() {
 }
 
 function initTheme() {
-  // Default: dark (per design system default; respect saved preference)
+  // Default: light. Respect saved preference if set.
   const saved = localStorage.getItem('vr-theme');
-  const isDark = saved ? saved === 'dark' : false; // default light
+  const isDark = saved === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
 
   document.getElementById('theme-toggle').addEventListener('click', () => {
