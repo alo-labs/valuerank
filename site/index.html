@@ -2629,13 +2629,14 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGaps();
     renderVersionTable();
     renderHeatmap('chart-heatmap-data', 480);
-    initFaq();
   }
   // CA-only init (skip on LLM page)
   if (document.querySelector('.ca-section')) {
     initCaNav();
-    initCaValueSliders();
+    if (typeof initCaTableSort === 'function') initCaTableSort();
   }
+  // Shared: FAQ accordion (works on either page when .faq-q present)
+  initFaq();
   lucide.createIcons();
 });
 </script>
