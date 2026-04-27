@@ -220,76 +220,266 @@
     }
     .section-sub { color: var(--text-secondary); font-size: .875rem; line-height: 1.6; }
 
-    /* ── HERO ── */
+    /* ── HERO (v0.6.2 redesign) ── */
     #hero {
+      position: relative; overflow: hidden;
       background: var(--bg-hero);
-      padding: 88px 0 72px;
+      padding: 96px 0 56px;
     }
-    .hero-layout { display: grid; grid-template-columns: 1fr auto; column-gap: 48px; row-gap: 0; align-items: start; }
-    .hero-top { grid-column: 1 / -1; }
-    .hero-eyebrow {
-      font-family: var(--font-heading);
-      font-size: .75rem; font-weight: 700;
-      color: var(--accent-light); letter-spacing: .12em;
-      text-transform: uppercase; margin-bottom: 16px;
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(60% 50% at 85% 30%, var(--accent-glow) 0%, transparent 60%),
+        radial-gradient(40% 40% at 15% 90%, rgba(245,158,11,.06) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
     }
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 900; line-height: 1.05;
-      letter-spacing: -.04em;
-      color: var(--text-primary);
-      margin-bottom: 20px;
+    #hero > .container { position: relative; z-index: 1; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      column-gap: 64px; row-gap: 32px;
+      align-items: center;
     }
-    .hero-title span { color: var(--accent-light); }
-    .hero-desc {
-      color: var(--text-secondary);
-      font-size: 1rem; max-width: 560px; line-height: 1.7; margin-bottom: 36px;
-    }
-    .hero-stats { display: flex; gap: 36px; }
-    .hero-stat { text-align: center; }
-    .hero-stat-num {
-      font-family: var(--font-mono);
-      font-size: 1.75rem; font-weight: 700; color: var(--accent-light);
-    }
-    .hero-stat-label {
-      font-family: var(--font-heading);
-      font-size: .7rem; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: .1em; margin-top: 4px;
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; column-gap: 0; }
     }
 
-    /* Podium cards */
-    .hero-podium { display: flex; flex-direction: column; gap: 12px; min-width: 300px; }
-    .podium-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 14px 18px; display: flex; align-items: flex-start; gap: 14px;
-      transition: all .3s;
-    }
-    .podium-card:hover {
-      border-color: var(--border-hover);
-      box-shadow: var(--shadow-glow);
-      transform: translateY(-2px);
-    }
-    .podium-card.gold  { border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.05); }
-    .podium-card.silver{ border-color: rgba(148,163,184,.25); background: rgba(148,163,184,.04); }
-    .podium-card.bronze{ border-color: rgba(205,124,46,.3);  background: rgba(205,124,46,.05); }
-    .podium-medal { width: 22px; height: 22px; flex-shrink: 0; display: block; }
-    .podium-medal svg { width: 22px; height: 22px; }
-    .podium-card.gold   .podium-medal { color: var(--gold); }
-    .podium-card.silver .podium-medal { color: var(--silver); }
-    .podium-card.bronze .podium-medal { color: var(--bronze); }
-    .podium-info { flex: 1; min-width: 0; }
-    .podium-name {
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
       font-family: var(--font-heading);
-      font-weight: 600; font-size: .875rem;
+      font-size: .72rem; font-weight: 700;
+      color: var(--accent-light); letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      background: var(--accent-a08);
+      border: 1px solid var(--accent-a25);
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .hero-pulse {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-light);
+      box-shadow: 0 0 0 0 var(--accent-light);
+      animation: hero-pulse 2s ease-out infinite;
+    }
+    @keyframes hero-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(99,102,241,.6); }
+      70% { box-shadow: 0 0 0 8px rgba(99,102,241,0); }
+      100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+      font-weight: 900; line-height: 1.02;
+      letter-spacing: -.045em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    .hero-title em { font-style: normal; color: var(--text-secondary); font-weight: 700; }
+    .hero-title .hero-accent {
+      background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 60%, #f59e0b 100%);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem; max-width: 580px; line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .hero-desc strong { color: var(--text-primary); font-weight: 600; }
+
+    .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .hero-cta-primary, .hero-cta-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-heading);
+      font-size: .875rem; font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all .2s;
+      letter-spacing: -.005em;
+    }
+    .hero-cta-primary {
+      background: var(--accent); color: white;
+      border: 1px solid var(--accent);
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .hero-cta-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+      filter: brightness(1.08);
+    }
+    .hero-cta-primary svg { width: 16px; height: 16px; }
+    .hero-cta-secondary {
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    .hero-cta-secondary:hover {
+      border-color: var(--border-hover);
       color: var(--text-primary);
     }
-    .podium-score { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; }
-    .podium-card.gold   .podium-score { color: var(--gold); }
-    .podium-card.silver .podium-score { color: var(--silver); }
-    .podium-card.bronze .podium-score { color: var(--bronze); }
-    .podium-dev { font-size: .7rem; color: var(--text-dim); margin-top: 2px; }
+
+    /* Podium v2: featured #1 + 2 runners */
+    .hero-podium-v2 {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .hero-podium-label {
+      font-family: var(--font-heading);
+      font-size: .68rem; font-weight: 700;
+      color: var(--text-dim); letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-podium-label::before {
+      content: ''; width: 24px; height: 1px; background: var(--border-hover);
+    }
+    .hero-podium-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .podium-hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(245,158,11,.08) 0%, var(--bg-card) 60%);
+      border: 1px solid rgba(245,158,11,.35);
+      border-radius: 16px;
+      padding: 22px 24px;
+      transition: all .3s;
+      overflow: hidden;
+    }
+    .podium-hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, #f59e0b 50%, transparent 100%);
+    }
+    .podium-hero:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(245,158,11,.15);
+      border-color: rgba(245,158,11,.55);
+    }
+    .podium-hero-rank {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-heading);
+      font-size: .72rem; font-weight: 800;
+      color: var(--gold); letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .podium-hero-rank svg { width: 14px; height: 14px; }
+    .podium-hero-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; margin-bottom: 6px;
+    }
+    .podium-hero-name {
+      font-family: var(--font-heading);
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+    }
+    .podium-hero-score {
+      font-family: var(--font-mono);
+      font-size: 2.4rem; font-weight: 800;
+      color: var(--gold); line-height: 1;
+      letter-spacing: -.03em;
+    }
+    .podium-hero-meta {
+      font-size: .78rem; color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+    .podium-hero-bars { display: flex; flex-direction: column; gap: 6px; }
+    .podium-bar-row {
+      display: grid; grid-template-columns: 60px 1fr 40px;
+      align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: .7rem;
+    }
+    .podium-bar-label { color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; font-size: .62rem; }
+    .podium-bar-track {
+      height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+    }
+    .podium-bar-fill {
+      height: 100%; border-radius: 2px;
+      transition: width .8s cubic-bezier(.4,0,.2,1);
+    }
+    .podium-bar-fill.quality { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+    .podium-bar-fill.cost    { background: linear-gradient(90deg, #22c55e, #84cc16); }
+    .podium-bar-val { color: var(--text-secondary); text-align: right; font-weight: 600; }
+
+    .podium-runners {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .podium-runner {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: all .2s;
+      position: relative;
+    }
+    .podium-runner.silver { border-left: 3px solid var(--silver); }
+    .podium-runner.bronze { border-left: 3px solid var(--bronze); }
+    .podium-runner:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-1px);
+    }
+    .podium-runner-top {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 8px; margin-bottom: 4px;
+    }
+    .podium-runner-rank {
+      font-family: var(--font-heading);
+      font-size: .68rem; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .podium-runner.silver .podium-runner-rank { color: var(--silver); }
+    .podium-runner.bronze .podium-runner-rank { color: var(--bronze); }
+    .podium-runner-score {
+      font-family: var(--font-mono);
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .podium-runner-name {
+      font-family: var(--font-heading);
+      font-size: .9rem; font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -.01em;
+    }
+    .podium-runner-meta {
+      font-size: .7rem; color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* Hero stat-bar (bottom strip) */
+    .hero-statbar {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .hero-statbar { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    .hero-statbar-item {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .hero-statbar-num {
+      font-family: var(--font-mono);
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.02em;
+      line-height: 1;
+    }
+    .hero-statbar-label {
+      font-family: var(--font-heading);
+      font-size: .68rem; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: .1em;
+    }
 
     /* ── CARDS ── */
     .card {
@@ -824,36 +1014,63 @@
 <!-- HERO -->
 <section id="hero">
   <div class="container">
-    <div class="hero-layout">
-      <div class="hero-top">
-        <div class="hero-eyebrow">Production AI Ranking Framework</div>
-        <h1 class="hero-title">Which AI Model Delivers the Most <span>Value?</span></h1>
-      </div>
-      <div>
-        <p class="hero-desc">ValueRank ranks 23 frontier AI models across 18 dimensions using rank-based normalization with a 25% cost weight — designed for production software engineering teams where price, speed, and reliability matter alongside raw capability.</p>
-        <div class="hero-stats">
-          <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-label">Models</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">18</div><div class="hero-stat-label">Dimensions</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">25%</div><div class="hero-stat-label">Cost Weight</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">v0.6</div><div class="hero-stat-label">Version</div></div>
+    <div class="hero-grid">
+      <!-- LEFT: title + desc + CTA -->
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="hero-pulse"></span>
+          Production AI Ranking Framework · v0.6
+        </div>
+        <h1 class="hero-title">
+          Which AI Model<br>
+          Delivers <em>the Most</em><br>
+          <span class="hero-accent">Value?</span>
+        </h1>
+        <p class="hero-desc">
+          ValueRank ranks <strong>23 frontier AI models</strong> across <strong>18 dimensions</strong> using rank-based normalization with a 25% cost weight — built for production teams where price, speed, and reliability matter alongside raw capability.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#rankings" class="hero-cta-primary">
+            See Rankings <i data-lucide="arrow-down"></i>
+          </a>
+          <a href="#methodology" class="hero-cta-secondary">
+            How It Works
+          </a>
         </div>
       </div>
-      <div class="hero-podium">
-        <div class="podium-card gold">
-          <i data-lucide="medal" class="podium-medal"></i>
-          <div class="podium-info"><div class="podium-name">Gemini 3.1 Pro</div><div class="podium-dev">Google DeepMind · Premium ($892)</div></div>
-          <div class="podium-score">70.6</div>
+
+      <!-- RIGHT: featured #1 + 2 runners -->
+      <div class="hero-podium-v2">
+        <div class="hero-podium-label">Current Top 3 · 23-Model Pool</div>
+        <div class="podium-hero" id="podium-hero-1"></div>
+        <div class="podium-runners">
+          <div class="podium-runner silver" id="podium-runner-2"></div>
+          <div class="podium-runner bronze" id="podium-runner-3"></div>
         </div>
-        <div class="podium-card silver">
-          <i data-lucide="medal" class="podium-medal"></i>
-          <div class="podium-info"><div class="podium-name">GPT-5.5</div><div class="podium-dev">OpenAI · Very Expensive ($3,357)</div></div>
-          <div class="podium-score">65.2</div>
-        </div>
-        <div class="podium-card bronze">
-          <i data-lucide="medal" class="podium-medal"></i>
-          <div class="podium-info"><div class="podium-name">KAT-Coder-Pro-V2</div><div class="podium-dev">Kay · Budget ($73)</div></div>
-          <div class="podium-score">58.0</div>
-        </div>
+      </div>
+    </div>
+
+    <!-- Bottom stat strip -->
+    <div class="hero-statbar">
+      <div class="hero-statbar-item">
+        <span class="hero-statbar-num">23</span>
+        <span class="hero-statbar-label">Models Ranked</span>
+      </div>
+      <div class="hero-statbar-item">
+        <span class="hero-statbar-num">18</span>
+        <span class="hero-statbar-label">Quality Dimensions</span>
+      </div>
+      <div class="hero-statbar-item">
+        <span class="hero-statbar-num">25%</span>
+        <span class="hero-statbar-label">Cost Weight</span>
+      </div>
+      <div class="hero-statbar-item">
+        <span class="hero-statbar-num">$0–$5K</span>
+        <span class="hero-statbar-label">Eval Cost Range</span>
+      </div>
+      <div class="hero-statbar-item">
+        <span class="hero-statbar-num">Apr 28</span>
+        <span class="hero-statbar-label">Last Updated</span>
       </div>
     </div>
   </div>
@@ -1860,6 +2077,56 @@ const MODELS = [
 ];
 
 // ─────────────────────────────────────────────
+// HERO PODIUM (auto-populates from MODELS rank 1-3)
+// ─────────────────────────────────────────────
+function renderHeroPodium() {
+  const top3 = [...MODELS].sort((a,b) => a.rank - b.rank).slice(0, 3);
+  const [m1, m2, m3] = top3;
+  if (!m1 || !m2 || !m3) return;
+
+  // Featured #1 with quality + cost bars
+  const el1 = document.getElementById('podium-hero-1');
+  if (el1) {
+    const qualNorm = Math.round(m1.qualityScore);
+    const costScore = Math.round(m1.dims[0]);
+    el1.innerHTML = `
+      <div class="podium-hero-rank"><i data-lucide="trophy"></i> Rank 1 · Overall</div>
+      <div class="podium-hero-row">
+        <div class="podium-hero-name">${m1.name}</div>
+        <div class="podium-hero-score">${m1.overallScore.toFixed(1)}</div>
+      </div>
+      <div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · $${m1.evalCost.toLocaleString(undefined,{maximumFractionDigits:0})} eval</div>
+      <div class="podium-hero-bars">
+        <div class="podium-bar-row">
+          <span class="podium-bar-label">Quality</span>
+          <div class="podium-bar-track"><div class="podium-bar-fill quality" style="width:${qualNorm}%"></div></div>
+          <span class="podium-bar-val">${m1.qualityScore.toFixed(1)}</span>
+        </div>
+        <div class="podium-bar-row">
+          <span class="podium-bar-label">Cost</span>
+          <div class="podium-bar-track"><div class="podium-bar-fill cost" style="width:${costScore}%"></div></div>
+          <span class="podium-bar-val">${m1.dims[0].toFixed(1)}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  // Runners #2 + #3
+  [['podium-runner-2', m2, '#2'], ['podium-runner-3', m3, '#3']].forEach(([id, m, lbl]) => {
+    const el = document.getElementById(id);
+    if (!el || !m) return;
+    el.innerHTML = `
+      <div class="podium-runner-top">
+        <span class="podium-runner-rank">${lbl}</span>
+        <span class="podium-runner-score">${m.overallScore.toFixed(1)}</span>
+      </div>
+      <div class="podium-runner-name">${m.name}</div>
+      <div class="podium-runner-meta">${m.developer} · $${m.evalCost.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
+    `;
+  });
+}
+
+// ─────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────
 function computeNewScore(model, costWeightPct) {
@@ -2615,6 +2882,7 @@ function initCaNav() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNav();
+  renderHeroPodium();
   initTable();
   initCostSlider();
   initChartTabs();
