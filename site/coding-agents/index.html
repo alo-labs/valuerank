@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ValueRank — Frontier LLM Models Ranked on Real-World Value</title>
+  <title>Coding Agent ValueRank — Terminal-Bench 2.0 + SWE-bench Verified Rankings</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -1219,18 +1219,17 @@
     </a>
   </div>
   <div class="mode-switcher">
-    <a class="mode-btn active" href="/">LLM Models</a>
-    <a class="mode-btn" href="/coding-agents/">Coding Agents</a>
+    <a class="mode-btn" href="/">LLM Models</a>
+    <a class="mode-btn active" href="/coding-agents/">Coding Agents</a>
   </div>
-  <div class="nav-links">
-    <a href="#rankings" class="active">Rankings</a>
-    <a href="#charts">Charts</a>
-    <a href="#methodology">Methodology</a>
-    <a href="#data">Data</a>
-    <a href="#faq">FAQ</a>
+  <div class="ca-nav-links" style="display:flex;">
+    <a href="#ca-tb20">TB2.0</a>
+    <a href="#ca-swev">SWE-V</a>
+    <a href="#ca-insights">Insights</a>
+    <a href="#ca-benchmarks">Benchmarks</a>
   </div>
   <div class="nav-right">
-    <div class="nav-meta">April 27, 2026 · 23 models · 18 dimensions</div>
+    <div class="nav-meta">April 27, 2026 · 24 entries · 2 active benchmarks</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
       <i data-lucide="sun" class="icon-sun"></i>
       <i data-lucide="moon" class="icon-moon"></i>
@@ -1242,358 +1241,686 @@
 
 
 
-<!-- HERO -->
-<section id="hero">
+<!-- CA HERO -->
+<section class="ca-hero">
   <div class="container">
-    <div class="hero-grid">
+    <div class="ca-hero-grid">
       <!-- LEFT: title + desc + CTA -->
-      <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="hero-pulse"></span>
-          Production AI Ranking Framework · v0.6
+      <div class="ca-hero-content">
+        <div class="ca-hero-eyebrow">
+          <span class="ca-hero-pulse"></span>
+          Coding Agent ValueRank · v0.1.0
         </div>
-        <h1 class="hero-title">
-          Which AI Model<br>
-          Delivers <em>the Most</em><br>
-          <span class="hero-accent">Value?</span>
+        <h1 class="ca-hero-title">
+          Which Coding Agent<br>
+          Delivers <em>Real</em><br>
+          <span class="ca-hero-accent">Results?</span>
         </h1>
-        <p class="hero-desc">
-          ValueRank ranks <strong>23 frontier AI models</strong> across <strong>18 dimensions</strong> using rank-based normalization with a 25% cost weight — built for production teams where price, speed, and reliability matter alongside raw capability.
+        <p class="ca-hero-sub">
+          Two separate ranked lists — <strong>Terminal-Bench 2.0</strong> and <strong>SWE-bench Verified</strong> — because the data doesn't support a composite. The two benchmarks test entirely different capabilities and attract entirely different agent populations.
         </p>
-        <div class="hero-cta-row">
-          <a href="#rankings" class="hero-cta-primary">
+        <div class="ca-hero-cta-row">
+          <a href="#ca-tb20" class="ca-hero-cta-primary">
             See Rankings <i data-lucide="arrow-down"></i>
           </a>
-          <a href="#methodology" class="hero-cta-secondary">
-            How It Works
+          <a href="#ca-benchmarks" class="ca-hero-cta-secondary">
+            Benchmark Landscape
           </a>
         </div>
       </div>
 
-      <!-- RIGHT: featured #1 + 2 runners -->
-      <div class="hero-podium-v2">
-        <div class="hero-podium-label">Current Top 3 · 23-Model Pool</div>
-        <div class="podium-hero" id="podium-hero-1"></div>
-        <div class="podium-runners">
-          <div class="podium-runner silver" id="podium-runner-2"></div>
-          <div class="podium-runner bronze" id="podium-runner-3"></div>
+      <!-- RIGHT: dual leader featured cards -->
+      <div class="ca-leaders">
+        <div class="ca-leaders-label">Current Leaders · 22 Agent Entries</div>
+        <div class="ca-leader-card tb">
+          <div class="ca-leader-head">
+            <span class="ca-leader-bench"><i data-lucide="terminal"></i>Terminal-Bench 2.0</span>
+            <span class="ca-leader-rank-pill">Rank 1 · 11 Entries</span>
+          </div>
+          <div class="ca-leader-row">
+            <div class="ca-leader-name">Codex + GPT-5.5</div>
+            <div class="ca-leader-score">82.0%</div>
+          </div>
+          <div class="ca-leader-meta">OpenAI · 89 tasks · Docker · CLI-First Autonomy</div>
+          <div class="ca-leader-bar-track"><div class="ca-leader-bar-fill" style="width:82%"></div></div>
+        </div>
+        <div class="ca-leader-card swev">
+          <div class="ca-leader-head">
+            <span class="ca-leader-bench"><i data-lucide="git-pull-request"></i>SWE-bench Verified</span>
+            <span class="ca-leader-rank-pill">Rank 1 · 13 Entries</span>
+          </div>
+          <div class="ca-leader-row">
+            <div class="ca-leader-name">Augment Code + Claude Opus 4.6</div>
+            <div class="ca-leader-score">72.0%</div>
+          </div>
+          <div class="ca-leader-meta">Augment · 500 tasks · Python repos · Patch-and-Test</div>
+          <div class="ca-leader-bar-track"><div class="ca-leader-bar-fill" style="width:72%"></div></div>
         </div>
       </div>
     </div>
 
     <!-- Bottom stat strip -->
-    <div class="hero-statbar">
-      <div class="hero-statbar-item">
-        <span class="hero-statbar-num">23</span>
-        <span class="hero-statbar-label">Models Ranked</span>
+    <div class="ca-statbar">
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">22</span>
+        <span class="ca-statbar-label">Agent Entries</span>
       </div>
-      <div class="hero-statbar-item">
-        <span class="hero-statbar-num">18</span>
-        <span class="hero-statbar-label">Quality Dimensions</span>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">2</span>
+        <span class="ca-statbar-label">Active Benchmarks</span>
       </div>
-      <div class="hero-statbar-item">
-        <span class="hero-statbar-num">25%</span>
-        <span class="hero-statbar-label">Cost Weight</span>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">89 / 500</span>
+        <span class="ca-statbar-label">TB2.0 / SWE-V Tasks</span>
       </div>
-      <div class="hero-statbar-item">
-        <span class="hero-statbar-num">$0–$5K</span>
-        <span class="hero-statbar-label">Eval Cost Range</span>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">~10 pp</span>
+        <span class="ca-statbar-label">Scaffold Premium</span>
       </div>
-      <div class="hero-statbar-item">
-        <span class="hero-statbar-num">Apr 28</span>
-        <span class="hero-statbar-label">Last Updated</span>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">Apr 28</span>
+        <span class="ca-statbar-label">Last Updated</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RANKINGS -->
-<section id="rankings">
+<!-- CA: TB2.0 RANKING -->
+<section class="ca-section" id="ca-tb20">
   <div class="container">
     <div class="section-header">
-      <div class="section-title">Rankings</div>
-      <div class="section-sub">Drag the cost weight slider to see how rankings shift. Click any column header to sort.</div>
+      <div class="section-label" style="color:#3b82f6;">Terminal-Bench 2.0</div>
+      <div class="section-title">TB2.0 Ranking — 11 Entries</div>
+      <div class="section-sub">Terminal-native agents · CLI/Docker environments · Multi-step system tasks · tbench.ai</div>
     </div>
-    <div class="table-controls">
-      <div class="filter-group" id="tier-filters">
-        <button class="filter-btn active" data-tier="all">All</button>
-        <button class="filter-btn" data-tier="Budget">Budget</button>
-        <button class="filter-btn" data-tier="Near-Budget">Near-Budget</button>
-        <button class="filter-btn" data-tier="Mid-Range">Mid-Range</button>
-        <button class="filter-btn" data-tier="Premium">Premium</button>
-        <button class="filter-btn" data-tier="Expensive">Expensive+</button>
+    <div class="card ca-table-wrap">
+      <div class="ca-controls">
+        <div class="ca-controls-label">Re-rank by composite:</div>
+        <div class="slider-wrap">
+          <span class="slider-label">Cost weight</span>
+          <input type="range" class="ca-cost-slider" data-table="ca-tb20" min="0" max="50" value="0" step="5">
+          <span class="slider-val ca-cost-slider-val">0%</span>
+        </div>
+        <div class="ca-controls-hint">At 0%, table reflects raw TB2.0 score. Higher cost weight rewards cheaper agents.</div>
       </div>
-      <div class="slider-wrap">
-        <span class="slider-label">Cost weight</span>
-        <input type="range" id="cost-slider" min="0" max="50" value="25" step="1">
-        <span class="slider-val" id="slider-val">25%</span>
-      </div>
-    </div>
-    <div class="card table-wrap">
-      <table id="ranking-table">
+      <table class="ca-table">
         <thead>
           <tr>
-            <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
-            <th data-col="name">Model</th>
-            <th data-col="score" class="sorted">Score <span class="sort-arrow">↓</span></th>
-            <th data-col="qualityScore">Quality Score</th>
-            <th data-col="qualityRank">Quality Rank</th>
-            <th data-col="evalCost">Eval Cost ($)</th>
-            <th data-col="costTier">Cost Tier</th>
-            <th data-col="missingCount">⊘ Gaps</th>
+            <th style="width:52px;">Rank</th>
+            <th>Agent + Model</th>
+            <th>Developer</th>
+            <th>TB2.0 Score</th>
+            <th>Cost ($/run)</th>
+            <th>Value</th>
           </tr>
         </thead>
-        <tbody id="ranking-tbody"></tbody>
+        <tbody>
+          <tr>
+            <td><span class="ca-rank r1"><i data-lucide="trophy"></i>1</span></td>
+            <td><div class="ca-agent-name">Codex + GPT-5.5</div></td>
+            <td><div class="ca-agent-dev">OpenAI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">82.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:82%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,357</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">24.4</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
+            <td><div class="ca-agent-name">ForgeCode + GPT-5.4</div></td>
+            <td><div class="ca-agent-dev">Antinomy</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">81.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:81.8%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$2,851</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">28.7</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r3"><i data-lucide="award"></i>3</span></td>
+            <td><div class="ca-agent-name">TongAgents + Gemini 3.1 Pro</div></td>
+            <td><div class="ca-agent-dev">ByteDance SE Lab</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">80.2%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:80.2%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$237</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">338</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">4</span></td>
+            <td><div class="ca-agent-name">ForgeCode + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Antinomy</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">79.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:79.8%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$236</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">338</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">5–6</span></td>
+            <td><div class="ca-agent-name">SageAgent + GPT-5.3-Codex</div></td>
+            <td><div class="ca-agent-dev">Unknown</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">78.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:78.4%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$93</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">843</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">5–6</span></td>
+            <td><div class="ca-agent-name">ForgeCode + Gemini 3.1 Pro</div></td>
+            <td><div class="ca-agent-dev">Antinomy</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">78.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:78.4%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$237</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">331</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">7</span></td>
+            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;display:inline-flex;align-items:center;gap:4px;"><i data-lucide="sparkle" style="width:11px;height:11px;"></i>Only Dual-Benchmark Entry</div></td>
+            <td><div class="ca-agent-dev">Factory AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">77.3%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:77.3%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$93</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">831</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">8</span></td>
+            <td><div class="ca-agent-name">Junie CLI + Multiple</div></td>
+            <td><div class="ca-agent-dev">JetBrains</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">71.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:71%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">9</span></td>
+            <td><div class="ca-agent-name">Factory Droid + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Factory AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">69.9%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:69.9%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$236</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">296</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">10</span></td>
+            <td><div class="ca-agent-name">Claude Code + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Anthropic</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">58.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:58%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$236</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">246</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">11</span></td>
+            <td><div class="ca-agent-name">OpenHands v2 + Claude Opus 4.5</div></td>
+            <td><div class="ca-agent-dev">All Hands AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">51.9%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:51.9%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$4,470</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">11.6</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+          </tr>
+        </tbody>
       </table>
-    </div>
-    <div style="margin-top:12px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
-      <span class="seal-note">Scores within ±2.5 pts are statistically tied (SEAL CI band)</span>
-      <span class="seal-note">⊘ = missing data, assigned neutral score of 50.0</span>
-      <span class="seal-note" id="cost-note">Cost weight: 25% (default)</span>
-    </div>
-
-    <div class="insight-grid" style="margin-top:32px;">
-      <div class="insight-card">
-        <div class="insight-icon">🎯</div>
-        <div class="insight-title">Pareto Finding</div>
-        <div class="insight-body">v0.6 has a <strong>6-model frontier</strong>: Gemma 4 31B ($0), Phi-4 ($4), ML3 ($39), MiMo ($462), Kimi K2.6 ($948), Gemini ($892). Every model priced above $892 is dominated by Gemini on both quality and cost. The Gemma 3→Gemma 4 swap added real benchmarks for the free tier; MiMo enters the frontier as Xiaomi's debut at quality #6.</div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-icon">💡</div>
-        <div class="insight-title">Cost Penalty</div>
-        <div class="insight-body"><strong>Claude Opus 4.7</strong> drops 15 places from quality #3 to overall #18 due to its $4,811 eval cost. A 25% cost weight has a dramatic effect on expensive models — the gap widens as the n=23 cost pool further compresses ultra-premium scores.</div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-icon">⚡</div>
-        <div class="insight-title">Sweet Spot</div>
-        <div class="insight-body"><strong>Gemini 3.1 Pro</strong> is both quality #1 and cost-competitive at $892 — cheaper than GPT-5.5 ($3,357), Opus 4.7 ($4,811), and GPT-5.4 ($2,851), while beating all on quality.</div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-icon">🔬</div>
-        <div class="insight-title">v0.6 Refresh</div>
-        <div class="insight-body"><strong>4 model swaps</strong> (Gemma 3→4 31B, Nova Pro→Premier, Grok 3→4.20, o3-mini→o4-mini) and <strong>3 additions</strong> (MiMo-V2.5-Pro, Qwen 3.6 Max, Gemma 4 27B MoE). Pool grows 20→23. MiMo debuts at #5; o4-mini #10; Grok 4.20 #14. Opus 4.7 slides quality #3 → overall #18 (cost penalty +3).</div>
+      <div class="ca-note">
+        <strong>Note:</strong> Ranks 1–7 have overlapping ±confidence intervals and are statistically indistinguishable at 1σ. Scores reflect tbench.ai's April 19, 2026 post-correction values (reward-hacking trials zeroed for affected agents). &nbsp;
+        <strong>Cost ($/run):</strong> Estimated USD to run one full 89-task TB2.0 evaluation (445 trials × per-trial median cost). Plain values are <strong>measured</strong> from per-trial token disclosures aggregated across same-model sibling submissions in the harborframework HF dataset (5 sibling subs for Opus 4.6 across 1,604 trials; 3 for GPT-5.3-Codex across 729 trials; Terminus-KIRA for Gemini 3.1 Pro across 445 trials). <em>≈</em> = AA Eval Cost proxy fallback for entries where no sibling submission populated tokens (Codex+GPT-5.5, Forge+GPT-5.4, OpenHands v2+Opus 4.5). — = multi-model or proprietary attribution unresolved. &nbsp;
+        <strong>Value:</strong> score points per $1K of run cost. Tiers (recalibrated for measured cost ranges): <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥200 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥80 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥25 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥12 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;12.
       </div>
     </div>
   </div>
 </section>
 
-<!-- CHARTS -->
-<section id="charts" style="padding-top:32px;">
+<!-- CA: SWE-V RANKING -->
+<section class="ca-section ca-section-alt" id="ca-swev">
   <div class="container">
     <div class="section-header">
-      <div class="section-title">Visualizations</div>
-      <div class="section-sub">Seven complementary charts exploring quality, cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
+      <div class="section-label" style="color:#8b5cf6;">SWE-bench Verified</div>
+      <div class="section-title">SWE-V Ranking — 13 Entries</div>
+      <div class="section-sub">Code-repair agents · GitHub issue resolution · Python repositories · swebench.com/verified.html</div>
     </div>
-    <div class="chart-tabs">
-      <button class="chart-tab active" data-chart="pareto">Pareto Frontier</button>
-      <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
-      <button class="chart-tab" data-chart="displacement">Rank Displacement</button>
-      <button class="chart-tab" data-chart="heatmap">Dimension Heatmap</button>
-      <button class="chart-tab" data-chart="bubble">Speed × Quality</button>
-      <button class="chart-tab" data-chart="bump">Version History</button>
-      <button class="chart-tab" data-chart="frontier2">Cost Impact</button>
-    </div>
-
-    <div class="card">
-      <!-- Pareto -->
-      <div class="chart-panel active" id="panel-pareto">
-        <div class="chart-desc"><strong>Pareto Frontier:</strong> Which models are undominated on quality vs. eval cost? A model is Pareto-optimal if no other model beats it on <em>both</em> quality and cost simultaneously. The green step function shows the best achievable quality at each budget level.</div>
-        <div id="chart-pareto" class="plotly-chart" style="height:520px;"></div>
-      </div>
-      <!-- Decomposition -->
-      <div class="chart-panel" id="panel-decomp">
-        <div class="chart-desc"><strong>Score Decomposition:</strong> How does each model earn its ValueRank score? Five macro-categories: <strong>Cost</strong> (25%), <strong>Reliability/IF</strong> (18%), <strong>Code/Agentic</strong> (25%), <strong>Production</strong> (24%), <strong>Intelligence</strong> (8%). Bar length = weighted contribution.</div>
-        <div id="chart-decomp" class="plotly-chart" style="height:520px;"></div>
-      </div>
-      <!-- Displacement -->
-      <div class="chart-panel" id="panel-displacement">
-        <div class="chart-desc"><strong>Rank Displacement:</strong> How many places does a 25% cost weight move each model from its quality-only rank? <span style="color:#22c55e">Green (right)</span> = cost bonus (overall rank better than quality rank). <span style="color:#ef4444">Red (left)</span> = cost penalty (expensive models fall).</div>
-        <div id="chart-displacement" class="plotly-chart" style="height:480px;"></div>
-      </div>
-      <!-- Heatmap -->
-      <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 23 models × 18 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
-        <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
-      </div>
-      <!-- Bubble -->
-      <div class="chart-panel" id="panel-bubble">
-        <div class="chart-desc"><strong>Speed × Quality × Cost:</strong> Which models are fast AND high-quality AND cheap? Bubble size = eval cost (larger = more expensive). Color = cost tier. Hover for exact values. The top-left "Production Sweet Spot" quadrant is where you want to be.</div>
-        <div id="chart-bubble" class="plotly-chart" style="height:520px;"></div>
-      </div>
-      <!-- Bump -->
-      <div class="chart-panel" id="panel-bump">
-        <div class="chart-desc"><strong>Version History:</strong> How rankings have shifted across ValueRank versions as new data was collected and corrections applied. Crossing lines = rank changes. Notable: Kimi's dramatic journey from #2 → #6 → #4 → #6 across versions; MiMo debut at #5 in v0.6.</div>
-        <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
-      </div>
-      <!-- Two-frontier / Cost Impact -->
-      <div class="chart-panel" id="panel-frontier2">
-        <div class="chart-desc"><strong>Cost Impact:</strong> Each model shown twice — circle = quality-only score (ignoring cost), diamond = overall score (with 25% cost weight). Lines connect the same model. <span style="color:#22c55e">Lines going up</span> = cost helps. <span style="color:#ef4444">Lines going down</span> = cost hurts. X-axis = eval cost.</div>
-        <div id="chart-frontier2" class="plotly-chart" style="height:520px;"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- METHODOLOGY -->
-<section id="methodology">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-title">Methodology</div>
-      <div class="section-sub">How scores are calculated, why cost gets 25%, and what ⊘ means.</div>
-    </div>
-    <div class="method-grid">
-      <div>
-        <div class="card mb-4">
-          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
-          <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
-          <p class="method-text">For each of 18 dimensions, models with real data are ranked 1–n (best to worst). The formula maps rank 1 → 100 pts, rank n → 0 pts, with linear interpolation in between. Tied ranks receive the average of their tied positions. <strong>Missing data (⊘)</strong> receives a neutral 50.0 — neither penalizing nor rewarding models for absent benchmarks.</p>
-          <hr class="divider" style="margin:16px 0;">
-          <p class="method-text">The final ValueRank score is a weighted sum across all 18 dimensions. <strong>Cost weight: 25%.</strong> This reflects production-scale reality: at 1M tokens/day, the cheapest model ($73 eval cost) saves ~$4,900/run vs. the most expensive ($4,970) — a difference that exceeds the annual salary of an engineer at some organizations.</p>
+    <div class="card ca-table-wrap">
+      <div class="ca-controls">
+        <div class="ca-controls-label">Re-rank by composite:</div>
+        <div class="slider-wrap">
+          <span class="slider-label">Cost weight</span>
+          <input type="range" class="ca-cost-slider" data-table="ca-swev" min="0" max="50" value="0" step="5">
+          <span class="slider-val ca-cost-slider-val">0%</span>
         </div>
-        <div class="card">
-          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
-          <div class="method-text" style="display:flex;flex-direction:column;gap:10px;">
-            <div><strong>Rank-based (not raw-score-based):</strong> Prevents any single benchmark from dominating due to scale differences. AIME 100% and Arena ELO 1500 are not comparable on raw values; ranks are.</div>
-            <div><strong>Missing data → neutral-50:</strong> Models are not penalized for benchmarks that don't exist yet. A ⊘ cell contributes exactly the median score, preserving the direction of the ranking without fabricating data.</div>
-            <div><strong>SEAL CI band (±2–3 pts):</strong> Due to benchmark variance and missing-data uncertainty, scores within 2–3 pts should be treated as statistically tied. Rankings within this band are effectively co-ranked.</div>
-            <div><strong>Quality sub-score:</strong> The 75% non-cost portion, computed as the weighted sum of all 17 non-cost dimensions. Represents pure capability ranking without cost penalty.</div>
+        <div class="ca-controls-hint">At 0%, table reflects raw SWE-V score. Higher cost weight rewards cheaper agents.</div>
+      </div>
+      <table class="ca-table">
+        <thead>
+          <tr>
+            <th style="width:52px;">Rank</th>
+            <th>Agent + Model</th>
+            <th>Developer</th>
+            <th>SWE-V Score</th>
+            <th>Cost ($/run)</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ca-rank r1"><i data-lucide="trophy"></i>1</span></td>
+            <td><div class="ca-agent-name">Augment Code + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">Augment</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">72.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:72%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$560</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">129</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
+            <td><div class="ca-agent-name">OpenHands v3 + Claude Opus 4.6</div></td>
+            <td><div class="ca-agent-dev">All Hands AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">68.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:68.4%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$560</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">122</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank r3"><i data-lucide="award"></i>3</span></td>
+            <td><div class="ca-agent-name">Amazon Q Developer + Proprietary</div></td>
+            <td><div class="ca-agent-dev">Amazon</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">66.0%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:66%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">4</span></td>
+            <td><div class="ca-agent-name">Cursor Background Agent + Sonnet 4.6</div></td>
+            <td><div class="ca-agent-dev">Anysphere</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">65.7%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:65.7%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,959</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">16.6</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">5</span></td>
+            <td><div class="ca-agent-name">Composio SWE-Kit + Sonnet 4.6</div></td>
+            <td><div class="ca-agent-dev">Composio</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#22c55e;">62.3%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:62.3%;background:#22c55e;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,959</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">15.7</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">6</span></td>
+            <td><div class="ca-agent-name">Cline + Claude Sonnet 4.6</div></td>
+            <td><div class="ca-agent-dev">Community (open-source)</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">59.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:59.8%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,959</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">15.1</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">7</span></td>
+            <td><div class="ca-agent-name">Factory Droid + GPT-5.3-Codex</div><div class="ca-agent-dev" style="color:#8b5cf6;font-size:10px;display:inline-flex;align-items:center;gap:4px;"><i data-lucide="sparkle" style="width:11px;height:11px;"></i>Only Dual-Benchmark Entry</div></td>
+            <td><div class="ca-agent-dev">Factory AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#3b82f6;">58.1%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:58.1%;background:#3b82f6;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$1,995</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">29.1</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">8</span></td>
+            <td><div class="ca-agent-name">Devin 2.0 + Proprietary</div></td>
+            <td><div class="ca-agent-dev">Cognition AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">45.8%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:45.8%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">9</span></td>
+            <td><div class="ca-agent-name">OpenHands v2 + Claude Opus 4.5</div></td>
+            <td><div class="ca-agent-dev">All Hands AI</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">44.7%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:44.7%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$4,470</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">10.0</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">10</span></td>
+            <td><div class="ca-agent-name">SWE-agent v1 + Claude Sonnet 4.5</div></td>
+            <td><div class="ca-agent-dev">Princeton</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#f59e0b;">43.2%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:43.2%;background:#f59e0b;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">12.1</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">11</span></td>
+            <td><div class="ca-agent-name">AutoCodeRover v2 + GPT-5.2</div></td>
+            <td><div class="ca-agent-dev">NUS</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#ef4444;">38.6%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:38.6%;background:#ef4444;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$310</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">125</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">12</span></td>
+            <td><div class="ca-agent-name">Agentless v2 + Claude Sonnet 4.5</div></td>
+            <td><div class="ca-agent-dev">Academic</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#ef4444;">34.2%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:34.2%;background:#ef4444;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">9.6</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="ca-rank">13</span></td>
+            <td><div class="ca-agent-name">Aider + Claude Sonnet 4.5</div></td>
+            <td><div class="ca-agent-dev">Community (open-source)</div></td>
+            <td>
+              <div class="ca-score-bar-wrap">
+                <span class="ca-score-val" style="color:#ef4444;">31.4%</span>
+                <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:31.4%;background:#ef4444;"></div></div>
+              </div>
+            </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#8b5cf6;">8.8</span><span class="ca-value-tier" style="color:#8b5cf6;">Premium</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="ca-note">
+        <strong>Sources:</strong> Devin and Aider scores sourced directly from cognition.ai and swebench.com/verified.html (primary). All other scores aggregated from awesomeagents.ai (third-party, April 19 2026 snapshot). &nbsp;
+        <strong>Cost ($/run):</strong> Estimated USD to run one full 500-task SWE-bench Verified evaluation (500 problems × per-problem cost). Plain values are <strong>measured</strong> from <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">swe-rebench.com</a> per-model leaderboard (Opus 4.6 = $1.12/problem, GPT-5.2 = $0.62/problem). <em>≈</em> = AA Eval Cost proxy fallback for entries without measured per-problem data. — = proprietary pricing model unresolved (Amazon Q monthly subscription, Devin ACU). &nbsp;
+        <strong>Value:</strong> score points per $1K of run cost. Tiers (recalibrated): <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥200 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥80 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥25 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥12 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;12. &nbsp;
+        <strong>Contamination notice:</strong> SWE-V scores above ~65% may be partially inflated by training data leakage (same models score ~11 pp lower on SWE-bench Pro).
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CA: PARETO FRONTIER + INSIGHTS -->
+<section class="ca-section" id="ca-insights">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title">Cross-Benchmark Pareto Frontier</div>
+      <div class="section-sub">The most honest cross-benchmark statement the data supports. Three entries are not dominated by any other on both dimensions simultaneously.</div>
+    </div>
+    <div class="ca-pareto-grid">
+      <div class="ca-pareto-card">
+        <div class="ca-pareto-label" style="display:inline-flex;align-items:center;gap:5px;"><i data-lucide="check-circle-2" style="width:11px;height:11px;"></i>Pareto Frontier · TB2.0 Leader</div>
+        <div class="ca-pareto-agent">Codex + GPT-5.5</div>
+        <div class="ca-pareto-sub">OpenAI</div>
+        <div class="ca-pareto-scores">
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">TB2.0</div>
+            <div class="ca-pareto-val" style="color:#22c55e;">82.0%</div>
+          </div>
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">SWE-V</div>
+            <div class="ca-pareto-val" style="color:var(--text-dim);">—</div>
           </div>
         </div>
       </div>
-      <div class="card">
-        <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (18 Total)</h3>
-        <table class="dim-table">
-          <thead><tr><th>Dimension</th><th>Weight</th><th>Category</th></tr></thead>
-          <tbody id="dim-table-body"></tbody>
-        </table>
+      <div class="ca-pareto-card">
+        <div class="ca-pareto-label" style="display:inline-flex;align-items:center;gap:5px;"><i data-lucide="check-circle-2" style="width:11px;height:11px;"></i>Pareto Frontier · SWE-V Leader</div>
+        <div class="ca-pareto-agent">Augment Code + Claude Opus 4.6</div>
+        <div class="ca-pareto-sub">Augment</div>
+        <div class="ca-pareto-scores">
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">TB2.0</div>
+            <div class="ca-pareto-val" style="color:var(--text-dim);">—</div>
+          </div>
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">SWE-V</div>
+            <div class="ca-pareto-val" style="color:#22c55e;">72.0%~</div>
+          </div>
+        </div>
+      </div>
+      <div class="ca-pareto-card">
+        <div class="ca-pareto-label" style="display:inline-flex;align-items:center;gap:5px;"><i data-lucide="check-circle-2" style="width:11px;height:11px;"></i>Frontier · Only Dual-Benchmark Entry</div>
+        <div class="ca-pareto-agent">Factory Droid + GPT-5.3-Codex</div>
+        <div class="ca-pareto-sub">Factory AI</div>
+        <div class="ca-pareto-scores">
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">TB2.0</div>
+            <div class="ca-pareto-val" style="color:#3b82f6;">77.3%</div>
+          </div>
+          <div class="ca-pareto-score-item">
+            <div class="ca-pareto-dim">SWE-V</div>
+            <div class="ca-pareto-val" style="color:#3b82f6;">58.1%~</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;padding:16px 20px;">
+      <div class="ca-note" style="margin-top:0;">
+        <strong>Selection rule:</strong> TB2.0-type work → Codex + GPT-5.5. &nbsp; SWE-V-type work → Augment Code + Opus 4.6. &nbsp; Both → Factory Droid + GPT-5.3-Codex (monitor for primary-source SWE-V confirmation).
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:64px;">
+      <div class="section-title">Strategic Insights</div>
+      <div class="section-sub">Four empirical findings that determine how to interpret and use these rankings.</div>
+    </div>
+    <div class="ca-insights-grid">
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon"><i data-lucide="layers"></i></div>
+        <div class="ca-insight-title">Scaffold Engineering Premium</div>
+        <span class="ca-insight-num" style="color:#22c55e;">~10 pp</span>
+        <div class="ca-insight-body">Same model, different scaffold = 10 percentage-point gap at the frontier. ForgeCode + Gemini 3.1 Pro scores 78.4% on TB2.0 while Google's own direct Gemini submission scores ~68.5% — same weights, different scaffold. Choosing the best model is not enough.</div>
+      </div>
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon"><i data-lucide="unlock"></i></div>
+        <div class="ca-insight-title">Open-Source Near-Parity on SWE-V</div>
+        <span class="ca-insight-num" style="color:#3b82f6;">3.6 pp</span>
+        <div class="ca-insight-body">OpenHands v3 achieves 68.4% vs. Augment Code's 72.0% on the same Claude Opus 4.6 base model. The 3.6 pp gap is the cost of Augment's proprietary BM25 + code-graph retrieval scaffold. For teams preferring BYOK economics, OpenHands is the rational choice.</div>
+      </div>
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon"><i data-lucide="mountain"></i></div>
+        <div class="ca-insight-title">Long-Horizon Capability Cliff</div>
+        <span class="ca-insight-num" style="color:#ef4444;">74% → 11%</span>
+        <div class="ca-insight-body">FeatureBench (ICLR 2026): agents scoring 68–74% on SWE-V collapse to 5–13% on multi-file feature development tasks. The cliff is consistent across all tested agents. Current benchmark scores predict contained task performance only — not "implement this 3-week feature across 15 files."</div>
+      </div>
+      <div class="ca-insight-card">
+        <div class="ca-insight-icon"><i data-lucide="trending-down"></i></div>
+        <div class="ca-insight-title">Devin 2.0 Brand vs. Benchmark Gap</div>
+        <span class="ca-insight-num" style="color:#f59e0b;">Rank 8</span>
+        <div class="ca-insight-body">Despite Cognition AI's high profile and reported valuation, Devin 2.0 sits at SWE-V rank 8 at 45.8% — 22.6 pp below OpenHands v3 (68.4%) and below three open-source systems. Differentiation is product experience and team workflow tooling, not benchmark performance.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DATA -->
-<section id="data">
+<!-- CA: BENCHMARK LANDSCAPE -->
+<section class="ca-section ca-section-alt" id="ca-benchmarks">
   <div class="container">
     <div class="section-header">
-      <div class="section-title">Raw Data & Coverage</div>
-      <div class="section-sub">Full normalized score matrix and data gaps by model.</div>
+      <div class="section-title">Benchmark Landscape</div>
+      <div class="section-sub">Every evaluated benchmark and why it is or isn't producing a ranked list. 15 benchmarks assessed across 5 classifications.</div>
     </div>
-
-    <div class="card mb-6">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (23 × 18)</h3>
-      <div class="heatmap-legend">
-        <span>0 (worst)</span>
-        <div class="hl-bar"></div>
-        <span>100 (best)</span>
-        <span style="margin-left:12px;">Grey cell with ⊘ = missing data (neutral 50)</span>
+    <div class="ca-bm-grid">
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-active"><i data-lucide="check-circle-2"></i>Active</div>
+        <div class="ca-bm-name">Terminal-Bench 2.0</div>
+        <div class="ca-bm-detail">11 cohort entries · 89 tasks · Docker · tbench.ai · Anti-gaming ATIF trajectories</div>
       </div>
-      <div id="chart-heatmap-data" style="height:480px;"></div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-active"><i data-lucide="check-circle-2"></i>Active</div>
+        <div class="ca-bm-name">SWE-bench Verified</div>
+        <div class="ca-bm-detail">13 cohort entries · 500 tasks · Python repos · swebench.com · Contamination notice above ~65%</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-pending"><i data-lucide="clock"></i>Pending — Need ≥4 Entries</div>
+        <div class="ca-bm-name">SWE-bench Pro</div>
+        <div class="ca-bm-detail">2 entries · 1,865 tasks · Multi-language · labs.scale.com · High contamination resistance — strongest anti-contamination signal</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-pending"><i data-lucide="clock"></i>Pending — Need ≥4 Entries</div>
+        <div class="ca-bm-name">SWE-bench Multilingual</div>
+        <div class="ca-bm-detail">0 entries · 300 tasks · 9 languages · swebench.com · Cross-lingual generalization signal</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-pending"><i data-lucide="clock"></i>Pending — Need ≥4 Entries</div>
+        <div class="ca-bm-name">Multi-SWE-bench</div>
+        <div class="ca-bm-detail">0 entries · 1,632 tasks · Java/TS/Go/Rust/C/C++ · Enterprise language coverage</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — No Live Leaderboard</div>
+        <div class="ca-bm-name">FeatureBench</div>
+        <div class="ca-bm-detail">1 exact cohort match · ICLR 2026 · Long-horizon multi-file feature dev · Key finding: 74% → 11% cliff</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — No Live Leaderboard</div>
+        <div class="ca-bm-name">DevOps-Gym</div>
+        <div class="ca-bm-detail">0 exact matches · ICLR 2026 · Java/Go DevOps · End-to-end pipeline: 0% all agents</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — No Live Leaderboard</div>
+        <div class="ca-bm-name">SWE-EVO</div>
+        <div class="ca-bm-detail">0 exact matches · 48 long-horizon software evolution tasks · GLM-4p7 leads despite not appearing in TB2.0/SWE-V top tiers</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — Access Restricted</div>
+        <div class="ca-bm-name">MLE-bench</div>
+        <div class="ca-bm-detail">Submissions frozen as of April 2026 · Kaggle ML competitions · ML engineering signal · Pending v2</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-watch"><i data-lucide="eye"></i>Watch — METR Internal</div>
+        <div class="ca-bm-name">RE-Bench / HCAST</div>
+        <div class="ca-bm-detail">No open portal · Predominantly ML research tasks · &lt;25% SWE tasks (HCAST) · No named agent scaffolds</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-excluded"><i data-lucide="x-circle"></i>Excluded — Model-Level</div>
+        <div class="ca-bm-name">SWE-rebench</div>
+        <div class="ca-bm-detail">Standardized 128K ReAct scaffold for all — tests models, not agent scaffolds</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-excluded"><i data-lucide="x-circle"></i>Excluded — Model-Level</div>
+        <div class="ca-bm-name">Aider Polyglot</div>
+        <div class="ca-bm-detail">Aider is the fixed scaffold — tests which model Aider should use, not which agent is best</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-excluded"><i data-lucide="x-circle"></i>Excluded — Model-Level</div>
+        <div class="ca-bm-name">BigCodeBench / LiveCodeBench</div>
+        <div class="ca-bm-detail">Pure model-level function completion / competitive programming — no agent scaffolding component</div>
+      </div>
+      <div class="ca-bm-card">
+        <div class="ca-bm-status s-ref" style="color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;"><i data-lucide="bar-chart-3"></i>Reference Only</div>
+        <div class="ca-bm-name">PR Arena</div>
+        <div class="ca-bm-detail">Real-world GitHub PR merge rates · No task-difficulty control · Copilot: 1.3M PRs 95.9% merge · Codex: 4.2M PRs 87.2%</div>
+      </div>
     </div>
-
-    <div class="card mb-6">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Data Gaps by Model</h3>
-      <div class="gaps-grid" id="gaps-grid"></div>
-    </div>
-
-    <div class="card">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Version History — Rank Changes</h3>
-      <div style="overflow-x:auto;">
-        <table class="version-table" id="version-table"></table>
+    <div class="card" style="margin-top:20px;padding:16px 20px;">
+      <div class="ca-note" style="margin-top:0;">
+        <strong>Activation threshold:</strong> ≥4 exact (agent, model) cohort pairs required. Exact match policy: paper-only benchmarks must match the specific agent scaffold + model version in the current cohort — no approximations.
+        Full benchmark landscape with research provenance: <code>coding-agents-valuerank/benchmarks.md</code>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">FAQ</div>
-      <div class="section-title">Frequently Asked Questions</div>
-      <div class="section-sub">Common questions about how ValueRank works, what the scores mean, and how to interpret results.</div>
-    </div>
-    <div class="faq-list">
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          What does the overall score actually represent?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          Each model's score is a weighted average of 18 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n</strong> is the number of models with real data in that dimension. A score of <strong>100</strong> = top of pool; <strong>50</strong> = neutral (assigned to missing ⊘ data); <strong>0</strong> = bottom of pool. Final scores are the weighted sum across all 18 dimensions.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Why does cost get 25% of the weight?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          ValueRank is designed for <strong>production software engineering teams</strong>, not academic benchmarking. At scale, a 10× cost difference between similarly capable models is a real operational constraint — not a footnote. The 25% cost weight reflects that price is a first-class factor in the value equation. You can drag the cost weight slider in the Rankings section to 0% to see a pure quality ranking if budget is no constraint.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          What does ⊘ mean?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          ⊘ indicates a genuine data gap — the benchmark hasn't been published for that model. Missing cells are treated as <strong>neutral-50</strong> (neither penalized nor rewarded), which prevents unfairly docking models for benchmarks they haven't participated in. See the Gaps tab in the Data section for all current ⊘ cells per model.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          What's the difference between Score and Quality Score?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          The <strong>overall Score</strong> includes all 18 dimensions with cost at 25% and speed at 5%. The <strong>Quality Score</strong> is recalculated using only the 16 non-cost, non-speed dimensions (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> — independent of price or throughput. The Rankings table shows both; the Quality Rank column lets you sort by quality alone.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Why is Claude ranked so low despite being a capable model?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          Cost. All three Claude models in the dataset carry the two highest eval costs ($3,959–$4,970 per AA benchmark run). With cost at 25% weight, even a strong quality rank — Claude Opus 4.7 is quality <strong>#3</strong> — can't fully overcome that penalty in the overall score. Drag the cost weight slider to 0% to see Claude Opus 4.7 rise to its pure-quality position.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          What is the Pareto frontier?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v0.6 has a <strong>6-model frontier</strong>: <strong>Gemma 4 31B Dense</strong> ($0), <strong>Phi-4</strong> ($4), <strong>Mistral Large 3</strong> ($39), <strong>MiMo-V2.5-Pro</strong> ($462), <strong>Kimi K2.6</strong> ($948), and <strong>Gemini 3.1 Pro</strong> (quality #1 at $892). Every other model is dominated by at least one frontier model on both quality and cost.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Are scores comparable across ValueRank versions?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. Prior-version → v0.6 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          How often is ValueRank updated?
-          <i data-lucide="chevron-down" class="faq-chevron"></i>
-        </button>
-        <div class="faq-a">
-          Quarterly, or whenever a major model launch would materially affect the rankings. v0.6 (April 27, 2026) refreshed 4 outdated models (Gemma 3→4 31B, Nova Pro→Premier, Grok 3→4.20, o3-mini→o4-mini) and added 3 (MiMo-V2.5-Pro, Qwen 3.6 Max Preview, Gemma 4 27B MoE), expanding the pool to 23. The next scheduled update is <strong>May 2026</strong> or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1604,11 +1931,10 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v0.6 · April 27, 2026 · 23 models × 18 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>Coding Agent ValueRank v0.1.0 · April 27, 2026 · TB2.0 + SWE-bench Verified · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
-        <a href="#methodology">Methodology</a>
-        <a href="#data">Data</a>
-        <a href="/coding-agents/">Coding Agents</a>
+        <a href="/">LLM Rankings</a>
+        <a href="#ca-insights">Insights</a>
         <a href="https://github.com/alo-labs/valuerank" target="_blank">GitHub</a>
       </div>
     </div>
