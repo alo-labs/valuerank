@@ -1287,7 +1287,7 @@ function renderPareto() {
     yaxis:{...getPlotlyLayout().yaxis, title:'Quality Sub-Score (0–100)', range:[20,80]},
     annotations:[
       {x:Math.log10(38.67), y:49.4, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:-20},
-      {x:Math.log10(892), y:73.8, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:16},
+      {x:Math.log10(892), y:73.8, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:-52, yshift:0},
       {x:Math.log10(3500), y:58, xref:'x', yref:'y',
         text:'Gemini ($892) dominates<br>all more-expensive models<br>on both quality AND cost',
         font:{color:'#94a3b8',size:10}, showarrow:false,
@@ -1324,8 +1324,8 @@ function renderDecomposition() {
     barmode:'stack',
     xaxis:{...getPlotlyLayout().xaxis, title:'Score Contribution (pts)', range:[0,80]},
     yaxis:{...getPlotlyLayout().yaxis, title:''},
-    legend:{orientation:'h', y:1.08, x:0, font:{size:11}},
-    margin:{...getPlotlyLayout().margin, l:90}
+    legend:{orientation:'h', y:-0.16, x:0, xanchor:'left', font:{size:11}},
+    margin:{...getPlotlyLayout().margin, l:90, b:90}
   };
   Plotly.newPlot('chart-decomp', traces, layout, PLOTLY_CONFIG);
 }
@@ -1362,11 +1362,11 @@ function renderDisplacement() {
     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Places gained (▶) or lost (◀) due to cost weight', zeroline:true, zerolinecolor:plotlyDim(), zerolinewidth:2, range:[-9,7]},
     yaxis:{...getPlotlyLayout().yaxis, title:''},
-    margin:{...getPlotlyLayout().margin, l:90},
+    margin:{...getPlotlyLayout().margin, l:90, b:80},
     shapes:[{type:'line', x0:0, x1:0, y0:-0.5, y1:sorted.length-0.5, line:{color:plotlyDim(),width:2,dash:'dot'}}],
     annotations:[
       {x:4, y:sorted.length-1, xref:'x', yref:'y', text:'← Cost bonus (rose)', font:{color:'#22c55e',size:10}, showarrow:false},
-      {x:-4, y:0, xref:'x', yref:'y', text:'Cost penalty (fell) →', font:{color:'#ef4444',size:10}, showarrow:false},
+      {xref:'paper', x:0.28, yref:'paper', y:-0.09, text:'◀ Cost penalty (fell)', font:{color:'#ef4444',size:10}, showarrow:false},
     ]
   };
   Plotly.newPlot('chart-displacement', traces, layout, PLOTLY_CONFIG);
@@ -1419,15 +1419,15 @@ function renderHeatmap(elementId, height) {
   }));
 
   const catLabels = [
-    {x:0, text:'Cost 25%', color:'#22c55e'},
-    {x:1, text:'Reliability 18%', color:'#a78bfa'},
-    {x:3.5, text:'Code/Agentic 25%', color:'#3b82f6'},
-    {x:9, text:'Production 24%', color:'#f97316'},
-    {x:15.5, text:'Intelligence 8%', color:'#eab308'},
+    {x:0,    text:'Cost 25%',        color:'#22c55e', y:-0.05},
+    {x:1,    text:'Reliability 18%', color:'#a78bfa', y:-0.12},
+    {x:3.5,  text:'Code/Agentic 25%',color:'#3b82f6', y:-0.08},
+    {x:9,    text:'Production 24%',  color:'#f97316', y:-0.08},
+    {x:15.5, text:'Intelligence 8%', color:'#eab308', y:-0.08},
   ];
 
   const catAnnotations = catLabels.map(c => ({
-    x: c.x, y: -0.08, xref:'x', yref:'paper',
+    x: c.x, y: c.y, xref:'x', yref:'paper',
     text:`<b>${c.text}</b>`, font:{color:c.color,size:10}, showarrow:false,
   }));
 
@@ -1452,10 +1452,10 @@ function renderHeatmap(elementId, height) {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Normalized Score Matrix (12 Models × 18 Dimensions)', font:plotlyTitle(14)},
+    title:{text:'Normalized Score Matrix (20 Models × 18 Dimensions)', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, side:'top', tickangle:-30, tickfont:{size:10}},
     yaxis:{...getPlotlyLayout().yaxis, autorange:'reversed', tickfont:{size:11}},
-    margin:{t:100, r:80, b:80, l:90},
+    margin:{t:100, r:80, b:100, l:90},
     shapes, annotations
   };
   Plotly.newPlot(elementId, [trace], layout, PLOTLY_CONFIG);
@@ -1466,12 +1466,14 @@ function renderHeatmap(elementId, height) {
 // ─────────────────────────────────────────────
 function renderBubble() {
   const maxCost = Math.max(...MODELS.map(m => m.evalCost));
+  // Per-model label offsets to avoid nearby-point collisions
+  const bubbleTextPos = {GLM:'bottom center', Maverick:'bottom center'};
   const traces = MODELS.map(m => ({
     x:[m.dims[7]], y:[m.qualityScore],
     mode:'markers+text',
     name:m.shortName,
     text:[m.shortName],
-    textposition:'top center',
+    textposition: bubbleTextPos[m.shortName] || 'top center',
     textfont:{size:10, color:'#94a3b8'},
     marker:{
       size: 10 + (m.evalCost / maxCost) * 30,
@@ -1537,7 +1539,7 @@ function renderBump() {
       tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14','#15','#16','#17','#18','#19','#20']},
     margin:{...getPlotlyLayout().margin, r:90},
     annotations:[
-      {x:'v5.0', y:3, xref:'x', yref:'y', text:'v5.0: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:50, ay:0}
+      {x:'v5.0', y:3, xref:'x', yref:'y', text:'v5.0: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:120, ay:0}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -1577,7 +1579,11 @@ function renderFrontier2() {
     mode:'markers+text',
     name:'Overall Score (with 25% cost)',
     text: MODELS.map(m => m.shortName),
-    textposition: MODELS.map(m => m.evalCost > 3000 ? 'top center' : 'top right'),
+    textposition: MODELS.map(m => {
+      if (m.shortName === 'MiniMax') return 'bottom right';
+      if (m.shortName === 'Nova Pro') return 'top left';
+      return m.evalCost > 3000 ? 'top center' : 'top right';
+    }),
     textfont:{size:10, color:'#94a3b8'},
     marker:{ size:10, color: MODELS.map(m => DEV_COLORS[m.developer]||'#64748b'), symbol:'diamond', line:{color:'rgba(255,255,255,0.5)',width:1.5} },
     hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<extra></extra>`),
@@ -1592,7 +1598,7 @@ function renderFrontier2() {
     legend:{orientation:'h', y:-0.15},
     annotations:[
       {x:Math.log10(73), y:45.6, xref:'x', yref:'y', text:'KAT +8.4 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},
-      {x:Math.log10(4811), y:56, xref:'x', yref:'y', text:'Opus 4.7 −24.4 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-60, ay:-20},
+      {x:Math.log10(4811), y:56, xref:'x', yref:'y', text:'Opus 4.7 −24.4 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:0, ay:70},
     ]
   };
   Plotly.newPlot('chart-frontier2', traces, layout, PLOTLY_CONFIG);
