@@ -1240,6 +1240,7 @@
     <a href="#ca-swev">SWE-V</a>
     <a href="#ca-insights">Insights</a>
     <a href="#ca-benchmarks">Benchmarks</a>
+    <a href="#ca-faq">FAQ</a>
   </div>
   <div class="nav-right">
     <div class="nav-meta">April 27, 2026 · 24 entries · 2 active benchmarks</div>
@@ -1938,6 +1939,129 @@
   </div>
 </section>
 
+<!-- CA: FAQ -->
+<section class="ca-section" id="ca-faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <div class="section-title">Cost Methodology &amp; Data Provenance</div>
+      <div class="section-sub">How the run-cost figures are sourced, how reliable they are, and what to do when the data is missing or proxied.</div>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How reliable is the cost data shown in the Cost ($/run) column?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          Reliability varies by row, and the table makes the distinction explicit. <strong>Plain dollar values</strong> like <code>$237</code>, <code>$93</code>, or <code>$560</code> are <strong>measured</strong> from primary leaderboard archives — high confidence, treat as accurate at <strong>±20%</strong> at the model level. <strong>Italic <code>≈$X,XXX</code> values</strong> (e.g. <code>≈$3,357</code>) are <strong>AA Eval Cost proxies</strong> — they correctly reflect the underlying model's pricing tier but are based on Artificial Analysis's standardized eval suite (HLE, GPQA, MMLU, AIME, etc.), not actual TB2.0 or SWE-bench Verified workloads. AA proxy values are typically <strong>5–20× higher</strong> in absolute dollars than what the agent would actually consume on these benchmarks — they preserve <em>relative ordering</em> but not absolute cost. <strong><code>—</code></strong> means no recoverable cost (multi-model, proprietary subscription, or compute-unit pricing). Coverage today: <strong>10 of 24 entries measured</strong>, 11 AA proxy, 3 missing.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Where does the measured cost data come from?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          Two primary sources, by benchmark:
+          <br><br>
+          <strong>Terminal-Bench 2.0</strong> — <code>huggingface.co/datasets/harborframework/terminal-bench-2-leaderboard</code>, the <strong>official submission archive for tbench.ai</strong>. We git-cloned the 8.1 GB dataset and parsed all 16,800+ per-trial <code>result.json</code> files across 37 submissions. Each submission's schema includes <code>agent_result.n_input_tokens</code>, <code>n_output_tokens</code>, <code>n_cache_tokens</code>, and <code>cost_usd</code> fields. Of 37 submissions, <strong>13 populated these fields</strong>; the remaining 24 (including all four of our tracked vendor scaffolds — Forge*, Droid*, Junie_CLI, OpenSage) left them <code>null</code>. We aggregate the <strong>per-trial median cost across same-model sibling submissions</strong>, then multiply by 445 trials (89 tasks × 5 trials). Example: Claude Opus 4.6 has 5 sibling submissions (1,604 measured trials) with a median <code>$0.530/trial</code> → <code>$236/run</code>.
+          <br><br>
+          <strong>SWE-bench Verified</strong> — <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">swe-rebench.com</a>, the <strong>only public SWE-bench-style leaderboard that publishes a Tokens/Problem and Cost/Problem column</strong> (Nebius's reliability-extended SWE-bench, 57-problem rolling window). We use the per-model figure as the cross-bench baseline and multiply by 500 SWE-V tasks. Example: Opus 4.6 = <code>$1.12/problem</code> × 500 = <code>$560/run</code>; gpt-5.2-medium = <code>$0.62/problem</code> × 500 = <code>$310/run</code>.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Why don't the official tbench.ai and swebench.com leaderboards show token costs themselves?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          They <em>could</em> — and the harborframework submission spec actually has the structured fields ready (<code>n_input_tokens</code>, <code>cost_usd</code>, etc.) — but <strong>token reporting is treated as optional, not mandatory</strong>. Of the 37 TB2.0 submissions, only 13 populate them. swebench.com/verified.html doesn't render a token column at all in its public UI. The benchmark community has so far prioritized score reproducibility over cost reproducibility. ValueRank treats this gap as the central problem to solve: we <strong>aggregate across the submitters who do disclose</strong>, transfer the model-level baseline to siblings that don't, and explicitly mark every value with its provenance (<code>$</code> = measured / <code>≈$</code> = AA proxy / <code>—</code> = unrecoverable). When tbench.ai / swebench.com mandate cost columns in future submissions, ValueRank's coverage will improve mechanically without methodology change.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What does the <code>≈</code> prefix on a cost value mean exactly?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          <strong>≈ = AA Eval Cost proxy.</strong> When we can't recover a measured per-run cost for a specific agent + model pair, we fall back to the underlying model's <a href="https://artificialanalysis.ai" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">Artificial Analysis</a> Eval Cost as a stand-in. AA Eval Cost is the dollar cost to run AA's standard intelligence-evaluation suite (HLE, GPQA Diamond, AIME, BrowseComp, etc.) — workloads that are structurally <strong>much lighter</strong> than agentic SWE-V or TB2.0 work (no 500-iteration trajectories, no codebase context replay, no terminal-output scrollback). The proxy preserves <strong>model-tier ordering</strong> reliably (cheap models stay cheap relative to expensive ones) but is <strong>not absolute</strong>. In practice, AA proxy values run 5–20× higher than the actual benchmark run cost would be. We use them as fallback, not first-class data — and the <code>≈</code> prefix is your visual cue to apply that discount in your head.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Why do some entries show <code>—</code> instead of a cost?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          Three structural cases produce <code>—</code>:
+          <br><br>
+          <strong>1. Multi-model entries.</strong> <strong>Junie CLI</strong> uses four different underlying models within the same submission (Gemini 3 Flash + Gemini 3.1 Pro + Claude Opus 4.6 + GPT-5.3-Codex). Without per-call routing data, we can't attribute a single per-trial cost.
+          <br><br>
+          <strong>2. Subscription pricing.</strong> <strong>Amazon Q Developer</strong> charges $19/month flat regardless of task count. There's no per-task token decomposition published.
+          <br><br>
+          <strong>3. Compute-unit pricing.</strong> <strong>Devin 2.0</strong> bills in Cognition AI's Agent Compute Units (1 ACU ≈ 15 minutes of active work, ~$8–9/hour). Translating ACU spend to token cost requires assumptions about API utilization that no public source supplies.
+          <br><br>
+          When sorted, <code>—</code> rows always sink to the bottom regardless of direction.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How is the Value column calculated, and what do the tier labels mean?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          <strong>Value = score points per $1,000 of run cost.</strong> So a 79.8% agent at $236/run scores <code>79.8 ÷ 0.236 = 338</code> score-points-per-$K. Tier thresholds (recalibrated for the v0.7 measured-cost range):
+          <br><br>
+          <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥ 200 — typical of cheap measured rows (Gemini 3.1 Pro, GPT-5.3-Codex pairings) <br>
+          <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥ 80 — typical of measured Opus 4.6 SWE-V pairings <br>
+          <span style="color:#84cc16;font-weight:700;">Good</span> ≥ 25 — cheaper-tier AA proxy rows <br>
+          <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥ 12 — mid-tier AA proxy rows <br>
+          <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt; 12 — top-of-line AA proxy rows
+          <br><br>
+          Because the methodology is dual-source, a row's tier reflects both its raw efficiency <em>and</em> which provenance bucket its cost came from. Two rows with the same true score-per-dollar can land in different tiers if one is measured and the other is AA-proxied. The provenance is always visible (plain $ vs. ≈$), so you can mentally normalize when comparing across buckets.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How does the cost-weight slider interact with column sorting?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          The slider and column sort are <strong>mutually exclusive</strong>. At slider = 0% the table reflects raw benchmark score (default). Moving the slider toward 50% blends a normalized cost metric into the ranking via <code>composite = (1 − w) × score + w × costNorm</code>, where <code>costNorm</code> linearly maps the cheapest cost in the table to 100 and the most expensive to 0. <strong>Clicking any column header</strong> resets the slider to 0% and applies your column sort. <strong>Moving the slider</strong> clears the column-sort arrow and re-ranks by composite. The active control is always identifiable: if a header has a colored <code>↑</code> or <code>↓</code> arrow, column sort is active; if all arrows are gray <code>↕</code>, the slider is in charge.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Why two separate tables instead of a single combined Coding Agents ranking?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          <strong>TB2.0 and SWE-bench Verified test fundamentally different capabilities and attract entirely different agent populations.</strong> TB2.0 is multi-step terminal/CLI workflows in Docker environments — system administration, data processing, ML pipeline, security tasks. SWE-V is GitHub issue resolution on Python repositories — code-repair agents fixing real bugs in mature codebases. Only <strong>one entry</strong> (Factory Droid + GPT-5.3-Codex) appears in both leaderboards' top tier. Forcing them into a single composite would average across structurally incomparable workloads and produce a misleading "general coding agent" ranking that doesn't predict performance on either real-world task type. We keep them visually parallel but mathematically separate, and surface the cross-benchmark Pareto frontier as the most honest combined view the data supports.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How often is the data updated, and when will more rows become measured?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          Scores reflect the leaderboards as of <strong>April 19, 2026</strong> (post tbench.ai's reward-hacking integrity correction). Cost data was extracted on <strong>April 28, 2026</strong> from the harborframework HF dataset and swe-rebench's then-current 57-task window. We re-pull on each ValueRank version bump (current: v0.6 LLM / v0.1.0 CA). New entries become <strong>measured</strong> when (a) their underlying model joins the swe-rebench window, (b) a sibling agent submitting on harborframework populates token fields for that model, or (c) the agent vendor publishes per-task token disclosures in a blog or technical report. We monitor monthly and upgrade rows mechanically — no methodology change required.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 </main>
 
@@ -3048,7 +3172,7 @@ function initCaTableSort() {
 
 // CA nav active-link highlighting on scroll
 function initCaNav() {
-  const caSections = ['ca-tb20','ca-swev','ca-insights','ca-benchmarks'];
+  const caSections = ['ca-tb20','ca-swev','ca-insights','ca-benchmarks','ca-faq'];
   const caLinks = document.querySelectorAll('.ca-nav-links a');
   const observer = new IntersectionObserver(entries => {
     if (currentMode !== 'ca') return;
@@ -3076,13 +3200,14 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGaps();
     renderVersionTable();
     renderHeatmap('chart-heatmap-data', 480);
-    initFaq();
   }
   // CA-only init (skip on LLM page)
   if (document.querySelector('.ca-section')) {
     initCaNav();
     initCaTableSort();
   }
+  // Shared: FAQ accordion (works on either page when .faq-q present)
+  initFaq();
   lucide.createIcons();
 });
 </script>
