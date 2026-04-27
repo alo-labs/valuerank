@@ -377,17 +377,28 @@
     .delta-same { color: var(--text-dim); }
     .missing-dots { font-size: .7rem; color: var(--text-dim); font-family: var(--font-mono); }
 
-    /* Cost tier badge colors */
-    .tier-Free          { background: rgba(6,182,212,.12);  color: #67e8f9; border: 1px solid rgba(6,182,212,.25); }
-    .tier-Ultra-Budget  { background: rgba(34,197,94,.12);  color: #86efac; border: 1px solid rgba(34,197,94,.3); }
-    .tier-Budget        { background: rgba(52,211,153,.12); color: #6ee7b7; border: 1px solid rgba(52,211,153,.25); }
-    .tier-Near-Budget   { background: rgba(132,204,22,.1);  color: #bef264; border: 1px solid rgba(132,204,22,.25); }
-    .tier-Value         { background: rgba(163,230,53,.1);  color: #d9f99d; border: 1px solid rgba(163,230,53,.25); }
-    .tier-Mid-Range     { background: rgba(251,191,36,.1);  color: #fcd34d; border: 1px solid rgba(251,191,36,.25); }
-    .tier-Premium       { background: rgba(251,146,60,.1);  color: #fdba74; border: 1px solid rgba(251,146,60,.25); }
-    .tier-Expensive     { background: rgba(248,113,113,.1); color: #fca5a5; border: 1px solid rgba(248,113,113,.25); }
-    .tier-Very-Expensive{ background: rgba(220,38,38,.1);   color: #fca5a5; border: 1px solid rgba(220,38,38,.2); }
-    .tier-Ultra-Premium { background: rgba(153,27,27,.15);  color: #fca5a5; border: 1px solid rgba(153,27,27,.35); }
+    /* Cost tier badge colors — light theme (saturated text for white backgrounds) */
+    .tier-Free          { background: rgba(6,182,212,.10);  color: #0891b2; border: 1px solid rgba(6,182,212,.40); }
+    .tier-Ultra-Budget  { background: rgba(34,197,94,.10);  color: #16a34a; border: 1px solid rgba(34,197,94,.40); }
+    .tier-Budget        { background: rgba(52,211,153,.10); color: #059669; border: 1px solid rgba(52,211,153,.40); }
+    .tier-Near-Budget   { background: rgba(132,204,22,.10); color: #4d7c0f; border: 1px solid rgba(132,204,22,.45); }
+    .tier-Value         { background: rgba(163,230,53,.10); color: #65a30d; border: 1px solid rgba(163,230,53,.45); }
+    .tier-Mid-Range     { background: rgba(251,191,36,.12); color: #b45309; border: 1px solid rgba(251,191,36,.50); }
+    .tier-Premium       { background: rgba(251,146,60,.12); color: #c2410c; border: 1px solid rgba(251,146,60,.45); }
+    .tier-Expensive     { background: rgba(248,113,113,.12);color: #dc2626; border: 1px solid rgba(248,113,113,.40); }
+    .tier-Very-Expensive{ background: rgba(220,38,38,.10);  color: #b91c1c; border: 1px solid rgba(220,38,38,.38); }
+    .tier-Ultra-Premium { background: rgba(153,27,27,.12);  color: #991b1b; border: 1px solid rgba(153,27,27,.45); }
+    /* Dark theme overrides — pastel text on dark surfaces */
+    [data-theme="dark"] .tier-Free          { color: #67e8f9; border-color: rgba(6,182,212,.25); }
+    [data-theme="dark"] .tier-Ultra-Budget  { color: #86efac; border-color: rgba(34,197,94,.30); }
+    [data-theme="dark"] .tier-Budget        { color: #6ee7b7; border-color: rgba(52,211,153,.25); }
+    [data-theme="dark"] .tier-Near-Budget   { color: #bef264; border-color: rgba(132,204,22,.25); }
+    [data-theme="dark"] .tier-Value         { color: #d9f99d; border-color: rgba(163,230,53,.25); }
+    [data-theme="dark"] .tier-Mid-Range     { color: #fcd34d; border-color: rgba(251,191,36,.25); }
+    [data-theme="dark"] .tier-Premium       { color: #fdba74; border-color: rgba(251,146,60,.25); }
+    [data-theme="dark"] .tier-Expensive     { color: #fca5a5; border-color: rgba(248,113,113,.25); }
+    [data-theme="dark"] .tier-Very-Expensive{ color: #fca5a5; border-color: rgba(220,38,38,.20); }
+    [data-theme="dark"] .tier-Ultra-Premium { color: #fca5a5; border-color: rgba(153,27,27,.35); }
 
     /* ── CHART TABS ── */
     .chart-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
