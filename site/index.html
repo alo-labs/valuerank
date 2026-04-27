@@ -1103,6 +1103,21 @@
     .ca-badge-secondary { background: rgba(148,163,184,.12); color: var(--text-dim); border: 1px solid var(--border); }
     .ca-badge-integrity { background: rgba(251,146,60,.1); color: #f97316; border: 1px solid rgba(251,146,60,.25); }
     .ca-badge-version { background: var(--accent-a08); color: var(--accent-light); border: 1px solid var(--accent-a25); }
+    /* CA Cost + Value columns */
+    .ca-cost-cell { white-space: nowrap; }
+    .ca-cost-val {
+      font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+      color: var(--text-secondary); letter-spacing: -.01em;
+    }
+    .ca-cost-est { color: var(--text-dim); font-style: italic; }
+    .ca-cost-na, .ca-value-na { color: var(--text-dim); font-size: 12px; opacity: .55; }
+    .ca-value-cell-td { white-space: nowrap; }
+    .ca-value-cell {
+      display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px;
+      line-height: 1.15;
+    }
+    .ca-value-num { font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: -.01em; }
+    .ca-value-tier { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
     .ca-note { font-size: 11px; color: var(--text-dim); margin-top: 14px; line-height: 1.6; }
     /* CA Pareto cards */
     .ca-pareto-grid {
@@ -1672,6 +1687,8 @@
             <th>Agent + Model</th>
             <th>Developer</th>
             <th>TB2.0 Score</th>
+            <th>Cost (AA)</th>
+            <th>Value</th>
           </tr>
         </thead>
         <tbody>
@@ -1685,6 +1702,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:82%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$3,357</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">24.4</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
@@ -1696,6 +1716,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:81.8%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$2,851</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">28.7</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank r3"><i data-lucide="award"></i>3</span></td>
@@ -1707,6 +1730,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:80.2%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$892</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">89.9</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">4</span></td>
@@ -1718,6 +1744,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:79.8%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">16.1</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">5–6</span></td>
@@ -1729,6 +1758,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:78.4%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$1,995</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">39.3</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">5–6</span></td>
@@ -1740,6 +1772,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:78.4%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$892</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#16a34a;">87.9</span><span class="ca-value-tier" style="color:#16a34a;">Outstanding</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">7</span></td>
@@ -1751,6 +1786,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:77.3%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$1,995</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#22c55e;">38.7</span><span class="ca-value-tier" style="color:#22c55e;">Excellent</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">8</span></td>
@@ -1762,6 +1800,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:71%;background:#3b82f6;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
           </tr>
           <tr>
             <td><span class="ca-rank">9</span></td>
@@ -1773,6 +1814,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:69.9%;background:#3b82f6;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">14.1</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">10</span></td>
@@ -1784,6 +1828,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:58%;background:#f59e0b;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">11.7</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">11</span></td>
@@ -1795,11 +1842,16 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:51.9%;background:#f59e0b;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$4,470</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">11.6</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
         </tbody>
       </table>
       <div class="ca-note">
-        <strong>Note:</strong> Ranks 1–7 have overlapping ±confidence intervals and are statistically indistinguishable at 1σ. Scores reflect tbench.ai's April 19, 2026 post-correction values (reward-hacking trials zeroed for affected agents).
+        <strong>Note:</strong> Ranks 1–7 have overlapping ±confidence intervals and are statistically indistinguishable at 1σ. Scores reflect tbench.ai's April 19, 2026 post-correction values (reward-hacking trials zeroed for affected agents). &nbsp;
+        <strong>Cost (AA):</strong> Artificial Analysis Eval Cost (USD) for the underlying model — exact for in-pool models; <em>≈</em> = extrapolated from same-brand current-gen pricing for older snapshots not in the 23-model AA pool; — = proprietary or multi-model. &nbsp;
+        <strong>Value:</strong> score points per $1K eval cost. Tiers: <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥60 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥30 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥15 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥5 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;5.
       </div>
     </div>
   </div>
@@ -1821,6 +1873,8 @@
             <th>Agent + Model</th>
             <th>Developer</th>
             <th>SWE-V Score</th>
+            <th>Cost (AA)</th>
+            <th>Value</th>
           </tr>
         </thead>
         <tbody>
@@ -1834,6 +1888,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:72%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">14.5</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank r2"><i data-lucide="medal"></i>2</span></td>
@@ -1845,6 +1902,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:68.4%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$4,970</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">13.8</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank r3"><i data-lucide="award"></i>3</span></td>
@@ -1856,6 +1916,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:66%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
           </tr>
           <tr>
             <td><span class="ca-rank">4</span></td>
@@ -1867,6 +1930,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:65.7%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
           </tr>
           <tr>
             <td><span class="ca-rank">5</span></td>
@@ -1878,6 +1944,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:62.3%;background:#22c55e;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
           </tr>
           <tr>
             <td><span class="ca-rank">6</span></td>
@@ -1889,6 +1958,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:59.8%;background:#3b82f6;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val">$3,959</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">15.1</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">7</span></td>
@@ -1900,6 +1972,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:58.1%;background:#3b82f6;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$1,995</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">29.1</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">8</span></td>
@@ -1911,6 +1986,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:45.8%;background:#f59e0b;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-na">—</span></td>
+            <td class="ca-value-cell-td"><span class="ca-value-na">—</span></td>
           </tr>
           <tr>
             <td><span class="ca-rank">9</span></td>
@@ -1922,6 +2000,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:44.7%;background:#f59e0b;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$4,470</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">10.0</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">10</span></td>
@@ -1933,6 +2014,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:43.2%;background:#f59e0b;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">12.1</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">11</span></td>
@@ -1944,6 +2028,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:38.6%;background:#ef4444;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$2,390</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#84cc16;">16.2</span><span class="ca-value-tier" style="color:#84cc16;">Good</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">12</span></td>
@@ -1955,6 +2042,9 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:34.2%;background:#ef4444;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">9.6</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
           <tr>
             <td><span class="ca-rank">13</span></td>
@@ -1966,11 +2056,16 @@
                 <div class="ca-score-bar"><div class="ca-score-bar-fill" style="width:31.4%;background:#ef4444;"></div></div>
               </div>
             </td>
+          
+            <td class="ca-cost-cell"><span class="ca-cost-val ca-cost-est">≈$3,565</span></td>
+            <td class="ca-value-cell-td"><div class="ca-value-cell"><span class="ca-value-num" style="color:#f59e0b;">8.8</span><span class="ca-value-tier" style="color:#f59e0b;">Fair</span></div></td>
           </tr>
         </tbody>
       </table>
       <div class="ca-note">
         <strong>Sources:</strong> Devin and Aider scores sourced directly from cognition.ai and swebench.com/verified.html (primary). All other scores aggregated from awesomeagents.ai (third-party, April 19 2026 snapshot). &nbsp;
+        <strong>Cost (AA):</strong> Artificial Analysis Eval Cost (USD) for the underlying model — exact for in-pool models; <em>≈</em> = extrapolated from same-brand current-gen pricing for older snapshots not in the 23-model AA pool; — = proprietary or multi-model. &nbsp;
+        <strong>Value:</strong> score points per $1K eval cost. Tiers: <span style="color:#16a34a;font-weight:700;">Outstanding</span> ≥60 · <span style="color:#22c55e;font-weight:700;">Excellent</span> ≥30 · <span style="color:#84cc16;font-weight:700;">Good</span> ≥15 · <span style="color:#f59e0b;font-weight:700;">Fair</span> ≥5 · <span style="color:#8b5cf6;font-weight:700;">Premium</span> &lt;5. &nbsp;
         <strong>Contamination notice:</strong> SWE-V scores above ~65% may be partially inflated by training data leakage (same models score ~11 pp lower on SWE-bench Pro).
       </div>
     </div>
