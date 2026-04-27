@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ValueRank v0.5 — AI Model Ranking</title>
+  <title>ValueRank v0.6 — AI Model Ranking</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -784,7 +784,7 @@
 <nav>
   <div class="nav-brand">
     <span class="logo">ValueRank</span>
-    <span class="badge">v0.5</span>
+    <span class="badge">v0.6</span>
   </div>
   <div class="mode-switcher">
     <button class="mode-btn active" id="btn-llm" onclick="switchMode('llm')">LLM Models</button>
@@ -804,7 +804,7 @@
     <a href="#ca-benchmarks">Benchmarks</a>
   </div>
   <div class="nav-right">
-    <div class="nav-meta" id="nav-meta-llm">April 26, 2026 · 20 models · 18 dimensions</div>
+    <div class="nav-meta" id="nav-meta-llm">April 27, 2026 · 23 models · 18 dimensions</div>
     <div class="nav-meta" id="nav-meta-ca" style="display:none">April 27, 2026 · 22 entries · 2 active benchmarks</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
       <i data-lucide="sun" class="icon-sun"></i>
@@ -831,7 +831,7 @@
           <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-label">Models</div></div>
           <div class="hero-stat"><div class="hero-stat-num">18</div><div class="hero-stat-label">Dimensions</div></div>
           <div class="hero-stat"><div class="hero-stat-num">25%</div><div class="hero-stat-label">Cost Weight</div></div>
-          <div class="hero-stat"><div class="hero-stat-num">v0.5</div><div class="hero-stat-label">Version</div></div>
+          <div class="hero-stat"><div class="hero-stat-num">v0.6</div><div class="hero-stat-label">Version</div></div>
         </div>
       </div>
       <div class="hero-podium">
@@ -904,12 +904,12 @@
       <div class="insight-card">
         <div class="insight-icon">🎯</div>
         <div class="insight-title">Pareto Finding</div>
-        <div class="insight-body">v0.5 has a <strong>6-model frontier</strong>: Gemma3 ($0), Phi-4 ($4), ML3 ($39), Nova Pro ($201), Grok 3 ($312), Gemini ($892). Every model priced above $892 is dominated by Gemini on both quality and cost. KAT ($73) is no longer on the frontier — ML3 is cheaper <em>and</em> higher quality.</div>
+        <div class="insight-body">v0.6 has a <strong>6-model frontier</strong>: Gemma 4 31B ($0), Phi-4 ($4), ML3 ($39), MiMo ($462), Kimi K2.6 ($948), Gemini ($892). Every model priced above $892 is dominated by Gemini on both quality and cost. The Gemma 3→Gemma 4 swap added real benchmarks for the free tier; MiMo enters the frontier as Xiaomi's debut at quality #6.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">💡</div>
         <div class="insight-title">Cost Penalty</div>
-        <div class="insight-body"><strong>Claude Opus 4.7</strong> drops 12 places from quality #3 to overall #15 due to its $4,811 eval cost. A 25% cost weight has a dramatic effect on expensive models.</div>
+        <div class="insight-body"><strong>Claude Opus 4.7</strong> drops 15 places from quality #3 to overall #18 due to its $4,811 eval cost. A 25% cost weight has a dramatic effect on expensive models — the gap widens as the n=23 cost pool further compresses ultra-premium scores.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">⚡</div>
@@ -918,8 +918,8 @@
       </div>
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
-        <div class="insight-title">v0.5 Expansion</div>
-        <div class="insight-body"><strong>8 new models</strong> added (Mistral Large 3, Gemma 3 27B, Phi-4, Nova Pro, Grok 3, Maverick, Scout, o3-mini). Cost range expands $73–$4,970 → $0–$4,970, compressing all existing cost scores. ML3/Gemma3/Phi-4 debut #3–#5 via cost arbitrage (14–16 ⊘ dims each).</div>
+        <div class="insight-title">v0.6 Refresh</div>
+        <div class="insight-body"><strong>4 model swaps</strong> (Gemma 3→4 31B, Nova Pro→Premier, Grok 3→4.20, o3-mini→o4-mini) and <strong>3 additions</strong> (MiMo-V2.5-Pro, Qwen 3.6 Max, Gemma 4 27B MoE). Pool grows 20→23. MiMo debuts at #5; o4-mini #10; Grok 4.20 #14. Opus 4.7 slides quality #3 → overall #18 (cost penalty +3).</div>
       </div>
     </div>
   </div>
@@ -960,7 +960,7 @@
       </div>
       <!-- Heatmap -->
       <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 20 models × 18 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 23 models × 18 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
         <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
       </div>
       <!-- Bubble -->
@@ -970,7 +970,7 @@
       </div>
       <!-- Bump -->
       <div class="chart-panel" id="panel-bump">
-        <div class="chart-desc"><strong>Version History:</strong> How rankings have shifted across ValueRank versions as new data was collected and corrections applied. Crossing lines = rank changes. Notable: Kimi's dramatic journey from #2 → #6 → #4 across versions.</div>
+        <div class="chart-desc"><strong>Version History:</strong> How rankings have shifted across ValueRank versions as new data was collected and corrections applied. Crossing lines = rank changes. Notable: Kimi's dramatic journey from #2 → #6 → #4 → #6 across versions; MiMo debut at #5 in v0.6.</div>
         <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Two-frontier / Cost Impact -->
@@ -1118,7 +1118,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v0.5 has a <strong>6-model frontier</strong>: <strong>Gemma 3 27B</strong> ($0), <strong>Phi-4</strong> ($4), <strong>Mistral Large 3</strong> ($39), <strong>Nova Pro</strong> ($201), <strong>Grok 3</strong> ($312), and <strong>Gemini 3.1 Pro</strong> (quality #1 at $892). Every other model is dominated by at least one frontier model on both quality and cost.
+          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v0.6 has a <strong>6-model frontier</strong>: <strong>Gemma 4 31B Dense</strong> ($0), <strong>Phi-4</strong> ($4), <strong>Mistral Large 3</strong> ($39), <strong>MiMo-V2.5-Pro</strong> ($462), <strong>Kimi K2.6</strong> ($948), and <strong>Gemini 3.1 Pro</strong> (quality #1 at $892). Every other model is dominated by at least one frontier model on both quality and cost.
         </div>
       </div>
 
@@ -1128,7 +1128,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. Prior-version → v0.5 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
+          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. Prior-version → v0.6 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
         </div>
       </div>
 
@@ -1138,7 +1138,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Quarterly, or whenever a major model launch would materially affect the rankings. v0.5 (April 26, 2026) expanded to 20 models with 8 new entrants. The next scheduled update is <strong>May 2026</strong> (priority: Nova Pro, Gemma3, Phi-4 benchmark gap-fill) or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
+          Quarterly, or whenever a major model launch would materially affect the rankings. v0.6 (April 27, 2026) refreshed 4 outdated models (Gemma 3→4 31B, Nova Pro→Premier, Grok 3→4.20, o3-mini→o4-mini) and added 3 (MiMo-V2.5-Pro, Qwen 3.6 Max Preview, Gemma 4 27B MoE), expanding the pool to 23. The next scheduled update is <strong>May 2026</strong> or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
         </div>
       </div>
 
@@ -1719,7 +1719,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v0.5 · April 26, 2026 · 20 models × 18 dimensions · No provisional data · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v0.6 · April 27, 2026 · 23 models × 18 dimensions · ~ = secondary source · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -1755,92 +1755,105 @@ const DEV_COLORS = {
   'Google DeepMind':'#4285F4','OpenAI':'#10a37f','Kay (alo-exp)':'#6366f1',
   'Moonshot AI':'#8b5cf6','Zhipu AI':'#06b6d4','MiniMax':'#f59e0b',
   'Alibaba':'#ff6900','DeepSeek':'#64748b','Anthropic':'#d4a574',
-  'Mistral AI':'#ff7043','Amazon':'#ff9900','xAI':'#1a1a2e','Meta':'#0066ff'
+  'Mistral AI':'#ff7043','Amazon':'#ff9900','xAI':'#1a1a2e','Meta':'#0066ff',
+  'Microsoft':'#0078d4','Xiaomi':'#ff6700'
 };
 
 // Dims array order: Cost IF Term SWE SWEPro LCB GDP Spd Tau2 OSW BC LCR HLE GPQA MMLU AIME Sci Omni
 // isMissing: 1 = ⊘ cell (real score of 50.0 counts as isMissing=0 even if it happens to equal 50)
 const MODELS = [
-  { rank:1,  name:'Gemini 3.1 Pro',    shortName:'Gemini',    developer:'Google DeepMind', evalCost:892.28,  costTier:'Premium',       overallScore:64.3, qualityScore:73.8, qualityRank:1,  missingCount:2,
-    dims:[36.8,100.0,58.3,61.1,50.0,55.6,9.1,88.9,100.0,50.0,71.4,88.9,92.9,100.0,87.5,41.7,100.0,100.0],
+  { rank:1,  name:'Gemini 3.1 Pro',       shortName:'Gemini',     developer:'Google DeepMind', evalCost:892.28,  costTier:'Premium',        overallScore:63.7, qualityScore:75.5, qualityRank:1,  missingCount:2,
+    dims:[31.8,100.0,58.3,75.0,50.0,44.4,7.7,90.5,100.0,50.0,71.4,90.0,93.8,100.0,91.7,60.0,100.0,100.0],
     isMissing:[0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
-    vRanks:{v20:1,v25:1,v30:1,v40:1,v42:1,v43:1,v50:1} },
-  { rank:2,  name:'GPT-5.5',           shortName:'GPT-5.5',   developer:'OpenAI',          evalCost:3357.00, costTier:'Very Expensive', overallScore:63.7, qualityScore:71.9, qualityRank:2,  missingCount:5,
-    dims:[15.8,76.9,100.0,100.0,68.8,50.0,100.0,61.1,90.9,100.0,100.0,50.0,85.7,88.2,50.0,50.0,50.0,0.0],
+    vRanks:{v20:1,v25:1,v30:1,v40:1,v42:1,v43:1,v50:1,v60:1} },
+  { rank:2,  name:'GPT-5.5',              shortName:'GPT-5.5',    developer:'OpenAI',          evalCost:3357.00, costTier:'Very Expensive', overallScore:62.2, qualityScore:72.1, qualityRank:2,  missingCount:5,
+    dims:[13.6,69.2,100.0,100.0,75.0,50.0,100.0,61.9,92.3,100.0,100.0,50.0,87.5,90.5,50.0,50.0,50.0,0.0],
     isMissing:[0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,1,0],
-    vRanks:{v20:null,v25:6,v30:2,v40:2,v42:2,v43:2,v50:2} },
-  { rank:3,  name:'Mistral Large 3',   shortName:'ML3',       developer:'Mistral AI',      evalCost:38.67,   costTier:'Ultra-Budget',   overallScore:59.7, qualityScore:49.4, qualityRank:9,  missingCount:14,
-    dims:[84.2,50.0,50.0,50.0,50.0,88.9,50.0,44.4,50.0,50.0,50.0,50.0,50.0,5.9,50.0,50.0,50.0,50.0],
+    vRanks:{v20:null,v25:6,v30:2,v40:2,v42:2,v43:2,v50:2,v60:2} },
+  { rank:3,  name:'Mistral Large 3',      shortName:'ML3',        developer:'Mistral AI',      evalCost:38.67,   costTier:'Ultra-Budget',   overallScore:60.3, qualityScore:49.2, qualityRank:9,  missingCount:14,
+    dims:[86.4,50.0,50.0,50.0,50.0,88.9,50.0,47.6,50.0,50.0,50.0,50.0,50.0,0.0,50.0,50.0,50.0,50.0],
     isMissing:[0,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1],
-    vRanks:{v50:3} },
-  { rank:4,  name:'Gemma 3 27B',       shortName:'Gemma3',    developer:'Google DeepMind', evalCost:0.00,    costTier:'Free',           overallScore:59.3, qualityScore:44.4, qualityRank:13, missingCount:15,
-    dims:[100.0,50.0,50.0,50.0,50.0,50.0,50.0,5.6,50.0,50.0,50.0,50.0,50.0,0.0,50.0,50.0,50.0,50.0],
-    isMissing:[0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1],
-    vRanks:{v50:4} },
-  { rank:5,  name:'Phi-4',             shortName:'Phi-4',     developer:'Microsoft',       evalCost:4.27,    costTier:'Ultra-Budget',   overallScore:59.2, qualityScore:47.7, qualityRank:10, missingCount:16,
-    dims:[94.7,50.0,50.0,50.0,50.0,50.0,50.0,11.1,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0],
+    vRanks:{v50:3,v60:3} },
+  { rank:4,  name:'Phi-4',                shortName:'Phi-4',      developer:'Microsoft',       evalCost:4.27,    costTier:'Ultra-Budget',   overallScore:59.6, qualityScore:47.9, qualityRank:12, missingCount:16,
+    dims:[95.5,50.0,50.0,50.0,50.0,50.0,50.0,14.3,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0],
     isMissing:[0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],
-    vRanks:{v50:5} },
-  { rank:6,  name:'Kimi K2.6',         shortName:'Kimi',      developer:'Moonshot AI',     evalCost:947.87,  costTier:'Premium',        overallScore:54.3, qualityScore:57.9, qualityRank:5,  missingCount:0,
-    dims:[31.6,84.6,41.7,44.4,68.8,77.8,36.4,72.2,72.7,40.0,28.6,61.1,57.1,76.5,37.5,66.7,75.0,42.9],
+    vRanks:{v50:5,v60:4} },
+  { rank:5,  name:'MiMo-V2.5-Pro',        shortName:'MiMo',       developer:'Xiaomi',          evalCost:461.59,  costTier:'Mid-Range',      overallScore:57.0, qualityScore:53.1, qualityRank:6,  missingCount:9,
+    dims:[54.5,76.9,50.0,50.0,50.0,50.0,50.0,57.1,69.2,50.0,50.0,30.0,56.2,52.4,50.0,50.0,61.5,50.0],
+    isMissing:[0,0,1,1,0,1,1,0,0,1,1,0,0,0,1,1,0,1],
+    vRanks:{v60:5} },
+  { rank:6,  name:'Kimi K2.6',            shortName:'Kimi',       developer:'Moonshot AI',     evalCost:947.87,  costTier:'Premium',        overallScore:56.2, qualityScore:62.4, qualityRank:5,  missingCount:0,
+    dims:[27.3,84.6,41.7,64.3,75.0,77.8,46.2,76.2,76.9,40.0,28.6,65.0,62.5,81.0,41.7,80.0,76.9,42.9],
     isMissing:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    vRanks:{v20:2,v25:4,v30:6,v40:5,v42:6,v43:4,v50:6} },
-  { rank:7,  name:'KAT-Coder-Pro-V2',  shortName:'KAT',       developer:'Kay (alo-exp)',   evalCost:73.49,   costTier:'Budget',         overallScore:54.0, qualityScore:45.6, qualityRank:11, missingCount:7,
-    dims:[73.7,38.5,91.7,27.8,50.0,50.0,0.0,83.3,63.6,50.0,50.0,33.3,21.4,41.2,50.0,50.0,25.0,50.0],
+    vRanks:{v20:2,v25:4,v30:6,v40:5,v42:6,v43:4,v50:6,v60:6} },
+  { rank:7,  name:'Gemma 4 31B Dense',    shortName:'Gemma4-31B', developer:'Google DeepMind', evalCost:0.00,    costTier:'Free',           overallScore:56.0, qualityScore:40.9, qualityRank:18, missingCount:8,
+    dims:[100.0,50.0,50.0,14.3,0.0,66.7,30.8,23.8,46.2,50.0,50.0,50.0,50.0,33.3,50.0,30.0,50.0,50.0],
+    isMissing:[0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1],
+    vRanks:{v60:7} },
+  { rank:8,  name:'KAT-Coder-Pro-V2',     shortName:'KAT',        developer:'Kay (alo-exp)',   evalCost:73.49,   costTier:'Budget',         overallScore:55.7, qualityScore:47.6, qualityRank:13, missingCount:7,
+    dims:[72.7,38.5,91.7,53.6,50.0,50.0,0.0,85.7,61.5,50.0,50.0,40.0,18.8,38.1,50.0,50.0,30.8,50.0],
     isMissing:[0,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,1],
-    vRanks:{v20:4,v25:2,v30:3,v40:3,v42:3,v43:3,v50:7} },
-  { rank:8,  name:'Amazon Nova Pro',   shortName:'Nova Pro',  developer:'Amazon',          evalCost:200.98,  costTier:'Near-Budget',    overallScore:53.3, qualityScore:50.0, qualityRank:7,  missingCount:17,
-    dims:[63.2,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0],
-    isMissing:[0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    vRanks:{v50:8} },
-  { rank:9,  name:'Grok 3',            shortName:'Grok 3',    developer:'xAI',             evalCost:311.71,  costTier:'Value',          overallScore:53.0, qualityScore:50.4, qualityRank:6,  missingCount:14,
-    dims:[57.9,50.0,50.0,50.0,50.0,66.7,50.0,55.6,50.0,50.0,50.0,50.0,50.0,35.3,50.0,50.0,50.0,50.0],
-    isMissing:[0,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1],
-    vRanks:{v50:9} },
-  { rank:10, name:'GPT-5.4',           shortName:'GPT-5.4',   developer:'OpenAI',          evalCost:2851.01, costTier:'Expensive',      overallScore:52.2, qualityScore:67.0, qualityRank:4,  missingCount:4,
-    dims:[21.1,53.8,83.3,50.0,87.5,22.2,72.7,66.7,54.5,60.0,85.7,100.0,78.6,82.4,50.0,50.0,91.7,50.0],
-    isMissing:[0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1],
-    vRanks:{v20:5,v25:8,v30:7,v40:7,v42:7,v43:7,v50:10} },
-  { rank:11, name:'MiniMax M2.7',      shortName:'MiniMax',   developer:'MiniMax',         evalCost:175.51,  costTier:'Near-Budget',    overallScore:51.4, qualityScore:44.8, qualityRank:12, missingCount:6,
-    dims:[68.4,69.2,8.3,50.0,25.0,50.0,27.3,36.1,40.9,50.0,50.0,44.4,28.6,52.9,50.0,50.0,58.3,71.4],
-    isMissing:[0,0,0,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0],
-    vRanks:{v20:3,v25:5,v30:5,v40:6,v42:5,v43:6,v50:11} },
-  { rank:12, name:'GLM 5.1',           shortName:'GLM',       developer:'Zhipu AI',        evalCost:543.95,  costTier:'Mid-Range',      overallScore:51.3, qualityScore:44.3, qualityRank:14, missingCount:2,
-    dims:[42.1,92.3,66.7,0.0,50.0,50.0,45.5,36.1,81.8,50.0,0.0,22.2,50.0,47.1,50.0,41.7,41.7,28.6],
+    vRanks:{v20:4,v25:2,v30:3,v40:3,v42:3,v43:3,v50:7,v60:8} },
+  { rank:9,  name:'GLM 5.1',              shortName:'GLM',        developer:'Zhipu AI',        evalCost:543.95,  costTier:'Mid-Range',      overallScore:55.0, qualityScore:49.2, qualityRank:10, missingCount:2,
+    dims:[40.9,92.3,66.7,35.7,60.0,50.0,53.8,40.5,84.6,50.0,0.0,20.0,50.0,47.6,58.3,60.0,38.5,28.6],
     isMissing:[0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0],
-    vRanks:{v20:7,v25:3,v30:4,v40:4,v42:4,v43:5,v50:12} },
-  { rank:13, name:'Llama 4 Maverick',  shortName:'Maverick',  developer:'Meta',            evalCost:62.28,   costTier:'Ultra-Budget',   overallScore:47.7, qualityScore:39.5, qualityRank:17, missingCount:10,
-    dims:[78.9,15.4,50.0,50.0,50.0,11.1,50.0,77.8,50.0,50.0,50.0,50.0,7.1,17.6,25.0,50.0,16.7,50.0],
+    vRanks:{v20:7,v25:3,v30:4,v40:4,v42:4,v43:5,v50:12,v60:9} },
+  { rank:10, name:'o4-mini',              shortName:'o4-mini',    developer:'OpenAI',          evalCost:459.80,  costTier:'Mid-Range',      overallScore:52.1, qualityScore:48.8, qualityRank:11, missingCount:13,
+    dims:[59.1,50.0,50.0,21.4,50.0,50.0,50.0,100.0,50.0,50.0,50.0,50.0,50.0,19.0,50.0,40.0,50.0,50.0],
+    isMissing:[0,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1],
+    vRanks:{v60:10} },
+  { rank:11, name:'Gemma 4 27B MoE',      shortName:'Gemma4-MoE', developer:'Google DeepMind', evalCost:41.51,   costTier:'Ultra-Budget',   overallScore:51.7, qualityScore:40.4, qualityRank:19, missingCount:10,
+    dims:[81.8,50.0,50.0,7.1,50.0,55.6,23.1,50.0,23.1,50.0,50.0,50.0,50.0,23.8,33.3,20.0,50.0,50.0],
+    isMissing:[0,1,1,0,1,0,0,1,0,1,1,1,1,0,0,0,1,1],
+    vRanks:{v60:11} },
+  { rank:12, name:'GPT-5.4',              shortName:'GPT-5.4',    developer:'OpenAI',          evalCost:2851.01, costTier:'Expensive',      overallScore:50.5, qualityScore:67.3, qualityRank:4,  missingCount:4,
+    dims:[18.2,46.2,83.3,50.0,90.0,22.2,76.9,66.7,53.8,60.0,85.7,100.0,81.2,85.7,50.0,50.0,92.3,50.0],
+    isMissing:[0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1],
+    vRanks:{v20:5,v25:8,v30:7,v40:7,v42:7,v43:7,v50:10,v60:12} },
+  { rank:13, name:'MiniMax M2.7',         shortName:'MiniMax',    developer:'MiniMax',         evalCost:175.51,  costTier:'Near-Budget',    overallScore:50.2, qualityScore:45.2, qualityRank:14, missingCount:6,
+    dims:[68.2,61.5,0.0,50.0,30.0,50.0,38.5,40.5,34.6,50.0,50.0,50.0,31.2,57.1,50.0,50.0,53.8,71.4],
+    isMissing:[0,0,0,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0],
+    vRanks:{v20:3,v25:5,v30:5,v40:6,v42:5,v43:6,v50:11,v60:13} },
+  { rank:14, name:'Grok 4.20',            shortName:'Grok 4.20',  developer:'xAI',             evalCost:514.16,  costTier:'Mid-Range',      overallScore:48.7, qualityScore:51.1, qualityRank:8,  missingCount:11,
+    dims:[45.5,50.0,50.0,28.6,50.0,50.0,50.0,71.4,50.0,50.0,50.0,50.0,25.0,66.7,66.7,60.0,50.0,50.0],
+    isMissing:[0,1,1,0,1,1,1,0,1,1,1,1,0,0,0,0,1,1],
+    vRanks:{v60:14} },
+  { rank:15, name:'Llama 4 Maverick',     shortName:'Maverick',   developer:'Meta',            evalCost:62.28,   costTier:'Ultra-Budget',   overallScore:47.6, qualityScore:40.1, qualityRank:20, missingCount:10,
+    dims:[77.3,15.4,50.0,50.0,50.0,11.1,50.0,81.0,50.0,50.0,50.0,50.0,12.5,14.3,25.0,50.0,23.1,50.0],
     isMissing:[0,0,1,1,1,0,1,0,1,1,1,1,0,0,0,1,0,1],
-    vRanks:{v50:13} },
-  { rank:14, name:'Llama 4 Scout',     shortName:'Scout',     developer:'Meta',            evalCost:26.42,   costTier:'Ultra-Budget',   overallScore:47.1, qualityScore:36.0, qualityRank:20, missingCount:10,
-    dims:[89.5,0.0,50.0,50.0,50.0,0.0,50.0,100.0,50.0,50.0,50.0,50.0,0.0,11.8,0.0,50.0,0.0,50.0],
+    vRanks:{v50:13,v60:15} },
+  { rank:16, name:'Llama 4 Scout',        shortName:'Scout',      developer:'Meta',            evalCost:26.42,   costTier:'Ultra-Budget',   overallScore:47.3, qualityScore:36.1, qualityRank:22, missingCount:10,
+    dims:[90.9,0.0,50.0,50.0,50.0,0.0,50.0,95.2,50.0,50.0,50.0,50.0,0.0,9.5,8.3,50.0,0.0,50.0],
     isMissing:[0,0,1,1,1,0,1,0,1,1,1,1,0,0,0,1,0,1],
-    vRanks:{v50:14} },
-  { rank:15, name:'Claude Opus 4.7',   shortName:'Opus 4.7',  developer:'Anthropic',       evalCost:4811.04, costTier:'Ultra-Premium',  overallScore:45.8, qualityScore:70.2, qualityRank:3,  missingCount:1,
-    dims:[5.3,30.8,75.0,88.9,100.0,50.0,90.9,22.2,9.1,80.0,14.3,77.8,100.0,94.1,100.0,91.7,83.3,85.7],
-    isMissing:[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
-    vRanks:{v20:8,v25:9,v30:10,v40:10,v42:10,v43:10,v50:15} },
-  { rank:16, name:'DeepSeek V4-Pro',   shortName:'DeepSeek',  developer:'DeepSeek',        evalCost:1071.28, costTier:'Premium',        overallScore:45.2, qualityScore:49.6, qualityRank:8,  missingCount:6,
-    dims:[26.3,50.0,50.0,61.1,12.5,100.0,54.5,16.7,50.0,50.0,42.9,50.0,64.3,64.7,62.5,50.0,50.0,14.3],
+    vRanks:{v50:14,v60:16} },
+  { rank:17, name:'DeepSeek V4-Pro',      shortName:'DeepSeek',   developer:'DeepSeek',        evalCost:1071.28, costTier:'Premium',        overallScore:46.5, qualityScore:52.8, qualityRank:7,  missingCount:6,
+    dims:[22.7,50.0,50.0,75.0,20.0,100.0,61.5,19.0,50.0,50.0,42.9,50.0,68.8,71.4,75.0,50.0,50.0,14.3],
     isMissing:[0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,1,1,0],
-    vRanks:{v20:null,v25:null,v30:8,v40:9,v42:9,v43:9,v50:16} },
-  { rank:17, name:'Qwen 3.6 Plus',     shortName:'Qwen',      developer:'Alibaba',         evalCost:482.65,  costTier:'Mid-Range',      overallScore:43.8, qualityScore:42.5, qualityRank:15, missingCount:5,
-    dims:[47.4,61.5,25.0,11.1,37.5,50.0,18.2,50.0,18.2,50.0,50.0,61.1,35.7,70.6,75.0,50.0,8.3,50.0],
+    vRanks:{v20:null,v25:null,v30:8,v40:9,v42:9,v43:9,v50:16,v60:17} },
+  { rank:18, name:'Claude Opus 4.7',      shortName:'Opus 4.7',   developer:'Anthropic',       evalCost:4811.04, costTier:'Ultra-Premium',  overallScore:46.0, qualityScore:70.8, qualityRank:3,  missingCount:1,
+    dims:[4.5,30.8,75.0,92.9,100.0,50.0,92.3,28.6,0.0,80.0,14.3,80.0,100.0,95.2,100.0,95.0,84.6,85.7],
+    isMissing:[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+    vRanks:{v20:8,v25:9,v30:10,v40:10,v42:10,v43:10,v50:15,v60:18} },
+  { rank:19, name:'Qwen 3.6 Plus',        shortName:'Qwen Plus',  developer:'Alibaba',         evalCost:482.65,  costTier:'Mid-Range',      overallScore:44.6, qualityScore:44.0, qualityRank:15, missingCount:5,
+    dims:[50.0,53.8,16.7,42.9,40.0,50.0,15.4,52.4,7.7,50.0,50.0,65.0,37.5,76.2,83.3,50.0,7.7,50.0],
     isMissing:[0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,1,0,1],
-    vRanks:{v20:6,v25:7,v30:9,v40:8,v42:8,v43:8,v50:17} },
-  { rank:18, name:'o3-mini (high)',    shortName:'o3-mini',   developer:'OpenAI',          evalCost:314.72,  costTier:'Value',          overallScore:42.7, qualityScore:36.7, qualityRank:18, missingCount:7,
-    dims:[52.6,46.2,0.0,50.0,50.0,33.3,50.0,94.4,0.0,50.0,50.0,50.0,14.3,23.5,12.5,16.7,33.3,50.0],
-    isMissing:[0,0,0,1,1,0,1,0,0,1,1,1,0,0,0,0,0,1],
-    vRanks:{v50:18} },
-  { rank:19, name:'Claude Sonnet 4.6', shortName:'Sonnet 4.6',developer:'Anthropic',       evalCost:3959.36, costTier:'Very Expensive', overallScore:27.4, qualityScore:36.3, qualityRank:19, missingCount:5,
-    dims:[10.5,23.1,16.7,27.8,50.0,50.0,81.8,27.8,27.3,0.0,50.0,11.1,42.9,58.8,50.0,0.0,50.0,50.0],
+    vRanks:{v20:6,v25:7,v30:9,v40:8,v42:8,v43:8,v50:17,v60:19} },
+  { rank:20, name:'Amazon Nova Premier',  shortName:'Nova Prem',  developer:'Amazon',          evalCost:375.98,  costTier:'Value',          overallScore:44.0, qualityScore:31.2, qualityRank:23, missingCount:10,
+    dims:[63.6,50.0,50.0,0.0,50.0,50.0,50.0,4.8,50.0,50.0,50.0,50.0,6.2,4.8,0.0,0.0,15.4,50.0],
+    isMissing:[0,1,1,0,1,1,1,0,1,1,1,1,0,0,0,0,0,1],
+    vRanks:{v60:20} },
+  { rank:21, name:'Qwen 3.6 Max Preview', shortName:'Qwen Max',   developer:'Alibaba',         evalCost:860.56,  costTier:'Premium',        overallScore:42.1, qualityScore:44.0, qualityRank:16, missingCount:13,
+    dims:[36.4,50.0,29.2,50.0,50.0,50.0,50.0,9.5,50.0,50.0,50.0,50.0,50.0,42.9,16.7,50.0,50.0,50.0],
+    isMissing:[0,1,0,1,1,1,1,0,1,1,1,1,1,0,0,1,1,1],
+    vRanks:{v60:21} },
+  { rank:22, name:'Claude Sonnet 4.6',    shortName:'Sonnet 4.6', developer:'Anthropic',       evalCost:3959.36, costTier:'Very Expensive', overallScore:28.2, qualityScore:37.7, qualityRank:21, missingCount:5,
+    dims:[9.1,23.1,8.3,53.6,50.0,50.0,84.6,33.3,15.4,0.0,50.0,10.0,43.8,61.9,50.0,10.0,46.2,50.0],
     isMissing:[0,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,1],
-    vRanks:{v20:10,v25:10,v30:11,v40:11,v42:11,v43:11,v50:19} },
-  { rank:20, name:'Claude Opus 4.6',   shortName:'Opus 4.6',  developer:'Anthropic',       evalCost:4969.68, costTier:'Ultra-Premium',  overallScore:24.7, qualityScore:41.8, qualityRank:16, missingCount:1,
-    dims:[0.0,7.7,33.3,77.8,0.0,44.4,63.6,0.0,40.9,20.0,57.1,0.0,71.4,29.4,50.0,91.7,66.7,57.1],
+    vRanks:{v20:10,v25:10,v30:11,v40:11,v42:11,v43:11,v50:19,v60:22} },
+  { rank:23, name:'Claude Opus 4.6',      shortName:'Opus 4.6',   developer:'Anthropic',       evalCost:4969.68, costTier:'Ultra-Premium',  overallScore:24.8, qualityScore:42.5, qualityRank:17, missingCount:1,
+    dims:[0.0,7.7,29.2,85.7,10.0,33.3,69.2,0.0,34.6,20.0,57.1,0.0,75.0,28.6,50.0,95.0,69.2,57.1],
     isMissing:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
-    vRanks:{v20:9,v25:11,v30:12,v40:12,v42:12,v43:12,v50:20} },
+    vRanks:{v20:9,v25:11,v30:12,v40:12,v42:12,v43:12,v50:20,v60:23} },
 ];
 
 // ─────────────────────────────────────────────
@@ -2272,8 +2285,8 @@ function renderBubble() {
 // CHART 6: VERSION BUMP CHART
 // ─────────────────────────────────────────────
 function renderBump() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60'];
   const traces = MODELS.map(m => {
     const x=[], y=[];
     vKeys.forEach((vk,i) => {
@@ -2285,7 +2298,7 @@ function renderBump() {
       x, y,
       mode:'lines+markers+text',
       name:m.shortName,
-      text: x.map((v,i) => v === 'v0.5' ? m.shortName : ''),
+      text: x.map((v,i) => v === 'v0.6' ? m.shortName : ''),
       textposition:'middle right',
       textfont:{size:10},
       line:{ color: DEV_COLORS[m.developer] || '#64748b', width: isTop3 ? 2.5 : 1.5, dash: isTop3 ? 'solid' : 'solid' },
@@ -2297,13 +2310,14 @@ function renderBump() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v2.0 to v0.5', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v2.0 to v0.6', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
-    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,20.5],
-      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14','#15','#16','#17','#18','#19','#20']},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,23.5],
+      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14','#15','#16','#17','#18','#19','#20','#21','#22','#23']},
     margin:{...getPlotlyLayout().margin, r:90},
     annotations:[
-      {x:'v0.5', y:3, xref:'x', yref:'y', text:'v0.5: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:120, ay:0}
+      {x:'v0.5', y:3, xref:'x', yref:'y', text:'v0.5: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:80, ay:-30},
+      {x:'v0.6', y:5, xref:'x', yref:'y', text:'v0.6: +3 models<br>(4 swaps)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:120, ay:0}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -2345,7 +2359,7 @@ function renderFrontier2() {
     text: MODELS.map(m => m.shortName),
     textposition: MODELS.map(m => {
       if (m.shortName === 'MiniMax') return 'bottom right';
-      if (m.shortName === 'Nova Pro') return 'top left';
+      if (m.shortName === 'Nova Prem') return 'top left';
       return m.evalCost > 3000 ? 'top center' : 'top right';
     }),
     textfont:{size:10, color:'#94a3b8'},
@@ -2437,8 +2451,8 @@ function renderGaps() {
 // VERSION TABLE
 // ─────────────────────────────────────────────
 function renderVersionTable() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60'];
   const table = document.getElementById('version-table');
   table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
   <tbody>${MODELS.map(m => {
