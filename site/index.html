@@ -1225,7 +1225,7 @@
   <div class="nav-links">
     <a href="#rankings" class="active">Rankings</a>
     <a href="#swe-rebench">SWE-Rebench</a>
-    <a href="#cross-perspective">Cross-Perspective</a>
+    <a href="#aa-rebench">AA+Rebench</a>
     <a href="#charts">Charts</a>
     <a href="#methodology">Methodology</a>
     <a href="#data">Data</a>
@@ -1434,12 +1434,12 @@
   </div>
 </section>
 
-<!-- CROSS-PERSPECTIVE VALUERANK (models in BOTH AA Eval and SWE-Rebench) -->
-<section id="cross-perspective" style="padding-top: 32px;">
+<!-- AA+REBENCH VALUERANK (models in BOTH AA Eval and SWE-Rebench) -->
+<section id="aa-rebench" style="padding-top: 32px;">
   <div class="container">
     <div class="section-header">
-      <div class="section-label" style="color:#06b6d4;">Cross-Perspective</div>
-      <div class="section-title">Cross-Perspective ValueRank — 7 Models in Both Rankings</div>
+      <div class="section-label" style="color:#06b6d4;">AA + Rebench</div>
+      <div class="section-title">AA + Rebench ValueRank — 7 Models in Both Rankings</div>
       <div class="section-sub">
         The 7 models with strict-name matches in <strong>both</strong> the main 23-model AA Eval pool
         <em>and</em> the 34-model SWE-Rebench leaderboard.
@@ -1450,7 +1450,7 @@
       </div>
     </div>
     <div class="card table-wrap">
-      <table id="cross-perspective-table">
+      <table id="aa-rebench-table">
         <thead>
           <tr>
             <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
@@ -1463,7 +1463,7 @@
             <th data-col="value" class="sorted">Combined Value <span class="sort-arrow">↓</span></th>
           </tr>
         </thead>
-        <tbody id="cross-perspective-tbody"></tbody>
+        <tbody id="aa-rebench-tbody"></tbody>
       </table>
     </div>
     <div class="ca-note" style="margin-top:14px;">
@@ -2513,7 +2513,7 @@ function renderVersionTable() {
 // NAV HIGHLIGHT
 // ─────────────────────────────────────────────
 function initNav() {
-  const sections = ['rankings','swe-rebench','cross-perspective','charts','methodology','data','faq'];
+  const sections = ['rankings','swe-rebench','aa-rebench','charts','methodology','data','faq'];
   const links = document.querySelectorAll('.nav-links a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -2885,7 +2885,7 @@ const CROSS_PERSPECTIVE_DATA = [
 ];
 
 function initCrossPerspective() {
-  const tbody = document.getElementById('cross-perspective-tbody');
+  const tbody = document.getElementById('aa-rebench-tbody');
   if (!tbody) return;
 
   // Derive: SWE-R total cost (× 57 problems), Combined Cost, Avg Score, Value
@@ -2956,7 +2956,7 @@ function initCrossPerspective() {
     }).join('');
 
     // Update sort arrows
-    document.querySelectorAll('#cross-perspective-table thead th').forEach(th => {
+    document.querySelectorAll('#aa-rebench-table thead th').forEach(th => {
       const col = th.dataset.col;
       const arrow = th.querySelector('.sort-arrow');
       if (!arrow) return;
@@ -2971,7 +2971,7 @@ function initCrossPerspective() {
   }
 
   // Header click handlers
-  document.querySelectorAll('#cross-perspective-table thead th[data-col]').forEach(th => {
+  document.querySelectorAll('#aa-rebench-table thead th[data-col]').forEach(th => {
     th.addEventListener('click', () => {
       const col = th.dataset.col;
       const ascCols = ['model', 'rank', 'aaCost', 'sweCostTotal', 'combinedCost'];
