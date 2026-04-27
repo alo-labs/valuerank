@@ -1409,12 +1409,12 @@
           <tr>
             <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
             <th data-col="model">Model</th>
-            <th data-col="resolved" class="sorted">Resolved <span class="sort-arrow">↓</span></th>
+            <th data-col="resolved">Resolved <span class="sort-arrow">↕</span></th>
             <th data-col="pass5">Pass@5 <span class="sort-arrow">↕</span></th>
             <th data-col="cost">$ / Problem <span class="sort-arrow">↕</span></th>
             <th data-col="tokens">Tokens / Problem <span class="sort-arrow">↕</span></th>
             <th data-col="cached">Cached % <span class="sort-arrow">↕</span></th>
-            <th data-col="value">Value <span class="sort-arrow">↕</span></th>
+            <th data-col="value" class="sorted">Value <span class="sort-arrow">↓</span></th>
           </tr>
         </thead>
         <tbody id="swe-rebench-tbody"></tbody>
@@ -2729,7 +2729,7 @@ function initSweRebench() {
     d._costNorm     = ((n - d._costRank) / (n - 1)) * 100;
   });
 
-  let sortCol = 'resolved';
+  let sortCol = 'value';
   let sortDir = -1; // -1 desc, 1 asc
   let costWeight = 25;
 
@@ -2813,6 +2813,9 @@ function initSweRebench() {
     slider.addEventListener('input', () => {
       costWeight = parseInt(slider.value, 10);
       sliderVal.textContent = costWeight + '%';
+      // Slider always re-ranks by Value — overrides any user column-sort
+      sortCol = 'value';
+      sortDir = -1;
       render();
     });
   }
