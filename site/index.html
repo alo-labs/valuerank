@@ -824,34 +824,250 @@
     /* ── CODING AGENTS CONTENT ── */
     #ca-content { display: none; }
     #ca-content.visible { display: block; }
-    /* CA Hero */
+    /* CA Hero (v0.6.3 redesign — mirrors LLM hero) */
     .ca-hero {
-      background: var(--bg-hero); border-bottom: 1px solid var(--border);
-      padding: 100px 0 64px; text-align: center;
+      position: relative; overflow: hidden;
+      background: var(--bg-hero);
+      border-bottom: 1px solid var(--border);
+      padding: 96px 0 56px;
     }
-    .ca-hero-kicker {
-      display: inline-block; font-size: .72rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--accent-light); background: var(--accent-a08);
-      border: 1px solid var(--accent-a25);
-      padding: 4px 14px; border-radius: 999px; margin-bottom: 20px;
+    .ca-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(60% 50% at 85% 30%, rgba(59,130,246,.08) 0%, transparent 60%),
+        radial-gradient(40% 40% at 15% 90%, rgba(139,92,246,.06) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
     }
+    .ca-hero > .container { position: relative; z-index: 1; }
+
+    .ca-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      column-gap: 64px; row-gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 960px) {
+      .ca-hero-grid { grid-template-columns: 1fr; column-gap: 0; }
+    }
+
+    .ca-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-heading);
+      font-size: .72rem; font-weight: 700;
+      color: #60a5fa; letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      background: rgba(59,130,246,.08);
+      border: 1px solid rgba(59,130,246,.25);
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .ca-hero-pulse {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #60a5fa;
+      animation: ca-hero-pulse 2s ease-out infinite;
+    }
+    @keyframes ca-hero-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59,130,246,.6); }
+      70% { box-shadow: 0 0 0 8px rgba(59,130,246,0); }
+      100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+    }
+
     .ca-hero-title {
-      font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -.03em;
-      color: var(--text-primary); margin-bottom: 16px; line-height: 1.1;
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+      font-weight: 900; line-height: 1.02;
+      letter-spacing: -.045em;
+      color: var(--text-primary);
+      margin-bottom: 24px;
     }
+    .ca-hero-title em { font-style: normal; color: var(--text-secondary); font-weight: 700; }
+    .ca-hero-title .ca-hero-accent {
+      background: linear-gradient(135deg, #60a5fa 0%, #8b5cf6 60%, #c084fc 100%);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+    }
+
     .ca-hero-sub {
-      font-size: 1rem; color: var(--text-secondary); max-width: 620px;
-      margin: 0 auto 36px; line-height: 1.7;
+      color: var(--text-secondary);
+      font-size: 1.05rem; max-width: 580px; line-height: 1.65;
+      margin-bottom: 32px;
     }
-    .ca-stats { display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; }
-    .ca-stat { text-align: center; }
-    .ca-stat-num {
-      font-size: 1.9rem; font-weight: 800; color: var(--accent-light);
-      letter-spacing: -.04em; font-family: var(--font-mono);
+    .ca-hero-sub strong { color: var(--text-primary); font-weight: 600; }
+
+    .ca-hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .ca-hero-cta-primary, .ca-hero-cta-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-heading);
+      font-size: .875rem; font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all .2s;
+      letter-spacing: -.005em;
     }
-    .ca-stat-label { font-size: .72rem; color: var(--text-dim); margin-top: 2px; text-transform: uppercase; letter-spacing: .06em; }
-    /* CA two-list explainer */
+    .ca-hero-cta-primary {
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      color: white;
+      border: 1px solid transparent;
+      box-shadow: 0 4px 14px rgba(59,130,246,.3);
+    }
+    .ca-hero-cta-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(59,130,246,.4);
+      filter: brightness(1.08);
+    }
+    .ca-hero-cta-primary svg { width: 16px; height: 16px; }
+    .ca-hero-cta-secondary {
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    .ca-hero-cta-secondary:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+    }
+
+    /* CA Featured: dual leader cards (TB + SWE) */
+    .ca-leaders {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .ca-leaders-label {
+      font-family: var(--font-heading);
+      font-size: .68rem; font-weight: 700;
+      color: var(--text-dim); letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ca-leaders-label::before {
+      content: ''; width: 24px; height: 1px; background: var(--border-hover);
+    }
+    .ca-leaders-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .ca-leader-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      transition: all .3s;
+      overflow: hidden;
+    }
+    .ca-leader-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .ca-leader-card.tb::before {
+      background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, transparent 100%);
+    }
+    .ca-leader-card.swev::before {
+      background: linear-gradient(90deg, #8b5cf6 0%, #c084fc 50%, transparent 100%);
+    }
+    .ca-leader-card.tb {
+      background: linear-gradient(135deg, rgba(59,130,246,.06) 0%, var(--bg-card) 60%);
+      border-color: rgba(59,130,246,.25);
+    }
+    .ca-leader-card.swev {
+      background: linear-gradient(135deg, rgba(139,92,246,.06) 0%, var(--bg-card) 60%);
+      border-color: rgba(139,92,246,.25);
+    }
+    .ca-leader-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(99,102,241,.15);
+    }
+    .ca-leader-card.tb:hover { border-color: rgba(59,130,246,.45); }
+    .ca-leader-card.swev:hover { border-color: rgba(139,92,246,.45); }
+
+    .ca-leader-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 8px; gap: 12px;
+    }
+    .ca-leader-bench {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-heading);
+      font-size: .68rem; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .ca-leader-card.tb .ca-leader-bench { color: #60a5fa; }
+    .ca-leader-card.swev .ca-leader-bench { color: #c084fc; }
+    .ca-leader-bench svg { width: 13px; height: 13px; }
+    .ca-leader-rank-pill {
+      font-family: var(--font-mono);
+      font-size: .62rem; font-weight: 800;
+      padding: 2px 8px; border-radius: 999px;
+      letter-spacing: .06em;
+      background: rgba(255,255,255,.06);
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .ca-leader-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; margin-bottom: 6px;
+    }
+    .ca-leader-name {
+      font-family: var(--font-heading);
+      font-size: 1.15rem; font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.015em;
+      line-height: 1.15;
+    }
+    .ca-leader-score {
+      font-family: var(--font-mono);
+      font-size: 1.85rem; font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.025em;
+    }
+    .ca-leader-card.tb .ca-leader-score { color: #60a5fa; }
+    .ca-leader-card.swev .ca-leader-score { color: #c084fc; }
+    .ca-leader-meta {
+      font-size: .75rem; color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .ca-leader-bar-track {
+      height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+    }
+    .ca-leader-bar-fill {
+      height: 100%; border-radius: 2px;
+      transition: width .8s cubic-bezier(.4,0,.2,1);
+    }
+    .ca-leader-card.tb .ca-leader-bar-fill {
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    }
+    .ca-leader-card.swev .ca-leader-bar-fill {
+      background: linear-gradient(90deg, #8b5cf6, #c084fc);
+    }
+
+    /* CA stat-bar (bottom strip) */
+    .ca-statbar {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .ca-statbar { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    .ca-statbar-item {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .ca-statbar-num {
+      font-family: var(--font-mono);
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -.02em;
+      line-height: 1;
+    }
+    .ca-statbar-label {
+      font-family: var(--font-heading);
+      font-size: .68rem; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: .1em;
+    }
+
+    /* Legacy CA explainer card (kept for any deep-link callers, but unused in new hero) */
     .ca-explainer {
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
       margin-top: 40px;
@@ -1377,25 +1593,82 @@
 <!-- CA HERO -->
 <section class="ca-hero">
   <div class="container">
-    <h1 class="ca-hero-title">Which Coding Agent Delivers Real Results?</h1>
-    <p class="ca-hero-sub">Two separate ranked lists — Terminal-Bench 2.0 and SWE-bench Verified — because the data doesn't support a composite. The two benchmarks test entirely different capabilities and attract entirely different agent populations.</p>
-    <div class="ca-stats">
-      <div class="ca-stat"><div class="ca-stat-num">22</div><div class="ca-stat-label">Agent entries</div></div>
-      <div class="ca-stat"><div class="ca-stat-num">2</div><div class="ca-stat-label">Active benchmarks</div></div>
-      <div class="ca-stat"><div class="ca-stat-num">11</div><div class="ca-stat-label">TB2.0 entries</div></div>
-      <div class="ca-stat"><div class="ca-stat-num">13</div><div class="ca-stat-label">SWE-V entries</div></div>
-      <div class="ca-stat"><div class="ca-stat-num">1</div><div class="ca-stat-label">Dual-benchmark entry</div></div>
-    </div>
-    <div class="ca-explainer container" style="max-width:720px;margin-top:40px;padding:0;">
-      <div class="ca-explainer-card">
-        <div class="ca-explainer-label tb">Terminal-Bench 2.0</div>
-        <div class="ca-explainer-title">Terminal-Native Autonomy</div>
-        <div class="ca-explainer-body">89 tasks across software engineering, biology, security, and gaming. Live Docker containers. Time-based execution. Real terminal feedback loops. Best signal for CLI-first, systems-level agents.</div>
+    <div class="ca-hero-grid">
+      <!-- LEFT: title + desc + CTA -->
+      <div class="ca-hero-content">
+        <div class="ca-hero-eyebrow">
+          <span class="ca-hero-pulse"></span>
+          Coding Agent ValueRank · v0.1.0
+        </div>
+        <h1 class="ca-hero-title">
+          Which Coding Agent<br>
+          Delivers <em>Real</em><br>
+          <span class="ca-hero-accent">Results?</span>
+        </h1>
+        <p class="ca-hero-sub">
+          Two separate ranked lists — <strong>Terminal-Bench 2.0</strong> and <strong>SWE-bench Verified</strong> — because the data doesn't support a composite. The two benchmarks test entirely different capabilities and attract entirely different agent populations.
+        </p>
+        <div class="ca-hero-cta-row">
+          <a href="#ca-tb20" class="ca-hero-cta-primary">
+            See Rankings <i data-lucide="arrow-down"></i>
+          </a>
+          <a href="#ca-benchmarks" class="ca-hero-cta-secondary">
+            Benchmark Landscape
+          </a>
+        </div>
       </div>
-      <div class="ca-explainer-card">
-        <div class="ca-explainer-label swev">SWE-bench Verified</div>
-        <div class="ca-explainer-title">GitHub Issue Resolution</div>
-        <div class="ca-explainer-body">500 human-validated tasks across 12 Python repositories. Patch-and-test workflow. Best signal for agents specialized in structured code repair, BM25 retrieval, and file editing.</div>
+
+      <!-- RIGHT: dual leader featured cards -->
+      <div class="ca-leaders">
+        <div class="ca-leaders-label">Current Leaders · 22 Agent Entries</div>
+        <div class="ca-leader-card tb">
+          <div class="ca-leader-head">
+            <span class="ca-leader-bench"><i data-lucide="terminal"></i>Terminal-Bench 2.0</span>
+            <span class="ca-leader-rank-pill">Rank 1 · 11 Entries</span>
+          </div>
+          <div class="ca-leader-row">
+            <div class="ca-leader-name">Codex + GPT-5.5</div>
+            <div class="ca-leader-score">82.0%</div>
+          </div>
+          <div class="ca-leader-meta">OpenAI · 89 tasks · Docker · CLI-First Autonomy</div>
+          <div class="ca-leader-bar-track"><div class="ca-leader-bar-fill" style="width:82%"></div></div>
+        </div>
+        <div class="ca-leader-card swev">
+          <div class="ca-leader-head">
+            <span class="ca-leader-bench"><i data-lucide="git-pull-request"></i>SWE-bench Verified</span>
+            <span class="ca-leader-rank-pill">Rank 1 · 13 Entries</span>
+          </div>
+          <div class="ca-leader-row">
+            <div class="ca-leader-name">Augment Code + Claude Opus 4.6</div>
+            <div class="ca-leader-score">72.0%</div>
+          </div>
+          <div class="ca-leader-meta">Augment · 500 tasks · Python repos · Patch-and-Test</div>
+          <div class="ca-leader-bar-track"><div class="ca-leader-bar-fill" style="width:72%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom stat strip -->
+    <div class="ca-statbar">
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">22</span>
+        <span class="ca-statbar-label">Agent Entries</span>
+      </div>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">2</span>
+        <span class="ca-statbar-label">Active Benchmarks</span>
+      </div>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">89 / 500</span>
+        <span class="ca-statbar-label">TB2.0 / SWE-V Tasks</span>
+      </div>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">~10 pp</span>
+        <span class="ca-statbar-label">Scaffold Premium</span>
+      </div>
+      <div class="ca-statbar-item">
+        <span class="ca-statbar-num">Apr 28</span>
+        <span class="ca-statbar-label">Last Updated</span>
       </div>
     </div>
   </div>
