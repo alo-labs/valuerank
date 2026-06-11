@@ -147,5 +147,9 @@ Current exclusions verified during the v1.0 audit:
 - `ITBench-AA` is excluded. Artificial Analysis currently publishes `17 of 24 models`, but the visible evaluated set is not the ValueRank cohort and omits at least `GPT-5.4`, `Claude Opus 4.8`, and `MiniMax M3`.
 - `MMMU-Pro` is excluded. Artificial Analysis currently publishes `18 of 198 models`, but that leaderboard is a multimodal subset rather than the exact DeepSWE-constrained cohort.
 - `MMLU-Pro` is excluded. Artificial Analysis currently publishes `14 of 345 models`, but the visible 14-model set is a different group centered on `Gemini 3 Pro Preview`, `Claude Opus 4.5`, and `gpt-oss`, not the ValueRank cohort.
+- `LiveCodeBench` is excluded. Artificial Analysis currently publishes `9 of 343 models`, far below full cohort coverage.
+- `Global-MMLU-Lite` is excluded. Artificial Analysis currently publishes `11 of 111 models`, far below full cohort coverage and with a different visible model set.
+- `AIME 2025` is excluded. Artificial Analysis currently publishes `9 of 269 models`, far below full cohort coverage.
+- `MATH-500` is excluded. Artificial Analysis currently publishes `5 of 201 models`, far below full cohort coverage.
 
 Result: v1.0 keeps the maximum currently verified fully covered benchmark set found in the zero-gap audit.
