@@ -1,13 +1,16 @@
 # ValueRank Methodology
 
-**Version:** v0.9  
+**Version:** v1.0  
 **Updated:** June 12, 2026
 
 ## Cohort Rule
 
-v0.9 ranks the models listed on [DeepSWE](https://deepswe.datacurve.ai/), excluding **Grok-Build-0.1** and **Gemini 3 Flash** by user instruction.
+v1.0 ranks only the current [DeepSWE](https://deepswe.datacurve.ai/) model roster, excluding:
 
-Ranked v0.9 cohort:
+- `Grok-Build-0.1`
+- `Gemini 3 Flash`
+
+Ranked cohort:
 
 - GPT-5.5
 - Claude Opus 4.8
@@ -24,30 +27,33 @@ Ranked v0.9 cohort:
 - Gemini 3.1 Pro
 - DeepSeek V4-Pro
 
+## Zero-Gap Rule
+
+v1.0 removes the old neutral-fill system entirely.
+
+- Every retained dimension must have a genuine current score for all 14 ranked models.
+- If even one ranked model is genuinely missing from a benchmark, that benchmark is excluded.
+- v1.0 therefore has **zero missing benchmark cells** and uses **no neutral 50 placeholders**.
+
 ## Scored Dimensions
 
-ValueRank v0.9 uses 20 dimensions:
+ValueRank v1.0 uses 15 fully covered dimensions:
 
 1. Cost
 2. IFBench
 3. AA-Omniscience Hallucination Rate
-4. Terminal-Bench 2.1
-5. SWE-bench Verified
-6. SWE-bench Pro
-7. LiveCodeBench v4
-8. DeepSWE
-9. Artificial Analysis Index
-10. Speed
-11. Tau2-Bench
-12. OSWorld
-13. BrowseComp
-14. LCR / RULER
-15. HLE
-16. GPQA Diamond
-17. MMLU-Pro
-18. AIME 2025
-19. SciCode
-20. AA-Omniscience Index
+4. Terminal-Bench Hard
+5. DeepSWE
+6. GDPval-AA
+7. τ²-Bench Telecom
+8. AA-LCR
+9. AA-Omniscience Accuracy
+10. Humanity's Last Exam
+11. GPQA Diamond
+12. SciCode
+13. CritPt
+14. Artificial Analysis Intelligence Index
+15. Speed
 
 ## Weights
 
@@ -56,31 +62,18 @@ ValueRank v0.9 uses 20 dimensions:
 | Cost | 25% |
 | IFBench | 12% |
 | AA-Omniscience Hallucination Rate | 6% |
-| Terminal-Bench 2.1 | 6% |
-| SWE-bench Verified | 5% |
-| SWE-bench Pro | 4% |
-| LiveCodeBench v4 | 5% |
-| DeepSWE | 5% |
-| Artificial Analysis Index | 5% |
+| Terminal-Bench Hard | 6% |
+| DeepSWE | 7% |
+| GDPval-AA | 6% |
+| τ²-Bench Telecom | 5% |
+| AA-LCR | 4% |
+| AA-Omniscience Accuracy | 4% |
+| Humanity's Last Exam | 4% |
+| GPQA Diamond | 4% |
+| SciCode | 4% |
+| CritPt | 3% |
+| Artificial Analysis Intelligence Index | 6% |
 | Speed | 5% |
-| Tau2-Bench | 4% |
-| OSWorld | 4% |
-| BrowseComp | 3% |
-| LCR / RULER | 2% |
-| HLE | 2% |
-| GPQA Diamond | 2% |
-| MMLU-Pro | 2% |
-| AIME 2025 | 1% |
-| SciCode | 1% |
-| AA-Omniscience Index | 1% |
-
-Macro-balance:
-
-- Cost: 25%
-- Reliability: 18% (`IFBench` 12% + `AA-Omniscience Hallucination Rate` 6%)
-- Code / agentic coding: 25%
-- Production / agentic operation: 24%
-- Intelligence: 8%
 
 ## Normalization
 
@@ -88,60 +81,58 @@ Each dimension is rank-normalized:
 
 `((n - rank) / (n - 1)) * 100`
 
-Where `n` is the number of models with real data on that benchmark.
+Where `n = 14` for every retained benchmark in v1.0.
 
-- Best real score gets `100`
-- Worst real score gets `0`
-- Missing data gets neutral `50`
-- For AA-Omniscience Hallucination Rate, the **lowest raw hallucination rate ranks first**
+- Best score gets `100`
+- Worst score gets `0`
+- Ties receive the average of the tied ranks
+- There are **no missing-data cells**
 
-### Cost construction
+For AA-Omniscience Hallucination Rate, lower raw hallucination is better.
 
-v0.9 now builds the raw cost input in three steps before applying the normal ValueRank rank-normalization:
+## Cost Construction
 
-1. Normalize current Artificial Analysis eval cost onto a `0–100` scale, where the highest-cost model in the ranked cohort is `100`.
-2. Normalize current **DeepSWE average cost per task** onto a `0–100` scale, where the highest-cost model in the ranked cohort is `100`.
-3. Add the two `0–100` components and renormalize the `0–200` total back to a `0–100` composite-cost scale.
+The `Cost` dimension is still built in three steps before rank-normalization:
 
-Lower composite cost is better. That composite-cost raw value is then rank-normalized into the `Cost` dimension used in ValueRank scoring.
+1. Normalize current Artificial Analysis eval cost onto `0–100`, with the highest-cost ranked model set to `100`.
+2. Normalize current DeepSWE average cost per task onto `0–100`, with the highest-cost ranked model set to `100`.
+3. Average those two penalty terms back onto a single `0–100` composite cost scale.
+
+Lower composite cost is better.
 
 ## Quality Score
 
-The Quality Score removes the 25% composite-cost term and renormalizes the remaining 19 dimensions to 100%.
+The Quality Score removes the 25% cost term and renormalizes the remaining 14 non-cost dimensions to 100%.
 
 ## Source Policy
 
-v0.9 refreshes unstable data from primary sources:
+v1.0 uses only primary sources for unstable data:
 
-- DeepSWE for DeepSWE pass@1
-- Terminal-Bench 2.1 leaderboard for current terminal-agent results where exact model matches exist
-- Vals SWE-bench Verified leaderboard for current exact model matches
-- Scale SWE-bench Pro public leaderboard where current public rows exist
-- Ai2 IFBench / Artificial Analysis publication for exact IFBench model scores
-- OSWorld-Verified official results workbook
-- Artificial Analysis evaluation pages for GPQA Diamond, HLE, SciCode, RULER/LCR, AA-Omniscience Index, and AA-Omniscience Hallucination Rate
-- Artificial Analysis model pages for current eval cost, speed, and intelligence-index values
-- DeepSWE for both pass@1 and average-cost-per-task values used in the composite cost construction
+- [DeepSWE](https://deepswe.datacurve.ai/) for DeepSWE pass@1 and DeepSWE average cost per task
+- Artificial Analysis model pages for:
+  - Artificial Analysis Intelligence Index
+  - Speed
+  - Eval cost
+  - GDPval-AA
+  - Terminal-Bench Hard
+  - τ²-Bench Telecom
+  - AA-LCR
+  - AA-Omniscience Accuracy
+  - AA-Omniscience Non-Hallucination Rate
+  - Humanity's Last Exam
+  - GPQA Diamond
+  - SciCode
+  - IFBench
+  - CritPt
 
-## Alias Rule
+## Artificial Analysis Extraction Rule
 
-Several current primary leaderboards publish a model family only as a public reasoning-profile row, for example:
+Artificial Analysis benchmark leaderboards often expose only a visible top slice in the rendered results list. v1.0 therefore derives the 14-model cohort rows directly from current rendered Artificial Analysis **model pages**, which still display benchmark result cards from the same first-party source.
 
-- `GPT-5.5 (xhigh)`
-- `Claude Opus 4.8 (Adaptive Reasoning, Max Effort)`
-- `Gemini 3.1 Pro Preview`
-- `DeepSeek V4 Pro (Reasoning, Max Effort)`
-- `MiniMax-M3`
-- `GLM-5.1 (Reasoning)`
+Concrete v1.0 rule:
 
-ValueRank is family-level, not reasoning-profile-level. v0.9 therefore allows a source row to map back to the ranked family when all of the following are true:
+- For the 11 AA benchmark dimensions above, 13 cohort rows were visible on the current `GPT-5.5 (xhigh)` model page.
+- The missing `GPT-5.4 mini (xhigh)` row was filled from its own current model page.
+- No values were inferred from third-party articles, screenshots, or older generations.
 
-1. The source row is clearly the same model family with only a suffix, punctuation variant, or public preview/profile label.
-2. ValueRank does not separately rank another sibling profile from that same family.
-3. The benchmark host itself uses that profile row as the current public representative result.
-
-This rule is used to reduce artificial missingness, but it is not extended across materially different model versions. For example, `Gemini 3 Pro Preview` is not treated as `Gemini 3.1 Pro`.
-
-## Remaining Missing-Data Rule
-
-Where no exact current row or allowed family-level alias exists for a model-dimension pair, ValueRank marks the cell missing and assigns neutral `50.0`. v0.9 does not infer benchmark values from secondary commentary, screenshots, or adjacent model generations.
+This is still primary-source extraction from Artificial Analysis' own current rendered pages.
