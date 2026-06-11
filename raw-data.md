@@ -146,3 +146,14 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | GLM 5.1 | 10.63 | 41.01 | 25.82 |
 | Gemini 3.1 Pro | 17.44 | 10.12 | 13.78 |
 | DeepSeek V4-Pro | 5.23 | 23.20 | 14.22 |
+
+## Excluded current benchmark candidates
+
+These benchmarks were re-checked during the zero-gap audit and remain excluded because the published first-party model sets do not match the exact 14-model DeepSWE cohort:
+
+| Benchmark | Current published coverage | Why excluded from v1.0 |
+|---|---|---|
+| APEX-Agents-AA | Artificial Analysis: `15 of 24 models` | Visible evaluated set omits cohort members including `Claude Opus 4.8`, `Claude Opus 4.7`, and `GLM 5.1` |
+| ITBench-AA | Artificial Analysis: `17 of 24 models` | Visible evaluated set omits cohort members including `GPT-5.4`, `Claude Opus 4.8`, and `MiniMax M3` |
+| MMMU-Pro | Artificial Analysis: `18 of 198 models` | Multimodal subset, not the exact DeepSWE cohort |
+| MMLU-Pro | Artificial Analysis: `14 of 345 models` | Published 14-model set is a different cohort centered on `Gemini 3 Pro Preview`, `Claude Opus 4.5`, and `gpt-oss` |

@@ -136,3 +136,16 @@ Concrete v1.0 rule:
 - No values were inferred from third-party articles, screenshots, or older generations.
 
 This is still primary-source extraction from Artificial Analysis' own current rendered pages.
+
+## Current Excluded Benchmark Candidates
+
+The zero-gap rule is stricter than "interesting benchmark" inclusion. A benchmark is excluded unless the currently published first-party leaderboard covers the exact ranked cohort.
+
+Current exclusions verified during the v1.0 audit:
+
+- `APEX-Agents-AA` is excluded. Artificial Analysis currently publishes `15 of 24 models`, but the visible evaluated set is not the ValueRank cohort and omits at least `Claude Opus 4.8`, `Claude Opus 4.7`, and `GLM 5.1`.
+- `ITBench-AA` is excluded. Artificial Analysis currently publishes `17 of 24 models`, but the visible evaluated set is not the ValueRank cohort and omits at least `GPT-5.4`, `Claude Opus 4.8`, and `MiniMax M3`.
+- `MMMU-Pro` is excluded. Artificial Analysis currently publishes `18 of 198 models`, but that leaderboard is a multimodal subset rather than the exact DeepSWE-constrained cohort.
+- `MMLU-Pro` is excluded. Artificial Analysis currently publishes `14 of 345 models`, but the visible 14-model set is a different group centered on `Gemini 3 Pro Preview`, `Claude Opus 4.5`, and `gpt-oss`, not the ValueRank cohort.
+
+Result: v1.0 keeps the maximum currently verified fully covered benchmark set found in the zero-gap audit.
