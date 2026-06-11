@@ -149,15 +149,15 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 
 ## Excluded current benchmark candidates
 
-These benchmarks were re-checked during the zero-gap audit and remain excluded because the published first-party model sets do not match the exact 14-model DeepSWE cohort:
+These benchmarks were re-checked during the corrected zero-gap audit and remain excluded because at least one of the 14 ranked ValueRank models is still genuinely missing from the currently published first-party benchmark data:
 
 | Benchmark | Current published coverage | Why excluded from v1.0 |
 |---|---|---|
-| APEX-Agents-AA | Artificial Analysis: `15 of 24 models` | Visible evaluated set omits cohort members including `Claude Opus 4.8`, `Claude Opus 4.7`, and `GLM 5.1` |
-| ITBench-AA | Artificial Analysis: `17 of 24 models` | Visible evaluated set omits cohort members including `GPT-5.4`, `Claude Opus 4.8`, and `MiniMax M3` |
-| MMMU-Pro | Artificial Analysis: `18 of 198 models` | Multimodal subset, not the exact DeepSWE cohort |
-| MMLU-Pro | Artificial Analysis: `14 of 345 models` | Published 14-model set is a different cohort centered on `Gemini 3 Pro Preview`, `Claude Opus 4.5`, and `gpt-oss` |
-| LiveCodeBench | Artificial Analysis: `9 of 343 models` | Far below full cohort coverage |
-| Global-MMLU-Lite | Artificial Analysis: `11 of 111 models` | Far below full cohort coverage and different visible model set |
-| AIME 2025 | Artificial Analysis: `9 of 269 models` | Far below full cohort coverage |
-| MATH-500 | Artificial Analysis: `5 of 201 models` | Far below full cohort coverage |
+| APEX-Agents-AA | Artificial Analysis: `15 of 24 models` | Missing `Claude Opus 4.8`, `Claude Opus 4.7`, `MiniMax M3`, and `GLM 5.1` |
+| ITBench-AA | Artificial Analysis: `17 of 24 models` | Missing `Claude Opus 4.8`, `GPT-5.4`, `Claude Opus 4.6`, and `MiniMax M3` |
+| MMMU-Pro | Artificial Analysis: `17 of 200 models` | Missing `Claude Opus 4.8`, `GPT-5.4`, `Claude Opus 4.7`, `Claude Opus 4.6`, `MiniMax M3`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` |
+| MMLU-Pro | Artificial Analysis: `9 of 345 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
+| LiveCodeBench | Artificial Analysis: `9 of 343 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
+| Global-MMLU-Lite | Artificial Analysis: `11 of 111 models` | Missing `GPT-5.5`, `Claude Opus 4.8`, `GPT-5.4`, `Claude Opus 4.7`, `Gemini 3.5 Flash`, `Kimi K2.6`, `MiniMax M3`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` |
+| AIME 2025 | Artificial Analysis: `9 of 269 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
+| MATH-500 | Artificial Analysis: `5 of 201 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
