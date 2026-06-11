@@ -1215,7 +1215,7 @@
   <div class="nav-brand">
     <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
       <span class="logo">ValueRank</span>
-      <span class="badge">v0.6</span>
+      <span class="badge">v0.7</span>
     </a>
   </div>
   <div class="mode-switcher">
@@ -1224,15 +1224,13 @@
   </div>
   <div class="nav-links">
     <a href="#rankings" class="active">Rankings</a>
-    <a href="#swe-rebench">SWE-Rebench</a>
-    <a href="#aa-rebench">AA+Rebench</a>
     <a href="#charts">Charts</a>
     <a href="#methodology">Methodology</a>
     <a href="#data">Data</a>
     <a href="#faq">FAQ</a>
   </div>
   <div class="nav-right">
-    <div class="nav-meta">April 27, 2026 · 23 models · 18 dimensions</div>
+    <div class="nav-meta">June 11, 2026 · 15 models · 19 dimensions</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
       <i data-lucide="sun" class="icon-sun"></i>
       <i data-lucide="moon" class="icon-moon"></i>
@@ -1252,7 +1250,7 @@
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-pulse"></span>
-          Production AI Ranking Framework · v0.6
+          Production AI Ranking Framework · v0.7
         </div>
         <h1 class="hero-title">
           Which AI Model<br>
@@ -1260,7 +1258,7 @@
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank ranks <strong>23 frontier AI models</strong> across <strong>18 dimensions</strong> using rank-based normalization with a 25% cost weight — built for production teams where price, speed, and reliability matter alongside raw capability.
+          ValueRank now ranks the <strong>DeepSWE model roster</strong> across <strong>19 dimensions</strong>, excluding <strong>Grok-Build-0.1</strong>. v0.7 adds <strong>DeepSWE</strong> as a scored coding benchmark and refreshes current primary-source cost, speed, and terminal-benchmark data where exact model matches exist.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1274,7 +1272,7 @@
 
       <!-- RIGHT: featured #1 + 2 runners -->
       <div class="hero-podium-v2">
-        <div class="hero-podium-label">Current Top 3 · 23-Model Pool</div>
+        <div class="hero-podium-label">Current Top 3 · DeepSWE Cohort</div>
         <div class="podium-hero" id="podium-hero-1"></div>
         <div class="podium-runners">
           <div class="podium-runner silver" id="podium-runner-2"></div>
@@ -1286,23 +1284,23 @@
     <!-- Bottom stat strip -->
     <div class="hero-statbar">
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">23</span>
+        <span class="hero-statbar-num">15</span>
         <span class="hero-statbar-label">Models Ranked</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">18</span>
-        <span class="hero-statbar-label">Quality Dimensions</span>
+        <span class="hero-statbar-num">19</span>
+        <span class="hero-statbar-label">Scored Dimensions</span>
       </div>
       <div class="hero-statbar-item">
         <span class="hero-statbar-num">25%</span>
         <span class="hero-statbar-label">Cost Weight</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">$0–$5K</span>
+        <span class="hero-statbar-num">$66–$5.1K</span>
         <span class="hero-statbar-label">Eval Cost Range</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">Apr 28</span>
+        <span class="hero-statbar-num">Jun 11</span>
         <span class="hero-statbar-label">Last Updated</span>
       </div>
     </div>
@@ -1358,123 +1356,23 @@
       <div class="insight-card">
         <div class="insight-icon">🎯</div>
         <div class="insight-title">Pareto Finding</div>
-        <div class="insight-body">v0.6 has a <strong>6-model frontier</strong>: Gemma 4 31B ($0), Phi-4 ($4), ML3 ($39), MiMo ($462), Kimi K2.6 ($948), Gemini ($892). Every model priced above $892 is dominated by Gemini on both quality and cost. The Gemma 3→Gemma 4 swap added real benchmarks for the free tier; MiMo enters the frontier as Xiaomi's debut at quality #6.</div>
+        <div class="insight-body">v0.7 has a <strong>4-model frontier</strong>: <strong>Gemini 3 Flash</strong> ($66), <strong>Gemini 3.1 Pro</strong> ($892), <strong>GPT-5.5</strong> ($3,357), and <strong>Claude Opus 4.8</strong> ($4,686). Low-cost DeepSWE entries rank strongly under the neutral-50 missing-data convention.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">💡</div>
         <div class="insight-title">Cost Penalty</div>
-        <div class="insight-body"><strong>Claude Opus 4.7</strong> drops 15 places from quality #3 to overall #18 due to its $4,811 eval cost. A 25% cost weight has a dramatic effect on expensive models — the gap widens as the n=23 cost pool further compresses ultra-premium scores.</div>
+        <div class="insight-body"><strong>Claude Opus 4.7</strong> is quality <strong>#6</strong>, but falls to overall <strong>#14</strong> because current Artificial Analysis eval cost is above <strong>$5.1K</strong>. The 25% cost weight hits ultra-premium models hard when source-audited coverage is sparse.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">⚡</div>
         <div class="insight-title">Sweet Spot</div>
-        <div class="insight-body"><strong>Gemini 3.1 Pro</strong> is both quality #1 and cost-competitive at $892 — cheaper than GPT-5.5 ($3,357), Opus 4.7 ($4,811), and GPT-5.4 ($2,851), while beating all on quality.</div>
+        <div class="insight-body"><strong>Gemini 3 Flash</strong> leads overall because it combines the lowest verified eval cost with an exact SWE-bench Verified row and high verified speed. Its many ⊘ cells are neutral rather than positive evidence, so treat the lead as cost-sensitive.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
-        <div class="insight-title">v0.6 Refresh</div>
-        <div class="insight-body"><strong>4 model swaps</strong> (Gemma 3→4 31B, Nova Pro→Premier, Grok 3→4.20, o3-mini→o4-mini) and <strong>3 additions</strong> (MiMo-V2.5-Pro, Qwen 3.6 Max, Gemma 4 27B MoE). Pool grows 20→23. MiMo debuts at #5; o4-mini #10; Grok 4.20 #14. Opus 4.7 slides quality #3 → overall #18 (cost penalty +3).</div>
+        <div class="insight-title">v0.7 Refresh</div>
+        <div class="insight-body">v0.7 constrains the roster to <strong>DeepSWE-listed models</strong>, excludes <strong>Grok-Build-0.1</strong>, adds <strong>DeepSWE</strong> at <strong>5%</strong>, and includes exact current <strong>IFBench</strong> and <strong>Vals SWE-bench Verified</strong> rows where names match.</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- SWE-REBENCH VALUERANK (single-source bonus table) -->
-<section id="swe-rebench" style="padding-top: 32px;">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label" style="color:#8b5cf6;">SWE-Rebench Single-Source Ranking</div>
-      <div class="section-title">SWE-Rebench ValueRank — 34 Models</div>
-      <div class="section-sub">
-        Bonus ranking based exclusively on the
-        <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">SWE-Rebench</a>
-        leaderboard's uniform-eval methodology (Jan–Mar 2026 rolling 57-task window from 46 repositories).
-        Single source — every model evaluated against the same problems with the same scaffold —
-        which is why it complements rather than competes with the 18-dimension ValueRank above.
-        <strong>Independent ranking</strong>: uses only Resolved Rate (pass@1) and Cost per Problem.
-      </div>
-    </div>
-    <div class="filter-bar" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:20px;">
-      <div style="flex:1;font-size:12px;color:var(--text-dim);min-width:200px;">
-        Click any header to sort. Drag the slider to weight cost in the composite ranking.
-      </div>
-      <div class="slider-wrap">
-        <span class="slider-label">Cost weight</span>
-        <input type="range" id="swe-rebench-slider" min="0" max="50" value="25" step="1">
-        <span class="slider-val" id="swe-rebench-slider-val">25%</span>
-      </div>
-    </div>
-    <div class="card table-wrap">
-      <table id="swe-rebench-table">
-        <thead>
-          <tr>
-            <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
-            <th data-col="model">Model</th>
-            <th data-col="resolved">Resolved <span class="sort-arrow">↕</span></th>
-            <th data-col="pass5">Pass@5 <span class="sort-arrow">↕</span></th>
-            <th data-col="cost">$ / Problem <span class="sort-arrow">↕</span></th>
-            <th data-col="tokens">Tokens / Problem <span class="sort-arrow">↕</span></th>
-            <th data-col="cached">Cached % <span class="sort-arrow">↕</span></th>
-            <th data-col="value" class="sorted">Value <span class="sort-arrow">↓</span></th>
-          </tr>
-        </thead>
-        <tbody id="swe-rebench-tbody"></tbody>
-      </table>
-    </div>
-    <div class="ca-note" style="margin-top:14px;">
-      <strong>Source:</strong>
-      <a href="https://swe-rebench.com" target="_blank" rel="noopener" style="color:var(--accent-light);text-decoration:underline;">swe-rebench.com</a>,
-      Jan–Mar 2026 rolling window · 57 problems from 46 repositories · 34 models with complete metrics. &nbsp;
-      <strong>Resolved Rate:</strong> pass@1 with ±1σ standard error margin shown inline. &nbsp;
-      <strong>Cached %:</strong> share of input tokens served from prompt cache. The ~93–96% on Anthropic models reflects heavy
-      cache reuse with short non-cached deltas; DeepSeek-V3.2 at 17% reflects a no-cache architecture for that submission. &nbsp;
-      <strong>Value:</strong> rank-based composite of <code>(1−w) × Resolved-rank + w × Cost-rank</code>,
-      where w is the slider weight (default 25%). Cheaper cost ranks higher in the cost dimension.
-    </div>
-  </div>
-</section>
-
-<!-- AA+REBENCH VALUERANK (models in BOTH AA Eval and SWE-Rebench) -->
-<section id="aa-rebench" style="padding-top: 32px;">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label" style="color:#06b6d4;">AA + Rebench</div>
-      <div class="section-title">AA + Rebench ValueRank — 7 Models in Both Rankings</div>
-      <div class="section-sub">
-        The 7 models with strict-name matches in <strong>both</strong> the main 23-model AA Eval pool
-        <em>and</em> the 34-model SWE-Rebench leaderboard.
-        <strong>Combined Cost</strong> = AA Eval Cost + SWE-Rebench Cost-per-Problem × 57 problems
-        (the full evaluation spend across both methodologies).
-        <strong>Combined Value</strong> = average of AA Quality score and SWE-Rebench Resolved Rate, divided by combined cost in $K.
-        Click any header to sort.
-      </div>
-    </div>
-    <div class="card table-wrap">
-      <table id="aa-rebench-table">
-        <thead>
-          <tr>
-            <th data-col="rank">Rank <span class="sort-arrow">↕</span></th>
-            <th data-col="model">Model</th>
-            <th data-col="aaQuality">AA Quality <span class="sort-arrow">↕</span></th>
-            <th data-col="sweResolved">SWE-R Resolved <span class="sort-arrow">↕</span></th>
-            <th data-col="aaCost">AA Eval $ <span class="sort-arrow">↕</span></th>
-            <th data-col="sweCostTotal">SWE-R $ × 57 <span class="sort-arrow">↕</span></th>
-            <th data-col="combinedCost">Combined $ <span class="sort-arrow">↕</span></th>
-            <th data-col="value" class="sorted">Combined Value <span class="sort-arrow">↓</span></th>
-          </tr>
-        </thead>
-        <tbody id="aa-rebench-tbody"></tbody>
-      </table>
-    </div>
-    <div class="ca-note" style="margin-top:14px;">
-      <strong>Why this view?</strong> The two source rankings disagree dramatically on Anthropic models
-      (Sonnet 4.6 / Opus 4.6 sit at #22 / #23 on the AA Pool but #3 / #2 on SWE-Rebench)
-      and on Gemma 4 31B Dense (#7 on AA Pool, free-tier driven ↔ #32 on SWE-Rebench, weakest coding score).
-      The combined view shows what each model actually costs to evaluate across <em>both</em> methodologies —
-      useful when you need a single number for budget planning that doesn't depend on which methodology you trust more.
-      &nbsp;<strong>Score formula:</strong> <code>(AA Quality + SWE-R Resolved) ÷ 2</code>. &nbsp;
-      <strong>Cost formula:</strong> <code>AA Eval Cost + SWE-R $/problem × 57</code>. &nbsp;
-      <strong>Value:</strong> <code>avg score × 1000 ÷ combined cost</code> (score points per $1K of total observed eval cost).
     </div>
   </div>
 </section>
@@ -1514,7 +1412,7 @@
       </div>
       <!-- Heatmap -->
       <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 23 models × 18 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 15 models × 19 dimensions. Color = normalized score (0–100). <strong>⊘</strong> = missing data (shown at neutral 50). Columns grouped by macro-category. Rows sorted by overall score. Hover for details.</div>
         <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
       </div>
       <!-- Bubble -->
@@ -1524,7 +1422,7 @@
       </div>
       <!-- Bump -->
       <div class="chart-panel" id="panel-bump">
-        <div class="chart-desc"><strong>Version History:</strong> How rankings have shifted across ValueRank versions as new data was collected and corrections applied. Crossing lines = rank changes. Notable: Kimi's dramatic journey from #2 → #6 → #4 → #6 across versions; MiMo debut at #5 in v0.6.</div>
+        <div class="chart-desc"><strong>Version History:</strong> How the DeepSWE cohort models moved across ValueRank versions as new benchmark coverage arrived. v0.7 changes the eligible pool to DeepSWE-listed models only, so historical lines should be read as rank history, not score continuity.</div>
         <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Two-frontier / Cost Impact -->
@@ -1548,9 +1446,9 @@
         <div class="card mb-4">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
           <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
-          <p class="method-text">For each of 18 dimensions, models with real data are ranked 1–n (best to worst). The formula maps rank 1 → 100 pts, rank n → 0 pts, with linear interpolation in between. Tied ranks receive the average of their tied positions. <strong>Missing data (⊘)</strong> receives a neutral 50.0 — neither penalizing nor rewarding models for absent benchmarks.</p>
+          <p class="method-text">For each of 19 dimensions, models with real data are ranked 1–n (best to worst). The formula maps rank 1 → 100 pts, rank n → 0 pts, with linear interpolation in between. Tied ranks receive the average of their tied positions. <strong>Missing data (⊘)</strong> receives a neutral 50.0 — neither penalizing nor rewarding models for absent benchmarks.</p>
           <hr class="divider" style="margin:16px 0;">
-          <p class="method-text">The final ValueRank score is a weighted sum across all 18 dimensions. <strong>Cost weight: 25%.</strong> This reflects production-scale reality: at 1M tokens/day, the cheapest model ($73 eval cost) saves ~$4,900/run vs. the most expensive ($4,970) — a difference that exceeds the annual salary of an engineer at some organizations.</p>
+          <p class="method-text">The final ValueRank score is a weighted sum across all 19 dimensions. <strong>Cost weight: 25%.</strong> v0.7 keeps the macro-balance of earlier releases, but expands the coding bucket to include <strong>DeepSWE</strong> at 5% while constraining the ranked cohort to DeepSWE-listed models only.</p>
         </div>
         <div class="card">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
@@ -1558,12 +1456,12 @@
             <div><strong>Rank-based (not raw-score-based):</strong> Prevents any single benchmark from dominating due to scale differences. AIME 100% and Arena ELO 1500 are not comparable on raw values; ranks are.</div>
             <div><strong>Missing data → neutral-50:</strong> Models are not penalized for benchmarks that don't exist yet. A ⊘ cell contributes exactly the median score, preserving the direction of the ranking without fabricating data.</div>
             <div><strong>SEAL CI band (±2–3 pts):</strong> Due to benchmark variance and missing-data uncertainty, scores within 2–3 pts should be treated as statistically tied. Rankings within this band are effectively co-ranked.</div>
-            <div><strong>Quality sub-score:</strong> The 75% non-cost portion, computed as the weighted sum of all 17 non-cost dimensions. Represents pure capability ranking without cost penalty.</div>
+            <div><strong>Quality sub-score:</strong> The 75% non-cost portion, computed as the weighted sum of all 18 non-cost dimensions. Represents pure capability ranking without cost penalty.</div>
           </div>
         </div>
       </div>
       <div class="card">
-        <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (18 Total)</h3>
+        <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (19 Total)</h3>
         <table class="dim-table">
           <thead><tr><th>Dimension</th><th>Weight</th><th>Category</th></tr></thead>
           <tbody id="dim-table-body"></tbody>
@@ -1582,7 +1480,7 @@
     </div>
 
     <div class="card mb-6">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (23 × 18)</h3>
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (15 × 19)</h3>
       <div class="heatmap-legend">
         <span>0 (worst)</span>
         <div class="hl-bar"></div>
@@ -1622,7 +1520,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Each model's score is a weighted average of 18 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n</strong> is the number of models with real data in that dimension. A score of <strong>100</strong> = top of pool; <strong>50</strong> = neutral (assigned to missing ⊘ data); <strong>0</strong> = bottom of pool. Final scores are the weighted sum across all 18 dimensions.
+          Each model's score is a weighted average of 19 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n</strong> is the number of models with real data in that dimension. A score of <strong>100</strong> = top of pool; <strong>50</strong> = neutral (assigned to missing ⊘ data); <strong>0</strong> = bottom of pool. Final scores are the weighted sum across all 19 dimensions.
         </div>
       </div>
 
@@ -1652,7 +1550,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The <strong>overall Score</strong> includes all 18 dimensions with cost at 25% and speed at 5%. The <strong>Quality Score</strong> is recalculated using only the 16 non-cost, non-speed dimensions (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> — independent of price or throughput. The Rankings table shows both; the Quality Rank column lets you sort by quality alone.
+          The <strong>overall Score</strong> includes all 19 dimensions with cost at 25% and speed at 5%. The <strong>Quality Score</strong> is recalculated using only the 18 non-cost dimensions (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> — independent of price. The Rankings table shows both; the Quality Rank column lets you sort by quality alone.
         </div>
       </div>
 
@@ -1662,7 +1560,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Cost. All three Claude models in the dataset carry the two highest eval costs ($3,959–$4,970 per AA benchmark run). With cost at 25% weight, even a strong quality rank — Claude Opus 4.7 is quality <strong>#3</strong> — can't fully overcome that penalty in the overall score. Drag the cost weight slider to 0% to see Claude Opus 4.7 rise to its pure-quality position.
+          Cost and sparse exact-match coverage. Claude Opus 4.7 is quality <strong>#6</strong> but overall <strong>#14</strong>, with the highest current eval cost in the cohort at roughly <strong>$5.1K</strong>. With cost at 25% weight and most non-primary-source cells marked ⊘, even its exact Terminal-Bench, SWE-bench, DeepSWE, AA Index, and speed rows cannot overcome the cost penalty.
         </div>
       </div>
 
@@ -1672,7 +1570,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The Pareto frontier contains models that no other single model beats on <em>both</em> value and quality simultaneously. ValueRank v0.6 has a <strong>6-model frontier</strong>: <strong>Gemma 4 31B Dense</strong> ($0), <strong>Phi-4</strong> ($4), <strong>Mistral Large 3</strong> ($39), <strong>MiMo-V2.5-Pro</strong> ($462), <strong>Kimi K2.6</strong> ($948), and <strong>Gemini 3.1 Pro</strong> (quality #1 at $892). Every other model is dominated by at least one frontier model on both quality and cost.
+          The Pareto frontier contains models that no other single model beats on <em>both</em> quality and cost simultaneously. In v0.7 the frontier is <strong>4 models</strong>: <strong>Gemini 3 Flash</strong>, <strong>Gemini 3.1 Pro</strong>, <strong>GPT-5.5</strong>, and <strong>Claude Opus 4.8</strong>. Every other ranked model is dominated by at least one frontier model on both dimensions.
         </div>
       </div>
 
@@ -1682,7 +1580,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n) or filling a ⊘ cell shifts every other model's score in that dimension. Prior-version → v0.6 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
+          <strong>No.</strong> Because normalization is rank-relative, adding a new model (larger n), filling a ⊘ cell, or changing the eligible cohort shifts every other model's score in that dimension. Prior-version → v0.7 scores cannot be compared directly. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
         </div>
       </div>
 
@@ -1692,7 +1590,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Quarterly, or whenever a major model launch would materially affect the rankings. v0.6 (April 27, 2026) refreshed 4 outdated models (Gemma 3→4 31B, Nova Pro→Premier, Grok 3→4.20, o3-mini→o4-mini) and added 3 (MiMo-V2.5-Pro, Qwen 3.6 Max Preview, Gemma 4 27B MoE), expanding the pool to 23. The next scheduled update is <strong>May 2026</strong> or the next major frontier model release, whichever comes first. All research provenance is documented in the GitHub repo.
+          Periodically, or whenever primary-source benchmark updates materially change the frontier. <strong>v0.7 (June 11, 2026)</strong> adds <strong>DeepSWE</strong>, refreshes current Artificial Analysis cost and speed pages, uses exact Terminal-Bench 2.1, IFBench, and Vals SWE-bench rows where exact model matches exist, and constrains the ranked pool to DeepSWE-listed models excluding Grok-Build-0.1.
         </div>
       </div>
 
@@ -1706,7 +1604,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v0.6 · April 27, 2026 · 23 models × 18 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v0.7 · June 11, 2026 · 15 models × 19 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -1722,18 +1620,18 @@
 // ─────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────
-const DIM_KEYS  = ['Cost','IF','Term','SWE','SWEPro','LCB','GDP','Spd','Tau2','OSW','BC','LCR','HLE','GPQA','MMLU','AIME','Sci','Omni'];
-const DIM_FULL  = ['Eval Cost','IFBench','Terminal-Bench 2.0','SWE-bench V','SWE-bench Pro','LiveCodeBench v4','GDPval-AA ELO','Speed (tok/s)','τ²-Bench','OSWorld','BrowseComp','RULER/LCR','HLE','GPQA Diamond','MMLU-Pro','AIME 2025','SciCode','AA-Omniscience'];
-const DIM_WEIGHTS = [25,18,8,7,4,6,5,5,4,4,3,2,2,2,2,1,1,1];
-const DIM_CAT   = ['cost','rely','code','code','code','code','prod','prod','prod','prod','prod','prod','intel','intel','intel','intel','intel','prod'];
+const DIM_KEYS  = ['Cost','IF','Term','SWE','SWEPro','LCB','DeepSWE','AAI','Spd','Tau2','OSW','BC','LCR','HLE','GPQA','MMLU','AIME','Sci','Omni'];
+const DIM_FULL  = ['Eval Cost','IFBench','Terminal-Bench 2.1','SWE-bench Verified','SWE-bench Pro','LiveCodeBench v4','DeepSWE','Artificial Analysis Index','Speed (tok/s)','τ²-Bench','OSWorld','BrowseComp','RULER/LCR','HLE','GPQA Diamond','MMLU-Pro','AIME 2025','SciCode','AA-Omniscience'];
+const DIM_WEIGHTS = [25,18,6,5,4,5,5,5,5,4,4,3,2,2,2,2,1,1,1];
+const DIM_CAT   = ['cost','rely','code','code','code','code','code','prod','prod','prod','prod','prod','prod','intel','intel','intel','intel','intel','prod'];
 
 // Macro-category definitions for decomposition
 const MACRO_CATS = [
   { key:'cost',  label:'Cost',           color:'#22c55e', dimIdxs:[0] },
   { key:'rely',  label:'Reliability (IF)',color:'#a78bfa', dimIdxs:[1] },
-  { key:'code',  label:'Code / Agentic', color:'#3b82f6', dimIdxs:[2,3,4,5] },
-  { key:'prod',  label:'Production',     color:'#f97316', dimIdxs:[6,7,8,9,10,11,17] },
-  { key:'intel', label:'Intelligence',   color:'#eab308', dimIdxs:[12,13,14,15,16] },
+  { key:'code',  label:'Code / Agentic', color:'#3b82f6', dimIdxs:[2,3,4,5,6] },
+  { key:'prod',  label:'Production',     color:'#f97316', dimIdxs:[7,8,9,10,11,12,18] },
+  { key:'intel', label:'Intelligence',   color:'#eab308', dimIdxs:[13,14,15,16,17] },
 ];
 
 const TIER_COLORS = {
@@ -1745,104 +1643,72 @@ const DEV_COLORS = {
   'Moonshot AI':'#8b5cf6','Zhipu AI':'#06b6d4','MiniMax':'#f59e0b',
   'Alibaba':'#ff6900','DeepSeek':'#64748b','Anthropic':'#d4a574',
   'Mistral AI':'#ff7043','Amazon':'#ff9900','xAI':'#1a1a2e','Meta':'#0066ff',
-  'Microsoft':'#0078d4','Xiaomi':'#ff6700'
+  'Microsoft':'#0078d4','Xiaomi':'#ff6700','Z-AI':'#06b6d4'
 };
 
-// Dims array order: Cost IF Term SWE SWEPro LCB GDP Spd Tau2 OSW BC LCR HLE GPQA MMLU AIME Sci Omni
+// Dims array order: Cost IF Term SWE SWEPro LCB DeepSWE AAI Spd Tau2 OSW BC LCR HLE GPQA MMLU AIME Sci Omni
 // isMissing: 1 = ⊘ cell (real score of 50.0 counts as isMissing=0 even if it happens to equal 50)
 const MODELS = [
-  { rank:1,  name:'Gemini 3.1 Pro',       shortName:'Gemini',     developer:'Google DeepMind', evalCost:892.28,  costTier:'Premium',        overallScore:63.7, qualityScore:75.5, qualityRank:1,  missingCount:2,
-    dims:[31.8,100.0,58.3,75.0,50.0,44.4,7.7,90.5,100.0,50.0,71.4,90.0,93.8,100.0,91.7,60.0,100.0,100.0],
-    isMissing:[0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0],
-    vRanks:{v20:1,v25:1,v30:1,v40:1,v42:1,v43:1,v50:1,v60:1} },
-  { rank:2,  name:'GPT-5.5',              shortName:'GPT-5.5',    developer:'OpenAI',          evalCost:3357.00, costTier:'Very Expensive', overallScore:62.2, qualityScore:72.1, qualityRank:2,  missingCount:5,
-    dims:[13.6,69.2,100.0,100.0,75.0,50.0,100.0,61.9,92.3,100.0,100.0,50.0,87.5,90.5,50.0,50.0,50.0,0.0],
-    isMissing:[0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,1,0],
-    vRanks:{v20:null,v25:6,v30:2,v40:2,v42:2,v43:2,v50:2,v60:2} },
-  { rank:3,  name:'Mistral Large 3',      shortName:'ML3',        developer:'Mistral AI',      evalCost:38.67,   costTier:'Ultra-Budget',   overallScore:60.3, qualityScore:49.2, qualityRank:9,  missingCount:14,
-    dims:[86.4,50.0,50.0,50.0,50.0,88.9,50.0,47.6,50.0,50.0,50.0,50.0,50.0,0.0,50.0,50.0,50.0,50.0],
-    isMissing:[0,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,1],
-    vRanks:{v50:3,v60:3} },
-  { rank:4,  name:'Phi-4',                shortName:'Phi-4',      developer:'Microsoft',       evalCost:4.27,    costTier:'Ultra-Budget',   overallScore:59.6, qualityScore:47.9, qualityRank:12, missingCount:16,
-    dims:[95.5,50.0,50.0,50.0,50.0,50.0,50.0,14.3,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0],
-    isMissing:[0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],
-    vRanks:{v50:5,v60:4} },
-  { rank:5,  name:'MiMo-V2.5-Pro',        shortName:'MiMo',       developer:'Xiaomi',          evalCost:461.59,  costTier:'Mid-Range',      overallScore:57.0, qualityScore:53.1, qualityRank:6,  missingCount:9,
-    dims:[54.5,76.9,50.0,50.0,50.0,50.0,50.0,57.1,69.2,50.0,50.0,30.0,56.2,52.4,50.0,50.0,61.5,50.0],
-    isMissing:[0,0,1,1,0,1,1,0,0,1,1,0,0,0,1,1,0,1],
-    vRanks:{v60:5} },
-  { rank:6,  name:'Kimi K2.6',            shortName:'Kimi',       developer:'Moonshot AI',     evalCost:947.87,  costTier:'Premium',        overallScore:56.2, qualityScore:62.4, qualityRank:5,  missingCount:0,
-    dims:[27.3,84.6,41.7,64.3,75.0,77.8,46.2,76.2,76.9,40.0,28.6,65.0,62.5,81.0,41.7,80.0,76.9,42.9],
-    isMissing:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    vRanks:{v20:2,v25:4,v30:6,v40:5,v42:6,v43:4,v50:6,v60:6} },
-  { rank:7,  name:'Gemma 4 31B Dense',    shortName:'Gemma4-31B', developer:'Google DeepMind', evalCost:0.00,    costTier:'Free',           overallScore:56.0, qualityScore:40.9, qualityRank:18, missingCount:8,
-    dims:[100.0,50.0,50.0,14.3,0.0,66.7,30.8,23.8,46.2,50.0,50.0,50.0,50.0,33.3,50.0,30.0,50.0,50.0],
-    isMissing:[0,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1],
-    vRanks:{v60:7} },
-  { rank:8,  name:'KAT-Coder-Pro-V2',     shortName:'KAT',        developer:'Kay (alo-exp)',   evalCost:73.49,   costTier:'Budget',         overallScore:55.7, qualityScore:47.6, qualityRank:13, missingCount:7,
-    dims:[72.7,38.5,91.7,53.6,50.0,50.0,0.0,85.7,61.5,50.0,50.0,40.0,18.8,38.1,50.0,50.0,30.8,50.0],
-    isMissing:[0,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,1],
-    vRanks:{v20:4,v25:2,v30:3,v40:3,v42:3,v43:3,v50:7,v60:8} },
-  { rank:9,  name:'GLM 5.1',              shortName:'GLM',        developer:'Zhipu AI',        evalCost:543.95,  costTier:'Mid-Range',      overallScore:55.0, qualityScore:49.2, qualityRank:10, missingCount:2,
-    dims:[40.9,92.3,66.7,35.7,60.0,50.0,53.8,40.5,84.6,50.0,0.0,20.0,50.0,47.6,58.3,60.0,38.5,28.6],
-    isMissing:[0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0],
-    vRanks:{v20:7,v25:3,v30:4,v40:4,v42:4,v43:5,v50:12,v60:9} },
-  { rank:10, name:'o4-mini',              shortName:'o4-mini',    developer:'OpenAI',          evalCost:459.80,  costTier:'Mid-Range',      overallScore:52.1, qualityScore:48.8, qualityRank:11, missingCount:13,
-    dims:[59.1,50.0,50.0,21.4,50.0,50.0,50.0,100.0,50.0,50.0,50.0,50.0,50.0,19.0,50.0,40.0,50.0,50.0],
-    isMissing:[0,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1],
-    vRanks:{v60:10} },
-  { rank:11, name:'Gemma 4 27B MoE',      shortName:'Gemma4-MoE', developer:'Google DeepMind', evalCost:41.51,   costTier:'Ultra-Budget',   overallScore:51.7, qualityScore:40.4, qualityRank:19, missingCount:10,
-    dims:[81.8,50.0,50.0,7.1,50.0,55.6,23.1,50.0,23.1,50.0,50.0,50.0,50.0,23.8,33.3,20.0,50.0,50.0],
-    isMissing:[0,1,1,0,1,0,0,1,0,1,1,1,1,0,0,0,1,1],
-    vRanks:{v60:11} },
-  { rank:12, name:'GPT-5.4',              shortName:'GPT-5.4',    developer:'OpenAI',          evalCost:2851.01, costTier:'Expensive',      overallScore:50.5, qualityScore:67.3, qualityRank:4,  missingCount:4,
-    dims:[18.2,46.2,83.3,50.0,90.0,22.2,76.9,66.7,53.8,60.0,85.7,100.0,81.2,85.7,50.0,50.0,92.3,50.0],
-    isMissing:[0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1],
-    vRanks:{v20:5,v25:8,v30:7,v40:7,v42:7,v43:7,v50:10,v60:12} },
-  { rank:13, name:'MiniMax M2.7',         shortName:'MiniMax',    developer:'MiniMax',         evalCost:175.51,  costTier:'Near-Budget',    overallScore:50.2, qualityScore:45.2, qualityRank:14, missingCount:6,
-    dims:[68.2,61.5,0.0,50.0,30.0,50.0,38.5,40.5,34.6,50.0,50.0,50.0,31.2,57.1,50.0,50.0,53.8,71.4],
-    isMissing:[0,0,0,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0],
-    vRanks:{v20:3,v25:5,v30:5,v40:6,v42:5,v43:6,v50:11,v60:13} },
-  { rank:14, name:'Grok 4.20',            shortName:'Grok 4.20',  developer:'xAI',             evalCost:514.16,  costTier:'Mid-Range',      overallScore:48.7, qualityScore:51.1, qualityRank:8,  missingCount:11,
-    dims:[45.5,50.0,50.0,28.6,50.0,50.0,50.0,71.4,50.0,50.0,50.0,50.0,25.0,66.7,66.7,60.0,50.0,50.0],
-    isMissing:[0,1,1,0,1,1,1,0,1,1,1,1,0,0,0,0,1,1],
-    vRanks:{v60:14} },
-  { rank:15, name:'Llama 4 Maverick',     shortName:'Maverick',   developer:'Meta',            evalCost:62.28,   costTier:'Ultra-Budget',   overallScore:47.6, qualityScore:40.1, qualityRank:20, missingCount:10,
-    dims:[77.3,15.4,50.0,50.0,50.0,11.1,50.0,81.0,50.0,50.0,50.0,50.0,12.5,14.3,25.0,50.0,23.1,50.0],
-    isMissing:[0,0,1,1,1,0,1,0,1,1,1,1,0,0,0,1,0,1],
-    vRanks:{v50:13,v60:15} },
-  { rank:16, name:'Llama 4 Scout',        shortName:'Scout',      developer:'Meta',            evalCost:26.42,   costTier:'Ultra-Budget',   overallScore:47.3, qualityScore:36.1, qualityRank:22, missingCount:10,
-    dims:[90.9,0.0,50.0,50.0,50.0,0.0,50.0,95.2,50.0,50.0,50.0,50.0,0.0,9.5,8.3,50.0,0.0,50.0],
-    isMissing:[0,0,1,1,1,0,1,0,1,1,1,1,0,0,0,1,0,1],
-    vRanks:{v50:14,v60:16} },
-  { rank:17, name:'DeepSeek V4-Pro',      shortName:'DeepSeek',   developer:'DeepSeek',        evalCost:1071.28, costTier:'Premium',        overallScore:46.5, qualityScore:52.8, qualityRank:7,  missingCount:6,
-    dims:[22.7,50.0,50.0,75.0,20.0,100.0,61.5,19.0,50.0,50.0,42.9,50.0,68.8,71.4,75.0,50.0,50.0,14.3],
-    isMissing:[0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,1,1,0],
-    vRanks:{v20:null,v25:null,v30:8,v40:9,v42:9,v43:9,v50:16,v60:17} },
-  { rank:18, name:'Claude Opus 4.7',      shortName:'Opus 4.7',   developer:'Anthropic',       evalCost:4811.04, costTier:'Ultra-Premium',  overallScore:46.0, qualityScore:70.8, qualityRank:3,  missingCount:1,
-    dims:[4.5,30.8,75.0,92.9,100.0,50.0,92.3,28.6,0.0,80.0,14.3,80.0,100.0,95.2,100.0,95.0,84.6,85.7],
-    isMissing:[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
-    vRanks:{v20:8,v25:9,v30:10,v40:10,v42:10,v43:10,v50:15,v60:18} },
-  { rank:19, name:'Qwen 3.6 Plus',        shortName:'Qwen Plus',  developer:'Alibaba',         evalCost:482.65,  costTier:'Mid-Range',      overallScore:44.6, qualityScore:44.0, qualityRank:15, missingCount:5,
-    dims:[50.0,53.8,16.7,42.9,40.0,50.0,15.4,52.4,7.7,50.0,50.0,65.0,37.5,76.2,83.3,50.0,7.7,50.0],
-    isMissing:[0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,1,0,1],
-    vRanks:{v20:6,v25:7,v30:9,v40:8,v42:8,v43:8,v50:17,v60:19} },
-  { rank:20, name:'Amazon Nova Premier',  shortName:'Nova Prem',  developer:'Amazon',          evalCost:375.98,  costTier:'Value',          overallScore:44.0, qualityScore:31.2, qualityRank:23, missingCount:10,
-    dims:[63.6,50.0,50.0,0.0,50.0,50.0,50.0,4.8,50.0,50.0,50.0,50.0,6.2,4.8,0.0,0.0,15.4,50.0],
-    isMissing:[0,1,1,0,1,1,1,0,1,1,1,1,0,0,0,0,0,1],
-    vRanks:{v60:20} },
-  { rank:21, name:'Qwen 3.6 Max Preview', shortName:'Qwen Max',   developer:'Alibaba',         evalCost:860.56,  costTier:'Premium',        overallScore:42.1, qualityScore:44.0, qualityRank:16, missingCount:13,
-    dims:[36.4,50.0,29.2,50.0,50.0,50.0,50.0,9.5,50.0,50.0,50.0,50.0,50.0,42.9,16.7,50.0,50.0,50.0],
-    isMissing:[0,1,0,1,1,1,1,0,1,1,1,1,1,0,0,1,1,1],
-    vRanks:{v60:21} },
-  { rank:22, name:'Claude Sonnet 4.6',    shortName:'Sonnet 4.6', developer:'Anthropic',       evalCost:3959.36, costTier:'Very Expensive', overallScore:28.2, qualityScore:37.7, qualityRank:21, missingCount:5,
-    dims:[9.1,23.1,8.3,53.6,50.0,50.0,84.6,33.3,15.4,0.0,50.0,10.0,43.8,61.9,50.0,10.0,46.2,50.0],
-    isMissing:[0,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,1],
-    vRanks:{v20:10,v25:10,v30:11,v40:11,v42:11,v43:11,v50:19,v60:22} },
-  { rank:23, name:'Claude Opus 4.6',      shortName:'Opus 4.6',   developer:'Anthropic',       evalCost:4969.68, costTier:'Ultra-Premium',  overallScore:24.8, qualityScore:42.5, qualityRank:17, missingCount:1,
-    dims:[0.0,7.7,29.2,85.7,10.0,33.3,69.2,0.0,34.6,20.0,57.1,0.0,75.0,28.6,50.0,95.0,69.2,57.1],
-    isMissing:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
-    vRanks:{v20:9,v25:11,v30:12,v40:12,v42:12,v43:12,v50:20,v60:23} },
+  { rank:1, name:'Gemini 3 Flash', shortName:'Gemini 3F', developer:'Google DeepMind', evalCost:65.98, costTier:'Budget', overallScore:66.2, qualityScore:55.0, qualityRank:5, missingCount:13,
+    dims:[100.0, 100.0, 50.0, 9.1, 50.0, 50.0, 0.0, 0.0, 85.7, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:1} },
+  { rank:2, name:'Gemini 3.1 Pro', shortName:'Gemini', developer:'Google DeepMind', evalCost:892.28, costTier:'Premium', overallScore:58.8, qualityScore:57.0, qualityRank:3, missingCount:12,
+    dims:[64.3, 66.7, 50.0, 72.7, 50.0, 50.0, 14.3, 78.6, 78.6, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:2} },
+  { rank:3, name:'MiMo-V2.5-Pro', shortName:'MiMo', developer:'Xiaomi', evalCost:160.82, costTier:'Budget', overallScore:57.3, qualityScore:45.5, qualityRank:10, missingCount:15,
+    dims:[92.9, 50.0, 50.0, 50.0, 50.0, 50.0, 28.6, 46.4, 7.1, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:3} },
+  { rank:4, name:'MiniMax M3', shortName:'MiniMax M3', developer:'MiniMax', evalCost:308.34, costTier:'Mid-Range', overallScore:55.4, qualityScore:47.6, qualityRank:8, missingCount:15,
+    dims:[78.6, 50.0, 50.0, 50.0, 50.0, 50.0, 35.7, 60.7, 17.9, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:4} },
+  { rank:5, name:'DeepSeek V4-Pro', shortName:'DeepSeek', developer:'DeepSeek', evalCost:267.82, costTier:'Mid-Range', overallScore:55.4, qualityScore:45.2, qualityRank:12, missingCount:15,
+    dims:[85.7, 50.0, 50.0, 50.0, 50.0, 50.0, 7.1, 35.7, 35.7, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:5} },
+  { rank:6, name:'Gemini 3.5 Flash', shortName:'Gemini Flash', developer:'Google DeepMind', evalCost:1551.60, costTier:'Expensive', overallScore:52.1, qualityScore:55.2, qualityRank:4, missingCount:14,
+    dims:[42.9, 50.0, 50.0, 63.6, 50.0, 50.0, 60.7, 60.7, 92.9, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:6} },
+  { rank:7, name:'Kimi K2.6', shortName:'Kimi', developer:'Moonshot AI', evalCost:947.87, costTier:'Premium', overallScore:49.8, qualityScore:47.4, qualityRank:9, missingCount:14,
+    dims:[57.1, 50.0, 50.0, 18.2, 50.0, 50.0, 46.4, 46.4, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:7} },
+  { rank:8, name:'GLM 5.1', shortName:'GLM', developer:'Z-AI', evalCost:543.95, costTier:'Mid-Range', overallScore:49.4, qualityScore:42.1, qualityRank:15, missingCount:13,
+    dims:[71.4, 50.0, 0.0, 27.3, 50.0, 50.0, 21.4, 28.6, 64.3, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:8} },
+  { rank:9, name:'GPT-5.4 Mini', shortName:'GPT-5.4 Mini', developer:'OpenAI', evalCost:1353.87, costTier:'Expensive', overallScore:48.4, qualityScore:47.9, qualityRank:7, missingCount:14,
+    dims:[50.0, 50.0, 50.0, 0.0, 50.0, 50.0, 46.4, 21.4, 100.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:9} },
+  { rank:10, name:'Claude Opus 4.8', shortName:'Opus 4.8', developer:'Anthropic', evalCost:4685.85, costTier:'Ultra-Premium', overallScore:48.3, qualityScore:62.0, qualityRank:1, missingCount:13,
+    dims:[7.1, 50.0, 75.0, 100.0, 50.0, 50.0, 92.9, 100.0, 57.1, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:10} },
+  { rank:11, name:'GPT-5.5', shortName:'GPT-5.5', developer:'OpenAI', evalCost:3357.00, costTier:'Very Expensive', overallScore:47.4, qualityScore:58.4, qualityRank:2, missingCount:12,
+    dims:[14.3, 33.3, 100.0, 90.9, 50.0, 50.0, 100.0, 92.9, 42.9, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:11} },
+  { rank:12, name:'Claude Sonnet 4.6', shortName:'Sonnet 4.6', developer:'Anthropic', evalCost:1694.19, costTier:'Expensive', overallScore:43.1, qualityScore:45.5, qualityRank:11, missingCount:14,
+    dims:[35.7, 50.0, 50.0, 36.4, 50.0, 50.0, 71.4, 7.1, 17.9, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:12} },
+  { rank:13, name:'Claude Opus 4.6', shortName:'Opus 4.6', developer:'Anthropic', evalCost:1745.71, costTier:'Expensive', overallScore:40.7, qualityScore:44.7, qualityRank:13, missingCount:14,
+    dims:[28.6, 50.0, 50.0, 45.5, 50.0, 50.0, 60.7, 14.3, 0.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:13} },
+  { rank:14, name:'Claude Opus 4.7', shortName:'Opus 4.7', developer:'Anthropic', evalCost:5117.14, costTier:'Ultra-Premium', overallScore:39.4, qualityScore:52.5, qualityRank:6, missingCount:13,
+    dims:[0.0, 50.0, 25.0, 81.8, 50.0, 50.0, 78.6, 78.6, 28.6, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:14} },
+  { rank:15, name:'GPT-5.4', shortName:'GPT-5.4', developer:'OpenAI', evalCost:2851.01, costTier:'Expensive', overallScore:38.4, qualityScore:44.0, qualityRank:14, missingCount:13,
+    dims:[21.4, 0.0, 50.0, 54.5, 50.0, 50.0, 85.7, 78.6, 71.4, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0],
+    isMissing:[0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    vRanks:{v70:15} },
 ];
 
 // ─────────────────────────────────────────────
@@ -1901,14 +1767,14 @@ function renderHeroPodium() {
 function computeNewScore(model, costWeightPct) {
   const cw = costWeightPct / 100;
   const scaleFactor = (1 - cw) / 0.75;
-  const qualWeights = [0,0.18,0.08,0.07,0.04,0.06,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
+  const qualWeights = [0,0.18,0.06,0.05,0.04,0.05,0.05,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
   let score = model.dims[0] * cw;
-  for (let i = 1; i < 18; i++) score += model.dims[i] * qualWeights[i] * scaleFactor;
+  for (let i = 1; i < model.dims.length; i++) score += model.dims[i] * qualWeights[i] * scaleFactor;
   return Math.round(score * 10) / 10;
 }
 
 function getMacroContribs(model) {
-  const weights = [0.25,0.18,0.08,0.07,0.04,0.06,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
+  const weights = [0.25,0.18,0.06,0.05,0.04,0.05,0.05,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
   return MACRO_CATS.map(cat => {
     let val = 0;
     cat.dimIdxs.forEach(i => val += model.dims[i] * weights[i]);
@@ -2047,11 +1913,26 @@ function initCostSlider() {
 // CHART 1: PARETO SCATTER
 // ─────────────────────────────────────────────
 function renderPareto() {
-  const frontier = [{model:MODELS[2],q:49.4},{model:MODELS[0],q:73.8}]; // ML3, Gemini
-
-  // Step function: x=[38.67,892,892,6000], y=[49.4,49.4,73.8,73.8]
-  const stepX = [10, 38.67, 892, 892, 6500];
-  const stepY = [49.4, 49.4, 49.4, 73.8, 73.8];
+  const frontier = [...MODELS]
+    .sort((a,b) => a.evalCost - b.evalCost)
+    .filter((m, i, arr) => !arr.some(other =>
+      other !== m &&
+      other.evalCost <= m.evalCost &&
+      other.qualityScore >= m.qualityScore &&
+      (other.evalCost < m.evalCost || other.qualityScore > m.qualityScore)
+    ));
+  const stepX = [Math.max(100, Math.min(...MODELS.map(m => m.evalCost)) * 0.8)];
+  const stepY = [frontier[0]?.qualityScore || 0];
+  frontier.forEach((m, idx) => {
+    if (idx > 0) {
+      stepX.push(m.evalCost);
+      stepY.push(frontier[idx - 1].qualityScore);
+    }
+    stepX.push(m.evalCost);
+    stepY.push(m.qualityScore);
+  });
+  stepX.push(Math.max(...MODELS.map(m => m.evalCost)) * 1.15);
+  stepY.push(frontier[frontier.length - 1]?.qualityScore || 0);
 
   const traces = [];
 
@@ -2073,7 +1954,7 @@ function renderPareto() {
 
   // All models scatter
   MODELS.forEach(m => {
-    const onFrontier = m === MODELS[0] || m === MODELS[2];
+    const onFrontier = frontier.includes(m);
     traces.push({
       x:[m.evalCost], y:[m.qualityScore],
       mode:'markers+text',
@@ -2102,12 +1983,11 @@ function renderPareto() {
       tickvals:[30,100,200,500,1000,2000,5000], ticktext:['$30','$100','$200','$500','$1K','$2K','$5K']},
     yaxis:{...getPlotlyLayout().yaxis, title:'Quality Sub-Score (0–100)', range:[20,80]},
     annotations:[
-      {x:Math.log10(38.67), y:49.4, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:0, yshift:-20},
-      {x:Math.log10(892), y:73.8, xref:'x', yref:'y', text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false, xshift:-52, yshift:0},
-      {x:Math.log10(3500), y:58, xref:'x', yref:'y',
-        text:'Gemini ($892) dominates<br>all more-expensive models<br>on both quality AND cost',
-        font:{color:'#94a3b8',size:10}, showarrow:false,
-        bgcolor:getPlotlyLayout().paper_bgcolor, bordercolor:getPlotlyLayout().xaxis.gridcolor, borderwidth:1, borderpad:6}
+      ...frontier.map((m, idx) => ({
+        x: m.evalCost, y: m.qualityScore, xref:'x', yref:'y',
+        text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false,
+        xshift: idx === frontier.length - 1 ? -42 : 0, yshift: idx === 0 ? -20 : 0
+      }))
     ],
     legend:{orientation:'h', y:-0.15}
   };
@@ -2124,7 +2004,7 @@ function renderDecomposition() {
   const traces = MACRO_CATS.map(cat => ({
     y: yLabels,
     x: sorted.map(m => {
-      const weights = [0.25,0.18,0.08,0.07,0.04,0.06,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
+      const weights = [0.25,0.18,0.06,0.05,0.04,0.05,0.05,0.05,0.05,0.04,0.04,0.03,0.02,0.02,0.02,0.02,0.01,0.01,0.01];
       let v = 0; cat.dimIdxs.forEach(i => v += sorted[sorted.indexOf(m)].dims[i] * weights[i]);
       return Math.round(v * 100) / 100;
     }),
@@ -2195,7 +2075,7 @@ function renderHeatmap(elementId, height) {
   const models = [...MODELS].sort((a,b) => b.overallScore - a.overallScore);
 
   // Column order: grouped by category
-  const colOrder = [0,1,2,3,4,5,6,7,8,9,10,11,17,12,13,14,15,16];
+  const colOrder = [0,1,2,3,4,5,6,7,8,9,10,11,12,18,13,14,15,16,17];
   const colLabels = colOrder.map(i => DIM_KEYS[i]);
   const colFull   = colOrder.map(i => DIM_FULL[i]);
   const colWeights= colOrder.map(i => DIM_WEIGHTS[i]);
@@ -2226,8 +2106,8 @@ function renderHeatmap(elementId, height) {
   };
 
   // Category dividers via shapes
-  // Columns: [Cost(0)] | [IF(1)] | [Term SWE SWEPro LCB = 2,3,4,5] | [GDP Spd Tau2 OSW BC LCR Omni = 6,7,8,9,10,11,12] | [HLE GPQA MMLU AIME Sci = 13,14,15,16,17]
-  const dividers = [0.5, 1.5, 5.5, 12.5]; // after column indexes 0,1,5,12
+  // Columns: [Cost] | [IF] | [Term SWE SWEPro LCB DeepSWE] | [AAI Spd Tau2 OSW BC LCR Omni] | [HLE GPQA MMLU AIME Sci]
+  const dividers = [0.5, 1.5, 6.5, 13.5];
   const shapes = dividers.map(x => ({
     type:'line', xref:'x', yref:'paper',
     x0: x, x1: x, y0: 0, y1: 1,
@@ -2237,9 +2117,9 @@ function renderHeatmap(elementId, height) {
   const catLabels = [
     {x:0,    text:'Cost 25%',        color:'#22c55e', y:-0.05},
     {x:1,    text:'Reliability 18%', color:'#a78bfa', y:-0.12},
-    {x:3.5,  text:'Code/Agentic 25%',color:'#3b82f6', y:-0.08},
-    {x:9,    text:'Production 24%',  color:'#f97316', y:-0.08},
-    {x:15.5, text:'Intelligence 8%', color:'#eab308', y:-0.08},
+    {x:4,    text:'Code/Agentic 25%',color:'#3b82f6', y:-0.08},
+    {x:10,   text:'Production 24%',  color:'#f97316', y:-0.08},
+    {x:16,   text:'Intelligence 8%', color:'#eab308', y:-0.08},
   ];
 
   const catAnnotations = catLabels.map(c => ({
@@ -2268,7 +2148,7 @@ function renderHeatmap(elementId, height) {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Normalized Score Matrix (23 Models × 18 Dimensions)', font:plotlyTitle(14)},
+    title:{text:'Normalized Score Matrix (15 Models × 19 Dimensions)', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, side:'top', tickangle:-30, tickfont:{size:10}},
     yaxis:{...getPlotlyLayout().yaxis, autorange:'reversed', tickfont:{size:11}},
     margin:{t:100, r:80, b:100, l:90},
@@ -2324,8 +2204,8 @@ function renderBubble() {
 // CHART 6: VERSION BUMP CHART
 // ─────────────────────────────────────────────
 function renderBump() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70'];
   const traces = MODELS.map(m => {
     const x=[], y=[];
     vKeys.forEach((vk,i) => {
@@ -2337,7 +2217,7 @@ function renderBump() {
       x, y,
       mode:'lines+markers+text',
       name:m.shortName,
-      text: x.map((v,i) => v === 'v0.6' ? m.shortName : ''),
+      text: x.map((v,i) => v === 'v0.7' ? m.shortName : ''),
       textposition:'middle right',
       textfont:{size:10},
       line:{ color: DEV_COLORS[m.developer] || '#64748b', width: isTop3 ? 2.5 : 1.5, dash: isTop3 ? 'solid' : 'solid' },
@@ -2349,14 +2229,14 @@ function renderBump() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v2.0 to v0.6', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v2.0 to v0.7', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
-    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,23.5],
-      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14','#15','#16','#17','#18','#19','#20','#21','#22','#23']},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,15.5],
+      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14','#15']},
     margin:{...getPlotlyLayout().margin, r:90},
     annotations:[
       {x:'v0.5', y:3, xref:'x', yref:'y', text:'v0.5: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:80, ay:-30},
-      {x:'v0.6', y:5, xref:'x', yref:'y', text:'v0.6: +3 models<br>(4 swaps)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:120, ay:0}
+      {x:'v0.7', y:2, xref:'x', yref:'y', text:'v0.7: DeepSWE cohort<br>+ benchmark refresh', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:120, ay:0}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -2414,8 +2294,8 @@ function renderFrontier2() {
     yaxis:{...getPlotlyLayout().yaxis, title:'Score (0–100)', range:[15,80]},
     legend:{orientation:'h', y:-0.15},
     annotations:[
-      {x:Math.log10(73), y:45.6, xref:'x', yref:'y', text:'KAT +8.4 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},
-      {x:Math.log10(4811), y:56, xref:'x', yref:'y', text:'Opus 4.7 −24.4 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:0, ay:70},
+      {x:160.82, y:57.3, xref:'x', yref:'y', text:'MiMo +11.8 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},
+      {x:5117.14, y:39.4, xref:'x', yref:'y', text:'Opus 4.7 -13.1 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:0, ay:70},
     ]
   };
   Plotly.newPlot('chart-frontier2', traces, layout, PLOTLY_CONFIG);
@@ -2490,8 +2370,8 @@ function renderGaps() {
 // VERSION TABLE
 // ─────────────────────────────────────────────
 function renderVersionTable() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70'];
   const table = document.getElementById('version-table');
   table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
   <tbody>${MODELS.map(m => {
@@ -2513,7 +2393,7 @@ function renderVersionTable() {
 // NAV HIGHLIGHT
 // ─────────────────────────────────────────────
 function initNav() {
-  const sections = ['rankings','swe-rebench','aa-rebench','charts','methodology','data','faq'];
+  const sections = ['rankings','charts','methodology','data','faq'];
   const links = document.querySelectorAll('.nav-links a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -2719,274 +2599,6 @@ function initCaNav() {
 }
 
 
-// ─────────────────────────────────────────────
-// SWE-REBENCH VALUERANK — bonus single-source table
-// ─────────────────────────────────────────────
-const SWE_REBENCH_DATA = [
-  { model:'GLM-5',                              resolved:63.0, sem:1.17, pass5:70.4, cost:0.67, tokens:1853498, cached:77.9 },
-  { model:'Claude Opus 4.6',                    resolved:63.0, sem:1.17, pass5:66.7, cost:1.22, tokens:1447696, cached:93.3 },
-  { model:'Claude Sonnet 4.6',                  resolved:60.0, sem:0.74, pass5:66.7, cost:1.04, tokens:2171185, cached:95.4 },
-  { model:'GLM-5.1',                            resolved:59.7, sem:1.26, pass5:63.0, cost:0.68, tokens:1932042, cached:91.9 },
-  { model:'Gemini 3.1 Pro Preview',             resolved:59.7, sem:1.46, pass5:70.4, cost:0.64, tokens:1357708, cached:83.3 },
-  { model:'Cursor',                             resolved:58.0, sem:1.55, pass5:70.4, cost:0.20, tokens: 835487, cached:91.3 },
-  { model:'DeepSeek-V3.2',                      resolved:57.4, sem:2.61, pass5:66.7, cost:0.68, tokens:2804263, cached:17.0 },
-  { model:'Claude Code',                        resolved:57.4, sem:2.48, pass5:66.7, cost:4.43, tokens:2669551, cached:92.3 },
-  { model:'Junie',                              resolved:57.4, sem:2.90, pass5:70.4, cost:0.30, tokens:1685001, cached:77.3 },
-  { model:'GLM-4.7',                            resolved:57.1, sem:1.77, pass5:66.7, cost:0.30, tokens:1955597, cached:92.7 },
-  { model:'Claude Sonnet 4.5',                  resolved:56.9, sem:0.77, pass5:65.4, cost:1.09, tokens:2149160, cached:96.1 },
-  { model:'Step-3.5-Flash',                     resolved:56.9, sem:1.58, pass5:70.4, cost:0.13, tokens:3392672, cached:82.7 },
-  { model:'Qwen3.5-397B-A17B',                  resolved:56.8, sem:1.77, pass5:66.7, cost:0.99, tokens:2459110, cached:93.5 },
-  { model:'Kimi K2 Thinking',                   resolved:56.8, sem:3.16, pass5:70.4, cost:0.52, tokens:2843944, cached:95.6 },
-  { model:'gpt-5.2-2025-12-11-medium',          resolved:56.5, sem:2.05, pass5:63.0, cost:0.61, tokens: 979028, cached:78.4 },
-  { model:'Kimi K2.5',                          resolved:55.2, sem:2.06, pass5:66.7, cost:0.18, tokens:1298836, cached:94.3 },
-  { model:'gpt-5.4-2026-03-05-medium',          resolved:54.8, sem:2.16, pass5:59.3, cost:0.64, tokens: 813462, cached:78.8 },
-  { model:'Qwen3.5-27B',                        resolved:54.8, sem:1.39, pass5:59.3, cost:0.47, tokens:2332250, cached:94.9 },
-  { model:'MiniMax M2.5',                       resolved:54.5, sem:1.38, pass5:63.0, cost:0.12, tokens:1967658, cached:90.5 },
-  { model:'gpt-5.3-codex-xhigh',                resolved:54.1, sem:1.89, pass5:63.0, cost:0.85, tokens:1695651, cached:84.4 },
-  { model:'Qwen3-Coder-Next',                   resolved:53.4, sem:1.08, pass5:66.7, cost:1.58, tokens:7700359, cached:98.5 },
-  { model:'Codex',                              resolved:52.6, sem:0.95, pass5:55.6, cost:0.64, tokens:1541828, cached:94.8 },
-  { model:'Gemini 3 Flash Preview',             resolved:51.5, sem:1.75, pass5:59.3, cost:0.26, tokens:1876948, cached:77.4 },
-  { model:'gpt-5.3-codex',                      resolved:51.5, sem:0.94, pass5:53.8, cost:0.39, tokens: 637366, cached:78.5 },
-  { model:'gpt-5.2-codex',                      resolved:50.8, sem:1.44, pass5:53.8, cost:0.39, tokens: 630712, cached:75.4 },
-  { model:'Qwen3.5-35B-A3B',                    resolved:50.4, sem:3.43, pass5:59.3, cost:0.82, tokens:4838955, cached:94.7 },
-  { model:'MiniMax M2.7',                       resolved:49.6, sem:1.99, pass5:59.3, cost:0.19, tokens:2295364, cached:92.1 },
-  { model:'Devstral-2-123B-Instruct-2512',      resolved:48.9, sem:2.96, pass5:59.3, cost:0.09, tokens:1733949, cached:97.3 },
-  { model:'Qwen3-Coder-480B-A35B-Instruct',     resolved:39.4, sem:1.34, pass5:51.9, cost:0.39, tokens:1939192, cached:30.1 },
-  { model:'Devstral-Small-2-24B-Instruct-2512', resolved:37.6, sem:2.75, pass5:66.7, cost:0.13, tokens:2101976, cached:97.3 },
-  { model:'GLM-4.7 Flash',                      resolved:36.3, sem:3.19, pass5:59.3, cost:0.08, tokens:4693424, cached:89.6 },
-  { model:'Gemma 4 31B',                        resolved:35.8, sem:2.57, pass5:55.6, cost:0.26, tokens:1815518, cached:90.3 },
-  { model:'GLM-4.5 Air',                        resolved:32.6, sem:1.40, pass5:55.6, cost:0.07, tokens:1720746, cached:95.4 },
-  { model:'gpt-oss-120b',                       resolved:31.0, sem:2.75, pass5:48.1, cost:0.19, tokens:1224594, cached:94.4 },
-];
-
-function initSweRebench() {
-  const data = SWE_REBENCH_DATA;
-  const tbody = document.getElementById('swe-rebench-tbody');
-  if (!tbody) return;
-  const n = data.length;
-
-  // Pre-compute resolved-rank (descending) and cost-rank (ascending) → normalized 0-100
-  const sortedByResolved = [...data].sort((a,b) => b.resolved - a.resolved);
-  const sortedByCost     = [...data].sort((a,b) => a.cost - b.cost);
-  data.forEach(d => {
-    d._resolvedRank = sortedByResolved.indexOf(d) + 1;
-    d._costRank     = sortedByCost.indexOf(d) + 1;
-    d._resolvedNorm = ((n - d._resolvedRank) / (n - 1)) * 100;
-    d._costNorm     = ((n - d._costRank) / (n - 1)) * 100;
-  });
-
-  let sortCol = 'value';
-  let sortDir = -1; // -1 desc, 1 asc
-  let costWeight = 25;
-
-  function valueColor(v) {
-    if (v >= 65) return '#22c55e';
-    if (v >= 50) return '#3b82f6';
-    if (v >= 35) return '#f59e0b';
-    return '#ef4444';
-  }
-
-  function fmtTokens(t) {
-    if (t >= 1000000) return (t / 1000000).toFixed(2) + 'M';
-    if (t >= 1000)    return (t / 1000).toFixed(0) + 'K';
-    return String(t);
-  }
-
-  function render() {
-    const f = costWeight / 100;
-    data.forEach(d => { d._value = (1 - f) * d._resolvedNorm + f * d._costNorm; });
-
-    const sorted = [...data];
-    const dir = sortDir;
-    if (sortCol === 'rank' || sortCol === 'value') {
-      sorted.sort((a,b) => dir * (a._value - b._value));
-    } else if (sortCol === 'model') {
-      sorted.sort((a,b) => dir * a.model.localeCompare(b.model));
-    } else {
-      sorted.sort((a,b) => dir * (a[sortCol] - b[sortCol]));
-    }
-
-    tbody.innerHTML = sorted.map((d, i) => {
-      const rank = i + 1;
-      const rankCls = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
-      return `<tr>
-        <td><span class="rank-cell ${rankCls}">${rank}</span></td>
-        <td><div class="model-name">${d.model}</div></td>
-        <td><span style="color:${valueColor(d._resolvedNorm)};font-weight:700;font-family:var(--font-mono);">${d.resolved.toFixed(1)}%</span> <span style="color:var(--text-dim);font-size:11px;font-family:var(--font-mono);">±${d.sem.toFixed(2)}</span></td>
-        <td><span class="mono">${d.pass5.toFixed(1)}%</span></td>
-        <td><span class="mono">$${d.cost.toFixed(2)}</span></td>
-        <td><span class="mono">${fmtTokens(d.tokens)}</span></td>
-        <td><span class="mono">${d.cached.toFixed(1)}%</span></td>
-        <td><span style="color:${valueColor(d._value)};font-weight:700;font-family:var(--font-mono);">${d._value.toFixed(1)}</span></td>
-      </tr>`;
-    }).join('');
-
-    // Update sort arrows
-    document.querySelectorAll('#swe-rebench-table thead th').forEach(th => {
-      const col = th.dataset.col;
-      const arrow = th.querySelector('.sort-arrow');
-      if (!arrow) return;
-      if (col === sortCol || (col === 'rank' && sortCol === 'value')) {
-        arrow.textContent = dir < 0 ? '↓' : '↑';
-        th.classList.add('sorted');
-      } else {
-        arrow.textContent = '↕';
-        th.classList.remove('sorted');
-      }
-    });
-  }
-
-  // Header click handlers
-  document.querySelectorAll('#swe-rebench-table thead th[data-col]').forEach(th => {
-    th.addEventListener('click', () => {
-      const col = th.dataset.col;
-      // Default sort dir per column type
-      const ascCols = ['rank','model','cost','tokens'];
-      if (sortCol === col || (sortCol === 'value' && col === 'rank')) {
-        sortDir *= -1;
-      } else {
-        sortCol = col;
-        sortDir = ascCols.includes(col) ? 1 : -1;
-      }
-      render();
-    });
-  });
-
-  // Slider
-  const slider = document.getElementById('swe-rebench-slider');
-  const sliderVal = document.getElementById('swe-rebench-slider-val');
-  if (slider && sliderVal) {
-    slider.addEventListener('input', () => {
-      costWeight = parseInt(slider.value, 10);
-      sliderVal.textContent = costWeight + '%';
-      // Slider always re-ranks by Value — overrides any user column-sort
-      sortCol = 'value';
-      sortDir = -1;
-      render();
-    });
-  }
-
-  render();
-}
-
-
-// ─────────────────────────────────────────────
-// CROSS-PERSPECTIVE VALUERANK — 7 models in BOTH AA Eval and SWE-Rebench
-// ─────────────────────────────────────────────
-const CROSS_PERSPECTIVE_DATA = [
-  // Strict-match: same model name in MODELS (AA pool) and SWE_REBENCH_DATA
-  { model:'Gemini 3.1 Pro',     aaQuality:75.5, aaOverallRank:1,  aaQualityRank:1,  sweResolved:59.7, sweRank:5,  aaCost:892.28,  sweCost:0.64 },
-  { model:'GLM 5.1',            aaQuality:49.2, aaOverallRank:9,  aaQualityRank:10, sweResolved:59.7, sweRank:4,  aaCost:543.95,  sweCost:0.68 },
-  { model:'GPT-5.4',            aaQuality:67.3, aaOverallRank:12, aaQualityRank:4,  sweResolved:54.8, sweRank:17, aaCost:2851.01, sweCost:0.64 },
-  { model:'Gemma 4 31B Dense',  aaQuality:40.9, aaOverallRank:7,  aaQualityRank:18, sweResolved:35.8, sweRank:32, aaCost:0.00,    sweCost:0.26 },
-  { model:'MiniMax M2.7',       aaQuality:45.2, aaOverallRank:13, aaQualityRank:14, sweResolved:49.6, sweRank:27, aaCost:175.51,  sweCost:0.19 },
-  { model:'Claude Sonnet 4.6',  aaQuality:37.7, aaOverallRank:22, aaQualityRank:21, sweResolved:60.0, sweRank:3,  aaCost:3959.36, sweCost:1.04 },
-  { model:'Claude Opus 4.6',    aaQuality:42.5, aaOverallRank:23, aaQualityRank:17, sweResolved:63.0, sweRank:2,  aaCost:4969.68, sweCost:1.22 },
-];
-
-function initCrossPerspective() {
-  const tbody = document.getElementById('aa-rebench-tbody');
-  if (!tbody) return;
-
-  // Derive: SWE-R total cost (× 57 problems), Combined Cost, Avg Score, Value
-  CROSS_PERSPECTIVE_DATA.forEach(d => {
-    d.sweCostTotal = d.sweCost * 57;
-    d.combinedCost = d.aaCost + d.sweCostTotal;
-    d.avgScore = (d.aaQuality + d.sweResolved) / 2;
-    d.value = d.combinedCost > 0 ? (d.avgScore * 1000 / d.combinedCost) : 0;
-  });
-
-  let sortCol = 'value';
-  let sortDir = -1;
-
-  function valueColor(v) {
-    if (v >= 500) return '#16a34a';
-    if (v >= 100) return '#22c55e';
-    if (v >= 50)  return '#84cc16';
-    if (v >= 20)  return '#f59e0b';
-    return '#8b5cf6';
-  }
-
-  function valueLabel(v) {
-    if (v >= 500) return 'Outstanding';
-    if (v >= 100) return 'Excellent';
-    if (v >= 50)  return 'Good';
-    if (v >= 20)  return 'Fair';
-    return 'Premium';
-  }
-
-  function fmtMoney(n) {
-    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  }
-
-  function render() {
-    const sorted = [...CROSS_PERSPECTIVE_DATA];
-    if (sortCol === 'rank' || sortCol === 'value') {
-      sorted.sort((a,b) => sortDir * (a.value - b.value));
-    } else if (sortCol === 'model') {
-      sorted.sort((a,b) => sortDir * a.model.localeCompare(b.model));
-    } else {
-      sorted.sort((a,b) => sortDir * (a[sortCol] - b[sortCol]));
-    }
-
-    tbody.innerHTML = sorted.map((d, i) => {
-      const rank = i + 1;
-      const rankCls = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
-      const vc = valueColor(d.value);
-      const vl = valueLabel(d.value);
-      const valStr = d.value >= 100 ? d.value.toFixed(0) : d.value.toFixed(1);
-      return `<tr>
-        <td><span class="rank-cell ${rankCls}">${rank}</span></td>
-        <td>
-          <div class="model-name">${d.model}</div>
-          <div class="model-dev" style="font-size:10px;color:var(--text-dim);">AA #${d.aaOverallRank} · SWE-R #${d.sweRank}</div>
-        </td>
-        <td><span class="mono">${d.aaQuality.toFixed(1)}</span></td>
-        <td><span class="mono">${d.sweResolved.toFixed(1)}%</span></td>
-        <td><span class="mono">${fmtMoney(d.aaCost)}</span></td>
-        <td><span class="mono">${fmtMoney(d.sweCostTotal)}</span></td>
-        <td><span class="mono" style="font-weight:700;color:var(--text-primary);">${fmtMoney(d.combinedCost)}</span></td>
-        <td>
-          <div style="display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.15;">
-            <span style="color:${vc};font-weight:700;font-family:var(--font-mono);font-size:14px;letter-spacing:-.01em;">${valStr}</span>
-            <span style="color:${vc};font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.85;">${vl}</span>
-          </div>
-        </td>
-      </tr>`;
-    }).join('');
-
-    // Update sort arrows
-    document.querySelectorAll('#aa-rebench-table thead th').forEach(th => {
-      const col = th.dataset.col;
-      const arrow = th.querySelector('.sort-arrow');
-      if (!arrow) return;
-      if (col === sortCol || (col === 'rank' && sortCol === 'value')) {
-        arrow.textContent = sortDir < 0 ? '↓' : '↑';
-        th.classList.add('sorted');
-      } else {
-        arrow.textContent = '↕';
-        th.classList.remove('sorted');
-      }
-    });
-  }
-
-  // Header click handlers
-  document.querySelectorAll('#aa-rebench-table thead th[data-col]').forEach(th => {
-    th.addEventListener('click', () => {
-      const col = th.dataset.col;
-      const ascCols = ['model', 'rank', 'aaCost', 'sweCostTotal', 'combinedCost'];
-      if (sortCol === col || (sortCol === 'value' && col === 'rank')) {
-        sortDir *= -1;
-      } else {
-        sortCol = col;
-        sortDir = ascCols.includes(col) ? 1 : -1;
-      }
-      render();
-    });
-  });
-
-  render();
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -2996,8 +2608,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderHeroPodium();
     initTable();
     initCostSlider();
-    initSweRebench();
-    initCrossPerspective();
     initChartTabs();
     renderDimTable();
     renderGaps();
