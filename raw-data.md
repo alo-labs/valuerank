@@ -157,3 +157,7 @@ These benchmarks were re-checked during the zero-gap audit and remain excluded b
 | ITBench-AA | Artificial Analysis: `17 of 24 models` | Visible evaluated set omits cohort members including `GPT-5.4`, `Claude Opus 4.8`, and `MiniMax M3` |
 | MMMU-Pro | Artificial Analysis: `18 of 198 models` | Multimodal subset, not the exact DeepSWE cohort |
 | MMLU-Pro | Artificial Analysis: `14 of 345 models` | Published 14-model set is a different cohort centered on `Gemini 3 Pro Preview`, `Claude Opus 4.5`, and `gpt-oss` |
+| LiveCodeBench | Artificial Analysis: `9 of 343 models` | Far below full cohort coverage |
+| Global-MMLU-Lite | Artificial Analysis: `11 of 111 models` | Far below full cohort coverage and different visible model set |
+| AIME 2025 | Artificial Analysis: `9 of 269 models` | Far below full cohort coverage |
+| MATH-500 | Artificial Analysis: `5 of 201 models` | Far below full cohort coverage |
