@@ -1,9 +1,9 @@
-# ValueRank v1.0 Raw Data
+# ValueRank v1.1 Raw Data
 
-**Version:** v1.0  
+**Version:** v1.1  
 **Updated:** June 12, 2026
 
-v1.0 keeps only dimensions with full 14-model coverage.
+v1.1 keeps only dimensions with full 13-model coverage after removing `Claude Opus 4.6` from the cohort.
 
 ## Primary Sources
 
@@ -15,7 +15,7 @@ v1.0 keeps only dimensions with full 14-model coverage.
   - `τ²-Bench Telecom`
   - `AA-LCR`
   - `AA-Omniscience Accuracy`
-  - `AA-Omniscience Non-Hallucination Rate`
+  - `AA-Omniscience Hallucination Rate`
   - `Humanity's Last Exam`
   - `GPQA Diamond`
   - `SciCode`
@@ -26,9 +26,9 @@ v1.0 keeps only dimensions with full 14-model coverage.
 
 ## Artificial Analysis model-page reconstruction
 
-For the 11 current Artificial Analysis benchmark dimensions retained in v1.0:
+For the 11 current Artificial Analysis benchmark dimensions retained in v1.1:
 
-- 13 cohort rows were visible on the current `GPT-5.5 (xhigh)` model page
+- 12 cohort rows were visible on the current `GPT-5.5 (xhigh)` model page
 - the missing `GPT-5.4 mini (xhigh)` row was filled from its own current model page
 
 This preserves primary-source provenance while eliminating benchmark gaps.
@@ -43,7 +43,6 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Claude Opus 4.7 | 59 |
 | Claude Sonnet 4.6 | 57 |
 | Gemini 3.5 Flash | 76 |
-| Claude Opus 4.6 | 53 |
 | GPT-5.4 Mini | 73 |
 | Kimi K2.6 | 76 |
 | MiniMax M3 | 83 |
@@ -62,7 +61,6 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Claude Opus 4.7 | 46 | 64 | 36 |
 | Claude Sonnet 4.6 | 40 | 54 | 46 |
 | Gemini 3.5 Flash | 52 | 39 | 61 |
-| Claude Opus 4.6 | 46 | 39 | 61 |
 | GPT-5.4 Mini | 37 | 10 | 90 |
 | Kimi K2.6 | 33 | 61 | 39 |
 | MiniMax M3 | 15 | 84 | 16 |
@@ -81,7 +79,6 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Claude Opus 4.7 | 54 | 18.19 |
 | Claude Sonnet 4.6 | 32 | 5.52 |
 | Gemini 3.5 Flash | 28 | 7.42 |
-| Claude Opus 4.6 | 28 | 5.39 |
 | GPT-5.4 Mini | 24 | 2.08 |
 | Kimi K2.6 | 24 | 3.16 |
 | MiniMax M3 | 20 | 5.57 |
@@ -100,7 +97,6 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Claude Opus 4.7 | 63 | 52 | 89 | 70 | 40 | 91 | 55 | 12 |
 | Claude Sonnet 4.6 | 59 | 53 | 76 | 71 | 30 | 87 | 47 | 3 |
 | Gemini 3.5 Flash | 58 | 41 | 95 | 69 | 41 | 92 | 53 | 13 |
-| Claude Opus 4.6 | 56 | 46 | 92 | 71 | 37 | 90 | 52 | 13 |
 | GPT-5.4 Mini | 47 | 52 | 83 | 69 | 27 | 87 | 50 | 10 |
 | Kimi K2.6 | 49 | 44 | 96 | 70 | 36 | 91 | 53 | 8 |
 | MiniMax M3 | 58 | 42 | 89 | 74 | 37 | 93 | 45 | 4 |
@@ -119,7 +115,6 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Claude Opus 4.7 | 5117.14 | 43.8 | 57 |
 | Claude Sonnet 4.6 | 1694.19 | 42.4 | 44 |
 | Gemini 3.5 Flash | 1551.60 | 144.8 | 55 |
-| Claude Opus 4.6 | 1745.71 | 36.9 | 46 |
 | GPT-5.4 Mini | 1353.87 | 147.8 | 49 |
 | Kimi K2.6 | 947.87 | 60.1 | 54 |
 | MiniMax M3 | 308.34 | 42.6 | 55 |
@@ -138,7 +133,6 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Claude Opus 4.7 | 100.00 | 100.00 | 100.00 |
 | Claude Sonnet 4.6 | 33.11 | 30.35 | 31.73 |
 | Gemini 3.5 Flash | 30.32 | 40.79 | 35.56 |
-| Claude Opus 4.6 | 34.11 | 29.63 | 31.87 |
 | GPT-5.4 Mini | 26.46 | 11.43 | 18.95 |
 | Kimi K2.6 | 18.52 | 17.37 | 17.95 |
 | MiniMax M3 | 6.03 | 30.62 | 18.32 |
@@ -147,17 +141,17 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Gemini 3.1 Pro | 17.44 | 10.12 | 13.78 |
 | DeepSeek V4-Pro | 5.23 | 23.20 | 14.22 |
 
-## Excluded current benchmark candidates
+## Official-first excluded benchmark audit
 
-These benchmarks were re-checked during the corrected zero-gap audit and remain excluded because at least one of the 14 ranked ValueRank models is still genuinely missing from the currently published first-party benchmark data:
+These benchmarks were re-checked during the v1.1 official-first audit and remain excluded because no currently published implementation contains all 13 ranked ValueRank models:
 
-| Benchmark | Current published coverage | Why excluded from v1.0 |
+| Benchmark | Official source outcome | Best current secondary outcome |
 |---|---|---|
-| APEX-Agents-AA | Artificial Analysis: `15 of 24 models` | Missing `Claude Opus 4.8`, `Claude Opus 4.7`, `MiniMax M3`, and `GLM 5.1` |
-| ITBench-AA | Artificial Analysis: `17 of 24 models` | Missing `Claude Opus 4.8`, `GPT-5.4`, `Claude Opus 4.6`, and `MiniMax M3` |
-| MMMU-Pro | Artificial Analysis: `17 of 200 models` | Missing `Claude Opus 4.8`, `GPT-5.4`, `Claude Opus 4.7`, `Claude Opus 4.6`, `MiniMax M3`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` |
-| MMLU-Pro | Artificial Analysis: `9 of 345 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
-| LiveCodeBench | Artificial Analysis: `9 of 343 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
-| Global-MMLU-Lite | Artificial Analysis: `11 of 111 models` | Missing `GPT-5.5`, `Claude Opus 4.8`, `GPT-5.4`, `Claude Opus 4.7`, `Gemini 3.5 Flash`, `Kimi K2.6`, `MiniMax M3`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` |
-| AIME 2025 | Artificial Analysis: `9 of 269 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
-| MATH-500 | Artificial Analysis: `5 of 201 models` | Published benchmark set does not contain the 14-model ValueRank cohort |
+| APEX-Agents | [Mercor official leaderboard](https://www.mercor.com/apex/apex-agents-leaderboard/) still misses `Kimi K2.6`, `MiniMax M3`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` | [Artificial Analysis APEX-Agents-AA](https://artificialanalysis.ai/evaluations/apex-agents-aa) still misses `Claude Opus 4.8`, `Claude Opus 4.7`, `MiniMax M3`, and `GLM 5.1` |
+| ITBench | [IBM Research ITBench Kaggle benchmark](https://www.kaggle.com/benchmarks/ibm-research/itbench) does not contain any of the 13 exact ValueRank model names | [Artificial Analysis ITBench-AA](https://artificialanalysis.ai/evaluations/itbench-aa) still misses `Claude Opus 4.8`, `GPT-5.4`, and `MiniMax M3` |
+| MMMU-Pro | [MMMU benchmark site](https://mmmu-benchmark.github.io/) still misses 10 of 13 current ValueRank models | [LLM Stats MMMU-Pro](https://llm-stats.com/benchmarks/mmmu-pro) is the closest secondary pass, but still misses `Claude Opus 4.8`, `Claude Opus 4.7`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` |
+| MMLU-Pro | [TIGER-Lab official leaderboard](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) still misses 10 of 13 current ValueRank models | [Kaggle MMLU-Pro](https://www.kaggle.com/benchmarks/open-benchmarks/mmlu-pro) still covers only `Claude Opus 4.8` and `Gemini 3.5 Flash` from the cohort |
+| LiveCodeBench | [LiveCodeBench official site](https://livecodebench.github.io/) is still the original paper-era leaderboard and does not contain the current ValueRank cohort | [Kaggle LiveCodeBench](https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench) still covers only `Claude Opus 4.8` and `Gemini 3.5 Flash` from the cohort |
+| Global-MMLU-Lite | [Cohere Labs Global-MMLU-Lite Kaggle benchmark](https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite) currently contains only `Gemini 3.5 Flash` and `Claude Opus 4.8` from the cohort | Secondary implementations remain incomplete as well |
+| AIME 2025 | The benchmark owner publishes the exam itself, not a current frontier-model leaderboard | [Kaggle AIME 2025](https://www.kaggle.com/benchmarks/open-benchmarks/aime-2025) currently contains only `GPT-5.5`, `Claude Opus 4.8`, and `Gemini 3.5 Flash` from the cohort |
+| MATH-500 | The benchmark owner publishes the dataset and benchmark definition, not a current frontier-model leaderboard | [Kaggle MATH-500](https://www.kaggle.com/benchmarks/open-benchmarks/math-500) is the strongest current alternative but still reaches only `6 of 13` ValueRank models |
