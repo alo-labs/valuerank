@@ -1,55 +1,56 @@
 # ValueRank
 **Frontier AI model ranking focused on production value**
 
-**Version:** v1.1  
-**Updated:** June 12, 2026  
-**Scope:** 13 DeepSWE-listed models, 15 scored dimensions
+**Version:** v1.2 
+**Updated:** June 20, 2026 
+**Scope:** 8 DeepSWE-listed models, 15 scored dimensions
 
 ## What ValueRank is
 
 ValueRank is a production-weighted ranking of frontier AI models. It combines benchmark quality, reliability, speed, and a composite cost term into a single rank-based score.
 
-v1.1 keeps the DeepSWE-constrained roster, keeps hallucination resistance as a primary reliability factor, and reruns the benchmark-gap audit with an official-source-first pass plus current secondary implementations:
+v1.2 shrinks the cohort from 13 to 8 DeepSWE-listed models and adds Claude Fable 5, keeps hallucination resistance as a primary reliability factor, and reruns the benchmark-gap audit with an official-source-first pass plus current secondary implementations.
+
+> The five v1.1-ranked models that are no longer on DeepSWE (`GPT-5.4 Mini`, `MiMo-V2.5-Pro`, `MiniMax M3`, `GLM 5.1`, `DeepSeek V4-Pro`) are preserved with their v1.1 scores in [methodology.md](/Users/shafqat/valuerank/methodology.md#v11-scores-of-models-removed-from-cohort) for historical reference.
 
 - Keeps the ranked pool limited to **models listed on DeepSWE**
 - Explicitly excludes **Grok-Build-0.1**
 - Explicitly excludes **Gemini 3 Flash**
 - Explicitly excludes **Claude Opus 4.6**
+- Adds **Claude Fable 5** *(NEW in v1.2)*
 - Keeps **AA-Omniscience Hallucination Rate** at **6%** weight, with **IFBench** at **12%**
-- Uses only **benchmarks with full coverage across all 13 ranked models**
+- Uses only **benchmarks with full coverage across all 8 ranked models**
 - Keeps the active score at **zero missing benchmark cells**
 - Reruns the excluded-benchmark audit against **official benchmark-owner sources first**, then current secondary implementations such as **Artificial Analysis**, **Kaggle Benchmarks**, and **LLM Stats**
 - Finds that the official-first audit still does **not** unlock any additional zero-gap benchmark
 
-## v1.1 Ranking
+## v1.2 Ranking
 
 Composite cost is built from normalized Artificial Analysis eval cost plus normalized DeepSWE average cost per task, then renormalized back to a `0–100` cost scale before rank-normalization.
 
 | Rank | Model | Score | Quality | Composite Cost |
 |---|---|---:|---:|---:|
-| 1 | Gemini 3.1 Pro | 73.6 | 67.5 | $13.78 |
-| 2 | GPT-5.5 | 62.2 | 77.3 | $50.97 |
-| 3 | MiMo-V2.5-Pro | 58.1 | 44.2 | $7.04 |
-| 4 | MiniMax M3 | 56.0 | 52.4 | $18.32 |
-| 5 | GPT-5.4 | 54.4 | 64.2 | $39.90 |
-| 6 | Kimi K2.6 | 54.3 | 47.4 | $17.95 |
-| 7 | Claude Opus 4.8 | 51.8 | 66.3 | $80.37 |
-| 8 | Gemini 3.5 Flash | 49.9 | 55.4 | $35.56 |
-| 9 | DeepSeek V4-Pro | 48.0 | 36.3 | $14.22 |
-| 10 | GLM 5.1 | 40.0 | 36.7 | $25.82 |
-| 11 | Claude Opus 4.7 | 39.0 | 52.0 | $100.00 |
-| 12 | GPT-5.4 Mini | 36.5 | 29.3 | $18.95 |
-| 13 | Claude Sonnet 4.6 | 32.6 | 29.6 | $31.73 |
+| 1 | Gemini 3.1 Pro | 59.1 | 59.8 | $42.24 |
+| 2 | Gemini 3.5 Flash | 59.0 | 50.2 | $36.53 |
+| 3 | Claude Fable 5 | 57.6 | 76.5 | $100.00 |
+| 4 | GPT-5.5 | 56.9 | 66.2 | $47.72 |
+| 5 | GPT-5.4 | 56.7 | 51.9 | $39.22 |
+| 6 | Claude Opus 4.8 | 46.1 | 56.6 | $81.49 |
+| 7 | Kimi K2.7 | 38.5 | 18.2 | $14.75 |
+| 8 | Claude Sonnet 4.6 | 26.2 | 20.7 | $47.53 |
 
-## v1.1 Frontier
+## v1.2 Frontier
 
-Undominated on composite cost vs. quality:
+Undominated on composite cost vs. quality (6 models):
 
 - Gemini 3.1 Pro
+- Gemini 3.5 Flash
+- Claude Fable 5
 - GPT-5.5
-- MiMo-V2.5-Pro
+- GPT-5.4
+- Kimi K2.7
 
-## Sources Used in v1.1
+## Sources Used in v1.2
 
 Active scored dimensions still use primary sources:
 

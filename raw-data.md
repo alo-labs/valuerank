@@ -1,17 +1,17 @@
-# ValueRank v1.1 Raw Data
+# ValueRank v1.2 Raw Data
 
-**Version:** v1.1  
-**Updated:** June 12, 2026
+**Version:** v1.2
+**Updated:** June 20, 2026
 
-v1.1 keeps only dimensions with full 13-model coverage after removing `Claude Opus 4.6` from the cohort.
+v1.2 keeps only dimensions with full 8-model coverage after shrinking the cohort from 13 to 8 current DeepSWE-listed models.
 
 ## Primary Sources
 
 - [DeepSWE](https://deepswe.datacurve.ai/) for `DeepSWE pass@1` and `DeepSWE Avg Cost ($)`
 - Artificial Analysis model pages for:
   - `IFBench`
-  - `GDPval-AA`
-  - `Terminal-Bench Hard`
+  - `GDPval-AA v2` (uses `gdpval_normalized` × 100; the older raw-points scale used in v1.1 was retired)
+  - `Terminal-Bench v2.1` (reported as `Terminal-Bench Hard`)
   - `τ²-Bench Telecom`
   - `AA-LCR`
   - `AA-Omniscience Accuracy`
@@ -20,16 +20,17 @@ v1.1 keeps only dimensions with full 13-model coverage after removing `Claude Op
   - `GPQA Diamond`
   - `SciCode`
   - `CritPt`
-  - `Artificial Analysis Intelligence Index`
+  - `Artificial Analysis Intelligence Index v4.1`
   - `Speed`
   - `Eval Cost`
 
 ## Artificial Analysis model-page reconstruction
 
-For the 11 current Artificial Analysis benchmark dimensions retained in v1.1:
+For the 11 current Artificial Analysis benchmark dimensions retained in v1.2:
 
-- 12 cohort rows were visible on the current `GPT-5.5 (xhigh)` model page
-- the missing `GPT-5.4 mini (xhigh)` row was filled from its own current model page
+- 7 cohort rows were visible on the current `GPT-5.5 (xhigh)` model page.
+- The missing `Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)` row was filled from its own current model page at `/models/claude-fable-5`.
+- For Gemini 3.5 Flash, the AA `(high)` variant was used because the `(medium)` variant does not publish GDPval-AA v2, AA Intelligence Index v4.1, or a complete Terminal-Bench Hard v2.1 score, which would break zero-gap.
 
 This preserves primary-source provenance while eliminating benchmark gaps.
 
@@ -38,120 +39,92 @@ This preserves primary-source provenance while eliminating benchmark gaps.
 | Model | IFBench |
 |---|---:|
 | GPT-5.5 | 76 |
+| Claude Fable 5 | 63 |
 | Claude Opus 4.8 | 62 |
 | GPT-5.4 | 74 |
-| Claude Opus 4.7 | 59 |
 | Claude Sonnet 4.6 | 57 |
 | Gemini 3.5 Flash | 76 |
-| GPT-5.4 Mini | 73 |
-| Kimi K2.6 | 76 |
-| MiniMax M3 | 83 |
-| MiMo-V2.5-Pro | 80 |
-| GLM 5.1 | 76 |
+| Kimi K2.7 | 63 |
 | Gemini 3.1 Pro | 77 |
-| DeepSeek V4-Pro | 76 |
 
 ## AA-Omniscience
 
 | Model | Accuracy | Non-Hallucination Rate | Hallucination Rate |
 |---|---:|---:|---:|
-| GPT-5.5 | 57 | 14 | 86 |
-| Claude Opus 4.8 | 47 | 64 | 36 |
-| GPT-5.4 | 50 | 11 | 89 |
-| Claude Opus 4.7 | 46 | 64 | 36 |
-| Claude Sonnet 4.6 | 40 | 54 | 46 |
-| Gemini 3.5 Flash | 52 | 39 | 61 |
-| GPT-5.4 Mini | 37 | 10 | 90 |
-| Kimi K2.6 | 33 | 61 | 39 |
-| MiniMax M3 | 15 | 84 | 16 |
-| MiMo-V2.5-Pro | 23 | 75 | 25 |
-| GLM 5.1 | 24 | 71 | 29 |
-| Gemini 3.1 Pro | 55 | 50 | 50 |
-| DeepSeek V4-Pro | 43 | 6 | 94 |
+| GPT-5.5 | 52 | 20 | 80 |
+| Claude Fable 5 | 61 | 59 | 41 |
+| Claude Opus 4.8 | 37 | 82 | 18 |
+| GPT-5.4 | 41 | 15 | 85 |
+| Claude Sonnet 4.6 | 30 | 73 | 27 |
+| Gemini 3.5 Flash | 57 | 43 | 57 |
+| Kimi K2.7 | 23 | 25 | 75 |
+| Gemini 3.1 Pro | 61 | 62 | 38 |
 
 ## DeepSWE
 
 | Model | DeepSWE pass@1 | DeepSWE Avg Cost ($) |
 |---|---:|---:|
-| GPT-5.5 | 70 | 6.61 |
-| Claude Opus 4.8 | 58 | 12.58 |
-| GPT-5.4 | 56 | 4.38 |
-| Claude Opus 4.7 | 54 | 18.19 |
-| Claude Sonnet 4.6 | 32 | 5.52 |
-| Gemini 3.5 Flash | 28 | 7.42 |
-| GPT-5.4 Mini | 24 | 2.08 |
-| Kimi K2.6 | 24 | 3.16 |
-| MiniMax M3 | 20 | 5.57 |
-| MiMo-V2.5-Pro | 19 | 1.99 |
-| GLM 5.1 | 18 | 7.46 |
-| Gemini 3.1 Pro | 10 | 1.84 |
-| DeepSeek V4-Pro | 8 | 4.22 |
+| GPT-5.5 | 67 | 7.23 |
+| Claude Fable 5 | 70 | 13.41 |
+| Claude Opus 4.8 | 59 | 13.22 |
+| GPT-5.4 | 52 | 5.65 |
+| Claude Sonnet 4.6 | 30 | 5.52 |
+| Gemini 3.5 Flash | 37 | 7.34 |
+| Kimi K2.7 | 31 | 2.82 |
+| Gemini 3.1 Pro | 12 | 9.48 |
 
 ## Agentic / reasoning benchmarks
 
 | Model | GDPval-AA | Terminal-Bench Hard | τ²-Bench Telecom | AA-LCR | HLE | GPQA | SciCode | CritPt |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| GPT-5.5 | 63 | 61 | 94 | 74 | 44 | 94 | 56 | 27 |
-| Claude Opus 4.8 | 69 | 58 | 94 | 68 | 46 | 92 | 53 | 21 |
-| GPT-5.4 | 59 | 58 | 87 | 74 | 42 | 92 | 57 | 23 |
-| Claude Opus 4.7 | 63 | 52 | 89 | 70 | 40 | 91 | 55 | 12 |
-| Claude Sonnet 4.6 | 59 | 53 | 76 | 71 | 30 | 87 | 47 | 3 |
-| Gemini 3.5 Flash | 58 | 41 | 95 | 69 | 41 | 92 | 53 | 13 |
-| GPT-5.4 Mini | 47 | 52 | 83 | 69 | 27 | 87 | 50 | 10 |
-| Kimi K2.6 | 49 | 44 | 96 | 70 | 36 | 91 | 53 | 8 |
-| MiniMax M3 | 58 | 42 | 89 | 74 | 37 | 93 | 45 | 4 |
-| MiMo-V2.5-Pro | 54 | 43 | 94 | 73 | 34 | 87 | 50 | 4 |
-| GLM 5.1 | 52 | 43 | 98 | 62 | 28 | 87 | 44 | 5 |
-| Gemini 3.1 Pro | 41 | 54 | 96 | 73 | 45 | 94 | 59 | 18 |
-| DeepSeek V4-Pro | 53 | 46 | 96 | 66 | 36 | 89 | 50 | 13 |
+| GPT-5.5 | 50 | 61 | 94 | 74 | 44 | 94 | 56 | 27 |
+| Claude Fable 5 | 64 | 63 | 99 | 70 | 53 | 93 | 60 | 29 |
+| Claude Opus 4.8 | 56 | 58 | 94 | 68 | 46 | 92 | 53 | 21 |
+| GPT-5.4 | 45 | 58 | 87 | 74 | 42 | 92 | 57 | 23 |
+| Claude Sonnet 4.6 | 45 | 53 | 76 | 71 | 30 | 87 | 47 | 3 |
+| Gemini 3.5 Flash | 43 | 41 | 95 | 69 | 41 | 92 | 53 | 13 |
+| Kimi K2.7 | 35 | 45 | 90 | 66 | 33 | 90 | 47 | 10 |
+| Gemini 3.1 Pro | 24 | 54 | 96 | 73 | 45 | 94 | 59 | 18 |
 
 ## Artificial Analysis model-page refresh
 
 | Model | Eval Cost ($) | Speed (tok/s) | AA Index |
 |---|---:|---:|---:|
-| GPT-5.5 | 3357.00 | 50.1 | 60 |
-| Claude Opus 4.8 | 4685.85 | 58.7 | 61 |
-| GPT-5.4 | 2851.01 | 82.0 | 57 |
-| Claude Opus 4.7 | 5117.14 | 43.8 | 57 |
-| Claude Sonnet 4.6 | 1694.19 | 42.4 | 44 |
-| Gemini 3.5 Flash | 1551.60 | 144.8 | 55 |
-| GPT-5.4 Mini | 1353.87 | 147.8 | 49 |
-| Kimi K2.6 | 947.87 | 60.1 | 54 |
-| MiniMax M3 | 308.34 | 42.6 | 55 |
-| MiMo-V2.5-Pro | 160.82 | 38.9 | 54 |
-| GLM 5.1 | 543.95 | 74.7 | 51 |
-| Gemini 3.1 Pro | 892.28 | 109.8 | 57 |
-| DeepSeek V4-Pro | 267.82 | 44.8 | 52 |
+| GPT-5.5 | 2588.36 | 58.3 | 55 |
+| Claude Fable 5 | 6227.74 | 0.0 | 60 |
+| Claude Opus 4.8 | 4011.58 | 58.8 | 56 |
+| GPT-5.4 | 2261.30 | 146.5 | 51 |
+| Claude Sonnet 4.6 | 3355.85 | 53.6 | 47 |
+| Gemini 3.5 Flash | 1141.63 | 159.2 | 50 |
+| Kimi K2.7 | 530.36 | 55.8 | 42 |
+| Gemini 3.1 Pro | 859.81 | 122.8 | 46 |
+
+Note: Claude Fable 5 speed is reported as 0.0 by Artificial Analysis — likely too new for reliable speed measurement. This drives Fable 5 to the bottom of the Speed dimension in the normalized ranking. Recheck on next AA refresh.
 
 ## Composite cost construction
 
 | Model | AA Cost (0-100) | DeepSWE Cost (0-100) | Composite Cost (0-100) |
 |---|---:|---:|---:|
-| GPT-5.5 | 65.60 | 36.34 | 50.97 |
-| Claude Opus 4.8 | 91.57 | 69.16 | 80.37 |
-| GPT-5.4 | 55.71 | 24.08 | 39.90 |
-| Claude Opus 4.7 | 100.00 | 100.00 | 100.00 |
-| Claude Sonnet 4.6 | 33.11 | 30.35 | 31.73 |
-| Gemini 3.5 Flash | 30.32 | 40.79 | 35.56 |
-| GPT-5.4 Mini | 26.46 | 11.43 | 18.95 |
-| Kimi K2.6 | 18.52 | 17.37 | 17.95 |
-| MiniMax M3 | 6.03 | 30.62 | 18.32 |
-| MiMo-V2.5-Pro | 3.14 | 10.94 | 7.04 |
-| GLM 5.1 | 10.63 | 41.01 | 25.82 |
-| Gemini 3.1 Pro | 17.44 | 10.12 | 13.78 |
-| DeepSeek V4-Pro | 5.23 | 23.20 | 14.22 |
+| GPT-5.5 | 41.56 | 53.87 | 47.72 |
+| Claude Fable 5 | 100.00 | 100.00 | 100.00 |
+| Claude Opus 4.8 | 64.41 | 98.57 | 81.49 |
+| GPT-5.4 | 36.31 | 42.14 | 39.22 |
+| Claude Sonnet 4.6 | 53.89 | 41.17 | 47.53 |
+| Gemini 3.5 Flash | 18.33 | 54.73 | 36.53 |
+| Kimi K2.7 | 8.52 | 20.99 | 14.75 |
+| Gemini 3.1 Pro | 13.81 | 70.68 | 42.24 |
 
 ## Official-first excluded benchmark audit
 
-These benchmarks were re-checked during the v1.1 official-first audit and remain excluded because no currently published implementation contains all 13 ranked ValueRank models:
+These benchmarks were re-checked during the v1.2 official-first audit and remain excluded because no currently published implementation contains all 8 ranked ValueRank models:
 
 | Benchmark | Official source outcome | Best current secondary outcome |
 |---|---|---|
-| APEX-Agents | [Mercor official leaderboard](https://www.mercor.com/apex/apex-agents-leaderboard/) still misses `Kimi K2.6`, `MiniMax M3`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` | [Artificial Analysis APEX-Agents-AA](https://artificialanalysis.ai/evaluations/apex-agents-aa) still misses `Claude Opus 4.8`, `Claude Opus 4.7`, `MiniMax M3`, and `GLM 5.1` |
-| ITBench | [IBM Research ITBench Kaggle benchmark](https://www.kaggle.com/benchmarks/ibm-research/itbench) does not contain any of the 13 exact ValueRank model names | [Artificial Analysis ITBench-AA](https://artificialanalysis.ai/evaluations/itbench-aa) still misses `Claude Opus 4.8`, `GPT-5.4`, and `MiniMax M3` |
-| MMMU-Pro | [MMMU benchmark site](https://mmmu-benchmark.github.io/) still misses 10 of 13 current ValueRank models | [LLM Stats MMMU-Pro](https://llm-stats.com/benchmarks/mmmu-pro) is the closest secondary pass, but still misses `Claude Opus 4.8`, `Claude Opus 4.7`, `MiMo-V2.5-Pro`, `GLM 5.1`, and `DeepSeek V4-Pro` |
-| MMLU-Pro | [TIGER-Lab official leaderboard](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) still misses 10 of 13 current ValueRank models | [Kaggle MMLU-Pro](https://www.kaggle.com/benchmarks/open-benchmarks/mmlu-pro) still covers only `Claude Opus 4.8` and `Gemini 3.5 Flash` from the cohort |
-| LiveCodeBench | [LiveCodeBench official site](https://livecodebench.github.io/) is still the original paper-era leaderboard and does not contain the current ValueRank cohort | [Kaggle LiveCodeBench](https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench) still covers only `Claude Opus 4.8` and `Gemini 3.5 Flash` from the cohort |
-| Global-MMLU-Lite | [Cohere Labs Global-MMLU-Lite Kaggle benchmark](https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite) currently contains only `Gemini 3.5 Flash` and `Claude Opus 4.8` from the cohort | Secondary implementations remain incomplete as well |
-| AIME 2025 | The benchmark owner publishes the exam itself, not a current frontier-model leaderboard | [Kaggle AIME 2025](https://www.kaggle.com/benchmarks/open-benchmarks/aime-2025) currently contains only `GPT-5.5`, `Claude Opus 4.8`, and `Gemini 3.5 Flash` from the cohort |
-| MATH-500 | The benchmark owner publishes the dataset and benchmark definition, not a current frontier-model leaderboard | [Kaggle MATH-500](https://www.kaggle.com/benchmarks/open-benchmarks/math-500) is the strongest current alternative but still reaches only `6 of 13` ValueRank models |
+| APEX-Agents | [Mercor official leaderboard](https://www.mercor.com/apex/apex-agents-leaderboard/) still misses `Claude Fable 5`, `Kimi K2.7 Code`, `Claude Opus 4.8`, and `Claude Sonnet 4.6` from the v1.2 cohort | [Artificial Analysis APEX-Agents-AA](https://artificialanalysis.ai/evaluations/apex-agents-aa) covers 5 of 8 — still missing `Claude Fable 5`, `Claude Opus 4.8`, and `Kimi K2.7 Code` |
+| ITBench | [IBM Research ITBench Kaggle benchmark](https://www.kaggle.com/benchmarks/ibm-research/itbench) does not contain any of the 8 exact ValueRank model names | [Artificial Analysis ITBench-AA](https://artificialanalysis.ai/evaluations/itbench-aa) remains incomplete |
+| MMMU-Pro | [MMMU benchmark site](https://mmmu-benchmark.github.io/) is the original paper-era leaderboard and does not contain the current 8-model cohort | [Artificial Analysis MMMU-Pro](https://artificialanalysis.ai/evaluations/mmmu-pro) and [LLM Stats MMMU-Pro](https://llm-stats.com/benchmarks/mmmu-pro) remain incomplete |
+| MMLU-Pro | [TIGER-Lab official leaderboard](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) does not contain the current 8-model cohort | [Kaggle MMLU-Pro](https://www.kaggle.com/benchmarks/open-benchmarks/mmlu-pro) and [LLM Stats MMLU-Pro](https://llm-stats.com/benchmarks/mmlu-pro) remain incomplete |
+| LiveCodeBench | [LiveCodeBench official site](https://livecodebench.github.io/) is still the original paper-era leaderboard and does not contain the current 8-model cohort | [Kaggle LiveCodeBench](https://www.kaggle.com/benchmarks/open-benchmarks/livecodebench), [Artificial Analysis LiveCodeBench](https://artificialanalysis.ai/evaluations/livecodebench), and [LLM Stats LiveCodeBench](https://llm-stats.com/benchmarks/livecodebench) remain incomplete |
+| Global-MMLU-Lite | [Cohere Labs Global-MMLU-Lite Kaggle benchmark](https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite) does not contain the current 8-model cohort | Secondary implementations remain incomplete as well |
+| AIME 2025 | The benchmark owner publishes the exam itself, not a current frontier-model leaderboard | [Kaggle AIME 2025](https://www.kaggle.com/benchmarks/open-benchmarks/aime-2025) and [Artificial Analysis AIME 2025](https://artificialanalysis.ai/evaluations/aime-2025) remain incomplete |
+| MATH-500 | The benchmark owner publishes the dataset and benchmark definition, not a current frontier-model leaderboard | [Kaggle MATH-500](https://www.kaggle.com/benchmarks/open-benchmarks/math-500) is the strongest current alternative but still covers only a subset of the 8-model cohort |

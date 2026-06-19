@@ -1215,7 +1215,7 @@
   <div class="nav-brand">
     <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
       <span class="logo">ValueRank</span>
-      <span class="badge">v1.1</span>
+      <span class="badge">v1.2</span>
     </a>
   </div>
   <div class="mode-switcher">
@@ -1230,7 +1230,7 @@
     <a href="#faq">FAQ</a>
   </div>
   <div class="nav-right">
-    <div class="nav-meta">June 12, 2026 · 13 models · 15 dimensions</div>
+    <div class="nav-meta">June 20, 2026 · 8 models · 15 dimensions</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
       <i data-lucide="sun" class="icon-sun"></i>
       <i data-lucide="moon" class="icon-moon"></i>
@@ -1250,7 +1250,7 @@
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-pulse"></span>
-          Production AI Ranking Framework · v1.1
+          Production AI Ranking Framework · v1.2
         </div>
         <h1 class="hero-title">
           Which AI Model<br>
@@ -1258,7 +1258,7 @@
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank now ranks the <strong>DeepSWE model roster</strong> across a <strong>zero-gap 15-dimension set</strong>, excluding <strong>Grok-Build-0.1</strong>, <strong>Gemini 3 Flash</strong>, and <strong>Claude Opus 4.6</strong>. v1.1 keeps <strong>AA-Omniscience Hallucination Rate</strong> at 6%, preserves the composite-cost method of <strong>normalized AA eval cost + normalized DeepSWE avg cost</strong>, and reruns the benchmark-gap audit against official-owner sources first, then current secondary implementations.
+          ValueRank now ranks the <strong>current DeepSWE leaderboard cohort</strong> across a <strong>zero-gap 15-dimension set</strong>. v1.2 <strong>shrinks the cohort from 13 to 8 models</strong> by dropping five non-DeepSWE-listed models (GPT-5.4 Mini, MiMo-V2.5-Pro, MiniMax M3, GLM 5.1, DeepSeek V4-Pro) and <strong>adds Claude Fable 5</strong>, the new Anthropic frontier. Kimi is now <strong>Kimi K2.7 Code</strong> (was K2.6). v1.2 keeps <strong>AA-Omniscience Hallucination Rate</strong> at 6%, preserves the composite-cost method of <strong>normalized AA eval cost + normalized DeepSWE avg cost</strong>, and reruns the benchmark-gap audit against official-owner sources first, then current secondary implementations.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1348,7 +1348,7 @@
     </div>
     <div style="margin-top:12px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
       <span class="seal-note">Scores within ±2.5 pts are statistically tied (SEAL CI band)</span>
-      <span class="seal-note">v1.1 uses zero missing benchmark cells and no neutral-fill placeholders</span>
+      <span class="seal-note">v1.2 uses zero missing benchmark cells and no neutral-fill placeholders</span>
       <span class="seal-note" id="cost-note">Cost weight: 25% (default)</span>
     </div>
 
@@ -1356,22 +1356,22 @@
       <div class="insight-card">
         <div class="insight-icon">🎯</div>
         <div class="insight-title">Pareto Finding</div>
-        <div class="insight-body">The Pareto frontier is now a <strong>3-model</strong> set: <strong>MiMo-V2.5-Pro</strong>, <strong>Gemini 3.1 Pro</strong>, and <strong>GPT-5.5</strong>. Removing <strong>Claude Opus 4.6</strong> eliminates the last non-frontier Anthropic buffer that had kept <strong>Claude Opus 4.8</strong> undominated on the older chart.</div>
+        <div class="insight-body">The Pareto frontier is now a <strong>6-model</strong> set: <strong>Gemini 3.1 Pro</strong>, <strong>Gemini 3.5 Flash</strong>, <strong>Claude Fable 5</strong>, <strong>GPT-5.5</strong>, <strong>GPT-5.4</strong>, and <strong>Kimi K2.7</strong>. The smaller v1.2 cohort tightens the frontier, with <strong>Claude Opus 4.8</strong> and <strong>Claude Sonnet 4.6</strong> dominated on cost.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">💡</div>
         <div class="insight-title">Cost Penalty</div>
-        <div class="insight-body"><strong>GPT-5.5</strong> is now quality <strong>#1</strong> and overall <strong>#2</strong>, but its composite cost still prevents it from passing <strong>Gemini 3.1 Pro</strong> on overall value.</div>
+        <div class="insight-body"><strong>Claude Fable 5</strong> is now quality <strong>#1</strong> and overall <strong>#3</strong>, but its composite cost (the highest in the cohort) prevents it from leading overall.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">⚡</div>
         <div class="insight-title">Sweet Spot</div>
-        <div class="insight-body"><strong>Gemini 3.1 Pro</strong> stays overall <strong>#1</strong> because its cost is still near the floor while its zero-gap benchmark profile remains elite across <strong>IFBench</strong>, <strong>GPQA</strong>, <strong>SciCode</strong>, <strong>AA-Omniscience Accuracy</strong>, and <strong>HLE</strong>.</div>
+        <div class="insight-body"><strong>Gemini 3.1 Pro</strong> stays overall <strong>#1</strong> thanks to the lowest composite cost among high-quality models, while its zero-gap benchmark profile remains elite across <strong>IFBench</strong>, <strong>GPQA</strong>, <strong>SciCode</strong>, <strong>AA-Omniscience Accuracy</strong>, and <strong>HLE</strong>.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
-        <div class="insight-title">v1.1 Release</div>
-        <div class="insight-body">v1.1 removes <strong>Claude Opus 4.6</strong> from the ranked cohort, preserves the exclusion of <strong>Grok-Build-0.1</strong> and <strong>Gemini 3 Flash</strong>, and confirms that the official-first excluded-benchmark audit still does not unlock any new zero-gap dimension.</div>
+        <div class="insight-title">v1.2 Release</div>
+        <div class="insight-body">v1.2 shrinks the cohort from <strong>13 to 8 DeepSWE-listed models</strong>, dropping <strong>GPT-5.4 Mini</strong>, <strong>MiMo-V2.5-Pro</strong>, <strong>MiniMax M3</strong>, <strong>GLM 5.1</strong>, and <strong>DeepSeek V4-Pro</strong>, and adds <strong>Claude Fable 5</strong>. Kimi moves from <strong>K2.6</strong> to <strong>K2.7 Code</strong>. The Pareto frontier grows from <strong>3 to 6 models</strong>.</div>
       </div>
     </div>
   </div>
@@ -1402,7 +1402,7 @@
       </div>
       <!-- Decomposition -->
       <div class="chart-panel" id="panel-decomp">
-        <div class="chart-desc"><strong>Score Decomposition:</strong> How does each model earn its ValueRank score? v1.1 keeps <strong>Cost</strong> at 25%, <strong>Reliability</strong> at 18% (IFBench 12% + hallucination 6%), then spreads the remaining weight across fully covered agentic, reasoning, and platform dimensions.</div>
+        <div class="chart-desc"><strong>Score Decomposition:</strong> How does each model earn its ValueRank score? v1.2 keeps <strong>Cost</strong> at 25%, <strong>Reliability</strong> at 18% (IFBench 12% + hallucination 6%), then spreads the remaining weight across fully covered agentic, reasoning, and platform dimensions.</div>
         <div id="chart-decomp" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Displacement -->
@@ -1412,7 +1412,7 @@
       </div>
       <!-- Heatmap -->
       <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 13 models × 15 dimensions. Color = normalized score (0–100). v1.1 has <strong>no missing benchmark cells</strong>. Rows are sorted by overall score.</div>
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 8 models × 15 dimensions. Color = normalized score (0–100). v1.2 has <strong>no missing benchmark cells</strong>. Rows are sorted by overall score.</div>
         <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
       </div>
       <!-- Bubble -->
@@ -1422,7 +1422,7 @@
       </div>
       <!-- Bump -->
       <div class="chart-panel" id="panel-bump">
-        <div class="chart-desc"><strong>Version History:</strong> How the DeepSWE cohort models moved across ValueRank versions as benchmark policy changed. v0.7 limits the pool to DeepSWE-listed models only, v0.9 adds hallucination rate as a primary reliability factor, v1.0 removes every benchmark that could not achieve full cohort coverage, and v1.1 removes <strong>Claude Opus 4.6</strong> from the cohort. Historical lines should be read as rank history, not score continuity.</div>
+        <div class="chart-desc"><strong>Version History:</strong> How the DeepSWE cohort models moved across ValueRank versions as benchmark policy changed. v0.7 limits the pool to DeepSWE-listed models only, v0.9 adds hallucination rate as a primary reliability factor, v1.0 removes every benchmark that could not achieve full cohort coverage, v1.1 removes <strong>Claude Opus 4.6</strong>, and v1.2 <strong>shrinks the cohort from 13 to 8 DeepSWE-listed models</strong>. Historical lines should be read as rank history, not score continuity.</div>
         <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Two-frontier / Cost Impact -->
@@ -1439,14 +1439,14 @@
   <div class="container">
     <div class="section-header">
       <div class="section-title">Methodology</div>
-      <div class="section-sub">How scores are calculated, why cost gets 25%, and how v1.1 enforces zero benchmark gaps.</div>
+      <div class="section-sub">How scores are calculated, why cost gets 25%, and how v1.2 enforces zero benchmark gaps.</div>
     </div>
     <div class="method-grid">
       <div>
         <div class="card mb-4">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
           <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
-          <p class="method-text">For each of 15 dimensions, all 13 models are ranked 1–13 (best to worst). The formula maps rank 1 → 100 pts and rank 13 → 0 pts, with tied ranks receiving the average of their tied positions. v1.1 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>.</p>
+          <p class="method-text">For each of 15 dimensions, all 8 models are ranked 1–8 (best to worst). The formula maps rank 1 → 100 pts and rank 8 → 0 pts, with tied ranks receiving the average of their tied positions. v1.2 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>.</p>
           <hr class="divider" style="margin:16px 0;">
           <p class="method-text">The final ValueRank score is a weighted sum across all 15 dimensions. <strong>Cost weight: 25%.</strong> AA-Omniscience Hallucination Rate remains a 6% primary reliability factor, and cost is still constructed from normalized AA eval cost plus normalized DeepSWE average cost before rank-normalization.</p>
         </div>
@@ -1454,7 +1454,7 @@
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
           <div class="method-text" style="display:flex;flex-direction:column;gap:10px;">
             <div><strong>Rank-based (not raw-score-based):</strong> Prevents any single benchmark from dominating due to scale differences. GPQA percentages, DeepSWE pass rates, and token-per-second speed figures are not directly comparable on raw values; ranks are.</div>
-            <div><strong>Zero-gap benchmark rule:</strong> If even one ranked model is genuinely missing from a benchmark, that benchmark is excluded from v1.1. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.</div>
+            <div><strong>Zero-gap benchmark rule:</strong> If even one of the 8 ranked models is genuinely missing from a benchmark, that benchmark is excluded from v1.2. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.</div>
             <div><strong>SEAL CI band (±2–3 pts):</strong> Due to benchmark variance, scores within 2–3 pts should be treated as statistically tied. Rankings within this band are effectively co-ranked.</div>
             <div><strong>Quality sub-score:</strong> The 75% non-cost portion, computed as the weighted sum of all 14 non-cost dimensions. Represents pure capability ranking without cost penalty.</div>
           </div>
@@ -1485,7 +1485,7 @@
         <span>0 (worst)</span>
         <div class="hl-bar"></div>
         <span>100 (best)</span>
-        <span style="margin-left:12px;">All scored cells are confirmed primary-source data in v1.1</span>
+        <span style="margin-left:12px;">All scored cells are confirmed primary-source data in v1.2</span>
       </div>
       <div id="chart-heatmap-data" style="height:480px;"></div>
     </div>
@@ -1520,7 +1520,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Each model's score is a weighted average of 15 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 13</strong> for every retained v1.1 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. There are <strong>no neutral missing-data cells</strong> in v1.1. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.
+          Each model's score is a weighted average of 15 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 8</strong> for every retained v1.2 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. There are <strong>no neutral missing-data cells</strong> in v1.2. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.
         </div>
       </div>
 
@@ -1540,7 +1540,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          In historical ValueRank versions, ⊘ meant a genuine benchmark data gap. In <strong>v1.1</strong>, there are <strong>no ⊘ cells</strong> because any benchmark without full cohort coverage is excluded entirely. The Coverage section should therefore show <strong>✓ Full</strong> for every ranked model.
+          In historical ValueRank versions, ⊘ meant a genuine benchmark data gap. In <strong>v1.2</strong>, there are <strong>no ⊘ cells</strong> because any benchmark without full cohort coverage is excluded entirely. The Coverage section should therefore show <strong>✓ Full</strong> for every ranked model.
         </div>
       </div>
 
@@ -1560,7 +1560,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The composite cost term values models that stay efficient on both public pricing surfaces. That is why <strong>Gemini 3.1 Pro</strong> stays overall <strong>#1</strong>, while <strong>Claude Opus 4.8</strong> remains high-quality but falls to overall <strong>#7</strong> because its composite cost is among the worst in the cohort.
+          The composite cost term values models that stay efficient on both public pricing surfaces. That is why <strong>Gemini 3.1 Pro</strong> stays overall <strong>#1</strong> in v1.2, while <strong>Claude Fable 5</strong> is the highest-quality model in the cohort (Quality <strong>#1</strong>) but falls to overall <strong>#3</strong> because its composite cost is the highest in the cohort.
         </div>
       </div>
 
@@ -1570,7 +1570,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The Pareto frontier contains models that no other single model beats on <em>both</em> quality and cost simultaneously. In <strong>v1.1</strong> the frontier is <strong>3 models</strong>: <strong>MiMo-V2.5-Pro</strong>, <strong>Gemini 3.1 Pro</strong>, and <strong>GPT-5.5</strong>. Every other ranked model is dominated by at least one frontier model on both dimensions.
+          The Pareto frontier contains models that no other single model beats on <em>both</em> quality and cost simultaneously. In <strong>v1.2</strong> the frontier is <strong>6 models</strong>: <strong>Gemini 3.1 Pro</strong>, <strong>Gemini 3.5 Flash</strong>, <strong>Claude Fable 5</strong>, <strong>GPT-5.5</strong>, <strong>GPT-5.4</strong>, and <strong>Kimi K2.7</strong>. Every other ranked model is dominated by at least one frontier model on both dimensions.
         </div>
       </div>
 
@@ -1580,7 +1580,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          <strong>No.</strong> Because normalization is rank-relative, adding a new model, changing benchmark policy, or changing the eligible cohort shifts every other model's score in that dimension. Prior-version scores cannot be compared directly to <strong>v1.1</strong>. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
+          <strong>No.</strong> Because normalization is rank-relative, adding a new model, changing benchmark policy, or changing the eligible cohort shifts every other model's score in that dimension. Prior-version scores cannot be compared directly to <strong>v1.2</strong>. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
         </div>
       </div>
 
@@ -1590,7 +1590,17 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Periodically, or whenever primary-source benchmark updates materially change the frontier. <strong>v1.1 (June 12, 2026)</strong> removes <strong>Claude Opus 4.6</strong> from the cohort, keeps AA-Omniscience Hallucination Rate at 6%, keeps IFBench at 12%, and confirms that no newly audited benchmark reaches full 13-model coverage.
+          Periodically, or whenever primary-source benchmark updates materially change the frontier. <strong>v1.2 (June 20, 2026)</strong> shrinks the cohort from <strong>13 to 8 DeepSWE-listed models</strong>, adds <strong>Claude Fable 5</strong>, renames Kimi from <strong>K2.6</strong> to <strong>K2.7 Code</strong>, keeps AA-Omniscience Hallucination Rate at 6%, keeps IFBench at 12%, and confirms that no newly audited benchmark reaches full 8-model coverage.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What happened to the models that were ranked in v1.1 but not in v1.2?
+          <i data-lucide="chevron-down" class="faq-chevron"></i>
+        </button>
+        <div class="faq-a">
+          The ValueRank cohort is restricted to the <strong>current DeepSWE leaderboard roster</strong>. Five v1.1-ranked models — <code>GPT-5.4 Mini</code>, <code>MiMo-V2.5-Pro</code>, <code>MiniMax M3</code>, <code>GLM 5.1</code>, and <code>DeepSeek V4-Pro</code> — are no longer listed on DeepSWE and are therefore excluded from v1.2. Their <strong>v1.1 scores are preserved</strong> in <code>methodology.md</code> and <code>scores.md</code> for historical reference (<strong>MiMo-V2.5-Pro</strong> 58.1 / <strong>MiniMax M3</strong> 56.0 / <strong>DeepSeek V4-Pro</strong> 48.0 / <strong>GLM 5.1</strong> 40.0 / <strong>GPT-5.4 Mini</strong> 36.5). These scores are <strong>not directly comparable to v1.2</strong> because the normalization denominator changed from 13 to 8 — use the version history table to track rank changes instead.
         </div>
       </div>
 
@@ -1604,7 +1614,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v1.1 · June 12, 2026 · 13 models × 15 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v1.2 · June 20, 2026 · 8 models × 15 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -1649,59 +1659,41 @@ const DEV_COLORS = {
 // Dims array order: Cost IF Halluc TermHard DeepSWE GDP Tau2 LCR OmniAcc HLE GPQA Sci CritPt AAI Spd
 // isMissing: 1 = ⊘ cell (real score of 50.0 counts as isMissing=0 even if it happens to equal 50)
 const MODELS = [
-  { rank:1, name:'Gemini 3.1 Pro', shortName:'Gemini', developer:'Google DeepMind', evalCost:13.78, aaEvalCost:892.28, deepSweCost:1.84, aaCostNorm:17.44, deepSweCostNorm:10.12, overallScore:73.6, qualityScore:67.5, qualityRank:2, missingCount:0,
-    dims:[91.7, 83.3, 41.7, 75.0, 8.3, 0.0, 83.3, 70.8, 91.7, 91.7, 95.8, 100.0, 75.0, 75.0, 83.3],
+  { rank:1, name:'Gemini 3.1 Pro', shortName:'Gemini', developer:'Google DeepMind', evalCost:42.24, aaEvalCost:859.81, deepSweCost:9.48, aaCostNorm:13.81, deepSweCostNorm:70.68, overallScore:59.1, qualityScore:59.8, qualityRank:3, missingCount:0,
+    dims:[57.1, 100.0, 71.4, 42.9, 0.0, 0.0, 85.7, 71.4, 85.7, 71.4, 100.0, 85.7, 42.9, 14.3, 71.4],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:1, v80:1, v90:1, v100:1, v110:1} },
-  { rank:2, name:'GPT-5.5', shortName:'GPT-5.5', developer:'OpenAI', evalCost:50.97, aaEvalCost:3357.00, deepSweCost:6.61, aaCostNorm:65.60, deepSweCostNorm:36.34, overallScore:62.2, qualityScore:77.3, qualityRank:1, missingCount:0,
-    dims:[16.7, 58.3, 25.0, 100.0, 100.0, 87.5, 50.0, 91.7, 100.0, 83.3, 95.8, 83.3, 100.0, 91.7, 41.7],
+    vRanks:{v70:1, v80:1, v90:1, v100:1, v110:1, v120:1} },
+  { rank:2, name:'Gemini 3.5 Flash', shortName:'Gemini Flash', developer:'Google DeepMind', evalCost:36.53, aaEvalCost:1141.63, deepSweCost:7.34, aaCostNorm:18.33, deepSweCostNorm:54.73, overallScore:59.0, qualityScore:50.2, qualityRank:6, missingCount:0,
+    dims:[85.7, 85.7, 42.9, 0.0, 42.9, 28.6, 71.4, 28.6, 71.4, 28.6, 57.1, 28.6, 28.6, 42.9, 100.0],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:2, v80:2, v90:5, v100:2, v110:2} },
-  { rank:3, name:'MiMo-V2.5-Pro', shortName:'MiMo', developer:'Xiaomi', evalCost:7.04, aaEvalCost:160.82, deepSweCost:1.99, aaCostNorm:3.14, deepSweCostNorm:10.94, overallScore:58.1, qualityScore:44.2, qualityRank:9, missingCount:0,
-    dims:[100.0, 91.7, 91.7, 20.8, 25.0, 41.7, 50.0, 70.8, 8.3, 25.0, 12.5, 33.3, 12.5, 37.5, 0.0],
+    vRanks:{v70:8, v80:8, v90:8, v100:8, v110:8, v120:2} },
+  { rank:3, name:'Claude Fable 5', shortName:'Claude Fable 5', developer:'Anthropic', evalCost:100.00, aaEvalCost:6227.74, deepSweCost:13.41, aaCostNorm:100.00, deepSweCostNorm:100.00, overallScore:57.6, qualityScore:76.5, qualityRank:1, missingCount:0,
+    dims:[0.0, 42.9, 57.1, 100.0, 100.0, 100.0, 100.0, 42.9, 100.0, 100.0, 71.4, 100.0, 100.0, 100.0, 0.0],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:3, v80:3, v90:2, v100:3, v110:3} },
-  { rank:4, name:'MiniMax M3', shortName:'MiniMax M3', developer:'MiniMax', evalCost:18.32, aaEvalCost:308.34, deepSweCost:5.57, aaCostNorm:6.03, deepSweCostNorm:30.62, overallScore:56.0, qualityScore:52.4, qualityRank:6, missingCount:0,
-    dims:[66.7, 100.0, 100.0, 8.3, 33.3, 54.2, 29.2, 91.7, 0.0, 50.0, 83.3, 8.3, 12.5, 54.2, 16.7],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:3} },
+  { rank:4, name:'GPT-5.5', shortName:'GPT-5.5', developer:'OpenAI', evalCost:47.72, aaEvalCost:2588.36, deepSweCost:7.23, aaCostNorm:41.56, deepSweCostNorm:53.87, overallScore:56.9, qualityScore:66.2, qualityRank:2, missingCount:0,
+    dims:[28.6, 71.4, 14.3, 85.7, 85.7, 71.4, 42.9, 100.0, 57.1, 57.1, 85.7, 57.1, 85.7, 71.4, 42.9],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:4, v80:4, v90:3, v100:4, v110:4} },
-  { rank:5, name:'GPT-5.4', shortName:'GPT-5.4', developer:'OpenAI', evalCost:39.90, aaEvalCost:2851.01, deepSweCost:4.38, aaCostNorm:55.71, deepSweCostNorm:24.08, overallScore:54.4, qualityScore:64.2, qualityRank:4, missingCount:0,
-    dims:[25.0, 33.3, 16.7, 87.5, 83.3, 70.8, 16.7, 91.7, 75.0, 75.0, 66.7, 91.7, 91.7, 75.0, 75.0],
+    vRanks:{v70:2, v80:2, v90:5, v100:2, v110:2, v120:4} },
+  { rank:5, name:'GPT-5.4', shortName:'GPT-5.4', developer:'OpenAI', evalCost:39.22, aaEvalCost:2261.30, deepSweCost:5.65, aaCostNorm:36.31, deepSweCostNorm:42.14, overallScore:56.7, qualityScore:51.9, qualityRank:5, missingCount:0,
+    dims:[71.4, 57.1, 0.0, 57.1, 57.1, 57.1, 14.3, 85.7, 42.9, 42.9, 35.7, 71.4, 71.4, 57.1, 85.7],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:6, v80:6, v90:12, v100:6, v110:5} },
-  { rank:6, name:'Kimi K2.6', shortName:'Kimi', developer:'Moonshot AI', evalCost:17.95, aaEvalCost:947.87, deepSweCost:3.16, aaCostNorm:18.52, deepSweCostNorm:17.37, overallScore:54.3, qualityScore:47.4, qualityRank:8, missingCount:0,
-    dims:[75.0, 58.3, 58.3, 33.3, 45.8, 16.7, 83.3, 45.8, 25.0, 37.5, 45.8, 58.3, 33.3, 37.5, 58.3],
+    vRanks:{v70:6, v80:6, v90:12, v100:6, v110:5, v120:5} },
+  { rank:6, name:'Claude Opus 4.8', shortName:'Opus 4.8', developer:'Anthropic', evalCost:81.49, aaEvalCost:4011.58, deepSweCost:13.22, aaCostNorm:64.41, deepSweCostNorm:98.57, overallScore:46.1, qualityScore:56.6, qualityRank:4, missingCount:0,
+    dims:[14.3, 14.3, 100.0, 71.4, 71.4, 85.7, 57.1, 14.3, 28.6, 85.7, 35.7, 42.9, 57.1, 85.7, 57.1],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:5, v80:5, v90:4, v100:5, v110:6} },
-  { rank:7, name:'Claude Opus 4.8', shortName:'Opus 4.8', developer:'Anthropic', evalCost:80.37, aaEvalCost:4685.85, deepSweCost:12.58, aaCostNorm:91.57, deepSweCostNorm:69.16, overallScore:51.8, qualityScore:66.3, qualityRank:3, missingCount:0,
-    dims:[8.3, 16.7, 70.8, 87.5, 91.7, 100.0, 50.0, 16.7, 66.7, 100.0, 66.7, 58.3, 83.3, 100.0, 50.0],
+    vRanks:{v70:7, v80:7, v90:6, v100:7, v110:7, v120:6} },
+  { rank:7, name:'Kimi K2.7', shortName:'Kimi', developer:'Moonshot AI', evalCost:14.75, aaEvalCost:530.36, deepSweCost:2.82, aaCostNorm:8.52, deepSweCostNorm:20.99, overallScore:38.5, qualityScore:18.2, qualityRank:8, missingCount:0,
+    dims:[100.0, 28.6, 28.6, 14.3, 28.6, 14.3, 28.6, 0.0, 0.0, 14.3, 14.3, 14.3, 14.3, 0.0, 28.6],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:7, v80:7, v90:6, v100:7, v110:7} },
-  { rank:8, name:'Gemini 3.5 Flash', shortName:'Gemini Flash', developer:'Google DeepMind', evalCost:35.56, aaEvalCost:1551.60, deepSweCost:7.42, aaCostNorm:30.32, deepSweCostNorm:40.79, overallScore:49.9, qualityScore:55.4, qualityRank:5, missingCount:0,
-    dims:[33.3, 58.3, 33.3, 0.0, 58.3, 54.2, 66.7, 29.2, 83.3, 66.7, 66.7, 58.3, 62.5, 54.2, 91.7],
+    vRanks:{v70:5, v80:5, v90:4, v100:5, v110:6, v120:7} },
+  { rank:8, name:'Claude Sonnet 4.6', shortName:'Sonnet 4.6', developer:'Anthropic', evalCost:47.53, aaEvalCost:3355.85, deepSweCost:5.52, aaCostNorm:53.89, deepSweCostNorm:41.17, overallScore:26.2, qualityScore:20.7, qualityRank:7, missingCount:0,
+    dims:[42.9, 0.0, 85.7, 28.6, 14.3, 42.9, 0.0, 57.1, 14.3, 0.0, 0.0, 0.0, 0.0, 28.6, 14.3],
     isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:8, v80:8, v90:8, v100:8, v110:8} },
-  { rank:9, name:'DeepSeek V4-Pro', shortName:'DeepSeek', developer:'DeepSeek', evalCost:14.22, aaEvalCost:267.82, deepSweCost:4.22, aaCostNorm:5.23, deepSweCostNorm:23.20, overallScore:48.0, qualityScore:36.3, qualityRank:11, missingCount:0,
-    dims:[83.3, 58.3, 0.0, 41.7, 0.0, 33.3, 83.3, 8.3, 50.0, 37.5, 33.3, 33.3, 62.5, 25.0, 33.3],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:9, v80:9, v90:7, v100:9, v110:9} },
-  { rank:10, name:'GLM 5.1', shortName:'GLM', developer:'Z-AI', evalCost:25.82, aaEvalCost:543.95, deepSweCost:7.46, aaCostNorm:10.63, deepSweCostNorm:41.01, overallScore:40.0, qualityScore:36.7, qualityRank:10, missingCount:0,
-    dims:[50.0, 58.3, 83.3, 20.8, 16.7, 25.0, 100.0, 0.0, 16.7, 8.3, 12.5, 0.0, 25.0, 16.7, 66.7],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:10, v80:10, v90:10, v100:10, v110:10} },
-  { rank:11, name:'Claude Opus 4.7', shortName:'Opus 4.7', developer:'Anthropic', evalCost:100.00, aaEvalCost:5117.14, deepSweCost:18.19, aaCostNorm:100.00, deepSweCostNorm:100.00, overallScore:39.0, qualityScore:52.0, qualityRank:7, missingCount:0,
-    dims:[0.0, 8.3, 70.8, 54.2, 75.0, 87.5, 29.2, 45.8, 58.3, 58.3, 45.8, 75.0, 50.0, 75.0, 25.0],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:11, v80:11, v90:14, v100:11, v110:11} },
-  { rank:12, name:'GPT-5.4 Mini', shortName:'GPT-5.4 Mini', developer:'OpenAI', evalCost:18.95, aaEvalCost:1353.87, deepSweCost:2.08, aaCostNorm:26.46, deepSweCostNorm:11.43, overallScore:36.5, qualityScore:29.3, qualityRank:13, missingCount:0,
-    dims:[58.3, 25.0, 8.3, 54.2, 45.8, 8.3, 8.3, 29.2, 33.3, 0.0, 12.5, 33.3, 41.7, 8.3, 100.0],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:12, v80:12, v90:9, v100:12, v110:12} },
-  { rank:13, name:'Claude Sonnet 4.6', shortName:'Sonnet 4.6', developer:'Anthropic', evalCost:31.73, aaEvalCost:1694.19, deepSweCost:5.52, aaCostNorm:33.11, deepSweCostNorm:30.35, overallScore:32.6, qualityScore:29.6, qualityRank:12, missingCount:0,
-    dims:[41.7, 0.0, 50.0, 66.7, 66.7, 70.8, 0.0, 58.3, 41.7, 16.7, 12.5, 16.7, 0.0, 0.0, 8.3],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:13, v80:13, v90:11, v100:13, v110:13} },
+    vRanks:{v70:13, v80:13, v90:11, v100:13, v110:13, v120:8} },
 ];
+
+
 
 function compositeCostTier(cost) {
   if (cost <= 15) return 'Budget';
@@ -2207,8 +2199,8 @@ function renderBubble() {
 // CHART 6: VERSION BUMP CHART
 // ─────────────────────────────────────────────
 function renderBump() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7','v0.8','v0.9','v1.0','v1.1'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70','v80','v90','v100','v110'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7','v0.8','v0.9','v1.0','v1.1','v1.2'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70','v80','v90','v100','v110','v120'];
   const traces = MODELS.map(m => {
     const x=[], y=[];
     vKeys.forEach((vk,i) => {
@@ -2220,7 +2212,7 @@ function renderBump() {
       x, y,
       mode:'lines+markers+text',
       name:m.shortName,
-      text: x.map((v,i) => v === 'v1.1' ? m.shortName : ''),
+      text: x.map((v,i) => v === 'v1.2' ? m.shortName : ''),
       textposition:'middle right',
       textfont:{size:10},
       line:{ color: DEV_COLORS[m.developer] || '#64748b', width: isTop3 ? 2.5 : 1.5, dash: isTop3 ? 'solid' : 'solid' },
@@ -2232,9 +2224,9 @@ function renderBump() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v2.0 to v1.1', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v2.0 to v1.2', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
-    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,14.5],
+    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,9.5],
       tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14']},
     margin:{...getPlotlyLayout().margin, r:90},
     annotations:[
@@ -2243,7 +2235,7 @@ function renderBump() {
       {x:'v0.8', y:3, xref:'x', yref:'y', text:'v0.8: benchmark coverage<br>expansion', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:100, ay:10},
       {x:'v0.9', y:4, xref:'x', yref:'y', text:'v0.9: hallucination rate', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:60, ay:-20},
       {x:'v1.0', y:1, xref:'x', yref:'y', text:'v1.0: zero-gap benchmark set', font:{color:'#f97316',size:9}, showarrow:true, arrowcolor:'#f97316', ax:50, ay:-35},
-      {x:'v1.1', y:3, xref:'x', yref:'y', text:'v1.1: Opus 4.6 removed', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:45, ay:25}
+      {x:'v1.2', y:2, xref:'x', yref:'y', text:'v1.2: cohort → 8 models\n+ Claude Fable 5', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-50, ay:35}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -2376,8 +2368,8 @@ function renderGaps() {
 // VERSION TABLE
 // ─────────────────────────────────────────────
 function renderVersionTable() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7','v0.8','v0.9','v1.0','v1.1'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70','v80','v90','v100','v110'];
+  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7','v0.8','v0.9','v1.0','v1.1','v1.2'];
+  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70','v80','v90','v100','v110','v120'];
   const table = document.getElementById('version-table');
   table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
   <tbody>${MODELS.map(m => {

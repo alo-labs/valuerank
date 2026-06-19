@@ -1,54 +1,62 @@
-# ValueRank v1.1 Scores
+# ValueRank v1.2 Scores
 
-**Version:** v1.1  
-**Updated:** June 12, 2026
+**Version:** v1.2
+**Updated:** June 20, 2026
 
 ## Final Ranking
 
-v1.1 removes `Claude Opus 4.6`, keeps the zero-gap 15-dimension set, and renormalizes the full score over the remaining 13-model cohort.
+v1.2 shrinks the ranked cohort from 13 to 8 current DeepSWE-listed models, adds Claude Fable 5, renames Kimi from K2.6 to K2.7 Code, and renormalizes the full score over the new 8-model cohort.
 
 | Rank | Model | Overall | Quality | Quality Rank | Missing Dims |
 |---|---|---:|---:|---:|---:|
-| 1 | Gemini 3.1 Pro | 73.6 | 67.5 | 2 | 0 |
-| 2 | GPT-5.5 | 62.2 | 77.3 | 1 | 0 |
-| 3 | MiMo-V2.5-Pro | 58.1 | 44.2 | 9 | 0 |
-| 4 | MiniMax M3 | 56.0 | 52.4 | 6 | 0 |
-| 5 | GPT-5.4 | 54.4 | 64.2 | 4 | 0 |
-| 6 | Kimi K2.6 | 54.3 | 47.4 | 8 | 0 |
-| 7 | Claude Opus 4.8 | 51.8 | 66.3 | 3 | 0 |
-| 8 | Gemini 3.5 Flash | 49.9 | 55.4 | 5 | 0 |
-| 9 | DeepSeek V4-Pro | 48.0 | 36.3 | 11 | 0 |
-| 10 | GLM 5.1 | 40.0 | 36.7 | 10 | 0 |
-| 11 | Claude Opus 4.7 | 39.0 | 52.0 | 7 | 0 |
-| 12 | GPT-5.4 Mini | 36.5 | 29.3 | 13 | 0 |
-| 13 | Claude Sonnet 4.6 | 32.6 | 29.6 | 12 | 0 |
+| 1 | Gemini 3.1 Pro | 59.1 | 59.8 | 3 | 0 |
+| 2 | Gemini 3.5 Flash | 59.0 | 50.2 | 6 | 0 |
+| 3 | Claude Fable 5 | 57.6 | 76.5 | 1 | 0 |
+| 4 | GPT-5.5 | 56.9 | 66.2 | 2 | 0 |
+| 5 | GPT-5.4 | 56.7 | 51.9 | 5 | 0 |
+| 6 | Claude Opus 4.8 | 46.1 | 56.6 | 4 | 0 |
+| 7 | Kimi K2.7 | 38.5 | 18.2 | 8 | 0 |
+| 8 | Claude Sonnet 4.6 | 26.2 | 20.7 | 7 | 0 |
+
+## Removed Models (v1.1 Scores)
+
+The following models were ranked in v1.1 (n=13) but are no longer on the DeepSWE leaderboard, so they are excluded from v1.2 (n=8). Their v1.1 scores are preserved here for reference. **Not directly comparable to v1.2** — normalization denominator changed from 13 to 8.
+
+| Model | v1.1 Rank | v1.1 Overall | v1.1 Quality | v1.1 Composite Cost |
+|---|---:|---:|---:|---:|
+| MiMo-V2.5-Pro | 3 | 58.1 | 44.2 | $7.04 |
+| MiniMax M3 | 4 | 56.0 | 52.4 | $18.32 |
+| DeepSeek V4-Pro | 9 | 48.0 | 36.3 | $14.22 |
+| Claude Opus 4.7 | 11 | 39.0 | 52.0 | $100.00 |
+| GLM 5.1 | 10 | 40.0 | 36.7 | $25.82 |
+| GPT-5.4 Mini | 12 | 36.5 | 29.3 | $18.95 |
 
 ## Pareto Frontier
 
-Undominated on composite cost vs. quality:
+Undominated on composite cost vs. quality (6 models):
 
 - Gemini 3.1 Pro
+- Gemini 3.5 Flash
+- Claude Fable 5
 - GPT-5.5
-- MiMo-V2.5-Pro
+- GPT-5.4
+- Kimi K2.7
+
+Dominated models: Claude Opus 4.8, Claude Sonnet 4.6.
 
 ## Normalized Dimension Matrix
 
 Dimension order:
 
-`[Cost, IF, Halluc, TermHard, DeepSWE, GDPval, Tau2, LCR, OmniAcc, HLE, GPQA, Sci, CritPt, AAI, Speed]`
+`[Cost, IF, Halluc, TermHard, DeepSWE, GDP, Tau2, LCR, OmniAcc, HLE, GPQA, Sci, CritPt, AAI, Spd]`
 
 | Model | Normalized dimensions |
 |---|---|
-| Gemini 3.1 Pro | `[91.7, 83.3, 41.7, 75.0, 8.3, 0.0, 83.3, 70.8, 91.7, 91.7, 95.8, 100.0, 75.0, 75.0, 83.3]` |
-| GPT-5.5 | `[16.7, 58.3, 25.0, 100.0, 100.0, 87.5, 50.0, 91.7, 100.0, 83.3, 95.8, 83.3, 100.0, 91.7, 41.7]` |
-| MiMo-V2.5-Pro | `[100.0, 91.7, 91.7, 20.8, 25.0, 41.7, 50.0, 70.8, 8.3, 25.0, 12.5, 33.3, 12.5, 37.5, 0.0]` |
-| MiniMax M3 | `[66.7, 100.0, 100.0, 8.3, 33.3, 54.2, 29.2, 91.7, 0.0, 50.0, 83.3, 8.3, 12.5, 54.2, 16.7]` |
-| GPT-5.4 | `[25.0, 33.3, 16.7, 87.5, 83.3, 70.8, 16.7, 91.7, 75.0, 75.0, 66.7, 91.7, 91.7, 75.0, 75.0]` |
-| Kimi K2.6 | `[75.0, 58.3, 58.3, 33.3, 45.8, 16.7, 83.3, 45.8, 25.0, 37.5, 45.8, 58.3, 33.3, 37.5, 58.3]` |
-| Claude Opus 4.8 | `[8.3, 16.7, 70.8, 87.5, 91.7, 100.0, 50.0, 16.7, 66.7, 100.0, 66.7, 58.3, 83.3, 100.0, 50.0]` |
-| Gemini 3.5 Flash | `[33.3, 58.3, 33.3, 0.0, 58.3, 54.2, 66.7, 29.2, 83.3, 66.7, 66.7, 58.3, 62.5, 54.2, 91.7]` |
-| DeepSeek V4-Pro | `[83.3, 58.3, 0.0, 41.7, 0.0, 33.3, 83.3, 8.3, 50.0, 37.5, 33.3, 33.3, 62.5, 25.0, 33.3]` |
-| GLM 5.1 | `[50.0, 58.3, 83.3, 20.8, 16.7, 25.0, 100.0, 0.0, 16.7, 8.3, 12.5, 0.0, 25.0, 16.7, 66.7]` |
-| Claude Opus 4.7 | `[0.0, 8.3, 70.8, 54.2, 75.0, 87.5, 29.2, 45.8, 58.3, 58.3, 45.8, 75.0, 50.0, 75.0, 25.0]` |
-| GPT-5.4 Mini | `[58.3, 25.0, 8.3, 54.2, 45.8, 8.3, 8.3, 29.2, 33.3, 0.0, 12.5, 33.3, 41.7, 8.3, 100.0]` |
-| Claude Sonnet 4.6 | `[41.7, 0.0, 50.0, 66.7, 66.7, 70.8, 0.0, 58.3, 41.7, 16.7, 12.5, 16.7, 0.0, 0.0, 8.3]` |
+| Gemini 3.1 Pro | `[57.1, 100.0, 71.4, 42.9, 0.0, 0.0, 85.7, 71.4, 85.7, 71.4, 100.0, 85.7, 42.9, 14.3, 71.4]` |
+| Gemini 3.5 Flash | `[85.7, 85.7, 42.9, 0.0, 42.9, 28.6, 71.4, 28.6, 71.4, 28.6, 57.1, 28.6, 28.6, 42.9, 100.0]` |
+| Claude Fable 5 | `[0.0, 42.9, 57.1, 100.0, 100.0, 100.0, 100.0, 42.9, 100.0, 100.0, 71.4, 100.0, 100.0, 100.0, 0.0]` |
+| GPT-5.5 | `[28.6, 71.4, 14.3, 85.7, 85.7, 71.4, 42.9, 100.0, 57.1, 57.1, 85.7, 57.1, 85.7, 71.4, 42.9]` |
+| GPT-5.4 | `[71.4, 57.1, 0.0, 57.1, 57.1, 57.1, 14.3, 85.7, 42.9, 42.9, 35.7, 71.4, 71.4, 57.1, 85.7]` |
+| Claude Opus 4.8 | `[14.3, 14.3, 100.0, 71.4, 71.4, 85.7, 57.1, 14.3, 28.6, 85.7, 35.7, 42.9, 57.1, 85.7, 57.1]` |
+| Kimi K2.7 | `[100.0, 28.6, 28.6, 14.3, 28.6, 14.3, 28.6, 0.0, 0.0, 14.3, 14.3, 14.3, 14.3, 0.0, 28.6]` |
+| Claude Sonnet 4.6 | `[42.9, 0.0, 85.7, 28.6, 14.3, 42.9, 0.0, 57.1, 14.3, 0.0, 0.0, 0.0, 0.0, 28.6, 14.3]` |
