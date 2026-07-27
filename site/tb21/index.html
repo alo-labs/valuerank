@@ -334,7 +334,7 @@
    color: var(--text-secondary);
    font-size: .88rem;
 }
-  .plot { width: 100%; height: 760px; }
+  .plot { width: 100%; height: 820px; }
   .table-wrap {
    overflow: auto;
    border: 1px solid var(--border);
@@ -664,170 +664,218 @@
    return `${row.agent}<br>+ ${row.model}`;
 }
   function dataToPaper(cost, score, gd) {
- // Pixel → paper (margins included). Plotly axis.domain is subplot-local [0,1], not paper.
- const xa = gd._fullLayout.xaxis;
- const ya = gd._fullLayout.yaxis;
- const w = gd._fullLayout.width || 1100;
- const h = gd._fullLayout.height || 520;
- const xPx = xa._offset + xa.l2p(Math.log10(cost));
- const yPx = ya._offset + ya.l2p(score);
- return { x: xPx / w, y: 1 - yPx / h };
+const xa = gd._fullLayout.xaxis;
+const ya = gd._fullLayout.yaxis;
+// Plotly xref/yref "paper" is normalized over the data plotting area, not the full figure.
+const xPx = xa._offset + xa.l2p(Math.log10(cost));
+const yPx = ya._offset + ya.l2p(score);
+return {
+ x: (xPx - xa._offset) / xa._length,
+ y: 1 - (yPx - ya._offset) / ya._length,
+ xPx,
+ yPx
+};
 }
- function estimateLabelSize(row, gd) {
- const w = gd._fullLayout.width || 1100;
- const h = gd._fullLayout.height || 520;
- const fontSize = 7.5;
- const lines = formatChartLabel(row).split("<br>");
- const maxChars = Math.max(...lines.map(s => s.length));
+function estimateLabelSize(row, gd) {
+const w = gd._fullLayout.width || 1100;
+const h = gd._fullLayout.height || 520;
+const fontSize = 8;
+const lines = formatChartLabel(row).split("<br>");
+const maxChars = Math.max(...lines.map(s => s.length));
+// Inflate vs glyph metrics so collision checks match Plotly DOM boxes.
+const wPx = maxChars * fontSize * 0.62 + 10;
+const hPx = fontSize * 1.45 * lines.length + 6;
+return { wPx, hPx, w: wPx / w, h: hPx / h };
+}
+function buildLabelAnnotations(frontierIds, gd) {
+const dark = isDark();
+const textColor = dark ? "#e2e8f0" : "#0f172a";
+const frontierColor = dark ? "#34d399" : "#047857";
+const arrowMuted = dark ? "rgba(148,163,184,.55)" : "rgba(100,116,139,.5)";
+const arrowFrontier = dark ? "rgba(52,211,153,.9)" : "rgba(5,150,105,.8)";
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const layout = gd._fullLayout;
+const w = layout.width || 1100;
+const h = layout.height || 520;
+const MARKER_R = 12;
+const LABEL_PAD = 5;
+const DIRS = [
+ { ux: 0, uy: -1, xa: "center", ya: "bottom" },
+ { ux: 0.707, uy: -0.707, xa: "left", ya: "bottom" },
+ { ux: 1, uy: 0, xa: "left", ya: "middle" },
+ { ux: 0.707, uy: 0.707, xa: "left", ya: "top" },
+ { ux: 0, uy: 1, xa: "center", ya: "top" },
+ { ux: -0.707, uy: 0.707, xa: "right", ya: "top" },
+ { ux: -1, uy: 0, xa: "right", ya: "middle" },
+ { ux: -0.707, uy: -0.707, xa: "right", ya: "bottom" },
+ { ux: 0.383, uy: -0.924, xa: "left", ya: "bottom" },
+ { ux: 0.924, uy: -0.383, xa: "left", ya: "bottom" },
+ { ux: 0.924, uy: 0.383, xa: "left", ya: "top" },
+ { ux: 0.383, uy: 0.924, xa: "left", ya: "top" },
+ { ux: -0.383, uy: 0.924, xa: "right", ya: "top" },
+ { ux: -0.924, uy: 0.383, xa: "right", ya: "top" },
+ { ux: -0.924, uy: -0.383, xa: "right", ya: "bottom" },
+ { ux: -0.383, uy: -0.924, xa: "right", ya: "bottom" }
+];
+const RADII = [24, 28, 34, 40, 48, 58, 70, 84, 100, 118];
+const items = ENTRIES.map((row, idx) => {
+ const pt = dataToPaper(row.cost, row.score, gd);
+ const size = estimateLabelSize(row, gd);
  return {
-  w: (maxChars * fontSize * 0.62 + 6) / w,
-  h: (fontSize * 1.4 * lines.length + 2) / h
- };
-}
- function buildLabelAnnotations(frontierIds, gd) {
- const dark = isDark();
- const textColor = dark ? "#e2e8f0" : "#0f172a";
- const frontierColor = dark ? "#34d399" : "#047857";
- const arrowMuted = dark ? "rgba(148,163,184,.45)" : "rgba(100,116,139,.4)";
- const arrowFrontier = dark ? "rgba(52,211,153,.85)" : "rgba(5,150,105,.75)";
- const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
- const layout = gd._fullLayout;
- const w = layout.width || 1100;
- const h = layout.height || 520;
- const m = layout.margin;
- const x0 = m.l / w;
- const x1 = (w - m.r) / w;
- const markerClear = 14; // px
- const items = ENTRIES.map(row => ({
+  idx,
   row,
-  pt: dataToPaper(row.cost, row.score, gd),
-  // Conservative width: Plotly grows text rightward from the ax/ay anchor.
-  size: (() => {
-   const base = estimateLabelSize(row, gd);
-   return { w: base.w * 1.15, h: base.h * 1.05 };
-  })(),
+  pt,
+  size,
+  px: { x: pt.xPx, y: pt.yPx },
   onFront: frontierIds.has(`${row.agent}|${row.model}|${row.effort}|${row.cost}`)
- })).sort((a, b) => b.row.score - a.row.score || a.row.cost - b.row.cost);
- const markersPx = items.map(it => ({
-  x: it.pt.x * w,
-  y: (1 - it.pt.y) * h
- }));
- const leftmostPx = Math.min(...markersPx.map(p => p.x));
- const rightmostPx = Math.max(...markersPx.map(p => p.x));
- const midX = (x0 + x1) / 2;
- const leftGroup = items.filter(it => it.pt.x <= midX)
-  .sort((a, b) => b.row.score - a.row.score);
- const rightGroup = items.filter(it => it.pt.x > midX)
-  .sort((a, b) => b.row.score - a.row.score);
-
- function hitsMarkerPx(left, right, top, bottom) {
-  return markersPx.some(m => {
-   const cx = Math.max(left, Math.min(m.x, right));
-   const cy = Math.max(top, Math.min(m.y, bottom));
-   const dx = m.x - cx, dy = m.y - cy;
-   return dx * dx + dy * dy < (markerClear) * (markerClear);
-  });
- }
-
- function placeGroup(group, side) {
-  const n = group.length;
-  if (!n) return [];
-  const yTopPx = m.t + 16;
-  const yBotPx = h - m.b - 16;
-  const maxH = Math.max(...group.map(g => g.size.h * h));
-  const minGap = maxH + 8;
-  const span = yBotPx - yTopPx;
-  const need = (n - 1) * minGap;
-  const usableTop = yTopPx;
-  const usableBot = need > span ? yBotPx : yTopPx + Math.max(need, span * 0.88);
-  const maxLabelW = Math.max(...group.map(g => g.size.w * w));
-  // Anchor = LEFT edge of text (Plotly pixel tails behave like left anchors).
-  let colLeft;
-  if (side === "left") {
-   const gutterRight = leftmostPx - markerClear;
-   colLeft = clamp(gutterRight - maxLabelW, m.l + 4, gutterRight - 12);
-  } else {
-   colLeft = clamp(rightmostPx + markerClear, rightmostPx + markerClear, w - m.r - maxLabelW - 4);
-  }
-  const placed = [];
-  group.forEach((item, i) => {
-   const lw = item.size.w * w;
-   const lh = item.size.h * h;
-   let textTop = n === 1
-    ? (yTopPx + yBotPx) / 2 - lh / 2
-    : usableTop + (i / Math.max(n - 1, 1)) * (usableBot - usableTop) - lh / 2;
-   if (placed.length) {
-    const prev = placed[placed.length - 1];
-    const minTop = prev.textTop + prev.lh + 6;
-    if (textTop < minTop) textTop = minTop;
-   }
-   textTop = clamp(textTop, yTopPx, yBotPx - lh);
-   let left = colLeft;
-   let right = left + lw;
-   let top = textTop;
-   let bottom = top + lh;
-   for (let step = 0; step < 14; step++) {
-    if (!hitsMarkerPx(left, right, top, bottom)) break;
-    if (side === "left") {
-     left = Math.max(m.l + 2, left - 10);
-     right = left + lw;
-    } else {
-     left = Math.min(w - m.r - lw - 2, left + 10);
-     right = left + lw;
-    }
-   }
-   for (let step = 0; step < 18; step++) {
-    if (!hitsMarkerPx(left, right, top, bottom)) break;
-    const dir = step % 2 === 0 ? 1 : -1;
-    top = clamp(top + dir * (8 + step * 2), yTopPx, yBotPx - lh);
-    bottom = top + lh;
-   }
-   const ptX = item.pt.x * w;
-   const ptY = (1 - item.pt.y) * h;
-   const textCy = (top + bottom) / 2;
-   // Left-edge anchor: ax/ay vector from point → text left-center.
-   const axPx = left - ptX;
-   const ayPx = textCy - ptY;
-   placed.push({ item, axPx, ayPx, lh, textTop });
-  });
-  return placed;
- }
-
- const placed = [
-  ...placeGroup(leftGroup, "left"),
-  ...placeGroup(rightGroup, "right")
- ];
- return placed.map(({ item, axPx, ayPx }) => ({
-  x: item.pt.x,
-  y: item.pt.y,
-  ax: axPx,
-  ay: ayPx,
-  xref: "paper",
-  yref: "paper",
-  axref: "pixel",
-  ayref: "pixel",
-  text: formatChartLabel(item.row),
-  showarrow: true,
-  arrowhead: 2,
-  arrowsize: 0.6,
-  arrowwidth: 1,
-  arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
-  align: "left",
-  xanchor: "left",
-  yanchor: "middle",
-  font: {
-   size: 7.5,
-   color: item.onFront ? frontierColor : textColor,
-   family: "IBM Plex Sans, sans-serif"
-  },
-  bgcolor: "rgba(0,0,0,0)",
-  bordercolor: "rgba(0,0,0,0)",
-  borderwidth: 0,
-  borderpad: 0,
-  captureevents: false
- }));
+ };
+});
+items.forEach(it => {
+ let nearest = Infinity;
+ items.forEach(other => {
+  if (other.idx === it.idx) return;
+  const dx = it.px.x - other.px.x;
+  const dy = it.px.y - other.px.y;
+  nearest = Math.min(nearest, Math.hypot(dx, dy));
+ });
+ it.isolation = nearest;
+});
+items.sort((a, b) => {
+ if (a.onFront !== b.onFront) return a.onFront ? -1 : 1;
+ return b.isolation - a.isolation || b.row.score - a.row.score || a.row.cost - b.row.cost;
+});
+function labelBox(ptX, ptY, ax, ay, lw, lh, xanchor, yanchor) {
+ const axX = ptX + ax;
+ const ayY = ptY + ay;
+ let left, right, top, bottom;
+ if (xanchor === "left") { left = axX; right = axX + lw; }
+ else if (xanchor === "right") { right = axX; left = axX - lw; }
+ else { left = axX - lw / 2; right = axX + lw / 2; }
+ if (yanchor === "top") { top = ayY; bottom = ayY + lh; }
+ else if (yanchor === "bottom") { bottom = ayY; top = ayY - lh; }
+ else { top = ayY - lh / 2; bottom = ayY + lh / 2; }
+ return { left, right, top, bottom };
 }
- function plotlyLayout(title) {
+function overlapsLabels(box, placed, skipIdx) {
+ return placed.some((p, i) => {
+  if (skipIdx != null && i === skipIdx) return false;
+  return !(
+   box.right + LABEL_PAD < p.box.left ||
+   box.left - LABEL_PAD > p.box.right ||
+   box.bottom + LABEL_PAD < p.box.top ||
+   box.top - LABEL_PAD > p.box.bottom
+  );
+ });
+}
+function hitsOtherMarkers(box, ownIdx) {
+ return items.some(m => {
+  if (m.idx === ownIdx) return false;
+  const cx = clamp(m.px.x, box.left, box.right);
+  const cy = clamp(m.px.y, box.top, box.bottom);
+  const dx = m.px.x - cx;
+  const dy = m.px.y - cy;
+  return dx * dx + dy * dy < MARKER_R * MARKER_R;
+ });
+}
+function inBounds(box) {
+ return box.left >= 2 && box.right <= w - 2 && box.top >= 2 && box.bottom <= h - 2;
+}
+function spillCost(box) {
+ let c = 0;
+ if (box.left < 2) c += 2 - box.left;
+ if (box.right > w - 2) c += box.right - (w - 2);
+ if (box.top < 2) c += 2 - box.top;
+ if (box.bottom > h - 2) c += box.bottom - (h - 2);
+ return c;
+}
+function findPlacement(item, placed, skipIdx) {
+ const lw = item.size.wPx;
+ const lh = item.size.hPx;
+ const ptX = item.px.x;
+ const ptY = item.px.y;
+ let best = null;
+ for (const r of RADII) {
+  for (const d of DIRS) {
+   const ax = d.ux * r;
+   const ay = d.uy * r;
+   const box = labelBox(ptX, ptY, ax, ay, lw, lh, d.xa, d.ya);
+   if (!inBounds(box)) continue;
+   if (overlapsLabels(box, placed, skipIdx)) continue;
+   if (hitsOtherMarkers(box, item.idx)) continue;
+   const score = r + Math.abs(d.ux) * 0.35 + Math.abs(d.uy) * 0.35;
+   if (!best || score < best.score) best = { ax, ay, xa: d.xa, ya: d.ya, box, score };
+  }
+  if (best && best.score <= r + 4) break;
+ }
+ if (!best) {
+  for (const r of RADII) {
+   for (const d of DIRS) {
+    const ax = d.ux * r;
+    const ay = d.uy * r;
+    const box = labelBox(ptX, ptY, ax, ay, lw, lh, d.xa, d.ya);
+    if (overlapsLabels(box, placed, skipIdx)) continue;
+    if (hitsOtherMarkers(box, item.idx)) continue;
+    const score = r * 2 + spillCost(box) * 5;
+    if (!best || score < best.score) best = { ax, ay, xa: d.xa, ya: d.ya, box, score };
+   }
+  }
+ }
+ if (!best) {
+  const d = DIRS[0];
+  const r = 48;
+  const ax = d.ux * r;
+  const ay = d.uy * r;
+  best = { ax, ay, xa: d.xa, ya: d.ya, box: labelBox(ptX, ptY, ax, ay, lw, lh, d.xa, d.ya), score: 999 };
+ }
+ return best;
+}
+const placed = [];
+items.forEach(item => {
+ placed.push({ item, ...findPlacement(item, placed, null) });
+});
+// Refinement: re-place any residual collisions (greedy).
+for (let pass = 0; pass < 3; pass++) {
+ for (let i = 0; i < placed.length; i++) {
+  const cur = placed[i];
+  const conflict = overlapsLabels(cur.box, placed, i) || hitsOtherMarkers(cur.box, cur.item.idx);
+  if (!conflict) continue;
+  const next = findPlacement(cur.item, placed, i);
+  placed[i] = { item: cur.item, ...next };
+ }
+}
+return placed.map(({ item, ax, ay, xa, ya }) => ({
+ x: item.pt.x,
+ y: item.pt.y,
+ ax,
+ ay,
+ xref: "paper",
+ yref: "paper",
+ axref: "pixel",
+ ayref: "pixel",
+ text: formatChartLabel(item.row),
+ showarrow: true,
+ arrowhead: 3,
+ arrowsize: 0.85,
+ arrowwidth: 1.15,
+ arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
+ standoff: 0,
+ startstandoff: 0,
+ align: xa === "right" ? "right" : xa === "center" ? "center" : "left",
+ xanchor: xa,
+ yanchor: ya,
+ font: {
+  size: 8,
+  color: item.onFront ? frontierColor : textColor,
+  family: "IBM Plex Sans, sans-serif"
+ },
+ bgcolor: "rgba(0,0,0,0)",
+ bordercolor: "rgba(0,0,0,0)",
+ borderwidth: 0,
+ borderpad: 0,
+ captureevents: false
+}));
+}
+function plotlyLayout(title) {
  const dark = isDark();
  const xMin = Math.log10(55);
  const xMax = Math.log10(3500);
@@ -836,7 +884,7 @@
   paper_bgcolor: "rgba(0,0,0,0)",
   plot_bgcolor: "rgba(0,0,0,0)",
   font: { family: "IBM Plex Sans, sans-serif", color: dark ? "#94a3b8" : "#475569", size: 12 },
-  margin: { l: 72, r: 56, t: 48, b: 88 },
+  margin: { l: 84, r: 88, t: 56, b: 96 },
   hovermode: "closest",
   legend: { orientation: "h", y: -0.18, font: { size: 12 } },
   annotations: [],
