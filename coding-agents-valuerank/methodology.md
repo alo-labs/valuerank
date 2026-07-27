@@ -4,7 +4,7 @@ Last updated: July 28, 2026
 
 ## Cohort
 
-v1.3 ranks the **42** coding-agent variants exposed by Artificial Analysis' Coding Agent benchmark page that publish both an Index score and mean API cost per task. The unit of comparison is an agent harness plus model/settings variant, not just the base model.
+v0.3 ranks the **42** coding-agent variants exposed by Artificial Analysis' Coding Agent benchmark page that publish both an Index score and mean API cost per task. The unit of comparison is an agent harness plus model/settings variant, not just the base model.
 
 Examples:
 
@@ -25,7 +25,7 @@ Artificial Analysis already includes Terminal-Bench v2 inside its own index. Ter
 
 ## Artificial Analysis Basis
 
-Artificial Analysis Coding Agent Index v1.3 is a composite of:
+Artificial Analysis Coding Agent Index is a composite of:
 
 | Component | Public Description | Weight in AA Index |
 |---|---|---:|
@@ -37,7 +37,7 @@ ValueRank uses the published `indexScore`, component scores, mean API cost per t
 
 ## Terminal Bench 2.1 Mapping
 
-Terminal Bench 2.1 publishes rows by agent plus model family. Artificial Analysis often distinguishes effort settings for the same family. v1.3 applies a family-level alias rule when the agent and model family match (effort suffixes in parentheses are ignored for the match).
+Terminal Bench 2.1 publishes rows by agent plus model family. Artificial Analysis often distinguishes effort settings for the same family. v0.3 applies a family-level alias rule when the agent and model family match (effort suffixes in parentheses are ignored for the match).
 
 | Terminal Bench 2.1 Family | ValueRank Rows |
 |---|---|
@@ -52,7 +52,7 @@ Rows without an official direct or family-level match receive neutral TB2.1 norm
 
 ## Normalization
 
-Each dimension is normalized by rank percentile within the v1.3 cohort (average ranks for ties).
+Each dimension is normalized by rank percentile within the v0.3 cohort (average ranks for ties).
 
 | Dimension | Direction | Normalization |
 |---|---|---|
@@ -78,3 +78,4 @@ The website slider lets users vary cost weight from 0% to 50%.
 ## Retired v0.1 Method
 
 v0.1 published separate Terminal-Bench 2.0 and SWE-bench Verified lists. That design is no longer used for `/coding-agents/` because the current objective is to use Artificial Analysis' coding-agent benchmark as the basis, then Terminal Bench 2.1.
+

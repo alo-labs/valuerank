@@ -1,10 +1,10 @@
-# Coding Agent ValueRank - v1.3
+# Coding Agent ValueRank - v0.3
 
 Last updated: July 28, 2026
 
 ## What Changed
 
-v1.3 refreshes the Artificial Analysis coding-agent cohort and remaps Terminal Bench 2.1 against the official 17-row leaderboard. The formula is unchanged from v0.2:
+v0.3 refreshes the Artificial Analysis coding-agent cohort and remaps Terminal Bench 2.1 against the official 17-row leaderboard. The formula is unchanged from v0.2:
 
 ```text
 Overall = 0.25 * CostNorm + 0.60 * AAIndexNorm + 0.15 * TB2.1Norm
@@ -45,3 +45,4 @@ Artificial Analysis is the basis because it provides one current coding-agent co
 | `profiles.md` | Per-harness notes |
 | `limitations.md` | Coverage and interpretation caveats |
 | `research.md` | Provenance and extraction notes |
+
