@@ -504,7 +504,7 @@
     <p class="hero-desc">
      Accuracy (%) against total evaluation cost (USD) from the official
      <a href="https://www.tbench.ai/leaderboard/terminal-bench/2.1" target="_blank" rel="noopener" style="color:var(--accent-light)">tbench.ai leaderboard</a>.
-     The green step line is the Pareto frontier: higher score at lower or equal cost.
+     The gray dotted curve is the Pareto frontier: higher score at lower or equal cost.
     </p>
     <div class="hero-cta-row">
      <a href="#chart" class="hero-cta-primary"><i data-lucide="scatter-chart"></i> View chart</a>
@@ -940,7 +940,7 @@ function plotlyLayout(title) {
      y: frontier.map(r => r.score),
      mode: "lines",
      type: "scatter",
-     line: { shape: "hv", color: "#10b981", width: 3 },
+     line: { shape: "spline", dash: "dot", color: "#94a3b8", width: 2 },
      hoverinfo: "skip",
      showlegend: false,
      name: "step"
