@@ -664,107 +664,201 @@
    return `${row.agent}<br>+ ${row.model}`;
 }
   function dataToPaper(cost, score, gd) {
-   const xa = gd._fullLayout.xaxis;
-   const ya = gd._fullLayout.yaxis;
-   const logx = Math.log10(cost);
-   const [x0, x1] = xa.range;
-   const [y0, y1] = ya.range;
-   return {
-    x: (logx - x0) / (x1 - x0),
-    y: (score - y0) / (y1 - y0)
-};
+ // Pixel → paper (margins included). Plotly axis.domain is subplot-local [0,1], not paper.
+ const xa = gd._fullLayout.xaxis;
+ const ya = gd._fullLayout.yaxis;
+ const w = gd._fullLayout.width || 1100;
+ const h = gd._fullLayout.height || 520;
+ const xPx = xa._offset + xa.l2p(Math.log10(cost));
+ const yPx = ya._offset + ya.l2p(score);
+ return { x: xPx / w, y: 1 - yPx / h };
 }
-  function buildLabelAnnotations(frontierIds, gd) {
-   const dark = isDark();
-   const textColor = dark ? "#e2e8f0" : "#0f172a";
-   const frontierColor = dark ? "#34d399" : "#059669";
-   const arrowMuted = dark ? "rgba(148,163,184,.5)" : "rgba(100,116,139,.5)";
-   const arrowFrontier = dark ? "rgba(52,211,153,.95)" : "rgba(5,150,105,.9)";
-   const bg = dark ? "rgba(18,18,26,.94)" : "rgba(255,255,255,.96)";
-   const border = dark ? "#334155" : "#cbd5e1";
-   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-   // Score-sorted vertical slots → guaranteed non-overlapping label bands
-   const items = ENTRIES.map(row => ({
-    row,
-    pt: dataToPaper(row.cost, row.score, gd),
-    onFront: frontierIds.has(`${row.agent}|${row.model}|${row.effort}|${row.cost}`)
-})).sort((a, b) => b.row.score - a.row.score || a.row.cost - b.row.cost);
-   const n = items.length;
-   const yTop = 0.955;
-   const yBot = 0.045;
-   return items.map((item, i) => {
-    const slotY = n === 1 ? 0.5 : yTop - (i / (n - 1)) * (yTop - yBot);
-    // Keep label near the point horizontally; nudge into open side of the plot
-    const preferRight = item.pt.x < 0.62;
-    const xPad = 0.09 + (i % 3) * 0.025;
-    let labelX = preferRight ? item.pt.x + xPad : item.pt.x - xPad;
-    labelX = clamp(labelX, 0.04, 0.96);
-    // Far-right outlier: keep label left of the marker
-    if (item.row.cost > 1500) labelX = clamp(item.pt.x - 0.1, 0.04, 0.96);
-    const axPx = labelX >= item.pt.x ? 1 : -1;
-    return {
-     x: item.pt.x,
-     y: item.pt.y,
-     ax: labelX,
-     ay: slotY,
-     xref: "paper",
-     yref: "paper",
-     axref: "paper",
-     ayref: "paper",
-     text: formatChartLabel(item.row),
-     showarrow: true,
-     arrowhead: 2,
-     arrowsize: 0.7,
-     arrowwidth: 1,
-     arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
-     align: "left",
-     xanchor: axPx >= 0 ? "left" : "right",
-     yanchor: "middle",
-     font: {
-      size: 8.5,
-      color: item.onFront ? frontierColor : textColor,
-      family: "IBM Plex Sans, sans-serif"
-     },
-     bgcolor: bg,
-     bordercolor: border,
-     borderwidth: 1,
-     borderpad: 2,
-     captureevents: false
-};
-});
+ function estimateLabelSize(row, gd) {
+ const w = gd._fullLayout.width || 1100;
+ const h = gd._fullLayout.height || 520;
+ const fontSize = 7.5;
+ const lines = formatChartLabel(row).split("<br>");
+ const maxChars = Math.max(...lines.map(s => s.length));
+ return {
+  w: (maxChars * fontSize * 0.62 + 6) / w,
+  h: (fontSize * 1.4 * lines.length + 2) / h
+ };
 }
-  function plotlyLayout(title) {
-   const dark = isDark();
-   const xMin = Math.log10(90);
-   const xMax = Math.log10(2800);
-   return {
-    title: { text: title, font: { size: 14, color: dark ? "#cbd5e1" : "#1e293b", family: "IBM Plex Sans, sans-serif" } },
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(0,0,0,0)",
-    font: { family: "IBM Plex Sans, sans-serif", color: dark ? "#94a3b8" : "#475569", size: 12 },
-    margin: { l: 64, r: 48, t: 44, b: 80 },
-    hovermode: "closest",
-    legend: { orientation: "h", y: -0.18, font: { size: 12 } },
-    annotations: [],
-    xaxis: {
-     title: "Cost (USD)",
-     type: "log",
-     range: [xMin, xMax],
-     autorange: false,
-     tickvals: [100, 200, 300, 500, 1000, 2000],
-     ticktext: ["$100", "$200", "$300", "$500", "$1k", "$2k"],
-     gridcolor: dark ? "#1e293b" : "#e2e8f0",
-     zeroline: false
-    },
-    yaxis: {
-     title: "Accuracy (%)",
-     gridcolor: dark ? "#1e293b" : "#e2e8f0",
-     zeroline: false,
-     range: [54, 90],
-     autorange: false
-}};
+ function buildLabelAnnotations(frontierIds, gd) {
+ const dark = isDark();
+ const textColor = dark ? "#e2e8f0" : "#0f172a";
+ const frontierColor = dark ? "#34d399" : "#047857";
+ const arrowMuted = dark ? "rgba(148,163,184,.45)" : "rgba(100,116,139,.4)";
+ const arrowFrontier = dark ? "rgba(52,211,153,.85)" : "rgba(5,150,105,.75)";
+ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+ const layout = gd._fullLayout;
+ const w = layout.width || 1100;
+ const h = layout.height || 520;
+ const m = layout.margin;
+ const x0 = m.l / w;
+ const x1 = (w - m.r) / w;
+ const markerClear = 14; // px
+ const items = ENTRIES.map(row => ({
+  row,
+  pt: dataToPaper(row.cost, row.score, gd),
+  // Conservative width: Plotly grows text rightward from the ax/ay anchor.
+  size: (() => {
+   const base = estimateLabelSize(row, gd);
+   return { w: base.w * 1.15, h: base.h * 1.05 };
+  })(),
+  onFront: frontierIds.has(`${row.agent}|${row.model}|${row.effort}|${row.cost}`)
+ })).sort((a, b) => b.row.score - a.row.score || a.row.cost - b.row.cost);
+ const markersPx = items.map(it => ({
+  x: it.pt.x * w,
+  y: (1 - it.pt.y) * h
+ }));
+ const leftmostPx = Math.min(...markersPx.map(p => p.x));
+ const rightmostPx = Math.max(...markersPx.map(p => p.x));
+ const midX = (x0 + x1) / 2;
+ const leftGroup = items.filter(it => it.pt.x <= midX)
+  .sort((a, b) => b.row.score - a.row.score);
+ const rightGroup = items.filter(it => it.pt.x > midX)
+  .sort((a, b) => b.row.score - a.row.score);
+
+ function hitsMarkerPx(left, right, top, bottom) {
+  return markersPx.some(m => {
+   const cx = Math.max(left, Math.min(m.x, right));
+   const cy = Math.max(top, Math.min(m.y, bottom));
+   const dx = m.x - cx, dy = m.y - cy;
+   return dx * dx + dy * dy < (markerClear) * (markerClear);
+  });
+ }
+
+ function placeGroup(group, side) {
+  const n = group.length;
+  if (!n) return [];
+  const yTopPx = m.t + 16;
+  const yBotPx = h - m.b - 16;
+  const maxH = Math.max(...group.map(g => g.size.h * h));
+  const minGap = maxH + 8;
+  const span = yBotPx - yTopPx;
+  const need = (n - 1) * minGap;
+  const usableTop = yTopPx;
+  const usableBot = need > span ? yBotPx : yTopPx + Math.max(need, span * 0.88);
+  const maxLabelW = Math.max(...group.map(g => g.size.w * w));
+  // Anchor = LEFT edge of text (Plotly pixel tails behave like left anchors).
+  let colLeft;
+  if (side === "left") {
+   const gutterRight = leftmostPx - markerClear;
+   colLeft = clamp(gutterRight - maxLabelW, m.l + 4, gutterRight - 12);
+  } else {
+   colLeft = clamp(rightmostPx + markerClear, rightmostPx + markerClear, w - m.r - maxLabelW - 4);
+  }
+  const placed = [];
+  group.forEach((item, i) => {
+   const lw = item.size.w * w;
+   const lh = item.size.h * h;
+   let textTop = n === 1
+    ? (yTopPx + yBotPx) / 2 - lh / 2
+    : usableTop + (i / Math.max(n - 1, 1)) * (usableBot - usableTop) - lh / 2;
+   if (placed.length) {
+    const prev = placed[placed.length - 1];
+    const minTop = prev.textTop + prev.lh + 6;
+    if (textTop < minTop) textTop = minTop;
+   }
+   textTop = clamp(textTop, yTopPx, yBotPx - lh);
+   let left = colLeft;
+   let right = left + lw;
+   let top = textTop;
+   let bottom = top + lh;
+   for (let step = 0; step < 14; step++) {
+    if (!hitsMarkerPx(left, right, top, bottom)) break;
+    if (side === "left") {
+     left = Math.max(m.l + 2, left - 10);
+     right = left + lw;
+    } else {
+     left = Math.min(w - m.r - lw - 2, left + 10);
+     right = left + lw;
+    }
+   }
+   for (let step = 0; step < 18; step++) {
+    if (!hitsMarkerPx(left, right, top, bottom)) break;
+    const dir = step % 2 === 0 ? 1 : -1;
+    top = clamp(top + dir * (8 + step * 2), yTopPx, yBotPx - lh);
+    bottom = top + lh;
+   }
+   const ptX = item.pt.x * w;
+   const ptY = (1 - item.pt.y) * h;
+   const textCy = (top + bottom) / 2;
+   // Left-edge anchor: ax/ay vector from point → text left-center.
+   const axPx = left - ptX;
+   const ayPx = textCy - ptY;
+   placed.push({ item, axPx, ayPx, lh, textTop });
+  });
+  return placed;
+ }
+
+ const placed = [
+  ...placeGroup(leftGroup, "left"),
+  ...placeGroup(rightGroup, "right")
+ ];
+ return placed.map(({ item, axPx, ayPx }) => ({
+  x: item.pt.x,
+  y: item.pt.y,
+  ax: axPx,
+  ay: ayPx,
+  xref: "paper",
+  yref: "paper",
+  axref: "pixel",
+  ayref: "pixel",
+  text: formatChartLabel(item.row),
+  showarrow: true,
+  arrowhead: 2,
+  arrowsize: 0.6,
+  arrowwidth: 1,
+  arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
+  align: "left",
+  xanchor: "left",
+  yanchor: "middle",
+  font: {
+   size: 7.5,
+   color: item.onFront ? frontierColor : textColor,
+   family: "IBM Plex Sans, sans-serif"
+  },
+  bgcolor: "rgba(0,0,0,0)",
+  bordercolor: "rgba(0,0,0,0)",
+  borderwidth: 0,
+  borderpad: 0,
+  captureevents: false
+ }));
 }
-  function renderChart(frontierIds) {
+ function plotlyLayout(title) {
+ const dark = isDark();
+ const xMin = Math.log10(55);
+ const xMax = Math.log10(3500);
+ return {
+  title: { text: title, font: { size: 14, color: dark ? "#cbd5e1" : "#1e293b", family: "IBM Plex Sans, sans-serif" } },
+  paper_bgcolor: "rgba(0,0,0,0)",
+  plot_bgcolor: "rgba(0,0,0,0)",
+  font: { family: "IBM Plex Sans, sans-serif", color: dark ? "#94a3b8" : "#475569", size: 12 },
+  margin: { l: 72, r: 56, t: 48, b: 88 },
+  hovermode: "closest",
+  legend: { orientation: "h", y: -0.18, font: { size: 12 } },
+  annotations: [],
+  xaxis: {
+  title: "Cost (USD)",
+  type: "log",
+  range: [xMin, xMax],
+  autorange: false,
+  tickvals: [100, 200, 300, 500, 1000, 2000],
+  ticktext: ["$100", "$200", "$300", "$500", "$1k", "$2k"],
+  gridcolor: dark ? "#1e293b" : "#e2e8f0",
+  zeroline: false
+  },
+  yaxis: {
+  title: "Accuracy (%)",
+  gridcolor: dark ? "#1e293b" : "#e2e8f0",
+  zeroline: false,
+  range: [54, 90],
+  autorange: false
+ }};
+}
+ function renderChart(frontierIds) {
    const frontier = ENTRIES.filter(r => frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`))
     .sort((a, b) => a.cost - b.cost || b.score - a.score);
    const dominated = ENTRIES.filter(r => !frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`));
