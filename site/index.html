@@ -1285,11 +1285,11 @@
     <!-- Bottom stat strip -->
     <div class="hero-statbar">
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">13</span>
+        <span class="hero-statbar-num">18</span>
         <span class="hero-statbar-label">Models Ranked</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">15</span>
+        <span class="hero-statbar-num">12</span>
         <span class="hero-statbar-label">Scored Dimensions</span>
       </div>
       <div class="hero-statbar-item">
@@ -1297,11 +1297,11 @@
         <span class="hero-statbar-label">Cost Weight</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">$7–$100</span>
+        <span class="hero-statbar-num">9–100</span>
         <span class="hero-statbar-label">Composite Cost Range</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">Jun 12</span>
+        <span class="hero-statbar-num">Jul 28</span>
         <span class="hero-statbar-label">Last Updated</span>
       </div>
     </div>
@@ -1398,12 +1398,12 @@
     <div class="card">
       <!-- Pareto -->
       <div class="chart-panel active" id="panel-pareto">
-        <div class="chart-desc"><strong>Pareto Frontier:</strong> Which models are undominated on quality vs. composite cost? A model is Pareto-optimal if no other model beats it on <em>both</em> quality and composite cost simultaneously. The green step function shows the best achievable quality at each cost level.</div>
+        <div class="chart-desc"><strong>Pareto Frontier:</strong> Which models are undominated on quality vs. composite cost? Cost on X (log), quality on Y. Near-dot model labels use leader lines (no boxes, no arrowheads). The dotted gray spline is the Pareto frontier — not a green angular step.</div>
         <div id="chart-pareto" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Decomposition -->
       <div class="chart-panel" id="panel-decomp">
-        <div class="chart-desc"><strong>Score Decomposition:</strong> How does each model earn its ValueRank score? v1.2 keeps <strong>Cost</strong> at 25%, <strong>Reliability</strong> at 18% (IFBench 12% + hallucination 6%), then spreads the remaining weight across fully covered agentic, reasoning, and platform dimensions.</div>
+        <div class="chart-desc"><strong>Score Decomposition:</strong> How does each model earn its ValueRank score? v1.3 keeps <strong>Cost</strong> at ~32% of the base weight set (slider default 25% blend), with reliability, agentic, intelligence, and platform macros across the zero-gap 12-dimension set.</div>
         <div id="chart-decomp" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Displacement -->
@@ -1413,7 +1413,7 @@
       </div>
       <!-- Heatmap -->
       <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 8 models × 15 dimensions. Color = normalized score (0–100). v1.2 has <strong>no missing benchmark cells</strong>. Rows are sorted by overall score.</div>
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 18 models × 12 dimensions. Color = normalized score (0–100). v1.3 has <strong>no missing benchmark cells</strong>. Rows are sorted by overall score.</div>
         <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
       </div>
       <!-- Bubble -->
@@ -1423,7 +1423,7 @@
       </div>
       <!-- Bump -->
       <div class="chart-panel" id="panel-bump">
-        <div class="chart-desc"><strong>Version History:</strong> How the DeepSWE cohort models moved across ValueRank versions as benchmark policy changed. v0.7 limits the pool to DeepSWE-listed models only, v0.9 adds hallucination rate as a primary reliability factor, v1.0 removes every benchmark that could not achieve full cohort coverage, v1.1 removes <strong>Claude Opus 4.6</strong>, and v1.2 <strong>shrinks the cohort from 13 to 8 DeepSWE-listed models</strong>. Historical lines should be read as rank history, not score continuity.</div>
+        <div class="chart-desc"><strong>Version History:</strong> How DeepSWE cohort models moved across ValueRank versions. v1.2 narrowed to 8 models; <strong>v1.3 expands to the full DeepSWE Best roster (n=18)</strong> on a zero-gap 12-dimension set. Historical lines are rank history, not score continuity.</div>
         <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Two-frontier / Cost Impact -->
@@ -1440,16 +1440,16 @@
   <div class="container">
     <div class="section-header">
       <div class="section-title">Methodology</div>
-      <div class="section-sub">How scores are calculated, why cost gets 25%, and how v1.2 enforces zero benchmark gaps.</div>
+      <div class="section-sub">How scores are calculated, why cost gets 25%, and how v1.3 enforces zero benchmark gaps across 12 dimensions.</div>
     </div>
     <div class="method-grid">
       <div>
         <div class="card mb-4">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
           <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
-          <p class="method-text">For each of 15 dimensions, all 8 models are ranked 1–8 (best to worst). The formula maps rank 1 → 100 pts and rank 8 → 0 pts, with tied ranks receiving the average of their tied positions. v1.2 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>.</p>
+          <p class="method-text">For each of 12 dimensions, all 18 models are ranked 1–18 (best to worst). The formula maps rank 1 → 100 pts and rank 18 → 0 pts, with tied ranks receiving the average of their tied positions. v1.3 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>.</p>
           <hr class="divider" style="margin:16px 0;">
-          <p class="method-text">The final ValueRank score is a weighted sum across all 15 dimensions. <strong>Cost weight: 25%.</strong> AA-Omniscience Hallucination Rate remains a 6% primary reliability factor, and cost is still constructed from normalized AA eval cost plus normalized DeepSWE average cost before rank-normalization.</p>
+          <p class="method-text">The final ValueRank score is a weighted sum across all 12 dimensions. <strong>Cost weight: 25%</strong> (slider-adjustable). Hallucination rate remains a primary reliability factor, and cost is constructed from normalized AA eval cost plus normalized DeepSWE average cost before rank-normalization.</p>
         </div>
         <div class="card">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
@@ -1462,7 +1462,7 @@
         </div>
       </div>
       <div class="card">
-        <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (15 Total)</h3>
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (12 Total)</h3>
         <table class="dim-table">
           <thead><tr><th>Dimension</th><th>Weight</th><th>Category</th></tr></thead>
           <tbody id="dim-table-body"></tbody>
@@ -1481,7 +1481,7 @@
     </div>
 
     <div class="card mb-6">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (13 × 15)</h3>
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (18 × 12)</h3>
       <div class="heatmap-legend">
         <span>0 (worst)</span>
         <div class="hl-bar"></div>
@@ -1521,7 +1521,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Each model's score is a weighted average of 15 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 8</strong> for every retained v1.2 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. There are <strong>no neutral missing-data cells</strong> in v1.2. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.
+          Each model's score is a weighted average of 12 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 18</strong> for every retained v1.3 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. There are <strong>no neutral missing-data cells</strong> in v1.3. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.
         </div>
       </div>
 
@@ -1541,7 +1541,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          In historical ValueRank versions, ⊘ meant a genuine benchmark data gap. In <strong>v1.2</strong>, there are <strong>no ⊘ cells</strong> because any benchmark without full cohort coverage is excluded entirely. The Coverage section should therefore show <strong>✓ Full</strong> for every ranked model.
+          In historical ValueRank versions, ⊘ meant a genuine benchmark data gap. In <strong>v1.3</strong>, there are <strong>no ⊘ cells</strong> because any benchmark without full cohort coverage is excluded entirely. The Coverage section should therefore show <strong>✓ Full</strong> for every ranked model.
         </div>
       </div>
 
@@ -1551,7 +1551,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The <strong>overall Score</strong> includes all <strong>15 dimensions</strong> with cost at 25% and speed at 5%. The <strong>Quality Score</strong> is recalculated using only the <strong>14 non-cost dimensions</strong> (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.
+          The <strong>overall Score</strong> includes all <strong>12 dimensions</strong> with cost at 25% (slider default) and speed among the platform dims. The <strong>Quality Score</strong> is recalculated using only the <strong>11 non-cost dimensions</strong> (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.
         </div>
       </div>
 
@@ -1746,6 +1746,238 @@ MODELS.forEach(model => {
   model.costTier = compositeCostTier(model.evalCost);
 });
 
+const SPEED_DIM_IDX = DIM_KEYS.indexOf('Spd'); // 11 in v1.3 (was 14 in v1.2)
+
+function fmtUsd(v, opts) {
+  if (v == null || Number.isNaN(Number(v))) return '—';
+  return '$' + Number(v).toLocaleString(undefined, opts || {});
+}
+
+function fmtAaDeepSweHover(m) {
+  return `AA Eval Cost: ${fmtUsd(m.aaEvalCost)}<br>DeepSWE Avg Cost: ${fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function paretoFrontModels(rows) {
+  const sorted = [...rows].sort((a, b) => a.evalCost - b.evalCost || b.qualityScore - a.qualityScore);
+  const frontier = [];
+  let bestScore = -Infinity;
+  sorted.forEach(row => {
+    if (row.qualityScore > bestScore) {
+      frontier.push(row);
+      bestScore = row.qualityScore;
+    }
+  });
+  return frontier;
+}
+
+function isPlotDark() {
+  return document.documentElement.getAttribute('data-theme') === 'dark';
+}
+
+function dataToPaperCostQuality(cost, score, gd) {
+  const xa = gd._fullLayout.xaxis;
+  const ya = gd._fullLayout.yaxis;
+  const xPx = xa._offset + xa.l2p(Math.log10(cost));
+  const yPx = ya._offset + ya.l2p(score);
+  return {
+    x: (xPx - xa._offset) / xa._length,
+    y: 1 - (yPx - ya._offset) / ya._length,
+    xPx,
+    yPx
+  };
+}
+
+function estimateModelLabelSize(label, gd) {
+  const w = gd._fullLayout.width || 1100;
+  const h = gd._fullLayout.height || 520;
+  const fontSize = 9;
+  const lines = String(label).split('<br>');
+  const maxChars = Math.max(...lines.map(s => s.length));
+  const wPx = maxChars * fontSize * 0.62 + 10;
+  const hPx = fontSize * 1.45 * lines.length + 6;
+  return { wPx, hPx, w: wPx / w, h: hPx / h };
+}
+
+function buildParetoLabelAnnotations(frontierSet, gd) {
+  const dark = isPlotDark();
+  const textColor = dark ? '#e2e8f0' : '#0f172a';
+  const frontierColor = dark ? '#34d399' : '#047857';
+  const arrowMuted = dark ? 'rgba(148,163,184,.75)' : 'rgba(71,85,105,.7)';
+  const arrowFrontier = dark ? 'rgba(52,211,153,.95)' : 'rgba(4,120,87,.85)';
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const layout = gd._fullLayout;
+  const w = layout.width || 1100;
+  const h = layout.height || 520;
+  const MARKER_R = 11;
+  const LABEL_PAD = 5;
+  const DIRS = [
+    { ux: 0, uy: -1, xa: 'center', ya: 'bottom' },
+    { ux: 0.707, uy: -0.707, xa: 'left', ya: 'bottom' },
+    { ux: 1, uy: 0, xa: 'left', ya: 'middle' },
+    { ux: 0.707, uy: 0.707, xa: 'left', ya: 'top' },
+    { ux: 0, uy: 1, xa: 'center', ya: 'top' },
+    { ux: -0.707, uy: 0.707, xa: 'right', ya: 'top' },
+    { ux: -1, uy: 0, xa: 'right', ya: 'middle' },
+    { ux: -0.707, uy: -0.707, xa: 'right', ya: 'bottom' },
+    { ux: 0.383, uy: -0.924, xa: 'left', ya: 'bottom' },
+    { ux: 0.924, uy: -0.383, xa: 'left', ya: 'bottom' },
+    { ux: 0.924, uy: 0.383, xa: 'left', ya: 'top' },
+    { ux: 0.383, uy: 0.924, xa: 'left', ya: 'top' },
+    { ux: -0.383, uy: 0.924, xa: 'right', ya: 'top' },
+    { ux: -0.924, uy: 0.383, xa: 'right', ya: 'top' },
+    { ux: -0.924, uy: -0.383, xa: 'right', ya: 'bottom' },
+    { ux: -0.383, uy: -0.924, xa: 'right', ya: 'bottom' }
+  ];
+  const RADII = [24, 30, 36, 44, 52, 64, 78, 94, 112];
+  const items = MODELS.map((m, idx) => {
+    const pt = dataToPaperCostQuality(m.evalCost, m.qualityScore, gd);
+    const size = estimateModelLabelSize(m.shortName, gd);
+    return {
+      idx, m, pt, size,
+      px: { x: pt.xPx, y: pt.yPx },
+      onFront: frontierSet.has(m.name)
+    };
+  });
+  items.forEach(it => {
+    let nearest = Infinity;
+    items.forEach(other => {
+      if (other.idx === it.idx) return;
+      nearest = Math.min(nearest, Math.hypot(it.px.x - other.px.x, it.px.y - other.px.y));
+    });
+    it.isolation = nearest;
+  });
+  items.sort((a, b) => {
+    if (a.onFront !== b.onFront) return a.onFront ? -1 : 1;
+    return b.isolation - a.isolation || b.m.qualityScore - a.m.qualityScore || a.m.evalCost - b.m.evalCost;
+  });
+  function labelBox(ptX, ptY, ax, ay, lw, lh, xanchor, yanchor) {
+    const axX = ptX + ax;
+    const ayY = ptY + ay;
+    let left, right, top, bottom;
+    if (xanchor === 'left') { left = axX; right = axX + lw; }
+    else if (xanchor === 'right') { right = axX; left = axX - lw; }
+    else { left = axX - lw / 2; right = axX + lw / 2; }
+    if (yanchor === 'top') { top = ayY; bottom = ayY + lh; }
+    else if (yanchor === 'bottom') { bottom = ayY; top = ayY - lh; }
+    else { top = ayY - lh / 2; bottom = ayY + lh / 2; }
+    return { left, right, top, bottom };
+  }
+  function overlapsLabels(box, placed, skipIdx) {
+    return placed.some((p, i) => {
+      if (skipIdx != null && i === skipIdx) return false;
+      return !(
+        box.right + LABEL_PAD < p.box.left ||
+        box.left - LABEL_PAD > p.box.right ||
+        box.bottom + LABEL_PAD < p.box.top ||
+        box.top - LABEL_PAD > p.box.bottom
+      );
+    });
+  }
+  function hitsOtherMarkers(box, ownIdx) {
+    return items.some(m => {
+      if (m.idx === ownIdx) return false;
+      const cx = clamp(m.px.x, box.left, box.right);
+      const cy = clamp(m.px.y, box.top, box.bottom);
+      const dx = m.px.x - cx;
+      const dy = m.px.y - cy;
+      return dx * dx + dy * dy < MARKER_R * MARKER_R;
+    });
+  }
+  function inBounds(box) {
+    return box.left >= 2 && box.right <= w - 2 && box.top >= 2 && box.bottom <= h - 2;
+  }
+  function spillCost(box) {
+    let c = 0;
+    if (box.left < 2) c += 2 - box.left;
+    if (box.right > w - 2) c += box.right - (w - 2);
+    if (box.top < 2) c += 2 - box.top;
+    if (box.bottom > h - 2) c += box.bottom - (h - 2);
+    return c;
+  }
+  function findPlacement(item, placed, skipIdx) {
+    const lw = item.size.wPx;
+    const lh = item.size.hPx;
+    const ptX = item.px.x;
+    const ptY = item.px.y;
+    let best = null;
+    for (const r of RADII) {
+      for (const d of DIRS) {
+        const ax = d.ux * r;
+        const ay = d.uy * r;
+        const box = labelBox(ptX, ptY, ax, ay, lw, lh, d.xa, d.ya);
+        if (!inBounds(box)) continue;
+        if (overlapsLabels(box, placed, skipIdx)) continue;
+        if (hitsOtherMarkers(box, item.idx)) continue;
+        const score = r + Math.abs(d.ux) * 0.35 + Math.abs(d.uy) * 0.35;
+        if (!best || score < best.score) best = { ax, ay, xa: d.xa, ya: d.ya, box, score };
+      }
+      if (best && best.score <= r + 4) break;
+    }
+    if (!best) {
+      for (const r of RADII) {
+        for (const d of DIRS) {
+          const ax = d.ux * r;
+          const ay = d.uy * r;
+          const box = labelBox(ptX, ptY, ax, ay, lw, lh, d.xa, d.ya);
+          if (overlapsLabels(box, placed, skipIdx)) continue;
+          if (hitsOtherMarkers(box, item.idx)) continue;
+          const score = r * 2 + spillCost(box) * 5;
+          if (!best || score < best.score) best = { ax, ay, xa: d.xa, ya: d.ya, box, score };
+        }
+      }
+    }
+    if (!best) {
+      const d = DIRS[0];
+      const r = 40;
+      const ax = d.ux * r;
+      const ay = d.uy * r;
+      best = { ax, ay, xa: d.xa, ya: d.ya, box: labelBox(ptX, ptY, ax, ay, lw, lh, d.xa, d.ya), score: 999 };
+    }
+    return best;
+  }
+  const placed = [];
+  items.forEach(item => {
+    placed.push({ item, ...findPlacement(item, placed, null) });
+  });
+  for (let pass = 0; pass < 3; pass++) {
+    for (let i = 0; i < placed.length; i++) {
+      const cur = placed[i];
+      const conflict = overlapsLabels(cur.box, placed, i) || hitsOtherMarkers(cur.box, cur.item.idx);
+      if (!conflict) continue;
+      const next = findPlacement(cur.item, placed, i);
+      placed[i] = { item: cur.item, ...next };
+    }
+  }
+  return placed.map(({ item, ax, ay, xa, ya }) => ({
+    x: item.pt.x,
+    y: item.pt.y,
+    ax, ay,
+    xref: 'paper', yref: 'paper',
+    axref: 'pixel', ayref: 'pixel',
+    text: item.m.shortName,
+    showarrow: true,
+    arrowhead: 0,
+    arrowsize: 0.95,
+    arrowwidth: 1.3,
+    arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
+    standoff: 0,
+    startstandoff: 0,
+    align: xa === 'right' ? 'right' : xa === 'center' ? 'center' : 'left',
+    xanchor: xa,
+    yanchor: ya,
+    font: {
+      size: 9,
+      color: item.onFront ? frontierColor : textColor,
+      family: 'IBM Plex Sans, sans-serif'
+    },
+    bgcolor: 'rgba(0,0,0,0)',
+    bordercolor: 'rgba(0,0,0,0)',
+    borderwidth: 0,
+    borderpad: 0,
+    captureevents: false
+  }));
+}
+
 // ─────────────────────────────────────────────
 // HERO PODIUM (auto-populates from MODELS rank 1-3)
 // ─────────────────────────────────────────────
@@ -1765,7 +1997,7 @@ function renderHeroPodium() {
         <div class="podium-hero-name">${m1.name}</div>
         <div class="podium-hero-score">${m1.overallScore.toFixed(1)}</div>
       </div>
-      <div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${m1.evalCost.toFixed(1)} composite · AA $${m1.aaEvalCost.toLocaleString(undefined,{maximumFractionDigits:0})} · DeepSWE $${m1.deepSweCost.toFixed(2)}</div>
+      <div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${m1.evalCost.toFixed(1)} composite · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>
       <div class="podium-hero-bars">
         <div class="podium-bar-row">
           <span class="podium-bar-label">Quality</span>
@@ -1948,84 +2180,100 @@ function initCostSlider() {
 // CHART 1: PARETO SCATTER
 // ─────────────────────────────────────────────
 function renderPareto() {
-  const frontier = [...MODELS]
-    .sort((a,b) => a.evalCost - b.evalCost)
-    .filter((m, i, arr) => !arr.some(other =>
-      other !== m &&
-      other.evalCost <= m.evalCost &&
-      other.qualityScore >= m.qualityScore &&
-      (other.evalCost < m.evalCost || other.qualityScore > m.qualityScore)
-    ));
-  const stepX = [Math.max(0, Math.min(...MODELS.map(m => m.evalCost)) - 3)];
-  const stepY = [frontier[0]?.qualityScore || 0];
-  frontier.forEach((m, idx) => {
-    if (idx > 0) {
-      stepX.push(m.evalCost);
-      stepY.push(frontier[idx - 1].qualityScore);
-    }
-    stepX.push(m.evalCost);
-    stepY.push(m.qualityScore);
-  });
-  stepX.push(Math.min(100, Math.max(...MODELS.map(m => m.evalCost)) + 5));
-  stepY.push(frontier[frontier.length - 1]?.qualityScore || 0);
+  const frontier = paretoFrontModels(MODELS);
+  const frontierSet = new Set(frontier.map(m => m.name));
+  const dominated = MODELS.filter(m => !frontierSet.has(m.name));
+  const costs = MODELS.map(m => m.evalCost);
+  const qScores = MODELS.map(m => m.qualityScore);
+  const xMin = Math.log10(Math.max(5, Math.min(...costs) * 0.85));
+  const xMax = Math.log10(Math.max(...costs) * 1.15);
+  const yMin = Math.max(0, Math.min(...qScores) - 8);
+  const yMax = Math.min(100, Math.max(...qScores) + 8);
 
-  const traces = [];
+  const hoverCd = (m) => [
+    m.name,
+    m.overallScore,
+    m.missingCount,
+    fmtUsd(m.aaEvalCost),
+    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  ];
+  const hoverTpl =
+    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<br>⊘ Missing: %{customdata[2]}<extra></extra>';
+  const hoverTplFront =
+    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<extra>Frontier</extra>';
 
-  // Frontier step line
-  traces.push({
-    x: stepX, y: stepY,
-    mode:'lines', name:'Pareto Frontier',
-    line:{color:'#22c55e', width:2.5, shape:'linear'},
-    hoverinfo:'skip'
-  });
-
-  // Frontier shading
-  traces.push({
-    x: [...stepX, ...stepX.slice().reverse()],
-    y: [...stepY, stepY.map(()=>0).reverse()],
-    fill:'toself', fillcolor:'rgba(34,197,94,0.06)',
-    mode:'none', name:'Frontier Region', showlegend:false, hoverinfo:'skip'
-  });
-
-  // All models scatter
-  MODELS.forEach(m => {
-    const onFrontier = frontier.includes(m);
-    traces.push({
-      x:[m.evalCost], y:[m.qualityScore],
-      mode:'markers+text',
-      name: m.shortName,
-      text:[m.shortName],
-      textposition: m.evalCost > 55 ? 'top center' : 'top right',
-      textfont:{ size:11, color: onFrontier ? plotlyTitle().color : getPlotlyLayout().font.color },
-      marker:{
-        size: onFrontier ? 14 : 10,
-        color: DEV_COLORS[m.developer] || '#64748b',
-        line:{ color: onFrontier ? '#22c55e' : 'transparent', width: onFrontier ? 2.5 : 0 },
-        symbol: onFrontier ? 'circle' : 'circle',
-        opacity: onFrontier ? 1.0 : 0.75
+  const traces = [
+    {
+      x: dominated.map(m => m.evalCost),
+      y: dominated.map(m => m.qualityScore),
+      mode: 'markers',
+      type: 'scatter',
+      name: 'Dominated',
+      marker: {
+        size: 11,
+        color: dominated.map(m => DEV_COLORS[m.developer] || '#6366f1'),
+        opacity: 0.55
       },
-      error_y:{ type:'constant', value:2.5, visible:true, color:'rgba(148,163,184,0.25)', thickness:1.5, width:4 },
-      hovertemplate:`<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>AA Eval Cost: $${m.aaEvalCost.toLocaleString()}<br>DeepSWE Avg Cost: $${m.deepSweCost.toFixed(2)}<br>Overall: ${m.overallScore}<br>⊘ Missing: ${m.missingCount}<extra></extra>`,
-      showlegend:false
-    });
-  });
+      customdata: dominated.map(hoverCd),
+      hovertemplate: hoverTpl,
+      showlegend: true
+    },
+    {
+      x: frontier.map(m => m.evalCost),
+      y: frontier.map(m => m.qualityScore),
+      mode: 'markers',
+      type: 'scatter',
+      name: 'Pareto frontier',
+      marker: {
+        size: 14,
+        color: '#10b981',
+        line: { width: 2, color: isPlotDark() ? '#064e3b' : '#ecfdf5' }
+      },
+      customdata: frontier.map(hoverCd),
+      hovertemplate: hoverTplFront,
+      showlegend: true
+    },
+    {
+      x: frontier.map(m => m.evalCost),
+      y: frontier.map(m => m.qualityScore),
+      mode: 'lines',
+      type: 'scatter',
+      line: { shape: 'spline', dash: 'dot', color: '#94a3b8', width: 2 },
+      hoverinfo: 'skip',
+      showlegend: false,
+      name: 'frontier-curve'
+    }
+  ];
 
-  // Frontier label annotations
+  const base = getPlotlyLayout();
   const layout = {
-    ...getPlotlyLayout(),
-    title:{text:'Quality Sub-Score vs. Composite Cost — Pareto Frontier', font:plotlyTitle(14)},
-    xaxis:{...getPlotlyLayout().xaxis, title:'Composite Cost (0-100)', range:[0,105]},
-    yaxis:{...getPlotlyLayout().yaxis, title:'Quality Sub-Score (0–100)', range:[20,80]},
-    annotations:[
-      ...frontier.map((m, idx) => ({
-        x: m.evalCost, y: m.qualityScore, xref:'x', yref:'y',
-        text:'<b>Frontier</b>', font:{color:'#22c55e',size:10}, showarrow:false,
-        xshift: idx === frontier.length - 1 ? -42 : 0, yshift: idx === 0 ? -20 : 0
-      }))
-    ],
-    legend:{orientation:'h', y:-0.15}
+    ...base,
+    title: { text: 'Quality vs Composite Cost — Pareto Frontier', font: plotlyTitle(14) },
+    xaxis: {
+      ...base.xaxis,
+      title: 'Composite Cost (0–100, log)',
+      type: 'log',
+      range: [xMin, xMax],
+      autorange: false,
+      tickvals: [10, 15, 20, 30, 50, 75, 100],
+      ticktext: ['10', '15', '20', '30', '50', '75', '100']
+    },
+    yaxis: {
+      ...base.yaxis,
+      title: 'Quality Sub-Score (0–100)',
+      range: [yMin, yMax],
+      autorange: false
+    },
+    annotations: [],
+    legend: { orientation: 'h', y: -0.18 },
+    margin: { ...base.margin, r: 88, b: 96 }
   };
-  Plotly.newPlot('chart-pareto', traces, layout, PLOTLY_CONFIG);
+
+  Plotly.newPlot('chart-pareto', traces, layout, PLOTLY_CONFIG).then(() => {
+    const gd = document.getElementById('chart-pareto');
+    const annotations = buildParetoLabelAnnotations(frontierSet, gd);
+    return Plotly.relayout(gd, { annotations });
+  });
 }
 
 // ─────────────────────────────────────────────
@@ -2108,15 +2356,16 @@ function renderDisplacement() {
 function renderHeatmap(elementId, height) {
   const models = [...MODELS].sort((a,b) => b.overallScore - a.overallScore);
 
-  // Column order: grouped by category
-  const colOrder = [0,1,2,8,3,4,5,6,7,13,14,9,10,11,12];
+  // Column order: grouped by macro category (v1.3 — 12 dims)
+  // Cost | Reliability (Halluc, OmniAcc) | Agentic (DeepSWE, GDP, LCR) | Intelligence | Platform (AAI, Spd)
+  const colOrder = [0, 1, 5, 2, 3, 4, 6, 7, 8, 9, 10, 11];
   const colLabels = colOrder.map(i => DIM_KEYS[i]);
   const colFull   = colOrder.map(i => DIM_FULL[i]);
   const colWeights= colOrder.map(i => DIM_WEIGHTS[i]);
 
   const z    = models.map(m => colOrder.map(i => m.dims[i]));
   const customdata = models.map(m => colOrder.map(i => ({
-    model: m.name, dim: DIM_FULL[i], score: m.dims[i].toFixed(1), weight: DIM_WEIGHTS[i], missing: m.isMissing[i]
+    model: m.name, dim: DIM_FULL[i], score: Number(m.dims[i]).toFixed(1), weight: DIM_WEIGHTS[i], missing: m.isMissing[i]
   })));
 
   const trace = {
@@ -2139,9 +2388,8 @@ function renderHeatmap(elementId, height) {
     }
   };
 
-  // Category dividers via shapes
-  // Columns: [Cost] | [IF Halluc OmniAcc] | [TermHard DeepSWE GDP Tau2 LCR] | [AAI Spd] | [HLE GPQA Sci CritPt]
-  const dividers = [0.5, 3.5, 8.5, 10.5];
+  // Category dividers (between Cost | Rely | Agentic | Intel | Platform)
+  const dividers = [0.5, 2.5, 5.5, 9.5];
   const shapes = dividers.map(x => ({
     type:'line', xref:'x', yref:'paper',
     x0: x, x1: x, y0: 0, y1: 1,
@@ -2149,11 +2397,11 @@ function renderHeatmap(elementId, height) {
   }));
 
   const catLabels = [
-    {x:0,    text:'Cost 25%',        color:'#22c55e', y:-0.05},
-    {x:2,    text:'Reliability 22%', color:'#a78bfa', y:-0.12},
-    {x:6,    text:'Agentic 28%',     color:'#3b82f6', y:-0.08},
-    {x:9.5,  text:'Platform 11%',    color:'#f97316', y:-0.08},
-    {x:12.5, text:'Intelligence 15%',color:'#eab308', y:-0.08},
+    {x:0,   text:'Cost',         color:'#22c55e', y:-0.05},
+    {x:1.5, text:'Reliability',  color:'#a78bfa', y:-0.12},
+    {x:4,   text:'Agentic',      color:'#3b82f6', y:-0.08},
+    {x:7.5, text:'Intelligence', color:'#eab308', y:-0.08},
+    {x:10.5,text:'Platform',     color:'#f97316', y:-0.08},
   ];
 
   const catAnnotations = catLabels.map(c => ({
@@ -2167,7 +2415,7 @@ function renderHeatmap(elementId, height) {
     colLabels.forEach((colLabel, colIdx) => {
       const ci = colOrder[colIdx];
       const val = m.dims[ci];
-      const textVal = m.isMissing[ci] ? '⊘' : val.toFixed(0);
+      const textVal = m.isMissing[ci] ? '⊘' : Number(val).toFixed(0);
       const textColor = val < 28 ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.72)';
       cellAnnotations.push({
         x: colLabel, y: m.shortName,
@@ -2182,7 +2430,7 @@ function renderHeatmap(elementId, height) {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Normalized Score Matrix (13 Models × 15 Dimensions)', font:plotlyTitle(14)},
+    title:{text:`Normalized Score Matrix (${MODELS.length} Models × ${DIM_KEYS.length} Dimensions)`, font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, side:'top', tickangle:-30, tickfont:{size:10}},
     yaxis:{...getPlotlyLayout().yaxis, autorange:'reversed', tickfont:{size:11}},
     margin:{t:100, r:80, b:100, l:90},
@@ -2196,10 +2444,11 @@ function renderHeatmap(elementId, height) {
 // ─────────────────────────────────────────────
 function renderBubble() {
   const maxCost = Math.max(...MODELS.map(m => m.evalCost));
+  const speedIdx = SPEED_DIM_IDX >= 0 ? SPEED_DIM_IDX : (MODELS[0].dims.length - 1);
   // Per-model label offsets to avoid nearby-point collisions
   const bubbleTextPos = {GLM:'bottom center'};
   const traces = MODELS.map(m => ({
-    x:[m.dims[14]], y:[m.qualityScore],
+    x:[m.dims[speedIdx]], y:[m.qualityScore],
     mode:'markers+text',
     name:m.shortName,
     text:[m.shortName],
@@ -2211,7 +2460,7 @@ function renderBubble() {
       opacity:0.8,
       line:{color:'rgba(255,255,255,0.15)',width:1}
     },
-    hovertemplate:`<b>${m.name}</b><br>Speed (norm): ${m.dims[14].toFixed(1)}<br>Quality: ${m.qualityScore.toFixed(1)}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>AA Eval Cost: $${m.aaEvalCost.toLocaleString()}<br>DeepSWE Avg Cost: $${m.deepSweCost.toFixed(2)}<br>Cost Tier: ${m.costTier}<extra></extra>`,
+    hovertemplate:`<b>${m.name}</b><br>Speed (norm): ${m.dims[speedIdx].toFixed(1)}<br>Quality: ${m.qualityScore.toFixed(1)}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<br>Cost Tier: ${m.costTier}<extra></extra>`,
     showlegend:false
   }));
 
@@ -2238,8 +2487,8 @@ function renderBubble() {
 // CHART 6: VERSION BUMP CHART
 // ─────────────────────────────────────────────
 function renderBump() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7','v0.8','v0.9','v1.0','v1.1','v1.2'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70','v80','v90','v100','v110','v120'];
+  const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3'];
+  const vKeys = ['v70','v80','v90','v100','v110','v120','v130'];
   const traces = MODELS.map(m => {
     const x=[], y=[];
     vKeys.forEach((vk,i) => {
@@ -2251,7 +2500,7 @@ function renderBump() {
       x, y,
       mode:'lines+markers+text',
       name:m.shortName,
-      text: x.map((v,i) => v === 'v1.2' ? m.shortName : ''),
+      text: x.map((v) => v === 'v1.3' ? m.shortName : ''),
       textposition:'middle right',
       textfont:{size:10},
       line:{ color: DEV_COLORS[m.developer] || '#64748b', width: isTop3 ? 2.5 : 1.5, dash: isTop3 ? 'solid' : 'solid' },
@@ -2263,18 +2512,17 @@ function renderBump() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v2.0 to v1.2', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v0.7 to v1.3', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
-    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5,9.5],
-      tickvals:[1,2,3,4,5,6,7,8,9,10,11,12,13,14], ticktext:['#1','#2','#3','#4','#5','#6','#7','#8','#9','#10','#11','#12','#13','#14']},
+    yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5, MODELS.length + 0.5],
+      tickvals: Array.from({length: MODELS.length}, (_,i)=>i+1),
+      ticktext: Array.from({length: MODELS.length}, (_,i)=>`#${i+1}`)},
     margin:{...getPlotlyLayout().margin, r:90},
     annotations:[
-      {x:'v0.5', y:3, xref:'x', yref:'y', text:'v0.5: +8 models', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:80, ay:-30},
       {x:'v0.7', y:2, xref:'x', yref:'y', text:'v0.7: DeepSWE cohort', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:80, ay:-20},
-      {x:'v0.8', y:3, xref:'x', yref:'y', text:'v0.8: benchmark coverage<br>expansion', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:100, ay:10},
-      {x:'v0.9', y:4, xref:'x', yref:'y', text:'v0.9: hallucination rate', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:60, ay:-20},
-      {x:'v1.0', y:1, xref:'x', yref:'y', text:'v1.0: zero-gap benchmark set', font:{color:'#f97316',size:9}, showarrow:true, arrowcolor:'#f97316', ax:50, ay:-35},
-      {x:'v1.2', y:2, xref:'x', yref:'y', text:'v1.2: cohort → 8 models\n+ Claude Fable 5', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-50, ay:35}
+      {x:'v1.0', y:1, xref:'x', yref:'y', text:'v1.0: zero-gap set', font:{color:'#f97316',size:9}, showarrow:true, arrowcolor:'#f97316', ax:50, ay:-35},
+      {x:'v1.2', y:2, xref:'x', yref:'y', text:'v1.2: cohort → 8', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-40, ay:35},
+      {x:'v1.3', y:1, xref:'x', yref:'y', text:'v1.3: 18 models · 12 dims', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:-60, ay:40}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -2304,7 +2552,7 @@ function renderFrontier2() {
     name:'Quality Score (no cost)',
     text: MODELS.map(m => ''),
     marker:{ size:10, color: MODELS.map(m => DEV_COLORS[m.developer]||'#64748b'), symbol:'circle', opacity:0.7, line:{color:'rgba(255,255,255,0.3)',width:1} },
-    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>AA Eval Cost: $${m.aaEvalCost.toLocaleString()}<br>DeepSWE Avg Cost: $${m.deepSweCost.toFixed(2)}<extra></extra>`),
+    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),
   });
 
   // Overall diamonds
@@ -2353,7 +2601,11 @@ const chartRenderers = {
 const rendered = { pareto: false };
 
 function initChartTabs() {
-  renderPareto(); rendered.pareto = true;
+  const safeRender = (key, fn) => {
+    try { fn(); rendered[key] = true; }
+    catch (err) { console.error('Chart render failed:', key, err); }
+  };
+  safeRender('pareto', renderPareto);
   document.querySelectorAll('.chart-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
@@ -2361,7 +2613,7 @@ function initChartTabs() {
       tab.classList.add('active');
       const key = tab.dataset.chart;
       document.getElementById('panel-' + key).classList.add('active');
-      if (!rendered[key]) { chartRenderers[key](); rendered[key] = true; }
+      if (!rendered[key]) safeRender(key, chartRenderers[key]);
     });
   });
 }
@@ -2407,8 +2659,8 @@ function renderGaps() {
 // VERSION TABLE
 // ─────────────────────────────────────────────
 function renderVersionTable() {
-  const versions = ['v2.0','v2.5','v3.0','v4.0','v4.2','v4.3','v0.5','v0.6','v0.7','v0.8','v0.9','v1.0','v1.1','v1.2'];
-  const vKeys = ['v20','v25','v30','v40','v42','v43','v50','v60','v70','v80','v90','v100','v110','v120'];
+  const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3'];
+  const vKeys = ['v70','v80','v90','v100','v110','v120','v130'];
   const table = document.getElementById('version-table');
   table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
   <tbody>${MODELS.map(m => {
@@ -2642,14 +2894,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   // LLM-only init (skip on CA page)
   if (document.getElementById('ranking-tbody')) {
-    renderHeroPodium();
-    initTable();
-    initCostSlider();
-    initChartTabs();
-    renderDimTable();
-    renderGaps();
-    renderVersionTable();
-    renderHeatmap('chart-heatmap-data', 480);
+    try { renderHeroPodium(); } catch (e) { console.error(e); }
+    try { initTable(); } catch (e) { console.error(e); }
+    try { initCostSlider(); } catch (e) { console.error(e); }
+    try { initChartTabs(); } catch (e) { console.error(e); }
+    try { renderDimTable(); } catch (e) { console.error(e); }
+    try { renderGaps(); } catch (e) { console.error(e); }
+    try { renderVersionTable(); } catch (e) { console.error(e); }
+    try { renderHeatmap('chart-heatmap-data', 480); } catch (e) { console.error(e); }
   }
   // CA-only init (skip on LLM page)
   if (document.querySelector('.ca-section')) {

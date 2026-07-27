@@ -113,28 +113,134 @@ function render(){
     </tr>`).join('');
   draw();
 }
+function paretoFrontAgents(rows){
+  const sorted=[...rows].sort((a,b)=>a.cost-b.cost||b.overall-a.overall);
+  const frontier=[]; let best=-Infinity;
+  sorted.forEach(r=>{ if(r.overall>best){ frontier.push(r); best=r.overall; } });
+  return frontier;
+}
+function dataToPaperCA(cost, score, gd){
+  const xa=gd._fullLayout.xaxis, ya=gd._fullLayout.yaxis;
+  const xPx=xa._offset+xa.l2p(Math.log10(cost));
+  const yPx=ya._offset+ya.l2p(score);
+  return { x:(xPx-xa._offset)/xa._length, y:1-(yPx-ya._offset)/ya._length, xPx, yPx };
+}
+function buildCaLabelAnnotations(frontierIds, labelIds, gd){
+  const dark=isDark();
+  const textColor=dark?'#e2e8f0':'#0f172a';
+  const frontierColor=dark?'#34d399':'#047857';
+  const arrowMuted=dark?'rgba(148,163,184,.75)':'rgba(71,85,105,.7)';
+  const arrowFrontier=dark?'rgba(52,211,153,.95)':'rgba(4,120,87,.85)';
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  const layout=gd._fullLayout;
+  const w=layout.width||1050, h=layout.height||480;
+  const MARKER_R=10, LABEL_PAD=4;
+  const DIRS=[
+    {ux:0,uy:-1,xa:'center',ya:'bottom'},{ux:0.707,uy:-0.707,xa:'left',ya:'bottom'},
+    {ux:1,uy:0,xa:'left',ya:'middle'},{ux:0.707,uy:0.707,xa:'left',ya:'top'},
+    {ux:0,uy:1,xa:'center',ya:'top'},{ux:-0.707,uy:0.707,xa:'right',ya:'top'},
+    {ux:-1,uy:0,xa:'right',ya:'middle'},{ux:-0.707,uy:-0.707,xa:'right',ya:'bottom'}
+  ];
+  const RADII=[22,28,36,46,58,72,90];
+  const labeled=AGENTS.filter(a=>labelIds.has(a.label));
+  const items=labeled.map((row,idx)=>{
+    const pt=dataToPaperCA(row.cost,row.overall,gd);
+    const lines=row.label.replace(' + ','<br>+ ').split('<br>');
+    const maxChars=Math.max(...lines.map(s=>s.length));
+    const wPx=maxChars*8*0.62+8, hPx=8*1.4*lines.length+4;
+    return {idx,row,pt,size:{wPx,hPx},px:{x:pt.xPx,y:pt.yPx},onFront:frontierIds.has(row.label)};
+  });
+  items.sort((a,b)=>(a.onFront===b.onFront?0:(a.onFront?-1:1))||b.row.overall-a.row.overall);
+  function labelBox(ptX,ptY,ax,ay,lw,lh,xanchor,yanchor){
+    const axX=ptX+ax, ayY=ptY+ay; let left,right,top,bottom;
+    if(xanchor==='left'){left=axX;right=axX+lw;} else if(xanchor==='right'){right=axX;left=axX-lw;} else {left=axX-lw/2;right=axX+lw/2;}
+    if(yanchor==='top'){top=ayY;bottom=ayY+lh;} else if(yanchor==='bottom'){bottom=ayY;top=ayY-lh;} else {top=ayY-lh/2;bottom=ayY+lh/2;}
+    return {left,right,top,bottom};
+  }
+  function overlaps(box,placed,skip){ return placed.some((p,i)=>{ if(skip!=null&&i===skip)return false; return !(box.right+LABEL_PAD<p.box.left||box.left-LABEL_PAD>p.box.right||box.bottom+LABEL_PAD<p.box.top||box.top-LABEL_PAD>p.box.bottom); }); }
+  function hitsMarkers(box,ownIdx){ return items.some(m=>{ if(m.idx===ownIdx)return false; const cx=clamp(m.px.x,box.left,box.right), cy=clamp(m.px.y,box.top,box.bottom); return (m.px.x-cx)**2+(m.px.y-cy)**2<MARKER_R*MARKER_R; }); }
+  function findPlacement(item,placed,skip){
+    let best=null;
+    for(const r of RADII){
+      for(const d of DIRS){
+        const ax=d.ux*r, ay=d.uy*r;
+        const box=labelBox(item.px.x,item.px.y,ax,ay,item.size.wPx,item.size.hPx,d.xa,d.ya);
+        if(box.left<2||box.right>w-2||box.top<2||box.bottom>h-2) continue;
+        if(overlaps(box,placed,skip)||hitsMarkers(box,item.idx)) continue;
+        const score=r+Math.abs(d.ux)*0.3+Math.abs(d.uy)*0.3;
+        if(!best||score<best.score) best={ax,ay,xa:d.xa,ya:d.ya,box,score};
+      }
+      if(best&&best.score<=r+4) break;
+    }
+    if(!best){
+      const d=DIRS[0], r=36, ax=d.ux*r, ay=d.uy*r;
+      best={ax,ay,xa:d.xa,ya:d.ya,box:labelBox(item.px.x,item.px.y,ax,ay,item.size.wPx,item.size.hPx,d.xa,d.ya),score:999};
+    }
+    return best;
+  }
+  const placed=[];
+  items.forEach(item=>placed.push({item,...findPlacement(item,placed,null)}));
+  return placed.map(({item,ax,ay,xa,ya})=>({
+    x:item.pt.x,y:item.pt.y,ax,ay,xref:'paper',yref:'paper',axref:'pixel',ayref:'pixel',
+    text:item.row.label.replace(' + ','<br>+ '),
+    showarrow:true,arrowhead:0,arrowsize:0.9,arrowwidth:1.2,
+    arrowcolor:item.onFront?arrowFrontier:arrowMuted,
+    xanchor:xa,yanchor:ya,align:xa==='right'?'right':xa==='center'?'center':'left',
+    font:{size:8,color:item.onFront?frontierColor:textColor,family:'IBM Plex Sans, sans-serif'},
+    bgcolor:'rgba(0,0,0,0)',bordercolor:'rgba(0,0,0,0)',borderwidth:0,borderpad:0,captureevents:false
+  }));
+}
 function draw(){
   const dark=isDark();
-  const trace={
-    x: AGENTS.map(a=>a.cost),
-    y: AGENTS.map(a=>a.overall),
-    text: AGENTS.map(a=>a.label),
-    mode:'markers+text',
-    textposition:'top center',
-    textfont:{ size:10, color: dark?'#94a3b8':'#64748b' },
-    marker:{ size:10, color: AGENTS.map(a=>a.rank<=3?'#4f46e5':'#94a3b8') },
-    hovertemplate:'%{text}<br>Cost $%{x:.3f}<br>Overall %{y:.1f}<extra></extra>'
-  };
-  Plotly.newPlot('chart',[trace],{
-    margin:{t:20,r:20,b:50,l:50},
+  const frontier=paretoFrontAgents(AGENTS);
+  const frontierIds=new Set(frontier.map(a=>a.label));
+  const dominated=AGENTS.filter(a=>!frontierIds.has(a.label));
+  // Label frontier + top 12 overall to avoid 42-label soup
+  const labelIds=new Set([
+    ...frontier.map(a=>a.label),
+    ...[...AGENTS].sort((a,b)=>a.rank-b.rank).slice(0,12).map(a=>a.label)
+  ]);
+  const traces=[
+    {
+      x:dominated.map(a=>a.cost), y:dominated.map(a=>a.overall),
+      mode:'markers', type:'scatter', name:'Dominated',
+      marker:{size:10,color:'#6366f1',opacity:0.5},
+      customdata:dominated.map(a=>[a.label,a.quality,a.aa]),
+      hovertemplate:'%{customdata[0]}<br>Cost $%{x:.3f}<br>Overall %{y:.1f}<br>Quality %{customdata[1]:.1f}<br>AA %{customdata[2]:.1f}<extra></extra>'
+    },
+    {
+      x:frontier.map(a=>a.cost), y:frontier.map(a=>a.overall),
+      mode:'markers', type:'scatter', name:'Pareto frontier',
+      marker:{size:13,color:'#10b981',line:{width:2,color:dark?'#064e3b':'#ecfdf5'}},
+      customdata:frontier.map(a=>[a.label,a.quality,a.aa]),
+      hovertemplate:'%{customdata[0]}<br>Cost $%{x:.3f}<br>Overall %{y:.1f}<extra>Frontier</extra>'
+    },
+    {
+      x:frontier.map(a=>a.cost), y:frontier.map(a=>a.overall),
+      mode:'lines', type:'scatter',
+      line:{shape:'spline',dash:'dot',color:'#94a3b8',width:2},
+      hoverinfo:'skip', showlegend:false, name:'frontier-curve'
+    }
+  ];
+  const costs=AGENTS.map(a=>a.cost);
+  const xMin=Math.log10(Math.max(0.02, Math.min(...costs)*0.7));
+  const xMax=Math.log10(Math.max(...costs)*1.3);
+  Plotly.newPlot('chart', traces, {
+    margin:{t:28,r:70,b:70,l:56},
     paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
     font:{ color: dark?'#e2e8f0':'#0f172a', family:'IBM Plex Sans' },
-    xaxis:{ title:'Cost / task (USD)', gridcolor: dark?'#1e293b':'#e2e8f0', type:'log' },
-    yaxis:{ title:'Overall ValueRank', gridcolor: dark?'#1e293b':'#e2e8f0' },
-  }, {displayModeBar:false, responsive:true});
+    xaxis:{ title:'Cost / task (USD)', type:'log', range:[xMin,xMax], gridcolor: dark?'#1e293b':'#e2e8f0', zeroline:false },
+    yaxis:{ title:'Overall ValueRank', gridcolor: dark?'#1e293b':'#e2e8f0', zeroline:false },
+    legend:{orientation:'h', y:-0.18},
+    annotations:[]
+  }, {displayModeBar:false, responsive:true}).then(()=>{
+    const gd=document.getElementById('chart');
+    return Plotly.relayout(gd,{ annotations: buildCaLabelAnnotations(frontierIds, labelIds, gd) });
+  });
 }
 render();
 if (window.lucide) lucide.createIcons();
 </script>
 </body>
 </html>
+
