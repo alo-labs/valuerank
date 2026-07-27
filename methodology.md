@@ -1,42 +1,51 @@
 # ValueRank Methodology
 
-**Version:** v1.3
+**Version:** v1.3.1
 **Updated:** July 28, 2026
 
 ## Cohort Rule
 
-v1.3 ranks the **full current [DeepSWE](https://deepswe.datacurve.ai/) Best roster** (**18 models**, source updated July 25, 2026). Historical exclusions that remain off-roster: `Grok-Build-0.1`, `Gemini 3 Flash`, `Claude Opus 4.6`. `Grok 4.5` is ranked (it is on DeepSWE Best).
+v1.3.1 ranks **17** models from the current [DeepSWE](https://deepswe.datacurve.ai/) Best roster (source updated July 25, 2026; roster size 18). Historical exclusions that remain off-roster: `Grok-Build-0.1`, `Gemini 3 Flash`, `Claude Opus 4.6`. `Grok 4.5` is ranked (it is on DeepSWE Best).
 
-Ranked cohort:
+**Changelog vs v1.3:** `Kimi K2.7 Code` removed from the ranked cohort so Cost can restore the AA+DeepSWE composite (AA Index total eval cost unpublished for that model).
 
-- Kimi K3
+Ranked cohort (n=17):
+
 - Grok 4.5
+- Kimi K3
 - Muse Spark 1.1
 - GPT-5.6 Terra
 - GPT-5.6 Sol
 - Claude Opus 5
 - GPT-5.6 Luna
 - GPT-5.5
-- Claude Fable 5
-- GLM-5.2
 - Gemini 3.6 Flash
-- GPT-5.4
-- Claude Opus 4.8
+- GLM-5.2
 - Gemini 3.1 Pro
-- Kimi K2.7 Code
+- Claude Fable 5
+- GPT-5.4
 - Gemini 3.5 Flash
+- Claude Opus 4.8
 - Claude Sonnet 5
 - Claude Sonnet 4.6
 
+## Ranked-cohort exclusion
+
+**Kimi K2.7 Code** is on the DeepSWE Best roster but **not ranked** in ValueRank v1.3.1:
+
+- Reason: no published AA Intelligence Index **total eval cost** on [https://artificialanalysis.ai/models/kimi-k2-7-code](https://artificialanalysis.ai/models/kimi-k2-7-code).
+- Evidence: [`.refresh/v1.3/aa-kimi-k27-cost-search.md`](.refresh/v1.3/aa-kimi-k27-cost-search.md) (search verdict NOT FOUND, 2026-07-28).
+- DeepSWE pass@1 / avg cost remain in [raw-data.md](raw-data.md) as a non-ranked appendix row.
+
 ## Zero-Gap Rule
 
-- Every retained dimension must have a genuine current score for all **18** ranked models.
+- Every retained dimension must have a genuine current score for all **17** ranked models.
 - If even one ranked model is genuinely missing from a benchmark, that benchmark is excluded.
-- v1.3 has **zero missing benchmark cells** and uses **no neutral 50 placeholders** on the main product.
+- v1.3.1 has **zero missing benchmark cells** and uses **no neutral 50 placeholders** on the main product.
 
 ## Scored Dimensions
 
-ValueRank v1.3 uses **12** fully covered dimensions:
+ValueRank v1.3.1 uses **12** fully covered dimensions:
 
 1. Cost
 2. Hallucination
@@ -51,7 +60,7 @@ ValueRank v1.3 uses **12** fully covered dimensions:
 11. AA Intelligence Index
 12. Speed
 
-Dropped vs v1.2 (incomplete AA coverage for newest DeepSWE models): IFBench, Terminal-Bench Hard, τ²-Bench Telecom.
+Dropped vs v1.2 (incomplete AA coverage for newest DeepSWE models — still incomplete after excluding Kimi K2.7 Code): IFBench, Terminal-Bench Hard, τ²-Bench Telecom.
 
 ## Weights
 
@@ -74,7 +83,7 @@ Relative v1.2 priorities are preserved among retained dimensions and renormalize
 
 ## Normalization
 
-`((n - rank) / (n - 1)) * 100` with `n = 18`.
+`((n - rank) / (n - 1)) * 100` with `n = 17`.
 
 - Best → 100, worst → 0, ties average ranks.
 - For Hallucination, lower raw rate is better.
@@ -82,13 +91,12 @@ Relative v1.2 priorities are preserved among retained dimensions and renormalize
 
 ## Cost Construction
 
-DeepSWE-only (AA Intelligence Index total eval cost unpublished for Kimi K2.7 Code; zero-gap forbids partial AA cost)
+Composite AA+DeepSWE (restored in v1.3.1):
 
-1. Take DeepSWE Best-row average cost per task for each model.
-2. Scale onto 0–100 with the highest-cost ranked model at 100.
-3. Rank-normalize that penalty for the Cost dimension.
-
-When AA Index total eval cost returns for every cohort member, v1.x can restore the AA+DeepSWE composite average used in v1.1–v1.2.
+1. Normalize AA Intelligence Index **total eval cost** onto 0–100 (highest-cost ranked model = 100; higher cost = higher penalty).
+2. Normalize DeepSWE Best-row average cost per task onto 0–100 the same way.
+3. Average the two penalties → composite cost scale.
+4. Rank-normalize that composite (lower better) for the Cost dimension.
 
 ## Quality Score
 

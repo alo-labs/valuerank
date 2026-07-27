@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build ValueRank v1.3 zero-gap matrix, scores, and evidence ledger."""
+"""Build ValueRank v1.3.1 zero-gap matrix, scores, and evidence ledger.
+
+v1.3.1 methodology correction: exclude Kimi K2.7 Code from the ranked cohort
+(no published AA Intelligence Index total eval cost) so Cost can restore the
+v1.2-style AA+DeepSWE composite. DeepSWE row preserved as non-ranked appendix.
+"""
 from __future__ import annotations
 
 import json
@@ -10,6 +15,20 @@ from pathlib import Path
 ROOT = Path("/Users/shafqat/valuerank")
 R = ROOT / ".refresh" / "v1.3"
 PUBLISH_DATE = "July 28, 2026"
+VERSION = "v1.3.1"
+
+# Ranked-cohort exclusions (still on DeepSWE; preserved in appendix / raw-data)
+RANKED_EXCLUSIONS = {
+    "kimi-k2.7-code": {
+        "reason": (
+            "No published AA Intelligence Index total eval cost on "
+            "https://artificialanalysis.ai/models/kimi-k2-7-code "
+            "(see .refresh/v1.3/aa-kimi-k27-cost-search.md). Excluded from "
+            "ranked cohort so Cost can use AA+DeepSWE composite for remaining models."
+        ),
+        "preserveInAppendix": True,
+    },
+}
 
 deepswe = json.loads((R / "deepswe.json").read_text())
 aa = json.loads((R / "aa_metrics.json").read_text())["models"]
@@ -224,7 +243,22 @@ CANDIDATES = [
     ("speed", "Speed", True, 5),
 ]
 
-# Build AA+DeepSWE composite cost where possible
+# Split ranked cohort vs non-ranked appendix (e.g. Kimi K2.7 Code)
+all_rows = rows
+appendix = []
+ranked = []
+for r in all_rows:
+    excl = RANKED_EXCLUSIONS.get(r["id"])
+    if excl:
+        r["ranked"] = False
+        r["exclusionReason"] = excl["reason"]
+        appendix.append(r)
+    else:
+        r["ranked"] = True
+        ranked.append(r)
+rows = ranked  # subsequent scoring uses ranked cohort only
+
+# Build AA+DeepSWE composite cost where possible (ranked cohort)
 aa_costs = [r.get("evalCost") for r in rows]
 aa_cost_complete = all(c is not None for c in aa_costs)
 max_aa = max(c for c in aa_costs if c is not None) if any(aa_costs) else None
@@ -243,12 +277,21 @@ for r in rows:
         # Zero-gap: AA eval cost incomplete → Cost = DeepSWE-only (documented)
         r["costComposite"] = round(ds_pen, 2)
         r["costMode"] = "deepswe-only"
-        r["evalCost"] = r.get("evalCost")  # may be null for kimi
+        r["evalCost"] = r.get("evalCost")
+
+# Appendix: DeepSWE-only cost scale for reference (not ranked)
+if appendix and max_ds:
+    for r in appendix:
+        ds_pen = (r["deepsweCost"] / max_ds) * 100
+        r["aaCostNorm"] = None
+        r["deepSweCostNorm"] = round(ds_pen, 2)
+        r["costComposite"] = round(ds_pen, 2)
+        r["costMode"] = "appendix-deepswe-only-not-ranked"
 
 cost_note = (
-    "Composite AA+DeepSWE"
+    "Composite AA+DeepSWE (Kimi K2.7 Code excluded from ranked cohort — no AA Index total eval cost; see aa-kimi-k27-cost-search.md)"
     if aa_cost_complete
-    else "DeepSWE-only (AA Intelligence Index total eval cost unpublished for Kimi K2.7 Code; zero-gap forbids partial AA cost)"
+    else "DeepSWE-only (AA Intelligence Index total eval cost incomplete for ranked cohort)"
 )
 
 # Coverage matrix
@@ -410,9 +453,18 @@ for r in rows:
     )
 
 manifest = {
-    "version": "v1.3",
+    "version": VERSION,
     "publishDate": PUBLISH_DATE,
     "cohortN": len(rows),
+    "deepsweRosterN": len(all_rows),
+    "rankedExclusions": [
+        {
+            "id": r["id"],
+            "name": r["name"],
+            "reason": r.get("exclusionReason"),
+        }
+        for r in appendix
+    ],
     "retainedDimensions": [w["label"] for w in weights],
     "retainedCount": len(weights),
     "droppedDimensions": dropped,
@@ -420,13 +472,29 @@ manifest = {
     "costNote": cost_note,
     "weights": weights,
     "pareto": pareto,
+    "changelog": (
+        "v1.3.1: Exclude Kimi K2.7 Code from ranked cohort (no AA Index total "
+        "eval cost); restore AA+DeepSWE composite Cost for n=17."
+    ),
 }
 
 (R / "coverage_matrix.json").write_text(
     json.dumps({"coverage": coverage, "retained": [w["key"] for w in weights], "dropped": dropped}, indent=2)
     + "\n"
 )
-(R / "scores.json").write_text(json.dumps({"models": by_overall, "weights": weights, "pareto": pareto}, indent=2) + "\n")
+(R / "scores.json").write_text(
+    json.dumps(
+        {
+            "version": VERSION,
+            "models": by_overall,
+            "weights": weights,
+            "pareto": pareto,
+            "appendixNonRanked": appendix,
+        },
+        indent=2,
+    )
+    + "\n"
+)
 (R / "run_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
 with (R / "sources.jsonl").open("w") as f:
@@ -440,7 +508,8 @@ with (R / "claims.jsonl").open("w") as f:
         f.write(json.dumps(c) + "\n")
 
 # Print summary
-print(f"n={len(rows)} retained_dims={len(weights)} costMode={rows[0]['costMode']}")
+print(f"version={VERSION} n={len(rows)} appendix={len(appendix)} retained_dims={len(weights)} costMode={rows[0]['costMode']}")
+print("EXCLUDED:", [f"{r['name']}: {r['exclusionReason'][:80]}..." for r in appendix])
 print("RETAINED:", [w["label"] + f"({w['weight']}%)" for w in weights])
 print("DROPPED:", [d["label"] + f" missing={d['missing']}" for d in dropped])
 print("\nRANKING:")
@@ -449,3 +518,4 @@ for r in by_overall:
         f"{r['rank']:2d} {r['name']:22s} overall={r['overallScore']:5.1f} quality={r['qualityScore']:5.1f} qrank={r['qualityRank']:2d} cost={r['costComposite']:6.2f} pareto={r['pareto']}"
     )
 print("\nPARETO:", pareto)
+
