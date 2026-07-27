@@ -25,15 +25,15 @@
 <script>(function(){var s=localStorage.getItem('vr-theme');if(s==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
 <style>
 :root {
-  --bg-page:#f8f9fc; --bg-card:#fff; --nav-bg:rgba(248,249,252,.92);
-  --accent:#4f46e5; --green:#059669; --text-primary:#0f172a; --text-secondary:#475569;
-  --text-dim:#94a3b8; --border:#e2e8f0; --radius:12px;
-  --font-heading:'IBM Plex Sans',system-ui,sans-serif; --font-mono:'IBM Plex Mono',monospace;
+ --bg-page:#f8f9fc; --bg-card:#fff; --nav-bg:rgba(248,249,252,.92);
+ --accent:#4f46e5; --green:#059669; --text-primary:#0f172a; --text-secondary:#475569;
+ --text-dim:#94a3b8; --border:#e2e8f0; --radius:12px;
+ --font-heading:'IBM Plex Sans',system-ui,sans-serif; --font-mono:'IBM Plex Mono',monospace;
 }
 [data-theme="dark"] {
-  --bg-page:#0a0a0f; --bg-card:#12121a; --nav-bg:rgba(10,10,15,.88);
-  --accent:#6366f1; --green:#34d399; --text-primary:#e2e8f0; --text-secondary:#94a3b8;
-  --text-dim:#64748b; --border:#1e293b;
+ --bg-page:#0a0a0f; --bg-card:#12121a; --nav-bg:rgba(10,10,15,.88);
+ --accent:#6366f1; --green:#34d399; --text-primary:#e2e8f0; --text-secondary:#94a3b8;
+ --text-dim:#64748b; --border:#1e293b;
 }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg-page); color:var(--text-primary); font-family:var(--font-heading); font-size:14px; line-height:1.6; }
@@ -54,7 +54,7 @@ h1 { font-size:2rem; margin:0 0 8px; }
 .card .name { font-weight:600; margin:6px 0; }
 .card .score { font-family:var(--font-mono); font-size:1.4rem; }
 .meta { color:var(--text-dim); font-size:12px; }
-#chart { height:480px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); margin:16px 0 32px; }
+#chart { height:560px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); margin:16px 0 32px; }
 table { width:100%; border-collapse:collapse; }
 th,td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--border); }
 th { color:var(--text-dim); font-size:12px; font-weight:600; }
@@ -67,189 +67,291 @@ footer { text-align:center; color:var(--text-dim); padding:24px; font-size:12px;
 </head>
 <body>
 <nav>
-  <a class="nav-brand" href="/"><span>ValueRank</span><span class="badge">v0.3</span></a>
-  <div class="mode-switcher">
-    <a class="mode-btn" href="/">LLM Models</a>
-    <a class="mode-btn active" href="/coding-agents/">Coding Agents</a>
-    <a class="mode-btn" href="/tb21/">TB 2.1</a>
-  </div>
-  <div class="nav-meta">July 28, 2026 · 42 agents</div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><i data-lucide="sun"></i></button>
+ <a class="nav-brand" href="/"><span>ValueRank</span><span class="badge">v0.3</span></a>
+ <div class="mode-switcher">
+  <a class="mode-btn" href="/">LLM Models</a>
+  <a class="mode-btn active" href="/coding-agents/">Coding Agents</a>
+  <a class="mode-btn" href="/tb21/">TB 2.1</a>
+ </div>
+ <div class="nav-meta">July 28, 2026 · 42 agents</div>
+ <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><i data-lucide="sun"></i></button>
 </nav>
 <main>
-  <p class="meta">Coding Agent ValueRank · v0.3</p>
-  <h1>Which coding agent delivers the most value?</h1>
-  <p class="sub">Overall = 0.25·Cost + 0.60·AA Coding Agent Index + 0.15·TB2.1 (missing TB2.1 → neutral 50). Cohort from Artificial Analysis; TB2.1 from tbench.ai.</p>
-  <div class="podium" id="podium"></div>
-  <h2>Cost vs Overall</h2>
-  <div id="chart"></div>
-  <h2>Full ranking</h2>
-  <div class="card" style="overflow:auto">
-    <table>
-      <thead><tr><th>#</th><th>Agent variant</th><th>Overall</th><th>Quality</th><th>Cost/task</th><th>AA Index %</th><th>TB2.1</th></tr></thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
+ <p class="meta">Coding Agent ValueRank · v0.3</p>
+ <h1>Which coding agent delivers the most value?</h1>
+ <p class="sub">Overall = 0.25·Cost + 0.60·AA Coding Agent Index + 0.15·TB2.1 (missing TB2.1 → neutral 50). Cohort from Artificial Analysis; TB2.1 from tbench.ai.</p>
+ <div class="podium" id="podium"></div>
+ <h2>Cost vs Overall</h2>
+ <p class="sub" style="margin-top:-4px">Cost on X (log USD). Near-dot agent + model labels use leader lines (no boxes, no arrowheads). Dotted gray spline is the Pareto frontier.</p>
+ <div id="chart"></div>
+ <h2>Full ranking</h2>
+ <div class="card" style="overflow:auto">
+  <table>
+   <thead><tr><th>#</th><th>Agent variant</th><th>Overall</th><th>Quality</th><th>Cost/task</th><th>AA Index %</th><th>TB2.1</th></tr></thead>
+   <tbody id="tbody"></tbody>
+  </table>
+ </div>
 </main>
 <footer>ValueRank coding-agents v0.3 · July 28, 2026 · 42 variants · Innovated at <a href="https://alolabs.dev" style="color:inherit">Ālo Labs</a></footer>
 <script>
 const AGENTS = [{"rank": 1, "agent": "Codex", "model": "GPT-5.6 Terra (max)", "label": "Codex + GPT-5.6 Terra (max)", "overall": 71.5, "quality": 83.1, "cost": 2.7572, "aa": 62.28, "costNorm": 36.6, "aaNorm": 90.2, "tbNorm": 54.8, "tbCoverage": "Covered"}, {"rank": 2, "agent": "Codex", "model": "GPT-5.5 (xhigh)", "label": "Codex + GPT-5.5 (xhigh)", "overall": 69.5, "quality": 87.8, "cost": 5.0696, "aa": 61.49, "costNorm": 14.6, "aaNorm": 85.4, "tbNorm": 97.6, "tbCoverage": "Covered"}, {"rank": 3, "agent": "Codex", "model": "GPT-5.6 Sol (high)", "label": "Codex + GPT-5.6 Sol (high)", "overall": 69.4, "quality": 86.1, "cost": 4.1442, "aa": 64.11, "costNorm": 19.5, "aaNorm": 95.1, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 4, "agent": "Codex", "model": "GPT-5.6 Sol (xhigh)", "label": "Codex + GPT-5.6 Sol (xhigh)", "overall": 69.1, "quality": 88.1, "cost": 5.2353, "aa": 65.09, "costNorm": 12.2, "aaNorm": 97.6, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 5, "agent": "Claude Code", "model": "Opus 5 (high)", "label": "Claude Code + Opus 5 (high)", "overall": 68.6, "quality": 84.2, "cost": 3.7975, "aa": 63.37, "costNorm": 22.0, "aaNorm": 92.7, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 6, "agent": "Claude Code", "model": "Opus 5 (medium)", "label": "Claude Code + Opus 5 (medium)", "overall": 67.5, "quality": 80.2, "cost": 3.1436, "aa": 61.92, "costNorm": 29.3, "aaNorm": 87.8, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 7, "agent": "Claude Code", "model": "Opus 5 (max)", "label": "Claude Code + Opus 5 (max)", "overall": 67.5, "quality": 90.0, "cost": 8.9497, "aa": 65.53, "costNorm": 0.0, "aaNorm": 100.0, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 8, "agent": "Codex", "model": "GPT-5.6 Luna (max)", "label": "Codex + GPT-5.6 Luna (max)", "overall": 67.2, "quality": 67.6, "cost": 1.567, "aa": 58.66, "costNorm": 65.9, "aaNorm": 78.0, "tbNorm": 26.2, "tbCoverage": "Covered"}, {"rank": 9, "agent": "Codex", "model": "GPT-5.6 Terra (xhigh)", "label": "Codex + GPT-5.6 Terra (xhigh)", "overall": 66.2, "quality": 69.5, "cost": 1.8951, "aa": 57.07, "costNorm": 56.1, "aaNorm": 73.2, "tbNorm": 54.8, "tbCoverage": "Covered"}, {"rank": 10, "agent": "Codex", "model": "GPT-5.6 Sol (medium)", "label": "Codex + GPT-5.6 Sol (medium)", "overall": 65.2, "quality": 76.3, "cost": 2.9913, "aa": 60.61, "costNorm": 31.7, "aaNorm": 82.9, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 11, "agent": "Codex", "model": "GPT-5.6 Terra (high)", "label": "Codex + GPT-5.6 Terra (high)", "overall": 63.6, "quality": 63.7, "cost": 1.5897, "aa": 55.79, "costNorm": 63.4, "aaNorm": 65.9, "tbNorm": 54.8, "tbCoverage": "Covered"}, {"rank": 12, "agent": "Claude Code", "model": "Opus 5 (low)", "label": "Claude Code + Opus 5 (low)", "overall": 61.5, "quality": 66.6, "cost": 2.1785, "aa": 56.8, "costNorm": 46.3, "aaNorm": 70.7, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 13, "agent": "Codex", "model": "GPT-5.5 (medium)", "label": "Codex + GPT-5.5 (medium)", "overall": 61.0, "quality": 68.3, "cost": 2.7545, "aa": 54.36, "costNorm": 39.0, "aaNorm": 61.0, "tbNorm": 97.6, "tbCoverage": "Covered"}, {"rank": 14, "agent": "Claude Code", "model": "Opus 4.8 (max)", "label": "Claude Code + Opus 4.8 (max)", "overall": 61.0, "quality": 80.6, "cost": 7.6975, "aa": 60.54, "costNorm": 2.4, "aaNorm": 80.5, "tbNorm": 81.0, "tbCoverage": "Covered"}, {"rank": 15, "agent": "Codex", "model": "GPT-5.6 Luna (xhigh)", "label": "Codex + GPT-5.6 Luna (xhigh)", "overall": 60.9, "quality": 56.0, "cost": 1.2564, "aa": 54.67, "costNorm": 75.6, "aaNorm": 63.4, "tbNorm": 26.2, "tbCoverage": "Covered"}, {"rank": 16, "agent": "Claude Code", "model": "Opus 4.8 (xhigh)", "label": "Claude Code + Opus 4.8 (xhigh)", "overall": 59.3, "quality": 76.7, "cost": 5.6662, "aa": 58.47, "costNorm": 7.3, "aaNorm": 75.6, "tbNorm": 81.0, "tbCoverage": "Covered"}, {"rank": 17, "agent": "Claude Code", "model": "Opus 4.8 (high)", "label": "Claude Code + Opus 4.8 (high)", "overall": 59.2, "quality": 70.8, "cost": 3.7166, "aa": 56.7, "costNorm": 24.4, "aaNorm": 68.3, "tbNorm": 81.0, "tbCoverage": "Covered"}, {"rank": 18, "agent": "Codex", "model": "GPT-5.6 Sol (low)", "label": "Codex + GPT-5.6 Sol (low)", "overall": 57.2, "quality": 56.8, "cost": 1.7175, "aa": 53.61, "costNorm": 58.5, "aaNorm": 58.5, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 19, "agent": "Codex", "model": "GPT-5.6 Terra (medium)", "label": "Codex + GPT-5.6 Terra (medium)", "overall": 56.7, "quality": 48.0, "cost": 0.9012, "aa": 47.8, "costNorm": 82.9, "aaNorm": 46.3, "tbNorm": 54.8, "tbCoverage": "Covered"}, {"rank": 20, "agent": "Codex", "model": "GPT-5.6 Luna (high)", "label": "Codex + GPT-5.6 Luna (high)", "overall": 56.3, "quality": 48.2, "cost": 0.9587, "aa": 51.42, "costNorm": 80.5, "aaNorm": 53.7, "tbNorm": 26.2, "tbCoverage": "Covered"}, {"rank": 21, "agent": "Claude Code", "model": "Opus 4.8 (medium)", "label": "Claude Code + Opus 4.8 (medium)", "overall": 52.5, "quality": 61.1, "cost": 3.2631, "aa": 53.56, "costNorm": 26.8, "aaNorm": 56.1, "tbNorm": 81.0, "tbCoverage": "Covered"}, {"rank": 22, "agent": "Claude Code", "model": "Opus 4.6 (medium)", "label": "Claude Code + Opus 4.6 (medium)", "overall": 50.7, "quality": 43.2, "cost": 1.2777, "aa": 46.47, "costNorm": 73.2, "aaNorm": 41.5, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 23, "agent": "Claude Code", "model": "Opus 4.8 (low)", "label": "Claude Code + Opus 4.8 (low)", "overall": 50.7, "quality": 51.3, "cost": 2.151, "aa": 47.41, "costNorm": 48.8, "aaNorm": 43.9, "tbNorm": 81.0, "tbCoverage": "Covered"}, {"rank": 24, "agent": "Cursor CLI", "model": "Composer 2.5", "label": "Cursor CLI + Composer 2.5", "overall": 46.5, "quality": 29.5, "cost": 0.0822, "aa": 38.19, "costNorm": 97.6, "aaNorm": 24.4, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 25, "agent": "Codex", "model": "GPT-5.6 Sol (none)", "label": "Codex + GPT-5.6 Sol (none)", "overall": 45.6, "quality": 37.3, "cost": 1.3983, "aa": 43.42, "costNorm": 70.7, "aaNorm": 34.1, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 26, "agent": "Opencode", "model": "Opus 4.7 (medium)", "label": "Opencode + Opus 4.7 (medium)", "overall": 45.3, "quality": 49.0, "cost": 2.9312, "aa": 49.96, "costNorm": 34.1, "aaNorm": 48.8, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 27, "agent": "Codex", "model": "GPT-5.6 Luna (medium)", "label": "Codex + GPT-5.6 Luna (medium)", "overall": 44.9, "quality": 30.6, "cost": 0.4739, "aa": 42.41, "costNorm": 87.8, "aaNorm": 31.7, "tbNorm": 26.2, "tbCoverage": "Covered"}, {"rank": 28, "agent": "Cursor CLI", "model": "GPT-5.5 (medium)", "label": "Cursor CLI + GPT-5.5 (medium)", "overall": 43.7, "quality": 41.2, "cost": 2.015, "aa": 46.09, "costNorm": 51.2, "aaNorm": 39.0, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 29, "agent": "Codex", "model": "GPT-5.6 Terra (low)", "label": "Codex + GPT-5.6 Terra (low)", "overall": 39.8, "quality": 24.6, "cost": 0.4843, "aa": 36.73, "costNorm": 85.4, "aaNorm": 17.1, "tbNorm": 54.8, "tbCoverage": "Covered"}, {"rank": 30, "agent": "Cursor CLI", "model": "Opus 4.7 (medium)", "label": "Cursor CLI + Opus 4.7 (medium)", "overall": 39.8, "quality": 39.3, "cost": 2.6799, "aa": 45.36, "costNorm": 41.5, "aaNorm": 36.6, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 31, "agent": "Cursor CLI", "model": "Composer 2", "label": "Cursor CLI + Composer 2", "overall": 36.9, "quality": 15.8, "cost": 0.0436, "aa": 27.47, "costNorm": 100.0, "aaNorm": 7.3, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 32, "agent": "Cursor CLI", "model": "GPT-5.4 (medium)", "label": "Cursor CLI + GPT-5.4 (medium)", "overall": 36.3, "quality": 25.6, "cost": 1.5459, "aa": 36.79, "costNorm": 68.3, "aaNorm": 19.5, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 33, "agent": "Codex", "model": "GPT-5.4 (medium)", "label": "Codex + GPT-5.4 (medium)", "overall": 34.6, "quality": 31.4, "cost": 2.4151, "aa": 39.05, "costNorm": 43.9, "aaNorm": 26.8, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 34, "agent": "Claude Code", "model": "Opus 4.7 (max)", "label": "Claude Code + Opus 4.7 (max)", "overall": 34.2, "quality": 42.4, "cost": 5.6324, "aa": 50.34, "costNorm": 9.8, "aaNorm": 51.2, "tbNorm": 7.1, "tbCoverage": "Covered"}, {"rank": 35, "agent": "Claude Code", "model": "Sonnet 4.6 (medium)", "label": "Claude Code + Sonnet 4.6 (medium)", "overall": 34.1, "quality": 27.6, "cost": 2.0059, "aa": 37.61, "costNorm": 53.7, "aaNorm": 22.0, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 36, "agent": "Claude Code", "model": "Opus 4.7 (medium)", "label": "Claude Code + Opus 4.7 (medium)", "overall": 33.9, "quality": 24.9, "cost": 1.6799, "aa": 40.48, "costNorm": 61.0, "aaNorm": 29.3, "tbNorm": 7.1, "tbCoverage": "Covered"}, {"rank": 37, "agent": "Claude Code", "model": "Kimi K2.6", "label": "Claude Code + Kimi K2.6", "overall": 32.9, "quality": 17.8, "cost": 1.189, "aa": 32.62, "costNorm": 78.0, "aaNorm": 9.8, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 38, "agent": "Codex", "model": "GPT-5.6 Terra (none)", "label": "Codex + GPT-5.6 Terra (none)", "overall": 32.2, "quality": 12.9, "cost": 0.37, "aa": 23.7, "costNorm": 90.2, "aaNorm": 2.4, "tbNorm": 54.8, "tbCoverage": "Covered"}, {"rank": 39, "agent": "Codex", "model": "GPT-5.6 Luna (low)", "label": "Codex + GPT-5.6 Luna (low)", "overall": 30.6, "quality": 9.2, "cost": 0.2086, "aa": 25.08, "costNorm": 95.1, "aaNorm": 4.9, "tbNorm": 26.2, "tbCoverage": "Covered"}, {"rank": 40, "agent": "Codex", "model": "GPT-5.6 Luna (none)", "label": "Codex + GPT-5.6 Luna (none)", "overall": 27.1, "quality": 5.2, "cost": 0.352, "aa": 20.42, "costNorm": 92.7, "aaNorm": 0.0, "tbNorm": 26.2, "tbCoverage": "Covered"}, {"rank": 41, "agent": "Claude Code", "model": "Qwen3.7 Plus (thinking)", "label": "Claude Code + Qwen3.7 Plus (thinking)", "overall": 16.0, "quality": 19.8, "cost": 6.2263, "aa": 35.97, "costNorm": 4.9, "aaNorm": 12.2, "tbNorm": 50.0, "tbCoverage": "Neutralized"}, {"rank": 42, "agent": "Claude Code", "model": "GLM-5.1", "label": "Claude Code + GLM-5.1", "overall": 13.0, "quality": 11.7, "cost": 4.3312, "aa": 36.13, "costNorm": 17.1, "aaNorm": 14.6, "tbNorm": 0.0, "tbCoverage": "Covered"}];
 function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
 document.getElementById('theme-toggle').onclick=()=>{
-  const dark=!isDark();
-  document.documentElement.setAttribute('data-theme', dark?'dark':'');
-  localStorage.setItem('vr-theme', dark?'dark':'light');
-  draw();
+ const dark=!isDark();
+ document.documentElement.setAttribute('data-theme', dark?'dark':'');
+ localStorage.setItem('vr-theme', dark?'dark':'light');
+ draw();
 };
 function render(){
-  const top=AGENTS.slice(0,3);
-  document.getElementById('podium').innerHTML=top.map(a=>`
-    <div class="card">
-      <div class="rank">Rank ${a.rank}</div>
-      <div class="name">${a.label}</div>
-      <div class="score">${a.overall.toFixed(1)}</div>
-      <div class="meta">Quality ${a.quality.toFixed(1)} · $${a.cost.toFixed(2)}/task · AA ${a.aa}</div>
-    </div>`).join('');
-  document.getElementById('tbody').innerHTML=AGENTS.map(a=>`
-    <tr>
-      <td class="mono">${a.rank}</td>
-      <td>${a.label}</td>
-      <td class="mono">${a.overall.toFixed(1)}</td>
-      <td class="mono">${a.quality.toFixed(1)}</td>
-      <td class="mono">$${a.cost.toFixed(3)}</td>
-      <td class="mono">${a.aa.toFixed(1)}</td>
-      <td class="${a.tbCoverage==='Covered'?'covered':'neutral'}">${a.tbCoverage}</td>
-    </tr>`).join('');
-  draw();
+ const top=AGENTS.slice(0,3);
+ document.getElementById('podium').innerHTML=top.map(a=>`
+  <div class="card">
+   <div class="rank">Rank ${a.rank}</div>
+   <div class="name">${a.label}</div>
+   <div class="score">${a.overall.toFixed(1)}</div>
+   <div class="meta">Quality ${a.quality.toFixed(1)} · $${a.cost.toFixed(2)}/task · AA ${a.aa}</div>
+  </div>`).join('');
+ document.getElementById('tbody').innerHTML=AGENTS.map(a=>`
+  <tr>
+   <td class="mono">${a.rank}</td>
+   <td>${a.label}</td>
+   <td class="mono">${a.overall.toFixed(1)}</td>
+   <td class="mono">${a.quality.toFixed(1)}</td>
+   <td class="mono">$${a.cost.toFixed(3)}</td>
+   <td class="mono">${a.aa.toFixed(1)}</td>
+   <td class="${a.tbCoverage==='Covered'?'covered':'neutral'}">${a.tbCoverage}</td>
+  </tr>`).join('');
+ draw();
 }
 function paretoFrontAgents(rows){
-  const sorted=[...rows].sort((a,b)=>a.cost-b.cost||b.overall-a.overall);
-  const frontier=[]; let best=-Infinity;
-  sorted.forEach(r=>{ if(r.overall>best){ frontier.push(r); best=r.overall; } });
-  return frontier;
+ const sorted=[...rows].sort((a,b)=>a.cost-b.cost||b.overall-a.overall);
+ const frontier=[]; let best=-Infinity;
+ sorted.forEach(r=>{ if(r.overall>best){ frontier.push(r); best=r.overall; } });
+ return frontier;
+}
+// Plotly xref/yref "x"/"y" stay empty on log axes — use paper + pixel leader offsets (TB21).
+function formatCaLabel(row){
+ return `${row.agent}<br>+ ${row.model}`;
 }
 function dataToPaperCA(cost, score, gd){
-  const xa=gd._fullLayout.xaxis, ya=gd._fullLayout.yaxis;
-  const xPx=xa._offset+xa.l2p(Math.log10(cost));
-  const yPx=ya._offset+ya.l2p(score);
-  return { x:(xPx-xa._offset)/xa._length, y:1-(yPx-ya._offset)/ya._length, xPx, yPx };
+ const xa=gd._fullLayout.xaxis, ya=gd._fullLayout.yaxis;
+ const xPx=xa._offset+xa.l2p(Math.log10(cost));
+ const yPx=ya._offset+ya.l2p(score);
+ return { x:(xPx-xa._offset)/xa._length, y:1-(yPx-ya._offset)/ya._length, xPx, yPx };
+}
+function estimateCaLabelSize(row, gd){
+ const w=gd._fullLayout.width||1100;
+ const h=gd._fullLayout.height||560;
+ const fontSize=8;
+ const lines=formatCaLabel(row).split('<br>');
+ const maxChars=Math.max(...lines.map(s=>s.length));
+ const wPx=maxChars*fontSize*0.62+10;
+ const hPx=fontSize*1.45*lines.length+6;
+ return { wPx, hPx, w:wPx/w, h:hPx/h };
 }
 function buildCaLabelAnnotations(frontierIds, labelIds, gd){
-  const dark=isDark();
-  const textColor=dark?'#e2e8f0':'#0f172a';
-  const frontierColor=dark?'#34d399':'#047857';
-  const arrowMuted=dark?'rgba(148,163,184,.75)':'rgba(71,85,105,.7)';
-  const arrowFrontier=dark?'rgba(52,211,153,.95)':'rgba(4,120,87,.85)';
-  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
-  const layout=gd._fullLayout;
-  const w=layout.width||1050, h=layout.height||480;
-  const MARKER_R=10, LABEL_PAD=4;
-  const DIRS=[
-    {ux:0,uy:-1,xa:'center',ya:'bottom'},{ux:0.707,uy:-0.707,xa:'left',ya:'bottom'},
-    {ux:1,uy:0,xa:'left',ya:'middle'},{ux:0.707,uy:0.707,xa:'left',ya:'top'},
-    {ux:0,uy:1,xa:'center',ya:'top'},{ux:-0.707,uy:0.707,xa:'right',ya:'top'},
-    {ux:-1,uy:0,xa:'right',ya:'middle'},{ux:-0.707,uy:-0.707,xa:'right',ya:'bottom'}
-  ];
-  const RADII=[22,28,36,46,58,72,90];
-  const labeled=AGENTS.filter(a=>labelIds.has(a.label));
-  const items=labeled.map((row,idx)=>{
-    const pt=dataToPaperCA(row.cost,row.overall,gd);
-    const lines=row.label.replace(' + ','<br>+ ').split('<br>');
-    const maxChars=Math.max(...lines.map(s=>s.length));
-    const wPx=maxChars*8*0.62+8, hPx=8*1.4*lines.length+4;
-    return {idx,row,pt,size:{wPx,hPx},px:{x:pt.xPx,y:pt.yPx},onFront:frontierIds.has(row.label)};
+ const dark=isDark();
+ const textColor=dark?'#e2e8f0':'#0f172a';
+ const frontierColor=dark?'#34d399':'#047857';
+ const arrowMuted=dark?'rgba(148,163,184,.75)':'rgba(71,85,105,.7)';
+ const arrowFrontier=dark?'rgba(52,211,153,.95)':'rgba(4,120,87,.85)';
+ const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+ const layout=gd._fullLayout;
+ const w=layout.width||1100, h=layout.height||560;
+ const MARKER_R=12, LABEL_PAD=8;
+ const DIRS=[
+  {ux:0,uy:-1,xa:'center',ya:'bottom'},
+  {ux:0.707,uy:-0.707,xa:'left',ya:'bottom'},
+  {ux:1,uy:0,xa:'left',ya:'middle'},
+  {ux:0.707,uy:0.707,xa:'left',ya:'top'},
+  {ux:0,uy:1,xa:'center',ya:'top'},
+  {ux:-0.707,uy:0.707,xa:'right',ya:'top'},
+  {ux:-1,uy:0,xa:'right',ya:'middle'},
+  {ux:-0.707,uy:-0.707,xa:'right',ya:'bottom'},
+  {ux:0.383,uy:-0.924,xa:'left',ya:'bottom'},
+  {ux:0.924,uy:-0.383,xa:'left',ya:'bottom'},
+  {ux:0.924,uy:0.383,xa:'left',ya:'top'},
+  {ux:0.383,uy:0.924,xa:'left',ya:'top'},
+  {ux:-0.383,uy:0.924,xa:'right',ya:'top'},
+  {ux:-0.924,uy:0.383,xa:'right',ya:'top'},
+  {ux:-0.924,uy:-0.383,xa:'right',ya:'bottom'},
+  {ux:-0.383,uy:-0.924,xa:'right',ya:'bottom'}
+ ];
+ const RADII=[28,34,40,48,56,68,82,98,116];
+ // All dots are obstacles so labels never cover unlabeled markers.
+ const allMarkers=AGENTS.map((row,idx)=>{
+  const pt=dataToPaperCA(row.cost,row.overall,gd);
+  return { idx, label:row.label, px:{x:pt.xPx,y:pt.yPx} };
+ });
+ const labeled=AGENTS.filter(a=>labelIds.has(a.label));
+ const items=labeled.map((row,idx)=>{
+  const pt=dataToPaperCA(row.cost,row.overall,gd);
+  const size=estimateCaLabelSize(row,gd);
+  return {idx,row,pt,size,px:{x:pt.xPx,y:pt.yPx},onFront:frontierIds.has(row.label)};
+ });
+ items.forEach(it=>{
+  let nearest=Infinity;
+  items.forEach(other=>{
+   if(other.idx===it.idx) return;
+   nearest=Math.min(nearest, Math.hypot(it.px.x-other.px.x, it.px.y-other.px.y));
   });
-  items.sort((a,b)=>(a.onFront===b.onFront?0:(a.onFront?-1:1))||b.row.overall-a.row.overall);
-  function labelBox(ptX,ptY,ax,ay,lw,lh,xanchor,yanchor){
-    const axX=ptX+ax, ayY=ptY+ay; let left,right,top,bottom;
-    if(xanchor==='left'){left=axX;right=axX+lw;} else if(xanchor==='right'){right=axX;left=axX-lw;} else {left=axX-lw/2;right=axX+lw/2;}
-    if(yanchor==='top'){top=ayY;bottom=ayY+lh;} else if(yanchor==='bottom'){bottom=ayY;top=ayY-lh;} else {top=ayY-lh/2;bottom=ayY+lh/2;}
-    return {left,right,top,bottom};
+  it.isolation=nearest;
+ });
+ items.sort((a,b)=>{
+  if(a.onFront!==b.onFront) return a.onFront?-1:1;
+  return b.isolation-a.isolation||b.row.overall-a.row.overall||a.row.cost-b.row.cost;
+ });
+ function labelBox(ptX,ptY,ax,ay,lw,lh,xanchor,yanchor){
+  const axX=ptX+ax, ayY=ptY+ay;
+  let left,right,top,bottom;
+  if(xanchor==='left'){left=axX;right=axX+lw;}
+  else if(xanchor==='right'){right=axX;left=axX-lw;}
+  else {left=axX-lw/2;right=axX+lw/2;}
+  if(yanchor==='top'){top=ayY;bottom=ayY+lh;}
+  else if(yanchor==='bottom'){bottom=ayY;top=ayY-lh;}
+  else {top=ayY-lh/2;bottom=ayY+lh/2;}
+  return {left,right,top,bottom};
+ }
+ function overlapsLabels(box,placed,skipIdx){
+  return placed.some((p,i)=>{
+   if(skipIdx!=null&&i===skipIdx) return false;
+   return !(box.right+LABEL_PAD<p.box.left||box.left-LABEL_PAD>p.box.right||box.bottom+LABEL_PAD<p.box.top||box.top-LABEL_PAD>p.box.bottom);
+  });
+ }
+ function hitsOtherMarkers(box, ownLabel){
+  return allMarkers.some(m=>{
+   if(m.label===ownLabel) return false;
+   const cx=clamp(m.px.x,box.left,box.right), cy=clamp(m.px.y,box.top,box.bottom);
+   const dx=m.px.x-cx, dy=m.px.y-cy;
+   return dx*dx+dy*dy<MARKER_R*MARKER_R;
+  });
+ }
+ function inBounds(box){
+  return box.left>=2&&box.right<=w-2&&box.top>=2&&box.bottom<=h-2;
+ }
+ function spillCost(box){
+  let c=0;
+  if(box.left<2) c+=2-box.left;
+  if(box.right>w-2) c+=box.right-(w-2);
+  if(box.top<2) c+=2-box.top;
+  if(box.bottom>h-2) c+=box.bottom-(h-2);
+  return c;
+ }
+ function findPlacement(item, placed, skipIdx){
+  const lw=item.size.wPx, lh=item.size.hPx;
+  const ptX=item.px.x, ptY=item.px.y;
+  let best=null;
+  for(const r of RADII){
+   for(const d of DIRS){
+    const ax=d.ux*r, ay=d.uy*r;
+    const box=labelBox(ptX,ptY,ax,ay,lw,lh,d.xa,d.ya);
+    if(!inBounds(box)) continue;
+    if(overlapsLabels(box,placed,skipIdx)||hitsOtherMarkers(box,item.row.label)) continue;
+    const score=r+Math.abs(d.ux)*0.35+Math.abs(d.uy)*0.35;
+    if(!best||score<best.score) best={ax,ay,xa:d.xa,ya:d.ya,box,score};
+   }
+   if(best&&best.score<=r+4) break;
   }
-  function overlaps(box,placed,skip){ return placed.some((p,i)=>{ if(skip!=null&&i===skip)return false; return !(box.right+LABEL_PAD<p.box.left||box.left-LABEL_PAD>p.box.right||box.bottom+LABEL_PAD<p.box.top||box.top-LABEL_PAD>p.box.bottom); }); }
-  function hitsMarkers(box,ownIdx){ return items.some(m=>{ if(m.idx===ownIdx)return false; const cx=clamp(m.px.x,box.left,box.right), cy=clamp(m.px.y,box.top,box.bottom); return (m.px.x-cx)**2+(m.px.y-cy)**2<MARKER_R*MARKER_R; }); }
-  function findPlacement(item,placed,skip){
-    let best=null;
-    for(const r of RADII){
-      for(const d of DIRS){
-        const ax=d.ux*r, ay=d.uy*r;
-        const box=labelBox(item.px.x,item.px.y,ax,ay,item.size.wPx,item.size.hPx,d.xa,d.ya);
-        if(box.left<2||box.right>w-2||box.top<2||box.bottom>h-2) continue;
-        if(overlaps(box,placed,skip)||hitsMarkers(box,item.idx)) continue;
-        const score=r+Math.abs(d.ux)*0.3+Math.abs(d.uy)*0.3;
-        if(!best||score<best.score) best={ax,ay,xa:d.xa,ya:d.ya,box,score};
-      }
-      if(best&&best.score<=r+4) break;
+  if(!best){
+   for(const r of RADII){
+    for(const d of DIRS){
+     const ax=d.ux*r, ay=d.uy*r;
+     const box=labelBox(ptX,ptY,ax,ay,lw,lh,d.xa,d.ya);
+     if(overlapsLabels(box,placed,skipIdx)||hitsOtherMarkers(box,item.row.label)) continue;
+     const score=r*2+spillCost(box)*5;
+     if(!best||score<best.score) best={ax,ay,xa:d.xa,ya:d.ya,box,score};
     }
-    if(!best){
-      const d=DIRS[0], r=36, ax=d.ux*r, ay=d.uy*r;
-      best={ax,ay,xa:d.xa,ya:d.ya,box:labelBox(item.px.x,item.px.y,ax,ay,item.size.wPx,item.size.hPx,d.xa,d.ya),score:999};
-    }
-    return best;
+   }
   }
-  const placed=[];
-  items.forEach(item=>placed.push({item,...findPlacement(item,placed,null)}));
-  return placed.map(({item,ax,ay,xa,ya})=>({
-    x:item.pt.x,y:item.pt.y,ax,ay,xref:'paper',yref:'paper',axref:'pixel',ayref:'pixel',
-    text:item.row.label.replace(' + ','<br>+ '),
-    showarrow:true,arrowhead:0,arrowsize:0.9,arrowwidth:1.2,
-    arrowcolor:item.onFront?arrowFrontier:arrowMuted,
-    xanchor:xa,yanchor:ya,align:xa==='right'?'right':xa==='center'?'center':'left',
-    font:{size:8,color:item.onFront?frontierColor:textColor,family:'IBM Plex Sans, sans-serif'},
-    bgcolor:'rgba(0,0,0,0)',bordercolor:'rgba(0,0,0,0)',borderwidth:0,borderpad:0,captureevents:false
-  }));
+  if(!best){
+   const d=DIRS[0], r=48, ax=d.ux*r, ay=d.uy*r;
+   best={ax,ay,xa:d.xa,ya:d.ya,box:labelBox(ptX,ptY,ax,ay,lw,lh,d.xa,d.ya),score:999};
+  }
+  return best;
+ }
+ const placed=[];
+ items.forEach(item=>placed.push({item,...findPlacement(item,placed,null)}));
+ for(let pass=0; pass<3; pass++){
+  for(let i=0; i<placed.length; i++){
+   const cur=placed[i];
+   const conflict=overlapsLabels(cur.box,placed,i)||hitsOtherMarkers(cur.box,cur.item.row.label);
+   if(!conflict) continue;
+   placed[i]={item:cur.item,...findPlacement(cur.item,placed,i)};
+  }
+ }
+ return placed.map(({item,ax,ay,xa,ya})=>({
+  x:item.pt.x, y:item.pt.y, ax, ay,
+  xref:'paper', yref:'paper', axref:'pixel', ayref:'pixel',
+  text:formatCaLabel(item.row),
+  showarrow:true, arrowhead:0, arrowsize:0.95, arrowwidth:1.4,
+  arrowcolor:item.onFront?arrowFrontier:arrowMuted,
+  standoff:0, startstandoff:0,
+  xanchor:xa, yanchor:ya,
+  align:xa==='right'?'right':xa==='center'?'center':'left',
+  font:{size:8,color:item.onFront?frontierColor:textColor,family:'IBM Plex Sans, sans-serif'},
+  bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(0,0,0,0)', borderwidth:0, borderpad:0,
+  captureevents:false
+ }));
 }
 function draw(){
-  const dark=isDark();
-  const frontier=paretoFrontAgents(AGENTS);
-  const frontierIds=new Set(frontier.map(a=>a.label));
-  const dominated=AGENTS.filter(a=>!frontierIds.has(a.label));
-  // Label frontier + top 12 overall to avoid 42-label soup
-  const labelIds=new Set([
-    ...frontier.map(a=>a.label),
-    ...[...AGENTS].sort((a,b)=>a.rank-b.rank).slice(0,12).map(a=>a.label)
-  ]);
-  const traces=[
-    {
-      x:dominated.map(a=>a.cost), y:dominated.map(a=>a.overall),
-      mode:'markers', type:'scatter', name:'Dominated',
-      marker:{size:10,color:'#6366f1',opacity:0.5},
-      customdata:dominated.map(a=>[a.label,a.quality,a.aa]),
-      hovertemplate:'%{customdata[0]}<br>Cost $%{x:.3f}<br>Overall %{y:.1f}<br>Quality %{customdata[1]:.1f}<br>AA %{customdata[2]:.1f}<extra></extra>'
-    },
-    {
-      x:frontier.map(a=>a.cost), y:frontier.map(a=>a.overall),
-      mode:'markers', type:'scatter', name:'Pareto frontier',
-      marker:{size:13,color:'#10b981',line:{width:2,color:dark?'#064e3b':'#ecfdf5'}},
-      customdata:frontier.map(a=>[a.label,a.quality,a.aa]),
-      hovertemplate:'%{customdata[0]}<br>Cost $%{x:.3f}<br>Overall %{y:.1f}<extra>Frontier</extra>'
-    },
-    {
-      x:frontier.map(a=>a.cost), y:frontier.map(a=>a.overall),
-      mode:'lines', type:'scatter',
-      line:{shape:'spline',dash:'dot',color:'#94a3b8',width:2},
-      hoverinfo:'skip', showlegend:false, name:'frontier-curve'
-    }
-  ];
-  const costs=AGENTS.map(a=>a.cost);
-  const xMin=Math.log10(Math.max(0.02, Math.min(...costs)*0.7));
-  const xMax=Math.log10(Math.max(...costs)*1.3);
-  Plotly.newPlot('chart', traces, {
-    margin:{t:28,r:70,b:70,l:56},
-    paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
-    font:{ color: dark?'#e2e8f0':'#0f172a', family:'IBM Plex Sans' },
-    xaxis:{ title:'Cost / task (USD)', type:'log', range:[xMin,xMax], gridcolor: dark?'#1e293b':'#e2e8f0', zeroline:false },
-    yaxis:{ title:'Overall ValueRank', gridcolor: dark?'#1e293b':'#e2e8f0', zeroline:false },
-    legend:{orientation:'h', y:-0.18},
-    annotations:[]
-  }, {displayModeBar:false, responsive:true}).then(()=>{
-    const gd=document.getElementById('chart');
-    return Plotly.relayout(gd,{ annotations: buildCaLabelAnnotations(frontierIds, labelIds, gd) });
-  });
+ const dark=isDark();
+ const frontier=paretoFrontAgents(AGENTS);
+ const frontierIds=new Set(frontier.map(a=>a.label));
+ const dominated=AGENTS.filter(a=>!frontierIds.has(a.label));
+ // Label frontier + top 8 overall — denser sets force far callouts / visual collisions
+ const labelIds=new Set([
+  ...frontier.map(a=>a.label),
+  ...[...AGENTS].sort((a,b)=>a.rank-b.rank).slice(0,8).map(a=>a.label)
+ ]);
+ const traces=[
+  {
+   x:dominated.map(a=>a.cost), y:dominated.map(a=>a.overall),
+   mode:'markers', type:'scatter', name:'Dominated',
+   marker:{size:10,color:'#6366f1',opacity:0.5},
+   customdata:dominated.map(a=>[a.label,a.quality,a.aa]),
+   hovertemplate:'%{customdata[0]}<br>Cost $%{x:.3f}<br>Overall %{y:.1f}<br>Quality %{customdata[1]:.1f}<br>AA %{customdata[2]:.1f}<extra></extra>'
+  },
+  {
+   x:frontier.map(a=>a.cost), y:frontier.map(a=>a.overall),
+   mode:'markers', type:'scatter', name:'Pareto frontier',
+   marker:{size:13,color:'#10b981',line:{width:2,color:dark?'#064e3b':'#ecfdf5'}},
+   customdata:frontier.map(a=>[a.label,a.quality,a.aa]),
+   hovertemplate:'%{customdata[0]}<br>Cost $%{x:.3f}<br>Overall %{y:.1f}<extra>Frontier</extra>'
+  },
+  {
+   x:frontier.map(a=>a.cost), y:frontier.map(a=>a.overall),
+   mode:'lines', type:'scatter',
+   line:{shape:'spline',dash:'dot',color:'#94a3b8',width:2},
+   hoverinfo:'skip', showlegend:false, name:'frontier-curve'
+  }
+ ];
+ const costs=AGENTS.map(a=>a.cost);
+ const xMin=Math.log10(Math.max(0.02, Math.min(...costs)*0.7));
+ const xMax=Math.log10(Math.max(...costs)*1.3);
+ Plotly.newPlot('chart', traces, {
+  margin:{t:28,r:88,b:96,l:56},
+  paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
+  font:{ color: dark?'#e2e8f0':'#0f172a', family:'IBM Plex Sans' },
+  xaxis:{
+   title:'Cost / task (USD, log)',
+   type:'log',
+   range:[xMin,xMax],
+   autorange:false,
+   tickvals:[0.05,0.1,0.25,0.5,1,2,5,10],
+   ticktext:['$0.05','$0.10','$0.25','$0.50','$1','$2','$5','$10'],
+   gridcolor: dark?'#1e293b':'#e2e8f0',
+   zeroline:false
+  },
+  yaxis:{ title:'Overall ValueRank', gridcolor: dark?'#1e293b':'#e2e8f0', zeroline:false },
+  legend:{orientation:'h', y:-0.18},
+  annotations:[]
+ }, {displayModeBar:false, responsive:true}).then(()=>{
+  const gd=document.getElementById('chart');
+  return Plotly.relayout(gd,{ annotations: buildCaLabelAnnotations(frontierIds, labelIds, gd) });
+ });
 }
 render();
 if (window.lucide) lucide.createIcons();
 </script>
 </body>
 </html>
-
