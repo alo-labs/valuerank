@@ -1,0 +1,67 @@
+{
+  "asOf": "2026-07-27T17:13:10.093651+00:00",
+  "cohortN": 18,
+  "rule": "exclude unless currently published implementation contains all 18 ranked models",
+  "benchmarks": [
+    {
+      "id": "APEX-Agents",
+      "keep": false,
+      "official": "https://www.mercor.com/apex/apex-agents-leaderboard/",
+      "secondary": "https://artificialanalysis.ai/evaluations/apex-agents-aa",
+      "note": "Incomplete for expanded July 2026 DeepSWE cohort"
+    },
+    {
+      "id": "ITBench",
+      "keep": false,
+      "official": "https://www.kaggle.com/benchmarks/ibm-research/itbench",
+      "secondary": "https://artificialanalysis.ai/evaluations/itbench-aa",
+      "note": "Exact cohort names missing"
+    },
+    {
+      "id": "MMMU-Pro",
+      "keep": false,
+      "official": "https://mmmu-benchmark.github.io/",
+      "secondary": "https://artificialanalysis.ai/evaluations/mmmu-pro",
+      "note": "Paper-era / incomplete"
+    },
+    {
+      "id": "MMLU-Pro",
+      "keep": false,
+      "official": "https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro",
+      "secondary": "https://www.kaggle.com/benchmarks/open-benchmarks/mmlu-pro",
+      "note": "Incomplete for n=18"
+    },
+    {
+      "id": "LiveCodeBench",
+      "keep": false,
+      "official": "https://livecodebench.github.io/",
+      "secondary": "https://artificialanalysis.ai/evaluations/livecodebench",
+      "note": "Incomplete"
+    },
+    {
+      "id": "Global-MMLU-Lite",
+      "keep": false,
+      "official": "https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite",
+      "note": "Incomplete"
+    },
+    {
+      "id": "AIME 2025",
+      "keep": false,
+      "official": "exam-only",
+      "secondary": "https://artificialanalysis.ai/evaluations/aime-2025",
+      "note": "No full frontier leaderboard"
+    },
+    {
+      "id": "MATH-500",
+      "keep": false,
+      "official": "dataset-only",
+      "secondary": "https://www.kaggle.com/benchmarks/open-benchmarks/math-500",
+      "note": "Incomplete"
+    }
+  ],
+  "alsoDroppedFromAACoverage": [
+    "IFBench",
+    "Terminal-Bench Hard",
+    "\u03c4\u00b2-Bench Telecom"
+  ]
+}

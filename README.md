@@ -1,79 +1,67 @@
 # ValueRank
 **Frontier AI model ranking focused on production value**
 
-**Version:** v1.2 
-**Updated:** June 20, 2026 
-**Scope:** 8 DeepSWE-listed models, 15 scored dimensions
+**Version:** v1.3  
+**Updated:** July 28, 2026  
+**Scope:** 18 DeepSWE Best models, 12 scored dimensions
 
 ## What ValueRank is
 
 ValueRank is a production-weighted ranking of frontier AI models. It combines benchmark quality, reliability, speed, and a composite cost term into a single rank-based score.
 
-v1.2 shrinks the cohort from 13 to 8 DeepSWE-listed models and adds Claude Fable 5, keeps hallucination resistance as a primary reliability factor, and reruns the benchmark-gap audit with an official-source-first pass plus current secondary implementations.
+v1.3 expands the cohort to the **full current DeepSWE Best roster (n=18)**, keeps the **zero-gap** rule (no neutral-50 fills), drops dimensions without full AA coverage on the new models, and uses **DeepSWE-only Cost** because AA Intelligence Index total eval cost is unpublished for `Kimi K2.7 Code`.
 
-> The five v1.1-ranked models that are no longer on DeepSWE (`GPT-5.4 Mini`, `MiMo-V2.5-Pro`, `MiniMax M3`, `GLM 5.1`, `DeepSeek V4-Pro`) are preserved with their v1.1 scores in [methodology.md](/Users/shafqat/valuerank/methodology.md#v11-scores-of-models-removed-from-cohort) for historical reference.
+- Keeps the ranked pool limited to **models on the current DeepSWE Best leaderboard**
+- Explicitly excludes off-roster historical models: **Grok-Build-0.1**, **Gemini 3 Flash**, **Claude Opus 4.6**
+- Includes **Grok 4.5**, **Claude Opus 5**, **GPT-5.6 Sol/Terra/Luna**, **Kimi K3**, **Muse Spark 1.1**, and other July 2026 DeepSWE entrants
+- Uses only **benchmarks with full coverage across all 18 ranked models**
+- Drops **IFBench**, **Terminal-Bench Hard**, and **τ²-Bench Telecom** (missing on newest AA model pages)
+- Reruns the excluded-benchmark audit against **official sources first**, then secondary implementations
 
-- Keeps the ranked pool limited to **models listed on DeepSWE**
-- Explicitly excludes **Grok-Build-0.1**
-- Explicitly excludes **Gemini 3 Flash**
-- Explicitly excludes **Claude Opus 4.6**
-- Adds **Claude Fable 5** *(NEW in v1.2)*
-- Keeps **AA-Omniscience Hallucination Rate** at **6%** weight, with **IFBench** at **12%**
-- Uses only **benchmarks with full coverage across all 8 ranked models**
-- Keeps the active score at **zero missing benchmark cells**
-- Reruns the excluded-benchmark audit against **official benchmark-owner sources first**, then current secondary implementations such as **Artificial Analysis**, **Kaggle Benchmarks**, and **LLM Stats**
-- Finds that the official-first audit still does **not** unlock any additional zero-gap benchmark
+## v1.3 Ranking
 
-## v1.2 Ranking
-
-Composite cost is built from normalized Artificial Analysis eval cost plus normalized DeepSWE average cost per task, then renormalized back to a `0–100` cost scale before rank-normalization.
+Cost is DeepSWE average cost per task scaled to 0–100 (highest-cost model = 100), then rank-normalized.
 
 | Rank | Model | Score | Quality | Composite Cost |
 |---|---|---:|---:|---:|
-| 1 | Gemini 3.1 Pro | 59.1 | 59.8 | $42.24 |
-| 2 | Gemini 3.5 Flash | 59.0 | 50.2 | $36.53 |
-| 3 | Claude Fable 5 | 57.6 | 76.5 | $100.00 |
-| 4 | GPT-5.5 | 56.9 | 66.2 | $47.72 |
-| 5 | GPT-5.4 | 56.7 | 51.9 | $39.22 |
-| 6 | Claude Opus 4.8 | 46.1 | 56.6 | $81.49 |
-| 7 | Kimi K2.7 | 38.5 | 18.2 | $14.75 |
-| 8 | Claude Sonnet 4.6 | 26.2 | 20.7 | $47.53 |
+| 1 | Kimi K3 | 66.9 | 67.9 | 17.61 |
+| 2 | Grok 4.5 | 62.8 | 48.1 | 9.17 |
+| 3 | Muse Spark 1.1 | 61.0 | 42.6 | 8.94 |
+| 4 | GPT-5.6 Terra | 60.7 | 61.7 | 18.75 |
+| 5 | GPT-5.6 Sol | 60.2 | 74.7 | 31.78 |
+| 6 | Claude Opus 5 | 57.1 | 75.8 | 44.85 |
+| 7 | GPT-5.6 Luna | 56.2 | 43.9 | 11.48 |
+| 8 | GPT-5.5 | 55.3 | 62.0 | 27.39 |
+| 9 | Claude Fable 5 | 53.0 | 75.2 | 81.93 |
+| 10 | GLM-5.2 | 52.4 | 43.8 | 14.85 |
+| 11 | Gemini 3.6 Flash | 51.7 | 39.9 | 13.37 |
+| 12 | GPT-5.4 | 47.8 | 48.1 | 21.40 |
+| 13 | Claude Opus 4.8 | 42.4 | 56.9 | 50.08 |
+| 14 | Gemini 3.1 Pro | 39.7 | 47.4 | 35.91 |
+| 15 | Kimi K2.7 Code | 34.8 | 9.6 | 10.68 |
+| 16 | Gemini 3.5 Flash | 34.8 | 34.6 | 27.80 |
+| 17 | Claude Sonnet 5 | 32.8 | 48.2 | 100.00 |
+| 18 | Claude Sonnet 4.6 | 30.3 | 19.7 | 20.91 |
 
-## v1.2 Frontier
+## v1.3 Frontier
 
-Undominated on composite cost vs. quality (6 models):
+Undominated on composite cost vs. quality:
 
-- Gemini 3.1 Pro
-- Gemini 3.5 Flash
-- Claude Fable 5
-- GPT-5.5
-- GPT-5.4
-- Kimi K2.7
+- Claude Opus 5
+- GPT-5.6 Sol
+- Kimi K3
+- Grok 4.5
+- Muse Spark 1.1
 
-## Sources Used in v1.2
+## Sources Used in v1.3
 
-Active scored dimensions still use primary sources:
-
-- [DeepSWE](https://deepswe.datacurve.ai/)
+- [DeepSWE](https://deepswe.datacurve.ai/) (Best roster; updated July 25, 2026)
 - [Artificial Analysis model pages](https://artificialanalysis.ai/models)
-- [Artificial Analysis Omniscience evaluation](https://artificialanalysis.ai/evaluations/omniscience?omniscience-hallucination-rate=hallucination-rate&omniscience-index=omniscience-index-vs-cost&omniscience-accuracy=accuracy-vs-cost#omniscience-hallucination-rate-tabs)
-- [Ai2 IFBench analysis](https://allenai.org/blog/ifbench-artificial-analysis)
-
-The official-first gap audit also checked:
-
-- [Mercor APEX-Agents leaderboard](https://www.mercor.com/apex/apex-agents-leaderboard/)
-- [IBM Research ITBench Kaggle benchmark](https://www.kaggle.com/benchmarks/ibm-research/itbench)
-- [MMMU benchmark site](https://mmmu-benchmark.github.io/)
-- [TIGER-Lab MMLU-Pro leaderboard](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro)
-- [LiveCodeBench official site](https://livecodebench.github.io/)
-- [Cohere Labs Global-MMLU-Lite Kaggle benchmark](https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite)
-- [Open Benchmarks AIME 2025 Kaggle benchmark](https://www.kaggle.com/benchmarks/open-benchmarks/aime-2025)
-- [Open Benchmarks MATH-500 Kaggle benchmark](https://www.kaggle.com/benchmarks/open-benchmarks/math-500)
-- Secondary benchmark implementations on [Artificial Analysis evaluations](https://artificialanalysis.ai/evaluations), [Kaggle Benchmarks](https://www.kaggle.com/benchmarks), and [LLM Stats](https://llm-stats.com/benchmarks)
+- Evidence ledger: [`.refresh/v1.3/`](.refresh/v1.3/)
 
 ## Files
 
-- [scores.md](/Users/shafqat/valuerank/scores.md): final rankings and normalized scores
-- [raw-data.md](/Users/shafqat/valuerank/raw-data.md): benchmark inputs and official-first exclusion audit
-- [methodology.md](/Users/shafqat/valuerank/methodology.md): scoring method, weights, cohort rules, and audit policy
-- [site/index.html](/Users/shafqat/valuerank/site/index.html): published static site
+- [scores.md](scores.md): final rankings and normalized scores
+- [raw-data.md](raw-data.md): benchmark inputs and official-first exclusion audit
+- [methodology.md](methodology.md): scoring method, weights, cohort rules, and audit policy
+- [site/index.html](site/index.html): published static site

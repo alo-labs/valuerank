@@ -1,0 +1,25 @@
+n=18 retained_dims=12 costMode=deepswe-only
+RETAINED: ['Cost(32.0513%)', 'Hallucination(7.6923%)', 'DeepSWE(8.9744%)', 'GDPval-AA(7.6923%)', 'AA-LCR(5.1282%)', 'Omni Acc(5.1282%)', 'HLE(5.1282%)', 'GPQA(5.1282%)', 'SciCode(5.1282%)', 'CritPt(3.8462%)', 'AA Intelligence Index(7.6923%)', 'Speed(6.4103%)']
+DROPPED: ["IFBench missing=['Claude Opus 5', 'Kimi K3', 'GPT-5.6 Luna', 'Grok 4.5', 'Claude Sonnet 5', 'Gemini 3.6 Flash']", "Terminal-Bench Hard missing=['Claude Opus 5', 'Kimi K3', 'GPT-5.6 Luna', 'Grok 4.5', 'Claude Sonnet 5', 'Gemini 3.6 Flash']", "τ²-Bench Telecom missing=['Claude Opus 5', 'Kimi K3', 'GPT-5.6 Luna', 'Grok 4.5', 'Claude Sonnet 5', 'Gemini 3.6 Flash']"]
+
+RANKING:
+ 1 Kimi K3                overall= 66.9 quality= 67.9 qrank= 4 cost= 17.61 pareto=True
+ 2 Grok 4.5               overall= 62.8 quality= 48.1 qrank= 9 cost=  9.17 pareto=True
+ 3 Muse Spark 1.1         overall= 61.0 quality= 42.6 qrank=14 cost=  8.94 pareto=True
+ 4 GPT-5.6 Terra          overall= 60.7 quality= 61.7 qrank= 6 cost= 18.75 pareto=False
+ 5 GPT-5.6 Sol            overall= 60.2 quality= 74.7 qrank= 3 cost= 31.78 pareto=True
+ 6 Claude Opus 5          overall= 57.1 quality= 75.8 qrank= 1 cost= 44.85 pareto=True
+ 7 GPT-5.6 Luna           overall= 56.2 quality= 43.9 qrank=12 cost= 11.48 pareto=False
+ 8 GPT-5.5                overall= 55.3 quality= 62.0 qrank= 5 cost= 27.39 pareto=False
+ 9 Claude Fable 5         overall= 53.0 quality= 75.2 qrank= 2 cost= 81.93 pareto=False
+10 GLM-5.2                overall= 52.4 quality= 43.8 qrank=13 cost= 14.85 pareto=False
+11 Gemini 3.6 Flash       overall= 51.7 quality= 39.9 qrank=15 cost= 13.37 pareto=False
+12 GPT-5.4                overall= 47.8 quality= 48.1 qrank=10 cost= 21.40 pareto=False
+13 Claude Opus 4.8        overall= 42.4 quality= 56.9 qrank= 7 cost= 50.08 pareto=False
+14 Gemini 3.1 Pro         overall= 39.7 quality= 47.4 qrank=11 cost= 35.91 pareto=False
+15 Kimi K2.7 Code         overall= 34.8 quality=  9.6 qrank=18 cost= 10.68 pareto=False
+16 Gemini 3.5 Flash       overall= 34.8 quality= 34.6 qrank=16 cost= 27.80 pareto=False
+17 Claude Sonnet 5        overall= 32.8 quality= 48.2 qrank= 8 cost=100.00 pareto=False
+18 Claude Sonnet 4.6      overall= 30.3 quality= 19.7 qrank=17 cost= 20.91 pareto=False
+
+PARETO: ['Claude Opus 5', 'GPT-5.6 Sol', 'Kimi K3', 'Grok 4.5', 'Muse Spark 1.1']

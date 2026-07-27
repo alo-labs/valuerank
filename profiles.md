@@ -5,6 +5,9 @@
 
 ---
 
+> **v1.3 (July 28, 2026):** Main ranking now covers **18 DeepSWE Best models** × **12 zero-gap dimensions**. Overall #1 **Kimi K3**; quality #1 **Claude Opus 5**; Pareto: Kimi K3, Grok 4.5, Muse Spark 1.1, GPT-5.6 Sol, Claude Opus 5. See [scores.md](scores.md).
+
+
 ## 11. Model Profiles
 
 ### 11.1 Gemini 3.1 Pro 🥇

@@ -1,0 +1,170 @@
+{
+  "coverage": {
+    "costComposite": {
+      "label": "Cost",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 25
+    },
+    "ifbench": {
+      "label": "IFBench",
+      "missing": [
+        "Claude Opus 5",
+        "Kimi K3",
+        "GPT-5.6 Luna",
+        "Grok 4.5",
+        "Claude Sonnet 5",
+        "Gemini 3.6 Flash"
+      ],
+      "n_missing": 6,
+      "weight": 12
+    },
+    "omniHalluc": {
+      "label": "Hallucination",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 6
+    },
+    "terminalBenchHard": {
+      "label": "Terminal-Bench Hard",
+      "missing": [
+        "Claude Opus 5",
+        "Kimi K3",
+        "GPT-5.6 Luna",
+        "Grok 4.5",
+        "Claude Sonnet 5",
+        "Gemini 3.6 Flash"
+      ],
+      "n_missing": 6,
+      "weight": 6
+    },
+    "deepswePassAt1": {
+      "label": "DeepSWE",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 7
+    },
+    "gdpvalNormalized": {
+      "label": "GDPval-AA",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 6
+    },
+    "tau2": {
+      "label": "\u03c4\u00b2-Bench Telecom",
+      "missing": [
+        "Claude Opus 5",
+        "Kimi K3",
+        "GPT-5.6 Luna",
+        "Grok 4.5",
+        "Claude Sonnet 5",
+        "Gemini 3.6 Flash"
+      ],
+      "n_missing": 6,
+      "weight": 5
+    },
+    "lcr": {
+      "label": "AA-LCR",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 4
+    },
+    "omniAcc": {
+      "label": "Omni Acc",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 4
+    },
+    "hle": {
+      "label": "HLE",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 4
+    },
+    "gpqa": {
+      "label": "GPQA",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 4
+    },
+    "scicode": {
+      "label": "SciCode",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 4
+    },
+    "critpt": {
+      "label": "CritPt",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 3
+    },
+    "intelligenceIndex": {
+      "label": "AA Intelligence Index",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 6
+    },
+    "speed": {
+      "label": "Speed",
+      "missing": [],
+      "n_missing": 0,
+      "weight": 5
+    }
+  },
+  "retained": [
+    "costComposite",
+    "omniHalluc",
+    "deepswePassAt1",
+    "gdpvalNormalized",
+    "lcr",
+    "omniAcc",
+    "hle",
+    "gpqa",
+    "scicode",
+    "critpt",
+    "intelligenceIndex",
+    "speed"
+  ],
+  "dropped": [
+    {
+      "key": "ifbench",
+      "label": "IFBench",
+      "missing": [
+        "Claude Opus 5",
+        "Kimi K3",
+        "GPT-5.6 Luna",
+        "Grok 4.5",
+        "Claude Sonnet 5",
+        "Gemini 3.6 Flash"
+      ],
+      "reason": "incomplete cohort coverage"
+    },
+    {
+      "key": "terminalBenchHard",
+      "label": "Terminal-Bench Hard",
+      "missing": [
+        "Claude Opus 5",
+        "Kimi K3",
+        "GPT-5.6 Luna",
+        "Grok 4.5",
+        "Claude Sonnet 5",
+        "Gemini 3.6 Flash"
+      ],
+      "reason": "incomplete cohort coverage"
+    },
+    {
+      "key": "tau2",
+      "label": "\u03c4\u00b2-Bench Telecom",
+      "missing": [
+        "Claude Opus 5",
+        "Kimi K3",
+        "GPT-5.6 Luna",
+        "Grok 4.5",
+        "Claude Sonnet 5",
+        "Gemini 3.6 Flash"
+      ],
+      "reason": "incomplete cohort coverage"
+    }
+  ]
+}

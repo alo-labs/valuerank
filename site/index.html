@@ -1215,7 +1215,7 @@
   <div class="nav-brand">
     <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
       <span class="logo">ValueRank</span>
-      <span class="badge">v1.2</span>
+      <span class="badge">v1.3</span>
     </a>
   </div>
   <div class="mode-switcher">
@@ -1231,7 +1231,7 @@
     <a href="#faq">FAQ</a>
   </div>
   <div class="nav-right">
-    <div class="nav-meta">June 20, 2026 · 8 models · 15 dimensions</div>
+    <div class="nav-meta">July 28, 2026 · 18 models · 12 dimensions</div>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
       <i data-lucide="sun" class="icon-sun"></i>
       <i data-lucide="moon" class="icon-moon"></i>
@@ -1251,7 +1251,7 @@
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-pulse"></span>
-          Production AI Ranking Framework · v1.2
+          Production AI Ranking Framework · v1.3
         </div>
         <h1 class="hero-title">
           Which AI Model<br>
@@ -1259,7 +1259,7 @@
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank now ranks the <strong>current DeepSWE leaderboard cohort</strong> across a <strong>zero-gap 15-dimension set</strong>. v1.2 <strong>shrinks the cohort from 13 to 8 models</strong> by dropping five non-DeepSWE-listed models (GPT-5.4 Mini, MiMo-V2.5-Pro, MiniMax M3, GLM 5.1, DeepSeek V4-Pro) and <strong>adds Claude Fable 5</strong>, the new Anthropic frontier. Kimi is now <strong>Kimi K2.7 Code</strong> (was K2.6). v1.2 keeps <strong>AA-Omniscience Hallucination Rate</strong> at 6%, preserves the composite-cost method of <strong>normalized AA eval cost + normalized DeepSWE avg cost</strong>, and reruns the benchmark-gap audit against official-owner sources first, then current secondary implementations.
+          ValueRank now ranks the <strong>full DeepSWE Best roster (n=18)</strong> across a <strong>zero-gap 12-dimension set</strong>. v1.3 <strong>expands from 8 to 18 models</strong> (Claude Opus 5, GPT-5.6 Sol/Terra/Luna, Kimi K3, Grok 4.5, Muse Spark, Sonnet 5, GLM-5.2, Gemini 3.6 Flash, and more), <strong>drops IFBench / Terminal-Bench Hard / τ²-Bench</strong> for incomplete AA coverage on newest models, and uses <strong>DeepSWE-only Cost</strong> because AA Index total eval cost is unpublished for Kimi K2.7 Code.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1349,7 +1349,7 @@
     </div>
     <div style="margin-top:12px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
       <span class="seal-note">Scores within ±2.5 pts are statistically tied (SEAL CI band)</span>
-      <span class="seal-note">v1.2 uses zero missing benchmark cells and no neutral-fill placeholders</span>
+      <span class="seal-note">v1.3 uses zero missing benchmark cells and no neutral-fill placeholders</span>
       <span class="seal-note" id="cost-note">Cost weight: 25% (default)</span>
     </div>
 
@@ -1357,7 +1357,7 @@
       <div class="insight-card">
         <div class="insight-icon">🎯</div>
         <div class="insight-title">Pareto Finding</div>
-        <div class="insight-body">The Pareto frontier is now a <strong>6-model</strong> set: <strong>Gemini 3.1 Pro</strong>, <strong>Gemini 3.5 Flash</strong>, <strong>Claude Fable 5</strong>, <strong>GPT-5.5</strong>, <strong>GPT-5.4</strong>, and <strong>Kimi K2.7</strong>. The smaller v1.2 cohort tightens the frontier, with <strong>Claude Opus 4.8</strong> and <strong>Claude Sonnet 4.6</strong> dominated on cost.</div>
+        <div class="insight-body">The Pareto frontier is a <strong>5-model</strong> set: <strong>Kimi K3</strong>, <strong>Grok 4.5</strong>, <strong>Muse Spark 1.1</strong>, <strong>GPT-5.6 Sol</strong>, and <strong>Claude Opus 5</strong>. Cost is DeepSWE-only in v1.3.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">💡</div>
@@ -1372,7 +1372,7 @@
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
         <div class="insight-title">v1.2 Release</div>
-        <div class="insight-body">v1.2 shrinks the cohort from <strong>13 to 8 DeepSWE-listed models</strong>, dropping <strong>GPT-5.4 Mini</strong>, <strong>MiMo-V2.5-Pro</strong>, <strong>MiniMax M3</strong>, <strong>GLM 5.1</strong>, and <strong>DeepSeek V4-Pro</strong>, and adds <strong>Claude Fable 5</strong>. Kimi moves from <strong>K2.6</strong> to <strong>K2.7 Code</strong>. The Pareto frontier grows from <strong>3 to 6 models</strong>.</div>
+        <div class="insight-body">v1.3 expands the cohort to <strong>18 DeepSWE Best models</strong>, retains <strong>12 zero-gap dimensions</strong>, and sets a <strong>5-model Pareto frontier</strong> led by cost-efficient quality (Kimi K3, Grok 4.5, Muse Spark) plus quality apex models (GPT-5.6 Sol, Claude Opus 5).</div>
       </div>
     </div>
   </div>
@@ -1615,7 +1615,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v1.2 · June 20, 2026 · 8 models × 15 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v1.3 · July 28, 2026 · 18 models × 12 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -1631,18 +1631,18 @@
 // ─────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────
-const DIM_KEYS  = ['Cost','IF','Halluc','TermHard','DeepSWE','GDP','Tau2','LCR','OmniAcc','HLE','GPQA','Sci','CritPt','AAI','Spd'];
-const DIM_FULL  = ['Composite Cost','IFBench','AA-Omniscience Hallucination Rate','Terminal-Bench Hard','DeepSWE','GDPval-AA','τ²-Bench Telecom','AA-LCR','AA-Omniscience Accuracy','Humanity\'s Last Exam','GPQA Diamond','SciCode','CritPt','Artificial Analysis Index','Speed (tok/s)'];
-const DIM_WEIGHTS = [25,12,6,6,7,6,5,4,4,4,4,4,3,6,5];
-const DIM_CAT   = ['cost','rely','rely','code','code','code','code','code','rely','intel','intel','intel','intel','prod','prod'];
+const DIM_KEYS  = ["Cost", "Halluc", "DeepSWE", "GDP", "LCR", "OmniAcc", "HLE", "GPQA", "Sci", "CritPt", "AAI", "Spd"];
+const DIM_FULL  = ["Composite Cost", "AA-Omniscience Hallucination Rate", "DeepSWE", "GDPval-AA", "AA-LCR", "AA-Omniscience Accuracy", "Humanity's Last Exam", "GPQA Diamond", "SciCode", "CritPt", "Artificial Analysis Index", "Speed (tok/s)"];
+const DIM_WEIGHTS = [32.0513, 7.6923, 8.9744, 7.6923, 5.1282, 5.1282, 5.1282, 5.1282, 5.1282, 3.8462, 7.6923, 6.4103];
+const DIM_CAT   = ["cost", "rely", "code", "code", "code", "rely", "intel", "intel", "intel", "intel", "prod", "prod"];
 
 // Macro-category definitions for decomposition
 const MACRO_CATS = [
   { key:'cost',  label:'Cost',           color:'#22c55e', dimIdxs:[0] },
-  { key:'rely',  label:'Reliability',    color:'#a78bfa', dimIdxs:[1,2,8] },
-  { key:'code',  label:'Agentic',        color:'#3b82f6', dimIdxs:[3,4,5,6,7] },
-  { key:'intel', label:'Intelligence',   color:'#eab308', dimIdxs:[9,10,11,12] },
-  { key:'prod',  label:'Platform',       color:'#f97316', dimIdxs:[13,14] },
+  { key:'rely',  label:'Reliability',    color:'#a78bfa', dimIdxs:[1,5] },
+  { key:'code',  label:'Agentic',        color:'#3b82f6', dimIdxs:[2,3,4] },
+  { key:'intel', label:'Intelligence',   color:'#eab308', dimIdxs:[6,7,8,9] },
+  { key:'prod',  label:'Platform',       color:'#f97316', dimIdxs:[10,11] },
 ];
 
 const TIER_COLORS = {
@@ -1651,49 +1651,87 @@ const TIER_COLORS = {
 };
 const DEV_COLORS = {
   'Google DeepMind':'#4285F4','OpenAI':'#10a37f','Kay (alo-exp)':'#6366f1',
-  'Moonshot AI':'#8b5cf6','Zhipu AI':'#06b6d4','MiniMax':'#f59e0b',
+  'Moonshot AI':'#8b5cf6','Zhipu AI':'#06b6d4','Z AI':'#06b6d4','MiniMax':'#f59e0b',
   'Alibaba':'#ff6900','DeepSeek':'#64748b','Anthropic':'#d4a574',
-  'Mistral AI':'#ff7043','Amazon':'#ff9900','xAI':'#1a1a2e','Meta':'#0066ff',
+  'Mistral AI':'#ff7043','Amazon':'#ff9900','xAI':'#1a1a2e','SpaceXAI':'#736cd3','Meta':'#0066ff',
   'Microsoft':'#0078d4','Xiaomi':'#ff6700','Z-AI':'#06b6d4'
 };
 
-// Dims array order: Cost IF Halluc TermHard DeepSWE GDP Tau2 LCR OmniAcc HLE GPQA Sci CritPt AAI Spd
-// isMissing: 1 = ⊘ cell (real score of 50.0 counts as isMissing=0 even if it happens to equal 50)
+// Dims: Cost Halluc DeepSWE GDP LCR OmniAcc HLE GPQA Sci CritPt AAI Spd
 const MODELS = [
-  { rank:1, name:'Gemini 3.1 Pro', shortName:'Gemini', developer:'Google DeepMind', evalCost:42.24, aaEvalCost:859.81, deepSweCost:9.48, aaCostNorm:13.81, deepSweCostNorm:70.68, overallScore:59.1, qualityScore:59.8, qualityRank:3, missingCount:0,
-    dims:[57.1, 100.0, 71.4, 42.9, 0.0, 0.0, 85.7, 71.4, 85.7, 71.4, 100.0, 85.7, 42.9, 14.3, 71.4],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:1, v80:1, v90:1, v100:1, v110:1, v120:1} },
-  { rank:2, name:'Gemini 3.5 Flash', shortName:'Gemini Flash', developer:'Google DeepMind', evalCost:36.53, aaEvalCost:1141.63, deepSweCost:7.34, aaCostNorm:18.33, deepSweCostNorm:54.73, overallScore:59.0, qualityScore:50.2, qualityRank:6, missingCount:0,
-    dims:[85.7, 85.7, 42.9, 0.0, 42.9, 28.6, 71.4, 28.6, 71.4, 28.6, 57.1, 28.6, 28.6, 42.9, 100.0],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:8, v80:8, v90:8, v100:8, v110:8, v120:2} },
-  { rank:3, name:'Claude Fable 5', shortName:'Claude Fable 5', developer:'Anthropic', evalCost:100.00, aaEvalCost:6227.74, deepSweCost:13.41, aaCostNorm:100.00, deepSweCostNorm:100.00, overallScore:57.6, qualityScore:76.5, qualityRank:1, missingCount:0,
-    dims:[0.0, 42.9, 57.1, 100.0, 100.0, 100.0, 100.0, 42.9, 100.0, 100.0, 71.4, 100.0, 100.0, 100.0, 0.0],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:3} },
-  { rank:4, name:'GPT-5.5', shortName:'GPT-5.5', developer:'OpenAI', evalCost:47.72, aaEvalCost:2588.36, deepSweCost:7.23, aaCostNorm:41.56, deepSweCostNorm:53.87, overallScore:56.9, qualityScore:66.2, qualityRank:2, missingCount:0,
-    dims:[28.6, 71.4, 14.3, 85.7, 85.7, 71.4, 42.9, 100.0, 57.1, 57.1, 85.7, 57.1, 85.7, 71.4, 42.9],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:2, v80:2, v90:5, v100:2, v110:2, v120:4} },
-  { rank:5, name:'GPT-5.4', shortName:'GPT-5.4', developer:'OpenAI', evalCost:39.22, aaEvalCost:2261.30, deepSweCost:5.65, aaCostNorm:36.31, deepSweCostNorm:42.14, overallScore:56.7, qualityScore:51.9, qualityRank:5, missingCount:0,
-    dims:[71.4, 57.1, 0.0, 57.1, 57.1, 57.1, 14.3, 85.7, 42.9, 42.9, 35.7, 71.4, 71.4, 57.1, 85.7],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:6, v80:6, v90:12, v100:6, v110:5, v120:5} },
-  { rank:6, name:'Claude Opus 4.8', shortName:'Opus 4.8', developer:'Anthropic', evalCost:81.49, aaEvalCost:4011.58, deepSweCost:13.22, aaCostNorm:64.41, deepSweCostNorm:98.57, overallScore:46.1, qualityScore:56.6, qualityRank:4, missingCount:0,
-    dims:[14.3, 14.3, 100.0, 71.4, 71.4, 85.7, 57.1, 14.3, 28.6, 85.7, 35.7, 42.9, 57.1, 85.7, 57.1],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:7, v80:7, v90:6, v100:7, v110:7, v120:6} },
-  { rank:7, name:'Kimi K2.7', shortName:'Kimi', developer:'Moonshot AI', evalCost:14.75, aaEvalCost:530.36, deepSweCost:2.82, aaCostNorm:8.52, deepSweCostNorm:20.99, overallScore:38.5, qualityScore:18.2, qualityRank:8, missingCount:0,
-    dims:[100.0, 28.6, 28.6, 14.3, 28.6, 14.3, 28.6, 0.0, 0.0, 14.3, 14.3, 14.3, 14.3, 0.0, 28.6],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:5, v80:5, v90:4, v100:5, v110:6, v120:7} },
-  { rank:8, name:'Claude Sonnet 4.6', shortName:'Sonnet 4.6', developer:'Anthropic', evalCost:47.53, aaEvalCost:3355.85, deepSweCost:5.52, aaCostNorm:53.89, deepSweCostNorm:41.17, overallScore:26.2, qualityScore:20.7, qualityRank:7, missingCount:0,
-    dims:[42.9, 0.0, 85.7, 28.6, 14.3, 42.9, 0.0, 57.1, 14.3, 0.0, 0.0, 0.0, 0.0, 28.6, 14.3],
-    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-    vRanks:{v70:13, v80:13, v90:11, v100:13, v110:13, v120:8} },
+  { rank:1, name:"Kimi K3", shortName:"Kimi K3", developer:"Moonshot AI", evalCost:17.61, aaEvalCost:2437.41, deepSweCost:4.65, aaCostNorm:43.29, deepSweCostNorm:17.61, overallScore:66.9, qualityScore:67.9, qualityRank:4, missingCount:0,
+    dims:[64.7, 58.8, 76.5, 82.4, 100.0, 41.2, 64.7, 85.3, 88.2, 67.6, 82.4, 0.0],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:1} },
+  { rank:2, name:"Grok 4.5", shortName:"Grok 4.5", developer:"SpaceXAI", evalCost:9.17, aaEvalCost:639.87, deepSweCost:2.42, aaCostNorm:11.36, deepSweCostNorm:9.17, overallScore:62.8, qualityScore:48.1, qualityRank:9, missingCount:0,
+    dims:[94.1, 52.9, 50.0, 52.9, 14.7, 70.6, 35.3, 70.6, 52.9, 29.4, 58.8, 29.4],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:2} },
+  { rank:3, name:"Muse Spark 1.1", shortName:"Muse Spark", developer:"Meta", evalCost:8.94, aaEvalCost:548.07, deepSweCost:2.36, aaCostNorm:9.73, deepSweCostNorm:8.94, overallScore:61.0, qualityScore:42.6, qualityRank:14, missingCount:0,
+    dims:[100.0, 82.4, 41.2, 17.6, 0.0, 23.5, 76.5, 17.6, 82.4, 23.5, 29.4, 64.7],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:3} },
+  { rank:4, name:"GPT-5.6 Terra", shortName:"GPT-5.6 Terra", developer:"OpenAI", evalCost:18.75, aaEvalCost:2060.40, deepSweCost:4.95, aaCostNorm:36.59, deepSweCostNorm:18.75, overallScore:60.7, qualityScore:61.7, qualityRank:6, missingCount:0,
+    dims:[58.8, 23.5, 85.3, 64.7, 82.4, 35.3, 52.9, 52.9, 47.1, 94.1, 70.6, 70.6],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:4} },
+  { rank:5, name:"GPT-5.6 Sol", shortName:"GPT-5.6 Sol", developer:"OpenAI", evalCost:31.78, aaEvalCost:3442.81, deepSweCost:8.39, aaCostNorm:61.15, deepSweCostNorm:31.78, overallScore:60.2, qualityScore:74.7, qualityRank:3, missingCount:0,
+    dims:[29.4, 5.9, 94.1, 88.2, 70.6, 94.1, 88.2, 97.1, 67.6, 100.0, 88.2, 47.1],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:5} },
+  { rank:6, name:"Claude Opus 5", shortName:"Opus 5", developer:"Anthropic", evalCost:44.85, aaEvalCost:3835.51, deepSweCost:11.84, aaCostNorm:68.12, deepSweCostNorm:44.85, overallScore:57.1, qualityScore:75.8, qualityRank:1, missingCount:0,
+    dims:[17.6, 64.7, 100.0, 100.0, 38.2, 76.5, 94.1, 76.5, 58.8, 88.2, 100.0, 17.6],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:6} },
+  { rank:7, name:"GPT-5.6 Luna", shortName:"GPT-5.6 Luna", developer:"OpenAI", evalCost:11.48, aaEvalCost:944.97, deepSweCost:3.03, aaCostNorm:16.78, deepSweCostNorm:11.48, overallScore:56.2, qualityScore:43.9, qualityRank:12, missingCount:0,
+    dims:[82.4, 0.0, 67.6, 58.8, 82.4, 29.4, 11.8, 26.5, 17.6, 47.1, 41.2, 88.2],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:7} },
+  { rank:8, name:"GPT-5.5", shortName:"GPT-5.5", developer:"OpenAI", evalCost:27.39, aaEvalCost:2777.91, deepSweCost:7.23, aaCostNorm:49.34, deepSweCostNorm:27.39, overallScore:55.3, qualityScore:62.0, qualityRank:5, missingCount:0,
+    dims:[41.2, 17.6, 67.6, 41.2, 94.1, 88.2, 58.8, 85.3, 67.6, 76.5, 64.7, 52.9],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:4, v130:8} },
+  { rank:9, name:"Claude Fable 5", shortName:"Fable 5", developer:"Anthropic", evalCost:81.93, aaEvalCost:5630.52, deepSweCost:21.63, aaCostNorm:100.00, deepSweCostNorm:81.93, overallScore:53.0, qualityScore:75.2, qualityRank:2, missingCount:0,
+    dims:[5.9, 41.2, 85.3, 94.1, 38.2, 100.0, 100.0, 58.8, 100.0, 82.4, 94.1, 35.3],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:3, v130:9} },
+  { rank:10, name:"GLM-5.2", shortName:"GLM-5.2", developer:"Z AI", evalCost:14.85, aaEvalCost:765.10, deepSweCost:3.92, aaCostNorm:13.59, deepSweCostNorm:14.85, overallScore:52.4, qualityScore:43.8, qualityRank:13, missingCount:0,
+    dims:[70.6, 100.0, 23.5, 47.1, 58.8, 0.0, 29.4, 5.9, 11.8, 55.9, 35.3, 94.1],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:10} },
+  { rank:11, name:"Gemini 3.6 Flash", shortName:"Gem 3.6 Flash", developer:"Google DeepMind", evalCost:13.37, aaEvalCost:726.70, deepSweCost:3.53, aaCostNorm:12.91, deepSweCostNorm:13.37, overallScore:51.7, qualityScore:39.9, qualityRank:15, missingCount:0,
+    dims:[76.5, 47.1, 29.4, 35.3, 29.4, 58.8, 17.6, 64.7, 23.5, 11.8, 17.6, 100.0],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:11} },
+  { rank:12, name:"GPT-5.4", shortName:"GPT-5.4", developer:"OpenAI", evalCost:21.40, aaEvalCost:2185.46, deepSweCost:5.65, aaCostNorm:38.81, deepSweCostNorm:21.40, overallScore:47.8, qualityScore:48.1, qualityRank:10, missingCount:0,
+    dims:[47.1, 11.8, 35.3, 29.4, 82.4, 52.9, 47.1, 38.2, 76.5, 67.6, 47.1, 76.5],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:5, v130:12} },
+  { rank:13, name:"Claude Opus 4.8", shortName:"Opus 4.8", developer:"Anthropic", evalCost:50.08, aaEvalCost:3752.55, deepSweCost:13.22, aaCostNorm:66.65, deepSweCostNorm:50.08, overallScore:42.4, qualityScore:56.9, qualityRank:7, missingCount:0,
+    dims:[11.8, 94.1, 58.8, 70.6, 14.7, 47.1, 82.4, 38.2, 35.3, 55.9, 76.5, 23.5],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:6, v130:13} },
+  { rank:14, name:"Gemini 3.1 Pro", shortName:"Gem 3.1 Pro", developer:"Google DeepMind", evalCost:35.91, aaEvalCost:815.11, deepSweCost:9.48, aaCostNorm:14.48, deepSweCostNorm:35.91, overallScore:39.7, qualityScore:47.4, qualityRank:11, missingCount:0,
+    dims:[23.5, 70.6, 0.0, 0.0, 64.7, 82.4, 70.6, 97.1, 94.1, 41.2, 5.9, 58.8],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:1, v130:14} },
+  { rank:15, name:"Kimi K2.7 Code", shortName:"Kimi K2.7", developer:"Moonshot AI", evalCost:10.68, aaEvalCost:null, deepSweCost:2.82, aaCostNorm:null, deepSweCostNorm:10.68, overallScore:34.8, qualityScore:9.6, qualityRank:18, missingCount:0,
+    dims:[88.2, 29.4, 11.8, 5.9, 5.9, 11.8, 5.9, 11.8, 5.9, 5.9, 0.0, 5.9],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:7, v130:15} },
+  { rank:16, name:"Gemini 3.5 Flash", shortName:"Gem 3.5 Flash", developer:"Google DeepMind", evalCost:27.80, aaEvalCost:1040.88, deepSweCost:7.34, aaCostNorm:18.49, deepSweCostNorm:27.80, overallScore:34.8, qualityScore:34.6, qualityRank:16, missingCount:0,
+    dims:[35.3, 35.3, 17.6, 11.8, 23.5, 64.7, 41.2, 47.1, 29.4, 17.6, 23.5, 82.4],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:2, v130:16} },
+  { rank:17, name:"Claude Sonnet 5", shortName:"Sonnet 5", developer:"Anthropic", evalCost:100.00, aaEvalCost:4010.12, deepSweCost:26.40, aaCostNorm:71.22, deepSweCostNorm:100.00, overallScore:32.8, qualityScore:48.2, qualityRank:8, missingCount:0,
+    dims:[0.0, 88.2, 50.0, 76.5, 50.0, 5.9, 23.5, 26.5, 41.2, 35.3, 52.9, 41.2],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:null, v130:17} },
+  { rank:18, name:"Claude Sonnet 4.6", shortName:"Sonnet 4.6", developer:"Anthropic", evalCost:20.91, aaEvalCost:3355.85, deepSweCost:5.52, aaCostNorm:59.60, deepSweCostNorm:20.91, overallScore:30.3, qualityScore:19.7, qualityRank:17, missingCount:0,
+    dims:[52.9, 76.5, 5.9, 23.5, 50.0, 17.6, 0.0, 0.0, 0.0, 0.0, 11.8, 11.8],
+    isMissing:[false, false, false, false, false, false, false, false, false, false, false, false],
+    vRanks:{v70:null, v80:null, v90:null, v100:null, v110:null, v120:8, v130:18} }
 ];
-
 
 
 function compositeCostTier(cost) {
@@ -1763,7 +1801,7 @@ function renderHeroPodium() {
 // ─────────────────────────────────────────────
 function computeNewScore(model, costWeightPct) {
   const cw = costWeightPct / 100;
-  const scaleFactor = (1 - cw) / 0.75;
+  const scaleFactor = (1 - cw) / ((DIM_WEIGHTS.slice(1).reduce((a,b)=>a+b,0))/100 || 0.75);
   const qualWeights = DIM_WEIGHTS.map((w, i) => i === 0 ? 0 : w / 100);
   let score = model.dims[0] * cw;
   for (let i = 1; i < model.dims.length; i++) score += model.dims[i] * qualWeights[i] * scaleFactor;
