@@ -1,868 +1,865 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Terminal-Bench 2.1 — Score vs Cost · ValueRank</title>
-  <meta name="description" content="Official Terminal-Bench 2.1 Accuracy (%) vs Cost (USD) with Pareto frontier. Snapshot from tbench.ai.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script>(function(){var s=localStorage.getItem('vr-theme');if(s==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
-  <style>
-    :root {
-      --bg-page: #f8f9fc;
-      --bg-card: #ffffff;
-      --bg-card-hover: #f1f5f9;
-      --bg-hero: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
-      --nav-bg: rgba(248,249,252,.92);
-      --section-alt: rgba(241,245,249,.6);
-      --accent: #4f46e5;
-      --accent-light: #6366f1;
-      --accent-a08: rgba(79,70,229,.08);
-      --accent-a12: rgba(79,70,229,.12);
-      --accent-a25: rgba(79,70,229,.25);
-      --accent-a30: rgba(79,70,229,.30);
-      --green: #059669;
-      --amber: #d97706;
-      --red: #dc2626;
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --text-dim: #94a3b8;
-      --heading-muted: #1e293b;
-      --border: #e2e8f0;
-      --border-hover: #cbd5e1;
-      --shadow-lg: 0 20px 60px rgba(0,0,0,.08);
-      --shadow-glow: 0 0 40px rgba(99,102,241,.06);
-      --table-row-hover: rgba(79,70,229,.03);
-      --radius-sm: 8px;
-      --radius: 12px;
-      --radius-lg: 20px;
-      --font-heading: 'IBM Plex Sans', system-ui, sans-serif;
-      --font-body: 'IBM Plex Sans', system-ui, sans-serif;
-      --font-mono: 'IBM Plex Mono', monospace;
-    }
-    [data-theme="dark"] {
-      --bg-page: #0a0a0f;
-      --bg-card: #12121a;
-      --bg-card-hover: #181825;
-      --bg-hero: linear-gradient(135deg, #0a0a1a 0%, #0f0f2e 40%, #1a0a2e 100%);
-      --nav-bg: rgba(10,10,15,.88);
-      --section-alt: rgba(18,18,26,.5);
-      --accent: #6366f1;
-      --accent-light: #818cf8;
-      --accent-a08: rgba(99,102,241,.08);
-      --accent-a12: rgba(99,102,241,.12);
-      --accent-a25: rgba(99,102,241,.25);
-      --accent-a30: rgba(99,102,241,.30);
-      --green: #34d399;
-      --amber: #fbbf24;
-      --red: #f87171;
-      --text-primary: #e2e8f0;
-      --text-secondary: #94a3b8;
-      --text-dim: #64748b;
-      --heading-muted: #cbd5e1;
-      --border: #1e293b;
-      --border-hover: #334155;
-      --shadow-lg: 0 20px 60px rgba(0,0,0,.4);
-      --shadow-glow: 0 0 40px rgba(99,102,241,.08);
-      --table-row-hover: rgba(99,102,241,.04);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    body {
-      background: var(--bg-page);
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
-    nav, section, .card, .table-wrap, .chart-panel, .method-box, .footnote {
-      transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
-    }
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 64px;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      border-bottom: 1px solid var(--border);
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-    }
-    .nav-brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .nav-brand .logo {
-      color: var(--text-primary);
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -.02em;
-      text-decoration: none;
-    }
-    .nav-brand .badge {
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--accent-a25);
-      background: var(--accent-a12);
-      color: var(--accent-light);
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-    }
-    .mode-switcher {
-      display: flex; gap: 2px;
-      background: var(--accent-a08); border: 1px solid var(--accent-a25);
-      border-radius: var(--radius-sm); padding: 3px;
-    }
-    .mode-btn {
-      font-family: var(--font-heading); font-size: .8rem; font-weight: 600;
-      padding: 4px 14px; border-radius: 6px; border: none; cursor: pointer;
-      color: var(--text-secondary); background: transparent;
-      transition: all .2s; white-space: nowrap;
-      text-decoration: none;
-    }
-    .mode-btn:hover { color: var(--text-primary); }
-    .mode-btn.active {
-      background: var(--bg-card); color: var(--text-primary);
-      box-shadow: 0 1px 4px rgba(0,0,0,.08);
-    }
-    .nav-links { display: flex; gap: 4px; }
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: var(--radius-sm);
-      font-size: .875rem;
-      font-weight: 500;
-    }
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--text-primary); background: var(--bg-card); }
-    .nav-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
-    .nav-meta { font-size: .75rem; color: var(--text-dim); }
-    .theme-toggle {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .theme-toggle:hover { border-color: var(--border-hover); color: var(--text-primary); box-shadow: var(--shadow-glow); }
-    .theme-toggle svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
-    .icon-sun { display: none; }
-    [data-theme="dark"] .icon-sun { display: block; }
-    [data-theme="dark"] .icon-moon { display: none; }
-
-    main { padding-top: 64px; }
-    section { padding: 72px 0; }
-    section:nth-child(even) { background: var(--section-alt); }
-    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
-    .section-header { margin-bottom: 28px; }
-    .section-label {
-      color: var(--accent-light);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .section-title {
-      color: var(--heading-muted);
-      font-size: clamp(1.55rem, 3vw, 2rem);
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -.03em;
-      margin-bottom: 8px;
-    }
-    .section-sub { color: var(--text-secondary); font-size: .92rem; max-width: 920px; }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--accent-a25);
-      background: var(--accent-a08);
-      color: var(--accent-light);
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-    .pulse {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      box-shadow: 0 0 0 0 var(--accent-a30);
-      animation: pulse 2s ease-out infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 var(--accent-a30); }
-      100% { box-shadow: 0 0 0 14px transparent; }
-    }
-
-    #hero {
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-hero);
-      padding: 72px 0 48px;
-    }
-    #hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(60% 50% at 85% 30%, rgba(99,102,241,.12) 0%, transparent 60%),
-        radial-gradient(40% 40% at 15% 90%, rgba(16,185,129,.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    #hero .container { position: relative; z-index: 1; }
-    .hero-title {
-      margin-top: 18px;
-      font-size: clamp(1.85rem, 4vw, 3rem);
-      line-height: 1.08;
-      letter-spacing: -.045em;
-      font-weight: 800;
-      max-width: 820px;
-    }
-    .hero-title .accent { color: var(--accent-light); }
-    .hero-desc {
-      margin-top: 14px;
-      color: var(--text-secondary);
-      font-size: 1rem;
-      max-width: 720px;
-    }
-    .hero-cta-row {
-      margin-top: 24px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .hero-cta-primary,
-    .hero-cta-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      border: 1px solid transparent;
-    }
-    .hero-cta-primary {
-      background: var(--text-primary);
-      color: var(--bg-card);
-      box-shadow: var(--shadow-lg);
-    }
-    .hero-cta-secondary {
-      color: var(--text-primary);
-      border-color: var(--border-hover);
-      background: rgba(255,255,255,.4);
-    }
-    [data-theme="dark"] .hero-cta-secondary { background: rgba(15,23,42,.25); }
-    .hero-stats {
-      margin-top: 32px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-    .hero-stat {
-      padding: 16px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(8px);
-    }
-    [data-theme="dark"] .hero-stat { background: rgba(15,23,42,.28); }
-    .hero-stat-num {
-      display: block;
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-primary);
-    }
-    .hero-stat-label {
-      display: block;
-      font-size: .78rem;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .card {
-      padding: 18px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-    }
-    .card-kicker {
-      color: var(--text-dim);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .card-value {
-      margin-top: 8px;
-      font-size: 1.35rem;
-      line-height: 1.2;
-      font-weight: 800;
-      letter-spacing: -.03em;
-    }
-    .card-copy {
-      margin-top: 8px;
-      color: var(--text-secondary);
-      font-size: .85rem;
-    }
-
-    .chart-panel {
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-      box-shadow: var(--shadow-lg);
-    }
-    .chart-copy {
-      margin-bottom: 14px;
-      color: var(--text-secondary);
-      font-size: .88rem;
-    }
-    .plot { width: 100%; height: 640px; }
-
-    .table-wrap {
-      overflow: auto;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--bg-card);
-      box-shadow: var(--shadow-lg);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 860px;
-    }
-    thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      font-size: .76rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: 14px 12px;
-      border-bottom: 1px solid var(--border);
-      white-space: nowrap;
-      text-align: left;
-    }
-    tbody td {
-      padding: 14px 12px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-    tbody tr:hover { background: var(--table-row-hover); }
-    tbody tr.frontier-row { background: rgba(5,150,105,.04); }
-    [data-theme="dark"] tbody tr.frontier-row { background: rgba(52,211,153,.06); }
-    .rank-badge {
-      display: inline-flex;
-      min-width: 32px;
-      justify-content: center;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: var(--accent-a08);
-      color: var(--accent-light);
-      font-weight: 700;
-    }
-    .model-main { font-weight: 700; line-height: 1.25; }
-    .model-sub { color: var(--text-secondary); font-size: .82rem; margin-top: 2px; }
-    .score-strong { font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-    .cost-cell { font-family: var(--font-mono); font-size: .88rem; font-variant-numeric: tabular-nums; }
-    .coverage-tag {
-      display: inline-flex;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: .72rem;
-      font-weight: 700;
-      border: 1px solid transparent;
-    }
-    .coverage-tag.covered {
-      color: var(--green);
-      background: rgba(5,150,105,.08);
-      border-color: rgba(5,150,105,.16);
-    }
-    .coverage-tag.missing {
-      color: var(--text-dim);
-      background: var(--bg-card-hover);
-      border-color: var(--border);
-    }
-
-    .method-grid {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .method-box,
-    .footnote {
-      padding: 18px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-    }
-    .method-box h3,
-    .footnote h3 {
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-    .method-box p,
-    .footnote p,
-    .footnote li {
-      color: var(--text-secondary);
-      font-size: .88rem;
-    }
-    .footnote ul {
-      padding-left: 18px;
-      margin-top: 10px;
-    }
-    .footnote a { color: var(--accent-light); }
-    .formula {
-      margin-top: 10px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--bg-card-hover);
-      font-family: var(--font-mono);
-      font-size: .82rem;
-      overflow: auto;
-    }
-    footer {
-      padding: 28px 0 44px;
-      color: var(--text-dim);
-      font-size: .82rem;
-    }
-    footer .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-    }
-    footer a { color: inherit; }
-
-    @media (max-width: 1040px) {
-      .method-grid { grid-template-columns: 1fr; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .nav-links { display: none; }
-    }
-    @media (max-width: 720px) {
-      nav { padding: 0 16px; }
-      .mode-switcher { display: none; }
-      .nav-meta { display: none; }
-      section { padding: 56px 0; }
-      .container { padding: 0 16px; }
-      #hero { padding: 56px 0 36px; }
-      .hero-stats { grid-template-columns: 1fr; }
-      .plot { height: 540px; }
-    }
-  </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Terminal-Bench 2.1 — Score vs Cost · ValueRank</title>
+ <meta name="description" content="Official Terminal-Bench 2.1 Accuracy (%) vs Cost (USD) with Pareto frontier. Snapshot from tbench.ai.">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+ <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+ <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+ <script>(function(){var s=localStorage.getItem('vr-theme');if(s==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
+ <style>
+  :root {
+   --bg-page: #f8f9fc;
+   --bg-card: #ffffff;
+   --bg-card-hover: #f1f5f9;
+   --bg-hero: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+   --nav-bg: rgba(248,249,252,.92);
+   --section-alt: rgba(241,245,249,.6);
+   --accent: #4f46e5;
+   --accent-light: #6366f1;
+   --accent-a08: rgba(79,70,229,.08);
+   --accent-a12: rgba(79,70,229,.12);
+   --accent-a25: rgba(79,70,229,.25);
+   --accent-a30: rgba(79,70,229,.30);
+   --green: #059669;
+   --amber: #d97706;
+   --red: #dc2626;
+   --text-primary: #0f172a;
+   --text-secondary: #475569;
+   --text-dim: #94a3b8;
+   --heading-muted: #1e293b;
+   --border: #e2e8f0;
+   --border-hover: #cbd5e1;
+   --shadow-lg: 0 20px 60px rgba(0,0,0,.08);
+   --shadow-glow: 0 0 40px rgba(99,102,241,.06);
+   --table-row-hover: rgba(79,70,229,.03);
+   --radius-sm: 8px;
+   --radius: 12px;
+   --radius-lg: 20px;
+   --font-heading: 'IBM Plex Sans', system-ui, sans-serif;
+   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+   --font-mono: 'IBM Plex Mono', monospace;
+}
+  [data-theme="dark"] {
+   --bg-page: #0a0a0f;
+   --bg-card: #12121a;
+   --bg-card-hover: #181825;
+   --bg-hero: linear-gradient(135deg, #0a0a1a 0%, #0f0f2e 40%, #1a0a2e 100%);
+   --nav-bg: rgba(10,10,15,.88);
+   --section-alt: rgba(18,18,26,.5);
+   --accent: #6366f1;
+   --accent-light: #818cf8;
+   --accent-a08: rgba(99,102,241,.08);
+   --accent-a12: rgba(99,102,241,.12);
+   --accent-a25: rgba(99,102,241,.25);
+   --accent-a30: rgba(99,102,241,.30);
+   --green: #34d399;
+   --amber: #fbbf24;
+   --red: #f87171;
+   --text-primary: #e2e8f0;
+   --text-secondary: #94a3b8;
+   --text-dim: #64748b;
+   --heading-muted: #cbd5e1;
+   --border: #1e293b;
+   --border-hover: #334155;
+   --shadow-lg: 0 20px 60px rgba(0,0,0,.4);
+   --shadow-glow: 0 0 40px rgba(99,102,241,.08);
+   --table-row-hover: rgba(99,102,241,.04);
+}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+   background: var(--bg-page);
+   color: var(--text-primary);
+   font-family: var(--font-body);
+   font-size: 14px;
+   line-height: 1.7;
+}
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+  nav, section, .card, .table-wrap, .chart-panel, .method-box, .footnote {
+   transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+}
+  nav {
+   position: fixed;
+   top: 0; left: 0; right: 0;
+   z-index: 100;
+   height: 64px;
+   padding: 0 24px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 16px;
+   border-bottom: 1px solid var(--border);
+   background: var(--nav-bg);
+   backdrop-filter: blur(20px);
+}
+  .nav-brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .nav-brand .logo {
+   color: var(--text-primary);
+   font-size: 1.1rem;
+   font-weight: 800;
+   letter-spacing: -.02em;
+   text-decoration: none;
+}
+  .nav-brand .badge {
+   padding: 2px 8px;
+   border-radius: 999px;
+   border: 1px solid var(--accent-a25);
+   background: var(--accent-a12);
+   color: var(--accent-light);
+   font-size: .7rem;
+   font-weight: 700;
+   letter-spacing: .04em;
+}
+  .mode-switcher {
+   display: flex; gap: 2px;
+   background: var(--accent-a08); border: 1px solid var(--accent-a25);
+   border-radius: var(--radius-sm); padding: 3px;
+}
+  .mode-btn {
+   font-family: var(--font-heading); font-size: .8rem; font-weight: 600;
+   padding: 4px 14px; border-radius: 6px; border: none; cursor: pointer;
+   color: var(--text-secondary); background: transparent;
+   transition: all .2s; white-space: nowrap;
+   text-decoration: none;
+}
+  .mode-btn:hover { color: var(--text-primary); }
+  .mode-btn.active {
+   background: var(--bg-card); color: var(--text-primary);
+   box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+   color: var(--text-secondary);
+   text-decoration: none;
+   padding: 6px 14px;
+   border-radius: var(--radius-sm);
+   font-size: .875rem;
+   font-weight: 500;
+}
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--text-primary); background: var(--bg-card); }
+  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+  .nav-meta { font-size: .75rem; color: var(--text-dim); }
+  .theme-toggle {
+   width: 40px; height: 40px;
+   border-radius: 50%;
+   border: 1px solid var(--border);
+   background: var(--bg-card);
+   color: var(--text-secondary);
+   cursor: pointer;
+   display: flex; align-items: center; justify-content: center;
+}
+  .theme-toggle:hover { border-color: var(--border-hover); color: var(--text-primary); box-shadow: var(--shadow-glow); }
+  .theme-toggle svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .icon-sun { display: none; }
+  [data-theme="dark"] .icon-sun { display: block; }
+  [data-theme="dark"] .icon-moon { display: none; }
+  main { padding-top: 64px; }
+  section { padding: 72px 0; }
+  section:nth-child(even) { background: var(--section-alt); }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .section-header { margin-bottom: 28px; }
+  .section-label {
+   color: var(--accent-light);
+   font-size: .75rem;
+   font-weight: 700;
+   letter-spacing: .12em;
+   text-transform: uppercase;
+   margin-bottom: 8px;
+}
+  .section-title {
+   color: var(--heading-muted);
+   font-size: clamp(1.55rem, 3vw, 2rem);
+   font-weight: 800;
+   line-height: 1.2;
+   letter-spacing: -.03em;
+   margin-bottom: 8px;
+}
+  .section-sub { color: var(--text-secondary); font-size: .92rem; max-width: 920px; }
+  .eyebrow {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+   padding: 6px 12px;
+   border-radius: 999px;
+   border: 1px solid var(--accent-a25);
+   background: var(--accent-a08);
+   color: var(--accent-light);
+   font-size: .72rem;
+   font-weight: 700;
+   letter-spacing: .14em;
+   text-transform: uppercase;
+}
+  .pulse {
+   width: 8px; height: 8px;
+   border-radius: 50%;
+   background: var(--accent-light);
+   box-shadow: 0 0 0 0 var(--accent-a30);
+   animation: pulse 2s ease-out infinite;
+}
+  @keyframes pulse {
+   0% { box-shadow: 0 0 0 0 var(--accent-a30); }
+   100% { box-shadow: 0 0 0 14px transparent; }
+}
+  #hero {
+   position: relative;
+   overflow: hidden;
+   background: var(--bg-hero);
+   padding: 72px 0 48px;
+}
+  #hero::before {
+   content: "";
+   position: absolute;
+   inset: 0;
+   background:
+    radial-gradient(60% 50% at 85% 30%, rgba(99,102,241,.12) 0%, transparent 60%),
+    radial-gradient(40% 40% at 15% 90%, rgba(16,185,129,.08) 0%, transparent 70%);
+   pointer-events: none;
+}
+  #hero .container { position: relative; z-index: 1; }
+  .hero-title {
+   margin-top: 18px;
+   font-size: clamp(1.85rem, 4vw, 3rem);
+   line-height: 1.08;
+   letter-spacing: -.045em;
+   font-weight: 800;
+   max-width: 820px;
+}
+  .hero-title .accent { color: var(--accent-light); }
+  .hero-desc {
+   margin-top: 14px;
+   color: var(--text-secondary);
+   font-size: 1rem;
+   max-width: 720px;
+}
+  .hero-cta-row {
+   margin-top: 24px;
+   display: flex;
+   gap: 12px;
+   flex-wrap: wrap;
+}
+  .hero-cta-primary,
+  .hero-cta-secondary {
+   display: inline-flex;
+   align-items: center;
+   gap: 10px;
+   padding: 12px 16px;
+   border-radius: 999px;
+   text-decoration: none;
+   font-weight: 600;
+   border: 1px solid transparent;
+}
+  .hero-cta-primary {
+   background: var(--text-primary);
+   color: var(--bg-card);
+   box-shadow: var(--shadow-lg);
+}
+  .hero-cta-secondary {
+   color: var(--text-primary);
+   border-color: var(--border-hover);
+   background: rgba(255,255,255,.4);
+}
+  [data-theme="dark"] .hero-cta-secondary { background: rgba(15,23,42,.25); }
+  .hero-stats {
+   margin-top: 32px;
+   display: grid;
+   grid-template-columns: repeat(4, minmax(0, 1fr));
+   gap: 16px;
+}
+  .hero-stat {
+   padding: 16px;
+   border: 1px solid var(--border);
+   border-radius: var(--radius);
+   background: rgba(255,255,255,.55);
+   backdrop-filter: blur(8px);
+}
+  [data-theme="dark"] .hero-stat { background: rgba(15,23,42,.28); }
+  .hero-stat-num {
+   display: block;
+   font-size: 1.15rem;
+   font-weight: 800;
+   color: var(--text-primary);
+}
+  .hero-stat-label {
+   display: block;
+   font-size: .78rem;
+   color: var(--text-secondary);
+   margin-top: 2px;
+}
+  .cards-grid {
+   display: grid;
+   grid-template-columns: repeat(3, minmax(0, 1fr));
+   gap: 16px;
+   margin-bottom: 24px;
+}
+  .card {
+   padding: 18px;
+   border-radius: var(--radius);
+   border: 1px solid var(--border);
+   background: var(--bg-card);
+}
+  .card-kicker {
+   color: var(--text-dim);
+   font-size: .75rem;
+   font-weight: 700;
+   letter-spacing: .08em;
+   text-transform: uppercase;
+}
+  .card-value {
+   margin-top: 8px;
+   font-size: 1.35rem;
+   line-height: 1.2;
+   font-weight: 800;
+   letter-spacing: -.03em;
+}
+  .card-copy {
+   margin-top: 8px;
+   color: var(--text-secondary);
+   font-size: .85rem;
+}
+  .chart-panel {
+   padding: 18px;
+   border-radius: 16px;
+   border: 1px solid var(--border);
+   background: var(--bg-card);
+   box-shadow: var(--shadow-lg);
+}
+  .chart-copy {
+   margin-bottom: 14px;
+   color: var(--text-secondary);
+   font-size: .88rem;
+}
+  .plot { width: 100%; height: 760px; }
+  .table-wrap {
+   overflow: auto;
+   border: 1px solid var(--border);
+   border-radius: 16px;
+   background: var(--bg-card);
+   box-shadow: var(--shadow-lg);
+}
+  table {
+   width: 100%;
+   border-collapse: collapse;
+   min-width: 860px;
+}
+  thead th {
+   position: sticky;
+   top: 0;
+   z-index: 1;
+   background: var(--bg-card);
+   color: var(--text-secondary);
+   font-size: .76rem;
+   font-weight: 700;
+   letter-spacing: .08em;
+   text-transform: uppercase;
+   padding: 14px 12px;
+   border-bottom: 1px solid var(--border);
+   white-space: nowrap;
+   text-align: left;
+}
+  tbody td {
+   padding: 14px 12px;
+   border-bottom: 1px solid var(--border);
+   vertical-align: middle;
+}
+  tbody tr:hover { background: var(--table-row-hover); }
+  tbody tr.frontier-row { background: rgba(5,150,105,.04); }
+  [data-theme="dark"] tbody tr.frontier-row { background: rgba(52,211,153,.06); }
+  .rank-badge {
+   display: inline-flex;
+   min-width: 32px;
+   justify-content: center;
+   padding: 4px 8px;
+   border-radius: 999px;
+   background: var(--accent-a08);
+   color: var(--accent-light);
+   font-weight: 700;
+}
+  .model-main { font-weight: 700; line-height: 1.25; }
+  .model-sub { color: var(--text-secondary); font-size: .82rem; margin-top: 2px; }
+  .score-strong { font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .cost-cell { font-family: var(--font-mono); font-size: .88rem; font-variant-numeric: tabular-nums; }
+  .coverage-tag {
+   display: inline-flex;
+   padding: 3px 8px;
+   border-radius: 999px;
+   font-size: .72rem;
+   font-weight: 700;
+   border: 1px solid transparent;
+}
+  .coverage-tag.covered {
+   color: var(--green);
+   background: rgba(5,150,105,.08);
+   border-color: rgba(5,150,105,.16);
+}
+  .coverage-tag.missing {
+   color: var(--text-dim);
+   background: var(--bg-card-hover);
+   border-color: var(--border);
+}
+  .method-grid {
+   display: grid;
+   gap: 16px;
+   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+  .method-box,
+  .footnote {
+   padding: 18px;
+   border-radius: var(--radius);
+   border: 1px solid var(--border);
+   background: var(--bg-card);
+}
+  .method-box h3,
+  .footnote h3 {
+   font-size: 1rem;
+   margin-bottom: 10px;
+}
+  .method-box p,
+  .footnote p,
+  .footnote li {
+   color: var(--text-secondary);
+   font-size: .88rem;
+}
+  .footnote ul {
+   padding-left: 18px;
+   margin-top: 10px;
+}
+  .footnote a { color: var(--accent-light); }
+  .formula {
+   margin-top: 10px;
+   padding: 12px 14px;
+   border-radius: 12px;
+   background: var(--bg-card-hover);
+   font-family: var(--font-mono);
+   font-size: .82rem;
+   overflow: auto;
+}
+  footer {
+   padding: 28px 0 44px;
+   color: var(--text-dim);
+   font-size: .82rem;
+}
+  footer .container {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 16px;
+   flex-wrap: wrap;
+   border-top: 1px solid var(--border);
+   padding-top: 24px;
+}
+  footer a { color: inherit; }
+  @media (max-width: 1040px) {
+   .method-grid { grid-template-columns: 1fr; }
+   .cards-grid { grid-template-columns: 1fr; }
+   .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+   .nav-links { display: none; }
+}
+  @media (max-width: 720px) {
+   nav { padding: 0 16px; }
+   .mode-switcher { display: none; }
+   .nav-meta { display: none; }
+   section { padding: 56px 0; }
+   .container { padding: 0 16px; }
+   #hero { padding: 56px 0 36px; }
+   .hero-stats { grid-template-columns: 1fr; }
+   .plot { height: 540px; }
+}
+ </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-brand">
-      <a href="/" class="logo">ValueRank</a>
-      <span class="badge">TB 2.1</span>
+ <nav>
+  <div class="nav-brand">
+   <a href="/" class="logo">ValueRank</a>
+   <span class="badge">TB 2.1</span>
+  </div>
+  <div class="mode-switcher">
+   <a class="mode-btn" href="/">LLMs</a>
+   <a class="mode-btn" href="/coding-agents/">Coding Agents</a>
+   <a class="mode-btn active" href="/tb21/">TB 2.1</a>
+  </div>
+  <div class="nav-links">
+   <a href="#chart">Chart</a>
+   <a href="#rankings">Table</a>
+   <a href="#methodology">Methodology</a>
+  </div>
+  <div class="nav-right">
+   <div class="nav-meta">Snapshot Jul 27, 2026 · 17 official rows</div>
+   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <i data-lucide="moon" class="icon-moon"></i>
+    <i data-lucide="sun" class="icon-sun"></i>
+   </button>
+  </div>
+ </nav>
+ <main>
+  <section id="hero">
+   <div class="container">
+    <div class="eyebrow"><span class="pulse"></span> Official Terminal-Bench 2.1</div>
+    <h1 class="hero-title">Terminal-Bench 2.1 — <span class="accent">Score vs Cost</span></h1>
+    <p class="hero-desc">
+     Accuracy (%) against total evaluation cost (USD) from the official
+     <a href="https://www.tbench.ai/leaderboard/terminal-bench/2.1" target="_blank" rel="noopener" style="color:var(--accent-light)">tbench.ai leaderboard</a>.
+     The green step line is the Pareto frontier: higher score at lower or equal cost.
+    </p>
+    <div class="hero-cta-row">
+     <a href="#chart" class="hero-cta-primary"><i data-lucide="scatter-chart"></i> View chart</a>
+     <a href="#methodology" class="hero-cta-secondary"><i data-lucide="flask-conical"></i> Methodology</a>
     </div>
-    <div class="mode-switcher">
-      <a class="mode-btn" href="/">LLMs</a>
-      <a class="mode-btn" href="/coding-agents/">Coding Agents</a>
-      <a class="mode-btn active" href="/tb21/">TB 2.1</a>
+    <div class="hero-stats">
+     <div class="hero-stat">
+      <span class="hero-stat-num">17</span>
+      <span class="hero-stat-label">Official leaderboard rows</span>
+     </div>
+     <div class="hero-stat">
+      <span class="hero-stat-num">83.8%</span>
+      <span class="hero-stat-label">Top accuracy (Claude Code + Fable 5)</span>
+     </div>
+     <div class="hero-stat">
+      <span class="hero-stat-num">$134</span>
+      <span class="hero-stat-label">Cheapest frontier (Cursor CLI + Grok 4.5)</span>
+     </div>
+     <div class="hero-stat">
+      <span class="hero-stat-num">3</span>
+      <span class="hero-stat-label">Pareto-nondominated points</span>
+     </div>
     </div>
-    <div class="nav-links">
-      <a href="#chart">Chart</a>
-      <a href="#rankings">Table</a>
-      <a href="#methodology">Methodology</a>
+   </div>
+  </section>
+  <section id="chart">
+   <div class="container">
+    <div class="section-header">
+     <div class="section-label">Score vs Cost</div>
+     <div class="section-title">Cost on X (log), Accuracy on Y</div>
+     <div class="section-sub">
+      Frontier markers are emphasized in green. Dominated points use muted indigo.
+      Hover a marker for agent, model, and effort.
+     </div>
     </div>
-    <div class="nav-right">
-      <div class="nav-meta">Snapshot Jul 27, 2026 · 17 official rows</div>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <i data-lucide="moon" class="icon-moon"></i>
-        <i data-lucide="sun" class="icon-sun"></i>
-      </button>
+    <div class="cards-grid" id="frontier-cards"></div>
+    <div class="chart-panel">
+     <div class="chart-copy">
+      Best available accuracy at each budget: Cursor CLI + Grok 4.5 ($134.09 → 79.3%),
+      Terminus 2 + Fable 5 ($438.64 → 80.4%), Claude Code + Fable 5 ($552.67 → 83.8%).
+     </div>
+     <div class="plot" id="plot-score-cost"></div>
     </div>
-  </nav>
-
-  <main>
-    <section id="hero">
-      <div class="container">
-        <div class="eyebrow"><span class="pulse"></span> Official Terminal-Bench 2.1</div>
-        <h1 class="hero-title">Terminal-Bench 2.1 — <span class="accent">Score vs Cost</span></h1>
-        <p class="hero-desc">
-          Accuracy (%) against total evaluation cost (USD) from the official
-          <a href="https://www.tbench.ai/leaderboard/terminal-bench/2.1" target="_blank" rel="noopener" style="color:var(--accent-light)">tbench.ai leaderboard</a>.
-          The green step line is the Pareto frontier: higher score at lower or equal cost.
-        </p>
-        <div class="hero-cta-row">
-          <a href="#chart" class="hero-cta-primary"><i data-lucide="scatter-chart"></i> View chart</a>
-          <a href="#methodology" class="hero-cta-secondary"><i data-lucide="flask-conical"></i> Methodology</a>
-        </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="hero-stat-num">17</span>
-            <span class="hero-stat-label">Official leaderboard rows</span>
-          </div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">83.8%</span>
-            <span class="hero-stat-label">Top accuracy (Claude Code + Fable 5)</span>
-          </div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">$134</span>
-            <span class="hero-stat-label">Cheapest frontier (Cursor CLI + Grok 4.5)</span>
-          </div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">3</span>
-            <span class="hero-stat-label">Pareto-nondominated points</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="chart">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-label">Score vs Cost</div>
-          <div class="section-title">Cost on X (log), Accuracy on Y</div>
-          <div class="section-sub">
-            Frontier markers are emphasized in green. Dominated points use muted indigo.
-            Hover a marker for agent, model, and effort.
-          </div>
-        </div>
-        <div class="cards-grid" id="frontier-cards"></div>
-        <div class="chart-panel">
-          <div class="chart-copy">
-            Best available accuracy at each budget: Cursor CLI + Grok 4.5 ($134.09 → 79.3%),
-            Terminus 2 + Fable 5 ($438.64 → 80.4%), Claude Code + Fable 5 ($552.67 → 83.8%).
-          </div>
-          <div class="plot" id="plot-score-cost"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="rankings">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-label">Leaderboard</div>
-          <div class="section-title">All 17 official TB 2.1 rows</div>
-          <div class="section-sub">
-            Rank follows the official Accuracy ordering. Frontier badge marks nondominated (higher score / lower cost) points.
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Agent + Model</th>
-                <th>Effort</th>
-                <th>Accuracy</th>
-                <th>Cost (USD)</th>
-                <th>Frontier</th>
-              </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section id="methodology">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-label">Methodology</div>
-          <div class="section-title">Official Accuracy and Cost only</div>
-          <div class="section-sub">
-            This page does not blend Artificial Analysis scores or apply cost-weight formulas — that stays on Coding Agents.
-          </div>
-        </div>
-        <div class="method-grid">
-          <div class="method-box">
-            <h3>1. Source</h3>
-            <p>Static snapshot of the public Terminal-Bench 2.1 leaderboard (Accuracy %, total Cost USD, Effort). Source: tbench.ai.</p>
-          </div>
-          <div class="method-box">
-            <h3>2. Axes</h3>
-            <p>X = Cost (USD), logarithmic scale. Y = Accuracy (%). Labels show Agent + Model; effort appears in hover.</p>
-          </div>
-          <div class="method-box">
-            <h3>3. Pareto</h3>
-            <p>A point is nondominated if no other submission has both strictly higher accuracy and strictly lower or equal cost (after sorting by ascending cost and keeping score improvements).</p>
-          </div>
-        </div>
-        <div class="footnote" style="margin-top:16px;">
-          <h3>Frontier definition</h3>
-          <div class="formula">Sort by Cost ↑ → keep rows where Accuracy improves the running maximum</div>
-          <p style="margin-top:12px;">
-            Data link:
-            <a href="https://www.tbench.ai/leaderboard/terminal-bench/2.1" target="_blank" rel="noopener">https://www.tbench.ai/leaderboard/terminal-bench/2.1</a>
-          </p>
-          <ul>
-            <li>Snapshot date: July 27, 2026 (17 entries shown on the official board at capture time).</li>
-            <li>No timeout/resource modifications assumed — same as the official note on the leaderboard.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div>ValueRank · Terminal-Bench 2.1 Score vs Cost · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener">Ālo Labs</a></div>
-      <div><a href="#methodology">Methodology</a> · <a href="/coding-agents/">Coding Agents</a> · <a href="/">LLMs</a></div>
+   </div>
+  </section>
+  <section id="rankings">
+   <div class="container">
+    <div class="section-header">
+     <div class="section-label">Leaderboard</div>
+     <div class="section-title">All 17 official TB 2.1 rows</div>
+     <div class="section-sub">
+      Rank follows the official Accuracy ordering. Frontier badge marks nondominated (higher score / lower cost) points.
+     </div>
     </div>
-  </footer>
-
-  <script>
-    const ENTRIES = [
-      [1, "Claude Code", "Fable 5", "xhigh", 83.8, 552.67],
-      [2, "Codex", "GPT-5.5", "xhigh", 83.1, 2059.19],
-      [3, "Terminus 2", "Fable 5", "high", 80.4, 438.64],
-      [4, "Cursor CLI", "Grok 4.5", "high", 79.3, 134.09],
-      [5, "Claude Code", "Opus 4.8", "high", 78.9, 286.94],
-      [6, "Codex", "GPT-5.6 Terra", "max", 78.4, 421.15],
-      [7, "Terminus 2", "GPT-5.5", "xhigh", 78.0, 493.85],
-      [8, "mini-SWE-agent", "Muse Spark 1.1", "xhigh", 76.2, 198.05],
-      [9, "Codex", "GPT-5.6 Luna", "max", 75.7, 241.45],
-      [10, "Claude Code", "Sonnet 5", "high", 74.6, 288.18],
-      [11, "Terminus 2", "Gemini 3 Pro", "high", 73.9, 224.44],
-      [12, "Claude Code", "Opus 4.7", "max", 68.9, 599.52],
-      [13, "Terminus 2", "Opus 4.7", "max", 66.1, 582.26],
-      [14, "Gemini CLI", "Gemini 3 Pro", "high", 65.8, 247.76],
-      [14, "Gemini CLI", "Gemini 3.1 Pro", "high", 65.8, 236.49],
-      [16, "Terminus 2", "Gemini 3.1 Pro", "high", 65.6, 229.99],
-      [17, "Claude Code", "GLM-5.1", "max", 58.7, 277.14]
-    ].map(([rank, agent, model, effort, score, cost]) => ({
-      rank, agent, model, effort, score, cost,
-      label: `${agent} + ${model}`
-    }));
-
-    function paretoFront(rows) {
-      const sorted = [...rows].sort((a, b) => a.cost - b.cost || b.score - a.score);
-      const frontier = [];
-      let bestScore = -Infinity;
-      sorted.forEach(row => {
-        if (row.score > bestScore) {
-          frontier.push(row);
-          bestScore = row.score;
-        }
-      });
-      return frontier;
-    }
-
-    function isDark() {
-      return document.documentElement.getAttribute("data-theme") === "dark";
-    }
-    // Hand-tuned pixel offsets (ax, ay): annotation text at tip+offset; arrow to marker.
-    // Dense ~$200–$600 / 65–80% cluster fans outward in alternating cardinal/diagonal dirs.
-    const LABEL_OFFSETS = {
-      "Cursor CLI|Grok 4.5|134.09": [-95, 42],
-      "mini-SWE-agent|Muse Spark 1.1|198.05": [-110, 8],
-      "Terminus 2|Gemini 3 Pro|224.44": [-85, 58],
-      "Terminus 2|Gemini 3.1 Pro|229.99": [-100, -48],
-      "Gemini CLI|Gemini 3.1 Pro|236.49": [15, -62],
-      "Codex|GPT-5.6 Luna|241.45": [18, 68],
-      "Gemini CLI|Gemini 3 Pro|247.76": [95, -52],
-      "Claude Code|GLM-5.1|277.14": [0, -58],
-      "Claude Code|Opus 4.8|286.94": [78, 62],
-      "Claude Code|Sonnet 5|288.18": [105, 6],
-      "Codex|GPT-5.6 Terra|421.15": [-92, 48],
-      "Terminus 2|Fable 5|438.64": [-8, 62],
-      "Terminus 2|GPT-5.5|493.85": [98, 18],
-      "Claude Code|Fable 5|552.67": [72, 48],
-      "Terminus 2|Opus 4.7|582.26": [-78, -48],
-      "Claude Code|Opus 4.7|599.52": [82, -42],
-      "Codex|GPT-5.5|2059.19": [-100, 28]
-    };
-    function formatChartLabel(row) {
-      const full = `${row.agent} + ${row.model}`;
-      if (full.length <= 24) return full;
-      return `${row.agent}<br>+ ${row.model}`;
-    }
-    function buildLabelAnnotations(frontierIds) {
-      const dark = isDark();
-      const textColor = dark ? "#e2e8f0" : "#0f172a";
-      const frontierColor = dark ? "#34d399" : "#059669";
-      const arrowMuted = dark ? "rgba(148,163,184,.75)" : "rgba(71,85,105,.7)";
-      const arrowFrontier = dark ? "rgba(52,211,153,.85)" : "rgba(5,150,105,.8)";
-      const bg = dark ? "rgba(18,18,26,.88)" : "rgba(255,255,255,.92)";
-      const border = dark ? "#334155" : "#e2e8f0";
-      return ENTRIES.map(row => {
-        const key = `${row.agent}|${row.model}|${row.cost}`;
-        const [ax, ay] = LABEL_OFFSETS[key] || [60, 40];
-        const onFront = frontierIds.has(`${row.agent}|${row.model}|${row.effort}|${row.cost}`);
-        return {
-          x: row.cost,
-          y: row.score,
-          xref: "x",
-          yref: "y",
-          text: formatChartLabel(row),
-          showarrow: true,
-          arrowhead: 2,
-          arrowsize: 0.9,
-          arrowwidth: 1.2,
-          arrowcolor: onFront ? arrowFrontier : arrowMuted,
-          ax,
-          ay,
-          axref: "pixel",
-          ayref: "pixel",
-          align: "left",
-          xanchor: ax >= 0 ? "left" : "right",
-          yanchor: "middle",
-          font: {
-            size: 10,
-            color: onFront ? frontierColor : textColor,
-            family: "IBM Plex Sans, sans-serif"
-          },
-          bgcolor: bg,
-          bordercolor: border,
-          borderwidth: 1,
-          borderpad: 3,
-          captureevents: false
-        };
-      });
-    }
-    function plotlyLayout(title, annotations) {
-      const dark = isDark();
-      return {
-        title: { text: title, font: { size: 14, color: dark ? "#cbd5e1" : "#1e293b", family: "IBM Plex Sans, sans-serif" } },
-        paper_bgcolor: "rgba(0,0,0,0)",
-        plot_bgcolor: "rgba(0,0,0,0)",
-        font: { family: "IBM Plex Sans, sans-serif", color: dark ? "#94a3b8" : "#475569", size: 12 },
-        margin: { l: 64, r: 120, t: 72, b: 80 },
-        hovermode: "closest",
-        legend: { orientation: "h", y: -0.16, font: { size: 12 } },
-        annotations: annotations || [],
-        xaxis: {
-          title: "Cost (USD)",
-          type: "log",
-          gridcolor: dark ? "#1e293b" : "#e2e8f0",
-          zeroline: false,
-          tickprefix: "$"
-        },
-        yaxis: {
-          title: "Accuracy (%)",
-          gridcolor: dark ? "#1e293b" : "#e2e8f0",
-          zeroline: false,
-          range: [54, 90]
-        }
-      };
-    }
-    function renderChart(frontierIds) {
-      const frontier = ENTRIES.filter(r => frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`));
-      const dominated = ENTRIES.filter(r => !frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`));
-      const annotations = buildLabelAnnotations(frontierIds);
-      Plotly.react("plot-score-cost", [
-        {
-          x: dominated.map(r => r.cost),
-          y: dominated.map(r => r.score),
-          mode: "markers",
-          type: "scatter",
-          marker: { size: 11, color: "#6366f1", opacity: 0.55 },
-          customdata: dominated.map(r => [r.agent, r.model, r.effort]),
-          hovertemplate: "%{customdata[0]} + %{customdata[1]}<br>Effort %{customdata[2]}<br>Accuracy %{y:.1f}%<br>Cost $%{x:.2f}<extra></extra>",
-          name: "Dominated"
-        },
-        {
-          x: frontier.map(r => r.cost),
-          y: frontier.map(r => r.score),
-          mode: "markers",
-          type: "scatter",
-          marker: {
-            size: 14,
-            color: "#10b981",
-            line: { width: 2, color: isDark() ? "#064e3b" : "#ecfdf5" }
-          },
-          customdata: frontier.map(r => [r.agent, r.model, r.effort]),
-          hovertemplate: "%{customdata[0]} + %{customdata[1]}<br>Effort %{customdata[2]}<br>Accuracy %{y:.1f}%<br>Cost $%{x:.2f}<extra>Frontier</extra>",
-          name: "Pareto frontier"
-        },
-        {
-          x: frontier.map(r => r.cost),
-          y: frontier.map(r => r.score),
-          mode: "lines",
-          type: "scatter",
-          line: { shape: "hv", color: "#10b981", width: 3 },
-          hoverinfo: "skip",
-          showlegend: false,
-          name: "step"
-        }
-      ], plotlyLayout("TB 2.1 Accuracy vs Cost", annotations), { displayModeBar: false, responsive: true });
-    }
-
-    function renderCards(frontier) {
-      const el = document.getElementById("frontier-cards");
-      el.innerHTML = frontier.map((r, i) => `
-        <div class="card">
-          <div class="card-kicker">Frontier ${i + 1}</div>
-          <div class="card-value">${r.label}</div>
-          <div class="card-copy">${r.score.toFixed(1)}% accuracy · $${r.cost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} · ${r.effort}</div>
-        </div>
-      `).join("");
-    }
-
-    function renderTable(frontierIds) {
-      const body = document.getElementById("table-body");
-      body.innerHTML = ENTRIES.map(r => {
-        const key = `${r.agent}|${r.model}|${r.effort}|${r.cost}`;
-        const onFront = frontierIds.has(key);
-        return `
-          <tr class="${onFront ? "frontier-row" : ""}">
-            <td><span class="rank-badge">${r.rank}</span></td>
-            <td>
-              <div class="model-main">${r.agent}</div>
-              <div class="model-sub">${r.model}</div>
-            </td>
-            <td>${r.effort}</td>
-            <td class="score-strong">${r.score.toFixed(1)}%</td>
-            <td class="cost-cell">$${r.cost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-            <td><span class="coverage-tag ${onFront ? "covered" : "missing"}">${onFront ? "Yes" : "—"}</span></td>
-          </tr>
-        `;
-      }).join("");
-    }
-
-    function renderAll() {
-      const frontier = paretoFront(ENTRIES);
-      const frontierIds = new Set(frontier.map(r => `${r.agent}|${r.model}|${r.effort}|${r.cost}`));
-      renderCards(frontier);
-      renderChart(frontierIds);
-      renderTable(frontierIds);
-    }
-
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-      const root = document.documentElement;
-      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      if (next === "light") root.removeAttribute("data-theme");
-      else root.setAttribute("data-theme", "dark");
-      localStorage.setItem("vr-theme", next === "dark" ? "dark" : "light");
-      lucide.createIcons();
-      renderAll();
-    });
-
-    window.addEventListener("resize", () => renderAll());
-    lucide.createIcons();
-    renderAll();
-  </script>
+    <div class="table-wrap">
+     <table>
+      <thead>
+       <tr>
+        <th>Rank</th>
+        <th>Agent + Model</th>
+        <th>Effort</th>
+        <th>Accuracy</th>
+        <th>Cost (USD)</th>
+        <th>Frontier</th>
+       </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+     </table>
+    </div>
+   </div>
+  </section>
+  <section id="methodology">
+   <div class="container">
+    <div class="section-header">
+     <div class="section-label">Methodology</div>
+     <div class="section-title">Official Accuracy and Cost only</div>
+     <div class="section-sub">
+      This page does not blend Artificial Analysis scores or apply cost-weight formulas — that stays on Coding Agents.
+     </div>
+    </div>
+    <div class="method-grid">
+     <div class="method-box">
+      <h3>1. Source</h3>
+      <p>Static snapshot of the public Terminal-Bench 2.1 leaderboard (Accuracy %, total Cost USD, Effort). Source: tbench.ai.</p>
+     </div>
+     <div class="method-box">
+      <h3>2. Axes</h3>
+      <p>X = Cost (USD), logarithmic scale. Y = Accuracy (%). Labels show Agent + Model; effort appears in hover.</p>
+     </div>
+     <div class="method-box">
+      <h3>3. Pareto</h3>
+      <p>A point is nondominated if no other submission has both strictly higher accuracy and strictly lower or equal cost (after sorting by ascending cost and keeping score improvements).</p>
+     </div>
+    </div>
+    <div class="footnote" style="margin-top:16px;">
+     <h3>Frontier definition</h3>
+     <div class="formula">Sort by Cost ↑ → keep rows where Accuracy improves the running maximum</div>
+     <p style="margin-top:12px;">
+      Data link:
+      <a href="https://www.tbench.ai/leaderboard/terminal-bench/2.1" target="_blank" rel="noopener">https://www.tbench.ai/leaderboard/terminal-bench/2.1</a>
+     </p>
+     <ul>
+      <li>Snapshot date: July 27, 2026 (17 entries shown on the official board at capture time).</li>
+      <li>No timeout/resource modifications assumed — same as the official note on the leaderboard.</li>
+     </ul>
+    </div>
+   </div>
+  </section>
+ </main>
+ <footer>
+  <div class="container">
+   <div>ValueRank · Terminal-Bench 2.1 Score vs Cost · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener">Ālo Labs</a></div>
+   <div><a href="#methodology">Methodology</a> · <a href="/coding-agents/">Coding Agents</a> · <a href="/">LLMs</a></div>
+  </div>
+ </footer>
+ <script>
+  const ENTRIES = [
+   [1, "Claude Code", "Fable 5", "xhigh", 83.8, 552.67],
+   [2, "Codex", "GPT-5.5", "xhigh", 83.1, 2059.19],
+   [3, "Terminus 2", "Fable 5", "high", 80.4, 438.64],
+   [4, "Cursor CLI", "Grok 4.5", "high", 79.3, 134.09],
+   [5, "Claude Code", "Opus 4.8", "high", 78.9, 286.94],
+   [6, "Codex", "GPT-5.6 Terra", "max", 78.4, 421.15],
+   [7, "Terminus 2", "GPT-5.5", "xhigh", 78.0, 493.85],
+   [8, "mini-SWE-agent", "Muse Spark 1.1", "xhigh", 76.2, 198.05],
+   [9, "Codex", "GPT-5.6 Luna", "max", 75.7, 241.45],
+   [10, "Claude Code", "Sonnet 5", "high", 74.6, 288.18],
+   [11, "Terminus 2", "Gemini 3 Pro", "high", 73.9, 224.44],
+   [12, "Claude Code", "Opus 4.7", "max", 68.9, 599.52],
+   [13, "Terminus 2", "Opus 4.7", "max", 66.1, 582.26],
+   [14, "Gemini CLI", "Gemini 3 Pro", "high", 65.8, 247.76],
+   [14, "Gemini CLI", "Gemini 3.1 Pro", "high", 65.8, 236.49],
+   [16, "Terminus 2", "Gemini 3.1 Pro", "high", 65.6, 229.99],
+   [17, "Claude Code", "GLM-5.1", "max", 58.7, 277.14]
+  ].map(([rank, agent, model, effort, score, cost]) => ({
+   rank, agent, model, effort, score, cost,
+   label: `${agent} + ${model}`
+  }));
+  function paretoFront(rows) {
+   const sorted = [...rows].sort((a, b) => a.cost - b.cost || b.score - a.score);
+   const frontier = [];
+   let bestScore = -Infinity;
+   sorted.forEach(row => {
+    if (row.score > bestScore) {
+     frontier.push(row);
+     bestScore = row.score;
+}});
+   return frontier;
+}
+  function isDark() {
+   return document.documentElement.getAttribute("data-theme") === "dark";
+}
+  // Pixel-ish callouts [ax, ay], converted to paper coords after layout.
+  // Plotly 2.27 does not paint annotations with xref/yref "x"/"y" on log axes
+  // (SVG annotation-text-g stays empty); paper refs work.
+  function formatChartLabel(row) {
+   return `${row.agent}<br>+ ${row.model}`;
+}
+  function dataToPaper(cost, score, gd) {
+   const xa = gd._fullLayout.xaxis;
+   const ya = gd._fullLayout.yaxis;
+   const logx = Math.log10(cost);
+   const [x0, x1] = xa.range;
+   const [y0, y1] = ya.range;
+   return {
+    x: (logx - x0) / (x1 - x0),
+    y: (score - y0) / (y1 - y0)
+};
+}
+  function buildLabelAnnotations(frontierIds, gd) {
+   const dark = isDark();
+   const textColor = dark ? "#e2e8f0" : "#0f172a";
+   const frontierColor = dark ? "#34d399" : "#059669";
+   const arrowMuted = dark ? "rgba(148,163,184,.5)" : "rgba(100,116,139,.5)";
+   const arrowFrontier = dark ? "rgba(52,211,153,.95)" : "rgba(5,150,105,.9)";
+   const bg = dark ? "rgba(18,18,26,.94)" : "rgba(255,255,255,.96)";
+   const border = dark ? "#334155" : "#cbd5e1";
+   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+   // Score-sorted vertical slots → guaranteed non-overlapping label bands
+   const items = ENTRIES.map(row => ({
+    row,
+    pt: dataToPaper(row.cost, row.score, gd),
+    onFront: frontierIds.has(`${row.agent}|${row.model}|${row.effort}|${row.cost}`)
+})).sort((a, b) => b.row.score - a.row.score || a.row.cost - b.row.cost);
+   const n = items.length;
+   const yTop = 0.955;
+   const yBot = 0.045;
+   return items.map((item, i) => {
+    const slotY = n === 1 ? 0.5 : yTop - (i / (n - 1)) * (yTop - yBot);
+    // Keep label near the point horizontally; nudge into open side of the plot
+    const preferRight = item.pt.x < 0.62;
+    const xPad = 0.09 + (i % 3) * 0.025;
+    let labelX = preferRight ? item.pt.x + xPad : item.pt.x - xPad;
+    labelX = clamp(labelX, 0.04, 0.96);
+    // Far-right outlier: keep label left of the marker
+    if (item.row.cost > 1500) labelX = clamp(item.pt.x - 0.1, 0.04, 0.96);
+    const axPx = labelX >= item.pt.x ? 1 : -1;
+    return {
+     x: item.pt.x,
+     y: item.pt.y,
+     ax: labelX,
+     ay: slotY,
+     xref: "paper",
+     yref: "paper",
+     axref: "paper",
+     ayref: "paper",
+     text: formatChartLabel(item.row),
+     showarrow: true,
+     arrowhead: 2,
+     arrowsize: 0.7,
+     arrowwidth: 1,
+     arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
+     align: "left",
+     xanchor: axPx >= 0 ? "left" : "right",
+     yanchor: "middle",
+     font: {
+      size: 8.5,
+      color: item.onFront ? frontierColor : textColor,
+      family: "IBM Plex Sans, sans-serif"
+     },
+     bgcolor: bg,
+     bordercolor: border,
+     borderwidth: 1,
+     borderpad: 2,
+     captureevents: false
+};
+});
+}
+  function plotlyLayout(title) {
+   const dark = isDark();
+   const xMin = Math.log10(90);
+   const xMax = Math.log10(2800);
+   return {
+    title: { text: title, font: { size: 14, color: dark ? "#cbd5e1" : "#1e293b", family: "IBM Plex Sans, sans-serif" } },
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)",
+    font: { family: "IBM Plex Sans, sans-serif", color: dark ? "#94a3b8" : "#475569", size: 12 },
+    margin: { l: 64, r: 48, t: 44, b: 80 },
+    hovermode: "closest",
+    legend: { orientation: "h", y: -0.18, font: { size: 12 } },
+    annotations: [],
+    xaxis: {
+     title: "Cost (USD)",
+     type: "log",
+     range: [xMin, xMax],
+     autorange: false,
+     tickvals: [100, 200, 300, 500, 1000, 2000],
+     ticktext: ["$100", "$200", "$300", "$500", "$1k", "$2k"],
+     gridcolor: dark ? "#1e293b" : "#e2e8f0",
+     zeroline: false
+    },
+    yaxis: {
+     title: "Accuracy (%)",
+     gridcolor: dark ? "#1e293b" : "#e2e8f0",
+     zeroline: false,
+     range: [54, 90],
+     autorange: false
+}};
+}
+  function renderChart(frontierIds) {
+   const frontier = ENTRIES.filter(r => frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`))
+    .sort((a, b) => a.cost - b.cost || b.score - a.score);
+   const dominated = ENTRIES.filter(r => !frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`));
+   const traces = [
+    {
+     x: dominated.map(r => r.cost),
+     y: dominated.map(r => r.score),
+     mode: "markers",
+     type: "scatter",
+     marker: { size: 11, color: "#6366f1", opacity: 0.55 },
+     customdata: dominated.map(r => [r.agent, r.model, r.effort]),
+     hovertemplate: "%{customdata[0]} + %{customdata[1]}<br>Effort %{customdata[2]}<br>Accuracy %{y:.1f}%<br>Cost $%{x:.2f}<extra></extra>",
+     name: "Dominated"
+    },
+    {
+     x: frontier.map(r => r.cost),
+     y: frontier.map(r => r.score),
+     mode: "markers",
+     type: "scatter",
+     marker: {
+      size: 14,
+      color: "#10b981",
+      line: { width: 2, color: isDark() ? "#064e3b" : "#ecfdf5" }
+     },
+     customdata: frontier.map(r => [r.agent, r.model, r.effort]),
+     hovertemplate: "%{customdata[0]} + %{customdata[1]}<br>Effort %{customdata[2]}<br>Accuracy %{y:.1f}%<br>Cost $%{x:.2f}<extra>Frontier</extra>",
+     name: "Pareto frontier"
+    },
+    {
+     x: frontier.map(r => r.cost),
+     y: frontier.map(r => r.score),
+     mode: "lines",
+     type: "scatter",
+     line: { shape: "hv", color: "#10b981", width: 3 },
+     hoverinfo: "skip",
+     showlegend: false,
+     name: "step"
+}
+   ];
+   const layout = plotlyLayout("TB 2.1 Accuracy vs Cost");
+   Plotly.react("plot-score-cost", traces, layout, { displayModeBar: false, responsive: true }).then(() => {
+    const gd = document.getElementById("plot-score-cost");
+    const annotations = buildLabelAnnotations(frontierIds, gd);
+    return Plotly.relayout(gd, { annotations });
+});
+}
+  function renderCards(frontier) {
+   const el = document.getElementById("frontier-cards");
+   el.innerHTML = frontier.map((r, i) => `
+    <div class="card">
+     <div class="card-kicker">Frontier ${i + 1}</div>
+     <div class="card-value">${r.label}</div>
+     <div class="card-copy">${r.score.toFixed(1)}% accuracy · $${r.cost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} · ${r.effort}</div>
+    </div>
+   `).join("");
+}
+  function renderTable(frontierIds) {
+   const body = document.getElementById("table-body");
+   body.innerHTML = ENTRIES.map(r => {
+    const key = `${r.agent}|${r.model}|${r.effort}|${r.cost}`;
+    const onFront = frontierIds.has(key);
+    return `
+     <tr class="${onFront ? "frontier-row" : ""}">
+      <td><span class="rank-badge">${r.rank}</span></td>
+      <td>
+       <div class="model-main">${r.agent}</div>
+       <div class="model-sub">${r.model}</div>
+      </td>
+      <td>${r.effort}</td>
+      <td class="score-strong">${r.score.toFixed(1)}%</td>
+      <td class="cost-cell">$${r.cost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+      <td><span class="coverage-tag ${onFront ? "covered" : "missing"}">${onFront ? "Yes" : "—"}</span></td>
+     </tr>
+    `;
+   }).join("");
+}
+  function renderAll() {
+   const frontier = paretoFront(ENTRIES);
+   const frontierIds = new Set(frontier.map(r => `${r.agent}|${r.model}|${r.effort}|${r.cost}`));
+   renderCards(frontier);
+   renderChart(frontierIds);
+   renderTable(frontierIds);
+}
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+   const root = document.documentElement;
+   const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+   if (next === "light") root.removeAttribute("data-theme");
+   else root.setAttribute("data-theme", "dark");
+   localStorage.setItem("vr-theme", next === "dark" ? "dark" : "light");
+   lucide.createIcons();
+   renderAll();
+});
+  window.addEventListener("resize", () => renderAll());
+  lucide.createIcons();
+  renderAll();
+ </script>
 </body>
 </html>
