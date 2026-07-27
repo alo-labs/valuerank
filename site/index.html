@@ -1735,7 +1735,7 @@ function isPlotDark() {
 function dataToPaperCostQuality(cost, score, gd) {
   const xa = gd._fullLayout.xaxis;
   const ya = gd._fullLayout.yaxis;
-  const xPx = xa._offset + xa.l2p(Math.log10(cost));
+  const xPx = xa._offset + xa.l2p(cost);
   const yPx = ya._offset + ya.l2p(score);
   return {
     x: (xPx - xa._offset) / xa._length,
@@ -2141,10 +2141,9 @@ function renderPareto() {
   const frontier = paretoFrontModels(MODELS);
   const frontierSet = new Set(frontier.map(m => m.name));
   const dominated = MODELS.filter(m => !frontierSet.has(m.name));
-  const costs = MODELS.map(m => m.evalCost);
   const qScores = MODELS.map(m => m.qualityScore);
-  const xMin = Math.log10(Math.max(5, Math.min(...costs) * 0.85));
-  const xMax = Math.log10(Math.max(...costs) * 1.15);
+  const xMin = 0;
+  const xMax = 105;
   const yMin = Math.max(0, Math.min(...qScores) - 8);
   const yMax = Math.min(100, Math.max(...qScores) + 8);
 
@@ -2209,12 +2208,12 @@ function renderPareto() {
     title: { text: 'Quality vs Composite Cost — Pareto Frontier', font: plotlyTitle(14) },
     xaxis: {
       ...base.xaxis,
-      title: 'Composite Cost (0–100, log)',
-      type: 'log',
+      title: 'Composite Cost (0–100, lower better)',
+      type: 'linear',
       range: [xMin, xMax],
       autorange: false,
-      tickvals: [10, 15, 20, 30, 50, 75, 100],
-      ticktext: ['10', '15', '20', '30', '50', '75', '100']
+      tickvals: [0, 20, 40, 60, 80, 100],
+      ticktext: ['0', '20', '40', '60', '80', '100']
     },
     yaxis: {
       ...base.yaxis,
