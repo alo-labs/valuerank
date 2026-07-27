@@ -338,7 +338,7 @@
       color: var(--text-secondary);
       font-size: .88rem;
     }
-    .plot { width: 100%; height: 520px; }
+    .plot { width: 100%; height: 640px; }
 
     .table-wrap {
       overflow: auto;
@@ -475,7 +475,7 @@
       .container { padding: 0 16px; }
       #hero { padding: 56px 0 36px; }
       .hero-stats { grid-template-columns: 1fr; }
-      .plot { height: 420px; }
+      .plot { height: 540px; }
     }
   </style>
 </head>
@@ -673,17 +673,86 @@
     function isDark() {
       return document.documentElement.getAttribute("data-theme") === "dark";
     }
-
-    function plotlyLayout(title) {
+    // Hand-tuned pixel offsets (ax, ay): annotation text at tip+offset; arrow to marker.
+    // Dense ~$200–$600 / 65–80% cluster fans outward in alternating cardinal/diagonal dirs.
+    const LABEL_OFFSETS = {
+      "Cursor CLI|Grok 4.5|134.09": [-95, 42],
+      "mini-SWE-agent|Muse Spark 1.1|198.05": [-110, 8],
+      "Terminus 2|Gemini 3 Pro|224.44": [-85, 58],
+      "Terminus 2|Gemini 3.1 Pro|229.99": [-100, -48],
+      "Gemini CLI|Gemini 3.1 Pro|236.49": [15, -62],
+      "Codex|GPT-5.6 Luna|241.45": [18, 68],
+      "Gemini CLI|Gemini 3 Pro|247.76": [95, -52],
+      "Claude Code|GLM-5.1|277.14": [0, -58],
+      "Claude Code|Opus 4.8|286.94": [78, 62],
+      "Claude Code|Sonnet 5|288.18": [105, 6],
+      "Codex|GPT-5.6 Terra|421.15": [-92, 48],
+      "Terminus 2|Fable 5|438.64": [-8, 62],
+      "Terminus 2|GPT-5.5|493.85": [98, 18],
+      "Claude Code|Fable 5|552.67": [72, 48],
+      "Terminus 2|Opus 4.7|582.26": [-78, -48],
+      "Claude Code|Opus 4.7|599.52": [82, -42],
+      "Codex|GPT-5.5|2059.19": [-100, 28]
+    };
+    function formatChartLabel(row) {
+      const full = `${row.agent} + ${row.model}`;
+      if (full.length <= 24) return full;
+      return `${row.agent}<br>+ ${row.model}`;
+    }
+    function buildLabelAnnotations(frontierIds) {
+      const dark = isDark();
+      const textColor = dark ? "#e2e8f0" : "#0f172a";
+      const frontierColor = dark ? "#34d399" : "#059669";
+      const arrowMuted = dark ? "rgba(148,163,184,.75)" : "rgba(71,85,105,.7)";
+      const arrowFrontier = dark ? "rgba(52,211,153,.85)" : "rgba(5,150,105,.8)";
+      const bg = dark ? "rgba(18,18,26,.88)" : "rgba(255,255,255,.92)";
+      const border = dark ? "#334155" : "#e2e8f0";
+      return ENTRIES.map(row => {
+        const key = `${row.agent}|${row.model}|${row.cost}`;
+        const [ax, ay] = LABEL_OFFSETS[key] || [60, 40];
+        const onFront = frontierIds.has(`${row.agent}|${row.model}|${row.effort}|${row.cost}`);
+        return {
+          x: row.cost,
+          y: row.score,
+          xref: "x",
+          yref: "y",
+          text: formatChartLabel(row),
+          showarrow: true,
+          arrowhead: 2,
+          arrowsize: 0.9,
+          arrowwidth: 1.2,
+          arrowcolor: onFront ? arrowFrontier : arrowMuted,
+          ax,
+          ay,
+          axref: "pixel",
+          ayref: "pixel",
+          align: "left",
+          xanchor: ax >= 0 ? "left" : "right",
+          yanchor: "middle",
+          font: {
+            size: 10,
+            color: onFront ? frontierColor : textColor,
+            family: "IBM Plex Sans, sans-serif"
+          },
+          bgcolor: bg,
+          bordercolor: border,
+          borderwidth: 1,
+          borderpad: 3,
+          captureevents: false
+        };
+      });
+    }
+    function plotlyLayout(title, annotations) {
       const dark = isDark();
       return {
         title: { text: title, font: { size: 14, color: dark ? "#cbd5e1" : "#1e293b", family: "IBM Plex Sans, sans-serif" } },
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
         font: { family: "IBM Plex Sans, sans-serif", color: dark ? "#94a3b8" : "#475569", size: 12 },
-        margin: { l: 56, r: 48, t: 56, b: 64 },
+        margin: { l: 64, r: 120, t: 72, b: 80 },
         hovermode: "closest",
-        legend: { orientation: "h", y: -0.18, font: { size: 12 } },
+        legend: { orientation: "h", y: -0.16, font: { size: 12 } },
+        annotations: annotations || [],
         xaxis: {
           title: "Cost (USD)",
           type: "log",
@@ -694,16 +763,15 @@
         yaxis: {
           title: "Accuracy (%)",
           gridcolor: dark ? "#1e293b" : "#e2e8f0",
-          zeroline: false
+          zeroline: false,
+          range: [54, 90]
         }
       };
     }
-
     function renderChart(frontierIds) {
       const frontier = ENTRIES.filter(r => frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`));
       const dominated = ENTRIES.filter(r => !frontierIds.has(`${r.agent}|${r.model}|${r.effort}|${r.cost}`));
-      // Permanent labels only on Pareto points; cycle positions to avoid stacking.
-      const frontierPositions = ["top right", "top left", "bottom right", "bottom left"];
+      const annotations = buildLabelAnnotations(frontierIds);
       Plotly.react("plot-score-cost", [
         {
           x: dominated.map(r => r.cost),
@@ -718,11 +786,8 @@
         {
           x: frontier.map(r => r.cost),
           y: frontier.map(r => r.score),
-          mode: "markers+text",
+          mode: "markers",
           type: "scatter",
-          text: frontier.map(r => r.agent),
-          textposition: frontier.map((_, i) => frontierPositions[i % frontierPositions.length]),
-          textfont: { size: 11, color: isDark() ? "#34d399" : "#059669", family: "IBM Plex Sans, sans-serif" },
           marker: {
             size: 14,
             color: "#10b981",
@@ -742,7 +807,7 @@
           showlegend: false,
           name: "step"
         }
-      ], plotlyLayout("TB 2.1 Accuracy vs Cost"), { displayModeBar: false, responsive: true });
+      ], plotlyLayout("TB 2.1 Accuracy vs Cost", annotations), { displayModeBar: false, responsive: true });
     }
 
     function renderCards(frontier) {
