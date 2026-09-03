@@ -1,0 +1,63 @@
+{
+  "report_id": "DEEP-RESEARCH-V4",
+  "topic": "Cursor Composer 2.5 (C25) vs MiMo-V2.5-Pro (MM25p) — Shared Benchmarks, Exact Scores, Cost-per-Task",
+  "mode": "ultradeep",
+  "phases_executed": 8,
+  "phases": {
+    "1_scope": "completed",
+    "2_plan": "completed",
+    "3_retrieve": "completed",
+    "4_triangulate": "completed",
+    "4_5_outline_refinement": "completed",
+    "5_synthesize": "completed",
+    "6_critique": "completed",
+    "7_refine": "completed",
+    "8_package": "completed"
+  },
+  "date": "2026-07-04",
+  "research_question": "Find ALL benchmarks where BOTH Cursor Composer 2.5 (C25) and MiMo-V2.5-Pro (MM25p) have published scores on the SAME benchmark. For each such benchmark, provide the exact scores and attempt to calculate or estimate cost-per-task.",
+  "constraints": {
+    "c25_treated_as": "model (Kimi K2.5 base), not IDE agent",
+    "scope": "ONLY benchmarks with BOTH models tested",
+    "cost_assumptions": {
+      "c25_standard": {"input_per_m": 0.50, "output_per_m": 2.50},
+      "c25_fast": {"input_per_m": 3.00, "output_per_m": 15.00},
+      "mm25p_xiaomi": {"input_per_m": 0.435, "output_per_m": 0.870, "cache_hit_per_m": 0.004}
+    },
+    "cost_formula": "cost_per_task = (input_tokens * input_price + output_tokens * output_price) / 1e6"
+  },
+  "sources": {
+    "total_cited": 28,
+    "primary_vendor_blogs": 4,
+    "model_cards": 1,
+    "vals_platform": 7,
+    "benchlm": 2,
+    "leaderboards": 5,
+    "third_party_blogs": 5,
+    "github_issues": 3,
+    "aggregators": 1
+  },
+  "shared_benchmarks_found": 4,
+  "shared_composites": 1,
+  "lmarena_subtracks_mm25p_only": 9,
+  "key_findings": {
+    "same_harness_c25_wins": "3/3 (Vals SWE-bench, Vals Terminal-Bench 2.1, Vals Vibe Code v1.1)",
+    "vals_index_c25_wins": "C25 62.55% vs MM25p 50.74% (+11.8 pts)",
+    "terminal_bench_2_0_essentially_tied": "C25 69.3% vs MM25p 68.4% (0.9 pt, possibly within noise)",
+    "lmarena_mm25p_only": "9 sub-categories, C25 unranked 0/8",
+    "benchlm_mm25p_wins": "C25 64 vs MM25p 77 (provisional lane)",
+    "cost_reality": "MM25p ~30% cheaper on Terminal-Bench 2.0 estimates; only 1 published C25 cost ($0.55 CursorBench 3.1)",
+    "mm25p_unique_advantages": "1M context (5x), MIT license, open weights, LMArena presence, WildClawBench/PinchBench presence"
+  },
+  "output_files": [
+    "DEEP-RESEARCH-V4.md",
+    "sources.jsonl",
+    "evidence.jsonl",
+    "claims.jsonl",
+    "run-manifest.json"
+  ],
+  "word_count": 6500,
+  "citations_format": "bracket_numbered",
+  "limitations_count": 7,
+  "gaps_count": 6
+}

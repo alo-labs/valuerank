@@ -1,7 +1,7 @@
 # ValueRank — Model Profiles
 **Per-model analysis | Updated per version**
 
-← [README](README.md) · [Scores](scores.md) · [Insights](insights.md)
+← [Root README](../../README.md) · [Scores](../../scores.md) · [Insights](insights.md)
 
 ---
 

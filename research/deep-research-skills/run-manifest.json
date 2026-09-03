@@ -1,0 +1,29 @@
+{
+  "query": "Find out the most capable deep research skills that exist (search in GitHub) and shortlist the top 5. Then do side-by-side capability and feature comparison to rank them according to capability.",
+  "mode": "ultradeep",
+  "date": "2026-07-05",
+  "model": "kimi-k2.7-code",
+  "output_directory": "research/deep-research-skills/",
+  "output_files": [
+    "kimi-k2.7-code-report.md",
+    "sources.jsonl",
+    "evidence.jsonl",
+    "claims.jsonl",
+    "run_manifest.json"
+  ],
+  "assumptions": [
+    "Capability is a composite of architectural depth, verification rigor, breadth of modes, cross-platform portability, and adoption.",
+    "README/SKILL.md claims are taken at face value unless contradicted; benchmark claims are flagged as self-reported where independent verification is unavailable.",
+    "GitHub stars proxy adoption and community trust, not raw capability.",
+    "The primary focus is reusable agent skills (SKILL.md files), with standalone research agents included for context."
+  ],
+  "methods": [
+    "ctx_fetch_and_index for GitHub repository pages and raw README/SKILL.md files",
+    "ctx_batch_execute for parallel search attempts (gh CLI was rate-limited)",
+    "ctx_execute for structured feature extraction",
+    "DuckDuckGo/Bing web search as fallback"
+  ],
+  "source_count": 18,
+  "evidence_count": 43,
+  "claim_count": 45
+}

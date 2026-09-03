@@ -1,4 +1,47 @@
 branch_structure.json
 temp_auto_push.bat
 temp_interactive_push.bat
-.gitignore
+
+# Operating-system and editor files
+.DS_Store
+*.swp
+
+# Local Python and Node environments
+.venv/
+__pycache__/
+*.py[cod]
+node_modules/
+
+# Local agent and analysis-tool state
+/.claude/
+/.opencode/
+/graphify-out/
+/.visual-audit/
+/.tmp/
+/.runs/
+/multi-ai-deep-research-out/
+
+# Reproducible generated charts and benchmark-run outputs
+/artifacts/
+/benchmark-runs/
+
+# Local source corpora; these may contain confidential or licensed material
+/research/sources/
+/projects/nz-egg-market/source-corpus/
+/projects/coderstrust/sources/
+
+# Refresh scratch and browser captures; canonical text/JSON evidence remains tracked
+.refresh/deepswe_unesc.txt
+.refresh/og/_tmp/
+.refresh/v1.3/aa/*.html
+.refresh/v1.3/screenshots/
+.refresh/v1.3/*_log.txt
+.refresh/v1.3/_diag.txt
+.refresh/v1.3/parse_err.txt
+.refresh/v1.3/parse_out.json
+.refresh/v1.3/parse_unesc_out.json
+.refresh/v1.3/push_log.txt
+
+# Tool logs and failed-agent transcripts
+*.log
+*.err
