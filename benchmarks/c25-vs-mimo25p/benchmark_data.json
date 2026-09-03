@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "report_title": "Cursor Composer 2.5 vs MiMo-V2.5-Pro Benchmark Comparison",
+    "last_updated": "2026-07-04",
+    "sources": 8,
+    "working_directory": "benchmarks/c25-vs-mimo25p/"
+  },
+  "models": {
+    "composer_2_5": {
+      "developer": "Cursor",
+      "base_model": "Kimi K2.5 (Moonshot AI)",
+      "release_date": "2026-05-18",
+      "context_window": 200000,
+      "open_source": false,
+      "modalities": ["text"],
+      "pricing": {
+        "standard": {
+          "input_per_1m": 0.50,
+          "output_per_1m": 2.50,
+          "cost_per_task": 0.07
+        },
+        "fast": {
+          "input_per_1m": 3.00,
+          "output_per_1m": 15.00,
+          "cost_per_task": 0.44
+        }
+      }
+    },
+    "mimo_v2_5_pro": {
+      "developer": "Xiaomi",
+      "architecture": "MoE (1.02T total, 42B active)",
+      "release_date": "2026-04-22",
+      "context_window": 1000000,
+      "open_source": true,
+      "license": "MIT",
+      "modalities": ["text", "image", "audio", "video"],
+      "pricing": {
+        "xiaomi_api": {
+          "input_per_1m": 0.435,
+          "output_per_1m": 0.870,
+          "cost_per_task": 0.09
+        },
+        "openrouter": {
+          "input_per_1m": 1.00,
+          "output_per_1m": 3.00
+        }
+      }
+    }
+  },
+  "benchmarks": {
+    "head_to_head": [
+      {
+        "benchmark": "BenchLM Overall Score",
+        "category": "Composite",
+        "composer_2_5": 77,
+        "mimo_v2_5_pro": 83,
+        "winner": "MiMo-V2.5-Pro",
+        "difference": "+6",
+        "source": "benchlm.ai",
+        "date": "2026-07-03"
+      },
+      {
+        "benchmark": "BenchLM Agentic Average",
+        "category": "Agentic",
+        "composer_2_5": 69.3,
+        "mimo_v2_5_pro": 68.4,
+        "winner": "Composer 2.5",
+        "difference": "+0.9",
+        "source": "benchlm.ai",
+        "date": "2026-07-03"
+      },
+      {
+        "benchmark": "Terminal-Bench 2.0",
+        "category": "Agentic",
+        "composer_2_5": 69.3,
+        "mimo_v2_5_pro": 68.4,
+        "winner": "Composer 2.5",
+        "difference": "+0.9",
+        "source": "cursor.com, xiaomi.com, evals.report",
+        "date": "2026-05-18"
+      }
+    ],
+    "composer_2_5_only": [
+      {
+        "benchmark": "CursorBench v3.1",
+        "category": "Coding",
+        "score": 63.2,
+        "source": "cursor.com"
+      },
+      {
+        "benchmark": "SWE-Bench Multilingual",
+        "category": "Coding",
+        "score": 79.8,
+        "source": "cursor.com"
+      },
+      {
+        "benchmark": "AA Coding Agent Index",
+        "category": "Agentic",
+        "score": 62,
+        "source": "artificialanalysis.ai",
+        "cost_per_task": 0.07
+      }
+    ],
+    "mimo_v2_5_pro_only": [
+      {
+        "benchmark": "SWE-Bench Verified",
+        "category": "Coding",
+        "score": 78.9,
+        "source": "evals.report"
+      },
+      {
+        "benchmark": "SWE-Bench Pro",
+        "category": "Coding",
+        "score": 57.2,
+        "source": "xiaomi.com"
+      },
+      {
+        "benchmark": "GPQA Diamond",
+        "category": "Reasoning",
+        "score": 86.6,
+        "source": "evals.report"
+      },
+      {
+        "benchmark": "Humanity's Last Exam",
+        "category": "Reasoning",
+        "score": 33.8,
+        "source": "evals.report"
+      },
+      {
+        "benchmark": "GDPval",
+        "category": "Agents",
+        "score": 1571,
+        "score_type": "Elo",
+        "source": "evals.report"
+      },
+      {
+        "benchmark": "SciCode",
+        "category": "Coding",
+        "score": 50.2,
+        "source": "evals.report"
+      },
+      {
+        "benchmark": "IFBench",
+        "category": "Reasoning",
+        "score": 79.9,
+        "source": "evals.report"
+      },
+      {
+        "benchmark": "AA Intelligence Index",
+        "category": "Composite",
+        "score": 42,
+        "source": "llmbase.ai"
+      }
+    ]
+  },
+  "cost_analysis": {
+    "cost_per_task_comparison": {
+      "composer_2_5_standard": 0.07,
+      "composer_2_5_fast": 0.44,
+      "mimo_v2_5_pro": 0.09,
+      "cheapest": "Composer 2.5 Standard"
+    },
+    "value_analysis": {
+      "terminal_bench_score_per_dollar": {
+        "composer_2_5": 989,
+        "mimo_v2_5_pro": 760,
+        "winner": "Composer 2.5"
+      }
+    },
+    "total_cost_1000_tasks": {
+      "composer_2_5_standard": 70,
+      "composer_2_5_fast": 440,
+      "mimo_v2_5_pro": 90
+    }
+  },
+  "recommendations": {
+    "cost_sensitive": "Composer 2.5 Standard ($0.07/task)",
+    "large_context": "MiMo-V2.5-Pro (1M tokens)",
+    "self_hosting": "MiMo-V2.5-Pro (MIT license)",
+    "speed_critical": "Composer 2.5 Fast ($0.44/task)"
+  }
+}

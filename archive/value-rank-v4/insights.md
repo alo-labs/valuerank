@@ -1,7 +1,7 @@
 # ValueRank — Strategic Insights & Use Cases
 **Updated per version**
 
-← [README](README.md) · [Profiles](profiles.md) · [Limitations](limitations.md)
+← [Root README](../../README.md) · [Profiles](profiles.md) · [Limitations](limitations.md)
 
 ---
 

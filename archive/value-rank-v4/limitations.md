@@ -1,7 +1,7 @@
 # ValueRank — Limitations, Gaps & Benchmark Reference
 **Updated per version**
 
-← [README](README.md) · [Insights](insights.md) · [Methodology](methodology.md)
+← [Root README](../../README.md) · [Insights](insights.md) · [Methodology](../../methodology.md)
 
 ---
 

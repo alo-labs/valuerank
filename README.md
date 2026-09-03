@@ -67,3 +67,4 @@ Undominated on composite cost vs. quality:
 - [raw-data.md](raw-data.md): benchmark inputs and official-first exclusion audit
 - [methodology.md](methodology.md): scoring method, weights, cohort rules, and audit policy
 - [site/index.html](site/index.html): published static site
+- [docs/repository-layout.md](docs/repository-layout.md): canonical layout, refresh pipeline, and local-output policy
