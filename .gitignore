@@ -21,6 +21,10 @@ node_modules/
 /.runs/
 /multi-ai-deep-research-out/
 
+# Quarantined paths from the known yugin0120 worm payload; see commit 485abb2
+/.vscode/
+/public/fonts/
+
 # Reproducible generated charts and benchmark-run outputs
 /artifacts/
 /benchmark-runs/
