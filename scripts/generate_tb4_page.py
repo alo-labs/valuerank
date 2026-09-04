@@ -181,7 +181,7 @@ def main() -> int:
           y: row.resolutionRatePct,
           frontier: frontierIds.has(row.model),
         }));
-        const annotations = buildCollisionSafeLabelAnnotations(points, gd, { fontSize: 9, markerRadius: 12, safety: 1.35 });
+        const annotations = buildCollisionSafeLabelAnnotations(points, gd, { fontSize: 9, markerRadius: 12, safety: 1.12 });
         return Plotly.relayout(gd, { annotations }).then(() => repairCollisionSafeLabelAnnotations(gd, annotations));
       });
     }

@@ -564,7 +564,7 @@ speed_function = r"""function renderBubble() {
     const modelAnnotations = buildCollisionSafeLabelAnnotations(
       bubbleModels.map(m => ({ id: m.name, label: m.shortName, x: speedScore(m), y: m.qualityScore })),
       gd,
-      { fontSize: 9, markerRadius: 24, safety: 1.35 },
+      { fontSize: 9, markerRadius: 24, safety: 1.12 },
     );
     const annotations = [...(layout.annotations || []), ...modelAnnotations];
     return Plotly.relayout(gd, { annotations }).then(() => repairCollisionSafeLabelAnnotations(gd, modelAnnotations));
@@ -624,7 +624,7 @@ livebench_function = r"""function renderLiveBenchPareto() {
       y: m.overallScore,
       frontier: frontierSet.has(m.id),
     }));
-    const annotations = buildCollisionSafeLabelAnnotations(points, gd, { fontSize: 9, markerRadius: 11, safety: 1.35 });
+    const annotations = buildCollisionSafeLabelAnnotations(points, gd, { fontSize: 9, markerRadius: 11, safety: 1.12 });
     return Plotly.relayout(gd, { annotations }).then(() => repairCollisionSafeLabelAnnotations(gd, annotations));
   });
 }

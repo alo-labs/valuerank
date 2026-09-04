@@ -54,7 +54,7 @@ h1 { font-size:2rem; margin:0 0 8px; }
 .card .name { font-weight:600; margin:6px 0; }
 .card .score { font-family:var(--font-mono); font-size:1.4rem; }
 .meta { color:var(--text-dim); font-size:12px; }
-#chart { height:560px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); margin:16px 0 32px; }
+#chart { height:620px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); margin:16px 0 32px; }
 table { width:100%; border-collapse:collapse; }
 th,td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--border); }
 th { color:var(--text-dim); font-size:12px; font-weight:600; }
@@ -63,6 +63,7 @@ td.mono { font-family:var(--font-mono); }
 .neutral { color:var(--text-dim); }
 footer { text-align:center; color:var(--text-dim); padding:24px; font-size:12px; }
 @media (max-width:800px) { .podium { grid-template-columns:1fr; } .nav-meta { display:none; } }
+@media (max-width:700px) { #chart { height:720px; } }
 </style>
 <style id="site-header-style">
 
@@ -117,9 +118,11 @@ function buildCollisionSafeLabelAnnotations(points, gd, options) {
   const width = layout.width || 1100;
   const height = layout.height || 520;
   const fontSize = Number(options.fontSize) || 9;
-  const safety = Number(options.safety) || 1.35;
+  const safety = Number(options.safety) || 1.15;
   const markerRadius = Number(options.markerRadius) || 11;
-  const labelPad = Number(options.labelPad) || Math.max(6, fontSize * 0.9);
+  const labelPad = Number(options.labelPad) || Math.max(4, fontSize * 0.55);
+  const labelGap = Number(options.labelGap) || Math.max(3, fontSize * 0.45);
+  const adjacentRadius = Number(options.adjacentRadius) || markerRadius + labelGap;
   const dark = document.documentElement.getAttribute('data-theme') === 'dark';
   const textColor = options.textColor || (dark ? '#e2e8f0' : '#0f172a');
   const frontierColor = options.frontierColor || (dark ? '#34d399' : '#047857');
@@ -135,11 +138,23 @@ function buildCollisionSafeLabelAnnotations(points, gd, options) {
     .replace(/<br\s*\/?\s*>/gi, '\n')
     .replace(/<[^>]*>/g, '')
     .split('\n');
+  const textMeasure = (() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      if (context) {
+        context.font = `${fontSize}px IBM Plex Sans, sans-serif`;
+        return context;
+      }
+    } catch (_) {}
+    return null;
+  })();
   const estimateLabelSize = label => {
     const lines = labelLines(label);
     const maxChars = Math.max(1, ...lines.map(line => line.length));
-    const wPx = Math.ceil((maxChars * fontSize * 0.68 + 12) * safety);
-    const hPx = Math.ceil((lines.length * fontSize * 1.45 + 8) * safety);
+    const measuredWidth = textMeasure ? Math.max(...lines.map(line => textMeasure.measureText(line).width)) : maxChars * fontSize * 0.6;
+    const wPx = Math.ceil((measuredWidth + 7) * safety);
+    const hPx = Math.ceil((lines.length * fontSize * 1.35 + 5) * safety);
     return { wPx, hPx };
   };
 
@@ -174,7 +189,40 @@ function buildCollisionSafeLabelAnnotations(points, gd, options) {
       ya: uy > 0.18 ? 'top' : uy < -0.18 ? 'bottom' : 'middle',
     };
   });
-  const radii = options.radii || [24, 32, 42, 54, 68, 84, 104, 128, 156, 188, 224, 264, 308, 356];
+  const radiusSteps = [0, 4, 8, 14, 22, 32, 46, 64, 86, 114, 148, 190, 240, 300, 380];
+  const requestedRadii = Array.isArray(options.radii) ? options.radii : [];
+  const radii = [...new Set([
+    ...radiusSteps.map(step => adjacentRadius + step),
+    ...requestedRadii.map(radius => Math.max(adjacentRadius, Number(radius))),
+  ].filter(Number.isFinite))].sort((left, right) => left - right);
+  const candidateStep = Math.max(6, Number(options.candidateStep) || 8);
+  const maxCandidateRadius = Math.max(...radii, adjacentRadius + 160);
+  const candidateOffsets = [];
+  const addCandidateOffset = (ax, ay, xa, ya) => {
+    const radius = Math.hypot(ax, ay);
+    if (Number.isFinite(radius) && radius >= adjacentRadius - 1 && radius <= maxCandidateRadius + 1) {
+      candidateOffsets.push({ ax, ay, xa, ya, radius });
+    }
+  };
+  radii.forEach(radius => directions.forEach(direction => addCandidateOffset(
+    direction.ux * radius,
+    direction.uy * radius,
+    direction.xa,
+    direction.ya,
+  )));
+  for (let ax = -maxCandidateRadius; ax <= maxCandidateRadius; ax += candidateStep) {
+    for (let ay = -maxCandidateRadius; ay <= maxCandidateRadius; ay += candidateStep) {
+      const radius = Math.hypot(ax, ay);
+      if (radius < adjacentRadius - 1 || radius > maxCandidateRadius) continue;
+      addCandidateOffset(
+        ax,
+        ay,
+        ax > candidateStep * 0.35 ? 'left' : ax < -candidateStep * 0.35 ? 'right' : 'center',
+        ay > candidateStep * 0.35 ? 'top' : ay < -candidateStep * 0.35 ? 'bottom' : 'middle',
+      );
+    }
+  }
+  candidateOffsets.sort((left, right) => left.radius - right.radius);
 
   items.forEach(item => {
     item.isolation = items.reduce((nearest, other) => {
@@ -182,10 +230,10 @@ function buildCollisionSafeLabelAnnotations(points, gd, options) {
       return Math.min(nearest, Math.hypot(item.px.x - other.px.x, item.px.y - other.px.y));
     }, Infinity);
   });
-  items.sort((left, right) => {
+  const priorityOrder = (left, right) => {
     if (left.onFront !== right.onFront) return left.onFront ? -1 : 1;
-    return right.isolation - left.isolation || left.label.localeCompare(right.label);
-  });
+    return left.isolation - right.isolation || left.label.localeCompare(right.label);
+  };
 
   function labelBox(pointX, pointY, ax, ay, labelWidth, labelHeight, xanchor, yanchor) {
     const anchorX = pointX + ax;
@@ -211,9 +259,13 @@ function buildCollisionSafeLabelAnnotations(points, gd, options) {
         box.top - labelPad > placedItem.box.bottom);
     });
   }
+  function pointGap(box, point) {
+    const nearestX = clamp(point.x, box.left, box.right);
+    const nearestY = clamp(point.y, box.top, box.bottom);
+    return Math.hypot(point.x - nearestX, point.y - nearestY);
+  }
   function markerPenalty(box, ownIndex) {
     return items.reduce((penalty, item) => {
-      if (item.idx === ownIndex) return penalty;
       const nearestX = clamp(item.px.x, box.left, box.right);
       const nearestY = clamp(item.px.y, box.top, box.bottom);
       const distance = Math.hypot(item.px.x - nearestX, item.px.y - nearestY);
@@ -233,54 +285,93 @@ function buildCollisionSafeLabelAnnotations(points, gd, options) {
     return widthOverlap * heightOverlap;
   }
   function findPlacement(item, placed, skipIndex) {
-    const candidates = [];
-    for (const radius of radii) {
-      for (const direction of directions) {
-        const ax = direction.ux * radius;
-        const ay = direction.uy * radius;
-        const box = labelBox(item.px.x, item.px.y, ax, ay, item.size.wPx, item.size.hPx, direction.xa, direction.ya);
-        if (inBounds(box) && !overlapsLabels(box, placed, skipIndex) && markerPenalty(box, item.idx) === 0) {
-          return { ax, ay, xa: direction.xa, ya: direction.ya, box, score: radius };
-        }
-        const labelOverlap = placed.reduce((total, placedItem, index) => {
-          if (skipIndex != null && index === skipIndex) return total;
-          return total + overlapArea(box, placedItem.box);
-        }, 0);
-        candidates.push({
-          ax, ay, xa: direction.xa, ya: direction.ya, box,
-          score: labelOverlap * 1000 + markerPenalty(box, item.idx) * 100 + spillCost(box) * 10 + radius,
-        });
+    let bestValid = null;
+    let bestInvalid = null;
+    let firstCandidate = null;
+    for (const offset of candidateOffsets) {
+      if (bestValid && offset.radius > bestValid.gap + 10) break;
+      const { ax, ay, xa, ya, radius } = offset;
+      const box = labelBox(item.px.x, item.px.y, ax, ay, item.size.wPx, item.size.hPx, xa, ya);
+      const gap = pointGap(box, item.px);
+      const inChart = inBounds(box);
+      const labelOverlap = placed.reduce((total, placedItem, index) => {
+        if (skipIndex != null && index === skipIndex) return total;
+        return total + overlapArea(box, placedItem.box);
+      }, 0);
+      const labelClear = inChart && !overlapsLabels(box, placed, skipIndex);
+      const markerCost = labelClear ? markerPenalty(box, item.idx) : 0;
+      const valid = labelClear && markerCost === 0;
+      const candidate = {
+        ax, ay, xa, ya, box, gap, radius,
+        adjacent: gap <= adjacentRadius + 1,
+        score: gap + radius * 0.01,
+      };
+      if (!firstCandidate) firstCandidate = candidate;
+      if (valid) {
+        if (!bestValid || candidate.score < bestValid.score) bestValid = candidate;
+      } else {
+        candidate.score = labelOverlap * 1000 + markerCost * 100 + (inChart ? 0 : spillCost(box) * 10) + gap + radius * 0.01;
+        if (!bestInvalid || candidate.score < bestInvalid.score) bestInvalid = candidate;
       }
     }
-    candidates.sort((left, right) => left.score - right.score);
-    return candidates[0];
+    return bestValid || bestInvalid || firstCandidate;
   }
 
-  const placed = [];
-  items.forEach(item => placed.push({ item, ...findPlacement(item, placed, null) }));
-  for (let pass = 0; pass < 6; pass += 1) {
-    let changed = false;
-    for (let index = 0; index < placed.length; index += 1) {
-      const current = placed[index];
-      if (!overlapsLabels(current.box, placed, index) && markerPenalty(current.box, current.item.idx) === 0) continue;
-      const next = findPlacement(current.item, placed, index);
-      if (next.ax !== current.ax || next.ay !== current.ay || next.xa !== current.xa || next.ya !== current.ya) changed = true;
-      placed[index] = { item: current.item, ...next };
+  function placeInOrder(order) {
+    const placed = [];
+    order.forEach(item => placed.push({ item, ...findPlacement(item, placed, null) }));
+    // Greedy placement establishes a safe arrangement; compaction then lets
+    // later labels use an open near-point slot blocked by an earlier choice.
+    for (let pass = 0; pass < 8; pass += 1) {
+      let changed = false;
+      for (let index = 0; index < placed.length; index += 1) {
+        const current = placed[index];
+        const next = findPlacement(current.item, placed, index);
+        const currentGap = Number.isFinite(current.gap) ? current.gap : Infinity;
+        if (next && (next.gap < currentGap - 0.25 ||
+          (Math.abs(next.gap - currentGap) <= 0.25 && next.radius < current.radius))) {
+          placed[index] = { item: current.item, ...next };
+          changed = true;
+        } else if (overlapsLabels(current.box, placed, index) || markerPenalty(current.box, current.item.idx) !== 0) {
+          placed[index] = { item: current.item, ...next };
+          changed = true;
+        }
+      }
+      if (!changed) break;
     }
-    if (!changed) break;
+    return placed;
   }
+  function arrangementScore(placed) {
+    const gaps = placed.map(entry => Number.isFinite(entry.gap) ? entry.gap : maxCandidateRadius);
+    const maxGap = Math.max(...gaps);
+    const invalid = placed.reduce((count, entry, index) => count +
+      (overlapsLabels(entry.box, placed, index) || markerPenalty(entry.box, entry.item.idx) !== 0 ? 1 : 0), 0);
+    return gaps.reduce((total, gap) => total + gap * gap, 0) + maxGap * maxGap * 2 + invalid * 1e9;
+  }
+  const orderings = [
+    items.slice().sort(priorityOrder),
+    items.slice().sort((left, right) => right.isolation - left.isolation || left.label.localeCompare(right.label)),
+    items.slice().sort((left, right) => left.px.x - right.px.x || left.px.y - right.px.y || left.label.localeCompare(right.label)),
+    items.slice().sort((left, right) => left.px.y - right.px.y || left.px.x - right.px.x || left.label.localeCompare(right.label)),
+  ];
+  let placed = null;
+  let bestScore = Infinity;
+  orderings.forEach(order => {
+    const candidate = placeInOrder(order);
+    const score = arrangementScore(candidate);
+    if (!placed || score < bestScore) {
+      placed = candidate;
+      bestScore = score;
+    }
+  });
 
-  return placed.map(({ item, ax, ay, xa, ya }) => ({
+  return placed.map(({ item, ax, ay, xa, ya, adjacent }) => ({
     x: item.paper.x,
     y: item.paper.y,
-    ax,
-    ay,
     xref: 'paper',
     yref: 'paper',
-    axref: 'pixel',
-    ayref: 'pixel',
     text: item.label,
-    showarrow: true,
+    showarrow: !adjacent,
     arrowhead: 0,
     arrowsize: 0.95,
     arrowwidth: 1.3,
@@ -300,6 +391,9 @@ function buildCollisionSafeLabelAnnotations(points, gd, options) {
     borderwidth: 0,
     borderpad: 0,
     captureevents: false,
+    ...(adjacent ? { xshift: ax, yshift: ay } : {
+      ax, ay, axref: 'pixel', ayref: 'pixel',
+    }),
   }));
 }
 
@@ -346,7 +440,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     const angle = -Math.PI / 2 + index * Math.PI / 8;
     return { x: Math.cos(angle), y: Math.sin(angle) };
   });
-  const distances = [0, 32, 64, 96, 132, 174, 224, 284, 352];
+  const distances = [0, 4, 10, 16, 24, 34, 48, 68, 96, 132, 174, 224, 284, 352];
 
   for (let pass = 0; pass < maxPasses; pass += 1) {
     const pairs = overlapPairs(boxes);
@@ -420,10 +514,26 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       const current = boxesByIndex.get(index);
       if (!current) return;
       const annotation = annotations[index];
-      annotation.ax = Number(annotation.ax) || 0;
-      annotation.ay = Number(annotation.ay) || 0;
-      annotation.ax += target.left - current.rect.left;
-      annotation.ay += target.top - current.rect.top;
+      const deltaX = target.left - current.rect.left;
+      const deltaY = target.top - current.rect.top;
+      if (annotation.showarrow === false) {
+        // A rendered collision means the adjacent, arrowless slot was not
+        // sufficient; preserve the point connection while moving the label.
+        annotation.ax = (Number(annotation.xshift) || 0) + deltaX;
+        annotation.ay = (Number(annotation.yshift) || 0) + deltaY;
+        annotation.xshift = 0;
+        annotation.yshift = 0;
+        annotation.xref = annotation.xref || 'paper';
+        annotation.yref = annotation.yref || 'paper';
+        annotation.axref = 'pixel';
+        annotation.ayref = 'pixel';
+        annotation.showarrow = true;
+      } else {
+        annotation.ax = Number(annotation.ax) || 0;
+        annotation.ay = Number(annotation.ay) || 0;
+        annotation.ax += deltaX;
+        annotation.ay += deltaY;
+      }
     });
     await Plotly.relayout(gd, { annotations });
     await waitForPaint();
@@ -528,7 +638,7 @@ function buildCaLabelAnnotations(frontierIds, labelIds, gd){
     frontier: frontierIds.has(row.label),
    })),
    gd,
-   { fontSize:8, markerRadius:12, safety:1.55, labelPad:10, radii:[28,38,50,64,82,104,132,164,202,246,296,352,414] }
+    { fontSize:7.5, markerRadius:8, safety:1.05, labelPad:3, candidateStep:6, radii:[28,38,50,64,82,104,132,164,202,246,296,352,414] }
   );
 }
 function draw(){
