@@ -58,7 +58,7 @@ All 21 current DeepSWE Best models are retained. Raw AA benchmark values are per
 
 ## LiveBench external component
 
-LiveBench release **2026_06_25** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **20/21** ranked models; GPT-6 Astra is unavailable in this release.
+LiveBench release **2026_06_25** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **20/21** ranked models and includes **1 official supplemental model** outside that cohort: **Claude Fable 5.1**. GPT-6 Astra is unavailable in this release.
 
 | Model | LiveBench variant | Instruction Following | Overall Score | Cost Per Successful Task |
 |---|---|---:|---:|---:|
@@ -82,8 +82,9 @@ LiveBench release **2026_06_25** supplies the four-task Instruction Following me
 | Gemini 3.6 Flash | gemini-3.6-flash-high | 75.37 | 73.59 | $0.2353 |
 | GLM-5.2 | glm-5.2 | 62.29 | 73.16 | $0.2246 |
 | Gemini 3.5 Flash | gemini-3.5-flash-high | 75.60 | 74.64 | $0.2489 |
+| Claude Fable 5.1 | claude-fable-5-1-max-effort | 72.99 | 83.41 | $1.2117 |
 
-LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5**.
+LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5.1**.
 
 ## Terminal-Bench 4.0 external component
 

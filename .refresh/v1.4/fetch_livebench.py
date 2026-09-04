@@ -4,8 +4,9 @@
 The release is pinned deliberately: LiveBench is a moving leaderboard, while a
 ValueRank publication needs a reproducible snapshot.  The script keeps the
 official task rows and cost-per-successful-task values for the current DeepSWE
-cohort, derives the published category/overall means, and records hashes for
-the fetched source files.
+cohort, preserves officially evaluated models outside that cohort as explicit
+supplemental rows, derives the published category/overall means, and records
+the release commit and hashes for the fetched source files.
 """
 
 from __future__ import annotations
@@ -24,10 +25,14 @@ ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
 RELEASE = "2026_06_25"
 BASE_URL = "https://livebench.ai"
+RELEASE_DATA_COMMIT = "62240f848c977d4202c1029191ac663498745f2f"
+RELEASE_DATA_BASE_URL = (
+    f"https://raw.githubusercontent.com/LiveBench/new-livebench/{RELEASE_DATA_COMMIT}/public"
+)
 URLS = {
-    "table": f"{BASE_URL}/table_{RELEASE}.csv",
-    "cost": f"{BASE_URL}/cost_{RELEASE}.csv",
-    "categories": f"{BASE_URL}/categories_{RELEASE}.json",
+    "table": f"{RELEASE_DATA_BASE_URL}/table_{RELEASE}.csv",
+    "cost": f"{RELEASE_DATA_BASE_URL}/cost_{RELEASE}.csv",
+    "categories": f"{RELEASE_DATA_BASE_URL}/categories_{RELEASE}.json",
 }
 
 # LiveBench uses "IF" in the release JSON; the publication uses the full
@@ -64,6 +69,13 @@ COHORT_MAP = {
     "gemini-3.6-flash": "gemini-3.6-flash-high",
     "glm-5.2": "glm-5.2",
     "gemini-3.5-flash": "gemini-3.5-flash-high",
+}
+
+# Keep officially evaluated models outside the ranked DeepSWE cohort visible in
+# the benchmark-specific views without silently changing the primary ranking
+# population.  These rows are stored separately as `supplementalModels`.
+SUPPLEMENTAL_MAP = {
+    "claude-fable-5-1": ("Claude Fable 5.1", "claude-fable-5-1-max-effort"),
 }
 
 
@@ -130,6 +142,48 @@ def pareto_ids(rows: dict[str, dict]) -> list[str]:
     return [row["modelId"] for row in sorted(frontier, key=lambda row: row["costPerSuccessfulTaskUsd"])]
 
 
+def build_record(
+    model_id: str,
+    display_name: str,
+    livebench_model: str | None,
+    table_by_model: dict[str, dict],
+    cost_by_model: dict[str, dict],
+    task_categories: dict[str, list[str]],
+    cost_key: str,
+) -> dict:
+    table_row = table_by_model.get(livebench_model) if livebench_model else None
+    cost_row = cost_by_model.get(livebench_model) if livebench_model else None
+    record = {
+        "modelId": model_id,
+        "name": display_name,
+        "livebenchModel": livebench_model,
+        "matched": bool(table_row and cost_row),
+        "tasks": {},
+        "categoryScores": {},
+        "overallScore": None,
+        "instructionFollowingScore": None,
+        "costPerSuccessfulTaskUsd": None,
+    }
+    if not record["matched"]:
+        return record
+    expected_tasks = {task for tasks in task_categories.values() for task in tasks}
+    for task in sorted(expected_tasks):
+        record["tasks"][task] = number(table_row.get(task), f"{model_id}.{task}")
+    for category, tasks in task_categories.items():
+        values = [record["tasks"].get(task) for task in tasks]
+        if any(value is None for value in values):
+            raise ValueError(f"incomplete LiveBench category for {model_id}: {category}")
+        record["categoryScores"][category] = mean(values, f"{model_id}.{category}")
+    record["overallScore"] = mean(list(record["categoryScores"].values()), f"{model_id}.overall")
+    record["instructionFollowingScore"] = record["categoryScores"]["Instruction Following"]
+    record["costPerSuccessfulTaskUsd"] = number(
+        cost_row[cost_key], f"{model_id}.{cost_key}"
+    )
+    if record["costPerSuccessfulTaskUsd"] is None or record["costPerSuccessfulTaskUsd"] <= 0:
+        raise ValueError(f"missing/non-positive LiveBench cost for {model_id}")
+    return record
+
+
 def main() -> int:
     deepswe = json.loads((REFRESH / "deepswe.json").read_text())
     cohort = [(item["slug"], item["displayName"]) for item in deepswe["models"]]
@@ -168,41 +222,41 @@ def main() -> int:
     missing_models = []
     for model_id, display_name in cohort:
         livebench_model = COHORT_MAP[model_id]
-        table_row = table_by_model.get(livebench_model) if livebench_model else None
-        cost_row = cost_by_model.get(livebench_model) if livebench_model else None
-        record = {
-            "modelId": model_id,
-            "name": display_name,
-            "livebenchModel": livebench_model,
-            "matched": bool(table_row and cost_row),
-            "tasks": {},
-            "categoryScores": {},
-            "overallScore": None,
-            "instructionFollowingScore": None,
-            "costPerSuccessfulTaskUsd": None,
-        }
+        record = build_record(
+            model_id,
+            display_name,
+            livebench_model,
+            table_by_model,
+            cost_by_model,
+            task_categories,
+            cost_key,
+        )
         if not record["matched"]:
             missing_models.append(display_name)
-            models[model_id] = record
-            continue
-        for task in sorted(expected_tasks):
-            record["tasks"][task] = number(table_row.get(task), f"{model_id}.{task}")
-        for category, tasks in task_categories.items():
-            values = [record["tasks"].get(task) for task in tasks]
-            if any(value is None for value in values):
-                raise ValueError(f"incomplete LiveBench category for {model_id}: {category}")
-            record["categoryScores"][category] = mean(values, f"{model_id}.{category}")
-        record["overallScore"] = mean(list(record["categoryScores"].values()), f"{model_id}.overall")
-        record["instructionFollowingScore"] = record["categoryScores"]["Instruction Following"]
-        record["costPerSuccessfulTaskUsd"] = number(
-            cost_row[cost_key], f"{model_id}.{cost_key}"
-        )
-        if record["costPerSuccessfulTaskUsd"] is None or record["costPerSuccessfulTaskUsd"] <= 0:
-            raise ValueError(f"missing/non-positive LiveBench cost for {model_id}")
         models[model_id] = record
 
     if len(missing_models) != 1 or missing_models != ["GPT-6 Astra"]:
         raise ValueError(f"unexpected LiveBench cohort coverage: {missing_models}")
+
+    supplemental_models: dict[str, dict] = {}
+    for model_id, (display_name, livebench_model) in SUPPLEMENTAL_MAP.items():
+        if model_id in models:
+            raise ValueError(f"LiveBench supplemental model overlaps cohort: {model_id}")
+        record = build_record(
+            model_id,
+            display_name,
+            livebench_model,
+            table_by_model,
+            cost_by_model,
+            task_categories,
+            cost_key,
+        )
+        if not record["matched"]:
+            raise ValueError(f"LiveBench supplemental model is missing from release: {livebench_model}")
+        supplemental_models[model_id] = record
+
+    all_models = {**models, **supplemental_models}
+    matched_supplemental = [record for record in supplemental_models.values() if record["matched"]]
     observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     document = {
         "schemaVersion": "valuerank-livebench-v1",
@@ -212,6 +266,7 @@ def main() -> int:
             "publisher": "LiveBench",
             "homepage": BASE_URL + "/",
             "repository": "https://github.com/livebench/new-livebench",
+            "releaseDataCommit": RELEASE_DATA_COMMIT,
             "releaseDate": "2026-06-25",
             "urls": URLS,
             "files": {
@@ -225,13 +280,19 @@ def main() -> int:
         "matchedN": len(cohort) - len(missing_models),
         "missingModels": missing_models,
         "models": models,
+        "supplementalN": len(supplemental_models),
+        "supplementalMatchedN": len(matched_supplemental),
+        "publishedN": len([record for record in all_models.values() if record["matched"]]),
+        "supplementalModels": supplemental_models,
     }
-    document["pareto"] = pareto_ids(models)
+    document["pareto"] = pareto_ids(all_models)
     (REFRESH / "livebench.json").write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps({
         "release": RELEASE,
         "cohortN": document["cohortN"],
         "matchedN": document["matchedN"],
+        "publishedN": document["publishedN"],
+        "supplementalModels": list(document["supplementalModels"]),
         "missingModels": document["missingModels"],
         "pareto": document["pareto"],
         "output": ".refresh/v1.4/livebench.json",

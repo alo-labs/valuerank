@@ -1869,14 +1869,14 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 
     <div class="card mb-6" id="livebench-data">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">LiveBench External Coverage</h3>
-      <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>20/21</strong> ranked models. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
+       <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>20/21</strong> ranked models and includes <strong>1 official supplemental model</strong> outside the ranked cohort: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
           <tbody><tr><td>Gemini 3.8 Flash</td><td class="mono">gemini-3.8-flash-high</td><td class="mono">81.41</td><td class="mono">75.83</td><td class="mono">$0.3073</td><td>—</td></tr>
 <tr><td>Claude Opus 5</td><td class="mono">claude-opus-5-max-effort</td><td class="mono">63.77</td><td class="mono">80.08</td><td class="mono">$0.7067</td><td>—</td></tr>
 <tr><td>GPT-5.6 Sol</td><td class="mono">gpt-5.6-sol-max</td><td class="mono">71.85</td><td class="mono">81.05</td><td class="mono">$0.5070</td><td>Frontier</td></tr>
-<tr><td>Claude Fable 5</td><td class="mono">claude-fable-5-max-effort</td><td class="mono">75.77</td><td class="mono">82.97</td><td class="mono">$1.4777</td><td>Frontier</td></tr>
+<tr><td>Claude Fable 5</td><td class="mono">claude-fable-5-max-effort</td><td class="mono">75.77</td><td class="mono">82.97</td><td class="mono">$1.4777</td><td>—</td></tr>
 <tr><td>GLM-5.3</td><td class="mono">glm-5.3</td><td class="mono">69.30</td><td class="mono">76.14</td><td class="mono">$0.4504</td><td>—</td></tr>
 <tr><td>Kimi K3</td><td class="mono">kimi-k3</td><td class="mono">71.36</td><td class="mono">79.19</td><td class="mono">$0.3510</td><td>Frontier</td></tr>
 <tr><td>Grok 4.6</td><td class="mono">grok-4.6</td><td class="mono">71.87</td><td class="mono">78.04</td><td class="mono">$0.2068</td><td>—</td></tr>
@@ -1892,10 +1892,11 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 <tr><td>DeepSeek V4 Flash</td><td class="mono">deepseek-v4-flash</td><td class="mono">63.14</td><td class="mono">65.48</td><td class="mono">$0.0161</td><td>Frontier</td></tr>
 <tr><td>Gemini 3.6 Flash</td><td class="mono">gemini-3.6-flash-high</td><td class="mono">75.37</td><td class="mono">73.59</td><td class="mono">$0.2353</td><td>—</td></tr>
 <tr><td>GLM-5.2</td><td class="mono">glm-5.2</td><td class="mono">62.29</td><td class="mono">73.16</td><td class="mono">$0.2246</td><td>—</td></tr>
-<tr><td>Gemini 3.5 Flash</td><td class="mono">gemini-3.5-flash-high</td><td class="mono">75.60</td><td class="mono">74.64</td><td class="mono">$0.2489</td><td>—</td></tr></tbody>
+<tr><td>Gemini 3.5 Flash</td><td class="mono">gemini-3.5-flash-high</td><td class="mono">75.60</td><td class="mono">74.64</td><td class="mono">$0.2489</td><td>—</td></tr>
+<tr><td>Claude Fable 5.1</td><td class="mono">claude-fable-5-1-max-effort</td><td class="mono">72.99</td><td class="mono">83.41</td><td class="mono">$1.2117</td><td>Frontier</td></tr></tbody>
         </table>
       </div>
-      <p class="method-text" style="margin-top:12px;">Source: <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a>; pinned data release 2026-06-25. Pareto frontier: <strong>DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5</strong>.</p>
+      <p class="method-text" style="margin-top:12px;">Source: <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a>; pinned data release 2026-06-25 at <a href="https://github.com/livebench/new-livebench/commit/62240f848c977d4202c1029191ac663498745f2f" target="_blank" rel="noopener">62240f848c977d4202c1029191ac663498745f2f</a>. Pareto frontier: <strong>DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5.1</strong>.</p>
     </div>
     <div class="card mb-6">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (21 × 12)</h3>
@@ -3598,7 +3599,7 @@ const LIVEBENCH = [
     "overallScore": 82.970798,
     "instructionFollowingScore": 75.77075,
     "costPerSuccessfulTaskUsd": 1.4777,
-    "pareto": true
+    "pareto": false
   },
   {
     "id": "glm-5.3",
@@ -3743,6 +3744,15 @@ const LIVEBENCH = [
     "instructionFollowingScore": 75.6,
     "costPerSuccessfulTaskUsd": 0.2489,
     "pareto": false
+  },
+  {
+    "id": "claude-fable-5-1",
+    "name": "Claude Fable 5.1",
+    "livebenchModel": "claude-fable-5-1-max-effort",
+    "overallScore": 83.414155,
+    "instructionFollowingScore": 72.98775,
+    "costPerSuccessfulTaskUsd": 1.2117,
+    "pareto": true
   }
 ];
 
@@ -3759,7 +3769,7 @@ MODELS.forEach(model => {
   model.costTier = compositeCostTier(model.evalCost);
 });
 
-const SPEED_DIM_IDX = -1; // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // 11 in v1.4.0 (was 14 in v1.2)
+const SPEED_DIM_IDX = -1; // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // 11 in v1.4.0 (was 14 in v1.2)
 
 function fmtUsd(v, opts) {
   if (v == null || Number.isNaN(Number(v))) return '—';

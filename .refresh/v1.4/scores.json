@@ -1,7 +1,7 @@
 {
   "version": "v1.4.0",
   "publishDate": "September 5, 2026",
-  "observedAt": "2026-09-04T14:29:24Z",
+  "observedAt": "2026-09-04T16:34:17Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.1.1",
   "cohort": {
     "n": 21,
@@ -2955,6 +2955,11 @@
       "release": "2026_06_25",
       "matchedN": 20,
       "cohortN": 21,
+      "publishedN": 21,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "claude-fable-5-1"
+      ],
       "pareto": [
         "deepseek-v4-flash",
         "glm-5.3-flash",
@@ -2962,7 +2967,7 @@
         "kimi-k3",
         "gpt-5.5",
         "gpt-5.6-sol",
-        "claude-fable-5"
+        "claude-fable-5-1"
       ]
     },
     "terminalBenchV4": {

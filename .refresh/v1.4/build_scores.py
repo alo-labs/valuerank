@@ -320,6 +320,13 @@ def main() -> int:
             "missingModels": livebench_document["missingModels"],
             "includedInPrimaryScore": False,
             "sourceRelease": livebench_document["release"],
+            "publishedN": livebench_document.get("publishedN", livebench_document["matchedN"]),
+            "supplementalMatchedN": livebench_document.get("supplementalMatchedN", 0),
+            "supplementalModels": [
+                record["name"]
+                for record in livebench_document.get("supplementalModels", {}).values()
+                if record.get("matched")
+            ],
         },
         "livebenchInstructionFollowing": {
             "group": "supplemental",
@@ -330,6 +337,13 @@ def main() -> int:
             "missingModels": livebench_document["missingModels"],
             "includedInPrimaryScore": False,
             "sourceRelease": livebench_document["release"],
+            "publishedN": livebench_document.get("publishedN", livebench_document["matchedN"]),
+            "supplementalMatchedN": livebench_document.get("supplementalMatchedN", 0),
+            "supplementalModels": [
+                record["name"]
+                for record in livebench_document.get("supplementalModels", {}).values()
+                if record.get("matched")
+            ],
         },
         "livebenchCostPerSuccessfulTask": {
             "group": "supplemental",
@@ -340,6 +354,13 @@ def main() -> int:
             "missingModels": livebench_document["missingModels"],
             "includedInPrimaryScore": False,
             "sourceRelease": livebench_document["release"],
+            "publishedN": livebench_document.get("publishedN", livebench_document["matchedN"]),
+            "supplementalMatchedN": livebench_document.get("supplementalMatchedN", 0),
+            "supplementalModels": [
+                record["name"]
+                for record in livebench_document.get("supplementalModels", {}).values()
+                if record.get("matched")
+            ],
         },
         "terminalBenchV4": {
             "group": "supplemental",
@@ -360,6 +381,9 @@ def main() -> int:
             "release": livebench_document["release"],
             "matchedN": livebench_document["matchedN"],
             "cohortN": livebench_document["cohortN"],
+            "publishedN": livebench_document.get("publishedN", livebench_document["matchedN"]),
+            "supplementalMatchedN": livebench_document.get("supplementalMatchedN", 0),
+            "supplementalModels": list(livebench_document.get("supplementalModels", {})),
             "pareto": livebench_document["pareto"],
         },
         "terminalBenchV4": {
@@ -399,6 +423,8 @@ def main() -> int:
         ],
         "externalCoverage": {
             "livebench": f"{livebench_document['matchedN']}/{livebench_document['cohortN']}",
+            "livebenchPublishedN": livebench_document.get("publishedN", livebench_document["matchedN"]),
+            "livebenchSupplementalModels": list(livebench_document.get("supplementalModels", {})),
             "terminalBenchV4": f"{tb4_document['matchedN']}/{tb4_document['cohortN']}",
         },
     }
@@ -426,6 +452,9 @@ def main() -> int:
                         "release": livebench_document["release"],
                         "matchedN": livebench_document["matchedN"],
                         "cohortN": livebench_document["cohortN"],
+                        "publishedN": livebench_document.get("publishedN", livebench_document["matchedN"]),
+                        "supplementalMatchedN": livebench_document.get("supplementalMatchedN", 0),
+                        "supplementalModels": list(livebench_document.get("supplementalModels", {})),
                         "pareto": livebench_document["pareto"],
                     },
                     "terminalBenchV4": {

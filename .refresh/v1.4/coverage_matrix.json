@@ -431,7 +431,12 @@
         "GPT-6 Astra"
       ],
       "includedInPrimaryScore": false,
-      "sourceRelease": "2026_06_25"
+      "sourceRelease": "2026_06_25",
+      "publishedN": 21,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "Claude Fable 5.1"
+      ]
     },
     "livebenchInstructionFollowing": {
       "group": "supplemental",
@@ -443,7 +448,12 @@
         "GPT-6 Astra"
       ],
       "includedInPrimaryScore": false,
-      "sourceRelease": "2026_06_25"
+      "sourceRelease": "2026_06_25",
+      "publishedN": 21,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "Claude Fable 5.1"
+      ]
     },
     "livebenchCostPerSuccessfulTask": {
       "group": "supplemental",
@@ -455,7 +465,12 @@
         "GPT-6 Astra"
       ],
       "includedInPrimaryScore": false,
-      "sourceRelease": "2026_06_25"
+      "sourceRelease": "2026_06_25",
+      "publishedN": 21,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "Claude Fable 5.1"
+      ]
     },
     "terminalBenchV4": {
       "group": "supplemental",
@@ -663,6 +678,11 @@
       "release": "2026_06_25",
       "matchedN": 20,
       "cohortN": 21,
+      "publishedN": 21,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "claude-fable-5-1"
+      ],
       "pareto": [
         "deepseek-v4-flash",
         "glm-5.3-flash",
@@ -670,7 +690,7 @@
         "kimi-k3",
         "gpt-5.5",
         "gpt-5.6-sol",
-        "claude-fable-5"
+        "claude-fable-5-1"
       ]
     },
     "terminalBenchV4": {

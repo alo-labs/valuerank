@@ -1,36 +1,37 @@
 {
   "schemaVersion": "valuerank-livebench-v1",
   "release": "2026_06_25",
-  "observedAt": "2026-09-04T14:05:21Z",
+  "observedAt": "2026-09-04T16:32:14Z",
   "source": {
     "publisher": "LiveBench",
     "homepage": "https://livebench.ai/",
     "repository": "https://github.com/livebench/new-livebench",
+    "releaseDataCommit": "62240f848c977d4202c1029191ac663498745f2f",
     "releaseDate": "2026-06-25",
     "urls": {
-      "table": "https://livebench.ai/table_2026_06_25.csv",
-      "cost": "https://livebench.ai/cost_2026_06_25.csv",
-      "categories": "https://livebench.ai/categories_2026_06_25.json"
+      "table": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/table_2026_06_25.csv",
+      "cost": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/cost_2026_06_25.csv",
+      "categories": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/categories_2026_06_25.json"
     },
     "files": {
       "table": {
-        "url": "https://livebench.ai/table_2026_06_25.csv",
+        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/table_2026_06_25.csv",
         "status": "200",
-        "contentType": "text/csv; charset=utf-8",
+        "contentType": "text/plain; charset=utf-8",
         "bytes": 8939,
         "sha256": "b8e6339f7fafe6df8f6ecc8b0abe3dc529b5737a6c7edd3e24ffcb36e02fd118"
       },
       "cost": {
-        "url": "https://livebench.ai/cost_2026_06_25.csv",
+        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/cost_2026_06_25.csv",
         "status": "200",
-        "contentType": "text/csv; charset=utf-8",
+        "contentType": "text/plain; charset=utf-8",
         "bytes": 23394,
         "sha256": "6ae57254eaefe9c84008e909d118f37e53271009cf97569d43506b2ae8c9b29e"
       },
       "categories": {
-        "url": "https://livebench.ai/categories_2026_06_25.json",
+        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/categories_2026_06_25.json",
         "status": "200",
-        "contentType": "application/json; charset=utf-8",
+        "contentType": "text/plain; charset=utf-8",
         "bytes": 725,
         "sha256": "dad300ad18655b69db720e1b88fc5a5eac06c5b2f0e52c2bf50f10ff057674f3"
       }
@@ -953,6 +954,54 @@
       "costPerSuccessfulTaskUsd": 0.2489
     }
   },
+  "supplementalN": 1,
+  "supplementalMatchedN": 1,
+  "publishedN": 21,
+  "supplementalModels": {
+    "claude-fable-5-1": {
+      "modelId": "claude-fable-5-1",
+      "name": "Claude Fable 5.1",
+      "livebenchModel": "claude-fable-5-1-max-effort",
+      "matched": true,
+      "tasks": {
+        "AMPS_Hard": 99.0,
+        "code_completion": 82.609,
+        "code_generation": 90.141,
+        "connections": 99.333,
+        "consecutive_events": 90.555,
+        "integrals_with_game": 99.0,
+        "javascript": 68.182,
+        "logic_with_navigation": 86.0,
+        "math_comp": 97.059,
+        "olympiad": 92.968,
+        "paraphrase": 71.517,
+        "plot_unscrambling": 75.17,
+        "python": 70.0,
+        "simplify": 70.167,
+        "spatial": 100.0,
+        "story_generation": 78.1,
+        "summarize": 72.167,
+        "tablejoin": 56.154,
+        "tablereformat": 94.118,
+        "theory_of_mind": 80.769,
+        "typescript": 60.0,
+        "typos": 94.0,
+        "zebra_puzzle": 100.0
+      },
+      "categoryScores": {
+        "Reasoning": 91.69225,
+        "Coding": 86.375,
+        "Agentic Coding": 66.060667,
+        "Mathematics": 97.00675,
+        "Data Analysis": 80.275667,
+        "Language": 89.501,
+        "Instruction Following": 72.98775
+      },
+      "overallScore": 83.414155,
+      "instructionFollowingScore": 72.98775,
+      "costPerSuccessfulTaskUsd": 1.2117
+    }
+  },
   "pareto": [
     "deepseek-v4-flash",
     "glm-5.3-flash",
@@ -960,6 +1009,6 @@
     "kimi-k3",
     "gpt-5.5",
     "gpt-5.6-sol",
-    "claude-fable-5"
+    "claude-fable-5-1"
   ]
 }

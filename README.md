@@ -40,7 +40,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - DeepSWE is refreshed to the live v1.1 Best page: **21 models**, **113 tasks**, source updated **September 3, 2026**.
 - Artificial Analysis is migrated to the current **Artificial Analysis Intelligence Index v4.1.1** identity: GDPval-AA v2, τ³-Banking, its source Terminal-Bench v2.1 component, SciCode, AA-LCR, HLE, GPQA Diamond, CritPt, and split AA-Omniscience accuracy/non-hallucination components.
 - The standalone Terminal-Bench view is replaced by the official **Terminal-Bench 4.0** snapshot: **14 rows**, with **11/21** overlap with the ranked cohort.
-- **LiveBench 2026-06-25** supplies the Instruction Following component and Overall-vs-Cost view: **20/21** cohort rows matched; the current LiveBench Pareto frontier is **DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5**.
+- **LiveBench 2026-06-25** supplies the Instruction Following component and Overall-vs-Cost view: **20/21** ranked cohort rows matched, **21** rows published in total, plus **1 official supplemental model** (**Claude Fable 5.1**); the current LiveBench Pareto frontier is **DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5.1**.
 - The ranked pool is **21 models**, with all current DeepSWE entries preserved.
 - The score retains **12 zero-gap dimensions**; **Terminal-Bench 4.0, Instruction Following (LiveBench), Speed** are excluded because each has incomplete official cohort coverage. Missing external values remain null and are not neutral-filled.
 - Speed remains an auditable coverage field (20/21 AA pages publish a numeric value) but is not imputed into the primary score because GPT-6 Astra's selected page reports N/A.
@@ -50,7 +50,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 
 - [DeepSWE Best](https://deepswe.datacurve.ai/) for pass@1, uncertainty, average cost, output tokens, and agent steps.
 - [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
-- [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench) for the pinned 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
+- [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench), pinned at [release data commit 62240f848c977d4202c1029191ac663498745f2f](https://github.com/livebench/new-livebench/commit/62240f848c977d4202c1029191ac663498745f2f), for the 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
 - [Terminal-Bench 4.0](https://www.tbench.ai/) and the [official Harbor repository](https://github.com/harbor-framework/terminal-bench) for the current rendered leaderboard and task identity.
 - [Research report](research/2026-09-04-valuerank-refresh/research_report.md) for the source ledger, evidence spans, triangulation, critique cycles, and decisions.
 - [Coverage matrix](.refresh/v1.4/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.

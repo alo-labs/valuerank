@@ -35,8 +35,15 @@ n = len(models)
 d = len(weights)
 pareto = scores["pareto"]
 model_by_id = {model["id"]: model for model in models}
-livebench_rows = [record for record in livebench_document["models"].values() if record.get("matched")]
-livebench_pareto = [livebench_document["models"][model_id] for model_id in livebench_document["pareto"]]
+livebench_models = {
+    **livebench_document["models"],
+    **livebench_document.get("supplementalModels", {}),
+}
+livebench_rows = [record for record in livebench_models.values() if record.get("matched")]
+livebench_supplemental_rows = [
+    record for record in livebench_document.get("supplementalModels", {}).values() if record.get("matched")
+]
+livebench_pareto = [livebench_models[model_id] for model_id in livebench_document["pareto"]]
 tb4_rows = tb4_document["rows"]
 deepswe_updated = scores["cohort"].get("sourceUpdatedOn") or "September 3, 2026"
 aa_version = scores.get("benchmarkVersion") or "Artificial Analysis Intelligence Index v4.1.1"
@@ -56,6 +63,10 @@ def names(values):
 
 
 livebench_pareto_text = names([record["name"] for record in livebench_pareto]) if livebench_pareto else "none"
+livebench_supplemental_text = names([record["name"] for record in livebench_supplemental_rows]) if livebench_supplemental_rows else "none"
+livebench_published_n = livebench_document.get("publishedN", len(livebench_rows))
+livebench_supplemental_count = livebench_document.get("supplementalMatchedN", len(livebench_supplemental_rows))
+livebench_supplemental_label = f"{livebench_supplemental_count} official supplemental model" + ("s" if livebench_supplemental_count != 1 else "")
 
 
 def primary_rows():
@@ -113,7 +124,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - DeepSWE is refreshed to the live v1.1 Best page: **{n} models**, **113 tasks**, source updated **{deepswe_updated}**.
 - Artificial Analysis is migrated to the current **{aa_version}** identity: GDPval-AA v2, τ³-Banking, its source Terminal-Bench v2.1 component, SciCode, AA-LCR, HLE, GPQA Diamond, CritPt, and split AA-Omniscience accuracy/non-hallucination components.
 - The standalone Terminal-Bench view is replaced by the official **Terminal-Bench 4.0** snapshot: **{tb4_document['rowN']} rows**, with **{tb4_document['matchedN']}/{tb4_document['cohortN']}** overlap with the ranked cohort.
-- **LiveBench {livebench_document['release'].replace('_', '-')}** supplies the Instruction Following component and Overall-vs-Cost view: **{livebench_document['matchedN']}/{livebench_document['cohortN']}** cohort rows matched; the current LiveBench Pareto frontier is **{livebench_pareto_text}**.
+- **LiveBench {livebench_document['release'].replace('_', '-')}** supplies the Instruction Following component and Overall-vs-Cost view: **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked cohort rows matched, **{livebench_published_n}** rows published in total, plus **{livebench_supplemental_label}** (**{livebench_supplemental_text}**); the current LiveBench Pareto frontier is **{livebench_pareto_text}**.
 - The ranked pool is **{n} models**, with all current DeepSWE entries preserved.
 - The score retains **{d} zero-gap dimensions**; **{names([item['label'] for item in dropped])}** are excluded because each has incomplete official cohort coverage. Missing external values remain null and are not neutral-filled.
 - Speed remains an auditable coverage field (20/{n} AA pages publish a numeric value) but is not imputed into the primary score because GPT-6 Astra's selected page reports N/A.
@@ -123,7 +134,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 
 - [DeepSWE Best](https://deepswe.datacurve.ai/) for pass@1, uncertainty, average cost, output tokens, and agent steps.
 - [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
-- [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench) for the pinned 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
+- [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench), pinned at [release data commit {livebench_document['source'].get('releaseDataCommit', 'not recorded')}](https://github.com/livebench/new-livebench/commit/{livebench_document['source'].get('releaseDataCommit', '')}), for the 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
 - [Terminal-Bench 4.0](https://www.tbench.ai/) and the [official Harbor repository](https://github.com/harbor-framework/terminal-bench) for the current rendered leaderboard and task identity.
 - [Research report](research/2026-09-04-valuerank-refresh/research_report.md) for the source ledger, evidence spans, triangulation, critique cycles, and decisions.
 - [Coverage matrix](.refresh/v1.4/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
@@ -152,7 +163,7 @@ The ranked cohort is the complete **{n}-model current DeepSWE Best roster**. Eac
 - DeepSWE source: [live leaderboard](https://deepswe.datacurve.ai/), v1.1, 113 tasks, updated {deepswe_updated}.
 - AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current {aa_version}.
 - AA model values: one first-party model page per DeepSWE family, with the effort-specific URL selected by .refresh/v1.4/aa_mapping.json and recorded in aa_metrics.json.
-- LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values.
+- LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **{livebench_document['source'].get('releaseDataCommit', 'not recorded')}**.
 - Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with {tb4_document['rowN']} official rows.
 
 The old v1.3.1 publication used an earlier cohort and older AA benchmark identities. It remains historical; its numerical scores must not be compared directly with v1.4.0.
@@ -223,7 +234,7 @@ Overall Score is the weighted sum of all retained dimensions. Quality Score remo
 
 Artificial Analysis exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, AutomationBench, EnterpriseOpsGym, ITBench SRE, Briefcase, and other legacy/current fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json, but they are not added to the primary score when incomplete or outside the current v4.1.1 index definition. The AA source payload still records its own v2.1 component for provenance; the standalone current Terminal-Bench publication is TB4.
 
-LiveBench is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the 20 matched cohort rows.
+LiveBench is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the {livebench_document['matchedN']} matched cohort rows plus {livebench_supplemental_label}: {livebench_supplemental_text}.
 
 Terminal-Bench 4.0 is incorporated as the current external terminal-agent source. The standalone page shows all 14 official rows and the current cohort overlap, while the ValueRank score keeps the field coverage-only because 10 of the 21 ranked models are not present in the pinned TB4 table.
 
@@ -320,7 +331,7 @@ All {n} current DeepSWE Best models are retained. Raw AA benchmark values are pe
 
 ## LiveBench external component
 
-LiveBench release **{livebench_document['release']}** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked models; GPT-6 Astra is unavailable in this release.
+LiveBench release **{livebench_document['release']}** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked models and includes **{livebench_supplemental_label}** outside that cohort: **{livebench_supplemental_text}**. GPT-6 Astra is unavailable in this release.
 
 | Model | LiveBench variant | Instruction Following | Overall Score | Cost Per Successful Task |
 |---|---|---:|---:|---:|
@@ -750,7 +761,7 @@ if 'data-chart="livebenchPareto"' not in html:
 if 'id="panel-livebenchPareto"' not in html:
     livebench_panel = f'''       <!-- LiveBench Pareto -->
        <div class="chart-panel" id="panel-livebenchPareto">
-         <div class="chart-desc"><strong>LiveBench Pareto:</strong> Official LiveBench Overall Score versus Cost Per Successful Task for {livebench_document['matchedN']}/{livebench_document['cohortN']} matched cohort rows. Higher Overall and lower cost are better; GPT-6 Astra is omitted because this pinned release has no row for it.</div>
+         <div class="chart-desc"><strong>LiveBench Pareto:</strong> Official LiveBench Overall Score versus Cost Per Successful Task for {livebench_document['matchedN']}/{livebench_document['cohortN']} matched cohort rows plus {livebench_supplemental_label}: {html_escape(livebench_supplemental_text)}. Higher Overall and lower cost are better; GPT-6 Astra is omitted because this pinned release has no row for it.</div>
          <div id="chart-livebench-pareto" class="plotly-chart" style="height:520px;"></div>
        </div>
 '''
@@ -760,19 +771,25 @@ if 'livebenchPareto: renderLiveBenchPareto' not in html:
 if "'chart-heatmap-data','chart-livebench-pareto'" not in html:
     html = html.replace("    'chart-heatmap-data'", "    'chart-heatmap-data','chart-livebench-pareto'", 1)
 
-if 'id="livebench-data"' not in html:
-    livebench_card = f'''    <div class="card mb-6" id="livebench-data">
+livebench_card = f'''    <div class="card mb-6" id="livebench-data">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">LiveBench External Coverage</h3>
-      <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> ranked models. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
+       <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> ranked models and includes <strong>{livebench_supplemental_label}</strong> outside the ranked cohort: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
           <tbody>{livebench_site_table_rows}</tbody>
         </table>
       </div>
-      <p class="method-text" style="margin-top:12px;">Source: <a href="{livebench_document['source']['homepage']}" target="_blank" rel="noopener">LiveBench</a>; pinned data release 2026-06-25. Pareto frontier: <strong>{html_escape(livebench_pareto_text)}</strong>.</p>
+      <p class="method-text" style="margin-top:12px;">Source: <a href="{livebench_document['source']['homepage']}" target="_blank" rel="noopener">LiveBench</a>; pinned data release 2026-06-25 at <a href="https://github.com/livebench/new-livebench/commit/{livebench_document['source'].get('releaseDataCommit', '')}" target="_blank" rel="noopener">{html_escape(livebench_document['source'].get('releaseDataCommit', 'unrecorded'))}</a>. Pareto frontier: <strong>{html_escape(livebench_pareto_text)}</strong>.</p>
     </div>
 '''
+livebench_start = html.find('    <div class="card mb-6" id="livebench-data">')
+if livebench_start >= 0:
+    next_card = html.find('    <div class="card mb-6">', livebench_start + 1)
+    if next_card < 0:
+        raise SystemExit("next data card not found after existing LiveBench card")
+    html = html[:livebench_start] + livebench_card + html[next_card:]
+else:
     data_start = html.find('<!-- DATA -->')
     data_card = html.find('    <div class="card mb-6">', data_start)
     if data_start < 0 or data_card < 0:

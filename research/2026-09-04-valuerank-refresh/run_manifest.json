@@ -50,7 +50,7 @@
   "scoring": {
     "version": "v1.4.0",
     "publishDate": "September 5, 2026",
-    "observedAt": "2026-09-04T14:29:24Z",
+    "observedAt": "2026-09-04T16:34:17Z",
     "cohortN": 21,
     "deepsweSourceUpdatedOn": "September 3, 2026",
     "aaBenchmarkVersion": "Artificial Analysis Intelligence Index v4.1.1",
@@ -147,6 +147,10 @@
     ],
     "externalCoverage": {
       "livebench": "20/21",
+      "livebenchPublishedN": 21,
+      "livebenchSupplementalModels": [
+        "claude-fable-5-1"
+      ],
       "terminalBenchV4": "11/21"
     },
     "weights": [

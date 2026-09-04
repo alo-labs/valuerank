@@ -58,9 +58,9 @@ Independent owner sources confirm why these fields need careful interpretation. 
 
 ### 7. LiveBench supplies the current Instruction Following component
 
-The pinned official LiveBench release is **2026-06-25**. Its public data surface contains 23 objective tasks across seven categories, including Instruction Following [23, 24]. The Instruction Following category is the mean of four official tasks—paraphrase, simplify, story_generation, and summarize—while the published Overall Score is reproduced as the mean of the seven category means. The official cost table supplies Cost Per Successful Task [25].
+The pinned official LiveBench release is **2026-06-25**. Its public data surface contains 23 objective tasks across seven categories, including Instruction Following [23, 24]. The Instruction Following category is the mean of four official tasks—paraphrase, simplify, story_generation, and summarize—while the published Overall Score is reproduced as the mean of the seven category means. The official cost table supplies Cost Per Successful Task [25]. A follow-up check of the release repository's pinned data commit also confirms an official Claude Fable 5.1 Max Effort row [26].
 
-The current DeepSWE cohort maps to 20 LiveBench variants; GPT-6 Astra has no matching row in the pinned release. The resulting external Pareto frontier on Overall Score versus Cost Per Successful Task is DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, and Claude Fable 5. This view is intentionally separate from the ValueRank primary score: the LiveBench Instruction Following candidate is listed in coverage and remains null for GPT-6 Astra rather than receiving a neutral fill.
+The current DeepSWE cohort maps to 20 LiveBench variants; GPT-6 Astra has no matching row in the pinned release. The published benchmark view additionally includes Claude Fable 5.1 as one official supplemental row outside the DeepSWE cohort, with Overall Score **83.414155**, Instruction Following **72.987750**, and Cost Per Successful Task **$1.2117** [26]. With that row included, the external Pareto frontier on Overall Score versus Cost Per Successful Task is DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, and Claude Fable 5.1; Claude Fable 5 is consequently dominated by the newer, lower-cost row. This view is intentionally separate from the ValueRank primary score: the LiveBench Instruction Following candidate is listed in coverage and remains null for GPT-6 Astra rather than receiving a neutral fill.
 
 ### 8. Terminal-Bench 4.0 replaces the standalone TB2.1 publication
 
@@ -68,7 +68,7 @@ The current official Terminal-Bench page renders 14 Terminal-Bench 4.0 rows with
 
 ### 9. External benchmark integration decision
 
-The no-imputation rule controls the integration boundary. LiveBench Instruction Following, LiveBench Overall/Cost, and TB4 values are first-class, source-backed data in the JSON snapshots, raw-data documentation, coverage matrix, and site views. Only complete dimensions are rank-normalized into the 21-model primary score; as of this capture, the primary score therefore contains 12 dimensions, while the LiveBench and TB4 views remain available for direct benchmark-specific analysis.
+The no-imputation rule controls the integration boundary. LiveBench Instruction Following, LiveBench Overall/Cost, and TB4 values are first-class, source-backed data in the JSON snapshots, raw-data documentation, coverage matrix, and site views. Only complete dimensions are rank-normalized into the 21-model primary score; as of this capture, the primary score therefore contains 12 dimensions, while the LiveBench view publishes 20 matched cohort rows plus one explicitly labelled supplemental row and the TB4 view remains available for direct benchmark-specific analysis.
 
 ## Synthesis
 
@@ -85,7 +85,7 @@ The main product recommendation is to publish v1.4.0 with the 21-model cohort, 1
 - DeepSWE uncertainty intervals overlap for several leading models. The ranking should not be read as a definitive significance test.
 - AA model pages can expose multiple reasoning efforts and default redirects. The selected URL, model slug, and effort are recorded for every row.
 - Speed is available for 20 of 21 models and is intentionally coverage-only in v1.4.0.
-- LiveBench Instruction Following is available for 20 of 21 models and Terminal-Bench 4.0 for 11 of 21; both are intentionally coverage-only until a complete, definition-compatible cohort is available.
+- LiveBench Instruction Following is available for 20 of 21 ranked cohort models, with Claude Fable 5.1 published as an additional official supplemental row; Terminal-Bench 4.0 covers 11 of 21. The external fields remain coverage-only until a complete, definition-compatible ranked cohort is available.
 - LiveBench Overall and Cost Per Successful Task are benchmark-specific measures and should not be conflated with ValueRank's AA+DeepSWE composite cost.
 - Supplemental fields are not all comparable across the cohort and therefore remain outside the primary score.
 - Web pages are time-sensitive. The values in this report use source captures through 2026-09-04 UTC and should be refreshed before reuse.
@@ -124,7 +124,7 @@ The main product recommendation is to publish v1.4.0 with the 21-model cohort, 1
 | Cost averages normalized AA evaluation cost and normalized DeepSWE average cost. | E31 | supported |
 | LiveBench release 2026-06-25 covers 23 tasks across seven categories, including Instruction Following. | E35 | supported |
 | LiveBench Instruction Following is the four-task mean, and Overall is the seven-category mean used by the external view. | E36, E37 | supported |
-| The pinned LiveBench release matches 20 of 21 cohort rows and powers the Overall-vs-Cost Pareto chart. | E37 | supported |
+| The pinned LiveBench release matches 20 of 21 cohort rows, adds the official Claude Fable 5.1 supplemental row, and powers the Overall-vs-Cost Pareto chart. | E37, E40 | supported |
 | The current official Terminal-Bench 4.0 snapshot has 14 rows and 11 of 21 cohort matches. | E38, E39 | supported |
 | LiveBench Instruction Following and TB4 remain coverage-only under the no-imputation policy. | E37, E39 | supported |
 
@@ -154,7 +154,8 @@ The main product recommendation is to publish v1.4.0 with the 21-model cohort, 1
 [22] Terminal-Bench official Harbor repository. https://github.com/harbor-framework/terminal-bench
 [23] LiveBench official current release page. https://livebench.ai/
 [24] LiveBench official release data repository. https://github.com/livebench/new-livebench
-[25] LiveBench pinned table data. https://livebench.ai/table_2026_06_25.csv
+[25] LiveBench pinned table data. https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/table_2026_06_25.csv
+[26] LiveBench 2026-06-25 release data commit. https://github.com/LiveBench/new-livebench/commit/62240f848c977d4202c1029191ac663498745f2f
 
 ## Methodology
 
