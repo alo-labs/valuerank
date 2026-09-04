@@ -91,6 +91,10 @@
 [data-theme="dark"] .vr-theme-toggle .icon-moon { display: block; }
 @media (max-width: 1180px) { .vr-nav-links { display: none; } }
 @media (max-width: 820px) { .vr-site-header { gap: 8px; padding: 0 14px; } .vr-mode-switcher { overflow-x: auto; } .vr-mode-btn { padding-inline: 7px; } .vr-nav-meta { display: none; } }
+.vr-sortable thead th { cursor: pointer; user-select: none; }
+.vr-sortable thead th:hover, .vr-sortable thead th:focus-visible { color: var(--accent, #4f46e5); }
+.vr-sortable thead th[aria-sort="ascending"], .vr-sortable thead th[aria-sort="descending"] { color: var(--accent, #4f46e5); }
+.vr-sort-indicator { display: inline-block; margin-left: 4px; color: var(--text-dim, #94a3b8); font-size: .9em; }
 
 </style>
 </head>
@@ -197,8 +201,8 @@
       const custom = row => [row.baseModel,row.agent,row.resolutionRatePct,row.uncertaintyPct,row.tokens,row.rankLabel,row.model];
       const hover = '<b>%{customdata[0]}</b><br>Resolution: %{customdata[2]:.1f}% ± %{customdata[3]:.1f}%<br>Cost: $%{x:,.0f}<br>Agent: %{customdata[1]}<br>Tokens: %{customdata[4]}<br>Rank: %{customdata[5]}<br>Variant: %{customdata[6]}<extra></extra>';
       const traces = [
-        {x:dominated.map(row=>row.costUsd), y:dominated.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Official rows', marker:{size:11,color:'#a78bfa',opacity:.65}, customdata:dominated.map(custom), hovertemplate:hover},
-        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Pareto frontier', marker:{size:15,color:'#10b981',line:{width:2,color:isDark()?'#064e3b':'#ecfdf5'}}, customdata:frontier.map(custom), hovertemplate:hover.replace('<extra></extra>','<extra>Frontier</extra>')},
+        {x:dominated.map(row=>row.costUsd), y:dominated.map(row=>row.resolutionRatePct), mode:'markers+text', type:'scatter', name:'Official rows', text:dominated.map(row=>row.baseModel), textposition:'top center', textfont:{size:9,color:'#64748b'}, cliponaxis:false, marker:{size:11,color:'#a78bfa',opacity:.65}, customdata:dominated.map(custom), hovertemplate:hover},
+        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'markers+text', type:'scatter', name:'Pareto frontier', text:frontier.map(row=>row.baseModel), textposition:'top center', textfont:{size:9,color:'#047857'}, cliponaxis:false, marker:{size:15,color:'#10b981',line:{width:2,color:isDark()?'#064e3b':'#ecfdf5'}}, customdata:frontier.map(custom), hovertemplate:hover.replace('<extra></extra>','<extra>Frontier</extra>')},
         {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'lines', type:'scatter', name:'frontier-curve', line:{shape:'spline',dash:'dot',color:'#94a3b8',width:2}, hoverinfo:'skip', showlegend:false},
       ];
       Plotly.newPlot('chart', traces, layout(), PLOTLY_CONFIG);
@@ -207,5 +211,96 @@
     document.getElementById('theme-toggle').addEventListener('click', () => { const next=isDark()?'':'dark'; document.documentElement.setAttribute('data-theme',next); localStorage.setItem('vr-theme',next?'dark':'light'); requestAnimationFrame(updateTheme); });
     document.addEventListener('DOMContentLoaded', () => { render(); if (typeof lucide !== 'undefined') lucide.createIcons(); });
   </script>
+<script id="site-table-sort">
+
+(function () {
+  function parseNumeric(raw) {
+    const text = String(raw || '').replace(/\u00a0/g, ' ').replace(/,/g, '').trim();
+    if (!text || /^[-—–]$/.test(text)) return null;
+    const match = text.match(/^(?:[$#]\s*)?(-?(?:\d+(?:\.\d+)?|\.\d+))(?:\s*([KMB]))?(?:\s*%|\s*±.*|\s+(?:new|tokens?)|\s*[▲▼])?$/i);
+    if (!match) return null;
+    const multiplier = { K: 1e3, M: 1e6, B: 1e9 }[(match[2] || '').toUpperCase()] || 1;
+    return Number(match[1]) * multiplier;
+  }
+
+  function cellValue(cell) {
+    const raw = cell?.dataset.sortValue ?? cell?.textContent ?? '';
+    const numeric = parseNumeric(raw);
+    return numeric == null ? { kind: 'text', value: String(raw).trim().toLocaleLowerCase() } : { kind: 'number', value: numeric };
+  }
+
+  function updateIndicators(headers, activeIndex, direction) {
+    headers.forEach((header, index) => {
+      const active = index === activeIndex;
+      header.setAttribute('aria-sort', active ? (direction === 1 ? 'ascending' : 'descending') : 'none');
+      const indicator = header.querySelector('.vr-sort-indicator');
+      if (indicator) indicator.textContent = active ? (direction === 1 ? '↑' : '↓') : '↕';
+    });
+  }
+
+  function sortTable(table, headers, index) {
+    const body = table.tBodies[0];
+    if (!body) return;
+    const prior = table._vrSortState;
+    const direction = prior && prior.index === index ? -prior.direction : 1;
+    const rows = Array.from(body.rows).map((row, originalIndex) => ({ row, originalIndex, value: cellValue(row.cells[index]) }));
+    const isEmpty = value => value === '' || value === '—' || value === '–';
+    const numericColumn = rows.some(item => item.value.kind === 'number') && rows.every(item => item.value.kind === 'number' || isEmpty(item.value.value));
+    rows.sort((left, right) => {
+      const leftEmpty = left.value.value === '' || left.value.value === '—' || left.value.value === '–';
+      const rightEmpty = right.value.value === '' || right.value.value === '—' || right.value.value === '–';
+      if (leftEmpty || rightEmpty) {
+        if (leftEmpty && rightEmpty) return left.originalIndex - right.originalIndex;
+        return leftEmpty ? 1 : -1;
+      }
+      const comparison = numericColumn
+        ? left.value.value - right.value.value
+        : String(left.value.value).localeCompare(String(right.value.value), undefined, { numeric: true, sensitivity: 'base' });
+      return comparison === 0 ? left.originalIndex - right.originalIndex : direction * comparison;
+    });
+    rows.forEach(item => body.appendChild(item.row));
+    table._vrSortState = { index, direction };
+    updateIndicators(headers, index, direction);
+  }
+
+  function prepareTable(table) {
+    if (table.dataset.vrTableSortReady === 'true' || table.dataset.vrSortable === 'false') return;
+    // The primary ranking table has a richer sorter for filters and the cost slider.
+    if (table.querySelector('thead th[data-col]')) return;
+    const headerRow = table.tHead?.rows[table.tHead.rows.length - 1];
+    const body = table.tBodies[0];
+    const headers = headerRow ? Array.from(headerRow.cells).filter(cell => cell.tagName === 'TH') : [];
+    if (!body || !headers.length) return;
+    table.dataset.vrTableSortReady = 'true';
+    table.classList.add('vr-sortable');
+    headers.forEach((header, index) => {
+      header.setAttribute('tabindex', '0');
+      header.setAttribute('role', 'button');
+      header.setAttribute('aria-sort', 'none');
+      const indicator = document.createElement('span');
+      indicator.className = 'vr-sort-indicator';
+      indicator.setAttribute('aria-hidden', 'true');
+      indicator.textContent = '↕';
+      header.appendChild(indicator);
+      const activate = () => sortTable(table, headers, index);
+      header.addEventListener('click', activate);
+      header.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activate();
+        }
+      });
+    });
+  }
+
+  function init() {
+    document.querySelectorAll('table').forEach(prepareTable);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
+}());
+
+</script>
 </body>
 </html>

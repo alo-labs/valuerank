@@ -569,13 +569,15 @@ livebench_function = r"""function renderLiveBenchPareto() {
   const traces = [
     {
       x: dominated.map(m => m.costPerSuccessfulTaskUsd), y: dominated.map(m => m.overallScore),
-      mode: 'markers', type: 'scatter', name: 'Dominated',
+      mode: 'markers+text', type: 'scatter', name: 'Dominated',
+      text: dominated.map(m => m.name), textposition: 'top center', textfont: { size: 9, color: '#64748b' }, cliponaxis: false,
       marker: { size: 11, color: '#a78bfa', opacity: 0.65 },
       customdata: dominated.map(custom), hovertemplate: hover,
     },
     {
       x: frontier.map(m => m.costPerSuccessfulTaskUsd), y: frontier.map(m => m.overallScore),
-      mode: 'markers', type: 'scatter', name: 'Pareto frontier',
+      mode: 'markers+text', type: 'scatter', name: 'Pareto frontier',
+      text: frontier.map(m => m.name), textposition: 'top center', textfont: { size: 9, color: '#047857' }, cliponaxis: false,
       marker: { size: 14, color: '#10b981', line: { width: 2, color: isPlotDark() ? '#064e3b' : '#ecfdf5' } },
       customdata: frontier.map(custom), hovertemplate: hover.replace('<extra></extra>', '<extra>Frontier</extra>'),
     },
@@ -599,8 +601,12 @@ livebench_function = r"""function renderLiveBenchPareto() {
   Plotly.newPlot('chart-livebench-pareto', traces, layout, PLOTLY_CONFIG);
 }
 """
-if "function renderLiveBenchPareto()" not in html:
+if "function renderLiveBenchPareto()" in html:
+    html = replace_once(html, r"function renderLiveBenchPareto\(\) \{[\s\S]*?\n\}(?=\n\nfunction renderPareto\(\))", livebench_function.rstrip(), "LiveBench Pareto chart")
+else:
     html = html.replace("function renderPareto()", livebench_function + "\nfunction renderPareto()", 1)
+if "function renderPareto()" not in html:
+    raise SystemExit("root Pareto renderer missing")
 
 html = html.replace("const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1'];", "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0'];")
 html = html.replace("const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131'];", "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140'];")

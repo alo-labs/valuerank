@@ -167,8 +167,8 @@ def main() -> int:
       const custom = row => [row.baseModel,row.agent,row.resolutionRatePct,row.uncertaintyPct,row.tokens,row.rankLabel,row.model];
       const hover = '<b>%{customdata[0]}</b><br>Resolution: %{customdata[2]:.1f}% ± %{customdata[3]:.1f}%<br>Cost: $%{x:,.0f}<br>Agent: %{customdata[1]}<br>Tokens: %{customdata[4]}<br>Rank: %{customdata[5]}<br>Variant: %{customdata[6]}<extra></extra>';
       const traces = [
-        {x:dominated.map(row=>row.costUsd), y:dominated.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Official rows', marker:{size:11,color:'#a78bfa',opacity:.65}, customdata:dominated.map(custom), hovertemplate:hover},
-        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Pareto frontier', marker:{size:15,color:'#10b981',line:{width:2,color:isDark()?'#064e3b':'#ecfdf5'}}, customdata:frontier.map(custom), hovertemplate:hover.replace('<extra></extra>','<extra>Frontier</extra>')},
+        {x:dominated.map(row=>row.costUsd), y:dominated.map(row=>row.resolutionRatePct), mode:'markers+text', type:'scatter', name:'Official rows', text:dominated.map(row=>row.baseModel), textposition:'top center', textfont:{size:9,color:'#64748b'}, cliponaxis:false, marker:{size:11,color:'#a78bfa',opacity:.65}, customdata:dominated.map(custom), hovertemplate:hover},
+        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'markers+text', type:'scatter', name:'Pareto frontier', text:frontier.map(row=>row.baseModel), textposition:'top center', textfont:{size:9,color:'#047857'}, cliponaxis:false, marker:{size:15,color:'#10b981',line:{width:2,color:isDark()?'#064e3b':'#ecfdf5'}}, customdata:frontier.map(custom), hovertemplate:hover.replace('<extra></extra>','<extra>Frontier</extra>')},
         {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'lines', type:'scatter', name:'frontier-curve', line:{shape:'spline',dash:'dot',color:'#94a3b8',width:2}, hoverinfo:'skip', showlegend:false},
       ];
       Plotly.newPlot('chart', traces, layout(), PLOTLY_CONFIG);
