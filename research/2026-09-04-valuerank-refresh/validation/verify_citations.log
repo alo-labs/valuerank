@@ -1,0 +1,10 @@
+Silver deep-research citation verification
+Command: verify_citations.py --report research_report.md
+Result: PASS with one external-status warning
+
+DOI Verified: 0/20
+URL Verified: 19/20
+Suspicious: 0/20
+Unverified: 1/20
+Unverified entry: [7] Terminal-Bench 2.1 release URL returned HTTP 308 to the validator's HEAD request.
+Interpretation: the validator accepts the run; the source remains a direct first-party URL and was retrievable through web search/open during research.

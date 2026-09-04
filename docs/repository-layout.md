@@ -13,9 +13,9 @@ ValueRank is a research workspace with a small reproducible publication pipeline
 
 ## Refresh pipeline
 
-`.refresh/v1.3/` contains the current extraction, scoring, evidence, and document-emission pipeline. Its canonical text/JSON snapshots and scripts are committed because they are needed to reproduce the published documents. Browser HTML captures, screenshots, logs, and failed-agent output are local-only and ignored.
+`.refresh/v1.4/` contains the current extraction, scoring, evidence, and document-emission pipeline. Its canonical JSON snapshots and scripts are committed because they are needed to reproduce the published documents. Browser HTML captures, screenshots, logs, and failed-agent output are local-only and ignored. `.refresh/v1.3/` is retained as the historical v1.3.1 pipeline.
 
-The coding-agent refresh is under `.refresh/v1.3/coding-agents/`. The Open Graph generator is `scripts/site-generate-og-cards.mjs` and can be run with `npm run generate:og` after installing the root Node dependencies.
+The coding-agent refresh is under `.refresh/v1.3/coding-agents/` until its next independent refresh. The Open Graph generator is `scripts/site-generate-og-cards.mjs` and can be run with `npm run generate:og` after installing the root Node dependencies.
 
 ## Research and supporting analyses
 

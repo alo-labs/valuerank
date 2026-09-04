@@ -1,181 +1,119 @@
-# ValueRank v1.3.1 Raw Data
-**Version:** v1.3.1
-**Updated:** July 28, 2026
+# ValueRank v1.4.0 Raw Data
 
-v1.3.1 ranks **n=17** models from the DeepSWE Best roster (roster has 18; **Kimi K2.7 Code** excluded from ranking). Dimensions without full ranked-cohort coverage are excluded (zero-gap). Cost uses the **AA Index total eval cost + DeepSWE avg cost** composite.
+**Version:** v1.4.0 · **Updated:** September 4, 2026 · **DeepSWE source update:** September 3, 2026 · **AA source:** Artificial Analysis Intelligence Index v4.1.1
 
-## Primary Sources
-- [DeepSWE](https://deepswe.datacurve.ai/) for `DeepSWE pass@1` and `DeepSWE Avg Cost ($)` (Best / max-effort row per family; source updated July 25, 2026)
-- Artificial Analysis model pages for retained AA dimensions (see evidence ledger under `.refresh/v1.3/`)
+All 21 current DeepSWE Best models are retained. Raw AA benchmark values are percentages below for readability; the machine-readable files preserve fractions. Speed is shown when published but is not part of the primary score because GPT-6 Astra is N/A.
 
-## Artificial Analysis variant selection
-Per family, the AA model-page variant with the most complete coverage of **retained** dimensions is used:
-- `Grok 4.5` → [`grok-4-5`](https://artificialanalysis.ai/models/grok-4-5)
-- `Kimi K3` → [`kimi-k3`](https://artificialanalysis.ai/models/kimi-k3)
-- `Muse Spark 1.1` → [`muse-spark-1-1`](https://artificialanalysis.ai/models/muse-spark-1-1)
-- `GPT-5.6 Terra` → [`gpt-5-6-terra`](https://artificialanalysis.ai/models/gpt-5-6-terra)
-- `GPT-5.6 Sol` → [`gpt-5-6-sol`](https://artificialanalysis.ai/models/gpt-5-6-sol)
-- `Claude Opus 5` → [`claude-opus-5`](https://artificialanalysis.ai/models/claude-opus-5)
-- `GPT-5.6 Luna` → [`gpt-5-6-luna`](https://artificialanalysis.ai/models/gpt-5-6-luna)
-- `GPT-5.5` → [`gpt-5-5`](https://artificialanalysis.ai/models/gpt-5-5)
-- `Gemini 3.6 Flash` → [`gemini-3-6-flash`](https://artificialanalysis.ai/models/gemini-3-6-flash)
-- `GLM-5.2` → [`glm-5-2`](https://artificialanalysis.ai/models/glm-5-2)
-- `Gemini 3.1 Pro` → [`gemini-3-1-pro-preview`](https://artificialanalysis.ai/models/gemini-3-1-pro-preview)
-- `Claude Fable 5` → [`claude-fable-5`](https://artificialanalysis.ai/models/claude-fable-5)
-- `GPT-5.4` → [`gpt-5-4`](https://artificialanalysis.ai/models/gpt-5-4)
-- `Gemini 3.5 Flash` → [`gemini-3-5-flash`](https://artificialanalysis.ai/models/gemini-3-5-flash)
-- `Claude Opus 4.8` → [`claude-opus-4-8`](https://artificialanalysis.ai/models/claude-opus-4-8)
-- `Claude Sonnet 5` → [`claude-sonnet-5`](https://artificialanalysis.ai/models/claude-sonnet-5)
-- `Claude Sonnet 4.6` → [`claude-sonnet-4-6-adaptive`](https://artificialanalysis.ai/models/claude-sonnet-4-6-adaptive)
-- `Kimi K2.7 Code` → [`kimi-k2-7-code`](https://artificialanalysis.ai/models/kimi-k2-7-code)
+## Selected AA pages
 
-## DeepSWE
+| Model | AA slug | AA effort | Source |
+|---|---|---|---|
+| Gemini 3.8 Flash | gemini-3-8-flash | high | [page](https://artificialanalysis.ai/models/gemini-3-8-flash) |
+| GLM-5.3 Flash | glm-5-3-flash | max | [page](https://artificialanalysis.ai/models/glm-5-3-flash) |
+| GPT-5.6 Sol | gpt-5-6-sol | max | [page](https://artificialanalysis.ai/models/gpt-5-6-sol) |
+| GPT-6 Astra | gpt-6-astra-xhigh | xhigh | [page](https://artificialanalysis.ai/models/gpt-6-astra-xhigh) |
+| Grok 4.6 | grok-4-6-medium | medium | [page](https://artificialanalysis.ai/models/grok-4-6-medium) |
+| Claude Opus 5 | claude-opus-5 | max | [page](https://artificialanalysis.ai/models/claude-opus-5) |
+| Kimi K3 | kimi-k3 | max | [page](https://artificialanalysis.ai/models/kimi-k3) |
+| GLM-5.3 | glm-5-3 | max | [page](https://artificialanalysis.ai/models/glm-5-3) |
+| Muse Spark 1.2 | muse-spark-1-2 | xhigh | [page](https://artificialanalysis.ai/models/muse-spark-1-2) |
+| Claude Fable 5 | claude-fable-5 | max | [page](https://artificialanalysis.ai/models/claude-fable-5) |
+| Gemini 3.7 Flash | gemini-3-7-flash-medium | medium | [page](https://artificialanalysis.ai/models/gemini-3-7-flash-medium) |
+| GPT-5.6 Luna | gpt-5-6-luna | max | [page](https://artificialanalysis.ai/models/gpt-5-6-luna) |
+| Qwen3.8 Max | qwen3-8-max | not stated | [page](https://artificialanalysis.ai/models/qwen3-8-max) |
+| DeepSeek V4 Pro | deepseek-v4-pro | max | [page](https://artificialanalysis.ai/models/deepseek-v4-pro) |
+| GPT-5.5 | gpt-5-5 | xhigh | [page](https://artificialanalysis.ai/models/gpt-5-5) |
+| Gemini 3.6 Flash | gemini-3-6-flash | high | [page](https://artificialanalysis.ai/models/gemini-3-6-flash) |
+| DeepSeek V4 Flash | deepseek-v4-flash | max | [page](https://artificialanalysis.ai/models/deepseek-v4-flash) |
+| Claude Opus 4.8 | claude-opus-4-8 | max | [page](https://artificialanalysis.ai/models/claude-opus-4-8) |
+| GLM-5.2 | glm-5-2 | max | [page](https://artificialanalysis.ai/models/glm-5-2) |
+| Gemini 3.5 Flash | gemini-3-5-flash | high | [page](https://artificialanalysis.ai/models/gemini-3-5-flash) |
+| Claude Sonnet 5 | claude-sonnet-5 | max | [page](https://artificialanalysis.ai/models/claude-sonnet-5) |
 
-| Model | Effort | DeepSWE pass@1 | DeepSWE Avg Cost ($) |
-|---|---|---:|---:|
-| Grok 4.5 | high | 54.0 | 2.42 |
-| Kimi K3 | max | 69.0 | 4.65 |
-| Muse Spark 1.1 | xhigh | 53.0 | 2.36 |
-| GPT-5.6 Terra | max | 70.0 | 4.95 |
-| GPT-5.6 Sol | max | 73.0 | 8.39 |
-| Claude Opus 5 | max | 74.0 | 11.84 |
-| GPT-5.6 Luna | max | 67.0 | 3.03 |
-| GPT-5.5 | xhigh | 67.0 | 7.23 |
-| Gemini 3.6 Flash | high | 49.0 | 3.53 |
-| GLM-5.2 | max | 44.0 | 3.92 |
-| Gemini 3.1 Pro | high | 12.0 | 9.48 |
-| Claude Fable 5 | max | 70.0 | 21.63 |
-| GPT-5.4 | xhigh | 52.0 | 5.65 |
-| Gemini 3.5 Flash | medium | 37.0 | 7.34 |
-| Claude Opus 4.8 | max | 59.0 | 13.22 |
-| Claude Sonnet 5 | max | 54.0 | 26.40 |
-| Claude Sonnet 4.6 | high | 30.0 | 5.52 |
-| Kimi K2.7 Code | — | 31.0 | 2.82 |
+## Full primary input matrix
 
-## AA-Omniscience
+| # | Model | Effort | DeepSWE pass@1 | DeepSWE avg cost | GDPval-AA v2 | τ³-Banking | Terminal-Bench v2.1 | SciCode | AA-LCR | HLE | GPQA | CritPt | Omni Accuracy | Omni Non-Hallucination | AA Index | AA eval cost | Speed tok/s |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | Gemini 3.8 Flash | high | 74.0% ± 1.0% | $2.36 | 52.27% | 44.95% | 87.64% | 53.59% | 81.00% | 47.82% | 95.25% | 18.29% | 54.60% | 44.82% | 58.68 | $825.83 | 326.9 |
+| 2 | GLM-5.3 Flash | max | 63.0% ± 4.0% | $0.24 | 63.23% | 47.22% | 84.27% | 46.06% | 78.00% | 39.85% | 91.21% | 15.43% | 27.50% | 72.37% | 57.46 | $138.02 | 47.4 |
+| 3 | GPT-5.6 Sol | max | 73.0% ± 3.0% | $6.46 | 60.51% | 44.33% | 88.01% | 56.13% | 77.67% | 49.49% | 94.14% | 32.29% | 59.40% | 7.80% | 60.93 | $2017.29 | 76.5 |
+| 4 | GPT-6 Astra | xhigh | 74.0% ± 3.0% | $6.52 | 55.28% | 43.09% | 89.14% | 49.54% | 74.00% | 54.59% | 96.26% | 31.43% | 61.85% | 51.68% | 60.99 | $2004.12 | — |
+| 5 | Grok 4.6 | medium | 67.0% ± 2.0% | $3.45 | 61.57% | 44.33% | 84.27% | 54.63% | 72.67% | 42.12% | 93.54% | 17.71% | 41.93% | 76.00% | 59.01 | $929.97 | 63.5 |
+| 6 | Claude Opus 5 | max | 74.0% ± 4.0% | $11.84 | 66.20% | 42.06% | 89.14% | 55.67% | 75.67% | 54.87% | 93.23% | 29.14% | 60.87% | 39.18% | 63.05 | $3836.05 | 57.1 |
+| 7 | Kimi K3 | max | 69.0% ± 5.0% | $4.65 | 58.40% | 45.98% | 85.02% | 58.68% | 82.67% | 46.90% | 93.54% | 23.43% | 47.58% | 46.80% | 59.70 | $2425.11 | 39.2 |
+| 8 | GLM-5.3 | max | 69.0% ± 3.0% | $3.99 | 62.91% | 50.31% | 83.90% | 56.48% | 76.33% | 42.26% | 91.72% | 19.14% | 33.85% | 70.45% | 59.51 | $1238.50 | 75.3 |
+| 9 | Muse Spark 1.2 | xhigh | 55.0% ± 2.0% | $3.70 | 55.75% | 34.85% | 80.15% | 56.37% | 83.33% | 45.46% | 90.40% | 17.71% | 45.38% | 66.71% | 56.76 | $639.27 | 235.8 |
+| 10 | Claude Fable 5 | xhigh | 70.0% ± 3.0% | $13.41 | 61.15% | 38.14% | 84.64% | 60.19% | 76.67% | 55.47% | 92.63% | 28.57% | 65.35% | 36.36% | 62.07 | $5455.22 | 70.0 |
+| 11 | Gemini 3.7 Flash | medium | 65.0% ± 3.0% | $2.03 | 49.58% | 35.46% | 78.28% | 57.87% | 81.00% | 38.97% | 92.12% | 9.43% | 54.00% | 34.13% | 53.42 | $277.50 | 295.4 |
+| 12 | GPT-5.6 Luna | max | 67.0% ± 4.0% | $0.61 | 53.46% | 31.13% | 80.90% | 52.55% | 78.33% | 39.48% | 91.11% | 20.57% | 42.73% | 7.42% | 52.32 | $173.85 | 125.2 |
+| 13 | Qwen3.8 Max | xhigh | 57.0% ± 3.0% | $3.73 | 61.05% | 51.34% | 81.27% | 52.89% | 74.33% | 43.05% | 92.73% | 20.00% | 31.85% | 58.25% | 58.08 | $1532.07 | 38.8 |
+| 14 | DeepSeek V4 Pro | max | 63.0% ± 6.0% | $1.67 | 53.84% | 39.59% | 78.65% | 49.19% | 75.33% | 41.01% | 92.83% | 18.00% | 49.10% | 5.17% | 53.20 | $616.95 | 60.2 |
+| 15 | GPT-5.5 | xhigh | 67.0% ± 6.0% | $7.23 | 49.09% | 38.97% | 84.27% | 56.13% | 79.00% | 45.78% | 93.54% | 27.14% | 57.95% | 10.98% | 56.31 | $2796.05 | 84.0 |
+| 16 | Gemini 3.6 Flash | high | 47.0% ± 4.0% | $2.21 | 45.71% | 29.90% | 77.53% | 52.66% | 79.00% | 40.82% | 92.83% | 10.57% | 49.97% | 44.37% | 51.58 | $412.03 | 208.8 |
+| 17 | DeepSeek V4 Flash | max | 53.0% ± 4.0% | $0.46 | 52.36% | 39.38% | 78.65% | 49.88% | 74.33% | 38.55% | 90.81% | 16.57% | 40.38% | 8.30% | 51.77 | $323.26 | 140.0 |
+| 18 | Claude Opus 4.8 | max | 59.0% ± 2.0% | $13.22 | 53.89% | 34.23% | 84.64% | 53.47% | 73.00% | 48.66% | 92.02% | 20.86% | 48.83% | 60.75% | 57.33 | $3752.32 | 62.2 |
+| 19 | GLM-5.2 | max | 44.0% ± 2.0% | $3.92 | 49.88% | 34.64% | 77.90% | 50.46% | 76.67% | 41.15% | 89.49% | 20.86% | 24.33% | 73.70% | 52.64 | $843.44 | 69.9 |
+| 20 | Gemini 3.5 Flash | high | 36.0% ± 4.0% | $3.45 | 41.86% | 32.16% | 78.65% | 53.12% | 81.00% | 42.68% | 92.22% | 13.14% | 51.40% | 37.83% | 51.96 | $1042.43 | 204.6 |
+| 21 | Claude Sonnet 5 | max | 54.0% ± 4.0% | $26.40 | 54.18% | 37.32% | 80.52% | 53.59% | 77.00% | 41.29% | 91.11% | 16.86% | 40.05% | 60.63% | 55.26 | $4010.51 | 82.1 |
 
-| Model | Accuracy | Hallucination Rate |
-|---|---:|---:|
-| Grok 4.5 | 52.0 | 53.5 |
-| Kimi K3 | 46.0 | 50.9 |
-| Muse Spark 1.1 | 40.6 | 38.1 |
-| GPT-5.6 Terra | 45.9 | 85.2 |
-| GPT-5.6 Sol | 58.5 | 88.8 |
-| Claude Opus 5 | 54.2 | 50.1 |
-| GPT-5.6 Luna | 41.5 | 90.1 |
-| GPT-5.5 | 56.9 | 85.5 |
-| Gemini 3.6 Flash | 50.2 | 53.5 |
-| GLM-5.2 | 25.1 | 28.1 |
-| Gemini 3.1 Pro | 55.2 | 49.9 |
-| Claude Fable 5 | 61.4 | 54.9 |
-| GPT-5.4 | 50.0 | 88.6 |
-| Gemini 3.5 Flash | 51.9 | 60.7 |
-| Claude Opus 4.8 | 46.6 | 35.9 |
-| Claude Sonnet 5 | 38.3 | 37.2 |
-| Claude Sonnet 4.6 | 40.0 | 46.1 |
-| Kimi K2.7 Code | 38.6 | 80.3 |
+## Cost construction
 
-## Agentic / reasoning benchmarks (retained)
-
-| Model | GDPval-AA | AA-LCR | HLE | GPQA | SciCode | CritPt |
-|---|---:|---:|---:|---:|---:|---:|
-| Grok 4.5 | 51.4 | 67.7 | 40.3 | 93.1 | 54.0 | 15.4 |
-| Kimi K3 | 59.4 | 74.7 | 44.4 | 93.5 | 58.7 | 23.4 |
-| Muse Spark 1.1 | 43.8 | 63.3 | 45.1 | 89.8 | 58.2 | 15.1 |
-| GPT-5.6 Terra | 54.1 | 74.0 | 41.8 | 92.5 | 53.9 | 30.0 |
-| GPT-5.6 Sol | 61.8 | 73.7 | 47.2 | 94.1 | 56.1 | 32.3 |
-| Claude Opus 5 | 68.1 | 70.0 | 52.6 | 93.2 | 55.7 | 29.1 |
-| GPT-5.6 Luna | 54.1 | 74.0 | 37.2 | 91.1 | 52.5 | 20.6 |
-| GPT-5.5 | 49.5 | 74.3 | 44.3 | 93.5 | 56.1 | 27.1 |
-| Gemini 3.6 Flash | 46.1 | 69.7 | 38.3 | 92.8 | 52.7 | 10.6 |
-| GLM-5.2 | 50.5 | 71.3 | 40.1 | 89.5 | 50.5 | 20.9 |
-| Gemini 3.1 Pro | 23.2 | 72.7 | 44.7 | 94.1 | 58.9 | 17.7 |
-| Claude Fable 5 | 62.3 | 70.0 | 53.3 | 92.6 | 60.2 | 28.6 |
-| GPT-5.4 | 44.6 | 74.0 | 41.6 | 92.0 | 56.6 | 23.4 |
-| Gemini 3.5 Flash | 42.2 | 69.3 | 41.0 | 92.2 | 53.1 | 13.1 |
-| Claude Opus 4.8 | 54.6 | 67.7 | 45.7 | 92.0 | 53.5 | 20.9 |
-| Claude Sonnet 5 | 55.1 | 70.7 | 39.6 | 91.1 | 53.6 | 16.9 |
-| Claude Sonnet 4.6 | 43.9 | 70.7 | 30.0 | 87.5 | 46.8 | 3.1 |
-| Kimi K2.7 Code | 34.3 | 66.3 | 32.8 | 89.6 | 47.5 | 10.0 |
-
-## Cost & speed (AA)
-
-| Model | Eval Cost ($) | Speed (tok/s) | AA Index |
+| Model | AA cost penalty | DeepSWE cost penalty | Composite cost |
 |---|---:|---:|---:|
-| Grok 4.5 | 639.87 | 58.3 | 53.8 |
-| Kimi K3 | 2437.41 | 33.3 | 57.1 |
-| Muse Spark 1.1 | 548.07 | 129.0 | 50.6 |
-| GPT-5.6 Terra | 2060.40 | 137.2 | 55.0 |
-| GPT-5.6 Sol | 3442.81 | 82.2 | 58.9 |
-| Claude Opus 5 | 3835.51 | 54.6 | 60.7 |
-| GPT-5.6 Luna | 944.97 | 194.9 | 51.2 |
-| GPT-5.5 | 2777.91 | 84.0 | 54.8 |
-| Gemini 3.6 Flash | 726.70 | 239.6 | 50.1 |
-| GLM-5.2 | 765.10 | 225.2 | 51.1 |
-| Gemini 3.1 Pro | 815.11 | 127.4 | 46.5 |
-| Claude Fable 5 | 5630.52 | 72.1 | 59.9 |
-| GPT-5.4 | 2185.46 | 153.5 | 51.4 |
-| Gemini 3.5 Flash | 1040.88 | 187.6 | 50.2 |
-| Claude Opus 4.8 | 3752.55 | 56.0 | 55.7 |
-| Claude Sonnet 5 | 4010.12 | 74.2 | 53.4 |
-| Claude Sonnet 4.6 | 3355.85 | 47.8 | 47.2 |
-| Kimi K2.7 Code | — | 45.7 | 41.9 |
+| Gemini 3.8 Flash | 15.14 | 8.94 | 12.04 |
+| GLM-5.3 Flash | 2.53 | 0.91 | 1.72 |
+| GPT-5.6 Sol | 36.98 | 24.47 | 30.72 |
+| GPT-6 Astra | 36.74 | 24.70 | 30.72 |
+| Grok 4.6 | 17.05 | 13.07 | 15.06 |
+| Claude Opus 5 | 70.32 | 44.85 | 57.58 |
+| Kimi K3 | 44.45 | 17.61 | 31.03 |
+| GLM-5.3 | 22.70 | 15.11 | 18.91 |
+| Muse Spark 1.2 | 11.72 | 14.02 | 12.87 |
+| Claude Fable 5 | 100.00 | 50.80 | 75.40 |
+| Gemini 3.7 Flash | 5.09 | 7.69 | 6.39 |
+| GPT-5.6 Luna | 3.19 | 2.31 | 2.75 |
+| Qwen3.8 Max | 28.08 | 14.13 | 21.11 |
+| DeepSeek V4 Pro | 11.31 | 6.33 | 8.82 |
+| GPT-5.5 | 51.25 | 27.39 | 39.32 |
+| Gemini 3.6 Flash | 7.55 | 8.37 | 7.96 |
+| DeepSeek V4 Flash | 5.93 | 1.74 | 3.83 |
+| Claude Opus 4.8 | 68.78 | 50.08 | 59.43 |
+| GLM-5.2 | 15.46 | 14.85 | 15.16 |
+| Gemini 3.5 Flash | 19.11 | 13.07 | 16.09 |
+| Claude Sonnet 5 | 73.52 | 100.00 | 86.76 |
 
+## Supplemental Artificial Analysis coverage
 
-## Non-ranked DeepSWE appendix
+These fields are preserved for future analysis but remain outside the primary score because they are incomplete across the current cohort or are not part of the current AA v4.1.1 weighted index.
 
-**Kimi K2.7 Code** is preserved for transparency but **not scored** in v1.3.1:
+| Field | Available | Missing models | Role |
+|---|---:|---|---|
+| mlcrOverall | 17/21 | gpt-6-astra, gemini-3.8-flash, grok-4.6, gemini-3.7-flash | Supplemental / not scored |
+| harveyLab | 11/21 | gpt-6-astra, gemini-3.8-flash, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, qwen3.8-max, muse-spark-1.2, deepseek-v4-flash | Supplemental / not scored |
+| apexAgents | 5/21 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash | Supplemental / not scored |
+| mmmuPro | 12/21 | claude-fable-5, glm-5.3, grok-4.6, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, muse-spark-1.2, deepseek-v4-flash, glm-5.2 | Supplemental / not scored |
+| livecodebench | 0/21 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash | Supplemental / not scored |
+| aime25 | 0/21 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash | Supplemental / not scored |
+| analystAgent | 8/21 | gpt-6-astra, gemini-3.8-flash, glm-5.3, grok-4.6, gpt-5.6-luna, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, qwen3.8-max, muse-spark-1.2, deepseek-v4-flash, gemini-3.6-flash, glm-5.2 | Supplemental / not scored |
+| automationBenchPartialScore | 11/21 | gpt-6-astra, claude-opus-5, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, qwen3.8-max, muse-spark-1.2, deepseek-v4-flash | Supplemental / not scored |
+| enterpriseOpsGym | 15/21 | gpt-6-astra, gemini-3.8-flash, grok-4.6, qwen3.8-max, deepseek-v4-flash, gemini-3.6-flash | Supplemental / not scored |
+| itBenchSre | 6/21 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, claude-fable-5, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash | Supplemental / not scored |
+| briefcaseElo | 19/21 | gemini-3.7-flash, glm-5.3-flash | Supplemental / not scored |
+| briefcaseRubricPassRate | 19/21 | gemini-3.7-flash, glm-5.3-flash | Supplemental / not scored |
+| briefcaseTotalCost | 19/21 | gemini-3.7-flash, glm-5.3-flash | Supplemental / not scored |
 
-- DeepSWE pass@1 = 31.0, avg cost/task = $2.82
-- AA Index = 41.9493685067994, speed = 45.7 tok/s
-- AA Index total eval cost = **unpublished** ([search](.refresh/v1.3/aa-kimi-k27-cost-search.md))
-- Exclusion reason: No published AA Intelligence Index total eval cost on https://artificialanalysis.ai/models/kimi-k2-7-code (see .refresh/v1.3/aa-kimi-k27-cost-search.md). Excluded from ranked cohort so Cost can use AA+DeepSWE composite for remaining models.
+## Dropped primary candidate
 
-## Cost construction (AA+DeepSWE composite)
-
-For ranked models: normalize AA eval cost and DeepSWE avg cost to 0–100 (max in ranked cohort = 100), then average.
-
-| Model | AA Cost (0-100) | DeepSWE Cost (0-100) | Composite Cost (0-100) |
-|---|---:|---:|---:|
-| Grok 4.5 | 11.36 | 9.17 | 10.27 |
-| Kimi K3 | 43.29 | 17.61 | 30.45 |
-| Muse Spark 1.1 | 9.73 | 8.94 | 9.34 |
-| GPT-5.6 Terra | 36.59 | 18.75 | 27.67 |
-| GPT-5.6 Sol | 61.15 | 31.78 | 46.46 |
-| Claude Opus 5 | 68.12 | 44.85 | 56.48 |
-| GPT-5.6 Luna | 16.78 | 11.48 | 14.13 |
-| GPT-5.5 | 49.34 | 27.39 | 38.36 |
-| Gemini 3.6 Flash | 12.91 | 13.37 | 13.14 |
-| GLM-5.2 | 13.59 | 14.85 | 14.22 |
-| Gemini 3.1 Pro | 14.48 | 35.91 | 25.19 |
-| Claude Fable 5 | 100.00 | 81.93 | 90.97 |
-| GPT-5.4 | 38.81 | 21.40 | 30.11 |
-| Gemini 3.5 Flash | 18.49 | 27.80 | 23.14 |
-| Claude Opus 4.8 | 66.65 | 50.08 | 58.36 |
-| Claude Sonnet 5 | 71.22 | 100.00 | 85.61 |
-| Claude Sonnet 4.6 | 59.60 | 20.91 | 40.26 |
-
-## Dropped dimensions (incomplete coverage)
-
-Re-checked after excluding Kimi K2.7 Code — IFBench / Terminal-Bench Hard / τ² still miss other newest models, so they stay dropped.
-
-| Dimension | Models missing |
-|---|---|
-| IFBench | Claude Opus 5, Kimi K3, GPT-5.6 Luna, Grok 4.5, Claude Sonnet 5, Gemini 3.6 Flash |
-| Terminal-Bench Hard | Claude Opus 5, Kimi K3, GPT-5.6 Luna, Grok 4.5, Claude Sonnet 5, Gemini 3.6 Flash |
-| τ²-Bench Telecom | Claude Opus 5, Kimi K3, GPT-5.6 Luna, Grok 4.5, Claude Sonnet 5, Gemini 3.6 Flash |
-
-## Official-first excluded benchmark audit
-
-Re-checked against the n=17 ranked cohort (DeepSWE Best minus Kimi K2.7 Code). A benchmark remains excluded unless a currently published implementation contains **all 17** ranked models.
-
-| Benchmark | Official source outcome | Best current secondary outcome |
+| Dimension | Missing model | Treatment |
 |---|---|---|
-| APEX-Agents | [Mercor APEX-Agents](https://www.mercor.com/apex/apex-agents-leaderboard/) does not cover the expanded July 2026 DeepSWE cohort (missing multiple new models including Claude Opus 5, GPT-5.6 family, Kimi K3, Grok 4.5, Muse Spark, etc.) | [AA APEX-Agents-AA](https://artificialanalysis.ai/evaluations/apex-agents-aa) still incomplete for n=17 |
-| ITBench | [IBM ITBench Kaggle](https://www.kaggle.com/benchmarks/ibm-research/itbench) lacks exact ValueRank cohort names | [AA ITBench-AA](https://artificialanalysis.ai/evaluations/itbench-aa) incomplete |
-| MMMU-Pro | [MMMU site](https://mmmu-benchmark.github.io/) is paper-era / incomplete for current cohort | [AA MMMU-Pro](https://artificialanalysis.ai/evaluations/mmmu-pro) incomplete |
-| MMLU-Pro | [TIGER-Lab MMLU-Pro](https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro) incomplete for current cohort | Kaggle / LLM Stats incomplete |
-| LiveCodeBench | [LiveCodeBench](https://livecodebench.github.io/) paper-era leaderboard incomplete | AA / Kaggle / LLM Stats incomplete |
-| Global-MMLU-Lite | [Cohere Labs Kaggle](https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite) incomplete | Secondary incomplete |
-| AIME 2025 | Owner publishes exam, not full frontier leaderboard | AA / Kaggle incomplete for n=17 |
-| MATH-500 | Owner publishes dataset, not full frontier leaderboard | Kaggle incomplete for n=17 |
+| Speed | GPT-6 Astra | incomplete cohort coverage; values remain null and are not neutral-filled |
+
+Missing values are intentionally represented as null; no old-version, model-family, median, or neutral-fill substitution is used.
+
+## Machine-readable artifacts
+
+- [.refresh/v1.4/deepswe.json](.refresh/v1.4/deepswe.json): current DeepSWE extraction
+- [.refresh/v1.4/aa_metrics.json](.refresh/v1.4/aa_metrics.json): decoded current AA model payloads
+- [.refresh/v1.4/scores.json](.refresh/v1.4/scores.json): normalized scores and rankings
+- [.refresh/v1.4/coverage_matrix.json](.refresh/v1.4/coverage_matrix.json): primary and supplemental availability
+- [research/2026-09-04-valuerank-refresh/evidence.jsonl](research/2026-09-04-valuerank-refresh/evidence.jsonl): source/evidence ledger

@@ -45,7 +45,15 @@ node_modules/
 .refresh/v1.3/parse_out.json
 .refresh/v1.3/parse_unesc_out.json
 .refresh/v1.3/push_log.txt
+.refresh/v1.4/aa/*.html
+.refresh/v1.4/aa/*.txt
+.refresh/v1.4/snapshots/*.html
+.refresh/v1.4/snapshots/*.txt
+.refresh/v1.4/*_log.txt
 
 # Tool logs and failed-agent transcripts
 *.log
 *.err
+
+# Auditable Silver deep-research validation logs
+!research/2026-09-04-valuerank-refresh/validation/*.log

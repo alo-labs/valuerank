@@ -1,0 +1,560 @@
+{
+  "schemaVersion": "v1.4",
+  "observedAt": "2026-09-04T11:31:44Z",
+  "cohort": "DeepSWE Best v1.1 current 21-model roster",
+  "cohortN": 21,
+  "primaryEvaluations": [
+    {
+      "key": "gdpvalV2",
+      "label": "GDPval-AA v2",
+      "aaKey": "gdpvalNormalized",
+      "weightPct": 20
+    },
+    {
+      "key": "tau3Banking",
+      "label": "τ³-Banking",
+      "aaKey": "tauBanking",
+      "weightPct": 14
+    },
+    {
+      "key": "terminalBenchV21",
+      "label": "Terminal-Bench v2.1",
+      "aaKey": "terminalbenchV21",
+      "weightPct": 16
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "aaKey": "scicode",
+      "weightPct": 8
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR",
+      "aaKey": "lcr",
+      "weightPct": 6
+    },
+    {
+      "key": "hle",
+      "label": "Humanity's Last Exam",
+      "aaKey": "hle",
+      "weightPct": 12
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond",
+      "aaKey": "gpqa",
+      "weightPct": 6
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "aaKey": "critpt",
+      "weightPct": 6
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "aaKey": "omniscienceBreakdown.accuracy",
+      "weightPct": 8
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "AA-Omniscience Non-Hallucination Rate",
+      "aaKey": "omniscienceBreakdown.hallucinationRate",
+      "weightPct": 4,
+      "transform": "oneMinus"
+    }
+  ],
+  "fields": {
+    "gdpvalV2": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "tau3Banking": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "terminalBenchV21": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "scicode": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "aaLcr": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "hle": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "gpqaDiamond": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "critpt": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "omniAccuracy": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "omniNonHallucination": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "intelligenceIndex": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "aaEvalCost": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 21,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true
+    },
+    "speed": {
+      "group": "primary",
+      "availableN": 20,
+      "cohortN": 21,
+      "coveragePct": 95.24,
+      "missingModels": [
+        "gpt-6-astra"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "mlcrOverall": {
+      "group": "supplemental",
+      "availableN": 17,
+      "cohortN": 21,
+      "coveragePct": 80.95,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "grok-4.6",
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "harveyLab": {
+      "group": "supplemental",
+      "availableN": 11,
+      "cohortN": 21,
+      "coveragePct": 52.38,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "glm-5.3",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "deepseek-v4-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "apexAgents": {
+      "group": "supplemental",
+      "availableN": 5,
+      "cohortN": 21,
+      "coveragePct": 23.81,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "mmmuPro": {
+      "group": "supplemental",
+      "availableN": 12,
+      "cohortN": 21,
+      "coveragePct": 57.14,
+      "missingModels": [
+        "claude-fable-5",
+        "glm-5.3",
+        "grok-4.6",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "muse-spark-1.2",
+        "deepseek-v4-flash",
+        "glm-5.2"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "livecodebench": {
+      "group": "supplemental",
+      "availableN": 0,
+      "cohortN": 21,
+      "coveragePct": 0.0,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "kimi-k3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "gemini-3.5-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "aime25": {
+      "group": "supplemental",
+      "availableN": 0,
+      "cohortN": 21,
+      "coveragePct": 0.0,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "kimi-k3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "gemini-3.5-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "analystAgent": {
+      "group": "supplemental",
+      "availableN": 8,
+      "cohortN": 21,
+      "coveragePct": 38.1,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "glm-5.3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "automationBenchPartialScore": {
+      "group": "supplemental",
+      "availableN": 11,
+      "cohortN": 21,
+      "coveragePct": 52.38,
+      "missingModels": [
+        "gpt-6-astra",
+        "claude-opus-5",
+        "glm-5.3",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "deepseek-v4-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "enterpriseOpsGym": {
+      "group": "supplemental",
+      "availableN": 15,
+      "cohortN": 21,
+      "coveragePct": 71.43,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "grok-4.6",
+        "qwen3.8-max",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "itBenchSre": {
+      "group": "supplemental",
+      "availableN": 6,
+      "cohortN": 21,
+      "coveragePct": 28.57,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "claude-fable-5",
+        "glm-5.3",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "briefcaseElo": {
+      "group": "supplemental",
+      "availableN": 19,
+      "cohortN": 21,
+      "coveragePct": 90.48,
+      "missingModels": [
+        "gemini-3.7-flash",
+        "glm-5.3-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "briefcaseRubricPassRate": {
+      "group": "supplemental",
+      "availableN": 19,
+      "cohortN": 21,
+      "coveragePct": 90.48,
+      "missingModels": [
+        "gemini-3.7-flash",
+        "glm-5.3-flash"
+      ],
+      "includedInPrimaryScore": false
+    },
+    "briefcaseTotalCost": {
+      "group": "supplemental",
+      "availableN": 19,
+      "cohortN": 21,
+      "coveragePct": 90.48,
+      "missingModels": [
+        "gemini-3.7-flash",
+        "glm-5.3-flash"
+      ],
+      "includedInPrimaryScore": false
+    }
+  },
+  "note": "Missing values are preserved as null; no supplemental field is silently substituted into the primary score.",
+  "scoring": {
+    "version": "v1.4.0",
+    "cohortN": 21,
+    "costMode": "aa+deepswe",
+    "retainedDimensions": [
+      "costComposite",
+      "omniNonHallucination",
+      "terminalBenchV21",
+      "deepswePassAt1",
+      "gdpvalV2",
+      "tau3Banking",
+      "aaLcr",
+      "omniAccuracy",
+      "hle",
+      "gpqaDiamond",
+      "scicode",
+      "critpt",
+      "intelligenceIndex"
+    ],
+    "droppedDimensions": [
+      {
+        "key": "speed",
+        "label": "Speed",
+        "missing": [
+          "GPT-6 Astra"
+        ],
+        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+      }
+    ],
+    "zeroGap": true,
+    "noNeutralFills": true,
+    "fields": {
+      "costComposite": {
+        "label": "Cost",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "omniNonHallucination": {
+        "label": "Non-Hallucination",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "terminalBenchV21": {
+        "label": "Terminal-Bench v2.1",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "deepswePassAt1": {
+        "label": "DeepSWE",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "gdpvalV2": {
+        "label": "GDPval-AA v2",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "tau3Banking": {
+        "label": "τ³-Banking",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "aaLcr": {
+        "label": "AA-LCR",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "omniAccuracy": {
+        "label": "AA-Omniscience Accuracy",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "hle": {
+        "label": "HLE",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "gpqaDiamond": {
+        "label": "GPQA Diamond",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "scicode": {
+        "label": "SciCode",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "critpt": {
+        "label": "CritPt",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "intelligenceIndex": {
+        "label": "AA Intelligence Index",
+        "availableN": 21,
+        "cohortN": 21,
+        "missingModels": [],
+        "includedInPrimaryScore": true
+      },
+      "speed": {
+        "label": "Speed",
+        "availableN": 20,
+        "cohortN": 21,
+        "missingModels": [
+          "GPT-6 Astra"
+        ],
+        "includedInPrimaryScore": false
+      }
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "question": "What is the most current, source-backed ValueRank ranking of frontier models, using the latest DeepSWE Best roster and the largest defensible set of benchmark dimensions with comparable coverage across the ranked cohort?",
+  "mode": "ultradeep",
+  "status": "verified_with_external_url_warning",
+  "validation": {
+    "report_structure": "pass",
+    "citation_integrity": "pass; 19/20 URL checks verified, one HTTP 308 warning",
+    "claim_support_strict": "pass; 15/15 supported",
+    "phase_gate": "pass"
+  },
+  "graphify": {
+    "status": "refreshed",
+    "mode": "code-ast",
+    "nodes": 1084,
+    "edges": 1060,
+    "communities": 94,
+    "multigraph_diagnostics": "pass; no dangling endpoints, self-loops, or collapsed endpoint pairs",
+    "semantic_enrichment": "not requested; graph remains reproducible without an API key"
+  },
+  "research_type": "default",
+  "started_at": "2026-09-04T10:59:50Z",
+  "search_cli": {
+    "status": "unavailable_on_host",
+    "user_reported_available": true,
+    "command_probe": [
+      "type -a search; which search; search --help",
+      "type -a search-cli; which search-cli; search-cli --help"
+    ],
+    "providers_available": [
+      "web",
+      "context_mode_search"
+    ],
+    "fallback_reason": "The user reported search-cli is available, but neither search nor search-cli resolved in this checkout's host environment; retrieval uses structured context-mode search plus host web search/open tools and direct first-party pages, with URLs and evidence spans persisted."
+  },
+  "repository": {
+    "root": "/Users/shafqat/valuerank",
+    "base_version": "v1.3.1",
+    "base_commit": "a2edc36d8451cdeef253eebacbc4202b2b3c1a06"
+  },
+  "assumptions": [
+    "DeepSWE Best remains the product cohort gate.",
+    "Artificial Analysis remains the primary comparable cross-benchmark source.",
+    "No missing benchmark cells or neutral fills are permitted in the ranked cohort.",
+    "Current values are observed on 2026-09-04 UTC."
+  ],
+  "scoring": {
+    "version": "v1.4.0",
+    "publishDate": "September 4, 2026",
+    "observedAt": "2026-09-04T11:35:07Z",
+    "cohortN": 21,
+    "deepsweSourceUpdatedOn": "September 3, 2026",
+    "aaBenchmarkVersion": "Artificial Analysis Intelligence Index v4.1.1",
+    "retainedDimensionN": 13,
+    "retainedDimensions": [
+      "Cost",
+      "Non-Hallucination",
+      "Terminal-Bench v2.1",
+      "DeepSWE",
+      "GDPval-AA v2",
+      "τ³-Banking",
+      "AA-LCR",
+      "AA-Omniscience Accuracy",
+      "HLE",
+      "GPQA Diamond",
+      "SciCode",
+      "CritPt",
+      "AA Intelligence Index"
+    ],
+    "droppedDimensions": [
+      {
+        "key": "speed",
+        "label": "Speed",
+        "missing": [
+          "GPT-6 Astra"
+        ],
+        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+      }
+    ],
+    "zeroGap": true,
+    "costMode": "aa+deepswe",
+    "pareto": [
+      "Gemini 3.8 Flash",
+      "Claude Opus 5",
+      "GPT-5.6 Sol",
+      "Kimi K3",
+      "GLM-5.3 Flash"
+    ],
+    "topFive": [
+      {
+        "rank": 1,
+        "name": "Gemini 3.8 Flash",
+        "overallScore": 69.4,
+        "qualityScore": 69.2
+      },
+      {
+        "rank": 2,
+        "name": "GLM-5.3 Flash",
+        "overallScore": 65.6,
+        "qualityScore": 51.1
+      },
+      {
+        "rank": 3,
+        "name": "GPT-5.6 Sol",
+        "overallScore": 61.3,
+        "qualityScore": 73.5
+      },
+      {
+        "rank": 4,
+        "name": "GPT-6 Astra",
+        "overallScore": 61.0,
+        "qualityScore": 73.1
+      },
+      {
+        "rank": 5,
+        "name": "Grok 4.6",
+        "overallScore": 60.8,
+        "qualityScore": 61.2
+      }
+    ],
+    "weights": [
+      {
+        "key": "costComposite",
+        "label": "Cost",
+        "higherBetter": false,
+        "priority": 25,
+        "weightPct": 29.7619
+      },
+      {
+        "key": "omniNonHallucination",
+        "label": "Non-Hallucination",
+        "higherBetter": true,
+        "priority": 6,
+        "weightPct": 7.1429
+      },
+      {
+        "key": "terminalBenchV21",
+        "label": "Terminal-Bench v2.1",
+        "higherBetter": true,
+        "priority": 6,
+        "weightPct": 7.1429
+      },
+      {
+        "key": "deepswePassAt1",
+        "label": "DeepSWE",
+        "higherBetter": true,
+        "priority": 7,
+        "weightPct": 8.3333
+      },
+      {
+        "key": "gdpvalV2",
+        "label": "GDPval-AA v2",
+        "higherBetter": true,
+        "priority": 6,
+        "weightPct": 7.1429
+      },
+      {
+        "key": "tau3Banking",
+        "label": "τ³-Banking",
+        "higherBetter": true,
+        "priority": 5,
+        "weightPct": 5.9524
+      },
+      {
+        "key": "aaLcr",
+        "label": "AA-LCR",
+        "higherBetter": true,
+        "priority": 4,
+        "weightPct": 4.7619
+      },
+      {
+        "key": "omniAccuracy",
+        "label": "AA-Omniscience Accuracy",
+        "higherBetter": true,
+        "priority": 4,
+        "weightPct": 4.7619
+      },
+      {
+        "key": "hle",
+        "label": "HLE",
+        "higherBetter": true,
+        "priority": 4,
+        "weightPct": 4.7619
+      },
+      {
+        "key": "gpqaDiamond",
+        "label": "GPQA Diamond",
+        "higherBetter": true,
+        "priority": 4,
+        "weightPct": 4.7619
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "higherBetter": true,
+        "priority": 4,
+        "weightPct": 4.7619
+      },
+      {
+        "key": "critpt",
+        "label": "CritPt",
+        "higherBetter": true,
+        "priority": 3,
+        "weightPct": 3.5714
+      },
+      {
+        "key": "intelligenceIndex",
+        "label": "AA Intelligence Index",
+        "higherBetter": true,
+        "priority": 6,
+        "weightPct": 7.1429
+      }
+    ],
+    "primaryMissingFields": {
+      "speed": [
+        "GPT-6 Astra"
+      ]
+    }
+  }
+}

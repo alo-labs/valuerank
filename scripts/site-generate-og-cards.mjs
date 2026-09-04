@@ -109,8 +109,8 @@ const CARDS = [
     <div class="subtitle">Frontier models ranked on real-world value</div>
     <p class="desc">Independent rankings from Artificial Analysis &amp; DeepSWE Best.<br>Quality, cost, and value — one score.</p>
     <div class="pill-row">
-      <div class="pill"><span class="dot dot-indigo"></span> v1.3</div>
-      <div class="pill"><span class="dot dot-green"></span> 18 models</div>
+      <div class="pill"><span class="dot dot-indigo"></span> v1.4.0</div>
+      <div class="pill"><span class="dot dot-green"></span> 21 models</div>
     </div>
     <div class="viz" aria-hidden="true">
       <div class="viz-inner">

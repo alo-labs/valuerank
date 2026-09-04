@@ -1,70 +1,61 @@
 # ValueRank
 **Frontier AI model ranking focused on production value**
 
-**Version:** v1.3.1  
-**Updated:** July 28, 2026  
-**Scope:** 17 DeepSWE Best models (ranked), 12 scored dimensions
+**Version:** v1.4.0
+**Updated:** September 4, 2026
+**Scope:** 21 models from the current DeepSWE Best roster, 13 retained zero-gap dimensions
 
-## What ValueRank is
+## Current result
 
-ValueRank is a production-weighted ranking of frontier AI models. It combines benchmark quality, reliability, speed, and a composite cost term into a single rank-based score.
+ValueRank combines current DeepSWE agent performance with Artificial Analysis Intelligence Index v4.1.1 component results and a two-source cost penalty. The complete current DeepSWE Best roster is retained; no missing cell is filled with a neutral value.
 
-v1.3.1 ranks **n=17** models from the current DeepSWE Best roster, keeps the **zero-gap** rule (no neutral-50 fills), drops dimensions without full AA coverage on the new models, and restores **AA+DeepSWE composite Cost**. **Kimi K2.7 Code** remains on DeepSWE but is **excluded from the ranked cohort** because AA Intelligence Index total eval cost is unpublished ([search evidence](.refresh/v1.3/aa-kimi-k27-cost-search.md)).
+| Rank | Model | Overall | Quality | Composite Cost |
+|---:|---|---:|---:|---:|
+| 1 | Gemini 3.8 Flash | 69.4 | 69.2 | 12.04 |
+| 2 | GLM-5.3 Flash | 65.6 | 51.1 | 1.72 |
+| 3 | GPT-5.6 Sol | 61.3 | 73.5 | 30.72 |
+| 4 | GPT-6 Astra | 61.0 | 73.1 | 30.72 |
+| 5 | Grok 4.6 | 60.8 | 61.2 | 15.06 |
+| 6 | Claude Opus 5 | 59.9 | 79.0 | 57.58 |
+| 7 | Kimi K3 | 59.6 | 74.2 | 31.03 |
+| 8 | GLM-5.3 | 58.3 | 63.9 | 18.91 |
+| 9 | Muse Spark 1.2 | 53.0 | 47.9 | 12.87 |
+| 10 | Claude Fable 5 | 52.1 | 72.0 | 75.40 |
+| 11 | Gemini 3.7 Flash | 50.8 | 36.3 | 6.39 |
+| 12 | GPT-5.6 Luna | 49.8 | 30.6 | 2.75 |
+| 13 | Qwen3.8 Max | 48.0 | 51.4 | 21.11 |
+| 14 | DeepSeek V4 Pro | 44.9 | 32.1 | 8.82 |
+| 15 | GPT-5.5 | 43.4 | 53.3 | 39.32 |
+| 16 | Gemini 3.6 Flash | 40.1 | 23.1 | 7.96 |
+| 17 | DeepSeek V4 Flash | 39.9 | 18.7 | 3.83 |
+| 18 | Claude Opus 4.8 | 36.8 | 48.1 | 59.43 |
+| 19 | GLM-5.2 | 34.8 | 26.2 | 15.16 |
+| 20 | Gemini 3.5 Flash | 34.0 | 27.3 | 16.09 |
+| 21 | Claude Sonnet 5 | 26.5 | 37.8 | 86.76 |
 
-- Keeps the ranked pool limited to **models on the current DeepSWE Best leaderboard** with complete Cost inputs
-- Explicitly excludes off-roster historical models: **Grok-Build-0.1**, **Gemini 3 Flash**, **Claude Opus 4.6**
-- Excludes **Kimi K2.7 Code** from ranking (no AA Index total eval cost; DeepSWE row preserved in raw-data)
-- Includes **Grok 4.5**, **Claude Opus 5**, **GPT-5.6 Sol/Terra/Luna**, **Kimi K3**, **Muse Spark 1.1**, and other July 2026 DeepSWE entrants
-- Uses only **benchmarks with full coverage across all 17 ranked models**
-- Drops **IFBench**, **Terminal-Bench Hard**, and **τ²-Bench Telecom** (missing on newest AA model pages)
-- Reruns the excluded-benchmark audit against **official sources first**, then secondary implementations
+The current Pareto frontier—undominated on composite cost versus quality—is: **Gemini 3.8 Flash, Claude Opus 5, GPT-5.6 Sol, Kimi K3, GLM-5.3 Flash**.
 
-## v1.3.1 Ranking
+## What changed in v1.4
 
-Cost is the average of normalized AA Index total eval cost and normalized DeepSWE avg cost per task (0–100, higher = costlier), then rank-normalized.
+- DeepSWE is refreshed to the live v1.1 Best page: **21 models**, **113 tasks**, source updated **September 3, 2026**.
+- Artificial Analysis is migrated to the current **Artificial Analysis Intelligence Index v4.1.1** identity: GDPval-AA v2, τ³-Banking, Terminal-Bench v2.1, SciCode, AA-LCR, HLE, GPQA Diamond, CritPt, and split AA-Omniscience accuracy/non-hallucination components.
+- The ranked pool is **21 models**, with all current DeepSWE entries preserved.
+- The score retains **13 zero-gap dimensions**; **Speed** is excluded because GPT-6 Astra.
+- Speed remains an auditable coverage field (20/21 AA pages publish a numeric value) but is not imputed into the primary score because GPT-6 Astra's selected page reports N/A.
+- Legacy v1.3.1 values are not numerically comparable: the AA benchmark identities and the DeepSWE cohort have changed.
 
-| Rank | Model | Score | Quality | Composite Cost |
-|---|---|---:|---:|---:|
-| 1 | Grok 4.5 | 60.6 | 44.9 | 10.27 |
-| 2 | Kimi K3 | 59.2 | 66.4 | 30.45 |
-| 3 | Muse Spark 1.1 | 58.9 | 39.5 | 9.34 |
-| 4 | GPT-5.6 Terra | 58.8 | 60.0 | 27.67 |
-| 5 | GPT-5.6 Sol | 58.2 | 73.8 | 46.46 |
-| 6 | Claude Opus 5 | 56.5 | 74.3 | 56.48 |
-| 7 | GPT-5.6 Luna | 53.9 | 41.1 | 14.13 |
-| 8 | GPT-5.5 | 53.0 | 60.3 | 38.36 |
-| 9 | Gemini 3.6 Flash | 52.6 | 36.2 | 13.14 |
-| 10 | GLM-5.2 | 52.0 | 41.2 | 14.22 |
-| 11 | Gemini 3.1 Pro | 51.0 | 45.6 | 25.19 |
-| 12 | Claude Fable 5 | 50.0 | 73.6 | 90.97 |
-| 13 | GPT-5.4 | 47.0 | 45.6 | 30.11 |
-| 14 | Gemini 3.5 Flash | 42.8 | 30.5 | 23.14 |
-| 15 | Claude Opus 4.8 | 40.8 | 54.2 | 58.36 |
-| 16 | Claude Sonnet 5 | 32.9 | 45.5 | 85.61 |
-| 17 | Claude Sonnet 4.6 | 21.7 | 17.2 | 40.26 |
+## Sources and audit trail
 
-## v1.3.1 Frontier
-
-Undominated on composite cost vs. quality:
-
-- Claude Opus 5
-- GPT-5.6 Sol
-- GPT-5.6 Terra
-- Kimi K3
-- Grok 4.5
-- Muse Spark 1.1
-- Gemini 3.1 Pro
-
-## Sources Used in v1.3.1
-
-- [DeepSWE](https://deepswe.datacurve.ai/) (Best roster; updated July 25, 2026)
-- [Artificial Analysis model pages](https://artificialanalysis.ai/models)
-- Evidence ledger: [`.refresh/v1.3/`](.refresh/v1.3/)
+- [DeepSWE Best](https://deepswe.datacurve.ai/) for pass@1, uncertainty, average cost, output tokens, and agent steps.
+- [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
+- [Research report](research/2026-09-04-valuerank-refresh/research_report.md) for the source ledger, evidence spans, triangulation, critique cycles, and decisions.
+- [Coverage matrix](.refresh/v1.4/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
 
 ## Files
 
-- [scores.md](scores.md): final rankings and normalized scores
-- [raw-data.md](raw-data.md): benchmark inputs and official-first exclusion audit
-- [methodology.md](methodology.md): scoring method, weights, cohort rules, and audit policy
-- [site/index.html](site/index.html): published static site
-- [docs/repository-layout.md](docs/repository-layout.md): canonical layout, refresh pipeline, and local-output policy
+- [scores.md](scores.md): final ranking, weights, and normalized matrix
+- [raw-data.md](raw-data.md): source values, selected AA variants, and supplemental coverage
+- [methodology.md](methodology.md): cohort, benchmark versions, normalization, and zero-gap rule
+- [site/index.html](site/index.html): interactive static publication
+- [research/2026-09-04-valuerank-refresh/](research/2026-09-04-valuerank-refresh/): reproducible research package
+- [.refresh/v1.4/](.refresh/v1.4/): refresh scripts and machine-readable snapshots/outputs

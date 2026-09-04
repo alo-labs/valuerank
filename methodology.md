@@ -1,109 +1,98 @@
 # ValueRank Methodology
 
-**Version:** v1.3.1
-**Updated:** July 28, 2026
+**Version:** v1.4.0
+**Updated:** September 4, 2026
 
-## Cohort Rule
+## Cohort and source versions
 
-v1.3.1 ranks **17** models from the current [DeepSWE](https://deepswe.datacurve.ai/) Best roster (source updated July 25, 2026; roster size 18). Historical exclusions that remain off-roster: `Grok-Build-0.1`, `Gemini 3 Flash`, `Claude Opus 4.6`. `Grok 4.5` is ranked (it is on DeepSWE Best).
+The ranked cohort is the complete **21-model current DeepSWE Best roster**. Each model is represented by the Best-page effort row shown by DeepSWE; all 21 rows have pass@1, uncertainty, average cost, output-token, and agent-step values.
 
-**Changelog vs v1.3:** `Kimi K2.7 Code` removed from the ranked cohort so Cost can restore the AA+DeepSWE composite (AA Index total eval cost unpublished for that model).
+- DeepSWE source: [live leaderboard](https://deepswe.datacurve.ai/), v1.1, 113 tasks, updated September 3, 2026.
+- AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current Artificial Analysis Intelligence Index v4.1.1.
+- AA model values: one first-party model page per DeepSWE family, with the effort-specific URL selected by .refresh/v1.4/aa_mapping.json and recorded in aa_metrics.json.
 
-Ranked cohort (n=17):
+The old v1.3.1 publication used an earlier cohort and older AA benchmark identities. It remains historical; its numerical scores must not be compared directly with v1.4.0.
 
-- Grok 4.5
-- Kimi K3
-- Muse Spark 1.1
-- GPT-5.6 Terra
-- GPT-5.6 Sol
-- Claude Opus 5
-- GPT-5.6 Luna
-- GPT-5.5
-- Gemini 3.6 Flash
-- GLM-5.2
-- Gemini 3.1 Pro
-- Claude Fable 5
-- GPT-5.4
-- Gemini 3.5 Flash
-- Claude Opus 4.8
-- Claude Sonnet 5
-- Claude Sonnet 4.6
+## Primary dimensions
 
-## Ranked-cohort exclusion
+The score retains only dimensions with a genuine value for every one of the 21 ranked models. Values are stored as raw fractions in scores.json, then converted to rank scores.
 
-**Kimi K2.7 Code** is on the DeepSWE Best roster but **not ranked** in ValueRank v1.3.1:
+| # | Dimension | ValueRank weight | Direction |
+|---:|---|---:|---|
+| 1 | Cost | 29.76% | lower |
+| 2 | Non-Hallucination | 7.14% | higher |
+| 3 | Terminal-Bench v2.1 | 7.14% | higher |
+| 4 | DeepSWE | 8.33% | higher |
+| 5 | GDPval-AA v2 | 7.14% | higher |
+| 6 | τ³-Banking | 5.95% | higher |
+| 7 | AA-LCR | 4.76% | higher |
+| 8 | AA-Omniscience Accuracy | 4.76% | higher |
+| 9 | HLE | 4.76% | higher |
+| 10 | GPQA Diamond | 4.76% | higher |
+| 11 | SciCode | 4.76% | higher |
+| 12 | CritPt | 3.57% | higher |
+| 13 | AA Intelligence Index | 7.14% | higher |
 
-- Reason: no published AA Intelligence Index **total eval cost** on [https://artificialanalysis.ai/models/kimi-k2-7-code](https://artificialanalysis.ai/models/kimi-k2-7-code).
-- Evidence: [`.refresh/v1.3/aa-kimi-k27-cost-search.md`](.refresh/v1.3/aa-kimi-k27-cost-search.md) (search verdict NOT FOUND, 2026-07-28).
-- DeepSWE pass@1 / avg cost remain in [raw-data.md](raw-data.md) as a non-ranked appendix row.
+The ten AA component entries below correspond to the nine current AA evaluations because Omniscience is split into accuracy and non-hallucination reliability:
 
-## Zero-Gap Rule
-
-- Every retained dimension must have a genuine current score for all **17** ranked models.
-- If even one ranked model is genuinely missing from a benchmark, that benchmark is excluded.
-- v1.3.1 has **zero missing benchmark cells** and uses **no neutral 50 placeholders** on the main product.
-
-## Scored Dimensions
-
-ValueRank v1.3.1 uses **12** fully covered dimensions:
-
-1. Cost
-2. Hallucination
-3. DeepSWE
-4. GDPval-AA
-5. AA-LCR
-6. Omni Acc
-7. HLE
-8. GPQA
-9. SciCode
-10. CritPt
-11. AA Intelligence Index
-12. Speed
-
-Dropped vs v1.2 (incomplete AA coverage for newest DeepSWE models — still incomplete after excluding Kimi K2.7 Code): IFBench, Terminal-Bench Hard, τ²-Bench Telecom.
-
-## Weights
-
-Relative v1.2 priorities are preserved among retained dimensions and renormalized to 100%:
-
-| Dimension | Weight |
+| AA evaluation/component | Current methodology weight |
 |---|---:|
-| Cost | 32.05% |
-| Hallucination | 7.69% |
-| DeepSWE | 8.97% |
-| GDPval-AA | 7.69% |
-| AA-LCR | 5.13% |
-| Omni Acc | 5.13% |
-| HLE | 5.13% |
-| GPQA | 5.13% |
-| SciCode | 5.13% |
-| CritPt | 3.85% |
-| AA Intelligence Index | 7.69% |
-| Speed | 6.41% |
+| GDPval-AA v2 | 20% |
+| τ³-Banking | 14% |
+| Terminal-Bench v2.1 | 16% |
+| SciCode | 8% |
+| AA-LCR | 6% |
+| Humanity's Last Exam | 12% |
+| GPQA Diamond | 6% |
+| CritPt | 6% |
+| AA-Omniscience Accuracy | 8% |
+| AA-Omniscience Non-Hallucination Rate | 4% |
 
-## Normalization
+These AA methodology weights describe the source index, not the combined ValueRank weights above. ValueRank adds DeepSWE, cost, and AA Index signals using the explicitly published priority table.
 
-`((n - rank) / (n - 1)) * 100` with `n = 17`.
+## Zero-gap rule
 
-- Best → 100, worst → 0, ties average ranks.
-- For Hallucination, lower raw rate is better.
-- For Cost, lower composite cost is better.
+- A candidate dimension is scored only when all 21 models have a published value.
+- Missing values remain null in aa_metrics.json and are listed in coverage_matrix.json.
+- No neutral 50, median, model-family, or legacy-version substitution is used.
+- In v1.4.0, **Speed is dropped from the primary score** because the selected GPT-6 Astra AA page reports N/A. Numeric speed values for the other 20 models remain in raw data and the coverage matrix.
 
-## Cost Construction
+Dropped candidate dimensions:
 
-Composite AA+DeepSWE (restored in v1.3.1):
+| Dimension | Missing models | Decision |
+|---|---|---|
+| Speed | GPT-6 Astra | incomplete cohort coverage; values remain null and are not neutral-filled |
 
-1. Normalize AA Intelligence Index **total eval cost** onto 0–100 (highest-cost ranked model = 100; higher cost = higher penalty).
-2. Normalize DeepSWE Best-row average cost per task onto 0–100 the same way.
-3. Average the two penalties → composite cost scale.
-4. Rank-normalize that composite (lower better) for the Cost dimension.
+## Rank normalization
 
-## Quality Score
+For each retained dimension, models are ranked from best to worst and mapped with:
 
-Quality removes the Cost term and renormalizes remaining non-cost dimensions to 100%.
+((n - rank) / (n - 1)) × 100
 
-## Source Policy
+Rank 1 maps to 100, rank 21 maps to 0, and exact ties receive the average tied rank. Lower-is-better dimensions, including composite Cost, reverse the ordering before normalization.
 
-- DeepSWE for pass@1 and avg cost.
-- Artificial Analysis model pages for retained AA metrics.
-- Official-first gap audit for excluded benchmarks (see raw-data.md).
+## Cost construction
+
+The Cost input is an average of two independently observed penalties:
+
+1. AA Intelligence Index total evaluation cost, normalized against the highest current cohort cost.
+2. DeepSWE Best average cost per task, normalized against the highest current cohort cost.
+3. The two 0–100 penalties are averaged into costComposite.
+4. costComposite is rank-normalized with lower cost better.
+
+This avoids treating a single vendor's price surface as the whole production-cost story while keeping the two source quantities visible in every score row.
+
+## Quality score and interpretation
+
+Overall Score is the weighted sum of all retained dimensions. Quality Score removes Cost and renormalizes the remaining retained dimensions to 100%. Scores are rank-relative to this cohort, not probabilities and not an absolute model capability scale.
+
+## Supplemental data
+
+Artificial Analysis exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, AutomationBench, EnterpriseOpsGym, ITBench SRE, Briefcase, and other legacy/current fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json, but they are not added to the primary score when incomplete or outside the current v4.1.1 index definition.
+
+## Limitations
+
+- DeepSWE and AA measure different tasks, harnesses, and sampling procedures; this is a transparent synthesis, not a new benchmark.
+- Rank normalization discards magnitude differences and should be read with the raw values and uncertainty fields.
+- Page variants can differ by reasoning effort; the selected URL and variant are recorded per model.
+- Speed is intentionally coverage-only in this release because one current page has N/A.

@@ -1,0 +1,50 @@
+{
+  "run_id": "2026-09-04-valuerank-refresh",
+  "workflow": "SILVER_DEEP_RESEARCH",
+  "mode": "ultradeep",
+  "status": "verified_with_external_url_warning",
+  "source_budget": {
+    "target": 30,
+    "maximum": 40,
+    "used": 38
+  },
+  "critique_cycles": 3,
+  "quality_floor": {
+    "minimum_average_credibility": 75,
+    "source_classes": [
+      "primary_live_leaderboard",
+      "primary_release_history",
+      "primary_methodology",
+      "primary_benchmark_owner",
+      "primary_model_page",
+      "primary_paper"
+    ]
+  },
+  "outputs": {
+    "cohort_models": 21,
+    "retained_dimensions": 13,
+    "zero_gap": true,
+    "neutral_fills": 0,
+    "dropped_candidate_dimensions": ["speed"],
+    "top_model": "Gemini 3.8 Flash",
+    "report": "research_report.md",
+    "claims": "claims.jsonl",
+    "validation_directory": "validation/"
+  },
+  "graphify": {
+    "status": "refreshed",
+    "mode": "code-ast",
+    "nodes": 1084,
+    "edges": 1060,
+    "communities": 94,
+    "diagnostics": "pass"
+  },
+  "fallbacks": [
+    {
+      "tool": "search-cli",
+      "status": "user_reported_available_but_not_resolved_on_host",
+      "replacement": "structured context-mode search, host web/open retrieval, and persisted first-party URLs/evidence spans"
+    }
+  ],
+  "next_gate": "Refresh Graphify after the final code changes, inspect the tracked file set, then commit and push."
+}
