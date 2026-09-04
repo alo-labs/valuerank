@@ -420,6 +420,63 @@
         "glm-5.3-flash"
       ],
       "includedInPrimaryScore": false
+    },
+    "livebenchOverall": {
+      "group": "supplemental",
+      "label": "LiveBench Overall Score",
+      "availableN": 20,
+      "cohortN": 21,
+      "coveragePct": 95.24,
+      "missingModels": [
+        "GPT-6 Astra"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "2026_06_25"
+    },
+    "livebenchInstructionFollowing": {
+      "group": "supplemental",
+      "label": "Instruction Following (LiveBench)",
+      "availableN": 20,
+      "cohortN": 21,
+      "coveragePct": 95.24,
+      "missingModels": [
+        "GPT-6 Astra"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "2026_06_25"
+    },
+    "livebenchCostPerSuccessfulTask": {
+      "group": "supplemental",
+      "label": "LiveBench Cost Per Successful Task",
+      "availableN": 20,
+      "cohortN": 21,
+      "coveragePct": 95.24,
+      "missingModels": [
+        "GPT-6 Astra"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "2026_06_25"
+    },
+    "terminalBenchV4": {
+      "group": "supplemental",
+      "label": "Terminal-Bench 4.0",
+      "availableN": 11,
+      "cohortN": 21,
+      "coveragePct": 52.38,
+      "missingModels": [
+        "Kimi K3",
+        "GPT-5.5",
+        "GLM-5.3 Flash",
+        "DeepSeek V4 Pro",
+        "Qwen3.8 Max",
+        "Muse Spark 1.2",
+        "DeepSeek V4 Flash",
+        "Gemini 3.6 Flash",
+        "GLM-5.2",
+        "Gemini 3.5 Flash"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "4.0"
     }
   },
   "note": "Missing values are preserved as null; no supplemental field is silently substituted into the primary score.",
@@ -430,7 +487,6 @@
     "retainedDimensions": [
       "costComposite",
       "omniNonHallucination",
-      "terminalBenchV21",
       "deepswePassAt1",
       "gdpvalV2",
       "tau3Banking",
@@ -443,6 +499,31 @@
       "intelligenceIndex"
     ],
     "droppedDimensions": [
+      {
+        "key": "terminalBenchV4",
+        "label": "Terminal-Bench 4.0",
+        "missing": [
+          "Kimi K3",
+          "GPT-5.5",
+          "GLM-5.3 Flash",
+          "DeepSeek V4 Pro",
+          "Qwen3.8 Max",
+          "Muse Spark 1.2",
+          "DeepSeek V4 Flash",
+          "Gemini 3.6 Flash",
+          "GLM-5.2",
+          "Gemini 3.5 Flash"
+        ],
+        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+      },
+      {
+        "key": "livebenchInstructionFollowing",
+        "label": "Instruction Following (LiveBench)",
+        "missing": [
+          "GPT-6 Astra"
+        ],
+        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+      },
       {
         "key": "speed",
         "label": "Speed",
@@ -469,12 +550,32 @@
         "missingModels": [],
         "includedInPrimaryScore": true
       },
-      "terminalBenchV21": {
-        "label": "Terminal-Bench v2.1",
-        "availableN": 21,
+      "terminalBenchV4": {
+        "label": "Terminal-Bench 4.0",
+        "availableN": 11,
         "cohortN": 21,
-        "missingModels": [],
-        "includedInPrimaryScore": true
+        "missingModels": [
+          "Kimi K3",
+          "GPT-5.5",
+          "GLM-5.3 Flash",
+          "DeepSeek V4 Pro",
+          "Qwen3.8 Max",
+          "Muse Spark 1.2",
+          "DeepSeek V4 Flash",
+          "Gemini 3.6 Flash",
+          "GLM-5.2",
+          "Gemini 3.5 Flash"
+        ],
+        "includedInPrimaryScore": false
+      },
+      "livebenchInstructionFollowing": {
+        "label": "Instruction Following (LiveBench)",
+        "availableN": 20,
+        "cohortN": 21,
+        "missingModels": [
+          "GPT-6 Astra"
+        ],
+        "includedInPrimaryScore": false
       },
       "deepswePassAt1": {
         "label": "DeepSWE",
@@ -555,6 +656,27 @@
         ],
         "includedInPrimaryScore": false
       }
+    }
+  },
+  "externalBenchmarks": {
+    "livebench": {
+      "release": "2026_06_25",
+      "matchedN": 20,
+      "cohortN": 21,
+      "pareto": [
+        "deepseek-v4-flash",
+        "glm-5.3-flash",
+        "gemini-3.7-flash",
+        "kimi-k3",
+        "gpt-5.5",
+        "gpt-5.6-sol",
+        "claude-fable-5"
+      ]
+    },
+    "terminalBenchV4": {
+      "version": "4.0",
+      "matchedN": 11,
+      "cohortN": 21
     }
   }
 }

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Terminal-Bench 4.0 — Score vs Cost · ValueRank</title>
+  <meta name="description" content="Official Terminal-Bench 4.0 resolution rate versus total cost, with a Pareto frontier and ValueRank cohort coverage.">
+  <meta property="og:title" content="Terminal-Bench 4.0 — Score vs Cost · ValueRank">
+  <meta property="og:description" content="Official Terminal-Bench 4.0 resolution rate versus total cost with Pareto frontier.">
+  <meta property="og:url" content="https://valuerank.alolabs.dev/tb4/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://valuerank.alolabs.dev/tb4/og.png?v=1">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terminal-Bench 4.0 — Score vs Cost · ValueRank">
+  <meta name="twitter:description" content="Official Terminal-Bench 4.0 resolution rate versus total cost with Pareto frontier.">
+  <meta name="twitter:image" content="https://valuerank.alolabs.dev/tb4/og.png?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>(function(){var s=localStorage.getItem('vr-theme');if(s==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
+  <style>
+    :root { --bg-page:#f8f9fc; --bg-card:#fff; --nav-bg:rgba(248,249,252,.92); --accent:#4f46e5; --green:#059669; --text-primary:#0f172a; --text-secondary:#475569; --text-dim:#94a3b8; --border:#e2e8f0; --font-heading:'IBM Plex Sans',system-ui,sans-serif; --font-mono:'IBM Plex Mono',monospace; }
+    [data-theme="dark"] { --bg-page:#0a0a0f; --bg-card:#12121a; --nav-bg:rgba(10,10,15,.88); --accent:#818cf8; --green:#34d399; --text-primary:#e2e8f0; --text-secondary:#94a3b8; --text-dim:#64748b; --border:#1e293b; }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+    body { margin:0; background:var(--bg-page); color:var(--text-primary); font-family:var(--font-heading); font-size:14px; line-height:1.7; }
+    main { max-width:1160px; margin:0 auto; padding:104px 24px 64px; }
+    h1,h2 { letter-spacing:-.025em; line-height:1.15; }
+    h1 { font-size:clamp(2rem,5vw,3.8rem); margin:0 0 14px; }
+    h2 { font-size:1.35rem; margin:0 0 8px; }
+    .eyebrow { color:var(--accent); font:600 11px/1.4 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; }
+    .lede { max-width:760px; color:var(--text-secondary); font-size:16px; margin:0; }
+    .hero { padding:28px 0 30px; }
+    .hero a,.source a { color:var(--accent); }
+    .stats { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .stat { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:12px 16px; min-width:150px; }
+    .stat strong { display:block; font:600 20px/1.2 var(--font-mono); }
+    .stat span { color:var(--text-dim); font-size:11px; }
+    .card { background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:20px; margin-top:24px; }
+    .card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+    .sub { color:var(--text-secondary); margin:0 0 16px; }
+    #chart { height:560px; margin-top:12px; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; min-width:800px; }
+    th,td { text-align:left; padding:11px 9px; border-bottom:1px solid var(--border); vertical-align:top; }
+    th { color:var(--text-dim); font:600 11px/1.4 var(--font-mono); text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+    td.mono { font-family:var(--font-mono); }
+    td strong { display:block; }
+    .variant { display:block; color:var(--text-dim); font-size:11px; }
+    .uncertainty { color:var(--text-dim); }
+    .covered { color:var(--green); font-size:12px; }
+    .muted { color:var(--text-dim); font-size:12px; }
+    .note { color:var(--text-secondary); font-size:13px; }
+    .source { display:flex; flex-wrap:wrap; gap:18px; color:var(--text-dim); font-size:12px; }
+    footer { max-width:1160px; margin:0 auto; padding:24px; border-top:1px solid var(--border); color:var(--text-dim); font-size:12px; }
+    @media (max-width:700px) { main { padding-inline:14px; } .card { padding:14px; } #chart { height:480px; } }
+  </style>
+<style id="site-header-style">
+
+/* Shared ValueRank header: keep this block identical across publication pages. */
+.vr-site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 1000; height: 64px;
+  display: flex; align-items: center; gap: 18px; padding: 0 24px;
+  background: var(--nav-bg, rgba(248,249,252,.94));
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  color: var(--text-primary, #0f172a);
+}
+.vr-site-header a { color: inherit; }
+.vr-nav-brand { display: flex; align-items: center; flex-shrink: 0; }
+.vr-nav-brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.vr-nav-logo { font-weight: 800; letter-spacing: -.02em; font-size: 1.1rem; }
+.vr-nav-badge { padding: 2px 8px; border-radius: 999px; background: var(--accent, #4f46e5); color: #fff; font: 600 11px/1.5 var(--font-mono, 'IBM Plex Mono', monospace); }
+.vr-mode-switcher { display: flex; align-items: center; gap: 4px; }
+.vr-mode-btn { padding: 6px 10px; border-radius: 8px; color: var(--text-secondary, #475569); text-decoration: none; font-size: 13px; white-space: nowrap; }
+.vr-mode-btn:hover, .vr-mode-btn:focus-visible { background: var(--accent-a08, rgba(79,70,229,.08)); color: var(--accent, #4f46e5); }
+.vr-mode-btn.active { background: var(--accent-a12, rgba(79,70,229,.12)); color: var(--accent, #4f46e5); font-weight: 700; }
+.vr-nav-links { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+.vr-nav-links a { color: var(--text-secondary, #475569); font-size: 12px; text-decoration: none; }
+.vr-nav-links a:hover, .vr-nav-links a:focus-visible { color: var(--accent, #4f46e5); }
+.vr-nav-meta { color: var(--text-dim, #94a3b8); font-size: 11px; white-space: nowrap; }
+.vr-theme-toggle { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; background: transparent; color: var(--text-secondary, #475569); cursor: pointer; }
+.vr-theme-toggle svg { width: 16px; height: 16px; }
+.vr-theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .vr-theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .vr-theme-toggle .icon-moon { display: block; }
+@media (max-width: 1180px) { .vr-nav-links { display: none; } }
+@media (max-width: 820px) { .vr-site-header { gap: 8px; padding: 0 14px; } .vr-mode-switcher { overflow-x: auto; } .vr-mode-btn { padding-inline: 7px; } .vr-nav-meta { display: none; } }
+
+</style>
+</head>
+<body>
+  <nav class="vr-site-header" data-vr-shared-header="true">
+  <div class="vr-nav-brand">
+    <a class="vr-nav-brand-link" href="/">
+      <span class="vr-nav-logo">ValueRank</span>
+      <span class="vr-nav-badge">v1.4.0</span>
+    </a>
+  </div>
+  <div class="vr-mode-switcher">
+    <a class="vr-mode-btn" href="/">LLM Models</a>
+    <a class="vr-mode-btn" href="/coding-agents/">Coding Agents</a>
+    <a class="vr-mode-btn active" href="/tb4/">TB 4</a>
+  </div>
+  <div class="vr-nav-links nav-links">
+    <a href="/#rankings">Rankings</a>
+    <a href="/#charts">Charts</a>
+    <a href="/#methodology">Methodology</a>
+    <a href="/#data">Data</a>
+    <a href="/#faq">FAQ</a>
+  </div>
+  <div class="vr-nav-meta">14 official rows · current 4.0</div>
+  <button class="vr-theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
+    <i data-lucide="sun" class="icon-sun"></i>
+    <i data-lucide="moon" class="icon-moon"></i>
+  </button>
+</nav>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Official benchmark view · current release 4.0</div>
+      <h1>Terminal-Bench 4.0</h1>
+      <p class="lede">Resolution rate versus total benchmark cost for the current official leaderboard. The chart marks models that are undominated when higher resolution and lower cost are considered together.</p>
+      <div class="stats">
+        <div class="stat"><strong>14</strong><span>official rows</span></div>
+        <div class="stat"><strong>11/21</strong><span>ValueRank cohort coverage</span></div>
+        <div class="stat"><strong>5</strong><span>cost / resolution frontier rows</span></div>
+        <div class="stat"><strong>Sep 2026</strong><span>latest observed release window</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><div><h2>Resolution Rate vs Cost</h2><p class="sub">X-axis is logarithmic because official run costs span orders of magnitude; hover for agent, uncertainty, tokens, and rank.</p></div><div class="eyebrow">Higher is better · lower cost is better</div></div>
+      <div id="chart" aria-label="Terminal-Bench 4.0 resolution rate versus cost chart"></div>
+    </section>
+
+    <section class="card">
+      <h2>Official Terminal-Bench 4.0 leaderboard</h2>
+      <p class="sub">The table reproduces the current rendered official rows. “ValueRank cohort” identifies rows that map exactly to the 21-model DeepSWE cohort; unmatched models stay visible as official-only rows.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rank</th><th>Model</th><th>Agent</th><th>Resolution rate</th><th>Tokens</th><th>Cost</th><th>ValueRank coverage</th></tr></thead>
+        <tbody><tr><td class="mono">1</td><td><strong>GPT-6 Astra</strong><span class="variant">GPT-6 Astra (max)</span></td><td>Codex</td><td class="mono">58.2% <span class="uncertainty">± 2.8%</span></td><td class="mono">1.5B</td><td class="mono">$3,300</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">2</td><td><strong>Fable 5.1</strong><span class="variant">Fable 5.1 (max)</span></td><td>Claude Code</td><td class="mono">57.9% <span class="uncertainty">± 3.8%</span></td><td class="mono">2.7B</td><td class="mono">$6,200</td><td class="muted">Official-only</td></tr>
+<tr><td class="mono">3</td><td><strong>Opus 5</strong><span class="variant">Opus 5 (max)</span></td><td>Claude Code</td><td class="mono">51.8% <span class="uncertainty">± 3.4%</span></td><td class="mono">6.5B</td><td class="mono">$6,000</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">4</td><td><strong>Fable 5</strong><span class="variant">Fable 5 (max)</span></td><td>Claude Code</td><td class="mono">44.5% <span class="uncertainty">± 3.8%</span></td><td class="mono">3.8B</td><td class="mono">$7,300</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">5</td><td><strong>GLM-5.3</strong><span class="variant">GLM-5.3 (max)</span></td><td>Claude Code</td><td class="mono">41.8% <span class="uncertainty">± 3.2%</span></td><td class="mono">8.7B</td><td class="mono">$2,700</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">6</td><td><strong>GPT-5.6 Sol</strong><span class="variant">GPT-5.6 Sol (max)</span></td><td>Codex</td><td class="mono">37.3% <span class="uncertainty">± 3.8%</span></td><td class="mono">4.4B</td><td class="mono">$2,500</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">7</td><td><strong>Opus 4.8</strong><span class="variant">Opus 4.8 (max)</span></td><td>Claude Code</td><td class="mono">23.6% <span class="uncertainty">± 3.6%</span></td><td class="mono">6.4B</td><td class="mono">$6,500</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">8</td><td><strong>GPT-5.6 Terra</strong><span class="variant">GPT-5.6 Terra (max)</span></td><td>Codex</td><td class="mono">21.5% <span class="uncertainty">± 3.3%</span></td><td class="mono">5.7B</td><td class="mono">$1,700</td><td class="muted">Official-only</td></tr>
+<tr><td class="mono">9</td><td><strong>Grok 4.6</strong><span class="variant">Grok 4.6 (high)</span></td><td>Grok Build</td><td class="mono">20.3% <span class="uncertainty">± 3.1%</span></td><td class="mono">4.0B</td><td class="mono">$3,600</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">10</td><td><strong>Gemini 3.8 Flash</strong><span class="variant">Gemini 3.8 Flash (high)</span></td><td>mini-SWE-agent</td><td class="mono">19.1% <span class="uncertainty">± 3.4%</span></td><td class="mono">17.2B</td><td class="mono">$1,800</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">11</td><td><strong>GPT-5.6 Luna</strong><span class="variant">GPT-5.6 Luna (max)</span></td><td>Codex</td><td class="mono">17.3% <span class="uncertainty">± 2.8%</span></td><td class="mono">11.6B</td><td class="mono">$300</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">12</td><td><strong>Grok 4.5</strong><span class="variant">Grok 4.5 (high)</span></td><td>Grok Build</td><td class="mono">12.4% <span class="uncertainty">± 2.6%</span></td><td class="mono">3.4B</td><td class="mono">$2,100</td><td class="muted">Official-only</td></tr>
+<tr><td class="mono">12</td><td><strong>Sonnet 5</strong><span class="variant">Sonnet 5 (max)</span></td><td>Claude Code</td><td class="mono">12.4% <span class="uncertainty">± 3.1%</span></td><td class="mono">21.6B</td><td class="mono">$9,600</td><td class="covered">ValueRank cohort</td></tr>
+<tr><td class="mono">14</td><td><strong>Gemini 3.7 Flash</strong><span class="variant">Gemini 3.7 Flash (high)</span></td><td>mini-SWE-agent</td><td class="mono">11.2% <span class="uncertainty">± 2.4%</span></td><td class="mono">11.1B</td><td class="mono">$1,300</td><td class="covered">ValueRank cohort</td></tr></tbody>
+      </table></div>
+    </section>
+
+    <section class="card">
+      <h2>Coverage and interpretation</h2>
+      <p class="note">The TB4 snapshot overlaps 11 of the 21 current ValueRank models. The missing cohort rows are: Kimi K3, GPT-5.5, GLM-5.3 Flash, DeepSeek V4 Pro, Qwen3.8 Max, Muse Spark 1.2, DeepSeek V4 Flash, Gemini 3.6 Flash, GLM-5.2, Gemini 3.5 Flash.</p>
+      <p class="note">ValueRank keeps TB4 as an auditable external component and does not neutral-fill the ten missing cohort values. It therefore does not change the primary zero-gap score until the official source covers the complete cohort.</p>
+      <div class="source">
+        <span>Source: <a href="https://www.tbench.ai/" target="_blank" rel="noopener">tbench.ai</a></span>
+        <span>Target release: <a href="https://www.tbench.ai/leaderboard/terminal-bench/4.0" target="_blank" rel="noopener">Terminal-Bench 4.0</a></span>
+        <span>Tasks: <a href="https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks" target="_blank" rel="noopener">Harbor dataset</a></span>
+      </div>
+    </section>
+  </main>
+  <footer>ValueRank · Terminal-Bench 4.0 · Official snapshot · <a href="/">LLM Models</a> · <a href="/coding-agents/">Coding Agents</a></footer>
+  <script>
+    const ENTRIES = [{"rank":1,"rankLabel":"1","model":"GPT-6 Astra (max)","baseModel":"GPT-6 Astra","agent":"Codex","resolutionRate":0.582,"resolutionRatePct":58.2,"uncertaintyPct":2.8,"releaseDate":"Sep 3, 2026","tokens":"1.5B","costUsd":3300.0,"cohortModelId":"gpt-6-astra"},{"rank":2,"rankLabel":"2","model":"Fable 5.1 (max)","baseModel":"Fable 5.1","agent":"Claude Code","resolutionRate":0.579,"resolutionRatePct":57.9,"uncertaintyPct":3.8,"releaseDate":"Sep 1, 2026","tokens":"2.7B","costUsd":6200.0,"cohortModelId":null},{"rank":3,"rankLabel":"3","model":"Opus 5 (max)","baseModel":"Opus 5","agent":"Claude Code","resolutionRate":0.518,"resolutionRatePct":51.8,"uncertaintyPct":3.4,"releaseDate":"Jul 24, 2026","tokens":"6.5B","costUsd":6000.0,"cohortModelId":"claude-opus-5"},{"rank":4,"rankLabel":"4","model":"Fable 5 (max)","baseModel":"Fable 5","agent":"Claude Code","resolutionRate":0.445,"resolutionRatePct":44.5,"uncertaintyPct":3.8,"releaseDate":"Jun 9, 2026","tokens":"3.8B","costUsd":7300.0,"cohortModelId":"claude-fable-5"},{"rank":5,"rankLabel":"5","model":"GLM-5.3 (max)","baseModel":"GLM-5.3","agent":"Claude Code","resolutionRate":0.418,"resolutionRatePct":41.8,"uncertaintyPct":3.2,"releaseDate":"Aug 14, 2026","tokens":"8.7B","costUsd":2700.0,"cohortModelId":"glm-5.3"},{"rank":6,"rankLabel":"6","model":"GPT-5.6 Sol (max)","baseModel":"GPT-5.6 Sol","agent":"Codex","resolutionRate":0.373,"resolutionRatePct":37.3,"uncertaintyPct":3.8,"releaseDate":"Jun 26, 2026","tokens":"4.4B","costUsd":2500.0,"cohortModelId":"gpt-5.6-sol"},{"rank":7,"rankLabel":"7","model":"Opus 4.8 (max)","baseModel":"Opus 4.8","agent":"Claude Code","resolutionRate":0.236,"resolutionRatePct":23.6,"uncertaintyPct":3.6,"releaseDate":"May 28, 2026","tokens":"6.4B","costUsd":6500.0,"cohortModelId":"claude-opus-4.8"},{"rank":8,"rankLabel":"8","model":"GPT-5.6 Terra (max)","baseModel":"GPT-5.6 Terra","agent":"Codex","resolutionRate":0.215,"resolutionRatePct":21.5,"uncertaintyPct":3.3,"releaseDate":"Jun 26, 2026","tokens":"5.7B","costUsd":1700.0,"cohortModelId":null},{"rank":9,"rankLabel":"9","model":"Grok 4.6 (high)","baseModel":"Grok 4.6","agent":"Grok Build","resolutionRate":0.203,"resolutionRatePct":20.3,"uncertaintyPct":3.1,"releaseDate":"Aug 12, 2026","tokens":"4.0B","costUsd":3600.0,"cohortModelId":"grok-4.6"},{"rank":10,"rankLabel":"10","model":"Gemini 3.8 Flash (high)","baseModel":"Gemini 3.8 Flash","agent":"mini-SWE-agent","resolutionRate":0.191,"resolutionRatePct":19.1,"uncertaintyPct":3.4,"releaseDate":"Sep 2, 2026","tokens":"17.2B","costUsd":1800.0,"cohortModelId":"gemini-3.8-flash"},{"rank":11,"rankLabel":"11","model":"GPT-5.6 Luna (max)","baseModel":"GPT-5.6 Luna","agent":"Codex","resolutionRate":0.173,"resolutionRatePct":17.3,"uncertaintyPct":2.8,"releaseDate":"Jun 26, 2026","tokens":"11.6B","costUsd":300.0,"cohortModelId":"gpt-5.6-luna"},{"rank":12,"rankLabel":"12","model":"Grok 4.5 (high)","baseModel":"Grok 4.5","agent":"Grok Build","resolutionRate":0.124,"resolutionRatePct":12.4,"uncertaintyPct":2.6,"releaseDate":"Jul 16, 2026","tokens":"3.4B","costUsd":2100.0,"cohortModelId":null},{"rank":12,"rankLabel":"12","model":"Sonnet 5 (max)","baseModel":"Sonnet 5","agent":"Claude Code","resolutionRate":0.124,"resolutionRatePct":12.4,"uncertaintyPct":3.1,"releaseDate":"Jun 30, 2026","tokens":"21.6B","costUsd":9600.0,"cohortModelId":"claude-sonnet-5"},{"rank":14,"rankLabel":"14","model":"Gemini 3.7 Flash (high)","baseModel":"Gemini 3.7 Flash","agent":"mini-SWE-agent","resolutionRate":0.112,"resolutionRatePct":11.2,"uncertaintyPct":2.4,"releaseDate":"Aug 13, 2026","tokens":"11.1B","costUsd":1300.0,"cohortModelId":"gemini-3.7-flash"}];
+    const PLOTLY_CONFIG = {responsive:true, displaylogo:false, modeBarButtonsToRemove:['lasso2d','select2d']};
+    const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+    function layout() {
+      return {
+        paper_bgcolor:'transparent', plot_bgcolor:'transparent', font:{family:'IBM Plex Sans, sans-serif', color:isDark()?'#cbd5e1':'#334155'},
+        margin:{l:64,r:24,t:28,b:80}, hovermode:'closest',
+        xaxis:{type:'log', title:'Total cost (USD, log scale)', gridcolor:isDark()?'#1e293b':'#e2e8f0', zeroline:false, tickprefix:'$', tickformat:',.0f'},
+        yaxis:{title:'Resolution rate (%)', range:[0,64], gridcolor:isDark()?'#1e293b':'#e2e8f0', zeroline:false, ticksuffix:'%'},
+        legend:{orientation:'h', y:-.18},
+      };
+    }
+    function frontierRows(rows) {
+      const sorted = [...rows].sort((a,b) => a.costUsd-b.costUsd || b.resolutionRate-a.resolutionRate);
+      let best = -Infinity;
+      return sorted.filter(row => { if (row.resolutionRate > best) { best=row.resolutionRate; return true; } return false; });
+    }
+    function render() {
+      const frontier = frontierRows(ENTRIES);
+      const ids = new Set(frontier.map(row => row.model));
+      const dominated = ENTRIES.filter(row => !ids.has(row.model));
+      const custom = row => [row.baseModel,row.agent,row.resolutionRatePct,row.uncertaintyPct,row.tokens,row.rankLabel,row.model];
+      const hover = '<b>%{customdata[0]}</b><br>Resolution: %{customdata[2]:.1f}% ± %{customdata[3]:.1f}%<br>Cost: $%{x:,.0f}<br>Agent: %{customdata[1]}<br>Tokens: %{customdata[4]}<br>Rank: %{customdata[5]}<br>Variant: %{customdata[6]}<extra></extra>';
+      const traces = [
+        {x:dominated.map(row=>row.costUsd), y:dominated.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Official rows', marker:{size:11,color:'#a78bfa',opacity:.65}, customdata:dominated.map(custom), hovertemplate:hover},
+        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Pareto frontier', marker:{size:15,color:'#10b981',line:{width:2,color:isDark()?'#064e3b':'#ecfdf5'}}, customdata:frontier.map(custom), hovertemplate:hover.replace('<extra></extra>','<extra>Frontier</extra>')},
+        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'lines', type:'scatter', name:'frontier-curve', line:{shape:'spline',dash:'dot',color:'#94a3b8',width:2}, hoverinfo:'skip', showlegend:false},
+      ];
+      Plotly.newPlot('chart', traces, layout(), PLOTLY_CONFIG);
+    }
+    function updateTheme() { const el=document.getElementById('chart'); if (el && el.querySelector('.plotly')) Plotly.relayout(el, layout()); }
+    document.getElementById('theme-toggle').addEventListener('click', () => { const next=isDark()?'':'dark'; document.documentElement.setAttribute('data-theme',next); localStorage.setItem('vr-theme',next?'dark':'light'); requestAnimationFrame(updateTheme); });
+    document.addEventListener('DOMContentLoaded', () => { render(); if (typeof lucide !== 'undefined') lucide.createIcons(); });
+  </script>
+</body>
+</html>

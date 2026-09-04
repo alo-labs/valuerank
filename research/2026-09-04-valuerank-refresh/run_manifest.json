@@ -7,8 +7,8 @@
   "status": "verified_with_external_url_warning",
   "validation": {
     "report_structure": "pass",
-    "citation_integrity": "pass; 19/20 URL checks verified, one HTTP 308 warning",
-    "claim_support_strict": "pass; 15/15 supported",
+    "citation_integrity": "pass; 24/25 URL checks verified, one historical HTTP 308 warning",
+    "claim_support_strict": "pass; 20 claims verified; factual unsupported=0; one partial synthesis",
     "phase_gate": "pass"
   },
   "graphify": {
@@ -44,20 +44,20 @@
     "DeepSWE Best remains the product cohort gate.",
     "Artificial Analysis remains the primary comparable cross-benchmark source.",
     "No missing benchmark cells or neutral fills are permitted in the ranked cohort.",
+    "LiveBench and Terminal-Bench 4.0 are supplemental until complete cohort coverage is available.",
     "Current values are observed on 2026-09-04 UTC."
   ],
   "scoring": {
     "version": "v1.4.0",
-    "publishDate": "September 4, 2026",
-    "observedAt": "2026-09-04T12:36:41Z",
+    "publishDate": "September 5, 2026",
+    "observedAt": "2026-09-04T14:29:24Z",
     "cohortN": 21,
     "deepsweSourceUpdatedOn": "September 3, 2026",
     "aaBenchmarkVersion": "Artificial Analysis Intelligence Index v4.1.1",
-    "retainedDimensionN": 13,
+    "retainedDimensionN": 12,
     "retainedDimensions": [
       "Cost",
       "Non-Hallucination",
-      "Terminal-Bench v2.1",
       "DeepSWE",
       "GDPval-AA v2",
       "τ³-Banking",
@@ -70,6 +70,31 @@
       "AA Intelligence Index"
     ],
     "droppedDimensions": [
+      {
+        "key": "terminalBenchV4",
+        "label": "Terminal-Bench 4.0",
+        "missing": [
+          "Kimi K3",
+          "GPT-5.5",
+          "GLM-5.3 Flash",
+          "DeepSeek V4 Pro",
+          "Qwen3.8 Max",
+          "Muse Spark 1.2",
+          "DeepSeek V4 Flash",
+          "Gemini 3.6 Flash",
+          "GLM-5.2",
+          "Gemini 3.5 Flash"
+        ],
+        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+      },
+      {
+        "key": "livebenchInstructionFollowing",
+        "label": "Instruction Following (LiveBench)",
+        "missing": [
+          "GPT-6 Astra"
+        ],
+        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+      },
       {
         "key": "speed",
         "label": "Speed",
@@ -92,128 +117,140 @@
       {
         "rank": 1,
         "name": "Gemini 3.8 Flash",
-        "overallScore": 69.4,
-        "qualityScore": 69.2
+        "overallScore": 68.2,
+        "qualityScore": 67.4
       },
       {
         "rank": 2,
         "name": "GLM-5.3 Flash",
-        "overallScore": 65.6,
-        "qualityScore": 51.1
+        "overallScore": 66.1,
+        "qualityScore": 50.0
       },
       {
         "rank": 3,
-        "name": "GPT-5.6 Sol",
-        "overallScore": 61.3,
-        "qualityScore": 73.5
+        "name": "Grok 4.6",
+        "overallScore": 60.9,
+        "qualityScore": 61.3
       },
       {
         "rank": 4,
-        "name": "GPT-6 Astra",
-        "overallScore": 61.0,
-        "qualityScore": 73.1
+        "name": "GPT-5.6 Sol",
+        "overallScore": 59.1,
+        "qualityScore": 71.7
       },
       {
         "rank": 5,
-        "name": "Grok 4.6",
-        "overallScore": 60.8,
-        "qualityScore": 61.2
+        "name": "GLM-5.3",
+        "overallScore": 58.9,
+        "qualityScore": 65.5
       }
     ],
+    "externalCoverage": {
+      "livebench": "20/21",
+      "terminalBenchV4": "11/21"
+    },
     "weights": [
       {
         "key": "costComposite",
         "label": "Cost",
         "higherBetter": false,
         "priority": 25,
-        "weightPct": 29.7619
+        "weightPct": 32.0513
       },
       {
         "key": "omniNonHallucination",
         "label": "Non-Hallucination",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 7.1429
-      },
-      {
-        "key": "terminalBenchV21",
-        "label": "Terminal-Bench v2.1",
-        "higherBetter": true,
-        "priority": 6,
-        "weightPct": 7.1429
+        "weightPct": 7.6923
       },
       {
         "key": "deepswePassAt1",
         "label": "DeepSWE",
         "higherBetter": true,
         "priority": 7,
-        "weightPct": 8.3333
+        "weightPct": 8.9744
       },
       {
         "key": "gdpvalV2",
         "label": "GDPval-AA v2",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 7.1429
+        "weightPct": 7.6923
       },
       {
         "key": "tau3Banking",
         "label": "τ³-Banking",
         "higherBetter": true,
         "priority": 5,
-        "weightPct": 5.9524
+        "weightPct": 6.4103
       },
       {
         "key": "aaLcr",
         "label": "AA-LCR",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.7619
+        "weightPct": 5.1282
       },
       {
         "key": "omniAccuracy",
         "label": "AA-Omniscience Accuracy",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.7619
+        "weightPct": 5.1282
       },
       {
         "key": "hle",
         "label": "HLE",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.7619
+        "weightPct": 5.1282
       },
       {
         "key": "gpqaDiamond",
         "label": "GPQA Diamond",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.7619
+        "weightPct": 5.1282
       },
       {
         "key": "scicode",
         "label": "SciCode",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.7619
+        "weightPct": 5.1282
       },
       {
         "key": "critpt",
         "label": "CritPt",
         "higherBetter": true,
         "priority": 3,
-        "weightPct": 3.5714
+        "weightPct": 3.8462
       },
       {
         "key": "intelligenceIndex",
         "label": "AA Intelligence Index",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 7.1429
+        "weightPct": 7.6923
       }
     ],
     "primaryMissingFields": {
+      "terminalBenchV4": [
+        "Kimi K3",
+        "GPT-5.5",
+        "GLM-5.3 Flash",
+        "DeepSeek V4 Pro",
+        "Qwen3.8 Max",
+        "Muse Spark 1.2",
+        "DeepSeek V4 Flash",
+        "Gemini 3.6 Flash",
+        "GLM-5.2",
+        "Gemini 3.5 Flash"
+      ],
+      "livebenchInstructionFollowing": [
+        "GPT-6 Astra"
+      ],
       "speed": [
         "GPT-6 Astra"
       ]

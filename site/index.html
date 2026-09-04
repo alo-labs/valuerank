@@ -1220,36 +1220,67 @@
       .mode-switcher { order: 3; }
     }
   </style>
+<style id="site-header-style">
+
+/* Shared ValueRank header: keep this block identical across publication pages. */
+.vr-site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 1000; height: 64px;
+  display: flex; align-items: center; gap: 18px; padding: 0 24px;
+  background: var(--nav-bg, rgba(248,249,252,.94));
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  color: var(--text-primary, #0f172a);
+}
+.vr-site-header a { color: inherit; }
+.vr-nav-brand { display: flex; align-items: center; flex-shrink: 0; }
+.vr-nav-brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.vr-nav-logo { font-weight: 800; letter-spacing: -.02em; font-size: 1.1rem; }
+.vr-nav-badge { padding: 2px 8px; border-radius: 999px; background: var(--accent, #4f46e5); color: #fff; font: 600 11px/1.5 var(--font-mono, 'IBM Plex Mono', monospace); }
+.vr-mode-switcher { display: flex; align-items: center; gap: 4px; }
+.vr-mode-btn { padding: 6px 10px; border-radius: 8px; color: var(--text-secondary, #475569); text-decoration: none; font-size: 13px; white-space: nowrap; }
+.vr-mode-btn:hover, .vr-mode-btn:focus-visible { background: var(--accent-a08, rgba(79,70,229,.08)); color: var(--accent, #4f46e5); }
+.vr-mode-btn.active { background: var(--accent-a12, rgba(79,70,229,.12)); color: var(--accent, #4f46e5); font-weight: 700; }
+.vr-nav-links { display: flex; align-items: center; gap: 14px; margin-left: auto; }
+.vr-nav-links a { color: var(--text-secondary, #475569); font-size: 12px; text-decoration: none; }
+.vr-nav-links a:hover, .vr-nav-links a:focus-visible { color: var(--accent, #4f46e5); }
+.vr-nav-meta { color: var(--text-dim, #94a3b8); font-size: 11px; white-space: nowrap; }
+.vr-theme-toggle { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; background: transparent; color: var(--text-secondary, #475569); cursor: pointer; }
+.vr-theme-toggle svg { width: 16px; height: 16px; }
+.vr-theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .vr-theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .vr-theme-toggle .icon-moon { display: block; }
+@media (max-width: 1180px) { .vr-nav-links { display: none; } }
+@media (max-width: 820px) { .vr-site-header { gap: 8px; padding: 0 14px; } .vr-mode-switcher { overflow-x: auto; } .vr-mode-btn { padding-inline: 7px; } .vr-nav-meta { display: none; } }
+
+</style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="nav-brand">
-    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
-      <span class="logo">ValueRank</span>
-      <span class="badge">v1.4.0</span>
+<nav class="vr-site-header" data-vr-shared-header="true">
+  <div class="vr-nav-brand">
+    <a class="vr-nav-brand-link" href="/">
+      <span class="vr-nav-logo">ValueRank</span>
+      <span class="vr-nav-badge">v1.4.0</span>
     </a>
   </div>
-  <div class="mode-switcher">
-    <a class="mode-btn active" href="/">LLM Models</a>
-    <a class="mode-btn" href="/coding-agents/">Coding Agents</a>
-    <a class="mode-btn" href="/tb21/">TB 2.1</a>
+  <div class="vr-mode-switcher">
+    <a class="vr-mode-btn active" href="/">LLM Models</a>
+    <a class="vr-mode-btn" href="/coding-agents/">Coding Agents</a>
+    <a class="vr-mode-btn" href="/tb4/">TB 4</a>
   </div>
-  <div class="nav-links">
-    <a href="#rankings" class="active">Rankings</a>
-    <a href="#charts">Charts</a>
-    <a href="#methodology">Methodology</a>
-    <a href="#data">Data</a>
-    <a href="#faq">FAQ</a>
+  <div class="vr-nav-links nav-links">
+    <a href="/#rankings">Rankings</a>
+    <a href="/#charts">Charts</a>
+    <a href="/#methodology">Methodology</a>
+    <a href="/#data">Data</a>
+    <a href="/#faq">FAQ</a>
   </div>
-  <div class="nav-right">
-    <div class="nav-meta">September 4, 2026 · 21 models · 13 dimensions</div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
-      <i data-lucide="sun" class="icon-sun"></i>
-      <i data-lucide="moon" class="icon-moon"></i>
-    </button>
-  </div>
+  <div class="vr-nav-meta">September 5, 2026 · 21 models · 12 scored dimensions</div>
+  <button class="vr-theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
+    <i data-lucide="sun" class="icon-sun"></i>
+    <i data-lucide="moon" class="icon-moon"></i>
+  </button>
 </nav>
 
 <main>
@@ -1272,7 +1303,7 @@
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank ranks <strong>21 current DeepSWE Best models</strong> across a <strong>zero-gap 13-dimension set</strong>. v1.4.0 uses Artificial Analysis <strong>Artificial Analysis Intelligence Index v4.1.1</strong> components plus DeepSWE performance and a composite AA+DeepSWE Cost. Speed is preserved as coverage-only because GPT-6 Astra has no numeric AA speed value.
+          ValueRank ranks <strong>21 current DeepSWE Best models</strong> across a <strong>zero-gap 12-dimension set</strong>. v1.4.0 uses Artificial Analysis <strong>Artificial Analysis Intelligence Index v4.1.1</strong> components plus DeepSWE performance and a composite AA+DeepSWE Cost. Speed is preserved as coverage-only because GPT-6 Astra has no numeric AA speed value. LiveBench Instruction Following and Terminal-Bench 4.0 are shown as external coverage-only views.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1302,7 +1333,7 @@
         <span class="hero-statbar-label">Models Ranked</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">13</span>
+        <span class="hero-statbar-num">12</span>
         <span class="hero-statbar-label">Scored Dimensions</span>
       </div>
       <div class="hero-statbar-item">
@@ -1314,7 +1345,7 @@
         <span class="hero-statbar-label">Composite Cost Range</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">Sep 4</span>
+        <span class="hero-statbar-num">Sep 5</span>
         <span class="hero-statbar-label">Last Updated</span>
       </div>
     </div>
@@ -1375,7 +1406,7 @@
       <div class="insight-card">
         <div class="insight-icon">💡</div>
         <div class="insight-title">Cost Penalty</div>
-        <div class="insight-body"><strong>Gemini 3.8 Flash</strong> leads the current ValueRank score at <strong>69.4</strong>; its position reflects both quality and the two-source cost composite.</div>
+        <div class="insight-body"><strong>Gemini 3.8 Flash</strong> leads the current ValueRank score at <strong>68.2</strong>; its position reflects both quality and the two-source cost composite.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">⚡</div>
@@ -1385,7 +1416,7 @@
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
         <div class="insight-title">v1.4.0 Release</div>
-        <div class="insight-body">v1.4.0 refreshes the full <strong>21-model</strong> DeepSWE roster against <strong>Artificial Analysis Intelligence Index v4.1.1</strong>, keeps <strong>13 zero-gap dimensions</strong>, and leaves Speed supplemental because GPT-6 Astra reports N/A.</div>
+        <div class="insight-body">v1.4.0 refreshes the full <strong>21-model</strong> DeepSWE roster against <strong>Artificial Analysis Intelligence Index v4.1.1</strong>, keeps <strong>12 zero-gap dimensions</strong>, and leaves Speed supplemental because GPT-6 Astra reports N/A.</div>
       </div>
     </div>
   </div>
@@ -1396,7 +1427,7 @@
   <div class="container">
     <div class="section-header">
       <div class="section-title">Visualizations</div>
-      <div class="section-sub">Seven complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
+      <div class="section-sub">Eight complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
     </div>
     <div class="chart-tabs">
       <button class="chart-tab active" data-chart="pareto">Pareto Frontier</button>
@@ -1405,6 +1436,7 @@
       <button class="chart-tab" data-chart="heatmap">Dimension Heatmap</button>
       <button class="chart-tab" data-chart="bubble">Speed × Quality</button>
       <button class="chart-tab" data-chart="bump">Version History</button>
+      <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="frontier2">Cost Impact</button>
     </div>
 
@@ -1416,7 +1448,7 @@
       </div>
       <!-- Decomposition -->
       <div class="chart-panel" id="panel-decomp">
-        <div class="chart-desc"><strong>Score Decomposition:</strong> v1.4.0 decomposes the weighted <strong>13-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>
+        <div class="chart-desc"><strong>Score Decomposition:</strong> v1.4.0 decomposes the weighted <strong>12-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>
         <div id="chart-decomp" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Displacement -->
@@ -1426,7 +1458,7 @@
       </div>
       <!-- Heatmap -->
       <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 21 models × 13 retained dimensions. Color = normalized rank score; every displayed cell is confirmed source data.</div>
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 21 models × 12 retained dimensions. Color = normalized rank score; every displayed cell is confirmed source data.</div>
         <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
       </div>
       <!-- Bubble -->
@@ -1439,6 +1471,11 @@
         <div class="chart-desc"><strong>Version History:</strong> Historical rank context through v1.4.0. The current point is a new benchmark-version snapshot, not a claim of score continuity.</div>
         <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
       </div>
+       <!-- LiveBench Pareto -->
+       <div class="chart-panel" id="panel-livebenchPareto">
+         <div class="chart-desc"><strong>LiveBench Pareto:</strong> Official LiveBench Overall Score versus Cost Per Successful Task for 20/21 matched cohort rows. Higher Overall and lower cost are better; GPT-6 Astra is omitted because this pinned release has no row for it.</div>
+         <div id="chart-livebench-pareto" class="plotly-chart" style="height:520px;"></div>
+       </div>
       <!-- Two-frontier / Cost Impact -->
       <div class="chart-panel" id="panel-frontier2">
         <div class="chart-desc"><strong>Cost Impact:</strong> Each model shown twice — circle = quality-only score (ignoring cost), diamond = overall score (with 25% cost weight). Lines connect the same model. <span style="color:#22c55e">Lines going up</span> = cost helps. <span style="color:#ef4444">Lines going down</span> = cost hurts. X-axis = composite cost.</div>
@@ -1460,22 +1497,22 @@
         <div class="card mb-4">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
           <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
-          <p class="method-text">For each of 13 dimensions, all 21 models are ranked 1–17 (best to worst). The formula maps rank 1 → 100 pts and rank 21 → 0 pts, with tied ranks receiving the average of their tied positions. v1.4.0 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>.</p>
+          <p class="method-text">For each of 12 dimensions, all 21 models are ranked 1–21 (best to worst). The formula maps rank 1 → 100 pts and rank 21 → 0 pts, with tied ranks receiving the average of their tied positions. v1.4.0 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>.</p>
           <hr class="divider" style="margin:16px 0;">
-          <p class="method-text">The final ValueRank score is a weighted sum across all 13 dimensions. <strong>Cost weight: 25%</strong> (slider-adjustable). Hallucination rate remains a primary reliability factor, and cost is constructed from normalized AA eval cost plus normalized DeepSWE average cost before rank-normalization.</p>
+          <p class="method-text">The final ValueRank score is a weighted sum across all 12 dimensions. <strong>Cost weight: 25%</strong> (slider-adjustable). Hallucination rate remains a primary reliability factor, and cost is constructed from normalized AA eval cost plus normalized DeepSWE average cost before rank-normalization.</p>
         </div>
         <div class="card">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
           <div class="method-text" style="display:flex;flex-direction:column;gap:10px;">
             <div><strong>Rank-based (not raw-score-based):</strong> Prevents any single benchmark from dominating due to scale differences. GPQA percentages, DeepSWE pass rates, and token-per-second speed figures are not directly comparable on raw values; ranks are.</div>
-            <div><strong>Zero-gap benchmark rule:</strong> If even one of the 21-model cohort is genuinely missing from a benchmark, that benchmark is excluded from v1.2. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.</div>
+            <div><strong>Zero-gap benchmark rule:</strong> If even one of the 21-model cohort is genuinely missing from a benchmark, that benchmark is excluded from the current primary score. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.</div>
             <div><strong>SEAL CI band (±2–3 pts):</strong> Due to benchmark variance, scores within 2–3 pts should be treated as statistically tied. Rankings within this band are effectively co-ranked.</div>
-            <div><strong>Quality sub-score:</strong> The 70% non-cost portion, computed as the weighted sum of all 12 non-cost dimensions. Represents pure capability ranking without cost penalty.</div>
+            <div><strong>Quality sub-score:</strong> The 68% non-cost portion, computed as the weighted sum of all 11 non-cost dimensions. Represents pure capability ranking without cost penalty.</div>
           </div>
         </div>
       </div>
       <div class="card">
-          <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (13 Total)</h3>
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (12 Total)</h3>
         <table class="dim-table">
           <thead><tr><th>Dimension</th><th>Weight</th><th>Category</th></tr></thead>
           <tbody id="dim-table-body"></tbody>
@@ -1493,13 +1530,43 @@
       <div class="section-sub">Full normalized score matrix for the zero-gap benchmark set.</div>
     </div>
 
+    <div class="card mb-6" id="livebench-data">
+      <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">LiveBench External Coverage</h3>
+      <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>20/21</strong> ranked models. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
+      <div style="overflow-x:auto;">
+        <table class="dim-table">
+          <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
+          <tbody><tr><td>Gemini 3.8 Flash</td><td class="mono">gemini-3.8-flash-high</td><td class="mono">81.41</td><td class="mono">75.83</td><td class="mono">$0.3073</td><td>—</td></tr>
+<tr><td>Claude Opus 5</td><td class="mono">claude-opus-5-max-effort</td><td class="mono">63.77</td><td class="mono">80.08</td><td class="mono">$0.7067</td><td>—</td></tr>
+<tr><td>GPT-5.6 Sol</td><td class="mono">gpt-5.6-sol-max</td><td class="mono">71.85</td><td class="mono">81.05</td><td class="mono">$0.5070</td><td>Frontier</td></tr>
+<tr><td>Claude Fable 5</td><td class="mono">claude-fable-5-max-effort</td><td class="mono">75.77</td><td class="mono">82.97</td><td class="mono">$1.4777</td><td>Frontier</td></tr>
+<tr><td>GLM-5.3</td><td class="mono">glm-5.3</td><td class="mono">69.30</td><td class="mono">76.14</td><td class="mono">$0.4504</td><td>—</td></tr>
+<tr><td>Kimi K3</td><td class="mono">kimi-k3</td><td class="mono">71.36</td><td class="mono">79.19</td><td class="mono">$0.3510</td><td>Frontier</td></tr>
+<tr><td>Grok 4.6</td><td class="mono">grok-4.6</td><td class="mono">71.87</td><td class="mono">78.04</td><td class="mono">$0.2068</td><td>—</td></tr>
+<tr><td>GPT-5.6 Luna</td><td class="mono">gpt-5.6-luna-max</td><td class="mono">60.12</td><td class="mono">73.56</td><td class="mono">$0.1677</td><td>—</td></tr>
+<tr><td>GPT-5.5</td><td class="mono">gpt-5.5-xhigh</td><td class="mono">70.73</td><td class="mono">80.19</td><td class="mono">$0.4356</td><td>Frontier</td></tr>
+<tr><td>Gemini 3.7 Flash</td><td class="mono">gemini-3.7-flash-high</td><td class="mono">79.93</td><td class="mono">78.83</td><td class="mono">$0.1571</td><td>Frontier</td></tr>
+<tr><td>GLM-5.3 Flash</td><td class="mono">glm-5.3-flash</td><td class="mono">52.82</td><td class="mono">71.59</td><td class="mono">$0.0305</td><td>Frontier</td></tr>
+<tr><td>DeepSeek V4 Pro</td><td class="mono">deepseek-v4-pro</td><td class="mono">62.35</td><td class="mono">71.57</td><td class="mono">$0.0498</td><td>—</td></tr>
+<tr><td>Claude Opus 4.8</td><td class="mono">claude-opus-4-8-max-effort</td><td class="mono">72.03</td><td class="mono">76.22</td><td class="mono">$0.9858</td><td>—</td></tr>
+<tr><td>Qwen3.8 Max</td><td class="mono">qwen3.8-max</td><td class="mono">74.08</td><td class="mono">78.46</td><td class="mono">$0.2750</td><td>—</td></tr>
+<tr><td>Muse Spark 1.2</td><td class="mono">muse-spark-1.2-xhigh</td><td class="mono">74.33</td><td class="mono">77.95</td><td class="mono">$0.3753</td><td>—</td></tr>
+<tr><td>Claude Sonnet 5</td><td class="mono">claude-sonnet-5-xhigh-effort</td><td class="mono">63.86</td><td class="mono">76.04</td><td class="mono">$0.5134</td><td>—</td></tr>
+<tr><td>DeepSeek V4 Flash</td><td class="mono">deepseek-v4-flash</td><td class="mono">63.14</td><td class="mono">65.48</td><td class="mono">$0.0161</td><td>Frontier</td></tr>
+<tr><td>Gemini 3.6 Flash</td><td class="mono">gemini-3.6-flash-high</td><td class="mono">75.37</td><td class="mono">73.59</td><td class="mono">$0.2353</td><td>—</td></tr>
+<tr><td>GLM-5.2</td><td class="mono">glm-5.2</td><td class="mono">62.29</td><td class="mono">73.16</td><td class="mono">$0.2246</td><td>—</td></tr>
+<tr><td>Gemini 3.5 Flash</td><td class="mono">gemini-3.5-flash-high</td><td class="mono">75.60</td><td class="mono">74.64</td><td class="mono">$0.2489</td><td>—</td></tr></tbody>
+        </table>
+      </div>
+      <p class="method-text" style="margin-top:12px;">Source: <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a>; pinned data release 2026-06-25. Pareto frontier: <strong>DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5</strong>.</p>
+    </div>
     <div class="card mb-6">
-          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (17 × 12)</h3>
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (21 × 12)</h3>
       <div class="heatmap-legend">
         <span>0 (worst)</span>
         <div class="hl-bar"></div>
         <span>100 (best)</span>
-        <span style="margin-left:12px;">All scored cells are confirmed primary-source data in v1.2</span>
+        <span style="margin-left:12px;">All scored cells are confirmed primary-source data in v1.4.0</span>
       </div>
       <div id="chart-heatmap-data" style="height:480px;"></div>
     </div>
@@ -1564,7 +1631,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The <strong>overall Score</strong> includes all <strong>13 dimensions</strong> with cost at 25% (slider default) and Speed is shown separately when an AA page publishes a numeric value. The <strong>Quality Score</strong> is recalculated using only the <strong>12 non-cost dimensions</strong> (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.
+          The <strong>overall Score</strong> includes all <strong>12 retained dimensions</strong> with cost at 25% (slider default) and Speed is shown separately when an AA page publishes a numeric value. The <strong>Quality Score</strong> is recalculated using only the <strong>11 non-cost dimensions</strong> (renormalized to 100%). It answers: <em>"which model is best at actual tasks?"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.
         </div>
       </div>
 
@@ -1614,7 +1681,7 @@
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The ValueRank cohort is restricted to the <strong>current DeepSWE leaderboard roster</strong>. Five v1.1-ranked models — <code>GPT-5.4 Mini</code>, <code>MiMo-V2.5-Pro</code>, <code>MiniMax M3</code>, <code>GLM 5.1</code>, and <code>DeepSeek V4-Pro</code> — are no longer listed on DeepSWE and are therefore excluded from v1.2. Their <strong>v1.1 scores are preserved</strong> in <code>methodology.md</code> and <code>scores.md</code> for historical reference (<strong>MiMo-V2.5-Pro</strong> 58.1 / <strong>MiniMax M3</strong> 56.0 / <strong>DeepSeek V4-Pro</strong> 48.0 / <strong>GLM 5.1</strong> 40.0 / <strong>GPT-5.4 Mini</strong> 36.5). These scores are <strong>not directly comparable to v1.2</strong> because the normalization denominator changed from 13 to 8 — use the version history table to track rank changes instead.
+          The ValueRank cohort is restricted to the <strong>current DeepSWE leaderboard roster</strong>. Five v1.1-ranked models — <code>GPT-5.4 Mini</code>, <code>MiMo-V2.5-Pro</code>, <code>MiniMax M3</code>, <code>GLM 5.1</code>, and <code>DeepSeek V4-Pro</code> — are no longer listed on DeepSWE and are therefore excluded from the current primary score. Their <strong>v1.1 scores are preserved</strong> in <code>methodology.md</code> and <code>scores.md</code> for historical reference (<strong>MiMo-V2.5-Pro</strong> 58.1 / <strong>MiniMax M3</strong> 56.0 / <strong>DeepSeek V4-Pro</strong> 48.0 / <strong>GLM 5.1</strong> 40.0 / <strong>GPT-5.4 Mini</strong> 36.5). These scores are <strong>not directly comparable to v1.2</strong> because the normalization denominator changed from 13 to 8 — use the version history table to track rank changes instead.
         </div>
       </div>
 
@@ -1628,7 +1695,7 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v1.4.0 · September 4, 2026 · 21 models × 13 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v1.4.0 · September 5, 2026 · 21 models × 12 dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -1644,13 +1711,13 @@
 // ─────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────
-const DIM_KEYS = ["Cost", "NonHalluc", "OmniAcc", "Terminal21", "DeepSWE", "GDPv2", "Tau3", "LCR", "HLE", "GPQA", "Sci", "CritPt", "AAI"];
-const DIM_FULL = ["Composite Cost", "AA-Omniscience Non-Hallucination Rate", "AA-Omniscience Accuracy", "Terminal-Bench v2.1", "DeepSWE pass@1", "GDPval-AA v2", "τ³-Banking", "AA-LCR", "Humanity's Last Exam", "GPQA Diamond", "SciCode", "CritPt", "Artificial Analysis Intelligence Index"];
-const DIM_WEIGHTS = [29.7619, 7.1429, 4.7619, 7.1429, 8.3333, 7.1429, 5.9524, 4.7619, 4.7619, 4.7619, 4.7619, 3.5714, 7.1429];
-const DIM_CAT = ["cost", "rely", "rely", "code", "code", "code", "code", "code", "intel", "intel", "intel", "intel", "prod"];
+const DIM_KEYS = ["Cost", "NonHalluc", "DeepSWE", "GDPv2", "Tau3", "LCR", "OmniAcc", "HLE", "GPQA", "Sci", "CritPt", "AAI"];
+const DIM_FULL = ["Composite Cost", "AA-Omniscience Non-Hallucination Rate", "DeepSWE pass@1", "GDPval-AA v2", "τ³-Banking", "AA-LCR", "AA-Omniscience Accuracy", "Humanity's Last Exam", "GPQA Diamond", "SciCode", "CritPt", "Artificial Analysis Intelligence Index"];
+const DIM_WEIGHTS = [32.0513, 7.6923, 8.9744, 7.6923, 6.4103, 5.1282, 5.1282, 5.1282, 5.1282, 5.1282, 3.8462, 7.6923];
+const DIM_CAT = ["cost", "rely", "code", "code", "code", "code", "rely", "intel", "intel", "intel", "intel", "prod"];
 
 // Macro-category definitions for decomposition
-const MACRO_CATS = [{"key": "cost", "label": "Cost", "color": "#22c55e", "dimIdxs": [0]}, {"key": "rely", "label": "Reliability", "color": "#a78bfa", "dimIdxs": [1, 2]}, {"key": "code", "label": "Agentic", "color": "#3b82f6", "dimIdxs": [3, 4, 5, 6, 7]}, {"key": "intel", "label": "Intelligence", "color": "#eab308", "dimIdxs": [8, 9, 10, 11]}, {"key": "prod", "label": "Platform", "color": "#f97316", "dimIdxs": [12]}];
+const MACRO_CATS = [{"key": "cost", "label": "Cost", "color": "#22c55e", "dimIdxs": [0]}, {"key": "rely", "label": "Reliability", "color": "#a78bfa", "dimIdxs": [1, 6]}, {"key": "code", "label": "Agentic", "color": "#3b82f6", "dimIdxs": [2, 3, 4, 5]}, {"key": "intel", "label": "Intelligence", "color": "#eab308", "dimIdxs": [7, 8, 9, 10]}, {"key": "prod", "label": "Platform", "color": "#f97316", "dimIdxs": [11]}];
 
 const TIER_COLORS = {
   'Budget':'#22c55e','Near-Budget':'#a3e635','Mid-Range':'#fbbf24',
@@ -1678,19 +1745,33 @@ const MODELS = [
     "deepSweCostNorm": 8.94,
     "speed": 326.9,
     "aaUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
-    "overallScore": 69.4,
-    "qualityScore": 69.2,
+    "livebench": {
+      "model": "gemini-3.8-flash-high",
+      "overallScore": 75.828524,
+      "instructionFollowingScore": 81.4125,
+      "costPerSuccessfulTaskUsd": 0.3073
+    },
+    "terminalBenchV4": {
+      "model": "Gemini 3.8 Flash",
+      "resolutionRate": 0.191,
+      "resolutionRatePct": 19.1,
+      "uncertaintyPct": 3.4,
+      "costUsd": 1800.0,
+      "agent": "mini-SWE-agent",
+      "releaseDate": "Sep 2, 2026"
+    },
+    "overallScore": 68.2,
+    "qualityScore": 67.4,
     "qualityRank": 6,
     "missingCount": 0,
     "dims": [
       70.0,
       50.0,
-      75.0,
-      85.0,
       95.0,
       25.0,
       80.0,
       85.0,
+      75.0,
       75.0,
       95.0,
       52.5,
@@ -1698,7 +1779,6 @@ const MODELS = [
       65.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -1736,19 +1816,33 @@ const MODELS = [
     "deepSweCostNorm": 0.91,
     "speed": 47.4,
     "aaUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
-    "overallScore": 65.6,
-    "qualityScore": 51.1,
+    "livebench": {
+      "model": "glm-5.3-flash",
+      "overallScore": 71.590786,
+      "instructionFollowingScore": 52.82075,
+      "costPerSuccessfulTaskUsd": 0.0305
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 66.1,
+    "qualityScore": 50.0,
     "qualityRank": 11,
     "missingCount": 0,
     "dims": [
       100.0,
       90.0,
-      5.0,
-      60.0,
       42.5,
       95.0,
       90.0,
       60.0,
+      5.0,
       15.0,
       25.0,
       0.0,
@@ -1756,7 +1850,6 @@ const MODELS = [
       55.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -1784,37 +1877,50 @@ const MODELS = [
   },
   {
     "rank": 3,
-    "name": "GPT-5.6 Sol",
-    "shortName": "GPT-5.6 Sol",
-    "developer": "OpenAI",
-    "evalCost": 30.72,
-    "aaEvalCost": 2017.29,
-    "deepSweCost": 6.46,
-    "aaCostNorm": 36.98,
-    "deepSweCostNorm": 24.47,
-    "speed": 76.5,
-    "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
-    "overallScore": 61.3,
-    "qualityScore": 73.5,
-    "qualityRank": 3,
+    "name": "Grok 4.6",
+    "shortName": "Grok 4.6",
+    "developer": "xAI",
+    "evalCost": 15.06,
+    "aaEvalCost": 929.97,
+    "deepSweCost": 3.45,
+    "aaCostNorm": 17.05,
+    "deepSweCostNorm": 13.07,
+    "speed": 63.5,
+    "aaUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+    "livebench": {
+      "model": "grok-4.6",
+      "overallScore": 78.042,
+      "instructionFollowingScore": 71.8665,
+      "costPerSuccessfulTaskUsd": 0.2068
+    },
+    "terminalBenchV4": {
+      "model": "Grok 4.6",
+      "resolutionRate": 0.203,
+      "resolutionRatePct": 20.3,
+      "uncertaintyPct": 3.1,
+      "costUsd": 3600.0,
+      "agent": "Grok Build",
+      "releaseDate": "Aug 12, 2026"
+    },
+    "overallScore": 60.9,
+    "qualityScore": 61.3,
+    "qualityRank": 8,
     "missingCount": 0,
     "dims": [
-      32.5,
-      10.0,
-      85.0,
-      90.0,
-      85.0,
-      70.0,
-      72.5,
-      55.0,
-      85.0,
-      90.0,
-      72.5,
+      60.0,
       100.0,
-      85.0
+      60.0,
+      85.0,
+      72.5,
+      0.0,
+      30.0,
+      40.0,
+      80.0,
+      60.0,
+      32.5,
+      70.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -1842,37 +1948,50 @@ const MODELS = [
   },
   {
     "rank": 4,
-    "name": "GPT-6 Astra",
-    "shortName": "GPT-6 Astra",
+    "name": "GPT-5.6 Sol",
+    "shortName": "GPT-5.6 Sol",
     "developer": "OpenAI",
     "evalCost": 30.72,
-    "aaEvalCost": 2004.12,
-    "deepSweCost": 6.52,
-    "aaCostNorm": 36.74,
-    "deepSweCostNorm": 24.7,
-    "speed": null,
-    "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-    "overallScore": 61.0,
-    "qualityScore": 73.1,
+    "aaEvalCost": 2017.29,
+    "deepSweCost": 6.46,
+    "aaCostNorm": 36.98,
+    "deepSweCostNorm": 24.47,
+    "speed": 76.5,
+    "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+    "livebench": {
+      "model": "gpt-5.6-sol-max",
+      "overallScore": 81.053548,
+      "instructionFollowingScore": 71.846,
+      "costPerSuccessfulTaskUsd": 0.507
+    },
+    "terminalBenchV4": {
+      "model": "GPT-5.6 Sol",
+      "resolutionRate": 0.373,
+      "resolutionRatePct": 37.3,
+      "uncertaintyPct": 3.8,
+      "costUsd": 2500.0,
+      "agent": "Codex",
+      "releaseDate": "Jun 26, 2026"
+    },
+    "overallScore": 59.1,
+    "qualityScore": 71.7,
     "qualityRank": 4,
     "missingCount": 0,
     "dims": [
       32.5,
-      60.0,
-      95.0,
-      97.5,
-      95.0,
+      10.0,
+      85.0,
+      70.0,
+      72.5,
       55.0,
-      65.0,
-      10.0,
+      85.0,
+      85.0,
       90.0,
+      72.5,
       100.0,
-      10.0,
-      95.0,
-      90.0
+      85.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -1900,37 +2019,50 @@ const MODELS = [
   },
   {
     "rank": 5,
-    "name": "Grok 4.6",
-    "shortName": "Grok 4.6",
-    "developer": "xAI",
-    "evalCost": 15.06,
-    "aaEvalCost": 929.97,
-    "deepSweCost": 3.45,
-    "aaCostNorm": 17.05,
-    "deepSweCostNorm": 13.07,
-    "speed": 63.5,
-    "aaUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
-    "overallScore": 60.8,
-    "qualityScore": 61.2,
-    "qualityRank": 8,
+    "name": "GLM-5.3",
+    "shortName": "GLM-5.3",
+    "developer": "Z AI",
+    "evalCost": 18.91,
+    "aaEvalCost": 1238.5,
+    "deepSweCost": 3.99,
+    "aaCostNorm": 22.7,
+    "deepSweCostNorm": 15.11,
+    "speed": 75.3,
+    "aaUrl": "https://artificialanalysis.ai/models/glm-5-3",
+    "livebench": {
+      "model": "glm-5.3",
+      "overallScore": 76.137809,
+      "instructionFollowingScore": 69.304,
+      "costPerSuccessfulTaskUsd": 0.4504
+    },
+    "terminalBenchV4": {
+      "model": "GLM-5.3",
+      "resolutionRate": 0.418,
+      "resolutionRatePct": 41.8,
+      "uncertaintyPct": 3.2,
+      "costUsd": 2700.0,
+      "agent": "Claude Code",
+      "releaseDate": "Aug 14, 2026"
+    },
+    "overallScore": 58.9,
+    "qualityScore": 65.5,
+    "qualityRank": 7,
     "missingCount": 0,
     "dims": [
-      60.0,
-      100.0,
-      30.0,
-      60.0,
-      60.0,
+      45.0,
       85.0,
       72.5,
-      0.0,
-      40.0,
-      80.0,
-      60.0,
-      32.5,
-      70.0
+      90.0,
+      95.0,
+      35.0,
+      15.0,
+      45.0,
+      30.0,
+      85.0,
+      50.0,
+      75.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -1958,37 +2090,50 @@ const MODELS = [
   },
   {
     "rank": 6,
-    "name": "Claude Opus 5",
-    "shortName": "Opus 5",
-    "developer": "Anthropic",
-    "evalCost": 57.58,
-    "aaEvalCost": 3836.05,
-    "deepSweCost": 11.84,
-    "aaCostNorm": 70.32,
-    "deepSweCostNorm": 44.85,
-    "speed": 57.1,
-    "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5",
-    "overallScore": 59.9,
-    "qualityScore": 79.0,
-    "qualityRank": 1,
+    "name": "GPT-6 Astra",
+    "shortName": "GPT-6 Astra",
+    "developer": "OpenAI",
+    "evalCost": 30.72,
+    "aaEvalCost": 2004.12,
+    "deepSweCost": 6.52,
+    "aaCostNorm": 36.74,
+    "deepSweCostNorm": 24.7,
+    "speed": null,
+    "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+    "livebench": {
+      "model": null,
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "terminalBenchV4": {
+      "model": "GPT-6 Astra",
+      "resolutionRate": 0.582,
+      "resolutionRatePct": 58.2,
+      "uncertaintyPct": 2.8,
+      "costUsd": 3300.0,
+      "agent": "Codex",
+      "releaseDate": "Sep 3, 2026"
+    },
+    "overallScore": 58.2,
+    "qualityScore": 70.3,
+    "qualityRank": 5,
     "missingCount": 0,
     "dims": [
-      15.0,
-      40.0,
-      90.0,
-      97.5,
-      95.0,
-      100.0,
+      32.5,
       60.0,
-      30.0,
       95.0,
-      70.0,
+      55.0,
       65.0,
+      10.0,
+      95.0,
       90.0,
-      100.0
+      100.0,
+      10.0,
+      95.0,
+      90.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2026,19 +2171,33 @@ const MODELS = [
     "deepSweCostNorm": 17.61,
     "speed": 39.2,
     "aaUrl": "https://artificialanalysis.ai/models/kimi-k3",
-    "overallScore": 59.6,
-    "qualityScore": 74.2,
+    "livebench": {
+      "model": "kimi-k3",
+      "overallScore": 79.193048,
+      "instructionFollowingScore": 71.36275,
+      "costPerSuccessfulTaskUsd": 0.351
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 58.0,
+    "qualityScore": 73.5,
     "qualityRank": 2,
     "missingCount": 0,
     "dims": [
       25.0,
       55.0,
-      45.0,
-      80.0,
       72.5,
       65.0,
       85.0,
       95.0,
+      45.0,
       70.0,
       80.0,
       95.0,
@@ -2046,7 +2205,6 @@ const MODELS = [
       80.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2074,37 +2232,50 @@ const MODELS = [
   },
   {
     "rank": 8,
-    "name": "GLM-5.3",
-    "shortName": "GLM-5.3",
-    "developer": "Z AI",
-    "evalCost": 18.91,
-    "aaEvalCost": 1238.5,
-    "deepSweCost": 3.99,
-    "aaCostNorm": 22.7,
-    "deepSweCostNorm": 15.11,
-    "speed": 75.3,
-    "aaUrl": "https://artificialanalysis.ai/models/glm-5-3",
-    "overallScore": 58.3,
-    "qualityScore": 63.9,
-    "qualityRank": 7,
+    "name": "Claude Opus 5",
+    "shortName": "Opus 5",
+    "developer": "Anthropic",
+    "evalCost": 57.58,
+    "aaEvalCost": 3836.05,
+    "deepSweCost": 11.84,
+    "aaCostNorm": 70.32,
+    "deepSweCostNorm": 44.85,
+    "speed": 57.1,
+    "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+    "livebench": {
+      "model": "claude-opus-5-max-effort",
+      "overallScore": 80.084976,
+      "instructionFollowingScore": 63.7665,
+      "costPerSuccessfulTaskUsd": 0.7067
+    },
+    "terminalBenchV4": {
+      "model": "Opus 5",
+      "resolutionRate": 0.518,
+      "resolutionRatePct": 51.8,
+      "uncertaintyPct": 3.4,
+      "costUsd": 6000.0,
+      "agent": "Claude Code",
+      "releaseDate": "Jul 24, 2026"
+    },
+    "overallScore": 57.1,
+    "qualityScore": 76.9,
+    "qualityRank": 1,
     "missingCount": 0,
     "dims": [
-      45.0,
-      85.0,
       15.0,
-      50.0,
-      72.5,
+      40.0,
+      95.0,
+      100.0,
+      60.0,
+      30.0,
       90.0,
       95.0,
-      35.0,
-      45.0,
-      30.0,
-      85.0,
-      50.0,
-      75.0
+      70.0,
+      65.0,
+      90.0,
+      100.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2142,19 +2313,33 @@ const MODELS = [
     "deepSweCostNorm": 14.02,
     "speed": 235.8,
     "aaUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
-    "overallScore": 53.0,
-    "qualityScore": 47.9,
-    "qualityRank": 13,
+    "livebench": {
+      "model": "muse-spark-1.2-xhigh",
+      "overallScore": 77.954774,
+      "instructionFollowingScore": 74.325,
+      "costPerSuccessfulTaskUsd": 0.3753
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 54.8,
+    "qualityScore": 50.0,
+    "qualityRank": 12,
     "missingCount": 0,
     "dims": [
       65.0,
       80.0,
-      40.0,
-      30.0,
       25.0,
       60.0,
       25.0,
       100.0,
+      40.0,
       60.0,
       5.0,
       80.0,
@@ -2162,7 +2347,6 @@ const MODELS = [
       45.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2190,37 +2374,50 @@ const MODELS = [
   },
   {
     "rank": 10,
-    "name": "Claude Fable 5",
-    "shortName": "Fable 5",
-    "developer": "Anthropic",
-    "evalCost": 75.4,
-    "aaEvalCost": 5455.22,
-    "deepSweCost": 13.41,
-    "aaCostNorm": 100.0,
-    "deepSweCostNorm": 50.8,
-    "speed": 70.0,
-    "aaUrl": "https://artificialanalysis.ai/models/claude-fable-5",
-    "overallScore": 52.1,
-    "qualityScore": 72.0,
-    "qualityRank": 5,
+    "name": "Gemini 3.7 Flash",
+    "shortName": "Gem 3.7 Flash",
+    "developer": "Google DeepMind",
+    "evalCost": 6.39,
+    "aaEvalCost": 277.5,
+    "deepSweCost": 2.03,
+    "aaCostNorm": 5.09,
+    "deepSweCostNorm": 7.69,
+    "speed": 295.4,
+    "aaUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+    "livebench": {
+      "model": "gemini-3.7-flash-high",
+      "overallScore": 78.826012,
+      "instructionFollowingScore": 79.92525,
+      "costPerSuccessfulTaskUsd": 0.1571
+    },
+    "terminalBenchV4": {
+      "model": "Gemini 3.7 Flash",
+      "resolutionRate": 0.112,
+      "resolutionRatePct": 11.2,
+      "uncertaintyPct": 2.4,
+      "costUsd": 1300.0,
+      "agent": "mini-SWE-agent",
+      "releaseDate": "Aug 13, 2026"
+    },
+    "overallScore": 53.9,
+    "qualityScore": 39.2,
+    "qualityRank": 14,
     "missingCount": 0,
     "dims": [
-      5.0,
-      30.0,
-      100.0,
-      72.5,
-      80.0,
-      80.0,
-      40.0,
-      42.5,
-      100.0,
-      50.0,
-      100.0,
       85.0,
-      95.0
+      25.0,
+      50.0,
+      15.0,
+      30.0,
+      85.0,
+      70.0,
+      5.0,
+      40.0,
+      90.0,
+      0.0,
+      30.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2248,37 +2445,50 @@ const MODELS = [
   },
   {
     "rank": 11,
-    "name": "Gemini 3.7 Flash",
-    "shortName": "Gem 3.7 Flash",
-    "developer": "Google DeepMind",
-    "evalCost": 6.39,
-    "aaEvalCost": 277.5,
-    "deepSweCost": 2.03,
-    "aaCostNorm": 5.09,
-    "deepSweCostNorm": 7.69,
-    "speed": 295.4,
-    "aaUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
-    "overallScore": 50.8,
-    "qualityScore": 36.3,
-    "qualityRank": 15,
+    "name": "GPT-5.6 Luna",
+    "shortName": "GPT-5.6 Luna",
+    "developer": "OpenAI",
+    "evalCost": 2.75,
+    "aaEvalCost": 173.85,
+    "deepSweCost": 0.61,
+    "aaCostNorm": 3.19,
+    "deepSweCostNorm": 2.31,
+    "speed": 125.2,
+    "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+    "livebench": {
+      "model": "gpt-5.6-luna-max",
+      "overallScore": 73.559381,
+      "instructionFollowingScore": 60.121,
+      "costPerSuccessfulTaskUsd": 0.1677
+    },
+    "terminalBenchV4": {
+      "model": "GPT-5.6 Luna",
+      "resolutionRate": 0.173,
+      "resolutionRatePct": 17.3,
+      "uncertaintyPct": 2.8,
+      "costUsd": 300.0,
+      "agent": "Codex",
+      "releaseDate": "Jun 26, 2026"
+    },
+    "overallScore": 50.5,
+    "qualityScore": 29.5,
+    "qualityRank": 17,
     "missingCount": 0,
     "dims": [
-      85.0,
-      25.0,
-      70.0,
-      10.0,
-      50.0,
-      15.0,
-      30.0,
-      85.0,
+      95.0,
       5.0,
-      40.0,
-      90.0,
-      0.0,
-      30.0
+      60.0,
+      35.0,
+      5.0,
+      65.0,
+      35.0,
+      10.0,
+      17.5,
+      25.0,
+      60.0,
+      15.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2306,37 +2516,50 @@ const MODELS = [
   },
   {
     "rank": 12,
-    "name": "GPT-5.6 Luna",
-    "shortName": "GPT-5.6 Luna",
-    "developer": "OpenAI",
-    "evalCost": 2.75,
-    "aaEvalCost": 173.85,
-    "deepSweCost": 0.61,
-    "aaCostNorm": 3.19,
-    "deepSweCostNorm": 2.31,
-    "speed": 125.2,
-    "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
-    "overallScore": 49.8,
-    "qualityScore": 30.6,
-    "qualityRank": 17,
+    "name": "Claude Fable 5",
+    "shortName": "Fable 5",
+    "developer": "Anthropic",
+    "evalCost": 75.4,
+    "aaEvalCost": 5455.22,
+    "deepSweCost": 13.41,
+    "aaCostNorm": 100.0,
+    "deepSweCostNorm": 50.8,
+    "speed": 70.0,
+    "aaUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+    "livebench": {
+      "model": "claude-fable-5-max-effort",
+      "overallScore": 82.970798,
+      "instructionFollowingScore": 75.77075,
+      "costPerSuccessfulTaskUsd": 1.4777
+    },
+    "terminalBenchV4": {
+      "model": "Fable 5",
+      "resolutionRate": 0.445,
+      "resolutionRatePct": 44.5,
+      "uncertaintyPct": 3.8,
+      "costUsd": 7300.0,
+      "agent": "Claude Code",
+      "releaseDate": "Jun 9, 2026"
+    },
+    "overallScore": 50.5,
+    "qualityScore": 72.0,
+    "qualityRank": 3,
     "missingCount": 0,
     "dims": [
-      95.0,
       5.0,
-      35.0,
+      30.0,
+      80.0,
+      80.0,
       40.0,
-      60.0,
-      35.0,
-      5.0,
-      65.0,
-      10.0,
-      17.5,
-      25.0,
-      60.0,
-      15.0
+      42.5,
+      100.0,
+      100.0,
+      50.0,
+      100.0,
+      85.0,
+      95.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2374,19 +2597,33 @@ const MODELS = [
     "deepSweCostNorm": 14.13,
     "speed": 38.8,
     "aaUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
-    "overallScore": 48.0,
-    "qualityScore": 51.4,
+    "livebench": {
+      "model": "qwen3.8-max",
+      "overallScore": 78.460893,
+      "instructionFollowingScore": 74.0835,
+      "costPerSuccessfulTaskUsd": 0.275
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 48.3,
+    "qualityScore": 52.2,
     "qualityRank": 10,
     "missingCount": 0,
     "dims": [
       40.0,
       65.0,
-      10.0,
-      45.0,
       30.0,
       75.0,
       100.0,
       17.5,
+      10.0,
       55.0,
       55.0,
       35.0,
@@ -2394,7 +2631,6 @@ const MODELS = [
       60.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2432,19 +2668,33 @@ const MODELS = [
     "deepSweCostNorm": 6.33,
     "speed": 60.2,
     "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
-    "overallScore": 44.9,
-    "qualityScore": 32.1,
+    "livebench": {
+      "model": "deepseek-v4-pro",
+      "overallScore": 71.57225,
+      "instructionFollowingScore": 62.35,
+      "costPerSuccessfulTaskUsd": 0.0498
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 46.8,
+    "qualityScore": 33.4,
     "qualityRank": 16,
     "missingCount": 0,
     "dims": [
       75.0,
       0.0,
-      55.0,
-      20.0,
       42.5,
       40.0,
       55.0,
       25.0,
+      55.0,
       25.0,
       62.5,
       5.0,
@@ -2452,7 +2702,6 @@ const MODELS = [
       25.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2480,37 +2729,50 @@ const MODELS = [
   },
   {
     "rank": 15,
-    "name": "GPT-5.5",
-    "shortName": "GPT-5.5",
-    "developer": "OpenAI",
-    "evalCost": 39.32,
-    "aaEvalCost": 2796.05,
-    "deepSweCost": 7.23,
-    "aaCostNorm": 51.25,
-    "deepSweCostNorm": 27.39,
-    "speed": 84.0,
-    "aaUrl": "https://artificialanalysis.ai/models/gpt-5-5",
-    "overallScore": 43.4,
-    "qualityScore": 53.3,
-    "qualityRank": 9,
+    "name": "Gemini 3.6 Flash",
+    "shortName": "Gem 3.6 Flash",
+    "developer": "Google DeepMind",
+    "evalCost": 7.96,
+    "aaEvalCost": 412.03,
+    "deepSweCost": 2.21,
+    "aaCostNorm": 7.55,
+    "deepSweCostNorm": 8.37,
+    "speed": 208.8,
+    "aaUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+    "livebench": {
+      "model": "gemini-3.6-flash-high",
+      "overallScore": 73.587512,
+      "instructionFollowingScore": 75.36675,
+      "costPerSuccessfulTaskUsd": 0.2353
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 43.1,
+    "qualityScore": 25.8,
+    "qualityRank": 20,
     "missingCount": 0,
     "dims": [
-      20.0,
-      20.0,
       80.0,
-      60.0,
-      60.0,
-      10.0,
       45.0,
+      10.0,
+      5.0,
+      0.0,
       72.5,
-      65.0,
-      80.0,
-      72.5,
-      80.0,
-      40.0
+      60.0,
+      20.0,
+      62.5,
+      30.0,
+      5.0,
+      0.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2538,37 +2800,50 @@ const MODELS = [
   },
   {
     "rank": 16,
-    "name": "Gemini 3.6 Flash",
-    "shortName": "Gem 3.6 Flash",
-    "developer": "Google DeepMind",
-    "evalCost": 7.96,
-    "aaEvalCost": 412.03,
-    "deepSweCost": 2.21,
-    "aaCostNorm": 7.55,
-    "deepSweCostNorm": 8.37,
-    "speed": 208.8,
-    "aaUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
-    "overallScore": 40.1,
-    "qualityScore": 23.1,
-    "qualityRank": 20,
+    "name": "GPT-5.5",
+    "shortName": "GPT-5.5",
+    "developer": "OpenAI",
+    "evalCost": 39.32,
+    "aaEvalCost": 2796.05,
+    "deepSweCost": 7.23,
+    "aaCostNorm": 51.25,
+    "deepSweCostNorm": 27.39,
+    "speed": 84.0,
+    "aaUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+    "livebench": {
+      "model": "gpt-5.5-xhigh",
+      "overallScore": 80.188298,
+      "instructionFollowingScore": 70.72925,
+      "costPerSuccessfulTaskUsd": 0.4356
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 42.1,
+    "qualityScore": 52.5,
+    "qualityRank": 9,
     "missingCount": 0,
     "dims": [
-      80.0,
-      45.0,
-      60.0,
-      0.0,
-      10.0,
-      5.0,
-      0.0,
-      72.5,
       20.0,
-      62.5,
-      30.0,
-      5.0,
-      0.0
+      20.0,
+      60.0,
+      10.0,
+      45.0,
+      72.5,
+      80.0,
+      65.0,
+      80.0,
+      72.5,
+      80.0,
+      40.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2606,19 +2881,33 @@ const MODELS = [
     "deepSweCostNorm": 1.74,
     "speed": 140.0,
     "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
-    "overallScore": 39.9,
-    "qualityScore": 18.7,
+    "livebench": {
+      "model": "deepseek-v4-flash",
+      "overallScore": 65.481107,
+      "instructionFollowingScore": 63.1375,
+      "costPerSuccessfulTaskUsd": 0.0161
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 41.5,
+    "qualityScore": 18.6,
     "qualityRank": 21,
     "missingCount": 0,
     "dims": [
       90.0,
       15.0,
-      25.0,
-      20.0,
       15.0,
       30.0,
       50.0,
       17.5,
+      25.0,
       0.0,
       10.0,
       15.0,
@@ -2626,7 +2915,6 @@ const MODELS = [
       5.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2654,37 +2942,50 @@ const MODELS = [
   },
   {
     "rank": 18,
-    "name": "Claude Opus 4.8",
-    "shortName": "Opus 4.8",
-    "developer": "Anthropic",
-    "evalCost": 59.43,
-    "aaEvalCost": 3752.32,
-    "deepSweCost": 13.22,
-    "aaCostNorm": 68.78,
-    "deepSweCostNorm": 50.08,
-    "speed": 62.2,
-    "aaUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
-    "overallScore": 36.8,
-    "qualityScore": 48.1,
-    "qualityRank": 12,
+    "name": "GLM-5.2",
+    "shortName": "GLM-5.2",
+    "developer": "Z AI",
+    "evalCost": 15.16,
+    "aaEvalCost": 843.44,
+    "deepSweCost": 3.92,
+    "aaCostNorm": 15.46,
+    "deepSweCostNorm": 14.85,
+    "speed": 69.9,
+    "aaUrl": "https://artificialanalysis.ai/models/glm-5-2",
+    "livebench": {
+      "model": "glm-5.2",
+      "overallScore": 73.157286,
+      "instructionFollowingScore": 62.29175,
+      "costPerSuccessfulTaskUsd": 0.2246
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 37.1,
+    "qualityScore": 28.6,
+    "qualityRank": 18,
     "missingCount": 0,
     "dims": [
-      10.0,
-      75.0,
-      50.0,
-      72.5,
-      35.0,
-      45.0,
-      15.0,
+      55.0,
+      95.0,
       5.0,
-      80.0,
-      35.0,
-      45.0,
+      20.0,
+      20.0,
+      42.5,
+      0.0,
+      30.0,
+      0.0,
+      20.0,
       67.5,
-      50.0
+      20.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2712,37 +3013,50 @@ const MODELS = [
   },
   {
     "rank": 19,
-    "name": "GLM-5.2",
-    "shortName": "GLM-5.2",
-    "developer": "Z AI",
-    "evalCost": 15.16,
-    "aaEvalCost": 843.44,
-    "deepSweCost": 3.92,
-    "aaCostNorm": 15.46,
-    "deepSweCostNorm": 14.85,
-    "speed": 69.9,
-    "aaUrl": "https://artificialanalysis.ai/models/glm-5-2",
-    "overallScore": 34.8,
-    "qualityScore": 26.2,
+    "name": "Gemini 3.5 Flash",
+    "shortName": "Gem 3.5 Flash",
+    "developer": "Google DeepMind",
+    "evalCost": 16.09,
+    "aaEvalCost": 1042.43,
+    "deepSweCost": 3.45,
+    "aaCostNorm": 19.11,
+    "deepSweCostNorm": 13.07,
+    "speed": 204.6,
+    "aaUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+    "livebench": {
+      "model": "gemini-3.5-flash-high",
+      "overallScore": 74.637762,
+      "instructionFollowingScore": 75.6,
+      "costPerSuccessfulTaskUsd": 0.2489
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 35.1,
+    "qualityScore": 28.1,
     "qualityRank": 19,
     "missingCount": 0,
     "dims": [
-      55.0,
-      95.0,
+      50.0,
+      35.0,
       0.0,
-      5.0,
-      5.0,
-      20.0,
-      20.0,
-      42.5,
-      30.0,
       0.0,
-      20.0,
-      67.5,
-      20.0
+      10.0,
+      85.0,
+      65.0,
+      50.0,
+      45.0,
+      40.0,
+      10.0,
+      10.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2770,37 +3084,50 @@ const MODELS = [
   },
   {
     "rank": 20,
-    "name": "Gemini 3.5 Flash",
-    "shortName": "Gem 3.5 Flash",
-    "developer": "Google DeepMind",
-    "evalCost": 16.09,
-    "aaEvalCost": 1042.43,
-    "deepSweCost": 3.45,
-    "aaCostNorm": 19.11,
-    "deepSweCostNorm": 13.07,
-    "speed": 204.6,
-    "aaUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+    "name": "Claude Opus 4.8",
+    "shortName": "Opus 4.8",
+    "developer": "Anthropic",
+    "evalCost": 59.43,
+    "aaEvalCost": 3752.32,
+    "deepSweCost": 13.22,
+    "aaCostNorm": 68.78,
+    "deepSweCostNorm": 50.08,
+    "speed": 62.2,
+    "aaUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+    "livebench": {
+      "model": "claude-opus-4-8-max-effort",
+      "overallScore": 76.223988,
+      "instructionFollowingScore": 72.0335,
+      "costPerSuccessfulTaskUsd": 0.9858
+    },
+    "terminalBenchV4": {
+      "model": "Opus 4.8",
+      "resolutionRate": 0.236,
+      "resolutionRatePct": 23.6,
+      "uncertaintyPct": 3.6,
+      "costUsd": 6500.0,
+      "agent": "Claude Code",
+      "releaseDate": "May 28, 2026"
+    },
     "overallScore": 34.0,
-    "qualityScore": 27.3,
-    "qualityRank": 18,
+    "qualityScore": 45.3,
+    "qualityRank": 13,
     "missingCount": 0,
     "dims": [
-      50.0,
+      10.0,
+      75.0,
       35.0,
-      65.0,
-      20.0,
-      0.0,
-      0.0,
-      10.0,
-      85.0,
-      50.0,
       45.0,
-      40.0,
-      10.0,
-      10.0
+      15.0,
+      5.0,
+      50.0,
+      80.0,
+      35.0,
+      45.0,
+      67.5,
+      50.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2838,19 +3165,33 @@ const MODELS = [
     "deepSweCostNorm": 100.0,
     "speed": 82.1,
     "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
-    "overallScore": 26.5,
-    "qualityScore": 37.8,
-    "qualityRank": 14,
+    "livebench": {
+      "model": "claude-sonnet-5-xhigh-effort",
+      "overallScore": 76.039714,
+      "instructionFollowingScore": 63.8585,
+      "costPerSuccessfulTaskUsd": 0.5134
+    },
+    "terminalBenchV4": {
+      "model": "Sonnet 5",
+      "resolutionRate": 0.124,
+      "resolutionRatePct": 12.4,
+      "uncertaintyPct": 3.1,
+      "costUsd": 9600.0,
+      "agent": "Claude Code",
+      "releaseDate": "Jun 30, 2026"
+    },
+    "overallScore": 25.9,
+    "qualityScore": 38.1,
+    "qualityRank": 15,
     "missingCount": 0,
     "dims": [
       0.0,
       70.0,
       20.0,
+      50.0,
       35.0,
+      50.0,
       20.0,
-      50.0,
-      35.0,
-      50.0,
       35.0,
       17.5,
       52.5,
@@ -2858,7 +3199,6 @@ const MODELS = [
       35.0
     ],
     "isMissing": [
-      false,
       false,
       false,
       false,
@@ -2886,6 +3226,189 @@ const MODELS = [
   }
 ];
 
+const LIVEBENCH = [
+  {
+    "id": "gemini-3.8-flash",
+    "name": "Gemini 3.8 Flash",
+    "livebenchModel": "gemini-3.8-flash-high",
+    "overallScore": 75.828524,
+    "instructionFollowingScore": 81.4125,
+    "costPerSuccessfulTaskUsd": 0.3073,
+    "pareto": false
+  },
+  {
+    "id": "claude-opus-5",
+    "name": "Claude Opus 5",
+    "livebenchModel": "claude-opus-5-max-effort",
+    "overallScore": 80.084976,
+    "instructionFollowingScore": 63.7665,
+    "costPerSuccessfulTaskUsd": 0.7067,
+    "pareto": false
+  },
+  {
+    "id": "gpt-5.6-sol",
+    "name": "GPT-5.6 Sol",
+    "livebenchModel": "gpt-5.6-sol-max",
+    "overallScore": 81.053548,
+    "instructionFollowingScore": 71.846,
+    "costPerSuccessfulTaskUsd": 0.507,
+    "pareto": true
+  },
+  {
+    "id": "claude-fable-5",
+    "name": "Claude Fable 5",
+    "livebenchModel": "claude-fable-5-max-effort",
+    "overallScore": 82.970798,
+    "instructionFollowingScore": 75.77075,
+    "costPerSuccessfulTaskUsd": 1.4777,
+    "pareto": true
+  },
+  {
+    "id": "glm-5.3",
+    "name": "GLM-5.3",
+    "livebenchModel": "glm-5.3",
+    "overallScore": 76.137809,
+    "instructionFollowingScore": 69.304,
+    "costPerSuccessfulTaskUsd": 0.4504,
+    "pareto": false
+  },
+  {
+    "id": "kimi-k3",
+    "name": "Kimi K3",
+    "livebenchModel": "kimi-k3",
+    "overallScore": 79.193048,
+    "instructionFollowingScore": 71.36275,
+    "costPerSuccessfulTaskUsd": 0.351,
+    "pareto": true
+  },
+  {
+    "id": "grok-4.6",
+    "name": "Grok 4.6",
+    "livebenchModel": "grok-4.6",
+    "overallScore": 78.042,
+    "instructionFollowingScore": 71.8665,
+    "costPerSuccessfulTaskUsd": 0.2068,
+    "pareto": false
+  },
+  {
+    "id": "gpt-5.6-luna",
+    "name": "GPT-5.6 Luna",
+    "livebenchModel": "gpt-5.6-luna-max",
+    "overallScore": 73.559381,
+    "instructionFollowingScore": 60.121,
+    "costPerSuccessfulTaskUsd": 0.1677,
+    "pareto": false
+  },
+  {
+    "id": "gpt-5.5",
+    "name": "GPT-5.5",
+    "livebenchModel": "gpt-5.5-xhigh",
+    "overallScore": 80.188298,
+    "instructionFollowingScore": 70.72925,
+    "costPerSuccessfulTaskUsd": 0.4356,
+    "pareto": true
+  },
+  {
+    "id": "gemini-3.7-flash",
+    "name": "Gemini 3.7 Flash",
+    "livebenchModel": "gemini-3.7-flash-high",
+    "overallScore": 78.826012,
+    "instructionFollowingScore": 79.92525,
+    "costPerSuccessfulTaskUsd": 0.1571,
+    "pareto": true
+  },
+  {
+    "id": "glm-5.3-flash",
+    "name": "GLM-5.3 Flash",
+    "livebenchModel": "glm-5.3-flash",
+    "overallScore": 71.590786,
+    "instructionFollowingScore": 52.82075,
+    "costPerSuccessfulTaskUsd": 0.0305,
+    "pareto": true
+  },
+  {
+    "id": "deepseek-v4-pro",
+    "name": "DeepSeek V4 Pro",
+    "livebenchModel": "deepseek-v4-pro",
+    "overallScore": 71.57225,
+    "instructionFollowingScore": 62.35,
+    "costPerSuccessfulTaskUsd": 0.0498,
+    "pareto": false
+  },
+  {
+    "id": "claude-opus-4.8",
+    "name": "Claude Opus 4.8",
+    "livebenchModel": "claude-opus-4-8-max-effort",
+    "overallScore": 76.223988,
+    "instructionFollowingScore": 72.0335,
+    "costPerSuccessfulTaskUsd": 0.9858,
+    "pareto": false
+  },
+  {
+    "id": "qwen3.8-max",
+    "name": "Qwen3.8 Max",
+    "livebenchModel": "qwen3.8-max",
+    "overallScore": 78.460893,
+    "instructionFollowingScore": 74.0835,
+    "costPerSuccessfulTaskUsd": 0.275,
+    "pareto": false
+  },
+  {
+    "id": "muse-spark-1.2",
+    "name": "Muse Spark 1.2",
+    "livebenchModel": "muse-spark-1.2-xhigh",
+    "overallScore": 77.954774,
+    "instructionFollowingScore": 74.325,
+    "costPerSuccessfulTaskUsd": 0.3753,
+    "pareto": false
+  },
+  {
+    "id": "claude-sonnet-5",
+    "name": "Claude Sonnet 5",
+    "livebenchModel": "claude-sonnet-5-xhigh-effort",
+    "overallScore": 76.039714,
+    "instructionFollowingScore": 63.8585,
+    "costPerSuccessfulTaskUsd": 0.5134,
+    "pareto": false
+  },
+  {
+    "id": "deepseek-v4-flash",
+    "name": "DeepSeek V4 Flash",
+    "livebenchModel": "deepseek-v4-flash",
+    "overallScore": 65.481107,
+    "instructionFollowingScore": 63.1375,
+    "costPerSuccessfulTaskUsd": 0.0161,
+    "pareto": true
+  },
+  {
+    "id": "gemini-3.6-flash",
+    "name": "Gemini 3.6 Flash",
+    "livebenchModel": "gemini-3.6-flash-high",
+    "overallScore": 73.587512,
+    "instructionFollowingScore": 75.36675,
+    "costPerSuccessfulTaskUsd": 0.2353,
+    "pareto": false
+  },
+  {
+    "id": "glm-5.2",
+    "name": "GLM-5.2",
+    "livebenchModel": "glm-5.2",
+    "overallScore": 73.157286,
+    "instructionFollowingScore": 62.29175,
+    "costPerSuccessfulTaskUsd": 0.2246,
+    "pareto": false
+  },
+  {
+    "id": "gemini-3.5-flash",
+    "name": "Gemini 3.5 Flash",
+    "livebenchModel": "gemini-3.5-flash-high",
+    "overallScore": 74.637762,
+    "instructionFollowingScore": 75.6,
+    "costPerSuccessfulTaskUsd": 0.2489,
+    "pareto": false
+  }
+];
+
 
 function compositeCostTier(cost) {
   if (cost <= 15) return 'Budget';
@@ -2899,7 +3422,7 @@ MODELS.forEach(model => {
   model.costTier = compositeCostTier(model.evalCost);
 });
 
-const SPEED_DIM_IDX = -1; // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // 11 in v1.4.0 (was 14 in v1.2)
+const SPEED_DIM_IDX = -1; // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // speed is coverage-only in v1.4.0; GPT-6 Astra reports N/A // 11 in v1.4.0 (was 14 in v1.2)
 
 function fmtUsd(v, opts) {
   if (v == null || Number.isNaN(Number(v))) return '—';
@@ -3332,6 +3855,51 @@ function initCostSlider() {
 // ─────────────────────────────────────────────
 // CHART 1: PARETO SCATTER
 // ─────────────────────────────────────────────
+function renderLiveBenchPareto() {
+  const rows = LIVEBENCH.filter(m => Number.isFinite(Number(m.overallScore)) && Number.isFinite(Number(m.costPerSuccessfulTaskUsd)));
+  const target = document.getElementById('chart-livebench-pareto');
+  if (!rows.length) {
+    target.innerHTML = '<div class="ca-dash" style="padding:32px;text-align:center;">No matched LiveBench rows are available.</div>';
+    return;
+  }
+  const frontier = rows.filter(m => m.pareto).sort((a, b) => a.costPerSuccessfulTaskUsd - b.costPerSuccessfulTaskUsd);
+  const frontierSet = new Set(frontier.map(m => m.id));
+  const dominated = rows.filter(m => !frontierSet.has(m.id));
+  const custom = m => [m.name, m.livebenchModel, m.instructionFollowingScore, m.costPerSuccessfulTaskUsd];
+  const hover = '<b>%{customdata[0]}</b><br>Overall Score: %{y:.2f}<br>Instruction Following: %{customdata[2]:.2f}<br>Cost Per Successful Task: $%{customdata[3]:.4f}<br>LiveBench variant: %{customdata[1]}<extra></extra>';
+  const traces = [
+    {
+      x: dominated.map(m => m.costPerSuccessfulTaskUsd), y: dominated.map(m => m.overallScore),
+      mode: 'markers', type: 'scatter', name: 'Dominated',
+      marker: { size: 11, color: '#a78bfa', opacity: 0.65 },
+      customdata: dominated.map(custom), hovertemplate: hover,
+    },
+    {
+      x: frontier.map(m => m.costPerSuccessfulTaskUsd), y: frontier.map(m => m.overallScore),
+      mode: 'markers', type: 'scatter', name: 'Pareto frontier',
+      marker: { size: 14, color: '#10b981', line: { width: 2, color: isPlotDark() ? '#064e3b' : '#ecfdf5' } },
+      customdata: frontier.map(custom), hovertemplate: hover.replace('<extra></extra>', '<extra>Frontier</extra>'),
+    },
+    {
+      x: frontier.map(m => m.costPerSuccessfulTaskUsd), y: frontier.map(m => m.overallScore),
+      mode: 'lines', type: 'scatter', name: 'frontier-curve',
+      line: { shape: 'spline', dash: 'dot', color: '#94a3b8', width: 2 }, hoverinfo: 'skip', showlegend: false,
+    },
+  ];
+  const scores = rows.map(m => m.overallScore);
+  const yMin = Math.max(0, Math.floor(Math.min(...scores) - 2));
+  const yMax = Math.min(100, Math.ceil(Math.max(...scores) + 2));
+  const layout = {
+    ...getPlotlyLayout(),
+    title: { text: 'LiveBench Overall Score vs Cost Per Successful Task', font: plotlyTitle(14) },
+    xaxis: { ...getPlotlyLayout().xaxis, title: 'Cost Per Successful Task (USD, log scale)', type: 'log', tickprefix: '$', tickformat: ',.2f' },
+    yaxis: { ...getPlotlyLayout().yaxis, title: 'Overall Score', range: [yMin, yMax], autorange: false },
+    legend: { orientation: 'h', y: -0.18 },
+    margin: { ...getPlotlyLayout().margin, r: 72, b: 96 },
+  };
+  Plotly.newPlot('chart-livebench-pareto', traces, layout, PLOTLY_CONFIG);
+}
+
 function renderPareto() {
   const frontier = paretoFrontModels(MODELS);
   const frontierSet = new Set(frontier.map(m => m.name));
@@ -3540,20 +4108,14 @@ function renderHeatmap(elementId, height) {
   };
 
   // Category dividers (between Cost | Rely | Agentic | Intel | Platform)
-  const dividers = [0.5, 2.5, 7.5, 11.5];
+  const dividers = [0.5, 1.5, 5.5, 6.5, 10.5];
   const shapes = dividers.map(x => ({
     type:'line', xref:'x', yref:'paper',
     x0: x, x1: x, y0: 0, y1: 1,
     line:{color:getPlotlyLayout().xaxis.gridcolor, width:2}
   }));
 
-  const catLabels = [
-    {x:0, text:'Cost', color:'#22c55e', y:-0.05},
-    {x:1.5, text:'Reliability', color:'#a78bfa', y:-0.12},
-    {x:5, text:'Agentic', color:'#3b82f6', y:-0.08},
-    {x:9.5, text:'Intelligence', color:'#eab308', y:-0.08},
-    {x:12, text:'Platform', color:'#f97316', y:-0.08},
-  ];
+  const catLabels = [{"x": 0.0, "text": "Cost", "color": "#22c55e", "y": -0.08}, {"x": 3.5, "text": "Reliability", "color": "#a78bfa", "y": -0.08}, {"x": 3.5, "text": "Agentic", "color": "#3b82f6", "y": -0.08}, {"x": 8.5, "text": "Intelligence", "color": "#eab308", "y": -0.08}, {"x": 11.0, "text": "Platform", "color": "#f97316", "y": -0.08}];
 
   const catAnnotations = catLabels.map(c => ({
     x: c.x, y: c.y, xref:'x', yref:'paper',
@@ -3671,7 +4233,7 @@ function renderBump() {
       {x:'v0.7', y:2, xref:'x', yref:'y', text:'v0.7: DeepSWE cohort', font:{color:'#a78bfa',size:9}, showarrow:true, arrowcolor:'#a78bfa', ax:80, ay:-20},
       {x:'v1.0', y:1, xref:'x', yref:'y', text:'v1.0: zero-gap set', font:{color:'#f97316',size:9}, showarrow:true, arrowcolor:'#f97316', ax:50, ay:-35},
       {x:'v1.2', y:2, xref:'x', yref:'y', text:'v1.2: cohort → 8', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:-40, ay:35},
-      {x:'v1.4.0', y:1, xref:'x', yref:'y', text:'v1.4.0: 21 models · 13 dims', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:-60, ay:40}
+      {x:'v1.4.0', y:1, xref:'x', yref:'y', text:'v1.4.0: 21 models · 12 dims', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:-60, ay:40}
     ]
   };
   Plotly.newPlot('chart-bump', traces, layout, PLOTLY_CONFIG);
@@ -3745,6 +4307,7 @@ const chartRenderers = {
   heatmap: () => renderHeatmap('chart-heatmap', 540),
   bubble: renderBubble,
   bump: renderBump,
+  livebenchPareto: renderLiveBenchPareto,
   frontier2: renderFrontier2,
 };
 const rendered = { pareto: false };
@@ -3808,7 +4371,7 @@ function renderGaps() {
 // VERSION TABLE
 // ─────────────────────────────────────────────
 function renderVersionTable() {
-  const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.4.0','v1.4.0'];
+  const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0'];
   const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140'];
   const table = document.getElementById('version-table');
   table.innerHTML = `<thead><tr><th>Model</th>${versions.map(v=>`<th>${v}</th>`).join('')}</tr></thead>
@@ -3866,7 +4429,7 @@ function updatePlotlyTheme() {
   const allChartIds = [
     'chart-pareto','chart-decomp','chart-displacement',
     'chart-heatmap','chart-bubble','chart-bump','chart-frontier2',
-    'chart-heatmap-data'
+    'chart-heatmap-data','chart-livebench-pareto'
   ];
   allChartIds.forEach(id => {
     const el = document.getElementById(id);

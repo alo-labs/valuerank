@@ -147,9 +147,9 @@ const CARDS = [
     <div class="brand">ValueRank</div>
     <h1 class="title compact">Coding Agent ValueRank</h1>
     <div class="subtitle">value per dollar</div>
-    <p class="desc">AA Coding Agent Index + Terminal-Bench 2.1 + cost.<br>Which agent delivers the most value?</p>
+    <p class="desc">Historical AA Coding Agent Index + Terminal-Bench 2.1 snapshot.<br>Current benchmark data is on the TB4 page.</p>
     <div class="pill-row">
-      <div class="pill"><span class="dot dot-indigo"></span> v0.3</div>
+      <div class="pill"><span class="dot dot-indigo"></span> Historical</div>
       <div class="pill"><span class="dot dot-green"></span> 42 agents</div>
     </div>
     <div class="viz" aria-hidden="true">
@@ -175,16 +175,16 @@ const CARDS = [
 </body></html>`,
   },
   {
-    id: "tb21",
-    out: join(ROOT, "site/tb21/og.png"),
+    id: "tb4",
+    out: join(ROOT, "site/tb4/og.png"),
     html: `
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>${SHARED_CSS}</style></head>
 <body>
   <div class="frame">
     <div class="brand">ValueRank</div>
-    <h1 class="title">Terminal-Bench 2.1</h1>
+    <h1 class="title">Terminal-Bench 4.0</h1>
     <div class="subtitle">Score vs Cost</div>
-    <p class="desc">Accuracy (%) vs Cost (USD) with Pareto frontier.<br>Official snapshot from tbench.ai</p>
+    <p class="desc">Resolution rate (%) vs Cost (USD) with Pareto frontier.<br>Official snapshot from tbench.ai</p>
     <div class="pill-row">
       <div class="pill"><span class="dot dot-purple"></span> Dominated</div>
       <div class="pill"><span class="dot dot-green"></span> Pareto frontier</div>
@@ -212,7 +212,7 @@ const CARDS = [
       </div>
     </div>
     <div class="footer">
-      <span>valuerank.alolabs.dev/tb21</span>
+      <span>valuerank.alolabs.dev/tb4</span>
       <span class="muted">Open source · Independent</span>
     </div>
   </div>

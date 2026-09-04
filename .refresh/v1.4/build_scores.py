@@ -6,7 +6,11 @@ candidate dimension is retained only when every cohort member has a published
 value; missing values are never neutral-filled.  Current AA v4.1.1 component
 metrics are kept as fractions, while the score matrix is rank-normalized to a
 0--100 scale.
-"""
+    LiveBench Instruction Following and Terminal-Bench 4.0 are loaded as
+    separately sourced coverage fields.  They are candidates for the score,
+    but remain coverage-only when the pinned official snapshot does not cover
+    every member of the complete cohort.
+    """
 
 from __future__ import annotations
 
@@ -19,7 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
 VERSION = "v1.4.0"
-PUBLISH_DATE = "September 4, 2026"
+PUBLISH_DATE = "September 5, 2026"
 
 DEVELOPER = {
     "GPT-6 Astra": "OpenAI",
@@ -75,7 +79,8 @@ SHORT = {
 CANDIDATES = [
     ("costComposite", "Cost", False, 25),
     ("omniNonHallucination", "Non-Hallucination", True, 6),
-    ("terminalBenchV21", "Terminal-Bench v2.1", True, 6),
+    ("terminalBenchV4", "Terminal-Bench 4.0", True, 6),
+    ("livebenchInstructionFollowing", "Instruction Following (LiveBench)", True, 5),
     ("deepswePassAt1", "DeepSWE", True, 7),
     ("gdpvalV2", "GDPval-AA v2", True, 6),
     ("tau3Banking", "τ³-Banking", True, 5),
@@ -122,10 +127,19 @@ def require_number(value, label):
 def main() -> int:
     deepswe = json.loads((REFRESH / "deepswe.json").read_text())
     aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
+    livebench_document = json.loads((REFRESH / "livebench.json").read_text())
+    tb4_document = json.loads((REFRESH / "tb4.json").read_text())
     aa_models = aa_document["models"]
+    livebench_models = livebench_document["models"]
+    tb4_models = tb4_document["cohortRows"]
     coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
     if len(deepswe["models"]) != 21 or deepswe.get("n") != 21:
         raise ValueError("v1.4 requires the complete 21-model DeepSWE roster")
+    cohort_ids = {item["slug"] for item in deepswe["models"]}
+    if set(livebench_models) != cohort_ids:
+        raise ValueError("LiveBench snapshot must contain exactly the current 21-model cohort")
+    if livebench_document.get("matchedN") != 20 or tb4_document.get("matchedN") != 11:
+        raise ValueError("unexpected external benchmark coverage; refresh snapshots before scoring")
 
     rows = []
     for deepswe_model in deepswe["models"]:
@@ -135,6 +149,8 @@ def main() -> int:
             raise ValueError(f"AA extraction missing DeepSWE model: {model_id}")
         aa_metrics = aa_model["metrics"]
         supplemental = aa_model.get("supplemental", {})
+        livebench = livebench_models[model_id]
+        tb4 = tb4_models.get(model_id)
         display_name = deepswe_model["displayName"]
         if display_name not in DEVELOPER or display_name not in SHORT:
             raise ValueError(f"identity mapping missing: {display_name}")
@@ -159,7 +175,23 @@ def main() -> int:
             "intelligenceIndex": aa_metrics.get("intelligenceIndex"),
             "gdpvalV2": aa_metrics.get("gdpvalV2"),
             "tau3Banking": aa_metrics.get("tau3Banking"),
-            "terminalBenchV21": aa_metrics.get("terminalBenchV21"),
+            # Keep the AA v4.1.1 field under an explicit source namespace: the
+            # current standalone Terminal-Bench field below is official TB4.
+            "aaTerminalBenchV21": aa_metrics.get("terminalBenchV21"),
+            "livebenchModel": livebench.get("livebenchModel"),
+            "livebenchOverall": livebench.get("overallScore"),
+            "livebenchInstructionFollowing": livebench.get("instructionFollowingScore"),
+            "livebenchCostPerSuccessfulTask": livebench.get("costPerSuccessfulTaskUsd"),
+            "livebenchCategoryScores": livebench.get("categoryScores", {}),
+            "livebenchTaskScores": livebench.get("tasks", {}),
+            "terminalBenchV4": tb4.get("resolutionRate") if tb4 else None,
+            "terminalBenchV4Pct": tb4.get("resolutionRatePct") if tb4 else None,
+            "terminalBenchV4UncertaintyPct": tb4.get("uncertaintyPct") if tb4 else None,
+            "terminalBenchV4Cost": tb4.get("costUsd") if tb4 else None,
+            "terminalBenchV4Agent": tb4.get("agent") if tb4 else None,
+            "terminalBenchV4Effort": tb4.get("model") if tb4 else None,
+            "terminalBenchV4ReleaseDate": tb4.get("releaseDate") if tb4 else None,
+            "terminalBenchV4Model": tb4.get("baseModel") if tb4 else None,
             "scicode": aa_metrics.get("scicode"),
             "aaLcr": aa_metrics.get("aaLcr"),
             "hle": aa_metrics.get("hle"),
@@ -265,7 +297,9 @@ def main() -> int:
         if row["pareto"]:
             pareto.append(row["name"])
 
-    # Keep the source extraction coverage and add the score-specific gate.
+    # Keep source extraction coverage and add both the score-specific gate and
+    # explicitly labelled external benchmark coverage.  Supplemental fields
+    # are never rank-normalized unless the zero-gap candidate gate retains them.
     score_coverage = {
         key: {
             "label": item["label"],
@@ -275,6 +309,64 @@ def main() -> int:
             "includedInPrimaryScore": key in {weight["key"] for weight in weights},
         }
         for key, item in coverage.items()
+    }
+    external_coverage = {
+        "livebenchOverall": {
+            "group": "supplemental",
+            "label": "LiveBench Overall Score",
+            "availableN": livebench_document["matchedN"],
+            "cohortN": len(rows),
+            "coveragePct": round(100 * livebench_document["matchedN"] / len(rows), 2),
+            "missingModels": livebench_document["missingModels"],
+            "includedInPrimaryScore": False,
+            "sourceRelease": livebench_document["release"],
+        },
+        "livebenchInstructionFollowing": {
+            "group": "supplemental",
+            "label": "Instruction Following (LiveBench)",
+            "availableN": livebench_document["matchedN"],
+            "cohortN": len(rows),
+            "coveragePct": round(100 * livebench_document["matchedN"] / len(rows), 2),
+            "missingModels": livebench_document["missingModels"],
+            "includedInPrimaryScore": False,
+            "sourceRelease": livebench_document["release"],
+        },
+        "livebenchCostPerSuccessfulTask": {
+            "group": "supplemental",
+            "label": "LiveBench Cost Per Successful Task",
+            "availableN": livebench_document["matchedN"],
+            "cohortN": len(rows),
+            "coveragePct": round(100 * livebench_document["matchedN"] / len(rows), 2),
+            "missingModels": livebench_document["missingModels"],
+            "includedInPrimaryScore": False,
+            "sourceRelease": livebench_document["release"],
+        },
+        "terminalBenchV4": {
+            "group": "supplemental",
+            "label": "Terminal-Bench 4.0",
+            "availableN": tb4_document["matchedN"],
+            "cohortN": len(rows),
+            "coveragePct": round(100 * tb4_document["matchedN"] / len(rows), 2),
+            "missingModels": tb4_document["missingModels"],
+            "includedInPrimaryScore": False,
+            "sourceRelease": tb4_document["version"],
+        },
+    }
+    source_fields = dict(coverage_document.get("fields", {}))
+    source_fields.update(external_coverage)
+    coverage_document["fields"] = source_fields
+    coverage_document["externalBenchmarks"] = {
+        "livebench": {
+            "release": livebench_document["release"],
+            "matchedN": livebench_document["matchedN"],
+            "cohortN": livebench_document["cohortN"],
+            "pareto": livebench_document["pareto"],
+        },
+        "terminalBenchV4": {
+            "version": tb4_document["version"],
+            "matchedN": tb4_document["matchedN"],
+            "cohortN": tb4_document["cohortN"],
+        },
     }
     coverage_document["scoring"] = {
         "version": VERSION,
@@ -305,6 +397,10 @@ def main() -> int:
             {"rank": row["rank"], "name": row["name"], "overallScore": row["overallScore"], "qualityScore": row["qualityScore"]}
             for row in by_overall[:5]
         ],
+        "externalCoverage": {
+            "livebench": f"{livebench_document['matchedN']}/{livebench_document['cohortN']}",
+            "terminalBenchV4": f"{tb4_document['matchedN']}/{tb4_document['cohortN']}",
+        },
     }
     manifest_path = ROOT / "research" / "2026-09-04-valuerank-refresh" / "run_manifest.json"
     manifest = json.loads(manifest_path.read_text())
@@ -325,6 +421,19 @@ def main() -> int:
                 "weights": weights,
                 "models": by_overall,
                 "pareto": pareto,
+                "externalBenchmarks": {
+                    "livebench": {
+                        "release": livebench_document["release"],
+                        "matchedN": livebench_document["matchedN"],
+                        "cohortN": livebench_document["cohortN"],
+                        "pareto": livebench_document["pareto"],
+                    },
+                    "terminalBenchV4": {
+                        "version": tb4_document["version"],
+                        "matchedN": tb4_document["matchedN"],
+                        "cohortN": tb4_document["cohortN"],
+                    },
+                },
                 "appendixNonRanked": [],
             },
             indent=2,
