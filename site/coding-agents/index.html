@@ -101,6 +101,339 @@ footer { text-align:center; color:var(--text-dim); padding:24px; font-size:12px;
 .vr-sort-indicator { display: inline-block; margin-left: 4px; color: var(--text-dim, #94a3b8); font-size: .9em; }
 
 </style>
+<script id="site-chart-labels">
+
+// Shared collision-safe model-label placement for Plotly scatter charts.
+// Callers pass data-space points; the helper handles linear and logarithmic axes.
+function buildCollisionSafeLabelAnnotations(points, gd, options) {
+  options = options || {};
+  if (!gd || !gd._fullLayout || !Array.isArray(points) || !points.length) return [];
+
+  const layout = gd._fullLayout;
+  const xa = layout[options.xaxis || 'xaxis'];
+  const ya = layout[options.yaxis || 'yaxis'];
+  if (!xa || !ya || !xa._length || !ya._length) return [];
+
+  const width = layout.width || 1100;
+  const height = layout.height || 520;
+  const fontSize = Number(options.fontSize) || 9;
+  const safety = Number(options.safety) || 1.35;
+  const markerRadius = Number(options.markerRadius) || 11;
+  const labelPad = Number(options.labelPad) || Math.max(6, fontSize * 0.9);
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const textColor = options.textColor || (dark ? '#e2e8f0' : '#0f172a');
+  const frontierColor = options.frontierColor || (dark ? '#34d399' : '#047857');
+  const arrowMuted = options.arrowMuted || (dark ? 'rgba(148,163,184,.75)' : 'rgba(71,85,105,.7)');
+  const arrowFrontier = options.arrowFrontier || (dark ? 'rgba(52,211,153,.95)' : 'rgba(4,120,87,.85)');
+  const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+  const axisCoordinate = (axis, value) => {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric) || (axis.type === 'log' && numeric <= 0)) return NaN;
+    return axis.type === 'log' ? axis.l2p(Math.log10(numeric)) : axis.l2p(numeric);
+  };
+  const labelLines = value => String(value == null ? '' : value)
+    .replace(/<br\s*\/?\s*>/gi, '\n')
+    .replace(/<[^>]*>/g, '')
+    .split('\n');
+  const estimateLabelSize = label => {
+    const lines = labelLines(label);
+    const maxChars = Math.max(1, ...lines.map(line => line.length));
+    const wPx = Math.ceil((maxChars * fontSize * 0.68 + 12) * safety);
+    const hPx = Math.ceil((lines.length * fontSize * 1.45 + 8) * safety);
+    return { wPx, hPx };
+  };
+
+  const items = points.map((point, idx) => {
+    const label = point.label == null ? (point.name == null ? '' : point.name) : point.label;
+    const xPx = xa._offset + axisCoordinate(xa, point.x);
+    const yPx = ya._offset + axisCoordinate(ya, point.y);
+    const valid = label !== '' && Number.isFinite(xPx) && Number.isFinite(yPx);
+    if (!valid) return null;
+    return {
+      idx,
+      point,
+      label,
+      onFront: Boolean(point.frontier || point.onFront),
+      px: { x: xPx, y: yPx },
+      paper: {
+        x: (xPx - xa._offset) / xa._length,
+        y: 1 - (yPx - ya._offset) / ya._length,
+      },
+      size: estimateLabelSize(label),
+    };
+  }).filter(Boolean);
+
+  const directions = Array.from({ length: 24 }, (_, index) => {
+    const angle = -Math.PI / 2 + index * Math.PI / 12;
+    const ux = Math.cos(angle);
+    const uy = Math.sin(angle);
+    return {
+      ux,
+      uy,
+      xa: ux > 0.18 ? 'left' : ux < -0.18 ? 'right' : 'center',
+      ya: uy > 0.18 ? 'top' : uy < -0.18 ? 'bottom' : 'middle',
+    };
+  });
+  const radii = options.radii || [24, 32, 42, 54, 68, 84, 104, 128, 156, 188, 224, 264, 308, 356];
+
+  items.forEach(item => {
+    item.isolation = items.reduce((nearest, other) => {
+      if (other.idx === item.idx) return nearest;
+      return Math.min(nearest, Math.hypot(item.px.x - other.px.x, item.px.y - other.px.y));
+    }, Infinity);
+  });
+  items.sort((left, right) => {
+    if (left.onFront !== right.onFront) return left.onFront ? -1 : 1;
+    return right.isolation - left.isolation || left.label.localeCompare(right.label);
+  });
+
+  function labelBox(pointX, pointY, ax, ay, labelWidth, labelHeight, xanchor, yanchor) {
+    const anchorX = pointX + ax;
+    const anchorY = pointY + ay;
+    let left;
+    let right;
+    let top;
+    let bottom;
+    if (xanchor === 'left') { left = anchorX; right = anchorX + labelWidth; }
+    else if (xanchor === 'right') { right = anchorX; left = anchorX - labelWidth; }
+    else { left = anchorX - labelWidth / 2; right = anchorX + labelWidth / 2; }
+    if (yanchor === 'top') { top = anchorY; bottom = anchorY + labelHeight; }
+    else if (yanchor === 'bottom') { bottom = anchorY; top = anchorY - labelHeight; }
+    else { top = anchorY - labelHeight / 2; bottom = anchorY + labelHeight / 2; }
+    return { left, right, top, bottom };
+  }
+  function overlapsLabels(box, placed, skipIndex) {
+    return placed.some((placedItem, index) => {
+      if (skipIndex != null && index === skipIndex) return false;
+      return !(box.right + labelPad < placedItem.box.left ||
+        box.left - labelPad > placedItem.box.right ||
+        box.bottom + labelPad < placedItem.box.top ||
+        box.top - labelPad > placedItem.box.bottom);
+    });
+  }
+  function markerPenalty(box, ownIndex) {
+    return items.reduce((penalty, item) => {
+      if (item.idx === ownIndex) return penalty;
+      const nearestX = clamp(item.px.x, box.left, box.right);
+      const nearestY = clamp(item.px.y, box.top, box.bottom);
+      const distance = Math.hypot(item.px.x - nearestX, item.px.y - nearestY);
+      return penalty + (distance < markerRadius ? (markerRadius - distance + 1) : 0);
+    }, 0);
+  }
+  function inBounds(box) {
+    return box.left >= 2 && box.right <= width - 2 && box.top >= 2 && box.bottom <= height - 2;
+  }
+  function spillCost(box) {
+    return Math.max(0, 2 - box.left) + Math.max(0, box.right - (width - 2)) +
+      Math.max(0, 2 - box.top) + Math.max(0, box.bottom - (height - 2));
+  }
+  function overlapArea(left, right) {
+    const widthOverlap = Math.max(0, Math.min(left.right, right.right) - Math.max(left.left, right.left));
+    const heightOverlap = Math.max(0, Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top));
+    return widthOverlap * heightOverlap;
+  }
+  function findPlacement(item, placed, skipIndex) {
+    const candidates = [];
+    for (const radius of radii) {
+      for (const direction of directions) {
+        const ax = direction.ux * radius;
+        const ay = direction.uy * radius;
+        const box = labelBox(item.px.x, item.px.y, ax, ay, item.size.wPx, item.size.hPx, direction.xa, direction.ya);
+        if (inBounds(box) && !overlapsLabels(box, placed, skipIndex) && markerPenalty(box, item.idx) === 0) {
+          return { ax, ay, xa: direction.xa, ya: direction.ya, box, score: radius };
+        }
+        const labelOverlap = placed.reduce((total, placedItem, index) => {
+          if (skipIndex != null && index === skipIndex) return total;
+          return total + overlapArea(box, placedItem.box);
+        }, 0);
+        candidates.push({
+          ax, ay, xa: direction.xa, ya: direction.ya, box,
+          score: labelOverlap * 1000 + markerPenalty(box, item.idx) * 100 + spillCost(box) * 10 + radius,
+        });
+      }
+    }
+    candidates.sort((left, right) => left.score - right.score);
+    return candidates[0];
+  }
+
+  const placed = [];
+  items.forEach(item => placed.push({ item, ...findPlacement(item, placed, null) }));
+  for (let pass = 0; pass < 6; pass += 1) {
+    let changed = false;
+    for (let index = 0; index < placed.length; index += 1) {
+      const current = placed[index];
+      if (!overlapsLabels(current.box, placed, index) && markerPenalty(current.box, current.item.idx) === 0) continue;
+      const next = findPlacement(current.item, placed, index);
+      if (next.ax !== current.ax || next.ay !== current.ay || next.xa !== current.xa || next.ya !== current.ya) changed = true;
+      placed[index] = { item: current.item, ...next };
+    }
+    if (!changed) break;
+  }
+
+  return placed.map(({ item, ax, ay, xa, ya }) => ({
+    x: item.paper.x,
+    y: item.paper.y,
+    ax,
+    ay,
+    xref: 'paper',
+    yref: 'paper',
+    axref: 'pixel',
+    ayref: 'pixel',
+    text: item.label,
+    showarrow: true,
+    arrowhead: 0,
+    arrowsize: 0.95,
+    arrowwidth: 1.3,
+    arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
+    standoff: 0,
+    startstandoff: 0,
+    align: xa === 'right' ? 'right' : xa === 'center' ? 'center' : 'left',
+    xanchor: xa,
+    yanchor: ya,
+    font: {
+      size: fontSize,
+      color: item.onFront ? frontierColor : textColor,
+      family: 'IBM Plex Sans, sans-serif',
+    },
+    bgcolor: 'rgba(0,0,0,0)',
+    bordercolor: 'rgba(0,0,0,0)',
+    borderwidth: 0,
+    borderpad: 0,
+    captureevents: false,
+  }));
+}
+
+// Plotly's text metrics can differ from the estimates above after the web font
+// loads. Measure the rendered SVG labels once and repack only the labels that
+// still collide, keeping the normal point-adjacent placement whenever possible.
+async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
+  options = options || {};
+  if (!gd || !Array.isArray(annotations) || !annotations.length || typeof Plotly === 'undefined') return annotations;
+
+  const normalize = value => String(value == null ? '' : value)
+    .replace(/<br\s*\/?\s*>/gi, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const annotationIndex = new Map();
+  annotations.forEach((annotation, index) => annotationIndex.set(normalize(annotation.text), index));
+  const readBoxes = () => [...gd.querySelectorAll('g.annotation text')]
+    .map(node => {
+      const index = annotationIndex.get(normalize(node.textContent));
+      if (index == null) return null;
+      const rect = node.getBoundingClientRect();
+      return { index, rect: { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom } };
+    })
+    .filter(item => item && item.rect.right > item.rect.left && item.rect.bottom > item.rect.top);
+  const intersects = (left, right, padding) => left.left < right.right + padding && left.right > right.left - padding &&
+    left.top < right.bottom + padding && left.bottom > right.top - padding;
+  const overlapPairs = boxes => {
+    const pairs = [];
+    for (let left = 0; left < boxes.length; left += 1) {
+      for (let right = left + 1; right < boxes.length; right += 1) {
+        if (intersects(boxes[left].rect, boxes[right].rect, Number(options.repairPad) || 1)) {
+          pairs.push([boxes[left], boxes[right]]);
+        }
+      }
+    }
+    return pairs;
+  };
+  const waitForPaint = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  let boxes = readBoxes();
+  if (boxes.length < annotations.length) return annotations;
+  const maxPasses = Number(options.repairPasses) || 5;
+  const directions = Array.from({ length: 16 }, (_, index) => {
+    const angle = -Math.PI / 2 + index * Math.PI / 8;
+    return { x: Math.cos(angle), y: Math.sin(angle) };
+  });
+  const distances = [0, 32, 64, 96, 132, 174, 224, 284, 352];
+
+  for (let pass = 0; pass < maxPasses; pass += 1) {
+    const pairs = overlapPairs(boxes);
+    if (!pairs.length) return annotations;
+    const conflicting = new Set(pairs.flatMap(pair => pair.map(item => item.index)));
+    const rect = gd.getBoundingClientRect();
+    const edge = Number(options.repairEdge) || 6;
+    const bounds = { left: rect.left + edge, right: rect.right - edge, top: rect.top + edge, bottom: rect.bottom - (Number(options.repairBottom) || 58) };
+    if (bounds.bottom <= bounds.top) bounds.bottom = rect.bottom - edge;
+    const boxesByIndex = new Map(boxes.map(item => [item.index, item]));
+    const maxLabelWidth = Math.max(...boxes.map(item => item.rect.right - item.rect.left));
+    const naturalColumns = Math.ceil(Math.sqrt(boxes.length * (bounds.right - bounds.left) / Math.max(1, bounds.bottom - bounds.top)));
+    const widthColumns = Math.max(2, Math.floor((bounds.right - bounds.left + 10) / Math.max(1, maxLabelWidth + 10)));
+    const gridColumns = Number(options.repairColumns) || Math.min(8, Math.max(2, Math.min(naturalColumns, widthColumns)));
+    const gridRows = Math.ceil(boxes.length / gridColumns);
+    const cellWidth = (bounds.right - bounds.left) / gridColumns;
+    const cellHeight = (bounds.bottom - bounds.top) / gridRows;
+    function gridCandidates(box) {
+      const candidates = [];
+      for (let row = 0; row < gridRows; row += 1) {
+        for (let column = 0; column < gridColumns; column += 1) {
+          const cellLeft = bounds.left + column * cellWidth;
+          const cellTop = bounds.top + row * cellHeight;
+          candidates.push({
+            left: cellLeft + Math.max(2, (cellWidth - (box.right - box.left)) / 2),
+            top: cellTop + Math.max(2, (cellHeight - (box.bottom - box.top)) / 2),
+          });
+        }
+      }
+      return candidates;
+    }
+    function candidatesFor(box) {
+      const width = box.rect.right - box.rect.left;
+      const height = box.rect.bottom - box.rect.top;
+      const candidates = [{ left: box.rect.left, top: box.rect.top }];
+      directions.forEach(direction => distances.slice(1).forEach(distance => candidates.push({
+        left: box.rect.left + direction.x * distance,
+        top: box.rect.top + direction.y * distance,
+      })));
+      gridCandidates({ right: box.rect.left + width, bottom: box.rect.top + height }).forEach(candidate => candidates.push(candidate));
+      return candidates.map(candidate => ({
+        left: candidate.left,
+        right: candidate.left + width,
+        top: candidate.top,
+        bottom: candidate.top + height,
+      }));
+    }
+    function inBounds(candidate) {
+      return candidate.left >= bounds.left && candidate.right <= bounds.right && candidate.top >= bounds.top && candidate.bottom <= bounds.bottom;
+    }
+    function place(items, reserved) {
+      const placed = reserved.map(item => item.rect);
+      const targets = new Map();
+      for (const item of items) {
+        const candidate = candidatesFor(item).find(box => inBounds(box) && !placed.some(other => intersects(box, other, Number(options.repairPad) || 1)));
+        if (!candidate) return null;
+        targets.set(item.index, candidate);
+        placed.push(candidate);
+      }
+      return targets;
+    }
+
+    const movable = boxes.filter(item => conflicting.has(item.index)).sort((left, right) => left.index - right.index);
+    const reserved = boxes.filter(item => !conflicting.has(item.index));
+    let targets = place(movable, reserved);
+    if (!targets || targets.size !== movable.length) {
+      targets = place(boxes.slice().sort((left, right) => left.index - right.index), []);
+    }
+    if (!targets) return annotations;
+    targets.forEach((target, index) => {
+      const current = boxesByIndex.get(index);
+      if (!current) return;
+      const annotation = annotations[index];
+      annotation.ax = Number(annotation.ax) || 0;
+      annotation.ay = Number(annotation.ay) || 0;
+      annotation.ax += target.left - current.rect.left;
+      annotation.ay += target.top - current.rect.top;
+    });
+    await Plotly.relayout(gd, { annotations });
+    await waitForPaint();
+    boxes = readBoxes();
+    if (boxes.length < annotations.length) return annotations;
+  }
+  return annotations;
+}
+
+</script>
 </head>
 <body>
 <nav class="vr-site-header" data-vr-shared-header="true">
@@ -185,165 +518,18 @@ function paretoFrontAgents(rows){
 function formatCaLabel(row){
  return `${row.agent}<br>+ ${row.model}`;
 }
-function dataToPaperCA(cost, score, gd){
- const xa=gd._fullLayout.xaxis, ya=gd._fullLayout.yaxis;
- const xPx=xa._offset+xa.l2p(Math.log10(cost));
- const yPx=ya._offset+ya.l2p(score);
- return { x:(xPx-xa._offset)/xa._length, y:1-(yPx-ya._offset)/ya._length, xPx, yPx };
-}
-function estimateCaLabelSize(row, gd){
- const w=gd._fullLayout.width||1100;
- const h=gd._fullLayout.height||560;
- const fontSize=8;
- const lines=formatCaLabel(row).split('<br>');
- const maxChars=Math.max(...lines.map(s=>s.length));
- const wPx=maxChars*fontSize*0.62+10;
- const hPx=fontSize*1.45*lines.length+6;
- return { wPx, hPx, w:wPx/w, h:hPx/h };
-}
 function buildCaLabelAnnotations(frontierIds, labelIds, gd){
- const dark=isDark();
- const textColor=dark?'#e2e8f0':'#0f172a';
- const frontierColor=dark?'#34d399':'#047857';
- const arrowMuted=dark?'rgba(148,163,184,.75)':'rgba(71,85,105,.7)';
- const arrowFrontier=dark?'rgba(52,211,153,.95)':'rgba(4,120,87,.85)';
- const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
- const layout=gd._fullLayout;
- const w=layout.width||1100, h=layout.height||560;
- const MARKER_R=12, LABEL_PAD=8;
- const DIRS=[
-  {ux:0,uy:-1,xa:'center',ya:'bottom'},
-  {ux:0.707,uy:-0.707,xa:'left',ya:'bottom'},
-  {ux:1,uy:0,xa:'left',ya:'middle'},
-  {ux:0.707,uy:0.707,xa:'left',ya:'top'},
-  {ux:0,uy:1,xa:'center',ya:'top'},
-  {ux:-0.707,uy:0.707,xa:'right',ya:'top'},
-  {ux:-1,uy:0,xa:'right',ya:'middle'},
-  {ux:-0.707,uy:-0.707,xa:'right',ya:'bottom'},
-  {ux:0.383,uy:-0.924,xa:'left',ya:'bottom'},
-  {ux:0.924,uy:-0.383,xa:'left',ya:'bottom'},
-  {ux:0.924,uy:0.383,xa:'left',ya:'top'},
-  {ux:0.383,uy:0.924,xa:'left',ya:'top'},
-  {ux:-0.383,uy:0.924,xa:'right',ya:'top'},
-  {ux:-0.924,uy:0.383,xa:'right',ya:'top'},
-  {ux:-0.924,uy:-0.383,xa:'right',ya:'bottom'},
-  {ux:-0.383,uy:-0.924,xa:'right',ya:'bottom'}
- ];
- const RADII=[28,34,40,48,56,68,82,98,116];
- // All dots are obstacles so labels never cover unlabeled markers.
- const allMarkers=AGENTS.map((row,idx)=>{
-  const pt=dataToPaperCA(row.cost,row.overall,gd);
-  return { idx, label:row.label, px:{x:pt.xPx,y:pt.yPx} };
- });
- const labeled=AGENTS.filter(a=>labelIds.has(a.label));
- const items=labeled.map((row,idx)=>{
-  const pt=dataToPaperCA(row.cost,row.overall,gd);
-  const size=estimateCaLabelSize(row,gd);
-  return {idx,row,pt,size,px:{x:pt.xPx,y:pt.yPx},onFront:frontierIds.has(row.label)};
- });
- items.forEach(it=>{
-  let nearest=Infinity;
-  items.forEach(other=>{
-   if(other.idx===it.idx) return;
-   nearest=Math.min(nearest, Math.hypot(it.px.x-other.px.x, it.px.y-other.px.y));
-  });
-  it.isolation=nearest;
- });
- items.sort((a,b)=>{
-  if(a.onFront!==b.onFront) return a.onFront?-1:1;
-  return b.isolation-a.isolation||b.row.overall-a.row.overall||a.row.cost-b.row.cost;
- });
- function labelBox(ptX,ptY,ax,ay,lw,lh,xanchor,yanchor){
-  const axX=ptX+ax, ayY=ptY+ay;
-  let left,right,top,bottom;
-  if(xanchor==='left'){left=axX;right=axX+lw;}
-  else if(xanchor==='right'){right=axX;left=axX-lw;}
-  else {left=axX-lw/2;right=axX+lw/2;}
-  if(yanchor==='top'){top=ayY;bottom=ayY+lh;}
-  else if(yanchor==='bottom'){bottom=ayY;top=ayY-lh;}
-  else {top=ayY-lh/2;bottom=ayY+lh/2;}
-  return {left,right,top,bottom};
- }
- function overlapsLabels(box,placed,skipIdx){
-  return placed.some((p,i)=>{
-   if(skipIdx!=null&&i===skipIdx) return false;
-   return !(box.right+LABEL_PAD<p.box.left||box.left-LABEL_PAD>p.box.right||box.bottom+LABEL_PAD<p.box.top||box.top-LABEL_PAD>p.box.bottom);
-  });
- }
- function hitsOtherMarkers(box, ownLabel){
-  return allMarkers.some(m=>{
-   if(m.label===ownLabel) return false;
-   const cx=clamp(m.px.x,box.left,box.right), cy=clamp(m.px.y,box.top,box.bottom);
-   const dx=m.px.x-cx, dy=m.px.y-cy;
-   return dx*dx+dy*dy<MARKER_R*MARKER_R;
-  });
- }
- function inBounds(box){
-  return box.left>=2&&box.right<=w-2&&box.top>=2&&box.bottom<=h-2;
- }
- function spillCost(box){
-  let c=0;
-  if(box.left<2) c+=2-box.left;
-  if(box.right>w-2) c+=box.right-(w-2);
-  if(box.top<2) c+=2-box.top;
-  if(box.bottom>h-2) c+=box.bottom-(h-2);
-  return c;
- }
- function findPlacement(item, placed, skipIdx){
-  const lw=item.size.wPx, lh=item.size.hPx;
-  const ptX=item.px.x, ptY=item.px.y;
-  let best=null;
-  for(const r of RADII){
-   for(const d of DIRS){
-    const ax=d.ux*r, ay=d.uy*r;
-    const box=labelBox(ptX,ptY,ax,ay,lw,lh,d.xa,d.ya);
-    if(!inBounds(box)) continue;
-    if(overlapsLabels(box,placed,skipIdx)||hitsOtherMarkers(box,item.row.label)) continue;
-    const score=r+Math.abs(d.ux)*0.35+Math.abs(d.uy)*0.35;
-    if(!best||score<best.score) best={ax,ay,xa:d.xa,ya:d.ya,box,score};
-   }
-   if(best&&best.score<=r+4) break;
-  }
-  if(!best){
-   for(const r of RADII){
-    for(const d of DIRS){
-     const ax=d.ux*r, ay=d.uy*r;
-     const box=labelBox(ptX,ptY,ax,ay,lw,lh,d.xa,d.ya);
-     if(overlapsLabels(box,placed,skipIdx)||hitsOtherMarkers(box,item.row.label)) continue;
-     const score=r*2+spillCost(box)*5;
-     if(!best||score<best.score) best={ax,ay,xa:d.xa,ya:d.ya,box,score};
-    }
-   }
-  }
-  if(!best){
-   const d=DIRS[0], r=48, ax=d.ux*r, ay=d.uy*r;
-   best={ax,ay,xa:d.xa,ya:d.ya,box:labelBox(ptX,ptY,ax,ay,lw,lh,d.xa,d.ya),score:999};
-  }
-  return best;
- }
- const placed=[];
- items.forEach(item=>placed.push({item,...findPlacement(item,placed,null)}));
- for(let pass=0; pass<3; pass++){
-  for(let i=0; i<placed.length; i++){
-   const cur=placed[i];
-   const conflict=overlapsLabels(cur.box,placed,i)||hitsOtherMarkers(cur.box,cur.item.row.label);
-   if(!conflict) continue;
-   placed[i]={item:cur.item,...findPlacement(cur.item,placed,i)};
-  }
- }
- return placed.map(({item,ax,ay,xa,ya})=>({
-  x:item.pt.x, y:item.pt.y, ax, ay,
-  xref:'paper', yref:'paper', axref:'pixel', ayref:'pixel',
-  text:formatCaLabel(item.row),
-  showarrow:true, arrowhead:0, arrowsize:0.95, arrowwidth:1.4,
-  arrowcolor:item.onFront?arrowFrontier:arrowMuted,
-  standoff:0, startstandoff:0,
-  xanchor:xa, yanchor:ya,
-  align:xa==='right'?'right':xa==='center'?'center':'left',
-  font:{size:8,color:item.onFront?frontierColor:textColor,family:'IBM Plex Sans, sans-serif'},
-  bgcolor:'rgba(0,0,0,0)', bordercolor:'rgba(0,0,0,0)', borderwidth:0, borderpad:0,
-  captureevents:false
- }));
+  return buildCollisionSafeLabelAnnotations(
+   AGENTS.filter(row => labelIds.has(row.label)).map(row => ({
+    id: row.label,
+    label: formatCaLabel(row),
+    x: row.cost,
+    y: row.overall,
+    frontier: frontierIds.has(row.label),
+   })),
+   gd,
+   { fontSize:8, markerRadius:12, safety:1.55, labelPad:10, radii:[28,38,50,64,82,104,132,164,202,246,296,352,414] }
+  );
 }
 function draw(){
  const dark=isDark();
@@ -396,7 +582,8 @@ function draw(){
   annotations:[]
  }, {displayModeBar:false, responsive:true}).then(()=>{
   const gd=document.getElementById('chart');
-  return Plotly.relayout(gd,{ annotations: buildCaLabelAnnotations(frontierIds, labelIds, gd) });
+  const annotations = buildCaLabelAnnotations(frontierIds, labelIds, gd);
+  return Plotly.relayout(gd,{ annotations }).then(() => repairCollisionSafeLabelAnnotations(gd, annotations, { repairPasses: 8, repairBottom: 44 }));
  });
 }
 render();

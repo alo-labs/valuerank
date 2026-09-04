@@ -97,6 +97,339 @@
 .vr-sort-indicator { display: inline-block; margin-left: 4px; color: var(--text-dim, #94a3b8); font-size: .9em; }
 
 </style>
+<script id="site-chart-labels">
+
+// Shared collision-safe model-label placement for Plotly scatter charts.
+// Callers pass data-space points; the helper handles linear and logarithmic axes.
+function buildCollisionSafeLabelAnnotations(points, gd, options) {
+  options = options || {};
+  if (!gd || !gd._fullLayout || !Array.isArray(points) || !points.length) return [];
+
+  const layout = gd._fullLayout;
+  const xa = layout[options.xaxis || 'xaxis'];
+  const ya = layout[options.yaxis || 'yaxis'];
+  if (!xa || !ya || !xa._length || !ya._length) return [];
+
+  const width = layout.width || 1100;
+  const height = layout.height || 520;
+  const fontSize = Number(options.fontSize) || 9;
+  const safety = Number(options.safety) || 1.35;
+  const markerRadius = Number(options.markerRadius) || 11;
+  const labelPad = Number(options.labelPad) || Math.max(6, fontSize * 0.9);
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const textColor = options.textColor || (dark ? '#e2e8f0' : '#0f172a');
+  const frontierColor = options.frontierColor || (dark ? '#34d399' : '#047857');
+  const arrowMuted = options.arrowMuted || (dark ? 'rgba(148,163,184,.75)' : 'rgba(71,85,105,.7)');
+  const arrowFrontier = options.arrowFrontier || (dark ? 'rgba(52,211,153,.95)' : 'rgba(4,120,87,.85)');
+  const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+  const axisCoordinate = (axis, value) => {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric) || (axis.type === 'log' && numeric <= 0)) return NaN;
+    return axis.type === 'log' ? axis.l2p(Math.log10(numeric)) : axis.l2p(numeric);
+  };
+  const labelLines = value => String(value == null ? '' : value)
+    .replace(/<br\s*\/?\s*>/gi, '\n')
+    .replace(/<[^>]*>/g, '')
+    .split('\n');
+  const estimateLabelSize = label => {
+    const lines = labelLines(label);
+    const maxChars = Math.max(1, ...lines.map(line => line.length));
+    const wPx = Math.ceil((maxChars * fontSize * 0.68 + 12) * safety);
+    const hPx = Math.ceil((lines.length * fontSize * 1.45 + 8) * safety);
+    return { wPx, hPx };
+  };
+
+  const items = points.map((point, idx) => {
+    const label = point.label == null ? (point.name == null ? '' : point.name) : point.label;
+    const xPx = xa._offset + axisCoordinate(xa, point.x);
+    const yPx = ya._offset + axisCoordinate(ya, point.y);
+    const valid = label !== '' && Number.isFinite(xPx) && Number.isFinite(yPx);
+    if (!valid) return null;
+    return {
+      idx,
+      point,
+      label,
+      onFront: Boolean(point.frontier || point.onFront),
+      px: { x: xPx, y: yPx },
+      paper: {
+        x: (xPx - xa._offset) / xa._length,
+        y: 1 - (yPx - ya._offset) / ya._length,
+      },
+      size: estimateLabelSize(label),
+    };
+  }).filter(Boolean);
+
+  const directions = Array.from({ length: 24 }, (_, index) => {
+    const angle = -Math.PI / 2 + index * Math.PI / 12;
+    const ux = Math.cos(angle);
+    const uy = Math.sin(angle);
+    return {
+      ux,
+      uy,
+      xa: ux > 0.18 ? 'left' : ux < -0.18 ? 'right' : 'center',
+      ya: uy > 0.18 ? 'top' : uy < -0.18 ? 'bottom' : 'middle',
+    };
+  });
+  const radii = options.radii || [24, 32, 42, 54, 68, 84, 104, 128, 156, 188, 224, 264, 308, 356];
+
+  items.forEach(item => {
+    item.isolation = items.reduce((nearest, other) => {
+      if (other.idx === item.idx) return nearest;
+      return Math.min(nearest, Math.hypot(item.px.x - other.px.x, item.px.y - other.px.y));
+    }, Infinity);
+  });
+  items.sort((left, right) => {
+    if (left.onFront !== right.onFront) return left.onFront ? -1 : 1;
+    return right.isolation - left.isolation || left.label.localeCompare(right.label);
+  });
+
+  function labelBox(pointX, pointY, ax, ay, labelWidth, labelHeight, xanchor, yanchor) {
+    const anchorX = pointX + ax;
+    const anchorY = pointY + ay;
+    let left;
+    let right;
+    let top;
+    let bottom;
+    if (xanchor === 'left') { left = anchorX; right = anchorX + labelWidth; }
+    else if (xanchor === 'right') { right = anchorX; left = anchorX - labelWidth; }
+    else { left = anchorX - labelWidth / 2; right = anchorX + labelWidth / 2; }
+    if (yanchor === 'top') { top = anchorY; bottom = anchorY + labelHeight; }
+    else if (yanchor === 'bottom') { bottom = anchorY; top = anchorY - labelHeight; }
+    else { top = anchorY - labelHeight / 2; bottom = anchorY + labelHeight / 2; }
+    return { left, right, top, bottom };
+  }
+  function overlapsLabels(box, placed, skipIndex) {
+    return placed.some((placedItem, index) => {
+      if (skipIndex != null && index === skipIndex) return false;
+      return !(box.right + labelPad < placedItem.box.left ||
+        box.left - labelPad > placedItem.box.right ||
+        box.bottom + labelPad < placedItem.box.top ||
+        box.top - labelPad > placedItem.box.bottom);
+    });
+  }
+  function markerPenalty(box, ownIndex) {
+    return items.reduce((penalty, item) => {
+      if (item.idx === ownIndex) return penalty;
+      const nearestX = clamp(item.px.x, box.left, box.right);
+      const nearestY = clamp(item.px.y, box.top, box.bottom);
+      const distance = Math.hypot(item.px.x - nearestX, item.px.y - nearestY);
+      return penalty + (distance < markerRadius ? (markerRadius - distance + 1) : 0);
+    }, 0);
+  }
+  function inBounds(box) {
+    return box.left >= 2 && box.right <= width - 2 && box.top >= 2 && box.bottom <= height - 2;
+  }
+  function spillCost(box) {
+    return Math.max(0, 2 - box.left) + Math.max(0, box.right - (width - 2)) +
+      Math.max(0, 2 - box.top) + Math.max(0, box.bottom - (height - 2));
+  }
+  function overlapArea(left, right) {
+    const widthOverlap = Math.max(0, Math.min(left.right, right.right) - Math.max(left.left, right.left));
+    const heightOverlap = Math.max(0, Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top));
+    return widthOverlap * heightOverlap;
+  }
+  function findPlacement(item, placed, skipIndex) {
+    const candidates = [];
+    for (const radius of radii) {
+      for (const direction of directions) {
+        const ax = direction.ux * radius;
+        const ay = direction.uy * radius;
+        const box = labelBox(item.px.x, item.px.y, ax, ay, item.size.wPx, item.size.hPx, direction.xa, direction.ya);
+        if (inBounds(box) && !overlapsLabels(box, placed, skipIndex) && markerPenalty(box, item.idx) === 0) {
+          return { ax, ay, xa: direction.xa, ya: direction.ya, box, score: radius };
+        }
+        const labelOverlap = placed.reduce((total, placedItem, index) => {
+          if (skipIndex != null && index === skipIndex) return total;
+          return total + overlapArea(box, placedItem.box);
+        }, 0);
+        candidates.push({
+          ax, ay, xa: direction.xa, ya: direction.ya, box,
+          score: labelOverlap * 1000 + markerPenalty(box, item.idx) * 100 + spillCost(box) * 10 + radius,
+        });
+      }
+    }
+    candidates.sort((left, right) => left.score - right.score);
+    return candidates[0];
+  }
+
+  const placed = [];
+  items.forEach(item => placed.push({ item, ...findPlacement(item, placed, null) }));
+  for (let pass = 0; pass < 6; pass += 1) {
+    let changed = false;
+    for (let index = 0; index < placed.length; index += 1) {
+      const current = placed[index];
+      if (!overlapsLabels(current.box, placed, index) && markerPenalty(current.box, current.item.idx) === 0) continue;
+      const next = findPlacement(current.item, placed, index);
+      if (next.ax !== current.ax || next.ay !== current.ay || next.xa !== current.xa || next.ya !== current.ya) changed = true;
+      placed[index] = { item: current.item, ...next };
+    }
+    if (!changed) break;
+  }
+
+  return placed.map(({ item, ax, ay, xa, ya }) => ({
+    x: item.paper.x,
+    y: item.paper.y,
+    ax,
+    ay,
+    xref: 'paper',
+    yref: 'paper',
+    axref: 'pixel',
+    ayref: 'pixel',
+    text: item.label,
+    showarrow: true,
+    arrowhead: 0,
+    arrowsize: 0.95,
+    arrowwidth: 1.3,
+    arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
+    standoff: 0,
+    startstandoff: 0,
+    align: xa === 'right' ? 'right' : xa === 'center' ? 'center' : 'left',
+    xanchor: xa,
+    yanchor: ya,
+    font: {
+      size: fontSize,
+      color: item.onFront ? frontierColor : textColor,
+      family: 'IBM Plex Sans, sans-serif',
+    },
+    bgcolor: 'rgba(0,0,0,0)',
+    bordercolor: 'rgba(0,0,0,0)',
+    borderwidth: 0,
+    borderpad: 0,
+    captureevents: false,
+  }));
+}
+
+// Plotly's text metrics can differ from the estimates above after the web font
+// loads. Measure the rendered SVG labels once and repack only the labels that
+// still collide, keeping the normal point-adjacent placement whenever possible.
+async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
+  options = options || {};
+  if (!gd || !Array.isArray(annotations) || !annotations.length || typeof Plotly === 'undefined') return annotations;
+
+  const normalize = value => String(value == null ? '' : value)
+    .replace(/<br\s*\/?\s*>/gi, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const annotationIndex = new Map();
+  annotations.forEach((annotation, index) => annotationIndex.set(normalize(annotation.text), index));
+  const readBoxes = () => [...gd.querySelectorAll('g.annotation text')]
+    .map(node => {
+      const index = annotationIndex.get(normalize(node.textContent));
+      if (index == null) return null;
+      const rect = node.getBoundingClientRect();
+      return { index, rect: { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom } };
+    })
+    .filter(item => item && item.rect.right > item.rect.left && item.rect.bottom > item.rect.top);
+  const intersects = (left, right, padding) => left.left < right.right + padding && left.right > right.left - padding &&
+    left.top < right.bottom + padding && left.bottom > right.top - padding;
+  const overlapPairs = boxes => {
+    const pairs = [];
+    for (let left = 0; left < boxes.length; left += 1) {
+      for (let right = left + 1; right < boxes.length; right += 1) {
+        if (intersects(boxes[left].rect, boxes[right].rect, Number(options.repairPad) || 1)) {
+          pairs.push([boxes[left], boxes[right]]);
+        }
+      }
+    }
+    return pairs;
+  };
+  const waitForPaint = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  let boxes = readBoxes();
+  if (boxes.length < annotations.length) return annotations;
+  const maxPasses = Number(options.repairPasses) || 5;
+  const directions = Array.from({ length: 16 }, (_, index) => {
+    const angle = -Math.PI / 2 + index * Math.PI / 8;
+    return { x: Math.cos(angle), y: Math.sin(angle) };
+  });
+  const distances = [0, 32, 64, 96, 132, 174, 224, 284, 352];
+
+  for (let pass = 0; pass < maxPasses; pass += 1) {
+    const pairs = overlapPairs(boxes);
+    if (!pairs.length) return annotations;
+    const conflicting = new Set(pairs.flatMap(pair => pair.map(item => item.index)));
+    const rect = gd.getBoundingClientRect();
+    const edge = Number(options.repairEdge) || 6;
+    const bounds = { left: rect.left + edge, right: rect.right - edge, top: rect.top + edge, bottom: rect.bottom - (Number(options.repairBottom) || 58) };
+    if (bounds.bottom <= bounds.top) bounds.bottom = rect.bottom - edge;
+    const boxesByIndex = new Map(boxes.map(item => [item.index, item]));
+    const maxLabelWidth = Math.max(...boxes.map(item => item.rect.right - item.rect.left));
+    const naturalColumns = Math.ceil(Math.sqrt(boxes.length * (bounds.right - bounds.left) / Math.max(1, bounds.bottom - bounds.top)));
+    const widthColumns = Math.max(2, Math.floor((bounds.right - bounds.left + 10) / Math.max(1, maxLabelWidth + 10)));
+    const gridColumns = Number(options.repairColumns) || Math.min(8, Math.max(2, Math.min(naturalColumns, widthColumns)));
+    const gridRows = Math.ceil(boxes.length / gridColumns);
+    const cellWidth = (bounds.right - bounds.left) / gridColumns;
+    const cellHeight = (bounds.bottom - bounds.top) / gridRows;
+    function gridCandidates(box) {
+      const candidates = [];
+      for (let row = 0; row < gridRows; row += 1) {
+        for (let column = 0; column < gridColumns; column += 1) {
+          const cellLeft = bounds.left + column * cellWidth;
+          const cellTop = bounds.top + row * cellHeight;
+          candidates.push({
+            left: cellLeft + Math.max(2, (cellWidth - (box.right - box.left)) / 2),
+            top: cellTop + Math.max(2, (cellHeight - (box.bottom - box.top)) / 2),
+          });
+        }
+      }
+      return candidates;
+    }
+    function candidatesFor(box) {
+      const width = box.rect.right - box.rect.left;
+      const height = box.rect.bottom - box.rect.top;
+      const candidates = [{ left: box.rect.left, top: box.rect.top }];
+      directions.forEach(direction => distances.slice(1).forEach(distance => candidates.push({
+        left: box.rect.left + direction.x * distance,
+        top: box.rect.top + direction.y * distance,
+      })));
+      gridCandidates({ right: box.rect.left + width, bottom: box.rect.top + height }).forEach(candidate => candidates.push(candidate));
+      return candidates.map(candidate => ({
+        left: candidate.left,
+        right: candidate.left + width,
+        top: candidate.top,
+        bottom: candidate.top + height,
+      }));
+    }
+    function inBounds(candidate) {
+      return candidate.left >= bounds.left && candidate.right <= bounds.right && candidate.top >= bounds.top && candidate.bottom <= bounds.bottom;
+    }
+    function place(items, reserved) {
+      const placed = reserved.map(item => item.rect);
+      const targets = new Map();
+      for (const item of items) {
+        const candidate = candidatesFor(item).find(box => inBounds(box) && !placed.some(other => intersects(box, other, Number(options.repairPad) || 1)));
+        if (!candidate) return null;
+        targets.set(item.index, candidate);
+        placed.push(candidate);
+      }
+      return targets;
+    }
+
+    const movable = boxes.filter(item => conflicting.has(item.index)).sort((left, right) => left.index - right.index);
+    const reserved = boxes.filter(item => !conflicting.has(item.index));
+    let targets = place(movable, reserved);
+    if (!targets || targets.size !== movable.length) {
+      targets = place(boxes.slice().sort((left, right) => left.index - right.index), []);
+    }
+    if (!targets) return annotations;
+    targets.forEach((target, index) => {
+      const current = boxesByIndex.get(index);
+      if (!current) return;
+      const annotation = annotations[index];
+      annotation.ax = Number(annotation.ax) || 0;
+      annotation.ay = Number(annotation.ay) || 0;
+      annotation.ax += target.left - current.rect.left;
+      annotation.ay += target.top - current.rect.top;
+    });
+    await Plotly.relayout(gd, { annotations });
+    await waitForPaint();
+    boxes = readBoxes();
+    if (boxes.length < annotations.length) return annotations;
+  }
+  return annotations;
+}
+
+</script>
 </head>
 <body>
   <nav class="vr-site-header" data-vr-shared-header="true">
@@ -201,11 +534,23 @@
       const custom = row => [row.baseModel,row.agent,row.resolutionRatePct,row.uncertaintyPct,row.tokens,row.rankLabel,row.model];
       const hover = '<b>%{customdata[0]}</b><br>Resolution: %{customdata[2]:.1f}% ± %{customdata[3]:.1f}%<br>Cost: $%{x:,.0f}<br>Agent: %{customdata[1]}<br>Tokens: %{customdata[4]}<br>Rank: %{customdata[5]}<br>Variant: %{customdata[6]}<extra></extra>';
       const traces = [
-        {x:dominated.map(row=>row.costUsd), y:dominated.map(row=>row.resolutionRatePct), mode:'markers+text', type:'scatter', name:'Official rows', text:dominated.map(row=>row.baseModel), textposition:'top center', textfont:{size:9,color:'#64748b'}, cliponaxis:false, marker:{size:11,color:'#a78bfa',opacity:.65}, customdata:dominated.map(custom), hovertemplate:hover},
-        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'markers+text', type:'scatter', name:'Pareto frontier', text:frontier.map(row=>row.baseModel), textposition:'top center', textfont:{size:9,color:'#047857'}, cliponaxis:false, marker:{size:15,color:'#10b981',line:{width:2,color:isDark()?'#064e3b':'#ecfdf5'}}, customdata:frontier.map(custom), hovertemplate:hover.replace('<extra></extra>','<extra>Frontier</extra>')},
+        {x:dominated.map(row=>row.costUsd), y:dominated.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Official rows', marker:{size:11,color:'#a78bfa',opacity:.65}, customdata:dominated.map(custom), hovertemplate:hover},
+        {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'markers', type:'scatter', name:'Pareto frontier', marker:{size:15,color:'#10b981',line:{width:2,color:isDark()?'#064e3b':'#ecfdf5'}}, customdata:frontier.map(custom), hovertemplate:hover.replace('<extra></extra>','<extra>Frontier</extra>')},
         {x:frontier.map(row=>row.costUsd), y:frontier.map(row=>row.resolutionRatePct), mode:'lines', type:'scatter', name:'frontier-curve', line:{shape:'spline',dash:'dot',color:'#94a3b8',width:2}, hoverinfo:'skip', showlegend:false},
       ];
-      Plotly.newPlot('chart', traces, layout(), PLOTLY_CONFIG);
+      Plotly.newPlot('chart', traces, layout(), PLOTLY_CONFIG).then(() => {
+        const gd = document.getElementById('chart');
+        const frontierIds = new Set(frontier.map(row => row.model));
+        const points = ENTRIES.map(row => ({
+          id: row.model,
+          label: row.baseModel,
+          x: row.costUsd,
+          y: row.resolutionRatePct,
+          frontier: frontierIds.has(row.model),
+        }));
+        const annotations = buildCollisionSafeLabelAnnotations(points, gd, { fontSize: 9, markerRadius: 12, safety: 1.35 });
+        return Plotly.relayout(gd, { annotations }).then(() => repairCollisionSafeLabelAnnotations(gd, annotations));
+      });
     }
     function updateTheme() { const el=document.getElementById('chart'); if (el && el.querySelector('.plotly')) Plotly.relayout(el, layout()); }
     document.getElementById('theme-toggle').addEventListener('click', () => { const next=isDark()?'':'dark'; document.documentElement.setAttribute('data-theme',next); localStorage.setItem('vr-theme',next?'dark':'light'); requestAnimationFrame(updateTheme); });

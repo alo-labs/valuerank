@@ -527,8 +527,7 @@ speed_function = r"""function renderBubble() {
   const maxCost = Math.max(...MODELS.map(m => m.evalCost));
   const traces = bubbleModels.map(m => ({
     x:[speedScore(m)], y:[m.qualityScore],
-    mode:'markers+text', name:m.shortName, text:[m.shortName],
-    textposition:'top center', textfont:{size:10, color:'#94a3b8'},
+    mode:'markers', name:m.shortName,
     marker:{size:10 + (m.evalCost / maxCost) * 30, color:TIER_COLORS[m.costTier] || '#64748b', opacity:0.8, line:{color:'rgba(255,255,255,0.15)',width:1}},
     hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',
     showlegend:false
@@ -549,7 +548,16 @@ speed_function = r"""function renderBubble() {
       {x:25, y:32, xref:'x', yref:'y', text:'Avoid', font:{color:'#6b7280',size:9}, showarrow:false},
     ]
   };
-  Plotly.newPlot('chart-bubble', traces, layout, PLOTLY_CONFIG);
+  Plotly.newPlot('chart-bubble', traces, layout, PLOTLY_CONFIG).then(() => {
+    const gd = document.getElementById('chart-bubble');
+    const modelAnnotations = buildCollisionSafeLabelAnnotations(
+      bubbleModels.map(m => ({ id: m.name, label: m.shortName, x: speedScore(m), y: m.qualityScore })),
+      gd,
+      { fontSize: 9, markerRadius: 24, safety: 1.35 },
+    );
+    const annotations = [...(layout.annotations || []), ...modelAnnotations];
+    return Plotly.relayout(gd, { annotations }).then(() => repairCollisionSafeLabelAnnotations(gd, modelAnnotations));
+  });
 }
 """
 html = replace_once(html, r"function renderBubble\(\) \{[\s\S]*?\n\}\n\n// ─+\n// CHART 6", speed_function + "\n// ─────────────────────────────────────────────\n// CHART 6", "speed chart")
@@ -569,15 +577,13 @@ livebench_function = r"""function renderLiveBenchPareto() {
   const traces = [
     {
       x: dominated.map(m => m.costPerSuccessfulTaskUsd), y: dominated.map(m => m.overallScore),
-      mode: 'markers+text', type: 'scatter', name: 'Dominated',
-      text: dominated.map(m => m.name), textposition: 'top center', textfont: { size: 9, color: '#64748b' }, cliponaxis: false,
+      mode: 'markers', type: 'scatter', name: 'Dominated',
       marker: { size: 11, color: '#a78bfa', opacity: 0.65 },
       customdata: dominated.map(custom), hovertemplate: hover,
     },
     {
       x: frontier.map(m => m.costPerSuccessfulTaskUsd), y: frontier.map(m => m.overallScore),
-      mode: 'markers+text', type: 'scatter', name: 'Pareto frontier',
-      text: frontier.map(m => m.name), textposition: 'top center', textfont: { size: 9, color: '#047857' }, cliponaxis: false,
+      mode: 'markers', type: 'scatter', name: 'Pareto frontier',
       marker: { size: 14, color: '#10b981', line: { width: 2, color: isPlotDark() ? '#064e3b' : '#ecfdf5' } },
       customdata: frontier.map(custom), hovertemplate: hover.replace('<extra></extra>', '<extra>Frontier</extra>'),
     },
@@ -598,7 +604,18 @@ livebench_function = r"""function renderLiveBenchPareto() {
     legend: { orientation: 'h', y: -0.18 },
     margin: { ...getPlotlyLayout().margin, r: 72, b: 96 },
   };
-  Plotly.newPlot('chart-livebench-pareto', traces, layout, PLOTLY_CONFIG);
+  Plotly.newPlot('chart-livebench-pareto', traces, layout, PLOTLY_CONFIG).then(() => {
+    const gd = document.getElementById('chart-livebench-pareto');
+    const points = rows.map(m => ({
+      id: m.id,
+      label: m.name,
+      x: m.costPerSuccessfulTaskUsd,
+      y: m.overallScore,
+      frontier: frontierSet.has(m.id),
+    }));
+    const annotations = buildCollisionSafeLabelAnnotations(points, gd, { fontSize: 9, markerRadius: 11, safety: 1.35 });
+    return Plotly.relayout(gd, { annotations }).then(() => repairCollisionSafeLabelAnnotations(gd, annotations));
+  });
 }
 """
 if "function renderLiveBenchPareto()" in html:
