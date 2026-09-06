@@ -39,14 +39,14 @@ Undominated on composite cost versus quality: **GPT-6 Astra, Gemini 3.8 Flash, G
 | Cost | 31.65% | lower |
 | Non-Hallucination | 7.59% | higher |
 | DeepSWE | 8.86% | higher |
-| GDPval-AA v2 | 7.59% | higher |
-| τ³-Banking | 6.33% | higher |
-| AA-LCR v1.1 | 5.06% | higher |
-| AA-Omniscience Accuracy | 5.06% | higher |
-| HLE | 5.06% | higher |
-| GPQA Diamond (legacy) | 5.06% | higher |
-| CritPt | 3.80% | higher |
-| AA Intelligence Index | 7.59% | higher |
+| [GDPval-AA v2](https://artificialanalysis.ai/evaluations/gdpval-aa) | 7.59% | higher |
+| [τ³-Banking](https://artificialanalysis.ai/evaluations/tau3-banking) | 6.33% | higher |
+| [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 5.06% | higher |
+| [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 5.06% | higher |
+| [HLE](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 5.06% | higher |
+| [GPQA Diamond (legacy)](https://artificialanalysis.ai/evaluations/gpqa-diamond) | 5.06% | higher |
+| [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 3.80% | higher |
+| [AA Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) | 7.59% | higher |
 | Speed | 6.33% | higher |
 
 ## Normalized dimension matrix
@@ -85,4 +85,4 @@ The score is zero-gap across all retained dimensions. The dropped candidate dime
 
 ## External benchmark supplements
 
-LiveBench provides the four-task Instruction Following view and the Overall Score versus Cost Per Successful Task Pareto analysis; Terminal-Bench 4.0 provides the current standalone terminal-agent leaderboard. Their incomplete cohort coverage keeps them supplemental rather than weighted into this zero-gap ranking. See [raw-data.md](raw-data.md) for the source-backed tables.
+[Artificial Analysis Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) provides the current AA component scores used by this release. [LiveBench](https://livebench.ai/) provides the four-task Instruction Following view and the Overall Score versus Cost Per Successful Task Pareto analysis; [Terminal-Bench 4.0](https://www.tbench.ai/) provides the current standalone terminal-agent leaderboard. Their incomplete cohort coverage keeps them supplemental rather than weighted into this zero-gap ranking. See [raw-data.md](raw-data.md) for the source-backed tables.

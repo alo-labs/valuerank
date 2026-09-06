@@ -1,6 +1,6 @@
 # ValueRank v1.5.0 Raw Data
 
-**Version:** v1.5.0 · **Updated:** September 6, 2026 · **DeepSWE source update:** September 3, 2026 · **AA source:** Artificial Analysis Intelligence Index v4.2
+**Version:** v1.5.0 · **Updated:** September 6, 2026 · **DeepSWE source update:** September 3, 2026 · **AA source:** [Artificial Analysis Intelligence Index v4.2](https://artificialanalysis.ai/methodology/intelligence-benchmarking)
 
 All 21 current DeepSWE Best models are retained. Raw AA benchmark values are percentages below for readability; the machine-readable files preserve fractions. Speed is included because the v4.2 snapshot publishes numeric values for all selected pages. The external benchmark tables are kept separate from the AA source matrix so version identities remain unambiguous.
 
@@ -56,9 +56,9 @@ All 21 current DeepSWE Best models are retained. Raw AA benchmark values are per
 | 20 | Claude Opus 4.8 | max | 59.0% ± 2.0% | $13.22 | 1319.47 | 49.63% | 34.23% | 84.64% | 54.40% | — | 77.67% | 48.66% | 92.02% | 20.86% | 48.83% | 60.75% | 46.44 | $— | 63.1 |
 | 21 | Claude Sonnet 5 | max | 54.0% ± 4.0% | $26.40 | 1358.11 | 50.24% | 37.32% | 80.52% | 54.28% | 13.20% | 82.00% | 41.29% | 91.11% | 16.86% | 40.05% | 60.63% | 45.11 | $5312.58 | 82.9 |
 
-## LiveBench external component
+## [LiveBench](https://livebench.ai/) external component
 
-LiveBench release **2026_06_25** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **20/21** ranked models and includes **1 official supplemental model** outside that cohort: **Claude Fable 5.1**. GPT-6 Astra is unavailable in this release.
+[LiveBench](https://livebench.ai/) release **2026_06_25** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **20/21** ranked models and includes **1 official supplemental model** outside that cohort: **Claude Fable 5.1**. GPT-6 Astra is unavailable in this release.
 
 | Model | LiveBench variant | Instruction Following | Overall Score | Cost Per Successful Task |
 |---|---|---:|---:|---:|
@@ -86,9 +86,9 @@ LiveBench release **2026_06_25** supplies the four-task Instruction Following me
 
 LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, Claude Fable 5.1**.
 
-## Terminal-Bench 4.0 external component
+## [Terminal-Bench 4.0](https://www.tbench.ai/) external component
 
-The current official TB4 snapshot contains **14 rows** and overlaps **11/21** ranked models. It replaces the old standalone TB2.1 publication; the AA source matrix above keeps its v2.1 field only as explicit AA-source provenance.
+The current official [Terminal-Bench 4.0](https://www.tbench.ai/) snapshot contains **14 rows** and overlaps **11/21** ranked models. It replaces the old standalone TB2.1 publication; the AA source matrix above keeps its v2.1 field only as explicit AA-source provenance.
 
 | Rank | Model | Agent | Resolution rate | Tokens | Cost |
 |---:|---|---|---:|---:|---:|

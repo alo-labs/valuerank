@@ -24,31 +24,31 @@ The score retains only dimensions with a genuine value for every one of the 21 r
 | 1 | Cost | 31.65% | lower |
 | 2 | Non-Hallucination | 7.59% | higher |
 | 3 | DeepSWE | 8.86% | higher |
-| 4 | GDPval-AA v2 | 7.59% | higher |
-| 5 | τ³-Banking | 6.33% | higher |
-| 6 | AA-LCR v1.1 | 5.06% | higher |
-| 7 | AA-Omniscience Accuracy | 5.06% | higher |
-| 8 | HLE | 5.06% | higher |
-| 9 | GPQA Diamond (legacy) | 5.06% | higher |
-| 10 | CritPt | 3.80% | higher |
-| 11 | AA Intelligence Index | 7.59% | higher |
+| 4 | [GDPval-AA v2](https://artificialanalysis.ai/evaluations/gdpval-aa) | 7.59% | higher |
+| 5 | [τ³-Banking](https://artificialanalysis.ai/evaluations/tau3-banking) | 6.33% | higher |
+| 6 | [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 5.06% | higher |
+| 7 | [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 5.06% | higher |
+| 8 | [HLE](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 5.06% | higher |
+| 9 | [GPQA Diamond (legacy)](https://artificialanalysis.ai/evaluations/gpqa-diamond) | 5.06% | higher |
+| 10 | [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 3.80% | higher |
+| 11 | [AA Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) | 7.59% | higher |
 | 12 | Speed | 6.33% | higher |
 
 The eleven AA source components below correspond to ten current AA evaluations because Omniscience is split into accuracy and non-hallucination reliability:
 
 | AA evaluation/component | Current methodology weight |
 |---|---:|
-| AA-Briefcase | 15% |
-| GDPval-AA v2 | 10% |
-| τ³-Banking | 5% |
-| Terminal-Bench v2.1 | 10% |
-| SciCode | 10% |
-| Humanity's Last Exam | 10% |
-| GDP.pdf | 10% |
-| CritPt | 10% |
-| AA-Omniscience Accuracy | 10% |
-| AA-Omniscience Non-Hallucination Rate | 5% |
-| AA-LCR v1.1 | 5% |
+| [AA-Briefcase](https://artificialanalysis.ai/evaluations/aa-briefcase) | 15% |
+| [GDPval-AA v2](https://artificialanalysis.ai/evaluations/gdpval-aa) | 10% |
+| [τ³-Banking](https://artificialanalysis.ai/evaluations/tau3-banking) | 5% |
+| [Terminal-Bench v2.1](https://artificialanalysis.ai/evaluations/terminalbench-v2-1) | 10% |
+| [SciCode](https://artificialanalysis.ai/evaluations/scicode) | 10% |
+| [Humanity's Last Exam](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 10% |
+| [GDP.pdf](https://artificialanalysis.ai/evaluations/gdp-pdf) | 10% |
+| [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 10% |
+| [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 10% |
+| [AA-Omniscience Non-Hallucination Rate](https://artificialanalysis.ai/evaluations/omniscience) | 5% |
+| [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 5% |
 
 These AA methodology weights describe the source index, not the combined ValueRank weights above. ValueRank adds DeepSWE, cost, and AA Index signals using the explicitly published priority table.
 
@@ -88,11 +88,11 @@ Overall Score is the weighted sum of all retained dimensions. Quality Score remo
 
 ## Supplemental data
 
-Artificial Analysis exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, AutomationBench, EnterpriseOpsGym, ITBench SRE, and other legacy/current fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json. AA-Briefcase and GDP.pdf are v4.2 source components represented in the snapshot; they are not added as separate ValueRank dimensions. GPQA Diamond is explicitly labelled as a legacy ValueRank input. The AA source payload still records its Terminal-Bench v2.1 component for provenance; the standalone current Terminal-Bench publication is TB4.
+[Artificial Analysis Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, AutomationBench, EnterpriseOpsGym, ITBench SRE, and other legacy/current fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json. AA-Briefcase and GDP.pdf are v4.2 source components represented in the snapshot; they are not added as separate ValueRank dimensions. GPQA Diamond is explicitly labelled as a legacy ValueRank input. The AA source payload still records its Terminal-Bench v2.1 component for provenance; the standalone current Terminal-Bench publication is TB4.
 
-LiveBench is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the 20 matched cohort rows plus 1 official supplemental model: Claude Fable 5.1.
+[LiveBench](https://livebench.ai/) is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the 20 matched cohort rows plus 1 official supplemental model: Claude Fable 5.1.
 
-Terminal-Bench 4.0 is incorporated as the current external terminal-agent source. The standalone page shows all 14 official rows and the current cohort overlap, while the ValueRank score keeps the field coverage-only because 10 of the 21 ranked models are not present in the pinned TB4 table.
+[Terminal-Bench 4.0](https://www.tbench.ai/) is incorporated as the current external terminal-agent source. The standalone page shows all 14 official rows and the current cohort overlap, while the ValueRank score keeps the field coverage-only because 10 of the 21 ranked models are not present in the pinned TB4 table.
 
 ## Limitations
 

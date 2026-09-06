@@ -1749,7 +1749,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank ranks <strong>21 current DeepSWE Best models</strong> across a <strong>zero-gap 12-dimension set</strong>. v1.5.0 uses Artificial Analysis <strong>Artificial Analysis Intelligence Index v4.2</strong> components plus DeepSWE performance and a DeepSWE-only Cost. Speed is retained because all selected v4.2 pages publish numeric values. LiveBench Instruction Following and Terminal-Bench 4.0 are shown as external coverage-only views.
+          ValueRank ranks <strong>21 current <a href="https://deepswe.datacurve.ai/" target="_blank" rel="noopener">DeepSWE Best</a> models</strong> across a <strong>zero-gap 12-dimension set</strong>. v1.5.0 uses <strong><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v4.2</a></strong> components plus DeepSWE performance and a DeepSWE-only Cost. Speed is retained because all selected v4.2 pages publish numeric values. <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> Instruction Following and <a href="https://www.tbench.ai/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> are shown as external coverage-only views.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1803,7 +1803,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="container">
     <div class="section-header">
       <div class="section-title">Rankings</div>
-      <div class="section-sub">Drag the cost weight slider to see how rankings shift. Cost now uses a composite 0–100 scale built from normalized AA eval cost and normalized DeepSWE average cost per task. Click any column header to sort.</div>
+      <div class="section-sub">Drag the cost weight slider to see how rankings shift. Cost now uses a 0–100 rank scale built from normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete. Click any column header to sort.</div>
     </div>
     <div class="table-controls">
       <div class="filter-group" id="tier-filters">
@@ -1875,21 +1875,21 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="section-title">Visualizations</div>
       <div class="section-sub">Eight complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
     </div>
-    <div class="chart-tabs">
-      <button class="chart-tab active" data-chart="pareto">Pareto Frontier</button>
+                        <div class="chart-tabs">
+      <button class="chart-tab active" data-chart="pareto">ValueRank Pareto Frontier</button>
+      <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
       <button class="chart-tab" data-chart="displacement">Rank Displacement</button>
       <button class="chart-tab" data-chart="heatmap">Dimension Heatmap</button>
       <button class="chart-tab" data-chart="bubble">Speed × Quality</button>
       <button class="chart-tab" data-chart="bump">Version History</button>
-      <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="frontier2">Cost Impact</button>
     </div>
 
     <div class="card">
       <!-- Pareto -->
       <div class="chart-panel active" id="panel-pareto">
-        <div class="chart-desc"><strong>Pareto Frontier:</strong> Current frontier: <strong>GPT-6 Astra, Gemini 3.8 Flash, GPT-5.6 Sol, Gemini 3.7 Flash, GLM-5.3 Flash</strong>. Every other ranked model is dominated on composite cost versus quality.</div>
+        <div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>GPT-6 Astra, Gemini 3.8 Flash, GPT-5.6 Sol, Gemini 3.7 Flash, GLM-5.3 Flash</strong>. Every other ranked model is dominated on composite cost versus quality.</div>
         <div id="chart-pareto" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Decomposition -->
@@ -1936,7 +1936,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="container">
     <div class="section-header">
       <div class="section-title">Methodology</div>
-      <div class="section-sub">How scores are calculated across 13 current zero-gap dimensions, with explicit cost construction and coverage provenance.</div>
+      <div class="section-sub">How scores are calculated across 12 current zero-gap dimensions, with explicit cost construction and coverage provenance.</div>
     </div>
     <div class="method-grid">
       <div>
@@ -1977,8 +1977,8 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     </div>
 
     <div class="card mb-6" id="livebench-data">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">LiveBench External Coverage</h3>
-       <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>20/21</strong> ranked models and includes <strong>1 official supplemental model</strong> outside the ranked cohort: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
+       <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;"><a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench External Coverage</a></h3>
+        <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>20/21</strong> ranked models and includes <strong>1 official supplemental model</strong> outside the ranked cohort: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
@@ -2048,7 +2048,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          Each model's score is a weighted average of 12 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 21</strong> for every retained v1.5.0 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. There are <strong>no neutral missing-data cells</strong> in v1.5.0. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.
+          Each model's score is a weighted average of 12 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 21</strong> for every retained v1.5.0 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. There are <strong>no neutral missing-data cells</strong> in v1.5.0. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete.
         </div>
       </div>
 
@@ -2058,7 +2058,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          ValueRank is designed for <strong>production software engineering teams</strong>, not academic benchmarking. At scale, a 10× cost difference between similarly capable models is a real operational constraint, but one pricing surface is not enough. The 25% cost weight therefore now combines Artificial Analysis eval cost with DeepSWE average cost per task into a single cost-efficiency term. You can drag the cost weight slider in the Rankings section to 0% to see a pure quality ranking if budget is no constraint.
+          ValueRank is designed for <strong>production software engineering teams</strong>, not academic benchmarking. At scale, a 10× cost difference between similarly capable models is a real operational constraint, but one pricing surface is not enough. The 25% cost weight therefore uses the cohort-wide DeepSWE average cost per task because the v4.2 AA total-cost field is incomplete. You can drag the cost weight slider in the Rankings section to 0% to see a pure quality ranking if budget is no constraint.
         </div>
       </div>
 
@@ -2162,6 +2162,7 @@ const DIM_KEYS = ["Cost", "NonHalluc", "DeepSWE", "GDPv2", "Tau3", "LCR", "OmniA
 const DIM_FULL = ["Composite Cost", "AA-Omniscience Non-Hallucination Rate", "DeepSWE pass@1", "GDPval-AA v2", "τ³-Banking", "AA-LCR v1.1", "AA-Omniscience Accuracy", "Humanity's Last Exam", "GPQA Diamond (legacy)", "CritPt", "Artificial Analysis Intelligence Index", "AA output speed (tok/s)"];
 const DIM_WEIGHTS = [31.6456, 7.5949, 8.8608, 7.5949, 6.3291, 5.0633, 5.0633, 5.0633, 5.0633, 3.7975, 7.5949, 6.3291];
 const DIM_CAT = ["cost", "rely", "code", "code", "code", "code", "rely", "intel", "intel", "intel", "prod", "prod"];
+const DIM_LINKS = [null, "https://artificialanalysis.ai/evaluations/omniscience", "https://deepswe.datacurve.ai/", "https://artificialanalysis.ai/evaluations/gdpval-aa", "https://artificialanalysis.ai/evaluations/tau3-banking", "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning", "https://artificialanalysis.ai/evaluations/omniscience", "https://artificialanalysis.ai/evaluations/humanitys-last-exam", "https://artificialanalysis.ai/evaluations/gpqa-diamond", "https://artificialanalysis.ai/evaluations/critpt", "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", "https://artificialanalysis.ai/methodology/intelligence-benchmarking"];
 
 // Macro-category definitions for decomposition
 const MACRO_CATS = [{"key": "cost", "label": "Cost", "color": "#22c55e", "dimIdxs": [0]}, {"key": "rely", "label": "Reliability", "color": "#a78bfa", "dimIdxs": [1, 6]}, {"key": "code", "label": "Agentic", "color": "#3b82f6", "dimIdxs": [2, 3, 4, 5]}, {"key": "intel", "label": "Intelligence", "color": "#eab308", "dimIdxs": [7, 8, 9]}, {"key": "prod", "label": "Platform", "color": "#f97316", "dimIdxs": [10, 11]}];
@@ -4216,7 +4217,7 @@ function renderPareto() {
     fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
   ];
   const hoverTpl =
-    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<br>⊘ Missing: %{customdata[2]}<extra></extra>';
+    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';
   const hoverTplFront =
     '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<extra>Frontier</extra>';
 
@@ -4266,7 +4267,7 @@ function renderPareto() {
   const base = getPlotlyLayout();
   const layout = {
     ...base,
-    title: { text: 'Quality vs Composite Cost — Pareto Frontier', font: plotlyTitle(14) },
+    title: { text: 'ValueRank Pareto Frontier — Quality vs Composite Cost', font: plotlyTitle(14) },
     xaxis: {
       ...base.xaxis,
       title: 'Composite Cost (0–100, lower better)',
@@ -4647,9 +4648,13 @@ function renderDimTable() {
   const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence' };
   const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel' };
   const tbody = document.getElementById('dim-table-body');
-  tbody.innerHTML = DIM_KEYS.map((k,i) => `
+  tbody.innerHTML = DIM_KEYS.map((k,i) => {
+    const label = DIM_LINKS[i]
+      ? `<a href="${DIM_LINKS[i]}" target="_blank" rel="noopener">${DIM_FULL[i]}</a>`
+      : DIM_FULL[i];
+    return `
     <tr>
-      <td><strong>${DIM_FULL[i]}</strong> <span class="mono text-muted" style="font-size:10px;">(${k})</span></td>
+      <td><strong>${label}</strong> <span class="mono text-muted" style="font-size:10px;">(${k})</span></td>
       <td>
         <div style="display:flex;align-items:center;gap:6px;">
           <div class="w-bar" style="width:${DIM_WEIGHTS[i]*3}px;"></div>
@@ -4657,7 +4662,8 @@ function renderDimTable() {
         </div>
       </td>
       <td><span class="cat-badge ${catClasses[DIM_CAT[i]]}">${catLabels[DIM_CAT[i]]}</span></td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 // ─────────────────────────────────────────────

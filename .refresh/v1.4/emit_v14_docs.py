@@ -24,6 +24,43 @@ VERSION = "v1.5.0"
 DATE = "September 6, 2026"
 CURRENCY = "$"
 
+AA_INDEX_URL = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
+AA_METHODOLOGY_URL = "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+DEEPSWE_URL = "https://deepswe.datacurve.ai/"
+LIVEBENCH_URL = "https://livebench.ai/"
+TERMINAL_BENCH_URL = "https://www.tbench.ai/"
+
+BENCHMARK_URLS = {
+    "DeepSWE Best": DEEPSWE_URL,
+    "AA-Briefcase": "https://artificialanalysis.ai/evaluations/aa-briefcase",
+    "GDPval-AA v2": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "τ³-Banking": "https://artificialanalysis.ai/evaluations/tau3-banking",
+    "Terminal-Bench v2.1": "https://artificialanalysis.ai/evaluations/terminalbench-v2-1",
+    "Terminal-Bench 4.0": TERMINAL_BENCH_URL,
+    "SciCode": "https://artificialanalysis.ai/evaluations/scicode",
+    "Humanity's Last Exam": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
+    "HLE": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
+    "GDP.pdf": "https://artificialanalysis.ai/evaluations/gdp-pdf",
+    "CritPt": "https://artificialanalysis.ai/evaluations/critpt",
+    "AA-Omniscience Accuracy": "https://artificialanalysis.ai/evaluations/omniscience",
+    "AA-Omniscience Non-Hallucination Rate": "https://artificialanalysis.ai/evaluations/omniscience",
+    "AA-LCR v1.1": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
+    "GPQA Diamond (legacy)": "https://artificialanalysis.ai/evaluations/gpqa-diamond",
+    "AA Intelligence Index": AA_INDEX_URL,
+    "Artificial Analysis Intelligence Index": AA_INDEX_URL,
+    "AA output speed (tok/s)": AA_METHODOLOGY_URL,
+    "LiveBench": LIVEBENCH_URL,
+}
+
+
+def md_benchmark_link(label):
+    url = BENCHMARK_URLS.get(label)
+    return f"[{label}]({url})" if url else label
+
+
+def html_external_link(label, url):
+    return f'<a href="{html_escape(url, quote=True)}" target="_blank" rel="noopener">{html_escape(label)}</a>'
+
 scores = json.loads((REFRESH / "scores.json").read_text())
 coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
 livebench_document = json.loads((REFRESH / "livebench.json").read_text())
@@ -52,6 +89,14 @@ cost_mode_label = "DeepSWE-only" if cost_mode.startswith("deepswe-only") else "A
 cost_coverage = scores.get("costCoverage") or manifest.get("scoring", {}).get("costCoverage", {})
 cost_missing_text = ", ".join(cost_coverage.get("missingModels", [])) or "none"
 dropped = manifest.get("scoring", {}).get("droppedDimensions", [])
+if cost_mode_label == "DeepSWE-only":
+    site_cost_summary = "Cost now uses a 0–100 rank scale built from normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete."
+    site_cost_raw_input = "For Cost, the raw input is normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete."
+    site_cost_weight = "The 25% cost weight therefore uses the cohort-wide DeepSWE average cost per task because the v4.2 AA total-cost field is incomplete."
+else:
+    site_cost_summary = "Cost now uses a 0–100 scale built from normalized AA eval cost and normalized DeepSWE average cost per task."
+    site_cost_raw_input = "For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task."
+    site_cost_weight = "The 25% cost weight therefore combines Artificial Analysis eval cost with DeepSWE average cost per task into a single cost-efficiency term."
 
 
 def fnum(value, places=2, dash="—"):
@@ -82,7 +127,7 @@ def primary_rows():
 
 def dimension_table():
     return "\n".join(
-        f"| {index} | {weight['label']} | {weight['weightPct']:.2f}% | {'higher' if weight['higherBetter'] else 'lower'} |"
+        f"| {index} | {md_benchmark_link(weight['label'])} | {weight['weightPct']:.2f}% | {'higher' if weight['higherBetter'] else 'lower'} |"
         for index, weight in enumerate(weights, 1)
     )
 
@@ -115,7 +160,7 @@ readme = f"""# ValueRank
 
 ## Current result
 
-ValueRank combines current DeepSWE agent performance with Artificial Analysis Intelligence Index v4.2 source results and a {cost_mode_label} cost penalty. The complete current DeepSWE Best roster is retained; no missing cell is filled with a neutral value. LiveBench Instruction Following and Terminal-Bench 4.0 are published alongside the score as separately sourced coverage-only views until their official coverage is complete for this cohort.
+ValueRank combines current {md_benchmark_link('DeepSWE Best')} agent performance with {md_benchmark_link('Artificial Analysis Intelligence Index')} v4.2 source results and a {cost_mode_label} cost penalty. The complete current DeepSWE Best roster is retained; no missing cell is filled with a neutral value. {md_benchmark_link('LiveBench')} Instruction Following and {md_benchmark_link('Terminal-Bench 4.0')} are published alongside the score as separately sourced coverage-only views until their official coverage is complete for this cohort.
 
 | Rank | Model | Overall | Quality | Composite Cost |
 |---:|---|---:|---:|---:|
@@ -126,9 +171,9 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 ## What changed in v1.5
 
 - DeepSWE is refreshed to the live v1.1 Best page: **{n} models**, **113 tasks**, source updated **{deepswe_updated}**.
-- Artificial Analysis is migrated to the current **{aa_version}** identity: AA-Briefcase, GDPval-AA v2, τ³-Banking, Terminal-Bench v2.1, SciCode, AA-LCR v1.1, HLE, GDP.pdf, CritPt, and split AA-Omniscience accuracy/non-hallucination components. GPQA Diamond is retained only as a separately labelled legacy ValueRank input.
+- Artificial Analysis is migrated to the current **{aa_version}** identity: {md_benchmark_link('AA-Briefcase')}, {md_benchmark_link('GDPval-AA v2')}, {md_benchmark_link('τ³-Banking')}, {md_benchmark_link('Terminal-Bench v2.1')}, {md_benchmark_link('SciCode')}, {md_benchmark_link('AA-LCR v1.1')}, {md_benchmark_link('HLE')}, {md_benchmark_link('GDP.pdf')}, {md_benchmark_link('CritPt')}, and split {md_benchmark_link('AA-Omniscience Accuracy')}/{md_benchmark_link('AA-Omniscience Non-Hallucination Rate')} components. {md_benchmark_link('GPQA Diamond (legacy)')} is retained only as a separately labelled legacy ValueRank input.
 - The standalone Terminal-Bench view is replaced by the official **Terminal-Bench 4.0** snapshot: **{tb4_document['rowN']} rows**, with **{tb4_document['matchedN']}/{tb4_document['cohortN']}** overlap with the ranked cohort.
-- **LiveBench {livebench_document['release'].replace('_', '-')}** supplies the Instruction Following component and Overall-vs-Cost view: **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked cohort rows matched, **{livebench_published_n}** rows published in total, plus **{livebench_supplemental_label}** (**{livebench_supplemental_text}**); the current LiveBench Pareto frontier is **{livebench_pareto_text}**.
+- **{md_benchmark_link('LiveBench')} {livebench_document['release'].replace('_', '-')}** supplies the Instruction Following component and Overall-vs-Cost view: **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked cohort rows matched, **{livebench_published_n}** rows published in total, plus **{livebench_supplemental_label}** (**{livebench_supplemental_text}**); the current LiveBench Pareto frontier is **{livebench_pareto_text}**.
 - The ranked pool is **{n} models**, with all current DeepSWE entries preserved.
 - The score retains **{d} zero-gap dimensions**; **{names([item['label'] for item in dropped])}** are excluded because each has incomplete official cohort coverage. Missing external values remain null and are not neutral-filled.
 - The v4.2 snapshot publishes numeric AA speed for all {n} selected pages, so Speed is now a retained ValueRank dimension.
@@ -185,17 +230,17 @@ The eleven AA source components below correspond to ten current AA evaluations b
 
 | AA evaluation/component | Current methodology weight |
 |---|---:|
-| AA-Briefcase | 15% |
-| GDPval-AA v2 | 10% |
-| τ³-Banking | 5% |
-| Terminal-Bench v2.1 | 10% |
-| SciCode | 10% |
-| Humanity's Last Exam | 10% |
-| GDP.pdf | 10% |
-| CritPt | 10% |
-| AA-Omniscience Accuracy | 10% |
-| AA-Omniscience Non-Hallucination Rate | 5% |
-| AA-LCR v1.1 | 5% |
+| {md_benchmark_link('AA-Briefcase')} | 15% |
+| {md_benchmark_link('GDPval-AA v2')} | 10% |
+| {md_benchmark_link('τ³-Banking')} | 5% |
+| {md_benchmark_link('Terminal-Bench v2.1')} | 10% |
+| {md_benchmark_link('SciCode')} | 10% |
+| {md_benchmark_link("Humanity's Last Exam")} | 10% |
+| {md_benchmark_link('GDP.pdf')} | 10% |
+| {md_benchmark_link('CritPt')} | 10% |
+| {md_benchmark_link('AA-Omniscience Accuracy')} | 10% |
+| {md_benchmark_link('AA-Omniscience Non-Hallucination Rate')} | 5% |
+| {md_benchmark_link('AA-LCR v1.1')} | 5% |
 
 These AA methodology weights describe the source index, not the combined ValueRank weights above. ValueRank adds DeepSWE, cost, and AA Index signals using the explicitly published priority table.
 
@@ -233,11 +278,11 @@ Overall Score is the weighted sum of all retained dimensions. Quality Score remo
 
 ## Supplemental data
 
-Artificial Analysis exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, AutomationBench, EnterpriseOpsGym, ITBench SRE, and other legacy/current fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json. AA-Briefcase and GDP.pdf are v4.2 source components represented in the snapshot; they are not added as separate ValueRank dimensions. GPQA Diamond is explicitly labelled as a legacy ValueRank input. The AA source payload still records its Terminal-Bench v2.1 component for provenance; the standalone current Terminal-Bench publication is TB4.
+{md_benchmark_link('Artificial Analysis Intelligence Index')} exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, AutomationBench, EnterpriseOpsGym, ITBench SRE, and other legacy/current fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json. AA-Briefcase and GDP.pdf are v4.2 source components represented in the snapshot; they are not added as separate ValueRank dimensions. GPQA Diamond is explicitly labelled as a legacy ValueRank input. The AA source payload still records its Terminal-Bench v2.1 component for provenance; the standalone current Terminal-Bench publication is TB4.
 
-LiveBench is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the {livebench_document['matchedN']} matched cohort rows plus {livebench_supplemental_label}: {livebench_supplemental_text}.
+{md_benchmark_link('LiveBench')} is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the {livebench_document['matchedN']} matched cohort rows plus {livebench_supplemental_label}: {livebench_supplemental_text}.
 
-Terminal-Bench 4.0 is incorporated as the current external terminal-agent source. The standalone page shows all 14 official rows and the current cohort overlap, while the ValueRank score keeps the field coverage-only because 10 of the 21 ranked models are not present in the pinned TB4 table.
+{md_benchmark_link('Terminal-Bench 4.0')} is incorporated as the current external terminal-agent source. The standalone page shows all 14 official rows and the current cohort overlap, while the ValueRank score keeps the field coverage-only because 10 of the 21 ranked models are not present in the pinned TB4 table.
 
 ## Limitations
 
@@ -275,7 +320,7 @@ Undominated on composite cost versus quality: **{pareto_text}**.
 
 | Dimension | Weight | Direction |
 |---|---:|---|
-{chr(10).join(f"| {w['label']} | {w['weightPct']:.2f}% | {'higher' if w['higherBetter'] else 'lower'} |" for w in weights)}
+{chr(10).join(f"| {md_benchmark_link(w['label'])} | {w['weightPct']:.2f}% | {'higher' if w['higherBetter'] else 'lower'} |" for w in weights)}
 
 ## Normalized dimension matrix
 
@@ -293,7 +338,7 @@ The score is zero-gap across all retained dimensions. The dropped candidate dime
 
 ## External benchmark supplements
 
-LiveBench provides the four-task Instruction Following view and the Overall Score versus Cost Per Successful Task Pareto analysis; Terminal-Bench 4.0 provides the current standalone terminal-agent leaderboard. Their incomplete cohort coverage keeps them supplemental rather than weighted into this zero-gap ranking. See [raw-data.md](raw-data.md) for the source-backed tables.
+{md_benchmark_link('Artificial Analysis Intelligence Index')} provides the current AA component scores used by this release. {md_benchmark_link('LiveBench')} provides the four-task Instruction Following view and the Overall Score versus Cost Per Successful Task Pareto analysis; {md_benchmark_link('Terminal-Bench 4.0')} provides the current standalone terminal-agent leaderboard. Their incomplete cohort coverage keeps them supplemental rather than weighted into this zero-gap ranking. See [raw-data.md](raw-data.md) for the source-backed tables.
 """
 (ROOT / "scores.md").write_text(scores_md)
 
@@ -314,7 +359,7 @@ livebench_raw_rows = livebench_table()
 tb4_raw_rows = tb4_table()
 raw_data = f"""# ValueRank {VERSION} Raw Data
 
-**Version:** {VERSION} · **Updated:** {DATE} · **DeepSWE source update:** {deepswe_updated} · **AA source:** {aa_version}
+**Version:** {VERSION} · **Updated:** {DATE} · **DeepSWE source update:** {deepswe_updated} · **AA source:** [{aa_version}]({AA_METHODOLOGY_URL})
 
 All {n} current DeepSWE Best models are retained. Raw AA benchmark values are percentages below for readability; the machine-readable files preserve fractions. Speed is included because the v4.2 snapshot publishes numeric values for all selected pages. The external benchmark tables are kept separate from the AA source matrix so version identities remain unambiguous.
 
@@ -330,9 +375,9 @@ All {n} current DeepSWE Best models are retained. Raw AA benchmark values are pe
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 {raw_rows}
 
-## LiveBench external component
+## {md_benchmark_link('LiveBench')} external component
 
-LiveBench release **{livebench_document['release']}** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked models and includes **{livebench_supplemental_label}** outside that cohort: **{livebench_supplemental_text}**. GPT-6 Astra is unavailable in this release.
+{md_benchmark_link('LiveBench')} release **{livebench_document['release']}** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked models and includes **{livebench_supplemental_label}** outside that cohort: **{livebench_supplemental_text}**. GPT-6 Astra is unavailable in this release.
 
 | Model | LiveBench variant | Instruction Following | Overall Score | Cost Per Successful Task |
 |---|---|---:|---:|---:|
@@ -340,9 +385,9 @@ LiveBench release **{livebench_document['release']}** supplies the four-task Ins
 
 LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **{livebench_pareto_text}**.
 
-## Terminal-Bench 4.0 external component
+## {md_benchmark_link('Terminal-Bench 4.0')} external component
 
-The current official TB4 snapshot contains **{tb4_document['rowN']} rows** and overlaps **{tb4_document['matchedN']}/{tb4_document['cohortN']}** ranked models. It replaces the old standalone TB2.1 publication; the AA source matrix above keeps its v2.1 field only as explicit AA-source provenance.
+The current official {md_benchmark_link('Terminal-Bench 4.0')} snapshot contains **{tb4_document['rowN']} rows** and overlaps **{tb4_document['matchedN']}/{tb4_document['cohortN']}** ranked models. It replaces the old standalone TB2.1 publication; the AA source matrix above keeps its v2.1 field only as explicit AA-source provenance.
 
 | Rank | Model | Agent | Resolution rate | Tokens | Cost |
 |---:|---|---|---:|---:|---:|
@@ -408,6 +453,20 @@ SITE_DIM_META = {
     "intelligenceIndex": ("intelligenceIndex", "AAI", "Artificial Analysis Intelligence Index", "prod"),
     "speed": ("speed", "Speed", "AA output speed (tok/s)", "prod"),
 }
+SITE_DIM_LINKS = {
+    "Composite Cost": None,
+    "AA-Omniscience Non-Hallucination Rate": BENCHMARK_URLS["AA-Omniscience Non-Hallucination Rate"],
+    "DeepSWE pass@1": BENCHMARK_URLS["DeepSWE Best"],
+    "GDPval-AA v2": BENCHMARK_URLS["GDPval-AA v2"],
+    "τ³-Banking": BENCHMARK_URLS["τ³-Banking"],
+    "AA-LCR v1.1": BENCHMARK_URLS["AA-LCR v1.1"],
+    "AA-Omniscience Accuracy": BENCHMARK_URLS["AA-Omniscience Accuracy"],
+    "Humanity's Last Exam": BENCHMARK_URLS["Humanity's Last Exam"],
+    "GPQA Diamond (legacy)": BENCHMARK_URLS["GPQA Diamond (legacy)"],
+    "CritPt": BENCHMARK_URLS["CritPt"],
+    "Artificial Analysis Intelligence Index": BENCHMARK_URLS["Artificial Analysis Intelligence Index"],
+    "AA output speed (tok/s)": BENCHMARK_URLS["AA output speed (tok/s)"],
+}
 unknown_site_dims = [weight["key"] for weight in weights if weight["key"] not in SITE_DIM_META]
 if unknown_site_dims:
     raise SystemExit(f"site dimension metadata missing: {unknown_site_dims}")
@@ -445,7 +504,7 @@ for model in models:
         "overallScore": model["overallScore"],
         "qualityScore": model["qualityScore"],
         "qualityRank": model["qualityRank"],
-        "missingCount": 0,
+        "missingCount": sum(1 for weight in weights if weight["key"] not in model["dims"]),
         "dims": [model["dims"][dim_key] for dim_key, _key, _full, _cat in SITE_DIMS],
         "isMissing": [False] * len(SITE_DIMS),
         "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": model["rank"]},
@@ -482,6 +541,11 @@ html = replace_once(html, r"const DIM_KEYS\s*=\s*\[[^\]]*\];", "const DIM_KEYS =
 html = replace_once(html, r"const DIM_FULL\s*=\s*\[[^\]]*\];", "const DIM_FULL = " + json.dumps([item[2] for item in SITE_DIMS], ensure_ascii=False) + ";", "DIM_FULL")
 html = replace_once(html, r"const DIM_WEIGHTS\s*=\s*\[[^\]]*\];", "const DIM_WEIGHTS = " + json.dumps([weight_by_key[item[0]]["weightPct"] for item in SITE_DIMS]) + ";", "DIM_WEIGHTS")
 html = replace_once(html, r"const DIM_CAT\s*=\s*\[[^\]]*\];", "const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";", "DIM_CAT")
+dim_links_js = "const DIM_LINKS = " + json.dumps([SITE_DIM_LINKS.get(item[2]) for item in SITE_DIMS]) + ";"
+if re.search(r"const DIM_LINKS\s*=\s*\[[^\]]*\];", html):
+    html = replace_once(html, r"const DIM_LINKS\s*=\s*\[[^\]]*\];", dim_links_js, "DIM_LINKS")
+else:
+    html = html.replace("const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";", "const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";\n" + dim_links_js, 1)
 macro_labels = {
     "cost": ("Cost", "#22c55e"),
     "rely": ("Reliability", "#a78bfa"),
@@ -504,6 +568,29 @@ html = replace_once(
     "MODELS",
 )
 html = replace_once(html, r"const SPEED_DIM_IDX\s*=\s*[^;]+;[^\n]*", "const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";", "SPEED_DIM_IDX")
+
+dim_table_function = r"""function renderDimTable() {
+  const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence' };
+  const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel' };
+  const tbody = document.getElementById('dim-table-body');
+  tbody.innerHTML = DIM_KEYS.map((k,i) => {
+    const label = DIM_LINKS[i]
+      ? `<a href="${DIM_LINKS[i]}" target="_blank" rel="noopener">${DIM_FULL[i]}</a>`
+      : DIM_FULL[i];
+    return `
+    <tr>
+      <td><strong>${label}</strong> <span class="mono text-muted" style="font-size:10px;">(${k})</span></td>
+      <td>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="w-bar" style="width:${DIM_WEIGHTS[i]*3}px;"></div>
+          <span class="mono">${DIM_WEIGHTS[i]}%</span>
+        </div>
+      </td>
+      <td><span class="cat-badge ${catClasses[DIM_CAT[i]]}">${catLabels[DIM_CAT[i]]}</span></td>
+    </tr>`;
+  }).join('');
+}"""
+html = replace_once(html, r"function renderDimTable\(\) \{[\s\S]*?\n\}", dim_table_function.rstrip(), "dimension table")
 
 html = replace_once(
     html,
@@ -704,10 +791,10 @@ html = re.sub(
 )
 
 hero_desc = (
-    f'ValueRank ranks <strong>{n} current DeepSWE Best models</strong> across a '
-    f'<strong>zero-gap {d}-dimension set</strong>. {VERSION} uses Artificial Analysis '
-    f'<strong>{aa_version}</strong> components plus DeepSWE performance and a {cost_mode_label} Cost. '
-    f'Speed is retained because all selected v4.2 pages publish numeric values. LiveBench Instruction Following and Terminal-Bench 4.0 are shown as external coverage-only views.'
+    f'ValueRank ranks <strong>{n} current {html_external_link("DeepSWE Best", DEEPSWE_URL)} models</strong> across a '
+    f'<strong>zero-gap {d}-dimension set</strong>. {VERSION} uses '
+    f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus DeepSWE performance and a {cost_mode_label} Cost. '
+    f'Speed is retained because all selected v4.2 pages publish numeric values. {html_external_link("LiveBench", LIVEBENCH_URL)} Instruction Following and {html_external_link("Terminal-Bench 4.0", TERMINAL_BENCH_URL)} are shown as external coverage-only views.'
 )
 html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero-desc">\n          {hero_desc}\n        </p>', "hero copy")
 html = replace_once(html, r'<div class="(?:nav-meta|vr-nav-meta)">[^<]*</div>', f'<div class="vr-nav-meta">{DATE} · {n} models · {d} dimensions</div>', "nav metadata")
@@ -738,20 +825,29 @@ if insight_count != len(insight_bodies):
 html = html[:grid_start] + grid + html[grid_end:]
 
 chart_replacements = [
-    (r'(<div class="chart-desc"><strong>Pareto Frontier:</strong>)[\s\S]*?</div>', f'\\1 Current frontier: <strong>{pareto_text}</strong>. Every other ranked model is dominated on composite cost versus quality.</div>'),
+    (r'<div class="chart-desc"><strong>(?:ValueRank )?Pareto Frontier:</strong>[\s\S]*?</div>', f'<div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>{pareto_text}</strong>. Every other ranked model is dominated on composite cost versus quality.</div>'),
     (r'(<div class="chart-desc"><strong>Score Decomposition:</strong>)[\s\S]*?</div>', f'\\1 {VERSION} decomposes the weighted <strong>{d}-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>'),
     (r'(<div class="chart-desc"><strong>Dimension Heatmap:</strong>)[\s\S]*?</div>', f'\\1 All {n} models × {d} retained dimensions. Color = normalized rank score; every displayed cell is confirmed source data.</div>'),
     (r'(<div class="chart-desc"><strong>Version History:</strong>)[\s\S]*?</div>', f'\\1 Historical rank context through {VERSION}. The current point is a new benchmark-version snapshot, not a claim of score continuity.</div>'),
 ]
 for pattern, replacement in chart_replacements:
     html = replace_once(html, pattern, replacement, "chart copy")
+html = re.sub(
+    r"(?:Quality vs Composite Cost — (?:ValueRank )?Pareto Frontier|ValueRank Pareto Frontier — Quality vs Composite Cost)",
+    "ValueRank Pareto Frontier — Quality vs Composite Cost",
+    html,
+)
 
 html = re.sub(
-    r'(<div class="section-sub">)How scores are calculated,[\s\S]*?(</div>)',
+    r'(<div class="section-sub">)How scores are calculated(?: across)?[\s\S]*?(</div>)',
     rf'\1How scores are calculated across {d} current zero-gap dimensions, with explicit cost construction and coverage provenance.\2',
     html,
     count=1,
 )
+html = html.replace("Cost now uses a composite 0–100 scale built from normalized AA eval cost and normalized DeepSWE average cost per task.", site_cost_summary)
+html = html.replace("For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.", site_cost_raw_input)
+html = html.replace("The 25% cost weight therefore now combines Artificial Analysis eval cost with DeepSWE average cost per task into a single cost-efficiency term.", site_cost_weight)
+html = html.replace("⊘ Missing: %{customdata[2]}", "Missing scored cells: %{customdata[2]}")
 html = re.sub(
     r'(<h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">)Dimension Weights \([^<]*</h3>',
     rf'\1Dimension Weights ({d} Total)</h3>',
@@ -800,10 +896,30 @@ if 'data-chart="livebenchPareto"' not in html:
         '      <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>\n      <button class="chart-tab" data-chart="frontier2">Cost Impact</button>',
         1,
     )
+chart_tab_pattern = r'<div class="chart-tabs">[\s\S]*?</div>'
+
+
+def arrange_chart_tabs(match):
+    buttons = re.findall(r'(?m)^[ \t]*<button class="chart-tab[^"]*" data-chart="[^"]+">[^<]*</button>', match.group(0))
+    button_by_chart = {
+        re.search(r'data-chart="([^"]+)"', button).group(1): button.strip()
+        for button in buttons
+    }
+    if "pareto" not in button_by_chart or "livebenchPareto" not in button_by_chart:
+        return match.group(0)
+    button_by_chart["pareto"] = re.sub(r">Pareto Frontier<", ">ValueRank Pareto Frontier<", button_by_chart["pareto"])
+    ordered = [button_by_chart["pareto"], button_by_chart["livebenchPareto"]]
+    ordered.extend(button for chart, button in button_by_chart.items() if chart not in {"pareto", "livebenchPareto"})
+    return '    <div class="chart-tabs">\n' + "\n".join(f"      {button}" for button in ordered) + '\n    </div>'
+
+
+html, chart_tab_count = re.subn(chart_tab_pattern, arrange_chart_tabs, html, count=1)
+if chart_tab_count != 1:
+    raise SystemExit(f"chart tab order replacement failed: {chart_tab_count}")
 if 'id="panel-livebenchPareto"' not in html:
     livebench_panel = f'''       <!-- LiveBench Pareto -->
        <div class="chart-panel" id="panel-livebenchPareto">
-         <div class="chart-desc"><strong>LiveBench Pareto:</strong> Official LiveBench Overall Score versus Cost Per Successful Task for {livebench_document['matchedN']}/{livebench_document['cohortN']} matched cohort rows plus {livebench_supplemental_label}: {html_escape(livebench_supplemental_text)}. Higher Overall and lower cost are better; GPT-6 Astra is omitted because this pinned release has no row for it.</div>
+         <div class="chart-desc"><strong>{html_external_link('LiveBench', LIVEBENCH_URL)} Pareto:</strong> Official LiveBench Overall Score versus Cost Per Successful Task for {livebench_document['matchedN']}/{livebench_document['cohortN']} matched cohort rows plus {livebench_supplemental_label}: {html_escape(livebench_supplemental_text)}. Higher Overall and lower cost are better; GPT-6 Astra is omitted because this pinned release has no row for it.</div>
          <div id="chart-livebench-pareto" class="plotly-chart" style="height:520px;"></div>
        </div>
 '''
@@ -814,8 +930,8 @@ if "'chart-heatmap-data','chart-livebench-pareto'" not in html:
     html = html.replace("    'chart-heatmap-data'", "    'chart-heatmap-data','chart-livebench-pareto'", 1)
 
 livebench_card = f'''    <div class="card mb-6" id="livebench-data">
-      <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">LiveBench External Coverage</h3>
-       <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> ranked models and includes <strong>{livebench_supplemental_label}</strong> outside the ranked cohort: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
+       <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">{html_external_link('LiveBench External Coverage', LIVEBENCH_URL)}</h3>
+        <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> ranked models and includes <strong>{livebench_supplemental_label}</strong> outside the ranked cohort: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; Overall is the seven-category mean; cost is the official Cost Per Successful Task. These fields are visible here and in the Pareto chart but are not imputed into the primary score.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
