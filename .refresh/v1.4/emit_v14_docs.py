@@ -764,6 +764,13 @@ html = html.replace("speed among the platform dims", "Speed is included as a pla
 html = html.replace("Speed is shown separately when an AA page publishes a numeric value", "Speed is included as a platform dimension because v4.2 publishes numeric values for every selected page")
 html = html.replace("the highest-quality model", "the current quality leader")
 html = html.replace("Gemini 3.1 Pro</strong> stays overall <strong>#1</strong> in v1.2", f"{models[0]['name']}</strong> is overall <strong>#1</strong> in {VERSION}")
+quality_leader = min(models, key=lambda item: item["qualityRank"])
+html = re.sub(
+    r"The composite cost term uses [\s\S]*?because its composite cost is the highest in the cohort\.",
+    f'The composite cost term uses {cost_mode_label}. That is why <strong>{models[0]["name"]}</strong> is overall <strong>#{models[0]["rank"]}</strong> in {VERSION}, while <strong>{quality_leader["name"]}</strong> is the current quality leader in the cohort (Quality <strong>#{quality_leader["qualityRank"]}</strong>) and ranks overall <strong>#{quality_leader["rank"]}</strong> after cost.',
+    html,
+    count=1,
+)
 html = html.replace("For each of 13 dimensions", f"For each of {d} dimensions")
 html = html.replace("weighted sum across all 13 dimensions", f"weighted sum across all {d} dimensions")
 html = html.replace("all 12 non-cost dimensions", f"all {d - 1} non-cost dimensions")
