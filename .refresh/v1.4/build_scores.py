@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build the reproducible ValueRank v1.4 ranking from current source data.
+"""Build the reproducible ValueRank v1.5 ranking from current source data.
 
 The ranked cohort is the complete current 21-model DeepSWE Best roster.  A
 candidate dimension is retained only when every cohort member has a published
-value; missing values are never neutral-filled.  Current AA v4.1.1 component
+  value; missing values are never neutral-filled.  Current AA v4.2 component
 metrics are kept as fractions, while the score matrix is rank-normalized to a
 0--100 scale.
     LiveBench Instruction Following and Terminal-Bench 4.0 are loaded as
@@ -22,8 +22,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
-VERSION = "v1.4.0"
-PUBLISH_DATE = "September 5, 2026"
+VERSION = "v1.5.0"
+PUBLISH_DATE = "September 6, 2026"
 
 DEVELOPER = {
     "GPT-6 Astra": "OpenAI",
@@ -84,10 +84,10 @@ CANDIDATES = [
     ("deepswePassAt1", "DeepSWE", True, 7),
     ("gdpvalV2", "GDPval-AA v2", True, 6),
     ("tau3Banking", "τ³-Banking", True, 5),
-    ("aaLcr", "AA-LCR", True, 4),
+    ("aaLcr", "AA-LCR v1.1", True, 4),
     ("omniAccuracy", "AA-Omniscience Accuracy", True, 4),
     ("hle", "HLE", True, 4),
-    ("gpqaDiamond", "GPQA Diamond", True, 4),
+    ("gpqaDiamond", "GPQA Diamond (legacy)", True, 4),
     ("scicode", "SciCode", True, 4),
     ("critpt", "CritPt", True, 3),
     ("intelligenceIndex", "AA Intelligence Index", True, 6),
@@ -134,7 +134,7 @@ def main() -> int:
     tb4_models = tb4_document["cohortRows"]
     coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
     if len(deepswe["models"]) != 21 or deepswe.get("n") != 21:
-        raise ValueError("v1.4 requires the complete 21-model DeepSWE roster")
+        raise ValueError("v1.5 requires the complete 21-model DeepSWE roster")
     cohort_ids = {item["slug"] for item in deepswe["models"]}
     if set(livebench_models) != cohort_ids:
         raise ValueError("LiveBench snapshot must contain exactly the current 21-model cohort")
@@ -171,11 +171,12 @@ def main() -> int:
             "aaSlug": aa_model["aaSlug"],
             "aaUrl": aa_model["aaUrl"],
             "aaVariant": aa_model.get("aaVariant"),
-            "aaEvalCost": require_number(aa_metrics["aaEvalCost"], f"{model_id}.aaEvalCost"),
+            "aaEvalCost": aa_metrics.get("aaEvalCost"),
+            "briefcaseElo": aa_metrics.get("briefcaseElo"),
             "intelligenceIndex": aa_metrics.get("intelligenceIndex"),
             "gdpvalV2": aa_metrics.get("gdpvalV2"),
             "tau3Banking": aa_metrics.get("tau3Banking"),
-            # Keep the AA v4.1.1 field under an explicit source namespace: the
+            # Keep the AA v4.2 field under an explicit source namespace: the
             # current standalone Terminal-Bench field below is official TB4.
             "aaTerminalBenchV21": aa_metrics.get("terminalBenchV21"),
             "livebenchModel": livebench.get("livebenchModel"),
@@ -193,6 +194,7 @@ def main() -> int:
             "terminalBenchV4ReleaseDate": tb4.get("releaseDate") if tb4 else None,
             "terminalBenchV4Model": tb4.get("baseModel") if tb4 else None,
             "scicode": aa_metrics.get("scicode"),
+            "gdpPdfAllPass": aa_metrics.get("gdpPdfAllPass"),
             "aaLcr": aa_metrics.get("aaLcr"),
             "hle": aa_metrics.get("hle"),
             "gpqaDiamond": aa_metrics.get("gpqaDiamond"),
@@ -205,15 +207,26 @@ def main() -> int:
         }
         rows.append(row)
 
-    max_aa_cost = max(require_number(row["aaEvalCost"], f"{row['id']}.aaEvalCost") for row in rows)
     max_deepswe_cost = max(require_number(row["deepsweCost"], f"{row['id']}.deepsweCost") for row in rows)
-    if max_aa_cost <= 0 or max_deepswe_cost <= 0:
+    aa_cost_rows = [row for row in rows if row["aaEvalCost"] is not None]
+    aa_cost_complete = len(aa_cost_rows) == len(rows)
+    max_aa_cost = (
+        max(require_number(row["aaEvalCost"], f"{row['id']}.aaEvalCost") for row in aa_cost_rows)
+        if aa_cost_rows
+        else None
+    )
+    if max_deepswe_cost <= 0 or (max_aa_cost is not None and max_aa_cost <= 0):
         raise ValueError("cost normalization requires positive maximum costs")
+    cost_mode = "aa+deepswe" if aa_cost_complete else "deepswe-only (AA v4.2 total cost incomplete)"
     for row in rows:
-        row["aaCostNorm"] = round((row["aaEvalCost"] / max_aa_cost) * 100, 2)
         row["deepSweCostNorm"] = round((row["deepsweCost"] / max_deepswe_cost) * 100, 2)
-        row["costComposite"] = round((row["aaCostNorm"] + row["deepSweCostNorm"]) / 2, 2)
-        row["costMode"] = "aa+deepswe"
+        if aa_cost_complete:
+            row["aaCostNorm"] = round((row["aaEvalCost"] / max_aa_cost) * 100, 2)
+            row["costComposite"] = round((row["aaCostNorm"] + row["deepSweCostNorm"]) / 2, 2)
+        else:
+            row["aaCostNorm"] = None
+            row["costComposite"] = row["deepSweCostNorm"]
+        row["costMode"] = cost_mode
 
     coverage = {}
     for key, label, higher_better, priority in CANDIDATES:
@@ -395,7 +408,13 @@ def main() -> int:
     coverage_document["scoring"] = {
         "version": VERSION,
         "cohortN": len(rows),
-        "costMode": "aa+deepswe",
+        "costMode": cost_mode,
+        "costCoverage": {
+            "availableN": len(aa_cost_rows),
+            "cohortN": len(rows),
+            "missingModels": [row["name"] for row in rows if row["aaEvalCost"] is None],
+            "selectiveSubstitution": False,
+        },
         "retainedDimensions": [weight["key"] for weight in weights],
         "droppedDimensions": dropped,
         "zeroGap": not any(item["missingModels"] for item in score_coverage.values() if item["includedInPrimaryScore"]),
@@ -415,7 +434,8 @@ def main() -> int:
         "retainedDimensions": [weight["label"] for weight in weights],
         "droppedDimensions": dropped,
         "zeroGap": coverage_document["scoring"]["zeroGap"],
-        "costMode": "aa+deepswe",
+        "costMode": cost_mode,
+        "costCoverage": coverage_document["scoring"]["costCoverage"],
         "pareto": pareto,
         "topFive": [
             {"rank": row["rank"], "name": row["name"], "overallScore": row["overallScore"], "qualityScore": row["qualityScore"]}
@@ -428,7 +448,7 @@ def main() -> int:
             "terminalBenchV4": f"{tb4_document['matchedN']}/{tb4_document['cohortN']}",
         },
     }
-    manifest_path = ROOT / "research" / "2026-09-04-valuerank-refresh" / "run_manifest.json"
+    manifest_path = ROOT / "research" / "2026-09-06-valuerank-refresh-v4-2" / "run_manifest.json"
     manifest = json.loads(manifest_path.read_text())
     manifest["scoring"] = ranking_summary
     manifest["scoring"]["weights"] = weights
@@ -445,6 +465,8 @@ def main() -> int:
                 "benchmarkVersion": aa_document.get("benchmarkVersion"),
                 "cohort": {"n": len(rows), "source": deepswe["source"], "sourceUpdatedOn": deepswe.get("sourceUpdatedOn")},
                 "weights": weights,
+                "costMode": cost_mode,
+                "costCoverage": coverage_document["scoring"]["costCoverage"],
                 "models": by_overall,
                 "pareto": pareto,
                 "externalBenchmarks": {

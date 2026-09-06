@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Extract the current Artificial Analysis model payloads for the v1.4 cohort.
+"""Extract the current Artificial Analysis model payloads for the v1.5 cohort.
 
 The public model pages contain the current model record in an escaped JSON
 payload.  The older v1.3 extractor searched visible labels and consequently
 mistook benchmark versions (for example, ``v2.1``) for scores.  This script
-decodes the page's ``currentModel`` object and keeps supplemental evaluations
-separate from the v4.1.1 primary score dimensions.
+decodes the page's ``currentModel`` object and keeps the v4.2 source
+components separate from ValueRank's own score dimensions.
 """
 
 from __future__ import annotations
@@ -23,30 +23,36 @@ REFRESH = ROOT / ".refresh" / "v1.4"
 AA_DIR = REFRESH / "aa"
 MAPPING_PATH = REFRESH / "aa_mapping.json"
 EXTRACT_PATH = AA_DIR / "aa_extract.json"
+SNAPSHOT_PATH = AA_DIR / "aa_v42_snapshot.json"
 OUTPUT_PATH = REFRESH / "aa_metrics.json"
 COVERAGE_PATH = REFRESH / "coverage_matrix.json"
 
 PRIMARY_EVALUATIONS = [
-    {"key": "gdpvalV2", "label": "GDPval-AA v2", "aaKey": "gdpvalNormalized", "weightPct": 20},
-    {"key": "tau3Banking", "label": "τ³-Banking", "aaKey": "tauBanking", "weightPct": 14},
-    {"key": "terminalBenchV21", "label": "Terminal-Bench v2.1", "aaKey": "terminalbenchV21", "weightPct": 16},
-    {"key": "scicode", "label": "SciCode", "aaKey": "scicode", "weightPct": 8},
-    {"key": "aaLcr", "label": "AA-LCR", "aaKey": "lcr", "weightPct": 6},
-    {"key": "hle", "label": "Humanity's Last Exam", "aaKey": "hle", "weightPct": 12},
-    {"key": "gpqaDiamond", "label": "GPQA Diamond", "aaKey": "gpqa", "weightPct": 6},
-    {"key": "critpt", "label": "CritPt", "aaKey": "critpt", "weightPct": 6},
-    {"key": "omniAccuracy", "label": "AA-Omniscience Accuracy", "aaKey": "omniscienceBreakdown.accuracy", "weightPct": 8},
+    {"key": "briefcaseElo", "label": "AA-Briefcase", "aaKey": "briefcaseBreakdown.overall.elo", "weightPct": 15},
+    {"key": "gdpvalV2", "label": "GDPval-AA v2", "aaKey": "gdpvalNormalized", "weightPct": 10},
+    {"key": "tau3Banking", "label": "τ³-Banking", "aaKey": "tauBanking", "weightPct": 5},
+    {"key": "terminalBenchV21", "label": "Terminal-Bench v2.1", "aaKey": "terminalbenchV21", "weightPct": 10},
+    {"key": "scicode", "label": "SciCode", "aaKey": "scicode", "weightPct": 10},
+    {"key": "hle", "label": "Humanity's Last Exam", "aaKey": "hle", "weightPct": 10},
+    {"key": "gdpPdfAllPass", "label": "GDP.pdf", "aaKey": "gdpPdfAllPass", "weightPct": 10},
+    {"key": "critpt", "label": "CritPt", "aaKey": "critpt", "weightPct": 10},
+    {"key": "omniAccuracy", "label": "AA-Omniscience Accuracy", "aaKey": "omniscienceBreakdown.accuracy", "weightPct": 10},
     {
         "key": "omniNonHallucination",
         "label": "AA-Omniscience Non-Hallucination Rate",
         "aaKey": "omniscienceBreakdown.hallucinationRate",
-        "weightPct": 4,
+        "weightPct": 5,
         "transform": "oneMinus",
     },
+    {"key": "aaLcr", "label": "AA-LCR v1.1", "aaKey": "lcr", "weightPct": 5},
+]
+
+ADDITIONAL_FIELDS = [
+    {"key": "gpqaDiamond", "label": "GPQA Diamond (legacy)", "aaKey": "gpqa"},
 ]
 
 # These fields are exposed by the page when available, but are not part of the
-# current v4.1.1 weighted index.  They are retained for auditability/coverage.
+# current v4.2 weighted index.  They are retained for auditability/coverage.
 SUPPLEMENTAL_FIELDS = [
     "mlcrOverall",
     "harveyLab",
@@ -58,7 +64,6 @@ SUPPLEMENTAL_FIELDS = [
     "automationBenchPartialScore",
     "enterpriseOpsGym",
     "itBenchSre",
-    "briefcaseElo",
     "briefcaseRubricPassRate",
     "briefcaseTotalCost",
 ]
@@ -157,43 +162,71 @@ def clean_number(value):
 def main() -> int:
     mapping = {item["id"]: item for item in json.loads(MAPPING_PATH.read_text())}
     extracted = json.loads(EXTRACT_PATH.read_text())
+    snapshot = {
+        item["id"]: item
+        for item in json.loads(SNAPSHOT_PATH.read_text())
+    } if SNAPSHOT_PATH.exists() else {}
     observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     models = {}
 
     for entry in extracted:
         model_id = entry["id"]
-        slug, html_path, text_path = selected_page(entry)
-        html = html_path.read_text(errors="ignore")
-        text = text_path.read_text(errors="ignore")
-        current = decode_current_model(html)
+        snapshot_entry = snapshot.get(model_id)
+        html_path = None
+        text_path = None
+        if snapshot_entry:
+            current = snapshot_entry["model"]
+            source_url = snapshot_entry["url"]
+            slug = current.get("slug") or model_id
+            html = ""
+            text = ""
+        else:
+            slug, html_path, text_path = selected_page(entry)
+            html = html_path.read_text(errors="ignore")
+            text = text_path.read_text(errors="ignore")
+            current = decode_current_model(html)
+            source_url = entry["url"]
         breakdown = current.get("omniscienceBreakdown") or {}
         cost = current.get("intelligenceIndexCost") or {}
         briefcase = current.get("briefcaseBreakdown") or {}
         metrics = {
+            "briefcaseElo": clean_number(
+                current.get("briefcaseElo", json_value(briefcase, "overall.elo"))
+            ),
             "intelligenceIndex": clean_number(current.get("intelligenceIndex")),
             "gdpvalV2": clean_number(current.get("gdpvalNormalized")),
             "tau3Banking": clean_number(current.get("tauBanking")),
-            "terminalBenchV21": clean_number(current.get("terminalbenchV21")),
+            "terminalBenchV21": clean_number(
+                current.get("terminalBenchV21", current.get("terminalbenchV21"))
+            ),
             "scicode": clean_number(current.get("scicode")),
+            "gdpPdfAllPass": clean_number(current.get("gdpPdfAllPass")),
             "aaLcr": clean_number(current.get("lcr")),
             "hle": clean_number(current.get("hle")),
             "gpqaDiamond": clean_number(current.get("gpqa")),
             "critpt": clean_number(current.get("critpt")),
-            "omniAccuracy": clean_number(breakdown.get("accuracy")),
-            "omniNonHallucination": (
+            "omniAccuracy": clean_number(
+                current.get("omniscienceAccuracy", breakdown.get("accuracy"))
+            ),
+            "omniNonHallucination": clean_number(
+                current.get("omniscienceNonHallucination")
+            ) if current.get("omniscienceNonHallucination") is not None else (
                 1.0 - float(breakdown["hallucinationRate"])
                 if breakdown.get("hallucinationRate") is not None
                 else None
             ),
-            "aaEvalCost": clean_number(cost.get("total")),
-            "speed": summary_speed(text),
+            "aaEvalCost": clean_number(current.get("aaEvalCost", cost.get("total"))),
+            "speed": clean_number(current.get("speed")) if snapshot_entry else summary_speed(text),
         }
         supplemental = {
             field: clean_number(current.get(field))
             for field in SUPPLEMENTAL_FIELDS
         }
-        supplemental["briefcaseElo"] = clean_number(json_value(briefcase, "overall.elo"))
+        supplemental["briefcaseElo"] = clean_number(
+            current.get("briefcaseElo", json_value(briefcase, "overall.elo"))
+        )
         supplemental["briefcaseRubricPassRate"] = clean_number(briefcase.get("rubricPassRate"))
+        supplemental["briefcaseTotalCost"] = clean_number(briefcase.get("totalCost"))
 
         models[model_id] = {
             "id": model_id,
@@ -202,15 +235,20 @@ def main() -> int:
             "aaName": current.get("name"),
             "aaShortName": current.get("shortName"),
             "aaVariant": current.get("effort", {}).get("slug"),
-            "aaUrl": entry["url"],
+            "aaUrl": source_url,
             "release": current.get("release"),
             "isReasoning": current.get("isReasoning"),
             "metrics": metrics,
             "supplemental": supplemental,
             "extraction": {
-                "htmlSnapshot": str(html_path.relative_to(ROOT)),
-                "textSnapshot": str(text_path.relative_to(ROOT)),
-                "method": "decoded currentModel object from first-party page payload",
+                "htmlSnapshot": str(html_path.relative_to(ROOT)) if html_path else None,
+                "textSnapshot": str(text_path.relative_to(ROOT)) if text_path else None,
+                "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot_entry else None,
+                "method": (
+                    "captured currentModel object from first-party page payload"
+                    if snapshot_entry
+                    else "decoded currentModel object from first-party page payload"
+                ),
             },
         }
 
@@ -219,15 +257,24 @@ def main() -> int:
         "aaEvalCost",
         "speed",
     ]
+    additional_fields = [item["key"] for item in ADDITIONAL_FIELDS]
     supplemental_fields = list(SUPPLEMENTAL_FIELDS) + [
-        "briefcaseElo",
         "briefcaseRubricPassRate",
         "briefcaseTotalCost",
     ]
     coverage = {}
-    for group, fields in (("primary", primary_fields), ("supplemental", supplemental_fields)):
+    for group, fields in (
+        ("primary", primary_fields),
+        ("additional", additional_fields),
+        ("supplemental", supplemental_fields),
+    ):
         for field in fields:
-            available = [model_id for model_id, item in models.items() if item["metrics" if field in primary_fields else "supplemental"].get(field) is not None]
+            container = "supplemental" if group == "supplemental" else "metrics"
+            available = [
+                model_id
+                for model_id, item in models.items()
+                if item[container].get(field) is not None
+            ]
             missing = [model_id for model_id in models if model_id not in available]
             coverage[field] = {
                 "group": group,
@@ -239,21 +286,25 @@ def main() -> int:
             }
 
     output = {
-        "schemaVersion": "v1.4",
+        "schemaVersion": "v1.5",
         "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
         "observedAt": observed_at,
-        "benchmarkVersion": "Artificial Analysis Intelligence Index v4.1.1",
+        "benchmarkVersion": "Artificial Analysis Intelligence Index v4.2",
+        "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot else None,
         "primaryEvaluations": PRIMARY_EVALUATIONS,
+        "additionalFields": ADDITIONAL_FIELDS,
         "models": models,
     }
     coverage_output = {
-        "schemaVersion": "v1.4",
+        "schemaVersion": "v1.5",
         "observedAt": observed_at,
         "cohort": "DeepSWE Best v1.1 current 21-model roster",
         "cohortN": len(models),
         "primaryEvaluations": PRIMARY_EVALUATIONS,
+        "additionalFields": ADDITIONAL_FIELDS,
         "fields": coverage,
-        "note": "Missing values are preserved as null; no supplemental field is silently substituted into the primary score.",
+        "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot else None,
+        "note": "Missing values are preserved as null; legacy or supplemental fields are not silently substituted into the v4.2 source components.",
     }
     OUTPUT_PATH.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n")
     COVERAGE_PATH.write_text(json.dumps(coverage_output, indent=2, ensure_ascii=False) + "\n")
@@ -262,6 +313,7 @@ def main() -> int:
     print(json.dumps({
         "models": len(models),
         "primaryFields": len(primary_fields),
+        "additionalFields": len(additional_fields),
         "missingPrimary": missing_primary,
         "outputs": [str(OUTPUT_PATH.relative_to(ROOT)), str(COVERAGE_PATH.relative_to(ROOT))],
     }, indent=2, ensure_ascii=False))
