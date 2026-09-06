@@ -22,7 +22,6 @@ node_modules/
 /multi-ai-deep-research-out/
 
 # Quarantined paths from the known yugin0120 worm payload; see commit 485abb2
-/.vscode/
 /public/fonts/
 
 # Reproducible generated charts and benchmark-run outputs
@@ -58,3 +57,4 @@ node_modules/
 
 # Auditable Silver deep-research validation logs
 !research/2026-09-04-valuerank-refresh/validation/*.log
+.gitignore

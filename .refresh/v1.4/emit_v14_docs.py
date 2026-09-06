@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
 RESEARCH = ROOT / "research" / "2026-09-06-valuerank-refresh-v4-2"
 sys.path.insert(0, str(ROOT / "scripts"))
+from plan_costs import build_cost_fields, load_plan_routes, route_summary
 from site_header import inject_header
 
 VERSION = "v1.5.0"
@@ -72,6 +73,9 @@ n = len(models)
 d = len(weights)
 pareto = scores["pareto"]
 model_by_id = {model["id"]: model for model in models}
+plan_route_document = load_plan_routes()
+plan_cost_fields = build_cost_fields(models, plan_route_document)
+plan_summary = route_summary(plan_route_document, plan_cost_fields)
 livebench_models = {
     **livebench_document["models"],
     **livebench_document.get("supplementalModels", {}),
@@ -90,13 +94,13 @@ cost_coverage = scores.get("costCoverage") or manifest.get("scoring", {}).get("c
 cost_missing_text = ", ".join(cost_coverage.get("missingModels", [])) or "none"
 dropped = manifest.get("scoring", {}).get("droppedDimensions", [])
 if cost_mode_label == "DeepSWE-only":
-    site_cost_summary = "Cost now uses a 0–100 rank scale built from normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete."
-    site_cost_raw_input = "For Cost, the raw input is normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete."
-    site_cost_weight = "The 25% cost weight therefore uses the cohort-wide DeepSWE average cost per task because the v4.2 AA total-cost field is incomplete."
+    site_cost_summary = "Cost is rank-normalized from the selected API-price or subscription-plan task-cost basis; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete."
+    site_cost_raw_input = "For Cost, the raw input is the selected API-price or subscription-plan task cost; Plan Costs divide API task cost by the highest eligible Value Multiple."
+    site_cost_weight = "The 25% cost weight therefore uses the selected API-price or subscription-plan task-cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple."
 else:
-    site_cost_summary = "Cost now uses a 0–100 scale built from normalized AA eval cost and normalized DeepSWE average cost per task."
-    site_cost_raw_input = "For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task."
-    site_cost_weight = "The 25% cost weight therefore combines Artificial Analysis eval cost with DeepSWE average cost per task into a single cost-efficiency term."
+    site_cost_summary = "Cost is rank-normalized from the selected API-price or subscription-plan task-cost basis."
+    site_cost_raw_input = "For Cost, the raw input is the selected API-price or subscription-plan task cost; Plan Costs divide API task cost by the highest eligible Value Multiple."
+    site_cost_weight = "The 25% cost weight therefore uses the selected API-price or subscription-plan task-cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple."
 
 
 def fnum(value, places=2, dash="—"):
@@ -435,6 +439,46 @@ Missing values are intentionally represented as null; no old-version, model-fami
 site_path = ROOT / "site" / "index.html"
 html = site_path.read_text()
 
+cost_basis_css = r"""    /* API-price versus subscription-plan cost switcher */
+    .cost-basis-control {
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap; width:100%;
+      padding:12px 14px; border:1px solid var(--border); border-radius:var(--radius);
+      background:var(--bg-card); margin-bottom:14px;
+    }
+    .cost-basis-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-secondary); }
+    .cost-basis-options { display:inline-flex; gap:3px; padding:3px; border:1px solid var(--border); border-radius:999px; background:var(--bg); }
+    .cost-basis-btn {
+      border:0; border-radius:999px; background:transparent; color:var(--text-dim); cursor:pointer;
+      font:600 12px var(--font-body); padding:6px 12px; transition:background .2s,color .2s,box-shadow .2s;
+    }
+    .cost-basis-btn:hover { color:var(--text-primary); }
+    .cost-basis-btn:focus-visible { outline:2px solid var(--accent-light); outline-offset:2px; }
+    .cost-basis-btn.active { background:var(--accent); color:#fff; box-shadow:0 1px 4px rgba(0,0,0,.18); }
+    .cost-basis-context { flex:1 1 280px; color:var(--text-dim); font-size:11px; line-height:1.5; }
+    .cost-cell { display:inline-flex; flex-direction:column; align-items:flex-start; gap:2px; line-height:1.15; }
+    .cost-meta { color:var(--text-dim); font-size:9px; line-height:1.25; max-width:180px; white-space:normal; }
+    .cost-score { color:var(--text-dim); font-size:9px; }
+"""
+if "/* API-price versus subscription-plan cost switcher */" not in html:
+    html = html.replace("    /* CA Cost + Value columns */", cost_basis_css + "    /* CA Cost + Value columns */", 1)
+
+cost_basis_markup = r"""    <div class="cost-basis-control" id="cost-basis-control" role="group" aria-labelledby="cost-basis-label">
+      <span class="cost-basis-label" id="cost-basis-label">Cost basis</span>
+      <div class="cost-basis-options">
+        <button type="button" class="cost-basis-btn active" data-cost-basis="api" aria-pressed="true">API Costs</button>
+        <button type="button" class="cost-basis-btn" data-cost-basis="plan" aria-pressed="false">Plan Costs</button>
+      </div>
+      <span class="cost-basis-context" id="cost-basis-context">API list-price task cost; cost-weighted scores use the API-cost rank.</span>
+    </div>
+"""
+if 'id="cost-basis-control"' not in html:
+    html = html.replace('    <div class="table-controls">', cost_basis_markup + '    <div class="table-controls">', 1)
+html = html.replace(
+    '<th data-col="evalCost">Composite Cost (0-100)</th>',
+    '<th data-col="evalCost">Cost <span id="cost-basis-table-label">(API Costs)</span></th>',
+    1,
+)
+
 weight_by_key = {weight["key"]: weight for weight in weights}
 SITE_DIM_META = {
     "costComposite": ("costComposite", "Cost", "Composite Cost", "cost"),
@@ -473,7 +517,7 @@ if unknown_site_dims:
 SITE_DIMS = [SITE_DIM_META[weight["key"]] for weight in weights]
 speed_dim_idx = next((index for index, item in enumerate(SITE_DIMS) if item[0] == "speed"), -1)
 site_models = []
-for model in models:
+for model, cost_fields in zip(models, plan_cost_fields):
     site_models.append({
         "rank": model["rank"],
         "name": model["name"],
@@ -482,6 +526,13 @@ for model in models:
         "evalCost": model["costComposite"],
         "aaEvalCost": round(model["aaEvalCost"], 2) if model.get("aaEvalCost") is not None else None,
         "deepSweCost": model["deepsweCost"],
+        "apiCost": cost_fields["apiCost"],
+        "planCost": cost_fields["planCost"],
+        "planComparableCost": cost_fields["planComparableCost"],
+        "apiCostScore": cost_fields["apiCostScore"],
+        "planCostScore": cost_fields["planCostScore"],
+        "planCostFallback": cost_fields["planCostFallback"],
+        "planRoute": cost_fields["planRoute"],
         "aaCostNorm": model["aaCostNorm"],
         "deepSweCostNorm": model["deepSweCostNorm"],
         "speed": model.get("speed"),
@@ -527,6 +578,15 @@ livebench_site_table_rows = "\n".join(
     for record in livebench_rows
 )
 
+plan_site_meta = {
+    "asOf": plan_summary["asOf"],
+    "routeCount": plan_summary["routeCount"],
+    "supportedModelCount": plan_summary["supportedModelCount"],
+    "fallbackModelCount": plan_summary["fallbackModelCount"],
+    "totalModelCount": n,
+    "mixId": plan_summary["mixId"],
+}
+
 def replace_once(source, pattern, replacement, label):
     result, count = re.subn(pattern, replacement, source, count=1)
     if count != 1:
@@ -568,6 +628,288 @@ html = replace_once(
     "MODELS",
 )
 html = replace_once(html, r"const SPEED_DIM_IDX\s*=\s*[^;]+;[^\n]*", "const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";", "SPEED_DIM_IDX")
+
+cost_switcher_js = r"""// COST BASIS SWITCHER START
+const PLAN_COST_META = PLAN_META_JSON;
+let costBasis = 'api';
+let costWeightPct = 25;
+
+function costBasisLabel() {
+  return costBasis === 'plan' ? 'Plan Costs' : 'API Costs';
+}
+
+function planRouteFor(model) {
+  return model.planRoute || null;
+}
+
+function hasPlanRoute(model) {
+  return planRouteFor(model) !== null && Number.isFinite(Number(model.planCost));
+}
+
+function activeCostUsd(model) {
+  return costBasis === 'plan' && hasPlanRoute(model) ? Number(model.planCost) : Number(model.apiCost);
+}
+
+function activeCostScore(model) {
+  const candidate = costBasis === 'plan' ? model.planCostScore : model.apiCostScore;
+  return Number.isFinite(Number(candidate)) ? Number(candidate) : Number(model.apiCostScore);
+}
+
+function formatValueMultiple(route) {
+  return route ? Number(route.valueMultiple).toLocaleString(undefined, { maximumFractionDigits: 3 }) + '×' : '—';
+}
+
+function activeCostRouteLabel(model) {
+  if (costBasis !== 'plan') return 'API list price';
+  const route = planRouteFor(model);
+  return route ? `${route.planLabel} · ${formatValueMultiple(route)}` : 'API fallback · no verified subscription route';
+}
+
+function costBasisTooltip(model) {
+  const api = fmtUsd(model.apiCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const plan = model.planCost == null
+    ? 'unavailable'
+    : fmtUsd(model.planCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const route = planRouteFor(model);
+  const routeText = route
+    ? `${route.planLabel} (${formatValueMultiple(route)}; ${route.evidenceClass})`
+    : 'No verified subscription route; API fallback';
+  return `API Cost: ${api}<br>Plan Cost: ${plan}<br>Route: ${routeText}`;
+}
+
+function recomputeCostState() {
+  MODELS.forEach(model => {
+    model.activeCostUsd = activeCostUsd(model);
+    model.evalCost = activeCostScore(model);
+    model.dims[0] = model.evalCost;
+    model.costTier = compositeCostTier(model.evalCost);
+    model.activeScore = computeNewScore(model, costWeightPct);
+    model.overallScore = model.activeScore;
+  });
+  const sorted = [...MODELS].sort((a, b) => b.activeScore - a.activeScore || a.name.localeCompare(b.name));
+  sorted.forEach((model, index) => { model.rank = index + 1; });
+  tableModels = MODELS.map(model => ({ ...model, score: model.activeScore }));
+}
+
+function updateCostBasisUI() {
+  const label = costBasisLabel();
+  document.querySelectorAll('[data-cost-basis]').forEach(button => {
+    const active = button.dataset.costBasis === costBasis;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
+  const tableLabel = document.getElementById('cost-basis-table-label');
+  if (tableLabel) tableLabel.textContent = `(${label})`;
+  const context = document.getElementById('cost-basis-context');
+  if (context) {
+    context.textContent = costBasis === 'plan'
+      ? `API task cost ÷ highest eligible Value Multiple. ${PLAN_COST_META.supportedModelCount}/${PLAN_COST_META.totalModelCount} models have a verified plan route; the rest remain API-priced.`
+      : 'Average task cost at provider API list prices; cost-weighted scores use the API-cost rank.';
+  }
+  const note = document.getElementById('cost-note');
+  if (note) note.textContent = `${label} · Cost weight: ${costWeightPct}%${costBasis === 'plan' ? ` · ${PLAN_COST_META.fallbackModelCount} API fallback${PLAN_COST_META.fallbackModelCount === 1 ? '' : 's'}` : ''}`;
+  document.querySelectorAll('[data-cost-basis-label]').forEach(element => { element.textContent = label; });
+}
+
+function applyCostBasis(nextBasis) {
+  costBasis = nextBasis === 'plan' ? 'plan' : 'api';
+  recomputeCostState();
+  updateCostBasisUI();
+}
+
+function rerenderCostBasisViews() {
+  recomputeCostState();
+  updateCostBasisUI();
+  if (typeof renderTable === 'function') renderTable();
+  if (typeof renderHeroPodium === 'function') renderHeroPodium();
+  const costChartKeys = ['pareto', 'decomp', 'displacement', 'heatmap', 'bubble', 'frontier2'];
+  if (typeof rendered !== 'undefined' && typeof chartRenderers !== 'undefined') {
+    costChartKeys.forEach(key => {
+      if (!rendered[key] || !chartRenderers[key]) return;
+      try { chartRenderers[key](); rendered[key] = true; }
+      catch (error) { console.error('Cost-basis chart render failed:', key, error); }
+    });
+  }
+  const dataHeatmap = document.getElementById('chart-heatmap-data');
+  if (dataHeatmap && typeof renderHeatmap === 'function') renderHeatmap('chart-heatmap-data', 480);
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function setCostBasis(nextBasis) {
+  applyCostBasis(nextBasis);
+  try { localStorage.setItem('vr-cost-basis', costBasis); } catch (error) { /* storage is optional */ }
+  rerenderCostBasisViews();
+}
+
+function initCostBasis() {
+  document.querySelectorAll('[data-cost-basis]').forEach(button => {
+    button.addEventListener('click', () => setCostBasis(button.dataset.costBasis));
+  });
+  let saved = 'api';
+  try { saved = localStorage.getItem('vr-cost-basis') || 'api'; } catch (error) { /* storage is optional */ }
+  applyCostBasis(saved);
+}
+// COST BASIS SWITCHER END""".replace("PLAN_META_JSON", json.dumps(plan_site_meta, ensure_ascii=False))
+cost_switcher_pattern = r"// COST BASIS SWITCHER START[\s\S]*?// COST BASIS SWITCHER END"
+if re.search(cost_switcher_pattern, html):
+    html = replace_once(html, cost_switcher_pattern, cost_switcher_js, "cost basis switcher")
+else:
+    html = html.replace("const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";", "const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";\n\n" + cost_switcher_js, 1)
+
+# Keep every cost-bearing interactive surface honest when the basis changes.
+# These replacements are intentionally idempotent because the emitter reads
+# its own generated shell on subsequent refreshes.
+dynamic_cost_chart_replacements = [
+    (
+        "  return `AA Eval Cost: ${fmtUsd(m.aaEvalCost)}<br>DeepSWE Avg Cost: ${fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;",
+        "  return `Selected ${costBasisLabel()}: ${fmtUsd(m.activeCostUsd, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}<br>${costBasisTooltip(m)}`;",
+    ),
+    (
+        "    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })\n  ];",
+        "    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),\n    costBasisTooltip(m)\n  ];",
+    ),
+    (
+        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';",
+        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';",
+    ),
+    (
+        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<extra>Frontier</extra>';",
+        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<extra>Frontier</extra>';",
+    ),
+    (
+        "title: { text: 'ValueRank Pareto Frontier — Quality vs Composite Cost', font: plotlyTitle(14) },",
+        "title: { text: 'ValueRank Pareto Frontier — Quality vs ' + costBasisLabel(), font: plotlyTitle(14) },",
+    ),
+    (
+        "      title: 'Composite Cost (0–100, lower better)',",
+        "      title: costBasisLabel() + ' (0–100, lower better)',",
+    ),
+    (
+        "     title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
+        "     title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
+    ),
+    (
+        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
+        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
+    ),
+    (
+        "  const colLabels = colOrder.map(i => DIM_KEYS[i]);",
+        "  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
+    ),
+    (
+        "'<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>'",
+        "'<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>'",
+    ),
+    (
+        "title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
+        "title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
+    ),
+    (
+        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
+        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
+    ),
+    (
+        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<extra></extra>`),",
+        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
+    ),
+    (
+        "title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of 25% cost weight', font:plotlyTitle(13)},",
+        "title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of ' + costWeightPct + '% ' + costBasisLabel() + ' weight', font:plotlyTitle(13)},",
+    ),
+    (
+        "    xaxis:{...getPlotlyLayout().xaxis, title:'Composite Cost (0-100)', range:[0,105]},",
+        "    xaxis:{...getPlotlyLayout().xaxis, title:costBasisLabel() + ' (0-100)', range:[0,105]},",
+    ),
+    (
+        "    annotations:[\n      {x:7.04, y:58.1, xref:'x', yref:'y', text:'MiMo +13.9 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},\n      {x:80.37, y:51.8, xref:'x', yref:'y', text:'Opus 4.8 -14.5 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:0, ay:70},\n    ]",
+        "    annotations:[]",
+    ),
+]
+for old, new in dynamic_cost_chart_replacements:
+    if old in html:
+        html = html.replace(old, new, 1)
+
+dynamic_hero_replacements = [
+    (
+        '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${m1.evalCost.toFixed(1)} composite · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>',
+        '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>',
+    ),
+    (
+        '<div class="podium-runner-meta">${m.developer} · $${m.evalCost.toFixed(1)} composite</div>',
+        '<div class="podium-runner-meta">${m.developer} · ${costBasisLabel()} ${fmtUsd(m.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m)}</div>',
+    ),
+]
+for old, new in dynamic_hero_replacements:
+    if old in html:
+        html = html.replace(old, new, 1)
+
+ranking_table_function = r"""function renderTable() {
+  let models = tableModels.filter(m => {
+    if (tierFilter === 'all') return true;
+    if (tierFilter === 'Expensive') return ['Expensive','Very Expensive','Ultra-Premium'].includes(m.costTier);
+    return m.costTier === tierFilter;
+  });
+  models.sort((a,b) => sortDir * (a[sortCol] > b[sortCol] ? 1 : a[sortCol] < b[sortCol] ? -1 : 0));
+  if (sortCol === 'rank' || sortCol === 'qualityRank' || sortCol === 'missingCount') {
+    models.sort((a,b) => sortDir * (a[sortCol] - b[sortCol]));
+  }
+  if (sortCol === 'evalCost') models.sort((a,b) => sortDir * (a.evalCost - b.evalCost));
+  if (sortCol === 'score') models.sort((a,b) => sortDir * (b.score - a.score));
+
+  const tbody = document.getElementById('ranking-tbody');
+  tbody.innerHTML = models.map((m, idx) => {
+    const rank = idx + 1;
+    const dispRank = sortCol === 'score' ? m.rank : rank;
+    const rankCls = dispRank===1?'r1':dispRank===2?'r2':dispRank===3?'r3':'';
+    const delta = m.qualityRank - m.rank;
+    const deltaStr = delta > 0 ? `+${delta}▲` : delta < 0 ? `${delta}▼` : '—';
+    const deltaCls = delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : 'delta-same';
+    const barW = Math.round((m.score/100)*100);
+    const cost = activeCostUsd(m);
+    const routeText = activeCostRouteLabel(m);
+    return `<tr>
+      <td><span class="rank-cell ${rankCls}">${dispRank}</span></td>
+      <td>
+        <div class="model-name">${m.name}</div>
+        <div class="model-dev">${m.developer}</div>
+      </td>
+      <td>
+        <div class="score-bar-wrap">
+          <span class="score-val" style="color:${scoreColor(m.score)}">${m.score.toFixed(1)}</span>
+          <div class="score-bar"><div class="score-bar-fill" style="width:${barW}%;background:${scoreColor(m.score)}"></div></div>
+        </div>
+      </td>
+      <td><span class="mono" style="color:${scoreColor(m.qualityScore)}">${m.qualityScore.toFixed(1)}</span></td>
+      <td><span class="quality-pill">#${m.qualityRank}</span></td>
+      <td data-sort-value="${cost}">
+        <span class="cost-cell">
+          <span class="mono">${fmtUsd(cost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+          <span class="cost-meta">${routeText}</span>
+          <span class="cost-score">Score ${m.evalCost.toFixed(1)}</span>
+        </span>
+      </td>
+      <td><span class="tier-badge ${tierClass(m.costTier)}">${m.costTier}</span></td>
+      <td><span class="missing-dots">${m.missingCount > 0 ? '⊘'.repeat(Math.min(m.missingCount,7)) + (m.missingCount > 7 ? '+' : '') + ` ${m.missingCount}` : '✓ Full'}</span></td>
+    </tr>`;
+  }).join('');
+}"""
+html = replace_once(html, r"function renderTable\(\) \{[\s\S]*?\n\}\n\nfunction initTable\(\)", ranking_table_function.rstrip() + "\n\nfunction initTable()", "ranking table")
+
+cost_slider_function = r"""function initCostSlider() {
+  const slider = document.getElementById('cost-slider');
+  const valEl  = document.getElementById('slider-val');
+  const noteEl = document.getElementById('cost-note');
+  if (!slider) return;
+  slider.addEventListener('input', () => {
+    const cw = parseInt(slider.value, 10);
+    costWeightPct = cw;
+    valEl.textContent = cw + '%';
+    noteEl.textContent = cw === 25 ? 'Cost weight: 25% (default)' : `Cost weight: ${cw}% (custom — default is 25%)`;
+    applyCostBasis(costBasis);
+    rerenderCostBasisViews();
+  });
+}"""
+html = replace_once(html, r"function initCostSlider\(\) \{[\s\S]*?\n\}(?=\n\n// ─+)", cost_slider_function.rstrip(), "cost slider")
 
 dim_table_function = r"""function renderDimTable() {
   const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence' };
@@ -665,6 +1007,35 @@ speed_function = r"""function renderBubble() {
 """
 html = replace_once(html, r"function renderBubble\(\) \{[\s\S]*?\n\}\n\n// ─+\n// CHART 6", speed_function + "\n// ─────────────────────────────────────────────\n// CHART 6", "speed chart")
 
+# The renderer above is replaced as a whole, so apply its basis-aware labels
+# after that replacement.  The remaining chart functions are patched here as
+# well, after their source has been normalized by the earlier replacements.
+post_renderer_cost_replacements = [
+    (
+        "     title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
+        "     title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
+    ),
+    (
+        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
+        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
+    ),
+    (
+        "     hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+        "     hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+    ),
+    (
+        "     title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
+        "     title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
+    ),
+    (
+        "  const colLabels = colOrder.map(i => DIM_KEYS[i]);",
+        "  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
+    ),
+]
+for old, new in post_renderer_cost_replacements:
+    if old in html:
+        html = html.replace(old, new, 1)
+
 livebench_function = r"""function renderLiveBenchPareto() {
   const rows = LIVEBENCH.filter(m => Number.isFinite(Number(m.overallScore)) && Number.isFinite(Number(m.costPerSuccessfulTaskUsd)));
   const target = document.getElementById('chart-livebench-pareto');
@@ -758,6 +1129,13 @@ html = html.replace("Sep 5", "Sep 6")
 html = html.replace("ValueRank v1.4.0", f"ValueRank {VERSION}")
 html = html.replace("Production AI Ranking Framework · v1.4.0", f"Production AI Ranking Framework · {VERSION}")
 html = html.replace("v1.4.0 uses zero missing benchmark cells", f"{VERSION} uses zero missing benchmark cells")
+
+if "try { initCostBasis(); } catch (e) { console.error(e); }" not in html:
+    html = html.replace(
+        "  if (document.getElementById('ranking-tbody')) {\n    try { renderHeroPodium(); } catch (e) { console.error(e); }",
+        "  if (document.getElementById('ranking-tbody')) {\n    try { initCostBasis(); } catch (e) { console.error(e); }\n    try { renderHeroPodium(); } catch (e) { console.error(e); }",
+        1,
+    )
 html = html.replace("v1.4.0 Release", f"{VERSION} Release")
 html = html.replace("primary-source data in v1.4.0", f"primary-source data in {VERSION}")
 html = html.replace("retained v1.4.0 dimension", f"retained {VERSION} dimension")
@@ -793,7 +1171,7 @@ html = re.sub(
 hero_desc = (
     f'ValueRank ranks <strong>{n} current {html_external_link("DeepSWE Best", DEEPSWE_URL)} models</strong> across a '
     f'<strong>zero-gap {d}-dimension set</strong>. {VERSION} uses '
-    f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus DeepSWE performance and a {cost_mode_label} Cost. '
+    f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus DeepSWE performance and a selectable API-price or subscription-plan cost basis. '
     f'Speed is retained because all selected v4.2 pages publish numeric values. {html_external_link("LiveBench", LIVEBENCH_URL)} Instruction Following and {html_external_link("Terminal-Bench 4.0", TERMINAL_BENCH_URL)} are shown as external coverage-only views.'
 )
 html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero-desc">\n          {hero_desc}\n        </p>', "hero copy")
@@ -848,6 +1226,67 @@ html = html.replace("Cost now uses a composite 0–100 scale built from normaliz
 html = html.replace("For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.", site_cost_raw_input)
 html = html.replace("The 25% cost weight therefore now combines Artificial Analysis eval cost with DeepSWE average cost per task into a single cost-efficiency term.", site_cost_weight)
 html = html.replace("⊘ Missing: %{customdata[2]}", "Missing scored cells: %{customdata[2]}")
+
+# Apply the final cost-basis labels after every renderer and card replacement.
+# Keeping these replacements at the end makes the generated artifact idempotent
+# even when an earlier chart renderer is replaced wholesale.
+final_cost_surface_replacements = [
+    (
+        "title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
+        "title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
+    ),
+    (
+        "title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
+        "title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
+    ),
+    (
+        "hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+        "hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+    ),
+    (
+        "title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
+        "title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
+    ),
+    (
+        "const colLabels = colOrder.map(i => DIM_KEYS[i]);",
+        "const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
+    ),
+    (
+        "Cost now uses a 0–100 rank scale built from normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete.",
+        site_cost_summary,
+    ),
+    (
+        "Every other ranked model is dominated on composite cost versus quality.",
+        "Every other ranked model is dominated on the selected <span data-cost-basis-label>API Costs</span> versus quality.",
+    ),
+    (
+        "Which models are fast AND high-quality AND cheap on the composite-cost basis?",
+        "Which models are fast AND high-quality AND cheap on the selected <span data-cost-basis-label>API Costs</span> basis?",
+    ),
+    (
+        "Color = cost tier. Hover for raw AA cost and DeepSWE average-cost components.",
+        "Color = cost tier. Hover for the selected cost basis, route provenance, and source components.",
+    ),
+    (
+        "X-axis = composite cost.",
+        "X-axis = <span data-cost-basis-label>API Costs</span> score.",
+    ),
+    (
+        "The composite cost term uses DeepSWE-only.",
+        "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple.",
+    ),
+    (
+        "and the DeepSWE-only cost composite.",
+        "and the selected <span data-cost-basis-label>API Costs</span> cost composite.",
+    ),
+    (
+        "function compositeCostTier(cost) {\n  if (cost <= 15) return 'Budget';\n  if (cost <= 22) return 'Near-Budget';\n  if (cost <= 35) return 'Mid-Range';\n  if (cost <= 55) return 'Premium';\n  return 'Expensive';\n}",
+        "function compositeCostTier(cost) {\n  const costPenalty = 100 - Number(cost);\n  if (costPenalty <= 15) return 'Budget';\n  if (costPenalty <= 22) return 'Near-Budget';\n  if (costPenalty <= 35) return 'Mid-Range';\n  if (costPenalty <= 55) return 'Premium';\n  return 'Expensive';\n}",
+    ),
+]
+for old, new in final_cost_surface_replacements:
+    if old in html:
+        html = html.replace(old, new, 1)
 html = re.sub(
     r'(<h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">)Dimension Weights \([^<]*</h3>',
     rf'\1Dimension Weights ({d} Total)</h3>',

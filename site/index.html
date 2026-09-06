@@ -1139,6 +1139,25 @@
     .ca-badge-secondary { background: rgba(148,163,184,.12); color: var(--text-dim); border: 1px solid var(--border); }
     .ca-badge-integrity { background: rgba(251,146,60,.1); color: #f97316; border: 1px solid rgba(251,146,60,.25); }
     .ca-badge-version { background: var(--accent-a08); color: var(--accent-light); border: 1px solid var(--accent-a25); }
+    /* API-price versus subscription-plan cost switcher */
+    .cost-basis-control {
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap; width:100%;
+      padding:12px 14px; border:1px solid var(--border); border-radius:var(--radius);
+      background:var(--bg-card); margin-bottom:14px;
+    }
+    .cost-basis-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-secondary); }
+    .cost-basis-options { display:inline-flex; gap:3px; padding:3px; border:1px solid var(--border); border-radius:999px; background:var(--bg); }
+    .cost-basis-btn {
+      border:0; border-radius:999px; background:transparent; color:var(--text-dim); cursor:pointer;
+      font:600 12px var(--font-body); padding:6px 12px; transition:background .2s,color .2s,box-shadow .2s;
+    }
+    .cost-basis-btn:hover { color:var(--text-primary); }
+    .cost-basis-btn:focus-visible { outline:2px solid var(--accent-light); outline-offset:2px; }
+    .cost-basis-btn.active { background:var(--accent); color:#fff; box-shadow:0 1px 4px rgba(0,0,0,.18); }
+    .cost-basis-context { flex:1 1 280px; color:var(--text-dim); font-size:11px; line-height:1.5; }
+    .cost-cell { display:inline-flex; flex-direction:column; align-items:flex-start; gap:2px; line-height:1.15; }
+    .cost-meta { color:var(--text-dim); font-size:9px; line-height:1.25; max-width:180px; white-space:normal; }
+    .cost-score { color:var(--text-dim); font-size:9px; }
     /* CA Cost + Value columns */
     .ca-cost-cell { white-space: nowrap; }
     .ca-cost-val {
@@ -1749,7 +1768,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank ranks <strong>21 current <a href="https://deepswe.datacurve.ai/" target="_blank" rel="noopener">DeepSWE Best</a> models</strong> across a <strong>zero-gap 12-dimension set</strong>. v1.5.0 uses <strong><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v4.2</a></strong> components plus DeepSWE performance and a DeepSWE-only Cost. Speed is retained because all selected v4.2 pages publish numeric values. <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> Instruction Following and <a href="https://www.tbench.ai/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> are shown as external coverage-only views.
+          ValueRank ranks <strong>21 current <a href="https://deepswe.datacurve.ai/" target="_blank" rel="noopener">DeepSWE Best</a> models</strong> across a <strong>zero-gap 12-dimension set</strong>. v1.5.0 uses <strong><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v4.2</a></strong> components plus DeepSWE performance and a selectable API-price or subscription-plan cost basis. Speed is retained because all selected v4.2 pages publish numeric values. <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> Instruction Following and <a href="https://www.tbench.ai/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> are shown as external coverage-only views.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1803,7 +1822,15 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="container">
     <div class="section-header">
       <div class="section-title">Rankings</div>
-      <div class="section-sub">Drag the cost weight slider to see how rankings shift. Cost now uses a 0–100 rank scale built from normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete. Click any column header to sort.</div>
+      <div class="section-sub">Drag the cost weight slider to see how rankings shift. Cost is rank-normalized from the selected API-price or subscription-plan task-cost basis; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete. Click any column header to sort.</div>
+    </div>
+    <div class="cost-basis-control" id="cost-basis-control" role="group" aria-labelledby="cost-basis-label">
+      <span class="cost-basis-label" id="cost-basis-label">Cost basis</span>
+      <div class="cost-basis-options">
+        <button type="button" class="cost-basis-btn active" data-cost-basis="api" aria-pressed="true">API Costs</button>
+        <button type="button" class="cost-basis-btn" data-cost-basis="plan" aria-pressed="false">Plan Costs</button>
+      </div>
+      <span class="cost-basis-context" id="cost-basis-context">API list-price task cost; cost-weighted scores use the API-cost rank.</span>
     </div>
     <div class="table-controls">
       <div class="filter-group" id="tier-filters">
@@ -1829,7 +1856,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
             <th data-col="score" class="sorted">Score <span class="sort-arrow">↓</span></th>
             <th data-col="qualityScore">Quality Score</th>
             <th data-col="qualityRank">Quality Rank</th>
-            <th data-col="evalCost">Composite Cost (0-100)</th>
+            <th data-col="evalCost">Cost <span id="cost-basis-table-label">(API Costs)</span></th>
             <th data-col="costTier">Cost Tier</th>
             <th data-col="missingCount">Coverage</th>
           </tr>
@@ -1852,7 +1879,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="insight-card">
         <div class="insight-icon">💡</div>
         <div class="insight-title">Cost Penalty</div>
-        <div class="insight-body"><strong>Gemini 3.8 Flash</strong> leads the current ValueRank score at <strong>68.5</strong>; its position reflects both quality and the DeepSWE-only cost composite.</div>
+        <div class="insight-body"><strong>Gemini 3.8 Flash</strong> leads the current ValueRank score at <strong>68.5</strong>; its position reflects both quality and the selected <span data-cost-basis-label>API Costs</span> cost composite.</div>
       </div>
       <div class="insight-card">
         <div class="insight-icon">⚡</div>
@@ -1875,7 +1902,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="section-title">Visualizations</div>
       <div class="section-sub">Eight complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
     </div>
-                        <div class="chart-tabs">
+                                                <div class="chart-tabs">
       <button class="chart-tab active" data-chart="pareto">ValueRank Pareto Frontier</button>
       <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
@@ -1889,7 +1916,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     <div class="card">
       <!-- Pareto -->
       <div class="chart-panel active" id="panel-pareto">
-        <div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>GPT-6 Astra, Gemini 3.8 Flash, GPT-5.6 Sol, Gemini 3.7 Flash, GLM-5.3 Flash</strong>. Every other ranked model is dominated on composite cost versus quality.</div>
+        <div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>GPT-6 Astra, Gemini 3.8 Flash, GPT-5.6 Sol, Gemini 3.7 Flash, GLM-5.3 Flash</strong>. Every other ranked model is dominated on the selected <span data-cost-basis-label>API Costs</span> versus quality.</div>
         <div id="chart-pareto" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Decomposition -->
@@ -1909,7 +1936,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       </div>
       <!-- Bubble -->
       <div class="chart-panel" id="panel-bubble">
-        <div class="chart-desc"><strong>Speed × Quality × Cost:</strong> Which models are fast AND high-quality AND cheap on the composite-cost basis? Bubble size = composite cost (larger = worse cost penalty). Color = cost tier. Hover for raw AA cost and DeepSWE average-cost components.</div>
+        <div class="chart-desc"><strong>Speed × Quality × Cost:</strong> Which models are fast AND high-quality AND cheap on the selected <span data-cost-basis-label>API Costs</span> basis? Bubble size = composite cost (larger = worse cost penalty). Color = cost tier. Hover for the selected cost basis, route provenance, and source components.</div>
         <div id="chart-bubble" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Bump -->
@@ -1924,7 +1951,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
        </div>
       <!-- Two-frontier / Cost Impact -->
       <div class="chart-panel" id="panel-frontier2">
-        <div class="chart-desc"><strong>Cost Impact:</strong> Each model shown twice — circle = quality-only score (ignoring cost), diamond = overall score (with 25% cost weight). Lines connect the same model. <span style="color:#22c55e">Lines going up</span> = cost helps. <span style="color:#ef4444">Lines going down</span> = cost hurts. X-axis = composite cost.</div>
+        <div class="chart-desc"><strong>Cost Impact:</strong> Each model shown twice — circle = quality-only score (ignoring cost), diamond = overall score (with 25% cost weight). Lines connect the same model. <span style="color:#22c55e">Lines going up</span> = cost helps. <span style="color:#ef4444">Lines going down</span> = cost hurts. X-axis = <span data-cost-basis-label>API Costs</span> score.</div>
         <div id="chart-frontier2" class="plotly-chart" style="height:520px;"></div>
       </div>
     </div>
@@ -2088,7 +2115,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
         <div class="faq-a">
-          The composite cost term uses DeepSWE-only. That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.5.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#4</strong> after cost.
+          The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple. That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.5.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#4</strong> after cost.
         </div>
       </div>
 
@@ -2189,6 +2216,49 @@ const MODELS = [
     "evalCost": 8.94,
     "aaEvalCost": 1077.95,
     "deepSweCost": 2.36,
+    "apiCost": 2.36,
+    "planCost": 0.22264150943396227,
+    "planComparableCost": 0.22264150943396227,
+    "apiCostScore": 70.0,
+    "planCostScore": 55.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "google-ai-ultra-20x-modelled",
+      "provider": "Google",
+      "plan": "AI Ultra 20x",
+      "planLabel": "Google AI Ultra $199.99 · 20x quota",
+      "planPriceUsd": 199.99,
+      "apiEquivalentUsd": 2119.89,
+      "valueMultiple": 10.6,
+      "valueMultipleKind": "community_modelled_official_scaled",
+      "evidenceClass": "derived",
+      "confidence": "low",
+      "validFrom": "2026-09-07",
+      "sourceUrl": "https://antigravity.google/blog/changes-to-antigravity-plans",
+      "sourceUrls": [
+        "https://gemini.google/us/subscriptions/?hl=en",
+        "https://support.google.com/gemini/answer/16275805?hl=en",
+        "https://antigravity.google/blog/changes-to-antigravity-plans",
+        "https://antigravity.google/docs/plans",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://5dive.ai/tokenmaxxing",
+        "https://agentplans.fyi/compare/google/",
+        "https://roninforge.org/antigravity-credits/pro-vs-ultra/"
+      ],
+      "modelIds": [
+        "gemini-3.8-flash",
+        "gemini-3.7-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash"
+      ],
+      "quotaMultipleVsPro": 20,
+      "multipleRange": [
+        6.0,
+        19.0
+      ],
+      "derivedFrom": "google_ai_pro_gemini_modelled",
+      "notes": "ValueRank-derived: 5.3x × [20 ÷ ($199.99 ÷ $19.99)] = approximately 10.6x. The modeled 3.0x-9.5x Pro range scales to approximately 6x-19x; Google publishes the relative quota and prices, not this absolute API-dollar estimate."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 8.94,
     "speed": 311.004295067041,
@@ -2261,6 +2331,37 @@ const MODELS = [
     "evalCost": 13.07,
     "aaEvalCost": 1632.13,
     "deepSweCost": 3.45,
+    "apiCost": 3.45,
+    "planCost": 2.3000000000000003,
+    "planComparableCost": 2.3000000000000003,
+    "apiCostScore": 62.5,
+    "planCostScore": 0.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "opencode-go-usage-15",
+      "provider": "OpenCode",
+      "plan": "Go",
+      "planLabel": "OpenCode Go $10 · Usage $15",
+      "planPriceUsd": 10,
+      "apiEquivalentUsd": 15,
+      "valueMultiple": 1.5,
+      "valueMultipleKind": "internal_usage_tier",
+      "evidenceClass": "official_internal_usage",
+      "confidence": "medium-high",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://dev.opencode.ai/docs/go/",
+      "modelIds": [
+        "grok-4.6",
+        "glm-5.3-flash",
+        "glm-5.3",
+        "kimi-k3",
+        "gpt-5.6-luna",
+        "deepseek-v4-pro",
+        "qwen3.8-max"
+      ],
+      "usageUsd": 15,
+      "notes": "One customer-facing $10 plan; the official model table assigns these models a $15 internal monthly Usage allocation."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 13.07,
     "speed": 62.6980259834417,
@@ -2333,6 +2434,41 @@ const MODELS = [
     "evalCost": 0.91,
     "aaEvalCost": 219.23,
     "deepSweCost": 0.24,
+    "apiCost": 0.24,
+    "planCost": 0.08,
+    "planComparableCost": 0.08,
+    "apiCostScore": 100.0,
+    "planCostScore": 90.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "ollama-max-exact",
+      "provider": "Ollama",
+      "plan": "Max",
+      "planLabel": "Ollama Max $100 · $300 usage",
+      "planPriceUsd": 100,
+      "apiEquivalentUsd": 300,
+      "valueMultiple": 3.0,
+      "valueMultipleKind": "exact_cash_credit",
+      "evidenceClass": "exact_cash_credit",
+      "confidence": "high",
+      "validFrom": "2026-08-31",
+      "sourceUrl": "https://ollama.com/pricing",
+      "sourceUrls": [
+        "https://ollama.com/pricing",
+        "https://ollama.com/blog/transparent-pricing"
+      ],
+      "modelIds": [
+        "glm-5.3-flash",
+        "glm-5.3",
+        "glm-5.2",
+        "kimi-k3",
+        "deepseek-v4-pro",
+        "deepseek-v4-flash",
+        "muse-spark-1.2",
+        "qwen3.8-max"
+      ],
+      "notes": "Exact published monthly usage-credit route; the Max sticker price is plan context and is not added to per-task effective cost."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 0.91,
     "speed": 46.1130926849213,
@@ -2405,6 +2541,37 @@ const MODELS = [
     "evalCost": 24.7,
     "aaEvalCost": 2778.3,
     "deepSweCost": 6.52,
+    "apiCost": 6.52,
+    "planCost": 0.16935064935064933,
+    "planComparableCost": 0.16935064935064933,
+    "apiCostScore": 25.0,
+    "planCostScore": 75.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "chatgpt-pro-20x-tibotattle",
+      "provider": "OpenAI",
+      "plan": "ChatGPT Pro 20x",
+      "planLabel": "ChatGPT Pro $200 · Codex 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 7700,
+      "valueMultiple": 38.5,
+      "valueMultipleKind": "community_observed",
+      "evidenceClass": "community_observed",
+      "confidence": "medium",
+      "validFrom": "2026-08-27",
+      "sourceUrl": "https://tibotattle.com/",
+      "sourceUrls": [
+        "https://tibotattle.com/",
+        "https://github.com/adamallcock/tibotattle"
+      ],
+      "modelIds": [
+        "gpt-6-astra",
+        "gpt-5.6-sol",
+        "gpt-5.6-luna",
+        "gpt-5.5"
+      ],
+      "notes": "Sole Codex empirical route: newer TiboTattle crowd-sourced allowance data, adjusted to the recorded ValueRank baseline. The older 70x estimate is intentionally excluded."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 24.7,
     "speed": 66.9596429908713,
@@ -2477,6 +2644,37 @@ const MODELS = [
     "evalCost": 24.47,
     "aaEvalCost": 2463.56,
     "deepSweCost": 6.46,
+    "apiCost": 6.46,
+    "planCost": 0.1677922077922078,
+    "planComparableCost": 0.1677922077922078,
+    "apiCostScore": 30.0,
+    "planCostScore": 80.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "chatgpt-pro-20x-tibotattle",
+      "provider": "OpenAI",
+      "plan": "ChatGPT Pro 20x",
+      "planLabel": "ChatGPT Pro $200 · Codex 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 7700,
+      "valueMultiple": 38.5,
+      "valueMultipleKind": "community_observed",
+      "evidenceClass": "community_observed",
+      "confidence": "medium",
+      "validFrom": "2026-08-27",
+      "sourceUrl": "https://tibotattle.com/",
+      "sourceUrls": [
+        "https://tibotattle.com/",
+        "https://github.com/adamallcock/tibotattle"
+      ],
+      "modelIds": [
+        "gpt-6-astra",
+        "gpt-5.6-sol",
+        "gpt-5.6-luna",
+        "gpt-5.5"
+      ],
+      "notes": "Sole Codex empirical route: newer TiboTattle crowd-sourced allowance data, adjusted to the recorded ValueRank baseline. The older 70x estimate is intentionally excluded."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 24.47,
     "speed": 87.4433938912987,
@@ -2549,6 +2747,49 @@ const MODELS = [
     "evalCost": 7.69,
     "aaEvalCost": 687.92,
     "deepSweCost": 2.03,
+    "apiCost": 2.03,
+    "planCost": 0.19150943396226414,
+    "planComparableCost": 0.19150943396226414,
+    "apiCostScore": 80.0,
+    "planCostScore": 65.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "google-ai-ultra-20x-modelled",
+      "provider": "Google",
+      "plan": "AI Ultra 20x",
+      "planLabel": "Google AI Ultra $199.99 · 20x quota",
+      "planPriceUsd": 199.99,
+      "apiEquivalentUsd": 2119.89,
+      "valueMultiple": 10.6,
+      "valueMultipleKind": "community_modelled_official_scaled",
+      "evidenceClass": "derived",
+      "confidence": "low",
+      "validFrom": "2026-09-07",
+      "sourceUrl": "https://antigravity.google/blog/changes-to-antigravity-plans",
+      "sourceUrls": [
+        "https://gemini.google/us/subscriptions/?hl=en",
+        "https://support.google.com/gemini/answer/16275805?hl=en",
+        "https://antigravity.google/blog/changes-to-antigravity-plans",
+        "https://antigravity.google/docs/plans",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://5dive.ai/tokenmaxxing",
+        "https://agentplans.fyi/compare/google/",
+        "https://roninforge.org/antigravity-credits/pro-vs-ultra/"
+      ],
+      "modelIds": [
+        "gemini-3.8-flash",
+        "gemini-3.7-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash"
+      ],
+      "quotaMultipleVsPro": 20,
+      "multipleRange": [
+        6.0,
+        19.0
+      ],
+      "derivedFrom": "google_ai_pro_gemini_modelled",
+      "notes": "ValueRank-derived: 5.3x × [20 ÷ ($199.99 ÷ $19.99)] = approximately 10.6x. The modeled 3.0x-9.5x Pro range scales to approximately 6x-19x; Google publishes the relative quota and prices, not this absolute API-dollar estimate."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 7.69,
     "speed": 319.092426124653,
@@ -2621,6 +2862,34 @@ const MODELS = [
     "evalCost": 15.11,
     "aaEvalCost": 1762.24,
     "deepSweCost": 3.99,
+    "apiCost": 3.99,
+    "planCost": 0.6600496277915633,
+    "planComparableCost": 0.6600496277915633,
+    "apiCostScore": 40.0,
+    "planCostScore": 10.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "zai-glm53-max-derived",
+      "provider": "Z.AI",
+      "plan": "GLM Coding Max",
+      "planLabel": "Z.AI GLM Coding Max · GLM5.3",
+      "planPriceUsd": 168,
+      "apiEquivalentUsd": 1015.51,
+      "valueMultiple": 6.045,
+      "valueMultipleKind": "derived_mix_normalized",
+      "evidenceClass": "derived",
+      "confidence": "medium-high",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://z.ai/subscribe",
+      "sourceUrls": [
+        "https://z.ai/subscribe",
+        "https://docs.z.ai/guides/llm/zai-coding-plan"
+      ],
+      "modelIds": [
+        "glm-5.3"
+      ],
+      "notes": "Mix-normalized estimate from documented weekly credits, model coefficients, and current GLM5.3 list rates."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 15.11,
     "speed": 82.8545737460279,
@@ -2693,6 +2962,37 @@ const MODELS = [
     "evalCost": 17.61,
     "aaEvalCost": 3069.54,
     "deepSweCost": 4.65,
+    "apiCost": 4.65,
+    "planCost": 0.0670995670995671,
+    "planComparableCost": 0.0670995670995671,
+    "apiCostScore": 35.0,
+    "planCostScore": 95.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "kimi-vivace-community-scaled",
+      "provider": "Kimi",
+      "plan": "Vivace",
+      "planLabel": "Kimi Vivace $199 · Code",
+      "planPriceUsd": 199,
+      "apiEquivalentUsd": 13790.7,
+      "valueMultiple": 69.3,
+      "valueMultipleKind": "community_scaled_sensitivity",
+      "evidenceClass": "community_scaled_sensitivity",
+      "confidence": "low",
+      "validFrom": "2026-09-04",
+      "sourceUrl": "https://www.kimi.ai/resources/kimi-k3-pricing",
+      "sourceUrls": [
+        "https://www.kimi.ai/resources/kimi-k3-pricing",
+        "https://www.kimi.com/code/docs/en/kimi-code/membership.html",
+        "https://cursor-alternatives.com/cli-agents/kimi-code/"
+      ],
+      "modelIds": [
+        "kimi-k3"
+      ],
+      "measuredAnchorMultiple": 24.2,
+      "anchorPlanLabel": "Kimi Moderato $19",
+      "notes": "Highest-tier community-scaled sensitivity from the measured 24.20x Moderato anchor; no official absolute Vivace API-dollar pool is published."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 17.61,
     "speed": 41.946463745957,
@@ -2765,6 +3065,37 @@ const MODELS = [
     "evalCost": 2.31,
     "aaEvalCost": 213.83,
     "deepSweCost": 0.61,
+    "apiCost": 0.61,
+    "planCost": 0.015844155844155845,
+    "planComparableCost": 0.015844155844155845,
+    "apiCostScore": 90.0,
+    "planCostScore": 100.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "chatgpt-pro-20x-tibotattle",
+      "provider": "OpenAI",
+      "plan": "ChatGPT Pro 20x",
+      "planLabel": "ChatGPT Pro $200 · Codex 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 7700,
+      "valueMultiple": 38.5,
+      "valueMultipleKind": "community_observed",
+      "evidenceClass": "community_observed",
+      "confidence": "medium",
+      "validFrom": "2026-08-27",
+      "sourceUrl": "https://tibotattle.com/",
+      "sourceUrls": [
+        "https://tibotattle.com/",
+        "https://github.com/adamallcock/tibotattle"
+      ],
+      "modelIds": [
+        "gpt-6-astra",
+        "gpt-5.6-sol",
+        "gpt-5.6-luna",
+        "gpt-5.5"
+      ],
+      "notes": "Sole Codex empirical route: newer TiboTattle crowd-sourced allowance data, adjusted to the recorded ValueRank baseline. The older 70x estimate is intentionally excluded."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 2.31,
     "speed": 130.135162363438,
@@ -2837,6 +3168,37 @@ const MODELS = [
     "evalCost": 44.85,
     "aaEvalCost": 5545.57,
     "deepSweCost": 11.84,
+    "apiCost": 11.84,
+    "planCost": 0.296,
+    "planComparableCost": 0.296,
+    "apiCostScore": 15.0,
+    "planCostScore": 50.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "claude-max-20x-high-water",
+      "provider": "Anthropic",
+      "plan": "Claude Max 20x",
+      "planLabel": "Claude Max $200 · 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 8000,
+      "valueMultiple": 40.0,
+      "valueMultipleKind": "observed_high_water",
+      "evidenceClass": "observed_high_water",
+      "confidence": "low-medium",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "sourceUrls": [
+        "https://www.anthropic.com/pricing",
+        "https://docs.anthropic.com/en/docs/about-claude/pricing"
+      ],
+      "modelIds": [
+        "claude-opus-5",
+        "claude-fable-5",
+        "claude-opus-4.8",
+        "claude-sonnet-5"
+      ],
+      "notes": "Independent high-water estimate, not a provider-published dollar pool; keep the evidence badge visible."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 44.85,
     "speed": 60.05259451893,
@@ -2909,6 +3271,41 @@ const MODELS = [
     "evalCost": 6.33,
     "aaEvalCost": 706.75,
     "deepSweCost": 1.67,
+    "apiCost": 1.67,
+    "planCost": 0.5566666666666666,
+    "planComparableCost": 0.5566666666666666,
+    "apiCostScore": 85.0,
+    "planCostScore": 30.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "ollama-max-exact",
+      "provider": "Ollama",
+      "plan": "Max",
+      "planLabel": "Ollama Max $100 · $300 usage",
+      "planPriceUsd": 100,
+      "apiEquivalentUsd": 300,
+      "valueMultiple": 3.0,
+      "valueMultipleKind": "exact_cash_credit",
+      "evidenceClass": "exact_cash_credit",
+      "confidence": "high",
+      "validFrom": "2026-08-31",
+      "sourceUrl": "https://ollama.com/pricing",
+      "sourceUrls": [
+        "https://ollama.com/pricing",
+        "https://ollama.com/blog/transparent-pricing"
+      ],
+      "modelIds": [
+        "glm-5.3-flash",
+        "glm-5.3",
+        "glm-5.2",
+        "kimi-k3",
+        "deepseek-v4-pro",
+        "deepseek-v4-flash",
+        "muse-spark-1.2",
+        "qwen3.8-max"
+      ],
+      "notes": "Exact published monthly usage-credit route; the Max sticker price is plan context and is not added to per-task effective cost."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 6.33,
     "speed": 70.5666765234971,
@@ -2981,6 +3378,32 @@ const MODELS = [
     "evalCost": 14.02,
     "aaEvalCost": 821.67,
     "deepSweCost": 3.7,
+    "apiCost": 3.7,
+    "planCost": 0.6166666666666667,
+    "planComparableCost": 0.6166666666666667,
+    "apiCostScore": 55.0,
+    "planCostScore": 25.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "opencode-go-usage-60",
+      "provider": "OpenCode",
+      "plan": "Go",
+      "planLabel": "OpenCode Go $10 · Usage $60",
+      "planPriceUsd": 10,
+      "apiEquivalentUsd": 60,
+      "valueMultiple": 6.0,
+      "valueMultipleKind": "internal_usage_tier",
+      "evidenceClass": "official_internal_usage",
+      "confidence": "medium-high",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://dev.opencode.ai/docs/go/",
+      "modelIds": [
+        "glm-5.2",
+        "muse-spark-1.2"
+      ],
+      "usageUsd": 60,
+      "notes": "One customer-facing $10 plan; the official model table assigns these models a $60 internal monthly Usage allocation."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 14.02,
     "speed": 318.385648552195,
@@ -3053,6 +3476,37 @@ const MODELS = [
     "evalCost": 50.8,
     "aaEvalCost": 7603.22,
     "deepSweCost": 13.41,
+    "apiCost": 13.41,
+    "planCost": 0.33525,
+    "planComparableCost": 0.33525,
+    "apiCostScore": 5.0,
+    "planCostScore": 35.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "claude-max-20x-high-water",
+      "provider": "Anthropic",
+      "plan": "Claude Max 20x",
+      "planLabel": "Claude Max $200 · 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 8000,
+      "valueMultiple": 40.0,
+      "valueMultipleKind": "observed_high_water",
+      "evidenceClass": "observed_high_water",
+      "confidence": "low-medium",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "sourceUrls": [
+        "https://www.anthropic.com/pricing",
+        "https://docs.anthropic.com/en/docs/about-claude/pricing"
+      ],
+      "modelIds": [
+        "claude-opus-5",
+        "claude-fable-5",
+        "claude-opus-4.8",
+        "claude-sonnet-5"
+      ],
+      "notes": "Independent high-water estimate, not a provider-published dollar pool; keep the evidence badge visible."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 50.8,
     "speed": 71.5232855469189,
@@ -3125,6 +3579,41 @@ const MODELS = [
     "evalCost": 14.13,
     "aaEvalCost": 1937.5,
     "deepSweCost": 3.73,
+    "apiCost": 3.73,
+    "planCost": 1.2433333333333334,
+    "planComparableCost": 1.2433333333333334,
+    "apiCostScore": 50.0,
+    "planCostScore": 5.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "ollama-max-exact",
+      "provider": "Ollama",
+      "plan": "Max",
+      "planLabel": "Ollama Max $100 · $300 usage",
+      "planPriceUsd": 100,
+      "apiEquivalentUsd": 300,
+      "valueMultiple": 3.0,
+      "valueMultipleKind": "exact_cash_credit",
+      "evidenceClass": "exact_cash_credit",
+      "confidence": "high",
+      "validFrom": "2026-08-31",
+      "sourceUrl": "https://ollama.com/pricing",
+      "sourceUrls": [
+        "https://ollama.com/pricing",
+        "https://ollama.com/blog/transparent-pricing"
+      ],
+      "modelIds": [
+        "glm-5.3-flash",
+        "glm-5.3",
+        "glm-5.2",
+        "kimi-k3",
+        "deepseek-v4-pro",
+        "deepseek-v4-flash",
+        "muse-spark-1.2",
+        "qwen3.8-max"
+      ],
+      "notes": "Exact published monthly usage-credit route; the Max sticker price is plan context and is not added to per-task effective cost."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 14.13,
     "speed": 40.6494330605666,
@@ -3197,6 +3686,41 @@ const MODELS = [
     "evalCost": 1.74,
     "aaEvalCost": 363.48,
     "deepSweCost": 0.46,
+    "apiCost": 0.46,
+    "planCost": 0.15333333333333335,
+    "planComparableCost": 0.15333333333333335,
+    "apiCostScore": 95.0,
+    "planCostScore": 85.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "ollama-max-exact",
+      "provider": "Ollama",
+      "plan": "Max",
+      "planLabel": "Ollama Max $100 · $300 usage",
+      "planPriceUsd": 100,
+      "apiEquivalentUsd": 300,
+      "valueMultiple": 3.0,
+      "valueMultipleKind": "exact_cash_credit",
+      "evidenceClass": "exact_cash_credit",
+      "confidence": "high",
+      "validFrom": "2026-08-31",
+      "sourceUrl": "https://ollama.com/pricing",
+      "sourceUrls": [
+        "https://ollama.com/pricing",
+        "https://ollama.com/blog/transparent-pricing"
+      ],
+      "modelIds": [
+        "glm-5.3-flash",
+        "glm-5.3",
+        "glm-5.2",
+        "kimi-k3",
+        "deepseek-v4-pro",
+        "deepseek-v4-flash",
+        "muse-spark-1.2",
+        "qwen3.8-max"
+      ],
+      "notes": "Exact published monthly usage-credit route; the Max sticker price is plan context and is not added to per-task effective cost."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 1.74,
     "speed": 133.015127144302,
@@ -3269,6 +3793,49 @@ const MODELS = [
     "evalCost": 8.37,
     "aaEvalCost": 508.75,
     "deepSweCost": 2.21,
+    "apiCost": 2.21,
+    "planCost": 0.20849056603773586,
+    "planComparableCost": 0.20849056603773586,
+    "apiCostScore": 75.0,
+    "planCostScore": 60.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "google-ai-ultra-20x-modelled",
+      "provider": "Google",
+      "plan": "AI Ultra 20x",
+      "planLabel": "Google AI Ultra $199.99 · 20x quota",
+      "planPriceUsd": 199.99,
+      "apiEquivalentUsd": 2119.89,
+      "valueMultiple": 10.6,
+      "valueMultipleKind": "community_modelled_official_scaled",
+      "evidenceClass": "derived",
+      "confidence": "low",
+      "validFrom": "2026-09-07",
+      "sourceUrl": "https://antigravity.google/blog/changes-to-antigravity-plans",
+      "sourceUrls": [
+        "https://gemini.google/us/subscriptions/?hl=en",
+        "https://support.google.com/gemini/answer/16275805?hl=en",
+        "https://antigravity.google/blog/changes-to-antigravity-plans",
+        "https://antigravity.google/docs/plans",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://5dive.ai/tokenmaxxing",
+        "https://agentplans.fyi/compare/google/",
+        "https://roninforge.org/antigravity-credits/pro-vs-ultra/"
+      ],
+      "modelIds": [
+        "gemini-3.8-flash",
+        "gemini-3.7-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash"
+      ],
+      "quotaMultipleVsPro": 20,
+      "multipleRange": [
+        6.0,
+        19.0
+      ],
+      "derivedFrom": "google_ai_pro_gemini_modelled",
+      "notes": "ValueRank-derived: 5.3x × [20 ÷ ($199.99 ÷ $19.99)] = approximately 10.6x. The modeled 3.0x-9.5x Pro range scales to approximately 6x-19x; Google publishes the relative quota and prices, not this absolute API-dollar estimate."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 8.37,
     "speed": 216.361965119,
@@ -3341,6 +3908,37 @@ const MODELS = [
     "evalCost": 27.39,
     "aaEvalCost": null,
     "deepSweCost": 7.23,
+    "apiCost": 7.23,
+    "planCost": 0.18779220779220782,
+    "planComparableCost": 0.18779220779220782,
+    "apiCostScore": 20.0,
+    "planCostScore": 70.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "chatgpt-pro-20x-tibotattle",
+      "provider": "OpenAI",
+      "plan": "ChatGPT Pro 20x",
+      "planLabel": "ChatGPT Pro $200 · Codex 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 7700,
+      "valueMultiple": 38.5,
+      "valueMultipleKind": "community_observed",
+      "evidenceClass": "community_observed",
+      "confidence": "medium",
+      "validFrom": "2026-08-27",
+      "sourceUrl": "https://tibotattle.com/",
+      "sourceUrls": [
+        "https://tibotattle.com/",
+        "https://github.com/adamallcock/tibotattle"
+      ],
+      "modelIds": [
+        "gpt-6-astra",
+        "gpt-5.6-sol",
+        "gpt-5.6-luna",
+        "gpt-5.5"
+      ],
+      "notes": "Sole Codex empirical route: newer TiboTattle crowd-sourced allowance data, adjusted to the recorded ValueRank baseline. The older 70x estimate is intentionally excluded."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 27.39,
     "speed": 84.7076106596008,
@@ -3413,6 +4011,49 @@ const MODELS = [
     "evalCost": 13.07,
     "aaEvalCost": 1419.97,
     "deepSweCost": 3.45,
+    "apiCost": 3.45,
+    "planCost": 0.3254716981132076,
+    "planComparableCost": 0.3254716981132076,
+    "apiCostScore": 62.5,
+    "planCostScore": 45.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "google-ai-ultra-20x-modelled",
+      "provider": "Google",
+      "plan": "AI Ultra 20x",
+      "planLabel": "Google AI Ultra $199.99 · 20x quota",
+      "planPriceUsd": 199.99,
+      "apiEquivalentUsd": 2119.89,
+      "valueMultiple": 10.6,
+      "valueMultipleKind": "community_modelled_official_scaled",
+      "evidenceClass": "derived",
+      "confidence": "low",
+      "validFrom": "2026-09-07",
+      "sourceUrl": "https://antigravity.google/blog/changes-to-antigravity-plans",
+      "sourceUrls": [
+        "https://gemini.google/us/subscriptions/?hl=en",
+        "https://support.google.com/gemini/answer/16275805?hl=en",
+        "https://antigravity.google/blog/changes-to-antigravity-plans",
+        "https://antigravity.google/docs/plans",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://5dive.ai/tokenmaxxing",
+        "https://agentplans.fyi/compare/google/",
+        "https://roninforge.org/antigravity-credits/pro-vs-ultra/"
+      ],
+      "modelIds": [
+        "gemini-3.8-flash",
+        "gemini-3.7-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash"
+      ],
+      "quotaMultipleVsPro": 20,
+      "multipleRange": [
+        6.0,
+        19.0
+      ],
+      "derivedFrom": "google_ai_pro_gemini_modelled",
+      "notes": "ValueRank-derived: 5.3x × [20 ÷ ($199.99 ÷ $19.99)] = approximately 10.6x. The modeled 3.0x-9.5x Pro range scales to approximately 6x-19x; Google publishes the relative quota and prices, not this absolute API-dollar estimate."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 13.07,
     "speed": 218.765127397798,
@@ -3485,6 +4126,32 @@ const MODELS = [
     "evalCost": 14.85,
     "aaEvalCost": null,
     "deepSweCost": 3.92,
+    "apiCost": 3.92,
+    "planCost": 0.6533333333333333,
+    "planComparableCost": 0.6533333333333333,
+    "apiCostScore": 45.0,
+    "planCostScore": 20.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "opencode-go-usage-60",
+      "provider": "OpenCode",
+      "plan": "Go",
+      "planLabel": "OpenCode Go $10 · Usage $60",
+      "planPriceUsd": 10,
+      "apiEquivalentUsd": 60,
+      "valueMultiple": 6.0,
+      "valueMultipleKind": "internal_usage_tier",
+      "evidenceClass": "official_internal_usage",
+      "confidence": "medium-high",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://dev.opencode.ai/docs/go/",
+      "modelIds": [
+        "glm-5.2",
+        "muse-spark-1.2"
+      ],
+      "usageUsd": 60,
+      "notes": "One customer-facing $10 plan; the official model table assigns these models a $60 internal monthly Usage allocation."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 14.85,
     "speed": 73.1010941962597,
@@ -3557,6 +4224,37 @@ const MODELS = [
     "evalCost": 50.08,
     "aaEvalCost": null,
     "deepSweCost": 13.22,
+    "apiCost": 13.22,
+    "planCost": 0.3305,
+    "planComparableCost": 0.3305,
+    "apiCostScore": 10.0,
+    "planCostScore": 40.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "claude-max-20x-high-water",
+      "provider": "Anthropic",
+      "plan": "Claude Max 20x",
+      "planLabel": "Claude Max $200 · 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 8000,
+      "valueMultiple": 40.0,
+      "valueMultipleKind": "observed_high_water",
+      "evidenceClass": "observed_high_water",
+      "confidence": "low-medium",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "sourceUrls": [
+        "https://www.anthropic.com/pricing",
+        "https://docs.anthropic.com/en/docs/about-claude/pricing"
+      ],
+      "modelIds": [
+        "claude-opus-5",
+        "claude-fable-5",
+        "claude-opus-4.8",
+        "claude-sonnet-5"
+      ],
+      "notes": "Independent high-water estimate, not a provider-published dollar pool; keep the evidence badge visible."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 50.08,
     "speed": 63.133614700185,
@@ -3629,6 +4327,37 @@ const MODELS = [
     "evalCost": 100.0,
     "aaEvalCost": 5312.58,
     "deepSweCost": 26.4,
+    "apiCost": 26.4,
+    "planCost": 0.6599999999999999,
+    "planComparableCost": 0.6599999999999999,
+    "apiCostScore": 0.0,
+    "planCostScore": 15.0,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "claude-max-20x-high-water",
+      "provider": "Anthropic",
+      "plan": "Claude Max 20x",
+      "planLabel": "Claude Max $200 · 20x",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 8000,
+      "valueMultiple": 40.0,
+      "valueMultipleKind": "observed_high_water",
+      "evidenceClass": "observed_high_water",
+      "confidence": "low-medium",
+      "validFrom": "2026-09-06",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "sourceUrls": [
+        "https://www.anthropic.com/pricing",
+        "https://docs.anthropic.com/en/docs/about-claude/pricing"
+      ],
+      "modelIds": [
+        "claude-opus-5",
+        "claude-fable-5",
+        "claude-opus-4.8",
+        "claude-sonnet-5"
+      ],
+      "notes": "Independent high-water estimate, not a provider-published dollar pool; keep the evidence badge visible."
+    },
     "aaCostNorm": null,
     "deepSweCostNorm": 100.0,
     "speed": 82.8795784371773,
@@ -3889,10 +4618,11 @@ const LIVEBENCH = [
 
 
 function compositeCostTier(cost) {
-  if (cost <= 15) return 'Budget';
-  if (cost <= 22) return 'Near-Budget';
-  if (cost <= 35) return 'Mid-Range';
-  if (cost <= 55) return 'Premium';
+  const costPenalty = 100 - Number(cost);
+  if (costPenalty <= 15) return 'Budget';
+  if (costPenalty <= 22) return 'Near-Budget';
+  if (costPenalty <= 35) return 'Mid-Range';
+  if (costPenalty <= 55) return 'Premium';
   return 'Expensive';
 }
 
@@ -3902,13 +4632,135 @@ MODELS.forEach(model => {
 
 const SPEED_DIM_IDX = 11;
 
+// COST BASIS SWITCHER START
+const PLAN_COST_META = {"asOf": "2026-09-07", "routeCount": 12, "supportedModelCount": 21, "fallbackModelCount": 0, "totalModelCount": 21, "mixId": "valuerank-billed-3"};
+let costBasis = 'api';
+let costWeightPct = 25;
+
+function costBasisLabel() {
+  return costBasis === 'plan' ? 'Plan Costs' : 'API Costs';
+}
+
+function planRouteFor(model) {
+  return model.planRoute || null;
+}
+
+function hasPlanRoute(model) {
+  return planRouteFor(model) !== null && Number.isFinite(Number(model.planCost));
+}
+
+function activeCostUsd(model) {
+  return costBasis === 'plan' && hasPlanRoute(model) ? Number(model.planCost) : Number(model.apiCost);
+}
+
+function activeCostScore(model) {
+  const candidate = costBasis === 'plan' ? model.planCostScore : model.apiCostScore;
+  return Number.isFinite(Number(candidate)) ? Number(candidate) : Number(model.apiCostScore);
+}
+
+function formatValueMultiple(route) {
+  return route ? Number(route.valueMultiple).toLocaleString(undefined, { maximumFractionDigits: 3 }) + '×' : '—';
+}
+
+function activeCostRouteLabel(model) {
+  if (costBasis !== 'plan') return 'API list price';
+  const route = planRouteFor(model);
+  return route ? `${route.planLabel} · ${formatValueMultiple(route)}` : 'API fallback · no verified subscription route';
+}
+
+function costBasisTooltip(model) {
+  const api = fmtUsd(model.apiCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const plan = model.planCost == null
+    ? 'unavailable'
+    : fmtUsd(model.planCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const route = planRouteFor(model);
+  const routeText = route
+    ? `${route.planLabel} (${formatValueMultiple(route)}; ${route.evidenceClass})`
+    : 'No verified subscription route; API fallback';
+  return `API Cost: ${api}<br>Plan Cost: ${plan}<br>Route: ${routeText}`;
+}
+
+function recomputeCostState() {
+  MODELS.forEach(model => {
+    model.activeCostUsd = activeCostUsd(model);
+    model.evalCost = activeCostScore(model);
+    model.dims[0] = model.evalCost;
+    model.costTier = compositeCostTier(model.evalCost);
+    model.activeScore = computeNewScore(model, costWeightPct);
+    model.overallScore = model.activeScore;
+  });
+  const sorted = [...MODELS].sort((a, b) => b.activeScore - a.activeScore || a.name.localeCompare(b.name));
+  sorted.forEach((model, index) => { model.rank = index + 1; });
+  tableModels = MODELS.map(model => ({ ...model, score: model.activeScore }));
+}
+
+function updateCostBasisUI() {
+  const label = costBasisLabel();
+  document.querySelectorAll('[data-cost-basis]').forEach(button => {
+    const active = button.dataset.costBasis === costBasis;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
+  const tableLabel = document.getElementById('cost-basis-table-label');
+  if (tableLabel) tableLabel.textContent = `(${label})`;
+  const context = document.getElementById('cost-basis-context');
+  if (context) {
+    context.textContent = costBasis === 'plan'
+      ? `API task cost ÷ highest eligible Value Multiple. ${PLAN_COST_META.supportedModelCount}/${PLAN_COST_META.totalModelCount} models have a verified plan route; the rest remain API-priced.`
+      : 'Average task cost at provider API list prices; cost-weighted scores use the API-cost rank.';
+  }
+  const note = document.getElementById('cost-note');
+  if (note) note.textContent = `${label} · Cost weight: ${costWeightPct}%${costBasis === 'plan' ? ` · ${PLAN_COST_META.fallbackModelCount} API fallback${PLAN_COST_META.fallbackModelCount === 1 ? '' : 's'}` : ''}`;
+  document.querySelectorAll('[data-cost-basis-label]').forEach(element => { element.textContent = label; });
+}
+
+function applyCostBasis(nextBasis) {
+  costBasis = nextBasis === 'plan' ? 'plan' : 'api';
+  recomputeCostState();
+  updateCostBasisUI();
+}
+
+function rerenderCostBasisViews() {
+  recomputeCostState();
+  updateCostBasisUI();
+  if (typeof renderTable === 'function') renderTable();
+  if (typeof renderHeroPodium === 'function') renderHeroPodium();
+  const costChartKeys = ['pareto', 'decomp', 'displacement', 'heatmap', 'bubble', 'frontier2'];
+  if (typeof rendered !== 'undefined' && typeof chartRenderers !== 'undefined') {
+    costChartKeys.forEach(key => {
+      if (!rendered[key] || !chartRenderers[key]) return;
+      try { chartRenderers[key](); rendered[key] = true; }
+      catch (error) { console.error('Cost-basis chart render failed:', key, error); }
+    });
+  }
+  const dataHeatmap = document.getElementById('chart-heatmap-data');
+  if (dataHeatmap && typeof renderHeatmap === 'function') renderHeatmap('chart-heatmap-data', 480);
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function setCostBasis(nextBasis) {
+  applyCostBasis(nextBasis);
+  try { localStorage.setItem('vr-cost-basis', costBasis); } catch (error) { /* storage is optional */ }
+  rerenderCostBasisViews();
+}
+
+function initCostBasis() {
+  document.querySelectorAll('[data-cost-basis]').forEach(button => {
+    button.addEventListener('click', () => setCostBasis(button.dataset.costBasis));
+  });
+  let saved = 'api';
+  try { saved = localStorage.getItem('vr-cost-basis') || 'api'; } catch (error) { /* storage is optional */ }
+  applyCostBasis(saved);
+}
+// COST BASIS SWITCHER END
+
 function fmtUsd(v, opts) {
   if (v == null || Number.isNaN(Number(v))) return '—';
   return '$' + Number(v).toLocaleString(undefined, opts || {});
 }
 
 function fmtAaDeepSweHover(m) {
-  return `AA Eval Cost: ${fmtUsd(m.aaEvalCost)}<br>DeepSWE Avg Cost: ${fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return `Selected ${costBasisLabel()}: ${fmtUsd(m.activeCostUsd, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}<br>${costBasisTooltip(m)}`;
 }
 
 function paretoFrontModels(rows) {
@@ -3961,7 +4813,7 @@ function renderHeroPodium() {
         <div class="podium-hero-name">${m1.name}</div>
         <div class="podium-hero-score">${m1.overallScore.toFixed(1)}</div>
       </div>
-      <div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${m1.evalCost.toFixed(1)} composite · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>
+      <div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>
       <div class="podium-hero-bars">
         <div class="podium-bar-row">
           <span class="podium-bar-label">Quality</span>
@@ -3987,7 +4839,7 @@ function renderHeroPodium() {
         <span class="podium-runner-score">${m.overallScore.toFixed(1)}</span>
       </div>
       <div class="podium-runner-name">${m.name}</div>
-      <div class="podium-runner-meta">${m.developer} · $${m.evalCost.toFixed(1)} composite</div>
+      <div class="podium-runner-meta">${m.developer} · ${costBasisLabel()} ${fmtUsd(m.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m)}</div>
     `;
   });
 }
@@ -4079,6 +4931,8 @@ function renderTable() {
     const deltaStr = delta > 0 ? `+${delta}▲` : delta < 0 ? `${delta}▼` : '—';
     const deltaCls = delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : 'delta-same';
     const barW = Math.round((m.score/100)*100);
+    const cost = activeCostUsd(m);
+    const routeText = activeCostRouteLabel(m);
     return `<tr>
       <td><span class="rank-cell ${rankCls}">${dispRank}</span></td>
       <td>
@@ -4093,7 +4947,13 @@ function renderTable() {
       </td>
       <td><span class="mono" style="color:${scoreColor(m.qualityScore)}">${m.qualityScore.toFixed(1)}</span></td>
       <td><span class="quality-pill">#${m.qualityRank}</span></td>
-      <td><span class="mono">$${m.evalCost.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})}</span></td>
+      <td data-sort-value="${cost}">
+        <span class="cost-cell">
+          <span class="mono">${fmtUsd(cost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+          <span class="cost-meta">${routeText}</span>
+          <span class="cost-score">Score ${m.evalCost.toFixed(1)}</span>
+        </span>
+      </td>
       <td><span class="tier-badge ${tierClass(m.costTier)}">${m.costTier}</span></td>
       <td><span class="missing-dots">${m.missingCount > 0 ? '⊘'.repeat(Math.min(m.missingCount,7)) + (m.missingCount > 7 ? '+' : '') + ` ${m.missingCount}` : '✓ Full'}</span></td>
     </tr>`;
@@ -4127,16 +4987,14 @@ function initCostSlider() {
   const slider = document.getElementById('cost-slider');
   const valEl  = document.getElementById('slider-val');
   const noteEl = document.getElementById('cost-note');
+  if (!slider) return;
   slider.addEventListener('input', () => {
-    const cw = parseInt(slider.value);
+    const cw = parseInt(slider.value, 10);
+    costWeightPct = cw;
     valEl.textContent = cw + '%';
     noteEl.textContent = cw === 25 ? 'Cost weight: 25% (default)' : `Cost weight: ${cw}% (custom — default is 25%)`;
-    tableModels = MODELS.map(m => ({...m, score: computeNewScore(m, cw)}));
-    // Re-assign dynamic ranks
-    const sorted = [...tableModels].sort((a,b) => b.score - a.score);
-    sorted.forEach((m,i) => { m.rank = i+1; });
-    sortCol = 'score'; sortDir = 1;
-    renderTable();
+    applyCostBasis(costBasis);
+    rerenderCostBasisViews();
   });
 }
 
@@ -4214,12 +5072,13 @@ function renderPareto() {
     m.overallScore,
     m.missingCount,
     fmtUsd(m.aaEvalCost),
-    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    costBasisTooltip(m)
   ];
   const hoverTpl =
-    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';
+    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';
   const hoverTplFront =
-    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<extra>Frontier</extra>';
+    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<extra>Frontier</extra>';
 
   const traces = [
     {
@@ -4267,10 +5126,10 @@ function renderPareto() {
   const base = getPlotlyLayout();
   const layout = {
     ...base,
-    title: { text: 'ValueRank Pareto Frontier — Quality vs Composite Cost', font: plotlyTitle(14) },
+    title: { text: 'ValueRank Pareto Frontier — Quality vs ' + costBasisLabel(), font: plotlyTitle(14) },
     xaxis: {
       ...base.xaxis,
-      title: 'Composite Cost (0–100, lower better)',
+      title: costBasisLabel() + ' (0–100, lower better)',
       type: 'linear',
       range: [xMin, xMax],
       autorange: false,
@@ -4316,7 +5175,7 @@ function renderDecomposition() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},
+    title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},
     barmode:'stack',
     xaxis:{...getPlotlyLayout().xaxis, title:'Score Contribution (pts)', range:[0,80]},
     yaxis:{...getPlotlyLayout().yaxis, title:''},
@@ -4355,7 +5214,7 @@ function renderDisplacement() {
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},
+    title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Places gained (▶) or lost (◀) due to cost weight', zeroline:true, zerolinecolor:plotlyDim(), zerolinewidth:2, range:[-9,7]},
     yaxis:{...getPlotlyLayout().yaxis, title:''},
     margin:{...getPlotlyLayout().margin, l:90, b:80},
@@ -4376,7 +5235,7 @@ function renderHeatmap(elementId, height) {
 
   // Column order follows generated Cost | Reliability | Agentic | Intelligence | Platform groups.
   const colOrder = DIM_KEYS.map((_, i) => i);
-  const colLabels = colOrder.map(i => DIM_KEYS[i]);
+  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);
   const colFull   = colOrder.map(i => DIM_FULL[i]);
   const colWeights= colOrder.map(i => DIM_WEIGHTS[i]);
 
@@ -4469,12 +5328,12 @@ function renderBubble() {
     x:[speedScore(m)], y:[m.qualityScore],
     mode:'markers', name:m.shortName,
     marker:{size:10 + (m.evalCost / maxCost) * 30, color:TIER_COLORS[m.costTier] || '#64748b', opacity:0.8, line:{color:'rgba(255,255,255,0.15)',width:1}},
-    hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',
+    hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',
     showlegend:false
   }));
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},
+    title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Speed percentile (' + minSpeed.toFixed(1) + '–' + maxSpeed.toFixed(1) + ' tok/s)', range:[-5,105]},
     yaxis:{...getPlotlyLayout().yaxis, title:'Quality Sub-Score', range:[25,80]},
     shapes:[
@@ -4572,7 +5431,7 @@ function renderFrontier2() {
     mode:'markers',
     name:'Quality Score (no cost)',
     marker:{ size:10, color: MODELS.map(m => DEV_COLORS[m.developer]||'#64748b'), symbol:'circle', opacity:0.7, line:{color:'rgba(255,255,255,0.3)',width:1} },
-    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),
+    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),
   });
 
   // Overall diamonds
@@ -4582,19 +5441,16 @@ function renderFrontier2() {
     mode:'markers',
     name:'Overall Score (with 25% cost)',
     marker:{ size:10, color: MODELS.map(m => DEV_COLORS[m.developer]||'#64748b'), symbol:'diamond', line:{color:'rgba(255,255,255,0.5)',width:1.5} },
-    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<extra></extra>`),
+    hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),
   });
 
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of 25% cost weight', font:plotlyTitle(13)},
-    xaxis:{...getPlotlyLayout().xaxis, title:'Composite Cost (0-100)', range:[0,105]},
+    title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of ' + costWeightPct + '% ' + costBasisLabel() + ' weight', font:plotlyTitle(13)},
+    xaxis:{...getPlotlyLayout().xaxis, title:costBasisLabel() + ' (0-100)', range:[0,105]},
     yaxis:{...getPlotlyLayout().yaxis, title:'Score (0–100)', range:[15,80]},
     legend:{orientation:'h', y:-0.15},
-    annotations:[
-      {x:7.04, y:58.1, xref:'x', yref:'y', text:'MiMo +13.9 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},
-      {x:80.37, y:51.8, xref:'x', yref:'y', text:'Opus 4.8 -14.5 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:0, ay:70},
-    ]
+    annotations:[]
   };
   Plotly.newPlot('chart-frontier2', traces, layout, PLOTLY_CONFIG).then(() => {
     const gd = document.getElementById('chart-frontier2');
@@ -4922,6 +5778,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   // LLM-only init (skip on CA page)
   if (document.getElementById('ranking-tbody')) {
+    try { initCostBasis(); } catch (e) { console.error(e); }
     try { renderHeroPodium(); } catch (e) { console.error(e); }
     try { initTable(); } catch (e) { console.error(e); }
     try { initCostSlider(); } catch (e) { console.error(e); }
