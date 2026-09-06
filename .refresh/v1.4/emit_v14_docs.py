@@ -717,7 +717,7 @@ html = replace_once(html, r'<span class="hero-statbar-num">(?:Jul 28|Sep \d+)</s
 
 insight_bodies = [
     f'The current Pareto frontier contains <strong>{len(pareto)} models</strong> undominated on composite cost versus quality: {pareto_text}.',
-    f'<strong>{models[0]["name"]}</strong> leads the current ValueRank score at <strong>{models[0]["overallScore"]:.1f}</strong>; its position reflects both quality and the two-source cost composite.',
+    f'<strong>{models[0]["name"]}</strong> leads the current ValueRank score at <strong>{models[0]["overallScore"]:.1f}</strong>; its position reflects both quality and the {cost_mode_label} cost composite.',
     f'<strong>{min(models, key=lambda item: item["costComposite"])["name"]}</strong> has the lowest composite cost penalty in this cohort, while the quality sub-score keeps capability visible separately.',
     f'{VERSION} refreshes the full <strong>{n}-model</strong> DeepSWE roster against <strong>{aa_version}</strong>, keeps <strong>{d} zero-gap dimensions</strong>, and retains Speed because the v4.2 pages publish numeric values for every selected model.',
 ]
