@@ -1,0 +1,20 @@
+{
+  "version": "3.0.0",
+  "query": "Research current Google Gemini AI Pro and AI Ultra coding-plan Value Multiples for ValueRank, including the 5x and 20x Ultra quota tiers.",
+  "mode": "deep",
+  "started_at": "2026-09-07T00:00:00Z",
+  "finished_at": "2026-09-07T00:00:00Z",
+  "assumptions": [
+    {"assumption_id":"asm_9581c5ba","text":"Antigravity is the current coding surface after Google's June 2026 consumer-plan transition.","materiality":"high","status":"evidence_validated"},
+    {"assumption_id":"asm_3a133ef4","text":"Google's relative quota tiers can be used to scale a community-modeled Pro baseline.","materiality":"high","status":"implicit"},
+    {"assumption_id":"asm_b1c2f4a1","text":"Plan Costs divides API-priced task cost by Value Multiple and does not add the monthly sticker price per task.","materiality":"high","status":"user_confirmed"}
+  ],
+  "provider_config": {"primary":"web","scholarly":null},
+  "report_dir": "research/2026-09-07-google-plan-value-multiple",
+  "artifact_paths": {
+    "sources":"research/2026-09-07-google-plan-value-multiple/sources.jsonl",
+    "evidence":"research/2026-09-07-google-plan-value-multiple/evidence.jsonl",
+    "claims":"research/2026-09-07-google-plan-value-multiple/claims.jsonl",
+    "report":"research/2026-09-07-google-plan-value-multiple/research_report.md"
+  }
+}
