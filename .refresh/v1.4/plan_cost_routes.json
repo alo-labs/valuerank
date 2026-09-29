@@ -1,6 +1,6 @@
 {
   "schemaVersion": "valuerank-plan-routes/v1",
-  "asOf": "2026-09-29",
+  "asOf": "2026-09-30",
   "currency": "USD",
   "costMix": {
     "id": "valuerank-billed-3",
@@ -22,10 +22,10 @@
       "valueMultiple": 38.0,
       "valueMultipleKind": "community_observed",
       "evidenceClass": "community_observed",
-      "confidence": "medium",
+      "confidence": "low-medium",
       "validFrom": "2026-08-27",
-      "checkedOn": "2026-09-29",
-      "availability": "Existing subscriptions continue; new sign-ups and upgrades paused since 2026-09-10",
+      "checkedOn": "2026-09-30",
+      "availability": "Eligible legacy Pro 200 subscribers retain prior allowance through 2026-10-29, then transition to the lower allowance. OpenAI's current help page has conflicting new-sign-up availability copy.",
       "sourceUrl": "https://www.reddit.com/r/codex/comments/1wqw2qq/warning_codex_allowances_have_dropped_about_20/",
       "sourceUrls": [
         "https://tibotattle.com/",
@@ -33,8 +33,58 @@
         "https://help.openai.com/en/articles/9793128-what-is-chatgpt-pro",
         "https://www.reddit.com/r/codex/comments/1wqw2qq/warning_codex_allowances_have_dropped_about_20/"
       ],
-      "modelIds": ["gpt-6-astra", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.5"],
-      "notes": "Community-observed Codex route. A September 26 report estimates about $1,750 of normalized Pro 20x allowance per week across plans, equivalent to roughly $7,600 per month and 38x at the $200 price. OpenAI says existing subscribers continue but new sign-ups and upgrades are paused. Approximate, not an OpenAI-published allowance."
+      "modelIds": ["gpt-5.6-luna", "gpt-5.5"],
+      "notes": "Provisional cross-model community estimate from a September 26 report: about $1,750 of normalized Pro 20x allowance per week, or roughly $7,600 per month and 38x at $200. Retained only for cohort variants without a newer model-specific measurement. OpenAI now documents a lower current Pro 200 allowance; eligible legacy subscribers retain the previous allowance only through 2026-10-29. This estimate is not an OpenAI-published quota."
+    },
+    {
+      "id": "chatgpt-pro-20x-gpt6-astra-community-measured",
+      "provider": "OpenAI",
+      "plan": "ChatGPT Pro 20x",
+      "planLabel": "ChatGPT Pro $200 · Codex 20x (current allowance)",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 5660,
+      "valueMultiple": 28.3,
+      "valueMultipleKind": "community_observed",
+      "evidenceClass": "community_observed",
+      "confidence": "low-medium",
+      "validFrom": "2026-09-30",
+      "checkedOn": "2026-09-30",
+      "availability": "Models the current lower Pro 200 allowance; eligible legacy subscribers retain the prior allowance through 2026-10-29. OpenAI's current help page has conflicting new-sign-up availability copy.",
+      "sourceUrl": "https://www.reddit.com/r/codex/comments/1wp0v6x/allowance_for_gpt_6_luna_sol_and_astra_measured/",
+      "sourceUrls": [
+        "https://www.reddit.com/r/codex/comments/1wp0v6x/allowance_for_gpt_6_luna_sol_and_astra_measured/",
+        "https://learn.chatgpt.com/docs/pricing",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+        "https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt"
+      ],
+      "modelIds": ["gpt-6-astra"],
+      "notes": "One-account community measurement reports about $283 monthly API-equivalent on Plus ($20), or 14.15x. OpenAI publishes Pro 20x as 20 times Plus usage; scaling the allowance to Pro 200 gives $5,660 per month and 28.3x at $200. This is a derived current-tier estimate, not a provider-published dollar quota; actual use varies by task. The temporary legacy Pro 200 allowance is excluded."
+    },
+    {
+      "id": "chatgpt-pro-20x-gpt56-sol-community-measured",
+      "provider": "OpenAI",
+      "plan": "ChatGPT Pro 20x",
+      "planLabel": "ChatGPT Pro $200 · Codex 20x (current allowance)",
+      "planPriceUsd": 200,
+      "apiEquivalentUsd": 7400,
+      "valueMultiple": 37.0,
+      "valueMultipleKind": "community_observed",
+      "evidenceClass": "community_observed",
+      "confidence": "low-medium",
+      "validFrom": "2026-09-30",
+      "checkedOn": "2026-09-30",
+      "availability": "Models the current lower Pro 200 allowance; eligible legacy subscribers retain the prior allowance through 2026-10-29. OpenAI's current help page has conflicting new-sign-up availability copy.",
+      "sourceUrl": "https://www.reddit.com/r/codex/comments/1wp0v6x/allowance_for_gpt_6_luna_sol_and_astra_measured/",
+      "sourceUrls": [
+        "https://www.reddit.com/r/codex/comments/1wp0v6x/allowance_for_gpt_6_luna_sol_and_astra_measured/",
+        "https://learn.chatgpt.com/docs/pricing",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+        "https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt"
+      ],
+      "modelIds": ["gpt-5.6-sol"],
+      "notes": "One-account community measurement reports about $370 monthly API-equivalent on Plus ($20), or 18.5x using GPT-5.6 Sol promotional API rates. OpenAI publishes Pro 20x as 20 times Plus usage; scaling the allowance to Pro 200 gives $7,400 per month and 37.0x at $200. The OpenAI API pricing page says the promotional rate is available at least through 2026-11-21. This is a derived current-tier estimate, not a provider-published dollar quota; actual use varies by task. The temporary legacy Pro 200 allowance is excluded."
     },
     {
       "id": "claude-max-20x-high-water",
@@ -48,13 +98,14 @@
       "evidenceClass": "observed_high_water",
       "confidence": "low-medium",
       "validFrom": "2026-09-06",
-      "sourceUrl": "https://www.anthropic.com/pricing",
+      "sourceUrl": "https://claude.com/pricing",
       "sourceUrls": [
-        "https://www.anthropic.com/pricing",
+        "https://claude.com/pricing",
+        "https://www.anthropic.com/claude/opus",
         "https://docs.anthropic.com/en/docs/about-claude/pricing"
       ],
-      "modelIds": ["claude-opus-5", "claude-fable-5", "claude-opus-4.8", "claude-sonnet-5"],
-      "notes": "Independent high-water estimate, not a provider-published dollar pool; keep the evidence badge visible."
+      "modelIds": ["claude-opus-5", "claude-opus-5-5", "claude-fable-5", "claude-opus-4.8", "claude-sonnet-5"],
+      "notes": "Independent high-water estimate, not a provider-published dollar pool; keep the evidence badge visible. Claude's current plan page offers Max 5x/20x, and its Opus 5.5 page lists Max access; 40x is not an Opus 5.5-specific allowance measurement."
     },
     {
       "id": "kimi-vivace-community-scaled",

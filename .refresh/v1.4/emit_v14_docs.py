@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit the v1.9.1 README, methodology, score tables, raw data, and site.
+"""Emit the v1.9.2 README, methodology, score tables, raw data, and site.
 
 The site keeps the existing interactive publication shell, but all ranking
 constants and model data are generated from .refresh/v1.4/scores.json.
@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from plan_costs import build_cost_fields, load_plan_routes, route_summary
 from site_header import inject_header
 
-VERSION = "v1.9.1"
+VERSION = "v1.9.2"
 DATE = "September 30, 2026"
 SHORT_DATE = "Sep 30"
 CURRENCY = "$"
@@ -1320,7 +1320,7 @@ html = html.replace("text:'v1.4.0: 21 models · 12 dims'", f"text:'{VERSION}: {n
 html = re.sub(r"const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
 html = re.sub(
     r"const versions = \[[^;]*\];",
-    "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1'];",
+    "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2'];",
     html,
     count=1,
 )
@@ -1481,7 +1481,7 @@ html = html.replace("All scored cells are confirmed primary-source data in v1.2"
 html = html.replace("excluded from v1.2", "excluded from the current primary score")
 html = re.sub(
     r"(function renderVersionTable\(\) \{[\s\S]*?const versions = )\[[^;]*\];",
-    lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1'];",
+    lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2'];",
     html,
     count=1,
 )

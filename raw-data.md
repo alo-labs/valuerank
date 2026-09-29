@@ -1,6 +1,6 @@
-# ValueRank v1.9.1 Raw Data
+# ValueRank v1.9.2 Raw Data
 
-**Version:** v1.9.1 · **Updated:** September 30, 2026 · **AA DeepSWE chart observed:** 2026-09-29 · **AA source:** [Artificial Analysis Intelligence Index v4.3.2](https://artificialanalysis.ai/methodology/intelligence-benchmarking)
+**Version:** v1.9.2 · **Updated:** September 30, 2026 · **AA DeepSWE chart observed:** 2026-09-29 · **AA source:** [Artificial Analysis Intelligence Index v4.3.2](https://artificialanalysis.ai/methodology/intelligence-benchmarking)
 
 The AA chart publishes 25 DeepSWE v1.1 agent/model configurations; 10 exact model variants map to this 22-model ValueRank comparison roster. The main score ranks 10 models with both an exact AA DeepSWE result and a Bug Hunt owner result; the other candidates remain source-only: Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, DeepSeek V4 Pro, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Muse Spark 1.2. Raw AA values keep their source units: Elo fields remain Elo, and ratio fields are shown as percentages. **none** has an AA Intelligence Index estimate; it is labelled in the matrix. Benchmark-owner results, estimates, and provider claims remain source-typed.
 

@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
-VERSION = "v1.9.1"
+VERSION = "v1.9.2"
 PUBLISH_DATE = "September 30, 2026"
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30

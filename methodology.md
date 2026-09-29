@@ -1,6 +1,6 @@
 # ValueRank Methodology
 
-**Version:** v1.9.1
+**Version:** v1.9.2
 **Updated:** September 30, 2026
 
 ## Cohort and source versions
@@ -13,7 +13,7 @@ The model universe is the **22-model AA-mapped ValueRank comparison roster**. AA
 - LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **7be9f746f36a6f007dd78461f67cb7d06cfe2304**.
 - Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with 15 official rows, **11** direct cohort matches, and **1** eligible provider claim.
 
-Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v1.9.1.
+Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v1.9.2.
 
 ## Primary dimensions
 

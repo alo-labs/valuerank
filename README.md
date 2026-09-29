@@ -1,7 +1,7 @@
 # ValueRank
 **Frontier AI model ranking focused on production value**
 
-**Version:** v1.9.1
+**Version:** v1.9.2
 **Updated:** September 30, 2026
 **Scope:** 10 primary-ranked models from a 22-model AA-mapped comparison roster, 12 retained dimensions including Bug Hunt Bench
 

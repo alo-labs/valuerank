@@ -19,7 +19,14 @@
     "liveBenchCommit": "https://github.com/LiveBench/new-livebench/commit/7be9f746f36a6f007dd78461f67cb7d06cfe2304",
     "terminalBench40": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
     "deepseekProviderClaim": "https://api-docs.deepseek.com/updates/",
-    "googleProviderClaims": "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
+    "googleProviderClaims": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+    "codexAllowanceMeasurement": "https://www.reddit.com/r/codex/comments/1wp0v6x/allowance_for_gpt_6_luna_sol_and_astra_measured/",
+    "openaiCodexPricing": "https://learn.chatgpt.com/docs/pricing",
+    "openaiApiPricing": "https://developers.openai.com/api/docs/pricing",
+    "openaiProTierAllowance": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+    "openaiModelAllowancePolicy": "https://help.openai.com/en/articles/20001354-gpt-56-and-gpt-6-pro-in-chatgpt",
+    "anthropicClaudePricing": "https://claude.com/pricing",
+    "anthropicOpus55Availability": "https://www.anthropic.com/claude/opus"
   },
   "sourceSnapshots": [
     ".refresh/v1.4/aa_deepswe.json",
@@ -33,7 +40,8 @@
     "README.md",
     "sources.jsonl",
     "evidence.jsonl",
-    "claims.jsonl"
+    "claims.jsonl",
+    "codex-allowance-addendum.md"
   ],
   "benchmarkEvidencePolicy": "When the benchmark owner has no result for a model, use a model-provider-published claim when available; preserve direct citation and source type; require exact benchmark version and evaluated variant; never transfer across versions or variants; replace the claim with the owner result when published.",
   "assumptions": [
@@ -43,12 +51,14 @@
     "LiveBench uses the latest official release data available in this capture, pinned at commit 7be9f746f36a6f007dd78461f67cb7d06cfe2304.",
     "AA v4.3.2 is the current owner-published composite version for the selected model pages.",
     "Claude Opus 5.5 uses its exact max-effort AA DeepSWE v1.1 result and its exact max-effort Bug Hunt owner result; no cross-variant transfer is used.",
-    "The pinned LiveBench release predates Claude Opus 5.5; its unavailable Instruction Following value is excluded under zero-gap scoring."
+    "The pinned LiveBench release predates Claude Opus 5.5; its unavailable Instruction Following value is excluded under zero-gap scoring.",
+    "GPT-6 Astra and GPT-5.6 Sol Pro 20x multiples use a community-measured Plus allowance scaled by OpenAI's published 20x tier; the estimate excludes the temporary grandfathered Pro 200 allowance through 2026-10-29.",
+    "Claude Opus 5.5 is mapped to Claude Max 20x using Anthropic's current plan and model availability pages; its 40.0x route value is an inherited independent high-water estimate, not a model-specific usage measurement."
   ],
   "scoring": {
-    "version": "v1.9.1",
+    "version": "v1.9.2",
     "publishDate": "September 30, 2026",
-    "observedAt": "2026-09-29T15:33:44Z",
+    "observedAt": "2026-09-29T17:00:16Z",
     "cohortN": 10,
     "sourceCohortN": 22,
     "rankingExcludedModels": [
