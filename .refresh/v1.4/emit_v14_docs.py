@@ -674,6 +674,7 @@ for model, cost_fields in zip(models, plan_cost_fields):
         "evalCost": model["costComposite"],
         "aaEvalCost": round(model["aaEvalCost"], 2) if model.get("aaEvalCost") is not None else None,
         "deepSweCost": model["deepsweCost"],
+        "deepSwePassAt1Pct": model.get("deepswePassAt1Pct"),
         "apiCost": cost_fields["apiCost"],
         "planCost": cost_fields["planCost"],
         "planComparableCost": cost_fields["planComparableCost"],
@@ -991,8 +992,8 @@ for old, new in dynamic_cost_chart_replacements:
 
 dynamic_hero_replacements = [
     (
-        '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${m1.evalCost.toFixed(1)} composite · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>',
         '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>',
+        '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE v1.1 ${m1.deepSwePassAt1Pct == null ? "—" : Number(m1.deepSwePassAt1Pct).toFixed(1) + "%"}</div>',
     ),
     (
         '<div class="podium-runner-meta">${m.developer} · $${m.evalCost.toFixed(1)} composite</div>',
@@ -1680,6 +1681,10 @@ html = html.replace(
     f'Frontier models ranked on real-world value. ValueRank {VERSION} · {n} models; DeepSWE v1.1 and Bug Hunt shape the primary score.',
 )
 html = html.replace(
+    '// Dims: Cost Halluc DeepSWE GDP LCR OmniAcc HLE GPQA Sci CritPt AAI Spd',
+    '// Dims: Cost NonHalluc LiveBenchIF DeepSWE GDP AutomationBench LCR OmniAcc HLE GPQA SciCode CritPt AAI BugHunt',
+)
+html = html.replace(
     'Independent rankings from Artificial Analysis & DeepSWE. ValueRank v1.7.0 · 21 models, plus a matched-cohort Bug Hunt emphasis ranking.',
     f'Evidence-backed rankings from benchmark owners. ValueRank {VERSION} · {n} models; DeepSWE v1.1 and Bug Hunt are in the primary rank.',
 )
@@ -1709,6 +1714,49 @@ html = html.replace(
     "name:'Overall Score (with 25% cost)',",
     "name:'Overall Score (with ' + costWeightPct + '% ' + costBasisLabel() + ')',",
 )
+html = html.replace(
+    'What happened to the models that were ranked in v1.1 but not in v1.2?',
+    "Why isn't Claude Opus 5.5 in the primary ranking?",
+)
+
+def replace_faq_answer(source, question, answer):
+    pattern = (
+        r'(<div class="faq-item">\s*<button class="faq-q"[^>]*>\s*'
+        + re.escape(question)
+        + r'\s*<i data-lucide="chevron-down" class="faq-chevron"></i>\s*</button>\s*'
+        r'<div class="faq-a">)[\s\S]*?(</div>\s*</div>)'
+    )
+    updated, count = re.subn(
+        pattern,
+        lambda match: match.group(1) + answer + match.group(2),
+        source,
+        count=1,
+    )
+    if count != 1:
+        raise SystemExit(f"FAQ answer replacement failed: {question}")
+    return updated
+
+faq_updates = [
+    (
+        'What is the Pareto frontier?',
+        'The Pareto frontier contains models that are not dominated on both quality and cost under the selected cost basis. The Pareto chart updates when you switch between API Costs and Plan Costs.',
+    ),
+    (
+        'Are scores comparable across ValueRank versions?',
+        'Prior-version scores are not directly comparable. The eligible models, benchmark versions, dimensions, and weights can change, shifting rank-normalized scores. Use the version history table for rank movement and each release record for its own score values.',
+    ),
+    (
+        'How often is ValueRank updated?',
+        f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} uses AA Coding Agent Index v1.5 DeepSWE v1.1 results, includes Bug Hunt in the primary score, and ranks 9 exact-overlap models across 14 zero-gap dimensions.',
+    ),
+    (
+        "Why isn't Claude Opus 5.5 in the primary ranking?",
+        'The primary ranking requires exact results for the same evaluated model variant in both AA Coding Agent Index v1.5 DeepSWE v1.1 and the Bug Hunt owner scoreboard. The AA chart has a Claude Opus 5.5 configuration, but that result cannot be transferred to Claude Opus 5; variants without their own results in both sources remain outside the composite.',
+    ),
+]
+for question, answer in faq_updates:
+    html = replace_faq_answer(html, question, answer)
+
 site_path.write_text(html)
 inject_header(site_path, "llm", f"{DATE} · {n} models · {d} scored dimensions", VERSION)
 

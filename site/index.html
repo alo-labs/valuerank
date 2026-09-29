@@ -1902,7 +1902,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="section-title">Visualizations</div>
       <div class="section-sub">Eight complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
     </div>
-                                                                                                <div class="chart-tabs">
+                                                                                                        <div class="chart-tabs">
       <button class="chart-tab active" data-chart="pareto">ValueRank Pareto Frontier</button>
       <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
@@ -2146,9 +2146,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           What is the Pareto frontier?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          The Pareto frontier contains models that no other single model beats on <em>both</em> quality and cost simultaneously. In <strong>v1.2</strong> the frontier is <strong>7 models</strong>: <strong>Grok 4.5</strong>, <strong>Kimi K3</strong>, <strong>Muse Spark 1.1</strong>, <strong>GPT-5.6 Terra</strong>, <strong>GPT-5.6 Sol</strong>, <strong>Claude Opus 5</strong>, and <strong>Gemini 3.1 Pro</strong>. Every other ranked model is dominated by at least one frontier model on both dimensions.
-        </div>
+        <div class="faq-a">The Pareto frontier contains models that are not dominated on both quality and cost under the selected cost basis. The Pareto chart updates when you switch between API Costs and Plan Costs.</div>
       </div>
 
       <div class="faq-item">
@@ -2156,9 +2154,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           Are scores comparable across ValueRank versions?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          <strong>No.</strong> Because normalization is rank-relative, adding a new model, changing benchmark policy, or changing the eligible cohort shifts every other model's score in that dimension. Prior-version scores cannot be compared directly to <strong>v1.2</strong>. Use the <strong>version history table</strong> in the Data section to track rank changes across versions instead.
-        </div>
+        <div class="faq-a">Prior-version scores are not directly comparable. The eligible models, benchmark versions, dimensions, and weights can change, shifting rank-normalized scores. Use the version history table for rank movement and each release record for its own score values.</div>
       </div>
 
       <div class="faq-item">
@@ -2166,19 +2162,15 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           How often is ValueRank updated?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          Periodically, or whenever primary-source benchmark updates materially change the frontier. <strong>v1.2 (June 20, 2026)</strong> shrinks the cohort from <strong>13 to 8 DeepSWE-listed models</strong>, adds <strong>Claude Fable 5</strong>, renames Kimi from <strong>K2.6</strong> to <strong>K2.7 Code</strong>, keeps AA-Omniscience Hallucination Rate at 6%, keeps IFBench at 12%, and confirms that no newly audited benchmark reaches full 8-model coverage.
-        </div>
+        <div class="faq-a">ValueRank is refreshed when primary benchmark results or cost inputs materially change. v1.9.0 uses AA Coding Agent Index v1.5 DeepSWE v1.1 results, includes Bug Hunt in the primary score, and ranks 9 exact-overlap models across 14 zero-gap dimensions.</div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          What happened to the models that were ranked in v1.1 but not in v1.2?
+          Why isn't Claude Opus 5.5 in the primary ranking?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          The ValueRank cohort is restricted to the <strong>current DeepSWE leaderboard roster</strong>. Five v1.1-ranked models — <code>GPT-5.4 Mini</code>, <code>MiMo-V2.5-Pro</code>, <code>MiniMax M3</code>, <code>GLM 5.1</code>, and <code>DeepSeek V4-Pro</code> — are no longer listed on DeepSWE and are therefore excluded from the current primary score. Their <strong>v1.1 scores are preserved</strong> in <code>methodology.md</code> and <code>scores.md</code> for historical reference (<strong>MiMo-V2.5-Pro</strong> 58.1 / <strong>MiniMax M3</strong> 56.0 / <strong>DeepSeek V4-Pro</strong> 48.0 / <strong>GLM 5.1</strong> 40.0 / <strong>GPT-5.4 Mini</strong> 36.5). These scores are <strong>not directly comparable to v1.2</strong> because the normalization denominator changed from 13 to 8 — use the version history table to track rank changes instead.
-        </div>
+        <div class="faq-a">The primary ranking requires exact results for the same evaluated model variant in both AA Coding Agent Index v1.5 DeepSWE v1.1 and the Bug Hunt owner scoreboard. The AA chart has a Claude Opus 5.5 configuration, but that result cannot be transferred to Claude Opus 5; variants without their own results in both sources remain outside the composite.</div>
       </div>
 
     </div>
@@ -2228,7 +2220,7 @@ const DEV_COLORS = {
   'Microsoft':'#0078d4','Xiaomi':'#ff6700','Z-AI':'#06b6d4'
 };
 
-// Dims: Cost Halluc DeepSWE GDP LCR OmniAcc HLE GPQA Sci CritPt AAI Spd
+// Dims: Cost NonHalluc LiveBenchIF DeepSWE GDP AutomationBench LCR OmniAcc HLE GPQA SciCode CritPt AAI BugHunt
 const MODELS = [
   {
     "rank": 1,
@@ -2238,6 +2230,7 @@ const MODELS = [
     "evalCost": 47.63,
     "aaEvalCost": 3464.84,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 72.0,
     "apiCost": 3464.843215149396,
     "planCost": 91.18008460919464,
     "planComparableCost": 91.18008460919464,
@@ -2352,6 +2345,7 @@ const MODELS = [
     "evalCost": 52.28,
     "aaEvalCost": 3802.98,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 68.0,
     "apiCost": 3802.9799452617394,
     "planCost": 100.07841961215104,
     "planComparableCost": 100.07841961215104,
@@ -2466,6 +2460,7 @@ const MODELS = [
     "evalCost": 26.62,
     "aaEvalCost": 1936.75,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 65.0,
     "apiCost": 1936.747257680374,
     "planCost": 1291.1648384535827,
     "planComparableCost": 1291.1648384535827,
@@ -2576,6 +2571,7 @@ const MODELS = [
     "evalCost": 50.28,
     "aaEvalCost": 3658.07,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 68.0,
     "apiCost": 3658.0675385043187,
     "planCost": 52.785967366584686,
     "planComparableCost": 52.785967366584686,
@@ -2686,6 +2682,7 @@ const MODELS = [
     "evalCost": 4.4,
     "aaEvalCost": 319.93,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 66.0,
     "apiCost": 319.92851141699316,
     "planCost": 8.419171353078767,
     "planComparableCost": 8.419171353078767,
@@ -2800,6 +2797,7 @@ const MODELS = [
     "evalCost": 22.31,
     "aaEvalCost": 1622.73,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 66.0,
     "apiCost": 1622.7263776021543,
     "planCost": 153.0873941134108,
     "planComparableCost": 153.0873941134108,
@@ -2922,6 +2920,7 @@ const MODELS = [
     "evalCost": 34.41,
     "aaEvalCost": 2503.48,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 61.0,
     "apiCost": 2503.478685148468,
     "planCost": 414.14039456550336,
     "planComparableCost": 414.14039456550336,
@@ -3029,6 +3028,7 @@ const MODELS = [
     "evalCost": 100.0,
     "aaEvalCost": 7274.74,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 63.0,
     "apiCost": 7274.7418382622345,
     "planCost": 181.86854595655586,
     "planComparableCost": 181.86854595655586,
@@ -3139,6 +3139,7 @@ const MODELS = [
     "evalCost": 67.83,
     "aaEvalCost": 4934.79,
     "deepSweCost": null,
+    "deepSwePassAt1Pct": 51.0,
     "apiCost": 4934.789930721673,
     "planCost": 1644.9299769072243,
     "planComparableCost": 1644.9299769072243,
@@ -3648,7 +3649,7 @@ function renderHeroPodium() {
         <div class="podium-hero-name">${m1.name}</div>
         <div class="podium-hero-score">${m1.overallScore.toFixed(1)}</div>
       </div>
-      <div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>
+      <div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE v1.1 ${m1.deepSwePassAt1Pct == null ? "—" : Number(m1.deepSwePassAt1Pct).toFixed(1) + "%"}</div>
       <div class="podium-hero-bars">
         <div class="podium-bar-row">
           <span class="podium-bar-label">Quality</span>
