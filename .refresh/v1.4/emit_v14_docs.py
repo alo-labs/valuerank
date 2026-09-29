@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit the v1.9.2 README, methodology, score tables, raw data, and site.
+"""Emit the current README, methodology, score tables, raw data, and site.
 
 The site keeps the existing interactive publication shell, but all ranking
 constants and model data are generated from .refresh/v1.4/scores.json.
@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from plan_costs import build_cost_fields, load_plan_routes, route_summary
 from site_header import inject_header
 
-VERSION = "v1.9.2"
+VERSION = "v1.9.3"
 DATE = "September 30, 2026"
 SHORT_DATE = "Sep 30"
 CURRENCY = "$"
@@ -107,6 +107,7 @@ ranking_history_document = json.loads((REFRESH / "ranking_history_v1.5.json").re
 ranking_history = ranking_history_document.get("v150", {})
 ranking_history_v190 = ranking_history_document.get("v190", {})
 ranking_history_v191 = ranking_history_document.get("v191", {})
+ranking_history_v192 = ranking_history_document.get("v192", {})
 deepswe_updated = scores.get("deepsweObservedAt") or deepswe_chart_doc.get("observedAt", DATE)
 deepswe_configurations = deepswe_chart_doc["configurations"]
 deepswe_overlap_n = len([item for item in deepswe_configurations if item.get("valueRankModelId")])
@@ -711,7 +712,7 @@ for model, cost_fields in zip(models, plan_cost_fields):
         "missingCount": sum(1 for weight in weights if weight["key"] not in model["dims"]),
         "dims": [model["dims"][dim_key] for dim_key, _key, _full, _cat in SITE_DIMS],
         "isMissing": [False] * len(SITE_DIMS),
-        "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": ranking_history.get(model["id"]), "v160": None, "v170": None, "v190": ranking_history_v190.get(model["id"]), "v191": ranking_history_v191.get(model["id"])},
+        "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": ranking_history.get(model["id"]), "v160": None, "v170": None, "v190": ranking_history_v190.get(model["id"]), "v191": ranking_history_v191.get(model["id"]), "v192": ranking_history_v192.get(model["id"]), "v193": model.get("rank")},
     })
 
 site_livebench = [
@@ -1320,13 +1321,13 @@ html = html.replace("text:'v1.4.0: 21 models · 12 dims'", f"text:'{VERSION}: {n
 html = re.sub(r"const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
 html = re.sub(
     r"const versions = \[[^;]*\];",
-    "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2'];",
+    "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2','v1.9.3'];",
     html,
     count=1,
 )
 html = re.sub(
     r"const vKeys = \[[^;]*\];",
-    "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191'];",
+    "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191','v192','v193'];",
     html,
     count=1,
 )
@@ -1481,13 +1482,13 @@ html = html.replace("All scored cells are confirmed primary-source data in v1.2"
 html = html.replace("excluded from v1.2", "excluded from the current primary score")
 html = re.sub(
     r"(function renderVersionTable\(\) \{[\s\S]*?const versions = )\[[^;]*\];",
-    lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2'];",
+    lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2','v1.9.3'];",
     html,
     count=1,
 )
 html = re.sub(
     r"(function renderVersionTable\(\) \{[\s\S]*?const vKeys = )\[[^;]*\];",
-    lambda match: match.group(1) + "['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191'];",
+    lambda match: match.group(1) + "['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191','v192','v193'];",
     html,
     count=1,
 )

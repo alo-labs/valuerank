@@ -1,4 +1,4 @@
-# ValueRank v1.9.2 Scores
+# ValueRank v1.9.3 Scores
 
 **Updated:** September 30, 2026 · **Cohort:** 13 · **Retained dimensions:** 12 · **Default cost basis:** API Costs (AA total evaluation cost)
 
