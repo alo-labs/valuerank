@@ -185,12 +185,12 @@ def build_record(
 
 
 def main() -> int:
-    deepswe = json.loads((REFRESH / "deepswe.json").read_text())
-    cohort = [(item["slug"], item["displayName"]) for item in deepswe["models"]]
+    aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
+    cohort = [(model_id, item["displayName"]) for model_id, item in aa_document["models"].items()]
     if len(cohort) != 21:
-        raise ValueError("LiveBench mapping expects the complete 21-model DeepSWE cohort")
+        raise ValueError("LiveBench mapping expects the complete 21-model AA comparison cohort")
     if set(COHORT_MAP) != {model_id for model_id, _ in cohort}:
-        raise ValueError("LiveBench cohort mapping does not exactly match DeepSWE v1.4")
+        raise ValueError("LiveBench cohort mapping does not exactly match the AA model map")
 
     table_bytes, table_source = fetch(URLS["table"])
     cost_bytes, cost_source = fetch(URLS["cost"])

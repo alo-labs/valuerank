@@ -1,7 +1,7 @@
 {
   "schemaVersion": "v1.7",
   "observedAt": "2026-09-29T07:24:48Z",
-  "cohort": "DeepSWE Best v1.1 current 21-model roster",
+  "cohort": "Artificial Analysis v4.3.2 mapped 21-model ValueRank comparison roster",
   "cohortN": 21,
   "primaryEvaluations": [
     {
@@ -81,24 +81,35 @@
   ],
   "providerClaimPolicy": "Use a provider-published value only while the benchmark owner has no result, for the same benchmark version and evaluated model identity; keep claims visibly distinct from owner results.",
   "fields": {
-  "bugHuntFixedOf105": {
-    "group": "supplemental",
-    "label": "Bug Hunt Bench bugs fixed out of 105",
-    "availableN": 16,
-    "cohortN": 21,
-    "coveragePct": 76.19,
-    "missingModels": [
-      "GPT-5.5",
-      "Gemini 3.7 Flash",
-      "Gemini 3.6 Flash",
-      "GLM-5.2",
-      "Gemini 3.5 Flash"
-    ],
-    "includedInPrimaryScore": false,
-    "includedInBugHuntEmphasisRanking": true,
-    "sourceRelease": "105 planted bugs across two repositories; rolling public results snapshot",
-    "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c"
-  },
+    "bugHuntFixedOf105": {
+      "group": "primary",
+      "label": "Bug Hunt Bench bugs fixed out of 105",
+      "availableN": 9,
+      "cohortN": 9,
+      "coveragePct": 100.0,
+      "sourceAvailableN": 9,
+      "sourceCohortN": 21,
+      "sourceCoveragePct": 42.86,
+      "missingModels": [],
+      "sourceMissingModels": [
+        "Claude Fable 5",
+        "GPT-5.5",
+        "Gemini 3.7 Flash",
+        "GLM-5.3 Flash",
+        "DeepSeek V4 Pro",
+        "Claude Opus 4.8",
+        "Muse Spark 1.2",
+        "Claude Sonnet 5",
+        "DeepSeek V4 Flash",
+        "Gemini 3.6 Flash",
+        "GLM-5.2",
+        "Gemini 3.5 Flash"
+      ],
+      "includedInPrimaryScore": true,
+      "includedInBugHuntEmphasisRanking": true,
+      "sourceRelease": "105 planted bugs across two repositories; rolling public results snapshot",
+      "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c"
+    },
     "briefcaseElo": {
       "group": "primary",
       "availableN": 20,
@@ -543,10 +554,13 @@
     "livebenchOverall": {
       "group": "supplemental",
       "label": "LiveBench Overall Score",
-      "availableN": 21,
-      "cohortN": 21,
+      "availableN": 9,
+      "cohortN": 9,
       "coveragePct": 100.0,
       "missingModels": [],
+      "sourceAvailableN": 21,
+      "sourceCohortN": 21,
+      "sourceMissingModels": [],
       "includedInPrimaryScore": false,
       "sourceRelease": "2026_06_25",
       "publishedN": 64,
@@ -556,13 +570,16 @@
       ]
     },
     "livebenchInstructionFollowing": {
-      "group": "supplemental",
+      "group": "primary",
       "label": "Instruction Following (LiveBench)",
-      "availableN": 21,
-      "cohortN": 21,
+      "availableN": 9,
+      "cohortN": 9,
       "coveragePct": 100.0,
       "missingModels": [],
-      "includedInPrimaryScore": false,
+      "sourceAvailableN": 21,
+      "sourceCohortN": 21,
+      "sourceMissingModels": [],
+      "includedInPrimaryScore": true,
       "sourceRelease": "2026_06_25",
       "publishedN": 64,
       "supplementalMatchedN": 1,
@@ -573,10 +590,13 @@
     "livebenchCostPerSuccessfulTask": {
       "group": "supplemental",
       "label": "LiveBench Cost Per Successful Task",
-      "availableN": 21,
-      "cohortN": 21,
+      "availableN": 9,
+      "cohortN": 9,
       "coveragePct": 100.0,
       "missingModels": [],
+      "sourceAvailableN": 21,
+      "sourceCohortN": 21,
+      "sourceMissingModels": [],
       "includedInPrimaryScore": false,
       "sourceRelease": "2026_06_25",
       "publishedN": 64,
@@ -588,12 +608,18 @@
     "terminalBenchV4": {
       "group": "supplemental",
       "label": "Terminal-Bench 4.0",
-      "availableN": 12,
-      "cohortN": 21,
-      "coveragePct": 57.14,
+      "availableN": 7,
+      "cohortN": 9,
+      "coveragePct": 77.78,
+      "sourceAvailableN": 12,
+      "sourceCohortN": 21,
       "officialMatchedN": 11,
       "providerClaimMatchedN": 1,
       "missingModels": [
+        "Kimi K3",
+        "Qwen3.8 Max"
+      ],
+      "sourceMissingModels": [
         "Kimi K3",
         "GPT-5.5",
         "GLM-5.3 Flash",
@@ -631,28 +657,52 @@
         "claude-fable-5-1"
       ]
     },
-    "bugHunt": {
-      "version": "105 planted bugs across two repositories; rolling public results snapshot",
-      "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
-      "matchedN": 16,
-      "cohortN": 21
-    },
     "terminalBenchV4": {
       "version": "4.0",
       "matchedN": 11,
       "providerClaimN": 1,
       "rankingAvailableN": 12,
       "cohortN": 21
+    },
+    "bugHunt": {
+      "version": "105 planted bugs across two repositories; rolling public results snapshot",
+      "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
+      "matchedN": 16,
+      "rankableOverlapN": 9,
+      "sourceCohortN": 21,
+      "primaryCohortN": 9,
+      "sourceCoveragePct": 76.19,
+      "primaryCoveragePct": 42.86,
+      "primaryWeightPct": 16.5289,
+      "emphasisWeightPct": 22.9008
     }
   },
   "scoring": {
-    "version": "v1.7.0",
-    "cohortN": 21,
-    "costMode": "deepswe-only (AA v4.3.2 total cost incomplete)",
+    "version": "v1.9.0",
+    "cohortN": 9,
+    "sourceCohortN": 21,
+    "rankingExcludedModels": [
+      "Claude Fable 5",
+      "GPT-5.5",
+      "Gemini 3.7 Flash",
+      "GLM-5.3 Flash",
+      "DeepSeek V4 Pro",
+      "Claude Opus 4.8",
+      "Muse Spark 1.2",
+      "Claude Sonnet 5",
+      "DeepSeek V4 Flash",
+      "Gemini 3.6 Flash",
+      "GLM-5.2",
+      "Gemini 3.5 Flash"
+    ],
+    "costMode": "aa-only",
     "costCoverage": {
-      "availableN": 20,
-      "cohortN": 21,
-      "missingModels": [
+      "availableN": 9,
+      "cohortN": 9,
+      "sourceAvailableN": 20,
+      "sourceCohortN": 21,
+      "missingModels": [],
+      "sourceMissingModels": [
         "Gemini 3.7 Flash"
       ],
       "selectiveSubstitution": false
@@ -663,19 +713,25 @@
       "livebenchInstructionFollowing",
       "deepswePassAt1",
       "gdpvalV21",
+      "automationBenchAA",
       "aaLcr",
       "omniAccuracy",
       "hle",
       "gpqaDiamond",
       "scicode",
       "critpt",
-      "intelligenceIndex"
+      "intelligenceIndex",
+      "bugHuntFixedOf105"
     ],
     "droppedDimensions": [
       {
         "key": "terminalBenchV4",
         "label": "Terminal-Bench 4.0",
         "missing": [
+          "Kimi K3",
+          "Qwen3.8 Max"
+        ],
+        "sourceMissing": [
           "Kimi K3",
           "GPT-5.5",
           "GLM-5.3 Flash",
@@ -686,15 +742,7 @@
           "GLM-5.2",
           "Gemini 3.5 Flash"
         ],
-        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
-      },
-      {
-        "key": "automationBenchAA",
-        "label": "AutomationBench-AA",
-        "missing": [
-          "Gemini 3.7 Flash"
-        ],
-        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+        "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
       {
         "key": "speed",
@@ -702,121 +750,59 @@
         "missing": [
           "Kimi K3"
         ],
-        "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
+        "sourceMissing": [
+          "Kimi K3"
+        ],
+        "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       }
     ],
     "zeroGap": true,
     "noNeutralFills": true,
-    "alternateRankings": {
-      "bugHuntEmphasis": {
-        "matchedN": 16,
-        "cohortN": 21,
-        "benchmarkWeightPct": 20.4082,
-        "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
-        "ranking": [
-          {
-            "rank": 1,
-            "modelId": "gpt-6-astra",
-            "score": 71.6
-          },
-          {
-            "rank": 2,
-            "modelId": "grok-4.6",
-            "score": 63.8
-          },
-          {
-            "rank": 3,
-            "modelId": "gpt-5.6-sol",
-            "score": 63.6
-          },
-          {
-            "rank": 4,
-            "modelId": "claude-fable-5",
-            "score": 58.9
-          },
-          {
-            "rank": 5,
-            "modelId": "gemini-3.8-flash",
-            "score": 58.1
-          },
-          {
-            "rank": 6,
-            "modelId": "claude-opus-5",
-            "score": 56.3
-          },
-          {
-            "rank": 7,
-            "modelId": "gpt-5.6-luna",
-            "score": 55.6
-          },
-          {
-            "rank": 8,
-            "modelId": "qwen3.8-max",
-            "score": 54.7
-          },
-          {
-            "rank": 9,
-            "modelId": "kimi-k3",
-            "score": 52.6
-          },
-          {
-            "rank": 10,
-            "modelId": "glm-5.3-flash",
-            "score": 50.7
-          },
-          {
-            "rank": 11,
-            "modelId": "glm-5.3",
-            "score": 50.6
-          },
-          {
-            "rank": 12,
-            "modelId": "deepseek-v4-flash",
-            "score": 39.9
-          },
-          {
-            "rank": 13,
-            "modelId": "deepseek-v4-pro",
-            "score": 38.8
-          },
-          {
-            "rank": 14,
-            "modelId": "muse-spark-1.2",
-            "score": 38.7
-          },
-          {
-            "rank": 15,
-            "modelId": "claude-opus-4.8",
-            "score": 29.5
-          },
-          {
-            "rank": 16,
-            "modelId": "claude-sonnet-5",
-            "score": 16.5
-          }
-        ]
-      }
-    },
     "fields": {
       "costComposite": {
         "label": "Cost",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 9,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [
+          "Claude Fable 5",
+          "GPT-5.5",
+          "Gemini 3.7 Flash",
+          "GLM-5.3 Flash",
+          "DeepSeek V4 Pro",
+          "Claude Opus 4.8",
+          "Muse Spark 1.2",
+          "Claude Sonnet 5",
+          "DeepSeek V4 Flash",
+          "Gemini 3.6 Flash",
+          "GLM-5.2",
+          "Gemini 3.5 Flash"
+        ],
         "includedInPrimaryScore": true
       },
       "omniNonHallucination": {
         "label": "Non-Hallucination",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "terminalBenchV4": {
         "label": "Terminal-Bench 4.0",
-        "availableN": 12,
-        "cohortN": 21,
+        "availableN": 7,
+        "cohortN": 9,
         "missingModels": [
+          "Kimi K3",
+          "Qwen3.8 Max"
+        ],
+        "sourceAvailableN": 12,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [
           "Kimi K3",
           "GPT-5.5",
           "GLM-5.3 Flash",
@@ -831,92 +817,226 @@
       },
       "livebenchInstructionFollowing": {
         "label": "Instruction Following (LiveBench)",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "deepswePassAt1": {
-        "label": "DeepSWE",
-        "availableN": 21,
-        "cohortN": 21,
+        "label": "DeepSWE v1.1",
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 9,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [
+          "Claude Fable 5",
+          "GPT-5.5",
+          "Gemini 3.7 Flash",
+          "GLM-5.3 Flash",
+          "DeepSeek V4 Pro",
+          "Claude Opus 4.8",
+          "Muse Spark 1.2",
+          "Claude Sonnet 5",
+          "DeepSeek V4 Flash",
+          "Gemini 3.6 Flash",
+          "GLM-5.2",
+          "Gemini 3.5 Flash"
+        ],
         "includedInPrimaryScore": true
       },
       "gdpvalV21": {
         "label": "GDPval-AA v2.1",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "automationBenchAA": {
         "label": "AutomationBench-AA",
-        "availableN": 20,
-        "cohortN": 21,
-        "missingModels": [
+        "availableN": 9,
+        "cohortN": 9,
+        "missingModels": [],
+        "sourceAvailableN": 20,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [
           "Gemini 3.7 Flash"
         ],
-        "includedInPrimaryScore": false
+        "includedInPrimaryScore": true
       },
       "aaLcr": {
         "label": "AA-LCR v1.1",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "omniAccuracy": {
         "label": "AA-Omniscience Accuracy",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "hle": {
         "label": "HLE",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "gpqaDiamond": {
         "label": "GPQA Diamond (legacy)",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "scicode": {
         "label": "SciCode",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "critpt": {
         "label": "CritPt",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "intelligenceIndex": {
         "label": "AA Intelligence Index",
-        "availableN": 21,
-        "cohortN": 21,
+        "availableN": 9,
+        "cohortN": 9,
         "missingModels": [],
+        "sourceAvailableN": 21,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "speed": {
         "label": "Speed",
-        "availableN": 20,
-        "cohortN": 21,
+        "availableN": 8,
+        "cohortN": 9,
         "missingModels": [
           "Kimi K3"
         ],
+        "sourceAvailableN": 20,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [
+          "Kimi K3"
+        ],
         "includedInPrimaryScore": false
+      },
+      "bugHuntFixedOf105": {
+        "label": "Bug Hunt Bench bugs fixed out of 105",
+        "availableN": 9,
+        "cohortN": 9,
+        "missingModels": [],
+        "sourceAvailableN": 16,
+        "sourceCohortN": 21,
+        "sourceMissingModels": [
+          "GPT-5.5",
+          "Gemini 3.7 Flash",
+          "Gemini 3.6 Flash",
+          "GLM-5.2",
+          "Gemini 3.5 Flash"
+        ],
+        "rankableOverlapN": 9,
+        "includedInPrimaryScore": true
+      }
+    },
+    "alternateRankings": {
+      "bugHuntEmphasis": {
+        "matchedN": 9,
+        "cohortN": 21,
+        "benchmarkWeightPct": 22.9008,
+        "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
+        "ranking": [
+          {
+            "rank": 1,
+            "modelId": "gpt-5.6-sol",
+            "score": 73.4
+          },
+          {
+            "rank": 2,
+            "modelId": "gpt-6-astra",
+            "score": 71.2
+          },
+          {
+            "rank": 3,
+            "modelId": "grok-4.6",
+            "score": 55.8
+          },
+          {
+            "rank": 4,
+            "modelId": "gpt-5.6-luna",
+            "score": 52.5
+          },
+          {
+            "rank": 5,
+            "modelId": "kimi-k3",
+            "score": 49.3
+          },
+          {
+            "rank": 6,
+            "modelId": "gemini-3.8-flash",
+            "score": 46.3
+          },
+          {
+            "rank": 7,
+            "modelId": "claude-opus-5",
+            "score": 37.5
+          },
+          {
+            "rank": 8,
+            "modelId": "glm-5.3",
+            "score": 35.6
+          },
+          {
+            "rank": 9,
+            "modelId": "qwen3.8-max",
+            "score": 28.4
+          }
+        ]
       }
     }
-  }
+  },
+  "deepSweSource": {
+    "publisher": "Artificial Analysis",
+    "sourceType": "benchmark_owner",
+    "title": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+    "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1",
+    "indexVersion": "v1.5",
+    "metric": "Pass@1 (%)",
+    "methodology": "The chart states each benchmark score averages pass@1 across three attempts per task.",
+    "captureMethod": "Built-in browser rendered public chart; 25 of 25 configurations observed."
+  },
+  "deepSweConfigurationsN": 25
 }

@@ -1,14 +1,16 @@
-# ValueRank v1.7.0 refresh record
+# ValueRank v1.9.0 refresh record
 
 - Capture date: 2026-09-29
 - Benchmark source: Artificial Analysis Intelligence Index v4.3.2
-- Cohort: all 21 models on the current DeepSWE Best page
+- Model universe: 21 AA-mapped ValueRank comparison candidates
+- DeepSWE source: AA Coding Agent Index v1.5, 25 configurations, 113 tasks
+- Primary ranked cohort: 9 candidates with exact AA DeepSWE variant and Bug Hunt owner results; 12 remain source-only
 
 This refresh updates every generated ValueRank ranking view from source snapshots captured on 2026-09-29 or the latest pinned benchmark release available on that date. Graphify orientation identified the dependency path from the model roster and source adapters through `.refresh/v1.4/build_scores.py`, the cost routes, and the Markdown and site emitters.
 
 ## Source changes and evidence boundaries
 
-- DeepSWE Best was read in the built-in browser. The page showed 113 tasks, 91 repositories, five languages, and a source update of 2026-09-22. The current 21-row Best roster is retained in its page order and at its displayed effort.
+- The final DeepSWE v1.1 result source is AA's [Coding Agent Index v1.5 chart](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1), read in the built-in browser. It shows 25 of 25 agent/model configurations over 113 tasks, with scores averaging pass@1 over three attempts per task. The full capture is pinned in .refresh/v1.4/aa_deepswe.json. The earlier DeepSWE Best page snapshot is retained only as historical audit material and is not used for current scores.
 - Artificial Analysis v4.3.2 replaces v4.2 as the current index input. Its current official component list includes AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-Omniscience Accuracy, AA-Omniscience Non-Hallucination, and AA-LCR v1.1. The captured first-party model payloads are pinned in `.refresh/v1.4/aa/aa_v432_snapshot.json`.
 - Gemini 3.7 Flash’s AA Index is marked as an owner estimate because the selected page identifies it as estimated. AA Omniscience reports hallucination rate; ValueRank derives Non-Hallucination as 1 minus that rate.
 - LiveBench uses the official 2026-06-25 release data pinned at commit `7be9f746f36a6f007dd78461f67cb7d06cfe2304`. The live release date is older than this capture date; the source commit and release date are recorded separately.
@@ -21,10 +23,13 @@ When a benchmark owner has not published a result for a model, use a model-provi
 
 ## Ranking and cost decisions
 
-- Keep all 21 current DeepSWE models; do not collapse families, use proxy models, or neutral-fill missing values.
-- Retain only zero-gap primary dimensions. LiveBench Instruction Following is eligible because the pinned release covers the entire roster. AA Speed has only 20/21 numeric values and is excluded. Terminal-Bench 4.0 and AutomationBench-AA have incomplete eligible coverage and remain supplemental.
-- AA total evaluation cost is missing for one selected page, so the primary cost dimension uses one cohort-wide DeepSWE cost basis. Captured AA costs remain visible as raw source data.
-- Preserve v1.5.0 ranks in `.refresh/v1.4/ranking_history_v1.5.json` before writing v1.6.0 ranks to the site history.
+- Set DeepSWE v1.1 priority to 25. On the 9-model primary cohort, DeepSWE carries a 20.66% ValueRank weight.
+- Include Bug Hunt Bench in the main rank at priority 20 (16.53%). Its owner scoreboard has 16 exact results in the 21-candidate roster; 9 of these overlap with exact AA DeepSWE model variants and enter the composite.
+- Keep a separate Bug Hunt emphasis view at priority 30 (22.90%) for the same 9 exact-overlap models.
+- Preserve all 25 AA chart configurations and their agent, model variant, and effort fields. Do not transfer scores across model versions or composite-agent configurations; models lacking the full overlap remain visible without a composite rank.
+- Retain only zero-gap dimensions across the 9-model overlap. LiveBench Instruction Following and AutomationBench-AA are included. AA Speed and standalone Terminal-Bench 4.0 have gaps and remain supplemental.
+- Default/API Costs uses AA total evaluation cost for the fixed index suite; the Plan Costs view divides the same amount by each model's highest eligible Value Multiple. Both inputs cover all 9 primary models. No DeepSWE leaderboard average-cost values enter the current score.
+- Preserve only recorded historical ranks in the site history; this refresh adds the v1.9.0 cohort snapshot without copying current ranks into unobserved prior versions.
 - Cost rankings retain both API Costs and Plan Costs views. The ChatGPT Pro allowance multiplier is an estimate based on a community-observed allowance, not an official OpenAI quota; current subscription access and the pause on new sign-ups/upgrades are separately attributed. OpenCode Go’s GLM-5.3 Flash route reflects the current $60 monthly usage quota.
 - Provider inputs, plan routes, selected variants, and source values remain in the machine-readable refresh files.
 
@@ -33,7 +38,6 @@ When a benchmark owner has not published a result for a model, use a model-provi
 Use the pinned snapshots and project builders in this order:
 
 ```sh
-python3 .refresh/v1.4/build_deepswe_v14.py .refresh/v1.4/deepswe-browser-2026-09-29.json .refresh/v1.4/deepswe.json
 python3 .refresh/v1.4/build_aa_metrics.py
 python3 .refresh/v1.4/fetch_livebench.py
 python3 .refresh/v1.4/build_tb4.py .refresh/v1.4/tb4-browser-2026-09-29.json .refresh/v1.4/tb4.json
@@ -42,4 +46,4 @@ python3 .refresh/v1.4/emit_v14_docs.py
 python3 scripts/generate_tb4_page.py
 ```
 
-The captured TB4 and DeepSWE snapshots were made with the built-in browser. AA page payloads and the pinned LiveBench release data are preserved locally. The refresh script that launches a separate Playwright browser is intentionally not part of this reproduction sequence.
+The AA DeepSWE chart capture and TB4 snapshot were made with the built-in browser. AA page payloads, all 25 DeepSWE configurations, and the pinned LiveBench release data are preserved locally. The current scoring and external-source adapters derive the model roster from AA-mapped data; the historical DeepSWE Best snapshot is not required.

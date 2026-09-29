@@ -1,7 +1,7 @@
-"""Resolve model-specific subscription routes into effective task costs.
+"""Resolve model-specific subscription routes into effective AA evaluation costs.
 
 The route file deliberately keeps evidence and eligibility next to the
-arithmetic.  A missing route is not treated as free usage: callers receive an
+arithmetic. A missing route is not treated as free usage: callers receive an
 explicit API fallback marker and can explain it in the UI.
 """
 
@@ -88,7 +88,7 @@ def rank_cost_scores(costs: list[float | int | None]) -> list[float | None]:
 def build_cost_fields(models: list[dict], route_document: dict) -> list[dict]:
     """Return API and plan cost values plus normalized scores for each model."""
 
-    api_costs = [model.get("deepsweCost", model.get("apiCost")) for model in models]
+    api_costs = [model.get("aaEvalCost") for model in models]
     routes = [select_best_route(model["id"], route_document) for model in models]
     plan_costs = [effective_cost(api_cost, route) for api_cost, route in zip(api_costs, routes)]
     comparable_plan_costs = [

@@ -77,7 +77,8 @@ def main() -> int:
         })
     if len(entries) != len(rows) - 1:
         raise ValueError(f"Terminal-Bench source row count mismatch: {len(entries)} entries from {len(rows)} rows")
-    cohort = json.loads((REFRESH / "deepswe.json").read_text())["models"]
+    aa_models = json.loads((REFRESH / "aa_metrics.json").read_text())["models"]
+    cohort = [{"slug": model_id, "displayName": item["displayName"]} for model_id, item in aa_models.items()]
     cohort_ids = [item["slug"] for item in cohort]
     matches = {entry["cohortModelId"]: entry for entry in entries if entry["cohortModelId"]}
     if len(matches) != len({entry["cohortModelId"] for entry in entries if entry["cohortModelId"]}):

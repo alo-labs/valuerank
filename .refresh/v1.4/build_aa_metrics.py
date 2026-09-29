@@ -351,7 +351,7 @@ def main() -> int:
     coverage_output = {
         "schemaVersion": "v1.6",
         "observedAt": observed_at,
-        "cohort": "DeepSWE Best v1.1 current 21-model roster",
+        "cohort": "Artificial Analysis current 21-model ValueRank comparison roster",
         "cohortN": len(models),
         "primaryEvaluations": PRIMARY_EVALUATIONS,
         "additionalFields": ADDITIONAL_FIELDS,
