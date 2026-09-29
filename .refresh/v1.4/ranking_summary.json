@@ -1,24 +1,24 @@
 {
-  "version": "v1.5.0",
-  "publishDate": "September 6, 2026",
-  "observedAt": "2026-09-06T10:50:50Z",
+  "version": "v1.7.0",
+  "publishDate": "September 29, 2026",
+  "observedAt": "2026-09-29T07:26:14Z",
   "cohortN": 21,
-  "deepsweSourceUpdatedOn": "September 3, 2026",
-  "aaBenchmarkVersion": "Artificial Analysis Intelligence Index v4.2",
+  "deepsweSourceUpdatedOn": "September 22, 2026",
+  "aaBenchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "retainedDimensionN": 12,
   "retainedDimensions": [
     "Cost",
     "Non-Hallucination",
+    "Instruction Following (LiveBench)",
     "DeepSWE",
-    "GDPval-AA v2",
-    "τ³-Banking",
+    "GDPval-AA v2.1",
     "AA-LCR v1.1",
     "AA-Omniscience Accuracy",
     "HLE",
     "GPQA Diamond (legacy)",
+    "SciCode",
     "CritPt",
-    "AA Intelligence Index",
-    "Speed"
+    "AA Intelligence Index"
   ],
   "droppedDimensions": [
     {
@@ -31,7 +31,6 @@
         "DeepSeek V4 Pro",
         "Qwen3.8 Max",
         "Muse Spark 1.2",
-        "DeepSeek V4 Flash",
         "Gemini 3.6 Flash",
         "GLM-5.2",
         "Gemini 3.5 Flash"
@@ -39,38 +38,35 @@
       "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
     },
     {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
       "missing": [
-        "GPT-6 Astra"
+        "Gemini 3.7 Flash"
       ],
       "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
     },
     {
-      "key": "scicode",
-      "label": "SciCode",
+      "key": "speed",
+      "label": "Speed",
       "missing": [
-        "GPT-5.5"
+        "Kimi K3"
       ],
       "reason": "incomplete cohort coverage; values remain null and are not neutral-filled"
     }
   ],
   "zeroGap": true,
-  "costMode": "deepswe-only (AA v4.2 total cost incomplete)",
+  "costMode": "deepswe-only (AA v4.3.2 total cost incomplete)",
   "costCoverage": {
-    "availableN": 18,
+    "availableN": 20,
     "cohortN": 21,
     "missingModels": [
-      "GPT-5.5",
-      "Claude Opus 4.8",
-      "GLM-5.2"
+      "Gemini 3.7 Flash"
     ],
     "selectiveSubstitution": false
   },
   "pareto": [
     "GPT-6 Astra",
     "Gemini 3.8 Flash",
-    "GPT-5.6 Sol",
     "Gemini 3.7 Flash",
     "GLM-5.3 Flash"
   ],
@@ -78,41 +74,80 @@
     {
       "rank": 1,
       "name": "Gemini 3.8 Flash",
-      "overallScore": 68.5,
-      "qualityScore": 67.9
+      "overallScore": 68.4,
+      "qualityScore": 67.6
     },
     {
       "rank": 2,
-      "name": "Grok 4.6",
-      "overallScore": 64.1,
-      "qualityScore": 64.9
+      "name": "GPT-6 Astra",
+      "overallScore": 64.7,
+      "qualityScore": 78.7
     },
     {
       "rank": 3,
-      "name": "GLM-5.3 Flash",
-      "overallScore": 63.8,
-      "qualityScore": 47.0
+      "name": "Grok 4.6",
+      "overallScore": 63.0,
+      "qualityScore": 63.2
     },
     {
       "rank": 4,
-      "name": "GPT-6 Astra",
-      "overallScore": 59.4,
-      "qualityScore": 75.3
+      "name": "GLM-5.3 Flash",
+      "overallScore": 59.6,
+      "qualityScore": 40.6
     },
     {
       "rank": 5,
-      "name": "GPT-5.6 Sol",
-      "overallScore": 59.1,
-      "qualityScore": 72.6
+      "name": "Gemini 3.7 Flash",
+      "overallScore": 57.6,
+      "qualityScore": 47.1
     }
   ],
+  "bugHuntEmphasis": {
+    "matchedN": 16,
+    "cohortN": 21,
+    "benchmarkWeightPct": 20.4082,
+    "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
+    "topFive": [
+      {
+        "rank": 1,
+        "name": "GPT-6 Astra",
+        "score": 71.6,
+        "fixedOf105": 45
+      },
+      {
+        "rank": 2,
+        "name": "Grok 4.6",
+        "score": 63.8,
+        "fixedOf105": 28.7
+      },
+      {
+        "rank": 3,
+        "name": "GPT-5.6 Sol",
+        "score": 63.6,
+        "fixedOf105": 43.5
+      },
+      {
+        "rank": 4,
+        "name": "Claude Fable 5",
+        "score": 58.9,
+        "fixedOf105": 29
+      },
+      {
+        "rank": 5,
+        "name": "Gemini 3.8 Flash",
+        "score": 58.1,
+        "fixedOf105": 18
+      }
+    ]
+  },
   "externalCoverage": {
-    "livebench": "20/21",
-    "livebenchPublishedN": 21,
+    "livebench": "21/21",
+    "livebenchPublishedN": 64,
     "livebenchSupplementalModels": [
       "claude-fable-5-1"
     ],
-    "terminalBenchV4": "11/21"
+    "bugHunt": "16/21 eligible owner results",
+    "terminalBenchV4": "12/21 including 1 provider claim"
   },
   "weights": [
     {
@@ -120,84 +155,84 @@
       "label": "Cost",
       "higherBetter": false,
       "priority": 25,
-      "weightPct": 31.6456
+      "weightPct": 32.0513
     },
     {
       "key": "omniNonHallucination",
       "label": "Non-Hallucination",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 7.5949
+      "weightPct": 7.6923
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "higherBetter": true,
+      "priority": 5,
+      "weightPct": 6.4103
     },
     {
       "key": "deepswePassAt1",
       "label": "DeepSWE",
       "higherBetter": true,
       "priority": 7,
-      "weightPct": 8.8608
+      "weightPct": 8.9744
     },
     {
-      "key": "gdpvalV2",
-      "label": "GDPval-AA v2",
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 7.5949
-    },
-    {
-      "key": "tau3Banking",
-      "label": "τ³-Banking",
-      "higherBetter": true,
-      "priority": 5,
-      "weightPct": 6.3291
+      "weightPct": 7.6923
     },
     {
       "key": "aaLcr",
       "label": "AA-LCR v1.1",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 5.0633
+      "weightPct": 5.1282
     },
     {
       "key": "omniAccuracy",
       "label": "AA-Omniscience Accuracy",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 5.0633
+      "weightPct": 5.1282
     },
     {
       "key": "hle",
       "label": "HLE",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 5.0633
+      "weightPct": 5.1282
     },
     {
       "key": "gpqaDiamond",
       "label": "GPQA Diamond (legacy)",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 5.0633
+      "weightPct": 5.1282
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "higherBetter": true,
+      "priority": 4,
+      "weightPct": 5.1282
     },
     {
       "key": "critpt",
       "label": "CritPt",
       "higherBetter": true,
       "priority": 3,
-      "weightPct": 3.7975
+      "weightPct": 3.8462
     },
     {
       "key": "intelligenceIndex",
       "label": "AA Intelligence Index",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 7.5949
-    },
-    {
-      "key": "speed",
-      "label": "Speed",
-      "higherBetter": true,
-      "priority": 5,
-      "weightPct": 6.3291
+      "weightPct": 7.6923
     }
   ],
   "primaryMissingFields": {
@@ -208,16 +243,22 @@
       "DeepSeek V4 Pro",
       "Qwen3.8 Max",
       "Muse Spark 1.2",
-      "DeepSeek V4 Flash",
       "Gemini 3.6 Flash",
       "GLM-5.2",
       "Gemini 3.5 Flash"
     ],
-    "livebenchInstructionFollowing": [
-      "GPT-6 Astra"
+    "automationBenchAA": [
+      "Gemini 3.7 Flash"
     ],
-    "scicode": [
-      "GPT-5.5"
+    "speed": [
+      "Kimi K3"
     ]
-  }
+  },
+  "providerClaimsUsed": [
+    {
+      "model": "DeepSeek V4 Flash",
+      "benchmark": "Terminal-Bench 4.0",
+      "sourceUrl": "https://api-docs.deepseek.com/updates/"
+    }
+  ]
 }

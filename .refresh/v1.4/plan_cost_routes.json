@@ -1,6 +1,6 @@
 {
   "schemaVersion": "valuerank-plan-routes/v1",
-  "asOf": "2026-09-07",
+  "asOf": "2026-09-29",
   "currency": "USD",
   "costMix": {
     "id": "valuerank-billed-3",
@@ -18,19 +18,23 @@
       "plan": "ChatGPT Pro 20x",
       "planLabel": "ChatGPT Pro $200 · Codex 20x",
       "planPriceUsd": 200,
-      "apiEquivalentUsd": 7700,
-      "valueMultiple": 38.5,
+      "apiEquivalentUsd": 7600,
+      "valueMultiple": 38.0,
       "valueMultipleKind": "community_observed",
       "evidenceClass": "community_observed",
       "confidence": "medium",
       "validFrom": "2026-08-27",
-      "sourceUrl": "https://tibotattle.com/",
+      "checkedOn": "2026-09-29",
+      "availability": "Existing subscriptions continue; new sign-ups and upgrades paused since 2026-09-10",
+      "sourceUrl": "https://www.reddit.com/r/codex/comments/1wqw2qq/warning_codex_allowances_have_dropped_about_20/",
       "sourceUrls": [
         "https://tibotattle.com/",
-        "https://github.com/adamallcock/tibotattle"
+        "https://github.com/adamallcock/tibotattle",
+        "https://help.openai.com/en/articles/9793128-what-is-chatgpt-pro",
+        "https://www.reddit.com/r/codex/comments/1wqw2qq/warning_codex_allowances_have_dropped_about_20/"
       ],
       "modelIds": ["gpt-6-astra", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.5"],
-      "notes": "Sole Codex empirical route: newer TiboTattle crowd-sourced allowance data, adjusted to the recorded ValueRank baseline. The older 70x estimate is intentionally excluded."
+      "notes": "Community-observed Codex route. A September 26 report estimates about $1,750 of normalized Pro 20x allowance per week across plans, equivalent to roughly $7,600 per month and 38x at the $200 price. OpenAI says existing subscribers continue but new sign-ups and upgrades are paused. Approximate, not an OpenAI-published allowance."
     },
     {
       "id": "claude-max-20x-high-water",
@@ -87,6 +91,7 @@
       "evidenceClass": "community_modelled",
       "confidence": "low",
       "validFrom": "2026-09-07",
+      "checkedOn": "2026-09-29",
       "sourceUrl": "https://5dive.ai/tokenmaxxing",
       "sourceUrls": [
         "https://gemini.google/us/subscriptions/?hl=en",
@@ -106,7 +111,10 @@
       ],
       "quotaMultipleVsPro": 1,
       "multipleRange": [3.0, 9.5],
-      "notes": "Google publishes relative quota limits but no absolute API-equivalent dollar allowance. ValueRank uses 5dive's current modeled Gemini AI Pro estimate of 5.3x as the baseline, with its modeled 3.0x-9.5x range; this is not provider-published."
+      "externalReferenceMultiple": 9.5,
+      "externalReferenceModel": "Gemini 3 Pro",
+      "externalReferenceUrl": "https://5dive.ai/tokenmaxxing",
+      "notes": "Google publishes relative quota limits but no absolute API-equivalent dollar allowance. ValueRank retains its 5.3x cohort-Flash estimate and 3.0x-9.5x sensitivity range; 5dive's current 9.5x headline is for Gemini 3 Pro, so it is recorded as context rather than transferred to the cohort Flash variants. This is not provider-published."
     },
     {
       "id": "google-ai-ultra-5x-modelled",
@@ -258,9 +266,10 @@
       "confidence": "medium-high",
       "validFrom": "2026-09-06",
       "sourceUrl": "https://dev.opencode.ai/docs/go/",
-      "modelIds": ["glm-5.2", "muse-spark-1.2"],
+      "checkedOn": "2026-09-29",
+      "modelIds": ["glm-5.2", "glm-5.3-flash", "muse-spark-1.2"],
       "usageUsd": 60,
-      "notes": "One customer-facing $10 plan; the official model table assigns these models a $60 internal monthly Usage allocation."
+      "notes": "One customer-facing $10 plan; the official model table assigns GLM-5.2, GLM-5.3-Flash, and Muse Spark 1.2 a $60 internal monthly Usage allocation."
     },
     {
       "id": "opencode-go-usage-30",
@@ -292,9 +301,9 @@
       "confidence": "medium-high",
       "validFrom": "2026-09-06",
       "sourceUrl": "https://dev.opencode.ai/docs/go/",
+      "checkedOn": "2026-09-29",
       "modelIds": [
         "grok-4.6",
-        "glm-5.3-flash",
         "glm-5.3",
         "kimi-k3",
         "gpt-5.6-luna",
@@ -302,7 +311,7 @@
         "qwen3.8-max"
       ],
       "usageUsd": 15,
-      "notes": "One customer-facing $10 plan; the official model table assigns these models a $15 internal monthly Usage allocation."
+      "notes": "One customer-facing $10 plan; the official model table assigns these six cohort models a $15 internal monthly Usage allocation."
     }
   ]
 }

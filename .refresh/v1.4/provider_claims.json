@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "valuerank-provider-claims/v1",
+  "policy": "Use a provider-published value only while the benchmark owner has no result, for the same benchmark version and evaluated model identity; keep claims visibly distinct from owner results.",
+  "claims": [
+    {
+      "claimId": "deepseek-v41-flash-terminal-bench-40-20260910",
+      "benchmark": "Terminal-Bench",
+      "benchmarkVersion": "4.0",
+      "component": "resolutionRate",
+      "cohortModelId": "deepseek-v4-flash",
+      "evaluatedModel": "DeepSeek V4.1-Flash",
+      "value": 0.312,
+      "valuePct": 31.2,
+      "sourceType": "model_provider_claim",
+      "publisher": "DeepSeek",
+      "publishedOn": "2026-09-10",
+      "sourceUrl": "https://api-docs.deepseek.com/updates/",
+      "eligibleForRanking": true,
+      "eligibilityScope": "current API alias",
+      "alias": "deepseek-v4-flash",
+      "aliasStatus": "temporarily routed to DeepSeek V4.1-Flash",
+      "caveat": "The provider reports TB4.0 for V4.1-Flash and says the deepseek-v4-flash API name is temporarily routed to it. This is a current-route claim, not a direct measurement of the retired V4 Flash model version. Remove the claim when the benchmark owner publishes a result for the mapped current route."
+    },
+    {
+      "claimId": "google-gemini-37-flash-gdp-pdf-20260813",
+      "benchmark": "GDP.pdf",
+      "benchmarkVersion": "not stated by provider",
+      "component": "gdpPdfAllPass",
+      "componentKey": "gdpPdfAllPass",
+      "cohortModelId": "gemini-3.7-flash",
+      "evaluatedModel": "Gemini 3.7 Flash",
+      "cohortVariant": "gemini-3-7-flash-medium",
+      "providerVariant": "not stated",
+      "value": 0.34,
+      "valuePct": 34.0,
+      "sourceType": "model_provider_claim",
+      "publisher": "Google DeepMind",
+      "publishedOn": "2026-08-13",
+      "sourceUrl": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+      "eligibleForRanking": false,
+      "eligibilityReason": "The provider material does not state the effort variant, while the selected Artificial Analysis cohort URL is the medium variant; retain the claim for audit but do not transfer it into that variant's value."
+    },
+{
+      "claimId": "google-gemini-37-flash-automationbench-20260813",
+      "benchmark": "AutomationBench",
+      "benchmarkVersion": "Provider private set; AA version not stated",
+      "component": "automationBenchAA",
+      "componentKey": "automationBenchAA",
+      "cohortModelId": "gemini-3.7-flash",
+      "evaluatedModel": "Gemini 3.7 Flash",
+      "cohortVariant": "gemini-3-7-flash-medium",
+      "providerVariant": "not stated",
+      "value": 0.304,
+      "valuePct": 30.4,
+      "sourceType": "model_provider_claim",
+      "publisher": "Google DeepMind",
+      "publishedOn": "2026-08-13",
+      "sourceUrl": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+      "eligibleForRanking": false,
+      "eligibilityReason": "The provider identifies a private AutomationBench set but does not establish equivalence to Artificial Analysis's AutomationBench-AA implementation or state the effort variant; retain for audit without transferring it into the selected medium variant."
+    }
+  ]
+}

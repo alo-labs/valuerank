@@ -101,7 +101,7 @@ for rank, model in enumerate(unique, start=1):
     model["rank"] = rank
 
 text = payload.get("textSample") or ""
-source_update = re.search(r"updated\s+([A-Z][a-z]+\s+\d{1,2},\s+\d{4})", text)
+source_update = re.search(r"updated\s+([A-Z][a-z]+\s+\d{1,2},\s+\d{4})", text, re.IGNORECASE)
 tasks = re.search(r"(\d+)\s+tasks", text)
 repositories = re.search(r"(\d+)\s+repos", text)
 languages = re.search(r"(\d+)\s+languages", text)

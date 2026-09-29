@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build the reproducible ValueRank v1.5 ranking from current source data.
+"""Build the reproducible ValueRank v1.7 ranking from current source data.
 
 The ranked cohort is the complete current 21-model DeepSWE Best roster.  A
 candidate dimension is retained only when every cohort member has a published
-  value; missing values are never neutral-filled.  Current AA v4.2 component
+  value; missing values are never neutral-filled.  Current AA v4.3.2 component
 metrics are kept as fractions, while the score matrix is rank-normalized to a
 0--100 scale.
     LiveBench Instruction Following and Terminal-Bench 4.0 are loaded as
@@ -22,8 +22,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
-VERSION = "v1.5.0"
-PUBLISH_DATE = "September 6, 2026"
+VERSION = "v1.7.0"
+PUBLISH_DATE = "September 29, 2026"
+BUG_HUNT_PRIORITY = 20
 
 DEVELOPER = {
     "GPT-6 Astra": "OpenAI",
@@ -82,8 +83,8 @@ CANDIDATES = [
     ("terminalBenchV4", "Terminal-Bench 4.0", True, 6),
     ("livebenchInstructionFollowing", "Instruction Following (LiveBench)", True, 5),
     ("deepswePassAt1", "DeepSWE", True, 7),
-    ("gdpvalV2", "GDPval-AA v2", True, 6),
-    ("tau3Banking", "τ³-Banking", True, 5),
+    ("gdpvalV21", "GDPval-AA v2.1", True, 6),
+    ("automationBenchAA", "AutomationBench-AA", True, 5),
     ("aaLcr", "AA-LCR v1.1", True, 4),
     ("omniAccuracy", "AA-Omniscience Accuracy", True, 4),
     ("hle", "HLE", True, 4),
@@ -124,22 +125,117 @@ def require_number(value, label):
     return float(value)
 
 
+def optional_number(value, label):
+    return None if value is None else require_number(value, label)
+
+
+def build_bug_hunt_emphasis(rows, weights, base_priority_sum, document):
+    matched_rows = [row for row in rows if row["bugHunt"].get("matched") is True]
+    if len(matched_rows) < 2:
+        raise ValueError("Bug Hunt emphasis ranking requires at least two matched models")
+    total_priority = base_priority_sum + BUG_HUNT_PRIORITY
+    emphasis_weights = [
+        {
+            "key": weight["key"],
+            "label": weight["label"],
+            "higherBetter": weight["higherBetter"],
+            "priority": weight["priority"],
+            "weightPct": round(100.0 * weight["priority"] / total_priority, 4),
+        }
+        for weight in weights
+    ]
+    emphasis_weights.append({
+        "key": "bugHuntFixedOf105",
+        "label": "Bug Hunt Bench",
+        "higherBetter": True,
+        "priority": BUG_HUNT_PRIORITY,
+        "weightPct": round(100.0 * BUG_HUNT_PRIORITY / total_priority, 4),
+    })
+    for weight in weights:
+        key = weight["key"]
+        values = [require_number(row[key], f"{row['id']}.{key}") for row in matched_rows]
+        normalized = rank_normalize(values, weight["higherBetter"])
+        for row, score in zip(matched_rows, normalized):
+            row.setdefault("bugHuntEmphasisDims", {})[key] = score
+    bug_hunt_values = [
+        require_number(row["bugHunt"]["fixedOf105"], f"{row['id']}.bugHunt.fixedOf105")
+        for row in matched_rows
+    ]
+    bug_hunt_normalized = rank_normalize(bug_hunt_values, True)
+    for row, score in zip(matched_rows, bug_hunt_normalized):
+        row.setdefault("bugHuntEmphasisDims", {})["bugHuntFixedOf105"] = score
+        row["bugHuntEmphasisScore"] = round(
+            sum(
+                row["bugHuntEmphasisDims"][weight["key"]] * weight["weightPct"] / 100
+                for weight in emphasis_weights
+            ),
+            1,
+        )
+    ranked_rows = sorted(
+        matched_rows,
+        key=lambda row: (-row["bugHuntEmphasisScore"], row["costComposite"], row["name"]),
+    )
+    for rank, row in enumerate(ranked_rows, 1):
+        row["bugHuntEmphasisRank"] = rank
+    missing_models = [row["name"] for row in rows if row["bugHunt"].get("matched") is not True]
+    ranking = {
+        "benchmark": document["benchmark"],
+        "benchmarkVersion": document["benchmarkVersion"],
+        "sourceCommit": document["sourceCommit"],
+        "sources": document["sources"],
+        "matchedN": len(ranked_rows),
+        "cohortN": len(rows),
+        "coveragePct": round(100.0 * len(ranked_rows) / len(rows), 2),
+        "basePrioritySum": base_priority_sum,
+        "benchmarkPriority": BUG_HUNT_PRIORITY,
+        "totalPriority": total_priority,
+        "benchmarkWeightPct": round(100.0 * BUG_HUNT_PRIORITY / total_priority, 4),
+        "weights": emphasis_weights,
+        "missingModels": missing_models,
+        "excludedResults": document.get("excludedResults", []),
+        "providerClaimAudit": document.get("providerClaimAudit", {}),
+        "ranking": [
+            {
+                "rank": row["bugHuntEmphasisRank"],
+                "modelId": row["id"],
+                "name": row["name"],
+                "emphasisScore": row["bugHuntEmphasisScore"],
+                "primaryRank": row["rank"],
+            }
+            for row in ranked_rows
+        ],
+    }
+    return ranking, ranked_rows, emphasis_weights
+
+
 def main() -> int:
     deepswe = json.loads((REFRESH / "deepswe.json").read_text())
     aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
     livebench_document = json.loads((REFRESH / "livebench.json").read_text())
     tb4_document = json.loads((REFRESH / "tb4.json").read_text())
+    bug_hunt_document = json.loads((REFRESH / "bug_hunt.json").read_text())
     aa_models = aa_document["models"]
     livebench_models = livebench_document["models"]
     tb4_models = tb4_document["cohortRows"]
+    tb4_provider_claims = {
+        item["cohortModelId"]: item
+        for item in tb4_document.get("providerClaims", [])
+        if item.get("eligibleForRanking") is True
+    }
     coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
     if len(deepswe["models"]) != 21 or deepswe.get("n") != 21:
-        raise ValueError("v1.5 requires the complete 21-model DeepSWE roster")
+        raise ValueError("v1.6 requires the complete 21-model DeepSWE roster")
     cohort_ids = {item["slug"] for item in deepswe["models"]}
     if set(livebench_models) != cohort_ids:
         raise ValueError("LiveBench snapshot must contain exactly the current 21-model cohort")
-    if livebench_document.get("matchedN") != 20 or tb4_document.get("matchedN") != 11:
-        raise ValueError("unexpected external benchmark coverage; refresh snapshots before scoring")
+    bug_hunt_by_id = {item["modelId"]: item for item in bug_hunt_document["models"]}
+    if set(bug_hunt_by_id) != cohort_ids:
+        raise ValueError("Bug Hunt snapshot must declare exactly the current 21-model cohort")
+    for model_id, item in bug_hunt_by_id.items():
+        if item.get("matched") is True:
+            require_number(item.get("fixedOf105"), f"{model_id}.bugHunt.fixedOf105")
+            if not 0 <= item["fixedOf105"] <= 105 or item.get("sampleN", 0) < 1:
+                raise ValueError(f"invalid Bug Hunt score/sample for {model_id}")
 
     rows = []
     for deepswe_model in deepswe["models"]:
@@ -151,6 +247,7 @@ def main() -> int:
         supplemental = aa_model.get("supplemental", {})
         livebench = livebench_models[model_id]
         tb4 = tb4_models.get(model_id)
+        tb4_claim = tb4_provider_claims.get(model_id) if not tb4 else None
         display_name = deepswe_model["displayName"]
         if display_name not in DEVELOPER or display_name not in SHORT:
             raise ValueError(f"identity mapping missing: {display_name}")
@@ -159,11 +256,12 @@ def main() -> int:
             "name": display_name,
             "shortName": SHORT[display_name],
             "developer": DEVELOPER[display_name],
+            "bugHunt": bug_hunt_by_id[model_id],
             "rankDeepSWE": deepswe_model["rank"],
             "deepsweEffort": deepswe_model["effort"],
             "deepswePassAt1": require_number(deepswe_model["passRate"], f"{model_id}.passRate"),
             "deepswePassAt1Pct": require_number(deepswe_model["passAt1Pct"], f"{model_id}.passAt1Pct"),
-            "deepsweUncertaintyPct": require_number(deepswe_model["uncertaintyPct"], f"{model_id}.uncertaintyPct"),
+            "deepsweUncertaintyPct": optional_number(deepswe_model.get("uncertaintyPct"), f"{model_id}.uncertaintyPct"),
             "deepsweCost": require_number(deepswe_model["avgCost"], f"{model_id}.avgCost"),
             "deepsweOutputTokens": deepswe_model.get("outputTokens"),
             "deepsweOutputTokensLabel": deepswe_model.get("outputTokensLabel"),
@@ -174,25 +272,28 @@ def main() -> int:
             "aaEvalCost": aa_metrics.get("aaEvalCost"),
             "briefcaseElo": aa_metrics.get("briefcaseElo"),
             "intelligenceIndex": aa_metrics.get("intelligenceIndex"),
-            "gdpvalV2": aa_metrics.get("gdpvalV2"),
-            "tau3Banking": aa_metrics.get("tau3Banking"),
-            # Keep the AA v4.2 field under an explicit source namespace: the
-            # current standalone Terminal-Bench field below is official TB4.
-            "aaTerminalBenchV21": aa_metrics.get("terminalBenchV21"),
+            "intelligenceIndexStatus": aa_model.get("intelligenceIndexStatus", "measured"),
+            "gdpvalV21": aa_metrics.get("gdpvalV21"),
+            "automationBenchAA": aa_metrics.get("automationBenchAA"),
+            "aaTerminalBenchV40": aa_metrics.get("terminalBenchV40"),
+            "aaTerminalBenchV21": supplemental.get("terminalBenchV21"),
+            "legacyTau3Banking": supplemental.get("tauBanking"),
             "livebenchModel": livebench.get("livebenchModel"),
             "livebenchOverall": livebench.get("overallScore"),
             "livebenchInstructionFollowing": livebench.get("instructionFollowingScore"),
             "livebenchCostPerSuccessfulTask": livebench.get("costPerSuccessfulTaskUsd"),
             "livebenchCategoryScores": livebench.get("categoryScores", {}),
             "livebenchTaskScores": livebench.get("tasks", {}),
-            "terminalBenchV4": tb4.get("resolutionRate") if tb4 else None,
-            "terminalBenchV4Pct": tb4.get("resolutionRatePct") if tb4 else None,
+            "terminalBenchV4": tb4.get("resolutionRate") if tb4 else (tb4_claim.get("value") if tb4_claim else None),
+            "terminalBenchV4Pct": tb4.get("resolutionRatePct") if tb4 else (tb4_claim.get("valuePct") if tb4_claim else None),
             "terminalBenchV4UncertaintyPct": tb4.get("uncertaintyPct") if tb4 else None,
+            "terminalBenchV4SourceType": "benchmark_owner" if tb4 else ("model_provider_claim" if tb4_claim else None),
+            "terminalBenchV4Claim": tb4_claim,
             "terminalBenchV4Cost": tb4.get("costUsd") if tb4 else None,
             "terminalBenchV4Agent": tb4.get("agent") if tb4 else None,
-            "terminalBenchV4Effort": tb4.get("model") if tb4 else None,
-            "terminalBenchV4ReleaseDate": tb4.get("releaseDate") if tb4 else None,
-            "terminalBenchV4Model": tb4.get("baseModel") if tb4 else None,
+            "terminalBenchV4Effort": tb4.get("model") if tb4 else (tb4_claim.get("evaluatedModel") if tb4_claim else None),
+            "terminalBenchV4ReleaseDate": tb4.get("releaseDate") if tb4 else (tb4_claim.get("publishedOn") if tb4_claim else None),
+            "terminalBenchV4Model": tb4.get("baseModel") if tb4 else (tb4_claim.get("evaluatedModel") if tb4_claim else None),
             "scicode": aa_metrics.get("scicode"),
             "gdpPdfAllPass": aa_metrics.get("gdpPdfAllPass"),
             "aaLcr": aa_metrics.get("aaLcr"),
@@ -217,7 +318,7 @@ def main() -> int:
     )
     if max_deepswe_cost <= 0 or (max_aa_cost is not None and max_aa_cost <= 0):
         raise ValueError("cost normalization requires positive maximum costs")
-    cost_mode = "aa+deepswe" if aa_cost_complete else "deepswe-only (AA v4.2 total cost incomplete)"
+    cost_mode = "aa+deepswe" if aa_cost_complete else "deepswe-only (AA v4.3.2 total cost incomplete)"
     for row in rows:
         row["deepSweCostNorm"] = round((row["deepsweCost"] / max_deepswe_cost) * 100, 2)
         if aa_cost_complete:
@@ -310,6 +411,13 @@ def main() -> int:
         if row["pareto"]:
             pareto.append(row["name"])
 
+    # Bug Hunt has partial cohort coverage, so publish an alternate matched
+    # cohort ranking without changing the zero-gap primary ranking.
+    bug_hunt_emphasis, bug_hunt_ranked_rows, bug_hunt_weights = build_bug_hunt_emphasis(
+        rows, weights, raw_priority_sum, bug_hunt_document
+    )
+    bug_hunt_missing_models = bug_hunt_emphasis["missingModels"]
+
     # Keep source extraction coverage and add both the score-specific gate and
     # explicitly labelled external benchmark coverage.  Supplemental fields
     # are never rank-normalized unless the zero-gap candidate gate retains them.
@@ -378,12 +486,26 @@ def main() -> int:
         "terminalBenchV4": {
             "group": "supplemental",
             "label": "Terminal-Bench 4.0",
-            "availableN": tb4_document["matchedN"],
+            "availableN": tb4_document.get("rankingAvailableN", tb4_document["matchedN"]),
             "cohortN": len(rows),
-            "coveragePct": round(100 * tb4_document["matchedN"] / len(rows), 2),
-            "missingModels": tb4_document["missingModels"],
+            "coveragePct": round(100 * tb4_document.get("rankingAvailableN", tb4_document["matchedN"]) / len(rows), 2),
+            "officialMatchedN": tb4_document["matchedN"],
+            "providerClaimMatchedN": tb4_document.get("providerClaimN", 0),
+            "missingModels": tb4_document.get("rankingMissingModels", tb4_document["missingModels"]),
             "includedInPrimaryScore": False,
             "sourceRelease": tb4_document["version"],
+        },
+        "bugHuntFixedOf105": {
+            "group": "supplemental",
+            "label": "Bug Hunt Bench bugs fixed out of 105",
+            "availableN": len(bug_hunt_ranked_rows),
+            "cohortN": len(rows),
+            "coveragePct": bug_hunt_emphasis["coveragePct"],
+            "missingModels": bug_hunt_missing_models,
+            "includedInPrimaryScore": False,
+            "includedInBugHuntEmphasisRanking": True,
+            "sourceRelease": bug_hunt_document["benchmarkVersion"],
+            "sourceCommit": bug_hunt_document["sourceCommit"],
         },
     }
     source_fields = dict(coverage_document.get("fields", {}))
@@ -402,7 +524,16 @@ def main() -> int:
         "terminalBenchV4": {
             "version": tb4_document["version"],
             "matchedN": tb4_document["matchedN"],
+            "providerClaimN": tb4_document.get("providerClaimN", 0),
+            "rankingAvailableN": tb4_document.get("rankingAvailableN", tb4_document["matchedN"]),
             "cohortN": tb4_document["cohortN"],
+        },
+        "bugHunt": {
+            "version": bug_hunt_document["benchmarkVersion"],
+            "sourceCommit": bug_hunt_document["sourceCommit"],
+            "matchedN": bug_hunt_emphasis["matchedN"],
+            "cohortN": bug_hunt_emphasis["cohortN"],
+            "weightPct": bug_hunt_emphasis["benchmarkWeightPct"],
         },
     }
     coverage_document["scoring"] = {
@@ -420,6 +551,18 @@ def main() -> int:
         "zeroGap": not any(item["missingModels"] for item in score_coverage.values() if item["includedInPrimaryScore"]),
         "noNeutralFills": True,
         "fields": score_coverage,
+        "alternateRankings": {
+            "bugHuntEmphasis": {
+                "matchedN": bug_hunt_emphasis["matchedN"],
+                "cohortN": bug_hunt_emphasis["cohortN"],
+                "benchmarkWeightPct": bug_hunt_emphasis["benchmarkWeightPct"],
+                "sourceCommit": bug_hunt_emphasis["sourceCommit"],
+                "ranking": [
+                    {"rank": item["rank"], "modelId": item["modelId"], "score": item["emphasisScore"]}
+                    for item in bug_hunt_emphasis["ranking"]
+                ],
+            }
+        },
     }
 
     observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -441,20 +584,36 @@ def main() -> int:
             {"rank": row["rank"], "name": row["name"], "overallScore": row["overallScore"], "qualityScore": row["qualityScore"]}
             for row in by_overall[:5]
         ],
+        "bugHuntEmphasis": {
+            "matchedN": bug_hunt_emphasis["matchedN"],
+            "cohortN": bug_hunt_emphasis["cohortN"],
+            "benchmarkWeightPct": bug_hunt_emphasis["benchmarkWeightPct"],
+            "sourceCommit": bug_hunt_emphasis["sourceCommit"],
+            "topFive": [
+                {"rank": item["rank"], "name": item["name"], "score": item["emphasisScore"], "fixedOf105": item["bugHunt"]["fixedOf105"]}
+                for item in bug_hunt_emphasis["ranking"][:5]
+            ],
+        },
         "externalCoverage": {
             "livebench": f"{livebench_document['matchedN']}/{livebench_document['cohortN']}",
             "livebenchPublishedN": livebench_document.get("publishedN", livebench_document["matchedN"]),
             "livebenchSupplementalModels": list(livebench_document.get("supplementalModels", {})),
-            "terminalBenchV4": f"{tb4_document['matchedN']}/{tb4_document['cohortN']}",
+            "bugHunt": f"{bug_hunt_emphasis['matchedN']}/{bug_hunt_emphasis['cohortN']} eligible owner results",
+            "terminalBenchV4": f"{tb4_document.get('rankingAvailableN', tb4_document['matchedN'])}/{tb4_document['cohortN']} including {tb4_document.get('providerClaimN', 0)} provider claim",
         },
     }
-    manifest_path = ROOT / "research" / "2026-09-06-valuerank-refresh-v4-2" / "run_manifest.json"
+    manifest_path = ROOT / "research" / "2026-09-29-valuerank-refresh-v4-3-2" / "run_manifest.json"
     manifest = json.loads(manifest_path.read_text())
     manifest["scoring"] = ranking_summary
     manifest["scoring"]["weights"] = weights
+    manifest["scoring"]["bugHuntEmphasisRanking"] = bug_hunt_emphasis
     manifest["scoring"]["primaryMissingFields"] = {
         key: data["missing"] for key, data in coverage.items() if data["missing"]
     }
+    manifest["scoring"]["providerClaimsUsed"] = [
+        {"model": row["name"], "benchmark": "Terminal-Bench 4.0", "sourceUrl": row["terminalBenchV4Claim"]["sourceUrl"]}
+        for row in rows if row.get("terminalBenchV4Claim")
+    ]
 
     (REFRESH / "scores.json").write_text(
         json.dumps(
@@ -465,6 +624,7 @@ def main() -> int:
                 "benchmarkVersion": aa_document.get("benchmarkVersion"),
                 "cohort": {"n": len(rows), "source": deepswe["source"], "sourceUpdatedOn": deepswe.get("sourceUpdatedOn")},
                 "weights": weights,
+                "bugHuntEmphasisRanking": bug_hunt_emphasis,
                 "costMode": cost_mode,
                 "costCoverage": coverage_document["scoring"]["costCoverage"],
                 "models": by_overall,
@@ -482,7 +642,15 @@ def main() -> int:
                     "terminalBenchV4": {
                         "version": tb4_document["version"],
                         "matchedN": tb4_document["matchedN"],
+                        "providerClaimN": tb4_document.get("providerClaimN", 0),
+                        "rankingAvailableN": tb4_document.get("rankingAvailableN", tb4_document["matchedN"]),
                         "cohortN": tb4_document["cohortN"],
+                    },
+                    "bugHunt": {
+                        "version": bug_hunt_document["benchmarkVersion"],
+                        "matchedN": bug_hunt_emphasis["matchedN"],
+                        "cohortN": bug_hunt_emphasis["cohortN"],
+                        "sourceCommit": bug_hunt_document["sourceCommit"],
                     },
                 },
                 "appendixNonRanked": [],
@@ -503,6 +671,7 @@ def main() -> int:
         "dropped": dropped,
         "zeroGap": ranking_summary["zeroGap"],
         "topFive": ranking_summary["topFive"],
+        "bugHuntEmphasisTopFive": ranking_summary["bugHuntEmphasis"]["topFive"],
         "outputs": [
             ".refresh/v1.4/scores.json",
             ".refresh/v1.4/coverage_matrix.json",

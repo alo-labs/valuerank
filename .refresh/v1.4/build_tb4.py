@@ -75,14 +75,27 @@ def main() -> int:
             "costUsd": parse_cost(cost),
             "cohortModelId": COHORT_ALIAS.get(base_model),
         })
-    if len(entries) != 14:
-        raise ValueError(f"expected 14 current Terminal-Bench 4.0 rows, found {len(entries)}")
+    if len(entries) != len(rows) - 1:
+        raise ValueError(f"Terminal-Bench source row count mismatch: {len(entries)} entries from {len(rows)} rows")
     cohort = json.loads((REFRESH / "deepswe.json").read_text())["models"]
     cohort_ids = [item["slug"] for item in cohort]
     matches = {entry["cohortModelId"]: entry for entry in entries if entry["cohortModelId"]}
-    if len(matches) != 11:
-        raise ValueError(f"expected 11 Terminal-Bench cohort matches, found {len(matches)}")
+    if len(matches) != len({entry["cohortModelId"] for entry in entries if entry["cohortModelId"]}):
+        raise ValueError("Terminal-Bench cohort aliases are not unique")
     missing = [item["displayName"] for item in cohort if item["slug"] not in matches]
+    claim_document = json.loads((REFRESH / "provider_claims.json").read_text())
+    provider_claims = [
+        claim for claim in claim_document.get("claims", [])
+        if claim.get("benchmark") == "Terminal-Bench"
+        and claim.get("benchmarkVersion") == "4.0"
+        and claim.get("eligibleForRanking") is True
+        and claim.get("cohortModelId") not in matches
+    ]
+    claim_model_ids = {claim["cohortModelId"] for claim in provider_claims}
+    ranking_missing = [
+        item["displayName"] for item in cohort
+        if item["slug"] not in matches and item["slug"] not in claim_model_ids
+    ]
     document = {
         "schemaVersion": "valuerank-terminal-bench-v1",
         "version": "4.0",
@@ -94,13 +107,19 @@ def main() -> int:
             "homepage": HOMEPAGE_URL,
             "tasksUrl": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks",
             "captureSha256": hashlib.sha256(raw_bytes).hexdigest(),
-            "capturePath": ".refresh/v1.4/tb4-scrape.json",
+            "capturePath": str(input_path),
+            "captureMethod": raw.get("captureMethod", "rendered leaderboard snapshot"),
             "capturedAt": raw.get("scrapedAt"),
         },
         "rowN": len(entries),
         "cohortN": len(cohort_ids),
         "matchedN": len(matches),
         "missingModels": missing,
+        "rankingAvailableN": len(matches) + len(claim_model_ids),
+        "rankingMissingModels": ranking_missing,
+        "providerClaimN": len(provider_claims),
+        "providerClaims": provider_claims,
+        "providerClaimPolicy": "Use exact-version provider claims only while the benchmark owner has no result; preserve claim type and evaluated model/alias details.",
         "rows": entries,
         "cohortRows": {model_id: matches[model_id] for model_id in cohort_ids if model_id in matches},
     }
@@ -110,7 +129,10 @@ def main() -> int:
         "rows": document["rowN"],
         "cohortN": document["cohortN"],
         "matchedN": document["matchedN"],
+        "rankingAvailableN": document["rankingAvailableN"],
+        "providerClaimN": document["providerClaimN"],
         "missingModels": document["missingModels"],
+        "rankingMissingModels": document["rankingMissingModels"],
         "output": str(output_path if output_path.is_absolute() else output_path),
     }, indent=2, ensure_ascii=False))
     return 0

@@ -18,6 +18,7 @@ from site_header import inject_header
 def main() -> int:
     document = json.loads((REFRESH / "tb4.json").read_text())
     entries = document["rows"]
+    provider_claims = document.get("providerClaims", [])
     best_rate = -float("inf")
     frontier_count = 0
     for entry in sorted(entries, key=lambda item: (item["costUsd"], -item["resolutionRate"])):
@@ -38,13 +39,25 @@ def main() -> int:
     )
     entries_json = json.dumps(entries, ensure_ascii=False, separators=(",", ":"))
     missing_html = ", ".join(escape(name) for name in document["missingModels"])
+    provider_claim_rows_html = "\n".join(
+        "<tr>"
+        f"<td>{escape(claim.get('alias', claim.get('cohortModelId', '—')))}</td>"
+        f"<td>{escape(claim.get('evaluatedModel', '—'))}</td>"
+        f"<td class='mono'>{claim.get('valuePct', claim.get('value', 0) * 100):.1f}%</td>"
+        f"<td>{'Ranking eligible for current alias' if claim.get('eligibleForRanking') is True else 'Audit only'}</td>"
+        f"<td>{escape(claim.get('sourceType', 'model_provider_claim'))}</td>"
+        f"<td><a href='{escape(claim.get('sourceUrl', '#'), quote=True)}' target='_blank' rel='noopener'>{escape(claim.get('publisher', 'Provider source'))}</a></td>"
+        f"<td>{escape(claim.get('caveat', '—'))}</td>"
+        "</tr>"
+        for claim in provider_claims
+    ) or '<tr><td colspan="7" class="muted">No eligible provider claims captured.</td></tr>'
     template = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Terminal-Bench 4.0 — Score vs Cost · ValueRank</title>
-  <meta name="description" content="Official Terminal-Bench 4.0 resolution rate versus total cost, with a Pareto frontier and ValueRank cohort coverage.">
+  <meta name="description" content="Official Terminal-Bench 4.0 leaderboard, ValueRank cohort coverage, and separately labelled exact-version provider claims.">
   <meta property="og:title" content="Terminal-Bench 4.0 — Score vs Cost · ValueRank">
   <meta property="og:description" content="Official Terminal-Bench 4.0 resolution rate versus total cost with Pareto frontier.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/tb4/">
@@ -110,8 +123,9 @@ def main() -> int:
       <p class="lede">Resolution rate versus total benchmark cost for the current official leaderboard. The chart marks models that are undominated when higher resolution and lower cost are considered together.</p>
       <div class="stats">
         <div class="stat"><strong>__ROW_N__</strong><span>official rows</span></div>
-        <div class="stat"><strong>__MATCHED_N__/__COHORT_N__</strong><span>ValueRank cohort coverage</span></div>
-        <div class="stat"><strong>__FRONTIER_N__</strong><span>cost / resolution frontier rows</span></div>
+        <div class="stat"><strong>__MATCHED_N__/__COHORT_N__</strong><span>direct official cohort matches</span></div>
+        <div class="stat"><strong>__RANKING_AVAILABLE_N__/__COHORT_N__</strong><span>eligible values incl. provider claims</span></div>
+        <div class="stat"><strong>__FRONTIER_N__</strong><span>official cost / resolution frontier rows</span></div>
         <div class="stat"><strong>Sep 2026</strong><span>latest observed release window</span></div>
       </div>
     </section>
@@ -131,9 +145,18 @@ def main() -> int:
     </section>
 
     <section class="card">
+      <h2>Provider claim supplement</h2>
+      <p class="note">Provider-published values stay separate from the official leaderboard and chart. A claim can support a current alias only when benchmark version and evaluated model identity match; the benchmark-owner result replaces it when published.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Current cohort alias</th><th>Evaluated model</th><th>Provider value</th><th>Status</th><th>Source type</th><th>Publisher</th><th>Variant / identity caveat</th></tr></thead>
+        <tbody>__PROVIDER_CLAIM_ROWS_HTML__</tbody>
+      </table></div>
+    </section>
+
+    <section class="card">
       <h2>Coverage and interpretation</h2>
-      <p class="note">The TB4 snapshot overlaps __MATCHED_N__ of the __COHORT_N__ current ValueRank models. The missing cohort rows are: __MISSING_MODELS__.</p>
-      <p class="note">ValueRank keeps TB4 as an auditable external component and does not neutral-fill the ten missing cohort values. It therefore does not change the primary zero-gap score until the official source covers the complete cohort.</p>
+      <p class="note">The official snapshot directly matches __MATCHED_N__ of the __COHORT_N__ current ValueRank models. Eligible provider claims bring current-route coverage to __RANKING_AVAILABLE_N__/__COHORT_N__; __RANKING_MISSING_N__ rows remain without an official result or eligible claim: __MISSING_MODELS__.</p>
+      <p class="note">The DeepSeek claim supports the current V4 Flash API alias because DeepSeek says that route now serves V4.1-Flash; it is not a direct result for retired V4 Flash. Keep the claim outside the official score-versus-cost plot. TB4 remains supplemental to the primary score while cohort coverage is incomplete.</p>
       <div class="source">
         <span>Source: <a href="https://www.tbench.ai/" target="_blank" rel="noopener">tbench.ai</a></span>
         <span>Target release: <a href="https://www.tbench.ai/leaderboard/terminal-bench/4.0" target="_blank" rel="noopener">Terminal-Bench 4.0</a></span>
@@ -194,6 +217,9 @@ def main() -> int:
 '''
     html = template.replace("__ROW_N__", str(document["rowN"]))
     html = html.replace("__MATCHED_N__", str(document["matchedN"]))
+    html = html.replace("__RANKING_AVAILABLE_N__", str(document.get("rankingAvailableN", document["matchedN"])))
+    html = html.replace("__RANKING_MISSING_N__", str(len(document.get("rankingMissingModels", document["missingModels"]))))
+    html = html.replace("__PROVIDER_CLAIM_ROWS_HTML__", provider_claim_rows_html)
     html = html.replace("__COHORT_N__", str(document["cohortN"]))
     html = html.replace("__FRONTIER_N__", str(frontier_count))
     html = html.replace("__MISSING_MODELS__", missing_html)
@@ -201,8 +227,8 @@ def main() -> int:
     html = html.replace("__ENTRIES_JSON__", entries_json)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(html)
-    inject_header(OUT, "tb4", f"{document['rowN']} official rows · current 4.0", "v1.4.0")
-    print(json.dumps({"output": str(OUT.relative_to(ROOT)), "rows": document["rowN"], "matched": document["matchedN"]}, indent=2))
+    inject_header(OUT, "tb4", f"{document['rowN']} official rows · {document.get('providerClaimN', 0)} provider claim · current 4.0", "v1.6.0")
+    print(json.dumps({"output": str(OUT.relative_to(ROOT)), "officialRows": document["rowN"], "directMatches": document["matchedN"], "providerClaims": document.get("providerClaimN", 0), "rankingAvailable": document.get("rankingAvailableN", document["matchedN"])}, indent=2))
     return 0
 
 

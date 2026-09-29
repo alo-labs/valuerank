@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Extract the current Artificial Analysis model payloads for the v1.5 cohort.
+"""Extract the current Artificial Analysis model payloads for the v1.6 cohort.
 
 The public model pages contain the current model record in an escaped JSON
 payload.  The older v1.3 extractor searched visible labels and consequently
 mistook benchmark versions (for example, ``v2.1``) for scores.  This script
-decodes the page's ``currentModel`` object and keeps the v4.2 source
+    decodes the page's ``currentModel`` object and keeps the v4.3.2 source
 components separate from ValueRank's own score dimensions.
 """
 
@@ -23,15 +23,15 @@ REFRESH = ROOT / ".refresh" / "v1.4"
 AA_DIR = REFRESH / "aa"
 MAPPING_PATH = REFRESH / "aa_mapping.json"
 EXTRACT_PATH = AA_DIR / "aa_extract.json"
-SNAPSHOT_PATH = AA_DIR / "aa_v42_snapshot.json"
+SNAPSHOT_PATH = AA_DIR / "aa_v432_snapshot.json"
 OUTPUT_PATH = REFRESH / "aa_metrics.json"
 COVERAGE_PATH = REFRESH / "coverage_matrix.json"
 
 PRIMARY_EVALUATIONS = [
     {"key": "briefcaseElo", "label": "AA-Briefcase", "aaKey": "briefcaseBreakdown.overall.elo", "weightPct": 15},
-    {"key": "gdpvalV2", "label": "GDPval-AA v2", "aaKey": "gdpvalNormalized", "weightPct": 10},
-    {"key": "tau3Banking", "label": "τ³-Banking", "aaKey": "tauBanking", "weightPct": 5},
-    {"key": "terminalBenchV21", "label": "Terminal-Bench v2.1", "aaKey": "terminalbenchV21", "weightPct": 10},
+    {"key": "gdpvalV21", "label": "GDPval-AA v2.1", "aaKey": "gdpvalNormalized", "weightPct": 10},
+    {"key": "automationBenchAA", "label": "AutomationBench-AA", "aaKey": "automationBenchPartialScore", "weightPct": 5},
+    {"key": "terminalBenchV40", "label": "Terminal-Bench 4.0 (AA evaluation)", "aaKey": "terminalBench40", "weightPct": 10},
     {"key": "scicode", "label": "SciCode", "aaKey": "scicode", "weightPct": 10},
     {"key": "hle", "label": "Humanity's Last Exam", "aaKey": "hle", "weightPct": 10},
     {"key": "gdpPdfAllPass", "label": "GDP.pdf", "aaKey": "gdpPdfAllPass", "weightPct": 10},
@@ -52,7 +52,7 @@ ADDITIONAL_FIELDS = [
 ]
 
 # These fields are exposed by the page when available, but are not part of the
-# current v4.2 weighted index.  They are retained for auditability/coverage.
+# current v4.3.2 weighted index. They are retained for auditability/coverage.
 SUPPLEMENTAL_FIELDS = [
     "mlcrOverall",
     "harveyLab",
@@ -66,6 +66,8 @@ SUPPLEMENTAL_FIELDS = [
     "itBenchSre",
     "briefcaseRubricPassRate",
     "briefcaseTotalCost",
+    "tauBanking",
+    "terminalBenchV21",
 ]
 
 NUMBER_RE = r"-?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
@@ -162,10 +164,15 @@ def clean_number(value):
 def main() -> int:
     mapping = {item["id"]: item for item in json.loads(MAPPING_PATH.read_text())}
     extracted = json.loads(EXTRACT_PATH.read_text())
-    snapshot = {
-        item["id"]: item
-        for item in json.loads(SNAPSHOT_PATH.read_text())
-    } if SNAPSHOT_PATH.exists() else {}
+    claim_document = json.loads((REFRESH / "provider_claims.json").read_text())
+    all_provider_claims = claim_document.get("claims", [])
+    snapshot_document = json.loads(SNAPSHOT_PATH.read_text()) if SNAPSHOT_PATH.exists() else {}
+    snapshot_pages = (
+        snapshot_document.get("pages", [])
+        if isinstance(snapshot_document, dict)
+        else snapshot_document if isinstance(snapshot_document, list) else []
+    )
+    snapshot = {item["id"]: item for item in snapshot_pages}
     observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     models = {}
 
@@ -194,11 +201,9 @@ def main() -> int:
                 current.get("briefcaseElo", json_value(briefcase, "overall.elo"))
             ),
             "intelligenceIndex": clean_number(current.get("intelligenceIndex")),
-            "gdpvalV2": clean_number(current.get("gdpvalNormalized")),
-            "tau3Banking": clean_number(current.get("tauBanking")),
-            "terminalBenchV21": clean_number(
-                current.get("terminalBenchV21", current.get("terminalbenchV21"))
-            ),
+            "gdpvalV21": clean_number(current.get("gdpval") if current.get("gdpval") is not None else current.get("gdpvalNormalized")),
+            "automationBenchAA": clean_number(current.get("automationBenchPartialScore")),
+            "terminalBenchV40": clean_number(current.get("terminalBench40", current.get("terminalbench40"))),
             "scicode": clean_number(current.get("scicode")),
             "gdpPdfAllPass": clean_number(current.get("gdpPdfAllPass")),
             "aaLcr": clean_number(current.get("lcr")),
@@ -208,16 +213,51 @@ def main() -> int:
             "omniAccuracy": clean_number(
                 current.get("omniscienceAccuracy", breakdown.get("accuracy"))
             ),
-            "omniNonHallucination": clean_number(
-                current.get("omniscienceNonHallucination")
-            ) if current.get("omniscienceNonHallucination") is not None else (
-                1.0 - float(breakdown["hallucinationRate"])
+            "omniNonHallucination": (
+                clean_number(current.get("omniscienceNonHallucination"))
+                if current.get("omniscienceNonHallucination") is not None
+                else 1.0 - float(current["omniscienceHallucinationRate"])
+                if current.get("omniscienceHallucinationRate") is not None
+                else 1.0 - float(breakdown["hallucinationRate"])
                 if breakdown.get("hallucinationRate") is not None
                 else None
             ),
-            "aaEvalCost": clean_number(current.get("aaEvalCost", cost.get("total"))),
-            "speed": clean_number(current.get("speed")) if snapshot_entry else summary_speed(text),
+            "aaEvalCost": clean_number(current.get("aaEvalCost") if current.get("aaEvalCost") is not None else cost.get("total")),
+            "speed": clean_number(
+                current.get("speed") if current.get("speed") is not None else json_value(current, "outputSpeedVariance.median")
+            ) if snapshot_entry else summary_speed(text),
         }
+        selected_variant = (current.get("effort") or {}).get("slug")
+        index_is_estimated = current.get("intelligenceIndexIsEstimated") is True
+        metric_sources = {
+            key: {"sourceType": "benchmark_owner", "sourceUrl": source_url}
+            for key, value in metrics.items() if value is not None
+        }
+        if index_is_estimated and "intelligenceIndex" in metric_sources:
+            metric_sources["intelligenceIndex"]["sourceType"] = "benchmark_owner_estimate"
+            metric_sources["intelligenceIndex"]["status"] = "estimated"
+        model_claims = [
+            claim for claim in all_provider_claims
+            if claim.get("cohortModelId") == model_id
+        ]
+        for claim in model_claims:
+            key = claim.get("componentKey") or claim.get("component")
+            exact_version = claim.get("benchmarkVersion") == "Artificial Analysis Intelligence Index v4.3.2"
+            exact_variant = claim.get("providerVariant") == selected_variant
+            if (
+                key in metrics
+                and metrics[key] is None
+                and claim.get("eligibleForRanking") is True
+                and exact_version
+                and exact_variant
+                and isinstance(claim.get("value"), (int, float))
+            ):
+                metrics[key] = float(claim["value"])
+                metric_sources[key] = {
+                    "sourceType": "model_provider_claim",
+                    "sourceUrl": claim.get("sourceUrl"),
+                    "claimId": claim.get("claimId"),
+                }
         supplemental = {
             field: clean_number(current.get(field))
             for field in SUPPLEMENTAL_FIELDS
@@ -227,6 +267,10 @@ def main() -> int:
         )
         supplemental["briefcaseRubricPassRate"] = clean_number(briefcase.get("rubricPassRate"))
         supplemental["briefcaseTotalCost"] = clean_number(briefcase.get("totalCost"))
+        supplemental["tauBanking"] = clean_number(current.get("tauBanking"))
+        supplemental["terminalBenchV21"] = clean_number(
+            current.get("terminalBenchV21", current.get("terminalbenchV21"))
+        )
 
         models[model_id] = {
             "id": model_id,
@@ -239,13 +283,17 @@ def main() -> int:
             "release": current.get("release"),
             "isReasoning": current.get("isReasoning"),
             "metrics": metrics,
+            "metricSources": metric_sources,
+            "intelligenceIndexStatus": "estimated" if index_is_estimated else "measured",
+            "providerClaims": model_claims,
             "supplemental": supplemental,
             "extraction": {
                 "htmlSnapshot": str(html_path.relative_to(ROOT)) if html_path else None,
                 "textSnapshot": str(text_path.relative_to(ROOT)) if text_path else None,
                 "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot_entry else None,
+                "responseSha256": snapshot_entry.get("capture", {}).get("responseSha256") if snapshot_entry else None,
                 "method": (
-                    "captured currentModel object from first-party page payload"
+                    "captured currentModel object from first-party page payload; raw HTML not retained"
                     if snapshot_entry
                     else "decoded currentModel object from first-party page payload"
                 ),
@@ -283,28 +331,34 @@ def main() -> int:
                 "coveragePct": round(100 * len(available) / len(models), 2),
                 "missingModels": missing,
                 "includedInPrimaryScore": group == "primary" and not missing,
+                "providerClaimN": sum(
+                    1 for model_id in available
+                    if models[model_id].get("metricSources", {}).get(field, {}).get("sourceType") == "model_provider_claim"
+                ),
             }
 
     output = {
-        "schemaVersion": "v1.5",
+        "schemaVersion": "v1.6",
         "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
         "observedAt": observed_at,
-        "benchmarkVersion": "Artificial Analysis Intelligence Index v4.2",
+        "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
         "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot else None,
         "primaryEvaluations": PRIMARY_EVALUATIONS,
         "additionalFields": ADDITIONAL_FIELDS,
+        "providerClaimPolicy": claim_document.get("policy"),
         "models": models,
     }
     coverage_output = {
-        "schemaVersion": "v1.5",
+        "schemaVersion": "v1.6",
         "observedAt": observed_at,
         "cohort": "DeepSWE Best v1.1 current 21-model roster",
         "cohortN": len(models),
         "primaryEvaluations": PRIMARY_EVALUATIONS,
         "additionalFields": ADDITIONAL_FIELDS,
+        "providerClaimPolicy": claim_document.get("policy"),
         "fields": coverage,
         "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot else None,
-        "note": "Missing values are preserved as null; legacy or supplemental fields are not silently substituted into the v4.2 source components.",
+        "note": "Missing values are preserved as null. Provider claims are separately source-typed and only eligible when benchmark version and evaluated model variant match; no legacy-version value is substituted into v4.3.2 components.",
     }
     OUTPUT_PATH.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n")
     COVERAGE_PATH.write_text(json.dumps(coverage_output, indent=2, ensure_ascii=False) + "\n")

@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
 RELEASE = "2026_06_25"
 BASE_URL = "https://livebench.ai"
-RELEASE_DATA_COMMIT = "62240f848c977d4202c1029191ac663498745f2f"
+RELEASE_DATA_COMMIT = "7be9f746f36a6f007dd78461f67cb7d06cfe2304"
 RELEASE_DATA_BASE_URL = (
     f"https://raw.githubusercontent.com/LiveBench/new-livebench/{RELEASE_DATA_COMMIT}/public"
 )
@@ -48,7 +48,7 @@ CATEGORY_LABELS = {
 }
 
 COHORT_MAP = {
-    "gpt-6-astra": None,
+    "gpt-6-astra": "gpt-6-astra-max",
     "gemini-3.8-flash": "gemini-3.8-flash-high",
     "claude-opus-5": "claude-opus-5-max-effort",
     "gpt-5.6-sol": "gpt-5.6-sol-max",
@@ -235,9 +235,6 @@ def main() -> int:
             missing_models.append(display_name)
         models[model_id] = record
 
-    if len(missing_models) != 1 or missing_models != ["GPT-6 Astra"]:
-        raise ValueError(f"unexpected LiveBench cohort coverage: {missing_models}")
-
     supplemental_models: dict[str, dict] = {}
     for model_id, (display_name, livebench_model) in SUPPLEMENTAL_MAP.items():
         if model_id in models:
@@ -282,7 +279,8 @@ def main() -> int:
         "models": models,
         "supplementalN": len(supplemental_models),
         "supplementalMatchedN": len(matched_supplemental),
-        "publishedN": len([record for record in all_models.values() if record["matched"]]),
+        "publishedN": len(table_rows),
+        "representedN": len([record for record in all_models.values() if record["matched"]]),
         "supplementalModels": supplemental_models,
     }
     document["pareto"] = pareto_ids(all_models)

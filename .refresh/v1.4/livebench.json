@@ -1,35 +1,35 @@
 {
   "schemaVersion": "valuerank-livebench-v1",
   "release": "2026_06_25",
-  "observedAt": "2026-09-04T16:32:14Z",
+  "observedAt": "2026-09-29T07:24:57Z",
   "source": {
     "publisher": "LiveBench",
     "homepage": "https://livebench.ai/",
     "repository": "https://github.com/livebench/new-livebench",
-    "releaseDataCommit": "62240f848c977d4202c1029191ac663498745f2f",
+    "releaseDataCommit": "7be9f746f36a6f007dd78461f67cb7d06cfe2304",
     "releaseDate": "2026-06-25",
     "urls": {
-      "table": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/table_2026_06_25.csv",
-      "cost": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/cost_2026_06_25.csv",
-      "categories": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/categories_2026_06_25.json"
+      "table": "https://raw.githubusercontent.com/LiveBench/new-livebench/7be9f746f36a6f007dd78461f67cb7d06cfe2304/public/table_2026_06_25.csv",
+      "cost": "https://raw.githubusercontent.com/LiveBench/new-livebench/7be9f746f36a6f007dd78461f67cb7d06cfe2304/public/cost_2026_06_25.csv",
+      "categories": "https://raw.githubusercontent.com/LiveBench/new-livebench/7be9f746f36a6f007dd78461f67cb7d06cfe2304/public/categories_2026_06_25.json"
     },
     "files": {
       "table": {
-        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/table_2026_06_25.csv",
+        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/7be9f746f36a6f007dd78461f67cb7d06cfe2304/public/table_2026_06_25.csv",
         "status": "200",
         "contentType": "text/plain; charset=utf-8",
-        "bytes": 8939,
-        "sha256": "b8e6339f7fafe6df8f6ecc8b0abe3dc529b5737a6c7edd3e24ffcb36e02fd118"
+        "bytes": 10746,
+        "sha256": "73f9d484f35433485463bae9566cd1602228bec219e1ffac8a655b2a8488b1b1"
       },
       "cost": {
-        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/cost_2026_06_25.csv",
+        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/7be9f746f36a6f007dd78461f67cb7d06cfe2304/public/cost_2026_06_25.csv",
         "status": "200",
         "contentType": "text/plain; charset=utf-8",
-        "bytes": 23394,
-        "sha256": "6ae57254eaefe9c84008e909d118f37e53271009cf97569d43506b2ae8c9b29e"
+        "bytes": 28034,
+        "sha256": "0db5806513fd40ca2435a0c0e835a7533f49b487191d1e17be4a79d75470bd53"
       },
       "categories": {
-        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/62240f848c977d4202c1029191ac663498745f2f/public/categories_2026_06_25.json",
+        "url": "https://raw.githubusercontent.com/LiveBench/new-livebench/7be9f746f36a6f007dd78461f67cb7d06cfe2304/public/categories_2026_06_25.json",
         "status": "200",
         "contentType": "text/plain; charset=utf-8",
         "bytes": 725,
@@ -77,21 +77,51 @@
     ]
   },
   "cohortN": 21,
-  "matchedN": 20,
-  "missingModels": [
-    "GPT-6 Astra"
-  ],
+  "matchedN": 21,
+  "missingModels": [],
   "models": {
     "gpt-6-astra": {
       "modelId": "gpt-6-astra",
       "name": "GPT-6 Astra",
-      "livebenchModel": null,
-      "matched": false,
-      "tasks": {},
-      "categoryScores": {},
-      "overallScore": null,
-      "instructionFollowingScore": null,
-      "costPerSuccessfulTaskUsd": null
+      "livebenchModel": "gpt-6-astra-max",
+      "matched": true,
+      "tasks": {
+        "AMPS_Hard": 98.0,
+        "code_completion": 80.435,
+        "code_generation": 80.282,
+        "connections": 100.0,
+        "consecutive_events": 90.555,
+        "integrals_with_game": 100.0,
+        "javascript": 63.636,
+        "logic_with_navigation": 88.0,
+        "math_comp": 97.059,
+        "olympiad": 92.166,
+        "paraphrase": 78.25,
+        "plot_unscrambling": 86.292,
+        "python": 65.0,
+        "simplify": 70.533,
+        "spatial": 98.0,
+        "story_generation": 73.983,
+        "summarize": 79.55,
+        "tablejoin": 58.365,
+        "tablereformat": 100.0,
+        "theory_of_mind": 84.615,
+        "typescript": 43.333,
+        "typos": 82.0,
+        "zebra_puzzle": 100.0
+      },
+      "categoryScores": {
+        "Reasoning": 92.65375,
+        "Coding": 80.3585,
+        "Agentic Coding": 57.323,
+        "Mathematics": 96.80625,
+        "Data Analysis": 82.973333,
+        "Language": 89.430667,
+        "Instruction Following": 75.579
+      },
+      "overallScore": 82.160643,
+      "instructionFollowingScore": 75.579,
+      "costPerSuccessfulTaskUsd": 0.7359
     },
     "gemini-3.8-flash": {
       "modelId": "gemini-3.8-flash",
@@ -956,7 +986,8 @@
   },
   "supplementalN": 1,
   "supplementalMatchedN": 1,
-  "publishedN": 21,
+  "publishedN": 64,
+  "representedN": 22,
   "supplementalModels": {
     "claude-fable-5-1": {
       "modelId": "claude-fable-5-1",
@@ -1009,6 +1040,7 @@
     "kimi-k3",
     "gpt-5.5",
     "gpt-5.6-sol",
+    "gpt-6-astra",
     "claude-fable-5-1"
   ]
 }
