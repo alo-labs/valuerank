@@ -444,7 +444,7 @@ The score is zero-gap across all retained dimensions for the {n} exact-match mod
 
 ## External benchmark coverage
 
-{md_benchmark_link('Artificial Analysis Intelligence Index')} provides the current AA component scores used by this release. {md_benchmark_link('LiveBench')} Instruction Following is included in the primary score; its Overall Score and Cost Per Successful Task are supplemental views. {md_benchmark_link('Terminal-Bench 4.0')} remains supplemental because coverage is incomplete in the exact-match cohort. See [raw-data.md](raw-data.md) for source-backed tables.
+{md_benchmark_link('Artificial Analysis Intelligence Index')} provides the current AA component scores used by this release. {md_benchmark_link('LiveBench')} Instruction Following remains supplemental because the pinned release lacks full coverage in the exact-match cohort; its Overall Score and Cost Per Successful Task are also supplemental. {md_benchmark_link('Terminal-Bench 4.0')} remains supplemental because coverage is incomplete in the exact-match cohort. See [raw-data.md](raw-data.md) for source-backed tables.
 """
 (ROOT / "scores.md").write_text(scores_md)
 
@@ -1335,7 +1335,7 @@ hero_desc = (
     f'ValueRank ranks <strong>{n} models</strong> with both exact AA DeepSWE v1.1 model-variant results and Bug Hunt results from a {source_n}-model AA-mapped comparison roster across a '
     f'<strong>zero-gap {d}-dimension set</strong>; Bug Hunt contributes {bug_hunt_weight["weightPct"]:.2f}% of the main score. {VERSION} uses '
     f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. '
-    f'Speed is {"included in the score" if speed_in_primary else "excluded from the score"}; AA speed is numeric for {speed_selected_available_n}/{n} selected pages and missing for {speed_missing_text}. {html_external_link("LiveBench", LIVEBENCH_URL)} Instruction Following is included, with other incomplete external benchmark results shown as supplemental views.'
+    f'Speed is {"included in the score" if speed_in_primary else "excluded from the score"}; AA speed is numeric for {speed_selected_available_n}/{n} selected pages and missing for {speed_missing_text}. The incomplete dimensions {", ".join(item["label"] for item in dropped if item["label"] != "Speed")} remain supplemental because exact cohort coverage is incomplete.'
 )
 html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero-desc">\n          {hero_desc}\n        </p>', "hero copy")
 html = replace_once(html, r'<div class="(?:nav-meta|vr-nav-meta)">[^<]*</div>', f'<div class="vr-nav-meta">{DATE} · {n} models · {d} dimensions</div>', "nav metadata")
@@ -1533,7 +1533,7 @@ if "'chart-heatmap-data','chart-livebench-pareto'" not in html:
 
 livebench_card = f'''    <div class="card mb-6" id="livebench-data">
        <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">{html_external_link('LiveBench External Coverage', LIVEBENCH_URL)}</h3>
-        <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean and contributes to the primary rank for the exact-overlap models. Overall and cost are shown here and in the Pareto chart as supplemental metrics.</p>
+        <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean, but it remains supplemental because the pinned release lacks complete coverage for the current cohort; it does not contribute to the zero-gap primary score. Overall and cost are also shown as supplemental metrics.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
@@ -1740,7 +1740,35 @@ def replace_faq_answer(source, question, answer):
         raise SystemExit(f"FAQ answer replacement failed: {question}")
     return updated
 
+html = re.sub(
+    r"Why is cost weighted at [0-9.]+% by default\?",
+    f"Why is cost weighted at {cost_weight['weightPct']:.2f}% by default?",
+    html,
+    count=1,
+)
+html = html.replace(
+    "Why isn't Claude Opus 5.5 in the primary ranking?",
+    "Is Claude Opus 5.5 included in the primary ranking?",
+    1,
+)
+
 faq_updates = [
+    (
+        'What does the overall score actually represent?',
+        f'Each model’s score is a weighted average of {d} normalized dimension scores across the {n}-model exact-overlap cohort. Each dimension score uses <code>((n − rank) / (n − 1)) × 100</code>, with n = {n}; ties receive average rank. Incomplete dimensions are excluded rather than imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.',
+    ),
+    (
+        f'Why is cost weighted at {cost_weight["weightPct"]:.2f}% by default?',
+        f'Cost has a {cost_weight["weightPct"]:.2f}% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple. Both views use the same benchmark suite and lower cost ranks better.',
+    ),
+    (
+        'What does ⊘ mean in ValueRank?',
+        f'In historical ValueRank versions, ⊘ marked a genuine benchmark data gap. In {VERSION}, incomplete dimensions are excluded from the composite, so every ranked model has full coverage across the retained dimensions.',
+    ),
+    (
+        "What's the difference between Score and Quality Score?",
+        f'The overall Score includes all {d} retained dimensions, including Bug Hunt and DeepSWE v1.1, with cost at {cost_weight["weightPct"]:.2f}% by default. Quality Score renormalizes the {d - 1} non-cost dimensions to 100%, showing benchmark performance without the cost weight.',
+    ),
     (
         'What is the Pareto frontier?',
         'The Pareto frontier contains models that are not dominated on both quality and cost under the selected cost basis. The Pareto chart updates when you switch between API Costs and Plan Costs.',
@@ -1754,8 +1782,8 @@ faq_updates = [
         f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} uses AA Coding Agent Index v1.5 DeepSWE v1.1 results, includes Bug Hunt in the primary score, and ranks {n} exact-overlap models across {d} zero-gap dimensions.',
     ),
     (
-        "Why isn't Claude Opus 5.5 in the primary ranking?",
-        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. The composite ranks {n} exact-overlap models across {d} zero-gap dimensions; missing LiveBench data remains unavailable.',
+        "Is Claude Opus 5.5 included in the primary ranking?",
+        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. The composite ranks {n} exact-overlap models across {d} zero-gap dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.',
     ),
 ]
 for question, answer in faq_updates:
@@ -1763,6 +1791,160 @@ for question, answer in faq_updates:
 
 site_path.write_text(html)
 inject_header(site_path, "llm", f"{DATE} · {n} models · {d} scored dimensions", VERSION)
+
+# Normalize current-release copy after applying the shared header. The site is
+# an inherited publication shell, so exact legacy-string replacements above
+# can miss text left by earlier refreshes.
+html = site_path.read_text()
+
+
+def replace_current_copy(source, pattern, replacement, label):
+    updated, count = re.subn(pattern, replacement, source, count=1)
+    if count != 1:
+        raise SystemExit(f"current-release copy replacement failed: {label}")
+    return updated
+
+
+current_description = (
+    f"ValueRank {VERSION}: {n} models ranked across {d} zero-gap dimensions; "
+    "DeepSWE v1.1 and Bug Hunt are included in the primary score."
+)
+for attribute in (
+    'name="description"',
+    'property="og:description"',
+    'name="twitter:description"',
+):
+    html = replace_current_copy(
+        html,
+        rf'(<meta {attribute} content=")[^"]*(">)',
+        lambda match: match.group(1) + html_escape(current_description, quote=True) + match.group(2),
+        f"meta {attribute}",
+    )
+
+html = replace_current_copy(
+    html,
+    r'(<div class="hero-eyebrow">[\s\S]*?Production AI Ranking Framework · )v[0-9.]+',
+    lambda match: match.group(1) + VERSION,
+    "hero release",
+)
+html = replace_current_copy(
+    html,
+    r'(<span class="hero-statbar-num">)[^<]*(</span>\s*<span class="hero-statbar-label">Cost Weight</span>)',
+    lambda match: match.group(1) + f'{cost_weight["weightPct"]:.2f}%' + match.group(2),
+    "hero cost weight",
+)
+html = replace_current_copy(
+    html,
+    r'(<div class="section-sub">)Drag the cost weight slider[\s\S]*?(</div>)',
+    lambda match: match.group(1)
+    + f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.'
+    + match.group(2),
+    "ranking cost explanation",
+)
+html = replace_current_copy(
+    html,
+    r'(<input type="range" id="cost-slider"[^>]*value=")[^"]+(" step=")[^"]+(">)',
+    lambda match: match.group(1) + f'{cost_weight["weightPct"]:.4f}' + match.group(2) + "0.01" + match.group(3),
+    "cost slider default",
+)
+html = replace_current_copy(
+    html,
+    r'(<span class="slider-val" id="slider-val">)[^<]*(</span>)',
+    lambda match: match.group(1) + f'{cost_weight["weightPct"]:.2f}%' + match.group(2),
+    "cost slider label",
+)
+html = replace_current_copy(
+    html,
+    r'(<span class="seal-note">)v[0-9.]+ primary score uses [^<]*(</span>)',
+    lambda match: match.group(1) + f'{VERSION} primary score uses {d} zero-gap dimensions and no neutral-fill placeholders' + match.group(2),
+    "ranking release note",
+)
+html = replace_current_copy(
+    html,
+    r'(<span class="seal-note" id="cost-note">)Cost weight: [^<]*(</span>)',
+    lambda match: match.group(1) + f'Cost weight: {cost_weight["weightPct"]:.2f}% (default)' + match.group(2),
+    "cost weight note",
+)
+html = replace_current_copy(
+    html,
+    r'(<div class="insight-title">)v[0-9.]+ Release(</div>)',
+    lambda match: match.group(1) + f'{VERSION} Release' + match.group(2),
+    "release insight title",
+)
+html = replace_current_copy(
+    html,
+    r'(<h3[^>]*>Normalized Score Matrix \()[0-9]+\s*[×x]\s*[0-9]+(\)</h3>)',
+    lambda match: match.group(1) + f'{n} × {d}' + match.group(2),
+    "score matrix heading",
+)
+html = replace_current_copy(
+    html,
+    r'(<span style="margin-left:12px;">)All retained score inputs are source-backed in v[0-9.]+(</span>)',
+    lambda match: match.group(1) + f'All retained score inputs are source-backed in {VERSION}' + match.group(2),
+    "score matrix source note",
+)
+
+formula_copy = (
+    f"For each of {d} retained dimensions, the {n} exact-overlap models are ranked from 1–{n}. "
+    f"Rank 1 maps to 100 points and rank {n} to 0; ties receive the average tied rank. "
+    f"{VERSION} excludes incomplete dimensions and does not fill missing values."
+)
+html = replace_current_copy(
+    html,
+    r'(<h3[^>]*>Scoring Formula</h3>\s*<div class="method-formula">[\s\S]*?</div>\s*<p class="method-text">)[\s\S]*?(</p>)',
+    lambda match: match.group(1) + formula_copy + match.group(2),
+    "scoring formula cohort",
+)
+weights_copy = (
+    f"The final ValueRank score is a weighted sum across {d} retained dimensions. "
+    f"<strong>Cost weight: {cost_weight['weightPct']:.2f}%</strong> (slider-adjustable). "
+    f"Bug Hunt Bench contributes <strong>{bug_hunt_weight['weightPct']:.2f}%</strong> and "
+    f"DeepSWE v1.1 contributes <strong>{deepswe_weight['weightPct']:.2f}%</strong>. "
+    "API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple."
+)
+html = replace_current_copy(
+    html,
+    r'(<h3[^>]*>Scoring Formula</h3>[\s\S]*?<hr class="divider"[^>]*>\s*<p class="method-text">)[\s\S]*?(</p>)',
+    lambda match: match.group(1) + weights_copy + match.group(2),
+    "scoring formula weights",
+)
+html = replace_current_copy(
+    html,
+    r'(<strong>Zero-gap benchmark rule:</strong>)[\s\S]*?(</div>)',
+    lambda match: match.group(1)
+    + f' If any of the {n} primary-cohort models is missing from a benchmark, that dimension is excluded from the composite. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.'
+    + match.group(2),
+    "zero-gap rule",
+)
+html = replace_current_copy(
+    html,
+    r'(<strong>Quality sub-score:</strong>)[\s\S]*?(</div>)',
+    lambda match: match.group(1)
+    + f'The weighted sum of the {d - 1} non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.'
+    + match.group(2),
+    "quality sub-score",
+)
+html = replace_current_copy(
+    html,
+    r'(<div class="card mb-6" id="livebench-data">[\s\S]*?<p class="method-text" style="margin-bottom:16px;">)[\s\S]*?(</p>)',
+    lambda match: match.group(1)
+    + f'Release <strong>{livebench_document["release"]}</strong> matches <strong>{livebench_document["matchedN"]}/{livebench_document["cohortN"]}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean, but it remains supplemental because the pinned release has incomplete coverage for the current cohort; it does not contribute to the zero-gap primary score. Overall and cost are also shown as supplemental metrics.'
+    + match.group(2),
+    "LiveBench primary coverage note",
+)
+html = replace_current_copy(
+    html,
+    r"(<div>ValueRank )v[0-9.]+ · [^<]+ · [0-9]+ models × [0-9]+ primary dimensions",
+    lambda match: match.group(1) + f'{VERSION} · {DATE} · {n} models × {d} primary dimensions',
+    "footer release",
+)
+html = replace_current_copy(
+    html,
+    r"(title:\{text:'Ranking History — v0\.7 to )v[0-9.]+",
+    lambda match: match.group(1) + VERSION,
+    "ranking history chart title",
+)
+site_path.write_text(html)
 
 coding_path = ROOT / "site" / "coding-agents" / "index.html"
 if coding_path.exists():

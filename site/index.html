@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ValueRank — Frontier LLM Models Ranked on Real-World Value</title>
-  <meta name="description" content="Frontier models ranked on real-world value. ValueRank v1.9.0 · 9 models; DeepSWE v1.1 and Bug Hunt shape the primary score.">
+  <meta name="description" content="ValueRank v1.9.1: 10 models ranked across 12 zero-gap dimensions; DeepSWE v1.1 and Bug Hunt are included in the primary score.">
   <meta property="og:title" content="ValueRank — Frontier models ranked on real-world value">
-  <meta property="og:description" content="Evidence-backed rankings from benchmark owners. ValueRank v1.9.0 · 9 models; DeepSWE v1.1 and Bug Hunt are in the primary rank.">
+  <meta property="og:description" content="ValueRank v1.9.1: 10 models ranked across 12 zero-gap dimensions; DeepSWE v1.1 and Bug Hunt are included in the primary score.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://valuerank.alolabs.dev/og.png?v=1">
@@ -15,7 +15,7 @@
   <meta property="og:image:type" content="image/png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ValueRank — Frontier models ranked on real-world value">
-  <meta name="twitter:description" content="Evidence-backed rankings from benchmark owners. ValueRank v1.9.0 · 9 models; DeepSWE v1.1 and Bug Hunt are in the primary rank.">
+  <meta name="twitter:description" content="ValueRank v1.9.1: 10 models ranked across 12 zero-gap dimensions; DeepSWE v1.1 and Bug Hunt are included in the primary score.">
   <meta name="twitter:image" content="https://valuerank.alolabs.dev/og.png?v=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1760,7 +1760,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-pulse"></span>
-          Production AI Ranking Framework · v1.9.0
+          Production AI Ranking Framework · v1.9.1
         </div>
         <h1 class="hero-title">
           Which AI Model<br>
@@ -1768,7 +1768,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank ranks <strong>10 models</strong> with both exact AA DeepSWE v1.1 model-variant results and Bug Hunt results from a 22-model AA-mapped comparison roster across a <strong>zero-gap 12-dimension set</strong>; Bug Hunt contributes 17.86% of the main score. v1.9.1 uses <strong><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v4.3.2</a></strong> components plus DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. Speed is excluded from the score; AA speed is numeric for 9/10 selected pages and missing for Kimi K3. <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> Instruction Following is included, with other incomplete external benchmark results shown as supplemental views.
+          ValueRank ranks <strong>10 models</strong> with both exact AA DeepSWE v1.1 model-variant results and Bug Hunt results from a 22-model AA-mapped comparison roster across a <strong>zero-gap 12-dimension set</strong>; Bug Hunt contributes 17.86% of the main score. v1.9.1 uses <strong><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v4.3.2</a></strong> components plus DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. Speed is excluded from the score; AA speed is numeric for 9/10 selected pages and missing for Kimi K3. The incomplete dimensions Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) remain supplemental because exact cohort coverage is incomplete.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1802,7 +1802,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
         <span class="hero-statbar-label">Scored Dimensions</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">20.66%</span>
+        <span class="hero-statbar-num">22.32%</span>
         <span class="hero-statbar-label">Cost Weight</span>
       </div>
       <div class="hero-statbar-item">
@@ -1822,7 +1822,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="container">
     <div class="section-header">
       <div class="section-title">Rankings</div>
-      <div class="section-sub">Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is 20.66%. Click any column header to sort.</div>
+      <div class="section-sub">Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is 22.32%. Click any column header to sort.</div>
     </div>
     <div class="cost-basis-control" id="cost-basis-control" role="group" aria-labelledby="cost-basis-label">
       <span class="cost-basis-label" id="cost-basis-label">Cost basis</span>
@@ -1843,8 +1843,8 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       </div>
       <div class="slider-wrap">
         <span class="slider-label">Cost weight</span>
-        <input type="range" id="cost-slider" min="0" max="50" value="20.6612" step="0.01">
-        <span class="slider-val" id="slider-val">20.66%</span>
+        <input type="range" id="cost-slider" min="0" max="50" value="22.3214" step="0.01">
+        <span class="slider-val" id="slider-val">22.32%</span>
       </div>
     </div>
     <div class="card table-wrap">
@@ -1866,8 +1866,8 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     </div>
     <div style="margin-top:12px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
       <span class="seal-note">Scores within ±2.5 pts are statistically tied (SEAL CI band)</span>
-      <span class="seal-note">v1.9.0 primary score uses zero-gap dimensions and no neutral-fill placeholders</span>
-      <span class="seal-note" id="cost-note">Cost weight: 20.66% (default)</span>
+      <span class="seal-note">v1.9.1 primary score uses 12 zero-gap dimensions and no neutral-fill placeholders</span>
+      <span class="seal-note" id="cost-note">Cost weight: 22.32% (default)</span>
     </div>
 
     <div class="insight-grid" style="margin-top:32px;">
@@ -1888,7 +1888,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       </div>
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
-        <div class="insight-title">v1.9.0 Release</div>
+        <div class="insight-title">v1.9.1 Release</div>
         <div class="insight-body">v1.9.1 uses <strong>25 AA DeepSWE chart configurations</strong> and keeps <strong>12 zero-gap dimensions</strong>; Speed is excluded because coverage is 9/10.</div>
       </div>
     </div>
@@ -1902,7 +1902,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="section-title">Visualizations</div>
       <div class="section-sub">Eight complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
     </div>
-                                                                                                            <div class="chart-tabs">
+                                                                                                                        <div class="chart-tabs">
       <button class="chart-tab active" data-chart="pareto">ValueRank Pareto Frontier</button>
       <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
@@ -1970,17 +1970,17 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
         <div class="card mb-4">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
           <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
-          <p class="method-text">For each of 14 retained dimensions, the 9 exact-overlap models are ranked from 1–9. Rank 1 maps to 100 points and rank 9 to 0; ties receive the average tied rank. v1.9.0 excludes incomplete dimensions and does not fill missing values.</p>
+          <p class="method-text">For each of 12 retained dimensions, the 10 exact-overlap models are ranked from 1–10. Rank 1 maps to 100 points and rank 10 to 0; ties receive the average tied rank. v1.9.1 excludes incomplete dimensions and does not fill missing values.</p>
           <hr class="divider" style="margin:16px 0;">
-          <p class="method-text">The final ValueRank score is a weighted sum across 14 retained dimensions. <strong>Cost weight: 20.66%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>16.53%</strong> and DeepSWE v1.1 contributes <strong>20.66%</strong>. Cost uses AA total evaluation cost in this rank, with lower cost better.</p>
+          <p class="method-text">The final ValueRank score is a weighted sum across 12 retained dimensions. <strong>Cost weight: 22.32%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>17.86%</strong> and DeepSWE v1.1 contributes <strong>22.32%</strong>. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.</p>
         </div>
         <div class="card">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
           <div class="method-text" style="display:flex;flex-direction:column;gap:10px;">
             <div><strong>Rank-based (not raw-score-based):</strong> Prevents any single benchmark from dominating due to scale differences. GPQA percentages, DeepSWE pass rates, and token-per-second speed figures are not directly comparable on raw values; ranks are.</div>
-            <div><strong>Zero-gap benchmark rule:</strong> If any of the 9 primary-cohort models is missing from a benchmark, that dimension is excluded from the composite. Exact benchmark-version and evaluated-model matches are required; the full source roster contains 21 candidates.</div>
+            <div><strong>Zero-gap benchmark rule:</strong> If any of the 10 primary-cohort models is missing from a benchmark, that dimension is excluded from the composite. Exact benchmark-version and evaluated-model matches are required; the full source roster contains 22 candidates.</div>
             <div><strong>SEAL CI band (±2–3 pts):</strong> Due to benchmark variance, scores within 2–3 pts should be treated as statistically tied. Rankings within this band are effectively co-ranked.</div>
-            <div><strong>Quality sub-score:</strong> The weighted sum of the 13 non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.</div>
+            <div><strong>Quality sub-score:</strong>The weighted sum of the 11 non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.</div>
           </div>
         </div>
       </div>
@@ -2005,7 +2005,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 
     <div class="card mb-6" id="livebench-data">
        <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;"><a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench External Coverage</a></h3>
-        <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>21/22</strong> AA comparison candidates and includes <strong>1 official supplemental model</strong> outside the source roster: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean and contributes to the primary rank for the exact-overlap models. Overall and cost are shown here and in the Pareto chart as supplemental metrics.</p>
+        <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>21/22</strong> AA comparison candidates and includes <strong>1 official supplemental model</strong> outside the source roster: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean, but it remains supplemental because the pinned release has incomplete coverage for the current cohort; it does not contribute to the zero-gap primary score. Overall and cost are also shown as supplemental metrics.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
@@ -2058,12 +2058,12 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     </div>
     <!-- BUG HUNT DATA CARD END -->
     <div class="card mb-6">
-          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (9 × 14)</h3>
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (10 × 12)</h3>
       <div class="heatmap-legend">
         <span>0 (worst)</span>
         <div class="hl-bar"></div>
         <span>100 (best)</span>
-        <span style="margin-left:12px;">All retained score inputs are source-backed in v1.9.0</span>
+        <span style="margin-left:12px;">All retained score inputs are source-backed in v1.9.1</span>
       </div>
       <div id="chart-heatmap-data" style="height:480px;"></div>
     </div>
@@ -2097,19 +2097,15 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           What does the overall score actually represent?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          Each model's score is a weighted average of 14 normalized dimension scores across the 9-model exact-overlap cohort. Each dimension score uses <code>((n − rank) / (n − 1)) × 100</code>, with n = 9; ties receive average rank. Incomplete dimensions are excluded rather than imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. Cost uses AA total evaluation cost, where lower is better; API Costs and Plan Costs remain separate per-task views.
-        </div>
+        <div class="faq-a">Each model’s score is a weighted average of 12 normalized dimension scores across the 10-model exact-overlap cohort. Each dimension score uses <code>((n − rank) / (n − 1)) × 100</code>, with n = 10; ties receive average rank. Incomplete dimensions are excluded rather than imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.</div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          Why is cost weighted at 20.66% by default?
+          Why is cost weighted at 22.32% by default?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          ValueRank is designed for <strong>production software engineering teams</strong>, not academic benchmarking. At scale, a 10× cost difference between similarly capable models is a real operational constraint, but one pricing surface is not enough. The 20.66% cost weight uses AA total evaluation cost, complete for all 9 primary models; no selective substitution is used. You can drag the cost weight slider in the Rankings section to 0% to see a pure quality ranking if budget is no constraint.
-        </div>
+        <div class="faq-a">Cost has a 22.32% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple. Both views use the same benchmark suite and lower cost ranks better.</div>
       </div>
 
       <div class="faq-item">
@@ -2117,9 +2113,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           What does ⊘ mean in ValueRank?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          In historical ValueRank versions, ⊘ meant a genuine benchmark data gap. In <strong>v1.9.0</strong>, there are <strong>no ⊘ cells</strong> because any dimension without full coverage in the 9-model cohort is excluded. The Coverage section should therefore show <strong>✓ Full</strong> for every ranked model.
-        </div>
+        <div class="faq-a">In historical ValueRank versions, ⊘ marked a genuine benchmark data gap. In v1.9.1, incomplete dimensions are excluded from the composite, so every ranked model has full coverage across the retained dimensions.</div>
       </div>
 
       <div class="faq-item">
@@ -2127,9 +2121,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           What's the difference between Score and Quality Score?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          The <strong>overall Score</strong> includes all <strong>14 retained dimensions</strong>, including Bug Hunt and DeepSWE v1.1, with cost at 20.66% by default. The <strong>Quality Score</strong> renormalizes the <strong>13 non-cost dimensions</strong> to 100%. It answers: <em>"which model ranks highest on the selected benchmarks?"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.
-        </div>
+        <div class="faq-a">The overall Score includes all 12 retained dimensions, including Bug Hunt and DeepSWE v1.1, with cost at 22.32% by default. Quality Score renormalizes the 11 non-cost dimensions to 100%, showing benchmark performance without the cost weight.</div>
       </div>
 
       <div class="faq-item">
@@ -2168,10 +2160,10 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          Why isn't Claude Opus 5.5 in the primary ranking?
+          Is Claude Opus 5.5 included in the primary ranking?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">Claude Opus 5.5 is included in v1.9.1. The <a href="https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1" target="_blank" rel="noopener">AA Coding Agent Index v1.5 DeepSWE v1.1 chart</a> reports 68.0% for Claude Code / Opus 5.5 / max; the <a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt owner scoreboard</a> reports 41.7/105 (mean of three runs) for Opus 5.5 max. The <a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">AA model profile</a> labels its corresponding profile max with fallback. The composite ranks 10 exact-overlap models across 12 zero-gap dimensions; missing LiveBench data remains unavailable.</div>
+        <div class="faq-a">Claude Opus 5.5 is included in v1.9.1. The <a href="https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1" target="_blank" rel="noopener">AA Coding Agent Index v1.5 DeepSWE v1.1 chart</a> reports 68.0% for Claude Code / Opus 5.5 / max; the <a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt owner scoreboard</a> reports 41.7/105 (mean of three runs) for Opus 5.5 max. The <a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">AA model profile</a> labels its corresponding profile max with fallback. The composite ranks 10 exact-overlap models across 12 zero-gap dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.</div>
       </div>
 
     </div>
@@ -2184,7 +2176,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v1.9.0 · September 29, 2026 · 9 models × 14 primary dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v1.9.1 · September 30, 2026 · 10 models × 12 primary dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -4284,7 +4276,7 @@ function renderBump() {
   }));
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v0.7 to v1.9.0', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v0.7 to v1.9.1', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
     yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5, MODELS.length + 0.5],
       tickvals: Array.from({length: MODELS.length}, (_,i)=>i+1),
