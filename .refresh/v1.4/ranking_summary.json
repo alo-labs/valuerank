@@ -1,9 +1,9 @@
 {
-  "version": "v1.9.0",
-  "publishDate": "September 29, 2026",
-  "observedAt": "2026-09-29T12:59:59Z",
-  "cohortN": 9,
-  "sourceCohortN": 21,
+  "version": "v1.9.1",
+  "publishDate": "September 30, 2026",
+  "observedAt": "2026-09-29T15:33:44Z",
+  "cohortN": 10,
+  "sourceCohortN": 22,
   "rankingExcludedModels": [
     "Claude Fable 5",
     "GPT-5.5",
@@ -32,18 +32,16 @@
   "deepsweBenchmarkVersion": "DeepSWE v1.1",
   "deepsweConfigurationsN": 25,
   "aaBenchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
-  "retainedDimensionN": 14,
+  "retainedDimensionN": 12,
   "retainedDimensions": [
     "Cost",
     "Non-Hallucination",
-    "Instruction Following (LiveBench)",
     "DeepSWE v1.1",
     "GDPval-AA v2.1",
     "AutomationBench-AA",
     "AA-LCR v1.1",
     "AA-Omniscience Accuracy",
     "HLE",
-    "GPQA Diamond (legacy)",
     "SciCode",
     "CritPt",
     "AA Intelligence Index",
@@ -55,7 +53,8 @@
       "label": "Terminal-Bench 4.0",
       "missing": [
         "Kimi K3",
-        "Qwen3.8 Max"
+        "Qwen3.8 Max",
+        "Claude Opus 5.5"
       ],
       "sourceMissing": [
         "Kimi K3",
@@ -66,7 +65,30 @@
         "Muse Spark 1.2",
         "Gemini 3.6 Flash",
         "GLM-5.2",
-        "Gemini 3.5 Flash"
+        "Gemini 3.5 Flash",
+        "Claude Opus 5.5"
+      ],
+      "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "missing": [
+        "Claude Opus 5.5"
+      ],
+      "sourceMissing": [
+        "Claude Opus 5.5"
+      ],
+      "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "missing": [
+        "Claude Opus 5.5"
+      ],
+      "sourceMissing": [
+        "Claude Opus 5.5"
       ],
       "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
     },
@@ -85,10 +107,10 @@
   "zeroGap": true,
   "costMode": "aa-only",
   "costCoverage": {
-    "availableN": 9,
-    "cohortN": 9,
-    "sourceAvailableN": 20,
-    "sourceCohortN": 21,
+    "availableN": 10,
+    "cohortN": 10,
+    "sourceAvailableN": 21,
+    "sourceCohortN": 22,
     "missingModels": [],
     "sourceMissingModels": [
       "Gemini 3.7 Flash"
@@ -96,90 +118,89 @@
     "selectiveSubstitution": false
   },
   "pareto": [
-    "GPT-6 Astra",
-    "Gemini 3.8 Flash",
     "GPT-5.6 Sol",
     "Grok 4.6",
-    "GPT-5.6 Luna"
+    "GPT-5.6 Luna",
+    "Claude Opus 5.5"
   ],
   "topFive": [
     {
       "rank": 1,
       "name": "GPT-5.6 Sol",
       "overallScore": 72.2,
-      "qualityScore": 78.0
+      "qualityScore": 77.0
     },
     {
       "rank": 2,
       "name": "GPT-6 Astra",
-      "overallScore": 68.8,
-      "qualityScore": 80.3
+      "overallScore": 65.8,
+      "qualityScore": 75.1
     },
     {
       "rank": 3,
-      "name": "Grok 4.6",
-      "overallScore": 55.2,
-      "qualityScore": 50.1
+      "name": "Claude Opus 5.5",
+      "overallScore": 64.5,
+      "qualityScore": 83.0
     },
     {
       "rank": 4,
-      "name": "Kimi K3",
-      "overallScore": 51.3,
-      "qualityScore": 54.9
+      "name": "Grok 4.6",
+      "overallScore": 51.8,
+      "qualityScore": 44.4
     },
     {
       "rank": 5,
       "name": "GPT-5.6 Luna",
-      "overallScore": 50.7,
-      "qualityScore": 37.8
+      "overallScore": 51.1,
+      "qualityScore": 37.1
     }
   ],
   "bugHuntEmphasis": {
-    "matchedN": 9,
-    "cohortN": 21,
-    "benchmarkWeightPct": 22.9008,
+    "matchedN": 10,
+    "cohortN": 22,
+    "benchmarkWeightPct": 24.5902,
     "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
     "topFive": [
       {
         "rank": 1,
         "name": "GPT-5.6 Sol",
-        "score": 73.4,
+        "score": 73.6,
         "fixedOf105": 43.5
       },
       {
         "rank": 2,
         "name": "GPT-6 Astra",
-        "score": 71.2,
+        "score": 68.6,
         "fixedOf105": 45.0
       },
       {
         "rank": 3,
-        "name": "Grok 4.6",
-        "score": 55.8,
-        "fixedOf105": 28.7
+        "name": "Claude Opus 5.5",
+        "score": 65.6,
+        "fixedOf105": 41.7
       },
       {
         "rank": 4,
         "name": "GPT-5.6 Luna",
-        "score": 52.5,
+        "score": 52.4,
         "fixedOf105": 31.3
       },
       {
         "rank": 5,
-        "name": "Kimi K3",
-        "score": 49.3,
-        "fixedOf105": 21.0
+        "name": "Grok 4.6",
+        "score": 52.1,
+        "fixedOf105": 28.7
       }
     ]
   },
   "externalCoverage": {
-    "livebench": "21/21",
+    "livebench": "21/22",
     "livebenchPublishedN": 64,
     "livebenchSupplementalModels": [
       "claude-fable-5-1"
     ],
-    "bugHunt": "16/21 owner matches; 9 exact AA DeepSWE plus Bug Hunt overlaps rank in the primary composite",
-    "terminalBenchV4": "12/21 including 1 provider claim"
+    "bugHunt": "17/22 owner matches; 10 exact AA DeepSWE plus Bug Hunt overlaps rank in the primary composite",
+    "terminalBenchV4": "12/22 including 1 provider claim"
   },
   "weights": [
     {
@@ -187,98 +208,84 @@
       "label": "Cost",
       "higherBetter": false,
       "priority": 25,
-      "weightPct": 20.6612
+      "weightPct": 22.3214
     },
     {
       "key": "omniNonHallucination",
       "label": "Non-Hallucination",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 4.9587
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "higherBetter": true,
-      "priority": 5,
-      "weightPct": 4.1322
+      "weightPct": 5.3571
     },
     {
       "key": "deepswePassAt1",
       "label": "DeepSWE v1.1",
       "higherBetter": true,
       "priority": 25,
-      "weightPct": 20.6612
+      "weightPct": 22.3214
     },
     {
       "key": "gdpvalV21",
       "label": "GDPval-AA v2.1",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 4.9587
+      "weightPct": 5.3571
     },
     {
       "key": "automationBenchAA",
       "label": "AutomationBench-AA",
       "higherBetter": true,
       "priority": 5,
-      "weightPct": 4.1322
+      "weightPct": 4.4643
     },
     {
       "key": "aaLcr",
       "label": "AA-LCR v1.1",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 3.3058
+      "weightPct": 3.5714
     },
     {
       "key": "omniAccuracy",
       "label": "AA-Omniscience Accuracy",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 3.3058
+      "weightPct": 3.5714
     },
     {
       "key": "hle",
       "label": "HLE",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 3.3058
-    },
-    {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "higherBetter": true,
-      "priority": 4,
-      "weightPct": 3.3058
+      "weightPct": 3.5714
     },
     {
       "key": "scicode",
       "label": "SciCode",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 3.3058
+      "weightPct": 3.5714
     },
     {
       "key": "critpt",
       "label": "CritPt",
       "higherBetter": true,
       "priority": 3,
-      "weightPct": 2.4793
+      "weightPct": 2.6786
     },
     {
       "key": "intelligenceIndex",
       "label": "AA Intelligence Index",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 4.9587
+      "weightPct": 5.3571
     },
     {
       "key": "bugHuntFixedOf105",
       "label": "Bug Hunt Bench",
       "higherBetter": true,
       "priority": 20,
-      "weightPct": 16.5289
+      "weightPct": 17.8571
     }
   ],
   "bugHuntEmphasisRanking": {
@@ -290,111 +297,97 @@
       "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv",
       "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md"
     },
-    "matchedN": 9,
-    "cohortN": 21,
-    "coveragePct": 42.86,
-    "basePrioritySum": 101,
+    "matchedN": 10,
+    "cohortN": 22,
+    "coveragePct": 45.45,
+    "basePrioritySum": 92,
     "benchmarkPriority": 30,
-    "totalPriority": 131,
-    "benchmarkWeightPct": 22.9008,
+    "totalPriority": 122,
+    "benchmarkWeightPct": 24.5902,
     "weights": [
       {
         "key": "costComposite",
         "label": "Cost",
         "higherBetter": false,
         "priority": 25,
-        "weightPct": 19.084
+        "weightPct": 20.4918
       },
       {
         "key": "omniNonHallucination",
         "label": "Non-Hallucination",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 4.5802
-      },
-      {
-        "key": "livebenchInstructionFollowing",
-        "label": "Instruction Following (LiveBench)",
-        "higherBetter": true,
-        "priority": 5,
-        "weightPct": 3.8168
+        "weightPct": 4.918
       },
       {
         "key": "deepswePassAt1",
         "label": "DeepSWE v1.1",
         "higherBetter": true,
         "priority": 25,
-        "weightPct": 19.084
+        "weightPct": 20.4918
       },
       {
         "key": "gdpvalV21",
         "label": "GDPval-AA v2.1",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 4.5802
+        "weightPct": 4.918
       },
       {
         "key": "automationBenchAA",
         "label": "AutomationBench-AA",
         "higherBetter": true,
         "priority": 5,
-        "weightPct": 3.8168
+        "weightPct": 4.0984
       },
       {
         "key": "aaLcr",
         "label": "AA-LCR v1.1",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 3.0534
+        "weightPct": 3.2787
       },
       {
         "key": "omniAccuracy",
         "label": "AA-Omniscience Accuracy",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 3.0534
+        "weightPct": 3.2787
       },
       {
         "key": "hle",
         "label": "HLE",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 3.0534
-      },
-      {
-        "key": "gpqaDiamond",
-        "label": "GPQA Diamond (legacy)",
-        "higherBetter": true,
-        "priority": 4,
-        "weightPct": 3.0534
+        "weightPct": 3.2787
       },
       {
         "key": "scicode",
         "label": "SciCode",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 3.0534
+        "weightPct": 3.2787
       },
       {
         "key": "critpt",
         "label": "CritPt",
         "higherBetter": true,
         "priority": 3,
-        "weightPct": 2.2901
+        "weightPct": 2.459
       },
       {
         "key": "intelligenceIndex",
         "label": "AA Intelligence Index",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 4.5802
+        "weightPct": 4.918
       },
       {
         "key": "bugHuntFixedOf105",
         "label": "Bug Hunt Bench",
         "higherBetter": true,
         "priority": 30,
-        "weightPct": 22.9008
+        "weightPct": 24.5902
       }
     ],
     "missingModels": [
@@ -439,7 +432,7 @@
         "modelId": "gpt-5.6-sol",
         "name": "GPT-5.6 Sol",
         "fixedOf105": 43.5,
-        "emphasisScore": 73.4,
+        "emphasisScore": 73.6,
         "primaryRank": 1
       },
       {
@@ -447,15 +440,15 @@
         "modelId": "gpt-6-astra",
         "name": "GPT-6 Astra",
         "fixedOf105": 45.0,
-        "emphasisScore": 71.2,
+        "emphasisScore": 68.6,
         "primaryRank": 2
       },
       {
         "rank": 3,
-        "modelId": "grok-4.6",
-        "name": "Grok 4.6",
-        "fixedOf105": 28.7,
-        "emphasisScore": 55.8,
+        "modelId": "claude-opus-5-5",
+        "name": "Claude Opus 5.5",
+        "fixedOf105": 41.7,
+        "emphasisScore": 65.6,
         "primaryRank": 3
       },
       {
@@ -463,55 +456,70 @@
         "modelId": "gpt-5.6-luna",
         "name": "GPT-5.6 Luna",
         "fixedOf105": 31.3,
-        "emphasisScore": 52.5,
+        "emphasisScore": 52.4,
         "primaryRank": 5
       },
       {
         "rank": 5,
-        "modelId": "kimi-k3",
-        "name": "Kimi K3",
-        "fixedOf105": 21.0,
-        "emphasisScore": 49.3,
+        "modelId": "grok-4.6",
+        "name": "Grok 4.6",
+        "fixedOf105": 28.7,
+        "emphasisScore": 52.1,
         "primaryRank": 4
       },
       {
         "rank": 6,
-        "modelId": "gemini-3.8-flash",
-        "name": "Gemini 3.8 Flash",
-        "fixedOf105": 18.0,
-        "emphasisScore": 46.3,
+        "modelId": "kimi-k3",
+        "name": "Kimi K3",
+        "fixedOf105": 21.0,
+        "emphasisScore": 48.3,
         "primaryRank": 6
       },
       {
         "rank": 7,
-        "modelId": "claude-opus-5",
-        "name": "Claude Opus 5",
-        "fixedOf105": 27.0,
-        "emphasisScore": 37.5,
-        "primaryRank": 8
-      },
-      {
-        "rank": 8,
-        "modelId": "glm-5.3",
-        "name": "GLM-5.3",
-        "fixedOf105": 19.0,
-        "emphasisScore": 35.6,
+        "modelId": "gemini-3.8-flash",
+        "name": "Gemini 3.8 Flash",
+        "fixedOf105": 18.0,
+        "emphasisScore": 40.9,
         "primaryRank": 7
       },
       {
+        "rank": 8,
+        "modelId": "claude-opus-5",
+        "name": "Claude Opus 5",
+        "fixedOf105": 27.0,
+        "emphasisScore": 36.5,
+        "primaryRank": 9
+      },
+      {
         "rank": 9,
+        "modelId": "glm-5.3",
+        "name": "GLM-5.3",
+        "fixedOf105": 19.0,
+        "emphasisScore": 35.5,
+        "primaryRank": 8
+      },
+      {
+        "rank": 10,
         "modelId": "qwen3.8-max",
         "name": "Qwen3.8 Max",
         "fixedOf105": 25.7,
-        "emphasisScore": 28.4,
-        "primaryRank": 9
+        "emphasisScore": 26.4,
+        "primaryRank": 10
       }
     ]
   },
   "primaryMissingFields": {
     "terminalBenchV4": [
       "Kimi K3",
-      "Qwen3.8 Max"
+      "Qwen3.8 Max",
+      "Claude Opus 5.5"
+    ],
+    "livebenchInstructionFollowing": [
+      "Claude Opus 5.5"
+    ],
+    "gpqaDiamond": [
+      "Claude Opus 5.5"
     ],
     "speed": [
       "Kimi K3"

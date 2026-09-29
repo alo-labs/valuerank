@@ -351,7 +351,7 @@ def main() -> int:
     coverage_output = {
         "schemaVersion": "v1.6",
         "observedAt": observed_at,
-        "cohort": "Artificial Analysis current 21-model ValueRank comparison roster",
+        "cohort": f"Artificial Analysis current {len(models)}-model ValueRank comparison roster",
         "cohortN": len(models),
         "primaryEvaluations": PRIMARY_EVALUATIONS,
         "additionalFields": ADDITIONAL_FIELDS,

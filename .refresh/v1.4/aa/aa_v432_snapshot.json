@@ -1,7 +1,7 @@
 {
   "schemaVersion": "valuerank-aa-page-snapshot/v2",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
-  "capturedAt": "2026-09-29T06:52:16Z",
+  "capturedAt": "2026-09-29T15:16:40Z",
   "source": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
   "concurrency": 4,
   "pages": [
@@ -6645,6 +6645,78 @@
         "contentType": "text/html; charset=utf-8",
         "responseBytes": 3884335,
         "responseSha256": "32e7e69237f0ef51b8b1e102b74fe57ec8f1b3b228c0d15d450639181f035015"
+      }
+    },
+    {
+      "id": "claude-opus-5-5",
+      "requestedName": "Claude Opus 5.5",
+      "url": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "model": {
+        "id": "2f3c4dc9-a450-4303-8697-0237257cf08f",
+        "slug": "claude-opus-5-5",
+        "name": "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+        "shortName": "Claude Opus 5.5 (max with fallback)",
+        "releaseDate": "2026-09-22",
+        "isReasoning": true,
+        "effort": {
+          "slug": "max",
+          "label": "max",
+          "level": 60
+        },
+        "release": {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "deprecatedTo": null
+        },
+        "deprecated": false,
+        "contextWindowTokens": 1000000,
+        "intelligenceIndex": 57.6223698102963,
+        "intelligenceIndexIsEstimated": false,
+        "briefcaseBreakdown": {
+          "overall": {
+            "elo": 1821.85,
+            "lower95ci": 1810.1,
+            "upper95ci": 1833.6
+          },
+          "rubricPassRate": 0.6121212121212121
+        },
+        "omniscienceAccuracy": 0.6621666666666667,
+        "omniscienceHallucinationRate": 0.5860878145041933,
+        "gdpPdfAllPass": 0.262,
+        "gdpval": 1846.17,
+        "gdpvalNormalized": 0.673085,
+        "terminalBench40": 0.595959595959596,
+        "scicode": 0.668981481481482,
+        "lcr": 0.846666666666667,
+        "hle": 0.613531047265987,
+        "gpqa": null,
+        "critpt": 0.317142857142857,
+        "automationBenchPartialScore": 0.6953868128636069,
+        "price1mInputTokens": 4,
+        "price1mOutputTokens": 20,
+        "cacheHitPrice": 0.2,
+        "cacheHitDiscountPercent": 0.95,
+        "intelligenceIndexCost": {
+          "answer": 920.62682,
+          "cacheRead": 2139.400743307854,
+          "cacheWrite": 1228.8174873036423,
+          "input": 3510.431022611496,
+          "nonCacheInput": 142.212792,
+          "output": 5197.76662,
+          "reasoning": 4277.1398,
+          "total": 8708.197642611496
+        },
+        "outputSpeedVariance": {
+          "median": 92.5191493491242,
+          "p05": 87.5881611414036,
+          "p95": 113.189446380186,
+          "q25": 91.3174270872806,
+          "q75": 95.4290542137804
+        }
+      },
+      "capture": {
+        "captureMethod": "Built-in browser read of the official page's currentModel payload; raw HTML not retained.",
+        "capturedAt": "2026-09-29T15:16:40Z"
       }
     }
   ]

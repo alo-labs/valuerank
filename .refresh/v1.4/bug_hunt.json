@@ -2,7 +2,7 @@
   "schemaVersion": "valuerank-bug-hunt-bench/v1",
   "benchmark": "Bug Hunt Bench",
   "benchmarkVersion": "105 planted bugs across two repositories; rolling public results snapshot",
-  "snapshotDate": "2026-09-29",
+  "snapshotDate": "2026-09-30",
   "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
   "sources": {
     "homepage": "https://bughunt.productcompass.pm/",
@@ -63,6 +63,21 @@
       "route": "Anthropic",
       "sourceType": "benchmark_owner",
       "note": "Single official run; treat as one draw."
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Opus 5.5 (max effort) - mean of 3",
+      "fixedOf105": 41.7,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "max",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "note": "Benchmark-owner scoreboard mean of three Opus 5.5 max-effort runs; evaluated version matches the AA DeepSWE chart row."
     },
     {
       "modelId": "gpt-5.6-sol",

@@ -16,8 +16,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
-VERSION = "v1.9.0"
-PUBLISH_DATE = "September 29, 2026"
+VERSION = "v1.9.1"
+PUBLISH_DATE = "September 30, 2026"
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
 DEEPSWE_PRIORITY = 25
@@ -26,6 +26,7 @@ DEVELOPER = {
     "GPT-6 Astra": "OpenAI",
     "Gemini 3.8 Flash": "Google DeepMind",
     "Claude Opus 5": "Anthropic",
+    "Claude Opus 5.5": "Anthropic",
     "GPT-5.6 Sol": "OpenAI",
     "Claude Fable 5": "Anthropic",
     "GLM-5.3": "Z AI",
@@ -50,6 +51,7 @@ SHORT = {
     "GPT-6 Astra": "GPT-6 Astra",
     "Gemini 3.8 Flash": "Gem 3.8 Flash",
     "Claude Opus 5": "Opus 5",
+    "Claude Opus 5.5": "Opus 5.5",
     "GPT-5.6 Sol": "GPT-5.6 Sol",
     "Claude Fable 5": "Fable 5",
     "GLM-5.3": "GLM-5.3",
@@ -220,8 +222,8 @@ def main() -> int:
         if item.get("eligibleForRanking") is True
     }
     coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
-    if len(aa_models) != 21:
-        raise ValueError("AA metrics snapshot must contain the current 21-model comparison roster")
+    if len(aa_models) != 22:
+        raise ValueError("AA metrics snapshot must contain the current 22-model comparison roster")
     if len(deepswe_chart.get("configurations", [])) != 25 or deepswe_chart.get("benchmarkTasks") != 113:
         raise ValueError("AA Coding Agent Index DeepSWE chart must contain the observed 25 configurations and 113 tasks")
     deepswe_by_id = {}
@@ -239,10 +241,10 @@ def main() -> int:
         raise ValueError("AA DeepSWE mapped model IDs must belong to the current ValueRank roster")
     cohort_ids = set(aa_models)
     if set(livebench_models) != cohort_ids:
-        raise ValueError("LiveBench snapshot must contain exactly the current 21-model cohort")
+        raise ValueError("LiveBench snapshot must contain exactly the current 22-model cohort")
     bug_hunt_by_id = {item["modelId"]: item for item in bug_hunt_document["models"]}
     if set(bug_hunt_by_id) != cohort_ids:
-        raise ValueError("Bug Hunt snapshot must declare exactly the current 21-model cohort")
+        raise ValueError("Bug Hunt snapshot must declare exactly the current 22-model cohort")
     for model_id, item in bug_hunt_by_id.items():
         if item.get("matched") is True:
             require_number(item.get("fixedOf105"), f"{model_id}.bugHunt.fixedOf105")
@@ -600,7 +602,7 @@ def main() -> int:
             "sourceCommit": bug_hunt_document["sourceCommit"],
         },
     }
-    coverage_document["cohort"] = "Artificial Analysis v4.3.2 mapped 21-model ValueRank comparison roster"
+    coverage_document["cohort"] = f"Artificial Analysis v4.3.2 mapped {len(rows)}-model ValueRank comparison roster"
     coverage_document["cohortN"] = len(rows)
     coverage_document["deepSweSource"] = deepswe_chart["source"]
     coverage_document["deepSweConfigurationsN"] = len(deepswe_chart["configurations"])

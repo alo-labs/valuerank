@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit the v1.9.0 README, methodology, score tables, raw data, and site.
+"""Emit the v1.9.1 README, methodology, score tables, raw data, and site.
 
 The site keeps the existing interactive publication shell, but all ranking
 constants and model data are generated from .refresh/v1.4/scores.json.
@@ -21,8 +21,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from plan_costs import build_cost_fields, load_plan_routes, route_summary
 from site_header import inject_header
 
-VERSION = "v1.9.0"
-DATE = "September 29, 2026"
+VERSION = "v1.9.1"
+DATE = "September 30, 2026"
+SHORT_DATE = "Sep 30"
 CURRENCY = "$"
 
 AA_INDEX_URL = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
@@ -102,7 +103,10 @@ livebench_pareto = [livebench_models[model_id] for model_id in livebench_documen
 tb4_rows = tb4_document["rows"]
 provider_claims = json.loads((REFRESH / "provider_claims.json").read_text()).get("claims", [])
 eligible_provider_claims = [item for item in provider_claims if item.get("eligibleForRanking") is True]
-ranking_history = json.loads((REFRESH / "ranking_history_v1.5.json").read_text()).get("v150", {})
+ranking_history_document = json.loads((REFRESH / "ranking_history_v1.5.json").read_text())
+ranking_history = ranking_history_document.get("v150", {})
+ranking_history_v190 = ranking_history_document.get("v190", {})
+ranking_history_v191 = ranking_history_document.get("v191", {})
 deepswe_updated = scores.get("deepsweObservedAt") or deepswe_chart_doc.get("observedAt", DATE)
 deepswe_configurations = deepswe_chart_doc["configurations"]
 deepswe_overlap_n = len([item for item in deepswe_configurations if item.get("valueRankModelId")])
@@ -707,7 +711,7 @@ for model, cost_fields in zip(models, plan_cost_fields):
         "missingCount": sum(1 for weight in weights if weight["key"] not in model["dims"]),
         "dims": [model["dims"][dim_key] for dim_key, _key, _full, _cat in SITE_DIMS],
         "isMissing": [False] * len(SITE_DIMS),
-        "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": ranking_history.get(model["id"]), "v160": None, "v170": None, "v190": model["rank"]},
+        "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": ranking_history.get(model["id"]), "v160": None, "v170": None, "v190": ranking_history_v190.get(model["id"]), "v191": ranking_history_v191.get(model["id"])},
     })
 
 site_livebench = [
@@ -1316,13 +1320,13 @@ html = html.replace("text:'v1.4.0: 21 models · 12 dims'", f"text:'{VERSION}: {n
 html = re.sub(r"const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
 html = re.sub(
     r"const versions = \[[^;]*\];",
-    "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0'];",
+    "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1'];",
     html,
     count=1,
 )
 html = re.sub(
     r"const vKeys = \[[^;]*\];",
-    "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190'];",
+    "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191'];",
     html,
     count=1,
 )
@@ -1337,7 +1341,7 @@ html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero
 html = replace_once(html, r'<div class="(?:nav-meta|vr-nav-meta)">[^<]*</div>', f'<div class="vr-nav-meta">{DATE} · {n} models · {d} dimensions</div>', "nav metadata")
 html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Models Ranked', f'<span class="hero-statbar-num">{n}</span>\n        <span class="hero-statbar-label">Models Ranked', "model stat")
 html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Scored Dimensions', f'<span class="hero-statbar-num">{d}</span>\n        <span class="hero-statbar-label">Scored Dimensions', "dimension stat")
-html = replace_once(html, r'<span class="hero-statbar-num">(?:Jul 28|Sep \d+)</span>', '<span class="hero-statbar-num">Sep 29</span>', "date stat")
+html = replace_once(html, r'<span class="hero-statbar-num">(?:Jul 28|Sep \d+)</span>', f'<span class="hero-statbar-num">{SHORT_DATE}</span>', "date stat")
 
 insight_bodies = [
     'The Pareto view highlights models that are not outperformed on both quality and the selected cost basis.',
@@ -1477,13 +1481,13 @@ html = html.replace("All scored cells are confirmed primary-source data in v1.2"
 html = html.replace("excluded from v1.2", "excluded from the current primary score")
 html = re.sub(
     r"(function renderVersionTable\(\) \{[\s\S]*?const versions = )\[[^;]*\];",
-    lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0'];",
+    lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1'];",
     html,
     count=1,
 )
 html = re.sub(
     r"(function renderVersionTable\(\) \{[\s\S]*?const vKeys = )\[[^;]*\];",
-    lambda match: match.group(1) + "['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190'];",
+    lambda match: match.group(1) + "['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191'];",
     html,
     count=1,
 )
@@ -1747,11 +1751,11 @@ faq_updates = [
     ),
     (
         'How often is ValueRank updated?',
-        f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} uses AA Coding Agent Index v1.5 DeepSWE v1.1 results, includes Bug Hunt in the primary score, and ranks 9 exact-overlap models across 14 zero-gap dimensions.',
+        f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} uses AA Coding Agent Index v1.5 DeepSWE v1.1 results, includes Bug Hunt in the primary score, and ranks {n} exact-overlap models across {d} zero-gap dimensions.',
     ),
     (
         "Why isn't Claude Opus 5.5 in the primary ranking?",
-        'The primary ranking requires exact results for the same evaluated model variant in both AA Coding Agent Index v1.5 DeepSWE v1.1 and the Bug Hunt owner scoreboard. The AA chart has a Claude Opus 5.5 configuration, but that result cannot be transferred to Claude Opus 5; variants without their own results in both sources remain outside the composite.',
+        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. The composite ranks {n} exact-overlap models across {d} zero-gap dimensions; missing LiveBench data remains unavailable.',
     ),
 ]
 for question, answer in faq_updates:

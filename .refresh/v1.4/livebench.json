@@ -76,9 +76,9 @@
       "summarize"
     ]
   },
-  "cohortN": 21,
+  "cohortN": 22,
   "matchedN": 21,
-  "missingModels": [],
+  "missingModels": ["claude-opus-5-5"],
   "models": {
     "gpt-6-astra": {
       "modelId": "gpt-6-astra",
@@ -982,6 +982,18 @@
       "overallScore": 74.637762,
       "instructionFollowingScore": 75.6,
       "costPerSuccessfulTaskUsd": 0.2489
+    },
+    "claude-opus-5-5": {
+      "modelId": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "not present in LiveBench 2026-06-25 release",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
     }
   },
   "supplementalN": 1,

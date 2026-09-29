@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "v1.7",
-  "observedAt": "2026-09-29T07:24:48Z",
-  "cohort": "Artificial Analysis v4.3.2 mapped 21-model ValueRank comparison roster",
-  "cohortN": 21,
+  "schemaVersion": "v1.6",
+  "observedAt": "2026-09-29T15:22:26Z",
+  "cohort": "Artificial Analysis v4.3.2 mapped 22-model ValueRank comparison roster",
+  "cohortN": 22,
   "primaryEvaluations": [
     {
       "key": "briefcaseElo",
@@ -81,15 +81,567 @@
   ],
   "providerClaimPolicy": "Use a provider-published value only while the benchmark owner has no result, for the same benchmark version and evaluated model identity; keep claims visibly distinct from owner results.",
   "fields": {
+    "briefcaseElo": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "gdpvalV21": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "automationBenchAA": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "terminalBenchV40": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "scicode": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "hle": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "gdpPdfAllPass": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "critpt": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "omniAccuracy": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "omniNonHallucination": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "aaLcr": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "intelligenceIndex": {
+      "group": "primary",
+      "availableN": 22,
+      "cohortN": 22,
+      "coveragePct": 100.0,
+      "missingModels": [],
+      "includedInPrimaryScore": true,
+      "providerClaimN": 0
+    },
+    "aaEvalCost": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "speed": {
+      "group": "primary",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "kimi-k3"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "gpqaDiamond": {
+      "group": "additional",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "mlcrOverall": {
+      "group": "supplemental",
+      "availableN": 18,
+      "cohortN": 22,
+      "coveragePct": 81.82,
+      "missingModels": [
+        "gpt-6-astra",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "harveyLab": {
+      "group": "supplemental",
+      "availableN": 11,
+      "cohortN": 22,
+      "coveragePct": 50.0,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "glm-5.3",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "deepseek-v4-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "apexAgents": {
+      "group": "supplemental",
+      "availableN": 5,
+      "cohortN": 22,
+      "coveragePct": 22.73,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "mmmuPro": {
+      "group": "supplemental",
+      "availableN": 12,
+      "cohortN": 22,
+      "coveragePct": 54.55,
+      "missingModels": [
+        "claude-fable-5",
+        "glm-5.3",
+        "grok-4.6",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "muse-spark-1.2",
+        "deepseek-v4-flash",
+        "glm-5.2",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "livecodebench": {
+      "group": "supplemental",
+      "availableN": 0,
+      "cohortN": 22,
+      "coveragePct": 0.0,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "kimi-k3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "gemini-3.5-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "aime25": {
+      "group": "supplemental",
+      "availableN": 0,
+      "cohortN": 22,
+      "coveragePct": 0.0,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "kimi-k3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "gemini-3.5-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "analystAgent": {
+      "group": "supplemental",
+      "availableN": 8,
+      "cohortN": 22,
+      "coveragePct": 36.36,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "glm-5.3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "automationBenchPartialScore": {
+      "group": "supplemental",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "enterpriseOpsGym": {
+      "group": "supplemental",
+      "availableN": 15,
+      "cohortN": 22,
+      "coveragePct": 68.18,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "grok-4.6",
+        "qwen3.8-max",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "itBenchSre": {
+      "group": "supplemental",
+      "availableN": 9,
+      "cohortN": 22,
+      "coveragePct": 40.91,
+      "missingModels": [
+        "gpt-6-astra",
+        "claude-opus-5",
+        "claude-fable-5",
+        "grok-4.6",
+        "gemini-3.7-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "briefcaseRubricPassRate": {
+      "group": "supplemental",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "gemini-3.7-flash"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "briefcaseTotalCost": {
+      "group": "supplemental",
+      "availableN": 0,
+      "cohortN": 22,
+      "coveragePct": 0.0,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "kimi-k3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "gemini-3.5-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "tauBanking": {
+      "group": "supplemental",
+      "availableN": 21,
+      "cohortN": 22,
+      "coveragePct": 95.45,
+      "missingModels": [
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "terminalBenchV21": {
+      "group": "supplemental",
+      "availableN": 0,
+      "cohortN": 22,
+      "coveragePct": 0.0,
+      "missingModels": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "kimi-k3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "gemini-3.5-flash",
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "providerClaimN": 0
+    },
+    "livebenchOverall": {
+      "group": "supplemental",
+      "label": "LiveBench Overall Score",
+      "availableN": 9,
+      "cohortN": 10,
+      "coveragePct": 90.0,
+      "missingModels": [
+        "Claude Opus 5.5"
+      ],
+      "sourceAvailableN": 21,
+      "sourceCohortN": 22,
+      "sourceMissingModels": [
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "2026_06_25",
+      "publishedN": 64,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "Claude Fable 5.1"
+      ]
+    },
+    "livebenchInstructionFollowing": {
+      "group": "primary",
+      "label": "Instruction Following (LiveBench)",
+      "availableN": 9,
+      "cohortN": 10,
+      "coveragePct": 90.0,
+      "missingModels": [
+        "Claude Opus 5.5"
+      ],
+      "sourceAvailableN": 21,
+      "sourceCohortN": 22,
+      "sourceMissingModels": [
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "2026_06_25",
+      "publishedN": 64,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "Claude Fable 5.1"
+      ]
+    },
+    "livebenchCostPerSuccessfulTask": {
+      "group": "supplemental",
+      "label": "LiveBench Cost Per Successful Task",
+      "availableN": 9,
+      "cohortN": 10,
+      "coveragePct": 90.0,
+      "missingModels": [
+        "Claude Opus 5.5"
+      ],
+      "sourceAvailableN": 21,
+      "sourceCohortN": 22,
+      "sourceMissingModels": [
+        "claude-opus-5-5"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "2026_06_25",
+      "publishedN": 64,
+      "supplementalMatchedN": 1,
+      "supplementalModels": [
+        "Claude Fable 5.1"
+      ]
+    },
+    "terminalBenchV4": {
+      "group": "supplemental",
+      "label": "Terminal-Bench 4.0",
+      "availableN": 7,
+      "cohortN": 10,
+      "coveragePct": 70.0,
+      "sourceAvailableN": 12,
+      "sourceCohortN": 22,
+      "officialMatchedN": 11,
+      "providerClaimMatchedN": 1,
+      "missingModels": [
+        "Kimi K3",
+        "Qwen3.8 Max",
+        "Claude Opus 5.5"
+      ],
+      "sourceMissingModels": [
+        "Kimi K3",
+        "GPT-5.5",
+        "GLM-5.3 Flash",
+        "DeepSeek V4 Pro",
+        "Qwen3.8 Max",
+        "Muse Spark 1.2",
+        "Gemini 3.6 Flash",
+        "GLM-5.2",
+        "Gemini 3.5 Flash",
+        "Claude Opus 5.5"
+      ],
+      "includedInPrimaryScore": false,
+      "sourceRelease": "4.0"
+    },
     "bugHuntFixedOf105": {
       "group": "primary",
       "label": "Bug Hunt Bench bugs fixed out of 105",
-      "availableN": 9,
-      "cohortN": 9,
+      "availableN": 10,
+      "cohortN": 10,
       "coveragePct": 100.0,
-      "sourceAvailableN": 9,
-      "sourceCohortN": 21,
-      "sourceCoveragePct": 42.86,
+      "sourceAvailableN": 10,
+      "sourceCohortN": 22,
+      "sourceCoveragePct": 45.45,
       "missingModels": [],
       "sourceMissingModels": [
         "Claude Fable 5",
@@ -109,538 +661,26 @@
       "includedInBugHuntEmphasisRanking": true,
       "sourceRelease": "105 planted bugs across two repositories; rolling public results snapshot",
       "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c"
-    },
-    "briefcaseElo": {
-      "group": "primary",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "gdpvalV21": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "automationBenchAA": {
-      "group": "primary",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "terminalBenchV40": {
-      "group": "primary",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "scicode": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "hle": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "gdpPdfAllPass": {
-      "group": "primary",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "critpt": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "omniAccuracy": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "omniNonHallucination": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "aaLcr": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "intelligenceIndex": {
-      "group": "primary",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": true,
-      "providerClaimN": 0
-    },
-    "aaEvalCost": {
-      "group": "primary",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "speed": {
-      "group": "primary",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "kimi-k3"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "gpqaDiamond": {
-      "group": "additional",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "mlcrOverall": {
-      "group": "supplemental",
-      "availableN": 18,
-      "cohortN": 21,
-      "coveragePct": 85.71,
-      "missingModels": [
-        "gpt-6-astra",
-        "grok-4.6",
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "harveyLab": {
-      "group": "supplemental",
-      "availableN": 11,
-      "cohortN": 21,
-      "coveragePct": 52.38,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "glm-5.3",
-        "grok-4.6",
-        "gemini-3.7-flash",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "deepseek-v4-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "apexAgents": {
-      "group": "supplemental",
-      "availableN": 5,
-      "cohortN": 21,
-      "coveragePct": 23.81,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "claude-opus-5",
-        "gpt-5.6-sol",
-        "claude-fable-5",
-        "glm-5.3",
-        "grok-4.6",
-        "gemini-3.7-flash",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "claude-opus-4.8",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "claude-sonnet-5",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "mmmuPro": {
-      "group": "supplemental",
-      "availableN": 12,
-      "cohortN": 21,
-      "coveragePct": 57.14,
-      "missingModels": [
-        "claude-fable-5",
-        "glm-5.3",
-        "grok-4.6",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "claude-opus-4.8",
-        "muse-spark-1.2",
-        "deepseek-v4-flash",
-        "glm-5.2"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "livecodebench": {
-      "group": "supplemental",
-      "availableN": 0,
-      "cohortN": 21,
-      "coveragePct": 0.0,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "claude-opus-5",
-        "gpt-5.6-sol",
-        "claude-fable-5",
-        "glm-5.3",
-        "kimi-k3",
-        "grok-4.6",
-        "gpt-5.6-luna",
-        "gpt-5.5",
-        "gemini-3.7-flash",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "claude-opus-4.8",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "claude-sonnet-5",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash",
-        "glm-5.2",
-        "gemini-3.5-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "aime25": {
-      "group": "supplemental",
-      "availableN": 0,
-      "cohortN": 21,
-      "coveragePct": 0.0,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "claude-opus-5",
-        "gpt-5.6-sol",
-        "claude-fable-5",
-        "glm-5.3",
-        "kimi-k3",
-        "grok-4.6",
-        "gpt-5.6-luna",
-        "gpt-5.5",
-        "gemini-3.7-flash",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "claude-opus-4.8",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "claude-sonnet-5",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash",
-        "glm-5.2",
-        "gemini-3.5-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "analystAgent": {
-      "group": "supplemental",
-      "availableN": 8,
-      "cohortN": 21,
-      "coveragePct": 38.1,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "glm-5.3",
-        "grok-4.6",
-        "gpt-5.6-luna",
-        "gemini-3.7-flash",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash",
-        "glm-5.2"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "automationBenchPartialScore": {
-      "group": "supplemental",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "enterpriseOpsGym": {
-      "group": "supplemental",
-      "availableN": 15,
-      "cohortN": 21,
-      "coveragePct": 71.43,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "grok-4.6",
-        "qwen3.8-max",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "itBenchSre": {
-      "group": "supplemental",
-      "availableN": 9,
-      "cohortN": 21,
-      "coveragePct": 42.86,
-      "missingModels": [
-        "gpt-6-astra",
-        "claude-opus-5",
-        "claude-fable-5",
-        "grok-4.6",
-        "gemini-3.7-flash",
-        "deepseek-v4-pro",
-        "claude-opus-4.8",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "claude-sonnet-5",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "briefcaseRubricPassRate": {
-      "group": "supplemental",
-      "availableN": 20,
-      "cohortN": 21,
-      "coveragePct": 95.24,
-      "missingModels": [
-        "gemini-3.7-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "briefcaseTotalCost": {
-      "group": "supplemental",
-      "availableN": 0,
-      "cohortN": 21,
-      "coveragePct": 0.0,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "claude-opus-5",
-        "gpt-5.6-sol",
-        "claude-fable-5",
-        "glm-5.3",
-        "kimi-k3",
-        "grok-4.6",
-        "gpt-5.6-luna",
-        "gpt-5.5",
-        "gemini-3.7-flash",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "claude-opus-4.8",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "claude-sonnet-5",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash",
-        "glm-5.2",
-        "gemini-3.5-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "tauBanking": {
-      "group": "supplemental",
-      "availableN": 21,
-      "cohortN": 21,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "terminalBenchV21": {
-      "group": "supplemental",
-      "availableN": 0,
-      "cohortN": 21,
-      "coveragePct": 0.0,
-      "missingModels": [
-        "gpt-6-astra",
-        "gemini-3.8-flash",
-        "claude-opus-5",
-        "gpt-5.6-sol",
-        "claude-fable-5",
-        "glm-5.3",
-        "kimi-k3",
-        "grok-4.6",
-        "gpt-5.6-luna",
-        "gpt-5.5",
-        "gemini-3.7-flash",
-        "glm-5.3-flash",
-        "deepseek-v4-pro",
-        "claude-opus-4.8",
-        "qwen3.8-max",
-        "muse-spark-1.2",
-        "claude-sonnet-5",
-        "deepseek-v4-flash",
-        "gemini-3.6-flash",
-        "glm-5.2",
-        "gemini-3.5-flash"
-      ],
-      "includedInPrimaryScore": false,
-      "providerClaimN": 0
-    },
-    "livebenchOverall": {
-      "group": "supplemental",
-      "label": "LiveBench Overall Score",
-      "availableN": 9,
-      "cohortN": 9,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "sourceAvailableN": 21,
-      "sourceCohortN": 21,
-      "sourceMissingModels": [],
-      "includedInPrimaryScore": false,
-      "sourceRelease": "2026_06_25",
-      "publishedN": 64,
-      "supplementalMatchedN": 1,
-      "supplementalModels": [
-        "Claude Fable 5.1"
-      ]
-    },
-    "livebenchInstructionFollowing": {
-      "group": "primary",
-      "label": "Instruction Following (LiveBench)",
-      "availableN": 9,
-      "cohortN": 9,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "sourceAvailableN": 21,
-      "sourceCohortN": 21,
-      "sourceMissingModels": [],
-      "includedInPrimaryScore": true,
-      "sourceRelease": "2026_06_25",
-      "publishedN": 64,
-      "supplementalMatchedN": 1,
-      "supplementalModels": [
-        "Claude Fable 5.1"
-      ]
-    },
-    "livebenchCostPerSuccessfulTask": {
-      "group": "supplemental",
-      "label": "LiveBench Cost Per Successful Task",
-      "availableN": 9,
-      "cohortN": 9,
-      "coveragePct": 100.0,
-      "missingModels": [],
-      "sourceAvailableN": 21,
-      "sourceCohortN": 21,
-      "sourceMissingModels": [],
-      "includedInPrimaryScore": false,
-      "sourceRelease": "2026_06_25",
-      "publishedN": 64,
-      "supplementalMatchedN": 1,
-      "supplementalModels": [
-        "Claude Fable 5.1"
-      ]
-    },
-    "terminalBenchV4": {
-      "group": "supplemental",
-      "label": "Terminal-Bench 4.0",
-      "availableN": 7,
-      "cohortN": 9,
-      "coveragePct": 77.78,
-      "sourceAvailableN": 12,
-      "sourceCohortN": 21,
-      "officialMatchedN": 11,
-      "providerClaimMatchedN": 1,
-      "missingModels": [
-        "Kimi K3",
-        "Qwen3.8 Max"
-      ],
-      "sourceMissingModels": [
-        "Kimi K3",
-        "GPT-5.5",
-        "GLM-5.3 Flash",
-        "DeepSeek V4 Pro",
-        "Qwen3.8 Max",
-        "Muse Spark 1.2",
-        "Gemini 3.6 Flash",
-        "GLM-5.2",
-        "Gemini 3.5 Flash"
-      ],
-      "includedInPrimaryScore": false,
-      "sourceRelease": "4.0"
     }
   },
   "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
   "note": "Missing values are preserved as null. Provider claims are separately source-typed and only eligible when benchmark version and evaluated model variant match; no legacy-version value is substituted into v4.3.2 components.",
+  "deepSweSource": {
+    "publisher": "Artificial Analysis",
+    "sourceType": "benchmark_owner",
+    "title": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+    "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1",
+    "indexVersion": "v1.5",
+    "metric": "Pass@1 (%)",
+    "methodology": "The chart states each benchmark score averages pass@1 across three attempts per task.",
+    "captureMethod": "Built-in browser rendered public chart; 25 of 25 configurations observed."
+  },
+  "deepSweConfigurationsN": 25,
   "externalBenchmarks": {
     "livebench": {
       "release": "2026_06_25",
       "matchedN": 21,
-      "cohortN": 21,
+      "cohortN": 22,
       "publishedN": 64,
       "supplementalMatchedN": 1,
       "supplementalModels": [
@@ -662,25 +702,25 @@
       "matchedN": 11,
       "providerClaimN": 1,
       "rankingAvailableN": 12,
-      "cohortN": 21
+      "cohortN": 22
     },
     "bugHunt": {
       "version": "105 planted bugs across two repositories; rolling public results snapshot",
       "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
-      "matchedN": 16,
-      "rankableOverlapN": 9,
-      "sourceCohortN": 21,
-      "primaryCohortN": 9,
-      "sourceCoveragePct": 76.19,
-      "primaryCoveragePct": 42.86,
-      "primaryWeightPct": 16.5289,
-      "emphasisWeightPct": 22.9008
+      "matchedN": 17,
+      "rankableOverlapN": 10,
+      "sourceCohortN": 22,
+      "primaryCohortN": 10,
+      "sourceCoveragePct": 77.27,
+      "primaryCoveragePct": 45.45,
+      "primaryWeightPct": 17.8571,
+      "emphasisWeightPct": 24.5902
     }
   },
   "scoring": {
-    "version": "v1.9.0",
-    "cohortN": 9,
-    "sourceCohortN": 21,
+    "version": "v1.9.1",
+    "cohortN": 10,
+    "sourceCohortN": 22,
     "rankingExcludedModels": [
       "Claude Fable 5",
       "GPT-5.5",
@@ -697,10 +737,10 @@
     ],
     "costMode": "aa-only",
     "costCoverage": {
-      "availableN": 9,
-      "cohortN": 9,
-      "sourceAvailableN": 20,
-      "sourceCohortN": 21,
+      "availableN": 10,
+      "cohortN": 10,
+      "sourceAvailableN": 21,
+      "sourceCohortN": 22,
       "missingModels": [],
       "sourceMissingModels": [
         "Gemini 3.7 Flash"
@@ -710,14 +750,12 @@
     "retainedDimensions": [
       "costComposite",
       "omniNonHallucination",
-      "livebenchInstructionFollowing",
       "deepswePassAt1",
       "gdpvalV21",
       "automationBenchAA",
       "aaLcr",
       "omniAccuracy",
       "hle",
-      "gpqaDiamond",
       "scicode",
       "critpt",
       "intelligenceIndex",
@@ -729,7 +767,8 @@
         "label": "Terminal-Bench 4.0",
         "missing": [
           "Kimi K3",
-          "Qwen3.8 Max"
+          "Qwen3.8 Max",
+          "Claude Opus 5.5"
         ],
         "sourceMissing": [
           "Kimi K3",
@@ -740,7 +779,30 @@
           "Muse Spark 1.2",
           "Gemini 3.6 Flash",
           "GLM-5.2",
-          "Gemini 3.5 Flash"
+          "Gemini 3.5 Flash",
+          "Claude Opus 5.5"
+        ],
+        "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
+      },
+      {
+        "key": "livebenchInstructionFollowing",
+        "label": "Instruction Following (LiveBench)",
+        "missing": [
+          "Claude Opus 5.5"
+        ],
+        "sourceMissing": [
+          "Claude Opus 5.5"
+        ],
+        "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
+      },
+      {
+        "key": "gpqaDiamond",
+        "label": "GPQA Diamond (legacy)",
+        "missing": [
+          "Claude Opus 5.5"
+        ],
+        "sourceMissing": [
+          "Claude Opus 5.5"
         ],
         "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
@@ -761,11 +823,11 @@
     "fields": {
       "costComposite": {
         "label": "Cost",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 9,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 10,
+        "sourceCohortN": 22,
         "sourceMissingModels": [
           "Claude Fable 5",
           "GPT-5.5",
@@ -784,24 +846,25 @@
       },
       "omniNonHallucination": {
         "label": "Non-Hallucination",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "terminalBenchV4": {
         "label": "Terminal-Bench 4.0",
         "availableN": 7,
-        "cohortN": 9,
+        "cohortN": 10,
         "missingModels": [
           "Kimi K3",
-          "Qwen3.8 Max"
+          "Qwen3.8 Max",
+          "Claude Opus 5.5"
         ],
         "sourceAvailableN": 12,
-        "sourceCohortN": 21,
+        "sourceCohortN": 22,
         "sourceMissingModels": [
           "Kimi K3",
           "GPT-5.5",
@@ -811,27 +874,32 @@
           "Muse Spark 1.2",
           "Gemini 3.6 Flash",
           "GLM-5.2",
-          "Gemini 3.5 Flash"
+          "Gemini 3.5 Flash",
+          "Claude Opus 5.5"
         ],
         "includedInPrimaryScore": false
       },
       "livebenchInstructionFollowing": {
         "label": "Instruction Following (LiveBench)",
         "availableN": 9,
-        "cohortN": 9,
-        "missingModels": [],
+        "cohortN": 10,
+        "missingModels": [
+          "Claude Opus 5.5"
+        ],
         "sourceAvailableN": 21,
-        "sourceCohortN": 21,
-        "sourceMissingModels": [],
-        "includedInPrimaryScore": true
+        "sourceCohortN": 22,
+        "sourceMissingModels": [
+          "Claude Opus 5.5"
+        ],
+        "includedInPrimaryScore": false
       },
       "deepswePassAt1": {
         "label": "DeepSWE v1.1",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 9,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 10,
+        "sourceCohortN": 22,
         "sourceMissingModels": [
           "Claude Fable 5",
           "GPT-5.5",
@@ -850,21 +918,21 @@
       },
       "gdpvalV21": {
         "label": "GDPval-AA v2.1",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "automationBenchAA": {
         "label": "AutomationBench-AA",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 20,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 21,
+        "sourceCohortN": 22,
         "sourceMissingModels": [
           "Gemini 3.7 Flash"
         ],
@@ -872,83 +940,87 @@
       },
       "aaLcr": {
         "label": "AA-LCR v1.1",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "omniAccuracy": {
         "label": "AA-Omniscience Accuracy",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "hle": {
         "label": "HLE",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "gpqaDiamond": {
         "label": "GPQA Diamond (legacy)",
         "availableN": 9,
-        "cohortN": 9,
-        "missingModels": [],
+        "cohortN": 10,
+        "missingModels": [
+          "Claude Opus 5.5"
+        ],
         "sourceAvailableN": 21,
-        "sourceCohortN": 21,
-        "sourceMissingModels": [],
-        "includedInPrimaryScore": true
+        "sourceCohortN": 22,
+        "sourceMissingModels": [
+          "Claude Opus 5.5"
+        ],
+        "includedInPrimaryScore": false
       },
       "scicode": {
         "label": "SciCode",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "critpt": {
         "label": "CritPt",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "intelligenceIndex": {
         "label": "AA Intelligence Index",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 22,
+        "sourceCohortN": 22,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "speed": {
         "label": "Speed",
-        "availableN": 8,
-        "cohortN": 9,
+        "availableN": 9,
+        "cohortN": 10,
         "missingModels": [
           "Kimi K3"
         ],
-        "sourceAvailableN": 20,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 21,
+        "sourceCohortN": 22,
         "sourceMissingModels": [
           "Kimi K3"
         ],
@@ -956,11 +1028,11 @@
       },
       "bugHuntFixedOf105": {
         "label": "Bug Hunt Bench bugs fixed out of 105",
-        "availableN": 9,
-        "cohortN": 9,
+        "availableN": 10,
+        "cohortN": 10,
         "missingModels": [],
-        "sourceAvailableN": 16,
-        "sourceCohortN": 21,
+        "sourceAvailableN": 17,
+        "sourceCohortN": 22,
         "sourceMissingModels": [
           "GPT-5.5",
           "Gemini 3.7 Flash",
@@ -968,75 +1040,69 @@
           "GLM-5.2",
           "Gemini 3.5 Flash"
         ],
-        "rankableOverlapN": 9,
+        "rankableOverlapN": 10,
         "includedInPrimaryScore": true
       }
     },
     "alternateRankings": {
       "bugHuntEmphasis": {
-        "matchedN": 9,
-        "cohortN": 21,
-        "benchmarkWeightPct": 22.9008,
+        "matchedN": 10,
+        "cohortN": 22,
+        "benchmarkWeightPct": 24.5902,
         "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
         "ranking": [
           {
             "rank": 1,
             "modelId": "gpt-5.6-sol",
-            "score": 73.4
+            "score": 73.6
           },
           {
             "rank": 2,
             "modelId": "gpt-6-astra",
-            "score": 71.2
+            "score": 68.6
           },
           {
             "rank": 3,
-            "modelId": "grok-4.6",
-            "score": 55.8
+            "modelId": "claude-opus-5-5",
+            "score": 65.6
           },
           {
             "rank": 4,
             "modelId": "gpt-5.6-luna",
-            "score": 52.5
+            "score": 52.4
           },
           {
             "rank": 5,
-            "modelId": "kimi-k3",
-            "score": 49.3
+            "modelId": "grok-4.6",
+            "score": 52.1
           },
           {
             "rank": 6,
-            "modelId": "gemini-3.8-flash",
-            "score": 46.3
+            "modelId": "kimi-k3",
+            "score": 48.3
           },
           {
             "rank": 7,
-            "modelId": "claude-opus-5",
-            "score": 37.5
+            "modelId": "gemini-3.8-flash",
+            "score": 40.9
           },
           {
             "rank": 8,
-            "modelId": "glm-5.3",
-            "score": 35.6
+            "modelId": "claude-opus-5",
+            "score": 36.5
           },
           {
             "rank": 9,
+            "modelId": "glm-5.3",
+            "score": 35.5
+          },
+          {
+            "rank": 10,
             "modelId": "qwen3.8-max",
-            "score": 28.4
+            "score": 26.4
           }
         ]
       }
     }
-  },
-  "deepSweSource": {
-    "publisher": "Artificial Analysis",
-    "sourceType": "benchmark_owner",
-    "title": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
-    "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1",
-    "indexVersion": "v1.5",
-    "metric": "Pass@1 (%)",
-    "methodology": "The chart states each benchmark score averages pass@1 across three attempts per task.",
-    "captureMethod": "Built-in browser rendered public chart; 25 of 25 configurations observed."
-  },
-  "deepSweConfigurationsN": 25
+  }
 }

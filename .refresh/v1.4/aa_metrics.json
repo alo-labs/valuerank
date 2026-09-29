@@ -1,7 +1,7 @@
 {
   "schemaVersion": "v1.6",
   "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
-  "observedAt": "2026-09-29T07:24:48Z",
+  "observedAt": "2026-09-29T15:22:26Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
   "primaryEvaluations": [
@@ -2635,6 +2635,122 @@
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
         "responseSha256": "32e7e69237f0ef51b8b1e102b74fe57ec8f1b3b228c0d15d450639181f035015",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-opus-5-5": {
+      "id": "claude-opus-5-5",
+      "displayName": "Claude Opus 5.5",
+      "aaSlug": "claude-opus-5-5",
+      "aaName": "Claude Opus 5.5 (Adaptive Reasoning, Max Effort, Default Fallback)",
+      "aaShortName": "Claude Opus 5.5 (max with fallback)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "release": {
+        "slug": "claude-opus-5-5",
+        "name": "Claude Opus 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseElo": 1821.85,
+        "intelligenceIndex": 57.6223698102963,
+        "gdpvalV21": 1846.17,
+        "automationBenchAA": 0.6953868128636069,
+        "terminalBenchV40": 0.595959595959596,
+        "scicode": 0.668981481481482,
+        "gdpPdfAllPass": 0.262,
+        "aaLcr": 0.846666666666667,
+        "hle": 0.613531047265987,
+        "gpqaDiamond": null,
+        "critpt": 0.317142857142857,
+        "omniAccuracy": 0.6621666666666667,
+        "omniNonHallucination": 0.41391218549580666,
+        "aaEvalCost": 8708.197642611496,
+        "speed": 92.5191493491242
+      },
+      "metricSources": {
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": null,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6953868128636069,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.6121212121212121,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1821.85
+      },
+      "extraction": {
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "responseSha256": null,
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
     }

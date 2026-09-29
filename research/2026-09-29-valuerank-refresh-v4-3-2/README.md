@@ -1,20 +1,21 @@
-# ValueRank v1.9.0 refresh record
+# ValueRank v1.9.1 refresh record
 
-- Capture date: 2026-09-29
+- Initial source capture: 2026-09-29; Claude Opus 5.5 inclusion follow-up: 2026-09-30
 - Benchmark source: Artificial Analysis Intelligence Index v4.3.2
-- Model universe: 21 AA-mapped ValueRank comparison candidates
-- DeepSWE source: AA Coding Agent Index v1.5, 25 configurations, 113 tasks
-- Primary ranked cohort: 9 candidates with exact AA DeepSWE variant and Bug Hunt owner results; 12 remain source-only
+- Model universe: 22 AA-mapped ValueRank comparison candidates
+- Primary ranked cohort: 10 candidates with exact AA DeepSWE v1.1 and Bug Hunt owner results; 12 remain source-only
+- Current main rank: 12 zero-gap dimensions, including DeepSWE v1.1 and Bug Hunt
 
-This refresh updates every generated ValueRank ranking view from source snapshots captured on 2026-09-29 or the latest pinned benchmark release available on that date. Graphify orientation identified the dependency path from the model roster and source adapters through `.refresh/v1.4/build_scores.py`, the cost routes, and the Markdown and site emitters.
+This refresh updates every generated ValueRank ranking view from pinned source snapshots and the 2026-09-30 Claude Opus 5.5 follow-up. Graphify orientation identified the dependency path from the model roster and source adapters through `.refresh/v1.4/build_scores.py`, the cost routes, and the Markdown and site emitters.
 
 ## Source changes and evidence boundaries
 
-- The final DeepSWE v1.1 result source is AA's [Coding Agent Index v1.5 chart](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1), read in the built-in browser. It shows 25 of 25 agent/model configurations over 113 tasks, with scores averaging pass@1 over three attempts per task. The full capture is pinned in .refresh/v1.4/aa_deepswe.json. The earlier DeepSWE Best page snapshot is retained only as historical audit material and is not used for current scores.
+- The final DeepSWE v1.1 result source is AA's [Coding Agent Index v1.5 chart](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1), read in the built-in browser. It shows 25 of 25 agent/model configurations over 113 tasks, with scores averaging pass@1 over three attempts per task. The full capture is pinned in `.refresh/v1.4/aa_deepswe.json`. The earlier DeepSWE Best page snapshot is retained only as historical audit material and is not used for current scores.
 - Artificial Analysis v4.3.2 replaces v4.2 as the current index input. Its current official component list includes AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-Omniscience Accuracy, AA-Omniscience Non-Hallucination, and AA-LCR v1.1. The captured first-party model payloads are pinned in `.refresh/v1.4/aa/aa_v432_snapshot.json`.
+- Claude Opus 5.5 is included using its exact AA model profile and max-effort benchmark variant. AA's DeepSWE v1.1 chart records Claude Code / Opus 5.5 / max at 68% pass@1. The Bug Hunt owner board records Claude Code / Opus 5.5 / max at a mean 41.7/105 across three runs. The AA profile identifies the evaluated configuration as max effort with fallback.
 - Gemini 3.7 Flash’s AA Index is marked as an owner estimate because the selected page identifies it as estimated. AA Omniscience reports hallucination rate; ValueRank derives Non-Hallucination as 1 minus that rate.
-- LiveBench uses the official 2026-06-25 release data pinned at commit `7be9f746f36a6f007dd78461f67cb7d06cfe2304`. The live release date is older than this capture date; the source commit and release date are recorded separately.
-- The Terminal-Bench 4.0 official view is a built-in-browser snapshot. Official leaderboard rows and provider claims are presented separately. The owner table directly matches 11 of 21 ValueRank models. DeepSeek’s 31.2% Terminal-Bench 4.0 provider claim raises eligible current-route coverage to 12/21; nine rows remain unavailable. The provider result is for V4.1-Flash, and DeepSeek states the `deepseek-v4-flash` API name currently routes to that model. It is not a direct measurement of retired V4 Flash.
+- LiveBench uses the official 2026-06-25 release data pinned at commit `7be9f746f36a6f007dd78461f67cb7d06cfe2304`. The release predates Claude Opus 5.5, so its unavailable Instruction Following result remains missing and that dimension is excluded from the zero-gap composite.
+- The Terminal-Bench 4.0 official view is a built-in-browser snapshot. Official leaderboard rows and provider claims are presented separately. The owner table directly matches 11 of 22 ValueRank models. DeepSeek’s 31.2% Terminal-Bench 4.0 provider claim raises eligible current-route coverage to 12/22; ten rows remain unavailable. The provider result is for V4.1-Flash, and DeepSeek states the `deepseek-v4-flash` API name currently routes to that model. It is not a direct measurement of retired V4 Flash.
 - Google DeepMind’s 34.0% GDP.pdf claim and 30.4% AutomationBench private-set claim are recorded as audit-only. The model card does not establish the exact selected effort and AA evaluation implementation needed to place either claim in a ValueRank model cell.
 
 ## Benchmark evidence policy
@@ -23,15 +24,19 @@ When a benchmark owner has not published a result for a model, use a model-provi
 
 ## Ranking and cost decisions
 
-- Set DeepSWE v1.1 priority to 25. On the 9-model primary cohort, DeepSWE carries a 20.66% ValueRank weight.
-- Include Bug Hunt Bench in the main rank at priority 20 (16.53%). Its owner scoreboard has 16 exact results in the 21-candidate roster; 9 of these overlap with exact AA DeepSWE model variants and enter the composite.
-- Keep a separate Bug Hunt emphasis view at priority 30 (22.90%) for the same 9 exact-overlap models.
+- Set DeepSWE v1.1 priority to 25. On the 10-model primary cohort, DeepSWE carries a 22.32% ValueRank weight.
+- Include Bug Hunt Bench in the main rank at priority 20 (17.86%). Its owner scoreboard has 17 exact results in the 22-candidate roster; 10 overlap with exact AA DeepSWE model variants and enter the composite.
+- Keep a separate Bug Hunt emphasis view at priority 30 (24.59%) for the same 10 exact-overlap models.
 - Preserve all 25 AA chart configurations and their agent, model variant, and effort fields. Do not transfer scores across model versions or composite-agent configurations; models lacking the full overlap remain visible without a composite rank.
-- Retain only zero-gap dimensions across the 9-model overlap. LiveBench Instruction Following and AutomationBench-AA are included. AA Speed and standalone Terminal-Bench 4.0 have gaps and remain supplemental.
-- Default/API Costs uses AA total evaluation cost for the fixed index suite; the Plan Costs view divides the same amount by each model's highest eligible Value Multiple. Both inputs cover all 9 primary models. No DeepSWE leaderboard average-cost values enter the current score.
-- Preserve only recorded historical ranks in the site history; this refresh adds the v1.9.0 cohort snapshot without copying current ranks into unobserved prior versions.
+- Retain only zero-gap dimensions across the 10-model overlap. LiveBench Instruction Following, legacy GPQA Diamond, Terminal-Bench 4.0, and AA Speed have gaps and remain supplemental. The main rank uses 12 dimensions.
+- Default/API Costs uses AA total evaluation cost for the fixed index suite; the Plan Costs view divides the same amount by each model's highest eligible Value Multiple. Both inputs cover all 10 primary models. No DeepSWE leaderboard average-cost values enter the current score.
+- Preserve only recorded historical ranks in the site history; this refresh adds the v1.9.1 cohort snapshot without copying current ranks into unobserved prior versions.
 - Cost rankings retain both API Costs and Plan Costs views. The ChatGPT Pro allowance multiplier is an estimate based on a community-observed allowance, not an official OpenAI quota; current subscription access and the pause on new sign-ups/upgrades are separately attributed. OpenCode Go’s GLM-5.3 Flash route reflects the current $60 monthly usage quota.
 - Provider inputs, plan routes, selected variants, and source values remain in the machine-readable refresh files.
+
+## Opus 5.5 inclusion follow-up
+
+The refresh initially omitted Claude Opus 5.5 because the ranking roster was pinned to 21 models. That roster guard is now 22, and the selected Opus 5.5 profile is represented consistently across AA, DeepSWE, Bug Hunt, LiveBench, Terminal-Bench, the scoring history, and publication outputs. Opus 5.5 ranks #3 overall and #1 on the primary quality score; it ranks #3 in the Bug Hunt emphasis view. LiveBench Instruction Following, legacy GPQA Diamond, Terminal-Bench 4.0, and AA Speed remain excluded from the primary composite where the required exact result is unavailable.
 
 ## Reproduction
 
@@ -46,4 +51,4 @@ python3 .refresh/v1.4/emit_v14_docs.py
 python3 scripts/generate_tb4_page.py
 ```
 
-The AA DeepSWE chart capture and TB4 snapshot were made with the built-in browser. AA page payloads, all 25 DeepSWE configurations, and the pinned LiveBench release data are preserved locally. The current scoring and external-source adapters derive the model roster from AA-mapped data; the historical DeepSWE Best snapshot is not required.
+The AA DeepSWE chart capture and TB4 snapshot were made with the built-in browser. AA page payloads, all 25 DeepSWE configurations, the Bug Hunt owner snapshot, and the pinned LiveBench release data are preserved locally. The current scoring and external-source adapters derive the model roster from AA-mapped data; the historical DeepSWE Best snapshot is not required.
