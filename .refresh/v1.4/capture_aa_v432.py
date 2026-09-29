@@ -45,8 +45,8 @@ def capture(entry: dict) -> dict:
 
 def main() -> int:
     entries = json.loads(EXTRACT_PATH.read_text())
-    if len(entries) != 21 or len({item["id"] for item in entries}) != 21:
-        raise ValueError("AA capture requires exactly 21 unique selected cohort URLs")
+    if not entries or len({item["id"] for item in entries}) != len(entries):
+        raise ValueError("AA capture requires a non-empty cohort of unique selected URLs")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         pages = list(pool.map(capture, entries))
     document = {

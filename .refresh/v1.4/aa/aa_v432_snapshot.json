@@ -6718,6 +6718,147 @@
         "captureMethod": "Built-in browser read of the official page's currentModel payload; raw HTML not retained.",
         "capturedAt": "2026-09-29T15:16:40Z"
       }
+    },
+    {
+      "id": "gpt-6-sol",
+      "requestedName": "GPT-6 Sol",
+      "url": "https://artificialanalysis.ai/models/gpt-6-sol",
+      "model": {
+        "id": "c50ea08c-88c0-4eb7-85b8-27f2bbf6d527",
+        "slug": "gpt-6-sol",
+        "name": "GPT-6 Sol (max)",
+        "shortName": "GPT-6 Sol (max)",
+        "isReasoning": true,
+        "effort": {"slug": "max", "label": "max", "level": 60},
+        "release": {"slug": "gpt-6-sol", "name": "GPT-6 Sol", "deprecatedTo": null},
+        "deprecated": false,
+        "intelligenceIndex": 47.5276426437724,
+        "intelligenceIndexIsEstimated": false,
+        "briefcaseBreakdown": {
+          "overall": {"elo": 1482.78},
+          "rubricPassRate": 0.4686868686868687,
+          "totalCost": 238.8123648528785,
+          "analyticalQuality": {"elo": 1652.11},
+          "presentation": {"elo": 1473.3}
+        },
+        "omniscienceAccuracy": 0.5448333333333333,
+        "omniscienceHallucinationRate": 0.6012449652142072,
+        "gdpPdfAllPass": 0.248,
+        "gdpval": 1486.93,
+        "gdpvalNormalized": 0.493465,
+        "terminalBench40": 0.439393939393939,
+        "scicode": 0.576388888888889,
+        "lcr": 0.836666666666667,
+        "hle": 0.479147358665431,
+        "gpqa": null,
+        "critpt": 0.308571428571429,
+        "automationBenchPartialScore": 0.6163369295959864,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 10,
+        "cacheHitPrice": 0.2,
+        "cacheHitDiscountPercent": 0.9,
+        "intelligenceIndexCost": {"total": 1545.8273278231068},
+        "outputSpeedVariance": {"median": 78.1139895681029},
+        "mlcrOverall": 0.161111111111111,
+        "itBenchSre": 0.494350282485876,
+        "mmmuPro": 0.832947976878613
+      },
+      "capture": {
+        "captureMethod": "Rendered official profile currentModel payload read in Codex in-app browser; raw HTML not retained.",
+        "capturedAt": "2026-09-29T18:12:25Z"
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "requestedName": "GPT-6 Luna",
+      "url": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "model": {
+        "id": "6fb13851-40ce-4bda-ad3f-6b38e0c5daa7",
+        "slug": "gpt-6-luna",
+        "name": "GPT-6 Luna (max)",
+        "shortName": "GPT-6 Luna (max)",
+        "isReasoning": true,
+        "effort": {"slug": "max", "label": "max", "level": 60},
+        "release": {"slug": "gpt-6-luna", "name": "GPT-6 Luna", "deprecatedTo": null},
+        "deprecated": false,
+        "intelligenceIndex": 37.2559686869738,
+        "intelligenceIndexIsEstimated": false,
+        "briefcaseBreakdown": {
+          "overall": {"elo": 1299.23},
+          "rubricPassRate": 0.37373737373737376,
+          "totalCost": 15.46927874060805
+        },
+        "omniscienceAccuracy": 0.43783333333333335,
+        "omniscienceHallucinationRate": 0.7672694930329084,
+        "gdpPdfAllPass": 0.204,
+        "gdpval": 1367.09,
+        "gdpvalNormalized": 0.433545,
+        "terminalBench40": 0.126262626262626,
+        "scicode": 0.546296296296296,
+        "lcr": 0.833333333333333,
+        "hle": 0.385078776645042,
+        "gpqa": null,
+        "critpt": 0.194285714285714,
+        "automationBenchPartialScore": 0.5316814034483175,
+        "price1mInputTokens": 0.1,
+        "price1mOutputTokens": 0.5,
+        "cacheHitPrice": 0.01,
+        "cacheHitDiscountPercent": 0.9,
+        "intelligenceIndexCost": {"total": 122.28821559329936},
+        "outputSpeedVariance": {"median": 148.457536628083},
+        "mlcrOverall": 0.161111111111111,
+        "mmmuPro": 0.755491329479769
+      },
+      "capture": {
+        "captureMethod": "Rendered official profile currentModel payload read in Codex in-app browser; raw HTML not retained.",
+        "capturedAt": "2026-09-29T18:12:25Z"
+      }
+    },
+    {
+      "id": "grok-4.7",
+      "requestedName": "Grok 4.7",
+      "url": "https://artificialanalysis.ai/models/grok-4-7",
+      "model": {
+        "id": "59627802-1546-422c-9a65-65b61c022d36",
+        "slug": "grok-4-7",
+        "name": "Grok 4.7 (xhigh)",
+        "shortName": "Grok 4.7 (xhigh)",
+        "isReasoning": true,
+        "effort": {"slug": "xhigh", "label": "xhigh", "level": 50},
+        "release": {"slug": "grok-4-7", "name": "Grok 4.7", "deprecatedTo": null},
+        "deprecated": false,
+        "intelligenceIndex": 46.4465506302286,
+        "intelligenceIndexIsEstimated": false,
+        "briefcaseBreakdown": {
+          "overall": {"elo": 1657.2},
+          "rubricPassRate": 0.5535353535353535,
+          "totalCost": 846.6175739776165
+        },
+        "omniscienceAccuracy": 0.4745,
+        "omniscienceHallucinationRate": 0.29337139232477005,
+        "gdpPdfAllPass": 0.2,
+        "gdpval": 1695.21,
+        "gdpvalNormalized": 0.597605,
+        "terminalBench40": 0.257575757575758,
+        "scicode": 0.574074074074074,
+        "lcr": 0.766666666666667,
+        "hle": 0.431417979610751,
+        "gpqa": null,
+        "critpt": 0.177142857142857,
+        "automationBenchPartialScore": 0.6555835148969458,
+        "price1mInputTokens": 2,
+        "price1mOutputTokens": 6,
+        "cacheHitPrice": 0.5,
+        "cacheHitDiscountPercent": 0.75,
+        "intelligenceIndexCost": {"total": 4967.354257472305},
+        "outputSpeedVariance": {"median": 70.6406219593259},
+        "mlcrOverall": 0.15,
+        "itBenchSre": 0.420809792843691
+      },
+      "capture": {
+        "captureMethod": "Rendered official profile currentModel payload read in Codex in-app browser; raw HTML not retained.",
+        "capturedAt": "2026-09-29T18:12:25Z"
+      }
     }
   ]
 }

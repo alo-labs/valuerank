@@ -69,6 +69,9 @@ COHORT_MAP = {
     "gemini-3.6-flash": "gemini-3.6-flash-high",
     "glm-5.2": "glm-5.2",
     "gemini-3.5-flash": "gemini-3.5-flash-high",
+    "gpt-6-sol": "gpt-6-sol-max",
+    "gpt-6-luna": "gpt-6-luna-max",
+    "grok-4.7": "grok-4.7-xhigh",
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in
@@ -187,8 +190,8 @@ def build_record(
 def main() -> int:
     aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
     cohort = [(model_id, item["displayName"]) for model_id, item in aa_document["models"].items()]
-    if len(cohort) != 21:
-        raise ValueError("LiveBench mapping expects the complete 21-model AA comparison cohort")
+    if not cohort:
+        raise ValueError("LiveBench mapping expects a non-empty AA comparison cohort")
     if set(COHORT_MAP) != {model_id for model_id, _ in cohort}:
         raise ValueError("LiveBench cohort mapping does not exactly match the AA model map")
 

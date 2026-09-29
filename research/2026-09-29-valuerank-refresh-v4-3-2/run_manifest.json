@@ -56,11 +56,11 @@
     "Claude Opus 5.5 is mapped to Claude Max 20x using Anthropic's current plan and model availability pages; its 40.0x route value is an inherited independent high-water estimate, not a model-specific usage measurement."
   ],
   "scoring": {
-    "version": "v1.9.2",
+    "version": "v1.9.3",
     "publishDate": "September 30, 2026",
-    "observedAt": "2026-09-29T17:00:16Z",
-    "cohortN": 10,
-    "sourceCohortN": 22,
+    "observedAt": "2026-09-29T18:17:05Z",
+    "cohortN": 13,
+    "sourceCohortN": 25,
     "rankingExcludedModels": [
       "Claude Fable 5",
       "GPT-5.5",
@@ -111,7 +111,10 @@
         "missing": [
           "Kimi K3",
           "Qwen3.8 Max",
-          "Claude Opus 5.5"
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7"
         ],
         "sourceMissing": [
           "Kimi K3",
@@ -123,7 +126,10 @@
           "Gemini 3.6 Flash",
           "GLM-5.2",
           "Gemini 3.5 Flash",
-          "Claude Opus 5.5"
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7"
         ],
         "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
@@ -131,10 +137,16 @@
         "key": "livebenchInstructionFollowing",
         "label": "Instruction Following (LiveBench)",
         "missing": [
-          "Claude Opus 5.5"
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7"
         ],
         "sourceMissing": [
-          "Claude Opus 5.5"
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7"
         ],
         "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
@@ -142,10 +154,16 @@
         "key": "gpqaDiamond",
         "label": "GPQA Diamond (legacy)",
         "missing": [
-          "Claude Opus 5.5"
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7"
         ],
         "sourceMissing": [
-          "Claude Opus 5.5"
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7"
         ],
         "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
@@ -164,10 +182,10 @@
     "zeroGap": true,
     "costMode": "aa-only",
     "costCoverage": {
-      "availableN": 10,
-      "cohortN": 10,
-      "sourceAvailableN": 21,
-      "sourceCohortN": 22,
+      "availableN": 13,
+      "cohortN": 13,
+      "sourceAvailableN": 24,
+      "sourceCohortN": 25,
       "missingModels": [],
       "sourceMissingModels": [
         "Gemini 3.7 Flash"
@@ -176,88 +194,89 @@
     },
     "pareto": [
       "GPT-5.6 Sol",
-      "Grok 4.6",
       "GPT-5.6 Luna",
-      "Claude Opus 5.5"
+      "Claude Opus 5.5",
+      "GPT-6 Sol",
+      "GPT-6 Luna"
     ],
     "topFive": [
       {
         "rank": 1,
-        "name": "GPT-5.6 Sol",
-        "overallScore": 72.2,
-        "qualityScore": 77.0
+        "name": "GPT-6 Sol",
+        "overallScore": 70.5,
+        "qualityScore": 66.9
       },
       {
         "rank": 2,
-        "name": "GPT-6 Astra",
-        "overallScore": 65.8,
-        "qualityScore": 75.1
+        "name": "GPT-5.6 Sol",
+        "overallScore": 70.0,
+        "qualityScore": 75.8
       },
       {
         "rank": 3,
-        "name": "Claude Opus 5.5",
-        "overallScore": 64.5,
-        "qualityScore": 83.0
+        "name": "GPT-6 Astra",
+        "overallScore": 64.8,
+        "qualityScore": 73.9
       },
       {
         "rank": 4,
-        "name": "Grok 4.6",
-        "overallScore": 51.8,
-        "qualityScore": 44.4
+        "name": "Claude Opus 5.5",
+        "overallScore": 63.6,
+        "qualityScore": 81.9
       },
       {
         "rank": 5,
-        "name": "GPT-5.6 Luna",
-        "overallScore": 51.1,
-        "qualityScore": 37.1
+        "name": "Grok 4.7",
+        "overallScore": 57.8,
+        "qualityScore": 69.6
       }
     ],
     "bugHuntEmphasis": {
-      "matchedN": 10,
-      "cohortN": 22,
+      "matchedN": 13,
+      "cohortN": 25,
       "benchmarkWeightPct": 24.5902,
       "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
       "topFive": [
         {
           "rank": 1,
           "name": "GPT-5.6 Sol",
-          "score": 73.6,
+          "score": 71.8,
           "fixedOf105": 43.5
         },
         {
           "rank": 2,
-          "name": "GPT-6 Astra",
-          "score": 68.6,
-          "fixedOf105": 45.0
+          "name": "GPT-6 Sol",
+          "score": 70.2,
+          "fixedOf105": 29.3
         },
         {
           "rank": 3,
-          "name": "Claude Opus 5.5",
-          "score": 65.6,
-          "fixedOf105": 41.7
+          "name": "GPT-6 Astra",
+          "score": 67.7,
+          "fixedOf105": 45.0
         },
         {
           "rank": 4,
-          "name": "GPT-5.6 Luna",
-          "score": 52.4,
-          "fixedOf105": 31.3
+          "name": "Claude Opus 5.5",
+          "score": 65.2,
+          "fixedOf105": 41.7
         },
         {
           "rank": 5,
-          "name": "Grok 4.6",
-          "score": 52.1,
-          "fixedOf105": 28.7
+          "name": "Grok 4.7",
+          "score": 57.8,
+          "fixedOf105": 28.8
         }
       ]
     },
     "externalCoverage": {
-      "livebench": "21/22",
+      "livebench": "21/25",
       "livebenchPublishedN": 64,
       "livebenchSupplementalModels": [
         "claude-fable-5-1"
       ],
-      "bugHunt": "17/22 owner matches; 10 exact AA DeepSWE plus Bug Hunt overlaps rank in the primary composite",
-      "terminalBenchV4": "12/22 including 1 provider claim"
+      "bugHunt": "20/25 owner matches; 13 exact AA DeepSWE plus Bug Hunt overlaps rank in the primary composite",
+      "terminalBenchV4": "12/25 including 1 provider claim"
     },
     "weights": [
       {
@@ -354,9 +373,9 @@
         "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv",
         "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md"
       },
-      "matchedN": 10,
-      "cohortN": 22,
-      "coveragePct": 45.45,
+      "matchedN": 13,
+      "cohortN": 25,
+      "coveragePct": 52.0,
       "basePrioritySum": 92,
       "benchmarkPriority": 30,
       "totalPriority": 122,
@@ -489,80 +508,104 @@
           "modelId": "gpt-5.6-sol",
           "name": "GPT-5.6 Sol",
           "fixedOf105": 43.5,
-          "emphasisScore": 73.6,
-          "primaryRank": 1
-        },
-        {
-          "rank": 2,
-          "modelId": "gpt-6-astra",
-          "name": "GPT-6 Astra",
-          "fixedOf105": 45.0,
-          "emphasisScore": 68.6,
+          "emphasisScore": 71.8,
           "primaryRank": 2
         },
         {
+          "rank": 2,
+          "modelId": "gpt-6-sol",
+          "name": "GPT-6 Sol",
+          "fixedOf105": 29.3,
+          "emphasisScore": 70.2,
+          "primaryRank": 1
+        },
+        {
           "rank": 3,
-          "modelId": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
-          "fixedOf105": 41.7,
-          "emphasisScore": 65.6,
+          "modelId": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "fixedOf105": 45.0,
+          "emphasisScore": 67.7,
           "primaryRank": 3
         },
         {
           "rank": 4,
-          "modelId": "gpt-5.6-luna",
-          "name": "GPT-5.6 Luna",
-          "fixedOf105": 31.3,
-          "emphasisScore": 52.4,
-          "primaryRank": 5
-        },
-        {
-          "rank": 5,
-          "modelId": "grok-4.6",
-          "name": "Grok 4.6",
-          "fixedOf105": 28.7,
-          "emphasisScore": 52.1,
+          "modelId": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "fixedOf105": 41.7,
+          "emphasisScore": 65.2,
           "primaryRank": 4
         },
         {
+          "rank": 5,
+          "modelId": "grok-4.7",
+          "name": "Grok 4.7",
+          "fixedOf105": 28.8,
+          "emphasisScore": 57.8,
+          "primaryRank": 5
+        },
+        {
           "rank": 6,
-          "modelId": "kimi-k3",
-          "name": "Kimi K3",
-          "fixedOf105": 21.0,
-          "emphasisScore": 48.3,
+          "modelId": "gpt-5.6-luna",
+          "name": "GPT-5.6 Luna",
+          "fixedOf105": 31.3,
+          "emphasisScore": 52.8,
           "primaryRank": 6
         },
         {
           "rank": 7,
-          "modelId": "gemini-3.8-flash",
-          "name": "Gemini 3.8 Flash",
-          "fixedOf105": 18.0,
-          "emphasisScore": 40.9,
-          "primaryRank": 7
-        },
-        {
-          "rank": 8,
-          "modelId": "claude-opus-5",
-          "name": "Claude Opus 5",
-          "fixedOf105": 27.0,
-          "emphasisScore": 36.5,
-          "primaryRank": 9
-        },
-        {
-          "rank": 9,
-          "modelId": "glm-5.3",
-          "name": "GLM-5.3",
-          "fixedOf105": 19.0,
-          "emphasisScore": 35.5,
+          "modelId": "grok-4.6",
+          "name": "Grok 4.6",
+          "fixedOf105": 28.7,
+          "emphasisScore": 48.6,
           "primaryRank": 8
         },
         {
+          "rank": 8,
+          "modelId": "kimi-k3",
+          "name": "Kimi K3",
+          "fixedOf105": 21.0,
+          "emphasisScore": 47.3,
+          "primaryRank": 7
+        },
+        {
+          "rank": 9,
+          "modelId": "gemini-3.8-flash",
+          "name": "Gemini 3.8 Flash",
+          "fixedOf105": 18.0,
+          "emphasisScore": 38.1,
+          "primaryRank": 9
+        },
+        {
           "rank": 10,
+          "modelId": "claude-opus-5",
+          "name": "Claude Opus 5",
+          "fixedOf105": 27.0,
+          "emphasisScore": 35.3,
+          "primaryRank": 12
+        },
+        {
+          "rank": 11,
+          "modelId": "glm-5.3",
+          "name": "GLM-5.3",
+          "fixedOf105": 19.0,
+          "emphasisScore": 34.7,
+          "primaryRank": 10
+        },
+        {
+          "rank": 12,
+          "modelId": "gpt-6-luna",
+          "name": "GPT-6 Luna",
+          "fixedOf105": 18.3,
+          "emphasisScore": 33.4,
+          "primaryRank": 11
+        },
+        {
+          "rank": 13,
           "modelId": "qwen3.8-max",
           "name": "Qwen3.8 Max",
           "fixedOf105": 25.7,
-          "emphasisScore": 26.4,
-          "primaryRank": 10
+          "emphasisScore": 27.0,
+          "primaryRank": 13
         }
       ]
     },
@@ -570,13 +613,22 @@
       "terminalBenchV4": [
         "Kimi K3",
         "Qwen3.8 Max",
-        "Claude Opus 5.5"
+        "Claude Opus 5.5",
+        "GPT-6 Sol",
+        "GPT-6 Luna",
+        "Grok 4.7"
       ],
       "livebenchInstructionFollowing": [
-        "Claude Opus 5.5"
+        "Claude Opus 5.5",
+        "GPT-6 Sol",
+        "GPT-6 Luna",
+        "Grok 4.7"
       ],
       "gpqaDiamond": [
-        "Claude Opus 5.5"
+        "Claude Opus 5.5",
+        "GPT-6 Sol",
+        "GPT-6 Luna",
+        "Grok 4.7"
       ],
       "speed": [
         "Kimi K3"

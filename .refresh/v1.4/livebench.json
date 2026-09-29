@@ -76,9 +76,9 @@
       "summarize"
     ]
   },
-  "cohortN": 22,
+  "cohortN": 25,
   "matchedN": 21,
-  "missingModels": ["claude-opus-5-5"],
+  "missingModels": ["claude-opus-5-5", "gpt-6-sol", "gpt-6-luna", "grok-4.7"],
   "models": {
     "gpt-6-astra": {
       "modelId": "gpt-6-astra",
@@ -994,12 +994,48 @@
       "overallScore": null,
       "instructionFollowingScore": null,
       "costPerSuccessfulTaskUsd": null
+    },
+    "gpt-6-sol": {
+      "modelId": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "not present in LiveBench 2026-06-25 release",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "gpt-6-luna": {
+      "modelId": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "not present in LiveBench 2026-06-25 release",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "grok-4.7": {
+      "modelId": "grok-4.7",
+      "name": "Grok 4.7",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "not present in LiveBench 2026-06-25 release",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
     }
   },
   "supplementalN": 1,
   "supplementalMatchedN": 1,
   "publishedN": 64,
-  "representedN": 22,
+  "representedN": 25,
   "supplementalModels": {
     "claude-fable-5-1": {
       "modelId": "claude-fable-5-1",

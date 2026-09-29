@@ -355,6 +355,51 @@
       "sourceType": null,
       "providerClaimFound": false,
       "note": "No Bug Hunt owner result or matching provider-published claim was found by the focused search as of the snapshot."
+    },
+    {
+      "modelId": "gpt-6-sol",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6 Sol MAX - mean of 3",
+      "fixedOf105": 29.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "verified ceiling",
+      "harness": "Codex CLI",
+      "route": "OpenAI",
+      "sourceType": "benchmark_owner",
+      "note": "Owner-published mean of three runs."
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6 Luna MAX - mean of 3",
+      "fixedOf105": 18.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "verified ceiling",
+      "harness": "Codex CLI",
+      "route": "OpenAI",
+      "sourceType": "benchmark_owner",
+      "note": "Owner-published mean of three runs."
+    },
+    {
+      "modelId": "grok-4.7",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Grok 4.7 (xhigh) seq - mean of 4",
+      "fixedOf105": 28.8,
+      "sampleN": 4,
+      "aggregation": "mean",
+      "effort": "xhigh",
+      "effortStatus": "verified ceiling",
+      "harness": "Grok Build CLI (ACP)",
+      "route": "xAI",
+      "sourceType": "benchmark_owner",
+      "note": "Owner-published sequential-run mean of four runs."
     }
   ],
   "excludedResults": [

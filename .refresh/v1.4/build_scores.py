@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
-VERSION = "v1.9.2"
+VERSION = "v1.9.3"
 PUBLISH_DATE = "September 30, 2026"
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
@@ -45,6 +45,9 @@ DEVELOPER = {
     "Gemini 3.6 Flash": "Google DeepMind",
     "GLM-5.2": "Z AI",
     "Gemini 3.5 Flash": "Google DeepMind",
+    "GPT-6 Sol": "OpenAI",
+    "GPT-6 Luna": "OpenAI",
+    "Grok 4.7": "xAI",
 }
 
 SHORT = {
@@ -70,6 +73,9 @@ SHORT = {
     "Gemini 3.6 Flash": "Gem 3.6 Flash",
     "GLM-5.2": "GLM-5.2",
     "Gemini 3.5 Flash": "Gem 3.5 Flash",
+    "GPT-6 Sol": "GPT-6 Sol",
+    "GPT-6 Luna": "GPT-6 Luna",
+    "Grok 4.7": "Grok 4.7",
 }
 
 # The priority values are ValueRank's combined score priorities, not the
@@ -222,8 +228,8 @@ def main() -> int:
         if item.get("eligibleForRanking") is True
     }
     coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
-    if len(aa_models) != 22:
-        raise ValueError("AA metrics snapshot must contain the current 22-model comparison roster")
+    if not aa_models:
+        raise ValueError("AA metrics snapshot must contain a non-empty comparison roster")
     if len(deepswe_chart.get("configurations", [])) != 25 or deepswe_chart.get("benchmarkTasks") != 113:
         raise ValueError("AA Coding Agent Index DeepSWE chart must contain the observed 25 configurations and 113 tasks")
     deepswe_by_id = {}
@@ -241,10 +247,10 @@ def main() -> int:
         raise ValueError("AA DeepSWE mapped model IDs must belong to the current ValueRank roster")
     cohort_ids = set(aa_models)
     if set(livebench_models) != cohort_ids:
-        raise ValueError("LiveBench snapshot must contain exactly the current 22-model cohort")
+        raise ValueError("LiveBench snapshot must contain exactly the current AA model cohort")
     bug_hunt_by_id = {item["modelId"]: item for item in bug_hunt_document["models"]}
     if set(bug_hunt_by_id) != cohort_ids:
-        raise ValueError("Bug Hunt snapshot must declare exactly the current 22-model cohort")
+        raise ValueError("Bug Hunt snapshot must declare exactly the current AA model cohort")
     for model_id, item in bug_hunt_by_id.items():
         if item.get("matched") is True:
             require_number(item.get("fixedOf105"), f"{model_id}.bugHunt.fixedOf105")

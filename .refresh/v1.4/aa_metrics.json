@@ -1,7 +1,7 @@
 {
   "schemaVersion": "v1.6",
   "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
-  "observedAt": "2026-09-29T15:22:26Z",
+  "observedAt": "2026-09-29T18:16:57Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
   "primaryEvaluations": [
@@ -2745,6 +2745,354 @@
         "tauBanking": null,
         "terminalBenchV21": null,
         "briefcaseElo": 1821.85
+      },
+      "extraction": {
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "responseSha256": null,
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "gpt-6-sol": {
+      "id": "gpt-6-sol",
+      "displayName": "GPT-6 Sol",
+      "aaSlug": "gpt-6-sol",
+      "aaName": "GPT-6 Sol (max)",
+      "aaShortName": "GPT-6 Sol (max)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+      "release": {
+        "slug": "gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseElo": 1482.78,
+        "intelligenceIndex": 47.5276426437724,
+        "gdpvalV21": 1486.93,
+        "automationBenchAA": 0.6163369295959864,
+        "terminalBenchV40": 0.439393939393939,
+        "scicode": 0.576388888888889,
+        "gdpPdfAllPass": 0.248,
+        "aaLcr": 0.836666666666667,
+        "hle": 0.479147358665431,
+        "gpqaDiamond": null,
+        "critpt": 0.308571428571429,
+        "omniAccuracy": 0.5448333333333333,
+        "omniNonHallucination": 0.3987550347857928,
+        "aaEvalCost": 1545.8273278231068,
+        "speed": 78.1139895681029
+      },
+      "metricSources": {
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.161111111111111,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": 0.832947976878613,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6163369295959864,
+        "enterpriseOpsGym": null,
+        "itBenchSre": 0.494350282485876,
+        "briefcaseRubricPassRate": 0.4686868686868687,
+        "briefcaseTotalCost": 238.8123648528785,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1482.78
+      },
+      "extraction": {
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "responseSha256": null,
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "gpt-6-luna": {
+      "id": "gpt-6-luna",
+      "displayName": "GPT-6 Luna",
+      "aaSlug": "gpt-6-luna",
+      "aaName": "GPT-6 Luna (max)",
+      "aaShortName": "GPT-6 Luna (max)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "release": {
+        "slug": "gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseElo": 1299.23,
+        "intelligenceIndex": 37.2559686869738,
+        "gdpvalV21": 1367.09,
+        "automationBenchAA": 0.5316814034483175,
+        "terminalBenchV40": 0.126262626262626,
+        "scicode": 0.546296296296296,
+        "gdpPdfAllPass": 0.204,
+        "aaLcr": 0.833333333333333,
+        "hle": 0.385078776645042,
+        "gpqaDiamond": null,
+        "critpt": 0.194285714285714,
+        "omniAccuracy": 0.43783333333333335,
+        "omniNonHallucination": 0.23273050696709163,
+        "aaEvalCost": 122.28821559329936,
+        "speed": 148.457536628083
+      },
+      "metricSources": {
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.161111111111111,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": 0.755491329479769,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.5316814034483175,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.37373737373737376,
+        "briefcaseTotalCost": 15.46927874060805,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1299.23
+      },
+      "extraction": {
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "responseSha256": null,
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "grok-4.7": {
+      "id": "grok-4.7",
+      "displayName": "Grok 4.7",
+      "aaSlug": "grok-4-7",
+      "aaName": "Grok 4.7 (xhigh)",
+      "aaShortName": "Grok 4.7 (xhigh)",
+      "aaVariant": "xhigh",
+      "aaUrl": "https://artificialanalysis.ai/models/grok-4-7",
+      "release": {
+        "slug": "grok-4-7",
+        "name": "Grok 4.7",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseElo": 1657.2,
+        "intelligenceIndex": 46.4465506302286,
+        "gdpvalV21": 1695.21,
+        "automationBenchAA": 0.6555835148969458,
+        "terminalBenchV40": 0.257575757575758,
+        "scicode": 0.574074074074074,
+        "gdpPdfAllPass": 0.2,
+        "aaLcr": 0.766666666666667,
+        "hle": 0.431417979610751,
+        "gpqaDiamond": null,
+        "critpt": 0.177142857142857,
+        "omniAccuracy": 0.4745,
+        "omniNonHallucination": 0.70662860767523,
+        "aaEvalCost": 4967.354257472305,
+        "speed": 70.6406219593259
+      },
+      "metricSources": {
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.15,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6555835148969458,
+        "enterpriseOpsGym": null,
+        "itBenchSre": 0.420809792843691,
+        "briefcaseRubricPassRate": 0.5535353535353535,
+        "briefcaseTotalCost": 846.6175739776165,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1657.2
       },
       "extraction": {
         "htmlSnapshot": null,

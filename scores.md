@@ -1,6 +1,6 @@
 # ValueRank v1.9.2 Scores
 
-**Updated:** September 30, 2026 · **Cohort:** 10 · **Retained dimensions:** 12 · **Default cost basis:** API Costs (AA total evaluation cost)
+**Updated:** September 30, 2026 · **Cohort:** 13 · **Retained dimensions:** 12 · **Default cost basis:** API Costs (AA total evaluation cost)
 
 API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple. The site switcher recalculates the main rank and cost-based charts using the selected basis.
 
@@ -8,39 +8,45 @@ API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same
 
 | Rank | Model | Overall | Quality | Quality Rank | AA eval-cost penalty (lower better) |
 |---:|---|---:|---:|---:|---:|
-| 1 | GPT-5.6 Sol | 72.2 | 77.0 | 2 | 39.79 |
-| 2 | GPT-6 Astra | 65.8 | 75.1 | 3 | 43.67 |
-| 3 | Claude Opus 5.5 | 64.5 | 83.0 | 1 | 100.00 |
-| 4 | Grok 4.6 | 51.8 | 44.4 | 5 | 22.24 |
-| 5 | GPT-5.6 Luna | 51.1 | 37.1 | 7 | 3.67 |
-| 6 | Kimi K3 | 50.7 | 52.5 | 4 | 42.01 |
-| 7 | Gemini 3.8 Flash | 44.5 | 31.7 | 8 | 18.63 |
-| 8 | GLM-5.3 | 37.7 | 29.4 | 9 | 28.75 |
-| 9 | Claude Opus 5 | 35.8 | 42.9 | 6 | 83.54 |
-| 10 | Qwen3.8 Max | 25.8 | 26.9 | 10 | 56.67 |
+| 1 | GPT-6 Sol | 70.5 | 66.9 | 5 | 17.75 |
+| 2 | GPT-5.6 Sol | 70.0 | 75.8 | 2 | 39.79 |
+| 3 | GPT-6 Astra | 64.8 | 73.9 | 3 | 43.67 |
+| 4 | Claude Opus 5.5 | 63.6 | 81.9 | 1 | 100.00 |
+| 5 | Grok 4.7 | 57.8 | 69.6 | 4 | 57.04 |
+| 6 | GPT-5.6 Luna | 50.8 | 39.0 | 9 | 3.67 |
+| 7 | Kimi K3 | 49.3 | 51.4 | 6 | 42.01 |
+| 8 | Grok 4.6 | 48.5 | 43.3 | 7 | 22.24 |
+| 9 | Gemini 3.8 Flash | 41.5 | 31.9 | 10 | 18.63 |
+| 10 | GLM-5.3 | 36.3 | 30.0 | 11 | 28.75 |
+| 11 | GPT-6 Luna | 35.6 | 17.1 | 13 | 1.40 |
+| 12 | Claude Opus 5 | 34.7 | 42.3 | 8 | 83.54 |
+| 13 | Qwen3.8 Max | 26.5 | 26.9 | 12 | 56.67 |
 
 ## Bug Hunt Emphasis Ranking
 
-Bug Hunt is included in the main **10-model primary ranking** at **17.86%**. The companion emphasis view uses the same cohort and increases Bug Hunt's weight to **24.59%** by re-ranking the other retained dimensions within those models.
+Bug Hunt is included in the main **13-model primary ranking** at **17.86%**. The companion emphasis view uses the same cohort and increases Bug Hunt's weight to **24.59%** by re-ranking the other retained dimensions within those models.
 
 | Bug Hunt rank | Model | Fixed / 105 | Emphasis score | Runs / aggregation | Effort | Harness / route | Primary rank |
 |---:|---|---:|---:|---|---|---|---:|
-| 1 | GPT-5.6 Sol | 43.5/105 | 73.6 | n=2 (mean) | max (max) | Codex CLI / OpenAI | 1 |
-| 2 | GPT-6 Astra | 45/105 | 68.6 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 2 |
-| 3 | Claude Opus 5.5 | 41.7/105 | 65.6 | n=3 (mean) | max (max) | Claude Code / Anthropic | 3 |
-| 4 | GPT-5.6 Luna | 31.3/105 | 52.4 | n=3 (mean) | max (max) | Codex CLI / OpenAI | 5 |
-| 5 | Grok 4.6 | 28.7/105 | 52.1 | n=3 (mean) | xhigh (verified ceiling) | Grok Build CLI (ACP) / xAI | 4 |
-| 6 | Kimi K3 | 21/105 | 48.3 | n=1 (single) | default (default) | Claude Code / OpenRouter / OpenRouter | 6 |
-| 7 | Gemini 3.8 Flash | 18/105 | 40.9 | n=3 (mean) | high (verified ceiling) | Antigravity CLI / Google | 7 |
-| 8 | Claude Opus 5 | 27/105 | 36.5 | n=1 (single) | max (max) | Claude Code / Anthropic | 9 |
-| 9 | GLM-5.3 | 19/105 | 35.5 | n=1 (single) | max (verified setting) | Claude Code / Z.ai API / Z.ai API | 8 |
-| 10 | Qwen3.8 Max | 25.7/105 | 26.4 | n=3 (mean) | max (verified ceiling) | Claude Code / Alibaba API / Alibaba API | 10 |
+| 1 | GPT-5.6 Sol | 43.5/105 | 71.8 | n=2 (mean) | max (max) | Codex CLI / OpenAI | 2 |
+| 2 | GPT-6 Sol | 29.3/105 | 70.2 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 1 |
+| 3 | GPT-6 Astra | 45/105 | 67.7 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 3 |
+| 4 | Claude Opus 5.5 | 41.7/105 | 65.2 | n=3 (mean) | max (max) | Claude Code / Anthropic | 4 |
+| 5 | Grok 4.7 | 28.8/105 | 57.8 | n=4 (mean) | xhigh (verified ceiling) | Grok Build CLI (ACP) / xAI | 5 |
+| 6 | GPT-5.6 Luna | 31.3/105 | 52.8 | n=3 (mean) | max (max) | Codex CLI / OpenAI | 6 |
+| 7 | Grok 4.6 | 28.7/105 | 48.6 | n=3 (mean) | xhigh (verified ceiling) | Grok Build CLI (ACP) / xAI | 8 |
+| 8 | Kimi K3 | 21/105 | 47.3 | n=1 (single) | default (default) | Claude Code / OpenRouter / OpenRouter | 7 |
+| 9 | Gemini 3.8 Flash | 18/105 | 38.1 | n=3 (mean) | high (verified ceiling) | Antigravity CLI / Google | 9 |
+| 10 | Claude Opus 5 | 27/105 | 35.3 | n=1 (single) | max (max) | Claude Code / Anthropic | 12 |
+| 11 | GLM-5.3 | 19/105 | 34.7 | n=1 (single) | max (verified setting) | Claude Code / Z.ai API / Z.ai API | 10 |
+| 12 | GPT-6 Luna | 18.3/105 | 33.4 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 11 |
+| 13 | Qwen3.8 Max | 25.7/105 | 27.0 | n=3 (mean) | max (verified ceiling) | Claude Code / Alibaba API / Alibaba API | 13 |
 
 Source: [Bug Hunt Bench](https://bughunt.productcompass.pm/) and the pinned [owner scoreboard](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv) at commit **0630b120a81363c343ed7dfaf3c6d3be7f7da38c**. The run configuration details and coverage gaps are in [raw-data.md](raw-data.md).
 
 ## Pareto frontier
 
-Undominated on composite cost versus quality: **GPT-5.6 Sol, Grok 4.6, GPT-5.6 Luna, Claude Opus 5.5**.
+Undominated on composite cost versus quality: **GPT-5.6 Sol, GPT-5.6 Luna, Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna**.
 
 ## Weights
 
@@ -67,20 +73,23 @@ Dimension order is the order in weights above:
 
 | Rank | Model | Normalized dimensions |
 |---:|---|---|
-| 1 | GPT-5.6 Sol | [55.6, 11.1, 100.0, 44.4, 55.6, 77.8, 66.7, 66.7, 66.7, 100.0, 66.7, 88.9] |
-| 2 | GPT-6 Astra | [33.3, 66.7, 77.8, 22.2, 88.9, 22.2, 88.9, 77.8, 22.2, 77.8, 88.9, 100.0] |
-| 3 | Claude Opus 5.5 | [0.0, 33.3, 77.8, 100.0, 100.0, 88.9, 100.0, 100.0, 100.0, 88.9, 100.0, 77.8] |
-| 4 | Grok 4.6 | [77.8, 100.0, 33.3, 55.6, 77.8, 44.4, 22.2, 11.1, 33.3, 5.6, 22.2, 55.6] |
-| 5 | GPT-5.6 Luna | [100.0, 0.0, 50.0, 11.1, 0.0, 66.7, 33.3, 0.0, 11.1, 44.4, 0.0, 66.7] |
-| 6 | Kimi K3 | [44.4, 55.6, 77.8, 33.3, 33.3, 100.0, 44.4, 44.4, 88.9, 55.6, 33.3, 22.2] |
-| 7 | Gemini 3.8 Flash | [88.9, 44.4, 50.0, 0.0, 44.4, 55.6, 55.6, 55.6, 55.6, 22.2, 11.1, 0.0] |
-| 8 | GLM-5.3 | [66.7, 77.8, 11.1, 66.7, 66.7, 11.1, 11.1, 22.2, 77.8, 33.3, 44.4, 11.1] |
-| 9 | Claude Opus 5 | [11.1, 22.2, 22.2, 88.9, 22.2, 0.0, 77.8, 88.9, 44.4, 66.7, 77.8, 44.4] |
-| 10 | Qwen3.8 Max | [22.2, 88.9, 0.0, 77.8, 11.1, 33.3, 0.0, 33.3, 0.0, 5.6, 55.6, 33.3] |
+| 1 | GPT-6 Sol | [83.3, 33.3, 83.3, 25.0, 58.3, 70.8, 58.3, 66.7, 75.0, 75.0, 75.0, 66.7] |
+| 2 | GPT-5.6 Sol | [50.0, 8.3, 91.7, 50.0, 50.0, 83.3, 75.0, 75.0, 58.3, 100.0, 66.7, 91.7] |
+| 3 | GPT-6 Astra | [33.3, 66.7, 66.7, 33.3, 91.7, 25.0, 91.7, 83.3, 25.0, 83.3, 91.7, 100.0] |
+| 4 | Claude Opus 5.5 | [0.0, 41.7, 66.7, 100.0, 100.0, 91.7, 100.0, 100.0, 100.0, 91.7, 100.0, 83.3] |
+| 5 | Grok 4.7 | [16.7, 83.3, 100.0, 83.3, 83.3, 0.0, 41.7, 41.7, 66.7, 8.3, 58.3, 58.3] |
+| 6 | GPT-5.6 Luna | [91.7, 0.0, 45.8, 16.7, 0.0, 70.8, 25.0, 8.3, 8.3, 50.0, 8.3, 75.0] |
+| 7 | Kimi K3 | [41.7, 58.3, 66.7, 41.7, 33.3, 100.0, 50.0, 50.0, 91.7, 58.3, 33.3, 25.0] |
+| 8 | Grok 4.6 | [66.7, 100.0, 33.3, 58.3, 75.0, 41.7, 16.7, 16.7, 33.3, 8.3, 25.0, 50.0] |
+| 9 | Gemini 3.8 Flash | [75.0, 50.0, 45.8, 8.3, 41.7, 50.0, 66.7, 58.3, 50.0, 25.0, 16.7, 0.0] |
+| 10 | GLM-5.3 | [58.3, 75.0, 8.3, 66.7, 66.7, 16.7, 8.3, 25.0, 83.3, 33.3, 41.7, 16.7] |
+| 11 | GPT-6 Luna | [100.0, 16.7, 25.0, 0.0, 8.3, 58.3, 33.3, 0.0, 16.7, 41.7, 0.0, 8.3] |
+| 12 | Claude Opus 5 | [8.3, 25.0, 16.7, 91.7, 25.0, 8.3, 83.3, 91.7, 41.7, 66.7, 83.3, 41.7] |
+| 13 | Qwen3.8 Max | [25.0, 91.7, 0.0, 75.0, 16.7, 33.3, 0.0, 33.3, 0.0, 8.3, 50.0, 33.3] |
 
 ## Coverage decision
 
-The score is zero-gap across all retained dimensions for the 10 exact-match models. 12 models remain in the 22-model source roster without a primary rank because they lack exact eligible Bug Hunt results. Dropped candidate dimensions are listed below; missing values remain null rather than receiving neutral scores.
+The score is zero-gap across all retained dimensions for the 13 exact-match models. 12 models remain in the 25-model source roster without a primary rank because they lack exact eligible Bug Hunt results. Dropped candidate dimensions are listed below; missing values remain null rather than receiving neutral scores.
 
 ## External benchmark coverage
 
