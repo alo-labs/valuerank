@@ -22,7 +22,7 @@ from plan_costs import build_cost_fields, load_plan_routes, route_summary
 from site_header import inject_header
 from aa_reconciliation import reconcile as reconcile_aa, publication as aa_reconciliation_publication
 
-VERSION = "v1.9.4"
+VERSION = "v1.9.5"
 DATE = "October 8, 2026"
 SHORT_DATE = "Oct 8"
 CURRENCY = "$"
@@ -93,6 +93,7 @@ model_by_id = {model["id"]: model for model in all_models}
 plan_route_document = load_plan_routes()
 plan_cost_fields = build_cost_fields(models, plan_route_document)
 plan_summary = route_summary(plan_route_document, plan_cost_fields)
+candidate_plan_cost_fields = build_cost_fields(all_models, plan_route_document)
 livebench_models = {
     **livebench_document["models"],
     **livebench_document.get("supplementalModels", {}),
@@ -238,6 +239,107 @@ drop_text = "\n".join(
 aa_reconciliation_report = reconcile_aa()
 aa_reconciliation_md, aa_reconciliation_html = aa_reconciliation_publication(aa_reconciliation_report)
 
+
+def plan_evidence_label(route):
+    if route.get("evidenceClass") == "user_assumption":
+        return "Provisional assumption"
+    if route.get("evidenceClass") == "controlled_account_workload_projection":
+        return "Controlled account measurement / workload projection"
+    return str(route.get("evidenceClass", "Unclassified")).replace("_", " ")
+
+
+def plan_usd(value, missing):
+    return f"${value:,.2f}" if isinstance(value, (int, float)) else missing
+
+
+def plan_source_html(route):
+    url = route.get("sourceUrl")
+    return html_external_link("Source", url) if url else "User assumption"
+
+
+def plan_intelligence_label(model):
+    value = model.get("intelligenceIndex")
+    record = aa_document.get("models", {}).get(model["id"], {})
+    metric_precision = ((record.get("metricSources") or {}).get("intelligenceIndex") or {}).get("precision")
+    precision = str(metric_precision or (record.get("extraction") or {}).get("precision") or "")
+    if isinstance(value, (int, float)) and "display-rounded" in precision:
+        label = str(value).removesuffix(".0") + " (rounded)"
+    else:
+        label = fnum(value)
+    return label + (" (estimated)" if model.get("intelligenceIndexStatus") == "estimated" else "")
+
+
+plan_candidate_headers = ["Model", "Primary rank", "AA Intelligence Index", "API evaluation cost", "Effective Plan evaluation cost", "Selected plan / multiple", "Evidence / source variant", "Source date", "Source"]
+plan_candidate_cells = []
+for model, field in zip(all_models, candidate_plan_cost_fields):
+    route = field["planRoute"]
+    plan_candidate_cells.append([
+        model["name"],
+        str(model["rank"]) if model.get("rank") is not None else "Unranked candidate",
+        plan_intelligence_label(model),
+        plan_usd(field["apiCost"], "Not established"),
+        plan_usd(field["planCost"], "API fallback" if route is None else "Not established"),
+        f"{route['planLabel']} / {route['valueMultiple']:g}×" if route else "No eligible route",
+        (plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else "")) if route else "API fallback",
+        (route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded") if route else "—",
+        (route.get("sourceUrl") or "User assumption") if route else "—",
+    ])
+
+plan_route_headers = ["Plan", "Eligible model variants", "Monthly fee", "API equivalent numerator", "Value Multiple", "Evidence / source model", "Source date", "Source"]
+plan_route_cells = []
+for route in plan_route_document["routes"]:
+    plan_route_cells.append([
+        route["planLabel"],
+        ", ".join(model_by_id[model_id]["name"] if model_id in model_by_id else model_id for model_id in route["modelIds"]),
+        plan_usd(route.get("planPriceUsd"), "Not established"),
+        plan_usd(route.get("apiEquivalentUsd"), "Not measured") + (" (applied estimate)" if route.get("numeratorKind") == "applied_estimate" else ""),
+        f"{route['valueMultiple']:g}×",
+        plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else ""),
+        route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded",
+        route.get("sourceUrl") or "User assumption",
+    ])
+
+
+def plan_markdown_table(headers, rows):
+    def clean(value):
+        text = str(value).replace("|", "\\|").replace("\n", " ")
+        return f"[Source]({text})" if text.startswith("https://") else text
+    return "\n".join(["| " + " | ".join(headers) + " |", "|" + "|".join("---" for _ in headers) + "|"] + ["| " + " | ".join(clean(value) for value in row) + " |" for row in rows])
+
+
+plan_policy_copy = (
+    f"Plan route evidence as of {plan_route_document.get('asOf', 'not recorded')}. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. "
+    "The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. "
+    "For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. "
+    "The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. "
+    "The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. "
+    "For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator."
+)
+plan_comparison_md = (
+    "\n\n## Plan Costs candidate comparison\n\n" + plan_policy_copy + "\n\n"
+    + plan_markdown_table(plan_candidate_headers, plan_candidate_cells)
+    + "\n\n### Plan route evidence\n\n" + plan_markdown_table(plan_route_headers, plan_route_cells)
+    + "\n\nThe selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `.refresh/v1.4/plan_cost_routes.json`.\n"
+)
+
+
+def plan_html_table(headers, rows):
+    def cell(value):
+        text = str(value)
+        return html_external_link("Source", text) if text.startswith("https://") else html_escape(text)
+    return '<div class="table-wrap"><table><thead><tr>' + ''.join(f'<th scope="col">{html_escape(header)}</th>' for header in headers) + '</tr></thead><tbody>' + ''.join('<tr>' + ''.join(f'<td>{cell(value)}</td>' for value in row) + '</tr>' for row in rows) + '</tbody></table></div>'
+
+
+plan_comparison_html = (
+    '<!-- plan-candidates:start --><section class="card mb-6" id="plan-candidates" aria-labelledby="plan-candidates-heading"><h2 id="plan-candidates-heading">Plan Costs candidate comparison</h2>'
+    + f'<p class="method-text">{html_escape(plan_policy_copy)}</p>'
+    + plan_html_table(plan_candidate_headers, plan_candidate_cells)
+    + '<h3 style="margin-top:24px;">Plan route evidence</h3>'
+    + plan_html_table(plan_route_headers, plan_route_cells)
+    + '<ul>' + ''.join(f'<li>{html_escape(route["planLabel"])}: {plan_source_html(route)}. {html_escape(str(route.get("notes", "")))}</li>' for route in plan_route_document["routes"]) + '</ul>'
+    + '</section><!-- plan-candidates:end -->'
+)
+
 readme = f"""# ValueRank
 **Frontier AI model ranking focused on production value**
 
@@ -293,7 +395,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - [research/2026-09-29-valuerank-refresh-v4-3-2/](research/2026-09-29-valuerank-refresh-v4-3-2/): reproducible v4.3.2 refresh package
 - [.refresh/v1.4/](.refresh/v1.4/): refresh scripts and machine-readable snapshots/outputs
 """
-(ROOT / "README.md").write_text(readme + aa_reconciliation_md)
+(ROOT / "README.md").write_text(readme + aa_reconciliation_md + plan_comparison_md)
 
 methodology = f"""# ValueRank Methodology
 
@@ -405,7 +507,7 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
 - AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value, so Speed is {"included" if speed_in_primary else "excluded"} under the zero-gap rule.
 - LiveBench and Terminal-Bench have different task suites and release surfaces from the AA source component; their displayed values should not be substituted for one another or read as a continuous version-to-version series.
 """
-(ROOT / "methodology.md").write_text(methodology)
+(ROOT / "methodology.md").write_text(methodology + "\n\n## Subscription evidence policy\n\n" + plan_policy_copy + "\n")
 
 def norm_values(model):
     return ", ".join(f"{model['dims'][weight['key']]:.1f}" for weight in weights)
@@ -616,7 +718,7 @@ Missing values are intentionally represented as null; no old-version, model-fami
 - [.refresh/v1.4/deepswe.json](.refresh/v1.4/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
 - [.refresh/v1.4/tb4-browser-2026-09-29.json](.refresh/v1.4/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
 """
-(ROOT / "raw-data.md").write_text(raw_data + aa_reconciliation_md)
+(ROOT / "raw-data.md").write_text(raw_data + aa_reconciliation_md + plan_comparison_md)
 
 
 # Existing interactive publication shell. Data constants and model data are
@@ -842,11 +944,12 @@ function planRouteFor(model) {
 }
 
 function hasPlanRoute(model) {
-  return planRouteFor(model) !== null && Number.isFinite(Number(model.planCost));
+  return planRouteFor(model) !== null && model.planCost !== null && model.planCost !== undefined && Number.isFinite(Number(model.planCost));
 }
 
 function activeCostUsd(model) {
-  return costBasis === 'plan' && hasPlanRoute(model) ? Number(model.planCost) : Number(model.apiCost);
+  const value = costBasis === 'plan' && hasPlanRoute(model) ? model.planCost : model.apiCost;
+  return value === null || value === undefined ? null : Number(value);
 }
 
 function activeCostScore(model) {
@@ -861,21 +964,27 @@ function formatValueMultiple(route) {
   return route ? Number(route.valueMultiple).toLocaleString(undefined, { maximumFractionDigits: 3 }) + '×' : '—';
 }
 
+function planEvidenceLabel(route) {
+  if (route.evidenceClass === 'user_assumption') return 'Provisional assumption';
+  if (route.evidenceClass === 'controlled_account_workload_projection') return 'Controlled account measurement / workload projection';
+  return String(route.evidenceClass || 'Unclassified').replaceAll('_', ' ');
+}
+
 function activeCostRouteLabel(model) {
   if (costBasis !== 'plan') return 'AA evaluation cost at API rates';
   const route = planRouteFor(model);
-  return route ? `${route.planLabel} · ${formatValueMultiple(route)}` : 'API fallback · no verified subscription route';
+  return route ? `${route.planLabel} · ${formatValueMultiple(route)} · ${planEvidenceLabel(route)}` : 'API fallback · no eligible subscription route';
 }
 
 function costBasisTooltip(model) {
-  const api = fmtUsd(model.apiCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const api = model.apiCost == null ? 'unavailable' : fmtUsd(model.apiCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const plan = model.planCost == null
     ? 'unavailable'
     : fmtUsd(model.planCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const route = planRouteFor(model);
   const routeText = route
-    ? `${route.planLabel} (${formatValueMultiple(route)}; ${route.evidenceClass})`
-    : 'No verified subscription route; API fallback';
+    ? `${route.planLabel} (${formatValueMultiple(route)}; ${planEvidenceLabel(route)})`
+    : 'No eligible subscription route; API fallback';
   return `API Cost: ${api}<br>Plan Cost: ${plan}<br>Route: ${routeText}`;
 }
 
@@ -905,7 +1014,7 @@ function updateCostBasisUI() {
   const context = document.getElementById('cost-basis-context');
   if (context) {
     context.textContent = costBasis === 'plan'
-      ? `AA total evaluation cost ÷ highest eligible Value Multiple. ${PLAN_COST_META.supportedModelCount}/${PLAN_COST_META.totalModelCount} models have a verified plan route; the rest remain API-priced.`
+      ? `AA total evaluation cost ÷ highest eligible Value Multiple. ${PLAN_COST_META.supportedModelCount}/${PLAN_COST_META.totalModelCount} ranked models have an eligible plan route, including explicitly labelled provisional assumptions. Evidence as of ${PLAN_COST_META.asOf}.`
       : 'AA total evaluation cost at API rates; cost-weighted scores use the API-cost rank.';
   }
   const note = document.getElementById('cost-note');
@@ -1982,11 +2091,12 @@ html = replace_current_copy(
     "ranking history chart title",
 )
 html = re.sub(r"<!-- aa-reconciliation:start -->[\s\S]*?<!-- aa-reconciliation:end -->", "", html)
+html = re.sub(r"<!-- plan-candidates:start -->[\s\S]*?<!-- plan-candidates:end -->", "", html)
 if "</main>" not in html:
     raise ValueError("Cannot insert AA comparison: publication shell lacks </main>")
 source_date_note = ('<p class="method-text">Publication updated October 8, 2026 with selective additions. Earlier AA and DeepSWE snapshots remain dated September 29–30; MiMo AA and frontier observations were captured October 8, and selective MiMo Bug Hunt owner notes were observed October 7. Rounded public AA metrics preserve captured display precision; source dates and precision are listed in raw data.</p>')
 aa_reconciliation_html = aa_reconciliation_html.replace('</p>', '</p>' + source_date_note, 1)
-html = html.replace("</main>", aa_reconciliation_html + "\n</main>", 1)
+html = html.replace("</main>", aa_reconciliation_html + plan_comparison_html + "\n</main>", 1)
 site_path.write_text(html)
 
 coding_path = ROOT / "site" / "coding-agents" / "index.html"

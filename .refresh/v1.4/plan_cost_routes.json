@@ -1,6 +1,6 @@
 {
   "schemaVersion": "valuerank-plan-routes/v1",
-  "asOf": "2026-09-30",
+  "asOf": "2026-10-08",
   "currency": "USD",
   "costMix": {
     "id": "valuerank-billed-3",
@@ -11,9 +11,127 @@
     "description": "Shared billed-3 token mix; cache-write tokens are excluded."
   },
   "fallback": "api",
+  "evidencePolicy": {
+    "reportingWindow": {"start": "2026-09-08", "end": "2026-10-08"},
+    "defaultNumerator": "Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.",
+    "selectedSourceException": {"providers": ["Anthropic", "OpenAI"], "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "publicationDate": "2026-10-06", "authorizedOn": "2026-10-07", "evidenceType": "Controlled subscription-account measurements with agentic workload projections."},
+    "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption.",
+    "mimoApplication": "User authorizes provisional 1.5x for both MiMo candidate variants. Plan fee and measured API-equivalent numerator remain unavailable.",
+    "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT and MiMo assumptions."
+  },
+  "sourceEvidence": {
+    "semianalysis": {
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "publicationDate": "2026-10-06",
+      "retrievedOn": "2026-10-07",
+      "evidenceClass": "controlled_account_workload_projection",
+      "measurementWindow": null,
+      "measurementWindowNote": "Exact experiment dates and full request ledgers are not supplied in the visible article. September supplies the agentic workload blend.",
+      "workloadMix": {"freshInputPct": 0.4, "cacheReadPct": 96.6, "cacheWritePct": 2.6, "outputPct": 0.3, "roundedTotalPct": 99.9},
+      "uncertainty": "Source targets approximately +/-5% token-rate uncertainty. Monthly figures are rounded chart labels; arithmetic decimals do not add measurement precision.",
+      "allocationRegime": "Current Codex allocation after September 29. Eligible pre-cut Pro 200 accounts retain older limits until October 29; these historical allocations are excluded from current routes.",
+      "modelConditionalFigures": [
+        {"provider": "Anthropic", "plan": "Pro", "planPriceUsd": 20, "sourceModel": "Opus 5.5", "apiEquivalentUsd": 1178, "valueMultiple": 58.9},
+        {"provider": "Anthropic", "plan": "Max 5x", "planPriceUsd": 100, "sourceModel": "Opus 5.5", "apiEquivalentUsd": 5725, "valueMultiple": 57.25},
+        {"provider": "Anthropic", "plan": "Max 20x", "planPriceUsd": 200, "sourceModel": "Opus 5.5", "apiEquivalentUsd": 11726, "valueMultiple": 58.63},
+        {"provider": "Anthropic", "plan": "Max 5x", "planPriceUsd": 100, "sourceModel": "Fable 5.1", "apiEquivalentUsd": 1273, "valueMultiple": 12.73, "allocationRegime": "Fable uses 50% of shared weekly pool; alternative to all-Opus allocation, not additive."},
+        {"provider": "Anthropic", "plan": "Max 20x", "planPriceUsd": 200, "sourceModel": "Fable 5.1", "apiEquivalentUsd": 2485, "valueMultiple": 12.425, "allocationRegime": "Fable uses 50% of shared weekly pool; alternative to all-Opus allocation, not additive."},
+        {"provider": "OpenAI", "plan": "Plus", "planPriceUsd": 20, "sourceModel": "GPT-6.1 Sol", "apiEquivalentUsd": 211, "valueMultiple": 10.55},
+        {"provider": "OpenAI", "plan": "Plus", "planPriceUsd": 20, "sourceModel": "GPT-6 Astra", "apiEquivalentUsd": 162, "valueMultiple": 8.1},
+        {"provider": "OpenAI", "plan": "Pro 100", "planPriceUsd": 100, "sourceModel": "GPT-6.1 Sol", "apiEquivalentUsd": 1055, "valueMultiple": 10.55},
+        {"provider": "OpenAI", "plan": "Pro 100", "planPriceUsd": 100, "sourceModel": "GPT-6 Astra", "apiEquivalentUsd": 1322, "valueMultiple": 13.22},
+        {"provider": "OpenAI", "plan": "Pro 200", "planPriceUsd": 200, "sourceModel": "GPT-6.1 Sol", "apiEquivalentUsd": 2084, "valueMultiple": 10.42},
+        {"provider": "OpenAI", "plan": "Pro 200", "planPriceUsd": 200, "sourceModel": "GPT-6 Astra", "apiEquivalentUsd": 2897, "valueMultiple": 14.485},
+        {"provider": "OpenAI", "plan": "Pro 500", "planPriceUsd": 500, "sourceModel": "GPT-6.1 Sol", "apiEquivalentUsd": 5386, "valueMultiple": 10.772},
+        {"provider": "OpenAI", "plan": "Pro 500", "planPriceUsd": 500, "sourceModel": "GPT-6 Astra", "apiEquivalentUsd": 6955, "valueMultiple": 13.91}
+      ]
+    }
+  },
   "routes": [
     {
+      "id": "chatgpt-plus-common-semianalysis-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
+      "valueMultipleKind": "user_assumption", "evidenceClass": "user_assumption", "sourceEvidenceClass": "controlled_account_workload_projection", "confidence": "provisional", "provisional": true, "numeratorKind": "applied_estimate",
+      "validFrom": "2026-10-08", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceModel": "GPT-6 Astra", "sourceEvidenceId": "semianalysis", "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"],
+      "modelIds": ["gpt-6-astra", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.5", "gpt-6-sol", "gpt-6-luna"],
+      "assumptionScope": "user-authorized cross-model application", "allocationRegime": "Current post-September 29 Codex schedule",
+      "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: Astra's 8.1x for Plus. $162 is the applied monthly equivalent estimate at the $20 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-common-semianalysis-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055, "valueMultiple": 10.55,
+      "valueMultipleKind": "user_assumption", "evidenceClass": "user_assumption", "sourceEvidenceClass": "controlled_account_workload_projection", "confidence": "provisional", "provisional": true, "numeratorKind": "applied_estimate",
+      "validFrom": "2026-10-08", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceModel": "GPT-6.1 Sol", "sourceEvidenceId": "semianalysis", "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"],
+      "modelIds": ["gpt-6-astra", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.5", "gpt-6-sol", "gpt-6-luna"],
+      "assumptionScope": "user-authorized cross-model application", "allocationRegime": "Current post-September 29 Codex schedule",
+      "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.55x for Pro 100. $1,055 is the applied monthly equivalent estimate at the $100 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-common-semianalysis-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084, "valueMultiple": 10.42,
+      "valueMultipleKind": "user_assumption", "evidenceClass": "user_assumption", "sourceEvidenceClass": "controlled_account_workload_projection", "confidence": "provisional", "provisional": true, "numeratorKind": "applied_estimate",
+      "validFrom": "2026-10-08", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceModel": "GPT-6.1 Sol", "sourceEvidenceId": "semianalysis", "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"],
+      "modelIds": ["gpt-6-astra", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.5", "gpt-6-sol", "gpt-6-luna"],
+      "assumptionScope": "user-authorized cross-model application", "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
+      "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.42x for Pro 200. $2,084 is the applied monthly equivalent estimate at the $200 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. Historical pre-cut $5,734 Astra and $5,904 GPT-6 Sol figures are excluded."
+    },
+    {
+      "id": "chatgpt-pro500-common-semianalysis-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386, "valueMultiple": 10.772,
+      "valueMultipleKind": "user_assumption", "evidenceClass": "user_assumption", "sourceEvidenceClass": "controlled_account_workload_projection", "confidence": "provisional", "provisional": true, "numeratorKind": "applied_estimate",
+      "validFrom": "2026-10-08", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceModel": "GPT-6.1 Sol", "sourceEvidenceId": "semianalysis", "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"],
+      "modelIds": ["gpt-6-astra", "gpt-5.6-sol", "gpt-5.6-luna", "gpt-5.5", "gpt-6-sol", "gpt-6-luna"],
+      "assumptionScope": "user-authorized cross-model application", "allocationRegime": "Current post-September 29 Codex schedule",
+      "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers."
+    },
+    {
+      "id": "claude-pro-opus55-semianalysis", "provider": "Anthropic", "plan": "Claude Pro", "planLabel": "Claude Pro $20 · Opus 5.5", "planPriceUsd": 20, "apiEquivalentUsd": 1178, "valueMultiple": 58.9,
+      "valueMultipleKind": "controlled_account_workload_projection", "evidenceClass": "controlled_account_workload_projection", "confidence": "research_estimate", "numeratorKind": "workload_capacity_projection",
+      "validFrom": "2026-10-06", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceModel": "Opus 5.5", "sourceEvidenceId": "semianalysis", "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["claude-opus-5-5"], "allocationRegime": "All-Opus allocation; Fable unavailable on Pro",
+      "notes": "October 6 controlled account measurements with agentic workload projections: $1,178/month divided by $20/month = 58.9x. Exact Opus 5.5 only. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis. This is the highest Opus 5.5 multiple among the three eligible Claude tiers."
+    },
+    {
+      "id": "claude-max5x-opus55-semianalysis", "provider": "Anthropic", "plan": "Claude Max 5x", "planLabel": "Claude Max $100 · Opus 5.5", "planPriceUsd": 100, "apiEquivalentUsd": 5725, "valueMultiple": 57.25,
+      "valueMultipleKind": "controlled_account_workload_projection", "evidenceClass": "controlled_account_workload_projection", "confidence": "research_estimate", "numeratorKind": "workload_capacity_projection",
+      "validFrom": "2026-10-06", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceModel": "Opus 5.5", "sourceEvidenceId": "semianalysis", "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["claude-opus-5-5"], "allocationRegime": "All-Opus allocation; alternative to Fable's 50% shared-pool allocation",
+      "notes": "October 6 controlled account measurements with agentic workload projections: $5,725/month divided by $100/month = 57.25x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "claude-max20x-opus55-semianalysis", "provider": "Anthropic", "plan": "Claude Max 20x", "planLabel": "Claude Max $200 · Opus 5.5", "planPriceUsd": 200, "apiEquivalentUsd": 11726, "valueMultiple": 58.63,
+      "valueMultipleKind": "controlled_account_workload_projection", "evidenceClass": "controlled_account_workload_projection", "confidence": "research_estimate", "numeratorKind": "workload_capacity_projection",
+      "validFrom": "2026-10-06", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceModel": "Opus 5.5", "sourceEvidenceId": "semianalysis", "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["claude-opus-5-5"], "allocationRegime": "All-Opus allocation; alternative to Fable's 50% shared-pool allocation",
+      "notes": "October 6 controlled account measurements with agentic workload projections: $11,726/month divided by $200/month = 58.63x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "supergrok-heavy-grok47-xhigh-user-projection", "provider": "xAI", "plan": "SuperGrok Heavy", "planLabel": "SuperGrok Heavy $300 · Grok 4.7 XHigh", "planPriceUsd": 300, "apiEquivalentUsd": 1735.5, "valueMultiple": 5.785,
+      "valueMultipleKind": "user_reported_projection", "evidenceClass": "user_reported_projection", "confidence": "low", "numeratorKind": "partial_interval_capacity_projection",
+      "validFrom": "2026-09-25", "checkedOn": "2026-10-08", "sourcePublicationDate": "2026-09-25", "measurementWindow": {"start": "2026-09-23", "end": "2026-09-25"}, "sourceModel": "Grok 4.7 XHigh", "requiredVariant": "xhigh", "modelIds": ["grok-4.7"],
+      "sourceUrl": "https://www.remakebench.com/capacity/plans/supergrok-heavy", "sourceUrls": ["https://www.remakebench.com/capacity/plans/supergrok-heavy"], "feeEvidence": "Experiment owner reports $300/month", "allocationRegime": "Shared product pools; CLI XHigh partial-interval calibration",
+      "observedApiEquivalentUsd": 124.85507688, "observedRuns": 17, "calibrationApiEquivalentUsd": 76.09728984, "calibrationMeterStartPct": 56, "calibrationMeterEndPct": 75, "projectedWeeklyApiEquivalentUsd": 400.5,
+      "notes": "Account owner reports API-equivalent receipts and projects approximately $400.5/week from deduplicated calibration receipts; monthly annualization is $400.5 x 52 / 12 = $1,735.5, divided by owner-reported $300 fee = 5.785x (about 5.79x). Ranked grok-4.7 is XHigh, matching the report. This is projected capacity from a partial interval, not measured full-week use. Linked audit receipts were not independently reproduced; shared pools, possible unlogged activity and interrupted runs limit inference."
+    },
+    {
+      "id": "mimo-provisional-user-assumption", "provider": "Xiaomi", "plan": "MiMo provisional assumption", "planLabel": "MiMo · provisional 1.5x assumption", "planPriceUsd": null, "apiEquivalentUsd": null, "valueMultiple": 1.5,
+      "valueMultipleKind": "user_assumption", "evidenceClass": "user_assumption", "confidence": "provisional", "provisional": true, "numeratorKind": "unavailable", "assumptionScope": "User-authorized provisional 1.5x for both MiMo candidate models",
+      "validFrom": "2026-10-08", "checkedOn": "2026-10-08", "sourcePublicationDate": null, "measurementWindow": null, "sourceModel": null, "modelIds": ["mimo-v2-6-pro", "mimo-v2-6-flash"],
+      "sourceUrl": null, "sourceUrls": [], "sourceReference": "User instruction in this chat on October 8, 2026", "notes": "Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable."
+    }
+  ],
+  "providerLevelEvidence": [
+    {"id": "supergrok-standard-grok47-unspecified-effort", "provider": "xAI", "plan": "Standard SuperGrok", "planPriceUsd": 30, "apiEquivalentUsd": 196.08333333333334, "valueMultiple": 6.536111111111111, "evidenceClass": "user_reported_projection", "sourceModel": "Grok 4.7, thinking effort unspecified", "modelIds": [], "sourcePublicationDate": "2026-10-02", "measurementWindow": {"start": "2026-09-23", "end": "2026-09-23"}, "projectedWeeklyApiEquivalentUsd": 45.25, "sourceUrl": "https://modeldial.com/en/subscriptions/grok", "sourceUrls": ["https://modeldial.com/en/subscriptions/grok", "https://x.ai/pricing"], "confidence": "low", "exclusionReason": "Thinking effort unspecified; cannot assign to ranked Grok 4.7 XHigh or Grok 4.6 Medium.", "notes": "Author's local account sample at 30% of weekly meter; projected $45.25/week x 52 / 12 / $30 is about 6.54x. Raw sample dollars and token ledger unpublished. xAI pricing supports denominator only."},
+    {"id": "zai-lite-mixed-glm53-user-estimate", "provider": "Z.AI", "plan": "Coding Plan Lite", "planPriceUsd": 18, "apiEquivalentUsd": 102.17, "valueMultiple": 5.676111111111111, "evidenceClass": "user_reported_api_priced_estimate", "sourceModels": ["GLM 5.3", "GLM 5.3 Flash"], "modelIds": [], "sourcePublicationDate": "2026-09-29", "publicationDatePrecision": "approximate", "measurementWindow": {"start": "2026-08-29", "end": "2026-09-29"}, "sourceUrl": "https://www.reddit.com/r/ZaiGLM/comments/1wstrqy/lite_plan_18mo_gave_me_102_of_api_usage_568x_a_1/", "sourceUrls": ["https://www.reddit.com/r/ZaiGLM/comments/1wstrqy/lite_plan_18mo_gave_me_102_of_api_usage_568x_a_1/"], "confidence": "reported_estimate", "exclusionReason": "Mixed-model report has no per-model usage breakdown; cannot assign the whole numerator to either ranked variant.", "notes": "User reports billing-statement exports analyzed with Hermes/ChatGPT at API prices and $18 plan fee. Whole-period report crosses the September 8 cutoff and does not isolate outside-window use, so retained with its complete interval. Raw token-price ledger is not independently reproducible."},
+    {"id": "kimi-old-allegretto-k3-256-user-projection", "provider": "Kimi", "plan": "Kimi Code old Allegretto", "planPriceUsd": 39, "apiEquivalentUsd": 156, "valueMultiple": 4, "evidenceClass": "user_reported_projection", "sourceModel": "K3-256", "modelIds": [], "sourcePublicationDate": "2026-09-27", "measurementWindow": null, "measurementWindowNote": "Five-hour OpenCode session reported; exact session date not stated.", "observedApiEquivalentUsd": 7.2, "observedWeeklyMeterPct": 20, "projectedWeeklyApiEquivalentUsd": 36, "sourceUrl": "https://www.reddit.com/r/kimi/comments/1wqjghr/i_just_measured_kimi_quota_for_coding_on/", "sourceUrls": ["https://www.reddit.com/r/kimi/comments/1wqjghr/i_just_measured_kimi_quota_for_coding_on/"], "confidence": "reported_estimate", "exclusionReason": "Measured K3-256 variant differs from ranked standard kimi-k3; source's separate standard-K3 extrapolation is not a measurement for that variant.", "notes": "User-reported $7.20 API-priced session at 20% weekly meter projects $36/week x 52 / 12 / $39 = 4x. Partial measured session with user extrapolation and owner-stated fee; no transfer to other tier or variant."},
+    {"id": "claude-max5x-fable51-semianalysis-unranked", "provider": "Anthropic", "plan": "Claude Max 5x", "planPriceUsd": 100, "apiEquivalentUsd": 1273, "valueMultiple": 12.73, "evidenceClass": "controlled_account_workload_projection", "sourceModel": "Fable 5.1", "modelIds": [], "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceEvidenceId": "semianalysis", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "allocationRegime": "Fable 50% weekly shared pool; other half remains", "exclusionReason": "No exact ranked Fable 5.1 variant. Do not transfer to Fable 5 or other Claude models.", "notes": "User-selected source exception. Alternative model allocation, not additive to all-Opus projection."},
+    {"id": "claude-max20x-fable51-semianalysis-unranked", "provider": "Anthropic", "plan": "Claude Max 20x", "planPriceUsd": 200, "apiEquivalentUsd": 2485, "valueMultiple": 12.425, "evidenceClass": "controlled_account_workload_projection", "sourceModel": "Fable 5.1", "modelIds": [], "sourcePublicationDate": "2026-10-06", "measurementWindow": null, "sourceEvidenceId": "semianalysis", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "allocationRegime": "Fable 50% weekly shared pool; other half remains", "exclusionReason": "No exact ranked Fable 5.1 variant. Do not transfer to Fable 5 or other Claude models.", "notes": "User-selected source exception. Alternative model allocation, not additive to all-Opus projection."}
+  ],
+  "excludedRoutes": [
+    {
       "id": "chatgpt-pro-20x-tibotattle",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Historical TiboTattle/account-track and legacy allocation estimate superseded by the user-selected October 6 SemiAnalysis source and October 8 common GPT plan assumptions. Not current model-specific evidence.",
       "provider": "OpenAI",
       "plan": "ChatGPT Pro 20x",
       "planLabel": "ChatGPT Pro $200 · Codex 20x",
@@ -38,6 +156,8 @@
     },
     {
       "id": "chatgpt-pro-20x-gpt6-astra-community-measured",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Superseded by the selected October 6 SemiAnalysis current allocation figures. Pro numerator scales a community Plus estimate using provider quota multipliers rather than measuring current Pro use.",
       "provider": "OpenAI",
       "plan": "ChatGPT Pro 20x",
       "planLabel": "ChatGPT Pro $200 · Codex 20x (current allowance)",
@@ -63,6 +183,8 @@
     },
     {
       "id": "chatgpt-pro-20x-gpt56-sol-community-measured",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Superseded by the selected October 6 SemiAnalysis current allocation figures and common GPT plan assumptions. Pro numerator scales a community Plus estimate using provider quota multipliers and is not current Pro measured use.",
       "provider": "OpenAI",
       "plan": "ChatGPT Pro 20x",
       "planLabel": "ChatGPT Pro $200 · Codex 20x (current allowance)",
@@ -88,6 +210,8 @@
     },
     {
       "id": "claude-max-20x-high-water",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Unsupported 40x high-water estimate lacks a qualifying API-priced end-user numerator or an exact evaluated-model match. Selected SemiAnalysis Opus 5.5 estimates must not transfer to other Claude variants.",
       "provider": "Anthropic",
       "plan": "Claude Max 20x",
       "planLabel": "Claude Max $200 · 20x",
@@ -109,6 +233,8 @@
     },
     {
       "id": "kimi-vivace-community-scaled",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Vivace scaling is not a measured API-priced report for this tier or exact ranked variant. Current qualified report concerns old Allegretto and K3-256, so it cannot be assigned to standard K3.",
       "provider": "Kimi",
       "plan": "Vivace",
       "planLabel": "Kimi Vivace $199 · Code",
@@ -132,6 +258,8 @@
     },
     {
       "id": "google-ai-pro-gemini-modelled",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Modeled allowance lacks qualifying actual API-priced end-user use for these Flash variants. Gemini 3 Pro reference and provider quotas cannot supply their numerator.",
       "provider": "Google",
       "plan": "AI Pro",
       "planLabel": "Google AI Pro $19.99 · Gemini",
@@ -169,6 +297,8 @@
     },
     {
       "id": "google-ai-ultra-5x-modelled",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Derived from an unsupported modeled base and provider quota scaling, not qualifying API-priced end-user use for the listed Flash variants.",
       "provider": "Google",
       "plan": "AI Ultra 5x",
       "planLabel": "Google AI Ultra $99.99 · 5x quota",
@@ -203,6 +333,8 @@
     },
     {
       "id": "google-ai-ultra-20x-modelled",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Derived from an unsupported modeled base and provider quota scaling, not qualifying API-priced end-user use for the listed Flash variants.",
       "provider": "Google",
       "plan": "AI Ultra 20x",
       "planLabel": "Google AI Ultra $199.99 · 20x quota",
@@ -237,6 +369,8 @@
     },
     {
       "id": "zai-glm53-max-derived",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Provider credit/model-coefficient calculation is not an actual API-priced end-user measurement. Latest Lite report mixes GLM 5.3 and GLM 5.3 Flash without per-model usage.",
       "provider": "Z.AI",
       "plan": "GLM Coding Max",
       "planLabel": "Z.AI GLM Coding Max · GLM5.3",
@@ -257,6 +391,8 @@
     },
     {
       "id": "ollama-max-exact",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Provider-published usage credit is excluded as an allowance numerator under the end-user measurement rule; a published fee alone cannot establish measured value.",
       "provider": "Ollama",
       "plan": "Max",
       "planLabel": "Ollama Max $100 · $300 usage",
@@ -286,6 +422,8 @@
     },
     {
       "id": "zai-glm53-flash-max-derived",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Provider credit/model-coefficient calculation is not an actual API-priced end-user measurement. Latest Lite report mixes GLM 5.3 and GLM 5.3 Flash without per-model usage.",
       "provider": "Z.AI",
       "plan": "GLM Coding Max",
       "planLabel": "Z.AI GLM Coding Max · GLM5.3-Flash",
@@ -306,6 +444,8 @@
     },
     {
       "id": "opencode-go-usage-60",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Provider-published internal Usage allocation is not qualifying end-user-measured API-list-price consumption; no exact API-priced reported numerator is established.",
       "provider": "OpenCode",
       "plan": "Go",
       "planLabel": "OpenCode Go $10 · Usage $60",
@@ -324,6 +464,8 @@
     },
     {
       "id": "opencode-go-usage-30",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Provider-published internal Usage allocation is not qualifying end-user-measured API-list-price consumption; no exact API-priced reported numerator is established.",
       "provider": "OpenCode",
       "plan": "Go",
       "planLabel": "OpenCode Go $10 · Usage $30",
@@ -341,6 +483,8 @@
     },
     {
       "id": "opencode-go-usage-15",
+      "excludedOn": "2026-10-08",
+      "exclusionReason": "Provider-published internal Usage allocation is not qualifying end-user-measured API-list-price consumption; no exact API-priced reported numerator is established.",
       "provider": "OpenCode",
       "plan": "Go",
       "planLabel": "OpenCode Go $10 · Usage $15",

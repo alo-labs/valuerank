@@ -32,10 +32,16 @@ def _routes_for_model(model_id: str, route_document: dict) -> list[dict]:
     return [route for route in route_document["routes"] if model_id in route.get("modelIds", [])]
 
 
-def select_best_route(model_id: str, route_document: dict) -> dict | None:
-    """Select the highest-multiple eligible route with deterministic tie-breaks."""
+def select_best_route(
+    model_id: str, route_document: dict, evaluated_variant: str | None = None
+) -> dict | None:
+    """Select an eligible route; variant-restricted evidence requires an exact match."""
 
-    candidates = _routes_for_model(model_id, route_document)
+    candidates = [
+        route
+        for route in _routes_for_model(model_id, route_document)
+        if route.get("requiredVariant") is None or route["requiredVariant"] == evaluated_variant
+    ]
     if not candidates:
         return None
     return max(
@@ -89,7 +95,7 @@ def build_cost_fields(models: list[dict], route_document: dict) -> list[dict]:
     """Return API and plan cost values plus normalized scores for each model."""
 
     api_costs = [model.get("aaEvalCost") for model in models]
-    routes = [select_best_route(model["id"], route_document) for model in models]
+    routes = [select_best_route(model["id"], route_document, model.get("aaVariant")) for model in models]
     plan_costs = [effective_cost(api_cost, route) for api_cost, route in zip(api_costs, routes)]
     comparable_plan_costs = [
         plan_cost if plan_cost is not None else api_cost
