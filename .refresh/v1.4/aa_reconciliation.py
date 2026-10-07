@@ -216,6 +216,29 @@ def reconcile(now=None):
         and (other["intelligenceIndex"] > row["intelligenceIndex"] or other["totalCostUsd"] < row["totalCostUsd"])
         for other in valid)]
     report["frontier"] = sorted(frontier, key=lambda row: (row.get("totalCostUsd") if number(row.get("totalCostUsd")) else math.inf, row["aaId"], row["name"]))
+    # Alternate effort decisions cannot waive a model family's required inclusion.
+    families = {}
+    for row in report["frontier"]:
+        family, required_id = row.get("family"), row.get("requiredFamilyModelId")
+        if not isinstance(family, str) or not family or not isinstance(required_id, str) or not required_id:
+            issues.append(f"{row['name']}: frontier family and requiredFamilyModelId are required.")
+            continue
+        group = families.setdefault(family, {"modelIds": set(), "rows": []})
+        group["modelIds"].add(required_id)
+        group["rows"].append(row)
+    report["requiredFamilies"] = []
+    for family, group in families.items():
+        if len(group["modelIds"]) != 1:
+            issues.append(f"{family}: conflicting required family model IDs.")
+            continue
+        required_id = next(iter(group["modelIds"]))
+        matches = [row for row in group["rows"] if row.get("valueRankModelId") == required_id]
+        included = len(matches) == 1 and required_id in ranked
+        report["requiredFamilies"].append({"family": family, "modelId": required_id,
+                                          "selectedFrontierConfigurationN": len(matches),
+                                          "primaryRanked": included})
+        if not included:
+            issues.append(f"Required AA frontier family {family} ({required_id}) must resolve to one exact selected frontier configuration and appear in the primary ranking.")
     report["comparisonCandidates"] = [row for row in valid if not row["valueRankModelId"]]
     report["metricGaps"] = [{"aaId": row["aaId"], "name": row["name"], "gap": row["metricGap"]} for row in valid if row["metricGap"]]
     report["observedRowN"] = len(rows)
@@ -243,6 +266,8 @@ def publication(report):
         summary += " Membership is AA's directly observed displayed frontier; no frontier is recomputed from these rows. "
         universe = report.get("sourceUniverse") if isinstance(report.get("sourceUniverse"), dict) else {}
         summary += f"Source selected {universe.get('selectedModelN', 'unknown')} models, plotted {universe.get('plottedPointN', 'unknown')} eligible points, and displayed {universe.get('observedFrontierPointN', 'unknown')} frontier points. Public metric/export gaps are shown explicitly."
+        required = report.get("requiredFamilies", [])
+        summary += f" All {len(required)} distinct frontier model families are required in the main ranking using exact selected configurations; {sum(item.get('primaryRanked') is True for item in required)} are included. Other effort configurations remain separate comparison entries."
     selected = {variant_key(row): row for row in report["frontier"] + report["comparisonCandidates"]}
     frontier_ids = {variant_key(row) for row in report["frontier"]}
     md_rows, html_rows = [], []

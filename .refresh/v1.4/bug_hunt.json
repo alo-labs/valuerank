@@ -11,6 +11,16 @@
   },
   "supplementalSourceCaptures": [
     {
+      "modelIds": ["gpt-6.1-sol"],
+      "observedAt": "2026-10-08",
+      "siteUpdatedOn": "2026-10-07",
+      "sourceCommit": "931c1ff9b9aaced865aaf56eaf744b7b1f182fc2",
+      "leaderboard": "https://bughunt.productcompass.pm/?preset=featured",
+      "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/931c1ff9b9aaced865aaf56eaf744b7b1f182fc2/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3",
+      "captureMethod": "Built-in browser official leaderboard and immutable benchmark-owner run notes",
+      "note": "Selective GPT-6.1 Sol Max inclusion; existing model records retain their original source snapshots. XHigh remains a distinct unselected configuration documented in the research note."
+    },
+    {
       "modelIds": ["mimo-v2-6-pro", "mimo-v2-6-flash"],
       "observedAt": "2026-10-07T14:15:34Z",
       "siteUpdatedOn": "2026-10-01",
@@ -31,6 +41,31 @@
     "note": "The focused search surfaced third-party discussion but no matching provider-hosted score for the unmatched cohort entries; no values are imputed."
   },
   "models": [
+    {
+      "modelId": "gpt-6.1-sol",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6.1 Sol (max effort) - mean of 3",
+      "fixedOf105": 44.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "verified first-party tier; below ultra ceiling",
+      "harness": "Codex CLI",
+      "harnessVersion": "0.159.0",
+      "route": "OpenAI ChatGPT account",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-08",
+      "reportedOn": "2026-09-30",
+      "sourceCommit": "931c1ff9b9aaced865aaf56eaf744b7b1f182fc2",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/931c1ff9b9aaced865aaf56eaf744b7b1f182fc2/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3",
+      "runScores": [44, 42, 47],
+      "observedRange": 5,
+      "judge": "grok-4.7 blinded to arm identity",
+      "wallMinutes": 139.3,
+      "listRateCostUsd": 5.88,
+      "note": "Owner-published mean of three identical Max configurations; 44.3/105 is the owner's published one-decimal mean. Codex0.159.0 differs from older OpenAI rows; max is below ultra. Some laptop load may inflate wall time. Cost is a list-rate estimate, not an invoice; no retained request reached long-context rates. Earlier sandbox-blocked attempt voided and excluded; extras65.3 are unscored."
+    },
     {
       "modelId": "gpt-6-astra",
       "matched": true,

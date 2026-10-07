@@ -22,7 +22,7 @@ from plan_costs import build_cost_fields, load_plan_routes, route_summary
 from site_header import inject_header
 from aa_reconciliation import reconcile as reconcile_aa, publication as aa_reconciliation_publication
 
-VERSION = "v1.9.5"
+VERSION = "v1.9.6"
 DATE = "October 8, 2026"
 SHORT_DATE = "Oct 8"
 CURRENCY = "$"
@@ -120,7 +120,11 @@ cost_mode = scores.get("costMode") or manifest.get("scoring", {}).get("costMode"
 cost_mode_label = "AA evaluation cost only" if cost_mode == "aa-only" else cost_mode
 cost_coverage = scores.get("costCoverage") or manifest.get("scoring", {}).get("costCoverage", {})
 cost_missing_text = ", ".join(cost_coverage.get("missingModels", [])) or "none"
-dropped = manifest.get("scoring", {}).get("droppedDimensions", [])
+dropped = scores.get("droppedDimensions")
+if dropped is None:
+    dropped = coverage_document.get("scoring", {}).get(
+        "droppedDimensions", manifest.get("scoring", {}).get("droppedDimensions", [])
+    )
 cost_weight = next((weight for weight in weights if weight["key"] == "costComposite"), None)
 cost_weight_text = f"{cost_weight['weightPct']:.2f}%" if cost_weight else "not included"
 site_cost_summary = "The default API Costs basis uses AA total evaluation cost for its fixed benchmark suite, rank-normalized with lower cost better. Plan Costs divides the same AA cost by the highest eligible subscription Value Multiple."
@@ -138,6 +142,39 @@ def pct(value, places=2):
 
 def pct_points(value, places=1):
     return f"{value:.{places}f}%" if isinstance(value, (int, float)) else "—"
+
+
+def metric_coverage_summary(model):
+    coverage = model.get("metricCoverage") or {}
+    model_dims = model.get("dims", {})
+    if "missingKeys" in coverage:
+        missing_keys = set(coverage.get("missingKeys") or [])
+    else:
+        missing_keys = {
+            weight["key"]
+            for weight in weights
+            if model_dims.get(weight["key"]) is None
+        }
+    missing_labels = [weight["label"] for weight in weights if weight["key"] in missing_keys]
+    available_keys = {
+        weight["key"]
+        for weight in weights
+        if model_dims.get(weight["key"]) is not None
+    }
+    available_priority = coverage.get("availablePriority")
+    if not isinstance(available_priority, (int, float)):
+        available_priority = sum(weight.get("priority", 0) for weight in weights if weight["key"] in available_keys)
+    total_priority = coverage.get("totalPriority")
+    if not isinstance(total_priority, (int, float)):
+        total_priority = sum(weight.get("priority", 0) for weight in weights)
+    coverage_pct = coverage.get("coveragePct")
+    if not isinstance(coverage_pct, (int, float)) and total_priority:
+        coverage_pct = 100 * available_priority / total_priority
+    if isinstance(coverage_pct, (int, float)):
+        coverage_text = f"{coverage_pct:.2f}% ({available_priority:g}/{total_priority:g} priority)"
+    else:
+        coverage_text = "—"
+    return coverage_text, ", ".join(missing_labels) or "none"
 
 
 def names(values):
@@ -160,10 +197,16 @@ livebench_supplemental_label = f"{livebench_supplemental_count} official supplem
 
 
 def primary_rows():
-    return "\n".join(
-        f"| {model['rank']} | {model['name']} | {model['overallScore']:.1f} | {model['qualityScore']:.1f} | {model['costComposite']:.2f} |"
-        for model in models
-    )
+    rows = []
+    for model in models:
+        coverage_text, missing_text = metric_coverage_summary(model)
+        rank = model.get("rank") if model.get("rank") is not None else "—"
+        rows.append(
+            f"| {rank} | {model['name']} | {fnum(model.get('overallScore'), 1)} | "
+            f"{fnum(model.get('qualityScore'), 1)} | {fnum(model.get('costComposite'))} | "
+            f"{coverage_text} | Missing: {missing_text} |"
+        )
+    return "\n".join(rows)
 
 
 def dimension_table():
@@ -347,36 +390,37 @@ readme = f"""# ValueRank
 **Updated:** {DATE}
 **Scope:** {n} primary-ranked models from a {source_n}-model AA-mapped comparison roster, {d} retained dimensions including Bug Hunt Bench
 
-Publication updated October 8, 2026 with selective MiMo and AA frontier additions. Earlier AA/DeepSWE observations remain dated September 29–30; current MiMo owner run notes were observed October 7. See per-model dates and capture precision in raw-data.md. This publication combines source snapshots with different dates.
+Publication updated October 8, 2026 with the current AA frontier reconciliation and selected benchmark updates. The complete 31-configuration DeepSWE v1.1 chart was observed October 8; the original 25 configuration records retain their earlier per-row observation dates. Earlier AA component snapshots retain their recorded dates, while the newly captured AA frontier profiles are dated October 8 and MiMo owner run notes October 7. See per-model dates and capture precision in raw-data.md.
 
 ## Current result
 
-ValueRank uses AA's [Coding Agent Index v1.5 DeepSWE v1.1 chart](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1), which publishes 25 agent/model configurations across 113 tasks, alongside the {source_n}-model AA-mapped comparison roster. The main score includes {n} rows with an exact DeepSWE model-variant result and an eligible Bug Hunt owner result; the other {len(unranked_models)} candidates remain source-only. Every chart result retains its displayed agent and effort, and results from other model versions or composite agents are not transferred. Provider claims fill benchmark-owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available.
+The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model represented on that observed frontier. The primary score uses each model's available exact-version values across the {d} retained dimensions; missing values remain null and each row's available priorities are renormalized to 100%. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
 
-| Rank | Model | Overall | Quality | AA eval-cost penalty (lower better) |
-|---:|---|---:|---:|---:|
+| Rank | Model | Overall | Quality | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
+|---:|---|---:|---:|---:|---:|---|
 {primary_rows()}
 
 The current Pareto frontier—undominated on composite cost versus quality—is: **{pareto_text}**.
 
 ## Refresh basis and v1.9 scoring update
 
-- **{n}/{source_n}** AA-mapped candidates have both an exact DeepSWE v1.1 chart variant and a Bug Hunt owner result, so only those enter the main composite. The other candidates remain unranked: **{unranked_names}**.
+- The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **{len(unranked_models)}** candidates have no rankable primary score: **{unranked_names}**.
+- For each model, ValueRank retains only its observed metrics, renormalizes that row's available dimension priorities, and reports `availablePriority / totalPriority` coverage plus missing metric names. No missing value receives a zero or neutral fill.
 - Bug Hunt Bench has priority **{bug_hunt_weight['priority']}** and weight **{bug_hunt_weight['weightPct']:.2f}%** in the main rank. DeepSWE v1.1 has priority **{deepswe_weight['priority']}** and weight **{deepswe_weight['weightPct']:.2f}%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
-- AA's Coding Agent Index v1.5 chart reports **{len(deepswe_configurations)} configurations** for DeepSWE v1.1 across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. All configurations and model-version mapping decisions are retained in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json); **{deepswe_overlap_n}** configurations map to the current model variants.
+- AA's Coding Agent Index v1.5 chart reports **{len(deepswe_configurations)} configurations** for DeepSWE v1.1 across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. All configurations and model-version mapping decisions are retained in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json); **{deepswe_overlap_n}** configurations map to selected model variants.
 - Artificial Analysis now uses **{aa_version}**: AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-LCR v1.1, and split AA-Omniscience accuracy/reliability components. τ³-Banking and Terminal-Bench 2.1 remain historical source fields only.
 - The standalone Terminal-Bench page has **{tb4_document['rowN']} official rows**, including **{tb4_document['matchedN']}/{tb4_document['cohortN']}** direct cohort matches. One separately labelled DeepSeek V4.1-Flash provider claim is used for the current `deepseek-v4-flash` API alias; official and claim counts are kept distinct.
-- **{md_benchmark_link('LiveBench')} {livebench_document['release'].replace('_', '-')}** provides the four-task Instruction Following mean plus Overall Score and Cost Per Successful Task views; the primary score includes Instruction Following because it has zero gaps in the exact-match cohort.
-- The companion Bug Hunt emphasis ranking covers the same **{bug_hunt_ranking['matchedN']}** exact-overlap models and raises Bug Hunt to **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%**; its ranked table and the full source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [.refresh/v1.4/bug_hunt.json](.refresh/v1.4/bug_hunt.json).
+- **{md_benchmark_link('LiveBench')} {livebench_document['release'].replace('_', '-')}** provides the four-task Instruction Following mean plus Overall Score and Cost Per Successful Task views; Instruction Following contributes where a selected model has an eligible value and is included in the row's available-priority calculation.
+- The companion Bug Hunt emphasis ranking covers **{bug_hunt_ranking['matchedN']}** eligible exact-variant owner results and raises Bug Hunt to **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [.refresh/v1.4/bug_hunt.json](.refresh/v1.4/bug_hunt.json).
 - The AA chart's full **{len(deepswe_configurations)}-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
-- The score retains **{d} zero-gap dimensions**; **{names([item['label'] for item in dropped])}** remain excluded because each has incomplete eligible coverage. Missing values remain null and are not neutral-filled.
-- AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value, so Speed is {'retained' if speed_in_primary else 'excluded'} under the zero-gap rule.
-- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** primary models. The API Costs baseline uses it consistently; the Plan Costs basis divides the same value by each model's highest eligible subscription Value Multiple.
+- The score retains **{d} primary dimensions**; **{names([item['label'] for item in dropped])}** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
+- AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
+- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** primary models. API Costs uses that amount where available; Plan Costs divides the same amount by each model's highest eligible subscription Value Multiple, and both views renormalize each row over its available dimensions.
 - Earlier ValueRank versions are not numerically comparable because this release changes benchmark weights and the ranked cohort.
 
 ## Sources and audit trail
 
-- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The public 25-configuration capture and model-variant decisions are recorded in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
+- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete {len(deepswe_configurations)}-configuration chart inventory, observed {deepswe_updated}, and model-variant decisions are recorded in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
 - [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
 - [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench), pinned at [release data commit {livebench_document['source'].get('releaseDataCommit', 'not recorded')}](https://github.com/livebench/new-livebench/commit/{livebench_document['source'].get('releaseDataCommit', '')}), for the 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
 - [Terminal-Bench 4.0](https://www.tbench.ai/) and the [official Harbor repository](https://github.com/harbor-framework/terminal-bench) for the current rendered leaderboard and task identity.
@@ -389,7 +433,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 
 - [scores.md](scores.md): final ranking, weights, and normalized matrix
 - [raw-data.md](raw-data.md): source values, selected AA variants, and supplemental coverage
-- [methodology.md](methodology.md): cohort, benchmark versions, normalization, and zero-gap rule
+- [methodology.md](methodology.md): frontier selection, benchmark versions, normalization, and row-level coverage
 - [site/index.html](site/index.html): interactive static publication
 - [site/tb4/index.html](site/tb4/index.html): current Terminal-Bench 4.0 score-versus-cost publication
 - [research/2026-09-29-valuerank-refresh-v4-3-2/](research/2026-09-29-valuerank-refresh-v4-3-2/): reproducible v4.3.2 refresh package
@@ -404,10 +448,11 @@ methodology = f"""# ValueRank Methodology
 
 ## Cohort and source versions
 
-The model universe is the **{source_n}-model AA-mapped ValueRank comparison roster**. AA's Coding Agent Index v1.5 chart publishes **{len(deepswe_configurations)} DeepSWE v1.1 configurations** across **{deepswe_chart_doc['benchmarkTasks']} tasks**. The primary rank contains **{n} models** with both an exact chart model-variant result and an eligible Bug Hunt owner result; all other candidates remain visible without a composite rank. Each chart result retains its displayed model variant, agent, and effort.
+The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every represented frontier model. AA's Coding Agent Index v1.5 chart publishes **{len(deepswe_configurations)} DeepSWE v1.1 configurations** across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
 
-- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the 25 visible configurations and exact-variant mapping decisions are pinned in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
+- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete {len(deepswe_configurations)}-configuration inventory and exact-variant mapping decisions are pinned in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
 - AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current {aa_version}.
+- AA Intelligence Index percentile comparisons use whole-point precision for every model because fresh public labels are rounded while older captures retain finer raw precision. Raw source inputs remain unchanged; sub-point differences should not be read as a reliable ordering.
 - AA v4.3.2 model values: first-party model pages selected by .refresh/v1.4/aa_mapping.json and recorded in aa_metrics.json.
 - LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **{livebench_document['source'].get('releaseDataCommit', 'not recorded')}**.
 - Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with {tb4_document['rowN']} official rows, **{tb4_document['matchedN']}** direct cohort matches, and **{tb4_document.get('providerClaimN', 0)}** eligible provider claim.
@@ -416,7 +461,7 @@ Earlier publications used different source snapshots, weights, or cohorts. They 
 
 ## Primary dimensions
 
-The score retains only dimensions with a genuine value for every one of the {n} ranked models, including exact owner-published Bug Hunt values. Values are stored as raw fractions in scores.json, then converted to rank scores within this cohort.
+The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Each model's available dimension priorities are then renormalized to 100%, and its `availablePriority / totalPriority` coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
 
 | # | Dimension | ValueRank weight | Direction |
 |---:|---|---:|---|
@@ -444,16 +489,17 @@ These AA methodology weights describe the source index, not the combined ValueRa
 
 The default API Costs basis uses each model's AA total evaluation cost in USD. Plan Costs divides that same value by the model's highest eligible subscription Value Multiple. Lower cost ranks better in both views; the site switcher recalculates the primary composite when the cost basis changes.
 
-## Zero-gap rule
+## Missing-metric handling
 
-- A candidate dimension is scored only when every model has an eligible value from the benchmark owner or an exact-version provider claim.
+- A retained dimension contributes to a model only when that model has an eligible value from the benchmark owner or an exact-version provider claim. Ranking within each dimension uses only models with eligible values.
 - Missing values remain null in aa_metrics.json and are listed in coverage_matrix.json.
-- No neutral 50, median, or mismatched-version value is used. Provider claims remain source-typed and are eligible only for the stated benchmark version and evaluated model/route.
-- AA output speed covers **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** is missing, so Speed is {'retained' if speed_in_primary else 'excluded'} under the zero-gap rule.
+- Each row's retained priorities are renormalized over that model's available values. Coverage is available priority divided by total retained priority; missing metric names accompany the percentage.
+- No zero, neutral 50, median, or mismatched-version value is used. Provider claims remain source-typed and are eligible only for the stated benchmark version and evaluated model/route.
+- AA output speed covers **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** is missing. If retained, Speed contributes only where a value exists and the gap is included in row coverage.
 - GPQA Diamond remains an explicitly labelled legacy ValueRank input; it is not a component of the v4.3.2 source composite.
 - AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** ranked models; the cost component uses **{cost_mode_label}** consistently across this cohort.
-- LiveBench Instruction Following is available for **{sum(model.get('livebenchInstructionFollowing') is not None for model in models)}/{n}** ranked models and is scored. Terminal-Bench 4.0 remains supplemental because it has gaps in this cohort.
-- Bug Hunt Bench has **{bug_hunt_source_matches_n}/{source_n}** exact owner results; **{bug_hunt_ranking['matchedN']}** also have an exact AA DeepSWE model-variant result and enter the primary composite at **{bug_hunt_weight['weightPct']:.2f}%**. {len(unranked_models)} candidates without the full overlap are not ranked.
+- LiveBench Instruction Following is available for **{sum(model.get('livebenchInstructionFollowing') is not None for model in models)}/{n}** ranked models and is scored where present. Terminal-Bench 4.0 is supplemental in this release under the published dimension-selection policy.
+- Bug Hunt Bench has **{bug_hunt_source_matches_n}/{source_n}** exact owner results. Eligible exact-variant results contribute where present at the published Bug Hunt priority; the separate emphasis view includes **{bug_hunt_ranking['matchedN']}** rows with eligible results.
 
 Dropped candidate dimensions:
 
@@ -463,19 +509,19 @@ Dropped candidate dimensions:
 
 ## Rank normalization
 
-For each retained dimension, models are ranked from best to worst and mapped with:
+For each retained dimension, models with an eligible value are ranked from best to worst and mapped using that dimension's available sample size:
 
 ((n - rank) / (n - 1)) × 100
 
-Rank 1 maps to 100, rank {n} maps to 0, and exact ties receive the average tied rank. Lower-is-better dimensions, including composite Cost, reverse the ordering before normalization.
+Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive the average tied rank. The sample size is the number of models with a value for that dimension. Lower-is-better dimensions, including composite Cost, reverse the ordering before normalization.
 
 ## Benchmark evaluation cost (score input)
 
-The Cost input uses **{cost_mode_label}** for every one of the {n} ranked models. AA Intelligence Index evaluation cost is normalized into costComposite; lower evaluation cost is better. No DeepSWE leaderboard cost or missing-value fill is used.
+The Cost input uses **{cost_mode_label}** where an AA Intelligence Index total evaluation cost is available; lower evaluation cost is better. Plan Costs divides that same total benchmark cost by the model's highest eligible subscription Value Multiple. A missing cost remains null and the row's other available priorities are renormalized; no DeepSWE leaderboard cost or missing-value fill is used.
 
 ## Quality score and interpretation
 
-Overall Score is the weighted sum of all retained dimensions. Quality Score removes Cost and renormalizes the remaining retained dimensions to 100%. Scores are rank-relative to this cohort, not probabilities and not an absolute model capability scale.
+Overall Score is the weighted sum of a model's available retained dimensions, with that row's available priorities renormalized to 100%. Quality Score removes Cost and renormalizes the available non-cost dimensions to 100%. Scores are rank-relative to the values available for this release, not probabilities and not an absolute model capability scale; row coverage is displayed beside each score.
 
 ## Supplemental data
 
@@ -491,11 +537,11 @@ When the benchmark owner has not published a result for a model, ValueRank uses 
 
 ## Bug Hunt Bench scoring
 
-Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **{bug_hunt_ranking['sourceCommit']}** and provides **{bug_hunt_source_matches_n}/{source_n}** exact results in the AA-mapped comparison roster. **{bug_hunt_ranking['matchedN']}** of those also have an exact AA DeepSWE v1.1 model-variant result, so both values enter the main {n}-model composite at Bug Hunt priority **{bug_hunt_weight['priority']}** (**{bug_hunt_weight['weightPct']:.2f}%**).
+Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **{bug_hunt_ranking['sourceCommit']}** and provides **{bug_hunt_source_matches_n}/{source_n}** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **{bug_hunt_weight['priority']}** (**{bug_hunt_weight['weightPct']:.2f}%** before row-level renormalization).
 
-The companion Bug Hunt emphasis ranking uses the same {n}-model exact-overlap cohort and re-ranks the other retained dimensions within those models. It gives Bug Hunt priority **{bug_hunt_ranking['benchmarkPriority']}** out of **{bug_hunt_ranking['totalPriority']}**, or **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%**. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
+The companion Bug Hunt emphasis ranking uses **{bug_hunt_ranking['matchedN']}** eligible owner-result rows and re-ranks the other available dimensions within that subset. It gives Bug Hunt priority **{bug_hunt_ranking['benchmarkPriority']}** out of **{bug_hunt_ranking['totalPriority']}**, or **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
 
-The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. The {len(unranked_models)} models without the full AA DeepSWE and Bug Hunt overlap remain unranked; some have only one of those results. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
+The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. Models remain visible when one or more retained metrics are missing, with their available-priority coverage shown. A model with no rankable primary metric remains unranked. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
 
 ## Limitations
 
@@ -504,13 +550,18 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
 - Rank normalization discards magnitude differences. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
 - Page variants can differ by reasoning effort; the selected URL and variant are recorded per model.
 - Provider claims may use a different harness or sampling procedure than the benchmark owner; displayed claim values are not presented as independent benchmark-owner measurements.
-- AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value, so Speed is {"included" if speed_in_primary else "excluded"} under the zero-gap rule.
+- AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.
 - LiveBench and Terminal-Bench have different task suites and release surfaces from the AA source component; their displayed values should not be substituted for one another or read as a continuous version-to-version series.
 """
 (ROOT / "methodology.md").write_text(methodology + "\n\n## Subscription evidence policy\n\n" + plan_policy_copy + "\n")
 
 def norm_values(model):
-    return ", ".join(f"{model['dims'][weight['key']]:.1f}" for weight in weights)
+    return ", ".join(
+        f"{model['dims'][weight['key']]:.1f}"
+        if isinstance(model.get("dims", {}).get(weight["key"]), (int, float))
+        else "⊘"
+        for weight in weights
+    )
 
 
 norm_rows = "\n".join(
@@ -525,9 +576,9 @@ API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same
 
 ## Final ranking
 
-| Rank | Model | Overall | Quality | Quality Rank | AA eval-cost penalty (lower better) |
-|---:|---|---:|---:|---:|---:|
-{chr(10).join(f"| {m['rank']} | {m['name']} | {m['overallScore']:.1f} | {m['qualityScore']:.1f} | {m['qualityRank']} | {m['costComposite']:.2f} |" for m in models)}
+| Rank | Model | Overall | Quality | Quality Rank | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
+|---:|---|---:|---:|---:|---:|---:|---|
+{chr(10).join(f"| {m.get('rank') or '—'} | {m['name']} | {fnum(m.get('overallScore'), 1)} | {fnum(m.get('qualityScore'), 1)} | {m.get('qualityRank') or '—'} | {fnum(m.get('costComposite'))} | {metric_coverage_summary(m)[0]} | {metric_coverage_summary(m)[1]} |" for m in models)}
 
 ## Bug Hunt Emphasis Ranking
 
@@ -561,11 +612,11 @@ Dimension order is the order in weights above:
 
 ## Coverage decision
 
-The score is zero-gap across all retained dimensions for the {n} exact-match models. {len(unranked_models)} models remain in the {source_n}-model source roster without a primary rank because they lack exact eligible Bug Hunt results. Dropped candidate dimensions are listed below; missing values remain null rather than receiving neutral scores.
+The current AA Intelligence Index score-versus-total-benchmark-cost frontier is reconciled into the selected catalog. The primary rank uses each model's available exact-version values and renormalizes its retained priorities per row; the ranking table reports the available-priority percentage and missing metric names. {len(unranked_models)} source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
 
 ## External benchmark coverage
 
-{md_benchmark_link('Artificial Analysis Intelligence Index')} provides the current AA component scores used by this release. {md_benchmark_link('LiveBench')} Instruction Following remains supplemental because the pinned release lacks full coverage in the exact-match cohort; its Overall Score and Cost Per Successful Task are also supplemental. {md_benchmark_link('Terminal-Bench 4.0')} remains supplemental because coverage is incomplete in the exact-match cohort. See [raw-data.md](raw-data.md) for source-backed tables.
+{md_benchmark_link('Artificial Analysis Intelligence Index')} provides the current AA component scores used by this release. {md_benchmark_link('LiveBench')} Instruction Following contributes for rows with an eligible value; its Overall Score and Cost Per Successful Task remain supplemental. {md_benchmark_link('Terminal-Bench 4.0')} remains supplemental under this release's dimension-selection policy. See [raw-data.md](raw-data.md) for source-backed tables.
 """
 (ROOT / "scores.md").write_text(scores_md)
 
@@ -614,13 +665,13 @@ raw_data = f"""# ValueRank {VERSION} Raw Data
 
 **Version:** {VERSION} · **Updated:** {DATE} · **AA DeepSWE chart observed:** {deepswe_updated} · **AA source:** [{aa_version}]({AA_METHODOLOGY_URL})
 
-This is a selective publication update with mixed source dates. Earlier AA and DeepSWE observations remain September 29–30 captures; the newly added MiMo AA observations and AA displayed frontier were captured October 8. Bug Hunt's base snapshot remains pinned separately from the selectively added MiMo owner run notes observed October 7. The publication date does not imply that all benchmark rows were recaptured October 8. Per-model AA dates, precision, and source notes appear below; rounded public chart/tooltips preserve their displayed precision and do not establish hidden unrounded payload values.
+This publication combines source snapshots with different observation dates. The complete AA DeepSWE v1.1 chart inventory was observed October 8 and contains 31 configurations; the original 25 configuration records retain their prior per-row observation dates. Earlier AA component snapshots retain their recorded dates, while newly captured AA frontier profiles were observed October 8. Bug Hunt's base snapshot remains pinned separately from the selectively added MiMo owner run notes observed October 7. The publication date does not imply that every benchmark row was recaptured October 8. Per-model AA dates, precision, and source notes appear below; rounded public chart/tooltips preserve their displayed precision and do not establish hidden unrounded payload values.
 
-The AA chart publishes {len(deepswe_configurations)} DeepSWE v1.1 agent/model configurations; {deepswe_overlap_n} exact model variants map to this {source_n}-model ValueRank comparison roster. The main score ranks {n} models with both an exact AA DeepSWE result and a Bug Hunt owner result; the other candidates remain source-only: {unranked_names}. Raw AA values keep their source units: Elo fields remain Elo, and ratio fields are shown as percentages. **{aa_index_estimated_models}** has an AA Intelligence Index estimate; it is labelled in the matrix. Benchmark-owner results, estimates, and provider claims remain source-typed.
+The AA chart publishes {len(deepswe_configurations)} DeepSWE v1.1 agent/model configurations; {deepswe_overlap_n} exact model variants map to selected catalog entries. The primary score uses eligible exact-version dimensions available for each model rather than requiring complete benchmark overlap. Missing values remain null and are reported with row-level priority coverage. Raw AA values keep their source units: Elo fields remain Elo, and ratio fields are shown as percentages. **{aa_index_estimated_models}** has an AA Intelligence Index estimate; it is labelled in the matrix. Benchmark-owner results, estimates, and provider claims remain source-typed.
 
 ## DeepSWE v1.1 AA chart configurations
 
-AA publishes 25 of 25 configurations in the visible chart. Pass@1 is averaged across three attempts per task. Exact model-version mismatches and composite-agent configurations remain separate from ValueRank model-family rows.
+The visible chart contains all {len(deepswe_configurations)} configurations in the October 8 capture. Pass@1 is averaged across three attempts per task. Exact model-version mismatches and composite-agent configurations remain separate from ValueRank model-family rows; the original 25 records retain their previous row observation dates.
 
 | # | Agent | Evaluated model variant | Effort | Pass@1 | ValueRank mapping | Mapping note |
 |---:|---|---|---|---:|---|---|
@@ -656,7 +707,7 @@ LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **{livebe
 
 ## {md_benchmark_link('Bug Hunt Bench')} external component
 
-The benchmark owner reports planted bugs fixed out of 105 across two repositories. This snapshot has **{bug_hunt_source_matches_n}/{source_n}** eligible exact selected-variant Bug Hunt results; **{bug_hunt_ranking['matchedN']}** also have an exact AA DeepSWE variant and enter the main score and emphasis view. The base snapshot is pinned to [scoreboard commit {bug_hunt_ranking['sourceCommit']}]({bug_hunt_document['sources']['scoreboard']}); selectively added MiMo records link to their individual owner notes at commit `7dd3c23a4c86a3fac586707d01129bf549bae325`, observed October 7. Per-record links preserve each source snapshot. The {len(unranked_models)} models without full overlap remain unranked: {unranked_names}.
+The benchmark owner reports planted bugs fixed out of 105 across two repositories. This snapshot has **{bug_hunt_source_matches_n}/{source_n}** eligible exact selected-variant Bug Hunt results. Eligible results contribute where available to each model’s primary score; the separate Bug Hunt emphasis view includes **{bug_hunt_ranking['matchedN']}** exact-variant results. The base snapshot is pinned to [scoreboard commit {bug_hunt_ranking['sourceCommit']}]({bug_hunt_document['sources']['scoreboard']}); selectively added MiMo records link to their individual owner notes at commit `7dd3c23a4c86a3fac586707d01129bf549bae325`, observed October 7. Per-record links preserve each source snapshot. Models without any available primary quality dimension remain unranked: {unranked_names}.
 
 | Model | Fixed / 105 | Runs / aggregation | Evaluated model | Effort and status | Harness | Route | Coverage |
 |---|---:|---|---|---|---|---|---|
@@ -706,7 +757,7 @@ Missing values are intentionally represented as null; no old-version, model-fami
 
 ## Machine-readable artifacts
 
-- [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json): AA Coding Agent Index v1.5 DeepSWE v1.1 chart, all 25 configurations and exact model-variant mappings
+- [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json): AA Coding Agent Index v1.5 DeepSWE v1.1 chart, all {len(deepswe_configurations)} configurations and exact model-variant mappings
 - [.refresh/v1.4/aa_metrics.json](.refresh/v1.4/aa_metrics.json): decoded current AA model payloads
 - [.refresh/v1.4/scores.json](.refresh/v1.4/scores.json): normalized scores and rankings
 - [.refresh/v1.4/coverage_matrix.json](.refresh/v1.4/coverage_matrix.json): primary and supplemental availability
@@ -809,8 +860,11 @@ SITE_DIMS = [SITE_DIM_META[weight["key"]] for weight in weights]
 speed_dim_idx = next((index for index, item in enumerate(SITE_DIMS) if item[0] == "speed"), -1)
 site_models = []
 for model, cost_fields in zip(models, plan_cost_fields):
+    site_dim_values = [model.get("dims", {}).get(dim_key) for dim_key, _key, _full, _cat in SITE_DIMS]
+    metric_coverage = model.get("metricCoverage") or {}
+    missing_metric_keys = set(metric_coverage.get("missingKeys") or [])
     site_models.append({
-        "rank": model["rank"],
+        "rank": model.get("rank"),
         "name": model["name"],
         "shortName": model["shortName"],
         "developer": model["developer"],
@@ -844,12 +898,19 @@ for model, cost_fields in zip(models, plan_cost_fields):
             "agent": model.get("terminalBenchV4Agent"),
             "releaseDate": model.get("terminalBenchV4ReleaseDate"),
         },
-        "overallScore": model["overallScore"],
-        "qualityScore": model["qualityScore"],
-        "qualityRank": model["qualityRank"],
-        "missingCount": sum(1 for weight in weights if weight["key"] not in model["dims"]),
-        "dims": [model["dims"][dim_key] for dim_key, _key, _full, _cat in SITE_DIMS],
-        "isMissing": [False] * len(SITE_DIMS),
+        "overallScore": model.get("overallScore"),
+        "qualityScore": model.get("qualityScore"),
+        "qualityRank": model.get("qualityRank"),
+        "metricCoverage": {
+            "availablePriority": metric_coverage.get("availablePriority"),
+            "totalPriority": metric_coverage.get("totalPriority"),
+            "coveragePct": metric_coverage.get("coveragePct"),
+            "missingKeys": metric_coverage.get("missingKeys", []),
+        },
+        "missingMetricLabels": [weight["label"] for weight in weights if weight["key"] in missing_metric_keys],
+        "missingCount": sum(1 for value in site_dim_values if value is None),
+        "dims": site_dim_values,
+        "isMissing": [value is None for value in site_dim_values],
         "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": ranking_history.get(model["id"]), "v160": None, "v170": None, "v190": ranking_history_v190.get(model["id"]), "v191": ranking_history_v191.get(model["id"]), "v192": ranking_history_v192.get(model["id"]), "v193": model.get("rank")},
     })
 
@@ -957,7 +1018,44 @@ function activeCostScore(model) {
   if (candidate !== null && candidate !== undefined && Number.isFinite(Number(candidate))) return Number(candidate);
   if (model.apiCostScore !== null && model.apiCostScore !== undefined && Number.isFinite(Number(model.apiCostScore))) return Number(model.apiCostScore);
   const base = model.dims?.[0];
-  return base !== null && base !== undefined && Number.isFinite(Number(base)) ? Number(base) : 50;
+  return base !== null && base !== undefined && Number.isFinite(Number(base)) ? Number(base) : null;
+}
+
+function hasDimensionValue(model, index) {
+  const value = model?.dims?.[index];
+  return value !== null && value !== undefined && Number.isFinite(Number(value));
+}
+
+function effectiveDimWeights(model, costPct = costWeightPct) {
+  const requestedCost = costPct === null || costPct === undefined || !Number.isFinite(Number(costPct))
+    ? DIM_WEIGHTS[0] / 100
+    : Math.min(100, Math.max(0, Number(costPct))) / 100;
+  const defaultCost = Number(DIM_WEIGHTS[0]) / 100;
+  const qualityScale = defaultCost < 1 ? (1 - requestedCost) / (1 - defaultCost) : 0;
+  const weights = DIM_WEIGHTS.map((weight, index) => {
+    if (!hasDimensionValue(model, index)) return 0;
+    return index === 0 ? requestedCost : (Number(weight) / 100) * qualityScale;
+  });
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  return total > 0 ? weights.map(weight => weight / total) : weights;
+}
+
+function getModelCoverage(model) {
+  const value = model?.metricCoverage?.coveragePct;
+  if (value !== null && value !== undefined && Number.isFinite(Number(value))) return Number(value);
+  const total = DIM_WEIGHTS.reduce((sum, weight) => sum + Number(weight), 0);
+  const available = DIM_WEIGHTS.reduce((sum, weight, index) => sum + (hasDimensionValue(model, index) ? Number(weight) : 0), 0);
+  return total > 0 ? (available / total) * 100 : null;
+}
+
+function modelCoverageNote(model) {
+  const coverage = getModelCoverage(model);
+  if (coverage === null) return '';
+  const missing = Array.isArray(model?.missingMetricLabels) ? model.missingMetricLabels : [];
+  const detail = missing.length
+    ? `Missing: ${missing.join(', ')}`
+    : coverage < 99.995 ? 'Some retained metrics unavailable' : 'All retained metrics available';
+  return `Baseline priority coverage ${coverage.toFixed(2)}% · ${detail}`;
 }
 
 function formatValueMultiple(route) {
@@ -993,11 +1091,15 @@ function recomputeCostState() {
     model.activeCostUsd = activeCostUsd(model);
     model.evalCost = activeCostScore(model);
     model.dims[0] = model.evalCost;
+    model.missingCount = model.dims.reduce((count, value) => count + (value === null || value === undefined ? 1 : 0), 0);
     model.costTier = compositeCostTier(model.evalCost);
     model.activeScore = computeNewScore(model, costWeightPct);
     model.overallScore = model.activeScore;
   });
-  const sorted = [...MODELS].sort((a, b) => b.activeScore - a.activeScore || a.name.localeCompare(b.name));
+  MODELS.forEach(model => { model.rank = null; });
+  const sorted = MODELS
+    .filter(model => Number.isFinite(model.activeScore))
+    .sort((a, b) => b.activeScore - a.activeScore || a.name.localeCompare(b.name));
   sorted.forEach((model, index) => { model.rank = index + 1; });
   tableModels = MODELS.map(model => ({ ...model, score: model.activeScore }));
 }
@@ -1430,7 +1532,7 @@ html = html.replace("the 8 ranked models", f"the {n}-model cohort")
 html = html.replace("n = 17", f"n = {n}")
 html = html.replace("rank 17", f"rank {n}")
 html = html.replace("17 DeepSWE", f"{n} DeepSWE")
-html = html.replace("12 zero-gap dimensions", f"{d} zero-gap dimensions")
+html = html.replace("12 zero-gap dimensions", f"{d} retained dimensions")
 html = html.replace("17 × 12", f"{n} × {d}")
 html = html.replace("ranked 1–17", f"ranked 1–{n}")
 html = html.replace("Seven complementary charts", "Eight complementary charts")
@@ -1438,7 +1540,7 @@ html = html.replace("Sep 4", "Sep 6")
 html = html.replace("Sep 5", "Sep 6")
 html = html.replace("ValueRank v1.4.0", f"ValueRank {VERSION}")
 html = html.replace("Production AI Ranking Framework · v1.4.0", f"Production AI Ranking Framework · {VERSION}")
-html = html.replace("v1.4.0 uses zero missing benchmark cells", f"{VERSION} uses zero missing benchmark cells")
+html = html.replace("v1.4.0 uses zero missing benchmark cells", f"{VERSION} shows unavailable metrics explicitly and renormalizes over each model's observed dimensions")
 
 if "try { initCostBasis(); } catch (e) { console.error(e); }" not in html:
     html = html.replace(
@@ -1450,7 +1552,7 @@ html = html.replace("v1.4.0 Release", f"{VERSION} Release")
 html = html.replace("primary-source data in v1.4.0", f"primary-source data in {VERSION}")
 html = html.replace("retained v1.4.0 dimension", f"retained {VERSION} dimension")
 html = html.replace("in <strong>v1.4.0</strong>", f"in <strong>{VERSION}</strong>")
-html = html.replace("v1.4.0 has <strong>no missing-data", f"{VERSION} has <strong>no missing-data")
+html = html.replace("v1.4.0 has <strong>no missing-data", f"{VERSION} marks missing data")
 html = html.replace("In <strong>v1.4.0</strong>", f"In <strong>{VERSION}</strong>")
 html = html.replace("in v1.4.0", f"in {VERSION}")
 html = html.replace("weighted average of 13 normalized", f"weighted average of {d} normalized")
@@ -1478,10 +1580,10 @@ html = re.sub(
 )
 
 hero_desc = (
-    f'ValueRank ranks <strong>{n} models</strong> with both exact AA DeepSWE v1.1 model-variant results and Bug Hunt results from a {source_n}-model AA-mapped comparison roster across a '
-    f'<strong>zero-gap {d}-dimension set</strong>; Bug Hunt contributes {bug_hunt_weight["weightPct"]:.2f}% of the main score. {VERSION} uses '
-    f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. '
-    f'Speed is {"included in the score" if speed_in_primary else "excluded from the score"}; AA speed is numeric for {speed_selected_available_n}/{n} selected pages and missing for {speed_missing_text}. The incomplete dimensions {", ".join(item["label"] for item in dropped if item["label"] != "Speed")} remain supplemental because exact cohort coverage is incomplete.'
+    f'ValueRank ranks <strong>{n} models</strong> with at least one available non-cost quality dimension from a {source_n}-model AA-mapped comparison roster reconciled to the current AA Intelligence Index score-versus-total-benchmark-cost frontier. '
+    f'Each model score uses its observed retained dimensions, with available priorities renormalized per model; priority coverage and missing metrics are shown beside partial scores. Bug Hunt contributes {bug_hunt_weight["weightPct"]:.2f}% of the main score when observed. {VERSION} uses '
+    f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus configuration-specific DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. '
+    f'Speed is {"included in the score" if speed_in_primary else "excluded from the score"}; AA speed is numeric for {speed_selected_available_n}/{n} selected pages and missing for {speed_missing_text}. Dimensions excluded from this release are {", ".join(item["label"] for item in dropped if item["label"] != "Speed") or "none"}.'
 )
 html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero-desc">\n          {hero_desc}\n        </p>', "hero copy")
 html = replace_once(html, r'<div class="(?:nav-meta|vr-nav-meta)">[^<]*</div>', f'<div class="vr-nav-meta">{DATE} · {n} models · {d} dimensions</div>', "nav metadata")
@@ -1493,7 +1595,7 @@ insight_bodies = [
     'The Pareto view highlights models that are not outperformed on both quality and the selected cost basis.',
     'Quality and overall scores separate benchmark performance from the selected cost view.',
     'Compare API Costs and Plan Costs with Quality to find the best fit for your usage.',
-    f'{VERSION} uses <strong>{len(deepswe_configurations)} AA DeepSWE chart configurations</strong> and keeps <strong>{d} zero-gap dimensions</strong>; {"Speed is included" if speed_in_primary else "Speed is excluded"} because coverage is {speed_selected_available_n}/{n}.',
+    f'{VERSION} records <strong>{len(deepswe_configurations)} AA DeepSWE chart configurations</strong> and uses <strong>{d} retained dimensions</strong> with per-model weight renormalization for available results; {"Speed is included" if speed_in_primary else "Speed is excluded"} because it is observed for {speed_selected_available_n}/{n} ranked models.',
 ]
 grid_start = html.find('<div class="insight-grid"')
 grid_end = html.find('</section>', grid_start)
@@ -1514,7 +1616,7 @@ html = html[:grid_start] + grid + html[grid_end:]
 chart_replacements = [
     (r'<div class="chart-desc"><strong>(?:ValueRank )?Pareto Frontier:</strong>[\s\S]*?</div>', f'<div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>{pareto_text}</strong>. Every other ranked model is dominated on composite cost versus quality.</div>'),
     (r'(<div class="chart-desc"><strong>Score Decomposition:</strong>)[\s\S]*?</div>', f'\\1 {VERSION} decomposes the weighted <strong>{d}-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>'),
-    (r'(<div class="chart-desc"><strong>Dimension Heatmap:</strong>)[\s\S]*?</div>', f'\\1 All {n} models × {d} retained dimensions. Color = normalized rank score; every displayed cell is confirmed source data.</div>'),
+    (r'(<div class="chart-desc"><strong>Dimension Heatmap:</strong>)[\s\S]*?</div>', f'\\1 All {n} models × {d} retained dimensions. Color = normalized rank score; missing cells are marked unavailable (⊘).</div>'),
     (r'(<div class="chart-desc"><strong>Version History:</strong>)[\s\S]*?</div>', f'\\1 Historical rank context through {VERSION}. The current point is a new benchmark-version snapshot, not a claim of score continuity.</div>'),
 ]
 for pattern, replacement in chart_replacements:
@@ -1527,7 +1629,7 @@ html = re.sub(
 
 html = re.sub(
     r'(<div class="section-sub">)How scores are calculated(?: across)?[\s\S]*?(</div>)',
-    rf'\1How scores are calculated across {d} current zero-gap dimensions, with explicit cost construction and coverage provenance.\2',
+    rf'\1How scores are calculated from each model’s available dimensions, with per-model weight renormalization and explicit coverage provenance.\2',
     html,
     count=1,
 )
@@ -1590,7 +1692,7 @@ final_cost_surface_replacements = [
     ),
     (
         "function compositeCostTier(cost) {\n  if (cost <= 15) return 'Budget';\n  if (cost <= 22) return 'Near-Budget';\n  if (cost <= 35) return 'Mid-Range';\n  if (cost <= 55) return 'Premium';\n  return 'Expensive';\n}",
-        "function compositeCostTier(cost) {\n  const costPenalty = 100 - Number(cost);\n  if (costPenalty <= 15) return 'Budget';\n  if (costPenalty <= 22) return 'Near-Budget';\n  if (costPenalty <= 35) return 'Mid-Range';\n  if (costPenalty <= 55) return 'Premium';\n  return 'Expensive';\n}",
+        "function compositeCostTier(cost) {\n  if (cost === null || cost === undefined || !Number.isFinite(Number(cost))) return 'Unknown';\n  const costPenalty = 100 - Number(cost);\n  if (costPenalty <= 15) return 'Budget';\n  if (costPenalty <= 22) return 'Near-Budget';\n  if (costPenalty <= 35) return 'Mid-Range';\n  if (costPenalty <= 55) return 'Premium';\n  return 'Expensive';\n}",
     ),
 ]
 for old, new in final_cost_surface_replacements:
@@ -1705,7 +1807,7 @@ else:
 bug_hunt_card = f'''    <!-- BUG HUNT DATA CARD START -->
     <div class="card mb-6" id="bughunt-data">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">{html_external_link('Bug Hunt Results', BUG_HUNT_URL)}</h3>
-      <p class="method-text" style="margin-bottom:16px;">Bug Hunt has <strong>{bug_hunt_source_matches_n}/{source_n}</strong> exact owner results; <strong>{bug_hunt_ranking['matchedN']}</strong> overlap with an exact AA DeepSWE model variant and contribute to the primary score at <strong>{bug_hunt_weight['weightPct']:.2f}%</strong>. The companion emphasis view raises Bug Hunt to <strong>{bug_hunt_ranking['benchmarkWeightPct']:.2f}%</strong> (priority {bug_hunt_ranking['benchmarkPriority']} of {bug_hunt_ranking['totalPriority']}). {len(unranked_models)} candidates without the full overlap remain unranked. The table preserves effort, harness, route, and repeat count because results measure each tested agent stack.</p>
+      <p class="method-text" style="margin-bottom:16px;">Bug Hunt has <strong>{bug_hunt_source_matches_n}/{source_n}</strong> exact owner results. Eligible exact-variant results contribute to each model’s primary score where observed; missing rows remain unavailable, and available priorities are renormalized per model. The companion emphasis view uses the <strong>{bug_hunt_ranking['matchedN']}</strong> eligible exact-variant results and raises Bug Hunt to <strong>{bug_hunt_ranking['benchmarkWeightPct']:.2f}%</strong> (priority {bug_hunt_ranking['benchmarkPriority']} of {bug_hunt_ranking['totalPriority']}). Models without any observed primary quality metric remain unranked. The table preserves effort, harness, route, and repeat count because results measure each tested agent stack.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Bug Hunt rank</th><th>Model</th><th>Fixed / 105</th><th>Emphasis score</th><th>Runs</th><th>Effort</th><th>Harness / route</th><th>Primary rank</th></tr></thead>
@@ -1735,14 +1837,14 @@ else:
 # Refresh current-release copy retained in the prior generated template.
 html = html.replace("ValueRank v1.5.0", f"ValueRank {VERSION}")
 html = html.replace("Production AI Ranking Framework · v1.5.0", f"Production AI Ranking Framework · {VERSION}")
-html = html.replace("v1.5.0 uses zero missing benchmark cells and no neutral-fill placeholders", f"{VERSION} uses zero-gap dimensions and no neutral-fill placeholders")
+html = html.replace("v1.5.0 uses zero missing benchmark cells and no neutral-fill placeholders", f"{VERSION} keeps missing metrics unavailable and renormalizes each model’s observed priorities")
 html = html.replace("v1.5.0 Release", f"{VERSION} Release")
 html = html.replace("For each of 12 dimensions", f"For each of {d} retained dimensions")
 html = html.replace("all 12 dimensions", f"all {d} retained dimensions")
 html = html.replace("12 normalized dimension scores", f"{d} normalized dimension scores")
 html = html.replace("for every retained v1.5.0 dimension", f"for every retained {VERSION} dimension")
-html = html.replace("v1.5.0 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>", f"{VERSION} excludes incomplete candidate dimensions and uses no neutral-fill values")
-html = html.replace("There are <strong>no neutral missing-data cells</strong> in v1.5.0.", f"In {VERSION}, incomplete candidate dimensions are excluded rather than imputed.")
+html = html.replace("v1.5.0 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>", f"{VERSION} displays missing values as unavailable and does not impute them")
+html = html.replace("There are <strong>no neutral missing-data cells</strong> in v1.5.0.", f"In {VERSION}, each model's available metric weights are renormalized; missing values remain unavailable.")
 html = html.replace("All scored cells are confirmed primary-source data in v1.5.0", f"All retained score inputs are source-backed in {VERSION}")
 html = html.replace("cost uses deepswe-only (AA v4.2 total cost incomplete)", f"cost uses {cost_mode_label}")
 html = html.replace("captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete.", f"captured AA total evaluation costs remain source-only because coverage is {cost_coverage.get('availableN', 0)}/{n}.")
@@ -1758,7 +1860,7 @@ html = html.replace("ValueRank v1.5.0 · September 6, 2026 · 21 models × 12 di
 html = re.sub("const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
 html = html.replace(
     "For each of 12 retained dimensions, all 21 models are ranked 1–21 (best to worst). The formula maps rank 1 → 100 pts and rank 21 → 0 pts, with tied ranks receiving the average of their tied positions. v1.6.0 excludes incomplete candidate dimensions and uses no neutral-fill values.",
-    f"For each of {d} retained dimensions, the {n} exact-overlap models are ranked from 1–{n}. Rank 1 maps to 100 points and rank {n} to 0; ties receive the average tied rank. {VERSION} excludes incomplete dimensions and does not fill missing values.",
+    f"For each retained dimension, only models with an observed value are ranked. Rank 1 maps to 100 points and the last observed rank to 0; ties receive the average tied rank. {VERSION} renormalizes each model's available priorities and does not fill missing values.",
 )
 html = html.replace(
     "The final ValueRank score is a weighted sum across all 12 retained dimensions. <strong>Cost weight: 25%</strong> (slider-adjustable). Non-Hallucination Rate remains a primary reliability factor, and cost uses DeepSWE-only and is rank-normalized with lower cost better.",
@@ -1766,15 +1868,15 @@ html = html.replace(
 )
 html = html.replace(
     "If even one of the 21-model cohort is genuinely missing from a benchmark, that benchmark is excluded from the current primary score. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.",
-    f"If any of the {n} primary-cohort models is missing from a benchmark, that dimension is excluded from the composite. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.",
+    f"Each model's observed retained metrics contribute to its score, with available priorities renormalized; missing values stay unavailable. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.",
 )
 html = html.replace(
     "The 68% non-cost portion, computed as the weighted sum of all 13 non-cost dimensions. Represents pure capability ranking without cost penalty.",
-    f"The weighted sum of the {d - 1} non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.",
+    f"The weighted average of each model's available non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.",
 )
 html = html.replace(
     "Each model's score is a weighted average of 14 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 21</strong> for every retained v1.6.0 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. In v1.6.0, incomplete candidate dimensions are excluded rather than imputed. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because coverage is 20/21.",
-    f"Each model's score is a weighted average of {d} normalized dimension scores across the {n}-model exact-overlap cohort. Each dimension score uses <code>((n − rank) / (n − 1)) × 100</code>, with n = {n}; ties receive average rank. Incomplete dimensions are excluded rather than imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides that amount by the highest eligible subscription Value Multiple, with lower cost better in both views.",
+    f"Each model's score is the weighted average of its available normalized dimensions; available priorities are renormalized per model. Dimension scores use <code>((n − rank) / (n − 1)) × 100</code> over models with an observation for that dimension; ties receive average rank. Missing values are not imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides that amount by the highest eligible subscription Value Multiple, with lower cost better in both views.",
 )
 html = html.replace(
     "The 32.05% cost weight uses DeepSWE-only; AA total evaluation cost is missing for Gemini 3.7 Flash, so no selective substitution is used.",
@@ -1782,11 +1884,11 @@ html = html.replace(
 )
 html = html.replace(
     "In <strong>v1.5.0</strong>, there are <strong>no ⊘ cells</strong> because any benchmark without full cohort coverage is excluded entirely.",
-    f"In <strong>{VERSION}</strong>, there are <strong>no ⊘ cells</strong> because any dimension without full coverage in the {n}-model cohort is excluded.",
+    f"In <strong>{VERSION}</strong>, ⊘ marks a missing observation; each model's score uses available metrics with priorities renormalized per row.",
 )
 html = html.replace(
     "The <strong>overall Score</strong> includes all <strong>12 retained dimensions</strong> with cost at 25% (slider default) and Speed is excluded because coverage is 20/21; missing for Kimi K3.. The <strong>Quality Score</strong> is recalculated using only the <strong>13 non-cost dimensions</strong> (renormalized to 100%). It answers: <em>\"which model is best at actual tasks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
-    f"The <strong>overall Score</strong> includes all <strong>{d} retained dimensions</strong>, including Bug Hunt and DeepSWE v1.1, with cost at {weight_by_key['costComposite']['weightPct']:.2f}% by default. The <strong>Quality Score</strong> renormalizes the <strong>{d - 1} non-cost dimensions</strong> to 100%. It answers: <em>\"which model ranks highest on the selected benchmarks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
+    f"The <strong>overall Score</strong> uses each model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at {weight_by_key['costComposite']['weightPct']:.2f}% by default. The <strong>Quality Score</strong> renormalizes each model’s available non-cost dimensions to 100%. It answers: <em>\"which model ranks highest on the selected benchmarks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
 )
 html = html.replace(
     "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple. That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.6.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#2</strong> after cost.",
@@ -1842,7 +1944,7 @@ html = html.replace('Production AI Ranking Framework · v1.7.0', f'Production AI
 html = html.replace('Current Top 3 · DeepSWE Cohort', 'Current Top 3 · Shared DeepSWE + Bug Hunt Cohort')
 html = html.replace(
     'v1.7.0 primary score uses zero-gap dimensions and no neutral-fill placeholders',
-    f'{VERSION} primary score uses zero-gap dimensions and no neutral-fill placeholders',
+    f'{VERSION} primary score uses each model’s observed dimensions, renormalizes available weights, and does not fill missing metrics',
 )
 html = html.replace('<div class="insight-title">v1.7.0 Release</div>', f'<div class="insight-title">{VERSION} Release</div>')
 html = html.replace(
@@ -1901,7 +2003,7 @@ html = html.replace(
 faq_updates = [
     (
         'What does the overall score actually represent?',
-        f'Each model’s score is a weighted average of {d} normalized dimension scores across the {n}-model exact-overlap cohort. Each dimension score uses <code>((n − rank) / (n − 1)) × 100</code>, with n = {n}; ties receive average rank. Incomplete dimensions are excluded rather than imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.',
+        f'Each model’s score is the weighted average of its available normalized dimensions; available priorities are renormalized per model and priority coverage plus missing metrics are reported beside the score. Dimension scores use <code>((n − rank) / (n − 1)) × 100</code> over models with an observation for that dimension; ties receive average rank. Missing values are not imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.',
     ),
     (
         f'Why is cost weighted at {cost_weight["weightPct"]:.2f}% by default?',
@@ -1909,11 +2011,11 @@ faq_updates = [
     ),
     (
         'What does ⊘ mean in ValueRank?',
-        f'In historical ValueRank versions, ⊘ marked a genuine benchmark data gap. In {VERSION}, incomplete dimensions are excluded from the composite, so every ranked model has full coverage across the retained dimensions.',
+        f'⊘ marks a missing observation for that model and dimension. The score excludes missing metrics and renormalizes the available priorities per model; the table reports priority coverage and missing metrics beside each partial score.',
     ),
     (
         "What's the difference between Score and Quality Score?",
-        f'The overall Score includes all {d} retained dimensions, including Bug Hunt and DeepSWE v1.1, with cost at {cost_weight["weightPct"]:.2f}% by default. Quality Score renormalizes the {d - 1} non-cost dimensions to 100%, showing benchmark performance without the cost weight.',
+        f'The overall Score uses the model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at {cost_weight["weightPct"]:.2f}% by default. Quality Score renormalizes the available non-cost dimensions to 100%, showing benchmark performance without the cost weight.',
     ),
     (
         'What is the Pareto frontier?',
@@ -1925,11 +2027,11 @@ faq_updates = [
     ),
     (
         'How often is ValueRank updated?',
-        f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} uses AA Coding Agent Index v1.5 DeepSWE v1.1 results, includes Bug Hunt in the primary score, and ranks {n} exact-overlap models across {d} zero-gap dimensions.',
+        f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} reconciles the AA Intelligence Index score-versus-total-benchmark-cost frontier, uses configuration-specific DeepSWE v1.1 results, and includes observed Bug Hunt results in the per-model available-dimension score.',
     ),
     (
         "Is Claude Opus 5.5 included in the primary ranking?",
-        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. The composite ranks {n} exact-overlap models across {d} zero-gap dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.',
+        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.',
     ),
 ]
 for question, answer in faq_updates:
@@ -1951,9 +2053,236 @@ def replace_current_copy(source, pattern, replacement, label):
     return updated
 
 
+html = replace_current_copy(
+    html,
+    r"function computeNewScore\(model, costWeightPct\) \{[\s\S]*?\n\}",
+    lambda _match: """function computeNewScore(model, costWeightPct) {
+  const weights = effectiveDimWeights(model, costWeightPct);
+  let weightedScore = 0;
+  let totalWeight = 0;
+  weights.forEach((weight, index) => {
+    if (weight <= 0 || !hasDimensionValue(model, index)) return;
+    weightedScore += Number(model.dims[index]) * weight;
+    totalWeight += weight;
+  });
+  return totalWeight > 0 ? Math.round((weightedScore / totalWeight) * 10) / 10 : null;
+}""",
+    "row-wise score calculation",
+)
+html = replace_current_copy(
+    html,
+    r"function getMacroContribs\(model\) \{[\s\S]*?\n\}",
+    lambda _match: """function getMacroContribs(model) {
+  const weights = effectiveDimWeights(model, costWeightPct);
+  return MACRO_CATS.map(cat => {
+    let value = 0;
+    cat.dimIdxs.forEach(index => {
+      if (weights[index] > 0 && hasDimensionValue(model, index)) value += Number(model.dims[index]) * weights[index];
+    });
+    return Math.round(value * 100) / 100;
+  });
+}""",
+    "row-wise macro contributions",
+)
+html = replace_current_copy(
+    html,
+    r"function renderTable\(\) \{[\s\S]*?(?=function initTable\(\))",
+    lambda _match: """function renderTable() {
+  let models = tableModels.filter(m => {
+    if (tierFilter === 'all') return true;
+    if (tierFilter === 'Expensive') return ['Expensive','Very Expensive','Ultra-Premium'].includes(m.costTier);
+    return m.costTier === tierFilter;
+  });
+  if (sortCol === 'rank' || sortCol === 'qualityRank' || sortCol === 'missingCount') {
+    models.sort((a, b) => {
+      const av = a[sortCol] !== null && a[sortCol] !== undefined && Number.isFinite(Number(a[sortCol])) ? Number(a[sortCol]) : Infinity;
+      const bv = b[sortCol] !== null && b[sortCol] !== undefined && Number.isFinite(Number(b[sortCol])) ? Number(b[sortCol]) : Infinity;
+      return sortDir * (av - bv);
+    });
+  } else if (sortCol === 'evalCost') {
+    models.sort((a, b) => {
+      const av = a.evalCost !== null && a.evalCost !== undefined && Number.isFinite(Number(a.evalCost)) ? Number(a.evalCost) : Infinity;
+      const bv = b.evalCost !== null && b.evalCost !== undefined && Number.isFinite(Number(b.evalCost)) ? Number(b.evalCost) : Infinity;
+      return sortDir * (av - bv);
+    });
+  } else if (sortCol === 'score') {
+    models.sort((a, b) => {
+      const av = a.score !== null && a.score !== undefined && Number.isFinite(Number(a.score)) ? Number(a.score) : null;
+      const bv = b.score !== null && b.score !== undefined && Number.isFinite(Number(b.score)) ? Number(b.score) : null;
+      if (av === null) return bv === null ? 0 : 1;
+      if (bv === null) return -1;
+      return sortDir * (bv - av);
+    });
+  } else {
+    models.sort((a, b) => sortDir * (a[sortCol] > b[sortCol] ? 1 : a[sortCol] < b[sortCol] ? -1 : 0));
+  }
+
+  const tbody = document.getElementById('ranking-tbody');
+  tbody.innerHTML = models.map((m, idx) => {
+    const rank = idx + 1;
+    const dispRank = m.rank == null ? null : (sortCol === 'score' ? m.rank : rank);
+    const rankCls = dispRank===1?'r1':dispRank===2?'r2':dispRank===3?'r3':'';
+    const hasQualityRank = m.qualityRank !== null && m.qualityRank !== undefined && Number.isFinite(Number(m.qualityRank));
+    const hasRank = m.rank !== null && m.rank !== undefined && Number.isFinite(Number(m.rank));
+    const delta = hasQualityRank && hasRank ? Number(m.qualityRank) - Number(m.rank) : null;
+    const deltaStr = delta === null ? '—' : delta > 0 ? `+${delta}▲` : delta < 0 ? `${delta}▼` : '—';
+    const deltaCls = delta === null ? 'delta-same' : delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : 'delta-same';
+    const scoreValue = m.score !== null && m.score !== undefined && Number.isFinite(Number(m.score)) ? Number(m.score) : null;
+    const scoreText = scoreValue === null ? '—' : scoreValue.toFixed(1);
+    const scoreStyle = scoreValue === null ? 'var(--muted)' : scoreColor(scoreValue);
+    const barW = scoreValue === null ? 0 : Math.max(0, Math.min(100, Math.round(scoreValue)));
+    const coverageNote = modelCoverageNote(m);
+    const qualityValue = m.qualityScore !== null && m.qualityScore !== undefined && Number.isFinite(Number(m.qualityScore)) ? Number(m.qualityScore) : null;
+    const cost = activeCostUsd(m);
+    const costText = cost === null ? '—' : fmtUsd(cost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const evalCostText = m.evalCost === null || m.evalCost === undefined || !Number.isFinite(Number(m.evalCost)) ? '—' : Number(m.evalCost).toFixed(1);
+    const routeText = activeCostRouteLabel(m);
+    return `<tr>
+      <td><span class="rank-cell ${rankCls}">${dispRank === null ? '—' : dispRank}</span></td>
+      <td><div class="model-name">${m.name}</div><div class="model-dev">${m.developer}</div></td>
+      <td>
+        <div class="score-bar-wrap">
+          <span class="score-val" style="color:${scoreStyle}">${scoreText}</span>
+          <div class="score-bar"><div class="score-bar-fill" style="width:${barW}%;background:${scoreStyle}"></div></div>
+        </div>
+        ${coverageNote ? `<span class="cost-meta">${coverageNote}</span>` : ''}
+      </td>
+      <td><span class="mono" style="color:${qualityValue === null ? 'var(--muted)' : scoreColor(qualityValue)}">${qualityValue === null ? '—' : qualityValue.toFixed(1)}</span></td>
+      <td><span class="quality-pill">${hasQualityRank ? `#${m.qualityRank}` : '—'}</span></td>
+      <td data-sort-value="${cost === null ? '' : cost}">
+        <span class="cost-cell">
+          <span class="mono">${costText}</span>
+          <span class="cost-meta">${routeText}</span>
+          <span class="cost-score">Score ${evalCostText}</span>
+        </span>
+      </td>
+      <td><span class="tier-badge ${tierClass(m.costTier)}">${m.costTier}</span></td>
+      <td><span class="missing-dots">${m.missingCount > 0 ? '⊘'.repeat(Math.min(m.missingCount,7)) + (m.missingCount > 7 ? '+' : '') + ` ${m.missingCount}` : '✓ Full'}</span></td>
+    </tr>`;
+  }).join('');
+}""" + "\n\n",
+    "coverage-aware ranking table",
+)
+html = replace_current_copy(
+    html,
+    r"function renderDecomposition\(\) \{[\s\S]*?\n\}",
+    lambda _match: """function renderDecomposition() {
+  const sorted = [...MODELS].filter(model => Number.isFinite(model.overallScore)).sort((a, b) => a.overallScore - b.overallScore);
+  const yLabels = sorted.map(model => model.shortName);
+  const traces = MACRO_CATS.map((category, categoryIndex) => ({
+    y: yLabels,
+    x: sorted.map(model => getMacroContribs(model)[categoryIndex]),
+    name: category.label,
+    type: 'bar', orientation: 'h',
+    marker: { color: category.color, opacity: 0.9 },
+    hovertemplate: `<b>${category.label}</b>: %{x:.2f} pts<extra>%{y}</extra>`,
+  }));
+  const layout = {
+    ...getPlotlyLayout(),
+    title: { text: 'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font: plotlyTitle(14) },
+    barmode: 'stack',
+    xaxis: { ...getPlotlyLayout().xaxis, title: 'Score Contribution (pts)', range: [0, 100] },
+    yaxis: { ...getPlotlyLayout().yaxis, title: '' },
+    legend: { orientation: 'h', y: -0.16, x: 0, xanchor: 'left', font: { size: 11 } },
+    margin: { ...getPlotlyLayout().margin, l: 90, b: 90 },
+  };
+  Plotly.newPlot('chart-decomp', traces, layout, PLOTLY_CONFIG);
+}""",
+    "coverage-aware score decomposition",
+)
+html = replace_current_copy(
+    html,
+    r"function renderHeatmap\(elementId, height\) \{[\s\S]*?\n\}",
+    lambda _match: """function renderHeatmap(elementId, height) {
+  const models = [...MODELS].sort((a, b) => b.overallScore - a.overallScore);
+  const colOrder = DIM_KEYS.map((_, index) => index);
+  const colLabels = colOrder.map(index => index === 0 ? costBasisLabel() : DIM_KEYS[index]);
+  const colFull = colOrder.map(index => DIM_FULL[index]);
+  const z = models.map(model => colOrder.map(index => hasDimensionValue(model, index) ? Number(model.dims[index]) : null));
+  const customdata = models.map(model => {
+    const weights = effectiveDimWeights(model, costWeightPct);
+    return colOrder.map(index => ({
+      model: model.name,
+      dim: DIM_FULL[index],
+      score: hasDimensionValue(model, index) ? Number(model.dims[index]).toFixed(1) : 'Not available',
+      weight: (weights[index] * 100).toFixed(2),
+      missing: !hasDimensionValue(model, index),
+      coverage: modelCoverageNote(model),
+    }));
+  });
+  const trace = {
+    z,
+    type: 'heatmap',
+    colorscale: [[0.0, '#1e3a8a'], [0.15, '#2563eb'], [0.35, '#93c5fd'], [0.5, '#cbd5e1'], [0.65, '#fcd34d'], [0.85, '#f59e0b'], [1.0, '#b45309']],
+    zmin: 0,
+    zmax: 100,
+    x: colLabels,
+    y: models.map(model => model.shortName),
+    hovertemplate: '<b>%{customdata.model}</b> — %{customdata.dim}<br>Score: %{customdata.score}<br>Effective row weight: %{customdata.weight}%<br>%{customdata.coverage}<extra></extra>',
+    customdata,
+    showscale: true,
+    colorbar: { title: 'Score', thickness: 12, len: 0.8, tickfont: { color: '#94a3b8', size: 10 }, titlefont: { color: '#94a3b8', size: 11 } },
+  };
+  const dividers = [];
+  for (let index = 0; index < colOrder.length - 1; index++) {
+    if (DIM_CAT[colOrder[index]] !== DIM_CAT[colOrder[index + 1]]) dividers.push(index + 0.5);
+  }
+  const shapes = dividers.map(x => ({ type: 'line', xref: 'x', yref: 'paper', x0: x, x1: x, y0: 0, y1: 1, line: { color: getPlotlyLayout().xaxis.gridcolor, width: 2 } }));
+  const categoryGroups = [];
+  colOrder.forEach((index, position) => {
+    const category = DIM_CAT[index];
+    let group = categoryGroups[categoryGroups.length - 1];
+    if (!group || group.key !== category) {
+      group = { key: category, start: position, end: position };
+      categoryGroups.push(group);
+    } else {
+      group.end = position;
+    }
+  });
+  const categoryLabels = {
+    cost: ['Cost', '#22c55e'], rely: ['Reliability', '#a78bfa'], code: ['Agentic', '#3b82f6'],
+    intel: ['Intelligence', '#eab308'], prod: ['Platform', '#f97316'], language: ['Language', '#ec4899'],
+  };
+  const catAnnotations = categoryGroups.map(group => {
+    const [text, color] = categoryLabels[group.key] || [group.key, '#94a3b8'];
+    return { x: (group.start + group.end) / 2, y: -0.08, xref: 'x', yref: 'paper', text: `<b>${text}</b>`, font: { color, size: 10 }, showarrow: false };
+  });
+  const cellAnnotations = [];
+  models.forEach(model => {
+    colLabels.forEach((label, columnIndex) => {
+      const dimensionIndex = colOrder[columnIndex];
+      const value = model.dims[dimensionIndex];
+      const missing = !hasDimensionValue(model, dimensionIndex);
+      cellAnnotations.push({
+        x: label,
+        y: model.shortName,
+        xref: 'x',
+        yref: 'y',
+        text: missing ? '⊘' : Number(value).toFixed(0),
+        showarrow: false,
+        font: { size: 9, color: missing ? 'rgba(148,163,184,0.9)' : Number(value) < 28 ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.72)', family: 'IBM Plex Mono, monospace' },
+      });
+    });
+  });
+  const layout = {
+    ...getPlotlyLayout(),
+    title: { text: `Normalized Score Matrix (${MODELS.length} Models × ${DIM_KEYS.length} Dimensions)`, font: plotlyTitle(14) },
+    xaxis: { ...getPlotlyLayout().xaxis, side: 'top', tickangle: -30, tickfont: { size: 10 } },
+    yaxis: { ...getPlotlyLayout().yaxis, autorange: 'reversed', tickfont: { size: 11 } },
+    margin: { t: 100, r: 80, b: 100, l: 90 },
+    shapes,
+    annotations: [...catAnnotations, ...cellAnnotations],
+    height: Number.isFinite(Number(height)) ? Number(height) : undefined,
+  };
+  Plotly.newPlot(elementId, [trace], layout, PLOTLY_CONFIG);
+}""",
+    "missing-safe score matrix",
+)
+
+
 current_description = (
-    f"ValueRank {VERSION}: {n} models ranked across {d} zero-gap dimensions; "
-    "DeepSWE v1.1 and Bug Hunt are included in the primary score."
+    f"ValueRank {VERSION}: {n} models ranked from available retained dimensions across the reconciled AA Intelligence Index score-versus-total-benchmark-cost frontier roster; "
+    "scores renormalize observed metrics per model and report priority coverage and missing inputs."
 )
 for attribute in (
     'name="description"',
@@ -1989,8 +2318,8 @@ html = replace_current_copy(
 )
 html = replace_current_copy(
     html,
-    r'(<input type="range" id="cost-slider"[^>]*value=")[^"]+(" step=")[^"]+(">)',
-    lambda match: match.group(1) + f'{cost_weight["weightPct"]:.4f}' + match.group(2) + "0.01" + match.group(3),
+    r'(<input type="range" id="cost-slider"[^>]*max=")[^"]+("[^>]*value=")[^"]+(" step=")[^"]+(">)',
+    lambda match: match.group(1) + "100" + match.group(2) + f'{cost_weight["weightPct"]:.4f}' + match.group(3) + "0.01" + match.group(4),
     "cost slider default",
 )
 html = replace_current_copy(
@@ -2002,7 +2331,7 @@ html = replace_current_copy(
 html = replace_current_copy(
     html,
     r'(<span class="seal-note">)v[0-9.]+ primary score uses [^<]*(</span>)',
-    lambda match: match.group(1) + f'{VERSION} primary score uses {d} zero-gap dimensions and no neutral-fill placeholders' + match.group(2),
+    lambda match: match.group(1) + f'{VERSION} primary score renormalizes each model’s observed dimensions; missing metrics are shown and never filled' + match.group(2),
     "ranking release note",
 )
 html = replace_current_copy(
@@ -2031,9 +2360,8 @@ html = replace_current_copy(
 )
 
 formula_copy = (
-    f"For each of {d} retained dimensions, the {n} exact-overlap models are ranked from 1–{n}. "
-    f"Rank 1 maps to 100 points and rank {n} to 0; ties receive the average tied rank. "
-    f"{VERSION} excludes incomplete dimensions and does not fill missing values."
+    f"For each retained dimension, models with an observed result are ranked within that dimension; rank 1 maps to 100 points and the last observed rank maps to 0, with ties receiving the average tied rank. "
+    f"Each model’s available dimension priorities are renormalized to calculate its score. {VERSION} reports priority coverage and missing metrics and does not impute missing values."
 )
 html = replace_current_copy(
     html,
@@ -2057,16 +2385,16 @@ html = replace_current_copy(
 html = replace_current_copy(
     html,
     r'(<strong>Zero-gap benchmark rule:</strong>)[\s\S]*?(</div>)',
-    lambda match: match.group(1)
-    + f' If any of the {n} primary-cohort models is missing from a benchmark, that dimension is excluded from the composite. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.'
+    lambda match: '<strong>Missing-metric handling:</strong>'
+    + f' Each model’s observed retained metrics contribute to its score, with available priorities renormalized; missing values remain unavailable and are shown in the matrix and coverage note. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.'
     + match.group(2),
-    "zero-gap rule",
+    "missing-metric rule",
 )
 html = replace_current_copy(
     html,
     r'(<strong>Quality sub-score:</strong>)[\s\S]*?(</div>)',
     lambda match: match.group(1)
-    + f'The weighted sum of the {d - 1} non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.'
+    + f'The weighted average of each model’s available non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.'
     + match.group(2),
     "quality sub-score",
 )
@@ -2074,7 +2402,7 @@ html = replace_current_copy(
     html,
     r'(<div class="card mb-6" id="livebench-data">[\s\S]*?<p class="method-text" style="margin-bottom:16px;">)[\s\S]*?(</p>)',
     lambda match: match.group(1)
-    + f'Release <strong>{livebench_document["release"]}</strong> matches <strong>{livebench_document["matchedN"]}/{livebench_document["cohortN"]}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean, but it remains supplemental because the pinned release has incomplete coverage for the current cohort; it does not contribute to the zero-gap primary score. Overall and cost are also shown as supplemental metrics.'
+    + f'Release <strong>{livebench_document["release"]}</strong> matches <strong>{livebench_document["matchedN"]}/{livebench_document["cohortN"]}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean, but remains supplemental in this release because the pinned release is incomplete for the selected roster. Overall and cost are also shown as supplemental metrics.'
     + match.group(2),
     "LiveBench primary coverage note",
 )

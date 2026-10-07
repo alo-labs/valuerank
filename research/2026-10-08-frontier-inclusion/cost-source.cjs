@@ -1,0 +1,1 @@
+const fs=require('fs');const s=fs.readFileSync('/Users/shafqat/valuerank/.refresh/v1.4/aa/aa_v432_snapshot.json','utf8');const d=JSON.parse(s);console.log(JSON.stringify(d.pages.filter(x=>x.id==='gpt-6-luna').map(x=>({id:x.id,cost:x.model.intelligenceIndexCost,capture:x.capture}))));console.log(s.split('\n').filter(x=>x.includes('122.288')).join('\n'));

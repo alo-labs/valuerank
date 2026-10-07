@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ValueRank — Frontier LLM Models Ranked on Real-World Value</title>
-  <meta name="description" content="ValueRank v1.9.5: 13 models ranked across 12 zero-gap dimensions; DeepSWE v1.1 and Bug Hunt are included in the primary score.">
+  <meta name="description" content="ValueRank v1.9.6: 16 models ranked from available retained dimensions across the reconciled AA Intelligence Index score-versus-total-benchmark-cost frontier roster; scores renormalize observed metrics per model and report priority coverage and missing inputs.">
   <meta property="og:title" content="ValueRank — Frontier models ranked on real-world value">
-  <meta property="og:description" content="ValueRank v1.9.5: 13 models ranked across 12 zero-gap dimensions; DeepSWE v1.1 and Bug Hunt are included in the primary score.">
+  <meta property="og:description" content="ValueRank v1.9.6: 16 models ranked from available retained dimensions across the reconciled AA Intelligence Index score-versus-total-benchmark-cost frontier roster; scores renormalize observed metrics per model and report priority coverage and missing inputs.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://valuerank.alolabs.dev/og.png?v=1">
@@ -15,7 +15,7 @@
   <meta property="og:image:type" content="image/png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ValueRank — Frontier models ranked on real-world value">
-  <meta name="twitter:description" content="ValueRank v1.9.5: 13 models ranked across 12 zero-gap dimensions; DeepSWE v1.1 and Bug Hunt are included in the primary score.">
+  <meta name="twitter:description" content="ValueRank v1.9.6: 16 models ranked from available retained dimensions across the reconciled AA Intelligence Index score-versus-total-benchmark-cost frontier roster; scores renormalize observed metrics per model and report priority coverage and missing inputs.">
   <meta name="twitter:image" content="https://valuerank.alolabs.dev/og.png?v=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1726,7 +1726,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="vr-nav-brand">
     <a class="vr-nav-brand-link" href="/">
       <span class="vr-nav-logo">ValueRank</span>
-      <span class="vr-nav-badge">v1.9.5</span>
+      <span class="vr-nav-badge">v1.9.6</span>
     </a>
   </div>
   <div class="vr-mode-switcher">
@@ -1741,7 +1741,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     <a href="/#data">Data</a>
     <a href="/#faq">FAQ</a>
   </div>
-  <div class="vr-nav-meta">October 8, 2026 · 13 models · 12 scored dimensions</div>
+  <div class="vr-nav-meta">October 8, 2026 · 16 models · 16 scored dimensions</div>
   <button class="vr-theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark">
     <i data-lucide="sun" class="icon-sun"></i>
     <i data-lucide="moon" class="icon-moon"></i>
@@ -1760,7 +1760,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-pulse"></span>
-          Production AI Ranking Framework · v1.9.5
+          Production AI Ranking Framework · v1.9.6
         </div>
         <h1 class="hero-title">
           Which AI Model<br>
@@ -1768,7 +1768,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           <span class="hero-accent">Value?</span>
         </h1>
         <p class="hero-desc">
-          ValueRank ranks <strong>13 models</strong> with both exact AA DeepSWE v1.1 model-variant results and Bug Hunt results from a 27-model AA-mapped comparison roster across a <strong>zero-gap 12-dimension set</strong>; Bug Hunt contributes 17.86% of the main score. v1.9.5 uses <strong><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v4.3.2</a></strong> components plus DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. Speed is excluded from the score; AA speed is numeric for 12/13 selected pages and missing for Kimi K3. The incomplete dimensions Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) remain supplemental because exact cohort coverage is incomplete.
+          ValueRank ranks <strong>16 models</strong> with at least one available non-cost quality dimension from a 28-model AA-mapped comparison roster reconciled to the current AA Intelligence Index score-versus-total-benchmark-cost frontier. Each model score uses its observed retained dimensions, with available priorities renormalized per model; priority coverage and missing metrics are shown beside partial scores. Bug Hunt contributes 15.15% of the main score when observed. v1.9.6 uses <strong><a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis Intelligence Index v4.3.2</a></strong> components plus configuration-specific DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. Speed is included in the score; AA speed is numeric for 15/16 selected pages and missing for Kimi K3. Dimensions excluded from this release are none.
         </p>
         <div class="hero-cta-row">
           <a href="#rankings" class="hero-cta-primary">
@@ -1794,15 +1794,15 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     <!-- Bottom stat strip -->
     <div class="hero-statbar">
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">13</span>
+        <span class="hero-statbar-num">16</span>
         <span class="hero-statbar-label">Models Ranked</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">12</span>
+        <span class="hero-statbar-num">16</span>
         <span class="hero-statbar-label">Scored Dimensions</span>
       </div>
       <div class="hero-statbar-item">
-        <span class="hero-statbar-num">22.32%</span>
+        <span class="hero-statbar-num">18.94%</span>
         <span class="hero-statbar-label">Cost Weight</span>
       </div>
       <div class="hero-statbar-item">
@@ -1822,7 +1822,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="container">
     <div class="section-header">
       <div class="section-title">Rankings</div>
-      <div class="section-sub">Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is 22.32%. Click any column header to sort.</div>
+      <div class="section-sub">Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is 18.94%. Click any column header to sort.</div>
     </div>
     <div class="cost-basis-control" id="cost-basis-control" role="group" aria-labelledby="cost-basis-label">
       <span class="cost-basis-label" id="cost-basis-label">Cost basis</span>
@@ -1843,8 +1843,8 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       </div>
       <div class="slider-wrap">
         <span class="slider-label">Cost weight</span>
-        <input type="range" id="cost-slider" min="0" max="50" value="22.3214" step="0.01">
-        <span class="slider-val" id="slider-val">22.32%</span>
+        <input type="range" id="cost-slider" min="0" max="100" value="18.9394" step="0.01">
+        <span class="slider-val" id="slider-val">18.94%</span>
       </div>
     </div>
     <div class="card table-wrap">
@@ -1866,8 +1866,8 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     </div>
     <div style="margin-top:12px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
       <span class="seal-note">Scores within ±2.5 pts are statistically tied (SEAL CI band)</span>
-      <span class="seal-note">v1.9.5 primary score uses 12 zero-gap dimensions and no neutral-fill placeholders</span>
-      <span class="seal-note" id="cost-note">Cost weight: 22.32% (default)</span>
+      <span class="seal-note">v1.9.6 primary score renormalizes each model’s observed dimensions; missing metrics are shown and never filled</span>
+      <span class="seal-note" id="cost-note">Cost weight: 18.94% (default)</span>
     </div>
 
     <div class="insight-grid" style="margin-top:32px;">
@@ -1888,8 +1888,8 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       </div>
       <div class="insight-card">
         <div class="insight-icon">🔬</div>
-        <div class="insight-title">v1.9.5 Release</div>
-        <div class="insight-body">v1.9.5 uses <strong>25 AA DeepSWE chart configurations</strong> and keeps <strong>12 zero-gap dimensions</strong>; Speed is excluded because coverage is 12/13.</div>
+        <div class="insight-title">v1.9.6 Release</div>
+        <div class="insight-body">v1.9.6 records <strong>31 AA DeepSWE chart configurations</strong> and uses <strong>16 retained dimensions</strong> with per-model weight renormalization for available results; Speed is included because it is observed for 15/16 ranked models.</div>
       </div>
     </div>
   </div>
@@ -1902,7 +1902,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="section-title">Visualizations</div>
       <div class="section-sub">Eight complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
     </div>
-                                                                                                                                                            <div class="chart-tabs">
+                                                                                                                                                                <div class="chart-tabs">
       <button class="chart-tab active" data-chart="pareto">ValueRank Pareto Frontier</button>
       <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
@@ -1916,12 +1916,12 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     <div class="card">
       <!-- Pareto -->
       <div class="chart-panel active" id="panel-pareto">
-        <div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>GPT-5.6 Sol, GPT-5.6 Luna, Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna</strong>. Every other ranked model is dominated on the selected <span data-cost-basis-label>API Costs</span> versus quality.</div>
+        <div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>Claude Opus 5.5, GPT-6.1 Sol, MiMo-V2.6-Pro, MiMo-V2.6-Flash</strong>. Every other ranked model is dominated on the selected <span data-cost-basis-label>API Costs</span> versus quality.</div>
         <div id="chart-pareto" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Decomposition -->
       <div class="chart-panel" id="panel-decomp">
-        <div class="chart-desc"><strong>Score Decomposition:</strong> v1.9.5 decomposes the weighted <strong>12-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>
+        <div class="chart-desc"><strong>Score Decomposition:</strong> v1.9.6 decomposes the weighted <strong>16-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>
         <div id="chart-decomp" class="plotly-chart" style="height:520px;"></div>
       </div>
       <!-- Displacement -->
@@ -1931,7 +1931,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       </div>
       <!-- Heatmap -->
       <div class="chart-panel" id="panel-heatmap">
-        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 13 models × 12 retained dimensions. Color = normalized rank score; every displayed cell is confirmed source data.</div>
+        <div class="chart-desc"><strong>Dimension Heatmap:</strong> All 16 models × 16 retained dimensions. Color = normalized rank score; missing cells are marked unavailable (⊘).</div>
         <div id="chart-heatmap" class="plotly-chart" style="height:540px;"></div>
       </div>
       <!-- Bubble -->
@@ -1941,7 +1941,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       </div>
       <!-- Bump -->
       <div class="chart-panel" id="panel-bump">
-        <div class="chart-desc"><strong>Version History:</strong> Historical rank context through v1.9.5. The current point is a new benchmark-version snapshot, not a claim of score continuity.</div>
+        <div class="chart-desc"><strong>Version History:</strong> Historical rank context through v1.9.6. The current point is a new benchmark-version snapshot, not a claim of score continuity.</div>
         <div id="chart-bump" class="plotly-chart" style="height:520px;"></div>
       </div>
        <!-- LiveBench Pareto -->
@@ -1963,29 +1963,29 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="container">
     <div class="section-header">
       <div class="section-title">Methodology</div>
-      <div class="section-sub">How scores are calculated across 12 current zero-gap dimensions, with explicit cost construction and coverage provenance.</div>
+      <div class="section-sub">How scores are calculated from each model’s available dimensions, with per-model weight renormalization and explicit coverage provenance.</div>
     </div>
     <div class="method-grid">
       <div>
         <div class="card mb-4">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Scoring Formula</h3>
           <div class="method-formula">Score = ((n − rank) / (n − 1)) × 100</div>
-          <p class="method-text">For each of 12 retained dimensions, the 13 exact-overlap models are ranked from 1–13. Rank 1 maps to 100 points and rank 13 to 0; ties receive the average tied rank. v1.9.5 excludes incomplete dimensions and does not fill missing values.</p>
+          <p class="method-text">For each retained dimension, models with an observed result are ranked within that dimension; rank 1 maps to 100 points and the last observed rank maps to 0, with ties receiving the average tied rank. Each model’s available dimension priorities are renormalized to calculate its score. v1.9.6 reports priority coverage and missing metrics and does not impute missing values.</p>
           <hr class="divider" style="margin:16px 0;">
-          <p class="method-text">The final ValueRank score is a weighted sum across 12 retained dimensions. <strong>Cost weight: 22.32%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>17.86%</strong> and DeepSWE v1.1 contributes <strong>22.32%</strong>. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.</p>
+          <p class="method-text">The final ValueRank score is a weighted sum across 16 retained dimensions. <strong>Cost weight: 18.94%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>15.15%</strong> and DeepSWE v1.1 contributes <strong>18.94%</strong>. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.</p>
         </div>
         <div class="card">
           <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Key Design Choices</h3>
           <div class="method-text" style="display:flex;flex-direction:column;gap:10px;">
             <div><strong>Rank-based (not raw-score-based):</strong> Prevents any single benchmark from dominating due to scale differences. GPQA percentages, DeepSWE pass rates, and token-per-second speed figures are not directly comparable on raw values; ranks are.</div>
-            <div><strong>Zero-gap benchmark rule:</strong> If any of the 13 primary-cohort models is missing from a benchmark, that dimension is excluded from the composite. Exact benchmark-version and evaluated-model matches are required; the full source roster contains 27 candidates.</div>
+            <div><strong>Missing-metric handling:</strong> Each model’s observed retained metrics contribute to its score, with available priorities renormalized; missing values remain unavailable and are shown in the matrix and coverage note. Exact benchmark-version and evaluated-model matches are required; the full source roster contains 28 candidates.</div>
             <div><strong>SEAL CI band (±2–3 pts):</strong> Due to benchmark variance, scores within 2–3 pts should be treated as statistically tied. Rankings within this band are effectively co-ranked.</div>
-            <div><strong>Quality sub-score:</strong>The weighted sum of the 11 non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.</div>
+            <div><strong>Quality sub-score:</strong>The weighted average of each model’s available non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.</div>
           </div>
         </div>
       </div>
       <div class="card">
-          <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (12 Total)</h3>
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">Dimension Weights (16 Total)</h3>
         <table class="dim-table">
           <thead><tr><th>Dimension</th><th>Weight</th><th>Category</th></tr></thead>
           <tbody id="dim-table-body"></tbody>
@@ -2005,7 +2005,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 
     <div class="card mb-6" id="livebench-data">
        <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;"><a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench External Coverage</a></h3>
-        <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>24/27</strong> AA comparison candidates and includes <strong>1 official supplemental model</strong> outside the source roster: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean, but it remains supplemental because the pinned release has incomplete coverage for the current cohort; it does not contribute to the zero-gap primary score. Overall and cost are also shown as supplemental metrics.</p>
+        <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>24/28</strong> AA comparison candidates and includes <strong>1 official supplemental model</strong> outside the source roster: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean, but remains supplemental in this release because the pinned release is incomplete for the selected roster. Overall and cost are also shown as supplemental metrics.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
@@ -2041,35 +2041,36 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
     <!-- BUG HUNT DATA CARD START -->
     <div class="card mb-6" id="bughunt-data">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;"><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt Results</a></h3>
-      <p class="method-text" style="margin-bottom:16px;">Bug Hunt has <strong>21/27</strong> exact owner results; <strong>13</strong> overlap with an exact AA DeepSWE model variant and contribute to the primary score at <strong>17.86%</strong>. The companion emphasis view raises Bug Hunt to <strong>24.59%</strong> (priority 30 of 122). 14 candidates without the full overlap remain unranked. The table preserves effort, harness, route, and repeat count because results measure each tested agent stack.</p>
+      <p class="method-text" style="margin-bottom:16px;">Bug Hunt has <strong>22/28</strong> exact owner results. Eligible exact-variant results contribute to each model’s primary score where observed; missing rows remain unavailable, and available priorities are renormalized per model. The companion emphasis view uses the <strong>14</strong> eligible exact-variant results and raises Bug Hunt to <strong>21.13%</strong> (priority 30 of 142). Models without any observed primary quality metric remain unranked. The table preserves effort, harness, route, and repeat count because results measure each tested agent stack.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Bug Hunt rank</th><th>Model</th><th>Fixed / 105</th><th>Emphasis score</th><th>Runs</th><th>Effort</th><th>Harness / route</th><th>Primary rank</th></tr></thead>
-          <tbody><tr><td>1</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-5.6 Sol</a></td><td class="mono">43.5/105</td><td class="mono">71.8</td><td>n=2 (mean)</td><td>max (max)</td><td>Codex CLI / OpenAI</td><td>2</td></tr>
-<tr><td>2</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-6 Sol</a></td><td class="mono">29.3/105</td><td class="mono">70.2</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Codex CLI / OpenAI</td><td>1</td></tr>
-<tr><td>3</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-6 Astra</a></td><td class="mono">45/105</td><td class="mono">67.7</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Codex CLI / OpenAI</td><td>3</td></tr>
-<tr><td>4</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Claude Opus 5.5</a></td><td class="mono">41.7/105</td><td class="mono">65.2</td><td>n=3 (mean)</td><td>max (max)</td><td>Claude Code / Anthropic</td><td>4</td></tr>
-<tr><td>5</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Grok 4.7</a></td><td class="mono">28.8/105</td><td class="mono">57.8</td><td>n=4 (mean)</td><td>xhigh (verified ceiling)</td><td>Grok Build CLI (ACP) / xAI</td><td>5</td></tr>
-<tr><td>6</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-5.6 Luna</a></td><td class="mono">31.3/105</td><td class="mono">52.8</td><td>n=3 (mean)</td><td>max (max)</td><td>Codex CLI / OpenAI</td><td>6</td></tr>
-<tr><td>7</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Grok 4.6</a></td><td class="mono">28.7/105</td><td class="mono">48.6</td><td>n=3 (mean)</td><td>xhigh (verified ceiling)</td><td>Grok Build CLI (ACP) / xAI</td><td>8</td></tr>
-<tr><td>8</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Kimi K3</a></td><td class="mono">21/105</td><td class="mono">47.3</td><td>n=1 (single)</td><td>default (default)</td><td>Claude Code / OpenRouter / OpenRouter</td><td>7</td></tr>
-<tr><td>9</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Gemini 3.8 Flash</a></td><td class="mono">18/105</td><td class="mono">38.1</td><td>n=3 (mean)</td><td>high (verified ceiling)</td><td>Antigravity CLI / Google</td><td>9</td></tr>
-<tr><td>10</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Claude Opus 5</a></td><td class="mono">27/105</td><td class="mono">35.3</td><td>n=1 (single)</td><td>max (max)</td><td>Claude Code / Anthropic</td><td>12</td></tr>
-<tr><td>11</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GLM-5.3</a></td><td class="mono">19/105</td><td class="mono">34.7</td><td>n=1 (single)</td><td>max (verified setting)</td><td>Claude Code / Z.ai API / Z.ai API</td><td>10</td></tr>
-<tr><td>12</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-6 Luna</a></td><td class="mono">18.3/105</td><td class="mono">33.4</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Codex CLI / OpenAI</td><td>11</td></tr>
-<tr><td>13</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Qwen3.8 Max</a></td><td class="mono">25.7/105</td><td class="mono">27.0</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Claude Code / Alibaba API / Alibaba API</td><td>13</td></tr></tbody>
+          <tbody><tr><td>1</td><td><a href="https://github.com/phuryn/bug-hunt-bench/blob/931c1ff9b9aaced865aaf56eaf744b7b1f182fc2/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3" target="_blank" rel="noopener">GPT-6.1 Sol</a></td><td class="mono">44.3/105</td><td class="mono">77.4</td><td>n=3 (mean)</td><td>max (verified first-party tier; below ultra ceiling)</td><td>Codex CLI / OpenAI ChatGPT account</td><td>1</td></tr>
+<tr><td>2</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-5.6 Sol</a></td><td class="mono">43.5/105</td><td class="mono">67.7</td><td>n=2 (mean)</td><td>max (max)</td><td>Codex CLI / OpenAI</td><td>2</td></tr>
+<tr><td>3</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-6 Astra</a></td><td class="mono">45/105</td><td class="mono">67.0</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Codex CLI / OpenAI</td><td>3</td></tr>
+<tr><td>4</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-6 Sol</a></td><td class="mono">29.3/105</td><td class="mono">63.3</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Codex CLI / OpenAI</td><td>4</td></tr>
+<tr><td>5</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Claude Opus 5.5</a></td><td class="mono">41.7/105</td><td class="mono">62.8</td><td>n=3 (mean)</td><td>max (max)</td><td>Claude Code / Anthropic</td><td>5</td></tr>
+<tr><td>6</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Grok 4.7</a></td><td class="mono">28.8/105</td><td class="mono">56.7</td><td>n=4 (mean)</td><td>xhigh (verified ceiling)</td><td>Grok Build CLI (ACP) / xAI</td><td>6</td></tr>
+<tr><td>7</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-5.6 Luna</a></td><td class="mono">31.3/105</td><td class="mono">46.5</td><td>n=3 (mean)</td><td>max (max)</td><td>Codex CLI / OpenAI</td><td>11</td></tr>
+<tr><td>8</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Grok 4.6</a></td><td class="mono">28.7/105</td><td class="mono">45.8</td><td>n=3 (mean)</td><td>xhigh (verified ceiling)</td><td>Grok Build CLI (ACP) / xAI</td><td>10</td></tr>
+<tr><td>9</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Kimi K3</a></td><td class="mono">21/105</td><td class="mono">44.9</td><td>n=1 (single)</td><td>default (default)</td><td>Claude Code / OpenRouter / OpenRouter</td><td>9</td></tr>
+<tr><td>10</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Gemini 3.8 Flash</a></td><td class="mono">18/105</td><td class="mono">40.7</td><td>n=3 (mean)</td><td>high (verified ceiling)</td><td>Antigravity CLI / Google</td><td>12</td></tr>
+<tr><td>11</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GLM-5.3</a></td><td class="mono">19/105</td><td class="mono">35.0</td><td>n=1 (single)</td><td>max (verified setting)</td><td>Claude Code / Z.ai API / Z.ai API</td><td>13</td></tr>
+<tr><td>12</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Claude Opus 5</a></td><td class="mono">27/105</td><td class="mono">34.8</td><td>n=1 (single)</td><td>max (max)</td><td>Claude Code / Anthropic</td><td>15</td></tr>
+<tr><td>13</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">GPT-6 Luna</a></td><td class="mono">18.3/105</td><td class="mono">34.1</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Codex CLI / OpenAI</td><td>14</td></tr>
+<tr><td>14</td><td><a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Qwen3.8 Max</a></td><td class="mono">25.7/105</td><td class="mono">26.3</td><td>n=3 (mean)</td><td>max (verified ceiling)</td><td>Claude Code / Alibaba API / Alibaba API</td><td>16</td></tr></tbody>
         </table>
       </div>
       <p class="method-text" style="margin-top:12px;">Source: <a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt Bench</a>. Base snapshot: <a href="https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv" target="_blank" rel="noopener">owner scoreboard</a> at <code>0630b120a81363c343ed7dfaf3c6d3be7f7da38c</code>; selective MiMo additions: <a href="https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md" target="_blank" rel="noopener">owner run notes at 7dd3c23</a>, observed October 7. Rows link to their individual source evidence. Rows with no eligible selected-variant result remain excluded from this matched cohort. MiMo Flash's owner default-route result is 23.3/105 (mean of three); reasoning state was unasserted and untested, so selected-reasoning equivalence remains unresolved. The separate result is preserved in raw data.</p>
     </div>
     <!-- BUG HUNT DATA CARD END -->
     <div class="card mb-6">
-          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (13 × 12)</h3>
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (16 × 16)</h3>
       <div class="heatmap-legend">
         <span>0 (worst)</span>
         <div class="hl-bar"></div>
         <span>100 (best)</span>
-        <span style="margin-left:12px;">All retained score inputs are source-backed in v1.9.5</span>
+        <span style="margin-left:12px;">All retained score inputs are source-backed in v1.9.6</span>
       </div>
       <div id="chart-heatmap-data" style="height:480px;"></div>
     </div>
@@ -2103,15 +2104,15 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           What does the overall score actually represent?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">Each model’s score is a weighted average of 12 normalized dimension scores across the 13-model exact-overlap cohort. Each dimension score uses <code>((n − rank) / (n − 1)) × 100</code>, with n = 13; ties receive average rank. Incomplete dimensions are excluded rather than imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.</div>
+        <div class="faq-a">Each model’s score is the weighted average of its available normalized dimensions; available priorities are renormalized per model and priority coverage plus missing metrics are reported beside the score. Dimension scores use <code>((n − rank) / (n − 1)) × 100</code> over models with an observation for that dimension; ties receive average rank. Missing values are not imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.</div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          Why is cost weighted at 22.32% by default?
+          Why is cost weighted at 18.94% by default?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">Cost has a 22.32% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple. Both views use the same benchmark suite and lower cost ranks better.</div>
+        <div class="faq-a">Cost has a 18.94% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple. Both views use the same benchmark suite and lower cost ranks better.</div>
       </div>
 
       <div class="faq-item">
@@ -2119,7 +2120,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           What does ⊘ mean in ValueRank?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">In historical ValueRank versions, ⊘ marked a genuine benchmark data gap. In v1.9.5, incomplete dimensions are excluded from the composite, so every ranked model has full coverage across the retained dimensions.</div>
+        <div class="faq-a">⊘ marks a missing observation for that model and dimension. The score excludes missing metrics and renormalizes the available priorities per model; the table reports priority coverage and missing metrics beside each partial score.</div>
       </div>
 
       <div class="faq-item">
@@ -2127,7 +2128,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           What's the difference between Score and Quality Score?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">The overall Score includes all 12 retained dimensions, including Bug Hunt and DeepSWE v1.1, with cost at 22.32% by default. Quality Score renormalizes the 11 non-cost dimensions to 100%, showing benchmark performance without the cost weight.</div>
+        <div class="faq-a">The overall Score uses the model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at 18.94% by default. Quality Score renormalizes the available non-cost dimensions to 100%, showing benchmark performance without the cost weight.</div>
       </div>
 
       <div class="faq-item">
@@ -2161,7 +2162,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           How often is ValueRank updated?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">ValueRank is refreshed when primary benchmark results or cost inputs materially change. v1.9.5 uses AA Coding Agent Index v1.5 DeepSWE v1.1 results, includes Bug Hunt in the primary score, and ranks 13 exact-overlap models across 12 zero-gap dimensions.</div>
+        <div class="faq-a">ValueRank is refreshed when primary benchmark results or cost inputs materially change. v1.9.6 reconciles the AA Intelligence Index score-versus-total-benchmark-cost frontier, uses configuration-specific DeepSWE v1.1 results, and includes observed Bug Hunt results in the per-model available-dimension score.</div>
       </div>
 
       <div class="faq-item">
@@ -2169,7 +2170,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           Is Claude Opus 5.5 included in the primary ranking?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">Claude Opus 5.5 is included in v1.9.5. The <a href="https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1" target="_blank" rel="noopener">AA Coding Agent Index v1.5 DeepSWE v1.1 chart</a> reports 68.0% for Claude Code / Opus 5.5 / max; the <a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt owner scoreboard</a> reports 41.7/105 (mean of three runs) for Opus 5.5 max. The <a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">AA model profile</a> labels its corresponding profile max with fallback. The composite ranks 13 exact-overlap models across 12 zero-gap dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.</div>
+        <div class="faq-a">Claude Opus 5.5 is included in v1.9.6. The <a href="https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1" target="_blank" rel="noopener">AA Coding Agent Index v1.5 DeepSWE v1.1 chart</a> reports 68.0% for Claude Code / Opus 5.5 / max; the <a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt owner scoreboard</a> reports 41.7/105 (mean of three runs) for Opus 5.5 max. The <a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">AA model profile</a> labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.</div>
       </div>
 
     </div>
@@ -2181,13 +2182,14 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 
 
 
-<!-- aa-reconciliation:start --><section class="card mb-6" id="aa-frontier-comparison" aria-labelledby="aa-frontier-heading"><h2 id="aa-frontier-heading">AA intelligence and total-cost comparison</h2><p class="method-text">Observed 2026-10-07T14:23:09Z; Artificial Analysis Intelligence Index v4.3.2. Scope: Complete displayed intelligence versus total evaluation cost Pareto line with all 691 catalog models selected; 173 eligible plotted points. This is not ValueRank&#x27;s composite-quality frontier.. Reconciliation: reconciled. This view compares AA intelligence index with AA total evaluation cost in USD. Primary composite-rank eligibility is shown separately. Membership is AA&#x27;s directly observed displayed frontier; no frontier is recomputed from these rows. Source selected 691 models, plotted 173 eligible points, and displayed 14 frontier points. Public metric/export gaps are shown explicitly.</p><p class="method-text">Publication updated October 8, 2026 with selective additions. Earlier AA and DeepSWE snapshots remain dated September 29–30; MiMo AA and frontier observations were captured October 8, and selective MiMo Bug Hunt owner notes were observed October 7. Rounded public AA metrics preserve captured display precision; source dates and precision are listed in raw data.</p><div style="overflow-x:auto"><table><thead><tr><th scope="col">Exact AA model</th><th scope="col">AA ID</th><th scope="col">Intelligence index</th><th scope="col">Total evaluation cost (USD)</th><th scope="col">Observed comparison</th><th scope="col">Primary rank status</th><th scope="col">Primary evidence gaps</th></tr></thead><tbody><tr><td><a href="https://artificialanalysis.ai/models/mimo-v2-6-flash" target="_blank" rel="noopener">MiMo-V2.6-Flash</a></td><td>mimo-v2-6-flash</td><td>38 (rounded)</td><td>$109.41</td><td>Observed AA frontier</td><td>Unranked source candidate</td><td>No eligible exact-variant Bug Hunt match; owner default result 23.3/105 available; selected reasoning equivalence is unverified; No exact-variant AA DeepSWE result in the selected source snapshot</td></tr><tr><td><a href="https://artificialanalysis.ai/models/mimo-v2-6-pro" target="_blank" rel="noopener">MiMo-V2.6-Pro</a></td><td>mimo-v2-6-pro</td><td>46 (rounded)</td><td>$206.66</td><td>Observed AA frontier</td><td>Unranked source candidate</td><td>No exact-variant AA DeepSWE result in the selected source snapshot</td></tr><tr><td><a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">Claude Opus 5.5 (max with fallback)</a></td><td>claude-opus-5-5</td><td>58 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Primary ranked</td><td>None</td></tr><tr><td><a href="https://artificialanalysis.ai/models/claude-opus-5-5-high" target="_blank" rel="noopener">Claude Opus 5.5 (high with fallback)</a></td><td>claude-opus-5-5-high</td><td>54 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/claude-opus-5-5-xhigh" target="_blank" rel="noopener">Claude Opus 5.5 (xhigh with fallback)</a></td><td>claude-opus-5-5-xhigh</td><td>56 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol" target="_blank" rel="noopener">GPT-6.1 Sol (max)</a></td><td>gpt-6-1-sol</td><td>52 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: New-generation frontier candidate explicitly retained for subsequent exact benchmark ingestion. This correction ingests the two MiMo models; the existing roster contains GPT-6 Sol, not GPT-6.1 Sol. No older-generation result is transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol-high" target="_blank" rel="noopener">GPT-6.1 Sol (high)</a></td><td>gpt-6-1-sol-high</td><td>50 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol-medium" target="_blank" rel="noopener">GPT-6.1 Sol (medium)</a></td><td>gpt-6-1-sol-medium</td><td>48 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh" target="_blank" rel="noopener">GPT-6.1 Sol (xhigh)</a></td><td>gpt-6-1-sol-xhigh</td><td>51 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna" target="_blank" rel="noopener">GPT-6 Luna (max)</a></td><td>gpt-6-luna</td><td>38 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Primary ranked</td><td>None</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-high" target="_blank" rel="noopener">GPT-6 Luna (high)</a></td><td>gpt-6-luna-high</td><td>33 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-low" target="_blank" rel="noopener">GPT-6 Luna (low)</a></td><td>gpt-6-luna-low</td><td>22 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-medium" target="_blank" rel="noopener">GPT-6 Luna (medium)</a></td><td>gpt-6-luna-medium</td><td>30 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-xhigh" target="_blank" rel="noopener">GPT-6 Luna (xhigh)</a></td><td>gpt-6-luna-xhigh</td><td>35 (rounded)</td><td>Not publicly captured</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred.</td></tr></tbody></table></div></section><!-- aa-reconciliation:end --><!-- plan-candidates:start --><section class="card mb-6" id="plan-candidates" aria-labelledby="plan-candidates-heading"><h2 id="plan-candidates-heading">Plan Costs candidate comparison</h2><p class="method-text">Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator.</p><div class="table-wrap"><table><thead><tr><th scope="col">Model</th><th scope="col">Primary rank</th><th scope="col">AA Intelligence Index</th><th scope="col">API evaluation cost</th><th scope="col">Effective Plan evaluation cost</th><th scope="col">Selected plan / multiple</th><th scope="col">Evidence / source variant</th><th scope="col">Source date</th><th scope="col">Source</th></tr></thead><tbody><tr><td>GPT-6 Sol</td><td>1</td><td>47.53</td><td>$1,545.83</td><td>$143.50</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>GPT-5.6 Sol</td><td>2</td><td>46.97</td><td>$3,464.84</td><td>$321.65</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>GPT-6 Astra</td><td>3</td><td>52.39</td><td>$3,802.98</td><td>$353.04</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Opus 5.5</td><td>4</td><td>57.62</td><td>$8,708.20</td><td>$147.85</td><td>Claude Pro $20 · Opus 5.5 / 58.9×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Grok 4.7</td><td>5</td><td>46.45</td><td>$4,967.35</td><td>$858.66</td><td>SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785×</td><td>user reported projection / Grok 4.7 XHigh</td><td>2026-09-25</td><td><a href="https://www.remakebench.com/capacity/plans/supergrok-heavy" target="_blank" rel="noopener">Source</a></td></tr><tr><td>GPT-5.6 Luna</td><td>6</td><td>37.32</td><td>$319.93</td><td>$29.70</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Kimi K3</td><td>7</td><td>43.59</td><td>$3,658.07</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Grok 4.6</td><td>8</td><td>42.84</td><td>$1,936.75</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Gemini 3.8 Flash</td><td>9</td><td>40.93</td><td>$1,622.73</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GLM-5.3</td><td>10</td><td>44.78</td><td>$2,503.48</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GPT-6 Luna</td><td>11</td><td>37.26</td><td>$122.29</td><td>$11.35</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Opus 5</td><td>12</td><td>50.78</td><td>$7,274.74</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Qwen3.8 Max</td><td>13</td><td>45.42</td><td>$4,934.79</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Claude Fable 5</td><td>Unranked candidate</td><td>49.63</td><td>$11,160.86</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Claude Opus 4.8</td><td>Unranked candidate</td><td>41.79</td><td>$6,873.86</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Claude Sonnet 5</td><td>Unranked candidate</td><td>38.16</td><td>$6,998.25</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>DeepSeek V4 Flash</td><td>Unranked candidate</td><td>34.33</td><td>$474.19</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>DeepSeek V4 Pro</td><td>Unranked candidate</td><td>36.00</td><td>$1,122.27</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GLM-5.2</td><td>Unranked candidate</td><td>33.71</td><td>$2,097.29</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GLM-5.3 Flash</td><td>Unranked candidate</td><td>41.81</td><td>$280.28</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GPT-5.5</td><td>Unranked candidate</td><td>38.36</td><td>$5,294.36</td><td>$491.49</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Gemini 3.5 Flash</td><td>Unranked candidate</td><td>32.60</td><td>$2,172.43</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Gemini 3.6 Flash</td><td>Unranked candidate</td><td>33.98</td><td>$1,036.81</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Gemini 3.7 Flash</td><td>Unranked candidate</td><td>39.62 (estimated)</td><td>Not established</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>MiMo-V2.6-Flash</td><td>Unranked candidate</td><td>38 (rounded)</td><td>$109.41</td><td>$72.94</td><td>MiMo · provisional 1.5x assumption / 1.5×</td><td>Provisional assumption</td><td>2026-10-08</td><td>User assumption</td></tr><tr><td>MiMo-V2.6-Pro</td><td>Unranked candidate</td><td>46 (rounded)</td><td>$206.66</td><td>$137.77</td><td>MiMo · provisional 1.5x assumption / 1.5×</td><td>Provisional assumption</td><td>2026-10-08</td><td>User assumption</td></tr><tr><td>Muse Spark 1.2</td><td>Unranked candidate</td><td>39.58</td><td>$1,385.40</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr></tbody></table></div><h3 style="margin-top:24px;">Plan route evidence</h3><div class="table-wrap"><table><thead><tr><th scope="col">Plan</th><th scope="col">Eligible model variants</th><th scope="col">Monthly fee</th><th scope="col">API equivalent numerator</th><th scope="col">Value Multiple</th><th scope="col">Evidence / source model</th><th scope="col">Source date</th><th scope="col">Source</th></tr></thead><tbody><tr><td>ChatGPT Plus $20 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6 Luna</td><td>$20.00</td><td>$162.00 (applied estimate)</td><td>8.1×</td><td>Provisional assumption / GPT-6 Astra</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>ChatGPT Pro $100 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6 Luna</td><td>$100.00</td><td>$1,055.00 (applied estimate)</td><td>10.55×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>ChatGPT Pro $200 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6 Luna</td><td>$200.00</td><td>$2,084.00 (applied estimate)</td><td>10.42×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>ChatGPT Pro $500 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6 Luna</td><td>$500.00</td><td>$5,386.00 (applied estimate)</td><td>10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Pro $20 · Opus 5.5</td><td>Claude Opus 5.5</td><td>$20.00</td><td>$1,178.00</td><td>58.9×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Max $100 · Opus 5.5</td><td>Claude Opus 5.5</td><td>$100.00</td><td>$5,725.00</td><td>57.25×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Max $200 · Opus 5.5</td><td>Claude Opus 5.5</td><td>$200.00</td><td>$11,726.00</td><td>58.63×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>SuperGrok Heavy $300 · Grok 4.7 XHigh</td><td>Grok 4.7</td><td>$300.00</td><td>$1,735.50</td><td>5.785×</td><td>user reported projection / Grok 4.7 XHigh</td><td>2026-09-25</td><td><a href="https://www.remakebench.com/capacity/plans/supergrok-heavy" target="_blank" rel="noopener">Source</a></td></tr><tr><td>MiMo · provisional 1.5x assumption</td><td>MiMo-V2.6-Pro, MiMo-V2.6-Flash</td><td>Not established</td><td>Not measured</td><td>1.5×</td><td>Provisional assumption</td><td>2026-10-08</td><td>User assumption</td></tr></tbody></table></div><ul><li>ChatGPT Plus $20 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: Astra&#x27;s 8.1x for Plus. $162 is the applied monthly equivalent estimate at the $20 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.</li><li>ChatGPT Pro $100 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol&#x27;s 10.55x for Pro 100. $1,055 is the applied monthly equivalent estimate at the $100 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.</li><li>ChatGPT Pro $200 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol&#x27;s 10.42x for Pro 200. $2,084 is the applied monthly equivalent estimate at the $200 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. Historical pre-cut $5,734 Astra and $5,904 GPT-6 Sol figures are excluded.</li><li>ChatGPT Pro $500 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol&#x27;s 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers.</li><li>Claude Pro $20 · Opus 5.5: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. October 6 controlled account measurements with agentic workload projections: $1,178/month divided by $20/month = 58.9x. Exact Opus 5.5 only. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis. This is the highest Opus 5.5 multiple among the three eligible Claude tiers.</li><li>Claude Max $100 · Opus 5.5: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. October 6 controlled account measurements with agentic workload projections: $5,725/month divided by $100/month = 57.25x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.</li><li>Claude Max $200 · Opus 5.5: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. October 6 controlled account measurements with agentic workload projections: $11,726/month divided by $200/month = 58.63x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.</li><li>SuperGrok Heavy $300 · Grok 4.7 XHigh: <a href="https://www.remakebench.com/capacity/plans/supergrok-heavy" target="_blank" rel="noopener">Source</a>. Account owner reports API-equivalent receipts and projects approximately $400.5/week from deduplicated calibration receipts; monthly annualization is $400.5 x 52 / 12 = $1,735.5, divided by owner-reported $300 fee = 5.785x (about 5.79x). Ranked grok-4.7 is XHigh, matching the report. This is projected capacity from a partial interval, not measured full-week use. Linked audit receipts were not independently reproduced; shared pools, possible unlogged activity and interrupted runs limit inference.</li><li>MiMo · provisional 1.5x assumption: User assumption. Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable.</li></ul></section><!-- plan-candidates:end -->
+
+<!-- aa-reconciliation:start --><section class="card mb-6" id="aa-frontier-comparison" aria-labelledby="aa-frontier-heading"><h2 id="aa-frontier-heading">AA intelligence and total-cost comparison</h2><p class="method-text">Observed 2026-10-07T16:22:14Z; Artificial Analysis Intelligence Index v4.3.2. Scope: Complete displayed intelligence versus total evaluation cost Pareto line with all 691 catalog models selected; 173 eligible plotted points. This is not ValueRank&#x27;s composite-quality frontier.. Reconciliation: reconciled. This view compares AA intelligence index with AA total evaluation cost in USD. Primary composite-rank eligibility is shown separately. Membership is AA&#x27;s directly observed displayed frontier; no frontier is recomputed from these rows. Source selected 691 models, plotted 173 eligible points, and displayed 14 frontier points. Public metric/export gaps are shown explicitly. All 5 distinct frontier model families are required in the main ranking using exact selected configurations; 5 are included. Other effort configurations remain separate comparison entries.</p><p class="method-text">Publication updated October 8, 2026 with selective additions. Earlier AA and DeepSWE snapshots remain dated September 29–30; MiMo AA and frontier observations were captured October 8, and selective MiMo Bug Hunt owner notes were observed October 7. Rounded public AA metrics preserve captured display precision; source dates and precision are listed in raw data.</p><div style="overflow-x:auto"><table><thead><tr><th scope="col">Exact AA model</th><th scope="col">AA ID</th><th scope="col">Intelligence index</th><th scope="col">Total evaluation cost (USD)</th><th scope="col">Observed comparison</th><th scope="col">Primary rank status</th><th scope="col">Primary evidence gaps</th></tr></thead><tbody><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-low" target="_blank" rel="noopener">GPT-6 Luna (low)</a></td><td>gpt-6-luna-low</td><td>22 (rounded)</td><td>$10.63</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-medium" target="_blank" rel="noopener">GPT-6 Luna (medium)</a></td><td>gpt-6-luna-medium</td><td>30 (rounded)</td><td>$31.17</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-high" target="_blank" rel="noopener">GPT-6 Luna (high)</a></td><td>gpt-6-luna-high</td><td>33 (rounded)</td><td>$47.85</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna-xhigh" target="_blank" rel="noopener">GPT-6 Luna (xhigh)</a></td><td>gpt-6-luna-xhigh</td><td>35 (rounded)</td><td>$66.81</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/mimo-v2-6-flash" target="_blank" rel="noopener">MiMo-V2.6-Flash</a></td><td>mimo-v2-6-flash</td><td>38 (rounded)</td><td>$109.41</td><td>Observed AA frontier</td><td>Primary ranked</td><td>None</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-luna" target="_blank" rel="noopener">GPT-6 Luna (max)</a></td><td>gpt-6-luna</td><td>38 (rounded)</td><td>$122.05</td><td>Observed AA frontier</td><td>Primary ranked</td><td>None</td></tr><tr><td><a href="https://artificialanalysis.ai/models/mimo-v2-6-pro" target="_blank" rel="noopener">MiMo-V2.6-Pro</a></td><td>mimo-v2-6-pro</td><td>46 (rounded)</td><td>$206.66</td><td>Observed AA frontier</td><td>Primary ranked</td><td>None</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol-medium" target="_blank" rel="noopener">GPT-6.1 Sol (medium)</a></td><td>gpt-6-1-sol-medium</td><td>48 (rounded)</td><td>$361.37</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol-high" target="_blank" rel="noopener">GPT-6.1 Sol (high)</a></td><td>gpt-6-1-sol-high</td><td>50 (rounded)</td><td>$521.32</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh" target="_blank" rel="noopener">GPT-6.1 Sol (xhigh)</a></td><td>gpt-6-1-sol-xhigh</td><td>51 (rounded)</td><td>$662.28</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/gpt-6-1-sol" target="_blank" rel="noopener">GPT-6.1 Sol (max)</a></td><td>gpt-6-1-sol</td><td>52 (rounded)</td><td>$1,081.55</td><td>Observed AA frontier</td><td>Primary ranked</td><td>None</td></tr><tr><td><a href="https://artificialanalysis.ai/models/claude-opus-5-5-high" target="_blank" rel="noopener">Claude Opus 5.5 (high with fallback)</a></td><td>claude-opus-5-5-high</td><td>54 (rounded)</td><td>$2,172.43</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/claude-opus-5-5-xhigh" target="_blank" rel="noopener">Claude Opus 5.5 (xhigh with fallback)</a></td><td>claude-opus-5-5-xhigh</td><td>56 (rounded)</td><td>$4,056.65</td><td>Observed AA frontier</td><td>Deferred comparison candidate</td><td>Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts.</td></tr><tr><td><a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">Claude Opus 5.5 (max with fallback)</a></td><td>claude-opus-5-5</td><td>58 (rounded)</td><td>$8,708.20</td><td>Observed AA frontier</td><td>Primary ranked</td><td>None</td></tr></tbody></table></div></section><!-- aa-reconciliation:end --><!-- plan-candidates:start --><section class="card mb-6" id="plan-candidates" aria-labelledby="plan-candidates-heading"><h2 id="plan-candidates-heading">Plan Costs candidate comparison</h2><p class="method-text">Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator.</p><div class="table-wrap"><table><thead><tr><th scope="col">Model</th><th scope="col">Primary rank</th><th scope="col">AA Intelligence Index</th><th scope="col">API evaluation cost</th><th scope="col">Effective Plan evaluation cost</th><th scope="col">Selected plan / multiple</th><th scope="col">Evidence / source variant</th><th scope="col">Source date</th><th scope="col">Source</th></tr></thead><tbody><tr><td>GPT-6.1 Sol</td><td>1</td><td>52.00</td><td>$1,081.55</td><td>$100.40</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>GPT-5.6 Sol</td><td>2</td><td>46.97</td><td>$3,464.84</td><td>$321.65</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>GPT-6 Astra</td><td>3</td><td>52.39</td><td>$3,802.98</td><td>$353.04</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>GPT-6 Sol</td><td>4</td><td>47.53</td><td>$1,545.83</td><td>$143.50</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Opus 5.5</td><td>5</td><td>57.62</td><td>$8,708.20</td><td>$147.85</td><td>Claude Pro $20 · Opus 5.5 / 58.9×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Grok 4.7</td><td>6</td><td>46.45</td><td>$4,967.35</td><td>$858.66</td><td>SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785×</td><td>user reported projection / Grok 4.7 XHigh</td><td>2026-09-25</td><td><a href="https://www.remakebench.com/capacity/plans/supergrok-heavy" target="_blank" rel="noopener">Source</a></td></tr><tr><td>MiMo-V2.6-Pro</td><td>7</td><td>46 (rounded)</td><td>$206.66</td><td>$137.77</td><td>MiMo · provisional 1.5x assumption / 1.5×</td><td>Provisional assumption</td><td>2026-10-08</td><td>User assumption</td></tr><tr><td>MiMo-V2.6-Flash</td><td>8</td><td>38 (rounded)</td><td>$109.41</td><td>$72.94</td><td>MiMo · provisional 1.5x assumption / 1.5×</td><td>Provisional assumption</td><td>2026-10-08</td><td>User assumption</td></tr><tr><td>Kimi K3</td><td>9</td><td>43.59</td><td>$3,658.07</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Grok 4.6</td><td>10</td><td>42.84</td><td>$1,936.75</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GPT-5.6 Luna</td><td>11</td><td>37.32</td><td>$319.93</td><td>$29.70</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Gemini 3.8 Flash</td><td>12</td><td>40.93</td><td>$1,622.73</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GLM-5.3</td><td>13</td><td>44.78</td><td>$2,503.48</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GPT-6 Luna</td><td>14</td><td>37.26</td><td>$122.05</td><td>$11.33</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Opus 5</td><td>15</td><td>50.78</td><td>$7,274.74</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Qwen3.8 Max</td><td>16</td><td>45.42</td><td>$4,934.79</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Claude Fable 5</td><td>Unranked candidate</td><td>49.63</td><td>$11,160.86</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Claude Opus 4.8</td><td>Unranked candidate</td><td>41.79</td><td>$6,873.86</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Claude Sonnet 5</td><td>Unranked candidate</td><td>38.16</td><td>$6,998.25</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>DeepSeek V4 Flash</td><td>Unranked candidate</td><td>34.33</td><td>$474.19</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>DeepSeek V4 Pro</td><td>Unranked candidate</td><td>36.00</td><td>$1,122.27</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GLM-5.2</td><td>Unranked candidate</td><td>33.71</td><td>$2,097.29</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GLM-5.3 Flash</td><td>Unranked candidate</td><td>41.81</td><td>$280.28</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>GPT-5.5</td><td>Unranked candidate</td><td>38.36</td><td>$5,294.36</td><td>$491.49</td><td>ChatGPT Pro $500 · common GPT assumption / 10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Gemini 3.5 Flash</td><td>Unranked candidate</td><td>32.60</td><td>$2,172.43</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Gemini 3.6 Flash</td><td>Unranked candidate</td><td>33.98</td><td>$1,036.81</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Gemini 3.7 Flash</td><td>Unranked candidate</td><td>39.62 (estimated)</td><td>Not established</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr><tr><td>Muse Spark 1.2</td><td>Unranked candidate</td><td>39.58</td><td>$1,385.40</td><td>API fallback</td><td>No eligible route</td><td>API fallback</td><td>—</td><td>—</td></tr></tbody></table></div><h3 style="margin-top:24px;">Plan route evidence</h3><div class="table-wrap"><table><thead><tr><th scope="col">Plan</th><th scope="col">Eligible model variants</th><th scope="col">Monthly fee</th><th scope="col">API equivalent numerator</th><th scope="col">Value Multiple</th><th scope="col">Evidence / source model</th><th scope="col">Source date</th><th scope="col">Source</th></tr></thead><tbody><tr><td>ChatGPT Plus $20 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna</td><td>$20.00</td><td>$162.00 (applied estimate)</td><td>8.1×</td><td>Provisional assumption / GPT-6 Astra</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>ChatGPT Pro $100 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna</td><td>$100.00</td><td>$1,055.00 (applied estimate)</td><td>10.55×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>ChatGPT Pro $200 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna</td><td>$200.00</td><td>$2,084.00 (applied estimate)</td><td>10.42×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>ChatGPT Pro $500 · common GPT assumption</td><td>GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna</td><td>$500.00</td><td>$5,386.00 (applied estimate)</td><td>10.772×</td><td>Provisional assumption / GPT-6.1 Sol</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Pro $20 · Opus 5.5</td><td>Claude Opus 5.5</td><td>$20.00</td><td>$1,178.00</td><td>58.9×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Max $100 · Opus 5.5</td><td>Claude Opus 5.5</td><td>$100.00</td><td>$5,725.00</td><td>57.25×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>Claude Max $200 · Opus 5.5</td><td>Claude Opus 5.5</td><td>$200.00</td><td>$11,726.00</td><td>58.63×</td><td>Controlled account measurement / workload projection / Opus 5.5</td><td>2026-10-06</td><td><a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a></td></tr><tr><td>SuperGrok Heavy $300 · Grok 4.7 XHigh</td><td>Grok 4.7</td><td>$300.00</td><td>$1,735.50</td><td>5.785×</td><td>user reported projection / Grok 4.7 XHigh</td><td>2026-09-25</td><td><a href="https://www.remakebench.com/capacity/plans/supergrok-heavy" target="_blank" rel="noopener">Source</a></td></tr><tr><td>MiMo · provisional 1.5x assumption</td><td>MiMo-V2.6-Pro, MiMo-V2.6-Flash</td><td>Not established</td><td>Not measured</td><td>1.5×</td><td>Provisional assumption</td><td>2026-10-08</td><td>User assumption</td></tr></tbody></table></div><ul><li>ChatGPT Plus $20 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: Astra&#x27;s 8.1x for Plus. $162 is the applied monthly equivalent estimate at the $20 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.</li><li>ChatGPT Pro $100 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol&#x27;s 10.55x for Pro 100. $1,055 is the applied monthly equivalent estimate at the $100 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.</li><li>ChatGPT Pro $200 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol&#x27;s 10.42x for Pro 200. $2,084 is the applied monthly equivalent estimate at the $200 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. Historical pre-cut $5,734 Astra and $5,904 GPT-6 Sol figures are excluded.</li><li>ChatGPT Pro $500 · common GPT assumption: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol&#x27;s 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank&#x27;s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers.</li><li>Claude Pro $20 · Opus 5.5: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. October 6 controlled account measurements with agentic workload projections: $1,178/month divided by $20/month = 58.9x. Exact Opus 5.5 only. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis. This is the highest Opus 5.5 multiple among the three eligible Claude tiers.</li><li>Claude Max $100 · Opus 5.5: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. October 6 controlled account measurements with agentic workload projections: $5,725/month divided by $100/month = 57.25x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.</li><li>Claude Max $200 · Opus 5.5: <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener">Source</a>. October 6 controlled account measurements with agentic workload projections: $11,726/month divided by $200/month = 58.63x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.</li><li>SuperGrok Heavy $300 · Grok 4.7 XHigh: <a href="https://www.remakebench.com/capacity/plans/supergrok-heavy" target="_blank" rel="noopener">Source</a>. Account owner reports API-equivalent receipts and projects approximately $400.5/week from deduplicated calibration receipts; monthly annualization is $400.5 x 52 / 12 = $1,735.5, divided by owner-reported $300 fee = 5.785x (about 5.79x). Ranked grok-4.7 is XHigh, matching the report. This is projected capacity from a partial interval, not measured full-week use. Linked audit receipts were not independently reproduced; shared pools, possible unlogged activity and interrupted runs limit inference.</li><li>MiMo · provisional 1.5x assumption: User assumption. Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable.</li></ul></section><!-- plan-candidates:end -->
 </main>
 
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div>ValueRank v1.9.5 · October 8, 2026 · 13 models × 12 primary dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
+      <div>ValueRank v1.9.6 · October 8, 2026 · 16 models × 16 primary dimensions · Innovated at <a href="https://alolabs.dev" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Ālo Labs</a></div>
       <div class="footer-links">
         <a href="#methodology">Methodology</a>
         <a href="#data">Data</a>
@@ -2203,14 +2205,14 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 // ─────────────────────────────────────────────
 // DATA
 // ─────────────────────────────────────────────
-const DIM_KEYS = ["Cost", "NonHalluc", "DeepSWE", "GDPv2.1", "AutoBench", "LCR", "OmniAcc", "HLE", "Sci", "CritPt", "AAI", "Bug Hunt"];
-const DIM_FULL = ["Composite Cost", "AA-Omniscience Non-Hallucination Rate", "DeepSWE pass@1", "GDPval-AA v2.1", "AutomationBench-AA", "AA-LCR v1.1", "AA-Omniscience Accuracy", "Humanity's Last Exam", "SciCode", "CritPt", "Artificial Analysis Intelligence Index", "Bug Hunt Bench bugs fixed out of 105"];
-const DIM_WEIGHTS = [22.3214, 5.3571, 22.3214, 5.3571, 4.4643, 3.5714, 3.5714, 3.5714, 3.5714, 2.6786, 5.3571, 17.8571];
-const DIM_CAT = ["cost", "rely", "code", "code", "code", "code", "rely", "intel", "intel", "intel", "prod", "code"];
-const DIM_LINKS = [null, "https://artificialanalysis.ai/evaluations/omniscience", "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1", "https://artificialanalysis.ai/evaluations/gdpval-aa", "https://artificialanalysis.ai/evaluations/automationbench-aa", "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning", "https://artificialanalysis.ai/evaluations/omniscience", "https://artificialanalysis.ai/evaluations/humanitys-last-exam", null, "https://artificialanalysis.ai/evaluations/critpt", "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", "https://bughunt.productcompass.pm/"];
+const DIM_KEYS = ["Cost", "NonHalluc", "Terminal4", "LiveBench IF", "DeepSWE", "GDPv2.1", "AutoBench", "LCR", "OmniAcc", "HLE", "GPQA", "Sci", "CritPt", "AAI", "Speed", "Bug Hunt"];
+const DIM_FULL = ["Composite Cost", "AA-Omniscience Non-Hallucination Rate", "Terminal-Bench 4.0", "Instruction Following (LiveBench)", "DeepSWE pass@1", "GDPval-AA v2.1", "AutomationBench-AA", "AA-LCR v1.1", "AA-Omniscience Accuracy", "Humanity's Last Exam", "GPQA Diamond (legacy)", "SciCode", "CritPt", "Artificial Analysis Intelligence Index", "AA output speed (tok/s)", "Bug Hunt Bench bugs fixed out of 105"];
+const DIM_WEIGHTS = [18.9394, 4.5455, 4.5455, 3.7879, 18.9394, 4.5455, 3.7879, 3.0303, 3.0303, 3.0303, 3.0303, 3.0303, 2.2727, 4.5455, 3.7879, 15.1515];
+const DIM_CAT = ["cost", "rely", "code", "language", "code", "code", "code", "code", "rely", "intel", "intel", "intel", "intel", "prod", "prod", "code"];
+const DIM_LINKS = [null, "https://artificialanalysis.ai/evaluations/omniscience", "https://www.tbench.ai/leaderboard/terminal-bench/4.0", "https://livebench.ai/", "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1", "https://artificialanalysis.ai/evaluations/gdpval-aa", "https://artificialanalysis.ai/evaluations/automationbench-aa", "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning", "https://artificialanalysis.ai/evaluations/omniscience", "https://artificialanalysis.ai/evaluations/humanitys-last-exam", "https://artificialanalysis.ai/evaluations/gpqa-diamond", null, "https://artificialanalysis.ai/evaluations/critpt", "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", "https://artificialanalysis.ai/methodology/intelligence-benchmarking", "https://bughunt.productcompass.pm/"];
 
 // Macro-category definitions for decomposition
-const MACRO_CATS = [{"key": "cost", "label": "Cost", "color": "#22c55e", "dimIdxs": [0]}, {"key": "rely", "label": "Reliability", "color": "#a78bfa", "dimIdxs": [1, 6]}, {"key": "code", "label": "Agentic", "color": "#3b82f6", "dimIdxs": [2, 3, 4, 5, 11]}, {"key": "intel", "label": "Intelligence", "color": "#eab308", "dimIdxs": [7, 8, 9]}, {"key": "prod", "label": "Platform", "color": "#f97316", "dimIdxs": [10]}];
+const MACRO_CATS = [{"key": "cost", "label": "Cost", "color": "#22c55e", "dimIdxs": [0]}, {"key": "rely", "label": "Reliability", "color": "#a78bfa", "dimIdxs": [1, 8]}, {"key": "code", "label": "Agentic", "color": "#3b82f6", "dimIdxs": [2, 4, 5, 6, 7, 15]}, {"key": "intel", "label": "Intelligence", "color": "#eab308", "dimIdxs": [9, 10, 11, 12]}, {"key": "prod", "label": "Platform", "color": "#f97316", "dimIdxs": [13, 14]}, {"key": "language", "label": "Language", "color": "#ec4899", "dimIdxs": [3]}];
 
 const TIER_COLORS = {
   'Budget':'#22c55e','Near-Budget':'#a3e635','Mid-Range':'#fbbf24',
@@ -2228,18 +2230,18 @@ const DEV_COLORS = {
 const MODELS = [
   {
     "rank": 1,
-    "name": "GPT-6 Sol",
-    "shortName": "GPT-6 Sol",
+    "name": "GPT-6.1 Sol",
+    "shortName": "GPT-6.1 Sol",
     "developer": "OpenAI",
-    "evalCost": 17.75,
-    "aaEvalCost": 1545.83,
+    "evalCost": 12.42,
+    "aaEvalCost": 1081.55,
     "deepSweCost": null,
-    "deepSwePassAt1Pct": 69.0,
-    "apiCost": 1545.8273278231068,
-    "planCost": 143.50420793010645,
-    "planComparableCost": 143.50420793010645,
-    "apiCostScore": 83.333333,
-    "planCostScore": 83.333333,
+    "deepSwePassAt1Pct": 70.0,
+    "apiCost": 1081.55,
+    "planCost": 100.40382473078351,
+    "planComparableCost": 100.40382473078351,
+    "apiCostScore": 73.333333,
+    "planCostScore": 80.0,
     "planCostFallback": null,
     "planRoute": {
       "id": "chatgpt-pro500-common-semianalysis-assumption",
@@ -2272,21 +2274,22 @@ const MODELS = [
         "gpt-5.6-luna",
         "gpt-5.5",
         "gpt-6-sol",
+        "gpt-6.1-sol",
         "gpt-6-luna"
       ],
       "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers."
     },
-    "aaCostNorm": 17.75,
+    "aaCostNorm": 12.42,
     "deepSweCostNorm": null,
-    "speed": 78.1139895681029,
-    "aaUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+    "speed": 58.3,
+    "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
     "livebench": {
-      "model": "gpt-6-sol-max",
-      "overallScore": 79.245452,
-      "instructionFollowingScore": 68.57475,
-      "costPerSuccessfulTaskUsd": 0.2685
+      "model": null,
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
     },
     "terminalBenchV4": {
       "model": null,
@@ -2297,32 +2300,55 @@ const MODELS = [
       "agent": null,
       "releaseDate": null
     },
-    "overallScore": 70.5,
-    "qualityScore": 66.9,
-    "qualityRank": 5,
-    "missingCount": 0,
+    "overallScore": 74.3,
+    "qualityScore": 74.6,
+    "qualityRank": 2,
+    "metricCoverage": {
+      "availablePriority": 117,
+      "totalPriority": 132,
+      "coveragePct": 88.64,
+      "missingKeys": [
+        "terminalBenchV4",
+        "livebenchInstructionFollowing",
+        "gpqaDiamond"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "Instruction Following (LiveBench)",
+      "GPQA Diamond (legacy)"
+    ],
+    "missingCount": 3,
     "dims": [
-      83.3,
-      33.3,
-      83.3,
-      25.0,
-      58.3,
-      70.8,
-      58.3,
-      66.7,
-      75.0,
-      75.0,
-      75.0,
-      66.7
+      73.3,
+      50.0,
+      null,
+      null,
+      84.6,
+      40.0,
+      80.0,
+      53.3,
+      93.3,
+      80.0,
+      null,
+      20.0,
+      93.3,
+      90.0,
+      28.6,
+      92.9
     ],
     "isMissing": [
       false,
       false,
+      true,
+      true,
       false,
       false,
       false,
       false,
       false,
+      false,
+      true,
       false,
       false,
       false,
@@ -2360,8 +2386,8 @@ const MODELS = [
     "apiCost": 3464.843215149396,
     "planCost": 321.65273070454845,
     "planComparableCost": 321.65273070454845,
-    "apiCostScore": 50.0,
-    "planCostScore": 66.666667,
+    "apiCostScore": 40.0,
+    "planCostScore": 53.333333,
     "planCostFallback": null,
     "planRoute": {
       "id": "chatgpt-pro500-common-semianalysis-assumption",
@@ -2394,6 +2420,7 @@ const MODELS = [
         "gpt-5.6-luna",
         "gpt-5.5",
         "gpt-6-sol",
+        "gpt-6.1-sol",
         "gpt-6-luna"
       ],
       "assumptionScope": "user-authorized cross-model application",
@@ -2419,25 +2446,40 @@ const MODELS = [
       "agent": "Codex",
       "releaseDate": "Jun 26, 2026"
     },
-    "overallScore": 70.0,
-    "qualityScore": 75.8,
-    "qualityRank": 2,
+    "overallScore": 65.5,
+    "qualityScore": 71.5,
+    "qualityRank": 4,
+    "metricCoverage": {
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "coveragePct": 100.0,
+      "missingKeys": []
+    },
+    "missingMetricLabels": [],
     "missingCount": 0,
     "dims": [
+      40.0,
+      6.7,
       50.0,
-      8.3,
-      91.7,
-      50.0,
-      50.0,
-      83.3,
+      54.5,
+      92.3,
+      46.7,
+      46.7,
+      80.0,
+      73.3,
+      73.3,
       75.0,
-      75.0,
-      58.3,
+      60.0,
       100.0,
       66.7,
-      91.7
+      71.4,
+      85.7
     ],
     "isMissing": [
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -2482,8 +2524,8 @@ const MODELS = [
     "apiCost": 3802.9799452617394,
     "planCost": 353.04306955641846,
     "planComparableCost": 353.04306955641846,
-    "apiCostScore": 33.333333,
-    "planCostScore": 58.333333,
+    "apiCostScore": 26.666667,
+    "planCostScore": 46.666667,
     "planCostFallback": null,
     "planRoute": {
       "id": "chatgpt-pro500-common-semianalysis-assumption",
@@ -2516,6 +2558,7 @@ const MODELS = [
         "gpt-5.6-luna",
         "gpt-5.5",
         "gpt-6-sol",
+        "gpt-6.1-sol",
         "gpt-6-luna"
       ],
       "assumptionScope": "user-authorized cross-model application",
@@ -2541,25 +2584,40 @@ const MODELS = [
       "agent": "Codex",
       "releaseDate": "Sep 3, 2026"
     },
-    "overallScore": 64.8,
-    "qualityScore": 73.9,
+    "overallScore": 64.2,
+    "qualityScore": 72.9,
     "qualityRank": 3,
+    "metricCoverage": {
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "coveragePct": 100.0,
+      "missingKeys": []
+    },
+    "missingMetricLabels": [],
     "missingCount": 0,
     "dims": [
-      33.3,
+      26.7,
       66.7,
-      66.7,
+      100.0,
+      90.9,
+      61.5,
+      26.7,
+      93.3,
+      26.7,
+      86.7,
+      86.7,
+      100.0,
       33.3,
-      91.7,
-      25.0,
-      91.7,
-      83.3,
-      25.0,
-      83.3,
-      91.7,
+      80.0,
+      90.0,
+      14.3,
       100.0
     ],
     "isMissing": [
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -2594,6 +2652,150 @@ const MODELS = [
   },
   {
     "rank": 4,
+    "name": "GPT-6 Sol",
+    "shortName": "GPT-6 Sol",
+    "developer": "OpenAI",
+    "evalCost": 17.75,
+    "aaEvalCost": 1545.83,
+    "deepSweCost": null,
+    "deepSwePassAt1Pct": 69.0,
+    "apiCost": 1545.8273278231068,
+    "planCost": 143.50420793010645,
+    "planComparableCost": 143.50420793010645,
+    "apiCostScore": 66.666667,
+    "planCostScore": 66.666667,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "chatgpt-pro500-common-semianalysis-assumption",
+      "provider": "OpenAI",
+      "plan": "ChatGPT Pro 500",
+      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "planPriceUsd": 500,
+      "apiEquivalentUsd": 5386,
+      "valueMultiple": 10.772,
+      "valueMultipleKind": "user_assumption",
+      "evidenceClass": "user_assumption",
+      "sourceEvidenceClass": "controlled_account_workload_projection",
+      "confidence": "provisional",
+      "provisional": true,
+      "numeratorKind": "applied_estimate",
+      "validFrom": "2026-10-08",
+      "checkedOn": "2026-10-08",
+      "sourcePublicationDate": "2026-10-06",
+      "measurementWindow": null,
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceEvidenceId": "semianalysis",
+      "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceUrls": [
+        "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"
+      ],
+      "modelIds": [
+        "gpt-6-astra",
+        "gpt-5.6-sol",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gpt-6-sol",
+        "gpt-6.1-sol",
+        "gpt-6-luna"
+      ],
+      "assumptionScope": "user-authorized cross-model application",
+      "allocationRegime": "Current post-September 29 Codex schedule",
+      "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers."
+    },
+    "aaCostNorm": 17.75,
+    "deepSweCostNorm": null,
+    "speed": 78.1139895681029,
+    "aaUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+    "livebench": {
+      "model": "gpt-6-sol-max",
+      "overallScore": 79.245452,
+      "instructionFollowingScore": 68.57475,
+      "costPerSuccessfulTaskUsd": 0.2685
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 61.9,
+    "qualityScore": 60.7,
+    "qualityRank": 6,
+    "metricCoverage": {
+      "availablePriority": 122,
+      "totalPriority": 132,
+      "coveragePct": 92.42,
+      "missingKeys": [
+        "terminalBenchV4",
+        "gpqaDiamond"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "GPQA Diamond (legacy)"
+    ],
+    "missingCount": 2,
+    "dims": [
+      66.7,
+      26.7,
+      null,
+      27.3,
+      76.9,
+      20.0,
+      53.3,
+      70.0,
+      60.0,
+      60.0,
+      null,
+      73.3,
+      73.3,
+      73.3,
+      57.1,
+      64.3
+    ],
+    "isMissing": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "vRanks": {
+      "v70": null,
+      "v80": null,
+      "v90": null,
+      "v100": null,
+      "v110": null,
+      "v120": null,
+      "v130": null,
+      "v131": null,
+      "v140": null,
+      "v150": null,
+      "v160": null,
+      "v170": null,
+      "v190": null,
+      "v191": null,
+      "v192": null,
+      "v193": 4
+    }
+  },
+  {
+    "rank": 5,
     "name": "Claude Opus 5.5",
     "shortName": "Opus 5.5",
     "developer": "Anthropic",
@@ -2605,7 +2807,7 @@ const MODELS = [
     "planCost": 147.8471586181918,
     "planComparableCost": 147.8471586181918,
     "apiCostScore": 0.0,
-    "planCostScore": 75.0,
+    "planCostScore": 60.0,
     "planCostFallback": null,
     "planRoute": {
       "id": "claude-pro-opus55-semianalysis",
@@ -2655,32 +2857,55 @@ const MODELS = [
       "agent": null,
       "releaseDate": null
     },
-    "overallScore": 63.6,
-    "qualityScore": 81.9,
+    "overallScore": 61.6,
+    "qualityScore": 78.4,
     "qualityRank": 1,
-    "missingCount": 0,
+    "metricCoverage": {
+      "availablePriority": 117,
+      "totalPriority": 132,
+      "coveragePct": 88.64,
+      "missingKeys": [
+        "terminalBenchV4",
+        "livebenchInstructionFollowing",
+        "gpqaDiamond"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "Instruction Following (LiveBench)",
+      "GPQA Diamond (legacy)"
+    ],
+    "missingCount": 3,
     "dims": [
       0.0,
-      41.7,
-      66.7,
+      33.3,
+      null,
+      null,
+      61.5,
       100.0,
       100.0,
-      91.7,
+      86.7,
       100.0,
       100.0,
+      null,
       100.0,
-      91.7,
+      86.7,
       100.0,
-      83.3
+      78.6,
+      78.6
     ],
     "isMissing": [
       false,
       false,
+      true,
+      true,
       false,
       false,
       false,
       false,
       false,
+      false,
+      true,
       false,
       false,
       false,
@@ -2703,11 +2928,11 @@ const MODELS = [
       "v190": null,
       "v191": 3,
       "v192": 3,
-      "v193": 4
+      "v193": 5
     }
   },
   {
-    "rank": 5,
+    "rank": 6,
     "name": "Grok 4.7",
     "shortName": "Grok 4.7",
     "developer": "xAI",
@@ -2718,8 +2943,8 @@ const MODELS = [
     "apiCost": 4967.354257472305,
     "planCost": 858.6610643858781,
     "planComparableCost": 858.6610643858781,
-    "apiCostScore": 16.666667,
-    "planCostScore": 50.0,
+    "apiCostScore": 13.333333,
+    "planCostScore": 40.0,
     "planCostFallback": null,
     "planRoute": {
       "id": "supergrok-heavy-grok47-xhigh-user-projection",
@@ -2778,25 +3003,532 @@ const MODELS = [
       "agent": null,
       "releaseDate": null
     },
-    "overallScore": 57.8,
-    "qualityScore": 69.6,
-    "qualityRank": 4,
-    "missingCount": 0,
+    "overallScore": 58.4,
+    "qualityScore": 70.1,
+    "qualityRank": 5,
+    "metricCoverage": {
+      "availablePriority": 122,
+      "totalPriority": 132,
+      "coveragePct": 92.42,
+      "missingKeys": [
+        "terminalBenchV4",
+        "gpqaDiamond"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "GPQA Diamond (legacy)"
+    ],
+    "missingCount": 2,
     "dims": [
-      16.7,
-      83.3,
+      13.3,
+      86.7,
+      null,
+      81.8,
       100.0,
-      83.3,
-      83.3,
-      0.0,
-      41.7,
-      41.7,
+      86.7,
+      86.7,
+      6.7,
+      46.7,
+      40.0,
+      null,
       66.7,
-      8.3,
-      58.3,
-      58.3
+      13.3,
+      56.7,
+      50.0,
+      57.1
     ],
     "isMissing": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "vRanks": {
+      "v70": null,
+      "v80": null,
+      "v90": null,
+      "v100": null,
+      "v110": null,
+      "v120": null,
+      "v130": null,
+      "v131": null,
+      "v140": null,
+      "v150": null,
+      "v160": null,
+      "v170": null,
+      "v190": null,
+      "v191": null,
+      "v192": null,
+      "v193": 6
+    }
+  },
+  {
+    "rank": 7,
+    "name": "MiMo-V2.6-Pro",
+    "shortName": "MiMo V2.6 Pro",
+    "developer": "Xiaomi",
+    "evalCost": 2.37,
+    "aaEvalCost": 206.66,
+    "deepSweCost": null,
+    "deepSwePassAt1Pct": null,
+    "apiCost": 206.66,
+    "planCost": 137.77333333333334,
+    "planComparableCost": 137.77333333333334,
+    "apiCostScore": 86.666667,
+    "planCostScore": 73.333333,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "mimo-provisional-user-assumption",
+      "provider": "Xiaomi",
+      "plan": "MiMo provisional assumption",
+      "planLabel": "MiMo · provisional 1.5x assumption",
+      "planPriceUsd": null,
+      "apiEquivalentUsd": null,
+      "valueMultiple": 1.5,
+      "valueMultipleKind": "user_assumption",
+      "evidenceClass": "user_assumption",
+      "confidence": "provisional",
+      "provisional": true,
+      "numeratorKind": "unavailable",
+      "assumptionScope": "User-authorized provisional 1.5x for both MiMo candidate models",
+      "validFrom": "2026-10-08",
+      "checkedOn": "2026-10-08",
+      "sourcePublicationDate": null,
+      "measurementWindow": null,
+      "sourceModel": null,
+      "modelIds": [
+        "mimo-v2-6-pro",
+        "mimo-v2-6-flash"
+      ],
+      "sourceUrl": null,
+      "sourceUrls": [],
+      "sourceReference": "User instruction in this chat on October 8, 2026",
+      "notes": "Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable."
+    },
+    "aaCostNorm": 2.37,
+    "deepSweCostNorm": null,
+    "speed": 40.1,
+    "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+    "livebench": {
+      "model": null,
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 54.1,
+    "qualityScore": 41.9,
+    "qualityRank": 10,
+    "metricCoverage": {
+      "availablePriority": 92,
+      "totalPriority": 132,
+      "coveragePct": 69.7,
+      "missingKeys": [
+        "terminalBenchV4",
+        "livebenchInstructionFollowing",
+        "deepswePassAt1",
+        "gpqaDiamond"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "Instruction Following (LiveBench)",
+      "DeepSWE v1.1",
+      "GPQA Diamond (legacy)"
+    ],
+    "missingCount": 4,
+    "dims": [
+      86.7,
+      73.3,
+      null,
+      null,
+      null,
+      80.0,
+      33.3,
+      93.3,
+      20.0,
+      66.7,
+      null,
+      93.3,
+      60.0,
+      56.7,
+      7.1,
+      3.6
+    ],
+    "isMissing": [
+      false,
+      false,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "vRanks": {
+      "v70": null,
+      "v80": null,
+      "v90": null,
+      "v100": null,
+      "v110": null,
+      "v120": null,
+      "v130": null,
+      "v131": null,
+      "v140": null,
+      "v150": null,
+      "v160": null,
+      "v170": null,
+      "v190": null,
+      "v191": null,
+      "v192": null,
+      "v193": 7
+    }
+  },
+  {
+    "rank": 8,
+    "name": "MiMo-V2.6-Flash",
+    "shortName": "MiMo V2.6 Flash",
+    "developer": "Xiaomi",
+    "evalCost": 1.26,
+    "aaEvalCost": 109.41,
+    "deepSweCost": null,
+    "deepSwePassAt1Pct": null,
+    "apiCost": 109.41,
+    "planCost": 72.94,
+    "planComparableCost": 72.94,
+    "apiCostScore": 100.0,
+    "planCostScore": 86.666667,
+    "planCostFallback": null,
+    "planRoute": {
+      "id": "mimo-provisional-user-assumption",
+      "provider": "Xiaomi",
+      "plan": "MiMo provisional assumption",
+      "planLabel": "MiMo · provisional 1.5x assumption",
+      "planPriceUsd": null,
+      "apiEquivalentUsd": null,
+      "valueMultiple": 1.5,
+      "valueMultipleKind": "user_assumption",
+      "evidenceClass": "user_assumption",
+      "confidence": "provisional",
+      "provisional": true,
+      "numeratorKind": "unavailable",
+      "assumptionScope": "User-authorized provisional 1.5x for both MiMo candidate models",
+      "validFrom": "2026-10-08",
+      "checkedOn": "2026-10-08",
+      "sourcePublicationDate": null,
+      "measurementWindow": null,
+      "sourceModel": null,
+      "modelIds": [
+        "mimo-v2-6-pro",
+        "mimo-v2-6-flash"
+      ],
+      "sourceUrl": null,
+      "sourceUrls": [],
+      "sourceReference": "User instruction in this chat on October 8, 2026",
+      "notes": "Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable."
+    },
+    "aaCostNorm": 1.26,
+    "deepSweCostNorm": null,
+    "speed": 56.4,
+    "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+    "livebench": {
+      "model": null,
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 51.6,
+    "qualityScore": 25.8,
+    "qualityRank": 15,
+    "metricCoverage": {
+      "availablePriority": 72,
+      "totalPriority": 132,
+      "coveragePct": 54.55,
+      "missingKeys": [
+        "terminalBenchV4",
+        "livebenchInstructionFollowing",
+        "deepswePassAt1",
+        "gpqaDiamond",
+        "bugHuntFixedOf105"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "Instruction Following (LiveBench)",
+      "DeepSWE v1.1",
+      "GPQA Diamond (legacy)",
+      "Bug Hunt Bench"
+    ],
+    "missingCount": 5,
+    "dims": [
+      100.0,
+      50.0,
+      null,
+      null,
+      null,
+      60.0,
+      73.3,
+      0.0,
+      0.0,
+      0.0,
+      null,
+      0.0,
+      0.0,
+      13.3,
+      21.4,
+      null
+    ],
+    "isMissing": [
+      false,
+      false,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    "vRanks": {
+      "v70": null,
+      "v80": null,
+      "v90": null,
+      "v100": null,
+      "v110": null,
+      "v120": null,
+      "v130": null,
+      "v131": null,
+      "v140": null,
+      "v150": null,
+      "v160": null,
+      "v170": null,
+      "v190": null,
+      "v191": null,
+      "v192": null,
+      "v193": 8
+    }
+  },
+  {
+    "rank": 9,
+    "name": "Kimi K3",
+    "shortName": "Kimi K3",
+    "developer": "Moonshot AI",
+    "evalCost": 42.01,
+    "aaEvalCost": 3658.07,
+    "deepSweCost": null,
+    "deepSwePassAt1Pct": 68.0,
+    "apiCost": 3658.0675385043187,
+    "planCost": null,
+    "planComparableCost": 3658.0675385043187,
+    "apiCostScore": 33.333333,
+    "planCostScore": 13.333333,
+    "planCostFallback": "api",
+    "planRoute": null,
+    "aaCostNorm": 42.01,
+    "deepSweCostNorm": null,
+    "speed": null,
+    "aaUrl": "https://artificialanalysis.ai/models/kimi-k3",
+    "livebench": {
+      "model": "kimi-k3",
+      "overallScore": 79.193048,
+      "instructionFollowingScore": 71.36275,
+      "costPerSuccessfulTaskUsd": 0.351
+    },
+    "terminalBenchV4": {
+      "model": null,
+      "resolutionRate": null,
+      "resolutionRatePct": null,
+      "uncertaintyPct": null,
+      "costUsd": null,
+      "agent": null,
+      "releaseDate": null
+    },
+    "overallScore": 46.2,
+    "qualityScore": 49.6,
+    "qualityRank": 7,
+    "metricCoverage": {
+      "availablePriority": 121,
+      "totalPriority": 132,
+      "coveragePct": 91.67,
+      "missingKeys": [
+        "terminalBenchV4",
+        "speed"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "Speed"
+    ],
+    "missingCount": 2,
+    "dims": [
+      33.3,
+      60.0,
+      null,
+      45.5,
+      61.5,
+      33.3,
+      26.7,
+      100.0,
+      53.3,
+      46.7,
+      56.2,
+      86.7,
+      53.3,
+      33.3,
+      null,
+      28.6
+    ],
+    "isMissing": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+    ],
+    "vRanks": {
+      "v70": null,
+      "v80": null,
+      "v90": null,
+      "v100": null,
+      "v110": null,
+      "v120": null,
+      "v130": null,
+      "v131": null,
+      "v140": null,
+      "v150": 8,
+      "v160": null,
+      "v170": null,
+      "v190": 4,
+      "v191": 6,
+      "v192": 6,
+      "v193": 9
+    }
+  },
+  {
+    "rank": 10,
+    "name": "Grok 4.6",
+    "shortName": "Grok 4.6",
+    "developer": "xAI",
+    "evalCost": 22.24,
+    "aaEvalCost": 1936.75,
+    "deepSweCost": null,
+    "deepSwePassAt1Pct": 65.0,
+    "apiCost": 1936.747257680374,
+    "planCost": null,
+    "planComparableCost": 1936.747257680374,
+    "apiCostScore": 53.333333,
+    "planCostScore": 26.666667,
+    "planCostFallback": "api",
+    "planRoute": null,
+    "aaCostNorm": 22.24,
+    "deepSweCostNorm": null,
+    "speed": 63.7335477757439,
+    "aaUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+    "livebench": {
+      "model": "grok-4.6",
+      "overallScore": 78.042,
+      "instructionFollowingScore": 71.8665,
+      "costPerSuccessfulTaskUsd": 0.2068
+    },
+    "terminalBenchV4": {
+      "model": "Grok 4.6",
+      "resolutionRate": 0.203,
+      "resolutionRatePct": 20.3,
+      "uncertaintyPct": 3.1,
+      "costUsd": 3600.0,
+      "agent": "Grok Build",
+      "releaseDate": "Aug 12, 2026"
+    },
+    "overallScore": 45.6,
+    "qualityScore": 43.8,
+    "qualityRank": 8,
+    "metricCoverage": {
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "coveragePct": 100.0,
+      "missingKeys": []
+    },
+    "missingMetricLabels": [],
+    "missingCount": 0,
+    "dims": [
+      53.3,
+      100.0,
+      33.3,
+      63.6,
+      30.8,
+      53.3,
+      66.7,
+      40.0,
+      26.7,
+      20.0,
+      56.2,
+      40.0,
+      13.3,
+      26.7,
+      42.9,
+      50.0
+    ],
+    "isMissing": [
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -2820,17 +3552,17 @@ const MODELS = [
       "v130": null,
       "v131": null,
       "v140": null,
-      "v150": null,
+      "v150": 2,
       "v160": null,
       "v170": null,
-      "v190": null,
-      "v191": null,
-      "v192": null,
-      "v193": 5
+      "v190": 3,
+      "v191": 4,
+      "v192": 4,
+      "v193": 10
     }
   },
   {
-    "rank": 6,
+    "rank": 11,
     "name": "GPT-5.6 Luna",
     "shortName": "GPT-5.6 Luna",
     "developer": "OpenAI",
@@ -2841,8 +3573,8 @@ const MODELS = [
     "apiCost": 319.92851141699316,
     "planCost": 29.700010343203967,
     "planComparableCost": 29.700010343203967,
-    "apiCostScore": 91.666667,
-    "planCostScore": 91.666667,
+    "apiCostScore": 80.0,
+    "planCostScore": 93.333333,
     "planCostFallback": null,
     "planRoute": {
       "id": "chatgpt-pro500-common-semianalysis-assumption",
@@ -2875,6 +3607,7 @@ const MODELS = [
         "gpt-5.6-luna",
         "gpt-5.5",
         "gpt-6-sol",
+        "gpt-6.1-sol",
         "gpt-6-luna"
       ],
       "assumptionScope": "user-authorized cross-model application",
@@ -2900,25 +3633,40 @@ const MODELS = [
       "agent": "Codex",
       "releaseDate": "Jun 26, 2026"
     },
-    "overallScore": 50.8,
-    "qualityScore": 39.0,
-    "qualityRank": 9,
+    "overallScore": 43.3,
+    "qualityScore": 34.8,
+    "qualityRank": 12,
+    "metricCoverage": {
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "coveragePct": 100.0,
+      "missingKeys": []
+    },
+    "missingMetricLabels": [],
     "missingCount": 0,
     "dims": [
-      91.7,
+      80.0,
       0.0,
-      45.8,
-      16.7,
       0.0,
-      70.8,
-      25.0,
-      8.3,
-      8.3,
-      50.0,
-      8.3,
-      75.0
+      9.1,
+      42.3,
+      13.3,
+      0.0,
+      70.0,
+      33.3,
+      13.3,
+      0.0,
+      13.3,
+      46.7,
+      3.3,
+      85.7,
+      71.4
     ],
     "isMissing": [
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -2948,183 +3696,11 @@ const MODELS = [
       "v190": 5,
       "v191": 5,
       "v192": 5,
-      "v193": 6
+      "v193": 11
     }
   },
   {
-    "rank": 7,
-    "name": "Kimi K3",
-    "shortName": "Kimi K3",
-    "developer": "Moonshot AI",
-    "evalCost": 42.01,
-    "aaEvalCost": 3658.07,
-    "deepSweCost": null,
-    "deepSwePassAt1Pct": 68.0,
-    "apiCost": 3658.0675385043187,
-    "planCost": null,
-    "planComparableCost": 3658.0675385043187,
-    "apiCostScore": 41.666667,
-    "planCostScore": 16.666667,
-    "planCostFallback": "api",
-    "planRoute": null,
-    "aaCostNorm": 42.01,
-    "deepSweCostNorm": null,
-    "speed": null,
-    "aaUrl": "https://artificialanalysis.ai/models/kimi-k3",
-    "livebench": {
-      "model": "kimi-k3",
-      "overallScore": 79.193048,
-      "instructionFollowingScore": 71.36275,
-      "costPerSuccessfulTaskUsd": 0.351
-    },
-    "terminalBenchV4": {
-      "model": null,
-      "resolutionRate": null,
-      "resolutionRatePct": null,
-      "uncertaintyPct": null,
-      "costUsd": null,
-      "agent": null,
-      "releaseDate": null
-    },
-    "overallScore": 49.3,
-    "qualityScore": 51.4,
-    "qualityRank": 6,
-    "missingCount": 0,
-    "dims": [
-      41.7,
-      58.3,
-      66.7,
-      41.7,
-      33.3,
-      100.0,
-      50.0,
-      50.0,
-      91.7,
-      58.3,
-      33.3,
-      25.0
-    ],
-    "isMissing": [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    ],
-    "vRanks": {
-      "v70": null,
-      "v80": null,
-      "v90": null,
-      "v100": null,
-      "v110": null,
-      "v120": null,
-      "v130": null,
-      "v131": null,
-      "v140": null,
-      "v150": 8,
-      "v160": null,
-      "v170": null,
-      "v190": 4,
-      "v191": 6,
-      "v192": 6,
-      "v193": 7
-    }
-  },
-  {
-    "rank": 8,
-    "name": "Grok 4.6",
-    "shortName": "Grok 4.6",
-    "developer": "xAI",
-    "evalCost": 22.24,
-    "aaEvalCost": 1936.75,
-    "deepSweCost": null,
-    "deepSwePassAt1Pct": 65.0,
-    "apiCost": 1936.747257680374,
-    "planCost": null,
-    "planComparableCost": 1936.747257680374,
-    "apiCostScore": 66.666667,
-    "planCostScore": 33.333333,
-    "planCostFallback": "api",
-    "planRoute": null,
-    "aaCostNorm": 22.24,
-    "deepSweCostNorm": null,
-    "speed": 63.7335477757439,
-    "aaUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
-    "livebench": {
-      "model": "grok-4.6",
-      "overallScore": 78.042,
-      "instructionFollowingScore": 71.8665,
-      "costPerSuccessfulTaskUsd": 0.2068
-    },
-    "terminalBenchV4": {
-      "model": "Grok 4.6",
-      "resolutionRate": 0.203,
-      "resolutionRatePct": 20.3,
-      "uncertaintyPct": 3.1,
-      "costUsd": 3600.0,
-      "agent": "Grok Build",
-      "releaseDate": "Aug 12, 2026"
-    },
-    "overallScore": 48.5,
-    "qualityScore": 43.3,
-    "qualityRank": 7,
-    "missingCount": 0,
-    "dims": [
-      66.7,
-      100.0,
-      33.3,
-      58.3,
-      75.0,
-      41.7,
-      16.7,
-      16.7,
-      33.3,
-      8.3,
-      25.0,
-      50.0
-    ],
-    "isMissing": [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    ],
-    "vRanks": {
-      "v70": null,
-      "v80": null,
-      "v90": null,
-      "v100": null,
-      "v110": null,
-      "v120": null,
-      "v130": null,
-      "v131": null,
-      "v140": null,
-      "v150": 2,
-      "v160": null,
-      "v170": null,
-      "v190": 3,
-      "v191": 4,
-      "v192": 4,
-      "v193": 8
-    }
-  },
-  {
-    "rank": 9,
+    "rank": 12,
     "name": "Gemini 3.8 Flash",
     "shortName": "Gem 3.8 Flash",
     "developer": "Google DeepMind",
@@ -3135,8 +3711,8 @@ const MODELS = [
     "apiCost": 1622.7263776021543,
     "planCost": null,
     "planComparableCost": 1622.7263776021543,
-    "apiCostScore": 75.0,
-    "planCostScore": 41.666667,
+    "apiCostScore": 60.0,
+    "planCostScore": 33.333333,
     "planCostFallback": "api",
     "planRoute": null,
     "aaCostNorm": 18.63,
@@ -3158,25 +3734,40 @@ const MODELS = [
       "agent": "mini-SWE-agent",
       "releaseDate": "Sep 2, 2026"
     },
-    "overallScore": 41.5,
-    "qualityScore": 31.9,
-    "qualityRank": 10,
+    "overallScore": 42.7,
+    "qualityScore": 38.7,
+    "qualityRank": 11,
+    "metricCoverage": {
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "coveragePct": 100.0,
+      "missingKeys": []
+    },
+    "missingMetricLabels": [],
     "missingCount": 0,
     "dims": [
-      75.0,
-      50.0,
-      45.8,
-      8.3,
-      41.7,
-      50.0,
-      66.7,
-      58.3,
-      50.0,
-      25.0,
+      60.0,
+      40.0,
       16.7,
-      0.0
+      100.0,
+      42.3,
+      6.7,
+      40.0,
+      46.7,
+      66.7,
+      53.3,
+      87.5,
+      53.3,
+      26.7,
+      20.0,
+      100.0,
+      3.6
     ],
     "isMissing": [
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -3206,11 +3797,11 @@ const MODELS = [
       "v190": 6,
       "v191": 7,
       "v192": 7,
-      "v193": 9
+      "v193": 12
     }
   },
   {
-    "rank": 10,
+    "rank": 13,
     "name": "GLM-5.3",
     "shortName": "GLM-5.3",
     "developer": "Z AI",
@@ -3221,8 +3812,8 @@ const MODELS = [
     "apiCost": 2503.478685148468,
     "planCost": null,
     "planComparableCost": 2503.478685148468,
-    "apiCostScore": 58.333333,
-    "planCostScore": 25.0,
+    "apiCostScore": 46.666667,
+    "planCostScore": 20.0,
     "planCostFallback": "api",
     "planRoute": null,
     "aaCostNorm": 28.75,
@@ -3244,25 +3835,40 @@ const MODELS = [
       "agent": "Claude Code",
       "releaseDate": "Aug 14, 2026"
     },
-    "overallScore": 36.3,
-    "qualityScore": 30.0,
-    "qualityRank": 11,
+    "overallScore": 36.7,
+    "qualityScore": 34.3,
+    "qualityRank": 13,
+    "metricCoverage": {
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "coveragePct": 100.0,
+      "missingKeys": []
+    },
+    "missingMetricLabels": [],
     "missingCount": 0,
     "dims": [
-      58.3,
-      75.0,
-      8.3,
+      46.7,
+      80.0,
       66.7,
+      36.4,
+      7.7,
       66.7,
-      16.7,
-      8.3,
-      25.0,
-      83.3,
+      60.0,
+      20.0,
+      13.3,
+      26.7,
+      12.5,
+      80.0,
       33.3,
-      41.7,
-      16.7
+      43.3,
+      64.3,
+      21.4
     ],
     "isMissing": [
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -3292,22 +3898,22 @@ const MODELS = [
       "v190": 7,
       "v191": 8,
       "v192": 8,
-      "v193": 10
+      "v193": 13
     }
   },
   {
-    "rank": 11,
+    "rank": 14,
     "name": "GPT-6 Luna",
     "shortName": "GPT-6 Luna",
     "developer": "OpenAI",
     "evalCost": 1.4,
-    "aaEvalCost": 122.29,
+    "aaEvalCost": 122.05,
     "deepSweCost": null,
     "deepSwePassAt1Pct": 64.0,
-    "apiCost": 122.28821559329936,
-    "planCost": 11.352415112634548,
-    "planComparableCost": 11.352415112634548,
-    "apiCostScore": 100.0,
+    "apiCost": 122.05,
+    "planCost": 11.33030077979948,
+    "planComparableCost": 11.33030077979948,
+    "apiCostScore": 93.333333,
     "planCostScore": 100.0,
     "planCostFallback": null,
     "planRoute": {
@@ -3341,6 +3947,7 @@ const MODELS = [
         "gpt-5.6-luna",
         "gpt-5.5",
         "gpt-6-sol",
+        "gpt-6.1-sol",
         "gpt-6-luna"
       ],
       "assumptionScope": "user-authorized cross-model application",
@@ -3366,32 +3973,53 @@ const MODELS = [
       "agent": null,
       "releaseDate": null
     },
-    "overallScore": 35.6,
-    "qualityScore": 17.1,
-    "qualityRank": 13,
-    "missingCount": 0,
+    "overallScore": 36.5,
+    "qualityScore": 21.8,
+    "qualityRank": 16,
+    "metricCoverage": {
+      "availablePriority": 122,
+      "totalPriority": 132,
+      "coveragePct": 92.42,
+      "missingKeys": [
+        "terminalBenchV4",
+        "gpqaDiamond"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0",
+      "GPQA Diamond (legacy)"
+    ],
+    "missingCount": 2,
     "dims": [
-      100.0,
-      16.7,
-      25.0,
+      93.3,
+      13.3,
+      null,
       0.0,
-      8.3,
-      58.3,
-      33.3,
+      23.1,
       0.0,
-      16.7,
-      41.7,
-      0.0,
-      8.3
+      6.7,
+      60.0,
+      40.0,
+      6.7,
+      null,
+      26.7,
+      40.0,
+      3.3,
+      92.9,
+      14.3
     ],
     "isMissing": [
       false,
       false,
+      true,
       false,
       false,
       false,
       false,
       false,
+      false,
+      false,
+      true,
       false,
       false,
       false,
@@ -3414,11 +4042,11 @@ const MODELS = [
       "v190": null,
       "v191": null,
       "v192": null,
-      "v193": 11
+      "v193": 14
     }
   },
   {
-    "rank": 12,
+    "rank": 15,
     "name": "Claude Opus 5",
     "shortName": "Opus 5",
     "developer": "Anthropic",
@@ -3429,7 +4057,7 @@ const MODELS = [
     "apiCost": 7274.7418382622345,
     "planCost": null,
     "planComparableCost": 7274.7418382622345,
-    "apiCostScore": 8.333333,
+    "apiCostScore": 6.666667,
     "planCostScore": 0.0,
     "planCostFallback": "api",
     "planRoute": null,
@@ -3445,32 +4073,47 @@ const MODELS = [
     },
     "terminalBenchV4": {
       "model": "Opus 5",
-      "resolutionRate": 0.539,
-      "resolutionRatePct": 53.9,
-      "uncertaintyPct": 3.2,
-      "costUsd": 6100.0,
+      "resolutionRate": 0.518,
+      "resolutionRatePct": 51.8,
+      "uncertaintyPct": 3.4,
+      "costUsd": 6000.0,
       "agent": "Claude Code",
       "releaseDate": "Jul 24, 2026"
     },
-    "overallScore": 34.7,
-    "qualityScore": 42.3,
-    "qualityRank": 8,
+    "overallScore": 35.8,
+    "qualityScore": 42.6,
+    "qualityRank": 9,
+    "metricCoverage": {
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "coveragePct": 100.0,
+      "missingKeys": []
+    },
+    "missingMetricLabels": [],
     "missingCount": 0,
     "dims": [
-      8.3,
-      25.0,
-      16.7,
-      91.7,
-      25.0,
-      8.3,
+      6.7,
+      20.0,
       83.3,
-      91.7,
-      41.7,
+      18.2,
+      15.4,
+      93.3,
+      20.0,
+      13.3,
+      80.0,
+      93.3,
+      37.5,
+      46.7,
       66.7,
-      83.3,
-      41.7
+      80.0,
+      35.7,
+      42.9
     ],
     "isMissing": [
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -3500,11 +4143,11 @@ const MODELS = [
       "v190": 8,
       "v191": 9,
       "v192": 9,
-      "v193": 12
+      "v193": 15
     }
   },
   {
-    "rank": 13,
+    "rank": 16,
     "name": "Qwen3.8 Max",
     "shortName": "Qwen3.8 Max",
     "developer": "Alibaba",
@@ -3515,8 +4158,8 @@ const MODELS = [
     "apiCost": 4934.789930721673,
     "planCost": null,
     "planComparableCost": 4934.789930721673,
-    "apiCostScore": 25.0,
-    "planCostScore": 8.333333,
+    "apiCostScore": 20.0,
+    "planCostScore": 6.666667,
     "planCostFallback": "api",
     "planRoute": null,
     "aaCostNorm": 56.67,
@@ -3538,25 +4181,44 @@ const MODELS = [
       "agent": null,
       "releaseDate": null
     },
-    "overallScore": 26.5,
-    "qualityScore": 26.9,
-    "qualityRank": 12,
-    "missingCount": 0,
+    "overallScore": 26.7,
+    "qualityScore": 28.3,
+    "qualityRank": 14,
+    "metricCoverage": {
+      "availablePriority": 126,
+      "totalPriority": 132,
+      "coveragePct": 95.45,
+      "missingKeys": [
+        "terminalBenchV4"
+      ]
+    },
+    "missingMetricLabels": [
+      "Terminal-Bench 4.0"
+    ],
+    "missingCount": 1,
     "dims": [
+      20.0,
+      93.3,
+      null,
+      72.7,
+      0.0,
+      73.3,
+      13.3,
+      33.3,
+      6.7,
+      33.3,
       25.0,
-      91.7,
+      6.7,
+      13.3,
+      43.3,
       0.0,
-      75.0,
-      16.7,
-      33.3,
-      0.0,
-      33.3,
-      0.0,
-      8.3,
-      50.0,
-      33.3
+      35.7
     ],
     "isMissing": [
+      false,
+      false,
+      true,
+      false,
       false,
       false,
       false,
@@ -3586,7 +4248,7 @@ const MODELS = [
       "v190": 9,
       "v191": 10,
       "v192": 10,
-      "v193": 13
+      "v193": 16
     }
   }
 ];
@@ -3833,12 +4495,12 @@ MODELS.forEach(model => {
   model.costTier = compositeCostTier(model.evalCost);
 });
 
-const SPEED_DIM_IDX = -1;
+const SPEED_DIM_IDX = 14;
 
 // COST BASIS SWITCHER START
-const PLAN_COST_META = {"asOf": "2026-10-08", "routeCount": 9, "supportedModelCount": 7, "fallbackModelCount": 6, "totalModelCount": 13, "mixId": "valuerank-billed-3"};
+const PLAN_COST_META = {"asOf": "2026-10-08", "routeCount": 9, "supportedModelCount": 10, "fallbackModelCount": 6, "totalModelCount": 16, "mixId": "valuerank-billed-3"};
 let costBasis = 'api';
-let costWeightPct = 22.3214;
+let costWeightPct = 18.9394;
 
 function costBasisLabel() {
   return costBasis === 'plan' ? 'Plan Costs' : 'API Costs';
@@ -3862,7 +4524,44 @@ function activeCostScore(model) {
   if (candidate !== null && candidate !== undefined && Number.isFinite(Number(candidate))) return Number(candidate);
   if (model.apiCostScore !== null && model.apiCostScore !== undefined && Number.isFinite(Number(model.apiCostScore))) return Number(model.apiCostScore);
   const base = model.dims?.[0];
-  return base !== null && base !== undefined && Number.isFinite(Number(base)) ? Number(base) : 50;
+  return base !== null && base !== undefined && Number.isFinite(Number(base)) ? Number(base) : null;
+}
+
+function hasDimensionValue(model, index) {
+  const value = model?.dims?.[index];
+  return value !== null && value !== undefined && Number.isFinite(Number(value));
+}
+
+function effectiveDimWeights(model, costPct = costWeightPct) {
+  const requestedCost = costPct === null || costPct === undefined || !Number.isFinite(Number(costPct))
+    ? DIM_WEIGHTS[0] / 100
+    : Math.min(100, Math.max(0, Number(costPct))) / 100;
+  const defaultCost = Number(DIM_WEIGHTS[0]) / 100;
+  const qualityScale = defaultCost < 1 ? (1 - requestedCost) / (1 - defaultCost) : 0;
+  const weights = DIM_WEIGHTS.map((weight, index) => {
+    if (!hasDimensionValue(model, index)) return 0;
+    return index === 0 ? requestedCost : (Number(weight) / 100) * qualityScale;
+  });
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  return total > 0 ? weights.map(weight => weight / total) : weights;
+}
+
+function getModelCoverage(model) {
+  const value = model?.metricCoverage?.coveragePct;
+  if (value !== null && value !== undefined && Number.isFinite(Number(value))) return Number(value);
+  const total = DIM_WEIGHTS.reduce((sum, weight) => sum + Number(weight), 0);
+  const available = DIM_WEIGHTS.reduce((sum, weight, index) => sum + (hasDimensionValue(model, index) ? Number(weight) : 0), 0);
+  return total > 0 ? (available / total) * 100 : null;
+}
+
+function modelCoverageNote(model) {
+  const coverage = getModelCoverage(model);
+  if (coverage === null) return '';
+  const missing = Array.isArray(model?.missingMetricLabels) ? model.missingMetricLabels : [];
+  const detail = missing.length
+    ? `Missing: ${missing.join(', ')}`
+    : coverage < 99.995 ? 'Some retained metrics unavailable' : 'All retained metrics available';
+  return `Baseline priority coverage ${coverage.toFixed(2)}% · ${detail}`;
 }
 
 function formatValueMultiple(route) {
@@ -3898,11 +4597,15 @@ function recomputeCostState() {
     model.activeCostUsd = activeCostUsd(model);
     model.evalCost = activeCostScore(model);
     model.dims[0] = model.evalCost;
+    model.missingCount = model.dims.reduce((count, value) => count + (value === null || value === undefined ? 1 : 0), 0);
     model.costTier = compositeCostTier(model.evalCost);
     model.activeScore = computeNewScore(model, costWeightPct);
     model.overallScore = model.activeScore;
   });
-  const sorted = [...MODELS].sort((a, b) => b.activeScore - a.activeScore || a.name.localeCompare(b.name));
+  MODELS.forEach(model => { model.rank = null; });
+  const sorted = MODELS
+    .filter(model => Number.isFinite(model.activeScore))
+    .sort((a, b) => b.activeScore - a.activeScore || a.name.localeCompare(b.name));
   sorted.forEach((model, index) => { model.rank = index + 1; });
   tableModels = MODELS.map(model => ({ ...model, score: model.activeScore }));
 }
@@ -4061,20 +4764,25 @@ function renderHeroPodium() {
 // HELPERS
 // ─────────────────────────────────────────────
 function computeNewScore(model, costWeightPct) {
-  const cw = costWeightPct / 100;
-  const scaleFactor = (1 - cw) / ((DIM_WEIGHTS.slice(1).reduce((a,b)=>a+b,0))/100 || 0.75);
-  const qualWeights = DIM_WEIGHTS.map((w, i) => i === 0 ? 0 : w / 100);
-  let score = model.dims[0] * cw;
-  for (let i = 1; i < model.dims.length; i++) score += model.dims[i] * qualWeights[i] * scaleFactor;
-  return Math.round(score * 10) / 10;
+  const weights = effectiveDimWeights(model, costWeightPct);
+  let weightedScore = 0;
+  let totalWeight = 0;
+  weights.forEach((weight, index) => {
+    if (weight <= 0 || !hasDimensionValue(model, index)) return;
+    weightedScore += Number(model.dims[index]) * weight;
+    totalWeight += weight;
+  });
+  return totalWeight > 0 ? Math.round((weightedScore / totalWeight) * 10) / 10 : null;
 }
 
 function getMacroContribs(model) {
-  const weights = DIM_WEIGHTS.map(w => w / 100);
+  const weights = effectiveDimWeights(model, costWeightPct);
   return MACRO_CATS.map(cat => {
-    let val = 0;
-    cat.dimIdxs.forEach(i => val += model.dims[i] * weights[i]);
-    return Math.round(val * 100) / 100;
+    let value = 0;
+    cat.dimIdxs.forEach(index => {
+      if (weights[index] > 0 && hasDimensionValue(model, index)) value += Number(model.dims[index]) * weights[index];
+    });
+    return Math.round(value * 100) / 100;
   });
 }
 
@@ -4128,43 +4836,67 @@ function renderTable() {
     if (tierFilter === 'Expensive') return ['Expensive','Very Expensive','Ultra-Premium'].includes(m.costTier);
     return m.costTier === tierFilter;
   });
-  models.sort((a,b) => sortDir * (a[sortCol] > b[sortCol] ? 1 : a[sortCol] < b[sortCol] ? -1 : 0));
   if (sortCol === 'rank' || sortCol === 'qualityRank' || sortCol === 'missingCount') {
-    models.sort((a,b) => sortDir * (a[sortCol] - b[sortCol]));
+    models.sort((a, b) => {
+      const av = a[sortCol] !== null && a[sortCol] !== undefined && Number.isFinite(Number(a[sortCol])) ? Number(a[sortCol]) : Infinity;
+      const bv = b[sortCol] !== null && b[sortCol] !== undefined && Number.isFinite(Number(b[sortCol])) ? Number(b[sortCol]) : Infinity;
+      return sortDir * (av - bv);
+    });
+  } else if (sortCol === 'evalCost') {
+    models.sort((a, b) => {
+      const av = a.evalCost !== null && a.evalCost !== undefined && Number.isFinite(Number(a.evalCost)) ? Number(a.evalCost) : Infinity;
+      const bv = b.evalCost !== null && b.evalCost !== undefined && Number.isFinite(Number(b.evalCost)) ? Number(b.evalCost) : Infinity;
+      return sortDir * (av - bv);
+    });
+  } else if (sortCol === 'score') {
+    models.sort((a, b) => {
+      const av = a.score !== null && a.score !== undefined && Number.isFinite(Number(a.score)) ? Number(a.score) : null;
+      const bv = b.score !== null && b.score !== undefined && Number.isFinite(Number(b.score)) ? Number(b.score) : null;
+      if (av === null) return bv === null ? 0 : 1;
+      if (bv === null) return -1;
+      return sortDir * (bv - av);
+    });
+  } else {
+    models.sort((a, b) => sortDir * (a[sortCol] > b[sortCol] ? 1 : a[sortCol] < b[sortCol] ? -1 : 0));
   }
-  if (sortCol === 'evalCost') models.sort((a,b) => sortDir * (a.evalCost - b.evalCost));
-  if (sortCol === 'score') models.sort((a,b) => sortDir * (b.score - a.score));
 
   const tbody = document.getElementById('ranking-tbody');
   tbody.innerHTML = models.map((m, idx) => {
     const rank = idx + 1;
-    const dispRank = sortCol === 'score' ? m.rank : rank;
+    const dispRank = m.rank == null ? null : (sortCol === 'score' ? m.rank : rank);
     const rankCls = dispRank===1?'r1':dispRank===2?'r2':dispRank===3?'r3':'';
-    const delta = m.qualityRank - m.rank;
-    const deltaStr = delta > 0 ? `+${delta}▲` : delta < 0 ? `${delta}▼` : '—';
-    const deltaCls = delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : 'delta-same';
-    const barW = Math.round((m.score/100)*100);
+    const hasQualityRank = m.qualityRank !== null && m.qualityRank !== undefined && Number.isFinite(Number(m.qualityRank));
+    const hasRank = m.rank !== null && m.rank !== undefined && Number.isFinite(Number(m.rank));
+    const delta = hasQualityRank && hasRank ? Number(m.qualityRank) - Number(m.rank) : null;
+    const deltaStr = delta === null ? '—' : delta > 0 ? `+${delta}▲` : delta < 0 ? `${delta}▼` : '—';
+    const deltaCls = delta === null ? 'delta-same' : delta > 0 ? 'delta-up' : delta < 0 ? 'delta-down' : 'delta-same';
+    const scoreValue = m.score !== null && m.score !== undefined && Number.isFinite(Number(m.score)) ? Number(m.score) : null;
+    const scoreText = scoreValue === null ? '—' : scoreValue.toFixed(1);
+    const scoreStyle = scoreValue === null ? 'var(--muted)' : scoreColor(scoreValue);
+    const barW = scoreValue === null ? 0 : Math.max(0, Math.min(100, Math.round(scoreValue)));
+    const coverageNote = modelCoverageNote(m);
+    const qualityValue = m.qualityScore !== null && m.qualityScore !== undefined && Number.isFinite(Number(m.qualityScore)) ? Number(m.qualityScore) : null;
     const cost = activeCostUsd(m);
+    const costText = cost === null ? '—' : fmtUsd(cost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const evalCostText = m.evalCost === null || m.evalCost === undefined || !Number.isFinite(Number(m.evalCost)) ? '—' : Number(m.evalCost).toFixed(1);
     const routeText = activeCostRouteLabel(m);
     return `<tr>
-      <td><span class="rank-cell ${rankCls}">${dispRank}</span></td>
-      <td>
-        <div class="model-name">${m.name}</div>
-        <div class="model-dev">${m.developer}</div>
-      </td>
+      <td><span class="rank-cell ${rankCls}">${dispRank === null ? '—' : dispRank}</span></td>
+      <td><div class="model-name">${m.name}</div><div class="model-dev">${m.developer}</div></td>
       <td>
         <div class="score-bar-wrap">
-          <span class="score-val" style="color:${scoreColor(m.score)}">${m.score.toFixed(1)}</span>
-          <div class="score-bar"><div class="score-bar-fill" style="width:${barW}%;background:${scoreColor(m.score)}"></div></div>
+          <span class="score-val" style="color:${scoreStyle}">${scoreText}</span>
+          <div class="score-bar"><div class="score-bar-fill" style="width:${barW}%;background:${scoreStyle}"></div></div>
         </div>
+        ${coverageNote ? `<span class="cost-meta">${coverageNote}</span>` : ''}
       </td>
-      <td><span class="mono" style="color:${scoreColor(m.qualityScore)}">${m.qualityScore.toFixed(1)}</span></td>
-      <td><span class="quality-pill">#${m.qualityRank}</span></td>
-      <td data-sort-value="${cost}">
+      <td><span class="mono" style="color:${qualityValue === null ? 'var(--muted)' : scoreColor(qualityValue)}">${qualityValue === null ? '—' : qualityValue.toFixed(1)}</span></td>
+      <td><span class="quality-pill">${hasQualityRank ? `#${m.qualityRank}` : '—'}</span></td>
+      <td data-sort-value="${cost === null ? '' : cost}">
         <span class="cost-cell">
-          <span class="mono">${fmtUsd(cost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+          <span class="mono">${costText}</span>
           <span class="cost-meta">${routeText}</span>
-          <span class="cost-score">Score ${m.evalCost.toFixed(1)}</span>
+          <span class="cost-score">Score ${evalCostText}</span>
         </span>
       </td>
       <td><span class="tier-badge ${tierClass(m.costTier)}">${m.costTier}</span></td>
@@ -4369,30 +5101,24 @@ function renderPareto() {
 // CHART 2: SCORE DECOMPOSITION
 // ─────────────────────────────────────────────
 function renderDecomposition() {
-  const sorted = [...MODELS].sort((a,b) => a.overallScore - b.overallScore);
-  const yLabels = sorted.map(m => m.shortName);
-
-  const traces = MACRO_CATS.map(cat => ({
+  const sorted = [...MODELS].filter(model => Number.isFinite(model.overallScore)).sort((a, b) => a.overallScore - b.overallScore);
+  const yLabels = sorted.map(model => model.shortName);
+  const traces = MACRO_CATS.map((category, categoryIndex) => ({
     y: yLabels,
-    x: sorted.map(m => {
-      const weights = DIM_WEIGHTS.map(w => w / 100);
-      let v = 0; cat.dimIdxs.forEach(i => v += sorted[sorted.indexOf(m)].dims[i] * weights[i]);
-      return Math.round(v * 100) / 100;
-    }),
-    name: cat.label,
-    type:'bar', orientation:'h',
-    marker:{ color: cat.color, opacity: 0.9 },
-    hovertemplate:`<b>${cat.label}</b>: %{x:.2f} pts<extra>%{y}</extra>`,
+    x: sorted.map(model => getMacroContribs(model)[categoryIndex]),
+    name: category.label,
+    type: 'bar', orientation: 'h',
+    marker: { color: category.color, opacity: 0.9 },
+    hovertemplate: `<b>${category.label}</b>: %{x:.2f} pts<extra>%{y}</extra>`,
   }));
-
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},
-    barmode:'stack',
-    xaxis:{...getPlotlyLayout().xaxis, title:'Score Contribution (pts)', range:[0,80]},
-    yaxis:{...getPlotlyLayout().yaxis, title:''},
-    legend:{orientation:'h', y:-0.16, x:0, xanchor:'left', font:{size:11}},
-    margin:{...getPlotlyLayout().margin, l:90, b:90}
+    title: { text: 'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font: plotlyTitle(14) },
+    barmode: 'stack',
+    xaxis: { ...getPlotlyLayout().xaxis, title: 'Score Contribution (pts)', range: [0, 100] },
+    yaxis: { ...getPlotlyLayout().yaxis, title: '' },
+    legend: { orientation: 'h', y: -0.16, x: 0, xanchor: 'left', font: { size: 11 } },
+    margin: { ...getPlotlyLayout().margin, l: 90, b: 90 },
   };
   Plotly.newPlot('chart-decomp', traces, layout, PLOTLY_CONFIG);
 }
@@ -4443,80 +5169,85 @@ function renderDisplacement() {
 // CHART 4: HEATMAP (for charts tab and data tab)
 // ─────────────────────────────────────────────
 function renderHeatmap(elementId, height) {
-  const models = [...MODELS].sort((a,b) => b.overallScore - a.overallScore);
-
-  // Column order follows generated Cost | Reliability | Agentic | Intelligence | Platform groups.
-  const colOrder = DIM_KEYS.map((_, i) => i);
-  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);
-  const colFull   = colOrder.map(i => DIM_FULL[i]);
-  const colWeights= colOrder.map(i => DIM_WEIGHTS[i]);
-
-  const z = models.map(m => colOrder.map(i => m.dims[i]));
-  const customdata = models.map(m => colOrder.map(i => ({
-    model: m.name, dim: DIM_FULL[i], score: Number(m.dims[i]).toFixed(1), weight: DIM_WEIGHTS[i], missing: m.isMissing[i]
-  })));
-
+  const models = [...MODELS].sort((a, b) => b.overallScore - a.overallScore);
+  const colOrder = DIM_KEYS.map((_, index) => index);
+  const colLabels = colOrder.map(index => index === 0 ? costBasisLabel() : DIM_KEYS[index]);
+  const colFull = colOrder.map(index => DIM_FULL[index]);
+  const z = models.map(model => colOrder.map(index => hasDimensionValue(model, index) ? Number(model.dims[index]) : null));
+  const customdata = models.map(model => {
+    const weights = effectiveDimWeights(model, costWeightPct);
+    return colOrder.map(index => ({
+      model: model.name,
+      dim: DIM_FULL[index],
+      score: hasDimensionValue(model, index) ? Number(model.dims[index]).toFixed(1) : 'Not available',
+      weight: (weights[index] * 100).toFixed(2),
+      missing: !hasDimensionValue(model, index),
+      coverage: modelCoverageNote(model),
+    }));
+  });
   const trace = {
     z,
-    type:'heatmap',
-    colorscale:[
-      [0.0, '#1e3a8a'],[0.15,'#2563eb'],[0.35,'#93c5fd'],
-      [0.5, '#cbd5e1'],[0.65,'#fcd34d'],[0.85,'#f59e0b'],[1.0,'#b45309']
-    ],
-    zmin:0, zmax:100,
+    type: 'heatmap',
+    colorscale: [[0.0, '#1e3a8a'], [0.15, '#2563eb'], [0.35, '#93c5fd'], [0.5, '#cbd5e1'], [0.65, '#fcd34d'], [0.85, '#f59e0b'], [1.0, '#b45309']],
+    zmin: 0,
+    zmax: 100,
     x: colLabels,
-    y: models.map(m => m.shortName),
-    hovertemplate:'<b>%{customdata.model}</b> — %{customdata.dim}<br>Score: %{customdata.score} (weight: %{customdata.weight}%)<br>Confirmed primary-source data<extra></extra>',
+    y: models.map(model => model.shortName),
+    hovertemplate: '<b>%{customdata.model}</b> — %{customdata.dim}<br>Score: %{customdata.score}<br>Effective row weight: %{customdata.weight}%<br>%{customdata.coverage}<extra></extra>',
     customdata,
-    showscale:true,
-    colorbar:{
-      title:'Score', thickness:12, len:0.8,
-      tickfont:{color:'#94a3b8',size:10},
-      titlefont:{color:'#94a3b8',size:11}
-    }
+    showscale: true,
+    colorbar: { title: 'Score', thickness: 12, len: 0.8, tickfont: { color: '#94a3b8', size: 10 }, titlefont: { color: '#94a3b8', size: 11 } },
   };
-
-  // Category dividers (between Cost | Rely | Agentic | Intel | Platform)
-  const dividers = [0.5, 1.5, 5.5, 6.5, 9.5, 10.5];
-  const shapes = dividers.map(x => ({
-    type:'line', xref:'x', yref:'paper',
-    x0: x, x1: x, y0: 0, y1: 1,
-    line:{color:getPlotlyLayout().xaxis.gridcolor, width:2}
-  }));
-
-  const catLabels = [{"x": 0.0, "text": "Cost", "color": "#22c55e", "y": -0.08}, {"x": 3.5, "text": "Reliability", "color": "#a78bfa", "y": -0.08}, {"x": 3.5, "text": "Agentic", "color": "#3b82f6", "y": -0.08}, {"x": 8.5, "text": "Intelligence", "color": "#eab308", "y": -0.08}, {"x": 11.0, "text": "Platform", "color": "#f97316", "y": -0.08}];
-
-  const catAnnotations = catLabels.map(c => ({
-    x: c.x, y: c.y, xref:'x', yref:'paper',
-    text:`<b>${c.text}</b>`, font:{color:c.color,size:10}, showarrow:false,
-  }));
-
-  // Per-cell text with legibility-aware color: white on dark blue, dark on light cells
+  const dividers = [];
+  for (let index = 0; index < colOrder.length - 1; index++) {
+    if (DIM_CAT[colOrder[index]] !== DIM_CAT[colOrder[index + 1]]) dividers.push(index + 0.5);
+  }
+  const shapes = dividers.map(x => ({ type: 'line', xref: 'x', yref: 'paper', x0: x, x1: x, y0: 0, y1: 1, line: { color: getPlotlyLayout().xaxis.gridcolor, width: 2 } }));
+  const categoryGroups = [];
+  colOrder.forEach((index, position) => {
+    const category = DIM_CAT[index];
+    let group = categoryGroups[categoryGroups.length - 1];
+    if (!group || group.key !== category) {
+      group = { key: category, start: position, end: position };
+      categoryGroups.push(group);
+    } else {
+      group.end = position;
+    }
+  });
+  const categoryLabels = {
+    cost: ['Cost', '#22c55e'], rely: ['Reliability', '#a78bfa'], code: ['Agentic', '#3b82f6'],
+    intel: ['Intelligence', '#eab308'], prod: ['Platform', '#f97316'], language: ['Language', '#ec4899'],
+  };
+  const catAnnotations = categoryGroups.map(group => {
+    const [text, color] = categoryLabels[group.key] || [group.key, '#94a3b8'];
+    return { x: (group.start + group.end) / 2, y: -0.08, xref: 'x', yref: 'paper', text: `<b>${text}</b>`, font: { color, size: 10 }, showarrow: false };
+  });
   const cellAnnotations = [];
-  models.forEach(m => {
-    colLabels.forEach((colLabel, colIdx) => {
-      const ci = colOrder[colIdx];
-      const val = m.dims[ci];
-      const textVal = m.isMissing[ci] ? '⊘' : Number(val).toFixed(0);
-      const textColor = val < 28 ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.72)';
+  models.forEach(model => {
+    colLabels.forEach((label, columnIndex) => {
+      const dimensionIndex = colOrder[columnIndex];
+      const value = model.dims[dimensionIndex];
+      const missing = !hasDimensionValue(model, dimensionIndex);
       cellAnnotations.push({
-        x: colLabel, y: m.shortName,
-        xref:'x', yref:'y',
-        text: textVal, showarrow: false,
-        font: { size: 9, color: textColor, family: 'IBM Plex Mono, monospace' }
+        x: label,
+        y: model.shortName,
+        xref: 'x',
+        yref: 'y',
+        text: missing ? '⊘' : Number(value).toFixed(0),
+        showarrow: false,
+        font: { size: 9, color: missing ? 'rgba(148,163,184,0.9)' : Number(value) < 28 ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.72)', family: 'IBM Plex Mono, monospace' },
       });
     });
   });
-
-  const annotations = [...catAnnotations, ...cellAnnotations];
-
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:`Normalized Score Matrix (${MODELS.length} Models × ${DIM_KEYS.length} Dimensions)`, font:plotlyTitle(14)},
-    xaxis:{...getPlotlyLayout().xaxis, side:'top', tickangle:-30, tickfont:{size:10}},
-    yaxis:{...getPlotlyLayout().yaxis, autorange:'reversed', tickfont:{size:11}},
-    margin:{t:100, r:80, b:100, l:90},
-    shapes, annotations
+    title: { text: `Normalized Score Matrix (${MODELS.length} Models × ${DIM_KEYS.length} Dimensions)`, font: plotlyTitle(14) },
+    xaxis: { ...getPlotlyLayout().xaxis, side: 'top', tickangle: -30, tickfont: { size: 10 } },
+    yaxis: { ...getPlotlyLayout().yaxis, autorange: 'reversed', tickfont: { size: 11 } },
+    margin: { t: 100, r: 80, b: 100, l: 90 },
+    shapes,
+    annotations: [...catAnnotations, ...cellAnnotations],
+    height: Number.isFinite(Number(height)) ? Number(height) : undefined,
   };
   Plotly.newPlot(elementId, [trace], layout, PLOTLY_CONFIG);
 }
@@ -4603,7 +5334,7 @@ function renderBump() {
   }));
   const layout = {
     ...getPlotlyLayout(),
-    title:{text:'Ranking History — v0.7 to v1.9.5', font:plotlyTitle(14)},
+    title:{text:'Ranking History — v0.7 to v1.9.6', font:plotlyTitle(14)},
     xaxis:{...getPlotlyLayout().xaxis, title:'Version', categoryorder:'array', categoryarray:versions},
     yaxis:{...getPlotlyLayout().yaxis, title:'Rank', autorange:'reversed', range:[0.5, MODELS.length + 0.5],
       tickvals: Array.from({length: MODELS.length}, (_,i)=>i+1),

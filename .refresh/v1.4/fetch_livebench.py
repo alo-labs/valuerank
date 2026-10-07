@@ -72,6 +72,8 @@ COHORT_MAP = {
     "glm-5.2": "glm-5.2",
     "gemini-3.5-flash": "gemini-3.5-flash-high",
     "gpt-6-sol": "gpt-6-sol-max",
+    # No verified exact GPT-6.1 Sol max identity in the pinned release.
+    "gpt-6.1-sol": None,
     "gpt-6-luna": "gpt-6-luna-max",
     "grok-4.7": "grok-4.7-xhigh",
     # No verified exact identity in the pinned release; keep missing rows.

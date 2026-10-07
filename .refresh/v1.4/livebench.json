@@ -76,14 +76,28 @@
       "summarize"
     ]
   },
-  "cohortN": 27,
+  "cohortN": 28,
   "matchedN": 24,
   "missingModels": [
+    "GPT-6.1 Sol",
     "Claude Opus 5.5",
     "MiMo-V2.6-Pro",
     "MiMo-V2.6-Flash"
   ],
   "models": {
+    "gpt-6.1-sol": {
+      "modelId": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No verified exact result in the retained June 25 LiveBench release. Added to the source cohort October 8; no new benchmark observation or score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
     "gpt-6-astra": {
       "modelId": "gpt-6-astra",
       "name": "GPT-6 Astra",

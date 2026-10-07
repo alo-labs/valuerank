@@ -1,10 +1,114 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-07T15:32:22.395249+00:00",
+  "checkedAt": "2026-10-07T17:23:39.797907+00:00",
   "inventoryPath": ".refresh/v1.4/aa_reconciliation_inventory.json",
   "maxAgeDays": 7,
   "issues": [],
   "frontier": [
+    {
+      "aaId": "gpt-6-luna-low",
+      "name": "GPT-6 Luna (low)",
+      "evaluatedVariant": "low",
+      "intelligenceIndex": 22,
+      "totalCostUsd": 10.63,
+      "directlyObservedFrontier": true,
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-low",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
+      "valueRankModelId": null,
+      "intelligenceIndexPrecision": "rounded_whole_public_label",
+      "rosterDecision": {
+        "aaId": "gpt-6-luna-low",
+        "name": "GPT-6 Luna (low)",
+        "evaluatedVariant": "low",
+        "decision": "defer",
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
+      },
+      "primaryRankingGaps": [
+        "Exact evaluated variant absent from source roster"
+      ],
+      "metricGap": null,
+      "rankStatus": "Deferred comparison candidate"
+    },
+    {
+      "aaId": "gpt-6-luna-medium",
+      "name": "GPT-6 Luna (medium)",
+      "evaluatedVariant": "medium",
+      "intelligenceIndex": 30,
+      "totalCostUsd": 31.17,
+      "directlyObservedFrontier": true,
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-medium",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
+      "valueRankModelId": null,
+      "intelligenceIndexPrecision": "rounded_whole_public_label",
+      "rosterDecision": {
+        "aaId": "gpt-6-luna-medium",
+        "name": "GPT-6 Luna (medium)",
+        "evaluatedVariant": "medium",
+        "decision": "defer",
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
+      },
+      "primaryRankingGaps": [
+        "Exact evaluated variant absent from source roster"
+      ],
+      "metricGap": null,
+      "rankStatus": "Deferred comparison candidate"
+    },
+    {
+      "aaId": "gpt-6-luna-high",
+      "name": "GPT-6 Luna (high)",
+      "evaluatedVariant": "high",
+      "intelligenceIndex": 33,
+      "totalCostUsd": 47.85,
+      "directlyObservedFrontier": true,
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
+      "valueRankModelId": null,
+      "intelligenceIndexPrecision": "rounded_whole_public_label",
+      "rosterDecision": {
+        "aaId": "gpt-6-luna-high",
+        "name": "GPT-6 Luna (high)",
+        "evaluatedVariant": "high",
+        "decision": "defer",
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
+      },
+      "primaryRankingGaps": [
+        "Exact evaluated variant absent from source roster"
+      ],
+      "metricGap": null,
+      "rankStatus": "Deferred comparison candidate"
+    },
+    {
+      "aaId": "gpt-6-luna-xhigh",
+      "name": "GPT-6 Luna (xhigh)",
+      "evaluatedVariant": "xhigh",
+      "intelligenceIndex": 35,
+      "totalCostUsd": 66.81,
+      "directlyObservedFrontier": true,
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-xhigh",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
+      "valueRankModelId": null,
+      "intelligenceIndexPrecision": "rounded_whole_public_label",
+      "rosterDecision": {
+        "aaId": "gpt-6-luna-xhigh",
+        "name": "GPT-6 Luna (xhigh)",
+        "evaluatedVariant": "xhigh",
+        "decision": "defer",
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
+      },
+      "primaryRankingGaps": [
+        "Exact evaluated variant absent from source roster"
+      ],
+      "metricGap": null,
+      "rankStatus": "Deferred comparison candidate"
+    },
     {
       "aaId": "mimo-v2-6-flash",
       "name": "MiMo-V2.6-Flash",
@@ -13,15 +117,31 @@
       "totalCostUsd": 109.41,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+      "family": "MiMo-V2.6-Flash",
+      "requiredFamilyModelId": "mimo-v2-6-flash",
       "valueRankModelId": "mimo-v2-6-flash",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
-      "primaryRankingGaps": [
-        "No eligible exact-variant Bug Hunt match; owner default result 23.3/105 available; selected reasoning equivalence is unverified",
-        "No exact-variant AA DeepSWE result in the selected source snapshot"
-      ],
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Unranked source candidate"
+      "rankStatus": "Primary ranked"
+    },
+    {
+      "aaId": "gpt-6-luna",
+      "name": "GPT-6 Luna (max)",
+      "evaluatedVariant": "max",
+      "intelligenceIndex": 38,
+      "totalCostUsd": 122.05,
+      "directlyObservedFrontier": true,
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
+      "valueRankModelId": "gpt-6-luna",
+      "intelligenceIndexPrecision": "rounded_whole_public_label",
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
+      "metricGap": null,
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "mimo-v2-6-pro",
@@ -31,134 +151,25 @@
       "totalCostUsd": 206.66,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "family": "MiMo-V2.6-Pro",
+      "requiredFamilyModelId": "mimo-v2-6-pro",
       "valueRankModelId": "mimo-v2-6-pro",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
-      "primaryRankingGaps": [
-        "No exact-variant AA DeepSWE result in the selected source snapshot"
-      ],
-      "metricGap": null,
-      "rankStatus": "Unranked source candidate"
-    },
-    {
-      "aaId": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max with fallback)",
-      "evaluatedVariant": "max with fallback",
-      "intelligenceIndex": 58,
-      "totalCostUsd": null,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "valueRankModelId": "claude-opus-5-5",
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": null,
       "primaryRankingGaps": [],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Primary ranked"
-    },
-    {
-      "aaId": "claude-opus-5-5-high",
-      "name": "Claude Opus 5.5 (high with fallback)",
-      "evaluatedVariant": "high with fallback",
-      "intelligenceIndex": 54,
-      "totalCostUsd": null,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-high",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-opus-5-5-high",
-        "name": "Claude Opus 5.5 (high with fallback)",
-        "evaluatedVariant": "high with fallback",
-        "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "claude-opus-5-5-xhigh",
-      "name": "Claude Opus 5.5 (xhigh with fallback)",
-      "evaluatedVariant": "xhigh with fallback",
-      "intelligenceIndex": 56,
-      "totalCostUsd": null,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-opus-5-5-xhigh",
-        "name": "Claude Opus 5.5 (xhigh with fallback)",
-        "evaluatedVariant": "xhigh with fallback",
-        "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol (max)",
-      "evaluatedVariant": "max",
-      "intelligenceIndex": 52,
-      "totalCostUsd": null,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol",
-        "name": "GPT-6.1 Sol (max)",
-        "evaluatedVariant": "max",
-        "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "New-generation frontier candidate explicitly retained for subsequent exact benchmark ingestion. This correction ingests the two MiMo models; the existing roster contains GPT-6 Sol, not GPT-6.1 Sol. No older-generation result is transferred."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "gpt-6-1-sol-high",
-      "name": "GPT-6.1 Sol (high)",
-      "evaluatedVariant": "high",
-      "intelligenceIndex": 50,
-      "totalCostUsd": null,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol-high",
-        "name": "GPT-6.1 Sol (high)",
-        "evaluatedVariant": "high",
-        "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
-      "rankStatus": "Deferred comparison candidate"
     },
     {
       "aaId": "gpt-6-1-sol-medium",
       "name": "GPT-6.1 Sol (medium)",
       "evaluatedVariant": "medium",
       "intelligenceIndex": 48,
-      "totalCostUsd": null,
+      "totalCostUsd": 361.37,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+      "family": "GPT-6.1 Sol",
+      "requiredFamilyModelId": "gpt-6.1-sol",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -166,13 +177,39 @@
         "name": "GPT-6.1 Sol (medium)",
         "evaluatedVariant": "medium",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
+      "rankStatus": "Deferred comparison candidate"
+    },
+    {
+      "aaId": "gpt-6-1-sol-high",
+      "name": "GPT-6.1 Sol (high)",
+      "evaluatedVariant": "high",
+      "intelligenceIndex": 50,
+      "totalCostUsd": 521.32,
+      "directlyObservedFrontier": true,
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+      "family": "GPT-6.1 Sol",
+      "requiredFamilyModelId": "gpt-6.1-sol",
+      "valueRankModelId": null,
+      "intelligenceIndexPrecision": "rounded_whole_public_label",
+      "rosterDecision": {
+        "aaId": "gpt-6-1-sol-high",
+        "name": "GPT-6.1 Sol (high)",
+        "evaluatedVariant": "high",
+        "decision": "defer",
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
+      },
+      "primaryRankingGaps": [
+        "Exact evaluated variant absent from source roster"
+      ],
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -180,9 +217,11 @@
       "name": "GPT-6.1 Sol (xhigh)",
       "evaluatedVariant": "xhigh",
       "intelligenceIndex": 51,
-      "totalCostUsd": null,
+      "totalCostUsd": 662.28,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+      "family": "GPT-6.1 Sol",
+      "requiredFamilyModelId": "gpt-6.1-sol",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -190,125 +229,100 @@
         "name": "GPT-6.1 Sol (xhigh)",
         "evaluatedVariant": "xhigh",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
-      "aaId": "gpt-6-luna",
-      "name": "GPT-6 Luna (max)",
+      "aaId": "gpt-6-1-sol",
+      "name": "GPT-6.1 Sol (max)",
       "evaluatedVariant": "max",
-      "intelligenceIndex": 38,
-      "totalCostUsd": null,
+      "intelligenceIndex": 52,
+      "totalCostUsd": 1081.55,
       "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "valueRankModelId": "gpt-6-luna",
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
+      "family": "GPT-6.1 Sol",
+      "requiredFamilyModelId": "gpt-6.1-sol",
+      "valueRankModelId": "gpt-6.1-sol",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
       "primaryRankingGaps": [],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Primary ranked"
     },
     {
-      "aaId": "gpt-6-luna-high",
-      "name": "GPT-6 Luna (high)",
-      "evaluatedVariant": "high",
-      "intelligenceIndex": 33,
-      "totalCostUsd": null,
+      "aaId": "claude-opus-5-5-high",
+      "name": "Claude Opus 5.5 (high with fallback)",
+      "evaluatedVariant": "high with fallback",
+      "intelligenceIndex": 54,
+      "totalCostUsd": 2172.43,
       "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-high",
+      "family": "Claude Opus 5.5",
+      "requiredFamilyModelId": "claude-opus-5-5",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
-        "aaId": "gpt-6-luna-high",
-        "name": "GPT-6 Luna (high)",
-        "evaluatedVariant": "high",
+        "aaId": "claude-opus-5-5-high",
+        "name": "Claude Opus 5.5 (high with fallback)",
+        "evaluatedVariant": "high with fallback",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
-      "aaId": "gpt-6-luna-low",
-      "name": "GPT-6 Luna (low)",
-      "evaluatedVariant": "low",
-      "intelligenceIndex": 22,
-      "totalCostUsd": null,
+      "aaId": "claude-opus-5-5-xhigh",
+      "name": "Claude Opus 5.5 (xhigh with fallback)",
+      "evaluatedVariant": "xhigh with fallback",
+      "intelligenceIndex": 56,
+      "totalCostUsd": 4056.65,
       "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-low",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh",
+      "family": "Claude Opus 5.5",
+      "requiredFamilyModelId": "claude-opus-5-5",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
-        "aaId": "gpt-6-luna-low",
-        "name": "GPT-6 Luna (low)",
-        "evaluatedVariant": "low",
+        "aaId": "claude-opus-5-5-xhigh",
+        "name": "Claude Opus 5.5 (xhigh with fallback)",
+        "evaluatedVariant": "xhigh with fallback",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
-      "aaId": "gpt-6-luna-medium",
-      "name": "GPT-6 Luna (medium)",
-      "evaluatedVariant": "medium",
-      "intelligenceIndex": 30,
-      "totalCostUsd": null,
+      "aaId": "claude-opus-5-5",
+      "name": "Claude Opus 5.5 (max with fallback)",
+      "evaluatedVariant": "max with fallback",
+      "intelligenceIndex": 58,
+      "totalCostUsd": 8708.2,
       "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-medium",
-      "valueRankModelId": null,
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "family": "Claude Opus 5.5",
+      "requiredFamilyModelId": "claude-opus-5-5",
+      "valueRankModelId": "claude-opus-5-5",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-luna-medium",
-        "name": "GPT-6 Luna (medium)",
-        "evaluatedVariant": "medium",
-        "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "gpt-6-luna-xhigh",
-      "name": "GPT-6 Luna (xhigh)",
-      "evaluatedVariant": "xhigh",
-      "intelligenceIndex": 35,
-      "totalCostUsd": null,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-xhigh",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-luna-xhigh",
-        "name": "GPT-6 Luna (xhigh)",
-        "evaluatedVariant": "xhigh",
-        "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
-      "rankStatus": "Deferred comparison candidate"
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
+      "metricGap": null,
+      "rankStatus": "Primary ranked"
     }
   ],
   "comparisonCandidates": [
@@ -317,9 +331,11 @@
       "name": "GPT-6 Luna (low)",
       "evaluatedVariant": "low",
       "intelligenceIndex": 22,
-      "totalCostUsd": null,
+      "totalCostUsd": 10.63,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-low",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -327,13 +343,13 @@
         "name": "GPT-6 Luna (low)",
         "evaluatedVariant": "low",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -341,9 +357,11 @@
       "name": "GPT-6 Luna (medium)",
       "evaluatedVariant": "medium",
       "intelligenceIndex": 30,
-      "totalCostUsd": null,
+      "totalCostUsd": 31.17,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-medium",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -351,13 +369,13 @@
         "name": "GPT-6 Luna (medium)",
         "evaluatedVariant": "medium",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -365,9 +383,11 @@
       "name": "GPT-6 Luna (high)",
       "evaluatedVariant": "high",
       "intelligenceIndex": 33,
-      "totalCostUsd": null,
+      "totalCostUsd": 47.85,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -375,13 +395,13 @@
         "name": "GPT-6 Luna (high)",
         "evaluatedVariant": "high",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -389,9 +409,11 @@
       "name": "GPT-6 Luna (xhigh)",
       "evaluatedVariant": "xhigh",
       "intelligenceIndex": 35,
-      "totalCostUsd": null,
+      "totalCostUsd": 66.81,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-xhigh",
+      "family": "GPT-6 Luna",
+      "requiredFamilyModelId": "gpt-6-luna",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -399,13 +421,13 @@
         "name": "GPT-6 Luna (xhigh)",
         "evaluatedVariant": "xhigh",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -413,9 +435,11 @@
       "name": "GPT-6.1 Sol (medium)",
       "evaluatedVariant": "medium",
       "intelligenceIndex": 48,
-      "totalCostUsd": null,
+      "totalCostUsd": 361.37,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+      "family": "GPT-6.1 Sol",
+      "requiredFamilyModelId": "gpt-6.1-sol",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -423,13 +447,13 @@
         "name": "GPT-6.1 Sol (medium)",
         "evaluatedVariant": "medium",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -437,9 +461,11 @@
       "name": "GPT-6.1 Sol (high)",
       "evaluatedVariant": "high",
       "intelligenceIndex": 50,
-      "totalCostUsd": null,
+      "totalCostUsd": 521.32,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+      "family": "GPT-6.1 Sol",
+      "requiredFamilyModelId": "gpt-6.1-sol",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -447,13 +473,13 @@
         "name": "GPT-6.1 Sol (high)",
         "evaluatedVariant": "high",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -461,9 +487,11 @@
       "name": "GPT-6.1 Sol (xhigh)",
       "evaluatedVariant": "xhigh",
       "intelligenceIndex": 51,
-      "totalCostUsd": null,
+      "totalCostUsd": 662.28,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+      "family": "GPT-6.1 Sol",
+      "requiredFamilyModelId": "gpt-6.1-sol",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -471,37 +499,13 @@
         "name": "GPT-6.1 Sol (xhigh)",
         "evaluatedVariant": "xhigh",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol (max)",
-      "evaluatedVariant": "max",
-      "intelligenceIndex": 52,
-      "totalCostUsd": null,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol",
-        "name": "GPT-6.1 Sol (max)",
-        "evaluatedVariant": "max",
-        "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "New-generation frontier candidate explicitly retained for subsequent exact benchmark ingestion. This correction ingests the two MiMo models; the existing roster contains GPT-6 Sol, not GPT-6.1 Sol. No older-generation result is transferred."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -509,9 +513,11 @@
       "name": "Claude Opus 5.5 (high with fallback)",
       "evaluatedVariant": "high with fallback",
       "intelligenceIndex": 54,
-      "totalCostUsd": null,
+      "totalCostUsd": 2172.43,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-high",
+      "family": "Claude Opus 5.5",
+      "requiredFamilyModelId": "claude-opus-5-5",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -519,13 +525,13 @@
         "name": "Claude Opus 5.5 (high with fallback)",
         "evaluatedVariant": "high with fallback",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     },
     {
@@ -533,9 +539,11 @@
       "name": "Claude Opus 5.5 (xhigh with fallback)",
       "evaluatedVariant": "xhigh with fallback",
       "intelligenceIndex": 56,
-      "totalCostUsd": null,
+      "totalCostUsd": 4056.65,
       "directlyObservedFrontier": true,
       "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh",
+      "family": "Claude Opus 5.5",
+      "requiredFamilyModelId": "claude-opus-5-5",
       "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": {
@@ -543,13 +551,13 @@
         "name": "Claude Opus 5.5 (xhigh with fallback)",
         "evaluatedVariant": "xhigh with fallback",
         "decision": "defer",
-        "reviewedAt": "2026-10-07T14:23:09Z",
-        "reason": "Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred."
+        "reviewedAt": "2026-10-07T16:22:14Z",
+        "reason": "Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
       ],
-      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture",
+      "metricGap": null,
       "rankStatus": "Deferred comparison candidate"
     }
   ],
@@ -557,106 +565,75 @@
   "scope": "Complete displayed intelligence versus total evaluation cost Pareto line with all 691 catalog models selected; 173 eligible plotted points. This is not ValueRank's composite-quality frontier.",
   "completeness": {
     "status": "complete",
-    "note": "All 14 rendered Pareto-line vertices matched to SVG circles by coordinates, then to exact displayed intelligence-chart identities using public data-chart-item-id attributes. Numeric intelligence values are rounded public labels. Total cost is only captured for MiMo through public tooltips; other total costs remain null. No hidden page state or paid export accessed."
+    "note": "All 691 catalog models selected; 173 plotted points and all 14 Pareto path vertices captured. Public tooltips supply rounded integer Intelligence Index and two-decimal USD total cost. No hidden state or paid export used."
   },
-  "observedAt": "2026-10-07T14:23:09Z",
+  "observedAt": "2026-10-07T16:22:14Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
-  "sourceUrl": "https://artificialanalysis.ai/models#total-cost-tabs",
+  "sourceUrl": "https://artificialanalysis.ai/models?total-cost=intelligence-vs-total-cost",
   "mode": "observedFrontier",
   "sourceUniverse": {
     "selectedModelN": 691,
     "plottedPointN": 173,
     "observedFrontierPointN": 14
   },
-  "ageDays": 0.048,
-  "metricGaps": [
+  "ageDays": 0.043,
+  "requiredFamilies": [
     {
-      "aaId": "gpt-6-luna-low",
-      "name": "GPT-6 Luna (low)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
+      "family": "GPT-6 Luna",
+      "modelId": "gpt-6-luna",
+      "selectedFrontierConfigurationN": 1,
+      "primaryRanked": true
     },
     {
-      "aaId": "gpt-6-luna-medium",
-      "name": "GPT-6 Luna (medium)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
+      "family": "MiMo-V2.6-Flash",
+      "modelId": "mimo-v2-6-flash",
+      "selectedFrontierConfigurationN": 1,
+      "primaryRanked": true
     },
     {
-      "aaId": "gpt-6-luna-high",
-      "name": "GPT-6 Luna (high)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
+      "family": "MiMo-V2.6-Pro",
+      "modelId": "mimo-v2-6-pro",
+      "selectedFrontierConfigurationN": 1,
+      "primaryRanked": true
     },
     {
-      "aaId": "gpt-6-luna-xhigh",
-      "name": "GPT-6 Luna (xhigh)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
+      "family": "GPT-6.1 Sol",
+      "modelId": "gpt-6.1-sol",
+      "selectedFrontierConfigurationN": 1,
+      "primaryRanked": true
     },
     {
-      "aaId": "gpt-6-luna",
-      "name": "GPT-6 Luna (max)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
-    },
-    {
-      "aaId": "gpt-6-1-sol-medium",
-      "name": "GPT-6.1 Sol (medium)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
-    },
-    {
-      "aaId": "gpt-6-1-sol-high",
-      "name": "GPT-6.1 Sol (high)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
-    },
-    {
-      "aaId": "gpt-6-1-sol-xhigh",
-      "name": "GPT-6.1 Sol (xhigh)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
-    },
-    {
-      "aaId": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol (max)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
-    },
-    {
-      "aaId": "claude-opus-5-5-high",
-      "name": "Claude Opus 5.5 (high with fallback)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
-    },
-    {
-      "aaId": "claude-opus-5-5-xhigh",
-      "name": "Claude Opus 5.5 (xhigh with fallback)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
-    },
-    {
-      "aaId": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max with fallback)",
-      "gap": "Numeric intelligence/cost values not fully available in the public chart capture"
+      "family": "Claude Opus 5.5",
+      "modelId": "claude-opus-5-5",
+      "selectedFrontierConfigurationN": 1,
+      "primaryRanked": true
     }
   ],
+  "metricGaps": [],
   "observedRowN": 14,
   "validRowN": 14,
   "missingFrontierIds": [
-    "claude-opus-5-5-high :: Claude Opus 5.5 (high with fallback)",
-    "claude-opus-5-5-xhigh :: Claude Opus 5.5 (xhigh with fallback)",
-    "gpt-6-1-sol :: GPT-6.1 Sol (max)",
-    "gpt-6-1-sol-high :: GPT-6.1 Sol (high)",
-    "gpt-6-1-sol-medium :: GPT-6.1 Sol (medium)",
-    "gpt-6-1-sol-xhigh :: GPT-6.1 Sol (xhigh)",
-    "gpt-6-luna-high :: GPT-6 Luna (high)",
     "gpt-6-luna-low :: GPT-6 Luna (low)",
     "gpt-6-luna-medium :: GPT-6 Luna (medium)",
-    "gpt-6-luna-xhigh :: GPT-6 Luna (xhigh)"
+    "gpt-6-luna-high :: GPT-6 Luna (high)",
+    "gpt-6-luna-xhigh :: GPT-6 Luna (xhigh)",
+    "gpt-6-1-sol-medium :: GPT-6.1 Sol (medium)",
+    "gpt-6-1-sol-high :: GPT-6.1 Sol (high)",
+    "gpt-6-1-sol-xhigh :: GPT-6.1 Sol (xhigh)",
+    "claude-opus-5-5-high :: Claude Opus 5.5 (high with fallback)",
+    "claude-opus-5-5-xhigh :: Claude Opus 5.5 (xhigh with fallback)"
   ],
   "unresolvedFrontierIds": [],
   "deferredFrontierIds": [
-    "claude-opus-5-5-high :: Claude Opus 5.5 (high with fallback)",
-    "claude-opus-5-5-xhigh :: Claude Opus 5.5 (xhigh with fallback)",
-    "gpt-6-1-sol :: GPT-6.1 Sol (max)",
-    "gpt-6-1-sol-high :: GPT-6.1 Sol (high)",
-    "gpt-6-1-sol-medium :: GPT-6.1 Sol (medium)",
-    "gpt-6-1-sol-xhigh :: GPT-6.1 Sol (xhigh)",
-    "gpt-6-luna-high :: GPT-6 Luna (high)",
     "gpt-6-luna-low :: GPT-6 Luna (low)",
     "gpt-6-luna-medium :: GPT-6 Luna (medium)",
-    "gpt-6-luna-xhigh :: GPT-6 Luna (xhigh)"
+    "gpt-6-luna-high :: GPT-6 Luna (high)",
+    "gpt-6-luna-xhigh :: GPT-6 Luna (xhigh)",
+    "gpt-6-1-sol-medium :: GPT-6.1 Sol (medium)",
+    "gpt-6-1-sol-high :: GPT-6.1 Sol (high)",
+    "gpt-6-1-sol-xhigh :: GPT-6.1 Sol (xhigh)",
+    "claude-opus-5-5-high :: Claude Opus 5.5 (high with fallback)",
+    "claude-opus-5-5-xhigh :: Claude Opus 5.5 (xhigh with fallback)"
   ],
   "status": "reconciled"
 }

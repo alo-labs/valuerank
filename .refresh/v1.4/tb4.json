@@ -1,24 +1,20 @@
 {
   "schemaVersion": "valuerank-terminal-bench-v1",
   "version": "4.0",
-  "observedAt": "2026-09-29T07:25:06Z",
+  "observedAt": "2026-10-07T16:44:05Z",
   "source": {
     "publisher": "Terminal-Bench / Harbor",
     "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
     "renderedUrl": "https://www.tbench.ai/",
     "homepage": "https://www.tbench.ai/",
     "tasksUrl": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks",
-    "captureSha256": "8a2255a28fb1e832247f6f8535b9d6033bf69e64d8685f151aeee3c051609bfa",
-    "capturePath": ".refresh/v1.4/tb4-browser-2026-09-29.json",
-    "captureMethod": "Built-in browser accessibility snapshot",
-    "capturedAt": "2026-09-29T06:50:27Z"
+    "captureSha256": "f760de7589cd592b68e8b783c67bab130e88425a3e2f725dc3eff28606a808de",
+    "capturePath": "/Users/shafqat/valuerank/.refresh/v1.4/tb4-scrape.json",
+    "captureMethod": "rendered leaderboard snapshot",
+    "capturedAt": "2026-09-04T13:50:16.451Z"
   },
-  "rowN": 15,
-  "cohortN": 27,
-  "cohortReconciliation": {
-    "modelIdsAdded": ["mimo-v2-6-pro", "mimo-v2-6-flash"],
-    "note": "Selected roster expanded; neither MiMo model occurs in the retained September leaderboard snapshot or eligible provider claims. This is snapshot coverage, not a fresh claim about all external results."
-  },
+  "rowN": 14,
+  "cohortN": 28,
   "matchedN": 11,
   "missingModels": [
     "Kimi K3",
@@ -33,6 +29,7 @@
     "Gemini 3.5 Flash",
     "Claude Opus 5.5",
     "GPT-6 Sol",
+    "GPT-6.1 Sol",
     "GPT-6 Luna",
     "Grok 4.7",
     "MiMo-V2.6-Pro",
@@ -51,6 +48,7 @@
     "Gemini 3.5 Flash",
     "Claude Opus 5.5",
     "GPT-6 Sol",
+    "GPT-6.1 Sol",
     "GPT-6 Luna",
     "Grok 4.7",
     "MiMo-V2.6-Pro",
@@ -83,7 +81,7 @@
     {
       "rank": 1,
       "rankLabel": "1",
-      "model": "GPT-6 Astra ( max )",
+      "model": "GPT-6 Astra (max)",
       "baseModel": "GPT-6 Astra",
       "agent": "Codex",
       "resolutionRate": 0.582,
@@ -97,7 +95,7 @@
     {
       "rank": 2,
       "rankLabel": "2",
-      "model": "Fable 5.1 ( max )",
+      "model": "Fable 5.1 (max)",
       "baseModel": "Fable 5.1",
       "agent": "Claude Code",
       "resolutionRate": 0.579,
@@ -111,21 +109,21 @@
     {
       "rank": 3,
       "rankLabel": "3",
-      "model": "Opus 5 ( xhigh )",
+      "model": "Opus 5 (max)",
       "baseModel": "Opus 5",
       "agent": "Claude Code",
-      "resolutionRate": 0.539,
-      "resolutionRatePct": 53.9,
-      "uncertaintyPct": 3.2,
+      "resolutionRate": 0.518,
+      "resolutionRatePct": 51.8,
+      "uncertaintyPct": 3.4,
       "releaseDate": "Jul 24, 2026",
-      "tokens": "6.9B",
-      "costUsd": 6100.0,
+      "tokens": "6.5B",
+      "costUsd": 6000.0,
       "cohortModelId": "claude-opus-5"
     },
     {
       "rank": 4,
       "rankLabel": "4",
-      "model": "Fable 5 ( max )",
+      "model": "Fable 5 (max)",
       "baseModel": "Fable 5",
       "agent": "Claude Code",
       "resolutionRate": 0.445,
@@ -139,7 +137,7 @@
     {
       "rank": 5,
       "rankLabel": "5",
-      "model": "GLM-5.3 ( max )",
+      "model": "GLM-5.3 (max)",
       "baseModel": "GLM-5.3",
       "agent": "Claude Code",
       "resolutionRate": 0.418,
@@ -153,21 +151,7 @@
     {
       "rank": 6,
       "rankLabel": "6",
-      "model": "Grok 4.7 ( xhigh )",
-      "baseModel": "Grok 4.7",
-      "agent": "Grok Build",
-      "resolutionRate": 0.376,
-      "resolutionRatePct": 37.6,
-      "uncertaintyPct": 3.5,
-      "releaseDate": "Sep 21, 2026",
-      "tokens": "5.5B",
-      "costUsd": 3700.0,
-      "cohortModelId": null
-    },
-    {
-      "rank": 7,
-      "rankLabel": "7",
-      "model": "GPT-5.6 Sol ( max )",
+      "model": "GPT-5.6 Sol (max)",
       "baseModel": "GPT-5.6 Sol",
       "agent": "Codex",
       "resolutionRate": 0.373,
@@ -179,9 +163,9 @@
       "cohortModelId": "gpt-5.6-sol"
     },
     {
-      "rank": 8,
-      "rankLabel": "8",
-      "model": "Opus 4.8 ( max )",
+      "rank": 7,
+      "rankLabel": "7",
+      "model": "Opus 4.8 (max)",
       "baseModel": "Opus 4.8",
       "agent": "Claude Code",
       "resolutionRate": 0.236,
@@ -193,9 +177,9 @@
       "cohortModelId": "claude-opus-4.8"
     },
     {
-      "rank": 9,
-      "rankLabel": "9",
-      "model": "GPT-5.6 Terra ( max )",
+      "rank": 8,
+      "rankLabel": "8",
+      "model": "GPT-5.6 Terra (max)",
       "baseModel": "GPT-5.6 Terra",
       "agent": "Codex",
       "resolutionRate": 0.215,
@@ -207,9 +191,9 @@
       "cohortModelId": null
     },
     {
-      "rank": 10,
-      "rankLabel": "10",
-      "model": "Grok 4.6 ( high )",
+      "rank": 9,
+      "rankLabel": "9",
+      "model": "Grok 4.6 (high)",
       "baseModel": "Grok 4.6",
       "agent": "Grok Build",
       "resolutionRate": 0.203,
@@ -221,9 +205,9 @@
       "cohortModelId": "grok-4.6"
     },
     {
-      "rank": 11,
-      "rankLabel": "11",
-      "model": "Gemini 3.8 Flash ( high )",
+      "rank": 10,
+      "rankLabel": "10",
+      "model": "Gemini 3.8 Flash (high)",
       "baseModel": "Gemini 3.8 Flash",
       "agent": "mini-SWE-agent",
       "resolutionRate": 0.191,
@@ -235,9 +219,9 @@
       "cohortModelId": "gemini-3.8-flash"
     },
     {
-      "rank": 12,
-      "rankLabel": "12",
-      "model": "GPT-5.6 Luna ( max )",
+      "rank": 11,
+      "rankLabel": "11",
+      "model": "GPT-5.6 Luna (max)",
       "baseModel": "GPT-5.6 Luna",
       "agent": "Codex",
       "resolutionRate": 0.173,
@@ -249,9 +233,9 @@
       "cohortModelId": "gpt-5.6-luna"
     },
     {
-      "rank": 13,
-      "rankLabel": "13",
-      "model": "Grok 4.5 ( high )",
+      "rank": 12,
+      "rankLabel": "12",
+      "model": "Grok 4.5 (high)",
       "baseModel": "Grok 4.5",
       "agent": "Grok Build",
       "resolutionRate": 0.124,
@@ -263,9 +247,9 @@
       "cohortModelId": null
     },
     {
-      "rank": 13,
-      "rankLabel": "13",
-      "model": "Sonnet 5 ( max )",
+      "rank": 12,
+      "rankLabel": "12",
+      "model": "Sonnet 5 (max)",
       "baseModel": "Sonnet 5",
       "agent": "Claude Code",
       "resolutionRate": 0.124,
@@ -277,9 +261,9 @@
       "cohortModelId": "claude-sonnet-5"
     },
     {
-      "rank": 15,
-      "rankLabel": "15",
-      "model": "Gemini 3.7 Flash ( high )",
+      "rank": 14,
+      "rankLabel": "14",
+      "model": "Gemini 3.7 Flash (high)",
       "baseModel": "Gemini 3.7 Flash",
       "agent": "mini-SWE-agent",
       "resolutionRate": 0.112,
@@ -295,7 +279,7 @@
     "gpt-6-astra": {
       "rank": 1,
       "rankLabel": "1",
-      "model": "GPT-6 Astra ( max )",
+      "model": "GPT-6 Astra (max)",
       "baseModel": "GPT-6 Astra",
       "agent": "Codex",
       "resolutionRate": 0.582,
@@ -307,9 +291,9 @@
       "cohortModelId": "gpt-6-astra"
     },
     "gemini-3.8-flash": {
-      "rank": 11,
-      "rankLabel": "11",
-      "model": "Gemini 3.8 Flash ( high )",
+      "rank": 10,
+      "rankLabel": "10",
+      "model": "Gemini 3.8 Flash (high)",
       "baseModel": "Gemini 3.8 Flash",
       "agent": "mini-SWE-agent",
       "resolutionRate": 0.191,
@@ -323,21 +307,21 @@
     "claude-opus-5": {
       "rank": 3,
       "rankLabel": "3",
-      "model": "Opus 5 ( xhigh )",
+      "model": "Opus 5 (max)",
       "baseModel": "Opus 5",
       "agent": "Claude Code",
-      "resolutionRate": 0.539,
-      "resolutionRatePct": 53.9,
-      "uncertaintyPct": 3.2,
+      "resolutionRate": 0.518,
+      "resolutionRatePct": 51.8,
+      "uncertaintyPct": 3.4,
       "releaseDate": "Jul 24, 2026",
-      "tokens": "6.9B",
-      "costUsd": 6100.0,
+      "tokens": "6.5B",
+      "costUsd": 6000.0,
       "cohortModelId": "claude-opus-5"
     },
     "gpt-5.6-sol": {
-      "rank": 7,
-      "rankLabel": "7",
-      "model": "GPT-5.6 Sol ( max )",
+      "rank": 6,
+      "rankLabel": "6",
+      "model": "GPT-5.6 Sol (max)",
       "baseModel": "GPT-5.6 Sol",
       "agent": "Codex",
       "resolutionRate": 0.373,
@@ -351,7 +335,7 @@
     "claude-fable-5": {
       "rank": 4,
       "rankLabel": "4",
-      "model": "Fable 5 ( max )",
+      "model": "Fable 5 (max)",
       "baseModel": "Fable 5",
       "agent": "Claude Code",
       "resolutionRate": 0.445,
@@ -365,7 +349,7 @@
     "glm-5.3": {
       "rank": 5,
       "rankLabel": "5",
-      "model": "GLM-5.3 ( max )",
+      "model": "GLM-5.3 (max)",
       "baseModel": "GLM-5.3",
       "agent": "Claude Code",
       "resolutionRate": 0.418,
@@ -377,9 +361,9 @@
       "cohortModelId": "glm-5.3"
     },
     "grok-4.6": {
-      "rank": 10,
-      "rankLabel": "10",
-      "model": "Grok 4.6 ( high )",
+      "rank": 9,
+      "rankLabel": "9",
+      "model": "Grok 4.6 (high)",
       "baseModel": "Grok 4.6",
       "agent": "Grok Build",
       "resolutionRate": 0.203,
@@ -391,9 +375,9 @@
       "cohortModelId": "grok-4.6"
     },
     "gpt-5.6-luna": {
-      "rank": 12,
-      "rankLabel": "12",
-      "model": "GPT-5.6 Luna ( max )",
+      "rank": 11,
+      "rankLabel": "11",
+      "model": "GPT-5.6 Luna (max)",
       "baseModel": "GPT-5.6 Luna",
       "agent": "Codex",
       "resolutionRate": 0.173,
@@ -405,9 +389,9 @@
       "cohortModelId": "gpt-5.6-luna"
     },
     "gemini-3.7-flash": {
-      "rank": 15,
-      "rankLabel": "15",
-      "model": "Gemini 3.7 Flash ( high )",
+      "rank": 14,
+      "rankLabel": "14",
+      "model": "Gemini 3.7 Flash (high)",
       "baseModel": "Gemini 3.7 Flash",
       "agent": "mini-SWE-agent",
       "resolutionRate": 0.112,
@@ -419,9 +403,9 @@
       "cohortModelId": "gemini-3.7-flash"
     },
     "claude-opus-4.8": {
-      "rank": 8,
-      "rankLabel": "8",
-      "model": "Opus 4.8 ( max )",
+      "rank": 7,
+      "rankLabel": "7",
+      "model": "Opus 4.8 (max)",
       "baseModel": "Opus 4.8",
       "agent": "Claude Code",
       "resolutionRate": 0.236,
@@ -433,9 +417,9 @@
       "cohortModelId": "claude-opus-4.8"
     },
     "claude-sonnet-5": {
-      "rank": 13,
-      "rankLabel": "13",
-      "model": "Sonnet 5 ( max )",
+      "rank": 12,
+      "rankLabel": "12",
+      "model": "Sonnet 5 (max)",
       "baseModel": "Sonnet 5",
       "agent": "Claude Code",
       "resolutionRate": 0.124,

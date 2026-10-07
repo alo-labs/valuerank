@@ -1,0 +1,2 @@
+const fs=require('fs'),path=require('path');
+try{const root='/Users/shafqat/valuerank',f=process.argv[2],s=fs.readFileSync(path.join(root,f),'utf8'),pattern=process.argv[3],offset=Number(process.argv[4]||0),limit=Number(process.argv[5]||11000);if(pattern==='defs')console.log([...s.matchAll(/^def (.+)/gm)].map(x=>x[1]).join('\n'));else{const i=s.indexOf(pattern);console.log(i<0?'Pattern not found':s.slice(i+offset,i+offset+limit));}}catch(e){console.log(e.message);}

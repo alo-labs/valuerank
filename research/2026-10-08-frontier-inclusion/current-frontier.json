@@ -1,0 +1,57 @@
+{
+  "captured_at": "2026-10-07T16:22:14Z",
+  "local_capture_date": "2026-10-08",
+  "local_timezone": "Australia/Sydney",
+  "source_url": "https://artificialanalysis.ai/models?total-cost=intelligence-vs-total-cost",
+  "source_owner": "Artificial Analysis",
+  "index_version": "4.3.2",
+  "chart_title": "Intelligence Index vs. Cost to Run Artificial Analysis Intelligence Index",
+  "x_axis": "Cost to Run Intelligence Index (USD, Log Scale)",
+  "y_axis": "Artificial Analysis Intelligence Index",
+  "cost_unit": "USD to run all Intelligence Index evaluations",
+  "universe": {
+    "catalog_models": 691,
+    "selected_models": 691,
+    "plotted_models_with_both_coordinates": 173,
+    "rendered_pareto_vertices": 14,
+    "model_families": 5,
+    "selection_evidence": "The public chart model selector displayed 691 of 691 models after Select all. The total-cost chart SVG contained 173 circles and a Pareto path with 14 M/L coordinate pairs."
+  },
+  "method": "Built-in browser only. Selected Intelligence Index vs. Total Cost, then Select all. Matched each rendered Pareto path vertex to the circle at the same SVG coordinates (tolerance 0.001 px). Hovered each matched circle through ordinary browser mouse input, captured its public tooltip, and matched the exact tooltip model name to rendered public anchor labels and hrefs. No embedded payload, HTTP client, API or downloaded dataset was used.",
+  "precision": {
+    "intelligence_index": "Rounded integer displayed by public tooltip; raw precision is not recovered from SVG coordinates.",
+    "total_cost_usd": "Two decimal places displayed by public tooltip."
+  },
+  "comparison_to_previous_capture": {
+    "previous_inventory": ".refresh/v1.4/aa_reconciliation_inventory.json",
+    "previous_capture_date": "2026-10-07",
+    "previous_vertex_count": 14,
+    "current_vertex_count": 14,
+    "frontier_membership_changed": false,
+    "basis": "Freshly observed names match the prior 14-model list provided in the task assignment. No claim is made that all prior raw values are unchanged."
+  },
+  "family_groups": [
+    {"family": "GPT-6 Luna", "efforts": ["low", "medium", "high", "xhigh", "max"], "frontier_configurations": 5},
+    {"family": "MiMo-V2.6-Flash", "efforts": [], "frontier_configurations": 1},
+    {"family": "MiMo-V2.6-Pro", "efforts": [], "frontier_configurations": 1},
+    {"family": "GPT-6.1 Sol", "efforts": ["medium", "high", "xhigh", "max"], "frontier_configurations": 4},
+    {"family": "Claude Opus 5.5", "efforts": ["high", "xhigh", "max"], "fallback": "with fallback", "frontier_configurations": 3}
+  ],
+  "frontier": [
+    {"order":1,"model_name":"GPT-6 Luna (low)","family":"GPT-6 Luna","effort":"low","url":"https://artificialanalysis.ai/models/gpt-6-luna-low","intelligence_index_display":22,"total_cost_usd":10.63,"circle_id":"bf9708d8-933d-44f6-affa-b696a7a650c9","svg_x":74.6554132984358,"svg_y":230.74942070519666},
+    {"order":2,"model_name":"GPT-6 Luna (medium)","family":"GPT-6 Luna","effort":"medium","url":"https://artificialanalysis.ai/models/gpt-6-luna-medium","intelligence_index_display":30,"total_cost_usd":31.17,"circle_id":"36667da0-9222-4967-adbb-f7efa15ad213","svg_x":183.59890725472417,"svg_y":191.6341740483737},
+    {"order":3,"model_name":"GPT-6 Luna (high)","family":"GPT-6 Luna","effort":"high","url":"https://artificialanalysis.ai/models/gpt-6-luna-high","intelligence_index_display":33,"total_cost_usd":47.85,"circle_id":"7d1229bc-deea-4717-ba5b-f59a35d991e3","svg_x":227.02613018648006,"svg_y":177.6486433526102},
+    {"order":4,"model_name":"GPT-6 Luna (xhigh)","family":"GPT-6 Luna","effort":"xhigh","url":"https://artificialanalysis.ai/models/gpt-6-luna-xhigh","intelligence_index_display":35,"total_cost_usd":66.81,"circle_id":"19813eb2-460a-475c-af65-810bb8660fec","svg_x":260.8373803003009,"svg_y":170.05504801286014},
+    {"order":5,"model_name":"MiMo-V2.6-Flash","family":"MiMo-V2.6-Flash","effort":null,"url":"https://artificialanalysis.ai/models/mimo-v2-6-flash","intelligence_index_display":38,"total_cost_usd":109.41,"circle_id":"127de816-57d3-4037-8484-480a613cd413","svg_x":310.8114653759333,"svg_y":154.5671280196974},
+    {"order":6,"model_name":"GPT-6 Luna (max)","family":"GPT-6 Luna","effort":"max","url":"https://artificialanalysis.ai/models/gpt-6-luna","intelligence_index_display":38,"total_cost_usd":122.05,"circle_id":"6fb13851-40ce-4bda-ad3f-6b38e0c5daa7","svg_x":321.8863764987187,"svg_y":153.44867011495057},
+    {"order":7,"model_name":"MiMo-V2.6-Pro","family":"MiMo-V2.6-Pro","effort":null,"url":"https://artificialanalysis.ai/models/mimo-v2-6-pro","intelligence_index_display":46,"total_cost_usd":206.66,"circle_id":"24d8fdfe-6241-424e-b7b7-1b6efb06e4fb","svg_x":375.2322228465703,"svg_y":115.2615524411645},
+    {"order":8,"model_name":"GPT-6.1 Sol (medium)","family":"GPT-6.1 Sol","effort":"medium","url":"https://artificialanalysis.ai/models/gpt-6-1-sol-medium","intelligence_index_display":48,"total_cost_usd":361.37,"circle_id":"a2e51d62-ea4e-4f15-8be0-be9dc1fb489d","svg_x":431.84617391046334,"svg_y":108.4662193780783},
+    {"order":9,"model_name":"GPT-6.1 Sol (high)","family":"GPT-6.1 Sol","effort":"high","url":"https://artificialanalysis.ai/models/gpt-6-1-sol-high","intelligence_index_display":50,"total_cost_usd":521.32,"circle_id":"3b84fee3-b70a-41bc-819e-5fbdef9a0042","svg_x":468.97059738393284,"svg_y":97.03549218365042},
+    {"order":10,"model_name":"GPT-6.1 Sol (xhigh)","family":"GPT-6.1 Sol","effort":"xhigh","url":"https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh","intelligence_index_display":51,"total_cost_usd":662.28,"circle_id":"092a3b0e-c5c8-45dc-bf1b-53673c8ff352","svg_x":493.21583076258196,"svg_y":93.30982373633415},
+    {"order":11,"model_name":"GPT-6.1 Sol (max)","family":"GPT-6.1 Sol","effort":"max","url":"https://artificialanalysis.ai/models/gpt-6-1-sol","intelligence_index_display":52,"total_cost_usd":1081.55,"circle_id":"b25ac058-1e33-4c31-bbc9-a20c3ad0717a","svg_x":542.9024455259665,"svg_y":89.60510482033949},
+    {"order":12,"model_name":"Claude Opus 5.5 (high with fallback)","family":"Claude Opus 5.5","effort":"high","fallback":"with fallback","url":"https://artificialanalysis.ai/models/claude-opus-5-5-high","intelligence_index_display":54,"total_cost_usd":2172.43,"circle_id":"f314eade-2232-44bf-a3ab-9b326bc67de6","svg_x":613.5575018425211,"svg_y":81.4554015685802},
+    {"order":13,"model_name":"Claude Opus 5.5 (xhigh with fallback)","family":"Claude Opus 5.5","effort":"xhigh","fallback":"with fallback","url":"https://artificialanalysis.ai/models/claude-opus-5-5-xhigh","intelligence_index_display":56,"total_cost_usd":4056.65,"circle_id":"df5bf99d-d228-4715-b41b-19ca86118777","svg_x":676.8239300298444,"svg_y":70.25891013730669},
+    {"order":14,"model_name":"Claude Opus 5.5 (max with fallback)","family":"Claude Opus 5.5","effort":"max","fallback":"with fallback","url":"https://artificialanalysis.ai/models/claude-opus-5-5","intelligence_index_display":58,"total_cost_usd":8708.20,"circle_id":"2f3c4dc9-a450-4303-8697-0237257cf08f","svg_x":754.2115697492453,"svg_y":62.64439202633438}
+  ],
+  "rendered_pareto_svg_path": "M 74.6554132984358 230.74942070519666 L 183.59890725472417 191.6341740483737 L 227.02613018648006 177.6486433526102 L 260.8373803003009 170.05504801286014 L 310.8114653759333 154.5671280196974 L 321.8863764987187 153.44867011495057 L 375.2322228465703 115.2615524411645 L 431.84617391046334 108.4662193780783 L 468.97059738393284 97.03549218365042 L 493.21583076258196 93.30982373633415 L 542.9024455259665 89.60510482033949 L 613.5575018425211 81.4554015685802 L 676.8239300298444 70.25891013730669 L 754.2115697492453 62.64439202633438"
+}

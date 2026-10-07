@@ -195,6 +195,13 @@ def main() -> int:
             text = text_path.read_text(errors="ignore")
             current = decode_current_model(html)
             source_url = entry["url"]
+        expected_identity = mapping.get(model_id, {})
+        expected_slug = expected_identity.get("aaSlug")
+        expected_variant = expected_identity.get("aaVariant")
+        if expected_slug and current.get("slug") != expected_slug:
+            raise ValueError(f"AA source slug mismatch for {model_id}: expected {expected_slug}, got {current.get('slug')}")
+        if expected_variant and (current.get("effort") or {}).get("slug") != expected_variant:
+            raise ValueError(f"AA source variant mismatch for {model_id}: expected {expected_variant}")
         breakdown = current.get("omniscienceBreakdown") or {}
         cost = current.get("intelligenceIndexCost") or {}
         briefcase = current.get("briefcaseBreakdown") or {}
@@ -314,6 +321,10 @@ def main() -> int:
             "providerClaims": model_claims,
             "supplemental": supplemental,
             "extraction": {
+                "captureMode": (
+                    snapshot_entry.get("capture", {}).get("captureMode")
+                    or entry.get("captureMode")
+                ) if snapshot_entry else entry.get("captureMode"),
                 "htmlSnapshot": str(html_path.relative_to(ROOT)) if html_path else None,
                 "textSnapshot": str(text_path.relative_to(ROOT)) if text_path else None,
                 "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot_entry else None,

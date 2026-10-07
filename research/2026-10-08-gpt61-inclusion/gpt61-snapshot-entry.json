@@ -1,0 +1,62 @@
+{
+  "id": "gpt-6.1-sol",
+  "url": "https://artificialanalysis.ai/models/gpt-6-1-sol",
+  "model": {
+    "slug": "gpt-6-1-sol",
+    "name": "GPT-6.1 Sol (max)",
+    "shortName": "GPT-6.1 Sol (max)",
+    "isReasoning": true,
+    "effort": { "slug": "max", "label": "max" },
+    "intelligenceIndex": 52,
+    "briefcaseNormalizedDisplay": 0.53,
+    "briefcaseElo": 1564,
+    "gdpvalNormalizedDisplay": 0.54,
+    "gdpval": 1575,
+    "automationBenchPartialScore": 0.65,
+    "terminalBench40": 0.56,
+    "scicode": 0.54,
+    "hle": 0.53,
+    "gdpPdfAllPass": 0.31,
+    "critpt": 0.32,
+    "omniscienceAccuracy": 0.62,
+    "omniscienceNonHallucination": 0.46,
+    "lcr": 0.83,
+    "price1mInputTokens": 2,
+    "price1mOutputTokens": 10,
+    "cacheHitPrice": 0.1,
+    "cacheHitDiscountPercent": 0.95,
+    "contextWindow": 1000000,
+    "intelligenceIndexCost": { "total": 1081.55 },
+    "costPerTaskDisplay": 0.72,
+    "outputSpeedVariance": { "median": 58.3 }
+  },
+  "capture": {
+    "captureMode": "public-rendered",
+    "observedAt": "2026-10-07T16:23:48Z",
+    "capturedAt": "2026-10-07T16:23:48Z",
+    "precision": "rounded_public_display",
+    "method": "Primary agent observed exact max official model profile in the built-in browser; frontier worker observed the exact max total benchmark cost tooltip. No hidden page state or API fetch used.",
+    "note": "Capture retained at the stated timestamp from primary-agent public browser observations collected shortly beforehand (approximately 16:20 UTC). Total benchmark cost 1081.55 is distinct from displayed cost per task 0.72. Normalized displays are retained directly and are not inverted into raw Elo values. Briefcase 1564 and GDPval-AA v2.1 1575 are observed whole-number public Elo labels. Cached-input price is derived from publicly displayed input price 2 USD/M and 95% cache discount; it is not a separately displayed price observation.",
+    "derivedFields": {
+      "cacheHitPrice": {
+        "method": "2 USD/M input price * (1 - 0.95 displayed cache discount)",
+        "value": 0.1,
+        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol"
+      }
+    },
+    "metricPrecision": {
+      "intelligenceIndex": "rounded_whole_public_label",
+      "briefcaseNormalized": "rounded_two_decimal_public_label",
+      "gdpvalV21Normalized": "rounded_two_decimal_public_label",
+      "briefcaseElo": "rounded_whole_public_elo_label",
+      "gdpvalV21": "rounded_whole_public_elo_label",
+      "aaEvalCost": "public_tooltip_two_decimal_usd",
+      "speed": "public_summary_one_decimal_tokens_per_second"
+    },
+    "metricSourceUrls": {
+      "aaEvalCost": "https://artificialanalysis.ai/models#total-cost-tabs",
+      "briefcaseElo": "https://artificialanalysis.ai/models/gpt-6-1-sol#aa-briefcase-elo",
+      "gdpvalV21": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+    }
+  }
+}
