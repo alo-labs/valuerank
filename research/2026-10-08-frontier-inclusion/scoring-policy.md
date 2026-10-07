@@ -37,6 +37,12 @@ two observations are required to assign a comparative percentile; a singleton
 observation remains available as source data but is omitted from normalized
 score dimensions and reported as a dropped dimension.
 
+AA Intelligence Index percentile comparisons use whole-point precision for
+all observations, matching the precision of the fresh public labels and
+avoiding spurious ordering against older raw-decimal snapshots. Raw source
+values remain unchanged. Frontier membership follows AA's observed plotted
+path and is not reconstructed from rounded labels.
+
 The existing priority values remain unchanged: DeepSWE v1.1 has priority 25 and
 Bug Hunt has priority 20. For each model, the weighted composite is the
 priority-weighted mean of only its available normalized dimensions. The score
