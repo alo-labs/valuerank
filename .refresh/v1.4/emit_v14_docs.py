@@ -1324,8 +1324,8 @@ cost_slider_function = r"""function initCostSlider() {
 html = replace_once(html, r"function initCostSlider\(\) \{[\s\S]*?\n\}(?=\n\n// ─+)", cost_slider_function.rstrip(), "cost slider")
 
 dim_table_function = r"""function renderDimTable() {
-  const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence' };
-  const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel' };
+  const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence', language:'Language' };
+  const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel', language:'cat-code' };
   const tbody = document.getElementById('dim-table-body');
   tbody.innerHTML = DIM_KEYS.map((k,i) => {
     const label = DIM_LINKS[i]
@@ -1781,7 +1781,7 @@ if "'chart-heatmap-data','chart-livebench-pareto'" not in html:
 
 livebench_card = f'''    <div class="card mb-6" id="livebench-data">
        <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">{html_external_link('LiveBench External Coverage', LIVEBENCH_URL)}</h3>
-        <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean, but it remains supplemental because the pinned release lacks complete coverage for the current cohort; it does not contribute to the zero-gap primary score. Overall and cost are also shown as supplemental metrics.</p>
+       <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; it contributes to each model’s primary score when that model has an eligible result and is unavailable otherwise. Overall and cost remain supplemental metrics.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
@@ -2031,7 +2031,7 @@ faq_updates = [
     ),
     (
         "Is Claude Opus 5.5 included in the primary ranking?",
-        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.',
+        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; Instruction Following is unavailable for Opus 5.5 in the pinned LiveBench release and contributes for models with an eligible result.',
     ),
 ]
 for question, answer in faq_updates:
@@ -2330,7 +2330,7 @@ html = replace_current_copy(
 )
 html = replace_current_copy(
     html,
-    r'(<span class="seal-note">)v[0-9.]+ primary score uses [^<]*(</span>)',
+    r'(<span class="seal-note">)v[0-9.]+ primary score (?:uses|renormalizes) [^<]*(</span>)',
     lambda match: match.group(1) + f'{VERSION} primary score renormalizes each model’s observed dimensions; missing metrics are shown and never filled' + match.group(2),
     "ranking release note",
 )
@@ -2384,7 +2384,7 @@ html = replace_current_copy(
 )
 html = replace_current_copy(
     html,
-    r'(<strong>Zero-gap benchmark rule:</strong>)[\s\S]*?(</div>)',
+    r'(<strong>(?:Zero-gap benchmark rule|Missing-metric handling):</strong>)[\s\S]*?(</div>)',
     lambda match: '<strong>Missing-metric handling:</strong>'
     + f' Each model’s observed retained metrics contribute to its score, with available priorities renormalized; missing values remain unavailable and are shown in the matrix and coverage note. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.'
     + match.group(2),
@@ -2402,9 +2402,26 @@ html = replace_current_copy(
     html,
     r'(<div class="card mb-6" id="livebench-data">[\s\S]*?<p class="method-text" style="margin-bottom:16px;">)[\s\S]*?(</p>)',
     lambda match: match.group(1)
-    + f'Release <strong>{livebench_document["release"]}</strong> matches <strong>{livebench_document["matchedN"]}/{livebench_document["cohortN"]}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean, but remains supplemental in this release because the pinned release is incomplete for the selected roster. Overall and cost are also shown as supplemental metrics.'
+    + f'Release <strong>{livebench_document["release"]}</strong> matches <strong>{livebench_document["matchedN"]}/{livebench_document["cohortN"]}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; it contributes to each model’s primary score when that model has an eligible result and is unavailable otherwise. Overall and cost remain supplemental metrics.'
     + match.group(2),
     "LiveBench primary coverage note",
+)
+html = replace_current_copy(
+    html,
+    r'(<div class="hero-podium-label">)Current Top 3[^<]*(</div>)',
+    lambda match: match.group(1) + 'Current Top 3 · Primary ranking (selected cost basis)' + match.group(2),
+    "top-three label",
+)
+html = replace_current_copy(
+    html,
+    r'(<div class="section-sub">)(?:Full normalized score matrix|Normalized score matrix)[^<]*(</div>)',
+    lambda match: match.group(1) + 'Normalized score matrix. Missing dimension values are marked ⊘; each model’s available priorities are renormalized.' + match.group(2),
+    "normalized matrix coverage note",
+)
+html = replace_faq_answer(
+    html,
+    "Why is Claude ranked so low despite being a capable model?",
+    f"Under {VERSION}, the current overall leader is <strong>{models[0]['name']}</strong> (overall rank #{models[0]['rank']}); the quality leader is <strong>{quality_leader['name']}</strong> (quality rank #{quality_leader['qualityRank']}). Rankings reflect the observed benchmark results and weights available for each model; they are not a general capability verdict.",
 )
 html = replace_current_copy(
     html,

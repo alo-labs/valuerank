@@ -1782,7 +1782,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 
       <!-- RIGHT: featured #1 + 2 runners -->
       <div class="hero-podium-v2">
-        <div class="hero-podium-label">Current Top 3 · Shared DeepSWE + Bug Hunt Cohort</div>
+        <div class="hero-podium-label">Current Top 3 · Primary ranking (selected cost basis)</div>
         <div class="podium-hero" id="podium-hero-1"></div>
         <div class="podium-runners">
           <div class="podium-runner silver" id="podium-runner-2"></div>
@@ -1902,7 +1902,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
       <div class="section-title">Visualizations</div>
       <div class="section-sub">Eight complementary charts exploring quality, composite cost, speed, and the effect of cost weighting. All charts are interactive — hover, zoom, and pan.</div>
     </div>
-                                                                                                                                                                <div class="chart-tabs">
+                                                                                                                                                                                    <div class="chart-tabs">
       <button class="chart-tab active" data-chart="pareto">ValueRank Pareto Frontier</button>
       <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>
       <button class="chart-tab" data-chart="decomp">Score Decomposition</button>
@@ -2000,12 +2000,12 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
   <div class="container">
     <div class="section-header">
       <div class="section-title">Raw Data & Coverage</div>
-      <div class="section-sub">Full normalized score matrix for the zero-gap benchmark set.</div>
+      <div class="section-sub">Normalized score matrix. Missing dimension values are marked ⊘; each model’s available priorities are renormalized.</div>
     </div>
 
     <div class="card mb-6" id="livebench-data">
        <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;"><a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench External Coverage</a></h3>
-        <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>24/28</strong> AA comparison candidates and includes <strong>1 official supplemental model</strong> outside the source roster: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean, but remains supplemental in this release because the pinned release is incomplete for the selected roster. Overall and cost are also shown as supplemental metrics.</p>
+       <p class="method-text" style="margin-bottom:16px;">Release <strong>2026_06_25</strong> matches <strong>24/28</strong> AA comparison candidates and includes <strong>1 official supplemental model</strong> outside the source roster: <strong>Claude Fable 5.1</strong>. Instruction Following is the four-task LiveBench mean; it contributes to each model’s primary score when that model has an eligible result and is unavailable otherwise. Overall and cost remain supplemental metrics.</p>
       <div style="overflow-x:auto;">
         <table class="dim-table">
           <thead><tr><th>Model</th><th>LiveBench variant</th><th>Instruction Following</th><th>Overall</th><th>Cost / successful task</th><th>Frontier</th></tr></thead>
@@ -2136,9 +2136,7 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           Why is Claude ranked so low despite being a capable model?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">
-          ValueRank reflects the selected benchmarks and their weights, including DeepSWE v1.1 and Bug Hunt in the main rank; it is not a general model-capability verdict. The current overall leader is <strong>GPT-5.6 Sol</strong> (#1); the quality leader is <strong>GPT-6 Astra</strong> (#1). API Costs and Plan Costs are presented as separate cost views.
-        </div>
+        <div class="faq-a">Under v1.9.6, the current overall leader is <strong>GPT-6.1 Sol</strong> (overall rank #1); the quality leader is <strong>Claude Opus 5.5</strong> (quality rank #1). Rankings reflect the observed benchmark results and weights available for each model; they are not a general capability verdict.</div>
       </div>
 
       <div class="faq-item">
@@ -2170,12 +2168,15 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
           Is Claude Opus 5.5 included in the primary ranking?
           <i data-lucide="chevron-down" class="faq-chevron"></i>
         </button>
-        <div class="faq-a">Claude Opus 5.5 is included in v1.9.6. The <a href="https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1" target="_blank" rel="noopener">AA Coding Agent Index v1.5 DeepSWE v1.1 chart</a> reports 68.0% for Claude Code / Opus 5.5 / max; the <a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt owner scoreboard</a> reports 41.7/105 (mean of three runs) for Opus 5.5 max. The <a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">AA model profile</a> labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; the pinned LiveBench release predates Opus 5.5, so Instruction Following remains supplemental.</div>
+        <div class="faq-a">Claude Opus 5.5 is included in v1.9.6. The <a href="https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1" target="_blank" rel="noopener">AA Coding Agent Index v1.5 DeepSWE v1.1 chart</a> reports 68.0% for Claude Code / Opus 5.5 / max; the <a href="https://bughunt.productcompass.pm/" target="_blank" rel="noopener">Bug Hunt owner scoreboard</a> reports 41.7/105 (mean of three runs) for Opus 5.5 max. The <a href="https://artificialanalysis.ai/models/claude-opus-5-5" target="_blank" rel="noopener">AA model profile</a> labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; Instruction Following is unavailable for Opus 5.5 in the pinned LiveBench release and contributes for models with an eligible result.</div>
       </div>
 
     </div>
   </div>
 </section>
+
+
+
 
 
 
@@ -5444,8 +5445,8 @@ function initChartTabs() {
 // DIMENSION TABLE (methodology)
 // ─────────────────────────────────────────────
 function renderDimTable() {
-  const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence' };
-  const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel' };
+  const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence', language:'Language' };
+  const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel', language:'cat-code' };
   const tbody = document.getElementById('dim-table-body');
   tbody.innerHTML = DIM_KEYS.map((k,i) => {
     const label = DIM_LINKS[i]
