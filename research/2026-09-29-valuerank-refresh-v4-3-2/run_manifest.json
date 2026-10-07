@@ -56,11 +56,11 @@
     "Claude Opus 5.5 is mapped to Claude Max 20x using Anthropic's current plan and model availability pages; its 40.0x route value is an inherited independent high-water estimate, not a model-specific usage measurement."
   ],
   "scoring": {
-    "version": "v1.9.3",
-    "publishDate": "September 30, 2026",
-    "observedAt": "2026-09-29T18:17:05Z",
+    "version": "v1.9.4",
+    "publishDate": "October 8, 2026",
+    "observedAt": "2026-10-07T14:46:05Z",
     "cohortN": 13,
-    "sourceCohortN": 25,
+    "sourceCohortN": 27,
     "rankingExcludedModels": [
       "Claude Fable 5",
       "GPT-5.5",
@@ -73,7 +73,115 @@
       "DeepSeek V4 Flash",
       "Gemini 3.6 Flash",
       "GLM-5.2",
-      "Gemini 3.5 Flash"
+      "Gemini 3.5 Flash",
+      "MiMo-V2.6-Pro",
+      "MiMo-V2.6-Flash"
+    ],
+    "rankingExclusions": [
+      {
+        "modelId": "claude-fable-5",
+        "name": "Claude Fable 5",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "gpt-5.5",
+        "name": "GPT-5.5",
+        "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "gemini-3.7-flash",
+        "name": "Gemini 3.7 Flash",
+        "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "glm-5.3-flash",
+        "name": "GLM-5.3 Flash",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "deepseek-v4-pro",
+        "name": "DeepSeek V4 Pro",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "claude-opus-4.8",
+        "name": "Claude Opus 4.8",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "muse-spark-1.2",
+        "name": "Muse Spark 1.2",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "claude-sonnet-5",
+        "name": "Claude Sonnet 5",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "deepseek-v4-flash",
+        "name": "DeepSeek V4 Flash",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "gemini-3.6-flash",
+        "name": "Gemini 3.6 Flash",
+        "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "glm-5.2",
+        "name": "GLM-5.2",
+        "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "gemini-3.5-flash",
+        "name": "Gemini 3.5 Flash",
+        "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "mimo-v2-6-pro",
+        "name": "MiMo-V2.6-Pro",
+        "reasons": [
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      },
+      {
+        "modelId": "mimo-v2-6-flash",
+        "name": "MiMo-V2.6-Flash",
+        "reasons": [
+          "No eligible exact-variant Bug Hunt match; owner default result 23.3/105 available; selected reasoning equivalence is unverified",
+          "No exact-variant AA DeepSWE result in the selected source snapshot"
+        ]
+      }
     ],
     "deepsweSource": {
       "publisher": "Artificial Analysis",
@@ -129,7 +237,9 @@
           "Claude Opus 5.5",
           "GPT-6 Sol",
           "GPT-6 Luna",
-          "Grok 4.7"
+          "Grok 4.7",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash"
         ],
         "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
@@ -137,16 +247,12 @@
         "key": "livebenchInstructionFollowing",
         "label": "Instruction Following (LiveBench)",
         "missing": [
-          "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7"
+          "Claude Opus 5.5"
         ],
         "sourceMissing": [
           "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7"
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash"
         ],
         "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
@@ -163,7 +269,9 @@
           "Claude Opus 5.5",
           "GPT-6 Sol",
           "GPT-6 Luna",
-          "Grok 4.7"
+          "Grok 4.7",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash"
         ],
         "reason": "incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled"
       },
@@ -184,8 +292,8 @@
     "costCoverage": {
       "availableN": 13,
       "cohortN": 13,
-      "sourceAvailableN": 24,
-      "sourceCohortN": 25,
+      "sourceAvailableN": 26,
+      "sourceCohortN": 27,
       "missingModels": [],
       "sourceMissingModels": [
         "Gemini 3.7 Flash"
@@ -233,7 +341,7 @@
     ],
     "bugHuntEmphasis": {
       "matchedN": 13,
-      "cohortN": 25,
+      "cohortN": 27,
       "benchmarkWeightPct": 24.5902,
       "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
       "topFive": [
@@ -270,13 +378,13 @@
       ]
     },
     "externalCoverage": {
-      "livebench": "21/25",
+      "livebench": "24/27",
       "livebenchPublishedN": 64,
       "livebenchSupplementalModels": [
         "claude-fable-5-1"
       ],
-      "bugHunt": "20/25 owner matches; 13 exact AA DeepSWE plus Bug Hunt overlaps rank in the primary composite",
-      "terminalBenchV4": "12/25 including 1 provider claim"
+      "bugHunt": "21/27 owner matches; 13 exact AA DeepSWE plus Bug Hunt overlaps rank in the primary composite",
+      "terminalBenchV4": "12/27 including 1 provider claim"
     },
     "weights": [
       {
@@ -374,8 +482,8 @@
         "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md"
       },
       "matchedN": 13,
-      "cohortN": 25,
-      "coveragePct": 52.0,
+      "cohortN": 27,
+      "coveragePct": 48.15,
       "basePrioritySum": 92,
       "benchmarkPriority": 30,
       "totalPriority": 122,
@@ -478,7 +586,9 @@
         "DeepSeek V4 Flash",
         "Gemini 3.6 Flash",
         "GLM-5.2",
-        "Gemini 3.5 Flash"
+        "Gemini 3.5 Flash",
+        "MiMo-V2.6-Pro",
+        "MiMo-V2.6-Flash"
       ],
       "excludedResults": [
         {
@@ -619,10 +729,7 @@
         "Grok 4.7"
       ],
       "livebenchInstructionFollowing": [
-        "Claude Opus 5.5",
-        "GPT-6 Sol",
-        "GPT-6 Luna",
-        "Grok 4.7"
+        "Claude Opus 5.5"
       ],
       "gpqaDiamond": [
         "Claude Opus 5.5",

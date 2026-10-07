@@ -14,7 +14,11 @@
     "capturedAt": "2026-09-29T06:50:27Z"
   },
   "rowN": 15,
-  "cohortN": 25,
+  "cohortN": 27,
+  "cohortReconciliation": {
+    "modelIdsAdded": ["mimo-v2-6-pro", "mimo-v2-6-flash"],
+    "note": "Selected roster expanded; neither MiMo model occurs in the retained September leaderboard snapshot or eligible provider claims. This is snapshot coverage, not a fresh claim about all external results."
+  },
   "matchedN": 11,
   "missingModels": [
     "Kimi K3",
@@ -30,7 +34,9 @@
     "Claude Opus 5.5",
     "GPT-6 Sol",
     "GPT-6 Luna",
-    "Grok 4.7"
+    "Grok 4.7",
+    "MiMo-V2.6-Pro",
+    "MiMo-V2.6-Flash"
   ],
   "rankingAvailableN": 12,
   "rankingMissingModels": [
@@ -46,7 +52,9 @@
     "Claude Opus 5.5",
     "GPT-6 Sol",
     "GPT-6 Luna",
-    "Grok 4.7"
+    "Grok 4.7",
+    "MiMo-V2.6-Pro",
+    "MiMo-V2.6-Flash"
   ],
   "providerClaimN": 1,
   "providerClaims": [

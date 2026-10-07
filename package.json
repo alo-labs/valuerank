@@ -1,6 +1,6 @@
 {
   "name": "valuerank",
-  "version": "1.9.1",
+  "version": "1.9.4",
   "private": true,
   "description": "ValueRank research and static publication workspace",
   "engines": {
@@ -11,9 +11,10 @@
     "capture:aa": "python3 .refresh/v1.4/capture_aa_v432.py",
     "refresh:external": "python3 .refresh/v1.4/fetch_livebench.py && npm run capture:tb4 && python3 .refresh/v1.4/build_tb4.py .refresh/v1.4/tb4-scrape.json .refresh/v1.4/tb4.json",
     "build:aa": "npm run capture:aa && python3 .refresh/v1.4/build_aa_metrics.py",
+    "reconcile:aa": "python3 .refresh/v1.4/aa_reconciliation.py",
     "build:scores": "python3 .refresh/v1.4/build_scores.py",
     "build:publication": "python3 .refresh/v1.4/emit_v14_docs.py && python3 scripts/generate_tb4_page.py && npm run generate:og",
-    "refresh": "npm run refresh:external && npm run build:aa && npm run build:scores && npm run build:publication",
+    "refresh": "npm run refresh:external && npm run build:aa && npm run build:scores && npm run reconcile:aa && npm run build:publication",
     "generate:og": "node scripts/site-generate-og-cards.mjs"
   },
   "devDependencies": {

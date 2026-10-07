@@ -6859,6 +6859,88 @@
         "captureMethod": "Rendered official profile currentModel payload read in Codex in-app browser; raw HTML not retained.",
         "capturedAt": "2026-09-29T18:12:25Z"
       }
+    },
+    {
+      "id": "mimo-v2-6-pro",
+      "requestedName": "MiMo-V2.6-Pro",
+      "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "model": {
+        "slug": "mimo-v2-6-pro",
+        "name": "MiMo-V2.6-Pro",
+        "shortName": "MiMo-V2.6-Pro",
+        "isReasoning": true,
+        "effort": null,
+        "contextWindowTokens": 1000000,
+        "intelligenceIndex": 46,
+        "intelligenceIndexIsEstimated": false,
+        "briefcaseElo": 1516,
+        "briefcaseNormalizedDisplay": 0.51,
+        "gdpvalNormalizedDisplay": 0.59,
+        "gdpval": 1686,
+        "automationBenchPartialScore": 0.59,
+        "terminalBench40": 0.35,
+        "scicode": 0.61,
+        "hle": 0.49,
+        "gdpPdfAllPass": 0.19,
+        "critpt": 0.27,
+        "omniscienceAccuracy": 0.35,
+        "omniscienceNonHallucination": 0.59,
+        "lcr": 0.86,
+        "intelligenceIndexCost": {"total": 206.66},
+        "speed": 40.1,
+        "price1mInputTokens": 0.435,
+        "price1mOutputTokens": 0.87
+      },
+      "capture": {
+        "observedAt": "2026-10-07T14:26:41Z",
+        "method": "Rendered official model profile, Intelligence Index component chart, GDPval-AA Elo chart and public total-cost tooltip read in Codex in-app browser; currentModel payload not used.",
+        "precision": "display-rounded",
+        "metricPrecision": {"briefcaseElo": "display-rounded, whole Elo", "gdpvalV21": "display-rounded, whole Elo", "aaEvalCost": "public tooltip, USD cents", "speed": "profile display, one decimal"},
+        "metricSourceUrls": {"gdpvalV21": "https://artificialanalysis.ai/evaluations/gdpval-aa"},
+        "sourceUrls": ["https://artificialanalysis.ai/models/mimo-v2-6-pro", "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", "https://artificialanalysis.ai/evaluations/gdpval-aa"],
+        "note": "Index and component values are display-rounded owner results. Briefcase and GDPval whole Elo are separately observed in owner charts, not reverse-converted from normalized percentages. Total evaluation cost comes from the total-cost tooltip, not token prices or cost per task."
+      }
+    },
+    {
+      "id": "mimo-v2-6-flash",
+      "requestedName": "MiMo-V2.6-Flash",
+      "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+      "model": {
+        "slug": "mimo-v2-6-flash",
+        "name": "MiMo-V2.6-Flash",
+        "shortName": "MiMo-V2.6-Flash",
+        "isReasoning": true,
+        "effort": null,
+        "contextWindowTokens": 1000000,
+        "intelligenceIndex": 38,
+        "intelligenceIndexIsEstimated": false,
+        "briefcaseElo": 1495,
+        "briefcaseNormalizedDisplay": 0.50,
+        "gdpvalNormalizedDisplay": 0.56,
+        "gdpval": 1611,
+        "automationBenchPartialScore": 0.64,
+        "terminalBench40": 0.23,
+        "scicode": 0.51,
+        "hle": 0.35,
+        "gdpPdfAllPass": 0.09,
+        "critpt": 0.12,
+        "omniscienceAccuracy": 0.27,
+        "omniscienceNonHallucination": 0.46,
+        "lcr": 0.74,
+        "intelligenceIndexCost": {"total": 109.41},
+        "speed": 56.4,
+        "price1mInputTokens": 0.14,
+        "price1mOutputTokens": 0.28
+      },
+      "capture": {
+        "observedAt": "2026-10-07T14:26:41Z",
+        "method": "Rendered official model profile, Intelligence Index component chart, GDPval-AA Elo chart and public total-cost tooltip read in Codex in-app browser; currentModel payload not used.",
+        "precision": "display-rounded",
+        "metricPrecision": {"briefcaseElo": "display-rounded, whole Elo", "gdpvalV21": "display-rounded, whole Elo", "aaEvalCost": "public tooltip, USD cents", "speed": "profile display, one decimal"},
+        "metricSourceUrls": {"gdpvalV21": "https://artificialanalysis.ai/evaluations/gdpval-aa"},
+        "sourceUrls": ["https://artificialanalysis.ai/models/mimo-v2-6-flash", "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", "https://artificialanalysis.ai/evaluations/gdpval-aa"],
+        "note": "Index and component values are display-rounded owner results. Briefcase and GDPval whole Elo are separately observed in owner charts, not reverse-converted from normalized percentages. Total evaluation cost comes from the total-cost tooltip, not token prices or cost per task."
+      }
     }
   ]
 }

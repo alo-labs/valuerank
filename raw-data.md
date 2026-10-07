@@ -1,8 +1,10 @@
-# ValueRank v1.9.3 Raw Data
+# ValueRank v1.9.4 Raw Data
 
-**Version:** v1.9.3 · **Updated:** September 30, 2026 · **AA DeepSWE chart observed:** 2026-09-29 · **AA source:** [Artificial Analysis Intelligence Index v4.3.2](https://artificialanalysis.ai/methodology/intelligence-benchmarking)
+**Version:** v1.9.4 · **Updated:** October 8, 2026 · **AA DeepSWE chart observed:** 2026-09-29 · **AA source:** [Artificial Analysis Intelligence Index v4.3.2](https://artificialanalysis.ai/methodology/intelligence-benchmarking)
 
-The AA chart publishes 25 DeepSWE v1.1 agent/model configurations; 13 exact model variants map to this 25-model ValueRank comparison roster. The main score ranks 13 models with both an exact AA DeepSWE result and a Bug Hunt owner result; the other candidates remain source-only: Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, DeepSeek V4 Pro, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Muse Spark 1.2. Raw AA values keep their source units: Elo fields remain Elo, and ratio fields are shown as percentages. **none** has an AA Intelligence Index estimate; it is labelled in the matrix. Benchmark-owner results, estimates, and provider claims remain source-typed.
+This is a selective publication update with mixed source dates. Earlier AA and DeepSWE observations remain September 29–30 captures; the newly added MiMo AA observations and AA displayed frontier were captured October 8. Bug Hunt's base snapshot remains pinned separately from the selectively added MiMo owner run notes observed October 7. The publication date does not imply that all benchmark rows were recaptured October 8. Per-model AA dates, precision, and source notes appear below; rounded public chart/tooltips preserve their displayed precision and do not establish hidden unrounded payload values.
+
+The AA chart publishes 25 DeepSWE v1.1 agent/model configurations; 13 exact model variants map to this 27-model ValueRank comparison roster. The main score ranks 13 models with both an exact AA DeepSWE result and a Bug Hunt owner result; the other candidates remain source-only: Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, DeepSeek V4 Pro, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, MiMo-V2.6-Flash, MiMo-V2.6-Pro, Muse Spark 1.2. Raw AA values keep their source units: Elo fields remain Elo, and ratio fields are shown as percentages. **none** has an AA Intelligence Index estimate; it is labelled in the matrix. Benchmark-owner results, estimates, and provider claims remain source-typed.
 
 ## DeepSWE v1.1 AA chart configurations
 
@@ -64,7 +66,41 @@ AA publishes 25 of 25 configurations in the visible chart. Pass@1 is averaged ac
 | Gemini 3.5 Flash | gemini-3-5-flash | high | [page](https://artificialanalysis.ai/models/gemini-3-5-flash) |
 | Gemini 3.6 Flash | gemini-3-6-flash | high | [page](https://artificialanalysis.ai/models/gemini-3-6-flash) |
 | Gemini 3.7 Flash | gemini-3-7-flash-medium | medium | [page](https://artificialanalysis.ai/models/gemini-3-7-flash-medium) |
+| MiMo-V2.6-Flash | mimo-v2-6-flash | not stated | [page](https://artificialanalysis.ai/models/mimo-v2-6-flash) |
+| MiMo-V2.6-Pro | mimo-v2-6-pro | not stated | [page](https://artificialanalysis.ai/models/mimo-v2-6-pro) |
 | Muse Spark 1.2 | muse-spark-1-2 | xhigh | [page](https://artificialanalysis.ai/models/muse-spark-1-2) |
+
+### AA observation dates and precision
+
+| Model | Source observation | Capture precision | Capture note |
+|---|---|---|---|
+| GPT-6 Sol | 2026-09-29T18:12:25Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GPT-5.6 Sol | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GPT-6 Astra | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Claude Opus 5.5 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Grok 4.7 | 2026-09-29T18:12:25Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GPT-5.6 Luna | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Kimi K3 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Grok 4.6 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Gemini 3.8 Flash | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GLM-5.3 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GPT-6 Luna | 2026-09-29T18:12:25Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Claude Opus 5 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Qwen3.8 Max | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Claude Fable 5 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Claude Opus 4.8 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Claude Sonnet 5 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| DeepSeek V4 Flash | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| DeepSeek V4 Pro | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GLM-5.2 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GLM-5.3 Flash | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GPT-5.5 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Gemini 3.5 Flash | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Gemini 3.6 Flash | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Gemini 3.7 Flash | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
+| MiMo-V2.6-Flash | 2026-10-07T14:26:41Z | display-rounded | Index and component values are display-rounded owner results. Briefcase and GDPval whole Elo are separately observed in owner charts, not reverse-converted from normalized percentages. Total evaluation cost comes from the total-cost tooltip, not token prices or cost per task. |
+| MiMo-V2.6-Pro | 2026-10-07T14:26:41Z | display-rounded | Index and component values are display-rounded owner results. Briefcase and GDPval whole Elo are separately observed in owner charts, not reverse-converted from normalized percentages. Total evaluation cost comes from the total-cost tooltip, not token prices or cost per task. |
+| Muse Spark 1.2 | 2026-09-29T15:16:40Z | No rounding metadata recorded | Retained earlier source snapshot |
 
 ## AA source input matrix
 
@@ -94,11 +130,13 @@ AA publishes 25 of 25 configurations in the visible chart. Pass@1 is averaged ac
 | — | Gemini 3.5 Flash | — / — / not shown | —% | 871.90 | 1184.8 | 42.08% | 6.57% | — | 32.16% | 53.94% | 19.80% | 73.33% | 42.68% | 92.22% | 13.14% | 51.40% | 37.83% | 32.60 | $2172.43 | 196.3 |
 | — | Gemini 3.6 Flash | — / — / not shown | —% | 950.46 | 1264.7 | 53.02% | 7.07% | — | 29.90% | 53.36% | 17.40% | 80.00% | 40.82% | 92.83% | 10.57% | 49.97% | 44.37% | 33.98 | $1036.81 | 185.4 |
 | — | Gemini 3.7 Flash | — / — / not shown | —% | — | 1339.6 | — | — | — | 35.46% | 59.84% | — | 83.00% | 38.97% | 92.12% | 9.43% | 54.00% | 34.13% | 39.62 (estimated) | $— | 286.6 |
+| — | MiMo-V2.6-Flash | — / — / not shown | —% | 1495.00 | 1611.0 | 64.00% | 23.00% | — | — | 51.00% | 9.00% | 74.00% | 35.00% | — | 12.00% | 27.00% | 46.00% | 38.00 | $109.41 | 56.4 |
+| — | MiMo-V2.6-Pro | — / — / not shown | —% | 1516.00 | 1686.0 | 59.00% | 35.00% | — | — | 61.00% | 19.00% | 86.00% | 49.00% | — | 27.00% | 35.00% | 59.00% | 46.00 | $206.66 | 40.1 |
 | — | Muse Spark 1.2 | — / — / not shown | —% | 1333.32 | 1481.6 | 40.61% | 7.07% | — | 34.85% | 57.41% | 17.40% | 79.00% | 45.46% | 90.40% | 17.71% | 45.38% | 66.71% | 39.58 | $1385.40 | 240.1 |
 
 ## [LiveBench](https://livebench.ai/) external component
 
-[LiveBench](https://livebench.ai/) release **2026_06_25** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **21/25** ranked models and includes **1 official supplemental model** outside that cohort: **Claude Fable 5.1**.
+[LiveBench](https://livebench.ai/) release **2026_06_25** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **24/27** ranked models and includes **1 official supplemental model** outside that cohort: **Claude Fable 5.1**.
 
 | Model | LiveBench variant | Instruction Following | Overall Score | Cost Per Successful Task |
 |---|---|---:|---:|---:|
@@ -123,47 +161,54 @@ AA publishes 25 of 25 configurations in the visible chart. Pass@1 is averaged ac
 | Gemini 3.6 Flash | gemini-3.6-flash-high | 75.37 | 73.59 | $0.2353 |
 | GLM-5.2 | glm-5.2 | 62.29 | 73.16 | $0.2246 |
 | Gemini 3.5 Flash | gemini-3.5-flash-high | 75.60 | 74.64 | $0.2489 |
+| GPT-6 Sol | gpt-6-sol-max | 68.57 | 79.25 | $0.2685 |
+| GPT-6 Luna | gpt-6-luna-max | 55.93 | 72.03 | $0.0263 |
+| Grok 4.7 | grok-4.7-xhigh | 75.28 | 77.40 | $0.7179 |
 | Claude Fable 5.1 | claude-fable-5-1-max-effort | 72.99 | 83.41 | $1.2117 |
 
-LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **DeepSeek V4 Flash, GLM-5.3 Flash, Gemini 3.7 Flash, Kimi K3, GPT-5.5, GPT-5.6 Sol, GPT-6 Astra, Claude Fable 5.1**.
+LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **DeepSeek V4 Flash, GPT-6 Luna, Gemini 3.7 Flash, GPT-6 Sol, GPT-5.5, GPT-5.6 Sol, GPT-6 Astra, Claude Fable 5.1**.
 
 ## [Bug Hunt Bench](https://bughunt.productcompass.pm/) external component
 
-The benchmark owner reports planted bugs fixed out of 105 across two repositories. This snapshot has **20/25** exact Bug Hunt results; **13** of those also have an exact AA DeepSWE model-variant result and enter both the main score and the companion emphasis view. It is pinned to [scoreboard commit 0630b120a81363c343ed7dfaf3c6d3be7f7da38c](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv); see the owner [run notes](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md) for harness and repeat details. The 12 models without the full overlap remain unranked: Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, DeepSeek V4 Pro, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Muse Spark 1.2.
+The benchmark owner reports planted bugs fixed out of 105 across two repositories. This snapshot has **21/27** eligible exact selected-variant Bug Hunt results; **13** also have an exact AA DeepSWE variant and enter the main score and emphasis view. The base snapshot is pinned to [scoreboard commit 0630b120a81363c343ed7dfaf3c6d3be7f7da38c](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv); selectively added MiMo records link to their individual owner notes at commit `7dd3c23a4c86a3fac586707d01129bf549bae325`, observed October 7. Per-record links preserve each source snapshot. The 14 models without full overlap remain unranked: Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, DeepSeek V4 Pro, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, MiMo-V2.6-Flash, MiMo-V2.6-Pro, Muse Spark 1.2.
 
 | Model | Fixed / 105 | Runs / aggregation | Evaluated model | Effort and status | Harness | Route | Coverage |
 |---|---:|---|---|---|---|---|---|
-| GPT-6 Sol | 29.3 | 3 / mean | GPT-6 Sol MAX - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
-| GPT-5.6 Sol | 43.5 | 2 / mean | GPT-5.6 Sol (max effort) - mean of 2 | max (max) | Codex CLI | OpenAI | Matched |
-| GPT-6 Astra | 45.0 | 3 / mean | GPT-6 Astra (max effort) - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
-| Claude Opus 5.5 | 41.7 | 3 / mean | Opus 5.5 (max effort) - mean of 3 | max (max) | Claude Code | Anthropic | Matched |
-| Grok 4.7 | 28.8 | 4 / mean | Grok 4.7 (xhigh) seq - mean of 4 | xhigh (verified ceiling) | Grok Build CLI (ACP) | xAI | Matched |
-| GPT-5.6 Luna | 31.3 | 3 / mean | GPT-5.6 Luna (max effort) - mean of 3 | max (max) | Codex CLI | OpenAI | Matched |
-| Kimi K3 | 21.0 | 1 / single | Kimi K3 | default (default) | Claude Code / OpenRouter | OpenRouter | Matched |
-| Grok 4.6 | 28.7 | 3 / mean | Grok 4.6 (xhigh) seq - mean of 3 | xhigh (verified ceiling) | Grok Build CLI (ACP) | xAI | Matched |
-| Gemini 3.8 Flash | 18.0 | 3 / mean | Gemini 3.8 Flash - mean of 3 | high (verified ceiling) | Antigravity CLI | Google | Matched |
-| GLM-5.3 | 19.0 | 1 / single | GLM-5.3 (max effort, Z.ai API) | max (verified setting) | Claude Code / Z.ai API | Z.ai API | Matched |
-| GPT-6 Luna | 18.3 | 3 / mean | GPT-6 Luna MAX - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
-| Claude Opus 5 | 27.0 | 1 / single | Opus 5 (max effort) | max (max) | Claude Code | Anthropic | Matched |
-| Qwen3.8 Max | 25.7 | 3 / mean | Qwen3.8-Max (max effort, Alibaba API) - mean of 3 | max (verified ceiling) | Claude Code / Alibaba API | Alibaba API | Matched |
-| Claude Fable 5 | 29.0 | 1 / single | Fable 5 (max effort) | max (max) | Claude Code | Anthropic | Matched |
-| Claude Opus 4.8 | 15.0 | 1 / single | Opus 4.8 (max effort) | max (max) | Claude Code | Anthropic | Matched |
-| Claude Sonnet 5 | 9.0 | 1 / single | Sonnet 5 (max effort) | max (max) | Claude Code | Anthropic | Matched |
-| DeepSeek V4 Flash | 21.7 | 3 / mean | DeepSeek V4.1 Flash (max effort) - mean of 3 | max (verified ceiling) | Claude Code / DeepSeek API | DeepSeek API | Matched |
-| DeepSeek V4 Pro | 16.0 | 1 / single | DeepSeek V4-Pro (max effort, DeepSeek API) | max (first-party; effort effect inconclusive) | Claude Code / DeepSeek API | DeepSeek API | Matched |
-| GLM-5.2 | — | None / None | None | None (None) | None | None | owner_result_missing |
-| GLM-5.3 Flash | 17.7 | 3 / mean | GLM-5.3 Flash (max effort, Z.ai API) - mean of 3 | max (verified ceiling) | Claude Code / Z.ai API | Z.ai API | Matched |
-| GPT-5.5 | — | None / None | None | None (None) | None | None | owner_result_missing |
-| Gemini 3.5 Flash | — | None / None | None | None (None) | None | None | owner_result_missing |
-| Gemini 3.6 Flash | — | None / None | None | None (None) | None | None | owner_result_missing |
-| Gemini 3.7 Flash | — | None / None | None | None (None) | None | None | variant_mismatch |
-| Muse Spark 1.2 | 14.0 | 1 / single | Muse Spark 1.2 (default effort, OpenRouter) | default (default) | Claude Code / OpenRouter | OpenRouter | Matched |
+| [GPT-6 Sol](https://bughunt.productcompass.pm/) | 29.3 | 3 / mean | GPT-6 Sol MAX - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
+| [GPT-5.6 Sol](https://bughunt.productcompass.pm/) | 43.5 | 2 / mean | GPT-5.6 Sol (max effort) - mean of 2 | max (max) | Codex CLI | OpenAI | Matched |
+| [GPT-6 Astra](https://bughunt.productcompass.pm/) | 45.0 | 3 / mean | GPT-6 Astra (max effort) - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
+| [Claude Opus 5.5](https://bughunt.productcompass.pm/) | 41.7 | 3 / mean | Opus 5.5 (max effort) - mean of 3 | max (max) | Claude Code | Anthropic | Matched |
+| [Grok 4.7](https://bughunt.productcompass.pm/) | 28.8 | 4 / mean | Grok 4.7 (xhigh) seq - mean of 4 | xhigh (verified ceiling) | Grok Build CLI (ACP) | xAI | Matched |
+| [GPT-5.6 Luna](https://bughunt.productcompass.pm/) | 31.3 | 3 / mean | GPT-5.6 Luna (max effort) - mean of 3 | max (max) | Codex CLI | OpenAI | Matched |
+| [Kimi K3](https://bughunt.productcompass.pm/) | 21.0 | 1 / single | Kimi K3 | default (default) | Claude Code / OpenRouter | OpenRouter | Matched |
+| [Grok 4.6](https://bughunt.productcompass.pm/) | 28.7 | 3 / mean | Grok 4.6 (xhigh) seq - mean of 3 | xhigh (verified ceiling) | Grok Build CLI (ACP) | xAI | Matched |
+| [Gemini 3.8 Flash](https://bughunt.productcompass.pm/) | 18.0 | 3 / mean | Gemini 3.8 Flash - mean of 3 | high (verified ceiling) | Antigravity CLI | Google | Matched |
+| [GLM-5.3](https://bughunt.productcompass.pm/) | 19.0 | 1 / single | GLM-5.3 (max effort, Z.ai API) | max (verified setting) | Claude Code / Z.ai API | Z.ai API | Matched |
+| [GPT-6 Luna](https://bughunt.productcompass.pm/) | 18.3 | 3 / mean | GPT-6 Luna MAX - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
+| [Claude Opus 5](https://bughunt.productcompass.pm/) | 27.0 | 1 / single | Opus 5 (max effort) | max (max) | Claude Code | Anthropic | Matched |
+| [Qwen3.8 Max](https://bughunt.productcompass.pm/) | 25.7 | 3 / mean | Qwen3.8-Max (max effort, Alibaba API) - mean of 3 | max (verified ceiling) | Claude Code / Alibaba API | Alibaba API | Matched |
+| [Claude Fable 5](https://bughunt.productcompass.pm/) | 29.0 | 1 / single | Fable 5 (max effort) | max (max) | Claude Code | Anthropic | Matched |
+| [Claude Opus 4.8](https://bughunt.productcompass.pm/) | 15.0 | 1 / single | Opus 4.8 (max effort) | max (max) | Claude Code | Anthropic | Matched |
+| [Claude Sonnet 5](https://bughunt.productcompass.pm/) | 9.0 | 1 / single | Sonnet 5 (max effort) | max (max) | Claude Code | Anthropic | Matched |
+| [DeepSeek V4 Flash](https://bughunt.productcompass.pm/) | 21.7 | 3 / mean | DeepSeek V4.1 Flash (max effort) - mean of 3 | max (verified ceiling) | Claude Code / DeepSeek API | DeepSeek API | Matched |
+| [DeepSeek V4 Pro](https://bughunt.productcompass.pm/) | 16.0 | 1 / single | DeepSeek V4-Pro (max effort, DeepSeek API) | max (first-party; effort effect inconclusive) | Claude Code / DeepSeek API | DeepSeek API | Matched |
+| [GLM-5.2](https://bughunt.productcompass.pm/) | — | None / None | None | None (None) | None | None | owner_result_missing |
+| [GLM-5.3 Flash](https://bughunt.productcompass.pm/) | 17.7 | 3 / mean | GLM-5.3 Flash (max effort, Z.ai API) - mean of 3 | max (verified ceiling) | Claude Code / Z.ai API | Z.ai API | Matched |
+| [GPT-5.5](https://bughunt.productcompass.pm/) | — | None / None | None | None (None) | None | None | owner_result_missing |
+| [Gemini 3.5 Flash](https://bughunt.productcompass.pm/) | — | None / None | None | None (None) | None | None | owner_result_missing |
+| [Gemini 3.6 Flash](https://bughunt.productcompass.pm/) | — | None / None | None | None (None) | None | None | owner_result_missing |
+| [Gemini 3.7 Flash](https://bughunt.productcompass.pm/) | — | None / None | None | None (None) | None | None | variant_mismatch |
+| [MiMo-V2.6-Flash](https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-flash---mean-of-3) | — | None / None | None | None (None) | None | None | reasoning_variant_unverified |
+| [MiMo-V2.6-Pro](https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-pro-first-party) | 18 | 1 / single | MiMo-V2.6-Pro (first-party, thinking enabled) | enabled (verified binary thinking toggle) | Claude Code / Anthropic-compatible shim | Xiaomi first-party | Matched |
+| [Muse Spark 1.2](https://bughunt.productcompass.pm/) | 14.0 | 1 / single | Muse Spark 1.2 (default effort, OpenRouter) | default (default) | Claude Code / OpenRouter | OpenRouter | Matched |
+| MiMo-V2.6-Flash — separate owner configuration | 23.3 | 3 / mean | [MiMo-V2.6-Flash - mean of 3](https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-flash---mean-of-3) | default (reasoning state unasserted and untested) | Claude Code / Anthropic-compatible shim | OpenRouter | Owner result present; excluded from selected variant: No verified equivalence to the selected AA reasoning variant. |
+| MiMo-V2.6-Pro — separate owner configuration | 22.7 | 3 / mean | [MiMo-V2.6-Pro - mean of 3](https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-pro-first-party) | default (—) | Claude Code / Anthropic-compatible shim | OpenRouter | Owner result present; excluded from selected variant: Reasoning state unasserted; retain separately from the explicitly enabled first-party configuration. Owner notes also disclose mixed judge standards. |
 
-Where the owner has no result, the model is not assigned an inferred or neutral value. The provider-claim audit recorded no matching provider-published Bug Hunt result for the uncovered cohort entries.
+Where no eligible selected-variant result exists, the model receives no inferred or neutral score. MiMo Flash has an owner default-route result (23.3/105, mean of three); its reasoning state was unasserted and untested, so equivalence to the selected AA reasoning variant remains unresolved and the owner result is shown separately. Provider-claim eligibility remains a separate exact-version and exact-variant audit.
 
 ## [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) external component
 
-The current official [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) snapshot contains **15 rows** and overlaps **11/25** ranked models. It replaces the old standalone TB2.1 publication; the AA source matrix above keeps its v2.1 field only as explicit AA-source provenance.
+The current official [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) snapshot contains **15 rows** and overlaps **11/27** ranked models. It replaces the old standalone TB2.1 publication; the AA source matrix above keeps its v2.1 field only as explicit AA-source provenance.
 
 | Rank | Model | Agent | Resolution rate | Tokens | Cost |
 |---:|---|---|---:|---:|---:|
@@ -192,6 +237,8 @@ The ledger contains **1 ranking-eligible provider claim** and separately records
 | Terminal-Bench 4.0 | deepseek-v4-flash | DeepSeek V4.1-Flash | 31.20% | Ranking eligible | model_provider_claim | [provider source](https://api-docs.deepseek.com/updates/) | The provider reports TB4.0 for V4.1-Flash and says the deepseek-v4-flash API name is temporarily routed to it. This is a current-route claim, not a direct measurement of the retired V4 Flash model version. Remove the claim when the benchmark owner publishes a result for the mapped current route. |
 | GDP.pdf not stated by provider | gemini-3.7-flash | Gemini 3.7 Flash | 34.00% | Audit only | model_provider_claim | [provider source](https://deepmind.google/models/model-cards/gemini-3-7-flash/) | The provider material does not state the effort variant, while the selected Artificial Analysis cohort URL is the medium variant; retain the claim for audit but do not transfer it into that variant's value. |
 | AutomationBench Provider private set; AA version not stated | gemini-3.7-flash | Gemini 3.7 Flash | 30.40% | Audit only | model_provider_claim | [provider source](https://deepmind.google/models/model-cards/gemini-3-7-flash/) | The provider identifies a private AutomationBench set but does not establish equivalence to Artificial Analysis's AutomationBench-AA implementation or state the effort variant; retain for audit without transferring it into the selected medium variant. |
+| DeepSWE not established as AA DeepSWE v1.1 | mimo-v2-6-pro | MiMo-V2.6-Pro | 71.90% | Audit only | model_provider_claim | [provider source](https://mimo.xiaomi.com/mimo-v2-6) | Provider launch claim retained separately. Exact benchmark-version, harness and evaluated-variant equivalence to the selected AA Coding Agent Index DeepSWE v1.1 configuration has not been established; no AA owner result is substituted. |
+| DeepSWE not established as AA DeepSWE v1.1 | mimo-v2-6-flash | MiMo-V2.6-Flash | 67.90% | Audit only | model_provider_claim | [provider source](https://mimo.xiaomi.com/mimo-v2-6) | Provider launch claim retained separately. Exact benchmark-version, harness and evaluated-variant equivalence to the selected AA Coding Agent Index DeepSWE v1.1 configuration has not been established; no AA owner result is substituted. |
 
 ## Benchmark evaluation cost (score input)
 
@@ -219,22 +266,22 @@ These fields are preserved for future analysis but remain outside the primary sc
 
 | Field | Available | Missing models | Role |
 |---|---:|---|---|
-| mlcrOverall | 21/25 | gpt-6-astra, grok-4.6, gemini-3.7-flash, claude-opus-5-5 | Supplemental / not scored |
-| harveyLab | 11/25 | gpt-6-astra, gemini-3.8-flash, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, qwen3.8-max, muse-spark-1.2, deepseek-v4-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| apexAgents | 5/25 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| mmmuPro | 14/25 | claude-fable-5, glm-5.3, grok-4.6, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, muse-spark-1.2, deepseek-v4-flash, glm-5.2, claude-opus-5-5, grok-4.7 | Supplemental / not scored |
-| livecodebench | 0/25 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| aime25 | 0/25 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| analystAgent | 8/25 | gpt-6-astra, gemini-3.8-flash, glm-5.3, grok-4.6, gpt-5.6-luna, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, qwen3.8-max, muse-spark-1.2, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| automationBenchPartialScore | 24/25 | gemini-3.7-flash | Supplemental / not scored |
-| enterpriseOpsGym | 15/25 | gpt-6-astra, gemini-3.8-flash, grok-4.6, qwen3.8-max, deepseek-v4-flash, gemini-3.6-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| itBenchSre | 11/25 | gpt-6-astra, claude-opus-5, claude-fable-5, grok-4.6, gemini-3.7-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, claude-opus-5-5, gpt-6-luna | Supplemental / not scored |
-| briefcaseRubricPassRate | 24/25 | gemini-3.7-flash | Supplemental / not scored |
-| briefcaseTotalCost | 3/25 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5 | Supplemental / not scored |
-| tauBanking | 21/25 | claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| terminalBenchV21 | 0/25 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7 | Supplemental / not scored |
-| livebenchOverall | 9/13 | Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | Supplemental / not scored |
-| livebenchCostPerSuccessfulTask | 9/13 | Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | Supplemental / not scored |
+| mlcrOverall | 21/27 | gpt-6-astra, grok-4.6, gemini-3.7-flash, claude-opus-5-5, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| harveyLab | 11/27 | gpt-6-astra, gemini-3.8-flash, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, qwen3.8-max, muse-spark-1.2, deepseek-v4-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| apexAgents | 5/27 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, grok-4.6, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| mmmuPro | 14/27 | claude-fable-5, glm-5.3, grok-4.6, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, muse-spark-1.2, deepseek-v4-flash, glm-5.2, claude-opus-5-5, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| livecodebench | 0/27 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| aime25 | 0/27 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| analystAgent | 8/27 | gpt-6-astra, gemini-3.8-flash, glm-5.3, grok-4.6, gpt-5.6-luna, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, qwen3.8-max, muse-spark-1.2, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| automationBenchPartialScore | 26/27 | gemini-3.7-flash | Supplemental / not scored |
+| enterpriseOpsGym | 15/27 | gpt-6-astra, gemini-3.8-flash, grok-4.6, qwen3.8-max, deepseek-v4-flash, gemini-3.6-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| itBenchSre | 11/27 | gpt-6-astra, claude-opus-5, claude-fable-5, grok-4.6, gemini-3.7-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, claude-opus-5-5, gpt-6-luna, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| briefcaseRubricPassRate | 24/27 | gemini-3.7-flash, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| briefcaseTotalCost | 3/27 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| tauBanking | 21/27 | claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| terminalBenchV21 | 0/27 | gpt-6-astra, gemini-3.8-flash, claude-opus-5, gpt-5.6-sol, claude-fable-5, glm-5.3, kimi-k3, grok-4.6, gpt-5.6-luna, gpt-5.5, gemini-3.7-flash, glm-5.3-flash, deepseek-v4-pro, claude-opus-4.8, qwen3.8-max, muse-spark-1.2, claude-sonnet-5, deepseek-v4-flash, gemini-3.6-flash, glm-5.2, gemini-3.5-flash, claude-opus-5-5, gpt-6-sol, gpt-6-luna, grok-4.7, mimo-v2-6-pro, mimo-v2-6-flash | Supplemental / not scored |
+| livebenchOverall | 12/13 | Claude Opus 5.5 | Supplemental / not scored |
+| livebenchCostPerSuccessfulTask | 12/13 | Claude Opus 5.5 | Supplemental / not scored |
 | terminalBenchV4 | 7/13 | Kimi K3, Qwen3.8 Max, Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | Supplemental / not scored |
 
 ## Dropped primary candidate
@@ -242,7 +289,7 @@ These fields are preserved for future analysis but remain outside the primary sc
 | Dimension | Missing model | Treatment |
 |---|---|---|
 | Terminal-Bench 4.0 | Kimi K3, Qwen3.8 Max, Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
-| Instruction Following (LiveBench) | Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
+| Instruction Following (LiveBench) | Claude Opus 5.5 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
 | GPQA Diamond (legacy) | Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
 | Speed | Kimi K3 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
 
@@ -261,3 +308,25 @@ Missing values are intentionally represented as null; no old-version, model-fami
 - [.refresh/v1.4/provider_claims.json](.refresh/v1.4/provider_claims.json): provider claim values, source URLs, eligibility, and caveats
 - [.refresh/v1.4/deepswe.json](.refresh/v1.4/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
 - [.refresh/v1.4/tb4-browser-2026-09-29.json](.refresh/v1.4/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
+
+
+## AA intelligence and total-cost comparison
+
+Observed 2026-10-07T14:23:09Z; Artificial Analysis Intelligence Index v4.3.2. Scope: Complete displayed intelligence versus total evaluation cost Pareto line with all 691 catalog models selected; 173 eligible plotted points. This is not ValueRank's composite-quality frontier.. Reconciliation: reconciled. This view compares AA intelligence index with AA total evaluation cost in USD. Primary composite-rank eligibility is shown separately. Membership is AA's directly observed displayed frontier; no frontier is recomputed from these rows. Source selected 691 models, plotted 173 eligible points, and displayed 14 frontier points. Public metric/export gaps are shown explicitly.
+
+| Exact AA model | AA ID | Intelligence index | Total evaluation cost (USD) | Observed comparison | Primary rank status | Primary evidence gaps |
+|---|---|---|---|---|---|---|
+| [MiMo-V2.6-Flash](https://artificialanalysis.ai/models/mimo-v2-6-flash) | mimo-v2-6-flash | 38 (rounded) | $109.41 | Observed AA frontier | Unranked source candidate | No eligible exact-variant Bug Hunt match; owner default result 23.3/105 available; selected reasoning equivalence is unverified; No exact-variant AA DeepSWE result in the selected source snapshot |
+| [MiMo-V2.6-Pro](https://artificialanalysis.ai/models/mimo-v2-6-pro) | mimo-v2-6-pro | 46 (rounded) | $206.66 | Observed AA frontier | Unranked source candidate | No exact-variant AA DeepSWE result in the selected source snapshot |
+| [Claude Opus 5.5 (max with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5) | claude-opus-5-5 | 58 (rounded) | Not publicly captured | Observed AA frontier | Primary ranked | None |
+| [Claude Opus 5.5 (high with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-high) | claude-opus-5-5-high | 54 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred. |
+| [Claude Opus 5.5 (xhigh with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-xhigh) | claude-opus-5-5-xhigh | 56 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Opus max with fallback. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred. |
+| [GPT-6.1 Sol (max)](https://artificialanalysis.ai/models/gpt-6-1-sol) | gpt-6-1-sol | 52 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: New-generation frontier candidate explicitly retained for subsequent exact benchmark ingestion. This correction ingests the two MiMo models; the existing roster contains GPT-6 Sol, not GPT-6.1 Sol. No older-generation result is transferred. |
+| [GPT-6.1 Sol (high)](https://artificialanalysis.ai/models/gpt-6-1-sol-high) | gpt-6-1-sol-high | 50 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred. |
+| [GPT-6.1 Sol (medium)](https://artificialanalysis.ai/models/gpt-6-1-sol-medium) | gpt-6-1-sol-medium | 48 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred. |
+| [GPT-6.1 Sol (xhigh)](https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh) | gpt-6-1-sol-xhigh | 51 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Exact-effort comparison candidate retained explicitly for subsequent ingestion; the current selected roster has GPT-6 Sol max, not this generation. Exact-variant benchmark coverage has not been collected, and no other effort or generation is transferred. |
+| [GPT-6 Luna (max)](https://artificialanalysis.ai/models/gpt-6-luna) | gpt-6-luna | 38 (rounded) | Not publicly captured | Observed AA frontier | Primary ranked | None |
+| [GPT-6 Luna (high)](https://artificialanalysis.ai/models/gpt-6-luna-high) | gpt-6-luna-high | 33 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred. |
+| [GPT-6 Luna (low)](https://artificialanalysis.ai/models/gpt-6-luna-low) | gpt-6-luna-low | 22 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred. |
+| [GPT-6 Luna (medium)](https://artificialanalysis.ai/models/gpt-6-luna-medium) | gpt-6-luna-medium | 30 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred. |
+| [GPT-6 Luna (xhigh)](https://artificialanalysis.ai/models/gpt-6-luna-xhigh) | gpt-6-luna-xhigh | 35 (rounded) | Not publicly captured | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T14:23:09Z: Lower-effort comparison candidate retained explicitly; the current selected roster uses Luna max. Exact-variant benchmark coverage has not been collected, and max results cannot be transferred. |

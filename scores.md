@@ -1,6 +1,6 @@
-# ValueRank v1.9.3 Scores
+# ValueRank v1.9.4 Scores
 
-**Updated:** September 30, 2026 · **Cohort:** 13 · **Retained dimensions:** 12 · **Default cost basis:** API Costs (AA total evaluation cost)
+**Updated:** October 8, 2026 · **Cohort:** 13 · **Retained dimensions:** 12 · **Default cost basis:** API Costs (AA total evaluation cost)
 
 API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple. The site switcher recalculates the main rank and cost-based charts using the selected basis.
 
@@ -89,7 +89,7 @@ Dimension order is the order in weights above:
 
 ## Coverage decision
 
-The score is zero-gap across all retained dimensions for the 13 exact-match models. 12 models remain in the 25-model source roster without a primary rank because they lack exact eligible Bug Hunt results. Dropped candidate dimensions are listed below; missing values remain null rather than receiving neutral scores.
+The score is zero-gap across all retained dimensions for the 13 exact-match models. 14 models remain in the 27-model source roster without a primary rank because they lack exact eligible Bug Hunt results. Dropped candidate dimensions are listed below; missing values remain null rather than receiving neutral scores.
 
 ## External benchmark coverage
 

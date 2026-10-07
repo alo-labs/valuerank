@@ -20,10 +20,11 @@ RESEARCH = ROOT / "research" / "2026-09-29-valuerank-refresh-v4-3-2"
 sys.path.insert(0, str(ROOT / "scripts"))
 from plan_costs import build_cost_fields, load_plan_routes, route_summary
 from site_header import inject_header
+from aa_reconciliation import reconcile as reconcile_aa, publication as aa_reconciliation_publication
 
-VERSION = "v1.9.3"
-DATE = "September 30, 2026"
-SHORT_DATE = "Sep 30"
+VERSION = "v1.9.4"
+DATE = "October 8, 2026"
+SHORT_DATE = "Oct 8"
 CURRENCY = "$"
 
 AA_INDEX_URL = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
@@ -68,6 +69,7 @@ def html_external_link(label, url):
     return f'<a href="{html_escape(url, quote=True)}" target="_blank" rel="noopener">{html_escape(label)}</a>'
 
 scores = json.loads((REFRESH / "scores.json").read_text())
+aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
 coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
 deepswe_chart_doc = json.loads((REFRESH / "aa_deepswe.json").read_text())
 livebench_document = json.loads((REFRESH / "livebench.json").read_text())
@@ -197,13 +199,24 @@ def bug_hunt_emphasis_table():
 
 def bug_hunt_raw_table():
     return "\n".join(
-        f"| {model['name']} | {record.get('fixedOf105') if record.get('matched') else '—'} | "
+        f"| [{model['name']}]({record.get('sourceUrl', BUG_HUNT_URL)}) | {record.get('fixedOf105') if record.get('matched') else '—'} | "
         f"{record.get('sampleN', '—')} / {record.get('aggregation', '—')} | {record.get('evaluatedModel', '—')} | "
         f"{record.get('effort', '—')} ({record.get('effortStatus', '—')}) | "
         f"{record.get('harness', '—')} | {record.get('route', '—')} | "
         f"{'Matched' if record.get('matched') else record.get('matchStatus', 'No result')} |"
         for model in all_models
         for record in [bug_hunt_records[model['id']]]
+    ) + "\n" + "\n".join(
+        f"| {model['name']} — separate owner configuration | {config['fixedOf105']} | "
+        f"{config.get('sampleN', '—')} / {config.get('aggregation', '—')} | "
+        f"[{config.get('evaluatedModel', '—')}]({record.get('sourceUrl', BUG_HUNT_URL)}) | "
+        f"{config.get('effort', '—')} ({config.get('effortStatus', '—')}) | "
+        f"{config.get('harness', '—')} | {config.get('route', '—')} | "
+        f"Owner result present; excluded from selected variant: {config.get('selectionReason', record.get('note', 'Variant equivalence unresolved'))} |"
+        for model in all_models
+        for record in [bug_hunt_records[model['id']]]
+        for config in record.get('availableOwnerConfigurations', [])
+        if config.get('selected') is not True
     )
 
 
@@ -222,12 +235,17 @@ drop_text = "\n".join(
     f"| {item['label']} | {names(item['missing'])} | {item['reason']} |" for item in dropped
 ) or "| None | — | All candidate dimensions have complete coverage. |"
 
+aa_reconciliation_report = reconcile_aa()
+aa_reconciliation_md, aa_reconciliation_html = aa_reconciliation_publication(aa_reconciliation_report)
+
 readme = f"""# ValueRank
 **Frontier AI model ranking focused on production value**
 
 **Version:** {VERSION}
 **Updated:** {DATE}
 **Scope:** {n} primary-ranked models from a {source_n}-model AA-mapped comparison roster, {d} retained dimensions including Bug Hunt Bench
+
+Publication updated October 8, 2026 with selective MiMo and AA frontier additions. Earlier AA/DeepSWE observations remain dated September 29–30; current MiMo owner run notes were observed October 7. See per-model dates and capture precision in raw-data.md. This publication combines source snapshots with different dates.
 
 ## Current result
 
@@ -275,7 +293,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - [research/2026-09-29-valuerank-refresh-v4-3-2/](research/2026-09-29-valuerank-refresh-v4-3-2/): reproducible v4.3.2 refresh package
 - [.refresh/v1.4/](.refresh/v1.4/): refresh scripts and machine-readable snapshots/outputs
 """
-(ROOT / "README.md").write_text(readme)
+(ROOT / "README.md").write_text(readme + aa_reconciliation_md)
 
 methodology = f"""# ValueRank Methodology
 
@@ -476,6 +494,16 @@ supplemental_rows = "\n".join(
 )
 livebench_raw_rows = livebench_table()
 tb4_raw_rows = tb4_table()
+aa_evidence_rows = "\n".join(
+    "| " + " | ".join(str(value).replace("|", "\\|").replace("\n", " ") for value in (
+        model['name'],
+        (record.get('extraction') or {}).get('sourceObservedAt') or aa_document.get('observedAt') or 'Not recorded',
+        (record.get('extraction') or {}).get('precision') or 'No rounding metadata recorded',
+        (record.get('extraction') or {}).get('note') or 'Retained earlier source snapshot',
+    )) + " |"
+    for model in all_models
+    for record in [aa_document.get('models', {}).get(model['id'], {})]
+)
 provider_claim_rows = "\n".join(
     f"| {claim['benchmark']} {claim['benchmarkVersion']} | {claim.get('cohortModelId', '—')} | {claim.get('evaluatedModel', '—')} | {pct(claim.get('value'))} | {'Ranking eligible' if claim.get('eligibleForRanking') is True else 'Audit only'} | {claim.get('sourceType', '—')} | [provider source]({claim['sourceUrl']}) | {claim.get('caveat', claim.get('eligibilityReason', '—'))} |"
     for claim in provider_claims
@@ -483,6 +511,8 @@ provider_claim_rows = "\n".join(
 raw_data = f"""# ValueRank {VERSION} Raw Data
 
 **Version:** {VERSION} · **Updated:** {DATE} · **AA DeepSWE chart observed:** {deepswe_updated} · **AA source:** [{aa_version}]({AA_METHODOLOGY_URL})
+
+This is a selective publication update with mixed source dates. Earlier AA and DeepSWE observations remain September 29–30 captures; the newly added MiMo AA observations and AA displayed frontier were captured October 8. Bug Hunt's base snapshot remains pinned separately from the selectively added MiMo owner run notes observed October 7. The publication date does not imply that all benchmark rows were recaptured October 8. Per-model AA dates, precision, and source notes appear below; rounded public chart/tooltips preserve their displayed precision and do not establish hidden unrounded payload values.
 
 The AA chart publishes {len(deepswe_configurations)} DeepSWE v1.1 agent/model configurations; {deepswe_overlap_n} exact model variants map to this {source_n}-model ValueRank comparison roster. The main score ranks {n} models with both an exact AA DeepSWE result and a Bug Hunt owner result; the other candidates remain source-only: {unranked_names}. Raw AA values keep their source units: Elo fields remain Elo, and ratio fields are shown as percentages. **{aa_index_estimated_models}** has an AA Intelligence Index estimate; it is labelled in the matrix. Benchmark-owner results, estimates, and provider claims remain source-typed.
 
@@ -499,6 +529,12 @@ AA publishes 25 of 25 configurations in the visible chart. Pass@1 is averaged ac
 | Model | AA slug | AA effort | Source |
 |---|---|---|---|
 {aa_variant_rows}
+
+### AA observation dates and precision
+
+| Model | Source observation | Capture precision | Capture note |
+|---|---|---|---|
+{aa_evidence_rows}
 
 ## AA source input matrix
 
@@ -518,13 +554,13 @@ LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **{livebe
 
 ## {md_benchmark_link('Bug Hunt Bench')} external component
 
-The benchmark owner reports planted bugs fixed out of 105 across two repositories. This snapshot has **{bug_hunt_source_matches_n}/{source_n}** exact Bug Hunt results; **{bug_hunt_ranking['matchedN']}** of those also have an exact AA DeepSWE model-variant result and enter both the main score and the companion emphasis view. It is pinned to [scoreboard commit {bug_hunt_ranking['sourceCommit']}]({bug_hunt_document['sources']['scoreboard']}); see the owner [run notes]({bug_hunt_document['sources']['runNotes']}) for harness and repeat details. The {len(unranked_models)} models without the full overlap remain unranked: {unranked_names}.
+The benchmark owner reports planted bugs fixed out of 105 across two repositories. This snapshot has **{bug_hunt_source_matches_n}/{source_n}** eligible exact selected-variant Bug Hunt results; **{bug_hunt_ranking['matchedN']}** also have an exact AA DeepSWE variant and enter the main score and emphasis view. The base snapshot is pinned to [scoreboard commit {bug_hunt_ranking['sourceCommit']}]({bug_hunt_document['sources']['scoreboard']}); selectively added MiMo records link to their individual owner notes at commit `7dd3c23a4c86a3fac586707d01129bf549bae325`, observed October 7. Per-record links preserve each source snapshot. The {len(unranked_models)} models without full overlap remain unranked: {unranked_names}.
 
 | Model | Fixed / 105 | Runs / aggregation | Evaluated model | Effort and status | Harness | Route | Coverage |
 |---|---:|---|---|---|---|---|---|
 {bug_hunt_raw_table()}
 
-Where the owner has no result, the model is not assigned an inferred or neutral value. The provider-claim audit recorded no matching provider-published Bug Hunt result for the uncovered cohort entries.
+Where no eligible selected-variant result exists, the model receives no inferred or neutral score. MiMo Flash has an owner default-route result (23.3/105, mean of three); its reasoning state was unasserted and untested, so equivalence to the selected AA reasoning variant remains unresolved and the owner result is shown separately. Provider-claim eligibility remains a separate exact-version and exact-variant audit.
 
 ## {md_benchmark_link('Terminal-Bench 4.0')} external component
 
@@ -580,7 +616,7 @@ Missing values are intentionally represented as null; no old-version, model-fami
 - [.refresh/v1.4/deepswe.json](.refresh/v1.4/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
 - [.refresh/v1.4/tb4-browser-2026-09-29.json](.refresh/v1.4/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
 """
-(ROOT / "raw-data.md").write_text(raw_data)
+(ROOT / "raw-data.md").write_text(raw_data + aa_reconciliation_md)
 
 
 # Existing interactive publication shell. Data constants and model data are
@@ -732,7 +768,7 @@ livebench_site_table_rows = "\n".join(
     for record in livebench_rows
 )
 bug_hunt_site_table_rows = "\n".join(
-    f"<tr><td>{item['rank']}</td><td>{html_escape(item['name'])}</td>"
+    f"<tr><td>{item['rank']}</td><td>{html_external_link(item['name'], record.get('sourceUrl', BUG_HUNT_URL))}</td>"
     f"<td class=\"mono\">{record['fixedOf105']:g}/105</td>"
     f"<td class=\"mono\">{item['emphasisScore']:.1f}</td><td>n={record['sampleN']} ({html_escape(record['aggregation'])})</td>"
     f"<td>{html_escape(str(record['effort']))} ({html_escape(str(record['effortStatus']))})</td>"
@@ -1342,7 +1378,7 @@ html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero
 html = replace_once(html, r'<div class="(?:nav-meta|vr-nav-meta)">[^<]*</div>', f'<div class="vr-nav-meta">{DATE} · {n} models · {d} dimensions</div>', "nav metadata")
 html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Models Ranked', f'<span class="hero-statbar-num">{n}</span>\n        <span class="hero-statbar-label">Models Ranked', "model stat")
 html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Scored Dimensions', f'<span class="hero-statbar-num">{d}</span>\n        <span class="hero-statbar-label">Scored Dimensions', "dimension stat")
-html = replace_once(html, r'<span class="hero-statbar-num">(?:Jul 28|Sep \d+)</span>', f'<span class="hero-statbar-num">{SHORT_DATE}</span>', "date stat")
+html = replace_once(html, r'<span class="hero-statbar-num">(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{1,2}</span>', f'<span class="hero-statbar-num">{SHORT_DATE}</span>', "date stat")
 
 insight_bodies = [
     'The Pareto view highlights models that are not outperformed on both quality and the selected cost basis.',
@@ -1567,7 +1603,7 @@ bug_hunt_card = f'''    <!-- BUG HUNT DATA CARD START -->
           <tbody>{bug_hunt_site_table_rows}</tbody>
         </table>
       </div>
-      <p class="method-text" style="margin-top:12px;">Source: <a href="{BUG_HUNT_URL}" target="_blank" rel="noopener">Bug Hunt Bench</a>; pinned <a href="{bug_hunt_document['sources']['scoreboard']}" target="_blank" rel="noopener">owner scoreboard</a> at commit <code>{html_escape(bug_hunt_ranking['sourceCommit'])}</code> and <a href="{bug_hunt_document['sources']['runNotes']}" target="_blank" rel="noopener">run notes</a>. Rows with no exact owner result are excluded from this matched cohort; the provider-claim audit found no matching claim for the uncovered entries.</p>
+      <p class="method-text" style="margin-top:12px;">Source: <a href="{BUG_HUNT_URL}" target="_blank" rel="noopener">Bug Hunt Bench</a>. Base snapshot: <a href="{bug_hunt_document['sources']['scoreboard']}" target="_blank" rel="noopener">owner scoreboard</a> at <code>{html_escape(bug_hunt_ranking['sourceCommit'])}</code>; selective MiMo additions: <a href="https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md" target="_blank" rel="noopener">owner run notes at 7dd3c23</a>, observed October 7. Rows link to their individual source evidence. Rows with no eligible selected-variant result remain excluded from this matched cohort. MiMo Flash's owner default-route result is 23.3/105 (mean of three); reasoning state was unasserted and untested, so selected-reasoning equivalence remains unresolved. The separate result is preserved in raw data.</p>
     </div>
     <!-- BUG HUNT DATA CARD END -->
 '''
@@ -1945,6 +1981,12 @@ html = replace_current_copy(
     lambda match: match.group(1) + VERSION,
     "ranking history chart title",
 )
+html = re.sub(r"<!-- aa-reconciliation:start -->[\s\S]*?<!-- aa-reconciliation:end -->", "", html)
+if "</main>" not in html:
+    raise ValueError("Cannot insert AA comparison: publication shell lacks </main>")
+source_date_note = ('<p class="method-text">Publication updated October 8, 2026 with selective additions. Earlier AA and DeepSWE snapshots remain dated September 29–30; MiMo AA and frontier observations were captured October 8, and selective MiMo Bug Hunt owner notes were observed October 7. Rounded public AA metrics preserve captured display precision; source dates and precision are listed in raw data.</p>')
+aa_reconciliation_html = aa_reconciliation_html.replace('</p>', '</p>' + source_date_note, 1)
+html = html.replace("</main>", aa_reconciliation_html + "\n</main>", 1)
 site_path.write_text(html)
 
 coding_path = ROOT / "site" / "coding-agents" / "index.html"

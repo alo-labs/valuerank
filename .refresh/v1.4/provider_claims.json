@@ -58,6 +58,40 @@
       "sourceUrl": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
       "eligibleForRanking": false,
       "eligibilityReason": "The provider identifies a private AutomationBench set but does not establish equivalence to Artificial Analysis's AutomationBench-AA implementation or state the effort variant; retain for audit without transferring it into the selected medium variant."
+    },
+    {
+      "claimId": "xiaomi-mimo-v26-pro-deepswe-20260922",
+      "benchmark": "DeepSWE",
+      "benchmarkVersion": "not established as AA DeepSWE v1.1",
+      "component": "deepswePassAt1",
+      "cohortModelId": "mimo-v2-6-pro",
+      "evaluatedModel": "MiMo-V2.6-Pro",
+      "providerVariant": "reasoning configuration not independently matched to AA",
+      "value": 0.719,
+      "valuePct": 71.9,
+      "sourceType": "model_provider_claim",
+      "publisher": "Xiaomi",
+      "publishedOn": "2026-09-22",
+      "sourceUrl": "https://mimo.xiaomi.com/mimo-v2-6",
+      "eligibleForRanking": false,
+      "eligibilityReason": "Provider launch claim retained separately. Exact benchmark-version, harness and evaluated-variant equivalence to the selected AA Coding Agent Index DeepSWE v1.1 configuration has not been established; no AA owner result is substituted."
+    },
+    {
+      "claimId": "xiaomi-mimo-v26-flash-deepswe-20260922",
+      "benchmark": "DeepSWE",
+      "benchmarkVersion": "not established as AA DeepSWE v1.1",
+      "component": "deepswePassAt1",
+      "cohortModelId": "mimo-v2-6-flash",
+      "evaluatedModel": "MiMo-V2.6-Flash",
+      "providerVariant": "reasoning configuration not independently matched to AA",
+      "value": 0.679,
+      "valuePct": 67.9,
+      "sourceType": "model_provider_claim",
+      "publisher": "Xiaomi",
+      "publishedOn": "2026-09-22",
+      "sourceUrl": "https://mimo.xiaomi.com/mimo-v2-6",
+      "eligibleForRanking": false,
+      "eligibilityReason": "Provider launch claim retained separately. Exact benchmark-version, harness and evaluated-variant equivalence to the selected AA Coding Agent Index DeepSWE v1.1 configuration has not been established; no AA owner result is substituted."
     }
   ]
 }

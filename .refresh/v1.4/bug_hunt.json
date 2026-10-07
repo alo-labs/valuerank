@@ -9,6 +9,18 @@
     "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv",
     "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md"
   },
+  "supplementalSourceCaptures": [
+    {
+      "modelIds": ["mimo-v2-6-pro", "mimo-v2-6-flash"],
+      "observedAt": "2026-10-07T14:15:34Z",
+      "siteUpdatedOn": "2026-10-01",
+      "sourceCommit": "7dd3c23a4c86a3fac586707d01129bf549bae325",
+      "leaderboard": "https://bughunt.productcompass.pm/?preset=all",
+      "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md",
+      "captureMethod": "Built-in browser official all-runs leaderboard and benchmark-owner run notes",
+      "note": "Selective MiMo addition; existing model records retain the original source snapshot and are not described as newly observed."
+    }
+  ],
   "scoreUnit": "independently verified planted bugs fixed out of 105",
   "methodology": "Same task prompt and two repositories; each model runs through its native agentic CLI. Blind grading uses the model's code diff as ground truth. Only planted bugs fixed and verified count. Unplanted discoveries are reported separately.",
   "matchingPolicy": "Use the benchmark owner's exact evaluated model identity and current route. Use the owner's published mean when repeated runs exist; otherwise retain the single official result with sample size 1. Do not transfer across model versions or variants, and do not use mixed-route runs when a single-route official result exists.",
@@ -400,6 +412,78 @@
       "route": "xAI",
       "sourceType": "benchmark_owner",
       "note": "Owner-published sequential-run mean of four runs."
+    },
+    {
+      "modelId": "mimo-v2-6-pro",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "MiMo-V2.6-Pro (first-party, thinking enabled)",
+      "fixedOf105": 18,
+      "sampleN": 1,
+      "aggregation": "single",
+      "effort": "enabled",
+      "effortStatus": "verified binary thinking toggle",
+      "harness": "Claude Code / Anthropic-compatible shim",
+      "route": "Xiaomi first-party",
+      "sourceType": "benchmark_owner",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-pro-first-party",
+      "sourceCommit": "7dd3c23a4c86a3fac586707d01129bf549bae325",
+      "observedAt": "2026-10-07T14:15:34Z",
+      "runDate": "2026-09-22",
+      "costUsd": 0.59,
+      "costEvidenceType": "list_rate_estimate",
+      "note": "Single owner run with thinking explicitly enabled on Xiaomi's first-party endpoint. Do not substitute the OpenRouter default mean, whose reasoning state was not asserted and whose three runs used two judge standards.",
+      "availableOwnerConfigurations": [
+        {
+          "evaluatedModel": "MiMo-V2.6-Pro - mean of 3",
+          "fixedOf105": 22.7,
+          "sampleN": 3,
+          "aggregation": "mean",
+          "effort": "default",
+          "route": "OpenRouter",
+          "harness": "Claude Code / Anthropic-compatible shim",
+          "runDate": "2026-09-22",
+          "costUsd": 0.86,
+          "costEvidenceType": "actual_bill",
+          "selected": false,
+          "selectionReason": "Reasoning state unasserted; retain separately from the explicitly enabled first-party configuration. Owner notes also disclose mixed judge standards."
+        }
+      ]
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "matched": false,
+      "matchStatus": "reasoning_variant_unverified",
+      "evaluatedModel": null,
+      "fixedOf105": null,
+      "sampleN": null,
+      "aggregation": null,
+      "effort": null,
+      "effortStatus": null,
+      "harness": null,
+      "route": null,
+      "sourceType": null,
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-flash---mean-of-3",
+      "sourceCommit": "7dd3c23a4c86a3fac586707d01129bf549bae325",
+      "observedAt": "2026-10-07T14:15:34Z",
+      "note": "An owner-published default-route mean exists, but the owner explicitly says its reasoning state was never asserted or probed. Preserve the result separately until equivalence to the selected AA reasoning variant is established.",
+      "availableOwnerConfigurations": [
+        {
+          "evaluatedModel": "MiMo-V2.6-Flash - mean of 3",
+          "fixedOf105": 23.3,
+          "sampleN": 3,
+          "aggregation": "mean",
+          "effort": "default",
+          "effortStatus": "reasoning state unasserted and untested",
+          "route": "OpenRouter",
+          "harness": "Claude Code / Anthropic-compatible shim",
+          "runDate": "2026-09-22",
+          "costUsd": 0.49,
+          "costEvidenceType": "actual_bill",
+          "selected": false,
+          "selectionReason": "No verified equivalence to the selected AA reasoning variant."
+        }
+      ]
     }
   ],
   "excludedResults": [

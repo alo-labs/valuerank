@@ -51,6 +51,8 @@ COHORT_MAP = {
     "gpt-6-astra": "gpt-6-astra-max",
     "gemini-3.8-flash": "gemini-3.8-flash-high",
     "claude-opus-5": "claude-opus-5-max-effort",
+    # The retained pinned-release snapshot declares no exact evaluated row.
+    "claude-opus-5-5": None,
     "gpt-5.6-sol": "gpt-5.6-sol-max",
     "claude-fable-5": "claude-fable-5-max-effort",
     "glm-5.3": "glm-5.3",
@@ -72,6 +74,9 @@ COHORT_MAP = {
     "gpt-6-sol": "gpt-6-sol-max",
     "gpt-6-luna": "gpt-6-luna-max",
     "grok-4.7": "grok-4.7-xhigh",
+    # No verified exact identity in the pinned release; keep missing rows.
+    "mimo-v2-6-pro": None,
+    "mimo-v2-6-flash": None,
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in
@@ -161,6 +166,15 @@ def build_record(
         "name": display_name,
         "livebenchModel": livebench_model,
         "matched": bool(table_row and cost_row),
+        "matchStatus": (
+            "matched" if table_row and cost_row
+            else "no_exact_match_in_pinned_release" if livebench_model
+            else "no_verified_exact_mapping"
+        ),
+        "coverageNote": (
+            None if table_row and cost_row
+            else "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed."
+        ),
         "tasks": {},
         "categoryScores": {},
         "overallScore": None,

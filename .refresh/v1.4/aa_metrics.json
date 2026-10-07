@@ -1,7 +1,7 @@
 {
   "schemaVersion": "v1.6",
   "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
-  "observedAt": "2026-09-29T18:16:57Z",
+  "observedAt": "2026-10-07T14:34:13Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
   "primaryEvaluations": [
@@ -13,8 +13,8 @@
     },
     {
       "key": "gdpvalV21",
-      "label": "GDPval-AA v2.1",
-      "aaKey": "gdpvalNormalized",
+      "label": "GDPval-AA v2.1 Elo",
+      "aaKey": "gdpval",
       "weightPct": 10
     },
     {
@@ -78,6 +78,16 @@
       "key": "gpqaDiamond",
       "label": "GPQA Diamond (legacy)",
       "aaKey": "gpqa"
+    },
+    {
+      "key": "briefcaseNormalized",
+      "label": "AA-Briefcase normalized (Elo-500)/2000",
+      "aaKey": "briefcaseNormalizedDisplay"
+    },
+    {
+      "key": "gdpvalV21Normalized",
+      "label": "GDPval-AA v2.1 normalized (Elo-500)/2000",
+      "aaKey": "gdpvalNormalizedDisplay"
     }
   ],
   "providerClaimPolicy": "Use a provider-published value only while the benchmark owner has no result, for the same benchmark version and evaluated model identity; keep claims visibly distinct from owner results.",
@@ -97,6 +107,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.5218400000000001,
+        "gdpvalV21Normalized": 0.50824,
         "briefcaseElo": 1543.68,
         "intelligenceIndex": 52.3863277108782,
         "gdpvalV21": 1516.48,
@@ -114,65 +126,107 @@
         "speed": 51.2224469367779
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -198,6 +252,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "3173fbd5b0e06980572493bb07184a0f8428fb80d6fbd217205629eae1136a94",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -217,6 +274,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.35079499999999997,
+        "gdpvalV21Normalized": 0.455975,
         "briefcaseElo": 1201.59,
         "intelligenceIndex": 40.9262321765904,
         "gdpvalV21": 1411.95,
@@ -234,65 +293,107 @@
         "speed": 238.736904635898
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -318,6 +419,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "f2470096e74c7a87500aa82d2263ff5f7c3acc8fd2470eaa8db114c4e5d8da7a",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -337,6 +441,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.586665,
+        "gdpvalV21Normalized": 0.60396,
         "briefcaseElo": 1673.33,
         "intelligenceIndex": 50.7771115797629,
         "gdpvalV21": 1707.92,
@@ -354,65 +460,107 @@
         "speed": 59.1947249074129
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -438,6 +586,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "7bd1166d5d4c377b53e60b18f5e28ac7d0e66254cbc62124e8d66578e7984c4b",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -457,6 +608,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.49371000000000004,
+        "gdpvalV21Normalized": 0.54395,
         "briefcaseElo": 1487.42,
         "intelligenceIndex": 46.9727068915036,
         "gdpvalV21": 1587.9,
@@ -474,65 +627,107 @@
         "speed": 86.9222003390528
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -558,6 +753,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "49bbb71bdb767e96c81be9103f06bbdc86041af78dae324fbd166c300e46acb7",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -577,6 +775,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.5203949999999999,
+        "gdpvalV21Normalized": 0.547705,
         "briefcaseElo": 1540.79,
         "intelligenceIndex": 49.6258202733378,
         "gdpvalV21": 1595.41,
@@ -594,65 +794,107 @@
         "speed": 62.9274726374674
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -678,6 +920,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "fd59d6b7ea7d8e8a2fde9485f5c223e0c9b91e5e6b42e4dcf16db3e220ad36d1",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -697,6 +942,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.506015,
+        "gdpvalV21Normalized": 0.5718099999999999,
         "briefcaseElo": 1512.03,
         "intelligenceIndex": 44.777392385614,
         "gdpvalV21": 1643.62,
@@ -714,65 +961,107 @@
         "speed": 86.821055031093
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -798,6 +1087,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "faacb003e23ebc6e3d072c84b0773fcc0f34f62df14596ff397b9166d931fc95",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -817,6 +1109,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.50261,
+        "gdpvalV21Normalized": 0.511985,
         "briefcaseElo": 1505.22,
         "intelligenceIndex": 43.5938229518782,
         "gdpvalV21": 1523.97,
@@ -834,61 +1128,101 @@
         "speed": null
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3"
+          "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -914,6 +1248,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "8a8d790854d1529f3f6dad071856a648fbe1ae8e2f731fd8cf677fb82c643e32",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -933,6 +1270,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.49363999999999997,
+        "gdpvalV21Normalized": 0.5524199999999999,
         "briefcaseElo": 1487.28,
         "intelligenceIndex": 42.836322654063,
         "gdpvalV21": 1604.84,
@@ -950,65 +1289,107 @@
         "speed": 63.7335477757439
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -1034,6 +1415,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "d706dc084bcca00fece5d76dbd708ec3880c4b57d7a74ccafd20aaa77f56ed21",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1053,6 +1437,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.42089,
+        "gdpvalV21Normalized": 0.47157000000000004,
         "briefcaseElo": 1341.78,
         "intelligenceIndex": 37.3244239690841,
         "gdpvalV21": 1443.14,
@@ -1070,65 +1456,107 @@
         "speed": 118.222437020143
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -1154,6 +1582,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "80ee77b0f245f7a6a2b33b75ccf5deeb434cced81d0a05155ca7f927cd8deec2",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1173,6 +1604,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.31859000000000004,
+        "gdpvalV21Normalized": 0.41794500000000007,
         "briefcaseElo": 1137.18,
         "intelligenceIndex": 38.3556437590607,
         "gdpvalV21": 1335.89,
@@ -1190,65 +1623,107 @@
         "speed": 96.1673942625436
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -1274,6 +1749,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "3ae24a5187e1b0b169db7f5ff3a393929091aff161670cbd768e871b2e4b7f4b",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1293,6 +1771,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": null,
+        "gdpvalV21Normalized": 0.41978999999999994,
         "briefcaseElo": null,
         "intelligenceIndex": 39.617751842555,
         "gdpvalV21": 1339.58,
@@ -1310,46 +1790,72 @@
         "speed": 286.587474801999
       },
       "metricSources": {
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner_estimate",
           "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null,
           "status": "estimated"
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "estimated",
@@ -1414,6 +1920,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "96971349e1187e88909e9cff4a29c5db891a6d00ea3efc5f197936718907cc16",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1433,6 +1942,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.47623000000000004,
+        "gdpvalV21Normalized": 0.57039,
         "briefcaseElo": 1452.46,
         "intelligenceIndex": 41.807466113455,
         "gdpvalV21": 1640.78,
@@ -1450,65 +1961,107 @@
         "speed": 49.2012048676186
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-3-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -1534,6 +2087,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "b896bfb2a5acdff5898e794ba7ba60b5e933d437c401a2a7410182c2e82b1c24",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1553,6 +2109,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.37884500000000004,
+        "gdpvalV21Normalized": 0.47071,
         "briefcaseElo": 1257.69,
         "intelligenceIndex": 35.9967791278402,
         "gdpvalV21": 1441.42,
@@ -1570,65 +2128,107 @@
         "speed": 83.8601724685335
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -1654,6 +2254,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "278b4e7b511d04cd5f854444e9815e1d452f72181425263aa093823179ea41e3",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1673,6 +2276,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.4104,
+        "gdpvalV21Normalized": 0.46915999999999997,
         "briefcaseElo": 1320.8,
         "intelligenceIndex": 41.7899103794639,
         "gdpvalV21": 1438.32,
@@ -1690,65 +2295,107 @@
         "speed": 52.8133866295498
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-4-8",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -1774,6 +2421,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "9db1b05b1d929bb17c9acc142d8b48c6d2e3c9df0783eaa73c5faa2de75f5594",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1793,6 +2443,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.563105,
+        "gdpvalV21Normalized": 0.58386,
         "briefcaseElo": 1626.21,
         "intelligenceIndex": 45.4152084980521,
         "gdpvalV21": 1667.72,
@@ -1810,65 +2462,107 @@
         "speed": 38.238240940991
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max"
+          "sourceUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -1894,6 +2588,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "7562fa95ebbb4b7d1af951424a9870be987e7f16e68c9c0932dac5babe5b6838",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -1913,6 +2610,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.41666,
+        "gdpvalV21Normalized": 0.49080999999999997,
         "briefcaseElo": 1333.32,
         "intelligenceIndex": 39.5758607970943,
         "gdpvalV21": 1481.62,
@@ -1930,65 +2629,107 @@
         "speed": 240.062257356533
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2014,6 +2755,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "e59d70c2042488bf5524ceb3106070540db096ed65cb67c3549c576f9f1c28f7",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -2033,6 +2777,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.429595,
+        "gdpvalV21Normalized": 0.4746,
         "briefcaseElo": 1359.19,
         "intelligenceIndex": 38.1638712882576,
         "gdpvalV21": 1449.2,
@@ -2050,65 +2796,107 @@
         "speed": 76.7596133703732
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2134,6 +2922,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "b3899ebca7e4025e91f12c839c68916670b386252c9c4de9fb869c172cb18b8a",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -2153,6 +2944,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.37829499999999994,
+        "gdpvalV21Normalized": 0.46328499999999995,
         "briefcaseElo": 1256.59,
         "intelligenceIndex": 34.3305129347816,
         "gdpvalV21": 1426.57,
@@ -2170,65 +2963,107 @@
         "speed": 226.746593603026
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2274,6 +3109,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "05d376b62686fcbb0ea1cc1c548f616dc73894de1db2c71af327a8afb8c20f82",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -2293,6 +3131,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.22523,
+        "gdpvalV21Normalized": 0.38233500000000004,
         "briefcaseElo": 950.46,
         "intelligenceIndex": 33.9785928920714,
         "gdpvalV21": 1264.67,
@@ -2310,65 +3150,107 @@
         "speed": 185.431181180171
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-6-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2394,6 +3276,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "4a75124303ec92d3ba47854a5f64ac9a2e5dde6f06d6b4cddd35cf5d99cac658",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -2413,6 +3298,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.365115,
+        "gdpvalV21Normalized": 0.42876,
         "briefcaseElo": 1230.23,
         "intelligenceIndex": 33.7054572377545,
         "gdpvalV21": 1357.52,
@@ -2430,65 +3317,107 @@
         "speed": 79.500521743421
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2"
+          "sourceUrl": "https://artificialanalysis.ai/models/glm-5-2",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2514,6 +3443,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "c61f497205c378c8d561dfd9f77294795dab51244c4f2842dcfca1d228960c6c",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -2533,6 +3465,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.18594999999999998,
+        "gdpvalV21Normalized": 0.3424,
         "briefcaseElo": 871.9,
         "intelligenceIndex": 32.5983283695905,
         "gdpvalV21": 1184.8,
@@ -2550,65 +3484,107 @@
         "speed": 196.28536461574
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash"
+          "sourceUrl": "https://artificialanalysis.ai/models/gemini-3-5-flash",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2634,6 +3610,9 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": "32e7e69237f0ef51b8b1e102b74fe57ec8f1b3b228c0d15d450639181f035015",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
@@ -2653,6 +3632,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.660925,
+        "gdpvalV21Normalized": 0.673085,
         "briefcaseElo": 1821.85,
         "intelligenceIndex": 57.6223698102963,
         "gdpvalV21": 1846.17,
@@ -2670,61 +3651,101 @@
         "speed": 92.5191493491242
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+          "observedAt": "2026-09-29T15:16:40Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2750,8 +3771,11 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T15:16:40Z",
+        "precision": null,
+        "note": null,
         "responseSha256": null,
-        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+        "method": "Built-in browser read of the official page's currentModel payload; raw HTML not retained."
       }
     },
     "gpt-6-sol": {
@@ -2769,6 +3793,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.49139,
+        "gdpvalV21Normalized": 0.493465,
         "briefcaseElo": 1482.78,
         "intelligenceIndex": 47.5276426437724,
         "gdpvalV21": 1486.93,
@@ -2786,61 +3812,101 @@
         "speed": 78.1139895681029
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-sol",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2866,8 +3932,11 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T18:12:25Z",
+        "precision": null,
+        "note": null,
         "responseSha256": null,
-        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+        "method": "Rendered official profile currentModel payload read in Codex in-app browser; raw HTML not retained."
       }
     },
     "gpt-6-luna": {
@@ -2885,6 +3954,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.399615,
+        "gdpvalV21Normalized": 0.433545,
         "briefcaseElo": 1299.23,
         "intelligenceIndex": 37.2559686869738,
         "gdpvalV21": 1367.09,
@@ -2902,61 +3973,101 @@
         "speed": 148.457536628083
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -2982,8 +4093,11 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T18:12:25Z",
+        "precision": null,
+        "note": null,
         "responseSha256": null,
-        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+        "method": "Rendered official profile currentModel payload read in Codex in-app browser; raw HTML not retained."
       }
     },
     "grok-4.7": {
@@ -3001,6 +4115,8 @@
       },
       "isReasoning": true,
       "metrics": {
+        "briefcaseNormalized": 0.5786,
+        "gdpvalV21Normalized": 0.597605,
         "briefcaseElo": 1657.2,
         "intelligenceIndex": 46.4465506302286,
         "gdpvalV21": 1695.21,
@@ -3018,61 +4134,101 @@
         "speed": 70.6406219593259
       },
       "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
+        },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7"
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-7",
+          "observedAt": "2026-09-29T18:12:25Z",
+          "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
@@ -3098,8 +4254,361 @@
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-09-29T18:12:25Z",
+        "precision": null,
+        "note": null,
         "responseSha256": null,
-        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+        "method": "Rendered official profile currentModel payload read in Codex in-app browser; raw HTML not retained."
+      }
+    },
+    "mimo-v2-6-pro": {
+      "id": "mimo-v2-6-pro",
+      "displayName": "MiMo-V2.6-Pro",
+      "aaSlug": "mimo-v2-6-pro",
+      "aaName": "MiMo-V2.6-Pro",
+      "aaShortName": "MiMo-V2.6-Pro",
+      "aaVariant": null,
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "release": null,
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.51,
+        "gdpvalV21Normalized": 0.59,
+        "briefcaseElo": 1516.0,
+        "intelligenceIndex": 46.0,
+        "gdpvalV21": 1686.0,
+        "automationBenchAA": 0.59,
+        "terminalBenchV40": 0.35,
+        "scicode": 0.61,
+        "gdpPdfAllPass": 0.19,
+        "aaLcr": 0.86,
+        "hle": 0.49,
+        "gpqaDiamond": null,
+        "critpt": 0.27,
+        "omniAccuracy": 0.35,
+        "omniNonHallucination": 0.59,
+        "aaEvalCost": 206.66,
+        "speed": 40.1
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded, whole Elo"
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded, whole Elo"
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "public tooltip, USD cents"
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "profile display, one decimal"
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [
+        {
+          "claimId": "xiaomi-mimo-v26-pro-deepswe-20260922",
+          "benchmark": "DeepSWE",
+          "benchmarkVersion": "not established as AA DeepSWE v1.1",
+          "component": "deepswePassAt1",
+          "cohortModelId": "mimo-v2-6-pro",
+          "evaluatedModel": "MiMo-V2.6-Pro",
+          "providerVariant": "reasoning configuration not independently matched to AA",
+          "value": 0.719,
+          "valuePct": 71.9,
+          "sourceType": "model_provider_claim",
+          "publisher": "Xiaomi",
+          "publishedOn": "2026-09-22",
+          "sourceUrl": "https://mimo.xiaomi.com/mimo-v2-6",
+          "eligibleForRanking": false,
+          "eligibilityReason": "Provider launch claim retained separately. Exact benchmark-version, harness and evaluated-variant equivalence to the selected AA Coding Agent Index DeepSWE v1.1 configuration has not been established; no AA owner result is substituted."
+        }
+      ],
+      "supplemental": {
+        "mlcrOverall": null,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.59,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": null,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1516.0
+      },
+      "extraction": {
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-07T14:26:41Z",
+        "precision": "display-rounded",
+        "note": "Index and component values are display-rounded owner results. Briefcase and GDPval whole Elo are separately observed in owner charts, not reverse-converted from normalized percentages. Total evaluation cost comes from the total-cost tooltip, not token prices or cost per task.",
+        "responseSha256": null,
+        "method": "Rendered official model profile, Intelligence Index component chart, GDPval-AA Elo chart and public total-cost tooltip read in Codex in-app browser; currentModel payload not used."
+      }
+    },
+    "mimo-v2-6-flash": {
+      "id": "mimo-v2-6-flash",
+      "displayName": "MiMo-V2.6-Flash",
+      "aaSlug": "mimo-v2-6-flash",
+      "aaName": "MiMo-V2.6-Flash",
+      "aaShortName": "MiMo-V2.6-Flash",
+      "aaVariant": null,
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+      "release": null,
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.5,
+        "gdpvalV21Normalized": 0.56,
+        "briefcaseElo": 1495.0,
+        "intelligenceIndex": 38.0,
+        "gdpvalV21": 1611.0,
+        "automationBenchAA": 0.64,
+        "terminalBenchV40": 0.23,
+        "scicode": 0.51,
+        "gdpPdfAllPass": 0.09,
+        "aaLcr": 0.74,
+        "hle": 0.35,
+        "gpqaDiamond": null,
+        "critpt": 0.12,
+        "omniAccuracy": 0.27,
+        "omniNonHallucination": 0.46,
+        "aaEvalCost": 109.41,
+        "speed": 56.4
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded, whole Elo"
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded, whole Elo"
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "display-rounded"
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "public tooltip, USD cents"
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+          "observedAt": "2026-10-07T14:26:41Z",
+          "precision": "profile display, one decimal"
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [
+        {
+          "claimId": "xiaomi-mimo-v26-flash-deepswe-20260922",
+          "benchmark": "DeepSWE",
+          "benchmarkVersion": "not established as AA DeepSWE v1.1",
+          "component": "deepswePassAt1",
+          "cohortModelId": "mimo-v2-6-flash",
+          "evaluatedModel": "MiMo-V2.6-Flash",
+          "providerVariant": "reasoning configuration not independently matched to AA",
+          "value": 0.679,
+          "valuePct": 67.9,
+          "sourceType": "model_provider_claim",
+          "publisher": "Xiaomi",
+          "publishedOn": "2026-09-22",
+          "sourceUrl": "https://mimo.xiaomi.com/mimo-v2-6",
+          "eligibleForRanking": false,
+          "eligibilityReason": "Provider launch claim retained separately. Exact benchmark-version, harness and evaluated-variant equivalence to the selected AA Coding Agent Index DeepSWE v1.1 configuration has not been established; no AA owner result is substituted."
+        }
+      ],
+      "supplemental": {
+        "mlcrOverall": null,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.64,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": null,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1495.0
+      },
+      "extraction": {
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": ".refresh/v1.4/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-07T14:26:41Z",
+        "precision": "display-rounded",
+        "note": "Index and component values are display-rounded owner results. Briefcase and GDPval whole Elo are separately observed in owner charts, not reverse-converted from normalized percentages. Total evaluation cost comes from the total-cost tooltip, not token prices or cost per task.",
+        "responseSha256": null,
+        "method": "Rendered official model profile, Intelligence Index component chart, GDPval-AA Elo chart and public total-cost tooltip read in Codex in-app browser; currentModel payload not used."
       }
     }
   }

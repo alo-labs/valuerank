@@ -1,11 +1,11 @@
 # ValueRank Methodology
 
-**Version:** v1.9.3
-**Updated:** September 30, 2026
+**Version:** v1.9.4
+**Updated:** October 8, 2026
 
 ## Cohort and source versions
 
-The model universe is the **25-model AA-mapped ValueRank comparison roster**. AA's Coding Agent Index v1.5 chart publishes **25 DeepSWE v1.1 configurations** across **113 tasks**. The primary rank contains **13 models** with both an exact chart model-variant result and an eligible Bug Hunt owner result; all other candidates remain visible without a composite rank. Each chart result retains its displayed model variant, agent, and effort.
+The model universe is the **27-model AA-mapped ValueRank comparison roster**. AA's Coding Agent Index v1.5 chart publishes **25 DeepSWE v1.1 configurations** across **113 tasks**. The primary rank contains **13 models** with both an exact chart model-variant result and an eligible Bug Hunt owner result; all other candidates remain visible without a composite rank. Each chart result retains its displayed model variant, agent, and effort.
 
 - DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the 25 visible configurations and exact-variant mapping decisions are pinned in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
 - AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current Artificial Analysis Intelligence Index v4.3.2.
@@ -13,7 +13,7 @@ The model universe is the **25-model AA-mapped ValueRank comparison roster**. AA
 - LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **7be9f746f36a6f007dd78461f67cb7d06cfe2304**.
 - Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with 15 official rows, **11** direct cohort matches, and **1** eligible provider claim.
 
-Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v1.9.3.
+Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v1.9.4.
 
 ## Primary dimensions
 
@@ -64,15 +64,15 @@ The default API Costs basis uses each model's AA total evaluation cost in USD. P
 - AA output speed covers **12/13** selected pages; **Kimi K3** is missing, so Speed is excluded under the zero-gap rule.
 - GPQA Diamond remains an explicitly labelled legacy ValueRank input; it is not a component of the v4.3.2 source composite.
 - AA total evaluation cost is available for **13/13** ranked models; the cost component uses **AA evaluation cost only** consistently across this cohort.
-- LiveBench Instruction Following is available for **9/13** ranked models and is scored. Terminal-Bench 4.0 remains supplemental because it has gaps in this cohort.
-- Bug Hunt Bench has **20/25** exact owner results; **13** also have an exact AA DeepSWE model-variant result and enter the primary composite at **17.86%**. 12 candidates without the full overlap are not ranked.
+- LiveBench Instruction Following is available for **12/13** ranked models and is scored. Terminal-Bench 4.0 remains supplemental because it has gaps in this cohort.
+- Bug Hunt Bench has **21/27** exact owner results; **13** also have an exact AA DeepSWE model-variant result and enter the primary composite at **17.86%**. 14 candidates without the full overlap are not ranked.
 
 Dropped candidate dimensions:
 
 | Dimension | Missing models | Decision |
 |---|---|---|
 | Terminal-Bench 4.0 | Kimi K3, Qwen3.8 Max, Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
-| Instruction Following (LiveBench) | Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
+| Instruction Following (LiveBench) | Claude Opus 5.5 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
 | GPQA Diamond (legacy) | Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, Grok 4.7 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
 | Speed | Kimi K3 | incomplete coverage within the exact Bug Hunt matched cohort; values remain null and are not neutral-filled |
 
@@ -96,9 +96,9 @@ Overall Score is the weighted sum of all retained dimensions. Quality Score remo
 
 [Artificial Analysis Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, EnterpriseOpsGym, ITBench SRE, and legacy fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json. AA-Briefcase, GDP.pdf, AutomationBench-AA, and AA's Terminal-Bench 4.0 evaluation are v4.3.2 source components, not standalone ValueRank dimensions. GPQA Diamond and the old τ³-Banking/TB2.1 fields are separately labelled legacy data.
 
-[LiveBench](https://livebench.ai/) is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the 21 matched cohort rows plus 1 official supplemental model: Claude Fable 5.1.
+[LiveBench](https://livebench.ai/) is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the 24 matched cohort rows plus 1 official supplemental model: Claude Fable 5.1.
 
-[Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) is incorporated as the current external terminal-agent source. The official page shows 15 owner rows; a separate provider-claim row is included for the current DeepSeek V4 Flash API alias and is explicitly labelled. Together they provide 12/25 eligible cohort values, leaving 13 gaps.
+[Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) is incorporated as the current external terminal-agent source. The official page shows 15 owner rows; a separate provider-claim row is included for the current DeepSeek V4 Flash API alias and is explicitly labelled. Together they provide 12/27 eligible cohort values, leaving 15 gaps.
 
 ## Provider claim policy
 
@@ -106,11 +106,11 @@ When the benchmark owner has not published a result for a model, ValueRank uses 
 
 ## Bug Hunt Bench scoring
 
-Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **0630b120a81363c343ed7dfaf3c6d3be7f7da38c** and provides **20/25** exact results in the AA-mapped comparison roster. **13** of those also have an exact AA DeepSWE v1.1 model-variant result, so both values enter the main 13-model composite at Bug Hunt priority **20** (**17.86%**).
+Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **0630b120a81363c343ed7dfaf3c6d3be7f7da38c** and provides **21/27** exact results in the AA-mapped comparison roster. **13** of those also have an exact AA DeepSWE v1.1 model-variant result, so both values enter the main 13-model composite at Bug Hunt priority **20** (**17.86%**).
 
 The companion Bug Hunt emphasis ranking uses the same 13-model exact-overlap cohort and re-ranks the other retained dimensions within those models. It gives Bug Hunt priority **30** out of **122**, or **24.59%**. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
 
-The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. The 12 models without the full AA DeepSWE and Bug Hunt overlap remain unranked; some have only one of those results. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
+The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. The 14 models without the full AA DeepSWE and Bug Hunt overlap remain unranked; some have only one of those results. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
 
 ## Limitations
 

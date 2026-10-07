@@ -16,8 +16,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 REFRESH = ROOT / ".refresh" / "v1.4"
-VERSION = "v1.9.3"
-PUBLISH_DATE = "September 30, 2026"
+VERSION = "v1.9.4"
+PUBLISH_DATE = "October 8, 2026"
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
 DEEPSWE_PRIORITY = 25
@@ -48,6 +48,8 @@ DEVELOPER = {
     "GPT-6 Sol": "OpenAI",
     "GPT-6 Luna": "OpenAI",
     "Grok 4.7": "xAI",
+    "MiMo-V2.6-Pro": "Xiaomi",
+    "MiMo-V2.6-Flash": "Xiaomi",
 }
 
 SHORT = {
@@ -76,6 +78,8 @@ SHORT = {
     "GPT-6 Sol": "GPT-6 Sol",
     "GPT-6 Luna": "GPT-6 Luna",
     "Grok 4.7": "Grok 4.7",
+    "MiMo-V2.6-Pro": "MiMo V2.6 Pro",
+    "MiMo-V2.6-Flash": "MiMo V2.6 Flash",
 }
 
 # The priority values are ValueRank's combined score priorities, not the
@@ -297,9 +301,11 @@ def main() -> int:
             "aaVariant": aa_model.get("aaVariant"),
             "aaEvalCost": aa_metrics.get("aaEvalCost"),
             "briefcaseElo": aa_metrics.get("briefcaseElo"),
+            "briefcaseNormalized": aa_metrics.get("briefcaseNormalized"),
             "intelligenceIndex": aa_metrics.get("intelligenceIndex"),
             "intelligenceIndexStatus": aa_model.get("intelligenceIndexStatus", "measured"),
             "gdpvalV21": aa_metrics.get("gdpvalV21"),
+            "gdpvalV21Normalized": aa_metrics.get("gdpvalV21Normalized"),
             "automationBenchAA": aa_metrics.get("automationBenchAA"),
             "aaTerminalBenchV40": aa_metrics.get("terminalBenchV40"),
             "aaTerminalBenchV21": supplemental.get("terminalBenchV21"),
@@ -422,8 +428,30 @@ def main() -> int:
         row["dims"] = {}
         row["rankingEligible"] = row["id"] in primary_ids
         row["missingFields"] = [key for key, _label, _higher, _priority in CANDIDATES if row.get(key) is None]
-        if not row["rankingEligible"]:
+        row["rankingExclusionReasons"] = []
+        if row["bugHunt"].get("matched") is not True:
             row["missingFields"].append("bugHuntFixedOf105")
+            if row["bugHunt"].get("matchStatus") == "reasoning_variant_unverified":
+                owner_configurations = row["bugHunt"].get("availableOwnerConfigurations", [])
+                available_scores = [
+                    f"{config['fixedOf105']:g}/105"
+                    for config in owner_configurations
+                    if isinstance(config.get("fixedOf105"), (int, float))
+                    and not isinstance(config.get("fixedOf105"), bool)
+                ]
+                owner_result_note = (
+                    f"owner default result {', '.join(available_scores)} available"
+                    if available_scores else "owner default result available"
+                )
+                row["rankingExclusionReasons"].append(
+                    "No eligible exact-variant Bug Hunt match; " + owner_result_note
+                    + "; selected reasoning equivalence is unverified"
+                )
+            else:
+                row["rankingExclusionReasons"].append("No eligible exact-model Bug Hunt result in the selected source snapshot")
+        if row.get("deepswePassAt1Pct") is None:
+            row["rankingExclusionReasons"].append("No exact-variant AA DeepSWE result in the selected source snapshot")
+        if not row["rankingEligible"]:
             row["rank"] = None
             row["qualityRank"] = None
             row["overallScore"] = None
@@ -650,6 +678,10 @@ def main() -> int:
         "cohortN": len(primary_rows),
         "sourceCohortN": len(rows),
         "rankingExcludedModels": [row["name"] for row in unranked_rows],
+        "rankingExclusions": [
+            {"modelId": row["id"], "name": row["name"], "reasons": row["rankingExclusionReasons"]}
+            for row in unranked_rows
+        ],
         "costMode": cost_mode,
         "costCoverage": {
             "availableN": len(aa_cost_rows),
@@ -687,6 +719,7 @@ def main() -> int:
         "cohortN": len(primary_rows),
         "sourceCohortN": len(rows),
         "rankingExcludedModels": [row["name"] for row in unranked_rows],
+        "rankingExclusions": coverage_document["scoring"]["rankingExclusions"],
         "deepsweSource": deepswe_chart["source"],
         "deepsweObservedAt": deepswe_chart["observedAt"],
         "deepsweBenchmarkVersion": deepswe_chart["benchmark"],

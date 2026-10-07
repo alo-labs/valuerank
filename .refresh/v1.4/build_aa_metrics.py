@@ -29,7 +29,7 @@ COVERAGE_PATH = REFRESH / "coverage_matrix.json"
 
 PRIMARY_EVALUATIONS = [
     {"key": "briefcaseElo", "label": "AA-Briefcase", "aaKey": "briefcaseBreakdown.overall.elo", "weightPct": 15},
-    {"key": "gdpvalV21", "label": "GDPval-AA v2.1", "aaKey": "gdpvalNormalized", "weightPct": 10},
+    {"key": "gdpvalV21", "label": "GDPval-AA v2.1 Elo", "aaKey": "gdpval", "weightPct": 10},
     {"key": "automationBenchAA", "label": "AutomationBench-AA", "aaKey": "automationBenchPartialScore", "weightPct": 5},
     {"key": "terminalBenchV40", "label": "Terminal-Bench 4.0 (AA evaluation)", "aaKey": "terminalBench40", "weightPct": 10},
     {"key": "scicode", "label": "SciCode", "aaKey": "scicode", "weightPct": 10},
@@ -49,6 +49,8 @@ PRIMARY_EVALUATIONS = [
 
 ADDITIONAL_FIELDS = [
     {"key": "gpqaDiamond", "label": "GPQA Diamond (legacy)", "aaKey": "gpqa"},
+    {"key": "briefcaseNormalized", "label": "AA-Briefcase normalized (Elo-500)/2000", "aaKey": "briefcaseNormalizedDisplay"},
+    {"key": "gdpvalV21Normalized", "label": "GDPval-AA v2.1 normalized (Elo-500)/2000", "aaKey": "gdpvalNormalizedDisplay"},
 ]
 
 # These fields are exposed by the page when available, but are not part of the
@@ -197,11 +199,13 @@ def main() -> int:
         cost = current.get("intelligenceIndexCost") or {}
         briefcase = current.get("briefcaseBreakdown") or {}
         metrics = {
+            "briefcaseNormalized": clean_number(current.get("briefcaseNormalizedDisplay")),
+            "gdpvalV21Normalized": clean_number(current.get("gdpvalNormalizedDisplay", current.get("gdpvalNormalized"))),
             "briefcaseElo": clean_number(
                 current.get("briefcaseElo", json_value(briefcase, "overall.elo"))
             ),
             "intelligenceIndex": clean_number(current.get("intelligenceIndex")),
-            "gdpvalV21": clean_number(current.get("gdpval") if current.get("gdpval") is not None else current.get("gdpvalNormalized")),
+            "gdpvalV21": clean_number(current.get("gdpval")),
             "automationBenchAA": clean_number(current.get("automationBenchPartialScore")),
             "terminalBenchV40": clean_number(current.get("terminalBench40", current.get("terminalbench40"))),
             "scicode": clean_number(current.get("scicode")),
@@ -227,10 +231,28 @@ def main() -> int:
                 current.get("speed") if current.get("speed") is not None else json_value(current, "outputSpeedVariance.median")
             ) if snapshot_entry else summary_speed(text),
         }
+        if metrics["briefcaseNormalized"] is None and metrics["briefcaseElo"] is not None:
+            metrics["briefcaseNormalized"] = (metrics["briefcaseElo"] - 500.0) / 2000.0
         selected_variant = (current.get("effort") or {}).get("slug")
         index_is_estimated = current.get("intelligenceIndexIsEstimated") is True
+        source_observed_at = (
+            snapshot_entry.get("capture", {}).get("observedAt")
+            or snapshot_entry.get("capture", {}).get("capturedAt")
+            or snapshot_document.get("capturedAt")
+        ) if snapshot_entry else None
         metric_sources = {
-            key: {"sourceType": "benchmark_owner", "sourceUrl": source_url}
+            key: {
+                "sourceType": "benchmark_owner",
+                "sourceUrl": (
+                    snapshot_entry.get("capture", {}).get("metricSourceUrls", {}).get(key)
+                    or source_url
+                ) if snapshot_entry else source_url,
+                "observedAt": source_observed_at,
+                "precision": (
+                    snapshot_entry.get("capture", {}).get("metricPrecision", {}).get(key)
+                    or snapshot_entry.get("capture", {}).get("precision")
+                ) if snapshot_entry else None,
+            }
             for key, value in metrics.items() if value is not None
         }
         if index_is_estimated and "intelligenceIndex" in metric_sources:
@@ -278,22 +300,31 @@ def main() -> int:
             "aaSlug": current.get("slug", slug),
             "aaName": current.get("name"),
             "aaShortName": current.get("shortName"),
-            "aaVariant": current.get("effort", {}).get("slug"),
+            "aaVariant": (current.get("effort") or {}).get("slug"),
             "aaUrl": source_url,
             "release": current.get("release"),
             "isReasoning": current.get("isReasoning"),
             "metrics": metrics,
             "metricSources": metric_sources,
-            "intelligenceIndexStatus": "estimated" if index_is_estimated else "measured",
+            "intelligenceIndexStatus": (
+                "missing" if metrics["intelligenceIndex"] is None
+                else "estimated" if index_is_estimated
+                else "measured"
+            ),
             "providerClaims": model_claims,
             "supplemental": supplemental,
             "extraction": {
                 "htmlSnapshot": str(html_path.relative_to(ROOT)) if html_path else None,
                 "textSnapshot": str(text_path.relative_to(ROOT)) if text_path else None,
                 "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot_entry else None,
+                "sourceObservedAt": source_observed_at,
+                "precision": snapshot_entry.get("capture", {}).get("precision") if snapshot_entry else None,
+                "note": snapshot_entry.get("capture", {}).get("note") if snapshot_entry else None,
                 "responseSha256": snapshot_entry.get("capture", {}).get("responseSha256") if snapshot_entry else None,
                 "method": (
-                    "captured currentModel object from first-party page payload; raw HTML not retained"
+                    snapshot_entry.get("capture", {}).get("method")
+                    or snapshot_entry.get("capture", {}).get("captureMethod")
+                    or "captured currentModel object from first-party page payload; raw HTML not retained"
                     if snapshot_entry
                     else "decoded currentModel object from first-party page payload"
                 ),
