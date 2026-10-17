@@ -1,0 +1,17 @@
+{"call":"chromium.launch","options":{"headless":true}}
+{"call":"browser.newPage","options":{"viewport":{"width":1200,"height":630},"deviceScaleFactor":1}}
+{"call":"page.goto","url":"file://<ROOT>/.tmp/og/home.html","options":{"waitUntil":"networkidle"}}
+{"call":"page.waitForTimeout","ms":900}
+{"call":"page.screenshot","path":"<ROOT>/site/og.png","type":"png"}
+{"call":"page.close"}
+{"call":"browser.newPage","options":{"viewport":{"width":1200,"height":630},"deviceScaleFactor":1}}
+{"call":"page.goto","url":"file://<ROOT>/.tmp/og/coding-agents.html","options":{"waitUntil":"networkidle"}}
+{"call":"page.waitForTimeout","ms":900}
+{"call":"page.screenshot","path":"<ROOT>/site/coding-agents/og.png","type":"png"}
+{"call":"page.close"}
+{"call":"browser.newPage","options":{"viewport":{"width":1200,"height":630},"deviceScaleFactor":1}}
+{"call":"page.goto","url":"file://<ROOT>/.tmp/og/tb4.html","options":{"waitUntil":"networkidle"}}
+{"call":"page.waitForTimeout","ms":900}
+{"call":"page.screenshot","path":"<ROOT>/site/tb4/og.png","type":"png"}
+{"call":"page.close"}
+{"call":"browser.close"}

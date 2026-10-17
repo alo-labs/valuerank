@@ -7,12 +7,8 @@ import re
 import sys
 from pathlib import Path
 
-from valuerank.clock import utcnow
+from valuerank.clock import iso_z
 
-
-source_path = Path(sys.argv[1])
-output_path = Path(sys.argv[2])
-payload = json.loads(source_path.read_text(encoding="utf-8"))
 
 DISPLAY = {
     "gpt-6-astra": "GPT-6 Astra",
@@ -43,7 +39,7 @@ def parse_percent(value: str) -> tuple[float, str | None]:
     match = re.match(r"([\d.]+)%", value)
     if not match:
         raise ValueError(f"invalid DeepSWE percentage: {value!r}")
-    uncertainty = re.search(r"±([\d.]+)%", value)
+    uncertainty = re.search(r"±\s*([\d.]+)%", value)
     return float(match.group(1)), uncertainty.group(1) if uncertainty else None
 
 
@@ -83,59 +79,70 @@ def parse_card(card: str) -> dict | None:
     }
 
 
-models = []
-for card in payload.get("cards") or []:
-    model = parse_card(card)
-    if model:
-        models.append(model)
+def main(argv: list[str] | None = None) -> int:
+    args = sys.argv[1:] if argv is None else argv
+    source_path = Path(args[0])
+    output_path = Path(args[1])
+    payload = json.loads(source_path.read_text(encoding="utf-8"))
 
-if len(models) != 21:
-    raise SystemExit(f"expected 21 current Best cards, parsed {len(models)}")
+    models = []
+    for card in payload.get("cards") or []:
+        model = parse_card(card)
+        if model:
+            models.append(model)
 
-seen: set[str] = set()
-unique = []
-for model in models:
-    if model["slug"] not in seen:
-        seen.add(model["slug"])
-        unique.append(model)
-for rank, model in enumerate(unique, start=1):
-    model["rank"] = rank
+    if len(models) != 21:
+        raise SystemExit(f"expected 21 current Best cards, parsed {len(models)}")
 
-text = payload.get("textSample") or ""
-source_update = re.search(r"updated\s+([A-Z][a-z]+\s+\d{1,2},\s+\d{4})", text, re.IGNORECASE)
-tasks = re.search(r"(\d+)\s+tasks", text)
-repositories = re.search(r"(\d+)\s+repos", text)
-languages = re.search(r"(\d+)\s+languages", text)
-models_total = re.search(r"models\s+(\d+)", text)
-configs = re.search(r"Configs\s*\(([^)]+)\)", text)
+    seen: set[str] = set()
+    unique = []
+    for model in models:
+        if model["slug"] not in seen:
+            seen.add(model["slug"])
+            unique.append(model)
+    for rank, model in enumerate(unique, start=1):
+        model["rank"] = rank
 
-output = {
-    "version": "v1.1",
-    "observedAt": payload.get("scrapedAt") or utcnow().isoformat(),
-    "source": "https://deepswe.datacurve.ai/",
-    "sourceSnapshot": str(source_path),
-    "leaderboard": "Best",
-    "sourceUpdatedOn": source_update.group(1) if source_update else None,
-    "tasks": int(tasks.group(1)) if tasks else None,
-    "repositories": int(repositories.group(1)) if repositories else None,
-    "languages": int(languages.group(1)) if languages else None,
-    "modelCatalog": int(models_total.group(1)) if models_total else None,
-    "configsShown": configs.group(1) if configs else None,
-    "selectionRule": "Current rows in the DeepSWE Best tab, preserving the source table order and effort level; no family collapse or score imputation.",
-    "methodology": {
-        "harness": "mini-swe-agent",
-        "taskDesign": "Original contamination-free engineering tasks",
-        "verification": "Hand-written behavioral verifiers",
-    },
-    "historicalExclusionsNotOnRoster": [
-        "Grok-Build-0.1",
-        "Gemini 3 Flash",
-        "Claude Opus 4.6",
-    ],
-    "n": len(unique),
-    "models": unique,
-}
+    text = payload.get("textSample") or ""
+    source_update = re.search(r"updated\s+([A-Z][a-z]+\s+\d{1,2},\s+\d{4})", text, re.IGNORECASE)
+    tasks = re.search(r"(\d+)\s+tasks", text)
+    repositories = re.search(r"(\d+)\s+repos", text)
+    languages = re.search(r"(\d+)\s+languages", text)
+    models_total = re.search(r"models\s+(\d+)", text)
+    configs = re.search(r"Configs\s*\(([^)]+)\)", text)
 
-output_path.parent.mkdir(parents=True, exist_ok=True)
-output_path.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
-print(json.dumps({"n": len(unique), "sourceUpdatedOn": output["sourceUpdatedOn"], "models": [(m["rank"], m["displayName"], m["passAt1Pct"], m["avgCost"], m["effort"]) for m in unique]}, indent=2))
+    output = {
+        "version": "v1.1",
+        "observedAt": payload.get("scrapedAt") or iso_z(),
+        "source": "https://deepswe.datacurve.ai/",
+        "sourceSnapshot": str(source_path),
+        "leaderboard": "Best",
+        "sourceUpdatedOn": source_update.group(1) if source_update else None,
+        "tasks": int(tasks.group(1)) if tasks else None,
+        "repositories": int(repositories.group(1)) if repositories else None,
+        "languages": int(languages.group(1)) if languages else None,
+        "modelCatalog": int(models_total.group(1)) if models_total else None,
+        "configsShown": configs.group(1) if configs else None,
+        "selectionRule": "Current rows in the DeepSWE Best tab, preserving the source table order and effort level; no family collapse or score imputation.",
+        "methodology": {
+            "harness": "mini-swe-agent",
+            "taskDesign": "Original contamination-free engineering tasks",
+            "verification": "Hand-written behavioral verifiers",
+        },
+        "historicalExclusionsNotOnRoster": [
+            "Grok-Build-0.1",
+            "Gemini 3 Flash",
+            "Claude Opus 4.6",
+        ],
+        "n": len(unique),
+        "models": unique,
+    }
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"n": len(unique), "sourceUpdatedOn": output["sourceUpdatedOn"], "models": [(m["rank"], m["displayName"], m["passAt1Pct"], m["avgCost"], m["effort"]) for m in unique]}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

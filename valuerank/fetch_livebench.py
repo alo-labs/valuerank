@@ -17,6 +17,7 @@ import io
 import json
 import math
 import urllib.request
+from collections.abc import Callable
 from pathlib import Path
 
 from valuerank.clock import iso_z
@@ -203,17 +204,21 @@ def build_record(
     return record
 
 
-def main() -> int:
-    aa_document = json.loads((DATA / "aa_metrics.json").read_text())
+def main(
+    *,
+    data: Path = DATA,
+    fetch_url: Callable[[str], tuple[bytes, dict[str, str]]] = fetch,
+) -> int:
+    aa_document = json.loads((data / "aa_metrics.json").read_text())
     cohort = [(model_id, item["displayName"]) for model_id, item in aa_document["models"].items()]
     if not cohort:
         raise ValueError("LiveBench mapping expects a non-empty AA comparison cohort")
     if set(COHORT_MAP) != {model_id for model_id, _ in cohort}:
         raise ValueError("LiveBench cohort mapping does not exactly match the AA model map")
 
-    table_bytes, table_source = fetch(URLS["table"])
-    cost_bytes, cost_source = fetch(URLS["cost"])
-    category_bytes, category_source = fetch(URLS["categories"])
+    table_bytes, table_source = fetch_url(URLS["table"])
+    cost_bytes, cost_source = fetch_url(URLS["cost"])
+    category_bytes, category_source = fetch_url(URLS["categories"])
     table_rows = list(csv.DictReader(io.StringIO(table_bytes.decode("utf-8-sig"))))
     cost_rows = list(csv.DictReader(io.StringIO(cost_bytes.decode("utf-8-sig"))))
     categories_source = json.loads(category_bytes)
@@ -303,7 +308,7 @@ def main() -> int:
         "supplementalModels": supplemental_models,
     }
     document["pareto"] = pareto_ids(all_models)
-    (DATA / "livebench.json").write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n")
+    (data / "livebench.json").write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps({
         "release": RELEASE,
         "cohortN": document["cohortN"],

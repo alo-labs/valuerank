@@ -8,12 +8,28 @@ from html import escape
 from pathlib import Path
 
 from valuerank.paths import DATA, ROOT
-OUT = ROOT / "site" / "tb4" / "index.html"
 from valuerank.site_header import inject_header
+from valuerank.release import VERSION
 
 
-def main() -> int:
-    document = json.loads((DATA / "tb4.json").read_text())
+def script_safe_json(value) -> str:
+    """Serialise ``value`` for an inline <script>: no sequence can close the tag or break the literal."""
+
+    return (
+        json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+        .replace("&", "\\u0026")
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+        .replace("\u2028", "\\u2028")
+        .replace("\u2029", "\\u2029")
+    )
+
+
+def main(*, root: Path = ROOT, data: Path = DATA, out: Path | None = None) -> int:
+    """Render the Terminal-Bench 4.0 page from ``data/tb4.json``; ``out`` defaults to ``root/site/tb4/index.html``."""
+
+    output = root / "site" / "tb4" / "index.html" if out is None else out
+    document = json.loads((data / "tb4.json").read_text())
     entries = document["rows"]
     provider_claims = document.get("providerClaims", [])
     best_rate = -float("inf")
@@ -34,7 +50,7 @@ def main() -> int:
         "</tr>"
         for entry in entries
     )
-    entries_json = json.dumps(entries, ensure_ascii=False, separators=(",", ":"))
+    entries_json = script_safe_json(entries)
     missing_html = ", ".join(escape(name) for name in document["missingModels"])
     provider_claim_rows_html = "\n".join(
         "<tr>"
@@ -222,10 +238,10 @@ def main() -> int:
     html = html.replace("__MISSING_MODELS__", missing_html)
     html = html.replace("__ROWS_HTML__", rows_html)
     html = html.replace("__ENTRIES_JSON__", entries_json)
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(html)
-    inject_header(OUT, "tb4", f"{document['rowN']} official rows · {document.get('providerClaimN', 0)} provider claim · current 4.0", "v1.6.0")
-    print(json.dumps({"output": str(OUT.relative_to(ROOT)), "officialRows": document["rowN"], "directMatches": document["matchedN"], "providerClaims": document.get("providerClaimN", 0), "rankingAvailable": document.get("rankingAvailableN", document["matchedN"])}, indent=2))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(html)
+    inject_header(output, "tb4", f"{document['rowN']} official rows · {document.get('providerClaimN', 0)} provider claim · current 4.0", VERSION)
+    print(json.dumps({"output": str(output.relative_to(root)), "officialRows": document["rowN"], "directMatches": document["matchedN"], "providerClaims": document.get("providerClaimN", 0), "rankingAvailable": document.get("rankingAvailableN", document["matchedN"])}, indent=2))
     return 0
 
 

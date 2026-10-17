@@ -18,9 +18,7 @@ from valuerank.plan_costs import build_cost_fields, load_plan_routes, route_summ
 from valuerank.site_header import inject_header
 from valuerank.aa_reconciliation import reconcile as reconcile_aa, publication as aa_reconciliation_publication
 
-VERSION = "v1.9.6"
-DATE = "October 8, 2026"
-SHORT_DATE = "Oct 8"
+from valuerank.release import DATE, SHORT_DATE, VERSION
 CURRENCY = "$"
 
 AA_INDEX_URL = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
@@ -64,69 +62,6 @@ def md_benchmark_link(label):
 def html_external_link(label, url):
     return f'<a href="{html_escape(url, quote=True)}" target="_blank" rel="noopener">{html_escape(label)}</a>'
 
-scores = json.loads((DATA / "scores.json").read_text())
-aa_document = json.loads((DATA / "aa_metrics.json").read_text())
-coverage_document = json.loads((DATA / "coverage_matrix.json").read_text())
-deepswe_chart_doc = json.loads((DATA / "aa_deepswe.json").read_text())
-livebench_document = json.loads((DATA / "livebench.json").read_text())
-tb4_document = json.loads((DATA / "tb4.json").read_text())
-bug_hunt_document = json.loads((DATA / "bug_hunt.json").read_text())
-bug_hunt_ranking = scores["bugHuntEmphasisRanking"]
-bug_hunt_records = {item["modelId"]: item for item in bug_hunt_document["models"]}
-manifest = json.loads((DATA / "run_manifest.json").read_text())
-all_models = scores["models"]
-models = [model for model in all_models if model.get("rankingEligible") is True]
-unranked_models = [model for model in all_models if model.get("rankingEligible") is not True]
-weights = scores["weights"]
-deepswe_weight = next(weight for weight in weights if weight["key"] == "deepswePassAt1")
-n = len(models)
-source_n = len(all_models)
-unranked_names = ", ".join(model["name"] for model in unranked_models) or "none"
-bug_hunt_weight = next(weight for weight in weights if weight["key"] == "bugHuntFixedOf105")
-d = len(weights)
-pareto = scores["pareto"]
-model_by_id = {model["id"]: model for model in all_models}
-plan_route_document = load_plan_routes()
-plan_cost_fields = build_cost_fields(models, plan_route_document)
-plan_summary = route_summary(plan_route_document, plan_cost_fields)
-candidate_plan_cost_fields = build_cost_fields(all_models, plan_route_document)
-livebench_models = {
-    **livebench_document["models"],
-    **livebench_document.get("supplementalModels", {}),
-}
-livebench_rows = [record for record in livebench_models.values() if record.get("matched")]
-livebench_supplemental_rows = [
-    record for record in livebench_document.get("supplementalModels", {}).values() if record.get("matched")
-]
-livebench_pareto = [livebench_models[model_id] for model_id in livebench_document["pareto"]]
-tb4_rows = tb4_document["rows"]
-provider_claims = json.loads((DATA / "provider_claims.json").read_text()).get("claims", [])
-eligible_provider_claims = [item for item in provider_claims if item.get("eligibleForRanking") is True]
-ranking_history_document = json.loads((DATA / "ranking_history_v1.5.json").read_text())
-ranking_history = ranking_history_document.get("v150", {})
-ranking_history_v190 = ranking_history_document.get("v190", {})
-ranking_history_v191 = ranking_history_document.get("v191", {})
-ranking_history_v192 = ranking_history_document.get("v192", {})
-deepswe_updated = scores.get("deepsweObservedAt") or deepswe_chart_doc.get("observedAt", DATE)
-deepswe_configurations = deepswe_chart_doc["configurations"]
-deepswe_overlap_n = len([item for item in deepswe_configurations if item.get("valueRankModelId")])
-bug_hunt_source_matches_n = scores.get("externalBenchmarks", {}).get("bugHunt", {}).get("matchedN", bug_hunt_ranking["matchedN"])
-aa_version = scores.get("benchmarkVersion") or "Artificial Analysis Intelligence Index v4.3.2"
-cost_mode = scores.get("costMode") or manifest.get("scoring", {}).get("costMode", "unknown")
-cost_mode_label = "AA evaluation cost only" if cost_mode == "aa-only" else cost_mode
-cost_coverage = scores.get("costCoverage") or manifest.get("scoring", {}).get("costCoverage", {})
-cost_missing_text = ", ".join(cost_coverage.get("missingModels", [])) or "none"
-dropped = scores.get("droppedDimensions")
-if dropped is None:
-    dropped = coverage_document.get("scoring", {}).get(
-        "droppedDimensions", manifest.get("scoring", {}).get("droppedDimensions", [])
-    )
-cost_weight = next((weight for weight in weights if weight["key"] == "costComposite"), None)
-cost_weight_text = f"{cost_weight['weightPct']:.2f}%" if cost_weight else "not included"
-site_cost_summary = "The default API Costs basis uses AA total evaluation cost for its fixed benchmark suite, rank-normalized with lower cost better. Plan Costs divides the same AA cost by the highest eligible subscription Value Multiple."
-site_cost_raw_input = "For the main-rank Cost dimension, the raw input is AA total evaluation cost in USD. Plan Costs applies the selected model route's Value Multiple to that same amount."
-site_cost_weight = f"Cost contributes {cost_weight_text} to the main rank using AA total evaluation cost under API Costs; the Plan Costs basis applies the selected eligible Value Multiple."
-
 
 def fnum(value, places=2, dash="—"):
     return f"{value:.{places}f}" if isinstance(value, (int, float)) else dash
@@ -140,7 +75,7 @@ def pct_points(value, places=1):
     return f"{value:.{places}f}%" if isinstance(value, (int, float)) else "—"
 
 
-def metric_coverage_summary(model):
+def metric_coverage_summary(model, weights):
     coverage = model.get("metricCoverage") or {}
     model_dims = model.get("dims", {})
     if "missingKeys" in coverage:
@@ -177,25 +112,10 @@ def names(values):
     return ", ".join(values) if values else "none"
 
 
-speed_coverage = coverage_document.get("fields", {}).get("speed", {})
-speed_missing_ids = set(speed_coverage.get("missingModels", []))
-speed_missing_text = names([model["name"] for model in models if model["id"] in speed_missing_ids])
-speed_selected_available_n = n - sum(model["id"] in speed_missing_ids for model in models)
-speed_in_primary = any(weight["key"] == "speed" for weight in weights)
-aa_index_estimated_models = names([model["name"] for model in models if model.get("intelligenceIndexStatus") == "estimated"])
-
-
-livebench_pareto_text = names([record["name"] for record in livebench_pareto]) if livebench_pareto else "none"
-livebench_supplemental_text = names([record["name"] for record in livebench_supplemental_rows]) if livebench_supplemental_rows else "none"
-livebench_published_n = livebench_document.get("publishedN", len(livebench_rows))
-livebench_supplemental_count = livebench_document.get("supplementalMatchedN", len(livebench_supplemental_rows))
-livebench_supplemental_label = f"{livebench_supplemental_count} official supplemental model" + ("s" if livebench_supplemental_count != 1 else "")
-
-
-def primary_rows():
+def primary_rows(models, weights):
     rows = []
     for model in models:
-        coverage_text, missing_text = metric_coverage_summary(model)
+        coverage_text, missing_text = metric_coverage_summary(model, weights)
         rank = model.get("rank") if model.get("rank") is not None else "—"
         rows.append(
             f"| {rank} | {model['name']} | {fnum(model.get('overallScore'), 1)} | "
@@ -205,28 +125,28 @@ def primary_rows():
     return "\n".join(rows)
 
 
-def dimension_table():
+def dimension_table(weights):
     return "\n".join(
         f"| {index} | {md_benchmark_link(weight['label'])} | {weight['weightPct']:.2f}% | {'higher' if weight['higherBetter'] else 'lower'} |"
         for index, weight in enumerate(weights, 1)
     )
 
 
-def livebench_table():
+def livebench_table(livebench_rows):
     return "\n".join(
         f"| {record['name']} | {record['livebenchModel']} | {record['instructionFollowingScore']:.2f} | {record['overallScore']:.2f} | ${record['costPerSuccessfulTaskUsd']:.4f} |"
         for record in livebench_rows
     )
 
 
-def tb4_table():
+def tb4_table(tb4_rows):
     return "\n".join(
         f"| {entry['rankLabel']} | {entry['baseModel']} | {entry['agent']} | {entry['resolutionRatePct']:.1f}% ± {entry['uncertaintyPct']:.1f}% | {entry['tokens']} | ${entry['costUsd']:,.0f} |"
         for entry in tb4_rows
     )
 
 
-def bug_hunt_emphasis_table():
+def bug_hunt_emphasis_table(bug_hunt_ranking, bug_hunt_records):
     return "\n".join(
         f"| {item['rank']} | {item['name']} | {record['fixedOf105']:g}/105 | "
         f"{item['emphasisScore']:.1f} | n={record['sampleN']} ({record['aggregation']}) | "
@@ -237,7 +157,7 @@ def bug_hunt_emphasis_table():
     )
 
 
-def bug_hunt_raw_table():
+def bug_hunt_raw_table(all_models, bug_hunt_records):
     return "\n".join(
         f"| [{model['name']}]({record.get('sourceUrl', BUG_HUNT_URL)}) | {record.get('fixedOf105') if record.get('matched') else '—'} | "
         f"{record.get('sampleN', '—')} / {record.get('aggregation', '—')} | {record.get('evaluatedModel', '—')} | "
@@ -260,7 +180,7 @@ def bug_hunt_raw_table():
     )
 
 
-def deepswe_chart_table():
+def deepswe_chart_table(deepswe_configurations):
     return "\n".join(
         f"| {item['sourceOrder']} | {item['agent']} | {item['model']} | {item.get('effort') or 'not shown'} | "
         f"{item['scorePct']:.1f}% | "
@@ -268,15 +188,6 @@ def deepswe_chart_table():
         f"{item.get('matchNote', '—')} |"
         for item in deepswe_configurations
     )
-
-
-pareto_text = names(pareto)
-drop_text = "\n".join(
-    f"| {item['label']} | {names(item['missing'])} | {item['reason']} |" for item in dropped
-) or "| None | — | All candidate dimensions have complete coverage. |"
-
-aa_reconciliation_report = reconcile_aa()
-aa_reconciliation_md, aa_reconciliation_html = aa_reconciliation_publication(aa_reconciliation_report)
 
 
 def plan_evidence_label(route):
@@ -296,7 +207,7 @@ def plan_source_html(route):
     return html_external_link("Source", url) if url else "User assumption"
 
 
-def plan_intelligence_label(model):
+def plan_intelligence_label(model, aa_document):
     value = model.get("intelligenceIndex")
     record = aa_document.get("models", {}).get(model["id"], {})
     metric_precision = ((record.get("metricSources") or {}).get("intelligenceIndex") or {}).get("precision")
@@ -308,58 +219,11 @@ def plan_intelligence_label(model):
     return label + (" (estimated)" if model.get("intelligenceIndexStatus") == "estimated" else "")
 
 
-plan_candidate_headers = ["Model", "Primary rank", "AA Intelligence Index", "API evaluation cost", "Effective Plan evaluation cost", "Selected plan / multiple", "Evidence / source variant", "Source date", "Source"]
-plan_candidate_cells = []
-for model, field in zip(all_models, candidate_plan_cost_fields):
-    route = field["planRoute"]
-    plan_candidate_cells.append([
-        model["name"],
-        str(model["rank"]) if model.get("rank") is not None else "Unranked candidate",
-        plan_intelligence_label(model),
-        plan_usd(field["apiCost"], "Not established"),
-        plan_usd(field["planCost"], "API fallback" if route is None else "Not established"),
-        f"{route['planLabel']} / {route['valueMultiple']:g}×" if route else "No eligible route",
-        (plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else "")) if route else "API fallback",
-        (route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded") if route else "—",
-        (route.get("sourceUrl") or "User assumption") if route else "—",
-    ])
-
-plan_route_headers = ["Plan", "Eligible model variants", "Monthly fee", "API equivalent numerator", "Value Multiple", "Evidence / source model", "Source date", "Source"]
-plan_route_cells = []
-for route in plan_route_document["routes"]:
-    plan_route_cells.append([
-        route["planLabel"],
-        ", ".join(model_by_id[model_id]["name"] if model_id in model_by_id else model_id for model_id in route["modelIds"]),
-        plan_usd(route.get("planPriceUsd"), "Not established"),
-        plan_usd(route.get("apiEquivalentUsd"), "Not measured") + (" (applied estimate)" if route.get("numeratorKind") == "applied_estimate" else ""),
-        f"{route['valueMultiple']:g}×",
-        plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else ""),
-        route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded",
-        route.get("sourceUrl") or "User assumption",
-    ])
-
-
 def plan_markdown_table(headers, rows):
     def clean(value):
         text = str(value).replace("|", "\\|").replace("\n", " ")
         return f"[Source]({text})" if text.startswith("https://") else text
     return "\n".join(["| " + " | ".join(headers) + " |", "|" + "|".join("---" for _ in headers) + "|"] + ["| " + " | ".join(clean(value) for value in row) + " |" for row in rows])
-
-
-plan_policy_copy = (
-    f"Plan route evidence as of {plan_route_document.get('asOf', 'not recorded')}. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. "
-    "The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. "
-    "For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. "
-    "The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. "
-    "The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. "
-    "For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator."
-)
-plan_comparison_md = (
-    "\n\n## Plan Costs candidate comparison\n\n" + plan_policy_copy + "\n\n"
-    + plan_markdown_table(plan_candidate_headers, plan_candidate_cells)
-    + "\n\n### Plan route evidence\n\n" + plan_markdown_table(plan_route_headers, plan_route_cells)
-    + "\n\nThe selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `data/plan_cost_routes.json`.\n"
-)
 
 
 def plan_html_table(headers, rows):
@@ -369,17 +233,250 @@ def plan_html_table(headers, rows):
     return '<div class="table-wrap"><table><thead><tr>' + ''.join(f'<th scope="col">{html_escape(header)}</th>' for header in headers) + '</tr></thead><tbody>' + ''.join('<tr>' + ''.join(f'<td>{cell(value)}</td>' for value in row) + '</tr>' for row in rows) + '</tbody></table></div>'
 
 
-plan_comparison_html = (
-    '<!-- plan-candidates:start --><section class="card mb-6" id="plan-candidates" aria-labelledby="plan-candidates-heading"><h2 id="plan-candidates-heading">Plan Costs candidate comparison</h2>'
-    + f'<p class="method-text">{html_escape(plan_policy_copy)}</p>'
-    + plan_html_table(plan_candidate_headers, plan_candidate_cells)
-    + '<h3 style="margin-top:24px;">Plan route evidence</h3>'
-    + plan_html_table(plan_route_headers, plan_route_cells)
-    + '<ul>' + ''.join(f'<li>{html_escape(route["planLabel"])}: {plan_source_html(route)}. {html_escape(str(route.get("notes", "")))}</li>' for route in plan_route_document["routes"]) + '</ul>'
-    + '</section><!-- plan-candidates:end -->'
-)
+def norm_values(model, weights):
+    return ", ".join(
+        f"{model['dims'][weight['key']]:.1f}"
+        if isinstance(model.get("dims", {}).get(weight["key"]), (int, float))
+        else "⊘"
+        for weight in weights
+    )
 
-readme = f"""# ValueRank
+
+def replace_once(source, pattern, replacement, label):
+    result, count = re.subn(pattern, replacement, source, count=1)
+    if count != 1:
+        if label in {"heatmap column order", "heatmap category labels"} and count == 0:
+            return source
+        if label == "date stat" and re.search(r'<span class="hero-statbar-num">Sep \d+</span>', source):
+            return source
+        raise SystemExit(f"{label} replacement failed: {count}")
+    return result
+
+
+def arrange_chart_tabs(match):
+    buttons = re.findall(r'(?m)^[ \t]*<button class="chart-tab[^"]*" data-chart="[^"]+">[^<]*</button>', match.group(0))
+    button_by_chart = {
+        re.search(r'data-chart="([^"]+)"', button).group(1): button.strip()
+        for button in buttons
+    }
+    if "pareto" not in button_by_chart or "livebenchPareto" not in button_by_chart:
+        return match.group(0)
+    button_by_chart["pareto"] = re.sub(r">Pareto Frontier<", ">ValueRank Pareto Frontier<", button_by_chart["pareto"])
+    ordered = [button_by_chart["pareto"], button_by_chart["livebenchPareto"]]
+    ordered.extend(button for chart, button in button_by_chart.items() if chart not in {"pareto", "livebenchPareto"})
+    return '<div class="chart-tabs">\n' + "\n".join(f"      {button}" for button in ordered) + '\n    </div>'
+
+
+def replace_faq_answer(source, question, answer):
+    pattern = (
+        r'(<div class="faq-item">\s*<button class="faq-q"[^>]*>\s*'
+        + re.escape(question)
+        + r'\s*<i data-lucide="chevron-down" class="faq-chevron"></i>\s*</button>\s*'
+        r'<div class="faq-a">)[\s\S]*?(</div>\s*</div>)'
+    )
+    updated, count = re.subn(
+        pattern,
+        lambda match: match.group(1) + answer + match.group(2),
+        source,
+        count=1,
+    )
+    if count != 1:
+        raise SystemExit(f"FAQ answer replacement failed: {question}")
+    return updated
+
+
+def replace_current_copy(source, pattern, replacement, label):
+    updated, count = re.subn(pattern, replacement, source, count=1)
+    if count != 1:
+        raise SystemExit(f"current-release copy replacement failed: {label}")
+    return updated
+
+
+def main(*, root=ROOT, data=DATA) -> int:
+    """Emit every publication output beneath ``root`` from the snapshots in ``data``."""
+
+    scores = json.loads((data / "scores.json").read_text())
+    aa_document = json.loads((data / "aa_metrics.json").read_text())
+    coverage_document = json.loads((data / "coverage_matrix.json").read_text())
+    deepswe_chart_doc = json.loads((data / "aa_deepswe.json").read_text())
+    livebench_document = json.loads((data / "livebench.json").read_text())
+    tb4_document = json.loads((data / "tb4.json").read_text())
+    bug_hunt_document = json.loads((data / "bug_hunt.json").read_text())
+    bug_hunt_ranking = scores["bugHuntEmphasisRanking"]
+    bug_hunt_records = {item["modelId"]: item for item in bug_hunt_document["models"]}
+    manifest = json.loads((data / "run_manifest.json").read_text())
+    all_models = scores["models"]
+    models = [model for model in all_models if model.get("rankingEligible") is True]
+    unranked_models = [model for model in all_models if model.get("rankingEligible") is not True]
+    weights = scores["weights"]
+    deepswe_weight = next(weight for weight in weights if weight["key"] == "deepswePassAt1")
+    n = len(models)
+    source_n = len(all_models)
+    unranked_names = ", ".join(model["name"] for model in unranked_models) or "none"
+    bug_hunt_weight = next(weight for weight in weights if weight["key"] == "bugHuntFixedOf105")
+    d = len(weights)
+    pareto = scores["pareto"]
+    model_by_id = {model["id"]: model for model in all_models}
+    plan_route_document = load_plan_routes(data / "plan_cost_routes.json")
+    plan_cost_fields = build_cost_fields(models, plan_route_document)
+    plan_summary = route_summary(plan_route_document, plan_cost_fields)
+    candidate_plan_cost_fields = build_cost_fields(all_models, plan_route_document)
+    livebench_models = {
+        **livebench_document["models"],
+        **livebench_document.get("supplementalModels", {}),
+    }
+    livebench_rows = [record for record in livebench_models.values() if record.get("matched")]
+    livebench_supplemental_rows = [
+        record for record in livebench_document.get("supplementalModels", {}).values() if record.get("matched")
+    ]
+    livebench_pareto = [livebench_models[model_id] for model_id in livebench_document["pareto"]]
+    tb4_rows = tb4_document["rows"]
+    provider_claims = json.loads((data / "provider_claims.json").read_text()).get("claims", [])
+    eligible_provider_claims = [item for item in provider_claims if item.get("eligibleForRanking") is True]
+    ranking_history_document = json.loads((data / "ranking_history_v1.5.json").read_text())
+    ranking_history = ranking_history_document.get("v150", {})
+    ranking_history_v190 = ranking_history_document.get("v190", {})
+    ranking_history_v191 = ranking_history_document.get("v191", {})
+    ranking_history_v192 = ranking_history_document.get("v192", {})
+    deepswe_updated = scores.get("deepsweObservedAt") or deepswe_chart_doc.get("observedAt", DATE)
+    deepswe_configurations = deepswe_chart_doc["configurations"]
+    deepswe_overlap_n = len([item for item in deepswe_configurations if item.get("valueRankModelId")])
+    bug_hunt_source_matches_n = scores.get("externalBenchmarks", {}).get("bugHunt", {}).get("matchedN", bug_hunt_ranking["matchedN"])
+    aa_version = scores.get("benchmarkVersion") or "Artificial Analysis Intelligence Index v4.3.2"
+    cost_mode = scores.get("costMode") or manifest.get("scoring", {}).get("costMode", "unknown")
+    cost_mode_label = "AA evaluation cost only" if cost_mode == "aa-only" else cost_mode
+    cost_coverage = scores.get("costCoverage") or manifest.get("scoring", {}).get("costCoverage", {})
+    cost_missing_text = ", ".join(cost_coverage.get("missingModels", [])) or "none"
+    dropped = scores.get("droppedDimensions")
+    if dropped is None:
+        dropped = coverage_document.get("scoring", {}).get(
+            "droppedDimensions", manifest.get("scoring", {}).get("droppedDimensions", [])
+        )
+    cost_weight = next((weight for weight in weights if weight["key"] == "costComposite"), None)
+    cost_weight_text = f"{cost_weight['weightPct']:.2f}%" if cost_weight else "not included"
+    site_cost_summary = "The default API Costs basis uses AA total evaluation cost for its fixed benchmark suite, rank-normalized with lower cost better. Plan Costs divides the same AA cost by the highest eligible subscription Value Multiple."
+    site_cost_raw_input = "For the main-rank Cost dimension, the raw input is AA total evaluation cost in USD. Plan Costs applies the selected model route's Value Multiple to that same amount."
+    site_cost_weight = f"Cost contributes {cost_weight_text} to the main rank using AA total evaluation cost under API Costs; the Plan Costs basis applies the selected eligible Value Multiple."
+
+
+
+
+
+
+
+
+
+
+
+
+    speed_coverage = coverage_document.get("fields", {}).get("speed", {})
+    speed_missing_ids = set(speed_coverage.get("missingModels", []))
+    speed_missing_text = names([model["name"] for model in models if model["id"] in speed_missing_ids])
+    speed_selected_available_n = n - sum(model["id"] in speed_missing_ids for model in models)
+    speed_in_primary = any(weight["key"] == "speed" for weight in weights)
+    aa_index_estimated_models = names([model["name"] for model in models if model.get("intelligenceIndexStatus") == "estimated"])
+
+
+    livebench_pareto_text = names([record["name"] for record in livebench_pareto]) if livebench_pareto else "none"
+    livebench_supplemental_text = names([record["name"] for record in livebench_supplemental_rows]) if livebench_supplemental_rows else "none"
+    livebench_published_n = livebench_document.get("publishedN", len(livebench_rows))
+    livebench_supplemental_count = livebench_document.get("supplementalMatchedN", len(livebench_supplemental_rows))
+    livebench_supplemental_label = f"{livebench_supplemental_count} official supplemental model" + ("s" if livebench_supplemental_count != 1 else "")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    pareto_text = names(pareto)
+    drop_text = "\n".join(
+        f"| {item['label']} | {names(item['missing'])} | {item['reason']} |" for item in dropped
+    ) or "| None | — | All candidate dimensions have complete coverage. |"
+
+    aa_reconciliation_report = reconcile_aa(data=data)
+    aa_reconciliation_md, aa_reconciliation_html = aa_reconciliation_publication(aa_reconciliation_report)
+
+
+
+
+
+
+
+
+
+
+    plan_candidate_headers = ["Model", "Primary rank", "AA Intelligence Index", "API evaluation cost", "Effective Plan evaluation cost", "Selected plan / multiple", "Evidence / source variant", "Source date", "Source"]
+    plan_candidate_cells = []
+    for model, field in zip(all_models, candidate_plan_cost_fields):
+        route = field["planRoute"]
+        plan_candidate_cells.append([
+            model["name"],
+            str(model["rank"]) if model.get("rank") is not None else "Unranked candidate",
+            plan_intelligence_label(model, aa_document),
+            plan_usd(field["apiCost"], "Not established"),
+            plan_usd(field["planCost"], "API fallback" if route is None else "Not established"),
+            f"{route['planLabel']} / {route['valueMultiple']:g}×" if route else "No eligible route",
+            (plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else "")) if route else "API fallback",
+            (route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded") if route else "—",
+            (route.get("sourceUrl") or "User assumption") if route else "—",
+        ])
+
+    plan_route_headers = ["Plan", "Eligible model variants", "Monthly fee", "API equivalent numerator", "Value Multiple", "Evidence / source model", "Source date", "Source"]
+    plan_route_cells = []
+    for route in plan_route_document["routes"]:
+        plan_route_cells.append([
+            route["planLabel"],
+            ", ".join(model_by_id[model_id]["name"] if model_id in model_by_id else model_id for model_id in route["modelIds"]),
+            plan_usd(route.get("planPriceUsd"), "Not established"),
+            plan_usd(route.get("apiEquivalentUsd"), "Not measured") + (" (applied estimate)" if route.get("numeratorKind") == "applied_estimate" else ""),
+            f"{route['valueMultiple']:g}×",
+            plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else ""),
+            route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded",
+            route.get("sourceUrl") or "User assumption",
+        ])
+
+
+
+
+    plan_policy_copy = (
+        f"Plan route evidence as of {plan_route_document.get('asOf', 'not recorded')}. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. "
+        "The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. "
+        "For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. "
+        "The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. "
+        "The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. "
+        "For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator."
+    )
+    plan_comparison_md = (
+        "\n\n## Plan Costs candidate comparison\n\n" + plan_policy_copy + "\n\n"
+        + plan_markdown_table(plan_candidate_headers, plan_candidate_cells)
+        + "\n\n### Plan route evidence\n\n" + plan_markdown_table(plan_route_headers, plan_route_cells)
+        + "\n\nThe selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `data/plan_cost_routes.json`.\n"
+    )
+
+
+
+
+    plan_comparison_html = (
+        '<!-- plan-candidates:start --><section class="card mb-6" id="plan-candidates" aria-labelledby="plan-candidates-heading"><h2 id="plan-candidates-heading">Plan Costs candidate comparison</h2>'
+        + f'<p class="method-text">{html_escape(plan_policy_copy)}</p>'
+        + plan_html_table(plan_candidate_headers, plan_candidate_cells)
+        + '<h3 style="margin-top:24px;">Plan route evidence</h3>'
+        + plan_html_table(plan_route_headers, plan_route_cells)
+        + '<ul>' + ''.join(f'<li>{html_escape(route["planLabel"])}: {plan_source_html(route)}. {html_escape(str(route.get("notes", "")))}</li>' for route in plan_route_document["routes"]) + '</ul>'
+        + '</section><!-- plan-candidates:end -->'
+    )
+
+    readme = f"""# ValueRank
 **Frontier AI model ranking focused on production value**
 
 **Version:** {VERSION}
@@ -394,7 +491,7 @@ The selected catalog is reconciled against AA's [Intelligence Index score versus
 
 | Rank | Model | Overall | Quality | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---|
-{primary_rows()}
+{primary_rows(models, weights)}
 
 The current Pareto frontier—undominated on composite cost versus quality—is: **{pareto_text}**.
 
@@ -434,10 +531,11 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - [site/tb4/index.html](site/tb4/index.html): current Terminal-Bench 4.0 score-versus-cost publication
 - [research/2026-09-29-valuerank-refresh-v4-3-2/](research/2026-09-29-valuerank-refresh-v4-3-2/): reproducible v4.3.2 refresh package
 - [data/](data/): machine-readable snapshots and generated outputs (pipeline code lives in [valuerank/](valuerank/))
+- [docs/](docs/README.md): contributor documentation (repository layout, architecture, development, testing, refresh and release); `npm run verify` runs every check
 """
-(ROOT / "README.md").write_text(readme + aa_reconciliation_md + plan_comparison_md)
+    (root / "README.md").write_text(readme + aa_reconciliation_md + plan_comparison_md)
 
-methodology = f"""# ValueRank Methodology
+    methodology = f"""# ValueRank Methodology
 
 **Version:** {VERSION}
 **Updated:** {DATE}
@@ -461,7 +559,7 @@ The retained dimension set is selected from eligible current source coverage and
 
 | # | Dimension | ValueRank weight | Direction |
 |---:|---|---:|---|
-{dimension_table()}
+{dimension_table(weights)}
 
 The eleven AA source components below correspond to ten current AA evaluations because Omniscience is split into accuracy and non-hallucination reliability:
 
@@ -549,22 +647,15 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
 - AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.
 - LiveBench and Terminal-Bench have different task suites and release surfaces from the AA source component; their displayed values should not be substituted for one another or read as a continuous version-to-version series.
 """
-(ROOT / "methodology.md").write_text(methodology + "\n\n## Subscription evidence policy\n\n" + plan_policy_copy + "\n")
+    (root / "methodology.md").write_text(methodology + "\n\n## Subscription evidence policy\n\n" + plan_policy_copy + "\n")
 
-def norm_values(model):
-    return ", ".join(
-        f"{model['dims'][weight['key']]:.1f}"
-        if isinstance(model.get("dims", {}).get(weight["key"]), (int, float))
-        else "⊘"
-        for weight in weights
+
+
+    norm_rows = "\n".join(
+        f"| {model['rank']} | {model['name']} | [{norm_values(model, weights)}] |"
+        for model in models
     )
-
-
-norm_rows = "\n".join(
-    f"| {model['rank']} | {model['name']} | [{norm_values(model)}] |"
-    for model in models
-)
-scores_md = f"""# ValueRank {VERSION} Scores
+    scores_md = f"""# ValueRank {VERSION} Scores
 
 **Updated:** {DATE} · **Cohort:** {n} · **Retained dimensions:** {d} · **Default cost basis:** API Costs (AA total evaluation cost)
 
@@ -574,7 +665,7 @@ API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same
 
 | Rank | Model | Overall | Quality | Quality Rank | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---:|---|
-{chr(10).join(f"| {m.get('rank') or '—'} | {m['name']} | {fnum(m.get('overallScore'), 1)} | {fnum(m.get('qualityScore'), 1)} | {m.get('qualityRank') or '—'} | {fnum(m.get('costComposite'))} | {metric_coverage_summary(m)[0]} | {metric_coverage_summary(m)[1]} |" for m in models)}
+{chr(10).join(f"| {m.get('rank') or '—'} | {m['name']} | {fnum(m.get('overallScore'), 1)} | {fnum(m.get('qualityScore'), 1)} | {m.get('qualityRank') or '—'} | {fnum(m.get('costComposite'))} | {metric_coverage_summary(m, weights)[0]} | {metric_coverage_summary(m, weights)[1]} |" for m in models)}
 
 ## Bug Hunt Emphasis Ranking
 
@@ -582,7 +673,7 @@ Bug Hunt is included in the main **{n}-model primary ranking** at **{bug_hunt_we
 
 | Bug Hunt rank | Model | Fixed / 105 | Emphasis score | Runs / aggregation | Effort | Harness / route | Primary rank |
 |---:|---|---:|---:|---|---|---|---:|
-{bug_hunt_emphasis_table()}
+{bug_hunt_emphasis_table(bug_hunt_ranking, bug_hunt_records)}
 
 Source: [Bug Hunt Bench]({BUG_HUNT_URL}) and the pinned [owner scoreboard]({bug_hunt_document['sources']['scoreboard']}) at commit **{bug_hunt_ranking['sourceCommit']}**. The run configuration details and coverage gaps are in [raw-data.md](raw-data.md).
 
@@ -614,50 +705,50 @@ The current AA Intelligence Index score-versus-total-benchmark-cost frontier is 
 
 {md_benchmark_link('Artificial Analysis Intelligence Index')} provides the current AA component scores used by this release. {md_benchmark_link('LiveBench')} Instruction Following contributes for rows with an eligible value; its Overall Score and Cost Per Successful Task remain supplemental. {md_benchmark_link('Terminal-Bench 4.0')} remains supplemental under this release's dimension-selection policy. See [raw-data.md](raw-data.md) for source-backed tables.
 """
-(ROOT / "scores.md").write_text(scores_md)
+    (root / "scores.md").write_text(scores_md)
 
-aa_variant_rows = "\n".join(
-    f"| {model['name']} | {model['aaSlug']} | {model['aaVariant'] or 'not stated'} | [page]({model['aaUrl']}) |"
-    for model in all_models
-)
-raw_rows = "\n".join(
-    f"| {model['rank'] if model.get('rank') is not None else '—'} | {model['name']} | "
-    f"{((model.get('deepsweScoreConfig') or {}).get('agent', '—'))} / "
-    f"{((model.get('deepsweScoreConfig') or {}).get('model', '—'))} / "
-    f"{((model.get('deepsweScoreConfig') or {}).get('effort') or 'not shown')} | "
-    f"{fnum(model.get('deepswePassAt1Pct'), 1)}% | {fnum(model.get('briefcaseElo'))} | "
-    f"{fnum(model.get('gdpvalV21'), 1)} | {pct(model.get('automationBenchAA'))} | "
-    f"{pct(model.get('aaTerminalBenchV40'))} | {pct(model.get('aaTerminalBenchV21'))} | "
-    f"{pct(model.get('legacyTau3Banking'))} | {pct(model['scicode'])} | "
-    f"{pct(model.get('gdpPdfAllPass'))} | {pct(model['aaLcr'])} | {pct(model['hle'])} | "
-    f"{pct(model['gpqaDiamond'])} | {pct(model['critpt'])} | {pct(model['omniAccuracy'])} | "
-    f"{pct(model['omniNonHallucination'])} | "
-    f"{fnum(model['intelligenceIndex'])}{' (estimated)' if model.get('intelligenceIndexStatus') == 'estimated' else ''} | "
-    f"{CURRENCY}{fnum(model.get('aaEvalCost'))} | {fnum(model.get('speed'), 1)} |"
-    for model in all_models
-)
-supplemental_rows = "\n".join(
-    f"| {field} | {data.get('availableN', '—')}/{data.get('cohortN', n)} | {names(data.get('missingModels', []))} | {'Primary' if data.get('includedInPrimaryScore') else 'Supplemental / not scored'} |"
-    for field, data in coverage_document.get("fields", {}).items()
-    if data.get("group") == "supplemental"
-)
-livebench_raw_rows = livebench_table()
-tb4_raw_rows = tb4_table()
-aa_evidence_rows = "\n".join(
-    "| " + " | ".join(str(value).replace("|", "\\|").replace("\n", " ") for value in (
-        model['name'],
-        (record.get('extraction') or {}).get('sourceObservedAt') or aa_document.get('observedAt') or 'Not recorded',
-        (record.get('extraction') or {}).get('precision') or 'No rounding metadata recorded',
-        (record.get('extraction') or {}).get('note') or 'Retained earlier source snapshot',
-    )) + " |"
-    for model in all_models
-    for record in [aa_document.get('models', {}).get(model['id'], {})]
-)
-provider_claim_rows = "\n".join(
-    f"| {claim['benchmark']} {claim['benchmarkVersion']} | {claim.get('cohortModelId', '—')} | {claim.get('evaluatedModel', '—')} | {pct(claim.get('value'))} | {'Ranking eligible' if claim.get('eligibleForRanking') is True else 'Audit only'} | {claim.get('sourceType', '—')} | [provider source]({claim['sourceUrl']}) | {claim.get('caveat', claim.get('eligibilityReason', '—'))} |"
-    for claim in provider_claims
-)
-raw_data = f"""# ValueRank {VERSION} Raw Data
+    aa_variant_rows = "\n".join(
+        f"| {model['name']} | {model['aaSlug']} | {model['aaVariant'] or 'not stated'} | [page]({model['aaUrl']}) |"
+        for model in all_models
+    )
+    raw_rows = "\n".join(
+        f"| {model['rank'] if model.get('rank') is not None else '—'} | {model['name']} | "
+        f"{((model.get('deepsweScoreConfig') or {}).get('agent', '—'))} / "
+        f"{((model.get('deepsweScoreConfig') or {}).get('model', '—'))} / "
+        f"{((model.get('deepsweScoreConfig') or {}).get('effort') or 'not shown')} | "
+        f"{fnum(model.get('deepswePassAt1Pct'), 1)}% | {fnum(model.get('briefcaseElo'))} | "
+        f"{fnum(model.get('gdpvalV21'), 1)} | {pct(model.get('automationBenchAA'))} | "
+        f"{pct(model.get('aaTerminalBenchV40'))} | {pct(model.get('aaTerminalBenchV21'))} | "
+        f"{pct(model.get('legacyTau3Banking'))} | {pct(model['scicode'])} | "
+        f"{pct(model.get('gdpPdfAllPass'))} | {pct(model['aaLcr'])} | {pct(model['hle'])} | "
+        f"{pct(model['gpqaDiamond'])} | {pct(model['critpt'])} | {pct(model['omniAccuracy'])} | "
+        f"{pct(model['omniNonHallucination'])} | "
+        f"{fnum(model['intelligenceIndex'])}{' (estimated)' if model.get('intelligenceIndexStatus') == 'estimated' else ''} | "
+        f"{CURRENCY}{fnum(model.get('aaEvalCost'))} | {fnum(model.get('speed'), 1)} |"
+        for model in all_models
+    )
+    supplemental_rows = "\n".join(
+        f"| {field} | {data.get('availableN', '—')}/{data.get('cohortN', n)} | {names(data.get('missingModels', []))} | {'Primary' if data.get('includedInPrimaryScore') else 'Supplemental / not scored'} |"
+        for field, data in coverage_document.get("fields", {}).items()
+        if data.get("group") == "supplemental"
+    )
+    livebench_raw_rows = livebench_table(livebench_rows)
+    tb4_raw_rows = tb4_table(tb4_rows)
+    aa_evidence_rows = "\n".join(
+        "| " + " | ".join(str(value).replace("|", "\\|").replace("\n", " ") for value in (
+            model['name'],
+            (record.get('extraction') or {}).get('sourceObservedAt') or aa_document.get('observedAt') or 'Not recorded',
+            (record.get('extraction') or {}).get('precision') or 'No rounding metadata recorded',
+            (record.get('extraction') or {}).get('note') or 'Retained earlier source snapshot',
+        )) + " |"
+        for model in all_models
+        for record in [aa_document.get('models', {}).get(model['id'], {})]
+    )
+    provider_claim_rows = "\n".join(
+        f"| {claim['benchmark']} {claim['benchmarkVersion']} | {claim.get('cohortModelId', '—')} | {claim.get('evaluatedModel', '—')} | {pct(claim.get('value'))} | {'Ranking eligible' if claim.get('eligibleForRanking') is True else 'Audit only'} | {claim.get('sourceType', '—')} | [provider source]({claim['sourceUrl']}) | {claim.get('caveat', claim.get('eligibilityReason', '—'))} |"
+        for claim in provider_claims
+    )
+    raw_data = f"""# ValueRank {VERSION} Raw Data
 
 **Version:** {VERSION} · **Updated:** {DATE} · **AA DeepSWE chart observed:** {deepswe_updated} · **AA source:** [{aa_version}]({AA_METHODOLOGY_URL})
 
@@ -671,7 +762,7 @@ The visible chart contains all {len(deepswe_configurations)} configurations in t
 
 | # | Agent | Evaluated model variant | Effort | Pass@1 | ValueRank mapping | Mapping note |
 |---:|---|---|---|---:|---|---|
-{deepswe_chart_table()}
+{deepswe_chart_table(deepswe_configurations)}
 
 ## Selected AA pages
 
@@ -707,7 +798,7 @@ The benchmark owner reports planted bugs fixed out of 105 across two repositorie
 
 | Model | Fixed / 105 | Runs / aggregation | Evaluated model | Effort and status | Harness | Route | Coverage |
 |---|---:|---|---|---|---|---|---|
-{bug_hunt_raw_table()}
+{bug_hunt_raw_table(all_models, bug_hunt_records)}
 
 Where no eligible selected-variant result exists, the model receives no inferred or neutral score. MiMo Flash has an owner default-route result (23.3/105, mean of three); its reasoning state was unasserted and untested, so equivalence to the selected AA reasoning variant remains unresolved and the owner result is shown separately. Provider-claim eligibility remains a separate exact-version and exact-variant audit.
 
@@ -765,15 +856,15 @@ Missing values are intentionally represented as null; no old-version, model-fami
 - [data/deepswe.json](data/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
 - [data/tb4-browser-2026-09-29.json](data/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
 """
-(ROOT / "raw-data.md").write_text(raw_data + aa_reconciliation_md + plan_comparison_md)
+    (root / "raw-data.md").write_text(raw_data + aa_reconciliation_md + plan_comparison_md)
 
 
-# Existing interactive publication shell. Data constants and model data are
-# regenerated to prevent stale v1.3 UI.
-site_path = ROOT / "site" / "index.html"
-html = site_path.read_text()
+    # Existing interactive publication shell. Data constants and model data are
+    # regenerated to prevent stale v1.3 UI.
+    site_path = root / "site" / "index.html"
+    html = site_path.read_text()
 
-cost_basis_css = r"""    /* API-price versus subscription-plan cost switcher */
+    cost_basis_css = r"""    /* API-price versus subscription-plan cost switcher */
     .cost-basis-control {
       display:flex; align-items:center; gap:12px; flex-wrap:wrap; width:100%;
       padding:12px 14px; border:1px solid var(--border); border-radius:var(--radius);
@@ -793,10 +884,10 @@ cost_basis_css = r"""    /* API-price versus subscription-plan cost switcher */
     .cost-meta { color:var(--text-dim); font-size:9px; line-height:1.25; max-width:180px; white-space:normal; }
     .cost-score { color:var(--text-dim); font-size:9px; }
 """
-if "/* API-price versus subscription-plan cost switcher */" not in html:
-    html = html.replace("    /* CA Cost + Value columns */", cost_basis_css + "    /* CA Cost + Value columns */", 1)
+    if "/* API-price versus subscription-plan cost switcher */" not in html:
+        html = html.replace("    /* CA Cost + Value columns */", cost_basis_css + "    /* CA Cost + Value columns */", 1)
 
-cost_basis_markup = r"""    <div class="cost-basis-control" id="cost-basis-control" role="group" aria-labelledby="cost-basis-label">
+    cost_basis_markup = r"""    <div class="cost-basis-control" id="cost-basis-control" role="group" aria-labelledby="cost-basis-label">
       <span class="cost-basis-label" id="cost-basis-label">Cost basis</span>
       <div class="cost-basis-options">
         <button type="button" class="cost-basis-btn active" data-cost-basis="api" aria-pressed="true">API Costs</button>
@@ -805,189 +896,180 @@ cost_basis_markup = r"""    <div class="cost-basis-control" id="cost-basis-contr
       <span class="cost-basis-context" id="cost-basis-context">AA total evaluation cost at API rates; the default cost-weighted score uses the API-cost rank.</span>
     </div>
 """
-if 'id="cost-basis-control"' not in html:
-    html = html.replace('    <div class="table-controls">', cost_basis_markup + '    <div class="table-controls">', 1)
-html = html.replace(
-    '<th data-col="evalCost">Composite Cost (0-100)</th>',
-    '<th data-col="evalCost">Cost <span id="cost-basis-table-label">(API Costs)</span></th>',
-    1,
-)
+    if 'id="cost-basis-control"' not in html:
+        html = html.replace('    <div class="table-controls">', cost_basis_markup + '    <div class="table-controls">', 1)
+    html = html.replace(
+        '<th data-col="evalCost">Composite Cost (0-100)</th>',
+        '<th data-col="evalCost">Cost <span id="cost-basis-table-label">(API Costs)</span></th>',
+        1,
+    )
 
-weight_by_key = {weight["key"]: weight for weight in weights}
-SITE_DIM_META = {
-    "costComposite": ("costComposite", "Cost", "Composite Cost", "cost"),
-    "omniNonHallucination": ("omniNonHallucination", "NonHalluc", "AA-Omniscience Non-Hallucination Rate", "rely"),
-    "omniAccuracy": ("omniAccuracy", "OmniAcc", "AA-Omniscience Accuracy", "rely"),
-    "terminalBenchV4": ("terminalBenchV4", "Terminal4", "Terminal-Bench 4.0", "code"),
-    "livebenchInstructionFollowing": ("livebenchInstructionFollowing", "LiveBench IF", "Instruction Following (LiveBench)", "language"),
-    "bugHuntFixedOf105": ("bugHuntFixedOf105", "Bug Hunt", "Bug Hunt Bench bugs fixed out of 105", "code"),
-    "deepswePassAt1": ("deepswePassAt1", "DeepSWE", "DeepSWE pass@1", "code"),
-    "gdpvalV21": ("gdpvalV21", "GDPv2.1", "GDPval-AA v2.1", "code"),
-    "automationBenchAA": ("automationBenchAA", "AutoBench", "AutomationBench-AA", "code"),
-    "aaLcr": ("aaLcr", "LCR", "AA-LCR v1.1", "code"),
-    "hle": ("hle", "HLE", "Humanity's Last Exam", "intel"),
-    "gpqaDiamond": ("gpqaDiamond", "GPQA", "GPQA Diamond (legacy)", "intel"),
-    "scicode": ("scicode", "Sci", "SciCode", "intel"),
-    "critpt": ("critpt", "CritPt", "CritPt", "intel"),
-    "intelligenceIndex": ("intelligenceIndex", "AAI", "Artificial Analysis Intelligence Index", "prod"),
-    "speed": ("speed", "Speed", "AA output speed (tok/s)", "prod"),
-}
-SITE_DIM_LINKS = {
-    "Composite Cost": None,
-    "AA-Omniscience Non-Hallucination Rate": BENCHMARK_URLS["AA-Omniscience Non-Hallucination Rate"],
-    "DeepSWE pass@1": BENCHMARK_URLS["DeepSWE pass@1"],
-    "GDPval-AA v2.1": BENCHMARK_URLS["GDPval-AA v2.1"],
-    "AutomationBench-AA": BENCHMARK_URLS["AutomationBench-AA"],
-    "Terminal-Bench 4.0": BENCHMARK_URLS["Terminal-Bench 4.0"],
-    "Instruction Following (LiveBench)": BENCHMARK_URLS["LiveBench"],
-    "Bug Hunt Bench bugs fixed out of 105": BENCHMARK_URLS["Bug Hunt Bench"],
-    "AA-LCR v1.1": BENCHMARK_URLS["AA-LCR v1.1"],
-    "AA-Omniscience Accuracy": BENCHMARK_URLS["AA-Omniscience Accuracy"],
-    "Humanity's Last Exam": BENCHMARK_URLS["Humanity's Last Exam"],
-    "GPQA Diamond (legacy)": BENCHMARK_URLS["GPQA Diamond (legacy)"],
-    "CritPt": BENCHMARK_URLS["CritPt"],
-    "Artificial Analysis Intelligence Index": BENCHMARK_URLS["Artificial Analysis Intelligence Index"],
-    "AA output speed (tok/s)": BENCHMARK_URLS["AA output speed (tok/s)"],
-}
-unknown_site_dims = [weight["key"] for weight in weights if weight["key"] not in SITE_DIM_META]
-if unknown_site_dims:
-    raise SystemExit(f"site dimension metadata missing: {unknown_site_dims}")
-SITE_DIMS = [SITE_DIM_META[weight["key"]] for weight in weights]
-speed_dim_idx = next((index for index, item in enumerate(SITE_DIMS) if item[0] == "speed"), -1)
-site_models = []
-for model, cost_fields in zip(models, plan_cost_fields):
-    site_dim_values = [model.get("dims", {}).get(dim_key) for dim_key, _key, _full, _cat in SITE_DIMS]
-    metric_coverage = model.get("metricCoverage") or {}
-    missing_metric_keys = set(metric_coverage.get("missingKeys") or [])
-    site_models.append({
-        "rank": model.get("rank"),
-        "name": model["name"],
-        "shortName": model["shortName"],
-        "developer": model["developer"],
-        "evalCost": model["costComposite"],
-        "aaEvalCost": round(model["aaEvalCost"], 2) if model.get("aaEvalCost") is not None else None,
-        "deepSweCost": model["deepsweCost"],
-        "deepSwePassAt1Pct": model.get("deepswePassAt1Pct"),
-        "apiCost": cost_fields["apiCost"],
-        "planCost": cost_fields["planCost"],
-        "planComparableCost": cost_fields["planComparableCost"],
-        "apiCostScore": cost_fields["apiCostScore"],
-        "planCostScore": cost_fields["planCostScore"],
-        "planCostFallback": cost_fields["planCostFallback"],
-        "planRoute": cost_fields["planRoute"],
-        "aaCostNorm": model["aaCostNorm"],
-        "deepSweCostNorm": model["deepSweCostNorm"],
-        "speed": model.get("speed"),
-        "aaUrl": model["aaUrl"],
-        "livebench": {
-            "model": model.get("livebenchModel"),
-            "overallScore": model.get("livebenchOverall"),
-            "instructionFollowingScore": model.get("livebenchInstructionFollowing"),
-            "costPerSuccessfulTaskUsd": model.get("livebenchCostPerSuccessfulTask"),
-        },
-        "terminalBenchV4": {
-            "model": model.get("terminalBenchV4Model"),
-            "resolutionRate": model.get("terminalBenchV4"),
-            "resolutionRatePct": model.get("terminalBenchV4Pct"),
-            "uncertaintyPct": model.get("terminalBenchV4UncertaintyPct"),
-            "costUsd": model.get("terminalBenchV4Cost"),
-            "agent": model.get("terminalBenchV4Agent"),
-            "releaseDate": model.get("terminalBenchV4ReleaseDate"),
-        },
-        "overallScore": model.get("overallScore"),
-        "qualityScore": model.get("qualityScore"),
-        "qualityRank": model.get("qualityRank"),
-        "metricCoverage": {
-            "availablePriority": metric_coverage.get("availablePriority"),
-            "totalPriority": metric_coverage.get("totalPriority"),
-            "coveragePct": metric_coverage.get("coveragePct"),
-            "missingKeys": metric_coverage.get("missingKeys", []),
-        },
-        "missingMetricLabels": [weight["label"] for weight in weights if weight["key"] in missing_metric_keys],
-        "missingCount": sum(1 for value in site_dim_values if value is None),
-        "dims": site_dim_values,
-        "isMissing": [value is None for value in site_dim_values],
-        "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": ranking_history.get(model["id"]), "v160": None, "v170": None, "v190": ranking_history_v190.get(model["id"]), "v191": ranking_history_v191.get(model["id"]), "v192": ranking_history_v192.get(model["id"]), "v193": model.get("rank")},
-    })
-
-site_livebench = [
-    {
-        "id": record["modelId"],
-        "name": record["name"],
-        "livebenchModel": record["livebenchModel"],
-        "overallScore": record["overallScore"],
-        "instructionFollowingScore": record["instructionFollowingScore"],
-        "costPerSuccessfulTaskUsd": record["costPerSuccessfulTaskUsd"],
-        "pareto": record["modelId"] in livebench_document["pareto"],
+    weight_by_key = {weight["key"]: weight for weight in weights}
+    SITE_DIM_META = {
+        "costComposite": ("costComposite", "Cost", "Composite Cost", "cost"),
+        "omniNonHallucination": ("omniNonHallucination", "NonHalluc", "AA-Omniscience Non-Hallucination Rate", "rely"),
+        "omniAccuracy": ("omniAccuracy", "OmniAcc", "AA-Omniscience Accuracy", "rely"),
+        "terminalBenchV4": ("terminalBenchV4", "Terminal4", "Terminal-Bench 4.0", "code"),
+        "livebenchInstructionFollowing": ("livebenchInstructionFollowing", "LiveBench IF", "Instruction Following (LiveBench)", "language"),
+        "bugHuntFixedOf105": ("bugHuntFixedOf105", "Bug Hunt", "Bug Hunt Bench bugs fixed out of 105", "code"),
+        "deepswePassAt1": ("deepswePassAt1", "DeepSWE", "DeepSWE pass@1", "code"),
+        "gdpvalV21": ("gdpvalV21", "GDPv2.1", "GDPval-AA v2.1", "code"),
+        "automationBenchAA": ("automationBenchAA", "AutoBench", "AutomationBench-AA", "code"),
+        "aaLcr": ("aaLcr", "LCR", "AA-LCR v1.1", "code"),
+        "hle": ("hle", "HLE", "Humanity's Last Exam", "intel"),
+        "gpqaDiamond": ("gpqaDiamond", "GPQA", "GPQA Diamond (legacy)", "intel"),
+        "scicode": ("scicode", "Sci", "SciCode", "intel"),
+        "critpt": ("critpt", "CritPt", "CritPt", "intel"),
+        "intelligenceIndex": ("intelligenceIndex", "AAI", "Artificial Analysis Intelligence Index", "prod"),
+        "speed": ("speed", "Speed", "AA output speed (tok/s)", "prod"),
     }
-    for record in livebench_rows
-]
-livebench_site_table_rows = "\n".join(
-    f"<tr><td>{html_escape(record['name'])}</td><td class=\"mono\">{html_escape(record['livebenchModel'])}</td><td class=\"mono\">{record['instructionFollowingScore']:.2f}</td><td class=\"mono\">{record['overallScore']:.2f}</td><td class=\"mono\">&#36;{record['costPerSuccessfulTaskUsd']:.4f}</td><td>{'Frontier' if record['modelId'] in livebench_document['pareto'] else '—'}</td></tr>"
-    for record in livebench_rows
-)
-bug_hunt_site_table_rows = "\n".join(
-    f"<tr><td>{item['rank']}</td><td>{html_external_link(item['name'], record.get('sourceUrl', BUG_HUNT_URL))}</td>"
-    f"<td class=\"mono\">{record['fixedOf105']:g}/105</td>"
-    f"<td class=\"mono\">{item['emphasisScore']:.1f}</td><td>n={record['sampleN']} ({html_escape(record['aggregation'])})</td>"
-    f"<td>{html_escape(str(record['effort']))} ({html_escape(str(record['effortStatus']))})</td>"
-    f"<td>{html_escape(record['harness'])} / {html_escape(record['route'])}</td><td>{item['primaryRank']}</td></tr>"
-    for item in bug_hunt_ranking["ranking"]
-    for record in [bug_hunt_records[item["modelId"]]]
-)
+    SITE_DIM_LINKS = {
+        "Composite Cost": None,
+        "AA-Omniscience Non-Hallucination Rate": BENCHMARK_URLS["AA-Omniscience Non-Hallucination Rate"],
+        "DeepSWE pass@1": BENCHMARK_URLS["DeepSWE pass@1"],
+        "GDPval-AA v2.1": BENCHMARK_URLS["GDPval-AA v2.1"],
+        "AutomationBench-AA": BENCHMARK_URLS["AutomationBench-AA"],
+        "Terminal-Bench 4.0": BENCHMARK_URLS["Terminal-Bench 4.0"],
+        "Instruction Following (LiveBench)": BENCHMARK_URLS["LiveBench"],
+        "Bug Hunt Bench bugs fixed out of 105": BENCHMARK_URLS["Bug Hunt Bench"],
+        "AA-LCR v1.1": BENCHMARK_URLS["AA-LCR v1.1"],
+        "AA-Omniscience Accuracy": BENCHMARK_URLS["AA-Omniscience Accuracy"],
+        "Humanity's Last Exam": BENCHMARK_URLS["Humanity's Last Exam"],
+        "GPQA Diamond (legacy)": BENCHMARK_URLS["GPQA Diamond (legacy)"],
+        "CritPt": BENCHMARK_URLS["CritPt"],
+        "Artificial Analysis Intelligence Index": BENCHMARK_URLS["Artificial Analysis Intelligence Index"],
+        "AA output speed (tok/s)": BENCHMARK_URLS["AA output speed (tok/s)"],
+    }
+    unknown_site_dims = [weight["key"] for weight in weights if weight["key"] not in SITE_DIM_META]
+    if unknown_site_dims:
+        raise SystemExit(f"site dimension metadata missing: {unknown_site_dims}")
+    SITE_DIMS = [SITE_DIM_META[weight["key"]] for weight in weights]
+    speed_dim_idx = next((index for index, item in enumerate(SITE_DIMS) if item[0] == "speed"), -1)
+    site_models = []
+    for model, cost_fields in zip(models, plan_cost_fields):
+        site_dim_values = [model.get("dims", {}).get(dim_key) for dim_key, _key, _full, _cat in SITE_DIMS]
+        metric_coverage = model.get("metricCoverage") or {}
+        missing_metric_keys = set(metric_coverage.get("missingKeys") or [])
+        site_models.append({
+            "rank": model.get("rank"),
+            "name": model["name"],
+            "shortName": model["shortName"],
+            "developer": model["developer"],
+            "evalCost": model["costComposite"],
+            "aaEvalCost": round(model["aaEvalCost"], 2) if model.get("aaEvalCost") is not None else None,
+            "deepSweCost": model["deepsweCost"],
+            "deepSwePassAt1Pct": model.get("deepswePassAt1Pct"),
+            "apiCost": cost_fields["apiCost"],
+            "planCost": cost_fields["planCost"],
+            "planComparableCost": cost_fields["planComparableCost"],
+            "apiCostScore": cost_fields["apiCostScore"],
+            "planCostScore": cost_fields["planCostScore"],
+            "planCostFallback": cost_fields["planCostFallback"],
+            "planRoute": cost_fields["planRoute"],
+            "aaCostNorm": model["aaCostNorm"],
+            "deepSweCostNorm": model["deepSweCostNorm"],
+            "speed": model.get("speed"),
+            "aaUrl": model["aaUrl"],
+            "livebench": {
+                "model": model.get("livebenchModel"),
+                "overallScore": model.get("livebenchOverall"),
+                "instructionFollowingScore": model.get("livebenchInstructionFollowing"),
+                "costPerSuccessfulTaskUsd": model.get("livebenchCostPerSuccessfulTask"),
+            },
+            "terminalBenchV4": {
+                "model": model.get("terminalBenchV4Model"),
+                "resolutionRate": model.get("terminalBenchV4"),
+                "resolutionRatePct": model.get("terminalBenchV4Pct"),
+                "uncertaintyPct": model.get("terminalBenchV4UncertaintyPct"),
+                "costUsd": model.get("terminalBenchV4Cost"),
+                "agent": model.get("terminalBenchV4Agent"),
+                "releaseDate": model.get("terminalBenchV4ReleaseDate"),
+            },
+            "overallScore": model.get("overallScore"),
+            "qualityScore": model.get("qualityScore"),
+            "qualityRank": model.get("qualityRank"),
+            "metricCoverage": {
+                "availablePriority": metric_coverage.get("availablePriority"),
+                "totalPriority": metric_coverage.get("totalPriority"),
+                "coveragePct": metric_coverage.get("coveragePct"),
+                "missingKeys": metric_coverage.get("missingKeys", []),
+            },
+            "missingMetricLabels": [weight["label"] for weight in weights if weight["key"] in missing_metric_keys],
+            "missingCount": sum(1 for value in site_dim_values if value is None),
+            "dims": site_dim_values,
+            "isMissing": [value is None for value in site_dim_values],
+            "vRanks": {"v70": None, "v80": None, "v90": None, "v100": None, "v110": None, "v120": None, "v130": None, "v131": None, "v140": None, "v150": ranking_history.get(model["id"]), "v160": None, "v170": None, "v190": ranking_history_v190.get(model["id"]), "v191": ranking_history_v191.get(model["id"]), "v192": ranking_history_v192.get(model["id"]), "v193": model.get("rank")},
+        })
 
-plan_site_meta = {
-    "asOf": plan_summary["asOf"],
-    "routeCount": plan_summary["routeCount"],
-    "supportedModelCount": plan_summary["supportedModelCount"],
-    "fallbackModelCount": plan_summary["fallbackModelCount"],
-    "totalModelCount": n,
-    "mixId": plan_summary["mixId"],
-}
+    site_livebench = [
+        {
+            "id": record["modelId"],
+            "name": record["name"],
+            "livebenchModel": record["livebenchModel"],
+            "overallScore": record["overallScore"],
+            "instructionFollowingScore": record["instructionFollowingScore"],
+            "costPerSuccessfulTaskUsd": record["costPerSuccessfulTaskUsd"],
+            "pareto": record["modelId"] in livebench_document["pareto"],
+        }
+        for record in livebench_rows
+    ]
+    livebench_site_table_rows = "\n".join(
+        f"<tr><td>{html_escape(record['name'])}</td><td class=\"mono\">{html_escape(record['livebenchModel'])}</td><td class=\"mono\">{record['instructionFollowingScore']:.2f}</td><td class=\"mono\">{record['overallScore']:.2f}</td><td class=\"mono\">&#36;{record['costPerSuccessfulTaskUsd']:.4f}</td><td>{'Frontier' if record['modelId'] in livebench_document['pareto'] else '—'}</td></tr>"
+        for record in livebench_rows
+    )
+    bug_hunt_site_table_rows = "\n".join(
+        f"<tr><td>{item['rank']}</td><td>{html_external_link(item['name'], record.get('sourceUrl', BUG_HUNT_URL))}</td>"
+        f"<td class=\"mono\">{record['fixedOf105']:g}/105</td>"
+        f"<td class=\"mono\">{item['emphasisScore']:.1f}</td><td>n={record['sampleN']} ({html_escape(record['aggregation'])})</td>"
+        f"<td>{html_escape(str(record['effort']))} ({html_escape(str(record['effortStatus']))})</td>"
+        f"<td>{html_escape(record['harness'])} / {html_escape(record['route'])}</td><td>{item['primaryRank']}</td></tr>"
+        for item in bug_hunt_ranking["ranking"]
+        for record in [bug_hunt_records[item["modelId"]]]
+    )
 
-def replace_once(source, pattern, replacement, label):
-    result, count = re.subn(pattern, replacement, source, count=1)
-    if count != 1:
-        if label in {"heatmap column order", "heatmap category labels"} and count == 0:
-            return source
-        if label == "date stat" and re.search(r'<span class="hero-statbar-num">Sep \d+</span>', source):
-            return source
-        raise SystemExit(f"{label} replacement failed: {count}")
-    return result
+    plan_site_meta = {
+        "asOf": plan_summary["asOf"],
+        "routeCount": plan_summary["routeCount"],
+        "supportedModelCount": plan_summary["supportedModelCount"],
+        "fallbackModelCount": plan_summary["fallbackModelCount"],
+        "totalModelCount": n,
+        "mixId": plan_summary["mixId"],
+    }
 
-html = replace_once(html, r"const DIM_KEYS\s*=\s*\[[^\]]*\];", "const DIM_KEYS = " + json.dumps([item[1] for item in SITE_DIMS], ensure_ascii=False) + ";", "DIM_KEYS")
-html = replace_once(html, r"const DIM_FULL\s*=\s*\[[^\]]*\];", "const DIM_FULL = " + json.dumps([item[2] for item in SITE_DIMS], ensure_ascii=False) + ";", "DIM_FULL")
-html = replace_once(html, r"const DIM_WEIGHTS\s*=\s*\[[^\]]*\];", "const DIM_WEIGHTS = " + json.dumps([weight_by_key[item[0]]["weightPct"] for item in SITE_DIMS]) + ";", "DIM_WEIGHTS")
-html = replace_once(html, r"const DIM_CAT\s*=\s*\[[^\]]*\];", "const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";", "DIM_CAT")
-dim_links_js = "const DIM_LINKS = " + json.dumps([SITE_DIM_LINKS.get(item[2]) for item in SITE_DIMS]) + ";"
-if re.search(r"const DIM_LINKS\s*=\s*\[[^\]]*\];", html):
-    html = replace_once(html, r"const DIM_LINKS\s*=\s*\[[^\]]*\];", dim_links_js, "DIM_LINKS")
-else:
-    html = html.replace("const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";", "const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";\n" + dim_links_js, 1)
-macro_labels = {
-    "cost": ("Cost", "#22c55e"),
-    "rely": ("Reliability", "#a78bfa"),
-    "code": ("Agentic", "#3b82f6"),
-    "intel": ("Intelligence", "#eab308"),
-    "prod": ("Platform", "#f97316"),
-    "language": ("Language", "#ec4899"),
-}
-macro_defs = []
-for category, (label, color) in macro_labels.items():
-    indices = [index for index, item in enumerate(SITE_DIMS) if item[3] == category]
-    if indices:
-        macro_defs.append({"key": category, "label": label, "color": color, "dimIdxs": indices})
-macro = "const MACRO_CATS = " + json.dumps(macro_defs, ensure_ascii=False) + ";"
-html = replace_once(html, r"const MACRO_CATS\s*=\s*\[[\s\S]*?\];", macro, "MACRO_CATS")
-html = replace_once(
-    html,
-    r"const MODELS\s*=\s*\[[\s\S]*?\];(?:\s*const LIVEBENCH\s*=\s*\[[\s\S]*?\];)?",
-    "const MODELS = " + json.dumps(site_models, ensure_ascii=False, indent=2) + ";\n\nconst LIVEBENCH = " + json.dumps(site_livebench, ensure_ascii=False, indent=2) + ";",
-    "MODELS",
-)
-html = replace_once(html, r"const SPEED_DIM_IDX\s*=\s*[^;]+;[^\n]*", "const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";", "SPEED_DIM_IDX")
 
-cost_switcher_js = r"""// COST BASIS SWITCHER START
+    html = replace_once(html, r"const DIM_KEYS\s*=\s*\[[^\]]*\];", "const DIM_KEYS = " + json.dumps([item[1] for item in SITE_DIMS], ensure_ascii=False) + ";", "DIM_KEYS")
+    html = replace_once(html, r"const DIM_FULL\s*=\s*\[[^\]]*\];", "const DIM_FULL = " + json.dumps([item[2] for item in SITE_DIMS], ensure_ascii=False) + ";", "DIM_FULL")
+    html = replace_once(html, r"const DIM_WEIGHTS\s*=\s*\[[^\]]*\];", "const DIM_WEIGHTS = " + json.dumps([weight_by_key[item[0]]["weightPct"] for item in SITE_DIMS]) + ";", "DIM_WEIGHTS")
+    html = replace_once(html, r"const DIM_CAT\s*=\s*\[[^\]]*\];", "const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";", "DIM_CAT")
+    dim_links_js = "const DIM_LINKS = " + json.dumps([SITE_DIM_LINKS.get(item[2]) for item in SITE_DIMS]) + ";"
+    if re.search(r"const DIM_LINKS\s*=\s*\[[^\]]*\];", html):
+        html = replace_once(html, r"const DIM_LINKS\s*=\s*\[[^\]]*\];", dim_links_js, "DIM_LINKS")
+    else:
+        html = html.replace("const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";", "const DIM_CAT = " + json.dumps([item[3] for item in SITE_DIMS]) + ";\n" + dim_links_js, 1)
+    macro_labels = {
+        "cost": ("Cost", "#22c55e"),
+        "rely": ("Reliability", "#a78bfa"),
+        "code": ("Agentic", "#3b82f6"),
+        "intel": ("Intelligence", "#eab308"),
+        "prod": ("Platform", "#f97316"),
+        "language": ("Language", "#ec4899"),
+    }
+    macro_defs = []
+    for category, (label, color) in macro_labels.items():
+        indices = [index for index, item in enumerate(SITE_DIMS) if item[3] == category]
+        if indices:
+            macro_defs.append({"key": category, "label": label, "color": color, "dimIdxs": indices})
+    macro = "const MACRO_CATS = " + json.dumps(macro_defs, ensure_ascii=False) + ";"
+    html = replace_once(html, r"const MACRO_CATS\s*=\s*\[[\s\S]*?\];", macro, "MACRO_CATS")
+    html = replace_once(
+        html,
+        r"const MODELS\s*=\s*\[[\s\S]*?\];(?:\s*const LIVEBENCH\s*=\s*\[[\s\S]*?\];)?",
+        "const MODELS = " + json.dumps(site_models, ensure_ascii=False, indent=2) + ";\n\nconst LIVEBENCH = " + json.dumps(site_livebench, ensure_ascii=False, indent=2) + ";",
+        "MODELS",
+    )
+    html = replace_once(html, r"const SPEED_DIM_IDX\s*=\s*[^;]+;[^\n]*", "const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";", "SPEED_DIM_IDX")
+
+    cost_switcher_js = r"""// COST BASIS SWITCHER START
 const PLAN_COST_META = PLAN_META_JSON;
 let costBasis = 'api';
 let costWeightPct = COST_WEIGHT_DEFAULT;
@@ -1159,100 +1241,100 @@ function initCostBasis() {
   applyCostBasis(saved);
 }
 // COST BASIS SWITCHER END""".replace("PLAN_META_JSON", json.dumps(plan_site_meta, ensure_ascii=False)).replace("COST_WEIGHT_DEFAULT", f"{cost_weight['weightPct']:.4f}")
-cost_switcher_pattern = r"// COST BASIS SWITCHER START[\s\S]*?// COST BASIS SWITCHER END"
-if re.search(cost_switcher_pattern, html):
-    html = replace_once(html, cost_switcher_pattern, cost_switcher_js, "cost basis switcher")
-else:
-    html = html.replace("const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";", "const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";\n\n" + cost_switcher_js, 1)
+    cost_switcher_pattern = r"// COST BASIS SWITCHER START[\s\S]*?// COST BASIS SWITCHER END"
+    if re.search(cost_switcher_pattern, html):
+        html = replace_once(html, cost_switcher_pattern, cost_switcher_js, "cost basis switcher")
+    else:
+        html = html.replace("const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";", "const SPEED_DIM_IDX = " + str(speed_dim_idx) + ";\n\n" + cost_switcher_js, 1)
 
-# Keep every cost-bearing interactive surface honest when the basis changes.
-# These replacements are intentionally idempotent because the emitter reads
-# its own generated shell on subsequent refreshes.
-dynamic_cost_chart_replacements = [
-    (
-        "  return `AA Eval Cost: ${fmtUsd(m.aaEvalCost)}<br>DeepSWE Avg Cost: ${fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;",
-        "  return `Selected ${costBasisLabel()}: ${fmtUsd(m.activeCostUsd, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}<br>${costBasisTooltip(m)}`;",
-    ),
-    (
-        "    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })\n  ];",
-        "    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),\n    costBasisTooltip(m)\n  ];",
-    ),
-    (
-        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';",
-        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';",
-    ),
-    (
-        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<extra>Frontier</extra>';",
-        "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<extra>Frontier</extra>';",
-    ),
-    (
-        "title: { text: 'ValueRank Pareto Frontier — Quality vs Composite Cost', font: plotlyTitle(14) },",
-        "title: { text: 'ValueRank Pareto Frontier — Quality vs ' + costBasisLabel(), font: plotlyTitle(14) },",
-    ),
-    (
-        "      title: 'Composite Cost (0–100, lower better)',",
-        "      title: costBasisLabel() + ' (0–100, lower better)',",
-    ),
-    (
-        "     title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
-        "     title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
-    ),
-    (
-        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
-        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
-    ),
-    (
-        "  const colLabels = colOrder.map(i => DIM_KEYS[i]);",
-        "  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
-    ),
-    (
-        "'<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>'",
-        "'<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>'",
-    ),
-    (
-        "title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
-        "title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
-    ),
-    (
-        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
-        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
-    ),
-    (
-        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<extra></extra>`),",
-        "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
-    ),
-    (
-        "title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of 25% cost weight', font:plotlyTitle(13)},",
-        "title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of ' + costWeightPct + '% ' + costBasisLabel() + ' weight', font:plotlyTitle(13)},",
-    ),
-    (
-        "    xaxis:{...getPlotlyLayout().xaxis, title:'Composite Cost (0-100)', range:[0,105]},",
-        "    xaxis:{...getPlotlyLayout().xaxis, title:costBasisLabel() + ' (0-100)', range:[0,105]},",
-    ),
-    (
-        "    annotations:[\n      {x:7.04, y:58.1, xref:'x', yref:'y', text:'MiMo +13.9 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},\n      {x:80.37, y:51.8, xref:'x', yref:'y', text:'Opus 4.8 -14.5 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:0, ay:70},\n    ]",
-        "    annotations:[]",
-    ),
-]
-for old, new in dynamic_cost_chart_replacements:
-    if old in html:
-        html = html.replace(old, new, 1)
+    # Keep every cost-bearing interactive surface honest when the basis changes.
+    # These replacements are intentionally idempotent because the emitter reads
+    # its own generated shell on subsequent refreshes.
+    dynamic_cost_chart_replacements = [
+        (
+            "  return `AA Eval Cost: ${fmtUsd(m.aaEvalCost)}<br>DeepSWE Avg Cost: ${fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;",
+            "  return `Selected ${costBasisLabel()}: ${fmtUsd(m.activeCostUsd, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}<br>${costBasisTooltip(m)}`;",
+        ),
+        (
+            "    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })\n  ];",
+            "    fmtUsd(m.deepSweCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),\n    costBasisTooltip(m)\n  ];",
+        ),
+        (
+            "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';",
+            "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<br>Missing scored cells: %{customdata[2]}<extra></extra>';",
+        ),
+        (
+            "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>Composite Cost: %{x:.1f}<br>Overall: %{customdata[1]}<br>AA Eval: %{customdata[3]}<br>DeepSWE: %{customdata[4]}<extra>Frontier</extra>';",
+            "    '<b>%{customdata[0]}</b><br>Quality: %{y:.1f}<br>' + costBasisLabel() + ': %{x:.1f}<br>Overall: %{customdata[1]}<br>%{customdata[5]}<extra>Frontier</extra>';",
+        ),
+        (
+            "title: { text: 'ValueRank Pareto Frontier — Quality vs Composite Cost', font: plotlyTitle(14) },",
+            "title: { text: 'ValueRank Pareto Frontier — Quality vs ' + costBasisLabel(), font: plotlyTitle(14) },",
+        ),
+        (
+            "      title: 'Composite Cost (0–100, lower better)',",
+            "      title: costBasisLabel() + ' (0–100, lower better)',",
+        ),
+        (
+            "     title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
+            "     title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
+        ),
+        (
+            "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
+            "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
+        ),
+        (
+            "  const colLabels = colOrder.map(i => DIM_KEYS[i]);",
+            "  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
+        ),
+        (
+            "'<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>'",
+            "'<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>'",
+        ),
+        (
+            "title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
+            "title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
+        ),
+        (
+            "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>Composite Cost: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
+            "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
+        ),
+        (
+            "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<extra></extra>`),",
+            "hovertemplate: MODELS.map(m => `<b>${m.name}</b><br>Overall: ${m.overallScore}<br>Quality: ${m.qualityScore}<br>${costBasisLabel()}: ${m.evalCost.toFixed(1)}<br>Change: ${(m.overallScore-m.qualityScore).toFixed(1)}<br>${fmtAaDeepSweHover(m)}<extra></extra>`),",
+        ),
+        (
+            "title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of 25% cost weight', font:plotlyTitle(13)},",
+            "title:{text:'Cost Impact: Quality Score (○) vs. Overall Score (◆) — Lines show effect of ' + costWeightPct + '% ' + costBasisLabel() + ' weight', font:plotlyTitle(13)},",
+        ),
+        (
+            "    xaxis:{...getPlotlyLayout().xaxis, title:'Composite Cost (0-100)', range:[0,105]},",
+            "    xaxis:{...getPlotlyLayout().xaxis, title:costBasisLabel() + ' (0-100)', range:[0,105]},",
+        ),
+        (
+            "    annotations:[\n      {x:7.04, y:58.1, xref:'x', yref:'y', text:'MiMo +13.9 pts<br>(cost bonus)', font:{color:'#22c55e',size:9}, showarrow:true, arrowcolor:'#22c55e', ax:50, ay:20},\n      {x:80.37, y:51.8, xref:'x', yref:'y', text:'Opus 4.8 -14.5 pts<br>(cost penalty)', font:{color:'#ef4444',size:9}, showarrow:true, arrowcolor:'#ef4444', ax:0, ay:70},\n    ]",
+            "    annotations:[]",
+        ),
+    ]
+    for old, new in dynamic_cost_chart_replacements:
+        if old in html:
+            html = html.replace(old, new, 1)
 
-dynamic_hero_replacements = [
-    (
-        '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>',
-        '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE v1.1 ${m1.deepSwePassAt1Pct == null ? "—" : Number(m1.deepSwePassAt1Pct).toFixed(1) + "%"}</div>',
-    ),
-    (
-        '<div class="podium-runner-meta">${m.developer} · $${m.evalCost.toFixed(1)} composite</div>',
-        '<div class="podium-runner-meta">${m.developer} · ${costBasisLabel()} ${fmtUsd(m.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m)}</div>',
-    ),
-]
-for old, new in dynamic_hero_replacements:
-    if old in html:
-        html = html.replace(old, new, 1)
+    dynamic_hero_replacements = [
+        (
+            '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE ${fmtUsd(m1.deepSweCost, {minimumFractionDigits:2, maximumFractionDigits:2})}</div>',
+            '<div class="podium-hero-meta">${m1.developer} · ${m1.costTier} · ${costBasisLabel()} ${fmtUsd(m1.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m1)} · ${m1.evalCost.toFixed(1)} score · AA ${fmtUsd(m1.aaEvalCost, {maximumFractionDigits:0})} · DeepSWE v1.1 ${m1.deepSwePassAt1Pct == null ? "—" : Number(m1.deepSwePassAt1Pct).toFixed(1) + "%"}</div>',
+        ),
+        (
+            '<div class="podium-runner-meta">${m.developer} · $${m.evalCost.toFixed(1)} composite</div>',
+            '<div class="podium-runner-meta">${m.developer} · ${costBasisLabel()} ${fmtUsd(m.activeCostUsd, {minimumFractionDigits:2, maximumFractionDigits:2})} · ${activeCostRouteLabel(m)}</div>',
+        ),
+    ]
+    for old, new in dynamic_hero_replacements:
+        if old in html:
+            html = html.replace(old, new, 1)
 
-ranking_table_function = r"""function renderTable() {
+    ranking_table_function = r"""function renderTable() {
   let models = tableModels.filter(m => {
     if (tierFilter === 'all') return true;
     if (tierFilter === 'Expensive') return ['Expensive','Very Expensive','Ultra-Premium'].includes(m.costTier);
@@ -1302,9 +1384,9 @@ ranking_table_function = r"""function renderTable() {
     </tr>`;
   }).join('');
 }"""
-html = replace_once(html, r"function renderTable\(\) \{[\s\S]*?\n\}\n\nfunction initTable\(\)", ranking_table_function.rstrip() + "\n\nfunction initTable()", "ranking table")
+    html = replace_once(html, r"function renderTable\(\) \{[\s\S]*?\n\}\n\nfunction initTable\(\)", ranking_table_function.rstrip() + "\n\nfunction initTable()", "ranking table")
 
-cost_slider_function = r"""function initCostSlider() {
+    cost_slider_function = r"""function initCostSlider() {
   const slider = document.getElementById('cost-slider');
   const valEl  = document.getElementById('slider-val');
   if (!slider) return;
@@ -1317,9 +1399,9 @@ cost_slider_function = r"""function initCostSlider() {
     rerenderCostBasisViews();
   });
 }"""
-html = replace_once(html, r"function initCostSlider\(\) \{[\s\S]*?\n\}(?=\n\n// ─+)", cost_slider_function.rstrip(), "cost slider")
+    html = replace_once(html, r"function initCostSlider\(\) \{[\s\S]*?\n\}(?=\n\n// ─+)", cost_slider_function.rstrip(), "cost slider")
 
-dim_table_function = r"""function renderDimTable() {
+    dim_table_function = r"""function renderDimTable() {
   const catLabels = { cost:'Cost', rely:'Reliability', code:'Code/Agentic', prod:'Production', intel:'Intelligence', language:'Language' };
   const catClasses = { cost:'cat-cost', rely:'cat-rely', code:'cat-code', prod:'cat-prod', intel:'cat-intel', language:'cat-code' };
   const tbody = document.getElementById('dim-table-body');
@@ -1340,33 +1422,33 @@ dim_table_function = r"""function renderDimTable() {
     </tr>`;
   }).join('');
 }"""
-html = replace_once(html, r"function renderDimTable\(\) \{[\s\S]*?\n\}", dim_table_function.rstrip(), "dimension table")
+    html = replace_once(html, r"function renderDimTable\(\) \{[\s\S]*?\n\}", dim_table_function.rstrip(), "dimension table")
 
-html = replace_once(
-    html,
-    r"  // Column order:[\s\S]*?  const z\s*=",
-    "  // Column order follows generated Cost | Reliability | Agentic | Intelligence | Platform groups.\n  const colOrder = DIM_KEYS.map((_, i) => i);\n  const colLabels = colOrder.map(i => DIM_KEYS[i]);\n  const colFull   = colOrder.map(i => DIM_FULL[i]);\n  const colWeights= colOrder.map(i => DIM_WEIGHTS[i]);\n\n  const z =",
-    "heatmap column order",
-)
-divider_values = []
-for index in range(1, len(SITE_DIMS)):
-    if SITE_DIMS[index][3] != SITE_DIMS[index - 1][3]:
-        divider_values.append(index - 0.5)
-html = replace_once(html, r"  const dividers = \[[^\]]*\];", "  const dividers = " + json.dumps(divider_values) + ";", "heatmap dividers")
-cat_positions = []
-for category, (label, color) in macro_labels.items():
-    indices = [index for index, item in enumerate(SITE_DIMS) if item[3] == category]
-    if indices:
-        cat_positions.append({"x": sum(indices) / len(indices), "text": label, "color": color, "y": -0.08})
-cat_labels_js = "  const catLabels = " + json.dumps(cat_positions, ensure_ascii=False) + ";\n\n  const catAnnotations"
-html = replace_once(
-    html,
-    r"  const catLabels = \[[\s\S]*?  \];\n\n  const catAnnotations",
-    cat_labels_js,
-    "heatmap category labels",
-)
+    html = replace_once(
+        html,
+        r"  // Column order:[\s\S]*?  const z\s*=",
+        "  // Column order follows generated Cost | Reliability | Agentic | Intelligence | Platform groups.\n  const colOrder = DIM_KEYS.map((_, i) => i);\n  const colLabels = colOrder.map(i => DIM_KEYS[i]);\n  const colFull   = colOrder.map(i => DIM_FULL[i]);\n  const colWeights= colOrder.map(i => DIM_WEIGHTS[i]);\n\n  const z =",
+        "heatmap column order",
+    )
+    divider_values = []
+    for index in range(1, len(SITE_DIMS)):
+        if SITE_DIMS[index][3] != SITE_DIMS[index - 1][3]:
+            divider_values.append(index - 0.5)
+    html = replace_once(html, r"  const dividers = \[[^\]]*\];", "  const dividers = " + json.dumps(divider_values) + ";", "heatmap dividers")
+    cat_positions = []
+    for category, (label, color) in macro_labels.items():
+        indices = [index for index, item in enumerate(SITE_DIMS) if item[3] == category]
+        if indices:
+            cat_positions.append({"x": sum(indices) / len(indices), "text": label, "color": color, "y": -0.08})
+    cat_labels_js = "  const catLabels = " + json.dumps(cat_positions, ensure_ascii=False) + ";\n\n  const catAnnotations"
+    html = replace_once(
+        html,
+        r"  const catLabels = \[[\s\S]*?  \];\n\n  const catAnnotations",
+        cat_labels_js,
+        "heatmap category labels",
+    )
 
-speed_function = r"""function renderBubble() {
+    speed_function = r"""function renderBubble() {
   const bubbleModels = MODELS.filter(m => Number.isFinite(Number(m.speed)));
   const target = document.getElementById('chart-bubble');
   if (!bubbleModels.length) {
@@ -1413,38 +1495,38 @@ speed_function = r"""function renderBubble() {
   });
 }
 """
-html = replace_once(html, r"function renderBubble\(\) \{[\s\S]*?\n\}\n\n// ─+\n// CHART 6", speed_function + "\n// ─────────────────────────────────────────────\n// CHART 6", "speed chart")
+    html = replace_once(html, r"function renderBubble\(\) \{[\s\S]*?\n\}\n\n// ─+\n// CHART 6", speed_function + "\n// ─────────────────────────────────────────────\n// CHART 6", "speed chart")
 
-# The renderer above is replaced as a whole, so apply its basis-aware labels
-# after that replacement.  The remaining chart functions are patched here as
-# well, after their source has been normalized by the earlier replacements.
-post_renderer_cost_replacements = [
-    (
-        "     title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
-        "     title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
-    ),
-    (
-        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
-        "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
-    ),
-    (
-        "     hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
-        "     hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
-    ),
-    (
-        "     title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
-        "     title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
-    ),
-    (
-        "  const colLabels = colOrder.map(i => DIM_KEYS[i]);",
-        "  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
-    ),
-]
-for old, new in post_renderer_cost_replacements:
-    if old in html:
-        html = html.replace(old, new, 1)
+    # The renderer above is replaced as a whole, so apply its basis-aware labels
+    # after that replacement.  The remaining chart functions are patched here as
+    # well, after their source has been normalized by the earlier replacements.
+    post_renderer_cost_replacements = [
+        (
+            "     title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
+            "     title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
+        ),
+        (
+            "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
+            "     title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
+        ),
+        (
+            "     hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+            "     hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+        ),
+        (
+            "     title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
+            "     title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
+        ),
+        (
+            "  const colLabels = colOrder.map(i => DIM_KEYS[i]);",
+            "  const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
+        ),
+    ]
+    for old, new in post_renderer_cost_replacements:
+        if old in html:
+            html = html.replace(old, new, 1)
 
-livebench_function = r"""function renderLiveBenchPareto() {
+    livebench_function = r"""function renderLiveBenchPareto() {
   const rows = LIVEBENCH.filter(m => Number.isFinite(Number(m.overallScore)) && Number.isFinite(Number(m.costPerSuccessfulTaskUsd)));
   const target = document.getElementById('chart-livebench-pareto');
   if (!rows.length) {
@@ -1500,282 +1582,270 @@ livebench_function = r"""function renderLiveBenchPareto() {
   });
 }
 """
-if "function renderLiveBenchPareto()" in html:
-    html = replace_once(html, r"function renderLiveBenchPareto\(\) \{[\s\S]*?\n\}(?=\n\nfunction renderPareto\(\))", livebench_function.rstrip(), "LiveBench Pareto chart")
-else:
-    html = html.replace("function renderPareto()", livebench_function + "\nfunction renderPareto()", 1)
-if "function renderPareto()" not in html:
-    raise SystemExit("root Pareto renderer missing")
+    if "function renderLiveBenchPareto()" in html:
+        html = replace_once(html, r"function renderLiveBenchPareto\(\) \{[\s\S]*?\n\}(?=\n\nfunction renderPareto\(\))", livebench_function.rstrip(), "LiveBench Pareto chart")
+    else:
+        html = html.replace("function renderPareto()", livebench_function + "\nfunction renderPareto()", 1)
+    if "function renderPareto()" not in html:
+        raise SystemExit("root Pareto renderer missing")
 
-html = html.replace("const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1'];", "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0'];")
-html = html.replace("const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131'];", "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140'];")
-html = html.replace("v === 'v1.3.1' ?", "v === 'v1.4.0' ?")
-html = html.replace("v1.3.1: 17 models · 12 dims", "v1.4.0: 21 models · 13 dims")
-html = html.replace("v1.4.0: 21 models · 13 dims", f"v1.4.0: {n} models · {d} dims")
+    html = html.replace("const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1'];", "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0'];")
+    html = html.replace("const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131'];", "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140'];")
+    html = html.replace("v === 'v1.3.1' ?", "v === 'v1.4.0' ?")
+    html = html.replace("v1.3.1: 17 models · 12 dims", "v1.4.0: 21 models · 13 dims")
+    html = html.replace("v1.4.0: 21 models · 13 dims", f"v1.4.0: {n} models · {d} dims")
 
-html = html.replace("v1.3.1", VERSION)
-html = html.replace("July 28, 2026", DATE)
-html = html.replace("17 models", f"{n} models")
-html = html.replace("n=17", f"n={n}")
-html = html.replace("12 dimensions", f"{d} dimensions")
-html = html.replace("12 Total", f"{d} Total")
-html = html.replace("All 17", f"All {n}")
-html = html.replace("all 17", f"all {n}")
-html = html.replace("12 normalized", f"{d} normalized")
-html = html.replace("all 11 non-cost", f"all {d - 1} non-cost")
-html = html.replace("75% non-cost", f"{100 - weight_by_key['costComposite']['weightPct']:.0f}% non-cost")
-html = html.replace("the 8 ranked models", f"the {n}-model cohort")
-html = html.replace("n = 17", f"n = {n}")
-html = html.replace("rank 17", f"rank {n}")
-html = html.replace("17 DeepSWE", f"{n} DeepSWE")
-html = html.replace("12 zero-gap dimensions", f"{d} retained dimensions")
-html = html.replace("17 × 12", f"{n} × {d}")
-html = html.replace("ranked 1–17", f"ranked 1–{n}")
-html = html.replace("Seven complementary charts", "Eight complementary charts")
-html = html.replace("Sep 4", "Sep 6")
-html = html.replace("Sep 5", "Sep 6")
-html = html.replace("ValueRank v1.4.0", f"ValueRank {VERSION}")
-html = html.replace("Production AI Ranking Framework · v1.4.0", f"Production AI Ranking Framework · {VERSION}")
-html = html.replace("v1.4.0 uses zero missing benchmark cells", f"{VERSION} shows unavailable metrics explicitly and renormalizes over each model's observed dimensions")
+    html = html.replace("v1.3.1", VERSION)
+    html = html.replace("July 28, 2026", DATE)
+    html = html.replace("17 models", f"{n} models")
+    html = html.replace("n=17", f"n={n}")
+    html = html.replace("12 dimensions", f"{d} dimensions")
+    html = html.replace("12 Total", f"{d} Total")
+    html = html.replace("All 17", f"All {n}")
+    html = html.replace("all 17", f"all {n}")
+    html = html.replace("12 normalized", f"{d} normalized")
+    html = html.replace("all 11 non-cost", f"all {d - 1} non-cost")
+    html = html.replace("75% non-cost", f"{100 - weight_by_key['costComposite']['weightPct']:.0f}% non-cost")
+    html = html.replace("the 8 ranked models", f"the {n}-model cohort")
+    html = html.replace("n = 17", f"n = {n}")
+    html = html.replace("rank 17", f"rank {n}")
+    html = html.replace("17 DeepSWE", f"{n} DeepSWE")
+    html = html.replace("12 zero-gap dimensions", f"{d} retained dimensions")
+    html = html.replace("17 × 12", f"{n} × {d}")
+    html = html.replace("ranked 1–17", f"ranked 1–{n}")
+    html = html.replace("Seven complementary charts", "Eight complementary charts")
+    html = html.replace("Sep 4", "Sep 6")
+    html = html.replace("Sep 5", "Sep 6")
+    html = html.replace("ValueRank v1.4.0", f"ValueRank {VERSION}")
+    html = html.replace("Production AI Ranking Framework · v1.4.0", f"Production AI Ranking Framework · {VERSION}")
+    html = html.replace("v1.4.0 uses zero missing benchmark cells", f"{VERSION} shows unavailable metrics explicitly and renormalizes over each model's observed dimensions")
 
-if "try { initCostBasis(); } catch (e) { console.error(e); }" not in html:
-    html = html.replace(
-        "  if (document.getElementById('ranking-tbody')) {\n    try { renderHeroPodium(); } catch (e) { console.error(e); }",
-        "  if (document.getElementById('ranking-tbody')) {\n    try { initCostBasis(); } catch (e) { console.error(e); }\n    try { renderHeroPodium(); } catch (e) { console.error(e); }",
-        1,
+    if "try { initCostBasis(); } catch (e) { console.error(e); }" not in html:
+        html = html.replace(
+            "  if (document.getElementById('ranking-tbody')) {\n    try { renderHeroPodium(); } catch (e) { console.error(e); }",
+            "  if (document.getElementById('ranking-tbody')) {\n    try { initCostBasis(); } catch (e) { console.error(e); }\n    try { renderHeroPodium(); } catch (e) { console.error(e); }",
+            1,
+        )
+    html = html.replace("v1.4.0 Release", f"{VERSION} Release")
+    html = html.replace("primary-source data in v1.4.0", f"primary-source data in {VERSION}")
+    html = html.replace("retained v1.4.0 dimension", f"retained {VERSION} dimension")
+    html = html.replace("in <strong>v1.4.0</strong>", f"in <strong>{VERSION}</strong>")
+    html = html.replace("v1.4.0 has <strong>no missing-data", f"{VERSION} marks missing data")
+    html = html.replace("In <strong>v1.4.0</strong>", f"In <strong>{VERSION}</strong>")
+    html = html.replace("in v1.4.0", f"in {VERSION}")
+    html = html.replace("weighted average of 13 normalized", f"weighted average of {d} normalized")
+    html = html.replace("cost is constructed from normalized AA eval cost plus normalized DeepSWE average cost before rank-normalization.", f"cost uses {cost_mode_label} and is rank-normalized with lower cost better.")
+    html = html.replace("two-source cost composite", f"{cost_mode_label} cost composite")
+    html = html.replace("The composite cost term values models that stay efficient on both public pricing surfaces.", f"The composite cost term uses {cost_mode_label}.")
+    html = html.replace("September 5, 2026", DATE)
+    html = html.replace("v1.4.0 to", f"{VERSION} to")
+    html = html.replace("v === 'v1.4.0' ?", f"v === '{VERSION}' ?")
+    html = html.replace("Ranking History — v0.7 to v1.4.0", f"Ranking History — v0.7 to {VERSION}")
+    html = html.replace("x:'v1.4.0', y:1", f"x:'{VERSION}', y:1")
+    html = html.replace("text:'v1.4.0: 21 models · 12 dims'", f"text:'{VERSION}: {n} models · {d} dims'")
+    html = re.sub(r"const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
+    html = re.sub(
+        r"const versions = \[[^;]*\];",
+        "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2','v1.9.3'];",
+        html,
+        count=1,
     )
-html = html.replace("v1.4.0 Release", f"{VERSION} Release")
-html = html.replace("primary-source data in v1.4.0", f"primary-source data in {VERSION}")
-html = html.replace("retained v1.4.0 dimension", f"retained {VERSION} dimension")
-html = html.replace("in <strong>v1.4.0</strong>", f"in <strong>{VERSION}</strong>")
-html = html.replace("v1.4.0 has <strong>no missing-data", f"{VERSION} marks missing data")
-html = html.replace("In <strong>v1.4.0</strong>", f"In <strong>{VERSION}</strong>")
-html = html.replace("in v1.4.0", f"in {VERSION}")
-html = html.replace("weighted average of 13 normalized", f"weighted average of {d} normalized")
-html = html.replace("cost is constructed from normalized AA eval cost plus normalized DeepSWE average cost before rank-normalization.", f"cost uses {cost_mode_label} and is rank-normalized with lower cost better.")
-html = html.replace("two-source cost composite", f"{cost_mode_label} cost composite")
-html = html.replace("The composite cost term values models that stay efficient on both public pricing surfaces.", f"The composite cost term uses {cost_mode_label}.")
-html = html.replace("September 5, 2026", DATE)
-html = html.replace("v1.4.0 to", f"{VERSION} to")
-html = html.replace("v === 'v1.4.0' ?", f"v === '{VERSION}' ?")
-html = html.replace("Ranking History — v0.7 to v1.4.0", f"Ranking History — v0.7 to {VERSION}")
-html = html.replace("x:'v1.4.0', y:1", f"x:'{VERSION}', y:1")
-html = html.replace("text:'v1.4.0: 21 models · 12 dims'", f"text:'{VERSION}: {n} models · {d} dims'")
-html = re.sub(r"const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
-html = re.sub(
-    r"const versions = \[[^;]*\];",
-    "const versions = ['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2','v1.9.3'];",
-    html,
-    count=1,
-)
-html = re.sub(
-    r"const vKeys = \[[^;]*\];",
-    "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191','v192','v193'];",
-    html,
-    count=1,
-)
-
-hero_desc = (
-    f'ValueRank ranks <strong>{n} models</strong> with at least one available non-cost quality dimension from a {source_n}-model AA-mapped comparison roster reconciled to the current AA Intelligence Index score-versus-total-benchmark-cost frontier. '
-    f'Each model score uses its observed retained dimensions, with available priorities renormalized per model; priority coverage and missing metrics are shown beside partial scores. Bug Hunt contributes {bug_hunt_weight["weightPct"]:.2f}% of the main score when observed. {VERSION} uses '
-    f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus configuration-specific DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. '
-    f'Speed is {"included in the score" if speed_in_primary else "excluded from the score"}; AA speed is numeric for {speed_selected_available_n}/{n} selected pages and missing for {speed_missing_text}. Dimensions excluded from this release are {", ".join(item["label"] for item in dropped if item["label"] != "Speed") or "none"}.'
-)
-html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero-desc">\n          {hero_desc}\n        </p>', "hero copy")
-html = replace_once(html, r'<div class="(?:nav-meta|vr-nav-meta)">[^<]*</div>', f'<div class="vr-nav-meta">{DATE} · {n} models · {d} dimensions</div>', "nav metadata")
-html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Models Ranked', f'<span class="hero-statbar-num">{n}</span>\n        <span class="hero-statbar-label">Models Ranked', "model stat")
-html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Scored Dimensions', f'<span class="hero-statbar-num">{d}</span>\n        <span class="hero-statbar-label">Scored Dimensions', "dimension stat")
-html = replace_once(html, r'<span class="hero-statbar-num">(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{1,2}</span>', f'<span class="hero-statbar-num">{SHORT_DATE}</span>', "date stat")
-
-insight_bodies = [
-    'The Pareto view highlights models that are not outperformed on both quality and the selected cost basis.',
-    'Quality and overall scores separate benchmark performance from the selected cost view.',
-    'Compare API Costs and Plan Costs with Quality to find the best fit for your usage.',
-    f'{VERSION} records <strong>{len(deepswe_configurations)} AA DeepSWE chart configurations</strong> and uses <strong>{d} retained dimensions</strong> with per-model weight renormalization for available results; {"Speed is included" if speed_in_primary else "Speed is excluded"} because it is observed for {speed_selected_available_n}/{n} ranked models.',
-]
-grid_start = html.find('<div class="insight-grid"')
-grid_end = html.find('</section>', grid_start)
-if grid_start < 0 or grid_end < 0:
-    raise SystemExit("insight grid not found")
-grid = html[grid_start:grid_end]
-insight_cursor = iter(insight_bodies)
-grid, insight_count = re.subn(
-    r'<div class="insight-body">[\s\S]*?</div>',
-    lambda _match: f'<div class="insight-body">{next(insight_cursor)}</div>',
-    grid,
-    count=len(insight_bodies),
-)
-if insight_count != len(insight_bodies):
-    raise SystemExit(f"insight replacement failed: {insight_count}")
-html = html[:grid_start] + grid + html[grid_end:]
-
-chart_replacements = [
-    (r'<div class="chart-desc"><strong>(?:ValueRank )?Pareto Frontier:</strong>[\s\S]*?</div>', f'<div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>{pareto_text}</strong>. Every other ranked model is dominated on composite cost versus quality.</div>'),
-    (r'(<div class="chart-desc"><strong>Score Decomposition:</strong>)[\s\S]*?</div>', f'\\1 {VERSION} decomposes the weighted <strong>{d}-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>'),
-    (r'(<div class="chart-desc"><strong>Dimension Heatmap:</strong>)[\s\S]*?</div>', f'\\1 All {n} models × {d} retained dimensions. Color = normalized rank score; missing cells are marked unavailable (⊘).</div>'),
-    (r'(<div class="chart-desc"><strong>Version History:</strong>)[\s\S]*?</div>', f'\\1 Historical rank context through {VERSION}. The current point is a new benchmark-version snapshot, not a claim of score continuity.</div>'),
-]
-for pattern, replacement in chart_replacements:
-    html = replace_once(html, pattern, replacement, "chart copy")
-html = re.sub(
-    r"(?:Quality vs Composite Cost — (?:ValueRank )?Pareto Frontier|ValueRank Pareto Frontier — Quality vs Composite Cost)",
-    "ValueRank Pareto Frontier — Quality vs Composite Cost",
-    html,
-)
-
-html = re.sub(
-    r'(<div class="section-sub">)How scores are calculated(?: across)?[\s\S]*?(</div>)',
-    rf'\1How scores are calculated from each model’s available dimensions, with per-model weight renormalization and explicit coverage provenance.\2',
-    html,
-    count=1,
-)
-html = html.replace("Cost now uses a composite 0–100 scale built from normalized AA eval cost and normalized DeepSWE average cost per task.", site_cost_summary)
-html = html.replace("For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.", site_cost_raw_input)
-html = html.replace("The 25% cost weight therefore now combines Artificial Analysis eval cost with DeepSWE average cost per task into a single cost-efficiency term.", site_cost_weight)
-html = html.replace("⊘ Missing: %{customdata[2]}", "Missing scored cells: %{customdata[2]}")
-
-# Apply the final cost-basis labels after every renderer and card replacement.
-# Keeping these replacements at the end makes the generated artifact idempotent
-# even when an earlier chart renderer is replaced wholesale.
-final_cost_surface_replacements = [
-    (
-        "title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
-        "title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
-    ),
-    (
-        "title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
-        "title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
-    ),
-    (
-        "hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
-        "hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
-    ),
-    (
-        "title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
-        "title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
-    ),
-    (
-        "const colLabels = colOrder.map(i => DIM_KEYS[i]);",
-        "const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
-    ),
-    (
-        "Cost now uses a 0–100 rank scale built from normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete.",
-        site_cost_summary,
-    ),
-    (
-        "Every other ranked model is dominated on composite cost versus quality.",
-        "Every other ranked model is dominated on the selected <span data-cost-basis-label>API Costs</span> versus quality.",
-    ),
-    (
-        "Which models are fast AND high-quality AND cheap on the composite-cost basis?",
-        "Which models are fast AND high-quality AND cheap on the selected <span data-cost-basis-label>API Costs</span> basis?",
-    ),
-    (
-        "Color = cost tier. Hover for raw AA cost and DeepSWE average-cost components.",
-        "Color = cost tier. Hover for the selected cost basis, route provenance, and source components.",
-    ),
-    (
-        "X-axis = composite cost.",
-        "X-axis = <span data-cost-basis-label>API Costs</span> score.",
-    ),
-    (
-        "The composite cost term uses DeepSWE-only.",
-        "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple.",
-    ),
-    (
-        "and the DeepSWE-only cost composite.",
-        "and the selected <span data-cost-basis-label>API Costs</span> cost composite.",
-    ),
-    (
-        "function compositeCostTier(cost) {\n  if (cost <= 15) return 'Budget';\n  if (cost <= 22) return 'Near-Budget';\n  if (cost <= 35) return 'Mid-Range';\n  if (cost <= 55) return 'Premium';\n  return 'Expensive';\n}",
-        "function compositeCostTier(cost) {\n  if (cost === null || cost === undefined || !Number.isFinite(Number(cost))) return 'Unknown';\n  const costPenalty = 100 - Number(cost);\n  if (costPenalty <= 15) return 'Budget';\n  if (costPenalty <= 22) return 'Near-Budget';\n  if (costPenalty <= 35) return 'Mid-Range';\n  if (costPenalty <= 55) return 'Premium';\n  return 'Expensive';\n}",
-    ),
-]
-for old, new in final_cost_surface_replacements:
-    if old in html:
-        html = html.replace(old, new, 1)
-html = re.sub(
-    r'(<h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">)Dimension Weights \([^<]*</h3>',
-    rf'\1Dimension Weights ({d} Total)</h3>',
-    html,
-    count=1,
-)
-html = html.replace("The <strong>overall Score</strong> includes all <strong>12 dimensions</strong>", f"The <strong>overall Score</strong> includes all <strong>{d} retained dimensions</strong>")
-html = html.replace("the <strong>11 non-cost dimensions</strong>", f"the <strong>{d - 1} non-cost dimensions</strong>")
-html = html.replace("speed among the platform dims", f"Speed is {'included' if speed_in_primary else 'excluded'} as a platform dimension; numeric for {speed_selected_available_n}/{n} selected pages")
-html = html.replace("Speed is shown separately when an AA page publishes a numeric value", f"Speed is {'included' if speed_in_primary else 'excluded'} as a platform dimension; numeric for {speed_selected_available_n}/{n} selected pages")
-html = html.replace("the highest-quality model", "the current quality leader")
-html = html.replace("Gemini 3.1 Pro</strong> stays overall <strong>#1</strong> in v1.2", f"{models[0]['name']}</strong> is overall <strong>#1</strong> in {VERSION}")
-quality_leader = min(models, key=lambda item: item["qualityRank"])
-html = re.sub(
-    r"The composite cost term uses [\s\S]*?because its composite cost is the highest in the cohort\.",
-    f'The composite cost term uses {cost_mode_label}. That is why <strong>{models[0]["name"]}</strong> is overall <strong>#{models[0]["rank"]}</strong> in {VERSION}, while <strong>{quality_leader["name"]}</strong> is the current quality leader in the cohort (Quality <strong>#{quality_leader["qualityRank"]}</strong>) and ranks overall <strong>#{quality_leader["rank"]}</strong> after cost.',
-    html,
-    count=1,
-)
-html = html.replace("For each of 13 dimensions", f"For each of {d} dimensions")
-html = html.replace("weighted sum across all 13 dimensions", f"weighted sum across all {d} dimensions")
-html = html.replace("all 12 non-cost dimensions", f"all {d - 1} non-cost dimensions")
-html = html.replace("12 non-cost dimensions", f"{d - 1} non-cost dimensions")
-html = html.replace("<strong>13 dimensions</strong>", f"<strong>{d} dimensions</strong>")
-html = html.replace("The 70% non-cost portion", f"The {100 - weight_by_key['costComposite']['weightPct']:.0f}% non-cost portion")
-html = html.replace("21 models × 13 dimensions", f"{n} models × {d} dimensions")
-html = html.replace("September 4, 2026", DATE)
-html = html.replace("All scored cells are confirmed primary-source data in v1.2", f"All scored cells are confirmed primary-source data in {VERSION}")
-html = html.replace("excluded from v1.2", "excluded from the current primary score")
-html = re.sub(
-    r"(function renderVersionTable\(\) \{[\s\S]*?const versions = )\[[^;]*\];",
-    lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2','v1.9.3'];",
-    html,
-    count=1,
-)
-html = re.sub(
-    r"(function renderVersionTable\(\) \{[\s\S]*?const vKeys = )\[[^;]*\];",
-    lambda match: match.group(1) + "['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191','v192','v193'];",
-    html,
-    count=1,
-)
-
-if 'data-chart="livebenchPareto"' not in html:
-    html = html.replace(
-        '      <button class="chart-tab" data-chart="frontier2">Cost Impact</button>',
-        '      <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>\n      <button class="chart-tab" data-chart="frontier2">Cost Impact</button>',
-        1,
+    html = re.sub(
+        r"const vKeys = \[[^;]*\];",
+        "const vKeys = ['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191','v192','v193'];",
+        html,
+        count=1,
     )
-chart_tab_pattern = r'<div class="chart-tabs">[\s\S]*?</div>'
+
+    hero_desc = (
+        f'ValueRank ranks <strong>{n} models</strong> with at least one available non-cost quality dimension from a {source_n}-model AA-mapped comparison roster reconciled to the current AA Intelligence Index score-versus-total-benchmark-cost frontier. '
+        f'Each model score uses its observed retained dimensions, with available priorities renormalized per model; priority coverage and missing metrics are shown beside partial scores. Bug Hunt contributes {bug_hunt_weight["weightPct"]:.2f}% of the main score when observed. {VERSION} uses '
+        f'<strong>{html_external_link(aa_version, AA_METHODOLOGY_URL)}</strong> components plus configuration-specific DeepSWE performance; the score uses AA evaluation cost, with selectable API-price and subscription-plan cost views. '
+        f'Speed is {"included in the score" if speed_in_primary else "excluded from the score"}; AA speed is numeric for {speed_selected_available_n}/{n} selected pages and missing for {speed_missing_text}. Dimensions excluded from this release are {", ".join(item["label"] for item in dropped if item["label"] != "Speed") or "none"}.'
+    )
+    html = replace_once(html, r'<p class="hero-desc">[\s\S]*?</p>', f'<p class="hero-desc">\n          {hero_desc}\n        </p>', "hero copy")
+    html = replace_once(html, r'<div class="(?:nav-meta|vr-nav-meta)">[^<]*</div>', f'<div class="vr-nav-meta">{DATE} · {n} models · {d} dimensions</div>', "nav metadata")
+    html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Models Ranked', f'<span class="hero-statbar-num">{n}</span>\n        <span class="hero-statbar-label">Models Ranked', "model stat")
+    html = replace_once(html, r'<span class="hero-statbar-num">\d+</span>\s*<span class="hero-statbar-label">Scored Dimensions', f'<span class="hero-statbar-num">{d}</span>\n        <span class="hero-statbar-label">Scored Dimensions', "dimension stat")
+    html = replace_once(html, r'<span class="hero-statbar-num">(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{1,2}</span>', f'<span class="hero-statbar-num">{SHORT_DATE}</span>', "date stat")
+
+    insight_bodies = [
+        'The Pareto view highlights models that are not outperformed on both quality and the selected cost basis.',
+        'Quality and overall scores separate benchmark performance from the selected cost view.',
+        'Compare API Costs and Plan Costs with Quality to find the best fit for your usage.',
+        f'{VERSION} records <strong>{len(deepswe_configurations)} AA DeepSWE chart configurations</strong> and uses <strong>{d} retained dimensions</strong> with per-model weight renormalization for available results; {"Speed is included" if speed_in_primary else "Speed is excluded"} because it is observed for {speed_selected_available_n}/{n} ranked models.',
+    ]
+    grid_start = html.find('<div class="insight-grid"')
+    grid_end = html.find('</section>', grid_start)
+    if grid_start < 0 or grid_end < 0:
+        raise SystemExit("insight grid not found")
+    grid = html[grid_start:grid_end]
+    insight_cursor = iter(insight_bodies)
+    grid, insight_count = re.subn(
+        r'<div class="insight-body">[\s\S]*?</div>',
+        lambda _match: f'<div class="insight-body">{next(insight_cursor)}</div>',
+        grid,
+        count=len(insight_bodies),
+    )
+    if insight_count != len(insight_bodies):
+        raise SystemExit(f"insight replacement failed: {insight_count}")
+    html = html[:grid_start] + grid + html[grid_end:]
+
+    chart_replacements = [
+        (r'<div class="chart-desc"><strong>(?:ValueRank )?Pareto Frontier:</strong>[\s\S]*?</div>', f'<div class="chart-desc"><strong>ValueRank Pareto Frontier:</strong> Current frontier: <strong>{pareto_text}</strong>. Every other ranked model is dominated on composite cost versus quality.</div>'),
+        (r'(<div class="chart-desc"><strong>Score Decomposition:</strong>)[\s\S]*?</div>', f'\\1 {VERSION} decomposes the weighted <strong>{d}-dimension</strong> score into Cost, Reliability, Agentic, Intelligence, and Platform macro-categories.</div>'),
+        (r'(<div class="chart-desc"><strong>Dimension Heatmap:</strong>)[\s\S]*?</div>', f'\\1 All {n} models × {d} retained dimensions. Color = normalized rank score; missing cells are marked unavailable (⊘).</div>'),
+        (r'(<div class="chart-desc"><strong>Version History:</strong>)[\s\S]*?</div>', f'\\1 Historical rank context through {VERSION}. The current point is a new benchmark-version snapshot, not a claim of score continuity.</div>'),
+    ]
+    for pattern, replacement in chart_replacements:
+        html = replace_once(html, pattern, replacement, "chart copy")
+    html = re.sub(
+        r"(?:Quality vs Composite Cost — (?:ValueRank )?Pareto Frontier|ValueRank Pareto Frontier — Quality vs Composite Cost)",
+        "ValueRank Pareto Frontier — Quality vs Composite Cost",
+        html,
+    )
+
+    html = re.sub(
+        r'(<div class="section-sub">)How scores are calculated(?: across)?[\s\S]*?(</div>)',
+        rf'\1How scores are calculated from each model’s available dimensions, with per-model weight renormalization and explicit coverage provenance.\2',
+        html,
+        count=1,
+    )
+    html = html.replace("Cost now uses a composite 0–100 scale built from normalized AA eval cost and normalized DeepSWE average cost per task.", site_cost_summary)
+    html = html.replace("For Cost, the raw input is a composite of normalized AA eval cost plus normalized DeepSWE average cost per task.", site_cost_raw_input)
+    html = html.replace("The 25% cost weight therefore now combines Artificial Analysis eval cost with DeepSWE average cost per task into a single cost-efficiency term.", site_cost_weight)
+    html = html.replace("⊘ Missing: %{customdata[2]}", "Missing scored cells: %{customdata[2]}")
+
+    # Apply the final cost-basis labels after every renderer and card replacement.
+    # Keeping these replacements at the end makes the generated artifact idempotent
+    # even when an earlier chart renderer is replaced wholesale.
+    final_cost_surface_replacements = [
+        (
+            "title:{text:'Score Decomposition by Macro-Category', font:plotlyTitle(14)},",
+            "title:{text:'Score Decomposition by Macro-Category (' + costBasisLabel() + ')', font:plotlyTitle(14)},",
+        ),
+        (
+            "title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with 25% Cost Weight)', font:plotlyTitle(14)},",
+            "title:{text:'Rank Displacement: Quality Rank vs. Overall Rank (with ' + costWeightPct + '% ' + costBasisLabel() + ' weight)', font:plotlyTitle(14)},",
+        ),
+        (
+            "hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>Composite Cost: ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+            "hovertemplate:'<b>' + m.name + '</b><br>Speed: ' + Number(m.speed).toFixed(1) + ' tok/s<br>Speed percentile score: ' + speedScore(m).toFixed(1) + '<br>Quality: ' + m.qualityScore.toFixed(1) + '<br>' + costBasisLabel() + ': ' + m.evalCost.toFixed(1) + '<br>' + fmtAaDeepSweHover(m) + '<extra></extra>',",
+        ),
+        (
+            "title:{text:'Speed × Quality × Cost (numeric AA speed only)', font:plotlyTitle(14)},",
+            "title:{text:'Speed × Quality × ' + costBasisLabel() + ' (numeric AA speed only)', font:plotlyTitle(14)},",
+        ),
+        (
+            "const colLabels = colOrder.map(i => DIM_KEYS[i]);",
+            "const colLabels = colOrder.map(i => i === 0 ? costBasisLabel() : DIM_KEYS[i]);",
+        ),
+        (
+            "Cost now uses a 0–100 rank scale built from normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete.",
+            site_cost_summary,
+        ),
+        (
+            "Every other ranked model is dominated on composite cost versus quality.",
+            "Every other ranked model is dominated on the selected <span data-cost-basis-label>API Costs</span> versus quality.",
+        ),
+        (
+            "Which models are fast AND high-quality AND cheap on the composite-cost basis?",
+            "Which models are fast AND high-quality AND cheap on the selected <span data-cost-basis-label>API Costs</span> basis?",
+        ),
+        (
+            "Color = cost tier. Hover for raw AA cost and DeepSWE average-cost components.",
+            "Color = cost tier. Hover for the selected cost basis, route provenance, and source components.",
+        ),
+        (
+            "X-axis = composite cost.",
+            "X-axis = <span data-cost-basis-label>API Costs</span> score.",
+        ),
+        (
+            "The composite cost term uses DeepSWE-only.",
+            "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple.",
+        ),
+        (
+            "and the DeepSWE-only cost composite.",
+            "and the selected <span data-cost-basis-label>API Costs</span> cost composite.",
+        ),
+        (
+            "function compositeCostTier(cost) {\n  if (cost <= 15) return 'Budget';\n  if (cost <= 22) return 'Near-Budget';\n  if (cost <= 35) return 'Mid-Range';\n  if (cost <= 55) return 'Premium';\n  return 'Expensive';\n}",
+            "function compositeCostTier(cost) {\n  if (cost === null || cost === undefined || !Number.isFinite(Number(cost))) return 'Unknown';\n  const costPenalty = 100 - Number(cost);\n  if (costPenalty <= 15) return 'Budget';\n  if (costPenalty <= 22) return 'Near-Budget';\n  if (costPenalty <= 35) return 'Mid-Range';\n  if (costPenalty <= 55) return 'Premium';\n  return 'Expensive';\n}",
+        ),
+    ]
+    for old, new in final_cost_surface_replacements:
+        if old in html:
+            html = html.replace(old, new, 1)
+    html = re.sub(
+        r'(<h3 style="font-size:14px;font-weight:700;margin-bottom:16px;">)Dimension Weights \([^<]*</h3>',
+        rf'\1Dimension Weights ({d} Total)</h3>',
+        html,
+        count=1,
+    )
+    html = html.replace("The <strong>overall Score</strong> includes all <strong>12 dimensions</strong>", f"The <strong>overall Score</strong> includes all <strong>{d} retained dimensions</strong>")
+    html = html.replace("the <strong>11 non-cost dimensions</strong>", f"the <strong>{d - 1} non-cost dimensions</strong>")
+    html = html.replace("speed among the platform dims", f"Speed is {'included' if speed_in_primary else 'excluded'} as a platform dimension; numeric for {speed_selected_available_n}/{n} selected pages")
+    html = html.replace("Speed is shown separately when an AA page publishes a numeric value", f"Speed is {'included' if speed_in_primary else 'excluded'} as a platform dimension; numeric for {speed_selected_available_n}/{n} selected pages")
+    html = html.replace("the highest-quality model", "the current quality leader")
+    html = html.replace("Gemini 3.1 Pro</strong> stays overall <strong>#1</strong> in v1.2", f"{models[0]['name']}</strong> is overall <strong>#1</strong> in {VERSION}")
+    quality_leader = min(models, key=lambda item: item["qualityRank"])
+    html = re.sub(
+        r"The composite cost term uses [\s\S]*?because its composite cost is the highest in the cohort\.",
+        f'The composite cost term uses {cost_mode_label}. That is why <strong>{models[0]["name"]}</strong> is overall <strong>#{models[0]["rank"]}</strong> in {VERSION}, while <strong>{quality_leader["name"]}</strong> is the current quality leader in the cohort (Quality <strong>#{quality_leader["qualityRank"]}</strong>) and ranks overall <strong>#{quality_leader["rank"]}</strong> after cost.',
+        html,
+        count=1,
+    )
+    html = html.replace("For each of 13 dimensions", f"For each of {d} dimensions")
+    html = html.replace("weighted sum across all 13 dimensions", f"weighted sum across all {d} dimensions")
+    html = html.replace("all 12 non-cost dimensions", f"all {d - 1} non-cost dimensions")
+    html = html.replace("12 non-cost dimensions", f"{d - 1} non-cost dimensions")
+    html = html.replace("<strong>13 dimensions</strong>", f"<strong>{d} dimensions</strong>")
+    html = html.replace("The 70% non-cost portion", f"The {100 - weight_by_key['costComposite']['weightPct']:.0f}% non-cost portion")
+    html = html.replace("21 models × 13 dimensions", f"{n} models × {d} dimensions")
+    html = html.replace("September 4, 2026", DATE)
+    html = html.replace("All scored cells are confirmed primary-source data in v1.2", f"All scored cells are confirmed primary-source data in {VERSION}")
+    html = html.replace("excluded from v1.2", "excluded from the current primary score")
+    html = re.sub(
+        r"(function renderVersionTable\(\) \{[\s\S]*?const versions = )\[[^;]*\];",
+        lambda match: match.group(1) + "['v0.7','v0.8','v0.9','v1.0','v1.1','v1.2','v1.3','v1.3.1','v1.4.0','v1.5.0','v1.6.0','v1.7.0','v1.9.0','v1.9.1','v1.9.2','v1.9.3'];",
+        html,
+        count=1,
+    )
+    html = re.sub(
+        r"(function renderVersionTable\(\) \{[\s\S]*?const vKeys = )\[[^;]*\];",
+        lambda match: match.group(1) + "['v70','v80','v90','v100','v110','v120','v130','v131','v140','v150','v160','v170','v190','v191','v192','v193'];",
+        html,
+        count=1,
+    )
+
+    if 'data-chart="livebenchPareto"' not in html:
+        html = html.replace(
+            '      <button class="chart-tab" data-chart="frontier2">Cost Impact</button>',
+            '      <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>\n      <button class="chart-tab" data-chart="frontier2">Cost Impact</button>',
+            1,
+        )
+    chart_tab_pattern = r'<div class="chart-tabs">[\s\S]*?</div>'
 
 
-def arrange_chart_tabs(match):
-    buttons = re.findall(r'(?m)^[ \t]*<button class="chart-tab[^"]*" data-chart="[^"]+">[^<]*</button>', match.group(0))
-    button_by_chart = {
-        re.search(r'data-chart="([^"]+)"', button).group(1): button.strip()
-        for button in buttons
-    }
-    if "pareto" not in button_by_chart or "livebenchPareto" not in button_by_chart:
-        return match.group(0)
-    button_by_chart["pareto"] = re.sub(r">Pareto Frontier<", ">ValueRank Pareto Frontier<", button_by_chart["pareto"])
-    ordered = [button_by_chart["pareto"], button_by_chart["livebenchPareto"]]
-    ordered.extend(button for chart, button in button_by_chart.items() if chart not in {"pareto", "livebenchPareto"})
-    return '<div class="chart-tabs">\n' + "\n".join(f"      {button}" for button in ordered) + '\n    </div>'
 
 
-html, chart_tab_count = re.subn(chart_tab_pattern, arrange_chart_tabs, html, count=1)
-if chart_tab_count != 1:
-    raise SystemExit(f"chart tab order replacement failed: {chart_tab_count}")
-if 'id="panel-livebenchPareto"' not in html:
-    livebench_panel = f'''       <!-- LiveBench Pareto -->
+    html, chart_tab_count = re.subn(chart_tab_pattern, arrange_chart_tabs, html, count=1)
+    if chart_tab_count != 1:
+        raise SystemExit(f"chart tab order replacement failed: {chart_tab_count}")
+    if 'id="panel-livebenchPareto"' not in html:
+        livebench_panel = f'''       <!-- LiveBench Pareto -->
        <div class="chart-panel" id="panel-livebenchPareto">
          <div class="chart-desc"><strong>{html_external_link('LiveBench', LIVEBENCH_URL)} Pareto:</strong> Official LiveBench Overall Score versus Cost Per Successful Task for {livebench_document['matchedN']}/{livebench_document['cohortN']} matched cohort rows plus {livebench_supplemental_label}: {html_escape(livebench_supplemental_text)}. Higher Overall and lower cost are better; GPT-6 Astra is omitted because this pinned release has no row for it.</div>
          <div id="chart-livebench-pareto" class="plotly-chart" style="height:520px;"></div>
        </div>
 '''
-    html = html.replace('      <!-- Two-frontier / Cost Impact -->', livebench_panel + '      <!-- Two-frontier / Cost Impact -->', 1)
-if 'livebenchPareto: renderLiveBenchPareto' not in html:
-    html = html.replace('  frontier2: renderFrontier2,', '  livebenchPareto: renderLiveBenchPareto,\n  frontier2: renderFrontier2,', 1)
-if "'chart-heatmap-data','chart-livebench-pareto'" not in html:
-    html = html.replace("    'chart-heatmap-data'", "    'chart-heatmap-data','chart-livebench-pareto'", 1)
+        html = html.replace('      <!-- Two-frontier / Cost Impact -->', livebench_panel + '      <!-- Two-frontier / Cost Impact -->', 1)
+    if 'livebenchPareto: renderLiveBenchPareto' not in html:
+        html = html.replace('  frontier2: renderFrontier2,', '  livebenchPareto: renderLiveBenchPareto,\n  frontier2: renderFrontier2,', 1)
+    if "'chart-heatmap-data','chart-livebench-pareto'" not in html:
+        html = html.replace("    'chart-heatmap-data'", "    'chart-heatmap-data','chart-livebench-pareto'", 1)
 
-livebench_card = f'''    <div class="card mb-6" id="livebench-data">
+    livebench_card = f'''    <div class="card mb-6" id="livebench-data">
        <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">{html_external_link('LiveBench External Coverage', LIVEBENCH_URL)}</h3>
        <p class="method-text" style="margin-bottom:16px;">Release <strong>{livebench_document['release']}</strong> matches <strong>{livebench_document['matchedN']}/{livebench_document['cohortN']}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; it contributes to each model’s primary score when that model has an eligible result and is unavailable otherwise. Overall and cost remain supplemental metrics.</p>
       <div style="overflow-x:auto;">
@@ -1787,20 +1857,20 @@ livebench_card = f'''    <div class="card mb-6" id="livebench-data">
       <p class="method-text" style="margin-top:12px;">Source: <a href="{livebench_document['source']['homepage']}" target="_blank" rel="noopener">LiveBench</a>; pinned data release 2026-06-25 at <a href="https://github.com/livebench/new-livebench/commit/{livebench_document['source'].get('releaseDataCommit', '')}" target="_blank" rel="noopener">{html_escape(livebench_document['source'].get('releaseDataCommit', 'unrecorded'))}</a>. Pareto frontier: <strong>{html_escape(livebench_pareto_text)}</strong>.</p>
     </div>
 '''
-livebench_start = html.find('    <div class="card mb-6" id="livebench-data">')
-if livebench_start >= 0:
-    next_card = html.find('    <div class="card mb-6">', livebench_start + 1)
-    if next_card < 0:
-        raise SystemExit("next data card not found after existing LiveBench card")
-    html = html[:livebench_start] + livebench_card + html[next_card:]
-else:
-    data_start = html.find('<!-- DATA -->')
-    data_card = html.find('    <div class="card mb-6">', data_start)
-    if data_start < 0 or data_card < 0:
-        raise SystemExit("data section insertion point not found")
-    html = html[:data_card] + livebench_card + html[data_card:]
+    livebench_start = html.find('    <div class="card mb-6" id="livebench-data">')
+    if livebench_start >= 0:
+        next_card = html.find('    <div class="card mb-6">', livebench_start + 1)
+        if next_card < 0:
+            raise SystemExit("next data card not found after existing LiveBench card")
+        html = html[:livebench_start] + livebench_card + html[next_card:]
+    else:
+        data_start = html.find('<!-- DATA -->')
+        data_card = html.find('    <div class="card mb-6">', data_start)
+        if data_start < 0 or data_card < 0:
+            raise SystemExit("data section insertion point not found")
+        html = html[:data_card] + livebench_card + html[data_card:]
 
-bug_hunt_card = f'''    <!-- BUG HUNT DATA CARD START -->
+    bug_hunt_card = f'''    <!-- BUG HUNT DATA CARD START -->
     <div class="card mb-6" id="bughunt-data">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">{html_external_link('Bug Hunt Results', BUG_HUNT_URL)}</h3>
       <p class="method-text" style="margin-bottom:16px;">Bug Hunt has <strong>{bug_hunt_source_matches_n}/{source_n}</strong> exact owner results. Eligible exact-variant results contribute to each model’s primary score where observed; missing rows remain unavailable, and available priorities are renormalized per model. The companion emphasis view uses the <strong>{bug_hunt_ranking['matchedN']}</strong> eligible exact-variant results and raises Bug Hunt to <strong>{bug_hunt_ranking['benchmarkWeightPct']:.2f}%</strong> (priority {bug_hunt_ranking['benchmarkPriority']} of {bug_hunt_ranking['totalPriority']}). Models without any observed primary quality metric remain unranked. The table preserves effort, harness, route, and repeat count because results measure each tested agent stack.</p>
@@ -1814,245 +1884,223 @@ bug_hunt_card = f'''    <!-- BUG HUNT DATA CARD START -->
     </div>
     <!-- BUG HUNT DATA CARD END -->
 '''
-if '<!-- BUG HUNT DATA CARD START -->' in html:
-    html, replacement_count = re.subn(
-        r'<!-- BUG HUNT DATA CARD START -->[\s\S]*?<!-- BUG HUNT DATA CARD END -->',
-        lambda _match: bug_hunt_card.strip(),
+    if '<!-- BUG HUNT DATA CARD START -->' in html:
+        html, replacement_count = re.subn(
+            r'<!-- BUG HUNT DATA CARD START -->[\s\S]*?<!-- BUG HUNT DATA CARD END -->',
+            lambda _match: bug_hunt_card.strip(),
+            html,
+            count=1,
+        )
+        if replacement_count != 1:
+            raise SystemExit(f"Bug Hunt card replacement failed: {replacement_count}")
+    else:
+        livebench_start = html.find('    <div class="card mb-6" id="livebench-data">')
+        # The LiveBench card was inserted above, and a data card always follows it.
+        next_card = html.find('    <div class="card mb-6"', livebench_start + 1)
+        html = html[:next_card] + bug_hunt_card + html[next_card:]
+
+    # Refresh current-release copy retained in the prior generated template.
+    html = html.replace("ValueRank v1.5.0", f"ValueRank {VERSION}")
+    html = html.replace("Production AI Ranking Framework · v1.5.0", f"Production AI Ranking Framework · {VERSION}")
+    html = html.replace("v1.5.0 uses zero missing benchmark cells and no neutral-fill placeholders", f"{VERSION} keeps missing metrics unavailable and renormalizes each model’s observed priorities")
+    html = html.replace("v1.5.0 Release", f"{VERSION} Release")
+    html = html.replace("For each of 12 dimensions", f"For each of {d} retained dimensions")
+    html = html.replace("all 12 dimensions", f"all {d} retained dimensions")
+    html = html.replace("12 normalized dimension scores", f"{d} normalized dimension scores")
+    html = html.replace("for every retained v1.5.0 dimension", f"for every retained {VERSION} dimension")
+    html = html.replace("v1.5.0 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>", f"{VERSION} displays missing values as unavailable and does not impute them")
+    html = html.replace("There are <strong>no neutral missing-data cells</strong> in v1.5.0.", f"In {VERSION}, each model's available metric weights are renormalized; missing values remain unavailable.")
+    html = html.replace("All scored cells are confirmed primary-source data in v1.5.0", f"All retained score inputs are source-backed in {VERSION}")
+    html = html.replace("cost uses deepswe-only (AA v4.2 total cost incomplete)", f"cost uses {cost_mode_label}")
+    html = html.replace("captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete.", f"captured AA total evaluation costs remain source-only because coverage is {cost_coverage.get('availableN', 0)}/{n}.")
+    html = html.replace("The 25% cost weight therefore uses the cohort-wide DeepSWE average cost per task because the v4.2 AA total-cost field is incomplete.", f"The {weight_by_key['costComposite']['weightPct']:.2f}% cost weight uses {cost_mode_label}; AA total evaluation cost is missing for {cost_missing_text}, so no selective substitution is used.")
+    html = html.replace("Speed is retained as a platform dimension because v4.2 publishes numeric values for every selected page", f"Speed is {'included' if speed_in_primary else 'excluded'} because coverage is {speed_selected_available_n}/{n}; missing for {speed_missing_text}.")
+    html = html.replace("Hallucination rate remains a primary reliability factor", "Non-Hallucination Rate remains a primary reliability factor")
+    html = html.replace("That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.5.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#4</strong> after cost.", f"That is why <strong>{models[0]['name']}</strong> is overall <strong>#{models[0]['rank']}</strong> in {VERSION}, while <strong>{quality_leader['name']}</strong> is the current quality leader in the cohort (Quality <strong>#{quality_leader['qualityRank']}</strong>) and ranks overall <strong>#{quality_leader['rank']}</strong> after cost.")
+    html = html.replace("Ranking History — v0.7 to v1.5.0", f"Ranking History — v0.7 to {VERSION}")
+    html = html.replace("x:'v1.5.0', y:1", f"x:'{VERSION}', y:1")
+    html = html.replace("text:'v1.5.0: 21 models · 12 dims'", f"text:'{VERSION}: {n} models · {d} dims'")
+    html = html.replace("September 6, 2026", DATE)
+    html = html.replace("ValueRank v1.5.0 · September 6, 2026 · 21 models × 12 dimensions", f"ValueRank {VERSION} · {DATE} · {n} models × {d} dimensions")
+    html = re.sub("const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
+    html = html.replace(
+        "For each of 12 retained dimensions, all 21 models are ranked 1–21 (best to worst). The formula maps rank 1 → 100 pts and rank 21 → 0 pts, with tied ranks receiving the average of their tied positions. v1.6.0 excludes incomplete candidate dimensions and uses no neutral-fill values.",
+        f"For each retained dimension, only models with an observed value are ranked. Rank 1 maps to 100 points and the last observed rank to 0; ties receive the average tied rank. {VERSION} renormalizes each model's available priorities and does not fill missing values.",
+    )
+    html = html.replace(
+        "The final ValueRank score is a weighted sum across all 12 retained dimensions. <strong>Cost weight: 25%</strong> (slider-adjustable). Non-Hallucination Rate remains a primary reliability factor, and cost uses DeepSWE-only and is rank-normalized with lower cost better.",
+        f"The final ValueRank score is a weighted sum across {d} retained dimensions. <strong>Cost weight: {weight_by_key['costComposite']['weightPct']:.2f}%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>{weight_by_key['bugHuntFixedOf105']['weightPct']:.2f}%</strong> and DeepSWE v1.1 contributes <strong>{weight_by_key['deepswePassAt1']['weightPct']:.2f}%</strong>. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.",
+    )
+    html = html.replace(
+        "If even one of the 21-model cohort is genuinely missing from a benchmark, that benchmark is excluded from the current primary score. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.",
+        f"Each model's observed retained metrics contribute to its score, with available priorities renormalized; missing values stay unavailable. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.",
+    )
+    html = html.replace(
+        "The 68% non-cost portion, computed as the weighted sum of all 13 non-cost dimensions. Represents pure capability ranking without cost penalty.",
+        f"The weighted average of each model's available non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.",
+    )
+    html = html.replace(
+        "Each model's score is a weighted average of 14 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 21</strong> for every retained v1.6.0 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. In v1.6.0, incomplete candidate dimensions are excluded rather than imputed. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because coverage is 20/21.",
+        f"Each model's score is the weighted average of its available normalized dimensions; available priorities are renormalized per model. Dimension scores use <code>((n − rank) / (n − 1)) × 100</code> over models with an observation for that dimension; ties receive average rank. Missing values are not imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides that amount by the highest eligible subscription Value Multiple, with lower cost better in both views.",
+    )
+    html = html.replace(
+        "The 32.05% cost weight uses DeepSWE-only; AA total evaluation cost is missing for Gemini 3.7 Flash, so no selective substitution is used.",
+        f"The {weight_by_key['costComposite']['weightPct']:.2f}% cost weight uses AA total evaluation cost, complete for all {n} primary models; no selective substitution is used.",
+    )
+    html = html.replace(
+        "In <strong>v1.5.0</strong>, there are <strong>no ⊘ cells</strong> because any benchmark without full cohort coverage is excluded entirely.",
+        f"In <strong>{VERSION}</strong>, ⊘ marks a missing observation; each model's score uses available metrics with priorities renormalized per row.",
+    )
+    html = html.replace(
+        "The <strong>overall Score</strong> includes all <strong>12 retained dimensions</strong> with cost at 25% (slider default) and Speed is excluded because coverage is 20/21; missing for Kimi K3.. The <strong>Quality Score</strong> is recalculated using only the <strong>13 non-cost dimensions</strong> (renormalized to 100%). It answers: <em>\"which model is best at actual tasks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
+        f"The <strong>overall Score</strong> uses each model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at {weight_by_key['costComposite']['weightPct']:.2f}% by default. The <strong>Quality Score</strong> renormalizes each model’s available non-cost dimensions to 100%. It answers: <em>\"which model ranks highest on the selected benchmarks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
+    )
+    html = html.replace(
+        "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple. That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.6.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#2</strong> after cost.",
+        f"ValueRank reflects the selected benchmarks and their weights, including DeepSWE v1.1 and Bug Hunt in the main rank; it is not a general model-capability verdict. The current overall leader is <strong>{models[0]['name']}</strong> (#{models[0]['rank']}); the quality leader is <strong>{quality_leader['name']}</strong> (#{quality_leader['qualityRank']}). API Costs and Plan Costs are presented as separate cost views.",
+    )
+
+    html = html.replace(
+        '<span class="hero-statbar-num">25%</span>',
+        f'<span class="hero-statbar-num">{cost_weight["weightPct"]:.2f}%</span>',
+        1,
+    )
+    html = html.replace(
+        'Drag the cost weight slider to see how rankings shift. Cost is rank-normalized from the selected API-price or subscription-plan task-cost basis; captured AA total evaluation costs remain source-only because coverage is 20/21. Click any column header to sort.',
+        f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.',
+    )
+    html = html.replace(
+        '<input type="range" id="cost-slider" min="0" max="50" value="25" step="1">',
+        f'<input type="range" id="cost-slider" min="0" max="50" value="{cost_weight["weightPct"]:.4f}" step="0.01">',
+    )
+    html = html.replace(
+        '<span class="slider-val" id="slider-val">25%</span>',
+        f'<span class="slider-val" id="slider-val">{cost_weight["weightPct"]:.2f}%</span>',
+    )
+    html = html.replace(
+        'Official LiveBench Overall Score versus Cost Per Successful Task for 20/21 matched cohort rows.',
+        f'Official LiveBench Overall Score versus Cost Per Successful Task for {livebench_document["matchedN"]}/{livebench_document["cohortN"]} AA source candidates.',
+    )
+    html = html.replace(
+        'diamond = overall score (with 25% cost weight).',
+        'diamond = overall score (with the currently selected cost weight).',
+    )
+    html = html.replace(
+        'API list-price task cost; cost-weighted scores use the API-cost rank.',
+        'AA total evaluation cost at API rates; the default cost-weighted score uses the API-cost rank.',
+    )
+    html = html.replace(
+        'How many places does a 25% cost weight move each model from its quality-only rank?',
+        'How many places does the selected cost weight move each model from its quality-only rank?',
+    )
+    html = html.replace(
+        'Frontier models ranked on real-world value. ValueRank v1.7.0 · 21 models from Artificial Analysis & DeepSWE Best, with a separate Bug Hunt emphasis ranking.',
+        f'Frontier models ranked on real-world value. ValueRank {VERSION} · {n} models; DeepSWE v1.1 and Bug Hunt shape the primary score.',
+    )
+    html = html.replace(
+        '// Dims: Cost Halluc DeepSWE GDP LCR OmniAcc HLE GPQA Sci CritPt AAI Spd',
+        '// Dims: Cost NonHalluc LiveBenchIF DeepSWE GDP AutomationBench LCR OmniAcc HLE GPQA SciCode CritPt AAI BugHunt',
+    )
+    html = html.replace(
+        'Independent rankings from Artificial Analysis & DeepSWE. ValueRank v1.7.0 · 21 models, plus a matched-cohort Bug Hunt emphasis ranking.',
+        f'Evidence-backed rankings from benchmark owners. ValueRank {VERSION} · {n} models; DeepSWE v1.1 and Bug Hunt are in the primary rank.',
+    )
+    html = html.replace('Production AI Ranking Framework · v1.7.0', f'Production AI Ranking Framework · {VERSION}')
+    html = html.replace('Current Top 3 · DeepSWE Cohort', 'Current Top 3 · Shared DeepSWE + Bug Hunt Cohort')
+    html = html.replace(
+        'v1.7.0 primary score uses zero-gap dimensions and no neutral-fill placeholders',
+        f'{VERSION} primary score uses each model’s observed dimensions, renormalizes available weights, and does not fill missing metrics',
+    )
+    html = html.replace('<div class="insight-title">v1.7.0 Release</div>', f'<div class="insight-title">{VERSION} Release</div>')
+    html = html.replace(
+        '<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (21 × 12)</h3>',
+        f'<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix ({n} × {d})</h3>',
+    )
+    html = html.replace(
+        'All retained score inputs are source-backed in v1.7.0',
+        f'All retained score inputs are source-backed in {VERSION}',
+    )
+    html = html.replace(
+        'ValueRank v1.7.0 · September 29, 2026 · 21 models × 12 primary dimensions',
+        f'ValueRank {VERSION} · {DATE} · {n} models × {d} primary dimensions',
+    )
+    html = html.replace('Cost weight: 25% (default)', f'Cost weight: {cost_weight["weightPct"]:.2f}% (default)')
+    html = html.replace('Why does cost get 25% of the weight?', f'Why is cost weighted at {cost_weight["weightPct"]:.2f}% by default?')
+    html = html.replace('Ranking History — v0.7 to v1.7.0', f'Ranking History — v0.7 to {VERSION}')
+    html = html.replace(
+        "name:'Overall Score (with 25% cost)',",
+        "name:'Overall Score (with ' + costWeightPct + '% ' + costBasisLabel() + ')',",
+    )
+    html = html.replace(
+        'What happened to the models that were ranked in v1.1 but not in v1.2?',
+        "Why isn't Claude Opus 5.5 in the primary ranking?",
+    )
+
+
+    html = re.sub(
+        r"Why is cost weighted at [0-9.]+% by default\?",
+        f"Why is cost weighted at {cost_weight['weightPct']:.2f}% by default?",
         html,
         count=1,
     )
-    if replacement_count != 1:
-        raise SystemExit(f"Bug Hunt card replacement failed: {replacement_count}")
-else:
-    livebench_start = html.find('    <div class="card mb-6" id="livebench-data">')
-    next_card = html.find('    <div class="card mb-6"', livebench_start + 1) if livebench_start >= 0 else -1
-    if livebench_start < 0 or next_card < 0:
-        raise SystemExit("Bug Hunt card insertion point after LiveBench not found")
-    html = html[:next_card] + bug_hunt_card + html[next_card:]
-
-# Refresh current-release copy retained in the prior generated template.
-html = html.replace("ValueRank v1.5.0", f"ValueRank {VERSION}")
-html = html.replace("Production AI Ranking Framework · v1.5.0", f"Production AI Ranking Framework · {VERSION}")
-html = html.replace("v1.5.0 uses zero missing benchmark cells and no neutral-fill placeholders", f"{VERSION} keeps missing metrics unavailable and renormalizes each model’s observed priorities")
-html = html.replace("v1.5.0 Release", f"{VERSION} Release")
-html = html.replace("For each of 12 dimensions", f"For each of {d} retained dimensions")
-html = html.replace("all 12 dimensions", f"all {d} retained dimensions")
-html = html.replace("12 normalized dimension scores", f"{d} normalized dimension scores")
-html = html.replace("for every retained v1.5.0 dimension", f"for every retained {VERSION} dimension")
-html = html.replace("v1.5.0 has <strong>no missing-data cells</strong> and therefore uses <strong>no neutral-fill values</strong>", f"{VERSION} displays missing values as unavailable and does not impute them")
-html = html.replace("There are <strong>no neutral missing-data cells</strong> in v1.5.0.", f"In {VERSION}, each model's available metric weights are renormalized; missing values remain unavailable.")
-html = html.replace("All scored cells are confirmed primary-source data in v1.5.0", f"All retained score inputs are source-backed in {VERSION}")
-html = html.replace("cost uses deepswe-only (AA v4.2 total cost incomplete)", f"cost uses {cost_mode_label}")
-html = html.replace("captured AA total evaluation costs remain source-only because v4.2 coverage is incomplete.", f"captured AA total evaluation costs remain source-only because coverage is {cost_coverage.get('availableN', 0)}/{n}.")
-html = html.replace("The 25% cost weight therefore uses the cohort-wide DeepSWE average cost per task because the v4.2 AA total-cost field is incomplete.", f"The {weight_by_key['costComposite']['weightPct']:.2f}% cost weight uses {cost_mode_label}; AA total evaluation cost is missing for {cost_missing_text}, so no selective substitution is used.")
-html = html.replace("Speed is retained as a platform dimension because v4.2 publishes numeric values for every selected page", f"Speed is {'included' if speed_in_primary else 'excluded'} because coverage is {speed_selected_available_n}/{n}; missing for {speed_missing_text}.")
-html = html.replace("Hallucination rate remains a primary reliability factor", "Non-Hallucination Rate remains a primary reliability factor")
-html = html.replace("That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.5.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#4</strong> after cost.", f"That is why <strong>{models[0]['name']}</strong> is overall <strong>#{models[0]['rank']}</strong> in {VERSION}, while <strong>{quality_leader['name']}</strong> is the current quality leader in the cohort (Quality <strong>#{quality_leader['qualityRank']}</strong>) and ranks overall <strong>#{quality_leader['rank']}</strong> after cost.")
-html = html.replace("Ranking History — v0.7 to v1.5.0", f"Ranking History — v0.7 to {VERSION}")
-html = html.replace("x:'v1.5.0', y:1", f"x:'{VERSION}', y:1")
-html = html.replace("text:'v1.5.0: 21 models · 12 dims'", f"text:'{VERSION}: {n} models · {d} dims'")
-html = html.replace("September 6, 2026", DATE)
-html = html.replace("ValueRank v1.5.0 · September 6, 2026 · 21 models × 12 dimensions", f"ValueRank {VERSION} · {DATE} · {n} models × {d} dimensions")
-html = re.sub("const SPEED_DIM_IDX = [-0-9]+;.*", f"const SPEED_DIM_IDX = {speed_dim_idx};", html, count=1)
-html = html.replace(
-    "For each of 12 retained dimensions, all 21 models are ranked 1–21 (best to worst). The formula maps rank 1 → 100 pts and rank 21 → 0 pts, with tied ranks receiving the average of their tied positions. v1.6.0 excludes incomplete candidate dimensions and uses no neutral-fill values.",
-    f"For each retained dimension, only models with an observed value are ranked. Rank 1 maps to 100 points and the last observed rank to 0; ties receive the average tied rank. {VERSION} renormalizes each model's available priorities and does not fill missing values.",
-)
-html = html.replace(
-    "The final ValueRank score is a weighted sum across all 12 retained dimensions. <strong>Cost weight: 25%</strong> (slider-adjustable). Non-Hallucination Rate remains a primary reliability factor, and cost uses DeepSWE-only and is rank-normalized with lower cost better.",
-    f"The final ValueRank score is a weighted sum across {d} retained dimensions. <strong>Cost weight: {weight_by_key['costComposite']['weightPct']:.2f}%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>{weight_by_key['bugHuntFixedOf105']['weightPct']:.2f}%</strong> and DeepSWE v1.1 contributes <strong>{weight_by_key['deepswePassAt1']['weightPct']:.2f}%</strong>. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.",
-)
-html = html.replace(
-    "If even one of the 21-model cohort is genuinely missing from a benchmark, that benchmark is excluded from the current primary score. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.",
-    f"Each model's observed retained metrics contribute to its score, with available priorities renormalized; missing values stay unavailable. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.",
-)
-html = html.replace(
-    "The 68% non-cost portion, computed as the weighted sum of all 13 non-cost dimensions. Represents pure capability ranking without cost penalty.",
-    f"The weighted average of each model's available non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.",
-)
-html = html.replace(
-    "Each model's score is a weighted average of 14 normalized dimension scores. Each dimension score is calculated as <code>((n − rank) / (n − 1)) × 100</code>, where <strong>n = 21</strong> for every retained v1.6.0 dimension. A score of <strong>100</strong> = top of pool and <strong>0</strong> = bottom of pool. In v1.6.0, incomplete candidate dimensions are excluded rather than imputed. For AA-Omniscience Hallucination Rate, lower raw hallucination rate is ranked better. For Cost, the raw input is normalized DeepSWE average cost per task; captured AA total evaluation costs remain source-only because coverage is 20/21.",
-    f"Each model's score is the weighted average of its available normalized dimensions; available priorities are renormalized per model. Dimension scores use <code>((n − rank) / (n − 1)) × 100</code> over models with an observation for that dimension; ties receive average rank. Missing values are not imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides that amount by the highest eligible subscription Value Multiple, with lower cost better in both views.",
-)
-html = html.replace(
-    "The 32.05% cost weight uses DeepSWE-only; AA total evaluation cost is missing for Gemini 3.7 Flash, so no selective substitution is used.",
-    f"The {weight_by_key['costComposite']['weightPct']:.2f}% cost weight uses AA total evaluation cost, complete for all {n} primary models; no selective substitution is used.",
-)
-html = html.replace(
-    "In <strong>v1.5.0</strong>, there are <strong>no ⊘ cells</strong> because any benchmark without full cohort coverage is excluded entirely.",
-    f"In <strong>{VERSION}</strong>, ⊘ marks a missing observation; each model's score uses available metrics with priorities renormalized per row.",
-)
-html = html.replace(
-    "The <strong>overall Score</strong> includes all <strong>12 retained dimensions</strong> with cost at 25% (slider default) and Speed is excluded because coverage is 20/21; missing for Kimi K3.. The <strong>Quality Score</strong> is recalculated using only the <strong>13 non-cost dimensions</strong> (renormalized to 100%). It answers: <em>\"which model is best at actual tasks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
-    f"The <strong>overall Score</strong> uses each model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at {weight_by_key['costComposite']['weightPct']:.2f}% by default. The <strong>Quality Score</strong> renormalizes each model’s available non-cost dimensions to 100%. It answers: <em>\"which model ranks highest on the selected benchmarks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
-)
-html = html.replace(
-    "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple. That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.6.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#2</strong> after cost.",
-    f"ValueRank reflects the selected benchmarks and their weights, including DeepSWE v1.1 and Bug Hunt in the main rank; it is not a general model-capability verdict. The current overall leader is <strong>{models[0]['name']}</strong> (#{models[0]['rank']}); the quality leader is <strong>{quality_leader['name']}</strong> (#{quality_leader['qualityRank']}). API Costs and Plan Costs are presented as separate cost views.",
-)
-
-html = html.replace(
-    '<span class="hero-statbar-num">25%</span>',
-    f'<span class="hero-statbar-num">{cost_weight["weightPct"]:.2f}%</span>',
-    1,
-)
-html = html.replace(
-    'Drag the cost weight slider to see how rankings shift. Cost is rank-normalized from the selected API-price or subscription-plan task-cost basis; captured AA total evaluation costs remain source-only because coverage is 20/21. Click any column header to sort.',
-    f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.',
-)
-html = html.replace(
-    '<input type="range" id="cost-slider" min="0" max="50" value="25" step="1">',
-    f'<input type="range" id="cost-slider" min="0" max="50" value="{cost_weight["weightPct"]:.4f}" step="0.01">',
-)
-html = html.replace(
-    '<span class="slider-val" id="slider-val">25%</span>',
-    f'<span class="slider-val" id="slider-val">{cost_weight["weightPct"]:.2f}%</span>',
-)
-html = html.replace(
-    'Official LiveBench Overall Score versus Cost Per Successful Task for 20/21 matched cohort rows.',
-    f'Official LiveBench Overall Score versus Cost Per Successful Task for {livebench_document["matchedN"]}/{livebench_document["cohortN"]} AA source candidates.',
-)
-html = html.replace(
-    'diamond = overall score (with 25% cost weight).',
-    'diamond = overall score (with the currently selected cost weight).',
-)
-html = html.replace(
-    'API list-price task cost; cost-weighted scores use the API-cost rank.',
-    'AA total evaluation cost at API rates; the default cost-weighted score uses the API-cost rank.',
-)
-html = html.replace(
-    'How many places does a 25% cost weight move each model from its quality-only rank?',
-    'How many places does the selected cost weight move each model from its quality-only rank?',
-)
-html = html.replace(
-    'Frontier models ranked on real-world value. ValueRank v1.7.0 · 21 models from Artificial Analysis & DeepSWE Best, with a separate Bug Hunt emphasis ranking.',
-    f'Frontier models ranked on real-world value. ValueRank {VERSION} · {n} models; DeepSWE v1.1 and Bug Hunt shape the primary score.',
-)
-html = html.replace(
-    '// Dims: Cost Halluc DeepSWE GDP LCR OmniAcc HLE GPQA Sci CritPt AAI Spd',
-    '// Dims: Cost NonHalluc LiveBenchIF DeepSWE GDP AutomationBench LCR OmniAcc HLE GPQA SciCode CritPt AAI BugHunt',
-)
-html = html.replace(
-    'Independent rankings from Artificial Analysis & DeepSWE. ValueRank v1.7.0 · 21 models, plus a matched-cohort Bug Hunt emphasis ranking.',
-    f'Evidence-backed rankings from benchmark owners. ValueRank {VERSION} · {n} models; DeepSWE v1.1 and Bug Hunt are in the primary rank.',
-)
-html = html.replace('Production AI Ranking Framework · v1.7.0', f'Production AI Ranking Framework · {VERSION}')
-html = html.replace('Current Top 3 · DeepSWE Cohort', 'Current Top 3 · Shared DeepSWE + Bug Hunt Cohort')
-html = html.replace(
-    'v1.7.0 primary score uses zero-gap dimensions and no neutral-fill placeholders',
-    f'{VERSION} primary score uses each model’s observed dimensions, renormalizes available weights, and does not fill missing metrics',
-)
-html = html.replace('<div class="insight-title">v1.7.0 Release</div>', f'<div class="insight-title">{VERSION} Release</div>')
-html = html.replace(
-    '<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix (21 × 12)</h3>',
-    f'<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Normalized Score Matrix ({n} × {d})</h3>',
-)
-html = html.replace(
-    'All retained score inputs are source-backed in v1.7.0',
-    f'All retained score inputs are source-backed in {VERSION}',
-)
-html = html.replace(
-    'ValueRank v1.7.0 · September 29, 2026 · 21 models × 12 primary dimensions',
-    f'ValueRank {VERSION} · {DATE} · {n} models × {d} primary dimensions',
-)
-html = html.replace('Cost weight: 25% (default)', f'Cost weight: {cost_weight["weightPct"]:.2f}% (default)')
-html = html.replace('Why does cost get 25% of the weight?', f'Why is cost weighted at {cost_weight["weightPct"]:.2f}% by default?')
-html = html.replace('Ranking History — v0.7 to v1.7.0', f'Ranking History — v0.7 to {VERSION}')
-html = html.replace(
-    "name:'Overall Score (with 25% cost)',",
-    "name:'Overall Score (with ' + costWeightPct + '% ' + costBasisLabel() + ')',",
-)
-html = html.replace(
-    'What happened to the models that were ranked in v1.1 but not in v1.2?',
-    "Why isn't Claude Opus 5.5 in the primary ranking?",
-)
-
-def replace_faq_answer(source, question, answer):
-    pattern = (
-        r'(<div class="faq-item">\s*<button class="faq-q"[^>]*>\s*'
-        + re.escape(question)
-        + r'\s*<i data-lucide="chevron-down" class="faq-chevron"></i>\s*</button>\s*'
-        r'<div class="faq-a">)[\s\S]*?(</div>\s*</div>)'
-    )
-    updated, count = re.subn(
-        pattern,
-        lambda match: match.group(1) + answer + match.group(2),
-        source,
-        count=1,
-    )
-    if count != 1:
-        raise SystemExit(f"FAQ answer replacement failed: {question}")
-    return updated
-
-html = re.sub(
-    r"Why is cost weighted at [0-9.]+% by default\?",
-    f"Why is cost weighted at {cost_weight['weightPct']:.2f}% by default?",
-    html,
-    count=1,
-)
-html = html.replace(
-    "Why isn't Claude Opus 5.5 in the primary ranking?",
-    "Is Claude Opus 5.5 included in the primary ranking?",
-    1,
-)
-
-faq_updates = [
-    (
-        'What does the overall score actually represent?',
-        f'Each model’s score is the weighted average of its available normalized dimensions; available priorities are renormalized per model and priority coverage plus missing metrics are reported beside the score. Dimension scores use <code>((n − rank) / (n − 1)) × 100</code> over models with an observation for that dimension; ties receive average rank. Missing values are not imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.',
-    ),
-    (
-        f'Why is cost weighted at {cost_weight["weightPct"]:.2f}% by default?',
-        f'Cost has a {cost_weight["weightPct"]:.2f}% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple. Both views use the same benchmark suite and lower cost ranks better.',
-    ),
-    (
-        'What does ⊘ mean in ValueRank?',
-        f'⊘ marks a missing observation for that model and dimension. The score excludes missing metrics and renormalizes the available priorities per model; the table reports priority coverage and missing metrics beside each partial score.',
-    ),
-    (
-        "What's the difference between Score and Quality Score?",
-        f'The overall Score uses the model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at {cost_weight["weightPct"]:.2f}% by default. Quality Score renormalizes the available non-cost dimensions to 100%, showing benchmark performance without the cost weight.',
-    ),
-    (
-        'What is the Pareto frontier?',
-        'The Pareto frontier contains models that are not dominated on both quality and cost under the selected cost basis. The Pareto chart updates when you switch between API Costs and Plan Costs.',
-    ),
-    (
-        'Are scores comparable across ValueRank versions?',
-        'Prior-version scores are not directly comparable. The eligible models, benchmark versions, dimensions, and weights can change, shifting rank-normalized scores. Use the version history table for rank movement and each release record for its own score values.',
-    ),
-    (
-        'How often is ValueRank updated?',
-        f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} reconciles the AA Intelligence Index score-versus-total-benchmark-cost frontier, uses configuration-specific DeepSWE v1.1 results, and includes observed Bug Hunt results in the per-model available-dimension score.',
-    ),
-    (
+    html = html.replace(
+        "Why isn't Claude Opus 5.5 in the primary ranking?",
         "Is Claude Opus 5.5 included in the primary ranking?",
-        f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; Instruction Following is unavailable for Opus 5.5 in the pinned LiveBench release and contributes for models with an eligible result.',
-    ),
-]
-for question, answer in faq_updates:
-    html = replace_faq_answer(html, question, answer)
+        1,
+    )
 
-site_path.write_text(html)
-inject_header(site_path, "llm", f"{DATE} · {n} models · {d} scored dimensions", VERSION)
+    faq_updates = [
+        (
+            'What does the overall score actually represent?',
+            f'Each model’s score is the weighted average of its available normalized dimensions; available priorities are renormalized per model and priority coverage plus missing metrics are reported beside the score. Dimension scores use <code>((n − rank) / (n − 1)) × 100</code> over models with an observation for that dimension; ties receive average rank. Missing values are not imputed. AA-Omniscience is represented as Non-Hallucination Rate, where higher is better. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.',
+        ),
+        (
+            f'Why is cost weighted at {cost_weight["weightPct"]:.2f}% by default?',
+            f'Cost has a {cost_weight["weightPct"]:.2f}% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple. Both views use the same benchmark suite and lower cost ranks better.',
+        ),
+        (
+            'What does ⊘ mean in ValueRank?',
+            f'⊘ marks a missing observation for that model and dimension. The score excludes missing metrics and renormalizes the available priorities per model; the table reports priority coverage and missing metrics beside each partial score.',
+        ),
+        (
+            "What's the difference between Score and Quality Score?",
+            f'The overall Score uses the model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at {cost_weight["weightPct"]:.2f}% by default. Quality Score renormalizes the available non-cost dimensions to 100%, showing benchmark performance without the cost weight.',
+        ),
+        (
+            'What is the Pareto frontier?',
+            'The Pareto frontier contains models that are not dominated on both quality and cost under the selected cost basis. The Pareto chart updates when you switch between API Costs and Plan Costs.',
+        ),
+        (
+            'Are scores comparable across ValueRank versions?',
+            'Prior-version scores are not directly comparable. The eligible models, benchmark versions, dimensions, and weights can change, shifting rank-normalized scores. Use the version history table for rank movement and each release record for its own score values.',
+        ),
+        (
+            'How often is ValueRank updated?',
+            f'ValueRank is refreshed when primary benchmark results or cost inputs materially change. {VERSION} reconciles the AA Intelligence Index score-versus-total-benchmark-cost frontier, uses configuration-specific DeepSWE v1.1 results, and includes observed Bug Hunt results in the per-model available-dimension score.',
+        ),
+        (
+            "Is Claude Opus 5.5 included in the primary ranking?",
+            f'Claude Opus 5.5 is included in {VERSION}. The {html_external_link("AA Coding Agent Index v1.5 DeepSWE v1.1 chart", AA_DEEPSWE_URL)} reports 68.0% for Claude Code / Opus 5.5 / max; the {html_external_link("Bug Hunt owner scoreboard", BUG_HUNT_URL)} reports 41.7/105 (mean of three runs) for Opus 5.5 max. The {html_external_link("AA model profile", "https://artificialanalysis.ai/models/claude-opus-5-5")} labels its corresponding profile max with fallback. Its score uses its observed retained dimensions; Instruction Following is unavailable for Opus 5.5 in the pinned LiveBench release and contributes for models with an eligible result.',
+        ),
+    ]
+    for question, answer in faq_updates:
+        html = replace_faq_answer(html, question, answer)
 
-# Normalize current-release copy after applying the shared header. The site is
-# an inherited publication shell, so exact legacy-string replacements above
-# can miss text left by earlier refreshes.
-html = site_path.read_text()
+    site_path.write_text(html)
+    inject_header(site_path, "llm", f"{DATE} · {n} models · {d} scored dimensions", VERSION)
+
+    # Normalize current-release copy after applying the shared header. The site is
+    # an inherited publication shell, so exact legacy-string replacements above
+    # can miss text left by earlier refreshes.
+    html = site_path.read_text()
 
 
-def replace_current_copy(source, pattern, replacement, label):
-    updated, count = re.subn(pattern, replacement, source, count=1)
-    if count != 1:
-        raise SystemExit(f"current-release copy replacement failed: {label}")
-    return updated
 
 
-html = replace_current_copy(
-    html,
-    r"function computeNewScore\(model, costWeightPct\) \{[\s\S]*?\n\}",
-    lambda _match: """function computeNewScore(model, costWeightPct) {
+    html = replace_current_copy(
+        html,
+        r"function computeNewScore\(model, costWeightPct\) \{[\s\S]*?\n\}",
+        lambda _match: """function computeNewScore(model, costWeightPct) {
   const weights = effectiveDimWeights(model, costWeightPct);
   let weightedScore = 0;
   let totalWeight = 0;
@@ -2063,12 +2111,12 @@ html = replace_current_copy(
   });
   return totalWeight > 0 ? Math.round((weightedScore / totalWeight) * 10) / 10 : null;
 }""",
-    "row-wise score calculation",
-)
-html = replace_current_copy(
-    html,
-    r"function getMacroContribs\(model\) \{[\s\S]*?\n\}",
-    lambda _match: """function getMacroContribs(model) {
+        "row-wise score calculation",
+    )
+    html = replace_current_copy(
+        html,
+        r"function getMacroContribs\(model\) \{[\s\S]*?\n\}",
+        lambda _match: """function getMacroContribs(model) {
   const weights = effectiveDimWeights(model, costWeightPct);
   return MACRO_CATS.map(cat => {
     let value = 0;
@@ -2078,12 +2126,12 @@ html = replace_current_copy(
     return Math.round(value * 100) / 100;
   });
 }""",
-    "row-wise macro contributions",
-)
-html = replace_current_copy(
-    html,
-    r"function renderTable\(\) \{[\s\S]*?(?=function initTable\(\))",
-    lambda _match: """function renderTable() {
+        "row-wise macro contributions",
+    )
+    html = replace_current_copy(
+        html,
+        r"function renderTable\(\) \{[\s\S]*?(?=function initTable\(\))",
+        lambda _match: """function renderTable() {
   let models = tableModels.filter(m => {
     if (tierFilter === 'all') return true;
     if (tierFilter === 'Expensive') return ['Expensive','Very Expensive','Ultra-Premium'].includes(m.costTier);
@@ -2157,12 +2205,12 @@ html = replace_current_copy(
     </tr>`;
   }).join('');
 }""" + "\n\n",
-    "coverage-aware ranking table",
-)
-html = replace_current_copy(
-    html,
-    r"function renderDecomposition\(\) \{[\s\S]*?\n\}",
-    lambda _match: """function renderDecomposition() {
+        "coverage-aware ranking table",
+    )
+    html = replace_current_copy(
+        html,
+        r"function renderDecomposition\(\) \{[\s\S]*?\n\}",
+        lambda _match: """function renderDecomposition() {
   const sorted = [...MODELS].filter(model => Number.isFinite(model.overallScore)).sort((a, b) => a.overallScore - b.overallScore);
   const yLabels = sorted.map(model => model.shortName);
   const traces = MACRO_CATS.map((category, categoryIndex) => ({
@@ -2184,12 +2232,12 @@ html = replace_current_copy(
   };
   Plotly.newPlot('chart-decomp', traces, layout, PLOTLY_CONFIG);
 }""",
-    "coverage-aware score decomposition",
-)
-html = replace_current_copy(
-    html,
-    r"function renderHeatmap\(elementId, height\) \{[\s\S]*?\n\}",
-    lambda _match: """function renderHeatmap(elementId, height) {
+        "coverage-aware score decomposition",
+    )
+    html = replace_current_copy(
+        html,
+        r"function renderHeatmap\(elementId, height\) \{[\s\S]*?\n\}",
+        lambda _match: """function renderHeatmap(elementId, height) {
   const models = [...MODELS].sort((a, b) => b.overallScore - a.overallScore);
   const colOrder = DIM_KEYS.map((_, index) => index);
   const colLabels = colOrder.map(index => index === 0 ? costBasisLabel() : DIM_KEYS[index]);
@@ -2272,198 +2320,203 @@ html = replace_current_copy(
   };
   Plotly.newPlot(elementId, [trace], layout, PLOTLY_CONFIG);
 }""",
-    "missing-safe score matrix",
-)
+        "missing-safe score matrix",
+    )
 
 
-current_description = (
-    f"ValueRank {VERSION}: {n} models ranked from available retained dimensions across the reconciled AA Intelligence Index score-versus-total-benchmark-cost frontier roster; "
-    "scores renormalize observed metrics per model and report priority coverage and missing inputs."
-)
-for attribute in (
-    'name="description"',
-    'property="og:description"',
-    'name="twitter:description"',
-):
+    current_description = (
+        f"ValueRank {VERSION}: {n} models ranked from available retained dimensions across the reconciled AA Intelligence Index score-versus-total-benchmark-cost frontier roster; "
+        "scores renormalize observed metrics per model and report priority coverage and missing inputs."
+    )
+    for attribute in (
+        'name="description"',
+        'property="og:description"',
+        'name="twitter:description"',
+    ):
+        html = replace_current_copy(
+            html,
+            rf'(<meta {attribute} content=")[^"]*(">)',
+            lambda match: match.group(1) + html_escape(current_description, quote=True) + match.group(2),
+            f"meta {attribute}",
+        )
+
     html = replace_current_copy(
         html,
-        rf'(<meta {attribute} content=")[^"]*(">)',
-        lambda match: match.group(1) + html_escape(current_description, quote=True) + match.group(2),
-        f"meta {attribute}",
+        r'(<div class="hero-eyebrow">[\s\S]*?Production AI Ranking Framework · )v[0-9.]+',
+        lambda match: match.group(1) + VERSION,
+        "hero release",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<span class="hero-statbar-num">)[^<]*(</span>\s*<span class="hero-statbar-label">Cost Weight</span>)',
+        lambda match: match.group(1) + f'{cost_weight["weightPct"]:.2f}%' + match.group(2),
+        "hero cost weight",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<div class="section-sub">)Drag the cost weight slider[\s\S]*?(</div>)',
+        lambda match: match.group(1)
+        + f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.'
+        + match.group(2),
+        "ranking cost explanation",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<input type="range" id="cost-slider"[^>]*max=")[^"]+("[^>]*value=")[^"]+(" step=")[^"]+(">)',
+        lambda match: match.group(1) + "100" + match.group(2) + f'{cost_weight["weightPct"]:.4f}' + match.group(3) + "0.01" + match.group(4),
+        "cost slider default",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<span class="slider-val" id="slider-val">)[^<]*(</span>)',
+        lambda match: match.group(1) + f'{cost_weight["weightPct"]:.2f}%' + match.group(2),
+        "cost slider label",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<span class="seal-note">)v[0-9.]+ primary score (?:uses|renormalizes) [^<]*(</span>)',
+        lambda match: match.group(1) + f'{VERSION} primary score renormalizes each model’s observed dimensions; missing metrics are shown and never filled' + match.group(2),
+        "ranking release note",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<span class="seal-note" id="cost-note">)Cost weight: [^<]*(</span>)',
+        lambda match: match.group(1) + f'Cost weight: {cost_weight["weightPct"]:.2f}% (default)' + match.group(2),
+        "cost weight note",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<div class="insight-title">)v[0-9.]+ Release(</div>)',
+        lambda match: match.group(1) + f'{VERSION} Release' + match.group(2),
+        "release insight title",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<h3[^>]*>Normalized Score Matrix \()[0-9]+\s*[×x]\s*[0-9]+(\)</h3>)',
+        lambda match: match.group(1) + f'{n} × {d}' + match.group(2),
+        "score matrix heading",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<span style="margin-left:12px;">)All retained score inputs are source-backed in v[0-9.]+(</span>)',
+        lambda match: match.group(1) + f'All retained score inputs are source-backed in {VERSION}' + match.group(2),
+        "score matrix source note",
     )
 
-html = replace_current_copy(
-    html,
-    r'(<div class="hero-eyebrow">[\s\S]*?Production AI Ranking Framework · )v[0-9.]+',
-    lambda match: match.group(1) + VERSION,
-    "hero release",
-)
-html = replace_current_copy(
-    html,
-    r'(<span class="hero-statbar-num">)[^<]*(</span>\s*<span class="hero-statbar-label">Cost Weight</span>)',
-    lambda match: match.group(1) + f'{cost_weight["weightPct"]:.2f}%' + match.group(2),
-    "hero cost weight",
-)
-html = replace_current_copy(
-    html,
-    r'(<div class="section-sub">)Drag the cost weight slider[\s\S]*?(</div>)',
-    lambda match: match.group(1)
-    + f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.'
-    + match.group(2),
-    "ranking cost explanation",
-)
-html = replace_current_copy(
-    html,
-    r'(<input type="range" id="cost-slider"[^>]*max=")[^"]+("[^>]*value=")[^"]+(" step=")[^"]+(">)',
-    lambda match: match.group(1) + "100" + match.group(2) + f'{cost_weight["weightPct"]:.4f}' + match.group(3) + "0.01" + match.group(4),
-    "cost slider default",
-)
-html = replace_current_copy(
-    html,
-    r'(<span class="slider-val" id="slider-val">)[^<]*(</span>)',
-    lambda match: match.group(1) + f'{cost_weight["weightPct"]:.2f}%' + match.group(2),
-    "cost slider label",
-)
-html = replace_current_copy(
-    html,
-    r'(<span class="seal-note">)v[0-9.]+ primary score (?:uses|renormalizes) [^<]*(</span>)',
-    lambda match: match.group(1) + f'{VERSION} primary score renormalizes each model’s observed dimensions; missing metrics are shown and never filled' + match.group(2),
-    "ranking release note",
-)
-html = replace_current_copy(
-    html,
-    r'(<span class="seal-note" id="cost-note">)Cost weight: [^<]*(</span>)',
-    lambda match: match.group(1) + f'Cost weight: {cost_weight["weightPct"]:.2f}% (default)' + match.group(2),
-    "cost weight note",
-)
-html = replace_current_copy(
-    html,
-    r'(<div class="insight-title">)v[0-9.]+ Release(</div>)',
-    lambda match: match.group(1) + f'{VERSION} Release' + match.group(2),
-    "release insight title",
-)
-html = replace_current_copy(
-    html,
-    r'(<h3[^>]*>Normalized Score Matrix \()[0-9]+\s*[×x]\s*[0-9]+(\)</h3>)',
-    lambda match: match.group(1) + f'{n} × {d}' + match.group(2),
-    "score matrix heading",
-)
-html = replace_current_copy(
-    html,
-    r'(<span style="margin-left:12px;">)All retained score inputs are source-backed in v[0-9.]+(</span>)',
-    lambda match: match.group(1) + f'All retained score inputs are source-backed in {VERSION}' + match.group(2),
-    "score matrix source note",
-)
-
-formula_copy = (
-    f"For each retained dimension, models with an observed result are ranked within that dimension; rank 1 maps to 100 points and the last observed rank maps to 0, with ties receiving the average tied rank. "
-    f"Each model’s available dimension priorities are renormalized to calculate its score. {VERSION} reports priority coverage and missing metrics and does not impute missing values."
-)
-html = replace_current_copy(
-    html,
-    r'(<h3[^>]*>Scoring Formula</h3>\s*<div class="method-formula">[\s\S]*?</div>\s*<p class="method-text">)[\s\S]*?(</p>)',
-    lambda match: match.group(1) + formula_copy + match.group(2),
-    "scoring formula cohort",
-)
-weights_copy = (
-    f"The final ValueRank score is a weighted sum across {d} retained dimensions. "
-    f"<strong>Cost weight: {cost_weight['weightPct']:.2f}%</strong> (slider-adjustable). "
-    f"Bug Hunt Bench contributes <strong>{bug_hunt_weight['weightPct']:.2f}%</strong> and "
-    f"DeepSWE v1.1 contributes <strong>{deepswe_weight['weightPct']:.2f}%</strong>. "
-    "API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple."
-)
-html = replace_current_copy(
-    html,
-    r'(<h3[^>]*>Scoring Formula</h3>[\s\S]*?<hr class="divider"[^>]*>\s*<p class="method-text">)[\s\S]*?(</p>)',
-    lambda match: match.group(1) + weights_copy + match.group(2),
-    "scoring formula weights",
-)
-html = replace_current_copy(
-    html,
-    r'(<strong>(?:Zero-gap benchmark rule|Missing-metric handling):</strong>)[\s\S]*?(</div>)',
-    lambda match: '<strong>Missing-metric handling:</strong>'
-    + f' Each model’s observed retained metrics contribute to its score, with available priorities renormalized; missing values remain unavailable and are shown in the matrix and coverage note. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.'
-    + match.group(2),
-    "missing-metric rule",
-)
-html = replace_current_copy(
-    html,
-    r'(<strong>Quality sub-score:</strong>)[\s\S]*?(</div>)',
-    lambda match: match.group(1)
-    + f'The weighted average of each model’s available non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.'
-    + match.group(2),
-    "quality sub-score",
-)
-html = replace_current_copy(
-    html,
-    r'(<div class="card mb-6" id="livebench-data">[\s\S]*?<p class="method-text" style="margin-bottom:16px;">)[\s\S]*?(</p>)',
-    lambda match: match.group(1)
-    + f'Release <strong>{livebench_document["release"]}</strong> matches <strong>{livebench_document["matchedN"]}/{livebench_document["cohortN"]}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; it contributes to each model’s primary score when that model has an eligible result and is unavailable otherwise. Overall and cost remain supplemental metrics.'
-    + match.group(2),
-    "LiveBench primary coverage note",
-)
-html = replace_current_copy(
-    html,
-    r'(<div class="hero-podium-label">)Current Top 3[^<]*(</div>)',
-    lambda match: match.group(1) + 'Current Top 3 · Primary ranking (selected cost basis)' + match.group(2),
-    "top-three label",
-)
-html = replace_current_copy(
-    html,
-    r'(<div class="section-sub">)(?:Full normalized score matrix|Normalized score matrix)[^<]*(</div>)',
-    lambda match: match.group(1) + 'Normalized score matrix. Missing dimension values are marked ⊘; each model’s available priorities are renormalized.' + match.group(2),
-    "normalized matrix coverage note",
-)
-html = replace_faq_answer(
-    html,
-    "Why is Claude ranked so low despite being a capable model?",
-    f"Under {VERSION}, the current overall leader is <strong>{models[0]['name']}</strong> (overall rank #{models[0]['rank']}); the quality leader is <strong>{quality_leader['name']}</strong> (quality rank #{quality_leader['qualityRank']}). Rankings reflect the observed benchmark results and weights available for each model; they are not a general capability verdict.",
-)
-html = replace_current_copy(
-    html,
-    r"(<div>ValueRank )v[0-9.]+ · [^<]+ · [0-9]+ models × [0-9]+ primary dimensions",
-    lambda match: match.group(1) + f'{VERSION} · {DATE} · {n} models × {d} primary dimensions',
-    "footer release",
-)
-html = replace_current_copy(
-    html,
-    r"(title:\{text:'Ranking History — v0\.7 to )v[0-9.]+",
-    lambda match: match.group(1) + VERSION,
-    "ranking history chart title",
-)
-html = re.sub(r"<!-- aa-reconciliation:start -->[\s\S]*?<!-- aa-reconciliation:end -->\n?", "", html)
-html = re.sub(r"<!-- plan-candidates:start -->[\s\S]*?<!-- plan-candidates:end -->\n?", "", html)
-if "</main>" not in html:
-    raise ValueError("Cannot insert AA comparison: publication shell lacks </main>")
-source_date_note = ('<p class="method-text">Publication updated October 8, 2026 with selective additions. Earlier AA and DeepSWE snapshots remain dated September 29–30; MiMo AA and frontier observations were captured October 8, and selective MiMo Bug Hunt owner notes were observed October 7. Rounded public AA metrics preserve captured display precision; source dates and precision are listed in raw data.</p>')
-aa_reconciliation_html = aa_reconciliation_html.replace('</p>', '</p>' + source_date_note, 1)
-html = html.replace("</main>", aa_reconciliation_html + plan_comparison_html + "\n</main>", 1)
-site_path.write_text(html)
-
-coding_path = ROOT / "site" / "coding-agents" / "index.html"
-if coding_path.exists():
-    coding_html = coding_path.read_text()
-    coding_html = coding_html.replace(
-        "Coding agents ranked on Artificial Analysis Coding Agent Index, Terminal-Bench 2.1, and cost. ValueRank v0.3 · 42 agents.",
-        "Historical coding-agent snapshot using the Artificial Analysis Coding Agent Index and Terminal-Bench 2.1 source data. It is retained for provenance; the current standalone benchmark is Terminal-Bench 4.0.",
+    formula_copy = (
+        f"For each retained dimension, models with an observed result are ranked within that dimension; rank 1 maps to 100 points and the last observed rank maps to 0, with ties receiving the average tied rank. "
+        f"Each model’s available dimension priorities are renormalized to calculate its score. {VERSION} reports priority coverage and missing metrics and does not impute missing values."
     )
-    coding_html = coding_html.replace(
-        "AA Coding Agent Index + Terminal-Bench 2.1 + cost. ValueRank v0.3 · 42 agents.",
-        "Historical AA Coding Agent Index + Terminal-Bench 2.1 snapshot. ValueRank v0.3 · 42 agents.",
+    html = replace_current_copy(
+        html,
+        r'(<h3[^>]*>Scoring Formula</h3>\s*<div class="method-formula">[\s\S]*?</div>\s*<p class="method-text">)[\s\S]*?(</p>)',
+        lambda match: match.group(1) + formula_copy + match.group(2),
+        "scoring formula cohort",
     )
-    coding_html = coding_html.replace(
-        "Overall = 0.25·Cost + 0.60·AA Coding Agent Index + 0.15·TB2.1 (missing TB2.1 → neutral 50). Cohort from Artificial Analysis; TB2.1 from tbench.ai.",
-        "Historical snapshot: Overall = 0.25·Cost + 0.60·AA Coding Agent Index + 0.15·TB2.1, with the original neutral-fill policy. This page is not the current TB4 leaderboard; use the Terminal-Bench 4.0 page for current results.",
+    weights_copy = (
+        f"The final ValueRank score is a weighted sum across {d} retained dimensions. "
+        f"<strong>Cost weight: {cost_weight['weightPct']:.2f}%</strong> (slider-adjustable). "
+        f"Bug Hunt Bench contributes <strong>{bug_hunt_weight['weightPct']:.2f}%</strong> and "
+        f"DeepSWE v1.1 contributes <strong>{deepswe_weight['weightPct']:.2f}%</strong>. "
+        "API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple."
     )
-    coding_html = coding_html.replace("<th>TB2.1</th>", "<th>TB2.1 (historical)</th>")
-    coding_html = coding_html.replace("ValueRank coding-agents v0.3 · July 28, 2026", "ValueRank coding-agents v0.3 · historical TB2.1 snapshot")
-    coding_path.write_text(coding_html)
-    inject_header(coding_path, "coding", "Historical snapshot · 42 agent variants", VERSION)
+    html = replace_current_copy(
+        html,
+        r'(<h3[^>]*>Scoring Formula</h3>[\s\S]*?<hr class="divider"[^>]*>\s*<p class="method-text">)[\s\S]*?(</p>)',
+        lambda match: match.group(1) + weights_copy + match.group(2),
+        "scoring formula weights",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<strong>(?:Zero-gap benchmark rule|Missing-metric handling):</strong>)[\s\S]*?(</div>)',
+        lambda match: '<strong>Missing-metric handling:</strong>'
+        + f' Each model’s observed retained metrics contribute to its score, with available priorities renormalized; missing values remain unavailable and are shown in the matrix and coverage note. Exact benchmark-version and evaluated-model matches are required; the full source roster contains {source_n} candidates.'
+        + match.group(2),
+        "missing-metric rule",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<strong>Quality sub-score:</strong>)[\s\S]*?(</div>)',
+        lambda match: match.group(1)
+        + f'The weighted average of each model’s available non-cost dimensions, renormalized to 100%. It represents benchmark capability without the cost penalty.'
+        + match.group(2),
+        "quality sub-score",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<div class="card mb-6" id="livebench-data">[\s\S]*?<p class="method-text" style="margin-bottom:16px;">)[\s\S]*?(</p>)',
+        lambda match: match.group(1)
+        + f'Release <strong>{livebench_document["release"]}</strong> matches <strong>{livebench_document["matchedN"]}/{livebench_document["cohortN"]}</strong> AA comparison candidates and includes <strong>{livebench_supplemental_label}</strong> outside the source roster: <strong>{html_escape(livebench_supplemental_text)}</strong>. Instruction Following is the four-task LiveBench mean; it contributes to each model’s primary score when that model has an eligible result and is unavailable otherwise. Overall and cost remain supplemental metrics.'
+        + match.group(2),
+        "LiveBench primary coverage note",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<div class="hero-podium-label">)Current Top 3[^<]*(</div>)',
+        lambda match: match.group(1) + 'Current Top 3 · Primary ranking (selected cost basis)' + match.group(2),
+        "top-three label",
+    )
+    html = replace_current_copy(
+        html,
+        r'(<div class="section-sub">)(?:Full normalized score matrix|Normalized score matrix)[^<]*(</div>)',
+        lambda match: match.group(1) + 'Normalized score matrix. Missing dimension values are marked ⊘; each model’s available priorities are renormalized.' + match.group(2),
+        "normalized matrix coverage note",
+    )
+    html = replace_faq_answer(
+        html,
+        "Why is Claude ranked so low despite being a capable model?",
+        f"Under {VERSION}, the current overall leader is <strong>{models[0]['name']}</strong> (overall rank #{models[0]['rank']}); the quality leader is <strong>{quality_leader['name']}</strong> (quality rank #{quality_leader['qualityRank']}). Rankings reflect the observed benchmark results and weights available for each model; they are not a general capability verdict.",
+    )
+    html = replace_current_copy(
+        html,
+        r"(<div>ValueRank )v[0-9.]+ · [^<]+ · [0-9]+ models × [0-9]+ primary dimensions",
+        lambda match: match.group(1) + f'{VERSION} · {DATE} · {n} models × {d} primary dimensions',
+        "footer release",
+    )
+    html = replace_current_copy(
+        html,
+        r"(title:\{text:'Ranking History — v0\.7 to )v[0-9.]+",
+        lambda match: match.group(1) + VERSION,
+        "ranking history chart title",
+    )
+    html = re.sub(r"<!-- aa-reconciliation:start -->[\s\S]*?<!-- aa-reconciliation:end -->\n?", "", html)
+    html = re.sub(r"<!-- plan-candidates:start -->[\s\S]*?<!-- plan-candidates:end -->\n?", "", html)
+    if "</main>" not in html:
+        raise ValueError("Cannot insert AA comparison: publication shell lacks </main>")
+    source_date_note = ('<p class="method-text">Publication updated October 8, 2026 with selective additions. Earlier AA and DeepSWE snapshots remain dated September 29–30; MiMo AA and frontier observations were captured October 8, and selective MiMo Bug Hunt owner notes were observed October 7. Rounded public AA metrics preserve captured display precision; source dates and precision are listed in raw data.</p>')
+    aa_reconciliation_html = aa_reconciliation_html.replace('</p>', '</p>' + source_date_note, 1)
+    html = html.replace("</main>", aa_reconciliation_html + plan_comparison_html + "\n</main>", 1)
+    site_path.write_text(html)
 
-print(json.dumps({
-    "version": VERSION,
-    "models": n,
-    "dimensions": d,
-    "dropped": [item["label"] for item in dropped],
-        "outputs": ["README.md", "methodology.md", "scores.md", "raw-data.md", "site/index.html", "site/coding-agents/index.html"],
-}, indent=2, ensure_ascii=False))
+    coding_path = root / "site" / "coding-agents" / "index.html"
+    if coding_path.exists():
+        coding_html = coding_path.read_text()
+        coding_html = coding_html.replace(
+            "Coding agents ranked on Artificial Analysis Coding Agent Index, Terminal-Bench 2.1, and cost. ValueRank v0.3 · 42 agents.",
+            "Historical coding-agent snapshot using the Artificial Analysis Coding Agent Index and Terminal-Bench 2.1 source data. It is retained for provenance; the current standalone benchmark is Terminal-Bench 4.0.",
+        )
+        coding_html = coding_html.replace(
+            "AA Coding Agent Index + Terminal-Bench 2.1 + cost. ValueRank v0.3 · 42 agents.",
+            "Historical AA Coding Agent Index + Terminal-Bench 2.1 snapshot. ValueRank v0.3 · 42 agents.",
+        )
+        coding_html = coding_html.replace(
+            "Overall = 0.25·Cost + 0.60·AA Coding Agent Index + 0.15·TB2.1 (missing TB2.1 → neutral 50). Cohort from Artificial Analysis; TB2.1 from tbench.ai.",
+            "Historical snapshot: Overall = 0.25·Cost + 0.60·AA Coding Agent Index + 0.15·TB2.1, with the original neutral-fill policy. This page is not the current TB4 leaderboard; use the Terminal-Bench 4.0 page for current results.",
+        )
+        coding_html = coding_html.replace("<th>TB2.1</th>", "<th>TB2.1 (historical)</th>")
+        coding_html = coding_html.replace("ValueRank coding-agents v0.3 · July 28, 2026", "ValueRank coding-agents v0.3 · historical TB2.1 snapshot")
+        coding_path.write_text(coding_html)
+        inject_header(coding_path, "coding", "Historical snapshot · 42 agent variants", VERSION)
+
+    print(json.dumps({
+        "version": VERSION,
+        "models": n,
+        "dimensions": d,
+        "dropped": [item["label"] for item in dropped],
+            "outputs": ["README.md", "methodology.md", "scores.md", "raw-data.md", "site/index.html", "site/coding-agents/index.html"],
+    }, indent=2, ensure_ascii=False))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

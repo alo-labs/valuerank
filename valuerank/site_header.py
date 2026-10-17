@@ -621,9 +621,12 @@ def inject_header(path: Path, active: str, meta: str, badge: str = "v1.4.0") -> 
     """Replace the first page nav and install/refresh shared header behavior."""
 
     source = path.read_text()
-    source, nav_count = re.subn(r"<nav\b[^>]*>[\s\S]*?</nav>", render_header(active, meta, badge), source, count=1)
+    nav_pattern = r"<nav\b[^>]*>[\s\S]*?</nav>"
+    nav_count = len(re.findall(nav_pattern, source))
     if nav_count != 1:
         raise SystemExit(f"shared header injection expected one nav in {path}, found {nav_count}")
+    header = render_header(active, meta, badge)
+    source = re.sub(nav_pattern, lambda _match: header, source, count=1)
     style = f'<style id="site-header-style">\n{HEADER_CSS}\n</style>'
     source, style_count = re.subn(r'<style id="site-header-style">[\s\S]*?</style>', style, source, count=1)
     if style_count == 0:

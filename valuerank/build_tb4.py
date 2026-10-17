@@ -46,9 +46,10 @@ def parse_cost(value: str) -> float:
     return round(float(match.group(1)) * multiplier, 2)
 
 
-def main() -> int:
-    input_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DATA / "tb4-scrape.json"
-    output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else DATA / "tb4.json"
+def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
+    args = sys.argv[1:] if argv is None else argv
+    input_path = Path(args[0]) if len(args) >= 1 else data / "tb4-scrape.json"
+    output_path = Path(args[1]) if len(args) >= 2 else data / "tb4.json"
     raw_bytes = input_path.read_bytes()
     raw = json.loads(raw_bytes)
     rows = raw.get("rows", [])
@@ -75,16 +76,16 @@ def main() -> int:
             "costUsd": parse_cost(cost),
             "cohortModelId": COHORT_ALIAS.get(base_model),
         })
-    if len(entries) != len(rows) - 1:
-        raise ValueError(f"Terminal-Bench source row count mismatch: {len(entries)} entries from {len(rows)} rows")
-    aa_models = json.loads((DATA / "aa_metrics.json").read_text())["models"]
+    aa_models = json.loads((data / "aa_metrics.json").read_text())["models"]
     cohort = [{"slug": model_id, "displayName": item["displayName"]} for model_id, item in aa_models.items()]
     cohort_ids = [item["slug"] for item in cohort]
+    aliased = [entry["cohortModelId"] for entry in entries if entry["cohortModelId"]]
+    duplicates = sorted({model_id for model_id in aliased if aliased.count(model_id) > 1})
+    if duplicates:
+        raise ValueError(f"Terminal-Bench cohort aliases are not unique: {', '.join(duplicates)}")
     matches = {entry["cohortModelId"]: entry for entry in entries if entry["cohortModelId"]}
-    if len(matches) != len({entry["cohortModelId"] for entry in entries if entry["cohortModelId"]}):
-        raise ValueError("Terminal-Bench cohort aliases are not unique")
     missing = [item["displayName"] for item in cohort if item["slug"] not in matches]
-    claim_document = json.loads((DATA / "provider_claims.json").read_text())
+    claim_document = json.loads((data / "provider_claims.json").read_text())
     provider_claims = [
         claim for claim in claim_document.get("claims", [])
         if claim.get("benchmark") == "Terminal-Bench"

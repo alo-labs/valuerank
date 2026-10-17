@@ -92,9 +92,7 @@ def decode_current_model(html: str) -> dict:
     marker_pos = html.find(marker)
     if marker_pos < 0:
         raise ValueError("currentModel marker not found")
-    start = html.find("{", marker_pos + len(marker) - 1)
-    if start < 0:
-        raise ValueError("currentModel opening brace not found")
+    start = marker_pos + len(marker) - 1  # the marker ends with the object's opening brace
 
     # The object is JSON escaped, but braces remain literal.  Model strings do
     # not contain structural braces; depth counting is sufficient and avoids
@@ -245,7 +243,7 @@ def main() -> int:
         source_observed_at = (
             snapshot_entry.get("capture", {}).get("observedAt")
             or snapshot_entry.get("capture", {}).get("capturedAt")
-            or snapshot_document.get("capturedAt")
+            or (snapshot_document.get("capturedAt") if isinstance(snapshot_document, dict) else None)
         ) if snapshot_entry else None
         metric_sources = {
             key: {

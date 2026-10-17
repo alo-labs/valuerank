@@ -1,17 +1,16 @@
-#!/usr/bin/env node
 /**
  * Generate ValueRank Open Graph / WhatsApp share cards (1200×630 PNG).
- * Usage: node scripts/site-generate-og-cards.mjs
+ * Usage: node scripts/generate-og-cards.mjs
  * Requires: playwright (repo root node_modules)
  */
-import { chromium } from "playwright";
-import { mkdirSync, writeFileSync } from "fs";
+import { mkdirSync, realpathSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = dirname(__dirname);
-const TMP = join(ROOT, ".tmp", "og");
+const VIEWPORT = { width: 1200, height: 630 };
+const SETTLE_MS = 900;
 
 const SHARED_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
@@ -96,14 +95,17 @@ const SHARED_CSS = `
   .footer .muted { color: #a5b4fc; }
 `;
 
-const CARDS = [
-  {
-    id: "home",
-    out: join(ROOT, "site/og.png"),
-    html: `
+/** Wraps one card's frame markup in the shared document shell. */
+function renderCardDocument(frame) {
+  return `
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>${SHARED_CSS}</style></head>
 <body>
-  <div class="frame">
+${frame}
+</body></html>`;
+}
+
+export function renderHomeCard() {
+  return renderCardDocument(`  <div class="frame">
     <div class="brand">ValueRank</div>
     <h1 class="title">ValueRank</h1>
     <div class="subtitle">Frontier models ranked on real-world value</div>
@@ -134,16 +136,11 @@ const CARDS = [
       <span>valuerank.alolabs.dev</span>
       <span class="muted">Open source · Independent</span>
     </div>
-  </div>
-</body></html>`,
-  },
-  {
-    id: "coding-agents",
-    out: join(ROOT, "site/coding-agents/og.png"),
-    html: `
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>${SHARED_CSS}</style></head>
-<body>
-  <div class="frame">
+  </div>`);
+}
+
+export function renderCodingAgentsCard() {
+  return renderCardDocument(`  <div class="frame">
     <div class="brand">ValueRank</div>
     <h1 class="title compact">Coding Agent ValueRank</h1>
     <div class="subtitle">value per dollar</div>
@@ -171,16 +168,11 @@ const CARDS = [
       <span>valuerank.alolabs.dev/coding-agents</span>
       <span class="muted">Open source · Independent</span>
     </div>
-  </div>
-</body></html>`,
-  },
-  {
-    id: "tb4",
-    out: join(ROOT, "site/tb4/og.png"),
-    html: `
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>${SHARED_CSS}</style></head>
-<body>
-  <div class="frame">
+  </div>`);
+}
+
+export function renderTb4Card() {
+  return renderCardDocument(`  <div class="frame">
     <div class="brand">ValueRank</div>
     <h1 class="title">Terminal-Bench 4.0</h1>
     <div class="subtitle">Score vs Cost</div>
@@ -215,35 +207,79 @@ const CARDS = [
       <span>valuerank.alolabs.dev/tb4</span>
       <span class="muted">Open source · Independent</span>
     </div>
-  </div>
-</body></html>`,
-  },
+  </div>`);
+}
+
+const CARD_LAYOUT = [
+  { id: "home", outPath: ["site", "og.png"], render: renderHomeCard },
+  { id: "coding-agents", outPath: ["site", "coding-agents", "og.png"], render: renderCodingAgentsCard },
+  { id: "tb4", outPath: ["site", "tb4", "og.png"], render: renderTb4Card },
 ];
 
-async function main() {
-  mkdirSync(TMP, { recursive: true });
+/** The card set for a repository root: id, screenshot target and HTML. */
+export function buildCards(root) {
+  return CARD_LAYOUT.map(({ id, outPath, render }) => ({
+    id,
+    out: join(root, ...outPath),
+    html: render(),
+  }));
+}
+
+/**
+ * Writes each card's HTML into <root>/.tmp/og and screenshots it into the site.
+ * The browser is closed even when a page fails.
+ */
+export async function run({ root = ROOT, chromium, log = console.log }) {
   const browser = await chromium.launch({ headless: true });
   try {
-    for (const card of CARDS) {
-      const htmlPath = join(TMP, `${card.id}.html`);
+    const workDir = join(root, ".tmp", "og");
+    mkdirSync(workDir, { recursive: true });
+    for (const card of buildCards(root)) {
+      const htmlPath = join(workDir, `${card.id}.html`);
       writeFileSync(htmlPath, card.html);
       const page = await browser.newPage({
-        viewport: { width: 1200, height: 630 },
+        viewport: VIEWPORT,
         deviceScaleFactor: 1,
       });
       await page.goto(`file://${htmlPath}`, { waitUntil: "networkidle" });
-      await page.waitForTimeout(900);
+      await page.waitForTimeout(SETTLE_MS);
       mkdirSync(dirname(card.out), { recursive: true });
       await page.screenshot({ path: card.out, type: "png" });
       await page.close();
-      console.log(`wrote ${card.out}`);
+      log(`wrote ${card.out}`);
     }
   } finally {
     await browser.close();
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+async function loadChromium() {
+  const { chromium } = await import("playwright");
+  return chromium;
+}
+
+/** CLI entry: uses the real Playwright browser and reports failures with exit status 1. */
+export async function main({ chromium, exit = process.exit, error = console.error, ...options } = {}) {
+  try {
+    await run({ ...options, chromium: chromium ?? (await loadChromium()) });
+  } catch (failure) {
+    error(failure);
+    exit(1);
+  }
+}
+
+/** True when argvPath names the file that is executing (symlinks resolved). */
+export function isEntryPoint(argvPath, moduleUrl) {
+  if (!argvPath) {
+    return false;
+  }
+  try {
+    return realpathSync(argvPath) === fileURLToPath(moduleUrl);
+  } catch {
+    return false;
+  }
+}
+
+if (isEntryPoint(process.argv[1], import.meta.url)) {
+  main();
+}

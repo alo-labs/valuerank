@@ -89,15 +89,19 @@ def exact_roster_match(row, roster):
     return matches[0] if len(matches) == 1 else None
 
 
-def reconcile(now=None):
+def reconcile(now=None, data=None):
+    """Reconcile the frontier inventory under ``data`` (default: the module DATA dir) as of ``now``."""
+
     now = now or utcnow()
-    report = {"schemaVersion": 1, "checkedAt": now.isoformat(), "inventoryPath": str(INVENTORY.relative_to(ROOT)),
+    data = DATA if data is None else data
+    inventory = data / "aa_reconciliation_inventory.json"
+    report = {"schemaVersion": 1, "checkedAt": now.isoformat(), "inventoryPath": str(inventory.relative_to(data.parent)),
               "maxAgeDays": MAX_AGE_DAYS, "issues": [], "frontier": [], "comparisonCandidates": [],
               "frontierDefinition": "Higher AA intelligence index and lower AA total evaluation cost; at least one strict improvement dominates.",
               "scope": "unknown", "completeness": {"status": "missing"}}
     issues = report["issues"]
     try:
-        doc = read_json(INVENTORY)
+        doc = read_json(inventory)
         if not isinstance(doc, dict):
             raise ValueError("inventory root must be an object")
     except (OSError, ValueError) as exc:
@@ -139,14 +143,14 @@ def reconcile(now=None):
         elif not (len(rows) == universe["observedFrontierPointN"] <= universe["plottedPointN"] <= universe["selectedModelN"]):
             issues.append("Frontier capture row count does not reconcile with displayed frontier/plotted/catalog counts.")
     try:
-        metrics = read_json(DATA / "aa_metrics.json")
+        metrics = read_json(data / "aa_metrics.json")
         roster = list(metrics["models"].items())
         if doc.get("benchmarkVersion") != metrics.get("benchmarkVersion"):
             issues.append("Inventory benchmark version differs from aa_metrics.json; recapture or migrate the exact version before publishing.")
-        scores = read_json(DATA / "scores.json")
+        scores = read_json(data / "scores.json")
         ranked = {item["id"] for item in scores["models"] if item.get("rankingEligible") is True}
         primary_gaps = {item["id"]: item.get("rankingExclusionReasons", []) for item in scores["models"]}
-    except (OSError, ValueError, KeyError, TypeError) as exc:
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
         issues.append(f"Source roster or ranking unavailable: {exc}")
         roster, ranked, primary_gaps = [], set(), {}
     decisions = {}

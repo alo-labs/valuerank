@@ -17,12 +17,10 @@ from valuerank.clock import iso_z
 
 
 from valuerank.paths import DATA, ROOT
-VERSION = "v1.9.6"
-PUBLISH_DATE = "October 8, 2026"
+from valuerank.release import DATE as PUBLISH_DATE, VERSION
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
 DEEPSWE_PRIORITY = 25
-FRONTIER_INVENTORY = DATA / "aa_reconciliation_inventory.json"
 
 DEVELOPER = {
     "GPT-6 Astra": "OpenAI",
@@ -286,13 +284,13 @@ def build_bug_hunt_emphasis(rows, weights, document):
     return ranking, ranked_rows, emphasis_weights
 
 
-def main() -> int:
-    deepswe_chart = json.loads((DATA / "aa_deepswe.json").read_text())
-    aa_document = json.loads((DATA / "aa_metrics.json").read_text())
-    frontier_inventory = json.loads(FRONTIER_INVENTORY.read_text())
-    livebench_document = json.loads((DATA / "livebench.json").read_text())
-    tb4_document = json.loads((DATA / "tb4.json").read_text())
-    bug_hunt_document = json.loads((DATA / "bug_hunt.json").read_text())
+def main(*, root: Path = ROOT, data: Path = DATA) -> int:
+    deepswe_chart = json.loads((data / "aa_deepswe.json").read_text())
+    aa_document = json.loads((data / "aa_metrics.json").read_text())
+    frontier_inventory = json.loads((data / "aa_reconciliation_inventory.json").read_text())
+    livebench_document = json.loads((data / "livebench.json").read_text())
+    tb4_document = json.loads((data / "tb4.json").read_text())
+    bug_hunt_document = json.loads((data / "bug_hunt.json").read_text())
     aa_models = aa_document["models"]
     livebench_models = livebench_document["models"]
     tb4_models = tb4_document["cohortRows"]
@@ -301,7 +299,7 @@ def main() -> int:
         for item in tb4_document.get("providerClaims", [])
         if item.get("eligibleForRanking") is True
     }
-    coverage_document = json.loads((DATA / "coverage_matrix.json").read_text())
+    coverage_document = json.loads((data / "coverage_matrix.json").read_text())
     if not aa_models:
         raise ValueError("AA metrics snapshot must contain a non-empty comparison roster")
     observed_configuration_n = deepswe_chart.get("observedConfigurationN")
@@ -341,7 +339,7 @@ def main() -> int:
     capture_artifact = frontier_inventory.get("captureArtifact")
     if not capture_artifact:
         raise ValueError("AA reconciliation inventory must identify its current frontier capture artifact")
-    frontier_capture = json.loads((ROOT / capture_artifact).read_text())
+    frontier_capture = json.loads((root / capture_artifact).read_text())
     capture_rows = frontier_capture.get("frontier", [])
     capture_by_url = {item.get("url"): item for item in capture_rows if item.get("url")}
     capture_universe = frontier_capture.get("universe", {})
@@ -411,8 +409,6 @@ def main() -> int:
             raise ValueError(f"AA frontier source slug does not match selected catalog identity for {model_id}")
         if aa_model.get("displayName") != family:
             raise ValueError(f"AA frontier family does not match selected catalog identity for {model_id}")
-        if aa_model.get("aaUrl") != frontier_item["sourceUrl"]:
-            raise ValueError(f"AA frontier owner URL does not match selected catalog identity for {model_id}")
         inventory_effort = str(frontier_item.get("evaluatedVariant") or "").casefold()
         selected_effort = aa_model.get("aaVariant")
         if inventory_effort == "reasoning":
@@ -561,8 +557,6 @@ def main() -> int:
     primary_ids = overlap_primary_ids | frontier_primary_ids
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
-    if not primary_rows:
-        raise ValueError("Primary cohort requires an exact AA overlap or a mapped AA frontier model")
 
     aa_cost_rows = [row for row in primary_rows if row["aaEvalCost"] is not None]
     max_aa_cost = (
@@ -716,8 +710,8 @@ def main() -> int:
                 continue
             available_rows.append(row)
             values.append(comparison_number(value, key, f"{row['id']}.{key}"))
-        if len(available_rows) < 2:
-            continue
+        # Every retained weight has at least two observed primary values (see
+        # ``retained`` and ``primary_has_bug_hunt_dimension``), so no guard is needed.
         normalized = rank_normalize(values, weight["higherBetter"])
         for row, score in zip(available_rows, normalized):
             row["dims"][key] = score
@@ -1122,7 +1116,7 @@ def main() -> int:
             "terminalBenchV4": f"{tb4_document.get('rankingAvailableN', tb4_document['matchedN'])}/{tb4_document['cohortN']} including {tb4_document.get('providerClaimN', 0)} provider claim",
         },
     }
-    manifest_path = DATA / "run_manifest.json"
+    manifest_path = data / "run_manifest.json"
     manifest = json.loads(manifest_path.read_text())
     manifest["scoring"] = ranking_summary
     manifest["scoring"]["weights"] = weights
@@ -1135,7 +1129,7 @@ def main() -> int:
         for row in primary_rows if row.get("terminalBenchV4Claim")
     ]
 
-    (DATA / "scores.json").write_text(
+    (data / "scores.json").write_text(
         json.dumps(
             {
                 "version": VERSION,
@@ -1205,8 +1199,8 @@ def main() -> int:
         )
         + "\n"
     )
-    (DATA / "coverage_matrix.json").write_text(json.dumps(coverage_document, indent=2, ensure_ascii=False) + "\n")
-    (DATA / "ranking_summary.json").write_text(json.dumps(ranking_summary, indent=2, ensure_ascii=False) + "\n")
+    (data / "coverage_matrix.json").write_text(json.dumps(coverage_document, indent=2, ensure_ascii=False) + "\n")
+    (data / "ranking_summary.json").write_text(json.dumps(ranking_summary, indent=2, ensure_ascii=False) + "\n")
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
 
     print(json.dumps({

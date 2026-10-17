@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "synthetic-provider-claims",
+  "policy": "synthetic",
+  "claims": [
+    {"claimId": "gemini-37-flash-tb4-a", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.0", "component": "resolutionRate", "cohortModelId": "gemini-3.7-flash", "evaluatedModel": "Gemini 3.7 Flash", "value": 0.31, "valuePct": 31.0, "eligibleForRanking": true},
+    {"claimId": "gemini-37-flash-tb4-b", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.0", "component": "resolutionRate", "cohortModelId": "gemini-3.7-flash", "evaluatedModel": "Gemini 3.7 Flash (alt)", "value": 0.29, "valuePct": 29.0, "eligibleForRanking": true},
+    {"claimId": "sonnet-tb4-not-eligible", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.0", "component": "resolutionRate", "cohortModelId": "claude-sonnet-5", "evaluatedModel": "Claude Sonnet 5", "value": 0.4, "valuePct": 40.0, "eligibleForRanking": false},
+    {"claimId": "sonnet-tb4-string-flag", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.0", "component": "resolutionRate", "cohortModelId": "claude-sonnet-5", "evaluatedModel": "Claude Sonnet 5", "value": 0.41, "valuePct": 41.0, "eligibleForRanking": "true"},
+    {"claimId": "sonnet-tb3-other-version", "benchmark": "Terminal-Bench", "benchmarkVersion": "3.0", "component": "resolutionRate", "cohortModelId": "claude-sonnet-5", "evaluatedModel": "Claude Sonnet 5", "value": 0.42, "valuePct": 42.0, "eligibleForRanking": true},
+    {"claimId": "sonnet-deepswe-other-benchmark", "benchmark": "DeepSWE", "benchmarkVersion": "4.0", "component": "passRate", "cohortModelId": "claude-sonnet-5", "evaluatedModel": "Claude Sonnet 5", "value": 0.43, "valuePct": 43.0, "eligibleForRanking": true},
+    {"claimId": "grok-tb4-already-measured", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.0", "component": "resolutionRate", "cohortModelId": "grok-4.6", "evaluatedModel": "Grok 4.6", "value": 0.44, "valuePct": 44.0, "eligibleForRanking": true}
+  ]
+}
