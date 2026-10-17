@@ -1,0 +1,131 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "note": "Manual workflow-contract application; Silver Bullet runtime/orchestrator not invoked.",
+  "phases": [
+    {
+      "phase": "DR-SCOPE",
+      "input_contract": "User asks for consumer-chat allowance trackers; recent user reports limited to 2026-09-05 through 2026-10-05; Codex values homepage-only at TiboTattle.",
+      "work_product": "scope.md",
+      "evidence_refs": [
+        "scope.md",
+        "run_manifest.json"
+      ],
+      "verification": "Eight-provider scope, in/out surfaces, tier attribution and success criteria documented.",
+      "validation": "Review against user instructions and folder scope.",
+      "repair": null,
+      "status": "complete"
+    },
+    {
+      "phase": "DR-PLAN",
+      "input_contract": "Bounded multi-provider allowance and app-discovery question.",
+      "work_product": "research-plan.md",
+      "evidence_refs": [
+        "research-plan.md",
+        "community-query-log-addendum.md"
+      ],
+      "verification": "Reddit-first per provider; HN/developer gap searches; official sources and tracker sources separated.",
+      "validation": "52 executed query rows present; original unexecuted queries remain separate.",
+      "repair": null,
+      "status": "complete"
+    },
+    {
+      "phase": "DR-RETRIEVE",
+      "input_contract": "Search plan and built-in web__run-only requirement.",
+      "work_product": "sources.jsonl + community-sources-addendum.jsonl; evidence ledgers; executed query logs.",
+      "evidence_refs": [
+        "community-sources-addendum.jsonl",
+        "community-evidence-addendum.jsonl",
+        "community-query-log-addendum.md"
+      ],
+      "verification": "88 source records, 81 unique URLs, 49 evidence records; 18 in-window community source records.",
+      "validation": "JSONL parsed; duplicate IDs none; evidence-to-source links resolve.",
+      "repair": null,
+      "status": "complete_with_bounded_coverage"
+    },
+    {
+      "phase": "DR-TRIANGULATE",
+      "input_contract": "Persisted policy, community and tracker sources.",
+      "work_product": "triangulation.md",
+      "evidence_refs": [
+        "O-C01–O-C12",
+        "C-PER-1–C-COM-5"
+      ],
+      "verification": "Official policy vs user self-report vs tracker claim differentiated; source reliability/credibility grades recorded.",
+      "validation": "All claim evidence IDs resolve; no multi-account report promoted to universal allowance.",
+      "repair": "Corrected tier/surface labels and separated coding/API reports.",
+      "status": "complete_with_single_source_limits"
+    },
+    {
+      "phase": "DR-OUTLINE",
+      "input_contract": "Triangulated policy, reports and app classes.",
+      "work_product": "outline.md",
+      "evidence_refs": [
+        "outline.md",
+        "O-E24–O-E33"
+      ],
+      "verification": "Added Gemini, standard ChatGPT and tracker taxonomy after retrieval exposed missing provider coverage and estimate-vs-meter distinction.",
+      "validation": "Each outline section maps to existing source/evidence records.",
+      "repair": "Expanded initial six-service outline to eight consumer chat services.",
+      "status": "complete"
+    },
+    {
+      "phase": "DR-SYNTHESIZE",
+      "input_contract": "Evidence ledgers and refined outline.",
+      "work_product": "report.md and community-research-addendum.md",
+      "evidence_refs": [
+        "claims.jsonl",
+        "community-claims-addendum.jsonl",
+        "community-evidence-addendum.jsonl"
+      ],
+      "verification": "Report distinguishes policy, actual account UI, third-party reader, local estimate, API cost and crowd reports; every user report states tier or not stated.",
+      "validation": "33 numbered citations map to 33 bibliography entries; report cross-links to ledgers.",
+      "repair": null,
+      "status": "complete"
+    },
+    {
+      "phase": "DR-CRITIQUE",
+      "input_contract": "Draft report and claim map.",
+      "work_product": "critique.md",
+      "evidence_refs": [
+        "critique.md",
+        "community-query-log-addendum.md"
+      ],
+      "verification": "Three ultradeep critique cycles by skeptic, reviewer and red-team personas; scope, tier attribution and tracker class issues reviewed.",
+      "validation": "High-severity tier/surface ambiguity repaired or explicitly qualified; no unsupported universal quota retained.",
+      "repair": "Critique loopback added official ChatGPT/Gemini policy, exact Reddit queries, app classification searches and report-level counterevidence.",
+      "status": "complete"
+    },
+    {
+      "phase": "DR-REFINE",
+      "input_contract": "Critique deltas and delta-search results.",
+      "work_product": "Updated report, ledgers and query log.",
+      "evidence_refs": [
+        "O-E24–O-E33",
+        "O-C08–O-C12",
+        "report.md"
+      ],
+      "verification": "Poe tier not inferred from price; Gemini alt text not assigned to poster; ChatGPT surface ambiguity retained; AIRadar estimate separated.",
+      "validation": "Report and registry validation rerun after package changes.",
+      "repair": null,
+      "status": "complete"
+    },
+    {
+      "phase": "DR-PACKAGE",
+      "input_contract": "Refined report and validated ledgers.",
+      "work_product": "decision-record.md, handoff.md, report.md, validation/.",
+      "evidence_refs": [
+        "decision-record.md",
+        "handoff.md",
+        "phase-evidence.md"
+      ],
+      "verification": "Citations, claims, registry and phase gate recorded in validation logs.",
+      "validation": "Silver Bullet validators invoked via LeanCTX shell route; see validation/ logs.",
+      "repair": "First report validation failure repaired with required headings, metadata, numbered citations, bibliography and claim/evidence tables.",
+      "status": "complete_with_scope_limitations"
+    }
+  ]
+}

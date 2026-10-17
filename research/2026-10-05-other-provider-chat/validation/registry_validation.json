@@ -1,0 +1,66 @@
+{
+  "status": "pass",
+  "records": {
+    "sources": 88,
+    "evidence": 49,
+    "claims": 30,
+    "unique_urls": 81
+  },
+  "uniqueness": {
+    "source_ids": true,
+    "evidence_ids": true,
+    "claim_ids": true
+  },
+  "references": {
+    "missing_evidence_source_ids": [],
+    "missing_claim_evidence_ids": []
+  },
+  "report_citations": {
+    "numeric_citations": 33,
+    "bibliography_entries": 33,
+    "missing_or_uncited_numbers": []
+  },
+  "current_window_evidence_rows_detected": 20,
+  "current_window_evidence_missing_plan": [],
+  "supplemental_executed_query_rows_detected": 52,
+  "report_hash_matches_compatibility_copy": true,
+  "current_window_community_source_records": 18,
+  "community_evidence_rows_linked_to_current_sources": 18,
+  "current_window_community_evidence_missing_plan": [],
+  "community_source_ids": [
+    "O-S03",
+    "O-S04",
+    "O-S05",
+    "O-S07",
+    "O-S08",
+    "O-S09",
+    "O-S11",
+    "O-S14",
+    "O-S16",
+    "O-S17",
+    "O-S19",
+    "O-S29",
+    "O-S30",
+    "O-S31",
+    "O-S32",
+    "S51",
+    "S52",
+    "S53"
+  ],
+  "date_gate": {
+    "community_source_type_filter": [
+      "community_claim",
+      "community_report"
+    ],
+    "publication_date_window": "2026-09-05 through 2026-10-05 inclusive",
+    "eligible_source_records": 18,
+    "linked_evidence_rows": 18,
+    "linked_evidence_rows_missing_plan": [],
+    "note": "Date gating uses source publication_date, not compound evidence updated/access-date prose."
+  },
+  "executed_query_table_data_rows": [
+    29,
+    23
+  ],
+  "query_row_validation_note": "Counts query data rows under both executed Route/Exact query tables; excludes table headings, separators, and the initial unexecuted CUA query log."
+}

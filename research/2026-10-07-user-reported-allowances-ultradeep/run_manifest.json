@@ -1,0 +1,56 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "run_id": "2026-10-07-valuerank-user-reported-allowances-ultradeep",
+  "question": "For non-Anthropic ValueRank models (excluding Mistral), which current-month end-user-reported subscription allowance measurements can be priced at API rates and matched to a plan tier?",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "started_at": "2026-10-07T08:53:49Z",
+  "retrieval_as_of": "2026-10-07",
+  "status": "completed_with_disclosed_limitations",
+  "execution": {
+    "native_sb_skill_invocation": false,
+    "skill_read": true,
+    "workflow_execution": "Silver Bullet Ultradeep workflow executed through host built-in-browser fallback",
+    "reason": "The actual Silver Bullet skill was read and its workflow followed using the documented host fallback. Native slash-command invocation was not used; its absence is not an execution blocker.",
+    "validation_status": "Actual report-format, citation, strict claim-support and nine-phase artifact-existence validators passed with disclosed warnings and review labels; see validation/2026-10-07-final-checks.md and completion-audit.md."
+  },
+  "completion_note": "Nine phases and three critique cycles completed through the documented host fallback. Final table: ten rows, seven non-Anthropic and three carried Anthropic. No exhaustive Internet coverage or independent complete raw-token-ledger audit is claimed.",
+  "artifact_counts": {"source_records": 21, "evidence_records": 18, "claim_records": 14, "included_numeric_rows": 10, "new_qualifying_non_anthropic_rows": 7, "carried_forward_anthropic_rows": 3},
+  "validation": {"report_format": "PASS; two recommended headings warning", "citations": "PASS; 14 references, 10 accessible, 4 HTTP-unverified", "strict_claim_support": "PASS; 14 claims, 12 factual, 0 unsupported, 8 partial, 1 needs-review, 5 supported", "phase_gate": "PASS; all nine phase artifact-existence checks", "table_consistency": "PASS; ten rows, four columns, references and arithmetic valid", "evidence_refs": ["validation/2026-10-07-final-checks.md", "completion-audit.md", "tracker-apps.md"]},
+  "provider_config": {
+    "primary": "Codex built-in in-app browser via cua_repl",
+    "disallowed": ["Chrome", "Edge", "web.run", "curl", "wget", "raw HTTP/fetch", "external search APIs"]
+  },
+  "search_cli": {
+    "status": "not_used",
+    "providers_available": [],
+    "fallback_reason": "The user requires built-in-browser-only web research; retrieval is being performed in the Codex in-app browser."
+  },
+  "scope": {
+    "ranked_model_count": 13,
+    "target_provider_count": 6,
+    "user_report_publication_date_from": "2026-09-07",
+    "user_report_publication_date_to": "2026-10-07",
+    "inclusive": true,
+    "openai_user_report_rule": "TiboTattle homepage only; user expressly permits raw By-plan aggregates, which are installation/account tracks rather than individual datapoints",
+    "numerator_rule": "Actual end-user-reported API-priced usage, including labeled reported estimates when raw ledgers are unavailable; provider allowances, quotas, multipliers and marketing never supply a numerator."
+  },
+  "report_dir": "/Users/shafqat/valuerank/research/2026-10-07-user-reported-allowances-ultradeep",
+  "artifact_paths": {
+    "scope": "scope.md",
+    "plan": "research-plan.md",
+    "report": "research_report.md",
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "queries": "query_log.jsonl",
+    "triangulation": "triangulation.md",
+    "outline": "outline.md",
+    "critique": "critique.md",
+    "decision_record": "decision-record.md",
+    "handoff": "handoff.md",
+    "rollup": "vloop-rollup.json"
+  }
+}

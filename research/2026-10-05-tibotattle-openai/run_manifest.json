@@ -1,0 +1,63 @@
+{
+  "research_date": "2026-10-05",
+  "timezone": "Australia/Sydney",
+  "empirical_report_cutoff": "2026-09-05",
+  "scope": "OpenAI Codex allowance tracking; comparable crowdsourced subscription allowance trackers/apps",
+  "browser": "Codex built-in web__run was used for the 2026-10-05 audit and revalidation. The earlier package recorded an Edge/CUA route; its homepage state was rechecked through web__run before retaining the finding.",
+  "tool_policy_for_this_audit": "Only Codex built-in web__run was used for web retrieval. No Edge, Chrome, CUA, curl/wget, or direct HTTP requests were used in this audit pass.",
+  "workflow": {
+    "deep_research_ultradeep_requested": true,
+    "deep_research_skill_invoked": false,
+    "limitation": "The Silver Bullet skill is accessible through LeanCTX multi-repository routing when the `silver-bullet` root is registered in the current session and reads use its `repo` selector. Earlier worker sessions lacked that alias; their path-read failures were local routing/configuration issues, not general skill unavailability. This audit pass did not invoke the automated `/sb:deep-research` command or its validators, and the package does not yet meet the complete Ultradeep artifact contract or document three critique cycles. The package records a manual phase audit only; do not treat it as a completed Silver Bullet Ultradeep run.",
+    "silver_bullet_run_claimed": false,
+    "silver_bullet_note": "The workflow file and phase contracts were rechecked through the registered repo=silver-bullet alias. No automated command or Silver Bullet validator execution is claimed; three critique cycles and required phase artifacts remain to be completed."
+  },
+  "queries": [
+    {"query":"TiboTattle Codex usage allowance tracker","purpose":"Find the app homepage and eligible crowdsourced-data surface."},
+    {"query":"crowdsourced AI subscription usage allowance tracker apps Codex Claude usage","purpose":"Discover comparison candidates; search snippets and AI summaries were not accepted as evidence."},
+    {"query":"\"crowdsourced\" Claude usage limits tracker app community allowance","purpose":"Search for other public aggregate trackers; candidate discovery only."},
+    {"query":"AI subscription usage limit tracker Codex app usage tracker App Store CodexBar CUStats","purpose":"Independent app landscape discovery; search snippets and AI overview not used as evidence."},
+    {"query":"Apple App Store adjacent usage-monitor listings surfaced from CUStats Go and VibeCheck ‘You Might Also Like’ / ‘Customers also bought’ areas","purpose":"Follow attributable store-discovery links to product listings for adjacent monitors; product pages used only for capabilities/data-source descriptions, never numerical allowance evidence."}
+  ],
+  "audit_queries_2026_10_05": [
+    {"query":"site:tibotattle.com Codex allowance estimates","purpose":"Find the official homepage and confirm the allowance-panel state; homepage only for any numeric Codex community allowance value."},
+    {"query":"\"TiboTattle\" Codex Reddit OR Hacker News OR community post","purpose":"Find a direct developer-community discovery post; post values excluded from allowance evidence."},
+    {"query":"TiboTattle Codex tracker launch post","purpose":"Discover direct product-announcement/community leads only."},
+    {"query":"\"TiboTattle\" \"Codex\"","purpose":"Cross-check direct product and community discovery leads; snippets not treated as evidence."}
+  ],
+  "coverage": {
+    "distinct_source_artifacts_reviewed": 37,
+    "target": "30+ preferred",
+    "target_met": true,
+    "note": "Thirty-seven distinct URLs are inventoried: the original 36 source records plus direct r/codex product-discovery post S37. They include publisher homepages/docs/privacy/repos, App Store publisher listings, a direct community post, and three search-discovery artifacts. Several CUStats pages were loading/structurally incomplete and are marked coverage-only. Search and community posts were used for discovery, not allowance facts. The app landscape review is bounded, not exhaustive.",
+    "trackers_identified": ["TiboTattle", "OpenUsage", "CodexBar", "CUStats", "SessionWatcher", "AIUsage", "ccusage", "VibeCheck", "Model Usage", "TokenBar Mobile", "Codexex"],
+    "search_discovery_artifacts": ["S05", "S23", "S24"],
+    "publisher_discovery_pages": ["S25", "S26", "S27", "S28", "S29", "S30", "S31", "S32", "S33", "S34", "S35", "S36"],
+    "publication_date_handling": "All 37 source records include retrieval date 2026-10-05 and publication/update date status. For S01-S24, source records state not stated unless dated explicitly; S14 notes Dec 2024, S15-S16 note Jul 2026, S17 Sep 28 2026, S18 privacy rechecked Sep 30 2026, S09 current repository revision Oct 5 2026. Store version recency and month/year gaps are labeled as shown or inferred in S29-S30 and S33-S36. S37's relative-time label does not establish a calendar date and is discovery-only. Older or undated pages are discovery/capability-only, never current empirical allowance evidence.",
+    "source_role_groups": {"S01":"Only eligible source for Codex crowdsourced allowance values; current page shows checking/loading state and no numeric series.","S02-S03":"TiboTattle publisher methodology/privacy and provenance context; no numeric allowance extraction.","S04-S05":"TiboTattle repository/search discovery only.","S06-S21":"Publisher product, methods, privacy, or repository capability coverage; no crowdsourced Codex value evidence.","S22":"OpenAI policy/navigation context, separate from community observation.","S23-S24":"Independent search discovery only; snippets excluded.","S25-S36":"Publisher discovery/capability sources for coverage expansion; empirical values and synthetic examples excluded.","S37":"Direct developer-authored community product discovery only; all allowance and usage/value quantities excluded."},
+    "homepage_allowance_source": "S01 only",
+    "homepage_observation": "Codex built-in web__run capture opened 2026-10-05: the community allowance panel said 'Checking allowance estimates' and 'Checking for published allowance estimates…'; the separate daily activity panel also displayed checking/loading text. No numerical community allowance series or sample count was visible. The separate interactive demo is explicitly labeled illustrative, not live account data, and was excluded.",
+    "allowance_panel_state": "Checking allowance estimates; Checking for published allowance estimates…",
+    "daily_activity_panel_state": "Checking daily series; Checking for published daily activity…",
+    "numeric_community_allowance_values_visible": 0,
+    "sample_count_visible": false,
+    "synthetic_demo_handling": "The homepage's separate interactive allowance demo is excluded as illustrative, not live account data.",
+    "community_discovery_post": "S37; discovery-only and excluded from all allowance-value claims."
+  },
+  "source_policy": {
+    "codex_crowdsourced_allowance_values": "Only data published on https://tibotattle.com/ homepage is eligible; the 2026-10-05 capture showed no numeric value.",
+    "recency": "Any empirical allowance reports/data must be published on or after 2026-09-05.",
+    "official_policy": "Can be discussed separately as policy navigation/context, not empirical report data.",
+    "discovery_sources": "Older announcements/search listings may identify apps only and cannot support allowance values.",
+    "synthetic_demo_values": "Excluded."
+  },
+  "artifacts": {
+    "report": "report.md",
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "query_log": "query_log.md",
+    "citations": "citations.md",
+    "critique_validation": "critique_validation.md"
+  }
+}

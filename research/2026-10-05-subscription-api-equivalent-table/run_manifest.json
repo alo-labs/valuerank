@@ -1,0 +1,43 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "question": "For each exact model in ValueRank's current 25-model roster, what lowest effective-cost paid subscription route can be evidenced using an exact model variant and an API-pricing-comparable allowance; what are every relevant tier and remaining denominator gaps?",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "started_at": "2026-10-05",
+  "as_of_date": "2026-10-05",
+  "research_directory": "research/2026-10-05-subscription-api-equivalent-table",
+  "search_cli": {
+    "status": "not_used",
+    "providers_available": [
+      "Codex built-in web__run"
+    ],
+    "fallback_reason": "User explicitly restricted web research to Codex built-in web__run; official pages and cited current-window repository packages were used."
+  },
+  "user_evidence_window": "2026-09-05 through 2026-10-05 inclusive",
+  "openai_crowd_source_policy": "TiboTattle homepage only; no numerical allowance series was visible, so no OpenAI/Codex user-reported denominator was used.",
+  "artifact_style": "Markdown plus CSV/JSON/JSONL evidence package; no HTML or PDF.",
+  "current_tool_notes": [
+    "ctx_read via repo alias silver-bullet was configured in this session after list_roots returned no roots.",
+    "ctx_execute language=javascript returned Unsupported language; the saved local Python validator ran through ctx_execute language=shell.",
+    "Local package checks passed; Silver Bullet-specific automated phase gates and parent review remain pending."
+  ],
+  "citation_display_numbers": {
+    "S01": 1,
+    "S02": 2,
+    "S03": 3,
+    "S04": 4,
+    "S05": 5,
+    "S06": 6,
+    "S07": 7,
+    "S08": 8,
+    "S09": 9,
+    "S10": 10,
+    "S11": 11,
+    "S12": 12,
+    "S13": 13,
+    "S14": 14,
+    "S15": 15
+  }
+}

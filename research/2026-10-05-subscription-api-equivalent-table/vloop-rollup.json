@@ -1,0 +1,197 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "as_of": "2026-10-05",
+  "cycles": 3,
+  "phase_status": {
+    "scope": {
+      "id": "DR-SCOPE",
+      "name": "Scope",
+      "order": 1,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "scope.md",
+      "evidence_refs": [
+        "E01"
+      ],
+      "verification": "Question bounded to 25 exact roster IDs, three profiles, route tiers, and denominator limits; assumptions and exclusions are listed.",
+      "validation": "Manual scope checklist recorded in scope.md.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete"
+    },
+    "plan": {
+      "id": "DR-PLAN",
+      "name": "Plan",
+      "order": 2,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "research-plan.md",
+      "evidence_refs": [
+        "E01",
+        "E02"
+      ],
+      "verification": "First-party plan/API sources, exact identity checks, current-window reports, and search angles documented.",
+      "validation": "Ultradeep mode rationale recorded; `web__run` only per request.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete"
+    },
+    "retrieve": {
+      "id": "DR-RETRIEVE",
+      "name": "Retrieve",
+      "order": 3,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "sources.jsonl; evidence.jsonl",
+      "evidence_refs": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "verification": "Fifteen source records and evidence spans persisted before synthesis.",
+      "validation": "Direct source links and repository package links recorded; automated source script not run.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete_with_tool_limit"
+    },
+    "triangulate": {
+      "id": "DR-TRIANGULATE",
+      "name": "Score / Triangulate",
+      "order": 4,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "triangulation.md",
+      "evidence_refs": [
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E10",
+        "E11",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "verification": "Primary plan/price/math inputs cross-checked; alias, redirect, price gap, and time policy contradictions surfaced.",
+      "validation": "No source-independent route database exists; first-party contractual pages are the relevant source.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete"
+    },
+    "outline": {
+      "id": "DR-OUTLINE",
+      "name": "Outline / Refine",
+      "order": 5,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "outline.md",
+      "evidence_refs": [
+        "E01",
+        "E02",
+        "E06",
+        "E10",
+        "E11",
+        "E12"
+      ],
+      "verification": "Findings map tied to claim/evidence IDs and table outputs.",
+      "validation": "All major report sections reference evidence package.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete"
+    },
+    "synthesize": {
+      "id": "DR-SYNTHESIZE",
+      "name": "Synthesize",
+      "order": 6,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "research_report.md; claims.jsonl",
+      "evidence_refs": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C08",
+        "C09",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "verification": "Report and claim ledger capture route math, 25-row coverage, and unknown denominators.",
+      "validation": "Claims point to evidence IDs; parent review remains pending.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete"
+    },
+    "critique": {
+      "id": "DR-CRITIQUE",
+      "name": "Adversarial Review",
+      "order": 7,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "critique.md",
+      "evidence_refs": [
+        "E07",
+        "E09",
+        "E10",
+        "E11",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "verification": "Three cycles address variant transfer, denominator quality, and temporary schedule/promotion effects.",
+      "validation": "Repairs are logged with residual medium/low deltas; not independent review.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete"
+    },
+    "refine": {
+      "id": "DR-REFINE",
+      "name": "Verify / Refresh",
+      "order": 8,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "research_report.md; methodology.md",
+      "evidence_refs": [
+        "E07",
+        "E09",
+        "E10",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "verification": "Local read-back validation checked exact roster joins, all 60 route-tier rows, 180 profile arithmetic rows, dates, evidence references, source URI completeness, and explicit quarterly unknown statuses; live-link re-resolution and parent review remain pending.",
+      "validation": "validation/validation.json records 13/13 passing local checks; no unsupported value promoted.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "complete_with_tool_limit"
+    },
+    "package": {
+      "id": "DR-PACKAGE",
+      "name": "Package",
+      "order": 9,
+      "input_contract": "Use exact roster identities and current source/evidence from prior phases; preserve user and source constraints.",
+      "work_product": "decision-record.md; handoff.md; vloop-rollup.json",
+      "evidence_refs": [
+        "C01",
+        "C07",
+        "C08",
+        "C11",
+        "C12"
+      ],
+      "verification": "Decision record, handoff and validation logs present.",
+      "validation": "Local validator passed; Silver Bullet-specific automated validators and parent review remain pending.",
+      "repair": "Corrections described in critique.md; remaining automated validation and parent review are surfaced in handoff.md.",
+      "status": "pending_automated_validation_and_parent_review"
+    }
+  },
+  "status": "pending_automated_validation_and_parent_review",
+  "limitation": "LeanCTX ctx_execute language=javascript returned Unsupported language. The package's saved Python validator ran via ctx_execute language=shell and passed local checks. Silver Bullet-specific automated phase gates and parent review remain pending; functions.exec JavaScript was used for some artifact generation."
+}

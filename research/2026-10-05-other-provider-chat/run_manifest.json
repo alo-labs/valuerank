@@ -1,0 +1,192 @@
+{
+  "run_id": "2026-10-05-other-provider-chat",
+  "run_date": "2026-10-05",
+  "timezone": "UTC",
+  "research_mode": "ultradeep_manual_contract_web_research",
+  "status": "complete_with_scope_limitations",
+  "scope": {
+    "providers": [
+      "Perplexity",
+      "xAI/Grok",
+      "Mistral Le Chat",
+      "DeepSeek consumer chat",
+      "Poe/Quora",
+      "Meta AI",
+      "Google Gemini app",
+      "OpenAI ChatGPT standard chat"
+    ],
+    "topic": "consumer chat subscription allowance policies and public/live/crowdsourced tracking",
+    "excluded_surfaces": [
+      "Claude workstream",
+      "ChatGPT Work/Codex quota values",
+      "Gemini CLI and Antigravity",
+      "coding-only Vibe/Grok Build use as chat evidence",
+      "enterprise/workspace allowances",
+      "API billing as consumer-chat evidence"
+    ],
+    "community_publication_cutoff_inclusive": "2026-09-05 through 2026-10-05",
+    "research_date_inclusive": "2026-10-05",
+    "codex_quota_source_rule": "Any OpenAI Codex quota value may use only the TiboTattle homepage; this package reports no Codex allowance number.",
+    "user_report_tier_rule": "Record the exact tier stated by each report author; otherwise use not stated; never infer from price, thread title, another commenter, or image alt text."
+  },
+  "browser": "Codex built-in web__run search/open/find only; no Edge/Chrome/CUA used for this extension.",
+  "followup_search_attempt": {
+    "date": "2026-10-05",
+    "initial_cua_status": "built-in iab unavailable; proposed queries in query_log.md were not executed during that attempt",
+    "subsequent_search_route": "Codex built-in web research; no external browser used",
+    "supplemental_queries_logged": "community-query-log-addendum.md",
+    "supplemental_queries_executed": true,
+    "result_summary": "Added 11 current-window Reddit/Hacker News allowance discussions; no reproducible normalized cross-account allowance estimate was supported.",
+    "note": "The initial CUA limitation is retained for audit. The primary agent later executed a separate expanded query set through the built-in web research route."
+  },
+  "silver_bullet": {
+    "status": "workflow_contract_accessible_runtime_not_invoked",
+    "invoked": false,
+    "runtime_invocation_attempted": false,
+    "workflow_references_read": [
+      "skills/silver-deep-research/SKILL.md",
+      "reference/methodology.md",
+      "reference/quality-gates.md",
+      "reference/adversarial-review.md",
+      "phases.yaml",
+      "reference/report-assembly.md",
+      "reference/source-grading.md"
+    ],
+    "workflow_contract_applied_manually": true,
+    "note": "Session-local repository alias was registered after the agent session began without it; references then read successfully. Do not describe general workflow unavailability."
+  },
+  "deep_research_skill": {
+    "skill_file_read": true,
+    "methodology_reference_read": true,
+    "quality_gates_reference_read": true,
+    "adversarial_review_reference_read": true,
+    "phase_map_read": true,
+    "limitation": "Silver Bullet runtime command was not invoked; phase contract applied manually and artifacts recorded."
+  },
+  "cutoff_rules": {
+    "community_reports_before_cutoff": "discovery_only; cannot support current allowance estimates",
+    "publication_date_and_measurement_interval": "recorded separately",
+    "mixed_windows": "excluded unless a post-cutoff segment is separately identified",
+    "official_policy": "reported separately as provider policy context, not measurement"
+  },
+  "coverage": {
+    "distinct_source_urls_registered": 81,
+    "source_url_breakdown": {
+      "core_registry_records": 54,
+      "supplemental_registry_records": 34,
+      "overlap_records": 7,
+      "unique_urls": 81
+    },
+    "record_counts": {
+      "core_sources": 54,
+      "core_evidence": 16,
+      "core_claims": 18,
+      "supplemental_sources": 34,
+      "supplemental_evidence": 33,
+      "supplemental_claims": 12,
+      "total_source_records": 88,
+      "total_evidence_records": 49,
+      "total_claims": 30
+    },
+    "initial_pass_in_window_community_items_inspected": 3,
+    "supplemental_in_window_reddit_hn_records": 15,
+    "total_in_window_community_source_records": 18,
+    "new_chatgpt_gemini_user_report_records": 4,
+    "out_of_scope_whole_record_examples": [
+      "Mistral Vibe coding thread",
+      "DeepSeek API spend discussion"
+    ],
+    "reproducible_normalized_community_measurements": 0,
+    "executed_query_rows_in_supplemental_log": 52,
+    "numeric_account_claims": "Several unverified user claims are retained as qualitative account reports; they are not transferable plan allowances.",
+    "query_logs": [
+      "query_log.md",
+      "community-query-log-addendum.md"
+    ],
+    "source_status_values": [
+      "opened",
+      "opened_redirect",
+      "opened_signed_out",
+      "indexed_link",
+      "search_result_only"
+    ],
+    "coverage_boundary": "Bounded public web search; not exhaustive of private, deleted, login-gated, unindexed, or regional sources."
+  },
+  "deliverables": [
+    "report.md",
+    "research_report.md",
+    "sources.jsonl",
+    "evidence.jsonl",
+    "claims.jsonl",
+    "community-research-addendum.md",
+    "community-sources-addendum.jsonl",
+    "community-evidence-addendum.jsonl",
+    "community-claims-addendum.jsonl",
+    "community-query-log-addendum.md",
+    "query_log.md",
+    "run_manifest.json",
+    "scope.md",
+    "research-plan.md",
+    "triangulation.md",
+    "outline.md",
+    "critique.md",
+    "phase-evidence.md",
+    "decision-record.md",
+    "handoff.md",
+    "vloop-rollup.json",
+    "validation/validate_report.log",
+    "validation/verify_citations.log",
+    "validation/verify_claim_support.log",
+    "validation/phase_gate.log",
+    "validation/registry_validation.json"
+  ],
+  "schemas": {
+    "sources.jsonl": "One source per line; source_id, title, url, publisher, source_type, access_status, dates, eligibility, notes.",
+    "evidence.jsonl": "One evidence item per line; evidence_id, source_id, evidence_type, dates/interval, plan/model/action, method, locator, paraphrase, use, confidence.",
+    "claims.jsonl": "One atomic claim per line; claim_id, claim, type, status, evidence_ids, scope, qualifier."
+  },
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "question": "Identify consumer AI chat allowance meters and apps; distinguish provider meters, local estimates, API spend, and crowd reports.",
+  "search_cli": {
+    "status": "not_used_user_constraint",
+    "providers_available": "not probed",
+    "fallback_reason": "User required Codex built-in web__run only for search/open/find."
+  },
+  "tool_routing_notes": [
+    "An initial ctx_execute JavaScript attempt returned unsupported language; data validation then used the supported Python route.",
+    "No result from the failed JavaScript tool call was used as evidence.",
+    "The initial CUA browser attempt remains separately marked unexecuted in query_log.md."
+  ],
+  "validation": {
+    "report_validator": "pass",
+    "citation_validator": "pass_with_8_http_probe_exceptions (25/33 URL probes accessible; 0 suspicious; source pages separately opened or indexed during research)",
+    "claim_support_validator": "pass_with_review_flags (15 supported, 13 partial, 2 needs_review; 0 claim rows typed factual by package taxonomy)",
+    "phase_gate": "pass",
+    "registry_validation": "pass"
+  },
+  "validation_details": {
+    "claim_support": "The SB validator expects text/quote fields. A disposable copy was adapted from claim/excerpt_or_paraphrase; original source, evidence, and claim ledgers were not mutated. The two needs_review rows are pre-cutoff/out-of-scope examples, not current consumer-chat allowance conclusions.",
+    "registry_validation": {
+      "current_window_community_source_records": 18,
+      "linked_community_evidence_rows": 18,
+      "community_rows_missing_stated_plan": 0,
+      "unique_source_urls": 81,
+      "missing_references": 0,
+      "date_gate_note": "Eligibility counts use source publication dates; provider-policy pages and update/check timestamps remain separate."
+    },
+    "citation_probe_exceptions": [
+      1,
+      2,
+      5,
+      10,
+      11,
+      12,
+      18,
+      19
+    ]
+  }
+}

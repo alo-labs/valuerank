@@ -1,0 +1,16 @@
+{
+  "version": "3.0.0",
+  "query": "What Codex allowance observations did TiboTattle publish on its homepage during the last month, and what comparable allowance-tracking apps exist?",
+  "mode": "ultradeep",
+  "started_at": "2026-10-05T09:24:12Z",
+  "finished_at": "2026-10-05T09:56:02Z",
+  "assumptions": [
+    {"assumption_id": "asm_61321a0b", "text": "Only the TiboTattle homepage is eligible as a source for numerical Codex crowdsourced allowance values.", "materiality": "high", "status": "user_confirmed"},
+    {"assumption_id": "asm_095b7e12", "text": "Empirical allowance observations must fall between 2026-09-05 and 2026-10-05 inclusive.", "materiality": "high", "status": "user_confirmed"},
+    {"assumption_id": "asm_c910db52", "text": "A user-reported allowance datapoint must identify its exact plan tier or be labeled not stated.", "materiality": "high", "status": "user_confirmed"}
+  ],
+  "provider_config": {"primary": "Codex built-in web__run", "scholarly": null},
+  "report_dir": "/Users/shafqat/valuerank/research/2026-10-05-tibotattle-openai/ultradeep",
+  "artifact_paths": {"sources": "sources.jsonl", "evidence": "evidence.jsonl", "claims": "claims.jsonl", "report": "research_report.md"},
+  "continuation": null
+}

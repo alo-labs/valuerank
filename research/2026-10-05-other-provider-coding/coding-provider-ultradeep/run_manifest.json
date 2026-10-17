@@ -1,0 +1,27 @@
+{
+  "version": "3.0.0",
+  "query": "Audit subscription plan allowance apps and user-reported usage for coding-oriented AI plans/providers, limited to material dated 2026-09-05 through 2026-10-05.",
+  "mode": "ultradeep",
+  "started_at": "2026-10-05T00:00:00Z",
+  "finished_at": "2026-10-05T10:21:24.428Z",
+  "assumptions": [
+    {
+      "assumption_id": "asm_8c68fa11",
+      "text": "Exact task kickoff time was not retained; started_at is a UTC date anchor, not an observed invocation timestamp.",
+      "materiality": "low",
+      "status": "implicit"
+    }
+  ],
+  "provider_config": {
+    "primary": "Codex built-in web__run",
+    "scholarly": null
+  },
+  "report_dir": "/Users/shafqat/valuerank/research/2026-10-05-other-provider-coding/coding-provider-ultradeep",
+  "artifact_paths": {
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "report": "research_report.md"
+  },
+  "continuation": null
+}

@@ -1,0 +1,157 @@
+{
+  "run_id": "2026-10-05-other-provider-coding",
+  "generated_at_utc": "2026-10-05T05:32:40Z",
+  "as_of_date": "2026-10-05",
+  "community_cutoff": "2026-09-05 through 2026-10-05 inclusive",
+  "scope": [
+    "Google Gemini / AI Pro / Ultra; Gemini CLI / Antigravity",
+    "GitHub Copilot",
+    "Cursor",
+    "Windsurf / Codeium"
+  ],
+  "excluded": [
+    "OpenAI Codex allowance research",
+    "Claude allowance research"
+  ],
+  "browser": "Built-in browser only: Google search pages and direct official, community, and repository pages.",
+  "method": "Manual Deep Research Ultradeep-style search: Reddit-first, then Hacker News, official provider policy, GitHub discussions/issues, and tracker projects; direct inspection of selected pages; separate current policy from eligible community measurement and older discovery-only sources.",
+  "silver_bullet_degradation": "Silver Bullet root alias and Ultradeep skill were registered/read; nine phase artifacts were applied manually and no /sb orchestration command was invoked. The earlier root-registration issue was corrected. Shared ctx_execute capacity saturation (15/15) is a separate sandbox execution limit; local lean-ctx command route is used for validators.",
+  "search_log": [
+    {
+      "surface": "Reddit/Google",
+      "query": "Gemini CLI usage limits AI Pro Ultra Reddit GitHub tracker quota",
+      "purpose": "Gemini allowance and tracker discovery"
+    },
+    {
+      "surface": "Reddit/Google",
+      "query": "site:reddit.com/r/GeminiCLI quota tracker usage limit AI Pro Ultra",
+      "purpose": "Gemini CLI usage report discovery"
+    },
+    {
+      "surface": "Reddit/Google",
+      "query": "Gemini AI Pro Ultra quota usage September 2026 Reddit GeminiCLI",
+      "purpose": "Recent Gemini reports"
+    },
+    {
+      "surface": "Reddit/Google",
+      "query": "site:reddit.com/r/cursor after:2026-09-05 usage limits Pro Ultra credits",
+      "purpose": "Recent Cursor reports"
+    },
+    {
+      "surface": "Reddit/Google",
+      "query": "site:reddit.com/r/windsurf after:2026-09-05 quota allowance usage",
+      "purpose": "Recent Windsurf reports; no documents returned"
+    },
+    {
+      "surface": "Reddit/Google",
+      "query": "site:reddit.com/r/GithubCopilot after:2026-09-05 credits quota usage limits",
+      "purpose": "Recent Copilot reports"
+    },
+    {
+      "surface": "HN/Google",
+      "query": "site:news.ycombinator.com Gemini CLI AI Pro quota limits 2026",
+      "purpose": "Gemini developer discussion"
+    },
+    {
+      "surface": "HN/Google",
+      "query": "site:news.ycombinator.com GitHub Copilot credits quota limits usage 2026",
+      "purpose": "Copilot developer discussion"
+    },
+    {
+      "surface": "GitHub/Google",
+      "query": "site:github.com/google-gemini/gemini-cli Gemini CLI personal accounts June 18 2026 announcement",
+      "purpose": "Official Gemini CLI transition"
+    },
+    {
+      "surface": "Google official docs",
+      "query": "official Gemini CLI quotas Google AI Pro Ultra request limit 2026 site:support.google.com OR site:gemini.google",
+      "purpose": "Official Gemini policy"
+    },
+    {
+      "surface": "Windsurf/Google",
+      "query": "site:windsurf.com plans usage quotas Windsurf 2026 official",
+      "purpose": "Official Windsurf policy"
+    },
+    {
+      "surface": "GitHub/Google",
+      "query": "usage tracker quota monitor site:github.com Cursor Copilot Gemini CLI Windsurf 2026",
+      "purpose": "Tracker discovery"
+    },
+    {
+      "surface": "Google",
+      "query": "quota tracker TiboTattle Cursor Gemini Copilot Windsurf tracker apps",
+      "purpose": "Cross-provider tracker discovery"
+    }
+  ],
+  "source_count": 39,
+  "evidence_count": 20,
+  "claim_count": 14,
+  "supplemental_community_search": {
+    "status": "completed_by_primary_agent_2026-10-05",
+    "source_records": 21,
+    "evidence_records": 13,
+    "claim_records": 9,
+    "unique_urls_across_core_and_supplement": 58,
+    "overlapping_urls": 2,
+    "query_log": "community-query-log-addendum.md",
+    "report": "community-research-addendum.md",
+    "claims": "community-claims-addendum.jsonl",
+    "interval_rule": "A mixed or potentially mixed pre-cutoff measurement is excluded unless the post-2026-09-05 segment is separately isolated.",
+    "cutoff_exclusions": [
+      "E02 mixed Sep 2-30 Cursor period",
+      "E10 pre-cutoff quantified Copilot observations; Oct 1 follow-up retained as qualitative only",
+      "E11 interval may include Sep 1-4",
+      "E12 Devin paid-plan experience is not Windsurf evidence",
+      "E13 discovery-only consumer chat report"
+    ]
+  },
+  "older_community_sources_discovery_only": [
+    "S19",
+    "S26",
+    "S31",
+    "S38"
+  ],
+  "mixed_window_community_sources_excluded_from_current_measurements": [
+    "S22"
+  ],
+  "community_report_date_and_measurement_interval_are_separate_fields": true,
+  "limits": [
+    "Public Google-indexed content only; private, unindexed, deleted, regional or login-only content may be absent.",
+    "No claim of literal exhaustiveness.",
+    "Community reports frequently omit comparable model, plan, task and reset-window detail.",
+    "Repository README support does not prove every live adapter works."
+  ],
+  "validation": {
+    "source_ids_unique": true,
+    "evidence_ids_unique": true,
+    "claim_ids_unique": true,
+    "crosswalks_manually_checked": true
+  },
+  "coding_provider_ultradeep": {
+    "package_dir": "coding-provider-ultradeep/",
+    "source_records": 22,
+    "direct_post_doc_repo_pages": 19,
+    "bounded_search_outcome_records": 3,
+    "eligible_user_observations": 13,
+    "excluded_user_context_observations": 1,
+    "provider_policy_observations": 6,
+    "total_evidence_rows": 20,
+    "claims": 8,
+    "exact_query_strings_logged": 47,
+    "exact_query_log_gap": "Earlier official-document searches were referenced in retained handoff history without their exact literals; count is exact preserved strings, not all web tool invocations.",
+    "user_measurement_class_counts": {
+      "provider_account_meter": 9,
+      "api_cost_equivalent": 2,
+      "user_extrapolation": 1,
+      "local_usage_log_estimate": 1
+    }
+  },
+  "coding_provider_validation": {
+    "custom_validator": "pass; source/evidence/claim/query counts, exact plan fields, measurement classes, hashes, and crosswalks validated",
+    "sb_phase_gate": "pass; mode ultradeep",
+    "sb_validate_report": "pass; all checks passed",
+    "sb_verify_citations": "pass; 19/19 URLs verified, 0 suspicious, 0 unverified",
+    "sb_verify_claim_support": "pass; 8 claims verified, 0 unsupported factual claims",
+    "execution_route": "local lean-ctx CLI; shared MCP ctx_execute probe returned agent capacity reached 15/15; this is a separate sandbox limit"
+  }
+}

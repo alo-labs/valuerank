@@ -1,0 +1,50 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "run_id": "2026-10-06-valuerank-first-party-allowances-ultradeep",
+  "question": "For the 13 ValueRank ranked model IDs, what first-party subscription tiers, prices, allowance/reset rules, API rates, and computable API-price-equivalent plan allowances are published?",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "started_at": "2026-10-05T16:38:50.559207Z",
+  "retrieval_as_of": "2026-10-06",
+  "status": "in_progress",
+  "provider_config": {
+    "primary": "Codex built-in in-app browser via cua_repl",
+    "disallowed": ["Chrome", "Edge", "web.run", "curl", "wget", "raw HTTP/fetch", "external search APIs"]
+  },
+  "search_cli": {
+    "status": "unavailable",
+    "providers_available": [],
+    "fallback_reason": "The optional search CLI probe returned unavailable; the user's built-in-browser-only constraint was honored, so provider discovery and page inspection used the Codex in-app browser."
+  },
+  "scope": {
+    "ranked_model_count": 13,
+    "first_party_provider_count": 7,
+    "user_report_publication_date_from": "2026-09-06",
+    "user_report_publication_date_to": "2026-10-06",
+    "inclusive": true,
+    "openai_user_report_rule": "TiboTattle homepage only; homepage aggregates are not individual datapoints"
+  },
+  "report_dir": "/Users/shafqat/valuerank/research/2026-10-06-value-multiples/provider-plan-allowances-ultradeep",
+  "artifact_paths": {
+    "scope": "scope.md",
+    "plan": "research-plan.md",
+    "report": "research_report.md",
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "queries": "query_log.jsonl",
+    "model_coverage": "model_coverage.csv",
+    "plan_allowances": "plan_allowances.csv",
+    "calculations": "calculations.csv",
+    "exclusions": "exclusions.jsonl",
+    "triangulation": "triangulation.md",
+    "outline": "outline.md",
+    "critique": "critique.md",
+    "decision_record": "decision-record.md",
+    "handoff": "handoff.md",
+    "rollup": "vloop-rollup.json"
+  },
+  "automated_sb_command_invoked": false
+}

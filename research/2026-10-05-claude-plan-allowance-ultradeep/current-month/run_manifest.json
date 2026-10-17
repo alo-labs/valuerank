@@ -1,0 +1,103 @@
+{
+  "run_id": "2026-10-05-claude-plan-allowance-current-month",
+  "as_of_date": "2026-10-06",
+  "measurement_cutoff_applied": true,
+  "reddit_first": true,
+  "scope": [
+    "Claude consumer allowance reports, anomalies, current policy context, and selected tracker projects",
+    "Measurement window 2026-09-06 through 2026-10-06 inclusive; measurement-start date controls eligibility",
+    "Exact plan wording is preserved; missing tiers are recorded as not stated",
+    "Only actual end-user API-priced log usage or clearly labeled user estimates from actual logs can support a numerator; provider quota claims are context only",
+    "Current-window observations are separated from historical comparators and incident reports",
+    "ValueRank provisional shared Claude Opus 5.5 40x route is not validated for exact-model current use",
+    "Anthropic Artifacts promotion dated 2026-10-01 to 2026-10-15 is irrelevant to Claude Code allowance and excluded"
+  ],
+  "status": "complete_with_scope_and_tooling_limitations",
+  "workflow": {
+    "requested": "Silver Bullet Deep Research Ultradeep",
+    "workflow_contract_reviewed": true,
+    "contract_access": "LeanCTX multi-repo alias silver-bullet, skills/silver-deep-research/SKILL.md and phases.yaml",
+    "silver_bullet_ultradeep_invoked": false,
+    "reason": "The workflow contract was reviewed and all nine manual research phases were completed. The slash-command interface itself was not invoked, so no slash-command execution is claimed.",
+    "manual_ultradeep_style_artifacts_created": true,
+    "formal_validators_run": true,
+    "validator_status": "Final run: validate_report passed 14/14 checks; verify_citations passed with 21/21 URLs accessible (0 suspicious/unverified); verify_claim_support passed for 11 claims (8 supported, 3 partial, 0 needs_review; 9 factual, 0 factual unsupported); phase_gate passed all 9 ultradeep phases. See validation/*.log."
+  },
+  "browser_route": "Codex built-in web research only",
+  "subagent_runs": [
+    {
+      "task": "Reddit recent-report candidate search",
+      "model_slug": "gpt-6-luna",
+      "reasoning_effort": "xhigh",
+      "edited_files": false,
+      "independent_review": "Candidate post bodies/metadata were directly reopened or checked by the primary researcher; see source/evidence ledger."
+    }
+  ],
+  "record_counts": {
+    "sources": 21,
+    "evidence": 25,
+    "claims": 11,
+    "current_window_incident_sources": 3,
+    "official_policy_sources": 2,
+    "tracker_discovery_sources": 4,
+    "historical_exclusion_records": 2,
+    "report_citations": 21,
+    "current_window_api_priced_user_estimates": 3,
+    "reddit_user_reports_reviewed": 11
+  },
+  "artifacts": {
+    "report": "research_report.md",
+    "compatibility_report": "report.md",
+    "scope": "scope.md",
+    "research_plan": "research-plan.md",
+    "query_log": "query_log.md",
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "outline": "outline.md",
+    "triangulation": "triangulation.md",
+    "critique": "critique.md",
+    "decision_record": "decision-record.md",
+    "handoff": "handoff.md",
+    "rollup": "vloop-rollup.json",
+    "validation_directory": "validation/"
+  },
+  "historical_root_artifacts": "Root-level records retained for audit/history; any measurement starting before 2026-09-06 is excluded from current synthesis.",
+  "limits": [
+    "Search is bounded to indexed public English-language material; private, deleted, login-only, unindexed, or differently worded reports may be missing.",
+    "Community samples are self-reported, heterogeneous, and non-representative.",
+    "No universal token/API-dollar allowance or average is inferred.",
+    "Provider quota and allowance claims never enter the numerator; the three eligible user estimates are partial-period author extrapolations with no public raw logs for independent reproduction.",
+    "The S-C05 $12,751 two-account/top-up aggregate cannot isolate one included plan allowance.",
+    "Tracker product/privacy statements and repositories were not fully audited.",
+    "ValueRank shared Opus 5.5 40x route remains unvalidated for exact-model current use.",
+    "The Silver Bullet slash-command interface itself was not invoked; the contract was reviewed and all phases were applied manually.",
+    "Validator status must match execution logs; claim-support lexical checks do not establish the truth of community reports."
+  ],
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "question": "What end-user-reported Claude allowance measurements start within 2026-09-06 through 2026-10-06, and do API-priced actual log reports support exploratory value estimates or validate ValueRank's provisional shared Claude Opus 5.5 40x route?",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "started_at": "2026-10-05",
+  "started_at_precision": "date-only; exact start time was not captured",
+  "fallback_reason": "The optional search executable was not found (command -v search probe exited 1); Codex built-in web research was used as the documented fallback.",
+  "search_cli": {
+    "status": "unavailable",
+    "providers_available": [],
+    "probe": "command -v search >/dev/null && search --version",
+    "probe_exit_code": 1
+  },
+  "audited_measurement_window": {
+    "start_inclusive": "2026-09-06",
+    "end_inclusive": "2026-10-06",
+    "eligibility_rule": "Use measurement interval start date; post date is provenance only; retain a later segment only when separable and its start is within window."
+  },
+  "validation_evidence": {
+    "validate_report": "validation/validate_report.log",
+    "verify_citations": "validation/verify_citations.log",
+    "verify_claim_support": "validation/verify_claim_support.log",
+    "phase_gate": "validation/phase_gate.log"
+  }
+}

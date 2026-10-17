@@ -1,0 +1,31 @@
+{
+  "workflow_id": "20261005-codex-tibotattle-ultradeep",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "question": "What Codex allowance observations did TiboTattle publish on its homepage during the last month, and what comparable allowance-tracking apps exist?",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "started_at": "2026-10-05T09:24:12Z",
+  "finished_at": "2026-10-05T09:56:02Z",
+  "search_cli": {
+    "status": "not_available_in_session",
+    "providers": ["Codex built-in web__run", "LeanCTX ctx_read(repo=silver-bullet)", "LeanCTX ctx_execute"]
+  },
+  "fallback_reason": "The search executable was not installed in the active session. Search and source access used the user's required built-in web__run route. SB skill and phase contracts were accessible after registering the silver-bullet LeanCTX root and using repo=silver-bullet. Artifacts were assembled manually to the Ultradeep contract; no automated /sb:deep-research invocation is claimed.",
+  "automated_sb_command_invoked": false,
+  "source_inventory_count": 37,
+  "source_budget": 30,
+  "preferred_budget_exceeded_by": 7,
+  "budget_exception": "Preserved the existing 37-record source inventory for traceability and bounded app coverage; 37 remains below the configured maximum of 40.",
+  "configured_max_sources": 40,
+  "critique_cycles_required": 3,
+  "critique_cycles_completed": 3,
+  "legacy_artifacts_preserved_at_parent": ["report.md", "sources.jsonl", "evidence.jsonl", "claims.jsonl", "citations.md", "query_log.md", "critique_validation.md"],
+  "schema_contract_note": "run_manifest.schema.json requires version/query/mode/started_at/report_dir/artifact_paths and forbids additional properties, while SKILL.md's HARD output-session contract separately requires workflow_id/atomic_flow/flow_step/question/research_type/search_cli/fallback_reason. The schema-conforming manifest and skill-specific workflow_record.json are split to preserve both contracts without asserting one file conforms to both incompatible shapes.",
+  "data_boundary": {
+    "codex_numeric_allowance_source": "https://tibotattle.com/ homepage only",
+    "empirical_date_window": "2026-09-05 through 2026-10-05 inclusive",
+    "numeric_user_datapoints_included": 0,
+    "plan_tier_requirement": "Any future user datapoint must state the exact plan tier or 'not stated'; this package contains no user-reported allowance datapoints."
+  }
+}

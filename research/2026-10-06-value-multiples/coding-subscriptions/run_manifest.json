@@ -1,0 +1,37 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "question": "Can end-user measured use of exact ValueRank models through paid coding subscriptions be converted to API-price-equivalent value multiples using only current-window user measurements?",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "started_at": "2026-10-05T14:36:16Z",
+  "status": "in_progress",
+  "search_cli": {
+    "status": "not_used_by_user_constraint",
+    "providers_available": []
+  },
+  "fallback_reason": "The user required all browser retrieval through Codex In-app Browser via cua_repl and prohibited other search/browser, HTTP, curl, and wget routes. The CUA inventory currently exposes Edge extension surfaces only; the required iab surface was unavailable at initial probe.",
+  "provider_config": {
+    "primary": "Codex In-app Browser via cua_repl only",
+    "disallowed": ["web.run", "Chrome", "Edge", "curl", "wget", "raw fetch"]
+  },
+  "report_dir": "/Users/shafqat/valuerank/research/2026-10-06-value-multiples/coding-subscriptions",
+  "window": {
+    "publication_date_from": "2026-09-06",
+    "publication_date_to": "2026-10-06",
+    "measurement_date_from": "2026-09-06",
+    "measurement_date_to": "2026-10-06",
+    "inclusive": true
+  },
+  "artifact_paths": {
+    "report": "research_report.md",
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "query_log": "query_log.jsonl",
+    "model_coverage": "model_coverage.csv",
+    "calculations": "calculations.csv",
+    "exclusions": "exclusions.jsonl"
+  }
+}

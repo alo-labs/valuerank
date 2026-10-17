@@ -1,0 +1,48 @@
+# AI subscription allowance research index
+
+**Snapshot:** 2026-10-06  
+**End-user report and measurement window:** 2026-09-06 through 2026-10-06, inclusive.
+
+## Current at-a-glance table
+
+The current four-column provider-wise table is [Provider-wise user-reported API-priced subscription value multiples](2026-10-06-provider-wise-user-reported-value-multiples.md). Its columns are exactly **Provider, Plan, Value Multiple, Reference**; provider groups are sorted by the highest included in-window multiple, and each numeric row links to its individual user source.
+
+The current table contains three Anthropic user-reported API-price estimates and one Kimi K3-256 estimate. It does not transfer that K3-256 result to ValueRank's standard `kimi-k3` variant. It does not publish an OpenAI multiple from TiboTattle: its charts normalize to a Pro 20x-equivalent week rather than each plan's actual allowance or amount paid, and no contributor-specific fee or measurement interval is exposed. Z.AI has a user-reported API-priced near-miss ($102.17 / 5.68×), but the Aug 29–Sep 29 measurement crosses the Sep 6 cutoff and mixes GLM 5.3 with GLM 5.3 Flash, so it is excluded. Recent Reddit reports name Grok 4.7 but provide meter comparisons rather than personal API-priced usage. Alibaba/Qwen searches found a current-window Individual Lite quota post with unreconciled token/dashboard figures but no exact model, fee, or API-priced use; an exact Qwen 3.8 Max limits discussion is from about two months earlier. These are ineligible. No current-window multiple is included for xAI, Google, or Alibaba from retained eligible cases reviewed so far.
+
+## Binding evidence policy
+
+- A numeric numerator must be actual end-user-reported measured usage priced at API rates. A user's estimate is allowed only when it is tied to measured use, and it must be labeled as an estimate if public evidence cannot reproduce the API-priced amount.
+- Provider-published allowances, quotas, limits, usage multipliers, and marketing statements never supply the numerator. First-party plan pages may support a matched subscription fee; first-party API rate cards may support pricing of user-measured usage.
+- The report date and measurement interval must fit the current month. Keep the user's plan tier, stated fee, model variant, product surface, and time interval attached to each case.
+- OpenAI/Codex crowd data may come only from the [TiboTattle homepage](https://tibotattle.com/). Its [documentation](https://tibotattle.com/docs) says charts normalize a full Pro 20x-equivalent week at API prices, not each plan's actual allowance or money paid. The homepage gives aggregate installation/account-track figures, not individual reports or a matched plan fee and interval; retain as context only and do not calculate a Value Multiple.
+- Do not transfer measurements across model variants. The K3-256 report is not a measured result for standard K3. Mixed-model Claude reports remain plan-level observations.
+- Exclude Mistral because Mistral is not featured in ValueRank. Keep the previously removed 120× item excluded.
+
+## Current qualification summary
+
+| Provider | Current-window evidence status |
+|---|---|
+| Anthropic | Three user-reported API-price estimates qualify at plan level: Max 20x partial interval from Sep 17, Max 20x separate interval from Sep 12, and Max 5x interval from Sep 15. Earlier Sep 5-starting periods are excluded. None is a standalone Opus 5/5.5 result. |
+| OpenAI | TiboTattle's Oct 6 30-day by-plan view shows API-equivalent aggregates through Oct 4, but its docs say the chart normalizes to a Pro 20x-equivalent week rather than each plan's actual allowance or money paid; no individual fee/interval mapping or ranked-model attribution, so context only and no numeric multiple. |
+| Moonshot AI / Kimi | One user reports K3-256 use on old Allegretto ($39/month): $7.20 API-priced usage in five hours at 20% of the weekly meter. The estimated ≈4.0× is restricted to K3-256; no qualifying measured result for standard `kimi-k3` is retained. |
+| xAI | Two current-window Reddit posts name Grok 4.7, but report meter depletion and cite task-average costs rather than personal usage priced at API rates; one mixes Grok 4.7/4.6/Composer, and neither links a supported fee to a measured API-cost amount. A separate Cursor-thread comment reports 1.3–1.5B tokens/month on an unnamed $200 plan but does not attribute the use to Grok or price it at API rates. Other retained cases are meter-only or qualitative. See the [xAI/Google audit](2026-10-06-value-multiples/roster-coverage/xai-google-ultradeep-followup.md). Search coverage remains bounded, not exhaustive. |
+| Google DeepMind | Retained cases describe app limits or mixed-model use without an exact ranked-variant API-priced measurement and matched plan fee. A current-window Gemini 3.8 Flash cost/use thread discusses an OpenRouter route, but has no measured user amount or Google subscription tier. This is a bounded gap, not an exhaustive no-hit. |
+| Z.AI | A Z.ai Coding Plan Lite user reports $102.17 / 5.68× API-priced use, but the GLM 5.3 + GLM 5.3 Flash period is Aug 29–Sep 29 and cannot be split at the Sep 6 cutoff; exclude it. An Oct 3 thread has a comment reporting about 1B tokens/day on a $20 plan without an API-priced amount or input/output mix; a separate ~$300-equivalent statement is a non-measured estimate. The OpenCode Go meter post lacks a user-priced amount, and comments must not be merged with the OP's usage. |
+| Alibaba | A QwenCloud Individual Lite post reports 20k tokens/63 output, but an attached dashboard shows a 2,500 seven-day quota, 0% remaining, and a Sep 29 reset; values are unreconciled, with no exact model, fee amount, or API-priced use. An exact Qwen 3.8 Max limits discussion is about two months old; a separate Qwen subscription/40k requests recollection is uncertain and unpriced. Current searches are logged but bounded. |
+
+## Research packages and evidence ledgers
+
+| Topic | Current supporting artifact | Use and limits |
+|---|---|---|
+| Current provider-wise user-reported multiples | [Four-column table](2026-10-06-provider-wise-user-reported-value-multiples.md) | Numeric user-reported API-price estimates only; all source and estimate caveats are inline. |
+| Anthropic qualification | [Strict-window audit](2026-10-06-value-multiples/roster-coverage/anthropic-strict-qualification.md) | Distinguishes in-window partial observations from Sep 5-starting intervals and excludes the removed 120× value. |
+| Other-provider community qualification | [Community audit](2026-10-06-value-multiples/roster-coverage/community-qualification-audit.md), [13-model coverage map](2026-10-06-value-multiples/roster-coverage/model-coverage.md), and [Oct 6 targeted follow-up search log](2026-10-06-value-multiples/roster-coverage/community-followup-search-log.md) | Requalifies retained xAI, Google, Kimi, Z.AI, and Alibaba cases; the Z.AI $102.17 / 5.68× user estimate is documented but excluded for its pre-cutoff mixed-model measurement window. These audits are bounded and do not establish exhaustive absence. |
+| OpenAI/TiboTattle | [TiboTattle eligibility audit](2026-10-06-value-multiples/roster-coverage/openai-tibotattle-eligibility.md) | Homepage provides the sole numeric crowd source; TiboTattle docs explain Pro 20x-week normalization, while aggregate tracks lack individual fee/time/model links. No multiple is assigned. |
+| First-party pricing and plan context | [Ultradeep first-party report](2026-10-06-value-multiples/provider-plan-allowances-ultradeep/research_report.md), [official-source ledger](2026-10-06-value-multiples/provider-plan-allowances-ultradeep/sources.jsonl), [claim evidence](2026-10-06-value-multiples/provider-plan-allowances-ultradeep/evidence.jsonl), and [model coverage](2026-10-06-value-multiples/provider-plan-allowances-ultradeep/model_coverage.csv) | First-party fees and API rates are contextual only; provider-published allowances never supply a numerator. Report citations and the phase gate passed in the prior run, but strict claim-support verification remains failed/unverified because the project ledgers lack the validator's required direct-quote/source fields; do not describe the full package as validated. |
+| Current-month community discoveries | [Coding-provider Ultradeep report](2026-10-05-other-provider-coding/coding-provider-ultradeep/research_report.md), [community addendum](2026-10-05-other-provider-coding/community-research-addendum.md), and [consumer-chat addendum](2026-10-05-other-provider-chat/community-research-addendum.md) | Discovery coverage includes user observations and plan discussions across sources. Each row still must pass the end-user, API-priced, exact-variant, plan-tier, and date rules before entering the numeric table. |
+
+## Method and limitations
+
+The active Silver Bullet Deep Research Ultradeep package records the first-party plan/API context for all 13 ValueRank model IDs across seven providers. Official plan limits are not used as user allowance estimates. Community reports are screened separately against the binding policy above. User reports are observational and may contain unverified API prices, partial intervals, omitted product surfaces, mixed models, or inferred denominators; each such limitation is kept next to the number.
+
+The existing community audits are not evidence that no qualifying report exists anywhere for providers with gaps. Search completeness must be reported from the relevant provider query logs. The provider-wise table is a snapshot for the stated month, not a controlled workload comparison, a provider reliability claim, or a substitute for the ValueRank benchmark rankings.

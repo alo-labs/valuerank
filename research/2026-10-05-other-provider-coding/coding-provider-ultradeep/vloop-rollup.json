@@ -1,0 +1,27 @@
+{
+  "run_id": "2026-10-05-coding-provider-ultradeep",
+  "mode": "ultradeep",
+  "as_of_date": "2026-10-05",
+  "phase_sequence": ["SCOPE", "PLAN", "RETRIEVE", "TRIANGULATE", "OUTLINE", "SYNTHESIZE", "CRITIQUE", "REFINE", "PACKAGE"],
+  "phase_artifacts_created": true,
+  "orchestration_command_invoked": false,
+  "source_records": 22,
+  "direct_post_doc_repo_pages": 19,
+  "bounded_search_outcome_records": 3,
+  "eligible_community_observations": 13,
+  "excluded_community_context_observations": 1,
+  "provider_policy_observations": 6,
+  "claims": 8,
+  "exact_query_strings_logged": 47,
+  "query_log_complete_for_all_prior_search_calls": false,
+  "query_log_gap": "Retained handoff transcript omitted literals for an earlier official-document query set.",
+  "critique_cycles": 3,
+  "validation": {
+    "package_validator": "pass; canonical hashes, crosswalks, counts, tier fields, and measurement classes validated",
+    "phase_gate": "pass; ultradeep mode; all nine phase artifacts present",
+    "sb_validate_report": "pass; all checks passed",
+    "sb_verify_citations": "pass; URL Verified 19/19; suspicious 0; unverified 0",
+    "sb_verify_claim_support": "pass; 8 claims; factual unsupported 0",
+    "shared_mcp_ctx_execute": "agent capacity reached 15/15; local lean-ctx validator route succeeded"
+  }
+}

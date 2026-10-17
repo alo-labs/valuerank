@@ -1,0 +1,21 @@
+{
+  "workflow_id": "20261005-codex-tibotattle-ultradeep",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "mode": "ultradeep",
+  "phases": [
+    {"phase": "scope", "status": "complete", "artifact": "scope.md", "loopback": false},
+    {"phase": "plan", "status": "complete", "artifact": "research-plan.md", "loopback": false},
+    {"phase": "retrieve", "status": "complete", "artifacts": ["sources.jsonl", "evidence.jsonl"], "loopback": false},
+    {"phase": "triangulate", "status": "complete", "artifact": "triangulation.md", "loopback": true},
+    {"phase": "outline", "status": "complete", "artifact": "outline.md", "loopback": false},
+    {"phase": "synthesize", "status": "complete", "artifacts": ["research_report.md", "claims.jsonl"], "loopback": true},
+    {"phase": "critique", "status": "complete", "artifact": "critique.md", "cycles_required": 3, "cycles_completed": 3, "loopback": true},
+    {"phase": "refine", "status": "complete", "artifacts": ["research_report.md", "claims.jsonl"], "loopback": true},
+    {"phase": "package", "status": "complete", "artifacts": ["decision-record.md", "handoff.md", "vloop-rollup.json"], "loopback": false}
+  ],
+  "source_counts": {"inventory": 37, "preferred_budget": 30, "preferred_budget_exceeded_by": 7, "configured_maximum": 40, "within_configured_maximum": true, "budget_exception": "Preserved existing audit trail and bounded app coverage.", "discovery_only_or_coverage_only_present": true},
+  "research_result": {"eligible_numeric_codex_allowance_values": 0, "user_reported_allowance_datapoints": 0, "homepage_capture_date": "2026-10-05", "homepage_state": "Checking/loading text; no numeric community series or sample count visible"},
+  "workflow_status": {"manual_artifact_workflow": true, "automated_sb_command_invoked": false, "sb_skill_access": "success via ctx_read(repo=silver-bullet)", "validators": {"report": "exit 0, required checks pass; see validation/validate_report.log", "citations": "exit 0 non-strict with 15/17 URLs verified; see validation/verify_citations.log", "claim_support": "exit 0, 10 supported claims; see validation/claim_support.log", "phase_gate": "exit 0, 9 phases pass; see validation/phase_gate.log", "structural_ledgers": "pass; see validation/structural-validation.log"}},
+  "remaining_limitations": ["Homepage state can change after capture.", "Publisher claims were not independently tested.", "Tracker discovery is bounded, not exhaustive.", "Manifest schema and skill output-session fields are incompatible in one strict additionalProperties=false object."]
+}

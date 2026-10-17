@@ -24,7 +24,7 @@ Artificial Analysis embeds row data in Next.js RSC payloads (`benchmarkRows`) ra
 
 Terminal Bench 2.1 exposes an HTML table that can be read directly. At verification time it contained **17** rows.
 
-Evidence snapshots: `.refresh/v1.3/coding-agents/` and `.refresh/v1.3/tb21/`.
+Evidence snapshots: `archive/refresh-v1.3/coding-agents/` and `archive/refresh-v1.3/tb21/`.
 
 ## Formula Confirmation
 

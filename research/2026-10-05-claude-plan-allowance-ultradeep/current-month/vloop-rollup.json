@@ -1,0 +1,229 @@
+{
+  "run_id": "2026-10-05-claude-plan-allowance-current-month",
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "mode": "ultradeep",
+  "research_type": "default",
+  "as_of_date": "2026-10-06",
+  "critique_cycles_completed": 3,
+  "loopback_required": true,
+  "loopback_decision": "Three critique passes and a final measurement-rule refinement applied. Sep6-Oct6 measurement-start eligibility is explicit; pre-window S-C03/S-C04 segments excluded; only three user-reported API-priced partial-log estimates remain eligible as provisional multiples. Exact-route testing remains unverified.",
+  "phases": [
+    {
+      "phase": "DR-SCOPE",
+      "input_contract": "User Sep6-Oct6 measurement-start window, Reddit-first order, exact-tier rule, API-priced user-log numerator rule, route-validity caveat, and promotion exclusion.",
+      "work_product": "scope.md",
+      "evidence_refs": [],
+      "verification": "Measurement-start cutoff, eligible interval segmentation, and assumptions are explicit.",
+      "validation": {
+        "method": "manual scope review",
+        "status": "complete"
+      },
+      "repair": "Separated imprecise observation intervals and pre-window comparators.",
+      "status": "complete"
+    },
+    {
+      "phase": "DR-PLAN",
+      "input_contract": "Bounded question and source/date policy.",
+      "work_product": "research-plan.md",
+      "evidence_refs": [],
+      "verification": "Reddit-first variants, source classes, evidence rules, and ultradeep depth rationale recorded.",
+      "validation": {
+        "method": "manual plan review",
+        "status": "complete"
+      },
+      "repair": null,
+      "status": "complete"
+    },
+    {
+      "phase": "DR-RETRIEVE",
+      "input_contract": "Research plan and indexed public sources.",
+      "work_product": [
+        "query_log.md",
+        "sources.jsonl",
+        "evidence.jsonl"
+      ],
+      "evidence_refs": [
+        "E-C01",
+        "E-C22"
+      ],
+      "verification": "21 sources and 25 evidence records persisted with post/measurement dates, exact stated plans, methods, numerator dispositions, caveats, and mappings.",
+      "validation": {
+        "method": "phase_gate.py",
+        "status": "pass",
+        "note": "Required files present and parseable."
+      },
+      "repair": "Added S10/S12 exact intervals and recent Reddit candidate records.",
+      "status": "complete"
+    },
+    {
+      "phase": "DR-TRIANGULATE",
+      "input_contract": "Source and evidence ledgers.",
+      "work_product": "triangulation.md",
+      "evidence_refs": [
+        "E-C03",
+        "E-C05",
+        "E-C12",
+        "E-C14",
+        "E-C18",
+        "E-C19"
+      ],
+      "verification": "Policy, user reports, incident reports, and tracker descriptions are separate evidence classes; conflicting claims are not averaged.",
+      "validation": {
+        "method": "manual cross-source review and Admiralty grading",
+        "status": "complete"
+      },
+      "repair": "S12's pre-window ratio separated from its current-window observation.",
+      "status": "complete"
+    },
+    {
+      "phase": "DR-OUTLINE",
+      "input_contract": "Triangulated claim map.",
+      "work_product": "outline.md",
+      "evidence_refs": [
+        "E-C05",
+        "E-C12",
+        "E-C19"
+      ],
+      "verification": "Report sections correspond to evidence-backed findings, incidents, policy, exclusions, and limitations.",
+      "validation": {
+        "method": "manual outline review",
+        "status": "complete"
+      },
+      "repair": "Added separate incident, counterevidence, and exact-route scope sections.",
+      "status": "complete"
+    },
+    {
+      "phase": "DR-SYNTHESIZE",
+      "input_contract": "Evidence ledger and refined outline.",
+      "work_product": [
+        "research_report.md",
+        "claims.jsonl"
+      ],
+      "evidence_refs": [
+        "E-C01",
+        "E-C03",
+        "E-C05",
+        "E-C12",
+        "E-C14",
+        "E-C22"
+      ],
+      "verification": "Report contains source IDs, formulas for three author-estimated API-price multiples, and claim/source mappings; provider allowance statements are context only.",
+      "validation": {
+        "method": "validate_report.py and verify_citations.py",
+        "status": "pass",
+        "details": "validate_report passed 14/14 checks; verify_citations passed with 21/21 URLs accessible."
+      },
+      "repair": "Added required report sections and complete 21-source bibliography after an initial validator failure.",
+      "status": "complete"
+    },
+    {
+      "phase": "DR-CRITIQUE",
+      "input_contract": "Draft report and ledgers.",
+      "work_product": "critique.md",
+      "evidence_refs": [
+        "E-C05",
+        "E-C12",
+        "E-C13",
+        "E-C19",
+        "E-C22"
+      ],
+      "verification": "Three manual adversarial cycles documented: skeptical practitioner, evidence reviewer, and red-team/implementation engineer.",
+      "validation": {
+        "method": "critique loopback review",
+        "status": "complete",
+        "cycles": 3
+      },
+      "repair": "Retrieved missing date-specific reports, fixed plan wording, and recorded unresolved exact-route blocker.",
+      "status": "complete_with_documented_blocker"
+    },
+    {
+      "phase": "DR-REFINE",
+      "input_contract": "Critique deltas and candidate gaps.",
+      "work_product": "research_report.md",
+      "evidence_refs": [
+        "E-C12",
+        "E-C13",
+        "E-C14",
+        "E-C15",
+        "E-C16",
+        "E-C17",
+        "E-C18",
+        "E-C19",
+        "E-C22"
+      ],
+      "verification": "Measurement-start cutoff applied; S-C03/S-C04 pre-window segments excluded; S-C05 two-account/top-up amount not used as per-plan numerator.",
+      "validation": {
+        "method": "verify_claim_support.py strict",
+        "status": "pass",
+        "details": "11 claims processed: 8 supported, 3 partial, 0 needs_review; 9 factual claims, factual_unsupported=0. Partial results remain qualified and do not validate source truth."
+      },
+      "repair": "Separated the Claude Tuner page-state and privacy claims, aligned incident paraphrases, and reran strict support; broad synthesis partials remain explicitly qualified.",
+      "status": "complete_with_limitations"
+    },
+    {
+      "phase": "DR-PACKAGE",
+      "input_contract": "Final refined report and claim map.",
+      "work_product": [
+        "decision-record.md",
+        "handoff.md",
+        "run_manifest.json",
+        "vloop-rollup.json",
+        "validation/"
+      ],
+      "evidence_refs": [
+        "E-C01",
+        "E-C05",
+        "E-C12",
+        "E-C13",
+        "E-C19",
+        "E-C22"
+      ],
+      "verification": "Decision, limitations, handoff, current validator logs, and updated 21-source/25-evidence/11-claim counts are persisted.",
+      "validation": {
+        "method": "phase_gate.py --dir current-month",
+        "status": "pass",
+        "mode": "ultradeep",
+        "phases": 9,
+        "details": "phase_gate passed mode=ultradeep with all 9 phases."
+      },
+      "repair": "Updated manifest to ultradeep and reran phase gate after an initial default-standard result.",
+      "status": "complete_with_limitations"
+    }
+  ],
+  "validators": {
+    "validate_report": {
+      "status": "pass",
+      "attempts": 5,
+      "checks_passed": 14,
+      "final_warnings": 0,
+      "log": "validation/validate_report.log"
+    },
+    "verify_citations": {
+      "status": "pass",
+      "urls_accessible": 21,
+      "total": 21,
+      "suspicious": 0,
+      "unverified": 0,
+      "log": "validation/verify_citations.log"
+    },
+    "verify_claim_support": {
+      "status": "pass",
+      "claims": 11,
+      "supported": 8,
+      "partial": 3,
+      "needs_review": 0,
+      "factual_unsupported": 0,
+      "total_factual": 9,
+      "log": "validation/verify_claim_support.log"
+    },
+    "phase_gate": {
+      "status": "pass",
+      "mode": "ultradeep",
+      "phase_count": 9,
+      "log": "validation/phase_gate.log"
+    }
+  },
+  "overall_status": "complete_with_scope_and_support_limitations"
+}

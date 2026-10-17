@@ -1,0 +1,87 @@
+{
+  "validation_version": "1.0.0",
+  "timestamp_utc": "2026-10-05T09:59:00Z",
+  "scope": "owned package only; no project-wide independent verification claimed",
+  "command": "python3 validation/validate_package.py via LeanCTX ctx_execute language=shell",
+  "automated_silver_bullet_gates": "not_run; local package checks only",
+  "independent_project_review": "pending parent review",
+  "status": "passed_local_package_checks",
+  "counts": {
+    "models": 25,
+    "qualified_route_tiers": 60,
+    "unqualified_route_exceptions": 8,
+    "selected_models": 11,
+    "no_qualified_route_models": 14,
+    "sources": 15,
+    "evidence": 18,
+    "claims": 13
+  },
+  "checks": [
+    {
+      "check": "exact roster coverage",
+      "status": "passed",
+      "detail": "routes.json=25 unique=25; raw-data selected AA pages=25; model-coverage.csv=25"
+    },
+    {
+      "check": "all qualified route tiers registered",
+      "status": "passed",
+      "detail": "routes.json candidates=60; route-tiers.csv rows=60; unqualified identity exception rows=8"
+    },
+    {
+      "check": "candidate tier keys unique",
+      "status": "passed",
+      "detail": "candidate key count=60; unique=60"
+    },
+    {
+      "check": "exact provider route model join",
+      "status": "passed",
+      "detail": "selected routes joined to one exact model/provider/tier/cadence/catalog label; mismatches=[]"
+    },
+    {
+      "check": "DeepSeek variant separation",
+      "status": "passed",
+      "detail": "V4 Flash selected route unavailable; qualified sibling rows=0; separately documented exceptions=8; none eligible for selection."
+    },
+    {
+      "check": "profile arithmetic",
+      "status": "passed",
+      "detail": "checked 180 qualified candidate profile rows; 0 mismatch(es)"
+    },
+    {
+      "check": "source/evidence/claim referential integrity",
+      "status": "passed",
+      "detail": "sources=15; evidence=18; claims=13; invalid refs=0"
+    },
+    {
+      "check": "research date window",
+      "status": "passed",
+      "detail": "all source retrieval and evidence dates within 2026-09-05..2026-10-05: True"
+    },
+    {
+      "check": "source link shape",
+      "status": "passed",
+      "detail": "15 source records, coverage links, and exception links inspected; invalid=0"
+    },
+    {
+      "check": "source URI registry completeness",
+      "status": "passed",
+      "detail": "referenced source IDs=15; missing or unresolved direct/local URIs=[]"
+    },
+    {
+      "check": "explicit quarterly fee unknowns",
+      "status": "passed",
+      "detail": "quarterly tiers=6; JSON counterparts=6; numeric profile API equivalents retained=36; issues=[]"
+    },
+    {
+      "check": "markdown table row counts",
+      "status": "passed",
+      "detail": "model table rows=25; qualified tier register rows=60; exception CSV rows=8"
+    },
+    {
+      "check": "research package components",
+      "status": "passed",
+      "detail": "missing=[]; critique cycles recognized=3"
+    }
+  ],
+  "failures": []
+}
