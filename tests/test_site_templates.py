@@ -418,3 +418,10 @@ def test_tier_badge_uses_singular_wording_for_a_one_point_gap(env):
     macros = env.get_template("partials/badge.html").module
     assert "within 1 Index point of the rendered AA frontier" in str(macros.tier_badge("near", "Alpha (low)", 1))
     assert "within 2 Index points of the rendered AA frontier" in str(macros.tier_badge("near", "Alpha (low)", 2))
+
+
+def test_plans_page_states_the_claude_shared_plan_assumption(env):
+    _, dom, page = render(env, "plans")
+    policy = dom.one("details", id="evidence-policy")
+    text = policy.all_text()
+    assert "Claude models" in text and page["plansJson"]["policy"]["claudeApplication"] in text

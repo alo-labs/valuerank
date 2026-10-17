@@ -367,7 +367,7 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     assert extraction["textSnapshot"] == "data/aa/full__full.txt"
     assert extraction["sourceSnapshot"] is None and extraction["captureMode"] == "html"
     assert extraction["method"] == "decoded currentModel object from first-party page payload"
-    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-10-17T19:28:57Z"
+    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-10-17T20:23:57Z"
     assert output["benchmarkVersion"] == VERSION and output["providerClaimPolicy"] == "policy-text"
     assert coverage["cohortN"] == 1 and coverage["cohort"].endswith("1-model ValueRank comparison roster")
     assert coverage["sourceSnapshot"] is None

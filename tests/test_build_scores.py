@@ -349,7 +349,7 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-10-17T19:28:57Z"
+    assert scoring["observedAt"] == "2026-10-17T20:23:57Z"
     # The DeepSeek V4 Flash claim is used because that model is primary-ranked; the other claim targets a non-primary model.
     assert scoring["providerClaimsUsed"] == [DEEPSEEK_CLAIM]
     assert scoring["primaryMissingFields"]

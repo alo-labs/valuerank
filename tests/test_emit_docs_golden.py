@@ -22,7 +22,7 @@ def test_main_reproduces_committed_markdown_and_never_touches_the_site(repo_copy
     for name in MARKDOWN_OUTPUTS:
         assert (repo_copy / name).read_bytes() == (ROOT / name).read_bytes(), name
     assert site_snapshot(repo_copy) == site_before
-    assert '"version": "v1.9.7"' in capsys.readouterr().out
+    assert '"version": "v1.9.8"' in capsys.readouterr().out
 
 
 def test_importing_the_module_has_no_side_effects(tmp_path, monkeypatch):

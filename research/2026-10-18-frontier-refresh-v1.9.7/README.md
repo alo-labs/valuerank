@@ -37,3 +37,9 @@ Ranked cohort: 16 → 19 models. API-basis leader: Gemini 4 Argon (previously GP
 - `aa-frontier-evidence.md`: chart method, frontier and near-frontier tables, roster decisions.
 - `aa-chart-tooltips.json`: all 189 tooltips as captured, with the overlapped-circle resolution.
 - `bug-hunt-evidence.md`: per-model Bug Hunt matches, changes against the previous pin, raw file hashes.
+
+## Addendum: v1.9.8 (same day)
+
+- **Claude shared-plan routes (owner decision, Option 2).** The owner noted that Claude Haiku 5.5 is available on every Claude plan. The plan basis needs a measured API-priced allowance for the exact model; the selected SemiAnalysis source measures Opus 5.5 (Pro 58.9×, Max 5x 57.25×, Max 20x 58.63×) and Fable 5.1 (12.73× and 12.425× on the Max plans) only. Three options were put to the owner: a conservative shared assumption at the lower measured Claude figure, Opus 5.5's multiples for all Claude models, or keeping the API fallback. The owner chose Opus 5.5's multiples for all Claude models. Three routes (`claude-pro-common-opus55-assumption`, `claude-max5x-…`, `claude-max20x-…`) now apply them to Claude Opus 5, Fable 5, Opus 4.8, Sonnet 5, Haiku 5.5 and Sonnet 5.5, labelled `user_assumption` with the recorded caution that the Fable 5.1 measurement shows allowances are model-specific and that the applied figures may overstate cheaper models. Opus 5.5 keeps its exact measured routes. Plan-basis effect: Claude Sonnet 5.5 first (was Opus 5.5), Haiku 5.5 16th → 14th, Opus 5 14th → 9th; API-basis ranks unchanged.
+- **Chart labels.** Model labels on every scatter chart now stay within 18 px of their own marker and no longer use leader lines; a Plotly vertical-shift sign error in the previous placement was corrected at the same time.
+- **Ranking history** gains `v197` (the v1.9.7 API-basis ranks).

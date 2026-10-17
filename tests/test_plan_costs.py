@@ -465,3 +465,25 @@ def test_rank_cost_scores_round_to_one_decimal_like_the_score_dimensions():
     # so that recomputing the composite from the public data reproduces the committed score.
     assert plan_costs.rank_cost_scores(list(range(1, 11)))[1] == 88.9
     assert plan_costs.rank_cost_scores([3, 1, 2]) == [0.0, 100.0, 50.0]
+
+
+# --- owner-authorised Claude shared-plan assumption (2026-10-18) -------------
+
+
+def test_every_claude_model_resolves_to_a_claude_plan_route_at_opus_55_multiples(repo_copy):
+    # Owner decision 2026-10-18 (Option 2): Opus 5.5's measured SemiAnalysis multiples apply to every
+    # Claude model as a labelled assumption; Opus 5.5 itself keeps its exact measured routes.
+    routes = plan_costs.load_plan_routes(repo_copy / "data" / "plan_cost_routes.json")
+    mapping = json.loads((repo_copy / "data" / "aa_mapping.json").read_text(encoding="utf-8"))
+    claude_ids = [entry["id"] for entry in mapping if entry["id"].startswith("claude-")]
+    assert "claude-haiku-5-5" in claude_ids and "claude-sonnet-5-5" in claude_ids
+    opus = plan_costs.select_best_route("claude-opus-5-5", routes)
+    assert opus["provider"] == "Anthropic" and opus["evidenceClass"] == "controlled_account_workload_projection"
+    for model_id in claude_ids:
+        route = plan_costs.select_best_route(model_id, routes)
+        assert route is not None, model_id
+        assert route["provider"] == "Anthropic"
+        assert route["valueMultiple"] == opus["valueMultiple"] and route["plan"] == opus["plan"]
+        if model_id != "claude-opus-5-5":
+            assert route["evidenceClass"] == "user_assumption" and route["sourceModel"] == "Opus 5.5"
+            assert "2026-10-18" in route["notes"]

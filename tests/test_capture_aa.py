@@ -7,13 +7,22 @@ import json
 import runpy
 import urllib.error
 import urllib.request
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
 
 from valuerank import capture_aa as ca
 
-NOW = "2026-10-17T19:28:57Z"  # pinned_clock instant
+NOW = "2026-10-17T20:23:57Z"  # pinned_clock instant
+
+
+def _shifted(delta: timedelta) -> str:
+    """The pinned instant moved by ``delta``, spelled as an AA observedAt value."""
+    moment = datetime.strptime(NOW, "%Y-%m-%dT%H:%M:%SZ") + delta
+    return moment.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 PAGE_FIXTURES = Path(__file__).parent / "fixtures" / "aa_pages"
 
 
@@ -98,11 +107,14 @@ def test_preserved_capture_accepts_captured_at_when_no_observed_at(pinned_clock)
 
 
 def test_preserved_capture_at_exact_age_limit_is_still_fresh(pinned_clock):
-    existing = preserved(capture={"observedAt": "2026-10-10T19:28:57Z", "precision": "p", "method": "m"})
+    existing = preserved(capture={"observedAt": _shifted(-timedelta(days=7)), "precision": "p", "method": "m"})
     assert ca.preserved_public_capture(entry(), {"m": existing}) is existing  # exactly 7 days
 
 
-@pytest.mark.parametrize("observed", ["2026-10-10T19:28:56Z", "2026-10-17T19:28:58Z"])
+@pytest.mark.parametrize(
+    "observed",
+    [_shifted(-timedelta(days=7, seconds=1)), _shifted(timedelta(seconds=1))],
+)
 def test_preserved_capture_outside_window_demands_recapture(pinned_clock, observed):
     existing = preserved(capture={"observedAt": observed, "precision": "p", "method": "m"})
     with pytest.raises(ValueError, match=r"older than 7 days or future-dated.*requires a public rendered capture"):

@@ -1,7 +1,7 @@
 {
-  "version": "v1.9.7",
+  "version": "v1.9.8",
   "publishDate": "October 18, 2026",
-  "observedAt": "2026-10-17T19:28:57Z",
+  "observedAt": "2026-10-17T20:23:57Z",
   "bases": {
     "api": {
       "label": "API ranking",
@@ -272,6 +272,108 @@
   },
   "models": [
     {
+      "slug": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "shortName": "Sonnet 5.5",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "rank": {
+        "api": 3,
+        "plan": 1
+      },
+      "overall": {
+        "api": 69.5,
+        "plan": 82.6
+      },
+      "quality": 85.4,
+      "qualityRank": 1,
+      "dims": {
+        "costComposite": null,
+        "omniNonHallucination": 66.7,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": 80.0,
+        "gdpvalV21": 94.4,
+        "automationBenchAA": 94.4,
+        "aaLcr": 61.1,
+        "omniAccuracy": 61.1,
+        "hle": 88.9,
+        "gpqaDiamond": null,
+        "scicode": 88.9,
+        "critpt": 80.6,
+        "intelligenceIndex": 94.4,
+        "speed": 82.4,
+        "bugHuntFixedOf105": 100.0
+      },
+      "costDims": {
+        "api": 11.1,
+        "plan": 72.2
+      },
+      "raw": {
+        "omniNonHallucination": 52.99,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": 72.0,
+        "gdpvalV21": 1837.82,
+        "automationBenchAA": 71.77,
+        "aaLcr": 82.67,
+        "omniAccuracy": 53.95,
+        "hle": 54.96,
+        "gpqaDiamond": null,
+        "scicode": 61.0,
+        "critpt": 31.43,
+        "intelligenceIndex": 56.0001286580794,
+        "speed": 141.374735137415,
+        "bugHuntFixedOf105": 51.3
+      },
+      "coverage": {
+        "pct": 88.64,
+        "availablePriority": 117,
+        "totalPriority": 132,
+        "missing": [
+          "Terminal-Bench 4.0",
+          "Instruction Following (LiveBench)",
+          "GPQA Diamond (legacy)"
+        ]
+      },
+      "cost": {
+        "apiUsd": 7259.502265782336,
+        "planUsdPerRun": 123.25131181294289,
+        "planUsdPerPoint": 2.200911225855922,
+        "planComparableUsdPerPoint": 2.200911225855922,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        }
+      },
+      "intelligenceIndex": {
+        "value": 56.0001286580794,
+        "status": "measured"
+      },
+      "speed": 141.374735137415,
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "tier": "Mid-Range",
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null
+    },
+    {
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "shortName": "Opus 5.5",
@@ -282,11 +384,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 6,
-        "plan": 1
+        "plan": 2
       },
       "overall": {
         "api": 60.3,
-        "plan": 76.9
+        "plan": 73.4
       },
       "quality": 76.7,
       "qualityRank": 3,
@@ -310,7 +412,7 @@
       },
       "costDims": {
         "api": 0.0,
-        "plan": 77.8
+        "plan": 61.1
       },
       "raw": {
         "omniNonHallucination": 41.39,
@@ -365,9 +467,9 @@
       "grade": "measured",
       "pareto": {
         "api": false,
-        "plan": true
+        "plan": false
       },
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -384,11 +486,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 2,
-        "plan": 2
+        "plan": 3
       },
       "overall": {
         "api": 70.1,
-        "plan": 73.6
+        "plan": 72.4
       },
       "quality": 71.0,
       "qualityRank": 5,
@@ -412,7 +514,7 @@
       },
       "costDims": {
         "api": 66.7,
-        "plan": 83.3
+        "plan": 77.8
       },
       "raw": {
         "omniNonHallucination": 45.73,
@@ -469,7 +571,7 @@
         "api": true,
         "plan": true
       },
-      "tier": "Near-Budget",
+      "tier": "Mid-Range",
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
       "aaFrontierIntelligenceGap": 0,
@@ -486,11 +588,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 4,
-        "plan": 3
+        "plan": 4
       },
       "overall": {
         "api": 64.1,
-        "plan": 70.6
+        "plan": 68.0
       },
       "quality": 75.2,
       "qualityRank": 4,
@@ -514,7 +616,7 @@
       },
       "costDims": {
         "api": 27.8,
-        "plan": 55.6
+        "plan": 44.4
       },
       "raw": {
         "omniNonHallucination": 51.68,
@@ -569,7 +671,7 @@
         "api": false,
         "plan": false
       },
-      "tier": "Premium",
+      "tier": "Expensive",
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (xhigh)",
       "aaFrontierIntelligenceGap": 2,
@@ -586,11 +688,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 1,
-        "plan": 4
+        "plan": 5
       },
       "overall": {
         "api": 74.1,
-        "plan": 69.1
+        "plan": 66.6
       },
       "quality": 82.6,
       "qualityRank": 2,
@@ -614,7 +716,7 @@
       },
       "costDims": {
         "api": 44.4,
-        "plan": 22.2
+        "plan": 11.1
       },
       "raw": {
         "omniNonHallucination": 84.93,
@@ -660,104 +762,12 @@
       "grade": "measured",
       "pareto": {
         "api": true,
-        "plan": true
+        "plan": false
       },
       "tier": "Expensive",
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Gemini 4 Argon (high)",
       "aaFrontierIntelligenceGap": 1,
-      "aaFrontierFootnote": null
-    },
-    {
-      "slug": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5",
-      "shortName": "Sonnet 5.5",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "rank": {
-        "api": 3,
-        "plan": 5
-      },
-      "overall": {
-        "api": 69.5,
-        "plan": 68.4
-      },
-      "quality": 85.4,
-      "qualityRank": 1,
-      "dims": {
-        "costComposite": null,
-        "omniNonHallucination": 66.7,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": 80.0,
-        "gdpvalV21": 94.4,
-        "automationBenchAA": 94.4,
-        "aaLcr": 61.1,
-        "omniAccuracy": 61.1,
-        "hle": 88.9,
-        "gpqaDiamond": null,
-        "scicode": 88.9,
-        "critpt": 80.6,
-        "intelligenceIndex": 94.4,
-        "speed": 82.4,
-        "bugHuntFixedOf105": 100.0
-      },
-      "costDims": {
-        "api": 11.1,
-        "plan": 5.6
-      },
-      "raw": {
-        "omniNonHallucination": 52.99,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": 72.0,
-        "gdpvalV21": 1837.82,
-        "automationBenchAA": 71.77,
-        "aaLcr": 82.67,
-        "omniAccuracy": 53.95,
-        "hle": 54.96,
-        "gpqaDiamond": null,
-        "scicode": 61.0,
-        "critpt": 31.43,
-        "intelligenceIndex": 56.0001286580794,
-        "speed": 141.374735137415,
-        "bugHuntFixedOf105": 51.3
-      },
-      "coverage": {
-        "pct": 88.64,
-        "availablePriority": 117,
-        "totalPriority": 132,
-        "missing": [
-          "Terminal-Bench 4.0",
-          "Instruction Following (LiveBench)",
-          "GPQA Diamond (legacy)"
-        ]
-      },
-      "cost": {
-        "apiUsd": 7259.502265782336,
-        "planUsdPerRun": null,
-        "planUsdPerPoint": null,
-        "planComparableUsdPerPoint": 129.6336712029138,
-        "fallback": "api",
-        "route": null
-      },
-      "intelligenceIndex": {
-        "value": 56.0001286580794,
-        "status": "measured"
-      },
-      "speed": 141.374735137415,
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "tier": "Expensive",
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
-      "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null
     },
     {
@@ -775,7 +785,7 @@
       },
       "overall": {
         "api": 62.9,
-        "plan": 66.0
+        "plan": 63.9
       },
       "quality": 69.8,
       "qualityRank": 6,
@@ -799,7 +809,7 @@
       },
       "costDims": {
         "api": 33.3,
-        "plan": 50.0
+        "plan": 38.9
       },
       "raw": {
         "omniNonHallucination": 7.8,
@@ -852,7 +862,7 @@
         "api": false,
         "plan": false
       },
-      "tier": "Premium",
+      "tier": "Expensive",
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -873,7 +883,7 @@
       },
       "overall": {
         "api": 56.6,
-        "plan": 61.2
+        "plan": 58.9
       },
       "quality": 66.9,
       "qualityRank": 7,
@@ -897,7 +907,7 @@
       },
       "costDims": {
         "api": 16.7,
-        "plan": 38.9
+        "plan": 27.8
       },
       "raw": {
         "omniNonHallucination": 70.66,
@@ -974,7 +984,7 @@
       },
       "overall": {
         "api": 58.6,
-        "plan": 60.9
+        "plan": 57.4
       },
       "quality": 59.3,
       "qualityRank": 8,
@@ -998,7 +1008,7 @@
       },
       "costDims": {
         "api": 55.6,
-        "plan": 66.7
+        "plan": 50.0
       },
       "raw": {
         "omniNonHallucination": 39.88,
@@ -1054,113 +1064,108 @@
         "api": false,
         "plan": false
       },
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null
     },
     {
-      "slug": "mimo-v2-6-pro",
-      "name": "MiMo-V2.6-Pro",
-      "shortName": "MiMo V2.6 Pro",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-      "aaVariant": null,
+      "slug": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "shortName": "Opus 5",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+      "aaVariant": "max",
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 9,
+        "api": 14,
         "plan": 9
       },
       "overall": {
-        "api": 53.7,
-        "plan": 50.7
+        "api": 40.7,
+        "plan": 52.2
       },
-      "quality": 42.7,
-      "qualityRank": 10,
+      "quality": 48.9,
+      "qualityRank": 9,
       "dims": {
         "costComposite": null,
-        "omniNonHallucination": 77.8,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": null,
-        "gdpvalV21": 77.8,
-        "automationBenchAA": 38.9,
-        "aaLcr": 100.0,
-        "omniAccuracy": 16.7,
-        "hle": 61.1,
-        "gpqaDiamond": null,
-        "scicode": 83.3,
-        "critpt": 55.6,
-        "intelligenceIndex": 52.8,
-        "speed": 5.9,
-        "bugHuntFixedOf105": 8.8
+        "omniNonHallucination": 27.8,
+        "terminalBenchV4": 83.3,
+        "livebenchInstructionFollowing": 36.4,
+        "deepswePassAt1": 33.3,
+        "gdpvalV21": 88.9,
+        "automationBenchAA": 27.8,
+        "aaLcr": 16.7,
+        "omniAccuracy": 83.3,
+        "hle": 83.3,
+        "gpqaDiamond": 62.5,
+        "scicode": 50.0,
+        "critpt": 66.7,
+        "intelligenceIndex": 72.2,
+        "speed": 23.5,
+        "bugHuntFixedOf105": 47.1
       },
       "costDims": {
-        "api": 83.3,
-        "plan": 72.2
+        "api": 5.6,
+        "plan": 66.7
       },
       "raw": {
-        "omniNonHallucination": 59.38,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": null,
-        "gdpvalV21": 1684.34,
-        "automationBenchAA": 58.62,
-        "aaLcr": 86.33,
-        "omniAccuracy": 34.85,
-        "hle": 49.35,
-        "gpqaDiamond": null,
-        "scicode": 60.88,
-        "critpt": 26.57,
-        "intelligenceIndex": 46.3242065310383,
-        "speed": 48.0431227818126,
-        "bugHuntFixedOf105": 18
+        "omniNonHallucination": 39.18,
+        "terminalBenchV4": 53.9,
+        "livebenchInstructionFollowing": 63.7665,
+        "deepswePassAt1": 62.5,
+        "gdpvalV21": 1721.15,
+        "automationBenchAA": 56.57,
+        "aaLcr": 79.33,
+        "omniAccuracy": 60.87,
+        "hle": 54.87,
+        "gpqaDiamond": 93.23,
+        "scicode": 56.37,
+        "critpt": 29.14,
+        "intelligenceIndex": 50.7771115797629,
+        "speed": 59.8728104023725,
+        "bugHuntFixedOf105": 27.0
       },
       "coverage": {
-        "pct": 69.7,
-        "availablePriority": 92,
+        "pct": 100.0,
+        "availablePriority": 132,
         "totalPriority": 132,
-        "missing": [
-          "Terminal-Bench 4.0",
-          "Instruction Following (LiveBench)",
-          "DeepSWE v1.1",
-          "GPQA Diamond (legacy)"
-        ]
+        "missing": []
       },
       "cost": {
-        "apiUsd": 206.65533881883294,
-        "planUsdPerRun": 137.77022587922195,
-        "planUsdPerPoint": 2.974043943675812,
-        "planComparableUsdPerPoint": 2.974043943675812,
+        "apiUsd": 7274.7418382622345,
+        "planUsdPerRun": 123.51004818781384,
+        "planUsdPerPoint": 2.4323961002350214,
+        "planComparableUsdPerPoint": 2.4323961002350214,
         "fallback": null,
         "route": {
-          "id": "mimo-provisional-user-assumption",
-          "planLabel": "MiMo · provisional 1.5x assumption",
-          "planFeeUsd": null,
-          "valueMultiple": 1.5,
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
           "grade": "assumption",
           "evidenceLabel": "Provisional assumption",
-          "sourceModel": null,
-          "sourceUrl": null,
-          "sourceDate": null
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
         }
       },
       "intelligenceIndex": {
-        "value": 46.3242065310383,
+        "value": 50.7771115797629,
         "status": "measured"
       },
-      "speed": 48.0431227818126,
+      "speed": 59.8728104023725,
       "grade": "measured",
       "pareto": {
-        "api": true,
+        "api": false,
         "plan": false
       },
       "tier": "Mid-Range",
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
-      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null
     },
     {
@@ -1178,7 +1183,7 @@
       },
       "overall": {
         "api": 46.0,
-        "plan": 49.2
+        "plan": 48.1
       },
       "quality": 38.6,
       "qualityRank": 13,
@@ -1202,7 +1207,7 @@
       },
       "costDims": {
         "api": 77.8,
-        "plan": 94.4
+        "plan": 88.9
       },
       "raw": {
         "omniNonHallucination": 7.42,
@@ -1262,6 +1267,109 @@
       "aaFrontierFootnote": null
     },
     {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro",
+      "shortName": "MiMo V2.6 Pro",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "rank": {
+        "api": 9,
+        "plan": 11
+      },
+      "overall": {
+        "api": 53.7,
+        "plan": 46.2
+      },
+      "quality": 42.7,
+      "qualityRank": 10,
+      "dims": {
+        "costComposite": null,
+        "omniNonHallucination": 77.8,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": null,
+        "gdpvalV21": 77.8,
+        "automationBenchAA": 38.9,
+        "aaLcr": 100.0,
+        "omniAccuracy": 16.7,
+        "hle": 61.1,
+        "gpqaDiamond": null,
+        "scicode": 83.3,
+        "critpt": 55.6,
+        "intelligenceIndex": 52.8,
+        "speed": 5.9,
+        "bugHuntFixedOf105": 8.8
+      },
+      "costDims": {
+        "api": 83.3,
+        "plan": 55.6
+      },
+      "raw": {
+        "omniNonHallucination": 59.38,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": null,
+        "gdpvalV21": 1684.34,
+        "automationBenchAA": 58.62,
+        "aaLcr": 86.33,
+        "omniAccuracy": 34.85,
+        "hle": 49.35,
+        "gpqaDiamond": null,
+        "scicode": 60.88,
+        "critpt": 26.57,
+        "intelligenceIndex": 46.3242065310383,
+        "speed": 48.0431227818126,
+        "bugHuntFixedOf105": 18
+      },
+      "coverage": {
+        "pct": 69.7,
+        "availablePriority": 92,
+        "totalPriority": 132,
+        "missing": [
+          "Terminal-Bench 4.0",
+          "Instruction Following (LiveBench)",
+          "DeepSWE v1.1",
+          "GPQA Diamond (legacy)"
+        ]
+      },
+      "cost": {
+        "apiUsd": 206.65533881883294,
+        "planUsdPerRun": 137.77022587922195,
+        "planUsdPerPoint": 2.974043943675812,
+        "planComparableUsdPerPoint": 2.974043943675812,
+        "fallback": null,
+        "route": {
+          "id": "mimo-provisional-user-assumption",
+          "planLabel": "MiMo · provisional 1.5x assumption",
+          "planFeeUsd": null,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": null,
+          "sourceUrl": null,
+          "sourceDate": null
+        }
+      },
+      "intelligenceIndex": {
+        "value": 46.3242065310383,
+        "status": "measured"
+      },
+      "speed": 48.0431227818126,
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "tier": "Premium",
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null
+    },
+    {
       "slug": "mimo-v2-6-flash",
       "name": "MiMo-V2.6-Flash",
       "shortName": "MiMo V2.6 Flash",
@@ -1272,11 +1380,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 10,
-        "plan": 11
+        "plan": 12
       },
       "overall": {
         "api": 50.7,
-        "plan": 46.9
+        "plan": 44.9
       },
       "quality": 24.5,
       "qualityRank": 16,
@@ -1300,7 +1408,7 @@
       },
       "costDims": {
         "api": 100.0,
-        "plan": 88.9
+        "plan": 83.3
       },
       "raw": {
         "omniNonHallucination": 45.64,
@@ -1359,7 +1467,7 @@
         "api": true,
         "plan": false
       },
-      "tier": "Budget",
+      "tier": "Near-Budget",
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Flash",
       "aaFrontierIntelligenceGap": 0,
@@ -1376,11 +1484,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 13,
-        "plan": 12
+        "plan": 13
       },
       "overall": {
         "api": 42.4,
-        "plan": 43.5
+        "plan": 42.4
       },
       "quality": 29.0,
       "qualityRank": 15,
@@ -1404,7 +1512,7 @@
       },
       "costDims": {
         "api": 94.4,
-        "plan": 100.0
+        "plan": 94.4
       },
       "raw": {
         "omniNonHallucination": 23.27,
@@ -1467,92 +1575,106 @@
       "aaFrontierFootnote": null
     },
     {
-      "slug": "claude-opus-5",
-      "name": "Claude Opus 5",
-      "shortName": "Opus 5",
+      "slug": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "shortName": "Haiku 5.5",
       "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5",
-      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
+      "aaVariant": "xhigh",
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 14,
-        "plan": 13
+        "api": 16,
+        "plan": 14
       },
       "overall": {
-        "api": 40.7,
-        "plan": 39.6
+        "api": 37.9,
+        "plan": 40.3
       },
-      "quality": 48.9,
-      "qualityRank": 9,
+      "quality": 24.0,
+      "qualityRank": 17,
       "dims": {
         "costComposite": null,
-        "omniNonHallucination": 27.8,
-        "terminalBenchV4": 83.3,
-        "livebenchInstructionFollowing": 36.4,
-        "deepswePassAt1": 33.3,
-        "gdpvalV21": 88.9,
-        "automationBenchAA": 27.8,
-        "aaLcr": 16.7,
-        "omniAccuracy": 83.3,
-        "hle": 83.3,
-        "gpqaDiamond": 62.5,
-        "scicode": 50.0,
-        "critpt": 66.7,
-        "intelligenceIndex": 72.2,
-        "speed": 23.5,
-        "bugHuntFixedOf105": 47.1
+        "omniNonHallucination": 72.2,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": 0.0,
+        "gdpvalV21": 33.3,
+        "automationBenchAA": 0.0,
+        "aaLcr": 11.1,
+        "omniAccuracy": 22.2,
+        "hle": 33.3,
+        "gpqaDiamond": null,
+        "scicode": 16.7,
+        "critpt": 50.0,
+        "intelligenceIndex": 30.6,
+        "speed": 100.0,
+        "bugHuntFixedOf105": 20.6
       },
       "costDims": {
-        "api": 5.6,
-        "plan": 0.0
+        "api": 88.9,
+        "plan": 100.0
       },
       "raw": {
-        "omniNonHallucination": 39.18,
-        "terminalBenchV4": 53.9,
-        "livebenchInstructionFollowing": 63.7665,
-        "deepswePassAt1": 62.5,
-        "gdpvalV21": 1721.15,
-        "automationBenchAA": 56.57,
-        "aaLcr": 79.33,
-        "omniAccuracy": 60.87,
-        "hle": 54.87,
-        "gpqaDiamond": 93.23,
-        "scicode": 56.37,
-        "critpt": 29.14,
-        "intelligenceIndex": 50.7771115797629,
-        "speed": 59.8728104023725,
-        "bugHuntFixedOf105": 27.0
+        "omniNonHallucination": 55.57,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": 49.0,
+        "gdpvalV21": 1513.05,
+        "automationBenchAA": 35.95,
+        "aaLcr": 78.33,
+        "omniAccuracy": 34.95,
+        "hle": 42.68,
+        "gpqaDiamond": null,
+        "scicode": 51.74,
+        "critpt": 22.57,
+        "intelligenceIndex": 41.2489304677024,
+        "speed": 195.273087468701,
+        "bugHuntFixedOf105": 18.3
       },
       "coverage": {
-        "pct": 100.0,
-        "availablePriority": 132,
+        "pct": 88.64,
+        "availablePriority": 117,
         "totalPriority": 132,
-        "missing": []
+        "missing": [
+          "Terminal-Bench 4.0",
+          "Instruction Following (LiveBench)",
+          "GPQA Diamond (legacy)"
+        ]
       },
       "cost": {
-        "apiUsd": 7274.7418382622345,
-        "planUsdPerRun": null,
-        "planUsdPerPoint": null,
-        "planComparableUsdPerPoint": 143.26813030384275,
-        "fallback": "api",
-        "route": null
+        "apiUsd": 157.5758646895501,
+        "planUsdPerRun": 2.675311794389645,
+        "planUsdPerPoint": 0.06485772513506487,
+        "planComparableUsdPerPoint": 0.06485772513506487,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        }
       },
       "intelligenceIndex": {
-        "value": 50.7771115797629,
+        "value": 41.2489304677024,
         "status": "measured"
       },
-      "speed": 59.8728104023725,
+      "speed": 195.273087468701,
       "grade": "measured",
       "pareto": {
         "api": false,
-        "plan": false
+        "plan": true
       },
-      "tier": "Expensive",
-      "aaFrontierTier": null,
-      "aaFrontierConfiguration": null,
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null
+      "tier": "Budget",
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
     },
     {
       "slug": "gemini-3-8-flash",
@@ -1565,11 +1687,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 12,
-        "plan": 14
+        "plan": 15
       },
       "overall": {
         "api": 43.5,
-        "plan": 39.3
+        "plan": 37.2
       },
       "quality": 42.0,
       "qualityRank": 11,
@@ -1593,7 +1715,7 @@
       },
       "costDims": {
         "api": 50.0,
-        "plan": 27.8
+        "plan": 16.7
       },
       "raw": {
         "omniNonHallucination": 44.82,
@@ -1653,11 +1775,11 @@
       "exclusionReasons": [],
       "rank": {
         "api": 15,
-        "plan": 15
+        "plan": 16
       },
       "overall": {
         "api": 40.5,
-        "plan": 36.3
+        "plan": 34.1
       },
       "quality": 40.8,
       "qualityRank": 12,
@@ -1681,7 +1803,7 @@
       },
       "costDims": {
         "api": 38.9,
-        "plan": 16.7
+        "plan": 5.6
       },
       "raw": {
         "omniNonHallucination": 70.45,
@@ -1731,98 +1853,6 @@
       "aaFrontierFootnote": null
     },
     {
-      "slug": "claude-haiku-5-5",
-      "name": "Claude Haiku 5.5",
-      "shortName": "Haiku 5.5",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
-      "aaVariant": "xhigh",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "rank": {
-        "api": 16,
-        "plan": 16
-      },
-      "overall": {
-        "api": 37.9,
-        "plan": 32.0
-      },
-      "quality": 24.0,
-      "qualityRank": 17,
-      "dims": {
-        "costComposite": null,
-        "omniNonHallucination": 72.2,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": 0.0,
-        "gdpvalV21": 33.3,
-        "automationBenchAA": 0.0,
-        "aaLcr": 11.1,
-        "omniAccuracy": 22.2,
-        "hle": 33.3,
-        "gpqaDiamond": null,
-        "scicode": 16.7,
-        "critpt": 50.0,
-        "intelligenceIndex": 30.6,
-        "speed": 100.0,
-        "bugHuntFixedOf105": 20.6
-      },
-      "costDims": {
-        "api": 88.9,
-        "plan": 61.1
-      },
-      "raw": {
-        "omniNonHallucination": 55.57,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": 49.0,
-        "gdpvalV21": 1513.05,
-        "automationBenchAA": 35.95,
-        "aaLcr": 78.33,
-        "omniAccuracy": 34.95,
-        "hle": 42.68,
-        "gpqaDiamond": null,
-        "scicode": 51.74,
-        "critpt": 22.57,
-        "intelligenceIndex": 41.2489304677024,
-        "speed": 195.273087468701,
-        "bugHuntFixedOf105": 18.3
-      },
-      "coverage": {
-        "pct": 88.64,
-        "availablePriority": 117,
-        "totalPriority": 132,
-        "missing": [
-          "Terminal-Bench 4.0",
-          "Instruction Following (LiveBench)",
-          "GPQA Diamond (legacy)"
-        ]
-      },
-      "cost": {
-        "apiUsd": 157.5758646895501,
-        "planUsdPerRun": null,
-        "planUsdPerPoint": null,
-        "planComparableUsdPerPoint": 3.820120010455321,
-        "fallback": "api",
-        "route": null
-      },
-      "intelligenceIndex": {
-        "value": 41.2489304677024,
-        "status": "measured"
-      },
-      "speed": 195.273087468701,
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "tier": "Premium",
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
-    },
-    {
       "slug": "qwen3-8-max",
       "name": "Qwen3.8 Max",
       "shortName": "Qwen3.8 Max",
@@ -1837,7 +1867,7 @@
       },
       "overall": {
         "api": 31.3,
-        "plan": 29.1
+        "plan": 26.9
       },
       "quality": 33.5,
       "qualityRank": 14,
@@ -1861,7 +1891,7 @@
       },
       "costDims": {
         "api": 22.2,
-        "plan": 11.1
+        "plan": 0.0
       },
       "raw": {
         "omniNonHallucination": 71.16,
@@ -1927,7 +1957,7 @@
       },
       "overall": {
         "api": 31.4,
-        "plan": 26.2
+        "plan": 24.1
       },
       "quality": 21.9,
       "qualityRank": 18,
@@ -1951,7 +1981,7 @@
       },
       "costDims": {
         "api": 72.2,
-        "plan": 44.4
+        "plan": 33.3
       },
       "raw": {
         "omniNonHallucination": 8.3,
@@ -2015,7 +2045,7 @@
       },
       "overall": {
         "api": 26.5,
-        "plan": 21.0
+        "plan": 18.8
       },
       "quality": 17.9,
       "qualityRank": 19,
@@ -2039,7 +2069,7 @@
       },
       "costDims": {
         "api": 61.1,
-        "plan": 33.3
+        "plan": 22.2
       },
       "raw": {
         "omniNonHallucination": 5.17,
@@ -2161,11 +2191,21 @@
       },
       "cost": {
         "apiUsd": 11160.864676562578,
-        "planUsdPerRun": null,
-        "planUsdPerPoint": null,
-        "planComparableUsdPerPoint": 224.90035661050658,
-        "fallback": "api",
-        "route": null
+        "planUsdPerRun": 189.488364627548,
+        "planUsdPerPoint": 3.818342217495867,
+        "planComparableUsdPerPoint": 3.818342217495867,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        }
       },
       "intelligenceIndex": {
         "value": 49.6258202733378,
@@ -2254,11 +2294,21 @@
       },
       "cost": {
         "apiUsd": 6873.860602077013,
-        "planUsdPerRun": null,
-        "planUsdPerPoint": null,
-        "planComparableUsdPerPoint": 164.48612929916493,
-        "fallback": "api",
-        "route": null
+        "planUsdPerRun": 116.70391514561992,
+        "planUsdPerPoint": 2.7926337741793708,
+        "planComparableUsdPerPoint": 2.7926337741793708,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        }
       },
       "intelligenceIndex": {
         "value": 41.7899103794639,
@@ -2347,11 +2397,21 @@
       },
       "cost": {
         "apiUsd": 6998.250634094257,
-        "planUsdPerRun": null,
-        "planUsdPerPoint": null,
-        "planComparableUsdPerPoint": 183.37370916161495,
-        "fallback": "api",
-        "route": null
+        "planUsdPerRun": 118.81580023929129,
+        "planUsdPerPoint": 3.113305758261714,
+        "planComparableUsdPerPoint": 3.113305758261714,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        }
       },
       "intelligenceIndex": {
         "value": 38.1638712882576,
@@ -3246,10 +3306,10 @@
         "unit": "overall"
       },
       "other": {
-        "slug": "claude-opus-5-5",
+        "slug": "claude-sonnet-5-5",
         "label": "Best on a subscription",
-        "reason": "Claude Opus 5.5 ranks #1 on a subscription and #6 in the API ranking.",
-        "score": 76.9,
+        "reason": "Claude Sonnet 5.5 ranks #1 on a subscription and #3 in the API ranking.",
+        "score": 82.6,
         "unit": "overall on a subscription"
       },
       "budget": {
@@ -3262,33 +3322,33 @@
     },
     "plan": {
       "value": {
-        "slug": "claude-opus-5-5",
+        "slug": "claude-sonnet-5-5",
         "label": "Best overall value",
-        "reason": "Claude Opus 5.5 has the highest overall score in the Plan ranking at 76.9, costing $2.57 per Index point.",
-        "score": 76.9,
+        "reason": "Claude Sonnet 5.5 has the highest overall score in the Plan ranking at 82.6, costing $2.20 per Index point.",
+        "score": 82.6,
         "unit": "overall"
       },
       "other": {
         "slug": "gemini-4-argon",
         "label": "Best at API rates",
-        "reason": "Gemini 4 Argon ranks #1 at API rates and #4 in the Plan ranking.",
+        "reason": "Gemini 4 Argon ranks #1 at API rates and #5 in the Plan ranking.",
         "score": 74.1,
         "unit": "overall at API rates"
       },
       "budget": {
         "slug": "gpt-6-1-sol",
         "label": "Best on a budget",
-        "reason": "GPT-6.1 Sol scores best overall (73.6) among the cheapest third, at $1.94 per Index point.",
-        "score": 73.6,
+        "reason": "GPT-6.1 Sol scores best overall (72.4) among the cheapest third, at $1.94 per Index point.",
+        "score": 72.4,
         "unit": "overall"
       }
     }
   },
   "planMeta": {
     "asOf": "2026-10-08",
-    "routeCount": 9,
-    "supportedModelCount": 10,
-    "fallbackModelCount": 9,
+    "routeCount": 12,
+    "supportedModelCount": 13,
+    "fallbackModelCount": 6,
     "totalModelCount": 19
   }
 }

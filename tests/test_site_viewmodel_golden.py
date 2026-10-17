@@ -178,9 +178,9 @@ def test_coverage_equals_committed_metric_coverage(bundle, ranked, scores):
 def test_plan_meta_and_tiers(bundle, ranked):
     assert bundle.rankings["planMeta"] == {
         "asOf": "2026-10-08",
-        "routeCount": 9,
-        "supportedModelCount": 10,
-        "fallbackModelCount": 9,
+        "routeCount": 12,
+        "supportedModelCount": 13,
+        "fallbackModelCount": 6,
         "totalModelCount": 19,
     }
     models = by_slug(bundle.rankings)
@@ -222,9 +222,9 @@ def test_picks_show_three_different_models_with_data_driven_labels(bundle):
     for basis in ("api", "plan"):
         assert len({pick["slug"] for pick in picks[basis].values()}) == 3
     assert picks["plan"]["other"]["label"] == "Best at API rates"
-    assert models_rank(bundle, picks["plan"]["other"]["slug"]) == {"api": 1, "plan": 4}
+    assert models_rank(bundle, picks["plan"]["other"]["slug"]) == {"api": 1, "plan": 5}
     assert picks["api"]["other"]["label"] == "Best on a subscription"
-    assert models_rank(bundle, picks["api"]["other"]["slug"]) == {"api": 6, "plan": 1}
+    assert models_rank(bundle, picks["api"]["other"]["slug"]) == {"api": 3, "plan": 1}
 
 
 def models_rank(bundle, slug):
@@ -296,7 +296,7 @@ def test_model_document_plans_history_and_frontier(bundle):
     first = opus["plans"][0]
     assert first["usdPerRun"] == pytest.approx(opus["cost"]["apiUsd"] / first["valueMultiple"])
     assert opus["cost"] == by_slug(bundle.rankings)["claude-opus-5-5"]["cost"]
-    assert [h["version"] for h in opus["history"]][-1] == "v1.9.7"
+    assert [h["version"] for h in opus["history"]][-1] == "v1.9.8"
     assert opus["history"][-1]["rank"] == opus["summary"]["rank"]
     assert opus["frontier"]["onAaFrontier"] is True
     assert "frontier" in opus["frontier"]["aaFrontierNote"].lower()
@@ -310,9 +310,9 @@ def test_model_document_plans_history_and_frontier(bundle):
 
 def test_models_absent_from_history_only_have_the_current_entry(bundle):
     sol = bundle.models["gpt-6-1-sol"]
-    assert [h["version"] for h in sol["history"]] == ["v1.9.6", "v1.9.7"]
+    assert [h["version"] for h in sol["history"]] == ["v1.9.6", "v1.9.7", "v1.9.8"]
     new = bundle.models["gemini-4-argon"]
-    assert [h["version"] for h in new["history"]] == ["v1.9.7"]
+    assert [h["version"] for h in new["history"]] == ["v1.9.7", "v1.9.8"]
     unranked = bundle.models["claude-fable-5"]
     assert [h["version"] for h in unranked["history"]] == ["v1.5.0"]
     assert unranked["summary"]["rankingEligible"] is False and unranked["summary"]["exclusionReasons"]
@@ -324,7 +324,7 @@ def test_models_absent_from_history_only_have_the_current_entry(bundle):
 def test_plans_document(bundle):
     plans = bundle.plans
     assert plans["asOf"] == "2026-10-08" and plans["policy"]["reportingWindow"]["start"] == "2026-09-08"
-    assert len(plans["routes"]) == 9 and len(plans["candidates"]) == 31
+    assert len(plans["routes"]) == 12 and len(plans["candidates"]) == 31
     route = next(r for r in plans["routes"] if r["id"] == "claude-pro-opus55-semianalysis")
     assert route["grade"] == "measured" and route["provider"] == "Anthropic"
     assert route["modelSlugs"] == ["claude-opus-5-5"] and route["planFeeUsd"] == 20
@@ -351,7 +351,7 @@ def test_benchmarks_document(bundle, scores):
     assert all(c["url"].startswith("https://") for c in doc["aaComponents"])
     assert doc["coverageMatrix"]["cohortN"] == 31 and "intelligenceIndex" in doc["coverageMatrix"]["fields"]
     frontier = doc["frontier"]
-    assert frontier["status"] == "complete" and frontier["checkedAt"] == "2026-10-17T19:28:57+00:00"
+    assert frontier["status"] == "complete" and frontier["checkedAt"] == "2026-10-17T20:23:57+00:00"
     assert len(frontier["rows"]) == 18
     luna = next(r for r in frontier["rows"] if r["aaId"] == "gpt-6-luna")
     assert luna["slug"] == "gpt-6-luna"
@@ -372,7 +372,7 @@ def test_tb4_document(bundle, data):
 
 def test_changelog_document(bundle):
     versions = bundle.changelog["versions"]
-    assert [v["version"] for v in versions] == ["v1.9.7", "v1.9.6", "v1.9.5", "v1.9.4", "v1.9.3", "v1.9.2", "v1.9.1", "v1.9.0", "v1.5.0"]
+    assert [v["version"] for v in versions] == ["v1.9.8", "v1.9.7", "v1.9.6", "v1.9.5", "v1.9.4", "v1.9.3", "v1.9.2", "v1.9.1", "v1.9.0", "v1.5.0"]
     assert versions[0]["models"] == 19 and versions[0]["dimensions"] == 16
     assert versions[0]["date"] == "October 18, 2026"
     assert versions[-1]["rankChanges"] == []
@@ -385,7 +385,7 @@ def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
     assert set(page["headline"]) == {"api", "plan"}
     assert page["headline"]["api"] == "Gemini 4 Argon leads the API ranking at 74.1; Claude Sonnet 5.5 leads on quality."
-    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 76.9; Claude Sonnet 5.5 leads on quality."
+    assert page["headline"]["plan"] == "Claude Sonnet 5.5 leads the Plan ranking at 82.6 and also leads on quality."
     for sentence in page["headline"].values():
         assert len(sentence.split()) <= 18
     assert page["picks"] == bundle.rankings["picks"]

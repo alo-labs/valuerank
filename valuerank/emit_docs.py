@@ -458,11 +458,24 @@ def main(*, root=ROOT, data=DATA) -> int:
         ])
 
 
+    claude_common = sorted(
+        (route for route in plan_route_document.get("routes", []) if str(route.get("id", "")).endswith("common-opus55-assumption")),
+        key=lambda route: float(route.get("planPriceUsd") or 0),
+    )
+    claude_common_copy = (
+        "The common Claude multiples ("
+        + "; ".join(
+            f"{'Pro' if route['plan'] == 'Claude Pro' else 'Max $' + str(route['planPriceUsd'])} {route['valueMultiple']}×" for route in claude_common
+        )
+        + ") are an owner-authorized (2026-10-18) application of Opus 5.5's measured figures to the other Claude models, not measurements of those models; "
+        "the same source measured Fable 5.1 at 12.4–12.7× on the Max plans, so the applied multiples may overstate the plan value of cheaper Claude models. "
+    ) if claude_common else ""
     plan_policy_copy = (
         f"Plan route evidence as of {plan_route_document.get('asOf', 'not recorded')}. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. Effective Plan cost per Index point is that amount divided by the model's AA Intelligence Index; the Plan-basis rank uses it so that a plan allowance is credited with the work it buys and token-efficient models are rewarded, while models without an eligible route are compared on API cost per Index point. "
         "The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. "
         "For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. "
         "The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. "
+        + claude_common_copy +
         "The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. "
         "For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator."
     )

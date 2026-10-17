@@ -308,13 +308,63 @@
   ],
   "cost": {
     "apiUsd": 6998.250634094257,
-    "planUsdPerRun": null,
-    "planUsdPerPoint": null,
-    "planComparableUsdPerPoint": 183.37370916161495,
-    "fallback": "api",
-    "route": null
+    "planUsdPerRun": 118.81580023929129,
+    "planUsdPerPoint": 3.113305758261714,
+    "planComparableUsdPerPoint": 3.113305758261714,
+    "fallback": null,
+    "route": {
+      "id": "claude-pro-common-opus55-assumption",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06"
+    }
   },
-  "plans": [],
+  "plans": [
+    {
+      "id": "claude-pro-common-opus55-assumption",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "usdPerRun": 118.81580023929129,
+      "usdPerPoint": 3.113305758261714,
+      "selected": true
+    },
+    {
+      "id": "claude-max20x-common-opus55-assumption",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "usdPerRun": 119.362964934236,
+      "usdPerPoint": 3.1276430012214727,
+      "selected": false
+    },
+    {
+      "id": "claude-max5x-common-opus55-assumption",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "usdPerRun": 122.2401857483713,
+      "usdPerPoint": 3.20303422116358,
+      "selected": false
+    }
+  ],
   "history": [
     {
       "version": "v1.5.0",

@@ -71,6 +71,7 @@
         <div><dt>Numerator</dt><dd>{{ policy.defaultNumerator }}</dd></div>
         <div><dt>Controlled source</dt><dd><a href="{{ policy.selectedSourceException.sourceUrl }}" rel="noopener">{{ policy.selectedSourceException.providers | join(" and ") }}</a>, {{ policy.selectedSourceException.publicationDate }}: {{ policy.selectedSourceException.evidenceType }}</dd></div>
         <div><dt>GPT models</dt><dd>{{ policy.gptApplication }}</dd></div>
+        <div><dt>Claude models</dt><dd>{{ policy.claudeApplication }}</dd></div>
         <div><dt>MiMo models</dt><dd>{{ policy.mimoApplication }}</dd></div>
         <div><dt>Other models</dt><dd>{{ policy.unsupportedModels }}</dd></div>
       </dl>

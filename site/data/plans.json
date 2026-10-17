@@ -18,7 +18,8 @@
     },
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption.",
     "mimoApplication": "User authorizes provisional 1.5x for both MiMo candidate variants. Plan fee and measured API-equivalent numerator remain unavailable.",
-    "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT and MiMo assumptions."
+    "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions.",
+    "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model."
   },
   "routes": [
     {
@@ -198,6 +199,72 @@
         "mimo-v2-6-flash"
       ],
       "notes": "Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable."
+    },
+    {
+      "id": "claude-pro-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "apiEquivalentUsd": 1178,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5",
+        "claude-fable-5",
+        "claude-opus-4-8",
+        "claude-sonnet-5",
+        "claude-haiku-5-5",
+        "claude-sonnet-5-5"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Pro figure ($1,178/month at $20, 58.9x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max5x-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "apiEquivalentUsd": 5725,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5",
+        "claude-fable-5",
+        "claude-opus-4-8",
+        "claude-sonnet-5",
+        "claude-haiku-5-5",
+        "claude-sonnet-5-5"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max20x-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "apiEquivalentUsd": 11726,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5",
+        "claude-fable-5",
+        "claude-opus-4-8",
+        "claude-sonnet-5",
+        "claude-haiku-5-5",
+        "claude-sonnet-5-5"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
     }
   ],
   "candidates": [
@@ -213,27 +280,27 @@
         "status": "measured"
       },
       "apiUsd": 11160.864676562578,
-      "planUsdPerRun": null,
-      "planUsdPerPoint": null,
-      "fallback": "api",
-      "routeId": null
+      "planUsdPerRun": 189.488364627548,
+      "planUsdPerPoint": 3.818342217495867,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption"
     },
     {
       "slug": "claude-haiku-5-5",
       "name": "Claude Haiku 5.5",
       "rank": {
         "api": 16,
-        "plan": 16
+        "plan": 14
       },
       "intelligenceIndex": {
         "value": 41.2489304677024,
         "status": "measured"
       },
       "apiUsd": 157.5758646895501,
-      "planUsdPerRun": null,
-      "planUsdPerPoint": null,
-      "fallback": "api",
-      "routeId": null
+      "planUsdPerRun": 2.675311794389645,
+      "planUsdPerPoint": 0.06485772513506487,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption"
     },
     {
       "slug": "claude-opus-4-8",
@@ -247,34 +314,34 @@
         "status": "measured"
       },
       "apiUsd": 6873.860602077013,
-      "planUsdPerRun": null,
-      "planUsdPerPoint": null,
-      "fallback": "api",
-      "routeId": null
+      "planUsdPerRun": 116.70391514561992,
+      "planUsdPerPoint": 2.7926337741793708,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption"
     },
     {
       "slug": "claude-opus-5",
       "name": "Claude Opus 5",
       "rank": {
         "api": 14,
-        "plan": 13
+        "plan": 9
       },
       "intelligenceIndex": {
         "value": 50.7771115797629,
         "status": "measured"
       },
       "apiUsd": 7274.7418382622345,
-      "planUsdPerRun": null,
-      "planUsdPerPoint": null,
-      "fallback": "api",
-      "routeId": null
+      "planUsdPerRun": 123.51004818781384,
+      "planUsdPerPoint": 2.4323961002350214,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption"
     },
     {
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "rank": {
         "api": 6,
-        "plan": 1
+        "plan": 2
       },
       "intelligenceIndex": {
         "value": 57.6223698102963,
@@ -298,27 +365,27 @@
         "status": "measured"
       },
       "apiUsd": 6998.250634094257,
-      "planUsdPerRun": null,
-      "planUsdPerPoint": null,
-      "fallback": "api",
-      "routeId": null
+      "planUsdPerRun": 118.81580023929129,
+      "planUsdPerPoint": 3.113305758261714,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption"
     },
     {
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
         "api": 3,
-        "plan": 5
+        "plan": 1
       },
       "intelligenceIndex": {
         "value": 56.0001286580794,
         "status": "measured"
       },
       "apiUsd": 7259.502265782336,
-      "planUsdPerRun": null,
-      "planUsdPerPoint": null,
-      "fallback": "api",
-      "routeId": null
+      "planUsdPerRun": 123.25131181294289,
+      "planUsdPerPoint": 2.200911225855922,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption"
     },
     {
       "slug": "deepseek-v4-flash",
@@ -410,7 +477,7 @@
       "name": "Gemini 3.8 Flash",
       "rank": {
         "api": 12,
-        "plan": 14
+        "plan": 15
       },
       "intelligenceIndex": {
         "value": 40.9262321765904,
@@ -427,7 +494,7 @@
       "name": "Gemini 4 Argon",
       "rank": {
         "api": 1,
-        "plan": 4
+        "plan": 5
       },
       "intelligenceIndex": {
         "value": 52.5605655745982,
@@ -461,7 +528,7 @@
       "name": "GLM-5.3",
       "rank": {
         "api": 15,
-        "plan": 15
+        "plan": 16
       },
       "intelligenceIndex": {
         "value": 44.777392385614,
@@ -546,7 +613,7 @@
       "name": "GPT-6.1 Sol",
       "rank": {
         "api": 2,
-        "plan": 2
+        "plan": 3
       },
       "intelligenceIndex": {
         "value": 51.8332597011541,
@@ -563,7 +630,7 @@
       "name": "GPT-6 Astra",
       "rank": {
         "api": 4,
-        "plan": 3
+        "plan": 4
       },
       "intelligenceIndex": {
         "value": 52.3863277108782,
@@ -580,7 +647,7 @@
       "name": "GPT-6 Luna",
       "rank": {
         "api": 13,
-        "plan": 12
+        "plan": 13
       },
       "intelligenceIndex": {
         "value": 38.1245186869738,
@@ -665,7 +732,7 @@
       "name": "MiMo-V2.6-Flash",
       "rank": {
         "api": 10,
-        "plan": 11
+        "plan": 12
       },
       "intelligenceIndex": {
         "value": 37.8843590141754,
@@ -682,7 +749,7 @@
       "name": "MiMo-V2.6-Pro",
       "rank": {
         "api": 9,
-        "plan": 9
+        "plan": 11
       },
       "intelligenceIndex": {
         "value": 46.3242065310383,

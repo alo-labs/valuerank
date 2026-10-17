@@ -51,33 +51,59 @@ function labelBox(pointX, pointY, ax, ay, labelWidth, labelHeight, xanchor, yanc
 const overlapArea = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) *
   Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
 
-function pointGap(box, point) {
-  return Math.hypot(point.x - clamp(point.x, box.left, box.right), point.y - clamp(point.y, box.top, box.bottom));
+function pointGapSquared(box, point) {
+  const dx = point.x - clamp(point.x, box.left, box.right);
+  const dy = point.y - clamp(point.y, box.top, box.bottom);
+  return dx * dx + dy * dy;
 }
 
-function candidateOffsets(adjacentRadius, requestedRadii, candidateStep) {
-  const directions = Array.from({ length: 24 }, (_, index) => {
-    const angle = -Math.PI / 2 + (index * Math.PI) / 12;
-    const ux = Math.cos(angle);
-    const uy = Math.sin(angle);
-    return { ux, uy, xa: ux > 0.18 ? 'left' : ux < -0.18 ? 'right' : 'center', ya: uy > 0.18 ? 'top' : uy < -0.18 ? 'bottom' : 'middle' };
-  });
-  const steps = [0, 4, 8, 14, 22, 32, 46, 64, 86, 114, 148, 190, 240, 300, 380];
-  const radii = [...new Set([
-    ...steps.map((step) => adjacentRadius + step),
-    ...requestedRadii.map((radius) => Math.max(adjacentRadius, Number(radius))),
-  ].filter(Number.isFinite))].sort((a, b) => a - b);
-  const maxRadius = Math.max(...radii, adjacentRadius + 160);
+const pointGap = (box, point) => Math.sqrt(pointGapSquared(box, point));
+
+// Labels stay beside their dots: no label box may end more than MAX_GAP pixels from its marker's edge.
+const DEFAULT_MAX_GAP = 18;
+const REACH_TOLERANCE = 1e-6;
+const RING_STEPS = [0, 2, 4, 6, 9, 12, 16, 20, 26, 32, 40];
+const shiftOf = (value) => Number(value) || 0;
+
+// 24 compass directions; the anchor keeps the label box on the far side of the offset point from the dot.
+const DIRECTIONS = Array.from({ length: 24 }, (_, index) => {
+  const angle = -Math.PI / 2 + (index * Math.PI) / 12;
+  const ux = Math.cos(angle);
+  const uy = Math.sin(angle);
+  return { ux, uy, xa: ux > 0.18 ? 'left' : ux < -0.18 ? 'right' : 'center', ya: uy > 0.18 ? 'top' : uy < -0.18 ? 'bottom' : 'middle' };
+});
+
+/**
+ * The distances a label may keep from its dot. `reach` is the largest centre-to-box distance allowed:
+ * the marker radius plus `maxGap`, never less than the adjacent distance itself.
+ */
+function resolveReach(options) {
+  const fontSize = positive(options.fontSize, 9);
+  const markerRadius = positive(options.markerRadius, 11);
+  const labelGap = positive(options.labelGap, Math.max(3, fontSize * 0.45));
+  const adjacentRadius = positive(options.adjacentRadius, markerRadius + labelGap);
+  const maxGap = positive(options.maxGap, DEFAULT_MAX_GAP);
+  return { fontSize, markerRadius, adjacentRadius, reach: Math.max(markerRadius + maxGap, adjacentRadius) };
+}
+
+/** Ring distances from the adjacent radius out to the cap, closest first. Requested radii are clamped into that range. */
+function ringRadii(adjacentRadius, reach, requestedRadii) {
+  return [...new Set([adjacentRadius, reach, ...RING_STEPS.map((step) => adjacentRadius + step), ...requestedRadii]
+    .map(Number)
+    .filter(Number.isFinite)
+    .map((radius) => clamp(radius, adjacentRadius, reach)))].sort((a, b) => a - b);
+}
+
+function candidateOffsets(adjacentRadius, reach, requestedRadii, candidateStep) {
   const offsets = [];
-  const add = (ax, ay, xa, ya) => {
-    const radius = Math.hypot(ax, ay);
-    if (radius >= adjacentRadius - 1 && radius <= maxRadius + 1) offsets.push({ ax, ay, xa, ya, radius });
-  };
-  radii.forEach((radius) => directions.forEach((d) => add(d.ux * radius, d.uy * radius, d.xa, d.ya)));
+  ringRadii(adjacentRadius, reach, requestedRadii).forEach((radius) => DIRECTIONS.forEach((d) => offsets.push({ ax: d.ux * radius, ay: d.uy * radius, xa: d.xa, ya: d.ya, radius })));
   const edge = candidateStep * 0.35;
-  for (let ax = -maxRadius; ax <= maxRadius; ax += candidateStep) {
-    for (let ay = -maxRadius; ay <= maxRadius; ay += candidateStep) {
-      add(ax, ay, ax > edge ? 'left' : ax < -edge ? 'right' : 'center', ay > edge ? 'top' : ay < -edge ? 'bottom' : 'middle');
+  for (let ax = -reach; ax <= reach; ax += candidateStep) {
+    for (let ay = -reach; ay <= reach; ay += candidateStep) {
+      const radius = Math.hypot(ax, ay);
+      if (radius >= adjacentRadius - 1 && radius <= reach) {
+        offsets.push({ ax, ay, xa: ax > edge ? 'left' : ax < -edge ? 'right' : 'center', ya: ay > edge ? 'top' : ay < -edge ? 'bottom' : 'middle', radius });
+      }
     }
   }
   return offsets.sort((a, b) => a.radius - b.radius);
@@ -86,22 +112,20 @@ function candidateOffsets(adjacentRadius, requestedRadii, candidateStep) {
 /**
  * Greedy-plus-compaction label placement in pixel space.
  * points: [{id?, label, x, y, frontier?}] in data coordinates.
- * geometry: see readGeometry. Returns Plotly annotation objects (paper-anchored).
+ * geometry: see readGeometry. Returns arrowless Plotly annotation objects (paper-anchored, positioned
+ * with xshift/yshift, where yshift is positive upward). Every label stays within `options.maxGap`
+ * pixels (default 18) of its marker's edge; when the neighbourhood is crowded labels overlap
+ * slightly rather than travelling further from their dots.
  */
 export function buildCollisionSafeLabelAnnotations(points, geometry, options = {}) {
   if (!geometry || !Array.isArray(points) || !points.length) return [];
   const { x: xa, y: ya } = geometry;
-  const fontSize = positive(options.fontSize, 9);
+  const { fontSize, markerRadius, adjacentRadius, reach } = resolveReach(options);
   const safety = positive(options.safety, 1.15);
-  const markerRadius = positive(options.markerRadius, 11);
   const labelPad = positive(options.labelPad, Math.max(4, fontSize * 0.55));
-  const labelGap = positive(options.labelGap, Math.max(3, fontSize * 0.45));
-  const adjacentRadius = positive(options.adjacentRadius, markerRadius + labelGap);
   const dark = geometry.dark;
   const textColor = options.textColor ?? (dark ? '#e2e8f0' : '#0f172a');
   const frontierColor = options.frontierColor ?? (dark ? '#34d399' : '#047857');
-  const arrowMuted = options.arrowMuted ?? (dark ? 'rgba(148,163,184,.75)' : 'rgba(71,85,105,.7)');
-  const arrowFrontier = options.arrowFrontier ?? (dark ? 'rgba(52,211,153,.95)' : 'rgba(4,120,87,.85)');
 
   const coordinate = (axis, value) => {
     const numeric = Number(value);
@@ -127,23 +151,38 @@ export function buildCollisionSafeLabelAnnotations(points, geometry, options = {
   }).filter(Boolean);
   if (!items.length) return [];
 
-  const offsets = candidateOffsets(adjacentRadius, Array.isArray(options.radii) ? options.radii : [], Math.max(6, Number(options.candidateStep) || 8));
+  const offsets = candidateOffsets(adjacentRadius, reach, Array.isArray(options.radii) ? options.radii : [], Math.max(6, Number(options.candidateStep) || 8));
   items.forEach((item) => {
     item.isolation = items.reduce((nearest, other) => (other === item ? nearest : Math.min(nearest, Math.hypot(item.px.x - other.px.x, item.px.y - other.px.y))), Infinity);
   });
 
-  const overlapsLabels = (box, placed, skip) => placed.some((p, index) => index !== skip &&
-    !(box.right + labelPad < p.box.left || box.left - labelPad > p.box.right || box.bottom + labelPad < p.box.top || box.top - labelPad > p.box.bottom));
-  const markerPenalty = (box) => items.reduce((total, item) => {
-    const distance = pointGap(box, item.px);
-    return total + (distance < markerRadius ? markerRadius - distance + 1 : 0);
+  // Labels and markers only interact with items near enough for a candidate inside the cap to reach them:
+  // a label box lies within `item.span` of its dot, so two boxes can meet only if their dots are closer than the sum.
+  items.forEach((item) => { item.span = reach + Math.hypot(item.size.wPx, item.size.hPx); });
+  items.forEach((item) => {
+    const distanceTo = (other) => Math.hypot(item.px.x - other.px.x, item.px.y - other.px.y);
+    item.near = items.filter((other) => other !== item && distanceTo(other) <= item.span + other.span + 2 * labelPad);
+    item.markers = [item, ...items.filter((other) => other !== item && distanceTo(other) <= item.span + markerRadius)];
+  });
+  // `slots[item.idx]` is the placement currently chosen for an item (undefined until it has one).
+  const overlapsLabels = (item, box, slots) => item.near.some((other) => {
+    const p = slots[other.idx];
+    return p && !(box.right + labelPad < p.box.left || box.left - labelPad > p.box.right || box.bottom + labelPad < p.box.top || box.top - labelPad > p.box.bottom);
+  });
+  const overlapTotal = (item, box, slots) => item.near.reduce((total, other) => total + (slots[other.idx] ? overlapArea(box, slots[other.idx].box) : 0), 0);
+  const markerReach = markerRadius * markerRadius;
+  const markerPenalty = (item, box) => item.markers.reduce((total, other) => {
+    const squared = pointGapSquared(box, other.px);
+    return total + (squared < markerReach ? markerRadius - Math.sqrt(squared) + 1 : 0);
   }, 0);
   // Labels must sit inside the plot area, not merely inside the figure (which includes the axis margins).
   const area = { left: xa.offset + 2, right: xa.offset + xa.length - 2, top: ya.offset + 2, bottom: ya.offset + ya.length - 2 };
   const inBounds = (box) => box.left >= area.left && box.right <= area.right && box.top >= area.top && box.bottom <= area.bottom;
   const spillCost = (box) => Math.max(0, area.left - box.left) + Math.max(0, box.right - area.right) + Math.max(0, area.top - box.top) + Math.max(0, box.bottom - area.bottom);
 
-  function findPlacement(item, placed, skip) {
+  // Preference inside the cap: the closest in-bounds slot that is clear of other labels and markers; failing
+  // that, the slot with the least spill, label overlap and marker coverage (slight overlap beats distance).
+  function findPlacement(item, slots) {
     let bestValid = null;
     let bestInvalid = null;
     for (const offset of offsets) {
@@ -152,30 +191,32 @@ export function buildCollisionSafeLabelAnnotations(points, geometry, options = {
       const box = labelBox(item.px.x, item.px.y, ax, ay, item.size.wPx, item.size.hPx, xanchor, yanchor);
       const gap = pointGap(box, item.px);
       const inChart = inBounds(box);
-      const labelClear = inChart && !overlapsLabels(box, placed, skip);
-      const markerCost = labelClear ? markerPenalty(box) : 0;
-      const candidate = { ax, ay, xa: xanchor, ya: yanchor, box, gap, radius, adjacent: gap <= adjacentRadius + 1, score: gap + radius * 0.01 };
-      if (labelClear && markerCost === 0) {
+      const markerCost = markerPenalty(item, box);
+      const candidate = { ax, ay, xa: xanchor, ya: yanchor, box, gap, radius, score: gap + radius * 0.01 };
+      if (inChart && markerCost === 0 && !overlapsLabels(item, box, slots)) {
         if (!bestValid || candidate.score < bestValid.score) bestValid = candidate;
       } else {
-        const overlap = placed.reduce((total, p, index) => total + (index === skip ? 0 : overlapArea(box, p.box)), 0);
-        candidate.score = overlap * 1000 + markerCost * 100 + (inChart ? 0 : spillCost(box) * 10) + gap + radius * 0.01;
+        candidate.score = spillCost(box) * 1e6 + overlapTotal(item, box, slots) * 1000 + markerCost * 100 + gap + radius * 0.01;
         if (!bestInvalid || candidate.score < bestInvalid.score) bestInvalid = candidate;
       }
     }
     return bestValid ?? bestInvalid;
   }
 
-  const invalid = (entry, placed, index) => overlapsLabels(entry.box, placed, index) || markerPenalty(entry.box) !== 0;
+  const invalid = (entry, slots) => overlapsLabels(entry.item, entry.box, slots) || markerPenalty(entry.item, entry.box) !== 0;
   function placeInOrder(order) {
-    const placed = [];
-    order.forEach((item) => placed.push({ item, ...findPlacement(item, placed, null) }));
+    const slots = [];
+    const placed = order.map((item) => {
+      slots[item.idx] = { item, ...findPlacement(item, slots) };
+      return slots[item.idx];
+    });
     for (let pass = 0; pass < 8; pass += 1) {
       let changed = false;
       placed.forEach((current, index) => {
-        const next = findPlacement(current.item, placed, index);
-        if (next.gap < current.gap - 0.25 || (Math.abs(next.gap - current.gap) <= 0.25 && next.radius < current.radius) || invalid(current, placed, index)) {
-          placed[index] = { item: current.item, ...next };
+        const next = findPlacement(current.item, slots);
+        if (next.gap < current.gap - 0.25 || (Math.abs(next.gap - current.gap) <= 0.25 && next.radius < current.radius) || invalid(current, slots)) {
+          slots[current.item.idx] = { item: current.item, ...next };
+          placed[index] = slots[current.item.idx];
           changed = true;
         }
       });
@@ -184,10 +225,13 @@ export function buildCollisionSafeLabelAnnotations(points, geometry, options = {
     return placed;
   }
   const arrangementScore = (placed) => {
+    const slots = [];
+    placed.forEach((entry) => { slots[entry.item.idx] = entry; });
     const gaps = placed.map((entry) => entry.gap);
     const worst = Math.max(...gaps);
-    return gaps.reduce((total, gap) => total + gap * gap, 0) + worst * worst * 2 +
-      placed.reduce((count, entry, index) => count + (invalid(entry, placed, index) ? 1 : 0), 0) * 1e9;
+    const overlap = placed.reduce((total, entry) => total + entry.item.near.reduce((sum, other) => (other.idx > entry.item.idx ? sum + overlapArea(entry.box, slots[other.idx].box) : sum), 0), 0);
+    return gaps.reduce((total, gap) => total + gap * gap, 0) + worst * worst * 2 + overlap * 50 +
+      placed.reduce((count, entry) => count + (invalid(entry, slots) ? 1 : 0), 0) * 1e9;
   };
 
   const byName = (l, r) => l.label.localeCompare(r.label);
@@ -205,19 +249,13 @@ export function buildCollisionSafeLabelAnnotations(points, geometry, options = {
     if (score < bestScore) { best = candidate; bestScore = score; }
   });
 
-  return best.map(({ item, ax, ay, xa: xanchor, ya: yanchor, adjacent }) => ({
+  return best.map(({ item, ax, ay, xa: xanchor, ya: yanchor }) => ({
     x: item.paper.x,
     y: item.paper.y,
     xref: 'paper',
     yref: 'paper',
     text: item.label,
-    showarrow: !adjacent,
-    arrowhead: 0,
-    arrowsize: 0.95,
-    arrowwidth: 1.3,
-    arrowcolor: item.onFront ? arrowFrontier : arrowMuted,
-    standoff: 0,
-    startstandoff: 0,
+    showarrow: false,
     align: xanchor === 'right' ? 'right' : xanchor === 'center' ? 'center' : 'left',
     xanchor,
     yanchor,
@@ -227,24 +265,27 @@ export function buildCollisionSafeLabelAnnotations(points, geometry, options = {
     borderwidth: 0,
     borderpad: 0,
     captureevents: false,
-    ...(adjacent ? { xshift: ax, yshift: ay } : { ax, ay, axref: 'pixel', ayref: 'pixel' }),
+    // Pixel offsets above are screen-down; Plotly's yshift is positive upward.
+    xshift: ax,
+    yshift: 0 - ay,
   }));
 }
 
-/** Moves an annotation by (dx, dy) pixels. An arrowless label gains a leader line so it stays tied to its point. */
+/** Moves an annotation by (dx, dy) screen pixels. Plotly's xshift is positive rightward and yshift positive upward. */
 function shiftAnnotation(annotation, dx, dy) {
-  if (annotation.showarrow === false) {
-    annotation.ax = (Number(annotation.xshift) || 0) + dx;
-    annotation.ay = (Number(annotation.yshift) || 0) + dy;
-    annotation.xshift = 0;
-    annotation.yshift = 0;
-    annotation.axref = 'pixel';
-    annotation.ayref = 'pixel';
-    annotation.showarrow = true;
-  } else {
-    annotation.ax = (Number(annotation.ax) || 0) + dx;
-    annotation.ay = (Number(annotation.ay) || 0) + dy;
-  }
+  annotation.xshift = shiftOf(annotation.xshift) + dx;
+  annotation.yshift = shiftOf(annotation.yshift) - dy;
+}
+
+/**
+ * Where the label's dot is in screen space. With a plot rectangle it follows from the annotation's paper
+ * coordinates; otherwise it is recovered from the rendered box, the annotation's anchors and its shifts.
+ */
+function dotOf(annotation, rect, plot) {
+  if (plot) return { x: plot.left + annotation.x * (plot.right - plot.left), y: plot.top + (1 - annotation.y) * (plot.bottom - plot.top) };
+  const anchorX = annotation.xanchor === 'left' ? rect.left : annotation.xanchor === 'right' ? rect.right : (rect.left + rect.right) / 2;
+  const anchorY = annotation.yanchor === 'top' ? rect.top : annotation.yanchor === 'bottom' ? rect.bottom : (rect.top + rect.bottom) / 2;
+  return { x: anchorX - shiftOf(annotation.xshift), y: anchorY + shiftOf(annotation.yshift) };
 }
 
 /** One axis of a measured label: clamp into [low, high]; if that would cover its point, flip to the far side when that fits. */
@@ -256,16 +297,20 @@ function insideRange(start, size, anchor, low, high) {
   return mirrored >= low && mirrored + size <= high ? mirrored : clamped;
 }
 
-/** Pulls measured labels that spill out of the plot area back inside. Returns true when any annotation moved. */
-function keepInsidePlot(annotations, boxes, plot) {
+/**
+ * Pulls measured labels that spill out of the plot area back inside, unless that would carry a label
+ * beyond `reach` from its dot. Returns true when any annotation moved.
+ */
+function keepInsidePlot(annotations, boxes, plot, reach) {
   let moved = false;
   boxes.forEach(({ index, rect }) => {
     const annotation = annotations[index];
-    const pointX = plot.left + annotation.x * (plot.right - plot.left);
-    const pointY = plot.top + (1 - annotation.y) * (plot.bottom - plot.top);
-    const left = insideRange(rect.left, rect.right - rect.left, pointX, plot.left, plot.right);
-    const top = insideRange(rect.top, rect.bottom - rect.top, pointY, plot.top, plot.bottom);
+    const dot = dotOf(annotation, rect, plot);
+    const left = insideRange(rect.left, rect.right - rect.left, dot.x, plot.left, plot.right);
+    const top = insideRange(rect.top, rect.bottom - rect.top, dot.y, plot.top, plot.bottom);
     if (left === rect.left && top === rect.top) return;
+    const target = { left, right: left + rect.right - rect.left, top, bottom: top + rect.bottom - rect.top };
+    if (pointGap(target, dot) > reach + REACH_TOLERANCE) return;
     shiftAnnotation(annotation, left - rect.left, top - rect.top);
     moved = true;
   });
@@ -276,25 +321,24 @@ const intersects = (a, b, pad) => a.left < b.right + pad && a.right > b.left - p
 
 /**
  * After the web font loads Plotly's text metrics change. Measure the rendered
- * labels and repack only those that still collide.
+ * labels and repack only those that still collide, each within the proximity
+ * cap (`maxGap`, default 18px from the marker edge) of its own dot. A label with
+ * no free slot inside the cap stays where it is; labels never travel further to escape a collision.
  * io: { readBoxes() -> [{index, rect}], bounds() -> rect, plot?() -> rect, relayout(), waitForPaint() }
  * `plot()` is the plot-area rectangle; when present every label is also kept inside it.
- * Mutates and returns `annotations`.
+ * Mutates (xshift/yshift only, never an arrow) and returns `annotations`.
  */
 export async function repairCollisionSafeLabelAnnotations(annotations, io, options = {}) {
   if (!Array.isArray(annotations) || !annotations.length) return annotations;
   const pad = positive(options.repairPad, 1);
   const maxPasses = positive(options.repairPasses, 5);
   const edge = positive(options.repairEdge, 6);
-  const directions = Array.from({ length: 16 }, (_, index) => {
-    const angle = -Math.PI / 2 + (index * Math.PI) / 8;
-    return { x: Math.cos(angle), y: Math.sin(angle) };
-  });
-  const distances = [4, 10, 16, 24, 34, 48, 68, 96, 132, 174, 224, 284, 352];
+  const { adjacentRadius, reach } = resolveReach(options);
+  const radii = ringRadii(adjacentRadius, reach, []);
   let boxes = io.readBoxes();
   if (boxes.length < annotations.length) return annotations;
   const plot = io.plot ? io.plot() : null;
-  if (plot && keepInsidePlot(annotations, boxes, plot)) {
+  if (plot && keepInsidePlot(annotations, boxes, plot, reach)) {
     await io.relayout();
     await io.waitForPaint();
     boxes = io.readBoxes();
@@ -313,54 +357,30 @@ export async function repairCollisionSafeLabelAnnotations(annotations, io, optio
       ? { left: plot.left + edge, right: plot.right - edge, top: plot.top + edge, bottom: plot.bottom - edge }
       : { left: rect.left + edge, right: rect.right - edge, top: rect.top + edge, bottom: rect.bottom - positive(options.repairBottom, 58) };
     if (bounds.bottom <= bounds.top) bounds.bottom = rect.bottom - edge;
-    const boxesByIndex = new Map(boxes.map((item) => [item.index, item]));
-    const maxLabelWidth = Math.max(...boxes.map((item) => item.rect.right - item.rect.left));
-    const naturalColumns = Math.ceil(Math.sqrt((boxes.length * (bounds.right - bounds.left)) / Math.max(1, bounds.bottom - bounds.top)));
-    const widthColumns = Math.max(2, Math.floor((bounds.right - bounds.left + 10) / Math.max(1, maxLabelWidth + 10)));
-    const gridColumns = positive(options.repairColumns, Math.min(8, Math.max(2, Math.min(naturalColumns, widthColumns))));
-    const gridRows = Math.ceil(boxes.length / gridColumns);
-    const cellWidth = (bounds.right - bounds.left) / gridColumns;
-    const cellHeight = (bounds.bottom - bounds.top) / gridRows;
 
+    // Slots around the label's own dot, closest first; the cap holds by construction (ring radius <= reach).
     const candidatesFor = (box) => {
       const width = box.rect.right - box.rect.left;
       const height = box.rect.bottom - box.rect.top;
-      const candidates = [{ left: box.rect.left, top: box.rect.top }];
-      directions.forEach((d) => distances.forEach((distance) => candidates.push({ left: box.rect.left + d.x * distance, top: box.rect.top + d.y * distance })));
-      for (let row = 0; row < gridRows; row += 1) {
-        for (let column = 0; column < gridColumns; column += 1) {
-          candidates.push({
-            left: bounds.left + column * cellWidth + Math.max(2, (cellWidth - width) / 2),
-            top: bounds.top + row * cellHeight + Math.max(2, (cellHeight - height) / 2),
-          });
-        }
-      }
-      return candidates.map((c) => ({ left: c.left, right: c.left + width, top: c.top, bottom: c.top + height }));
+      const dot = dotOf(annotations[box.index], box.rect, plot);
+      return radii.flatMap((radius) => DIRECTIONS.map((d) => ({ radius, ...labelBox(dot.x, dot.y, d.ux * radius, d.uy * radius, width, height, d.xa, d.ya) })))
+        .map((c) => ({ ...c, travel: Math.hypot(c.left - box.rect.left, c.top - box.rect.top) }))
+        .sort((l, r) => l.radius - r.radius || l.travel - r.travel);
     };
     const inside = (c) => c.left >= bounds.left && c.right <= bounds.right && c.top >= bounds.top && c.bottom <= bounds.bottom;
-    const place = (items, reserved) => {
-      const taken = reserved.map((item) => item.rect);
-      const targets = new Map();
-      for (const item of items) {
-        const found = candidatesFor(item).find((c) => inside(c) && !taken.some((other) => intersects(c, other, pad)));
-        if (!found) return null;
-        targets.set(item.index, found);
-        taken.push(found);
-      }
-      return targets;
-    };
-
-    const byIndex = (l, r) => l.index - r.index;
-    let targets = place(boxes.filter((item) => conflicting.has(item.index)).sort(byIndex), boxes.filter((item) => !conflicting.has(item.index)));
-    if (!targets) targets = place(boxes.slice().sort(byIndex), []);
-    if (!targets) return annotations;
-    targets.forEach((target, index) => {
-      const current = boxesByIndex.get(index);
-      const annotation = annotations[index];
-      const deltaX = target.left - current.rect.left;
-      const deltaY = target.top - current.rect.top;
-      shiftAnnotation(annotation, deltaX, deltaY);
+    // Every label counts as an obstacle at its current (or already chosen) position while the others are placed.
+    const positions = new Map(boxes.map((item) => [item.index, item.rect]));
+    const blocked = (c, own) => [...positions].some(([index, other]) => index !== own && intersects(c, other, pad));
+    let moved = false;
+    boxes.filter((item) => conflicting.has(item.index)).sort((l, r) => l.index - r.index).forEach((item) => {
+      if (!blocked(item.rect, item.index)) return;
+      const found = candidatesFor(item).find((c) => inside(c) && !blocked(c, item.index));
+      if (!found) return;
+      shiftAnnotation(annotations[item.index], found.left - item.rect.left, found.top - item.rect.top);
+      positions.set(item.index, found);
+      moved = true;
     });
+    if (!moved) return annotations;
     await io.relayout();
     await io.waitForPaint();
     boxes = io.readBoxes();
