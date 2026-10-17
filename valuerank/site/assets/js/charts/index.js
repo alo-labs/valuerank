@@ -121,11 +121,14 @@ export function mountCharts(root, data, config) {
   const tabs = [...root.querySelectorAll('[data-chart-tab]')];
   const panels = [...root.querySelectorAll('[data-chart-panel]')];
   const tabKeys = tabs.map((tab) => tab.getAttribute('data-chart-tab'));
-  function selectTab(key, notify) {
+  // `reveal` keeps the selected tab visible when the strip scrolls sideways on a narrow screen. The first tab
+  // sits at the strip's start, so selecting it on load must not scroll the page to the chart.
+  function selectTab(key, notify, reveal = notify) {
     tabs.forEach((tab, i) => {
       const selected = tabKeys[i] === key;
       tab.setAttribute('aria-selected', String(selected));
       tab.setAttribute('tabindex', selected ? '0' : '-1');
+      if (selected && reveal) tab.scrollIntoView({ block: 'nearest', inline: 'center' });
     });
     panels.forEach((panel) => { panel.hidden = panel.getAttribute('data-chart-panel') !== key; });
     ensure(key);
@@ -145,7 +148,7 @@ export function mountCharts(root, data, config) {
   if (tabs.length) {
     const selected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true');
     const wanted = tabKeys.includes(config.initialChart) ? config.initialChart : (selected ?? tabs[0]).getAttribute('data-chart-tab');
-    selectTab(wanted, false);
+    selectTab(wanted, false, wanted !== tabKeys[0]);
   }
 
   return {

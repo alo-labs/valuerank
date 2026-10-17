@@ -56,9 +56,9 @@ export function indexPage(opts = {}) {
   const parts = shared(win);
   parts.body = add(add(body, 'table'), 'tbody', { id: 'index-body' });
   parts.picks = {};
-  for (const kind of ['value', 'quality', 'budget']) {
+  for (const kind of ['value', 'other', 'budget']) {
     const box = add(body, 'article', { 'data-pick': kind });
-    parts.picks[kind] = { box, name: add(box, 'a', { 'data-pick-name': '', href: '#' }), score: add(box, 'p', { 'data-pick-score': '' }), reason: add(box, 'p', { 'data-pick-reason': '' }) };
+    parts.picks[kind] = { box, label: add(box, 'h3', { 'data-pick-label': '' }), name: add(box, 'a', { 'data-pick-name': '', href: '#' }), score: add(box, 'p', { 'data-pick-score': '' }), reason: add(box, 'p', { 'data-pick-reason': '' }) };
   }
   return { win, ...parts };
 }

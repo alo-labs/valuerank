@@ -11,6 +11,7 @@ export class FakeElement {
   }
   get dataset() { return new Proxy({}, { get: (_, key) => this.attrs[`data-${key.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`)}`] }); }
   focus() { this.focused = true; }
+  scrollIntoView(options) { (this.scrolled ??= []).push(options); }
   setAttribute(name, value) { this.attrs[name] = String(value); }
   getAttribute(name) { return name in this.attrs ? this.attrs[name] : null; }
   addEventListener(type, fn) { (this.listeners[type] ??= []).push(fn); }

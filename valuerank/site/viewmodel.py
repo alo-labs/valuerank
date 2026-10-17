@@ -53,12 +53,16 @@ BASES = {
         "costLabel": "API cost",
         "costUnit": "USD per Index run",
         "description": "AA total evaluation cost at API rates.",
+        "pickLabel": "Best at API rates",
+        "pickPhrase": "at API rates",
     },
     "plan": {
         "label": "Plan ranking",
         "costLabel": "Plan cost",
         "costUnit": "USD per Index point",
         "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index.",
+        "pickLabel": "Best on a subscription",
+        "pickPhrase": "on a subscription",
     },
 }
 CATEGORIES = {
@@ -649,14 +653,15 @@ def index_page(bundle: Bundle) -> dict:
     rankings = bundle.rankings
     ranked = [m for m in rankings["models"] if m["rankingEligible"]]
     by_slug = {m["slug"]: m for m in rankings["models"]}
+    quality = min(ranked, key=lambda m: m["qualityRank"])
     headline = {}
     for basis, picks in rankings["picks"].items():
-        value, quality = by_slug[picks["value"]["slug"]], by_slug[picks["quality"]["slug"]]
-        lead = f"On the {rankings['bases'][basis]['label']}, {value['name']} ranks first with an overall score of {value['overall'][basis]:.1f}"
+        value = by_slug[picks["value"]["slug"]]
+        lead = f"{value['name']} leads the {rankings['bases'][basis]['label']} at {value['overall'][basis]:.1f}"
         headline[basis] = (
-            f"{lead} and also leads on quality alone."
+            f"{lead} and also leads on quality."
             if value is quality
-            else f"{lead}; {quality['name']} leads on quality alone."
+            else f"{lead}; {quality['name']} leads on quality."
         )
     return {
         "headline": headline,

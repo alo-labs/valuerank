@@ -24,8 +24,8 @@ Every value that reaches a page carries a grade. One enum, rendered by one compo
 {
   "version": "v1.9.6", "publishDate": "October 8, 2026", "observedAt": "2026-10-07T17:23:20Z",
   "bases": {
-    "api": {"label": "API ranking", "costLabel": "API cost", "costUnit": "USD per Index run", "description": "AA total evaluation cost at API rates."},
-    "plan": {"label": "Plan ranking", "costLabel": "Plan cost", "costUnit": "USD per Index point", "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index."}
+    "api": {"label": "API ranking", "costLabel": "API cost", "costUnit": "USD per Index run", "description": "AA total evaluation cost at API rates.", "pickLabel": "Best at API rates", "pickPhrase": "at API rates"},
+    "plan": {"label": "Plan ranking", "costLabel": "Plan cost", "costUnit": "USD per Index point", "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index.", "pickLabel": "Best on a subscription", "pickPhrase": "on a subscription"}
   },
   "defaultBasis": "plan",
   "costWeightPct": 18.9394,
@@ -54,8 +54,8 @@ Every value that reaches a page carries a grade. One enum, rendered by one compo
     }
   ],
   "picks": {
-    "plan": {"value": {"slug": "…", "reason": "…"}, "quality": {"slug": "…", "reason": "…"}, "budget": {"slug": "…", "reason": "…"}},
-    "api": {"value": {}, "quality": {}, "budget": {}}
+    "plan": {"value": {"slug": "…", "label": "Best overall value", "reason": "…", "score": 77.3, "unit": "overall"}, "other": {"slug": "…", "label": "Best at API rates", "reason": "…", "score": 74.3, "unit": "overall at API rates"}, "budget": {"slug": "…", "label": "Best on a budget", "reason": "…", "score": 61.2, "unit": "overall"}},
+    "api": {"value": {}, "other": {}, "budget": {}}
   },
   "planMeta": {"asOf": "2026-10-08", "routeCount": 9, "supportedModelCount": 10, "fallbackModelCount": 6, "totalModelCount": 16}
 }
@@ -66,7 +66,7 @@ Rules:
 - `overall[basis]` and `rank[basis]` are the committed values for each basis at the default cost weight. The client recomputes both when the cost-weight slider moves, using `dimensions[].weightPct`, `dims`, `costDims` and the renormalisation rule (available priorities only).
 - `models` contains every roster model (28), ranked ones first. Unranked models have `rank` values `null`, `overall` values `null`, and `exclusionReasons` filled.
 - `grade` on a model is the worst grade among the values that enter its score (`measured` < `claim` < `estimate` < `assumption`).
-- `picks[basis].value` is the top overall model on that basis; `quality` is the quality-rank leader; `budget` is the model with the best overall score among models whose cost score is in the top third (cheapest third); each has a one-sentence `reason` written from the data.
+- `picks[basis]` holds three cards that show three different angles; each has `slug`, `label`, `reason` (under 25 words), `score` and `unit`, and is `null` when the cohort cannot supply it. `value` is rank 1 on that basis (label "Best overall value"). `other` is rank 1 on the other basis, labelled from `bases[other].pickLabel` ("Best at API rates" or "Best on a subscription") with a reason that states both ranks; when that is the same model as `value`, it becomes the quality leader ("Best quality, any cost") and, if that is also `value`, the runner-up overall ("Runner-up overall"). `budget` is the best overall model in the cheapest third by that basis' cost score, skipping models already picked when that third holds more than one model (and keeping them if skipping would leave nothing). `bases[key]` carries `pickLabel` and `pickPhrase` ("at API rates", "on a subscription") for the other-basis card. The client applies the same rule in `scoring.js` when the cost weight moves, scoring both bases at that weight.
 
 ### `site/data/models/<slug>.json`
 
@@ -121,7 +121,7 @@ site = {"version", "publishDate", "observedAt", "nav": [{"label", "href", "key"}
 
 | Template | `page` keys |
 |---|---|
-| `index.html` | `headline` (one sentence per basis: `{"plan": "…", "api": "…"}`), `picks`, `models` (ranked 16, compact fields including `coverage`), `dimensions`, `chart`, `rankingsJson` (embedded as `rankings-data`) |
+| `index.html` | `headline` (one sentence per basis of at most 18 words, leading with the model name: `{"plan": "…", "api": "…"}`), `picks`, `models` (ranked 16, compact fields including `coverage`), `dimensions`, `chart`, `rankingsJson` (embedded as `rankings-data`) |
 | `rankings.html` | `rankingsJson`, `providers` (sorted developers), `grades`, `columns` (`[{key, label, sortable, default}]`; keys are the script catalogue: `rank`, `name`, `overall`, `quality`, `cost`, `grade`, `coverage`, `developer`, `qualityRank`, `speed`, `ii`, then one per non-cost dimension) |
 | `models.html` | `models` (all 28 roster models, ranked first: `slug`, `name`, `developer`, `rank`, `overall`, `grade`, `rankingEligible`, `coveragePct`), `rankedCount`, `unrankedCount` |
 | `model.html` | the model JSON above plus `related` (same developer) |

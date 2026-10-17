@@ -9,14 +9,14 @@
 <meta property="og:description" content="Historical AA Coding Agent Index + Terminal-Bench 2.1 snapshot. ValueRank v0.3 · 42 agents.">
 <meta property="og:url" content="https://valuerank.alolabs.dev/coding-agents/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://valuerank.alolabs.dev/coding-agents/og.png?v=1">
+<meta property="og:image" content="https://valuerank.alolabs.dev/og/archive.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Coding Agent ValueRank — value per dollar">
 <meta name="twitter:description" content="Historical AA Coding Agent Index + Terminal-Bench 2.1 snapshot. ValueRank v0.3 · 42 agents.">
-<meta name="twitter:image" content="https://valuerank.alolabs.dev/coding-agents/og.png?v=1">
+<meta name="twitter:image" content="https://valuerank.alolabs.dev/og/archive.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -546,10 +546,11 @@ async function repairCollisionSafeLabelAnnotations(gd, annotations, options) {
 </script>
 </head>
 <body>
-<aside class="archive-banner" role="note">
+<link rel="stylesheet" href="/assets/css/archive.css">
+<aside class="archive-banner" aria-label="Archived snapshot notice">
   <div class="wrap">
     <strong>Archived snapshot.</strong>
-    This page is a frozen copy archived on 2026-10-18 and is no longer updated. This coding-agents v0.3 snapshot (July 2026, Terminal-Bench 2.1) is kept for provenance and is no longer updated. Current results live in the ValueRank rankings and the Terminal-Bench 4.0 benchmark page.    <a href="/benchmarks/">See the current benchmarks</a>.
+    This page is a frozen copy archived on 2026-10-18 and is no longer updated. This coding-agents v0.3 snapshot (July 2026, Terminal-Bench 2.1) is kept for provenance and is no longer updated. Current results live in the ValueRank rankings and the Terminal-Bench 4.0 benchmark page.    <a href="/benchmarks/">See the current benchmarks</a>
   </div>
 </aside>
 <nav class="vr-site-header" data-vr-shared-header="true">
@@ -769,7 +770,6 @@ if (window.lucide) lucide.createIcons();
     table.classList.add('vr-sortable');
     headers.forEach((header, index) => {
       header.setAttribute('tabindex', '0');
-      header.setAttribute('role', 'button');
       header.setAttribute('aria-sort', 'none');
       const indicator = document.createElement('span');
       indicator.className = 'vr-sort-indicator';

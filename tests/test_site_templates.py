@@ -262,10 +262,16 @@ def test_answer_page(pages):
     _, dom, page = pages["index"]
     picks = dom.one("section", id="picks")
     arts = [n for n in picks.walk() if n.tag == "article"]
-    assert [a.attrs["data-pick"] for a in arts] == ["value", "quality", "budget"]
+    assert [a.attrs["data-pick"] for a in arts] == ["value", "other", "budget"]
     for a in arts:
-        for hook in ("data-pick-name", "data-pick-reason", "data-pick-score"):
+        for hook in ("data-pick-label", "data-pick-name", "data-pick-reason", "data-pick-score"):
             assert any(hook in n.attrs for n in a.walk()), hook
+    plan = page["picks"]["plan"]
+    labels = [n.all_text().strip() for n in picks.walk() if "data-pick-label" in n.attrs]
+    assert labels == [plan[kind]["label"] for kind in ("value", "other", "budget")]
+    assert len(set(labels)) == 3
+    scores = [n.all_text().strip() for n in picks.walk() if "data-pick-score" in n.attrs]
+    assert scores == [f"{plan[kind]['score']:.1f}{plan[kind]['unit']}" for kind in ("value", "other", "budget")]
     table = dom.one("table", id="answer-table")
     assert [t.attrs["scope"] for t in table.walk() if t.tag == "th"]
     assert not dom.find_all("template")

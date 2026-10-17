@@ -7,13 +7,17 @@
       "label": "API ranking",
       "costLabel": "API cost",
       "costUnit": "USD per Index run",
-      "description": "AA total evaluation cost at API rates."
+      "description": "AA total evaluation cost at API rates.",
+      "pickLabel": "Best at API rates",
+      "pickPhrase": "at API rates"
     },
     "plan": {
       "label": "Plan ranking",
       "costLabel": "Plan cost",
       "costUnit": "USD per Index point",
-      "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index."
+      "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index.",
+      "pickLabel": "Best on a subscription",
+      "pickPhrase": "on a subscription"
     }
   },
   "defaultBasis": "plan",
@@ -2768,29 +2772,47 @@
     "api": {
       "value": {
         "slug": "gpt-6-1-sol",
-        "reason": "GPT-6.1 Sol has the highest overall score in the API ranking at 74.3, costing $1,081.55 per Index run."
+        "label": "Best overall value",
+        "reason": "GPT-6.1 Sol has the highest overall score in the API ranking at 74.3, costing $1,081.55 per Index run.",
+        "score": 74.3,
+        "unit": "overall"
       },
-      "quality": {
+      "other": {
         "slug": "claude-opus-5-5",
-        "reason": "Claude Opus 5.5 has the best quality score (78.4) before cost; it ranks #5 in the API ranking."
+        "label": "Best on a subscription",
+        "reason": "Claude Opus 5.5 ranks #1 on a subscription and #5 in the API ranking.",
+        "score": 77.3,
+        "unit": "overall on a subscription"
       },
       "budget": {
-        "slug": "gpt-6-1-sol",
-        "reason": "GPT-6.1 Sol scores best overall (74.3) among the cheapest third, at $1,081.55 per Index run."
+        "slug": "gpt-6-sol",
+        "label": "Best on a budget",
+        "reason": "GPT-6 Sol scores best overall (61.9) among the cheapest third, at $1,545.83 per Index run.",
+        "score": 61.9,
+        "unit": "overall"
       }
     },
     "plan": {
       "value": {
         "slug": "claude-opus-5-5",
-        "reason": "Claude Opus 5.5 has the highest overall score in the Plan ranking at 77.3, costing $2.57 per Index point."
+        "label": "Best overall value",
+        "reason": "Claude Opus 5.5 has the highest overall score in the Plan ranking at 77.3, costing $2.57 per Index point.",
+        "score": 77.3,
+        "unit": "overall"
       },
-      "quality": {
-        "slug": "claude-opus-5-5",
-        "reason": "Claude Opus 5.5 has the best quality score (78.4) before cost; it ranks #1 in the Plan ranking."
+      "other": {
+        "slug": "gpt-6-1-sol",
+        "label": "Best at API rates",
+        "reason": "GPT-6.1 Sol ranks #1 at API rates and #2 in the Plan ranking.",
+        "score": 74.3,
+        "unit": "overall at API rates"
       },
       "budget": {
-        "slug": "claude-opus-5-5",
-        "reason": "Claude Opus 5.5 scores best overall (77.3) among the cheapest third, at $2.57 per Index point."
+        "slug": "mimo-v2-6-pro",
+        "label": "Best on a budget",
+        "reason": "MiMo-V2.6-Pro scores best overall (48.6) among the cheapest third, at $3.00 per Index point.",
+        "score": 48.6,
+        "unit": "overall"
       }
     }
   },

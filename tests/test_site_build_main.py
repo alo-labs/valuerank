@@ -1,11 +1,51 @@
 """End-to-end generation of the site into a temporary directory."""
 
 import json
+import re
 import runpy
+import shutil
 
 import pytest
 
+from valuerank.paths import ROOT
 from valuerank.site import build
+
+SITE_DIR = ROOT / "site"
+ARCHIVE_PATH = "/archive/coding-agents-v0.3/"
+CORE_CARD_KEYS = {
+    "/": "index",
+    "/rankings/": "rankings",
+    "/models/": "models",
+    "/plans/": "plans",
+    "/benchmarks/": "benchmarks",
+    "/benchmarks/terminal-bench-4/": "tb4",
+    "/methodology/": "methodology",
+    "/changelog/": "changelog",
+    "/data/": "data",
+}
+
+
+def expected_share_card(path: str) -> str:
+    """The share card, as a site path, that the generated page at ``path`` must reference."""
+
+    if path in CORE_CARD_KEYS:
+        return f"/og/{CORE_CARD_KEYS[path]}.png"
+    if path == ARCHIVE_PATH:
+        return "/og/archive.png"
+    assert path.startswith("/models/"), path
+    return f"/og/models/{path.split('/')[2]}.png"
+
+
+def catalogued_paths() -> list[str]:
+    from valuerank.site import viewmodel
+
+    return [path for path, _template, _page in build.pages(viewmodel.build_bundle())] + [ARCHIVE_PATH]
+
+
+def meta_content(html: str, attribute: str) -> str:
+    match = re.search(rf'<meta {attribute} content="([^"]*)"', html)
+    assert match is not None, attribute
+    return match.group(1)
 
 
 @pytest.fixture(scope="module")
@@ -92,9 +132,12 @@ def test_stale_model_pages_are_removed_on_rebuild(tmp_path):
 
 
 def test_module_entry_point_generates_into_a_copy(repo_copy, monkeypatch, capsys):
-    monkeypatch.setattr("valuerank.site.build.ROOT", repo_copy)
-    monkeypatch.setattr("valuerank.site.build.DATA", repo_copy / "data")
+    # runpy executes build.py afresh, so its ``from valuerank.paths import ...`` must see the patched paths.
+    monkeypatch.setattr("valuerank.paths.ROOT", repo_copy)
+    monkeypatch.setattr("valuerank.paths.DATA", repo_copy / "data")
+    monkeypatch.setattr("valuerank.paths.SITE", repo_copy / "site")
     monkeypatch.setattr("sys.argv", ["valuerank.site.build"])
+    shutil.rmtree(repo_copy / "site")  # the entry point must regenerate the copy, not inherit its files
 
     with pytest.raises(SystemExit) as exit_info:
         runpy.run_module("valuerank.site.build", run_name="__main__", alter_sys=True)
@@ -102,3 +145,22 @@ def test_module_entry_point_generates_into_a_copy(repo_copy, monkeypatch, capsys
     assert exit_info.value.code == 0
     assert json.loads(capsys.readouterr().out)["pages"] == 37
     assert (repo_copy / "site" / "rankings" / "index.html").is_file()
+
+
+def test_og_image_meta_points_each_generated_page_at_its_share_card(generated):
+    cards = set()
+    for path in catalogued_paths():
+        html = generated.joinpath(*[part for part in path.split("/") if part], "index.html").read_text()
+        card = expected_share_card(path)
+        assert meta_content(html, 'property="og:image"') == build.BASE_URL + card, path
+        assert meta_content(html, 'name="twitter:image"') == build.BASE_URL + card, path
+        cards.add(card)
+    # 9 core pages, one card per roster model (28) and the archive page.
+    assert len(cards) == 38
+
+
+def test_share_cards_on_disk_are_exactly_the_ones_the_pages_reference():
+    referenced = {expected_share_card(path) for path in catalogued_paths()}
+    on_disk = {"/" + card.relative_to(SITE_DIR).as_posix() for card in (SITE_DIR / "og").rglob("*.png")}
+
+    assert on_disk == referenced

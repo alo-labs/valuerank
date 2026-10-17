@@ -88,18 +88,31 @@ def _model(slug, name, api, plan, quality_rank, cost_api, cost_plan, fallback=No
     }
 
 
-def test_picks_choose_value_quality_and_cheapest_third_budget():
+BASES = {
+    "api": {"label": "API ranking", "pickLabel": "Best at API rates", "pickPhrase": "at API rates"},
+    "plan": {"label": "Plan ranking", "pickLabel": "Best on a subscription", "pickPhrase": "on a subscription"},
+}
+
+
+def _slugs(result):
+    return tuple(result[key]["slug"] for key in ("value", "other", "budget"))
+
+
+def test_picks_show_the_leader_the_other_basis_leader_and_a_budget_model():
     models = [
         _model("big", "Big", 1, 3, 1, 0.0, 10.0),
         _model("mid", "Mid", 2, 1, 2, 50.0, 20.0, fallback="api"),
         _model("cheap", "Cheap", 3, 2, 3, 100.0, 90.0),
         _model("dead", "Dead", None, None, None, None, None),
     ]
-    bases = {"api": {"label": "API ranking"}, "plan": {"label": "Plan ranking"}}
-    api = picks.build_picks(models, "api", bases)
-    assert (api["value"]["slug"], api["quality"]["slug"], api["budget"]["slug"]) == ("big", "big", "cheap")
-    plan = picks.build_picks(models, "plan", bases)
-    assert (plan["value"]["slug"], plan["quality"]["slug"], plan["budget"]["slug"]) == ("mid", "big", "cheap")
+    api = picks.build_picks(models, "api", BASES)
+    assert _slugs(api) == ("big", "mid", "cheap")
+    assert [api[key]["label"] for key in ("value", "other", "budget")] == [
+        "Best overall value", "Best on a subscription", "Best on a budget",
+    ]
+    plan = picks.build_picks(models, "plan", BASES)
+    assert _slugs(plan) == ("mid", "big", "cheap")
+    assert plan["other"]["label"] == "Best at API rates"
     assert "API fallback" in plan["value"]["reason"]
     assert "per Index point" in plan["value"]["reason"]
     assert "per Index run" in api["value"]["reason"]
@@ -107,13 +120,68 @@ def test_picks_choose_value_quality_and_cheapest_third_budget():
         assert len(pick["reason"].split()) < 25
 
 
+def test_other_basis_pick_states_both_ranks_and_scores_on_that_basis():
+    models = [_model("a", "Aye", 2, 1, 1, 10.0, 10.0), _model("b", "Bee", 1, 2, 2, 20.0, 20.0), _model("c", "Sea", 3, 3, 3, 90.0, 90.0)]
+    plan = picks.build_picks(models, "plan", BASES)["other"]
+    assert plan["slug"] == "b" and plan["reason"] == "Bee ranks #1 at API rates and #2 in the Plan ranking."
+    assert (plan["score"], plan["unit"]) == (79.0, "overall at API rates")
+    api = picks.build_picks(models, "api", BASES)["other"]
+    assert api["reason"] == "Aye ranks #1 on a subscription and #2 in the API ranking."
+    assert (api["score"], api["unit"]) == (79.0, "overall on a subscription")
+
+
+def test_value_and_budget_picks_carry_their_score_and_unit():
+    models = [_model("a", "Aye", 1, 2, 1, 10.0, 10.0), _model("b", "Bee", 2, 1, 2, 90.0, 90.0)]
+    result = picks.build_picks(models, "api", BASES)
+    assert (result["value"]["score"], result["value"]["unit"]) == (79.0, "overall")
+    assert (result["budget"]["score"], result["budget"]["unit"]) == (78.0, "overall")
+
+
+def test_other_basis_pick_falls_back_to_the_quality_leader_then_the_runner_up():
+    same = [_model("a", "Aye", 1, 1, 2, 0.0, 0.0), _model("b", "Bee", 2, 2, 1, 50.0, 50.0), _model("c", "Sea", 3, 3, 3, 100.0, 100.0)]
+    result = picks.build_picks(same, "api", BASES)
+    assert _slugs(result) == ("a", "b", "c")
+    assert result["other"]["label"] == "Best quality, any cost"
+    assert result["other"]["unit"] == "quality" and result["other"]["score"] == 70.0
+    assert "best quality score (70.0)" in result["other"]["reason"] and "#2 in the API ranking" in result["other"]["reason"]
+    leader = [_model("a", "Aye", 1, 1, 1, 0.0, 0.0), _model("b", "Bee", 2, 2, 2, 50.0, 50.0), _model("c", "Sea", 3, 3, 3, 100.0, 100.0)]
+    result = picks.build_picks(leader, "plan", BASES)
+    assert _slugs(result) == ("a", "b", "c")
+    assert result["other"]["label"] == "Runner-up overall"
+    assert result["other"]["reason"] == "Bee is the runner-up in the Plan ranking at 78.0."
+    assert (result["other"]["score"], result["other"]["unit"]) == (78.0, "overall")
+
+
+def test_budget_pick_skips_models_already_picked_when_the_cheapest_third_has_several():
+    models = [
+        _model("a", "Aye", 1, 1, 1, 100.0, 100.0),
+        _model("b", "Bee", 2, 2, 2, 10.0, 10.0),
+        _model("c", "Sea", 3, 3, 3, 90.0, 90.0),
+        _model("d", "Dee", 4, 4, 4, 0.0, 0.0),
+    ]
+    assert _slugs(picks.build_picks(models, "api", BASES)) == ("a", "b", "c")
+
+
+def test_budget_pick_keeps_a_picked_model_when_every_cheap_model_is_already_picked():
+    models = [
+        _model("a", "Aye", 1, 2, 1, 100.0, 100.0),
+        _model("b", "Bee", 2, 1, 2, 90.0, 90.0),
+        _model("c", "Sea", 3, 3, 3, 0.0, 0.0),
+        _model("d", "Dee", 4, 4, 4, 5.0, 5.0),
+    ]
+    result = picks.build_picks(models, "api", BASES)
+    assert _slugs(result) == ("a", "b", "a")
+
+
+def test_a_single_ranked_model_has_no_other_pick():
+    models = [_model("only", "Only", 1, 1, 1, 50.0, 50.0)]
+    result = picks.build_picks(models, "api", BASES)
+    assert result["value"]["slug"] == "only" and result["other"] is None and result["budget"]["slug"] == "only"
+
+
 def test_picks_are_none_when_nothing_is_ranked():
     models = [_model("dead", "Dead", None, None, None, None, None)]
-    assert picks.build_picks(models, "api", {"api": {"label": "API ranking"}}) == {
-        "value": None,
-        "quality": None,
-        "budget": None,
-    }
+    assert picks.build_picks(models, "api", BASES) == {"value": None, "other": None, "budget": None}
 
 
 HISTORY = {
@@ -191,15 +259,13 @@ def test_model_history_omits_versions_without_a_record_and_never_infers_ranks():
 def test_picks_say_so_when_a_pick_has_no_cost_data():
     models = [_model("only", "Only", 1, 1, 1, 50.0, 50.0)]
     models[0]["cost"] = {"apiUsd": None, "planComparableUsdPerPoint": None, "fallback": None}
-    bases = {"api": {"label": "API ranking"}, "plan": {"label": "Plan ranking"}}
-    assert "no cost data" in picks.build_picks(models, "api", bases)["value"]["reason"]
-    assert "no cost data" in picks.build_picks(models, "plan", bases)["value"]["reason"]
+    assert "no cost data" in picks.build_picks(models, "api", BASES)["value"]["reason"]
+    assert "no cost data" in picks.build_picks(models, "plan", BASES)["value"]["reason"]
 
 
 def test_budget_pick_is_none_when_no_ranked_model_has_a_cost_score():
     models = [_model("only", "Only", 1, 1, 1, None, None)]
-    bases = {"api": {"label": "API ranking"}}
-    result = picks.build_picks(models, "api", bases)
+    result = picks.build_picks(models, "api", BASES)
     assert result["budget"] is None and result["value"]["slug"] == "only"
 
 

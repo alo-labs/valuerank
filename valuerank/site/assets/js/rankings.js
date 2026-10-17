@@ -303,8 +303,11 @@ export function initIndex(win) {
     render();
   };
 
+  // The second pick compares against the other basis, so score that one at the same cost weight.
+  const withOtherBasis = (scored) => recompute(scored, data.dimensions, Object.keys(data.bases).find((k) => k !== state.basis), state.w);
+
   function renderPicks(scored) {
-    const chosen = state.w === data.costWeightPct ? data.picks[state.basis] : picks(scored, state.basis);
+    const chosen = state.w === data.costWeightPct ? data.picks[state.basis] : picks(withOtherBasis(scored), state.basis, data.bases);
     doc.querySelectorAll('[data-pick]').forEach((box) => {
       const pick = chosen[box.getAttribute('data-pick')];
       box.hidden = !pick;
@@ -314,8 +317,8 @@ export function initIndex(win) {
       name.textContent = model.name;
       name.setAttribute('href', `${ctx.modelBase}${model.slug}/`);
       const score = box.querySelector('[data-pick-score]');
-      const quality = box.getAttribute('data-pick') === 'quality';
-      score.replaceChildren(fmtScore(quality ? model.quality : model.overall[state.basis]), h(doc, 'span', { class: 'unit', text: quality ? 'quality' : 'overall' }));
+      box.querySelector('[data-pick-label]').textContent = pick.label;
+      score.replaceChildren(fmtScore(pick.score), h(doc, 'span', { class: 'unit', text: pick.unit }));
       box.querySelector('[data-pick-reason]').textContent = pick.reason;
     });
   }

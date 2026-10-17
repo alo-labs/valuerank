@@ -32,7 +32,7 @@
 <section class="block" id="score-breakdown" aria-labelledby="breakdown-title">
   <h2 id="breakdown-title" class="section-title">Score breakdown</h2>
   <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains.</p>
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="breakdown-title">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Score breakdown table">
     <table id="dimension-table" class="data-table">
       <thead><tr>
         <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Evidence</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
@@ -60,7 +60,7 @@
   <p class="muted">API cost to run the Intelligence Index: <strong>{{ usd(page.cost.apiUsd, 0) }}</strong>.
     {% if page.cost.fallback %}No subscription route is measured for this model, so the plan ranking falls back to API cost ({{ page.cost.fallback }}).{% endif %}</p>
   {%- if page.plans %}
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="routes-title">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Plan routes and cost table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">USD per run</th><th scope="col" class="col-num">USD per Index point</th><th scope="col">Evidence</th></tr></thead>
       <tbody>
@@ -85,7 +85,7 @@
 <section class="block" id="rank-history" aria-labelledby="history-title">
   <h2 id="history-title" class="section-title">Rank history</h2>
   {%- if page.history %}
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="history-title">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Rank history table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Version</th><th scope="col">Date</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th></tr></thead>
       <tbody>

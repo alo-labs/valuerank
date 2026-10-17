@@ -77,8 +77,14 @@ def write_redirect(env: Environment, out_path: Path, *, target: str, title: str,
     return out_path
 
 
-def archive_legacy_page(env: Environment, source: Path, out_path: Path, *, archive_date: str, archive_href: str, note: str) -> Path:
-    """Copy a retired static page under ``archive/`` with a banner after its ``<body>`` tag."""
+OG_IMAGE_META = re.compile(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")')
+
+
+def archive_legacy_page(env: Environment, source: Path, out_path: Path, *, archive_date: str, archive_href: str, note: str, og_image: str | None = None) -> Path:
+    """Copy a retired static page under ``archive/`` with a banner after its ``<body>`` tag.
+
+    With ``og_image`` set, the page's ``og:image`` and ``twitter:image`` tags point at that share card.
+    """
 
     html = source.read_text()
     match = re.search(r"<body\b[^>]*>", html)
@@ -86,6 +92,8 @@ def archive_legacy_page(env: Environment, source: Path, out_path: Path, *, archi
         raise ValueError(f"legacy page has no <body> tag: {source}")
     banner = render(env, "archive_banner.html", {"page": {"archiveDate": archive_date, "archiveHref": archive_href, "note": note}})
     archived = html[: match.end()] + "\n" + banner + html[match.end() :]
+    if og_image is not None:
+        archived = OG_IMAGE_META.sub(lambda tag: tag.group(1) + escape(og_image, {'"': "&quot;"}) + tag.group(2), archived)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(archived)
     return out_path
@@ -127,6 +135,7 @@ NAV = [
 
 LEGACY_CODING_AGENTS = PACKAGE_DIR / "legacy" / "coding-agents-v0.3.html"
 ARCHIVE_PATH = "/archive/coding-agents-v0.3/"
+ARCHIVE_CARD = "/og/archive.png"
 REDIRECTS = {
     "/tb4/": ("/benchmarks/terminal-bench-4/", "Terminal-Bench 4.0 has moved"),
     "/coding-agents/": (ARCHIVE_PATH, "The coding-agents snapshot is archived"),
@@ -161,7 +170,9 @@ SCRIPTS = {
 STATIC_SCRIPTS = ["/assets/js/pages/static.js"]
 
 
-def page_meta(path: str, title: str, description: str, key: str, og_image: str = "/og.png") -> dict:
+def page_meta(path: str, title: str, description: str, key: str, og_image: str | None = None) -> dict:
+    """Per-page metadata. The share card is ``/og/<key>.png`` unless ``og_image`` names another card."""
+
     return {
         "key": key,
         "scripts": SCRIPTS.get(key, STATIC_SCRIPTS),
@@ -169,7 +180,7 @@ def page_meta(path: str, title: str, description: str, key: str, og_image: str =
         "title": title,
         "description": description,
         "canonical": BASE_URL + path,
-        "ogImage": BASE_URL + og_image,
+        "ogImage": BASE_URL + (og_image or f"/og/{key}.png"),
     }
 
 
@@ -196,8 +207,7 @@ def pages(bundle) -> list[tuple[str, str, dict]]:
          "The benchmarks behind each dimension, their owners, versions, observation dates and coverage."),
         ("/benchmarks/terminal-bench-4/", "benchmark_tb4.html", viewmodel.tb4_page(bundle), "tb4",
          "Terminal-Bench 4.0: resolution rate versus cost · ValueRank",
-         "The official Terminal-Bench 4.0 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims.",
-         "/tb4/og.png"),
+         "The official Terminal-Bench 4.0 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims."),
         ("/methodology/", "methodology.html", viewmodel.methodology_page(bundle), "methodology",
          f"Methodology · ValueRank {version}",
          "How ValueRank scores models: dimensions, weights, renormalisation, evidence grades and limitations, with a worked example."),
@@ -209,14 +219,14 @@ def pages(bundle) -> list[tuple[str, str, dict]]:
          "Machine-readable JSON for every table on the site, with its schema and provenance."),
     ]
     result = []
-    for path, template, page, key, title, description, *og in catalogue:
+    for path, template, page, key, title, description in catalogue:
         page = dict(page)
-        page.update(page_meta(path, title, description, key, *og))
+        page.update(page_meta(path, title, description, key))
         result.append((path, template, page))
     for slug in sorted(bundle.models):
         page = dict(viewmodel.model_page(bundle, slug))
         path = f"/models/{slug}/"
-        page.update(page_meta(path, f"{page['name']} · ValueRank {version}", f"How {page['name']} scores on every ValueRank dimension, with sources, dates and evidence grades.", "model"))
+        page.update(page_meta(path, f"{page['name']} · ValueRank {version}", f"How {page['name']} scores on every ValueRank dimension, with sources, dates and evidence grades.", "model", f"/og/models/{slug}.png"))
         result.append((path, "model.html", page))
     return result
 
@@ -255,6 +265,7 @@ def main(*, root: Path = ROOT, data: Path = DATA, out: Path | None = None, templ
         env, LEGACY_CODING_AGENTS, out_dir.joinpath(*ARCHIVE_PATH.strip("/").split("/")) / "index.html",
         archive_date="2026-10-18", archive_href="/benchmarks/",
         note="This coding-agents v0.3 snapshot (July 2026, Terminal-Bench 2.1) is kept for provenance and is no longer updated. Current results live in the ValueRank rankings and the Terminal-Bench 4.0 benchmark page.",
+        og_image=BASE_URL + ARCHIVE_CARD,
     ))
     written.append(write_sitemap(out_dir, BASE_URL, [path for path, _template, _page in pages(bundle)] + [ARCHIVE_PATH], lastmod=bundle.rankings["observedAt"][:10]))
     written.append(write_robots(out_dir, BASE_URL))

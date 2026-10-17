@@ -7,7 +7,7 @@
     {%- endfor %}
   </div>
   {%- for k, tab, aria in items %}
-  <div class="chart-panel" role="tabpanel" id="panel-{{ k }}" aria-labelledby="tab-{{ k }}" data-chart-panel="{{ k }}"{% if not loop.first %} hidden{% endif %}>
+  <div class="chart-panel" role="tabpanel" tabindex="0" id="panel-{{ k }}" aria-labelledby="tab-{{ k }}" data-chart-panel="{{ k }}"{% if not loop.first %} hidden{% endif %}>
     <div class="chart" data-chart="{{ k }}" data-chart-summary-target="{{ k }}-summary" role="img" aria-label="{{ aria }}">
       <p class="chart-state" data-chart-state>{{ loading }}</p>
     </div>

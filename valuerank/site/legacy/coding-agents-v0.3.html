@@ -763,7 +763,6 @@ if (window.lucide) lucide.createIcons();
     table.classList.add('vr-sortable');
     headers.forEach((header, index) => {
       header.setAttribute('tabindex', '0');
-      header.setAttribute('role', 'button');
       header.setAttribute('aria-sort', 'none');
       const indicator = document.createElement('span');
       indicator.className = 'vr-sort-indicator';

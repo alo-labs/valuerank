@@ -90,7 +90,7 @@ function candidateOffsets(adjacentRadius, requestedRadii, candidateStep) {
  */
 export function buildCollisionSafeLabelAnnotations(points, geometry, options = {}) {
   if (!geometry || !Array.isArray(points) || !points.length) return [];
-  const { x: xa, y: ya, width, height } = geometry;
+  const { x: xa, y: ya } = geometry;
   const fontSize = positive(options.fontSize, 9);
   const safety = positive(options.safety, 1.15);
   const markerRadius = positive(options.markerRadius, 11);
@@ -138,8 +138,10 @@ export function buildCollisionSafeLabelAnnotations(points, geometry, options = {
     const distance = pointGap(box, item.px);
     return total + (distance < markerRadius ? markerRadius - distance + 1 : 0);
   }, 0);
-  const inBounds = (box) => box.left >= 2 && box.right <= width - 2 && box.top >= 2 && box.bottom <= height - 2;
-  const spillCost = (box) => Math.max(0, 2 - box.left) + Math.max(0, box.right - (width - 2)) + Math.max(0, 2 - box.top) + Math.max(0, box.bottom - (height - 2));
+  // Labels must sit inside the plot area, not merely inside the figure (which includes the axis margins).
+  const area = { left: xa.offset + 2, right: xa.offset + xa.length - 2, top: ya.offset + 2, bottom: ya.offset + ya.length - 2 };
+  const inBounds = (box) => box.left >= area.left && box.right <= area.right && box.top >= area.top && box.bottom <= area.bottom;
+  const spillCost = (box) => Math.max(0, area.left - box.left) + Math.max(0, box.right - area.right) + Math.max(0, area.top - box.top) + Math.max(0, box.bottom - area.bottom);
 
   function findPlacement(item, placed, skip) {
     let bestValid = null;
@@ -229,12 +231,54 @@ export function buildCollisionSafeLabelAnnotations(points, geometry, options = {
   }));
 }
 
+/** Moves an annotation by (dx, dy) pixels. An arrowless label gains a leader line so it stays tied to its point. */
+function shiftAnnotation(annotation, dx, dy) {
+  if (annotation.showarrow === false) {
+    annotation.ax = (Number(annotation.xshift) || 0) + dx;
+    annotation.ay = (Number(annotation.yshift) || 0) + dy;
+    annotation.xshift = 0;
+    annotation.yshift = 0;
+    annotation.axref = 'pixel';
+    annotation.ayref = 'pixel';
+    annotation.showarrow = true;
+  } else {
+    annotation.ax = (Number(annotation.ax) || 0) + dx;
+    annotation.ay = (Number(annotation.ay) || 0) + dy;
+  }
+}
+
+/** One axis of a measured label: clamp into [low, high]; if that would cover its point, flip to the far side when that fits. */
+function insideRange(start, size, anchor, low, high) {
+  if (start >= low && start + size <= high) return start;
+  const clamped = clamp(start, low, high - size);
+  if (anchor < clamped || anchor > clamped + size) return clamped;
+  const mirrored = 2 * anchor - (start + size);
+  return mirrored >= low && mirrored + size <= high ? mirrored : clamped;
+}
+
+/** Pulls measured labels that spill out of the plot area back inside. Returns true when any annotation moved. */
+function keepInsidePlot(annotations, boxes, plot) {
+  let moved = false;
+  boxes.forEach(({ index, rect }) => {
+    const annotation = annotations[index];
+    const pointX = plot.left + annotation.x * (plot.right - plot.left);
+    const pointY = plot.top + (1 - annotation.y) * (plot.bottom - plot.top);
+    const left = insideRange(rect.left, rect.right - rect.left, pointX, plot.left, plot.right);
+    const top = insideRange(rect.top, rect.bottom - rect.top, pointY, plot.top, plot.bottom);
+    if (left === rect.left && top === rect.top) return;
+    shiftAnnotation(annotation, left - rect.left, top - rect.top);
+    moved = true;
+  });
+  return moved;
+}
+
 const intersects = (a, b, pad) => a.left < b.right + pad && a.right > b.left - pad && a.top < b.bottom + pad && a.bottom > b.top - pad;
 
 /**
  * After the web font loads Plotly's text metrics change. Measure the rendered
  * labels and repack only those that still collide.
- * io: { readBoxes() -> [{index, rect}], bounds() -> rect, relayout(), waitForPaint() }
+ * io: { readBoxes() -> [{index, rect}], bounds() -> rect, plot?() -> rect, relayout(), waitForPaint() }
+ * `plot()` is the plot-area rectangle; when present every label is also kept inside it.
  * Mutates and returns `annotations`.
  */
 export async function repairCollisionSafeLabelAnnotations(annotations, io, options = {}) {
@@ -249,6 +293,13 @@ export async function repairCollisionSafeLabelAnnotations(annotations, io, optio
   const distances = [4, 10, 16, 24, 34, 48, 68, 96, 132, 174, 224, 284, 352];
   let boxes = io.readBoxes();
   if (boxes.length < annotations.length) return annotations;
+  const plot = io.plot ? io.plot() : null;
+  if (plot && keepInsidePlot(annotations, boxes, plot)) {
+    await io.relayout();
+    await io.waitForPaint();
+    boxes = io.readBoxes();
+    if (boxes.length < annotations.length) return annotations;
+  }
 
   for (let pass = 0; pass < maxPasses; pass += 1) {
     const pairs = [];
@@ -258,7 +309,9 @@ export async function repairCollisionSafeLabelAnnotations(annotations, io, optio
     if (!pairs.length) return annotations;
     const conflicting = new Set(pairs.flatMap((pair) => pair.map((item) => item.index)));
     const rect = io.bounds();
-    const bounds = { left: rect.left + edge, right: rect.right - edge, top: rect.top + edge, bottom: rect.bottom - positive(options.repairBottom, 58) };
+    const bounds = plot
+      ? { left: plot.left + edge, right: plot.right - edge, top: plot.top + edge, bottom: plot.bottom - edge }
+      : { left: rect.left + edge, right: rect.right - edge, top: rect.top + edge, bottom: rect.bottom - positive(options.repairBottom, 58) };
     if (bounds.bottom <= bounds.top) bounds.bottom = rect.bottom - edge;
     const boxesByIndex = new Map(boxes.map((item) => [item.index, item]));
     const maxLabelWidth = Math.max(...boxes.map((item) => item.rect.right - item.rect.left));
@@ -306,19 +359,7 @@ export async function repairCollisionSafeLabelAnnotations(annotations, io, optio
       const annotation = annotations[index];
       const deltaX = target.left - current.rect.left;
       const deltaY = target.top - current.rect.top;
-      if (annotation.showarrow === false) {
-        // An arrowless slot was not enough: keep the point connection and move the label.
-        annotation.ax = (Number(annotation.xshift) || 0) + deltaX;
-        annotation.ay = (Number(annotation.yshift) || 0) + deltaY;
-        annotation.xshift = 0;
-        annotation.yshift = 0;
-        annotation.axref = 'pixel';
-        annotation.ayref = 'pixel';
-        annotation.showarrow = true;
-      } else {
-        annotation.ax = (Number(annotation.ax) || 0) + deltaX;
-        annotation.ay = (Number(annotation.ay) || 0) + deltaY;
-      }
+      shiftAnnotation(annotation, deltaX, deltaY);
     });
     await io.relayout();
     await io.waitForPaint();
@@ -343,6 +384,11 @@ export function createRepairIO(gd, annotations, env) {
       return { index: i, rect: { left, right, top, bottom } };
     }).filter((item) => item && item.rect.right > item.rect.left && item.rect.bottom > item.rect.top),
     bounds: () => gd.getBoundingClientRect(),
+    plot: () => {
+      const { left, top } = gd.getBoundingClientRect();
+      const size = gd._fullLayout._size;
+      return { left: left + size.l, right: left + size.l + size.w, top: top + size.t, bottom: top + size.t + size.h };
+    },
     relayout: () => env.relayout(annotations),
     waitForPaint: () => new Promise((resolve) => env.raf(() => env.raf(resolve))),
   };

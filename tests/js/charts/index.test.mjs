@@ -131,6 +131,20 @@ test('the initial tab honours the caller choice and falls back to the first tab'
   assert.deepEqual(unknown.panels.map((p) => p.hidden), [false, true]);
 });
 
+test('the selected tab scrolls into view in the tab strip, but the default first tab never moves the page on load', () => {
+  const plain = setup({ keys: ['pareto', 'tb4'], tabs: true });
+  plain.mount();
+  assert.deepEqual(plain.buttons.map((b) => b.scrolled?.length ?? 0), [0, 0]);
+  const deep = setup({ keys: ['pareto', 'tb4', 'bump'], tabs: true });
+  deep.mount({ initialChart: 'bump' });
+  assert.deepEqual(deep.buttons.map((b) => b.scrolled?.length ?? 0), [0, 0, 1]);
+  assert.deepEqual(deep.buttons[2].scrolled[0], { block: 'nearest', inline: 'center' });
+  deep.buttons[0].dispatch('click');
+  assert.equal(deep.buttons[0].scrolled.length, 1);
+  deep.buttons[0].dispatch('keydown', undefined, { key: 'ArrowRight' });
+  assert.equal(deep.buttons[1].scrolled.length, 1);
+});
+
 test('arrow keys move between tabs and wrap around', async () => {
   const t = setup({ keys: ['pareto', 'tb4', 'bump'], tabs: true });
   const mount = t.mount();

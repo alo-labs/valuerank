@@ -12,11 +12,11 @@
   <meta property="og:title" content="Benchmark sources · ValueRank v1.9.6">
   <meta property="og:description" content="The benchmarks behind each dimension, their owners, versions, observation dates and coverage.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/benchmarks/">
-  <meta property="og:image" content="https://valuerank.alolabs.dev/og.png">
+  <meta property="og:image" content="https://valuerank.alolabs.dev/og/benchmarks.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Benchmark sources · ValueRank v1.9.6">
   <meta name="twitter:description" content="The benchmarks behind each dimension, their owners, versions, observation dates and coverage.">
-  <meta name="twitter:image" content="https://valuerank.alolabs.dev/og.png">
+  <meta name="twitter:image" content="https://valuerank.alolabs.dev/og/benchmarks.png">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <script>
     (function () {
@@ -57,7 +57,7 @@
 
 <section class="block" id="sources" aria-labelledby="sources-title">
   <h2 id="sources-title" class="section-title">Sources</h2>
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sources-title">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Sources table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Benchmark</th><th scope="col">Owner</th><th scope="col">Role</th><th scope="col" class="col-num">Weight</th><th scope="col" class="col-num">Coverage</th><th scope="col">Observed</th></tr></thead>
       <tbody>        <tr>
@@ -117,12 +117,12 @@
   <h2 id="coverage-title" class="section-title">Coverage and cost charts</h2>
   <p class="muted">The matrix shows which models have an eligible value for which dimension; gaps are real gaps. The LiveBench view plots overall score against cost per successful task for the roster models LiveBench has verified results for.</p>
   <div class="chart-card">
-  <div class="chart-tabs" role="tablist" aria-label="Chart view">    <button type="button" role="tab" id="tab-heatmapData" aria-controls="panel-heatmapData" data-chart-tab="heatmapData" aria-selected="true">Coverage matrix</button>    <button type="button" role="tab" id="tab-livebenchPareto" aria-controls="panel-livebenchPareto" data-chart-tab="livebenchPareto" aria-selected="false" tabindex="-1">LiveBench score vs cost</button>  </div>  <div class="chart-panel" role="tabpanel" id="panel-heatmapData" aria-labelledby="tab-heatmapData" data-chart-panel="heatmapData">
+  <div class="chart-tabs" role="tablist" aria-label="Chart view">    <button type="button" role="tab" id="tab-heatmapData" aria-controls="panel-heatmapData" data-chart-tab="heatmapData" aria-selected="true">Coverage matrix</button>    <button type="button" role="tab" id="tab-livebenchPareto" aria-controls="panel-livebenchPareto" data-chart-tab="livebenchPareto" aria-selected="false" tabindex="-1">LiveBench score vs cost</button>  </div>  <div class="chart-panel" role="tabpanel" tabindex="0" id="panel-heatmapData" aria-labelledby="tab-heatmapData" data-chart-panel="heatmapData">
     <div class="chart" data-chart="heatmapData" data-chart-summary-target="heatmapData-summary" role="img" aria-label="Matrix of models against benchmarks showing where eligible values exist">
       <p class="chart-state" data-chart-state>Loading chart…</p>
     </div>
     <p class="chart-summary" id="heatmapData-summary" data-chart-summary>Matrix of models against benchmarks showing where eligible values exist. A text summary appears here when the chart loads.</p>
-  </div>  <div class="chart-panel" role="tabpanel" id="panel-livebenchPareto" aria-labelledby="tab-livebenchPareto" data-chart-panel="livebenchPareto" hidden>
+  </div>  <div class="chart-panel" role="tabpanel" tabindex="0" id="panel-livebenchPareto" aria-labelledby="tab-livebenchPareto" data-chart-panel="livebenchPareto" hidden>
     <div class="chart" data-chart="livebenchPareto" data-chart-summary-target="livebenchPareto-summary" role="img" aria-label="Scatter chart of LiveBench overall score against cost per successful task">
       <p class="chart-state" data-chart-state>Loading chart…</p>
     </div>

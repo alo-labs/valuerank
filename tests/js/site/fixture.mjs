@@ -53,14 +53,22 @@ export const models = [
 export const data = {
   version: 'v9.9.9', publishDate: 'October 8, 2026', defaultBasis: 'plan', costWeightPct: 20,
   bases: {
-    api: { label: 'API ranking', costLabel: 'API cost', costUnit: 'USD per Index run', description: 'api' },
-    plan: { label: 'Plan ranking', costLabel: 'Plan cost', costUnit: 'USD per Index point', description: 'plan' },
+    api: { label: 'API ranking', costLabel: 'API cost', costUnit: 'USD per Index run', description: 'api', pickLabel: 'Best at API rates', pickPhrase: 'at API rates' },
+    plan: { label: 'Plan ranking', costLabel: 'Plan cost', costUnit: 'USD per Index point', description: 'plan', pickLabel: 'Best on a subscription', pickPhrase: 'on a subscription' },
   },
   dimensions,
   categories: { cost: 'Cost', code: 'Code', rely: 'Reliability' },
   models,
   picks: {
-    plan: { value: { slug: 'alpha', reason: 'committed value' }, quality: { slug: 'beta', reason: 'committed quality' }, budget: { slug: 'gamma', reason: 'committed budget' } },
-    api: { value: { slug: 'beta', reason: 'committed api value' }, quality: { slug: 'beta', reason: 'q' }, budget: { slug: 'gamma', reason: 'b' } },
+    plan: {
+      value: { slug: 'alpha', label: 'Best overall value', reason: 'committed value', score: 71.6, unit: 'overall' },
+      other: { slug: 'beta', label: 'Best at API rates', reason: 'committed other', score: 75.3, unit: 'overall at API rates' },
+      budget: { slug: 'gamma', label: 'Best on a budget', reason: 'committed budget', score: 56, unit: 'overall' },
+    },
+    api: {
+      value: { slug: 'beta', label: 'Best overall value', reason: 'committed api value', score: 75.3, unit: 'overall' },
+      other: { slug: 'alpha', label: 'Best on a subscription', reason: 'o', score: 71.6, unit: 'overall on a subscription' },
+      budget: { slug: 'gamma', label: 'Best on a budget', reason: 'b', score: 58, unit: 'overall' },
+    },
   },
 };

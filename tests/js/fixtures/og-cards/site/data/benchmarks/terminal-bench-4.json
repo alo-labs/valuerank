@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "valuerank-terminal-bench-v1",
+  "version": "4.0",
+  "observedAt": "2026-10-07T17:23:20Z",
+  "cohortN": 3,
+  "matchedN": 1,
+  "rowN": 2,
+  "frontierCount": 1,
+  "rows": [
+    {"rank": 1, "rankLabel": "1", "model": "Alpha One (max)", "baseModel": "Alpha One", "agent": "Codex", "resolutionRate": 0.582, "resolutionRatePct": 58.2, "uncertaintyPct": 2.8, "releaseDate": "Sep 3, 2026", "tokens": "1.5B", "costUsd": 3300, "cohortModelId": "alpha-one"},
+    {"rank": 2, "rankLabel": "2", "model": "Unlisted Model (high)", "baseModel": "Unlisted Model", "agent": "mini-SWE-agent", "resolutionRate": 0.311, "resolutionRatePct": 31.1, "uncertaintyPct": 3.4, "releaseDate": "Sep 2, 2026", "tokens": "900M", "costUsd": 410, "cohortModelId": null}
+  ],
+  "cohortMapping": {
+    "alpha-one": {"status": "official", "rank": 1, "resolutionRatePct": 58.2, "evaluatedModel": "Alpha One (max)"},
+    "beta-two": {"status": "missing", "rank": null, "resolutionRatePct": null, "evaluatedModel": null},
+    "gamma-three": {"status": "missing", "rank": null, "resolutionRatePct": null, "evaluatedModel": null}
+  }
+}

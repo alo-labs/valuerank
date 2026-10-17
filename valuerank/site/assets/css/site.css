@@ -334,7 +334,7 @@ a.chip:hover { border-color: var(--accent); }
 a.model-name { display: inline-block; padding-block: 11px; margin-block: -11px; }
 a.model-name:hover { color: var(--accent); text-decoration: underline; }
 .model-dev { font-size: var(--fs-xs); color: var(--text-muted); }
-.sort-btn { display: inline-flex; align-items: center; gap: 6px; min-height: var(--target); padding: 0; background: none; border: 0; color: inherit; font: inherit; letter-spacing: inherit; cursor: pointer; white-space: nowrap; }
+.sort-btn { display: inline-flex; align-items: center; gap: 6px; min-height: var(--target); min-width: var(--target); padding: 0; background: none; border: 0; color: inherit; font: inherit; letter-spacing: inherit; cursor: pointer; white-space: nowrap; }
 .sort-btn:hover { color: var(--text); }
 .sort-ind::after { content: "\2195"; opacity: 0.35; }
 th[aria-sort="ascending"] .sort-ind::after { content: "\25B2"; opacity: 1; color: var(--accent); }
@@ -416,6 +416,7 @@ th[aria-sort="descending"] .sort-ind::after { content: "\25BC"; opacity: 1; colo
 .chart:not([data-chart-status]) { display: flex; align-items: center; justify-content: center; }
 .chart[data-chart-status="error"] { display: flex; align-items: center; justify-content: center; }
 .chart-panel { overflow-x: auto; }
+.chart-panel:focus-visible { outline-offset: -3px; }
 .chart[data-chart^="heatmap"] { min-width: 46rem; }
 @media (max-width: 40rem) {
   .chart-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--sp-1); scrollbar-width: thin; }
@@ -473,7 +474,7 @@ td[data-col="coverage"] { white-space: nowrap; }
 .footer-grid { display: grid; gap: var(--sp-5); }
 .footer-brand { font-weight: 700; margin-bottom: var(--sp-2); }
 .footer-links { list-style: none; display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-4); margin: 0; padding: 0; }
-.footer-links a { display: inline-flex; align-items: center; min-height: var(--target); }
+.footer-links a { display: inline-flex; align-items: center; min-height: var(--target); min-width: var(--target); }
 @media (min-width: 48rem) { .footer-grid { grid-template-columns: 1.4fr 1fr; align-items: start; } }
 .archive-banner { background: var(--warn-bg); color: var(--text); border-bottom: 1px solid var(--border); padding-block: var(--sp-3); font-size: var(--fs-sm); }
 

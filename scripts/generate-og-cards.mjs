@@ -1,9 +1,13 @@
 /**
- * Generate ValueRank Open Graph / WhatsApp share cards (1200×630 PNG).
- * Usage: node scripts/generate-og-cards.mjs
- * Requires: playwright (repo root node_modules)
+ * Generate the ValueRank Open Graph share cards (1200×630 PNG) from the published site data.
+ * Usage: node scripts/generate-og-cards.mjs   (after `npm run build:site` has written site/data)
+ * Requires: playwright (repo root node_modules) and a Chromium build.
+ *
+ * Writes one card per core page to site/og/<key>.png, one per roster model to
+ * site/og/models/<slug>.png and the archive card to site/og/archive.png. The card
+ * builders are pure functions; only readPublication, run and main touch files or the browser.
  */
-import { mkdirSync, realpathSync, writeFileSync } from "fs";
+import { mkdirSync, readFileSync, readdirSync, realpathSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
@@ -11,230 +15,385 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = dirname(__dirname);
 const VIEWPORT = { width: 1200, height: 630 };
 const SETTLE_MS = 900;
+const SITE_OG = ["site", "og"];
 
+// Tokens mirror the light theme in valuerank/site/assets/css/site.css.
 const SHARED_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  :root {
+    --bg: #f6f6fb; --surface: #ffffff; --text: #14152b; --text-muted: #55587a; --border: #dcdceb;
+    --accent: #4f46e5; --accent-soft: #e9e8fd;
+    --g-measured: #0b6b42; --g-measured-bg: #dff3e8;
+    --g-claim: #1c4fa3; --g-claim-bg: #e2edfb;
+    --g-estimate: #7a4e00; --g-estimate-bg: #fdf0d2;
+    --g-assumption: #7b2a8f; --g-assumption-bg: #f5e4fa;
+    --g-missing: #50546b; --g-missing-bg: #eceef4;
+    --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    width: 1200px; height: 630px; overflow: hidden;
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 45%, #fdf2f8 100%);
-    color: #0f172a;
-  }
+  body { width: 1200px; height: 630px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-sans); }
   .frame {
-    width: 1200px; height: 630px; position: relative;
-    padding: 56px 64px 0; display: flex; flex-direction: column;
+    position: relative; width: 1200px; height: 630px; padding: 56px 72px 0;
+    display: flex; flex-direction: column;
+    background: linear-gradient(135deg, #f6f6fb 0%, #ebeafb 100%);
   }
-  .brand {
-    font-family: 'IBM Plex Mono', monospace; font-weight: 600;
-    font-size: 28px; letter-spacing: 0.04em; color: #4f46e5; margin-bottom: 28px;
+  .frame::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 12px; background: var(--accent); }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .wordmark { font-family: var(--font-mono); font-size: 28px; font-weight: 600; letter-spacing: 0.02em; color: var(--accent); }
+  .version {
+    font-family: var(--font-mono); font-size: 18px; font-weight: 500; color: var(--accent);
+    background: var(--accent-soft); border-radius: 999px; padding: 6px 16px;
   }
-  .title {
-    font-size: 58px; font-weight: 700; line-height: 1.08;
-    letter-spacing: -0.02em; color: #0f172a; max-width: 700px;
+  .kicker {
+    margin-top: 44px; font-family: var(--font-mono); font-size: 18px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
   }
-  .title.compact { font-size: 52px; max-width: 680px; }
-  .subtitle {
-    margin-top: 16px; font-size: 34px; font-weight: 600;
-    color: #4f46e5; letter-spacing: -0.01em; max-width: 680px; line-height: 1.2;
-  }
-  .desc {
-    margin-top: 24px; font-size: 22px; font-weight: 400;
-    color: #475569; line-height: 1.45; max-width: 620px;
-  }
-  .pill-row { margin-top: 32px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .headline { margin-top: 12px; font-size: 56px; font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; max-width: 1000px; }
+  .description { margin-top: 18px; font-size: 24px; line-height: 1.35; color: var(--text-muted); max-width: 1000px; }
+  .pills { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
   .pill {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,0.85); border: 1px solid rgba(79,70,229,0.18);
-    border-radius: 999px; padding: 10px 18px; font-size: 16px; font-weight: 500; color: #334155;
+    font-family: var(--font-mono); font-size: 18px; font-weight: 500; padding: 8px 16px;
+    border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text);
   }
-  .dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-  .dot-indigo { background: #4f46e5; }
-  .dot-purple { background: #7c3aed; }
-  .dot-green { background: #059669; }
-  .dot-amber { background: #d97706; }
-  .viz {
-    position: absolute; right: 56px; top: 90px; width: 380px; height: 340px;
-    background: rgba(255,255,255,0.72); border: 1px solid rgba(79,70,229,0.12);
-    border-radius: 24px; box-shadow: 0 20px 50px rgba(79,70,229,0.10); overflow: hidden;
+  .pill.rank { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+  .pill.g-measured { background: var(--g-measured-bg); border-color: transparent; color: var(--g-measured); }
+  .pill.g-claim { background: var(--g-claim-bg); border-color: transparent; color: var(--g-claim); }
+  .pill.g-estimate { background: var(--g-estimate-bg); border-color: transparent; color: var(--g-estimate); }
+  .pill.g-assumption { background: var(--g-assumption-bg); border-color: transparent; color: var(--g-assumption); }
+  .pill.g-missing { background: var(--g-missing-bg); border-color: transparent; color: var(--g-missing); }
+  .stats { margin-top: auto; margin-bottom: 92px; display: flex; gap: 20px; }
+  .stat {
+    flex: 1; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 18px 22px; box-shadow: 0 1px 2px rgb(20 21 43 / 0.06), 0 4px 16px rgb(20 21 43 / 0.06);
   }
-  .viz-inner { position: relative; width: 100%; height: 100%; padding: 28px 24px 24px; }
-  .viz-label {
-    font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;
-    color: #64748b; letter-spacing: 0.02em; margin-bottom: 12px;
-  }
-  .plot {
-    position: relative; width: 100%; height: calc(100% - 28px);
-    border-left: 2px solid #cbd5e1; border-bottom: 2px solid #cbd5e1;
-  }
-  .pt {
-    position: absolute; width: 14px; height: 14px; border-radius: 50%;
-    transform: translate(-50%, 50%);
-  }
-  .pt.d { background: #a78bfa; opacity: 0.75; }
-  .pt.p { background: #059669; box-shadow: 0 0 0 4px rgba(5,150,105,0.18); }
-  .pt.i { background: #4f46e5; box-shadow: 0 0 0 4px rgba(79,70,229,0.18); }
-  .bar {
-    position: absolute; bottom: 0; width: 28px; border-radius: 6px 6px 0 0;
-    transform: translateX(-50%);
-  }
-  .bar.b1 { background: #4f46e5; }
-  .bar.b2 { background: #6366f1; opacity: 0.85; }
-  .bar.b3 { background: #a78bfa; opacity: 0.8; }
-  .axis-x, .axis-y {
-    position: absolute; font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px; color: #94a3b8;
-  }
-  .axis-x { bottom: 6px; right: 8px; }
-  .axis-y { top: 4px; left: 8px; }
+  .stat-value { font-family: var(--font-mono); font-size: 44px; font-weight: 600; line-height: 1.1; color: var(--accent); overflow-wrap: anywhere; }
+  .stat-value.long { font-size: 30px; }
+  .stat-label { margin-top: 8px; font-size: 18px; color: var(--text-muted); }
   .footer {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 72px;
-    background: #1e1b4b; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: #e2e8f0;
+    position: absolute; left: 72px; right: 64px; bottom: 0; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 17px; color: var(--text-muted);
   }
-  .footer .muted { color: #a5b4fc; }
 `;
 
-/** Wraps one card's frame markup in the shared document shell. */
-function renderCardDocument(frame) {
-  return `
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>${SHARED_CSS}</style></head>
-<body>
-${frame}
-</body></html>`;
+const HTML_ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+const GRADES = ["measured", "claim", "estimate", "assumption", "missing"];
+
+/** Escapes text for HTML element content and quoted attribute values. */
+export function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, (character) => HTML_ESCAPES[character]);
 }
 
-export function renderHomeCard() {
-  return renderCardDocument(`  <div class="frame">
-    <div class="brand">ValueRank</div>
-    <h1 class="title">ValueRank</h1>
-    <div class="subtitle">Frontier models ranked on real-world value</div>
-    <p class="desc">Independent rankings from Artificial Analysis &amp; DeepSWE Best.<br>Quality, cost, and value — one score.</p>
-    <div class="pill-row">
-      <div class="pill"><span class="dot dot-indigo"></span> v1.4.0</div>
-      <div class="pill"><span class="dot dot-green"></span> 21 models</div>
-    </div>
-    <div class="viz" aria-hidden="true">
-      <div class="viz-inner">
-        <div class="viz-label">Value vs Cost</div>
-        <div class="plot">
-          <span class="axis-y">Value</span>
-          <span class="axis-x">Cost →</span>
-          <span class="pt d" style="left:20%; bottom:30%"></span>
-          <span class="pt d" style="left:32%; bottom:42%"></span>
-          <span class="pt d" style="left:45%; bottom:38%"></span>
-          <span class="pt d" style="left:55%; bottom:55%"></span>
-          <span class="pt d" style="left:68%; bottom:48%"></span>
-          <span class="pt d" style="left:78%; bottom:62%"></span>
-          <span class="pt i" style="left:28%; bottom:68%"></span>
-          <span class="pt i" style="left:48%; bottom:78%"></span>
-          <span class="pt i" style="left:72%; bottom:85%"></span>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <span>valuerank.alolabs.dev</span>
-      <span class="muted">Open source · Independent</span>
-    </div>
-  </div>`);
+const stat = (value, label) => ({ value, label });
+
+/** Only the known evidence grades become CSS classes; anything else is drawn as "missing". */
+function gradeClass(grade) {
+  return `g-${GRADES.includes(grade) ? grade : "missing"}`;
 }
 
-export function renderCodingAgentsCard() {
-  return renderCardDocument(`  <div class="frame">
-    <div class="brand">ValueRank</div>
-    <h1 class="title compact">Coding Agent ValueRank</h1>
-    <div class="subtitle">value per dollar</div>
-    <p class="desc">Historical AA Coding Agent Index + Terminal-Bench 2.1 snapshot.<br>Current benchmark data is on the TB4 page.</p>
-    <div class="pill-row">
-      <div class="pill"><span class="dot dot-indigo"></span> Historical</div>
-      <div class="pill"><span class="dot dot-green"></span> 42 agents</div>
-    </div>
-    <div class="viz" aria-hidden="true">
-      <div class="viz-inner">
-        <div class="viz-label">Overall vs Cost</div>
-        <div class="plot">
-          <span class="axis-y">Overall</span>
-          <span class="axis-x">Cost →</span>
-          <span class="bar b3" style="left:18%; height:42%"></span>
-          <span class="bar b2" style="left:32%; height:58%"></span>
-          <span class="bar b1" style="left:46%; height:78%"></span>
-          <span class="bar b2" style="left:60%; height:64%"></span>
-          <span class="bar b3" style="left:74%; height:50%"></span>
-          <span class="bar b1" style="left:88%; height:70%"></span>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <span>valuerank.alolabs.dev/coding-agents</span>
-      <span class="muted">Open source · Independent</span>
-    </div>
-  </div>`);
+function formatScore(value) {
+  return value === null ? "—" : value.toFixed(1);
 }
 
-export function renderTb4Card() {
-  return renderCardDocument(`  <div class="frame">
-    <div class="brand">ValueRank</div>
-    <h1 class="title">Terminal-Bench 4.0</h1>
-    <div class="subtitle">Score vs Cost</div>
-    <p class="desc">Resolution rate (%) vs Cost (USD) with Pareto frontier.<br>Official snapshot from tbench.ai</p>
-    <div class="pill-row">
-      <div class="pill"><span class="dot dot-purple"></span> Dominated</div>
-      <div class="pill"><span class="dot dot-green"></span> Pareto frontier</div>
-    </div>
-    <div class="viz" aria-hidden="true">
-      <div class="viz-inner">
-        <div class="viz-label">Accuracy vs Cost</div>
-        <div class="plot">
-          <span class="axis-y">Acc %</span>
-          <span class="axis-x">Cost →</span>
-          <span class="pt d" style="left:18%; bottom:22%"></span>
-          <span class="pt d" style="left:28%; bottom:38%"></span>
-          <span class="pt d" style="left:36%; bottom:48%"></span>
-          <span class="pt d" style="left:44%; bottom:42%"></span>
-          <span class="pt d" style="left:52%; bottom:55%"></span>
-          <span class="pt d" style="left:58%; bottom:62%"></span>
-          <span class="pt d" style="left:68%; bottom:58%"></span>
-          <span class="pt d" style="left:74%; bottom:70%"></span>
-          <span class="pt d" style="left:82%; bottom:66%"></span>
-          <span class="pt p" style="left:22%; bottom:58%"></span>
-          <span class="pt p" style="left:40%; bottom:72%"></span>
-          <span class="pt p" style="left:62%; bottom:82%"></span>
-          <span class="pt p" style="left:88%; bottom:88%"></span>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <span>valuerank.alolabs.dev/tb4</span>
-      <span class="muted">Open source · Independent</span>
-    </div>
-  </div>`);
+function formatPercent(value) {
+  return `${value.toFixed(1)}%`;
 }
 
-const CARD_LAYOUT = [
-  { id: "home", outPath: ["site", "og.png"], render: renderHomeCard },
-  { id: "coding-agents", outPath: ["site", "coding-agents", "og.png"], render: renderCodingAgentsCard },
-  { id: "tb4", outPath: ["site", "tb4", "og.png"], render: renderTb4Card },
+function formatUsd(value) {
+  return `$${value.toFixed(2)}`;
+}
+
+function rankedModels(rankings) {
+  return rankings.models.filter((model) => model.rankingEligible);
+}
+
+function rankPill(basis, rank) {
+  return rank === null ? `${basis} unranked` : `${basis} #${rank}`;
+}
+
+// The core pages in catalogue order. Each stats function reads only the publication documents.
+const CORE_PAGES = [
+  {
+    key: "index",
+    path: "/",
+    kicker: "Overview",
+    headline: "Which AI model delivers the most value?",
+    description: "Frontier models ranked on measured quality against API and plan cost.",
+    stats({ rankings }) {
+      const pick = rankings.models.find((model) => model.slug === rankings.picks.plan.value.slug);
+      return [
+        stat(pick.name, "Top Plan pick"),
+        stat(formatScore(pick.overall.plan), "Plan overall"),
+        stat(String(rankedModels(rankings).length), "Models ranked"),
+      ];
+    },
+  },
+  {
+    key: "rankings",
+    path: "/rankings/",
+    kicker: "Rankings",
+    headline: "Every ranked model, on every dimension",
+    description: "Filter, sort and compare the full table on either the Plan or the API basis.",
+    stats({ rankings }) {
+      return [
+        stat(`${rankedModels(rankings).length} of ${rankings.models.length}`, "Models ranked"),
+        stat(String(rankings.dimensions.length), "Dimensions"),
+        stat(formatPercent(rankings.costWeightPct), "Default cost weight"),
+      ];
+    },
+  },
+  {
+    key: "models",
+    path: "/models/",
+    kicker: "Roster",
+    headline: "The ValueRank model roster",
+    description: "Every roster model with its ranks, evidence grade and sourced scores.",
+    stats({ rankings }) {
+      return [
+        stat(String(rankings.models.length), "Roster models"),
+        stat(String(rankedModels(rankings).length), "Ranked"),
+        stat(String(new Set(rankings.models.map((model) => model.developer)).size), "Developers"),
+      ];
+    },
+  },
+  {
+    key: "plans",
+    path: "/plans/",
+    kicker: "Plans",
+    headline: "Subscription plan value",
+    description: "Allowances and token efficiency, combined into cost per Index point.",
+    stats({ plans }) {
+      const priced = plans.candidates.filter((candidate) => candidate.planUsdPerPoint !== null);
+      const cheapest = Math.min(...priced.map((candidate) => candidate.planUsdPerPoint));
+      return [
+        stat(formatUsd(cheapest), "Best cost per Index point"),
+        stat(String(plans.routes.length), "Plan routes"),
+        stat(String(priced.length), "Models priced on a plan"),
+      ];
+    },
+  },
+  {
+    key: "benchmarks",
+    path: "/benchmarks/",
+    kicker: "Benchmarks",
+    headline: "The benchmarks behind each score",
+    description: "Sources, owners, versions, observation dates and coverage for every dimension.",
+    stats({ benchmarks }) {
+      return [
+        stat(String(benchmarks.sources.length), "Benchmark sources"),
+        stat(String(benchmarks.aaComponents.length), "Index components"),
+        stat(String(benchmarks.coverageMatrix.cohortN), "Cohort models"),
+      ];
+    },
+  },
+  {
+    key: "tb4",
+    path: "/benchmarks/terminal-bench-4/",
+    kicker: "Terminal-Bench 4.0",
+    headline: "Terminal-Bench 4.0: resolution against cost",
+    description: "The official leaderboard, with cohort coverage and labelled provider claims.",
+    stats({ tb4 }) {
+      return [
+        stat(String(tb4.rows.length), "Official rows"),
+        stat(String(tb4.frontierCount), "On the frontier"),
+        stat(`${tb4.matchedN} of ${tb4.cohortN}`, "Cohort models matched"),
+      ];
+    },
+  },
+  {
+    key: "methodology",
+    path: "/methodology/",
+    kicker: "Methodology",
+    headline: "How ValueRank scores a model",
+    description: "Dimensions, weights, renormalisation, evidence grades and a worked example.",
+    stats({ rankings }) {
+      return [
+        stat(String(rankings.dimensions.length), "Dimensions"),
+        stat(formatPercent(rankings.costWeightPct), "Cost weight"),
+      ];
+    },
+  },
+  {
+    key: "changelog",
+    path: "/changelog/",
+    kicker: "Changelog",
+    headline: "Every ValueRank release",
+    description: "Each release with its cohort, dimensions and rank changes, newest first.",
+    stats({ changelog }) {
+      const [latest] = changelog.versions;
+      return [
+        stat(latest.version, "Latest release"),
+        stat(latest.date, "Released"),
+        stat(String(changelog.versions.length), "Releases recorded"),
+      ];
+    },
+  },
+  {
+    key: "data",
+    path: "/data/",
+    kicker: "Data",
+    headline: "Machine-readable data for every table",
+    description: "JSON downloads with their schema and provenance, one document per table.",
+    stats({ rankings, dataFileCount }) {
+      return [
+        stat(String(dataFileCount), "JSON files"),
+        stat(String(rankings.models.length), "Model documents"),
+      ];
+    },
+  },
 ];
 
-/** The card set for a repository root: id, screenshot target and HTML. */
-export function buildCards(root) {
-  return CARD_LAYOUT.map(({ id, outPath, render }) => ({
-    id,
-    out: join(root, ...outPath),
-    html: render(),
+const ARCHIVE = {
+  kicker: "Archive",
+  headline: "Coding Agent ValueRank v0.3",
+  description: "Historical coding-agent results on Terminal-Bench 2.1, kept for provenance.",
+  pills: ["Archived", "No longer updated"],
+  stats: [stat("42", "Agents in the snapshot"), stat("2.1", "Terminal-Bench version"), stat("Jul 2026", "Snapshot month")],
+  path: "/archive/coding-agents-v0.3/",
+};
+
+/** The facts one core card shows: its path, copy and three numbers taken from the publication. */
+export function coreFacts(key, publication) {
+  const page = CORE_PAGES.find((candidate) => candidate.key === key);
+  if (page === undefined) {
+    throw new Error(`no core card for ${key}`);
+  }
+  return {
+    path: page.path,
+    kicker: page.kicker,
+    headline: page.headline,
+    description: page.description,
+    stats: page.stats(publication),
+  };
+}
+
+/** The facts one model card shows: its name and developer, rank pills, evidence grade and three numbers. */
+export function modelFacts(model) {
+  return {
+    slug: model.slug,
+    name: model.name,
+    developer: model.developer,
+    path: `/models/${model.slug}/`,
+    grade: model.grade,
+    pills: [rankPill("Plan", model.rank.plan), rankPill("API", model.rank.api)],
+    stats: [
+      stat(formatScore(model.overall.plan), "Plan overall"),
+      stat(formatScore(model.overall.api), "API overall"),
+      stat(formatScore(model.quality), "Quality"),
+    ],
+  };
+}
+
+function renderCardDocument(frame) {
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>ValueRank share card</title><style>${SHARED_CSS}</style></head><body>${frame}</body></html>`;
+}
+
+function header(version) {
+  return `<div class="top"><div class="wordmark">ValueRank</div><div class="version">${escapeHtml(version)}</div></div>`;
+}
+
+function footer(path) {
+  return `<div class="footer"><span>valuerank.alolabs.dev${escapeHtml(path)}</span><span>Open source · Independent</span></div>`;
+}
+
+function statHtml({ value, label }) {
+  const size = value.length > 10 ? " long" : "";
+  return `<div class="stat"><div class="stat-value${size}">${escapeHtml(value)}</div><div class="stat-label">${escapeHtml(label)}</div></div>`;
+}
+
+/** The HTML document for one core page card. */
+export function renderCoreCard(facts, version) {
+  return renderCardDocument(`<div class="frame">${header(version)}
+    <div class="kicker">${escapeHtml(facts.kicker)}</div>
+    <h1 class="headline">${escapeHtml(facts.headline)}</h1>
+    <p class="description">${escapeHtml(facts.description)}</p>
+    <div class="stats">${facts.stats.map(statHtml).join("")}</div>
+    ${footer(facts.path)}
+  </div>`);
+}
+
+/** The HTML document for one roster model card. */
+export function renderModelCard(facts, version) {
+  const pills = facts.pills.map((text) => `<span class="pill rank">${escapeHtml(text)}</span>`);
+  pills.push(`<span class="pill grade ${gradeClass(facts.grade)}">Evidence: ${escapeHtml(facts.grade)}</span>`);
+  return renderCardDocument(`<div class="frame">${header(version)}
+    <div class="kicker">${escapeHtml(facts.developer)}</div>
+    <h1 class="headline">${escapeHtml(facts.name)}</h1>
+    <div class="pills">${pills.join("")}</div>
+    <div class="stats">${facts.stats.map(statHtml).join("")}</div>
+    ${footer(facts.path)}
+  </div>`);
+}
+
+/** The HTML document for the archived coding-agents v0.3 card. */
+export function renderArchiveCard(version) {
+  const pills = ARCHIVE.pills.map((text) => `<span class="pill">${escapeHtml(text)}</span>`).join("");
+  return renderCardDocument(`<div class="frame">${header(version)}
+    <div class="kicker">${escapeHtml(ARCHIVE.kicker)}</div>
+    <h1 class="headline">${escapeHtml(ARCHIVE.headline)}</h1>
+    <p class="description">${escapeHtml(ARCHIVE.description)}</p>
+    <div class="pills">${pills}</div>
+    <div class="stats">${ARCHIVE.stats.map(statHtml).join("")}</div>
+    ${footer(ARCHIVE.path)}
+  </div>`);
+}
+
+/** The card set for a repository root, in build order: core pages, roster models, then the archive. */
+export function buildCards(root, publication) {
+  const version = publication.rankings.version;
+  const core = CORE_PAGES.map(({ key }) => ({
+    id: key,
+    out: join(root, ...SITE_OG, `${key}.png`),
+    html: renderCoreCard(coreFacts(key, publication), version),
   }));
+  const models = publication.rankings.models.map((model) => ({
+    id: `model-${model.slug}`,
+    out: join(root, ...SITE_OG, "models", `${model.slug}.png`),
+    html: renderModelCard(modelFacts(model), version),
+  }));
+  const archive = { id: "archive", out: join(root, ...SITE_OG, "archive.png"), html: renderArchiveCard(version) };
+  return [...core, ...models, archive];
+}
+
+function countFiles(dir, extension) {
+  let count = 0;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      count += countFiles(join(dir, entry.name), extension);
+    } else if (entry.name.endsWith(extension)) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+/** Reads the public documents the cards are drawn from. Throws when one of them is missing. */
+export function readPublication(root) {
+  const dataDir = join(root, "site", "data");
+  const readJson = (...parts) => JSON.parse(readFileSync(join(dataDir, ...parts), "utf8"));
+  return {
+    rankings: readJson("rankings.json"),
+    plans: readJson("plans.json"),
+    changelog: readJson("changelog.json"),
+    benchmarks: readJson("benchmarks.json"),
+    tb4: readJson("benchmarks", "terminal-bench-4.json"),
+    dataFileCount: countFiles(dataDir, ".json"),
+  };
 }
 
 /**
- * Writes each card's HTML into <root>/.tmp/og and screenshots it into the site.
+ * Reads the publication, writes each card's HTML into <root>/.tmp/og and screenshots it into site/og.
+ * The data is read before the browser starts, so a missing document never launches Chromium.
  * The browser is closed even when a page fails.
  */
-export async function run({ root = ROOT, chromium, log = console.log }) {
+export async function run({ root = ROOT, chromium, log = console.log, publication }) {
+  const cards = buildCards(root, publication ?? readPublication(root));
   const browser = await chromium.launch({ headless: true });
   try {
     const workDir = join(root, ".tmp", "og");
     mkdirSync(workDir, { recursive: true });
-    for (const card of buildCards(root)) {
+    for (const card of cards) {
       const htmlPath = join(workDir, `${card.id}.html`);
       writeFileSync(htmlPath, card.html);
       const page = await browser.newPage({

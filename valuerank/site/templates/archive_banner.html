@@ -1,7 +1,8 @@
-<aside class="archive-banner" role="note">
+<link rel="stylesheet" href="/assets/css/archive.css">
+<aside class="archive-banner" aria-label="Archived snapshot notice">
   <div class="wrap">
     <strong>Archived snapshot.</strong>
     This page is a frozen copy archived on {{ page.archiveDate }} and is no longer updated.{% if page.note is defined %} {{ page.note }}{% endif %}
-    <a href="{{ page.archiveHref }}">See the current benchmarks</a>.
+    <a href="{{ page.archiveHref }}">See the current benchmarks</a>
   </div>
 </aside>

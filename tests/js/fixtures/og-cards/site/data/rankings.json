@@ -1,0 +1,53 @@
+{
+  "version": "v1.9.6",
+  "publishDate": "October 8, 2026",
+  "observedAt": "2026-10-07T17:23:20Z",
+  "bases": {
+    "api": {"label": "API ranking", "costLabel": "API cost", "costUnit": "USD per Index run", "description": "AA total evaluation cost at API rates."},
+    "plan": {"label": "Plan ranking", "costLabel": "Plan cost", "costUnit": "USD per Index point", "description": "AA total evaluation cost divided by the highest eligible Value Multiple and the AA Intelligence Index."}
+  },
+  "defaultBasis": "plan",
+  "costWeightPct": 18.9394,
+  "dimensions": [
+    {"key": "costComposite", "label": "Cost", "fullLabel": "Cost (selected basis)", "category": "cost", "weightPct": 18.9394, "priority": 25, "higherBetter": false, "sourceUrl": null},
+    {"key": "deepswePassAt1", "label": "DeepSWE v1.1", "fullLabel": "DeepSWE v1.1 pass@1", "category": "code", "weightPct": 40, "priority": 30, "higherBetter": true, "sourceUrl": "https://example.test/deepswe"},
+    {"key": "hle", "label": "HLE", "fullLabel": "Humanity's Last Exam", "category": "intel", "weightPct": 41.0606, "priority": 45, "higherBetter": true, "sourceUrl": "https://example.test/hle"}
+  ],
+  "categories": {"cost": "Cost", "code": "Code/Agentic", "intel": "Intelligence"},
+  "models": [
+    {
+      "slug": "alpha-one", "name": "Alpha One", "shortName": "Alpha One", "developer": "Acme AI",
+      "aaUrl": "https://example.test/models/alpha-one", "aaVariant": "max",
+      "rankingEligible": true, "exclusionReasons": [],
+      "rank": {"api": 1, "plan": 2}, "overall": {"api": 74.3, "plan": 75.7}, "quality": 74.6, "qualityRank": 2,
+      "grade": "measured", "speed": 86.2, "tier": "Near-Budget", "pareto": {"api": true, "plan": true}
+    },
+    {
+      "slug": "beta-two", "name": "Beta <Two> & Co", "shortName": "Beta Two", "developer": "Beta Labs",
+      "aaUrl": "https://example.test/models/beta-two", "aaVariant": "high",
+      "rankingEligible": true, "exclusionReasons": [],
+      "rank": {"api": 2, "plan": 1}, "overall": {"api": 70.1, "plan": 80.2}, "quality": 71.0, "qualityRank": 3,
+      "grade": "estimate", "speed": 60.5, "tier": "Mid-Range", "pareto": {"api": false, "plan": true}
+    },
+    {
+      "slug": "gamma-three", "name": "Gamma Three", "shortName": "Gamma Three", "developer": "Acme AI",
+      "aaUrl": "https://example.test/models/gamma-three", "aaVariant": "max",
+      "rankingEligible": false, "exclusionReasons": ["No Plan route and no API-priced run"],
+      "rank": {"api": null, "plan": null}, "overall": {"api": null, "plan": null}, "quality": null, "qualityRank": null,
+      "grade": "missing", "speed": null, "tier": null, "pareto": {"api": false, "plan": false}
+    }
+  ],
+  "picks": {
+    "api": {
+      "value": {"slug": "alpha-one", "reason": "Alpha One has the highest overall score on the API basis."},
+      "quality": {"slug": "beta-two", "reason": "Beta Two has the best quality score."},
+      "budget": {"slug": "alpha-one", "reason": "Alpha One scores best among the cheapest third."}
+    },
+    "plan": {
+      "value": {"slug": "beta-two", "reason": "Beta Two has the highest overall score on the Plan basis."},
+      "quality": {"slug": "beta-two", "reason": "Beta Two has the best quality score."},
+      "budget": {"slug": "beta-two", "reason": "Beta Two scores best among the cheapest third."}
+    }
+  },
+  "planMeta": {"asOf": "2026-10-08", "routeCount": 2, "supportedModelCount": 2, "fallbackModelCount": 1, "totalModelCount": 3}
+}

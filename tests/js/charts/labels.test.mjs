@@ -111,14 +111,43 @@ test('near-edge placement spills are costed when no in-bounds slot exists', () =
   assert.equal(annotations.length, 2);
 });
 
+test('labels at the plot edges stay inside the plot area, not just the figure', () => {
+  const geo = geometry();
+  const edges = [
+    { label: 'Left edge', x: 0, y: 50 }, { label: 'Right edge', x: 100, y: 50 },
+    { label: 'Top edge', x: 50, y: 100 }, { label: 'Bottom edge', x: 50, y: 0 },
+    { label: 'Top left', x: 0, y: 100 }, { label: 'Bottom right', x: 100, y: 0 },
+  ];
+  const annotations = buildCollisionSafeLabelAnnotations(edges, geo);
+  assert.equal(annotations.length, edges.length);
+  annotations.forEach((annotation) => {
+    const box = boxOf(annotation, geo);
+    const { x: xa, y: ya } = geo;
+    assert.ok(box.left >= xa.offset && box.right <= xa.offset + xa.length, `${annotation.text} spills horizontally: ${JSON.stringify(box)}`);
+    assert.ok(box.top >= ya.offset && box.bottom <= ya.offset + ya.length, `${annotation.text} spills vertically: ${JSON.stringify(box)}`);
+  });
+});
+
+test('a crowded small plot is compacted until every label has a slot', () => {
+  const geo = geometry({ width: 300, height: 250, x: { type: 'linear', offset: 50, length: 200, l2p: (v) => v * 2 }, y: { type: 'linear', offset: 50, length: 150, l2p: (v) => 150 - v * 1.5 } });
+  let seed = 1;
+  const next = () => { seed = (seed * 16807) % 2147483647; return (seed / 2147483647) * 100; };
+  const points = Array.from({ length: 12 }, (_, i) => ({ label: `Mdl ${i}`, x: next(), y: next(), frontier: i % 5 === 0 }));
+  const annotations = buildCollisionSafeLabelAnnotations(points, geo, { markerRadius: 11 });
+  assert.equal(annotations.length, 12);
+  assert.ok(annotations.every((a) => Number.isFinite(a.x) && Number.isFinite(a.y)));
+  assert.ok(annotations.some((a) => a.showarrow), 'leader lines connect the displaced labels');
+});
+
 const rect = (left, top, w = 40, h = 12) => ({ left, right: left + w, top, bottom: top + h });
-const makeIO = (frames, { bounds = { left: 0, right: 1000, top: 0, bottom: 600 } } = {}) => {
+const makeIO = (frames, { bounds = { left: 0, right: 1000, top: 0, bottom: 600 }, plot } = {}) => {
   let frame = 0;
   const log = { relayouts: 0, paints: 0 };
   return {
     log,
     readBoxes: () => frames[Math.min(frame, frames.length - 1)].map((entry) => ({ index: entry.index, rect: entry.rect })),
     bounds: () => bounds,
+    ...(plot ? { plot: () => plot } : {}),
     relayout: async () => { log.relayouts += 1; frame += 1; },
     waitForPaint: async () => { log.paints += 1; },
   };
@@ -182,6 +211,83 @@ test('repair stops after the pass limit and tolerates a degenerate bottom bound'
   assert.equal(io.log.relayouts, 2);
 });
 
+const PLOT = { left: 100, right: 900, top: 50, bottom: 450 };
+const finalBox = (annotation, box) => {
+  const dx = annotation.showarrow ? annotation.ax : annotation.xshift;
+  const dy = annotation.showarrow ? annotation.ay : annotation.yshift;
+  return { left: box.left + dx, right: box.right + dx, top: box.top + dy, bottom: box.bottom + dy };
+};
+
+test('repair flips or clamps measured labels that spill out of the plot, leaving the rest alone', async () => {
+  const anns = [
+    { text: 'Flip left', x: 0, y: 0.5, showarrow: false, xshift: -5, yshift: 0 },
+    { text: 'Straddle', x: 0, y: 0.25, showarrow: true, ax: 3, ay: 4 },
+    { text: 'Flip down', x: 0.5, y: 0, showarrow: true, ax: 0, ay: 20 },
+    { text: 'Flip right', x: 0.9, y: 0.75, showarrow: false },
+    { text: 'Fine', x: 0.4, y: 0.5, showarrow: false },
+  ];
+  const before = [
+    { index: 0, rect: rect(60, 244) },
+    { index: 1, rect: rect(70, 344) },
+    { index: 2, rect: rect(480, 452) },
+    { index: 3, rect: rect(850, 144, 100) },
+    { index: 4, rect: rect(300, 200) },
+  ];
+  const clean = before.map((entry, i) => ({ index: i, rect: rect(100 + i * 100, 100) }));
+  const io = makeIO([before, clean], { plot: PLOT });
+  await repairCollisionSafeLabelAnnotations(anns, io, { repairPad: 0 });
+  assert.equal(io.log.relayouts, 1);
+  assert.equal(anns[0].ax, -5 + 40, 'flipped to the other side of the point');
+  assert.equal(anns[0].showarrow, true);
+  assert.equal(anns[0].xshift, 0);
+  assert.equal(anns[0].axref, 'pixel');
+  assert.equal(anns[1].ax, 3 + 30, 'a label straddling the edge is clamped');
+  assert.equal(anns[1].ay, 4);
+  assert.equal(anns[2].ay, 20 - 16, 'flipped above the bottom edge');
+  assert.equal(anns[2].ax, 0);
+  assert.equal(anns[3].ax, -160, 'flipped left of the right edge');
+  assert.equal(anns[4].showarrow, false, 'a label inside the plot is untouched');
+  assert.equal('ax' in anns[4], false);
+  const moves = [[40, 0], [30, 0], [0, -16], [-160, 0]];
+  moves.forEach(([dx, dy], i) => {
+    const { left, right, top, bottom } = before[i].rect;
+    assert.ok(left + dx >= PLOT.left && right + dx <= PLOT.right && top + dy >= PLOT.top && bottom + dy <= PLOT.bottom, anns[i].text);
+  });
+});
+
+test('repair clamps labels wider or taller than the room the mirror image has, and ignores plots it cannot read', async () => {
+  const anns = [{ text: 'Wide', x: 0.5, y: 0.5, showarrow: true, ax: 0, ay: 0 }, { text: 'Tall', x: 0.5, y: 0.5, showarrow: true, ax: 0, ay: 0 }];
+  const spilled = [{ index: 0, rect: rect(60, 100, 900, 12) }, { index: 1, rect: rect(300, 20, 40, 500) }];
+  const io = makeIO([spilled, [{ index: 0, rect: rect(100, 100) }, { index: 1, rect: rect(300, 300) }]], { plot: PLOT });
+  await repairCollisionSafeLabelAnnotations(anns, io, { repairPad: 0 });
+  assert.equal(anns[0].ax, 40, 'too wide for either side: pinned to the left edge');
+  assert.equal(anns[1].ay, 30, 'too tall for either side: pinned to the top edge');
+  const legacyAnns = [{ text: 'A', x: 0, y: 0.5, showarrow: false }];
+  const legacy = makeIO([[{ index: 0, rect: rect(-20, 244) }]]);
+  await repairCollisionSafeLabelAnnotations(legacyAnns, legacy);
+  assert.equal(legacy.log.relayouts, 0, 'without a plot rectangle there is nothing to clamp to');
+});
+
+test('repair nudges a label that barely spills instead of flipping it across its point', async () => {
+  const anns = [{ text: 'Near', x: 0.3, y: 0.5, showarrow: true, ax: 0, ay: 0 }];
+  const io = makeIO([[{ index: 0, rect: rect(98, 200) }], [{ index: 0, rect: rect(100, 200) }]], { plot: PLOT });
+  await repairCollisionSafeLabelAnnotations(anns, io, { repairPad: 0 });
+  assert.deepEqual([anns[0].ax, anns[0].ay], [2, 0]);
+});
+
+test('repair packs colliding labels inside the plot area when one is known', async () => {
+  const anns = [{ text: 'A', showarrow: false }, { text: 'B', showarrow: false }];
+  const plot = { left: 100, right: 700, top: 100, bottom: 300 };
+  const stacked = [{ index: 0, rect: rect(300, 150) }, { index: 1, rect: rect(310, 152) }];
+  const io = makeIO([stacked, [{ index: 0, rect: rect(100, 100) }, { index: 1, rect: rect(300, 100) }]], { plot });
+  await repairCollisionSafeLabelAnnotations(anns, io, { repairEdge: 4 });
+  assert.equal(io.log.relayouts, 1);
+  stacked.forEach((entry, i) => {
+    const box = finalBox(anns[i], entry.rect);
+    assert.ok(box.left >= plot.left + 4 && box.right <= plot.right - 4 && box.top >= plot.top + 4 && box.bottom <= plot.bottom - 4, JSON.stringify(box));
+  });
+});
+
 test('createRepairIO reads annotation text boxes from the rendered SVG', async () => {
   const annotations = [{ text: '<b>A</b>' }, { text: 'B' }];
   const div = createPlotDiv({
@@ -196,6 +302,7 @@ test('createRepairIO reads annotation text boxes from the rendered SVG', async (
   const io = createRepairIO(div, annotations, { relayout: (a) => { calls.push(a); return Promise.resolve(); }, raf: (cb) => cb() });
   assert.deepEqual(io.readBoxes(), [{ index: 0, rect: { left: 1, right: 11, top: 1, bottom: 5 } }]);
   assert.deepEqual(io.bounds(), { left: 0, right: 10, top: 0, bottom: 10 });
+  assert.deepEqual(io.plot(), { left: 50, right: 850, top: 50, bottom: 550 }, 'the plot area is the figure minus its margins');
   await io.relayout();
   await io.waitForPaint();
   assert.equal(calls[0], annotations);

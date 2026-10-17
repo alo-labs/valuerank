@@ -1,0 +1,25 @@
+/* Fixes for the archived coding-agents v0.3 page. That page keeps its legacy markup and colour variables;
+   these rules add readable contrast, 44px targets and a legible archive banner in both themes.
+   Loaded by archive_banner.html. */
+:root { --text-dim: #5b6b82; --green: #047857; }
+[data-theme="dark"] { --text-dim: #94a3b8; --accent: #818cf8; --green: #34d399; }
+
+.vr-nav-badge, .badge { background: #4f46e5; color: #fff; }
+
+/* The legacy header is fixed and 64px tall: sit the banner below it and trim the main padding that reserved room for it. */
+.archive-banner { margin-top: 64px; padding: 12px 24px; background: var(--bg-card, #fff); color: var(--text-primary, #0f172a); border-bottom: 1px solid var(--border, #e2e8f0); border-left: 4px solid var(--accent, #4f46e5); font: 14px/1.6 var(--font-heading, system-ui, sans-serif); }
+.archive-banner .wrap { max-width: 1100px; margin: 0 auto; }
+.archive-banner a { display: flex; width: fit-content; align-items: center; min-height: 44px; color: var(--accent, #4f46e5); text-decoration: underline; text-underline-offset: 3px; }
+.archive-banner + .vr-site-header + main { padding-top: 24px; }
+
+/* 44px minimum targets. */
+.vr-mode-btn, .vr-nav-links a, .vr-nav-brand-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; }
+.vr-mode-switcher { flex: 1 1 0; min-width: 0; overflow-x: auto; }
+.vr-mode-btn { flex: none; }
+.vr-nav-links { gap: 6px; }
+.vr-nav-links a { padding: 0 8px; }
+.vr-theme-toggle { width: 44px; height: 44px; }
+.vr-sortable thead th { padding-block: 13px; min-width: 44px; }
+footer a { display: inline-flex; align-items: center; min-height: 44px; }
+
+:focus-visible { outline: 3px solid var(--accent, #4f46e5); outline-offset: 2px; }

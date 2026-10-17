@@ -3,17 +3,16 @@
 {%- set by = {} -%}
 {%- for m in page.models %}{% if by.update({m.slug: m}) %}{% endif %}{% endfor -%}
 {%- set cur = page.picks[site.defaultBasis] -%}
-{%- set titles = {"value": "Best overall value", "quality": "Best quality, any cost", "budget": "Best on a budget"} -%}
 <section id="picks" class="picks" aria-labelledby="picks-title">
   <h2 id="picks-title" class="section-title">Our three picks</h2>
   <div class="pick-grid">
-    {%- for kind in ["value", "quality", "budget"] %}
+    {%- for kind in ["value", "other", "budget"] %}
     {%- set p = cur[kind] -%}
     {%- set m = by.get(p.slug) if p and p.slug else none %}
     <article class="pick" data-pick="{{ kind }}">
-      <h3 class="pick-kind">{{ titles[kind] }}</h3>
+      <h3 class="pick-kind" data-pick-label>{{ p.label if p else "" }}</h3>
       <p class="pick-name">{% if m %}<a data-pick-name href="/models/{{ m.slug }}/">{{ m.name }}</a>{% else %}&ndash;{% endif %}</p>
-      <p class="pick-score" data-pick-score>{% if m %}{{ num(m.overall[site.defaultBasis] if kind != "quality" else m.quality) }}<span class="unit">{{ "overall" if kind != "quality" else "quality" }}</span>{% endif %}</p>
+      <p class="pick-score" data-pick-score>{% if m %}{{ num(p.score) }}<span class="unit">{{ p.unit }}</span>{% endif %}</p>
       <p class="pick-reason" data-pick-reason>{{ p.reason if p else "" }}</p>
     </article>
     {%- endfor %}

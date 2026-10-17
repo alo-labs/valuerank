@@ -12,11 +12,11 @@
   <meta property="og:title" content="Methodology · ValueRank v1.9.6">
   <meta property="og:description" content="How ValueRank scores models: dimensions, weights, renormalisation, evidence grades and limitations, with a worked example.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/methodology/">
-  <meta property="og:image" content="https://valuerank.alolabs.dev/og.png">
+  <meta property="og:image" content="https://valuerank.alolabs.dev/og/methodology.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Methodology · ValueRank v1.9.6">
   <meta name="twitter:description" content="How ValueRank scores models: dimensions, weights, renormalisation, evidence grades and limitations, with a worked example.">
-  <meta name="twitter:image" content="https://valuerank.alolabs.dev/og.png">
+  <meta name="twitter:image" content="https://valuerank.alolabs.dev/og/methodology.png">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <script>
     (function () {
@@ -67,7 +67,7 @@
 
 <section class="block" id="weights" aria-labelledby="weights-title">
   <h2 id="weights-title" class="section-title">Dimensions and weights</h2>
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="weights-title">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Dimensions and weights table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col">Category</th><th scope="col" class="col-num">Weight</th><th scope="col">Better when</th></tr></thead>
       <tbody>        <tr>
@@ -158,7 +158,7 @@
 <section class="block" id="worked-example" aria-labelledby="example-title">
   <h2 id="example-title" class="section-title">Worked example: Claude Opus 5.5</h2>
   <p>Each dimension score is multiplied by its weight, the products are added, and the sum is divided by the weight that actually had data (117 of 132 priority points).</p>
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="example-title">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Worked example: Claude Opus 5.5 table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Weight</th><th scope="col" class="col-num">Effective weight</th><th scope="col" class="col-num">Score (0&ndash;100)</th><th scope="col" class="col-num">Contribution</th></tr></thead>
       <tbody>        <tr><th scope="row" class="cell-model"><span class="model-name">Cost</span></th><td class="cell-num">18.94%</td><td class="cell-num">21.37%</td><td class="cell-num">73.3</td><td class="cell-num">15.67</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Non-Hallucination</span></th><td class="cell-num">4.55%</td><td class="cell-num">5.13%</td><td class="cell-num">33.3</td><td class="cell-num">1.71</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Terminal-Bench 4.0</span></th><td class="cell-num">4.55%</td><td class="cell-num">0.00%</td><td class="cell-num"><span class="na" title="No value">&ndash;</span></td><td class="cell-num">0.00</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Instruction Following (LiveBench)</span></th><td class="cell-num">3.79%</td><td class="cell-num">0.00%</td><td class="cell-num"><span class="na" title="No value">&ndash;</span></td><td class="cell-num">0.00</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">DeepSWE v1.1</span></th><td class="cell-num">18.94%</td><td class="cell-num">21.37%</td><td class="cell-num">61.5</td><td class="cell-num">13.14</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">GDPval-AA v2.1</span></th><td class="cell-num">4.55%</td><td class="cell-num">5.13%</td><td class="cell-num">100.0</td><td class="cell-num">5.13</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AutomationBench-AA</span></th><td class="cell-num">3.79%</td><td class="cell-num">4.27%</td><td class="cell-num">100.0</td><td class="cell-num">4.27</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA-LCR v1.1</span></th><td class="cell-num">3.03%</td><td class="cell-num">3.42%</td><td class="cell-num">86.7</td><td class="cell-num">2.96</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA-Omniscience Accuracy</span></th><td class="cell-num">3.03%</td><td class="cell-num">3.42%</td><td class="cell-num">100.0</td><td class="cell-num">3.42</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">HLE</span></th><td class="cell-num">3.03%</td><td class="cell-num">3.42%</td><td class="cell-num">100.0</td><td class="cell-num">3.42</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">GPQA Diamond (legacy)</span></th><td class="cell-num">3.03%</td><td class="cell-num">0.00%</td><td class="cell-num"><span class="na" title="No value">&ndash;</span></td><td class="cell-num">0.00</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">SciCode</span></th><td class="cell-num">3.03%</td><td class="cell-num">3.42%</td><td class="cell-num">100.0</td><td class="cell-num">3.42</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">CritPt</span></th><td class="cell-num">2.27%</td><td class="cell-num">2.56%</td><td class="cell-num">86.7</td><td class="cell-num">2.22</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA Intelligence Index</span></th><td class="cell-num">4.55%</td><td class="cell-num">5.13%</td><td class="cell-num">100.0</td><td class="cell-num">5.13</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Speed</span></th><td class="cell-num">3.79%</td><td class="cell-num">4.27%</td><td class="cell-num">78.6</td><td class="cell-num">3.36</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Bug Hunt Bench</span></th><td class="cell-num">15.15%</td><td class="cell-num">17.09%</td><td class="cell-num">78.6</td><td class="cell-num">13.44</td></tr>      </tbody>

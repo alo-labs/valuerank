@@ -159,6 +159,7 @@ export class FakeElement {
   }
   click() { this.clicks += 1; this.fire('click'); }
   focus() { this.focused = true; this.ownerDocument.activeElement = this; }
+  scrollIntoView(options) { (this.scrolled ??= []).push(options); }
 }
 
 export function createDocument(bodyHtmlBuilder) {

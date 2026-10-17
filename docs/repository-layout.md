@@ -39,7 +39,7 @@ ValueRank is a research workspace with a small, reproducible publication pipelin
 | `/assets/` | Copied from `valuerank/site/assets/` | Stylesheet, ES modules, charts and favicon. |
 | `/data/*.json` | `valuerank/site/export.py` | `rankings.json`, `plans.json`, `benchmarks.json`, `livebench.json`, `changelog.json`, `benchmarks/terminal-bench-4.json` and `models/<slug>.json`. |
 | `/sitemap.xml`, `/robots.txt` | `valuerank/site/build.py` | The sitemap lists every generated page and the archive page. |
-| `/og.png`, `/tb4/og.png`, `/coding-agents/og.png` | `scripts/generate-og-cards.mjs` | Share images. Three cards today. Pages point to `/og.png`, except Terminal-Bench 4.0, which points to `/tb4/og.png`. |
+| `/og/<key>.png`, `/og/models/<slug>.png`, `/og/archive.png` | `scripts/generate-og-cards.mjs` | Share images, one per page, drawn from the public JSON; each page's `og:image` points at its own card. |
 
 ## Path map for historical references
 

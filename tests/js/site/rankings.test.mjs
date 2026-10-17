@@ -366,7 +366,7 @@ test('answer page lists at most 16 models', () => {
     ...data.models[0], slug: `m${i}`, name: `M${i}`, rank: { api: i + 1, plan: i + 1 }, overall: { api: 50, plan: 50 },
   }));
   const page = indexPage();
-  page.win.document.getElementById('rankings-data').replaceChildren(JSON.stringify({ ...data, models: many, picks: { plan: { value: null, quality: null, budget: null }, api: {} } }));
+  page.win.document.getElementById('rankings-data').replaceChildren(JSON.stringify({ ...data, models: many, picks: { plan: { value: null, other: null, budget: null }, api: {} } }));
   initIndex(page.win);
   assert.equal(slugsInOrder(page).length, 16);
 });
@@ -376,11 +376,15 @@ test('committed picks are shown at the default weight and update with the basis'
   assert.equal(p.picks.value.name.textContent, 'Alpha');
   assert.equal(p.picks.value.name.getAttribute('href'), '/models/alpha/');
   assert.equal(p.picks.value.reason.textContent, 'committed value');
+  assert.equal(p.picks.value.label.textContent, 'Best overall value');
   assert.equal(p.picks.value.score.textContent, '71.6overall');
-  assert.equal(p.picks.quality.score.textContent, '90.0quality');
+  assert.equal(p.picks.other.label.textContent, 'Best at API rates');
+  assert.equal(p.picks.other.name.textContent, 'Beta');
+  assert.equal(p.picks.other.score.textContent, '75.3overall at API rates');
   p.toggle.api.click();
   assert.equal(p.picks.value.name.textContent, 'Beta');
   assert.equal(p.picks.value.reason.textContent, 'committed api value');
+  assert.equal(p.picks.other.label.textContent, 'Best on a subscription');
   assert.equal(p.win.document.documentElement.getAttribute('data-basis'), 'api');
   assert.equal(p.basisLabel.textContent, 'API ranking');
   assert.equal(p.win.history.calls.at(-1), '/?basis=api');
@@ -393,12 +397,16 @@ test('moving the cost weight re-renders the table and recomputes the picks from 
   assert.deepEqual(slugsInOrder(p), ['gamma', 'alpha', 'beta']);
   assert.equal(p.picks.value.name.textContent, 'Gamma');
   assert.match(p.picks.value.reason.textContent, /Gamma has the highest overall score/);
+  // Gamma also leads the other basis at this weight, so the second card shows the quality leader instead.
+  assert.equal(p.picks.other.label.textContent, 'Best quality, any cost');
+  assert.equal(p.picks.other.name.textContent, 'Beta');
+  assert.equal(p.picks.other.score.textContent, '90.0quality');
   assert.equal(p.sliderOut.textContent, '100.0%');
   assert.equal(p.win.history.calls.at(-1), '/?w=100');
 });
 
 test('picks that are null are hidden', () => {
-  const none = { value: null, quality: null, budget: null };
+  const none = { value: null, other: null, budget: null };
   const page = indexPage();
   const lone = { ...data, models: [data.models[3]], picks: { plan: none, api: none } };
   page.win.document.getElementById('rankings-data').replaceChildren(JSON.stringify(lone));

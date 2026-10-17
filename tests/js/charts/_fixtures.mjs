@@ -70,7 +70,7 @@ export function createPlotDiv({ boxes = [], rect = { left: 0, right: 1000, top: 
   const axis = (type) => ({ type, _offset: 50, _length: 800, l2p: (v) => v * 8 });
   const div = {
     attrs: {}, parentNode: parent, textContent: '',
-    _fullLayout: layout === undefined ? { width: 1000, height: 600, xaxis: axis('linear'), yaxis: axis('linear') } : layout,
+    _fullLayout: layout === undefined ? { width: 1000, height: 600, _size: { l: 50, t: 50, w: 800, h: 500 }, xaxis: axis('linear'), yaxis: axis('linear') } : layout,
     setAttribute(name, value) { this.attrs[name] = value; },
     getBoundingClientRect: () => rect,
     boxes,

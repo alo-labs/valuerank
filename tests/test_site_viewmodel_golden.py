@@ -210,11 +210,25 @@ def test_picks_reference_ranked_models_and_use_plain_reasons(bundle):
     for basis in ("api", "plan"):
         value = picks[basis]["value"]
         assert models[value["slug"]]["rank"][basis] == 1
-        assert models[picks[basis]["quality"]["slug"]]["qualityRank"] == 1
         budget = models[picks[basis]["budget"]["slug"]]
         assert budget["costDims"][basis] is not None
         for pick in picks[basis].values():
             assert len(pick["reason"].split()) < 25
+            assert set(pick) == {"slug", "label", "reason", "score", "unit"}
+
+
+def test_picks_show_three_different_models_with_data_driven_labels(bundle):
+    picks = bundle.rankings["picks"]
+    for basis in ("api", "plan"):
+        assert len({pick["slug"] for pick in picks[basis].values()}) == 3
+    assert picks["plan"]["other"]["label"] == "Best at API rates"
+    assert models_rank(bundle, picks["plan"]["other"]["slug"]) == {"api": 1, "plan": 2}
+    assert picks["api"]["other"]["label"] == "Best on a subscription"
+    assert models_rank(bundle, picks["api"]["other"]["slug"]) == {"api": 5, "plan": 1}
+
+
+def models_rank(bundle, slug):
+    return by_slug(bundle.rankings)[slug]["rank"]
 
 
 # --- models/<slug>.json ----------------------------------------------------------------------
@@ -368,8 +382,10 @@ def test_changelog_document(bundle):
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
     assert set(page["headline"]) == {"api", "plan"}
-    assert "GPT-6.1 Sol" in page["headline"]["api"] and "Claude Opus 5.5 leads on quality alone" in page["headline"]["api"]
-    assert page["headline"]["plan"].endswith("ranks first with an overall score of 77.3 and also leads on quality alone.")
+    assert page["headline"]["api"] == "GPT-6.1 Sol leads the API ranking at 74.3; Claude Opus 5.5 leads on quality."
+    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 77.3 and also leads on quality."
+    for sentence in page["headline"].values():
+        assert len(sentence.split()) <= 18
     assert page["picks"] == bundle.rankings["picks"]
     assert len(page["models"]) == 16
     assert [m["rank"]["plan"] for m in page["models"]] == list(range(1, 17))

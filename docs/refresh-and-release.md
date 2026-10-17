@@ -44,14 +44,14 @@ Update every version site together. `tests/test_release_metadata.py` fails when 
 ```bash
 npm run build:scores        # data/scores.json, data/coverage_matrix.json, data/ranking_summary.json, data/run_manifest.json
 npm run reconcile:aa        # data/aa_reconciliation_report.json; exit 1 blocks the release when the frontier is stale or incomplete
-npm run build:publication   # README.md, methodology.md, scores.md, raw-data.md (emitter); site/** (site build); site/og.png, site/tb4/og.png, site/coding-agents/og.png (OG cards)
+npm run build:publication   # README.md, methodology.md, scores.md, raw-data.md (emitter); site/** (site build); site/og/** (OG cards)
 ```
 
 Do not set `VALUERANK_NOW` during a real refresh: the stamped instant must be the actual observation time. Afterwards, `data/ranking_summary.json` holds that instant, and `npm run verify:docs` reproduces the outputs from it.
 
 `site/` is generated in full, so never edit a file under `site/` by hand. Change the snapshots, `valuerank/site/` (view models, templates or assets) or the data contract in `docs/site-data-contract.md`, then run `npm run build:publication`. The build replaces `site/assets/`, rewrites the pages, and removes model pages for models that left the roster.
 
-The OG script (`npm run generate:og`) writes the share cards on every publication build. It writes three cards today: home, coding agents and Terminal-Bench 4.0. Per-page cards for the new site are not produced yet; see `docs/site-experience-plan.md`, phase 5.
+The OG script (`npm run generate:og`) writes the share cards on every publication build, one per core page (`site/og/<key>.png`), one per roster model (`site/og/models/<slug>.png`) and `site/og/archive.png`, all read from `site/data/`, and its pixels are only checked by eye, so look at the home card and one model card after each release.
 
 ## 4. Verify
 

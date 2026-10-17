@@ -11,29 +11,47 @@
     "plan": {
       "value": {
         "slug": "alpha-one",
-        "reason": "Because value on plan."
+        "label": "Best overall value",
+        "reason": "Because value on plan.",
+        "score": 75.7,
+        "unit": "overall"
       },
-      "quality": {
+      "other": {
         "slug": "beta-two",
-        "reason": "Because quality on plan."
+        "label": "Best at API rates",
+        "reason": "Because other on plan.",
+        "score": 70.1,
+        "unit": "overall"
       },
       "budget": {
         "slug": "gamma-three",
-        "reason": "Because budget on plan."
+        "label": "Best on a budget",
+        "reason": "Because budget on plan.",
+        "score": 60.0,
+        "unit": "overall"
       }
     },
     "api": {
       "value": {
         "slug": "alpha-one",
-        "reason": "Because value on api."
+        "label": "Best overall value",
+        "reason": "Because value on api.",
+        "score": 75.7,
+        "unit": "overall"
       },
-      "quality": {
+      "other": {
         "slug": "beta-two",
-        "reason": "Because quality on api."
+        "label": "Best on a subscription",
+        "reason": "Because other on api.",
+        "score": 70.1,
+        "unit": "overall"
       },
       "budget": {
         "slug": "gamma-three",
-        "reason": "Because budget on api."
+        "label": "Best on a budget",
+        "reason": "Because budget on api.",
+        "score": 60.0,
+        "unit": "overall"
       }
     }
   },

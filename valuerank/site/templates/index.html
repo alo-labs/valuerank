@@ -34,7 +34,7 @@
     <summary>Adjust how much cost matters</summary>
     <div class="panel-body">{{ cost_slider(site) }}</div>
   </details>
-  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-title">
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Compact ranking table, scrolls sideways on small screens">
     <table id="answer-table" class="data-table table-cards" data-basis="{{ site.defaultBasis }}">
       <caption class="sr-only">Models ranked by <span data-basis-label>{{ site.basis[site.defaultBasis].label }}</span></caption>
       <thead><tr>{{ head_cells(cols, site, sortable=false) }}</tr></thead>

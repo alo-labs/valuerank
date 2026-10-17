@@ -22,7 +22,7 @@ ValueRank turns pinned benchmark and pricing snapshots into a ranked publication
 | 7 | `valuerank.aa_reconciliation` | `data/aa_reconciliation_inventory.json`, `data/aa_metrics.json`, `data/scores.json` | `data/aa_reconciliation_report.json` | Offline; fails when the inventory is older than 7 days |
 | 8 | `valuerank.emit_docs` | `data/` snapshots: scores, AA metrics, coverage matrix, AA DeepSWE, LiveBench, Terminal-Bench 4.0, Bug Hunt, run manifest, provider claims and plan cost routes | `README.md`, `methodology.md`, `scores.md`, `raw-data.md` (Markdown only) | Offline |
 | 9 | `valuerank.site.build` | `data/` snapshots (through the view models), `valuerank/site/templates/`, `valuerank/site/assets/`, `valuerank/site/legacy/coding-agents-v0.3.html` | `site/`: pages, `site/data/`, `site/assets/`, redirect stubs, `site/archive/coding-agents-v0.3/`, `site/sitemap.xml`, `site/robots.txt` | Offline; Jinja2 |
-| 10 | `scripts/generate-og-cards.mjs` | card definitions in the script | `site/og.png`, `site/tb4/og.png`, `site/coding-agents/og.png` (three cards today) | Playwright |
+| 10 | `scripts/generate-og-cards.mjs` | `site/data/*.json` | `site/og/<key>.png` for the nine core pages, `site/og/models/<slug>.png` per model, `site/og/archive.png` (38 cards) | Playwright |
 
 `npm run refresh` runs the stages in this order (see `package.json`). `npm run build:docs` runs stages 8 and 9, `npm run build:site` runs stage 9 alone, and `npm run build:publication` adds stage 10.
 

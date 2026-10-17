@@ -89,23 +89,50 @@ const leader = (models, score) => models.reduce(
   (best, m) => (best === null || score(m) > score(best) || (score(m) === score(best) && byName(m, best) < 0) ? m : best),
   null,
 );
-const pick = (m, reason) => (m ? { slug: m.slug, reason } : null);
+const rankOn = (models, basis, m) => 1 + models.filter(
+  (o) => o.overall[basis] > m.overall[basis] || (o.overall[basis] === m.overall[basis] && byName(o, m) < 0),
+).length;
+const pick = (m, label, reason, score, unit) => ({ slug: m.slug, label, reason, score, unit });
 
-/** The three picks for a basis, computed from the (possibly recomputed) models. */
-export function picks(models, basis) {
+// Second card: rank 1 on the other basis, else the quality leader, else the runner-up (never the first card's model).
+function otherPick(ranked, value, basis, bases) {
+  const otherKey = Object.keys(bases).find((k) => k !== basis);
+  const label = bases[basis].label;
+  const lead = leader(ranked.filter((m) => has(m.overall[otherKey])), (m) => m.overall[otherKey]);
+  if (lead && lead !== value) {
+    const phrase = bases[otherKey].pickPhrase;
+    return pick(lead, bases[otherKey].pickLabel, `${lead.name} ranks #1 ${phrase} and #${rankOn(ranked, basis, lead)} in the ${label}.`, lead.overall[otherKey], `overall ${phrase}`);
+  }
+  const topQuality = leader(ranked.filter((m) => has(m.quality)), (m) => m.quality);
+  if (topQuality && topQuality !== value) {
+    return pick(topQuality, 'Best quality, any cost', `${topQuality.name} has the best quality score (${fmtScore(topQuality.quality)}) before cost; it ranks #${rankOn(ranked, basis, topQuality)} in the ${label}.`, topQuality.quality, 'quality');
+  }
+  const runnerUp = leader(ranked.filter((m) => m !== value), (m) => m.overall[basis]);
+  return runnerUp && pick(runnerUp, 'Runner-up overall', `${runnerUp.name} is the runner-up in the ${label} at ${fmtScore(runnerUp.overall[basis])}.`, runnerUp.overall[basis], 'overall');
+}
+
+/**
+ * The three picks for a basis, computed from the (possibly recomputed) models, which must carry
+ * overall scores for both bases: best overall value, best on the other basis, best on a budget.
+ * Same rule as valuerank/site/picks.py.
+ */
+export function picks(models, basis, bases) {
   const ranked = models.filter((m) => has(m.overall[basis]));
   const overall = (m) => m.overall[basis];
   const best = leader(ranked, overall);
-  const withQuality = ranked.filter((m) => has(m.quality));
-  const topQuality = leader(withQuality, (m) => m.quality);
-  const cheap = ranked
-    .filter((m) => has(m.costDims[basis]))
-    .sort((a, b) => b.costDims[basis] - a.costDims[basis])
-    .slice(0, Math.ceil(ranked.filter((m) => has(m.costDims[basis])).length / 3));
+  if (!best) return { value: null, other: null, budget: null };
+  const other = otherPick(ranked, best, basis, bases);
+  const priced = ranked.filter((m) => has(m.costDims[basis])).sort((a, b) => b.costDims[basis] - a.costDims[basis]);
+  let cheap = priced.slice(0, Math.ceil(priced.length / 3));
+  if (cheap.length > 1) {
+    // Two or more priced models means two or more ranked ones, so the second pick exists.
+    const unpicked = cheap.filter((m) => m !== best && m.slug !== other.slug);
+    cheap = unpicked.length ? unpicked : cheap;
+  }
   const budget = leader(cheap, overall);
   return {
-    value: pick(best, best && `${best.name} has the highest overall score on this basis (${fmtScore(overall(best))}).`),
-    quality: pick(topQuality, topQuality && `${topQuality.name} has the highest quality score (${fmtScore(topQuality.quality)}), before cost is considered.`),
-    budget: pick(budget, budget && `${budget.name} has the best overall score (${fmtScore(overall(budget))}) among the cheapest third of models.`),
+    value: pick(best, 'Best overall value', `${best.name} has the highest overall score in the ${bases[basis].label} at ${fmtScore(overall(best))}.`, overall(best), 'overall'),
+    other,
+    budget: budget && pick(budget, 'Best on a budget', `${budget.name} scores best overall (${fmtScore(overall(budget))}) among the cheapest third of models.`, overall(budget), 'overall'),
   };
 }
