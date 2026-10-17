@@ -1,0 +1,22 @@
+{
+  "title": "Data",
+  "description": "Downloads.",
+  "canonical": "https://example.test/data/",
+  "ogImage": "https://example.test/og.png",
+  "files": [
+    {
+      "path": "/data/rankings.json",
+      "description": "All rankings.",
+      "schema": "See contract."
+    },
+    {
+      "path": "/data/plans.json",
+      "description": "Plans.",
+      "schema": "See contract."
+    }
+  ],
+  "key": "data",
+  "scripts": [
+    "/assets/js/pages/static.js"
+  ]
+}

@@ -23,7 +23,6 @@ def test_release_module_is_the_single_source_for_version_and_dates():
     assert build_scores.VERSION is release.VERSION
     assert emit_docs.DATE is release.DATE
     assert build_scores.PUBLISH_DATE is release.DATE
-    assert emit_docs.SHORT_DATE is release.SHORT_DATE
     source = (ROOT / "valuerank" / "emit_docs.py").read_text() + (ROOT / "valuerank" / "build_scores.py").read_text()
     assert 'VERSION = "v' not in source, "version literals must live only in valuerank/release.py"
 

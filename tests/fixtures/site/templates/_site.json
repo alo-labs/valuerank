@@ -1,0 +1,63 @@
+{
+  "version": "v9.9.9",
+  "publishDate": "January 2, 2030",
+  "observedAt": "2030-01-01T00:00:00Z",
+  "nav": [
+    {
+      "label": "Rankings",
+      "href": "/rankings/",
+      "key": "rankings"
+    },
+    {
+      "label": "Models",
+      "href": "/models/",
+      "key": "models"
+    },
+    {
+      "label": "Plans",
+      "href": "/plans/",
+      "key": "plans"
+    },
+    {
+      "label": "Benchmarks",
+      "href": "/benchmarks/",
+      "key": "benchmarks"
+    },
+    {
+      "label": "Methodology",
+      "href": "/methodology/",
+      "key": "methodology"
+    },
+    {
+      "label": "Changelog",
+      "href": "/changelog/",
+      "key": "changelog"
+    },
+    {
+      "label": "Data",
+      "href": "/data/",
+      "key": "data"
+    }
+  ],
+  "baseUrl": "https://example.test",
+  "basis": {
+    "api": {
+      "label": "API ranking",
+      "costLabel": "API cost",
+      "costUnit": "USD per Index run",
+      "description": "AA total evaluation cost at API rates."
+    },
+    "plan": {
+      "label": "Plan ranking",
+      "costLabel": "Plan cost",
+      "costUnit": "USD per Index point",
+      "description": "AA total evaluation cost divided by the highest eligible Value Multiple and the AA Intelligence Index."
+    }
+  },
+  "defaultBasis": "plan",
+  "costWeightPct": 18.9394,
+  "counts": {
+    "ranked": 3,
+    "roster": 4
+  }
+}

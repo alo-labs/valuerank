@@ -1,0 +1,114 @@
+{
+  "title": "Subscription plans",
+  "description": "Plan value.",
+  "canonical": "https://example.test/plans/",
+  "ogImage": "https://example.test/og.png",
+  "plansJson": {
+    "asOf": "2030-01-01",
+    "policy": {
+      "reportingWindow": {
+        "start": "2030-01-01",
+        "end": "2030-02-01"
+      },
+      "defaultNumerator": "Only measured usage counts.",
+      "selectedSourceException": {
+        "providers": [
+          "Acme"
+        ],
+        "sourceUrl": "https://example.test/semi",
+        "publicationDate": "2030-01-02",
+        "authorizedOn": "2030-01-03",
+        "evidenceType": "Controlled measurements."
+      },
+      "gptApplication": "GPT note.",
+      "mimoApplication": "MiMo note.",
+      "unsupportedModels": "API fallback."
+    },
+    "routes": [
+      {
+        "id": "r1",
+        "provider": "Alpha Labs",
+        "planLabel": "Pro $200",
+        "planFeeUsd": 200,
+        "valueMultiple": 10.7,
+        "apiEquivalentUsd": 2140,
+        "grade": "assumption",
+        "evidenceLabel": "Provisional assumption",
+        "sourceModel": "Alpha One",
+        "sourceUrl": "https://example.test/src",
+        "sourceDate": "2030-01-01",
+        "modelSlugs": [
+          "alpha-one"
+        ],
+        "notes": "Applied across variants."
+      }
+    ],
+    "candidates": [
+      {
+        "slug": "alpha-one",
+        "name": "Alpha <b>x</b> One",
+        "rank": {
+          "api": 1,
+          "plan": 2
+        },
+        "intelligenceIndex": {
+          "value": 52.0,
+          "status": "measured"
+        },
+        "apiUsd": 1081.55,
+        "planUsdPerRun": 100.4,
+        "planUsdPerPoint": 1.931,
+        "fallback": null,
+        "routeId": "r1"
+      }
+    ],
+    "workedExample": {
+      "slugs": [
+        "alpha-one",
+        "beta-two"
+      ]
+    }
+  },
+  "workedExample": {
+    "slugs": [
+      "alpha-one",
+      "beta-two"
+    ],
+    "models": [
+      {
+        "slug": "alpha-one",
+        "name": "Alpha <b>x</b> One",
+        "apiUsd": 1081.55,
+        "valueMultiple": 10.7,
+        "planUsdPerRun": 100.4,
+        "indexValue": 52.0,
+        "planUsdPerPoint": 1.931
+      }
+    ]
+  },
+  "routesByProvider": {
+    "Alpha Labs": [
+      {
+        "id": "r1",
+        "provider": "Alpha Labs",
+        "planLabel": "Pro $200",
+        "planFeeUsd": 200,
+        "valueMultiple": 10.7,
+        "apiEquivalentUsd": 2140,
+        "grade": "assumption",
+        "evidenceLabel": "Provisional assumption",
+        "sourceModel": "Alpha One",
+        "sourceUrl": "https://example.test/src",
+        "sourceDate": "2030-01-01",
+        "modelSlugs": [
+          "alpha-one"
+        ],
+        "notes": "Applied across variants."
+      }
+    ]
+  },
+  "key": "plans",
+  "scripts": [
+    "/assets/js/pages/static.js"
+  ]
+}

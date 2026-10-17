@@ -1,0 +1,34 @@
+{#- Ranking table pieces shared by the answer page and the rankings instrument.
+    Cells carry data-col (the column key used by assets/js/filters.js; the model column is "name") and data-label. -#}
+{%- from "partials/badge.html" import badge -%}
+{%- from "partials/fmt.html" import num, usd, rank -%}
+{%- from "partials/coverage_bar.html" import coverage_bar -%}
+
+{%- macro cost_head(site) -%}
+Cost <small class="unit" data-cost-unit>{{ site.basis[site.defaultBasis].costUnit }}</small>
+{%- endmacro -%}
+
+{#- Server-rendered fallback row (default basis); replaced by the script when it loads. -#}
+{%- macro answer_row(m, site) -%}
+{%- set b = site.defaultBasis -%}
+<tr data-slug="{{ m.slug }}">
+  <td data-col="rank" data-label="Rank" class="num">{{ rank(m.rank[b]) }}</td>
+  <th scope="row" data-col="name" data-label="Model" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a><span class="model-dev">{{ m.developer }}</span></span></th>
+  <td data-col="overall" data-label="Score" class="num">{{ num(m.overall[b]) }}</td>
+  <td data-col="quality" data-label="Quality" class="num">{{ num(m.quality) }}</td>
+  <td data-col="cost" data-label="Cost" class="num">{% if b == "plan" %}{{ usd(m.cost.planUsdPerPoint if m.cost.planUsdPerPoint is not none else m.cost.planComparableUsdPerPoint, 2) }}{% else %}{{ usd(m.cost.apiUsd, 0) }}{% endif %}</td>
+  <td data-col="grade" data-label="Evidence">{{ badge(m.grade) }}</td>
+  <td data-col="coverage" data-label="Coverage">{{ coverage_bar(m.coverage) }}</td>
+</tr>
+{%- endmacro -%}
+
+{%- macro head_cells(cols, site, sortable=true, active="overall") -%}
+{%- for c in cols %}
+{%- set cls = "" if c.key in ("name", "developer", "grade", "coverage") else "num" %}
+{%- if sortable and c.get("sortable", true) %}
+<th scope="col" class="{{ cls }}" data-col="{{ c.key }}" aria-sort="{{ 'descending' if c.key == active else 'none' }}"><button type="button" class="sort-btn">{% if c.key == "cost" %}{{ cost_head(site) }}{% else %}{{ c.label }}{% endif %}<span class="sort-ind" aria-hidden="true"></span></button></th>
+{%- else %}
+<th scope="col" class="{{ cls }}" data-col="{{ c.key }}">{% if c.key == "cost" %}{{ cost_head(site) }}{% else %}{{ c.label }}{% endif %}</th>
+{%- endif %}
+{%- endfor %}
+{%- endmacro -%}

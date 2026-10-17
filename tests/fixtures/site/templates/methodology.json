@@ -1,0 +1,63 @@
+{
+  "title": "Methodology",
+  "description": "How scoring works.",
+  "canonical": "https://example.test/methodology/",
+  "ogImage": "https://example.test/og.png",
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "fullLabel": "Cost (selected basis)",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "priority": 25,
+      "higherBetter": false,
+      "sourceUrl": null
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "fullLabel": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.94,
+      "priority": 25,
+      "higherBetter": true,
+      "sourceUrl": "https://example.test/deepswe"
+    }
+  ],
+  "weights": {
+    "costComposite": 18.94,
+    "deepswePassAt1": 18.94
+  },
+  "workedExample": {
+    "slug": "alpha-one",
+    "name": "Alpha <b>x</b> One",
+    "basis": "plan",
+    "steps": [
+      {
+        "label": "DeepSWE",
+        "weightPct": 18.94,
+        "normalized": 100.0,
+        "contribution": 18.94,
+        "effectiveWeightPct": 18.94
+      }
+    ],
+    "availablePriority": 117,
+    "totalPriority": 132,
+    "overall": 75.7
+  },
+  "faq": [
+    {
+      "q": "Why does coverage matter?",
+      "a": "Missing metrics are excluded, not zero-filled."
+    }
+  ],
+  "limitations": [
+    "Some multiples are assumptions.",
+    "Coverage differs by model."
+  ],
+  "key": "methodology",
+  "scripts": [
+    "/assets/js/pages/static.js"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Changelog",
+  "description": "Version history.",
+  "canonical": "https://example.test/changelog/",
+  "ogImage": "https://example.test/og.png",
+  "changelogJson": {
+    "versions": [
+      {
+        "version": "v9.9.9",
+        "date": "January 2, 2030",
+        "models": 4,
+        "dimensions": 2,
+        "summary": "Initial.",
+        "rankChanges": [
+          {
+            "slug": "alpha-one",
+            "name": "Alpha <b>x</b> One",
+            "from": 3,
+            "to": 1
+          }
+        ]
+      }
+    ]
+  },
+  "key": "changelog",
+  "scripts": [
+    "/assets/js/pages/static.js"
+  ]
+}

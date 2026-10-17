@@ -1,0 +1,62 @@
+{
+  "title": "All models",
+  "description": "d",
+  "canonical": "https://example.test/models/",
+  "ogImage": "https://example.test/og.png",
+  "key": "models",
+  "scripts": [
+    "/assets/js/pages/static.js"
+  ],
+  "rankedCount": 2,
+  "unrankedCount": 1,
+  "models": [
+    {
+      "slug": "alpha-one",
+      "name": "Alpha <b>x</b> One",
+      "developer": "Acme",
+      "rank": {
+        "api": 1,
+        "plan": 2
+      },
+      "overall": {
+        "api": 70.0,
+        "plan": 71.5
+      },
+      "grade": "measured",
+      "rankingEligible": true,
+      "coveragePct": 100.0
+    },
+    {
+      "slug": "beta-two",
+      "name": "Beta Two",
+      "developer": "Bolt",
+      "rank": {
+        "api": 2,
+        "plan": 1
+      },
+      "overall": {
+        "api": 65.0,
+        "plan": 72.5
+      },
+      "grade": "claim",
+      "rankingEligible": true,
+      "coveragePct": 80.5
+    },
+    {
+      "slug": "gamma",
+      "name": "Gamma",
+      "developer": "Cog",
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      },
+      "grade": "missing",
+      "rankingEligible": false,
+      "coveragePct": 0
+    }
+  ]
+}

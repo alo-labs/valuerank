@@ -1,0 +1,6 @@
+{%- macro basis_toggle(site) -%}
+<div id="basis-toggle" class="basis-toggle" role="group" aria-label="Cost basis">
+  <button type="button" data-basis="plan" aria-pressed="{{ 'true' if site.defaultBasis == 'plan' else 'false' }}">{{ site.basis.plan.label }}</button>
+  <button type="button" data-basis="api" aria-pressed="{{ 'true' if site.defaultBasis == 'api' else 'false' }}">{{ site.basis.api.label }}</button>
+</div>
+{%- endmacro -%}

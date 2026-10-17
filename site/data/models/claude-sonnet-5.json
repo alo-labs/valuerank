@@ -1,0 +1,332 @@
+{
+  "slug": "claude-sonnet-5",
+  "name": "Claude Sonnet 5",
+  "developer": "Anthropic",
+  "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5",
+  "aaVariant": "max",
+  "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5",
+  "summary": {
+    "rank": {
+      "api": null,
+      "plan": null
+    },
+    "overall": {
+      "api": null,
+      "plan": null
+    },
+    "quality": null,
+    "qualityRank": null,
+    "coverage": {
+      "pct": 81.06,
+      "availablePriority": 107,
+      "totalPriority": 132,
+      "missing": [
+        "DeepSWE v1.1"
+      ]
+    },
+    "grade": "measured",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "No exact-variant AA DeepSWE result in the selected source snapshot",
+      "Not a required selected AA frontier family model"
+    ]
+  },
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "value": 6998.250634094257,
+      "unit": "USD per Index run",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured",
+      "normalizedByBasis": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.9394,
+      "value": null,
+      "unit": "% pass@1",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "bugHuntFixedOf105",
+      "label": "Bug Hunt Bench",
+      "category": "code",
+      "weightPct": 15.1515,
+      "value": 9.0,
+      "unit": "bugs fixed of 105",
+      "normalized": null,
+      "source": {
+        "name": "Bug Hunt Bench",
+        "url": null
+      },
+      "observedAt": null,
+      "evaluatedVariant": "Sonnet 5 (max effort)",
+      "note": "Single official run; treat as one draw.",
+      "grade": "measured"
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "Non-Hallucination",
+      "category": "rely",
+      "weightPct": 4.5455,
+      "value": 60.63,
+      "unit": "% non-hallucination",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBenchV4",
+      "label": "Terminal-Bench 4.0",
+      "category": "code",
+      "weightPct": 4.5455,
+      "value": 12.4,
+      "unit": "% resolved",
+      "normalized": null,
+      "source": {
+        "name": "Terminal-Bench 4.0 leaderboard",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "Claude Code / Sonnet 5",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
+      "category": "prod",
+      "weightPct": 4.5455,
+      "value": 1449.2,
+      "unit": "Elo",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "intelligenceIndex",
+      "label": "AA Intelligence Index",
+      "category": "intel",
+      "weightPct": 4.5455,
+      "value": 38.1638712882576,
+      "unit": "Index points",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "category": "language",
+      "weightPct": 3.7879,
+      "value": 63.8585,
+      "unit": "score",
+      "normalized": null,
+      "source": {
+        "name": "LiveBench release 2026_06_25",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "claude-sonnet-5-xhigh-effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 36.51,
+      "unit": "% score",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 76.7596133703732,
+      "unit": "tokens per second",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR v1.1",
+      "category": "language",
+      "weightPct": 3.0303,
+      "value": 82.0,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "category": "rely",
+      "weightPct": 3.0303,
+      "value": 40.05,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 41.29,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 91.11,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 54.28,
+      "unit": "% score",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "intel",
+      "weightPct": 2.2727,
+      "value": 16.86,
+      "unit": "% score",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 6998.250634094257,
+    "planUsdPerRun": null,
+    "planUsdPerPoint": null,
+    "planComparableUsdPerPoint": 183.37370916161495,
+    "fallback": "api",
+    "route": null
+  },
+  "plans": [],
+  "history": [
+    {
+      "version": "v1.5.0",
+      "date": "2026-09-06",
+      "rank": {
+        "api": 21,
+        "plan": null
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+  }
+}

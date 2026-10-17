@@ -1,0 +1,73 @@
+{
+  "title": "Terminal-Bench 4.0",
+  "description": "TB4 page.",
+  "canonical": "https://example.test/benchmarks/terminal-bench-4/",
+  "ogImage": "https://example.test/og.png",
+  "tb4Json": {
+    "version": "4.0",
+    "observedAt": "2030-01-01T00:00:00Z",
+    "frontierCount": 2,
+    "source": {
+      "publisher": "Terminal-Bench / Harbor",
+      "targetUrl": "https://example.test/tb4",
+      "capturedAt": "2029-12-31T00:00:00Z",
+      "captureMethod": "rendered leaderboard snapshot"
+    },
+    "rowN": 2,
+    "cohortN": 4,
+    "matchedN": 2,
+    "missingModels": [
+      "Delta Four",
+      "Gamma Three"
+    ],
+    "rankingAvailableN": 2,
+    "rankingMissingModels": [
+      "Delta Four"
+    ],
+    "rows": [
+      {
+        "rank": 1,
+        "rankLabel": "1",
+        "model": "Alpha <b>x</b> One (max)",
+        "baseModel": "Alpha <b>x</b> One",
+        "agent": "Codex",
+        "resolutionRatePct": 55.1,
+        "uncertaintyPct": 2.8,
+        "releaseDate": "Sep 3, 2029",
+        "tokens": "1.5B",
+        "costUsd": 3300.0,
+        "cohortModelId": "alpha-one"
+      },
+      {
+        "rank": 2,
+        "rankLabel": "2",
+        "model": "Beta Two (max)",
+        "baseModel": "Beta Two",
+        "agent": "Claude Code",
+        "resolutionRatePct": 40.0,
+        "uncertaintyPct": 3.0,
+        "releaseDate": "Sep 4, 2029",
+        "tokens": "2B",
+        "costUsd": 4000.0,
+        "cohortModelId": "beta-two"
+      }
+    ],
+    "providerClaims": [
+      {
+        "evaluatedModel": "Gamma Three",
+        "valuePct": 31.2,
+        "publisher": "Gamma",
+        "publishedOn": "2029-09-10",
+        "sourceUrl": "https://example.test/claim",
+        "eligibleForRanking": true,
+        "eligibilityScope": "current API alias",
+        "caveat": "Provider reports the exact version."
+      }
+    ],
+    "providerClaimPolicy": "Use exact-version provider claims only."
+  },
+  "key": "tb4",
+  "scripts": [
+    "/assets/js/pages/static.js"
+  ]
+}

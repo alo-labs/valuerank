@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{%- from "partials/badge.html" import legend -%}
+{%- from "partials/fmt.html" import num -%}
+{% block content %}
+{%- set w = page.workedExample -%}
+<header class="page-head">
+  <p class="eyebrow">Methodology</p>
+  <h1 id="page-title">How ValueRank scores a model</h1>
+  <p class="lead">A model's score is a weighted average of 0&ndash;100 dimension scores, one of which is cost. If a dimension has no eligible value for a model it is left out and the remaining weights are scaled to 100%, so a gap never counts as zero and never gets filled in.</p>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <ul>
+    <li><a href="#weights">Dimensions and weights</a></li>
+    <li><a href="#worked-example">Worked example</a></li>
+    <li><a href="#evidence-grades">Evidence grades</a></li>
+    <li><a href="#limitations">Limitations</a></li>
+    <li><a href="#faq">Questions</a></li>
+  </ul>
+</nav>
+
+<section class="block" id="weights" aria-labelledby="weights-title">
+  <h2 id="weights-title" class="section-title">Dimensions and weights</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="weights-title">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col">Category</th><th scope="col" class="col-num">Weight</th><th scope="col">Better when</th></tr></thead>
+      <tbody>
+        {%- for d in page.dimensions %}
+        <tr>
+          <th scope="row" class="cell-model"><span class="model-id">{% if d.sourceUrl %}<a class="model-name" href="{{ d.sourceUrl }}" rel="noopener">{{ d.fullLabel }}</a>{% else %}<span class="model-name">{{ d.fullLabel }}</span>{% endif %}</span></th>
+          <td>{{ d.category }}</td>
+          <td class="cell-num">{{ num(d.weightPct, 2) }}%</td>
+          <td>{{ "higher" if d.higherBetter else "lower" }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block" id="worked-example" aria-labelledby="example-title">
+  <h2 id="example-title" class="section-title">Worked example: {{ w.name }}</h2>
+  <p>Each dimension score is multiplied by its weight, the products are added, and the sum is divided by the weight that actually had data ({{ w.availablePriority }} of {{ w.totalPriority }} priority points).</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="example-title">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Weight</th><th scope="col" class="col-num">Effective weight</th><th scope="col" class="col-num">Score (0&ndash;100)</th><th scope="col" class="col-num">Contribution</th></tr></thead>
+      <tbody>
+        {%- for s in w.steps %}
+        <tr><th scope="row" class="cell-model"><span class="model-name">{{ s.label }}</span></th><td class="cell-num">{{ num(s.weightPct, 2) }}%</td><td class="cell-num">{{ num(s.effectiveWeightPct, 2) }}%</td><td class="cell-num">{{ num(s.normalized) }}</td><td class="cell-num">{{ num(s.contribution, 2) }}</td></tr>
+        {%- endfor %}
+      </tbody>
+      <tfoot><tr><th scope="row" colspan="4">Overall score</th><td class="cell-num"><strong>{{ num(w.overall) }}</strong></td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="block" id="evidence-grades" aria-labelledby="grades-title">
+  <h2 id="grades-title" class="section-title">Evidence grades</h2>
+  <p class="muted">A model's grade is the weakest grade among the values inside its score.</p>
+  {{ legend() }}
+</section>
+
+<section class="block" id="limitations" aria-labelledby="limits-title">
+  <h2 id="limits-title" class="section-title">Limitations</h2>
+  <ul class="plain-list">
+    {%- for l in page.limitations %}<li>{{ l }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section class="block" id="faq" aria-labelledby="faq-title">
+  <h2 id="faq-title" class="section-title">Questions</h2>
+  {%- for f in page.faq %}
+  <details class="faq">
+    <summary>{{ f.q }}</summary>
+    <p>{{ f.a }}</p>
+  </details>
+  {%- endfor %}
+</section>
+{% endblock %}

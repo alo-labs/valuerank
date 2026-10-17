@@ -1,0 +1,351 @@
+{
+  "slug": "grok-4-7",
+  "name": "Grok 4.7",
+  "developer": "xAI",
+  "aaUrl": "https://artificialanalysis.ai/models/grok-4-7",
+  "aaVariant": "xhigh",
+  "selectedPage": "https://artificialanalysis.ai/models/grok-4-7",
+  "summary": {
+    "rank": {
+      "api": 6,
+      "plan": 5
+    },
+    "overall": {
+      "api": 58.4,
+      "plan": 63.9
+    },
+    "quality": 70.1,
+    "qualityRank": 5,
+    "coverage": {
+      "pct": 92.42,
+      "availablePriority": 122,
+      "totalPriority": 132,
+      "missing": [
+        "Terminal-Bench 4.0",
+        "GPQA Diamond (legacy)"
+      ]
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": []
+  },
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "value": 4967.354257472305,
+      "unit": "USD per Index run",
+      "normalized": 13.333333,
+      "source": {
+        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured",
+      "normalizedByBasis": {
+        "api": 13.333333,
+        "plan": 40.0
+      }
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.9394,
+      "value": 73.0,
+      "unit": "% pass@1",
+      "normalized": 100.0,
+      "source": {
+        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-08",
+      "evaluatedVariant": "Grok Build / Grok 4.7 / xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHuntFixedOf105",
+      "label": "Bug Hunt Bench",
+      "category": "code",
+      "weightPct": 15.1515,
+      "value": 28.8,
+      "unit": "bugs fixed of 105",
+      "normalized": 57.1,
+      "source": {
+        "name": "Bug Hunt Bench",
+        "url": null
+      },
+      "observedAt": null,
+      "evaluatedVariant": "Grok 4.7 (xhigh) seq - mean of 4",
+      "note": "Owner-published sequential-run mean of four runs.",
+      "grade": "measured"
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "Non-Hallucination",
+      "category": "rely",
+      "weightPct": 4.5455,
+      "value": 70.66,
+      "unit": "% non-hallucination",
+      "normalized": 86.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBenchV4",
+      "label": "Terminal-Bench 4.0",
+      "category": "code",
+      "weightPct": 4.5455,
+      "value": null,
+      "unit": "% resolved",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
+      "category": "prod",
+      "weightPct": 4.5455,
+      "value": 1695.21,
+      "unit": "Elo",
+      "normalized": 86.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "intelligenceIndex",
+      "label": "AA Intelligence Index",
+      "category": "intel",
+      "weightPct": 4.5455,
+      "value": 46.4465506302286,
+      "unit": "Index points",
+      "normalized": 56.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "category": "language",
+      "weightPct": 3.7879,
+      "value": 75.27525,
+      "unit": "score",
+      "normalized": 81.8,
+      "source": {
+        "name": "LiveBench release 2026_06_25",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "grok-4.7-xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 65.56,
+      "unit": "% score",
+      "normalized": 86.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 70.6406219593259,
+      "unit": "tokens per second",
+      "normalized": 50.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR v1.1",
+      "category": "language",
+      "weightPct": 3.0303,
+      "value": 76.67,
+      "unit": "% accuracy",
+      "normalized": 6.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "category": "rely",
+      "weightPct": 3.0303,
+      "value": 47.45,
+      "unit": "% accuracy",
+      "normalized": 46.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 43.14,
+      "unit": "% accuracy",
+      "normalized": 40.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": null,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 57.41,
+      "unit": "% score",
+      "normalized": 66.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "intel",
+      "weightPct": 2.2727,
+      "value": 17.71,
+      "unit": "% score",
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/grok-4-7"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 4967.354257472305,
+    "planUsdPerRun": 858.6610643858781,
+    "planUsdPerPoint": 18.487079292967767,
+    "planComparableUsdPerPoint": 18.487079292967767,
+    "fallback": null,
+    "route": {
+      "id": "supergrok-heavy-grok47-xhigh-user-projection",
+      "planLabel": "SuperGrok Heavy $300 · Grok 4.7 XHigh",
+      "planFeeUsd": 300,
+      "valueMultiple": 5.785,
+      "grade": "estimate",
+      "evidenceLabel": "user reported projection",
+      "sourceModel": "Grok 4.7 XHigh",
+      "sourceUrl": "https://www.remakebench.com/capacity/plans/supergrok-heavy",
+      "sourceDate": "2026-09-25"
+    }
+  },
+  "plans": [
+    {
+      "id": "supergrok-heavy-grok47-xhigh-user-projection",
+      "planLabel": "SuperGrok Heavy $300 · Grok 4.7 XHigh",
+      "planFeeUsd": 300,
+      "valueMultiple": 5.785,
+      "grade": "estimate",
+      "evidenceLabel": "user reported projection",
+      "sourceUrl": "https://www.remakebench.com/capacity/plans/supergrok-heavy",
+      "sourceDate": "2026-09-25",
+      "usdPerRun": 858.6610643858781,
+      "usdPerPoint": 18.487079292967767,
+      "selected": true
+    }
+  ],
+  "history": [
+    {
+      "version": "v1.9.6",
+      "date": "2026-10-08",
+      "rank": {
+        "api": 6,
+        "plan": 5
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+  }
+}

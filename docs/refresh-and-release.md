@@ -6,7 +6,7 @@ A refresh captures new source data, recomputes the ranking and regenerates the p
 
 - Read `AGENTS.md`: the model-inclusion policy (every model on the AA Intelligence Index versus total-cost Pareto frontier), the exact-variant evidence rules and the subscription-allowance evidence rules are binding on every refresh.
 - Work on a clean `main` with `npm run verify` passing.
-- Have Playwright Chromium installed (`npx playwright install chromium`).
+- Install the Python dependencies in the virtual environment (`.venv/bin/python -m pip install -r requirements.txt -r requirements-dev.txt`) and Playwright Chromium (`npx playwright install chromium`).
 
 ## 1. Capture and curate sources
 
@@ -29,24 +29,29 @@ Document the refresh in a new dated directory under `research/` (sources, eviden
 
 ## 2. Bump the version
 
-Update every version site together; `tests/test_release_metadata.py` fails when they disagree:
+Update every version site together. `tests/test_release_metadata.py` fails when the manifests disagree with `valuerank/release.py`.
 
 | Location | Field |
 |---|---|
-| `valuerank/release.py` | `VERSION`, `DATE`, `SHORT_DATE` (the only code that names the version) |
-| `valuerank/emit_docs.py` | the site version-history lists (`const versions = [...]`) |
+| `valuerank/release.py` | `VERSION`, `DATE`, `SHORT_DATE`. This is the only file that names the version. The emitter, the site build and the score builder import it. |
 | `package.json`, `pyproject.toml` | `version` (without the leading `v`) |
-| `data/ranking_history_v1.5.json` | add the new release's recorded ranks |
+| `data/ranking_history_v1.5.json` | Earlier releases' API-basis ranks, one key per release: `v` followed by three digits (`v150` for 1.5.0, `v196` for 1.9.6). Before the bump, add the outgoing release's API-basis ranks under its key so that the changelog keeps them. The current release is computed at build time and is not stored in this file. |
+
+`data/ranking_summary.json` also carries the version and date. `npm run build:scores` regenerates it, and the release test checks it.
 
 ## 3. Score, reconcile and emit
 
 ```bash
-npm run build:scores     # data/scores.json, data/coverage_matrix.json, data/ranking_summary.json, data/run_manifest.json
-npm run reconcile:aa     # data/aa_reconciliation_report.json; exit 1 blocks the release when the frontier is stale or incomplete
-npm run build:publication  # README.md, methodology.md, scores.md, raw-data.md, site/**, site/**/og.png
+npm run build:scores        # data/scores.json, data/coverage_matrix.json, data/ranking_summary.json, data/run_manifest.json
+npm run reconcile:aa        # data/aa_reconciliation_report.json; exit 1 blocks the release when the frontier is stale or incomplete
+npm run build:publication   # README.md, methodology.md, scores.md, raw-data.md (emitter); site/** (site build); site/og.png, site/tb4/og.png, site/coding-agents/og.png (OG cards)
 ```
 
-Do not set `VALUERANK_NOW` during a real refresh: the stamped instant must be the actual observation time. Afterwards, `data/ranking_summary.json` holds that instant and `npm run verify:docs` will reproduce the outputs from it.
+Do not set `VALUERANK_NOW` during a real refresh: the stamped instant must be the actual observation time. Afterwards, `data/ranking_summary.json` holds that instant, and `npm run verify:docs` reproduces the outputs from it.
+
+`site/` is generated in full, so never edit a file under `site/` by hand. Change the snapshots, `valuerank/site/` (view models, templates or assets) or the data contract in `docs/site-data-contract.md`, then run `npm run build:publication`. The build replaces `site/assets/`, rewrites the pages, and removes model pages for models that left the roster.
+
+The OG script (`npm run generate:og`) writes the share cards on every publication build. It writes three cards today: home, coding agents and Terminal-Bench 4.0. Per-page cards for the new site are not produced yet; see `docs/site-experience-plan.md`, phase 5.
 
 ## 4. Verify
 
@@ -54,12 +59,16 @@ Do not set `VALUERANK_NOW` during a real refresh: the stamped instant must be th
 npm run verify
 ```
 
-This runs the Python and Node suites with their 100% coverage gates and then regenerates the documents with the clock pinned to the newly stamped instant, failing on any difference. Also review `git diff --stat` for unexpected files (local captures and logs are ignored and must stay so) and read the regenerated `README.md` ranking table once as a human.
+This runs the Python, Node and end-to-end suites with their coverage gates, then regenerates the documents and the site with the clock pinned to the newly stamped instant. It fails on any difference in the tracked files. The command is the same as before; it now also runs the end-to-end suite.
+
+After it passes, review `git status --short`. Local captures and logs are ignored and must stay so. New files under `site/` must be the ones you expect, because `git diff` does not list untracked files. Read the regenerated `README.md` ranking table once as a human, and check the home page and the rankings page with `npm run preview`.
 
 ## 5. Commit and deploy
 
-Commit the generated documents, `data/` snapshots, the research record and the version bump in one commit with a subject such as `Publish ValueRank v1.9.7 with …`. Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs the CI checks and then deploys `site/` to GitHub Pages at https://alo-labs.github.io/valuerank. The custom domain is configured through `site/CNAME`.
+Commit the generated documents, the regenerated `site/`, the `data/` snapshots, the research record and the version bump in one commit, with a subject such as `Publish ValueRank v1.9.7 with …`.
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`. It runs the CI checks, then uploads the committed `site/` directory to GitHub Pages without rebuilding it. The commit must therefore contain everything the site needs. The custom domain is set by `site/CNAME` (`valuerank.alolabs.dev`).
 
 ## Rolling back
 
-The site is a pure function of `main`. Revert the publication commit and push; the deployment workflow republishes the previous `site/`.
+The published site is whatever is committed under `site/`. Revert the publication commit and push. The deployment workflow then republishes the previous `site/`.

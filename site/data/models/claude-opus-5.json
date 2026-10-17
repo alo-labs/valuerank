@@ -1,0 +1,362 @@
+{
+  "slug": "claude-opus-5",
+  "name": "Claude Opus 5",
+  "developer": "Anthropic",
+  "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5",
+  "aaVariant": "max",
+  "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5",
+  "summary": {
+    "rank": {
+      "api": 15,
+      "plan": 14
+    },
+    "overall": {
+      "api": 35.8,
+      "plan": 34.5
+    },
+    "quality": 42.6,
+    "qualityRank": 9,
+    "coverage": {
+      "pct": 100.0,
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "missing": []
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": []
+  },
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "value": 7274.7418382622345,
+      "unit": "USD per Index run",
+      "normalized": 6.666667,
+      "source": {
+        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured",
+      "normalizedByBasis": {
+        "api": 6.666667,
+        "plan": 0.0
+      }
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.9394,
+      "value": 63.0,
+      "unit": "% pass@1",
+      "normalized": 15.4,
+      "source": {
+        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-08",
+      "evaluatedVariant": "Claude Code / Opus 5 / max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHuntFixedOf105",
+      "label": "Bug Hunt Bench",
+      "category": "code",
+      "weightPct": 15.1515,
+      "value": 27.0,
+      "unit": "bugs fixed of 105",
+      "normalized": 42.9,
+      "source": {
+        "name": "Bug Hunt Bench",
+        "url": null
+      },
+      "observedAt": null,
+      "evaluatedVariant": "Opus 5 (max effort)",
+      "note": "Single official run; treat as one draw.",
+      "grade": "measured"
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "Non-Hallucination",
+      "category": "rely",
+      "weightPct": 4.5455,
+      "value": 39.18,
+      "unit": "% non-hallucination",
+      "normalized": 20.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBenchV4",
+      "label": "Terminal-Bench 4.0",
+      "category": "code",
+      "weightPct": 4.5455,
+      "value": 51.8,
+      "unit": "% resolved",
+      "normalized": 83.3,
+      "source": {
+        "name": "Terminal-Bench 4.0 leaderboard",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "Claude Code / Opus 5",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
+      "category": "prod",
+      "weightPct": 4.5455,
+      "value": 1707.92,
+      "unit": "Elo",
+      "normalized": 93.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "intelligenceIndex",
+      "label": "AA Intelligence Index",
+      "category": "intel",
+      "weightPct": 4.5455,
+      "value": 50.7771115797629,
+      "unit": "Index points",
+      "normalized": 80.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "category": "language",
+      "weightPct": 3.7879,
+      "value": 63.7665,
+      "unit": "score",
+      "normalized": 18.2,
+      "source": {
+        "name": "LiveBench release 2026_06_25",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "claude-opus-5-max-effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 56.57,
+      "unit": "% score",
+      "normalized": 20.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 59.1947249074129,
+      "unit": "tokens per second",
+      "normalized": 35.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR v1.1",
+      "category": "language",
+      "weightPct": 3.0303,
+      "value": 79.33,
+      "unit": "% accuracy",
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "category": "rely",
+      "weightPct": 3.0303,
+      "value": 60.87,
+      "unit": "% accuracy",
+      "normalized": 80.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 54.87,
+      "unit": "% accuracy",
+      "normalized": 93.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 93.23,
+      "unit": "% accuracy",
+      "normalized": 37.5,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 56.37,
+      "unit": "% score",
+      "normalized": 46.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "intel",
+      "weightPct": 2.2727,
+      "value": 29.14,
+      "unit": "% score",
+      "normalized": 66.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 7274.7418382622345,
+    "planUsdPerRun": null,
+    "planUsdPerPoint": null,
+    "planComparableUsdPerPoint": 143.26813030384275,
+    "fallback": "api",
+    "route": null
+  },
+  "plans": [],
+  "history": [
+    {
+      "version": "v1.5.0",
+      "date": "2026-09-06",
+      "rank": {
+        "api": 10,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.0",
+      "date": null,
+      "rank": {
+        "api": 8,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.1",
+      "date": null,
+      "rank": {
+        "api": 9,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.2",
+      "date": null,
+      "rank": {
+        "api": 9,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.6",
+      "date": "2026-10-08",
+      "rank": {
+        "api": 15,
+        "plan": 14
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+  }
+}

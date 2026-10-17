@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changelog · ValueRank v1.9.6</title>
+  <meta name="description" content="Every ValueRank release with its cohort, dimensions and rank changes.">
+  <link rel="canonical" href="https://valuerank.alolabs.dev/changelog/">
+  <meta name="theme-color" content="#4f46e5">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ValueRank">
+  <meta property="og:title" content="Changelog · ValueRank v1.9.6">
+  <meta property="og:description" content="Every ValueRank release with its cohort, dimensions and rank changes.">
+  <meta property="og:url" content="https://valuerank.alolabs.dev/changelog/">
+  <meta property="og:image" content="https://valuerank.alolabs.dev/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Changelog · ValueRank v1.9.6">
+  <meta name="twitter:description" content="Every ValueRank release with its cohort, dimensions and rank changes.">
+  <meta name="twitter:image" content="https://valuerank.alolabs.dev/og.png">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("vr-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage unavailable: follow the system theme */ }
+      var b = /[?&]basis=(api|plan)(&|$)/.exec(location.search);
+      document.documentElement.setAttribute("data-basis", b ? b[1] : "plan");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body data-page="changelog">
+  <a class="skip-link" href="#main">Skip to main content</a>  <header class="site-header">
+    <nav class="wrap nav" aria-label="Primary">
+      <a class="brand" href="/" aria-label="ValueRank home">
+        <svg class="brand-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M6 8l6 9 6-9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="brand-word">Value<span>Rank</span></span>
+      </a>
+      <button type="button" class="nav-menu" data-nav-toggle aria-controls="site-nav-links" aria-expanded="false"><span class="nav-menu-bars" aria-hidden="true"></span><span class="nav-menu-label">Menu</span></button>
+      <ul id="site-nav-links" class="nav-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/" aria-current="page">Changelog</a></li>        <li><a href="/data/">Data</a></li>      </ul>
+      <button type="button" id="theme-toggle" class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </button>
+    </nav>
+  </header>
+  <main id="main" class="wrap main" tabindex="-1">
+<header class="page-head">
+  <p class="eyebrow">Changelog</p>
+  <h1 id="page-title">What changed in each release</h1>
+  <p class="lead">Every published version, newest first, with the models whose rank moved.</p>
+</header>
+<section class="block" aria-labelledby="history-title">
+  <h2 id="history-title" class="section-title">Rank history</h2>
+  <p class="muted">Where each model has stood in every release that recorded it. A gap means no record, never a guess.</p>
+  <div class="chart-card">
+  <div class="chart-tabs" role="tablist" aria-label="Chart view">    <button type="button" role="tab" id="tab-bump" aria-controls="panel-bump" data-chart-tab="bump" aria-selected="true">Rank by release</button>  </div>  <div class="chart-panel" role="tabpanel" id="panel-bump" aria-labelledby="tab-bump" data-chart-panel="bump">
+    <div class="chart" data-chart="bump" data-chart-summary-target="bump-summary" role="img" aria-label="Line chart of model rank across releases">
+      <p class="chart-state" data-chart-state>Loading chart…</p>
+    </div>
+    <p class="chart-summary" id="bump-summary" data-chart-summary>Line chart of model rank across releases. A text summary appears here when the chart loads.</p>
+  </div></div>
+</section><section class="release" id="v1.9.6" aria-labelledby="rel-1">
+  <h2 id="rel-1" class="section-title"><span class="mono">v1.9.6</span> <span class="muted">October 8, 2026</span></h2>
+  <p class="muted">16 models &middot; 16 dimensions</p>
+  <p>16 models ranked on 16 dimensions; GPT-6.1 Sol is first on the API basis.</p>  <ul class="delta-list">    <li><a href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a> <span class="delta delta-down">#1 &rarr; #2 <span class="sr-only">down</span></span></li>    <li><a href="/models/gpt-6-astra/">GPT-6 Astra</a> <span class="delta delta-down">#2 &rarr; #3 <span class="sr-only">down</span></span></li>    <li><a href="/models/claude-opus-5-5/">Claude Opus 5.5</a> <span class="delta delta-down">#3 &rarr; #5 <span class="sr-only">down</span></span></li>    <li><a href="/models/kimi-k3/">Kimi K3</a> <span class="delta delta-down">#6 &rarr; #9 <span class="sr-only">down</span></span></li>    <li><a href="/models/grok-4-6/">Grok 4.6</a> <span class="delta delta-down">#4 &rarr; #10 <span class="sr-only">down</span></span></li>    <li><a href="/models/gpt-5-6-luna/">GPT-5.6 Luna</a> <span class="delta delta-down">#5 &rarr; #11 <span class="sr-only">down</span></span></li>    <li><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a> <span class="delta delta-down">#7 &rarr; #12 <span class="sr-only">down</span></span></li>    <li><a href="/models/glm-5-3/">GLM-5.3</a> <span class="delta delta-down">#8 &rarr; #13 <span class="sr-only">down</span></span></li>    <li><a href="/models/claude-opus-5/">Claude Opus 5</a> <span class="delta delta-down">#9 &rarr; #15 <span class="sr-only">down</span></span></li>    <li><a href="/models/qwen3-8-max/">Qwen3.8 Max</a> <span class="delta delta-down">#10 &rarr; #16 <span class="sr-only">down</span></span></li>  </ul></section><section class="release" id="v1.9.2" aria-labelledby="rel-2">
+  <h2 id="rel-2" class="section-title"><span class="mono">v1.9.2</span> <span class="muted">None</span></h2>
+  <p class="muted">10 models &middot; None dimensions</p>
+  <p>10 models ranked; GPT-5.6 Sol first.</p></section><section class="release" id="v1.9.1" aria-labelledby="rel-3">
+  <h2 id="rel-3" class="section-title"><span class="mono">v1.9.1</span> <span class="muted">None</span></h2>
+  <p class="muted">10 models &middot; None dimensions</p>
+  <p>10 models ranked; GPT-5.6 Sol first.</p>  <ul class="delta-list">    <li><a href="/models/grok-4-6/">Grok 4.6</a> <span class="delta delta-down">#3 &rarr; #4 <span class="sr-only">down</span></span></li>    <li><a href="/models/kimi-k3/">Kimi K3</a> <span class="delta delta-down">#4 &rarr; #6 <span class="sr-only">down</span></span></li>    <li><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a> <span class="delta delta-down">#6 &rarr; #7 <span class="sr-only">down</span></span></li>    <li><a href="/models/glm-5-3/">GLM-5.3</a> <span class="delta delta-down">#7 &rarr; #8 <span class="sr-only">down</span></span></li>    <li><a href="/models/claude-opus-5/">Claude Opus 5</a> <span class="delta delta-down">#8 &rarr; #9 <span class="sr-only">down</span></span></li>    <li><a href="/models/qwen3-8-max/">Qwen3.8 Max</a> <span class="delta delta-down">#9 &rarr; #10 <span class="sr-only">down</span></span></li>  </ul></section><section class="release" id="v1.9.0" aria-labelledby="rel-4">
+  <h2 id="rel-4" class="section-title"><span class="mono">v1.9.0</span> <span class="muted">None</span></h2>
+  <p class="muted">9 models &middot; None dimensions</p>
+  <p>9 models ranked; GPT-5.6 Sol first.</p>  <ul class="delta-list">    <li><a href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a> <span class="delta delta-up">#5 &rarr; #1 <span class="sr-only">up</span></span></li>    <li><a href="/models/gpt-6-astra/">GPT-6 Astra</a> <span class="delta delta-up">#4 &rarr; #2 <span class="sr-only">up</span></span></li>    <li><a href="/models/grok-4-6/">Grok 4.6</a> <span class="delta delta-down">#2 &rarr; #3 <span class="sr-only">down</span></span></li>    <li><a href="/models/kimi-k3/">Kimi K3</a> <span class="delta delta-up">#8 &rarr; #4 <span class="sr-only">up</span></span></li>    <li><a href="/models/gpt-5-6-luna/">GPT-5.6 Luna</a> <span class="delta delta-up">#9 &rarr; #5 <span class="sr-only">up</span></span></li>    <li><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a> <span class="delta delta-down">#1 &rarr; #6 <span class="sr-only">down</span></span></li>    <li><a href="/models/claude-opus-5/">Claude Opus 5</a> <span class="delta delta-up">#10 &rarr; #8 <span class="sr-only">up</span></span></li>    <li><a href="/models/qwen3-8-max/">Qwen3.8 Max</a> <span class="delta delta-up">#14 &rarr; #9 <span class="sr-only">up</span></span></li>  </ul></section><section class="release" id="v1.5.0" aria-labelledby="rel-5">
+  <h2 id="rel-5" class="section-title"><span class="mono">v1.5.0</span> <span class="muted">September 6, 2026</span></h2>
+  <p class="muted">21 models &middot; None dimensions</p>
+  <p>21 models ranked; Gemini 3.8 Flash first.</p></section>  </main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">ValueRank <span class="mono">v1.9.6</span></p>
+      <p class="muted">Published October 8, 2026. Data observed 2026-10-07. Every score is traceable to a source, a date and an evidence grade.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer><script type="application/json" id="page-data">{"versions": [{"added": ["gpt-6-1-sol", "gpt-6-luna", "gpt-6-sol", "grok-4-7", "mimo-v2-6-flash", "mimo-v2-6-pro"], "date": "October 8, 2026", "dimensions": 16, "models": 16, "rankChanges": [{"from": 1, "name": "GPT-5.6 Sol", "slug": "gpt-5-6-sol", "to": 2}, {"from": 2, "name": "GPT-6 Astra", "slug": "gpt-6-astra", "to": 3}, {"from": 3, "name": "Claude Opus 5.5", "slug": "claude-opus-5-5", "to": 5}, {"from": 6, "name": "Kimi K3", "slug": "kimi-k3", "to": 9}, {"from": 4, "name": "Grok 4.6", "slug": "grok-4-6", "to": 10}, {"from": 5, "name": "GPT-5.6 Luna", "slug": "gpt-5-6-luna", "to": 11}, {"from": 7, "name": "Gemini 3.8 Flash", "slug": "gemini-3-8-flash", "to": 12}, {"from": 8, "name": "GLM-5.3", "slug": "glm-5-3", "to": 13}, {"from": 9, "name": "Claude Opus 5", "slug": "claude-opus-5", "to": 15}, {"from": 10, "name": "Qwen3.8 Max", "slug": "qwen3-8-max", "to": 16}], "ranks": {"claude-opus-5": 15, "claude-opus-5-5": 5, "gemini-3-8-flash": 12, "glm-5-3": 13, "gpt-5-6-luna": 11, "gpt-5-6-sol": 2, "gpt-6-1-sol": 1, "gpt-6-astra": 3, "gpt-6-luna": 14, "gpt-6-sol": 4, "grok-4-6": 10, "grok-4-7": 6, "kimi-k3": 9, "mimo-v2-6-flash": 8, "mimo-v2-6-pro": 7, "qwen3-8-max": 16}, "removed": [], "summary": "16 models ranked on 16 dimensions; GPT-6.1 Sol is first on the API basis.", "version": "v1.9.6"}, {"added": [], "date": null, "dimensions": null, "models": 10, "rankChanges": [], "ranks": {"claude-opus-5": 9, "claude-opus-5-5": 3, "gemini-3-8-flash": 7, "glm-5-3": 8, "gpt-5-6-luna": 5, "gpt-5-6-sol": 1, "gpt-6-astra": 2, "grok-4-6": 4, "kimi-k3": 6, "qwen3-8-max": 10}, "removed": [], "summary": "10 models ranked; GPT-5.6 Sol first.", "version": "v1.9.2"}, {"added": ["claude-opus-5-5"], "date": null, "dimensions": null, "models": 10, "rankChanges": [{"from": 3, "name": "Grok 4.6", "slug": "grok-4-6", "to": 4}, {"from": 4, "name": "Kimi K3", "slug": "kimi-k3", "to": 6}, {"from": 6, "name": "Gemini 3.8 Flash", "slug": "gemini-3-8-flash", "to": 7}, {"from": 7, "name": "GLM-5.3", "slug": "glm-5-3", "to": 8}, {"from": 8, "name": "Claude Opus 5", "slug": "claude-opus-5", "to": 9}, {"from": 9, "name": "Qwen3.8 Max", "slug": "qwen3-8-max", "to": 10}], "ranks": {"claude-opus-5": 9, "claude-opus-5-5": 3, "gemini-3-8-flash": 7, "glm-5-3": 8, "gpt-5-6-luna": 5, "gpt-5-6-sol": 1, "gpt-6-astra": 2, "grok-4-6": 4, "kimi-k3": 6, "qwen3-8-max": 10}, "removed": [], "summary": "10 models ranked; GPT-5.6 Sol first.", "version": "v1.9.1"}, {"added": [], "date": null, "dimensions": null, "models": 9, "rankChanges": [{"from": 5, "name": "GPT-5.6 Sol", "slug": "gpt-5-6-sol", "to": 1}, {"from": 4, "name": "GPT-6 Astra", "slug": "gpt-6-astra", "to": 2}, {"from": 2, "name": "Grok 4.6", "slug": "grok-4-6", "to": 3}, {"from": 8, "name": "Kimi K3", "slug": "kimi-k3", "to": 4}, {"from": 9, "name": "GPT-5.6 Luna", "slug": "gpt-5-6-luna", "to": 5}, {"from": 1, "name": "Gemini 3.8 Flash", "slug": "gemini-3-8-flash", "to": 6}, {"from": 10, "name": "Claude Opus 5", "slug": "claude-opus-5", "to": 8}, {"from": 14, "name": "Qwen3.8 Max", "slug": "qwen3-8-max", "to": 9}], "ranks": {"claude-opus-5": 8, "gemini-3-8-flash": 6, "glm-5-3": 7, "gpt-5-6-luna": 5, "gpt-5-6-sol": 1, "gpt-6-astra": 2, "grok-4-6": 3, "kimi-k3": 4, "qwen3-8-max": 9}, "removed": ["claude-fable-5", "claude-opus-4-8", "claude-sonnet-5", "deepseek-v4-flash", "deepseek-v4-pro", "gemini-3-5-flash", "gemini-3-6-flash", "gemini-3-7-flash", "glm-5-2", "glm-5-3-flash", "gpt-5-5", "muse-spark-1-2"], "summary": "9 models ranked; GPT-5.6 Sol first.", "version": "v1.9.0"}, {"added": [], "date": "September 6, 2026", "dimensions": null, "models": 21, "rankChanges": [], "ranks": {"claude-fable-5": 13, "claude-opus-4-8": 20, "claude-opus-5": 10, "claude-sonnet-5": 21, "deepseek-v4-flash": 15, "deepseek-v4-pro": 11, "gemini-3-5-flash": 18, "gemini-3-6-flash": 16, "gemini-3-7-flash": 6, "gemini-3-8-flash": 1, "glm-5-2": 19, "glm-5-3": 7, "glm-5-3-flash": 3, "gpt-5-5": 17, "gpt-5-6-luna": 9, "gpt-5-6-sol": 5, "gpt-6-astra": 4, "grok-4-6": 2, "kimi-k3": 8, "muse-spark-1-2": 12, "qwen3-8-max": 14}, "removed": [], "summary": "21 models ranked; Gemini 3.8 Flash first.", "version": "v1.5.0"}]}</script>  <script type="module" src="/assets/js/pages/changelog.js"></script></body>
+</html>

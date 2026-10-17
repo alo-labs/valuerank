@@ -1,0 +1,330 @@
+{
+  "slug": "muse-spark-1-2",
+  "name": "Muse Spark 1.2",
+  "developer": "Meta",
+  "aaUrl": "https://artificialanalysis.ai/models/muse-spark-1-2",
+  "aaVariant": "xhigh",
+  "selectedPage": "https://artificialanalysis.ai/models/muse-spark-1-2",
+  "summary": {
+    "rank": {
+      "api": null,
+      "plan": null
+    },
+    "overall": {
+      "api": null,
+      "plan": null
+    },
+    "quality": null,
+    "qualityRank": null,
+    "coverage": {
+      "pct": 76.52,
+      "availablePriority": 101,
+      "totalPriority": 132,
+      "missing": [
+        "Terminal-Bench 4.0",
+        "DeepSWE v1.1"
+      ]
+    },
+    "grade": "measured",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "No exact-variant AA DeepSWE result in the selected source snapshot",
+      "Not a required selected AA frontier family model"
+    ]
+  },
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "value": 1385.40074776,
+      "unit": "USD per Index run",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured",
+      "normalizedByBasis": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.9394,
+      "value": null,
+      "unit": "% pass@1",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "bugHuntFixedOf105",
+      "label": "Bug Hunt Bench",
+      "category": "code",
+      "weightPct": 15.1515,
+      "value": 14.0,
+      "unit": "bugs fixed of 105",
+      "normalized": null,
+      "source": {
+        "name": "Bug Hunt Bench",
+        "url": null
+      },
+      "observedAt": null,
+      "evaluatedVariant": "Muse Spark 1.2 (default effort, OpenRouter)",
+      "note": "The alternative 17/105 xhigh row mixes Meta-direct and OpenRouter routes across its two repository legs; the run notes identify 14/105 as the single-route row.",
+      "grade": "measured"
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "Non-Hallucination",
+      "category": "rely",
+      "weightPct": 4.5455,
+      "value": 66.71,
+      "unit": "% non-hallucination",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBenchV4",
+      "label": "Terminal-Bench 4.0",
+      "category": "code",
+      "weightPct": 4.5455,
+      "value": null,
+      "unit": "% resolved",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
+      "category": "prod",
+      "weightPct": 4.5455,
+      "value": 1481.62,
+      "unit": "Elo",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "intelligenceIndex",
+      "label": "AA Intelligence Index",
+      "category": "intel",
+      "weightPct": 4.5455,
+      "value": 39.5758607970943,
+      "unit": "Index points",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "category": "language",
+      "weightPct": 3.7879,
+      "value": 74.325,
+      "unit": "score",
+      "normalized": null,
+      "source": {
+        "name": "LiveBench release 2026_06_25",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "muse-spark-1.2-xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 40.61,
+      "unit": "% score",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 240.062257356533,
+      "unit": "tokens per second",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR v1.1",
+      "category": "language",
+      "weightPct": 3.0303,
+      "value": 79.0,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "category": "rely",
+      "weightPct": 3.0303,
+      "value": 45.38,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 45.46,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 90.4,
+      "unit": "% accuracy",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 57.41,
+      "unit": "% score",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "intel",
+      "weightPct": 2.2727,
+      "value": 17.71,
+      "unit": "% score",
+      "normalized": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "xhigh",
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 1385.40074776,
+    "planUsdPerRun": null,
+    "planUsdPerPoint": null,
+    "planComparableUsdPerPoint": 35.0062063049736,
+    "fallback": "api",
+    "route": null
+  },
+  "plans": [],
+  "history": [
+    {
+      "version": "v1.5.0",
+      "date": "2026-09-06",
+      "rank": {
+        "api": 12,
+        "plan": null
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+  }
+}

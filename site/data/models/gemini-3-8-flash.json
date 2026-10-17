@@ -1,0 +1,362 @@
+{
+  "slug": "gemini-3-8-flash",
+  "name": "Gemini 3.8 Flash",
+  "developer": "Google DeepMind",
+  "aaUrl": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+  "aaVariant": "high",
+  "selectedPage": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+  "summary": {
+    "rank": {
+      "api": 12,
+      "plan": 13
+    },
+    "overall": {
+      "api": 42.7,
+      "plan": 37.7
+    },
+    "quality": 38.7,
+    "qualityRank": 11,
+    "coverage": {
+      "pct": 100.0,
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "missing": []
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": []
+  },
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "value": 1622.7263776021543,
+      "unit": "USD per Index run",
+      "normalized": 60.0,
+      "source": {
+        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured",
+      "normalizedByBasis": {
+        "api": 60.0,
+        "plan": 33.333333
+      }
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.9394,
+      "value": 66.0,
+      "unit": "% pass@1",
+      "normalized": 42.3,
+      "source": {
+        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-08",
+      "evaluatedVariant": "Antigravity SDK / Gemini 3.8 Flash / high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHuntFixedOf105",
+      "label": "Bug Hunt Bench",
+      "category": "code",
+      "weightPct": 15.1515,
+      "value": 18.0,
+      "unit": "bugs fixed of 105",
+      "normalized": 3.6,
+      "source": {
+        "name": "Bug Hunt Bench",
+        "url": null
+      },
+      "observedAt": null,
+      "evaluatedVariant": "Gemini 3.8 Flash - mean of 3",
+      "note": "Owner-published mean of three runs.",
+      "grade": "measured"
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "Non-Hallucination",
+      "category": "rely",
+      "weightPct": 4.5455,
+      "value": 44.82,
+      "unit": "% non-hallucination",
+      "normalized": 40.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBenchV4",
+      "label": "Terminal-Bench 4.0",
+      "category": "code",
+      "weightPct": 4.5455,
+      "value": 19.1,
+      "unit": "% resolved",
+      "normalized": 16.7,
+      "source": {
+        "name": "Terminal-Bench 4.0 leaderboard",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "mini-SWE-agent / Gemini 3.8 Flash",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
+      "category": "prod",
+      "weightPct": 4.5455,
+      "value": 1411.95,
+      "unit": "Elo",
+      "normalized": 6.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "intelligenceIndex",
+      "label": "AA Intelligence Index",
+      "category": "intel",
+      "weightPct": 4.5455,
+      "value": 40.9262321765904,
+      "unit": "Index points",
+      "normalized": 20.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "category": "language",
+      "weightPct": 3.7879,
+      "value": 81.4125,
+      "unit": "score",
+      "normalized": 100.0,
+      "source": {
+        "name": "LiveBench release 2026_06_25",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "gemini-3.8-flash-high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 59.93,
+      "unit": "% score",
+      "normalized": 40.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 238.736904635898,
+      "unit": "tokens per second",
+      "normalized": 100.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR v1.1",
+      "category": "language",
+      "weightPct": 3.0303,
+      "value": 81.33,
+      "unit": "% accuracy",
+      "normalized": 46.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "category": "rely",
+      "weightPct": 3.0303,
+      "value": 54.6,
+      "unit": "% accuracy",
+      "normalized": 66.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 47.82,
+      "unit": "% accuracy",
+      "normalized": 53.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 95.25,
+      "unit": "% accuracy",
+      "normalized": 87.5,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 56.6,
+      "unit": "% score",
+      "normalized": 53.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "intel",
+      "weightPct": 2.2727,
+      "value": 18.29,
+      "unit": "% score",
+      "normalized": 26.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "high",
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 1622.7263776021543,
+    "planUsdPerRun": null,
+    "planUsdPerPoint": null,
+    "planComparableUsdPerPoint": 39.650031075432,
+    "fallback": "api",
+    "route": null
+  },
+  "plans": [],
+  "history": [
+    {
+      "version": "v1.5.0",
+      "date": "2026-09-06",
+      "rank": {
+        "api": 1,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.0",
+      "date": null,
+      "rank": {
+        "api": 6,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.1",
+      "date": null,
+      "rank": {
+        "api": 7,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.2",
+      "date": null,
+      "rank": {
+        "api": 7,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.6",
+      "date": "2026-10-08",
+      "rank": {
+        "api": 12,
+        "plan": 13
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+  }
+}

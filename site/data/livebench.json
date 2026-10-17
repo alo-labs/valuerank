@@ -1,0 +1,231 @@
+{
+  "release": "2026_06_25",
+  "observedAt": "2026-10-07T14:30:13Z",
+  "rows": [
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "livebenchModel": "deepseek-v4-flash",
+      "overallScore": 65.481107,
+      "instructionFollowingScore": 63.1375,
+      "costPerSuccessfulTaskUsd": 0.0161,
+      "pareto": true
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "livebenchModel": "gpt-6-luna-max",
+      "overallScore": 72.026476,
+      "instructionFollowingScore": 55.93325,
+      "costPerSuccessfulTaskUsd": 0.0263,
+      "pareto": true
+    },
+    {
+      "id": "glm-5-3-flash",
+      "name": "GLM-5.3 Flash",
+      "livebenchModel": "glm-5.3-flash",
+      "overallScore": 71.590786,
+      "instructionFollowingScore": 52.82075,
+      "costPerSuccessfulTaskUsd": 0.0305,
+      "pareto": false
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "livebenchModel": "deepseek-v4-pro",
+      "overallScore": 71.57225,
+      "instructionFollowingScore": 62.35,
+      "costPerSuccessfulTaskUsd": 0.0498,
+      "pareto": false
+    },
+    {
+      "id": "gemini-3-7-flash",
+      "name": "Gemini 3.7 Flash",
+      "livebenchModel": "gemini-3.7-flash-high",
+      "overallScore": 78.826012,
+      "instructionFollowingScore": 79.92525,
+      "costPerSuccessfulTaskUsd": 0.1571,
+      "pareto": true
+    },
+    {
+      "id": "gpt-5-6-luna",
+      "name": "GPT-5.6 Luna",
+      "livebenchModel": "gpt-5.6-luna-max",
+      "overallScore": 73.559381,
+      "instructionFollowingScore": 60.121,
+      "costPerSuccessfulTaskUsd": 0.1677,
+      "pareto": false
+    },
+    {
+      "id": "grok-4-6",
+      "name": "Grok 4.6",
+      "livebenchModel": "grok-4.6",
+      "overallScore": 78.042,
+      "instructionFollowingScore": 71.8665,
+      "costPerSuccessfulTaskUsd": 0.2068,
+      "pareto": false
+    },
+    {
+      "id": "glm-5-2",
+      "name": "GLM-5.2",
+      "livebenchModel": "glm-5.2",
+      "overallScore": 73.157286,
+      "instructionFollowingScore": 62.29175,
+      "costPerSuccessfulTaskUsd": 0.2246,
+      "pareto": false
+    },
+    {
+      "id": "gemini-3-6-flash",
+      "name": "Gemini 3.6 Flash",
+      "livebenchModel": "gemini-3.6-flash-high",
+      "overallScore": 73.587512,
+      "instructionFollowingScore": 75.36675,
+      "costPerSuccessfulTaskUsd": 0.2353,
+      "pareto": false
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "name": "Gemini 3.5 Flash",
+      "livebenchModel": "gemini-3.5-flash-high",
+      "overallScore": 74.637762,
+      "instructionFollowingScore": 75.6,
+      "costPerSuccessfulTaskUsd": 0.2489,
+      "pareto": false
+    },
+    {
+      "id": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "livebenchModel": "gpt-6-sol-max",
+      "overallScore": 79.245452,
+      "instructionFollowingScore": 68.57475,
+      "costPerSuccessfulTaskUsd": 0.2685,
+      "pareto": true
+    },
+    {
+      "id": "qwen3-8-max",
+      "name": "Qwen3.8 Max",
+      "livebenchModel": "qwen3.8-max",
+      "overallScore": 78.460893,
+      "instructionFollowingScore": 74.0835,
+      "costPerSuccessfulTaskUsd": 0.275,
+      "pareto": false
+    },
+    {
+      "id": "gemini-3-8-flash",
+      "name": "Gemini 3.8 Flash",
+      "livebenchModel": "gemini-3.8-flash-high",
+      "overallScore": 75.828524,
+      "instructionFollowingScore": 81.4125,
+      "costPerSuccessfulTaskUsd": 0.3073,
+      "pareto": false
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "livebenchModel": "kimi-k3",
+      "overallScore": 79.193048,
+      "instructionFollowingScore": 71.36275,
+      "costPerSuccessfulTaskUsd": 0.351,
+      "pareto": false
+    },
+    {
+      "id": "muse-spark-1-2",
+      "name": "Muse Spark 1.2",
+      "livebenchModel": "muse-spark-1.2-xhigh",
+      "overallScore": 77.954774,
+      "instructionFollowingScore": 74.325,
+      "costPerSuccessfulTaskUsd": 0.3753,
+      "pareto": false
+    },
+    {
+      "id": "gpt-5-5",
+      "name": "GPT-5.5",
+      "livebenchModel": "gpt-5.5-xhigh",
+      "overallScore": 80.188298,
+      "instructionFollowingScore": 70.72925,
+      "costPerSuccessfulTaskUsd": 0.4356,
+      "pareto": true
+    },
+    {
+      "id": "glm-5-3",
+      "name": "GLM-5.3",
+      "livebenchModel": "glm-5.3",
+      "overallScore": 76.137809,
+      "instructionFollowingScore": 69.304,
+      "costPerSuccessfulTaskUsd": 0.4504,
+      "pareto": false
+    },
+    {
+      "id": "gpt-5-6-sol",
+      "name": "GPT-5.6 Sol",
+      "livebenchModel": "gpt-5.6-sol-max",
+      "overallScore": 81.053548,
+      "instructionFollowingScore": 71.846,
+      "costPerSuccessfulTaskUsd": 0.507,
+      "pareto": true
+    },
+    {
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "livebenchModel": "claude-sonnet-5-xhigh-effort",
+      "overallScore": 76.039714,
+      "instructionFollowingScore": 63.8585,
+      "costPerSuccessfulTaskUsd": 0.5134,
+      "pareto": false
+    },
+    {
+      "id": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "livebenchModel": "claude-opus-5-max-effort",
+      "overallScore": 80.084976,
+      "instructionFollowingScore": 63.7665,
+      "costPerSuccessfulTaskUsd": 0.7067,
+      "pareto": false
+    },
+    {
+      "id": "grok-4-7",
+      "name": "Grok 4.7",
+      "livebenchModel": "grok-4.7-xhigh",
+      "overallScore": 77.396738,
+      "instructionFollowingScore": 75.27525,
+      "costPerSuccessfulTaskUsd": 0.7179,
+      "pareto": false
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "livebenchModel": "gpt-6-astra-max",
+      "overallScore": 82.160643,
+      "instructionFollowingScore": 75.579,
+      "costPerSuccessfulTaskUsd": 0.7359,
+      "pareto": true
+    },
+    {
+      "id": "claude-opus-4-8",
+      "name": "Claude Opus 4.8",
+      "livebenchModel": "claude-opus-4-8-max-effort",
+      "overallScore": 76.223988,
+      "instructionFollowingScore": 72.0335,
+      "costPerSuccessfulTaskUsd": 0.9858,
+      "pareto": false
+    },
+    {
+      "id": "claude-fable-5-1",
+      "name": "Claude Fable 5.1",
+      "livebenchModel": "claude-fable-5-1-max-effort",
+      "overallScore": 83.414155,
+      "instructionFollowingScore": 72.98775,
+      "costPerSuccessfulTaskUsd": 1.2117,
+      "pareto": true
+    },
+    {
+      "id": "claude-fable-5",
+      "name": "Claude Fable 5",
+      "livebenchModel": "claude-fable-5-max-effort",
+      "overallScore": 82.970798,
+      "instructionFollowingScore": 75.77075,
+      "costPerSuccessfulTaskUsd": 1.4777,
+      "pareto": false
+    }
+  ]
+}

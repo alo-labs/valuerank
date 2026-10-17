@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{%- from "partials/badge.html" import badge, legend -%}
+{%- from "partials/fmt.html" import num, usd, rank -%}
+{% block content %}
+{%- set routes_by_id = {} -%}
+{%- for r in page.plansJson.routes %}{% if routes_by_id.update({r.id: r}) %}{% endif %}{% endfor -%}
+<header class="page-head">
+  <p class="eyebrow">Subscription value &middot; as of {{ page.plansJson.asOf }}</p>
+  <h1 id="page-title">Plans: what a subscription is really worth</h1>
+  <p class="lead">A flat monthly fee can be a much cheaper way to use a model than paying per token. ValueRank converts that into one number, USD per Intelligence Index point, so a plan model and an API-only model can be ranked together.</p>
+</header>
+
+<section class="block" id="worked-example" aria-labelledby="example-title">
+  <h2 id="example-title" class="section-title">How the number is built</h2>
+  <ol class="steps">
+    <li><strong>API cost of the benchmark.</strong> Artificial Analysis reports what it cost to run the whole Intelligence Index on the model at API rates.</li>
+    <li><strong>Divide by the value multiple.</strong> The value multiple is how many dollars of API-priced work one subscription dollar buys, taken from measured usage.</li>
+    <li><strong>Divide by the Index score.</strong> The result is plan dollars per Intelligence Index point.</li>
+  </ol>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="example-title">
+    <table class="data-table">
+      <caption class="sr-only">Worked example of the plan cost calculation</caption>
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">API cost per run</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">Plan cost per run</th><th scope="col" class="col-num">Index score</th><th scope="col" class="col-num">USD per Index point</th></tr></thead>
+      <tbody>
+        {%- for m in page.workedExample.models %}
+        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a></span></th>
+          <td class="cell-num">{{ usd(m.apiUsd, 0) }}</td>
+          <td class="cell-num">{{ num(m.valueMultiple, 1) }}&times;</td>
+          <td class="cell-num">{{ usd(m.planUsdPerRun) }}</td>
+          <td class="cell-num">{{ num(m.indexValue, 1) }}</td>
+          <td class="cell-num"><strong>{{ usd(m.planUsdPerPoint, 3) }}</strong></td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="callout callout-info">
+    <p><strong>What this does and does not claim.</strong> It estimates the price of one benchmark run on a plan, not what your own usage will cost. Provisional assumptions are flagged on every route.</p>
+  </div>
+</section>
+
+<section class="block" id="routes" aria-labelledby="routes-title">
+  <h2 id="routes-title" class="section-title">Routes and their evidence</h2>
+  {%- for provider, routes in page.routesByProvider.items() %}
+  <h3 class="subhead">{{ provider }}</h3>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="{{ provider }} routes">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
+      <tbody>
+        {%- for r in routes %}
+        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ r.planLabel }}</span><span class="model-dev">{{ r.modelSlugs | length }} model{{ "" if r.modelSlugs | length == 1 else "s" }}</span></span></th>
+          <td class="cell-num">{{ usd(r.planFeeUsd, 0) }}</td>
+          <td class="cell-num">{{ num(r.valueMultiple, 1) }}&times;</td>
+          <td class="cell-num">{{ usd(r.apiEquivalentUsd, 0) }}</td>
+          <td>{{ badge(r.grade, hint=r.evidenceLabel) }}</td>
+          <td><a href="{{ r.sourceUrl }}" rel="noopener">{{ r.sourceModel }}</a><br><span class="muted small">{{ r.sourceDate }}</span>{% if r.notes %}<details class="evidence"><summary>Notes</summary><p class="small">{{ r.notes }}</p></details>{% endif %}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  {%- endfor %}
+  {%- set policy = page.plansJson.policy %}
+  <details class="panel" id="evidence-policy">
+    <summary>Evidence policy</summary>
+    <div class="panel-body">
+      <dl class="evidence-list">
+        <div><dt>Reporting window</dt><dd>{{ policy.reportingWindow.start }} to {{ policy.reportingWindow.end }}</dd></div>
+        <div><dt>Numerator</dt><dd>{{ policy.defaultNumerator }}</dd></div>
+        <div><dt>Controlled source</dt><dd><a href="{{ policy.selectedSourceException.sourceUrl }}" rel="noopener">{{ policy.selectedSourceException.providers | join(" and ") }}</a>, {{ policy.selectedSourceException.publicationDate }}: {{ policy.selectedSourceException.evidenceType }}</dd></div>
+        <div><dt>GPT models</dt><dd>{{ policy.gptApplication }}</dd></div>
+        <div><dt>MiMo models</dt><dd>{{ policy.mimoApplication }}</dd></div>
+        <div><dt>Other models</dt><dd>{{ policy.unsupportedModels }}</dd></div>
+      </dl>
+    </div>
+  </details>
+</section>
+
+<section class="block" id="candidates" aria-labelledby="candidates-title">
+  <h2 id="candidates-title" class="section-title">Every candidate side by side</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="candidates-title">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">Index</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col" class="col-num">USD per Index point</th><th scope="col">Route</th></tr></thead>
+      <tbody>
+        {%- for c in page.plansJson.candidates %}
+        {%- set r = routes_by_id.get(c.routeId) if c.routeId else none %}
+        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ c.slug }}/">{{ c.name }}</a></span></th>
+          <td class="cell-num">{{ rank(c.rank.plan) }}</td>
+          <td class="cell-num">{{ rank(c.rank.api) }}</td>
+          <td class="cell-num">{{ num(c.intelligenceIndex.value) }}</td>
+          <td class="cell-num">{{ usd(c.apiUsd, 0) }}</td>
+          <td class="cell-num">{{ usd(c.planUsdPerPoint, 3) }}</td>
+          <td>{% if r %}{{ badge(r.grade, hint=r.evidenceLabel) }} <span class="muted small">{{ r.planLabel }}</span>{% else %}{{ badge("missing", label="API fallback", hint="No subscription route; the plan ranking uses API cost.") }}{% endif %}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="legend-title">
+  <h2 id="legend-title" class="section-title">Evidence grades</h2>
+  {{ legend() }}
+</section>
+{% endblock %}
+{% block data %}<script type="application/json" id="page-data">{{ page.plansJson | tojson }}</script>{% endblock %}

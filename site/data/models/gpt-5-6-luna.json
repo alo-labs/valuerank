@@ -1,0 +1,425 @@
+{
+  "slug": "gpt-5-6-luna",
+  "name": "GPT-5.6 Luna",
+  "developer": "OpenAI",
+  "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+  "aaVariant": "max",
+  "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+  "summary": {
+    "rank": {
+      "api": 11,
+      "plan": 9
+    },
+    "overall": {
+      "api": 43.3,
+      "plan": 45.8
+    },
+    "quality": 34.8,
+    "qualityRank": 12,
+    "coverage": {
+      "pct": 100.0,
+      "availablePriority": 132,
+      "totalPriority": 132,
+      "missing": []
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": []
+  },
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "value": 319.92851141699316,
+      "unit": "USD per Index run",
+      "normalized": 80.0,
+      "source": {
+        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured",
+      "normalizedByBasis": {
+        "api": 80.0,
+        "plan": 93.333333
+      }
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.9394,
+      "value": 66.0,
+      "unit": "% pass@1",
+      "normalized": 42.3,
+      "source": {
+        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-08",
+      "evaluatedVariant": "Codex / GPT-5.6 Luna / max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHuntFixedOf105",
+      "label": "Bug Hunt Bench",
+      "category": "code",
+      "weightPct": 15.1515,
+      "value": 31.3,
+      "unit": "bugs fixed of 105",
+      "normalized": 71.4,
+      "source": {
+        "name": "Bug Hunt Bench",
+        "url": null
+      },
+      "observedAt": null,
+      "evaluatedVariant": "GPT-5.6 Luna (max effort) - mean of 3",
+      "note": "Owner-published mean of three runs.",
+      "grade": "measured"
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "Non-Hallucination",
+      "category": "rely",
+      "weightPct": 4.5455,
+      "value": 7.42,
+      "unit": "% non-hallucination",
+      "normalized": 0.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBenchV4",
+      "label": "Terminal-Bench 4.0",
+      "category": "code",
+      "weightPct": 4.5455,
+      "value": 17.3,
+      "unit": "% resolved",
+      "normalized": 0.0,
+      "source": {
+        "name": "Terminal-Bench 4.0 leaderboard",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "Codex / GPT-5.6 Luna",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
+      "category": "prod",
+      "weightPct": 4.5455,
+      "value": 1443.14,
+      "unit": "Elo",
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "intelligenceIndex",
+      "label": "AA Intelligence Index",
+      "category": "intel",
+      "weightPct": 4.5455,
+      "value": 37.3244239690841,
+      "unit": "Index points",
+      "normalized": 3.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "category": "language",
+      "weightPct": 3.7879,
+      "value": 60.121,
+      "unit": "score",
+      "normalized": 9.1,
+      "source": {
+        "name": "LiveBench release 2026_06_25",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "gpt-5.6-luna-max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 50.21,
+      "unit": "% score",
+      "normalized": 0.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 118.222437020143,
+      "unit": "tokens per second",
+      "normalized": 85.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR v1.1",
+      "category": "language",
+      "weightPct": 3.0303,
+      "value": 83.67,
+      "unit": "% accuracy",
+      "normalized": 70.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "category": "rely",
+      "weightPct": 3.0303,
+      "value": 42.73,
+      "unit": "% accuracy",
+      "normalized": 33.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 39.48,
+      "unit": "% accuracy",
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 91.11,
+      "unit": "% accuracy",
+      "normalized": 0.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 53.59,
+      "unit": "% score",
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "intel",
+      "weightPct": 2.2727,
+      "value": 20.57,
+      "unit": "% score",
+      "normalized": 46.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/gpt-5-6-luna"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": "max",
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 319.92851141699316,
+    "planUsdPerRun": 29.700010343203967,
+    "planUsdPerPoint": 0.7957258862937724,
+    "planComparableUsdPerPoint": 0.7957258862937724,
+    "fallback": null,
+    "route": {
+      "id": "chatgpt-pro500-common-semianalysis-assumption",
+      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06"
+    }
+  },
+  "plans": [
+    {
+      "id": "chatgpt-pro500-common-semianalysis-assumption",
+      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "usdPerRun": 29.700010343203967,
+      "usdPerPoint": 0.7957258862937724,
+      "selected": true
+    },
+    {
+      "id": "chatgpt-pro100-common-semianalysis-assumption",
+      "planLabel": "ChatGPT Pro $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "usdPerRun": 30.32497738549698,
+      "usdPerPoint": 0.8124700708205228,
+      "selected": false
+    },
+    {
+      "id": "chatgpt-pro200-common-semianalysis-assumption",
+      "planLabel": "ChatGPT Pro $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "usdPerRun": 30.703312036179767,
+      "usdPerPoint": 0.8226064536618538,
+      "selected": false
+    },
+    {
+      "id": "chatgpt-plus-common-semianalysis-assumption",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "usdPerRun": 39.49734708851768,
+      "usdPerPoint": 1.0582171910069775,
+      "selected": false
+    }
+  ],
+  "history": [
+    {
+      "version": "v1.5.0",
+      "date": "2026-09-06",
+      "rank": {
+        "api": 9,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.0",
+      "date": null,
+      "rank": {
+        "api": 5,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.1",
+      "date": null,
+      "rank": {
+        "api": 5,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.2",
+      "date": null,
+      "rank": {
+        "api": 5,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.6",
+      "date": "2026-10-08",
+      "rank": {
+        "api": 11,
+        "plan": 9
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+  }
+}

@@ -1,0 +1,437 @@
+{
+  "title": "Rankings",
+  "description": "Full ranking table.",
+  "canonical": "https://example.test/rankings/",
+  "ogImage": "https://example.test/og.png",
+  "rankingsJson": {
+    "version": "v9.9.9",
+    "publishDate": "January 2, 2030",
+    "bases": {
+      "api": {
+        "label": "API ranking",
+        "costLabel": "API cost",
+        "costUnit": "USD per Index run",
+        "description": "AA total evaluation cost at API rates."
+      },
+      "plan": {
+        "label": "Plan ranking",
+        "costLabel": "Plan cost",
+        "costUnit": "USD per Index point",
+        "description": "AA total evaluation cost divided by the highest eligible Value Multiple and the AA Intelligence Index."
+      }
+    },
+    "defaultBasis": "plan",
+    "costWeightPct": 18.9394,
+    "dimensions": [
+      {
+        "key": "costComposite",
+        "label": "Cost",
+        "fullLabel": "Cost (selected basis)",
+        "category": "cost",
+        "weightPct": 18.9394,
+        "priority": 25,
+        "higherBetter": false,
+        "sourceUrl": null
+      },
+      {
+        "key": "deepswePassAt1",
+        "label": "DeepSWE v1.1",
+        "fullLabel": "DeepSWE v1.1",
+        "category": "code",
+        "weightPct": 18.94,
+        "priority": 25,
+        "higherBetter": true,
+        "sourceUrl": "https://example.test/deepswe"
+      }
+    ],
+    "categories": {
+      "cost": "Cost",
+      "code": "Code/Agentic"
+    },
+    "models": [
+      {
+        "slug": "alpha-one",
+        "name": "Alpha <b>x</b> One",
+        "shortName": "Alpha <b>x</b> One",
+        "developer": "Alpha Labs",
+        "aaUrl": "https://example.test/aa/alpha-one",
+        "aaVariant": "max",
+        "rankingEligible": true,
+        "exclusionReasons": [],
+        "rank": {
+          "api": 2,
+          "plan": 1
+        },
+        "overall": {
+          "api": 74.3,
+          "plan": 75.7
+        },
+        "quality": 74.6,
+        "qualityRank": 1,
+        "dims": {
+          "costComposite": null,
+          "deepswePassAt1": 100.0
+        },
+        "costDims": {
+          "api": 70.0,
+          "plan": 80.0
+        },
+        "raw": {
+          "deepswePassAt1": 70.0
+        },
+        "coverage": {
+          "pct": 88.64,
+          "availablePriority": 117,
+          "totalPriority": 132,
+          "missing": [
+            "Terminal-Bench 4.0"
+          ]
+        },
+        "cost": {
+          "apiUsd": 1081.55,
+          "planUsdPerRun": 100.4,
+          "planUsdPerPoint": 1.931,
+          "planComparableUsdPerPoint": 1.931,
+          "fallback": null,
+          "route": {
+            "id": "r1",
+            "planLabel": "Pro $200",
+            "planFeeUsd": 200,
+            "valueMultiple": 10.7,
+            "grade": "assumption",
+            "evidenceLabel": "Provisional assumption",
+            "sourceModel": "Alpha <b>x</b> One",
+            "sourceUrl": "https://example.test/src",
+            "sourceDate": "2030-01-01"
+          }
+        },
+        "intelligenceIndex": {
+          "value": 52.0,
+          "status": "measured"
+        },
+        "speed": 86.2,
+        "grade": "measured",
+        "pareto": {
+          "api": true,
+          "plan": true
+        },
+        "tier": "Near-Budget"
+      },
+      {
+        "slug": "beta-two",
+        "name": "Beta Two",
+        "shortName": "Beta Two",
+        "developer": "Beta Corp",
+        "aaUrl": "https://example.test/aa/beta-two",
+        "aaVariant": "max",
+        "rankingEligible": true,
+        "exclusionReasons": [],
+        "rank": {
+          "api": 1,
+          "plan": 2
+        },
+        "overall": {
+          "api": 76.0,
+          "plan": 70.1
+        },
+        "quality": 72.0,
+        "qualityRank": 2,
+        "dims": {
+          "costComposite": null,
+          "deepswePassAt1": 100.0
+        },
+        "costDims": {
+          "api": 70.0,
+          "plan": 80.0
+        },
+        "raw": {
+          "deepswePassAt1": 70.0
+        },
+        "coverage": {
+          "pct": 88.64,
+          "availablePriority": 117,
+          "totalPriority": 132,
+          "missing": [
+            "Terminal-Bench 4.0"
+          ]
+        },
+        "cost": {
+          "apiUsd": 900.0,
+          "planUsdPerRun": 100.4,
+          "planUsdPerPoint": 1.931,
+          "planComparableUsdPerPoint": 1.931,
+          "fallback": null,
+          "route": {
+            "id": "r1",
+            "planLabel": "Pro $200",
+            "planFeeUsd": 200,
+            "valueMultiple": 10.7,
+            "grade": "assumption",
+            "evidenceLabel": "Provisional assumption",
+            "sourceModel": "Beta Two",
+            "sourceUrl": "https://example.test/src",
+            "sourceDate": "2030-01-01"
+          }
+        },
+        "intelligenceIndex": {
+          "value": 52.0,
+          "status": "measured"
+        },
+        "speed": 86.2,
+        "grade": "claim",
+        "pareto": {
+          "api": true,
+          "plan": true
+        },
+        "tier": "Near-Budget"
+      },
+      {
+        "slug": "gamma-three",
+        "name": "Gamma Three",
+        "shortName": "Gamma Three",
+        "developer": "Alpha Labs",
+        "aaUrl": "https://example.test/aa/gamma-three",
+        "aaVariant": "max",
+        "rankingEligible": true,
+        "exclusionReasons": [],
+        "rank": {
+          "api": 3,
+          "plan": 3
+        },
+        "overall": {
+          "api": 60.5,
+          "plan": 60.0
+        },
+        "quality": 61.0,
+        "qualityRank": 3,
+        "dims": {
+          "costComposite": null,
+          "deepswePassAt1": 100.0
+        },
+        "costDims": {
+          "api": 70.0,
+          "plan": 80.0
+        },
+        "raw": {
+          "deepswePassAt1": 70.0
+        },
+        "coverage": {
+          "pct": 88.64,
+          "availablePriority": 117,
+          "totalPriority": 132,
+          "missing": [
+            "Terminal-Bench 4.0"
+          ]
+        },
+        "cost": {
+          "apiUsd": 500.0,
+          "planUsdPerRun": 100.4,
+          "planUsdPerPoint": 1.931,
+          "planComparableUsdPerPoint": 1.931,
+          "fallback": null,
+          "route": {
+            "id": "r1",
+            "planLabel": "Pro $200",
+            "planFeeUsd": 200,
+            "valueMultiple": 10.7,
+            "grade": "assumption",
+            "evidenceLabel": "Provisional assumption",
+            "sourceModel": "Gamma Three",
+            "sourceUrl": "https://example.test/src",
+            "sourceDate": "2030-01-01"
+          }
+        },
+        "intelligenceIndex": {
+          "value": 52.0,
+          "status": "measured"
+        },
+        "speed": 86.2,
+        "grade": "estimate",
+        "pareto": {
+          "api": true,
+          "plan": true
+        },
+        "tier": "Near-Budget"
+      },
+      {
+        "slug": "delta-four",
+        "name": "Delta Four",
+        "shortName": "Delta Four",
+        "developer": "Delta Inc",
+        "aaUrl": "https://example.test/aa/delta-four",
+        "aaVariant": "max",
+        "rankingEligible": false,
+        "exclusionReasons": [
+          "No eligible Intelligence Index"
+        ],
+        "rank": {
+          "api": null,
+          "plan": null
+        },
+        "overall": {
+          "api": null,
+          "plan": null
+        },
+        "quality": null,
+        "qualityRank": null,
+        "dims": {
+          "costComposite": null,
+          "deepswePassAt1": 100.0
+        },
+        "costDims": {
+          "api": 70.0,
+          "plan": 80.0
+        },
+        "raw": {
+          "deepswePassAt1": 70.0
+        },
+        "coverage": {
+          "pct": 88.64,
+          "availablePriority": 117,
+          "totalPriority": 132,
+          "missing": [
+            "Terminal-Bench 4.0"
+          ]
+        },
+        "cost": {
+          "apiUsd": null,
+          "planUsdPerRun": 100.4,
+          "planUsdPerPoint": 1.931,
+          "planComparableUsdPerPoint": 1.931,
+          "fallback": null,
+          "route": {
+            "id": "r1",
+            "planLabel": "Pro $200",
+            "planFeeUsd": 200,
+            "valueMultiple": 10.7,
+            "grade": "assumption",
+            "evidenceLabel": "Provisional assumption",
+            "sourceModel": "Delta Four",
+            "sourceUrl": "https://example.test/src",
+            "sourceDate": "2030-01-01"
+          }
+        },
+        "intelligenceIndex": {
+          "value": 52.0,
+          "status": "measured"
+        },
+        "speed": 86.2,
+        "grade": "missing",
+        "pareto": {
+          "api": true,
+          "plan": true
+        },
+        "tier": "Near-Budget"
+      }
+    ],
+    "picks": {
+      "plan": {
+        "value": {
+          "slug": "alpha-one",
+          "reason": "Because value on plan."
+        },
+        "quality": {
+          "slug": "beta-two",
+          "reason": "Because quality on plan."
+        },
+        "budget": {
+          "slug": "gamma-three",
+          "reason": "Because budget on plan."
+        }
+      },
+      "api": {
+        "value": {
+          "slug": "alpha-one",
+          "reason": "Because value on api."
+        },
+        "quality": {
+          "slug": "beta-two",
+          "reason": "Because quality on api."
+        },
+        "budget": {
+          "slug": "gamma-three",
+          "reason": "Because budget on api."
+        }
+      }
+    },
+    "planMeta": {
+      "asOf": "2030-01-01",
+      "routeCount": 2,
+      "supportedModelCount": 3,
+      "fallbackModelCount": 1,
+      "totalModelCount": 4
+    }
+  },
+  "providers": [
+    "Alpha Labs",
+    "Beta Corp",
+    "Delta Inc"
+  ],
+  "grades": [
+    "measured",
+    "claim",
+    "estimate",
+    "assumption",
+    "missing"
+  ],
+  "columns": [
+    {
+      "key": "rank",
+      "label": "Rank",
+      "sortable": true,
+      "default": true
+    },
+    {
+      "key": "name",
+      "label": "Model",
+      "sortable": true,
+      "default": true
+    },
+    {
+      "key": "overall",
+      "label": "Overall",
+      "sortable": true,
+      "default": true
+    },
+    {
+      "key": "quality",
+      "label": "Quality",
+      "sortable": true,
+      "default": true
+    },
+    {
+      "key": "cost",
+      "label": "Cost",
+      "sortable": true,
+      "default": true
+    },
+    {
+      "key": "grade",
+      "label": "Evidence",
+      "sortable": true,
+      "default": true
+    },
+    {
+      "key": "coverage",
+      "label": "Coverage",
+      "sortable": true,
+      "default": true
+    },
+    {
+      "key": "developer",
+      "label": "Developer",
+      "sortable": true,
+      "default": false
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "sortable": true,
+      "default": false
+    }
+  ],
+  "key": "rankings",
+  "scripts": [
+    "/assets/js/pages/rankings.js"
+  ]
+}

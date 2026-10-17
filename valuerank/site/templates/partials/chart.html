@@ -1,0 +1,18 @@
+{#- Chart card with tabs, panels and per-chart text summaries. items: list of [key, tab label, aria label]. -#}
+{%- macro chart(items, loading="Loading chart…") -%}
+<div class="chart-card">
+  <div class="chart-tabs" role="tablist" aria-label="Chart view">
+    {%- for k, tab, aria in items %}
+    <button type="button" role="tab" id="tab-{{ k }}" aria-controls="panel-{{ k }}" data-chart-tab="{{ k }}" aria-selected="{{ 'true' if loop.first else 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>{{ tab }}</button>
+    {%- endfor %}
+  </div>
+  {%- for k, tab, aria in items %}
+  <div class="chart-panel" role="tabpanel" id="panel-{{ k }}" aria-labelledby="tab-{{ k }}" data-chart-panel="{{ k }}"{% if not loop.first %} hidden{% endif %}>
+    <div class="chart" data-chart="{{ k }}" data-chart-summary-target="{{ k }}-summary" role="img" aria-label="{{ aria }}">
+      <p class="chart-state" data-chart-state>{{ loading }}</p>
+    </div>
+    <p class="chart-summary" id="{{ k }}-summary" data-chart-summary>{{ aria }}. A text summary appears here when the chart loads.</p>
+  </div>
+  {%- endfor %}
+</div>
+{%- endmacro -%}

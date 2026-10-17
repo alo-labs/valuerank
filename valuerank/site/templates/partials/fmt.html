@@ -1,0 +1,3 @@
+{%- macro num(v, d=1) -%}{%- if v is none -%}<span class="na" title="No value">&ndash;</span>{%- else -%}{{ ("%." ~ d ~ "f") | format(v) }}{%- endif -%}{%- endmacro -%}
+{%- macro usd(v, d=2) -%}{%- if v is none -%}<span class="na" title="No value">&ndash;</span>{%- else -%}${{ ("{:,.%df}" % d).format(v) }}{%- endif -%}{%- endmacro -%}
+{%- macro rank(v) -%}{%- if v is none -%}<span class="na" title="Not ranked">&ndash;</span>{%- else -%}{{ v }}{%- endif -%}{%- endmacro -%}

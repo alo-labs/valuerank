@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{%- from "partials/badge.html" import badge -%}
+{%- from "partials/fmt.html" import num, rank -%}
+{%- from "partials/coverage_bar.html" import coverage_bar -%}
+{% block content %}
+<header class="page-head">
+  <p class="eyebrow">Roster &middot; {{ page.models | length }} models</p>
+  <h1 id="page-title">Every model we track</h1>
+  <p class="lead">{{ page.rankedCount }} models are ranked. The other {{ page.unrankedCount }} are listed too, because the gaps in their evidence are as informative as the scores. Each page shows every value with its source, date and grade.</p>
+</header>
+
+<section class="block" aria-labelledby="models-title">
+  <h2 id="models-title" class="section-title">All models</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="models-title">
+    <table id="models-table" class="data-table">
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">Plan score</th><th scope="col">Evidence</th><th scope="col">Coverage</th></tr></thead>
+      <tbody>
+        {%- for m in page.models %}
+        <tr data-slug="{{ m.slug }}"{% if not m.rankingEligible %} class="row-missing"{% endif %}>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a><span class="model-dev">{{ m.developer }}{% if not m.rankingEligible %} &middot; not ranked{% endif %}</span></span></th>
+          <td class="cell-num">{{ rank(m.rank.plan) }}</td>
+          <td class="cell-num">{{ rank(m.rank.api) }}</td>
+          <td class="cell-num">{{ num(m.overall.plan) }}</td>
+          <td>{{ badge(m.grade) }}</td>
+          <td>{{ coverage_bar({"pct": m.coveragePct, "missing": []}) }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

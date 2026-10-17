@@ -2,7 +2,7 @@
 
 Runs every offline stage as a subprocess inside a temporary copy of the
 repository with the clock pinned to the committed observation instant and
-asserts that each generated file is byte-identical to the committed one.
+asserts that each generated file, and the whole site/ tree, is byte-identical to the committed one.
 """
 
 import subprocess
@@ -16,7 +16,7 @@ OFFLINE_STAGES = (
     ("valuerank.build_scores",),
     ("valuerank.aa_reconciliation",),
     ("valuerank.emit_docs",),
-    ("valuerank.tb4_page",),
+    ("valuerank.site.build",),
 )
 GENERATED_FILES = (
     "data/scores.json",
@@ -28,10 +28,13 @@ GENERATED_FILES = (
     "methodology.md",
     "scores.md",
     "raw-data.md",
-    "site/index.html",
-    "site/coding-agents/index.html",
-    "site/tb4/index.html",
 )
+
+
+def tree(root):
+    """Every file under ``site/`` keyed by its path relative to ``root``."""
+
+    return {str(path.relative_to(root)): path.read_bytes() for path in sorted((root / "site").rglob("*")) if path.is_file()}
 
 
 def run_stage(root, module):
@@ -47,6 +50,10 @@ def test_offline_stages_regenerate_the_committed_publication(repo_copy, pinned_c
 
     differing = [name for name in GENERATED_FILES if (repo_copy / name).read_bytes() != (ROOT / name).read_bytes()]
     assert differing == [], f"regenerated files differ from the committed publication: {differing}"
+    regenerated, committed = tree(repo_copy), tree(ROOT)
+    assert sorted(regenerated) == sorted(committed), "the build wrote a different set of site files"
+    changed_site_files = [name for name in committed if regenerated[name] != committed[name]]
+    assert changed_site_files == [], f"regenerated site files differ from the committed site: {changed_site_files}"
 
 
 @pytest.mark.integration

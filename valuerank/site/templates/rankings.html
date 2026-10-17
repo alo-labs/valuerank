@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{%- from "partials/basis_toggle.html" import basis_toggle -%}
+{%- from "partials/cost_slider.html" import cost_slider -%}
+{%- from "partials/table.html" import head_cells -%}
+{%- from "partials/chart.html" import chart -%}
+{% block content %}
+<header class="page-head">
+  <p class="eyebrow">The full instrument</p>
+  <h1 id="page-title">Rankings</h1>
+  <p class="lead">Sort, filter and compare every model on either basis. The address bar always holds your current view, so a copied link reproduces it.</p>
+  <div class="hero-controls">
+    {{ basis_toggle(site) }}
+    <p class="note basis-note"><span data-basis-label>{{ site.basis[site.defaultBasis].label }}</span>: cost in <span data-cost-unit>{{ site.basis[site.defaultBasis].costUnit }}</span>.</p>
+  </div>
+</header>
+
+<div class="rank-layout">
+  <form id="filters" class="filters" method="get" action="/rankings/" autocomplete="off" role="search" aria-label="Filter rankings">
+    <details class="filters-details">
+    <summary><h2 class="filters-title">Filters</h2></summary>
+    <div class="field">
+      <label for="filter-q">Search models</label>
+      <input type="search" id="filter-q" name="q" placeholder="Name or developer" autocomplete="off">
+    </div>
+    <div class="field">
+      {{ cost_slider(site) }}
+    </div>
+    <fieldset class="fs">
+      <legend>Provider <span class="muted">(none selected shows all)</span></legend>
+      {%- for p in page.providers %}
+      <label class="check"><input type="checkbox" name="provider" value="{{ p }}"><span>{{ p }}</span></label>
+      {%- endfor %}
+    </fieldset>
+    <fieldset class="fs">
+      <legend>Evidence grade <span class="muted">(none selected shows all)</span></legend>
+      {%- for g in page.grades %}
+      <label class="check"><input type="checkbox" name="grade" value="{{ g }}"><span>{{ g | capitalize }}</span></label>
+      {%- endfor %}
+    </fieldset>
+    <fieldset class="fs">
+      <legend>Plan route</legend>
+      <label class="check"><input type="radio" name="route" value="all" checked><span>All models</span></label>
+      <label class="check"><input type="radio" name="route" value="eligible"><span>Subscription route found</span></label>
+      <label class="check"><input type="radio" name="route" value="fallback"><span>API fallback only</span></label>
+    </fieldset>
+    <fieldset class="fs">
+      <legend>Minimum coverage</legend>
+      <div class="slider-field">
+        <input type="range" id="filter-cov" name="cov" min="0" max="100" step="1" value="0" aria-label="Minimum coverage percent">
+        <output for="filter-cov" id="filter-cov-value">0%</output>
+      </div>
+    </fieldset>
+    <fieldset class="fs" id="column-picker">
+      <legend>Columns</legend>
+      <div id="column-picker-list" class="column-picker-list"></div>
+    </fieldset>
+    <div class="filters-actions">
+      <button type="button" class="btn btn-ghost" data-action="reset-filters">Reset</button>
+    </div>
+    </details>
+  </form>
+
+  <div class="rank-main">
+    <div class="toolbar" role="toolbar" aria-label="Table actions">
+      <p class="muted toolbar-count" role="status" aria-live="polite" id="rankings-count">{{ page.rankingsJson.models | length }} models</p>
+      <div class="toolbar-actions">
+        <a id="export-csv" class="btn btn-ghost" href="/data/rankings.json" download="valuerank.csv" role="button">Export CSV</a>
+        <a id="export-json" class="btn btn-ghost" href="/data/rankings.json" download="valuerank.json" role="button">Export JSON</a>
+        <button type="button" class="btn btn-primary" data-share>Copy link to this view</button>
+      </div>
+    </div>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Rankings table, scrolls sideways on small screens">
+      <table id="rankings-table" class="data-table" data-basis="{{ site.defaultBasis }}">
+        <caption class="sr-only">All models ranked by <span data-basis-label>{{ site.basis[site.defaultBasis].label }}</span></caption>
+        <thead id="rankings-head"><tr>{{ head_cells(page.columns | selectattr("default") | list, site) }}</tr></thead>
+        <tbody id="rankings-body">
+          <tr class="state-row" data-state="loading"><td colspan="{{ page.columns | length }}">Loading rankings&hellip;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <noscript><p class="callout callout-warn">The sortable table needs JavaScript. The same data is available as <a href="/data/rankings.json">rankings.json</a>.</p></noscript>
+    <p class="state-box" id="rankings-empty" hidden>No models match these filters. Clear a filter or <button type="button" class="link-btn" data-action="reset-filters">reset all filters</button>.</p>
+    <p class="state-box state-error" id="rankings-error" role="alert" hidden>The rankings could not be loaded. Reload the page or use <a href="/data/rankings.json">rankings.json</a>.</p>
+
+    <aside id="compare-drawer" class="compare-drawer" aria-label="Compare models" hidden>
+      <div class="compare-head">
+        <h2 class="compare-title">Compare</h2>
+        <button type="button" id="compare-clear" class="btn btn-ghost" data-compare-clear>Clear</button>
+      </div>
+      <div id="compare-body" class="compare-body"></div>
+      <p class="note">Pick two to four models with the checkbox on each row.</p>
+    </aside>
+
+    <section class="block" aria-labelledby="chart-title">
+      <h2 id="chart-title" class="section-title">Quality against cost</h2>
+      {{ chart([
+        ["pareto", "Quality vs cost", "Scatter chart of quality score against cost for each ranked model"],
+        ["decomposition", "Score breakdown", "Stacked bars splitting each score by category"],
+        ["displacement", "Cost effect", "Bars showing how far cost moves each model from its quality-only rank"],
+        ["frontier2", "Plan vs API", "Dumbbell chart of the overall score on the plan and API bases"],
+        ["bubble", "Speed", "Bubble chart of speed against quality"],
+        ["heatmap", "Heatmap", "Heatmap of normalised scores by model and dimension"]
+      ]) }}
+    </section>
+  </div>
+</div>
+{% endblock %}
+{% block data %}<script type="application/json" id="rankings-data">{{ page.rankingsJson | tojson }}</script>{% endblock %}

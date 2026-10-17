@@ -1,0 +1,19 @@
+{#- Evidence badge: one component for every grade. -#}
+{%- set GRADES = {
+  "measured": ["Owner-measured", "Measured by the benchmark owner or in a controlled account measurement."],
+  "claim": ["Provider claim", "Published by the model provider for the exact benchmark version and evaluated variant."],
+  "estimate": ["Modelled", "Owner estimate or projection anchored to a measurement."],
+  "assumption": ["Assumption", "Explicitly authorised assumption with no measurement."],
+  "missing": ["Missing", "No eligible value; excluded from the score and the score is renormalised."]
+} -%}
+{%- macro badge(grade, label=none, hint=none) -%}
+{%- set g = grade if grade in GRADES else "missing" -%}
+<span class="badge badge-{{ g }}" title="{{ hint if hint else GRADES[g][1] }}">{{ label if label else GRADES[g][0] }}</span>
+{%- endmacro -%}
+{%- macro legend() -%}
+<ul class="badge-legend">
+{%- for g, v in GRADES.items() %}
+  <li>{{ badge(g) }} <span>{{ v[1] }}</span></li>
+{%- endfor %}
+</ul>
+{%- endmacro -%}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{%- from "partials/badge.html" import badge -%}
+{%- from "partials/fmt.html" import num, usd -%}
+{%- from "partials/chart.html" import chart -%}
+{% block content %}
+{%- set t = page.tb4Json -%}
+<header class="page-head">
+  <p class="eyebrow"><a href="/benchmarks/">Benchmarks</a> / Terminal-Bench {{ t.version }}</p>
+  <h1 id="page-title">Terminal-Bench {{ t.version }}</h1>
+  <p class="lead">Terminal-Bench measures how often an agent completes real command-line tasks. {{ t.rowN }} official rows were captured, {{ t.matchedN }} of {{ t.cohortN }} roster models match one, and {{ t.frontierCount }} sit on the frontier. Observed {{ t.observedAt[:10] }} from <a href="{{ t.source.targetUrl }}" rel="noopener">{{ t.source.publisher }}</a>.</p>
+</header>
+
+<section class="block" id="score-vs-cost" aria-labelledby="svc-title">
+  <h2 id="svc-title" class="section-title">Score against cost</h2>
+  {{ chart([["tb4", "Resolution against cost", "Scatter chart of Terminal-Bench resolution rate against run cost for each official row"]]) }}
+</section>
+
+<section class="block" id="official-rows" aria-labelledby="rows-title">
+  <h2 id="rows-title" class="section-title">Official leaderboard rows</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="rows-title">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-num">Rank</th><th scope="col" class="col-model">Model</th><th scope="col">Agent</th><th scope="col" class="col-num">Resolved</th><th scope="col" class="col-num">&plusmn;</th><th scope="col" class="col-num">Cost (USD)</th><th scope="col">Evidence</th></tr></thead>
+      <tbody>
+        {%- for r in t.rows %}
+        <tr>
+          <td class="cell-num">{{ r.rank }}</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ r.model }}</span><span class="model-dev">{{ r.releaseDate }} &middot; {{ r.tokens }} tokens</span></span></th>
+          <td>{{ r.agent }}</td>
+          <td class="cell-num">{{ num(r.resolutionRatePct) }}%</td>
+          <td class="cell-num">{{ num(r.uncertaintyPct) }}</td>
+          <td class="cell-num">{{ usd(r.costUsd, 0) }}</td>
+          <td>{{ badge("measured") }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block" id="provider-claims" aria-labelledby="claims-title">
+  <h2 id="claims-title" class="section-title">Provider claim supplement</h2>
+  <p class="muted">{{ t.providerClaimPolicy }}</p>
+  {%- if t.providerClaims %}
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="claims-title">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Claimed</th><th scope="col">Publisher</th><th scope="col">Published</th><th scope="col">Scope</th><th scope="col">Evidence</th></tr></thead>
+      <tbody>
+        {%- for c in t.providerClaims %}
+        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="{{ c.sourceUrl }}" rel="noopener">{{ c.evaluatedModel }}</a></span></th>
+          <td class="cell-num">{{ num(c.valuePct) }}%</td>
+          <td>{{ c.publisher }}</td>
+          <td>{{ c.publishedOn }}</td>
+          <td>{{ c.eligibilityScope }}{% if c.caveat %}<details class="evidence"><summary>Caveat</summary><p class="small">{{ c.caveat }}</p></details>{% endif %}</td>
+          <td>{{ badge("claim") if c.eligibleForRanking else badge("missing", label="Not ranked") }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  {%- else %}
+  <p class="state-box">No provider claims are used for this benchmark.</p>
+  {%- endif %}
+</section>
+
+<section class="block" id="coverage" aria-labelledby="cov-title">
+  <h2 id="cov-title" class="section-title">Roster coverage</h2>
+  <p>{{ t.rankingAvailableN }} of {{ t.cohortN }} roster models have an eligible Terminal-Bench value. Models without one are excluded from this dimension and their score is renormalised.</p>
+  {%- if t.rankingMissingModels %}
+  <h3 class="subhead">Without an eligible value</h3>
+  <ul class="chip-list">
+    {%- for n in t.rankingMissingModels %}<li><span class="chip">{{ n }}</span></li>{% endfor %}
+  </ul>
+  {%- endif %}
+</section>
+{% endblock %}
+{% block data %}<script type="application/json" id="page-data">{{ page.tb4Json | tojson }}</script>{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{%- from "partials/badge.html" import badge -%}
+{%- from "partials/fmt.html" import num, usd, rank -%}
+{%- from "partials/coverage_bar.html" import coverage_bar -%}
+{%- from "partials/evidence_drawer.html" import evidence -%}
+{% block content %}
+{%- set s = page.summary -%}
+<header class="page-head model-head">
+  <p class="eyebrow"><a href="/rankings/">Rankings</a> / {{ page.developer }}</p>
+  <h1 id="page-title">{{ page.name }}</h1>
+  <p class="lead">
+    {% if s.rankingEligible -%}
+      Ranked <strong>#{{ s.rank.plan }}</strong> on the plan basis and <strong>#{{ s.rank.api }}</strong> at API rates, with {{ s.coverage.pct | round(0) | int }}% of the scoring weight backed by evidence.
+    {%- else -%}
+      Not ranked. {{ s.exclusionReasons | join("; ") }}. Its evidence is shown below so the gaps are visible.
+    {%- endif %}
+  </p>
+  <dl class="stat-row">
+    <div class="stat"><dt>Plan ranking</dt><dd class="stat-val">{% if s.rank.plan is none %}&ndash;{% else %}#{{ s.rank.plan }}{% endif %}<small>{{ num(s.overall.plan) }} pts</small></dd></div>
+    <div class="stat"><dt>API ranking</dt><dd class="stat-val">{% if s.rank.api is none %}&ndash;{% else %}#{{ s.rank.api }}{% endif %}<small>{{ num(s.overall.api) }} pts</small></dd></div>
+    <div class="stat"><dt>Quality</dt><dd class="stat-val">{{ num(s.quality) }}<small>{% if s.qualityRank is not none %}rank #{{ s.qualityRank }}{% else %}not ranked{% endif %}</small></dd></div>
+    <div class="stat"><dt>Evidence</dt><dd class="stat-val">{{ badge(s.grade) }}<small>weakest value in the score</small></dd></div>
+    <div class="stat"><dt>Coverage</dt><dd class="stat-val">{{ coverage_bar(s.coverage) }}</dd></div>
+  </dl>
+  <p class="links">
+    <a href="{{ page.selectedPage }}" rel="noopener">Artificial Analysis page</a>
+    {%- if page.aaVariant %} &middot; evaluated variant <span class="mono">{{ page.aaVariant }}</span>{% endif %}
+    {%- if page.frontier and page.frontier.onAaFrontier %} &middot; {{ page.frontier.aaFrontierNote }}{% endif %}
+  </p>
+</header>
+
+<section class="block" id="score-breakdown" aria-labelledby="breakdown-title">
+  <h2 id="breakdown-title" class="section-title">Score breakdown</h2>
+  <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="breakdown-title">
+    <table id="dimension-table" class="data-table">
+      <thead><tr>
+        <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Evidence</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
+      </tr></thead>
+      <tbody>
+        {%- for d in page.dimensions %}
+        <tr class="{{ 'row-missing' if d.grade == 'missing' else '' }}">
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ d.label }}</span><span class="model-dev">{{ d.category }}</span></span></th>
+          <td class="cell-num">{{ num(d.value) }}</td>
+          <td class="muted">{{ d.unit }}</td>
+          <td class="cell-num">{{ num(d.normalized) }}</td>
+          <td>{{ badge(d.grade) }}</td>
+          <td>{% if d.source %}<a href="{{ d.source.url }}" rel="noopener">{{ d.source.name }}</a>{% else %}<span class="na">No source</span>{% endif %}<br><span class="muted small">{{ d.observedAt if d.observedAt else "no observation" }}</span>
+            {{ evidence(d) }}</td>
+          <td class="cell-num">{{ num(d.weightPct, 1) }}%</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block" id="plan-routes" aria-labelledby="routes-title">
+  <h2 id="routes-title" class="section-title">Plan routes and cost</h2>
+  <p class="muted">API cost to run the Intelligence Index: <strong>{{ usd(page.cost.apiUsd, 0) }}</strong>.
+    {% if page.cost.fallback %}No subscription route is measured for this model, so the plan ranking falls back to API cost ({{ page.cost.fallback }}).{% endif %}</p>
+  {%- if page.plans %}
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="routes-title">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">USD per run</th><th scope="col" class="col-num">USD per Index point</th><th scope="col">Evidence</th></tr></thead>
+      <tbody>
+        {%- for r in page.plans %}
+        <tr{% if r.selected %} class="row-selected" aria-label="Selected route"{% endif %}>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="{{ r.sourceUrl }}" rel="noopener">{{ r.planLabel }}</a>{% if r.selected %}<span class="model-dev">Selected route</span>{% endif %}</span></th>
+          <td class="cell-num">{{ usd(r.planFeeUsd, 0) }}</td>
+          <td class="cell-num">{{ num(r.valueMultiple, 1) }}&times;</td>
+          <td class="cell-num">{{ usd(r.usdPerRun) }}</td>
+          <td class="cell-num">{{ usd(r.usdPerPoint, 3) }}</td>
+          <td>{{ badge(r.grade, hint=r.evidenceLabel) }}<br><span class="muted small">{{ r.sourceDate }}</span></td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  {%- else %}
+  <p class="state-box">No subscription route has an eligible measurement for this model.</p>
+  {%- endif %}
+</section>
+
+<section class="block" id="rank-history" aria-labelledby="history-title">
+  <h2 id="history-title" class="section-title">Rank history</h2>
+  {%- if page.history %}
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="history-title">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Version</th><th scope="col">Date</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th></tr></thead>
+      <tbody>
+        {%- for h in page.history | reverse %}
+        <tr><th scope="row" class="cell-model"><span class="mono">{{ h.version }}</span></th><td>{{ h.date }}</td><td class="cell-num">{{ rank(h.rank.plan) }}</td><td class="cell-num">{{ rank(h.rank.api) }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Versions without a recorded rank are omitted, never inferred.</p>
+  {%- else %}
+  <p class="state-box">No earlier ranking recorded for this model.</p>
+  {%- endif %}
+</section>
+
+{%- if page.related %}
+<section class="block" id="related" aria-labelledby="related-title">
+  <h2 id="related-title" class="section-title">More from {{ page.developer }}</h2>
+  <ul class="chip-list">
+    {%- for r in page.related %}
+    <li><a class="chip" href="/models/{{ r.slug }}/">{{ r.name }}</a></li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+{% endblock %}

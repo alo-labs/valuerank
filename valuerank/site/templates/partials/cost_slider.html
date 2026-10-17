@@ -1,0 +1,8 @@
+{%- macro cost_slider(site) -%}
+<div class="slider-field">
+  <label for="cost-weight" class="slider-label">Cost weight</label>
+  <input type="range" id="cost-weight" name="w" min="0" max="100" step="0.1" value="{{ site.costWeightPct }}" aria-describedby="cost-weight-note">
+  <output for="cost-weight" id="cost-weight-value">{{ "%.1f" | format(site.costWeightPct) }}%</output>
+</div>
+<p class="note" id="cost-weight-note">Share of the score given to cost, from 0 to 100%. The published default is {{ "%.1f" | format(site.costWeightPct) }}%. Other weights are rescaled; the table re-ranks as you move it.</p>
+{%- endmacro -%}

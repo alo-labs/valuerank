@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-head">
+  <p class="eyebrow">Open data</p>
+  <h1 id="page-title">Download the data</h1>
+  <p class="lead">Every table on this site is published as a static JSON file you can fetch directly. Files are regenerated with each release and keep stable field names.</p>
+</header>
+<section class="block" aria-labelledby="files-title">
+  <h2 id="files-title" class="section-title">Files</h2>
+  <ul class="file-list">
+    {%- for f in page.files %}
+    <li class="file">
+      <a class="file-path mono" href="{{ f.path }}"{% if "<" not in f.path %} download{% endif %}>{{ f.path }}</a>
+      <p>{{ f.description }}</p>
+      <details class="evidence"><summary>Schema</summary><p class="small">{{ f.schema }}</p></details>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+<section class="block" aria-labelledby="use-title">
+  <h2 id="use-title" class="section-title">Using the data</h2>
+  <p>Numbers are JSON numbers or <span class="mono">null</span>; a <span class="mono">null</span> means no eligible value and is never zero. Every value carries an evidence grade. Cite the version in <a href="/changelog/">the changelog</a> with the observation date.</p>
+</section>
+{% endblock %}

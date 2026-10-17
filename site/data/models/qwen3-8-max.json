@@ -1,0 +1,361 @@
+{
+  "slug": "qwen3-8-max",
+  "name": "Qwen3.8 Max",
+  "developer": "Alibaba",
+  "aaUrl": "https://artificialanalysis.ai/models/qwen3-8-max",
+  "aaVariant": null,
+  "selectedPage": "https://artificialanalysis.ai/models/qwen3-8-max",
+  "summary": {
+    "rank": {
+      "api": 16,
+      "plan": 16
+    },
+    "overall": {
+      "api": 26.7,
+      "plan": 24.0
+    },
+    "quality": 28.3,
+    "qualityRank": 14,
+    "coverage": {
+      "pct": 95.45,
+      "availablePriority": 126,
+      "totalPriority": 132,
+      "missing": [
+        "Terminal-Bench 4.0"
+      ]
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": []
+  },
+  "dimensions": [
+    {
+      "key": "costComposite",
+      "label": "Cost",
+      "category": "cost",
+      "weightPct": 18.9394,
+      "value": 4934.789930721673,
+      "unit": "USD per Index run",
+      "normalized": 20.0,
+      "source": {
+        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured",
+      "normalizedByBasis": {
+        "api": 20.0,
+        "plan": 6.666667
+      }
+    },
+    {
+      "key": "deepswePassAt1",
+      "label": "DeepSWE v1.1",
+      "category": "code",
+      "weightPct": 18.9394,
+      "value": 51.0,
+      "unit": "% pass@1",
+      "normalized": 0.0,
+      "source": {
+        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-08",
+      "evaluatedVariant": "Claude Code / Qwen3.8 Max",
+      "note": "The chart does not display an effort level.",
+      "grade": "measured"
+    },
+    {
+      "key": "bugHuntFixedOf105",
+      "label": "Bug Hunt Bench",
+      "category": "code",
+      "weightPct": 15.1515,
+      "value": 25.7,
+      "unit": "bugs fixed of 105",
+      "normalized": 35.7,
+      "source": {
+        "name": "Bug Hunt Bench",
+        "url": null
+      },
+      "observedAt": null,
+      "evaluatedVariant": "Qwen3.8-Max (max effort, Alibaba API) - mean of 3",
+      "note": "Owner-published mean of three runs on Alibaba's own endpoint.",
+      "grade": "measured"
+    },
+    {
+      "key": "omniNonHallucination",
+      "label": "Non-Hallucination",
+      "category": "rely",
+      "weightPct": 4.5455,
+      "value": 71.16,
+      "unit": "% non-hallucination",
+      "normalized": 93.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBenchV4",
+      "label": "Terminal-Bench 4.0",
+      "category": "code",
+      "weightPct": 4.5455,
+      "value": null,
+      "unit": "% resolved",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpvalV21",
+      "label": "GDPval-AA v2.1",
+      "category": "prod",
+      "weightPct": 4.5455,
+      "value": 1667.72,
+      "unit": "Elo",
+      "normalized": 73.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "intelligenceIndex",
+      "label": "AA Intelligence Index",
+      "category": "intel",
+      "weightPct": 4.5455,
+      "value": 45.4152084980521,
+      "unit": "Index points",
+      "normalized": 43.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchInstructionFollowing",
+      "label": "Instruction Following (LiveBench)",
+      "category": "language",
+      "weightPct": 3.7879,
+      "value": 74.0835,
+      "unit": "score",
+      "normalized": 72.7,
+      "source": {
+        "name": "LiveBench release 2026_06_25",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-07",
+      "evaluatedVariant": "qwen3.8-max",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBenchAA",
+      "label": "AutomationBench-AA",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 56.19,
+      "unit": "% score",
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "category": "prod",
+      "weightPct": 3.7879,
+      "value": 38.238240940991,
+      "unit": "tokens per second",
+      "normalized": 0.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aaLcr",
+      "label": "AA-LCR v1.1",
+      "category": "language",
+      "weightPct": 3.0303,
+      "value": 80.33,
+      "unit": "% accuracy",
+      "normalized": 33.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniAccuracy",
+      "label": "AA-Omniscience Accuracy",
+      "category": "rely",
+      "weightPct": 3.0303,
+      "value": 31.68,
+      "unit": "% accuracy",
+      "normalized": 6.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 43.1,
+      "unit": "% accuracy",
+      "normalized": 33.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gpqaDiamond",
+      "label": "GPQA Diamond (legacy)",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 92.83,
+      "unit": "% accuracy",
+      "normalized": 25.0,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "intel",
+      "weightPct": 3.0303,
+      "value": 52.08,
+      "unit": "% score",
+      "normalized": 6.7,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "intel",
+      "weightPct": 2.2727,
+      "value": 17.71,
+      "unit": "% score",
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/qwen3-8-max"
+      },
+      "observedAt": "2026-09-29",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 4934.789930721673,
+    "planUsdPerRun": null,
+    "planUsdPerPoint": null,
+    "planComparableUsdPerPoint": 108.6594137497647,
+    "fallback": "api",
+    "route": null
+  },
+  "plans": [],
+  "history": [
+    {
+      "version": "v1.5.0",
+      "date": "2026-09-06",
+      "rank": {
+        "api": 14,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.0",
+      "date": null,
+      "rank": {
+        "api": 9,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.1",
+      "date": null,
+      "rank": {
+        "api": 10,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.2",
+      "date": null,
+      "rank": {
+        "api": 10,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.6",
+      "date": "2026-10-08",
+      "rank": {
+        "api": 16,
+        "plan": 16
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+  }
+}

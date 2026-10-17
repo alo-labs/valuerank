@@ -1,9 +1,5 @@
 """Unit tests for the pure helpers of the publication emitter."""
 
-import re
-
-import pytest
-
 from valuerank import emit_docs as ed
 
 WEIGHTS = [
@@ -19,8 +15,6 @@ def test_number_formatters():
     assert ed.fnum("x", dash="n/a") == "n/a"
     assert ed.pct(0.1234) == "12.34%"
     assert ed.pct(None) == "—"
-    assert ed.pct_points(12.34) == "12.3%"
-    assert ed.pct_points("x") == "—"
     assert ed.names(["a", "b"]) == "a, b"
     assert ed.names([]) == "none"
 
@@ -47,77 +41,6 @@ class TestMetricCoverageSummary:
     def test_zero_total_priority_has_no_percentage(self):
         zero = [{"key": "a", "label": "Alpha"}]
         assert ed.metric_coverage_summary({"dims": {}}, zero) == ("—", "Alpha")
-
-
-class TestReplaceOnce:
-    def test_replaces_exactly_one_match(self):
-        assert ed.replace_once("x x", "x", "y", "label") == "y x"
-
-    def test_missing_match_raises_with_label(self):
-        with pytest.raises(SystemExit, match="thing replacement failed: 0"):
-            ed.replace_once("abc", "z", "y", "thing")
-
-    @pytest.mark.parametrize("label", ["heatmap column order", "heatmap category labels"])
-    def test_optional_heatmap_labels_are_tolerated(self, label):
-        assert ed.replace_once("abc", "z", "y", label) == "abc"
-
-    def test_stale_date_stat_is_tolerated(self):
-        source = '<span class="hero-statbar-num">Sep 5</span>'
-        assert ed.replace_once(source, "zzz", "y", "date stat") == source
-
-    def test_date_stat_without_stale_value_raises(self):
-        with pytest.raises(SystemExit, match="date stat replacement failed"):
-            ed.replace_once("none", "zzz", "y", "date stat")
-
-
-class TestChartTabs:
-    PANEL = (
-        '<div class="chart-tabs">\n'
-        '      <button class="chart-tab active" data-chart="heat">Heat</button>\n'
-        '      <button class="chart-tab" data-chart="pareto">Pareto Frontier</button>\n'
-        '      <button class="chart-tab" data-chart="livebenchPareto">LiveBench Pareto</button>\n'
-        "    </div>"
-    )
-
-    def arrange(self, html):
-        match = re.search(r'<div class="chart-tabs">[\s\S]*?</div>', html)
-        return ed.arrange_chart_tabs(match)
-
-    def test_pareto_tabs_come_first_and_pareto_is_renamed(self):
-        result = self.arrange(self.PANEL)
-        charts = re.findall(r'data-chart="([^"]+)"', result)
-        assert charts == ["pareto", "livebenchPareto", "heat"]
-        assert ">ValueRank Pareto Frontier<" in result
-
-    def test_unrecognised_tab_sets_are_returned_unchanged(self):
-        html = '<div class="chart-tabs">\n<button class="chart-tab" data-chart="heat">Heat</button>\n</div>'
-        assert self.arrange(html) == html
-
-
-class TestFaqAndCurrentCopy:
-    FAQ = (
-        '<div class="faq-item"><button class="faq-q" x>Why? <i data-lucide="chevron-down" class="faq-chevron"></i></button>'
-        '<div class="faq-a">old</div></div>'
-        '<div class="faq-item"><button class="faq-q">Other <i data-lucide="chevron-down" class="faq-chevron"></i></button>'
-        '<div class="faq-a">keep</div></div>'
-    )
-
-    def test_replaces_only_the_matching_answer(self):
-        updated = ed.replace_faq_answer(self.FAQ, "Why?", "new")
-        assert '<div class="faq-a">new</div>' in updated
-        assert updated.count("new") == 1
-        assert '<div class="faq-a">keep</div>' in updated
-
-    def test_unknown_question_raises(self):
-        with pytest.raises(SystemExit, match="FAQ answer replacement failed: Nope"):
-            ed.replace_faq_answer(self.FAQ, "Nope", "x")
-
-    def test_replace_current_copy_replaces_first_match_only(self):
-        assert ed.replace_current_copy("aa", "a", "b", "label") == "ba"
-
-    def test_replace_current_copy_raises_on_zero_matches(self):
-        with pytest.raises(SystemExit, match="current-release copy replacement failed: demo"):
-            ed.replace_current_copy("aa", "z", "b", "demo")
 
 
 class TestTables:

@@ -1,0 +1,66 @@
+{
+  "title": "Benchmarks",
+  "description": "Source registry.",
+  "canonical": "https://example.test/benchmarks/",
+  "ogImage": "https://example.test/og.png",
+  "benchmarksJson": {
+    "sources": [
+      {
+        "id": "deepswe",
+        "name": "DeepSWE v1.1",
+        "owner": "Artificial Analysis",
+        "version": "1.1",
+        "url": "https://example.test/deepswe",
+        "observedAt": "2030-01-01",
+        "role": "primary dimension",
+        "weightPct": 18.94,
+        "coverage": {
+          "available": 14,
+          "cohort": 16
+        },
+        "unit": "% pass@1",
+        "notes": "Owner board."
+      }
+    ],
+    "aaComponents": [
+      {
+        "name": "GDPval",
+        "weightPct": 10.0,
+        "url": "https://example.test/gdpval"
+      }
+    ],
+    "coverageMatrix": {
+      "rows": []
+    },
+    "frontier": {
+      "status": "ok",
+      "checkedAt": "2030-01-01",
+      "rows": [
+        {
+          "aaId": "alpha",
+          "name": "Alpha <b>x</b> One",
+          "slug": "alpha-one",
+          "family": "A",
+          "evaluatedVariant": "max",
+          "intelligenceIndex": 50.0,
+          "totalCostUsd": 100.0,
+          "sourceUrl": "https://example.test/a"
+        },
+        {
+          "aaId": "ghost",
+          "name": "Ghost",
+          "slug": null,
+          "family": "G",
+          "evaluatedVariant": "max",
+          "intelligenceIndex": 40.0,
+          "totalCostUsd": 50.0,
+          "sourceUrl": "https://example.test/g"
+        }
+      ]
+    }
+  },
+  "key": "benchmarks",
+  "scripts": [
+    "/assets/js/pages/static.js"
+  ]
+}

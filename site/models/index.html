@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All models · ValueRank v1.9.6</title>
+  <meta name="description" content="Every model in the ValueRank roster with its Plan and API rank, evidence grade and a page of sourced scores.">
+  <link rel="canonical" href="https://valuerank.alolabs.dev/models/">
+  <meta name="theme-color" content="#4f46e5">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ValueRank">
+  <meta property="og:title" content="All models · ValueRank v1.9.6">
+  <meta property="og:description" content="Every model in the ValueRank roster with its Plan and API rank, evidence grade and a page of sourced scores.">
+  <meta property="og:url" content="https://valuerank.alolabs.dev/models/">
+  <meta property="og:image" content="https://valuerank.alolabs.dev/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="All models · ValueRank v1.9.6">
+  <meta name="twitter:description" content="Every model in the ValueRank roster with its Plan and API rank, evidence grade and a page of sourced scores.">
+  <meta name="twitter:image" content="https://valuerank.alolabs.dev/og.png">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("vr-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage unavailable: follow the system theme */ }
+      var b = /[?&]basis=(api|plan)(&|$)/.exec(location.search);
+      document.documentElement.setAttribute("data-basis", b ? b[1] : "plan");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body data-page="models">
+  <a class="skip-link" href="#main">Skip to main content</a>  <header class="site-header">
+    <nav class="wrap nav" aria-label="Primary">
+      <a class="brand" href="/" aria-label="ValueRank home">
+        <svg class="brand-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M6 8l6 9 6-9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="brand-word">Value<span>Rank</span></span>
+      </a>
+      <button type="button" class="nav-menu" data-nav-toggle aria-controls="site-nav-links" aria-expanded="false"><span class="nav-menu-bars" aria-hidden="true"></span><span class="nav-menu-label">Menu</span></button>
+      <ul id="site-nav-links" class="nav-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/" aria-current="page">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>      </ul>
+      <button type="button" id="theme-toggle" class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </button>
+    </nav>
+  </header>
+  <main id="main" class="wrap main" tabindex="-1">
+<header class="page-head">
+  <p class="eyebrow">Roster &middot; 28 models</p>
+  <h1 id="page-title">Every model we track</h1>
+  <p class="lead">16 models are ranked. The other 12 are listed too, because the gaps in their evidence are as informative as the scores. Each page shows every value with its source, date and grade.</p>
+</header>
+
+<section class="block" aria-labelledby="models-title">
+  <h2 id="models-title" class="section-title">All models</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="models-title">
+    <table id="models-table" class="data-table">
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">Plan score</th><th scope="col">Evidence</th><th scope="col">Coverage</th></tr></thead>
+      <tbody>        <tr data-slug="claude-opus-5-5">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-opus-5-5/">Claude Opus 5.5</a><span class="model-dev">Anthropic</span></span></th>
+          <td class="cell-num">1</td>
+          <td class="cell-num">5</td>
+          <td class="cell-num">77.3</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="88.6% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 89%"></span></span>
+  <span class="cov-num">89%</span>
+</span></td>
+        </tr>        <tr data-slug="gpt-6-1-sol">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a><span class="model-dev">OpenAI</span></span></th>
+          <td class="cell-num">2</td>
+          <td class="cell-num">1</td>
+          <td class="cell-num">75.7</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="88.6% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 89%"></span></span>
+  <span class="cov-num">89%</span>
+</span></td>
+        </tr>        <tr data-slug="gpt-6-astra">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-astra/">GPT-6 Astra</a><span class="model-dev">OpenAI</span></span></th>
+          <td class="cell-num">3</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num">69.2</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="100.0% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 100%"></span></span>
+  <span class="cov-num">100%</span>
+</span></td>
+        </tr>        <tr data-slug="gpt-5-6-sol">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a><span class="model-dev">OpenAI</span></span></th>
+          <td class="cell-num">4</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num">66.8</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="100.0% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 100%"></span></span>
+  <span class="cov-num">100%</span>
+</span></td>
+        </tr>        <tr data-slug="grok-4-7">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/grok-4-7/">Grok 4.7</a><span class="model-dev">xAI</span></span></th>
+          <td class="cell-num">5</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num">63.9</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="92.4% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 92%"></span></span>
+  <span class="cov-num">92%</span>
+</span></td>
+        </tr>        <tr data-slug="gpt-6-sol">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-sol/">GPT-6 Sol</a><span class="model-dev">OpenAI</span></span></th>
+          <td class="cell-num">6</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num">60.6</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="92.4% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 92%"></span></span>
+  <span class="cov-num">92%</span>
+</span></td>
+        </tr>        <tr data-slug="mimo-v2-6-pro">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/mimo-v2-6-pro/">MiMo-V2.6-Pro</a><span class="model-dev">Xiaomi</span></span></th>
+          <td class="cell-num">7</td>
+          <td class="cell-num">7</td>
+          <td class="cell-num">48.6</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="69.7% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 70%"></span></span>
+  <span class="cov-num">70%</span>
+</span></td>
+        </tr>        <tr data-slug="mimo-v2-6-flash">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/mimo-v2-6-flash/">MiMo-V2.6-Flash</a><span class="model-dev">Xiaomi</span></span></th>
+          <td class="cell-num">8</td>
+          <td class="cell-num">8</td>
+          <td class="cell-num">46.9</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="54.5% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 55%"></span></span>
+  <span class="cov-num">55%</span>
+</span></td>
+        </tr>        <tr data-slug="gpt-5-6-luna">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-5-6-luna/">GPT-5.6 Luna</a><span class="model-dev">OpenAI</span></span></th>
+          <td class="cell-num">9</td>
+          <td class="cell-num">11</td>
+          <td class="cell-num">45.8</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="100.0% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 100%"></span></span>
+  <span class="cov-num">100%</span>
+</span></td>
+        </tr>        <tr data-slug="kimi-k3">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/kimi-k3/">Kimi K3</a><span class="model-dev">Moonshot AI</span></span></th>
+          <td class="cell-num">10</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">42.1</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="91.7% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 92%"></span></span>
+  <span class="cov-num">92%</span>
+</span></td>
+        </tr>        <tr data-slug="grok-4-6">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/grok-4-6/">Grok 4.6</a><span class="model-dev">xAI</span></span></th>
+          <td class="cell-num">11</td>
+          <td class="cell-num">10</td>
+          <td class="cell-num">40.6</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="100.0% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 100%"></span></span>
+  <span class="cov-num">100%</span>
+</span></td>
+        </tr>        <tr data-slug="gpt-6-luna">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-luna/">GPT-6 Luna</a><span class="model-dev">OpenAI</span></span></th>
+          <td class="cell-num">12</td>
+          <td class="cell-num">14</td>
+          <td class="cell-num">37.8</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="92.4% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 92%"></span></span>
+  <span class="cov-num">92%</span>
+</span></td>
+        </tr>        <tr data-slug="gemini-3-8-flash">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><span class="model-dev">Google DeepMind</span></span></th>
+          <td class="cell-num">13</td>
+          <td class="cell-num">12</td>
+          <td class="cell-num">37.7</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="100.0% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 100%"></span></span>
+  <span class="cov-num">100%</span>
+</span></td>
+        </tr>        <tr data-slug="claude-opus-5">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-opus-5/">Claude Opus 5</a><span class="model-dev">Anthropic</span></span></th>
+          <td class="cell-num">14</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">34.5</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="100.0% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 100%"></span></span>
+  <span class="cov-num">100%</span>
+</span></td>
+        </tr>        <tr data-slug="glm-5-3">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/glm-5-3/">GLM-5.3</a><span class="model-dev">Z AI</span></span></th>
+          <td class="cell-num">15</td>
+          <td class="cell-num">13</td>
+          <td class="cell-num">31.6</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="100.0% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 100%"></span></span>
+  <span class="cov-num">100%</span>
+</span></td>
+        </tr>        <tr data-slug="qwen3-8-max">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/qwen3-8-max/">Qwen3.8 Max</a><span class="model-dev">Alibaba</span></span></th>
+          <td class="cell-num">16</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">24.0</td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="95.5% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 95%"></span></span>
+  <span class="cov-num">95%</span>
+</span></td>
+        </tr>        <tr data-slug="claude-fable-5" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-fable-5/">Claude Fable 5</a><span class="model-dev">Anthropic &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="81.1% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 81%"></span></span>
+  <span class="cov-num">81%</span>
+</span></td>
+        </tr>        <tr data-slug="claude-opus-4-8" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-opus-4-8/">Claude Opus 4.8</a><span class="model-dev">Anthropic &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="81.1% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 81%"></span></span>
+  <span class="cov-num">81%</span>
+</span></td>
+        </tr>        <tr data-slug="claude-sonnet-5" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-sonnet-5/">Claude Sonnet 5</a><span class="model-dev">Anthropic &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="81.1% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 81%"></span></span>
+  <span class="cov-num">81%</span>
+</span></td>
+        </tr>        <tr data-slug="deepseek-v4-flash" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/deepseek-v4-flash/">DeepSeek V4 Flash</a><span class="model-dev">DeepSeek &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-claim" title="Published by the model provider for the exact benchmark version and evaluated variant.">Provider claim</span></td>
+          <td><span class="cov" title="81.1% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 81%"></span></span>
+  <span class="cov-num">81%</span>
+</span></td>
+        </tr>        <tr data-slug="deepseek-v4-pro" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/deepseek-v4-pro/">DeepSeek V4 Pro</a><span class="model-dev">DeepSeek &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="76.5% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 77%"></span></span>
+  <span class="cov-num">77%</span>
+</span></td>
+        </tr>        <tr data-slug="glm-5-2" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/glm-5-2/">GLM-5.2</a><span class="model-dev">Z AI &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="61.4% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 61%"></span></span>
+  <span class="cov-num">61%</span>
+</span></td>
+        </tr>        <tr data-slug="glm-5-3-flash" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/glm-5-3-flash/">GLM-5.3 Flash</a><span class="model-dev">Z AI &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="76.5% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 77%"></span></span>
+  <span class="cov-num">77%</span>
+</span></td>
+        </tr>        <tr data-slug="gpt-5-5" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-5-5/">GPT-5.5</a><span class="model-dev">OpenAI &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="61.4% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 61%"></span></span>
+  <span class="cov-num">61%</span>
+</span></td>
+        </tr>        <tr data-slug="gemini-3-5-flash" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-5-flash/">Gemini 3.5 Flash</a><span class="model-dev">Google DeepMind &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="61.4% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 61%"></span></span>
+  <span class="cov-num">61%</span>
+</span></td>
+        </tr>        <tr data-slug="gemini-3-6-flash" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-6-flash/">Gemini 3.6 Flash</a><span class="model-dev">Google DeepMind &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="61.4% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 61%"></span></span>
+  <span class="cov-num">61%</span>
+</span></td>
+        </tr>        <tr data-slug="gemini-3-7-flash" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-7-flash/">Gemini 3.7 Flash</a><span class="model-dev">Google DeepMind &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-estimate" title="Owner estimate or projection anchored to a measurement.">Modelled</span></td>
+          <td><span class="cov" title="43.2% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 43%"></span></span>
+  <span class="cov-num">43%</span>
+</span></td>
+        </tr>        <tr data-slug="muse-spark-1-2" class="row-missing">
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/muse-spark-1-2/">Muse Spark 1.2</a><span class="model-dev">Meta &middot; not ranked</span></span></th>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
+          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
+          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
+          <td><span class="cov" title="76.5% of priority weight has an eligible value">
+  <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 77%"></span></span>
+  <span class="cov-num">77%</span>
+</span></td>
+        </tr>      </tbody>
+    </table>
+  </div>
+</section>
+  </main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">ValueRank <span class="mono">v1.9.6</span></p>
+      <p class="muted">Published October 8, 2026. Data observed 2026-10-07. Every score is traceable to a source, a date and an evidence grade.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>  <script type="module" src="/assets/js/pages/static.js"></script></body>
+</html>

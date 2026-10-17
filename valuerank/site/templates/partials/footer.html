@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">ValueRank <span class="mono">{{ site.version }}</span></p>
+      <p class="muted">Published {{ site.publishDate }}. Data observed {{ site.observedAt[:10] }}. Every score is traceable to a source, a date and an evidence grade.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        {%- for item in site.nav %}
+        <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+        {%- endfor %}
+        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>

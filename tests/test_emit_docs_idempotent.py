@@ -1,13 +1,11 @@
-"""The emitter patches the committed publication in place, so running it twice
-must leave every output byte-identical: no drifting indentation, no leaked
-newlines. This runs the real stage as a subprocess inside a temporary copy."""
+"""Running the Markdown emitter twice must leave every output byte-identical. This runs the real stage as a subprocess inside a temporary copy."""
 
 import subprocess
 import sys
 
 import pytest
 
-PUBLICATION_OUTPUTS = ("README.md", "methodology.md", "scores.md", "raw-data.md", "site/index.html")
+PUBLICATION_OUTPUTS = ("README.md", "methodology.md", "scores.md", "raw-data.md")
 
 
 def run_emit(root):

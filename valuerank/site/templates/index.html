@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{%- from "partials/basis_toggle.html" import basis_toggle -%}
+{%- from "partials/cost_slider.html" import cost_slider -%}
+{%- from "partials/picks.html" import picks -%}
+{%- from "partials/table.html" import head_cells, answer_row -%}
+{%- from "partials/chart.html" import chart -%}
+{%- from "partials/badge.html" import legend -%}
+{%- set cols = [{"key":"rank","label":"Rank"},{"key":"name","label":"Model"},{"key":"overall","label":"Score"},{"key":"quality","label":"Quality"},{"key":"cost","label":"Cost"},{"key":"grade","label":"Evidence"},{"key":"coverage","label":"Coverage"}] -%}
+{% block content %}
+<section class="hero" aria-labelledby="page-title">
+  <p class="eyebrow">Best value today <span class="mono">{{ site.version }}</span></p>
+  <h1 id="page-title" class="hero-title">
+    <span data-basis-only="plan">{{ page.headline.plan }}</span>
+    <span data-basis-only="api">{{ page.headline.api }}</span>
+  </h1>
+  <p class="lead">ValueRank scores {{ page.models | length }} frontier models on what you get for what you pay: quality from independent benchmarks, cost at API rates or on a subscription. Missing evidence is shown as missing, never filled in.</p>
+  <div class="hero-controls">
+    {{ basis_toggle(site) }}
+    <p class="note basis-note">
+      <span data-basis-only="plan">{{ site.basis.plan.description }}</span>
+      <span data-basis-only="api">{{ site.basis.api.description }}</span>
+    </p>
+  </div>
+</section>
+
+{{ picks(page, site) }}
+
+<section class="block" aria-labelledby="table-title">
+  <div class="block-head">
+    <h2 id="table-title" class="section-title">Ranking: <span data-basis-label>{{ site.basis[site.defaultBasis].label }}</span></h2>
+    <a class="btn btn-ghost" href="/rankings/">Filter, compare and export</a>
+  </div>
+  <details class="panel slider-panel">
+    <summary>Adjust how much cost matters</summary>
+    <div class="panel-body">{{ cost_slider(site) }}</div>
+  </details>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-title">
+    <table id="answer-table" class="data-table table-cards" data-basis="{{ site.defaultBasis }}">
+      <caption class="sr-only">Models ranked by <span data-basis-label>{{ site.basis[site.defaultBasis].label }}</span></caption>
+      <thead><tr>{{ head_cells(cols, site, sortable=false) }}</tr></thead>
+      <tbody id="index-body">
+        {%- for m in page.models %}
+        {{ answer_row(m, site) }}
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Rank, score and cost follow the selected basis. Evidence shows the weakest grade of any value inside the score. A <span class="fallback-mark" aria-hidden="true">*</span> after a cost means no subscription route is measured, so the plan cost falls back to the API price. <a href="/methodology/">How scoring works</a>.</p>
+</section>
+
+<section class="block" aria-labelledby="chart-title">
+  <h2 id="chart-title" class="section-title">Quality against cost</h2>
+  <p class="muted">Models on the frontier give the most quality for their cost; nothing else is both cheaper and better.</p>
+  {{ chart([["pareto", "Pareto frontier", "Scatter chart of quality score against cost for each ranked model, with the Pareto frontier highlighted"]]) }}
+</section>
+
+<section class="block" aria-labelledby="legend-title">
+  <h2 id="legend-title" class="section-title">How much to trust each number</h2>
+  <p class="muted">Every value carries one of five evidence grades. Weaker grades are shown plainly, never blended in silently.</p>
+  {{ legend() }}
+</section>
+{% endblock %}
+{% block data %}<script type="application/json" id="rankings-data">{{ page.rankingsJson | tojson }}</script>{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{%- from "partials/chart.html" import chart -%}
+{% block content %}
+<header class="page-head">
+  <p class="eyebrow">Changelog</p>
+  <h1 id="page-title">What changed in each release</h1>
+  <p class="lead">Every published version, newest first, with the models whose rank moved.</p>
+</header>
+<section class="block" aria-labelledby="history-title">
+  <h2 id="history-title" class="section-title">Rank history</h2>
+  <p class="muted">Where each model has stood in every release that recorded it. A gap means no record, never a guess.</p>
+  {{ chart([["bump", "Rank by release", "Line chart of model rank across releases"]]) }}
+</section>
+{%- if page.changelogJson.versions %}
+{%- for v in page.changelogJson.versions %}
+<section class="release" id="{{ v.version }}" aria-labelledby="rel-{{ loop.index }}">
+  <h2 id="rel-{{ loop.index }}" class="section-title"><span class="mono">{{ v.version }}</span> <span class="muted">{{ v.date }}</span></h2>
+  <p class="muted">{{ v.models }} models &middot; {{ v.dimensions }} dimensions</p>
+  <p>{{ v.summary }}</p>
+  {%- if v.rankChanges %}
+  <ul class="delta-list">
+    {%- for c in v.rankChanges %}
+    {%- set d = c.from - c.to %}
+    <li><a href="/models/{{ c.slug }}/">{{ c.name }}</a> <span class="delta {{ 'delta-up' if d > 0 else ('delta-down' if d < 0 else 'delta-flat') }}">#{{ c.from }} &rarr; #{{ c.to }} <span class="sr-only">{{ "up" if d > 0 else ("down" if d < 0 else "unchanged") }}</span></span></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</section>
+{%- endfor %}
+{%- else %}
+<p class="state-box">No releases have been recorded yet.</p>
+{%- endif %}
+{% endblock %}
+{% block data %}<script type="application/json" id="page-data">{{ page.changelogJson | tojson }}</script>{% endblock %}
