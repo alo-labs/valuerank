@@ -10,6 +10,11 @@ __pycache__/
 node_modules/
 
 # Local agent and analysis-tool state
+/.github/context-mode/
+/.pytest_cache/
+/.coverage
+/coverage.xml
+/htmlcov/
 /.claude/
 /.opencode/
 /graphify-out/
@@ -32,22 +37,19 @@ node_modules/
 /projects/coderstrust/sources/
 
 # Refresh scratch and browser captures; canonical text/JSON evidence remains tracked
-.refresh/deepswe_unesc.txt
-.refresh/og/_tmp/
-.refresh/v1.3/aa/*.html
-.refresh/v1.3/screenshots/
-.refresh/v1.3/*_log.txt
-.refresh/v1.3/_diag.txt
-.refresh/v1.3/parse_err.txt
-.refresh/v1.3/parse_out.json
-.refresh/v1.3/parse_unesc_out.json
-.refresh/v1.3/push_log.txt
-.refresh/v1.4/aa/*.html
-.refresh/v1.4/aa/*.txt
-.refresh/v1.4/snapshots/*.html
-.refresh/v1.4/snapshots/*.txt
-.refresh/v1.4/*_log.txt
-.refresh/v1.4/tb4-scrape.json
+data/aa/*.html
+data/aa/*.txt
+data/snapshots/
+data/validation/
+data/tb4-scrape.json
+archive/refresh-v1.3/aa/*.html
+archive/refresh-v1.3/screenshots/
+archive/refresh-v1.3/*_log.txt
+archive/refresh-v1.3/_diag.txt
+archive/refresh-v1.3/parse_err.txt
+archive/refresh-v1.3/parse_out.json
+archive/refresh-v1.3/parse_unesc_out.json
+archive/refresh-v1.3/push_log.txt
 
 # Tool logs and failed-agent transcripts
 *.log

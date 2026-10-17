@@ -37,11 +37,11 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **12** candidates have no rankable primary score: **Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, DeepSeek V4 Pro, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Muse Spark 1.2**.
 - For each model, ValueRank retains only its observed metrics, renormalizes that row's available dimension priorities, and reports `availablePriority / totalPriority` coverage plus missing metric names. No missing value receives a zero or neutral fill.
 - Bug Hunt Bench has priority **20** and weight **15.15%** in the main rank. DeepSWE v1.1 has priority **25** and weight **18.94%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
-- AA's Coding Agent Index v1.5 chart reports **31 configurations** for DeepSWE v1.1 across **113 tasks**, observed **2026-10-08**. All configurations and model-version mapping decisions are retained in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json); **14** configurations map to selected model variants.
+- AA's Coding Agent Index v1.5 chart reports **31 configurations** for DeepSWE v1.1 across **113 tasks**, observed **2026-10-08**. All configurations and model-version mapping decisions are retained in [data/aa_deepswe.json](data/aa_deepswe.json); **14** configurations map to selected model variants.
 - Artificial Analysis now uses **Artificial Analysis Intelligence Index v4.3.2**: AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-LCR v1.1, and split AA-Omniscience accuracy/reliability components. τ³-Banking and Terminal-Bench 2.1 remain historical source fields only.
 - The standalone Terminal-Bench page has **14 official rows**, including **11/28** direct cohort matches. One separately labelled DeepSeek V4.1-Flash provider claim is used for the current `deepseek-v4-flash` API alias; official and claim counts are kept distinct.
 - **[LiveBench](https://livebench.ai/) 2026-06-25** provides the four-task Instruction Following mean plus Overall Score and Cost Per Successful Task views; Instruction Following contributes where a selected model has an eligible value and is included in the row's available-priority calculation.
-- The companion Bug Hunt emphasis ranking covers **14** eligible exact-variant owner results and raises Bug Hunt to **21.13%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [.refresh/v1.4/bug_hunt.json](.refresh/v1.4/bug_hunt.json).
+- The companion Bug Hunt emphasis ranking covers **14** eligible exact-variant owner results and raises Bug Hunt to **21.13%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [data/bug_hunt.json](data/bug_hunt.json).
 - The AA chart's full **31-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
 - The score retains **16 primary dimensions**; **none** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
 - AA output speed is numeric for **15/16** selected pages; **Kimi K3** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
@@ -50,14 +50,14 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 
 ## Sources and audit trail
 
-- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete 31-configuration chart inventory, observed 2026-10-08, and model-variant decisions are recorded in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
+- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete 31-configuration chart inventory, observed 2026-10-08, and model-variant decisions are recorded in [data/aa_deepswe.json](data/aa_deepswe.json).
 - [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
 - [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench), pinned at [release data commit 7be9f746f36a6f007dd78461f67cb7d06cfe2304](https://github.com/livebench/new-livebench/commit/7be9f746f36a6f007dd78461f67cb7d06cfe2304), for the 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
 - [Terminal-Bench 4.0](https://www.tbench.ai/) and the [official Harbor repository](https://github.com/harbor-framework/terminal-bench) for the current rendered leaderboard and task identity.
 - [Bug Hunt Bench](https://bughunt.productcompass.pm/), with owner-published [combined scoreboard](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv) and [run notes](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md) pinned to commit **0630b120a81363c343ed7dfaf3c6d3be7f7da38c**.
 - [Refresh record](research/2026-09-29-valuerank-refresh-v4-3-2/README.md) for the v4.3.2 source change, evidence boundary, provider claims, and scoring decisions.
-- [Provider claim ledger](.refresh/v1.4/provider_claims.json) for provider-sourced values, eligibility, and alias/variant caveats. Provider values never masquerade as benchmark-owner measurements.
-- [Coverage matrix](.refresh/v1.4/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
+- [Provider claim ledger](data/provider_claims.json) for provider-sourced values, eligibility, and alias/variant caveats. Provider values never masquerade as benchmark-owner measurements.
+- [Coverage matrix](data/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
 
 ## Files
 
@@ -67,7 +67,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - [site/index.html](site/index.html): interactive static publication
 - [site/tb4/index.html](site/tb4/index.html): current Terminal-Bench 4.0 score-versus-cost publication
 - [research/2026-09-29-valuerank-refresh-v4-3-2/](research/2026-09-29-valuerank-refresh-v4-3-2/): reproducible v4.3.2 refresh package
-- [.refresh/v1.4/](.refresh/v1.4/): refresh scripts and machine-readable snapshots/outputs
+- [data/](data/): machine-readable snapshots and generated outputs (pipeline code lives in [valuerank/](valuerank/))
 
 
 ## AA intelligence and total-cost comparison
@@ -141,4 +141,4 @@ Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API e
 | SuperGrok Heavy $300 · Grok 4.7 XHigh | Grok 4.7 | $300.00 | $1,735.50 | 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
 | MiMo · provisional 1.5x assumption | MiMo-V2.6-Pro, MiMo-V2.6-Flash | Not established | Not measured | 1.5× | Provisional assumption | 2026-10-08 | User assumption |
 
-The selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `.refresh/v1.4/plan_cost_routes.json`.
+The selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `data/plan_cost_routes.json`.

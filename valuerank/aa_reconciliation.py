@@ -13,13 +13,14 @@ from html import escape
 import json
 import math
 from pathlib import Path
+
+from valuerank.clock import utcnow
 import re
 from urllib.parse import urlparse
 
-ROOT = Path(__file__).resolve().parents[2]
-REFRESH = ROOT / ".refresh" / "v1.4"
-INVENTORY = REFRESH / "aa_reconciliation_inventory.json"
-REPORT = REFRESH / "aa_reconciliation_report.json"
+from valuerank.paths import DATA, ROOT
+INVENTORY = DATA / "aa_reconciliation_inventory.json"
+REPORT = DATA / "aa_reconciliation_report.json"
 MAX_AGE_DAYS = 7
 
 
@@ -89,7 +90,7 @@ def exact_roster_match(row, roster):
 
 
 def reconcile(now=None):
-    now = now or datetime.now(timezone.utc)
+    now = now or utcnow()
     report = {"schemaVersion": 1, "checkedAt": now.isoformat(), "inventoryPath": str(INVENTORY.relative_to(ROOT)),
               "maxAgeDays": MAX_AGE_DAYS, "issues": [], "frontier": [], "comparisonCandidates": [],
               "frontierDefinition": "Higher AA intelligence index and lower AA total evaluation cost; at least one strict improvement dominates.",
@@ -138,11 +139,11 @@ def reconcile(now=None):
         elif not (len(rows) == universe["observedFrontierPointN"] <= universe["plottedPointN"] <= universe["selectedModelN"]):
             issues.append("Frontier capture row count does not reconcile with displayed frontier/plotted/catalog counts.")
     try:
-        metrics = read_json(REFRESH / "aa_metrics.json")
+        metrics = read_json(DATA / "aa_metrics.json")
         roster = list(metrics["models"].items())
         if doc.get("benchmarkVersion") != metrics.get("benchmarkVersion"):
             issues.append("Inventory benchmark version differs from aa_metrics.json; recapture or migrate the exact version before publishing.")
-        scores = read_json(REFRESH / "scores.json")
+        scores = read_json(DATA / "scores.json")
         ranked = {item["id"] for item in scores["models"] if item.get("rankingEligible") is True}
         primary_gaps = {item["id"]: item.get("rankingExclusionReasons", []) for item in scores["models"]}
     except (OSError, ValueError, KeyError, TypeError) as exc:

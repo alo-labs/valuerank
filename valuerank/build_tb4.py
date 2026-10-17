@@ -7,12 +7,12 @@ import hashlib
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 
+from valuerank.clock import iso_z
 
-ROOT = Path(__file__).resolve().parents[2]
-REFRESH = ROOT / ".refresh" / "v1.4"
+
+from valuerank.paths import DATA, ROOT
 TARGET_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 HOMEPAGE_URL = "https://www.tbench.ai/"
 
@@ -47,8 +47,8 @@ def parse_cost(value: str) -> float:
 
 
 def main() -> int:
-    input_path = Path(sys.argv[1]) if len(sys.argv) > 1 else REFRESH / "tb4-scrape.json"
-    output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else REFRESH / "tb4.json"
+    input_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DATA / "tb4-scrape.json"
+    output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else DATA / "tb4.json"
     raw_bytes = input_path.read_bytes()
     raw = json.loads(raw_bytes)
     rows = raw.get("rows", [])
@@ -77,14 +77,14 @@ def main() -> int:
         })
     if len(entries) != len(rows) - 1:
         raise ValueError(f"Terminal-Bench source row count mismatch: {len(entries)} entries from {len(rows)} rows")
-    aa_models = json.loads((REFRESH / "aa_metrics.json").read_text())["models"]
+    aa_models = json.loads((DATA / "aa_metrics.json").read_text())["models"]
     cohort = [{"slug": model_id, "displayName": item["displayName"]} for model_id, item in aa_models.items()]
     cohort_ids = [item["slug"] for item in cohort]
     matches = {entry["cohortModelId"]: entry for entry in entries if entry["cohortModelId"]}
     if len(matches) != len({entry["cohortModelId"] for entry in entries if entry["cohortModelId"]}):
         raise ValueError("Terminal-Bench cohort aliases are not unique")
     missing = [item["displayName"] for item in cohort if item["slug"] not in matches]
-    claim_document = json.loads((REFRESH / "provider_claims.json").read_text())
+    claim_document = json.loads((DATA / "provider_claims.json").read_text())
     provider_claims = [
         claim for claim in claim_document.get("claims", [])
         if claim.get("benchmark") == "Terminal-Bench"
@@ -100,7 +100,7 @@ def main() -> int:
     document = {
         "schemaVersion": "valuerank-terminal-bench-v1",
         "version": "4.0",
-        "observedAt": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "observedAt": iso_z(),
         "source": {
             "publisher": "Terminal-Bench / Harbor",
             "targetUrl": TARGET_URL,

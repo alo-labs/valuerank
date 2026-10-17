@@ -10,7 +10,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
-const OUT = process.argv[2] || path.join(__dirname, 'tb4-scrape.json');
+const OUT = process.argv[2] || path.join(__dirname, '..', 'data', 'tb4-scrape.json');
 const URL = 'https://www.tbench.ai/leaderboard/terminal-bench/4.0';
 
 (async () => {

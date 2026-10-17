@@ -5,8 +5,9 @@ from __future__ import annotations
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
+
+from valuerank.clock import utcnow
 
 
 source_path = Path(sys.argv[1])
@@ -110,7 +111,7 @@ configs = re.search(r"Configs\s*\(([^)]+)\)", text)
 
 output = {
     "version": "v1.1",
-    "observedAt": payload.get("scrapedAt") or datetime.now(timezone.utc).isoformat(),
+    "observedAt": payload.get("scrapedAt") or utcnow().isoformat(),
     "source": "https://deepswe.datacurve.ai/",
     "sourceSnapshot": str(source_path),
     "leaderboard": "Best",

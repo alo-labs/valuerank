@@ -1,54 +1,36 @@
 # Repository layout
 
-ValueRank is a research workspace with a small reproducible publication pipeline. Keep canonical inputs and generators separate from local captures and rendered QA output.
+ValueRank is a research workspace with a small, reproducible publication pipeline. The layout separates four kinds of material: pipeline code, canonical data snapshots, generated publication output, and dated research ledgers.
 
-## Canonical product surface
+| Path | Kind | Notes |
+|---|---|---|
+| `valuerank/` | Pipeline code | One module per stage, run as `python3 -m valuerank.<stage>`. Standard library only. |
+| `scripts/` | Browser helpers | Playwright capture and Open Graph rendering (`scripts/README.md`). |
+| `data/` | Canonical inputs and generated outputs | Committed JSON snapshots (`aa_mapping.json`, `bug_hunt.json`, …) and generated files (`scores.json`, `coverage_matrix.json`, `ranking_summary.json`, `run_manifest.json`, …). Browser HTML/text captures under `data/aa/` and `data/snapshots/` are local-only and ignored. |
+| `site/` | Published static site | Committed GitHub Pages output. `site/index.html` is patched in place by the emitter; it is both template and output. |
+| `README.md`, `methodology.md`, `scores.md`, `raw-data.md` | Generated publication | Written by `valuerank.emit_docs`; do not edit by hand. |
+| `tests/` | Test suite | `pytest` for Python, `node --test` for `scripts/`; see `docs/testing.md`. |
+| `docs/` | Contributor documentation | Architecture, development, testing, refresh and release guides. |
+| `research/` | Dated research ledgers | Immutable records of each refresh and investigation. Historical ledgers may reference the pre-2026-10-17 layout; see the path map below. |
+| `benchmarks/`, `coding-agents-valuerank/`, `skills/`, `projects/` | Supporting analyses and auxiliary projects | Not part of the pipeline. |
+| `archive/` | Historical material | `archive/refresh-v1.3/` is the retired v1.3.1 pipeline and its snapshots; `archive/value-rank-v4/` holds the earlier modular documents. |
+| `.github/workflows/` | CI and deployment | `ci.yml` runs tests, coverage gates and the publication sync check; `deploy.yml` publishes `site/` after `ci.yml` passes. |
 
-- `README.md` — current root ValueRank overview and published ranking snapshot.
-- `methodology.md` — current cohort, dimensions, weights, normalization, and source policy.
-- `raw-data.md` — current source-backed benchmark and cost inputs.
-- `scores.md` — current normalized matrix, ranking, and Pareto frontier.
-- `coding-agents-valuerank/` — separate harness/model/effort-variant ranking.
-- `site/` — committed static GitHub Pages output.
+## Path map for historical references
 
-## Refresh pipeline
+The layout changed on 2026-10-17. Older research ledgers and commit messages use the previous paths:
 
-`.refresh/v1.4/` contains the current extraction, scoring, evidence, and document-emission pipeline. Its canonical JSON snapshots and scripts are committed because they are needed to reproduce the published documents. Browser HTML captures, screenshots, logs, and failed-agent output are local-only and ignored. `.refresh/v1.3/` is retained as the historical v1.3.1 pipeline.
+| Before | Now |
+|---|---|
+| `.refresh/v1.4/*.py` | `valuerank/*.py` (`build_deepswe_v14.py` → `build_deepswe.py`, `capture_aa_v432.py` → `capture_aa.py`, `emit_v14_docs.py` → `emit_docs.py`) |
+| `.refresh/v1.4/*.json`, `.refresh/v1.4/aa/` | `data/*.json`, `data/aa/` |
+| `.refresh/v1.4/scrape_tb4.js` | `scripts/scrape-tb4.js` |
+| `scripts/plan_costs.py`, `scripts/site_header.py`, `scripts/generate_tb4_page.py` | `valuerank/plan_costs.py`, `valuerank/site_header.py`, `valuerank/tb4_page.py` |
+| `scripts/site-generate-og-cards.mjs` | `scripts/generate-og-cards.mjs` |
+| `research/2026-09-29-valuerank-refresh-v4-3-2/run_manifest.json` (generated copy) | `data/run_manifest.json`; the research copy is now a frozen snapshot |
+| `.refresh/v1.3/` | `archive/refresh-v1.3/` |
+| `scripts/charts/`, `.refresh/parse_deepswe.py` | Removed (unreferenced legacy generators; available in git history) |
 
-The coding-agent refresh is under `.refresh/v1.3/coding-agents/` until its next independent refresh. The Open Graph generator is `scripts/site-generate-og-cards.mjs` and can be run with `npm run generate:og` after installing the root Node dependencies.
+## Local-only material
 
-## Research and supporting analyses
-
-- `benchmarks/` — benchmark-specific research packages, including the C25 versus MiMo comparison.
-- `research/code-quality/` — static-analysis benchmark research.
-- `research/deep-research-skills/` — durable multi-agent deep-research reports and evidence ledgers.
-- `research/kimi/` — durable Kimi model and pricing notes.
-- `research/pi/` — Pi benchmark and skills research.
-- `research/agent-benchmarks/` — other benchmark summaries such as LoCoBench.
-- `research/sources/` — local source documents only; ignored because source files may be licensed or confidential.
-
-## Auxiliary projects
-
-- `projects/nz-egg-market/market-structure/` — the ReportLab generator and selected final PDF for the separate NZ egg-market infographic.
-- `projects/nz-egg-market/source-corpus/` — local source corpus for that project; ignored and never staged by default.
-- `projects/coderstrust/` — separate competitor-research material; local source captures are ignored.
-
-## Local-only output
-
-Do not commit installed environments, browser/tool state, graphify output, visual-audit captures, screenshots, logs, or generated chart files. They are reproducible and ignored by `.gitignore`:
-
-- `.venv/`, `node_modules/`
-- `.claude/`, `.opencode/`
-- `graphify-out/`, `.visual-audit/`, `.runs/`, `.tmp/`
-- `artifacts/`, `benchmark-runs/`, `multi-ai-deep-research-out/`
-
-## Reproducibility
-
-```text
-python3 -m venv .venv
-python3 -m pip install -r requirements.txt
-npm install
-npm run generate:og
-```
-
-The refresh scripts currently use the absolute project root captured in their configuration. If the repository is cloned elsewhere, update that configuration before running a full refresh.
+Installed environments, browser and tool state, graph output, captures and logs are reproducible and ignored by `.gitignore`: `.venv/`, `node_modules/`, `.claude/`, `.opencode/`, `graphify-out/`, `.tmp/`, `.runs/`, `artifacts/`, `data/aa/*.html`, `data/aa/*.txt`, `data/snapshots/`, `data/tb4-scrape.json`, `research/sources/`, `projects/*/source-corpus/`.

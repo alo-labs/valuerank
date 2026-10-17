@@ -305,17 +305,17 @@ Missing values are intentionally represented as null; no old-version, model-fami
 
 ## Machine-readable artifacts
 
-- [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json): AA Coding Agent Index v1.5 DeepSWE v1.1 chart, all 31 configurations and exact model-variant mappings
-- [.refresh/v1.4/aa_metrics.json](.refresh/v1.4/aa_metrics.json): decoded current AA model payloads
-- [.refresh/v1.4/scores.json](.refresh/v1.4/scores.json): normalized scores and rankings
-- [.refresh/v1.4/coverage_matrix.json](.refresh/v1.4/coverage_matrix.json): primary and supplemental availability
-- [.refresh/v1.4/livebench.json](.refresh/v1.4/livebench.json): pinned LiveBench task/category/cost snapshot and Pareto data
-- [.refresh/v1.4/tb4.json](.refresh/v1.4/tb4.json): normalized official Terminal-Bench 4.0 rendered leaderboard
-- [.refresh/v1.4/bug_hunt.json](.refresh/v1.4/bug_hunt.json): pinned Bug Hunt scoreboard, exact matches, and explicit mismatches
+- [data/aa_deepswe.json](data/aa_deepswe.json): AA Coding Agent Index v1.5 DeepSWE v1.1 chart, all 31 configurations and exact model-variant mappings
+- [data/aa_metrics.json](data/aa_metrics.json): decoded current AA model payloads
+- [data/scores.json](data/scores.json): normalized scores and rankings
+- [data/coverage_matrix.json](data/coverage_matrix.json): primary and supplemental availability
+- [data/livebench.json](data/livebench.json): pinned LiveBench task/category/cost snapshot and Pareto data
+- [data/tb4.json](data/tb4.json): normalized official Terminal-Bench 4.0 rendered leaderboard
+- [data/bug_hunt.json](data/bug_hunt.json): pinned Bug Hunt scoreboard, exact matches, and explicit mismatches
 - [research/2026-09-29-valuerank-refresh-v4-3-2/README.md](research/2026-09-29-valuerank-refresh-v4-3-2/README.md): v4.3.2 source-change, evidence, and scoring record
-- [.refresh/v1.4/provider_claims.json](.refresh/v1.4/provider_claims.json): provider claim values, source URLs, eligibility, and caveats
-- [.refresh/v1.4/deepswe.json](.refresh/v1.4/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
-- [.refresh/v1.4/tb4-browser-2026-09-29.json](.refresh/v1.4/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
+- [data/provider_claims.json](data/provider_claims.json): provider claim values, source URLs, eligibility, and caveats
+- [data/deepswe.json](data/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
+- [data/tb4-browser-2026-09-29.json](data/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
 
 
 ## AA intelligence and total-cost comparison
@@ -389,4 +389,4 @@ Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API e
 | SuperGrok Heavy $300 · Grok 4.7 XHigh | Grok 4.7 | $300.00 | $1,735.50 | 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
 | MiMo · provisional 1.5x assumption | MiMo-V2.6-Pro, MiMo-V2.6-Flash | Not established | Not measured | 1.5× | Provisional assumption | 2026-10-08 | User assumption |
 
-The selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `.refresh/v1.4/plan_cost_routes.json`.
+The selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `data/plan_cost_routes.json`.

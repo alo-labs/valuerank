@@ -4,19 +4,16 @@
 from __future__ import annotations
 
 import json
-import sys
 from html import escape
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-REFRESH = ROOT / ".refresh" / "v1.4"
+from valuerank.paths import DATA, ROOT
 OUT = ROOT / "site" / "tb4" / "index.html"
-sys.path.insert(0, str(ROOT / "scripts"))
-from site_header import inject_header
+from valuerank.site_header import inject_header
 
 
 def main() -> int:
-    document = json.loads((REFRESH / "tb4.json").read_text())
+    document = json.loads((DATA / "tb4.json").read_text())
     entries = document["rows"]
     provider_claims = document.get("providerClaims", [])
     best_rate = -float("inf")

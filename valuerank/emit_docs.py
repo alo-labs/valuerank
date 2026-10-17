@@ -2,25 +2,21 @@
 """Emit the current README, methodology, score tables, raw data, and site.
 
 The site keeps the existing interactive publication shell, but all ranking
-constants and model data are generated from .refresh/v1.4/scores.json.
+constants and model data are generated from data/scores.json.
 """
 
 from __future__ import annotations
 
 import json
 import re
-import sys
 from html import escape as html_escape
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
-REFRESH = ROOT / ".refresh" / "v1.4"
-RESEARCH = ROOT / "research" / "2026-09-29-valuerank-refresh-v4-3-2"
-sys.path.insert(0, str(ROOT / "scripts"))
-from plan_costs import build_cost_fields, load_plan_routes, route_summary
-from site_header import inject_header
-from aa_reconciliation import reconcile as reconcile_aa, publication as aa_reconciliation_publication
+from valuerank.paths import DATA, ROOT
+from valuerank.plan_costs import build_cost_fields, load_plan_routes, route_summary
+from valuerank.site_header import inject_header
+from valuerank.aa_reconciliation import reconcile as reconcile_aa, publication as aa_reconciliation_publication
 
 VERSION = "v1.9.6"
 DATE = "October 8, 2026"
@@ -68,16 +64,16 @@ def md_benchmark_link(label):
 def html_external_link(label, url):
     return f'<a href="{html_escape(url, quote=True)}" target="_blank" rel="noopener">{html_escape(label)}</a>'
 
-scores = json.loads((REFRESH / "scores.json").read_text())
-aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
-coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
-deepswe_chart_doc = json.loads((REFRESH / "aa_deepswe.json").read_text())
-livebench_document = json.loads((REFRESH / "livebench.json").read_text())
-tb4_document = json.loads((REFRESH / "tb4.json").read_text())
-bug_hunt_document = json.loads((REFRESH / "bug_hunt.json").read_text())
+scores = json.loads((DATA / "scores.json").read_text())
+aa_document = json.loads((DATA / "aa_metrics.json").read_text())
+coverage_document = json.loads((DATA / "coverage_matrix.json").read_text())
+deepswe_chart_doc = json.loads((DATA / "aa_deepswe.json").read_text())
+livebench_document = json.loads((DATA / "livebench.json").read_text())
+tb4_document = json.loads((DATA / "tb4.json").read_text())
+bug_hunt_document = json.loads((DATA / "bug_hunt.json").read_text())
 bug_hunt_ranking = scores["bugHuntEmphasisRanking"]
 bug_hunt_records = {item["modelId"]: item for item in bug_hunt_document["models"]}
-manifest = json.loads((RESEARCH / "run_manifest.json").read_text())
+manifest = json.loads((DATA / "run_manifest.json").read_text())
 all_models = scores["models"]
 models = [model for model in all_models if model.get("rankingEligible") is True]
 unranked_models = [model for model in all_models if model.get("rankingEligible") is not True]
@@ -104,9 +100,9 @@ livebench_supplemental_rows = [
 ]
 livebench_pareto = [livebench_models[model_id] for model_id in livebench_document["pareto"]]
 tb4_rows = tb4_document["rows"]
-provider_claims = json.loads((REFRESH / "provider_claims.json").read_text()).get("claims", [])
+provider_claims = json.loads((DATA / "provider_claims.json").read_text()).get("claims", [])
 eligible_provider_claims = [item for item in provider_claims if item.get("eligibleForRanking") is True]
-ranking_history_document = json.loads((REFRESH / "ranking_history_v1.5.json").read_text())
+ranking_history_document = json.loads((DATA / "ranking_history_v1.5.json").read_text())
 ranking_history = ranking_history_document.get("v150", {})
 ranking_history_v190 = ranking_history_document.get("v190", {})
 ranking_history_v191 = ranking_history_document.get("v191", {})
@@ -362,7 +358,7 @@ plan_comparison_md = (
     "\n\n## Plan Costs candidate comparison\n\n" + plan_policy_copy + "\n\n"
     + plan_markdown_table(plan_candidate_headers, plan_candidate_cells)
     + "\n\n### Plan route evidence\n\n" + plan_markdown_table(plan_route_headers, plan_route_cells)
-    + "\n\nThe selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `.refresh/v1.4/plan_cost_routes.json`.\n"
+    + "\n\nThe selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `data/plan_cost_routes.json`.\n"
 )
 
 
@@ -407,11 +403,11 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **{len(unranked_models)}** candidates have no rankable primary score: **{unranked_names}**.
 - For each model, ValueRank retains only its observed metrics, renormalizes that row's available dimension priorities, and reports `availablePriority / totalPriority` coverage plus missing metric names. No missing value receives a zero or neutral fill.
 - Bug Hunt Bench has priority **{bug_hunt_weight['priority']}** and weight **{bug_hunt_weight['weightPct']:.2f}%** in the main rank. DeepSWE v1.1 has priority **{deepswe_weight['priority']}** and weight **{deepswe_weight['weightPct']:.2f}%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
-- AA's Coding Agent Index v1.5 chart reports **{len(deepswe_configurations)} configurations** for DeepSWE v1.1 across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. All configurations and model-version mapping decisions are retained in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json); **{deepswe_overlap_n}** configurations map to selected model variants.
+- AA's Coding Agent Index v1.5 chart reports **{len(deepswe_configurations)} configurations** for DeepSWE v1.1 across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. All configurations and model-version mapping decisions are retained in [data/aa_deepswe.json](data/aa_deepswe.json); **{deepswe_overlap_n}** configurations map to selected model variants.
 - Artificial Analysis now uses **{aa_version}**: AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-LCR v1.1, and split AA-Omniscience accuracy/reliability components. τ³-Banking and Terminal-Bench 2.1 remain historical source fields only.
 - The standalone Terminal-Bench page has **{tb4_document['rowN']} official rows**, including **{tb4_document['matchedN']}/{tb4_document['cohortN']}** direct cohort matches. One separately labelled DeepSeek V4.1-Flash provider claim is used for the current `deepseek-v4-flash` API alias; official and claim counts are kept distinct.
 - **{md_benchmark_link('LiveBench')} {livebench_document['release'].replace('_', '-')}** provides the four-task Instruction Following mean plus Overall Score and Cost Per Successful Task views; Instruction Following contributes where a selected model has an eligible value and is included in the row's available-priority calculation.
-- The companion Bug Hunt emphasis ranking covers **{bug_hunt_ranking['matchedN']}** eligible exact-variant owner results and raises Bug Hunt to **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [.refresh/v1.4/bug_hunt.json](.refresh/v1.4/bug_hunt.json).
+- The companion Bug Hunt emphasis ranking covers **{bug_hunt_ranking['matchedN']}** eligible exact-variant owner results and raises Bug Hunt to **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [data/bug_hunt.json](data/bug_hunt.json).
 - The AA chart's full **{len(deepswe_configurations)}-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
 - The score retains **{d} primary dimensions**; **{names([item['label'] for item in dropped])}** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
 - AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
@@ -420,14 +416,14 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 
 ## Sources and audit trail
 
-- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete {len(deepswe_configurations)}-configuration chart inventory, observed {deepswe_updated}, and model-variant decisions are recorded in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
+- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete {len(deepswe_configurations)}-configuration chart inventory, observed {deepswe_updated}, and model-variant decisions are recorded in [data/aa_deepswe.json](data/aa_deepswe.json).
 - [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
 - [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench), pinned at [release data commit {livebench_document['source'].get('releaseDataCommit', 'not recorded')}](https://github.com/livebench/new-livebench/commit/{livebench_document['source'].get('releaseDataCommit', '')}), for the 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
 - [Terminal-Bench 4.0](https://www.tbench.ai/) and the [official Harbor repository](https://github.com/harbor-framework/terminal-bench) for the current rendered leaderboard and task identity.
 - [Bug Hunt Bench]({BUG_HUNT_URL}), with owner-published [combined scoreboard]({bug_hunt_document['sources']['scoreboard']}) and [run notes]({bug_hunt_document['sources']['runNotes']}) pinned to commit **{bug_hunt_document['sourceCommit']}**.
 - [Refresh record](research/2026-09-29-valuerank-refresh-v4-3-2/README.md) for the v4.3.2 source change, evidence boundary, provider claims, and scoring decisions.
-- [Provider claim ledger](.refresh/v1.4/provider_claims.json) for provider-sourced values, eligibility, and alias/variant caveats. Provider values never masquerade as benchmark-owner measurements.
-- [Coverage matrix](.refresh/v1.4/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
+- [Provider claim ledger](data/provider_claims.json) for provider-sourced values, eligibility, and alias/variant caveats. Provider values never masquerade as benchmark-owner measurements.
+- [Coverage matrix](data/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
 
 ## Files
 
@@ -437,7 +433,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - [site/index.html](site/index.html): interactive static publication
 - [site/tb4/index.html](site/tb4/index.html): current Terminal-Bench 4.0 score-versus-cost publication
 - [research/2026-09-29-valuerank-refresh-v4-3-2/](research/2026-09-29-valuerank-refresh-v4-3-2/): reproducible v4.3.2 refresh package
-- [.refresh/v1.4/](.refresh/v1.4/): refresh scripts and machine-readable snapshots/outputs
+- [data/](data/): machine-readable snapshots and generated outputs (pipeline code lives in [valuerank/](valuerank/))
 """
 (ROOT / "README.md").write_text(readme + aa_reconciliation_md + plan_comparison_md)
 
@@ -450,10 +446,10 @@ methodology = f"""# ValueRank Methodology
 
 The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every represented frontier model. AA's Coding Agent Index v1.5 chart publishes **{len(deepswe_configurations)} DeepSWE v1.1 configurations** across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
 
-- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete {len(deepswe_configurations)}-configuration inventory and exact-variant mapping decisions are pinned in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
+- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete {len(deepswe_configurations)}-configuration inventory and exact-variant mapping decisions are pinned in [data/aa_deepswe.json](data/aa_deepswe.json).
 - AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current {aa_version}.
 - AA Intelligence Index percentile comparisons use whole-point precision for every model because fresh public labels are rounded while older captures retain finer raw precision. Raw source inputs remain unchanged; sub-point differences should not be read as a reliable ordering.
-- AA v4.3.2 model values: first-party model pages selected by .refresh/v1.4/aa_mapping.json and recorded in aa_metrics.json.
+- AA v4.3.2 model values: first-party model pages selected by data/aa_mapping.json and recorded in aa_metrics.json.
 - LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **{livebench_document['source'].get('releaseDataCommit', 'not recorded')}**.
 - Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with {tb4_document['rowN']} official rows, **{tb4_document['matchedN']}** direct cohort matches, and **{tb4_document.get('providerClaimN', 0)}** eligible provider claim.
 
@@ -757,17 +753,17 @@ Missing values are intentionally represented as null; no old-version, model-fami
 
 ## Machine-readable artifacts
 
-- [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json): AA Coding Agent Index v1.5 DeepSWE v1.1 chart, all {len(deepswe_configurations)} configurations and exact model-variant mappings
-- [.refresh/v1.4/aa_metrics.json](.refresh/v1.4/aa_metrics.json): decoded current AA model payloads
-- [.refresh/v1.4/scores.json](.refresh/v1.4/scores.json): normalized scores and rankings
-- [.refresh/v1.4/coverage_matrix.json](.refresh/v1.4/coverage_matrix.json): primary and supplemental availability
-- [.refresh/v1.4/livebench.json](.refresh/v1.4/livebench.json): pinned LiveBench task/category/cost snapshot and Pareto data
-- [.refresh/v1.4/tb4.json](.refresh/v1.4/tb4.json): normalized official Terminal-Bench 4.0 rendered leaderboard
-- [.refresh/v1.4/bug_hunt.json](.refresh/v1.4/bug_hunt.json): pinned Bug Hunt scoreboard, exact matches, and explicit mismatches
+- [data/aa_deepswe.json](data/aa_deepswe.json): AA Coding Agent Index v1.5 DeepSWE v1.1 chart, all {len(deepswe_configurations)} configurations and exact model-variant mappings
+- [data/aa_metrics.json](data/aa_metrics.json): decoded current AA model payloads
+- [data/scores.json](data/scores.json): normalized scores and rankings
+- [data/coverage_matrix.json](data/coverage_matrix.json): primary and supplemental availability
+- [data/livebench.json](data/livebench.json): pinned LiveBench task/category/cost snapshot and Pareto data
+- [data/tb4.json](data/tb4.json): normalized official Terminal-Bench 4.0 rendered leaderboard
+- [data/bug_hunt.json](data/bug_hunt.json): pinned Bug Hunt scoreboard, exact matches, and explicit mismatches
 - [research/2026-09-29-valuerank-refresh-v4-3-2/README.md](research/2026-09-29-valuerank-refresh-v4-3-2/README.md): v4.3.2 source-change, evidence, and scoring record
-- [.refresh/v1.4/provider_claims.json](.refresh/v1.4/provider_claims.json): provider claim values, source URLs, eligibility, and caveats
-- [.refresh/v1.4/deepswe.json](.refresh/v1.4/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
-- [.refresh/v1.4/tb4-browser-2026-09-29.json](.refresh/v1.4/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
+- [data/provider_claims.json](data/provider_claims.json): provider claim values, source URLs, eligibility, and caveats
+- [data/deepswe.json](data/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
+- [data/tb4-browser-2026-09-29.json](data/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
 """
 (ROOT / "raw-data.md").write_text(raw_data + aa_reconciliation_md + plan_comparison_md)
 
@@ -1760,7 +1756,7 @@ def arrange_chart_tabs(match):
     button_by_chart["pareto"] = re.sub(r">Pareto Frontier<", ">ValueRank Pareto Frontier<", button_by_chart["pareto"])
     ordered = [button_by_chart["pareto"], button_by_chart["livebenchPareto"]]
     ordered.extend(button for chart, button in button_by_chart.items() if chart not in {"pareto", "livebenchPareto"})
-    return '    <div class="chart-tabs">\n' + "\n".join(f"      {button}" for button in ordered) + '\n    </div>'
+    return '<div class="chart-tabs">\n' + "\n".join(f"      {button}" for button in ordered) + '\n    </div>'
 
 
 html, chart_tab_count = re.subn(chart_tab_pattern, arrange_chart_tabs, html, count=1)
@@ -2435,8 +2431,8 @@ html = replace_current_copy(
     lambda match: match.group(1) + VERSION,
     "ranking history chart title",
 )
-html = re.sub(r"<!-- aa-reconciliation:start -->[\s\S]*?<!-- aa-reconciliation:end -->", "", html)
-html = re.sub(r"<!-- plan-candidates:start -->[\s\S]*?<!-- plan-candidates:end -->", "", html)
+html = re.sub(r"<!-- aa-reconciliation:start -->[\s\S]*?<!-- aa-reconciliation:end -->\n?", "", html)
+html = re.sub(r"<!-- plan-candidates:start -->[\s\S]*?<!-- plan-candidates:end -->\n?", "", html)
 if "</main>" not in html:
     raise ValueError("Cannot insert AA comparison: publication shell lacks </main>")
 source_date_note = ('<p class="method-text">Publication updated October 8, 2026 with selective additions. Earlier AA and DeepSWE snapshots remain dated September 29–30; MiMo AA and frontier observations were captured October 8, and selective MiMo Bug Hunt owner notes were observed October 7. Rounded public AA metrics preserve captured display precision; source dates and precision are listed in raw data.</p>')

@@ -11,18 +11,18 @@ from __future__ import annotations
 
 import json
 import math
-from datetime import datetime, timezone
 from pathlib import Path
 
+from valuerank.clock import iso_z
 
-ROOT = Path(__file__).resolve().parents[2]
-REFRESH = ROOT / ".refresh" / "v1.4"
+
+from valuerank.paths import DATA, ROOT
 VERSION = "v1.9.6"
 PUBLISH_DATE = "October 8, 2026"
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
 DEEPSWE_PRIORITY = 25
-FRONTIER_INVENTORY = REFRESH / "aa_reconciliation_inventory.json"
+FRONTIER_INVENTORY = DATA / "aa_reconciliation_inventory.json"
 
 DEVELOPER = {
     "GPT-6 Astra": "OpenAI",
@@ -287,12 +287,12 @@ def build_bug_hunt_emphasis(rows, weights, document):
 
 
 def main() -> int:
-    deepswe_chart = json.loads((REFRESH / "aa_deepswe.json").read_text())
-    aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
+    deepswe_chart = json.loads((DATA / "aa_deepswe.json").read_text())
+    aa_document = json.loads((DATA / "aa_metrics.json").read_text())
     frontier_inventory = json.loads(FRONTIER_INVENTORY.read_text())
-    livebench_document = json.loads((REFRESH / "livebench.json").read_text())
-    tb4_document = json.loads((REFRESH / "tb4.json").read_text())
-    bug_hunt_document = json.loads((REFRESH / "bug_hunt.json").read_text())
+    livebench_document = json.loads((DATA / "livebench.json").read_text())
+    tb4_document = json.loads((DATA / "tb4.json").read_text())
+    bug_hunt_document = json.loads((DATA / "bug_hunt.json").read_text())
     aa_models = aa_document["models"]
     livebench_models = livebench_document["models"]
     tb4_models = tb4_document["cohortRows"]
@@ -301,7 +301,7 @@ def main() -> int:
         for item in tb4_document.get("providerClaims", [])
         if item.get("eligibleForRanking") is True
     }
-    coverage_document = json.loads((REFRESH / "coverage_matrix.json").read_text())
+    coverage_document = json.loads((DATA / "coverage_matrix.json").read_text())
     if not aa_models:
         raise ValueError("AA metrics snapshot must contain a non-empty comparison roster")
     observed_configuration_n = deepswe_chart.get("observedConfigurationN")
@@ -1071,7 +1071,7 @@ def main() -> int:
         },
     }
 
-    observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    observed_at = iso_z()
     ranking_summary = {
         "version": VERSION,
         "publishDate": PUBLISH_DATE,
@@ -1122,7 +1122,7 @@ def main() -> int:
             "terminalBenchV4": f"{tb4_document.get('rankingAvailableN', tb4_document['matchedN'])}/{tb4_document['cohortN']} including {tb4_document.get('providerClaimN', 0)} provider claim",
         },
     }
-    manifest_path = ROOT / "research" / "2026-09-29-valuerank-refresh-v4-3-2" / "run_manifest.json"
+    manifest_path = DATA / "run_manifest.json"
     manifest = json.loads(manifest_path.read_text())
     manifest["scoring"] = ranking_summary
     manifest["scoring"]["weights"] = weights
@@ -1135,7 +1135,7 @@ def main() -> int:
         for row in primary_rows if row.get("terminalBenchV4Claim")
     ]
 
-    (REFRESH / "scores.json").write_text(
+    (DATA / "scores.json").write_text(
         json.dumps(
             {
                 "version": VERSION,
@@ -1205,8 +1205,8 @@ def main() -> int:
         )
         + "\n"
     )
-    (REFRESH / "coverage_matrix.json").write_text(json.dumps(coverage_document, indent=2, ensure_ascii=False) + "\n")
-    (REFRESH / "ranking_summary.json").write_text(json.dumps(ranking_summary, indent=2, ensure_ascii=False) + "\n")
+    (DATA / "coverage_matrix.json").write_text(json.dumps(coverage_document, indent=2, ensure_ascii=False) + "\n")
+    (DATA / "ranking_summary.json").write_text(json.dumps(ranking_summary, indent=2, ensure_ascii=False) + "\n")
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
 
     print(json.dumps({
@@ -1219,9 +1219,9 @@ def main() -> int:
         "topFive": ranking_summary["topFive"],
         "bugHuntEmphasisTopFive": ranking_summary["bugHuntEmphasis"]["topFive"],
         "outputs": [
-            ".refresh/v1.4/scores.json",
-            ".refresh/v1.4/coverage_matrix.json",
-            ".refresh/v1.4/ranking_summary.json",
+            "data/scores.json",
+            "data/coverage_matrix.json",
+            "data/ranking_summary.json",
         ],
     }, indent=2, ensure_ascii=False))
     return 0

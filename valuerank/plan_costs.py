@@ -12,8 +12,8 @@ from collections import defaultdict
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_ROUTE_PATH = ROOT / ".refresh" / "v1.4" / "plan_cost_routes.json"
+from valuerank.paths import DATA, ROOT
+DEFAULT_ROUTE_PATH = DATA / "plan_cost_routes.json"
 CONFIDENCE_ORDER = {"high": 4, "medium-high": 3, "medium": 2, "low-medium": 1, "low": 0}
 
 

@@ -10,10 +10,12 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-from build_aa_metrics import decode_current_model
+from valuerank.clock import iso_z, utcnow
 
-ROOT = Path(__file__).resolve().parents[2]
-AA_DIR = ROOT / ".refresh" / "v1.4" / "aa"
+from valuerank.build_aa_metrics import decode_current_model
+
+from valuerank.paths import DATA, ROOT
+AA_DIR = DATA / "aa"
 EXTRACT_PATH = AA_DIR / "aa_extract.json"
 OUTPUT_PATH = AA_DIR / "aa_v432_snapshot.json"
 MAX_WORKERS = 4
@@ -42,7 +44,7 @@ def preserved_public_capture(entry: dict, preserved_pages: dict) -> dict:
         captured_at = datetime.fromisoformat(observed_at.replace("Z", "+00:00"))
         if captured_at.tzinfo is None:
             raise ValueError("capture date requires a timezone")
-        age_seconds = (datetime.now(timezone.utc) - captured_at).total_seconds()
+        age_seconds = (utcnow() - captured_at).total_seconds()
     except (TypeError, ValueError, AttributeError) as exc:
         raise ValueError(recapture_message) from exc
     if age_seconds < 0 or age_seconds > PUBLIC_CAPTURE_MAX_AGE_DAYS * 86400:
@@ -98,7 +100,7 @@ def main() -> int:
     document = {
         "schemaVersion": "valuerank-aa-page-snapshot/v2",
         "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
-        "capturedAt": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "capturedAt": iso_z(),
         "source": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
         "concurrency": MAX_WORKERS,
         "pages": pages,

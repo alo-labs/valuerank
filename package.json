@@ -2,20 +2,26 @@
   "name": "valuerank",
   "version": "1.9.6",
   "private": true,
-  "description": "ValueRank research and static publication workspace",
+  "description": "ValueRank research workspace and static publication pipeline",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "capture:tb4": "node .refresh/v1.4/scrape_tb4.js .refresh/v1.4/tb4-scrape.json",
-    "capture:aa": "python3 .refresh/v1.4/capture_aa_v432.py",
-    "refresh:external": "python3 .refresh/v1.4/fetch_livebench.py && npm run capture:tb4 && python3 .refresh/v1.4/build_tb4.py .refresh/v1.4/tb4-scrape.json .refresh/v1.4/tb4.json",
-    "build:aa": "npm run capture:aa && python3 .refresh/v1.4/build_aa_metrics.py",
-    "reconcile:aa": "python3 .refresh/v1.4/aa_reconciliation.py",
-    "build:scores": "python3 .refresh/v1.4/build_scores.py",
-    "build:publication": "python3 .refresh/v1.4/emit_v14_docs.py && python3 scripts/generate_tb4_page.py && npm run generate:og",
+    "capture:tb4": "node scripts/scrape-tb4.js data/tb4-scrape.json",
+    "capture:aa": "python3 -m valuerank.capture_aa",
+    "refresh:external": "python3 -m valuerank.fetch_livebench && npm run capture:tb4 && python3 -m valuerank.build_tb4 data/tb4-scrape.json data/tb4.json",
+    "build:aa": "npm run capture:aa && python3 -m valuerank.build_aa_metrics",
+    "reconcile:aa": "python3 -m valuerank.aa_reconciliation",
+    "build:scores": "python3 -m valuerank.build_scores",
+    "build:docs": "python3 -m valuerank.emit_docs && python3 -m valuerank.tb4_page",
+    "build:publication": "npm run build:docs && npm run generate:og",
+    "generate:og": "node scripts/generate-og-cards.mjs",
     "refresh": "npm run refresh:external && npm run build:aa && npm run build:scores && npm run reconcile:aa && npm run build:publication",
-    "generate:og": "node scripts/site-generate-og-cards.mjs"
+    "verify:docs": "VALUERANK_NOW=$(node -p \"require('./data/ranking_summary.json').observedAt\") npm run build:docs && git diff --exit-code --stat -- README.md methodology.md scores.md raw-data.md site data",
+    "test": "npm run test:py && npm run test:js",
+    "test:py": "python3 -m pytest --cov --cov-report=term-missing",
+    "test:js": "node --test --experimental-test-coverage --test-coverage-include='scripts/**' --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 'tests/js/**/*.test.mjs'",
+    "verify": "npm test && npm run verify:docs"
   },
   "devDependencies": {
     "playwright": "1.62.0"

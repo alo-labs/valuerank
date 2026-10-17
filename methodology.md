@@ -7,10 +7,10 @@
 
 The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every represented frontier model. AA's Coding Agent Index v1.5 chart publishes **31 DeepSWE v1.1 configurations** across **113 tasks**, observed **2026-10-08**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
 
-- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete 31-configuration inventory and exact-variant mapping decisions are pinned in [.refresh/v1.4/aa_deepswe.json](.refresh/v1.4/aa_deepswe.json).
+- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete 31-configuration inventory and exact-variant mapping decisions are pinned in [data/aa_deepswe.json](data/aa_deepswe.json).
 - AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current Artificial Analysis Intelligence Index v4.3.2.
 - AA Intelligence Index percentile comparisons use whole-point precision for every model because fresh public labels are rounded while older captures retain finer raw precision. Raw source inputs remain unchanged; sub-point differences should not be read as a reliable ordering.
-- AA v4.3.2 model values: first-party model pages selected by .refresh/v1.4/aa_mapping.json and recorded in aa_metrics.json.
+- AA v4.3.2 model values: first-party model pages selected by data/aa_mapping.json and recorded in aa_metrics.json.
 - LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **7be9f746f36a6f007dd78461f67cb7d06cfe2304**.
 - Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with 14 official rows, **11** direct cohort matches, and **1** eligible provider claim.
 

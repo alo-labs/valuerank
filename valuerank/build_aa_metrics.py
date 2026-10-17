@@ -13,19 +13,19 @@ from __future__ import annotations
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
+
+from valuerank.clock import iso_z
 from urllib.parse import urlparse
 
 
-ROOT = Path(__file__).resolve().parents[2]
-REFRESH = ROOT / ".refresh" / "v1.4"
-AA_DIR = REFRESH / "aa"
-MAPPING_PATH = REFRESH / "aa_mapping.json"
+from valuerank.paths import DATA, ROOT
+AA_DIR = DATA / "aa"
+MAPPING_PATH = DATA / "aa_mapping.json"
 EXTRACT_PATH = AA_DIR / "aa_extract.json"
 SNAPSHOT_PATH = AA_DIR / "aa_v432_snapshot.json"
-OUTPUT_PATH = REFRESH / "aa_metrics.json"
-COVERAGE_PATH = REFRESH / "coverage_matrix.json"
+OUTPUT_PATH = DATA / "aa_metrics.json"
+COVERAGE_PATH = DATA / "coverage_matrix.json"
 
 PRIMARY_EVALUATIONS = [
     {"key": "briefcaseElo", "label": "AA-Briefcase", "aaKey": "briefcaseBreakdown.overall.elo", "weightPct": 15},
@@ -166,7 +166,7 @@ def clean_number(value):
 def main() -> int:
     mapping = {item["id"]: item for item in json.loads(MAPPING_PATH.read_text())}
     extracted = json.loads(EXTRACT_PATH.read_text())
-    claim_document = json.loads((REFRESH / "provider_claims.json").read_text())
+    claim_document = json.loads((DATA / "provider_claims.json").read_text())
     all_provider_claims = claim_document.get("claims", [])
     snapshot_document = json.loads(SNAPSHOT_PATH.read_text()) if SNAPSHOT_PATH.exists() else {}
     snapshot_pages = (
@@ -175,7 +175,7 @@ def main() -> int:
         else snapshot_document if isinstance(snapshot_document, list) else []
     )
     snapshot = {item["id"]: item for item in snapshot_pages}
-    observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    observed_at = iso_z()
     models = {}
 
     for entry in extracted:

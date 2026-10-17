@@ -1,0 +1,25 @@
+[project]
+name = "valuerank"
+version = "1.9.6"
+description = "ValueRank research workspace and static publication pipeline"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q --strict-markers"
+markers = [
+  "integration: regenerates the committed publication from committed data in a temporary checkout",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["valuerank"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+precision = 2
+# No exclusion patterns: every statement and branch in valuerank/ must be
+# exercised by a test; "pragma: no cover" is deliberately not honoured.
+exclude_lines = []

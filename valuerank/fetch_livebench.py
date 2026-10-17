@@ -17,12 +17,12 @@ import io
 import json
 import math
 import urllib.request
-from datetime import datetime, timezone
 from pathlib import Path
 
+from valuerank.clock import iso_z
 
-ROOT = Path(__file__).resolve().parents[2]
-REFRESH = ROOT / ".refresh" / "v1.4"
+
+from valuerank.paths import DATA, ROOT
 RELEASE = "2026_06_25"
 BASE_URL = "https://livebench.ai"
 RELEASE_DATA_COMMIT = "7be9f746f36a6f007dd78461f67cb7d06cfe2304"
@@ -204,7 +204,7 @@ def build_record(
 
 
 def main() -> int:
-    aa_document = json.loads((REFRESH / "aa_metrics.json").read_text())
+    aa_document = json.loads((DATA / "aa_metrics.json").read_text())
     cohort = [(model_id, item["displayName"]) for model_id, item in aa_document["models"].items()]
     if not cohort:
         raise ValueError("LiveBench mapping expects a non-empty AA comparison cohort")
@@ -273,7 +273,7 @@ def main() -> int:
 
     all_models = {**models, **supplemental_models}
     matched_supplemental = [record for record in supplemental_models.values() if record["matched"]]
-    observed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    observed_at = iso_z()
     document = {
         "schemaVersion": "valuerank-livebench-v1",
         "release": RELEASE,
@@ -303,7 +303,7 @@ def main() -> int:
         "supplementalModels": supplemental_models,
     }
     document["pareto"] = pareto_ids(all_models)
-    (REFRESH / "livebench.json").write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n")
+    (DATA / "livebench.json").write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps({
         "release": RELEASE,
         "cohortN": document["cohortN"],
@@ -312,7 +312,7 @@ def main() -> int:
         "supplementalModels": list(document["supplementalModels"]),
         "missingModels": document["missingModels"],
         "pareto": document["pareto"],
-        "output": ".refresh/v1.4/livebench.json",
+        "output": "data/livebench.json",
     }, indent=2, ensure_ascii=False))
     return 0
 
