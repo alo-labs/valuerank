@@ -1,0 +1,92 @@
+{
+  "version": "1.1.0",
+  "mode": "deep",
+  "generated_at": "2026-10-17T17:15:21.094821+00:00",
+  "phases": [
+    {
+      "key": "scope",
+      "id": "DR-SCOPE",
+      "name": "Scope",
+      "required_artifacts": [
+        "scope.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "plan",
+      "id": "DR-PLAN",
+      "name": "Plan",
+      "required_artifacts": [
+        "research-plan.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "retrieve",
+      "id": "DR-RETRIEVE",
+      "name": "Retrieve",
+      "required_artifacts": [
+        "sources.jsonl",
+        "evidence.jsonl"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "triangulate",
+      "id": "DR-TRIANGULATE",
+      "name": "Score / Triangulate",
+      "required_artifacts": [
+        "triangulation.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "outline",
+      "id": "DR-OUTLINE",
+      "name": "Outline / Refine",
+      "required_artifacts": [
+        "outline.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "synthesize",
+      "id": "DR-SYNTHESIZE",
+      "name": "Synthesize",
+      "required_artifacts": [
+        "research_report.md",
+        "claims.jsonl"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "critique",
+      "id": "DR-CRITIQUE",
+      "name": "Adversarial Review",
+      "required_artifacts": [
+        "critique.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "refine",
+      "id": "DR-REFINE",
+      "name": "Verify / Refresh",
+      "required_artifacts": [
+        "research_report.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "key": "package",
+      "id": "DR-PACKAGE",
+      "name": "Package",
+      "required_artifacts": [
+        "decision-record.md",
+        "handoff.md",
+        "vloop-rollup.json"
+      ],
+      "status": "pending"
+    }
+  ]
+}

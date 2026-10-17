@@ -1,0 +1,31 @@
+{
+  "version": "3.0.0",
+  "query": "Which other websites rank or compare AI models on value (quality against cost, including subscription-plan cost), as ValueRank does, and how do they differ?",
+  "mode": "deep",
+  "started_at": "2026-10-17T17:15:20Z",
+  "finished_at": null,
+  "assumptions": [],
+  "provider_config": {
+    "primary": "search-cli",
+    "scholarly": null
+  },
+  "report_dir": "/Users/shafqat/projects/valuerank/research/2026-10-17-value-ranking-sites-landscape",
+  "artifact_paths": {
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "report": "research_report.md"
+  },
+  "continuation": null,
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "research_type": "default",
+  "requested_by": "ValueRank owner, 2026-10-18 local",
+  "search_cli": {
+    "status": "unavailable",
+    "providers_available": []
+  },
+  "fallback_reason": "search-cli is not installed on this host; retrieval uses the host WebSearch and WebFetch tools plus Context Mode fetch-and-index, with parallel retrieval agents, as the skill's fallback policy allows for deep mode.",
+  "skill_source": "~/projects/silver-bullet/repo/skills/silver-deep-research (v1.0.0, phases.yaml 1.1.0)"
+}

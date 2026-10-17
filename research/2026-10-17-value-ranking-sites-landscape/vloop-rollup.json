@@ -1,0 +1,188 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "mode": "deep",
+  "phases": {
+    "scope": {
+      "id": "DR-SCOPE",
+      "input_contract": "research question from the owner, ValueRank baseline docs",
+      "work_product": [
+        "scope.md"
+      ],
+      "evidence_refs": [],
+      "verification": "bounded question, assumptions A1-A4, in/out scope and success criteria written",
+      "validation": "phase_gate --phase scope",
+      "repair": null,
+      "status": "complete"
+    },
+    "plan": {
+      "id": "DR-PLAN",
+      "input_contract": "scope.md",
+      "work_product": [
+        "research-plan.md"
+      ],
+      "evidence_refs": [],
+      "verification": "source classes, eight search angles, triangulation rules, quality gates recorded; deep mode rationale",
+      "validation": "phase_gate --phase plan",
+      "repair": null,
+      "status": "complete"
+    },
+    "retrieve": {
+      "id": "DR-RETRIEVE",
+      "input_contract": "research-plan.md; search-cli unavailable so host WebSearch/WebFetch and Context Mode fetch were used; four parallel retrieval agents plus two bounded reworks; lead broad scan of eight queries",
+      "work_product": [
+        "sources.jsonl (131)",
+        "evidence.jsonl (273)",
+        "retrieval/angle-*.jsonl",
+        "retrieval/lead-scan.md",
+        "retrieval/angle-e-fetch-failures.md"
+      ],
+      "evidence_refs": "all rows in evidence.jsonl",
+      "verification": "91 unique sources (52 primary, 25 secondary, 14 tertiary); agent-read Admiralty grades on every row plus evaluator heuristic grade; evaluator average credibility 65.4 (heuristic; it grades vendor methodology pages C3); source types: official 47, independent analysis 17, methodology 11, academic 7, news 5, community 4",
+      "validation": "phase_gate --phase retrieve ok",
+      "repair": "two reworks (angle A gaps: LMArena, Scale, LiveBench, Vellum, Klu, HF, AA cost pages; angle D gaps: SuperCLUE quadrant, OpenCompass, METR, Stanford AI Index, AA cost method, evidence-grading sites); placeholder neura.market lines removed; LiveBench cost view confirmed from the pinned release data rather than the JS-rendered site; delta retrieval after critique added 40 sources (unread plan guides, Copilot/Cursor, forum measurements, RemakeBench detail, Chinese plans, reuse terms)",
+      "known_gaps": [
+        "LMArena price-performance page blocked (403) and blog JS-rendered: relay evidence only",
+        "SuperCLUE token-cost quadrant confirmed via Economic Reference Daily, not the SuperCLUE site",
+        "OpenCompass CompassRank page JS-rendered: README negative only",
+        "SemiAnalysis article paywalled beyond the public portion",
+        "WebFetch returns summaries, so many quotes are paraphrase-typed"
+      ],
+      "status": "complete"
+    },
+    "triangulate": {
+      "id": "DR-TRIANGULATE",
+      "input_contract": "sources.jsonl, evidence.jsonl",
+      "work_product": [
+        "triangulation.md (C1-C28, X1-X16, sites register)"
+      ],
+      "evidence_refs": "evidence ids per claim in triangulation.md",
+      "verification": "core claims graded; contradictions registered incl. allowance figures, formula-dependent leaders, relay-only claims",
+      "validation": "phase_gate --phase triangulate pass",
+      "repair": "revised after critique with like-for-like allowance table",
+      "status": "complete"
+    },
+    "outline": {
+      "id": "DR-OUTLINE",
+      "input_contract": "triangulation.md",
+      "work_product": [
+        "outline.md"
+      ],
+      "evidence_refs": "per section",
+      "verification": "findings map tied to evidence ids",
+      "validation": "phase_gate --phase outline pass",
+      "repair": "rewritten after critique (F8-F10 added)",
+      "status": "complete"
+    },
+    "synthesize": {
+      "id": "DR-SYNTHESIZE",
+      "input_contract": "outline.md, evidence store",
+      "work_product": [
+        "research_report.md (draft 9,881 words)",
+        "claims.jsonl (64)"
+      ],
+      "evidence_refs": "[n] citations mapped by citation_manager",
+      "verification": "validate_report pass; verify_citations 91/91; verify_claim_support pass (0 unsupported)",
+      "validation": "phase_gate --phase synthesize pass",
+      "repair": null,
+      "status": "complete"
+    },
+    "critique": {
+      "id": "DR-CRITIQUE",
+      "input_contract": "draft report, claims, evidence",
+      "work_product": [
+        "critique.md (2 cycles, 24 deltas: 5 high, 13 medium, 6 low)"
+      ],
+      "evidence_refs": "per delta",
+      "verification": "stopping rule: 5 high deltas remained -> loopback required",
+      "validation": "phase_gate --phase critique pass",
+      "repair": "delta retrieval + refine",
+      "status": "complete"
+    },
+    "refine": {
+      "id": "DR-REFINE",
+      "input_contract": "critique.md, expanded store",
+      "work_product": [
+        "research_report.md (final 14,928 words)",
+        "claims.jsonl (116, 110 active)",
+        "critique.md refine disposition",
+        "bibliography with publisher/date/grade"
+      ],
+      "evidence_refs": "[1]-[131]",
+      "verification": "24 deltas: 20 fixed, 4 narrowed, 0 blocked; validate_report pass; verify_citations 126/131 reachable, 0 suspicious; verify_claim_support pass (64 supported, 45 partial, 7 needs_review explained, 0 factual unsupported)",
+      "validation": "phase_gate --phase refine pass",
+      "repair": null,
+      "status": "complete"
+    },
+    "package": {
+      "id": "DR-PACKAGE",
+      "input_contract": "final report and validation logs",
+      "work_product": [
+        "decision-record.md",
+        "handoff.md",
+        "vloop-rollup.json"
+      ],
+      "evidence_refs": "decision-record.md evidence summary",
+      "verification": "AF-DECIDE rollup written; full deep-mode gate run",
+      "validation": "phase_gate --mode deep",
+      "repair": null,
+      "status": "complete"
+    }
+  },
+  "updated_at": "2026-10-17T18:40:00Z",
+  "summary": {
+    "sources": 131,
+    "evidence": 273,
+    "claims_active": 110,
+    "report_words": 14928,
+    "assumption_verdicts": {
+      "A1": "supported as a bounded negative (definition-dependent; RemakeBench and Klu partial)",
+      "A2": "confirmed",
+      "A3": "partly refuted",
+      "A4": "split"
+    },
+    "subagent_runs": [
+      {
+        "id": "R-A",
+        "score": 3
+      },
+      {
+        "id": "R-A2",
+        "score": 4
+      },
+      {
+        "id": "R-B",
+        "score": 4
+      },
+      {
+        "id": "R-C",
+        "score": 4
+      },
+      {
+        "id": "R-D",
+        "score": 3
+      },
+      {
+        "id": "R-D2",
+        "score": 4
+      },
+      {
+        "id": "SYN",
+        "score": 4
+      },
+      {
+        "id": "CRIT",
+        "score": 5
+      },
+      {
+        "id": "DR",
+        "score": 4
+      },
+      {
+        "id": "REF",
+        "score": 4
+      }
+    ]
+  }
+}
