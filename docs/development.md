@@ -50,7 +50,7 @@ Run a single stage directly with `python3 -m valuerank.<stage>`; the module docs
 Every stage stamps an observation instant through `valuerank.clock.utcnow()`. Set `VALUERANK_NOW` to an ISO 8601 instant to pin it:
 
 ```bash
-VALUERANK_NOW=2026-10-07T17:23:20Z python3 -m valuerank.build_scores
+VALUERANK_NOW=2026-10-17T19:28:57Z python3 -m valuerank.build_scores
 ```
 
 The committed outputs were generated with the instant recorded in `data/ranking_summary.json` (`observedAt`). `npm run verify:docs` reads that value, regenerates and diffs. When you intentionally change a generator or a snapshot, regenerate with the same pinned instant so the diff shows only your change. A real refresh, which captures new data, stamps a new instant.

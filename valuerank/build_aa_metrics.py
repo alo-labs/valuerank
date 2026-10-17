@@ -4,8 +4,8 @@
 The public model pages contain the current model record in an escaped JSON
 payload.  The older v1.3 extractor searched visible labels and consequently
 mistook benchmark versions (for example, ``v2.1``) for scores.  This script
-    decodes the page's ``currentModel`` object and keeps the v4.3.2 source
-components separate from ValueRank's own score dimensions.
+decodes the page's own full model object (see ``decode_page_model``) and keeps
+the v4.3.2 source components separate from ValueRank's own score dimensions.
 """
 
 from __future__ import annotations
@@ -73,6 +73,8 @@ SUPPLEMENTAL_FIELDS = [
 ]
 
 NUMBER_RE = r"-?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
+QUOTE = chr(92) + '"'  # a JSON-escaped double quote as it appears in the flight payload
+LEGACY_MARKER = QUOTE + "currentModel" + QUOTE + ":{"
 
 
 def json_value(obj: dict, path: str):
@@ -84,29 +86,33 @@ def json_value(obj: dict, path: str):
     return value
 
 
-def decode_current_model(html: str) -> dict:
-    """Return the page's escaped ``currentModel`` object."""
+def object_end(html: str, start: int):
+    """Index just past the brace-balanced object opening at ``start`` (None if unterminated).
 
-    quote = chr(92) + '"'
-    marker = quote + "currentModel" + quote + ":{"
-    marker_pos = html.find(marker)
-    if marker_pos < 0:
-        raise ValueError("currentModel marker not found")
-    start = marker_pos + len(marker) - 1  # the marker ends with the object's opening brace
+    The object is JSON escaped, but braces remain literal.  Model strings do
+    not contain structural braces; depth counting is sufficient and avoids
+    loading the multi-megabyte HTML into a second parser structure.
+    """
 
-    # The object is JSON escaped, but braces remain literal.  Model strings do
-    # not contain structural braces; depth counting is sufficient and avoids
-    # loading the multi-megabyte HTML into a second parser structure.
     depth = 0
-    end = None
     for index in range(start, len(html)):
         if html[index] == "{":
             depth += 1
         elif html[index] == "}":
             depth -= 1
             if depth == 0:
-                end = index + 1
-                break
+                return index + 1
+    return None
+
+
+def decode_current_model(html: str) -> dict:
+    """Return the page's escaped ``currentModel`` object."""
+
+    marker_pos = html.find(LEGACY_MARKER)
+    if marker_pos < 0:
+        raise ValueError("currentModel marker not found")
+    start = marker_pos + len(LEGACY_MARKER) - 1  # the marker ends with the object's opening brace
+    end = object_end(html, start)
     if end is None:
         raise ValueError("currentModel object is unterminated")
 
@@ -119,6 +125,75 @@ def decode_current_model(html: str) -> dict:
     if not isinstance(model, dict) or not model.get("slug"):
         raise ValueError("decoded currentModel has no slug")
     return model
+
+
+def slug_keyed_models(html: str, slug: str) -> list[dict]:
+    """Decode every full model object in ``html`` whose ``slug`` is ``slug``.
+
+    Artificial Analysis embeds one full model record per page (91-92 keys,
+    including ``intelligenceIndexCost``) in the Next.js flight payload.  The same
+    payload also repeats the slug in short catalogue entries
+    (``{slug, name, releaseSlug}``), release summaries and nested ``release``
+    blocks.  A candidate therefore counts only when the object that directly
+    encloses an escaped ``"slug":"<slug>"`` has that slug *and* an
+    ``intelligenceIndexCost`` key; undecodable fragments are skipped.
+    """
+
+    marker = QUOTE + "slug" + QUOTE + ":" + QUOTE + slug + QUOTE
+    found: list[dict] = []
+    position = html.find(marker)
+    while position >= 0:
+        start = html.rfind("{", 0, position)
+        if start >= 0:
+            end = object_end(html, start)
+            if end is not None:
+                try:
+                    candidate = json.loads(json.loads('"' + html[start:end] + '"'))
+                except json.JSONDecodeError:
+                    candidate = None
+                if (
+                    isinstance(candidate, dict)
+                    and candidate.get("slug") == slug
+                    and "intelligenceIndexCost" in candidate
+                ):
+                    found.append(candidate)
+        position = html.find(marker, position + 1)
+    return found
+
+
+def decode_page_model(html: str, slug: str) -> dict:
+    """Return the full model object that an AA model page embeds for ``slug``.
+
+    Current pages no longer wrap it in ``"currentModel":{``; the object is found
+    by its slug (see ``slug_keyed_models``).  Pages that still carry the legacy
+    marker are read with ``decode_current_model``; its object is accepted when
+    its slug matches and must agree with any slug-keyed object.  A marker object
+    for another slug is ignored when the slug-keyed object exists.
+
+    Raises ``ValueError`` when no full object for ``slug`` exists, the legacy
+    object belongs to a different slug or has none, or candidates disagree.
+    """
+
+    candidates = slug_keyed_models(html, slug)
+    if LEGACY_MARKER in html:
+        legacy = decode_current_model(html)
+        if legacy["slug"] == slug:
+            candidates.append(legacy)
+        elif not candidates:
+            raise ValueError(
+                f"currentModel slug {legacy['slug']!r} does not match page slug {slug!r}"
+            )
+    if not candidates:
+        raise ValueError(f"no full model object for slug {slug!r} found in page payload")
+    if any(candidate != candidates[0] for candidate in candidates[1:]):
+        raise ValueError(f"full model objects for slug {slug!r} disagree")
+    return candidates[0]
+
+
+def page_slug(url: str) -> str:
+    """The model slug named by a model-page URL: its last path segment."""
+
+    return urlparse(url).path.rstrip("/").split("/")[-1]
 
 
 def summary_speed(text: str):
@@ -137,7 +212,7 @@ def summary_speed(text: str):
 
 def selected_page(entry: dict):
     url = entry["url"]
-    slug = urlparse(url).path.rstrip("/").split("/")[-1]
+    slug = page_slug(url)
     html = AA_DIR / f"{entry['id']}__{slug}.html"
     text = AA_DIR / f"{entry['id']}__{slug}.txt"
     if not html.exists():
@@ -191,7 +266,7 @@ def main() -> int:
             slug, html_path, text_path = selected_page(entry)
             html = html_path.read_text(errors="ignore")
             text = text_path.read_text(errors="ignore")
-            current = decode_current_model(html)
+            current = decode_page_model(html, slug)
             source_url = entry["url"]
         expected_identity = mapping.get(model_id, {})
         expected_slug = expected_identity.get("aaSlug")

@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
   "summary": {
     "rank": {
-      "api": 7,
-      "plan": 7
+      "api": 9,
+      "plan": 9
     },
     "overall": {
-      "api": 54.1,
-      "plan": 48.6
+      "api": 53.7,
+      "plan": 50.7
     },
-    "quality": 41.9,
+    "quality": 42.7,
     "qualityRank": 10,
     "coverage": {
       "pct": 69.7,
@@ -37,20 +37,20 @@
       "label": "Cost",
       "category": "cost",
       "weightPct": 18.9394,
-      "value": 206.66,
+      "value": 206.65533881883294,
       "unit": "USD per Index run",
-      "normalized": 86.666667,
+      "normalized": 83.3,
       "source": {
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": 86.666667,
-        "plan": 66.666667
+        "api": 83.3,
+        "plan": 72.2
       }
     },
     {
@@ -74,12 +74,12 @@
       "weightPct": 15.1515,
       "value": 18,
       "unit": "bugs fixed of 105",
-      "normalized": 3.6,
+      "normalized": 8.8,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-pro-first-party"
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-pro-first-party"
       },
-      "observedAt": "2026-10-07T14:15:34Z",
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "MiMo-V2.6-Pro (first-party, thinking enabled)",
       "note": "Single owner run with thinking explicitly enabled on Xiaomi's first-party endpoint. Do not substitute the OpenRouter default mean, whose reasoning state was not asserted and whose three runs used two judge standards.",
       "grade": "measured"
@@ -89,16 +89,16 @@
       "label": "Non-Hallucination",
       "category": "rely",
       "weightPct": 4.5455,
-      "value": 59.0,
+      "value": 59.38,
       "unit": "% non-hallucination",
-      "normalized": 73.3,
+      "normalized": 77.8,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -120,16 +120,16 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1686.0,
+      "value": 1684.34,
       "unit": "Elo",
-      "normalized": 80.0,
+      "normalized": 77.8,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded, whole Elo.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -137,16 +137,16 @@
       "label": "AA Intelligence Index",
       "category": "intel",
       "weightPct": 4.5455,
-      "value": 46.0,
+      "value": 46.3242065310383,
       "unit": "Index points",
-      "normalized": 56.7,
+      "normalized": 52.8,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -168,16 +168,16 @@
       "label": "AutomationBench-AA",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 59.0,
+      "value": 58.62,
       "unit": "% score",
-      "normalized": 33.3,
+      "normalized": 38.9,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -185,16 +185,16 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 40.1,
+      "value": 48.0431227818126,
       "unit": "tokens per second",
-      "normalized": 7.1,
+      "normalized": 5.9,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: profile display, one decimal.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -202,16 +202,16 @@
       "label": "AA-LCR v1.1",
       "category": "language",
       "weightPct": 3.0303,
-      "value": 86.0,
+      "value": 86.33,
       "unit": "% accuracy",
-      "normalized": 93.3,
+      "normalized": 100.0,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -219,16 +219,16 @@
       "label": "AA-Omniscience Accuracy",
       "category": "rely",
       "weightPct": 3.0303,
-      "value": 35.0,
+      "value": 34.85,
       "unit": "% accuracy",
-      "normalized": 20.0,
+      "normalized": 16.7,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -236,16 +236,16 @@
       "label": "HLE",
       "category": "intel",
       "weightPct": 3.0303,
-      "value": 49.0,
+      "value": 49.35,
       "unit": "% accuracy",
-      "normalized": 66.7,
+      "normalized": 61.1,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -267,16 +267,16 @@
       "label": "SciCode",
       "category": "intel",
       "weightPct": 3.0303,
-      "value": 61.0,
+      "value": 60.88,
       "unit": "% score",
-      "normalized": 93.3,
+      "normalized": 83.3,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -284,24 +284,24 @@
       "label": "CritPt",
       "category": "intel",
       "weightPct": 2.2727,
-      "value": 27.0,
+      "value": 26.57,
       "unit": "% score",
-      "normalized": 60.0,
+      "normalized": 55.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": null,
-      "note": "Display precision: display-rounded.",
+      "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 206.66,
-    "planUsdPerRun": 137.77333333333334,
-    "planUsdPerPoint": 2.9950724637681163,
-    "planComparableUsdPerPoint": 2.9950724637681163,
+    "apiUsd": 206.65533881883294,
+    "planUsdPerRun": 137.77022587922195,
+    "planUsdPerPoint": 2.974043943675812,
+    "planComparableUsdPerPoint": 2.974043943675812,
     "fallback": null,
     "route": {
       "id": "mimo-provisional-user-assumption",
@@ -325,23 +325,35 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": null,
       "sourceDate": null,
-      "usdPerRun": 137.77333333333334,
-      "usdPerPoint": 2.9950724637681163,
+      "usdPerRun": 137.77022587922195,
+      "usdPerPoint": 2.974043943675812,
       "selected": true
     }
   ],
   "history": [
     {
       "version": "v1.9.6",
-      "date": "2026-10-08",
+      "date": null,
       "rank": {
         "api": 7,
-        "plan": 7
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.7",
+      "date": "2026-10-18",
+      "rank": {
+        "api": 9,
+        "plan": 9
       }
     }
   ],
   "frontier": {
     "onAaFrontier": true,
-    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as MiMo-V2.6-Pro."
+    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as MiMo-V2.6-Pro.",
+    "tier": "frontier",
+    "configuration": "MiMo-V2.6-Pro",
+    "intelligenceGap": 0,
+    "footnote": null
   }
 }

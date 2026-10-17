@@ -59,5 +59,33 @@
   "key": "methodology",
   "scripts": [
     "/assets/js/pages/static.js"
-  ]
+  ],
+  "modelInclusion": {
+    "frontierRule": "Frontier rule text.",
+    "nearFrontierRule": "Near rule text within 3 points.",
+    "policyText": "Policy sentence.",
+    "observation": "Chart observed 2026-10-17T18:48:27Z.",
+    "nearFrontierStatus": "Near-frontier models: 2 required, 0 deferred by roster decision.",
+    "frontierFamilies": [
+      {
+        "family": "GPT-6 Luna",
+        "configuration": "GPT-6 Luna (max)"
+      }
+    ],
+    "nearFrontierFamilies": [
+      {
+        "family": "Gemini 4 Argon",
+        "configuration": "Gemini 4 Argon (high)",
+        "gap": "2"
+      }
+    ],
+    "footnotes": [
+      {
+        "text": "Pricing footnote.",
+        "models": [
+          "Alpha Three"
+        ]
+      }
+    ]
+  }
 }

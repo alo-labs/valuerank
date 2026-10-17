@@ -72,9 +72,9 @@ def test_dimensions_mirror_the_score_weights(bundle, scores):
     assert all(d["sourceUrl"] for d in dims[1:])
 
 
-def test_roster_has_28_models_ranked_first(bundle, ranked):
+def test_roster_has_31_models_ranked_first(bundle, ranked):
     models = bundle.rankings["models"]
-    assert len(models) == 28
+    assert len(models) == 31
     leading = models[: len(ranked)]
     assert all(m["rankingEligible"] for m in leading)
     assert [m["rank"]["plan"] for m in leading] == list(range(1, len(ranked) + 1))
@@ -149,9 +149,9 @@ def test_dims_raw_and_coverage_for_a_known_model(bundle, ranked):
     sol = by_slug(bundle.rankings)["gpt-6-1-sol"]
     assert sol["name"] == "GPT-6.1 Sol" and sol["developer"] == "OpenAI"
     assert sol["aaVariant"] == "max" and sol["aaUrl"].endswith("/gpt-6-1-sol")
-    assert sol["dims"]["deepswePassAt1"] == 84.6
-    assert sol["raw"]["deepswePassAt1"] == 70.0 and sol["raw"]["bugHuntFixedOf105"] == 44.3
-    assert sol["raw"]["omniNonHallucination"] == 46.0
+    assert sol["dims"]["deepswePassAt1"] == 73.3
+    assert sol["raw"]["deepswePassAt1"] == 69.6 and sol["raw"]["bugHuntFixedOf105"] == 44.3
+    assert sol["raw"]["omniNonHallucination"] == 45.73
     assert sol["dims"]["terminalBenchV4"] is None and sol["raw"]["terminalBenchV4"] is None
     assert sol["coverage"] == {
         "pct": 88.64,
@@ -159,8 +159,8 @@ def test_dims_raw_and_coverage_for_a_known_model(bundle, ranked):
         "totalPriority": 132,
         "missing": ["Terminal-Bench 4.0", "Instruction Following (LiveBench)", "GPQA Diamond (legacy)"],
     }
-    assert sol["intelligenceIndex"] == {"value": 52.0, "status": "measured"}
-    assert sol["speed"] == 58.3 and sol["grade"] == "measured"
+    assert sol["intelligenceIndex"] == {"value": 51.8332597011541, "status": "measured"}
+    assert sol["speed"] == 66.030331930327 and sol["grade"] == "measured"
 
 
 def test_coverage_equals_committed_metric_coverage(bundle, ranked, scores):
@@ -180,8 +180,8 @@ def test_plan_meta_and_tiers(bundle, ranked):
         "asOf": "2026-10-08",
         "routeCount": 9,
         "supportedModelCount": 10,
-        "fallbackModelCount": 6,
-        "totalModelCount": 16,
+        "fallbackModelCount": 9,
+        "totalModelCount": 19,
     }
     models = by_slug(bundle.rankings)
     assert {models[s]["tier"] for s in models if models[s]["rankingEligible"]} <= {
@@ -222,9 +222,9 @@ def test_picks_show_three_different_models_with_data_driven_labels(bundle):
     for basis in ("api", "plan"):
         assert len({pick["slug"] for pick in picks[basis].values()}) == 3
     assert picks["plan"]["other"]["label"] == "Best at API rates"
-    assert models_rank(bundle, picks["plan"]["other"]["slug"]) == {"api": 1, "plan": 2}
+    assert models_rank(bundle, picks["plan"]["other"]["slug"]) == {"api": 1, "plan": 4}
     assert picks["api"]["other"]["label"] == "Best on a subscription"
-    assert models_rank(bundle, picks["api"]["other"]["slug"]) == {"api": 5, "plan": 1}
+    assert models_rank(bundle, picks["api"]["other"]["slug"]) == {"api": 6, "plan": 1}
 
 
 def models_rank(bundle, slug):
@@ -235,22 +235,22 @@ def models_rank(bundle, slug):
 
 
 def test_model_documents_cover_the_roster(bundle):
-    assert len(bundle.models) == 28
+    assert len(bundle.models) == 31
     assert set(bundle.models) == {m["slug"] for m in bundle.rankings["models"]}
 
 
 def test_model_document_dimensions_values_grades_and_sources(bundle, scores):
     doc = bundle.models["gpt-6-1-sol"]
     assert doc["selectedPage"] == "https://artificialanalysis.ai/models/gpt-6-1-sol"
-    assert doc["summary"]["rank"] == {"api": 1, "plan": doc["summary"]["rank"]["plan"]}
+    assert doc["summary"]["rank"] == {"api": 2, "plan": doc["summary"]["rank"]["plan"]}
     keys = [d["key"] for d in doc["dimensions"]]
     assert keys == [w["key"] for w in sorted(scores["weights"], key=lambda w: -w["weightPct"])]
     dims = {d["key"]: d for d in doc["dimensions"]}
     deepswe = dims["deepswePassAt1"]
-    assert deepswe["value"] == 70.0 and deepswe["unit"] == "% pass@1" and deepswe["normalized"] == 84.6
-    assert deepswe["grade"] == "measured" and deepswe["observedAt"] == "2026-10-08"
+    assert deepswe["value"] == 69.6 and deepswe["unit"] == "% pass@1" and deepswe["normalized"] == 73.3
+    assert deepswe["grade"] == "measured" and deepswe["observedAt"] == "2026-10-17T19:26:26Z"
     assert deepswe["evaluatedVariant"] == "Codex / GPT-6.1 Sol / max"
-    assert "Exact Codex GPT-6.1 Sol Max" in deepswe["note"]
+    assert "Exact variant" in deepswe["note"] and "GPT-6.1 Sol (max)" in deepswe["note"]
     assert deepswe["source"]["url"].startswith("https://artificialanalysis.ai/agents")
     bug = dims["bugHuntFixedOf105"]
     assert bug["value"] == 44.3 and bug["grade"] == "measured" and "GPT-6.1 Sol" in bug["evaluatedVariant"]
@@ -259,13 +259,13 @@ def test_model_document_dimensions_values_grades_and_sources(bundle, scores):
     assert missing["value"] is None and missing["grade"] == "missing" and missing["normalized"] is None
     assert missing["source"] is None and missing["observedAt"] is None
     cost = dims["costComposite"]
-    assert cost["value"] == 1081.55 and cost["grade"] == "measured"
+    assert cost["value"] == 1081.552560620246 and cost["grade"] == "measured"
     sol_entry = by_slug(bundle.rankings)["gpt-6-1-sol"]
     assert cost["normalized"] == sol_entry["costDims"]["api"]
     assert cost["normalizedByBasis"] == sol_entry["costDims"]
     index = dims["intelligenceIndex"]
-    assert index["value"] == 52.0 and index["source"]["url"].endswith("gpt-6-1-sol")
-    assert index["observedAt"] == "2026-10-07"
+    assert index["value"] == 51.8332597011541 and index["source"]["url"].endswith("gpt-6-1-sol")
+    assert index["observedAt"] == "2026-10-17"
 
 
 def test_model_document_provider_claim_and_estimated_index(bundle):
@@ -279,12 +279,12 @@ def test_model_document_provider_claim_and_estimated_index(bundle):
     assert index["grade"] == "estimate"
     owner = bundle.models["claude-opus-5"]
     tb4_owner = next(d for d in owner["dimensions"] if d["key"] == "terminalBenchV4")
-    assert tb4_owner["grade"] == "measured" and tb4_owner["value"] == 51.8
+    assert tb4_owner["grade"] == "measured" and tb4_owner["value"] == 53.9
     assert tb4_owner["source"]["url"] == "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
     assert "Claude Code" in tb4_owner["evaluatedVariant"]
     live = next(d for d in owner["dimensions"] if d["key"] == "livebenchInstructionFollowing")
     assert live["value"] == 63.7665 and live["evaluatedVariant"] == "claude-opus-5-max-effort"
-    assert live["source"]["url"] == "https://livebench.ai/" and live["observedAt"] == "2026-10-07"
+    assert live["source"]["url"] == "https://livebench.ai/" and live["observedAt"] == "2026-10-17"
 
 
 def test_model_document_plans_history_and_frontier(bundle):
@@ -296,7 +296,7 @@ def test_model_document_plans_history_and_frontier(bundle):
     first = opus["plans"][0]
     assert first["usdPerRun"] == pytest.approx(opus["cost"]["apiUsd"] / first["valueMultiple"])
     assert opus["cost"] == by_slug(bundle.rankings)["claude-opus-5-5"]["cost"]
-    assert [h["version"] for h in opus["history"]][-1] == "v1.9.6"
+    assert [h["version"] for h in opus["history"]][-1] == "v1.9.7"
     assert opus["history"][-1]["rank"] == opus["summary"]["rank"]
     assert opus["frontier"]["onAaFrontier"] is True
     assert "frontier" in opus["frontier"]["aaFrontierNote"].lower()
@@ -310,7 +310,9 @@ def test_model_document_plans_history_and_frontier(bundle):
 
 def test_models_absent_from_history_only_have_the_current_entry(bundle):
     sol = bundle.models["gpt-6-1-sol"]
-    assert [h["version"] for h in sol["history"]] == ["v1.9.6"]
+    assert [h["version"] for h in sol["history"]] == ["v1.9.6", "v1.9.7"]
+    new = bundle.models["gemini-4-argon"]
+    assert [h["version"] for h in new["history"]] == ["v1.9.7"]
     unranked = bundle.models["claude-fable-5"]
     assert [h["version"] for h in unranked["history"]] == ["v1.5.0"]
     assert unranked["summary"]["rankingEligible"] is False and unranked["summary"]["exclusionReasons"]
@@ -322,7 +324,7 @@ def test_models_absent_from_history_only_have_the_current_entry(bundle):
 def test_plans_document(bundle):
     plans = bundle.plans
     assert plans["asOf"] == "2026-10-08" and plans["policy"]["reportingWindow"]["start"] == "2026-09-08"
-    assert len(plans["routes"]) == 9 and len(plans["candidates"]) == 28
+    assert len(plans["routes"]) == 9 and len(plans["candidates"]) == 31
     route = next(r for r in plans["routes"] if r["id"] == "claude-pro-opus55-semianalysis")
     assert route["grade"] == "measured" and route["provider"] == "Anthropic"
     assert route["modelSlugs"] == ["claude-opus-5-5"] and route["planFeeUsd"] == 20
@@ -341,16 +343,16 @@ def test_benchmarks_document(bundle, scores):
     assert {"aa-intelligence-index", "deepswe", "bug-hunt", "livebench", "terminal-bench-4", "provider-claims"} <= set(ids)
     deepswe = next(s for s in doc["sources"] if s["id"] == "deepswe")
     assert deepswe["name"] == "DeepSWE v1.1" and deepswe["owner"] == "Artificial Analysis"
-    assert deepswe["weightPct"] == 18.9394 and deepswe["coverage"] == {"available": 14, "cohort": 16}
-    assert deepswe["observedAt"] == "2026-10-08"
+    assert deepswe["weightPct"] == 18.9394 and deepswe["coverage"] == {"available": 16, "cohort": 19}
+    assert deepswe["observedAt"] == "2026-10-17T19:26:26Z"
     tb4 = next(s for s in doc["sources"] if s["id"] == "terminal-bench-4")
-    assert tb4["coverage"]["cohort"] == 16 and tb4["url"] == "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+    assert tb4["coverage"]["cohort"] == 19 and tb4["url"] == "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
     assert sum(c["weightPct"] for c in doc["aaComponents"]) == 100
     assert all(c["url"].startswith("https://") for c in doc["aaComponents"])
-    assert doc["coverageMatrix"]["cohortN"] == 28 and "intelligenceIndex" in doc["coverageMatrix"]["fields"]
+    assert doc["coverageMatrix"]["cohortN"] == 31 and "intelligenceIndex" in doc["coverageMatrix"]["fields"]
     frontier = doc["frontier"]
-    assert frontier["status"] == "complete" and frontier["checkedAt"] == "2026-10-07T17:23:20+00:00"
-    assert len(frontier["rows"]) == 14
+    assert frontier["status"] == "complete" and frontier["checkedAt"] == "2026-10-17T19:28:57+00:00"
+    assert len(frontier["rows"]) == 18
     luna = next(r for r in frontier["rows"] if r["aaId"] == "gpt-6-luna")
     assert luna["slug"] == "gpt-6-luna"
     low = next(r for r in frontier["rows"] if r["aaId"] == "gpt-6-luna-low")
@@ -361,18 +363,18 @@ def test_tb4_document(bundle, data):
     tb4 = json.loads((data / "tb4.json").read_text())
     doc = bundle.tb4
     assert doc["rows"] == tb4["rows"] and doc["frontierCount"] >= 1
-    assert doc["cohortMapping"]["gpt-6-astra"]["rank"] == 1
+    assert doc["cohortMapping"]["gpt-6-astra"]["rank"] == 3
     assert doc["cohortMapping"]["deepseek-v4-flash"]["status"] == "provider_claim"
     assert doc["cohortMapping"]["gpt-6-1-sol"]["status"] == "missing"
     assert doc["cohortMapping"]["claude-opus-5"]["status"] == "official"
-    assert len(doc["cohortMapping"]) == 28
+    assert len(doc["cohortMapping"]) == 31
 
 
 def test_changelog_document(bundle):
     versions = bundle.changelog["versions"]
-    assert [v["version"] for v in versions] == ["v1.9.6", "v1.9.2", "v1.9.1", "v1.9.0", "v1.5.0"]
-    assert versions[0]["models"] == 16 and versions[0]["dimensions"] == 16
-    assert versions[0]["date"] == "October 8, 2026"
+    assert [v["version"] for v in versions] == ["v1.9.7", "v1.9.6", "v1.9.5", "v1.9.4", "v1.9.3", "v1.9.2", "v1.9.1", "v1.9.0", "v1.5.0"]
+    assert versions[0]["models"] == 19 and versions[0]["dimensions"] == 16
+    assert versions[0]["date"] == "October 18, 2026"
     assert versions[-1]["rankChanges"] == []
 
 
@@ -382,18 +384,18 @@ def test_changelog_document(bundle):
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
     assert set(page["headline"]) == {"api", "plan"}
-    assert page["headline"]["api"] == "GPT-6.1 Sol leads the API ranking at 74.3; Claude Opus 5.5 leads on quality."
-    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 77.3 and also leads on quality."
+    assert page["headline"]["api"] == "Gemini 4 Argon leads the API ranking at 74.1; Claude Sonnet 5.5 leads on quality."
+    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 76.9; Claude Sonnet 5.5 leads on quality."
     for sentence in page["headline"].values():
         assert len(sentence.split()) <= 18
     assert page["picks"] == bundle.rankings["picks"]
-    assert len(page["models"]) == 16
-    assert [m["rank"]["plan"] for m in page["models"]] == list(range(1, 17))
-    assert next(m for m in page["models"] if m["slug"] == "gpt-6-1-sol")["rank"]["api"] == 1
+    assert len(page["models"]) == 19
+    assert [m["rank"]["plan"] for m in page["models"]] == list(range(1, 20))
+    assert next(m for m in page["models"] if m["slug"] == "gpt-6-1-sol")["rank"]["api"] == 2
     assert {"slug", "name", "developer", "rank", "overall", "quality", "grade", "costDims", "cost", "coveragePct"} <= set(page["models"][0])
     assert page["dimensions"] == bundle.rankings["dimensions"]
     assert page["rankingsJson"] is bundle.rankings
-    assert len(page["chart"]["api"]) == 16 and len(page["chart"]["plan"]) == 16
+    assert len(page["chart"]["api"]) == 19 and len(page["chart"]["plan"]) == 19
     point = page["chart"]["plan"][0]
     assert set(point) == {"slug", "name", "x", "y", "pareto", "costLabel"}
 
@@ -467,7 +469,7 @@ def test_export_writes_every_public_file_deterministically(data, tmp_path):
     first = export.export_public_data(data, tmp_path / "one")
     second = export.export_public_data(data, tmp_path / "two")
     relative = sorted(p.relative_to(tmp_path / "one").as_posix() for p in first)
-    assert len(first) == 34
+    assert len(first) == 37
     assert relative[:5] == ["benchmarks.json", "benchmarks/terminal-bench-4.json", "changelog.json", "livebench.json", "models/claude-fable-5.json"]
     assert "plans.json" in relative and "rankings.json" in relative
     for left, right in zip(sorted(first), sorted(second)):

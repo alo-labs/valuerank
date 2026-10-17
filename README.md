@@ -1,60 +1,96 @@
 # ValueRank
 **Frontier AI model ranking focused on production value**
 
-**Version:** v1.9.6
-**Updated:** October 8, 2026
-**Scope:** 16 primary-ranked models from a 28-model AA-mapped comparison roster, 16 retained dimensions including Bug Hunt Bench
+**Version:** v1.9.7
+**Updated:** October 18, 2026
+**Scope:** 19 primary-ranked models from a 31-model AA-mapped comparison roster, 16 retained dimensions including Bug Hunt Bench
 
 Publication updated October 8, 2026 with the current AA frontier reconciliation and selected benchmark updates. The complete 31-configuration DeepSWE v1.1 chart was observed October 8; the original 25 configuration records retain their earlier per-row observation dates. Earlier AA component snapshots retain their recorded dates, while the newly captured AA frontier profiles are dated October 8 and MiMo owner run notes October 7. See per-model dates and capture precision in raw-data.md.
 
 ## Current result
 
-The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model represented on that observed frontier. The primary score uses each model's available exact-version values across the 16 retained dimensions; missing values remain null and each row's available priorities are renormalized to 100%. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
+The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model family on that observed frontier plus every near-frontier family (see Model inclusion below). The primary score uses each model's available exact-version values across the 16 retained dimensions; missing values remain null and each row's available priorities are renormalized to 100%. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
 
 | Rank | Model | Overall | Quality | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---|
-| 1 | GPT-6.1 Sol | 74.3 | 74.6 | 12.42 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 2 | GPT-5.6 Sol | 65.5 | 71.5 | 39.79 | 100.00% (132/132 priority) | Missing: none |
-| 3 | GPT-6 Astra | 64.2 | 72.9 | 43.67 | 100.00% (132/132 priority) | Missing: none |
-| 4 | GPT-6 Sol | 61.9 | 60.7 | 17.75 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 5 | Claude Opus 5.5 | 61.6 | 78.4 | 100.00 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 6 | Grok 4.7 | 58.4 | 70.1 | 57.04 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 7 | MiMo-V2.6-Pro | 54.1 | 41.9 | 2.37 | 69.70% (92/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy) |
-| 8 | MiMo-V2.6-Flash | 51.6 | 25.8 | 1.26 | 54.55% (72/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy), Bug Hunt Bench |
-| 9 | Kimi K3 | 46.2 | 49.6 | 42.01 | 91.67% (121/132 priority) | Missing: Terminal-Bench 4.0, Speed |
-| 10 | Grok 4.6 | 45.6 | 43.8 | 22.24 | 100.00% (132/132 priority) | Missing: none |
-| 11 | GPT-5.6 Luna | 43.3 | 34.8 | 3.67 | 100.00% (132/132 priority) | Missing: none |
-| 12 | Gemini 3.8 Flash | 42.7 | 38.7 | 18.63 | 100.00% (132/132 priority) | Missing: none |
-| 13 | GLM-5.3 | 36.7 | 34.3 | 28.75 | 100.00% (132/132 priority) | Missing: none |
-| 14 | GPT-6 Luna | 36.5 | 21.8 | 1.40 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 15 | Claude Opus 5 | 35.8 | 42.6 | 83.54 | 100.00% (132/132 priority) | Missing: none |
-| 16 | Qwen3.8 Max | 26.7 | 28.3 | 56.67 | 95.45% (126/132 priority) | Missing: Terminal-Bench 4.0 |
+| 1 | Gemini 4 Argon | 74.1 | 82.6 | 27.64 | 84.85% (112/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy), Speed |
+| 2 | GPT-6.1 Sol | 70.1 | 71.0 | 12.42 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 3 | Claude Sonnet 5.5 | 69.5 | 85.4 | 83.36 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 4 | GPT-6 Astra | 64.1 | 75.2 | 43.67 | 81.06% (107/132 priority) | Missing: DeepSWE v1.1 |
+| 5 | GPT-5.6 Sol | 62.9 | 69.8 | 39.79 | 100.00% (132/132 priority) | Missing: none |
+| 6 | Claude Opus 5.5 | 60.3 | 76.7 | 100.00 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 7 | GPT-6 Sol | 58.6 | 59.3 | 17.64 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 8 | Grok 4.7 | 56.6 | 66.9 | 57.04 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 9 | MiMo-V2.6-Pro | 53.7 | 42.7 | 2.37 | 69.70% (92/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy) |
+| 10 | MiMo-V2.6-Flash | 50.7 | 24.5 | 1.26 | 54.55% (72/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy), Bug Hunt Bench |
+| 11 | GPT-5.6 Luna | 46.0 | 38.6 | 3.67 | 100.00% (132/132 priority) | Missing: none |
+| 12 | Gemini 3.8 Flash | 43.5 | 42.0 | 18.63 | 100.00% (132/132 priority) | Missing: none |
+| 13 | GPT-6 Luna | 42.4 | 29.0 | 1.40 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 14 | Claude Opus 5 | 40.7 | 48.9 | 83.54 | 100.00% (132/132 priority) | Missing: none |
+| 15 | GLM-5.3 | 40.5 | 40.8 | 28.75 | 100.00% (132/132 priority) | Missing: none |
+| 16 | Claude Haiku 5.5 | 37.9 | 24.0 | 1.81 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 17 | DeepSeek V4 Flash | 31.4 | 21.9 | 5.45 | 100.00% (132/132 priority) | Missing: none |
+| 18 | Qwen3.8 Max | 31.3 | 33.5 | 56.67 | 95.45% (126/132 priority) | Missing: Terminal-Bench 4.0 |
+| 19 | DeepSeek V4 Pro | 26.5 | 17.9 | 12.89 | 95.45% (126/132 priority) | Missing: Terminal-Bench 4.0 |
 
-The current Pareto frontier—undominated on composite cost versus quality—is: **Claude Opus 5.5, GPT-6.1 Sol, MiMo-V2.6-Pro, MiMo-V2.6-Flash**.
+The current Pareto frontier—undominated on composite cost versus quality—is: **GPT-6.1 Sol, GPT-6 Luna, MiMo-V2.6-Pro, MiMo-V2.6-Flash, Claude Sonnet 5.5, Gemini 4 Argon**.
+
+## Model inclusion
+
+**Frontier rule.** Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA's rendered line as observed; ValueRank never recomputes it from rounded values.
+
+**Near-frontier rule.** A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked (its selected configuration may differ from the near configuration) or is explicitly deferred by a dated, reasoned roster decision. The cost ratio to the frontier is reported for information only.
+
+Policy as recorded: A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only.
+
+Chart observed 2026-10-17T18:48:27Z (Intelligence Index v4.3.2): 694 catalog models selected, 189 plotted points and 18 rendered Pareto vertices across 7 families. 9 plotted points across 6 families are near-frontier.
+
+Near-frontier models: 6 required, 0 deferred by roster decision.
+
+Frontier families and the configuration selected for each:
+
+- Claude Haiku 5.5: Claude Haiku 5.5 (xhigh)
+- Claude Opus 5.5: Claude Opus 5.5 (max with fallback)
+- Claude Sonnet 5.5: Claude Sonnet 5.5 (max with fallback)
+- GPT-6 Luna: GPT-6 Luna (max)
+- GPT-6.1 Sol: GPT-6.1 Sol (max)
+- MiMo-V2.6-Flash: MiMo-V2.6-Flash
+- MiMo-V2.6-Pro: MiMo-V2.6-Pro
+
+Near-frontier families and the configuration selected for each:
+
+- Claude Haiku 5.5: Claude Haiku 5.5 (low), 1 Index points below the frontier
+- Claude Opus 5.5: Claude Opus 5.5 (medium with fallback), 1 Index points below the frontier
+- Claude Sonnet 5.5: Claude Sonnet 5.5 (xhigh with fallback), 2 Index points below the frontier
+- GPT-5.6 Luna: GPT-5.6 Luna (low), 1 Index points below the frontier
+- GPT-6 Astra: GPT-6 Astra (xhigh), 2 Index points below the frontier
+- Gemini 4 Argon: Gemini 4 Argon (high), 1 Index points below the frontier
+
+AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.
 
 ## Refresh basis and v1.9 scoring update
 
-- The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **12** candidates have no rankable primary score: **Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, DeepSeek V4 Pro, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Muse Spark 1.2**.
+- The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **12** candidates have no rankable primary score: **Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Grok 4.6, Kimi K3, Muse Spark 1.2**.
 - For each model, ValueRank retains only its observed metrics, renormalizes that row's available dimension priorities, and reports `availablePriority / totalPriority` coverage plus missing metric names. No missing value receives a zero or neutral fill.
 - Bug Hunt Bench has priority **20** and weight **15.15%** in the main rank. DeepSWE v1.1 has priority **25** and weight **18.94%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
-- AA's Coding Agent Index v1.5 chart reports **31 configurations** for DeepSWE v1.1 across **113 tasks**, observed **2026-10-08**. All configurations and model-version mapping decisions are retained in [data/aa_deepswe.json](data/aa_deepswe.json); **14** configurations map to selected model variants.
+- AA's Coding Agent Index v1.5 chart reports **42 configurations** for DeepSWE v1.1 across **113 tasks**, observed **2026-10-17T19:26:26Z**. All configurations and model-version mapping decisions are retained in [data/aa_deepswe.json](data/aa_deepswe.json); **16** configurations map to selected model variants.
 - Artificial Analysis now uses **Artificial Analysis Intelligence Index v4.3.2**: AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-LCR v1.1, and split AA-Omniscience accuracy/reliability components. τ³-Banking and Terminal-Bench 2.1 remain historical source fields only.
-- The standalone Terminal-Bench page has **14 official rows**, including **11/28** direct cohort matches. One separately labelled DeepSeek V4.1-Flash provider claim is used for the current `deepseek-v4-flash` API alias; official and claim counts are kept distinct.
+- The standalone Terminal-Bench page has **23 official rows**, including **11/31** direct cohort matches. One separately labelled DeepSeek V4.1-Flash provider claim is used for the current `deepseek-v4-flash` API alias; official and claim counts are kept distinct.
 - **[LiveBench](https://livebench.ai/) 2026-06-25** provides the four-task Instruction Following mean plus Overall Score and Cost Per Successful Task views; Instruction Following contributes where a selected model has an eligible value and is included in the row's available-priority calculation.
-- The companion Bug Hunt emphasis ranking covers **14** eligible exact-variant owner results and raises Bug Hunt to **21.13%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [data/bug_hunt.json](data/bug_hunt.json).
-- The AA chart's full **31-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
+- The companion Bug Hunt emphasis ranking covers **16** eligible exact-variant owner results and raises Bug Hunt to **21.13%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [data/bug_hunt.json](data/bug_hunt.json).
+- The AA chart's full **42-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
 - The score retains **16 primary dimensions**; **none** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
-- AA output speed is numeric for **15/16** selected pages; **Kimi K3** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
-- AA total evaluation cost is available for **16/16** primary models. API Costs uses that amount where available; Plan Costs divides the same amount by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point), and both views renormalize each row over its available dimensions.
+- AA output speed is numeric for **18/19** selected pages; **Gemini 4 Argon** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
+- AA total evaluation cost is available for **19/19** primary models. API Costs uses that amount where available; Plan Costs divides the same amount by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point), and both views renormalize each row over its available dimensions.
 - Earlier ValueRank versions are not numerically comparable because this release changes benchmark weights and the ranked cohort.
 
 ## Sources and audit trail
 
-- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete 31-configuration chart inventory, observed 2026-10-08, and model-variant decisions are recorded in [data/aa_deepswe.json](data/aa_deepswe.json).
+- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete 42-configuration chart inventory, observed 2026-10-17T19:26:26Z, and model-variant decisions are recorded in [data/aa_deepswe.json](data/aa_deepswe.json).
 - [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
 - [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench), pinned at [release data commit 7be9f746f36a6f007dd78461f67cb7d06cfe2304](https://github.com/livebench/new-livebench/commit/7be9f746f36a6f007dd78461f67cb7d06cfe2304), for the 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
 - [Terminal-Bench 4.0](https://www.tbench.ai/) and the [official Harbor repository](https://github.com/harbor-framework/terminal-bench) for the current rendered leaderboard and task identity.
-- [Bug Hunt Bench](https://bughunt.productcompass.pm/), with owner-published [combined scoreboard](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv) and [run notes](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md) pinned to commit **0630b120a81363c343ed7dfaf3c6d3be7f7da38c**.
+- [Bug Hunt Bench](https://bughunt.productcompass.pm/), with owner-published [combined scoreboard](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv) and [run notes](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md) pinned to commit **aec976170df89a371384174ca87646a9a8c82415**.
 - [Refresh record](research/2026-09-29-valuerank-refresh-v4-3-2/README.md) for the v4.3.2 source change, evidence boundary, provider claims, and scoring decisions.
 - [Provider claim ledger](data/provider_claims.json) for provider-sourced values, eligibility, and alias/variant caveats. Provider values never masquerade as benchmark-owner measurements.
 - [Coverage matrix](data/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
@@ -73,24 +109,37 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 
 ## AA intelligence and total-cost comparison
 
-Observed 2026-10-07T16:22:14Z; Artificial Analysis Intelligence Index v4.3.2. Scope: Complete displayed intelligence versus total evaluation cost Pareto line with all 691 catalog models selected; 173 eligible plotted points. This is not ValueRank's composite-quality frontier.. Reconciliation: reconciled. This view compares AA intelligence index with AA total evaluation cost in USD. Primary composite-rank eligibility is shown separately. Membership is AA's directly observed displayed frontier; no frontier is recomputed from these rows. Source selected 691 models, plotted 173 eligible points, and displayed 14 frontier points. Public metric/export gaps are shown explicitly. All 5 distinct frontier model families are required in the main ranking using exact selected configurations; 5 are included. Other effort configurations remain separate comparison entries.
+Observed 2026-10-17T18:48:27Z; Artificial Analysis Intelligence Index v4.3.2. Scope: Complete displayed intelligence versus total evaluation cost Pareto line with all 694 catalog models selected; 189 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.. Reconciliation: reconciled. This view compares AA intelligence index with AA total evaluation cost in USD. Primary composite-rank eligibility is shown separately. Membership is AA's directly observed displayed frontier; no frontier is recomputed from these rows. Source selected 694 models, plotted 189 eligible points, and displayed 18 frontier points. Public metric/export gaps are shown explicitly. All 7 distinct frontier model families are required in the main ranking using exact selected configurations; 7 are included. Other effort configurations remain separate comparison entries. 9 plotted configurations from 6 families lie within 3 Index points of the rendered frontier; 6 of those families are in the main ranking, 0 are deferred.
 
 | Exact AA model | AA ID | Intelligence index | Total evaluation cost (USD) | Observed comparison | Primary rank status | Primary evidence gaps |
 |---|---|---|---|---|---|---|
-| [GPT-6 Luna (low)](https://artificialanalysis.ai/models/gpt-6-luna-low) | gpt-6-luna-low | 22 (rounded) | $10.63 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
-| [GPT-6 Luna (medium)](https://artificialanalysis.ai/models/gpt-6-luna-medium) | gpt-6-luna-medium | 30 (rounded) | $31.17 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
-| [GPT-6 Luna (high)](https://artificialanalysis.ai/models/gpt-6-luna-high) | gpt-6-luna-high | 33 (rounded) | $47.85 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
-| [GPT-6 Luna (xhigh)](https://artificialanalysis.ai/models/gpt-6-luna-xhigh) | gpt-6-luna-xhigh | 35 (rounded) | $66.81 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
-| [MiMo-V2.6-Flash](https://artificialanalysis.ai/models/mimo-v2-6-flash) | mimo-v2-6-flash | 38 (rounded) | $109.41 | Observed AA frontier | Primary ranked | None |
+| [GPT-6 Luna (low)](https://artificialanalysis.ai/models/gpt-6-luna-low) | gpt-6-luna-low | 22 (rounded) | $10.63 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the GPT-6 Luna family is represented in the primary ranking by its selected configuration (gpt-6-luna). No result is transferred between efforts. |
+| [GPT-6 Luna (medium)](https://artificialanalysis.ai/models/gpt-6-luna-medium) | gpt-6-luna-medium | 30 (rounded) | $31.17 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the GPT-6 Luna family is represented in the primary ranking by its selected configuration (gpt-6-luna). No result is transferred between efforts. |
+| [GPT-6 Luna (high)](https://artificialanalysis.ai/models/gpt-6-luna-high) | gpt-6-luna-high | 33 (rounded) | $47.85 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the GPT-6 Luna family is represented in the primary ranking by its selected configuration (gpt-6-luna). No result is transferred between efforts. |
+| [Claude Haiku 5.5 (medium)](https://artificialanalysis.ai/models/claude-haiku-5-5-medium) | claude-haiku-5-5-medium | 34 (rounded) | $56.36 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts. |
+| [GPT-6 Luna (xhigh)](https://artificialanalysis.ai/models/gpt-6-luna-xhigh) | gpt-6-luna-xhigh | 35 (rounded) | $66.81 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the GPT-6 Luna family is represented in the primary ranking by its selected configuration (gpt-6-luna). No result is transferred between efforts. |
+| [Claude Haiku 5.5 (high)](https://artificialanalysis.ai/models/claude-haiku-5-5-high) | claude-haiku-5-5-high | 38 (rounded) | $94.07 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts. |
+| [MiMo-V2.6-Flash](https://artificialanalysis.ai/models/mimo-v2-6-flash) | mimo-v2-6-flash | 38 (rounded) | $109.55 | Observed AA frontier | Primary ranked | None |
 | [GPT-6 Luna (max)](https://artificialanalysis.ai/models/gpt-6-luna) | gpt-6-luna | 38 (rounded) | $122.05 | Observed AA frontier | Primary ranked | None |
+| [Claude Haiku 5.5 (xhigh)](https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh) | claude-haiku-5-5-xhigh | 41 (rounded) | $157.58 | Observed AA frontier | Primary ranked | None |
 | [MiMo-V2.6-Pro](https://artificialanalysis.ai/models/mimo-v2-6-pro) | mimo-v2-6-pro | 46 (rounded) | $206.66 | Observed AA frontier | Primary ranked | None |
-| [GPT-6.1 Sol (medium)](https://artificialanalysis.ai/models/gpt-6-1-sol-medium) | gpt-6-1-sol-medium | 48 (rounded) | $361.37 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
-| [GPT-6.1 Sol (high)](https://artificialanalysis.ai/models/gpt-6-1-sol-high) | gpt-6-1-sol-high | 50 (rounded) | $521.32 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
-| [GPT-6.1 Sol (xhigh)](https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh) | gpt-6-1-sol-xhigh | 51 (rounded) | $662.28 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
+| [GPT-6.1 Sol (medium)](https://artificialanalysis.ai/models/gpt-6-1-sol-medium) | gpt-6-1-sol-medium | 48 (rounded) | $361.37 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts. |
+| [GPT-6.1 Sol (high)](https://artificialanalysis.ai/models/gpt-6-1-sol-high) | gpt-6-1-sol-high | 50 (rounded) | $521.32 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts. |
+| [GPT-6.1 Sol (xhigh)](https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh) | gpt-6-1-sol-xhigh | 51 (rounded) | $662.28 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts. |
 | [GPT-6.1 Sol (max)](https://artificialanalysis.ai/models/gpt-6-1-sol) | gpt-6-1-sol | 52 (rounded) | $1,081.55 | Observed AA frontier | Primary ranked | None |
-| [Claude Opus 5.5 (high with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-high) | claude-opus-5-5-high | 54 (rounded) | $2,172.43 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
-| [Claude Opus 5.5 (xhigh with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-xhigh) | claude-opus-5-5-xhigh | 56 (rounded) | $4,056.65 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-07T16:22:14Z: Alternate effort retained in the AA frontier comparison; the same model family is required in the primary ranking using its selected exact frontier configuration. No result is transferred between efforts. |
+| [Claude Opus 5.5 (high with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-high) | claude-opus-5-5-high | 54 (rounded) | $2,172.43 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the Claude Opus 5.5 family is represented in the primary ranking by its selected configuration (claude-opus-5-5). No result is transferred between efforts. |
+| [Claude Opus 5.5 (xhigh with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-xhigh) | claude-opus-5-5-xhigh | 56 (rounded) | $4,056.65 | Observed AA frontier | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA frontier comparison; the Claude Opus 5.5 family is represented in the primary ranking by its selected configuration (claude-opus-5-5). No result is transferred between efforts. |
+| [Claude Sonnet 5.5 (max with fallback)](https://artificialanalysis.ai/models/claude-sonnet-5-5) | claude-sonnet-5-5 | 56 (rounded) | $7,259.50 | Observed AA frontier | Primary ranked | None |
 | [Claude Opus 5.5 (max with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5) | claude-opus-5-5 | 58 (rounded) | $8,708.20 | Observed AA frontier | Primary ranked | None |
+| [GPT-5.6 Luna (low)](https://artificialanalysis.ai/models/gpt-5-6-luna-low) | gpt-5-6-luna-low | 21 (rounded) | $27.02 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the GPT-5.6 Luna family is represented in the primary ranking by its selected configuration (gpt-5-6-luna). No result is transferred between efforts. |
+| [Claude Haiku 5.5 (low)](https://artificialanalysis.ai/models/claude-haiku-5-5-low) | claude-haiku-5-5-low | 29 (rounded) | $34.31 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts. |
+| [Claude Haiku 5.5 (max)](https://artificialanalysis.ai/models/claude-haiku-5-5) | claude-haiku-5-5 | 43 (rounded) | $330.25 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts. |
+| [Claude Opus 5.5 (medium with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-medium) | claude-opus-5-5-medium | 51 (rounded) | $1,626.81 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the Claude Opus 5.5 family is represented in the primary ranking by its selected configuration (claude-opus-5-5). No result is transferred between efforts. |
+| [Claude Sonnet 5.5 (xhigh with fallback)](https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh) | claude-sonnet-5-5-xhigh | 52 (rounded) | $2,176.82 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the Claude Sonnet 5.5 family is represented in the primary ranking by its selected configuration (claude-sonnet-5-5). No result is transferred between efforts. |
+| [Gemini 4 Argon (high)](https://artificialanalysis.ai/models/gemini-4-argon) | gemini-4-argon | 53 (rounded) | $2,407.24 | Near AA frontier (within 3 Index points) | Primary ranked | None |
+| [GPT-6 Astra (high)](https://artificialanalysis.ai/models/gpt-6-astra-high) | gpt-6-astra-high | 51 (rounded) | $2,925.01 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the GPT-6 Astra family is represented in the primary ranking by its selected configuration (gpt-6-astra-xhigh). No result is transferred between efforts. |
+| [GPT-6 Astra (xhigh)](https://artificialanalysis.ai/models/gpt-6-astra-xhigh) | gpt-6-astra-xhigh | 52 (rounded) | $3,802.98 | Near AA frontier (within 3 Index points) | Primary ranked | None |
+| [GPT-6 Astra (max)](https://artificialanalysis.ai/models/gpt-6-astra) | gpt-6-astra | 53 (rounded) | $5,324.10 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the GPT-6 Astra family is represented in the primary ranking by its selected configuration (gpt-6-astra-xhigh). No result is transferred between efforts. |
 
 
 ## Plan Costs candidate comparison
@@ -99,33 +148,36 @@ Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API e
 
 | Model | Primary rank | AA Intelligence Index | API evaluation cost | Effective Plan evaluation cost | Effective Plan cost per Index point | Selected plan / multiple | Evidence / source variant | Source date | Source |
 |---|---|---|---|---|---|---|---|---|---|
-| GPT-6.1 Sol | 1 | 52.00 | $1,081.55 | $100.40 | $1.93 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-5.6 Sol | 2 | 46.97 | $3,464.84 | $321.65 | $6.85 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-6 Astra | 3 | 52.39 | $3,802.98 | $353.04 | $6.74 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-6 Sol | 4 | 47.53 | $1,545.83 | $143.50 | $3.02 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5.5 | 5 | 57.62 | $8,708.20 | $147.85 | $2.57 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Grok 4.7 | 6 | 46.45 | $4,967.35 | $858.66 | $18.49 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
-| MiMo-V2.6-Pro | 7 | 46 (rounded) | $206.66 | $137.77 | $3.00 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| MiMo-V2.6-Flash | 8 | 38 (rounded) | $109.41 | $72.94 | $1.92 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| Kimi K3 | 9 | 43.59 | $3,658.07 | API fallback | $83.91 (API fallback) | No eligible route | API fallback | — | — |
-| Grok 4.6 | 10 | 42.84 | $1,936.75 | API fallback | $45.21 (API fallback) | No eligible route | API fallback | — | — |
+| Gemini 4 Argon | 1 | 52.56 | $2,407.24 | API fallback | $45.80 (API fallback) | No eligible route | API fallback | — | — |
+| GPT-6.1 Sol | 2 | 51.83 | $1,081.55 | $100.40 | $1.94 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Sonnet 5.5 | 3 | 56.00 | $7,259.50 | API fallback | $129.63 (API fallback) | No eligible route | API fallback | — | — |
+| GPT-6 Astra | 4 | 52.39 | $3,802.98 | $353.04 | $6.74 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-5.6 Sol | 5 | 46.97 | $3,464.84 | $321.65 | $6.85 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Opus 5.5 | 6 | 57.62 | $8,708.20 | $147.85 | $2.57 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-6 Sol | 7 | 47.63 | $1,535.80 | $142.57 | $2.99 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Grok 4.7 | 8 | 46.45 | $4,967.35 | $858.66 | $18.49 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
+| MiMo-V2.6-Pro | 9 | 46.32 | $206.66 | $137.77 | $2.97 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
+| MiMo-V2.6-Flash | 10 | 37.88 | $109.55 | $73.03 | $1.93 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
 | GPT-5.6 Luna | 11 | 37.32 | $319.93 | $29.70 | $0.80 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Gemini 3.8 Flash | 12 | 40.93 | $1,622.73 | API fallback | $39.65 (API fallback) | No eligible route | API fallback | — | — |
-| GLM-5.3 | 13 | 44.78 | $2,503.48 | API fallback | $55.91 (API fallback) | No eligible route | API fallback | — | — |
-| GPT-6 Luna | 14 | 37.26 | $122.05 | $11.33 | $0.30 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5 | 15 | 50.78 | $7,274.74 | API fallback | $143.27 (API fallback) | No eligible route | API fallback | — | — |
-| Qwen3.8 Max | 16 | 45.42 | $4,934.79 | API fallback | $108.66 (API fallback) | No eligible route | API fallback | — | — |
+| GPT-6 Luna | 13 | 38.12 | $122.05 | $11.33 | $0.30 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Opus 5 | 14 | 50.78 | $7,274.74 | API fallback | $143.27 (API fallback) | No eligible route | API fallback | — | — |
+| GLM-5.3 | 15 | 44.78 | $2,503.48 | API fallback | $55.91 (API fallback) | No eligible route | API fallback | — | — |
+| Claude Haiku 5.5 | 16 | 41.25 | $157.58 | API fallback | $3.82 (API fallback) | No eligible route | API fallback | — | — |
+| DeepSeek V4 Flash | 17 | 34.33 | $474.19 | API fallback | $13.81 (API fallback) | No eligible route | API fallback | — | — |
+| Qwen3.8 Max | 18 | 45.42 | $4,934.79 | API fallback | $108.66 (API fallback) | No eligible route | API fallback | — | — |
+| DeepSeek V4 Pro | 19 | 36.00 | $1,122.27 | API fallback | $31.18 (API fallback) | No eligible route | API fallback | — | — |
 | Claude Fable 5 | Unranked candidate | 49.63 | $11,160.86 | API fallback | $224.90 (API fallback) | No eligible route | API fallback | — | — |
 | Claude Opus 4.8 | Unranked candidate | 41.79 | $6,873.86 | API fallback | $164.49 (API fallback) | No eligible route | API fallback | — | — |
 | Claude Sonnet 5 | Unranked candidate | 38.16 | $6,998.25 | API fallback | $183.37 (API fallback) | No eligible route | API fallback | — | — |
-| DeepSeek V4 Flash | Unranked candidate | 34.33 | $474.19 | API fallback | $13.81 (API fallback) | No eligible route | API fallback | — | — |
-| DeepSeek V4 Pro | Unranked candidate | 36.00 | $1,122.27 | API fallback | $31.18 (API fallback) | No eligible route | API fallback | — | — |
 | GLM-5.2 | Unranked candidate | 33.71 | $2,097.29 | API fallback | $62.22 (API fallback) | No eligible route | API fallback | — | — |
-| GLM-5.3 Flash | Unranked candidate | 41.81 | $280.28 | API fallback | $6.70 (API fallback) | No eligible route | API fallback | — | — |
+| GLM-5.3 Flash | Unranked candidate | 41.81 | $305.52 | API fallback | $7.31 (API fallback) | No eligible route | API fallback | — | — |
 | GPT-5.5 | Unranked candidate | 38.36 | $5,294.36 | $491.49 | $12.81 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Gemini 3.5 Flash | Unranked candidate | 32.60 | $2,172.43 | API fallback | $66.64 (API fallback) | No eligible route | API fallback | — | — |
-| Gemini 3.6 Flash | Unranked candidate | 33.98 | $1,036.81 | API fallback | $30.51 (API fallback) | No eligible route | API fallback | — | — |
+| Gemini 3.5 Flash | Unranked candidate | 32.60 | $4,222.12 | API fallback | $129.52 (API fallback) | No eligible route | API fallback | — | — |
+| Gemini 3.6 Flash | Unranked candidate | 33.98 | $1,614.42 | API fallback | $47.51 (API fallback) | No eligible route | API fallback | — | — |
 | Gemini 3.7 Flash | Unranked candidate | 39.62 (estimated) | Not established | API fallback | Not established | No eligible route | API fallback | — | — |
+| Grok 4.6 | Unranked candidate | 42.84 | $1,557.04 | API fallback | $36.35 (API fallback) | No eligible route | API fallback | — | — |
+| Kimi K3 | Unranked candidate | 43.59 | $3,658.07 | API fallback | $83.91 (API fallback) | No eligible route | API fallback | — | — |
 | Muse Spark 1.2 | Unranked candidate | 39.58 | $1,385.40 | API fallback | $35.01 (API fallback) | No eligible route | API fallback | — | — |
 
 ### Plan route evidence

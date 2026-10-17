@@ -1,7 +1,7 @@
 {
   "schemaVersion": "valuerank-livebench-v1",
   "release": "2026_06_25",
-  "observedAt": "2026-10-07T14:30:13Z",
+  "observedAt": "2026-10-17T19:26:16Z",
   "source": {
     "publisher": "LiveBench",
     "homepage": "https://livebench.ai/",
@@ -76,28 +76,18 @@
       "summarize"
     ]
   },
-  "cohortN": 28,
+  "cohortN": 31,
   "matchedN": 24,
   "missingModels": [
-    "GPT-6.1 Sol",
     "Claude Opus 5.5",
+    "GPT-6.1 Sol",
     "MiMo-V2.6-Pro",
-    "MiMo-V2.6-Flash"
+    "MiMo-V2.6-Flash",
+    "Claude Haiku 5.5",
+    "Claude Sonnet 5.5",
+    "Gemini 4 Argon"
   ],
   "models": {
-    "gpt-6.1-sol": {
-      "modelId": "gpt-6.1-sol",
-      "name": "GPT-6.1 Sol",
-      "livebenchModel": null,
-      "matched": false,
-      "matchStatus": "no_verified_exact_mapping",
-      "coverageNote": "No verified exact result in the retained June 25 LiveBench release. Added to the source cohort October 8; no new benchmark observation or score is imputed.",
-      "tasks": {},
-      "categoryScores": {},
-      "overallScore": null,
-      "instructionFollowingScore": null,
-      "costPerSuccessfulTaskUsd": null
-    },
     "gpt-6-astra": {
       "modelId": "gpt-6-astra",
       "name": "GPT-6 Astra",
@@ -1101,6 +1091,19 @@
       "instructionFollowingScore": 68.57475,
       "costPerSuccessfulTaskUsd": 0.2685
     },
+    "gpt-6.1-sol": {
+      "modelId": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
     "gpt-6-luna": {
       "modelId": "gpt-6-luna",
       "name": "GPT-6 Luna",
@@ -1207,6 +1210,45 @@
     "mimo-v2-6-flash": {
       "modelId": "mimo-v2-6-flash",
       "name": "MiMo-V2.6-Flash",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "claude-haiku-5-5": {
+      "modelId": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "claude-sonnet-5-5": {
+      "modelId": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "gemini-4-argon": {
+      "modelId": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
       "livebenchModel": null,
       "matched": false,
       "matchStatus": "no_verified_exact_mapping",

@@ -29,7 +29,7 @@
     "rankingEligible": false,
     "exclusionReasons": [
       "No exact-variant AA DeepSWE result in the selected source snapshot",
-      "Not a required selected AA frontier family model"
+      "Not a required AA frontier or near-frontier family model"
     ]
   },
   "dimensions": [
@@ -45,7 +45,7 @@
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured",
@@ -78,11 +78,11 @@
       "normalized": null,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": null
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-muse-spark-12-default-effort-openrouter"
       },
-      "observedAt": null,
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "Muse Spark 1.2 (default effort, OpenRouter)",
-      "note": "The alternative 17/105 xhigh row mixes Meta-direct and OpenRouter routes across its two repository legs; the run notes identify 14/105 as the single-route row.",
+      "note": "The alternative 17/105 xhigh row mixes Meta-direct and OpenRouter routes across its two repository legs; the run notes identify 14/105 as the single-route row. The owner's run notes tag the 14/105 row 'Superseded' by the Meta-API xhigh row, but that row (17/105) is a mixed-route result by the owner's own caveat, so the single-route 14/105 row remains the match under the matching policy.",
       "grade": "measured"
     },
     {
@@ -97,7 +97,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -121,14 +121,14 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1481.62,
+      "value": 1472.97,
       "unit": "Elo",
       "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -145,7 +145,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -162,7 +162,7 @@
         "name": "LiveBench release 2026_06_25",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "muse-spark-1.2-xhigh",
       "note": null,
       "grade": "measured"
@@ -179,7 +179,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -189,14 +189,14 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 240.062257356533,
+      "value": 369.216186861067,
       "unit": "tokens per second",
       "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -213,7 +213,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -230,7 +230,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -247,7 +247,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -264,7 +264,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -281,7 +281,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -298,7 +298,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/muse-spark-1-2"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -325,6 +325,10 @@
   ],
   "frontier": {
     "onAaFrontier": false,
-    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
   }
 }

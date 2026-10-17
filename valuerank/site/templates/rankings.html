@@ -3,6 +3,7 @@
 {%- from "partials/cost_slider.html" import cost_slider -%}
 {%- from "partials/table.html" import head_cells -%}
 {%- from "partials/chart.html" import chart -%}
+{%- from "partials/badge.html" import tier_badge -%}
 {% block content %}
 <header class="page-head">
   <p class="eyebrow">The full instrument</p>
@@ -90,6 +91,14 @@
       <div id="compare-body" class="compare-body"></div>
       <p class="note">Pick two to four models with the checkbox on each row.</p>
     </aside>
+
+    <section class="block" id="frontier-legend" aria-labelledby="frontier-legend-title">
+      <h2 id="frontier-legend-title" class="section-title">Frontier badges</h2>
+      <ul class="badge-legend">
+        <li>{{ tier_badge("frontier") }} <span>The model family sits on the Pareto frontier Artificial Analysis draws for Intelligence Index against cost to run, as observed.</span></li>
+        <li>{{ tier_badge("near") }} <span>Its public Intelligence Index is within {{ page.nearFrontierGap }} Index points of that frontier at its cost. Hover a badge for the configuration and gap.</span></li>
+      </ul>
+    </section>
 
     <section class="block" aria-labelledby="chart-title">
       <h2 id="chart-title" class="section-title">Quality against cost</h2>

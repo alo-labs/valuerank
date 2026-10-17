@@ -50,6 +50,18 @@ function coverageCell(doc, model, expanded) {
   return [h(doc, 'span', { class: 'cov' }, ...summary, button), panel];
 }
 
+const TIER_LABELS = { frontier: 'AA frontier', near: 'Near frontier' };
+
+function tierBadge(doc, model) {
+  const tier = model.aaFrontierTier;
+  if (!TIER_LABELS[tier]) return null;
+  const config = model.aaFrontierConfiguration;
+  const title = tier === 'frontier'
+    ? `${config ? `${config} is` : 'Selected configuration is'} on the rendered AA frontier.`
+    : `${config ? `${config} is` : 'A plotted configuration is'} within ${Number.isFinite(model.aaFrontierIntelligenceGap) ? `${model.aaFrontierIntelligenceGap} Index point${model.aaFrontierIntelligenceGap === 1 ? '' : 's'}` : 'the policy gap'} of the rendered AA frontier at its cost.`;
+  return h(doc, 'span', { class: `badge badge-tier badge-tier-${tier}`, 'data-aa-tier': tier, title, text: TIER_LABELS[tier] });
+}
+
 function cellChildren(doc, key, model, ctx) {
   switch (key) {
     case 'rank': return [orDash(model.rank[ctx.basis])];
@@ -57,6 +69,7 @@ function cellChildren(doc, key, model, ctx) {
       h(doc, 'span', { class: 'model-id' },
         h(doc, 'a', { href: `${ctx.modelBase}${model.slug}/`, class: 'model-name', text: model.name }),
         h(doc, 'span', { class: 'model-dev', text: model.developer }),
+        tierBadge(doc, model),
         model.rankingEligible ? null : h(doc, 'span', { class: 'tag', text: 'Not ranked' })),
     ];
     case 'developer': return [model.developer];

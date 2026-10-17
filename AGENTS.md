@@ -3,6 +3,8 @@
 ## Required model inclusion
 
 - Include every model represented on Artificial Analysis' Pareto frontier of Intelligence Index score versus the total USD cost to run the Intelligence Index benchmarks. Use total benchmark cost, not cost per task or token price.
+- Include every near-frontier model family. A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Intelligence Index at its cost, where the frontier's Index at cost c is the highest Index among rendered-frontier points costing no more than c. The family's selected configuration may differ from the near configuration. Defer a near-frontier family only by a dated, reasoned roster decision; report the cost ratio to the frontier for information only.
+- Frontier membership is Artificial Analysis' rendered line as observed, never recomputed from rounded values.
 - Capture the complete selected catalog and retain exact model identities, reasoning efforts, observation dates, and direct owner links in the reconciliation inventory. Reconcile frontier entrants on each routine refresh; a manually maintained roster or missing supplementary benchmark must not silently exclude a frontier model.
 - Preserve configuration-specific evidence. Do not transfer benchmark results between reasoning efforts or model versions. Report missing benchmark coverage explicitly and apply the documented scoring policy.
 

@@ -15,9 +15,9 @@ def test_utcnow_defaults_to_the_current_utc_time(monkeypatch):
 
 
 def test_utcnow_honours_pinned_instant_with_z_suffix(monkeypatch):
-    monkeypatch.setenv(clock.ENV_VAR, "2026-10-07T17:23:20Z")
+    monkeypatch.setenv(clock.ENV_VAR, "2026-10-17T19:28:57Z")
 
-    assert clock.utcnow() == datetime(2026, 10, 7, 17, 23, 20, tzinfo=timezone.utc)
+    assert clock.utcnow() == datetime(2026, 10, 17, 19, 28, 57, tzinfo=timezone.utc)
 
 
 def test_utcnow_normalises_offsets_and_naive_values_to_utc(monkeypatch):
@@ -42,7 +42,7 @@ def test_invalid_override_raises_a_clear_error(monkeypatch):
 
 
 def test_iso_z_formats_whole_seconds_with_z_suffix(monkeypatch):
-    monkeypatch.setenv(clock.ENV_VAR, "2026-10-07T17:23:20.654321Z")
+    monkeypatch.setenv(clock.ENV_VAR, "2026-10-17T19:28:57.654321Z")
 
-    assert clock.iso_z() == "2026-10-07T17:23:20Z"
+    assert clock.iso_z() == "2026-10-17T19:28:57Z"
     assert clock.iso_z(datetime(2026, 1, 2, 3, 4, 5, 999, tzinfo=timezone.utc)) == "2026-01-02T03:04:05Z"

@@ -25,11 +25,16 @@ def row(aa_id="model-a", name="Model A (high)", **extra):
     return base
 
 
+NEAR_POLICY = {"maxIntelligenceGap": 3, "basis": "Within 3 Index points of the rendered frontier at its cost.",
+               "text": "Near-frontier families are required or explicitly deferred."}
+
+
 def inventory(**overrides):
     doc = {"observedAt": OBSERVED, "benchmarkVersion": VERSION, "sourceUrl": "https://artificialanalysis.ai/models",
            "scope": "Intelligence vs total cost", "completeness": {"status": "complete", "note": "all points read"},
            "mode": "observedFrontier",
-           "sourceUniverse": {"selectedModelN": 5, "plottedPointN": 3, "observedFrontierPointN": 1},
+           "sourceUniverse": {"selectedModelN": 5, "plottedPointN": 3, "observedFrontierPointN": 1, "nearFrontierPointN": 0},
+           "nearFrontierPolicy": NEAR_POLICY, "nearFrontierRows": [],
            "rows": [row()]}
     doc.update(overrides)
     return doc
@@ -232,10 +237,10 @@ def test_non_object_inventory_blocks(world):
     assert report["status"] == "blocked" and has_issue(report, "inventory root must be an object")
 
 
-def test_reconcile_defaults_to_the_pinned_clock(world, monkeypatch):
-    monkeypatch.setenv("VALUERANK_NOW", "2026-10-07T17:23:20Z")
+def test_reconcile_defaults_to_the_pinned_clock(world, pinned_clock):
     world.setup(inventory())
-    assert rec.reconcile()["checkedAt"] == NOW.isoformat()
+    pinned = datetime.fromisoformat(pinned_clock.replace("Z", "+00:00"))
+    assert rec.reconcile()["checkedAt"] == pinned.isoformat()
 
 
 def test_stale_inventory_is_blocked_with_age_in_message(world):
@@ -322,9 +327,9 @@ def test_malformed_scores_block(world):
 # --------------------------------------------------------------------------- observed-frontier universe counts
 
 
-@pytest.mark.parametrize("universe", [None, "x", {}, {"selectedModelN": 5, "plottedPointN": 3, "observedFrontierPointN": 0},
-                                      {"selectedModelN": True, "plottedPointN": 3, "observedFrontierPointN": 1},
-                                      {"selectedModelN": 5, "plottedPointN": 3, "observedFrontierPointN": "1"}])
+@pytest.mark.parametrize("universe", [None, "x", {}, {"selectedModelN": 5, "plottedPointN": 3, "observedFrontierPointN": 0, "nearFrontierPointN": 0},
+                                      {"selectedModelN": True, "plottedPointN": 3, "observedFrontierPointN": 1, "nearFrontierPointN": 0},
+                                      {"selectedModelN": 5, "plottedPointN": 3, "observedFrontierPointN": "1", "nearFrontierPointN": 0}])
 def test_observed_frontier_requires_positive_integer_source_counts(world, universe):
     report = run(world, inventory(sourceUniverse=universe))
     assert has_issue(report, "positive selectedModelN, plottedPointN, and observedFrontierPointN")
@@ -333,7 +338,7 @@ def test_observed_frontier_requires_positive_integer_source_counts(world, univer
 @pytest.mark.parametrize("counts", [(5, 3, 2), (2, 3, 1), (5, 0, 1)])
 def test_inconsistent_source_counts_are_flagged(world, counts):
     selected, plotted, frontier = counts
-    universe = {"selectedModelN": selected, "plottedPointN": plotted, "observedFrontierPointN": frontier}
+    universe = {"selectedModelN": selected, "plottedPointN": plotted, "observedFrontierPointN": frontier, "nearFrontierPointN": 0}
     if plotted == 0:  # non-positive counts fall under the positivity rule instead
         assert has_issue(run(world, inventory(sourceUniverse=universe)), "positive selectedModelN")
     else:
@@ -341,7 +346,7 @@ def test_inconsistent_source_counts_are_flagged(world, counts):
 
 
 def test_equal_source_counts_reconcile(world):
-    universe = {"selectedModelN": 1, "plottedPointN": 1, "observedFrontierPointN": 1}
+    universe = {"selectedModelN": 1, "plottedPointN": 1, "observedFrontierPointN": 1, "nearFrontierPointN": 0}
     assert not has_issue(run(world, inventory(sourceUniverse=universe)), "does not reconcile")
 
 
@@ -361,7 +366,7 @@ def frontier_pair():
 
 
 def pair_doc(**extra):
-    return inventory(rows=frontier_pair(), sourceUniverse={"selectedModelN": 9, "plottedPointN": 4, "observedFrontierPointN": 2},
+    return inventory(rows=frontier_pair(), sourceUniverse={"selectedModelN": 9, "plottedPointN": 4, "observedFrontierPointN": 2, "nearFrontierPointN": 0},
                      **extra)
 
 
@@ -473,7 +478,7 @@ def test_family_fields_are_required_on_frontier_rows(world):
 
 def test_conflicting_required_family_ids_are_reported(world):
     second = row(evaluatedVariant="max", name="Model A (max)", requiredFamilyModelId="m-other")
-    report = run(world, inventory(rows=[row(), second], sourceUniverse={"selectedModelN": 4, "plottedPointN": 3, "observedFrontierPointN": 2}))
+    report = run(world, inventory(rows=[row(), second], sourceUniverse={"selectedModelN": 4, "plottedPointN": 3, "observedFrontierPointN": 2, "nearFrontierPointN": 0}))
     assert has_issue(report, "Family A: conflicting required family model IDs.")
     assert report["requiredFamilies"] == []
 
@@ -516,6 +521,264 @@ def test_full_universe_requires_numeric_metrics(world, bad):
     assert report["validRowN"] == 0
 
 
+# --------------------------------------------------------------------------- near-frontier policy
+
+
+def near_row(aa_id="model-a", name="Model A (medium)", **extra):
+    base = {"aaId": aa_id, "name": name, "sourceUrl": f"https://artificialanalysis.ai/models/{aa_id}",
+            "evaluatedVariant": "medium", "isReasoning": True, "intelligenceIndex": 68, "totalCostUsd": 120.0,
+            "intelligenceGap": 2, "costRatio": 1.2, "nearestFrontierAaId": "model-a", "directlyObservedFrontier": False,
+            "family": "Family A", "requiredFamilyModelId": "m-a", "sourceFootnote": None}
+    base.update(extra)
+    return base
+
+
+def near_doc(near_rows, **extra):
+    doc = inventory(sourceUniverse={"selectedModelN": 9, "plottedPointN": 4, "observedFrontierPointN": 1,
+                                    "nearFrontierPointN": len(near_rows)},
+                    nearFrontierRows=near_rows, **extra)
+    return doc
+
+
+C_ITEM = {"aaSlug": "model-c", "aaVariant": "high", "aaName": "Model C (high)", "aaShortName": "C", "isReasoning": True}
+C_ROSTER = {**ROSTER, "m-c": C_ITEM}
+C_SCORES = {"models": [*SCORES["models"], {"id": "m-c", "rankingEligible": True, "rankingExclusionReasons": []}]}
+
+
+def test_near_family_in_roster_may_differ_from_the_near_configuration(world):
+    report = run(world, near_doc([near_row()]))
+    assert report["status"] == "reconciled" and report["issues"] == []
+    assert report["nearFrontierPolicy"] == NEAR_POLICY
+    assert [item["aaId"] for item in report["nearFrontier"]] == ["model-a"]
+    near = report["nearFrontier"][0]
+    assert near["valueRankModelId"] is None and near["rankStatus"] == "Missing from source roster"
+    assert near["rosterDecision"] is None and near["intelligenceGap"] == 2
+    assert near["primaryRankingGaps"] == ["Exact evaluated variant absent from source roster"]
+    assert report["nearFrontierFamilies"] == [{"family": "Family A", "modelId": "m-a", "configurationN": 1,
+                                               "inRoster": True, "primaryRanked": True, "deferred": False}]
+    assert report["missingNearFrontierIds"] == ["model-a :: Model A (medium)"]
+    assert report["unresolvedNearFrontierIds"] == ["model-a :: Model A (medium)"]
+    assert report["deferredNearFrontierIds"] == []
+    assert [item["aaId"] for item in report["frontier"]] == ["model-a"]  # near rows never join the frontier
+
+
+def test_near_row_resolves_to_exact_roster_configuration(world):
+    far = near_row("model-c", "Model C (high)", evaluatedVariant="high", family="Family C", requiredFamilyModelId="m-c")
+    report = run(world, near_doc([far]), roster=C_ROSTER, scores=C_SCORES)
+    assert report["status"] == "reconciled"
+    near = report["nearFrontier"][0]
+    assert (near["valueRankModelId"], near["rankStatus"]) == ("m-c", "Primary ranked")
+    assert report["missingNearFrontierIds"] == [] and report["unresolvedNearFrontierIds"] == []
+
+
+def test_near_rows_are_sorted_by_cost_and_families_grouped(world):
+    rows = [near_row(totalCostUsd=300.0),
+            near_row("model-c", "Model C (high)", evaluatedVariant="high", family="Family C", requiredFamilyModelId="m-c", totalCostUsd=110.0),
+            near_row("model-a", "Model A (low)", evaluatedVariant="low", totalCostUsd=90.0)]
+    report = run(world, near_doc(rows), roster=C_ROSTER, scores=C_SCORES)
+    assert [item["name"] for item in report["nearFrontier"]] == ["Model A (low)", "Model C (high)", "Model A (medium)"]
+    assert report["nearFrontierFamilies"] == [
+        {"family": "Family A", "modelId": "m-a", "configurationN": 2, "inRoster": True, "primaryRanked": True, "deferred": False},
+        {"family": "Family C", "modelId": "m-c", "configurationN": 1, "inRoster": True, "primaryRanked": True, "deferred": False}]
+
+
+def test_deferred_near_family_needs_a_dated_decision_per_row(world):
+    cheap = near_row("model-d", "Model D (low)", evaluatedVariant="low", family="Family D", requiredFamilyModelId=None)
+    both = [cheap, near_row("model-d", "Model D (max)", evaluatedVariant="max", family="Family D", requiredFamilyModelId=None,
+                            totalCostUsd=200.0)]
+    decisions = [decision(aaId="model-d", name="Model D (low)", evaluatedVariant="low"),
+                 decision(aaId="model-d", name="Model D (max)", evaluatedVariant="max")]
+    report = run(world, near_doc(both, rosterDecisions=decisions))
+    assert report["status"] == "reconciled" and report["issues"] == []
+    assert report["nearFrontierFamilies"] == [{"family": "Family D", "modelId": None, "configurationN": 2,
+                                               "inRoster": False, "primaryRanked": False, "deferred": True}]
+    assert report["deferredNearFrontierIds"] == ["model-d :: Model D (low)", "model-d :: Model D (max)"]
+    assert report["unresolvedNearFrontierIds"] == []
+    assert report["nearFrontier"][0]["rankStatus"] == "Deferred comparison candidate"
+    assert report["nearFrontier"][0]["rosterDecision"]["reason"].startswith("Not evaluated")
+    partial = run(world, near_doc(both, rosterDecisions=decisions[:1]))
+    assert partial["status"] == "blocked"
+    assert has_issue(partial, "Near-frontier AA family Family D is deferred without a dated roster decision for: Model D (max)")
+    undecided = run(world, near_doc(both))
+    assert has_issue(undecided, "deferred without a dated roster decision for: Model D (low), Model D (max)")
+
+
+def test_decision_for_near_row_counts_as_observed_variant(world):
+    report = run(world, near_doc([near_row("model-d", "Model D (low)", evaluatedVariant="low", family="Family D",
+                                           requiredFamilyModelId=None)],
+                                 rosterDecisions=[decision(aaId="model-d", name="Model D (low)", evaluatedVariant="low")]))
+    assert not has_issue(report, "Roster decision does not match an observed evaluated variant")
+
+
+def test_near_family_with_required_id_must_be_in_roster_and_ranked(world):
+    absent = near_row("model-c", "Model C (high)", evaluatedVariant="high", family="Family C", requiredFamilyModelId="m-c")
+    report = run(world, near_doc([absent]))
+    assert report["status"] == "blocked"
+    assert has_issue(report, "Near-frontier AA family Family C (m-c) must appear in the primary ranking")
+    assert report["nearFrontierFamilies"][0]["inRoster"] is False and report["nearFrontierFamilies"][0]["primaryRanked"] is False
+    unranked = {"models": [*SCORES["models"], {"id": "m-c", "rankingEligible": False, "rankingExclusionReasons": ["few evals"]}]}
+    report = run(world, near_doc([absent]), roster=C_ROSTER, scores=unranked)
+    assert has_issue(report, "Near-frontier AA family Family C (m-c) must appear in the primary ranking")
+    assert report["nearFrontierFamilies"][0]["inRoster"] is True and report["nearFrontierFamilies"][0]["primaryRanked"] is False
+    assert report["nearFrontier"][0]["rankStatus"] == "Unranked source candidate"
+
+
+@pytest.mark.parametrize("override, fragment", [
+    ({"nearFrontierPolicy": None}, "nearFrontierPolicy"),
+    ({"nearFrontierPolicy": "text"}, "nearFrontierPolicy"),
+    ({"nearFrontierPolicy": {**NEAR_POLICY, "maxIntelligenceGap": 0}}, "nearFrontierPolicy"),
+    ({"nearFrontierPolicy": {**NEAR_POLICY, "maxIntelligenceGap": "3"}}, "nearFrontierPolicy"),
+    ({"nearFrontierPolicy": {**NEAR_POLICY, "maxIntelligenceGap": True}}, "nearFrontierPolicy"),
+    ({"nearFrontierPolicy": {**NEAR_POLICY, "basis": " "}}, "nearFrontierPolicy"),
+    ({"nearFrontierPolicy": {**NEAR_POLICY, "text": ""}}, "nearFrontierPolicy"),
+    ({"nearFrontierPolicy": {k: v for k, v in NEAR_POLICY.items() if k != "text"}}, "nearFrontierPolicy"),
+    ({"nearFrontierRows": None}, "nearFrontierRows"),
+    ({"nearFrontierRows": "rows"}, "nearFrontierRows"),
+])
+def test_observed_frontier_requires_near_policy_and_rows(world, override, fragment):
+    doc = inventory()
+    doc.update(override)
+    report = run(world, doc)
+    assert report["status"] == "blocked" and has_issue(report, fragment)
+    assert report["nearFrontier"] == []
+
+
+def test_fractional_policy_gap_is_accepted(world):
+    report = run(world, inventory(nearFrontierPolicy={**NEAR_POLICY, "maxIntelligenceGap": 2.5}))
+    assert report["status"] == "reconciled" and report["nearFrontierPolicy"]["maxIntelligenceGap"] == 2.5
+
+
+@pytest.mark.parametrize("count", [None, -1, True, "0", 1.0, 2])
+def test_near_point_count_must_be_nonnegative_int_matching_rows(world, count):
+    universe = {"selectedModelN": 5, "plottedPointN": 3, "observedFrontierPointN": 1}
+    if count is not None:
+        universe["nearFrontierPointN"] = count
+    report = run(world, inventory(sourceUniverse=universe))
+    assert report["status"] == "blocked"
+    assert has_issue(report, "sourceUniverse.nearFrontierPointN")
+
+
+def test_near_point_count_mismatch_with_rows_is_flagged(world):
+    doc = near_doc([near_row()])
+    doc["sourceUniverse"]["nearFrontierPointN"] = 2
+    assert has_issue(run(world, doc), "Near-frontier row count 1 does not match sourceUniverse.nearFrontierPointN 2")
+
+
+def test_near_point_count_requires_object_universe(world):
+    assert has_issue(run(world, inventory(sourceUniverse="x")), "sourceUniverse.nearFrontierPointN")
+
+
+@pytest.mark.parametrize(
+    "bad_row, fragment",
+    [
+        ("text", "Near-frontier row 0 is not an object."),
+        ({"name": "x"}, "Near-frontier row 0 lacks an exact AA model URL slug."),
+        (near_row(aaId="Bad_ID"), "Near-frontier row 0 lacks an exact AA model URL slug."),
+        (near_row(name=""), "Near-frontier model-a: name and matching exact model source URL required."),
+        (near_row(sourceUrl="https://artificialanalysis.ai/models/other"), "Near-frontier model-a: name and matching exact model source URL"),
+        (near_row(evaluatedVariant=""), "Near-frontier model-a: evaluatedVariant must be a nonempty string"),
+        (near_row(isReasoning="yes"), "Near-frontier model-a: isReasoning must be boolean"),
+        (near_row(evaluatedVariant="low"), "Near-frontier model-a: declared variant contradicts its displayed label"),
+        (near_row(directlyObservedFrontier=True), "Model A (medium): near-frontier rows must not claim direct frontier observation."),
+        (near_row(directlyObservedFrontier=None), "Model A (medium): near-frontier rows must not claim direct frontier observation."),
+        (near_row(intelligenceIndex=None), "Model A (medium): near-frontier intelligenceIndex and totalCostUsd must be numeric."),
+        (near_row(intelligenceIndex="68"), "Model A (medium): near-frontier intelligenceIndex and totalCostUsd must be numeric."),
+        (near_row(totalCostUsd=-1), "Model A (medium): near-frontier intelligenceIndex and totalCostUsd must be numeric."),
+        (near_row(totalCostUsd=None), "Model A (medium): near-frontier intelligenceIndex and totalCostUsd must be numeric."),
+        (near_row(intelligenceGap=None), "Model A (medium): intelligenceGap must be a number between 0 and 3."),
+        (near_row(intelligenceGap=-0.5), "Model A (medium): intelligenceGap must be a number between 0 and 3."),
+        (near_row(intelligenceGap=3.5), "Model A (medium): intelligenceGap must be a number between 0 and 3."),
+        (near_row(intelligenceGap="2"), "Model A (medium): intelligenceGap must be a number between 0 and 3."),
+        (near_row(costRatio="1.2"), "Model A (medium): costRatio must be null or a nonnegative number."),
+        (near_row(costRatio=-1), "Model A (medium): costRatio must be null or a nonnegative number."),
+        (near_row(nearestFrontierAaId="elsewhere"), "Model A (medium): nearestFrontierAaId must name a frontier row."),
+        (near_row(nearestFrontierAaId=None), "Model A (medium): nearestFrontierAaId must name a frontier row."),
+        (near_row(sourceFootnote=""), "Model A (medium): sourceFootnote must be a nonempty string or null."),
+        (near_row(sourceFootnote=3), "Model A (medium): sourceFootnote must be a nonempty string or null."),
+    ],
+)
+def test_invalid_near_rows_are_skipped_with_specific_issue(world, bad_row, fragment):
+    report = run(world, near_doc([bad_row]))
+    assert has_issue(report, fragment)
+    assert report["nearFrontier"] == [] and report["status"] == "blocked"
+
+
+def test_near_cost_ratio_may_be_null_or_zero(world):
+    report = run(world, near_doc([near_row(costRatio=None), near_row(evaluatedVariant="low", name="Model A (low)", costRatio=0)]))
+    assert report["status"] == "reconciled" and len(report["nearFrontier"]) == 2
+
+
+def test_near_gap_bounds_are_inclusive_and_follow_the_declared_policy(world):
+    edge = [near_row(intelligenceGap=0), near_row(evaluatedVariant="low", name="Model A (low)", intelligenceGap=3)]
+    assert run(world, near_doc(edge))["status"] == "reconciled"
+    wide = near_doc([near_row(intelligenceGap=4.5)], nearFrontierPolicy={**NEAR_POLICY, "maxIntelligenceGap": 5})
+    assert run(world, wide)["status"] == "reconciled"
+
+
+def test_near_gap_upper_bound_skipped_when_policy_invalid(world):
+    report = run(world, near_doc([near_row(intelligenceGap=9)], nearFrontierPolicy=None))
+    assert has_issue(report, "nearFrontierPolicy") and not has_issue(report, "intelligenceGap must be")
+
+
+def test_near_row_duplicating_a_frontier_or_near_variant_is_rejected(world):
+    frontier_dup = near_row(evaluatedVariant="high", name="Model A (high)")
+    report = run(world, near_doc([frontier_dup]))
+    assert has_issue(report, "Duplicate exact AA evaluated variant: ('model-a', 'high').")
+    assert report["nearFrontier"] == []
+    report = run(world, near_doc([near_row(), near_row()]))
+    assert has_issue(report, "Duplicate exact AA evaluated variant: ('model-a', 'medium').")
+    assert len(report["nearFrontier"]) == 1
+
+
+def test_near_family_fields_are_required_and_ids_must_be_consistent(world):
+    for bad in ({"family": ""}, {"family": 3}):
+        report = run(world, near_doc([near_row(**bad)]))
+        assert has_issue(report, "Model A (medium): near-frontier family is required.")
+        assert report["nearFrontierFamilies"] == []
+    for bad in ({"requiredFamilyModelId": ""}, {"requiredFamilyModelId": 5}):
+        report = run(world, near_doc([near_row(**bad)]))
+        assert has_issue(report, "Model A (medium): near-frontier requiredFamilyModelId must be a model ID string or null.")
+        assert report["nearFrontierFamilies"] == []
+    missing = near_row()
+    del missing["requiredFamilyModelId"]
+    assert has_issue(run(world, near_doc([missing])), "requiredFamilyModelId must be a model ID string or null")
+    mixed = [near_row(), near_row(evaluatedVariant="low", name="Model A (low)", requiredFamilyModelId=None)]
+    report = run(world, near_doc(mixed))
+    assert has_issue(report, "Near-frontier AA family Family A: conflicting requiredFamilyModelId values.")
+    assert report["nearFrontierFamilies"] == []
+
+
+def test_source_footnotes_pass_through_to_report_rows(world):
+    note = "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs."
+    doc = near_doc([near_row(sourceFootnote=note)])
+    doc["rows"][0]["sourceFootnote"] = note
+    report = run(world, doc)
+    assert report["status"] == "reconciled"
+    assert report["frontier"][0]["sourceFootnote"] == note and report["nearFrontier"][0]["sourceFootnote"] == note
+
+
+@pytest.mark.parametrize("bad", ["", 4])
+def test_frontier_row_footnote_must_be_nonempty_string_or_null(world, bad):
+    report = run(world, inventory(rows=[row(sourceFootnote=bad)]))
+    assert has_issue(report, "Model A (high): sourceFootnote must be a nonempty string or null.")
+    assert report["frontier"] == []
+
+
+def test_full_universe_mode_ignores_near_frontier_fields(world):
+    rows = [full_row("cheap", 40, 10)]
+    report = run(world, inventory(mode="fullNumericUniverse", nearFrontierPolicy=None, nearFrontierRows=None, rows=rows),
+                 roster={}, scores={"models": []})
+    assert not has_issue(report, "nearFrontier") and report["nearFrontier"] == []
+    assert report["nearFrontierFamilies"] == [] and report["nearFrontierPolicy"] is None
+
+
+def test_missing_inventory_report_carries_empty_near_sections(world):
+    world.setup(None)
+    report = rec.reconcile(NOW)
+    assert report["nearFrontier"] == [] and report["nearFrontierFamilies"] == []
+
+
+
 # --------------------------------------------------------------------------- publication
 
 
@@ -523,7 +786,7 @@ def test_publication_renders_escaped_markdown_and_html(world):
     odd = row("model-b", "Model [B] | <x>", evaluatedVariant=None, intelligenceIndex=69.6, totalCostUsd=1234.5,
               family="B", requiredFamilyModelId="m-b", intelligenceIndexPrecision="rounded_whole_public_label")
     odd["sourceUrl"] = "https://artificialanalysis.ai/models/model-b"
-    doc = inventory(rows=[row(), odd], sourceUniverse={"selectedModelN": 9, "plottedPointN": 4, "observedFrontierPointN": 2},
+    doc = inventory(rows=[row(), odd], sourceUniverse={"selectedModelN": 9, "plottedPointN": 4, "observedFrontierPointN": 2, "nearFrontierPointN": 0},
                     rosterDecisions=[{**decision(), "evaluatedVariant": None, "name": "Model [B] | <x>", "reviewedAt": "2026-10-07T00:00:00Z"}])
     report = run(world, doc)
     markdown, html = rec.publication(report)
@@ -561,6 +824,41 @@ def test_publication_formats_numbers_by_mode_and_flags_comparison_rows():
     assert "| 61.234 |" in text  # observed-frontier values are shown verbatim
 
 
+def test_publication_flags_near_rows_and_summarises_families(world):
+    deferred = near_row("model-d", "Model [D] | <x>", evaluatedVariant=None, family="Family D", requiredFamilyModelId=None,
+                        intelligenceIndex=68.4, totalCostUsd=2000.0, intelligenceGap=1.5)
+    deferred["sourceUrl"] = "https://artificialanalysis.ai/models/model-d"
+    dec = decision(aaId="model-d", name="Model [D] | <x>", evaluatedVariant=None)
+    report = run(world, near_doc([near_row(), deferred], rosterDecisions=[dec],
+                                 intelligenceIndexPrecision="rounded_whole_public_label"))
+    assert report["status"] == "reconciled"
+    markdown, html = rec.publication(report)
+    assert "2 plotted configurations from 2 families lie within 3 Index points of the rendered frontier; 1 of those families are in the main ranking, 1 are deferred." in markdown
+    assert "Near AA frontier (within 3 Index points)" in markdown and "Observed AA frontier" in markdown
+    assert "[Model &#91;D&#93; \\| <x>](https://artificialanalysis.ai/models/model-d)" in markdown
+    assert "Deferred comparison candidate" in markdown and "Reviewed 2026-10-07T00:00:00Z: Not evaluated by ValueRank." in markdown
+    assert "Model [D] | &lt;x&gt;" in html and "<x>" not in html
+    assert "Near AA frontier (within 3 Index points)" in html
+    assert html.count("<tr>") == 4  # header + frontier + two near rows
+    assert markdown.count("| Near AA frontier (within 3 Index points) |") == 2
+
+
+def test_publication_near_summary_tolerates_missing_policy_and_fractional_gap():
+    base = {"status": "blocked", "issues": [], "mode": "observedFrontier", "observedAt": "2026-10-06", "benchmarkVersion": "v",
+            "scope": "chart", "sourceUniverse": {}, "requiredFamilies": [], "frontier": [], "comparisonCandidates": []}
+    markdown, _ = rec.publication(base)
+    assert "0 plotted configurations from 0 families lie within unknown Index points" in markdown
+    fractional = dict(base, nearFrontierPolicy={"maxIntelligenceGap": 2.5},
+                      nearFrontier=[{"aaId": "n", "name": "N", "sourceUrl": "https://artificialanalysis.ai/models/n",
+                                     "intelligenceIndex": 5, "totalCostUsd": 1, "rankStatus": "Primary ranked", "primaryRankingGaps": []}],
+                      nearFrontierFamilies=[{"family": "N", "primaryRanked": True, "deferred": False}])
+    text, _ = rec.publication(fractional)
+    assert "1 plotted configurations from 1 families lie within 2.5 Index points" in text
+    assert "| Near AA frontier (within 2.5 Index points) |" in text
+    full, _ = rec.publication({**base, "mode": "fullNumericUniverse"})
+    assert "lie within" not in full
+
+
 # --------------------------------------------------------------------------- main / CLI
 
 
@@ -571,14 +869,14 @@ def run_main(world, monkeypatch, capsys, args=()):
 
 
 def test_main_exit_zero_when_reconciled(world, monkeypatch, capsys, pinned_clock):
-    world.setup(inventory(observedAt="2026-10-07T00:00:00Z"))
+    world.setup(inventory(observedAt="2026-10-17T00:00:00Z"))
     status, out, report = run_main(world, monkeypatch, capsys)
     assert status == 0 and report["status"] == "reconciled"
     assert out == "AA reconciliation reconciled: data/aa_reconciliation_report.json\n"
 
 
 def test_main_exit_one_when_blocked_and_lists_issues(world, monkeypatch, capsys, pinned_clock):
-    world.setup(pair_doc(observedAt="2026-10-07T00:00:00Z"))
+    world.setup(pair_doc(observedAt="2026-10-17T00:00:00Z"))
     status, out, report = run_main(world, monkeypatch, capsys)
     assert status == 1 and report["status"] == "blocked"
     assert out.startswith("AA reconciliation blocked: data/aa_reconciliation_report.json\n- ")
@@ -586,7 +884,7 @@ def test_main_exit_one_when_blocked_and_lists_issues(world, monkeypatch, capsys,
 
 
 def test_main_report_only_exits_zero_even_when_blocked(world, monkeypatch, capsys, pinned_clock):
-    world.setup(pair_doc(observedAt="2026-10-07T00:00:00Z"))
+    world.setup(pair_doc(observedAt="2026-10-17T00:00:00Z"))
     status, _, report = run_main(world, monkeypatch, capsys, ["--report-only"])
     assert status == 0 and report["status"] == "blocked"
 
@@ -599,7 +897,7 @@ def test_main_blocks_when_inventory_is_missing(world, monkeypatch, capsys, pinne
 def test_module_guard_exits_with_main_status(world, monkeypatch, pinned_clock):
     import valuerank.paths as paths
 
-    world.setup(inventory(observedAt="2026-10-07T00:00:00Z"))
+    world.setup(inventory(observedAt="2026-10-17T00:00:00Z"))
     monkeypatch.setattr(paths, "ROOT", world.root)
     monkeypatch.setattr(paths, "DATA", world.data)
     monkeypatch.setattr(sys, "argv", ["aa_reconciliation"])

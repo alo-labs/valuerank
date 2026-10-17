@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-sol",
   "summary": {
     "rank": {
-      "api": 2,
-      "plan": 4
+      "api": 5,
+      "plan": 6
     },
     "overall": {
-      "api": 65.5,
-      "plan": 66.8
+      "api": 62.9,
+      "plan": 66.0
     },
-    "quality": 71.5,
-    "qualityRank": 4,
+    "quality": 69.8,
+    "qualityRank": 6,
     "coverage": {
       "pct": 100.0,
       "availablePriority": 132,
@@ -34,18 +34,18 @@
       "weightPct": 18.9394,
       "value": 3464.843215149396,
       "unit": "USD per Index run",
-      "normalized": 40.0,
+      "normalized": 33.3,
       "source": {
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": 40.0,
-        "plan": 46.666667
+        "api": 33.3,
+        "plan": 50.0
       }
     },
     {
@@ -53,16 +53,16 @@
       "label": "DeepSWE v1.1",
       "category": "code",
       "weightPct": 18.9394,
-      "value": 72.0,
+      "value": 72.3,
       "unit": "% pass@1",
-      "normalized": 92.3,
+      "normalized": 86.7,
       "source": {
         "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
         "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
       },
-      "observedAt": "2026-10-08",
+      "observedAt": "2026-10-17T19:26:26Z",
       "evaluatedVariant": "Codex / GPT-5.6 Sol / max",
-      "note": null,
+      "note": "Exact variant: chart model GPT-5.6 Sol (max) matches the roster display name 'GPT-5.6 Sol' at effort max.",
       "grade": "measured"
     },
     {
@@ -72,12 +72,12 @@
       "weightPct": 15.1515,
       "value": 43.5,
       "unit": "bugs fixed of 105",
-      "normalized": 85.7,
+      "normalized": 82.4,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": null
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-56-sol-max-effort---mean-of-2"
       },
-      "observedAt": null,
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "GPT-5.6 Sol (max effort) - mean of 2",
       "note": "Use the owner-published mean of two identical-configuration runs.",
       "grade": "measured"
@@ -89,12 +89,12 @@
       "weightPct": 4.5455,
       "value": 7.8,
       "unit": "% non-hallucination",
-      "normalized": 6.7,
+      "normalized": 11.1,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -111,7 +111,7 @@
         "name": "Terminal-Bench 4.0 leaderboard",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "Codex / GPT-5.6 Sol",
       "note": null,
       "grade": "measured"
@@ -121,14 +121,14 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1587.9,
+      "value": 1608.63,
       "unit": "Elo",
-      "normalized": 46.7,
+      "normalized": 55.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -140,12 +140,12 @@
       "weightPct": 4.5455,
       "value": 46.9727068915036,
       "unit": "Index points",
-      "normalized": 66.7,
+      "normalized": 61.1,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -157,12 +157,12 @@
       "weightPct": 3.7879,
       "value": 71.846,
       "unit": "score",
-      "normalized": 54.5,
+      "normalized": 63.6,
       "source": {
         "name": "LiveBench release 2026_06_25",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "gpt-5.6-sol-max",
       "note": null,
       "grade": "measured"
@@ -174,12 +174,12 @@
       "weightPct": 3.7879,
       "value": 60.08,
       "unit": "% score",
-      "normalized": 46.7,
+      "normalized": 50.0,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -189,14 +189,14 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 86.9222003390528,
+      "value": 89.32795188983,
       "unit": "tokens per second",
-      "normalized": 71.4,
+      "normalized": 47.1,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -208,12 +208,12 @@
       "weightPct": 3.0303,
       "value": 84.0,
       "unit": "% accuracy",
-      "normalized": 80.0,
+      "normalized": 88.9,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -225,12 +225,12 @@
       "weightPct": 3.0303,
       "value": 59.4,
       "unit": "% accuracy",
-      "normalized": 73.3,
+      "normalized": 77.8,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -242,12 +242,12 @@
       "weightPct": 3.0303,
       "value": 49.49,
       "unit": "% accuracy",
-      "normalized": 73.3,
+      "normalized": 66.7,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -264,7 +264,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -276,12 +276,12 @@
       "weightPct": 3.0303,
       "value": 57.06,
       "unit": "% score",
-      "normalized": 60.0,
+      "normalized": 61.1,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -298,7 +298,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-6-sol"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -410,16 +410,52 @@
       }
     },
     {
-      "version": "v1.9.6",
-      "date": "2026-10-08",
+      "version": "v1.9.3",
+      "date": null,
       "rank": {
         "api": 2,
-        "plan": 4
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.4",
+      "date": null,
+      "rank": {
+        "api": 2,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.5",
+      "date": null,
+      "rank": {
+        "api": 2,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.6",
+      "date": null,
+      "rank": {
+        "api": 2,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.7",
+      "date": "2026-10-18",
+      "rank": {
+        "api": 5,
+        "plan": 6
       }
     }
   ],
   "frontier": {
     "onAaFrontier": false,
-    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
   }
 }

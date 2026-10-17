@@ -7,30 +7,26 @@
   "selectedPage": "https://artificialanalysis.ai/models/deepseek-v4-pro",
   "summary": {
     "rank": {
-      "api": null,
-      "plan": null
+      "api": 19,
+      "plan": 19
     },
     "overall": {
-      "api": null,
-      "plan": null
+      "api": 26.5,
+      "plan": 21.0
     },
-    "quality": null,
-    "qualityRank": null,
+    "quality": 17.9,
+    "qualityRank": 19,
     "coverage": {
-      "pct": 76.52,
-      "availablePriority": 101,
+      "pct": 95.45,
+      "availablePriority": 126,
       "totalPriority": 132,
       "missing": [
-        "Terminal-Bench 4.0",
-        "DeepSWE v1.1"
+        "Terminal-Bench 4.0"
       ]
     },
     "grade": "measured",
-    "rankingEligible": false,
-    "exclusionReasons": [
-      "No exact-variant AA DeepSWE result in the selected source snapshot",
-      "Not a required selected AA frontier family model"
-    ]
+    "rankingEligible": true,
+    "exclusionReasons": []
   },
   "dimensions": [
     {
@@ -40,18 +36,18 @@
       "weightPct": 18.9394,
       "value": 1122.2711228899416,
       "unit": "USD per Index run",
-      "normalized": null,
+      "normalized": 61.1,
       "source": {
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": null,
-        "plan": null
+        "api": 61.1,
+        "plan": 33.3
       }
     },
     {
@@ -59,14 +55,17 @@
       "label": "DeepSWE v1.1",
       "category": "code",
       "weightPct": 18.9394,
-      "value": null,
+      "value": 57.2,
       "unit": "% pass@1",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
+      "normalized": 20.0,
+      "source": {
+        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-17T19:26:26Z",
+      "evaluatedVariant": "Codex / DeepSeek V4 Pro 0813 / max",
+      "note": "Exact variant: chart model DeepSeek V4 Pro 0813 (max) matches the roster AA short name 'DeepSeek V4 Pro 0813' at effort max.",
+      "grade": "measured"
     },
     {
       "key": "bugHuntFixedOf105",
@@ -75,12 +74,12 @@
       "weightPct": 15.1515,
       "value": 16.0,
       "unit": "bugs fixed of 105",
-      "normalized": null,
+      "normalized": 0.0,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": null
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-deepseek-v4-pro-max-effort-deepseek-api"
       },
-      "observedAt": null,
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "DeepSeek V4-Pro (max effort, DeepSeek API)",
       "note": "Single official run. The run notes say the high-versus-max effort probe on Pro was inconclusive.",
       "grade": "measured"
@@ -92,12 +91,12 @@
       "weightPct": 4.5455,
       "value": 5.17,
       "unit": "% non-hallucination",
-      "normalized": null,
+      "normalized": 0.0,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -121,14 +120,14 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1441.42,
+      "value": 1450.47,
       "unit": "Elo",
-      "normalized": null,
+      "normalized": 16.7,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -140,12 +139,12 @@
       "weightPct": 4.5455,
       "value": 35.9967791278402,
       "unit": "Index points",
-      "normalized": null,
+      "normalized": 5.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -157,12 +156,12 @@
       "weightPct": 3.7879,
       "value": 62.35,
       "unit": "score",
-      "normalized": null,
+      "normalized": 18.2,
       "source": {
         "name": "LiveBench release 2026_06_25",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "deepseek-v4-pro",
       "note": null,
       "grade": "measured"
@@ -174,12 +173,12 @@
       "weightPct": 3.7879,
       "value": 56.71,
       "unit": "% score",
-      "normalized": null,
+      "normalized": 33.3,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -189,14 +188,14 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 83.8601724685335,
+      "value": 78.7593928468968,
       "unit": "tokens per second",
-      "normalized": null,
+      "normalized": 35.3,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -208,12 +207,12 @@
       "weightPct": 3.0303,
       "value": 80.33,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 47.2,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -225,12 +224,12 @@
       "weightPct": 3.0303,
       "value": 49.1,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 50.0,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -242,12 +241,12 @@
       "weightPct": 3.0303,
       "value": 41.01,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 22.2,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -259,12 +258,12 @@
       "weightPct": 3.0303,
       "value": 92.83,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 43.8,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -276,12 +275,12 @@
       "weightPct": 3.0303,
       "value": 51.04,
       "unit": "% score",
-      "normalized": null,
+      "normalized": 5.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -293,12 +292,12 @@
       "weightPct": 2.2727,
       "value": 18.0,
       "unit": "% score",
-      "normalized": null,
+      "normalized": 22.2,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -321,10 +320,22 @@
         "api": 11,
         "plan": null
       }
+    },
+    {
+      "version": "v1.9.7",
+      "date": "2026-10-18",
+      "rank": {
+        "api": 19,
+        "plan": 19
+      }
     }
   ],
   "frontier": {
     "onAaFrontier": false,
-    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
   }
 }

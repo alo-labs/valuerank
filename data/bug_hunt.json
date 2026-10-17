@@ -2,33 +2,82 @@
   "schemaVersion": "valuerank-bug-hunt-bench/v1",
   "benchmark": "Bug Hunt Bench",
   "benchmarkVersion": "105 planted bugs across two repositories; rolling public results snapshot",
-  "snapshotDate": "2026-09-30",
-  "sourceCommit": "0630b120a81363c343ed7dfaf3c6d3be7f7da38c",
+  "snapshotDate": "2026-10-17",
+  "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
   "sources": {
     "homepage": "https://bughunt.productcompass.pm/",
-    "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv",
-    "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/run-notes.md"
+    "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv",
+    "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md"
   },
   "supplementalSourceCaptures": [
     {
-      "modelIds": ["gpt-6.1-sol"],
+      "modelIds": [
+        "gpt-6-astra",
+        "gemini-3.8-flash",
+        "claude-opus-5",
+        "claude-opus-5-5",
+        "gpt-5.6-sol",
+        "claude-fable-5",
+        "glm-5.3",
+        "kimi-k3",
+        "grok-4.6",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gemini-3.7-flash",
+        "glm-5.3-flash",
+        "deepseek-v4-pro",
+        "claude-opus-4.8",
+        "qwen3.8-max",
+        "muse-spark-1.2",
+        "claude-sonnet-5",
+        "deepseek-v4-flash",
+        "gemini-3.6-flash",
+        "glm-5.2",
+        "gemini-3.5-flash",
+        "gpt-6-sol",
+        "gpt-6.1-sol",
+        "gpt-6-luna",
+        "grok-4.7",
+        "mimo-v2-6-pro",
+        "mimo-v2-6-flash",
+        "claude-haiku-5-5",
+        "claude-sonnet-5-5",
+        "gemini-4-argon"
+      ],
+      "observedAt": "2026-10-18",
+      "siteUpdatedOn": "2026-10-17",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "leaderboard": "https://bughunt.productcompass.pm/",
+      "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md",
+      "captureMethod": "raw files from the benchmark owner's repository at the pinned commit",
+      "note": "Full re-pin of every roster record to the owner's 2026-10-17 scoreboard (192 rows, run notes 'Updated Oct 17, 2026'), adding Claude Haiku 5.5 (max). Supersedes the 2026-10-08 supplemental GPT-6.1 Sol capture (commit 931c1ff9b9aaced865aaf56eaf744b7b1f182fc2) and the 2026-10-07 MiMo capture (commit 7dd3c23a4c86a3fac586707d01129bf549bae325); those entries are retained for history only."
+    },
+    {
+      "modelIds": [
+        "gpt-6.1-sol"
+      ],
       "observedAt": "2026-10-08",
       "siteUpdatedOn": "2026-10-07",
       "sourceCommit": "931c1ff9b9aaced865aaf56eaf744b7b1f182fc2",
       "leaderboard": "https://bughunt.productcompass.pm/?preset=featured",
       "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/931c1ff9b9aaced865aaf56eaf744b7b1f182fc2/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3",
       "captureMethod": "Built-in browser official leaderboard and immutable benchmark-owner run notes",
-      "note": "Selective GPT-6.1 Sol Max inclusion; existing model records retain their original source snapshots. XHigh remains a distinct unselected configuration documented in the research note."
+      "note": "Selective GPT-6.1 Sol Max inclusion; existing model records retain their original source snapshots. XHigh remains a distinct unselected configuration documented in the research note.",
+      "supersededBy": "2026-10-18 full re-pin to commit aec976170df89a371384174ca87646a9a8c82415"
     },
     {
-      "modelIds": ["mimo-v2-6-pro", "mimo-v2-6-flash"],
+      "modelIds": [
+        "mimo-v2-6-pro",
+        "mimo-v2-6-flash"
+      ],
       "observedAt": "2026-10-07T14:15:34Z",
       "siteUpdatedOn": "2026-10-01",
       "sourceCommit": "7dd3c23a4c86a3fac586707d01129bf549bae325",
       "leaderboard": "https://bughunt.productcompass.pm/?preset=all",
       "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md",
       "captureMethod": "Built-in browser official all-runs leaderboard and benchmark-owner run notes",
-      "note": "Selective MiMo addition; existing model records retain the original source snapshot and are not described as newly observed."
+      "note": "Selective MiMo addition; existing model records retain the original source snapshot and are not described as newly observed.",
+      "supersededBy": "2026-10-18 full re-pin to commit aec976170df89a371384174ca87646a9a8c82415"
     }
   ],
   "scoreUnit": "independently verified planted bugs fixed out of 105",
@@ -38,34 +87,10 @@
     "searchedOn": "2026-09-29",
     "searchQuery": "\"Bug Hunt Bench\" (\"GPT-5.5\" OR \"Gemini 3.7 Flash\" OR \"Gemini 3.6 Flash\" OR \"GLM-5.2\" OR \"Gemini 3.5 Flash\")",
     "matchingProviderClaimsFound": 0,
-    "note": "The focused search surfaced third-party discussion but no matching provider-hosted score for the unmatched cohort entries; no values are imputed."
+    "note": "The focused search surfaced third-party discussion but no matching provider-hosted score for the unmatched cohort entries; no values are imputed. The provider-claim search was not repeated on 2026-10-18; no search is claimed for that date.",
+    "repeatedOn": null
   },
   "models": [
-    {
-      "modelId": "gpt-6.1-sol",
-      "matched": true,
-      "matchStatus": "matched",
-      "evaluatedModel": "GPT-6.1 Sol (max effort) - mean of 3",
-      "fixedOf105": 44.3,
-      "sampleN": 3,
-      "aggregation": "mean",
-      "effort": "max",
-      "effortStatus": "verified first-party tier; below ultra ceiling",
-      "harness": "Codex CLI",
-      "harnessVersion": "0.159.0",
-      "route": "OpenAI ChatGPT account",
-      "sourceType": "benchmark_owner",
-      "observedAt": "2026-10-08",
-      "reportedOn": "2026-09-30",
-      "sourceCommit": "931c1ff9b9aaced865aaf56eaf744b7b1f182fc2",
-      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/931c1ff9b9aaced865aaf56eaf744b7b1f182fc2/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3",
-      "runScores": [44, 42, 47],
-      "observedRange": 5,
-      "judge": "grok-4.7 blinded to arm identity",
-      "wallMinutes": 139.3,
-      "listRateCostUsd": 5.88,
-      "note": "Owner-published mean of three identical Max configurations; 44.3/105 is the owner's published one-decimal mean. Codex0.159.0 differs from older OpenAI rows; max is below ultra. Some laptop load may inflate wall time. Cost is a list-rate estimate, not an invoice; no retained request reached long-context rates. Earlier sandbox-blocked attempt voided and excluded; extras65.3 are unscored."
-    },
     {
       "modelId": "gpt-6-astra",
       "matched": true,
@@ -79,7 +104,11 @@
       "harness": "Codex CLI",
       "route": "OpenAI",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of three runs."
+      "note": "Owner-published mean of three runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-14",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-astra-max-effort---mean-of-3"
     },
     {
       "modelId": "gemini-3.8-flash",
@@ -94,7 +123,11 @@
       "harness": "Antigravity CLI",
       "route": "Google",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of three runs."
+      "note": "Owner-published mean of three runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-15",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gemini-38-flash---mean-of-3"
     },
     {
       "modelId": "claude-opus-5",
@@ -109,7 +142,11 @@
       "harness": "Claude Code",
       "route": "Anthropic",
       "sourceType": "benchmark_owner",
-      "note": "Single official run; treat as one draw."
+      "note": "Single official run; treat as one draw.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-08-01",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-opus-5-max-effort"
     },
     {
       "modelId": "claude-opus-5-5",
@@ -124,7 +161,11 @@
       "harness": "Claude Code",
       "route": "Anthropic",
       "sourceType": "benchmark_owner",
-      "note": "Benchmark-owner scoreboard mean of three Opus 5.5 max-effort runs; evaluated version matches the AA DeepSWE chart row."
+      "note": "Benchmark-owner scoreboard mean of three Opus 5.5 max-effort runs; evaluated version matches the AA DeepSWE chart row.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-23",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-opus-55-max-effort---mean-of-3"
     },
     {
       "modelId": "gpt-5.6-sol",
@@ -139,7 +180,11 @@
       "harness": "Codex CLI",
       "route": "OpenAI",
       "sourceType": "benchmark_owner",
-      "note": "Use the owner-published mean of two identical-configuration runs."
+      "note": "Use the owner-published mean of two identical-configuration runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-16",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-56-sol-max-effort---mean-of-2"
     },
     {
       "modelId": "claude-fable-5",
@@ -154,7 +199,11 @@
       "harness": "Claude Code",
       "route": "Anthropic",
       "sourceType": "benchmark_owner",
-      "note": "Single official run; treat as one draw."
+      "note": "Single official run; treat as one draw.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-08-01",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-fable-5-max-effort"
     },
     {
       "modelId": "glm-5.3",
@@ -169,7 +218,11 @@
       "harness": "Claude Code / Z.ai API",
       "route": "Z.ai API",
       "sourceType": "benchmark_owner",
-      "note": "Single official run; treat as one draw."
+      "note": "Single official run; treat as one draw.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-10",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-glm-53-max-effort-zai-api"
     },
     {
       "modelId": "kimi-k3",
@@ -184,7 +237,11 @@
       "harness": "Claude Code / OpenRouter",
       "route": "OpenRouter",
       "sourceType": "benchmark_owner",
-      "note": "Only one owner result is available, at the route's default setting."
+      "note": "Only one owner result is available, at the route's default setting.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-07-26",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-kimi-k3"
     },
     {
       "modelId": "grok-4.6",
@@ -199,7 +256,11 @@
       "harness": "Grok Build CLI (ACP)",
       "route": "xAI",
       "sourceType": "benchmark_owner",
-      "note": "Sequential repo runs; owner-published mean of three runs."
+      "note": "Sequential repo runs; owner-published mean of three runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-14",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-grok-46-xhigh-seq---mean-of-3"
     },
     {
       "modelId": "gpt-5.6-luna",
@@ -214,7 +275,11 @@
       "harness": "Codex CLI",
       "route": "OpenAI",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of three runs."
+      "note": "Owner-published mean of three runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-22",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-56-luna-max-effort---mean-of-3"
     },
     {
       "modelId": "gpt-5.5",
@@ -230,7 +295,7 @@
       "route": null,
       "sourceType": null,
       "providerClaimFound": false,
-      "note": "No Bug Hunt owner result or matching provider-published claim was found by the focused search as of the snapshot."
+      "note": "No Bug Hunt owner result appears in the 192-row owner scoreboard at commit aec976170df89a371384174ca87646a9a8c82415 (2026-10-17), and the 2026-09-29 focused search found no matching provider-published claim; that search was not repeated on 2026-10-18."
     },
     {
       "modelId": "gemini-3.7-flash",
@@ -246,7 +311,7 @@
       "route": null,
       "sourceType": null,
       "providerClaimFound": false,
-      "note": "The owner has Gemini 3.7 Flash high-effort rows, but this cohort row selects the Gemini 3.7 Flash medium variant. No value is transferred across the variant."
+      "note": "The owner has only Gemini 3.7 Flash high-effort rows (3 rows at commit aec976170df89a371384174ca87646a9a8c82415), but this cohort row selects the Gemini 3.7 Flash medium variant. No value is transferred across the variant."
     },
     {
       "modelId": "glm-5.3-flash",
@@ -261,7 +326,11 @@
       "harness": "Claude Code / Z.ai API",
       "route": "Z.ai API",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of three runs."
+      "note": "Owner-published mean of three runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-15",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-glm-53-flash-max-effort-zai-api---mean-of-3"
     },
     {
       "modelId": "deepseek-v4-pro",
@@ -276,7 +345,11 @@
       "harness": "Claude Code / DeepSeek API",
       "route": "DeepSeek API",
       "sourceType": "benchmark_owner",
-      "note": "Single official run. The run notes say the high-versus-max effort probe on Pro was inconclusive."
+      "note": "Single official run. The run notes say the high-versus-max effort probe on Pro was inconclusive.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-10",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-deepseek-v4-pro-max-effort-deepseek-api"
     },
     {
       "modelId": "claude-opus-4.8",
@@ -291,7 +364,11 @@
       "harness": "Claude Code",
       "route": "Anthropic",
       "sourceType": "benchmark_owner",
-      "note": "Single official run; treat as one draw."
+      "note": "Single official run; treat as one draw.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-10",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-opus-48-max-effort"
     },
     {
       "modelId": "qwen3.8-max",
@@ -306,7 +383,11 @@
       "harness": "Claude Code / Alibaba API",
       "route": "Alibaba API",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of three runs on Alibaba's own endpoint."
+      "note": "Owner-published mean of three runs on Alibaba's own endpoint.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-15",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-qwen38-max-max-effort-alibaba-api---mean-of-3"
     },
     {
       "modelId": "muse-spark-1.2",
@@ -321,7 +402,11 @@
       "harness": "Claude Code / OpenRouter",
       "route": "OpenRouter",
       "sourceType": "benchmark_owner",
-      "note": "The alternative 17/105 xhigh row mixes Meta-direct and OpenRouter routes across its two repository legs; the run notes identify 14/105 as the single-route row."
+      "note": "The alternative 17/105 xhigh row mixes Meta-direct and OpenRouter routes across its two repository legs; the run notes identify 14/105 as the single-route row. The owner's run notes tag the 14/105 row 'Superseded' by the Meta-API xhigh row, but that row (17/105) is a mixed-route result by the owner's own caveat, so the single-route 14/105 row remains the match under the matching policy.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-08-06",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-muse-spark-12-default-effort-openrouter"
     },
     {
       "modelId": "claude-sonnet-5",
@@ -336,7 +421,11 @@
       "harness": "Claude Code",
       "route": "Anthropic",
       "sourceType": "benchmark_owner",
-      "note": "Single official run; treat as one draw."
+      "note": "Single official run; treat as one draw.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-10",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-sonnet-5-max-effort"
     },
     {
       "modelId": "deepseek-v4-flash",
@@ -353,7 +442,27 @@
       "sourceType": "benchmark_owner",
       "alias": "deepseek-v4-flash currently routes to DeepSeek V4.1 Flash",
       "aliasSourceUrl": "https://api-docs.deepseek.com/updates/",
-      "note": "Current API alias match; this is a V4.1 Flash result, not a retired V4 Flash result."
+      "note": "Current API alias match; this is a V4.1 Flash result, not a retired V4 Flash result. The owner now also publishes DeepSeek V4.1 Flash 1017 (a newer snapshot reached via deepseek-flash); DeepSeek's update notes do not say that the deepseek-v4-flash alias routes to it, so that distinct model is kept as an unselected owner configuration and no value is transferred.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-15",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-deepseek-v41-flash-max-effort---mean-of-3",
+      "availableOwnerConfigurations": [
+        {
+          "evaluatedModel": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 5",
+          "fixedOf105": 39.4,
+          "sampleN": 5,
+          "aggregation": "mean",
+          "effort": "max",
+          "route": "DeepSeek API",
+          "harness": "Claude Code / DeepSeek API",
+          "runDate": "2026-10-17",
+          "costUsd": 1.06,
+          "costEvidenceType": "actual_bill",
+          "selected": false,
+          "selectionReason": "Distinct newer snapshot (DeepSeek-V4.1-Flash-1017); no verified evidence that the deepseek-v4-flash alias routes to it, so the earlier V4.1 Flash result stays selected."
+        }
+      ]
     },
     {
       "modelId": "gemini-3.6-flash",
@@ -369,7 +478,7 @@
       "route": null,
       "sourceType": null,
       "providerClaimFound": false,
-      "note": "No Bug Hunt owner result or matching provider-published claim was found by the focused search as of the snapshot."
+      "note": "No Bug Hunt owner result appears in the 192-row owner scoreboard at commit aec976170df89a371384174ca87646a9a8c82415 (2026-10-17), and the 2026-09-29 focused search found no matching provider-published claim; that search was not repeated on 2026-10-18."
     },
     {
       "modelId": "glm-5.2",
@@ -385,7 +494,7 @@
       "route": null,
       "sourceType": null,
       "providerClaimFound": false,
-      "note": "No Bug Hunt owner result or matching provider-published claim was found by the focused search as of the snapshot."
+      "note": "No Bug Hunt owner result appears in the 192-row owner scoreboard at commit aec976170df89a371384174ca87646a9a8c82415 (2026-10-17), and the 2026-09-29 focused search found no matching provider-published claim; that search was not repeated on 2026-10-18."
     },
     {
       "modelId": "gemini-3.5-flash",
@@ -401,7 +510,7 @@
       "route": null,
       "sourceType": null,
       "providerClaimFound": false,
-      "note": "No Bug Hunt owner result or matching provider-published claim was found by the focused search as of the snapshot."
+      "note": "No Bug Hunt owner result appears in the 192-row owner scoreboard at commit aec976170df89a371384174ca87646a9a8c82415 (2026-10-17), and the 2026-09-29 focused search found no matching provider-published claim; that search was not repeated on 2026-10-18."
     },
     {
       "modelId": "gpt-6-sol",
@@ -416,7 +525,40 @@
       "harness": "Codex CLI",
       "route": "OpenAI",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of three runs."
+      "note": "Owner-published mean of three runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-23",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-sol-max-effort---mean-of-3"
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6.1 Sol (max effort) - mean of 3",
+      "fixedOf105": 44.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "verified first-party tier; below ultra ceiling",
+      "harness": "Codex CLI",
+      "harnessVersion": "0.159.0",
+      "route": "OpenAI ChatGPT account",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-30",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3",
+      "runScores": [
+        44,
+        42,
+        47
+      ],
+      "observedRange": 5,
+      "judge": "grok-4.7 blinded to arm identity",
+      "wallMinutes": 139.3,
+      "listRateCostUsd": 5.88,
+      "note": "Owner-published mean of three identical Max configurations; 44.3/105 is the owner's published one-decimal mean. Codex0.159.0 differs from older OpenAI rows; max is below ultra. Some laptop load may inflate wall time. Cost is a list-rate estimate, not an invoice; no retained request reached long-context rates. Earlier sandbox-blocked attempt voided and excluded; extras65.3 are unscored."
     },
     {
       "modelId": "gpt-6-luna",
@@ -431,22 +573,42 @@
       "harness": "Codex CLI",
       "route": "OpenAI",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of three runs."
+      "note": "Owner-published mean of three runs.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-23",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-luna-max-effort---mean-of-3"
     },
     {
       "modelId": "grok-4.7",
       "matched": true,
       "matchStatus": "matched",
-      "evaluatedModel": "Grok 4.7 (xhigh) seq - mean of 4",
-      "fixedOf105": 28.8,
-      "sampleN": 4,
+      "evaluatedModel": "Grok 4.7 (xhigh) - mean of 5",
+      "fixedOf105": 29.0,
+      "sampleN": 5,
       "aggregation": "mean",
       "effort": "xhigh",
       "effortStatus": "verified ceiling",
       "harness": "Grok Build CLI (ACP)",
       "route": "xAI",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published sequential-run mean of four runs."
+      "note": "Owner-published mean of five runs of one xhigh configuration, superseding the earlier mean of four (28.8) on 2026-10-09. Runs 1-4 took their two repositories sequentially on 2026-09-21; run 5 (2026-10-08, same grok 1.0.30 build, 500K window restored) took them at the same time, so the owner dropped 'seq' from the row name and run 5's wall is contended. Cost is a reconstructed floor at API list rates. xhigh is the model's ceiling.",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-10-08",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-grok-47-xhigh---mean-of-5",
+      "harnessVersion": "grok 1.0.30",
+      "runScores": [
+        25,
+        30,
+        31,
+        29,
+        30
+      ],
+      "observedRange": 6,
+      "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
+      "wallMinutes": 44.7,
+      "listRateCostUsd": 22.96
     },
     {
       "modelId": "mimo-v2-6-pro",
@@ -461,9 +623,6 @@
       "harness": "Claude Code / Anthropic-compatible shim",
       "route": "Xiaomi first-party",
       "sourceType": "benchmark_owner",
-      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-pro-first-party",
-      "sourceCommit": "7dd3c23a4c86a3fac586707d01129bf549bae325",
-      "observedAt": "2026-10-07T14:15:34Z",
       "runDate": "2026-09-22",
       "costUsd": 0.59,
       "costEvidenceType": "list_rate_estimate",
@@ -483,7 +642,11 @@
           "selected": false,
           "selectionReason": "Reasoning state unasserted; retain separately from the explicitly enabled first-party configuration. Owner notes also disclose mixed judge standards."
         }
-      ]
+      ],
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-22",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-pro-first-party"
     },
     {
       "modelId": "mimo-v2-6-flash",
@@ -498,9 +661,9 @@
       "harness": null,
       "route": null,
       "sourceType": null,
-      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/7dd3c23a4c86a3fac586707d01129bf549bae325/results/run-notes.md#mimo-v26-flash---mean-of-3",
-      "sourceCommit": "7dd3c23a4c86a3fac586707d01129bf549bae325",
-      "observedAt": "2026-10-07T14:15:34Z",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-flash---mean-of-3",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "observedAt": "2026-10-18",
       "note": "An owner-published default-route mean exists, but the owner explicitly says its reasoning state was never asserted or probed. Preserve the result separately until equivalence to the selected AA reasoning variant is established.",
       "availableOwnerConfigurations": [
         {
@@ -519,6 +682,90 @@
           "selectionReason": "No verified equivalence to the selected AA reasoning variant."
         }
       ]
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Haiku 5.5 (xhigh effort) - mean of 3",
+      "fixedOf105": 18.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "xhigh",
+      "effortStatus": "xhigh",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-10-07",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-haiku-55-xhigh-effort---mean-of-3",
+      "runScores": [
+        16,
+        19,
+        20
+      ],
+      "observedRange": 4,
+      "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
+      "wallMinutes": 24.1,
+      "listRateCostUsd": 4.8,
+      "note": "Owner-published mean of three runs of Claude Haiku 5.5 at xhigh effort through Claude Code on the first-party API (16, 19 and 20 of 105); xhigh is the cohort-selected variant (Artificial Analysis frontier configurations medium, high and xhigh; max is not on the frontier). The xhigh effort was read off the wire because the CLI did not yet recognise the model: accepted, not magnitude-probed, and not the ceiling (max exists). Cost is a list-rate estimate priced per request, not an invoice. The max, high, medium and low rows are other efforts and are excluded."
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Sonnet 5.5 (max effort) - mean of 3",
+      "fixedOf105": 51.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "max",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-09-29",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-sonnet-55-max-effort---mean-of-3",
+      "runScores": [
+        57,
+        54,
+        43
+      ],
+      "observedRange": 14,
+      "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
+      "wallMinutes": 287.1,
+      "listRateCostUsd": 154.03,
+      "note": "Benchmark-owner scoreboard mean of three Sonnet 5.5 max-effort runs (57, 54 and 43 of 105; spread 14), superseding the owner's mean of two (55.5). The AA 'max with fallback' configuration maps to the owner's '(max effort)' row, the same convention as the Opus 5.5 entry. Cost is a list-rate estimate, not an invoice; the owner notes the harness priced this model on another model's table."
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3",
+      "fixedOf105": 40.7,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "high",
+      "effortStatus": "verified ceiling",
+      "harness": "Antigravity CLI",
+      "route": "Google",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-18",
+      "reportedOn": "2026-10-14",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gemini-4-argon-high-effort-antigravity-cli---mean-of-3",
+      "runScores": [
+        40,
+        45,
+        37
+      ],
+      "observedRange": 8,
+      "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
+      "wallMinutes": 56.5,
+      "listRateCostUsd": 7.16,
+      "note": "Owner-published mean of three high-effort runs (40, 45 and 37 of 105) through Antigravity CLI, the same harness as the Gemini 3.8 Flash entry. High is the model ceiling (the API accepts low, medium and high and rejects max). Run 2 was cut off by an API billing limit and resumed in the same conversation. The owner's separate Gemini CLI single run (33/105, $32.08) is a different harness and is excluded. Cost is a list estimate from Google's per-call usage."
     }
   ],
   "excludedResults": [
@@ -535,6 +782,97 @@
       "fixedOf105": 17,
       "sampleN": 1,
       "exclusionReason": "Two repository legs used different serving routes. The owner run notes identify the 14/105 OpenRouter row as the single-route result."
+    },
+    {
+      "modelId": "gemini-3.7-flash",
+      "evaluatedModel": "Gemini 3.7 Flash (high; Antigravity CLI retest)",
+      "fixedOf105": 18,
+      "sampleN": 1,
+      "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the medium variant."
+    },
+    {
+      "modelId": "gemini-3.7-flash",
+      "evaluatedModel": "Gemini 3.7 Flash seq",
+      "fixedOf105": 16,
+      "sampleN": 1,
+      "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the medium variant."
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "evaluatedModel": "Haiku 5.5 (max effort) - mean of 2",
+      "fixedOf105": 21.5,
+      "sampleN": 2,
+      "exclusionReason": "Benchmark owner evaluated max effort; the cohort selects the xhigh variant."
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "evaluatedModel": "Haiku 5.5 (high effort) - mean of 2",
+      "fixedOf105": 16,
+      "sampleN": 2,
+      "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the xhigh variant."
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "evaluatedModel": "Haiku 5.5 (medium effort)",
+      "fixedOf105": 12,
+      "sampleN": 1,
+      "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the xhigh variant."
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "evaluatedModel": "Haiku 5.5 (low effort)",
+      "fixedOf105": 11,
+      "sampleN": 1,
+      "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the xhigh variant."
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "evaluatedModel": "Sonnet 5.5 (xhigh effort) - mean of 3",
+      "fixedOf105": 36,
+      "sampleN": 3,
+      "exclusionReason": "Benchmark owner evaluated xhigh effort; the cohort selects the max variant."
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "evaluatedModel": "Sonnet 5.5 (high effort) - mean of 3",
+      "fixedOf105": 34.3,
+      "sampleN": 3,
+      "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the max variant."
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "evaluatedModel": "Sonnet 5.5 (medium effort) - mean of 3",
+      "fixedOf105": 23.3,
+      "sampleN": 3,
+      "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the max variant."
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "evaluatedModel": "Sonnet 5.5 (low effort) - mean of 3",
+      "fixedOf105": 19,
+      "sampleN": 3,
+      "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the max variant."
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "evaluatedModel": "Gemini 4 Argon (high effort)",
+      "fixedOf105": 33,
+      "sampleN": 1,
+      "exclusionReason": "Benchmark owner ran high effort through Gemini CLI (a different harness) and publishes it as a separate row; the match selects the Antigravity CLI mean of 3, the same harness as the existing Gemini 3.8 Flash entry."
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "evaluatedModel": "Gemini 4 Argon (medium effort, Antigravity CLI) - mean of 3",
+      "fixedOf105": 39.3,
+      "sampleN": 3,
+      "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the high variant."
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "evaluatedModel": "Gemini 4 Argon (low effort, Antigravity CLI) - mean of 3",
+      "fixedOf105": 35.3,
+      "sampleN": 3,
+      "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the high variant."
     }
   ]
 }

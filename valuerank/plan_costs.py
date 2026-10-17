@@ -102,7 +102,9 @@ def rank_cost_scores(costs: list[float | int | None]) -> list[float | None]:
         first = ordered.index(value) + 1
         last = n - ordered[::-1].index(value)
         average_rank = (first + last) / 2
-        scores[index] = round(((n - average_rank) / (n - 1)) * 100, 6) if n > 1 else 50.0
+        # One decimal, the precision of every dimension stored in scores.json, so a composite
+        # recomputed from the public data reproduces the committed score exactly.
+        scores[index] = round(((n - average_rank) / (n - 1)) * 100, 1) if n > 1 else 50.0
     return scores
 
 

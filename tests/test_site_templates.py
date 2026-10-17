@@ -334,6 +334,16 @@ def test_tb4_sections(pages):
     assert dom.one("div", **{"data-chart": "tb4"})
 
 
+def test_tb4_row_without_a_published_cost_renders_not_published(env):
+    page = load("benchmark_tb4")
+    page["tb4Json"]["rows"][1]["costUsd"] = None
+    html = env.get_template("benchmark_tb4.html").render(site=load("_site"), page=page)
+    dom = Dom()
+    dom.feed(html)
+    cells = [n.all_text().strip() for n in dom.one("section", id="official-rows").walk() if n.tag == "td" and "cell-num" in n.attrs.get("class", "")]
+    assert "Not published" in cells and "$3,300" in cells
+
+
 def test_redirect_stub(env):
     _, dom, page = render(env, "redirect")
     meta = [n for n in dom.find_all("meta") if n.attrs.get("http-equiv", "").lower() == "refresh"]
@@ -347,3 +357,64 @@ def test_archive_banner_names_date(env):
     text = dom.one(**{"class": "archive-banner"}).all_text()
     assert "2026-07-15" in text or "July 15, 2026" in text
     assert dom.one("a", href="/benchmarks/")
+
+
+def render_with(env, name, change):
+    page = load(name)
+    change(page)
+    html = env.get_template(f"{name}.html").render(site=load("_site"), page=page)
+    dom = Dom()
+    dom.feed(html)
+    return html, dom
+
+
+def test_model_page_shows_the_aa_tier_badge_and_footnote(pages):
+    _, dom, page = pages["model"]
+    tier = dom.one("span", **{"data-aa-tier": "near"})
+    assert tier.all_text().strip() == "Near frontier"  # text, not colour alone
+    assert "Alpha Three (high)" in tier.attrs["title"] and "2 Index points" in tier.attrs["title"]
+    note = dom.one("p", id="aa-footnote")
+    assert page["frontier"]["footnote"] in note.all_text()
+    assert dom.one("section", id="plan-routes").walk() and any(n is note for n in dom.one("section", id="plan-routes").walk())
+
+
+def test_model_page_frontier_tier_labels_and_absence(env):
+    _, dom = render_with(env, "model", lambda p: p["frontier"].update(tier="frontier", intelligenceGap=0))
+    badge = dom.one("span", **{"data-aa-tier": "frontier"})
+    assert badge.all_text().strip() == "AA frontier" and "on the rendered AA frontier" in badge.attrs["title"]
+    _, dom = render_with(env, "model", lambda p: p["frontier"].update(tier=None, configuration=None, intelligenceGap=None, footnote=None))
+    assert not dom.find_all("span", **{"data-aa-tier": "near"}) and not dom.find_all(id="aa-footnote")
+    assert not [n for n in dom.root.walk() if "data-aa-tier" in n.attrs]
+
+
+def test_rankings_legend_explains_the_frontier_badge(pages):
+    _, dom, _ = pages["rankings"]
+    legend = dom.one("section", id="frontier-legend")
+    text = legend.all_text()
+    assert "AA frontier" in text and "Near frontier" in text and "within 3 Index points" in text
+
+
+def test_rankings_legend_gap_follows_the_view_model(env):
+    _, dom = render_with(env, "rankings", lambda p: p.update(nearFrontierGap="4"))
+    assert "within 4 Index points" in dom.one("section", id="frontier-legend").all_text()
+
+
+def test_methodology_model_inclusion_section(pages, env):
+    _, dom, page = pages["methodology"]
+    section = dom.one("section", id="model-inclusion")
+    text = section.all_text()
+    for expected in ("Frontier rule text.", "Near rule text within 3 points.", "Policy sentence.", "Chart observed 2026-10-17T18:48:27Z.",
+                     "2 required, 0 deferred", "GPT-6 Luna (max)", "Gemini 4 Argon (high)", "2 Index points below", "Pricing footnote.", "Alpha Three"):
+        assert expected in text, expected
+    assert any(a.attrs.get("href") == "#model-inclusion" for a in dom.find_all("a"))
+    empty = {"frontierRule": "R.", "nearFrontierRule": "N.", "policyText": None, "observation": None, "nearFrontierStatus": None,
+             "frontierFamilies": [], "nearFrontierFamilies": [], "footnotes": []}
+    _, bare = render_with(env, "methodology", lambda p: p.update(modelInclusion=empty))
+    bare_text = bare.one("section", id="model-inclusion").all_text()
+    assert "R." in bare_text and "families" not in bare_text and "footnote" not in bare_text.lower()
+
+
+def test_tier_badge_uses_singular_wording_for_a_one_point_gap(env):
+    macros = env.get_template("partials/badge.html").module
+    assert "within 1 Index point of the rendered AA frontier" in str(macros.tier_badge("near", "Alpha (low)", 1))
+    assert "within 2 Index points of the rendered AA frontier" in str(macros.tier_badge("near", "Alpha (low)", 2))

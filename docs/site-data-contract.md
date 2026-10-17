@@ -22,13 +22,14 @@ Every value that reaches a page carries a grade. One enum, rendered by one compo
 
 ```json
 {
-  "version": "v1.9.6", "publishDate": "October 8, 2026", "observedAt": "2026-10-07T17:23:20Z",
+  "version": "v1.9.6", "publishDate": "October 8, 2026", "observedAt": "2026-10-17T19:28:57Z",
   "bases": {
     "api": {"label": "API ranking", "costLabel": "API cost", "costUnit": "USD per Index run", "description": "AA total evaluation cost at API rates.", "pickLabel": "Best at API rates", "pickPhrase": "at API rates"},
     "plan": {"label": "Plan ranking", "costLabel": "Plan cost", "costUnit": "USD per Index point", "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index.", "pickLabel": "Best on a subscription", "pickPhrase": "on a subscription"}
   },
   "defaultBasis": "plan",
   "costWeightPct": 18.9394,
+  "modelInclusion": {"frontierRule": "…", "nearFrontierRule": "…", "nearFrontierGap": "3", "policyText": null, "observation": null, "nearFrontierStatus": null, "frontierFamilies": [{"family": "GPT-6 Luna", "configuration": "GPT-6 Luna (max)"}], "nearFrontierFamilies": [{"family": "Gemini 4 Argon", "configuration": "Gemini 4 Argon (high)", "gap": "2"}], "footnotes": [{"text": "…", "models": ["Claude Haiku 5.5 (xhigh)"]}]},
   "dimensions": [
     {"key": "costComposite", "label": "Cost", "fullLabel": "Cost (selected basis)", "category": "cost", "weightPct": 18.9394, "priority": 25, "higherBetter": false, "sourceUrl": null}
   ],
@@ -50,7 +51,8 @@ Every value that reaches a page carries a grade. One enum, rendered by one compo
       "speed": 86.2,
       "grade": "measured",
       "pareto": {"api": true, "plan": true},
-      "tier": "Near-Budget"
+      "tier": "Near-Budget",
+      "aaFrontierTier": "frontier", "aaFrontierConfiguration": "GPT-6.1 Sol (max)", "aaFrontierIntelligenceGap": 0, "aaFrontierFootnote": null
     }
   ],
   "picks": {
@@ -65,6 +67,8 @@ Rules:
 - `dims` holds the normalised 0–100 score per non-cost dimension (`null` when missing). `costDims` holds the cost dimension score per basis; the client substitutes it for `costComposite` when recomputing.
 - `overall[basis]` and `rank[basis]` are the committed values for each basis at the default cost weight. The client recomputes both when the cost-weight slider moves, using `dimensions[].weightPct`, `dims`, `costDims` and the renormalisation rule (available priorities only).
 - `models` contains every roster model (28), ranked ones first. Unranked models have `rank` values `null`, `overall` values `null`, and `exclusionReasons` filled.
+- `modelInclusion` states the two-part model-inclusion policy and is read from `frontierSelection` in `data/scores.json` (a copy of `data/ranking_summary.json`): the frontier rule, the near-frontier rule (threshold from `nearFrontierPolicy.maxIntelligenceGap`, default 3, as a string in `nearFrontierGap`), the optional recorded `policyText`, the `observation` sentence (chart date, Index version, catalog, plotted and vertex counts, near-frontier counts), `nearFrontierStatus` (required and deferred model counts), the `frontierFamilies` and `nearFrontierFamilies` lists with the selected configuration (`gap` is the Index-point gap, as a string) and one `footnotes` entry per distinct Artificial Analysis footnote with the model names it applies to. Every optional part is `null` or an empty list when `frontierSelection` lacks the field; the two rules are always present.
+- `aaFrontierTier` (`"frontier"`, `"near"` or `null`), `aaFrontierConfiguration`, `aaFrontierIntelligenceGap` (Index points below the rendered frontier at the model's cost, `0` on the frontier) and `aaFrontierFootnote` (Artificial Analysis' footnote for the model's points, for example the Claude Haiku 5.5 long-context pricing note) pass through unchanged from `data/scores.json` and are `null` when the snapshot lacks them. Frontier membership is the line Artificial Analysis renders, never recomputed. The rankings table shows a text badge ("AA frontier" or "Near frontier") with the configuration and gap in its tooltip; the model page shows the badge, the same fields under `frontier` (`tier`, `configuration`, `intelligenceGap`, `footnote`), and the footnote as a note beside the cost evidence (it is also the `note` of the `costComposite` dimension).
 - `grade` on a model is the worst grade among the values that enter its score (`measured` < `claim` < `estimate` < `assumption`).
 - `picks[basis]` holds three cards that show three different angles; each has `slug`, `label`, `reason` (under 25 words), `score` and `unit`, and is `null` when the cohort cannot supply it. `value` is rank 1 on that basis (label "Best overall value"). `other` is rank 1 on the other basis, labelled from `bases[other].pickLabel` ("Best at API rates" or "Best on a subscription") with a reason that states both ranks; when that is the same model as `value`, it becomes the quality leader ("Best quality, any cost") and, if that is also `value`, the runner-up overall ("Runner-up overall"). `budget` is the best overall model in the cheapest third by that basis' cost score, skipping models already picked when that third holds more than one model (and keeping them if skipping would leave nothing). `bases[key]` carries `pickLabel` and `pickPhrase` ("at API rates", "on a subscription") for the other-basis card. The client applies the same rule in `scoring.js` when the cost weight moves, scoring both bases at that weight.
 
@@ -81,7 +85,7 @@ Rules:
   "cost": {…same shape as rankings.models[].cost…},
   "plans": [ {"id": "…", "planLabel": "…", "planFeeUsd": 20, "valueMultiple": 58.9, "grade": "measured", "evidenceLabel": "…", "sourceUrl": "…", "sourceDate": "…", "usdPerRun": 147.85, "usdPerPoint": 2.566, "selected": true} ],
   "history": [ {"version": "v1.9.6", "date": "2026-10-08", "rank": {"api": 1, "plan": 2}} ],
-  "frontier": {"onAaFrontier": true, "aaFrontierNote": "…"}
+  "frontier": {"onAaFrontier": true, "aaFrontierNote": "…", "tier": "frontier", "configuration": "GPT-6.1 Sol (max)", "intelligenceGap": 0, "footnote": null}
 }
 ```
 
@@ -98,6 +102,8 @@ Routes, their evidence and the full candidate comparison (all 28 models): `{ "as
 ### `site/data/benchmarks/terminal-bench-4.json`
 
 The current `data/tb4.json` content plus `frontierCount` and the cohort mapping used by the Terminal-Bench page.
+
+`rows[].costUsd` may be `null` when the leaderboard publishes no cost for a row; `rowsWithoutCostN` counts such rows. They keep their rank and resolution rate, are listed last when ordered by cost, never count towards `frontierCount`, are left off the cost axis of the chart, and render as "Not published" in the table.
 
 ### `site/data/changelog.json`
 
@@ -122,13 +128,13 @@ site = {"version", "publishDate", "observedAt", "nav": [{"label", "href", "key"}
 | Template | `page` keys |
 |---|---|
 | `index.html` | `headline` (one sentence per basis of at most 18 words, leading with the model name: `{"plan": "…", "api": "…"}`), `picks`, `models` (ranked 16, compact fields including `coverage`), `dimensions`, `chart`, `rankingsJson` (embedded as `rankings-data`) |
-| `rankings.html` | `rankingsJson`, `providers` (sorted developers), `grades`, `columns` (`[{key, label, sortable, default}]`; keys are the script catalogue: `rank`, `name`, `overall`, `quality`, `cost`, `grade`, `coverage`, `developer`, `qualityRank`, `speed`, `ii`, then one per non-cost dimension) |
+| `rankings.html` | `rankingsJson`, `nearFrontierGap` (string, from `modelInclusion`), `providers` (sorted developers), `grades`, `columns` (`[{key, label, sortable, default}]`; keys are the script catalogue: `rank`, `name`, `overall`, `quality`, `cost`, `grade`, `coverage`, `developer`, `qualityRank`, `speed`, `ii`, then one per non-cost dimension) |
 | `models.html` | `models` (all 28 roster models, ranked first: `slug`, `name`, `developer`, `rank`, `overall`, `grade`, `rankingEligible`, `coveragePct`), `rankedCount`, `unrankedCount` |
 | `model.html` | the model JSON above plus `related` (same developer) |
 | `plans.html` | `plansJson`, `workedExample: {models: [{slug, name, routeLabel, planFeeUsd, valueMultiple, grade, evidenceLabel, indexValue, apiUsd, planUsdPerRun, planUsdPerPoint}]}`, `routesByProvider` |
 | `benchmarks.html` | `benchmarksJson` |
 | `benchmark_tb4.html` | `tb4Json` (`data/tb4.json` plus `frontierCount` and `cohortMapping`) |
-| `methodology.html` | `dimensions`, `weights`, `workedExample: {slug, name, basis, overall, availableWeightPct, availablePriority, totalPriority, steps: [{key, label, weightPct, normalized, included, effectiveWeightPct, contribution}], missing}`, `faq` (list of `{q, a}` without release notes), `limitations` |
+| `methodology.html` | `dimensions`, `weights`, `workedExample: {slug, name, basis, overall, availableWeightPct, availablePriority, totalPriority, steps: [{key, label, weightPct, normalized, included, effectiveWeightPct, contribution}], missing}`, `modelInclusion` (the `rankings.modelInclusion` object above, rendered as the "Model inclusion" section), `faq` (list of `{q, a}` without release notes), `limitations` |
 | `changelog.html` | `changelogJson` |
 | `data.html` | `files` (list of `{path, description, schema}`; `path` is absolute, for example `/data/rankings.json`) |
 | `archive_banner.html` | `archiveDate`, `archiveHref`, `note` |

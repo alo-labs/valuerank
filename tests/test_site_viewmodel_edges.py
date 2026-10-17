@@ -71,17 +71,17 @@ def test_estimated_status_without_a_source_type_still_grades_the_index_as_estima
 
 def test_a_model_without_cost_or_index_has_no_plan_numbers_and_a_missing_cost_dimension(data):
     def change(scores):
-        kimi = model(scores, "kimi-k3")
-        kimi["aaEvalCost"] = None
-        kimi["frontierSelection"] = None
+        pro = model(scores, "deepseek-v4-pro")
+        pro["aaEvalCost"] = None
+        pro["frontierSelection"] = None
     edit(data, "scores.json", change)
     bundle = viewmodel.build_bundle(data)
-    kimi = next(m for m in bundle.rankings["models"] if m["slug"] == "kimi-k3")
-    assert kimi["costDims"] == {"api": None, "plan": None}
-    cost = dim(bundle, "kimi-k3", "costComposite")
+    pro = next(m for m in bundle.rankings["models"] if m["slug"] == "deepseek-v4-pro")
+    assert pro["costDims"] == {"api": None, "plan": None}
+    cost = dim(bundle, "deepseek-v4-pro", "costComposite")
     assert cost["grade"] == "missing" and cost["value"] is None and cost["source"] is None
-    assert kimi["tier"] is None
-    assert kimi["rank"]["api"] is not None
+    assert pro["tier"] is None
+    assert pro["rank"]["api"] is not None
 
 
 def test_unranked_model_with_a_cost_keeps_its_values_but_no_scores(data):
@@ -184,3 +184,72 @@ def test_plans_page_requires_a_plan_route_for_each_worked_example_model(data):
     bundle.plans["workedExample"]["slugs"] = ["kimi-k3"]
     with pytest.raises(ValueError, match="no plan route"):
         viewmodel.plans_page(bundle)
+
+
+def test_terminal_bench_rows_without_a_cost_stay_null_and_are_not_a_cost_frontier_point(data):
+    baseline = viewmodel.build_bundle(data).tb4
+
+    def change(tb4):
+        tb4["rows"].append(dict(tb4["rows"][0], model="Unpriced (max)", baseName="Unpriced", cohortModelId=None, costUsd=None, resolutionRate=0.99, resolutionRatePct=99.0))
+    edit(data, "tb4.json", change)
+    updated = viewmodel.build_bundle(data).tb4
+    assert updated["rows"][-1]["costUsd"] is None
+    assert updated["frontierCount"] == baseline["frontierCount"]
+
+
+def test_frontier_tier_fields_pass_through_to_rankings_and_model_documents(data):
+    def change(scores):
+        sol = model(scores, "gpt-6.1-sol")
+        sol.update(aaFrontierTier="frontier", aaFrontierConfiguration="GPT-6.1 Sol (max)", aaFrontierIntelligenceGap=0, aaFrontierFootnote=None)
+        luna = model(scores, "gpt-6-luna")
+        luna.update(aaFrontierTier="near", aaFrontierConfiguration="GPT-6 Luna (high)", aaFrontierIntelligenceGap=2.5, aaFrontierFootnote="Footnote text.")
+    edit(data, "scores.json", change)
+    bundle = viewmodel.build_bundle(data)
+    row = next(m for m in bundle.rankings["models"] if m["slug"] == "gpt-6-luna")
+    assert (row["aaFrontierTier"], row["aaFrontierConfiguration"], row["aaFrontierIntelligenceGap"], row["aaFrontierFootnote"]) == (
+        "near", "GPT-6 Luna (high)", 2.5, "Footnote text.")
+    frontier = bundle.models["gpt-6-luna"]["frontier"]
+    assert (frontier["tier"], frontier["configuration"], frontier["intelligenceGap"], frontier["footnote"]) == (
+        "near", "GPT-6 Luna (high)", 2.5, "Footnote text.")
+    sol = bundle.models["gpt-6-1-sol"]["frontier"]
+    assert sol["tier"] == "frontier" and sol["intelligenceGap"] == 0 and sol["footnote"] is None
+
+
+def test_frontier_tier_fields_default_to_null_when_the_snapshot_lacks_them(data):
+    def change(scores):
+        for m in scores["models"]:
+            for key in ("aaFrontierTier", "aaFrontierConfiguration", "aaFrontierIntelligenceGap", "aaFrontierFootnote"):
+                m.pop(key, None)
+    edit(data, "scores.json", change)
+    bundle = viewmodel.build_bundle(data)
+    assert all(m["aaFrontierTier"] is None and m["aaFrontierFootnote"] is None for m in bundle.rankings["models"])
+    assert all(
+        (d["frontier"]["tier"], d["frontier"]["configuration"], d["frontier"]["intelligenceGap"], d["frontier"]["footnote"]) == (None,) * 4
+        for d in bundle.models.values()
+    )
+
+
+def test_rankings_page_exposes_the_near_frontier_gap_from_the_policy(data):
+    edit(data, "scores.json", lambda scores: scores["frontierSelection"].update(nearFrontierPolicy={"maxIntelligenceGap": 4}))
+    assert viewmodel.rankings_page(viewmodel.build_bundle(data))["nearFrontierGap"] == "4"
+
+
+def test_methodology_page_carries_the_model_inclusion_section_from_the_snapshot(data):
+    def change(scores):
+        scores["frontierSelection"]["nearFrontierPolicy"] = {"maxIntelligenceGap": 3, "text": "Policy text."}
+        scores["frontierSelection"]["nearFrontierFamilies"] = [{"family": "Gemini 4 Argon", "modelId": "x", "configuration": "Gemini 4 Argon (high)", "intelligenceGap": 2}]
+        model(scores, "gpt-6-luna")["aaFrontierFootnote"] = "Footnote text."
+    edit(data, "scores.json", change)
+    bundle = viewmodel.build_bundle(data)
+    inclusion = viewmodel.methodology_page(bundle)["modelInclusion"]
+    assert inclusion["policyText"] == "Policy text."
+    assert inclusion["nearFrontierFamilies"] == [{"family": "Gemini 4 Argon", "configuration": "Gemini 4 Argon (high)", "gap": "2"}]
+    assert inclusion["footnotes"][0]["text"] == "Footnote text."
+    assert inclusion["frontierRule"] and "3 points" in inclusion["nearFrontierRule"]
+
+
+def test_aa_footnote_becomes_the_note_on_the_cost_evidence(data):
+    edit(data, "scores.json", lambda scores: model(scores, "gpt-6-luna").update(aaFrontierFootnote="Footnote text."))
+    bundle = viewmodel.build_bundle(data)
+    assert dim(bundle, "gpt-6-luna", "costComposite")["note"] == "Footnote text."
+    assert dim(bundle, "gpt-6-1-sol", "costComposite")["note"] is None

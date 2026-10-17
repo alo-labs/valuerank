@@ -11,6 +11,7 @@ import pytest
 from valuerank import build_aa_metrics as bam
 
 FIXTURES = Path(__file__).parent / "fixtures" / "aa"
+PAGE_FIXTURES = Path(__file__).parent / "fixtures" / "aa_pages"
 VERSION = "Artificial Analysis Intelligence Index v4.3.2"
 
 
@@ -85,6 +86,132 @@ def test_decode_rejects_undecodable_json(body):
 def test_decode_rejects_model_without_slug():
     with pytest.raises(ValueError, match="no slug"):
         bam.decode_current_model(escaped_payload({"name": "no slug"}))
+
+
+# --------------------------------------------------------------------------- decode_page_model
+
+
+def page_fixture(name: str) -> str:
+    """Real excerpt cut from an AA model page (JSON-escaped flight payload)."""
+
+    return (PAGE_FIXTURES / name).read_text()
+
+
+def test_page_slug_is_the_last_url_path_segment_with_or_without_trailing_slash():
+    assert bam.page_slug("https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh") == "claude-haiku-5-5-xhigh"
+    assert bam.page_slug("https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh/") == "claude-haiku-5-5-xhigh"
+    assert bam.page_slug("https://artificialanalysis.ai/models/m?tab=x#top") == "m"
+
+
+def test_decode_page_model_reads_slug_keyed_object_from_page_without_legacy_marker():
+    html = page_fixture("haiku-xhigh-full.txt") + page_fixture("haiku-xhigh-decoy.txt")
+    assert bam.LEGACY_MARKER not in html
+    model = bam.decode_page_model(html, "claude-haiku-5-5-xhigh")
+    assert model["slug"] == "claude-haiku-5-5-xhigh"
+    assert model["name"] == "Claude Haiku 5.5 (Xhigh)"
+    assert model["effort"]["slug"] == "xhigh"
+    assert model["intelligenceIndex"] == pytest.approx(41.2489304677024)
+    assert model["intelligenceIndexCost"]["total"] == pytest.approx(157.5758646895501)
+    assert len(model) == 91
+
+
+def test_decode_page_model_ignores_decoys_before_after_and_nested_slug_mentions():
+    # GPT-6 Luna's page also carries a ``currentRelease`` object (slug + index, no cost)
+    # and its own release block inside the model; neither may be mistaken for the model.
+    html = page_fixture("gpt-6-luna-decoy.txt") + page_fixture("gpt-6-luna-full.txt")
+    model = bam.decode_page_model(html, "gpt-6-luna")
+    assert model["name"] == "GPT-6 Luna (Max)" and model["effort"]["slug"] == "max"
+    assert model["intelligenceIndexCost"]["total"] == pytest.approx(122.05438368649308)
+    assert model["release"]["slug"] == "gpt-6-luna"
+
+
+def test_decode_page_model_accepts_identical_duplicate_objects():
+    full = page_fixture("haiku-xhigh-full.txt")
+    model = bam.decode_page_model(full + full, "claude-haiku-5-5-xhigh")
+    assert model == bam.decode_page_model(full, "claude-haiku-5-5-xhigh")
+
+
+def test_decode_page_model_matches_legacy_extraction_where_the_marker_exists():
+    html = page_fixture("mimo-v2-6-pro-full.txt")
+    assert bam.LEGACY_MARKER in html
+    model = bam.decode_page_model(html, "mimo-v2-6-pro")
+    assert model == bam.decode_current_model(html)
+    assert model["intelligenceIndex"] == pytest.approx(46.3242065310383)
+
+
+def test_decode_page_model_falls_back_to_legacy_marker_for_objects_without_cost():
+    model = {"slug": "m", "intelligenceIndex": 50}
+    assert bam.decode_page_model(escaped_payload(model), "m") == model
+
+
+def test_decode_page_model_prefers_slug_keyed_object_over_a_marker_for_another_slug():
+    html = escaped_payload({"slug": "other", "intelligenceIndex": 1}) + page_fixture("haiku-xhigh-full.txt")
+    model = bam.decode_page_model(html, "claude-haiku-5-5-xhigh")
+    assert model["slug"] == "claude-haiku-5-5-xhigh"
+
+
+def test_decode_page_model_rejects_marker_object_for_a_different_slug():
+    with pytest.raises(ValueError, match="currentModel slug 'other' does not match page slug 'm'"):
+        bam.decode_page_model(escaped_payload({"slug": "other"}), "m")
+
+
+def test_decode_page_model_propagates_legacy_marker_without_slug():
+    with pytest.raises(ValueError, match="no slug"):
+        bam.decode_page_model(escaped_payload({"name": "no slug"}), "m")
+
+
+def test_decode_page_model_rejects_decoy_only_page():
+    html = page_fixture("haiku-xhigh-decoy.txt") + page_fixture("gpt-6-luna-decoy.txt")
+    with pytest.raises(ValueError, match="no full model object for slug 'claude-haiku-5-5-xhigh'"):
+        bam.decode_page_model(html, "claude-haiku-5-5-xhigh")
+
+
+def test_decode_page_model_ignores_slug_mention_outside_any_object():
+    with pytest.raises(ValueError, match="no full model object for slug 'm'"):
+        bam.decode_page_model('\\"slug\\":\\"m\\"', "m")
+
+
+def test_decode_page_model_rejects_page_without_any_slug_mention():
+    with pytest.raises(ValueError, match="no full model object for slug 'm'"):
+        bam.decode_page_model("<html>blocked</html>", "m")
+
+
+def compact_escaped(model: dict) -> str:
+    """The model as the flight payload spells it: compact JSON, then JSON-string escaped."""
+
+    return json.dumps(json.dumps(model, separators=(",", ":")))[1:-1]
+
+
+def full_object(slug: str, **changes) -> str:
+    return compact_escaped({"slug": slug, "intelligenceIndex": 10, "intelligenceIndexCost": {"total": 5}, **changes})
+
+
+def test_decode_page_model_rejects_disagreeing_full_objects():
+    html = "a" + full_object("m") + "b" + full_object("m", intelligenceIndex=11)
+    with pytest.raises(ValueError, match="full model objects for slug 'm' disagree"):
+        bam.decode_page_model(html, "m")
+
+
+def test_decode_page_model_rejects_keyed_object_disagreeing_with_legacy_marker():
+    marker_object = compact_escaped({"slug": "m", "intelligenceIndex": 99})
+    html = '\\"currentModel\\":' + marker_object + "," + full_object("m")
+    with pytest.raises(ValueError, match="full model objects for slug 'm' disagree"):
+        bam.decode_page_model(html, "m")
+
+
+@pytest.mark.parametrize(
+    "fragment",
+    [
+        '{\\"slug\\":\\"m\\",\\"intelligenceIndexCost\\":{',  # never closed
+        '{\\"slug\\":\\"m\\",\\"intelligenceIndexCost\\":\\q}',  # invalid JSON string escape
+        '{\\"slug\\":\\"m\\",\\"intelligenceIndexCost\\":x}',  # invalid JSON document
+    ],
+)
+def test_decode_page_model_skips_undecodable_candidates(fragment):
+    with pytest.raises(ValueError, match="no full model object for slug 'm'"):
+        bam.decode_page_model(fragment, "m")
+    # ...but still finds a good object elsewhere on the same page.
+    assert bam.decode_page_model(fragment + full_object("m"), "m")["intelligenceIndex"] == 10
 
 
 # --------------------------------------------------------------------------- selected_page
@@ -240,13 +367,59 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     assert extraction["textSnapshot"] == "data/aa/full__full.txt"
     assert extraction["sourceSnapshot"] is None and extraction["captureMode"] == "html"
     assert extraction["method"] == "decoded currentModel object from first-party page payload"
-    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-10-07T17:23:20Z"
+    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-10-17T19:28:57Z"
     assert output["benchmarkVersion"] == VERSION and output["providerClaimPolicy"] == "policy-text"
     assert coverage["cohortN"] == 1 and coverage["cohort"].endswith("1-model ValueRank comparison roster")
     assert coverage["sourceSnapshot"] is None
     printed = json.loads(capsys.readouterr().out)
     assert printed["models"] == 1 and printed["primaryFields"] == 14 and printed["additionalFields"] == 3
     assert printed["outputs"] == ["data/aa_metrics.json", "data/coverage_matrix.json"]
+
+
+def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
+    world.write(
+        mapping=[{"id": "haiku", "displayName": "Haiku", "aaSlug": "claude-haiku-5-5-xhigh", "aaVariant": "xhigh"}],
+        extract=[entry("haiku", slug="claude-haiku-5-5-xhigh")],
+    )
+    slug = "claude-haiku-5-5-xhigh"
+    (world.data / "aa" / f"haiku__{slug}.html").write_text(
+        page_fixture("haiku-xhigh-full.txt") + page_fixture("haiku-xhigh-decoy.txt"))
+    (world.data / "aa" / f"haiku__{slug}.txt").write_text("Model summary\nSpeed 195.3 Output tokens per second\n")
+    output, _ = world.run()
+    model = output["models"]["haiku"]
+    metrics = model["metrics"]
+    assert (model["aaSlug"], model["aaName"], model["aaVariant"]) == (slug, "Claude Haiku 5.5 (Xhigh)", "xhigh")
+    assert model["release"] == {"slug": "claude-haiku-5-5", "name": "Claude Haiku 5.5", "deprecatedTo": None}
+    assert metrics["intelligenceIndex"] == pytest.approx(41.2489304677024)
+    assert metrics["aaEvalCost"] == pytest.approx(157.5758646895501)
+    assert metrics["speed"] == 195.3  # raw-HTML mode keeps reading the page's visible summary text
+    assert model["intelligenceIndexStatus"] == "measured"
+    # Every retained ranking dimension is read from the new object, none silently null.
+    assert metrics["briefcaseElo"] == 1531.52 and metrics["briefcaseNormalized"] == pytest.approx((1531.52 - 500) / 2000)
+    assert metrics["gdpvalV21"] == 1513.05 and metrics["gdpvalV21Normalized"] == 0.506525
+    assert metrics["automationBenchAA"] == pytest.approx(0.35953889773428194)
+    assert metrics["terminalBenchV40"] == pytest.approx(0.292929292929293)
+    assert metrics["scicode"] == pytest.approx(0.517361111111111) and metrics["hle"] == pytest.approx(0.42678405931418)
+    assert metrics["gdpPdfAllPass"] == 0.182 and metrics["critpt"] == pytest.approx(0.225714285714286)
+    assert metrics["omniAccuracy"] == 0.3495
+    assert metrics["omniNonHallucination"] == pytest.approx(1 - 0.44427363566487316)
+    assert metrics["aaLcr"] == pytest.approx(0.783333333333333)
+    assert metrics["gpqaDiamond"] is None  # AA publishes gpqa: null for this model; legacy field, not ranked
+
+
+def test_main_snapshot_speed_comes_from_output_speed_variance_median_of_a_decoded_page(world):
+    """AA pages carry no ``speed`` key; the headline speed is ``outputSpeedVariance.median``.
+
+    On the saved pages that median equals ``performanceByPromptType.long.medianOutputSpeed``.
+    """
+
+    slug = "claude-haiku-5-5-xhigh"
+    decoded = bam.decode_page_model(page_fixture("haiku-xhigh-full.txt"), slug)
+    assert "speed" not in decoded
+    assert decoded["outputSpeedVariance"]["median"] == decoded["performanceByPromptType"]["long"]["medianOutputSpeed"]
+    world.write(extract=[entry("haiku", slug=slug)], snapshot={"pages": [snapshot_page("haiku", decoded, {})]})
+    output, _ = world.run()
+    assert output["models"]["haiku"]["metrics"]["speed"] == pytest.approx(195.273087468701)
 
 
 def test_main_alternate_field_names_and_estimated_index(world):
@@ -348,9 +521,16 @@ def test_main_provider_claims_fill_only_exactly_eligible_missing_metrics(world):
     assert coverage["fields"]["scicode"]["providerClaimN"] == 0
 
 
-def test_main_rejects_slug_and_variant_mismatch(world):
-    world.write(mapping=[{"id": "m", "aaSlug": "expected"}], extract=[entry("m")])
+def test_main_rejects_raw_page_whose_payload_belongs_to_another_slug(world):
+    world.write(extract=[entry("m")])
     world.page("m", "m", {"slug": "actual"})
+    with pytest.raises(ValueError, match="currentModel slug 'actual' does not match page slug 'm'"):
+        bam.main()
+
+
+def test_main_rejects_slug_and_variant_mismatch(world):
+    world.write(mapping=[{"id": "m", "aaSlug": "expected"}], extract=[entry("m", slug="actual")])
+    world.page("m", "actual", {"slug": "actual"})
     with pytest.raises(ValueError, match="slug mismatch for m: expected expected, got actual"):
         bam.main()
     world.write(mapping=[{"id": "m", "aaVariant": "max"}], extract=[entry("m")])

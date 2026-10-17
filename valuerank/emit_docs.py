@@ -133,7 +133,7 @@ def livebench_table(livebench_rows):
 
 def tb4_table(tb4_rows):
     return "\n".join(
-        f"| {entry['rankLabel']} | {entry['baseModel']} | {entry['agent']} | {entry['resolutionRatePct']:.1f}% ± {entry['uncertaintyPct']:.1f}% | {entry['tokens']} | ${entry['costUsd']:,.0f} |"
+        f"| {entry['rankLabel']} | {entry['baseModel']} | {entry['agent']} | {entry['resolutionRatePct']:.1f}% ± {entry['uncertaintyPct']:.1f}% | {entry['tokens']} | {'—' if entry['costUsd'] is None else f"${entry['costUsd']:,.0f}"} |"
         for entry in tb4_rows
     )
 
@@ -225,6 +225,117 @@ def plan_html_table(headers, rows):
     return '<div class="table-wrap"><table><thead><tr>' + ''.join(f'<th scope="col">{html_escape(header)}</th>' for header in headers) + '</tr></thead><tbody>' + ''.join('<tr>' + ''.join(f'<td>{cell(value)}</td>' for value in row) + '</tr>' for row in rows) + '</tbody></table></div>'
 
 
+FRONTIER_RULE = (
+    "Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus "
+    "total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA's "
+    "rendered line as observed; ValueRank never recomputes it from rounded values."
+)
+NEAR_FRONTIER_RULE = (
+    "A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within {gap} points of the "
+    "rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. "
+    "Every near-frontier family is ranked (its selected configuration may differ from the near configuration) or is explicitly "
+    "deferred by a dated, reasoned roster decision. The cost ratio to the frontier is reported for information only."
+)
+DEFAULT_NEAR_GAP = 3
+
+
+def _count(value, noun, plural=None):
+    return f"{value} {noun if value == 1 else plural or noun + 's'}"
+
+
+def _clean_number(value):
+    return str(int(value)) if isinstance(value, (int, float)) and float(value).is_integer() else str(value)
+
+
+def model_inclusion(selection, models):
+    """The model-inclusion policy and its observed facts, read from ``frontierSelection`` (optional, every field).
+
+    Shared by the Markdown emitter and the site view model so both state the same rules and numbers.
+    """
+
+    selection = selection or {}
+    policy = selection.get("nearFrontierPolicy") or {}
+    universe = selection.get("sourceUniverse") or {}
+    head = ["Chart observed"] if selection.get("capturedAt") or selection.get("indexVersion") or universe else []
+    if head:
+        if selection.get("capturedAt"):
+            head.append(selection["capturedAt"])
+        if selection.get("indexVersion"):
+            head.append(f"(Intelligence Index v{selection['indexVersion']})")
+    facts = []
+    if universe.get("selectedModelN") is not None:
+        facts.append(f"{universe['selectedModelN']} catalog models selected")
+    if universe.get("plottedPointN") is not None:
+        facts.append(_count(universe["plottedPointN"], "plotted point"))
+    if universe.get("observedFrontierPointN") is not None:
+        vertices = _count(universe["observedFrontierPointN"], "rendered Pareto vertex", "rendered Pareto vertices")
+        facts.append(vertices + (f" across {_count(selection['familyN'], 'family', 'families')}" if selection.get("familyN") is not None else ""))
+    sentences = []
+    if head:
+        sentences.append(" ".join(head) + (": " + (", ".join(facts[:-1]) + " and " + facts[-1] if len(facts) > 1 else facts[0]) if facts else "") + ".")
+    if selection.get("nearFrontierPointN") is not None:
+        near = _count(selection["nearFrontierPointN"], "plotted point")
+        if selection.get("nearFrontierFamilyN") is not None:
+            near += f" across {_count(selection['nearFrontierFamilyN'], 'family', 'families')}"
+        sentences.append(f"{near} {'is' if selection['nearFrontierPointN'] == 1 else 'are'} near-frontier.")
+    status = [
+        text
+        for text in (
+            f"{selection['nearFrontierRequiredModelN']} required" if selection.get("nearFrontierRequiredModelN") is not None else None,
+            f"{selection['nearFrontierDeferredN']} deferred by roster decision" if selection.get("nearFrontierDeferredN") is not None else None,
+        )
+        if text
+    ]
+    footnotes = {}
+    for model in models:
+        if model.get("aaFrontierFootnote"):
+            footnotes.setdefault(model["aaFrontierFootnote"], []).append(model["name"])
+    gap = _clean_number(policy.get("maxIntelligenceGap", DEFAULT_NEAR_GAP))
+    return {
+        "frontierRule": FRONTIER_RULE,
+        "nearFrontierGap": gap,
+        "nearFrontierRule": NEAR_FRONTIER_RULE.format(gap=gap),
+        "policyText": policy.get("text"),
+        "observation": " ".join(sentences) or None,
+        "nearFrontierStatus": "Near-frontier models: " + ", ".join(status) + "." if status else None,
+        "frontierFamilies": [
+            {"family": item["family"], "configuration": item["configuration"]} for item in selection.get("frontierFamilies") or []
+        ],
+        "nearFrontierFamilies": [
+            {"family": item["family"], "configuration": item["configuration"], "gap": _clean_number(item["intelligenceGap"])}
+            for item in selection.get("nearFrontierFamilies") or []
+        ],
+        "footnotes": [{"text": text, "models": names_} for text, names_ in footnotes.items()],
+    }
+
+
+def model_inclusion_markdown(inclusion, level="##"):
+    lines = [
+        f"{level} Model inclusion",
+        "",
+        f"**Frontier rule.** {inclusion['frontierRule']}",
+        "",
+        f"**Near-frontier rule.** {inclusion['nearFrontierRule']}",
+    ]
+    if inclusion["policyText"]:
+        lines += ["", f"Policy as recorded: {inclusion['policyText']}"]
+    for text in (inclusion["observation"], inclusion["nearFrontierStatus"]):
+        if text:
+            lines += ["", text]
+    if inclusion["frontierFamilies"]:
+        lines += ["", "Frontier families and the configuration selected for each:", ""]
+        lines += [f"- {item['family']}: {item['configuration']}" for item in inclusion["frontierFamilies"]]
+    if inclusion["nearFrontierFamilies"]:
+        lines += ["", "Near-frontier families and the configuration selected for each:", ""]
+        lines += [
+            f"- {item['family']}: {item['configuration']}, {item['gap']} Index points below the frontier"
+            for item in inclusion["nearFrontierFamilies"]
+        ]
+    for note in inclusion["footnotes"]:
+        lines += ["", f"AA footnote ({', '.join(note['models'])}): {note['text']}"]
+    return "\n".join(lines) + "\n"
+
+
 def norm_values(model, weights):
     return ", ".join(
         f"{model['dims'][weight['key']]:.1f}"
@@ -290,6 +401,7 @@ def main(*, root=ROOT, data=DATA) -> int:
         )
     cost_weight = next((weight for weight in weights if weight["key"] == "costComposite"), None)
     cost_weight_text = f"{cost_weight['weightPct']:.2f}%" if cost_weight else "not included"
+    inclusion_md = model_inclusion_markdown(model_inclusion(scores.get("frontierSelection"), all_models))
 
 
     speed_coverage = coverage_document.get("fields", {}).get("speed", {})
@@ -373,7 +485,7 @@ Publication updated October 8, 2026 with the current AA frontier reconciliation 
 
 ## Current result
 
-The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model represented on that observed frontier. The primary score uses each model's available exact-version values across the {d} retained dimensions; missing values remain null and each row's available priorities are renormalized to 100%. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
+The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model family on that observed frontier plus every near-frontier family (see Model inclusion below). The primary score uses each model's available exact-version values across the {d} retained dimensions; missing values remain null and each row's available priorities are renormalized to 100%. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
 
 | Rank | Model | Overall | Quality | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---|
@@ -381,6 +493,7 @@ The selected catalog is reconciled against AA's [Intelligence Index score versus
 
 The current Pareto frontier—undominated on composite cost versus quality—is: **{pareto_text}**.
 
+{inclusion_md}
 ## Refresh basis and v1.9 scoring update
 
 - The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **{len(unranked_models)}** candidates have no rankable primary score: **{unranked_names}**.
@@ -428,7 +541,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 
 ## Cohort and source versions
 
-The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every represented frontier model. AA's Coding Agent Index v1.5 chart publishes **{len(deepswe_configurations)} DeepSWE v1.1 configurations** across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
+The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every model family on that frontier plus every near-frontier family; the full policy follows. AA's Coding Agent Index v1.5 chart publishes **{len(deepswe_configurations)} DeepSWE v1.1 configurations** across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
 
 - DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete {len(deepswe_configurations)}-configuration inventory and exact-variant mapping decisions are pinned in [data/aa_deepswe.json](data/aa_deepswe.json).
 - AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current {aa_version}.
@@ -439,6 +552,7 @@ The selected catalog is reconciled against AA's current Pareto frontier of Intel
 
 Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with {VERSION}.
 
+{inclusion_md}
 ## Primary dimensions
 
 The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Each model's available dimension priorities are then renormalized to 100%, and its `availablePriority / totalPriority` coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
@@ -584,7 +698,7 @@ Dimension order is the order in weights above:
 
 ## Coverage decision
 
-The current AA Intelligence Index score-versus-total-benchmark-cost frontier is reconciled into the selected catalog. The primary rank uses each model's available exact-version values and renormalizes its retained priorities per row; the ranking table reports the available-priority percentage and missing metric names. {len(unranked_models)} source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
+The current AA Intelligence Index score-versus-total-benchmark-cost frontier, and its near-frontier families, are reconciled into the selected catalog (see Model inclusion in methodology.md). The primary rank uses each model's available exact-version values and renormalizes its retained priorities per row; the ranking table reports the available-priority percentage and missing metric names. {len(unranked_models)} source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
 
 ## External benchmark coverage
 

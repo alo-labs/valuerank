@@ -44,16 +44,25 @@ def test_export_writes_livebench_json(data, tmp_path):
     assert json.loads((tmp_path / "out" / "livebench.json").read_text())["rows"]
 
 
+def test_export_writes_frontier_tier_fields_and_model_inclusion(data, tmp_path):
+    export.export_public_data(data, tmp_path / "out")
+    rankings = json.loads((tmp_path / "out" / "rankings.json").read_text())
+    assert {"aaFrontierTier", "aaFrontierConfiguration", "aaFrontierIntelligenceGap", "aaFrontierFootnote"} <= set(rankings["models"][0])
+    assert "frontierRule" in rankings["modelInclusion"]
+    model_doc = json.loads((tmp_path / "out" / "models" / "gpt-6-1-sol.json").read_text())
+    assert {"tier", "configuration", "intelligenceGap", "footnote"} <= set(model_doc["frontier"])
+
+
 def test_models_index_lists_every_roster_model_ranked_first(bundle):
     page = viewmodel.models_page(bundle)
     models = page["models"]
-    assert len(models) == 28
+    assert len(models) == 31
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rankingEligible"]]
-    assert [m["rank"]["plan"] for m in ranked] == list(range(1, 17))
-    assert models[:16] == ranked
-    assert all(m["rank"]["plan"] is None for m in models[16:])
-    assert page["rankedCount"] == 16 and page["unrankedCount"] == 12
+    assert [m["rank"]["plan"] for m in ranked] == list(range(1, 20))
+    assert models[:19] == ranked
+    assert all(m["rank"]["plan"] is None for m in models[19:])
+    assert page["rankedCount"] == 19 and page["unrankedCount"] == 12
 
 
 def test_index_models_carry_the_coverage_object(bundle):

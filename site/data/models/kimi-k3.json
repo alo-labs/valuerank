@@ -7,27 +7,30 @@
   "selectedPage": "https://artificialanalysis.ai/models/kimi-k3",
   "summary": {
     "rank": {
-      "api": 9,
-      "plan": 10
+      "api": null,
+      "plan": null
     },
     "overall": {
-      "api": 46.2,
-      "plan": 42.1
+      "api": null,
+      "plan": null
     },
-    "quality": 49.6,
-    "qualityRank": 7,
+    "quality": null,
+    "qualityRank": null,
     "coverage": {
-      "pct": 91.67,
-      "availablePriority": 121,
+      "pct": 76.52,
+      "availablePriority": 101,
       "totalPriority": 132,
       "missing": [
         "Terminal-Bench 4.0",
-        "Speed"
+        "DeepSWE v1.1"
       ]
     },
     "grade": "measured",
-    "rankingEligible": true,
-    "exclusionReasons": []
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "No exact-variant AA DeepSWE result in the selected source snapshot",
+      "Not a required AA frontier or near-frontier family model"
+    ]
   },
   "dimensions": [
     {
@@ -37,18 +40,18 @@
       "weightPct": 18.9394,
       "value": 3658.0675385043187,
       "unit": "USD per Index run",
-      "normalized": 33.333333,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": 33.333333,
-        "plan": 13.333333
+        "api": null,
+        "plan": null
       }
     },
     {
@@ -56,17 +59,14 @@
       "label": "DeepSWE v1.1",
       "category": "code",
       "weightPct": 18.9394,
-      "value": 68.0,
+      "value": null,
       "unit": "% pass@1",
-      "normalized": 61.5,
-      "source": {
-        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-      },
-      "observedAt": "2026-10-08",
-      "evaluatedVariant": "Kimi Code CLI / Kimi K3",
-      "note": "The chart does not display an effort level.",
-      "grade": "measured"
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
     },
     {
       "key": "bugHuntFixedOf105",
@@ -75,12 +75,12 @@
       "weightPct": 15.1515,
       "value": 21.0,
       "unit": "bugs fixed of 105",
-      "normalized": 28.6,
+      "normalized": null,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": null
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-kimi-k3"
       },
-      "observedAt": null,
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "Kimi K3",
       "note": "Only one owner result is available, at the route's default setting.",
       "grade": "measured"
@@ -92,12 +92,12 @@
       "weightPct": 4.5455,
       "value": 46.8,
       "unit": "% non-hallucination",
-      "normalized": 60.0,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -121,14 +121,14 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1523.97,
+      "value": 1533.13,
       "unit": "Elo",
-      "normalized": 33.3,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -140,12 +140,12 @@
       "weightPct": 4.5455,
       "value": 43.5938229518782,
       "unit": "Index points",
-      "normalized": 33.3,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -157,12 +157,12 @@
       "weightPct": 3.7879,
       "value": 71.36275,
       "unit": "score",
-      "normalized": 45.5,
+      "normalized": null,
       "source": {
         "name": "LiveBench release 2026_06_25",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "kimi-k3",
       "note": null,
       "grade": "measured"
@@ -174,12 +174,12 @@
       "weightPct": 3.7879,
       "value": 58.27,
       "unit": "% score",
-      "normalized": 26.7,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -189,14 +189,17 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": null,
+      "value": 42.1643778284807,
       "unit": "tokens per second",
       "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "source": {
+        "name": "Artificial Analysis Intelligence Index v4.3.2",
+        "url": "https://artificialanalysis.ai/models/kimi-k3"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "max",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "aaLcr",
@@ -205,12 +208,12 @@
       "weightPct": 3.0303,
       "value": 88.67,
       "unit": "% accuracy",
-      "normalized": 100.0,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -222,12 +225,12 @@
       "weightPct": 3.0303,
       "value": 47.58,
       "unit": "% accuracy",
-      "normalized": 53.3,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -239,12 +242,12 @@
       "weightPct": 3.0303,
       "value": 46.9,
       "unit": "% accuracy",
-      "normalized": 46.7,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -256,12 +259,12 @@
       "weightPct": 3.0303,
       "value": 93.54,
       "unit": "% accuracy",
-      "normalized": 56.2,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -273,12 +276,12 @@
       "weightPct": 3.0303,
       "value": 59.49,
       "unit": "% score",
-      "normalized": 86.7,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -290,12 +293,12 @@
       "weightPct": 2.2727,
       "value": 23.43,
       "unit": "% score",
-      "normalized": 53.3,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/kimi-k3"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -344,16 +347,44 @@
       }
     },
     {
+      "version": "v1.9.3",
+      "date": null,
+      "rank": {
+        "api": 7,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.4",
+      "date": null,
+      "rank": {
+        "api": 7,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.5",
+      "date": null,
+      "rank": {
+        "api": 7,
+        "plan": null
+      }
+    },
+    {
       "version": "v1.9.6",
-      "date": "2026-10-08",
+      "date": null,
       "rank": {
         "api": 9,
-        "plan": 10
+        "plan": null
       }
     }
   ],
   "frontier": {
     "onAaFrontier": false,
-    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
   }
 }

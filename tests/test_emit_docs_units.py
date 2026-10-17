@@ -64,6 +64,8 @@ class TestTables:
         assert live == "| N | lb | 1.00 | 2.00 | $0.5000 |"
         tb4 = ed.tb4_table([{"rankLabel": "1", "baseModel": "B", "agent": "A", "resolutionRatePct": 50.0, "uncertaintyPct": 2.0, "tokens": "1M", "costUsd": 1234.4}])
         assert tb4 == "| 1 | B | A | 50.0% ± 2.0% | 1M | $1,234 |"
+        unpriced = ed.tb4_table([{"rankLabel": "2", "baseModel": "M", "agent": "A", "resolutionRatePct": 14.5, "uncertaintyPct": 2.9, "tokens": "9.0B", "costUsd": None}])
+        assert unpriced == "| 2 | M | A | 14.5% ± 2.9% | 9.0B | — |"
 
     def test_bug_hunt_tables(self):
         record = {"fixedOf105": 50, "sampleN": 3, "aggregation": "mean", "effort": "high", "effortStatus": "owner", "harness": "H", "route": "R",
@@ -118,3 +120,87 @@ class TestPlanHelpers:
         assert '<th scope="col">H&lt;1</th>' in table
         assert "<td>&lt;b&gt;</td>" in table
         assert 'href="https://x.test"' in table
+
+
+SELECTION = {
+    "capturedAt": "2026-10-17T18:48:27Z",
+    "indexVersion": "4.3.2",
+    "sourceUniverse": {"selectedModelN": 694, "plottedPointN": 189, "observedFrontierPointN": 18},
+    "familyN": 7,
+    "nearFrontierPolicy": {"maxIntelligenceGap": 3, "basis": "public rounded Index", "text": "Within 3 Index points of the frontier at its cost."},
+    "nearFrontierPointN": 9,
+    "nearFrontierFamilyN": 2,
+    "nearFrontierRequiredModelN": 2,
+    "nearFrontierDeferredN": 0,
+    "frontierFamilies": [{"family": "GPT-6 Luna", "modelId": "gpt-6-luna", "configuration": "GPT-6 Luna (max)"}],
+    "nearFrontierFamilies": [
+        {"family": "Gemini 4 Argon", "modelId": "gemini-4-argon", "configuration": "Gemini 4 Argon (high)", "intelligenceGap": 2},
+        {"family": "GPT-6 Astra", "modelId": "gpt-6-astra", "configuration": "GPT-6 Astra (xhigh)", "intelligenceGap": 1.5},
+    ],
+}
+FOOTNOTE = "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs."
+
+
+class TestModelInclusion:
+    def test_absent_selection_has_only_the_rules(self):
+        inclusion = ed.model_inclusion(None, [])
+        assert inclusion["observation"] is None
+        assert inclusion["frontierFamilies"] == [] and inclusion["nearFrontierFamilies"] == [] and inclusion["footnotes"] == []
+        assert "rendered" in inclusion["frontierRule"] and "3 points" in inclusion["nearFrontierRule"]
+        assert inclusion["policyText"] is None
+
+    def test_facts_are_read_from_the_selection(self):
+        inclusion = ed.model_inclusion(SELECTION, [])
+        assert inclusion["observation"] == (
+            "Chart observed 2026-10-17T18:48:27Z (Intelligence Index v4.3.2): 694 catalog models selected, 189 plotted points and "
+            "18 rendered Pareto vertices across 7 families. 9 plotted points across 2 families are near-frontier."
+        )
+        assert inclusion["policyText"] == "Within 3 Index points of the frontier at its cost."
+        assert inclusion["frontierFamilies"] == [{"family": "GPT-6 Luna", "configuration": "GPT-6 Luna (max)"}]
+        assert inclusion["nearFrontierFamilies"][0] == {"family": "Gemini 4 Argon", "configuration": "Gemini 4 Argon (high)", "gap": "2"}
+        assert inclusion["nearFrontierFamilies"][1]["gap"] == "1.5"
+        assert "2 required" in inclusion["nearFrontierStatus"] and "0 deferred" in inclusion["nearFrontierStatus"]
+
+    def test_threshold_follows_the_policy(self):
+        inclusion = ed.model_inclusion({"nearFrontierPolicy": {"maxIntelligenceGap": 5}}, [])
+        assert "5 points" in inclusion["nearFrontierRule"] and inclusion["nearFrontierGap"] == "5"
+        assert ed.model_inclusion(None, [])["nearFrontierGap"] == "3"
+
+    def test_partial_selection_omits_missing_facts(self):
+        inclusion = ed.model_inclusion({"capturedAt": "2026-10-17T18:48:27Z"}, [])
+        assert inclusion["observation"] == "Chart observed 2026-10-17T18:48:27Z."
+        assert inclusion["nearFrontierStatus"] is None
+        assert ed.model_inclusion({"nearFrontierPointN": 1, "nearFrontierFamilyN": 1}, [])["observation"] == (
+            "1 plotted point across 1 family is near-frontier."
+        )
+        assert ed.model_inclusion({"nearFrontierPointN": 2}, [])["observation"] == "2 plotted points are near-frontier."
+        assert ed.model_inclusion({"indexVersion": "4.3.2", "sourceUniverse": {"plottedPointN": 1}}, [])["observation"] == (
+            "Chart observed (Intelligence Index v4.3.2): 1 plotted point."
+        )
+
+    def test_footnotes_are_grouped_once_per_distinct_text(self):
+        models = [
+            {"name": "Haiku A", "aaFrontierFootnote": FOOTNOTE},
+            {"name": "Haiku B", "aaFrontierFootnote": FOOTNOTE},
+            {"name": "Other", "aaFrontierFootnote": None},
+            {"name": "NoField"},
+            {"name": "Distinct", "aaFrontierFootnote": "Another note."},
+        ]
+        assert ed.model_inclusion(None, models)["footnotes"] == [
+            {"text": FOOTNOTE, "models": ["Haiku A", "Haiku B"]},
+            {"text": "Another note.", "models": ["Distinct"]},
+        ]
+
+    def test_markdown_lists_rules_facts_families_and_footnotes(self):
+        text = ed.model_inclusion_markdown(ed.model_inclusion(SELECTION, [{"name": "Haiku", "aaFrontierFootnote": FOOTNOTE}]))
+        assert text.startswith("## Model inclusion\n")
+        assert "**Frontier rule.**" in text and "**Near-frontier rule.**" in text
+        assert "Chart observed 2026-10-17T18:48:27Z" in text and "Within 3 Index points of the frontier at its cost." in text
+        assert "- GPT-6 Luna: GPT-6 Luna (max)" in text
+        assert "- Gemini 4 Argon: Gemini 4 Argon (high), 2 Index points below the frontier" in text
+        assert f"AA footnote (Haiku): {FOOTNOTE}" in text
+
+    def test_markdown_with_no_data_renders_only_the_rules(self):
+        text = ed.model_inclusion_markdown(ed.model_inclusion(None, []))
+        assert "Frontier families" not in text and "Near-frontier families" not in text and "footnote" not in text
+        assert text.count("\n## ") == 0 and "Near-frontier rule" in text

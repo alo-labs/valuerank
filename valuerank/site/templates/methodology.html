@@ -12,6 +12,7 @@
 <nav class="toc" aria-label="On this page">
   <ul>
     <li><a href="#weights">Dimensions and weights</a></li>
+    <li><a href="#model-inclusion">Model inclusion</a></li>
     <li><a href="#worked-example">Worked example</a></li>
     <li><a href="#evidence-grades">Evidence grades</a></li>
     <li><a href="#limitations">Limitations</a></li>
@@ -36,6 +37,31 @@
       </tbody>
     </table>
   </div>
+</section>
+
+{%- set mi = page.modelInclusion -%}
+<section class="block" id="model-inclusion" aria-labelledby="inclusion-title">
+  <h2 id="inclusion-title" class="section-title">Model inclusion</h2>
+  <p><strong>Frontier rule.</strong> {{ mi.frontierRule }}</p>
+  <p><strong>Near-frontier rule.</strong> {{ mi.nearFrontierRule }}</p>
+  {%- if mi.policyText %}<p class="muted">Policy as recorded: {{ mi.policyText }}</p>{% endif %}
+  {%- if mi.observation %}<p>{{ mi.observation }}</p>{% endif %}
+  {%- if mi.nearFrontierStatus %}<p>{{ mi.nearFrontierStatus }}</p>{% endif %}
+  {%- if mi.frontierFamilies %}
+  <h3 class="sub-title">Frontier families</h3>
+  <ul class="plain-list">
+    {%- for f in mi.frontierFamilies %}<li><strong>{{ f.family }}</strong>: {{ f.configuration }}</li>{% endfor %}
+  </ul>
+  {%- endif %}
+  {%- if mi.nearFrontierFamilies %}
+  <h3 class="sub-title">Near-frontier families</h3>
+  <ul class="plain-list">
+    {%- for f in mi.nearFrontierFamilies %}<li><strong>{{ f.family }}</strong>: {{ f.configuration }}, {{ f.gap }} Index points below the frontier</li>{% endfor %}
+  </ul>
+  {%- endif %}
+  {%- for n in mi.footnotes %}
+  <p class="note"><strong>AA footnote</strong> ({{ n.models | join(", ") }}): {{ n.text }}</p>
+  {%- endfor %}
 </section>
 
 <section class="block" id="worked-example" aria-labelledby="example-title">

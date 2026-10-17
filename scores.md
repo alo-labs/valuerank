@@ -1,6 +1,6 @@
-# ValueRank v1.9.6 Scores
+# ValueRank v1.9.7 Scores
 
-**Updated:** October 8, 2026 · **Cohort:** 16 · **Retained dimensions:** 16 · **Default cost basis:** API Costs (AA total evaluation cost)
+**Updated:** October 18, 2026 · **Cohort:** 19 · **Retained dimensions:** 16 · **Default cost basis:** API Costs (AA total evaluation cost)
 
 API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple and by the model's AA Intelligence Index (USD per Index point). The site switcher recalculates the main rank and cost-based charts using the selected basis.
 
@@ -8,49 +8,54 @@ API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same
 
 | Rank | Model | Overall | Quality | Quality Rank | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---:|---|
-| 1 | GPT-6.1 Sol | 74.3 | 74.6 | 2 | 12.42 | 88.64% (117/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 2 | GPT-5.6 Sol | 65.5 | 71.5 | 4 | 39.79 | 100.00% (132/132 priority) | none |
-| 3 | GPT-6 Astra | 64.2 | 72.9 | 3 | 43.67 | 100.00% (132/132 priority) | none |
-| 4 | GPT-6 Sol | 61.9 | 60.7 | 6 | 17.75 | 92.42% (122/132 priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 5 | Claude Opus 5.5 | 61.6 | 78.4 | 1 | 100.00 | 88.64% (117/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 6 | Grok 4.7 | 58.4 | 70.1 | 5 | 57.04 | 92.42% (122/132 priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 7 | MiMo-V2.6-Pro | 54.1 | 41.9 | 10 | 2.37 | 69.70% (92/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy) |
-| 8 | MiMo-V2.6-Flash | 51.6 | 25.8 | 15 | 1.26 | 54.55% (72/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy), Bug Hunt Bench |
-| 9 | Kimi K3 | 46.2 | 49.6 | 7 | 42.01 | 91.67% (121/132 priority) | Terminal-Bench 4.0, Speed |
-| 10 | Grok 4.6 | 45.6 | 43.8 | 8 | 22.24 | 100.00% (132/132 priority) | none |
-| 11 | GPT-5.6 Luna | 43.3 | 34.8 | 12 | 3.67 | 100.00% (132/132 priority) | none |
-| 12 | Gemini 3.8 Flash | 42.7 | 38.7 | 11 | 18.63 | 100.00% (132/132 priority) | none |
-| 13 | GLM-5.3 | 36.7 | 34.3 | 13 | 28.75 | 100.00% (132/132 priority) | none |
-| 14 | GPT-6 Luna | 36.5 | 21.8 | 16 | 1.40 | 92.42% (122/132 priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 15 | Claude Opus 5 | 35.8 | 42.6 | 9 | 83.54 | 100.00% (132/132 priority) | none |
-| 16 | Qwen3.8 Max | 26.7 | 28.3 | 14 | 56.67 | 95.45% (126/132 priority) | Terminal-Bench 4.0 |
+| 1 | Gemini 4 Argon | 74.1 | 82.6 | 2 | 27.64 | 84.85% (112/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy), Speed |
+| 2 | GPT-6.1 Sol | 70.1 | 71.0 | 5 | 12.42 | 88.64% (117/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 3 | Claude Sonnet 5.5 | 69.5 | 85.4 | 1 | 83.36 | 88.64% (117/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 4 | GPT-6 Astra | 64.1 | 75.2 | 4 | 43.67 | 81.06% (107/132 priority) | DeepSWE v1.1 |
+| 5 | GPT-5.6 Sol | 62.9 | 69.8 | 6 | 39.79 | 100.00% (132/132 priority) | none |
+| 6 | Claude Opus 5.5 | 60.3 | 76.7 | 3 | 100.00 | 88.64% (117/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 7 | GPT-6 Sol | 58.6 | 59.3 | 8 | 17.64 | 92.42% (122/132 priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 8 | Grok 4.7 | 56.6 | 66.9 | 7 | 57.04 | 92.42% (122/132 priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 9 | MiMo-V2.6-Pro | 53.7 | 42.7 | 10 | 2.37 | 69.70% (92/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy) |
+| 10 | MiMo-V2.6-Flash | 50.7 | 24.5 | 16 | 1.26 | 54.55% (72/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy), Bug Hunt Bench |
+| 11 | GPT-5.6 Luna | 46.0 | 38.6 | 13 | 3.67 | 100.00% (132/132 priority) | none |
+| 12 | Gemini 3.8 Flash | 43.5 | 42.0 | 11 | 18.63 | 100.00% (132/132 priority) | none |
+| 13 | GPT-6 Luna | 42.4 | 29.0 | 15 | 1.40 | 92.42% (122/132 priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 14 | Claude Opus 5 | 40.7 | 48.9 | 9 | 83.54 | 100.00% (132/132 priority) | none |
+| 15 | GLM-5.3 | 40.5 | 40.8 | 12 | 28.75 | 100.00% (132/132 priority) | none |
+| 16 | Claude Haiku 5.5 | 37.9 | 24.0 | 17 | 1.81 | 88.64% (117/132 priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 17 | DeepSeek V4 Flash | 31.4 | 21.9 | 18 | 5.45 | 100.00% (132/132 priority) | none |
+| 18 | Qwen3.8 Max | 31.3 | 33.5 | 14 | 56.67 | 95.45% (126/132 priority) | Terminal-Bench 4.0 |
+| 19 | DeepSeek V4 Pro | 26.5 | 17.9 | 19 | 12.89 | 95.45% (126/132 priority) | Terminal-Bench 4.0 |
 
 ## Bug Hunt Emphasis Ranking
 
-Bug Hunt is included in the main **16-model primary ranking** at **15.15%**. The companion emphasis view uses the same cohort and increases Bug Hunt's weight to **21.13%** by re-ranking the other retained dimensions within those models.
+Bug Hunt is included in the main **19-model primary ranking** at **15.15%**. The companion emphasis view uses the same cohort and increases Bug Hunt's weight to **21.13%** by re-ranking the other retained dimensions within those models.
 
 | Bug Hunt rank | Model | Fixed / 105 | Emphasis score | Runs / aggregation | Effort | Harness / route | Primary rank |
 |---:|---|---:|---:|---|---|---|---:|
-| 1 | GPT-6.1 Sol | 44.3/105 | 77.4 | n=3 (mean) | max (verified first-party tier; below ultra ceiling) | Codex CLI / OpenAI ChatGPT account | 1 |
-| 2 | GPT-5.6 Sol | 43.5/105 | 67.7 | n=2 (mean) | max (max) | Codex CLI / OpenAI | 2 |
-| 3 | GPT-6 Astra | 45/105 | 67.0 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 3 |
-| 4 | GPT-6 Sol | 29.3/105 | 63.3 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 4 |
-| 5 | Claude Opus 5.5 | 41.7/105 | 62.8 | n=3 (mean) | max (max) | Claude Code / Anthropic | 5 |
-| 6 | Grok 4.7 | 28.8/105 | 56.7 | n=4 (mean) | xhigh (verified ceiling) | Grok Build CLI (ACP) / xAI | 6 |
-| 7 | GPT-5.6 Luna | 31.3/105 | 46.5 | n=3 (mean) | max (max) | Codex CLI / OpenAI | 11 |
-| 8 | Grok 4.6 | 28.7/105 | 45.8 | n=3 (mean) | xhigh (verified ceiling) | Grok Build CLI (ACP) / xAI | 10 |
-| 9 | Kimi K3 | 21/105 | 44.9 | n=1 (single) | default (default) | Claude Code / OpenRouter / OpenRouter | 9 |
-| 10 | Gemini 3.8 Flash | 18/105 | 40.7 | n=3 (mean) | high (verified ceiling) | Antigravity CLI / Google | 12 |
-| 11 | GLM-5.3 | 19/105 | 35.0 | n=1 (single) | max (verified setting) | Claude Code / Z.ai API / Z.ai API | 13 |
-| 12 | Claude Opus 5 | 27/105 | 34.8 | n=1 (single) | max (max) | Claude Code / Anthropic | 15 |
-| 13 | GPT-6 Luna | 18.3/105 | 34.1 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 14 |
-| 14 | Qwen3.8 Max | 25.7/105 | 26.3 | n=3 (mean) | max (verified ceiling) | Claude Code / Alibaba API / Alibaba API | 16 |
+| 1 | Gemini 4 Argon | 40.7/105 | 74.5 | n=3 (mean) | high (verified ceiling) | Antigravity CLI / Google | 1 |
+| 2 | GPT-6.1 Sol | 44.3/105 | 73.7 | n=3 (mean) | max (verified first-party tier; below ultra ceiling) | Codex CLI / OpenAI ChatGPT account | 2 |
+| 3 | Claude Sonnet 5.5 | 51.3/105 | 71.9 | n=3 (mean) | max (max) | Claude Code / Anthropic | 3 |
+| 4 | GPT-5.6 Sol | 43.5/105 | 65.9 | n=2 (mean) | max (max) | Codex CLI / OpenAI | 5 |
+| 5 | Claude Opus 5.5 | 41.7/105 | 62.5 | n=3 (mean) | max (max) | Claude Code / Anthropic | 6 |
+| 6 | GPT-6 Sol | 29.3/105 | 60.6 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 7 |
+| 7 | Grok 4.7 | 29/105 | 56.5 | n=5 (mean) | xhigh (verified ceiling) | Grok Build CLI (ACP) / xAI | 8 |
+| 8 | GPT-5.6 Luna | 31.3/105 | 49.4 | n=3 (mean) | max (max) | Codex CLI / OpenAI | 11 |
+| 9 | Gemini 3.8 Flash | 18/105 | 42.1 | n=3 (mean) | high (verified ceiling) | Antigravity CLI / Google | 12 |
+| 10 | Claude Opus 5 | 27/105 | 41.9 | n=1 (single) | max (max) | Claude Code / Anthropic | 14 |
+| 11 | GPT-6 Luna | 18.3/105 | 40.7 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 13 |
+| 12 | GLM-5.3 | 19/105 | 39.7 | n=1 (single) | max (verified setting) | Claude Code / Z.ai API / Z.ai API | 15 |
+| 13 | Claude Haiku 5.5 | 18.3/105 | 36.4 | n=3 (mean) | xhigh (xhigh) | Claude Code / Anthropic | 16 |
+| 14 | Qwen3.8 Max | 25.7/105 | 32.9 | n=3 (mean) | max (verified ceiling) | Claude Code / Alibaba API / Alibaba API | 18 |
+| 15 | DeepSeek V4 Flash | 21.7/105 | 32.8 | n=3 (mean) | max (verified ceiling) | Claude Code / DeepSeek API / DeepSeek API | 17 |
+| 16 | DeepSeek V4 Pro | 16/105 | 25.5 | n=1 (single) | max (first-party; effort effect inconclusive) | Claude Code / DeepSeek API / DeepSeek API | 19 |
 
-Source: [Bug Hunt Bench](https://bughunt.productcompass.pm/) and the pinned [owner scoreboard](https://github.com/phuryn/bug-hunt-bench/blob/0630b120a81363c343ed7dfaf3c6d3be7f7da38c/results/combined-scoreboard.csv) at commit **0630b120a81363c343ed7dfaf3c6d3be7f7da38c**. The run configuration details and coverage gaps are in [raw-data.md](raw-data.md).
+Source: [Bug Hunt Bench](https://bughunt.productcompass.pm/) and the pinned [owner scoreboard](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv) at commit **aec976170df89a371384174ca87646a9a8c82415**. The run configuration details and coverage gaps are in [raw-data.md](raw-data.md).
 
 ## Pareto frontier
 
-Undominated on composite cost versus quality: **Claude Opus 5.5, GPT-6.1 Sol, MiMo-V2.6-Pro, MiMo-V2.6-Flash**.
+Undominated on composite cost versus quality: **GPT-6.1 Sol, GPT-6 Luna, MiMo-V2.6-Pro, MiMo-V2.6-Flash, Claude Sonnet 5.5, Gemini 4 Argon**.
 
 ## Weights
 
@@ -81,26 +86,29 @@ Dimension order is the order in weights above:
 
 | Rank | Model | Normalized dimensions |
 |---:|---|---|
-| 1 | GPT-6.1 Sol | [73.3, 50.0, ⊘, ⊘, 84.6, 40.0, 80.0, 53.3, 93.3, 80.0, ⊘, 20.0, 93.3, 90.0, 28.6, 92.9] |
-| 2 | GPT-5.6 Sol | [40.0, 6.7, 50.0, 54.5, 92.3, 46.7, 46.7, 80.0, 73.3, 73.3, 75.0, 60.0, 100.0, 66.7, 71.4, 85.7] |
-| 3 | GPT-6 Astra | [26.7, 66.7, 100.0, 90.9, 61.5, 26.7, 93.3, 26.7, 86.7, 86.7, 100.0, 33.3, 80.0, 90.0, 14.3, 100.0] |
-| 4 | GPT-6 Sol | [66.7, 26.7, ⊘, 27.3, 76.9, 20.0, 53.3, 70.0, 60.0, 60.0, ⊘, 73.3, 73.3, 73.3, 57.1, 64.3] |
-| 5 | Claude Opus 5.5 | [0.0, 33.3, ⊘, ⊘, 61.5, 100.0, 100.0, 86.7, 100.0, 100.0, ⊘, 100.0, 86.7, 100.0, 78.6, 78.6] |
-| 6 | Grok 4.7 | [13.3, 86.7, ⊘, 81.8, 100.0, 86.7, 86.7, 6.7, 46.7, 40.0, ⊘, 66.7, 13.3, 56.7, 50.0, 57.1] |
-| 7 | MiMo-V2.6-Pro | [86.7, 73.3, ⊘, ⊘, ⊘, 80.0, 33.3, 93.3, 20.0, 66.7, ⊘, 93.3, 60.0, 56.7, 7.1, 3.6] |
-| 8 | MiMo-V2.6-Flash | [100.0, 50.0, ⊘, ⊘, ⊘, 60.0, 73.3, 0.0, 0.0, 0.0, ⊘, 0.0, 0.0, 13.3, 21.4, ⊘] |
-| 9 | Kimi K3 | [33.3, 60.0, ⊘, 45.5, 61.5, 33.3, 26.7, 100.0, 53.3, 46.7, 56.2, 86.7, 53.3, 33.3, ⊘, 28.6] |
-| 10 | Grok 4.6 | [53.3, 100.0, 33.3, 63.6, 30.8, 53.3, 66.7, 40.0, 26.7, 20.0, 56.2, 40.0, 13.3, 26.7, 42.9, 50.0] |
-| 11 | GPT-5.6 Luna | [80.0, 0.0, 0.0, 9.1, 42.3, 13.3, 0.0, 70.0, 33.3, 13.3, 0.0, 13.3, 46.7, 3.3, 85.7, 71.4] |
-| 12 | Gemini 3.8 Flash | [60.0, 40.0, 16.7, 100.0, 42.3, 6.7, 40.0, 46.7, 66.7, 53.3, 87.5, 53.3, 26.7, 20.0, 100.0, 3.6] |
-| 13 | GLM-5.3 | [46.7, 80.0, 66.7, 36.4, 7.7, 66.7, 60.0, 20.0, 13.3, 26.7, 12.5, 80.0, 33.3, 43.3, 64.3, 21.4] |
-| 14 | GPT-6 Luna | [93.3, 13.3, ⊘, 0.0, 23.1, 0.0, 6.7, 60.0, 40.0, 6.7, ⊘, 26.7, 40.0, 3.3, 92.9, 14.3] |
-| 15 | Claude Opus 5 | [6.7, 20.0, 83.3, 18.2, 15.4, 93.3, 20.0, 13.3, 80.0, 93.3, 37.5, 46.7, 66.7, 80.0, 35.7, 42.9] |
-| 16 | Qwen3.8 Max | [20.0, 93.3, ⊘, 72.7, 0.0, 73.3, 13.3, 33.3, 6.7, 33.3, 25.0, 6.7, 13.3, 43.3, 0.0, 35.7] |
+| 1 | Gemini 4 Argon | [44.4, 100.0, ⊘, ⊘, 100.0, 61.1, 100.0, 27.8, 55.6, 94.4, ⊘, 94.4, 61.1, 88.9, ⊘, 70.6] |
+| 2 | GPT-6.1 Sol | [66.7, 55.6, ⊘, ⊘, 73.3, 44.4, 72.2, 66.7, 94.4, 72.2, ⊘, 33.3, 91.7, 80.6, 29.4, 88.2] |
+| 3 | Claude Sonnet 5.5 | [11.1, 66.7, ⊘, ⊘, 80.0, 94.4, 94.4, 61.1, 61.1, 88.9, ⊘, 88.9, 80.6, 94.4, 82.4, 100.0] |
+| 4 | GPT-6 Astra | [27.8, 61.1, 100.0, 90.9, ⊘, 38.9, 83.3, 38.9, 88.9, 77.8, 100.0, 44.4, 80.6, 80.6, 17.6, 94.1] |
+| 5 | GPT-5.6 Sol | [33.3, 11.1, 50.0, 63.6, 86.7, 55.6, 50.0, 88.9, 77.8, 66.7, 75.0, 61.1, 100.0, 61.1, 47.1, 82.4] |
+| 6 | Claude Opus 5.5 | [0.0, 38.9, ⊘, ⊘, 60.0, 100.0, 88.9, 94.4, 100.0, 100.0, ⊘, 100.0, 91.7, 100.0, 58.8, 76.5] |
+| 7 | GPT-6 Sol | [55.6, 33.3, ⊘, 45.5, 66.7, 27.8, 55.6, 80.6, 66.7, 55.6, ⊘, 72.2, 72.2, 66.7, 64.7, 58.8] |
+| 8 | Grok 4.7 | [16.7, 88.9, ⊘, 81.8, 93.3, 83.3, 77.8, 5.6, 44.4, 44.4, ⊘, 66.7, 13.9, 52.8, 52.9, 52.9] |
+| 9 | MiMo-V2.6-Pro | [83.3, 77.8, ⊘, ⊘, ⊘, 77.8, 38.9, 100.0, 16.7, 61.1, ⊘, 83.3, 55.6, 52.8, 5.9, 8.8] |
+| 10 | MiMo-V2.6-Flash | [100.0, 50.0, ⊘, ⊘, ⊘, 50.0, 66.7, 0.0, 0.0, 0.0, ⊘, 11.1, 0.0, 19.4, 11.8, ⊘] |
+| 11 | GPT-5.6 Luna | [77.8, 5.6, 0.0, 9.1, 53.3, 22.2, 5.6, 80.6, 33.3, 16.7, 12.5, 27.8, 44.4, 11.1, 76.5, 64.7] |
+| 12 | Gemini 3.8 Flash | [50.0, 44.4, 16.7, 100.0, 46.7, 11.1, 44.4, 55.6, 72.2, 50.0, 87.5, 55.6, 27.8, 30.6, 88.2, 8.8] |
+| 13 | GPT-6 Luna | [94.4, 22.2, ⊘, 0.0, 40.0, 0.0, 11.1, 72.2, 38.9, 5.6, ⊘, 38.9, 38.9, 19.4, 70.6, 20.6] |
+| 14 | Claude Opus 5 | [5.6, 27.8, 83.3, 36.4, 33.3, 88.9, 27.8, 16.7, 83.3, 83.3, 62.5, 50.0, 66.7, 72.2, 23.5, 47.1] |
+| 15 | GLM-5.3 | [38.9, 83.3, 66.7, 54.5, 26.7, 66.7, 61.1, 27.8, 11.1, 27.8, 25.0, 77.8, 33.3, 41.7, 41.2, 29.4] |
+| 16 | Claude Haiku 5.5 | [88.9, 72.2, ⊘, ⊘, 0.0, 33.3, 0.0, 11.1, 22.2, 33.3, ⊘, 16.7, 50.0, 30.6, 100.0, 20.6] |
+| 17 | DeepSeek V4 Flash | [72.2, 16.7, 33.3, 27.3, 13.3, 5.6, 16.7, 27.8, 27.8, 11.1, 0.0, 0.0, 5.6, 0.0, 94.1, 35.3] |
+| 18 | Qwen3.8 Max | [22.2, 94.4, ⊘, 72.7, 6.7, 72.2, 22.2, 47.2, 5.6, 38.9, 43.8, 22.2, 13.9, 41.7, 0.0, 41.2] |
+| 19 | DeepSeek V4 Pro | [61.1, 0.0, ⊘, 18.2, 20.0, 16.7, 33.3, 47.2, 50.0, 22.2, 43.8, 5.6, 22.2, 5.6, 35.3, 0.0] |
 
 ## Coverage decision
 
-The current AA Intelligence Index score-versus-total-benchmark-cost frontier is reconciled into the selected catalog. The primary rank uses each model's available exact-version values and renormalizes its retained priorities per row; the ranking table reports the available-priority percentage and missing metric names. 12 source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
+The current AA Intelligence Index score-versus-total-benchmark-cost frontier, and its near-frontier families, are reconciled into the selected catalog (see Model inclusion in methodology.md). The primary rank uses each model's available exact-version values and renormalizes its retained priorities per row; the ranking table reports the available-priority percentage and missing metric names. 12 source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
 
 ## External benchmark coverage
 

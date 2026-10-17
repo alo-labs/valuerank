@@ -7,29 +7,24 @@
   "selectedPage": "https://artificialanalysis.ai/models/deepseek-v4-flash",
   "summary": {
     "rank": {
-      "api": null,
-      "plan": null
+      "api": 17,
+      "plan": 18
     },
     "overall": {
-      "api": null,
-      "plan": null
+      "api": 31.4,
+      "plan": 26.2
     },
-    "quality": null,
-    "qualityRank": null,
+    "quality": 21.9,
+    "qualityRank": 18,
     "coverage": {
-      "pct": 81.06,
-      "availablePriority": 107,
+      "pct": 100.0,
+      "availablePriority": 132,
       "totalPriority": 132,
-      "missing": [
-        "DeepSWE v1.1"
-      ]
+      "missing": []
     },
     "grade": "claim",
-    "rankingEligible": false,
-    "exclusionReasons": [
-      "No exact-variant AA DeepSWE result in the selected source snapshot",
-      "Not a required selected AA frontier family model"
-    ]
+    "rankingEligible": true,
+    "exclusionReasons": []
   },
   "dimensions": [
     {
@@ -39,18 +34,18 @@
       "weightPct": 18.9394,
       "value": 474.192204864049,
       "unit": "USD per Index run",
-      "normalized": null,
+      "normalized": 72.2,
       "source": {
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": null,
-        "plan": null
+        "api": 72.2,
+        "plan": 44.4
       }
     },
     {
@@ -58,14 +53,17 @@
       "label": "DeepSWE v1.1",
       "category": "code",
       "weightPct": 18.9394,
-      "value": null,
+      "value": 54.3,
       "unit": "% pass@1",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
+      "normalized": 13.3,
+      "source": {
+        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-17T19:26:26Z",
+      "evaluatedVariant": "Codex / DeepSeek V4 Flash 0731 / max",
+      "note": "Exact variant: chart model DeepSeek V4 Flash 0731 (max) matches the roster AA short name 'DeepSeek V4 Flash 0731' at effort max.",
+      "grade": "measured"
     },
     {
       "key": "bugHuntFixedOf105",
@@ -74,14 +72,14 @@
       "weightPct": 15.1515,
       "value": 21.7,
       "unit": "bugs fixed of 105",
-      "normalized": null,
+      "normalized": 35.3,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": null
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-deepseek-v41-flash-max-effort---mean-of-3"
       },
-      "observedAt": null,
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "DeepSeek V4.1 Flash (max effort) - mean of 3",
-      "note": "Current API alias match; this is a V4.1 Flash result, not a retired V4 Flash result.",
+      "note": "Current API alias match; this is a V4.1 Flash result, not a retired V4 Flash result. The owner now also publishes DeepSeek V4.1 Flash 1017 (a newer snapshot reached via deepseek-flash); DeepSeek's update notes do not say that the deepseek-v4-flash alias routes to it, so that distinct model is kept as an unselected owner configuration and no value is transferred.",
       "grade": "measured"
     },
     {
@@ -91,12 +89,12 @@
       "weightPct": 4.5455,
       "value": 8.3,
       "unit": "% non-hallucination",
-      "normalized": null,
+      "normalized": 16.7,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -108,7 +106,7 @@
       "weightPct": 4.5455,
       "value": 31.2,
       "unit": "% resolved",
-      "normalized": null,
+      "normalized": 33.3,
       "source": {
         "name": "DeepSeek provider claim",
         "url": "https://api-docs.deepseek.com/updates/"
@@ -123,14 +121,14 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1426.57,
+      "value": 1433.74,
       "unit": "Elo",
-      "normalized": null,
+      "normalized": 5.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -142,12 +140,12 @@
       "weightPct": 4.5455,
       "value": 34.3305129347816,
       "unit": "Index points",
-      "normalized": null,
+      "normalized": 0.0,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -159,12 +157,12 @@
       "weightPct": 3.7879,
       "value": 63.1375,
       "unit": "score",
-      "normalized": null,
+      "normalized": 27.3,
       "source": {
         "name": "LiveBench release 2026_06_25",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "deepseek-v4-flash",
       "note": null,
       "grade": "measured"
@@ -176,12 +174,12 @@
       "weightPct": 3.7879,
       "value": 53.97,
       "unit": "% score",
-      "normalized": null,
+      "normalized": 16.7,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -191,14 +189,14 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 226.746593603026,
+      "value": 172.693014663863,
       "unit": "tokens per second",
-      "normalized": null,
+      "normalized": 94.1,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -210,12 +208,12 @@
       "weightPct": 3.0303,
       "value": 79.67,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 27.8,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -227,12 +225,12 @@
       "weightPct": 3.0303,
       "value": 40.38,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 27.8,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -244,12 +242,12 @@
       "weightPct": 3.0303,
       "value": 38.55,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 11.1,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -261,12 +259,12 @@
       "weightPct": 3.0303,
       "value": 90.81,
       "unit": "% accuracy",
-      "normalized": null,
+      "normalized": 0.0,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -278,12 +276,12 @@
       "weightPct": 3.0303,
       "value": 50.35,
       "unit": "% score",
-      "normalized": null,
+      "normalized": 0.0,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -295,12 +293,12 @@
       "weightPct": 2.2727,
       "value": 16.57,
       "unit": "% score",
-      "normalized": null,
+      "normalized": 5.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/deepseek-v4-flash"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured"
@@ -323,10 +321,22 @@
         "api": 15,
         "plan": null
       }
+    },
+    {
+      "version": "v1.9.7",
+      "date": "2026-10-18",
+      "rank": {
+        "api": 17,
+        "plan": 18
+      }
     }
   ],
   "frontier": {
     "onAaFrontier": false,
-    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
   }
 }

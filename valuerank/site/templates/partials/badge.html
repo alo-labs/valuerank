@@ -10,6 +10,14 @@
 {%- set g = grade if grade in GRADES else "missing" -%}
 <span class="badge badge-{{ g }}" title="{{ hint if hint else GRADES[g][1] }}">{{ label if label else GRADES[g][0] }}</span>
 {%- endmacro -%}
+{#- Artificial Analysis frontier tier: always text, with the configuration and gap in the tooltip. -#}
+{%- macro tier_badge(tier, configuration=none, gap=none) -%}
+{%- if tier == "frontier" -%}
+<span class="badge badge-tier badge-tier-frontier" data-aa-tier="frontier" title="{{ configuration ~ ' is' if configuration else 'Selected configuration is' }} on the rendered AA frontier.">AA frontier</span>
+{%- elif tier == "near" -%}
+<span class="badge badge-tier badge-tier-near" data-aa-tier="near" title="{{ configuration ~ ' is' if configuration else 'A plotted configuration is' }} within {{ 'the policy gap' if gap is none else gap ~ (' Index point' if gap == 1 else ' Index points') }} of the rendered AA frontier at its cost.">Near frontier</span>
+{%- endif -%}
+{%- endmacro -%}
 {%- macro legend() -%}
 <ul class="badge-legend">
 {%- for g, v in GRADES.items() %}

@@ -1,70 +1,189 @@
 {
   "versions": [
     {
-      "version": "v1.9.6",
-      "date": "October 8, 2026",
-      "models": 16,
+      "version": "v1.9.7",
+      "date": "October 18, 2026",
+      "models": 19,
       "dimensions": 16,
-      "summary": "16 models ranked on 16 dimensions; GPT-6.1 Sol is first on the API basis.",
+      "summary": "19 models ranked on 16 dimensions; Gemini 4 Argon is first on the API basis.",
       "rankChanges": [
         {
-          "slug": "gpt-5-6-sol",
-          "name": "GPT-5.6 Sol",
+          "slug": "gpt-6-1-sol",
+          "name": "GPT-6.1 Sol",
           "from": 1,
           "to": 2
         },
         {
           "slug": "gpt-6-astra",
           "name": "GPT-6 Astra",
+          "from": 3,
+          "to": 4
+        },
+        {
+          "slug": "gpt-5-6-sol",
+          "name": "GPT-5.6 Sol",
           "from": 2,
-          "to": 3
+          "to": 5
         },
         {
           "slug": "claude-opus-5-5",
           "name": "Claude Opus 5.5",
-          "from": 3,
-          "to": 5
+          "from": 5,
+          "to": 6
         },
         {
-          "slug": "kimi-k3",
-          "name": "Kimi K3",
+          "slug": "gpt-6-sol",
+          "name": "GPT-6 Sol",
+          "from": 4,
+          "to": 7
+        },
+        {
+          "slug": "grok-4-7",
+          "name": "Grok 4.7",
           "from": 6,
+          "to": 8
+        },
+        {
+          "slug": "mimo-v2-6-pro",
+          "name": "MiMo-V2.6-Pro",
+          "from": 7,
           "to": 9
         },
         {
-          "slug": "grok-4-6",
-          "name": "Grok 4.6",
-          "from": 4,
+          "slug": "mimo-v2-6-flash",
+          "name": "MiMo-V2.6-Flash",
+          "from": 8,
           "to": 10
         },
         {
-          "slug": "gpt-5-6-luna",
-          "name": "GPT-5.6 Luna",
-          "from": 5,
-          "to": 11
-        },
-        {
-          "slug": "gemini-3-8-flash",
-          "name": "Gemini 3.8 Flash",
-          "from": 7,
-          "to": 12
-        },
-        {
-          "slug": "glm-5-3",
-          "name": "GLM-5.3",
-          "from": 8,
+          "slug": "gpt-6-luna",
+          "name": "GPT-6 Luna",
+          "from": 14,
           "to": 13
         },
         {
           "slug": "claude-opus-5",
           "name": "Claude Opus 5",
-          "from": 9,
+          "from": 15,
+          "to": 14
+        },
+        {
+          "slug": "glm-5-3",
+          "name": "GLM-5.3",
+          "from": 13,
           "to": 15
         },
         {
           "slug": "qwen3-8-max",
           "name": "Qwen3.8 Max",
+          "from": 16,
+          "to": 18
+        }
+      ],
+      "ranks": {
+        "claude-haiku-5-5": 16,
+        "claude-opus-5": 14,
+        "claude-opus-5-5": 6,
+        "claude-sonnet-5-5": 3,
+        "deepseek-v4-flash": 17,
+        "deepseek-v4-pro": 19,
+        "gemini-3-8-flash": 12,
+        "gemini-4-argon": 1,
+        "glm-5-3": 15,
+        "gpt-5-6-luna": 11,
+        "gpt-5-6-sol": 5,
+        "gpt-6-astra": 4,
+        "gpt-6-luna": 13,
+        "gpt-6-sol": 7,
+        "gpt-6-1-sol": 2,
+        "grok-4-7": 8,
+        "mimo-v2-6-flash": 10,
+        "mimo-v2-6-pro": 9,
+        "qwen3-8-max": 18
+      },
+      "added": [
+        "claude-haiku-5-5",
+        "claude-sonnet-5-5",
+        "deepseek-v4-flash",
+        "deepseek-v4-pro",
+        "gemini-4-argon"
+      ],
+      "removed": [
+        "grok-4-6",
+        "kimi-k3"
+      ]
+    },
+    {
+      "version": "v1.9.6",
+      "date": null,
+      "models": 16,
+      "dimensions": null,
+      "summary": "16 models ranked; GPT-6.1 Sol first.",
+      "rankChanges": [
+        {
+          "slug": "gpt-6-sol",
+          "name": "GPT-6 Sol",
+          "from": 1,
+          "to": 4
+        },
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "from": 4,
+          "to": 5
+        },
+        {
+          "slug": "grok-4-7",
+          "name": "Grok 4.7",
+          "from": 5,
+          "to": 6
+        },
+        {
+          "slug": "kimi-k3",
+          "name": "Kimi K3",
+          "from": 7,
+          "to": 9
+        },
+        {
+          "slug": "grok-4-6",
+          "name": "Grok 4.6",
+          "from": 8,
+          "to": 10
+        },
+        {
+          "slug": "gpt-5-6-luna",
+          "name": "GPT-5.6 Luna",
+          "from": 6,
+          "to": 11
+        },
+        {
+          "slug": "gemini-3-8-flash",
+          "name": "Gemini 3.8 Flash",
+          "from": 9,
+          "to": 12
+        },
+        {
+          "slug": "glm-5-3",
+          "name": "GLM-5.3",
           "from": 10,
+          "to": 13
+        },
+        {
+          "slug": "gpt-6-luna",
+          "name": "GPT-6 Luna",
+          "from": 11,
+          "to": 14
+        },
+        {
+          "slug": "claude-opus-5",
+          "name": "Claude Opus 5",
+          "from": 12,
+          "to": 15
+        },
+        {
+          "slug": "qwen3-8-max",
+          "name": "Qwen3.8 Max",
+          "from": 13,
           "to": 16
         }
       ],
@@ -88,11 +207,148 @@
       },
       "added": [
         "gpt-6-1-sol",
-        "gpt-6-luna",
-        "gpt-6-sol",
-        "grok-4-7",
         "mimo-v2-6-flash",
         "mimo-v2-6-pro"
+      ],
+      "removed": []
+    },
+    {
+      "version": "v1.9.5",
+      "date": null,
+      "models": 13,
+      "dimensions": null,
+      "summary": "13 models ranked; GPT-6 Sol first.",
+      "rankChanges": [],
+      "ranks": {
+        "claude-opus-5": 12,
+        "claude-opus-5-5": 4,
+        "gemini-3-8-flash": 9,
+        "glm-5-3": 10,
+        "gpt-5-6-luna": 6,
+        "gpt-5-6-sol": 2,
+        "gpt-6-astra": 3,
+        "gpt-6-luna": 11,
+        "gpt-6-sol": 1,
+        "grok-4-6": 8,
+        "grok-4-7": 5,
+        "kimi-k3": 7,
+        "qwen3-8-max": 13
+      },
+      "added": [],
+      "removed": []
+    },
+    {
+      "version": "v1.9.4",
+      "date": null,
+      "models": 13,
+      "dimensions": null,
+      "summary": "13 models ranked; GPT-6 Sol first.",
+      "rankChanges": [],
+      "ranks": {
+        "claude-opus-5": 12,
+        "claude-opus-5-5": 4,
+        "gemini-3-8-flash": 9,
+        "glm-5-3": 10,
+        "gpt-5-6-luna": 6,
+        "gpt-5-6-sol": 2,
+        "gpt-6-astra": 3,
+        "gpt-6-luna": 11,
+        "gpt-6-sol": 1,
+        "grok-4-6": 8,
+        "grok-4-7": 5,
+        "kimi-k3": 7,
+        "qwen3-8-max": 13
+      },
+      "added": [],
+      "removed": []
+    },
+    {
+      "version": "v1.9.3",
+      "date": null,
+      "models": 13,
+      "dimensions": null,
+      "summary": "13 models ranked; GPT-6 Sol first.",
+      "rankChanges": [
+        {
+          "slug": "gpt-5-6-sol",
+          "name": "GPT-5.6 Sol",
+          "from": 1,
+          "to": 2
+        },
+        {
+          "slug": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "from": 2,
+          "to": 3
+        },
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "from": 3,
+          "to": 4
+        },
+        {
+          "slug": "gpt-5-6-luna",
+          "name": "GPT-5.6 Luna",
+          "from": 5,
+          "to": 6
+        },
+        {
+          "slug": "kimi-k3",
+          "name": "Kimi K3",
+          "from": 6,
+          "to": 7
+        },
+        {
+          "slug": "grok-4-6",
+          "name": "Grok 4.6",
+          "from": 4,
+          "to": 8
+        },
+        {
+          "slug": "gemini-3-8-flash",
+          "name": "Gemini 3.8 Flash",
+          "from": 7,
+          "to": 9
+        },
+        {
+          "slug": "glm-5-3",
+          "name": "GLM-5.3",
+          "from": 8,
+          "to": 10
+        },
+        {
+          "slug": "claude-opus-5",
+          "name": "Claude Opus 5",
+          "from": 9,
+          "to": 12
+        },
+        {
+          "slug": "qwen3-8-max",
+          "name": "Qwen3.8 Max",
+          "from": 10,
+          "to": 13
+        }
+      ],
+      "ranks": {
+        "claude-opus-5": 12,
+        "claude-opus-5-5": 4,
+        "gemini-3-8-flash": 9,
+        "glm-5-3": 10,
+        "gpt-5-6-luna": 6,
+        "gpt-5-6-sol": 2,
+        "gpt-6-astra": 3,
+        "gpt-6-luna": 11,
+        "gpt-6-sol": 1,
+        "grok-4-6": 8,
+        "grok-4-7": 5,
+        "kimi-k3": 7,
+        "qwen3-8-max": 13
+      },
+      "added": [
+        "gpt-6-luna",
+        "gpt-6-sol",
+        "grok-4-7"
       ],
       "removed": []
     },

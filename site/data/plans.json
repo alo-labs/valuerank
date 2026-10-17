@@ -219,6 +219,23 @@
       "routeId": null
     },
     {
+      "slug": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "rank": {
+        "api": 16,
+        "plan": 16
+      },
+      "intelligenceIndex": {
+        "value": 41.2489304677024,
+        "status": "measured"
+      },
+      "apiUsd": 157.5758646895501,
+      "planUsdPerRun": null,
+      "planUsdPerPoint": null,
+      "fallback": "api",
+      "routeId": null
+    },
+    {
       "slug": "claude-opus-4-8",
       "name": "Claude Opus 4.8",
       "rank": {
@@ -239,8 +256,8 @@
       "slug": "claude-opus-5",
       "name": "Claude Opus 5",
       "rank": {
-        "api": 15,
-        "plan": 14
+        "api": 14,
+        "plan": 13
       },
       "intelligenceIndex": {
         "value": 50.7771115797629,
@@ -256,7 +273,7 @@
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "rank": {
-        "api": 5,
+        "api": 6,
         "plan": 1
       },
       "intelligenceIndex": {
@@ -287,11 +304,28 @@
       "routeId": null
     },
     {
+      "slug": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "rank": {
+        "api": 3,
+        "plan": 5
+      },
+      "intelligenceIndex": {
+        "value": 56.0001286580794,
+        "status": "measured"
+      },
+      "apiUsd": 7259.502265782336,
+      "planUsdPerRun": null,
+      "planUsdPerPoint": null,
+      "fallback": "api",
+      "routeId": null
+    },
+    {
       "slug": "deepseek-v4-flash",
       "name": "DeepSeek V4 Flash",
       "rank": {
-        "api": null,
-        "plan": null
+        "api": 17,
+        "plan": 18
       },
       "intelligenceIndex": {
         "value": 34.3305129347816,
@@ -307,8 +341,8 @@
       "slug": "deepseek-v4-pro",
       "name": "DeepSeek V4 Pro",
       "rank": {
-        "api": null,
-        "plan": null
+        "api": 19,
+        "plan": 19
       },
       "intelligenceIndex": {
         "value": 35.9967791278402,
@@ -331,7 +365,7 @@
         "value": 32.5983283695905,
         "status": "measured"
       },
-      "apiUsd": 2172.4285671078924,
+      "apiUsd": 4222.120097385288,
       "planUsdPerRun": null,
       "planUsdPerPoint": null,
       "fallback": "api",
@@ -348,7 +382,7 @@
         "value": 33.9785928920714,
         "status": "measured"
       },
-      "apiUsd": 1036.8142167476205,
+      "apiUsd": 1614.4196428711296,
       "planUsdPerRun": null,
       "planUsdPerPoint": null,
       "fallback": "api",
@@ -376,13 +410,30 @@
       "name": "Gemini 3.8 Flash",
       "rank": {
         "api": 12,
-        "plan": 13
+        "plan": 14
       },
       "intelligenceIndex": {
         "value": 40.9262321765904,
         "status": "measured"
       },
       "apiUsd": 1622.7263776021543,
+      "planUsdPerRun": null,
+      "planUsdPerPoint": null,
+      "fallback": "api",
+      "routeId": null
+    },
+    {
+      "slug": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "rank": {
+        "api": 1,
+        "plan": 4
+      },
+      "intelligenceIndex": {
+        "value": 52.5605655745982,
+        "status": "measured"
+      },
+      "apiUsd": 2407.239010161643,
       "planUsdPerRun": null,
       "planUsdPerPoint": null,
       "fallback": "api",
@@ -409,7 +460,7 @@
       "slug": "glm-5-3",
       "name": "GLM-5.3",
       "rank": {
-        "api": 13,
+        "api": 15,
         "plan": 15
       },
       "intelligenceIndex": {
@@ -433,7 +484,7 @@
         "value": 41.807466113455,
         "status": "measured"
       },
-      "apiUsd": 280.28213741916164,
+      "apiUsd": 305.51631302660803,
       "planUsdPerRun": null,
       "planUsdPerPoint": null,
       "fallback": "api",
@@ -461,7 +512,7 @@
       "name": "GPT-5.6 Luna",
       "rank": {
         "api": 11,
-        "plan": 9
+        "plan": 10
       },
       "intelligenceIndex": {
         "value": 37.3244239690841,
@@ -477,8 +528,8 @@
       "slug": "gpt-5-6-sol",
       "name": "GPT-5.6 Sol",
       "rank": {
-        "api": 2,
-        "plan": 4
+        "api": 5,
+        "plan": 6
       },
       "intelligenceIndex": {
         "value": 46.9727068915036,
@@ -494,16 +545,16 @@
       "slug": "gpt-6-1-sol",
       "name": "GPT-6.1 Sol",
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 2
       },
       "intelligenceIndex": {
-        "value": 52.0,
+        "value": 51.8332597011541,
         "status": "measured"
       },
-      "apiUsd": 1081.55,
-      "planUsdPerRun": 100.40382473078351,
-      "planUsdPerPoint": 1.9308427832842983,
+      "apiUsd": 1081.552560620246,
+      "planUsdPerRun": 100.40406244153786,
+      "planUsdPerPoint": 1.9370586187405516,
       "fallback": null,
       "routeId": "chatgpt-pro500-common-semianalysis-assumption"
     },
@@ -511,7 +562,7 @@
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "rank": {
-        "api": 3,
+        "api": 4,
         "plan": 3
       },
       "intelligenceIndex": {
@@ -528,16 +579,16 @@
       "slug": "gpt-6-luna",
       "name": "GPT-6 Luna",
       "rank": {
-        "api": 14,
+        "api": 13,
         "plan": 12
       },
       "intelligenceIndex": {
-        "value": 37.2559686869738,
+        "value": 38.1245186869738,
         "status": "measured"
       },
-      "apiUsd": 122.05,
-      "planUsdPerRun": 11.33030077979948,
-      "planUsdPerPoint": 0.30412041826095404,
+      "apiUsd": 122.05438368649308,
+      "planUsdPerRun": 11.33070773175762,
+      "planUsdPerPoint": 0.29720264339046043,
       "fallback": null,
       "routeId": "chatgpt-pro500-common-semianalysis-assumption"
     },
@@ -545,16 +596,16 @@
       "slug": "gpt-6-sol",
       "name": "GPT-6 Sol",
       "rank": {
-        "api": 4,
-        "plan": 6
+        "api": 7,
+        "plan": 8
       },
       "intelligenceIndex": {
-        "value": 47.5276426437724,
+        "value": 47.6305176437724,
         "status": "measured"
       },
-      "apiUsd": 1545.8273278231068,
-      "planUsdPerRun": 143.50420793010645,
-      "planUsdPerPoint": 3.0193840878179965,
+      "apiUsd": 1535.7958440173156,
+      "planUsdPerRun": 142.5729524709725,
+      "planUsdPerPoint": 2.9933110015152993,
       "fallback": null,
       "routeId": "chatgpt-pro500-common-semianalysis-assumption"
     },
@@ -562,14 +613,14 @@
       "slug": "grok-4-6",
       "name": "Grok 4.6",
       "rank": {
-        "api": 10,
-        "plan": 11
+        "api": null,
+        "plan": null
       },
       "intelligenceIndex": {
         "value": 42.836322654063,
         "status": "measured"
       },
-      "apiUsd": 1936.747257680374,
+      "apiUsd": 1557.039406856376,
       "planUsdPerRun": null,
       "planUsdPerPoint": null,
       "fallback": "api",
@@ -579,8 +630,8 @@
       "slug": "grok-4-7",
       "name": "Grok 4.7",
       "rank": {
-        "api": 6,
-        "plan": 5
+        "api": 8,
+        "plan": 7
       },
       "intelligenceIndex": {
         "value": 46.4465506302286,
@@ -596,8 +647,8 @@
       "slug": "kimi-k3",
       "name": "Kimi K3",
       "rank": {
-        "api": 9,
-        "plan": 10
+        "api": null,
+        "plan": null
       },
       "intelligenceIndex": {
         "value": 43.5938229518782,
@@ -613,16 +664,16 @@
       "slug": "mimo-v2-6-flash",
       "name": "MiMo-V2.6-Flash",
       "rank": {
-        "api": 8,
-        "plan": 8
+        "api": 10,
+        "plan": 11
       },
       "intelligenceIndex": {
-        "value": 38.0,
+        "value": 37.8843590141754,
         "status": "measured"
       },
-      "apiUsd": 109.41,
-      "planUsdPerRun": 72.94,
-      "planUsdPerPoint": 1.9194736842105262,
+      "apiUsd": 109.54875236182735,
+      "planUsdPerRun": 73.03250157455157,
+      "planUsdPerPoint": 1.9277745083986928,
       "fallback": null,
       "routeId": "mimo-provisional-user-assumption"
     },
@@ -630,16 +681,16 @@
       "slug": "mimo-v2-6-pro",
       "name": "MiMo-V2.6-Pro",
       "rank": {
-        "api": 7,
-        "plan": 7
+        "api": 9,
+        "plan": 9
       },
       "intelligenceIndex": {
-        "value": 46.0,
+        "value": 46.3242065310383,
         "status": "measured"
       },
-      "apiUsd": 206.66,
-      "planUsdPerRun": 137.77333333333334,
-      "planUsdPerPoint": 2.9950724637681163,
+      "apiUsd": 206.65533881883294,
+      "planUsdPerRun": 137.77022587922195,
+      "planUsdPerPoint": 2.974043943675812,
       "fallback": null,
       "routeId": "mimo-provisional-user-assumption"
     },
@@ -664,8 +715,8 @@
       "slug": "qwen3-8-max",
       "name": "Qwen3.8 Max",
       "rank": {
-        "api": 16,
-        "plan": 16
+        "api": 18,
+        "plan": 17
       },
       "intelligenceIndex": {
         "value": 45.4152084980521,

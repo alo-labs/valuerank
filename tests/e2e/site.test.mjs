@@ -84,7 +84,7 @@ describe('answer page', () => {
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
-    assert.equal(await page.locator('#rankings-body tr').count(), 28);
+    assert.equal(await page.locator('#rankings-body tr').count(), 31);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
@@ -198,9 +198,9 @@ describe('charts, model, plans and listing pages', () => {
     await context.close();
   });
 
-  test('the models index lists all 28 models and links to their pages', async () => {
+  test('the models index lists all 31 models and links to their pages', async () => {
     const { page, context } = await open('/models/');
-    assert.equal(await page.locator('#models-table tbody tr').count(), 28);
+    assert.equal(await page.locator('#models-table tbody tr').count(), 31);
     await page.locator('#models-table a.model-name', { hasText: 'GPT-6.1 Sol' }).first().click();
     await page.waitForURL(/\/models\/gpt-6-1-sol\/$/);
     assert.equal(await page.locator('h1').innerText(), 'GPT-6.1 Sol');
@@ -220,7 +220,7 @@ describe('charts, model, plans and listing pages', () => {
 
   test('legacy benchmarks pages keep working: Terminal-Bench shows its table and a chart placeholder', async () => {
     const { page, context } = await open('/benchmarks/terminal-bench-4/');
-    assert.equal(await page.locator('#official-rows tbody tr').count(), 14);
+    assert.equal(await page.locator('#official-rows tbody tr').count(), 23);
     await page.locator('[data-chart="tb4"]').scrollIntoViewIfNeeded();
     await page.waitForFunction(() => document.querySelector('[data-chart="tb4"]').dataset.chartStatus === 'error');
     await context.close();

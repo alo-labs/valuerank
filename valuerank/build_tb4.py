@@ -38,7 +38,12 @@ def parse_rate(value: str) -> tuple[float, float]:
     return float(match.group(1)) / 100, float(match.group(2))
 
 
-def parse_cost(value: str) -> float:
+NO_COST = {"", "—", "–", "-", "n/a"}
+
+
+def parse_cost(value: str) -> float | None:
+    if value.strip().lower() in NO_COST:
+        return None
     match = re.fullmatch(r"\s*\$([0-9.]+)([kKmM]?)\s*", value)
     if not match:
         raise ValueError(f"unexpected Terminal-Bench cost: {value!r}")
@@ -114,6 +119,7 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
             "capturedAt": raw.get("scrapedAt"),
         },
         "rowN": len(entries),
+        "rowsWithoutCostN": sum(entry["costUsd"] is None for entry in entries),
         "cohortN": len(cohort_ids),
         "matchedN": len(matches),
         "missingModels": missing,
@@ -129,6 +135,7 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
     print(json.dumps({
         "version": document["version"],
         "rows": document["rowN"],
+        "rowsWithoutCostN": document["rowsWithoutCostN"],
         "cohortN": document["cohortN"],
         "matchedN": document["matchedN"],
         "rankingAvailableN": document["rankingAvailableN"],

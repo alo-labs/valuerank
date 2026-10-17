@@ -32,9 +32,10 @@ def test_public_models_carry_per_point_and_per_run_plan_costs(repo_copy, tmp_pat
     models = {model["name"]: model for model in public_rankings(repo_copy, tmp_path)["models"]}
     sol = models["GPT-6.1 Sol"]["cost"]
     opus = models["Claude Opus 5.5"]["cost"]
+    scored = {m["name"]: m for m in json.loads((repo_copy / "data" / "scores.json").read_text())["models"]}["GPT-6.1 Sol"]
 
-    assert sol["planUsdPerRun"] == pytest.approx(1081.55 / 10.772)
-    assert sol["planUsdPerPoint"] == pytest.approx(1081.55 / 10.772 / 52.0)
+    assert sol["planUsdPerRun"] == pytest.approx(scored["aaEvalCost"] / 10.772)
+    assert sol["planUsdPerPoint"] == pytest.approx(scored["aaEvalCost"] / 10.772 / scored["intelligenceIndex"])
     assert opus["planUsdPerPoint"] > sol["planUsdPerPoint"]
     assert sol["fallback"] is None
 
@@ -44,7 +45,7 @@ def test_readme_candidate_table_shows_cost_per_index_point(repo_copy, pinned_clo
 
     assert "| Effective Plan cost per Index point |" in readme
     sol_row = next(line for line in readme.splitlines() if line.startswith("| GPT-6.1 Sol |"))
-    assert "| $100.40 | $1.93 |" in sol_row
+    assert "| $100.40 | $1.94 |" in sol_row
     opus_row = next(line for line in readme.splitlines() if line.startswith("| Claude Opus 5.5 |"))
     assert "| $147.85 | $2.57 |" in opus_row
     assert "divided by the model's AA Intelligence Index" in readme

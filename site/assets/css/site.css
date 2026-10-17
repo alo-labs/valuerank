@@ -288,6 +288,11 @@ input[type="range"] { width: 100%; min-height: var(--target); accent-color: var(
 .badge-assumption::before { border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .badge-missing { color: var(--g-missing); background: var(--g-missing-bg); border-color: var(--border-strong); border-style: dashed; }
 .badge-missing::before { background: transparent; border: 1.5px solid currentColor; }
+.badge-tier-frontier { color: var(--accent-hover); background: var(--accent-soft); border-color: var(--accent); }
+.badge-tier-near { color: var(--text); background: transparent; border-color: var(--accent); border-style: dashed; }
+.badge-tier-near::before { border-radius: 2px; background: var(--accent); }
+.badge-tier-frontier::before { background: var(--accent); }
+.model-id .badge-tier { align-self: flex-start; margin-top: 2px; }
 .badge-legend { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--sp-2); max-width: 52rem; }
 .badge-legend li { display: grid; grid-template-columns: 9.5rem 1fr; gap: var(--sp-3); align-items: start; font-size: var(--fs-sm); color: var(--text-muted); }
 .cov { display: inline-flex; align-items: center; gap: var(--sp-2); }

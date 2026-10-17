@@ -171,7 +171,7 @@ def dimension_evidence(key: str, model: Mapping, context: Mapping) -> dict[str, 
             "source": {"name": "Artificial Analysis total cost to run the Intelligence Index", "url": selection.get("url") or model["aaUrl"]},
             "observedAt": _day((scores.get("frontierSelection") or {}).get("capturedAt")),
             "evaluatedVariant": model.get("aaVariant"),
-            "note": None,
+            "note": model.get("aaFrontierFootnote"),
             "grade": "measured",
         }
     source = context["aaSources"].get(key) or {}

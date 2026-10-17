@@ -1,20 +1,53 @@
 # ValueRank Methodology
 
-**Version:** v1.9.6
-**Updated:** October 8, 2026
+**Version:** v1.9.7
+**Updated:** October 18, 2026
 
 ## Cohort and source versions
 
-The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every represented frontier model. AA's Coding Agent Index v1.5 chart publishes **31 DeepSWE v1.1 configurations** across **113 tasks**, observed **2026-10-08**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
+The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every model family on that frontier plus every near-frontier family; the full policy follows. AA's Coding Agent Index v1.5 chart publishes **42 DeepSWE v1.1 configurations** across **113 tasks**, observed **2026-10-17T19:26:26Z**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
 
-- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete 31-configuration inventory and exact-variant mapping decisions are pinned in [data/aa_deepswe.json](data/aa_deepswe.json).
+- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete 42-configuration inventory and exact-variant mapping decisions are pinned in [data/aa_deepswe.json](data/aa_deepswe.json).
 - AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current Artificial Analysis Intelligence Index v4.3.2.
 - AA Intelligence Index percentile comparisons use whole-point precision for every model because fresh public labels are rounded while older captures retain finer raw precision. Raw source inputs remain unchanged; sub-point differences should not be read as a reliable ordering.
 - AA v4.3.2 model values: first-party model pages selected by data/aa_mapping.json and recorded in aa_metrics.json.
 - LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **7be9f746f36a6f007dd78461f67cb7d06cfe2304**.
-- Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with 14 official rows, **11** direct cohort matches, and **1** eligible provider claim.
+- Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with 23 official rows, **11** direct cohort matches, and **1** eligible provider claim.
 
-Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v1.9.6.
+Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v1.9.7.
+
+## Model inclusion
+
+**Frontier rule.** Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA's rendered line as observed; ValueRank never recomputes it from rounded values.
+
+**Near-frontier rule.** A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked (its selected configuration may differ from the near configuration) or is explicitly deferred by a dated, reasoned roster decision. The cost ratio to the frontier is reported for information only.
+
+Policy as recorded: A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only.
+
+Chart observed 2026-10-17T18:48:27Z (Intelligence Index v4.3.2): 694 catalog models selected, 189 plotted points and 18 rendered Pareto vertices across 7 families. 9 plotted points across 6 families are near-frontier.
+
+Near-frontier models: 6 required, 0 deferred by roster decision.
+
+Frontier families and the configuration selected for each:
+
+- Claude Haiku 5.5: Claude Haiku 5.5 (xhigh)
+- Claude Opus 5.5: Claude Opus 5.5 (max with fallback)
+- Claude Sonnet 5.5: Claude Sonnet 5.5 (max with fallback)
+- GPT-6 Luna: GPT-6 Luna (max)
+- GPT-6.1 Sol: GPT-6.1 Sol (max)
+- MiMo-V2.6-Flash: MiMo-V2.6-Flash
+- MiMo-V2.6-Pro: MiMo-V2.6-Pro
+
+Near-frontier families and the configuration selected for each:
+
+- Claude Haiku 5.5: Claude Haiku 5.5 (low), 1 Index points below the frontier
+- Claude Opus 5.5: Claude Opus 5.5 (medium with fallback), 1 Index points below the frontier
+- Claude Sonnet 5.5: Claude Sonnet 5.5 (xhigh with fallback), 2 Index points below the frontier
+- GPT-5.6 Luna: GPT-5.6 Luna (low), 1 Index points below the frontier
+- GPT-6 Astra: GPT-6 Astra (xhigh), 2 Index points below the frontier
+- Gemini 4 Argon: Gemini 4 Argon (high), 1 Index points below the frontier
+
+AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.
 
 ## Primary dimensions
 
@@ -67,11 +100,11 @@ The API Costs basis uses each model's AA total evaluation cost in USD. Plan Cost
 - Missing values remain null in aa_metrics.json and are listed in coverage_matrix.json.
 - Each row's retained priorities are renormalized over that model's available values. Coverage is available priority divided by total retained priority; missing metric names accompany the percentage.
 - No zero, neutral 50, median, or mismatched-version value is used. Provider claims remain source-typed and are eligible only for the stated benchmark version and evaluated model/route.
-- AA output speed covers **15/16** selected pages; **Kimi K3** is missing. If retained, Speed contributes only where a value exists and the gap is included in row coverage.
+- AA output speed covers **18/19** selected pages; **Gemini 4 Argon** is missing. If retained, Speed contributes only where a value exists and the gap is included in row coverage.
 - GPQA Diamond remains an explicitly labelled legacy ValueRank input; it is not a component of the v4.3.2 source composite.
-- AA total evaluation cost is available for **16/16** ranked models; the cost component uses **AA evaluation cost only** consistently across this cohort.
-- LiveBench Instruction Following is available for **12/16** ranked models and is scored where present. Terminal-Bench 4.0 is supplemental in this release under the published dimension-selection policy.
-- Bug Hunt Bench has **22/28** exact owner results. Eligible exact-variant results contribute where present at the published Bug Hunt priority; the separate emphasis view includes **14** rows with eligible results.
+- AA total evaluation cost is available for **19/19** ranked models; the cost component uses **AA evaluation cost only** consistently across this cohort.
+- LiveBench Instruction Following is available for **12/19** ranked models and is scored where present. Terminal-Bench 4.0 is supplemental in this release under the published dimension-selection policy.
+- Bug Hunt Bench has **25/31** exact owner results. Eligible exact-variant results contribute where present at the published Bug Hunt priority; the separate emphasis view includes **16** rows with eligible results.
 
 Dropped candidate dimensions:
 
@@ -101,7 +134,7 @@ Overall Score is the weighted sum of a model's available retained dimensions, wi
 
 [LiveBench](https://livebench.ai/) is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the 24 matched cohort rows plus 1 official supplemental model: Claude Fable 5.1.
 
-[Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) is incorporated as the current external terminal-agent source. The official page shows 14 owner rows; a separate provider-claim row is included for the current DeepSeek V4 Flash API alias and is explicitly labelled. Together they provide 12/28 eligible cohort values, leaving 16 gaps.
+[Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) is incorporated as the current external terminal-agent source. The official page shows 23 owner rows; a separate provider-claim row is included for the current DeepSeek V4 Flash API alias and is explicitly labelled. Together they provide 12/31 eligible cohort values, leaving 19 gaps.
 
 ## Provider claim policy
 
@@ -109,9 +142,9 @@ When the benchmark owner has not published a result for a model, ValueRank uses 
 
 ## Bug Hunt Bench scoring
 
-Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **0630b120a81363c343ed7dfaf3c6d3be7f7da38c** and provides **22/28** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **20** (**15.15%** before row-level renormalization).
+Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **aec976170df89a371384174ca87646a9a8c82415** and provides **25/31** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **20** (**15.15%** before row-level renormalization).
 
-The companion Bug Hunt emphasis ranking uses **14** eligible owner-result rows and re-ranks the other available dimensions within that subset. It gives Bug Hunt priority **30** out of **142**, or **21.13%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
+The companion Bug Hunt emphasis ranking uses **16** eligible owner-result rows and re-ranks the other available dimensions within that subset. It gives Bug Hunt priority **30** out of **142**, or **21.13%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
 
 The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. Models remain visible when one or more retained metrics are missing, with their available-priority coverage shown. A model with no rankable primary metric remains unranked. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
 
@@ -122,7 +155,7 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
 - Rank normalization discards magnitude differences. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
 - Page variants can differ by reasoning effort; the selected URL and variant are recorded per model.
 - Provider claims may use a different harness or sampling procedure than the benchmark owner; displayed claim values are not presented as independent benchmark-owner measurements.
-- AA output speed is numeric for **15/16** selected pages; **Kimi K3** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.
+- AA output speed is numeric for **18/19** selected pages; **Gemini 4 Argon** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.
 - LiveBench and Terminal-Bench have different task suites and release surfaces from the AA source component; their displayed values should not be substituted for one another or read as a continuous version-to-version series.
 
 

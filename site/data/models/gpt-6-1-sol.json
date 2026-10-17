@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-1-sol",
   "summary": {
     "rank": {
-      "api": 1,
+      "api": 2,
       "plan": 2
     },
     "overall": {
-      "api": 74.3,
-      "plan": 75.7
+      "api": 70.1,
+      "plan": 73.6
     },
-    "quality": 74.6,
-    "qualityRank": 2,
+    "quality": 71.0,
+    "qualityRank": 5,
     "coverage": {
       "pct": 88.64,
       "availablePriority": 117,
@@ -36,20 +36,20 @@
       "label": "Cost",
       "category": "cost",
       "weightPct": 18.9394,
-      "value": 1081.55,
+      "value": 1081.552560620246,
       "unit": "USD per Index run",
-      "normalized": 73.333333,
+      "normalized": 66.7,
       "source": {
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": 73.333333,
-        "plan": 80.0
+        "api": 66.7,
+        "plan": 83.3
       }
     },
     {
@@ -57,16 +57,16 @@
       "label": "DeepSWE v1.1",
       "category": "code",
       "weightPct": 18.9394,
-      "value": 70.0,
+      "value": 69.6,
       "unit": "% pass@1",
-      "normalized": 84.6,
+      "normalized": 73.3,
       "source": {
         "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1&agents=codex-gpt-6-1-sol-max"
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
       },
-      "observedAt": "2026-10-08",
+      "observedAt": "2026-10-17T19:26:26Z",
       "evaluatedVariant": "Codex / GPT-6.1 Sol / max",
-      "note": "Exact Codex GPT-6.1 Sol Max owner row selected from all configurations; public chart 70 is rounded, 113 tasks with three attempts per task. Evaluation date and higher precision are not publicly exposed in the inspected row.",
+      "note": "Exact variant: chart model GPT-6.1 Sol (max) matches the roster display name 'GPT-6.1 Sol' at effort max.",
       "grade": "measured"
     },
     {
@@ -76,12 +76,12 @@
       "weightPct": 15.1515,
       "value": 44.3,
       "unit": "bugs fixed of 105",
-      "normalized": 92.9,
+      "normalized": 88.2,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/931c1ff9b9aaced865aaf56eaf744b7b1f182fc2/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3"
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3"
       },
-      "observedAt": "2026-10-08",
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "GPT-6.1 Sol (max effort) - mean of 3",
       "note": "Owner-published mean of three identical Max configurations; 44.3/105 is the owner's published one-decimal mean. Codex0.159.0 differs from older OpenAI rows; max is below ultra. Some laptop load may inflate wall time. Cost is a list-rate estimate, not an invoice; no retained request reached long-context rates. Earlier sandbox-blocked attempt voided and excluded; extras65.3 are unscored.",
       "grade": "measured"
@@ -91,16 +91,16 @@
       "label": "Non-Hallucination",
       "category": "rely",
       "weightPct": 4.5455,
-      "value": 46.0,
+      "value": 45.73,
       "unit": "% non-hallucination",
-      "normalized": 50.0,
+      "normalized": 55.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_public_display.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -122,16 +122,16 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1575.0,
+      "value": 1593.85,
       "unit": "Elo",
-      "normalized": 40.0,
+      "normalized": 44.4,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+        "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_whole_public_elo_label.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -139,16 +139,16 @@
       "label": "AA Intelligence Index",
       "category": "intel",
       "weightPct": 4.5455,
-      "value": 52.0,
+      "value": 51.8332597011541,
       "unit": "Index points",
-      "normalized": 90.0,
+      "normalized": 80.6,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_whole_public_label.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -170,16 +170,16 @@
       "label": "AutomationBench-AA",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 65.0,
+      "value": 64.87,
       "unit": "% score",
-      "normalized": 80.0,
+      "normalized": 72.2,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_public_display.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -187,16 +187,16 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 58.3,
+      "value": 66.030331930327,
       "unit": "tokens per second",
-      "normalized": 28.6,
+      "normalized": 29.4,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: public_summary_one_decimal_tokens_per_second.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -206,14 +206,14 @@
       "weightPct": 3.0303,
       "value": 83.0,
       "unit": "% accuracy",
-      "normalized": 53.3,
+      "normalized": 66.7,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_public_display.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -221,16 +221,16 @@
       "label": "AA-Omniscience Accuracy",
       "category": "rely",
       "weightPct": 3.0303,
-      "value": 62.0,
+      "value": 62.1,
       "unit": "% accuracy",
-      "normalized": 93.3,
+      "normalized": 94.4,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_public_display.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -238,16 +238,16 @@
       "label": "HLE",
       "category": "intel",
       "weightPct": 3.0303,
-      "value": 53.0,
+      "value": 52.92,
       "unit": "% accuracy",
-      "normalized": 80.0,
+      "normalized": 72.2,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_public_display.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -269,16 +269,16 @@
       "label": "SciCode",
       "category": "intel",
       "weightPct": 3.0303,
-      "value": 54.0,
+      "value": 54.17,
       "unit": "% score",
-      "normalized": 20.0,
+      "normalized": 33.3,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_public_display.",
+      "note": null,
       "grade": "measured"
     },
     {
@@ -286,24 +286,24 @@
       "label": "CritPt",
       "category": "intel",
       "weightPct": 2.2727,
-      "value": 32.0,
+      "value": 31.71,
       "unit": "% score",
-      "normalized": 93.3,
+      "normalized": 91.7,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "max",
-      "note": "Display precision: rounded_public_display.",
+      "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 1081.55,
-    "planUsdPerRun": 100.40382473078351,
-    "planUsdPerPoint": 1.9308427832842983,
-    "planComparableUsdPerPoint": 1.9308427832842983,
+    "apiUsd": 1081.552560620246,
+    "planUsdPerRun": 100.40406244153786,
+    "planUsdPerPoint": 1.9370586187405516,
+    "planComparableUsdPerPoint": 1.9370586187405516,
     "fallback": null,
     "route": {
       "id": "chatgpt-pro500-common-semianalysis-assumption",
@@ -327,8 +327,8 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "usdPerRun": 100.40382473078351,
-      "usdPerPoint": 1.9308427832842983,
+      "usdPerRun": 100.40406244153786,
+      "usdPerPoint": 1.9370586187405516,
       "selected": true
     },
     {
@@ -340,8 +340,8 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "usdPerRun": 102.51658767772511,
-      "usdPerPoint": 1.9714728399562522,
+      "usdPerRun": 102.51683039054463,
+      "usdPerPoint": 1.9778194730875092,
       "selected": false
     },
     {
@@ -353,8 +353,8 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "usdPerRun": 103.79558541266795,
-      "usdPerPoint": 1.9960689502436144,
+      "usdPerRun": 103.79583115357447,
+      "usdPerPoint": 2.0024947640185435,
       "selected": false
     },
     {
@@ -366,23 +366,35 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "usdPerRun": 133.52469135802468,
-      "usdPerPoint": 2.567782526115859,
+      "usdPerRun": 133.52500748398097,
+      "usdPerPoint": 2.576048819885583,
       "selected": false
     }
   ],
   "history": [
     {
       "version": "v1.9.6",
-      "date": "2026-10-08",
+      "date": null,
       "rank": {
         "api": 1,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.7",
+      "date": "2026-10-18",
+      "rank": {
+        "api": 2,
         "plan": 2
       }
     }
   ],
   "frontier": {
     "onAaFrontier": true,
-    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as GPT-6.1 Sol (max)."
+    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as GPT-6.1 Sol (max).",
+    "tier": "frontier",
+    "configuration": "GPT-6.1 Sol (max)",
+    "intelligenceGap": 0,
+    "footnote": null
   }
 }

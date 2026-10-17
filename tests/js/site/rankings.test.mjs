@@ -450,3 +450,31 @@ test('a chart tab chosen in the URL survives later filter and weight changes', (
   type(p.q, 'a');
   assert.equal(lastUrl(p), '/rankings/?w=50&q=a&chart=bubble');
 });
+
+test('frontier tier badges carry text and a tooltip with the configuration and gap', () => {
+  const [alpha, beta, gamma, delta] = data.models;
+  Object.assign(alpha, { aaFrontierTier: 'frontier', aaFrontierConfiguration: 'Alpha (max)', aaFrontierIntelligenceGap: 0 });
+  Object.assign(beta, { aaFrontierTier: 'near', aaFrontierConfiguration: 'Beta (high)', aaFrontierIntelligenceGap: 2 });
+  Object.assign(gamma, { aaFrontierTier: 'near', aaFrontierConfiguration: null, aaFrontierIntelligenceGap: null });
+  Object.assign(delta, { aaFrontierTier: 'frontier' });
+  try {
+    const p = mount();
+    const tag = (slug) => cell(rows(p).find((r) => r.dataset.slug === slug), 'name').querySelector('[data-aa-tier]');
+    assert.equal(tag('alpha').textContent, 'AA frontier');
+    assert.equal(tag('alpha').getAttribute('title'), 'Alpha (max) is on the rendered AA frontier.');
+    assert.equal(tag('alpha').className, 'badge badge-tier badge-tier-frontier');
+    assert.equal(tag('beta').textContent, 'Near frontier');
+    assert.equal(tag('beta').getAttribute('title'), 'Beta (high) is within 2 Index points of the rendered AA frontier at its cost.');
+    assert.equal(tag('gamma').getAttribute('title'), 'A plotted configuration is within the policy gap of the rendered AA frontier at its cost.');
+    assert.equal(tag('delta').getAttribute('title'), 'Selected configuration is on the rendered AA frontier.');
+    Object.assign(delta, { aaFrontierTier: 'near', aaFrontierConfiguration: 'Delta (low)', aaFrontierIntelligenceGap: 1 });
+    const singular = mount();
+    const deltaTag = cell(rows(singular).find((r) => r.dataset.slug === 'delta'), 'name').querySelector('[data-aa-tier]');
+    assert.equal(deltaTag.getAttribute('title'), 'Delta (low) is within 1 Index point of the rendered AA frontier at its cost.');
+    assert.equal(tag('eps'), null);
+  } finally {
+    for (const m of [alpha, beta, gamma, delta]) {
+      delete m.aaFrontierTier; delete m.aaFrontierConfiguration; delete m.aaFrontierIntelligenceGap;
+    }
+  }
+});

@@ -12,7 +12,7 @@ from pathlib import Path
 
 from valuerank.clock import iso_z, utcnow
 
-from valuerank.build_aa_metrics import decode_current_model
+from valuerank.build_aa_metrics import decode_page_model, page_slug
 
 from valuerank.paths import DATA, ROOT
 AA_DIR = DATA / "aa"
@@ -69,7 +69,7 @@ def capture(entry: dict, preserved_pages: dict) -> dict:
     with urllib.request.urlopen(request, timeout=45) as response:
         payload = response.read()
         html = payload.decode("utf-8", errors="replace")
-        model = decode_current_model(html)
+        model = decode_page_model(html, page_slug(url))
         return {
             "id": entry["id"],
             "requestedName": entry.get("displayName"),

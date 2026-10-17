@@ -99,10 +99,32 @@ def test_parse_cost_expands_magnitude_suffixes_and_rounds_to_cents(value, dollar
     assert build_tb4.parse_cost(value) == dollars
 
 
-@pytest.mark.parametrize("value", ["3.3k", "$", "$abc", "$3.3x", "$3.3 k", "", "$-2", "USD 3"])
+@pytest.mark.parametrize("value", ["3.3k", "$", "$abc", "$3.3x", "$3.3 k", "$-2", "USD 3"])
 def test_parse_cost_refuses_values_without_a_dollar_amount(value):
     with pytest.raises(ValueError, match=re.escape(f"unexpected Terminal-Bench cost: {value!r}")):
         build_tb4.parse_cost(value)
+
+
+@pytest.mark.parametrize("value", ["—", "–", "-", "", "  ", "n/a", "N/A", " N/a "])
+def test_parse_cost_returns_none_when_the_leaderboard_publishes_no_cost(value):
+    assert build_tb4.parse_cost(value) is None
+
+
+def test_main_keeps_a_row_without_a_published_cost_and_counts_it(data_dir, capsys):
+    scrape_document = synthetic_scrape()
+    scrape_document["rows"].append(["20", "Muse Spark 1.3 (xhigh)", "Muse Code", "14.5% ± 2.9%", "Sep 2, 2026", "9.0B", "—"])
+    scrape = write_json(data_dir / "scrape.json", scrape_document)
+    output = data_dir / "tb4.json"
+
+    assert build_tb4.main([str(scrape), str(output)], data=data_dir) == 0
+
+    document = read_document(output)
+    assert document["rowN"] == 5
+    assert document["rowsWithoutCostN"] == 1
+    assert document["rows"][4]["costUsd"] is None
+    assert document["rows"][4]["cohortModelId"] is None
+    assert document["rows"][0]["costUsd"] == 3300.0
+    assert json.loads(capsys.readouterr().out)["rowsWithoutCostN"] == 1
 
 
 def test_parse_cost_refuses_a_malformed_decimal_rather_than_guessing():
@@ -125,7 +147,7 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
     document = read_document(output)
     assert document["schemaVersion"] == "valuerank-terminal-bench-v1"
     assert document["version"] == "4.0"
-    assert document["observedAt"] == "2026-10-07T17:23:20Z"
+    assert document["observedAt"] == "2026-10-17T19:28:57Z"
     assert document["source"] == {
         "publisher": "Terminal-Bench / Harbor",
         "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
@@ -138,6 +160,7 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
         "capturedAt": "2026-09-04T13:50:16.451Z",
     }
     assert document["rowN"] == 4
+    assert document["rowsWithoutCostN"] == 0
     assert document["cohortN"] == 5
     assert document["matchedN"] == 3
     assert document["missingModels"] == ["Gemini 3.7 Flash", "Claude Sonnet 5"]
@@ -182,6 +205,7 @@ def test_main_summary_reports_counts_missing_models_and_the_output_path(data_dir
     assert summary == {
         "version": "4.0",
         "rows": 4,
+        "rowsWithoutCostN": 0,
         "cohortN": 5,
         "matchedN": 3,
         "rankingAvailableN": 4,

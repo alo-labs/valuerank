@@ -118,6 +118,19 @@ def test_frontier_effort_normalizes_and_strips_fallback(variant, expected):
     assert build_scores.frontier_effort(variant) == expected
 
 
+@pytest.mark.parametrize(
+    ("family", "developer", "short"),
+    [
+        ("Claude Haiku 5.5", "Anthropic", "Haiku 5.5"),
+        ("Claude Sonnet 5.5", "Anthropic", "Sonnet 5.5"),
+        ("Gemini 4 Argon", "Google DeepMind", "Gem 4 Argon"),
+    ],
+)
+def test_frontier_and_near_frontier_families_have_identity_mappings(family, developer, short):
+    assert build_scores.DEVELOPER[family] == developer
+    assert build_scores.SHORT[family] == short
+
+
 @pytest.mark.parametrize("value", [None, True, "5", [1], float("nan"), float("inf")])
 def test_require_number_rejects_bad_values(value):
     with pytest.raises(ValueError, match="required value: label"):
@@ -291,7 +304,7 @@ def test_ranked_order_and_exclusions(built):
     for m in excluded:
         assert m["rank"] is None and m["overallScore"] is None and m["vRanks"] == {}
         assert m["rankingStatus"] == "excluded_from_primary_cohort"
-        assert "Not a required selected AA frontier family model" in m["rankingExclusionReasons"]
+        assert "Not a required AA frontier or near-frontier family model" in m["rankingExclusionReasons"]
     assert {a["id"] for a in scores["appendixNonRanked"]} == {m["id"] for m in excluded}
     assert [m["name"] for m in scores["models"] if not m["rankingEligible"]] == sorted(m["name"] for m in excluded)
 
@@ -324,6 +337,9 @@ def test_cost_normalization_is_relative_to_most_expensive_primary_model(built):
     assert built["scores.json"]["costMode"] == "aa-only"
 
 
+DEEPSEEK_CLAIM = {"model": "DeepSeek V4 Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://api-docs.deepseek.com/updates/"}
+
+
 def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     run_main(world)
     printed = json.loads(capsys.readouterr().out)
@@ -333,8 +349,9 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-10-07T17:23:20Z"
-    assert scoring["providerClaimsUsed"] == []  # the only claim targets a non-primary model
+    assert scoring["observedAt"] == "2026-10-17T19:28:57Z"
+    # The DeepSeek V4 Flash claim is used because that model is primary-ranked; the other claim targets a non-primary model.
+    assert scoring["providerClaimsUsed"] == [DEEPSEEK_CLAIM]
     assert scoring["primaryMissingFields"]
     assert printed["version"] == build_scores.VERSION
     assert printed["n"] == scoring["cohortN"]
@@ -600,7 +617,11 @@ def test_without_bug_hunt_overlap_the_dimension_is_dropped(world):
     scores = out["scores.json"]
     assert all(w["key"] != "bugHuntFixedOf105" for w in scores["weights"])
     assert scores["cohort"]["exactBenchmarkOverlapN"] == 0
-    assert scores["cohort"]["n"] == scores["cohort"]["frontierRequiredModelN"]
+    selection = scores["frontierSelection"]
+    forced_ids = {item["modelId"] for item in selection["selectedFamilyModelIds"]} | {
+        item["modelId"] for item in selection["nearFrontierFamilies"] if item["modelId"]}
+    assert scores["cohort"]["n"] == len(forced_ids)
+    assert scores["cohort"]["frontierRequiredModelN"] == len(selection["selectedFamilyModelIds"])
     assert scores["externalBenchmarks"]["bugHunt"]["primaryWeightPct"] == 0.0
     dropped = out["ranking_summary.json"]["droppedDimensions"]
     assert dropped[-1]["key"] == "bugHuntFixedOf105"
@@ -643,7 +664,7 @@ def test_unverified_reasoning_variant_without_numeric_scores(world):
     run_main(world)
     reasons = exclusion_reasons(world)
     assert reasons[0].endswith("owner default result available; selected reasoning equivalence is unverified")
-    assert reasons[-1] == "Not a required selected AA frontier family model"
+    assert reasons[-1] == "Not a required AA frontier or near-frontier family model"
 
 
 def test_missing_owner_result_has_plain_exclusion_reason(world):
@@ -690,6 +711,7 @@ def test_provider_claim_for_primary_model_is_recorded(world):
     assert row["terminalBenchV4SourceType"] == "model_provider_claim"
     assert row["terminalBenchV4"] == 0.312
     assert out["run_manifest.json"]["scoring"]["providerClaimsUsed"] == [
+        DEEPSEEK_CLAIM,
         {"model": "MiMo-V2.6-Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://example.invalid/claim"}
     ]
 
@@ -699,6 +721,459 @@ def test_official_terminal_bench_row_beats_provider_claim(world):
     row = next(m for m in outputs(world)["scores.json"]["models"] if m["id"] == "gpt-6-astra")
     assert row["terminalBenchV4SourceType"] == "benchmark_owner"
     assert row["terminalBenchV4Claim"] is None
+
+
+# --------------------------------------------------------------------------
+# near-frontier policy: pure helpers
+# --------------------------------------------------------------------------
+
+AA_URL = "https://artificialanalysis.ai/models/"
+
+
+def near_inv(slug="near-a", family="Fam A", required="fam-a", gap=2, variant="medium", **extra):
+    row = {"aaId": slug, "name": f"{family} ({variant})", "evaluatedVariant": variant, "intelligenceIndex": 50,
+           "totalCostUsd": 12.5, "intelligenceGap": gap, "costRatio": 1.5, "nearestFrontierAaId": "front-a",
+           "directlyObservedFrontier": False, "sourceUrl": AA_URL + slug, "family": family,
+           "requiredFamilyModelId": required, "sourceFootnote": None}
+    row.update(extra)
+    return row
+
+
+def near_cap(row, **extra):
+    capture = {"model_name": row["name"], "family": row["family"],
+               "effort": build_scores.frontier_effort(row["evaluatedVariant"]), "fallback": None, "url": row["sourceUrl"],
+               "intelligence_index_display": row["intelligenceIndex"], "total_cost_usd": row["totalCostUsd"],
+               "intelligence_gap": row["intelligenceGap"]}
+    capture.update(extra)
+    return capture
+
+
+def near_docs(rows=None, caps=None):
+    rows = [near_inv()] if rows is None else rows
+    caps = [near_cap(row) for row in rows] if caps is None else caps
+    inventory = {"nearFrontierRows": rows, "nearFrontierPolicy": {"maxIntelligenceGap": 3, "basis": "b", "text": "t"},
+                 "sourceUniverse": {"nearFrontierPointN": len(rows)}}
+    capture = {"near_frontier": caps, "near_frontier_policy": {"max_intelligence_gap": 3},
+               "universe": {"near_frontier_points": len(caps)}}
+    return inventory, capture
+
+
+AA_MODELS = {"fam-a": {"displayName": "Fam A"}, "fam-b": {"displayName": "Fam B"}}
+
+
+def select(inventory, capture, frontier_urls=(), frontier_ids=None, aa_models=AA_MODELS):
+    return build_scores.near_frontier_selection(inventory, capture, set(frontier_urls), frontier_ids or {}, aa_models)
+
+
+def test_near_selection_groups_rows_by_family_and_allows_deferred_ids():
+    rows = [near_inv(), near_inv("near-a2", variant="high", gap=1),
+            near_inv("near-d", family="Phantom", required=None, variant="low")]
+    selection = select(*near_docs(rows))
+    assert list(selection) == ["Fam A", "Phantom"]
+    assert selection["Fam A"] == {"modelId": "fam-a", "rows": rows[:2]}
+    assert selection["Phantom"] == {"modelId": None, "rows": rows[2:]}
+
+
+def test_near_selection_accepts_fallback_variants_and_consistent_frontier_family():
+    row = near_inv(variant="high with fallback")
+    inventory, capture = near_docs([row], [near_cap(row, effort="high", fallback="with fallback")])
+    assert select(inventory, capture, frontier_ids={"Fam A": {"fam-a"}})["Fam A"]["modelId"] == "fam-a"
+    capture["near_frontier"][0]["fallback"] = True
+    assert "Fam A" in select(inventory, capture)
+
+
+def test_near_selection_with_no_rows_is_empty():
+    assert select(*near_docs([])) == {}
+
+
+def _drop(container, key):
+    def fn(inventory, capture):
+        del {"inventory": inventory, "capture": capture}[container][key]
+    return fn
+
+
+@pytest.mark.parametrize("mutation", [
+    _drop("inventory", "nearFrontierRows"), _drop("inventory", "nearFrontierPolicy"),
+    _drop("capture", "near_frontier"), _drop("capture", "near_frontier_policy"),
+    lambda inventory, capture: inventory.update(nearFrontierPolicy="text"),
+    lambda inventory, capture: capture.update(near_frontier="rows"),
+])
+def test_near_selection_requires_policy_and_rows_on_both_sides(mutation):
+    inventory, capture = near_docs()
+    mutation(inventory, capture)
+    with pytest.raises(ValueError, match="must carry the near-frontier policy and rows"):
+        select(inventory, capture)
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda inventory, capture: inventory["sourceUniverse"].update(nearFrontierPointN=2),
+    lambda inventory, capture: inventory["sourceUniverse"].pop("nearFrontierPointN"),
+    lambda inventory, capture: capture["universe"].update(near_frontier_points=2),
+    lambda inventory, capture: inventory["nearFrontierRows"].append(near_inv("extra")),
+    lambda inventory, capture: capture["near_frontier"].pop(),
+])
+def test_near_selection_counts_must_reconcile(mutation):
+    inventory, capture = near_docs()
+    mutation(inventory, capture)
+    with pytest.raises(ValueError, match="near-frontier point counts do not reconcile"):
+        select(inventory, capture)
+
+
+@pytest.mark.parametrize("gap", [4, None])
+def test_near_selection_policy_gap_must_match_capture(gap):
+    inventory, capture = near_docs()
+    capture["near_frontier_policy"]["max_intelligence_gap"] = gap
+    with pytest.raises(ValueError, match="near-frontier policy differs"):
+        select(inventory, capture)
+
+
+def test_near_selection_policy_gap_must_be_declared():
+    inventory, capture = near_docs()
+    del inventory["nearFrontierPolicy"]["maxIntelligenceGap"]
+    del capture["near_frontier_policy"]["max_intelligence_gap"]
+    with pytest.raises(ValueError, match="near-frontier policy differs"):
+        select(inventory, capture)
+
+
+@pytest.mark.parametrize("change", [
+    {"family": ""}, {"family": None}, {"sourceUrl": ""}, {"directlyObservedFrontier": True},
+    {"directlyObservedFrontier": None}, {"requiredFamilyModelId": ""}, {"requiredFamilyModelId": 5},
+])
+def test_near_rows_must_carry_family_url_flag_and_id(change):
+    row = near_inv(**change)
+    with pytest.raises(ValueError, match="near-frontier inventory row must carry"):
+        select(*near_docs([row], [near_cap(near_inv())]))
+
+
+def test_near_row_without_required_id_key_is_rejected():
+    row = near_inv()
+    del row["requiredFamilyModelId"]
+    with pytest.raises(ValueError, match="near-frontier inventory row must carry"):
+        select(*near_docs([row], [near_cap(near_inv())]))
+
+
+def test_near_urls_must_be_unique_across_near_and_frontier_rows():
+    twin = near_inv("near-b", sourceUrl=AA_URL + "near-a")
+    with pytest.raises(ValueError, match="duplicate owner URL: " + AA_URL + "near-a"):
+        select(*near_docs([near_inv(), twin], [near_cap(near_inv()), near_cap(twin)]))
+    with pytest.raises(ValueError, match="duplicate owner URL"):
+        select(*near_docs(), frontier_urls={AA_URL + "near-a"})
+
+
+@pytest.mark.parametrize("change", [
+    {"model_name": "Other"}, {"family": "Other"}, {"effort": "low"}, {"fallback": "with fallback"},
+    {"intelligence_index_display": 51}, {"total_cost_usd": 12.6}, {"intelligence_gap": 1}, {"url": AA_URL + "elsewhere"},
+])
+def test_near_rows_must_match_their_capture_rows(change):
+    row = near_inv()
+    with pytest.raises(ValueError, match="near-frontier row is inconsistent with its current frontier capture: " + AA_URL + "near-a"):
+        select(*near_docs([row], [near_cap(row, **change)]))
+
+
+def test_near_row_missing_fallback_in_inventory_is_rejected():
+    row = near_inv(variant="high with fallback")
+    with pytest.raises(ValueError, match="inconsistent with its current frontier capture"):
+        select(*near_docs([row], [near_cap(row, effort="high", fallback=None)]))
+
+
+def test_near_cost_must_be_numeric_in_the_capture():
+    row = near_inv()
+    with pytest.raises(ValueError, match="non-numeric required value"):
+        select(*near_docs([row], [near_cap(row, total_cost_usd="12.5")]))
+
+
+def test_near_family_ids_must_be_consistent_and_agree_with_the_frontier():
+    rows = [near_inv(), near_inv("near-a2", variant="high", required="fam-b")]
+    with pytest.raises(ValueError, match="inconsistent required model IDs: Fam A"):
+        select(*near_docs(rows))
+    mixed = [near_inv(), near_inv("near-a2", variant="high", required=None)]
+    with pytest.raises(ValueError, match="inconsistent required model IDs: Fam A"):
+        select(*near_docs(mixed))
+    for frontier_id in ("fam-b", None):
+        with pytest.raises(ValueError, match="disagrees with its frontier model ID: Fam A"):
+            select(*near_docs(), frontier_ids={"Fam A": {frontier_id}})
+
+
+def test_near_family_model_must_exist_in_roster_with_matching_display_name():
+    with pytest.raises(ValueError, match="absent from the selected AA metrics roster: fam-a"):
+        select(*near_docs(), aa_models={})
+    with pytest.raises(ValueError, match="does not match selected catalog identity for fam-a"):
+        select(*near_docs(), aa_models={"fam-a": {"displayName": "Fam B"}})
+
+
+def test_near_row_errors_precede_family_roster_errors():
+    with pytest.raises(ValueError, match="near-frontier row is inconsistent"):
+        select(*near_docs([near_inv()], [near_cap(near_inv(), model_name="x")]), aa_models={})
+
+
+# --------------------------------------------------------------------------
+# frontier tiers: per-family annotations and summary rows
+# --------------------------------------------------------------------------
+
+
+def front(name, intelligence, cost, family="Fam A", model_id="fam-a", note=None):
+    return {"name": name, "intelligenceIndex": intelligence, "totalCostUsd": cost, "family": family,
+            "requiredFamilyModelId": model_id, "sourceFootnote": note}
+
+
+def test_frontier_tiers_pick_the_highest_intelligence_frontier_configuration():
+    frontier = {"Fam A": [front("A low", 20, 5), front("A max", 40, 90, note="priced differently"),
+                          front("A high", 40, 80, note="cheaper tie")]}
+    annotations, frontier_families, near_families = build_scores.frontier_tiers(frontier, {})
+    assert annotations == {"Fam A": {"tier": "frontier", "configuration": "A high", "intelligenceGap": 0,
+                                     "footnote": "cheaper tie"}}
+    assert frontier_families == [{"family": "Fam A", "modelId": "fam-a", "configuration": "A high"}]
+    assert near_families == []
+
+
+def test_frontier_tiers_break_exact_frontier_ties_by_name():
+    frontier = {"F": [front("F b", 30, 10, "F", "f"), front("F a", 30, 10, "F", "f")]}
+    assert build_scores.frontier_tiers(frontier, {})[0]["F"]["configuration"] == "F a"
+
+
+def test_frontier_tiers_pick_the_smallest_gap_near_configuration():
+    near = {"Fam B": {"modelId": "fam-b", "rows": [
+        near_inv("b1", "Fam B", "fam-b", gap=2, sourceFootnote="note b1"),
+        near_inv("b2", "Fam B", "fam-b", gap=1, totalCostUsd=30.0, sourceFootnote="note b2"),
+        near_inv("b3", "Fam B", "fam-b", gap=1, totalCostUsd=20.0, sourceFootnote="note b3"),
+        near_inv("b4", "Fam B", "fam-b", gap=1, totalCostUsd=20.0, variant="low", sourceFootnote=None)]}}
+    annotations, frontier_families, near_families = build_scores.frontier_tiers({}, near)
+    assert annotations == {"Fam B": {"tier": "near", "configuration": "Fam B (low)",
+                                     "intelligenceGap": 1, "footnote": None}}
+    assert frontier_families == []
+    assert near_families == [{"family": "Fam B", "modelId": "fam-b", "configuration": "Fam B (low)", "intelligenceGap": 1}]
+
+
+def test_frontier_tiers_prefer_frontier_over_near_and_sort_families():
+    frontier = {"Zed": [front("Zed top", 60, 100, "Zed", "zed")], "Fam A": [front("A top", 40, 80)]}
+    near = {"Fam A": {"modelId": "fam-a", "rows": [near_inv(gap=3)]},
+            "Phantom": {"modelId": None, "rows": [near_inv("p", "Phantom", None, gap=0)]},
+            "Beta": {"modelId": "beta", "rows": [near_inv("b", "Beta", "beta", gap=1, sourceFootnote="b note")]}}
+    annotations, frontier_families, near_families = build_scores.frontier_tiers(frontier, near)
+    assert annotations["Fam A"]["tier"] == "frontier" and annotations["Fam A"]["configuration"] == "A top"
+    assert annotations["Beta"] == {"tier": "near", "configuration": "Beta (medium)", "intelligenceGap": 1, "footnote": "b note"}
+    assert annotations["Phantom"]["tier"] == "near"
+    assert [item["family"] for item in frontier_families] == ["Fam A", "Zed"]
+    assert near_families == [
+        {"family": "Beta", "modelId": "beta", "configuration": "Beta (medium)", "intelligenceGap": 1},
+        {"family": "Fam A", "modelId": "fam-a", "configuration": "Fam A (medium)", "intelligenceGap": 3},
+        {"family": "Phantom", "modelId": None, "configuration": "Phantom (medium)", "intelligenceGap": 0}]
+
+
+def test_frontier_tiers_with_nothing_is_empty():
+    assert build_scores.frontier_tiers({}, {}) == ({}, [], [])
+
+
+# --------------------------------------------------------------------------
+# near-frontier policy: pipeline integration on the copied data
+# --------------------------------------------------------------------------
+
+
+def _inv_no_near_rows(document):
+    del document["nearFrontierRows"]
+
+
+def _inv_near_count(document):
+    document["sourceUniverse"]["nearFrontierPointN"] += 1
+
+
+def _inv_near_policy_gap(document):
+    document["nearFrontierPolicy"]["maxIntelligenceGap"] = 99
+
+
+def _inv_near_flag(document):
+    document["nearFrontierRows"][0]["directlyObservedFrontier"] = True
+
+
+def _inv_near_cost(document):
+    document["nearFrontierRows"][0]["totalCostUsd"] += 5
+
+
+def _inv_near_gap(document):
+    document["nearFrontierRows"][0]["intelligenceGap"] += 1
+
+
+def _inv_near_duplicate(document):
+    document["nearFrontierRows"][1]["sourceUrl"] = document["nearFrontierRows"][0]["sourceUrl"]
+
+
+def _inv_near_frontier_url(document):
+    document["nearFrontierRows"][0]["sourceUrl"] = document["rows"][0]["sourceUrl"]
+
+
+NEAR_INVENTORY_CASES = [
+    (_inv_no_near_rows, "must carry the near-frontier policy and rows"),
+    (_inv_near_count, "near-frontier point counts do not reconcile"),
+    (_inv_near_policy_gap, "near-frontier policy differs"),
+    (_inv_near_flag, "near-frontier inventory row must carry"),
+    (_inv_near_cost, "near-frontier row is inconsistent with its current frontier capture"),
+    (_inv_near_gap, "near-frontier row is inconsistent with its current frontier capture"),
+    (_inv_near_duplicate, "near-frontier inventory has a duplicate owner URL"),
+    (_inv_near_frontier_url, "near-frontier inventory has a duplicate owner URL"),
+]
+
+
+@pytest.mark.parametrize(("mutation", "message"), NEAR_INVENTORY_CASES)
+def test_near_inventory_rows_are_validated(world, mutation, message):
+    edit(world, "inventory", mutation)
+    with pytest.raises(ValueError, match=message):
+        run_main(world)
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda d: d.pop("near_frontier"), lambda d: d.pop("near_frontier_policy"),
+    lambda d: d["universe"].update(near_frontier_points=0),
+    lambda d: d["near_frontier_policy"].update(max_intelligence_gap=1),
+])
+def test_near_capture_must_match_inventory(world, mutation):
+    edit(world, "capture", mutation)
+    with pytest.raises(ValueError, match="near-frontier"):
+        run_main(world)
+
+
+def add_near_family(root: Path, *, family: str, model_id, slug: str, gap: int = 1) -> str:
+    """Append a consistent synthetic near-frontier row for ``family`` to the copied inventory and capture."""
+
+    inventory_path, capture_path = root / FILES["inventory"], root / FILES["capture"]
+    inventory, capture = json.loads(inventory_path.read_text()), json.loads(capture_path.read_text())
+    url = AA_URL + slug
+    row = {"aaId": slug, "name": f"{family} (medium)", "evaluatedVariant": "medium", "intelligenceIndex": 40,
+           "totalCostUsd": 10.0, "intelligenceGap": gap, "costRatio": 1.1,
+           "nearestFrontierAaId": inventory["rows"][0]["aaId"], "directlyObservedFrontier": False, "sourceUrl": url,
+           "family": family, "requiredFamilyModelId": model_id, "sourceFootnote": f"note for {slug}"}
+    inventory["nearFrontierRows"].append(row)
+    inventory["sourceUniverse"]["nearFrontierPointN"] += 1
+    capture["near_frontier"].append(near_cap(row, fallback=None))
+    capture["universe"]["near_frontier_points"] += 1
+    inventory_path.write_text(json.dumps(inventory))
+    capture_path.write_text(json.dumps(capture))
+    return url
+
+
+def model_rows(root: Path) -> dict:
+    return {m["id"]: m for m in outputs(root)["scores.json"]["models"]}
+
+
+def test_every_model_row_reports_its_aa_frontier_tier(world):
+    run_main(world)
+    inventory = json.loads((world / FILES["inventory"]).read_text())
+    best_near = {}
+    for row in inventory["nearFrontierRows"]:
+        key = (row["intelligenceGap"], row["totalCostUsd"], row["name"])
+        if row["family"] not in best_near or key < best_near[row["family"]][0]:
+            best_near[row["family"]] = (key, row)
+    best_front = {}
+    for row in inventory["rows"]:
+        key = (-row["intelligenceIndex"], row["totalCostUsd"], row["name"])
+        if row["family"] not in best_front or key < best_front[row["family"]][0]:
+            best_front[row["family"]] = (key, row)
+    seen_tiers = set()
+    for model in outputs(world)["scores.json"]["models"]:
+        family = model["name"]
+        if family in best_front:
+            row = best_front[family][1]
+            want = ("frontier", row["name"], 0, row.get("sourceFootnote"))
+        elif family in best_near:
+            row = best_near[family][1]
+            want = ("near", row["name"], row["intelligenceGap"], row.get("sourceFootnote"))
+        else:
+            want = (None, None, None, None)
+        got = (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"],
+               model["aaFrontierFootnote"])
+        assert got == want, family
+        seen_tiers.add(want[0])
+        assert "frontierSelection" in model  # existing field untouched
+    assert seen_tiers == {"frontier", "near", None}
+
+
+def test_footnote_of_the_best_configuration_is_passed_through(world):
+    def notes(document):
+        for row in document["rows"]:
+            row["sourceFootnote"] = "note " + row["aaId"]
+    edit(world, "inventory", notes)
+    run_main(world)
+    inventory = json.loads((world / FILES["inventory"]).read_text())
+    luna = [r for r in inventory["rows"] if r["family"] == "GPT-6 Luna"]
+    best = max(luna, key=lambda r: (r["intelligenceIndex"], -r["totalCostUsd"]))
+    assert model_rows(world)["gpt-6-luna"]["aaFrontierFootnote"] == "note " + best["aaId"]
+    assert model_rows(world)["gpt-6-luna"]["aaFrontierConfiguration"] == best["name"]
+
+
+def test_frontier_selection_summarises_near_families(world):
+    run_main(world)
+    out = outputs(world)
+    selection = out["ranking_summary.json"]["frontierSelection"]
+    inventory = json.loads((world / FILES["inventory"]).read_text())
+    near_families = {r["family"]: r["requiredFamilyModelId"] for r in inventory["nearFrontierRows"]}
+    assert selection["nearFrontierPolicy"] == inventory["nearFrontierPolicy"]
+    assert selection["nearFrontierPointN"] == len(inventory["nearFrontierRows"])
+    assert selection["nearFrontierFamilyN"] == len(near_families)
+    assert selection["nearFrontierRequiredModelN"] == len({v for v in near_families.values() if v})
+    assert selection["nearFrontierDeferredN"] == sum(v is None for v in near_families.values())
+    assert [(f["family"], f["modelId"]) for f in selection["nearFrontierFamilies"]] == sorted(near_families.items())
+    assert all(set(f) == {"family", "modelId", "configuration", "intelligenceGap"} for f in selection["nearFrontierFamilies"])
+    assert [f["family"] for f in selection["frontierFamilies"]] == sorted({r["family"] for r in inventory["rows"]})
+    assert all(set(f) == {"family", "modelId", "configuration"} for f in selection["frontierFamilies"])
+    assert selection["familyN"] == len(selection["frontierFamilies"])
+    assert out["scores.json"]["frontierSelection"] == selection == out["coverage_matrix.json"]["frontierSelection"]
+
+
+def test_near_family_without_overlap_coverage_still_ranks(world):
+    run_main(world)
+    base = outputs(world)
+    # gpt-5.5 has no DeepSWE/Bug Hunt overlap and is not a frontier family: excluded until it becomes a near family.
+    assert model_rows(world)["gpt-5.5"]["rankingEligible"] is False
+    base_frontier_n = base["scores.json"]["cohort"]["frontierRequiredModelN"]
+    base_cohort_n = base["scores.json"]["cohort"]["n"]
+    add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="synthetic-gpt-5-5")
+    run_main(world)
+    out = outputs(world)
+    model = model_rows(world)["gpt-5.5"]
+    assert model["rankingEligible"] is True and model["rank"] is not None
+    assert model["rankingInclusionReasons"] == [
+        "Near-frontier AA family (within 3 Index points of the rendered frontier)"]
+    assert model["rankingExclusionReasons"] == []
+    assert (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"]) == ("near", "GPT-5.5 (medium)", 1)
+    assert model["aaFrontierFootnote"] == "note for synthetic-gpt-5-5"
+    assert out["scores.json"]["cohort"]["n"] == base_cohort_n + 1
+    assert out["scores.json"]["cohort"]["frontierRequiredModelN"] == base_frontier_n
+    assert out["ranking_summary.json"]["frontierRequiredModelN"] == base_frontier_n
+    assert out["ranking_summary.json"]["frontierSelection"]["nearFrontierRequiredModelN"] == \
+        base["ranking_summary.json"]["frontierSelection"]["nearFrontierRequiredModelN"] + 1
+
+
+def test_frontier_family_that_is_also_near_keeps_only_the_frontier_inclusion_reason(world):
+    run_main(world)
+    inventory = json.loads((world / FILES["inventory"]).read_text())
+    both = {r["family"] for r in inventory["rows"]} & {r["family"] for r in inventory["nearFrontierRows"]}
+    assert both
+    names = {m["name"]: m for m in model_rows(world).values()}
+    for family in both:
+        reasons = names[family]["rankingInclusionReasons"]
+        assert "Required AA Intelligence Index versus total-evaluation-cost frontier family" in reasons
+        assert not any(reason.startswith("Near-frontier AA family") for reason in reasons)
+
+
+def test_deferred_near_family_counts_but_adds_no_ranked_model(world):
+    run_main(world)
+    base = outputs(world)
+    add_near_family(world, family="Phantom Family", model_id=None, slug="synthetic-phantom", gap=0)
+    run_main(world)
+    out = outputs(world)
+    selection = out["ranking_summary.json"]["frontierSelection"]
+    before = base["ranking_summary.json"]["frontierSelection"]
+    assert selection["nearFrontierDeferredN"] == before["nearFrontierDeferredN"] + 1
+    assert selection["nearFrontierFamilyN"] == before["nearFrontierFamilyN"] + 1
+    assert selection["nearFrontierRequiredModelN"] == before["nearFrontierRequiredModelN"]
+    assert out["scores.json"]["cohort"]["n"] == base["scores.json"]["cohort"]["n"]
+    assert {"family": "Phantom Family", "modelId": None, "configuration": "Phantom Family (medium)",
+            "intelligenceGap": 0} in selection["nearFrontierFamilies"]
+
+
+def test_near_family_with_unknown_roster_model_is_rejected(world):
+    add_near_family(world, family="Ghost Family", model_id="ghost-model", slug="synthetic-ghost")
+    with pytest.raises(ValueError, match="near-frontier family model is absent from the selected AA metrics roster: ghost-model"):
+        run_main(world)
 
 
 # --------------------------------------------------------------------------

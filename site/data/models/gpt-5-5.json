@@ -31,7 +31,7 @@
     "exclusionReasons": [
       "No eligible exact-model Bug Hunt result in the selected source snapshot",
       "No exact-variant AA DeepSWE result in the selected source snapshot",
-      "Not a required selected AA frontier family model"
+      "Not a required AA frontier or near-frontier family model"
     ]
   },
   "dimensions": [
@@ -47,7 +47,7 @@
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured",
@@ -96,7 +96,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -120,14 +120,14 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1335.89,
+      "value": 1350.71,
       "unit": "Elo",
       "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -144,7 +144,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -161,7 +161,7 @@
         "name": "LiveBench release 2026_06_25",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "gpt-5.5-xhigh",
       "note": null,
       "grade": "measured"
@@ -178,7 +178,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -188,14 +188,14 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 96.1673942625436,
+      "value": 99.2617676420437,
       "unit": "tokens per second",
       "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -212,7 +212,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -229,7 +229,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -246,7 +246,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -263,7 +263,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -280,7 +280,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -297,7 +297,7 @@
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/gpt-5-5"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "xhigh",
       "note": null,
       "grade": "measured"
@@ -387,6 +387,10 @@
   ],
   "frontier": {
     "onAaFrontier": false,
-    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
   }
 }

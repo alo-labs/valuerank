@@ -4,7 +4,7 @@ ValueRank is a research workspace with a small, reproducible publication pipelin
 
 | Path | Kind | Notes |
 |---|---|---|
-| `valuerank/` | Pipeline code | One module per stage, run as `python3 -m valuerank.<stage>`. The Markdown stages use the standard library only. |
+| `valuerank/` | Pipeline code | One module per stage, run as `python3 -m valuerank.<stage>` (including `fetch_deepswe`, the DeepSWE chart capture, and `frontier`, the frontier and near-frontier classifier). The Markdown stages use the standard library only. |
 | `valuerank/site/` | Site generator | `build.py` (orchestrator), `viewmodel.py`, `evidence.py`, `picks.py`, `changelog.py` and `export.py` (view models and public JSON), `templates/` (Jinja2 pages and partials), `assets/` (stylesheet, ES modules, charts, favicon; copied to `site/assets/`) and `legacy/` (the archived coding-agents v0.3 page). Needs Jinja2. |
 | `scripts/` | Browser helpers | Playwright capture and Open Graph rendering (`scripts/README.md`). |
 | `data/` | Canonical inputs and generated outputs | Committed JSON snapshots (`aa_mapping.json`, `bug_hunt.json`, …) and generated files (`scores.json`, `coverage_matrix.json`, `ranking_summary.json`, `run_manifest.json`, …). Browser HTML/text captures under `data/aa/` and `data/snapshots/` are local-only and ignored. |

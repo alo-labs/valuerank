@@ -28,7 +28,7 @@
           <td>{{ r.agent }}</td>
           <td class="cell-num">{{ num(r.resolutionRatePct) }}%</td>
           <td class="cell-num">{{ num(r.uncertaintyPct) }}</td>
-          <td class="cell-num">{{ usd(r.costUsd, 0) }}</td>
+          <td class="cell-num">{% if r.costUsd is none %}Not published{% else %}{{ usd(r.costUsd, 0) }}{% endif %}</td>
           <td>{{ badge("measured") }}</td>
         </tr>
         {%- endfor %}

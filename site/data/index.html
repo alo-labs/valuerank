@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Data downloads · ValueRank v1.9.6</title>
+  <title>Data downloads · ValueRank v1.9.7</title>
   <meta name="description" content="Machine-readable JSON for every table on the site, with its schema and provenance.">
   <link rel="canonical" href="https://valuerank.alolabs.dev/data/">
   <meta name="theme-color" content="#4f46e5">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ValueRank">
-  <meta property="og:title" content="Data downloads · ValueRank v1.9.6">
+  <meta property="og:title" content="Data downloads · ValueRank v1.9.7">
   <meta property="og:description" content="Machine-readable JSON for every table on the site, with its schema and provenance.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/data/">
   <meta property="og:image" content="https://valuerank.alolabs.dev/og/data.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Data downloads · ValueRank v1.9.6">
+  <meta name="twitter:title" content="Data downloads · ValueRank v1.9.7">
   <meta name="twitter:description" content="Machine-readable JSON for every table on the site, with its schema and provenance.">
   <meta name="twitter:image" content="https://valuerank.alolabs.dev/og/data.png">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -59,7 +59,7 @@
   <ul class="file-list">    <li class="file">
       <a class="file-path mono" href="/data/rankings.json" download>/data/rankings.json</a>
       <p>Every roster model with scores, ranks, cost and evidence on both bases.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{version, publishDate, observedAt, bases, defaultBasis, costWeightPct, dimensions, categories, models, picks, planMeta}</p></details>
+      <details class="evidence"><summary>Schema</summary><p class="small">{version, publishDate, observedAt, bases, defaultBasis, costWeightPct, modelInclusion, dimensions, categories, models, picks, planMeta}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/models/&lt;slug&gt;.json">/data/models/&lt;slug&gt;.json</a>
       <p>One document per roster model with every dimension, source, plan route and history.</p>
@@ -75,7 +75,7 @@
     </li>    <li class="file">
       <a class="file-path mono" href="/data/benchmarks/terminal-bench-4.json" download>/data/benchmarks/terminal-bench-4.json</a>
       <p>Terminal-Bench 4.0 official rows, provider claims and cohort mapping.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{schemaVersion, version, observedAt, source, rowN, cohortN, matchedN, missingModels, rankingAvailableN, rankingMissingModels, providerClaimN, providerClaims, providerClaimPolicy, rows, cohortRows, frontierCount, cohortMapping}</p></details>
+      <details class="evidence"><summary>Schema</summary><p class="small">{schemaVersion, version, observedAt, source, rowN, rowsWithoutCostN, cohortN, matchedN, missingModels, rankingAvailableN, rankingMissingModels, providerClaimN, providerClaims, providerClaimPolicy, rows, cohortRows, frontierCount, cohortMapping}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/changelog.json" download>/data/changelog.json</a>
       <p>Versions, newest first, with recorded ranks and rank changes between consecutive releases.</p>
@@ -94,8 +94,8 @@
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
-      <p class="footer-brand">ValueRank <span class="mono">v1.9.6</span></p>
-      <p class="muted">Published October 8, 2026. Data observed 2026-10-07. Every score is traceable to a source, a date and an evidence grade.</p>
+      <p class="footer-brand">ValueRank <span class="mono">v1.9.7</span></p>
+      <p class="muted">Published October 18, 2026. Data observed 2026-10-17. Every score is traceable to a source, a date and an evidence grade.</p>
     </div>
     <nav aria-label="Footer">
       <ul class="footer-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>

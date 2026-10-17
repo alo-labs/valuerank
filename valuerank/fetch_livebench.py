@@ -80,6 +80,10 @@ COHORT_MAP = {
     # No verified exact identity in the pinned release; keep missing rows.
     "mimo-v2-6-pro": None,
     "mimo-v2-6-flash": None,
+    # Added to the roster 2026-10-18; released after the pinned June 25 release.
+    "claude-haiku-5-5": None,
+    "claude-sonnet-5-5": None,
+    "gemini-4-argon": None,
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in

@@ -7,12 +7,14 @@ import json
 import runpy
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 import pytest
 
 from valuerank import capture_aa as ca
 
-NOW = "2026-10-07T17:23:20Z"  # pinned_clock instant
+NOW = "2026-10-17T19:28:57Z"  # pinned_clock instant
+PAGE_FIXTURES = Path(__file__).parent / "fixtures" / "aa_pages"
 
 
 def page_html(model: dict) -> str:
@@ -75,7 +77,7 @@ def entry(model_id="m", **extra):
 
 def preserved(model_id="m", capture=None, **overrides):
     page = {"id": model_id, "url": f"https://artificialanalysis.ai/models/{model_id}", "model": {"slug": model_id},
-            "capture": {"observedAt": "2026-10-05T00:00:00Z", "precision": "rounded", "method": "browser"}}
+            "capture": {"observedAt": "2026-10-15T00:00:00Z", "precision": "rounded", "method": "browser"}}
     if capture is not None:
         page["capture"] = capture
     page.update(overrides)
@@ -91,16 +93,16 @@ def test_fresh_preserved_capture_is_reused_unchanged(pinned_clock):
 
 
 def test_preserved_capture_accepts_captured_at_when_no_observed_at(pinned_clock):
-    existing = preserved(capture={"capturedAt": "2026-10-06T12:00:00+00:00", "precision": "p", "method": "m"})
+    existing = preserved(capture={"capturedAt": "2026-10-16T12:00:00+00:00", "precision": "p", "method": "m"})
     assert ca.preserved_public_capture(entry(), {"m": existing}) is existing
 
 
 def test_preserved_capture_at_exact_age_limit_is_still_fresh(pinned_clock):
-    existing = preserved(capture={"observedAt": "2026-09-30T17:23:20Z", "precision": "p", "method": "m"})
+    existing = preserved(capture={"observedAt": "2026-10-10T19:28:57Z", "precision": "p", "method": "m"})
     assert ca.preserved_public_capture(entry(), {"m": existing}) is existing  # exactly 7 days
 
 
-@pytest.mark.parametrize("observed", ["2026-09-30T17:23:19Z", "2026-10-07T17:23:21Z"])
+@pytest.mark.parametrize("observed", ["2026-10-10T19:28:56Z", "2026-10-17T19:28:58Z"])
 def test_preserved_capture_outside_window_demands_recapture(pinned_clock, observed):
     existing = preserved(capture={"observedAt": observed, "precision": "p", "method": "m"})
     with pytest.raises(ValueError, match=r"older than 7 days or future-dated.*requires a public rendered capture"):
@@ -115,8 +117,8 @@ def test_preserved_capture_outside_window_demands_recapture(pinned_clock, observ
         preserved(url="https://artificialanalysis.ai/models/other"),
         preserved(capture="not a dict"),
         preserved(capture={"precision": "p", "method": "m"}),
-        preserved(capture={"observedAt": "2026-10-05T00:00:00Z", "method": "m"}),
-        preserved(capture={"observedAt": "2026-10-05T00:00:00Z", "precision": "p"}),
+        preserved(capture={"observedAt": "2026-10-15T00:00:00Z", "method": "m"}),
+        preserved(capture={"observedAt": "2026-10-15T00:00:00Z", "precision": "p"}),
         preserved(model="nope"),
         preserved(model={"name": "no slug"}),
         preserved(capture={"observedAt": "garbage", "precision": "p", "method": "m"}),
@@ -136,7 +138,7 @@ def test_missing_capture_block_demands_recapture(pinned_clock):
 
 
 def test_timezone_naive_capture_date_is_rejected_with_cause(pinned_clock):
-    existing = preserved(capture={"observedAt": "2026-10-05T00:00:00", "precision": "p", "method": "m"})
+    existing = preserved(capture={"observedAt": "2026-10-15T00:00:00", "precision": "p", "method": "m"})
     with pytest.raises(ValueError, match="requires a public rendered capture") as info:
         ca.preserved_public_capture(entry(), {"m": existing})
     assert str(info.value.__cause__) == "capture date requires a timezone"
@@ -191,10 +193,48 @@ def test_capture_surfaces_http_failures(net):
         ca.capture(entry(), {})
 
 
-def test_capture_rejects_page_without_current_model(net):
+def test_capture_rejects_page_without_a_model_object(net):
     net.pages["https://artificialanalysis.ai/models/m"] = FakeResponse(b"<html>blocked</html>")
-    with pytest.raises(ValueError, match="marker not found"):
+    with pytest.raises(ValueError, match="no full model object for slug 'm'"):
         ca.capture(entry(), {})
+
+
+def fixture_page(*names: str) -> bytes:
+    return "".join((PAGE_FIXTURES / name).read_text() for name in names).encode()
+
+
+@pytest.mark.parametrize("suffix", ["", "/"])
+def test_capture_decodes_current_pages_that_lack_the_legacy_marker(net, suffix):
+    slug = "claude-haiku-5-5-xhigh"
+    url = f"https://artificialanalysis.ai/models/{slug}{suffix}"
+    body = fixture_page("haiku-xhigh-full.txt", "haiku-xhigh-decoy.txt")
+    net.pages[url] = FakeResponse(body)
+    result = ca.capture({"id": "claude-haiku-5-5", "displayName": "Claude Haiku 5.5", "url": url}, {})
+    assert result["id"] == "claude-haiku-5-5" and result["requestedName"] == "Claude Haiku 5.5"
+    assert result["url"] == url  # recorded exactly as requested
+    assert set(result) == {"id", "requestedName", "url", "model", "capture"}
+    model = result["model"]
+    assert model["slug"] == slug and model["effort"]["slug"] == "xhigh"
+    assert model["intelligenceIndexCost"]["total"] == pytest.approx(157.5758646895501)
+    assert result["capture"]["responseBytes"] == len(body)
+
+
+def test_capture_uses_the_url_slug_to_pick_the_page_model(net):
+    url = "https://artificialanalysis.ai/models/gpt-6-luna"
+    net.pages[url] = FakeResponse(fixture_page("gpt-6-luna-decoy.txt", "gpt-6-luna-full.txt"))
+    model = ca.capture({"id": "gpt-6-luna", "url": url}, {})["model"]
+    assert model["name"] == "GPT-6 Luna (Max)"
+    other = "https://artificialanalysis.ai/models/gpt-6-sol"
+    net.pages[other] = FakeResponse(fixture_page("gpt-6-luna-decoy.txt", "gpt-6-luna-full.txt"))
+    with pytest.raises(ValueError, match="no full model object for slug 'gpt-6-sol'"):
+        ca.capture({"id": "gpt-6-sol", "url": other}, {})
+
+
+def test_capture_still_reads_pages_that_keep_the_legacy_marker(net):
+    url = "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+    net.pages[url] = FakeResponse(fixture_page("mimo-v2-6-pro-full.txt"))
+    model = ca.capture({"id": "mimo-v2-6-pro", "url": url}, {})["model"]
+    assert model["name"] == "MiMo-V2.6-Pro" and "effort" not in model
 
 
 # --------------------------------------------------------------------------- main

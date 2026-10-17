@@ -4,6 +4,14 @@
 The inventory may capture the complete displayed AA frontier directly, with
 catalog/plotted-point counts, or the full numeric chart universe. Neither mode
 uses the selected ValueRank roster as evidence of AA-wide completeness.
+
+An observed-frontier inventory also carries the near-frontier policy: a plotted
+configuration is near the rendered frontier when its public Intelligence Index
+is within ``nearFrontierPolicy.maxIntelligenceGap`` points of the frontier's
+intelligence at its cost (the highest intelligence among frontier points costing
+no more).  Cost ratio is informational only.  Each near-frontier family must be
+in the primary ranking (its selected configuration may differ from the near
+one) or be explicitly deferred by a dated roster decision, like frontier families.
 """
 from __future__ import annotations
 
@@ -70,6 +78,44 @@ def combined_variant(declared, label, reasoning=None):
             "fallback": explicit["fallback"] or displayed["fallback"]}
 
 
+def check_row_identity(row, index, near, seen, issues):
+    """Shared exact-identity checks for frontier and near-frontier rows.
+
+    Returns the exact evaluated-variant key, or None when the row is rejected
+    (the reason is appended to ``issues``).  Accepted keys join ``seen``.
+    """
+    kind, prefix = ("Near-frontier", "Near-frontier ") if near else ("Inventory", "")
+    if not isinstance(row, dict):
+        issues.append(f"{kind} row {index} is not an object.")
+        return None
+    identity = row.get("aaId")
+    if not isinstance(identity, str) or not re.fullmatch(r"[a-z0-9][a-z0-9.-]*", identity):
+        issues.append(f"{kind} row {index} lacks an exact AA model URL slug.")
+        return None
+    if not isinstance(row.get("name"), str) or not row["name"] or row.get("sourceUrl") != f"https://artificialanalysis.ai/models/{identity}":
+        issues.append(f"{prefix}{identity}: name and matching exact model source URL required.")
+        return None
+    if row.get("evaluatedVariant") is not None and (not isinstance(row["evaluatedVariant"], str) or not row["evaluatedVariant"]):
+        issues.append(f"{prefix}{identity}: evaluatedVariant must be a nonempty string when supplied.")
+        return None
+    if row.get("isReasoning") is not None and not isinstance(row["isReasoning"], bool):
+        issues.append(f"{prefix}{identity}: isReasoning must be boolean when supplied.")
+        return None
+    if combined_variant(row.get("evaluatedVariant"), row["name"], row.get("isReasoning")) is None:
+        issues.append(f"{prefix}{identity}: declared variant contradicts its displayed label or has unsupported/ambiguous metadata.")
+        return None
+    identity_variant = variant_key(row)
+    if identity_variant in seen:
+        issues.append(f"Duplicate exact AA evaluated variant: {identity_variant}.")
+        return None
+    seen.add(identity_variant)
+    footnote = row.get("sourceFootnote")
+    if footnote is not None and (not isinstance(footnote, str) or not footnote.strip()):
+        issues.append(f"{row['name']}: sourceFootnote must be a nonempty string or null.")
+        return None
+    return identity_variant
+
+
 def exact_roster_match(row, roster):
     captured = combined_variant(row.get("evaluatedVariant"), row["name"], row.get("isReasoning"))
     if captured is None:
@@ -98,7 +144,9 @@ def reconcile(now=None, data=None):
     report = {"schemaVersion": 1, "checkedAt": now.isoformat(), "inventoryPath": str(inventory.relative_to(data.parent)),
               "maxAgeDays": MAX_AGE_DAYS, "issues": [], "frontier": [], "comparisonCandidates": [],
               "frontierDefinition": "Higher AA intelligence index and lower AA total evaluation cost; at least one strict improvement dominates.",
-              "scope": "unknown", "completeness": {"status": "missing"}}
+              "scope": "unknown", "completeness": {"status": "missing"},
+              "nearFrontierPolicy": None, "nearFrontier": [], "nearFrontierFamilies": [],
+              "missingNearFrontierIds": [], "unresolvedNearFrontierIds": [], "deferredNearFrontierIds": []}
     issues = report["issues"]
     try:
         doc = read_json(inventory)
@@ -135,6 +183,7 @@ def reconcile(now=None, data=None):
     if not isinstance(rows, list) or not rows:
         issues.append("Inventory rows must be a nonempty array.")
         rows = []
+    max_gap, near_rows = None, []
     if observed_frontier:
         universe = doc.get("sourceUniverse") or {}
         if not isinstance(universe, dict) or any(not isinstance(universe.get(key), int) or isinstance(universe.get(key), bool) or universe[key] <= 0
@@ -142,6 +191,23 @@ def reconcile(now=None, data=None):
             issues.append("Observed frontier requires positive selectedModelN, plottedPointN, and observedFrontierPointN source counts.")
         elif not (len(rows) == universe["observedFrontierPointN"] <= universe["plottedPointN"] <= universe["selectedModelN"]):
             issues.append("Frontier capture row count does not reconcile with displayed frontier/plotted/catalog counts.")
+        policy = doc.get("nearFrontierPolicy")
+        if (isinstance(policy, dict) and number(policy.get("maxIntelligenceGap")) and policy["maxIntelligenceGap"] > 0
+                and all(isinstance(policy.get(key), str) and policy[key].strip() for key in ("basis", "text"))):
+            max_gap = policy["maxIntelligenceGap"]
+            report["nearFrontierPolicy"] = policy
+        else:
+            issues.append("Observed frontier requires nearFrontierPolicy with a positive maxIntelligenceGap and nonempty basis and text.")
+        near_rows_ok = isinstance(doc.get("nearFrontierRows"), list)
+        if near_rows_ok:
+            near_rows = doc["nearFrontierRows"]
+        else:
+            issues.append("Observed frontier requires a nearFrontierRows array.")
+        near_n = universe.get("nearFrontierPointN") if isinstance(universe, dict) else None
+        if not isinstance(near_n, int) or isinstance(near_n, bool) or near_n < 0:
+            issues.append("Observed frontier requires a non-negative integer sourceUniverse.nearFrontierPointN.")
+        elif near_rows_ok and near_n != len(near_rows):
+            issues.append(f"Near-frontier row count {len(near_rows)} does not match sourceUniverse.nearFrontierPointN {near_n}.")
     try:
         metrics = read_json(data / "aa_metrics.json")
         roster = list(metrics["models"].items())
@@ -172,32 +238,26 @@ def reconcile(now=None, data=None):
             decisions[key] = decision
         except (KeyError, TypeError, AttributeError, ValueError) as exc:
             issues.append(f"Invalid exact-variant roster decision: {exc}")
-    valid, seen = [], set()
+    seen = set()
+    roster_ids = {model_id for model_id, _ in roster}
+
+    def resolved(row, identity_variant):
+        model_id = exact_roster_match(row, roster)
+        deferred = decisions.get(identity_variant) if model_id is None else None
+        return {**row, "valueRankModelId": model_id,
+                "intelligenceIndexPrecision": row.get("intelligenceIndexPrecision") or doc.get("intelligenceIndexPrecision"),
+                "rosterDecision": deferred,
+                "primaryRankingGaps": primary_gaps.get(model_id, ["Exact evaluated variant absent from source roster"]),
+                "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture"
+                if not number(row.get("intelligenceIndex")) or not number(row.get("totalCostUsd")) else None,
+                "rankStatus": "Primary ranked" if model_id in ranked else "Unranked source candidate" if model_id else "Deferred comparison candidate" if deferred else "Missing from source roster"}
+
+    valid = []
     for index, row in enumerate(rows):
-        if not isinstance(row, dict):
-            issues.append(f"Inventory row {index} is not an object.")
+        identity_variant = check_row_identity(row, index, False, seen, issues)
+        if identity_variant is None:
             continue
-        identity = row.get("aaId")
-        if not isinstance(identity, str) or not re.fullmatch(r"[a-z0-9][a-z0-9.-]*", identity):
-            issues.append(f"Inventory row {index} lacks an exact AA model URL slug.")
-            continue
-        if not isinstance(row.get("name"), str) or not row["name"] or row.get("sourceUrl") != f"https://artificialanalysis.ai/models/{identity}":
-            issues.append(f"{identity}: name and matching exact model source URL required.")
-            continue
-        if row.get("evaluatedVariant") is not None and (not isinstance(row["evaluatedVariant"], str) or not row["evaluatedVariant"]):
-            issues.append(f"{identity}: evaluatedVariant must be a nonempty string when supplied.")
-            continue
-        if row.get("isReasoning") is not None and not isinstance(row["isReasoning"], bool):
-            issues.append(f"{identity}: isReasoning must be boolean when supplied.")
-            continue
-        if combined_variant(row.get("evaluatedVariant"), row["name"], row.get("isReasoning")) is None:
-            issues.append(f"{identity}: declared variant contradicts its displayed label or has unsupported/ambiguous metadata.")
-            continue
-        identity_variant = variant_key(row)
-        if identity_variant in seen:
-            issues.append(f"Duplicate exact AA evaluated variant: {identity_variant}.")
-            continue
-        seen.add(identity_variant)
+        identity = row["aaId"]
         intelligence, cost = row.get("intelligenceIndex"), row.get("totalCostUsd")
         if observed_frontier and row.get("directlyObservedFrontier") is not True:
             issues.append(f"{row['name']}: direct observation of displayed AA frontier membership required.")
@@ -208,19 +268,69 @@ def reconcile(now=None, data=None):
         if not observed_frontier and (not number(intelligence) or not number(cost) or cost < 0):
             issues.append(f"{identity}: intelligence index or total evaluation cost missing/invalid; dominance cannot be established.")
             continue
-        model_id = exact_roster_match(row, roster)
-        deferred = decisions.get(identity_variant) if model_id is None else None
-        valid.append({**row, "valueRankModelId": model_id,
-                      "intelligenceIndexPrecision": row.get("intelligenceIndexPrecision") or doc.get("intelligenceIndexPrecision"),
-                      "rosterDecision": deferred,
-                      "primaryRankingGaps": primary_gaps.get(model_id, ["Exact evaluated variant absent from source roster"]),
-                      "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture" if not number(intelligence) or not number(cost) else None,
-                      "rankStatus": "Primary ranked" if model_id in ranked else "Unranked source candidate" if model_id else "Deferred comparison candidate" if deferred else "Missing from source roster"})
+        valid.append(resolved(row, identity_variant))
     frontier = valid if observed_frontier else [row for row in valid if not any(
         other["intelligenceIndex"] >= row["intelligenceIndex"] and other["totalCostUsd"] <= row["totalCostUsd"]
         and (other["intelligenceIndex"] > row["intelligenceIndex"] or other["totalCostUsd"] < row["totalCostUsd"])
         for other in valid)]
     report["frontier"] = sorted(frontier, key=lambda row: (row.get("totalCostUsd") if number(row.get("totalCostUsd")) else math.inf, row["aaId"], row["name"]))
+    # Near-frontier rows are plotted configurations within the policy gap of the rendered frontier.
+    frontier_aa_ids = {row["aaId"] for row in report["frontier"]}
+    gap_limit = math.inf if max_gap is None else max_gap
+    gap_text = "the policy maximum" if max_gap is None else f"{max_gap:g}"
+    near_valid = []
+    for index, row in enumerate(near_rows):
+        identity_variant = check_row_identity(row, index, True, seen, issues)
+        if identity_variant is None:
+            continue
+        name = row["name"]
+        if row.get("directlyObservedFrontier") is not False:
+            issues.append(f"{name}: near-frontier rows must not claim direct frontier observation.")
+            continue
+        intelligence, cost, gap, ratio = (row.get(key) for key in ("intelligenceIndex", "totalCostUsd", "intelligenceGap", "costRatio"))
+        if not number(intelligence) or not number(cost) or cost < 0:
+            issues.append(f"{name}: near-frontier intelligenceIndex and totalCostUsd must be numeric.")
+            continue
+        if not number(gap) or not 0 <= gap <= gap_limit:
+            issues.append(f"{name}: intelligenceGap must be a number between 0 and {gap_text}.")
+            continue
+        if ratio is not None and (not number(ratio) or ratio < 0):
+            issues.append(f"{name}: costRatio must be null or a nonnegative number.")
+            continue
+        if not isinstance(row.get("nearestFrontierAaId"), str) or row["nearestFrontierAaId"] not in frontier_aa_ids:
+            issues.append(f"{name}: nearestFrontierAaId must name a frontier row.")
+            continue
+        near_valid.append(resolved(row, identity_variant))
+    report["nearFrontier"] = sorted(near_valid, key=lambda row: (row["totalCostUsd"], row["aaId"], row["name"]))
+    near_groups = {}
+    for row in report["nearFrontier"]:
+        family, required_id = row.get("family"), row.get("requiredFamilyModelId")
+        if not isinstance(family, str) or not family:
+            issues.append(f"{row['name']}: near-frontier family is required.")
+            continue
+        if "requiredFamilyModelId" not in row or (required_id is not None and (not isinstance(required_id, str) or not required_id)):
+            issues.append(f"{row['name']}: near-frontier requiredFamilyModelId must be a model ID string or null.")
+            continue
+        group = near_groups.setdefault(family, {"modelIds": set(), "rows": []})
+        group["modelIds"].add(required_id)
+        group["rows"].append(row)
+    for family, group in near_groups.items():
+        if len(group["modelIds"]) != 1:
+            issues.append(f"Near-frontier AA family {family}: conflicting requiredFamilyModelId values.")
+            continue
+        required_id = next(iter(group["modelIds"]))
+        in_roster, primary_ranked = required_id in roster_ids, required_id in ranked
+        report["nearFrontierFamilies"].append({"family": family, "modelId": required_id, "configurationN": len(group["rows"]),
+                                               "inRoster": in_roster, "primaryRanked": primary_ranked, "deferred": required_id is None})
+        if required_id is not None and not (in_roster and primary_ranked):
+            issues.append(f"Near-frontier AA family {family} ({required_id}) must appear in the primary ranking using its selected roster configuration; the near configuration itself need not be selected.")
+        undecided = [row["name"] for row in group["rows"] if required_id is None and not row["rosterDecision"]]
+        if undecided:
+            issues.append(f"Near-frontier AA family {family} is deferred without a dated roster decision for: " + ", ".join(undecided) + ".")
+    near_label = lambda row: row["aaId"] + " :: " + row["name"]
+    report["missingNearFrontierIds"] = [near_label(row) for row in report["nearFrontier"] if not row["valueRankModelId"]]
+    report["unresolvedNearFrontierIds"] = [near_label(row) for row in report["nearFrontier"] if not row["valueRankModelId"] and not row["rosterDecision"]]
+    report["deferredNearFrontierIds"] = [near_label(row) for row in report["nearFrontier"] if row["rosterDecision"]]
     # Alternate effort decisions cannot waive a model family's required inclusion.
     families = {}
     for row in report["frontier"]:
@@ -260,6 +370,12 @@ def reconcile(now=None, data=None):
     return report
 
 
+def near_gap_label(policy):
+    """Render the policy's maximum Index-point gap, e.g. ``3`` or ``2.5``."""
+    gap = policy.get("maxIntelligenceGap") if isinstance(policy, dict) else None
+    return f"{gap:g}" if number(gap) else "unknown"
+
+
 def publication(report):
     """Return escaped Markdown and HTML comparison views, including blocked scope."""
     summary = (f"Observed {report.get('observedAt') or 'unknown date'}; {report.get('benchmarkVersion') or 'unknown version'}. "
@@ -273,11 +389,21 @@ def publication(report):
         summary += f"Source selected {universe.get('selectedModelN', 'unknown')} models, plotted {universe.get('plottedPointN', 'unknown')} eligible points, and displayed {universe.get('observedFrontierPointN', 'unknown')} frontier points. Public metric/export gaps are shown explicitly."
         required = report.get("requiredFamilies", [])
         summary += f" All {len(required)} distinct frontier model families are required in the main ranking using exact selected configurations; {sum(item.get('primaryRanked') is True for item in required)} are included. Other effort configurations remain separate comparison entries."
-    selected = {variant_key(row): row for row in report["frontier"] + report["comparisonCandidates"]}
+        policy = report.get("nearFrontierPolicy") if isinstance(report.get("nearFrontierPolicy"), dict) else {}
+        near_families = report.get("nearFrontierFamilies", [])
+        summary += (f" {len(report.get('nearFrontier', []))} plotted configurations from {len(near_families)} families lie within "
+                    f"{near_gap_label(policy)} Index points of the rendered frontier; "
+                    f"{sum(item.get('primaryRanked') is True for item in near_families)} of those families are in the main ranking, "
+                    f"{sum(item.get('deferred') is True for item in near_families)} are deferred.")
+    near = report.get("nearFrontier", [])
+    selected = {variant_key(row): row for row in report["frontier"] + near + report["comparisonCandidates"]}
     frontier_ids = {variant_key(row) for row in report["frontier"]}
+    near_ids = {variant_key(row) for row in near}
+    near_flag = f"Near AA frontier (within {near_gap_label(report.get('nearFrontierPolicy'))} Index points)"
     md_rows, html_rows = [], []
     for row in selected.values():
-        flag = "Observed AA frontier" if variant_key(row) in frontier_ids else "Comparison candidate"
+        flag = ("Observed AA frontier" if variant_key(row) in frontier_ids
+                else near_flag if variant_key(row) in near_ids else "Comparison candidate")
         intelligence = "Not publicly captured"
         if number(row.get("intelligenceIndex")):
             precision = row.get("intelligenceIndexPrecision")

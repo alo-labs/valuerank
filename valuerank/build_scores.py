@@ -5,6 +5,17 @@ The comparison roster comes from the mapped AA model data, not the retired
 DeepSWE Best leaderboard. Exact DeepSWE and Bug Hunt overlaps remain eligible;
 the selected AA Intelligence Index versus total-cost frontier models are also
 included with per-row coverage when benchmark results are missing.
+
+Near-frontier policy: a plotted configuration within the policy's Index-point
+gap of the rendered frontier (``nearFrontierRows`` in the reconciliation
+inventory, mirrored by the capture's ``near_frontier``) makes its model family
+a required primary-ranking family too, unless the family is explicitly deferred
+(``requiredFamilyModelId`` null).  Near rows are validated against the capture
+like frontier rows.  Every model row reports ``aaFrontierTier`` ("frontier",
+"near" or null), ``aaFrontierConfiguration`` (the family's best frontier
+configuration, or its smallest-gap near configuration), ``aaFrontierIntelligenceGap``
+and ``aaFrontierFootnote``; ``frontierSelection`` summarises frontier and near
+families.  Near families that are also frontier families keep the frontier tier.
 """
 
 from __future__ import annotations
@@ -27,6 +38,9 @@ DEVELOPER = {
     "Gemini 3.8 Flash": "Google DeepMind",
     "Claude Opus 5": "Anthropic",
     "Claude Opus 5.5": "Anthropic",
+    "Claude Haiku 5.5": "Anthropic",
+    "Claude Sonnet 5.5": "Anthropic",
+    "Gemini 4 Argon": "Google DeepMind",
     "GPT-5.6 Sol": "OpenAI",
     "Claude Fable 5": "Anthropic",
     "GLM-5.3": "Z AI",
@@ -58,6 +72,9 @@ SHORT = {
     "Gemini 3.8 Flash": "Gem 3.8 Flash",
     "Claude Opus 5": "Opus 5",
     "Claude Opus 5.5": "Opus 5.5",
+    "Claude Haiku 5.5": "Haiku 5.5",
+    "Claude Sonnet 5.5": "Sonnet 5.5",
+    "Gemini 4 Argon": "Gem 4 Argon",
     "GPT-5.6 Sol": "GPT-5.6 Sol",
     "Claude Fable 5": "Fable 5",
     "GLM-5.3": "GLM-5.3",
@@ -132,6 +149,109 @@ def frontier_effort(variant):
     if "fallback" in effort:
         effort = effort.split(" with ", 1)[0].split(" (", 1)[0].strip()
     return effort
+
+
+NO_FRONTIER_TIER = {"tier": None, "configuration": None, "intelligenceGap": None, "footnote": None}
+
+
+def capture_row_matches(item, capture_item):
+    """True when an inventory row agrees with its capture row on identity, display index and cost."""
+
+    if capture_item is None:
+        return False
+    inventory_effort = str(item.get("evaluatedVariant") or "").casefold()
+    expected_capture_effort = None if inventory_effort == "reasoning" else frontier_effort(inventory_effort)
+    capture_fallback = capture_item.get("fallback")
+    captured_has_fallback = capture_fallback is True or "fallback" in str(capture_fallback or "").casefold()
+    url = item.get("sourceUrl")
+    return not (
+        capture_item.get("model_name") != item.get("name")
+        or capture_item.get("family") != item.get("family")
+        or capture_item.get("effort") != expected_capture_effort
+        or captured_has_fallback != ("fallback" in inventory_effort)
+        or capture_item.get("intelligence_index_display") != item.get("intelligenceIndex")
+        or round(require_number(capture_item.get("total_cost_usd"), f"{url}.total_cost_usd"), 2)
+        != round(require_number(item.get("totalCostUsd"), f"{url}.totalCostUsd"), 2)
+    )
+
+
+def near_frontier_selection(inventory, capture, frontier_urls, frontier_family_ids, aa_models):
+    """Validate the near-frontier rows against the capture; return ``{family: {"modelId", "rows"}}``.
+
+    ``frontier_family_ids`` maps each frontier family to its set of required model IDs.
+    A null ``modelId`` marks a family deferred by a dated roster decision.
+    """
+
+    rows, capture_rows = inventory.get("nearFrontierRows"), capture.get("near_frontier")
+    policy, capture_policy = inventory.get("nearFrontierPolicy"), capture.get("near_frontier_policy")
+    if not (isinstance(rows, list) and isinstance(capture_rows, list)
+            and isinstance(policy, dict) and isinstance(capture_policy, dict)):
+        raise ValueError("AA reconciliation inventory and frontier capture must carry the near-frontier policy and rows")
+    point_counts = (
+        capture.get("universe", {}).get("near_frontier_points"),
+        inventory.get("sourceUniverse", {}).get("nearFrontierPointN"),
+        len(rows),
+        len(capture_rows),
+    )
+    if len(set(point_counts)) != 1:
+        raise ValueError("AA near-frontier point counts do not reconcile across the inventory, its universe, and the capture")
+    if policy.get("maxIntelligenceGap") is None or capture_policy.get("max_intelligence_gap") != policy["maxIntelligenceGap"]:
+        raise ValueError("AA near-frontier policy differs between the inventory and its capture")
+    capture_by_url = {item.get("url"): item for item in capture_rows}
+    families, urls = {}, set()
+    for item in rows:
+        family, required_id, url = item.get("family"), item.get("requiredFamilyModelId"), item.get("sourceUrl")
+        if (
+            not family or not url or item.get("directlyObservedFrontier") is not False
+            or "requiredFamilyModelId" not in item
+            or (required_id is not None and (not isinstance(required_id, str) or not required_id))
+        ):
+            raise ValueError(
+                "Every AA near-frontier inventory row must carry its family, owner URL, a false direct-observation flag, "
+                "and a required model ID string or null"
+            )
+        if url in urls or url in frontier_urls:
+            raise ValueError(f"AA near-frontier inventory has a duplicate owner URL: {url}")
+        urls.add(url)
+        capture_item = capture_by_url.get(url)
+        if not capture_row_matches(item, capture_item) or capture_item.get("intelligence_gap") != item.get("intelligenceGap"):
+            raise ValueError(f"AA near-frontier row is inconsistent with its current frontier capture: {url}")
+        families.setdefault(family, []).append(item)
+    selection = {}
+    for family, family_rows in families.items():
+        required_ids = {item["requiredFamilyModelId"] for item in family_rows}
+        if len(required_ids) != 1:
+            raise ValueError(f"AA near-frontier family has inconsistent required model IDs: {family}")
+        model_id = next(iter(required_ids))
+        if family in frontier_family_ids and frontier_family_ids[family] != required_ids:
+            raise ValueError(f"AA near-frontier family disagrees with its frontier model ID: {family}")
+        if model_id is not None:
+            aa_model = aa_models.get(model_id)
+            if aa_model is None:
+                raise ValueError(f"AA near-frontier family model is absent from the selected AA metrics roster: {model_id}")
+            if aa_model.get("displayName") != family:
+                raise ValueError(f"AA near-frontier family does not match selected catalog identity for {model_id}")
+        selection[family] = {"modelId": model_id, "rows": family_rows}
+    return selection
+
+
+def frontier_tiers(frontier_families, near_families):
+    """Per-family AA tier annotations plus the sorted frontier and near family summaries."""
+
+    annotations, frontier_list, near_list = {}, [], []
+    for family, group in near_families.items():
+        best = min(group["rows"], key=lambda row: (row["intelligenceGap"], row["totalCostUsd"], row["name"]))
+        annotations[family] = {"tier": "near", "configuration": best["name"],
+                               "intelligenceGap": best["intelligenceGap"], "footnote": best.get("sourceFootnote")}
+        near_list.append({"family": family, "modelId": group["modelId"], "configuration": best["name"],
+                          "intelligenceGap": best["intelligenceGap"]})
+    for family, family_rows in frontier_families.items():
+        best = min(family_rows, key=lambda row: (-row["intelligenceIndex"], row["totalCostUsd"], row["name"]))
+        annotations[family] = {"tier": "frontier", "configuration": best["name"],
+                               "intelligenceGap": 0, "footnote": best.get("sourceFootnote")}
+        frontier_list.append({"family": family, "modelId": best["requiredFamilyModelId"], "configuration": best["name"]})
+    return (annotations, sorted(frontier_list, key=lambda item: item["family"]),
+            sorted(near_list, key=lambda item: item["family"]))
 
 
 def require_number(value, label):
@@ -363,29 +483,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         if url in frontier_urls:
             raise ValueError(f"AA frontier inventory has a duplicate owner URL: {url}")
         frontier_urls.add(url)
-        capture_item = capture_by_url.get(url)
-        inventory_effort = str(item.get("evaluatedVariant") or "").casefold()
-        captured_effort = capture_item.get("effort") if capture_item else None
-        expected_capture_effort = (
-            None if inventory_effort == "reasoning"
-            else frontier_effort(inventory_effort)
-        )
-        expected_fallback = "fallback" in inventory_effort
-        capture_fallback = capture_item.get("fallback") if capture_item else None
-        captured_has_fallback = (
-            capture_fallback is True
-            or "fallback" in str(capture_fallback or "").casefold()
-        )
-        if (
-            capture_item is None
-            or capture_item.get("model_name") != item.get("name")
-            or capture_item.get("family") != family
-            or captured_effort != expected_capture_effort
-            or captured_has_fallback != expected_fallback
-            or capture_item.get("intelligence_index_display") != item.get("intelligenceIndex")
-            or round(require_number(capture_item.get("total_cost_usd"), f"{url}.total_cost_usd"), 2)
-            != round(require_number(item.get("totalCostUsd"), f"{url}.totalCostUsd"), 2)
-        ):
+        if not capture_row_matches(item, capture_by_url.get(url)):
             raise ValueError(f"AA reconciliation row is inconsistent with its current frontier capture: {url}")
         frontier_families.setdefault(family, []).append(item)
 
@@ -434,6 +532,16 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "totalCostUsd": frontier_item["totalCostUsd"],
         }
 
+    near_families = near_frontier_selection(
+        frontier_inventory,
+        frontier_capture,
+        frontier_urls,
+        {family: {item["requiredFamilyModelId"] for item in family_rows} for family, family_rows in frontier_families.items()},
+        aa_models,
+    )
+    near_policy = frontier_inventory["nearFrontierPolicy"]
+    aa_tiers, frontier_family_list, near_family_list = frontier_tiers(frontier_families, near_families)
+    near_frontier_primary_ids = {group["modelId"] for group in near_families.values() if group["modelId"]}
     frontier_selection = {
         "sourceUrl": frontier_inventory["sourceUrl"],
         "captureArtifact": frontier_inventory["captureArtifact"],
@@ -445,6 +553,13 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         "sourceUniverse": frontier_universe,
         "configurationN": len(frontier_rows),
         "familyN": len(frontier_families),
+        "frontierFamilies": frontier_family_list,
+        "nearFrontierPolicy": near_policy,
+        "nearFrontierPointN": len(frontier_inventory["nearFrontierRows"]),
+        "nearFrontierFamilyN": len(near_families),
+        "nearFrontierRequiredModelN": len(near_frontier_primary_ids),
+        "nearFrontierDeferredN": sum(group["modelId"] is None for group in near_families.values()),
+        "nearFrontierFamilies": near_family_list,
         "selectedFamilyModelIds": [
             {
                 "modelId": model_id,
@@ -486,12 +601,17 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         display_name = aa_model["displayName"]
         if display_name not in DEVELOPER or display_name not in SHORT:
             raise ValueError(f"identity mapping missing: {display_name}")
+        tier = aa_tiers.get(display_name, NO_FRONTIER_TIER)
         row = {
             "id": model_id,
             "name": display_name,
             "shortName": SHORT[display_name],
             "developer": DEVELOPER[display_name],
             "frontierSelection": frontier_selection_by_id.get(model_id),
+            "aaFrontierTier": tier["tier"],
+            "aaFrontierConfiguration": tier["configuration"],
+            "aaFrontierIntelligenceGap": tier["intelligenceGap"],
+            "aaFrontierFootnote": tier["footnote"],
             "bugHunt": bug_hunt_by_id[model_id],
             "rankDeepSWE": deepswe_model.get("sourceOrder") if deepswe_model else None,
             "deepsweEffort": deepswe_model.get("effort") if deepswe_model else None,
@@ -554,7 +674,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         and row.get("deepswePassAt1Pct") is not None
     }
     frontier_primary_ids = set(frontier_selection_by_id)
-    primary_ids = overlap_primary_ids | frontier_primary_ids
+    near_only_primary_ids = near_frontier_primary_ids - frontier_primary_ids
+    primary_ids = overlap_primary_ids | frontier_primary_ids | near_frontier_primary_ids
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
 
@@ -661,6 +782,11 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             row["rankingInclusionReasons"].append(
                 "Required AA Intelligence Index versus total-evaluation-cost frontier family"
             )
+        if row["id"] in near_only_primary_ids:
+            row["rankingInclusionReasons"].append(
+                "Near-frontier AA family (within "
+                f"{near_policy['maxIntelligenceGap']:g} Index points of the rendered frontier)"
+            )
         row["missingFields"] = [key for key, _label, _higher, _priority in CANDIDATES if row.get(key) is None]
         row["rankingExclusionReasons"] = []
         if row["bugHunt"].get("matched") is not True and row["rankingEligible"]:
@@ -688,7 +814,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         if not row["rankingEligible"] and row.get("deepswePassAt1Pct") is None:
             row["rankingExclusionReasons"].append("No exact-variant AA DeepSWE result in the selected source snapshot")
         if not row["rankingEligible"]:
-            row["rankingExclusionReasons"].append("Not a required selected AA frontier family model")
+            row["rankingExclusionReasons"].append("Not a required AA frontier or near-frontier family model")
             row["rank"] = None
             row["qualityRank"] = None
             row["overallScore"] = None
@@ -820,7 +946,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     frontier_rows_without_quality = [
         row["id"]
         for row in primary_rows
-        if row["id"] in frontier_primary_ids
+        if row["id"] in frontier_primary_ids | near_frontier_primary_ids
         and (
             row["qualityScore"] is None
             or not math.isfinite(row["qualityScore"])
@@ -828,7 +954,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     ]
     if frontier_rows_without_quality:
         raise ValueError(
-            "Every required AA frontier model must have a finite non-cost quality score: "
+            "Every required AA frontier or near-frontier model must have a finite non-cost quality score: "
             f"{frontier_rows_without_quality}"
         )
 

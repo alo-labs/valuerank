@@ -33,7 +33,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from valuerank.emit_docs import AA_METHODOLOGY_URL, BENCHMARK_URLS, plan_evidence_label
+from valuerank.emit_docs import AA_METHODOLOGY_URL, BENCHMARK_URLS, model_inclusion, plan_evidence_label
 from valuerank.paths import DATA
 from valuerank.plan_costs import (
     build_cost_fields,
@@ -230,6 +230,9 @@ def _dimension_docs(source: dict, slug: str, weights: list[dict], normalized: di
 # --- bundle ----------------------------------------------------------------------------------
 
 
+FRONTIER_TIER_KEYS = ("aaFrontierTier", "aaFrontierConfiguration", "aaFrontierIntelligenceGap", "aaFrontierFootnote")
+
+
 def build_bundle(data: Path = DATA) -> Bundle:
     inputs = _load(data)
     scores = inputs["scores"]
@@ -303,6 +306,7 @@ def build_bundle(data: Path = DATA) -> Bundle:
             "grade": evidence.worst_grade(doc["grade"] for doc in dimension_docs),
             "pareto": {basis: pareto[basis].get(model_id, False) for basis in BASES},
             "tier": _tier(cost_dims["plan"]),
+            **{key: source.get(key) for key in FRONTIER_TIER_KEYS},
         }
         docs[slug] = dimension_docs
 
@@ -318,6 +322,7 @@ def build_bundle(data: Path = DATA) -> Bundle:
         "bases": BASES,
         "defaultBasis": "plan",
         "costWeightPct": cost_weight,
+        "modelInclusion": model_inclusion(scores.get("frontierSelection"), roster),
         "dimensions": [
             {
                 "key": w["key"],
@@ -418,6 +423,10 @@ def _model_doc(source: dict, entry: dict, dimension_docs: list[dict], inputs: di
                 if on_frontier
                 else "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
             ),
+            "tier": entry["aaFrontierTier"],
+            "configuration": entry["aaFrontierConfiguration"],
+            "intelligenceGap": entry["aaFrontierIntelligenceGap"],
+            "footnote": entry["aaFrontierFootnote"],
         },
     }
 
@@ -622,8 +631,8 @@ def _tb4(inputs: dict, roster: list[dict]) -> dict:
     document = inputs["tb4"]
     claims = {claim["cohortModelId"]: claim for claim in document["providerClaims"]}
     best, frontier = -float("inf"), 0
-    for row in sorted(document["rows"], key=lambda item: (item["costUsd"], -item["resolutionRate"])):
-        if row["resolutionRate"] > best:
+    for row in sorted(document["rows"], key=lambda item: (item["costUsd"] is None, item["costUsd"] or 0, -item["resolutionRate"])):
+        if row["costUsd"] is not None and row["resolutionRate"] > best:
             best, frontier = row["resolutionRate"], frontier + 1
     mapping = {}
     for source in roster:
@@ -719,6 +728,7 @@ def rankings_page(bundle: Bundle) -> dict:
     columns += [{"key": d["key"], "label": d["label"]} for d in rankings["dimensions"] if d["key"] != COST_KEY]
     return {
         "rankingsJson": rankings,
+        "nearFrontierGap": rankings["modelInclusion"]["nearFrontierGap"],
         "providers": sorted({m["developer"] for m in rankings["models"]}),
         "grades": list(evidence.GRADES),
         "columns": [{**column, "sortable": True, "default": column["key"] in DEFAULT_COLUMNS} for column in columns],
@@ -833,6 +843,7 @@ def methodology_page(bundle: Bundle) -> dict:
         )
     return {
         "dimensions": dimensions,
+        "modelInclusion": rankings["modelInclusion"],
         "weights": {d["key"]: d["weightPct"] for d in dimensions},
         "workedExample": {
             "slug": chosen["slug"],

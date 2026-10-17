@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{%- from "partials/badge.html" import badge -%}
+{%- from "partials/badge.html" import badge, tier_badge -%}
 {%- from "partials/fmt.html" import num, usd, rank -%}
 {%- from "partials/coverage_bar.html" import coverage_bar -%}
 {%- from "partials/evidence_drawer.html" import evidence -%}
@@ -26,6 +26,7 @@
     <a href="{{ page.selectedPage }}" rel="noopener">Artificial Analysis page</a>
     {%- if page.aaVariant %} &middot; evaluated variant <span class="mono">{{ page.aaVariant }}</span>{% endif %}
     {%- if page.frontier and page.frontier.onAaFrontier %} &middot; {{ page.frontier.aaFrontierNote }}{% endif %}
+    {%- if page.frontier and page.frontier.tier %} &middot; {{ tier_badge(page.frontier.tier, page.frontier.configuration, page.frontier.intelligenceGap) }}{% endif %}
   </p>
 </header>
 
@@ -59,6 +60,9 @@
   <h2 id="routes-title" class="section-title">Plan routes and cost</h2>
   <p class="muted">API cost to run the Intelligence Index: <strong>{{ usd(page.cost.apiUsd, 0) }}</strong>.
     {% if page.cost.fallback %}No subscription route is measured for this model, so the plan ranking falls back to API cost ({{ page.cost.fallback }}).{% endif %}</p>
+  {%- if page.frontier and page.frontier.footnote %}
+  <p class="note" id="aa-footnote"><strong>Artificial Analysis note:</strong> {{ page.frontier.footnote }}</p>
+  {%- endif %}
   {%- if page.plans %}
   <div class="table-wrap" tabindex="0" role="region" aria-label="Plan routes and cost table">
     <table class="data-table">

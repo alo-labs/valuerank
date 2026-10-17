@@ -5,6 +5,6 @@ pyproject.toml, the ranking history) that must be bumped together; the test
 suite checks that they agree with these constants.
 """
 
-VERSION = "v1.9.6"
-DATE = "October 8, 2026"
-SHORT_DATE = "Oct 8"
+VERSION = "v1.9.7"
+DATE = "October 18, 2026"
+SHORT_DATE = "Oct 18"

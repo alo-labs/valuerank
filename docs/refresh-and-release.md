@@ -4,22 +4,33 @@ A refresh captures new source data, recomputes the ranking and regenerates the p
 
 ## Before you start
 
-- Read `AGENTS.md`: the model-inclusion policy (every model on the AA Intelligence Index versus total-cost Pareto frontier), the exact-variant evidence rules and the subscription-allowance evidence rules are binding on every refresh.
+- Read `AGENTS.md`: the model-inclusion policy (every model family on the AA Intelligence Index versus total-cost Pareto frontier, plus every near-frontier family within 3 Index points of it at its cost), the exact-variant evidence rules and the subscription-allowance evidence rules are binding on every refresh.
 - Work on a clean `main` with `npm run verify` passing.
 - Install the Python dependencies in the virtual environment (`.venv/bin/python -m pip install -r requirements.txt -r requirements-dev.txt`) and Playwright Chromium (`npx playwright install chromium`).
 
 ## 1. Capture and curate sources
 
+Capture the AA chart first. In the built-in browser open AA's "Intelligence Index vs. Cost to Run" chart, select the complete catalog and capture every plotted point (not only the vertices of the Pareto line) together with the rendered line and any footnote shown on the chart. Then list the frontier and near-frontier families against the roster:
+
+```bash
+python3 -m valuerank.frontier <capture> --roster data/aa_mapping.json
+```
+
+The command prints each family on the rendered frontier and each near-frontier family (public Index within 3 points of the frontier at its cost), and whether the roster already has it. Add every missing family to `data/aa_mapping.json` (or record a dated, reasoned deferral) before running `npm run build:aa`. Frontier membership is the line AA renders as observed, never recomputed from rounded values.
+
 Automated captures:
 
 ```bash
 npm run refresh:external   # LiveBench (HTTPS) and Terminal-Bench 4.0 (Playwright) -> data/livebench.json, data/tb4.json
+npm run capture:deepswe    # AA DeepSWE v1.1 coding-agent chart (HTTPS, page payload) -> data/aa_deepswe.json
 npm run build:aa           # AA model pages (HTTPS) -> data/aa/aa_v432_snapshot.json -> data/aa_metrics.json
 ```
 
+The AA page capture decodes each model page's payload object keyed by the page slug. `capture:deepswe` records every configuration that has a DeepSWE evaluation at the owner's full precision.
+
 Hand-curated snapshots (record the observation date and source inside each file):
 
-- `data/aa_deepswe.json`: every configuration on AA's DeepSWE v1.1 chart with exact-variant mapping decisions.
+- `data/aa_deepswe.json`: exact-variant mapping decisions for the captured DeepSWE v1.1 configurations (the configurations themselves come from `npm run capture:deepswe`).
 - `data/bug_hunt.json`: the Bug Hunt Bench scoreboard pinned to a commit.
 - `data/aa_reconciliation_inventory.json`: the observed AA frontier (the reconciliation gate rejects inventories older than 7 days).
 - `data/aa_mapping.json`: add or retire roster entries when the frontier changes.
@@ -36,6 +47,7 @@ Update every version site together. `tests/test_release_metadata.py` fails when 
 | `valuerank/release.py` | `VERSION`, `DATE`, `SHORT_DATE`. This is the only file that names the version. The emitter, the site build and the score builder import it. |
 | `package.json`, `pyproject.toml` | `version` (without the leading `v`) |
 | `data/ranking_history_v1.5.json` | Earlier releases' API-basis ranks, one key per release: `v` followed by three digits (`v150` for 1.5.0, `v196` for 1.9.6). Before the bump, add the outgoing release's API-basis ranks under its key so that the changelog keeps them. The current release is computed at build time and is not stored in this file. |
+| `tests/conftest.py` and the test literals | After `npm run build:scores` has stamped the new instant into `data/ranking_summary.json`, replace the previous instant in `tests/conftest.py` (`pinned_clock`) and in every test that asserts it, so the golden tests regenerate the committed publication from the same clock that produced it. |
 
 `data/ranking_summary.json` also carries the version and date. `npm run build:scores` regenerates it, and the release test checks it.
 

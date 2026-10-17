@@ -7,24 +7,29 @@
   "selectedPage": "https://artificialanalysis.ai/models/grok-4-6-medium",
   "summary": {
     "rank": {
-      "api": 10,
-      "plan": 11
+      "api": null,
+      "plan": null
     },
     "overall": {
-      "api": 45.6,
-      "plan": 40.6
+      "api": null,
+      "plan": null
     },
-    "quality": 43.8,
-    "qualityRank": 8,
+    "quality": null,
+    "qualityRank": null,
     "coverage": {
-      "pct": 100.0,
-      "availablePriority": 132,
+      "pct": 81.06,
+      "availablePriority": 107,
       "totalPriority": 132,
-      "missing": []
+      "missing": [
+        "DeepSWE v1.1"
+      ]
     },
     "grade": "measured",
-    "rankingEligible": true,
-    "exclusionReasons": []
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "No exact-variant AA DeepSWE result in the selected source snapshot",
+      "Not a required AA frontier or near-frontier family model"
+    ]
   },
   "dimensions": [
     {
@@ -32,20 +37,20 @@
       "label": "Cost",
       "category": "cost",
       "weightPct": 18.9394,
-      "value": 1936.747257680374,
+      "value": 1557.039406856376,
       "unit": "USD per Index run",
-      "normalized": 53.333333,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis total cost to run the Intelligence Index",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": 53.333333,
-        "plan": 26.666667
+        "api": null,
+        "plan": null
       }
     },
     {
@@ -53,17 +58,14 @@
       "label": "DeepSWE v1.1",
       "category": "code",
       "weightPct": 18.9394,
-      "value": 65.0,
+      "value": null,
       "unit": "% pass@1",
-      "normalized": 30.8,
-      "source": {
-        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-      },
-      "observedAt": "2026-10-08",
-      "evaluatedVariant": "Grok Build / Grok 4.6 / xhigh",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "bugHuntFixedOf105",
@@ -72,12 +74,12 @@
       "weightPct": 15.1515,
       "value": 28.7,
       "unit": "bugs fixed of 105",
-      "normalized": 50.0,
+      "normalized": null,
       "source": {
         "name": "Bug Hunt Bench",
-        "url": null
+        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-grok-46-xhigh-seq---mean-of-3"
       },
-      "observedAt": null,
+      "observedAt": "2026-10-18",
       "evaluatedVariant": "Grok 4.6 (xhigh) seq - mean of 3",
       "note": "Sequential repo runs; owner-published mean of three runs.",
       "grade": "measured"
@@ -89,12 +91,12 @@
       "weightPct": 4.5455,
       "value": 76.0,
       "unit": "% non-hallucination",
-      "normalized": 100.0,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -106,12 +108,12 @@
       "weightPct": 4.5455,
       "value": 20.3,
       "unit": "% resolved",
-      "normalized": 33.3,
+      "normalized": null,
       "source": {
         "name": "Terminal-Bench 4.0 leaderboard",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "Grok Build / Grok 4.6",
       "note": null,
       "grade": "measured"
@@ -121,14 +123,14 @@
       "label": "GDPval-AA v2.1",
       "category": "prod",
       "weightPct": 4.5455,
-      "value": 1604.84,
+      "value": 1612.18,
       "unit": "Elo",
-      "normalized": 53.3,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -140,12 +142,12 @@
       "weightPct": 4.5455,
       "value": 42.836322654063,
       "unit": "Index points",
-      "normalized": 26.7,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -157,12 +159,12 @@
       "weightPct": 3.7879,
       "value": 71.8665,
       "unit": "score",
-      "normalized": 63.6,
+      "normalized": null,
       "source": {
         "name": "LiveBench release 2026_06_25",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-07",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "grok-4.6",
       "note": null,
       "grade": "measured"
@@ -174,12 +176,12 @@
       "weightPct": 3.7879,
       "value": 63.15,
       "unit": "% score",
-      "normalized": 66.7,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -189,14 +191,14 @@
       "label": "Speed",
       "category": "prod",
       "weightPct": 3.7879,
-      "value": 63.7335477757439,
+      "value": 61.6186946436783,
       "unit": "tokens per second",
-      "normalized": 42.9,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -208,12 +210,12 @@
       "weightPct": 3.0303,
       "value": 81.0,
       "unit": "% accuracy",
-      "normalized": 40.0,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -225,12 +227,12 @@
       "weightPct": 3.0303,
       "value": 41.93,
       "unit": "% accuracy",
-      "normalized": 26.7,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -242,12 +244,12 @@
       "weightPct": 3.0303,
       "value": 42.12,
       "unit": "% accuracy",
-      "normalized": 20.0,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -259,12 +261,12 @@
       "weightPct": 3.0303,
       "value": 93.54,
       "unit": "% accuracy",
-      "normalized": 56.2,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -276,12 +278,12 @@
       "weightPct": 3.0303,
       "value": 55.9,
       "unit": "% score",
-      "normalized": 40.0,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
@@ -293,22 +295,22 @@
       "weightPct": 2.2727,
       "value": 17.71,
       "unit": "% score",
-      "normalized": 13.3,
+      "normalized": null,
       "source": {
         "name": "Artificial Analysis Intelligence Index v4.3.2",
         "url": "https://artificialanalysis.ai/models/grok-4-6-medium"
       },
-      "observedAt": "2026-09-29",
+      "observedAt": "2026-10-17",
       "evaluatedVariant": "medium",
       "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 1936.747257680374,
+    "apiUsd": 1557.039406856376,
     "planUsdPerRun": null,
     "planUsdPerPoint": null,
-    "planComparableUsdPerPoint": 45.21273390624895,
+    "planComparableUsdPerPoint": 36.34857780465177,
     "fallback": "api",
     "route": null
   },
@@ -347,16 +349,44 @@
       }
     },
     {
+      "version": "v1.9.3",
+      "date": null,
+      "rank": {
+        "api": 8,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.4",
+      "date": null,
+      "rank": {
+        "api": 8,
+        "plan": null
+      }
+    },
+    {
+      "version": "v1.9.5",
+      "date": null,
+      "rank": {
+        "api": 8,
+        "plan": null
+      }
+    },
+    {
       "version": "v1.9.6",
-      "date": "2026-10-08",
+      "date": null,
       "rank": {
         "api": 10,
-        "plan": 11
+        "plan": null
       }
     }
   ],
   "frontier": {
     "onAaFrontier": false,
-    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
   }
 }

@@ -274,14 +274,14 @@ def test_integer_and_float_costs_with_equal_value_are_tied():
     assert plan_costs.rank_cost_scores([2, 2.0, 1]) == [25.0, 25.0, 100.0]
 
 
-def test_scores_are_rounded_to_six_decimal_places():
+def test_scores_are_rounded_to_one_decimal_place():
     assert plan_costs.rank_cost_scores([1, 2, 3, 4, 5, 6, 7]) == [
         100.0,
-        83.333333,
-        66.666667,
+        83.3,
+        66.7,
         50.0,
-        33.333333,
-        16.666667,
+        33.3,
+        16.7,
         0.0,
     ]
 
@@ -458,3 +458,10 @@ def test_summary_of_the_committed_routes_accounts_for_every_model(repo_copy):
             assert field["planRoute"] is not None, model["id"]
         if field["planRoute"] is None:
             assert field["planCostFallback"] == "api", model["id"]
+
+
+def test_rank_cost_scores_round_to_one_decimal_like_the_score_dimensions():
+    # scores.json stores every dimension at one decimal; the cost score must match it exactly
+    # so that recomputing the composite from the public data reproduces the committed score.
+    assert plan_costs.rank_cost_scores(list(range(1, 11)))[1] == 88.9
+    assert plan_costs.rank_cost_scores([3, 1, 2]) == [0.0, 100.0, 50.0]

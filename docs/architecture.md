@@ -16,6 +16,8 @@ ValueRank turns pinned benchmark and pricing snapshots into a ranked publication
 | 1 | `valuerank.fetch_livebench` | LiveBench release data over HTTPS (pinned commit), `data/aa_metrics.json` | `data/livebench.json` | Network |
 | 2 | `scripts/scrape-tb4.js` | tbench.ai Terminal-Bench 4.0 page | `data/tb4-scrape.json` (local-only) | Network, Playwright |
 | 3 | `valuerank.build_tb4` | `data/tb4-scrape.json`, `data/aa_metrics.json`, `data/provider_claims.json` | `data/tb4.json` | Local capture |
+| 3a | `valuerank.fetch_deepswe` | AA coding-agents page payload over HTTPS (DeepSWE v1.1 chart) | `data/aa_deepswe.json` | Network |
+| 3b | `valuerank.frontier` | A captured AA chart (every plotted point and the rendered line), `data/aa_mapping.json` | Console report of frontier and near-frontier families against the roster | Offline |
 | 4 | `valuerank.capture_aa` | AA model pages over HTTPS (roster from `data/aa_mapping.json`), preserved captures | `data/aa/aa_v432_snapshot.json`, `data/aa/*.html`, `data/aa/*.txt` (HTML/text local-only) | Network |
 | 5 | `valuerank.build_aa_metrics` | `data/aa_mapping.json`, `data/aa/*` captures, `data/provider_claims.json` | `data/aa_metrics.json`, `data/coverage_matrix.json` | Local captures |
 | 6 | `valuerank.build_scores` | `data/aa_deepswe.json`, `data/aa_metrics.json`, `data/livebench.json`, `data/tb4.json`, `data/bug_hunt.json`, `data/coverage_matrix.json`, `data/aa_reconciliation_inventory.json`, `data/run_manifest.json` | `data/scores.json`, `data/coverage_matrix.json`, `data/ranking_summary.json`, `data/run_manifest.json` | Offline |
