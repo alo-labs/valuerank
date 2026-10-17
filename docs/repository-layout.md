@@ -28,6 +28,7 @@ The layout changed on 2026-10-17. Older research ledgers and commit messages use
 | `scripts/plan_costs.py`, `scripts/site_header.py`, `scripts/generate_tb4_page.py` | `valuerank/plan_costs.py`, `valuerank/site_header.py`, `valuerank/tb4_page.py` |
 | `scripts/site-generate-og-cards.mjs` | `scripts/generate-og-cards.mjs` |
 | `research/2026-09-29-valuerank-refresh-v4-3-2/run_manifest.json` (generated copy) | `data/run_manifest.json`; the research copy is now a frozen snapshot |
+| `research/2026-10-08-frontier-inclusion/current-frontier.json` (pipeline input) | `data/aa_frontier_capture.json`; the research copy is a frozen snapshot |
 | `.refresh/v1.3/` | `archive/refresh-v1.3/` |
 | `scripts/charts/`, `.refresh/parse_deepswe.py` | Removed (unreferenced legacy generators; available in git history) |
 
