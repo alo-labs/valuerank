@@ -354,9 +354,9 @@ def main(*, root=ROOT, data=DATA) -> int:
         )
     cost_weight = next((weight for weight in weights if weight["key"] == "costComposite"), None)
     cost_weight_text = f"{cost_weight['weightPct']:.2f}%" if cost_weight else "not included"
-    site_cost_summary = "The default API Costs basis uses AA total evaluation cost for its fixed benchmark suite, rank-normalized with lower cost better. Plan Costs divides the same AA cost by the highest eligible subscription Value Multiple."
-    site_cost_raw_input = "For the main-rank Cost dimension, the raw input is AA total evaluation cost in USD. Plan Costs applies the selected model route's Value Multiple to that same amount."
-    site_cost_weight = f"Cost contributes {cost_weight_text} to the main rank using AA total evaluation cost under API Costs; the Plan Costs basis applies the selected eligible Value Multiple."
+    site_cost_summary = "The default API Costs basis uses AA total evaluation cost for its fixed benchmark suite, rank-normalized with lower cost better. Plan Costs divides the same AA cost by the highest eligible subscription Value Multiple and by the model's AA Intelligence Index (USD per Index point); the site opens on Plan Costs."
+    site_cost_raw_input = "For the main-rank Cost dimension, the raw input is AA total evaluation cost in USD. Plan Costs applies the selected model route's Value Multiple to that same amount and divides by the AA Intelligence Index (USD per Index point)."
+    site_cost_weight = f"Cost contributes {cost_weight_text} to the main rank using AA total evaluation cost under API Costs; the Plan Costs basis applies the selected eligible Value Multiple and divides by the AA Intelligence Index."
 
 
 
@@ -415,7 +415,7 @@ def main(*, root=ROOT, data=DATA) -> int:
 
 
 
-    plan_candidate_headers = ["Model", "Primary rank", "AA Intelligence Index", "API evaluation cost", "Effective Plan evaluation cost", "Selected plan / multiple", "Evidence / source variant", "Source date", "Source"]
+    plan_candidate_headers = ["Model", "Primary rank", "AA Intelligence Index", "API evaluation cost", "Effective Plan evaluation cost", "Effective Plan cost per Index point", "Selected plan / multiple", "Evidence / source variant", "Source date", "Source"]
     plan_candidate_cells = []
     for model, field in zip(all_models, candidate_plan_cost_fields):
         route = field["planRoute"]
@@ -424,7 +424,8 @@ def main(*, root=ROOT, data=DATA) -> int:
             str(model["rank"]) if model.get("rank") is not None else "Unranked candidate",
             plan_intelligence_label(model, aa_document),
             plan_usd(field["apiCost"], "Not established"),
-            plan_usd(field["planCost"], "API fallback" if route is None else "Not established"),
+            plan_usd(field["planCostPerRun"], "API fallback" if route is None else "Not established"),
+            plan_usd(field["planComparableCost"], "Not established") + (" (API fallback)" if route is None and field["planComparableCost"] is not None else ""),
             f"{route['planLabel']} / {route['valueMultiple']:g}×" if route else "No eligible route",
             (plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else "")) if route else "API fallback",
             (route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded") if route else "—",
@@ -449,7 +450,7 @@ def main(*, root=ROOT, data=DATA) -> int:
 
 
     plan_policy_copy = (
-        f"Plan route evidence as of {plan_route_document.get('asOf', 'not recorded')}. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. "
+        f"Plan route evidence as of {plan_route_document.get('asOf', 'not recorded')}. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. Effective Plan cost per Index point is that amount divided by the model's AA Intelligence Index; the Plan-basis rank uses it so that a plan allowance is credited with the work it buys and token-efficient models are rewarded, while models without an eligible route are compared on API cost per Index point. "
         "The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. "
         "For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. "
         "The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. "
@@ -508,7 +509,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - The AA chart's full **{len(deepswe_configurations)}-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
 - The score retains **{d} primary dimensions**; **{names([item['label'] for item in dropped])}** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
 - AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
-- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** primary models. API Costs uses that amount where available; Plan Costs divides the same amount by each model's highest eligible subscription Value Multiple, and both views renormalize each row over its available dimensions.
+- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** primary models. API Costs uses that amount where available; Plan Costs divides the same amount by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point), and both views renormalize each row over its available dimensions.
 - Earlier ValueRank versions are not numerically comparable because this release changes benchmark weights and the ranked cohort.
 
 ## Sources and audit trail
@@ -581,7 +582,7 @@ These AA methodology weights describe the source index, not the combined ValueRa
 
 ## API Costs and Plan Costs
 
-The default API Costs basis uses each model's AA total evaluation cost in USD. Plan Costs divides that same value by the model's highest eligible subscription Value Multiple. Lower cost ranks better in both views; the site switcher recalculates the primary composite when the cost basis changes.
+The API Costs basis uses each model's AA total evaluation cost in USD. Plan Costs divides that same value by the model's highest eligible subscription Value Multiple and then by its AA Intelligence Index, so the Plan input is USD per Index point: a plan allowance is credited with the work it buys, which rewards token-efficient models. Models without an eligible route are compared on API cost per Index point. Lower cost ranks better in both views; the site opens on Plan Costs and the site switcher recalculates the primary composite when the cost basis changes.
 
 ## Missing-metric handling
 
@@ -611,7 +612,7 @@ Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive th
 
 ## Benchmark evaluation cost (score input)
 
-The Cost input uses **{cost_mode_label}** where an AA Intelligence Index total evaluation cost is available; lower evaluation cost is better. Plan Costs divides that same total benchmark cost by the model's highest eligible subscription Value Multiple. A missing cost remains null and the row's other available priorities are renormalized; no DeepSWE leaderboard cost or missing-value fill is used.
+The Cost input uses **{cost_mode_label}** where an AA Intelligence Index total evaluation cost is available; lower evaluation cost is better. Plan Costs divides that same total benchmark cost by the model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). A missing cost remains null and the row's other available priorities are renormalized; no DeepSWE leaderboard cost or missing-value fill is used.
 
 ## Quality score and interpretation
 
@@ -659,7 +660,7 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
 
 **Updated:** {DATE} · **Cohort:** {n} · **Retained dimensions:** {d} · **Default cost basis:** API Costs (AA total evaluation cost)
 
-API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple. The site switcher recalculates the main rank and cost-based charts using the selected basis.
+API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple and by the model's AA Intelligence Index (USD per Index point). The site switcher recalculates the main rank and cost-based charts using the selected basis.
 
 ## Final ranking
 
@@ -820,7 +821,7 @@ The ledger contains **{len(eligible_provider_claims)} ranking-eligible provider 
 
 ## Benchmark evaluation cost (score input)
 
-The API Costs baseline uses AA total evaluation cost in USD. AA cost is available for **{cost_coverage.get('availableN', '—')}/{cost_coverage.get('cohortN', n)}** ranked models; missing values are **{cost_missing_text}**. Plan Costs divides the same AA cost by each model's highest eligible subscription Value Multiple. No DeepSWE leaderboard cost is used.
+The API Costs baseline uses AA total evaluation cost in USD. AA cost is available for **{cost_coverage.get('availableN', '—')}/{cost_coverage.get('cohortN', n)}** ranked models; missing values are **{cost_missing_text}**. Plan Costs divides the same AA cost by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). No DeepSWE leaderboard cost is used.
 
 | Model | AA evaluation cost (USD) | AA cost penalty | Composite cost |
 |---|---:|---:|---:|
@@ -890,17 +891,35 @@ Missing values are intentionally represented as null; no old-version, model-fami
     cost_basis_markup = r"""    <div class="cost-basis-control" id="cost-basis-control" role="group" aria-labelledby="cost-basis-label">
       <span class="cost-basis-label" id="cost-basis-label">Cost basis</span>
       <div class="cost-basis-options">
-        <button type="button" class="cost-basis-btn active" data-cost-basis="api" aria-pressed="true">API Costs</button>
-        <button type="button" class="cost-basis-btn" data-cost-basis="plan" aria-pressed="false">Plan Costs</button>
+        <button type="button" class="cost-basis-btn active" data-cost-basis="plan" aria-pressed="true">Plan Costs</button>
+        <button type="button" class="cost-basis-btn" data-cost-basis="api" aria-pressed="false">API Costs</button>
       </div>
-      <span class="cost-basis-context" id="cost-basis-context">AA total evaluation cost at API rates; the default cost-weighted score uses the API-cost rank.</span>
+      <span class="cost-basis-context" id="cost-basis-context">AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index, in USD per Index point; the site opens on this basis.</span>
     </div>
 """
     if 'id="cost-basis-control"' not in html:
         html = html.replace('    <div class="table-controls">', cost_basis_markup + '    <div class="table-controls">', 1)
+    html = replace_current_copy(
+        html,
+        r'<div class="cost-basis-options">[\s\S]*?</div>',
+        lambda _match: '<div class="cost-basis-options">\n        <button type="button" class="cost-basis-btn active" data-cost-basis="plan" aria-pressed="true">Plan Costs</button>\n        <button type="button" class="cost-basis-btn" data-cost-basis="api" aria-pressed="false">API Costs</button>\n      </div>',
+        "cost basis button order",
+    )
+    html = replace_current_copy(
+        html,
+        r'<span class="cost-basis-context" id="cost-basis-context">[^<]*</span>',
+        lambda _match: '<span class="cost-basis-context" id="cost-basis-context">AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index, in USD per Index point; the site opens on this basis.</span>',
+        "cost basis context",
+    )
+    html = replace_current_copy(
+        html,
+        r'<span id="cost-basis-table-label">\([^)]*\)</span>',
+        lambda _match: '<span id="cost-basis-table-label">(Plan Costs)</span>',
+        "cost basis table label",
+    )
     html = html.replace(
         '<th data-col="evalCost">Composite Cost (0-100)</th>',
-        '<th data-col="evalCost">Cost <span id="cost-basis-table-label">(API Costs)</span></th>',
+        '<th data-col="evalCost">Cost <span id="cost-basis-table-label">(Plan Costs)</span></th>',
         1,
     )
 
@@ -961,6 +980,8 @@ Missing values are intentionally represented as null; no old-version, model-fami
             "deepSwePassAt1Pct": model.get("deepswePassAt1Pct"),
             "apiCost": cost_fields["apiCost"],
             "planCost": cost_fields["planCost"],
+            "planCostPerRun": cost_fields["planCostPerRun"],
+            "intelligenceIndex": cost_fields["intelligenceIndex"],
             "planComparableCost": cost_fields["planComparableCost"],
             "apiCostScore": cost_fields["apiCostScore"],
             "planCostScore": cost_fields["planCostScore"],
@@ -1071,7 +1092,7 @@ Missing values are intentionally represented as null; no old-version, model-fami
 
     cost_switcher_js = r"""// COST BASIS SWITCHER START
 const PLAN_COST_META = PLAN_META_JSON;
-let costBasis = 'api';
+let costBasis = 'plan';
 let costWeightPct = COST_WEIGHT_DEFAULT;
 
 function costBasisLabel() {
@@ -1082,12 +1103,8 @@ function planRouteFor(model) {
   return model.planRoute || null;
 }
 
-function hasPlanRoute(model) {
-  return planRouteFor(model) !== null && model.planCost !== null && model.planCost !== undefined && Number.isFinite(Number(model.planCost));
-}
-
 function activeCostUsd(model) {
-  const value = costBasis === 'plan' && hasPlanRoute(model) ? model.planCost : model.apiCost;
+  const value = costBasis === 'plan' ? model.planComparableCost : model.apiCost;
   return value === null || value === undefined ? null : Number(value);
 }
 
@@ -1155,8 +1172,8 @@ function activeCostRouteLabel(model) {
 function costBasisTooltip(model) {
   const api = model.apiCost == null ? 'unavailable' : fmtUsd(model.apiCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const plan = model.planCost == null
-    ? 'unavailable'
-    : fmtUsd(model.planCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    ? (model.planComparableCost == null ? 'unavailable' : `${fmtUsd(model.planComparableCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} per Index point (API fallback)`)
+    : `${fmtUsd(model.planCost, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} per Index point (${fmtUsd(model.planCostPerRun, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} per Index run)`;
   const route = planRouteFor(model);
   const routeText = route
     ? `${route.planLabel} (${formatValueMultiple(route)}; ${planEvidenceLabel(route)})`
@@ -1190,11 +1207,11 @@ function updateCostBasisUI() {
     button.setAttribute('aria-pressed', active ? 'true' : 'false');
   });
   const tableLabel = document.getElementById('cost-basis-table-label');
-  if (tableLabel) tableLabel.textContent = `(${label})`;
+  if (tableLabel) tableLabel.textContent = costBasis === 'plan' ? '(Plan Costs · $ per Index point)' : '(API Costs)';
   const context = document.getElementById('cost-basis-context');
   if (context) {
     context.textContent = costBasis === 'plan'
-      ? `AA total evaluation cost ÷ highest eligible Value Multiple. ${PLAN_COST_META.supportedModelCount}/${PLAN_COST_META.totalModelCount} ranked models have an eligible plan route, including explicitly labelled provisional assumptions. Evidence as of ${PLAN_COST_META.asOf}.`
+      ? `AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index, in USD per Index point. ${PLAN_COST_META.supportedModelCount}/${PLAN_COST_META.totalModelCount} ranked models have an eligible plan route, including explicitly labelled provisional assumptions. Evidence as of ${PLAN_COST_META.asOf}.`
       : 'AA total evaluation cost at API rates; cost-weighted scores use the API-cost rank.';
   }
   const note = document.getElementById('cost-note');
@@ -1236,8 +1253,8 @@ function initCostBasis() {
   document.querySelectorAll('[data-cost-basis]').forEach(button => {
     button.addEventListener('click', () => setCostBasis(button.dataset.costBasis));
   });
-  let saved = 'api';
-  try { saved = localStorage.getItem('vr-cost-basis') || 'api'; } catch (error) { /* storage is optional */ }
+  let saved = 'plan';
+  try { saved = localStorage.getItem('vr-cost-basis') || 'plan'; } catch (error) { /* storage is optional */ }
   applyCostBasis(saved);
 }
 // COST BASIS SWITCHER END""".replace("PLAN_META_JSON", json.dumps(plan_site_meta, ensure_ascii=False)).replace("COST_WEIGHT_DEFAULT", f"{cost_weight['weightPct']:.4f}")
@@ -1762,7 +1779,7 @@ function initCostBasis() {
         ),
         (
             "The composite cost term uses DeepSWE-only.",
-            "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple.",
+            "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple and by the AA Intelligence Index (USD per Index point).",
         ),
         (
             "and the DeepSWE-only cost composite.",
@@ -1929,7 +1946,7 @@ function initCostBasis() {
     )
     html = html.replace(
         "The final ValueRank score is a weighted sum across all 12 retained dimensions. <strong>Cost weight: 25%</strong> (slider-adjustable). Non-Hallucination Rate remains a primary reliability factor, and cost uses DeepSWE-only and is rank-normalized with lower cost better.",
-        f"The final ValueRank score is a weighted sum across {d} retained dimensions. <strong>Cost weight: {weight_by_key['costComposite']['weightPct']:.2f}%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>{weight_by_key['bugHuntFixedOf105']['weightPct']:.2f}%</strong> and DeepSWE v1.1 contributes <strong>{weight_by_key['deepswePassAt1']['weightPct']:.2f}%</strong>. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple.",
+        f"The final ValueRank score is a weighted sum across {d} retained dimensions. <strong>Cost weight: {weight_by_key['costComposite']['weightPct']:.2f}%</strong> (slider-adjustable). Bug Hunt Bench contributes <strong>{weight_by_key['bugHuntFixedOf105']['weightPct']:.2f}%</strong> and DeepSWE v1.1 contributes <strong>{weight_by_key['deepswePassAt1']['weightPct']:.2f}%</strong>. API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple and by the model's AA Intelligence Index (USD per Index point).",
     )
     html = html.replace(
         "If even one of the 21-model cohort is genuinely missing from a benchmark, that benchmark is excluded from the current primary score. The official-source owner is checked first, then current secondary implementations are checked before a benchmark is ruled out.",
@@ -1956,7 +1973,7 @@ function initCostBasis() {
         f"The <strong>overall Score</strong> uses each model’s available retained dimensions, including Bug Hunt and DeepSWE v1.1 where observed, with cost at {weight_by_key['costComposite']['weightPct']:.2f}% by default. The <strong>Quality Score</strong> renormalizes each model’s available non-cost dimensions to 100%. It answers: <em>\"which model ranks highest on the selected benchmarks?\"</em> independent of composite cost. The Rankings table shows both, and the Quality Rank column lets you sort by quality alone.",
     )
     html = html.replace(
-        "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple. That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.6.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#2</strong> after cost.",
+        "The composite cost term uses the selected cost basis; Plan Costs divide API task cost by the highest eligible Value Multiple and by the AA Intelligence Index (USD per Index point). That is why <strong>Gemini 3.8 Flash</strong> is overall <strong>#1</strong> in v1.6.0, while <strong>GPT-6 Astra</strong> is the current quality leader in the cohort (Quality <strong>#1</strong>) and ranks overall <strong>#2</strong> after cost.",
         f"ValueRank reflects the selected benchmarks and their weights, including DeepSWE v1.1 and Bug Hunt in the main rank; it is not a general model-capability verdict. The current overall leader is <strong>{models[0]['name']}</strong> (#{models[0]['rank']}); the quality leader is <strong>{quality_leader['name']}</strong> (#{quality_leader['qualityRank']}). API Costs and Plan Costs are presented as separate cost views.",
     )
 
@@ -1967,7 +1984,7 @@ function initCostBasis() {
     )
     html = html.replace(
         'Drag the cost weight slider to see how rankings shift. Cost is rank-normalized from the selected API-price or subscription-plan task-cost basis; captured AA total evaluation costs remain source-only because coverage is 20/21. Click any column header to sort.',
-        f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.',
+        f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple and by the model’s AA Intelligence Index (USD per Index point). The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.',
     )
     html = html.replace(
         '<input type="range" id="cost-slider" min="0" max="50" value="25" step="1">',
@@ -2056,7 +2073,7 @@ function initCostBasis() {
         ),
         (
             f'Why is cost weighted at {cost_weight["weightPct"]:.2f}% by default?',
-            f'Cost has a {cost_weight["weightPct"]:.2f}% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple. Both views use the same benchmark suite and lower cost ranks better.',
+            f'Cost has a {cost_weight["weightPct"]:.2f}% weight in the primary score. The API Costs basis uses AA total evaluation cost; Plan Costs divides that same cost by the highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). Both views use the same benchmark suite and lower cost ranks better.',
         ),
         (
             'What does ⊘ mean in ValueRank?',
@@ -2356,7 +2373,7 @@ function initCostBasis() {
         html,
         r'(<div class="section-sub">)Drag the cost weight slider[\s\S]*?(</div>)',
         lambda match: match.group(1)
-        + f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple. The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.'
+        + f'Drag the cost weight slider to see how rankings shift. API Costs uses AA total evaluation cost; Plan Costs divides the same cost by the highest eligible subscription Value Multiple and by the model’s AA Intelligence Index (USD per Index point). The default Cost weight is {cost_weight["weightPct"]:.2f}%. Click any column header to sort.'
         + match.group(2),
         "ranking cost explanation",
     )
@@ -2418,7 +2435,7 @@ function initCostBasis() {
         f"<strong>Cost weight: {cost_weight['weightPct']:.2f}%</strong> (slider-adjustable). "
         f"Bug Hunt Bench contributes <strong>{bug_hunt_weight['weightPct']:.2f}%</strong> and "
         f"DeepSWE v1.1 contributes <strong>{deepswe_weight['weightPct']:.2f}%</strong>. "
-        "API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple."
+        "API Costs uses AA total evaluation cost; Plan Costs divides the same value by the highest eligible subscription Value Multiple and by the model's AA Intelligence Index (USD per Index point)."
     )
     html = replace_current_copy(
         html,

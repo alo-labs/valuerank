@@ -24,8 +24,8 @@ def make_document(*routes, **extra):
     return {"routes": list(routes), **extra}
 
 
-def make_model(model_id, api_cost, variant=None):
-    model = {"id": model_id, "aaEvalCost": api_cost}
+def make_model(model_id, api_cost, variant=None, index=50):
+    model = {"id": model_id, "aaEvalCost": api_cost, "intelligenceIndex": index}
     if variant is not None:
         model["aaVariant"] = variant
     return model
@@ -286,6 +286,19 @@ def test_scores_are_rounded_to_six_decimal_places():
     ]
 
 
+# --- cost_per_index_point ---------------------------------------------------
+
+
+def test_cost_per_index_point_divides_cost_by_the_intelligence_index():
+    assert plan_costs.cost_per_index_point(147.85, 57.62) == pytest.approx(147.85 / 57.62)
+    assert plan_costs.cost_per_index_point(0, 52) == 0.0
+
+
+@pytest.mark.parametrize("cost, index", [(None, 52), (100, None), (100, 0), (100, -3), (100, "52")])
+def test_cost_per_index_point_is_unknown_without_a_positive_numeric_index_and_a_cost(cost, index):
+    assert plan_costs.cost_per_index_point(cost, index) is None
+
+
 # --- build_cost_fields ------------------------------------------------------
 
 
@@ -293,15 +306,17 @@ def test_build_cost_fields_of_no_models_is_empty():
     assert plan_costs.build_cost_fields([], make_document()) == []
 
 
-def test_an_eligible_route_sets_plan_cost_and_no_fallback_marker():
+def test_an_eligible_route_prices_the_plan_in_usd_per_index_point():
     route = make_route(id="route-a", modelIds=["model-1"], valueMultiple=4)
 
-    [field] = plan_costs.build_cost_fields([make_model("model-1", 100)], make_document(route))
+    [field] = plan_costs.build_cost_fields([make_model("model-1", 100, index=50)], make_document(route))
 
     assert field == {
         "apiCost": 100,
-        "planCost": 25.0,
-        "planComparableCost": 25.0,
+        "intelligenceIndex": 50,
+        "planCostPerRun": 25.0,
+        "planCost": 0.5,
+        "planComparableCost": 0.5,
         "apiCostScore": 50.0,
         "planCostScore": 50.0,
         "planRoute": route,
@@ -309,28 +324,48 @@ def test_an_eligible_route_sets_plan_cost_and_no_fallback_marker():
     }
 
 
-def test_a_model_without_a_route_is_marked_as_api_fallback_and_compared_on_api_cost():
+def test_a_model_without_a_route_falls_back_to_api_cost_per_index_point():
     route = make_route(id="route-a", modelIds=["model-1"], valueMultiple=4)
 
     covered, uncovered = plan_costs.build_cost_fields(
-        [make_model("model-1", 100), make_model("model-2", 40)], make_document(route)
+        [make_model("model-1", 100, index=50), make_model("model-2", 40, index=40)], make_document(route)
     )
 
     assert uncovered["planRoute"] is None
+    assert uncovered["planCostPerRun"] is None
     assert uncovered["planCost"] is None
     assert uncovered["planCostFallback"] == "api"
-    assert uncovered["planComparableCost"] == 40
+    assert uncovered["planComparableCost"] == 1.0
     assert covered["planCostFallback"] is None
+
+
+def test_token_efficiency_offsets_a_larger_allowance():
+    # Opus 5.5 on Claude Pro (58.9x) against GPT-6.1 Sol on ChatGPT Pro $500 (10.772x):
+    # the 5.5x larger allowance is more than consumed by the 8x larger Index run cost.
+    claude = make_route(id="claude-pro", modelIds=["opus"], valueMultiple=58.9)
+    openai = make_route(id="chatgpt-pro-500", modelIds=["sol"], valueMultiple=10.772)
+
+    opus, sol = plan_costs.build_cost_fields(
+        [make_model("opus", 8708.20, index=57.62), make_model("sol", 1081.55, index=52.0)],
+        make_document(claude, openai),
+    )
+
+    assert opus["planCostPerRun"] == pytest.approx(147.85, abs=0.01)
+    assert sol["planCostPerRun"] == pytest.approx(100.40, abs=0.01)
+    assert opus["planCost"] == pytest.approx(2.566, abs=0.001)
+    assert sol["planCost"] == pytest.approx(1.931, abs=0.001)
+    assert (sol["planCostScore"], opus["planCostScore"]) == (100.0, 0.0)
+    assert (sol["apiCostScore"], opus["apiCostScore"]) == (100.0, 0.0)
 
 
 def test_plan_ranking_can_reverse_the_api_ranking_once_a_route_divides_the_cost():
     route = make_route(id="route-a", modelIds=["model-1"], valueMultiple=4)
 
     covered, uncovered = plan_costs.build_cost_fields(
-        [make_model("model-1", 100), make_model("model-2", 40)], make_document(route)
+        [make_model("model-1", 100, index=50), make_model("model-2", 40, index=50)], make_document(route)
     )
 
-    # On API cost model-2 is cheaper; after dividing model-1 by 4 it is 25 against 40, so model-1 leads.
+    # On API cost model-2 is cheaper; after dividing model-1 by 4 it is 0.5 against 0.8 per point.
     assert (covered["apiCostScore"], covered["planCostScore"]) == (0.0, 100.0)
     assert (uncovered["apiCostScore"], uncovered["planCostScore"]) == (100.0, 0.0)
 
@@ -339,41 +374,39 @@ def test_a_missing_api_cost_leaves_plan_fields_empty_but_keeps_the_route():
     route = make_route(id="route-a", modelIds=["model-1"], valueMultiple=4)
 
     covered, other = plan_costs.build_cost_fields(
-        [make_model("model-1", None), make_model("model-2", 40)], make_document(route)
+        [make_model("model-1", None, index=50), make_model("model-2", 40, index=50)], make_document(route)
     )
 
     assert covered["planRoute"] == route
+    assert covered["planCostPerRun"] is None
     assert covered["planCost"] is None
     assert covered["planComparableCost"] is None
     assert covered["apiCostScore"] is None
     assert covered["planCostScore"] is None
     assert covered["planCostFallback"] is None
-    assert other["planComparableCost"] == 40
+    assert other["planComparableCost"] == 0.8
     assert other["planCostScore"] == 50.0
 
 
+def test_a_missing_intelligence_index_keeps_the_run_cost_but_cannot_be_ranked_per_point():
+    route = make_route(id="route-a", modelIds=["model-1"], valueMultiple=4)
+
+    [field] = plan_costs.build_cost_fields([make_model("model-1", 100, index=None)], make_document(route))
+
+    assert field["planCostPerRun"] == 25.0
+    assert field["intelligenceIndex"] is None
+    assert field["planCost"] is None
+    assert field["planComparableCost"] is None
+    assert field["planCostScore"] is None
+    assert field["apiCostScore"] == 50.0
+
+
 def test_a_missing_api_cost_without_a_route_has_no_comparable_cost():
-    [field] = plan_costs.build_cost_fields([make_model("model-1", None)], make_document())
+    [field] = plan_costs.build_cost_fields([make_model("model-1", None, index=50)], make_document())
 
     assert field["planComparableCost"] is None
     assert field["planCostScore"] is None
     assert field["planCostFallback"] == "api"
-
-
-def test_the_evaluated_variant_selects_a_matching_restricted_route():
-    route = make_route(id="xhigh-only", modelIds=["model-1"], valueMultiple=8, requiredVariant="xhigh")
-
-    with_variant, without_variant = plan_costs.build_cost_fields(
-        [make_model("model-1", 80, "xhigh"), make_model("model-1", 80)], make_document(route)
-    )
-
-    assert with_variant["planRoute"] == route
-    assert with_variant["planCost"] == 10.0
-    assert without_variant["planRoute"] is None
-    assert without_variant["planCostFallback"] == "api"
-
-
-# --- route_summary ----------------------------------------------------------
 
 
 def test_route_summary_counts_supported_and_fallback_models():

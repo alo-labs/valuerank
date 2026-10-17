@@ -26,7 +26,7 @@ ValueRank turns pinned benchmark and pricing snapshots into a ranked publication
 
 `npm run refresh` runs the stages in this order (see `package.json`); `npm run build:docs` runs only stages 8 and 9, and `npm run build:publication` adds stage 10.
 
-Stage 6 also embeds `valuerank.plan_costs` (subscription routes from `data/plan_cost_routes.json` turned into effective plan costs) and stage 8 calls `valuerank.aa_reconciliation.reconcile` again to render the frontier comparison tables. `valuerank.site_header` renders the shared navigation, chart-label and table-sort assets that stages 8 and 9 inject into every page.
+Stage 8 embeds `valuerank.plan_costs` (subscription routes from `data/plan_cost_routes.json` turned into effective plan costs: AA total cost ÷ Value Multiple ÷ AA Intelligence Index, in USD per Index point) and stage 8 calls `valuerank.aa_reconciliation.reconcile` again to render the frontier comparison tables. `valuerank.site_header` renders the shared navigation, chart-label and table-sort assets that stages 8 and 9 inject into every page.
 
 `valuerank.build_deepswe` converts the historical DeepSWE Best page capture (`data/deepswe-scrape.json`) into `data/deepswe.json`. That file is retained for audit only; current DeepSWE values come from the hand-curated `data/aa_deepswe.json`.
 

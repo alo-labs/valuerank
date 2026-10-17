@@ -2,7 +2,7 @@
 
 **Updated:** October 8, 2026 · **Cohort:** 16 · **Retained dimensions:** 16 · **Default cost basis:** API Costs (AA total evaluation cost)
 
-API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple. The site switcher recalculates the main rank and cost-based charts using the selected basis.
+API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple and by the model's AA Intelligence Index (USD per Index point). The site switcher recalculates the main rank and cost-based charts using the selected basis.
 
 ## Final ranking
 

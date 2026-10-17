@@ -251,7 +251,7 @@ The ledger contains **1 ranking-eligible provider claim** and separately records
 
 ## Benchmark evaluation cost (score input)
 
-The API Costs baseline uses AA total evaluation cost in USD. AA cost is available for **16/16** ranked models; missing values are **none**. Plan Costs divides the same AA cost by each model's highest eligible subscription Value Multiple. No DeepSWE leaderboard cost is used.
+The API Costs baseline uses AA total evaluation cost in USD. AA cost is available for **16/16** ranked models; missing values are **none**. Plan Costs divides the same AA cost by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). No DeepSWE leaderboard cost is used.
 
 | Model | AA evaluation cost (USD) | AA cost penalty | Composite cost |
 |---|---:|---:|---:|
@@ -342,38 +342,38 @@ Observed 2026-10-07T16:22:14Z; Artificial Analysis Intelligence Index v4.3.2. Sc
 
 ## Plan Costs candidate comparison
 
-Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator.
+Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. Effective Plan cost per Index point is that amount divided by the model's AA Intelligence Index; the Plan-basis rank uses it so that a plan allowance is credited with the work it buys and token-efficient models are rewarded, while models without an eligible route are compared on API cost per Index point. The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator.
 
-| Model | Primary rank | AA Intelligence Index | API evaluation cost | Effective Plan evaluation cost | Selected plan / multiple | Evidence / source variant | Source date | Source |
-|---|---|---|---|---|---|---|---|---|
-| GPT-6.1 Sol | 1 | 52.00 | $1,081.55 | $100.40 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-5.6 Sol | 2 | 46.97 | $3,464.84 | $321.65 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-6 Astra | 3 | 52.39 | $3,802.98 | $353.04 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-6 Sol | 4 | 47.53 | $1,545.83 | $143.50 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5.5 | 5 | 57.62 | $8,708.20 | $147.85 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Grok 4.7 | 6 | 46.45 | $4,967.35 | $858.66 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
-| MiMo-V2.6-Pro | 7 | 46 (rounded) | $206.66 | $137.77 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| MiMo-V2.6-Flash | 8 | 38 (rounded) | $109.41 | $72.94 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| Kimi K3 | 9 | 43.59 | $3,658.07 | API fallback | No eligible route | API fallback | — | — |
-| Grok 4.6 | 10 | 42.84 | $1,936.75 | API fallback | No eligible route | API fallback | — | — |
-| GPT-5.6 Luna | 11 | 37.32 | $319.93 | $29.70 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Gemini 3.8 Flash | 12 | 40.93 | $1,622.73 | API fallback | No eligible route | API fallback | — | — |
-| GLM-5.3 | 13 | 44.78 | $2,503.48 | API fallback | No eligible route | API fallback | — | — |
-| GPT-6 Luna | 14 | 37.26 | $122.05 | $11.33 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5 | 15 | 50.78 | $7,274.74 | API fallback | No eligible route | API fallback | — | — |
-| Qwen3.8 Max | 16 | 45.42 | $4,934.79 | API fallback | No eligible route | API fallback | — | — |
-| Claude Fable 5 | Unranked candidate | 49.63 | $11,160.86 | API fallback | No eligible route | API fallback | — | — |
-| Claude Opus 4.8 | Unranked candidate | 41.79 | $6,873.86 | API fallback | No eligible route | API fallback | — | — |
-| Claude Sonnet 5 | Unranked candidate | 38.16 | $6,998.25 | API fallback | No eligible route | API fallback | — | — |
-| DeepSeek V4 Flash | Unranked candidate | 34.33 | $474.19 | API fallback | No eligible route | API fallback | — | — |
-| DeepSeek V4 Pro | Unranked candidate | 36.00 | $1,122.27 | API fallback | No eligible route | API fallback | — | — |
-| GLM-5.2 | Unranked candidate | 33.71 | $2,097.29 | API fallback | No eligible route | API fallback | — | — |
-| GLM-5.3 Flash | Unranked candidate | 41.81 | $280.28 | API fallback | No eligible route | API fallback | — | — |
-| GPT-5.5 | Unranked candidate | 38.36 | $5,294.36 | $491.49 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Gemini 3.5 Flash | Unranked candidate | 32.60 | $2,172.43 | API fallback | No eligible route | API fallback | — | — |
-| Gemini 3.6 Flash | Unranked candidate | 33.98 | $1,036.81 | API fallback | No eligible route | API fallback | — | — |
-| Gemini 3.7 Flash | Unranked candidate | 39.62 (estimated) | Not established | API fallback | No eligible route | API fallback | — | — |
-| Muse Spark 1.2 | Unranked candidate | 39.58 | $1,385.40 | API fallback | No eligible route | API fallback | — | — |
+| Model | Primary rank | AA Intelligence Index | API evaluation cost | Effective Plan evaluation cost | Effective Plan cost per Index point | Selected plan / multiple | Evidence / source variant | Source date | Source |
+|---|---|---|---|---|---|---|---|---|---|
+| GPT-6.1 Sol | 1 | 52.00 | $1,081.55 | $100.40 | $1.93 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-5.6 Sol | 2 | 46.97 | $3,464.84 | $321.65 | $6.85 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-6 Astra | 3 | 52.39 | $3,802.98 | $353.04 | $6.74 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-6 Sol | 4 | 47.53 | $1,545.83 | $143.50 | $3.02 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Opus 5.5 | 5 | 57.62 | $8,708.20 | $147.85 | $2.57 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Grok 4.7 | 6 | 46.45 | $4,967.35 | $858.66 | $18.49 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
+| MiMo-V2.6-Pro | 7 | 46 (rounded) | $206.66 | $137.77 | $3.00 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
+| MiMo-V2.6-Flash | 8 | 38 (rounded) | $109.41 | $72.94 | $1.92 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
+| Kimi K3 | 9 | 43.59 | $3,658.07 | API fallback | $83.91 (API fallback) | No eligible route | API fallback | — | — |
+| Grok 4.6 | 10 | 42.84 | $1,936.75 | API fallback | $45.21 (API fallback) | No eligible route | API fallback | — | — |
+| GPT-5.6 Luna | 11 | 37.32 | $319.93 | $29.70 | $0.80 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Gemini 3.8 Flash | 12 | 40.93 | $1,622.73 | API fallback | $39.65 (API fallback) | No eligible route | API fallback | — | — |
+| GLM-5.3 | 13 | 44.78 | $2,503.48 | API fallback | $55.91 (API fallback) | No eligible route | API fallback | — | — |
+| GPT-6 Luna | 14 | 37.26 | $122.05 | $11.33 | $0.30 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Opus 5 | 15 | 50.78 | $7,274.74 | API fallback | $143.27 (API fallback) | No eligible route | API fallback | — | — |
+| Qwen3.8 Max | 16 | 45.42 | $4,934.79 | API fallback | $108.66 (API fallback) | No eligible route | API fallback | — | — |
+| Claude Fable 5 | Unranked candidate | 49.63 | $11,160.86 | API fallback | $224.90 (API fallback) | No eligible route | API fallback | — | — |
+| Claude Opus 4.8 | Unranked candidate | 41.79 | $6,873.86 | API fallback | $164.49 (API fallback) | No eligible route | API fallback | — | — |
+| Claude Sonnet 5 | Unranked candidate | 38.16 | $6,998.25 | API fallback | $183.37 (API fallback) | No eligible route | API fallback | — | — |
+| DeepSeek V4 Flash | Unranked candidate | 34.33 | $474.19 | API fallback | $13.81 (API fallback) | No eligible route | API fallback | — | — |
+| DeepSeek V4 Pro | Unranked candidate | 36.00 | $1,122.27 | API fallback | $31.18 (API fallback) | No eligible route | API fallback | — | — |
+| GLM-5.2 | Unranked candidate | 33.71 | $2,097.29 | API fallback | $62.22 (API fallback) | No eligible route | API fallback | — | — |
+| GLM-5.3 Flash | Unranked candidate | 41.81 | $280.28 | API fallback | $6.70 (API fallback) | No eligible route | API fallback | — | — |
+| GPT-5.5 | Unranked candidate | 38.36 | $5,294.36 | $491.49 | $12.81 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Gemini 3.5 Flash | Unranked candidate | 32.60 | $2,172.43 | API fallback | $66.64 (API fallback) | No eligible route | API fallback | — | — |
+| Gemini 3.6 Flash | Unranked candidate | 33.98 | $1,036.81 | API fallback | $30.51 (API fallback) | No eligible route | API fallback | — | — |
+| Gemini 3.7 Flash | Unranked candidate | 39.62 (estimated) | Not established | API fallback | Not established | No eligible route | API fallback | — | — |
+| Muse Spark 1.2 | Unranked candidate | 39.58 | $1,385.40 | API fallback | $35.01 (API fallback) | No eligible route | API fallback | — | — |
 
 ### Plan route evidence
 

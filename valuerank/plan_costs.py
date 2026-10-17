@@ -74,6 +74,21 @@ def effective_cost(api_cost: float | int | None, route: dict | None) -> float | 
     return float(api_cost) / float(multiple)
 
 
+def cost_per_index_point(cost: float | int | None, intelligence_index) -> float | None:
+    """Express a cost in USD per AA Intelligence Index point.
+
+    Dividing by the achieved intelligence credits token-efficient models: a
+    plan allowance buys more work from a model that reaches a given score
+    with fewer dollars. Without a positive numeric index there is no rate.
+    """
+
+    if cost is None or isinstance(intelligence_index, bool) or not isinstance(intelligence_index, (int, float)):
+        return None
+    if intelligence_index <= 0:
+        return None
+    return float(cost) / float(intelligence_index)
+
+
 def rank_cost_scores(costs: list[float | int | None]) -> list[float | None]:
     """Convert lower-is-better costs to 0-100 scores with average ties."""
 
@@ -92,24 +107,36 @@ def rank_cost_scores(costs: list[float | int | None]) -> list[float | None]:
 
 
 def build_cost_fields(models: list[dict], route_document: dict) -> list[dict]:
-    """Return API and plan cost values plus normalized scores for each model."""
+    """Return API and plan cost values plus normalized scores for each model.
+
+    ``apiCost`` is the AA total evaluation cost (USD per Index run).
+    ``planCostPerRun`` divides it by the selected route's Value Multiple, and
+    ``planCost`` divides that by the model's AA Intelligence Index (USD per
+    Index point), which is what the Plan-basis rank compares. A model
+    without an eligible route is not treated as free usage: it is compared
+    on API cost per Index point and carries an explicit fallback marker.
+    """
 
     api_costs = [model.get("aaEvalCost") for model in models]
+    indices = [model.get("intelligenceIndex") for model in models]
     routes = [select_best_route(model["id"], route_document, model.get("aaVariant")) for model in models]
-    plan_costs = [effective_cost(api_cost, route) for api_cost, route in zip(api_costs, routes)]
+    plan_run_costs = [effective_cost(api_cost, route) for api_cost, route in zip(api_costs, routes)]
+    plan_costs = [cost_per_index_point(run_cost, index) for run_cost, index in zip(plan_run_costs, indices)]
     comparable_plan_costs = [
-        plan_cost if plan_cost is not None else api_cost
-        for plan_cost, api_cost in zip(plan_costs, api_costs)
+        plan_cost if plan_cost is not None else cost_per_index_point(api_cost, index)
+        for plan_cost, api_cost, index in zip(plan_costs, api_costs, indices)
     ]
     api_scores = rank_cost_scores(api_costs)
     plan_scores = rank_cost_scores(comparable_plan_costs)
     result = []
-    for api_cost, plan_cost, comparable, api_score, plan_score, route in zip(
-        api_costs, plan_costs, comparable_plan_costs, api_scores, plan_scores, routes
+    for api_cost, index, run_cost, plan_cost, comparable, api_score, plan_score, route in zip(
+        api_costs, indices, plan_run_costs, plan_costs, comparable_plan_costs, api_scores, plan_scores, routes
     ):
         result.append(
             {
                 "apiCost": api_cost,
+                "intelligenceIndex": index,
+                "planCostPerRun": run_cost,
                 "planCost": plan_cost,
                 "planComparableCost": comparable,
                 "apiCostScore": api_score,
