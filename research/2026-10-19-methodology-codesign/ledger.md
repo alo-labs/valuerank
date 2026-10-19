@@ -158,3 +158,24 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - certificate_role per uncertain input; no zero uncertainty for missing repeatability; monotonicity tests.
 - Reset-phase attainability with a time-indexed LP where windows and billing periods misalign.
 - Superseded prose removed (Bug Hunt interval, serving-snapshot coupling); normative definitions govern.
+
+## Owner decisions (after round-2 reviewer 10)
+- O15. The scored API cost becomes an SDLC cost basket replacing total Index cost: Coding Agent Index (incl. DeepSWE), FrontierCode, ITBench-AA, MMMU-Pro, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0, SciCode, AA-LCR; excluded HLE, Omniscience, CritPt. Supersedes O5/O9 for the scored cost (total Index cost becomes a diagnostic).
+- O16. Plan rows without an identified AA-mix multiple keep being scored, flagged "workload-unmatched"; certification still requires an identified multiple.
+- Feasibility check (2026-10-19): AA total Index cost = Σ cost per task × fixed task counts (Briefcase 91, GDPval 220, GDP.pdf 100, AutomationBench 657, Terminal-Bench 66, SciCode 288, LCR 100, HLE 2158, CritPt 70, Omniscience 6000), exact to <0.002% for all rows; Coding Agent Index page exposes per-configuration costUsd; FrontierCode/MMMU-Pro cost charts need browser capture; ITBench-AA cost source not yet located. Basket is phased by capture.
+
+## Editor decisions after round-2 reviewer 10
+- E7. "Recommended" = interval-certified among directly evidenced routes.
+
+## Reviewer 10 (Grok 4.7, round 2, Thinking) — adopted
+- Pairwise common-support certification (≥70% common weight; no [0,100] fills in Θ_cert); scenario-supported on the same estimand; S2 as max rank change, not a hurdle.
+- Unidentified inputs ≥5% weight block pair certification unless a pre-registered bound exists.
+- Bug Hunt unit fix (z = 100·x/105, test vector 52/105 → 49.52).
+- TB4 quality row by pre-registered agent preference, never best-of-agent; matched cost uses AA exact per-evaluation cost only.
+- Lexicographic Plan route choice; finer route key; page diffs flag, measurements clear.
+- Pairwise matched-cost reversal against the leader blocks certification.
+- Executable cohort rule; Omniscience count-level definitions; single governing Plan formula with test; clip gate ≥ 2 rows; scored-field release assertion.
+
+## Reviewer 10 (Grok 4.7) — rejected or modified
+- Withhold Plan scores without identified AA-mix multiple: modified by owner (O16) — scored and flagged; certification only with identification.
+- Expired routes leave the Plan ranking entirely: O13 kept (API-cost fallback, flagged, excluded from Plan claims).
