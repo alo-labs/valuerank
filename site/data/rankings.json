@@ -1,13 +1,13 @@
 {
-  "version": "v1.9.8",
-  "publishDate": "October 18, 2026",
+  "version": "v2.0.0",
+  "publishDate": "October 19, 2026",
   "observedAt": "2026-10-17T20:23:57Z",
   "bases": {
     "api": {
       "label": "API ranking",
       "costLabel": "API cost",
-      "costUnit": "USD per Index run",
-      "description": "AA total evaluation cost at API rates.",
+      "costUnit": "USD per Index point",
+      "description": "AA total evaluation cost at API rates ÷ AA Intelligence Index.",
       "pickLabel": "Best at API rates",
       "pickPhrase": "at API rates"
     },
@@ -21,7 +21,7 @@
     }
   },
   "defaultBasis": "plan",
-  "costWeightPct": 18.9394,
+  "costWeightPct": 25.0,
   "modelInclusion": {
     "frontierRule": "Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA's rendered line as observed; ValueRank never recomputes it from rounded values.",
     "nearFrontierGap": "3",
@@ -106,8 +106,8 @@
       "label": "Cost",
       "fullLabel": "Cost (selected basis)",
       "category": "cost",
-      "weightPct": 18.9394,
-      "priority": 25,
+      "weightPct": 25.0,
+      "priority": null,
       "higherBetter": false,
       "sourceUrl": null
     },
@@ -116,7 +116,7 @@
       "label": "Non-Hallucination",
       "fullLabel": "Non-Hallucination",
       "category": "rely",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "priority": 6,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/omniscience"
@@ -126,7 +126,7 @@
       "label": "Terminal-Bench 4.0",
       "fullLabel": "Terminal-Bench 4.0",
       "category": "code",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "priority": 6,
       "higherBetter": true,
       "sourceUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
@@ -136,7 +136,7 @@
       "label": "Instruction Following (LiveBench)",
       "fullLabel": "Instruction Following (LiveBench)",
       "category": "language",
-      "weightPct": 3.7879,
+      "weightPct": 3.5047,
       "priority": 5,
       "higherBetter": true,
       "sourceUrl": "https://livebench.ai/"
@@ -146,7 +146,7 @@
       "label": "DeepSWE v1.1",
       "fullLabel": "DeepSWE v1.1",
       "category": "code",
-      "weightPct": 18.9394,
+      "weightPct": 17.5234,
       "priority": 25,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
@@ -156,7 +156,7 @@
       "label": "GDPval-AA v2.1",
       "fullLabel": "GDPval-AA v2.1",
       "category": "prod",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "priority": 6,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/gdpval-aa"
@@ -166,7 +166,7 @@
       "label": "AutomationBench-AA",
       "fullLabel": "AutomationBench-AA",
       "category": "prod",
-      "weightPct": 3.7879,
+      "weightPct": 3.5047,
       "priority": 5,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/automationbench-aa"
@@ -176,7 +176,7 @@
       "label": "AA-LCR v1.1",
       "fullLabel": "AA-LCR v1.1",
       "category": "language",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "priority": 4,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
@@ -186,7 +186,7 @@
       "label": "AA-Omniscience Accuracy",
       "fullLabel": "AA-Omniscience Accuracy",
       "category": "rely",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "priority": 4,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/omniscience"
@@ -196,7 +196,7 @@
       "label": "HLE",
       "fullLabel": "HLE",
       "category": "intel",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "priority": 4,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
@@ -206,7 +206,7 @@
       "label": "GPQA Diamond (legacy)",
       "fullLabel": "GPQA Diamond (legacy)",
       "category": "intel",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "priority": 4,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/gpqa-diamond"
@@ -216,7 +216,7 @@
       "label": "SciCode",
       "fullLabel": "SciCode",
       "category": "intel",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "priority": 4,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/scicode"
@@ -226,7 +226,7 @@
       "label": "CritPt",
       "fullLabel": "CritPt",
       "category": "intel",
-      "weightPct": 2.2727,
+      "weightPct": 2.1028,
       "priority": 3,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/critpt"
@@ -236,7 +236,7 @@
       "label": "AA Intelligence Index",
       "fullLabel": "AA Intelligence Index",
       "category": "intel",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "priority": 6,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
@@ -246,7 +246,7 @@
       "label": "Speed",
       "fullLabel": "Speed",
       "category": "prod",
-      "weightPct": 3.7879,
+      "weightPct": 3.5047,
       "priority": 5,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
@@ -256,7 +256,7 @@
       "label": "Bug Hunt Bench",
       "fullLabel": "Bug Hunt Bench",
       "category": "code",
-      "weightPct": 15.1515,
+      "weightPct": 14.0187,
       "priority": 20,
       "higherBetter": true,
       "sourceUrl": "https://bughunt.productcompass.pm/"
@@ -285,8 +285,8 @@
         "plan": 1
       },
       "overall": {
-        "api": 69.5,
-        "plan": 82.6
+        "api": 65.0,
+        "plan": 77.2
       },
       "quality": 85.4,
       "qualityRank": 1,
@@ -309,8 +309,8 @@
         "bugHuntFixedOf105": 100.0
       },
       "costDims": {
-        "api": 11.1,
-        "plan": 72.2
+        "api": 3.9,
+        "plan": 52.5
       },
       "raw": {
         "omniNonHallucination": 52.99,
@@ -330,9 +330,10 @@
         "bugHuntFixedOf105": 51.3
       },
       "coverage": {
-        "pct": 88.64,
-        "availablePriority": 117,
-        "totalPriority": 132,
+        "pct": 89.49,
+        "costAvailable": true,
+        "availablePriority": 92,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "Instruction Following (LiveBench)",
@@ -341,6 +342,7 @@
       },
       "cost": {
         "apiUsd": 7259.502265782336,
+        "apiUsdPerPoint": 129.6336712029138,
         "planUsdPerRun": 123.25131181294289,
         "planUsdPerPoint": 2.200911225855922,
         "planComparableUsdPerPoint": 2.200911225855922,
@@ -367,7 +369,7 @@
         "api": true,
         "plan": true
       },
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -383,12 +385,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 6,
+        "api": 5,
         "plan": 2
       },
       "overall": {
-        "api": 60.3,
-        "plan": 73.4
+        "api": 57.5,
+        "plan": 70.1
       },
       "quality": 76.7,
       "qualityRank": 3,
@@ -412,7 +414,7 @@
       },
       "costDims": {
         "api": 0.0,
-        "plan": 61.1
+        "plan": 50.5
       },
       "raw": {
         "omniNonHallucination": 41.39,
@@ -432,9 +434,10 @@
         "bugHuntFixedOf105": 41.7
       },
       "coverage": {
-        "pct": 88.64,
-        "availablePriority": 117,
-        "totalPriority": 132,
+        "pct": 89.49,
+        "costAvailable": true,
+        "availablePriority": 92,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "Instruction Following (LiveBench)",
@@ -443,6 +446,7 @@
       },
       "cost": {
         "apiUsd": 8708.197642611496,
+        "apiUsdPerPoint": 151.12529511161244,
         "planUsdPerRun": 147.8471586181918,
         "planUsdPerPoint": 2.5657944840681233,
         "planComparableUsdPerPoint": 2.5657944840681233,
@@ -489,8 +493,8 @@
         "plan": 3
       },
       "overall": {
-        "api": 70.1,
-        "plan": 72.4
+        "api": 65.7,
+        "plan": 66.8
       },
       "quality": 71.0,
       "qualityRank": 5,
@@ -513,8 +517,8 @@
         "bugHuntFixedOf105": 88.2
       },
       "costDims": {
-        "api": 66.7,
-        "plan": 77.8
+        "api": 50.0,
+        "plan": 54.2
       },
       "raw": {
         "omniNonHallucination": 45.73,
@@ -534,9 +538,10 @@
         "bugHuntFixedOf105": 44.3
       },
       "coverage": {
-        "pct": 88.64,
-        "availablePriority": 117,
-        "totalPriority": 132,
+        "pct": 89.49,
+        "costAvailable": true,
+        "availablePriority": 92,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "Instruction Following (LiveBench)",
@@ -545,6 +550,7 @@
       },
       "cost": {
         "apiUsd": 1081.552560620246,
+        "apiUsdPerPoint": 20.865995441073224,
         "planUsdPerRun": 100.40406244153786,
         "planUsdPerPoint": 1.9370586187405516,
         "planComparableUsdPerPoint": 1.9370586187405516,
@@ -571,7 +577,7 @@
         "api": true,
         "plan": true
       },
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
       "aaFrontierIntelligenceGap": 0,
@@ -591,8 +597,8 @@
         "plan": 4
       },
       "overall": {
-        "api": 64.1,
-        "plan": 68.0
+        "api": 61.0,
+        "plan": 65.8
       },
       "quality": 75.2,
       "qualityRank": 4,
@@ -615,8 +621,8 @@
         "bugHuntFixedOf105": 94.1
       },
       "costDims": {
-        "api": 27.8,
-        "plan": 44.4
+        "api": 18.5,
+        "plan": 37.5
       },
       "raw": {
         "omniNonHallucination": 51.68,
@@ -636,15 +642,17 @@
         "bugHuntFixedOf105": 45.0
       },
       "coverage": {
-        "pct": 81.06,
-        "availablePriority": 107,
-        "totalPriority": 132,
+        "pct": 82.48,
+        "costAvailable": true,
+        "availablePriority": 82,
+        "totalPriority": 107,
         "missing": [
           "DeepSWE v1.1"
         ]
       },
       "cost": {
         "apiUsd": 3802.9799452617394,
+        "apiUsdPerPoint": 72.59489472616798,
         "planUsdPerRun": 353.04306955641846,
         "planUsdPerPoint": 6.739221567598216,
         "planComparableUsdPerPoint": 6.739221567598216,
@@ -691,8 +699,8 @@
         "plan": 5
       },
       "overall": {
-        "api": 74.1,
-        "plan": 66.6
+        "api": 69.5,
+        "plan": 64.8
       },
       "quality": 82.6,
       "qualityRank": 2,
@@ -715,8 +723,8 @@
         "bugHuntFixedOf105": 70.6
       },
       "costDims": {
-        "api": 44.4,
-        "plan": 11.1
+        "api": 30.2,
+        "plan": 11.6
       },
       "raw": {
         "omniNonHallucination": 84.93,
@@ -736,9 +744,10 @@
         "bugHuntFixedOf105": 40.7
       },
       "coverage": {
-        "pct": 84.85,
-        "availablePriority": 112,
-        "totalPriority": 132,
+        "pct": 85.98,
+        "costAvailable": true,
+        "availablePriority": 87,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "Instruction Following (LiveBench)",
@@ -748,6 +757,7 @@
       },
       "cost": {
         "apiUsd": 2407.239010161643,
+        "apiUsdPerPoint": 45.7993361343324,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 45.7993361343324,
@@ -780,12 +790,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 5,
+        "api": 6,
         "plan": 6
       },
       "overall": {
-        "api": 62.9,
-        "plan": 63.9
+        "api": 56.8,
+        "plan": 61.6
       },
       "quality": 69.8,
       "qualityRank": 6,
@@ -808,8 +818,8 @@
         "bugHuntFixedOf105": 82.4
       },
       "costDims": {
-        "api": 33.3,
-        "plan": 38.9
+        "api": 18.1,
+        "plan": 37.2
       },
       "raw": {
         "omniNonHallucination": 7.8,
@@ -830,12 +840,14 @@
       },
       "coverage": {
         "pct": 100.0,
-        "availablePriority": 132,
-        "totalPriority": 132,
+        "costAvailable": true,
+        "availablePriority": 107,
+        "totalPriority": 107,
         "missing": []
       },
       "cost": {
         "apiUsd": 3464.843215149396,
+        "apiUsdPerPoint": 73.76290285233947,
         "planUsdPerRun": 321.65273070454845,
         "planUsdPerPoint": 6.847651583024457,
         "planComparableUsdPerPoint": 6.847651583024457,
@@ -869,107 +881,6 @@
       "aaFrontierFootnote": null
     },
     {
-      "slug": "grok-4-7",
-      "name": "Grok 4.7",
-      "shortName": "Grok 4.7",
-      "developer": "xAI",
-      "aaUrl": "https://artificialanalysis.ai/models/grok-4-7",
-      "aaVariant": "xhigh",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "rank": {
-        "api": 8,
-        "plan": 7
-      },
-      "overall": {
-        "api": 56.6,
-        "plan": 58.9
-      },
-      "quality": 66.9,
-      "qualityRank": 7,
-      "dims": {
-        "costComposite": null,
-        "omniNonHallucination": 88.9,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": 81.8,
-        "deepswePassAt1": 93.3,
-        "gdpvalV21": 83.3,
-        "automationBenchAA": 77.8,
-        "aaLcr": 5.6,
-        "omniAccuracy": 44.4,
-        "hle": 44.4,
-        "gpqaDiamond": null,
-        "scicode": 66.7,
-        "critpt": 13.9,
-        "intelligenceIndex": 52.8,
-        "speed": 52.9,
-        "bugHuntFixedOf105": 52.9
-      },
-      "costDims": {
-        "api": 16.7,
-        "plan": 27.8
-      },
-      "raw": {
-        "omniNonHallucination": 70.66,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": 75.27525,
-        "deepswePassAt1": 72.6,
-        "gdpvalV21": 1711.07,
-        "automationBenchAA": 65.56,
-        "aaLcr": 76.67,
-        "omniAccuracy": 47.45,
-        "hle": 43.14,
-        "gpqaDiamond": null,
-        "scicode": 57.41,
-        "critpt": 17.71,
-        "intelligenceIndex": 46.4465506302286,
-        "speed": 93.1303226037017,
-        "bugHuntFixedOf105": 29.0
-      },
-      "coverage": {
-        "pct": 92.42,
-        "availablePriority": 122,
-        "totalPriority": 132,
-        "missing": [
-          "Terminal-Bench 4.0",
-          "GPQA Diamond (legacy)"
-        ]
-      },
-      "cost": {
-        "apiUsd": 4967.354257472305,
-        "planUsdPerRun": 858.6610643858781,
-        "planUsdPerPoint": 18.487079292967767,
-        "planComparableUsdPerPoint": 18.487079292967767,
-        "fallback": null,
-        "route": {
-          "id": "supergrok-heavy-grok47-xhigh-user-projection",
-          "planLabel": "SuperGrok Heavy $300 · Grok 4.7 XHigh",
-          "planFeeUsd": 300,
-          "valueMultiple": 5.785,
-          "grade": "estimate",
-          "evidenceLabel": "user reported projection",
-          "sourceModel": "Grok 4.7 XHigh",
-          "sourceUrl": "https://www.remakebench.com/capacity/plans/supergrok-heavy",
-          "sourceDate": "2026-09-25"
-        }
-      },
-      "intelligenceIndex": {
-        "value": 46.4465506302286,
-        "status": "measured"
-      },
-      "speed": 93.1303226037017,
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "tier": "Expensive",
-      "aaFrontierTier": null,
-      "aaFrontierConfiguration": null,
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null
-    },
-    {
       "slug": "gpt-6-sol",
       "name": "GPT-6 Sol",
       "shortName": "GPT-6 Sol",
@@ -979,12 +890,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 7,
-        "plan": 8
+        "api": 8,
+        "plan": 7
       },
       "overall": {
-        "api": 58.6,
-        "plan": 57.4
+        "api": 54.3,
+        "plan": 56.6
       },
       "quality": 59.3,
       "qualityRank": 8,
@@ -1007,8 +918,8 @@
         "bugHuntFixedOf105": 58.8
       },
       "costDims": {
-        "api": 55.6,
-        "plan": 50.0
+        "api": 39.0,
+        "plan": 48.4
       },
       "raw": {
         "omniNonHallucination": 39.88,
@@ -1028,9 +939,10 @@
         "bugHuntFixedOf105": 29.3
       },
       "coverage": {
-        "pct": 92.42,
-        "availablePriority": 122,
-        "totalPriority": 132,
+        "pct": 92.99,
+        "costAvailable": true,
+        "availablePriority": 97,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "GPQA Diamond (legacy)"
@@ -1038,6 +950,7 @@
       },
       "cost": {
         "apiUsd": 1535.7958440173156,
+        "apiUsdPerPoint": 32.2439461083228,
         "planUsdPerRun": 142.5729524709725,
         "planUsdPerPoint": 2.9933110015152993,
         "planComparableUsdPerPoint": 2.9933110015152993,
@@ -1071,6 +984,109 @@
       "aaFrontierFootnote": null
     },
     {
+      "slug": "grok-4-7",
+      "name": "Grok 4.7",
+      "shortName": "Grok 4.7",
+      "developer": "xAI",
+      "aaUrl": "https://artificialanalysis.ai/models/grok-4-7",
+      "aaVariant": "xhigh",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "rank": {
+        "api": 9,
+        "plan": 8
+      },
+      "overall": {
+        "api": 52.3,
+        "plan": 56.1
+      },
+      "quality": 66.9,
+      "qualityRank": 7,
+      "dims": {
+        "costComposite": null,
+        "omniNonHallucination": 88.9,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": 81.8,
+        "deepswePassAt1": 93.3,
+        "gdpvalV21": 83.3,
+        "automationBenchAA": 77.8,
+        "aaLcr": 5.6,
+        "omniAccuracy": 44.4,
+        "hle": 44.4,
+        "gpqaDiamond": null,
+        "scicode": 66.7,
+        "critpt": 13.9,
+        "intelligenceIndex": 52.8,
+        "speed": 52.9,
+        "bugHuntFixedOf105": 52.9
+      },
+      "costDims": {
+        "api": 8.7,
+        "plan": 23.9
+      },
+      "raw": {
+        "omniNonHallucination": 70.66,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": 75.27525,
+        "deepswePassAt1": 72.6,
+        "gdpvalV21": 1711.07,
+        "automationBenchAA": 65.56,
+        "aaLcr": 76.67,
+        "omniAccuracy": 47.45,
+        "hle": 43.14,
+        "gpqaDiamond": null,
+        "scicode": 57.41,
+        "critpt": 17.71,
+        "intelligenceIndex": 46.4465506302286,
+        "speed": 93.1303226037017,
+        "bugHuntFixedOf105": 29.0
+      },
+      "coverage": {
+        "pct": 92.99,
+        "costAvailable": true,
+        "availablePriority": 97,
+        "totalPriority": 107,
+        "missing": [
+          "Terminal-Bench 4.0",
+          "GPQA Diamond (legacy)"
+        ]
+      },
+      "cost": {
+        "apiUsd": 4967.354257472305,
+        "apiUsdPerPoint": 106.94775370981853,
+        "planUsdPerRun": 858.6610643858781,
+        "planUsdPerPoint": 18.487079292967767,
+        "planComparableUsdPerPoint": 18.487079292967767,
+        "fallback": null,
+        "route": {
+          "id": "supergrok-heavy-grok47-xhigh-user-projection",
+          "planLabel": "SuperGrok Heavy $300 · Grok 4.7 XHigh",
+          "planFeeUsd": 300,
+          "valueMultiple": 5.785,
+          "grade": "estimate",
+          "evidenceLabel": "user reported projection",
+          "sourceModel": "Grok 4.7 XHigh",
+          "sourceUrl": "https://www.remakebench.com/capacity/plans/supergrok-heavy",
+          "sourceDate": "2026-09-25"
+        }
+      },
+      "intelligenceIndex": {
+        "value": 46.4465506302286,
+        "status": "measured"
+      },
+      "speed": 93.1303226037017,
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "tier": "Expensive",
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null
+    },
+    {
       "slug": "claude-opus-5",
       "name": "Claude Opus 5",
       "shortName": "Opus 5",
@@ -1080,12 +1096,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 14,
+        "api": 15,
         "plan": 9
       },
       "overall": {
-        "api": 40.7,
-        "plan": 52.2
+        "api": 37.0,
+        "plan": 49.5
       },
       "quality": 48.9,
       "qualityRank": 9,
@@ -1108,8 +1124,8 @@
         "bugHuntFixedOf105": 47.1
       },
       "costDims": {
-        "api": 5.6,
-        "plan": 66.7
+        "api": 1.3,
+        "plan": 51.2
       },
       "raw": {
         "omniNonHallucination": 39.18,
@@ -1130,12 +1146,14 @@
       },
       "coverage": {
         "pct": 100.0,
-        "availablePriority": 132,
-        "totalPriority": 132,
+        "costAvailable": true,
+        "availablePriority": 107,
+        "totalPriority": 107,
         "missing": []
       },
       "cost": {
         "apiUsd": 7274.7418382622345,
+        "apiUsdPerPoint": 143.26813030384275,
         "planUsdPerRun": 123.51004818781384,
         "planUsdPerPoint": 2.4323961002350214,
         "planComparableUsdPerPoint": 2.4323961002350214,
@@ -1162,7 +1180,7 @@
         "api": false,
         "plan": false
       },
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -1178,12 +1196,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 11,
+        "api": 10,
         "plan": 10
       },
       "overall": {
-        "api": 46.0,
-        "plan": 48.1
+        "api": 47.1,
+        "plan": 45.5
       },
       "quality": 38.6,
       "qualityRank": 13,
@@ -1206,8 +1224,8 @@
         "bugHuntFixedOf105": 64.7
       },
       "costDims": {
-        "api": 77.8,
-        "plan": 88.9
+        "api": 72.5,
+        "plan": 66.2
       },
       "raw": {
         "omniNonHallucination": 7.42,
@@ -1228,12 +1246,14 @@
       },
       "coverage": {
         "pct": 100.0,
-        "availablePriority": 132,
-        "totalPriority": 132,
+        "costAvailable": true,
+        "availablePriority": 107,
+        "totalPriority": 107,
         "missing": []
       },
       "cost": {
         "apiUsd": 319.92851141699316,
+        "apiUsdPerPoint": 8.571559247156516,
         "planUsdPerRun": 29.700010343203967,
         "planUsdPerPoint": 0.7957258862937724,
         "planComparableUsdPerPoint": 0.7957258862937724,
@@ -1260,7 +1280,7 @@
         "api": false,
         "plan": true
       },
-      "tier": "Budget",
+      "tier": "Mid-Range",
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-5.6 Luna (low)",
       "aaFrontierIntelligenceGap": 1,
@@ -1276,12 +1296,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 9,
+        "api": 7,
         "plan": 11
       },
       "overall": {
-        "api": 53.7,
-        "plan": 46.2
+        "api": 54.3,
+        "plan": 44.2
       },
       "quality": 42.7,
       "qualityRank": 10,
@@ -1304,8 +1324,8 @@
         "bugHuntFixedOf105": 8.8
       },
       "costDims": {
-        "api": 83.3,
-        "plan": 55.6
+        "api": 89.0,
+        "plan": 48.5
       },
       "raw": {
         "omniNonHallucination": 59.38,
@@ -1325,9 +1345,10 @@
         "bugHuntFixedOf105": 18
       },
       "coverage": {
-        "pct": 69.7,
-        "availablePriority": 92,
-        "totalPriority": 132,
+        "pct": 71.96,
+        "costAvailable": true,
+        "availablePriority": 67,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "Instruction Following (LiveBench)",
@@ -1337,6 +1358,7 @@
       },
       "cost": {
         "apiUsd": 206.65533881883294,
+        "apiUsdPerPoint": 4.461065915513719,
         "planUsdPerRun": 137.77022587922195,
         "planUsdPerPoint": 2.974043943675812,
         "planComparableUsdPerPoint": 2.974043943675812,
@@ -1370,211 +1392,6 @@
       "aaFrontierFootnote": null
     },
     {
-      "slug": "mimo-v2-6-flash",
-      "name": "MiMo-V2.6-Flash",
-      "shortName": "MiMo V2.6 Flash",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
-      "aaVariant": null,
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "rank": {
-        "api": 10,
-        "plan": 12
-      },
-      "overall": {
-        "api": 50.7,
-        "plan": 44.9
-      },
-      "quality": 24.5,
-      "qualityRank": 16,
-      "dims": {
-        "costComposite": null,
-        "omniNonHallucination": 50.0,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": null,
-        "gdpvalV21": 50.0,
-        "automationBenchAA": 66.7,
-        "aaLcr": 0.0,
-        "omniAccuracy": 0.0,
-        "hle": 0.0,
-        "gpqaDiamond": null,
-        "scicode": 11.1,
-        "critpt": 0.0,
-        "intelligenceIndex": 19.4,
-        "speed": 11.8,
-        "bugHuntFixedOf105": null
-      },
-      "costDims": {
-        "api": 100.0,
-        "plan": 83.3
-      },
-      "raw": {
-        "omniNonHallucination": 45.64,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": null,
-        "deepswePassAt1": null,
-        "gdpvalV21": 1607.51,
-        "automationBenchAA": 64.05,
-        "aaLcr": 74.33,
-        "omniAccuracy": 27.0,
-        "hle": 35.08,
-        "gpqaDiamond": null,
-        "scicode": 51.27,
-        "critpt": 12.0,
-        "intelligenceIndex": 37.8843590141754,
-        "speed": 51.9430960183717,
-        "bugHuntFixedOf105": null
-      },
-      "coverage": {
-        "pct": 54.55,
-        "availablePriority": 72,
-        "totalPriority": 132,
-        "missing": [
-          "Terminal-Bench 4.0",
-          "Instruction Following (LiveBench)",
-          "DeepSWE v1.1",
-          "GPQA Diamond (legacy)",
-          "Bug Hunt Bench"
-        ]
-      },
-      "cost": {
-        "apiUsd": 109.54875236182735,
-        "planUsdPerRun": 73.03250157455157,
-        "planUsdPerPoint": 1.9277745083986928,
-        "planComparableUsdPerPoint": 1.9277745083986928,
-        "fallback": null,
-        "route": {
-          "id": "mimo-provisional-user-assumption",
-          "planLabel": "MiMo · provisional 1.5x assumption",
-          "planFeeUsd": null,
-          "valueMultiple": 1.5,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": null,
-          "sourceUrl": null,
-          "sourceDate": null
-        }
-      },
-      "intelligenceIndex": {
-        "value": 37.8843590141754,
-        "status": "measured"
-      },
-      "speed": 51.9430960183717,
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": false
-      },
-      "tier": "Near-Budget",
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "MiMo-V2.6-Flash",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null
-    },
-    {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna",
-      "shortName": "GPT-6 Luna",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "rank": {
-        "api": 13,
-        "plan": 13
-      },
-      "overall": {
-        "api": 42.4,
-        "plan": 42.4
-      },
-      "quality": 29.0,
-      "qualityRank": 15,
-      "dims": {
-        "costComposite": null,
-        "omniNonHallucination": 22.2,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": 0.0,
-        "deepswePassAt1": 40.0,
-        "gdpvalV21": 0.0,
-        "automationBenchAA": 11.1,
-        "aaLcr": 72.2,
-        "omniAccuracy": 38.9,
-        "hle": 5.6,
-        "gpqaDiamond": null,
-        "scicode": 38.9,
-        "critpt": 38.9,
-        "intelligenceIndex": 19.4,
-        "speed": 70.6,
-        "bugHuntFixedOf105": 20.6
-      },
-      "costDims": {
-        "api": 94.4,
-        "plan": 94.4
-      },
-      "raw": {
-        "omniNonHallucination": 23.27,
-        "terminalBenchV4": null,
-        "livebenchInstructionFollowing": 55.93325,
-        "deepswePassAt1": 63.7,
-        "gdpvalV21": 1431.86,
-        "automationBenchAA": 53.17,
-        "aaLcr": 83.33,
-        "omniAccuracy": 43.78,
-        "hle": 38.51,
-        "gpqaDiamond": null,
-        "scicode": 54.63,
-        "critpt": 19.43,
-        "intelligenceIndex": 38.1245186869738,
-        "speed": 120.357052380923,
-        "bugHuntFixedOf105": 18.3
-      },
-      "coverage": {
-        "pct": 92.42,
-        "availablePriority": 122,
-        "totalPriority": 132,
-        "missing": [
-          "Terminal-Bench 4.0",
-          "GPQA Diamond (legacy)"
-        ]
-      },
-      "cost": {
-        "apiUsd": 122.05438368649308,
-        "planUsdPerRun": 11.33070773175762,
-        "planUsdPerPoint": 0.29720264339046043,
-        "planComparableUsdPerPoint": 0.29720264339046043,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro500-common-semianalysis-assumption",
-          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        }
-      },
-      "intelligenceIndex": {
-        "value": 38.1245186869738,
-        "status": "measured"
-      },
-      "speed": 120.357052380923,
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "tier": "Budget",
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null
-    },
-    {
       "slug": "claude-haiku-5-5",
       "name": "Claude Haiku 5.5",
       "shortName": "Haiku 5.5",
@@ -1584,12 +1401,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 16,
-        "plan": 14
+        "api": 13,
+        "plan": 12
       },
       "overall": {
-        "api": 37.9,
-        "plan": 40.3
+        "api": 41.3,
+        "plan": 43.0
       },
       "quality": 24.0,
       "qualityRank": 17,
@@ -1612,7 +1429,7 @@
         "bugHuntFixedOf105": 20.6
       },
       "costDims": {
-        "api": 88.9,
+        "api": 93.0,
         "plan": 100.0
       },
       "raw": {
@@ -1633,9 +1450,10 @@
         "bugHuntFixedOf105": 18.3
       },
       "coverage": {
-        "pct": 88.64,
-        "availablePriority": 117,
-        "totalPriority": 132,
+        "pct": 89.49,
+        "costAvailable": true,
+        "availablePriority": 92,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "Instruction Following (LiveBench)",
@@ -1644,6 +1462,7 @@
       },
       "cost": {
         "apiUsd": 157.5758646895501,
+        "apiUsdPerPoint": 3.820120010455321,
         "planUsdPerRun": 2.675311794389645,
         "planUsdPerPoint": 0.06485772513506487,
         "planComparableUsdPerPoint": 0.06485772513506487,
@@ -1677,6 +1496,109 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
     },
     {
+      "slug": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "shortName": "GPT-6 Luna",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "rank": {
+        "api": 11,
+        "plan": 13
+      },
+      "overall": {
+        "api": 46.1,
+        "plan": 41.6
+      },
+      "quality": 29.0,
+      "qualityRank": 15,
+      "dims": {
+        "costComposite": null,
+        "omniNonHallucination": 22.2,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": 0.0,
+        "deepswePassAt1": 40.0,
+        "gdpvalV21": 0.0,
+        "automationBenchAA": 11.1,
+        "aaLcr": 72.2,
+        "omniAccuracy": 38.9,
+        "hle": 5.6,
+        "gpqaDiamond": null,
+        "scicode": 38.9,
+        "critpt": 38.9,
+        "intelligenceIndex": 19.4,
+        "speed": 70.6,
+        "bugHuntFixedOf105": 20.6
+      },
+      "costDims": {
+        "api": 97.4,
+        "plan": 79.5
+      },
+      "raw": {
+        "omniNonHallucination": 23.27,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": 55.93325,
+        "deepswePassAt1": 63.7,
+        "gdpvalV21": 1431.86,
+        "automationBenchAA": 53.17,
+        "aaLcr": 83.33,
+        "omniAccuracy": 43.78,
+        "hle": 38.51,
+        "gpqaDiamond": null,
+        "scicode": 54.63,
+        "critpt": 19.43,
+        "intelligenceIndex": 38.1245186869738,
+        "speed": 120.357052380923,
+        "bugHuntFixedOf105": 18.3
+      },
+      "coverage": {
+        "pct": 92.99,
+        "costAvailable": true,
+        "availablePriority": 97,
+        "totalPriority": 107,
+        "missing": [
+          "Terminal-Bench 4.0",
+          "GPQA Diamond (legacy)"
+        ]
+      },
+      "cost": {
+        "apiUsd": 122.05438368649308,
+        "apiUsdPerPoint": 3.20146687460204,
+        "planUsdPerRun": 11.33070773175762,
+        "planUsdPerPoint": 0.29720264339046043,
+        "planComparableUsdPerPoint": 0.29720264339046043,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-common-semianalysis-assumption",
+          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+          "planFeeUsd": 500,
+          "valueMultiple": 10.772,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        }
+      },
+      "intelligenceIndex": {
+        "value": 38.1245186869738,
+        "status": "measured"
+      },
+      "speed": 120.357052380923,
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "tier": "Near-Budget",
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6 Luna (max)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null
+    },
+    {
       "slug": "gemini-3-8-flash",
       "name": "Gemini 3.8 Flash",
       "shortName": "Gem 3.8 Flash",
@@ -1686,12 +1608,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 12,
-        "plan": 15
+        "api": 14,
+        "plan": 14
       },
       "overall": {
-        "api": 43.5,
-        "plan": 37.2
+        "api": 39.9,
+        "plan": 34.9
       },
       "quality": 42.0,
       "qualityRank": 11,
@@ -1714,8 +1636,8 @@
         "bugHuntFixedOf105": 8.8
       },
       "costDims": {
-        "api": 50.0,
-        "plan": 16.7
+        "api": 33.8,
+        "plan": 13.6
       },
       "raw": {
         "omniNonHallucination": 44.82,
@@ -1736,12 +1658,14 @@
       },
       "coverage": {
         "pct": 100.0,
-        "availablePriority": 132,
-        "totalPriority": 132,
+        "costAvailable": true,
+        "availablePriority": 107,
+        "totalPriority": 107,
         "missing": []
       },
       "cost": {
         "apiUsd": 1622.7263776021543,
+        "apiUsdPerPoint": 39.650031075432,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 39.650031075432,
@@ -1774,12 +1698,12 @@
       "rankingEligible": true,
       "exclusionReasons": [],
       "rank": {
-        "api": 15,
-        "plan": 16
+        "api": 16,
+        "plan": 15
       },
       "overall": {
-        "api": 40.5,
-        "plan": 34.1
+        "api": 36.9,
+        "plan": 32.9
       },
       "quality": 40.8,
       "qualityRank": 12,
@@ -1802,8 +1726,8 @@
         "bugHuntFixedOf105": 29.4
       },
       "costDims": {
-        "api": 38.9,
-        "plan": 5.6
+        "api": 25.1,
+        "plan": 9.0
       },
       "raw": {
         "omniNonHallucination": 70.45,
@@ -1824,12 +1748,14 @@
       },
       "coverage": {
         "pct": 100.0,
-        "availablePriority": 132,
-        "totalPriority": 132,
+        "costAvailable": true,
+        "availablePriority": 107,
+        "totalPriority": 107,
         "missing": []
       },
       "cost": {
         "apiUsd": 2503.478685148468,
+        "apiUsdPerPoint": 55.909434466147715,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 55.909434466147715,
@@ -1853,6 +1779,112 @@
       "aaFrontierFootnote": null
     },
     {
+      "slug": "mimo-v2-6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "shortName": "MiMo V2.6 Flash",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "rank": {
+        "api": 12,
+        "plan": 16
+      },
+      "overall": {
+        "api": 43.4,
+        "plan": 32.0
+      },
+      "quality": 24.5,
+      "qualityRank": 16,
+      "dims": {
+        "costComposite": null,
+        "omniNonHallucination": 50.0,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": null,
+        "gdpvalV21": 50.0,
+        "automationBenchAA": 66.7,
+        "aaLcr": 0.0,
+        "omniAccuracy": 0.0,
+        "hle": 0.0,
+        "gpqaDiamond": null,
+        "scicode": 11.1,
+        "critpt": 0.0,
+        "intelligenceIndex": 19.4,
+        "speed": 11.8,
+        "bugHuntFixedOf105": null
+      },
+      "costDims": {
+        "api": 100.0,
+        "plan": 54.3
+      },
+      "raw": {
+        "omniNonHallucination": 45.64,
+        "terminalBenchV4": null,
+        "livebenchInstructionFollowing": null,
+        "deepswePassAt1": null,
+        "gdpvalV21": 1607.51,
+        "automationBenchAA": 64.05,
+        "aaLcr": 74.33,
+        "omniAccuracy": 27.0,
+        "hle": 35.08,
+        "gpqaDiamond": null,
+        "scicode": 51.27,
+        "critpt": 12.0,
+        "intelligenceIndex": 37.8843590141754,
+        "speed": 51.9430960183717,
+        "bugHuntFixedOf105": null
+      },
+      "coverage": {
+        "pct": 57.94,
+        "costAvailable": true,
+        "availablePriority": 47,
+        "totalPriority": 107,
+        "missing": [
+          "Terminal-Bench 4.0",
+          "Instruction Following (LiveBench)",
+          "DeepSWE v1.1",
+          "GPQA Diamond (legacy)",
+          "Bug Hunt Bench"
+        ]
+      },
+      "cost": {
+        "apiUsd": 109.54875236182735,
+        "apiUsdPerPoint": 2.891661762598039,
+        "planUsdPerRun": 73.03250157455157,
+        "planUsdPerPoint": 1.9277745083986928,
+        "planComparableUsdPerPoint": 1.9277745083986928,
+        "fallback": null,
+        "route": {
+          "id": "mimo-provisional-user-assumption",
+          "planLabel": "MiMo · provisional 1.5x assumption",
+          "planFeeUsd": null,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": null,
+          "sourceUrl": null,
+          "sourceDate": null
+        }
+      },
+      "intelligenceIndex": {
+        "value": 37.8843590141754,
+        "status": "measured"
+      },
+      "speed": 51.9430960183717,
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "tier": "Premium",
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "MiMo-V2.6-Flash",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null
+    },
+    {
       "slug": "qwen3-8-max",
       "name": "Qwen3.8 Max",
       "shortName": "Qwen3.8 Max",
@@ -1866,8 +1898,8 @@
         "plan": 17
       },
       "overall": {
-        "api": 31.3,
-        "plan": 26.9
+        "api": 27.2,
+        "plan": 25.2
       },
       "quality": 33.5,
       "qualityRank": 14,
@@ -1890,7 +1922,7 @@
         "bugHuntFixedOf105": 41.2
       },
       "costDims": {
-        "api": 22.2,
+        "api": 8.3,
         "plan": 0.0
       },
       "raw": {
@@ -1911,15 +1943,17 @@
         "bugHuntFixedOf105": 25.7
       },
       "coverage": {
-        "pct": 95.45,
-        "availablePriority": 126,
-        "totalPriority": 132,
+        "pct": 95.79,
+        "costAvailable": true,
+        "availablePriority": 101,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0"
         ]
       },
       "cost": {
         "apiUsd": 4934.789930721673,
+        "apiUsdPerPoint": 108.6594137497647,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 108.6594137497647,
@@ -1956,8 +1990,8 @@
         "plan": 18
       },
       "overall": {
-        "api": 31.4,
-        "plan": 24.1
+        "api": 31.6,
+        "plan": 23.4
       },
       "quality": 21.9,
       "qualityRank": 18,
@@ -1980,8 +2014,8 @@
         "bugHuntFixedOf105": 35.3
       },
       "costDims": {
-        "api": 72.2,
-        "plan": 33.3
+        "api": 60.5,
+        "plan": 27.8
       },
       "raw": {
         "omniNonHallucination": 8.3,
@@ -2002,12 +2036,14 @@
       },
       "coverage": {
         "pct": 100.0,
-        "availablePriority": 132,
-        "totalPriority": 132,
+        "costAvailable": true,
+        "availablePriority": 107,
+        "totalPriority": 107,
         "missing": []
       },
       "cost": {
         "apiUsd": 474.192204864049,
+        "apiUsdPerPoint": 13.81255811018268,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 13.81255811018268,
@@ -2044,8 +2080,8 @@
         "plan": 19
       },
       "overall": {
-        "api": 26.5,
-        "plan": 18.8
+        "api": 23.4,
+        "plan": 17.6
       },
       "quality": 17.9,
       "qualityRank": 19,
@@ -2068,8 +2104,8 @@
         "bugHuntFixedOf105": 0.0
       },
       "costDims": {
-        "api": 61.1,
-        "plan": 22.2
+        "api": 39.9,
+        "plan": 16.8
       },
       "raw": {
         "omniNonHallucination": 5.17,
@@ -2089,15 +2125,17 @@
         "bugHuntFixedOf105": 16.0
       },
       "coverage": {
-        "pct": 95.45,
-        "availablePriority": 126,
-        "totalPriority": 132,
+        "pct": 95.79,
+        "costAvailable": true,
+        "availablePriority": 101,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0"
         ]
       },
       "cost": {
         "apiUsd": 1122.2711228899416,
+        "apiUsdPerPoint": 31.17698722166973,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 31.17698722166973,
@@ -2182,15 +2220,17 @@
         "bugHuntFixedOf105": 29.0
       },
       "coverage": {
-        "pct": 81.06,
-        "availablePriority": 107,
-        "totalPriority": 132,
+        "pct": 82.48,
+        "costAvailable": true,
+        "availablePriority": 82,
+        "totalPriority": 107,
         "missing": [
           "DeepSWE v1.1"
         ]
       },
       "cost": {
         "apiUsd": 11160.864676562578,
+        "apiUsdPerPoint": 224.90035661050658,
         "planUsdPerRun": 189.488364627548,
         "planUsdPerPoint": 3.818342217495867,
         "planComparableUsdPerPoint": 3.818342217495867,
@@ -2285,15 +2325,17 @@
         "bugHuntFixedOf105": 15.0
       },
       "coverage": {
-        "pct": 81.06,
-        "availablePriority": 107,
-        "totalPriority": 132,
+        "pct": 82.48,
+        "costAvailable": true,
+        "availablePriority": 82,
+        "totalPriority": 107,
         "missing": [
           "DeepSWE v1.1"
         ]
       },
       "cost": {
         "apiUsd": 6873.860602077013,
+        "apiUsdPerPoint": 164.48612929916493,
         "planUsdPerRun": 116.70391514561992,
         "planUsdPerPoint": 2.7926337741793708,
         "planComparableUsdPerPoint": 2.7926337741793708,
@@ -2388,15 +2430,17 @@
         "bugHuntFixedOf105": 9.0
       },
       "coverage": {
-        "pct": 81.06,
-        "availablePriority": 107,
-        "totalPriority": 132,
+        "pct": 82.48,
+        "costAvailable": true,
+        "availablePriority": 82,
+        "totalPriority": 107,
         "missing": [
           "DeepSWE v1.1"
         ]
       },
       "cost": {
         "apiUsd": 6998.250634094257,
+        "apiUsdPerPoint": 183.37370916161495,
         "planUsdPerRun": 118.81580023929129,
         "planUsdPerPoint": 3.113305758261714,
         "planComparableUsdPerPoint": 3.113305758261714,
@@ -2492,9 +2536,10 @@
         "bugHuntFixedOf105": null
       },
       "coverage": {
-        "pct": 61.36,
-        "availablePriority": 81,
-        "totalPriority": 132,
+        "pct": 64.25,
+        "costAvailable": true,
+        "availablePriority": 56,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "DeepSWE v1.1",
@@ -2503,6 +2548,7 @@
       },
       "cost": {
         "apiUsd": 2097.288029425553,
+        "apiUsdPerPoint": 62.223989861093386,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 62.223989861093386,
@@ -2587,9 +2633,10 @@
         "bugHuntFixedOf105": 17.7
       },
       "coverage": {
-        "pct": 76.52,
-        "availablePriority": 101,
-        "totalPriority": 132,
+        "pct": 78.27,
+        "costAvailable": true,
+        "availablePriority": 76,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "DeepSWE v1.1"
@@ -2597,6 +2644,7 @@
       },
       "cost": {
         "apiUsd": 305.51631302660803,
+        "apiUsdPerPoint": 7.307697438479367,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 7.307697438479367,
@@ -2682,9 +2730,10 @@
         "bugHuntFixedOf105": null
       },
       "coverage": {
-        "pct": 61.36,
-        "availablePriority": 81,
-        "totalPriority": 132,
+        "pct": 64.25,
+        "costAvailable": true,
+        "availablePriority": 56,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "DeepSWE v1.1",
@@ -2693,6 +2742,7 @@
       },
       "cost": {
         "apiUsd": 5294.3643471784235,
+        "apiUsdPerPoint": 138.03351549607987,
         "planUsdPerRun": 491.49316256762194,
         "planUsdPerPoint": 12.814102812484204,
         "planComparableUsdPerPoint": 12.814102812484204,
@@ -2788,9 +2838,10 @@
         "bugHuntFixedOf105": null
       },
       "coverage": {
-        "pct": 61.36,
-        "availablePriority": 81,
-        "totalPriority": 132,
+        "pct": 64.25,
+        "costAvailable": true,
+        "availablePriority": 56,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "DeepSWE v1.1",
@@ -2799,6 +2850,7 @@
       },
       "cost": {
         "apiUsd": 4222.120097385288,
+        "apiUsdPerPoint": 129.51952779652078,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 129.51952779652078,
@@ -2884,9 +2936,10 @@
         "bugHuntFixedOf105": null
       },
       "coverage": {
-        "pct": 61.36,
-        "availablePriority": 81,
-        "totalPriority": 132,
+        "pct": 64.25,
+        "costAvailable": true,
+        "availablePriority": 56,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "DeepSWE v1.1",
@@ -2895,6 +2948,7 @@
       },
       "cost": {
         "apiUsd": 1614.4196428711296,
+        "apiUsdPerPoint": 47.51284574964963,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 47.51284574964963,
@@ -2980,9 +3034,10 @@
         "bugHuntFixedOf105": null
       },
       "coverage": {
-        "pct": 43.18,
+        "pct": 39.95,
+        "costAvailable": false,
         "availablePriority": 57,
-        "totalPriority": 132,
+        "totalPriority": 107,
         "missing": [
           "Cost",
           "DeepSWE v1.1",
@@ -2992,6 +3047,7 @@
       },
       "cost": {
         "apiUsd": null,
+        "apiUsdPerPoint": null,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": null,
@@ -3076,15 +3132,17 @@
         "bugHuntFixedOf105": 28.7
       },
       "coverage": {
-        "pct": 81.06,
-        "availablePriority": 107,
-        "totalPriority": 132,
+        "pct": 82.48,
+        "costAvailable": true,
+        "availablePriority": 82,
+        "totalPriority": 107,
         "missing": [
           "DeepSWE v1.1"
         ]
       },
       "cost": {
         "apiUsd": 1557.039406856376,
+        "apiUsdPerPoint": 36.34857780465177,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 36.34857780465177,
@@ -3169,9 +3227,10 @@
         "bugHuntFixedOf105": 21.0
       },
       "coverage": {
-        "pct": 76.52,
-        "availablePriority": 101,
-        "totalPriority": 132,
+        "pct": 78.27,
+        "costAvailable": true,
+        "availablePriority": 76,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "DeepSWE v1.1"
@@ -3179,6 +3238,7 @@
       },
       "cost": {
         "apiUsd": 3658.0675385043187,
+        "apiUsdPerPoint": 83.9125199582138,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 83.9125199582138,
@@ -3263,9 +3323,10 @@
         "bugHuntFixedOf105": 14.0
       },
       "coverage": {
-        "pct": 76.52,
-        "availablePriority": 101,
-        "totalPriority": 132,
+        "pct": 78.27,
+        "costAvailable": true,
+        "availablePriority": 76,
+        "totalPriority": 107,
         "missing": [
           "Terminal-Bench 4.0",
           "DeepSWE v1.1"
@@ -3273,6 +3334,7 @@
       },
       "cost": {
         "apiUsd": 1385.40074776,
+        "apiUsdPerPoint": 35.0062063049736,
         "planUsdPerRun": null,
         "planUsdPerPoint": null,
         "planComparableUsdPerPoint": 35.0062063049736,
@@ -3301,22 +3363,22 @@
       "value": {
         "slug": "gemini-4-argon",
         "label": "Best overall value",
-        "reason": "Gemini 4 Argon has the highest overall score in the API ranking at 74.1, costing $2,407.24 per Index run.",
-        "score": 74.1,
+        "reason": "Gemini 4 Argon has the highest overall score in the API ranking at 69.5, costing $2,407.24 per Index run.",
+        "score": 69.5,
         "unit": "overall"
       },
       "other": {
         "slug": "claude-sonnet-5-5",
         "label": "Best on a subscription",
         "reason": "Claude Sonnet 5.5 ranks #1 on a subscription and #3 in the API ranking.",
-        "score": 82.6,
+        "score": 77.2,
         "unit": "overall on a subscription"
       },
       "budget": {
         "slug": "gpt-6-1-sol",
         "label": "Best on a budget",
-        "reason": "GPT-6.1 Sol scores best overall (70.1) among the cheapest third, at $1,081.55 per Index run.",
-        "score": 70.1,
+        "reason": "GPT-6.1 Sol scores best overall (65.7) among the cheapest third, at $1,081.55 per Index run.",
+        "score": 65.7,
         "unit": "overall"
       }
     },
@@ -3324,22 +3386,22 @@
       "value": {
         "slug": "claude-sonnet-5-5",
         "label": "Best overall value",
-        "reason": "Claude Sonnet 5.5 has the highest overall score in the Plan ranking at 82.6, costing $2.20 per Index point.",
-        "score": 82.6,
+        "reason": "Claude Sonnet 5.5 has the highest overall score in the Plan ranking at 77.2, costing $2.20 per Index point.",
+        "score": 77.2,
         "unit": "overall"
       },
       "other": {
         "slug": "gemini-4-argon",
         "label": "Best at API rates",
         "reason": "Gemini 4 Argon ranks #1 at API rates and #5 in the Plan ranking.",
-        "score": 74.1,
+        "score": 69.5,
         "unit": "overall at API rates"
       },
       "budget": {
         "slug": "gpt-6-1-sol",
         "label": "Best on a budget",
-        "reason": "GPT-6.1 Sol scores best overall (72.4) among the cheapest third, at $1.94 per Index point.",
-        "score": 72.4,
+        "reason": "GPT-6.1 Sol scores best overall (66.8) among the cheapest third, at $1.94 per Index point.",
+        "score": 66.8,
         "unit": "overall"
       }
     }

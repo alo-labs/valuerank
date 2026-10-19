@@ -53,16 +53,29 @@ def test_slugify_replaces_dots_with_hyphens():
 
 
 WEIGHTS = [
-    {"key": "costComposite", "priority": 2},
+    {"key": "costComposite", "priority": None},
     {"key": "a", "priority": 6},
     {"key": "b", "priority": 2},
 ]
 
 
-def test_composite_score_renormalises_available_priorities_only():
-    assert viewmodel.composite_score({"a": 100.0, "b": 0.0}, 50.0, WEIGHTS) == 70.0
+def test_composite_score_gives_cost_a_fixed_quarter_and_renormalises_quality_only():
+    # quality (6 * 100 + 2 * 0) / 8 = 75; overall 0.25 * 50 + 0.75 * 75
+    assert viewmodel.composite_score({"a": 100.0, "b": 0.0}, 50.0, WEIGHTS) == 68.8
+    # a missing quality dimension leaves cost at 25%: 0.25 * 50 + 0.75 * 100
     assert viewmodel.composite_score({"a": 100.0, "b": None}, 50.0, WEIGHTS) == 87.5
+    # without a cost the score is quality alone
     assert viewmodel.composite_score({"a": 100.0, "b": 0.0}, None, WEIGHTS) == 75.0
+
+
+def test_composite_score_needs_a_quality_dimension():
+    assert viewmodel.composite_score({"a": None, "b": None}, 80.0, WEIGHTS) is None
+
+
+def test_coverage_pct_counts_cost_share_and_quality_share():
+    assert viewmodel.coverage_pct(True, 92, 107) == round(25 + 75 * 92 / 107, 2)
+    assert viewmodel.coverage_pct(False, 107, 107) == 75.0
+    assert viewmodel.coverage_pct(True, 0, 0) == 25.0
 
 
 def test_composite_score_is_none_without_any_available_dimension():
@@ -73,6 +86,12 @@ def test_rank_scores_orders_by_score_then_name_and_skips_none():
     scores = {"z": 10.0, "a": 10.0, "m": 50.0, "n": None}
     names = {"z": "Zed", "a": "Alpha", "m": "Mid", "n": "Nope"}
     assert viewmodel.rank_scores(scores, names) == {"m": 1, "a": 2, "z": 3}
+
+
+def test_rank_scores_break_ties_by_lower_cost_before_name():
+    scores = {"z": 10.0, "a": 10.0, "u": 10.0}
+    names = {"z": "Zed", "a": "Alpha", "u": "Unpriced"}
+    assert viewmodel.rank_scores(scores, names, {"z": 1.0, "a": 2.0, "u": None}) == {"z": 1, "a": 2, "u": 3}
 
 
 def _model(slug, name, api, plan, quality_rank, cost_api, cost_plan, fallback=None):

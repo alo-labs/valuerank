@@ -58,7 +58,7 @@
 
 <section class="block" id="plan-routes" aria-labelledby="routes-title">
   <h2 id="routes-title" class="section-title">Plan routes and cost</h2>
-  <p class="muted">API cost to run the Intelligence Index: <strong>{{ usd(page.cost.apiUsd, 0) }}</strong>.
+  <p class="muted">API cost to run the Intelligence Index: <strong>{{ usd(page.cost.apiUsd, 0) }}</strong>{% if page.cost.apiUsdPerPoint is not none %}, or <strong>{{ usd(page.cost.apiUsdPerPoint, 2) }}</strong> per Index point, the cost the API ranking compares{% endif %}.
     {% if page.cost.fallback %}No subscription route is measured for this model, so the plan ranking falls back to API cost ({{ page.cost.fallback }}).{% endif %}</p>
   {%- if page.frontier and page.frontier.footnote %}
   <p class="note" id="aa-footnote"><strong>Artificial Analysis note:</strong> {{ page.frontier.footnote }}</p>

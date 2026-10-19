@@ -28,7 +28,7 @@ test('missing values are null and never best; an all-missing row has no best', (
   assert.deepEqual(b.values, [null, null]);
   assert.deepEqual(b.best, []);
   const a = out.rows.find((r) => r.key === 'a');
-  assert.deepEqual(a.values, [90, null]);
+  assert.deepEqual(a.values, [84, null]);
   assert.deepEqual(a.best, [0]);
 });
 

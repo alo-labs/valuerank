@@ -74,7 +74,7 @@ function cellChildren(doc, key, model, ctx) {
     ];
     case 'developer': return [model.developer];
     case 'overall': return [orDash(model.overall[ctx.basis], fmtScore)];
-    case 'cost': return [fmtUsd(costValue(model, ctx.basis), ctx.basis === 'api' ? 0 : 2)];
+    case 'cost': return [fmtUsd(costValue(model, ctx.basis), 2)];
     case 'grade': return [h(doc, 'span', { class: `badge badge-${model.grade}`, text: gradeLabel(model.grade) })];
     case 'coverage': return coverageCell(doc, model, ctx.expanded);
     case 'qualityRank': return [orDash(model.qualityRank, (v) => `#${v}`)];

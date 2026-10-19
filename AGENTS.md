@@ -8,6 +8,12 @@
 - Capture the complete selected catalog and retain exact model identities, reasoning efforts, observation dates, and direct owner links in the reconciliation inventory. Reconcile frontier entrants on each routine refresh; a manually maintained roster or missing supplementary benchmark must not silently exclude a frontier model.
 - Preserve configuration-specific evidence. Do not transfer benchmark results between reasoning efforts or model versions. Report missing benchmark coverage explicitly and apply the documented scoring policy.
 
+## Value scoring
+
+- ValueRank ranks the AA Pareto and near-Pareto models by actual value. Token efficiency is AA's total cost to run the AA Intelligence Index benchmarks; on the Plan basis, value is the API-equivalent usage a subscription delivers against its fee.
+- On 2026-10-19 the owner set cost at a fixed 25% of the overall score on both the API and Plan bases (`COST_WEIGHT_PCT` in `valuerank/plan_costs.py`). Quality dimensions share the other 75% by their priorities. Missing quality metrics never change cost's share.
+- Both bases compare cost per AA Intelligence Index point. The Plan basis also divides by the highest eligible Value Multiple. Cost is scored on a log scale so cost ratios keep their magnitude; see `research/2026-10-19-valuerank-v2-value-scoring/`.
+
 ## Subscription allowance value-multiple evidence
 
 - For providers other than the explicitly selected Anthropic/Codex SemiAnalysis comparison below, count only actual end-user-reported usage measurements priced at API rates as the value-multiple numerator. Accept the user's API-priced estimate as a reported estimate even when the raw token ledger is not published; label what cannot be independently reproduced.

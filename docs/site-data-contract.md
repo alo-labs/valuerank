@@ -24,14 +24,14 @@ Every value that reaches a page carries a grade. One enum, rendered by one compo
 {
   "version": "v1.9.6", "publishDate": "October 8, 2026", "observedAt": "2026-10-17T19:28:57Z",
   "bases": {
-    "api": {"label": "API ranking", "costLabel": "API cost", "costUnit": "USD per Index run", "description": "AA total evaluation cost at API rates.", "pickLabel": "Best at API rates", "pickPhrase": "at API rates"},
+    "api": {"label": "API ranking", "costLabel": "API cost", "costUnit": "USD per Index point", "description": "AA total evaluation cost at API rates ÷ AA Intelligence Index.", "pickLabel": "Best at API rates", "pickPhrase": "at API rates"},
     "plan": {"label": "Plan ranking", "costLabel": "Plan cost", "costUnit": "USD per Index point", "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index.", "pickLabel": "Best on a subscription", "pickPhrase": "on a subscription"}
   },
   "defaultBasis": "plan",
-  "costWeightPct": 18.9394,
+  "costWeightPct": 25.0,
   "modelInclusion": {"frontierRule": "…", "nearFrontierRule": "…", "nearFrontierGap": "3", "policyText": null, "observation": null, "nearFrontierStatus": null, "frontierFamilies": [{"family": "GPT-6 Luna", "configuration": "GPT-6 Luna (max)"}], "nearFrontierFamilies": [{"family": "Gemini 4 Argon", "configuration": "Gemini 4 Argon (high)", "gap": "2"}], "footnotes": [{"text": "…", "models": ["Claude Haiku 5.5 (xhigh)"]}]},
   "dimensions": [
-    {"key": "costComposite", "label": "Cost", "fullLabel": "Cost (selected basis)", "category": "cost", "weightPct": 18.9394, "priority": 25, "higherBetter": false, "sourceUrl": null}
+    {"key": "costComposite", "label": "Cost", "fullLabel": "Cost (selected basis)", "category": "cost", "weightPct": 25.0, "priority": null, "higherBetter": false, "sourceUrl": null}
   ],
   "categories": {"cost": "Cost", "rely": "Reliability", "code": "Code/Agentic", "prod": "Production", "intel": "Intelligence", "language": "Language"},
   "models": [
@@ -42,9 +42,9 @@ Every value that reaches a page carries a grade. One enum, rendered by one compo
       "dims": {"costComposite": null, "deepswePassAt1": 100.0, "bugHuntFixedOf105": 93.3},
       "costDims": {"api": 73.33, "plan": 80.0},
       "raw": {"deepswePassAt1": 70.0, "bugHuntFixedOf105": 44.3},
-      "coverage": {"pct": 88.64, "availablePriority": 117, "totalPriority": 132, "missing": ["Terminal-Bench 4.0"]},
+      "coverage": {"pct": 89.49, "costAvailable": true, "availablePriority": 92, "totalPriority": 107, "missing": ["Terminal-Bench 4.0"]},
       "cost": {
-        "apiUsd": 1081.55, "planUsdPerRun": 100.40, "planUsdPerPoint": 1.931, "planComparableUsdPerPoint": 1.931, "fallback": null,
+        "apiUsd": 1081.55, "apiUsdPerPoint": 20.87, "planUsdPerRun": 100.40, "planUsdPerPoint": 1.931, "planComparableUsdPerPoint": 1.931, "fallback": null,
         "route": {"id": "chatgpt-pro500-common-semianalysis-assumption", "planLabel": "ChatGPT Pro $500 · common GPT assumption", "planFeeUsd": 500, "valueMultiple": 10.772, "grade": "assumption", "evidenceLabel": "Provisional assumption", "sourceModel": "GPT-6.1 Sol", "sourceUrl": "https://…", "sourceDate": "2026-10-06"}
       },
       "intelligenceIndex": {"value": 52.0, "status": "measured"},
@@ -65,7 +65,7 @@ Every value that reaches a page carries a grade. One enum, rendered by one compo
 
 Rules:
 - `dims` holds the normalised 0–100 score per non-cost dimension (`null` when missing). `costDims` holds the cost dimension score per basis; the client substitutes it for `costComposite` when recomputing.
-- `overall[basis]` and `rank[basis]` are the committed values for each basis at the default cost weight. The client recomputes both when the cost-weight slider moves, using `dimensions[].weightPct`, `dims`, `costDims` and the renormalisation rule (available priorities only).
+- `overall[basis]` and `rank[basis]` are the committed values for each basis at the default cost weight. The client recomputes both when the cost-weight slider moves, using `dimensions[].weightPct`, `dims`, `costDims` and the fixed cost-share rule: cost takes the slider's share when the model has a cost score, and the available quality dimensions split the rest in proportion to their weights. Ties break by lower cost on the basis (`cost.apiUsdPerPoint` or the plan cost per point), then name. Cost has no `priority`; its `weightPct` is the fixed default share. `coverage.pct` is cost's share (when `costAvailable`) plus the quality share times `availablePriority / totalPriority`, both counted over quality priorities only.
 - `models` contains every roster model (28), ranked ones first. Unranked models have `rank` values `null`, `overall` values `null`, and `exclusionReasons` filled.
 - `modelInclusion` states the two-part model-inclusion policy and is read from `frontierSelection` in `data/scores.json` (a copy of `data/ranking_summary.json`): the frontier rule, the near-frontier rule (threshold from `nearFrontierPolicy.maxIntelligenceGap`, default 3, as a string in `nearFrontierGap`), the optional recorded `policyText`, the `observation` sentence (chart date, Index version, catalog, plotted and vertex counts, near-frontier counts), `nearFrontierStatus` (required and deferred model counts), the `frontierFamilies` and `nearFrontierFamilies` lists with the selected configuration (`gap` is the Index-point gap, as a string) and one `footnotes` entry per distinct Artificial Analysis footnote with the model names it applies to. Every optional part is `null` or an empty list when `frontierSelection` lacks the field; the two rules are always present.
 - `aaFrontierTier` (`"frontier"`, `"near"` or `null`), `aaFrontierConfiguration`, `aaFrontierIntelligenceGap` (Index points below the rendered frontier at the model's cost, `0` on the frontier) and `aaFrontierFootnote` (Artificial Analysis' footnote for the model's points, for example the Claude Haiku 5.5 long-context pricing note) pass through unchanged from `data/scores.json` and are `null` when the snapshot lacks them. Frontier membership is the line Artificial Analysis renders, never recomputed. The rankings table shows a text badge ("AA frontier" or "Near frontier") with the configuration and gap in its tooltip; the model page shows the badge, the same fields under `frontier` (`tier`, `configuration`, `intelligenceGap`, `footnote`), and the footnote as a note beside the cost evidence (it is also the `note` of the `costComposite` dimension).
@@ -134,7 +134,7 @@ site = {"version", "publishDate", "observedAt", "nav": [{"label", "href", "key"}
 | `plans.html` | `plansJson`, `workedExample: {models: [{slug, name, routeLabel, planFeeUsd, valueMultiple, grade, evidenceLabel, indexValue, apiUsd, planUsdPerRun, planUsdPerPoint}]}`, `routesByProvider` |
 | `benchmarks.html` | `benchmarksJson` |
 | `benchmark_tb4.html` | `tb4Json` (`data/tb4.json` plus `frontierCount` and `cohortMapping`) |
-| `methodology.html` | `dimensions`, `weights`, `workedExample: {slug, name, basis, overall, availableWeightPct, availablePriority, totalPriority, steps: [{key, label, weightPct, normalized, included, effectiveWeightPct, contribution}], missing}`, `modelInclusion` (the `rankings.modelInclusion` object above, rendered as the "Model inclusion" section), `faq` (list of `{q, a}` without release notes), `limitations` |
+| `methodology.html` | `dimensions`, `costWeightPct`, `weights`, `workedExample: {slug, name, basis, overall, availableWeightPct, availablePriority, totalPriority, steps: [{key, label, weightPct, normalized, included, effectiveWeightPct, contribution}], missing}`, `modelInclusion` (the `rankings.modelInclusion` object above, rendered as the "Model inclusion" section), `faq` (list of `{q, a}` without release notes), `limitations` |
 | `changelog.html` | `changelogJson` |
 | `data.html` | `files` (list of `{path, description, schema}`; `path` is absolute, for example `/data/rankings.json`) |
 | `archive_banner.html` | `archiveDate`, `archiveHref`, `note` |

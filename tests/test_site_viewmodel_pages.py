@@ -67,7 +67,7 @@ def test_models_index_lists_every_roster_model_ranked_first(bundle):
 
 def test_index_models_carry_the_coverage_object(bundle):
     first = viewmodel.index_page(bundle)["models"][0]
-    assert set(first["coverage"]) == {"pct", "availablePriority", "totalPriority", "missing"}
+    assert set(first["coverage"]) == {"pct", "costAvailable", "availablePriority", "totalPriority", "missing"}
 
 
 def test_rankings_columns_use_the_script_catalogue_keys(bundle):
@@ -92,8 +92,10 @@ def test_methodology_worked_example_lists_steps_and_priorities(bundle):
     example = viewmodel.methodology_page(bundle)["workedExample"]
     assert example["name"] and example["steps"] and "rows" not in example
     assert {"label", "weightPct", "normalized", "contribution", "included", "effectiveWeightPct"} <= set(example["steps"][0])
-    assert example["totalPriority"] == 132
+    assert example["totalPriority"] == 107
     assert 0 < example["availablePriority"] <= example["totalPriority"]
+    cost = next(step for step in example["steps"] if step["key"] == "costComposite")
+    assert cost["included"] and cost["effectiveWeightPct"] == 25.0
 
 
 def test_data_page_links_are_absolute_and_include_livebench(bundle):

@@ -1,7 +1,7 @@
 # ValueRank Methodology
 
-**Version:** v1.9.8
-**Updated:** October 18, 2026
+**Version:** v2.0.0
+**Updated:** October 19, 2026
 
 ## Cohort and source versions
 
@@ -14,7 +14,7 @@ The selected catalog is reconciled against AA's current Pareto frontier of Intel
 - LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **7be9f746f36a6f007dd78461f67cb7d06cfe2304**.
 - Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with 23 official rows, **11** direct cohort matches, and **1** eligible provider claim.
 
-Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v1.9.8.
+Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v2.0.0.
 
 ## Model inclusion
 
@@ -51,26 +51,26 @@ AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer
 
 ## Primary dimensions
 
-The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Each model's available dimension priorities are then renormalized to 100%, and its `availablePriority / totalPriority` coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
+The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Cost takes a fixed **25.00%** of each model's score; the model's available quality priorities are renormalized over the rest, and its weight coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
 
 | # | Dimension | ValueRank weight | Direction |
 |---:|---|---:|---|
-| 1 | Cost | 18.94% | lower |
-| 2 | Non-Hallucination | 4.55% | higher |
-| 3 | [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | 4.55% | higher |
-| 4 | Instruction Following (LiveBench) | 3.79% | higher |
-| 5 | DeepSWE v1.1 | 18.94% | higher |
-| 6 | [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | 4.55% | higher |
-| 7 | [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | 3.79% | higher |
-| 8 | [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 3.03% | higher |
-| 9 | [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 3.03% | higher |
-| 10 | [HLE](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 3.03% | higher |
-| 11 | [GPQA Diamond (legacy)](https://artificialanalysis.ai/evaluations/gpqa-diamond) | 3.03% | higher |
-| 12 | [SciCode](https://artificialanalysis.ai/evaluations/scicode) | 3.03% | higher |
-| 13 | [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 2.27% | higher |
-| 14 | [AA Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) | 4.55% | higher |
-| 15 | Speed | 3.79% | higher |
-| 16 | [Bug Hunt Bench](https://bughunt.productcompass.pm/) | 15.15% | higher |
+| 1 | Cost | 25.00% | lower |
+| 2 | Non-Hallucination | 4.21% | higher |
+| 3 | [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | 4.21% | higher |
+| 4 | Instruction Following (LiveBench) | 3.50% | higher |
+| 5 | DeepSWE v1.1 | 17.52% | higher |
+| 6 | [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | 4.21% | higher |
+| 7 | [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | 3.50% | higher |
+| 8 | [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 2.80% | higher |
+| 9 | [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 2.80% | higher |
+| 10 | [HLE](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 2.80% | higher |
+| 11 | [GPQA Diamond (legacy)](https://artificialanalysis.ai/evaluations/gpqa-diamond) | 2.80% | higher |
+| 12 | [SciCode](https://artificialanalysis.ai/evaluations/scicode) | 2.80% | higher |
+| 13 | [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 2.10% | higher |
+| 14 | [AA Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) | 4.21% | higher |
+| 15 | Speed | 3.50% | higher |
+| 16 | [Bug Hunt Bench](https://bughunt.productcompass.pm/) | 14.02% | higher |
 
 The eleven AA source components below correspond to ten current AA evaluations because Omniscience is split into accuracy and non-hallucination reliability:
 
@@ -92,17 +92,17 @@ These AA methodology weights describe the source index, not the combined ValueRa
 
 ## API Costs and Plan Costs
 
-The API Costs basis uses each model's AA total evaluation cost in USD. Plan Costs divides that same value by the model's highest eligible subscription Value Multiple and then by its AA Intelligence Index, so the Plan input is USD per Index point: a plan allowance is credited with the work it buys, which rewards token-efficient models. Models without an eligible route are compared on API cost per Index point. Lower cost ranks better in both views; the site opens on Plan Costs and the site switcher recalculates the primary composite when the cost basis changes.
+Both bases measure token efficiency as AA's total cost to run its Intelligence Index benchmarks per Index point. The API Costs basis divides each model's AA total evaluation cost in USD by its AA Intelligence Index. Plan Costs also divides by the model's highest eligible subscription Value Multiple, so a plan allowance is credited with the API-equivalent usage it delivers per dollar of fee. Models without an eligible route are compared on API cost per Index point. Lower cost ranks better in both views, cost carries a fixed **25.00%** of the score in both, and the site switcher recalculates the primary composite when the cost basis changes.
 
 ## Missing-metric handling
 
 - A retained dimension contributes to a model only when that model has an eligible value from the benchmark owner or an exact-version provider claim. Ranking within each dimension uses only models with eligible values.
 - Missing values remain null in aa_metrics.json and are listed in coverage_matrix.json.
-- Each row's retained priorities are renormalized over that model's available values. Coverage is available priority divided by total retained priority; missing metric names accompany the percentage.
+- Cost keeps its fixed share; each row's retained quality priorities are renormalized over that model's available values. Coverage is cost's share (when the model has a cost) plus the quality share times available quality priority divided by total quality priority; missing metric names accompany the percentage.
 - No zero, neutral 50, median, or mismatched-version value is used. Provider claims remain source-typed and are eligible only for the stated benchmark version and evaluated model/route.
 - AA output speed covers **18/19** selected pages; **Gemini 4 Argon** is missing. If retained, Speed contributes only where a value exists and the gap is included in row coverage.
 - GPQA Diamond remains an explicitly labelled legacy ValueRank input; it is not a component of the v4.3.2 source composite.
-- AA total evaluation cost is available for **19/19** ranked models; the cost component uses **AA evaluation cost only** consistently across this cohort.
+- AA total evaluation cost is available for **19/19** ranked models; the cost component uses **AA evaluation cost per AA Intelligence Index point** consistently across this cohort.
 - LiveBench Instruction Following is available for **12/19** ranked models and is scored where present. Terminal-Bench 4.0 is supplemental in this release under the published dimension-selection policy.
 - Bug Hunt Bench has **25/31** exact owner results. Eligible exact-variant results contribute where present at the published Bug Hunt priority; the separate emphasis view includes **16** rows with eligible results.
 
@@ -114,19 +114,27 @@ Dropped candidate dimensions:
 
 ## Rank normalization
 
-For each retained dimension, models with an eligible value are ranked from best to worst and mapped using that dimension's available sample size:
+For each retained quality dimension, models with an eligible value are ranked from best to worst and mapped using that dimension's available sample size:
 
 ((n - rank) / (n - 1)) × 100
 
-Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive the average tied rank. The sample size is the number of models with a value for that dimension. Lower-is-better dimensions, including composite Cost, reverse the ordering before normalization.
+Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive the average tied rank. The sample size is the number of models with a value for that dimension.
+
+## Cost normalization
+
+Cost is the one lower-is-better dimension and keeps its magnitude. Each ranked model's cost per Index point c is mapped on a log scale between the cheapest (c_min) and dearest (c_max) ranked model:
+
+100 × (ln c_max − ln c) / (ln c_max − ln c_min)
+
+The cheapest model scores 100 and the dearest 0, and equal cost ratios move the score by equal amounts: a model twice as expensive as another sits the same distance below it anywhere on the scale.
 
 ## Benchmark evaluation cost (score input)
 
-The Cost input uses **AA evaluation cost only** where an AA Intelligence Index total evaluation cost is available; lower evaluation cost is better. Plan Costs divides that same total benchmark cost by the model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). A missing cost remains null and the row's other available priorities are renormalized; no DeepSWE leaderboard cost or missing-value fill is used.
+The Cost input uses **AA evaluation cost per AA Intelligence Index point** where an AA Intelligence Index total evaluation cost is available; lower cost per point is better. Plan Costs further divides that cost by the model's highest eligible subscription Value Multiple. A missing cost remains null and the row is scored on quality alone; no DeepSWE leaderboard cost or missing-value fill is used.
 
 ## Quality score and interpretation
 
-Overall Score is the weighted sum of a model's available retained dimensions, with that row's available priorities renormalized to 100%. Quality Score removes Cost and renormalizes the available non-cost dimensions to 100%. Scores are rank-relative to the values available for this release, not probabilities and not an absolute model capability scale; row coverage is displayed beside each score.
+Quality Score is the priority-weighted mean of a model's available non-cost dimensions, renormalized to 100%. Overall Score is **25.00%** × cost score + the remainder × Quality Score. Scores are relative to the ranked cohort and the values available for this release, not probabilities and not an absolute model capability scale; row coverage is displayed beside each score.
 
 ## Supplemental data
 
@@ -142,9 +150,9 @@ When the benchmark owner has not published a result for a model, ValueRank uses 
 
 ## Bug Hunt Bench scoring
 
-Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **aec976170df89a371384174ca87646a9a8c82415** and provides **25/31** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **20** (**15.15%** before row-level renormalization).
+Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **aec976170df89a371384174ca87646a9a8c82415** and provides **25/31** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **20** (**14.02%** before row-level renormalization).
 
-The companion Bug Hunt emphasis ranking uses **16** eligible owner-result rows and re-ranks the other available dimensions within that subset. It gives Bug Hunt priority **30** out of **142**, or **21.13%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
+The companion Bug Hunt emphasis ranking uses **16** eligible owner-result rows and re-ranks the other available dimensions within that subset. Cost keeps its fixed **25.00%**; Bug Hunt gets priority **30** out of **117** quality priority, or **19.23%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
 
 The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. Models remain visible when one or more retained metrics are missing, with their available-priority coverage shown. A model with no rankable primary metric remains unranked. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
 
@@ -152,7 +160,7 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
 
 - The AA DeepSWE chart and the other AA Index components measure distinct tasks and use different evaluation setups; ValueRank is a transparent synthesis, not a new benchmark.
 - Bug Hunt results also depend on the tested agent CLI/harness, effort, and route; they measure the tested stack, not model capability in isolation.
-- Rank normalization discards magnitude differences. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
+- Rank normalization of the quality dimensions discards magnitude differences; only cost keeps its magnitude. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
 - Page variants can differ by reasoning effort; the selected URL and variant are recorded per model.
 - Provider claims may use a different harness or sampling procedure than the benchmark owner; displayed claim values are not presented as independent benchmark-owner measurements.
 - AA output speed is numeric for **18/19** selected pages; **Gemini 4 Argon** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.

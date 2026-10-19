@@ -201,7 +201,7 @@ def test_cost_slider(pages):
         _, dom, _ = pages[name]
         r = dom.one("input", id="cost-weight")
         assert r.attrs["type"] == "range" and r.attrs["min"] == "0" and r.attrs["max"] == "100" and r.attrs["step"] == "0.1"
-        assert r.attrs["value"] == "18.9394" and r.attrs["aria-describedby"] == "cost-weight-note"
+        assert r.attrs["value"] == "25.0" and r.attrs["aria-describedby"] == "cost-weight-note"
         assert dom.one("output", id="cost-weight-value").attrs["for"] == "cost-weight"
         assert dom.one(id="cost-weight-note")
 

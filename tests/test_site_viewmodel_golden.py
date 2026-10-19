@@ -54,9 +54,9 @@ def test_rankings_header_and_bases(bundle, scores):
     assert rankings["observedAt"] == scores["observedAt"]
     assert rankings["defaultBasis"] == "plan"
     assert set(rankings["bases"]) == {"api", "plan"}
-    assert rankings["bases"]["api"]["costUnit"] == "USD per Index run"
+    assert rankings["bases"]["api"]["costUnit"] == "USD per Index point"
     assert rankings["bases"]["plan"]["costUnit"] == "USD per Index point"
-    assert rankings["costWeightPct"] == 18.9394
+    assert rankings["costWeightPct"] == 25.0
     assert set(rankings["categories"]) == {"cost", "rely", "code", "prod", "intel", "language"}
 
 
@@ -66,7 +66,8 @@ def test_dimensions_mirror_the_score_weights(bundle, scores):
     assert dims[0]["fullLabel"] == "Cost (selected basis)" and dims[0]["category"] == "cost"
     assert dims[0]["sourceUrl"] is None
     deepswe = next(d for d in dims if d["key"] == "deepswePassAt1")
-    assert deepswe["weightPct"] == 18.9394 and deepswe["priority"] == 25 and deepswe["higherBetter"] is True
+    assert deepswe["weightPct"] == 17.5234 and deepswe["priority"] == 25 and deepswe["higherBetter"] is True
+    assert dims[0]["weightPct"] == 25.0 and dims[0]["priority"] is None
     assert deepswe["sourceUrl"].startswith("https://artificialanalysis.ai")
     assert all(d["category"] in bundle.rankings["categories"] for d in dims)
     assert all(d["sourceUrl"] for d in dims[1:])
@@ -102,15 +103,16 @@ def test_api_basis_recomputation_reproduces_scores_json_exactly(bundle, ranked):
 
 
 def test_plan_basis_rank_follows_independent_recomputation(bundle, scores, ranked):
-    weights = {w["key"]: w["priority"] for w in scores["weights"]}
+    weights = {w["key"]: w["priority"] for w in scores["weights"] if w["key"] != "costComposite"}
     fields = build_cost_fields(ranked, load_plan_routes(bundle.data / "plan_cost_routes.json"))
-    expected = {}
+    expected, costs = {}, {}
     for source, field in zip(ranked, fields):
-        dims = dict(source["dims"])
-        dims["costComposite"] = field["planCostScore"]
-        total = sum(dims[k] * weights[k] for k in dims)
-        expected[source["id"]] = round(total / sum(weights[k] for k in dims), 1)
-    order = sorted(ranked, key=lambda m: (-expected[m["id"]], m["name"]))
+        quality = [k for k in source["dims"] if k in weights]
+        quality_score = sum(source["dims"][k] * weights[k] for k in quality) / sum(weights[k] for k in quality)
+        # Cost carries a fixed 25% on the plan basis too.
+        expected[source["id"]] = round(0.25 * field["planCostScore"] + 0.75 * quality_score, 1)
+        costs[source["id"]] = field["planComparableCost"]
+    order = sorted(ranked, key=lambda m: (-expected[m["id"]], costs[m["id"]], m["name"]))
     models = by_slug(bundle.rankings)
     for position, source in enumerate(order, 1):
         model = models[viewmodel.slugify(source["id"])]
@@ -154,9 +156,10 @@ def test_dims_raw_and_coverage_for_a_known_model(bundle, ranked):
     assert sol["raw"]["omniNonHallucination"] == 45.73
     assert sol["dims"]["terminalBenchV4"] is None and sol["raw"]["terminalBenchV4"] is None
     assert sol["coverage"] == {
-        "pct": 88.64,
-        "availablePriority": 117,
-        "totalPriority": 132,
+        "pct": 89.49,
+        "costAvailable": True,
+        "availablePriority": 92,
+        "totalPriority": 107,
         "missing": ["Terminal-Bench 4.0", "Instruction Following (LiveBench)", "GPQA Diamond (legacy)"],
     }
     assert sol["intelligenceIndex"] == {"value": 51.8332597011541, "status": "measured"}
@@ -259,7 +262,8 @@ def test_model_document_dimensions_values_grades_and_sources(bundle, scores):
     assert missing["value"] is None and missing["grade"] == "missing" and missing["normalized"] is None
     assert missing["source"] is None and missing["observedAt"] is None
     cost = dims["costComposite"]
-    assert cost["value"] == 1081.552560620246 and cost["grade"] == "measured"
+    assert cost["value"] == 20.865995441073224 and cost["unit"] == "USD per Index point" and cost["grade"] == "measured"
+    assert cost["value"] == pytest.approx(1081.552560620246 / 51.8332597011541)
     sol_entry = by_slug(bundle.rankings)["gpt-6-1-sol"]
     assert cost["normalized"] == sol_entry["costDims"]["api"]
     assert cost["normalizedByBasis"] == sol_entry["costDims"]
@@ -296,7 +300,7 @@ def test_model_document_plans_history_and_frontier(bundle):
     first = opus["plans"][0]
     assert first["usdPerRun"] == pytest.approx(opus["cost"]["apiUsd"] / first["valueMultiple"])
     assert opus["cost"] == by_slug(bundle.rankings)["claude-opus-5-5"]["cost"]
-    assert [h["version"] for h in opus["history"]][-1] == "v1.9.8"
+    assert [h["version"] for h in opus["history"]][-1] == "v2.0.0"
     assert opus["history"][-1]["rank"] == opus["summary"]["rank"]
     assert opus["frontier"]["onAaFrontier"] is True
     assert "frontier" in opus["frontier"]["aaFrontierNote"].lower()
@@ -310,9 +314,9 @@ def test_model_document_plans_history_and_frontier(bundle):
 
 def test_models_absent_from_history_only_have_the_current_entry(bundle):
     sol = bundle.models["gpt-6-1-sol"]
-    assert [h["version"] for h in sol["history"]] == ["v1.9.6", "v1.9.7", "v1.9.8"]
+    assert [h["version"] for h in sol["history"]] == ["v1.9.6", "v1.9.7", "v1.9.8", "v2.0.0"]
     new = bundle.models["gemini-4-argon"]
-    assert [h["version"] for h in new["history"]] == ["v1.9.7", "v1.9.8"]
+    assert [h["version"] for h in new["history"]] == ["v1.9.7", "v1.9.8", "v2.0.0"]
     unranked = bundle.models["claude-fable-5"]
     assert [h["version"] for h in unranked["history"]] == ["v1.5.0"]
     assert unranked["summary"]["rankingEligible"] is False and unranked["summary"]["exclusionReasons"]
@@ -343,7 +347,7 @@ def test_benchmarks_document(bundle, scores):
     assert {"aa-intelligence-index", "deepswe", "bug-hunt", "livebench", "terminal-bench-4", "provider-claims"} <= set(ids)
     deepswe = next(s for s in doc["sources"] if s["id"] == "deepswe")
     assert deepswe["name"] == "DeepSWE v1.1" and deepswe["owner"] == "Artificial Analysis"
-    assert deepswe["weightPct"] == 18.9394 and deepswe["coverage"] == {"available": 16, "cohort": 19}
+    assert deepswe["weightPct"] == 17.5234 and deepswe["coverage"] == {"available": 16, "cohort": 19}
     assert deepswe["observedAt"] == "2026-10-17T19:26:26Z"
     tb4 = next(s for s in doc["sources"] if s["id"] == "terminal-bench-4")
     assert tb4["coverage"]["cohort"] == 19 and tb4["url"] == "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
@@ -372,9 +376,9 @@ def test_tb4_document(bundle, data):
 
 def test_changelog_document(bundle):
     versions = bundle.changelog["versions"]
-    assert [v["version"] for v in versions] == ["v1.9.8", "v1.9.7", "v1.9.6", "v1.9.5", "v1.9.4", "v1.9.3", "v1.9.2", "v1.9.1", "v1.9.0", "v1.5.0"]
+    assert [v["version"] for v in versions] == ["v2.0.0", "v1.9.8", "v1.9.7", "v1.9.6", "v1.9.5", "v1.9.4", "v1.9.3", "v1.9.2", "v1.9.1", "v1.9.0", "v1.5.0"]
     assert versions[0]["models"] == 19 and versions[0]["dimensions"] == 16
-    assert versions[0]["date"] == "October 18, 2026"
+    assert versions[0]["date"] == "October 19, 2026"
     assert versions[-1]["rankChanges"] == []
 
 
@@ -384,8 +388,8 @@ def test_changelog_document(bundle):
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
     assert set(page["headline"]) == {"api", "plan"}
-    assert page["headline"]["api"] == "Gemini 4 Argon leads the API ranking at 74.1; Claude Sonnet 5.5 leads on quality."
-    assert page["headline"]["plan"] == "Claude Sonnet 5.5 leads the Plan ranking at 82.6 and also leads on quality."
+    assert page["headline"]["api"] == "Gemini 4 Argon leads the API ranking at 69.5; Claude Sonnet 5.5 leads on quality."
+    assert page["headline"]["plan"] == "Claude Sonnet 5.5 leads the Plan ranking at 77.2 and also leads on quality."
     for sentence in page["headline"].values():
         assert len(sentence.split()) <= 18
     assert page["picks"] == bundle.rankings["picks"]
@@ -437,7 +441,8 @@ def test_benchmark_pages_wrap_their_documents(bundle):
 def test_methodology_page(bundle):
     page = viewmodel.methodology_page(bundle)
     assert page["dimensions"] == bundle.rankings["dimensions"]
-    assert page["weights"]["deepswePassAt1"] == 18.9394
+    assert page["weights"]["deepswePassAt1"] == 17.5234
+    assert page["costWeightPct"] == 25.0
     example = page["workedExample"]
     model = by_slug(bundle.rankings)[example["slug"]]
     assert example["basis"] == "plan" and example["overall"] == model["overall"]["plan"]

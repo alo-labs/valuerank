@@ -33,7 +33,7 @@ test('resolveOptions defaults to the plan basis and resolves labels', () => {
 test('money and costText follow the basis unit', () => {
   assert.equal(money(1081.5, 0), '$1,082');
   assert.equal(money(null), '—');
-  assert.equal(costText({ cost: { apiUsd: 1000 } }, 'api'), '$1,000 per Index run');
+  assert.equal(costText({ cost: { apiUsd: 1000, apiUsdPerPoint: 19.3 } }, 'api'), '$19.300 per Index point');
   assert.equal(costText({ cost: { planUsdPerPoint: 1.9308 } }, 'plan'), '$1.931 per Index point');
   assert.equal(costText({}, 'plan'), '— per Index point');
 });

@@ -28,6 +28,7 @@ from valuerank.clock import iso_z
 
 
 from valuerank.paths import DATA, ROOT
+from valuerank.plan_costs import COST_WEIGHT_PCT, blend, cost_per_index_point, cost_scores
 from valuerank.release import DATE as PUBLISH_DATE, VERSION
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
@@ -101,11 +102,15 @@ SHORT = {
     "MiMo-V2.6-Flash": "MiMo V2.6 Flash",
 }
 
-# The priority values are ValueRank's combined score priorities, not the
-# Artificial Analysis component weights.  AA's official component weights are
-# retained in aa_metrics.json and documented separately.
+# The priority values are ValueRank's quality priorities, not the Artificial
+# Analysis component weights.  AA's official component weights are retained in
+# aa_metrics.json and documented separately.  Cost has no priority: it carries
+# a fixed COST_WEIGHT_PCT share of every overall score, and the quality
+# priorities share the rest.
+COST_KEY = "costComposite"
+COST_MODE = "aa-per-index-point"
 CANDIDATES = [
-    ("costComposite", "Cost", False, 25),
+    (COST_KEY, "Cost", False, None),
     ("omniNonHallucination", "Non-Hallucination", True, 6),
     ("terminalBenchV4", "Terminal-Bench 4.0", True, 6),
     ("livebenchInstructionFollowing", "Instruction Following (LiveBench)", True, 5),
@@ -142,6 +147,37 @@ def rank_normalize(values, higher_better=True):
     if len(values) == 1:
         return [100.0]
     return [round(((len(values) - rank) / (len(values) - 1)) * 100, 1) for rank in ranks]
+
+
+def normalize_dimension(key, values, higher_better):
+    """Cost is scored on a log scale so cost ratios keep their size; other dimensions by rank."""
+
+    return cost_scores(values) if key == COST_KEY else rank_normalize(values, higher_better)
+
+
+def quality_weight_pct(priority, quality_priority, cost_retained=True):
+    """A quality dimension's nominal weight: its share of the weight cost leaves (all of it without cost)."""
+
+    share = 100.0 - COST_WEIGHT_PCT if cost_retained else 100.0
+    return round(share * priority / quality_priority, 4)
+
+
+def coverage_pct(has_cost, cost_retained, available_priority, total_priority):
+    """Share of the scoring weight that has an eligible value: cost's fixed share plus the quality share."""
+
+    cost_share = COST_WEIGHT_PCT if cost_retained else 0.0
+    quality = (100.0 - cost_share) * available_priority / total_priority if total_priority else 0.0
+    return round((cost_share if has_cost else 0.0) + quality, 2)
+
+
+def quality_score(dims, weights):
+    """Priority-weighted mean of the available non-cost dimension scores, or None."""
+
+    available = [weight for weight in weights if weight["key"] != COST_KEY and weight["key"] in dims]
+    priority = sum(weight["priority"] for weight in available)
+    if not priority:
+        return None
+    return sum(dims[weight["key"]] * weight["priority"] for weight in available) / priority
 
 
 def frontier_effort(variant):
@@ -315,7 +351,8 @@ def build_bug_hunt_emphasis(rows, weights, document):
         available_rows = [row for row in matched_rows if row.get(key) is not None]
         if len(available_rows) < 2:
             continue
-        normalized = rank_normalize(
+        normalized = normalize_dimension(
+            key,
             [comparison_number(row[key], key, f"{row['id']}.{key}") for row in available_rows],
             weight["higherBetter"],
         )
@@ -323,15 +360,20 @@ def build_bug_hunt_emphasis(rows, weights, document):
             row.setdefault("bugHuntEmphasisDims", {})[key] = score
         emphasis_base_weights.append(weight)
 
-    emphasis_base_priority = sum(weight["priority"] for weight in emphasis_base_weights)
+    emphasis_base_priority = sum(
+        weight["priority"] for weight in emphasis_base_weights if weight["key"] != COST_KEY
+    )
     total_priority = emphasis_base_priority + BUG_HUNT_EMPHASIS_PRIORITY
+    emphasis_has_cost = any(weight["key"] == COST_KEY for weight in emphasis_base_weights)
     emphasis_weights = [
         {
             "key": weight["key"],
             "label": weight["label"],
             "higherBetter": weight["higherBetter"],
             "priority": weight["priority"],
-            "weightPct": round(100.0 * weight["priority"] / total_priority, 4),
+            "weightPct": COST_WEIGHT_PCT
+            if weight["key"] == COST_KEY
+            else quality_weight_pct(weight["priority"], total_priority, emphasis_has_cost),
         }
         for weight in emphasis_base_weights
     ]
@@ -340,7 +382,7 @@ def build_bug_hunt_emphasis(rows, weights, document):
         "label": "Bug Hunt Bench",
         "higherBetter": True,
         "priority": BUG_HUNT_EMPHASIS_PRIORITY,
-        "weightPct": round(100.0 * BUG_HUNT_EMPHASIS_PRIORITY / total_priority, 4),
+        "weightPct": quality_weight_pct(BUG_HUNT_EMPHASIS_PRIORITY, total_priority, emphasis_has_cost),
     })
     bug_hunt_values = [
         require_number(row["bugHunt"]["fixedOf105"], f"{row['id']}.bugHunt.fixedOf105")
@@ -349,17 +391,9 @@ def build_bug_hunt_emphasis(rows, weights, document):
     bug_hunt_normalized = rank_normalize(bug_hunt_values, True)
     for row, score in zip(matched_rows, bug_hunt_normalized):
         row.setdefault("bugHuntEmphasisDims", {})["bugHuntFixedOf105"] = score
-        available_weights = [
-            weight for weight in emphasis_weights
-            if weight["key"] in row["bugHuntEmphasisDims"]
-        ]
-        available_priority = sum(weight["priority"] for weight in available_weights)
-        row["bugHuntEmphasisScore"] = round(
-            sum(
-                row["bugHuntEmphasisDims"][weight["key"]] * weight["priority"]
-                for weight in available_weights
-            ) / available_priority,
-            1,
+        row["bugHuntEmphasisScore"] = blend(
+            row["bugHuntEmphasisDims"].get(COST_KEY),
+            quality_score(row["bugHuntEmphasisDims"], emphasis_weights),
         )
     ranked_rows = sorted(
         matched_rows,
@@ -384,7 +418,7 @@ def build_bug_hunt_emphasis(rows, weights, document):
         "basePrioritySum": emphasis_base_priority,
         "benchmarkPriority": BUG_HUNT_EMPHASIS_PRIORITY,
         "totalPriority": total_priority,
-        "benchmarkWeightPct": round(100.0 * BUG_HUNT_EMPHASIS_PRIORITY / total_priority, 4),
+        "benchmarkWeightPct": quality_weight_pct(BUG_HUNT_EMPHASIS_PRIORITY, total_priority, emphasis_has_cost),
         "weights": emphasis_weights,
         "missingModels": missing_models,
         "excludedResults": document.get("excludedResults", []),
@@ -679,27 +713,20 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
 
-    aa_cost_rows = [row for row in primary_rows if row["aaEvalCost"] is not None]
-    max_aa_cost = (
-        max(require_number(row["aaEvalCost"], f"{row['id']}.aaEvalCost") for row in aa_cost_rows)
-        if aa_cost_rows
-        else None
-    )
-    if max_aa_cost is not None and max_aa_cost <= 0:
-        raise ValueError("AA evaluation cost normalization requires a positive maximum")
-    cost_mode = "aa-only" if aa_cost_rows else "unavailable (AA evaluation cost has no primary coverage)"
+    # Token efficiency: AA total evaluation cost per AA Intelligence Index point
+    # (USD per point, lower is better). A row without a cost or an Index has no cost value.
+    for row in rows:
+        if row["aaEvalCost"] is not None and require_number(row["aaEvalCost"], f"{row['id']}.aaEvalCost") <= 0:
+            raise ValueError(f"AA evaluation cost must be positive: {row['id']}")
+        row["aaCostPerIndexPoint"] = cost_per_index_point(row["aaEvalCost"], row.get("intelligenceIndex"))
+    aa_cost_rows = [row for row in primary_rows if row["aaCostPerIndexPoint"] is not None]
+    cost_mode = COST_MODE if aa_cost_rows else "unavailable (AA evaluation cost has no primary coverage)"
     for row in primary_rows:
         row["deepSweCostNorm"] = None
-        row["aaCostNorm"] = (
-            round((require_number(row["aaEvalCost"], f"{row['id']}.aaEvalCost") / max_aa_cost) * 100, 2)
-            if row["aaEvalCost"] is not None and max_aa_cost is not None
-            else None
-        )
-        row["costComposite"] = row["aaCostNorm"]
+        row["costComposite"] = row["aaCostPerIndexPoint"]
         row["costMode"] = cost_mode
     for row in unranked_rows:
         row["deepSweCostNorm"] = None
-        row["aaCostNorm"] = None
         row["costComposite"] = None
         row["costMode"] = cost_mode
 
@@ -734,14 +761,15 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         for key, label, _higher_better, _priority in CANDIDATES
         if coverage[key]["availableN"] < 2
     ]
-    raw_priority_sum = sum(candidate[3] for candidate in retained)
+    raw_priority_sum = sum(candidate[3] for candidate in retained if candidate[0] != COST_KEY)
+    cost_retained = any(candidate[0] == COST_KEY for candidate in retained)
     base_weights = [
         {
             "key": key,
             "label": label,
             "higherBetter": higher_better,
             "priority": priority,
-            "weightPct": round(100.0 * priority / raw_priority_sum, 4),
+            "weightPct": COST_WEIGHT_PCT if key == COST_KEY else quality_weight_pct(priority, raw_priority_sum, cost_retained),
         }
         for key, label, higher_better, priority in retained
     ] if raw_priority_sum else []
@@ -755,7 +783,9 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     weights = [
         {
             **weight,
-            "weightPct": round(100.0 * weight["priority"] / primary_total_priority, 4),
+            "weightPct": COST_WEIGHT_PCT
+            if weight["key"] == COST_KEY
+            else quality_weight_pct(weight["priority"], primary_total_priority, cost_retained),
         }
         for weight in base_weights
     ]
@@ -765,7 +795,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "label": "Bug Hunt Bench",
             "higherBetter": True,
             "priority": BUG_HUNT_PRIORITY,
-            "weightPct": round(100.0 * BUG_HUNT_PRIORITY / primary_total_priority, 4),
+            "weightPct": quality_weight_pct(BUG_HUNT_PRIORITY, primary_total_priority, cost_retained),
         })
     bug_hunt_primary_weight_pct = next(
         (weight["weightPct"] for weight in weights if weight["key"] == "bugHuntFixedOf105"),
@@ -838,48 +868,29 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             values.append(comparison_number(value, key, f"{row['id']}.{key}"))
         # Every retained weight has at least two observed primary values (see
         # ``retained`` and ``primary_has_bug_hunt_dimension``), so no guard is needed.
-        normalized = rank_normalize(values, weight["higherBetter"])
+        normalized = normalize_dimension(key, values, weight["higherBetter"])
         for row, score in zip(available_rows, normalized):
             row["dims"][key] = score
 
     effective_keys = [weight["key"] for weight in weights]
     for row in rows:
-        available_weights = [weight for weight in weights if weight["key"] in row["dims"]]
-        available_priority = sum(weight["priority"] for weight in available_weights)
+        available_priority = sum(
+            weight["priority"] for weight in weights
+            if weight["key"] != COST_KEY and weight["key"] in row["dims"]
+        )
+        has_cost = COST_KEY in row["dims"]
         row["metricCoverage"] = {
+            "costAvailable": has_cost,
             "availablePriority": available_priority,
             "totalPriority": primary_total_priority,
-            "coveragePct": round(100.0 * available_priority / primary_total_priority, 2)
-            if primary_total_priority
-            else 0.0,
+            "coveragePct": coverage_pct(has_cost, cost_retained, available_priority, primary_total_priority),
             "missingKeys": [key for key in effective_keys if key not in row["dims"]],
         }
 
     for row in primary_rows:
-        available_weights = [weight for weight in weights if weight["key"] in row["dims"]]
-        available_priority = sum(weight["priority"] for weight in available_weights)
-        quality_weights = [
-            weight for weight in available_weights if weight["key"] != "costComposite"
-        ]
-        quality_priority = sum(weight["priority"] for weight in quality_weights)
-        row["overallScore"] = (
-            round(
-                sum(row["dims"][weight["key"]] * weight["priority"] for weight in available_weights)
-                / available_priority,
-                1,
-            )
-            if available_priority and quality_priority
-            else None
-        )
-        row["qualityScore"] = (
-            round(
-                sum(row["dims"][weight["key"]] * weight["priority"] for weight in quality_weights)
-                / quality_priority,
-                1,
-            )
-            if quality_priority
-            else None
-        )
+        quality = quality_score(row["dims"], weights)
+        row["overallScore"] = blend(row["dims"].get(COST_KEY), quality)
+        row["qualityScore"] = round(quality, 1) if quality is not None else None
         row["isMissing"] = bool(row["missingFields"] or row["metricCoverage"]["missingKeys"])
         row["rank"] = None
         row["qualityRank"] = None

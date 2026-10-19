@@ -5,21 +5,27 @@ import { CATEGORY_COLORS, FALLBACK_COLOR, axisWith } from './theme.js';
 const COST_KEY = 'costComposite';
 
 /**
- * Points each category adds to the model's overall score: value x weight over the
- * weights of the dimensions that have a value (the renormalisation rule).
- * When costWeightPct is given the other weights are scaled to fill the rest.
+ * Points each category adds to the model's overall score (the fixed cost-share rule of
+ * valuerank.plan_costs.blend): cost takes its share when the model has a cost score and the
+ * available quality dimensions split the rest in proportion to their weights.
+ * costWeightPct overrides the published cost weight.
  */
 export function contributions(model, dimensions, basis, costWeightPct) {
   const costDim = dimensions.find((d) => d.key === COST_KEY);
-  const scale = costWeightPct == null ? 1 : (100 - costWeightPct) / (100 - (costDim?.weightPct ?? 0));
   const totals = Object.fromEntries(dimensions.map((d) => [d.category, 0]));
   const entries = dimensions.map((d) => ({
     category: d.category,
+    cost: d.key === COST_KEY,
     value: d.key === COST_KEY ? pick(model.costDims, basis) : (model.dims?.[d.key] ?? null),
-    weight: d.key === COST_KEY ? (costWeightPct ?? d.weightPct) : d.weightPct * scale,
-  })).filter((e) => finite(e.value) && e.weight > 0);
-  const available = entries.reduce((sum, e) => sum + e.weight, 0);
-  entries.forEach((e) => { totals[e.category] += (e.value * e.weight) / available; });
+    weight: d.weightPct,
+  })).filter((e) => finite(e.value));
+  const quality = entries.filter((e) => !e.cost);
+  const qualityWeight = quality.reduce((sum, e) => sum + e.weight, 0);
+  if (!(qualityWeight > 0)) return totals;
+  const cost = entries.find((e) => e.cost);
+  const share = cost ? (costWeightPct ?? costDim.weightPct) / 100 : 0;
+  if (cost) totals[cost.category] += cost.value * share;
+  quality.forEach((e) => { totals[e.category] += (e.value * e.weight * (1 - share)) / qualityWeight; });
   return totals;
 }
 

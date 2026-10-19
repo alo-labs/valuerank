@@ -114,4 +114,4 @@ def test_main_guard_runs_the_emitter(repo_copy, pinned_clock, monkeypatch, capsy
         runpy.run_module("valuerank.emit_docs", run_name="__main__", alter_sys=True)
     assert exit_info.value.code == 0
     assert (repo_copy / "README.md").read_text() == committed("README.md")
-    assert '"version": "v1.9.8"' in capsys.readouterr().out
+    assert '"version": "v2.0.0"' in capsys.readouterr().out

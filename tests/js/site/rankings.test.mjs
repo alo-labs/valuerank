@@ -55,8 +55,8 @@ test('the basis toggle switches rank order, cost header and unit, and the URL', 
   const p = mount();
   p.toggle.api.click();
   assert.deepEqual(slugsInOrder(p).slice(0, 3), ['beta', 'alpha', 'gamma']);
-  assert.match(header(p, 'cost').textContent, /API cost \(USD per Index run\)/);
-  assert.equal(cell(rows(p)[0], 'cost').textContent, '$2,500');
+  assert.match(header(p, 'cost').textContent, /API cost \(USD per Index point\)/);
+  assert.equal(cell(rows(p)[0], 'cost').textContent, '$2,500.00');
   assert.equal(lastUrl(p), '/rankings/?basis=api');
   assert.equal(p.toggle.api.getAttribute('aria-pressed'), 'true');
   p.toggle.plan.click();
@@ -232,7 +232,7 @@ test('compare drawer needs two models, then shows a side-by-side table and write
   const labels = bodyRows.map((r) => r.querySelector('th').textContent);
   assert.deepEqual(labels, ['Overall', 'Quality', 'Cost', 'Alpha bench', 'Beta bench']);
   const a = bodyRows[3];
-  assert.deepEqual([...a.querySelectorAll('td')].map((t) => t.textContent), ['80.0', '90.0']);
+  assert.deepEqual([...a.querySelectorAll('td')].map((t) => t.textContent), ['80.0', '84.0']);
   assert.equal(a.querySelectorAll('td')[1].classList.contains('is-best'), true);
   assert.equal(a.querySelectorAll('td')[0].classList.contains('is-best'), false);
   assert.deepEqual([...bodyRows[4].querySelectorAll('td')].map((t) => t.textContent), ['60.0', '—']);
@@ -301,7 +301,7 @@ test('the loading row is replaced by the table; basis labels and units follow th
   assert.equal(p.costUnit.textContent, 'USD per Index point');
   p.toggle.api.click();
   assert.equal(p.basisLabel.textContent, 'API ranking');
-  assert.equal(p.costUnit.textContent, 'USD per Index run');
+  assert.equal(p.costUnit.textContent, 'USD per Index point');
   assert.equal(p.win.document.documentElement.getAttribute('data-basis'), 'api');
 });
 
@@ -400,7 +400,7 @@ test('moving the cost weight re-renders the table and recomputes the picks from 
   // Gamma also leads the other basis at this weight, so the second card shows the quality leader instead.
   assert.equal(p.picks.other.label.textContent, 'Best quality, any cost');
   assert.equal(p.picks.other.name.textContent, 'Beta');
-  assert.equal(p.picks.other.score.textContent, '90.0quality');
+  assert.equal(p.picks.other.score.textContent, '84.0quality');
   assert.equal(p.sliderOut.textContent, '100.0%');
   assert.equal(p.win.history.calls.at(-1), '/?w=100');
 });
@@ -419,10 +419,10 @@ test('picks that are null are hidden', () => {
 });
 
 test('answer page reads its state from the URL and honours a custom model base', () => {
-  const page = indexPage({ search: '?basis=api&w=40' });
+  const page = indexPage({ search: '?basis=api&w=50' });
   page.body.setAttribute('data-model-base', '/m/');
   initIndex(page.win);
-  assert.equal(page.slider.value, '40');
+  assert.equal(page.slider.value, '50');
   assert.equal(page.toggle.api.getAttribute('aria-pressed'), 'true');
   assert.equal(cell(rows(page)[0], 'name').querySelector('a').getAttribute('href'), '/m/gamma/');
 });

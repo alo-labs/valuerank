@@ -6,7 +6,7 @@
 <header class="page-head">
   <p class="eyebrow">Methodology</p>
   <h1 id="page-title">How ValueRank scores a model</h1>
-  <p class="lead">A model's score is a weighted average of 0&ndash;100 dimension scores, one of which is cost. If a dimension has no eligible value for a model it is left out and the remaining weights are scaled to 100%, so a gap never counts as zero and never gets filled in.</p>
+  <p class="lead">A model's score is its value: cost per Intelligence Index point carries a fixed {{ num(page.costWeightPct, 0) }}% of the score and benchmark quality the other {{ num(100 - page.costWeightPct, 0) }}%. The quality part is a weighted average of 0&ndash;100 dimension scores. If a quality dimension has no eligible value for a model it is left out and the remaining quality weights are scaled up, so a gap never counts as zero and never gets filled in.</p>
 </header>
 
 <nav class="toc" aria-label="On this page">
@@ -66,7 +66,7 @@
 
 <section class="block" id="worked-example" aria-labelledby="example-title">
   <h2 id="example-title" class="section-title">Worked example: {{ w.name }}</h2>
-  <p>Each dimension score is multiplied by its weight, the products are added, and the sum is divided by the weight that actually had data ({{ w.availablePriority }} of {{ w.totalPriority }} priority points).</p>
+  <p>Cost takes its fixed {{ num(page.costWeightPct, 0) }}% share. Each quality score is multiplied by its weight, the products are added, and the sum is divided by the quality weight that actually had data ({{ w.availablePriority }} of {{ w.totalPriority }} priority points), which fills the remaining {{ num(100 - page.costWeightPct, 0) }}%.</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Worked example: {{ w.name }} table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Weight</th><th scope="col" class="col-num">Effective weight</th><th scope="col" class="col-num">Score (0&ndash;100)</th><th scope="col" class="col-num">Contribution</th></tr></thead>

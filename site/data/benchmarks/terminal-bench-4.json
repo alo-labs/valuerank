@@ -590,13 +590,19 @@
       "resolutionRatePct": 58.2,
       "evaluatedModel": "GPT-6 Astra (max)"
     },
+    "claude-opus-5-5": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
     "gpt-5-6-sol": {
       "status": "official",
       "rank": 11,
       "resolutionRatePct": 37.3,
       "evaluatedModel": "GPT-5.6 Sol (max)"
     },
-    "claude-opus-5-5": {
+    "mimo-v2-6-pro": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
@@ -614,7 +620,13 @@
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "mimo-v2-6-pro": {
+    "gpt-5-6-luna": {
+      "status": "official",
+      "rank": 18,
+      "resolutionRatePct": 17.3,
+      "evaluatedModel": "GPT-5.6 Luna (max)"
+    },
+    "gpt-6-luna": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
@@ -626,23 +638,17 @@
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "gpt-5-6-luna": {
-      "status": "official",
-      "rank": 18,
-      "resolutionRatePct": 17.3,
-      "evaluatedModel": "GPT-5.6 Luna (max)"
+    "claude-haiku-5-5": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
     },
     "gemini-3-8-flash": {
       "status": "official",
       "rank": 17,
       "resolutionRatePct": 19.1,
       "evaluatedModel": "Gemini 3.8 Flash (high)"
-    },
-    "gpt-6-luna": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
     },
     "claude-opus-5": {
       "status": "official",
@@ -655,12 +661,6 @@
       "rank": 9,
       "resolutionRatePct": 41.8,
       "evaluatedModel": "GLM-5.3 (max)"
-    },
-    "claude-haiku-5-5": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
     },
     "deepseek-v4-flash": {
       "status": "provider_claim",

@@ -16,7 +16,7 @@ Cost <small class="unit" data-cost-unit>{{ site.basis[site.defaultBasis].costUni
   <th scope="row" data-col="name" data-label="Model" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a><span class="model-dev">{{ m.developer }}</span></span></th>
   <td data-col="overall" data-label="Score" class="num">{{ num(m.overall[b]) }}</td>
   <td data-col="quality" data-label="Quality" class="num">{{ num(m.quality) }}</td>
-  <td data-col="cost" data-label="Cost" class="num">{% if b == "plan" %}{{ usd(m.cost.planUsdPerPoint if m.cost.planUsdPerPoint is not none else m.cost.planComparableUsdPerPoint, 2) }}{% else %}{{ usd(m.cost.apiUsd, 0) }}{% endif %}</td>
+  <td data-col="cost" data-label="Cost" class="num">{% if b == "plan" %}{{ usd(m.cost.planUsdPerPoint if m.cost.planUsdPerPoint is not none else m.cost.planComparableUsdPerPoint, 2) }}{% else %}{{ usd(m.cost.apiUsdPerPoint, 2) }}{% endif %}</td>
   <td data-col="grade" data-label="Evidence">{{ badge(m.grade) }}</td>
   <td data-col="coverage" data-label="Coverage">{{ coverage_bar(m.coverage) }}</td>
 </tr>

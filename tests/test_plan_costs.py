@@ -241,49 +241,63 @@ def test_effective_cost_rejects_an_invalid_multiple(route):
     assert plan_costs.effective_cost(100, route) is None
 
 
-# --- rank_cost_scores -------------------------------------------------------
+# --- cost_scores --------------------------------------------------------------
 
 
-def test_rank_cost_scores_of_nothing_known_is_all_none():
-    assert plan_costs.rank_cost_scores([None, None]) == [None, None]
-    assert plan_costs.rank_cost_scores([]) == []
+def test_cost_scores_of_nothing_known_is_all_none():
+    assert plan_costs.cost_scores([None, None]) == [None, None]
+    assert plan_costs.cost_scores([]) == []
 
 
 def test_a_single_known_cost_gets_a_neutral_score_and_gaps_are_kept():
-    assert plan_costs.rank_cost_scores([None, 7, None]) == [None, 50.0, None]
-
-
-def test_lower_costs_score_higher_on_a_zero_to_hundred_scale():
-    assert plan_costs.rank_cost_scores([1, 3, 2]) == [100.0, 0.0, 50.0]
-
-
-def test_tied_costs_share_the_average_rank():
-    # Two costs of 1 occupy ranks 1 and 2, so both take average rank 1.5 and score 75.
-    assert plan_costs.rank_cost_scores([1, 1, 2]) == [75.0, 75.0, 0.0]
+    assert plan_costs.cost_scores([None, 7, None]) == [None, 50.0, None]
 
 
 def test_identical_costs_all_score_the_midpoint():
-    assert plan_costs.rank_cost_scores([5, 5, 5]) == [50.0, 50.0, 50.0]
+    assert plan_costs.cost_scores([5, 5.0, 5]) == [50.0, 50.0, 50.0]
 
 
-def test_none_entries_do_not_take_rank_positions_in_ties():
-    assert plan_costs.rank_cost_scores([None, 5, None, 5, 9]) == [None, 75.0, None, 75.0, 0.0]
+def test_cheapest_scores_100_and_dearest_0():
+    assert plan_costs.cost_scores([1, 100, None]) == [100.0, 0.0, None]
 
 
-def test_integer_and_float_costs_with_equal_value_are_tied():
-    assert plan_costs.rank_cost_scores([2, 2.0, 1]) == [25.0, 25.0, 100.0]
+def test_cost_scores_keep_ratios_on_a_log_scale():
+    # 10 is ten times 1 and 100 ten times 10, so it sits exactly halfway.
+    assert plan_costs.cost_scores([1, 10, 100]) == [100.0, 50.0, 0.0]
+    # A tiny gap is a tiny penalty, unlike a rank where any gap is a full step.
+    assert plan_costs.cost_scores([1, 1.01, 100]) == [100.0, 99.8, 0.0]
 
 
-def test_scores_are_rounded_to_one_decimal_place():
-    assert plan_costs.rank_cost_scores([1, 2, 3, 4, 5, 6, 7]) == [
-        100.0,
-        83.3,
-        66.7,
-        50.0,
-        33.3,
-        16.7,
-        0.0,
-    ]
+def test_cost_scores_round_to_one_decimal_like_the_score_dimensions():
+    # scores.json stores every dimension at one decimal; the cost score must match it exactly
+    # so that recomputing the composite from the public data reproduces the committed score.
+    assert plan_costs.cost_scores([1, 2, 3]) == [100.0, 36.9, 0.0]
+
+
+@pytest.mark.parametrize("bad", [0, -1])
+def test_cost_scores_reject_non_positive_costs(bad):
+    with pytest.raises(ValueError, match="positive costs"):
+        plan_costs.cost_scores([1, bad])
+
+
+# --- blend -------------------------------------------------------------------
+
+
+def test_cost_carries_a_fixed_quarter_of_the_overall_score():
+    assert plan_costs.COST_WEIGHT_PCT == 25.0
+    assert plan_costs.blend(100, 60) == 70.0
+    assert plan_costs.blend(0, 80) == 60.0
+
+
+def test_blend_accepts_another_cost_weight():
+    assert plan_costs.blend(100, 60, 50) == 80.0
+    assert plan_costs.blend(100, 60, 0) == 60.0
+    assert plan_costs.blend(100, 60, 100) == 100.0
+
+
+def test_without_quality_there_is_no_overall_score_and_without_cost_quality_stands_alone():
+    assert plan_costs.blend(90, None) is None
+    assert plan_costs.blend(None, 61.25) == 61.2
 
 
 # --- cost_per_index_point ---------------------------------------------------
@@ -313,6 +327,7 @@ def test_an_eligible_route_prices_the_plan_in_usd_per_index_point():
 
     assert field == {
         "apiCost": 100,
+        "apiCostPerPoint": 2.0,
         "intelligenceIndex": 50,
         "planCostPerRun": 25.0,
         "planCost": 0.5,
@@ -398,7 +413,9 @@ def test_a_missing_intelligence_index_keeps_the_run_cost_but_cannot_be_ranked_pe
     assert field["planCost"] is None
     assert field["planComparableCost"] is None
     assert field["planCostScore"] is None
-    assert field["apiCostScore"] == 50.0
+    # The API basis also compares cost per Index point, so it cannot be scored either.
+    assert field["apiCostPerPoint"] is None
+    assert field["apiCostScore"] is None
 
 
 def test_a_missing_api_cost_without_a_route_has_no_comparable_cost():
@@ -460,11 +477,13 @@ def test_summary_of_the_committed_routes_accounts_for_every_model(repo_copy):
             assert field["planCostFallback"] == "api", model["id"]
 
 
-def test_rank_cost_scores_round_to_one_decimal_like_the_score_dimensions():
-    # scores.json stores every dimension at one decimal; the cost score must match it exactly
-    # so that recomputing the composite from the public data reproduces the committed score.
-    assert plan_costs.rank_cost_scores(list(range(1, 11)))[1] == 88.9
-    assert plan_costs.rank_cost_scores([3, 1, 2]) == [0.0, 100.0, 50.0]
+def test_api_basis_compares_cost_per_index_point_not_run_cost():
+    # The cheaper run buys too little intelligence: per point it is the dearer model.
+    cheap, strong = plan_costs.build_cost_fields(
+        [make_model("cheap", 100, index=10), make_model("strong", 300, index=60)], make_document()
+    )
+    assert (cheap["apiCostPerPoint"], strong["apiCostPerPoint"]) == (10.0, 5.0)
+    assert (cheap["apiCostScore"], strong["apiCostScore"]) == (0.0, 100.0)
 
 
 # --- owner-authorised Claude shared-plan assumption (2026-10-18) -------------
