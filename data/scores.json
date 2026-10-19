@@ -8801,25 +8801,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 12956046.0,
-            "gdpval-aa": 16405618.0,
-            "gdp-pdf": 843150.0,
-            "automationbench-aa": 21414709.0,
-            "terminalbench-4-0": 10911801.0,
-            "scicode": 2756082.0,
-            "artificial-analysis-long-context-reasoning": 219725.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 3146068939,
+                "output": 112847057,
+                "answer": 31335093,
+                "reasoning": 81511964
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 12956046.0,
+                "gdpval-aa": 16405618.0,
+                "gdp-pdf": 843150.0,
+                "automationbench-aa": 21414709.0,
+                "terminalbench-4-0": 10911801.0,
+                "scicode": 2756082.0,
+                "artificial-analysis-long-context-reasoning": 219725.0,
+                "humanitys-last-exam": 34047081.0,
+                "critpt": 7667312.0,
+                "omniscience": 5625533.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 3146068939,
-            "output": 112847057,
-            "answer": 31335093,
-            "reasoning": 81511964
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -9196,25 +9257,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 10464416.0,
-            "gdpval-aa": 10086282.0,
-            "gdp-pdf": 971770.0000000001,
-            "automationbench-aa": 9168900.0,
-            "terminalbench-4-0": 7140228.0,
-            "scicode": 1118799.0,
-            "artificial-analysis-long-context-reasoning": 107380.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 1383452045,
+                "output": 67198855,
+                "answer": 17360658,
+                "reasoning": 49838197
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 10464416.0,
+                "gdpval-aa": 10086282.0,
+                "gdp-pdf": 971770.0000000001,
+                "automationbench-aa": 9168900.0,
+                "terminalbench-4-0": 7140228.0,
+                "scicode": 1118799.0,
+                "artificial-analysis-long-context-reasoning": 107380.0,
+                "humanitys-last-exam": 16604440.0,
+                "critpt": 1643394.0,
+                "omniscience": 9893246.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 1383452045,
-            "output": 67198855,
-            "answer": 17360658,
-            "reasoning": 49838197
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -9664,25 +9786,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 56890995.0,
-            "gdpval-aa": 62804183.0,
-            "gdp-pdf": 4418913.0,
-            "automationbench-aa": 40018561.0,
-            "terminalbench-4-0": 25240331.0,
-            "scicode": 7772559.0,
-            "artificial-analysis-long-context-reasoning": 522287.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 18668251191,
+                "output": 415769956,
+                "answer": 57824089,
+                "reasoning": 357945867
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 56890995.0,
+                "gdpval-aa": 62804183.0,
+                "gdp-pdf": 4418913.0,
+                "automationbench-aa": 40018561.0,
+                "terminalbench-4-0": 25240331.0,
+                "scicode": 7772559.0,
+                "artificial-analysis-long-context-reasoning": 522287.0,
+                "humanitys-last-exam": 117172461.0,
+                "critpt": 13170965.0,
+                "omniscience": 87758701.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 18668251191,
-            "output": 415769956,
-            "answer": 57824089,
-            "reasoning": 357945867
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -10121,23 +10304,82 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 4066890.0,
-            "gdpval-aa": 5287847.0,
-            "gdp-pdf": 557942.0,
-            "automationbench-aa": 6776580.999999999,
-            "terminalbench-4-0": 2856172.0,
-            "scicode": 567601.0,
-            "artificial-analysis-long-context-reasoning": 53166.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 934379760,
+                "output": 37901142,
+                "answer": 13409872,
+                "reasoning": 24491270
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 4066890.0,
+                "gdpval-aa": 5287847.0,
+                "gdp-pdf": 557942.0,
+                "automationbench-aa": 6776580.999999999,
+                "terminalbench-4-0": 2856172.0,
+                "scicode": 567601.0,
+                "artificial-analysis-long-context-reasoning": 53166.0,
+                "humanitys-last-exam": 10792910.0,
+                "critpt": 1065425.0,
+                "omniscience": 5876608.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            }
           },
-          "componentsWithoutTokenTelemetry": [],
-          "indexCategoryTokens": {
-            "input": 934379760,
-            "output": 37901142,
-            "answer": 13409872,
-            "reasoning": 24491270
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -10489,25 +10731,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 30766989.0,
-            "gdpval-aa": 41178124.0,
-            "gdp-pdf": 4231945.0,
-            "automationbench-aa": 27006025.0,
-            "terminalbench-4-0": 16694596.0,
-            "scicode": 6510770.0,
-            "artificial-analysis-long-context-reasoning": 512047.99999999994
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 10978320412,
+                "output": 259888331,
+                "answer": 46031341,
+                "reasoning": 213856990
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 30766989.0,
+                "gdpval-aa": 41178124.0,
+                "gdp-pdf": 4231945.0,
+                "automationbench-aa": 27006025.0,
+                "terminalbench-4-0": 16694596.0,
+                "scicode": 6510770.0,
+                "artificial-analysis-long-context-reasoning": 512047.99999999994,
+                "humanitys-last-exam": 77325958.0,
+                "critpt": 7595161.0,
+                "omniscience": 48066715.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 10978320412,
-            "output": 259888331,
-            "answer": 46031341,
-            "reasoning": 213856990
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -10955,25 +11258,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 5280154.0,
-            "gdpval-aa": 8928180.0,
-            "gdp-pdf": 1415839.0,
-            "automationbench-aa": 10959674.000000002,
-            "terminalbench-4-0": 5077672.0,
-            "scicode": 1011994.0,
-            "artificial-analysis-long-context-reasoning": 121408.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 2729472126,
+                "output": 89979207,
+                "answer": 17377727,
+                "reasoning": 72601480
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 5280154.0,
+                "gdpval-aa": 8928180.0,
+                "gdp-pdf": 1415839.0,
+                "automationbench-aa": 10959674.000000002,
+                "terminalbench-4-0": 5077672.0,
+                "scicode": 1011994.0,
+                "artificial-analysis-long-context-reasoning": 121408.0,
+                "humanitys-last-exam": 28781964.0,
+                "critpt": 2955551.0,
+                "omniscience": 25446771.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 2729472126,
-            "output": 89979207,
-            "answer": 17377727,
-            "reasoning": 72601480
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -11406,23 +11770,82 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 14914154.999999998,
-            "gdpval-aa": 19346525.0,
-            "gdp-pdf": 926362.0000000001,
-            "automationbench-aa": 13890143.0,
-            "terminalbench-4-0": 12176073.0,
-            "scicode": 2033124.0,
-            "artificial-analysis-long-context-reasoning": 217103.00000000003
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 4427596878,
+                "output": 143690985,
+                "answer": 38703160,
+                "reasoning": 104987825
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 14914154.999999998,
+                "gdpval-aa": 19346525.0,
+                "gdp-pdf": 926362.0000000001,
+                "automationbench-aa": 13890143.0,
+                "terminalbench-4-0": 12176073.0,
+                "scicode": 2033124.0,
+                "artificial-analysis-long-context-reasoning": 217103.00000000003,
+                "humanitys-last-exam": 48536838.0,
+                "critpt": 4710188.0,
+                "omniscience": 26940474.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            }
           },
-          "componentsWithoutTokenTelemetry": [],
-          "indexCategoryTokens": {
-            "input": 4427596878,
-            "output": 143690985,
-            "answer": 38703160,
-            "reasoning": 104987825
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -11787,25 +12210,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 6196372,
-            "gdpval-aa": 9100782.0,
-            "gdp-pdf": 1026815.0,
-            "automationbench-aa": 8893095.0,
-            "terminalbench-4-0": 6426551.0,
-            "scicode": 1110600.0,
-            "artificial-analysis-long-context-reasoning": 95354.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 2494962325,
+                "output": 76751405,
+                "answer": 14183887,
+                "reasoning": 62567518
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 6196372,
+                "gdpval-aa": 9100782.0,
+                "gdp-pdf": 1026815.0,
+                "automationbench-aa": 8893095.0,
+                "terminalbench-4-0": 6426551.0,
+                "scicode": 1110600.0,
+                "artificial-analysis-long-context-reasoning": 95354.0,
+                "humanitys-last-exam": 25699362.0,
+                "critpt": 2229360,
+                "omniscience": 15973114.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 2494962325,
-            "output": 76751405,
-            "answer": 14183887,
-            "reasoning": 62567518
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -12238,25 +12722,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 14671423.0,
-            "gdpval-aa": 29842981.0,
-            "gdp-pdf": 1704483.0000000002,
-            "automationbench-aa": 20766121.0,
-            "terminalbench-4-0": 10434479.0,
-            "scicode": 6162673.0,
-            "artificial-analysis-long-context-reasoning": 921682.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 4188838973,
+                "output": 240410045,
+                "answer": 27473948,
+                "reasoning": 212936097
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 14671423.0,
+                "gdpval-aa": 29842981.0,
+                "gdp-pdf": 1704483.0000000002,
+                "automationbench-aa": 20766121.0,
+                "terminalbench-4-0": 10434479.0,
+                "scicode": 6162673.0,
+                "artificial-analysis-long-context-reasoning": 921682.0,
+                "humanitys-last-exam": 111230948.0,
+                "critpt": 10577404.0,
+                "omniscience": 34097851.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 4188838973,
-            "output": 240410045,
-            "answer": 27473948,
-            "reasoning": 212936097
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -12670,25 +13215,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 7089191.0,
-            "gdpval-aa": 7498042.999999999,
-            "gdp-pdf": 2043858.0000000002,
-            "automationbench-aa": 15233005.0,
-            "terminalbench-4-0": 8834278.0,
-            "scicode": 2090857.0,
-            "artificial-analysis-long-context-reasoning": 170977.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 4880927437,
+                "output": 153656724,
+                "answer": 18347818,
+                "reasoning": 135308906
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 7089191.0,
+                "gdpval-aa": 7498042.999999999,
+                "gdp-pdf": 2043858.0000000002,
+                "automationbench-aa": 15233005.0,
+                "terminalbench-4-0": 8834278.0,
+                "scicode": 2090857.0,
+                "artificial-analysis-long-context-reasoning": 170977.0,
+                "humanitys-last-exam": 52501119.0,
+                "critpt": 3457801.0,
+                "omniscience": 54737595.00000001
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 4880927437,
-            "output": 153656724,
-            "answer": 18347818,
-            "reasoning": 135308906
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -13111,25 +13717,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 10011694.0,
-            "gdpval-aa": 13430307.0,
-            "gdp-pdf": 2483115.0,
-            "automationbench-aa": 22360386.0,
-            "terminalbench-4-0": 9304268.0,
-            "scicode": 1988886.0,
-            "artificial-analysis-long-context-reasoning": 150852.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 3146391012,
+                "output": 144380994,
+                "answer": 16144377,
+                "reasoning": 128236617
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 10011694.0,
+                "gdpval-aa": 13430307.0,
+                "gdp-pdf": 2483115.0,
+                "automationbench-aa": 22360386.0,
+                "terminalbench-4-0": 9304268.0,
+                "scicode": 1988886.0,
+                "artificial-analysis-long-context-reasoning": 150852.0,
+                "humanitys-last-exam": 50846645.0,
+                "critpt": 3672555.0,
+                "omniscience": 30132286.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 3146391012,
-            "output": 144380994,
-            "answer": 16144377,
-            "reasoning": 128236617
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -13580,23 +14247,82 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 14679574,
-            "gdpval-aa": 22310920.0,
-            "gdp-pdf": 551116.0,
-            "automationbench-aa": 15418861.0,
-            "terminalbench-4-0": 15600156,
-            "scicode": 2471164.0,
-            "artificial-analysis-long-context-reasoning": 149497.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 5537710083,
+                "output": 244682440,
+                "answer": 26149270,
+                "reasoning": 218533170
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 14679574,
+                "gdpval-aa": 22310920.0,
+                "gdp-pdf": 551116.0,
+                "automationbench-aa": 15418861.0,
+                "terminalbench-4-0": 15600156,
+                "scicode": 2471164.0,
+                "artificial-analysis-long-context-reasoning": 149497.0,
+                "humanitys-last-exam": 94819613.0,
+                "critpt": 7737281.0,
+                "omniscience": 70944258.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            }
           },
-          "componentsWithoutTokenTelemetry": [],
-          "indexCategoryTokens": {
-            "input": 5537710083,
-            "output": 244682440,
-            "answer": 26149270,
-            "reasoning": 218533170
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -13931,25 +14657,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 21867377.0,
-            "gdpval-aa": 20478312.0,
-            "gdp-pdf": 1941875.0,
-            "automationbench-aa": 18387808.0,
-            "terminalbench-4-0": 15298833.0,
-            "scicode": 1328405.0,
-            "artificial-analysis-long-context-reasoning": 193491.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 4454825207,
+                "output": 179986858,
+                "answer": 29496266,
+                "reasoning": 150490592
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 21867377.0,
+                "gdpval-aa": 20478312.0,
+                "gdp-pdf": 1941875.0,
+                "automationbench-aa": 18387808.0,
+                "terminalbench-4-0": 15298833.0,
+                "scicode": 1328405.0,
+                "artificial-analysis-long-context-reasoning": 193491.0,
+                "humanitys-last-exam": 82205572.0,
+                "critpt": 9044538.0,
+                "omniscience": 9240647.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 4454825207,
-            "output": 179986858,
-            "answer": 29496266,
-            "reasoning": 150490592
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -14368,25 +15155,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 14034950.0,
-            "gdpval-aa": 29315302.999999996,
-            "gdp-pdf": 1281501.0,
-            "automationbench-aa": 30406339.0,
-            "terminalbench-4-0": 12122515.0,
-            "scicode": 5755216.0,
-            "artificial-analysis-long-context-reasoning": 491312.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 5973510492,
+                "output": 172228415,
+                "answer": 36241494,
+                "reasoning": 135986921
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 14034950.0,
+                "gdpval-aa": 29315302.999999996,
+                "gdp-pdf": 1281501.0,
+                "automationbench-aa": 30406339.0,
+                "terminalbench-4-0": 12122515.0,
+                "scicode": 5755216.0,
+                "artificial-analysis-long-context-reasoning": 491312.0,
+                "humanitys-last-exam": 52796458.0,
+                "critpt": 5157385.0,
+                "omniscience": 20867436.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 5973510492,
-            "output": 172228415,
-            "answer": 36241494,
-            "reasoning": 135986921
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -14793,25 +15641,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 15477246.0,
-            "gdpval-aa": 21391813.0,
-            "gdp-pdf": 815573.0,
-            "automationbench-aa": 15879696.0,
-            "terminalbench-4-0": 13537254.0,
-            "scicode": 1124418.0,
-            "artificial-analysis-long-context-reasoning": 173770.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 5522853815,
+                "output": 140355897,
+                "answer": 39652358,
+                "reasoning": 100703539
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 15477246.0,
+                "gdpval-aa": 21391813.0,
+                "gdp-pdf": 815573.0,
+                "automationbench-aa": 15879696.0,
+                "terminalbench-4-0": 13537254.0,
+                "scicode": 1124418.0,
+                "artificial-analysis-long-context-reasoning": 173770.0,
+                "humanitys-last-exam": 57950314.99999999,
+                "critpt": 7999639.0,
+                "omniscience": 6006173.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 5522853815,
-            "output": 140355897,
-            "answer": 39652358,
-            "reasoning": 100703539
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -15202,25 +16111,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 12406503.0,
-            "gdpval-aa": 20772998.0,
-            "gdp-pdf": 2841710.0,
-            "automationbench-aa": 18224087.0,
-            "terminalbench-4-0": 12841347.0,
-            "scicode": 5044211.0,
-            "artificial-analysis-long-context-reasoning": 280574.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 5405967611,
+                "output": 208643973,
+                "answer": 29141271,
+                "reasoning": 179502702
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 12406503.0,
+                "gdpval-aa": 20772998.0,
+                "gdp-pdf": 2841710.0,
+                "automationbench-aa": 18224087.0,
+                "terminalbench-4-0": 12841347.0,
+                "scicode": 5044211.0,
+                "artificial-analysis-long-context-reasoning": 280574.0,
+                "humanitys-last-exam": 113978285.0,
+                "critpt": 6996495.0,
+                "omniscience": 15257763.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 5405967611,
-            "output": 208643973,
-            "answer": 29141271,
-            "reasoning": 179502702
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -15627,25 +16597,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 9858025.0,
-            "gdpval-aa": 20849338.0,
-            "gdp-pdf": 2413766.0,
-            "automationbench-aa": 23845462.0,
-            "terminalbench-4-0": 9689610.0,
-            "scicode": 9013129.0,
-            "artificial-analysis-long-context-reasoning": 420387.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 4317353554,
+                "output": 242335641,
+                "answer": 24781642,
+                "reasoning": 217553999
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 9858025.0,
+                "gdpval-aa": 20849338.0,
+                "gdp-pdf": 2413766.0,
+                "automationbench-aa": 23845462.0,
+                "terminalbench-4-0": 9689610.0,
+                "scicode": 9013129.0,
+                "artificial-analysis-long-context-reasoning": 420387.0,
+                "humanitys-last-exam": 69819926.0,
+                "critpt": 6007843.0,
+                "omniscience": 90418155.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 4317353554,
-            "output": 242335641,
-            "answer": 24781642,
-            "reasoning": 217553999
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -15994,25 +17025,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 30402791.0,
-            "gdpval-aa": 26899971.0,
-            "gdp-pdf": 1127935.0,
-            "automationbench-aa": 14401549.0,
-            "terminalbench-4-0": 19305800.0,
-            "scicode": 5057462.0,
-            "artificial-analysis-long-context-reasoning": 259544.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 9896761467,
+                "output": 191963342,
+                "answer": 43134084,
+                "reasoning": 148829258
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 30402791.0,
+                "gdpval-aa": 26899971.0,
+                "gdp-pdf": 1127935.0,
+                "automationbench-aa": 14401549.0,
+                "terminalbench-4-0": 19305800.0,
+                "scicode": 5057462.0,
+                "artificial-analysis-long-context-reasoning": 259544.0,
+                "humanitys-last-exam": 80070176.0,
+                "critpt": 5668503.0,
+                "omniscience": 8769611.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 9896761467,
-            "output": 191963342,
-            "answer": 43134084,
-            "reasoning": 148829258
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -16419,25 +17511,86 @@
         "configurationMapped": true,
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
-          "componentOutputTokens": {
-            "aa-briefcase": 8385669.0,
-            "gdpval-aa": 15251779.999999998,
-            "gdp-pdf": 1664034.9999999998,
-            "automationbench-aa": 24331279.0,
-            "terminalbench-4-0": 11319934.0,
-            "scicode": 3439457.0,
-            "artificial-analysis-long-context-reasoning": 323719.0
+          "populations": {
+            "intelligence-index": {
+              "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+              "conservationTotal": {
+                "input": 5438520642,
+                "output": 162876499,
+                "answer": 24730335,
+                "reasoning": 138146164
+              },
+              "scoredComponents": [
+                "aa-briefcase",
+                "gdpval-aa",
+                "gdp-pdf",
+                "automationbench-aa",
+                "terminalbench-4-0",
+                "scicode",
+                "artificial-analysis-long-context-reasoning"
+              ],
+              "residualComponents": [
+                "humanitys-last-exam",
+                "critpt",
+                "omniscience"
+              ],
+              "componentOutputTokens": {
+                "aa-briefcase": 8385669.0,
+                "gdpval-aa": 15251779.999999998,
+                "gdp-pdf": 1664034.9999999998,
+                "automationbench-aa": 24331279.0,
+                "terminalbench-4-0": 11319934.0,
+                "scicode": 3439457.0,
+                "artificial-analysis-long-context-reasoning": 323719.0,
+                "humanitys-last-exam": 73682569.0,
+                "critpt": 5948872.0,
+                "omniscience": 18529185.0
+              },
+              "outputEqualsReasoningPlusAnswer": true
+            },
+            "coding-agent-index": {
+              "conservationTotalId": null,
+              "status": "no public category telemetry; demand unconstrained beyond its cost identity"
+            }
           },
-          "componentsWithoutTokenTelemetry": [
-            "coding-agent-index"
-          ],
-          "indexCategoryTokens": {
-            "input": 5438520642,
-            "output": 162876499,
-            "answer": 24730335,
-            "reasoning": 138146164
+          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "tokenOntology": {
+            "intelligenceIndexEvaluations[].outputTokensPerTask": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.output": {
+              "canonical": [
+                "reasoning",
+                "answer"
+              ],
+              "mapping": "inclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.reasoning": {
+              "canonical": [
+                "reasoning"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.answer": {
+              "canonical": [
+                "answer"
+              ],
+              "mapping": "exclusive"
+            },
+            "canonicalIntelligenceIndexTokenCount.input": {
+              "canonical": [
+                "uncached input",
+                "cache read",
+                "cache write"
+              ],
+              "mapping": "inclusive"
+            }
           },
-          "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"

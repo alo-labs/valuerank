@@ -120,21 +120,52 @@ def row_components(page: dict, cai_record: dict | None, chart_rows: dict) -> tup
     return components, reconciliation
 
 
+# E131: each source token field's mapping onto the exclusive canonical coordinates.
+TOKEN_ONTOLOGY = {
+    "intelligenceIndexEvaluations[].outputTokensPerTask": {"canonical": ["reasoning", "answer"], "mapping": "inclusive"},
+    "canonicalIntelligenceIndexTokenCount.output": {"canonical": ["reasoning", "answer"], "mapping": "inclusive"},
+    "canonicalIntelligenceIndexTokenCount.reasoning": {"canonical": ["reasoning"], "mapping": "exclusive"},
+    "canonicalIntelligenceIndexTokenCount.answer": {"canonical": ["answer"], "mapping": "exclusive"},
+    "canonicalIntelligenceIndexTokenCount.input": {"canonical": ["uncached input", "cache read", "cache write"], "mapping": "inclusive"},
+}
+INDEX_COMPONENTS = {**basket.INDEX_SDLC_TASKS, **basket.INDEX_RESIDUAL_TASKS}
+
+
 def demand_registry(page: dict, admitted: list[str]) -> dict:
-    """E124: the set-identified demand region for the admitted basket from AA's public telemetry (never rescaled)."""
+    """E124/E130/E131: set-identified demand populations from AA's public telemetry (never rescaled).
+
+    The ten Intelligence Index executions are one population, conserved against
+    AA's Index-wide token totals, with the excluded evaluations kept as residual
+    demand; the Coding Agent Index is its own population (AA publishes no category
+    telemetry for it). Output token fields are inclusive of reasoning and answer.
+    """
 
     evaluations = {item.get("slug"): item for item in page.get("intelligenceIndexEvaluations") or []}
     outputs = {
         slug: evaluations[slug]["outputTokensPerTask"] * tasks
-        for slug, tasks in basket.INDEX_SDLC_TASKS.items()
-        if slug in admitted and (evaluations.get(slug) or {}).get("outputTokensPerTask") is not None
+        for slug, tasks in INDEX_COMPONENTS.items()
+        if (evaluations.get(slug) or {}).get("outputTokensPerTask") is not None
     }
+    totals = page.get("canonicalIntelligenceIndexTokenCount") or {}
+    inclusive = totals.get("output") is not None and totals.get("reasoning") is not None and totals.get("answer") is not None
+    populations = {
+        "intelligence-index": {
+            "conservationTotalId": "canonicalIntelligenceIndexTokenCount",
+            "conservationTotal": totals or None,
+            "scoredComponents": [slug for slug in basket.INDEX_SDLC_TASKS if slug in admitted],
+            "residualComponents": list(basket.INDEX_RESIDUAL_TASKS),
+            "componentOutputTokens": outputs,
+            "outputEqualsReasoningPlusAnswer": (totals["output"] == totals["reasoning"] + totals["answer"]) if inclusive else None,
+        },
+    }
+    if basket.CODING_AGENT_INDEX in admitted:
+        populations[basket.CODING_AGENT_INDEX] = {"conservationTotalId": None, "status": "no public category telemetry; demand unconstrained beyond its cost identity"}
     return {
         "status": "set-identified feasible region; M_W not identified",
-        "componentOutputTokens": outputs,
-        "componentsWithoutTokenTelemetry": [component for component in admitted if component not in outputs],
-        "indexCategoryTokens": page.get("canonicalIntelligenceIndexTokenCount"),
-        "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+        "populations": populations,
+        "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+        "tokenOntology": TOKEN_ONTOLOGY,
+        "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
         "missingForIdentification": ["category-specific burn coefficients for each plan meter", "or a controlled measurement on a workload compatible with W"],
     }
 

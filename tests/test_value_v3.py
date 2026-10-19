@@ -394,8 +394,19 @@ def test_abstention_sensitivity_and_demand_registry():
     assert rows["a"]["quality"]["leaves"]["omniscience"]["abstentionPenalisedZ"] == 0.0
     assert rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == pytest.approx(0.5 * 0.6)
     registry = rows["a"]["demandRegistry"]
-    assert registry["componentsWithoutTokenTelemetry"] == [basket.CODING_AGENT_INDEX, *basket.INDEX_SDLC_TASKS]
+    assert set(registry["populations"]) == {"intelligence-index", basket.CODING_AGENT_INDEX}
+    index_population = registry["populations"]["intelligence-index"]
+    assert index_population["residualComponents"] == list(basket.INDEX_RESIDUAL_TASKS) and index_population["componentOutputTokens"] == {}
+    assert index_population["outputEqualsReasoningPlusAnswer"] is None
     stability = output["diagnostics"]["anchorStability"]
     assert stability["exchangeRateSeries"][0]["anchorVersion"] == frozen["anchorVersion"]
-    tokens = v.demand_registry({"intelligenceIndexEvaluations": [{"slug": "scicode", "outputTokensPerTask": 10.0}]}, ["scicode", "gdp-pdf"])
-    assert tokens["componentOutputTokens"] == {"scicode": 2880.0} and tokens["componentsWithoutTokenTelemetry"] == ["gdp-pdf"]
+    tokens = v.demand_registry(
+        {"intelligenceIndexEvaluations": [{"slug": "scicode", "outputTokensPerTask": 10.0}, {"slug": "critpt", "outputTokensPerTask": 1.0}],
+         "canonicalIntelligenceIndexTokenCount": {"input": 9, "output": 5, "reasoning": 3, "answer": 2}},
+        ["scicode", "gdp-pdf"],
+    )
+    population = tokens["populations"]["intelligence-index"]
+    # Residual (excluded) evaluations keep their demand outside W; the Coding Agent Index is not admitted here.
+    assert population["componentOutputTokens"] == {"scicode": 2880.0, "critpt": 70.0} and population["scoredComponents"] == ["gdp-pdf", "scicode"]
+    assert population["outputEqualsReasoningPlusAnswer"] is True and set(tokens["populations"]) == {"intelligence-index"}
+    assert tokens["tokenOntology"]["canonicalIntelligenceIndexTokenCount.output"]["mapping"] == "inclusive"

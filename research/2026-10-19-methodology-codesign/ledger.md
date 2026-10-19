@@ -520,3 +520,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 36 (GLM 5.3, round 6, Thinking) — adopted with the two exceptions above
 - E124–E129.
+
+## Editor decisions after reviewer 37 (owner may override)
+- E130. Demand accounting populations: the ten Index executions conserve against AA's Index-wide category totals with the three excluded evaluations as residual demand; the Coding Agent Index is its own population (no public category telemetry today); d_iW = Σ_S d_ie + d_iA; registry fields and three fixtures. Answers Gemini Q1: the implementation already kept the populations separate (the registry lists the Coding Agent Index among components without token telemetry and uses Index totals only for Index evaluations); the draft now states it.
+- E131. Token ontology: exclusive canonical coordinates; AA's output tokens are inclusive of reasoning and answer (verified 37,901,142 = 13,409,872 + 24,491,270); subtraction only with matching support; three independent validations; equal-price fixture.
+- E132. E121 defined over dependency blocks: blocks partition primitives, roles map onto blocks, merged when they share primitives, 2^B assignments over the non-empty blocks (eight in v1 when the role blocks are distinct), restricted coverage disclosed, assignment-set version named; four fixtures. Answers Gemini Q2 without escalation: exhaustive over non-overlapping dependency blocks (the v1 code already merges coincident blocks).
+
+## Reviewer 37 (Gemini 3.8 Flash, round 6, Thinking) — adopted
+- All findings (E130–E132).
+
+# Round 6 complete (reviewers 32–37). Every panel model returned HAS FEEDBACK; round 7 starts with GPT-6.1 Sol on draft r37.
+
+# Round 7 (reviewer 38 onward)
