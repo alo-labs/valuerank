@@ -305,3 +305,18 @@ def test_valuation_status_and_interval_eligibility():
     assert table["now"]["officialDisplayEligible"] and table["now"]["planIntervalEligible"]
     assert table["old"]["case"] == 4 and not table["old"]["officialDisplayEligible"]
     assert table["unknown"]["officialDisplayEligible"] and not table["unknown"]["planIntervalEligible"]
+
+
+def test_measurement_capacity_status():
+    """E139: concordance never upgrades capacity; a recorded status wins."""
+
+    assert pr.measurement_capacity_status(route("c", 50)) == pr.CAPACITY_ESTABLISHED
+    transfer = route("t", 10, kind="user_assumption", source_kind="controlled_account_workload_projection")
+    assert pr.measurement_capacity_status(transfer) == pr.CAPACITY_ESTABLISHED
+    reports = route("r", 5, kind="user_reported_projection", independentReports=[comparable_report("a", 5.0), comparable_report("b", 5.2)])
+    assert pr.measurement_capacity_status(reports) == pr.CAPACITY_UNVERIFIED
+    assert pr.measurement_capacity_status(dict(reports, measurementCapacityStatus=pr.CAPACITY_OBSERVED)) == pr.CAPACITY_OBSERVED
+    assert pr.measurement_capacity_status(dict(reports, measurementCapacityStatus="anything else")) == pr.CAPACITY_UNVERIFIED
+    flagged = pr.plan_cost(100.0, {"route": reports, "grade": "reports", "identification": "unidentified", "expiry": "fresh"})
+    assert "observed-usage multiple; full utilisation not established" in flagged["flags"]
+    assert flagged["measurementCapacityStatus"] == pr.CAPACITY_UNVERIFIED

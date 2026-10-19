@@ -112,7 +112,7 @@ def test_admitted_components_require_two_thirds_of_ranked_rows():
         "c": {"scicode": FULL},
     }
     admitted = b.admitted_components(costs, ranked)
-    assert admitted[b.CODING_AGENT_INDEX] == {"admitted": True, "referencePanel": ["a", "b"], "covered": 2, "available": 2, "ranked": 3}
+    assert admitted[b.CODING_AGENT_INDEX] == {"admitted": True, "covered": 2, "available": 2, "ranked": 3}
     assert admitted["frontiercode"]["admitted"] is False
     assert admitted["scicode"]["admitted"] is True
     assert admitted["itbench-aa"]["covered"] == 0
@@ -131,10 +131,10 @@ def test_admission_panel_is_joint_and_deterministic():
     for row in ("a", "b", "c", "d"):
         costs[row]["itbench-aa"] = FULL
     panel = b.admission_panel(costs, ranked)
-    assert panel["admissionOrder"][:4] == ["scicode", b.CODING_AGENT_INDEX, "frontiercode", "itbench-aa"]
     components = panel["components"]
-    assert components[b.CODING_AGENT_INDEX]["admitted"] is True  # 5/6 jointly with SciCode
-    assert components["frontiercode"]["admitted"] is True and components["frontiercode"]["referencePanel"] == ["b", "c", "d", "e"]
+    assert components[b.CODING_AGENT_INDEX]["admitted"] is True
+    # {CAI, FrontierCode, SciCode} and {CAI, ITBench, SciCode} both reach (3 components, 4 rows): target order picks FrontierCode.
+    assert components["frontiercode"]["admitted"] is True and panel["objective"] == [3, 4] and panel["feasibleAlternatives"] == 11
     # ITBench alone covers 4/6, but jointly only b, c, d (3/6): pending.
     assert components["itbench-aa"]["covered"] == 4 and components["itbench-aa"]["admitted"] is False
     assert panel["referencePanel"] == ["b", "c", "d", "e"] and panel["jointCovered"] == 4
@@ -189,3 +189,18 @@ def test_expenditure_shares_and_concentration():
     assert hhi == pytest.approx(0.625)
     assert b.expenditure_shares({}, ["p"]) == ({}, None)
     assert b.expenditure_shares({"p": comp(0.0)}, ["p"]) == ({}, None)
+
+
+def test_admission_enumerates_subsets_instead_of_a_greedy_order():
+    """E140 fixture: A on rows 1-5, B and C on rows 1, 2, 3, 6 (N = 6): a greedy coverage order admits only A."""
+
+    ranked = ["1", "2", "3", "4", "5", "6"]
+    costs = {row: {} for row in ranked}
+    for row in ("1", "2", "3", "4", "5"):
+        costs[row][b.CODING_AGENT_INDEX] = FULL
+    for row in ("1", "2", "3", "6"):
+        costs[row]["frontiercode"] = FULL
+        costs[row]["itbench-aa"] = FULL
+    panel = b.admission_panel(costs, ranked)
+    assert panel["admitted"] == ["frontiercode", "itbench-aa"] and panel["referencePanel"] == ["1", "2", "3", "6"]
+    assert panel["objective"] == [2, 4] and panel["components"][b.CODING_AGENT_INDEX]["admitted"] is False

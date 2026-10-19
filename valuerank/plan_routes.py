@@ -122,6 +122,28 @@ def expiry_status(route: dict, release_day: date) -> str:
     return "fresh"
 
 
+CAPACITY_ESTABLISHED = "capacity established on the measurement workload"
+CAPACITY_OBSERVED = "observed usage; capacity not established"
+CAPACITY_UNVERIFIED = "saturation unverified"
+CAPACITY_STATUSES = (CAPACITY_ESTABLISHED, CAPACITY_OBSERVED, CAPACITY_UNVERIFIED)
+
+
+def measurement_capacity_status(route: dict) -> str:
+    """E139: whether the measurement established capacity on its own workload (separate from transport to W).
+
+    A recorded status wins; otherwise a controlled saturation measurement (the donor's,
+    for an owner-named transfer) establishes capacity, and anything else is unverified.
+    """
+
+    recorded = route.get("measurementCapacityStatus")
+    if recorded in CAPACITY_STATUSES:
+        return recorded
+    kind, source_kind = route.get("valueMultipleKind"), route.get("sourceEvidenceClass")
+    if kind in CONTROLLED_KINDS or (kind in ASSUMPTION_KINDS and source_kind in CONTROLLED_KINDS):
+        return CAPACITY_ESTABLISHED
+    return CAPACITY_UNVERIFIED
+
+
 def valuation_status(route: dict) -> str:
     """E138: release / revalued / different (O7 price-basis mismatch) / unverified (basis not recorded)."""
 
@@ -342,6 +364,8 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         flags.append(selected["expiry"])
     if valuation_status(route) == "unverified":
         flags.append("valuation basis unverified")
+    if measurement_capacity_status(route) != CAPACITY_ESTABLISHED:
+        flags.append("observed-usage multiple; full utilisation not established")
     return {
         "costUsd": api_cost / comparison_multiple(route),
         "fallback": None,
@@ -349,6 +373,7 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         "multiple": comparison_multiple(route),
         "grade": selected["grade"],
         "identification": selected["identification"],
+        "measurementCapacityStatus": measurement_capacity_status(route),
         "flags": flags,
     }
 

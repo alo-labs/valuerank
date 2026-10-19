@@ -7527,262 +7527,71 @@
       "components": {
         "coding-agent-index": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 16,
           "available": 16,
           "ranked": 19
         },
         "frontiercode": {
           "admitted": false,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "claude-opus-5-5",
-            "grok-4.7",
-            "gpt-6-luna",
-            "gemini-3.8-flash",
-            "glm-5.3",
-            "qwen3.8-max"
-          ],
           "covered": 10,
           "available": 11,
           "ranked": 19
         },
         "itbench-aa": {
           "admitted": false,
-          "referencePanel": [
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gemini-3.8-flash",
-            "glm-5.3",
-            "qwen3.8-max"
-          ],
           "covered": 7,
           "available": 7,
           "ranked": 19
         },
         "aa-briefcase": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "gpt-6-astra",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "mimo-v2-6-pro",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "mimo-v2-6-flash",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 19,
           "available": 19,
           "ranked": 19
         },
         "gdpval-aa": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "gpt-6-astra",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "mimo-v2-6-pro",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "mimo-v2-6-flash",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 19,
           "available": 19,
           "ranked": 19
         },
         "gdp-pdf": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "gpt-6-astra",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "mimo-v2-6-pro",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "mimo-v2-6-flash",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 19,
           "available": 19,
           "ranked": 19
         },
         "automationbench-aa": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "gpt-6-astra",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "mimo-v2-6-pro",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "mimo-v2-6-flash",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 19,
           "available": 19,
           "ranked": 19
         },
         "terminalbench-4-0": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "gpt-6-astra",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "mimo-v2-6-pro",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "mimo-v2-6-flash",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 19,
           "available": 19,
           "ranked": 19
         },
         "scicode": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "gpt-6-astra",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "mimo-v2-6-pro",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "mimo-v2-6-flash",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 19,
           "available": 19,
           "ranked": 19
         },
         "artificial-analysis-long-context-reasoning": {
           "admitted": true,
-          "referencePanel": [
-            "gemini-4-argon",
-            "gpt-6.1-sol",
-            "claude-sonnet-5-5",
-            "gpt-6-astra",
-            "claude-opus-5-5",
-            "gpt-5.6-sol",
-            "mimo-v2-6-pro",
-            "gpt-6-sol",
-            "grok-4.7",
-            "gpt-5.6-luna",
-            "gpt-6-luna",
-            "mimo-v2-6-flash",
-            "claude-haiku-5-5",
-            "gemini-3.8-flash",
-            "claude-opus-5",
-            "glm-5.3",
-            "deepseek-v4-flash",
-            "qwen3.8-max",
-            "deepseek-v4-pro"
-          ],
           "covered": 19,
           "available": 19,
           "ranked": 19
         }
       },
-      "admissionOrder": [
-        "aa-briefcase",
-        "gdpval-aa",
-        "gdp-pdf",
-        "automationbench-aa",
-        "terminalbench-4-0",
-        "scicode",
-        "artificial-analysis-long-context-reasoning",
-        "coding-agent-index",
-        "frontiercode",
-        "itbench-aa"
+      "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds",
+      "objective": [
+        8,
+        16
       ],
+      "feasibleAlternatives": 255,
       "admitted": [
         "coding-agent-index",
         "aa-briefcase",
@@ -9706,6 +9515,7 @@
           "multiple": 10.772,
           "grade": "controlled",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "valuation basis unverified"
@@ -10236,6 +10046,7 @@
           "multiple": 58.9,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -10653,6 +10464,7 @@
           "multiple": 8.1,
           "grade": "controlled",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "valuation basis unverified"
@@ -11193,6 +11005,7 @@
           "multiple": 58.9,
           "grade": "controlled",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "valuation basis unverified"
@@ -11693,6 +11506,7 @@
           "multiple": 10.772,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -12170,10 +11984,12 @@
           "multiple": 1.5,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "saturation unverified",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
-            "valuation basis unverified"
+            "valuation basis unverified",
+            "observed-usage multiple; full utilisation not established"
           ],
           "selectionReason": "only remaining eligible route",
           "dominatedRoutes": {},
@@ -12647,6 +12463,7 @@
           "multiple": 10.772,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -13643,6 +13460,7 @@
           "multiple": 10.772,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -14174,6 +13992,7 @@
           "multiple": 10.772,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -14621,10 +14440,12 @@
           "multiple": 1.5,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "saturation unverified",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
-            "valuation basis unverified"
+            "valuation basis unverified",
+            "observed-usage multiple; full utilisation not established"
           ],
           "selectionReason": "only remaining eligible route",
           "dominatedRoutes": {},
@@ -15096,6 +14917,7 @@
           "multiple": 58.9,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -16053,6 +15875,7 @@
           "multiple": 58.9,
           "grade": "assumption",
           "identification": "unidentified",
+          "measurementCapacityStatus": "capacity established on the measurement workload",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",

@@ -548,3 +548,10 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 39 (Claude Sonnet 5.5, round 7, Thinking) — adopted (E138 partly, reason above)
 - E137, E138.
+
+## Editor decisions after reviewer 40 (owner may override)
+- E139. Measurement capacity status per measurement object (capacity established / observed usage, capacity not established / saturation unverified) with saturation and balance evidence; reports without established capacity are labelled "observed-usage multiple; full utilisation not established"; concordance never upgrades the status; fixed-cash attainable-consumption lower bound, E105 otherwise. Answers Grok Q1 without escalation: O11 admits concordant reports without a saturation requirement; adding one would change an owner decision, so the status is disclosed instead.
+- E140. Basket admission by exhaustive enumeration of component subsets (2¹⁰ today) with |P(S)| ≥ ⌈2N/3⌉, maximising component count, then panel size, then target order; selected set, objective tuple and feasible alternatives published; Grok's counterexample as fixture; replaces E95's greedy order; current outcome unchanged (verified: eight components, 16-row panel). Answers Grok Q2 without escalation: O15 lists the components without priorities, so the count objective applies.
+
+## Reviewer 40 (Grok 4.7, round 7, Thinking) — adopted
+- All findings (E139–E140).

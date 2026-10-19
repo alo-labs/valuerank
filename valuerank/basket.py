@@ -17,6 +17,7 @@ incomplete by AA (FullCost, owner decision O27).
 from __future__ import annotations
 
 import hashlib
+import itertools
 import json
 import math
 from fractions import Fraction
@@ -158,15 +159,15 @@ def chart_component(row: dict | None, *, source: str) -> dict | None:
 
 
 def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
-    """E26/E95/E101: one reference panel per workload version, built deterministically on complete evidence.
+    """E26/E101/E140: the admitted basket and its reference panel, chosen by exhaustive enumeration.
 
-    A_ie = exact compatible cost available; K_ie = CompleteCostEvidence(i, e)
-    (exact cost without AA's missing- or declined-task marker). Candidate
-    components are taken in descending order of complete-evidence coverage (target
-    order breaks ties). A component is admitted only if the rows complete on it and
-    on every component admitted before it still number at least two-thirds of the
-    ranked rows; that set is the reference panel P_K, frozen at admission. P_A,
-    the exact-cost panel on the same admitted components, is published beside it.
+    A_ie = exact compatible cost available; K_ie = CompleteCostEvidence(i, e) (exact
+    cost without AA's missing- or declined-task marker). Every subset S of the target
+    components whose complete-evidence panel P(S) holds at least two-thirds of the
+    ranked rows is feasible; the selected subset maximises, lexicographically, the
+    number of components, then |P(S)|, then the earliest components in target
+    order. P(S) is the reference panel, frozen at admission; P_A, the exact-cost
+    panel on the same components, is published beside it.
     """
 
     def available(row_id: str, component: str) -> bool:
@@ -175,41 +176,47 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
     def complete(row_id: str, component: str) -> bool:
         return available(row_id, component) and costs_by_row[row_id][component]["completeness"] == COMPLETE
 
-    marginal = {component: sum(1 for row_id in ranked_ids if complete(row_id, component)) for component in TARGET_COMPONENTS}
-    order = sorted(TARGET_COMPONENTS, key=lambda component: (-marginal[component], TARGET_COMPONENTS.index(component)))
-    panel = list(ranked_ids)
-    components = {}
-    for component in order:
-        candidate = [row_id for row_id in panel if complete(row_id, component)]
-        admitted = bool(ranked_ids) and Fraction(len(candidate), len(ranked_ids)) >= ADMISSION_SHARE
-        if admitted:
-            panel = candidate
-        components[component] = {
-            "admitted": admitted,
-            "referencePanel": candidate,
-            "covered": marginal[component],
-            "available": sum(1 for row_id in ranked_ids if available(row_id, component)),
-            "ranked": len(ranked_ids),
-        }
-    admitted_set = [component for component in TARGET_COMPONENTS if components[component]["admitted"]]
+    required = math.ceil(ADMISSION_SHARE * len(ranked_ids))
+    complete_rows = {component: {row_id for row_id in ranked_ids if complete(row_id, component)} for component in TARGET_COMPONENTS}
+    best, feasible = None, 0
+    for size in range(len(TARGET_COMPONENTS), 0, -1):
+        # combinations() yields subsets in target order, so the first best key is the earliest one.
+        for subset in itertools.combinations(TARGET_COMPONENTS, size):
+            panel = set(ranked_ids).intersection(*(complete_rows[component] for component in subset))
+            if ranked_ids and len(panel) >= required:
+                feasible += 1
+                if best is None or (size, len(panel)) > best[0]:
+                    best = ((size, len(panel)), subset, panel)
+    admitted = [component for component in TARGET_COMPONENTS if best and component in best[1]]
+    panel = [row_id for row_id in ranked_ids if best and row_id in best[2]]
     return {
-        "components": {component: components[component] for component in TARGET_COMPONENTS},
-        "admissionOrder": order,
-        "admitted": admitted_set,
+        "components": {
+            component: {
+                "admitted": component in admitted,
+                "covered": len(complete_rows[component]),
+                "available": sum(1 for row_id in ranked_ids if available(row_id, component)),
+                "ranked": len(ranked_ids),
+            }
+            for component in TARGET_COMPONENTS
+        },
+        "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds",
+        "objective": list(best[0]) if best else None,
+        "feasibleAlternatives": feasible,
+        "admitted": admitted,
         "referencePanel": panel,
-        "exactCostPanel": [row_id for row_id in ranked_ids if all(available(row_id, component) for component in admitted_set)],
+        "exactCostPanel": [row_id for row_id in ranked_ids if admitted and all(available(row_id, component) for component in admitted)],
         "matrices": {
             "exactCostAvailable": {row_id: {component: available(row_id, component) for component in TARGET_COMPONENTS} for row_id in ranked_ids},
             "completeCostEvidence": {row_id: {component: complete(row_id, component) for component in TARGET_COMPONENTS} for row_id in ranked_ids},
         },
         "jointCovered": len(panel),
         "ranked": len(ranked_ids),
-        "requiredPanelSize": math.ceil(ADMISSION_SHARE * len(ranked_ids)),
+        "requiredPanelSize": required,
     }
 
 
 def admitted_components(costs_by_row: dict, ranked_ids: list[str]) -> dict:
-    """Per-component admission under the E95/E101 joint panel rule."""
+    """Per-component admission under the E101/E140 rule."""
 
     return admission_panel(costs_by_row, ranked_ids)["components"]
 
