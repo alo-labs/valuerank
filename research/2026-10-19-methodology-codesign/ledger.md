@@ -361,3 +361,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Adopted: basket labelling (E59), identification yield (E61), independent-source check (E62), active-rules manifest (E63), cost-weight disclosure (E60), overlap and Bug Hunt sensitivity (E64).
 - Corrected premise: "only one basket component is admissible" — incorrect; the seven Index SDLC evaluations (19/19) and the Coding Agent Index (16/19) are admitted (8 of 10 target components). The draft's capture-status wording was ambiguous and is fixed.
 - No change: the 30-day soft expiry already fires on detected change and acts as a backstop; the Omniscience reconstruction is already tested against AA's published fields each release.
+
+## Owner decisions (after round-4 reviewer 22)
+- O27. The Coding Agent Index cost record is AA's documented cost-to-run metric (average pay-per-token API cost per task — a pooled per-task-attempt average that excludes missing telemetry, per AA's coding-agents methodology page, verified 2026-10-19) × the 303 required tasks. A component is incomplete only where AA itself marks tasks missing or declined (e.g. the chart "*" marker); unseen telemetry gaps and unequal attempt coverage are cost precision (scenario layer). Supersedes the T = n·μ completeness certificate (E47) and resolves reviewer 22's two High findings.
+
+## Editor decisions after reviewer 22 (owner may override)
+- E65. Paired-panel rank changes: baseline and branch ranks on their common evaluable panel, with panel size, exclusions, scores, retained weight and workload hash; release-wide changes labelled as including composition effects.
+- E66. E62 split into two named checks on one matched panel: quality agreement (observed quality vs independent-only quality) and quality-substitution value agreement (value with Q_ind, cost held fixed; not a validation of costs or multiples). Answers Grok Q2: both questions are published, named separately.
+- E67. Plan identification taxonomy: point-identified / set-identified (finite positive interval) / unidentified, with representation recorded; point- and set-identified routes are eligible; yield counts them separately.
+- Answer to Grok Q1: AA documents its coding-agent cost, tokens and time as pooled per-task-attempt averages that exclude missing telemetry (artificialanalysis.ai/methodology/coding-agents-benchmarking, 2026-10-19); sums.costUsd is not documented and is kept as a diagnostic.
+
+## Reviewer 22 (Grok 4.7, round 4, Thinking) — adopted
+- Aggregation and chart-marker findings resolved by O27; paired panels (E65); E62 estimands (E66); Plan taxonomy (E67).
