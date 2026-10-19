@@ -224,3 +224,19 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Loosen pair SWE gate to 30% and one anchor: rejected; loosening a gate to produce more certificates weakens the evidence behind "recommended".
 - Omniscience N = 100(1 − i/total): rejected; the leaf follows AA's own hallucination definition (incorrect ÷ non-correct), and abstention is already penalised through accuracy A at 2/3 weight. The cited examples are not non-monotonic.
 - Within-group Dirichlet α = 200 × w for uniform CV: rejected; the reviewer's premise is off (science leaves are 12.5% of their group, so α = 6.25 gives CV ≈ 37% on a 1.25% leaf, i.e. ±0.46 weight points); Dirichlet CV necessarily varies with share, and realised per-leaf CV is already published.
+
+# Round 3 begins
+
+## Owner decisions (after round-3 reviewer 14)
+- O18. Certification is blocked by a value-margin workload check: an edge must also hold when cost is computed on the matched priced-leaf workload (own frozen anchors); a cost-order reversal alone is a published warning.
+- O19. Certification constraints are limited to published intervals, public repeated runs, structural bounds and full score domains; analyst-assumed allowances (e.g. repeatability bands) are sensitivity-only.
+
+## Editor decisions after reviewer 14 (owner may override)
+- E20. Anchor object: c_L = reference min ÷ 2, c_H = reference max × 2 (reference cohort never clips); one governing clip gate per basis (hold if > max(1, 10% of rows) clip or any row is beyond an anchor by > 2×); first-release fixture must pass.
+- E21. Definite/possible frontier defined over the joint admissible set with full-composite quality.
+- E22. Target-basket readiness table with per-model expenditure shares and HHI (diagnostic).
+- E23. Price-cancellation release test split into uniform-scaling, proportional-mix and category-repricing cases.
+- Superseded formulas (harmonic token-mix multiple, full-composite value certificate, 5% blocking rule in the summary) removed from governing text.
+
+## Reviewer 14 (GPT-6.1 Sol, round 3, Thinking) — adopted
+- All findings: clip-gate initialisation contradiction (E20), price-test condition (E23), value-margin blocker (O18), frontier quantifiers (E21), readiness/concentration (E22), repeatability constraint basis (O19), superseded formulas removed.

@@ -7,6 +7,7 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - O6 SWE leaves: DeepSWE 30, Bug Hunt 10, FrontierCode 10, Terminal-Bench 10 (share of quality). O8 No quality floor; exchange rate disclosed. O10 One quality vector for both bases.
 - O11 Official Plan routes need a controlled saturation measurement or ≥2 independent concordant reports (±20%). O12 Failed release gate holds the release. O13 Routes past 90-day expiry + 30-day grace are diagnostic-only (API-cost fallback, flagged). O14 c_SWE is diagnostic only.
 - O15 Scored API cost = SDLC cost basket (Coding Agent Index incl. DeepSWE, FrontierCode, ITBench-AA, MMMU-Pro, Briefcase, GDPval, GDP.pdf, AutomationBench, Terminal-Bench 4.0, SciCode, LCR; excluded HLE, Omniscience, CritPt), phased by capture. O16 Plan rows without identified M_W are scored and flagged; certification needs identification. O17 A row missing a basket component is scored on its subset, flagged, compared on the identical subset.
+- O18 Certification blocked only by a value-margin check on the matched priced-leaf workload (own anchors); cost-order reversal is a warning. O19 Certificate constraints = published intervals, public repeated runs, structural bounds or full score domains; analyst allowances are sensitivity-only.
 
 ## Editor decisions (owner may override)
 - E1. Certification set fixes nominal weights, primary price rule, frozen route and linear GDPval map; specification robustness is published separately.
@@ -29,6 +30,7 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - E18. Soft-expiry change detection is scoped to pricing, rate-limit and model-availability sections; ≥2 independent user reports of an undocumented limit change also trigger it (answers Gemini Q1).
 - E19. Harness-mismatch stress branch for Bug Hunt from tbench.ai same-model cross-agent spreads (S2 stress only).
 - Answer to Gemini Q2: a model lacking exact-variant DeepSWE stays ranked and provisional (not certifiable) until that run exists.
+- E20 Anchors = reference min ÷ 2 / max × 2; one clip gate (> max(1,10%) rows or > 2× beyond anchor holds release). E21 Joint-set frontier definitions. E22 Target-basket readiness and expenditure HHI. E23 Three-case price-cancellation tests.
 
 ## Rejected or modified claims (do not repeat without a new argument)
 - "AA's frontier plots cost per task": rejected; the captured chart is total cost to run the Index (both fields recorded).
@@ -49,3 +51,4 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - R11 Kimi K3: M_W transport to the scored workload, governing pairwise formula, Omniscience denominator, workload object.
 - R12 GLM 5.3: outgoing-edge certification, simultaneous scenario leadership, margin-based validity, subset calibration, Plan measurement/transport split, named robustness estimands.
 - R13 Gemini 3.8 Flash: fixed certificate exchange rate, workday-feasible diagnostic, explicit pair SWE gate, token-only matched cost, scoped change detection, harness stress branch.
+- R14 GPT-6.1 Sol: clip-gate initialisation, value-margin blocker (O18), constraint basis (O19), frontier quantifiers, readiness table, price tests, superseded formulas removed.
