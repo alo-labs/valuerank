@@ -327,3 +327,23 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Note: the first Gemini run failed because Perplexity's home page did not render its composer; the driver now reloads with backoff and the review was re-run on the same prompt.
 
 # Round 3 complete (reviewers 14–19). Every panel model returned HAS FEEDBACK on its draft; round 4 starts with GPT-6.1 Sol on draft r19.
+
+# Round 4 begins (reviewer 20 onward)
+
+## Owner decisions (after round-4 reviewer 20)
+- O26. LiveBench instruction following is retired (LiveBench 2.0, released 2026-10-14, has no instruction-following suite; verified on livebench.ai 2026-10-19: categories Agentic, Reasoning, Coding, Browser Use, Data Analysis, Research, Design). AA-Omniscience takes the reliability group's full 10%. Independent (non-AA-executed) quality weight becomes ≈20%.
+
+## Editor decisions after reviewer 20 (owner may override)
+- E53. Completeness unit stays the task support of the deployment-equivalent pass (E9); attempt coverage (e.g. 905 of 909 attempts) is published as a precision diagnostic and enters only the scenario layer (O25). Modifies reviewer 20's attempt-level eligibility proposal, which would leave no row eligible because AA publishes no per-attempt cost telemetry (answers GPT Q3: the capture documents per-component attempt counts, aggregate totals and means only).
+- E54. Funding-aware Plan capacity: purchase policy per route (default: conditional on the measured additional cash — answers GPT Q1), non-overlapping funding flows, shared limits bind combined flows; unidentified when payment-to-capacity relationships are not public.
+- E55. Matched cost over canonical execution families with frozen diagnostic weights; quality leaves reference one family; split invariance restated (fixes the algebraic contradiction in the r19 test).
+- E56. Capacity results publish feasible lower bound, relaxed upper bound, grid resolution and optimality scope; point capacity only when the bounds coincide; otherwise the interval enters Θ.
+- E57. Exposure vectors by dataset origin, execution organisation, harness and grader, computed from admitted evidence; leave-AA-out by execution organisation.
+- E58. Scenario targets and sampling levels per stochastic input; expected-performance uncertainty kept separate from run-to-run variation.
+- Answer to GPT Q2: no current LiveBench instruction-following artifact exists for the cohort (resolved by O26).
+
+## Reviewer 20 (GPT-6.1 Sol, round 4, Thinking) — adopted
+- LiveBench source finding (O26), funding-aware capacity (E54), matched-cost invariance (E55), capacity bounds (E56), scenario targets (E58), exposure vectors (E57).
+
+## Reviewer 20 (GPT-6.1 Sol) — modified
+- Attempt-level completeness as an eligibility gate: modified (E53). Under E9 the estimand is one deployment-equivalent pass with repetitions averaged; missing repetitions change the precision of a task's mean, not the support of the pass, and under O25 precision belongs to the scenario layer. Attempt coverage is published.
