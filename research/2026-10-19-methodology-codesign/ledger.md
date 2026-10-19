@@ -194,3 +194,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Workload object: unique execution components, aggregate/component exclusivity, frozen membership per version, migration bridge.
 - Matched-cost blocker reads C_W; either blocker fails certification; reversal defined with interval separation.
 - Exchange rates computed from active anchors; additional release tests.
+
+## Editor decisions after reviewer 12 (owner may override)
+- E10. Subset calibration contract: each used subset is a versioned workload W_S with frozen subset anchors from reference configurations evidenced on it; paired full/subset results are published; the row keeps its O17 score and position, labelled "cross-workload ordering not identified" (answers GLM Q1 from O17's "flagged" wording).
+- E11. Certificate validity is margin-based: every retained input enters through an admissible constraint or its documented domain worst case; no constraint and no domain = unevaluable. The 5% rule is only a disclosure trigger.
+- E12. Plan uncertainty split: measurement object (S0) vs transport object (S1); "not separable" label where public evidence cannot split them.
+- E13. Robustness outputs are named estimands; "S2 maximum rank change" means displayed-score rank; pairwise recommendation robustness is reported as edge changes (answers GLM Q2).
+
+## Reviewer 12 (GLM 5.3, round 2, Thinking) — adopted
+- Certified = certified outgoing win against every competitor; "undefeated" is a diagnostic; four-state pair outcome; per-pair machine-readable record.
+- Simultaneous scenario-leadership event L_i(s) for the 90% rule; undefined comparisons are not wins.
+- E10–E13; Omniscience prose wording aligned with AA's hallucination definition; three new release tests.
+- Source adapter keys total run cost vs weighted cost per task by field identity (already in the source contract; reaffirmed).
