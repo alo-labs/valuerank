@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "inputHash": "0f45ea79e15d8f63cbaaea2b4338104b721af82360bbd7c1ca09a566c55ca225",
+  "inputHash": "bc23c1fe9f52b50e9be24dbc92f246e8a91325e991ec6442a0fc5d34914ad994",
   "seed": 20261017,
   "scenarios": 10000,
   "streamDescriptions": {
     "S0": "published-record reporting precision",
     "S1": "published-record reporting precision + conventional identification of missing leaves",
-    "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress"
+    "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+    "S1M": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)"
   },
   "notQuantified": [
     "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares",
@@ -23,6 +24,13 @@
         "variedTargets": [
           "reporting precision"
         ],
+        "qualityEquation": "observed leaves, renormalised (observed-only score)",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "observed-only score frontier frequency",
+          "qualifies": "qualifying-at-the-bar frequency (observed leaves, renormalised (observed-only score))"
+        },
         "scenarios": 10000,
         "seed": 20261017,
         "alternative": false,
@@ -300,6 +308,13 @@
           "identification convention",
           "reporting precision"
         ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under conventional missing-evidence draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
         "scenarios": 10000,
         "seed": 20261018,
         "alternative": false,
@@ -579,6 +594,13 @@
           "reporting precision",
           "specification stress"
         ],
+        "qualityEquation": "full composite, hierarchical weight draw",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under missing-evidence and weight-stress draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, hierarchical weight draw)"
+        },
         "scenarios": 10000,
         "seed": 20261019,
         "alternative": false,
@@ -856,6 +878,13 @@
           "identification convention",
           "reporting precision"
         ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under conventional missing-evidence draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
         "scenarios": 10000,
         "seed": 20261020,
         "alternative": true,
@@ -1121,6 +1150,292 @@
           }
         },
         "pairwise": []
+      },
+      {
+        "stratum": "S1M",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "permittedTargets": [
+          "expected performance",
+          "identification convention",
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "expected performance",
+          "identification convention",
+          "reporting precision"
+        ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under missing-evidence and published-interval draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
+        "scenarios": 10000,
+        "seed": 20261021,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.3042,
+              "monteCarloSe": 0.004600677776154292
+            },
+            "top1": {
+              "share": 0.0961,
+              "monteCarloSe": 0.002947283325369314
+            },
+            "frontier": {
+              "share": 0.7379,
+              "monteCarloSe": 0.00439776750181271
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.9907,
+              "monteCarloSe": 0.0009598703037389986
+            },
+            "top1": {
+              "share": 0.5607,
+              "monteCarloSe": 0.004963018335650192
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.5405,
+              "monteCarloSe": 0.0049835705071765565
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.1667,
+              "monteCarloSe": 0.00372707807806598
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.002,
+              "monteCarloSe": 0.0004467661580737735
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0828,
+              "monteCarloSe": 0.0027557967994756073
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0508,
+              "monteCarloSe": 0.0021958907076628383
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.1159,
+              "monteCarloSe": 0.003201049671592117
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.3652,
+              "monteCarloSe": 0.004814861991791665
+            },
+            "top1": {
+              "share": 0.1485,
+              "monteCarloSe": 0.0035559492403576293
+            },
+            "frontier": {
+              "share": 0.5002,
+              "monteCarloSe": 0.004999999599999984
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.8954,
+              "monteCarloSe": 0.0030603731798589536
+            },
+            "top1": {
+              "share": 0.0242,
+              "monteCarloSe": 0.0015366964566888284
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.0366,
+              "monteCarloSe": 0.0018777763445096437
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.1777,
+              "monteCarloSe": 0.0038226000313922462
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0462,
+              "monteCarloSe": 0.002099179839842218
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.3131,
+              "monteCarloSe": 0.004637546657447233
+            },
+            "top1": {
+              "share": 0.1645,
+              "monteCarloSe": 0.0037072867436981453
+            },
+            "frontier": {
+              "share": 0.5747,
+              "monteCarloSe": 0.004943884201718321
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.042,
+              "monteCarloSe": 0.0020058913230780974
+            },
+            "top1": {
+              "share": 0.006,
+              "monteCarloSe": 0.0007722693830523129
+            },
+            "frontier": {
+              "share": 0.3704,
+              "monteCarloSe": 0.004829118346033777
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
       }
     ],
     "plan": [
@@ -1133,6 +1448,13 @@
         "variedTargets": [
           "reporting precision"
         ],
+        "qualityEquation": "observed leaves, renormalised (observed-only score)",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "observed-only score frontier frequency",
+          "qualifies": "qualifying-at-the-bar frequency (observed leaves, renormalised (observed-only score))"
+        },
         "scenarios": 10000,
         "seed": 20261017,
         "alternative": false,
@@ -1410,6 +1732,13 @@
           "identification convention",
           "reporting precision"
         ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under conventional missing-evidence draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
         "scenarios": 10000,
         "seed": 20261018,
         "alternative": false,
@@ -1689,6 +2018,13 @@
           "reporting precision",
           "specification stress"
         ],
+        "qualityEquation": "full composite, hierarchical weight draw",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under missing-evidence and weight-stress draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, hierarchical weight draw)"
+        },
         "scenarios": 10000,
         "seed": 20261019,
         "alternative": false,
@@ -1966,6 +2302,13 @@
           "identification convention",
           "reporting precision"
         ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under conventional missing-evidence draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
         "scenarios": 10000,
         "seed": 20261020,
         "alternative": true,
@@ -2231,6 +2574,292 @@
           }
         },
         "pairwise": []
+      },
+      {
+        "stratum": "S1M",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "permittedTargets": [
+          "expected performance",
+          "identification convention",
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "expected performance",
+          "identification convention",
+          "reporting precision"
+        ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under missing-evidence and published-interval draws",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
+        "scenarios": 10000,
+        "seed": 20261021,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.4411,
+              "monteCarloSe": 0.00496518670343825
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.7574,
+              "monteCarloSe": 0.004286551527743485
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.9999,
+              "monteCarloSe": 9.999499987498824e-05
+            },
+            "top1": {
+              "share": 0.9023,
+              "monteCarloSe": 0.0029690858862619655
+            },
+            "frontier": {
+              "share": 0.9792,
+              "monteCarloSe": 0.0014271425997425778
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.9987,
+              "monteCarloSe": 0.00036032069049666963
+            },
+            "top1": {
+              "share": 0.0668,
+              "monteCarloSe": 0.0024967530915170604
+            },
+            "frontier": {
+              "share": 0.3038,
+              "monteCarloSe": 0.004598973363697597
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6781,
+              "monteCarloSe": 0.004672048694095557
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6863,
+              "monteCarloSe": 0.004639960236898588
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.1704,
+              "monteCarloSe": 0.003759838294395119
+            },
+            "top1": {
+              "share": 0.0052,
+              "monteCarloSe": 0.0007192329247191065
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0736,
+              "monteCarloSe": 0.002611188235267615
+            },
+            "top1": {
+              "share": 0.0257,
+              "monteCarloSe": 0.0015823877527331915
+            },
+            "frontier": {
+              "share": 0.1219,
+              "monteCarloSe": 0.003271702767673127
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
       }
     ]
   },
@@ -2257,7 +2886,7 @@
               "uniqueLabelEligible": true,
               "labelAuthorized": true,
               "decisionTarget": {
-                "qualityEquation": "full composite",
+                "qualityEquation": "full composite, nominal weights",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
                 "variedTargets": [
@@ -2287,7 +2916,7 @@
               "uniqueLabelEligible": true,
               "labelAuthorized": true,
               "decisionTarget": {
-                "qualityEquation": "full composite",
+                "qualityEquation": "full composite, nominal weights",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
                 "variedTargets": [
@@ -2333,7 +2962,7 @@
               "uniqueLabelEligible": true,
               "labelAuthorized": true,
               "decisionTarget": {
-                "qualityEquation": "full composite",
+                "qualityEquation": "full composite, nominal weights",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
                 "variedTargets": [
@@ -2365,7 +2994,7 @@
               "uniqueLabelEligible": true,
               "labelAuthorized": true,
               "decisionTarget": {
-                "qualityEquation": "full composite",
+                "qualityEquation": "full composite, nominal weights",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
                 "variedTargets": [

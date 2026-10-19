@@ -428,6 +428,14 @@
         "top1": 0.0,
         "top3": 0.7874,
         "frontier": 1.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "top1": 0.0242,
+        "top3": 0.8954,
+        "frontier": 1.0
       }
     ],
     "plan": [
@@ -462,6 +470,14 @@
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.6311
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.6863
       }
     ]
   },

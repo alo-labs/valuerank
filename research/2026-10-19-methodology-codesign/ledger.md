@@ -611,3 +611,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 47 (Kimi K3, round 8, Thinking) — adopted
 - All findings (E157–E159).
+
+## Editor decisions after reviewer 48 (owner may override)
+- E160. Anchor-panel policy object recorded with the anchors: complete-cost-evidence configurations on every workload component (the admission reference panel on the main workload), Plan anchors from the same configurations at their displayed Plan cost including transfers and API fallbacks, minimum two references (unavailable subset anchors leave those rows unscored; the main workload must meet it), frozen IDs and costs, a rule or population change is a new anchor version. Verified: the re-freeze changed no anchor (16 references on the main workload, 19 on the subset). Answers GLM Q1 without escalation: O13 and O16 score fallback and transfer rows in the Plan table, and the clip gate would hold a release whose Plan anchors excluded them.
+- E161. Stream events name their quality equation and event label (S0 observed-only score frontier; S1 and S2 full-composite frontier); S0-to-S1 differences are reported as a change of target plus identification draws; the scenario file and decision signatures carry the fields.
+
+## Reviewer 48 (GLM 5.3, round 8, Thinking) — adopted
+- All findings (E160–E161). The first submission of this prompt (130,745 characters) was silently not accepted by Perplexity's composer; the draft's revision-history paragraph and the brief's index were condensed (124,938 characters) and the review was rerun.
+
+## Editor decision after the editor's own verification (owner may override)
+- E162. Expected-performance stream S1M: tbench.ai documents its ± as a 95% confidence interval (accuracy_ci95_half_width, with n_trials; verified on the leaderboard page 2026-10-19), so "none in v1" (E145, E155) was wrong for Terminal-Bench, and O25 says published confidence intervals are reported through scenario shares. S1M = S1 plus that interval as an interval-only expected-performance input (uniform with arcsine alternative, clipped); other leaves publish no interval (Bug Hunt's owner publishes run means and counts only); S1M never authorises labels. Implemented and published beside S1.

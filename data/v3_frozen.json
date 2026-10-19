@@ -107,7 +107,8 @@
           "high": 13400.043925611271,
           "padding": 2.0
         }
-      }
+      },
+      "anchorStatus": "frozen"
     },
     "1453a9a0576b02ea": {
       "components": [
@@ -221,7 +222,8 @@
           "high": 8725.810901443347,
           "padding": 2.0
         }
-      }
+      },
+      "anchorStatus": "frozen"
     }
   },
   "barReferences": [
@@ -230,6 +232,15 @@
       "rule": "median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)"
     }
   ],
+  "anchorPolicy": {
+    "policyId": "complete-evidence-panel",
+    "version": 1,
+    "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
+    "planRule": "the same configurations at their displayed Plan cost: measured routes, owner-named transfers and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them",
+    "minimumReferences": 2,
+    "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
+    "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor"
+  },
   "barPolicy": {
     "policyId": "median-definite-frontier",
     "version": 1,

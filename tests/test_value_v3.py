@@ -146,9 +146,45 @@ def test_freeze_anchors_and_bar_reference():
     subset = next(entry for entry in frozen["workloads"].values() if entry["role"] == "subset")
     assert subset["anchors"]["api"]["referenceIds"] == ["a", "b", "c"]
     assert frozen["barReferences"][0]["id"] in {"a", "b"}
-    # No definite-frontier member: no bar is pinned.
+    assert frozen["anchorPolicy"]["policyId"] == "complete-evidence-panel" and main["anchorStatus"] == "frozen"
+    # E160: the main workload needs at least two complete-evidence references.
     lone = v.assemble(CONFIGURATIONS[:1], documents(), release_day=DAY)
-    assert v.freeze(lone, frozen_at="2026-10-19")["barReferences"] == [{"id": "a", "rule": v.freeze(lone, frozen_at="x")["barReferences"][0]["rule"]}]
+    with pytest.raises(ValueError, match="main workload has 1 complete-evidence anchor references"):
+        v.freeze(lone, frozen_at="2026-10-19")
+
+
+def test_anchor_population_is_the_complete_evidence_panel_and_thin_subsets_have_no_anchors(monkeypatch):
+    """E160: incomplete-evidence rows never set anchors; a subset workload below the minimum leaves its rows unscored."""
+
+    result = assembled()
+    main = result["mainWorkload"]
+    assert v.anchor_population(result, result["admitted"]) == ["a", "b"]
+    reordered = dict(result, rows=list(reversed(result["rows"])))
+    assert v.freeze(reordered, frozen_at="d")["workloads"] == v.freeze(result, frozen_at="d")["workloads"]
+    unresolved = assembled()
+    row_b = next(row for row in unresolved["rows"] if row["id"] == "b")
+    row_b["components"]["scicode"] = dict(row_b["components"]["scicode"], completeness=basket.UNRESOLVED)
+    assert v.anchor_population(unresolved, unresolved["admitted"]) == ["a"]
+    original = v.anchor_population
+
+    def thin(assembled_, components):
+        population = original(assembled_, components)
+        return population if basket.CODING_AGENT_INDEX in components else population[:1]
+
+    monkeypatch.setattr(v, "anchor_population", thin)
+    routes = documents()["planRoutes"]
+    routes["routes"].append({"id": "plan-c", "valueMultiple": 3.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["c"], "planPriceUsd": 20})
+    with_route = assembled(planRoutes=routes)
+    frozen = v.freeze(with_route, frozen_at="d")
+    subset = next(workload for workload, entry in frozen["workloads"].items() if entry["role"] == "subset")
+    assert frozen["workloads"][subset]["anchors"] == {"api": None, "plan": None}
+    assert frozen["workloads"][subset]["anchorStatus"].startswith("unavailable")
+    output = v.score(with_route, frozen)
+    rows = {row["id"]: row for row in output["rows"]}
+    assert rows["c"]["api"]["costScore"] is None and rows["c"]["api"]["value"] is None and rows["c"]["api"]["rank"] is None
+    assert [item["workload"] for item in output["gates"]["clip"]["api"]] == [main]
+    assert output["measuredOnlyPlanView"]["rows"]["c"]["costScore"] is None
+    assert output["workloads"][subset]["anchorStatus"].startswith("unavailable")
 
 
 def test_plan_boxes_need_an_identified_finite_multiple():
@@ -331,7 +367,7 @@ def test_scenarios_hash_attach_and_bar_labels():
     assert panel[0].leaves["deepswe"].family == "fixed" and panel[1].leaves["deepswe"].family == "uniform"
     document = v.run_scenarios(result, frozen, n=200, seed=7)
     assert document["inputHash"] == v.scenario_hash(result, frozen, n=200, seed=7)
-    assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1"]
+    assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M"]
     assert document["streamDescriptions"]["S0"] == "published-record reporting precision" and len(document["notQuantified"]) == 2
     assert document["barLabels"][0]["status"] == "evaluated"
     current = v.attach_scenarios(v.score(result, frozen), document, document["inputHash"])
@@ -581,3 +617,24 @@ def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
     assert leaves["a"]["gdpval"]["evidence"] == {"artifact": "data/aa/aa_v432_snapshot.json", "locator": "pages[model.slug=a-max].model.gdpval", "publishedValue": 1500.0}
     assert leaves["a"]["bugHunt"]["evidence"]["locator"] == "models[modelId=a].fixedOf105"
     assert leaves["a"]["deepswe"]["evidence"]["artifact"] == "data/aa_deepswe.json"
+
+
+def test_measurement_stream_draws_the_published_confidence_interval():
+    """E162: Terminal-Bench's documented 95% CI enters only the S1M panel, clipped to the leaf's domain."""
+
+    result, frozen = scored()
+    rows = {row["id"]: row for row in result["rows"]}
+    rows["a"]["evidence"]["observations"]["terminalBench"] = q.Observation(60.0, 0.05)
+    rows["a"]["evidence"]["provenance"]["terminalBench"] = {"source": "tbench", "ci95HalfWidthPct": 3.1}
+    rows["b"]["evidence"]["observations"]["terminalBench"] = q.Observation(99.0, 0.05)
+    rows["b"]["evidence"]["provenance"]["terminalBench"] = {"source": "tbench", "ci95HalfWidthPct": 3.1}
+    plain = {item.row: item for item in v.scenario_panel(result, "api")}
+    measured = {item.row: item for item in v.scenario_panel(result, "api", measurement=True)}
+    assert plain["a"].leaves["terminalBench"].target == "reporting precision"
+    kernel = measured["a"].leaves["terminalBench"]
+    assert kernel.params == pytest.approx((56.9, 63.1)) and kernel.target == "expected performance" and kernel.alternative == "endpoint-heavy"
+    assert measured["b"].leaves["terminalBench"].params == pytest.approx((95.9, 100.0))
+    assert measured["a"].leaves["deepswe"] == plain["a"].leaves["deepswe"]
+    document = v.run_scenarios(result, frozen, n=50, seed=3)
+    s1m = document["results"]["api"][-1]
+    assert s1m["stratum"] == "S1M" and s1m["variedTargets"] == ["expected performance", "identification convention", "reporting precision"]

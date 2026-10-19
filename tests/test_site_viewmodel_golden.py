@@ -179,7 +179,7 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     assert len(selected) == 1 and selected[0]["id"] == doc["cost"]["route"]["id"] and doc["plans"][0] is selected[0]
     for plan in doc["plans"]:
         assert plan["usdPerRun"] == pytest.approx(doc["cost"]["apiUsd"] / plan["valueMultiple"]) and plan["case"] in (2, 3, "identified")
-    assert doc["scenarios"]["status"] == "current" and {run["stratum"] for run in doc["scenarios"]["api"]} == {"S0", "S1", "S2"}
+    assert doc["scenarios"]["status"] == "current" and {run["stratum"] for run in doc["scenarios"]["api"]} == {"S0", "S1", "S2", "S1M"}
     assert doc["intervals"]["api"]["definite"] == "certified"
 
 

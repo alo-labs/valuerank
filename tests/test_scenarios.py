@@ -52,8 +52,11 @@ def test_stream_target_profiles_are_an_allowlist():
     analyst_range = RowInputs("e", {}, Kernel("uniform", (80.0, 120.0), target=sc.SPECIFICATION_STRESS))
     for stratum in sc.STRATA:
         for row in (fitted_interval, run_range):
+            if stratum == "S1M" and row is fitted_interval:
+                continue  # E162: the named stream for source-documented expected-performance intervals
             with pytest.raises(ValueError, match="cannot vary"):
                 sc.validate_stream([row], stratum)
+    assert sc.validate_stream([fitted_interval], "S1M") == ["expected performance", "identification convention"]
     for stratum in ("S0", "S1"):
         with pytest.raises(ValueError, match="cannot vary e cost"):
             sc.validate_stream([analyst_range], stratum)
@@ -166,6 +169,9 @@ def test_shares_report_frequencies_with_monte_carlo_errors():
     assert result["rows"]["cheap"]["top3"]["monteCarloSe"] == 0.0
     alternative = sc.shares(rows, "S1", 50, 7, ANCHORS, 0.25, alternative=True)
     assert alternative["alternative"] is True and alternative["rows"]["strong"]["qualifies"] == {}
+    # E161: each stream's events name their quality equation.
+    assert result["qualityEquation"].startswith("observed leaves") and result["events"]["frontier"] == "observed-only score frontier frequency"
+    assert alternative["events"]["frontier"].startswith("full-composite frontier frequency") and alternative["qualityEquation"] == "full composite, nominal weights"
 
 
 def test_regularized_beta_and_clopper_pearson():
@@ -211,7 +217,7 @@ def test_scenario_supported_cheapest_needs_a_non_provisional_candidate():
     rule = {"batch": 100, "looks": 2}
     eligible = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), reference], "c", "ref", "S1", random.Random(5), **rule)
     assert eligible["status"] == "met" and eligible["label"] is True
-    assert eligible["decisionTarget"]["qualityEquation"] == "full composite"
+    assert eligible["decisionTarget"]["qualityEquation"] == "full composite, nominal weights"
     # A provisional singleton that is cheapest in every scenario keeps its frequency but gets no label.
     provisional = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0, provisional=True), reference], "c", "ref", "S1", random.Random(5), **rule)
     assert provisional["share"] == 1.0 and provisional["uniqueLabelEligible"] is False and provisional["label"] is False
@@ -252,7 +258,7 @@ def test_only_the_full_composite_s1_core_branch_authorises_the_label():
     reference = full_row("ref", 80.0, 100.0)
     s0 = sc.scenario_supported_cheapest([candidate, reference], "c", "ref", "S0", random.Random(11), batch=500, looks=2)
     assert s0["share"] == 1.0 and s0["labelAuthorized"] is False and s0["label"] is False
-    assert s0["decisionTarget"]["qualityEquation"] == "observed leaves"
+    assert s0["decisionTarget"]["qualityEquation"].startswith("observed leaves")
     # Full composite: 70 + 0.1 * (U1 + U2 + U3) >= 80 holds with probability 5/6, below the 90% bar.
     s1 = sc.scenario_supported_cheapest([candidate, reference], "c", "ref", "S1", random.Random(11), batch=1000, looks=2)
     assert s1["labelAuthorized"] is True and s1["status"] == "not met" and s1["label"] is False

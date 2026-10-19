@@ -57,7 +57,8 @@ FRACTION_LEAVES = {
 CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (labels rounded to USD 1)" for slug in basket.CHART_COMPONENTS}
 DEFAULT_TB_HARNESS = "Terminus 2"  # E125: the named default harness of the same-harness diagnostic
 SCENARIO_COUNT = 10_000
-SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True))
+SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False))
+MEASUREMENT_STREAM = "S1M"  # E162: S1 plus source-documented 95% confidence intervals (Terminal-Bench today)
 FROZEN_FILE = "v3_frozen.json"
 SCENARIO_FILE = "v3_scenarios.json"
 
@@ -95,7 +96,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict |
     tb4 = exact_match.select_tb4_row(model_id, effort, tb4_rows)
     if tb4 is not None:
         add("terminalBench", tb4["resolutionRatePct"], q.percent_z(tb4["resolutionRatePct"], TB4_HALF_WIDTH_PCT),
-            {"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "configuration": tb4["model"], "agent": tb4.get("agent")},
+            {"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "configuration": tb4["model"], "agent": tb4.get("agent"),
+             "ci95HalfWidthPct": tb4.get("uncertaintyPct")},
             "tb4", f"rows[model={tb4['model']}, agent={tb4.get('agent')}].resolutionRatePct")
     if page.get("gdpval") is not None:
         add("gdpval", page["gdpval"], q.gdpval_z(page["gdpval"]), {"source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"}, "snapshot", f"{page_path}.gdpval")
@@ -350,20 +352,50 @@ BAR_POLICY = {
 }
 
 
+# E160: the registered rule that selects each workload's anchor references (separate from workload admission).
+ANCHOR_POLICY = {
+    "policyId": "complete-evidence-panel",
+    "version": 1,
+    "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
+    "planRule": "the same configurations at their displayed Plan cost: measured routes, owner-named transfers and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them",
+    "minimumReferences": 2,
+    "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
+    "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor",
+}
+MIN_ANCHOR_REFERENCES = 2
+
+
+def anchor_population(assembled: dict, components: list[str]) -> list[str]:
+    """E160: ranked configurations with complete cost evidence on every component of a workload."""
+
+    return sorted(
+        row["id"] for row in assembled["rows"]
+        if all((row["components"].get(component) or {}).get("completeness") == basket.COMPLETE for component in components)
+    )
+
+
 def freeze(assembled: dict, *, frozen_at: str) -> dict:
-    """Anchor objects per workload and basis from the evidenced reference configurations, and the bar reference."""
+    """Anchor objects per workload and basis from the registered anchor population (E160), and the bar reference."""
 
     workloads = {}
+    by_id = {row["id"]: row for row in assembled["rows"]}
     for workload, entry in workload_catalog(assembled).items():
         components = entry["components"]
-        api = {row["id"]: restricted_cost(row["components"], components) for row in assembled["rows"]}
-        plan = {row["id"]: _plan_cost_on(row, components) for row in assembled["rows"]}
+        population = anchor_population(assembled, components)
+        if len(population) < MIN_ANCHOR_REFERENCES:
+            if entry["role"] == "main":
+                raise ValueError(f"the main workload has {len(population)} complete-evidence anchor references; at least {MIN_ANCHOR_REFERENCES} are required")
+            workloads[workload] = {**entry, "anchors": {"api": None, "plan": None}, "anchorStatus": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} complete-evidence references"}
+            continue
+        api = {row_id: restricted_cost(by_id[row_id]["components"], components) for row_id in population}
+        plan = {row_id: _plan_cost_on(by_id[row_id], components) for row_id in population}
         workloads[workload] = {
             **entry,
             "anchors": {
                 "api": anchor_math.anchor_object(api, basis="api", workload=workload),
                 "plan": anchor_math.anchor_object(plan, basis="plan", workload=workload),
             },
+            "anchorStatus": "frozen",
         }
     frontier = intervals.frontier(api_boxes(assembled))
     by_id = {row["id"]: row for row in assembled["rows"]}
@@ -385,6 +417,7 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
         "mainWorkload": assembled["mainWorkload"],
         "workloads": workloads,
         "barReferences": references,
+        "anchorPolicy": ANCHOR_POLICY,
         "barPolicy": {**BAR_POLICY, "selectionCutoff": frozen_at, "population": sorted(population), "referenceIds": [item["id"] for item in references]},
     }
 
@@ -581,8 +614,9 @@ def score(assembled: dict, frozen: dict) -> dict:
         clip = []
         for workload in frozen["workloads"]:
             costs = {row["id"]: _basis_cost(row, basis) for row in rows if row["cost"]["workload"] == workload}
-            if costs:
-                clip.append({"workload": workload, **anchor_math.clip_gate(costs, frozen["workloads"][workload]["anchors"][basis])})
+            anchors = frozen["workloads"][workload]["anchors"][basis]
+            if costs and anchors:
+                clip.append({"workload": workload, **anchor_math.clip_gate(costs, anchors)})
         gates[basis] = clip
         influence[basis] = anchor_math.panel_cost_influence(
             [{"id": row["id"], "workloadId": row["cost"]["workload"], "costScore": per_row[row["id"]][basis]["costScore"], "qualityScore": row["summary"].displayed} for row in rows],
@@ -614,6 +648,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "beta": BETA,
         "anchorVersion": frozen["anchorVersion"],
         "barPolicy": frozen["barPolicy"],
+        "anchorPolicy": frozen["anchorPolicy"],
         "costBoundary": {
             "label": COST_LABEL,
             "source": COST_BOUNDARY_SOURCE,
@@ -623,7 +658,10 @@ def score(assembled: dict, frozen: dict) -> dict:
         "mainWorkload": main,
         "admission": {key: value for key, value in assembled["admission"].items() if key != "matrices"},
         "admissionMatrices": assembled["admission"]["matrices"],
-        "workloads": {workload: {"components": entry["components"], "role": entry["role"], "anchors": entry["anchors"]} for workload, entry in frozen["workloads"].items()},
+        "workloads": {
+            workload: {"components": entry["components"], "role": entry["role"], "anchors": entry["anchors"], "anchorStatus": entry["anchorStatus"]}
+            for workload, entry in frozen["workloads"].items()
+        },
         "exchangeRate": exchange,
         "costInfluence": influence,
         "gates": {"clip": gates, "hold": hold},
@@ -666,7 +704,8 @@ def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict) -> dict:
             entries[row["id"]] = {"status": "no measured route"}
             continue
         cost = row["cost"]["costUsd"] / plan_routes.comparison_multiple(selected["route"])
-        score_value = anchor_math.cost_score(cost, _anchors_for(frozen, row["cost"]["workload"], "plan"))
+        anchors = _anchors_for(frozen, row["cost"]["workload"], "plan")
+        score_value = anchor_math.cost_score(cost, anchors) if anchors else None
         value = anchor_math.value_score(score_value, row["summary"].displayed, BETA)
         status = "measured, target-workload identified" if selected["identification"] in plan_routes.IDENTIFIED else "measured, target-workload unmatched"
         entries[row["id"]] = {"status": status, "routeId": selected["route"]["id"], "costUsd": cost, "costScore": score_value, "value": value}
@@ -860,15 +899,26 @@ def _cost_kernel(row: dict, cost: float) -> scenarios.Kernel:
     return scenarios.Kernel("uniform-sum", (exact * ratio, *terms), "endpoint-heavy")
 
 
-def scenario_panel(assembled: dict, basis: str) -> list[scenarios.RowInputs]:
-    """The declared panel for one basis (E96): rows with a cost on the main workload, in a fixed order."""
+def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False) -> list[scenarios.RowInputs]:
+    """The declared panel for one basis (E96): rows with a cost on the main workload, in a fixed order.
+
+    With ``measurement`` (the E162 stream), a leaf whose source documents a 95%
+    confidence interval (Terminal-Bench's published half-width) is drawn on that
+    interval as an expected-performance input: uniform with the arcsine
+    alternative, never assumed normal, clipped to the leaf's domain.
+    """
 
     panel = []
     for row in assembled["rows"]:
         cost = _basis_cost(row, basis)
         if row["cost"]["workload"] != assembled["mainWorkload"] or not anchor_math.scoreable(cost):
             continue
-        leaves = {key: _kernel(value.low, value.high, value.z) for key, value in row["evidence"]["observations"].items()}
+        observations = row["evidence"]["observations"]
+        leaves = {key: _kernel(value.low, value.high, value.z) for key, value in observations.items()}
+        half = (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct")
+        if measurement and half:
+            z = observations["terminalBench"].z
+            leaves["terminalBench"] = scenarios.Kernel("uniform", (max(0.0, z - half), min(100.0, z + half)), "endpoint-heavy", scenarios.EXPECTED_PERFORMANCE)
         panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional))
     return panel
 
@@ -882,11 +932,15 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
         "seed": seed,
         "anchors": {basis: frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis] for basis in BASES},
         "panels": {
-            basis: [
-                {"row": item.row, "provisional": item.provisional, "cost": [item.cost.family, list(item.cost.params)], "leaves": {key: [kernel.family, list(kernel.params)] for key, kernel in sorted(item.leaves.items())}}
-                for item in scenario_panel(assembled, basis)
+            f"{basis}{'-measurement' if measurement else ''}": [
+                {
+                    "row": item.row, "provisional": item.provisional, "cost": [item.cost.family, list(item.cost.params)],
+                    "leaves": {key: [kernel.family, list(kernel.params), kernel.target] for key, kernel in sorted(item.leaves.items())},
+                }
+                for item in scenario_panel(assembled, basis, measurement=measurement)
             ]
             for basis in BASES
+            for measurement in (False, True)
         },
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
@@ -897,10 +951,10 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
 
     results = {}
     for basis in BASES:
-        panel = scenario_panel(assembled, basis)
+        panels = {False: scenario_panel(assembled, basis), True: scenario_panel(assembled, basis, measurement=True)}
         anchors = frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis]
         results[basis] = [
-            scenarios.shares(panel, stratum, n, seed + index, anchors, BETA, alternative=alternative)
+            scenarios.shares(panels[stratum == MEASUREMENT_STREAM], stratum, n, seed + index, anchors, BETA, alternative=alternative)
             for index, (stratum, alternative) in enumerate(SCENARIO_RUNS)
         ]
     return {

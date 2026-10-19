@@ -38,17 +38,34 @@ TARGET_PROFILES = {
     "S0": "published-record reporting precision",
     "S1": "published-record reporting precision + conventional identification of missing leaves",
     "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+    # E162: the separately named stream for source-documented expected-performance intervals (Terminal-Bench's 95% CI).
+    "S1M": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
 }
-STRATA = ("S0", "S1", "S2")
+STRATA = ("S0", "S1", "S2", "S1M")
+# E161: every stream's events name the quality equation they use, so S0-to-S1 changes are never read as uncertainty alone.
+QUALITY_EQUATIONS = {
+    "S0": "observed leaves, renormalised (observed-only score)",
+    "S1": "full composite, nominal weights",
+    "S2": "full composite, hierarchical weight draw",
+    "S1M": "full composite, nominal weights",
+}
+FRONTIER_EVENTS = {
+    "S0": "observed-only score frontier frequency",
+    "S1": "full-composite frontier frequency under conventional missing-evidence draws",
+    "S2": "full-composite frontier frequency under missing-evidence and weight-stress draws",
+    "S1M": "full-composite frontier frequency under missing-evidence and published-interval draws",
+}
 # E145: the target profile governs which inputs a stream may vary (an explicit allowlist); source-supported
 # uncertainty about expected performance or future runs enters only separately named streams (none in v1).
 REPORTING_PRECISION = "reporting precision"
 IDENTIFICATION_CONVENTION = "identification convention"
 SPECIFICATION_STRESS = "specification stress"
+EXPECTED_PERFORMANCE = "expected performance"
 STREAM_TARGETS = {
     "S0": frozenset({REPORTING_PRECISION}),
     "S1": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION}),
     "S2": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, SPECIFICATION_STRESS}),
+    "S1M": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, EXPECTED_PERFORMANCE}),
 }
 GROUP_CONCENTRATION = 100.0
 LEAF_CONCENTRATION = 50.0
@@ -279,7 +296,7 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
     # E100/E112: only the full-composite S1 core branch, under each of its pre-registered kernels, authorises the label.
     authorized = stratum == LABEL_STRATUM
     signature = {
-        "qualityEquation": "observed leaves" if stratum == "S0" else "full composite",
+        "qualityEquation": QUALITY_EQUATIONS[stratum],
         "scenarioStratum": stratum,
         "scenarioTargetProfileId": TARGET_PROFILES[stratum],
         "variedTargets": varied,
@@ -421,6 +438,11 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
     panel = sorted(row.row for row in rows)
     return {
         "stratum": stratum, "targetProfile": TARGET_PROFILES[stratum], "permittedTargets": sorted(STREAM_TARGETS[stratum]), "variedTargets": varied,
+        "qualityEquation": QUALITY_EQUATIONS[stratum],
+        "events": {
+            "top1": "rank-1 frequency (competition ranks on value)", "top3": "rank 3 or better frequency (competition ranks on value)",
+            "frontier": FRONTIER_EVENTS[stratum], "qualifies": f"qualifying-at-the-bar frequency ({QUALITY_EQUATIONS[stratum]})",
+        },
         "scenarios": n, "seed": seed, "alternative": alternative,
         "panel": panel, "panelSize": len(panel), "rows": result, "pairwise": pairwise,
     }
