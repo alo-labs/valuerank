@@ -1,5 +1,5 @@
 ## Panel
-Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, Claude Sonnet 5.5, Kimi K3, GLM 5.3, Grok 4.7. Round 1 = reviewers 1–7, round 2 = 8–12 so far. (The full ledger with every adopted item is in the repository; this is the condensed version.)
+Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, Claude Sonnet 5.5, Kimi K3, GLM 5.3, Grok 4.7. Round 1 = reviewers 1–7, round 2 = 8–13, round 3 from 14. (The full ledger with every adopted item is in the repository; this is the condensed version.)
 
 ## Owner decisions (binding; argue only as "Owner decision challenge")
 - O1 API and Plan buyers ranked separately. O2 Headline = weighted value score (cost 25%, quality 75%) plus frontier and cheapest-above-bar views. O3 Plan = full-utilisation Value Multiple, labelled. O4/O7 Only owner-named model-to-model transfers stay as labelled assumptions; other mismatches are unmatched and excluded from the official Plan ranking; a measured-only Plan view is published.
@@ -22,11 +22,18 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - E11. Certificate validity is margin-based: every retained input enters through an admissible constraint or its documented domain worst case; no constraint and no domain = unevaluable. The 5% rule is only a disclosure trigger.
 - E12. Plan uncertainty split: measurement object (S0) vs transport object (S1); "not separable" label where public evidence cannot split them.
 - E13. Robustness outputs are named estimands; "S2 maximum rank change" means displayed-score rank; pairwise recommendation robustness is reported as edge changes (answers GLM Q2).
+- E14. Pairwise cost term = 0.25 κ_W [ln C_j,W − ln C_i,W], κ_W fixed per release/basis from full-workload anchors, unclipped; subset-cost rows have no certifiable edges.
+- E15. Workday-feasible Plan multiple (40-hour week LP) published as a diagnostic; full utilisation stays the scored estimand (O3).
+- E16. Pair SWE gate made explicit: ≥2 common SWE leaves and ≥40% common SWE weight; not loosened.
+- E17. Matched-cost c_ib counts model API token charges only; unseparable harness/retry tokens leave the leaf unpriced for that row.
+- E18. Soft-expiry change detection is scoped to pricing, rate-limit and model-availability sections; ≥2 independent user reports of an undocumented limit change also trigger it (answers Gemini Q1).
+- E19. Harness-mismatch stress branch for Bug Hunt from tbench.ai same-model cross-agent spreads (S2 stress only).
+- Answer to Gemini Q2: a model lacking exact-variant DeepSWE stays ranked and provisional (not certifiable) until that run exists.
 
 ## Rejected or modified claims (do not repeat without a new argument)
 - "AA's frontier plots cost per task": rejected; the captured chart is total cost to run the Index (both fields recorded).
 - Remove assumed multiples / monthly-demand scenarios / cheapest-above-threshold as headline / basis-specific quality vectors / separate list for provisional rows / exclude mix-unmatched routes / withhold unidentified Plan scores / expired routes leave the table: rejected or modified by owner decisions above.
-- Precision-aware weight shrinkage: rejected (weights fixed; noise in measurement layer). Near-Pareto on unrounded Index: rejected (policy uses rounded). Dirichlet α floor: replaced by hierarchical Dirichlet (floor recentred weights).
+- Precision-aware weight shrinkage: rejected (weights fixed; noise in measurement layer). Near-Pareto on unrounded Index: rejected (policy uses rounded). Dirichlet α floor: replaced by hierarchical Dirichlet. Uniform-CV Dirichlet: rejected (CV varies with share; realised CV published). Omniscience N over total questions: rejected (AA definition kept; abstention penalised via A). Loosened pair SWE gate: rejected.
 
 ## Adopted, by reviewer (headlines only)
 - R1 GPT-6.1 Sol: frozen anchors, raw-magnitude quality, Index removed from quality, 60/20/10/10 hierarchy, bands and sensitivity, frontier views.
@@ -41,3 +48,4 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - R10 Grok 4.7: pairwise common support, Bug Hunt unit fix, lexicographic route choice, executable cohort rule.
 - R11 Kimi K3: M_W transport to the scored workload, governing pairwise formula, Omniscience denominator, workload object.
 - R12 GLM 5.3: outgoing-edge certification, simultaneous scenario leadership, margin-based validity, subset calibration, Plan measurement/transport split, named robustness estimands.
+- R13 Gemini 3.8 Flash: fixed certificate exchange rate, workday-feasible diagnostic, explicit pair SWE gate, token-only matched cost, scoped change detection, harness stress branch.

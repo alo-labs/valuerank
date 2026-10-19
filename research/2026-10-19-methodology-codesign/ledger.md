@@ -206,3 +206,21 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Simultaneous scenario-leadership event L_i(s) for the 90% rule; undefined comparisons are not wins.
 - E10–E13; Omniscience prose wording aligned with AA's hallucination definition; three new release tests.
 - Source adapter keys total run cost vs weighted cost per task by field identity (already in the source contract; reaffirmed).
+
+## Editor decisions after reviewer 13 (owner may override)
+- E14. Pairwise cost term = 0.25 κ_W [ln C_j,W − ln C_i,W], κ_W fixed per release/basis from full-workload anchors, unclipped; subset-cost rows have no certifiable edges.
+- E15. Workday-feasible Plan multiple (40-hour week LP) published as a diagnostic; full utilisation stays the scored estimand (O3).
+- E16. Pair SWE gate made explicit: ≥2 common SWE leaves and ≥40% common SWE weight; not loosened.
+- E17. Matched-cost c_ib counts model API token charges only; unseparable harness/retry tokens leave the leaf unpriced for that row.
+- E18. Soft-expiry change detection is scoped to pricing, rate-limit and model-availability sections; ≥2 independent user reports of an undocumented limit change also trigger it (answers Gemini Q1).
+- E19. Harness-mismatch stress branch for Bug Hunt from tbench.ai same-model cross-agent spreads (S2 stress only).
+- Answer to Gemini Q2: a model lacking exact-variant DeepSWE stays ranked and provisional (not certifiable) until that run exists, whatever its margin elsewhere — the existing provisional rule, consistent with no transfer between variants.
+
+## Reviewer 13 (Gemini 3.8 Flash, round 2, Thinking) — adopted
+- Critical: certificate exchange rate fixed across pairs (E14). Duty-cycle concern adopted as a diagnostic (E15) — scoring change would challenge O3.
+- E16–E19.
+
+## Reviewer 13 (Gemini 3.8 Flash) — rejected
+- Loosen pair SWE gate to 30% and one anchor: rejected; loosening a gate to produce more certificates weakens the evidence behind "recommended".
+- Omniscience N = 100(1 − i/total): rejected; the leaf follows AA's own hallucination definition (incorrect ÷ non-correct), and abstention is already penalised through accuracy A at 2/3 weight. The cited examples are not non-monotonic.
+- Within-group Dirichlet α = 200 × w for uniform CV: rejected; the reviewer's premise is off (science leaves are 12.5% of their group, so α = 6.25 gives CV ≈ 37% on a 1.25% leaf, i.e. ±0.46 weight points); Dirichlet CV necessarily varies with share, and realised per-leaf CV is already published.
