@@ -238,6 +238,37 @@ def numerator_treatment(record: dict) -> str:
     return "included"
 
 
+def certified_multiple_bounds(capacity_result: dict, api_cost_per_unit: float, payment: dict) -> dict:
+    """E105: M_W bounds from capacity bounds, converted directly only under fixed positive gross cash.
+
+    ``payment`` is {"rule": "fixed", "grossCashUsd": F0}, or another rule with an
+    optional ``certificate`` {"multipleLower", "multipleUpper"} computed at the
+    consumption-optimal, minimum-cash solution (M* = U*/F*). Capacity bounds of an
+    arbitrary feasible schedule never bound M* when cash depends on consumption,
+    so without a certificate M_W stays unidentified. One-sided or non-positive
+    bounds are unidentified (E67).
+    """
+
+    if payment.get("rule") == "fixed":
+        cash = payment.get("grossCashUsd") or 0.0
+        lower_units, upper_units = capacity_result.get("feasibleLowerBound"), capacity_result.get("relaxedUpperBound")
+        if cash <= 0 or lower_units is None or upper_units is None:
+            return {"identification": "unidentified", "lower": None, "upper": None, "derivation": "fixed cash: capacity bounds unavailable"}
+        lower, upper = lower_units * api_cost_per_unit / cash, upper_units * api_cost_per_unit / cash
+        derivation = "fixed positive gross cash: capacity bounds / F0"
+        point = capacity_result.get("pointCertified") is True
+    else:
+        certificate = payment.get("certificate") or {}
+        lower, upper = certificate.get("multipleLower"), certificate.get("multipleUpper")
+        if lower is None or upper is None:
+            return {"identification": "unidentified", "lower": None, "upper": None, "derivation": "consumption-dependent payment without a lexicographic certificate"}
+        derivation = "certified at the consumption-optimal, minimum-cash solution"
+        point = lower == upper
+    if not 0 < lower <= upper < math.inf:
+        return {"identification": "unidentified", "lower": None, "upper": None, "derivation": "bounds not strictly positive and finite"}
+    return {"identification": "point-identified" if point else "set-identified", "lower": lower, "upper": upper, "derivation": derivation}
+
+
 def value_multiple(units: float, api_cost_per_unit: float, gross_cash: float) -> float | None:
     """M = API-priced capacity / gross cash paid for the fee period (gross-cash convention)."""
 

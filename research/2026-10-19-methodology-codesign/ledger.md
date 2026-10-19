@@ -455,3 +455,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 30 (GLM 5.3, round 5, Thinking) — adopted
 - All findings (E100–E103).
+
+## Editor decisions after reviewer 31 (owner may override)
+- E105. Multiple certification under consumption-dependent payment: capacity bounds convert to M_W bounds only with fixed positive gross cash; otherwise the interval must enclose M* = U*/F* at the consumption-optimal, minimum-cash solution over admissible states (deterministic payment function: bound U/f(U) on a certified domain containing U*; schedule- or funding-dependent: certify the optimum and the tie-break or use conservative joint bounds; else unidentified); published fields; U = 10, F = 1 vs U = 20, F = 10 fixture.
+- E106. One Plan admission decision table (OfficialDisplayEligible, TargetTransportIdentified, PlanIntervalEligible; five cases) replaces the residual "any other mismatch … excluded" sentence, which contradicted O16; displayed multiple M_W / L_W / M_observed or the authorised transfer; one fixture per case.
+
+## Reviewer 31 (Gemini 3.8 Flash, round 5, Thinking) — adopted
+- All findings (E105–E106).
+
+# Round 5 complete (reviewers 26–31). Every panel model returned HAS FEEDBACK; round 6 starts with GPT-6.1 Sol on draft r31.
+
+# Round 6 (reviewer 32 onward)

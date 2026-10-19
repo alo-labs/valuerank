@@ -147,6 +147,43 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
     return candidates
 
 
+IDENTIFIED = {"point-identified", "set-identified"}
+
+
+def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date) -> list[dict]:
+    """E106: every route naming the model, classified once by case and the three predicates.
+
+    1 execution-identity incompatibility (excluded); 2 owner-named transfer
+    (display only, never identifies M_W); 3 exact-route measurement with
+    unidentified transport (displayed, interval-ineligible); 4 exact-route
+    measurement with an unreconciled valuation basis (displayed and flagged,
+    interval-ineligible); 5 evidence failing admission (diagnostic only); and
+    "identified" for exact-route measurements with an identified M_W.
+    """
+
+    table = []
+    for route in routes:
+        if model_id not in route.get("modelIds", []):
+            continue
+        required = route.get("requiredVariant")
+        if required is not None and (configuration_effort or "").casefold() != required.casefold():
+            table.append({"route": route, "case": 1, "officialDisplayEligible": False, "targetTransportIdentified": False, "planIntervalEligible": False})
+            continue
+        candidate = route_candidates(model_id, configuration_effort, [route], release_day)[0]
+        identified = candidate["identification"] in IDENTIFIED
+        if candidate["grade"] == "diagnostic":
+            case = 5
+        elif candidate["grade"] == "assumption":
+            case = 2
+        elif route.get("valuationBasisReconciled") is False:
+            case = 4
+        else:
+            case = "identified" if identified else 3
+        transport = case == "identified"
+        table.append({**candidate, "case": case, "officialDisplayEligible": case != 5, "targetTransportIdentified": transport, "planIntervalEligible": transport})
+    return table
+
+
 def gross_cash(route: dict) -> float:
     """Cash paid for the fee period under the declared purchase policy (subscription fee + declared additional cash)."""
 

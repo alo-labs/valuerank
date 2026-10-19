@@ -213,3 +213,22 @@ def test_identification_yield_and_exploratory_label():
     assert result == {"rows": 5, "pointIdentified": 1, "setIdentified": 1, "unidentified": 3, "exploratory": True}
     assert pr.identification_yield({"a": rows["a"], "b": rows["b"], "c": rows["c"]})["exploratory"] is False
     assert pr.identification_yield({})["exploratory"] is False
+
+
+def test_admission_table_classifies_every_route_once():
+    routes = [
+        route("effort", 9, models=("m",), requiredVariant="xhigh"),
+        route("transfer", 9, kind="user_assumption", models=("m", "donor"), source="GPT-6.1 Sol", source_kind="controlled_account_workload_projection"),
+        route("unmatched", 9, models=("m",)),
+        route("basis", 9, models=("m",), valuationBasisReconciled=False),
+        route("single-report", 9, kind="user_reported_projection", models=("m",)),
+        route("identified", 9, models=("m",), identification="point-identified"),
+        route("other-model", 9, models=("x",)),
+    ]
+    table = {item["route"]["id"]: item for item in pr.admission_table("m", "max", routes, TODAY)}
+    assert set(table) == {"effort", "transfer", "unmatched", "basis", "single-report", "identified"}
+    assert {key: item["case"] for key, item in table.items()} == {
+        "effort": 1, "transfer": 2, "unmatched": 3, "basis": 4, "single-report": 5, "identified": "identified",
+    }
+    assert [key for key, item in table.items() if item["officialDisplayEligible"]] == ["transfer", "unmatched", "basis", "identified"]
+    assert [key for key, item in table.items() if item["planIntervalEligible"]] == ["identified"]

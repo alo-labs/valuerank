@@ -185,3 +185,19 @@ def test_numerator_treatment_follows_delivery_not_task_outcome():
     assert pc.numerator_treatment({"requestDeliveryStatus": "transport-error"}) == "excluded"
     assert pc.numerator_treatment(dict(delivered, deploymentPolicyRole="evaluation-repetition")) == "excluded"
     assert pc.numerator_treatment(dict(delivered, tokenObservability="inseparable")) == "bounded"
+
+
+def test_certified_multiple_bounds_need_fixed_cash_or_a_certificate():
+    verified = {"feasibleLowerBound": 10.0, "relaxedUpperBound": 12.0, "pointCertified": False}
+    fixed = pc.certified_multiple_bounds(verified, 2.0, {"rule": "fixed", "grossCashUsd": 4.0})
+    assert fixed == {"identification": "set-identified", "lower": 5.0, "upper": 6.0, "derivation": "fixed positive gross cash: capacity bounds / F0"}
+    exact = pc.certified_multiple_bounds({"feasibleLowerBound": 10.0, "relaxedUpperBound": 10.0, "pointCertified": True}, 2.0, {"rule": "fixed", "grossCashUsd": 4.0})
+    assert exact["identification"] == "point-identified" and exact["lower"] == exact["upper"] == 5.0
+    assert pc.certified_multiple_bounds({"feasibleLowerBound": 10.0, "relaxedUpperBound": None}, 2.0, {"rule": "fixed", "grossCashUsd": 4.0})["identification"] == "unidentified"
+    assert pc.certified_multiple_bounds(verified, 2.0, {"rule": "fixed", "grossCashUsd": 0})["identification"] == "unidentified"
+    # E105 fixture: a feasible schedule with U = 10 at F = 1 must not certify M >= 10 when the optimum is U = 20 at F = 10.
+    dependent = {"rule": "consumption-dependent"}
+    assert pc.certified_multiple_bounds(verified, 1.0, dependent)["identification"] == "unidentified"
+    certified = pc.certified_multiple_bounds(verified, 1.0, dict(dependent, certificate={"multipleLower": 2.0, "multipleUpper": 2.0}))
+    assert certified["identification"] == "point-identified" and certified["upper"] == 2.0
+    assert pc.certified_multiple_bounds(verified, 1.0, dict(dependent, certificate={"multipleLower": 0.0, "multipleUpper": 2.0}))["identification"] == "unidentified"
