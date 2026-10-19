@@ -254,3 +254,33 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 15 (Claude Sonnet 5.5, round 3, Thinking) — adopted
 - Plan basis of the alternative check (O20); execution-unit contract for W_alt (E24); frozen contest (O21); kernel objects (E25); admission/persistence state machine (E26); legacy two-row clip sentence removed (left behind by a faulty r14 edit); typed certificate record (E27); five integration tests.
+
+## Owner decisions (after round-3 reviewer 16)
+- O22. Drop the entire "recommended" feature. Removed with it: the leader rule, pairwise certification and certification matrix, the frozen contest (O21), the matched-workload value blocker (O18/O20), pair-level gates (E8, E14, E16), certificate scopes (E4, E7) and the typed certificate record (E27). Kept: the weighted value-score ranking, frontier and cheapest-above-a-bar outputs with their interval logic, scenario shares, diagnostics. O19's constraint basis now governs the remaining interval outputs.
+- O23. MMMU-Pro is dropped from the SDLC cost basket.
+- O24. Both priced Terminal-Bench executions stay (AA Index run and the Coding Agent Index's vendor-agent run); overlap disclosed.
+
+## Editor decisions after reviewer 16 (owner may override)
+- E28. Accounting identities split: AA's Index total decomposes into ten evaluations; C_W uses the seven SDLC ones; HLE + Omniscience + CritPt is a reconciliation residual, never in C_W. Coding Agent Index cost = AA's published "Total Cost" (sums.costUsd), task count included stored, missing telemetry recorded (not imputed), "partial component" flag; chart totals rounded to USD 1 are rounding intervals; AA's "*" (declined tasks) flags partial component.
+- E29. Bug Hunt estimand = mean of published runs for the exact model/effort/harness; public repeated runs are measurement evidence; single-run rows use the full score domain in interval outputs (O19).
+- E30. Plan LP encodes each window's recorded semantics (session-anchored / fixed reset / sliding; unknown → conservative sliding), model-specific sub-caps and burn coefficients (never borrowed); burst fixtures.
+- E31. Pinned source fields (AutomationBench-AA automationBenchPartialScore; Omniscience accuracy and hallucinationRate; GPQA gpqa legacy series; Coding Agent Index sums.costUsd; Bug Hunt runs).
+- E32. A multiple that cannot be repriced on the release price list leaves M_W unidentified (score kept under O16, flagged "valuation basis differs", excluded from Plan interval outputs).
+- E33. Report concordance is checked on unpooled reports (max/min ≤ 1.20) before geometric pooling.
+- E34. AA cost embeds AA's cache protocol; cache-rate variation is an S2 stress branch, not an S0 redraw.
+- E35. Formal quality bounds Q^L/Q^U = min/max of the full composite over the joint admissible set; outputs cite only the joint normative tests.
+- E36. Expired-route API fallback rows (O13) are labelled "cross-estimand ordering not identified" and excluded from Plan interval outputs.
+- Exchange rate split into two named quantities (anchor rate; within-cohort influence) with a flag when cost's influence share < 10%.
+
+## Reviewer 16 (Grok 4.7, round 3, Thinking) — adopted
+- Index-vs-basket accounting split (E28); unrepriceable multiples (E32); window semantics and sub-caps (E30, partly); Omniscience wording corrected (AA's Index uses 2:1 too — the r06-era "AA uses 1:1" statement was wrong; verified in data/aa_metrics.json weights 10%/5%); Bug Hunt estimand (E29); exchange-rate split; joint bounds (E35); pinned fields (E31); expired-row label (E36); concordance (E33); group renamed "Long context, science & knowledge"; cache stress (E34).
+- Critical findings on the contest and the value blocker became moot with O22.
+
+## Reviewer 16 (Grok 4.7) — rejected or modified
+- "The only legal 5-hour constraint is sliding": modified (E30). Claude-style 5-hour windows are session-anchored (start at first use); a sliding constraint is stricter and is used only when semantics are unknown. The burst fixture holds under both.
+- O4/O7 challenge (drop transfers across models with different burn rates): no change. Transfers stay labelled assumptions that never identify M_W (so they are already excluded from interval outputs); the owner authorised them knowing allowances are model-specific (AGENTS.md, 2026-10-18). Fable is not in the ranked roster.
+- "The Coding Agent Index publishes no documented total": incorrect; AA publishes "Total Cost Across the Artificial Analysis Coding Agent Index" (sums.costUsd), equal to per-task mean × tasks included.
+- MMMU-Pro "would swamp the basket at question-level multiplicity": incorrect (the basket sums each evaluation's total cost, USD 4–186 for MMMU-Pro); the owner dropped MMMU-Pro anyway (O23).
+- Retire pending components after two releases: rejected; pending components do not enter C_W and are visible in the readiness table, so retiring them only adds workload churn.
+- Drop GPQA as "no current AA series": rejected; AA still publishes a GPQA Diamond evaluation page and per-model values (field gpqa, present for current models); pinned as a legacy series.
+- Bug Hunt single-run rows "unidentified, pair unevaluable": modified; under O19 the full score domain is an admissible constraint (E11), so the row is bounded, not unevaluable.
