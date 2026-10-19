@@ -435,3 +435,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 28 (Grok 4.7, round 5, Thinking) — adopted
 - All findings (E92–E94).
+
+## Editor decisions after reviewer 29 (owner may override)
+- E95. One deterministic admission panel per workload version: candidates in descending exact-cost coverage (target order breaks ties); a component is admitted only if the rows complete on it and on every earlier-admitted component still number ≥ two-thirds of the ranked rows; that set is the reference panel; admission object published with marginal and joint coverage; fixture for two components that pass alone but not together. Answers Kimi Q2 without escalation: E26 already names one panel per W ("W's frozen, named reference panel").
+- E96. Rank events: declared panel per series fixed before the draws (size named); branch exclusions change the declared panel, never the per-scenario denominator; competition ranks as in the displayed table (ties may put more than k rows at rank ≤ k, disclosed); pairwise win / tie / loss published separately; E65 common panels for baseline-vs-branch frequency changes. Answers Kimi Q3 without escalation: the displayed table already uses competition ranks.
+- E97. Delivery is not outcome: "failed request" = no delivered execution; delivered, policy-permitted execution is eligible whether the task passes or fails (incl. model-generated refusals and permitted retries), matching the API basket's support; record fields and fixtures. Answers Kimi Q1 without escalation (E75 was an editor decision; this states its intended meaning).
+- E98. Concordance stated exactly: the largest report at most 20% above the smallest (O11's "±20%" kept, with the operational form beside it); boundary fixtures 100/120 pass, 100/120.001 and 80/120 fail.
+- E99. A one-leaf quality group takes within-group weight exactly one with no draw (already so in code); fixture.
+
+## Reviewer 29 (Kimi K3, round 5, Thinking) — adopted
+- All findings (E95–E99).

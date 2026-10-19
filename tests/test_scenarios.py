@@ -145,3 +145,26 @@ def test_scenario_supported_cheapest_needs_a_non_provisional_candidate():
     # A cheaper provisional qualifier still competes and blocks the candidate.
     blocked = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), full_row("p", 70.0, 5.0, provisional=True), reference], "c", "ref", "S0", random.Random(5), **rule)
     assert blocked["status"] == "not met" and blocked["label"] is False
+
+
+def test_shares_fix_the_panel_and_report_pairwise_win_tie_loss():
+    rows = [full_row("a", 60.0, 10.0), full_row("b", 60.0, 10.0), full_row("c", 40.0, 10.0)]
+    result = sc.shares(rows, "S0", 20, 9, ANCHORS, 0.25, pairs=(("a", "b"), ("a", "c"), ("c", "a")))
+    assert result["panel"] == ["a", "b", "c"] and result["panelSize"] == 3
+    # Tied rows share the better competition rank, so both hold rank 1.
+    assert result["rows"]["a"]["top1"]["share"] == result["rows"]["b"]["top1"]["share"] == 1.0
+    assert [item["tie"] for item in result["pairwise"]] == [1.0, 0.0, 0.0]
+    assert result["pairwise"][1]["win"] == 1.0 and result["pairwise"][2]["loss"] == 1.0
+
+
+def test_singleton_group_within_weight_is_exactly_one():
+    """E99: a one-leaf group takes its whole group share; no within-group draw."""
+
+    groups = list(q.GROUPS)
+    single = [group for group in groups if len([leaf for leaf in q.LEAVES if leaf.group == group]) == 1]
+    assert single
+    weights = sc.hierarchical_weights(random.Random(7))
+    replay = sc.dirichlet(random.Random(7), [sc.GROUP_CONCENTRATION * q.GROUPS[group] / 100.0 for group in groups])
+    for group in single:
+        leaf = next(leaf for leaf in q.LEAVES if leaf.group == group)
+        assert weights[leaf.key] == 100.0 * replay[groups.index(group)]

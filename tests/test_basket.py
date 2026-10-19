@@ -115,6 +115,28 @@ def test_admitted_components_require_two_thirds_of_ranked_rows():
     assert set(admitted) == set(b.TARGET_COMPONENTS)
 
 
+def test_admission_panel_is_joint_and_deterministic():
+    """E95: components that pass alone but not together are admitted in coverage order."""
+
+    ranked = ["a", "b", "c", "d", "e", "f"]
+    costs = {row: {"scicode": {}} for row in ranked}
+    for row in ("a", "b", "c", "d", "e"):
+        costs[row][b.CODING_AGENT_INDEX] = {}
+    for row in ("b", "c", "d", "e", "f"):
+        costs[row]["frontiercode"] = {}
+    for row in ("a", "b", "c", "d"):
+        costs[row]["itbench-aa"] = {}
+    panel = b.admission_panel(costs, ranked)
+    assert panel["admissionOrder"][:4] == ["scicode", b.CODING_AGENT_INDEX, "frontiercode", "itbench-aa"]
+    components = panel["components"]
+    assert components[b.CODING_AGENT_INDEX]["admitted"] is True  # 5/6 jointly with SciCode
+    assert components["frontiercode"]["admitted"] is True and components["frontiercode"]["referencePanel"] == ["b", "c", "d", "e"]
+    # ITBench alone covers 4/6, but jointly only b, c, d (3/6): pending.
+    assert components["itbench-aa"]["covered"] == 4 and components["itbench-aa"]["admitted"] is False
+    assert panel["referencePanel"] == ["b", "c", "d", "e"] and panel["jointCovered"] == 4
+    assert panel["requiredPanelSize"] == 4 and panel["ranked"] == 6
+
+
 def test_admitted_components_with_no_ranked_rows():
     admitted = b.admitted_components({}, [])
     assert all(item["admitted"] is False for item in admitted.values())

@@ -218,6 +218,26 @@ def capacity(windows: list[Window], workload: Demand, horizon: int, *, grid_minu
     }
 
 
+EXCLUDED_POLICY_ROLES = {"evaluation-repetition", "platform-overhead"}
+
+
+def numerator_treatment(record: dict) -> str:
+    """E75/E97: included / excluded / bounded for one measured execution record, never by task outcome.
+
+    Delivered, policy-permitted execution counts whether the task passed or failed
+    and includes model-generated refusals and policy-permitted retries, matching
+    the API basket's support; transport errors and requests rejected before
+    execution deliver nothing and are excluded; consumption that cannot be
+    separated from excluded overhead is carried as a bound.
+    """
+
+    if record.get("tokenObservability") == "inseparable":
+        return "bounded"
+    if record.get("requestDeliveryStatus") != "delivered" or record.get("deploymentPolicyRole") in EXCLUDED_POLICY_ROLES:
+        return "excluded"
+    return "included"
+
+
 def value_multiple(units: float, api_cost_per_unit: float, gross_cash: float) -> float | None:
     """M = API-priced capacity / gross cash paid for the fee period (gross-cash convention)."""
 

@@ -173,3 +173,15 @@ def test_capacity_rejects_a_per_task_vector_whatever_its_entries():
 
     with pytest.raises(ValueError, match="workload-pass demand"):
         pc.capacity([window("w", 3, 10.0, "fixed")], Demand(DEMAND, "per-task"), 3, grid_minutes=15)
+
+
+def test_numerator_treatment_follows_delivery_not_task_outcome():
+    delivered = {"requestDeliveryStatus": "delivered", "deploymentPolicyRole": "primary"}
+    assert pc.numerator_treatment(dict(delivered, taskOutcome="pass")) == "included"
+    assert pc.numerator_treatment(dict(delivered, taskOutcome="fail")) == "included"
+    assert pc.numerator_treatment(dict(delivered, taskOutcome="refusal")) == "included"
+    assert pc.numerator_treatment(dict(delivered, deploymentPolicyRole="retry", taskOutcome="fail")) == "included"
+    assert pc.numerator_treatment({"requestDeliveryStatus": "rejected-before-execution"}) == "excluded"
+    assert pc.numerator_treatment({"requestDeliveryStatus": "transport-error"}) == "excluded"
+    assert pc.numerator_treatment(dict(delivered, deploymentPolicyRole="evaluation-repetition")) == "excluded"
+    assert pc.numerator_treatment(dict(delivered, tokenObservability="inseparable")) == "bounded"

@@ -190,16 +190,27 @@ def standard_error(share: float, n: int) -> float:
     return math.sqrt(share * (1.0 - share) / n) if n else 0.0
 
 
-def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict, beta: float, *, references: tuple = (), alternative: bool = False) -> dict:
-    """Per-row scenario frequencies for one stratum: rank <= 3, rank 1, frontier, and per-bar qualification."""
+def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict, beta: float, *, references: tuple = (), pairs: tuple = (), alternative: bool = False) -> dict:
+    """Per-row scenario frequencies for one stratum: rank <= 3, rank 1, frontier, per-bar qualification.
+
+    E96: the panel is the declared row set, fixed for every scenario; ranks are
+    competition ranks (ties share the better rank, so more than k rows can hold
+    rank <= k); each declared pair (i, j) reports win, tie and loss frequencies
+    for V_i against V_j.
+    """
 
     rng = random.Random(seed)
     ranges = missing_ranges(rows) if alternative else None
     counts = {row.row: {"top3": 0, "top1": 0, "frontier": 0} for row in rows}
     qualify = {reference: {row.row: 0 for row in rows} for reference in references}
+    outcomes = {pair: {"win": 0, "tie": 0, "loss": 0} for pair in pairs}
     for _ in range(n):
         scenario = draw_scenario(rows, stratum, rng, alternative=alternative, ranges=ranges)
-        rank = ranks(scenario_values(scenario, anchors, beta))
+        values = scenario_values(scenario, anchors, beta)
+        rank = ranks(values)
+        for first, second in pairs:
+            gap = values[first] - values[second]
+            outcomes[(first, second)]["win" if gap > 0 else "loss" if gap < 0 else "tie"] += 1
         front = frontier_rows(scenario)
         for row in rows:
             counts[row.row]["top3"] += rank[row.row] <= 3
@@ -217,7 +228,9 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
             entry[key] = {"share": share, "monteCarloSe": standard_error(share, n)}
         entry["qualifies"] = {reference: qualify[reference][row.row] / n for reference in references}
         result[row.row] = entry
-    return {"stratum": stratum, "scenarios": n, "seed": seed, "alternative": alternative, "rows": result}
+    pairwise = [{"pair": list(pair), **{key: count / n for key, count in counts_.items()}} for pair, counts_ in outcomes.items()]
+    panel = sorted(row.row for row in rows)
+    return {"stratum": stratum, "scenarios": n, "seed": seed, "alternative": alternative, "panel": panel, "panelSize": len(panel), "rows": result, "pairwise": pairwise}
 
 
 def _beta_continued_fraction(a: float, b: float, x: float) -> float:

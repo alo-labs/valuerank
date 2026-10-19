@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from fractions import Fraction
 
 # Fixed task counts of the AA Intelligence Index v4.3.2 evaluations (AA total = sum of cost per task x count).
@@ -156,20 +157,44 @@ def chart_component(row: dict | None, *, source: str) -> dict | None:
     )
 
 
-def admitted_components(costs_by_row: dict, ranked_ids: list[str]) -> dict:
-    """Admission per target component: exact cost for at least two-thirds of the ranked rows (E26)."""
+def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
+    """E26/E95: one reference panel per workload version, built deterministically.
 
-    result = {}
-    for component in TARGET_COMPONENTS:
-        panel = [row_id for row_id in ranked_ids if (costs_by_row.get(row_id) or {}).get(component) is not None]
-        share = Fraction(len(panel), len(ranked_ids)) if ranked_ids else Fraction(0)
-        result[component] = {
-            "admitted": bool(ranked_ids) and share >= ADMISSION_SHARE,
-            "referencePanel": panel,
-            "covered": len(panel),
-            "ranked": len(ranked_ids),
-        }
-    return result
+    Candidate components are taken in descending order of exact-cost coverage
+    (target order breaks ties). A component is admitted only if the rows with
+    exact cost on it and on every component admitted before it still number at
+    least two-thirds of the ranked rows; that complete-row set is the workload's
+    reference panel, frozen at admission. Marginal and joint coverage are both
+    published.
+    """
+
+    def has(row_id: str, component: str) -> bool:
+        return (costs_by_row.get(row_id) or {}).get(component) is not None
+
+    marginal = {component: sum(1 for row_id in ranked_ids if has(row_id, component)) for component in TARGET_COMPONENTS}
+    order = sorted(TARGET_COMPONENTS, key=lambda component: (-marginal[component], TARGET_COMPONENTS.index(component)))
+    panel = list(ranked_ids)
+    components = {}
+    for component in order:
+        candidate = [row_id for row_id in panel if has(row_id, component)]
+        admitted = bool(ranked_ids) and Fraction(len(candidate), len(ranked_ids)) >= ADMISSION_SHARE
+        if admitted:
+            panel = candidate
+        components[component] = {"admitted": admitted, "referencePanel": candidate, "covered": marginal[component], "ranked": len(ranked_ids)}
+    return {
+        "components": {component: components[component] for component in TARGET_COMPONENTS},
+        "admissionOrder": order,
+        "referencePanel": panel,
+        "jointCovered": len(panel),
+        "ranked": len(ranked_ids),
+        "requiredPanelSize": math.ceil(ADMISSION_SHARE * len(ranked_ids)),
+    }
+
+
+def admitted_components(costs_by_row: dict, ranked_ids: list[str]) -> dict:
+    """Per-component admission under the E95 joint panel rule."""
+
+    return admission_panel(costs_by_row, ranked_ids)["components"]
 
 
 def workload_hash(components: list[str]) -> str:

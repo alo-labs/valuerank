@@ -33,6 +33,9 @@ def test_concordant_pool_checks_unpooled_reports_then_takes_the_geometric_mean()
     assert pr.concordant_pool([10.0, 11.0]) == pytest.approx((10 * 11) ** 0.5)
     assert pr.concordant_pool([10.0, 12.5]) is None  # 1.25 > 1.2
     assert pr.concordant_pool([10.0]) is None
+    # E98 boundary: the largest report may be at most 20% above the smallest.
+    assert pr.concordant_pool([100.0, 120.0]) is not None and pr.concordant_pool([100.0, 120.001]) is None
+    assert pr.concordant_pool([80.0, 120.0]) is None  # within +-20% of 100, but 50% apart
     assert pr.concordant_pool([10.0, 0, None]) is None
 
 
