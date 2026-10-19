@@ -7522,6 +7522,24 @@
     "basketVersion": "SDLC basket v1",
     "beta": 0.25,
     "anchorVersion": "v3-2026-10-19",
+    "barPolicy": {
+      "policyId": "median-definite-frontier",
+      "version": 1,
+      "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
+      "populationRule": "non-provisional configurations on the API main-workload definite frontier (E40 interval outputs)",
+      "order": "displayed quality ascending, then configuration ID",
+      "position": "lower median",
+      "emptyPopulation": "no bar pinned; the bar is published as unavailable",
+      "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
+      "selectionCutoff": "2026-10-19",
+      "population": [
+        "gpt-6-luna",
+        "gpt-6.1-sol"
+      ],
+      "referenceIds": [
+        "gpt-6-luna"
+      ]
+    },
     "mainWorkload": "9a0d376cc6080f3c",
     "admission": {
       "components": {

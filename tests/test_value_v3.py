@@ -282,7 +282,29 @@ def test_freeze_without_definite_members_pins_no_bar():
     result = assembled()
     for item in result["rows"]:
         item["cost"] = dict(item["cost"], fullCost=False)
-    assert v.freeze(result, frozen_at="d")["barReferences"] == []
+    frozen = v.freeze(result, frozen_at="d")
+    assert frozen["barReferences"] == [] and frozen["barPolicy"]["referenceIds"] == [] and frozen["barPolicy"]["population"] == []
+
+
+def test_bar_reference_selection_is_registered_and_outcome_independent(monkeypatch):
+    """E156: input order cannot change the reference; bar outcomes are never computed at selection; provisional rows are excluded."""
+
+    result = assembled()
+    frozen = v.freeze(result, frozen_at="2026-10-19")
+    policy = frozen["barPolicy"]
+    assert policy["policyId"] == "median-definite-frontier" and policy["selectionCutoff"] == "2026-10-19"
+    assert policy["referenceIds"] == [item["id"] for item in frozen["barReferences"]]
+    reordered = dict(result, rows=list(reversed(result["rows"])))
+    assert v.freeze(reordered, frozen_at="2026-10-19")["barReferences"] == frozen["barReferences"]
+
+    def refuse(*_args, **_kwargs):
+        raise AssertionError("bar outcomes must not be computed while selecting the reference")
+
+    monkeypatch.setattr(v.intervals, "cheapest_above_bar", refuse)
+    assert v.freeze(result, frozen_at="2026-10-19")["barReferences"] == frozen["barReferences"]
+    for row in result["rows"]:
+        row["summary"] = q.summarize({"deepswe": q.Observation(50.0)})  # every row provisional
+    assert v.freeze(result, frozen_at="2026-10-19")["barReferences"] == []
 
 
 def test_score_handles_rows_without_cost_and_empty_workloads():

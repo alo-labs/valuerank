@@ -597,3 +597,9 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 45 (Claude Sonnet 5.5, round 8, Thinking) — adopted
 - All findings (E154–E155).
+
+## Editor decisions after reviewer 46 (owner may override)
+- E156. Bar-selection policy object recorded with the anchor version and published in the scores (policy ID and version, mode, cutoff, population rule, order, lower median, empty-population rule, lifetime, population, reference IDs); the population now excludes provisional rows (no current effect: both definite-frontier rows are non-provisional, so gpt-6-luna stays the reference and the re-freeze left every anchor unchanged). Answers Grok Q1 without escalation: bars stay stable within an anchor version and are re-selected only at a versioned re-freeze, the same lifecycle as the anchors themselves (O12 migrations), which the implementation already followed.
+
+## Reviewer 46 (Grok 4.7, round 8, Thinking) — adopted
+- All findings (E156).

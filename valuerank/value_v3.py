@@ -305,6 +305,18 @@ def plan_boxes(assembled: dict) -> list[intervals.Box]:
     return boxes
 
 
+BAR_POLICY = {
+    "policyId": "median-definite-frontier",
+    "version": 1,
+    "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
+    "populationRule": "non-provisional configurations on the API main-workload definite frontier (E40 interval outputs)",
+    "order": "displayed quality ascending, then configuration ID",
+    "position": "lower median",
+    "emptyPopulation": "no bar pinned; the bar is published as unavailable",
+    "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
+}
+
+
 def freeze(assembled: dict, *, frozen_at: str) -> dict:
     """Anchor objects per workload and basis from the evidenced reference configurations, and the bar reference."""
 
@@ -322,7 +334,9 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
         }
     frontier = intervals.frontier(api_boxes(assembled))
     by_id = {row["id"]: row for row in assembled["rows"]}
-    definite = sorted((row_id for row_id, result in frontier.items() if result["definite"] == intervals.CERTIFIED), key=lambda row_id: (by_id[row_id]["summary"].displayed, row_id))
+    # E156: the bar reference comes from the registered policy, at freeze, before any bar outcome is computed.
+    population = [row_id for row_id, result in frontier.items() if result["definite"] == intervals.CERTIFIED and not by_id[row_id]["summary"].provisional]
+    definite = sorted(population, key=lambda row_id: (by_id[row_id]["summary"].displayed, row_id))
     references = []
     if definite:
         references.append({
@@ -338,6 +352,7 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
         "mainWorkload": assembled["mainWorkload"],
         "workloads": workloads,
         "barReferences": references,
+        "barPolicy": {**BAR_POLICY, "selectionCutoff": frozen_at, "population": sorted(population), "referenceIds": [item["id"] for item in references]},
     }
 
 
@@ -565,6 +580,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "basketVersion": BASKET_VERSION,
         "beta": BETA,
         "anchorVersion": frozen["anchorVersion"],
+        "barPolicy": frozen["barPolicy"],
         "mainWorkload": main,
         "admission": {key: value for key, value in assembled["admission"].items() if key != "matrices"},
         "admissionMatrices": assembled["admission"]["matrices"],
