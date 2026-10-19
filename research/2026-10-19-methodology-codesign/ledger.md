@@ -310,3 +310,20 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Reviewer 18 (GLM 5.3, round 3, Thinking) — adopted
 - All findings (E43–E47, fixture fix).
 - Note: the first GLM run timed out waiting for Perplexity's model button (page slow to render); the driver now waits up to 60 s and the review was re-run on the same prompt.
+
+## Owner decisions (after round-3 reviewer 19)
+- O25. Interval outputs (definite/possible frontier, confirmed/possible cheapest above a bar) protect the **published record**: benchmark results and costs as published for each exact configuration, robust to reporting precision and missing evidence. Run-to-run noise, published confidence intervals and cost-variance kernels are reported only through the scenario shares. Supersedes E46's declared target for Θ; O19's exclusion of analyst assumptions stands.
+
+## Editor decisions after reviewer 19 (owner may override)
+- E48. GPQA Diamond retired at this quality version: AA no longer evaluates new frontier models on it (no value for 10 of the 19 ranked rows in the 2026-10-17 snapshot: Opus 5.5, Sonnet 5.5, Haiku 5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna, Grok 4.7, Gemini 4 Argon, both MiMo rows). Science leaves HLE, SciCode, CritPt take 5/3% each (group 10% unchanged). This corrects the reviewer-16 rejection, which wrongly said the series was present for current models.
+- E49. Target-compatibility gate: an interval narrows a Θ variable only when its constraint target is that published-record variable (or a public justified mapping exists); confidence intervals and run ranges stay in the scenario layer.
+- E50. Solver dependencies compiled from the full decision equations; a bar's reference quality is a shared variable; breakpoint enumeration or certified branch-and-bound; three-row regression test; separate proof obligations for witnesses and infeasibility.
+- E51. Claim contract per interval result (decision, target, universe, evidence-set coverage, solver status, cohort extension, certificate); wording "confirmed within the declared evidence set".
+- E52. Reference-quality object: a pinned reference keeps defining the bar after losing cost or Plan eligibility (answers Gemini Q2: yes); it competes only if in R_W; never silently substituted.
+- Answer to Gemini Q1 (cost estimand): under O25 the interval target is the published deployment-equivalent cost of the fixed workload; future-pass variability is a scenario-layer quantity.
+
+## Reviewer 19 (Gemini 3.8 Flash, round 3, Thinking) — adopted
+- Bar-threshold counterexample (E50), target-compatibility gate (E49, resolved by O25), certificate vs coverage (E51), reference object (E52), cost estimand (O25).
+- Note: the first Gemini run failed because Perplexity's home page did not render its composer; the driver now reloads with backoff and the review was re-run on the same prompt.
+
+# Round 3 complete (reviewers 14–19). Every panel model returned HAS FEEDBACK on its draft; round 4 starts with GPT-6.1 Sol on draft r19.
