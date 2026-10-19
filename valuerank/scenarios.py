@@ -247,7 +247,8 @@ def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str
     """
 
     runs = {}
-    for index, assignment in enumerate(kernel_assignments(rows, candidate, reference)):
+    assignments = kernel_assignments(rows, candidate, reference)
+    for index, assignment in enumerate(assignments):
         runs[assignment["id"]] = scenario_supported_cheapest(
             rows, candidate, reference, LABEL_STRATUM, random.Random(seed + index), alternative_rows=assignment["endpointHeavyRows"], **rule
         )
@@ -255,13 +256,21 @@ def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str
     met = all(run["status"] == "met" for run in runs.values())
     eligible = primary["uniqueLabelEligible"]
     if met and eligible:
-        reading = "supported under the registered kernel checks (block-exhaustive over candidate, reference and competitors)"
+        reading = "supported under all registered role-group kernel checks"
     elif primary["status"] == "met":
         reading = "primary-kernel frequency >= 90%; kernel-sensitive" if eligible else "frequency only (provisional row)"
     else:
         reading = "not scenario-supported"
     shares_ = [run["share"] for run in runs.values()]
-    return {"assignments": runs, "coverage": "block-exhaustive", "frequencyRange": [min(shares_), max(shares_)], "label": met and eligible, "reading": reading}
+    check = {
+        # E133: in v1 every row is its own dependency component; kernels switch by role group.
+        "dependencyComponents": [[row.row] for row in rows],
+        "switchGroups": {"candidate": [candidate], "reference": [reference], "competitors": sorted({row.row for row in rows} - {candidate, reference})},
+        "assignments": [{"id": item["id"], "endpointHeavyRows": sorted(item["endpointHeavyRows"])} for item in assignments],
+        "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
+        "executionStatus": "threshold unresolved" if any(run["status"] == "scenario threshold unresolved" for run in runs.values()) else "completed",
+    }
+    return {"assignments": runs, "kernelCheck": check, "frequencyRange": [min(shares_), max(shares_)], "label": met and eligible, "reading": reading}
 
 
 def standard_error(share: float, n: int) -> float:

@@ -2280,13 +2280,144 @@
               "label": true
             }
           },
-          "coverage": "block-exhaustive",
+          "kernelCheck": {
+            "dependencyComponents": [
+              [
+                "gemini-4-argon"
+              ],
+              [
+                "gpt-6.1-sol"
+              ],
+              [
+                "claude-sonnet-5-5"
+              ],
+              [
+                "claude-opus-5-5"
+              ],
+              [
+                "gpt-5.6-sol"
+              ],
+              [
+                "gpt-6-sol"
+              ],
+              [
+                "grok-4.7"
+              ],
+              [
+                "gpt-5.6-luna"
+              ],
+              [
+                "gpt-6-luna"
+              ],
+              [
+                "claude-haiku-5-5"
+              ],
+              [
+                "gemini-3.8-flash"
+              ],
+              [
+                "claude-opus-5"
+              ],
+              [
+                "glm-5.3"
+              ],
+              [
+                "deepseek-v4-flash"
+              ],
+              [
+                "qwen3.8-max"
+              ],
+              [
+                "deepseek-v4-pro"
+              ]
+            ],
+            "switchGroups": {
+              "candidate": [
+                "gpt-6-luna"
+              ],
+              "reference": [
+                "gpt-6-luna"
+              ],
+              "competitors": [
+                "claude-haiku-5-5",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "grok-4.7",
+                "qwen3.8-max"
+              ]
+            },
+            "assignments": [
+              {
+                "id": "UUU",
+                "endpointHeavyRows": []
+              },
+              {
+                "id": "UUH",
+                "endpointHeavyRows": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "qwen3.8-max"
+                ]
+              },
+              {
+                "id": "HHU",
+                "endpointHeavyRows": [
+                  "gpt-6-luna"
+                ]
+              },
+              {
+                "id": "HHH",
+                "endpointHeavyRows": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "qwen3.8-max"
+                ]
+              }
+            ],
+            "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
+            "executionStatus": "completed"
+          },
           "frequencyRange": [
             1.0,
             1.0
           ],
           "label": true,
-          "reading": "supported under the registered kernel checks (block-exhaustive over candidate, reference and competitors)"
+          "reading": "supported under all registered role-group kernel checks"
         }
       }
     }

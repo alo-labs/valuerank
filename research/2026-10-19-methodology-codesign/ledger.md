@@ -532,3 +532,12 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 # Round 6 complete (reviewers 32–37). Every panel model returned HAS FEEDBACK; round 7 starts with GPT-6.1 Sol on draft r37.
 
 # Round 7 (reviewer 38 onward)
+
+## Editor decisions after reviewer 38 (owner may override)
+- E133. Kernel-check object: dependency components, kernel-switch groups, mapping, roles, exact assignment list, coverage, execution status; v1 switches by role group (candidate, reference, competitors) — competitor components are not exhaustively varied — and the label reads "supported under all registered role-group kernel checks"; resource-limit overruns withhold the label. Answers GPT Q1 without escalation: role-group switching keeps the check tractable (exhaustive switching would need up to 2^16 assignments for 16 rows) and the claim is narrowed to match.
+- E134. Token-use variance: rounding draws and public paired observations only in S0; analyst ranges only in a named S2 stress branch; otherwise "not quantified"; build rejects S0 primitives derived from analyst conventions. Answers GPT Q2 without escalation: no exact-configuration evidence supports a parametric range today (the implementation draws cost from rounding intervals only).
+- E135. E77 certification requires IID replicates from a fixed law per event and assignment; other designs publish descriptive frequencies only.
+- E136. The undefined per-row "own normalised weighted spread" is dropped (common-panel spread and row-level scenario dispersion remain).
+
+## Reviewer 38 (GPT-6.1 Sol, round 7, Thinking) — adopted
+- All findings (E133–E136).

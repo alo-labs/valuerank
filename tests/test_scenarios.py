@@ -208,7 +208,11 @@ def test_kernel_robust_label_needs_every_kernel():
     assert result["label"] is False and result["reading"] == "primary-kernel frequency >= 90%; kernel-sensitive"
     assert result["frequencyRange"][0] < 0.9 <= result["frequencyRange"][1]
     always = sc.kernel_robust_cheapest([full_row("c", 80.0, 10.0), reference, full_row("x", 90.0, 500.0)], "c", "ref", 3, batch=100, looks=1)
-    assert len(always["assignments"]) == 8 and always["label"] is True and always["reading"].startswith("supported under the registered kernel checks")
+    assert len(always["assignments"]) == 8 and always["label"] is True and always["reading"] == "supported under all registered role-group kernel checks"
+    assert always["kernelCheck"]["switchGroups"]["competitors"] == ["x"] and always["kernelCheck"]["executionStatus"] == "completed"
+    assert result["kernelCheck"]["dependencyComponents"] == [["c"], ["ref"]]
+    borderline = sc.kernel_robust_cheapest([candidate, full_row("ref", 79.0, 100.0)], "c", "ref", 2, batch=200, looks=1)
+    assert borderline["kernelCheck"]["executionStatus"] == "threshold unresolved"
     provisional = sc.kernel_robust_cheapest([full_row("c", 80.0, 10.0, provisional=True), reference], "c", "ref", 3, batch=100, looks=1)
     assert provisional["label"] is False and provisional["reading"] == "frequency only (provisional row)"
     never = sc.kernel_robust_cheapest([full_row("c", 50.0, 10.0), reference], "c", "ref", 3, batch=100, looks=1)
