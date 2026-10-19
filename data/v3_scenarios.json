@@ -8,6 +8,12 @@
       {
         "stratum": "S0",
         "targetProfile": "published-record reporting precision",
+        "permittedTargets": [
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "reporting precision"
+        ],
         "scenarios": 10000,
         "seed": 20261017,
         "alternative": false,
@@ -277,6 +283,14 @@
       {
         "stratum": "S1",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
         "scenarios": 10000,
         "seed": 20261018,
         "alternative": false,
@@ -546,6 +560,16 @@
       {
         "stratum": "S2",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision",
+          "specification stress"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "reporting precision",
+          "specification stress"
+        ],
         "scenarios": 10000,
         "seed": 20261019,
         "alternative": false,
@@ -815,6 +839,14 @@
       {
         "stratum": "S1",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
         "scenarios": 10000,
         "seed": 20261020,
         "alternative": true,
@@ -1086,6 +1118,12 @@
       {
         "stratum": "S0",
         "targetProfile": "published-record reporting precision",
+        "permittedTargets": [
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "reporting precision"
+        ],
         "scenarios": 10000,
         "seed": 20261017,
         "alternative": false,
@@ -1355,6 +1393,14 @@
       {
         "stratum": "S1",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
         "scenarios": 10000,
         "seed": 20261018,
         "alternative": false,
@@ -1624,6 +1670,16 @@
       {
         "stratum": "S2",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision",
+          "specification stress"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "reporting precision",
+          "specification stress"
+        ],
         "scenarios": 10000,
         "seed": 20261019,
         "alternative": false,
@@ -1893,6 +1949,14 @@
       {
         "stratum": "S1",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "reporting precision"
+        ],
         "scenarios": 10000,
         "seed": 20261020,
         "alternative": true,
@@ -2183,6 +2247,10 @@
                 "qualityEquation": "full composite",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                "variedTargets": [
+                  "identification convention",
+                  "reporting precision"
+                ],
                 "specificationBranch": "core",
                 "kernel": "block assignment",
                 "endpointHeavyRows": [],
@@ -2205,6 +2273,10 @@
                 "qualityEquation": "full composite",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                "variedTargets": [
+                  "identification convention",
+                  "reporting precision"
+                ],
                 "specificationBranch": "core",
                 "kernel": "block assignment",
                 "endpointHeavyRows": [
@@ -2243,6 +2315,10 @@
                 "qualityEquation": "full composite",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                "variedTargets": [
+                  "identification convention",
+                  "reporting precision"
+                ],
                 "specificationBranch": "core",
                 "kernel": "block assignment",
                 "endpointHeavyRows": [
@@ -2267,6 +2343,10 @@
                 "qualityEquation": "full composite",
                 "scenarioStratum": "S1",
                 "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                "variedTargets": [
+                  "identification convention",
+                  "reporting precision"
+                ],
                 "specificationBranch": "core",
                 "kernel": "block assignment",
                 "endpointHeavyRows": [
@@ -2295,52 +2375,59 @@
           "kernelCheck": {
             "dependencyComponents": [
               [
-                "gemini-4-argon"
-              ],
-              [
-                "gpt-6.1-sol"
-              ],
-              [
-                "claude-sonnet-5-5"
-              ],
-              [
-                "claude-opus-5-5"
-              ],
-              [
-                "gpt-5.6-sol"
-              ],
-              [
-                "gpt-6-sol"
-              ],
-              [
-                "grok-4.7"
-              ],
-              [
-                "gpt-5.6-luna"
-              ],
-              [
-                "gpt-6-luna"
-              ],
-              [
                 "claude-haiku-5-5"
-              ],
-              [
-                "gemini-3.8-flash"
               ],
               [
                 "claude-opus-5"
               ],
               [
-                "glm-5.3"
+                "claude-opus-5-5"
+              ],
+              [
+                "claude-sonnet-5-5"
               ],
               [
                 "deepseek-v4-flash"
               ],
               [
-                "qwen3.8-max"
+                "deepseek-v4-pro"
               ],
               [
-                "deepseek-v4-pro"
+                "gemini-3.8-flash"
+              ],
+              [
+                "gemini-4-argon"
+              ],
+              [
+                "glm-5.3"
+              ],
+              [
+                "gpt-5.6-luna"
+              ],
+              [
+                "gpt-5.6-sol"
+              ],
+              [
+                "gpt-6-luna"
+              ],
+              [
+                "gpt-6-sol"
+              ],
+              [
+                "gpt-6.1-sol"
+              ],
+              [
+                "grok-4.7"
+              ],
+              [
+                "qwen3.8-max"
+              ]
+            ],
+            "dependencyGraphHash": "df28ecb25535268c",
+            "mergedBlocks": [
+              [
+                "candidate",
+                "reference"
               ]
             ],
             "switchGroups": {

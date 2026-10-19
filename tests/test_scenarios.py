@@ -27,10 +27,63 @@ def test_kernels_draw_their_families():
     heavy = Kernel("uniform", (10.0, 20.0), "endpoint-heavy")
     assert 10.0 <= heavy.draw(rng, use_alternative=True) <= 20.0
     assert 10.0 <= Kernel("uniform", (10.0, 20.0)).draw(rng, use_alternative=True) <= 20.0
-    runs = Kernel("runs", (40.0, 50.0, 60.0)).draw(rng)
+    runs = Kernel("runs", (40.0, 50.0, 60.0), target="expected performance").draw(rng)
     assert 40.0 <= runs <= 60.0
     with pytest.raises(ValueError, match="unknown kernel family: normal"):
         Kernel("normal", (0, 1)).draw(rng)
+    with pytest.raises(ValueError, match="never reporting precision"):
+        Kernel("runs", (40.0, 50.0))
+
+
+def test_stream_target_profiles_are_an_allowlist():
+    """E145: v1 S0 varies only reporting precision; other uncertainty enters only streams that name it."""
+
+    rounding = RowInputs("a", {"deepswe": Kernel("uniform", (49.95, 50.05))}, Kernel("uniform", (99.5, 100.5)))
+    fixed = RowInputs("b", {"deepswe": Kernel("fixed", (40.0,))}, Kernel("fixed", (80.0,)))
+    assert sc.validate_stream([rounding, fixed], "S0") == ["reporting precision"]
+    assert sc.validate_stream([fixed], "S0") == []
+    assert sc.validate_stream([fixed], "S1") == ["identification convention"]
+    assert sc.validate_stream([fixed], "S2") == ["identification convention", "specification stress"]
+    fitted_interval = RowInputs("c", {"gdpval": Kernel("uniform", (40.0, 44.0), target="expected performance")}, Kernel("fixed", (1.0,)))
+    run_range = RowInputs("d", {"terminalBench": Kernel("runs", (30.0, 35.0), target="future-run variation")}, Kernel("fixed", (1.0,)))
+    analyst_range = RowInputs("e", {}, Kernel("uniform", (80.0, 120.0), target=sc.SPECIFICATION_STRESS))
+    for stratum in sc.STRATA:
+        for row in (fitted_interval, run_range):
+            with pytest.raises(ValueError, match="cannot vary"):
+                sc.validate_stream([row], stratum)
+    for stratum in ("S0", "S1"):
+        with pytest.raises(ValueError, match="cannot vary e cost"):
+            sc.validate_stream([analyst_range], stratum)
+    assert sc.validate_stream([analyst_range], "S2") == ["identification convention", "specification stress"]
+    with pytest.raises(ValueError, match="unknown stratum: S9"):
+        sc.validate_stream([fixed], "S9")
+    with pytest.raises(ValueError, match="cannot vary"):
+        sc.shares([fitted_interval], "S1", 10, 1, ANCHORS, 0.25)
+    with pytest.raises(ValueError, match="cannot vary"):
+        sc.scenario_supported_cheapest([fitted_interval, fixed], "c", "b", "S1", random.Random(1))
+    result = sc.shares([rounding, fixed], "S0", 10, 1, ANCHORS, 0.25)
+    assert result["permittedTargets"] == ["reporting precision"] and result["variedTargets"] == ["reporting precision"]
+
+
+def test_dependency_components_are_compiled_from_shared_primitives():
+    """E147: rows linked by a shared varying primitive form one component; kernels switch per component."""
+
+    rows = [
+        RowInputs("a", {}, Kernel("fixed", (1.0,)), meta={"sharedPrimitives": ["price-list"]}),
+        RowInputs("b", {}, Kernel("fixed", (2.0,))),
+        RowInputs("c", {}, Kernel("fixed", (3.0,)), meta={"sharedPrimitives": ["price-list", "donor"]}),
+        RowInputs("d", {}, Kernel("fixed", (4.0,)), meta={"sharedPrimitives": ["donor"]}),
+    ]
+    assert sc.dependency_components(rows) == [["a", "c", "d"], ["b"]]
+    assert sc.dependency_components(rows[:2]) == [["a"], ["b"]]
+    # Candidate a shares primitives with competitors c and d: the candidate and competitor blocks switch together.
+    ids = [item["id"] for item in sc.kernel_assignments(rows, "a", "b")]
+    assert ids == ["UUU", "UHU", "HUH", "HHH"]
+    check = sc.kernel_robust_cheapest(rows, "a", "b", 5, batch=50, looks=1)["kernelCheck"]
+    assert check["dependencyComponents"] == [["a", "c", "d"], ["b"]] and check["mergedBlocks"] == [["candidate", "competitors"]]
+    assert len(check["dependencyGraphHash"]) == 16
+    independent = sc.kernel_robust_cheapest(rows[:2], "a", "b", 5, batch=50, looks=1)["kernelCheck"]
+    assert independent["mergedBlocks"] == [] and independent["dependencyComponents"] == [["a"], ["b"]]
 
 
 def test_dirichlet_and_hierarchical_weights_preserve_totals():
@@ -56,7 +109,7 @@ def test_hierarchical_weights_keep_the_nominal_means():
 
 def test_missing_ranges_use_observed_values_and_default_to_the_domain():
     rows = [
-        RowInputs("a", {"deepswe": Kernel("fixed", (40.0,)), "bugHunt": Kernel("runs", (30.0, 50.0))}, Kernel("fixed", (1.0,))),
+        RowInputs("a", {"deepswe": Kernel("fixed", (40.0,)), "bugHunt": Kernel("runs", (30.0, 50.0), target="expected performance")}, Kernel("fixed", (1.0,))),
         RowInputs("b", {"deepswe": Kernel("fixed", (70.0,))}, Kernel("fixed", (1.0,))),
     ]
     ranges = sc.missing_ranges(rows)

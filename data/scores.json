@@ -9520,6 +9520,8 @@
           "grade": "controlled",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "valuation basis unverified"
@@ -10053,6 +10055,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": "claude-pro-opus55-semianalysis",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -10473,6 +10477,8 @@
           "grade": "controlled",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "valuation basis unverified"
@@ -11016,6 +11022,8 @@
           "grade": "controlled",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "valuation basis unverified"
@@ -11519,6 +11527,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -11999,6 +12009,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "saturation unverified",
+          "evidenceDate": "2026-10-08",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -12480,6 +12492,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -13481,6 +13495,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -14015,6 +14031,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -14465,6 +14483,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "saturation unverified",
+          "evidenceDate": "2026-10-08",
+          "donorRouteId": null,
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -14944,6 +14964,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": "claude-pro-opus55-semianalysis",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -15906,6 +15928,8 @@
           "grade": "assumption",
           "identification": "unidentified",
           "measurementCapacityStatus": "capacity established on the measurement workload",
+          "evidenceDate": "2026-10-06",
+          "donorRouteId": "claude-pro-opus55-semianalysis",
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
@@ -18479,7 +18503,1284 @@
           "grok-4.7",
           "qwen3.8-max"
         ]
-      }
+      },
+      "deletionSensitivity": [
+        {
+          "id": "leave-out:deepswe",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "deepswe"
+          ],
+          "retainedNominalWeight": 0.7,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": -2,
+                  "claude-opus-5": -3,
+                  "claude-opus-5-5": -5,
+                  "claude-sonnet-5-5": -1,
+                  "deepseek-v4-flash": -1,
+                  "deepseek-v4-pro": 2,
+                  "gemini-3.8-flash": 2,
+                  "gemini-4-argon": 3,
+                  "glm-5.3": -1,
+                  "gpt-5.6-luna": 5,
+                  "gpt-5.6-sol": 2,
+                  "gpt-6-astra": -4,
+                  "gpt-6-luna": 2,
+                  "gpt-6-sol": 1,
+                  "gpt-6.1-sol": 1,
+                  "grok-4.7": 2,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": -3,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 5,
+                "maxRow": "gpt-5.6-luna"
+              },
+              "kendallTauB": 0.7192982456140351
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 1,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": -1,
+                  "claude-sonnet-5-5": 1,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 1,
+                  "glm-5.3": -1,
+                  "gpt-5.6-luna": 3,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": -1,
+                  "gpt-6-luna": 1,
+                  "gpt-6-sol": 1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 1,
+                  "mimo-v2-6-flash": -4,
+                  "mimo-v2-6-pro": -2,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 4,
+                "maxRow": "mimo-v2-6-flash"
+              },
+              "kendallTauB": 0.8830409356725146
+            }
+          }
+        },
+        {
+          "id": "leave-out:bugHunt",
+          "labels": [
+            "leave-one-benchmark-out",
+            "leave-one-source-out"
+          ],
+          "removed": [
+            "bugHunt"
+          ],
+          "retainedNominalWeight": 0.9,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": -3,
+                  "claude-opus-5-5": -1,
+                  "claude-sonnet-5-5": 1,
+                  "deepseek-v4-flash": -1,
+                  "deepseek-v4-pro": -2,
+                  "gemini-3.8-flash": 1,
+                  "gemini-4-argon": 1,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 1,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 3,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 2,
+                  "grok-4.7": 2,
+                  "mimo-v2-6-flash": 1,
+                  "mimo-v2-6-pro": -4,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 4,
+                "maxRow": "mimo-v2-6-pro"
+              },
+              "kendallTauB": 0.8245614035087719
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 1,
+                  "claude-opus-5": -2,
+                  "claude-opus-5-5": -1,
+                  "claude-sonnet-5-5": 1,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": -1,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": -1,
+                  "gpt-5.6-sol": -1,
+                  "gpt-6-astra": 5,
+                  "gpt-6-luna": -1,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 2,
+                  "mimo-v2-6-pro": -1,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 5,
+                "maxRow": "gpt-6-astra"
+              },
+              "kendallTauB": 0.8947368421052632
+            }
+          }
+        },
+        {
+          "id": "leave-out:frontierCode",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "frontierCode"
+          ],
+          "retainedNominalWeight": 0.9,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 1,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": -2,
+                  "claude-sonnet-5-5": -3,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 2,
+                  "gemini-3.8-flash": 1,
+                  "gemini-4-argon": -1,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 2,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 1,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": -1,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 3,
+                "maxRow": "claude-sonnet-5-5"
+              },
+              "kendallTauB": 0.9181286549707602
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 1,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 1,
+                  "gemini-3.8-flash": -1,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 1,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 1,
+                  "gpt-6-astra": 1,
+                  "gpt-6-luna": -3,
+                  "gpt-6-sol": 1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": -1,
+                  "mimo-v2-6-flash": -1,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 3,
+                "maxRow": "gpt-6-luna"
+              },
+              "kendallTauB": 0.9298245614035088
+            }
+          }
+        },
+        {
+          "id": "leave-out:terminalBench",
+          "labels": [
+            "leave-one-benchmark-out",
+            "leave-one-source-out"
+          ],
+          "removed": [
+            "terminalBench"
+          ],
+          "retainedNominalWeight": 0.9,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 1,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": -1,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 2,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 1,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": -3,
+                  "gpt-5.6-sol": -2,
+                  "gpt-6-astra": 1,
+                  "gpt-6-luna": -1,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 2,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 1,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 3,
+                "maxRow": "gpt-5.6-luna"
+              },
+              "kendallTauB": 0.9064327485380117
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 3,
+                  "claude-opus-5": 4,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 2,
+                  "gemini-3.8-flash": -2,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 1,
+                  "gpt-5.6-luna": -4,
+                  "gpt-5.6-sol": -4,
+                  "gpt-6-astra": 4,
+                  "gpt-6-luna": -4,
+                  "gpt-6-sol": 1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": -1,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 4,
+                "maxRow": "gpt-6-luna"
+              },
+              "kendallTauB": 0.8011695906432749
+            }
+          }
+        },
+        {
+          "id": "leave-out:gdpval",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "gdpval"
+          ],
+          "retainedNominalWeight": 0.9,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 1,
+                  "deepseek-v4-pro": 1,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": -1,
+                  "gpt-6-astra": -3,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 2,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 3,
+                "maxRow": "gpt-6-astra"
+              },
+              "kendallTauB": 0.9415204678362573
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 2,
+                  "claude-opus-5": 2,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": -1,
+                  "gemini-4-argon": -1,
+                  "glm-5.3": 1,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": -1,
+                  "gpt-6-luna": -1,
+                  "gpt-6-sol": -2,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 1,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 2,
+                "maxRow": "gpt-6-sol"
+              },
+              "kendallTauB": 0.9298245614035088
+            }
+          }
+        },
+        {
+          "id": "leave-out:automationBench",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "automationBench"
+          ],
+          "retainedNominalWeight": 0.9,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": -1,
+                  "claude-opus-5": -3,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": -1,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 2,
+                  "gemini-3.8-flash": 1,
+                  "gemini-4-argon": 1,
+                  "glm-5.3": 1,
+                  "gpt-5.6-luna": -2,
+                  "gpt-5.6-sol": -1,
+                  "gpt-6-astra": 2,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 1,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 1,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 3,
+                "maxRow": "claude-opus-5"
+              },
+              "kendallTauB": 0.8947368421052632
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": -1,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": -1,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 2,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 1,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 2,
+                "maxRow": "gpt-6-astra"
+              },
+              "kendallTauB": 0.9649122807017544
+            }
+          }
+        },
+        {
+          "id": "leave-out:omniscience",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "omniscience"
+          ],
+          "retainedNominalWeight": 0.9,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 2,
+                  "gemini-4-argon": 1,
+                  "glm-5.3": -2,
+                  "gpt-5.6-luna": -2,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 1,
+                  "gpt-6-luna": -1,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 1,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 1,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 2,
+                "maxRow": "gpt-5.6-luna"
+              },
+              "kendallTauB": 0.9181286549707602
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 2,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": -3,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 6,
+                  "gpt-6-luna": -3,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": -2,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 6,
+                "maxRow": "gpt-6-astra"
+              },
+              "kendallTauB": 0.8596491228070176
+            }
+          }
+        },
+        {
+          "id": "leave-out:lcr",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "lcr"
+          ],
+          "retainedNominalWeight": 0.95,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": -1,
+                  "claude-sonnet-5-5": -2,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 3,
+                  "gemini-3.8-flash": 1,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": -1,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 1,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": -1,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 1,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 3,
+                "maxRow": "deepseek-v4-pro"
+              },
+              "kendallTauB": 0.9181286549707602
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": -1,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": -1,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 1,
+                  "gpt-5.6-sol": -1,
+                  "gpt-6-astra": 2,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": -1,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 1,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 2,
+                "maxRow": "gpt-6-astra"
+              },
+              "kendallTauB": 0.9532163742690059
+            }
+          }
+        },
+        {
+          "id": "leave-out:hle",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "hle"
+          ],
+          "retainedNominalWeight": 0.9833333333333333,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 0,
+                "maxRow": "qwen3.8-max"
+              },
+              "kendallTauB": 1.0
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 0,
+                "maxRow": "qwen3.8-max"
+              },
+              "kendallTauB": 1.0
+            }
+          }
+        },
+        {
+          "id": "leave-out:scicode",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "scicode"
+          ],
+          "retainedNominalWeight": 0.9833333333333333,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": -1,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 2,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": -1,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 2,
+                "maxRow": "deepseek-v4-pro"
+              },
+              "kendallTauB": 0.9766081871345029
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 0,
+                "maxRow": "qwen3.8-max"
+              },
+              "kendallTauB": 1.0
+            }
+          }
+        },
+        {
+          "id": "leave-out:critpt",
+          "labels": [
+            "leave-one-benchmark-out"
+          ],
+          "removed": [
+            "critpt"
+          ],
+          "retainedNominalWeight": 0.9833333333333333,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 0,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": -1,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 1,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 1,
+                "maxRow": "gpt-5.6-sol"
+              },
+              "kendallTauB": 0.9883040935672515
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "mimo-v2-6-flash",
+                  "mimo-v2-6-pro",
+                  "qwen3.8-max"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5": 1,
+                  "claude-opus-5": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-flash": 0,
+                  "deepseek-v4-pro": 0,
+                  "gemini-3.8-flash": 0,
+                  "gemini-4-argon": 0,
+                  "glm-5.3": 0,
+                  "gpt-5.6-luna": 0,
+                  "gpt-5.6-sol": 0,
+                  "gpt-6-astra": -1,
+                  "gpt-6-luna": 0,
+                  "gpt-6-sol": 0,
+                  "gpt-6.1-sol": 0,
+                  "grok-4.7": 0,
+                  "mimo-v2-6-flash": 0,
+                  "mimo-v2-6-pro": 0,
+                  "qwen3.8-max": 0
+                },
+                "maxAbsChange": 1,
+                "maxRow": "gpt-6-astra"
+              },
+              "kendallTauB": 0.9883040935672515
+            }
+          }
+        },
+        {
+          "id": "leave-source-out:Artificial Analysis",
+          "labels": [
+            "leave-one-source-out"
+          ],
+          "removed": [
+            "deepswe",
+            "frontierCode",
+            "gdpval",
+            "automationBench",
+            "omniscience",
+            "lcr",
+            "hle",
+            "scicode",
+            "critpt"
+          ],
+          "retainedNominalWeight": 0.2,
+          "status": "not identifiable under the coverage rule"
+        }
+      ]
     },
     "manifest": [
       {
@@ -18549,6 +19850,12 @@
           {
             "stratum": "S0",
             "targetProfile": "published-record reporting precision",
+            "permittedTargets": [
+              "reporting precision"
+            ],
+            "variedTargets": [
+              "reporting precision"
+            ],
             "scenarios": 10000,
             "seed": 20261017,
             "alternative": false,
@@ -18818,6 +20125,14 @@
           {
             "stratum": "S1",
             "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+            "permittedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
+            "variedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
             "scenarios": 10000,
             "seed": 20261018,
             "alternative": false,
@@ -19087,6 +20402,16 @@
           {
             "stratum": "S2",
             "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+            "permittedTargets": [
+              "identification convention",
+              "reporting precision",
+              "specification stress"
+            ],
+            "variedTargets": [
+              "identification convention",
+              "reporting precision",
+              "specification stress"
+            ],
             "scenarios": 10000,
             "seed": 20261019,
             "alternative": false,
@@ -19356,6 +20681,14 @@
           {
             "stratum": "S1",
             "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+            "permittedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
+            "variedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
             "scenarios": 10000,
             "seed": 20261020,
             "alternative": true,
@@ -19627,6 +20960,12 @@
           {
             "stratum": "S0",
             "targetProfile": "published-record reporting precision",
+            "permittedTargets": [
+              "reporting precision"
+            ],
+            "variedTargets": [
+              "reporting precision"
+            ],
             "scenarios": 10000,
             "seed": 20261017,
             "alternative": false,
@@ -19896,6 +21235,14 @@
           {
             "stratum": "S1",
             "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+            "permittedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
+            "variedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
             "scenarios": 10000,
             "seed": 20261018,
             "alternative": false,
@@ -20165,6 +21512,16 @@
           {
             "stratum": "S2",
             "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+            "permittedTargets": [
+              "identification convention",
+              "reporting precision",
+              "specification stress"
+            ],
+            "variedTargets": [
+              "identification convention",
+              "reporting precision",
+              "specification stress"
+            ],
             "scenarios": 10000,
             "seed": 20261019,
             "alternative": false,
@@ -20434,6 +21791,14 @@
           {
             "stratum": "S1",
             "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+            "permittedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
+            "variedTargets": [
+              "identification convention",
+              "reporting precision"
+            ],
             "scenarios": 10000,
             "seed": 20261020,
             "alternative": true,
@@ -20724,6 +22089,10 @@
                     "qualityEquation": "full composite",
                     "scenarioStratum": "S1",
                     "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
                     "specificationBranch": "core",
                     "kernel": "block assignment",
                     "endpointHeavyRows": [],
@@ -20746,6 +22115,10 @@
                     "qualityEquation": "full composite",
                     "scenarioStratum": "S1",
                     "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
                     "specificationBranch": "core",
                     "kernel": "block assignment",
                     "endpointHeavyRows": [
@@ -20784,6 +22157,10 @@
                     "qualityEquation": "full composite",
                     "scenarioStratum": "S1",
                     "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
                     "specificationBranch": "core",
                     "kernel": "block assignment",
                     "endpointHeavyRows": [
@@ -20808,6 +22185,10 @@
                     "qualityEquation": "full composite",
                     "scenarioStratum": "S1",
                     "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
                     "specificationBranch": "core",
                     "kernel": "block assignment",
                     "endpointHeavyRows": [
@@ -20836,52 +22217,59 @@
               "kernelCheck": {
                 "dependencyComponents": [
                   [
-                    "gemini-4-argon"
-                  ],
-                  [
-                    "gpt-6.1-sol"
-                  ],
-                  [
-                    "claude-sonnet-5-5"
-                  ],
-                  [
-                    "claude-opus-5-5"
-                  ],
-                  [
-                    "gpt-5.6-sol"
-                  ],
-                  [
-                    "gpt-6-sol"
-                  ],
-                  [
-                    "grok-4.7"
-                  ],
-                  [
-                    "gpt-5.6-luna"
-                  ],
-                  [
-                    "gpt-6-luna"
-                  ],
-                  [
                     "claude-haiku-5-5"
-                  ],
-                  [
-                    "gemini-3.8-flash"
                   ],
                   [
                     "claude-opus-5"
                   ],
                   [
-                    "glm-5.3"
+                    "claude-opus-5-5"
+                  ],
+                  [
+                    "claude-sonnet-5-5"
                   ],
                   [
                     "deepseek-v4-flash"
                   ],
                   [
-                    "qwen3.8-max"
+                    "deepseek-v4-pro"
                   ],
                   [
-                    "deepseek-v4-pro"
+                    "gemini-3.8-flash"
+                  ],
+                  [
+                    "gemini-4-argon"
+                  ],
+                  [
+                    "glm-5.3"
+                  ],
+                  [
+                    "gpt-5.6-luna"
+                  ],
+                  [
+                    "gpt-5.6-sol"
+                  ],
+                  [
+                    "gpt-6-luna"
+                  ],
+                  [
+                    "gpt-6-sol"
+                  ],
+                  [
+                    "gpt-6.1-sol"
+                  ],
+                  [
+                    "grok-4.7"
+                  ],
+                  [
+                    "qwen3.8-max"
+                  ]
+                ],
+                "dependencyGraphHash": "df28ecb25535268c",
+                "mergedBlocks": [
+                  [
+                    "candidate",
+                    "reference"
                   ]
                 ],
                 "switchGroups": {

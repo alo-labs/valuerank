@@ -2,9 +2,11 @@
 
 Each scenario draws:
 
-- S0 (measurement): observed leaf values from their kernels (uniform on a
-  published interval, or a run-level bootstrap of public repeated runs) and
-  cost from its kernel; quality is the observed-only renormalised composite.
+- S0 (measurement): observed leaf values and cost from their reporting-precision
+  kernels (uniform on the published record's rounding interval); quality is the
+  observed-only renormalised composite. The stream's target profile is an
+  explicit allowlist (E145): a kernel concerning anything else (a fitted-rating
+  interval, a run range, an analyst range) fails validation.
 - S1 (identification): S0 plus a value for every missing leaf from the declared
   convention (uniform on 0-100; the published alternative draws uniformly on
   the cohort's observed range for that leaf); quality is the full composite.
@@ -38,6 +40,16 @@ TARGET_PROFILES = {
     "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
 }
 STRATA = ("S0", "S1", "S2")
+# E145: the target profile governs which inputs a stream may vary (an explicit allowlist); source-supported
+# uncertainty about expected performance or future runs enters only separately named streams (none in v1).
+REPORTING_PRECISION = "reporting precision"
+IDENTIFICATION_CONVENTION = "identification convention"
+SPECIFICATION_STRESS = "specification stress"
+STREAM_TARGETS = {
+    "S0": frozenset({REPORTING_PRECISION}),
+    "S1": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION}),
+    "S2": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, SPECIFICATION_STRESS}),
+}
 GROUP_CONCENTRATION = 100.0
 LEAF_CONCENTRATION = 50.0
 BATCH = 10_000
@@ -54,6 +66,11 @@ class Kernel:
     family: str
     params: tuple
     alternative: str | None = None  # 'endpoint-heavy' for interval-only inputs
+    target: str = REPORTING_PRECISION  # E145: what the kernel's variation is uncertainty about
+
+    def __post_init__(self):
+        if self.family == "runs" and self.target == REPORTING_PRECISION:
+            raise ValueError("a run-level bootstrap concerns expected performance or future runs, never reporting precision")
 
     def draw(self, rng: random.Random, *, use_alternative: bool = False) -> float:
         if self.family == "fixed":
@@ -117,6 +134,58 @@ def missing_ranges(rows: list[RowInputs]) -> dict:
     return ranges
 
 
+def validate_stream(rows: list[RowInputs], stratum: str) -> list[str]:
+    """E145: every varying input must be one the stratum's target profile allows; returns the varied targets.
+
+    Fixed inputs never vary and always pass. A kernel whose target the profile
+    does not list (a fitted-rating interval, a run range, an analyst range in S0)
+    fails the build instead of entering a stream labelled for something else.
+    """
+
+    if stratum not in STRATA:
+        raise ValueError(f"unknown stratum: {stratum}")
+    varied = set()
+    for row in rows:
+        for name, kernel in [*sorted(row.leaves.items()), ("cost", row.cost)]:
+            if kernel.family == "fixed":
+                continue
+            if kernel.target not in STREAM_TARGETS[stratum]:
+                raise ValueError(f"{stratum} ({TARGET_PROFILES[stratum]}) cannot vary {row.row} {name}: its kernel concerns {kernel.target}")
+            varied.add(kernel.target)
+    if stratum != "S0":
+        varied.add(IDENTIFICATION_CONVENTION)  # missing-leaf domains (drawn in the scenario)
+    if stratum == "S2":
+        varied.add(SPECIFICATION_STRESS)  # hierarchical weights
+    return sorted(varied)
+
+
+def dependency_components(rows: list[RowInputs]) -> list[list[str]]:
+    """E147: rows that share a varying primitive (``meta['sharedPrimitives']``) form one dependency component.
+
+    Compiled from the stream's inputs, never asserted: a shared price list or
+    donor multiple that is drawn once per scenario links every row it feeds.
+    """
+
+    parent = {row.row: row.row for row in rows}
+
+    def find(item):
+        while parent[item] != item:
+            item = parent[item]
+        return item
+
+    owner = {}
+    for row in rows:
+        for primitive in row.meta.get("sharedPrimitives", ()):
+            if primitive in owner:
+                parent[find(row.row)] = find(owner[primitive])
+            else:
+                owner[primitive] = row.row
+    groups: dict[str, list[str]] = {}
+    for row in rows:
+        groups.setdefault(find(row.row), []).append(row.row)
+    return sorted(sorted(group) for group in groups.values())
+
+
 def draw_scenario(rows: list[RowInputs], stratum: str, rng: random.Random, *, alternative: bool = False, ranges: dict | None = None, alternative_rows: frozenset | None = None) -> dict:
     """One scenario: {row: (cost, quality)} for the stratum.
 
@@ -139,7 +208,7 @@ def draw_scenario(rows: list[RowInputs], stratum: str, rng: random.Random, *, al
                 if leaf.key not in values:
                     # A missing leaf's score domain is an interval-only input: uniform, with the E25 endpoint-heavy alternative.
                     low, high = (ranges or {}).get(leaf.key, (0.0, 100.0))
-                    values[leaf.key] = Kernel("uniform", (low, high), "endpoint-heavy").draw(rng, use_alternative=heavy)
+                    values[leaf.key] = Kernel("uniform", (low, high), "endpoint-heavy", IDENTIFICATION_CONVENTION).draw(rng, use_alternative=heavy)
             quality = sum(weights[key] * values[key] for key in weights) / 100.0
         scenario[row.row] = (row.cost.draw(rng, use_alternative=heavy), quality)
     return scenario
@@ -194,6 +263,8 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
     branch, S1 core (E100); other strata and branches publish the frequency only.
     """
 
+    varied = validate_stream(rows, stratum)
+
     def event(generator):
         scenario = draw_scenario(rows, stratum, generator, alternative=alternative, alternative_rows=alternative_rows)
         return cheapest_qualifier(scenario, reference) == candidate
@@ -206,6 +277,7 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
         "qualityEquation": "observed leaves" if stratum == "S0" else "full composite",
         "scenarioStratum": stratum,
         "scenarioTargetProfileId": TARGET_PROFILES[stratum],
+        "variedTargets": varied,
         "specificationBranch": "core",
         "kernel": "endpoint-heavy alternative" if alternative else "primary" if alternative_rows is None else "block assignment",
         "endpointHeavyRows": sorted(alternative_rows) if alternative_rows is not None else None,
@@ -235,11 +307,14 @@ def kernel_assignments(rows: list[RowInputs], candidate: str, reference: str) ->
         "reference": {reference},
         "competitors": {row.row for row in rows} - {candidate, reference},
     }
+    components = dependency_components(rows)
     assignments, seen = [], set()
     for flags in itertools.product((False, True), repeat=len(BLOCKS)):
         heavy = frozenset().union(*(members[block] for block, flag in zip(BLOCKS, flags) if flag))
         light = frozenset().union(*(members[block] for block, flag in zip(BLOCKS, flags) if not flag))
-        if heavy & light or heavy in seen:
+        # E147: rows of one dependency component share primitives, so they always take one kernel family.
+        split = any(heavy.intersection(component) and not heavy.issuperset(component) for component in components)
+        if heavy & light or split or heavy in seen:
             continue
         seen.add(heavy)
         assignments.append({"id": "".join("H" if flag else "U" for flag in flags), "endpointHeavyRows": heavy})
@@ -277,9 +352,14 @@ def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str
     else:
         reading = "not scenario-supported"
     shares_ = [run["share"] for run in runs.values()]
+    components = dependency_components(rows)
+    blocks = {"candidate": {candidate}, "reference": {reference}, "competitors": {row.row for row in rows} - {candidate, reference}}
     check = {
-        # E133: in v1 every row is its own dependency component; kernels switch by role group.
-        "dependencyComponents": [[row.row] for row in rows],
+        # E133/E147: components are compiled from the stream's shared primitives; kernels switch by role group,
+        # and role groups linked by one component switch together.
+        "dependencyComponents": components,
+        "dependencyGraphHash": hashlib.sha256(json.dumps(components).encode()).hexdigest()[:16],
+        "mergedBlocks": [sorted(block for block in BLOCKS if blocks[block] & set(component)) for component in components if sum(1 for block in BLOCKS if blocks[block] & set(component)) > 1],
         "switchGroups": {"candidate": [candidate], "reference": [reference], "competitors": sorted({row.row for row in rows} - {candidate, reference})},
         "assignments": [{"id": item["id"], "endpointHeavyRows": sorted(item["endpointHeavyRows"])} for item in assignments],
         "assignmentSetHash": hashlib.sha256(json.dumps(sorted(item["id"] for item in assignments)).encode()).hexdigest()[:16],
@@ -302,6 +382,7 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
     for V_i against V_j.
     """
 
+    varied = validate_stream(rows, stratum)
     rng = random.Random(seed)
     ranges = None
     counts = {row.row: {"top3": 0, "top1": 0, "frontier": 0} for row in rows}
@@ -334,7 +415,8 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
     pairwise = [{"pair": list(pair), **{key: count / n for key, count in counts_.items()}} for pair, counts_ in outcomes.items()]
     panel = sorted(row.row for row in rows)
     return {
-        "stratum": stratum, "targetProfile": TARGET_PROFILES[stratum], "scenarios": n, "seed": seed, "alternative": alternative,
+        "stratum": stratum, "targetProfile": TARGET_PROFILES[stratum], "permittedTargets": sorted(STREAM_TARGETS[stratum]), "variedTargets": varied,
+        "scenarios": n, "seed": seed, "alternative": alternative,
         "panel": panel, "panelSize": len(panel), "rows": result, "pairwise": pairwise,
     }
 

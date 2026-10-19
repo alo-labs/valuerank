@@ -423,3 +423,45 @@ def test_unknown_fees_are_written_as_null():
     row_a = next(row for row in v.score(result, frozen)["rows"] if row["id"] == "a")
     assert row_a["plan"]["comparisonTuples"]["plan-a"][-1] is None
     json.dumps(row_a, allow_nan=False)
+
+
+def test_deletion_branches_renormalise_the_remaining_observed_leaves():
+    """E146: displayed-score deletion sensitivity per registered branch; leave-AA-out is not identifiable today."""
+
+    branches = {item["id"]: item for item in v.deletion_branches()}
+    assert len(branches) == len(q.LEAVES) + 1
+    assert branches["leave-out:bugHunt"]["labels"] == ["leave-one-benchmark-out", "leave-one-source-out"]
+    assert branches["leave-out:deepswe"]["labels"] == ["leave-one-benchmark-out"]
+    observations = {"deepswe": q.Observation(80.0), "bugHunt": q.Observation(20.0)}
+    assert v.deletion_quality(observations, {"bugHunt"}) == pytest.approx(80.0)
+    assert v.deletion_quality(observations, {"deepswe", "bugHunt"}) is None
+    result, frozen = scored()
+    sensitivity = {item["id"]: item for item in v.score(result, frozen)["diagnostics"]["deletionSensitivity"]}
+    aa_out = sensitivity["leave-source-out:Artificial Analysis"]
+    assert aa_out["status"] == "not identifiable under the coverage rule" and aa_out["retainedNominalWeight"] == pytest.approx(0.2)
+    deep = sensitivity["leave-out:deepswe"]
+    assert deep["status"] == "evaluated" and deep["retainedNominalWeight"] == pytest.approx(0.7)
+    assert deep["bases"]["api"]["rankChanges"]["panel"] == ["a", "b", "c"] and deep["unevaluableRows"] == []
+    rows = [{"id": "x", "evidence": {"observations": {"deepswe": q.Observation(50.0)}}}]
+    per_row = {"x": {"api": {"value": 40.0, "costScore": 20.0}, "plan": {"value": None, "costScore": None}}}
+    crafted = {item["id"]: item for item in v._deletion_sensitivity(rows, per_row)}
+    assert crafted["leave-out:deepswe"]["unevaluableRows"] == ["x"]
+    assert crafted["leave-out:deepswe"]["bases"]["api"]["kendallTauB"] is None
+    assert crafted["leave-out:bugHunt"]["bases"]["plan"]["rankChanges"]["panel"] == []
+
+
+def test_bar_labels_fail_when_the_compiled_dependency_graph_is_not_the_registered_one(monkeypatch):
+    """E147: v1 registers singleton components; a shared varying primitive fails the build."""
+
+    result, frozen = scored()
+    original = v.scenario_panel
+
+    def linked(assembled_, basis):
+        panel = original(assembled_, basis)
+        for item in panel:
+            item.meta["sharedPrimitives"] = ["price-list"]
+        return panel
+
+    monkeypatch.setattr(v, "scenario_panel", linked)
+    with pytest.raises(ValueError, match="registered kernel-check object"):
+        v.bar_labels(result, frozen, seed=1, batch=50)

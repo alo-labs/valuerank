@@ -20,6 +20,7 @@ def route(identifier, multiple, *, kind="controlled_account_workload_projection"
         "modelIds": list(models),
         "planPriceUsd": fee,
         "checkedOn": checked,
+        "sourcePublicationDate": checked,
     }
     if source:
         document["sourceModel"] = source
@@ -87,9 +88,76 @@ def test_expiry_states():
     assert pr.expiry_status(route("a", 1, checked="2026-07-01"), TODAY) == "expired"
     assert pr.expiry_status(route("a", 1, checked="2026-05-01"), TODAY) == "demoted"
     undated = route("a", 1)
-    del undated["checkedOn"]
+    del undated["checkedOn"], undated["sourcePublicationDate"]
     assert pr.age_days(undated, TODAY) is None and pr.expiry_status(undated, TODAY) == "fresh"
     assert pr.age_days(dict(undated, validFrom="2026-10-09"), TODAY) == 10
+
+
+def test_evidence_clock_runs_from_the_observation_never_from_a_record_edit():
+    """E144: the measurement window's end, else the publication date, else the authorisation date; checkedOn is editorial."""
+
+    rechecked = route("a", 1, checked="2026-05-01", checkedOn="2026-10-18")
+    assert pr.age_days(rechecked, TODAY) == 171 and pr.expiry_status(rechecked, TODAY) == "demoted"
+    windowed = route("b", 1, checked="2026-10-15", measurementWindow={"start": "2026-10-01", "end": "2026-10-09"})
+    assert pr.evidence_date(windowed) == date(2026, 10, 9) and pr.age_days(windowed, TODAY) == 10
+
+
+def test_transfers_inherit_their_donor_measurements_clock_and_status():
+    """E144: a transfer never outlives its donor; editing or authorising it never restarts the donor's clock."""
+
+    kind = {"kind": "user_assumption", "source": "Opus 5.5", "source_kind": "controlled_account_workload_projection"}
+    current = route("donor-current", 50.0, models=("claude-opus-5-5",), checked="2026-10-06")
+    expired = route("donor-expired", 50.0, models=("claude-opus-5-5",), checked="2026-07-01")
+    demoted = route("donor-demoted", 50.0, models=("claude-opus-5-5",), checked="2026-05-01")
+    changed = route("donor-changed", 50.0, models=("claude-opus-5-5",), checked="2026-10-06", changeDetectedOn="2026-10-12")
+    later = route("donor-later", 50.0, models=("claude-opus-5-5",), checked="2026-10-06", changeDetectedOn="2026-10-25")
+    donors = [current, expired, demoted, changed, later]
+
+    def transfer(donor_id):
+        return route(f"t-{donor_id}", 50.0, models=("m",), checked="2026-10-18", donorRouteId=donor_id, **kind)
+
+    def candidate(donor_id):
+        (item,) = pr.route_candidates("m", "max", [transfer(donor_id)], TODAY, registry=donors + [transfer(donor_id)])
+        return item
+
+    fresh = candidate("donor-current")
+    assert (fresh["grade"], fresh["expiry"], fresh["evidenceDate"], fresh["donorRouteId"]) == ("assumption", "fresh", "2026-10-06", "donor-current")
+    assert candidate("donor-expired")["expiry"] == "expired"
+    gone = candidate("donor-demoted")
+    assert (gone["grade"], gone["expiry"]) == ("diagnostic", "demoted")
+    assert pr.select_route([gone]) is None
+    # A scoped change detected after the donor's observation supersedes both; one after the release day is not yet known.
+    assert candidate("donor-changed")["expiry"] == "possibly-superseded"
+    assert candidate("donor-later")["expiry"] == "fresh"
+    # A newer eligible measurement of the donor replaces the old one by naming it.
+    assert candidate("donor-current")["expiry"] == "fresh" and candidate("donor-current")["grade"] == "assumption"
+    # Donor chains resolve to the measurement; unknown and circular donors fail the build.
+    chained = route("chain", 50.0, models=("m",), donorRouteId="t-donor-demoted", **kind)
+    registry = {item["id"]: item for item in donors + [transfer("donor-demoted"), chained]}
+    assert pr.donor(chained, registry)["id"] == "donor-demoted"
+    with pytest.raises(ValueError, match="unknown donor"):
+        pr.donor(transfer("nobody"), {})
+    with pytest.raises(ValueError, match="unknown donor"):
+        pr.expiry_status(transfer("donor-current"), TODAY)
+    loop = {"x": {"id": "x", "donorRouteId": "y"}, "y": {"id": "y", "donorRouteId": "x"}}
+    with pytest.raises(ValueError, match="circular"):
+        pr.donor(loop["x"], loop)
+
+
+def test_transfers_take_their_donors_valuation_divisor_and_capacity():
+    kind = {"kind": "user_assumption", "source": "Opus 5.5", "source_kind": "controlled_account_workload_projection"}
+    different = route("d1", 50.0, models=("claude-opus-5-5",), valuationBasisReconciled=False)
+    invalid = route("d2", 0.0, models=("claude-opus-5-5",))
+    observed = route("d3", 50.0, models=("claude-opus-5-5",), valuationBasis="release", measurementCapacityStatus=pr.CAPACITY_OBSERVED)
+    transfers = [route(f"t{index}", 50.0, models=("m",), donorRouteId=f"d{index}", **kind) for index in (1, 2, 3)]
+    registry = [different, invalid, observed] + transfers
+    rows = {item["route"]["id"]: item for item in pr.admission_table("m", "max", registry, TODAY)}
+    assert (rows["t1"]["case"], rows["t1"]["valuation"], rows["t1"]["officialDisplayEligible"]) == (4, "different", False)
+    assert (rows["t2"]["case"], rows["t2"]["grade"]) == (5, "diagnostic")
+    assert (rows["t3"]["case"], rows["t3"]["valuation"], rows["t3"]["measurementCapacityStatus"]) == (2, "release", pr.CAPACITY_OBSERVED)
+    cost = pr.plan_cost(100.0, rows["t3"])
+    assert "observed-usage multiple; full utilisation not established" in cost["flags"] and "valuation basis unverified" not in cost["flags"]
+    assert (cost["donorRouteId"], cost["evidenceDate"]) == ("d3", "2026-10-10")
 
 
 def test_route_candidates_filter_by_model_and_required_variant():

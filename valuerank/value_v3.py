@@ -291,7 +291,7 @@ def plan_boxes(assembled: dict) -> list[intervals.Box]:
             continue
         bounds = plan_routes.identified_bounds(selected)
         # E138: an unrecorded or different valuation basis is never interval-eligible.
-        if bounds is None or not anchor_math.scoreable(bounds[1]) or plan_routes.valuation_status(selected["route"]) not in {"release", "revalued"}:
+        if bounds is None or not anchor_math.scoreable(bounds[1]) or selected["valuation"] not in {"release", "revalued"}:
             continue
         summary = row["summary"]
         boxes.append(intervals.Box(row["id"], cost["lowUsd"] / bounds[1], cost["highUsd"] / bounds[0], summary.lower, summary.upper, summary.provisional))
@@ -385,6 +385,68 @@ def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> l
     return results
 
 
+# E146: registered deletion branches. Displayed-score sensitivity removes the leaf set R globally and
+# renormalises the remaining observed weights: Q(-R) = sum_{b in O\R} w_b z_b / sum_{b in O\R} w_b (a zero
+# denominator leaves the row unevaluable); cost, workload, route and anchors stay primary.
+LEAVE_OUT_MIN_WEIGHT = 0.40
+SOURCE_LEAVES = {"Artificial Analysis": tuple(leaf.key for leaf in q.LEAVES if leaf.source == "aa")}
+
+
+def deletion_branches() -> list[dict]:
+    """Every registered branch: one per leaf (leave-one-benchmark-out) and one per multi-leaf source.
+
+    A single-leaf source (Bug Hunt Bench, Terminal-Bench) coincides with its
+    leaf's branch, which carries both labels; the Bug Hunt branch is the
+    standing Bug Hunt removal.
+    """
+
+    single = {leaf.key: leaf for leaf in q.LEAVES if leaf.source != "aa"}
+    branches = []
+    for leaf in q.LEAVES:
+        labels = ["leave-one-benchmark-out"] + (["leave-one-source-out"] if leaf.key in single else [])
+        branches.append({"id": f"leave-out:{leaf.key}", "labels": labels, "removed": [leaf.key]})
+    for source, keys in SOURCE_LEAVES.items():
+        branches.append({"id": f"leave-source-out:{source}", "labels": ["leave-one-source-out"], "removed": list(keys)})
+    return branches
+
+
+def deletion_quality(observations: dict, removed: set) -> float | None:
+    """Q(-R) for one row: the observed leaves outside R, renormalised (None when none remain)."""
+
+    return q.summarize({key: value for key, value in observations.items() if key not in removed}).displayed
+
+
+def _deletion_sensitivity(rows: list[dict], per_row: dict) -> list[dict]:
+    """E146: each registered deletion branch's rank changes on the common panel (E65), per basis."""
+
+    results = []
+    for branch in deletion_branches():
+        removed = set(branch["removed"])
+        retained = sum(leaf.weight for leaf in q.LEAVES if leaf.key not in removed) / 100.0
+        entry = {**branch, "retainedNominalWeight": retained}
+        if retained < LEAVE_OUT_MIN_WEIGHT:
+            results.append({**entry, "status": "not identifiable under the coverage rule"})
+            continue
+        unevaluable = sorted(row["id"] for row in rows if deletion_quality(row["evidence"]["observations"], removed) is None)
+        bases = {}
+        for basis in BASES:
+            primary, branched = {}, {}
+            for row in rows:
+                quality = deletion_quality(row["evidence"]["observations"], removed)
+                scores = per_row[row["id"]][basis]
+                if scores["value"] is None or quality is None:
+                    continue
+                primary[row["id"]] = scores["value"]
+                branched[row["id"]] = anchor_math.value_score(scores["costScore"], quality, BETA)
+            panel = sorted(primary)
+            bases[basis] = {
+                "rankChanges": diagnostics.paired_rank_change(primary, branched),
+                "kendallTauB": diagnostics.kendall_tau_b([primary[key] for key in panel], [branched[key] for key in panel]),
+            }
+        results.append({**entry, "status": "evaluated", "unevaluableRows": unevaluable, "bases": bases})
+    return results
+
+
 def _rule(rule: str, status: str, detail: str) -> dict:
     return {"rule": rule, "status": status, "detail": detail}
 
@@ -462,6 +524,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "qualityAgreement": agreement,
             "nonDiscriminatingLeaves": diagnostics.non_discriminating(_z_by_leaf(rows)),
             "groupDrift": _group_drift(rows),
+            "deletionSensitivity": _deletion_sensitivity(rows, per_row),
         },
         "manifest": manifest,
     }
@@ -624,6 +687,10 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
 # --------------------------------------------------------------------------
 
 
+# E147: the registered kernel-check object for v1 (multiples and price lists are fixed inputs, not drawn).
+REGISTERED_DEPENDENCY = "every row its own dependency component: no shared varying primitive in v1 streams"
+
+
 def _kernel(low: float, high: float, point: float) -> scenarios.Kernel:
     return scenarios.Kernel("uniform", (low, high), "endpoint-heavy") if high > low else scenarios.Kernel("fixed", (point,))
 
@@ -689,6 +756,9 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     members = {item.row for item in panel}
     boxes = api_boxes(assembled)
     by_id = {row["id"]: row for row in assembled["rows"]}
+    # E147: the compiled dependency graph must be the registered kernel-check object, or the build fails.
+    if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
+        raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
     labels = []
     for reference in frozen["barReferences"]:
         if reference["id"] not in members:

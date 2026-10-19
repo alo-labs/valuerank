@@ -15,7 +15,10 @@ route's evidence is classified:
 
 Routes past the 90-day hard expiry plus a 30-day grace are demoted to
 diagnostic; the model then falls back to API cost, flagged and labelled
-"cross-estimand ordering not identified". Routes certifiably dearer than another
+"cross-estimand ordering not identified". Age runs from the evidence's own
+observation date, never from a record's check or edit date, and an owner-named
+transfer that names its donor measurement inherits that donor's date, expiry
+stage, change flags and diagnostic status (E144). Routes certifiably dearer than another
 identified route of at least equal grade are first set aside (E88). The official
 route is then chosen by the E85 comparator: identification class (point > set >
 unidentified), evidence grade (controlled > reports > assumption), the
@@ -100,24 +103,56 @@ def evidence_grade(route: dict, model_id: str) -> str:
     return "diagnostic"
 
 
-def age_days(route: dict, release_day: date) -> int | None:
-    stamp = route.get("checkedOn") or route.get("validFrom")
-    if not stamp:
+def donor(route: dict, registry: dict | None) -> dict | None:
+    """E144: the donor measurement an owner-named transfer names (``donorRouteId``), resolved in the route registry."""
+
+    donor_id = route.get("donorRouteId")
+    if donor_id is None:
         return None
-    return (release_day - date.fromisoformat(stamp)).days
+    seen = {route["id"]}
+    while True:
+        if registry is None or donor_id not in registry:
+            raise ValueError(f"route {route['id']} names an unknown donor measurement: {donor_id}")
+        if donor_id in seen:
+            raise ValueError(f"donor chain of route {route['id']} is circular")
+        seen.add(donor_id)
+        found = registry[donor_id]
+        donor_id = found.get("donorRouteId")
+        if donor_id is None:
+            return found
 
 
-def expiry_status(route: dict, release_day: date) -> str:
-    """fresh / possibly-superseded (soft expiry) / expired (hard expiry, in grace) / demoted (past grace)."""
+def evidence_date(route: dict, registry: dict | None = None) -> date | None:
+    """E144: when the evidence was observed — the donor's date for a transfer, else the measurement window's end,
+    the source publication date, or (for an owner assumption without a donor measurement) its authorisation date.
 
-    age = age_days(route, release_day)
+    A record's check or edit date (``checkedOn``) is an editorial event and never restarts the clock.
+    """
+
+    source = donor(route, registry) or route
+    stamp = (source.get("measurementWindow") or {}).get("end") or source.get("sourcePublicationDate") or source.get("validFrom")
+    return date.fromisoformat(stamp) if stamp else None
+
+
+def age_days(route: dict, release_day: date, registry: dict | None = None) -> int | None:
+    stamp = evidence_date(route, registry)
+    return None if stamp is None else (release_day - stamp).days
+
+
+def expiry_status(route: dict, release_day: date, registry: dict | None = None) -> str:
+    """fresh / possibly-superseded (soft expiry or a scoped change detected since observation) / expired (hard
+    expiry, in grace) / demoted (past grace); a transfer takes its donor's stage (E144)."""
+
+    source = donor(route, registry) or route
+    age = age_days(source, release_day)
     if age is None:
         return "fresh"
     if age > HARD_EXPIRY_DAYS + GRACE_DAYS:
         return "demoted"
     if age > HARD_EXPIRY_DAYS:
         return "expired"
-    if age > SOFT_EXPIRY_DAYS:
+    changed = source.get("changeDetectedOn")
+    if age > SOFT_EXPIRY_DAYS or (changed and evidence_date(source) <= date.fromisoformat(changed) <= release_day):
         return "possibly-superseded"
     return "fresh"
 
@@ -174,9 +209,13 @@ def measurement_objects(route: dict) -> list[dict]:
     return objects or [route]
 
 
-def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date) -> list[dict]:
-    """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match."""
+def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None) -> list[dict]:
+    """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match.
 
+    ``registry`` is the full route list donors are resolved in (default: ``routes``).
+    """
+
+    by_id = {item["id"]: item for item in (registry if registry is not None else routes)}
     candidates = []
     for route in [item for base in routes for item in measurement_objects(base)]:
         if model_id not in route.get("modelIds", []):
@@ -185,16 +224,26 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
         if required is not None and (configuration_effort or "").casefold() != required.casefold():
             continue
         grade = evidence_grade(route, model_id)
-        expiry = expiry_status(route, release_day)
-        # O7/E123: a measurement on an unreconciled price basis is unmatched; E109: divisors must be positive.
-        if expiry == "demoted" or not _divisor_eligible(route) or valuation_status(route) == "different":
+        expiry = expiry_status(route, release_day, by_id)
+        source = donor(route, by_id)
+        # O7/E123: a measurement on an unreconciled price basis is unmatched; E109: divisors must be positive;
+        # E144: a transfer is diagnostic whenever its donor measurement is.
+        checks = [route] + ([source] if source is not None else [])
+        if expiry == "demoted" or any(not _divisor_eligible(item) or valuation_status(item) == "different" for item in checks):
             grade = "diagnostic"
+        stamp = evidence_date(route, by_id)
+        provenance = source if source is not None else route
         candidates.append(
             {
                 "route": route,
                 "grade": grade,
                 "expiry": expiry,
                 "identification": route.get("identification", "unidentified"),
+                "evidenceDate": stamp.isoformat() if stamp else None,
+                "donorRouteId": source["id"] if source is not None else None,
+                # E144: valuation compatibility and capacity status are the donor measurement's for a transfer.
+                "valuation": "different" if "different" in {valuation_status(item) for item in checks} else valuation_status(provenance),
+                "measurementCapacityStatus": measurement_capacity_status(provenance),
             }
         )
     return candidates
@@ -218,13 +267,13 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
     for route in routes:
         if model_id not in route.get("modelIds", []):
             continue
-        candidates = route_candidates(model_id, configuration_effort, [route], release_day)
+        candidates = route_candidates(model_id, configuration_effort, [route], release_day, registry=routes)
         if not candidates:
             table.append({"route": route, "case": 1, "officialDisplayEligible": False, "targetTransportIdentified": False, "planIntervalEligible": False})
             continue
         for candidate in candidates:
             identified = candidate["identification"] in IDENTIFIED
-            if valuation_status(candidate["route"]) == "different":
+            if candidate["valuation"] == "different":
                 case = 4
             elif candidate["grade"] == "diagnostic":
                 case = 5
@@ -233,9 +282,9 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
             else:
                 case = "identified" if identified else 3
             transport = case == "identified"
-            valued = valuation_status(candidate["route"]) in {"release", "revalued"}
+            valued = candidate["valuation"] in {"release", "revalued"}
             table.append({
-                **candidate, "case": case, "valuation": valuation_status(candidate["route"]), "officialDisplayEligible": case not in (4, 5),
+                **candidate, "case": case, "officialDisplayEligible": case not in (4, 5),
                 "targetTransportIdentified": transport, "planIntervalEligible": transport and valued,
             })
     return table
@@ -362,9 +411,12 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         flags.append("owner-named transfer (assumption)")
     if selected["expiry"] in {"possibly-superseded", "expired"}:
         flags.append(selected["expiry"])
-    if valuation_status(route) == "unverified":
+    # E144: a candidate carries its provenance's (the donor's, for a transfer) valuation and capacity status.
+    valuation = selected.get("valuation", valuation_status(route))
+    capacity = selected.get("measurementCapacityStatus", measurement_capacity_status(route))
+    if valuation == "unverified":
         flags.append("valuation basis unverified")
-    if measurement_capacity_status(route) != CAPACITY_ESTABLISHED:
+    if capacity != CAPACITY_ESTABLISHED:
         flags.append("observed-usage multiple; full utilisation not established")
     return {
         "costUsd": api_cost / comparison_multiple(route),
@@ -373,7 +425,9 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         "multiple": comparison_multiple(route),
         "grade": selected["grade"],
         "identification": selected["identification"],
-        "measurementCapacityStatus": measurement_capacity_status(route),
+        "measurementCapacityStatus": capacity,
+        "evidenceDate": selected.get("evidenceDate"),
+        "donorRouteId": selected.get("donorRouteId"),
         "flags": flags,
     }
 
