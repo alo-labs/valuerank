@@ -296,3 +296,17 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Reviewer 17 (Kimi K3, round 3, Thinking) — adopted
 - Critical: confirmed-cheapest self-comparison fixed (E38). Partial-telemetry eligibility (E37), scope fields (E38), session-start schedule contract (E39), interval decision procedure (E40), cross-check threshold (E41), overlap matrix (E42).
 - Note: the first Kimi run (r17) failed in the browser driver before answering; the review was re-run on the same prompt.
+
+## Editor decisions after reviewer 18 (owner may override)
+- E43. E40's extreme-point search replaced by decision-specific feasibility: exact monotone extremes when no shared factor exists; certified interval branch-and-bound over shared factors otherwise (unresolved at depth limit); exact strict inequalities; witnesses re-checked; interior-witness release test.
+- E44. Workload-demand evidence object x_iW (category token vectors) required for additive-capacity transport; optimise capacity over the feasible demand set when only partial token data are public; a dollar total never identifies x.
+- E45. Possible-cheapest set K_r defined (cheapest among qualifiers in at least one common admissible state; ties allowed); outputs: confirmed unique cheapest, certified K_r members, unresolved, provisional status.
+- E46. Uncertainty objects carry estimand, randomness_unit, constraint_target, coverage_claim, supporting evidence; declared target = expected performance over repeated executions of the fixed published suite under the stated deployment policy (answers GLM Q2); observed ranges keep their observed-range meaning.
+- E47. Completeness statuses: confirmed complete / unresolved / confirmed incomplete. AA's Coding Agent Index fields are unrounded floats with explicit per-component attempt counts (answers GLM Q1: no explicit cost-observed counts or task identifiers), so T = n·μ at source precision over the fixed n-task set confirms completeness; chart totals rely on AA's declined-tasks marker.
+- Answer to GLM Q3: category token vectors are partly public (AA Index evaluations: input, cacheable input, reasoning and answer tokens per evaluation; Coding Agent Index: mean input, output and cache tokens per task). No current Plan route identifies M_W by any mechanism, so every route is "workload-unmatched" today (O16).
+- Answer to GLM Q4: the implementation will follow E43 (no endpoint-only search).
+- Singleton cheapest fixture corrected (provisional singleton gets no confirmed label).
+
+## Reviewer 18 (GLM 5.3, round 3, Thinking) — adopted
+- All findings (E43–E47, fixture fix).
+- Note: the first GLM run timed out waiting for Perplexity's model button (page slow to render); the driver now waits up to 60 s and the review was re-run on the same prompt.
