@@ -394,3 +394,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 24 (GLM 5.3, round 4, Thinking) — adopted
 - All findings (E73–E78).
+
+## Editor decisions after reviewer 25 (owner may override)
+- E79. Feasibility prerequisite: a certified feasible witness for each decision's full constraint component before any label; infeasible → "inconsistent evidence" (release-blocking for that output); unresolved → no confirmed or definite label; two empty-set fixtures.
+- E80. Consumption-dependent payments: joint representation; purchases fixed by the route's declared purchase policy (answers Gemini Q1); maximise eligible consumption, gross cash at the solution, minimum-cash tie-break; unbounded or unestablished → unidentified.
+- E81. "Effective weights" renamed normalised weighted spread; a signed covariance allocation on a declared common complete panel is added.
+- E82. Coding Agent Index fixtures aligned with O27 (scored cost = pooled mean × 303; sum and sum ÷ mean are diagnostics; AA markers alone decide completeness).
+- Answer to Gemini Q2: the solver is being implemented in valuerank/intervals.py alongside the review; it will include the E79 prerequisite.
+
+## Reviewer 25 (Gemini 3.8 Flash, round 4, Thinking) — adopted
+- All findings (E79–E82).
+
+# Round 4 complete (reviewers 20–25). Every panel model returned HAS FEEDBACK; round 5 starts with GPT-6.1 Sol on draft r25.

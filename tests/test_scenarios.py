@@ -1,0 +1,134 @@
+"""Tests for the scenario engine: kernels, strata, weights, frequencies and the sequential precision rule."""
+
+from __future__ import annotations
+
+import random
+
+import pytest
+
+from valuerank import quality as q
+from valuerank import scenarios as sc
+from valuerank.scenarios import Kernel, RowInputs
+
+ANCHORS = {"low": 10.0, "high": 1000.0}
+
+
+def full_row(name, z, cost, **extra):
+    leaves = {leaf.key: Kernel("fixed", (z,)) for leaf in q.LEAVES}
+    leaves.update(extra.pop("leaves", {}))
+    return RowInputs(name, leaves, Kernel("fixed", (cost,)), **extra)
+
+
+def test_kernels_draw_their_families():
+    rng = random.Random(1)
+    assert Kernel("fixed", (3.0,)).draw(rng) == 3.0
+    value = Kernel("uniform", (10.0, 20.0)).draw(rng)
+    assert 10.0 <= value <= 20.0
+    heavy = Kernel("uniform", (10.0, 20.0), "endpoint-heavy")
+    assert 10.0 <= heavy.draw(rng, use_alternative=True) <= 20.0
+    assert 10.0 <= Kernel("uniform", (10.0, 20.0)).draw(rng, use_alternative=True) <= 20.0
+    runs = Kernel("runs", (40.0, 50.0, 60.0)).draw(rng)
+    assert 40.0 <= runs <= 60.0
+    with pytest.raises(ValueError, match="unknown kernel family: normal"):
+        Kernel("normal", (0, 1)).draw(rng)
+
+
+def test_dirichlet_and_hierarchical_weights_preserve_totals():
+    rng = random.Random(2)
+    shares = sc.dirichlet(rng, [1.0, 2.0, 3.0])
+    assert sum(shares) == pytest.approx(1.0)
+    weights = sc.hierarchical_weights(rng)
+    assert set(weights) == {leaf.key for leaf in q.LEAVES}
+    assert sum(weights.values()) == pytest.approx(100.0)
+    assert sc.nominal_weights()["deepswe"] == 30.0
+
+
+def test_hierarchical_weights_keep_the_nominal_means():
+    rng = random.Random(3)
+    totals = {leaf.key: 0.0 for leaf in q.LEAVES}
+    draws = 2000
+    for _ in range(draws):
+        for key, value in sc.hierarchical_weights(rng).items():
+            totals[key] += value
+    for leaf in q.LEAVES:
+        assert totals[leaf.key] / draws == pytest.approx(leaf.weight, rel=0.08)
+
+
+def test_missing_ranges_use_observed_values_and_default_to_the_domain():
+    rows = [
+        RowInputs("a", {"deepswe": Kernel("fixed", (40.0,)), "bugHunt": Kernel("runs", (30.0, 50.0))}, Kernel("fixed", (1.0,))),
+        RowInputs("b", {"deepswe": Kernel("fixed", (70.0,))}, Kernel("fixed", (1.0,))),
+    ]
+    ranges = sc.missing_ranges(rows)
+    assert ranges["deepswe"] == (40.0, 70.0)
+    assert ranges["bugHunt"] == (40.0, 40.0)
+    assert ranges["critpt"] == (0.0, 100.0)
+
+
+def test_draw_scenario_strata():
+    rng = random.Random(4)
+    partial = RowInputs("p", {"deepswe": Kernel("fixed", (80.0,))}, Kernel("uniform", (90.0, 110.0)))
+    s0 = sc.draw_scenario([partial], "S0", rng)
+    assert s0["p"][1] == pytest.approx(80.0) and 90.0 <= s0["p"][0] <= 110.0
+    s1 = sc.draw_scenario([partial], "S1", rng)
+    assert 0.0 <= s1["p"][1] <= 100.0 and s1["p"][1] != pytest.approx(80.0)
+    alternative = sc.draw_scenario([partial], "S1", rng, alternative=True, ranges={"deepswe": (0, 0), **{leaf.key: (50.0, 50.0) for leaf in q.LEAVES}})
+    assert alternative["p"][1] == pytest.approx(0.3 * 80 + 0.7 * 50)
+    alternative_default = sc.draw_scenario([partial], "S1", rng, alternative=True)
+    assert 0.0 <= alternative_default["p"][1] <= 100.0
+    s2 = sc.draw_scenario([full_row("f", 60.0, 100.0)], "S2", rng)
+    assert s2["f"][1] == pytest.approx(60.0)
+    with pytest.raises(ValueError, match="unknown stratum: S9"):
+        sc.draw_scenario([partial], "S9", rng)
+
+
+def test_values_ranks_frontier_and_cheapest_qualifier():
+    scenario = {"a": (100.0, 80.0), "b": (50.0, 60.0), "c": (200.0, 70.0), "d": (50.0, 60.0)}
+    values = sc.scenario_values(scenario, ANCHORS, 0.25)
+    assert values["a"] == pytest.approx(0.25 * 50 + 0.75 * 80)
+    assert sc.ranks({"x": 3.0, "y": 3.0, "z": 1.0}) == {"x": 1, "y": 1, "z": 3}
+    assert sc.frontier_rows(scenario) == {"a", "b", "d"}
+    assert sc.cheapest_qualifier(scenario, "c") == "a"
+    assert sc.cheapest_qualifier(scenario, "b") is None  # b and d tie at the cheapest cost
+    assert sc.cheapest_qualifier({"only": (5.0, 10.0), "ref": (1.0, 50.0)}, "ref") == "ref"
+    assert sc.cheapest_qualifier({"ref": (1.0, 50.0)}, "ref") == "ref"
+
+
+def test_standard_error():
+    assert sc.standard_error(0.5, 100) == pytest.approx(0.05)
+    assert sc.standard_error(0.5, 0) == 0.0
+
+
+def test_shares_report_frequencies_with_monte_carlo_errors():
+    rows = [full_row("strong", 80.0, 100.0), full_row("cheap", 40.0, 20.0), full_row("weak", 20.0, 500.0)]
+    result = sc.shares(rows, "S0", 200, 7, ANCHORS, 0.25, references=("cheap",))
+    assert result["scenarios"] == 200 and result["seed"] == 7 and result["stratum"] == "S0"
+    assert result["rows"]["strong"]["top1"]["share"] == 1.0
+    assert result["rows"]["weak"]["frontier"]["share"] == 0.0
+    assert result["rows"]["strong"]["qualifies"]["cheap"] == 1.0
+    assert result["rows"]["weak"]["qualifies"]["cheap"] == 0.0
+    assert result["rows"]["cheap"]["top3"]["monteCarloSe"] == 0.0
+    alternative = sc.shares(rows, "S1", 50, 7, ANCHORS, 0.25, alternative=True)
+    assert alternative["alternative"] is True and alternative["rows"]["strong"]["qualifies"] == {}
+
+
+def test_regularized_beta_and_clopper_pearson():
+    assert sc.regularized_beta(0.0, 2, 3) == 0.0
+    assert sc.regularized_beta(1.0, 2, 3) == 1.0
+    assert sc.regularized_beta(0.5, 1, 1) == pytest.approx(0.5)
+    assert sc.regularized_beta(0.9, 2, 2) == pytest.approx(3 * 0.81 - 2 * 0.729)  # 3x^2 - 2x^3
+    assert sc.regularized_beta(0.1, 2, 2) == pytest.approx(3 * 0.01 - 2 * 0.001)
+    lower, upper = sc.clopper_pearson(5, 10, 0.05)
+    assert lower == pytest.approx(0.1871, abs=1e-4) and upper == pytest.approx(0.8129, abs=1e-4)
+    assert sc.clopper_pearson(0, 10, 0.05) == (0.0, pytest.approx(0.3085, abs=1e-4))
+    assert sc.clopper_pearson(10, 10, 0.05) == (pytest.approx(0.6915, abs=1e-4), 1.0)
+
+
+def test_sequential_threshold_met_not_met_and_unresolved():
+    rng = random.Random(5)
+    met = sc.sequential_threshold(lambda r: True, rng, batch=100, looks=4)
+    assert met["status"] == "met" and met["looks"] == 1
+    not_met = sc.sequential_threshold(lambda r: r.random() < 0.5, rng, batch=200, looks=4)
+    assert not_met["status"] == "not met"
+    borderline = sc.sequential_threshold(lambda r: r.random() < 0.9, rng, batch=50, looks=2)
+    assert borderline["status"] == "scenario threshold unresolved" and borderline["scenarios"] == 100
