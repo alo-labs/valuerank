@@ -87,7 +87,9 @@ def test_cost_influence_flags_a_low_cost_share():
     result = a.cost_influence([0.0, 100.0], [40.0, 60.0], 0.25)
     assert result["costShare"] == pytest.approx(0.25 * 50 / (0.25 * 50 + 0.75 * 10))
     assert result["flag"] is False
-    assert a.cost_influence([1.0], [2.0, 3.0], 0.25) == {"costShare": None, "flag": False}
+    assert a.cost_influence([1.0], [2.0, 3.0], 0.25) == {"costShare": None, "flag": False, "qualityFlag": False}
+    dominant = a.cost_influence([0.0, 100.0], [50.0, 50.1], 0.25)
+    assert dominant["costShare"] > 0.9 and dominant["qualityFlag"] is True and dominant["flag"] is False
     flat = a.cost_influence([5.0, 5.0], [7.0, 7.0], 0.25)
     assert flat["costShare"] is None and flat["flag"] is False
 
@@ -126,3 +128,12 @@ def test_numerical_domains_are_validated():
     assert a.cost_score(0.0, anchors) is None and a.cost_score(float("inf"), anchors) is None
     with pytest.raises(ValueError, match="finite and positive"):
         a.anchor_object({"x": float("inf")}, basis="api", workload="w")
+
+
+def test_trimmed_anchor_object_is_a_percentile_diagnostic():
+    costs = {f"r{i}": float(value) for i, value in enumerate([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1000])}
+    trimmed = a.trimmed_anchor_object(costs, basis="api", workload="w")
+    assert trimmed["low"] == pytest.approx(2.0 / 2) and trimmed["high"] == pytest.approx(10.0 * 2)
+    assert trimmed["rule"].startswith("P10") and a.anchor_object(costs, basis="api", workload="w")["high"] == 2000.0
+    with pytest.raises(ValueError, match="at least two"):
+        a.trimmed_anchor_object({"x": 1.0, "y": None}, basis="plan", workload="w")

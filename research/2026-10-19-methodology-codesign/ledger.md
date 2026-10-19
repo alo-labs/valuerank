@@ -508,3 +508,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 35 (Kimi K3, round 6, Thinking) — adopted
 - All findings (O28, E121, E122); E123 corrects E93/E106 against O7.
+
+## Editor decisions after reviewer 36 (owner may override)
+- E124. Plan identification roadmap and demand registry: AA publishes per-evaluation cost and output tokens per task and Index-wide category totals, not per-evaluation category splits, so the basket demand vector is set-identified (D_iW from component cost identities, per-component output tokens and Index-wide totals; never rescaled). M_W needs category-specific burn evidence or a workload-compatible controlled measurement, which no public source provides; the "exploratory" label is structural and the missing evidence is listed per route. GLM's pipeline is adopted as the registry; it cannot by itself identify M_W. Answer to GLM Q1 (not escalated as a methodology question): an owner-run measurement is admissible under O11 and the AGENTS.md numerator rules; commissioning one is an operational choice, raised with the owner in the session summary.
+- E125. Same-harness Terminal-Bench diagnostic (default harness Terminus 2; τ_b against the primary ordering; per-row "harness-mixed" marker); the primary leaf keeps the pre-registered preference. Answers GLM Q3 without escalation (O6 names the tbench.ai leaf; the harness preference is an editor rule).
+- E126. Symmetric influence flag (> 90% cost share → "quality not discriminating"), exchange-rate series across anchor versions, trimmed-anchor rank-shift diagnostic. Answers GLM Q2 without escalation.
+- E127. E72 wording corrected: repeated-look-adjusted (Bonferroni over 16 declared looks), not anytime-valid.
+- E128. Omniscience disclosure: unanswered-or-partial share (1 − A)(1 − h) per row (split where AA publishes counts) and the named sensitivity z_pen = max(0, I). Owner decision challenge to O28 noted; O28 unchanged.
+- E129. Citations: GDPval transform cited to AA's methodology page (verified 2026-10-19, answering GLM Q4); LiveBench 2.0 cited by title and capture date because livebench.ai publishes no release date (GLM's 2026-10-13 and the ledger's 2026-10-14 could not be confirmed).
+- Not adopted: a category-price revaluation branch (per-component category telemetry is not public and E84 forbids rescaling) and a LiveBench 2.0 cost companion (exact-variant coverage for the ranked configurations not yet captured; listed as a candidate diagnostic).
+
+## Reviewer 36 (GLM 5.3, round 6, Thinking) — adopted with the two exceptions above
+- E124–E129.

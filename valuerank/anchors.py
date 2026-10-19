@@ -17,6 +17,7 @@ PADDING = 2.0
 CLIP_SHARE_LIMIT = 0.10
 BEYOND_FACTOR_LIMIT = 2.0
 LOW_INFLUENCE_FLAG = 0.10
+HIGH_INFLUENCE_FLAG = 0.90  # E126: the mirror flag, quality not discriminating
 
 
 def scoreable(value) -> bool:
@@ -107,10 +108,14 @@ def exchange_rate_curve(beta: float, ratios: list[float]) -> list[dict]:
 
 
 def cost_influence(cost_scores: list[float], quality_scores: list[float], beta: float) -> dict:
-    """Within-cohort influence of cost: beta*SD(S_C) / (beta*SD(S_C) + (1-beta)*SD(S_Q)); informational flag below 10%."""
+    """Within-cohort influence of cost: beta*SD(S_C) / (beta*SD(S_C) + (1-beta)*SD(S_Q)).
+
+    Informational flags (E91, E126): ``flag`` below 10% (cost not discriminating) and
+    ``qualityFlag`` above 90% (quality not discriminating); beta never changes.
+    """
 
     if len(cost_scores) < 2 or len(quality_scores) < 2:
-        return {"costShare": None, "flag": False}
+        return {"costShare": None, "flag": False, "qualityFlag": False}
     cost_sd = statistics.pstdev(cost_scores)
     quality_sd = statistics.pstdev(quality_scores)
     denominator = beta * cost_sd + (1.0 - beta) * quality_sd
@@ -120,6 +125,7 @@ def cost_influence(cost_scores: list[float], quality_scores: list[float], beta: 
         "qualitySd": quality_sd,
         "costShare": share,
         "flag": share is not None and share < LOW_INFLUENCE_FLAG,
+        "qualityFlag": share is not None and share > HIGH_INFLUENCE_FLAG,
     }
 
 
@@ -156,6 +162,31 @@ def panel_cost_influence(rows: list[dict], beta: float, main_workload: str) -> d
         "subsetStrata": strata,
         "displayedTableDispersion": summarise(scored),
         "flag": headline["flag"],
+        "qualityFlag": headline["qualityFlag"],
+    }
+
+
+def trimmed_anchor_object(reference_costs: dict, *, basis: str, workload: str | None, low_pct: float = 10.0, high_pct: float = 90.0) -> dict:
+    """E126 diagnostic: anchors from the 10th and 90th percentile reference costs with the same padding (never primary)."""
+
+    costs = sorted(float(value) for value in reference_costs.values() if scoreable(value))
+    if len(costs) < 2:
+        raise ValueError(f"the trimmed {basis} anchors need at least two reference costs")
+
+    def percentile(pct: float) -> float:
+        position = (len(costs) - 1) * pct / 100.0
+        lower = int(position)
+        upper = min(lower + 1, len(costs) - 1)
+        return costs[lower] + (costs[upper] - costs[lower]) * (position - lower)
+
+    return {
+        "basis": basis,
+        "workload": workload,
+        "units": "USD per workload pass",
+        "rule": f"P{low_pct:g} / {PADDING:g} and P{high_pct:g} x {PADDING:g} (diagnostic only)",
+        "low": percentile(low_pct) / PADDING,
+        "high": percentile(high_pct) * PADDING,
+        "padding": PADDING,
     }
 
 

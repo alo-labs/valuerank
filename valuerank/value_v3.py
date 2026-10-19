@@ -54,6 +54,7 @@ FRACTION_LEAVES = {
     "critpt": "critpt",
 }
 CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (labels rounded to USD 1)" for slug in basket.CHART_COMPONENTS}
+DEFAULT_TB_HARNESS = "Terminus 2"  # E125: the named default harness of the same-harness diagnostic
 SCENARIO_COUNT = 10_000
 SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True))
 FROZEN_FILE = "v3_frozen.json"
@@ -98,8 +99,10 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict |
     if page.get("omniscience") is not None:
         accuracy, hallucination = page.get("omniscienceAccuracy"), page.get("omniscienceHallucinationRate")
         rebuilt = q.omniscience_index_from_rates(accuracy, hallucination) if accuracy is not None and hallucination is not None else None
+        unanswered = (1.0 - accuracy) * (1.0 - hallucination) if rebuilt is not None else None
         add("omniscience", page["omniscience"], q.omniscience_index_z(page["omniscience"]),
-            {"source": "AA Omniscience Index (O28)", "accuracy": accuracy, "hallucinationRate": hallucination, "indexFromRates": rebuilt})
+            {"source": "AA Omniscience Index (O28)", "accuracy": accuracy, "hallucinationRate": hallucination, "indexFromRates": rebuilt,
+             "unansweredOrPartialShare": unanswered, "abstentionPenalisedZ": max(0.0, page["omniscience"])})
     return {"observations": observations, "provenance": provenance, "clipAudit": audit}
 
 
@@ -115,6 +118,25 @@ def row_components(page: dict, cai_record: dict | None, chart_rows: dict) -> tup
         if chart is not None:
             components[slug] = chart
     return components, reconciliation
+
+
+def demand_registry(page: dict, admitted: list[str]) -> dict:
+    """E124: the set-identified demand region for the admitted basket from AA's public telemetry (never rescaled)."""
+
+    evaluations = {item.get("slug"): item for item in page.get("intelligenceIndexEvaluations") or []}
+    outputs = {
+        slug: evaluations[slug]["outputTokensPerTask"] * tasks
+        for slug, tasks in basket.INDEX_SDLC_TASKS.items()
+        if slug in admitted and (evaluations.get(slug) or {}).get("outputTokensPerTask") is not None
+    }
+    return {
+        "status": "set-identified feasible region; M_W not identified",
+        "componentOutputTokens": outputs,
+        "componentsWithoutTokenTelemetry": [component for component in admitted if component not in outputs],
+        "indexCategoryTokens": page.get("canonicalIntelligenceIndexTokenCount"),
+        "identities": "p . d_ie = C_ie for each component; AA's Index-wide category totals bound the sum over its ten evaluations",
+        "missingForIdentification": ["category-specific burn coefficients for each plan meter", "or a controlled measurement on a workload compatible with W"],
+    }
 
 
 def restricted_cost(components: dict, workload_components: list[str]) -> float | None:
@@ -168,6 +190,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date) 
         )
         candidates = plan_routes.route_candidates(model_id, effort, routes, release_day)
         rows.append({
+            "page": page,
             "routeCandidates": candidates,
             **configuration,
             "evidence": evidence,
@@ -186,7 +209,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date) 
         row["cost"] = basket.row_cost(row["components"], admitted)
         selected = row["routeSelection"]["selected"]
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
-    return {"rows": rows, "admission": admission, "admitted": admitted, "mainWorkload": main, "releaseDay": release_day.isoformat()}
+    return {"rows": rows, "admission": admission, "admitted": admitted, "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"]}
 
 
 def workload_catalog(assembled: dict) -> dict:
@@ -371,7 +394,8 @@ def score(assembled: dict, frozen: dict) -> dict:
     measured = _measured_only_view(rows, frozen, per_row)
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", "release held" if hold else "no basis exceeds the clipping allowance"),
-        _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "informational only; beta never changes (O2)"),
+        _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
+        _rule("quality influence flag (E126)", "fired" if influence["api"]["qualityFlag"] or influence["plan"]["qualityFlag"] else "passed", "quality not discriminating (cost share > 90%); informational only"),
         _rule("subset scoring (O17)", "fired" if any(row["cost"]["subset"] for row in rows) else "vacuous", "subset rows scored on their own workload and anchors"),
         _rule("partial component flag (E37)", "fired" if any(row["cost"]["partialComponents"] for row in rows) else "vacuous", "AA declined- or missing-task markers"),
         _rule("route dominance filter (E88)", "fired" if any(row["routeSelection"]["dominated"] for row in rows) else "vacuous", "certifiably dearer routes set aside"),
@@ -398,6 +422,9 @@ def score(assembled: dict, frozen: dict) -> dict:
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
         "measuredOnlyPlanView": measured,
         "diagnostics": {
+            "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
+            "anchorStability": _anchor_stability(rows, frozen, main, per_row),
+            "omniscienceAbstentionSensitivity": _abstention_sensitivity(rows, per_row),
             "qualitySourceShares": q.source_shares(),
             "qualityAgreement": agreement,
             "nonDiscriminatingLeaves": diagnostics.non_discriminating(_z_by_leaf(rows)),
@@ -449,6 +476,62 @@ def _group_drift(rows: list[dict]) -> dict:
     return {**result, "panel": sorted(row["id"] for row in complete)}
 
 
+def _tb_same_harness(rows: list[dict], tb4_rows: list[dict]) -> dict:
+    """E125: the restricted single-harness Terminal-Bench variant, its agreement with the primary leaf, harness-mixed rows."""
+
+    same = [item for item in tb4_rows if item.get("agent") == DEFAULT_TB_HARNESS]
+    primary, restricted, mixed = {}, {}, []
+    for row in rows:
+        source = row["evidence"]["provenance"].get("terminalBench")
+        if source is not None:
+            primary[row["id"]] = row["evidence"]["observations"]["terminalBench"].z
+            if source.get("agent") != DEFAULT_TB_HARNESS:
+                mixed.append(row["id"])
+        selected = exact_match.select_tb4_row(row["id"], row.get("effort"), same)
+        if selected is not None:
+            restricted[row["id"]] = selected["resolutionRatePct"]
+    return {
+        "defaultHarness": DEFAULT_TB_HARNESS,
+        "restricted": restricted,
+        "harnessMixed": sorted(mixed),
+        "agreement": diagnostics.agreement(primary, restricted, label="Terminal-Bench same-harness diagnostic"),
+    }
+
+
+def _anchor_stability(rows: list[dict], frozen: dict, main: str, per_row: dict) -> dict:
+    """E126: the exchange-rate series across anchor versions and the trimmed-anchor rank-shift diagnostic (API basis)."""
+
+    anchors = frozen["workloads"][main]["anchors"]["api"]
+    trimmed = anchor_math.trimmed_anchor_object(anchors["referenceCosts"], basis="api", workload=main)
+    primary, shifted = {}, {}
+    for row in rows:
+        if row["cost"]["workload"] == main and per_row[row["id"]]["api"]["value"] is not None:
+            primary[row["id"]] = per_row[row["id"]]["api"]["value"]
+            shifted[row["id"]] = anchor_math.value_score(anchor_math.cost_score(row["cost"]["costUsd"], trimmed), row["summary"].displayed, BETA)
+    return {
+        "exchangeRateSeries": [{"anchorVersion": frozen["anchorVersion"], **anchor_math.exchange_rate(anchors, BETA)}],
+        "trimmedAnchors": trimmed,
+        "trimmedRankShifts": diagnostics.paired_rank_change(primary, shifted),
+    }
+
+
+def _abstention_sensitivity(rows: list[dict], per_row: dict) -> dict:
+    """E128: API ranks with the Omniscience leaf at z_pen = max(0, I) (total abstention scores 0); O28 is unchanged."""
+
+    primary, penalised = {}, {}
+    for row in rows:
+        observations = dict(row["evidence"]["observations"])
+        source = row["evidence"]["provenance"].get("omniscience")
+        value = per_row[row["id"]]["api"]["value"]
+        if value is None:
+            continue
+        if source is not None:
+            observations["omniscience"] = q.Observation(source["abstentionPenalisedZ"])
+        primary[row["id"]] = value
+        penalised[row["id"]] = anchor_math.value_score(per_row[row["id"]]["api"]["costScore"], q.summarize(observations).displayed, BETA)
+    return {"rule": "z_pen = max(0, I)", "rankChanges": diagnostics.paired_rank_change(primary, penalised)}
+
+
 def _z_by_leaf(rows: list[dict]) -> dict:
     return {leaf.key: [row["evidence"]["observations"][leaf.key].z for row in rows if leaf.key in row["evidence"]["observations"]] for leaf in q.LEAVES}
 
@@ -474,6 +557,7 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
         "effort": row.get("effort"),
         "aaSlug": row["aaSlug"],
         "configurationMapped": row["configurationMapped"],
+        "demandRegistry": demand_registry(row["page"], row["cost"]["components"]),
         "quality": {
             **_summary_json(row["summary"]),
             "status": "scored" if row["summary"].displayed is not None else "quality not scoreable — no observed leaves",

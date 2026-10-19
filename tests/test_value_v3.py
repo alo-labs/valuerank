@@ -363,3 +363,39 @@ def test_module_entry_point(tmp_path, monkeypatch):
 def test_json_default_rejects_unknown_objects():
     with pytest.raises(TypeError, match="not JSON serializable: object"):
         v._json_default(object())
+
+
+def test_terminal_bench_same_harness_diagnostic():
+    """E125: the default-harness variant, harness-mixed rows and their agreement panel."""
+
+    tb4 = [
+        {"model": "Opus 5.5 (max)", "agent": "Claude Code", "resolutionRatePct": 64.0},
+        {"model": "Sonnet 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 50.0},
+        {"model": "Haiku 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 30.0},
+    ]
+    rows = []
+    for model_id in ("claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"):
+        evidence = v.leaf_evidence(model_id, "max", {}, None, tb4, None)
+        rows.append({"id": model_id, "effort": "max", "evidence": evidence})
+    result = v._tb_same_harness(rows, tb4)
+    assert result["harnessMixed"] == ["claude-opus-5-5"]
+    assert result["restricted"] == {"claude-sonnet-5-5": 50.0, "claude-haiku-5-5": 30.0}
+    assert result["agreement"]["panel"] == ["claude-haiku-5-5", "claude-sonnet-5-5"]
+
+
+def test_abstention_sensitivity_and_demand_registry():
+    pages = [page("a-max", 1.0, omniscience=-40.0), page("b-max", 4.0), page("c-max", 0.5)]
+    del pages[2]["model"]["omniscience"]
+    result, frozen = scored(snapshot={"pages": pages})
+    output = v.score(result, frozen)
+    sensitivity = output["diagnostics"]["omniscienceAbstentionSensitivity"]
+    assert sensitivity["rule"] == "z_pen = max(0, I)" and sensitivity["rankChanges"]["panel"] == ["a", "b", "c"]
+    rows = {row["id"]: row for row in output["rows"]}
+    assert rows["a"]["quality"]["leaves"]["omniscience"]["abstentionPenalisedZ"] == 0.0
+    assert rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == pytest.approx(0.5 * 0.6)
+    registry = rows["a"]["demandRegistry"]
+    assert registry["componentsWithoutTokenTelemetry"] == [basket.CODING_AGENT_INDEX, *basket.INDEX_SDLC_TASKS]
+    stability = output["diagnostics"]["anchorStability"]
+    assert stability["exchangeRateSeries"][0]["anchorVersion"] == frozen["anchorVersion"]
+    tokens = v.demand_registry({"intelligenceIndexEvaluations": [{"slug": "scicode", "outputTokensPerTask": 10.0}]}, ["scicode", "gdp-pdf"])
+    assert tokens["componentOutputTokens"] == {"scicode": 2880.0} and tokens["componentsWithoutTokenTelemetry"] == ["gdp-pdf"]
