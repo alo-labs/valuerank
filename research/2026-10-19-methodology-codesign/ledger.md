@@ -373,3 +373,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 22 (Grok 4.7, round 4, Thinking) — adopted
 - Aggregation and chart-marker findings resolved by O27; paired panels (E65); E62 estimands (E66); Plan taxonomy (E67).
+
+## Editor decisions after reviewer 23 (owner may override)
+- E68. Same-execution contract for cost per solved task (shared observation key; Terminal-Bench uses the AA-priced execution's resolved fraction — answers Kimi Q2).
+- E69. The scored Plan capacity target is token-equivalent (API-priced) capacity, as AGENTS.md defines Plan value; completed-pass capacity is a diagnostic from task-level schedules where public, else "not identified" (answers Kimi Q1 from the existing definition, no owner change).
+- E70. Full-utilisation wording aligned with the governing formula (maximum eligible consumption under all evidenced constraints; binding and slack limits published).
+- E71. Disjoint-evidence agreement: AA-executed-only vs independently-executed-only quality, labelled a restricted evidence comparison.
+- E72. Monte Carlo precision: standard errors per published frequency; anytime-valid interval; pre-registered expansion to 160,000 scenarios; "scenario threshold unresolved" otherwise.
+
+## Reviewer 23 (Kimi K3, round 4, Thinking) — adopted
+- All findings (E68–E72).
