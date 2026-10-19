@@ -347,3 +347,17 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 20 (GPT-6.1 Sol) — modified
 - Attempt-level completeness as an eligibility gate: modified (E53). Under E9 the estimand is one deployment-equivalent pass with repetitions averaged; missing repetitions change the precision of a task's mean, not the support of the pass, and under O25 precision belongs to the scenario layer. Attempt coverage is published.
+
+## Editor decisions after reviewer 21 (owner may override)
+- E59. The headline names the active basket version and components ("SDLC basket v1: 7 AA Index SDLC evaluations + Coding Agent Index; pending FrontierCode, ITBench-AA").
+- E60. Anchor exchange rate and within-cohort cost influence printed beside the first table, with a sensitivity curve over c_H/c_L; the 10% influence flag is informational (answers Sonnet Q3: β is fixed by O2).
+- E61. Plan identification-yield table per route; Plan headline labelled "workload-unmatched: exploratory" while fewer than half of Plan rows have an identified M_W (answers Sonnet Q1: today no route has an identified M_W, so the label applies).
+- E62. Independent-source rank check (Kendall τ_b vs a ranking from independently executed leaves only, bootstrap interval) beside the "not identifiable" leave-AA-out note.
+- E63. Active-rules manifest per release (fired / passed / vacuous / unresolved).
+- E64. Standing sensitivity columns: drop the AA Index-run Terminal-Bench cost; leave Bug Hunt out; worked attempts-reconciliation example.
+- Answer to Sonnet Q2: the first release ships as "SDLC basket v1" with its composition named (E59), not as a full ten-component basket.
+
+## Reviewer 21 (Claude Sonnet 5.5, round 4, Thinking) — adopted or modified
+- Adopted: basket labelling (E59), identification yield (E61), independent-source check (E62), active-rules manifest (E63), cost-weight disclosure (E60), overlap and Bug Hunt sensitivity (E64).
+- Corrected premise: "only one basket component is admissible" — incorrect; the seven Index SDLC evaluations (19/19) and the Coding Agent Index (16/19) are admitted (8 of 10 target components). The draft's capture-status wording was ambiguous and is fixed.
+- No change: the 30-day soft expiry already fires on detected change and acts as a backstop; the Omniscience reconstruction is already tested against AA's published fields each release.
