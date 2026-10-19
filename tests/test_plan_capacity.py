@@ -8,9 +8,10 @@ import math
 import pytest
 
 from valuerank import plan_capacity as pc
-from valuerank.plan_capacity import Window
+from valuerank.plan_capacity import Demand, Window
 
 DEMAND = {"output": 1.0}
+WORKLOAD = Demand(DEMAND, "workload-pass")
 
 
 def window(name, length, budget, semantics, **extra):
@@ -92,15 +93,15 @@ def test_greedy_matches_the_exhaustive_optimum_on_small_instances(semantics):
 def test_capacity_bounds_and_certification():
     weekly = window("week", 672, 1000.0, "fixed")
     five_hour = window("5h", 20, 50.0, "session")
-    result = pc.capacity([five_hour, weekly], DEMAND, 672 * 4, grid_minutes=15)
+    result = pc.capacity([five_hour, weekly], WORKLOAD, 672 * 4, grid_minutes=15)
     assert result["status"] == "verified"
     assert result["feasibleLowerBound"] == pytest.approx(4000.0)  # the weekly cap binds
     assert result["relaxedUpperBound"] == pytest.approx(4000.0) and result["pointCertified"] is True
     # Loosening the non-binding 5-hour cap cannot change a weekly-binding plan.
-    looser = pc.capacity([window("5h", 20, 80.0, "session"), weekly], DEMAND, 672 * 4, grid_minutes=15)
+    looser = pc.capacity([window("5h", 20, 80.0, "session"), weekly], WORKLOAD, 672 * 4, grid_minutes=15)
     assert looser["feasibleLowerBound"] == pytest.approx(result["feasibleLowerBound"])
     # A tighter quota cannot increase capacity.
-    tighter = pc.capacity([five_hour, window("week", 672, 900.0, "fixed")], DEMAND, 672 * 4, grid_minutes=15)
+    tighter = pc.capacity([five_hour, window("week", 672, 900.0, "fixed")], WORKLOAD, 672 * 4, grid_minutes=15)
     assert tighter["feasibleLowerBound"] <= result["feasibleLowerBound"]
 
 
@@ -108,7 +109,7 @@ def test_misaligned_fixed_windows_count_their_partial_instances():
     # Horizon 5, length 3, phase 1: steps {0}, {1, 2, 3}, {4} are three instances.
     shifted = window("w", 3, 10.0, "fixed", phase=1)
     assert pc.instance_count(shifted, 5) == 3
-    result = pc.capacity([shifted], DEMAND, 5, grid_minutes=15)
+    result = pc.capacity([shifted], WORKLOAD, 5, grid_minutes=15)
     assert result["feasibleLowerBound"] == pytest.approx(30.0)
     assert result["relaxedUpperBound"] == pytest.approx(30.0) and result["pointCertified"] is True
     assert pc.instance_count(window("s", 3, 1.0, "sliding"), 5) == 2
@@ -116,20 +117,20 @@ def test_misaligned_fixed_windows_count_their_partial_instances():
 
 def test_capacity_reports_an_interval_when_the_bounds_differ(monkeypatch):
     monkeypatch.setattr(pc, "relaxed_upper_bound", lambda *args, **kwargs: 50.0)
-    result = pc.capacity([window("w", 3, 10.0, "fixed")], DEMAND, 3, grid_minutes=15)
+    result = pc.capacity([window("w", 3, 10.0, "fixed")], WORKLOAD, 3, grid_minutes=15)
     assert result["feasibleLowerBound"] == pytest.approx(10.0) and result["relaxedUpperBound"] == 50.0
     assert result["pointCertified"] is False
 
 
 def test_capacity_unbounded_without_constraints():
-    unbounded = pc.capacity([window("free", 3, 1.0, "fixed", burn={})], DEMAND, 4, grid_minutes=60)
+    unbounded = pc.capacity([window("free", 3, 1.0, "fixed", burn={})], WORKLOAD, 4, grid_minutes=60)
     assert unbounded["capacityBoundedness"] == "unbounded" and unbounded["relaxedUpperBound"] is None
     assert unbounded["pointCertified"] is False
 
 
 def test_capacity_marks_an_unverified_schedule_unresolved(monkeypatch):
     monkeypatch.setattr(pc, "greedy_schedule", lambda *args, **kwargs: [999.0])
-    result = pc.capacity([window("w", 1, 1.0, "fixed")], DEMAND, 1, grid_minutes=15)
+    result = pc.capacity([window("w", 1, 1.0, "fixed")], WORKLOAD, 1, grid_minutes=15)
     assert result["status"] == "unresolved" and result["feasibleLowerBound"] is None
     assert result["schedule"] is None and result["pointCertified"] is False
 
@@ -144,3 +145,31 @@ def test_a_step_limit_spreads_a_session_budget_across_steps():
     schedule = pc.greedy_schedule([session], DEMAND, 6, step_limit=3.0)
     assert schedule == [3.0, 3.0, 3.0, 1.0, 3.0, 3.0]
     assert pc.verify_schedule(schedule, [session], DEMAND, step_limit=3.0) is True
+
+
+def test_demand_objects_carry_units_and_reconcile_to_cost():
+    prices = {"input": 2e-6, "output": 10e-6}
+    per_task = {
+        "deepswe": Demand({"input": 1000.0, "output": 100.0}, "per-task", "deepswe"),
+        "scicode": Demand({"input": 200.0, "output": 50.0}, "per-task", "scicode"),
+    }
+    passes = [pc.component_pass(per_task["deepswe"], 113), pc.component_pass(per_task["scicode"], 288)]
+    assert passes[0].unit == "component-pass" and passes[0].tokens == {"input": 113000.0, "output": 11300.0}
+    workload = pc.workload_pass(passes)
+    assert workload.unit == "workload-pass"
+    # p . d_ie = C_ie for every component and p . d_iW = C_iW.
+    assert pc.priced(workload, prices) == pytest.approx(sum(pc.priced(item, prices) for item in passes))
+    assert pc.priced(passes[0], prices) == pytest.approx(113 * (1000 * 2e-6 + 100 * 10e-6))
+    with pytest.raises(ValueError, match="unknown demand unit"):
+        Demand({}, "per-run")
+    with pytest.raises(ValueError, match="per-task vector"):
+        pc.component_pass(passes[0], 2)
+    with pytest.raises(ValueError, match="component-pass vectors"):
+        pc.workload_pass([per_task["deepswe"]])
+
+
+def test_capacity_rejects_a_per_task_vector_whatever_its_entries():
+    """E94 units fixture: numerically plausible entries do not make a per-task vector a workload pass."""
+
+    with pytest.raises(ValueError, match="workload-pass demand"):
+        pc.capacity([window("w", 3, 10.0, "fixed")], Demand(DEMAND, "per-task"), 3, grid_minutes=15)

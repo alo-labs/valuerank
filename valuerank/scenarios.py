@@ -166,6 +166,26 @@ def cheapest_qualifier(scenario: dict, reference: str) -> str | None:
     return qualifiers[0][1]
 
 
+def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference: str, stratum: str, rng: random.Random, *, alternative: bool = False, **rule) -> dict:
+    """E92: the scenario-supported unique-cheapest label for one bar and one candidate.
+
+    The event is "the candidate qualifies and is strictly cheaper than every other
+    qualifier in the same scenario"; every row, provisional or not, competes in it.
+    The label also needs UniqueLabelEligible: a provisional candidate keeps its
+    published event frequency but never receives the label.
+    """
+
+    ranges = missing_ranges(rows) if alternative else None
+
+    def event(generator):
+        scenario = draw_scenario(rows, stratum, generator, alternative=alternative, ranges=ranges)
+        return cheapest_qualifier(scenario, reference) == candidate
+
+    outcome = sequential_threshold(event, rng, **rule)
+    eligible = not next(row.provisional for row in rows if row.row == candidate)
+    return {**outcome, "uniqueLabelEligible": eligible, "label": eligible and outcome["status"] == "met"}
+
+
 def standard_error(share: float, n: int) -> float:
     return math.sqrt(share * (1.0 - share) / n) if n else 0.0
 

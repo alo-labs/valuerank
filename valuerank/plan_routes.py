@@ -177,14 +177,35 @@ def dominance_filter(candidates: list[dict]) -> tuple[list[dict], dict]:
     return [candidate for candidate in candidates if candidate["route"]["id"] not in dominated], dominated
 
 
+DECIDING_KEYS = ("higher identification class", "higher evidence grade", "larger comparison multiple", "lower gross cash")
+
+
+def _order(candidate: dict) -> tuple:
+    return tuple(-value for value in comparison_tuple(candidate)), candidate["route"]["id"]
+
+
+def route_selection(candidates: list[dict]) -> dict:
+    """The official route with its published selection reason, dominated routes and comparison tuples (E85, E88, E93)."""
+
+    eligible = [candidate for candidate in candidates if candidate["grade"] != "diagnostic"]
+    remaining, dominated = dominance_filter(eligible)
+    ordered = sorted(remaining, key=_order)
+    tuples = {candidate["route"]["id"]: comparison_tuple(candidate) for candidate in eligible}
+    if not ordered:
+        return {"selected": None, "reason": "no eligible route", "dominated": dominated, "tuples": tuples}
+    if len(ordered) == 1:
+        return {"selected": ordered[0], "reason": "only remaining eligible route", "dominated": dominated, "tuples": tuples}
+    best, runner_up = (comparison_tuple(candidate) for candidate in ordered[:2])
+    deciding = next((DECIDING_KEYS[index] for index, (a, b) in enumerate(zip(best, runner_up)) if a != b), "route ID tie-break")
+    if deciding == DECIDING_KEYS[2] and ordered[0]["identification"] == "unidentified":
+        deciding = "larger observed multiple (observed-workload multiple — target-workload ordering not identified)"
+    return {"selected": ordered[0], "reason": deciding, "dominated": dominated, "tuples": tuples}
+
+
 def select_route(candidates: list[dict]) -> dict | None:
     """The official route: after the E88 filter, the greatest comparator tuple; on a complete tie, the first route ID."""
 
-    eligible = [candidate for candidate in candidates if candidate["grade"] != "diagnostic"]
-    remaining, _dominated = dominance_filter(eligible)
-    if not remaining:
-        return None
-    return min(remaining, key=lambda candidate: (tuple(-value for value in comparison_tuple(candidate)), candidate["route"]["id"]))
+    return route_selection(candidates)["selected"]
 
 
 def plan_cost(api_cost: float | None, selected: dict | None) -> dict:

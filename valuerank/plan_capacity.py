@@ -17,6 +17,12 @@ relaxation: in every window family, ceil(horizon / length) disjoint instances
 cover the horizon, so total consumption cannot exceed that many budgets, nor
 the per-step throughput limit times the horizon. A point capacity is certified
 only when the bounds coincide; otherwise the interval is reported.
+
+Demand objects carry units (E94): tokens per deployment-equivalent task, per
+component pass (task multiplicity times the per-task vector, or an evidenced
+component-pass vector) and per complete workload pass (the sum over the
+workload's components). Capacity accepts only a workload-pass demand, so
+capacity is counted in complete workload passes per fee period.
 """
 
 from __future__ import annotations
@@ -25,6 +31,7 @@ import math
 from dataclasses import dataclass, field
 
 SEMANTICS = ("fixed", "sliding", "session")
+DEMAND_UNITS = ("per-task", "component-pass", "workload-pass")
 TOLERANCE = 1e-9
 
 
@@ -40,6 +47,45 @@ class Window:
     def __post_init__(self):
         if self.semantics not in SEMANTICS or self.length <= 0 or self.budget < 0:
             raise ValueError(f"invalid window {self.name}")
+
+
+@dataclass(frozen=True)
+class Demand:
+    """A category-token vector with its unit: per-task, component-pass or workload-pass (E94)."""
+
+    tokens: dict
+    unit: str
+    component: str | None = None
+
+    def __post_init__(self):
+        if self.unit not in DEMAND_UNITS:
+            raise ValueError(f"unknown demand unit: {self.unit}")
+
+
+def component_pass(per_task: Demand, multiplicity: int) -> Demand:
+    """d_ie = n_e * t_ie: one pass over a component's tasks."""
+
+    if per_task.unit != "per-task":
+        raise ValueError(f"a component pass is built from a per-task vector, not {per_task.unit}")
+    return Demand({category: multiplicity * tokens for category, tokens in per_task.tokens.items()}, "component-pass", per_task.component)
+
+
+def workload_pass(components: list[Demand]) -> Demand:
+    """d_iW = sum over the workload's components of d_ie, one complete workload pass."""
+
+    totals: dict = {}
+    for demand in components:
+        if demand.unit != "component-pass":
+            raise ValueError(f"a workload pass sums component-pass vectors, not {demand.unit}")
+        for category, tokens in demand.tokens.items():
+            totals[category] = totals.get(category, 0.0) + tokens
+    return Demand(totals, "workload-pass")
+
+
+def priced(demand: Demand, prices: dict) -> float:
+    """p . d in USD (prices per token by category); reconciles to the scored cost at the same unit."""
+
+    return sum(prices[category] * tokens for category, tokens in demand.tokens.items())
 
 
 def unit_burn(window: Window, demand: dict) -> float:
@@ -148,9 +194,12 @@ def relaxed_upper_bound(windows: list[Window], demand: dict, horizon: int, *, st
     return bound
 
 
-def capacity(windows: list[Window], demand: dict, horizon: int, *, grid_minutes: int, step_limit: float = math.inf) -> dict:
-    """Token-equivalent capacity in workload units: verified lower bound, relaxed upper bound and certification."""
+def capacity(windows: list[Window], workload: Demand, horizon: int, *, grid_minutes: int, step_limit: float = math.inf) -> dict:
+    """Token-equivalent capacity in complete workload passes: verified lower bound, relaxed upper bound, certification."""
 
+    if workload.unit != "workload-pass":
+        raise ValueError(f"capacity needs a workload-pass demand, not {workload.unit}")
+    demand = workload.tokens
     schedule = greedy_schedule(windows, demand, horizon, step_limit=step_limit)
     # Only a schedule re-verified against the recorded semantics may serve as the lower bound.
     verified = verify_schedule(schedule, windows, demand, step_limit=step_limit)

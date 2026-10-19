@@ -427,3 +427,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 27 (Claude Sonnet 5.5, round 5, Thinking) — adopted
 - All findings (E88–E91).
+
+## Editor decisions after reviewer 28 (owner may override)
+- E92. One eligibility predicate for both unique-cheapest labels: UniqueLabelEligible(i) = bar competitor ∧ ¬provisional; provisional rows still compete and can block; their scenario frequencies and K_r membership are published without a unique label; scenario fixtures added. Answers Grok Q1 without escalation: the draft's prose already excludes provisional rows from unique-cheapest results, so the normative scenario definition is aligned with it.
+- E93. Comparator key 3 for unidentified routes = the observed multiple (lower bound where ranged), labelled "observed-workload multiple — target-workload ordering not identified"; routes record measurement workload, valuation basis and fee period; public token ledgers are revalued at the release price list, otherwise the multiples are compared as published with the basis difference stated; selection-reason field; unidentified-vs-unidentified fixtures. Answers Grok Q2 from the owner's AGENTS.md rule that the Plan basis divides by the highest eligible Value Multiple (Grok preferred skipping the multiple; that would contradict the owner rule).
+- E94. Demand objects with units: t_ie per task, d_ie = n_e t_ie per component pass (or an evidenced component-pass vector with its aggregation operator), d_iW = Σ d_ie per workload pass; p·d_ie = C_ie and p·d_iW = C_iW; the capacity solver accepts only d_iW; λ in workload passes per fee period; units fixture.
+
+## Reviewer 28 (Grok 4.7, round 5, Thinking) — adopted
+- All findings (E92–E94).

@@ -105,6 +105,27 @@ def test_select_route_follows_the_e85_comparator():
     assert pr.select_route([]) is None
 
 
+def test_route_selection_publishes_the_deciding_key():
+    assert pr.route_selection([])["reason"] == "no eligible route"
+    single = pr.route_selection([candidate("only", 5.0, "controlled")])
+    assert single["selected"]["route"]["id"] == "only" and single["reason"] == "only remaining eligible route"
+    # Unidentified routes at equal grade: the larger observed multiple decides, labelled as such.
+    observed = pr.route_selection([candidate("pro", 8.0, "controlled"), candidate("max", 12.0, "controlled")])
+    assert observed["selected"]["route"]["id"] == "max" and observed["reason"].startswith("larger observed multiple")
+    assert observed["tuples"]["pro"] == (0, 3, 8.0, -20.0)
+    points = pr.route_selection([candidate("a", 8.0, "controlled", identification="point-identified"), candidate("b", 12.0, "controlled", identification="point-identified")])
+    assert points["reason"] == "only remaining eligible route" and points["dominated"] == {"a": "b"}
+    overlapping = [
+        {"route": route(name, 10.0, valueMultipleLower=low, valueMultipleUpper=high), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
+        for name, low, high in (("a", 8.0, 13.0), ("b", 7.0, 12.0))
+    ]
+    assert pr.route_selection(overlapping)["reason"] == "larger comparison multiple"
+    assert pr.route_selection([candidate("a", 8.0, "controlled"), candidate("b", 9.0, "assumption")])["reason"] == "higher evidence grade"
+    assert pr.route_selection([candidate("a", 8.0, "controlled", identification="point-identified"), candidate("b", 9.0, "controlled")])["reason"] == "higher identification class"
+    assert pr.route_selection([candidate("a", 8.0, "controlled", fee=10), candidate("b", 8.0, "controlled")])["reason"] == "lower gross cash"
+    assert pr.route_selection([candidate("b", 8.0, "controlled"), candidate("a", 8.0, "controlled")])["reason"] == "route ID tie-break"
+
+
 def test_gross_cash_and_lower_bound_comparison():
     assert pr.gross_cash(route("r", 1, fee=20, additionalCashUsd=5)) == 25.0
     assert pr.gross_cash(route("r", 1, fee=None)) == math.inf

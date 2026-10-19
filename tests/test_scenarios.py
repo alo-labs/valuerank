@@ -132,3 +132,16 @@ def test_sequential_threshold_met_not_met_and_unresolved():
     assert not_met["status"] == "not met"
     borderline = sc.sequential_threshold(lambda r: r.random() < 0.9, rng, batch=50, looks=2)
     assert borderline["status"] == "scenario threshold unresolved" and borderline["scenarios"] == 100
+
+
+def test_scenario_supported_cheapest_needs_a_non_provisional_candidate():
+    reference = full_row("ref", 50.0, 100.0)
+    rule = {"batch": 100, "looks": 2}
+    eligible = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), reference], "c", "ref", "S0", random.Random(5), **rule)
+    assert eligible["status"] == "met" and eligible["label"] is True
+    # A provisional singleton that is cheapest in every scenario keeps its frequency but gets no label.
+    provisional = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0, provisional=True), reference], "c", "ref", "S0", random.Random(5), **rule)
+    assert provisional["share"] == 1.0 and provisional["uniqueLabelEligible"] is False and provisional["label"] is False
+    # A cheaper provisional qualifier still competes and blocks the candidate.
+    blocked = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), full_row("p", 70.0, 5.0, provisional=True), reference], "c", "ref", "S0", random.Random(5), **rule)
+    assert blocked["status"] == "not met" and blocked["label"] is False
