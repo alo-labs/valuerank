@@ -117,6 +117,42 @@ def cost_influence(cost_scores: list[float], quality_scores: list[float], beta: 
     }
 
 
+def _influence_status(rows: list[dict], result: dict) -> str:
+    if len(rows) < 2:
+        return "undefined (panel too small)"
+    return "defined" if result["costShare"] is not None else "undefined — no composite dispersion"
+
+
+def panel_cost_influence(rows: list[dict], beta: float, main_workload: str) -> dict:
+    """E91: cost influence on the common-workload panel, per subset stratum, and over the displayed table.
+
+    Each row is {"id", "workloadId", "costScore", "qualityScore"}. The headline
+    statistic and its 10% flag use only the rows scored on the main workload with
+    its anchor object (the same rows for both SDs); subset workloads get their own
+    statistic; the whole-table value mixes anchor objects and is labelled
+    "displayed-table dispersion".
+    """
+
+    scored = [row for row in rows if row["costScore"] is not None and row["qualityScore"] is not None]
+
+    def summarise(panel: list[dict]) -> dict:
+        result = cost_influence([row["costScore"] for row in panel], [row["qualityScore"] for row in panel], beta)
+        return {**result, "status": _influence_status(panel, result), "panel": sorted(row["id"] for row in panel)}
+
+    main = [row for row in scored if row["workloadId"] == main_workload]
+    headline = summarise(main)
+    headline["excluded"] = sorted(row["id"] for row in rows if row not in main)
+    strata = {}
+    for workload in sorted({row["workloadId"] for row in scored} - {main_workload}):
+        strata[workload] = summarise([row for row in scored if row["workloadId"] == workload])
+    return {
+        "commonWorkload": headline,
+        "subsetStrata": strata,
+        "displayedTableDispersion": summarise(scored),
+        "flag": headline["flag"],
+    }
+
+
 def value_score(cost_score_value: float | None, quality: float | None, beta: float) -> float | None:
     """V = beta * S_C + (1 - beta) * Q; a row needs both a cost score and a quality score (no cost, no value score)."""
 

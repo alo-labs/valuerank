@@ -140,3 +140,22 @@ def test_reference_as_competitor_and_as_candidate():
 
 def test_bar_with_shared_factors_is_unresolved():
     assert iv.cheapest_above_bar([Box("a", 1, 1, 1, 1)], Reference("r", 0, 1), shared_factors=("x",))["status"] == iv.UNRESOLVED
+
+
+def test_row_local_coupling_is_not_decided_at_corners():
+    """E89 release test: i is dominated for every t although its box corner (1, 1) is undominated."""
+
+    enclosure = [Box("i", 1, 2, 0, 1), Box("j", 1, 1, 0.5, 0.5), Box("k", 1.5, 1.5, 1, 1)]
+    # The product enclosure alone would wrongly certify a possible membership.
+    assert iv.frontier(enclosure)["i"]["possible"] == iv.CERTIFIED
+    coupled = [Box("i", 1, 2, 0, 1, coupled=True)] + enclosure[1:]
+    assert iv.frontier(coupled)["i"]["possible"] == iv.UNRESOLVED
+    assert "E89" in iv.cheapest_above_bar(coupled, Reference("j", 0.5, 0.5))["reason"]
+    # Solved over the coupled primitive t: C_i = 1 + t, Q_i = t.
+    rows = [
+        SharedBox("i", Affine(1, 1), Affine(1, 1), Affine(0, 1), Affine(0, 1)),
+        SharedBox("j", Affine(1), Affine(1), Affine(0.5), Affine(0.5)),
+        SharedBox("k", Affine(1.5), Affine(1.5), Affine(1), Affine(1)),
+    ]
+    result = iv.frontier_shared(rows, 0.0, 1.0)
+    assert result["i"]["possible"] == iv.DISPROVED and result["i"]["definite"] == iv.DISPROVED

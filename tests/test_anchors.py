@@ -92,6 +92,25 @@ def test_cost_influence_flags_a_low_cost_share():
     assert flat["costShare"] is None and flat["flag"] is False
 
 
+def test_panel_cost_influence_uses_the_common_workload_panel():
+    rows = [
+        {"id": "a", "workloadId": "W", "costScore": 0.0, "qualityScore": 40.0},
+        {"id": "b", "workloadId": "W", "costScore": 100.0, "qualityScore": 60.0},
+        {"id": "s1", "workloadId": "W-sub", "costScore": 90.0, "qualityScore": 50.0},
+        {"id": "s2", "workloadId": "W-sub", "costScore": 90.0, "qualityScore": 50.0},
+        {"id": "lone", "workloadId": "W-other", "costScore": 10.0, "qualityScore": 70.0},
+        {"id": "unscored", "workloadId": "W", "costScore": None, "qualityScore": 55.0},
+    ]
+    result = a.panel_cost_influence(rows, 0.25, "W")
+    headline = result["commonWorkload"]
+    assert headline["panel"] == ["a", "b"] and headline["excluded"] == ["lone", "s1", "s2", "unscored"]
+    assert headline["costShare"] == pytest.approx(0.25 * 50 / (0.25 * 50 + 0.75 * 10)) and headline["status"] == "defined"
+    assert result["flag"] is False
+    assert result["subsetStrata"]["W-sub"]["status"] == "undefined — no composite dispersion"
+    assert result["subsetStrata"]["W-other"]["status"] == "undefined (panel too small)"
+    assert result["displayedTableDispersion"]["panel"] == ["a", "b", "lone", "s1", "s2"]
+
+
 def test_value_score_needs_cost_and_quality():
     assert a.value_score(80.0, 60.0, 0.25) == pytest.approx(65.0)
     assert a.value_score(None, 60.0, 0.25) is None

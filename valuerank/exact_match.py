@@ -72,6 +72,8 @@ def efforts_match(model_id: str, configuration_effort: str | None, evaluated_eff
     evaluated = (evaluated_effort or "").casefold() or None
     if configuration_effort is not None:
         return evaluated == configuration_effort.casefold()
+    if evaluated is None:
+        return True  # both unlabeled: the same single-mode configuration on both sides
     equivalents, _evidence = EFFORT_EQUIVALENTS.get(model_id, (set(), ""))
     return evaluated in equivalents
 

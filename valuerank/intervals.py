@@ -5,7 +5,11 @@ each evaluable row has an independent box (cost interval from reporting
 precision; quality interval from reporting precision plus 0-100 domains for
 missing leaves). With independent boxes the decisions reduce exactly to
 corners (each row's inputs move only its own cost and quality, and dominance
-and qualification are monotone in them). A bar's reference quality Q_r is a
+and qualification are monotone in them). That needs separability (E89): a box
+is the product of its cost and quality ranges, so a row whose cost and quality
+share a primitive is marked ``coupled`` and the corner solvers return
+"unresolved"; such a row is solved over the coupled primitive with
+``frontier_shared``. A bar's reference quality Q_r is a
 variable shared by every qualification condition, so bar decisions solve for
 it exactly over its interval (breakpoint reasoning on a one-dimensional affine
 threshold). Problems with other shared factors are returned as "unresolved"
@@ -34,6 +38,7 @@ class Box:
     q_low: float
     q_high: float
     provisional: bool = False
+    coupled: bool = False  # a primitive enters both cost and quality: the box is only an outer enclosure
 
     def __post_init__(self):
         if not (0 < self.c_low <= self.c_high) or not (self.q_low <= self.q_high):
@@ -44,6 +49,16 @@ def _dominates(c_j, q_j, c_i, q_i) -> bool:
     return c_j <= c_i and q_j >= q_i and (c_j < c_i or q_j > q_i)
 
 
+def _unsupported(boxes: list[Box], shared_factors: tuple) -> str | None:
+    """Why the corner reduction is not exact for these boxes, or None when it is (E43, E89)."""
+
+    if shared_factors:
+        return "shared factors are not supported by this solver"
+    if any(box.coupled for box in boxes):
+        return "row-local coupling of cost and quality: solve over the coupled primitive (E89)"
+    return None
+
+
 def frontier(boxes: list[Box], *, shared_factors: tuple = ()) -> dict:
     """Definite and possible frontier membership for every row, with witnesses.
 
@@ -52,11 +67,11 @@ def frontier(boxes: list[Box], *, shared_factors: tuple = ()) -> dict:
     and some j at its best that dominates; certified otherwise.
     """
 
+    reason = _unsupported(boxes, shared_factors)
+    if reason:
+        return {box.row: {"definite": UNRESOLVED, "possible": UNRESOLVED, "reason": reason} for box in boxes}
     results = {}
     for box in boxes:
-        if shared_factors:
-            results[box.row] = {"definite": UNRESOLVED, "possible": UNRESOLVED, "reason": "shared factors are not supported by this solver"}
-            continue
         others = [other for other in boxes if other.row != box.row]
         blockers = [
             other.row for other in others if _dominates(other.c_high, other.q_low, box.c_low, box.q_high)
@@ -245,8 +260,9 @@ def cheapest_above_bar(boxes: list[Box], reference: Reference, *, shared_factors
     possibly qualify (j != i). Ties never produce a unique label.
     """
 
-    if shared_factors:
-        return {"status": UNRESOLVED, "reason": "shared factors are not supported by this solver"}
+    reason = _unsupported(boxes, shared_factors)
+    if reason:
+        return {"status": UNRESOLVED, "reason": reason}
     rows = {}
     members = []
     for box in boxes:

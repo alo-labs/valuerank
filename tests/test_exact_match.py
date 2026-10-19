@@ -18,7 +18,7 @@ def test_efforts_match_requires_the_same_label_or_a_documented_equivalent():
     assert em.efforts_match("mimo-v2-6-pro", None, "enabled") is True
     assert em.efforts_match("qwen3.8-max", None, "high") is False
     assert em.efforts_match("unknown-model", None, "max") is False
-    assert em.efforts_match("unknown-model", None, None) is False
+    assert em.efforts_match("unknown-model", None, None) is True  # both unlabeled
 
 
 ROWS = [

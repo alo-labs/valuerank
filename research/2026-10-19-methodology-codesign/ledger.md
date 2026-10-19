@@ -418,3 +418,12 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 26 (GPT-6.1 Sol, round 5, Thinking) — adopted
 - All findings (E83–E87).
+
+## Editor decisions after reviewer 27 (owner may override)
+- E88. Route-dominance pre-filter before the E85 comparator: drop route b when an admissible route a for the same configuration, workload and basis has grade ≥ b's and identified multiples with L_a > U_b (a sufficient condition under any joint constraints); unidentified routes neither filter nor are filtered; dropped routes stay in the release data with the reason; the official route is "evidence-priority selected". Answers Sonnet Q1 without escalation: evidence-grade priority stands because AGENTS.md keeps exact measured routes ahead of shared assumptions; identification precision no longer overrides certified dominance.
+- E89. Separability condition for the monotone-corner shortcut: exact only when no shared factor and no row-local coupling (row feasible set = product of its C and Q ranges); row-local coupled primitives are branched over like shared factors; unsupported constraint classes return unresolved; Sonnet's three-configuration fixture (i dominated for every t although its box corner is undominated) must return disproved. v1 rows draw C and Q from distinct published records, asserted per release.
+- E90. GDPval temporal estimand: AA's published GDPval-AA v2.1 Elo as integrated in the pinned Index version (frozen at a configuration's addition; AA methodology verified 2026-10-19). Verified that AA's leaderboard showed the same values on 2026-10-19 (Opus 5.5 1866, GPT-6.1 Sol 1594, Gemini 4 Argon 1624; 2026-10-17 snapshot 1866.27, 1593.85, 1623.99), so one published record exists today. Registry adds rating snapshot ID, fit or anchor revision and freeze status; refresh decomposition adds "benchmark-record update". Answers Sonnet Q2 without escalation because the two records coincide; if AA ever publishes a differing refitted rating, the release flags it, keeps the Index-integrated value and the question goes to the owner.
+- E91. Within-cohort cost influence computed on the declared common-workload panel (main W and anchor object, same rows for both SDs, panel size and exclusions shown); subset strata separately; whole-table value only as "displayed-table dispersion"; zero denominator → undefined. The 10% flag uses the common-workload statistic.
+
+## Reviewer 27 (Claude Sonnet 5.5, round 5, Thinking) — adopted
+- All findings (E88–E91).

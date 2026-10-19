@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from datetime import date
 
 import pytest
@@ -37,16 +38,16 @@ def test_concordant_pool_checks_unpooled_reports_then_takes_the_geometric_mean()
 
 def test_evidence_grades():
     measured = route("a", 50, models=("claude-opus-5-5",), source="Opus 5.5")
-    assert pr.evidence_grade(measured, "claude-opus-5-5") == "measured"
+    assert pr.evidence_grade(measured, "claude-opus-5-5") == "controlled"
     shared_controlled = route("b", 50, models=("x", "y"))
     assert pr.evidence_grade(shared_controlled, "x") == "assumption"
     transfer = route("c", 10, kind="user_assumption", models=("gpt-6.1-sol", "gpt-6-sol"), source="GPT-6.1 Sol", source_kind="controlled_account_workload_projection")
-    assert pr.evidence_grade(transfer, "gpt-6.1-sol") == "measured"  # the donor's own measurement
+    assert pr.evidence_grade(transfer, "gpt-6.1-sol") == "controlled"  # the donor's own measurement
     assert pr.evidence_grade(transfer, "gpt-6-sol") == "assumption"
     report = route("d", 5, kind="user_reported_projection", models=("grok-4.7",), source="Grok 4.7 XHigh")
     assert pr.evidence_grade(report, "grok-4.7") == "diagnostic"
     concordant = dict(report, independentReports=[5.0, 5.5])
-    assert pr.evidence_grade(concordant, "grok-4.7") == "measured"
+    assert pr.evidence_grade(concordant, "grok-4.7") == "reports"
     assert pr.evidence_grade(route("e", 1, kind="press_claim"), "m") == "diagnostic"
 
 
@@ -80,18 +81,58 @@ def candidate(identifier, multiple, grade, *, fee=20, identification="unidentifi
     return {"route": route(identifier, multiple, fee=fee), "grade": grade, "identification": identification, "expiry": expiry}
 
 
-def test_select_route_is_lexicographic():
-    measured_low = candidate("measured", 8.1, "measured")
+def test_select_route_follows_the_e85_comparator():
+    controlled_low = candidate("controlled", 8.1, "controlled")
     assumption_high = candidate("assumption", 10.8, "assumption")
-    assert pr.select_route([assumption_high, measured_low])["route"]["id"] == "measured"
-    identified = candidate("identified", 2.0, "assumption", identification="set-identified")
-    assert pr.select_route([measured_low, identified])["route"]["id"] == "identified"
-    cheaper_fee = candidate("cheap-fee", 8.1, "measured", fee=10)
-    assert pr.select_route([measured_low, cheaper_fee])["route"]["id"] == "cheap-fee"
-    no_fee = candidate("no-fee", 8.1, "measured", fee=None)
-    assert pr.select_route([no_fee, measured_low])["route"]["id"] == "measured"
+    assert pr.select_route([assumption_high, controlled_low])["route"]["id"] == "controlled"
+    reports = candidate("reports", 9.0, "reports")
+    assert pr.select_route([reports, assumption_high])["route"]["id"] == "reports"
+    assert pr.select_route([reports, controlled_low])["route"]["id"] == "controlled"
+    set_identified = {"route": route("set", 2.0, valueMultipleLower=0.5, valueMultipleUpper=3.0), "grade": "assumption", "identification": "set-identified", "expiry": "fresh"}
+    point_identified = candidate("point", 1.0, "assumption", identification="point-identified")
+    assert pr.select_route([controlled_low, set_identified])["route"]["id"] == "set"
+    # Overlapping identified multiples: no certified dominance, so point identification wins.
+    assert pr.select_route([set_identified, point_identified])["route"]["id"] == "point"
+    cheaper_fee = candidate("cheap-fee", 8.1, "controlled", fee=10)
+    assert pr.select_route([controlled_low, cheaper_fee])["route"]["id"] == "cheap-fee"
+    no_fee = candidate("no-fee", 8.1, "controlled", fee=None)
+    assert pr.select_route([no_fee, controlled_low])["route"]["id"] == "controlled"
+    tie_b, tie_a = candidate("b-route", 8.1, "controlled"), candidate("a-route", 8.1, "controlled")
+    assert pr.select_route([tie_b, tie_a])["route"]["id"] == "a-route"
+    prefix_long, prefix_short = candidate("ab", 8.1, "controlled"), candidate("a", 8.1, "controlled")
+    assert pr.select_route([prefix_long, prefix_short])["route"]["id"] == "a"
     assert pr.select_route([candidate("diag", 99, "diagnostic")]) is None
     assert pr.select_route([]) is None
+
+
+def test_gross_cash_and_lower_bound_comparison():
+    assert pr.gross_cash(route("r", 1, fee=20, additionalCashUsd=5)) == 25.0
+    assert pr.gross_cash(route("r", 1, fee=None)) == math.inf
+    interval = {"route": route("i", 10.0, valueMultipleLower=6.0), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
+    assert pr.comparison_tuple(interval)[2] == 6.0
+    point = candidate("p", 7.0, "controlled", identification="set-identified")
+    assert pr.select_route([interval, point])["route"]["id"] == "p"
+
+
+def test_dominance_filter_sets_aside_certifiably_dearer_routes():
+    point_low = candidate("A", 2.0, "controlled", identification="point-identified")
+    set_high = {"route": route("B", 10.5, valueMultipleLower=10.0, valueMultipleUpper=11.0), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
+    remaining, dominated = pr.dominance_filter([point_low, set_high])
+    assert [item["route"]["id"] for item in remaining] == ["B"] and dominated == {"A": "B"}
+    assert pr.select_route([point_low, set_high])["route"]["id"] == "B"
+    # Losing point identification by an epsilon no longer flips the selection.
+    point_ten = candidate("B", 10.0, "controlled", identification="point-identified")
+    nearly_point = {"route": route("B", 10.0, valueMultipleLower=10.0, valueMultipleUpper=10.001), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
+    assert pr.select_route([point_low, point_ten])["route"]["id"] == pr.select_route([point_low, nearly_point])["route"]["id"] == "B"
+    # A lower-grade route never sets aside a higher-grade one.
+    transfer_high = {"route": route("T", 10.5, valueMultipleLower=10.0, valueMultipleUpper=11.0), "grade": "assumption", "identification": "set-identified", "expiry": "fresh"}
+    assert pr.dominance_filter([point_low, transfer_high])[1] == {}
+    assert pr.select_route([point_low, transfer_high])["route"]["id"] == "A"
+    # Unidentified routes neither filter nor are filtered; a set without a recorded upper bound is never dominated.
+    unidentified_high = candidate("U", 100.0, "controlled")
+    open_set = {"route": route("S", 3.0, valueMultipleLower=1.0), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
+    assert pr.dominance_filter([point_low, unidentified_high, open_set])[1] == {}
+    assert pr.identified_bounds(open_set) == (1.0, math.inf) and pr.identified_bounds(unidentified_high) is None
 
 
 def test_plan_cost_routes_fallbacks_and_flags():
@@ -103,14 +144,16 @@ def test_plan_cost_routes_fallbacks_and_flags():
     result = pr.plan_cost(1000.0, selected)
     assert result["costUsd"] == 20.0 and result["multiple"] == 50.0
     assert result["flags"] == ["workload-unmatched", "owner-named transfer (assumption)", "possibly-superseded"]
-    identified = pr.plan_cost(1000.0, candidate("r", 50.0, "measured", identification="point-identified"))
+    identified = pr.plan_cost(1000.0, candidate("r", 50.0, "controlled", identification="point-identified"))
     assert identified["flags"] == [] and identified["identification"] == "point-identified"
+    ranged = {"route": route("s", 50.0, valueMultipleLower=40.0, valueMultipleUpper=60.0), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
+    assert pr.plan_cost(1000.0, ranged)["costUsd"] == 25.0  # scored at the lower bound (E74)
 
 
 def test_identification_yield_and_exploratory_label():
     rows = {
-        "a": candidate("a", 1, "measured", identification="point-identified"),
-        "b": candidate("b", 1, "measured", identification="set-identified"),
+        "a": candidate("a", 1, "controlled", identification="point-identified"),
+        "b": candidate("b", 1, "controlled", identification="set-identified"),
         "c": candidate("c", 1, "assumption"),
         "d": None,
         "e": candidate("e", 1, "assumption"),

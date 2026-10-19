@@ -3,9 +3,10 @@
 A route gives a Value Multiple M for a model on a plan tier. For each model the
 route's evidence is classified:
 
-- ``measured``: a controlled saturation measurement of this exact model
-  (e.g. SemiAnalysis), or at least two independent end-user reports concordant
-  within 20% (max/min <= 1.2 on the unpooled reports, then a geometric mean).
+- ``controlled``: a controlled saturation measurement of this exact model
+  (e.g. SemiAnalysis);
+- ``reports``: at least two independent end-user reports concordant within 20%
+  (max/min <= 1.2 on the unpooled reports, then a geometric mean);
 - ``assumption``: an owner-named model-to-model transfer (labelled; it never
   identifies the scored-workload multiple M_W).
 - ``diagnostic``: single-source reports and anything else the admission rule
@@ -13,9 +14,13 @@ route's evidence is classified:
 
 Routes past the 90-day hard expiry plus a 30-day grace are demoted to
 diagnostic; the model then falls back to API cost, flagged and labelled
-"cross-estimand ordering not identified". The official route is chosen
-lexicographically: identified M_W first, then evidence grade, then the
-multiple, then the lower fee. Plan cost is the API basket cost divided by M.
+"cross-estimand ordering not identified". Routes certifiably dearer than another
+identified route of at least equal grade are first set aside (E88). The official
+route is then chosen by the E85 comparator: identification class (point > set >
+unidentified), evidence grade (controlled > reports > assumption), the
+comparison multiple, lower gross cash under the declared purchase policy, then
+route ID. Plan cost is the API basket cost divided by the comparison multiple
+(the lower bound of a multiple range; E74).
 """
 
 from __future__ import annotations
@@ -30,7 +35,8 @@ CONCORDANCE_RATIO = 1.2
 CONTROLLED_KINDS = {"controlled_account_workload_projection", "controlled_measurement"}
 ASSUMPTION_KINDS = {"user_assumption"}
 REPORT_KINDS = {"user_reported_projection", "end_user_report", "community_observed"}
-GRADE = {"measured": 2, "assumption": 1, "diagnostic": 0}
+GRADE = {"controlled": 3, "reports": 2, "assumption": 1, "diagnostic": 0}
+IDENTIFICATION = {"point-identified": 2, "set-identified": 1, "unidentified": 0}
 # Route source-model labels mapped to ValueRank model ids (the donor of a measured multiple).
 SOURCE_MODEL_IDS = {
     "Opus 5.5": "claude-opus-5-5",
@@ -56,12 +62,12 @@ def evidence_grade(route: dict, model_id: str) -> str:
     source_kind = route.get("sourceEvidenceClass")
     same_model = SOURCE_MODEL_IDS.get(route.get("sourceModel")) == model_id
     if kind in CONTROLLED_KINDS:
-        return "measured" if same_model or len(route.get("modelIds", [])) == 1 else "assumption"
+        return "controlled" if same_model or len(route.get("modelIds", [])) == 1 else "assumption"
     if kind in ASSUMPTION_KINDS:
         # The donor model's own route is its measurement; other models carry the owner-named transfer.
-        return "measured" if same_model and source_kind in CONTROLLED_KINDS else "assumption"
+        return "controlled" if same_model and source_kind in CONTROLLED_KINDS else "assumption"
     if kind in REPORT_KINDS and concordant_pool(route.get("independentReports") or []) is not None:
-        return "measured"
+        return "reports"
     return "diagnostic"
 
 
@@ -112,25 +118,73 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
     return candidates
 
 
+def gross_cash(route: dict) -> float:
+    """Cash paid for the fee period under the declared purchase policy (subscription fee + declared additional cash)."""
+
+    fee = route.get("planPriceUsd")
+    if not isinstance(fee, (int, float)):
+        return math.inf
+    return float(fee) + float(route.get("additionalCashUsd") or 0.0)
+
+
+def comparison_multiple(route: dict) -> float:
+    """The multiple a route is compared and scored at: its lower bound when a range is recorded (E74)."""
+
+    return float(route.get("valueMultipleLower", route["valueMultiple"]))
+
+
+def comparison_tuple(candidate: dict) -> tuple:
+    """The E85 comparator key (higher is preferred); published with every route."""
+
+    route = candidate["route"]
+    return (
+        IDENTIFICATION.get(candidate["identification"], 0),
+        GRADE[candidate["grade"]],
+        comparison_multiple(route),
+        -gross_cash(route),
+    )
+
+
+def identified_bounds(candidate: dict) -> tuple[float, float] | None:
+    """[L, U] of an identified M_W: a point twice, or a set's bounds (no recorded upper bound = unbounded)."""
+
+    route = candidate["route"]
+    if candidate["identification"] == "point-identified":
+        return float(route["valueMultiple"]), float(route["valueMultiple"])
+    if candidate["identification"] == "set-identified":
+        return comparison_multiple(route), float(route.get("valueMultipleUpper", math.inf))
+    return None
+
+
+def dominance_filter(candidates: list[dict]) -> tuple[list[dict], dict]:
+    """E88: set aside each route b for which an identified route a of at least b's grade has L_a > U_b.
+
+    L_a > U_b makes a cheaper on the workload in every admissible state, whatever
+    the joint constraints. Unidentified routes neither filter nor are filtered.
+    Returns the remaining routes and {dominated route ID: dominating route ID}.
+    """
+
+    dominated = {}
+    for loser in candidates:
+        loser_bounds = identified_bounds(loser)
+        for winner in candidates:
+            winner_bounds = identified_bounds(winner)
+            if winner is loser or loser_bounds is None or winner_bounds is None:
+                continue
+            if GRADE[winner["grade"]] >= GRADE[loser["grade"]] and winner_bounds[0] > loser_bounds[1]:
+                dominated[loser["route"]["id"]] = winner["route"]["id"]
+                break
+    return [candidate for candidate in candidates if candidate["route"]["id"] not in dominated], dominated
+
+
 def select_route(candidates: list[dict]) -> dict | None:
-    """The official route: identified M_W first, then evidence grade, then the multiple, then the lower fee."""
+    """The official route: after the E88 filter, the greatest comparator tuple; on a complete tie, the first route ID."""
 
     eligible = [candidate for candidate in candidates if candidate["grade"] != "diagnostic"]
-    if not eligible:
+    remaining, _dominated = dominance_filter(eligible)
+    if not remaining:
         return None
-
-    def key(candidate):
-        route = candidate["route"]
-        fee = route.get("planPriceUsd")
-        return (
-            candidate["identification"] in {"point-identified", "set-identified"},
-            GRADE[candidate["grade"]],
-            float(route["valueMultiple"]),
-            -(fee if isinstance(fee, (int, float)) else math.inf),
-            route["id"],
-        )
-
-    return max(eligible, key=key)
+    return min(remaining, key=lambda candidate: (tuple(-value for value in comparison_tuple(candidate)), candidate["route"]["id"]))
 
 
 def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
@@ -153,10 +207,10 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     if selected["expiry"] in {"possibly-superseded", "expired"}:
         flags.append(selected["expiry"])
     return {
-        "costUsd": api_cost / float(route["valueMultiple"]),
+        "costUsd": api_cost / comparison_multiple(route),
         "fallback": None,
         "routeId": route["id"],
-        "multiple": float(route["valueMultiple"]),
+        "multiple": comparison_multiple(route),
         "grade": selected["grade"],
         "identification": selected["identification"],
         "flags": flags,
