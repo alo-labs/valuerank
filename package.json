@@ -10,6 +10,7 @@
     "capture:tb4": "node scripts/scrape-tb4.js data/tb4-scrape.json",
     "capture:aa": "python3 -m valuerank.capture_aa",
     "capture:deepswe": "python3 -m valuerank.fetch_deepswe",
+    "capture:basket": "python3 -m valuerank.capture_coding_agents && node scripts/capture-aa-cost-charts.js",
     "refresh:external": "python3 -m valuerank.fetch_livebench && npm run capture:tb4 && python3 -m valuerank.build_tb4 data/tb4-scrape.json data/tb4.json",
     "build:aa": "npm run capture:aa && python3 -m valuerank.build_aa_metrics",
     "reconcile:aa": "python3 -m valuerank.aa_reconciliation",
