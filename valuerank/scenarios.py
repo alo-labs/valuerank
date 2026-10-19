@@ -21,6 +21,7 @@ upper bound < 0.90, otherwise continue, ending "unresolved" at the cap.
 
 from __future__ import annotations
 
+import itertools
 import math
 import random
 from dataclasses import dataclass, field
@@ -108,25 +109,31 @@ def missing_ranges(rows: list[RowInputs]) -> dict:
     return ranges
 
 
-def draw_scenario(rows: list[RowInputs], stratum: str, rng: random.Random, *, alternative: bool = False, ranges: dict | None = None) -> dict:
-    """One scenario: {row: (cost, quality)} for the stratum."""
+def draw_scenario(rows: list[RowInputs], stratum: str, rng: random.Random, *, alternative: bool = False, ranges: dict | None = None, alternative_rows: frozenset | None = None) -> dict:
+    """One scenario: {row: (cost, quality)} for the stratum.
+
+    ``alternative_rows`` (E121) assigns the endpoint-heavy kernels per row block;
+    without it, ``alternative`` applies to every row.
+    """
 
     if stratum not in STRATA:
         raise ValueError(f"unknown stratum: {stratum}")
     weights = hierarchical_weights(rng) if stratum == "S2" else nominal_weights()
     scenario = {}
     for row in rows:
-        values = {key: kernel.draw(rng, use_alternative=alternative) for key, kernel in row.leaves.items()}
+        heavy = alternative if alternative_rows is None else row.row in alternative_rows
+        values = {key: kernel.draw(rng, use_alternative=heavy) for key, kernel in row.leaves.items()}
         if stratum == "S0":
             observed = sum(weights[key] for key in values)
             quality = sum(weights[key] * value for key, value in values.items()) / observed
         else:
             for leaf in q.LEAVES:
                 if leaf.key not in values:
-                    low, high = (ranges or {}).get(leaf.key, (0.0, 100.0)) if alternative else (0.0, 100.0)
-                    values[leaf.key] = rng.uniform(low, high)
+                    # A missing leaf's score domain is an interval-only input: uniform, with the E25 endpoint-heavy alternative.
+                    low, high = (ranges or {}).get(leaf.key, (0.0, 100.0))
+                    values[leaf.key] = Kernel("uniform", (low, high), "endpoint-heavy").draw(rng, use_alternative=heavy)
             quality = sum(weights[key] * values[key] for key in weights) / 100.0
-        scenario[row.row] = (row.cost.draw(rng, use_alternative=alternative), quality)
+        scenario[row.row] = (row.cost.draw(rng, use_alternative=heavy), quality)
     return scenario
 
 
@@ -169,7 +176,7 @@ def cheapest_qualifier(scenario: dict, reference: str) -> str | None:
 LABEL_STRATUM = "S1"
 
 
-def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference: str, stratum: str, rng: random.Random, *, alternative: bool = False, **rule) -> dict:
+def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference: str, stratum: str, rng: random.Random, *, alternative: bool = False, alternative_rows: frozenset | None = None, **rule) -> dict:
     """E92: the scenario-supported unique-cheapest label for one bar and one candidate.
 
     The event is "the candidate qualifies and is strictly cheaper than every other
@@ -179,20 +186,20 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
     branch, S1 core (E100); other strata and branches publish the frequency only.
     """
 
-    ranges = missing_ranges(rows) if alternative else None
-
     def event(generator):
-        scenario = draw_scenario(rows, stratum, generator, alternative=alternative, ranges=ranges)
+        scenario = draw_scenario(rows, stratum, generator, alternative=alternative, alternative_rows=alternative_rows)
         return cheapest_qualifier(scenario, reference) == candidate
 
     outcome = sequential_threshold(event, rng, **rule)
     eligible = not next(row.provisional for row in rows if row.row == candidate)
-    # E100: only the full-composite S1 core branch authorises the label; elsewhere it is a frequency.
-    authorized = stratum == LABEL_STRATUM and not alternative
+    # E100/E112: only the full-composite S1 core branch, under each of its pre-registered kernels, authorises the label.
+    authorized = stratum == LABEL_STRATUM
     signature = {
         "qualityEquation": "observed leaves" if stratum == "S0" else "full composite",
         "scenarioStratum": stratum,
-        "specificationBranch": "endpoint-heavy alternative" if alternative else "core",
+        "specificationBranch": "core",
+        "kernel": "endpoint-heavy alternative" if alternative else "primary" if alternative_rows is None else "block assignment",
+        "endpointHeavyRows": sorted(alternative_rows) if alternative_rows is not None else None,
         "referenceObjectId": reference,
     }
     return {
@@ -202,6 +209,59 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
         "decisionTarget": signature,
         "label": authorized and eligible and outcome["status"] == "met",
     }
+
+
+BLOCKS = ("candidate", "reference", "competitors")
+
+
+def kernel_assignments(rows: list[RowInputs], candidate: str, reference: str) -> list[dict]:
+    """E121: every uniform/arcsine assignment over the event-relevant blocks (candidate, reference, competitors).
+
+    Rows of one block share one kernel family; when the candidate is the
+    reference, the two blocks coincide and duplicate assignments are dropped.
+    """
+
+    members = {
+        "candidate": {candidate},
+        "reference": {reference},
+        "competitors": {row.row for row in rows} - {candidate, reference},
+    }
+    assignments, seen = [], set()
+    for flags in itertools.product((False, True), repeat=len(BLOCKS)):
+        heavy = frozenset().union(*(members[block] for block, flag in zip(BLOCKS, flags) if flag))
+        light = frozenset().union(*(members[block] for block, flag in zip(BLOCKS, flags) if not flag))
+        if heavy & light or heavy in seen:
+            continue
+        seen.add(heavy)
+        assignments.append({"id": "".join("H" if flag else "U" for flag in flags), "endpointHeavyRows": heavy})
+    return assignments
+
+
+def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str, seed: int, **rule) -> dict:
+    """E112/E121: the scenario-supported label needs the S1 threshold met under every registered block assignment.
+
+    Each assignment is resolved by the E77 sequential rule; the frequency range
+    across assignments is published, never its minimum as a probability. A
+    primary-kernel pass that fails under another assignment reads
+    "kernel-sensitive" without the label.
+    """
+
+    runs = {}
+    for index, assignment in enumerate(kernel_assignments(rows, candidate, reference)):
+        runs[assignment["id"]] = scenario_supported_cheapest(
+            rows, candidate, reference, LABEL_STRATUM, random.Random(seed + index), alternative_rows=assignment["endpointHeavyRows"], **rule
+        )
+    primary = runs["UUU"]
+    met = all(run["status"] == "met" for run in runs.values())
+    eligible = primary["uniqueLabelEligible"]
+    if met and eligible:
+        reading = "supported under the registered kernel checks (block-exhaustive over candidate, reference and competitors)"
+    elif primary["status"] == "met":
+        reading = "primary-kernel frequency >= 90%; kernel-sensitive" if eligible else "frequency only (provisional row)"
+    else:
+        reading = "not scenario-supported"
+    shares_ = [run["share"] for run in runs.values()]
+    return {"assignments": runs, "coverage": "block-exhaustive", "frequencyRange": [min(shares_), max(shares_)], "label": met and eligible, "reading": reading}
 
 
 def standard_error(share: float, n: int) -> float:
@@ -218,7 +278,7 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
     """
 
     rng = random.Random(seed)
-    ranges = missing_ranges(rows) if alternative else None
+    ranges = None
     counts = {row.row: {"top3": 0, "top1": 0, "frontier": 0} for row in rows}
     qualify = {reference: {row.row: 0 for row in rows} for reference in references}
     outcomes = {pair: {"win": 0, "tie": 0, "loss": 0} for pair in pairs}

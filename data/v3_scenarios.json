@@ -1,0 +1,2294 @@
+{
+  "schemaVersion": 1,
+  "inputHash": "0f45ea79e15d8f63cbaaea2b4338104b721af82360bbd7c1ca09a566c55ca225",
+  "seed": 20261017,
+  "scenarios": 10000,
+  "results": {
+    "api": [
+      {
+        "stratum": "S0",
+        "scenarios": 10000,
+        "seed": 20261017,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.01,
+              "monteCarloSe": 0.00099498743710662
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      },
+      {
+        "stratum": "S1",
+        "scenarios": 10000,
+        "seed": 20261018,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.3018,
+              "monteCarloSe": 0.0045903895259552865
+            },
+            "top1": {
+              "share": 0.0977,
+              "monteCarloSe": 0.002969085886261965
+            },
+            "frontier": {
+              "share": 0.7383,
+              "monteCarloSe": 0.004395601324051124
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.9947,
+              "monteCarloSe": 0.0007260791967822775
+            },
+            "top1": {
+              "share": 0.5783,
+              "monteCarloSe": 0.004938310541065638
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.5533,
+              "monteCarloSe": 0.004971509931600258
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0022,
+              "monteCarloSe": 0.0004685253461660319
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0876,
+              "monteCarloSe": 0.002827122919152968
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0485,
+              "monteCarloSe": 0.0021482027371735658
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.115,
+              "monteCarloSe": 0.003190219428189854
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.367,
+              "monteCarloSe": 0.004819865143341668
+            },
+            "top1": {
+              "share": 0.1471,
+              "monteCarloSe": 0.003542055759019048
+            },
+            "frontier": {
+              "share": 0.5054,
+              "monteCarloSe": 0.004999708391496448
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.8873,
+              "monteCarloSe": 0.0031622572634116917
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.0373,
+              "monteCarloSe": 0.001894959366318972
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.1798,
+              "monteCarloSe": 0.0038402078068771224
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0445,
+              "monteCarloSe": 0.0020620317650317612
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.3126,
+              "monteCarloSe": 0.004635528448839464
+            },
+            "top1": {
+              "share": 0.1705,
+              "monteCarloSe": 0.003760714692714671
+            },
+            "frontier": {
+              "share": 0.5746,
+              "monteCarloSe": 0.004944035194049492
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0486,
+              "monteCarloSe": 0.002150303234429972
+            },
+            "top1": {
+              "share": 0.0064,
+              "monteCarloSe": 0.0007974358908401352
+            },
+            "frontier": {
+              "share": 0.3735,
+              "monteCarloSe": 0.00483733139241049
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      },
+      {
+        "stratum": "S2",
+        "scenarios": 10000,
+        "seed": 20261019,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.303,
+              "monteCarloSe": 0.004595552197505758
+            },
+            "top1": {
+              "share": 0.0872,
+              "monteCarloSe": 0.0028212791425167414
+            },
+            "frontier": {
+              "share": 0.7537,
+              "monteCarloSe": 0.004308553237456861
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.9549,
+              "monteCarloSe": 0.002075234685523544
+            },
+            "top1": {
+              "share": 0.3657,
+              "monteCarloSe": 0.004816259025426269
+            },
+            "frontier": {
+              "share": 0.9931,
+              "monteCarloSe": 0.0008277916404506642
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.5033,
+              "monteCarloSe": 0.004999891098814053
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.2093,
+              "monteCarloSe": 0.004068089354967513
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0033,
+              "monteCarloSe": 0.0005735076285456019
+            },
+            "top1": {
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
+            },
+            "frontier": {
+              "share": 0.0842,
+              "monteCarloSe": 0.0027768752222597256
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0618,
+              "monteCarloSe": 0.0024079194338681685
+            },
+            "top1": {
+              "share": 0.004,
+              "monteCarloSe": 0.00063118935352238
+            },
+            "frontier": {
+              "share": 0.1117,
+              "monteCarloSe": 0.0031499699998571414
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.3565,
+              "monteCarloSe": 0.004789652910180444
+            },
+            "top1": {
+              "share": 0.1216,
+              "monteCarloSe": 0.003268232549865447
+            },
+            "frontier": {
+              "share": 0.5035,
+              "monteCarloSe": 0.004999877498499338
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.8798,
+              "monteCarloSe": 0.0032519526441816458
+            },
+            "top1": {
+              "share": 0.2564,
+              "monteCarloSe": 0.0043664521066879925
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.0689,
+              "monteCarloSe": 0.0025328401054942255
+            },
+            "top1": {
+              "share": 0.0079,
+              "monteCarloSe": 0.0008853016435091489
+            },
+            "frontier": {
+              "share": 0.1531,
+              "monteCarloSe": 0.0036008386523142077
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0492,
+              "monteCarloSe": 0.0021628536705010815
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.3126,
+              "monteCarloSe": 0.004635528448839464
+            },
+            "top1": {
+              "share": 0.1431,
+              "monteCarloSe": 0.003501747992074815
+            },
+            "frontier": {
+              "share": 0.5439,
+              "monteCarloSe": 0.004980690614764182
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0589,
+              "monteCarloSe": 0.0023543744392088527
+            },
+            "top1": {
+              "share": 0.014,
+              "monteCarloSe": 0.0011749042514179614
+            },
+            "frontier": {
+              "share": 0.3634,
+              "monteCarloSe": 0.004809786273837955
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      },
+      {
+        "stratum": "S1",
+        "scenarios": 10000,
+        "seed": 20261020,
+        "alternative": true,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.3453,
+              "monteCarloSe": 0.00475465992474751
+            },
+            "top1": {
+              "share": 0.1556,
+              "monteCarloSe": 0.003624757095309974
+            },
+            "frontier": {
+              "share": 0.6519,
+              "monteCarloSe": 0.00476367914536653
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.9779,
+              "monteCarloSe": 0.0014700880925985356
+            },
+            "top1": {
+              "share": 0.4084,
+              "monteCarloSe": 0.004915378317077944
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.4977,
+              "monteCarloSe": 0.004999947099720156
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0051,
+              "monteCarloSe": 0.0007123194508084137
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.1438,
+              "monteCarloSe": 0.003508868193591774
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0578,
+              "monteCarloSe": 0.002333648645362022
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.2186,
+              "monteCarloSe": 0.004132965521269201
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.3897,
+              "monteCarloSe": 0.004876821813435467
+            },
+            "top1": {
+              "share": 0.2096,
+              "monteCarloSe": 0.004070231443050874
+            },
+            "frontier": {
+              "share": 0.4586,
+              "monteCarloSe": 0.004982830922277014
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.7874,
+              "monteCarloSe": 0.004091469662602914
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.0447,
+              "monteCarloSe": 0.0020664440471495956
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.2296,
+              "monteCarloSe": 0.004205756055693197
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0769,
+              "monteCarloSe": 0.002664327119555705
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.305,
+              "monteCarloSe": 0.004604074282632721
+            },
+            "top1": {
+              "share": 0.201,
+              "monteCarloSe": 0.004007480505255141
+            },
+            "frontier": {
+              "share": 0.5687,
+              "monteCarloSe": 0.004952578217454017
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0871,
+              "monteCarloSe": 0.002819815419491141
+            },
+            "top1": {
+              "share": 0.0254,
+              "monteCarloSe": 0.0015733670900333462
+            },
+            "frontier": {
+              "share": 0.3609,
+              "monteCarloSe": 0.004802615849721899
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      }
+    ],
+    "plan": [
+      {
+        "stratum": "S0",
+        "scenarios": 10000,
+        "seed": 20261017,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      },
+      {
+        "stratum": "S1",
+        "scenarios": 10000,
+        "seed": 20261018,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.4376,
+              "monteCarloSe": 0.004960909594016001
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.7526,
+              "monteCarloSe": 0.004315011471595412
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.9776,
+              "monteCarloSe": 0.0014798053926107979
+            },
+            "frontier": {
+              "share": 0.9847,
+              "monteCarloSe": 0.0012274326865453755
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.9992,
+              "monteCarloSe": 0.00028272955275316074
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.683,
+              "monteCarloSe": 0.004653074252577536
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6856,
+              "monteCarloSe": 0.004642764693585062
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.1713,
+              "monteCarloSe": 0.0037677089855773097
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0769,
+              "monteCarloSe": 0.002664327119555705
+            },
+            "top1": {
+              "share": 0.0224,
+              "monteCarloSe": 0.0014798053926107987
+            },
+            "frontier": {
+              "share": 0.1219,
+              "monteCarloSe": 0.003271702767673127
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      },
+      {
+        "stratum": "S2",
+        "scenarios": 10000,
+        "seed": 20261019,
+        "alternative": false,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.4255,
+              "monteCarloSe": 0.004944185979511693
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.7223,
+              "monteCarloSe": 0.00447864611238709
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.9997,
+              "monteCarloSe": 0.00017317909804591517
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.994,
+              "monteCarloSe": 0.0007722693830523132
+            },
+            "top1": {
+              "share": 0.7148,
+              "monteCarloSe": 0.004515096455226621
+            },
+            "frontier": {
+              "share": 0.9696,
+              "monteCarloSe": 0.001716852934878232
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.9941,
+              "monteCarloSe": 0.0007658452846365261
+            },
+            "top1": {
+              "share": 0.1836,
+              "monteCarloSe": 0.003871576423112425
+            },
+            "frontier": {
+              "share": 0.3809,
+              "monteCarloSe": 0.004856080621241785
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.005,
+              "monteCarloSe": 0.0007053367989832942
+            },
+            "top1": {
+              "share": 0.0009,
+              "monteCarloSe": 0.0002998649696113236
+            },
+            "frontier": {
+              "share": 0.0353,
+              "monteCarloSe": 0.001845370152571023
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0242,
+              "monteCarloSe": 0.0015366964566888284
+            },
+            "top1": {
+              "share": 0.0063,
+              "monteCarloSe": 0.0007912212080069645
+            },
+            "frontier": {
+              "share": 0.0109,
+              "monteCarloSe": 0.0010383250936002654
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.0346,
+              "monteCarloSe": 0.0018276443855411262
+            },
+            "top1": {
+              "share": 0.0101,
+              "monteCarloSe": 0.0009998994949493674
+            },
+            "frontier": {
+              "share": 0.678,
+              "monteCarloSe": 0.0046724297747531745
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.7306,
+              "monteCarloSe": 0.0044364810379398665
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.1514,
+              "monteCarloSe": 0.003584383350033866
+            },
+            "top1": {
+              "share": 0.0539,
+              "monteCarloSe": 0.0022582026038422682
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0744,
+              "monteCarloSe": 0.002624207308883961
+            },
+            "top1": {
+              "share": 0.0304,
+              "monteCarloSe": 0.0017168529348782324
+            },
+            "frontier": {
+              "share": 0.1177,
+              "monteCarloSe": 0.0032225255623501265
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0004,
+              "monteCarloSe": 0.0001999599959991998
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      },
+      {
+        "stratum": "S1",
+        "scenarios": 10000,
+        "seed": 20261020,
+        "alternative": true,
+        "panel": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "panelSize": 16,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.4653,
+              "monteCarloSe": 0.004987944566652681
+            },
+            "qualifies": {}
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.632,
+              "monteCarloSe": 0.004822613399392491
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.9312,
+              "monteCarloSe": 0.0025311372937871224
+            },
+            "frontier": {
+              "share": 0.9396,
+              "monteCarloSe": 0.0023822644689454613
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.9898,
+              "monteCarloSe": 0.0010047865444958938
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.5996,
+              "monteCarloSe": 0.004899794281395904
+            },
+            "qualifies": {}
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6311,
+              "monteCarloSe": 0.004825067771544769
+            },
+            "qualifies": {}
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.2532,
+              "monteCarloSe": 0.00434844523939304
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.125,
+              "monteCarloSe": 0.003307189138830738
+            },
+            "top1": {
+              "share": 0.0688,
+              "monteCarloSe": 0.002531137293787123
+            },
+            "frontier": {
+              "share": 0.1754,
+              "monteCarloSe": 0.003803088744691609
+            },
+            "qualifies": {}
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {}
+          }
+        },
+        "pairwise": []
+      }
+    ]
+  },
+  "barLabels": [
+    {
+      "reference": "gpt-6-luna",
+      "status": "evaluated",
+      "candidates": {
+        "gpt-6-luna": {
+          "assignments": {
+            "UUU": {
+              "status": "met",
+              "share": 1.0,
+              "scenarios": 10000,
+              "interval": [
+                0.9993540618902661,
+                1.0
+              ],
+              "looks": 1,
+              "uniqueLabelEligible": true,
+              "labelAuthorized": true,
+              "decisionTarget": {
+                "qualityEquation": "full composite",
+                "scenarioStratum": "S1",
+                "specificationBranch": "core",
+                "kernel": "block assignment",
+                "endpointHeavyRows": [],
+                "referenceObjectId": "gpt-6-luna"
+              },
+              "label": true
+            },
+            "UUH": {
+              "status": "met",
+              "share": 1.0,
+              "scenarios": 10000,
+              "interval": [
+                0.9993540618902661,
+                1.0
+              ],
+              "looks": 1,
+              "uniqueLabelEligible": true,
+              "labelAuthorized": true,
+              "decisionTarget": {
+                "qualityEquation": "full composite",
+                "scenarioStratum": "S1",
+                "specificationBranch": "core",
+                "kernel": "block assignment",
+                "endpointHeavyRows": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "qwen3.8-max"
+                ],
+                "referenceObjectId": "gpt-6-luna"
+              },
+              "label": true
+            },
+            "HHU": {
+              "status": "met",
+              "share": 1.0,
+              "scenarios": 10000,
+              "interval": [
+                0.9993540618902661,
+                1.0
+              ],
+              "looks": 1,
+              "uniqueLabelEligible": true,
+              "labelAuthorized": true,
+              "decisionTarget": {
+                "qualityEquation": "full composite",
+                "scenarioStratum": "S1",
+                "specificationBranch": "core",
+                "kernel": "block assignment",
+                "endpointHeavyRows": [
+                  "gpt-6-luna"
+                ],
+                "referenceObjectId": "gpt-6-luna"
+              },
+              "label": true
+            },
+            "HHH": {
+              "status": "met",
+              "share": 1.0,
+              "scenarios": 10000,
+              "interval": [
+                0.9993540618902661,
+                1.0
+              ],
+              "looks": 1,
+              "uniqueLabelEligible": true,
+              "labelAuthorized": true,
+              "decisionTarget": {
+                "qualityEquation": "full composite",
+                "scenarioStratum": "S1",
+                "specificationBranch": "core",
+                "kernel": "block assignment",
+                "endpointHeavyRows": [
+                  "claude-haiku-5-5",
+                  "claude-opus-5",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-flash",
+                  "deepseek-v4-pro",
+                  "gemini-3.8-flash",
+                  "gemini-4-argon",
+                  "glm-5.3",
+                  "gpt-5.6-luna",
+                  "gpt-5.6-sol",
+                  "gpt-6-luna",
+                  "gpt-6-sol",
+                  "gpt-6.1-sol",
+                  "grok-4.7",
+                  "qwen3.8-max"
+                ],
+                "referenceObjectId": "gpt-6-luna"
+              },
+              "label": true
+            }
+          },
+          "coverage": "block-exhaustive",
+          "frequencyRange": [
+            1.0,
+            1.0
+          ],
+          "label": true,
+          "reading": "supported under the registered kernel checks (block-exhaustive over candidate, reference and competitors)"
+        }
+      }
+    }
+  ]
+}

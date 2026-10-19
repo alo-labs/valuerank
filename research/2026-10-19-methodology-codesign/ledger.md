@@ -466,3 +466,45 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 # Round 5 complete (reviewers 26–31). Every panel model returned HAS FEEDBACK; round 6 starts with GPT-6.1 Sol on draft r31.
 
 # Round 6 (reviewer 32 onward)
+
+## Editor decisions after reviewer 32 (owner may override)
+- E107. Versioned report set E_r,t before concordance (pre-registered discovery and cutoff, inclusion and exclusion reasons); concordance on every eligible report of a comparability partition together, never a searched-for passing subset; schema partitions only on public evidence of a schema change; failing partition → diagnostic-only; source count = distinct measurement objects; 100/110/150 fixture. Answers GPT Q1 without escalation: O11 requires the reports to be concordant, and a complete set that fails is not concordant; a different measurement regime is recognised only through E102 comparability or an evidenced schema change.
+- E108. Certification grammar: primitive domains and original constraints, documented equivalence-preserving reductions, independently checked certificates; v1 classes = boxes, exact rational affine, separable monotone transforms, documented corner reductions; nonlinear equalities only with validated existence certificates; otherwise unresolved; x² = 2 fixtures.
+- E109. Numerical-domain contract (finite non-negative component costs; log scoring only for 0 < c < ∞; anchors 0 < c_L < c_H < ∞; divisors finite and strictly positive). Answers GPT Q2 without escalation: a published zero workload cost is outside the supported scope (no cost or value score, flagged, excluded from anchors, never best value, no epsilon); the owner may extend the scope later.
+- E110. Quality clipping audit per leaf (raw-domain validity, anchor position, clipping amount, affected weight, action); saturation disclosed; domain violations block the release; both in the manifest.
+
+## Reviewer 32 (GPT-6.1 Sol, round 6, Thinking) — adopted
+- All findings (E107–E110).
+
+## Panel note (2026-10-19)
+- Perplexity renamed the Sonnet picker entry from "Sonnet 5.5" to "Claude Sonnet 5.5"; the first round-6 Sonnet send failed with "model not selectable" and was resent with the new label (verified model: Sonnet 5.5 Thinking).
+
+## Editor decisions after reviewer 33 (owner may override)
+- E111. Measurement objects: each controlled measurement and each complete concordant report partition is a measurement object; the comparator selects among route–measurement pairs; magnitude decides only at key 3 after identification and grade, per the owner's highest-eligible Value Multiple rule (AGENTS.md), labelled; controlled outranks reports via the grade key; alternatives and rank sensitivity published; four fixtures. Answers Sonnet Q1 from the owner's rule and the E85 order (identification, grade, then the highest eligible multiple) rather than recency, without escalation.
+- E112. The scenario-supported label must meet the threshold under every pre-registered kernel specification in S1 core (primary uniform and the E25 endpoint-heavy alternative, including missing-leaf domains), each by the E77 sequential rule; otherwise "primary-kernel frequency ≥ 90%; kernel-sensitive"; frequency range published; Sonnet's 97.9% vs 87.5% fixture. Answers Sonnet Q2 without escalation: E100 was an editor decision, and E25 already makes the alternative kernel mandatory.
+- E113. Measured-only Plan view D_measured: controlled or concordant-report candidates only, selector rerun, identified vs unmatched statuses kept distinct, no API fallback ("no measured route"), official Plan anchors, E65 comparison with the official ranks. Answers Sonnet Q3 without escalation.
+- E114. Drift flag defined exactly: D_g from d_b = w_b SD(z_b) on one common complete panel over the eligible leaf set B*, nominal shares renormalised over B*, thresholds 0.5 W_g and 1.5 W_g, "not estimable" otherwise; covariance allocation kept separate.
+
+## Reviewer 33 (Claude Sonnet 5.5, round 6, Thinking) — adopted
+- All findings (E111–E114).
+
+## Editor decisions after reviewer 34 (owner may override)
+- E115. Window semantics as identification: a set S_r of publicly admissible mechanisms; bounds L_r = min over s of verified lower bounds and U_r = max over s of relaxed upper bounds enclose the E105 multiple under every s; point only when they coincide; otherwise "semantics unresolved; conservative achievable capacity only", one-sided diagnostic, M_W unidentified; two fixtures. Answers Grok's owner question without escalation: E106 and E67 already fix the display — an unidentified M_W displays M_observed, and the conservative capacity is a one-sided diagnostic.
+- E116. Comparator keys end with route ID then a canonical measurement-object ID; selected pair ID published; permutation-invariance fixture.
+- E117. Workday diagnostic calendar: same fee period, balances, purchase policy, reset phase and semantics; availability indicator A(t) from a versioned calendar (IANA zone, weekdays, hours, fee-period bounds, partial days); workday maximum consumption ≤ full maximum regression test.
+- E118. Zero observed quality (p_i = 0): "quality not scoreable — no observed leaves", no displayed quality or value score, never zero; the row stays in the cohort.
+- E119 (editor correction found while implementing E112). E25's endpoint-heavy alternative is the arcsine law Beta(½, ½) on the same interval (as implemented); the E112 fixture used a two-point law (87.5%), which no pre-registered kernel produces. The fixture now uses a reference at 78: about 91.5% (uniform) vs 86.7% (arcsine), verified by simulation and in tests/test_scenarios.py.
+
+## Reviewer 34 (Grok 4.7, round 6, Thinking) — adopted
+- All findings (E115–E118).
+
+## Owner decision (2026-10-19, answering Kimi K3 round 6)
+- O28. The reliability leaf (AA-Omniscience, 10% of quality) is scored with AA's Omniscience Index: z = (I + 100)/2, I = 100 × (correct − incorrect) ÷ all questions (partial answers and abstentions count zero). Replaces (2A + N)/3 with AA's conditional hallucination rate, which is not monotone (98/1/1 → 82, 99/1/0 → 66). Accuracy and the conditional hallucination rate stay diagnostics; I is reconciled as 100 [A − h (1 − A)] each release (verified on the 2026-10-17 snapshot: GPT-6 Astra xhigh 43.42 = 100 × (0.6185 − 0.4832 × 0.3815)). The ledger's earlier rejection of a related claim ("the cited examples are not non-monotonic", reviewer 15 era) was wrong for this case.
+
+## Editor decisions after reviewer 35 (owner may override)
+- E121. Kernel assignments per event-relevant dependency block (candidate, reference, competitors); the registered check is block-exhaustive over the 2³ uniform/arcsine assignments, each by the E77 rule; label wording "supported under the registered kernel checks (block-exhaustive over candidate, reference and competitors)"; registry fields. Answers Kimi Q2 without escalation (E112 is an editor decision; per-input exhaustive assignment is intractable and is not claimed).
+- E122. S0 and S1 use the primary price rule only; first-party vs cross-provider median is a named S2 branch with shared price primitives; uncertainty_layer field validated at build time.
+- E123 (editor correction while answering Kimi). E106 case 4 and E93's "compared as published" clause conflicted with owner decision O7 (price-basis mismatches are unmatched and excluded from the official Plan ranking); O16 relaxed only the workload case. A measurement on another price basis now enters only after revaluation at the release price list from a public token ledger; otherwise it is diagnostic-only.
+
+## Reviewer 35 (Kimi K3, round 6, Thinking) — adopted
+- All findings (O28, E121, E122); E123 corrects E93/E106 against O7.

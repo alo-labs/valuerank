@@ -51,11 +51,17 @@ def test_bug_hunt_release_vector():
     assert q.bug_hunt_z(44.3, 0.05).half_width == pytest.approx(100 * 0.05 / 105)
 
 
-def test_omniscience_from_rates_and_from_counts():
-    assert q.omniscience_z(0.6, 0.75).z == pytest.approx(65.0)
-    assert q.omniscience_from_counts(60, 0, 10, 30) == (pytest.approx(60.0), pytest.approx(75.0), pytest.approx(65.0))
-    # No non-correct responses: nothing to hallucinate on, so N = 100.
-    assert q.omniscience_from_counts(10, 0, 0, 0) == (100.0, 100.0, 100.0)
+def test_omniscience_index_is_monotone_in_outcomes():
+    """O28: z = (I + 100) / 2 with I = 100 (correct - incorrect) / all questions."""
+
+    assert q.omniscience_index_z(50.0).z == 75.0 and q.omniscience_index_z(-100.0).z == 0.0
+    assert q.omniscience_from_counts(60, 0, 10, 30) == (pytest.approx(50.0), pytest.approx(75.0))
+    # Kimi K3's fixture: turning an abstention into a correct answer raises the score (the retired (2A + N)/3 fell 82 -> 66).
+    assert q.omniscience_from_counts(99, 0, 1, 0)[1] > q.omniscience_from_counts(98, 0, 1, 1)[1]
+    assert q.omniscience_from_counts(60, 0, 9, 31)[1] > q.omniscience_from_counts(60, 0, 10, 30)[1]
+    assert q.omniscience_from_counts(0, 0, 0, 10) == (0.0, 50.0)  # all abstention
+    # Reconciliation with AA's accuracy and conditional hallucination rate (GPT-6 Astra xhigh, 2026-10-17 snapshot).
+    assert q.omniscience_index_from_rates(0.6185, 0.4831804281345566) == pytest.approx(43.416666666666664)
 
 
 def test_summarize_full_coverage_row():
@@ -119,3 +125,20 @@ def test_composite_requires_every_leaf():
     del values["critpt"]
     with pytest.raises(ValueError, match="missing: critpt"):
         q.composite(values)
+
+
+def test_clip_audit_discloses_saturation_and_rejects_domain_violations():
+    """E110: valid saturation is disclosed; values outside the documented domain are rejected."""
+
+    inside = q.clip_audit("deepswe", 72.0)
+    assert inside["domainValid"] and inside["anchorPosition"] == "inside" and inside["action"] == "none" and inside["clippingAmount"] == 0.0
+    high_elo = q.clip_audit("gdpval", 2700.0)
+    assert high_elo["anchorPosition"] == "above" and high_elo["clippingAmount"] == pytest.approx(10.0) and high_elo["action"] == "disclose saturation"
+    assert q.clip_audit("gdpval", 400.0)["anchorPosition"] == "below"
+    assert q.clip_audit("bugHunt", 52.0)["unclippedZ"] == pytest.approx(49.5238, abs=1e-4)
+    assert q.clip_audit("hle", 0.5)["unclippedZ"] == 50.0
+    omni = q.clip_audit("omniscience", 43.4)
+    assert omni["raw"] == 43.4 and omni["unclippedZ"] == pytest.approx(71.7)
+    for key, raw in (("deepswe", 101.0), ("scicode", -0.1), ("omniscience", 120.0), ("gdpval", float("nan")), ("lcr", True), ("hle", None)):
+        bad = q.clip_audit(key, raw)
+        assert bad["domainValid"] is False and bad["action"].startswith("reject") and bad["unclippedZ"] is None

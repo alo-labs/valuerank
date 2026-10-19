@@ -123,3 +123,20 @@ def test_matched_cost_diagnostic_object_and_bridge():
     row = bridge["rows"]["a"]
     assert row["old"] == pytest.approx(87.5) and row["dataRefresh"] == pytest.approx(15.0)
     assert row["composition"] == pytest.approx(85.0 - 102.5) and row["new"] == pytest.approx(85.0)
+
+
+def test_group_drift_on_a_common_complete_panel():
+    """E114: spread shares against nominal shares renormalised over the same eligible leaves."""
+
+    weights = {"a": 30.0, "b": 10.0, "c": 10.0}
+    groups = {"a": "swe", "b": "swe", "c": "knowledge"}
+    z = {"a": [10.0, 20.0, 30.0], "b": [50.0, 51.0, 52.0], "c": [0.0, 50.0, 100.0]}
+    result = dg.group_drift(z, weights, groups)
+    assert result["status"] == "estimated" and result["eligibleLeaves"] == ["a", "c"]
+    swe, knowledge = result["groups"]["swe"], result["groups"]["knowledge"]
+    assert swe["nominalShare"] == pytest.approx(0.75) and knowledge["nominalShare"] == pytest.approx(0.25)
+    assert knowledge["spreadShare"] == pytest.approx(408.248 / (244.949 + 408.248), rel=1e-4)
+    assert knowledge["flag"] is True and swe["flag"] is False
+    assert dg.group_drift({"a": [1.0, 2.0]}, weights, groups)["status"] == "not estimable"
+    assert dg.group_drift({"a": [1.0, 2.0, 3.0], "b": [1.0, 2.0]}, weights, groups)["status"] == "not estimable"
+    assert dg.group_drift({"a": [1.0, 1.0, 1.0]}, weights, groups)["status"] == "not estimable"

@@ -98,8 +98,11 @@ def _instance(window: Window, step: int) -> int:
     return (step - window.phase) // window.length
 
 
-def greedy_schedule(windows: list[Window], demand: dict, horizon: int, *, step_limit: float = math.inf) -> list[float]:
-    """The earliest-possible schedule: at each step consume the most every window still allows."""
+def greedy_schedule(windows: list[Window], demand: dict, horizon: int, *, step_limit: float = math.inf, available: set | None = None) -> list[float]:
+    """The earliest-possible schedule: at each step consume the most every window still allows.
+
+    ``available`` (E117) restricts consumption to the calendar's available steps (y_t = 0 elsewhere).
+    """
 
     burns = [unit_burn(window, demand) for window in windows]
     schedule = []
@@ -107,7 +110,7 @@ def greedy_schedule(windows: list[Window], demand: dict, horizon: int, *, step_l
     session_start = [None for _ in windows]
     session_used = [0.0 for _ in windows]
     for step in range(horizon):
-        allowance = step_limit
+        allowance = step_limit if available is None or step in available else 0.0
         for index, (window, burn) in enumerate(zip(windows, burns)):
             if burn <= 0:
                 continue
@@ -194,13 +197,13 @@ def relaxed_upper_bound(windows: list[Window], demand: dict, horizon: int, *, st
     return bound
 
 
-def capacity(windows: list[Window], workload: Demand, horizon: int, *, grid_minutes: int, step_limit: float = math.inf) -> dict:
+def capacity(windows: list[Window], workload: Demand, horizon: int, *, grid_minutes: int, step_limit: float = math.inf, available: set | None = None) -> dict:
     """Token-equivalent capacity in complete workload passes: verified lower bound, relaxed upper bound, certification."""
 
     if workload.unit != "workload-pass":
         raise ValueError(f"capacity needs a workload-pass demand, not {workload.unit}")
     demand = workload.tokens
-    schedule = greedy_schedule(windows, demand, horizon, step_limit=step_limit)
+    schedule = greedy_schedule(windows, demand, horizon, step_limit=step_limit, available=available)
     # Only a schedule re-verified against the recorded semantics may serve as the lower bound.
     verified = verify_schedule(schedule, windows, demand, step_limit=step_limit)
     lower = sum(schedule) if verified else None
@@ -236,6 +239,30 @@ def numerator_treatment(record: dict) -> str:
     if record.get("requestDeliveryStatus") != "delivered" or record.get("deploymentPolicyRole") in EXCLUDED_POLICY_ROLES:
         return "excluded"
     return "included"
+
+
+def capacity_across_semantics(window_sets: dict, workload: Demand, horizon: int, *, grid_minutes: int, step_limit: float = math.inf) -> dict:
+    """E115: capacity across the publicly admissible window mechanisms S_r of a route.
+
+    The true mechanism is one of S_r, so min over s of the verified lower bounds is
+    a valid lower bound and max over s of the relaxed upper bounds a valid upper
+    bound; a point is identified only when they coincide. A mechanism without a
+    verified lower bound or a finite upper bound leaves that side unestablished.
+    """
+
+    results = {name: capacity(windows, workload, horizon, grid_minutes=grid_minutes, step_limit=step_limit) for name, windows in sorted(window_sets.items())}
+    lowers = [result["feasibleLowerBound"] for result in results.values()]
+    uppers = [result["relaxedUpperBound"] for result in results.values()]
+    lower = None if None in lowers else min(lowers)
+    upper = None if None in uppers else max(uppers)
+    point = lower is not None and upper is not None and abs(upper - lower) <= TOLERANCE * max(1.0, upper)
+    if point:
+        status = "identified across semantics"
+    elif lower is not None and upper is not None:
+        status = "bounded across semantics"
+    else:
+        status = "semantics unresolved; conservative achievable capacity only"
+    return {"semantics": results, "lowerBound": lower, "upperBound": upper, "pointIdentified": point, "status": status}
 
 
 def certified_multiple_bounds(capacity_result: dict, api_cost_per_unit: float, payment: dict) -> dict:

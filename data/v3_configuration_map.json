@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-19",
+  "purpose": "Pinned exact-configuration identities of each ranked ValueRank configuration in the AA cost sources that are not on the AA model page (owner decision O15 basket; exact model and effort only, never transferred between efforts or versions).",
+  "derivedFrom": "research/2026-10-19-methodology-codesign/basket-cost-capture-2026-10-19.json",
+  "sources": {
+    "coding-agent-index": {
+      "artifact": "data/aa/coding_agents_capture.json",
+      "key": "label",
+      "url": "https://artificialanalysis.ai/agents/coding-agents"
+    },
+    "frontiercode": {
+      "artifact": "data/aa/cost_charts_capture.json",
+      "key": "model",
+      "url": "https://artificialanalysis.ai/evaluations/frontiercode?eval-cost=total-cost"
+    },
+    "itbench-aa": {
+      "artifact": "data/aa/cost_charts_capture.json",
+      "key": "model",
+      "url": "https://artificialanalysis.ai/evaluations/itbench-aa?eval-cost=total-cost"
+    }
+  },
+  "deploymentPolicyNote": "Configurations are agent + model + effort. Claude Code rows may differ from the AA Index deployment policy (AA Index Claude rows run with \"Default Fallback\"); recorded per component as deployment policy.",
+  "rows": {
+    "gemini-4-argon": {
+      "coding-agent-index": "Antigravity CLI - Gemini 4 Argon (high)",
+      "frontiercode": "Gemini 4 Argon (high)",
+      "itbench-aa": null
+    },
+    "gpt-6.1-sol": {
+      "coding-agent-index": "Codex - GPT-6.1 Sol (max)",
+      "frontiercode": "GPT-6.1 Sol (max)",
+      "itbench-aa": null
+    },
+    "claude-sonnet-5-5": {
+      "coding-agent-index": "Claude Code - Sonnet 5.5 (max)",
+      "frontiercode": "Claude Sonnet 5.5 (max with fallback)",
+      "itbench-aa": null
+    },
+    "gpt-6-astra": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "claude-opus-5-5": {
+      "coding-agent-index": "Claude Code - Opus 5.5 (max)",
+      "frontiercode": "Claude Opus 5.5 (max with fallback)",
+      "itbench-aa": "Claude Opus 5.5 (max with fallback)"
+    },
+    "gpt-5.6-sol": {
+      "coding-agent-index": "Codex - GPT-5.6 Sol (max) ({'reasoning_effort': 'max'})",
+      "frontiercode": null,
+      "itbench-aa": "GPT-5.6 Sol (max)"
+    },
+    "mimo-v2-6-pro": {
+      "coding-agent-index": null,
+      "frontiercode": "MiMo-V2.6-Pro",
+      "itbench-aa": null
+    },
+    "gpt-6-sol": {
+      "coding-agent-index": "Codex - GPT-6 Sol (max)",
+      "frontiercode": null,
+      "itbench-aa": "GPT-6 Sol (max)"
+    },
+    "grok-4.7": {
+      "coding-agent-index": "Grok Build - Grok 4.7 (xhigh)",
+      "frontiercode": "Grok 4.7 (xhigh)",
+      "itbench-aa": "Grok 4.7 (xhigh)"
+    },
+    "gpt-5.6-luna": {
+      "coding-agent-index": "Codex - GPT-5.6 Luna (max)",
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6-luna": {
+      "coding-agent-index": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+      "frontiercode": "GPT-6 Luna (max)",
+      "itbench-aa": null
+    },
+    "mimo-v2-6-flash": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "claude-haiku-5-5": {
+      "coding-agent-index": "Claude Code - Haiku 5.5 (xhigh)",
+      "frontiercode": "Claude Haiku 5.5 (xhigh)",
+      "itbench-aa": null
+    },
+    "gemini-3.8-flash": {
+      "coding-agent-index": "Antigravity SDK - Gemini 3.8 Flash (high)",
+      "frontiercode": "Gemini 3.8 Flash (high)",
+      "itbench-aa": "Gemini 3.8 Flash (high)"
+    },
+    "claude-opus-5": {
+      "coding-agent-index": "Claude Code - Opus 5 (max)",
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "glm-5.3": {
+      "coding-agent-index": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
+      "frontiercode": "GLM-5.3 (max)",
+      "itbench-aa": "GLM-5.3 (max)"
+    },
+    "deepseek-v4-flash": {
+      "coding-agent-index": "Codex - DeepSeek V4 Flash 0731 (max)",
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "qwen3.8-max": {
+      "coding-agent-index": "Claude Code - Qwen3.8 Max",
+      "frontiercode": "Qwen3.8 Max (0902)",
+      "itbench-aa": "Qwen3.8 Max (0902)"
+    },
+    "deepseek-v4-pro": {
+      "coding-agent-index": "Codex - DeepSeek V4 Pro 0813 (max)",
+      "frontiercode": null,
+      "itbench-aa": null
+    }
+  }
+}

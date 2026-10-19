@@ -184,6 +184,34 @@ def effective_weights(z_by_leaf: dict, weights: dict) -> dict:
     return {leaf: value / total for leaf, value in raw.items()} if total else {}
 
 
+DRIFT_LOW, DRIFT_HIGH, DRIFT_MIN_ROWS = 0.5, 1.5, 3
+
+
+def group_drift(z_by_leaf: dict, weights: dict, groups: dict) -> dict:
+    """E114: D_g = sum of w_b SD(z_b) over the group's eligible leaves / total, against nominal shares over the same leaves.
+
+    ``z_by_leaf`` holds each leaf's values on one common complete panel; leaves
+    below the non-discriminating SD are excluded from both shares. A group is
+    flagged outside [0.5, 1.5] x its renormalised nominal share.
+    """
+
+    rows = {len(values) for values in z_by_leaf.values()}
+    if len(rows) != 1 or rows.pop() < DRIFT_MIN_ROWS:
+        return {"status": "not estimable", "eligibleLeaves": [], "groups": {}}
+    eligible = sorted(leaf for leaf, values in z_by_leaf.items() if statistics.pstdev(values) >= NON_DISCRIMINATING_SD)
+    spread = {leaf: weights[leaf] * statistics.pstdev(z_by_leaf[leaf]) for leaf in eligible}
+    total_spread, total_weight = sum(spread.values()), sum(weights[leaf] for leaf in eligible)
+    if not eligible:
+        return {"status": "not estimable", "eligibleLeaves": [], "groups": {}}
+    result = {}
+    for group in sorted({groups[leaf] for leaf in eligible}):
+        members = [leaf for leaf in eligible if groups[leaf] == group]
+        share = sum(spread[leaf] for leaf in members) / total_spread
+        nominal = sum(weights[leaf] for leaf in members) / total_weight
+        result[group] = {"spreadShare": share, "nominalShare": nominal, "flag": share < DRIFT_LOW * nominal or share > DRIFT_HIGH * nominal}
+    return {"status": "estimated", "eligibleLeaves": eligible, "groups": result}
+
+
 def non_discriminating(z_by_leaf: dict) -> list:
     """Leaves whose cohort SD(z) is below 3 points (still scored; excluded from drift-flag counting)."""
 

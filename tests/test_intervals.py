@@ -159,3 +159,17 @@ def test_row_local_coupling_is_not_decided_at_corners():
     ]
     result = iv.frontier_shared(rows, 0.0, 1.0)
     assert result["i"]["possible"] == iv.DISPROVED and result["i"]["definite"] == iv.DISPROVED
+
+
+def test_validated_root_certificates_are_exact():
+    """E108 fixtures: x^2 = 2 on [1, 2] has an irrational root; on [1, 1.4] it has none."""
+
+    square_minus_two = (-2, 0, 1)
+    assert iv.validated_root(square_minus_two, 1, 2) == iv.CERTIFIED
+    assert iv.validated_root(square_minus_two, 1, 1.4) == iv.DISPROVED
+    assert iv.validated_root(square_minus_two, -1.4, -1) == iv.DISPROVED  # decreasing branch
+    assert iv.validated_root(square_minus_two, -1, 1) == iv.UNRESOLVED  # no sign change, slope changes sign
+    assert iv.validated_root((-4, 0, 1), 2, 3) == iv.CERTIFIED  # exact root at an endpoint
+    assert iv.point_certifies(square_minus_two, 1.414214) is False  # residual about 1e-6
+    assert iv.point_certifies((-4, 0, 1), 2) is True
+    assert iv._power_range(iv.Fraction(-2), iv.Fraction(1), 3) == (iv.Fraction(-8), iv.Fraction(1))

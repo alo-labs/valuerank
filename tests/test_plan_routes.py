@@ -230,5 +230,61 @@ def test_admission_table_classifies_every_route_once():
     assert {key: item["case"] for key, item in table.items()} == {
         "effort": 1, "transfer": 2, "unmatched": 3, "basis": 4, "single-report": 5, "identified": "identified",
     }
-    assert [key for key, item in table.items() if item["officialDisplayEligible"]] == ["transfer", "unmatched", "basis", "identified"]
+    assert [key for key, item in table.items() if item["officialDisplayEligible"]] == ["transfer", "unmatched", "identified"]
+    # O7/E123: the unreconciled price basis never reaches the official selector.
+    assert pr.route_candidates("m", "max", [routes[3]], TODAY)[0]["grade"] == "diagnostic"
     assert [key for key, item in table.items() if item["planIntervalEligible"]] == ["identified"]
+
+
+def test_report_sets_are_tested_whole_and_divisors_are_validated():
+    """E107: comparable reports 100, 110 and 150 fail together although 100/110 would pass."""
+
+    reports = [comparable_report("a", 100.0), comparable_report("b", 110.0), comparable_report("c", 150.0)]
+    assert pr.pooled_reports(reports) is None
+    assert pr.pooled_reports(reports[:2]) is not None
+    # E109: a zero, infinite or missing multiple can never be a divisor.
+    for bad in (route("zero", 0.0), route("inf", float("inf")), route("lower", 5.0, valueMultipleLower=0.0), route("none", None)):
+        assert pr.route_candidates("m", "max", [bad], TODAY)[0]["grade"] == "diagnostic"
+
+
+def test_measurement_objects_make_route_measurement_pairs():
+    """E111: two passing but incomparable partitions become two candidates; the comparator picks between them."""
+
+    reports = [
+        comparable_report("a", 10.0), comparable_report("b", 11.0),
+        comparable_report("c", 30.0, measurementWorkload="chat"), comparable_report("d", 31.0, measurementWorkload="chat"),
+    ]
+    base = route("r", 1.0, kind="user_reported_projection", models=("m",), independentReports=reports)
+    objects = pr.measurement_objects(base)
+    assert [item["id"] for item in objects] == ["r#m1", "r#m2"] and objects[1]["reportIds"] == ["c", "d"]
+    candidates = pr.route_candidates("m", "max", [base], TODAY)
+    assert [item["grade"] for item in candidates] == ["reports", "reports"]
+    selection = pr.route_selection(candidates)
+    assert selection["selected"]["route"]["id"] == "r#m2" and selection["selected"]["route"]["routeId"] == "r"
+    failing = route("f", 1.0, kind="user_reported_projection", models=("m",), independentReports=[comparable_report("a", 10.0), comparable_report("b", 20.0)])
+    assert pr.measurement_objects(failing) == [failing]
+    assert pr.measurement_objects(route("plain", 5.0)) == [route("plain", 5.0)]
+
+
+def test_measured_only_selection_drops_transfers_and_reruns_the_selector():
+    """E113: the measured-only view keeps exact-route measurements and reruns selection."""
+
+    transfer = candidate("transfer", 50.0, "assumption")
+    measured = candidate("measured", 8.0, "controlled")
+    report = candidate("report", 9.0, "reports")
+    assert pr.route_selection([transfer, report])["selected"]["route"]["id"] == "report"
+    view = pr.measured_only_selection([transfer, measured, report])
+    assert view["selected"]["route"]["id"] == "measured"
+    assert pr.measured_only_selection([transfer])["selected"] is None
+
+
+def test_route_selection_is_permutation_invariant():
+    """E116: shuffling the admissible-candidate file never changes the selected route-measurement pair."""
+
+    import random as _random
+
+    reports = [comparable_report("a", 10.0), comparable_report("b", 10.0), comparable_report("c", 10.0, measurementWorkload="chat"), comparable_report("d", 10.0, measurementWorkload="chat")]
+    base = route("r", 1.0, kind="user_reported_projection", models=("m",), independentReports=reports)
+    candidates = pr.route_candidates("m", "max", [base, route("q", 10.0, kind="user_reported_projection", models=("m",), independentReports=reports)], TODAY)
+    chosen = {pr.select_route(_random.Random(seed).sample(candidates, len(candidates)))["route"]["id"] for seed in range(20)}
+    assert chosen == {"q#m1"}

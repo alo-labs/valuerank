@@ -185,4 +185,33 @@ def test_only_the_full_composite_s1_core_branch_authorises_the_label():
     assert s1["labelAuthorized"] is True and s1["status"] == "not met" and s1["label"] is False
     assert s1["share"] == pytest.approx(5 / 6, abs=0.04)
     alternative = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), reference], "c", "ref", "S1", random.Random(5), alternative=True, batch=100, looks=1)
-    assert alternative["labelAuthorized"] is False and alternative["decisionTarget"]["specificationBranch"] == "endpoint-heavy alternative"
+    assert alternative["labelAuthorized"] is True and alternative["decisionTarget"]["kernel"] == "endpoint-heavy alternative"
+    blocks = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), reference], "c", "ref", "S1", random.Random(5), alternative_rows=frozenset({"ref"}), batch=100, looks=1)
+    assert blocks["decisionTarget"]["kernel"] == "block assignment" and blocks["decisionTarget"]["endpointHeavyRows"] == ["ref"]
+
+
+def test_kernel_robust_label_needs_every_kernel():
+    """E112 fixture: 70% coverage, one missing 10% leaf in each of three groups, reference at 78.
+
+    The candidate qualifies when 70 + 0.1 * (U1 + U2 + U3) >= 78: about 91.5% of
+    uniform draws but 86.7% of arcsine (endpoint-heavy) draws, so no label.
+    """
+
+    missing = {"bugHunt", "automationBench", "omniscience"}
+    candidate = RowInputs("c", {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in missing}, Kernel("fixed", (10.0,)))
+    reference = full_row("ref", 78.0, 100.0)
+    result = sc.kernel_robust_cheapest([candidate, reference], "c", "ref", 21, batch=10000, looks=2)
+    primary, heavy = result["assignments"]["UUU"], result["assignments"]["HUU"]
+    assert sorted(result["assignments"]) == ["HHU", "HUU", "UHU", "UUU"]  # no competitors: the competitor block is empty
+    assert primary["status"] == "met" and primary["share"] == pytest.approx(0.915, abs=0.01)
+    assert heavy["status"] == "not met" and heavy["share"] == pytest.approx(0.867, abs=0.01)
+    assert result["label"] is False and result["reading"] == "primary-kernel frequency >= 90%; kernel-sensitive"
+    assert result["frequencyRange"][0] < 0.9 <= result["frequencyRange"][1]
+    always = sc.kernel_robust_cheapest([full_row("c", 80.0, 10.0), reference, full_row("x", 90.0, 500.0)], "c", "ref", 3, batch=100, looks=1)
+    assert len(always["assignments"]) == 8 and always["label"] is True and always["reading"].startswith("supported under the registered kernel checks")
+    provisional = sc.kernel_robust_cheapest([full_row("c", 80.0, 10.0, provisional=True), reference], "c", "ref", 3, batch=100, looks=1)
+    assert provisional["label"] is False and provisional["reading"] == "frequency only (provisional row)"
+    never = sc.kernel_robust_cheapest([full_row("c", 50.0, 10.0), reference], "c", "ref", 3, batch=100, looks=1)
+    assert never["reading"] == "not scenario-supported"
+    itself = sc.kernel_assignments([reference], "ref", "ref")
+    assert [item["id"] for item in itself] == ["UUU", "HHU"]  # candidate and reference blocks coincide

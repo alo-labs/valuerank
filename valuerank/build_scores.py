@@ -24,7 +24,8 @@ import json
 import math
 from pathlib import Path
 
-from valuerank.clock import iso_z
+from valuerank import value_v3
+from valuerank.clock import iso_z, utcnow
 
 
 from valuerank.paths import DATA, ROOT
@@ -1266,6 +1267,15 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         for row in primary_rows if row.get("terminalBenchV4Claim")
     ]
 
+    v3_section = value_v3.build(
+        [
+            {"id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"]}
+            for row in by_overall + unscored_primary_rows
+        ],
+        data,
+        release_day=utcnow().date(),
+    )
+
     (data / "scores.json").write_text(
         json.dumps(
             {
@@ -1330,6 +1340,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                     }
                     for row in unranked_rows
                 ],
+                "v3": v3_section,
             },
             indent=2,
             ensure_ascii=False,

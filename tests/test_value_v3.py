@@ -1,0 +1,365 @@
+"""Tests for the v3 integration: evidence, admission, anchors, scores, intervals, scenarios and the CLI."""
+
+from __future__ import annotations
+
+import json
+import runpy
+import sys
+from datetime import date
+from pathlib import Path
+
+import pytest
+
+from valuerank import basket
+from valuerank import quality as q
+from valuerank import value_v3 as v
+
+DAY = date(2026, 10, 19)
+ALL_TASKS = {**basket.INDEX_SDLC_TASKS, **basket.INDEX_RESIDUAL_TASKS}
+
+
+def page(slug: str, cost_per_task: float, **fields) -> dict:
+    evaluations = [{"slug": key, "costPerTask": cost_per_task} for key in ALL_TASKS]
+    model = {
+        "slug": slug,
+        "intelligenceIndexEvaluations": evaluations,
+        "intelligenceIndexCost": {"total": cost_per_task * sum(ALL_TASKS.values())},
+        "gdpval": 1500.0,
+        "automationBenchPartialScore": 0.5,
+        "frontierCode": 0.45,
+        "lcr": 0.8,
+        "hle": 0.3,
+        "scicode": 0.4,
+        "critpt": 0.2,
+        "omniscience": 30.0,
+        "omniscienceAccuracy": 0.5,
+        "omniscienceHallucinationRate": 0.4,
+    }
+    model.update(fields)
+    return {"model": model}
+
+
+def documents(**overrides) -> dict:
+    base = {
+        "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5)]},
+        "deepswe": {"configurations": [
+            {"valueRankModelId": "a", "scorePct": 70.0, "effort": "max", "displayLabel": "A", "agent": "x"},
+            {"valueRankModelId": "b", "scorePct": 75.0, "effort": "max", "scorePrecision": 0.1},
+            {"valueRankModelId": "c", "scorePct": 50.0, "effort": "high"},
+            {"valueRankModelId": None, "scorePct": 10.0},
+        ]},
+        "bugHunt": {"models": [
+            {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 52.0, "sampleN": 3},
+            {"modelId": "b", "matched": False, "fixedOf105": None},
+        ]},
+        "tb4": {"rows": [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]},
+        "codingAgents": {"configurations": [
+            {"label": "agent-a", "meanCostPerTaskUsd": 2.0, "totalCostUsd": 600.0, "components": []},
+            {"label": "agent-b", "meanCostPerTaskUsd": 6.0, "totalCostUsd": 1800.0, "components": []},
+        ]},
+        "costCharts": {"evaluations": [
+            {"slug": "frontiercode", "rows": [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}]},
+            {"slug": "itbench-aa", "rows": []},
+        ]},
+        "configurationMap": {"rows": {
+            "a": {"coding-agent-index": "agent-a", "frontiercode": "A (max)", "itbench-aa": None},
+            "b": {"coding-agent-index": "agent-b", "frontiercode": None, "itbench-aa": None},
+            "c": {"coding-agent-index": None, "frontiercode": None, "itbench-aa": None},
+        }},
+        "planRoutes": {"routes": [
+            {"id": "plan-a", "valueMultiple": 10.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10"},
+            {"id": "plan-b", "valueMultiple": 2.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["b"], "planPriceUsd": 20, "checkedOn": "2026-10-10",
+             "identification": "point-identified"},
+        ]},
+    }
+    base.update(overrides)
+    return base
+
+
+CONFIGURATIONS = [
+    {"id": "a", "name": "A", "effort": "max", "aaSlug": "a-max"},
+    {"id": "b", "name": "B", "effort": "max", "aaSlug": "b-max"},
+    {"id": "c", "name": "C", "effort": "max", "aaSlug": "c-max"},
+]
+
+
+def assembled(**overrides):
+    return v.assemble(CONFIGURATIONS, documents(**overrides), release_day=DAY)
+
+
+def test_leaf_evidence_uses_exact_configurations_only():
+    model = page("a-max", 1.0)["model"]
+    tb4 = [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]
+    evidence = v.leaf_evidence("claude-opus-5-5", "max", model, {"scorePct": 70.0, "effort": "max", "scorePrecision": 0.1}, tb4, {"matched": True, "effort": "max", "fixedOf105": 52.0})
+    observations = evidence["observations"]
+    assert set(observations) == {leaf.key for leaf in q.LEAVES}
+    assert observations["deepswe"].half_width == pytest.approx(0.05) and observations["terminalBench"].z == 60.0
+    assert observations["omniscience"].z == pytest.approx(65.0)
+    assert evidence["provenance"]["omniscience"]["indexFromRates"] == pytest.approx(30.0)
+    assert evidence["provenance"]["terminalBench"]["agent"] == "Terminus 2"
+    # A different effort never transfers; absent fields stay missing.
+    sparse = v.leaf_evidence("x", "max", {"gdpval": None}, {"scorePct": 70.0, "effort": "high"}, [], None)
+    assert sparse["observations"] == {} and sparse["clipAudit"] == []
+    index_only = v.leaf_evidence("x", "max", {"omniscience": -20.0}, None, [], None)
+    assert index_only["observations"]["omniscience"].z == 40.0 and index_only["provenance"]["omniscience"]["indexFromRates"] is None
+    with pytest.raises(ValueError, match="outside its documented domain"):
+        v.leaf_evidence("x", "max", {"hle": 1.5}, None, [], None)
+
+
+def test_components_and_restricted_cost():
+    components, reconciliation = v.row_components(page("a-max", 1.0)["model"], None, {"frontiercode": None, "itbench-aa": None})
+    assert set(components) == set(basket.INDEX_SDLC_TASKS) and reconciliation["reconciled"] is True
+    assert v.restricted_cost(components, ["scicode"]) == 288.0
+    assert v.restricted_cost(components, ["scicode", basket.CODING_AGENT_INDEX]) is None
+
+
+def test_assemble_admission_subset_rows_and_plan_costs():
+    result = assembled()
+    assert result["admitted"] == [basket.CODING_AGENT_INDEX, *basket.INDEX_SDLC_TASKS]
+    rows = {row["id"]: row for row in result["rows"]}
+    assert rows["c"]["cost"]["subset"] is True and rows["a"]["cost"]["fullCost"] is True
+    # FrontierCode carries AA's declined-task marker for A and is pending (one row of three).
+    assert "frontiercode" in rows["a"]["components"] and result["admission"]["components"]["frontiercode"]["admitted"] is False
+    assert rows["a"]["plan"]["costUsd"] == pytest.approx(rows["a"]["cost"]["costUsd"] / 10.0)
+    assert rows["c"]["plan"]["fallback"] == "api"
+    catalog = v.workload_catalog(result)
+    assert [entry["role"] for entry in catalog.values()] == ["main", "subset"]
+    with pytest.raises(ValueError, match="missing from the pinned snapshot"):
+        v.assemble([{"id": "z", "name": "Z", "aaSlug": "z-max"}], documents(), release_day=DAY)
+    unmapped = v.assemble([{"id": "z", "name": "Z", "aaSlug": "a-max"}], documents(), release_day=DAY)
+    assert unmapped["rows"][0]["configurationMapped"] is False and basket.CODING_AGENT_INDEX not in unmapped["rows"][0]["components"]
+
+
+def test_workload_catalog_skips_rows_without_any_cost():
+    result = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), {"model": {"slug": "c-max"}}]})
+    rows = {row["id"]: row for row in result["rows"]}
+    assert rows["c"]["cost"]["workload"] is None
+    assert len(v.workload_catalog(result)) == 1
+
+
+def test_freeze_anchors_and_bar_reference():
+    result = assembled()
+    frozen = v.freeze(result, frozen_at="2026-10-19")
+    main = frozen["workloads"][result["mainWorkload"]]
+    assert main["role"] == "main" and main["anchors"]["api"]["referenceIds"] == ["a", "b"]
+    subset = next(entry for entry in frozen["workloads"].values() if entry["role"] == "subset")
+    assert subset["anchors"]["api"]["referenceIds"] == ["a", "b", "c"]
+    assert frozen["barReferences"][0]["id"] in {"a", "b"}
+    # No definite-frontier member: no bar is pinned.
+    lone = v.assemble(CONFIGURATIONS[:1], documents(), release_day=DAY)
+    assert v.freeze(lone, frozen_at="2026-10-19")["barReferences"] == [{"id": "a", "rule": v.freeze(lone, frozen_at="x")["barReferences"][0]["rule"]}]
+
+
+def test_plan_boxes_need_an_identified_finite_multiple():
+    result = assembled()
+    boxes = {box.row: box for box in v.plan_boxes(result)}
+    assert set(boxes) == {"b"}
+    assert boxes["b"].c_low == pytest.approx(result["rows"][1]["cost"]["lowUsd"] / 2.0)
+    open_set = documents()["planRoutes"]
+    open_set["routes"][1].update(identification="set-identified", valueMultipleLower=1.0)
+    assert v.plan_boxes(assembled(planRoutes=open_set)) == []
+
+
+def scored(**overrides):
+    result = assembled(**overrides)
+    return result, v.freeze(result, frozen_at="2026-10-19")
+
+
+def test_score_ranks_gates_disclosures_and_intervals():
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    rows = {row["id"]: row for row in output["rows"]}
+    assert {row["api"]["rank"] for row in output["rows"]} == {1, 2, 3}
+    assert rows["c"]["quality"]["status"] == "scored" and rows["a"]["plan"]["selectionReason"] == "only remaining eligible route"
+    assert output["gates"]["hold"] is False and output["intervals"]["api"]["status"] == "evaluated"
+    assert output["intervals"]["plan"]["universe"] == ["b"]
+    assert output["costInfluence"]["api"]["commonWorkload"]["panel"] == ["a", "b"]
+    manifest = {item["rule"]: item["status"] for item in output["manifest"]}
+    assert manifest["subset scoring (O17)"] == "fired" and manifest["Plan exploratory label (E61)"] == "fired"
+    assert output["measuredOnlyPlanView"]["rows"]["b"]["status"] == "measured, target-workload identified"
+    assert output["measuredOnlyPlanView"]["rows"]["c"]["status"] == "no measured route"
+    assert output["diagnostics"]["groupDrift"]["status"] == "not estimable"
+    assert manifest["configuration map coverage"] == "passed"
+    mapping = documents()["configurationMap"]
+    del mapping["rows"]["c"]
+    unmapped, unmapped_frozen = scored(configurationMap=mapping)
+    flagged = {item["rule"]: item for item in v.score(unmapped, unmapped_frozen)["manifest"]}["configuration map coverage"]
+    assert flagged["status"] == "fired" and flagged["detail"].endswith(": c")
+
+
+def test_score_refuses_unfrozen_workloads():
+    result, frozen = scored()
+    moved = dict(frozen, mainWorkload="elsewhere")
+    with pytest.raises(ValueError, match="workload migration"):
+        v.score(result, moved)
+    trimmed = dict(frozen, workloads={result["mainWorkload"]: frozen["workloads"][result["mainWorkload"]]})
+    with pytest.raises(ValueError, match="has no frozen anchors"):
+        v.score(result, trimmed)
+
+
+def test_score_manifest_branches_and_unevaluable_bars():
+    result, frozen = scored()
+    # A tight anchor object clips every row and holds the release; the reference lost its quality.
+    tight = json.loads(json.dumps(frozen))
+    for entry in tight["workloads"].values():
+        for basis in ("api", "plan"):
+            entry["anchors"][basis].update(low=1e6, high=2e6)
+    tight["barReferences"] = [{"id": "gone", "rule": "x"}]
+    output = v.score(result, tight)
+    manifest = {item["rule"]: item["status"] for item in output["manifest"]}
+    assert output["gates"]["hold"] is True and manifest["clip gate (E20)"] == "fired"
+    assert output["intervals"]["api"]["bars"][0]["status"] == "unevaluable"
+    zero_quality = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5, **{key: None for key in (
+        "gdpval", "automationBenchPartialScore", "frontierCode", "lcr", "hle", "scicode", "critpt", "omniscience")})]},
+        deepswe={"configurations": []}, bugHunt={"models": []})
+    output = v.score(zero_quality, v.freeze(zero_quality, frozen_at="d"))
+    row_c = next(row for row in output["rows"] if row["id"] == "c")
+    assert row_c["quality"]["status"] == "quality not scoreable — no observed leaves" and row_c["api"]["value"] is None
+
+
+def test_score_flags_partial_components_dominance_and_saturation():
+    routes = documents()["planRoutes"]
+    routes["routes"].append({"id": "plan-a-low", "valueMultiple": 1.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"],
+                             "planPriceUsd": 20, "checkedOn": "2026-10-10", "identification": "point-identified"})
+    routes["routes"].append({"id": "plan-a-high", "valueMultiple": 50.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"],
+                             "planPriceUsd": 20, "checkedOn": "2026-10-10", "identification": "point-identified"})
+    charts = documents()["costCharts"]
+    charts["evaluations"][0]["rows"] = [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}, {"model": "B (max)", "totalUsd": 30, "declinedTasks": False}]
+    mapping = documents()["configurationMap"]
+    mapping["rows"]["b"]["frontiercode"] = "B (max)"
+    mapping["rows"]["c"]["coding-agent-index"] = "agent-a"
+    result, frozen = scored(planRoutes=routes, costCharts=charts, configurationMap=mapping,
+                            snapshot={"pages": [page("a-max", 1.0, gdpval=2700.0), page("b-max", 4.0), page("c-max", 0.5)]})
+    assert result["admission"]["components"]["frontiercode"]["admitted"] is False
+    output = v.score(result, frozen)
+    manifest = {item["rule"]: item["status"] for item in output["manifest"]}
+    assert manifest["route dominance filter (E88)"] == "fired" and manifest["quality clipping audit (E110)"] == "fired"
+    assert manifest["Plan exploratory label (E61)"] == "passed" and manifest["subset scoring (O17)"] == "vacuous"
+
+
+def test_partial_component_rows_are_flagged():
+    agents = documents()["codingAgents"]
+    agents["configurations"].append({"label": "agent-c", "meanCostPerTaskUsd": 1.0, "components": []})
+    mapping = documents()["configurationMap"]
+    mapping["rows"]["c"]["coding-agent-index"] = "agent-c"
+    pages = [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5)]
+    pages[2]["model"]["intelligenceIndexCost"]["total"] = 1.0  # fails reconciliation: unresolved Index components
+    result, frozen = scored(codingAgents=agents, configurationMap=mapping, snapshot={"pages": pages})
+    output = v.score(result, frozen)
+    assert {item["rule"]: item["status"] for item in output["manifest"]}["partial component flag (E37)"] == "fired"
+
+
+def test_cost_influence_flag_fires_when_quality_dominates():
+    pages = [page("a-max", 1.0, hle=0.0, scicode=0.0, critpt=0.0, lcr=0.0), page("b-max", 1.0001, hle=1.0, scicode=1.0, critpt=1.0, lcr=1.0), page("c-max", 0.5)]
+    agents = documents()["codingAgents"]
+    agents["configurations"][1]["meanCostPerTaskUsd"] = 2.0
+    result, frozen = scored(snapshot={"pages": pages}, codingAgents=agents)
+    output = v.score(result, frozen)
+    assert {item["rule"]: item["status"] for item in output["manifest"]}["cost influence flag (E91)"] == "fired"
+
+
+def test_quality_agreement_and_drift_on_real_panels():
+    result, frozen = scored()
+    agreement = v._quality_agreement(result["rows"])
+    assert agreement["panel"] == []  # no synthetic row has both independent leaves
+    assert v._group_drift(result["rows"])["panel"] == []
+
+    def row(identifier, displayed, bug, tb):
+        observations = {"bugHunt": q.Observation(bug), "terminalBench": q.Observation(tb)}
+        return {"id": identifier, "evidence": {"observations": observations}, "summary": q.summarize(observations).__class__(**{**q.summarize(observations).__dict__, "displayed": displayed})}
+
+    matched = v._quality_agreement([row("x", 50.0, 40.0, 40.0), row("y", 60.0, 50.0, 50.0), row("z", 70.0, 60.0, 60.0)])
+    assert matched["panel"] == ["x", "y", "z"] and matched["tau"] == pytest.approx(1.0)
+
+
+def test_freeze_without_definite_members_pins_no_bar():
+    result = assembled()
+    for item in result["rows"]:
+        item["cost"] = dict(item["cost"], fullCost=False)
+    assert v.freeze(result, frozen_at="d")["barReferences"] == []
+
+
+def test_score_handles_rows_without_cost_and_empty_workloads():
+    result = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), {"model": {"slug": "c-max"}}]})
+    frozen = v.freeze(result, frozen_at="d")
+    frozen["workloads"]["unused"] = json.loads(json.dumps(frozen["workloads"][result["mainWorkload"]]))
+    output = v.score(result, frozen)
+    row_c = next(row for row in output["rows"] if row["id"] == "c")
+    assert row_c["api"]["costScore"] is None and row_c["api"]["rank"] is None
+    assert [item["workload"] for item in output["gates"]["clip"]["api"]] == [result["mainWorkload"]]
+
+
+def test_interval_outputs_without_api_rows():
+    result, frozen = scored()
+    for row in result["rows"]:
+        row["cost"] = dict(row["cost"], fullCost=False)
+    assert v.interval_outputs(result, frozen, "api")["reason"] == "no row has FullCost on the main workload"
+
+
+def test_scenarios_hash_attach_and_bar_labels():
+    result, frozen = scored()
+    panel = v.scenario_panel(result, "api")
+    assert [item.row for item in panel] == ["a", "b"]
+    assert panel[0].leaves["deepswe"].family == "fixed" and panel[1].leaves["deepswe"].family == "uniform"
+    document = v.run_scenarios(result, frozen, n=200, seed=7)
+    assert document["inputHash"] == v.scenario_hash(result, frozen, n=200, seed=7)
+    assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1"]
+    assert document["barLabels"][0]["status"] == "evaluated"
+    current = v.attach_scenarios(v.score(result, frozen), document, document["inputHash"])
+    assert current["scenarios"]["status"] == "current" and current["gates"]["hold"] is False
+    stale = v.attach_scenarios(v.score(result, frozen), document, "other")
+    assert stale["scenarios"]["status"].startswith("stale") and stale["gates"]["hold"] is True
+    missing = v.attach_scenarios(v.score(result, frozen), None, "x")
+    assert missing["scenarios"] == {"status": "missing"} and missing["manifest"][-1]["status"] == "fired"
+    outside = dict(frozen, barReferences=[{"id": "c", "rule": "x"}])
+    assert v.bar_labels(result, outside, seed=1, batch=50)[0]["status"] == "unevaluable"
+
+
+def write_world(root: Path) -> Path:
+    data = root / "data"
+    for relative, content in {
+        "aa/aa_v432_snapshot.json": documents()["snapshot"],
+        "aa_deepswe.json": documents()["deepswe"],
+        "bug_hunt.json": documents()["bugHunt"],
+        "tb4.json": documents()["tb4"],
+        "aa/coding_agents_capture.json": documents()["codingAgents"],
+        "aa/cost_charts_capture.json": documents()["costCharts"],
+        "v3_configuration_map.json": documents()["configurationMap"],
+        "plan_cost_routes.json": documents()["planRoutes"],
+        "scores.json": {
+            "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
+            + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
+        },
+    }.items():
+        target = data / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(content))
+    return data
+
+
+def test_command_line_freeze_scenarios_and_build(tmp_path, capsys, monkeypatch):
+    data = write_world(tmp_path)
+    monkeypatch.setenv("VALUERANK_NOW", "2026-10-19T12:00:00Z")
+    assert v.main(["freeze"], data=data) == 0
+    assert json.loads(capsys.readouterr().out)["wrote"] == "data/v3_frozen.json"
+    configurations = v.configurations_from_scores(json.loads((data / "scores.json").read_text()))
+    assert v.build(configurations, data, release_day=DAY)["scenarios"]["status"] == "missing"
+    assert v.main(["scenarios", "--scenarios", "100"], data=data) == 0
+    built = v.build(configurations, data, release_day=DAY)
+    assert built["scenarios"]["status"] == "current" and built["scenarios"]["scenarios"] == 100
+    assert v.scenario_seed(DAY) == 20261019
+
+
+def test_module_entry_point(tmp_path, monkeypatch):
+    data = write_world(tmp_path)
+    monkeypatch.setattr(v, "DATA", data)
+    monkeypatch.setattr(sys, "argv", ["value_v3", "freeze"])
+    monkeypatch.setattr("valuerank.paths.DATA", data)
+    with pytest.raises(SystemExit) as stop:
+        runpy.run_module("valuerank.value_v3", run_name="__main__")
+    assert stop.value.code == 0
+
+
+def test_json_default_rejects_unknown_objects():
+    with pytest.raises(TypeError, match="not JSON serializable: object"):
+        v._json_default(object())

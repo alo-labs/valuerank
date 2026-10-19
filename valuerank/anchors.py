@@ -19,14 +19,20 @@ BEYOND_FACTOR_LIMIT = 2.0
 LOW_INFLUENCE_FLAG = 0.10
 
 
+def scoreable(value) -> bool:
+    """E109: a cost or multiple usable on the log scale or as a divisor: finite and strictly positive."""
+
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and 0 < value < math.inf
+
+
 def anchor_object(reference_costs: dict, *, basis: str, workload: str | None) -> dict:
     """The versioned anchor object: reference ids and costs, padded anchors, basis and workload."""
 
     costs = {key: float(value) for key, value in reference_costs.items() if value is not None}
     if not costs:
         raise ValueError(f"no reference costs for the {basis} anchors")
-    if any(value <= 0 for value in costs.values()):
-        raise ValueError("anchor reference costs must be positive")
+    if not all(scoreable(value) for value in costs.values()):
+        raise ValueError("anchor reference costs must be finite and positive")
     return {
         "basis": basis,
         "workload": workload,
@@ -47,7 +53,7 @@ def unclipped_score(cost: float, anchors: dict) -> float:
 def cost_score(cost: float | None, anchors: dict) -> float | None:
     """S_C = 100 * clip((ln c_H - ln c) / (ln c_H - ln c_L), 0, 1); a missing or non-positive cost has none."""
 
-    if cost is None or cost <= 0:
+    if not scoreable(cost):
         return None
     return max(0.0, min(100.0, unclipped_score(cost, anchors)))
 

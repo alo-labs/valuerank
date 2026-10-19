@@ -122,11 +122,33 @@ def expiry_status(route: dict, release_day: date) -> str:
     return "fresh"
 
 
+def _divisor_eligible(route: dict) -> bool:
+    """E109: every multiple a route can divide by is finite and strictly positive."""
+
+    values = [route.get("valueMultiple")] + [route[key] for key in ("valueMultipleLower", "valueMultipleUpper") if key in route]
+    return all(isinstance(value, (int, float)) and not isinstance(value, bool) and 0 < value < math.inf for value in values)
+
+
+def measurement_objects(route: dict) -> list[dict]:
+    """E111: a route's measurement objects — its own measurement, or one per concordant comparable report partition."""
+
+    reports = route.get("independentReports")
+    if route.get("valueMultipleKind") not in REPORT_KINDS or not reports:
+        return [route]
+    groups, _separate = comparable_groups(reports)
+    objects = []
+    for index, group in enumerate(groups, start=1):
+        pooled = concordant_pool([report.get("multiple") for report in group])
+        if pooled is not None:
+            objects.append({**route, "id": f"{route['id']}#m{index}", "routeId": route["id"], "valueMultiple": pooled, "reportIds": sorted(report["id"] for report in group)})
+    return objects or [route]
+
+
 def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date) -> list[dict]:
-    """Every route that names this model, classified; variant-restricted routes need an exact effort match."""
+    """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match."""
 
     candidates = []
-    for route in routes:
+    for route in [item for base in routes for item in measurement_objects(base)]:
         if model_id not in route.get("modelIds", []):
             continue
         required = route.get("requiredVariant")
@@ -134,7 +156,8 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
             continue
         grade = evidence_grade(route, model_id)
         expiry = expiry_status(route, release_day)
-        if expiry == "demoted":
+        # O7/E123: a measurement on an unreconciled price basis is unmatched; E109: divisors must be positive.
+        if expiry == "demoted" or not _divisor_eligible(route) or route.get("valuationBasisReconciled") is False:
             grade = "diagnostic"
         candidates.append(
             {
@@ -151,36 +174,36 @@ IDENTIFIED = {"point-identified", "set-identified"}
 
 
 def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date) -> list[dict]:
-    """E106: every route naming the model, classified once by case and the three predicates.
+    """E106/E123: every route-measurement pair naming the model, classified once by case and the three predicates.
 
     1 execution-identity incompatibility (excluded); 2 owner-named transfer
     (display only, never identifies M_W); 3 exact-route measurement with
     unidentified transport (displayed, interval-ineligible); 4 exact-route
-    measurement with an unreconciled valuation basis (displayed and flagged,
-    interval-ineligible); 5 evidence failing admission (diagnostic only); and
-    "identified" for exact-route measurements with an identified M_W.
+    measurement on an unreconciled price basis (unmatched under O7: diagnostic
+    only); 5 evidence failing admission (diagnostic only); and "identified" for
+    exact-route measurements with an identified M_W.
     """
 
     table = []
     for route in routes:
         if model_id not in route.get("modelIds", []):
             continue
-        required = route.get("requiredVariant")
-        if required is not None and (configuration_effort or "").casefold() != required.casefold():
+        candidates = route_candidates(model_id, configuration_effort, [route], release_day)
+        if not candidates:
             table.append({"route": route, "case": 1, "officialDisplayEligible": False, "targetTransportIdentified": False, "planIntervalEligible": False})
             continue
-        candidate = route_candidates(model_id, configuration_effort, [route], release_day)[0]
-        identified = candidate["identification"] in IDENTIFIED
-        if candidate["grade"] == "diagnostic":
-            case = 5
-        elif candidate["grade"] == "assumption":
-            case = 2
-        elif route.get("valuationBasisReconciled") is False:
-            case = 4
-        else:
-            case = "identified" if identified else 3
-        transport = case == "identified"
-        table.append({**candidate, "case": case, "officialDisplayEligible": case != 5, "targetTransportIdentified": transport, "planIntervalEligible": transport})
+        for candidate in candidates:
+            identified = candidate["identification"] in IDENTIFIED
+            if candidate["route"].get("valuationBasisReconciled") is False:
+                case = 4
+            elif candidate["grade"] == "diagnostic":
+                case = 5
+            elif candidate["grade"] == "assumption":
+                case = 2
+            else:
+                case = "identified" if identified else 3
+            transport = case == "identified"
+            table.append({**candidate, "case": case, "officialDisplayEligible": case not in (4, 5), "targetTransportIdentified": transport, "planIntervalEligible": transport})
     return table
 
 
@@ -247,7 +270,10 @@ DECIDING_KEYS = ("higher identification class", "higher evidence grade", "larger
 
 
 def _order(candidate: dict) -> tuple:
-    return tuple(-value for value in comparison_tuple(candidate)), candidate["route"]["id"]
+    """E85/E116: the comparator keys, then route ID, then the measurement-object ID (a total order)."""
+
+    route = candidate["route"]
+    return tuple(-value for value in comparison_tuple(candidate)), route.get("routeId", route["id"]), route["id"]
 
 
 def route_selection(candidates: list[dict]) -> dict:
@@ -266,6 +292,15 @@ def route_selection(candidates: list[dict]) -> dict:
     if deciding == DECIDING_KEYS[2] and ordered[0]["identification"] == "unidentified":
         deciding = "larger observed multiple (observed-workload multiple — target-workload ordering not identified)"
     return {"selected": ordered[0], "reason": deciding, "dominated": dominated, "tuples": tuples}
+
+
+MEASURED_GRADES = {"controlled", "reports"}
+
+
+def measured_only_selection(candidates: list[dict]) -> dict:
+    """E113: the measured-only view reruns the same selector among exact-route measurements (no transfers)."""
+
+    return route_selection([candidate for candidate in candidates if candidate["grade"] in MEASURED_GRADES])
 
 
 def select_route(candidates: list[dict]) -> dict | None:

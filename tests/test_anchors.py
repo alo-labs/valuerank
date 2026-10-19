@@ -25,7 +25,7 @@ def test_anchor_object_pads_the_reference_extremes_by_two():
 def test_anchor_object_rejects_empty_or_non_positive_references():
     with pytest.raises(ValueError, match="no reference costs for the plan anchors"):
         a.anchor_object({"x": None}, basis="plan", workload=None)
-    with pytest.raises(ValueError, match="must be positive"):
+    with pytest.raises(ValueError, match="must be finite and positive"):
         a.anchor_object({"x": 0.0}, basis="api", workload=None)
 
 
@@ -115,3 +115,14 @@ def test_value_score_needs_cost_and_quality():
     assert a.value_score(80.0, 60.0, 0.25) == pytest.approx(65.0)
     assert a.value_score(None, 60.0, 0.25) is None
     assert a.value_score(80.0, None, 0.25) is None
+
+
+def test_numerical_domains_are_validated():
+    """E109: only finite, strictly positive values are scoreable; zero and infinities never score."""
+
+    assert a.scoreable(1.0) and a.scoreable(3)
+    assert not any(a.scoreable(value) for value in (0, 0.0, -1.0, float("inf"), float("nan"), None, True, "5"))
+    anchors = a.anchor_object({"x": 10.0, "y": 1000.0}, basis="api", workload="w")
+    assert a.cost_score(0.0, anchors) is None and a.cost_score(float("inf"), anchors) is None
+    with pytest.raises(ValueError, match="finite and positive"):
+        a.anchor_object({"x": float("inf")}, basis="api", workload="w")

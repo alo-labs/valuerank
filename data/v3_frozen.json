@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "methodologyVersion": "3.0.0",
+  "anchorVersion": "v3-2026-10-19",
+  "frozenAt": "2026-10-19",
+  "basketVersion": "SDLC basket v1",
+  "mainWorkload": "9a0d376cc6080f3c",
+  "workloads": {
+    "9a0d376cc6080f3c": {
+      "components": [
+        "coding-agent-index",
+        "aa-briefcase",
+        "gdpval-aa",
+        "gdp-pdf",
+        "automationbench-aa",
+        "terminalbench-4-0",
+        "scicode",
+        "artificial-analysis-long-context-reasoning"
+      ],
+      "role": "main",
+      "anchors": {
+        "api": {
+          "basis": "api",
+          "workload": "9a0d376cc6080f3c",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5",
+            "claude-opus-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
+            "gemini-3.8-flash",
+            "gemini-4-argon",
+            "glm-5.3",
+            "gpt-5.6-luna",
+            "gpt-5.6-sol",
+            "gpt-6-luna",
+            "gpt-6-sol",
+            "gpt-6.1-sol",
+            "grok-4.7",
+            "qwen3.8-max"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5": 292.07481065705014,
+            "claude-opus-5": 8733.127052137232,
+            "claude-opus-5-5": 9989.151438394825,
+            "claude-sonnet-5-5": 9373.65305908234,
+            "deepseek-v4-flash": 279.5120478141823,
+            "deepseek-v4-pro": 801.4967532139415,
+            "gemini-3.8-flash": 2073.444227327155,
+            "gemini-4-argon": 3628.6386911634218,
+            "glm-5.3": 3186.289595775135,
+            "gpt-5.6-luna": 319.25290369032655,
+            "gpt-5.6-sol": 4238.135507049396,
+            "gpt-6-luna": 132.8652049689931,
+            "gpt-6-sol": 1999.4094902839818,
+            "gpt-6.1-sol": 1267.6626637224322,
+            "grok-4.7": 6700.021962805636,
+            "qwen3.8-max": 5417.032020806289
+          },
+          "low": 66.43260248449656,
+          "high": 19978.30287678965,
+          "padding": 2.0
+        },
+        "plan": {
+          "basis": "plan",
+          "workload": "9a0d376cc6080f3c",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5",
+            "claude-opus-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
+            "gemini-3.8-flash",
+            "gemini-4-argon",
+            "glm-5.3",
+            "gpt-5.6-luna",
+            "gpt-5.6-sol",
+            "gpt-6-luna",
+            "gpt-6-sol",
+            "gpt-6.1-sol",
+            "grok-4.7",
+            "qwen3.8-max"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5": 4.958825308269103,
+            "claude-opus-5": 148.27040835547083,
+            "claude-opus-5-5": 169.59510082164388,
+            "claude-sonnet-5-5": 159.14521322720444,
+            "deepseek-v4-flash": 279.5120478141823,
+            "deepseek-v4-pro": 801.4967532139415,
+            "gemini-3.8-flash": 2073.444227327155,
+            "gemini-4-argon": 3628.6386911634218,
+            "glm-5.3": 3186.289595775135,
+            "gpt-5.6-luna": 29.637291467724335,
+            "gpt-5.6-sol": 393.4399839444297,
+            "gpt-6-luna": 12.334311638413768,
+            "gpt-6-sol": 185.61172394021366,
+            "gpt-6.1-sol": 117.68127216138434,
+            "grok-4.7": 6700.021962805636,
+            "qwen3.8-max": 5417.032020806289
+          },
+          "low": 2.4794126541345514,
+          "high": 13400.043925611271,
+          "padding": 2.0
+        }
+      }
+    },
+    "1453a9a0576b02ea": {
+      "components": [
+        "aa-briefcase",
+        "gdpval-aa",
+        "gdp-pdf",
+        "automationbench-aa",
+        "terminalbench-4-0",
+        "scicode",
+        "artificial-analysis-long-context-reasoning"
+      ],
+      "role": "subset",
+      "anchors": {
+        "api": {
+          "basis": "api",
+          "workload": "1453a9a0576b02ea",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5",
+            "claude-opus-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
+            "gemini-3.8-flash",
+            "gemini-4-argon",
+            "glm-5.3",
+            "gpt-5.6-luna",
+            "gpt-5.6-sol",
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6-sol",
+            "gpt-6.1-sol",
+            "grok-4.7",
+            "mimo-v2-6-flash",
+            "mimo-v2-6-pro",
+            "qwen3.8-max"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5": 107.09527518955011,
+            "claude-opus-5": 5464.013178262235,
+            "claude-opus-5-5": 6039.127262611497,
+            "claude-sonnet-5-5": 5073.840417782336,
+            "deepseek-v4-flash": 253.73759774404903,
+            "deepseek-v4-pro": 729.3687827299415,
+            "gemini-3.8-flash": 1325.8243906021544,
+            "gemini-4-argon": 1857.935358161643,
+            "glm-5.3": 1901.1496881484682,
+            "gpt-5.6-luna": 186.53206681699322,
+            "gpt-5.6-sol": 2313.0800831493957,
+            "gpt-6-astra": 2899.4244152617393,
+            "gpt-6-luna": 79.56395288649308,
+            "gpt-6-sol": 1093.5216020173157,
+            "gpt-6.1-sol": 796.764446620246,
+            "grok-4.7": 4028.328937472306,
+            "mimo-v2-6-flash": 60.36787614182735,
+            "mimo-v2-6-pro": 136.12695920883297,
+            "qwen3.8-max": 4362.905450721673
+          },
+          "low": 30.183938070913676,
+          "high": 12078.254525222994,
+          "padding": 2.0
+        },
+        "plan": {
+          "basis": "plan",
+          "workload": "1453a9a0576b02ea",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5",
+            "claude-opus-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
+            "gemini-3.8-flash",
+            "gemini-4-argon",
+            "glm-5.3",
+            "gpt-5.6-luna",
+            "gpt-5.6-sol",
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6-sol",
+            "gpt-6.1-sol",
+            "grok-4.7",
+            "mimo-v2-6-flash",
+            "mimo-v2-6-pro",
+            "qwen3.8-max"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5": 1.8182559454932108,
+            "claude-opus-5": 92.76762611650653,
+            "claude-opus-5-5": 102.53187203075547,
+            "claude-sonnet-5-5": 86.1433008112451,
+            "deepseek-v4-flash": 253.73759774404903,
+            "deepseek-v4-pro": 729.3687827299415,
+            "gemini-3.8-flash": 1325.8243906021544,
+            "gemini-4-argon": 1857.935358161643,
+            "glm-5.3": 1901.1496881484682,
+            "gpt-5.6-luna": 17.316381991922874,
+            "gpt-5.6-sol": 214.7307912318414,
+            "gpt-6-astra": 357.953631513795,
+            "gpt-6-luna": 7.386182035508084,
+            "gpt-6-sol": 101.51518771048232,
+            "gpt-6.1-sol": 73.96625015041273,
+            "grok-4.7": 4028.328937472306,
+            "mimo-v2-6-flash": 40.24525076121824,
+            "mimo-v2-6-pro": 90.75130613922198,
+            "qwen3.8-max": 4362.905450721673
+          },
+          "low": 0.9091279727466054,
+          "high": 8725.810901443347,
+          "padding": 2.0
+        }
+      }
+    }
+  },
+  "barReferences": [
+    {
+      "id": "gpt-6-luna",
+      "rule": "median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)"
+    }
+  ]
+}

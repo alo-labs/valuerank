@@ -10,6 +10,7 @@ record, so observed leaves contribute only their reporting-precision intervals).
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 
 # Group shares of the quality score (percent); the leaf weights below sum to them.
@@ -100,20 +101,23 @@ def bug_hunt_z(bugs_fixed: float, half_width_bugs: float = 0.0) -> Observation:
     return Observation(clip(100.0 * bugs_fixed / BUG_HUNT_BUGS), 100.0 * half_width_bugs / BUG_HUNT_BUGS)
 
 
-def omniscience_z(accuracy: float, non_hallucination: float) -> Observation:
-    """z = (2A + N) / 3 with A and N in percent (AA's Index integrates them 2:1 too)."""
+def omniscience_index_z(index: float) -> Observation:
+    """Owner decision O28: z = (I + 100) / 2 for AA's Omniscience Index I in [-100, 100] (monotone in outcomes)."""
 
-    return Observation(clip((2.0 * 100.0 * accuracy + 100.0 * non_hallucination) / 3.0))
+    return Observation(clip((index + 100.0) / 2.0))
 
 
-def omniscience_from_counts(correct: int, partial: int, incorrect: int, abstained: int) -> tuple[float, float, float]:
-    """(A, N, z) from AA's counts; AA's hallucination rate is incorrect / all non-correct responses."""
+def omniscience_index_from_rates(accuracy: float, hallucination_rate: float) -> float:
+    """I = 100 [A - h (1 - A)] from AA's accuracy and conditional hallucination rate (fractions): the reconciliation check."""
 
-    total = correct + partial + incorrect + abstained
-    accuracy = 100.0 * correct / total
-    non_correct = partial + incorrect + abstained
-    non_hallucination = 100.0 if non_correct == 0 else 100.0 * (1.0 - incorrect / non_correct)
-    return accuracy, non_hallucination, (2.0 * accuracy + non_hallucination) / 3.0
+    return 100.0 * (accuracy - hallucination_rate * (1.0 - accuracy))
+
+
+def omniscience_from_counts(correct: int, partial: int, incorrect: int, abstained: int) -> tuple[float, float]:
+    """(I, z) from AA's counts: I = 100 (correct - incorrect) / all questions; partial answers and abstentions count zero."""
+
+    index = 100.0 * (correct - incorrect) / (correct + partial + incorrect + abstained)
+    return index, omniscience_index_z(index).z
 
 
 @dataclass(frozen=True)
@@ -173,6 +177,58 @@ def composite(values: dict) -> float:
     if missing:
         raise ValueError(f"full composite needs every leaf; missing: {', '.join(missing)}")
     return sum(leaf.weight * values[leaf.key] for leaf in LEAVES) / 100.0
+
+
+# E110: each leaf's documented raw domain (unit, low, high); a value outside it is a data-validation error.
+LEAF_DOMAINS = {
+    "deepswe": ("percent", 0.0, 100.0),
+    "bugHunt": ("bugs fixed of 105", 0.0, BUG_HUNT_BUGS),
+    "frontierCode": ("fraction", 0.0, 1.0),
+    "terminalBench": ("percent", 0.0, 100.0),
+    "gdpval": ("Elo", -math.inf, math.inf),
+    "automationBench": ("fraction", 0.0, 1.0),
+    "omniscience": ("AA Omniscience Index", -100.0, 100.0),
+    "lcr": ("fraction", 0.0, 1.0),
+    "hle": ("fraction", 0.0, 1.0),
+    "scicode": ("fraction", 0.0, 1.0),
+    "critpt": ("fraction", 0.0, 1.0),
+}
+
+
+def unclipped_z(key: str, raw) -> float:
+    """The leaf's z before clipping to 0-100 (the value kept in the data release)."""
+
+    if key == "omniscience":
+        return (raw + 100.0) / 2.0
+    if key == "gdpval":
+        return 100.0 * (raw - GDPVAL_ELO_LOW) / GDPVAL_ELO_SPAN
+    if key == "bugHunt":
+        return 100.0 * raw / BUG_HUNT_BUGS
+    return raw if LEAF_DOMAINS[key][0] == "percent" else 100.0 * raw
+
+
+def clip_audit(key: str, raw) -> dict:
+    """E110: domain validity, anchor position, clipping amount, affected weight and action for one observation."""
+
+    unit, low, high = LEAF_DOMAINS[key]
+    valid = isinstance(raw, (int, float)) and not isinstance(raw, bool) and math.isfinite(raw) and low <= raw <= high
+    z = unclipped_z(key, raw) if valid else None
+    position = None if z is None else "below" if z < 0.0 else "above" if z > 100.0 else "inside"
+    if not valid:
+        action = "reject: outside the metric's documented domain"
+    else:
+        action = "none" if position == "inside" else "disclose saturation"
+    return {
+        "leaf": key,
+        "raw": raw,
+        "unit": unit,
+        "domainValid": valid,
+        "anchorPosition": position,
+        "unclippedZ": z,
+        "clippingAmount": None if z is None else z - clip(z),
+        "weight": LEAF_BY_KEY[key].weight,
+        "action": action,
+    }
 
 
 def source_shares() -> dict:

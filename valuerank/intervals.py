@@ -21,6 +21,7 @@ Every label carries a status: certified / disproved / unresolved / unevaluable.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 
 CERTIFIED = "certified"
 DISPROVED = "disproved"
@@ -285,3 +286,56 @@ def cheapest_above_bar(boxes: list[Box], reference: Reference, *, shared_factors
         "possibleCheapest": members,
         "confirmedCheapest": confirmed[0] if confirmed else None,
     }
+
+
+def _rational(value) -> Fraction:
+    """A published decimal as an exact rational (floats are read through their decimal text)."""
+
+    return value if isinstance(value, Fraction) else Fraction(str(value))
+
+
+def _evaluate(coefficients: tuple, x: Fraction) -> Fraction:
+    return sum((coefficient * x ** power for power, coefficient in enumerate(coefficients)), Fraction(0))
+
+
+def _power_range(low: Fraction, high: Fraction, power: int) -> tuple[Fraction, Fraction]:
+    ends = (low ** power, high ** power)
+    if power % 2 == 0 and low < 0 < high:
+        return Fraction(0), max(ends)
+    return min(ends), max(ends)
+
+
+def _polynomial_range(coefficients: tuple, low: Fraction, high: Fraction) -> tuple[Fraction, Fraction]:
+    """A sound enclosure of a polynomial's values on [low, high] (term-wise interval arithmetic)."""
+
+    lower = upper = Fraction(0)
+    for power, coefficient in enumerate(coefficients):
+        small, large = _power_range(low, high, power)
+        terms = (coefficient * small, coefficient * large)
+        lower, upper = lower + min(terms), upper + max(terms)
+    return lower, upper
+
+
+def validated_root(coefficients: tuple, low, high) -> str:
+    """E108: exact certificate that sum_k a_k x^k = 0 has (or has no) solution with x in [low, high].
+
+    Coefficients are listed from the constant term up. A sign change at the
+    rational endpoints certifies a root (intermediate value theorem); a polynomial
+    whose derivative keeps one strict sign on the interval and does not change
+    sign there is certified root-free. Anything else is "unresolved".
+    """
+
+    exact = tuple(_rational(coefficient) for coefficient in coefficients)
+    low, high = _rational(low), _rational(high)
+    at_low, at_high = _evaluate(exact, low), _evaluate(exact, high)
+    if at_low == 0 or at_high == 0 or (at_low < 0) != (at_high < 0):
+        return CERTIFIED
+    derivative = tuple(power * coefficient for power, coefficient in enumerate(exact))[1:]
+    slope_low, slope_high = _polynomial_range(derivative, low, high)
+    return DISPROVED if slope_low > 0 or slope_high < 0 else UNRESOLVED
+
+
+def point_certifies(coefficients: tuple, point) -> bool:
+    """Only an exact zero certifies a point; a small numerical residual never does (E108)."""
+
+    return _evaluate(tuple(_rational(coefficient) for coefficient in coefficients), _rational(point)) == 0
