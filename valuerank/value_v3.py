@@ -68,42 +68,48 @@ SCENARIO_FILE = "v3_scenarios.json"
 
 
 def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict | None, tb4_rows: list[dict], bug_hunt: dict | None) -> dict:
-    """Exact-configuration observations for the twelve leaves, with provenance and the clipping audit (E110)."""
+    """Exact-configuration observations for the eleven leaves, with provenance, evidence locators (E159) and the clipping audit (E110)."""
 
     observations, provenance, audit = {}, {}, []
 
-    def add(key: str, raw, observation: q.Observation, source: dict) -> None:
+    def add(key: str, raw, observation: q.Observation, source: dict, artifact: str, locator: str) -> None:
         check = q.clip_audit(key, raw)
         if not check["domainValid"]:
             raise ValueError(f"{model_id}: {key} value {raw!r} is outside its documented domain")
         observations[key] = observation
-        provenance[key] = source
+        provenance[key] = {**source, "evidence": {"artifact": f"data/{EVIDENCE_FILES[artifact][0]}", "locator": locator, "publishedValue": raw}}
         audit.append(check)
+
+    page_path = f"pages[model.slug={page.get('slug')}].model"
 
     if deepswe is not None and exact_match.efforts_match(model_id, effort, deepswe.get("effort")):
         precision = deepswe.get("scorePrecision")
         half = precision / 2.0 if isinstance(precision, (int, float)) else 0.0
         add("deepswe", deepswe["scorePct"], q.percent_z(deepswe["scorePct"], half),
-            {"source": "AA Coding Agent Index, DeepSWE v1.1", "configuration": deepswe.get("displayLabel"), "agent": deepswe.get("agent")})
+            {"source": "AA Coding Agent Index, DeepSWE v1.1", "configuration": deepswe.get("displayLabel"), "agent": deepswe.get("agent")},
+            "deepswe", f"configurations[valueRankModelId={model_id}].scorePct")
     if exact_match.bug_hunt_matches(model_id, effort, bug_hunt):
         add("bugHunt", bug_hunt["fixedOf105"], q.bug_hunt_z(bug_hunt["fixedOf105"], BUG_HUNT_HALF_WIDTH),
-            {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN")})
+            {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN")},
+            "bugHunt", f"models[modelId={model_id}].fixedOf105")
     tb4 = exact_match.select_tb4_row(model_id, effort, tb4_rows)
     if tb4 is not None:
         add("terminalBench", tb4["resolutionRatePct"], q.percent_z(tb4["resolutionRatePct"], TB4_HALF_WIDTH_PCT),
-            {"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "configuration": tb4["model"], "agent": tb4.get("agent")})
+            {"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "configuration": tb4["model"], "agent": tb4.get("agent")},
+            "tb4", f"rows[model={tb4['model']}, agent={tb4.get('agent')}].resolutionRatePct")
     if page.get("gdpval") is not None:
-        add("gdpval", page["gdpval"], q.gdpval_z(page["gdpval"]), {"source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"})
+        add("gdpval", page["gdpval"], q.gdpval_z(page["gdpval"]), {"source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"}, "snapshot", f"{page_path}.gdpval")
     for key, field in FRACTION_LEAVES.items():
         if page.get(field) is not None:
-            add(key, page[field], q.fraction_z(page[field]), {"source": f"AA field {field}"})
+            add(key, page[field], q.fraction_z(page[field]), {"source": f"AA field {field}"}, "snapshot", f"{page_path}.{field}")
     if page.get("omniscience") is not None:
         accuracy, hallucination = page.get("omniscienceAccuracy"), page.get("omniscienceHallucinationRate")
         rebuilt = q.omniscience_index_from_rates(accuracy, hallucination) if accuracy is not None and hallucination is not None else None
         unanswered = (1.0 - accuracy) * (1.0 - hallucination) if rebuilt is not None else None
         add("omniscience", page["omniscience"], q.omniscience_index_z(page["omniscience"]),
             {"source": "AA Omniscience Index (O28)", "accuracy": accuracy, "hallucinationRate": hallucination, "indexFromRates": rebuilt,
-             "unansweredOrPartialShare": unanswered, "abstentionPenalisedZ": max(0.0, page["omniscience"])})
+             "unansweredOrPartialShare": unanswered, "abstentionPenalisedZ": max(0.0, page["omniscience"])},
+            "snapshot", f"{page_path}.omniscience")
     return {"observations": observations, "provenance": provenance, "clipAudit": audit}
 
 
@@ -166,8 +172,35 @@ def demand_registry(page: dict, admitted: list[str]) -> dict:
         "populations": populations,
         "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
         "tokenOntology": TOKEN_ONTOLOGY,
-        "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+        "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
         "missingForIdentification": ["category-specific burn coefficients for each plan meter", "or a controlled measurement on a workload compatible with W"],
+    }
+
+
+# E158: what each component's published cost covers. AA prices the contestant model's provider-reported tokens; for
+# GDP.pdf it states that judge calls, PDF preparation and OCR are excluded. Nothing else is stated, so it stays unknown.
+COST_LABEL = "contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)"
+COST_BOUNDARY_SOURCE = "https://artificialanalysis.ai/methodology/intelligence-benchmarking (fetched 2026-10-19)"
+CHARGE_CLASSES = ("contestantModelTokens", "otherModelCalls", "externalTools", "executionEnvironment", "preparation", "grading")
+COMPONENT_BOUNDARY = {"gdp-pdf": {"otherModelCalls": "excluded", "preparation": "excluded", "grading": "excluded"}}
+
+
+def cost_boundary(component: str) -> dict:
+    """One component's charge classes: included / excluded / not applicable / unknown (unknown unless documented)."""
+
+    return {charge: "included" if charge == "contestantModelTokens" else COMPONENT_BOUNDARY.get(component, {}).get(charge, "unknown") for charge in CHARGE_CLASSES}
+
+
+def valuation_contract(caveat: str | None) -> dict:
+    """E157: AA's valuation is linear in token categories, so category totals suffice to reconcile it; a provider tariff
+    banded by request (e.g. context length) needs band-allocated demand or a request ledger, which no source publishes."""
+
+    return {
+        "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+        "valuationSufficiency": "category totals sufficient for AA's published valuation",
+        "providerBillingRule": "banded tariff not reflected in AA's cost (AA cost caveat)" if caveat else "not recorded",
+        "tariffCorrectedValuation": "unidentified: billing-band allocation unavailable" if caveat else "not assessed: provider billing rule not recorded",
+        "tariffAllocationSupport": "unavailable",
     }
 
 
@@ -581,6 +614,12 @@ def score(assembled: dict, frozen: dict) -> dict:
         "beta": BETA,
         "anchorVersion": frozen["anchorVersion"],
         "barPolicy": frozen["barPolicy"],
+        "costBoundary": {
+            "label": COST_LABEL,
+            "source": COST_BOUNDARY_SOURCE,
+            "chargeClasses": list(CHARGE_CLASSES),
+            "components": {component: cost_boundary(component) for component in assembled["admitted"]},
+        },
         "mainWorkload": main,
         "admission": {key: value for key, value in assembled["admission"].items() if key != "matrices"},
         "admissionMatrices": assembled["admission"]["matrices"],
@@ -738,6 +777,7 @@ def _quality_agreement(rows: list[dict]) -> dict:
 def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
     selection = row["routeSelection"]
     selected = selection["selected"]
+    caveat = row.get("aaNote") if row.get("aaNote") and any(word in row["aaNote"].lower() for word in ("pricing", "cost", "price")) else None
     return {
         "id": row["id"],
         "name": row["name"],
@@ -745,7 +785,8 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
         "aaSlug": row["aaSlug"],
         "configurationMapped": row["configurationMapped"],
         # E141: AA's own note on what its cost omits (e.g. a long-context surcharge), shown as a cost caveat.
-        "aaCostCaveat": row.get("aaNote") if row.get("aaNote") and any(word in row["aaNote"].lower() for word in ("pricing", "cost", "price")) else None,
+        "aaCostCaveat": caveat,
+        "valuation": valuation_contract(caveat),
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": demand_registry(row["page"], row["cost"]["components"]),
         "quality": {
@@ -916,19 +957,38 @@ def attach_scenarios(scored: dict, document: dict | None, expected_hash: str) ->
 # --------------------------------------------------------------------------
 
 
-def load_documents(data: Path) -> dict:
-    def read(relative: str) -> dict:
-        return json.loads((data / relative).read_text())
+# E159: every captured artifact the v3 build reads, with the code or procedure that produced it. The build never
+# consults live pages, so the committed artifacts are the release's evidence bundle.
+EVIDENCE_FILES = {
+    "snapshot": ("aa/aa_v432_snapshot.json", "valuerank.capture_aa"),
+    "deepswe": ("aa_deepswe.json", "valuerank.fetch_deepswe"),
+    "bugHunt": ("bug_hunt.json", "editorial capture of the owner's published results (source commit recorded)"),
+    "tb4": ("tb4.json", "scripts/scrape-tb4.js, then valuerank.build_tb4"),
+    "codingAgents": ("aa/coding_agents_capture.json", "valuerank.capture_coding_agents"),
+    "costCharts": ("aa/cost_charts_capture.json", "scripts/capture-aa-cost-charts.js"),
+    "configurationMap": ("v3_configuration_map.json", "editorial pinning from the research capture"),
+    "planRoutes": ("plan_cost_routes.json", "editorial Plan evidence registry"),
+}
+CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 
+
+def load_documents(data: Path) -> dict:
+    return {key: json.loads((data / relative).read_text()) for key, (relative, _extractor) in EVIDENCE_FILES.items()}
+
+
+def evidence_bundle(data: Path) -> dict:
+    """E159: content hashes, capture times and extractors of the release's input artifacts (plus the anchor object)."""
+
+    artifacts = []
+    for key, (relative, extractor) in [*EVIDENCE_FILES.items(), ("anchors", (FROZEN_FILE, "valuerank.value_v3 freeze"))]:
+        content = (data / relative).read_bytes()
+        document = json.loads(content)
+        captured = next((document[field] for field in CAPTURE_FIELDS if isinstance(document.get(field), str)), None)
+        artifacts.append({"key": key, "artifact": f"data/{relative}", "sha256": hashlib.sha256(content).hexdigest(), "capturedAt": captured, "extractor": extractor})
     return {
-        "snapshot": read("aa/aa_v432_snapshot.json"),
-        "deepswe": read("aa_deepswe.json"),
-        "bugHunt": read("bug_hunt.json"),
-        "tb4": read("tb4.json"),
-        "codingAgents": read("aa/coding_agents_capture.json"),
-        "costCharts": read("aa/cost_charts_capture.json"),
-        "configurationMap": read("v3_configuration_map.json"),
-        "planRoutes": read("plan_cost_routes.json"),
+        "artifacts": artifacts,
+        "bundleHash": hashlib.sha256("".join(item["sha256"] for item in artifacts).encode()).hexdigest(),
+        "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages",
     }
 
 
@@ -952,6 +1012,7 @@ def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:
     assembled = assemble(configurations, load_documents(data), release_day=release_day)
     frozen = json.loads((data / FROZEN_FILE).read_text())
     scored = score(assembled, frozen)
+    scored["evidenceBundle"] = evidence_bundle(data)
     scenario_path = data / SCENARIO_FILE
     document = json.loads(scenario_path.read_text()) if scenario_path.exists() else None
     seed = document["seed"] if document else scenario_seed(release_day)

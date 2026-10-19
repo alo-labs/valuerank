@@ -7540,6 +7540,84 @@
         "gpt-6-luna"
       ]
     },
+    "costBoundary": {
+      "label": "contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)",
+      "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking (fetched 2026-10-19)",
+      "chargeClasses": [
+        "contestantModelTokens",
+        "otherModelCalls",
+        "externalTools",
+        "executionEnvironment",
+        "preparation",
+        "grading"
+      ],
+      "components": {
+        "coding-agent-index": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "unknown",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "unknown",
+          "grading": "unknown"
+        },
+        "aa-briefcase": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "unknown",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "unknown",
+          "grading": "unknown"
+        },
+        "gdpval-aa": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "unknown",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "unknown",
+          "grading": "unknown"
+        },
+        "gdp-pdf": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "excluded",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "excluded",
+          "grading": "excluded"
+        },
+        "automationbench-aa": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "unknown",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "unknown",
+          "grading": "unknown"
+        },
+        "terminalbench-4-0": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "unknown",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "unknown",
+          "grading": "unknown"
+        },
+        "scicode": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "unknown",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "unknown",
+          "grading": "unknown"
+        },
+        "artificial-analysis-long-context-reasoning": {
+          "contestantModelTokens": "included",
+          "otherModelCalls": "unknown",
+          "externalTools": "unknown",
+          "executionEnvironment": "unknown",
+          "preparation": "unknown",
+          "grading": "unknown"
+        }
+      }
+    },
     "mainWorkload": "9a0d376cc6080f3c",
     "admission": {
       "components": {
@@ -8627,6 +8705,13 @@
         "aaSlug": "gemini-4-argon",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -8709,7 +8794,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -8733,7 +8818,12 @@
               "high": 78.8,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Antigravity CLI - Gemini 4 Argon (high)",
-              "agent": "Antigravity CLI"
+              "agent": "Antigravity CLI",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=gemini-4-argon].scorePct",
+                "publishedValue": 78.8
+              }
             },
             "bugHunt": {
               "z": 38.761904761904766,
@@ -8743,56 +8833,96 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3",
               "harness": "Antigravity CLI",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=gemini-4-argon].fixedOf105",
+                "publishedValue": 40.7
+              }
             },
             "gdpval": {
               "z": 56.1995,
               "halfWidth": 0.0,
               "low": 56.1995,
               "high": 56.1995,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.gdpval",
+                "publishedValue": 1623.99
+              }
             },
             "frontierCode": {
               "z": 43.453199999999995,
               "halfWidth": 0.0,
               "low": 43.453199999999995,
               "high": 43.453199999999995,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.frontierCode",
+                "publishedValue": 0.434532
+              }
             },
             "automationBench": {
               "z": 77.51346945899195,
               "halfWidth": 0.0,
               "low": 77.51346945899195,
               "high": 77.51346945899195,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.automationBenchPartialScore",
+                "publishedValue": 0.7751346945899195
+              }
             },
             "lcr": {
               "z": 79.6666666666667,
               "halfWidth": 0.0,
               "low": 79.6666666666667,
               "high": 79.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.lcr",
+                "publishedValue": 0.796666666666667
+              }
             },
             "hle": {
               "z": 57.089898053753494,
               "halfWidth": 0.0,
               "low": 57.089898053753494,
               "high": 57.089898053753494,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.hle",
+                "publishedValue": 0.570898980537535
+              }
             },
             "scicode": {
               "z": 61.8055555555556,
               "halfWidth": 0.0,
               "low": 61.8055555555556,
               "high": 61.8055555555556,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.scicode",
+                "publishedValue": 0.618055555555556
+              }
             },
             "critpt": {
               "z": 27.142857142857103,
               "halfWidth": 0.0,
               "low": 27.142857142857103,
               "high": 27.142857142857103,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.critpt",
+                "publishedValue": 0.271428571428571
+              }
             },
             "omniscience": {
               "z": 71.175,
@@ -8804,7 +8934,12 @@
               "hallucinationRate": 0.1506986027944112,
               "indexFromRates": 42.35,
               "unansweredOrPartialShare": 0.4255,
-              "abstentionPenalisedZ": 42.35
+              "abstentionPenalisedZ": 42.35,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-4-argon].model.omniscience",
+                "publishedValue": 42.35
+              }
             }
           },
           "clipAudit": [
@@ -9085,6 +9220,13 @@
         "aaSlug": "gpt-6-1-sol",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -9167,7 +9309,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -9191,7 +9333,12 @@
               "high": 69.6,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Codex - GPT-6.1 Sol (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=gpt-6.1-sol].scorePct",
+                "publishedValue": 69.6
+              }
             },
             "bugHunt": {
               "z": 42.19047619047619,
@@ -9201,7 +9348,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "GPT-6.1 Sol (max effort) - mean of 3",
               "harness": "Codex CLI",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=gpt-6.1-sol].fixedOf105",
+                "publishedValue": 44.3
+              }
             },
             "terminalBench": {
               "z": 58.2,
@@ -9210,56 +9362,96 @@
               "high": 58.25,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "GPT-6.1 Sol (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=GPT-6.1 Sol (max), agent=Codex].resolutionRatePct",
+                "publishedValue": 58.2
+              }
             },
             "gdpval": {
               "z": 54.692499999999995,
               "halfWidth": 0.0,
               "low": 54.692499999999995,
               "high": 54.692499999999995,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.gdpval",
+                "publishedValue": 1593.85
+              }
             },
             "frontierCode": {
               "z": 49.1209333333333,
               "halfWidth": 0.0,
               "low": 49.1209333333333,
               "high": 49.1209333333333,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.frontierCode",
+                "publishedValue": 0.491209333333333
+              }
             },
             "automationBench": {
               "z": 64.86844882398171,
               "halfWidth": 0.0,
               "low": 64.86844882398171,
               "high": 64.86844882398171,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.automationBenchPartialScore",
+                "publishedValue": 0.6486844882398171
+              }
             },
             "lcr": {
               "z": 83.0,
               "halfWidth": 0.0,
               "low": 83.0,
               "high": 83.0,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.lcr",
+                "publishedValue": 0.83
+              }
             },
             "hle": {
               "z": 52.919369786839695,
               "halfWidth": 0.0,
               "low": 52.919369786839695,
               "high": 52.919369786839695,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.hle",
+                "publishedValue": 0.529193697868397
+              }
             },
             "scicode": {
               "z": 54.1666666666667,
               "halfWidth": 0.0,
               "low": 54.1666666666667,
               "high": 54.1666666666667,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.scicode",
+                "publishedValue": 0.541666666666667
+              }
             },
             "critpt": {
               "z": 31.7142857142857,
               "halfWidth": 0.0,
               "low": 31.7142857142857,
               "high": 31.7142857142857,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.critpt",
+                "publishedValue": 0.317142857142857
+              }
             },
             "omniscience": {
               "z": 70.76666666666667,
@@ -9271,7 +9463,12 @@
               "hallucinationRate": 0.5426561125769569,
               "indexFromRates": 41.53333333333333,
               "unansweredOrPartialShare": 0.17333333333333334,
-              "abstentionPenalisedZ": 41.53333333333333
+              "abstentionPenalisedZ": 41.53333333333333,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-1-sol].model.omniscience",
+                "publishedValue": 41.53333333333333
+              }
             }
           },
           "clipAudit": [
@@ -9640,6 +9837,13 @@
         "aaSlug": "claude-sonnet-5-5",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -9722,7 +9926,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -9746,7 +9950,12 @@
               "high": 72.0,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Claude Code - Sonnet 5.5 (max)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=claude-sonnet-5-5].scorePct",
+                "publishedValue": 72.0
+              }
             },
             "bugHunt": {
               "z": 48.857142857142854,
@@ -9756,7 +9965,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Sonnet 5.5 (max effort) - mean of 3",
               "harness": "Claude Code",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=claude-sonnet-5-5].fixedOf105",
+                "publishedValue": 51.3
+              }
             },
             "terminalBench": {
               "z": 61.8,
@@ -9765,56 +9979,96 @@
               "high": 61.849999999999994,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "Sonnet 5.5 (max)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=Sonnet 5.5 (max), agent=Claude Code].resolutionRatePct",
+                "publishedValue": 61.8
+              }
             },
             "gdpval": {
               "z": 66.891,
               "halfWidth": 0.0,
               "low": 66.891,
               "high": 66.891,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.gdpval",
+                "publishedValue": 1837.82
+              }
             },
             "frontierCode": {
               "z": 45.8291333333333,
               "halfWidth": 0.0,
               "low": 45.8291333333333,
               "high": 45.8291333333333,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.frontierCode",
+                "publishedValue": 0.458291333333333
+              }
             },
             "automationBench": {
               "z": 71.76882128193995,
               "halfWidth": 0.0,
               "low": 71.76882128193995,
               "high": 71.76882128193995,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.automationBenchPartialScore",
+                "publishedValue": 0.7176882128193995
+              }
             },
             "lcr": {
               "z": 82.6666666666667,
               "halfWidth": 0.0,
               "low": 82.6666666666667,
               "high": 82.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.lcr",
+                "publishedValue": 0.826666666666667
+              }
             },
             "hle": {
               "z": 54.9582947173309,
               "halfWidth": 0.0,
               "low": 54.9582947173309,
               "high": 54.9582947173309,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.hle",
+                "publishedValue": 0.549582947173309
+              }
             },
             "scicode": {
               "z": 60.9953703703704,
               "halfWidth": 0.0,
               "low": 60.9953703703704,
               "high": 60.9953703703704,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.scicode",
+                "publishedValue": 0.609953703703704
+              }
             },
             "critpt": {
               "z": 31.4285714285714,
               "halfWidth": 0.0,
               "low": 31.4285714285714,
               "high": 31.4285714285714,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.critpt",
+                "publishedValue": 0.314285714285714
+              }
             },
             "omniscience": {
               "z": 66.15,
@@ -9826,7 +10080,12 @@
               "hallucinationRate": 0.47014115092290987,
               "indexFromRates": 32.3,
               "unansweredOrPartialShare": 0.24400000000000002,
-              "abstentionPenalisedZ": 32.3
+              "abstentionPenalisedZ": 32.3,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-sonnet-5-5].model.omniscience",
+                "publishedValue": 32.3
+              }
             }
           },
           "clipAudit": [
@@ -10179,6 +10438,13 @@
         "aaSlug": "gpt-6-astra-xhigh",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -10257,7 +10523,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -10284,42 +10550,72 @@
               "halfWidth": 0.0,
               "low": 52.795500000000004,
               "high": 52.795500000000004,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-astra-xhigh].model.gdpval",
+                "publishedValue": 1555.91
+              }
             },
             "automationBench": {
               "z": 67.17778020215393,
               "halfWidth": 0.0,
               "low": 67.17778020215393,
               "high": 67.17778020215393,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-astra-xhigh].model.automationBenchPartialScore",
+                "publishedValue": 0.6717778020215392
+              }
             },
             "lcr": {
               "z": 80.0,
               "halfWidth": 0.0,
               "low": 80.0,
               "high": 80.0,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-astra-xhigh].model.lcr",
+                "publishedValue": 0.8
+              }
             },
             "hle": {
               "z": 54.587581093605195,
               "halfWidth": 0.0,
               "low": 54.587581093605195,
               "high": 54.587581093605195,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-astra-xhigh].model.hle",
+                "publishedValue": 0.545875810936052
+              }
             },
             "scicode": {
               "z": 55.671296296296305,
               "halfWidth": 0.0,
               "low": 55.671296296296305,
               "high": 55.671296296296305,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-astra-xhigh].model.scicode",
+                "publishedValue": 0.556712962962963
+              }
             },
             "critpt": {
               "z": 31.4285714285714,
               "halfWidth": 0.0,
               "low": 31.4285714285714,
               "high": 31.4285714285714,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-astra-xhigh].model.critpt",
+                "publishedValue": 0.314285714285714
+              }
             },
             "omniscience": {
               "z": 71.70833333333333,
@@ -10331,7 +10627,12 @@
               "hallucinationRate": 0.4831804281345566,
               "indexFromRates": 43.41666666666667,
               "unansweredOrPartialShare": 0.19716666666666663,
-              "abstentionPenalisedZ": 43.416666666666664
+              "abstentionPenalisedZ": 43.416666666666664,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-astra-xhigh].model.omniscience",
+                "publishedValue": 43.416666666666664
+              }
             }
           },
           "clipAudit": [
@@ -10632,6 +10933,13 @@
         "aaSlug": "claude-opus-5-5",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -10714,7 +11022,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -10738,7 +11046,12 @@
               "high": 68.4,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Claude Code - Opus 5.5 (max)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=claude-opus-5-5].scorePct",
+                "publishedValue": 68.4
+              }
             },
             "bugHunt": {
               "z": 39.714285714285715,
@@ -10748,7 +11061,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Opus 5.5 (max effort) - mean of 3",
               "harness": "Claude Code",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=claude-opus-5-5].fixedOf105",
+                "publishedValue": 41.7
+              }
             },
             "terminalBench": {
               "z": 64.8,
@@ -10757,56 +11075,96 @@
               "high": 64.85,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "Opus 5.5 (max)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=Opus 5.5 (max), agent=Claude Code].resolutionRatePct",
+                "publishedValue": 64.8
+              }
             },
             "gdpval": {
               "z": 68.3135,
               "halfWidth": 0.0,
               "low": 68.3135,
               "high": 68.3135,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.gdpval",
+                "publishedValue": 1866.27
+              }
             },
             "frontierCode": {
               "z": 52.17309999999999,
               "halfWidth": 0.0,
               "low": 52.17309999999999,
               "high": 52.17309999999999,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.frontierCode",
+                "publishedValue": 0.521731
+              }
             },
             "automationBench": {
               "z": 69.5386812863607,
               "halfWidth": 0.0,
               "low": 69.5386812863607,
               "high": 69.5386812863607,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.automationBenchPartialScore",
+                "publishedValue": 0.6953868128636069
+              }
             },
             "lcr": {
               "z": 84.6666666666667,
               "halfWidth": 0.0,
               "low": 84.6666666666667,
               "high": 84.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.lcr",
+                "publishedValue": 0.846666666666667
+              }
             },
             "hle": {
               "z": 61.353104726598694,
               "halfWidth": 0.0,
               "low": 61.353104726598694,
               "high": 61.353104726598694,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.hle",
+                "publishedValue": 0.613531047265987
+              }
             },
             "scicode": {
               "z": 66.8981481481482,
               "halfWidth": 0.0,
               "low": 66.8981481481482,
               "high": 66.8981481481482,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.scicode",
+                "publishedValue": 0.668981481481482
+              }
             },
             "critpt": {
               "z": 31.7142857142857,
               "halfWidth": 0.0,
               "low": 31.7142857142857,
               "high": 31.7142857142857,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.critpt",
+                "publishedValue": 0.317142857142857
+              }
             },
             "omniscience": {
               "z": 73.20833333333333,
@@ -10818,7 +11176,12 @@
               "hallucinationRate": 0.5860878145041933,
               "indexFromRates": 46.41666666666667,
               "unansweredOrPartialShare": 0.13983333333333334,
-              "abstentionPenalisedZ": 46.416666666666664
+              "abstentionPenalisedZ": 46.416666666666664,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5-5].model.omniscience",
+                "publishedValue": 46.416666666666664
+              }
             }
           },
           "clipAudit": [
@@ -11180,6 +11543,13 @@
         "aaSlug": "gpt-5-6-sol",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -11262,7 +11632,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -11286,7 +11656,12 @@
               "high": 72.3,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Codex - GPT-5.6 Sol (max) ({'reasoning_effort': 'max'})",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=gpt-5.6-sol].scorePct",
+                "publishedValue": 72.3
+              }
             },
             "bugHunt": {
               "z": 41.42857142857143,
@@ -11296,7 +11671,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "GPT-5.6 Sol (max effort) - mean of 2",
               "harness": "Codex CLI",
-              "runs": 2
+              "runs": 2,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=gpt-5.6-sol].fixedOf105",
+                "publishedValue": 43.5
+              }
             },
             "terminalBench": {
               "z": 37.3,
@@ -11305,49 +11685,84 @@
               "high": 37.349999999999994,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "GPT-5.6 Sol (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=GPT-5.6 Sol (max), agent=Codex].resolutionRatePct",
+                "publishedValue": 37.3
+              }
             },
             "gdpval": {
               "z": 55.43150000000001,
               "halfWidth": 0.0,
               "low": 55.43150000000001,
               "high": 55.43150000000001,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-sol].model.gdpval",
+                "publishedValue": 1608.63
+              }
             },
             "automationBench": {
               "z": 60.08114996276329,
               "halfWidth": 0.0,
               "low": 60.08114996276329,
               "high": 60.08114996276329,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-sol].model.automationBenchPartialScore",
+                "publishedValue": 0.6008114996276329
+              }
             },
             "lcr": {
               "z": 84.0,
               "halfWidth": 0.0,
               "low": 84.0,
               "high": 84.0,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-sol].model.lcr",
+                "publishedValue": 0.84
+              }
             },
             "hle": {
               "z": 49.4902687673772,
               "halfWidth": 0.0,
               "low": 49.4902687673772,
               "high": 49.4902687673772,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-sol].model.hle",
+                "publishedValue": 0.494902687673772
+              }
             },
             "scicode": {
               "z": 57.0601851851852,
               "halfWidth": 0.0,
               "low": 57.0601851851852,
               "high": 57.0601851851852,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-sol].model.scicode",
+                "publishedValue": 0.570601851851852
+              }
             },
             "critpt": {
               "z": 32.2857142857143,
               "halfWidth": 0.0,
               "low": 32.2857142857143,
               "high": 32.2857142857143,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-sol].model.critpt",
+                "publishedValue": 0.322857142857143
+              }
             },
             "omniscience": {
               "z": 60.983333333333334,
@@ -11359,7 +11774,12 @@
               "hallucinationRate": 0.9220032840722496,
               "indexFromRates": 21.96666666666666,
               "unansweredOrPartialShare": 0.031666666666666655,
-              "abstentionPenalisedZ": 21.966666666666665
+              "abstentionPenalisedZ": 21.966666666666665,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-sol].model.omniscience",
+                "publishedValue": 21.966666666666665
+              }
             }
           },
           "clipAudit": [
@@ -11718,6 +12138,13 @@
         "aaSlug": "mimo-v2-6-pro",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -11796,7 +12223,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -11825,56 +12252,96 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "MiMo-V2.6-Pro (first-party, thinking enabled)",
               "harness": "Claude Code / Anthropic-compatible shim",
-              "runs": 1
+              "runs": 1,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=mimo-v2-6-pro].fixedOf105",
+                "publishedValue": 18
+              }
             },
             "gdpval": {
               "z": 59.21699999999999,
               "halfWidth": 0.0,
               "low": 59.21699999999999,
               "high": 59.21699999999999,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.gdpval",
+                "publishedValue": 1684.34
+              }
             },
             "frontierCode": {
               "z": 45.4153333333333,
               "halfWidth": 0.0,
               "low": 45.4153333333333,
               "high": 45.4153333333333,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.frontierCode",
+                "publishedValue": 0.454153333333333
+              }
             },
             "automationBench": {
               "z": 58.623409434190854,
               "halfWidth": 0.0,
               "low": 58.623409434190854,
               "high": 58.623409434190854,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.automationBenchPartialScore",
+                "publishedValue": 0.5862340943419085
+              }
             },
             "lcr": {
               "z": 86.3333333333333,
               "halfWidth": 0.0,
               "low": 86.3333333333333,
               "high": 86.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.lcr",
+                "publishedValue": 0.863333333333333
+              }
             },
             "hle": {
               "z": 49.351251158480096,
               "halfWidth": 0.0,
               "low": 49.351251158480096,
               "high": 49.351251158480096,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.hle",
+                "publishedValue": 0.493512511584801
+              }
             },
             "scicode": {
               "z": 60.8796296296296,
               "halfWidth": 0.0,
               "low": 60.8796296296296,
               "high": 60.8796296296296,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.scicode",
+                "publishedValue": 0.608796296296296
+              }
             },
             "critpt": {
               "z": 26.5714285714286,
               "halfWidth": 0.0,
               "low": 26.5714285714286,
               "high": 26.5714285714286,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.critpt",
+                "publishedValue": 0.265714285714286
+              }
             },
             "omniscience": {
               "z": 54.19166666666666,
@@ -11886,7 +12353,12 @@
               "hallucinationRate": 0.40624200562803786,
               "indexFromRates": 8.383333333333331,
               "unansweredOrPartialShare": 0.38683333333333336,
-              "abstentionPenalisedZ": 8.383333333333333
+              "abstentionPenalisedZ": 8.383333333333333,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-pro].model.omniscience",
+                "publishedValue": 8.383333333333333
+              }
             }
           },
           "clipAudit": [
@@ -12170,6 +12642,13 @@
         "aaSlug": "gpt-6-sol",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -12252,7 +12731,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -12276,7 +12755,12 @@
               "high": 69.0,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Codex - GPT-6 Sol (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=gpt-6-sol].scorePct",
+                "publishedValue": 69.0
+              }
             },
             "bugHunt": {
               "z": 27.904761904761905,
@@ -12286,7 +12770,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "GPT-6 Sol MAX - mean of 3",
               "harness": "Codex CLI",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=gpt-6-sol].fixedOf105",
+                "publishedValue": 29.3
+              }
             },
             "terminalBench": {
               "z": 49.4,
@@ -12295,49 +12784,84 @@
               "high": 49.449999999999996,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "GPT-6 Sol (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=GPT-6 Sol (max), agent=Codex].resolutionRatePct",
+                "publishedValue": 49.4
+              }
             },
             "gdpval": {
               "z": 50.4115,
               "halfWidth": 0.0,
               "low": 50.4115,
               "high": 50.4115,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-sol].model.gdpval",
+                "publishedValue": 1508.23
+              }
             },
             "automationBench": {
               "z": 61.63369295959864,
               "halfWidth": 0.0,
               "low": 61.63369295959864,
               "high": 61.63369295959864,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-sol].model.automationBenchPartialScore",
+                "publishedValue": 0.6163369295959864
+              }
             },
             "lcr": {
               "z": 83.6666666666667,
               "halfWidth": 0.0,
               "low": 83.6666666666667,
               "high": 83.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-sol].model.lcr",
+                "publishedValue": 0.836666666666667
+              }
             },
             "hle": {
               "z": 47.914735866543104,
               "halfWidth": 0.0,
               "low": 47.914735866543104,
               "high": 47.914735866543104,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-sol].model.hle",
+                "publishedValue": 0.479147358665431
+              }
             },
             "scicode": {
               "z": 57.63888888888889,
               "halfWidth": 0.0,
               "low": 57.63888888888889,
               "high": 57.63888888888889,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-sol].model.scicode",
+                "publishedValue": 0.576388888888889
+              }
             },
             "critpt": {
               "z": 30.8571428571429,
               "halfWidth": 0.0,
               "low": 30.8571428571429,
               "high": 30.8571428571429,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-sol].model.critpt",
+                "publishedValue": 0.308571428571429
+              }
             },
             "omniscience": {
               "z": 63.55833333333334,
@@ -12349,7 +12873,12 @@
               "hallucinationRate": 0.6012449652142072,
               "indexFromRates": 27.11666666666666,
               "unansweredOrPartialShare": 0.18150000000000002,
-              "abstentionPenalisedZ": 27.116666666666667
+              "abstentionPenalisedZ": 27.116666666666667,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-sol].model.omniscience",
+                "publishedValue": 27.116666666666667
+              }
             }
           },
           "clipAudit": [
@@ -12708,6 +13237,13 @@
         "aaSlug": "grok-4-7",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -12790,7 +13326,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -12814,7 +13350,12 @@
               "high": 72.6,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Grok Build - Grok 4.7 (xhigh)",
-              "agent": "Grok Build"
+              "agent": "Grok Build",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=grok-4.7].scorePct",
+                "publishedValue": 72.6
+              }
             },
             "bugHunt": {
               "z": 27.61904761904762,
@@ -12824,7 +13365,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Grok 4.7 (xhigh) - mean of 5",
               "harness": "Grok Build CLI (ACP)",
-              "runs": 5
+              "runs": 5,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=grok-4.7].fixedOf105",
+                "publishedValue": 29.0
+              }
             },
             "terminalBench": {
               "z": 37.6,
@@ -12833,56 +13379,96 @@
               "high": 37.65,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "Grok 4.7 (xhigh)",
-              "agent": "Grok Build"
+              "agent": "Grok Build",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=Grok 4.7 (xhigh), agent=Grok Build].resolutionRatePct",
+                "publishedValue": 37.6
+              }
             },
             "gdpval": {
               "z": 60.5535,
               "halfWidth": 0.0,
               "low": 60.5535,
               "high": 60.5535,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.gdpval",
+                "publishedValue": 1711.07
+              }
             },
             "frontierCode": {
               "z": 33.834199999999996,
               "halfWidth": 0.0,
               "low": 33.834199999999996,
               "high": 33.834199999999996,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.frontierCode",
+                "publishedValue": 0.338342
+              }
             },
             "automationBench": {
               "z": 65.55835148969457,
               "halfWidth": 0.0,
               "low": 65.55835148969457,
               "high": 65.55835148969457,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.automationBenchPartialScore",
+                "publishedValue": 0.6555835148969458
+              }
             },
             "lcr": {
               "z": 76.6666666666667,
               "halfWidth": 0.0,
               "low": 76.6666666666667,
               "high": 76.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.lcr",
+                "publishedValue": 0.766666666666667
+              }
             },
             "hle": {
               "z": 43.1417979610751,
               "halfWidth": 0.0,
               "low": 43.1417979610751,
               "high": 43.1417979610751,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.hle",
+                "publishedValue": 0.431417979610751
+              }
             },
             "scicode": {
               "z": 57.4074074074074,
               "halfWidth": 0.0,
               "low": 57.4074074074074,
               "high": 57.4074074074074,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.scicode",
+                "publishedValue": 0.574074074074074
+              }
             },
             "critpt": {
               "z": 17.714285714285698,
               "halfWidth": 0.0,
               "low": 17.714285714285698,
               "high": 17.714285714285698,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.critpt",
+                "publishedValue": 0.177142857142857
+              }
             },
             "omniscience": {
               "z": 66.01666666666667,
@@ -12894,7 +13480,12 @@
               "hallucinationRate": 0.29337139232477005,
               "indexFromRates": 32.03333333333333,
               "unansweredOrPartialShare": 0.3713333333333334,
-              "abstentionPenalisedZ": 32.03333333333333
+              "abstentionPenalisedZ": 32.03333333333333,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=grok-4-7].model.omniscience",
+                "publishedValue": 32.03333333333333
+              }
             }
           },
           "clipAudit": [
@@ -13208,6 +13799,13 @@
         "aaSlug": "gpt-5-6-luna",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -13290,7 +13888,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -13314,7 +13912,12 @@
               "high": 66.4,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Codex - GPT-5.6 Luna (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=gpt-5.6-luna].scorePct",
+                "publishedValue": 66.4
+              }
             },
             "bugHunt": {
               "z": 29.80952380952381,
@@ -13324,7 +13927,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "GPT-5.6 Luna (max effort) - mean of 3",
               "harness": "Codex CLI",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=gpt-5.6-luna].fixedOf105",
+                "publishedValue": 31.3
+              }
             },
             "terminalBench": {
               "z": 17.3,
@@ -13333,49 +13941,84 @@
               "high": 17.35,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "GPT-5.6 Luna (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=GPT-5.6 Luna (max), agent=Codex].resolutionRatePct",
+                "publishedValue": 17.3
+              }
             },
             "gdpval": {
               "z": 47.96,
               "halfWidth": 0.0,
               "low": 47.96,
               "high": 47.96,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-luna].model.gdpval",
+                "publishedValue": 1459.2
+              }
             },
             "automationBench": {
               "z": 50.208617637561936,
               "halfWidth": 0.0,
               "low": 50.208617637561936,
               "high": 50.208617637561936,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-luna].model.automationBenchPartialScore",
+                "publishedValue": 0.5020861763756194
+              }
             },
             "lcr": {
               "z": 83.6666666666667,
               "halfWidth": 0.0,
               "low": 83.6666666666667,
               "high": 83.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-luna].model.lcr",
+                "publishedValue": 0.836666666666667
+              }
             },
             "hle": {
               "z": 39.4810009267841,
               "halfWidth": 0.0,
               "low": 39.4810009267841,
               "high": 39.4810009267841,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-luna].model.hle",
+                "publishedValue": 0.394810009267841
+              }
             },
             "scicode": {
               "z": 53.587962962963,
               "halfWidth": 0.0,
               "low": 53.587962962963,
               "high": 53.587962962963,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-luna].model.scicode",
+                "publishedValue": 0.53587962962963
+              }
             },
             "critpt": {
               "z": 20.571428571428598,
               "halfWidth": 0.0,
               "low": 20.571428571428598,
               "high": 20.571428571428598,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-luna].model.critpt",
+                "publishedValue": 0.205714285714286
+              }
             },
             "omniscience": {
               "z": 44.858333333333334,
@@ -13387,7 +14030,12 @@
               "hallucinationRate": 0.9257857974388825,
               "indexFromRates": -10.283333333333333,
               "unansweredOrPartialShare": 0.04249999999999998,
-              "abstentionPenalisedZ": 0.0
+              "abstentionPenalisedZ": 0.0,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-5-6-luna].model.omniscience",
+                "publishedValue": -10.283333333333333
+              }
             }
           },
           "clipAudit": [
@@ -13736,6 +14384,13 @@
         "aaSlug": "gpt-6-luna",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -13818,7 +14473,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -13842,7 +14497,12 @@
               "high": 63.7,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=gpt-6-luna].scorePct",
+                "publishedValue": 63.7
+              }
             },
             "bugHunt": {
               "z": 17.428571428571427,
@@ -13852,7 +14512,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "GPT-6 Luna MAX - mean of 3",
               "harness": "Codex CLI",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=gpt-6-luna].fixedOf105",
+                "publishedValue": 18.3
+              }
             },
             "terminalBench": {
               "z": 16.4,
@@ -13861,56 +14526,96 @@
               "high": 16.45,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "GPT-6 Luna (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=GPT-6 Luna (max), agent=Codex].resolutionRatePct",
+                "publishedValue": 16.4
+              }
             },
             "gdpval": {
               "z": 46.59299999999999,
               "halfWidth": 0.0,
               "low": 46.59299999999999,
               "high": 46.59299999999999,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.gdpval",
+                "publishedValue": 1431.86
+              }
             },
             "frontierCode": {
               "z": 41.9269666666667,
               "halfWidth": 0.0,
               "low": 41.9269666666667,
               "high": 41.9269666666667,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.frontierCode",
+                "publishedValue": 0.419269666666667
+              }
             },
             "automationBench": {
               "z": 53.16814034483175,
               "halfWidth": 0.0,
               "low": 53.16814034483175,
               "high": 53.16814034483175,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.automationBenchPartialScore",
+                "publishedValue": 0.5316814034483175
+              }
             },
             "lcr": {
               "z": 83.3333333333333,
               "halfWidth": 0.0,
               "low": 83.3333333333333,
               "high": 83.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.lcr",
+                "publishedValue": 0.833333333333333
+              }
             },
             "hle": {
               "z": 38.5078776645042,
               "halfWidth": 0.0,
               "low": 38.5078776645042,
               "high": 38.5078776645042,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.hle",
+                "publishedValue": 0.385078776645042
+              }
             },
             "scicode": {
               "z": 54.6296296296296,
               "halfWidth": 0.0,
               "low": 54.6296296296296,
               "high": 54.6296296296296,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.scicode",
+                "publishedValue": 0.546296296296296
+              }
             },
             "critpt": {
               "z": 19.428571428571402,
               "halfWidth": 0.0,
               "low": 19.428571428571402,
               "high": 19.428571428571402,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.critpt",
+                "publishedValue": 0.194285714285714
+              }
             },
             "omniscience": {
               "z": 50.325,
@@ -13922,7 +14627,12 @@
               "hallucinationRate": 0.7672694930329084,
               "indexFromRates": 0.6500000000000006,
               "unansweredOrPartialShare": 0.13083333333333336,
-              "abstentionPenalisedZ": 0.65
+              "abstentionPenalisedZ": 0.65,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gpt-6-luna].model.omniscience",
+                "publishedValue": 0.65
+              }
             }
           },
           "clipAudit": [
@@ -14292,6 +15002,13 @@
         "aaSlug": "mimo-v2-6-flash",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -14370,7 +15087,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -14397,49 +15114,84 @@
               "halfWidth": 0.0,
               "low": 55.3755,
               "high": 55.3755,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.gdpval",
+                "publishedValue": 1607.51
+              }
             },
             "frontierCode": {
               "z": 42.0675333333333,
               "halfWidth": 0.0,
               "low": 42.0675333333333,
               "high": 42.0675333333333,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.frontierCode",
+                "publishedValue": 0.420675333333333
+              }
             },
             "automationBench": {
               "z": 64.05168250285656,
               "halfWidth": 0.0,
               "low": 64.05168250285656,
               "high": 64.05168250285656,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.automationBenchPartialScore",
+                "publishedValue": 0.6405168250285657
+              }
             },
             "lcr": {
               "z": 74.3333333333333,
               "halfWidth": 0.0,
               "low": 74.3333333333333,
               "high": 74.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.lcr",
+                "publishedValue": 0.743333333333333
+              }
             },
             "hle": {
               "z": 35.0787766450417,
               "halfWidth": 0.0,
               "low": 35.0787766450417,
               "high": 35.0787766450417,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.hle",
+                "publishedValue": 0.350787766450417
+              }
             },
             "scicode": {
               "z": 51.273148148148195,
               "halfWidth": 0.0,
               "low": 51.273148148148195,
               "high": 51.273148148148195,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.scicode",
+                "publishedValue": 0.512731481481482
+              }
             },
             "critpt": {
               "z": 12.0,
               "halfWidth": 0.0,
               "low": 12.0,
               "high": 12.0,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.critpt",
+                "publishedValue": 0.12
+              }
             },
             "omniscience": {
               "z": 43.65833333333333,
@@ -14451,7 +15203,12 @@
               "hallucinationRate": 0.5436073059360731,
               "indexFromRates": -12.683333333333335,
               "unansweredOrPartialShare": 0.3331666666666666,
-              "abstentionPenalisedZ": 0.0
+              "abstentionPenalisedZ": 0.0,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=mimo-v2-6-flash].model.omniscience",
+                "publishedValue": -12.683333333333334
+              }
             }
           },
           "clipAudit": [
@@ -14714,6 +15471,13 @@
         "aaSlug": "claude-haiku-5-5-xhigh",
         "configurationMapped": true,
         "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "banded tariff not reflected in AA's cost (AA cost caveat)",
+          "tariffCorrectedValuation": "unidentified: billing-band allocation unavailable",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -14796,7 +15560,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -14820,7 +15584,12 @@
               "high": 49.0,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Claude Code - Haiku 5.5 (xhigh)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=claude-haiku-5-5].scorePct",
+                "publishedValue": 49.0
+              }
             },
             "bugHunt": {
               "z": 17.428571428571427,
@@ -14830,56 +15599,96 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Haiku 5.5 (xhigh effort) - mean of 3",
               "harness": "Claude Code",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=claude-haiku-5-5].fixedOf105",
+                "publishedValue": 18.3
+              }
             },
             "gdpval": {
               "z": 50.6525,
               "halfWidth": 0.0,
               "low": 50.6525,
               "high": 50.6525,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.gdpval",
+                "publishedValue": 1513.05
+              }
             },
             "frontierCode": {
               "z": 45.471000000000004,
               "halfWidth": 0.0,
               "low": 45.471000000000004,
               "high": 45.471000000000004,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.frontierCode",
+                "publishedValue": 0.45471
+              }
             },
             "automationBench": {
               "z": 35.953889773428195,
               "halfWidth": 0.0,
               "low": 35.953889773428195,
               "high": 35.953889773428195,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.automationBenchPartialScore",
+                "publishedValue": 0.35953889773428194
+              }
             },
             "lcr": {
               "z": 78.3333333333333,
               "halfWidth": 0.0,
               "low": 78.3333333333333,
               "high": 78.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.lcr",
+                "publishedValue": 0.783333333333333
+              }
             },
             "hle": {
               "z": 42.678405931418,
               "halfWidth": 0.0,
               "low": 42.678405931418,
               "high": 42.678405931418,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.hle",
+                "publishedValue": 0.42678405931418
+              }
             },
             "scicode": {
               "z": 51.73611111111111,
               "halfWidth": 0.0,
               "low": 51.73611111111111,
               "high": 51.73611111111111,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.scicode",
+                "publishedValue": 0.517361111111111
+              }
             },
             "critpt": {
               "z": 22.5714285714286,
               "halfWidth": 0.0,
               "low": 22.5714285714286,
               "high": 22.5714285714286,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.critpt",
+                "publishedValue": 0.225714285714286
+              }
             },
             "omniscience": {
               "z": 53.025,
@@ -14891,7 +15700,12 @@
               "hallucinationRate": 0.44427363566487316,
               "indexFromRates": 6.0499999999999945,
               "unansweredOrPartialShare": 0.3615000000000001,
-              "abstentionPenalisedZ": 6.05
+              "abstentionPenalisedZ": 6.05,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-haiku-5-5-xhigh].model.omniscience",
+                "publishedValue": 6.05
+              }
             }
           },
           "clipAudit": [
@@ -15233,6 +16047,13 @@
         "aaSlug": "gemini-3-8-flash",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -15315,7 +16136,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -15339,7 +16160,12 @@
               "high": 65.8,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Antigravity SDK - Gemini 3.8 Flash (high)",
-              "agent": "Antigravity SDK"
+              "agent": "Antigravity SDK",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=gemini-3.8-flash].scorePct",
+                "publishedValue": 65.8
+              }
             },
             "bugHunt": {
               "z": 17.142857142857142,
@@ -15349,7 +16175,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Gemini 3.8 Flash - mean of 3",
               "harness": "Antigravity CLI",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=gemini-3.8-flash].fixedOf105",
+                "publishedValue": 18.0
+              }
             },
             "terminalBench": {
               "z": 19.1,
@@ -15358,56 +16189,96 @@
               "high": 19.150000000000002,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "Gemini 3.8 Flash (high)",
-              "agent": "mini-SWE-agent"
+              "agent": "mini-SWE-agent",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=Gemini 3.8 Flash (high), agent=mini-SWE-agent].resolutionRatePct",
+                "publishedValue": 19.1
+              }
             },
             "gdpval": {
               "z": 46.815,
               "halfWidth": 0.0,
               "low": 46.815,
               "high": 46.815,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.gdpval",
+                "publishedValue": 1436.3
+              }
             },
             "frontierCode": {
               "z": 36.3585,
               "halfWidth": 0.0,
               "low": 36.3585,
               "high": 36.3585,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.frontierCode",
+                "publishedValue": 0.363585
+              }
             },
             "automationBench": {
               "z": 59.93009432118242,
               "halfWidth": 0.0,
               "low": 59.93009432118242,
               "high": 59.93009432118242,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.automationBenchPartialScore",
+                "publishedValue": 0.5993009432118243
+              }
             },
             "lcr": {
               "z": 81.3333333333333,
               "halfWidth": 0.0,
               "low": 81.3333333333333,
               "high": 81.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.lcr",
+                "publishedValue": 0.813333333333333
+              }
             },
             "hle": {
               "z": 47.8220574606117,
               "halfWidth": 0.0,
               "low": 47.8220574606117,
               "high": 47.8220574606117,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.hle",
+                "publishedValue": 0.478220574606117
+              }
             },
             "scicode": {
               "z": 56.5972222222222,
               "halfWidth": 0.0,
               "low": 56.5972222222222,
               "high": 56.5972222222222,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.scicode",
+                "publishedValue": 0.565972222222222
+              }
             },
             "critpt": {
               "z": 18.2857142857143,
               "halfWidth": 0.0,
               "low": 18.2857142857143,
               "high": 18.2857142857143,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.critpt",
+                "publishedValue": 0.182857142857143
+              }
             },
             "omniscience": {
               "z": 64.775,
@@ -15419,7 +16290,12 @@
               "hallucinationRate": 0.551762114537445,
               "indexFromRates": 29.550000000000004,
               "unansweredOrPartialShare": 0.2035,
-              "abstentionPenalisedZ": 29.55
+              "abstentionPenalisedZ": 29.55,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=gemini-3-8-flash].model.omniscience",
+                "publishedValue": 29.55
+              }
             }
           },
           "clipAudit": [
@@ -15721,6 +16597,13 @@
         "aaSlug": "claude-opus-5",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -15803,7 +16686,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -15827,7 +16710,12 @@
               "high": 62.5,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Claude Code - Opus 5 (max)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=claude-opus-5].scorePct",
+                "publishedValue": 62.5
+              }
             },
             "bugHunt": {
               "z": 25.714285714285715,
@@ -15837,49 +16725,84 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Opus 5 (max effort)",
               "harness": "Claude Code",
-              "runs": 1
+              "runs": 1,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=claude-opus-5].fixedOf105",
+                "publishedValue": 27.0
+              }
             },
             "gdpval": {
               "z": 61.057500000000005,
               "halfWidth": 0.0,
               "low": 61.057500000000005,
               "high": 61.057500000000005,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5].model.gdpval",
+                "publishedValue": 1721.15
+              }
             },
             "automationBench": {
               "z": 56.57355576493251,
               "halfWidth": 0.0,
               "low": 56.57355576493251,
               "high": 56.57355576493251,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5].model.automationBenchPartialScore",
+                "publishedValue": 0.565735557649325
+              }
             },
             "lcr": {
               "z": 79.3333333333333,
               "halfWidth": 0.0,
               "low": 79.3333333333333,
               "high": 79.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5].model.lcr",
+                "publishedValue": 0.793333333333333
+              }
             },
             "hle": {
               "z": 54.8656163113994,
               "halfWidth": 0.0,
               "low": 54.8656163113994,
               "high": 54.8656163113994,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5].model.hle",
+                "publishedValue": 0.548656163113994
+              }
             },
             "scicode": {
               "z": 56.3657407407407,
               "halfWidth": 0.0,
               "low": 56.3657407407407,
               "high": 56.3657407407407,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5].model.scicode",
+                "publishedValue": 0.563657407407407
+              }
             },
             "critpt": {
               "z": 29.1428571428571,
               "halfWidth": 0.0,
               "low": 29.1428571428571,
               "high": 29.1428571428571,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5].model.critpt",
+                "publishedValue": 0.291428571428571
+              }
             },
             "omniscience": {
               "z": 68.53333333333333,
@@ -15891,7 +16814,12 @@
               "hallucinationRate": 0.6081771720613288,
               "indexFromRates": 37.06666666666667,
               "unansweredOrPartialShare": 0.15333333333333332,
-              "abstentionPenalisedZ": 37.06666666666667
+              "abstentionPenalisedZ": 37.06666666666667,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=claude-opus-5].model.omniscience",
+                "publishedValue": 37.06666666666667
+              }
             }
           },
           "clipAudit": [
@@ -16212,6 +17140,13 @@
         "aaSlug": "glm-5-3",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -16294,7 +17229,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -16318,7 +17253,12 @@
               "high": 61.4,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
-              "agent": "Opencode"
+              "agent": "Opencode",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=glm-5.3].scorePct",
+                "publishedValue": 61.4
+              }
             },
             "bugHunt": {
               "z": 18.095238095238095,
@@ -16328,7 +17268,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "GLM-5.3 (max effort, Z.ai API)",
               "harness": "Claude Code / Z.ai API",
-              "runs": 1
+              "runs": 1,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=glm-5.3].fixedOf105",
+                "publishedValue": 19.0
+              }
             },
             "terminalBench": {
               "z": 41.8,
@@ -16337,56 +17282,96 @@
               "high": 41.849999999999994,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "GLM-5.3 (max)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=GLM-5.3 (max), agent=Claude Code].resolutionRatePct",
+                "publishedValue": 41.8
+              }
             },
             "gdpval": {
               "z": 57.5155,
               "halfWidth": 0.0,
               "low": 57.5155,
               "high": 57.5155,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.gdpval",
+                "publishedValue": 1650.31
+              }
             },
             "frontierCode": {
               "z": 40.0752,
               "halfWidth": 0.0,
               "low": 40.0752,
               "high": 40.0752,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.frontierCode",
+                "publishedValue": 0.400752
+              }
             },
             "automationBench": {
               "z": 62.202864996264196,
               "halfWidth": 0.0,
               "low": 62.202864996264196,
               "high": 62.202864996264196,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.automationBenchPartialScore",
+                "publishedValue": 0.622028649962642
+              }
             },
             "lcr": {
               "z": 79.6666666666667,
               "halfWidth": 0.0,
               "low": 79.6666666666667,
               "high": 79.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.lcr",
+                "publishedValue": 0.796666666666667
+              }
             },
             "hle": {
               "z": 42.2613531047266,
               "halfWidth": 0.0,
               "low": 42.2613531047266,
               "high": 42.2613531047266,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.hle",
+                "publishedValue": 0.422613531047266
+              }
             },
             "scicode": {
               "z": 59.0277777777778,
               "halfWidth": 0.0,
               "low": 59.0277777777778,
               "high": 59.0277777777778,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.scicode",
+                "publishedValue": 0.590277777777778
+              }
             },
             "critpt": {
               "z": 19.1428571428571,
               "halfWidth": 0.0,
               "low": 19.1428571428571,
               "high": 19.1428571428571,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.critpt",
+                "publishedValue": 0.191428571428571
+              }
             },
             "omniscience": {
               "z": 57.15,
@@ -16398,7 +17383,12 @@
               "hallucinationRate": 0.29554043839758126,
               "indexFromRates": 14.3,
               "unansweredOrPartialShare": 0.46599999999999997,
-              "abstentionPenalisedZ": 14.3
+              "abstentionPenalisedZ": 14.3,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=glm-5-3].model.omniscience",
+                "publishedValue": 14.3
+              }
             }
           },
           "clipAudit": [
@@ -16700,6 +17690,13 @@
         "aaSlug": "deepseek-v4-flash",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -16782,7 +17779,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -16806,7 +17803,12 @@
               "high": 54.3,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Codex - DeepSeek V4 Flash 0731 (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=deepseek-v4-flash].scorePct",
+                "publishedValue": 54.3
+              }
             },
             "bugHunt": {
               "z": 20.666666666666668,
@@ -16816,49 +17818,84 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "DeepSeek V4.1 Flash (max effort) - mean of 3",
               "harness": "Claude Code / DeepSeek API",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=deepseek-v4-flash].fixedOf105",
+                "publishedValue": 21.7
+              }
             },
             "gdpval": {
               "z": 46.687,
               "halfWidth": 0.0,
               "low": 46.687,
               "high": 46.687,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-flash].model.gdpval",
+                "publishedValue": 1433.74
+              }
             },
             "automationBench": {
               "z": 53.96771855133674,
               "halfWidth": 0.0,
               "low": 53.96771855133674,
               "high": 53.96771855133674,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-flash].model.automationBenchPartialScore",
+                "publishedValue": 0.5396771855133674
+              }
             },
             "lcr": {
               "z": 79.6666666666667,
               "halfWidth": 0.0,
               "low": 79.6666666666667,
               "high": 79.6666666666667,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-flash].model.lcr",
+                "publishedValue": 0.796666666666667
+              }
             },
             "hle": {
               "z": 38.5542168674699,
               "halfWidth": 0.0,
               "low": 38.5542168674699,
               "high": 38.5542168674699,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-flash].model.hle",
+                "publishedValue": 0.385542168674699
+              }
             },
             "scicode": {
               "z": 50.3472222222222,
               "halfWidth": 0.0,
               "low": 50.3472222222222,
               "high": 50.3472222222222,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-flash].model.scicode",
+                "publishedValue": 0.503472222222222
+              }
             },
             "critpt": {
               "z": 16.5714285714286,
               "halfWidth": 0.0,
               "low": 16.5714285714286,
               "high": 16.5714285714286,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-flash].model.critpt",
+                "publishedValue": 0.165714285714286
+              }
             },
             "omniscience": {
               "z": 42.858333333333334,
@@ -16870,7 +17907,12 @@
               "hallucinationRate": 0.9169695275370422,
               "indexFromRates": -14.283333333333342,
               "unansweredOrPartialShare": 0.049500000000000016,
-              "abstentionPenalisedZ": 0.0
+              "abstentionPenalisedZ": 0.0,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-flash].model.omniscience",
+                "publishedValue": -14.283333333333333
+              }
             }
           },
           "clipAudit": [
@@ -17130,6 +18172,13 @@
         "aaSlug": "qwen3-8-max",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -17212,7 +18261,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -17236,7 +18285,12 @@
               "high": 51.0,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Claude Code - Qwen3.8 Max",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=qwen3.8-max].scorePct",
+                "publishedValue": 51.0
+              }
             },
             "bugHunt": {
               "z": 24.476190476190474,
@@ -17246,7 +18300,12 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "Qwen3.8-Max (max effort, Alibaba API) - mean of 3",
               "harness": "Claude Code / Alibaba API",
-              "runs": 3
+              "runs": 3,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=qwen3.8-max].fixedOf105",
+                "publishedValue": 25.7
+              }
             },
             "terminalBench": {
               "z": 27.0,
@@ -17255,56 +18314,96 @@
               "high": 27.05,
               "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
               "configuration": "Qwen3.8-Max-0902 (max)",
-              "agent": "Claude Code"
+              "agent": "Claude Code",
+              "evidence": {
+                "artifact": "data/tb4.json",
+                "locator": "rows[model=Qwen3.8-Max-0902 (max), agent=Claude Code].resolutionRatePct",
+                "publishedValue": 27.0
+              }
             },
             "gdpval": {
               "z": 58.279,
               "halfWidth": 0.0,
               "low": 58.279,
               "high": 58.279,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.gdpval",
+                "publishedValue": 1665.58
+              }
             },
             "frontierCode": {
               "z": 43.156299999999995,
               "halfWidth": 0.0,
               "low": 43.156299999999995,
               "high": 43.156299999999995,
-              "source": "AA field frontierCode"
+              "source": "AA field frontierCode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.frontierCode",
+                "publishedValue": 0.431563
+              }
             },
             "automationBench": {
               "z": 56.1905381087678,
               "halfWidth": 0.0,
               "low": 56.1905381087678,
               "high": 56.1905381087678,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.automationBenchPartialScore",
+                "publishedValue": 0.561905381087678
+              }
             },
             "lcr": {
               "z": 80.3333333333333,
               "halfWidth": 0.0,
               "low": 80.3333333333333,
               "high": 80.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.lcr",
+                "publishedValue": 0.803333333333333
+              }
             },
             "hle": {
               "z": 43.0954587581094,
               "halfWidth": 0.0,
               "low": 43.0954587581094,
               "high": 43.0954587581094,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.hle",
+                "publishedValue": 0.430954587581094
+              }
             },
             "scicode": {
               "z": 52.0833333333333,
               "halfWidth": 0.0,
               "low": 52.0833333333333,
               "high": 52.0833333333333,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.scicode",
+                "publishedValue": 0.520833333333333
+              }
             },
             "critpt": {
               "z": 17.714285714285698,
               "halfWidth": 0.0,
               "low": 17.714285714285698,
               "high": 17.714285714285698,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.critpt",
+                "publishedValue": 0.177142857142857
+              }
             },
             "omniscience": {
               "z": 55.99166666666667,
@@ -17316,7 +18415,12 @@
               "hallucinationRate": 0.28836301536960235,
               "indexFromRates": 11.983333333333334,
               "unansweredOrPartialShare": 0.48616666666666664,
-              "abstentionPenalisedZ": 11.983333333333333
+              "abstentionPenalisedZ": 11.983333333333333,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=qwen3-8-max].model.omniscience",
+                "publishedValue": 11.983333333333333
+              }
             }
           },
           "clipAudit": [
@@ -17618,6 +18722,13 @@
         "aaSlug": "deepseek-v4-pro",
         "configurationMapped": true,
         "aaCostCaveat": null,
+        "valuation": {
+          "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
+          "valuationSufficiency": "category totals sufficient for AA's published valuation",
+          "providerBillingRule": "not recorded",
+          "tariffCorrectedValuation": "not assessed: provider billing rule not recorded",
+          "tariffAllocationSupport": "unavailable"
+        },
         "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": {
           "status": "set-identified feasible region; M_W not identified",
@@ -17700,7 +18811,7 @@
               "mapping": "inclusive"
             }
           },
-          "identities": "p . d_ie = C_ie for each component; the Index totals bound the sum over all ten Index executions only",
+          "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
           "missingForIdentification": [
             "category-specific burn coefficients for each plan meter",
             "or a controlled measurement on a workload compatible with W"
@@ -17724,7 +18835,12 @@
               "high": 57.2,
               "source": "AA Coding Agent Index, DeepSWE v1.1",
               "configuration": "Codex - DeepSeek V4 Pro 0813 (max)",
-              "agent": "Codex"
+              "agent": "Codex",
+              "evidence": {
+                "artifact": "data/aa_deepswe.json",
+                "locator": "configurations[valueRankModelId=deepseek-v4-pro].scorePct",
+                "publishedValue": 57.2
+              }
             },
             "bugHunt": {
               "z": 15.238095238095237,
@@ -17734,49 +18850,84 @@
               "source": "Bug Hunt Bench owner-published runs",
               "configuration": "DeepSeek V4-Pro (max effort, DeepSeek API)",
               "harness": "Claude Code / DeepSeek API",
-              "runs": 1
+              "runs": 1,
+              "evidence": {
+                "artifact": "data/bug_hunt.json",
+                "locator": "models[modelId=deepseek-v4-pro].fixedOf105",
+                "publishedValue": 16.0
+              }
             },
             "gdpval": {
               "z": 47.5235,
               "halfWidth": 0.0,
               "low": 47.5235,
               "high": 47.5235,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"
+              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-pro].model.gdpval",
+                "publishedValue": 1450.47
+              }
             },
             "automationBench": {
               "z": 56.711655463440025,
               "halfWidth": 0.0,
               "low": 56.711655463440025,
               "high": 56.711655463440025,
-              "source": "AA field automationBenchPartialScore"
+              "source": "AA field automationBenchPartialScore",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-pro].model.automationBenchPartialScore",
+                "publishedValue": 0.5671165546344002
+              }
             },
             "lcr": {
               "z": 80.3333333333333,
               "halfWidth": 0.0,
               "low": 80.3333333333333,
               "high": 80.3333333333333,
-              "source": "AA field lcr"
+              "source": "AA field lcr",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-pro].model.lcr",
+                "publishedValue": 0.803333333333333
+              }
             },
             "hle": {
               "z": 41.0101946246525,
               "halfWidth": 0.0,
               "low": 41.0101946246525,
               "high": 41.0101946246525,
-              "source": "AA field hle"
+              "source": "AA field hle",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-pro].model.hle",
+                "publishedValue": 0.410101946246525
+              }
             },
             "scicode": {
               "z": 51.0416666666667,
               "halfWidth": 0.0,
               "low": 51.0416666666667,
               "high": 51.0416666666667,
-              "source": "AA field scicode"
+              "source": "AA field scicode",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-pro].model.scicode",
+                "publishedValue": 0.510416666666667
+              }
             },
             "critpt": {
               "z": 18.0,
               "halfWidth": 0.0,
               "low": 18.0,
               "high": 18.0,
-              "source": "AA field critpt"
+              "source": "AA field critpt",
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-pro].model.critpt",
+                "publishedValue": 0.18
+              }
             },
             "omniscience": {
               "z": 50.416666666666664,
@@ -17788,7 +18939,12 @@
               "hallucinationRate": 0.9482645710543549,
               "indexFromRates": 0.8333333333333359,
               "unansweredOrPartialShare": 0.02633333333333335,
-              "abstentionPenalisedZ": 0.8333333333333334
+              "abstentionPenalisedZ": 0.8333333333333334,
+              "evidence": {
+                "artifact": "data/aa/aa_v432_snapshot.json",
+                "locator": "pages[model.slug=deepseek-v4-pro].model.omniscience",
+                "publishedValue": 0.8333333333333334
+              }
             }
           },
           "clipAudit": [
@@ -20355,6 +21511,75 @@
         "detail": "scenario input hash matches the scored inputs"
       }
     ],
+    "evidenceBundle": {
+      "artifacts": [
+        {
+          "key": "snapshot",
+          "artifact": "data/aa/aa_v432_snapshot.json",
+          "sha256": "312aa15650c35064d16359de73ed91c236b9bdd8d4561891bc236d024a5c8878",
+          "capturedAt": "2026-10-17T19:25:14Z",
+          "extractor": "valuerank.capture_aa"
+        },
+        {
+          "key": "deepswe",
+          "artifact": "data/aa_deepswe.json",
+          "sha256": "1c7d350ff9069b378ec37c6ee442770200d30c24f5ff32da5622e85b68acdd92",
+          "capturedAt": "2026-10-17T19:26:26Z",
+          "extractor": "valuerank.fetch_deepswe"
+        },
+        {
+          "key": "bugHunt",
+          "artifact": "data/bug_hunt.json",
+          "sha256": "1a13cffc13f53068129011d8a9e0515fec9bc8487f7b39f01764daaefaf1606d",
+          "capturedAt": "2026-10-17",
+          "extractor": "editorial capture of the owner's published results (source commit recorded)"
+        },
+        {
+          "key": "tb4",
+          "artifact": "data/tb4.json",
+          "sha256": "dd29b617afa1c868f0903092167a62d324997a197abfbf63693b36b1e9c6f940",
+          "capturedAt": "2026-10-17T19:25:15Z",
+          "extractor": "scripts/scrape-tb4.js, then valuerank.build_tb4"
+        },
+        {
+          "key": "codingAgents",
+          "artifact": "data/aa/coding_agents_capture.json",
+          "sha256": "944b4082d89e451c9383b662a8b3c4b3c32423d31dca2316a8ff9dc6eca6ca7c",
+          "capturedAt": "2026-10-19T19:31:46Z",
+          "extractor": "valuerank.capture_coding_agents"
+        },
+        {
+          "key": "costCharts",
+          "artifact": "data/aa/cost_charts_capture.json",
+          "sha256": "2e2cd3653c5f2add06595161e3839062e0ce1e989f8f3ba781cdc00814c3b5d3",
+          "capturedAt": "2026-10-19T19:39:55.048Z",
+          "extractor": "scripts/capture-aa-cost-charts.js"
+        },
+        {
+          "key": "configurationMap",
+          "artifact": "data/v3_configuration_map.json",
+          "sha256": "2f2147fb801356a4050394d1747ae81f3d6627979880453ced7a3523031b01f4",
+          "capturedAt": "2026-10-19",
+          "extractor": "editorial pinning from the research capture"
+        },
+        {
+          "key": "planRoutes",
+          "artifact": "data/plan_cost_routes.json",
+          "sha256": "70b6bd160e8d890e867ea4998bf047c1e7acb22726c1cfb7450e1ddacc82a197",
+          "capturedAt": "2026-10-08",
+          "extractor": "editorial Plan evidence registry"
+        },
+        {
+          "key": "anchors",
+          "artifact": "data/v3_frozen.json",
+          "sha256": "64d874243350cd4c13bf054eba812f29176f0ce47b3c4001a882b5029994efcc",
+          "capturedAt": "2026-10-19",
+          "extractor": "valuerank.value_v3 freeze"
+        }
+      ],
+      "bundleHash": "98d6ad04aa8f0340e0ca31f913b15704a8e38a029f1f1f159121a3787eb06401",
+      "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
+    },
     "scenarios": {
       "status": "current",
       "schemaVersion": 1,

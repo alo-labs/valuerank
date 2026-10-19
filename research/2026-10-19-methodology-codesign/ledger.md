@@ -603,3 +603,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 46 (Grok 4.7, round 8, Thinking) — adopted
 - All findings (E156).
+
+## Editor decisions after reviewer 47 (owner may override)
+- E157. Tariff-aware valuation contract (valuation_sufficiency, billing_rule_id, tariff_allocation_support): AA's category-linear valuation is reconcilable from category totals; a banded provider tariff needs band-allocated demand or a request ledger, otherwise tariff-corrected valuation and dependent transport stay unidentified and the displayed AA cost is kept with its caveat. Implemented per row (Claude Haiku 5.5 carries the banded-tariff status from AA's own caveat; other rows "not recorded").
+- E158. Cost boundary: the headline cost is labelled contestant-model API token cost for the basket, not operating cost; per-component boundary matrix with documented exclusions only (verified on AA's methodology page 2026-10-19: AA prices provider-reported token counts; GDP.pdf excludes judge calls, PDF preparation and OCR); no synthetic operating-cost total. Answers Kimi Q1 without escalation: AGENTS.md defines token efficiency as AA's total cost to run the benchmarks, so the claim is limited to contestant-model token spend; extending it would need a new owner decision.
+- E159. Evidence bundle: hashes, capture times and extractors of every input artifact plus the anchor object, a bundle hash, and per-observation artifact locators with the published value; rebuild from the bundle without live pages (already enforced by verify:docs in CI). Answers Kimi Q2 without escalation: the repository already commits the captured payloads and rebuilds offline; the hashes and locators make that auditable per observation.
+
+## Reviewer 47 (Kimi K3, round 8, Thinking) — adopted
+- All findings (E157–E159).

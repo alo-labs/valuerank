@@ -541,3 +541,43 @@ def test_cost_kernels_derive_the_basket_cost_from_component_draws():
     single = {"components": {"scicode": component(100.0), "frontiercode": component(10.0, 0.5)}}
     single["cost"] = basket.row_cost(single["components"], list(single["components"]))
     assert v._cost_kernel(single, 110.0) == v._kernel(109.5, 110.5, 110.0)
+
+
+def test_valuation_contract_and_cost_boundary():
+    """E157/E158: AA's category-linear valuation; banded tariffs leave tariff-corrected valuation unidentified;
+    each component's charge classes, with only documented exclusions."""
+
+    flagged = v.valuation_contract("higher long-context pricing not reflected")
+    assert flagged["tariffCorrectedValuation"].startswith("unidentified") and flagged["providerBillingRule"].startswith("banded")
+    plain = v.valuation_contract(None)
+    assert plain["providerBillingRule"] == "not recorded" and plain["valuationSufficiency"].startswith("category totals sufficient")
+    assert v.cost_boundary("gdp-pdf")["preparation"] == "excluded" and v.cost_boundary("gdp-pdf")["contestantModelTokens"] == "included"
+    assert v.cost_boundary("scicode")["executionEnvironment"] == "unknown"
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    assert output["costBoundary"]["label"].startswith("contestant-model API token cost")
+    assert set(output["costBoundary"]["components"]) == set(result["admitted"])
+    rows = {row["id"]: row for row in output["rows"]}
+    assert rows["a"]["valuation"]["providerBillingRule"].startswith("banded") and rows["b"]["valuation"]["providerBillingRule"] == "not recorded"
+
+
+def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
+    """E159: each artifact's content hash, capture time and extractor; each leaf points to its artifact and field."""
+
+    data = write_world(tmp_path)
+    monkeypatch.setenv("VALUERANK_NOW", "2026-10-19T12:00:00Z")
+    assert v.main(["freeze"], data=data) == 0
+    bundle = v.evidence_bundle(data)
+    assert [item["key"] for item in bundle["artifacts"]] == [*v.EVIDENCE_FILES, "anchors"]
+    snapshot = bundle["artifacts"][0]
+    import hashlib
+    assert snapshot["sha256"] == hashlib.sha256((data / "aa/aa_v432_snapshot.json").read_bytes()).hexdigest()
+    assert snapshot["capturedAt"] is None and bundle["artifacts"][-1]["capturedAt"] == "2026-10-19"
+    assert len(bundle["bundleHash"]) == 64
+    configurations = v.configurations_from_scores(json.loads((data / "scores.json").read_text()))
+    built = v.build(configurations, data, release_day=DAY)
+    assert built["evidenceBundle"]["bundleHash"] == bundle["bundleHash"]
+    leaves = {row["id"]: row["quality"]["leaves"] for row in built["rows"]}
+    assert leaves["a"]["gdpval"]["evidence"] == {"artifact": "data/aa/aa_v432_snapshot.json", "locator": "pages[model.slug=a-max].model.gdpval", "publishedValue": 1500.0}
+    assert leaves["a"]["bugHunt"]["evidence"]["locator"] == "models[modelId=a].fixedOf105"
+    assert leaves["a"]["deepswe"]["evidence"]["artifact"] == "data/aa_deepswe.json"
