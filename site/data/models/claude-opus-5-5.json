@@ -424,7 +424,7 @@
       {
         "stratum": "S1M",
         "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.1667
@@ -466,7 +466,7 @@
       {
         "stratum": "S1M",
         "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "top1": 0.0668,
         "top3": 0.9987,
         "frontier": 0.3038

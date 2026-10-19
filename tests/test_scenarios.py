@@ -49,14 +49,15 @@ def test_stream_target_profiles_are_an_allowlist():
     assert sc.validate_stream([fixed], "S2") == ["identification convention", "specification stress"]
     fitted_interval = RowInputs("c", {"gdpval": Kernel("uniform", (40.0, 44.0), target="expected performance")}, Kernel("fixed", (1.0,)))
     run_range = RowInputs("d", {"terminalBench": Kernel("runs", (30.0, 35.0), target="future-run variation")}, Kernel("fixed", (1.0,)))
+    published_interval = RowInputs("f", {"terminalBench": Kernel("uniform", (56.9, 63.1), target=sc.INTERVAL_RANGE)}, Kernel("fixed", (1.0,)))
     analyst_range = RowInputs("e", {}, Kernel("uniform", (80.0, 120.0), target=sc.SPECIFICATION_STRESS))
     for stratum in sc.STRATA:
-        for row in (fitted_interval, run_range):
-            if stratum == "S1M" and row is fitted_interval:
-                continue  # E162: the named stream for source-documented expected-performance intervals
+        for row in (fitted_interval, run_range, published_interval):
+            if stratum == "S1M" and row is published_interval:
+                continue  # E162/E165: the named stream for conventional draws inside published intervals
             with pytest.raises(ValueError, match="cannot vary"):
                 sc.validate_stream([row], stratum)
-    assert sc.validate_stream([fitted_interval], "S1M") == ["expected performance", "identification convention"]
+    assert sc.validate_stream([published_interval], "S1M") == ["identification convention", "published-interval range (conventional)"]
     for stratum in ("S0", "S1"):
         with pytest.raises(ValueError, match="cannot vary e cost"):
             sc.validate_stream([analyst_range], stratum)
@@ -304,3 +305,15 @@ def test_kernel_robust_label_needs_every_kernel():
     assert never["reading"] == "not scenario-supported"
     itself = sc.kernel_assignments([reference], "ref", "ref")
     assert [item["id"] for item in itself] == ["UUU", "HHU"]  # candidate and reference blocks coincide
+
+
+def test_a_published_interval_supports_expected_performance_only_when_the_source_documents_it():
+    """E165: the permitted label is derived from the interval's documented estimand, method, unit and repeat treatment."""
+
+    documented = {
+        "leaf": "terminalBench", "kernelStatus": "source-derived", "sourceEstimand": "mean task resolution",
+        "sourceIntervalMethod": "task bootstrap", "samplingUnit": "task", "repeatedTaskTreatment": "trials averaged per task",
+    }
+    assert sc.interval_interpretation(documented)["permittedLabel"] == "source-supported expected-performance uncertainty"
+    assert sc.interval_interpretation({**documented, "samplingUnit": sc.NOT_ESTABLISHED})["permittedLabel"].startswith("conventional CI-range sensitivity")
+    assert sc.interval_interpretation({**documented, "kernelStatus": "conventional-within-CI"})["permittedLabel"].startswith("conventional CI-range sensitivity")

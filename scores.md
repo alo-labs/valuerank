@@ -1,115 +1,398 @@
 # ValueRank v2.0.0 Scores
 
-**Updated:** October 19, 2026 · **Cohort:** 19 · **Retained dimensions:** 16 · **Default cost basis:** API Costs (AA total evaluation cost per Index point) · **Cost weight:** 25.00%
+**Updated:** October 19, 2026 · methodology 3.0.0 · SDLC basket v1 · anchor version `v3-2026-10-19`
 
-API Costs uses the AA total evaluation cost in USD divided by the model's AA Intelligence Index (USD per Index point); Plan Costs also divides by the highest eligible subscription Value Multiple. Cost carries a fixed 25.00% of the overall score on both bases. The site switcher recalculates the main rank and cost-based charts using the selected basis.
+Value = 25% × cost score + 75% × quality. Costs are USD per basket run; the cost score is log-scaled against the frozen anchors of the row's workload (see [methodology.md](methodology.md)).
 
-## Final ranking
+## Ranking
 
-| Rank | Model | Overall | Quality | Quality Rank | API cost per Index point (USD, lower better) | Weight coverage | Missing metrics |
-|---:|---|---:|---:|---:|---:|---:|---|
-| 1 | Gemini 4 Argon | 69.5 | 82.6 | 2 | 45.80 | 85.98% (cost + 87/107 quality priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy), Speed |
-| 2 | GPT-6.1 Sol | 65.7 | 71.0 | 5 | 20.87 | 89.49% (cost + 92/107 quality priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 3 | Claude Sonnet 5.5 | 65.0 | 85.4 | 1 | 129.63 | 89.49% (cost + 92/107 quality priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 4 | GPT-6 Astra | 61.0 | 75.2 | 4 | 72.59 | 82.48% (cost + 82/107 quality priority) | DeepSWE v1.1 |
-| 5 | Claude Opus 5.5 | 57.5 | 76.7 | 3 | 151.13 | 89.49% (cost + 92/107 quality priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 6 | GPT-5.6 Sol | 56.8 | 69.8 | 6 | 73.76 | 100.00% (cost + 107/107 quality priority) | none |
-| 7 | MiMo-V2.6-Pro | 54.3 | 42.7 | 10 | 4.46 | 71.96% (cost + 67/107 quality priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy) |
-| 8 | GPT-6 Sol | 54.3 | 59.3 | 8 | 32.24 | 92.99% (cost + 97/107 quality priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 9 | Grok 4.7 | 52.3 | 66.9 | 7 | 106.95 | 92.99% (cost + 97/107 quality priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 10 | GPT-5.6 Luna | 47.1 | 38.6 | 13 | 8.57 | 100.00% (cost + 107/107 quality priority) | none |
-| 11 | GPT-6 Luna | 46.1 | 29.0 | 15 | 3.20 | 92.99% (cost + 97/107 quality priority) | Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 12 | MiMo-V2.6-Flash | 43.4 | 24.5 | 16 | 2.89 | 57.94% (cost + 47/107 quality priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy), Bug Hunt Bench |
-| 13 | Claude Haiku 5.5 | 41.3 | 24.0 | 17 | 3.82 | 89.49% (cost + 92/107 quality priority) | Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 14 | Gemini 3.8 Flash | 39.9 | 42.0 | 11 | 39.65 | 100.00% (cost + 107/107 quality priority) | none |
-| 15 | Claude Opus 5 | 37.0 | 48.9 | 9 | 143.27 | 100.00% (cost + 107/107 quality priority) | none |
-| 16 | GLM-5.3 | 36.9 | 40.8 | 12 | 55.91 | 100.00% (cost + 107/107 quality priority) | none |
-| 17 | DeepSeek V4 Flash | 31.6 | 21.9 | 18 | 13.81 | 100.00% (cost + 107/107 quality priority) | none |
-| 18 | Qwen3.8 Max | 27.2 | 33.5 | 14 | 108.66 | 95.79% (cost + 101/107 quality priority) | Terminal-Bench 4.0 |
-| 19 | DeepSeek V4 Pro | 23.4 | 17.9 | 19 | 31.18 | 95.79% (cost + 101/107 quality priority) | Terminal-Bench 4.0 |
+| Configuration | Plan rank | Plan value | Plan cost score | API rank | API value | API cost score | Quality | Quality coverage | Workload |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 1 | 61.13 | 51.58 | 13 | 51.55 | 13.26 | 64.32 | 100% | main |
+| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 2 | 60.86 | 50.84 | 14 | 51.18 | 12.15 | 64.19 | 100% | main |
+| [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 3 | 59.77 | 55.09 | 2 | 58.08 | 48.32 | 61.33 | 100% | main |
+| [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 4 | 57.00 | 91.94 | 10 | 52.53 | 74.05 | 45.36 | 90% | main |
+| [GPT-6 Astra (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 5 | 56.58 | 34.83 | 8 | 53.82 | 23.81 | 63.82 | 40% | subset |
+| [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 6 | 56.45 | 52.40 | 18 | 46.98 | 14.50 | 57.81 | 80% | main |
+| [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 7 | 56.15 | 49.79 | 9 | 53.79 | 40.34 | 58.28 | 90% | main |
+| [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 8 | 56.14 | 81.33 | 3 | 57.77 | 87.85 | 47.74 | 100% | main |
+| [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 9 | 55.29 | 71.13 | 6 | 55.63 | 72.49 | 50.01 | 90% | main |
+| [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 10 | 55.03 | 41.05 | 12 | 51.57 | 27.17 | 59.70 | 90% | main |
+| [MiMo-V2.6-Flash](https://valuerank.alolabs.dev/models/mimo-v2-6-flash/) | 11 | 53.47 | 58.66 | 1 | 60.91 | 88.43 | 51.74 | 50% | subset |
+| [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 12 | 52.77 | 15.20 | 4 | 56.45 | 29.89 | 65.30 | 90% | main |
+| [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 13 | 50.02 | 49.80 | 5 | 56.28 | 74.86 | 50.09 | 60% | subset |
+| [DeepSeek V4 Flash (max)](https://valuerank.alolabs.dev/models/deepseek-v4-flash/) | 14 | 47.30 | 45.03 | 7 | 54.75 | 74.82 | 48.06 | 80% | main |
+| [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 15 | 45.69 | 32.77 | 11 | 51.59 | 56.36 | 50.00 | 80% | main |
+| [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 16 | 44.54 | 8.06 | 16 | 47.31 | 19.15 | 56.70 | 100% | main |
+| [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 17 | 43.25 | 16.71 | 17 | 47.11 | 32.17 | 52.09 | 100% | main |
+| [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 18 | 43.13 | 21.71 | 15 | 47.62 | 39.70 | 50.26 | 100% | main |
+| [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 19 | 38.42 | 10.54 | 19 | 41.50 | 22.87 | 47.71 | 100% | main |
 
-## Bug Hunt Emphasis Ranking
+## Not ranked
 
-Bug Hunt is included in the main **19-model primary ranking** at **14.02%**. The companion emphasis view uses the same cohort and increases Bug Hunt's weight to **19.23%** by re-ranking the other retained dimensions within those models.
+| Model | Reasons |
+|---|---|
+| Claude Fable 5 | No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Claude Opus 4.8 | No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Claude Sonnet 5 | No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| GLM-5.2 | No eligible exact-model Bug Hunt result in the selected source snapshot; No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| GLM-5.3 Flash | No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| GPT-5.5 | No eligible exact-model Bug Hunt result in the selected source snapshot; No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Gemini 3.5 Flash | No eligible exact-model Bug Hunt result in the selected source snapshot; No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Gemini 3.6 Flash | No eligible exact-model Bug Hunt result in the selected source snapshot; No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Gemini 3.7 Flash | No eligible exact-model Bug Hunt result in the selected source snapshot; No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Grok 4.6 | No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Kimi K3 | No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
+| Muse Spark 1.2 | No exact-variant AA DeepSWE result in the selected source snapshot; Not a required AA frontier or near-frontier family model |
 
-| Bug Hunt rank | Model | Fixed / 105 | Emphasis score | Runs / aggregation | Effort | Harness / route | Primary rank |
-|---:|---|---:|---:|---|---|---|---:|
-| 1 | Gemini 4 Argon | 40.7/105 | 69.0 | n=3 (mean) | high (verified ceiling) | Antigravity CLI / Google | 1 |
-| 2 | GPT-6.1 Sol | 44.3/105 | 68.2 | n=3 (mean) | max (verified first-party tier; below ultra ceiling) | Codex CLI / OpenAI ChatGPT account | 2 |
-| 3 | Claude Sonnet 5.5 | 51.3/105 | 65.7 | n=3 (mean) | max (max) | Claude Code / Anthropic | 3 |
-| 4 | GPT-5.6 Sol | 43.5/105 | 59.3 | n=2 (mean) | max (max) | Codex CLI / OpenAI | 6 |
-| 5 | Claude Opus 5.5 | 41.7/105 | 58.3 | n=3 (mean) | max (max) | Claude Code / Anthropic | 5 |
-| 6 | GPT-6 Sol | 29.3/105 | 55.6 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 8 |
-| 7 | Grok 4.7 | 29/105 | 51.0 | n=5 (mean) | xhigh (verified ceiling) | Grok Build CLI (ACP) / xAI | 9 |
-| 8 | GPT-5.6 Luna | 31.3/105 | 49.7 | n=3 (mean) | max (max) | Codex CLI / OpenAI | 10 |
-| 9 | GPT-6 Luna | 18.3/105 | 45.2 | n=3 (mean) | max (verified ceiling) | Codex CLI / OpenAI | 11 |
-| 10 | Claude Haiku 5.5 | 18.3/105 | 40.7 | n=3 (mean) | xhigh (xhigh) | Claude Code / Anthropic | 13 |
-| 11 | Gemini 3.8 Flash | 18/105 | 38.4 | n=3 (mean) | high (verified ceiling) | Antigravity CLI / Google | 14 |
-| 12 | Claude Opus 5 | 27/105 | 37.5 | n=1 (single) | max (max) | Claude Code / Anthropic | 15 |
-| 13 | GLM-5.3 | 19/105 | 36.2 | n=1 (single) | max (verified setting) | Claude Code / Z.ai API / Z.ai API | 16 |
-| 14 | DeepSeek V4 Flash | 21.7/105 | 32.6 | n=3 (mean) | max (verified ceiling) | Claude Code / DeepSeek API / DeepSeek API | 17 |
-| 15 | Qwen3.8 Max | 25.7/105 | 27.8 | n=3 (mean) | max (verified ceiling) | Claude Code / Alibaba API / Alibaba API | 18 |
-| 16 | DeepSeek V4 Pro | 16/105 | 22.4 | n=1 (single) | max (first-party; effort effect inconclusive) | Claude Code / DeepSeek API / DeepSeek API | 19 |
+## Quality leaf scores
 
-Source: [Bug Hunt Bench](https://bughunt.productcompass.pm/) and the pinned [owner scoreboard](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv) at commit **aec976170df89a371384174ca87646a9a8c82415**. The run configuration details and coverage gaps are in [raw-data.md](raw-data.md).
+Each leaf's score z on its fixed 0–100 anchors; "—" marks a leaf with no eligible exact-configuration result.
 
-## Pareto frontier
+| Configuration | DeepSWE v1.1 | Bug Hunt Bench | AA FrontierCode 1.1 | Terminal-Bench 4.0 (tbench.ai) | GDPval-AA v2.1 | AutomationBench-AA | AA-Omniscience | AA-LCR v1.1 | Humanity's Last Exam | SciCode | CritPt | Quality | Provisional |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Claude Sonnet 5.5 (max) | 72.0 | 48.9 | 45.8 | 61.8 | 66.9 | 71.8 | 66.2 | 82.7 | 55.0 | 61.0 | 31.4 | 64.32 | no |
+| Claude Opus 5.5 (max) | 68.4 | 39.7 | 52.2 | 64.8 | 68.3 | 69.5 | 73.2 | 84.7 | 61.4 | 66.9 | 31.7 | 64.19 | no |
+| GPT-6.1 Sol (max) | 69.6 | 42.2 | 49.1 | 58.2 | 54.7 | 64.9 | 70.8 | 83.0 | 52.9 | 54.2 | 31.7 | 61.33 | no |
+| Claude Haiku 5.5 (xhigh) | 49.0 | 17.4 | 45.5 | — | 50.7 | 36.0 | 53.0 | 78.3 | 42.7 | 51.7 | 22.6 | 45.36 | no |
+| GPT-6 Astra (xhigh) | — | — | — | — | 52.8 | 67.2 | 71.7 | 80.0 | 54.6 | 55.7 | 31.4 | 63.82 | coverage 40% below 70%; 0 SWE leaves observed (need 2); observed SWE weight 0% below 40%; DeepSWE v1.1 missing |
+| Claude Opus 5 (max) | 62.5 | 25.7 | — | — | 61.1 | 56.6 | 68.5 | 79.3 | 54.9 | 56.4 | 29.1 | 57.81 | no |
+| GPT-6 Sol (max) | 69.0 | 27.9 | — | 49.4 | 50.4 | 61.6 | 63.6 | 83.7 | 47.9 | 57.6 | 30.9 | 58.28 | no |
+| GPT-6 Luna (max) | 63.7 | 17.4 | 41.9 | 16.4 | 46.6 | 53.2 | 50.3 | 83.3 | 38.5 | 54.6 | 19.4 | 47.74 | no |
+| GPT-5.6 Luna (max) | 66.4 | 29.8 | — | 17.3 | 48.0 | 50.2 | 44.9 | 83.7 | 39.5 | 53.6 | 20.6 | 50.01 | no |
+| GPT-5.6 Sol (max) | 72.3 | 41.4 | — | 37.3 | 55.4 | 60.1 | 61.0 | 84.0 | 49.5 | 57.1 | 32.3 | 59.70 | no |
+| MiMo-V2.6-Flash | — | — | 42.1 | — | 55.4 | 64.1 | 43.7 | 74.3 | 35.1 | 51.3 | 12.0 | 51.74 | coverage 50% below 70%; 1 SWE leaves observed (need 2); observed SWE weight 10% below 40%; DeepSWE v1.1 missing |
+| Gemini 4 Argon (high) | 78.8 | 38.8 | 43.5 | — | 56.2 | 77.5 | 71.2 | 79.7 | 57.1 | 61.8 | 27.1 | 65.30 | no |
+| MiMo-V2.6-Pro | — | 17.1 | 45.4 | — | 59.2 | 58.6 | 54.2 | 86.3 | 49.4 | 60.9 | 26.6 | 50.09 | coverage 60% below 70%; observed SWE weight 20% below 40%; DeepSWE v1.1 missing |
+| DeepSeek V4 Flash (max) | 54.3 | 20.7 | — | — | 46.7 | 54.0 | 42.9 | 79.7 | 38.6 | 50.3 | 16.6 | 48.06 | no |
+| DeepSeek V4 Pro (max) | 57.2 | 15.2 | — | — | 47.5 | 56.7 | 50.4 | 80.3 | 41.0 | 51.0 | 18.0 | 50.00 | no |
+| Grok 4.7 (xhigh) | 72.6 | 27.6 | 33.8 | 37.6 | 60.6 | 65.6 | 66.0 | 76.7 | 43.1 | 57.4 | 17.7 | 56.70 | no |
+| GLM-5.3 (max) | 61.4 | 18.1 | 40.1 | 41.8 | 57.5 | 62.2 | 57.1 | 79.7 | 42.3 | 59.0 | 19.1 | 52.09 | no |
+| Gemini 3.8 Flash (high) | 65.8 | 17.1 | 36.4 | 19.1 | 46.8 | 59.9 | 64.8 | 81.3 | 47.8 | 56.6 | 18.3 | 50.26 | no |
+| Qwen3.8 Max | 51.0 | 24.5 | 43.2 | 27.0 | 58.3 | 56.2 | 56.0 | 80.3 | 43.1 | 52.1 | 17.7 | 47.71 | no |
 
-Undominated on composite cost versus quality: **GPT-6.1 Sol, GPT-6 Luna, MiMo-V2.6-Pro, MiMo-V2.6-Flash, Claude Sonnet 5.5, Gemini 4 Argon**.
+## Basket cost by component
 
-## Weights
+USD at API rates for the exact configuration; "—" marks a component without an exact cost.
 
-| Dimension | Weight | Direction |
-|---|---:|---|
-| Cost | 25.00% | lower |
-| Non-Hallucination | 4.21% | higher |
-| [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | 4.21% | higher |
-| Instruction Following (LiveBench) | 3.50% | higher |
-| DeepSWE v1.1 | 17.52% | higher |
-| [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | 4.21% | higher |
-| [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | 3.50% | higher |
-| [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 2.80% | higher |
-| [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 2.80% | higher |
-| [HLE](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 2.80% | higher |
-| [GPQA Diamond (legacy)](https://artificialanalysis.ai/evaluations/gpqa-diamond) | 2.80% | higher |
-| [SciCode](https://artificialanalysis.ai/evaluations/scicode) | 2.80% | higher |
-| [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 2.10% | higher |
-| [AA Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) | 4.21% | higher |
-| Speed | 3.50% | higher |
-| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | 14.02% | higher |
+| Configuration | Coding Agent Index | FrontierCode | ITBench-AA | AA-Briefcase | GDPval-AA | GDP.pdf | AutomationBench-AA | Terminal-Bench 4.0 (AA Index run) | SciCode | AA-LCR | Basket cost | Missing admitted components |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Claude Sonnet 5.5 (max) | $4,299.81 | $826.00 | — | $1,863.13 | $1,504.30 | $79.43 | $678.32 | $834.67 | $80.07 | $33.93 | $9,373.65 | none |
+| Claude Opus 5.5 (max) | $3,950.02 | $1,015.00 | $146.00 | $1,915.18 | $1,962.05 | $155.23 | $938.69 | $865.21 | $135.11 | $67.66 | $9,989.15 | none |
+| GPT-6.1 Sol (max) | $470.90 | $81.00 | — | $210.45 | $196.57 | $41.99 | $195.01 | $120.30 | $12.50 | $19.94 | $1,267.66 | none |
+| Claude Haiku 5.5 (xhigh) | $184.98 | $16.00 | — | $33.29 | $20.26 | $2.73 | $18.14 | $30.38 | $0.77 | $1.53 | $292.07 | none |
+| GPT-6 Astra (xhigh) | — | — | — | $597.28 | $668.39 | $191.27 | $924.00 | $386.46 | $35.03 | $96.99 | $2,899.42 | Coding Agent Index |
+| Claude Opus 5 (max) | $3,269.11 | — | — | $1,619.19 | $1,488.52 | $108.57 | $864.64 | $1,273.08 | $33.90 | $76.11 | $8,733.13 | none |
+| GPT-6 Sol (max) | $905.89 | — | $38.00 | $238.81 | $280.84 | $42.54 | $235.06 | $264.22 | $12.24 | $19.82 | $1,999.41 | none |
+| GPT-6 Luna (max) | $53.30 | $9.00 | — | $15.47 | $19.66 | $2.85 | $23.91 | $15.59 | $1.06 | $1.02 | $132.87 | none |
+| GPT-5.6 Luna (max) | $132.72 | — | — | $35.95 | $24.18 | $5.68 | $59.91 | $56.06 | $2.67 | $2.09 | $319.25 | none |
+| GPT-5.6 Sol (max) | $1,925.06 | — | $106.00 | $365.84 | $618.22 | $92.85 | $638.90 | $534.15 | $22.95 | $40.16 | $4,238.14 | none |
+| MiMo-V2.6-Flash | — | — | — | $13.81 | $16.10 | $2.01 | $10.94 | $15.19 | $0.81 | $1.51 | $60.37 | Coding Agent Index |
+| Gemini 4 Argon (high) | $1,770.70 | $670.00 | — | $530.33 | $400.23 | $25.93 | $399.89 | $447.49 | $30.44 | $23.64 | $3,628.64 | none |
+| MiMo-V2.6-Pro | — | $18.00 | — | $34.60 | $35.47 | $2.40 | $27.77 | $28.91 | $2.25 | $4.74 | $136.13 | Coding Agent Index |
+| DeepSeek V4 Flash (max) | $25.77 | — | — | $38.53 | $63.77 | $4.66 | $69.22 | $60.65 | $12.16 | $4.76 | $279.51 | none |
+| DeepSeek V4 Pro (max) | $72.13 | — | — | $90.59 | $127.70 | $11.00 | $223.87 | $247.85 | $14.47 | $13.89 | $801.50 | none |
+| Grok 4.7 (xhigh) | $2,671.69 | $1,131.00 | $203.00 | $846.62 | $1,415.17 | $32.43 | $707.44 | $963.85 | $38.30 | $24.51 | $6,700.02 | none |
+| GLM-5.3 (max) | $1,285.14 | $432.00 | $91.00 | $514.04 | $496.54 | $17.34 | $302.51 | $532.24 | $23.62 | $14.86 | $3,186.29 | none |
+| Gemini 3.8 Flash (high) | $747.62 | $372.00 | $86.00 | $245.87 | $372.82 | $10.90 | $278.70 | $385.54 | $22.12 | $9.88 | $2,073.44 | none |
+| Qwen3.8 Max | $1,054.13 | $675.00 | $327.00 | $1,781.49 | $998.39 | $33.31 | $261.64 | $1,232.62 | $32.57 | $22.88 | $5,417.03 | none |
 
-## Normalized dimension matrix
+## Plan route selection
 
-Dimension order is the order in weights above:
+| Configuration | Selected route | Identification | Plan cost (USD per basket run) | Flags | Selection reason |
+|---|---|---|---:|---|---|
+| Claude Sonnet 5.5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | unidentified | $159.15 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| Claude Opus 5.5 (max) | Claude Pro $20 · Opus 5.5 (58.9×, measured) | unidentified | $169.60 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6.1 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | unidentified | $117.68 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| Claude Haiku 5.5 (xhigh) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | unidentified | $4.96 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Astra (xhigh) | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | unidentified | $357.95 | workload-unmatched; valuation basis unverified | higher evidence grade |
+| Claude Opus 5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | unidentified | $148.27 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $185.61 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $12.33 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-5.6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $29.64 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-5.6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $393.44 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| MiMo-V2.6-Flash | MiMo · provisional 1.5x assumption (1.5×, assumption) | unidentified | $40.25 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | only remaining eligible route |
+| Gemini 4 Argon (high) | — | — | $3,628.64 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| MiMo-V2.6-Pro | MiMo · provisional 1.5x assumption (1.5×, assumption) | unidentified | $90.75 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | only remaining eligible route |
+| DeepSeek V4 Flash (max) | — | — | $279.51 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| DeepSeek V4 Pro (max) | — | — | $801.50 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| Grok 4.7 (xhigh) | — | — | $6,700.02 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| GLM-5.3 (max) | — | — | $3,186.29 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| Gemini 3.8 Flash (high) | — | — | $2,073.44 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| Qwen3.8 Max | — | — | $5,417.03 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
 
-[costComposite, omniNonHallucination, terminalBenchV4, livebenchInstructionFollowing, deepswePassAt1, gdpvalV21, automationBenchAA, aaLcr, omniAccuracy, hle, gpqaDiamond, scicode, critpt, intelligenceIndex, speed, bugHuntFixedOf105]
+### Measured-only Plan view
 
-| Rank | Model | Normalized dimensions |
-|---:|---|---|
-| 1 | Gemini 4 Argon | [30.2, 100.0, ⊘, ⊘, 100.0, 61.1, 100.0, 27.8, 55.6, 94.4, ⊘, 94.4, 61.1, 88.9, ⊘, 70.6] |
-| 2 | GPT-6.1 Sol | [50.0, 55.6, ⊘, ⊘, 73.3, 44.4, 72.2, 66.7, 94.4, 72.2, ⊘, 33.3, 91.7, 80.6, 29.4, 88.2] |
-| 3 | Claude Sonnet 5.5 | [3.9, 66.7, ⊘, ⊘, 80.0, 94.4, 94.4, 61.1, 61.1, 88.9, ⊘, 88.9, 80.6, 94.4, 82.4, 100.0] |
-| 4 | GPT-6 Astra | [18.5, 61.1, 100.0, 90.9, ⊘, 38.9, 83.3, 38.9, 88.9, 77.8, 100.0, 44.4, 80.6, 80.6, 17.6, 94.1] |
-| 5 | Claude Opus 5.5 | [0.0, 38.9, ⊘, ⊘, 60.0, 100.0, 88.9, 94.4, 100.0, 100.0, ⊘, 100.0, 91.7, 100.0, 58.8, 76.5] |
-| 6 | GPT-5.6 Sol | [18.1, 11.1, 50.0, 63.6, 86.7, 55.6, 50.0, 88.9, 77.8, 66.7, 75.0, 61.1, 100.0, 61.1, 47.1, 82.4] |
-| 7 | MiMo-V2.6-Pro | [89.0, 77.8, ⊘, ⊘, ⊘, 77.8, 38.9, 100.0, 16.7, 61.1, ⊘, 83.3, 55.6, 52.8, 5.9, 8.8] |
-| 8 | GPT-6 Sol | [39.0, 33.3, ⊘, 45.5, 66.7, 27.8, 55.6, 80.6, 66.7, 55.6, ⊘, 72.2, 72.2, 66.7, 64.7, 58.8] |
-| 9 | Grok 4.7 | [8.7, 88.9, ⊘, 81.8, 93.3, 83.3, 77.8, 5.6, 44.4, 44.4, ⊘, 66.7, 13.9, 52.8, 52.9, 52.9] |
-| 10 | GPT-5.6 Luna | [72.5, 5.6, 0.0, 9.1, 53.3, 22.2, 5.6, 80.6, 33.3, 16.7, 12.5, 27.8, 44.4, 11.1, 76.5, 64.7] |
-| 11 | GPT-6 Luna | [97.4, 22.2, ⊘, 0.0, 40.0, 0.0, 11.1, 72.2, 38.9, 5.6, ⊘, 38.9, 38.9, 19.4, 70.6, 20.6] |
-| 12 | MiMo-V2.6-Flash | [100.0, 50.0, ⊘, ⊘, ⊘, 50.0, 66.7, 0.0, 0.0, 0.0, ⊘, 11.1, 0.0, 19.4, 11.8, ⊘] |
-| 13 | Claude Haiku 5.5 | [93.0, 72.2, ⊘, ⊘, 0.0, 33.3, 0.0, 11.1, 22.2, 33.3, ⊘, 16.7, 50.0, 30.6, 100.0, 20.6] |
-| 14 | Gemini 3.8 Flash | [33.8, 44.4, 16.7, 100.0, 46.7, 11.1, 44.4, 55.6, 72.2, 50.0, 87.5, 55.6, 27.8, 30.6, 88.2, 8.8] |
-| 15 | Claude Opus 5 | [1.3, 27.8, 83.3, 36.4, 33.3, 88.9, 27.8, 16.7, 83.3, 83.3, 62.5, 50.0, 66.7, 72.2, 23.5, 47.1] |
-| 16 | GLM-5.3 | [25.1, 83.3, 66.7, 54.5, 26.7, 66.7, 61.1, 27.8, 11.1, 27.8, 25.0, 77.8, 33.3, 41.7, 41.2, 29.4] |
-| 17 | DeepSeek V4 Flash | [60.5, 16.7, 33.3, 27.3, 13.3, 5.6, 16.7, 27.8, 27.8, 11.1, 0.0, 0.0, 5.6, 0.0, 94.1, 35.3] |
-| 18 | Qwen3.8 Max | [8.3, 94.4, ⊘, 72.7, 6.7, 72.2, 22.2, 47.2, 5.6, 38.9, 43.8, 22.2, 13.9, 41.7, 0.0, 41.2] |
-| 19 | DeepSeek V4 Pro | [39.9, 0.0, ⊘, 18.2, 20.0, 16.7, 33.3, 47.2, 50.0, 22.2, 43.8, 5.6, 22.2, 5.6, 35.3, 0.0] |
+Admission: exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics). Selection: the official selector (E111, E88, E85) rerun among the admitted candidates. Panel: rows with an admitted measured candidate; others listed as 'no measured route' (no API fallback).
 
-## Coverage decision
+| Configuration | Status | Route | Plan cost | Value | Rank |
+|---|---|---|---:|---:|---:|
+| Claude Opus 5.5 (max) | measured, target-workload unmatched | claude-pro-opus55-semianalysis | $169.60 | 60.86 | 1 |
+| GPT-6.1 Sol (max) | measured, target-workload unmatched | chatgpt-pro500-common-semianalysis-assumption | $117.68 | 59.77 | 2 |
+| GPT-6 Astra (xhigh) | measured, target-workload unmatched | chatgpt-plus-common-semianalysis-assumption | $357.95 | 56.58 | 3 |
+| Claude Haiku 5.5 (xhigh) | no measured route | — | — | — | — |
+| Claude Opus 5 (max) | no measured route | — | — | — | — |
+| Claude Sonnet 5.5 (max) | no measured route | — | — | — | — |
+| DeepSeek V4 Flash (max) | no measured route | — | — | — | — |
+| DeepSeek V4 Pro (max) | no measured route | — | — | — | — |
+| GLM-5.3 (max) | no measured route | — | — | — | — |
+| GPT-5.6 Luna (max) | no measured route | — | — | — | — |
+| GPT-5.6 Sol (max) | no measured route | — | — | — | — |
+| GPT-6 Luna (max) | no measured route | — | — | — | — |
+| GPT-6 Sol (max) | no measured route | — | — | — | — |
+| Gemini 3.8 Flash (high) | no measured route | — | — | — | — |
+| Gemini 4 Argon (high) | no measured route | — | — | — | — |
+| Grok 4.7 (xhigh) | no measured route | — | — | — | — |
+| MiMo-V2.6-Flash | no measured route | — | — | — | — |
+| MiMo-V2.6-Pro | no measured route | — | — | — | — |
+| Qwen3.8 Max | no measured route | — | — | — | — |
 
-The current AA Intelligence Index score-versus-total-benchmark-cost frontier, and its near-frontier families, are reconciled into the selected catalog (see Model inclusion in methodology.md). The primary rank gives cost per Index point a fixed 25.00% share, uses each model's available exact-version quality values and renormalizes its retained quality priorities per row; the ranking table reports the weight-coverage percentage and missing metric names. 12 source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
+#### Measured-evidence calibration (diagnostic)
 
-## External benchmark coverage
+References: each workload's measured-only rows with complete cost evidence are the references: c_L = cheapest / 2, c_H = dearest x 2 (diagnostic only; the official anchors are unchanged). Status: evaluated.
 
-[Artificial Analysis Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) provides the current AA component scores used by this release. [LiveBench](https://livebench.ai/) Instruction Following contributes for rows with an eligible value; its Overall Score and Cost Per Successful Task remain supplemental. [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) remains supplemental under this release's dimension-selection policy. See [raw-data.md](raw-data.md) for source-backed tables.
+- Workload `9a0d376cc6080f3c`: measured anchors $58.84 to $339.19 from Claude Opus 5.5 (max), GPT-6.1 Sol (max); anchor ratio 5.8 against the official 5404.5. Official Plan anchors are set by Claude Haiku 5.5 (xhigh) (owner-named transfer) at the low end and Grok 4.7 (xhigh) (API-cost fallback) at the high end.
+- Workload `1453a9a0576b02ea`: measured-evidence calibration unavailable (fewer than two measured references); measured rows GPT-6 Astra (xhigh). Official Plan anchors are set by Claude Haiku 5.5 (xhigh) (owner-named transfer) at the low end and Qwen3.8 Max (API-cost fallback) at the high end.
+
+| Configuration | Value on official Plan anchors | Value on measured anchors | Rank change |
+|---|---:|---:|---:|
+| Claude Opus 5.5 (max) | 60.86 | 58.04 | 1 |
+| GPT-6.1 Sol (max) | 59.77 | 61.10 | -1 |
+
+Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 2.82 points.
+
+## Interval outputs
+
+**API basis, main workload: frontier.** Not evaluable: GPT-6 Astra (xhigh), MiMo-V2.6-Flash, MiMo-V2.6-Pro.
+
+| Configuration | Possible frontier | Definite frontier | Definite counterexample | Possible frontier blocked by |
+|---|---|---|---|---|
+| Gemini 4 Argon (high) | certified | disproved | GPT-6.1 Sol (max) | — |
+| GPT-6.1 Sol (max) | certified | certified | — | — |
+| Claude Sonnet 5.5 (max) | certified | disproved | Gemini 4 Argon (high) | — |
+| Claude Opus 5.5 (max) | disproved | disproved | Gemini 4 Argon (high) | Claude Sonnet 5.5 (max) |
+| GPT-5.6 Sol (max) | certified | disproved | Gemini 4 Argon (high) | — |
+| GPT-6 Sol (max) | certified | disproved | GPT-6.1 Sol (max) | — |
+| Grok 4.7 (xhigh) | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max) |
+| GPT-5.6 Luna (max) | certified | disproved | GPT-6 Luna (max) | — |
+| GPT-6 Luna (max) | certified | certified | — | — |
+| Claude Haiku 5.5 (xhigh) | certified | disproved | GPT-6 Luna (max) | — |
+| Gemini 3.8 Flash (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Sol (max) |
+| Claude Opus 5 (max) | certified | disproved | Gemini 4 Argon (high) | — |
+| GLM-5.3 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Sol (max) |
+| DeepSeek V4 Flash (max) | certified | disproved | GPT-6 Luna (max) | — |
+| Qwen3.8 Max | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-6 Luna (max), Gemini 3.8 Flash (high), GLM-5.3 (max) |
+| DeepSeek V4 Pro (max) | certified | disproved | GPT-5.6 Luna (max) | — |
+
+**API basis: cheapest at or above GPT-6 Luna (max)'s quality** (median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)). Status certified; confirmed cheapest: GPT-6 Luna (max).
+
+| Configuration | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---|---|---|
+| Gemini 4 Argon (high) | certified | certified | disproved |
+| GPT-6.1 Sol (max) | certified | certified | disproved |
+| Claude Sonnet 5.5 (max) | certified | certified | disproved |
+| Claude Opus 5.5 (max) | certified | certified | disproved |
+| GPT-5.6 Sol (max) | certified | certified | disproved |
+| GPT-6 Sol (max) | certified | certified | disproved |
+| Grok 4.7 (xhigh) | certified | certified | disproved |
+| GPT-5.6 Luna (max) | disproved | certified | disproved |
+| GPT-6 Luna (max) | certified | certified | certified |
+| Claude Haiku 5.5 (xhigh) | disproved | certified | disproved |
+| Gemini 3.8 Flash (high) | certified | certified | disproved |
+| Claude Opus 5 (max) | disproved | certified | disproved |
+| GLM-5.3 (max) | certified | certified | disproved |
+| DeepSeek V4 Flash (max) | disproved | certified | disproved |
+| Qwen3.8 Max | disproved | disproved | disproved |
+| DeepSeek V4 Pro (max) | disproved | certified | disproved |
+
+**Plan basis:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
+
+## Scenario shares
+
+Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined in [methodology.md](methodology.md#uncertainty-outputs).
+
+### API basis: rank 1
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.8% | 0.0% | 0.0% |
+| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4 Flash (max) | 0.0% | 17.1% | 14.3% | 20.1% | 16.4% |
+| DeepSeek V4 Pro (max) | 0.0% | 0.6% | 1.4% | 2.5% | 0.6% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 9.8% | 8.7% | 15.6% | 9.6% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | 14.7% | 12.2% | 21.0% | 14.8% |
+| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 25.6% | 0.0% | 2.4% |
+| GPT-6 Sol (max) | 0.0% | 0.0% | 0.4% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) | 100.0% | 57.8% | 36.6% | 40.8% | 56.1% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+### API basis: rank 3 or better
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 0.0% | 3.7% | 6.9% | 4.5% | 3.7% |
+| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4 Flash (max) | 0.0% | 31.3% | 31.3% | 30.5% | 31.3% |
+| DeepSeek V4 Pro (max) | 0.0% | 4.9% | 5.9% | 8.7% | 4.2% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 100.0% | 30.2% | 30.3% | 34.5% | 30.4% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | 36.7% | 35.6% | 39.0% | 36.5% |
+| GPT-5.6 Sol (max) | 0.0% | 0.2% | 0.3% | 0.5% | 0.2% |
+| GPT-6 Luna (max) | 100.0% | 88.7% | 88.0% | 78.7% | 89.5% |
+| GPT-6 Sol (max) | 0.0% | 4.9% | 6.2% | 5.8% | 5.1% |
+| GPT-6.1 Sol (max) | 100.0% | 99.5% | 95.5% | 97.8% | 99.1% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+### API basis: on the frontier
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 0.0% | 18.0% | 15.3% | 23.0% | 17.8% |
+| Claude Opus 5 (max) | 0.0% | 4.5% | 4.9% | 7.7% | 4.6% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 20.9% | 0.0% | 16.7% |
+| Claude Sonnet 5.5 (max) | 0.0% | 55.3% | 50.3% | 49.8% | 54.0% |
+| DeepSeek V4 Flash (max) | 100.0% | 57.5% | 54.4% | 56.9% | 57.5% |
+| DeepSeek V4 Pro (max) | 1.0% | 37.4% | 36.3% | 36.1% | 37.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 100.0% | 73.8% | 75.4% | 65.2% | 73.8% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 100.0% | 50.5% | 50.3% | 45.9% | 50.0% |
+| GPT-5.6 Sol (max) | 0.0% | 8.8% | 8.4% | 14.4% | 8.3% |
+| GPT-6 Luna (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6 Sol (max) | 0.0% | 11.5% | 11.2% | 21.9% | 11.6% |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 99.3% | 100.0% | 100.0% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+### Plan basis: rank 1
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 5.4% | 0.0% | 0.5% |
+| Claude Opus 5 (max) | 0.0% | 2.2% | 3.0% | 6.9% | 2.6% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 18.4% | 0.0% | 6.7% |
+| Claude Sonnet 5.5 (max) | 100.0% | 97.8% | 71.5% | 93.1% | 90.2% |
+| DeepSeek V4 Flash (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | 0.0% | 1.0% | 0.0% | 0.0% |
+| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Sol (max) | 0.0% | 0.0% | 0.6% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+### Plan basis: rank 3 or better
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 0.0% | 17.1% | 15.1% | 25.3% | 17.0% |
+| Claude Opus 5 (max) | 0.0% | 7.7% | 7.4% | 12.5% | 7.4% |
+| Claude Opus 5.5 (max) | 100.0% | 99.9% | 99.4% | 99.0% | 99.9% |
+| Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 99.4% | 100.0% | 100.0% |
+| DeepSeek V4 Flash (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | 0.0% | 3.5% | 0.0% | 0.0% |
+| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.5% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Sol (max) | 0.0% | 0.0% | 2.4% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) | 100.0% | 75.3% | 72.2% | 63.2% | 75.7% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+### Plan basis: on the frontier
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Claude Opus 5 (max) | 0.0% | 12.2% | 11.8% | 17.5% | 12.2% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 38.1% | 0.0% | 30.4% |
+| Claude Sonnet 5.5 (max) | 100.0% | 98.5% | 97.0% | 94.0% | 97.9% |
+| DeepSeek V4 Flash (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 100.0% | 43.8% | 42.5% | 46.5% | 44.1% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 100.0% | 68.3% | 67.8% | 60.0% | 67.8% |
+| GPT-5.6 Sol (max) | 0.0% | 0.0% | 3.5% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 100.0% | 68.6% | 73.1% | 63.1% | 68.6% |
+| GPT-6 Sol (max) | 0.0% | 0.0% | 1.1% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+### Cheapest-above-the-bar labels (API basis)
+
+Each kernel assignment code gives the kernel used for the candidate, the reference and the competitors, in that order (U uniform, H endpoint-heavy); the label needs every assignment met.
+
+| Bar | Candidate | Reading | Frequency range | Kernel assignments | Label |
+|---|---|---|---|---|---|
+| GPT-6 Luna (max) | GPT-6 Luna (max) | supported under all registered role-group kernel checks | 100.0% to 100.0% | UUU met, UUH met, HHU met, HHH met | yes |
+
+## Diagnostics
+
+- **Terminal-Bench same-harness (Terminus 2):** undefined (panel too small); 11 rows ran on mixed harnesses.
+- **Quality agreement:** quality agreement (matched-panel sensitivity): defined, Kendall tau 0.85 (interval 0.48 to 1.00) on 11 rows.
+- **Quality source shares:** AA-run 80%, independent 20%.
+- **Non-discriminating leaves:** lcr.
+- **Group drift:** estimated; flagged: none.
+- **Omniscience abstention sensitivity** (z_pen = max(0, I)): 15 rows move; largest move 5 (Claude Opus 5.5 (max)).
+- **Anchor stability:** trimmed anchors (P10 / 2 and P90 x 2 (diagnostic only)) give $142.90 to $18,106.78; 9 rows move; largest move 2 (Gemini 4 Argon (high)).
+
+### Deletion sensitivity
+
+| Branch | Retained nominal weight | Status | API rank changes | Plan rank changes |
+|---|---:|---|---|---|
+| leave-out:deepswe | 70% | evaluated | 17 rows move; largest move 5 (Claude Opus 5.5 (max), GPT-5.6 Luna (max)) | 12 rows move; largest move 4 (MiMo-V2.6-Flash) |
+| leave-out:bugHunt | 90% | evaluated | 14 rows move; largest move 4 (MiMo-V2.6-Pro) | 12 rows move; largest move 5 (GPT-6 Astra (xhigh)) |
+| leave-out:frontierCode | 90% | evaluated | 9 rows move; largest move 3 (Claude Sonnet 5.5 (max)) | 10 rows move; largest move 3 (GPT-6 Luna (max)) |
+| leave-out:terminalBench | 90% | evaluated | 11 rows move; largest move 3 (GPT-5.6 Luna (max)) | 11 rows move; largest move 4 (Claude Opus 5 (max), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Astra (xhigh), GPT-6 Luna (max)) |
+| leave-out:gdpval | 90% | evaluated | 5 rows move; largest move 3 (GPT-6 Astra (xhigh)) | 9 rows move; largest move 2 (Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), GPT-6 Sol (max)) |
+| leave-out:automationBench | 90% | evaluated | 13 rows move; largest move 3 (Claude Opus 5 (max)) | 5 rows move; largest move 2 (GPT-6 Astra (xhigh)) |
+| leave-out:omniscience | 90% | evaluated | 9 rows move; largest move 2 (Gemini 3.8 Flash (high), GLM-5.3 (max), GPT-5.6 Luna (max)) | 5 rows move; largest move 6 (GPT-6 Astra (xhigh)) |
+| leave-out:lcr | 95% | evaluated | 9 rows move; largest move 3 (DeepSeek V4 Pro (max)) | 7 rows move; largest move 2 (GPT-6 Astra (xhigh)) |
+| leave-out:hle | 98% | evaluated | no rank changes | no rank changes |
+| leave-out:scicode | 98% | evaluated | 3 rows move; largest move 2 (DeepSeek V4 Pro (max)) | no rank changes |
+| leave-out:critpt | 98% | evaluated | 2 rows move; largest move 1 (Claude Sonnet 5.5 (max), GPT-5.6 Sol (max)) | 2 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), GPT-6 Astra (xhigh)) |
+| leave-source-out:Artificial Analysis | 20% | not identifiable under the coverage rule | — | — |
+
+### Cost-component removal (Terminal-Bench 4.0 (AA Index run): evaluated)
+
+| Basis | Run | Rank changes |
+|---|---|---|
+| api | cost-component removal, original anchors | 2 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), DeepSeek V4 Pro (max)) |
+| api | alternative workload, recalibrated anchors | 2 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), DeepSeek V4 Pro (max)) |
+| plan | cost-component removal, original anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | no rank changes |
+| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | no rank changes |
+
+## Release gates
+
+| Rule | Status | Detail |
+|---|---|---|
+| clip gate (E20) | passed | no basis exceeds the clipping allowance |
+| cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
+| quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
+| subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
+| partial component flag (E37) | vacuous | AA declined- or missing-task markers |
+| route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
+| Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
+| score swing gate (> 5 points without cause) | vacuous | first v3 release: no previous v3 release to compare |
+| configuration map coverage | passed | every cohort row has a pinned identity |
+| quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
+| scenario outputs current (E72) | passed | scenario input hash matches the scored inputs |

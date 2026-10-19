@@ -7,9 +7,11 @@ import runpy
 import sys
 from datetime import date
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
+from valuerank import anchors as anchor_math
 from valuerank import basket
 from valuerank import diagnostics
 from valuerank import quality as q
@@ -620,7 +622,7 @@ def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
 
 
 def test_measurement_stream_draws_the_published_confidence_interval():
-    """E162: Terminal-Bench's documented 95% CI enters only the S1M panel, clipped to the leaf's domain."""
+    """E162/E165: Terminal-Bench's documented 95% CI enters only the S1M panel, clipped to the leaf's domain, as a conventional range."""
 
     result, frozen = scored()
     rows = {row["id"]: row for row in result["rows"]}
@@ -632,9 +634,68 @@ def test_measurement_stream_draws_the_published_confidence_interval():
     measured = {item.row: item for item in v.scenario_panel(result, "api", measurement=True)}
     assert plain["a"].leaves["terminalBench"].target == "reporting precision"
     kernel = measured["a"].leaves["terminalBench"]
-    assert kernel.params == pytest.approx((56.9, 63.1)) and kernel.target == "expected performance" and kernel.alternative == "endpoint-heavy"
+    assert kernel.params == pytest.approx((56.9, 63.1)) and kernel.target == "published-interval range (conventional)" and kernel.alternative == "endpoint-heavy"
     assert measured["b"].leaves["terminalBench"].params == pytest.approx((95.9, 100.0))
     assert measured["a"].leaves["deepswe"] == plain["a"].leaves["deepswe"]
     document = v.run_scenarios(result, frozen, n=50, seed=3)
     s1m = document["results"]["api"][-1]
-    assert s1m["stratum"] == "S1M" and s1m["variedTargets"] == ["expected performance", "identification convention", "reporting precision"]
+    assert s1m["stratum"] == "S1M" and s1m["variedTargets"] == ["identification convention", "published-interval range (conventional)", "reporting precision"]
+    interpretation = document["intervalInterpretation"]["S1M"][0]
+    assert interpretation["leaf"] == "terminalBench" and interpretation["kernelStatus"] == "conventional-within-CI"
+    assert interpretation["permittedLabel"] == "conventional CI-range sensitivity (endpoint-conditioned; no tail model)"
+
+
+def calibration_row(row_id, workload, quality, *, partial=(), fallback=None, grade="controlled"):
+    return {
+        "id": row_id,
+        "cost": {"workload": workload, "partialComponents": list(partial)},
+        "plan": {"fallback": fallback, "grade": grade},
+        "summary": SimpleNamespace(displayed=quality),
+    }
+
+
+def test_measured_calibration_rescores_measured_rows_on_measured_anchors():
+    """E164: holding rows, routes, costs and quality fixed, measured-evidence anchors expose the calibration effect."""
+
+    official = anchor_math.anchor_object({"cheap": 5.0, "dear": 4000.0, "x": 10.0, "gone": 50.0}, basis="plan", workload="w1")
+    frozen = {"workloads": {"w1": {"anchors": {"plan": official}}, "w2": {"anchors": {"plan": None}}}}
+    rows = [
+        calibration_row("x", "w1", 60.0),
+        calibration_row("y", "w1", 70.0),
+        calibration_row("p", "w1", 65.0, partial=["gdp-pdf"]),
+        calibration_row("q", "w1", None),
+        calibration_row("cheap", "w1", 40.0, grade="assumption"),
+        calibration_row("dear", "w1", 50.0, fallback="api"),
+        calibration_row("lone", "w2", 55.0),
+    ]
+    entries = {}
+    for row_id, cost in (("x", 10.0), ("y", 40.0), ("p", 20.0), ("q", 30.0), ("lone", 12.0)):
+        anchors = official if row_id != "lone" else None
+        score = anchor_math.cost_score(cost, anchors) if anchors else None
+        quality = next(row for row in rows if row["id"] == row_id)["summary"].displayed
+        entries[row_id] = {"status": "measured, target-workload unmatched", "costUsd": cost, "costScore": score, "value": anchor_math.value_score(score, quality, v.BETA)}
+    entries["cheap"] = entries["dear"] = {"status": "no measured route"}
+    result = v._measured_calibration(rows, frozen, entries)
+    w1, w2 = result["workloads"]["w1"], result["workloads"]["w2"]
+    assert result["status"] == "evaluated" and w1["status"] == "evaluated"
+    assert w1["references"] == ["q", "x", "y"] and w1["rows"] == ["p", "q", "x", "y"]
+    assert w1["anchors"]["low"] == pytest.approx(5.0) and w1["anchors"]["high"] == pytest.approx(80.0)
+    assert w1["officialAnchorProvenance"] == {"low": {"row": "cheap", "evidence": "owner-named transfer"}, "high": {"row": "dear", "evidence": "API-cost fallback"}}
+    assert w1["exchangeRate"]["anchorRatio"] == pytest.approx(16.0) and w1["officialExchangeRate"]["anchorRatio"] == pytest.approx(3200.0)
+    assert w2 == {"rows": ["lone"], "references": ["lone"], "officialAnchorProvenance": None, "status": "measured-evidence calibration unavailable (fewer than two measured references)"}
+    assert result["values"]["q"] is None and set(result["values"]) == {"p", "q", "x", "y"}
+    # Cheaper, weaker rows gain on the narrow measured anchors: official y > p > x becomes x > p > y.
+    assert result["reversals"] == [["p", "x"], ["p", "y"], ["x", "y"]]
+    assert result["rankChange"]["changes"] == {"p": 0, "x": -2, "y": 2}
+    assert result["maxAbsValueChange"] == pytest.approx(max(abs(result["values"][key] - entries[key]["value"]) for key in ("p", "x", "y")))
+
+
+def test_measured_calibration_without_references_and_unknown_anchor_rows():
+    official = anchor_math.anchor_object({"retired": 5.0, "x": 10.0}, basis="plan", workload="w1")
+    frozen = {"workloads": {"w1": {"anchors": {"plan": official}}}}
+    entries = {"x": {"status": "measured, target-workload unmatched", "costUsd": 10.0, "costScore": 50.0, "value": 55.0}}
+    result = v._measured_calibration([calibration_row("x", "w1", 60.0)], frozen, entries)
+    assert result["status"] == "measured-evidence calibration unavailable"
+    assert result["workloads"]["w1"]["officialAnchorProvenance"]["low"] == {"row": "retired", "evidence": "not in the current table"}
+    assert result["values"] == {} and result["reversals"] == [] and result["maxAbsValueChange"] is None
+    assert v._plan_evidence(calibration_row("r", "w1", 1.0, grade="reports")) == "concordant reports"

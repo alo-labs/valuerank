@@ -38,9 +38,9 @@ from typing import Any
 from valuerank import basket
 from valuerank import plan_routes
 from valuerank import quality as q
-from valuerank.emit_docs import AA_METHODOLOGY_URL, BENCHMARK_URLS, model_inclusion, plan_evidence_label
 from valuerank.paths import DATA
 from valuerank.plan_costs import COST_WEIGHT_PCT
+from valuerank.publication import AA_METHODOLOGY_URL, BENCHMARK_URLS, model_inclusion, plan_evidence_label
 from valuerank.release import DATE, VERSION
 from valuerank.site import evidence
 from valuerank.site.changelog import build_changelog, model_history

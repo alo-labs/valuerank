@@ -1,18 +1,40 @@
 {
   "schemaVersion": 1,
-  "inputHash": "bc23c1fe9f52b50e9be24dbc92f246e8a91325e991ec6442a0fc5d34914ad994",
+  "inputHash": "c956e60d0bf196b6c270af43bf3cbf9370116231b846a69cde6abaf90bd315d5",
   "seed": 20261017,
   "scenarios": 10000,
   "streamDescriptions": {
     "S0": "published-record reporting precision",
     "S1": "published-record reporting precision + conventional identification of missing leaves",
     "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-    "S1M": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)"
+    "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)"
   },
   "notQuantified": [
-    "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares",
+    "benchmark repeatability beyond the conventional Terminal-Bench interval-range sensitivity in S1M (other published intervals, run-to-run ranges): not quantified in v1 scenario shares",
     "fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares"
   ],
+  "intervalInterpretation": {
+    "S1M": [
+      {
+        "leaf": "terminalBench",
+        "source": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
+        "sourceStatement": "The whiskers span the 95% confidence interval",
+        "confidenceLevel": 0.95,
+        "sourceFields": [
+          "accuracy_ci95_half_width",
+          "n_trials"
+        ],
+        "sourceEstimand": "not established from the captured documentation",
+        "sourceIntervalMethod": "not established from the captured documentation",
+        "samplingUnit": "not established from the captured documentation",
+        "repeatedTaskTreatment": "not established from the captured documentation",
+        "kernelStatus": "conventional-within-CI",
+        "kernel": "uniform on [z - h, z + h] clipped to [0, 100] (arcsine alternative), h the published half-width",
+        "tailTreatment": "values outside the interval are not explored; no tail mass is invented",
+        "permittedLabel": "conventional CI-range sensitivity (endpoint-conditioned; no tail model)"
+      }
+    ]
+  },
   "results": {
     "api": [
       {
@@ -1153,22 +1175,22 @@
       },
       {
         "stratum": "S1M",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "permittedTargets": [
-          "expected performance",
           "identification convention",
+          "published-interval range (conventional)",
           "reporting precision"
         ],
         "variedTargets": [
-          "expected performance",
           "identification convention",
+          "published-interval range (conventional)",
           "reporting precision"
         ],
         "qualityEquation": "full composite, nominal weights",
         "events": {
           "top1": "rank-1 frequency (competition ranks on value)",
           "top3": "rank 3 or better frequency (competition ranks on value)",
-          "frontier": "full-composite frontier frequency under missing-evidence and published-interval draws",
+          "frontier": "full-composite frontier frequency under missing-evidence draws and conventional draws inside published intervals",
           "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
         },
         "scenarios": 10000,
@@ -2577,22 +2599,22 @@
       },
       {
         "stratum": "S1M",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "permittedTargets": [
-          "expected performance",
           "identification convention",
+          "published-interval range (conventional)",
           "reporting precision"
         ],
         "variedTargets": [
-          "expected performance",
           "identification convention",
+          "published-interval range (conventional)",
           "reporting precision"
         ],
         "qualityEquation": "full composite, nominal weights",
         "events": {
           "top1": "rank-1 frequency (competition ranks on value)",
           "top3": "rank 3 or better frequency (competition ranks on value)",
-          "frontier": "full-composite frontier frequency under missing-evidence and published-interval draws",
+          "frontier": "full-composite frontier frequency under missing-evidence draws and conventional draws inside published intervals",
           "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
         },
         "scenarios": 10000,

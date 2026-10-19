@@ -1,312 +1,110 @@
 #!/usr/bin/env python3
-"""Emit the Markdown publication: README, methodology, score tables and raw data.
+"""Emit the Markdown publication for methodology v3: README, methodology, score tables and raw data.
 
+Every number comes from the ``v3`` section of ``data/scores.json``, read through the site view model
+(``valuerank.site.viewmodel.build_bundle``) so the Markdown and the website state the same values.
 The website under site/ is owned by ``python -m valuerank.site.build``.
 """
 
 from __future__ import annotations
 
 import json
-from html import escape as html_escape
 
-
+from valuerank import basket
+from valuerank import quality as q
+from valuerank.aa_reconciliation import publication as aa_reconciliation_publication, reconcile as reconcile_aa
 from valuerank.paths import DATA, ROOT
-from valuerank.plan_costs import build_cost_fields, load_plan_routes
-from valuerank.aa_reconciliation import reconcile as reconcile_aa, publication as aa_reconciliation_publication
-
+from valuerank.publication import (
+    AA_DEEPSWE_URL,
+    AA_METHODOLOGY_URL,
+    BUG_HUNT_URL,
+    TERMINAL_BENCH_URL,
+    model_inclusion,
+    plan_evidence_label,
+)
 from valuerank.release import DATE, VERSION
-CURRENCY = "$"
+from valuerank.site import viewmodel
 
-AA_INDEX_URL = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
-AA_METHODOLOGY_URL = "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
-AA_DEEPSWE_URL = "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-LIVEBENCH_URL = "https://livebench.ai/"
-TERMINAL_BENCH_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
-BUG_HUNT_URL = "https://bughunt.productcompass.pm/"
-
-BENCHMARK_URLS = {
-    "DeepSWE pass@1": AA_DEEPSWE_URL,
-    "AA-Briefcase": "https://artificialanalysis.ai/evaluations/aa-briefcase",
-    "GDPval-AA v2.1": "https://artificialanalysis.ai/evaluations/gdpval-aa",
-    "AutomationBench-AA": "https://artificialanalysis.ai/evaluations/automationbench-aa",
-    "Terminal-Bench 4.0 (AA evaluation)": "https://artificialanalysis.ai/evaluations/terminalbench-4-0",
-    "τ³-Banking (legacy)": "https://artificialanalysis.ai/evaluations/tau3-banking",
-    "Terminal-Bench v2.1 (legacy)": "https://artificialanalysis.ai/evaluations/terminalbench-2-1",
-    "Terminal-Bench 4.0": TERMINAL_BENCH_URL,
-    "SciCode": "https://artificialanalysis.ai/evaluations/scicode",
-    "Humanity's Last Exam": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
-    "HLE": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
-    "GDP.pdf": "https://artificialanalysis.ai/evaluations/gdp-pdf",
-    "CritPt": "https://artificialanalysis.ai/evaluations/critpt",
-    "AA-Omniscience Accuracy": "https://artificialanalysis.ai/evaluations/omniscience",
-    "AA-Omniscience Non-Hallucination Rate": "https://artificialanalysis.ai/evaluations/omniscience",
-    "AA-LCR v1.1": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
-    "GPQA Diamond (legacy)": "https://artificialanalysis.ai/evaluations/gpqa-diamond",
-    "AA Intelligence Index": AA_INDEX_URL,
-    "Artificial Analysis Intelligence Index": AA_INDEX_URL,
-    "AA output speed (tok/s)": AA_METHODOLOGY_URL,
-    "LiveBench": LIVEBENCH_URL,
-    "Bug Hunt Bench": BUG_HUNT_URL,
+DASH = "—"
+SITE_URL = "https://valuerank.alolabs.dev"
+SPEC_DIR = "research/2026-10-19-methodology-codesign/"
+SEMIANALYSIS_URL = "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"
+OUTPUTS = ("README.md", "methodology.md", "scores.md", "raw-data.md")
+# Cohort routes, in the order a row is classified (a row can carry several inclusion reasons).
+COHORT_ROUTES = (
+    ("Required AA Intelligence Index versus total-evaluation-cost frontier family", "On AA's rendered frontier"),
+    ("Near-frontier AA family", "Near-frontier family"),
+    ("Exact AA DeepSWE and eligible Bug Hunt overlap", "Retained from earlier releases for exact DeepSWE and Bug Hunt evidence"),
+)
+LEAF_TRANSFORMS = {
+    "deepswe": "z = pass@1 %",
+    "bugHunt": "z = 100 × bugs fixed / 105",
+    "frontierCode": "z = 100 × score",
+    "terminalBench": "z = resolution %",
+    "gdpval": "z = 100 × (Elo − 500) / 2000 (AA's integration transform)",
+    "automationBench": "z = 100 × score",
+    "omniscience": "z = (I + 100) / 2 on AA's Omniscience Index I (O28)",
+    "lcr": "z = 100 × accuracy",
+    "hle": "z = 100 × accuracy",
+    "scicode": "z = 100 × score",
+    "critpt": "z = 100 × score",
 }
+SOURCE_LABELS = {"aa": "AA-run", "independent": "independent"}
+# Owner-authorised route applications in the Plan evidence policy, printed when recorded.
+POLICY_APPLICATIONS = (
+    ("gptApplication", "GPT"),
+    ("claudeApplication", "Claude"),
+    ("mimoApplication", "MiMo"),
+    ("unsupportedModels", "Other models"),
+)
+CHARGE_LABELS = {
+    "contestantModelTokens": "Contestant tokens",
+    "otherModelCalls": "Other model calls",
+    "externalTools": "External tools",
+    "executionEnvironment": "Execution environment",
+    "preparation": "Preparation",
+    "grading": "Grading",
+}
+FLAG_LEGEND = (
+    ("subset cost", "scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17)"),
+    ("provisional quality", "observed leaves cover under 70% of quality weight, fewer than two software-engineering leaves or under 40% software-engineering weight are observed, or DeepSWE is missing; ranked and flagged, never floored (O8)"),
+    ("partial component", "AA marks tasks of a basket component missing or declined (E37)"),
+    ("AA cost caveat", "AA states that its published cost omits a pricing term"),
+    ("API-cost fallback", "no admitted Plan route; the Plan ranking uses the API cost (O13)"),
+)
 
 
-def md_benchmark_link(label):
-    url = BENCHMARK_URLS.get(label)
-    return f"[{label}]({url})" if url else label
+# --- formatting helpers ----------------------------------------------------------------------
 
 
-def html_external_link(label, url):
-    return f'<a href="{html_escape(url, quote=True)}" target="_blank" rel="noopener">{html_escape(label)}</a>'
-
-
-def fnum(value, places=2, dash="—"):
+def fnum(value, places=2, dash=DASH):
     return f"{value:.{places}f}" if isinstance(value, (int, float)) else dash
 
 
 def pct(value, places=2):
-    return f"{value * 100:.{places}f}%" if isinstance(value, (int, float)) else "—"
+    """A fraction as a percentage."""
+
+    return f"{value * 100:.{places}f}%" if isinstance(value, (int, float)) else DASH
 
 
-def metric_coverage_summary(model, weights):
-    coverage = model.get("metricCoverage") or {}
-    model_dims = model.get("dims", {})
-    if "missingKeys" in coverage:
-        missing_keys = set(coverage.get("missingKeys") or [])
-    else:
-        missing_keys = {
-            weight["key"]
-            for weight in weights
-            if model_dims.get(weight["key"]) is None
-        }
-    missing_labels = [weight["label"] for weight in weights if weight["key"] in missing_keys]
-    available_keys = {
-        weight["key"]
-        for weight in weights
-        if model_dims.get(weight["key"]) is not None
-    }
-    available_priority = coverage.get("availablePriority")
-    if not isinstance(available_priority, (int, float)):
-        available_priority = sum(weight.get("priority") or 0 for weight in weights if weight["key"] in available_keys)
-    total_priority = coverage.get("totalPriority")
-    if not isinstance(total_priority, (int, float)):
-        total_priority = sum(weight.get("priority") or 0 for weight in weights)
-    coverage_pct = coverage.get("coveragePct")
-    if not isinstance(coverage_pct, (int, float)) and total_priority:
-        coverage_pct = 100 * available_priority / total_priority
-    if isinstance(coverage_pct, (int, float)):
-        coverage_text = f"{coverage_pct:.2f}% (cost + {available_priority:g}/{total_priority:g} quality priority)" if coverage.get("costAvailable") else f"{coverage_pct:.2f}% ({available_priority:g}/{total_priority:g} quality priority)"
-    else:
-        coverage_text = "—"
-    return coverage_text, ", ".join(missing_labels) or "none"
+def usd(value, places=2):
+    return f"${value:,.{places}f}" if isinstance(value, (int, float)) else DASH
 
 
 def names(values):
     return ", ".join(values) if values else "none"
 
 
-def primary_rows(models, weights):
-    rows = []
-    for model in models:
-        coverage_text, missing_text = metric_coverage_summary(model, weights)
-        rank = model.get("rank") if model.get("rank") is not None else "—"
-        rows.append(
-            f"| {rank} | {model['name']} | {fnum(model.get('overallScore'), 1)} | "
-            f"{fnum(model.get('qualityScore'), 1)} | {fnum(model.get('costComposite'))} | "
-            f"{coverage_text} | Missing: {missing_text} |"
-        )
-    return "\n".join(rows)
+def markdown_table(headers, rows, numeric=()):
+    """A Markdown table; ``numeric`` holds the indices of right-aligned columns. Pipes and newlines in cells are escaped."""
 
-
-def dimension_table(weights):
-    return "\n".join(
-        f"| {index} | {md_benchmark_link(weight['label'])} | {weight['weightPct']:.2f}% | {'higher' if weight['higherBetter'] else 'lower'} |"
-        for index, weight in enumerate(weights, 1)
-    )
-
-
-def livebench_table(livebench_rows):
-    return "\n".join(
-        f"| {record['name']} | {record['livebenchModel']} | {record['instructionFollowingScore']:.2f} | {record['overallScore']:.2f} | ${record['costPerSuccessfulTaskUsd']:.4f} |"
-        for record in livebench_rows
-    )
-
-
-def tb4_table(tb4_rows):
-    return "\n".join(
-        f"| {entry['rankLabel']} | {entry['baseModel']} | {entry['agent']} | {entry['resolutionRatePct']:.1f}% ± {entry['uncertaintyPct']:.1f}% | {entry['tokens']} | {'—' if entry['costUsd'] is None else f"${entry['costUsd']:,.0f}"} |"
-        for entry in tb4_rows
-    )
-
-
-def bug_hunt_emphasis_table(bug_hunt_ranking, bug_hunt_records):
-    return "\n".join(
-        f"| {item['rank']} | {item['name']} | {record['fixedOf105']:g}/105 | "
-        f"{item['emphasisScore']:.1f} | n={record['sampleN']} ({record['aggregation']}) | "
-        f"{record['effort']} ({record['effortStatus']}) | "
-        f"{record['harness']} / {record['route']} | {item['primaryRank']} |"
-        for item in bug_hunt_ranking["ranking"]
-        for record in [bug_hunt_records[item["modelId"]]]
-    )
-
-
-def bug_hunt_raw_table(all_models, bug_hunt_records):
-    return "\n".join(
-        f"| [{model['name']}]({record.get('sourceUrl', BUG_HUNT_URL)}) | {record.get('fixedOf105') if record.get('matched') else '—'} | "
-        f"{record.get('sampleN', '—')} / {record.get('aggregation', '—')} | {record.get('evaluatedModel', '—')} | "
-        f"{record.get('effort', '—')} ({record.get('effortStatus', '—')}) | "
-        f"{record.get('harness', '—')} | {record.get('route', '—')} | "
-        f"{'Matched' if record.get('matched') else record.get('matchStatus', 'No result')} |"
-        for model in all_models
-        for record in [bug_hunt_records[model['id']]]
-    ) + "\n" + "\n".join(
-        f"| {model['name']} — separate owner configuration | {config['fixedOf105']} | "
-        f"{config.get('sampleN', '—')} / {config.get('aggregation', '—')} | "
-        f"[{config.get('evaluatedModel', '—')}]({record.get('sourceUrl', BUG_HUNT_URL)}) | "
-        f"{config.get('effort', '—')} ({config.get('effortStatus', '—')}) | "
-        f"{config.get('harness', '—')} | {config.get('route', '—')} | "
-        f"Owner result present; excluded from selected variant: {config.get('selectionReason', record.get('note', 'Variant equivalence unresolved'))} |"
-        for model in all_models
-        for record in [bug_hunt_records[model['id']]]
-        for config in record.get('availableOwnerConfigurations', [])
-        if config.get('selected') is not True
-    )
-
-
-def deepswe_chart_table(deepswe_configurations):
-    return "\n".join(
-        f"| {item['sourceOrder']} | {item['agent']} | {item['model']} | {item.get('effort') or 'not shown'} | "
-        f"{item['scorePct']:.1f}% | "
-        f"{'Exact: ' + item['valueRankModelId'] if item.get('valueRankModelId') else item['matchStatus'].replace('_', ' ')} | "
-        f"{item.get('matchNote', '—')} |"
-        for item in deepswe_configurations
-    )
-
-
-def plan_evidence_label(route):
-    if route.get("evidenceClass") == "user_assumption":
-        return "Provisional assumption"
-    if route.get("evidenceClass") == "controlled_account_workload_projection":
-        return "Controlled account measurement / workload projection"
-    return str(route.get("evidenceClass", "Unclassified")).replace("_", " ")
-
-
-def plan_usd(value, missing):
-    return f"${value:,.2f}" if isinstance(value, (int, float)) else missing
-
-
-def plan_source_html(route):
-    url = route.get("sourceUrl")
-    return html_external_link("Source", url) if url else "User assumption"
-
-
-def plan_intelligence_label(model, aa_document):
-    value = model.get("intelligenceIndex")
-    record = aa_document.get("models", {}).get(model["id"], {})
-    metric_precision = ((record.get("metricSources") or {}).get("intelligenceIndex") or {}).get("precision")
-    precision = str(metric_precision or (record.get("extraction") or {}).get("precision") or "")
-    if isinstance(value, (int, float)) and "display-rounded" in precision:
-        label = str(value).removesuffix(".0") + " (rounded)"
-    else:
-        label = fnum(value)
-    return label + (" (estimated)" if model.get("intelligenceIndexStatus") == "estimated" else "")
-
-
-def plan_markdown_table(headers, rows):
     def clean(value):
-        text = str(value).replace("|", "\\|").replace("\n", " ")
-        return f"[Source]({text})" if text.startswith("https://") else text
-    return "\n".join(["| " + " | ".join(headers) + " |", "|" + "|".join("---" for _ in headers) + "|"] + ["| " + " | ".join(clean(value) for value in row) + " |" for row in rows])
+        return str(value).replace("|", "\\|").replace("\n", " ")
 
-
-def plan_html_table(headers, rows):
-    def cell(value):
-        text = str(value)
-        return html_external_link("Source", text) if text.startswith("https://") else html_escape(text)
-    return '<div class="table-wrap"><table><thead><tr>' + ''.join(f'<th scope="col">{html_escape(header)}</th>' for header in headers) + '</tr></thead><tbody>' + ''.join('<tr>' + ''.join(f'<td>{cell(value)}</td>' for value in row) + '</tr>' for row in rows) + '</tbody></table></div>'
-
-
-FRONTIER_RULE = (
-    "Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus "
-    "total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA's "
-    "rendered line as observed; ValueRank never recomputes it from rounded values."
-)
-NEAR_FRONTIER_RULE = (
-    "A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within {gap} points of the "
-    "rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. "
-    "Every near-frontier family is ranked (its selected configuration may differ from the near configuration) or is explicitly "
-    "deferred by a dated, reasoned roster decision. The cost ratio to the frontier is reported for information only."
-)
-DEFAULT_NEAR_GAP = 3
-
-
-def _count(value, noun, plural=None):
-    return f"{value} {noun if value == 1 else plural or noun + 's'}"
-
-
-def _clean_number(value):
-    return str(int(value)) if isinstance(value, (int, float)) and float(value).is_integer() else str(value)
-
-
-def model_inclusion(selection, models):
-    """The model-inclusion policy and its observed facts, read from ``frontierSelection`` (optional, every field).
-
-    Shared by the Markdown emitter and the site view model so both state the same rules and numbers.
-    """
-
-    selection = selection or {}
-    policy = selection.get("nearFrontierPolicy") or {}
-    universe = selection.get("sourceUniverse") or {}
-    head = ["Chart observed"] if selection.get("capturedAt") or selection.get("indexVersion") or universe else []
-    if head:
-        if selection.get("capturedAt"):
-            head.append(selection["capturedAt"])
-        if selection.get("indexVersion"):
-            head.append(f"(Intelligence Index v{selection['indexVersion']})")
-    facts = []
-    if universe.get("selectedModelN") is not None:
-        facts.append(f"{universe['selectedModelN']} catalog models selected")
-    if universe.get("plottedPointN") is not None:
-        facts.append(_count(universe["plottedPointN"], "plotted point"))
-    if universe.get("observedFrontierPointN") is not None:
-        vertices = _count(universe["observedFrontierPointN"], "rendered Pareto vertex", "rendered Pareto vertices")
-        facts.append(vertices + (f" across {_count(selection['familyN'], 'family', 'families')}" if selection.get("familyN") is not None else ""))
-    sentences = []
-    if head:
-        sentences.append(" ".join(head) + (": " + (", ".join(facts[:-1]) + " and " + facts[-1] if len(facts) > 1 else facts[0]) if facts else "") + ".")
-    if selection.get("nearFrontierPointN") is not None:
-        near = _count(selection["nearFrontierPointN"], "plotted point")
-        if selection.get("nearFrontierFamilyN") is not None:
-            near += f" across {_count(selection['nearFrontierFamilyN'], 'family', 'families')}"
-        sentences.append(f"{near} {'is' if selection['nearFrontierPointN'] == 1 else 'are'} near-frontier.")
-    status = [
-        text
-        for text in (
-            f"{selection['nearFrontierRequiredModelN']} required" if selection.get("nearFrontierRequiredModelN") is not None else None,
-            f"{selection['nearFrontierDeferredN']} deferred by roster decision" if selection.get("nearFrontierDeferredN") is not None else None,
-        )
-        if text
-    ]
-    footnotes = {}
-    for model in models:
-        if model.get("aaFrontierFootnote"):
-            footnotes.setdefault(model["aaFrontierFootnote"], []).append(model["name"])
-    gap = _clean_number(policy.get("maxIntelligenceGap", DEFAULT_NEAR_GAP))
-    return {
-        "frontierRule": FRONTIER_RULE,
-        "nearFrontierGap": gap,
-        "nearFrontierRule": NEAR_FRONTIER_RULE.format(gap=gap),
-        "policyText": policy.get("text"),
-        "observation": " ".join(sentences) or None,
-        "nearFrontierStatus": "Near-frontier models: " + ", ".join(status) + "." if status else None,
-        "frontierFamilies": [
-            {"family": item["family"], "configuration": item["configuration"]} for item in selection.get("frontierFamilies") or []
-        ],
-        "nearFrontierFamilies": [
-            {"family": item["family"], "configuration": item["configuration"], "gap": _clean_number(item["intelligenceGap"])}
-            for item in selection.get("nearFrontierFamilies") or []
-        ],
-        "footnotes": [{"text": text, "models": names_} for text, names_ in footnotes.items()],
-    }
+    rule = ["---:" if index in numeric else "---" for index in range(len(headers))]
+    lines = ["| " + " | ".join(headers) + " |", "|" + "|".join(rule) + "|"]
+    lines += ["| " + " | ".join(clean(value) for value in row) + " |" for row in rows]
+    return "\n".join(lines)
 
 
 def model_inclusion_markdown(inclusion, level="##"):
@@ -328,7 +126,7 @@ def model_inclusion_markdown(inclusion, level="##"):
     if inclusion["nearFrontierFamilies"]:
         lines += ["", "Near-frontier families and the configuration selected for each:", ""]
         lines += [
-            f"- {item['family']}: {item['configuration']}, {item['gap']} Index points below the frontier"
+            f"- {item['family']}: {item['configuration']}, {item['gap']} Index point{'' if item['gap'] == '1' else 's'} below the frontier"
             for item in inclusion["nearFrontierFamilies"]
         ]
     for note in inclusion["footnotes"]:
@@ -336,564 +134,774 @@ def model_inclusion_markdown(inclusion, level="##"):
     return "\n".join(lines) + "\n"
 
 
-def norm_values(model, weights):
-    return ", ".join(
-        f"{model['dims'][weight['key']]:.1f}"
-        if isinstance(model.get("dims", {}).get(weight["key"]), (int, float))
-        else "⊘"
-        for weight in weights
+def tb4_table(tb4_rows):
+    return "\n".join(
+        f"| {entry['rankLabel']} | {entry['baseModel']} | {entry['agent']} | {entry['resolutionRatePct']:.1f}% ± {entry['uncertaintyPct']:.1f}% | {entry['tokens']} | {'—' if entry['costUsd'] is None else f"${entry['costUsd']:,.0f}"} |"
+        for entry in tb4_rows
     )
 
 
-def main(*, root=ROOT, data=DATA) -> int:
-    """Emit every publication output beneath ``root`` from the snapshots in ``data``."""
+def deepswe_chart_table(deepswe_configurations):
+    return "\n".join(
+        f"| {item['sourceOrder']} | {item['agent']} | {item['model']} | {item.get('effort') or 'not shown'} | "
+        f"{item['scorePct']:.1f}% | "
+        f"{'Exact: ' + item['valueRankModelId'] if item.get('valueRankModelId') else item['matchStatus'].replace('_', ' ')} | "
+        f"{item.get('matchNote', '—')} |"
+        for item in deepswe_configurations
+    )
 
-    scores = json.loads((data / "scores.json").read_text())
-    aa_document = json.loads((data / "aa_metrics.json").read_text())
-    coverage_document = json.loads((data / "coverage_matrix.json").read_text())
-    deepswe_chart_doc = json.loads((data / "aa_deepswe.json").read_text())
-    livebench_document = json.loads((data / "livebench.json").read_text())
-    tb4_document = json.loads((data / "tb4.json").read_text())
-    bug_hunt_document = json.loads((data / "bug_hunt.json").read_text())
-    bug_hunt_ranking = scores["bugHuntEmphasisRanking"]
-    bug_hunt_records = {item["modelId"]: item for item in bug_hunt_document["models"]}
-    manifest = json.loads((data / "run_manifest.json").read_text())
-    all_models = scores["models"]
-    models = [model for model in all_models if model.get("rankingEligible") is True]
-    unranked_models = [model for model in all_models if model.get("rankingEligible") is not True]
-    weights = scores["weights"]
-    deepswe_weight = next(weight for weight in weights if weight["key"] == "deepswePassAt1")
-    n = len(models)
-    source_n = len(all_models)
-    unranked_names = ", ".join(model["name"] for model in unranked_models) or "none"
-    bug_hunt_weight = next(weight for weight in weights if weight["key"] == "bugHuntFixedOf105")
-    d = len(weights)
-    pareto = scores["pareto"]
-    model_by_id = {model["id"]: model for model in all_models}
-    plan_route_document = load_plan_routes(data / "plan_cost_routes.json")
-    plan_cost_fields = build_cost_fields(models, plan_route_document)
-    candidate_plan_cost_fields = build_cost_fields(all_models, plan_route_document)
-    livebench_models = {
-        **livebench_document["models"],
-        **livebench_document.get("supplementalModels", {}),
-    }
-    livebench_rows = [record for record in livebench_models.values() if record.get("matched")]
-    livebench_supplemental_rows = [
-        record for record in livebench_document.get("supplementalModels", {}).values() if record.get("matched")
+
+def configuration_label(row, names_by_id):
+    """``Name (effort)``: the configuration a v3 row scores."""
+
+    name = names_by_id[row["id"]]
+    return f"{name} ({row['effort']})" if row.get("effort") else name
+
+
+def model_link(entry, label=None):
+    return f"[{label or entry['name']}]({SITE_URL}/models/{entry['slug']}/)"
+
+
+def short_flags(entry, row):
+    """The row's flags as the short words of ``FLAG_LEGEND``."""
+
+    cost = entry["cost"]
+    flags = [
+        word
+        for word, present in (
+            ("subset cost", cost["subset"]),
+            ("provisional quality", entry["coverage"]["provisional"]),
+            ("partial component", bool(cost["partialComponents"])),
+            ("AA cost caveat", bool(row.get("aaCostCaveat"))),
+            ("API-cost fallback", cost["fallback"] is not None),
+        )
+        if present
     ]
-    livebench_pareto = [livebench_models[model_id] for model_id in livebench_document["pareto"]]
-    tb4_rows = tb4_document["rows"]
-    provider_claims = json.loads((data / "provider_claims.json").read_text()).get("claims", [])
-    eligible_provider_claims = [item for item in provider_claims if item.get("eligibleForRanking") is True]
-    deepswe_updated = scores.get("deepsweObservedAt") or deepswe_chart_doc.get("observedAt", DATE)
-    deepswe_configurations = deepswe_chart_doc["configurations"]
-    deepswe_overlap_n = len([item for item in deepswe_configurations if item.get("valueRankModelId")])
-    bug_hunt_source_matches_n = scores.get("externalBenchmarks", {}).get("bugHunt", {}).get("matchedN", bug_hunt_ranking["matchedN"])
-    aa_version = scores.get("benchmarkVersion") or "Artificial Analysis Intelligence Index v4.3.2"
-    cost_mode = scores.get("costMode") or manifest.get("scoring", {}).get("costMode", "unknown")
-    cost_mode_label = (
-        "AA evaluation cost per AA Intelligence Index point" if cost_mode == "aa-per-index-point" else cost_mode
-    )
-    cost_coverage = scores.get("costCoverage") or manifest.get("scoring", {}).get("costCoverage", {})
-    cost_missing_text = ", ".join(cost_coverage.get("missingModels", [])) or "none"
-    dropped = scores.get("droppedDimensions")
-    if dropped is None:
-        dropped = coverage_document.get("scoring", {}).get(
-            "droppedDimensions", manifest.get("scoring", {}).get("droppedDimensions", [])
+    return ", ".join(flags) or DASH
+
+
+def route_text(entry):
+    route = entry["cost"]["route"]
+    if route is None:
+        return DASH
+    return f"{route['planLabel']} ({route['valueMultiple']:g}×, {route['grade']})"
+
+
+def share(value):
+    return f"{100 * value:.1f}%"
+
+
+def component_label(key):
+    return basket.COMPONENT_LABELS.get(key, key)
+
+
+# --- shared facts ----------------------------------------------------------------------------
+
+
+class Facts:
+    """Everything the four documents quote, computed once from one data directory."""
+
+    def __init__(self, data):
+        self.bundle = viewmodel.build_bundle(data)
+        self.scores = json.loads((data / "scores.json").read_text())
+        self.routes_document = json.loads((data / "plan_cost_routes.json").read_text())
+        self.deepswe = json.loads((data / "aa_deepswe.json").read_text())
+        self.tb4 = json.loads((data / "tb4.json").read_text())
+        self.bug_hunt = json.loads((data / "bug_hunt.json").read_text())
+        self.v3 = self.scores["v3"]
+        self.rows = {row["id"]: row for row in self.v3["rows"]}
+        self.names = {model["id"]: model["name"] for model in self.scores["models"]}
+        self.rankings = self.bundle.rankings
+        self.ranked = [entry for entry in self.rankings["models"] if entry["rankingEligible"]]
+        self.unranked = [entry for entry in self.rankings["models"] if not entry["rankingEligible"]]
+        self.method = self.bundle.extras["method"]
+        self.inclusion = model_inclusion(self.scores.get("frontierSelection"), self.scores["models"])
+        self.cost_pct = self.rankings["costWeightPct"]
+        self.quality_pct = 100.0 - self.cost_pct
+        reconciliation, _html = aa_reconciliation_publication(reconcile_aa(data=data))
+        self.reconciliation_md = reconciliation
+
+    def row(self, entry):
+        return self.rows[self.source_id(entry)]
+
+    def source_id(self, entry):
+        return next(model["id"] for model in self.scores["models"] if viewmodel.slugify(model["id"]) == entry["slug"])
+
+    def label(self, model_id):
+        return configuration_label(self.rows[model_id], self.names) if model_id in self.rows else self.names.get(model_id, model_id)
+
+    def labels(self, model_ids):
+        return names([self.label(model_id) for model_id in model_ids])
+
+    def cohort_route(self, model_id):
+        reasons = next(model for model in self.scores["models"] if model["id"] == model_id).get("rankingInclusionReasons") or []
+        for prefix, label in COHORT_ROUTES:
+            if any(reason.startswith(prefix) for reason in reasons):
+                return label
+        raise ValueError(f"ranked configuration {model_id} has no recorded cohort inclusion reason")
+
+
+# --- interval and scenario summaries ----------------------------------------------------------
+
+
+def interval_sentences(facts):
+    """Plain sentences for the interval outputs of both bases (E21, E38)."""
+
+    sentences = []
+    for basis, label in (("api", "API"), ("plan", "Plan")):
+        result = facts.v3["intervals"][basis]
+        if result["status"] != "evaluated":
+            sentences.append(f"{label} basis: interval outputs not evaluated ({result.get('reason', result['status'])}).")
+            continue
+        frontier = result["frontier"]
+        definite = [row_id for row_id, item in frontier.items() if item["definite"] == "certified"]
+        possible = [row_id for row_id, item in frontier.items() if item["possible"] == "certified" and item["definite"] != "certified"]
+        text = (
+            f"{label} basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere "
+            f"inside the published record's precision and missing-evidence bounds) is {facts.labels(definite)}; "
+            f"the possible frontier adds {facts.labels(possible)}."
         )
-    cost_weight = next((weight for weight in weights if weight["key"] == "costComposite"), None)
-    cost_weight_text = f"{cost_weight['weightPct']:.2f}%" if cost_weight else "not included"
-    inclusion_md = model_inclusion_markdown(model_inclusion(scores.get("frontierSelection"), all_models))
+        if result["unevaluable"]:
+            text += f" Not evaluable on this workload: {facts.labels(result['unevaluable'])}."
+        for bar in result.get("bars", []):
+            reference = facts.label(bar["reference"]["id"])
+            if bar["status"] != "certified":
+                text += f" Cheapest at or above {reference}'s quality: {bar['status']}."
+            elif bar["confirmedCheapest"]:
+                text += f" Cheapest at or above {reference}'s quality: {facts.label(bar['confirmedCheapest'])} (confirmed)."
+            else:
+                text += f" Cheapest at or above {reference}'s quality: not unique; possibly {facts.labels(bar['possibleCheapest'])}."
+        sentences.append(text)
+    return sentences
 
 
-    speed_coverage = coverage_document.get("fields", {}).get("speed", {})
-    speed_missing_ids = set(speed_coverage.get("missingModels", []))
-    speed_missing_text = names([model["name"] for model in models if model["id"] in speed_missing_ids])
-    speed_selected_available_n = n - sum(model["id"] in speed_missing_ids for model in models)
-    aa_index_estimated_models = names([model["name"] for model in models if model.get("intelligenceIndexStatus") == "estimated"])
+def run_label(run):
+    return run["stratum"] + (" endpoint-heavy" if run["alternative"] else "")
 
 
-    livebench_pareto_text = names([record["name"] for record in livebench_pareto]) if livebench_pareto else "none"
-    livebench_supplemental_text = names([record["name"] for record in livebench_supplemental_rows]) if livebench_supplemental_rows else "none"
-    livebench_supplemental_count = livebench_document.get("supplementalMatchedN", len(livebench_supplemental_rows))
-    livebench_supplemental_label = f"{livebench_supplemental_count} official supplemental model" + ("s" if livebench_supplemental_count != 1 else "")
+# --- README ------------------------------------------------------------------------------------
 
 
-    pareto_text = names(pareto)
-    drop_text = "\n".join(
-        f"| {item['label']} | {names(item['missing'])} | {item['reason']} |" for item in dropped
-    ) or "| None | — | All candidate dimensions have complete coverage. |"
-
-    aa_reconciliation_report = reconcile_aa(data=data)
-    aa_reconciliation_md, _ = aa_reconciliation_publication(aa_reconciliation_report)
-
-
-    plan_candidate_headers = ["Model", "Primary rank", "AA Intelligence Index", "API evaluation cost", "Effective Plan evaluation cost", "Effective Plan cost per Index point", "Selected plan / multiple", "Evidence / source variant", "Source date", "Source"]
-    plan_candidate_cells = []
-    for model, field in zip(all_models, candidate_plan_cost_fields):
-        route = field["planRoute"]
-        plan_candidate_cells.append([
-            model["name"],
-            str(model["rank"]) if model.get("rank") is not None else "Unranked candidate",
-            plan_intelligence_label(model, aa_document),
-            plan_usd(field["apiCost"], "Not established"),
-            plan_usd(field["planCostPerRun"], "API fallback" if route is None else "Not established"),
-            plan_usd(field["planComparableCost"], "Not established") + (" (API fallback)" if route is None and field["planComparableCost"] is not None else ""),
-            f"{route['planLabel']} / {route['valueMultiple']:g}×" if route else "No eligible route",
-            (plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else "")) if route else "API fallback",
-            (route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded") if route else "—",
-            (route.get("sourceUrl") or "User assumption") if route else "—",
+def readme(facts):
+    v3, method = facts.v3, facts.method
+    headline = viewmodel.index_page(facts.bundle)["headline"]
+    admitted = [item["label"] for item in method["basket"]["admitted"]]
+    yield_ = v3["identificationYield"]
+    table_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        table_rows.append([
+            entry["rank"]["plan"],
+            entry["rank"]["api"],
+            model_link(entry, configuration_label(row, facts.names)),
+            fnum(entry["overall"]["plan"], 1),
+            fnum(entry["overall"]["api"], 1),
+            fnum(entry["quality"], 1),
+            f"{entry['coverage']['pct']:.0f}%",
+            usd(entry["cost"]["apiUsd"]),
+            usd(entry["cost"]["planUsd"]),
+            route_text(entry),
+            short_flags(entry, row),
         ])
-
-    plan_route_headers = ["Plan", "Eligible model variants", "Monthly fee", "API equivalent numerator", "Value Multiple", "Evidence / source model", "Source date", "Source"]
-    plan_route_cells = []
-    for route in plan_route_document["routes"]:
-        plan_route_cells.append([
-            route["planLabel"],
-            ", ".join(model_by_id[model_id]["name"] if model_id in model_by_id else model_id for model_id in route["modelIds"]),
-            plan_usd(route.get("planPriceUsd"), "Not established"),
-            plan_usd(route.get("apiEquivalentUsd"), "Not measured") + (" (applied estimate)" if route.get("numeratorKind") == "applied_estimate" else ""),
-            f"{route['valueMultiple']:g}×",
-            plan_evidence_label(route) + (f" / {route['sourceModel']}" if route.get("sourceModel") else ""),
-            route.get("sourcePublicationDate") or route.get("reportDate") or route.get("validFrom") or "Not recorded",
-            route.get("sourceUrl") or "User assumption",
-        ])
-
-
-    claude_common = sorted(
-        (route for route in plan_route_document.get("routes", []) if str(route.get("id", "")).endswith("common-opus55-assumption")),
-        key=lambda route: float(route.get("planPriceUsd") or 0),
+    exploratory = (
+        f" No Value Multiple is yet identified on the basket itself ({yield_['pointIdentified'] + yield_['setIdentified']} of {yield_['rows']} rows), "
+        "so the Plan ranking is labelled exploratory."
+        if yield_["exploratory"] else ""
     )
-    claude_common_copy = (
-        "The common Claude multiples ("
-        + "; ".join(
-            f"{'Pro' if route['plan'] == 'Claude Pro' else 'Max $' + str(route['planPriceUsd'])} {route['valueMultiple']}×" for route in claude_common
-        )
-        + ") are an owner-authorized (2026-10-18) application of Opus 5.5's measured figures to the other Claude models, not measurements of those models; "
-        "the same source measured Fable 5.1 at 12.4–12.7× on the Max plans, so the applied multiples may overstate the plan value of cheaper Claude models. "
-    ) if claude_common else ""
-    plan_policy_copy = (
-        f"Plan route evidence as of {plan_route_document.get('asOf', 'not recorded')}. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. Effective Plan cost per Index point is that amount divided by the model's AA Intelligence Index; the Plan-basis rank uses it so that a plan allowance is credited with the work it buys and token-efficient models are rewarded, while models without an eligible route are compared on API cost per Index point. "
-        "The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. "
-        "For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. "
-        "The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. "
-        + claude_common_copy +
-        "The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. "
-        "For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator."
-    )
-    plan_comparison_md = (
-        "\n\n## Plan Costs candidate comparison\n\n" + plan_policy_copy + "\n\n"
-        + plan_markdown_table(plan_candidate_headers, plan_candidate_cells)
-        + "\n\n### Plan route evidence\n\n" + plan_markdown_table(plan_route_headers, plan_route_cells)
-        + "\n\nThe selected source is [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x). Full route assumptions, allocation regimes, workloads, source links and eligibility are retained in `data/plan_cost_routes.json`.\n"
-    )
-
-
-    readme = f"""# ValueRank
-**Frontier AI model ranking focused on production value**
+    legend = "\n".join(f"- **{word}**: {text}." for word, text in FLAG_LEGEND)
+    intervals = "\n".join(f"- {sentence}" for sentence in interval_sentences(facts))
+    return f"""# ValueRank
+**Frontier AI configurations ranked by value: benchmark quality against what the work costs**
 
 **Version:** {VERSION}
 **Updated:** {DATE}
-**Scope:** {n} primary-ranked models from a {source_n}-model AA-mapped comparison roster, {d} retained dimensions including Bug Hunt Bench
-
-Publication updated October 8, 2026 with the current AA frontier reconciliation and selected benchmark updates. The complete 31-configuration DeepSWE v1.1 chart was observed October 8; the original 25 configuration records retain their earlier per-row observation dates. Earlier AA component snapshots retain their recorded dates, while the newly captured AA frontier profiles are dated October 8 and MiMo owner run notes October 7. See per-model dates and capture precision in raw-data.md.
+**Methodology:** {v3['methodologyVersion']} · {v3['basketVersion']} · anchor version {v3['anchorVersion']}
+**Scope:** {len(facts.ranked)} ranked configurations from a {len(facts.scores['models'])}-model AA-mapped roster; value is a {facts.cost_pct:.0f}% cost score plus {facts.quality_pct:.0f}% quality over {len(q.LEAVES)} benchmark leaves
 
 ## Current result
 
-The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model family on that observed frontier plus every near-frontier family (see Model inclusion below). ValueRank ranks those models by value: token efficiency, measured as AA's total cost to run its Intelligence Index benchmarks per Index point, carries a fixed **{cost_weight_text}** of each overall score, and benchmark quality carries the rest. In the API view that cost is priced at API rates; in the Plan view it is also divided by the API-equivalent usage value a subscription delivers per dollar of fee. The quality part uses each model's available exact-version values across the other retained dimensions; missing values remain null and each row's available quality priorities are renormalized. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality. Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running {', '.join(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
 
-| Rank | Model | Overall | Quality | API cost per Index point (USD, lower better) | Weight coverage | Missing metrics |
-|---:|---|---:|---:|---:|---:|---|
-{primary_rows(models, weights)}
+{headline['plan']} {headline['api']}
 
-The current Pareto frontier—undominated on composite cost versus quality—is: **{pareto_text}**.
+{markdown_table(['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)', 'Plan cost (USD per basket run)', 'Plan route', 'Flags'], table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
 
-{inclusion_md}
-## v2.0 value scoring
+Values are rounded for display; ranks are competition ranks (equal values share the better rank).
 
-- **Cost weight.** Cost carries a fixed **{cost_weight_text}** of the overall score in both the API and Plan views; the quality dimensions share the other {100 - (cost_weight['weightPct'] if cost_weight else 0):.2f}% in proportion to their priorities. A model missing a quality metric keeps cost at its fixed share instead of letting cost grow.
-- **Token efficiency per unit of intelligence.** Both views compare cost per AA Intelligence Index point. The API view divides AA total evaluation cost at API rates by the model's Index; the Plan view further divides it by the highest eligible subscription Value Multiple. Earlier releases compared raw API cost, which credited cheap but weak models fully.
-- **Token efficiency means total benchmark cost.** AA's total cost to run the Intelligence Index combines the tokens a model spends with its per-token price; ValueRank uses that dollar figure as its measure of token efficiency and does not score token counts separately.
-- **Cost keeps its magnitude.** Cost is scored on a log scale within the ranked cohort: the cheapest model per Index point scores 100, the dearest 0, and equal cost ratios move the score equally. Earlier releases rank-normalized cost, so a 10x and a 1.1x price gap could count the same. Quality dimensions remain rank-normalized.
-- Earlier ValueRank versions are not numerically comparable with v2.0.
+{legend}
 
-## Refresh basis and v1.9 scoring update
+Not ranked ({len(facts.unranked)} roster models): {names([entry['name'] for entry in facts.unranked])}. Reasons are listed in [scores.md](scores.md#not-ranked).
 
-- The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **{len(unranked_models)}** candidates have no rankable primary score: **{unranked_names}**.
-- For each model, ValueRank retains only its observed metrics, renormalizes that row's available quality priorities, and reports weight coverage (cost's fixed share plus `availablePriority / totalPriority` of the quality share) with missing metric names. No missing value receives a zero or neutral fill.
-- Bug Hunt Bench has priority **{bug_hunt_weight['priority']}** and weight **{bug_hunt_weight['weightPct']:.2f}%** in the main rank. DeepSWE v1.1 has priority **{deepswe_weight['priority']}** and weight **{deepswe_weight['weightPct']:.2f}%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
-- AA's Coding Agent Index v1.5 chart reports **{len(deepswe_configurations)} configurations** for DeepSWE v1.1 across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. All configurations and model-version mapping decisions are retained in [data/aa_deepswe.json](data/aa_deepswe.json); **{deepswe_overlap_n}** configurations map to selected model variants.
-- Artificial Analysis now uses **{aa_version}**: AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-LCR v1.1, and split AA-Omniscience accuracy/reliability components. τ³-Banking and Terminal-Bench 2.1 remain historical source fields only.
-- The standalone Terminal-Bench page has **{tb4_document['rowN']} official rows**, including **{tb4_document['matchedN']}/{tb4_document['cohortN']}** direct cohort matches. One separately labelled DeepSeek V4.1-Flash provider claim is used for the current `deepseek-v4-flash` API alias; official and claim counts are kept distinct.
-- **{md_benchmark_link('LiveBench')} {livebench_document['release'].replace('_', '-')}** provides the four-task Instruction Following mean plus Overall Score and Cost Per Successful Task views; Instruction Following contributes where a selected model has an eligible value and is included in the row's available-priority calculation.
-- The companion Bug Hunt emphasis ranking covers **{bug_hunt_ranking['matchedN']}** eligible exact-variant owner results and raises Bug Hunt to **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [data/bug_hunt.json](data/bug_hunt.json).
-- The AA chart's full **{len(deepswe_configurations)}-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
-- The score retains **{d} primary dimensions**; **{names([item['label'] for item in dropped])}** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
-- AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
-- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** primary models. API Costs divides that amount by the model's AA Intelligence Index (USD per Index point); Plan Costs also divides it by each model's highest eligible subscription Value Multiple. Both views give cost its fixed share and renormalize each row over its available quality dimensions.
-- Earlier ValueRank versions are not numerically comparable because this release changes benchmark weights and the ranked cohort.
+### What the evidence supports
+
+{intervals}
+
+Scenario shares by stream, diagnostics and the release gates are in [scores.md](scores.md); the inputs behind every number are in [raw-data.md](raw-data.md).
+
+{model_inclusion_markdown(facts.inclusion)}
+## How v3 scores value
+
+- **Cost is the SDLC basket.** {v3['basketVersion']}: AA's published cost of running {', '.join(admitted)} once at API rates, in USD per basket run. Pending capture: {names([item['label'] for item in method['basket']['pending']])}. v2 used AA's cost to run the whole Intelligence Index per Index point.
+- **Cost keeps its magnitude.** The cost score is 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100, against anchors frozen with anchor version `{v3['anchorVersion']}`. A model entering or leaving the cohort does not move another model's score. At the API anchors, doubling cost costs {method['exchangeRate']['api']['valuePointsPerCostDoubling']:.2f} value points, which {method['exchangeRate']['api']['qualityPointsPerCostDoubling']:.2f} quality points offset.
+- **Quality is measured, not ranked.** Each of the {len(q.LEAVES)} leaves is placed on fixed 0–100 anchors from its raw value, so quality no longer depends on which other models are ranked. A missing leaf is left out of that configuration's mean, its coverage is shown, and low coverage marks the row provisional.
+- **Plan value is route evidence.** Each subscription route carries its Value Multiple, evidence grade (controlled measurement, concordant reports, owner-named assumption) and identification status; the Plan ranking is labelled exploratory until multiples are identified on the basket.
+- **Uncertainty is shown, not hidden.** Interval outputs certify which frontier and cheapest-above-a-bar claims the published record supports; scenario shares report frequencies over declared streams.
+- v3 values are not numerically comparable with v2 or earlier releases.
 
 ## Sources and audit trail
 
-- [AA Coding Agent Index v1.5 — DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) is the benchmark-owner source for all DeepSWE values in this release. The complete {len(deepswe_configurations)}-configuration chart inventory, observed {deepswe_updated}, and model-variant decisions are recorded in [data/aa_deepswe.json](data/aa_deepswe.json).
-- [Artificial Analysis methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking) and the linked first-party model pages for current component values and Intelligence Index evaluation cost.
-- [LiveBench](https://livebench.ai/) and its [official release data repository](https://github.com/livebench/new-livebench), pinned at [release data commit {livebench_document['source'].get('releaseDataCommit', 'not recorded')}](https://github.com/livebench/new-livebench/commit/{livebench_document['source'].get('releaseDataCommit', '')}), for the 2026-06-25 task/category table, Instruction Following means, Overall Score, and Cost Per Successful Task.
-- [Terminal-Bench 4.0](https://www.tbench.ai/) and the [official Harbor repository](https://github.com/harbor-framework/terminal-bench) for the current rendered leaderboard and task identity.
-- [Bug Hunt Bench]({BUG_HUNT_URL}), with owner-published [combined scoreboard]({bug_hunt_document['sources']['scoreboard']}) and [run notes]({bug_hunt_document['sources']['runNotes']}) pinned to commit **{bug_hunt_document['sourceCommit']}**.
-- [Refresh record](research/2026-09-29-valuerank-refresh-v4-3-2/README.md) for the v4.3.2 source change, evidence boundary, provider claims, and scoring decisions.
-- [Provider claim ledger](data/provider_claims.json) for provider-sourced values, eligibility, and alias/variant caveats. Provider values never masquerade as benchmark-owner measurements.
-- [Coverage matrix](data/coverage_matrix.json) for primary and supplemental availability, including fields not used in the score.
+- [Artificial Analysis methodology]({AA_METHODOLOGY_URL}) and its model pages: Intelligence Index component scores and the per-task evaluation costs of the basket.
+- [AA Coding Agent Index, DeepSWE v1.1]({AA_DEEPSWE_URL}): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
+- [Terminal-Bench 4.0]({TERMINAL_BENCH_URL}) official leaderboard rows and [Bug Hunt Bench]({BUG_HUNT_URL}) owner-published runs.
+- [SemiAnalysis subscription measurements]({SEMIANALYSIS_URL}) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `{v3['evidenceBundle']['bundleHash']}`.
+- [Methodology co-design record]({SPEC_DIR}): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files
 
-- [scores.md](scores.md): final ranking, weights, and normalized matrix
-- [raw-data.md](raw-data.md): source values, selected AA variants, and supplemental coverage
-- [methodology.md](methodology.md): frontier selection, benchmark versions, normalization, and row-level coverage
+- [methodology.md](methodology.md): how value, cost, quality, the Plan basis and the uncertainty outputs are computed
+- [scores.md](scores.md): rankings, leaf scores, basket costs, Plan routes, interval outputs, scenario shares, diagnostics and release gates
+- [raw-data.md](raw-data.md): every leaf input with its evidence locator, component costs, benchmark source tables, Plan routes and the evidence bundle
 - [https://valuerank.alolabs.dev/](https://valuerank.alolabs.dev/): website, generated by `valuerank.site.build` (source under [valuerank/site/](valuerank/site/))
 - [https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/](https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/): current Terminal-Bench 4.0 score-versus-cost page
-- [research/2026-09-29-valuerank-refresh-v4-3-2/](research/2026-09-29-valuerank-refresh-v4-3-2/): reproducible v4.3.2 refresh package
 - [data/](data/): machine-readable snapshots and generated outputs (pipeline code lives in [valuerank/](valuerank/))
 - [docs/](docs/README.md): contributor documentation (repository layout, architecture, development, testing, refresh and release); `npm run verify` runs every check
-"""
-    (root / "README.md").write_text(readme + aa_reconciliation_md + plan_comparison_md)
+""" + facts.reconciliation_md
 
-    methodology = f"""# ValueRank Methodology
 
-**Version:** {VERSION}
+# --- methodology -------------------------------------------------------------------------------
+
+
+def methodology(facts):
+    v3, method = facts.v3, facts.method
+    admission = v3["admission"]
+    main = v3["mainWorkload"]
+    cohort = {label: [] for _prefix, label in COHORT_ROUTES}
+    for row_id in facts.rows:
+        cohort[facts.cohort_route(row_id)].append(facts.label(row_id))
+    cohort_lines = "\n".join(f"- {route} ({len(members)}): {', '.join(members)}" for route, members in cohort.items() if members)
+    component_rows = [
+        [component_label(key), "admitted" if item["admitted"] else "pending capture", item["available"], item["covered"], item["ranked"]]
+        for key, item in admission["components"].items()
+    ]
+    boundary = v3["costBoundary"]
+    boundary_rows = [
+        [component_label(key)] + [classes.get(name, DASH) for name in boundary["chargeClasses"]]
+        for key, classes in boundary["components"].items()
+    ]
+    anchor_rows = []
+    for workload_id, workload in v3["workloads"].items():
+        for basis, anchors in workload["anchors"].items():
+            anchor_rows.append([f"`{workload_id}` ({workload['role']})", basis, usd(anchors["low"]), usd(anchors["high"]), len(anchors["referenceIds"]), workload.get("anchorStatus", DASH)])
+    leaf_rows = [
+        [md_link(leaf.label, viewmodel.LEAF_INFO[leaf.key]["url"]), q.GROUP_LABELS[leaf.group], f"{leaf.weight:.2f}%", f"{facts.quality_pct * leaf.weight / 100:.2f}%",
+         viewmodel.LEAF_INFO[leaf.key]["unit"], LEAF_TRANSFORMS[leaf.key], "AA-run" if leaf.source == "aa" else "independent"]
+        for leaf in q.LEAVES
+    ]
+    rate_rows = [
+        [basis, f"{rate['anchorRatio']:.1f}", f"{rate['valuePointsPerCostDoubling']:.2f}", f"{rate['qualityPointsPerCostDoubling']:.2f}"]
+        for basis, rate in v3["exchangeRate"].items()
+    ]
+    influence_rows = [
+        [basis, len(item["commonWorkload"]["panel"]), pct(item["commonWorkload"]["costShare"], 1), item["commonWorkload"]["status"]]
+        for basis, item in v3["costInfluence"].items()
+    ]
+    policy = v3["anchorPolicy"]
+    bar = v3["barPolicy"]
+    routes_policy = facts.routes_document["evidencePolicy"]
+    exception = routes_policy["selectedSourceException"]
+    policy_lines = "\n".join(f"- {label}: {routes_policy[key]}" for key, label in POLICY_APPLICATIONS if routes_policy.get(key))
+    yield_ = v3["identificationYield"]
+    measured = v3["measuredOnlyPlanView"]["specification"]
+    streams = "\n".join(f"- **{key}**: {text}." for key, text in method["streamDescriptions"].items())
+    not_quantified = "\n".join(f"- {text}." for text in method["notQuantified"])
+    gate_rows = [[item["rule"], item["status"], item["detail"]] for item in v3["manifest"]]
+    limitations = "\n".join(f"- {text}" for text in viewmodel.methodology_page(facts.bundle)["limitations"])
+    scenarios = v3["scenarios"]
+    interval_notes = "".join(
+        f"{stream} draws {q.LEAF_BY_KEY[item['leaf']].label} inside its source's published {item['confidenceLevel']:.0%} confidence interval, labelled "
+        f"{item['permittedLabel']} under its interpretation contract (E165; estimand: {item['sourceEstimand']}; method: {item['sourceIntervalMethod']}; "
+        f"sampling unit: {item['samplingUnit']}); {item['tailTreatment']}. "
+        for stream, items in scenarios.get("intervalInterpretation", {}).items()
+        for item in items
+    )
+    scenario_scope = (
+        f"{scenarios['scenarios']:,} scenarios per run, seed {scenarios['seed']}, input hash `{scenarios['inputHash'][:16]}`"
+        if scenarios.get("status") == "current" else f"scenario outputs {scenarios.get('status')}"
+    )
+    return f"""# ValueRank Methodology
+
+**Version:** {VERSION} (methodology {v3['methodologyVersion']})
 **Updated:** {DATE}
 
-## Cohort and source versions
+This page summarises how ValueRank scores value. The normative specification, its review record and every owner and editor decision are in [{SPEC_DIR}]({SPEC_DIR}); where this summary is less precise, the specification governs.
 
-The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every model family on that frontier plus every near-frontier family; the full policy follows. AA's Coding Agent Index v1.5 chart publishes **{len(deepswe_configurations)} DeepSWE v1.1 configurations** across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
+## Objective and claim scope
 
-- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete {len(deepswe_configurations)}-configuration inventory and exact-variant mapping decisions are pinned in [data/aa_deepswe.json](data/aa_deepswe.json).
-- AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current {aa_version}.
-- AA Intelligence Index percentile comparisons use whole-point precision for every model because fresh public labels are rounded while older captures retain finer raw precision. Raw source inputs remain unchanged; sub-point differences should not be read as a reliable ordering.
-- AA v4.3.2 model values: first-party model pages selected by data/aa_mapping.json and recorded in aa_metrics.json.
-- LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **{livebench_document['source'].get('releaseDataCommit', 'not recorded')}**.
-- Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with {tb4_document['rowN']} official rows, **{tb4_document['matchedN']}** direct cohort matches, and **{tb4_document.get('providerClaimN', 0)}** eligible provider claim.
+ValueRank asks which frontier AI model configuration is lowest cost for the value it delivers on software-development work, once subscription economics and software-engineering benchmarks are weighed alongside general capability. It serves two buyers, ranked separately: **API buyers**, who pay per token (including through third-party agents), and **Plan buyers**, who use a provider subscription such as Claude Code, Codex or ChatGPT. The claim is scoped to value among the ranked configurations, under the published benchmark mix and evidence; it is not a market-wide optimum. Every ranked row is a **configuration**: a model version at one reasoning effort. Results are never transferred between versions or efforts.
 
-Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with {VERSION}.
+## Cohort
 
-{inclusion_md}
-## Primary dimensions
+{len(facts.rows)} configurations are ranked:
 
-The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Cost takes a fixed **{cost_weight_text}** of each model's score; the model's available quality priorities are renormalized over the rest, and its weight coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
+{cohort_lines}
 
-| # | Dimension | ValueRank weight | Direction |
-|---:|---|---:|---|
-{dimension_table(weights)}
+The remaining {len(facts.unranked)} roster models are not ranked; each keeps a page with the evidence held for it.
 
-The eleven AA source components below correspond to ten current AA evaluations because Omniscience is split into accuracy and non-hallucination reliability:
+{model_inclusion_markdown(facts.inclusion)}
+## Value
 
-| AA evaluation/component | Current methodology weight |
-|---|---:|
-| {md_benchmark_link('AA-Briefcase')} | 15% |
-| {md_benchmark_link('GDPval-AA v2.1')} | 10% |
-| {md_benchmark_link('AutomationBench-AA')} | 5% |
-| {md_benchmark_link('Terminal-Bench 4.0 (AA evaluation)')} | 10% |
-| {md_benchmark_link('SciCode')} | 10% |
-| {md_benchmark_link("Humanity's Last Exam")} | 10% |
-| {md_benchmark_link('GDP.pdf')} | 10% |
-| {md_benchmark_link('CritPt')} | 10% |
-| {md_benchmark_link('AA-Omniscience Accuracy')} | 10% |
-| {md_benchmark_link('AA-Omniscience Non-Hallucination Rate')} | 5% |
-| {md_benchmark_link('AA-LCR v1.1')} | 5% |
+Value on a basis = **{facts.cost_pct:.0f}%** × cost score + **{facts.quality_pct:.0f}%** × quality score (owner decision, 2026-10-19). Both scores run from 0 to 100, higher is better. Cost's share is fixed: a configuration missing quality evidence keeps cost at {facts.cost_pct:.0f}%, and a configuration without a cost score has no value score. Ranks are competition ranks; equal values share the better rank.
 
-These AA methodology weights describe the source index, not the combined ValueRank weights above. ValueRank adds DeepSWE, cost, and AA Index signals using the explicitly published priority table. The AA Index value for {aa_index_estimated_models} is the benchmark owner’s estimate pending independent evaluation.
+## Cost: the SDLC basket
 
-## API Costs and Plan Costs
+The cost figure is the **{boundary['label']}**. {v3['basketVersion']} holds the components the admission rule admits ({admission['selectionRule']}); its reference panel is {admission['jointCovered']} of the {len(facts.rows)} ranked configurations (at least {admission['requiredPanelSize']} required):
 
-Both bases measure token efficiency as AA's total cost to run its Intelligence Index benchmarks per Index point. The API Costs basis divides each model's AA total evaluation cost in USD by its AA Intelligence Index. Plan Costs also divides by the model's highest eligible subscription Value Multiple, so a plan allowance is credited with the API-equivalent usage it delivers per dollar of fee. Models without an eligible route are compared on API cost per Index point. Lower cost ranks better in both views, cost carries a fixed **{cost_weight_text}** of the score in both, and the site switcher recalculates the primary composite when the cost basis changes.
+{markdown_table(['Component', 'Status', 'Exact cost available', 'Complete', 'Ranked'], component_rows, numeric={2, 3, 4})}
 
-## Missing-metric handling
+A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is read from AA's chart (rounded to USD 1). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
-- A retained dimension contributes to a model only when that model has an eligible value from the benchmark owner or an exact-version provider claim. Ranking within each dimension uses only models with eligible values.
-- Missing values remain null in aa_metrics.json and are listed in coverage_matrix.json.
-- Cost keeps its fixed share; each row's retained quality priorities are renormalized over that model's available values. Coverage is cost's share (when the model has a cost) plus the quality share times available quality priority divided by total quality priority; missing metric names accompany the percentage.
-- No zero, neutral 50, median, or mismatched-version value is used. Provider claims remain source-typed and are eligible only for the stated benchmark version and evaluated model/route.
-- AA output speed covers **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** is missing. If retained, Speed contributes only where a value exists and the gap is included in row coverage.
-- GPQA Diamond remains an explicitly labelled legacy ValueRank input; it is not a component of the v4.3.2 source composite.
-- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** ranked models; the cost component uses **{cost_mode_label}** consistently across this cohort.
-- LiveBench Instruction Following is available for **{sum(model.get('livebenchInstructionFollowing') is not None for model in models)}/{n}** ranked models and is scored where present. Terminal-Bench 4.0 is supplemental in this release under the published dimension-selection policy.
-- Bug Hunt Bench has **{bug_hunt_source_matches_n}/{source_n}** exact owner results. Eligible exact-variant results contribute where present at the published Bug Hunt priority; the separate emphasis view includes **{bug_hunt_ranking['matchedN']}** rows with eligible results.
+**Cost boundary.** Source: {boundary['source']}. AA's cost covers the contestant model's API tokens; other charges are included, excluded or unknown per component:
 
-Dropped candidate dimensions:
+{markdown_table(['Component'] + [CHARGE_LABELS[name] for name in boundary['chargeClasses']], boundary_rows)}
 
-| Dimension | Missing models | Decision |
-|---|---|---|
-{drop_text}
+**Subset workloads (O17).** A configuration without exact cost for an admitted component is scored on the workload made of the components it has, against that workload's own frozen anchors, and flagged "subset cost"; its ordering against main-workload configurations is not identified. A component AA marks with missing or declined tasks is flagged "partial component" (E37).
 
-## Rank normalization
+## Cost score and anchors
 
-For each retained quality dimension, models with an eligible value are ranked from best to worst and mapped using that dimension's available sample size:
+Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100. The anchors are frozen per workload and basis: c_L is half the cheapest reference cost and c_H twice the dearest, so no reference configuration clips. A release is held when more than max(1, 10% of ranked rows) clip on a basis or any row lies beyond an anchor by more than a factor of 2 (owner decision O12).
 
-((n - rank) / (n - 1)) × 100
+{markdown_table(['Workload', 'Basis', 'Low anchor c_L (USD)', 'High anchor c_H (USD)', 'References', 'Status'], anchor_rows, numeric={2, 3, 4})}
 
-Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive the average tied rank. The sample size is the number of models with a value for that dimension.
+**Anchor policy** (`{policy['policyId']}` v{policy['version']}). Population: {policy['populationRule']}. Plan anchors: {policy['planRule']}. At least {policy['minimumReferences']} references; below that, {policy['belowMinimum']}. Lifetime: {policy['lifetime']}.
 
-## Cost normalization
+**Exchange rate.** In the unclipped region a cost doubling changes value by −100 × {v3['beta']} × ln 2 / ln(c_H / c_L) points, offset by +100 × {v3['beta']} × ln 2 / ((1 − {v3['beta']}) × ln(c_H / c_L)) quality points. At the main-workload anchors:
 
-Cost is the one lower-is-better dimension and keeps its magnitude. Each ranked model's cost per Index point c is mapped on a log scale between the cheapest (c_min) and dearest (c_max) ranked model:
+{markdown_table(['Basis', 'Anchor ratio c_H / c_L', 'Value points per cost doubling', 'Quality points that offset it'], rate_rows, numeric={1, 2, 3})}
 
-100 × (ln c_max − ln c) / (ln c_max − ln c_min)
+**Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2).
 
-The cheapest model scores 100 and the dearest 0, and equal cost ratios move the score by equal amounts: a model twice as expensive as another sits the same distance below it anywhere on the scale.
+{markdown_table(['Basis', 'Panel', "Cost's share", 'Status'], influence_rows, numeric={1, 2})}
 
-## Benchmark evaluation cost (score input)
+## Quality
 
-The Cost input uses **{cost_mode_label}** where an AA Intelligence Index total evaluation cost is available; lower cost per point is better. Plan Costs further divides that cost by the model's highest eligible subscription Value Multiple. A missing cost remains null and the row is scored on quality alone; no DeepSWE leaderboard cost or missing-value fill is used.
+Quality is the weighted mean of the leaves observed for the exact configuration, each placed on fixed 0–100 anchors from its raw value (clipped, with saturation disclosed). Group shares of quality: {', '.join(f"{q.GROUP_LABELS[group]} {share_value:.0f}%" for group, share_value in q.GROUPS.items())}.
 
-## Quality score and interpretation
+{markdown_table(['Leaf', 'Group', 'Weight in quality', 'Weight in value', 'Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
 
-Quality Score is the priority-weighted mean of a model's available non-cost dimensions, renormalized to 100%. Overall Score is **{cost_weight_text}** × cost score + the remainder × Quality Score. Scores are relative to the ranked cohort and the values available for this release, not probabilities and not an absolute model capability scale; row coverage is displayed beside each score.
+Coverage is the observed share of quality weight. A row is **provisional** when coverage is below {q.MIN_COVERAGE:.0%}, fewer than {q.MIN_SWE_LEAVES} software-engineering leaves are observed, observed software-engineering weight is below {q.MIN_SWE_WEIGHT:.0%}, or a leaf weighing {q.REQUIRED_LEAF_WEIGHT:.0f}% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
 
-## Supplemental data
+## Plan basis
 
-{md_benchmark_link('Artificial Analysis Intelligence Index')} exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, EnterpriseOpsGym, ITBench SRE, and legacy fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json. AA-Briefcase, GDP.pdf, AutomationBench-AA, and AA's Terminal-Bench 4.0 evaluation are v4.3.2 source components, not standalone ValueRank dimensions. GPQA Diamond and the old τ³-Banking/TB2.1 fields are separately labelled legacy data.
+Plan cost = basket API cost ÷ the Value Multiple of the selected subscription route, at full utilisation. A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged.
 
-{md_benchmark_link('LiveBench')} is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the {livebench_document['matchedN']} matched cohort rows plus {livebench_supplemental_label}: {livebench_supplemental_text}.
+**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today {yield_['pointIdentified']} of {yield_['rows']} Plan rows are point-identified and {yield_['setIdentified']} set-identified, so the Plan ranking is {'labelled exploratory' if yield_['exploratory'] else 'not labelled exploratory'}. A measured-only Plan view (`{measured['id']}`) re-runs the selection over {measured['admission']}, without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
-{md_benchmark_link('Terminal-Bench 4.0')} is incorporated as the current external terminal-agent source. The official page shows {tb4_document['rowN']} owner rows; a separate provider-claim row is included for the current DeepSeek V4 Flash API alias and is explicitly labelled. Together they provide {tb4_document.get('rankingAvailableN', tb4_document['matchedN'])}/{tb4_document['cohortN']} eligible cohort values, leaving {len(tb4_document.get('rankingMissingModels', tb4_document['missingModels']))} gaps.
+**Subscription evidence policy** (as of {facts.routes_document['asOf']}; reporting window {routes_policy['reportingWindow']['start']} to {routes_policy['reportingWindow']['end']}):
 
-## Provider claim policy
+- Default numerator: {routes_policy['defaultNumerator']}
+- Selected source for {', '.join(exception['providers'])}: [SemiAnalysis]({exception['sourceUrl']}) ({exception['publicationDate']}, owner-selected {exception['authorizedOn']}): {exception['evidenceType']}
+{policy_lines}
+- Provider allowance, quota and marketing figures never supply the measured numerator; a provider's published price can be the fee denominator only when the tier mapping is supported.
 
-When the benchmark owner has not published a result for a model, ValueRank uses a model-provider-published claim when the benchmark version and evaluated model identity match. The claim keeps its source type, direct source link, date, and any alias/variant caveat in the raw data and evidence ledger. A benchmark-owner result supersedes the claim when it becomes available. Claims for different versions or variants remain audit-only.
+## Uncertainty outputs
 
-## Bug Hunt Bench scoring
+**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `{bar['policyId']}` v{bar['version']}: the {bar['position']} of {bar['populationRule']}, ordered by {bar['order']}, selected {bar['selectionMode']}; {bar['lifetime']}. Current reference: {method['barReference'] or 'none'}.
 
-Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **{bug_hunt_ranking['sourceCommit']}** and provides **{bug_hunt_source_matches_n}/{source_n}** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **{bug_hunt_weight['priority']}** (**{bug_hunt_weight['weightPct']:.2f}%** before row-level renormalization).
+**Scenario shares** are frequencies over declared streams, never probabilities ({scenario_scope}):
 
-The companion Bug Hunt emphasis ranking uses **{bug_hunt_ranking['matchedN']}** eligible owner-result rows and re-ranks the other available dimensions within that subset. Cost keeps its fixed **{cost_weight_text}**; Bug Hunt gets priority **{bug_hunt_ranking['benchmarkPriority']}** out of **{bug_hunt_ranking['totalPriority']}** quality priority, or **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
+{streams}
 
-The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. Models remain visible when one or more retained metrics are missing, with their available-priority coverage shown. A model with no rankable primary metric remains unranked. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
+S1 also runs with the endpoint-heavy kernel. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
+
+{not_quantified}
+
+## Diagnostics
+
+Diagnostics are published beside the ranking and never change a score: Terminal-Bench same-harness agreement, anchor stability (exchange-rate series and trimmed-anchor rank shifts), Omniscience abstention sensitivity, quality source shares, matched-panel quality agreement, non-discriminating leaves, group drift, quality dispersion, deletion sensitivity (leave-one-benchmark-out and source deletions) and the standing removal of the Terminal-Bench cost component. Current results are in [scores.md](scores.md#diagnostics).
+
+## Release gates
+
+{markdown_table(['Rule', 'Status', 'Detail'], gate_rows)}
 
 ## Limitations
 
-- The AA DeepSWE chart and the other AA Index components measure distinct tasks and use different evaluation setups; ValueRank is a transparent synthesis, not a new benchmark.
-- Bug Hunt results also depend on the tested agent CLI/harness, effort, and route; they measure the tested stack, not model capability in isolation.
-- Rank normalization of the quality dimensions discards magnitude differences; only cost keeps its magnitude. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
-- Page variants can differ by reasoning effort; the selected URL and variant are recorded per model.
-- Provider claims may use a different harness or sampling procedure than the benchmark owner; displayed claim values are not presented as independent benchmark-owner measurements.
-- AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.
-- LiveBench and Terminal-Bench have different task suites and release surfaces from the AA source component; their displayed values should not be substituted for one another or read as a continuous version-to-version series.
+{limitations}
+
+## Machine-readable files
+
+- [data/scores.json](data/scores.json): the `v3` section holds every row, workload, anchor, interval output, scenario result, diagnostic and the evidence bundle
+- [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
+- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `{v3['anchorVersion']}`
+- [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
+- [data/aa_deepswe.json](data/aa_deepswe.json), [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots
 """
-    (root / "methodology.md").write_text(methodology + "\n\n## Subscription evidence policy\n\n" + plan_policy_copy + "\n")
 
 
-    norm_rows = "\n".join(
-        f"| {model['rank']} | {model['name']} | [{norm_values(model, weights)}] |"
-        for model in models
-    )
-    scores_md = f"""# ValueRank {VERSION} Scores
+def md_link(label, url):
+    return f"[{label}]({url})" if url else label
 
-**Updated:** {DATE} · **Cohort:** {n} · **Retained dimensions:** {d} · **Default cost basis:** API Costs (AA total evaluation cost per Index point) · **Cost weight:** {cost_weight_text}
 
-API Costs uses the AA total evaluation cost in USD divided by the model's AA Intelligence Index (USD per Index point); Plan Costs also divides by the highest eligible subscription Value Multiple. Cost carries a fixed {cost_weight_text} of the overall score on both bases. The site switcher recalculates the main rank and cost-based charts using the selected basis.
+# --- scores ------------------------------------------------------------------------------------
 
-## Final ranking
 
-| Rank | Model | Overall | Quality | Quality Rank | API cost per Index point (USD, lower better) | Weight coverage | Missing metrics |
-|---:|---|---:|---:|---:|---:|---:|---|
-{chr(10).join(f"| {m.get('rank') or '—'} | {m['name']} | {fnum(m.get('overallScore'), 1)} | {fnum(m.get('qualityScore'), 1)} | {m.get('qualityRank') or '—'} | {fnum(m.get('costComposite'))} | {metric_coverage_summary(m, weights)[0]} | {metric_coverage_summary(m, weights)[1]} |" for m in models)}
+def scores_markdown(facts):
+    v3 = facts.v3
+    ranking_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        ranking_rows.append([
+            model_link(entry, configuration_label(row, facts.names)),
+            entry["rank"]["plan"], fnum(entry["overall"]["plan"], 2), fnum(entry["costDims"]["plan"], 2),
+            entry["rank"]["api"], fnum(entry["overall"]["api"], 2), fnum(entry["costDims"]["api"], 2),
+            fnum(entry["quality"], 2), f"{entry['coverage']['pct']:.0f}%", "subset" if entry["cost"]["subset"] else "main",
+        ])
+    leaf_headers = ["Configuration"] + [leaf.label for leaf in q.LEAVES] + ["Quality", "Provisional"]
+    leaf_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        leaves = row["quality"]["leaves"]
+        leaf_rows.append(
+            [configuration_label(row, facts.names)]
+            + [fnum(leaves[leaf.key]["z"], 1) if leaf.key in leaves else DASH for leaf in q.LEAVES]
+            + [fnum(row["quality"]["displayed"], 2), "; ".join(row["quality"]["provisionalReasons"]) or "no"]
+        )
+    components = list(basket.TARGET_COMPONENTS)
+    cost_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        detail = row["cost"]["componentsDetail"]
+        cost_rows.append(
+            [configuration_label(row, facts.names)]
+            + [usd(detail[key]["costUsd"]) if key in detail else DASH for key in components]
+            + [usd(row["cost"]["costUsd"]), names([component_label(key) for key in row["cost"]["missingComponents"]])]
+        )
+    plan_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        plan = row["plan"]
+        plan_rows.append([
+            configuration_label(row, facts.names), route_text(entry), plan.get("selectedIdentification") or DASH,
+            usd(row["planScore"]["costUsd"]), "; ".join(plan["flags"]) or DASH, plan.get("selectionReason") or DASH,
+        ])
+    measured = v3["measuredOnlyPlanView"]
+    measured_rows = [
+        [facts.label(model_id), item["status"], item.get("routeId") or DASH, usd(item.get("costUsd")), fnum(item.get("value"), 2), item.get("rank") or DASH]
+        for model_id, item in sorted(measured["rows"].items(), key=lambda pair: (pair[1].get("rank") is None, pair[1].get("rank") or 0, facts.label(pair[0])))
+    ]
+    unranked_rows = [[entry["name"], "; ".join(entry["exclusionReasons"]) or DASH] for entry in facts.unranked]
+    return f"""# ValueRank {VERSION} Scores
 
-## Bug Hunt Emphasis Ranking
+**Updated:** {DATE} · methodology {v3['methodologyVersion']} · {v3['basketVersion']} · anchor version `{v3['anchorVersion']}`
 
-Bug Hunt is included in the main **{n}-model primary ranking** at **{bug_hunt_weight['weightPct']:.2f}%**. The companion emphasis view uses the same cohort and increases Bug Hunt's weight to **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** by re-ranking the other retained dimensions within those models.
+Value = {facts.cost_pct:.0f}% × cost score + {facts.quality_pct:.0f}% × quality. Costs are USD per basket run; the cost score is log-scaled against the frozen anchors of the row's workload (see [methodology.md](methodology.md)).
 
-| Bug Hunt rank | Model | Fixed / 105 | Emphasis score | Runs / aggregation | Effort | Harness / route | Primary rank |
-|---:|---|---:|---:|---|---|---|---:|
-{bug_hunt_emphasis_table(bug_hunt_ranking, bug_hunt_records)}
+## Ranking
 
-Source: [Bug Hunt Bench]({BUG_HUNT_URL}) and the pinned [owner scoreboard]({bug_hunt_document['sources']['scoreboard']}) at commit **{bug_hunt_ranking['sourceCommit']}**. The run configuration details and coverage gaps are in [raw-data.md](raw-data.md).
+{markdown_table(['Configuration', 'Plan rank', 'Plan value', 'Plan cost score', 'API rank', 'API value', 'API cost score', 'Quality', 'Quality coverage', 'Workload'], ranking_rows, numeric={1, 2, 3, 4, 5, 6, 7, 8})}
 
-## Pareto frontier
+## Not ranked
 
-Undominated on composite cost versus quality: **{pareto_text}**.
+{markdown_table(['Model', 'Reasons'], unranked_rows)}
 
-## Weights
+## Quality leaf scores
 
-| Dimension | Weight | Direction |
-|---|---:|---|
-{chr(10).join(f"| {md_benchmark_link(w['label'])} | {w['weightPct']:.2f}% | {'higher' if w['higherBetter'] else 'lower'} |" for w in weights)}
+Each leaf's score z on its fixed 0–100 anchors; "—" marks a leaf with no eligible exact-configuration result.
 
-## Normalized dimension matrix
+{markdown_table(leaf_headers, leaf_rows, numeric=set(range(1, len(q.LEAVES) + 2)))}
 
-Dimension order is the order in weights above:
+## Basket cost by component
 
-[{', '.join(w['key'] for w in weights)}]
+USD at API rates for the exact configuration; "—" marks a component without an exact cost.
 
-| Rank | Model | Normalized dimensions |
-|---:|---|---|
-{norm_rows}
+{markdown_table(['Configuration'] + [component_label(key) for key in components] + ['Basket cost', 'Missing admitted components'], cost_rows, numeric=set(range(1, len(components) + 2)))}
 
-## Coverage decision
+## Plan route selection
 
-The current AA Intelligence Index score-versus-total-benchmark-cost frontier, and its near-frontier families, are reconciled into the selected catalog (see Model inclusion in methodology.md). The primary rank gives cost per Index point a fixed {cost_weight_text} share, uses each model's available exact-version quality values and renormalizes its retained quality priorities per row; the ranking table reports the weight-coverage percentage and missing metric names. {len(unranked_models)} source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
+{markdown_table(['Configuration', 'Selected route', 'Identification', 'Plan cost (USD per basket run)', 'Flags', 'Selection reason'], plan_rows, numeric={3})}
 
-## External benchmark coverage
+### Measured-only Plan view
 
-{md_benchmark_link('Artificial Analysis Intelligence Index')} provides the current AA component scores used by this release. {md_benchmark_link('LiveBench')} Instruction Following contributes for rows with an eligible value; its Overall Score and Cost Per Successful Task remain supplemental. {md_benchmark_link('Terminal-Bench 4.0')} remains supplemental under this release's dimension-selection policy. See [raw-data.md](raw-data.md) for source-backed tables.
+Admission: {measured['specification']['admission']}. Selection: {measured['specification']['selection']}. Panel: {measured['specification']['panel']}.
+
+{markdown_table(['Configuration', 'Status', 'Route', 'Plan cost', 'Value', 'Rank'], measured_rows, numeric={3, 4, 5})}
+
+{calibration_markdown(facts)}
+
+## Interval outputs
+
+{interval_tables(facts)}
+
+## Scenario shares
+
+{scenario_tables(facts)}
+
+## Diagnostics
+
+{diagnostics_markdown(facts)}
+
+## Release gates
+
+{markdown_table(['Rule', 'Status', 'Detail'], [[item['rule'], item['status'], item['detail']] for item in v3['manifest']])}
 """
-    (root / "scores.md").write_text(scores_md)
 
-    aa_variant_rows = "\n".join(
-        f"| {model['name']} | {model['aaSlug']} | {model['aaVariant'] or 'not stated'} | [page]({model['aaUrl']}) |"
-        for model in all_models
-    )
-    raw_rows = "\n".join(
-        f"| {model['rank'] if model.get('rank') is not None else '—'} | {model['name']} | "
-        f"{((model.get('deepsweScoreConfig') or {}).get('agent', '—'))} / "
-        f"{((model.get('deepsweScoreConfig') or {}).get('model', '—'))} / "
-        f"{((model.get('deepsweScoreConfig') or {}).get('effort') or 'not shown')} | "
-        f"{fnum(model.get('deepswePassAt1Pct'), 1)}% | {fnum(model.get('briefcaseElo'))} | "
-        f"{fnum(model.get('gdpvalV21'), 1)} | {pct(model.get('automationBenchAA'))} | "
-        f"{pct(model.get('aaTerminalBenchV40'))} | {pct(model.get('aaTerminalBenchV21'))} | "
-        f"{pct(model.get('legacyTau3Banking'))} | {pct(model['scicode'])} | "
-        f"{pct(model.get('gdpPdfAllPass'))} | {pct(model['aaLcr'])} | {pct(model['hle'])} | "
-        f"{pct(model['gpqaDiamond'])} | {pct(model['critpt'])} | {pct(model['omniAccuracy'])} | "
-        f"{pct(model['omniNonHallucination'])} | "
-        f"{fnum(model['intelligenceIndex'])}{' (estimated)' if model.get('intelligenceIndexStatus') == 'estimated' else ''} | "
-        f"{CURRENCY}{fnum(model.get('aaEvalCost'))} | {fnum(model.get('speed'), 1)} |"
-        for model in all_models
-    )
-    supplemental_rows = "\n".join(
-        f"| {field} | {data.get('availableN', '—')}/{data.get('cohortN', n)} | {names(data.get('missingModels', []))} | {'Primary' if data.get('includedInPrimaryScore') else 'Supplemental / not scored'} |"
-        for field, data in coverage_document.get("fields", {}).items()
-        if data.get("group") == "supplemental"
-    )
-    livebench_raw_rows = livebench_table(livebench_rows)
-    tb4_raw_rows = tb4_table(tb4_rows)
-    aa_evidence_rows = "\n".join(
-        "| " + " | ".join(str(value).replace("|", "\\|").replace("\n", " ") for value in (
-            model['name'],
-            (record.get('extraction') or {}).get('sourceObservedAt') or aa_document.get('observedAt') or 'Not recorded',
-            (record.get('extraction') or {}).get('precision') or 'No rounding metadata recorded',
-            (record.get('extraction') or {}).get('note') or 'Retained earlier source snapshot',
-        )) + " |"
-        for model in all_models
-        for record in [aa_document.get('models', {}).get(model['id'], {})]
-    )
-    provider_claim_rows = "\n".join(
-        f"| {claim['benchmark']} {claim['benchmarkVersion']} | {claim.get('cohortModelId', '—')} | {claim.get('evaluatedModel', '—')} | {pct(claim.get('value'))} | {'Ranking eligible' if claim.get('eligibleForRanking') is True else 'Audit only'} | {claim.get('sourceType', '—')} | [provider source]({claim['sourceUrl']}) | {claim.get('caveat', claim.get('eligibilityReason', '—'))} |"
-        for claim in provider_claims
-    )
-    raw_data = f"""# ValueRank {VERSION} Raw Data
 
-**Version:** {VERSION} · **Updated:** {DATE} · **AA DeepSWE chart observed:** {deepswe_updated} · **AA source:** [{aa_version}]({AA_METHODOLOGY_URL})
+def calibration_markdown(facts):
+    """E164: the measured-only rows rescored on anchors built from measured evidence alone."""
 
-This publication combines source snapshots with different observation dates. The complete AA DeepSWE v1.1 chart inventory was observed October 8 and contains 31 configurations; the original 25 configuration records retain their prior per-row observation dates. Earlier AA component snapshots retain their recorded dates, while newly captured AA frontier profiles were observed October 8. Bug Hunt's base snapshot remains pinned separately from the selectively added MiMo owner run notes observed October 7. The publication date does not imply that every benchmark row was recaptured October 8. Per-model AA dates, precision, and source notes appear below; rounded public chart/tooltips preserve their displayed precision and do not establish hidden unrounded payload values.
+    measured = facts.v3["measuredOnlyPlanView"]
+    calibration = measured["calibration"]
+    lines = [f"#### Measured-evidence calibration (diagnostic)\n\nReferences: {calibration['rule']}. Status: {calibration['status']}.\n"]
+    for workload, item in calibration["workloads"].items():
+        provenance = item["officialAnchorProvenance"]
+        extremes = (
+            f" Official Plan anchors are set by {facts.label(provenance['low']['row'])} ({provenance['low']['evidence']}) at the low end "
+            f"and {facts.label(provenance['high']['row'])} ({provenance['high']['evidence']}) at the high end."
+            if provenance else " The workload has no official Plan anchors."
+        )
+        if item["status"] != "evaluated":
+            lines.append(f"- Workload `{workload}`: {item['status']}; measured rows {facts.labels(item['rows'])}.{extremes}")
+            continue
+        anchors = item["anchors"]
+        official_ratio = f"{item['officialExchangeRate']['anchorRatio']:.1f}" if item["officialExchangeRate"] else DASH
+        lines.append(
+            f"- Workload `{workload}`: measured anchors {usd(anchors['low'])} to {usd(anchors['high'])} from {facts.labels(item['references'])}; "
+            f"anchor ratio {item['exchangeRate']['anchorRatio']:.1f} against the official {official_ratio}.{extremes}"
+        )
+    rows = [
+        [facts.label(row_id), fnum(measured["rows"][row_id]["value"], 2), fnum(value, 2), calibration["rankChange"]["changes"].get(row_id, DASH)]
+        for row_id, value in sorted(calibration["values"].items(), key=lambda pair: facts.label(pair[0]))
+    ]
+    if rows:
+        lines.append("\n" + markdown_table(["Configuration", "Value on official Plan anchors", "Value on measured anchors", "Rank change"], rows, numeric={1, 2, 3}))
+        reversals = "; ".join(f"{facts.label(a)} and {facts.label(b)}" for a, b in calibration["reversals"]) or "none"
+        lines.append(f"\nPairwise reversals: {reversals}. Largest value change: {fnum(calibration['maxAbsValueChange'], 2)} points.")
+    return "\n".join(lines)
 
-The AA chart publishes {len(deepswe_configurations)} DeepSWE v1.1 agent/model configurations; {deepswe_overlap_n} exact model variants map to selected catalog entries. The primary score uses eligible exact-version dimensions available for each model rather than requiring complete benchmark overlap. Missing values remain null and are reported with row-level priority coverage. Raw AA values keep their source units: Elo fields remain Elo, and ratio fields are shown as percentages. **{aa_index_estimated_models}** has an AA Intelligence Index estimate; it is labelled in the matrix. Benchmark-owner results, estimates, and provider claims remain source-typed.
+
+def interval_tables(facts):
+    sections = []
+    for basis, label in (("api", "API"), ("plan", "Plan")):
+        result = facts.v3["intervals"][basis]
+        if result["status"] != "evaluated":
+            sections.append(f"**{label} basis:** not evaluated ({result.get('reason', result['status'])}).")
+            continue
+        rows = [
+            [facts.label(row_id), item["possible"], item["definite"], facts.label(item["definiteCounterexample"]) if item["definiteCounterexample"] else DASH,
+             facts.labels(item["possibleBlockedBy"]) if item["possibleBlockedBy"] else DASH]
+            for row_id, item in result["frontier"].items()
+        ]
+        text = f"**{label} basis, main workload: frontier.** Not evaluable: {facts.labels(result['unevaluable'])}.\n\n"
+        text += markdown_table(["Configuration", "Possible frontier", "Definite frontier", "Definite counterexample", "Possible frontier blocked by"], rows)
+        for bar in result.get("bars", []):
+            reference = facts.label(bar["reference"]["id"])
+            text += f"\n\n**{label} basis: cheapest at or above {reference}'s quality** ({bar['reference']['rule']}). Status {bar['status']}"
+            if bar["status"] == "certified":
+                text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
+                bar_rows = [[facts.label(row_id), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items()]
+                text += markdown_table(["Configuration", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows)
+            else:
+                text += "."
+        sections.append(text)
+    return "\n\n".join(sections)
+
+
+def scenario_tables(facts):
+    scenarios = facts.v3["scenarios"]
+    if scenarios.get("status") != "current":
+        return f"Scenario outputs are {scenarios.get('status')}; no shares are published for this release."
+    parts = [f"Frequencies over {scenarios['scenarios']:,} scenarios per run (seed {scenarios['seed']}); streams are defined in [methodology.md](methodology.md#uncertainty-outputs)."]
+    for basis, label in (("api", "API"), ("plan", "Plan")):
+        runs = scenarios["results"][basis]
+        for event, event_label in (("top1", "rank 1"), ("top3", "rank 3 or better"), ("frontier", "on the frontier")):
+            row_ids = runs[0]["panel"]
+            rows = [[facts.label(row_id)] + [share(run["rows"][row_id][event]["share"]) for run in runs] for row_id in row_ids]
+            parts.append(f"### {label} basis: {event_label}\n\n" + markdown_table(["Configuration"] + [run_label(run) for run in runs], rows, numeric=set(range(1, len(runs) + 1))))
+    labels = []
+    for item in scenarios["barLabels"]:
+        for candidate, result in item.get("candidates", {}).items():
+            low, high = result["frequencyRange"]
+            labels.append([
+                facts.label(item["reference"]), facts.label(candidate), result["reading"], f"{share(low)} to {share(high)}",
+                ", ".join(f"{code} {outcome['status']}" for code, outcome in result["assignments"].items()), "yes" if result["label"] else "no",
+            ])
+    if labels:
+        parts.append("### Cheapest-above-the-bar labels (API basis)\n\nEach kernel assignment code gives the kernel used for the candidate, the reference and the competitors, in that order (U uniform, H endpoint-heavy); the label needs every assignment met.\n\n"
+                     + markdown_table(["Bar", "Candidate", "Reading", "Frequency range", "Kernel assignments", "Label"], labels))
+    return "\n\n".join(parts)
+
+
+def rank_change_text(changes, names_label):
+    moved = {row_id: change for row_id, change in changes.items() if change}
+    if not moved:
+        return "no rank changes"
+    largest = max(abs(change) for change in moved.values())
+    return f"{len(moved)} rows move; largest move {largest} ({names_label([row_id for row_id, change in moved.items() if abs(change) == largest])})"
+
+
+def diagnostics_markdown(facts):
+    diagnostics = facts.v3["diagnostics"]
+    harness = diagnostics["terminalBenchSameHarness"]
+    agreement = diagnostics["qualityAgreement"]
+    drift = diagnostics["groupDrift"]
+    shares = diagnostics["qualitySourceShares"]
+    abstention = diagnostics["omniscienceAbstentionSensitivity"]
+    lines = [
+        f"- **Terminal-Bench same-harness ({harness['defaultHarness']}):** {harness['agreement']['status']}; {len(harness['harnessMixed'])} rows ran on mixed harnesses.",
+        f"- **Quality agreement:** {agreement['label']}: {agreement['status']}" + (f", Kendall tau {agreement['tau']:.2f} (interval {agreement['interval'][0]:.2f} to {agreement['interval'][1]:.2f}) on {len(agreement['panel'])} rows." if agreement["tau"] is not None else "."),
+        "- **Quality source shares:** " + ", ".join(f"{SOURCE_LABELS[source]} {share_value:.0%}" for source, share_value in shares.items()) + ".",
+        f"- **Non-discriminating leaves:** {names(diagnostics['nonDiscriminatingLeaves'])}.",
+        f"- **Group drift:** {drift['status']}" + ("; flagged: " + names([group for group, item in drift.get('groups', {}).items() if item['flag']]) if drift.get("groups") else "") + ".",
+        f"- **Omniscience abstention sensitivity** ({abstention['rule']}): {rank_change_text(abstention['rankChanges']['changes'], facts.labels)}.",
+    ]
+    stability = diagnostics["anchorStability"]
+    lines.append(
+        f"- **Anchor stability:** trimmed anchors ({stability['trimmedAnchors']['rule']}) give {usd(stability['trimmedAnchors']['low'])} to {usd(stability['trimmedAnchors']['high'])}; "
+        f"{rank_change_text(stability['trimmedRankShifts']['changes'], facts.labels)}."
+    )
+    deletion_rows = []
+    for branch in diagnostics["deletionSensitivity"]:
+        cells = [branch["id"], pct(branch["retainedNominalWeight"], 0), branch["status"]]
+        for basis in ("api", "plan"):
+            result = (branch.get("bases") or {}).get(basis)
+            cells.append(rank_change_text(result["rankChanges"]["changes"], facts.labels) if result else DASH)
+        deletion_rows.append(cells)
+    removal = diagnostics["costRemoval"]
+    removal_rows = [
+        [basis, item[key]["label"] + (f"; {item['multiplePolicy']}" if item["multiplePolicy"] else ""), rank_change_text(item[key]["rankChanges"]["changes"], facts.labels)]
+        for basis, item in removal.get("bases", {}).items()
+        for key in ("fixedAnchors", "recalibrated")
+    ]
+    return "\n".join(lines) + "\n\n### Deletion sensitivity\n\n" + markdown_table(
+        ["Branch", "Retained nominal weight", "Status", "API rank changes", "Plan rank changes"], deletion_rows, numeric={1}
+    ) + f"\n\n### Cost-component removal ({component_label(removal['component'])}: {removal['status']})\n\n" + markdown_table(["Basis", "Run", "Rank changes"], removal_rows)
+
+
+# --- raw data ----------------------------------------------------------------------------------
+
+
+def raw_data(facts):
+    v3 = facts.v3
+    leaf_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        audit = {item["leaf"]: item for item in row["quality"]["clipAudit"]}
+        for leaf in q.LEAVES:
+            if leaf.key not in row["quality"]["leaves"]:
+                continue
+            detail = row["quality"]["leaves"][leaf.key]
+            evidence = detail.get("evidence") or {}
+            leaf_rows.append([
+                configuration_label(row, facts.names), leaf.label, audit[leaf.key]["raw"], audit[leaf.key]["unit"], fnum(detail["z"], 2),
+                " / ".join(str(part) for part in (detail.get("configuration"), detail.get("agent")) if part) or DASH,
+                f"`{evidence['artifact']}` `{evidence['locator']}`" if evidence else DASH,
+            ])
+    component_rows = []
+    reconciliation_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        for key, item in row["cost"]["componentsDetail"].items():
+            detail = item.get("detail") or {}
+            component_rows.append([
+                configuration_label(row, facts.names), component_label(key), usd(item["costUsd"]), item["completeness"],
+                detail.get("tasks", DASH), usd(detail.get("costPerTaskUsd"), 4), item["source"],
+            ])
+        check = row["cost"]["indexReconciliation"]
+        reconciliation_rows.append([
+            configuration_label(row, facts.names), usd(check.get("sdlcSevenUsd")), usd(check.get("residualUsd")),
+            usd(check.get("reconstructedTotalUsd")), usd(check.get("publishedTotalUsd")), "yes" if check.get("reconciled") else "no",
+        ])
+    bug_rows = [
+        [facts.names.get(record["modelId"], record["modelId"]), record["evaluatedModel"], fnum(record["fixedOf105"], 1), record["sampleN"], record["effort"], record["harness"]]
+        for record in facts.bug_hunt["models"]
+        if record.get("matched") is True
+    ]
+    route_rows = [
+        [route["planLabel"], names([facts.names.get(model_id, model_id) for model_id in route["modelIds"]]), usd(route.get("planPriceUsd")),
+         f"{route['valueMultiple']:g}×", plan_evidence_label(route), route.get("sourceModel") or DASH, route.get("sourcePublicationDate") or DASH,
+         md_link("Source", route.get("sourceUrl")) if route.get("sourceUrl") else "User assumption"]
+        for route in facts.routes_document["routes"]
+    ]
+    bundle = v3["evidenceBundle"]
+    bundle_rows = [[item["key"], f"`{item['artifact']}`", f"`{item['sha256']}`", item.get("capturedAt") or DASH, item.get("extractor") or DASH] for item in bundle["artifacts"]]
+    deepswe = facts.deepswe["configurations"]
+    tb4 = facts.tb4
+    return f"""# ValueRank {VERSION} Raw Data
+
+**Updated:** {DATE} · methodology {v3['methodologyVersion']}
+
+Every input behind the published scores, with the artifact and locator that holds it. Generated from the committed snapshots in [data/](data/); nothing here is edited by hand.
+
+## Quality leaf inputs
+
+{markdown_table(['Configuration', 'Leaf', 'Raw value', 'Unit', 'Score z', 'Evaluated configuration / agent', 'Evidence'], leaf_rows, numeric={2, 4})}
+
+## Basket cost components
+
+{markdown_table(['Configuration', 'Component', 'Cost (USD)', 'Completeness', 'Tasks', 'USD per task', 'Source'], component_rows, numeric={2, 4, 5})}
+
+### AA Index total reconciliation
+
+The seven Index components plus AA's residual reproduce AA's published Intelligence Index total cost.
+
+{markdown_table(['Configuration', 'Index SDLC components', 'Residual', 'Reconstructed total', 'Published total', 'Reconciled'], reconciliation_rows, numeric={1, 2, 3, 4})}
 
 ## DeepSWE v1.1 AA chart configurations
 
-The visible chart contains all {len(deepswe_configurations)} configurations in the October 8 capture. Pass@1 is averaged across three attempts per task. Exact model-version mismatches and composite-agent configurations remain separate from ValueRank model-family rows; the original 25 records retain their previous row observation dates.
+The AA chart publishes {len(deepswe)} DeepSWE v1.1 configurations across {facts.deepswe['benchmarkTasks']} tasks, observed {facts.deepswe.get('observedAt', DASH)}. Each keeps its displayed agent, model and effort; only exact matches enter a score.
 
-| # | Agent | Evaluated model variant | Effort | Pass@1 | ValueRank mapping | Mapping note |
+| # | Agent | Evaluated model variant | Effort | pass@1 | ValueRank match | Note |
 |---:|---|---|---|---:|---|---|
-{deepswe_chart_table(deepswe_configurations)}
+{deepswe_chart_table(deepswe)}
 
-## Selected AA pages
+## Terminal-Bench 4.0 official rows
 
-| Model | AA slug | AA effort | Source |
-|---|---|---|---|
-{aa_variant_rows}
+{tb4['rowN']} official rows ({tb4['matchedN']} of {tb4['cohortN']} cohort matches), observed {tb4.get('observedAt', DASH)}. The published ± is the source's 95% confidence interval (used by stream S1M).
 
-### AA observation dates and precision
+| Rank | Base model | Agent | Resolution rate | Tokens | Cost |
+|---|---|---|---:|---|---:|
+{tb4_table(tb4['rows'])}
 
-| Model | Source observation | Capture precision | Capture note |
-|---|---|---|---|
-{aa_evidence_rows}
+## Bug Hunt Bench matched runs
 
-## AA source input matrix
+Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the score is the mean bugs fixed of 105 over the runs for the exact model, effort and harness.
 
-| # | Model | AA DeepSWE agent / variant / effort | DeepSWE pass@1 (AA) | AA-Briefcase Elo | GDPval-AA v2.1 | AutomationBench-AA | AA Terminal-Bench 4.0 | AA Terminal-Bench 2.1 legacy | τ³-Banking legacy | SciCode | GDP.pdf all-pass | AA-LCR v1.1 | HLE | GPQA legacy | CritPt | Omni Accuracy | Omni Non-Hallucination | AA Index | AA eval cost | Speed tok/s |
-|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-{raw_rows}
+{markdown_table(['Model', 'Evaluated model', 'Bugs fixed of 105', 'Runs', 'Effort', 'Harness'], bug_rows, numeric={2, 3})}
 
-## {md_benchmark_link('LiveBench')} external component
+## Plan routes
 
-{md_benchmark_link('LiveBench')} release **{livebench_document['release']}** supplies the four-task Instruction Following mean and its seven-category Overall Score. Cost is the official **Cost Per Successful Task** field. The pinned table matches **{livebench_document['matchedN']}/{livebench_document['cohortN']}** ranked models and includes **{livebench_supplemental_label}** outside that cohort: **{livebench_supplemental_text}**.
+Route evidence as of {facts.routes_document['asOf']}. Full allocation regimes, workloads and notes are in [data/plan_cost_routes.json](data/plan_cost_routes.json).
 
-| Model | LiveBench variant | Instruction Following | Overall Score | Cost Per Successful Task |
-|---|---|---:|---:|---:|
-{livebench_raw_rows}
+{markdown_table(['Plan', 'Eligible configurations', 'Monthly fee', 'Value Multiple', 'Evidence', 'Source model', 'Source date', 'Source'], route_rows, numeric={2, 3})}
 
-LiveBench Pareto frontier (Overall Score vs Cost Per Successful Task): **{livebench_pareto_text}**.
+## Evidence bundle
 
-## {md_benchmark_link('Bug Hunt Bench')} external component
+Bundle hash `{bundle['bundleHash']}`: {bundle['rebuild']}.
 
-The benchmark owner reports planted bugs fixed out of 105 across two repositories. This snapshot has **{bug_hunt_source_matches_n}/{source_n}** eligible exact selected-variant Bug Hunt results. Eligible results contribute where available to each model’s primary score; the separate Bug Hunt emphasis view includes **{bug_hunt_ranking['matchedN']}** exact-variant results. The base snapshot is pinned to [scoreboard commit {bug_hunt_ranking['sourceCommit']}]({bug_hunt_document['sources']['scoreboard']}); selectively added MiMo records link to their individual owner notes at commit `7dd3c23a4c86a3fac586707d01129bf549bae325`, observed October 7. Per-record links preserve each source snapshot. Models without any available primary quality dimension remain unranked: {unranked_names}.
+{markdown_table(['Key', 'Artifact', 'SHA-256', 'Captured', 'Extractor'], bundle_rows)}
+""" + facts.reconciliation_md
 
-| Model | Fixed / 105 | Runs / aggregation | Evaluated model | Effort and status | Harness | Route | Coverage |
-|---|---:|---|---|---|---|---|---|
-{bug_hunt_raw_table(all_models, bug_hunt_records)}
 
-Where no eligible selected-variant result exists, the model receives no inferred or neutral score. MiMo Flash has an owner default-route result (23.3/105, mean of three); its reasoning state was unasserted and untested, so equivalence to the selected AA reasoning variant remains unresolved and the owner result is shown separately. Provider-claim eligibility remains a separate exact-version and exact-variant audit.
+# --- entry point -------------------------------------------------------------------------------
 
-## {md_benchmark_link('Terminal-Bench 4.0')} external component
 
-The current official {md_benchmark_link('Terminal-Bench 4.0')} snapshot contains **{tb4_document['rowN']} rows** and overlaps **{tb4_document['matchedN']}/{tb4_document['cohortN']}** ranked models. It replaces the old standalone TB2.1 publication; the AA source matrix above keeps its v2.1 field only as explicit AA-source provenance.
+def main(*, root=ROOT, data=DATA) -> int:
+    """Emit every Markdown output beneath ``root`` from the snapshots in ``data``."""
 
-| Rank | Model | Agent | Resolution rate | Tokens | Cost |
-|---:|---|---|---:|---:|---:|
-{tb4_raw_rows}
-
-## Provider claims (separate from benchmark-owner results)
-
-The ledger contains **{len(eligible_provider_claims)} ranking-eligible provider claim** and separately records claims that fail version, implementation, or evaluated-variant checks. The eligible DeepSeek value is a V4.1-Flash Terminal-Bench 4.0 claim for the current `deepseek-v4-flash` API alias; it is not a direct result for the retired V4 Flash model. Google’s GDP.pdf and AutomationBench claims remain audit-only because the model card does not establish the selected medium effort and exact AA component implementation.
-
-| Benchmark and version | Cohort model | Evaluated model | Provider value | Status | Source type | Source | Caveat |
-|---|---|---|---:|---|---|---|---|
-{provider_claim_rows}
-
-## Benchmark evaluation cost (score input)
-
-The API Costs baseline uses AA total evaluation cost in USD divided by the AA Intelligence Index. AA cost is available for **{cost_coverage.get('availableN', '—')}/{cost_coverage.get('cohortN', n)}** ranked models; missing values are **{cost_missing_text}**. Plan Costs further divides by each model's highest eligible subscription Value Multiple. No DeepSWE leaderboard cost is used.
-
-| Model | AA evaluation cost (USD) | AA Intelligence Index | API cost per Index point (USD) | API cost score (log scale) |
-|---|---:|---:|---:|---:|
-{chr(10).join(f"| {m['name']} | {fnum(m.get('aaEvalCost'))} | {fnum(m.get('intelligenceIndex'))} | {fnum(m.get('aaCostPerIndexPoint'))} | {fnum((m.get('dims') or {}).get('costComposite'), 1)} |" for m in models)}
-
-## Supplemental Artificial Analysis coverage
-
-These fields are preserved for future analysis but remain outside the primary score because they are incomplete across the current cohort or are not separate ValueRank dimensions. AA-Briefcase and GDP.pdf are current v4.3.2 source components represented in the raw matrix; GPQA Diamond is retained as an explicitly labelled legacy ValueRank input. LiveBench and Terminal-Bench 4.0 are external coverage-only components under the same no-imputation policy.
-
-| Field | Available | Missing models | Role |
-|---|---:|---|---|
-{supplemental_rows}
-
-## Dropped primary candidate
-
-| Dimension | Missing model | Treatment |
-|---|---|---|
-{drop_text}
-
-Missing values are intentionally represented as null; no old-version, model-family, median, or neutral-fill substitution is used.
-
-## Machine-readable artifacts
-
-- [data/aa_deepswe.json](data/aa_deepswe.json): AA Coding Agent Index v1.5 DeepSWE v1.1 chart, all {len(deepswe_configurations)} configurations and exact model-variant mappings
-- [data/aa_metrics.json](data/aa_metrics.json): decoded current AA model payloads
-- [data/scores.json](data/scores.json): normalized scores and rankings
-- [data/coverage_matrix.json](data/coverage_matrix.json): primary and supplemental availability
-- [data/livebench.json](data/livebench.json): pinned LiveBench task/category/cost snapshot and Pareto data
-- [data/tb4.json](data/tb4.json): normalized official Terminal-Bench 4.0 rendered leaderboard
-- [data/bug_hunt.json](data/bug_hunt.json): pinned Bug Hunt scoreboard, exact matches, and explicit mismatches
-- [research/2026-09-29-valuerank-refresh-v4-3-2/README.md](research/2026-09-29-valuerank-refresh-v4-3-2/README.md): v4.3.2 source-change, evidence, and scoring record
-- [data/provider_claims.json](data/provider_claims.json): provider claim values, source URLs, eligibility, and caveats
-- [data/deepswe.json](data/deepswe.json): historical DeepSWE Best snapshot retained for audit only; it is not used for current DeepSWE scores
-- [data/tb4-browser-2026-09-29.json](data/tb4-browser-2026-09-29.json): built-in browser Terminal-Bench snapshot
-"""
-    (root / "raw-data.md").write_text(raw_data + aa_reconciliation_md + plan_comparison_md)
-
+    facts = Facts(data)
+    documents = {
+        "README.md": readme(facts),
+        "methodology.md": methodology(facts),
+        "scores.md": scores_markdown(facts),
+        "raw-data.md": raw_data(facts),
+    }
+    for name in OUTPUTS:
+        (root / name).write_text(documents[name])
     print(json.dumps({
         "version": VERSION,
-        "models": n,
-        "dimensions": d,
-        "dropped": [item["label"] for item in dropped],
-        "outputs": ["README.md", "methodology.md", "scores.md", "raw-data.md"],
+        "methodology": facts.v3["methodologyVersion"],
+        "configurations": len(facts.rows),
+        "outputs": list(OUTPUTS),
     }, indent=2, ensure_ascii=False))
     return 0
 

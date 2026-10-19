@@ -1,20 +1,23 @@
 # ValueRank Methodology
 
-**Version:** v2.0.0
+**Version:** v2.0.0 (methodology 3.0.0)
 **Updated:** October 19, 2026
 
-## Cohort and source versions
+This page summarises how ValueRank scores value. The normative specification, its review record and every owner and editor decision are in [research/2026-10-19-methodology-codesign/](research/2026-10-19-methodology-codesign/); where this summary is less precise, the specification governs.
 
-The selected catalog is reconciled against AA's current Pareto frontier of Intelligence Index score versus total USD benchmark-run cost and includes every model family on that frontier plus every near-frontier family; the full policy follows. AA's Coding Agent Index v1.5 chart publishes **42 DeepSWE v1.1 configurations** across **113 tasks**, observed **2026-10-17T19:26:26Z**. The primary rank includes every selected model with at least one eligible exact-version non-cost quality metric; a model does not need complete benchmark overlap. Models without an observed quality metric remain unranked. Each chart result retains its displayed model variant, agent, and effort.
+## Objective and claim scope
 
-- DeepSWE v1.1 source: [AA Coding Agent Index v1.5](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1). The published chart says each score averages pass@1 across three attempts per task; the complete 42-configuration inventory and exact-variant mapping decisions are pinned in [data/aa_deepswe.json](data/aa_deepswe.json).
-- AA source: [Intelligence Index methodology](https://artificialanalysis.ai/methodology/intelligence-benchmarking), current Artificial Analysis Intelligence Index v4.3.2.
-- AA Intelligence Index percentile comparisons use whole-point precision for every model because fresh public labels are rounded while older captures retain finer raw precision. Raw source inputs remain unchanged; sub-point differences should not be read as a reliable ordering.
-- AA v4.3.2 model values: first-party model pages selected by data/aa_mapping.json and recorded in aa_metrics.json.
-- LiveBench source: [livebench.ai](https://livebench.ai/), pinned release **2026-06-25** with seven categories, including the four-task Instruction Following category and published Cost Per Successful Task values. The data files are pinned to release commit **7be9f746f36a6f007dd78461f67cb7d06cfe2304**.
-- Terminal-Bench source: [tbench.ai](https://www.tbench.ai/), current **4.0** rendered leaderboard snapshot with 23 official rows, **11** direct cohort matches, and **1** eligible provider claim.
+ValueRank asks which frontier AI model configuration is lowest cost for the value it delivers on software-development work, once subscription economics and software-engineering benchmarks are weighed alongside general capability. It serves two buyers, ranked separately: **API buyers**, who pay per token (including through third-party agents), and **Plan buyers**, who use a provider subscription such as Claude Code, Codex or ChatGPT. The claim is scoped to value among the ranked configurations, under the published benchmark mix and evidence; it is not a market-wide optimum. Every ranked row is a **configuration**: a model version at one reasoning effort. Results are never transferred between versions or efforts.
 
-Earlier publications used different source snapshots, weights, or cohorts. They remain historical; their numerical scores must not be compared directly with v2.0.0.
+## Cohort
+
+19 configurations are ranked:
+
+- On AA's rendered frontier (7): GPT-6.1 Sol (max), Claude Sonnet 5.5 (max), Claude Opus 5.5 (max), MiMo-V2.6-Pro, GPT-6 Luna (max), MiMo-V2.6-Flash, Claude Haiku 5.5 (xhigh)
+- Near-frontier family (3): Gemini 4 Argon (high), GPT-6 Astra (xhigh), GPT-5.6 Luna (max)
+- Retained from earlier releases for exact DeepSWE and Bug Hunt evidence (9): GPT-5.6 Sol (max), GPT-6 Sol (max), Grok 4.7 (xhigh), Gemini 3.8 Flash (high), Claude Opus 5 (max), GLM-5.3 (max), DeepSeek V4 Flash (max), Qwen3.8 Max, DeepSeek V4 Pro (max)
+
+The remaining 12 roster models are not ranked; each keeps a page with the evidence held for it.
 
 ## Model inclusion
 
@@ -40,133 +43,165 @@ Frontier families and the configuration selected for each:
 
 Near-frontier families and the configuration selected for each:
 
-- Claude Haiku 5.5: Claude Haiku 5.5 (low), 1 Index points below the frontier
-- Claude Opus 5.5: Claude Opus 5.5 (medium with fallback), 1 Index points below the frontier
+- Claude Haiku 5.5: Claude Haiku 5.5 (low), 1 Index point below the frontier
+- Claude Opus 5.5: Claude Opus 5.5 (medium with fallback), 1 Index point below the frontier
 - Claude Sonnet 5.5: Claude Sonnet 5.5 (xhigh with fallback), 2 Index points below the frontier
-- GPT-5.6 Luna: GPT-5.6 Luna (low), 1 Index points below the frontier
+- GPT-5.6 Luna: GPT-5.6 Luna (low), 1 Index point below the frontier
 - GPT-6 Astra: GPT-6 Astra (xhigh), 2 Index points below the frontier
-- Gemini 4 Argon: Gemini 4 Argon (high), 1 Index points below the frontier
+- Gemini 4 Argon: Gemini 4 Argon (high), 1 Index point below the frontier
 
 AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.
 
-## Primary dimensions
+## Value
 
-The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Cost takes a fixed **25.00%** of each model's score; the model's available quality priorities are renormalized over the rest, and its weight coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
+Value on a basis = **25%** × cost score + **75%** × quality score (owner decision, 2026-10-19). Both scores run from 0 to 100, higher is better. Cost's share is fixed: a configuration missing quality evidence keeps cost at 25%, and a configuration without a cost score has no value score. Ranks are competition ranks; equal values share the better rank.
 
-| # | Dimension | ValueRank weight | Direction |
-|---:|---|---:|---|
-| 1 | Cost | 25.00% | lower |
-| 2 | Non-Hallucination | 4.21% | higher |
-| 3 | [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | 4.21% | higher |
-| 4 | Instruction Following (LiveBench) | 3.50% | higher |
-| 5 | DeepSWE v1.1 | 17.52% | higher |
-| 6 | [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | 4.21% | higher |
-| 7 | [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | 3.50% | higher |
-| 8 | [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 2.80% | higher |
-| 9 | [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 2.80% | higher |
-| 10 | [HLE](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 2.80% | higher |
-| 11 | [GPQA Diamond (legacy)](https://artificialanalysis.ai/evaluations/gpqa-diamond) | 2.80% | higher |
-| 12 | [SciCode](https://artificialanalysis.ai/evaluations/scicode) | 2.80% | higher |
-| 13 | [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 2.10% | higher |
-| 14 | [AA Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) | 4.21% | higher |
-| 15 | Speed | 3.50% | higher |
-| 16 | [Bug Hunt Bench](https://bughunt.productcompass.pm/) | 14.02% | higher |
+## Cost: the SDLC basket
 
-The eleven AA source components below correspond to ten current AA evaluations because Omniscience is split into accuracy and non-hallucination reliability:
+The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 16 of the 19 ranked configurations (at least 13 required):
 
-| AA evaluation/component | Current methodology weight |
-|---|---:|
-| [AA-Briefcase](https://artificialanalysis.ai/evaluations/aa-briefcase) | 15% |
-| [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | 10% |
-| [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | 5% |
-| [Terminal-Bench 4.0 (AA evaluation)](https://artificialanalysis.ai/evaluations/terminalbench-4-0) | 10% |
-| [SciCode](https://artificialanalysis.ai/evaluations/scicode) | 10% |
-| [Humanity's Last Exam](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | 10% |
-| [GDP.pdf](https://artificialanalysis.ai/evaluations/gdp-pdf) | 10% |
-| [CritPt](https://artificialanalysis.ai/evaluations/critpt) | 10% |
-| [AA-Omniscience Accuracy](https://artificialanalysis.ai/evaluations/omniscience) | 10% |
-| [AA-Omniscience Non-Hallucination Rate](https://artificialanalysis.ai/evaluations/omniscience) | 5% |
-| [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | 5% |
+| Component | Status | Exact cost available | Complete | Ranked |
+|---|---|---:|---:|---:|
+| Coding Agent Index | admitted | 16 | 16 | 19 |
+| FrontierCode | pending capture | 11 | 10 | 19 |
+| ITBench-AA | pending capture | 7 | 7 | 19 |
+| AA-Briefcase | admitted | 19 | 19 | 19 |
+| GDPval-AA | admitted | 19 | 19 | 19 |
+| GDP.pdf | admitted | 19 | 19 | 19 |
+| AutomationBench-AA | admitted | 19 | 19 | 19 |
+| Terminal-Bench 4.0 (AA Index run) | admitted | 19 | 19 | 19 |
+| SciCode | admitted | 19 | 19 | 19 |
+| AA-LCR | admitted | 19 | 19 | 19 |
 
-These AA methodology weights describe the source index, not the combined ValueRank weights above. ValueRank adds DeepSWE, cost, and AA Index signals using the explicitly published priority table. The AA Index value for none is the benchmark owner’s estimate pending independent evaluation.
+A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is read from AA's chart (rounded to USD 1). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
-## API Costs and Plan Costs
+**Cost boundary.** Source: https://artificialanalysis.ai/methodology/intelligence-benchmarking (fetched 2026-10-19). AA's cost covers the contestant model's API tokens; other charges are included, excluded or unknown per component:
 
-Both bases measure token efficiency as AA's total cost to run its Intelligence Index benchmarks per Index point. The API Costs basis divides each model's AA total evaluation cost in USD by its AA Intelligence Index. Plan Costs also divides by the model's highest eligible subscription Value Multiple, so a plan allowance is credited with the API-equivalent usage it delivers per dollar of fee. Models without an eligible route are compared on API cost per Index point. Lower cost ranks better in both views, cost carries a fixed **25.00%** of the score in both, and the site switcher recalculates the primary composite when the cost basis changes.
+| Component | Contestant tokens | Other model calls | External tools | Execution environment | Preparation | Grading |
+|---|---|---|---|---|---|---|
+| Coding Agent Index | included | unknown | unknown | unknown | unknown | unknown |
+| AA-Briefcase | included | unknown | unknown | unknown | unknown | unknown |
+| GDPval-AA | included | unknown | unknown | unknown | unknown | unknown |
+| GDP.pdf | included | excluded | unknown | unknown | excluded | excluded |
+| AutomationBench-AA | included | unknown | unknown | unknown | unknown | unknown |
+| Terminal-Bench 4.0 (AA Index run) | included | unknown | unknown | unknown | unknown | unknown |
+| SciCode | included | unknown | unknown | unknown | unknown | unknown |
+| AA-LCR | included | unknown | unknown | unknown | unknown | unknown |
 
-## Missing-metric handling
+**Subset workloads (O17).** A configuration without exact cost for an admitted component is scored on the workload made of the components it has, against that workload's own frozen anchors, and flagged "subset cost"; its ordering against main-workload configurations is not identified. A component AA marks with missing or declined tasks is flagged "partial component" (E37).
 
-- A retained dimension contributes to a model only when that model has an eligible value from the benchmark owner or an exact-version provider claim. Ranking within each dimension uses only models with eligible values.
-- Missing values remain null in aa_metrics.json and are listed in coverage_matrix.json.
-- Cost keeps its fixed share; each row's retained quality priorities are renormalized over that model's available values. Coverage is cost's share (when the model has a cost) plus the quality share times available quality priority divided by total quality priority; missing metric names accompany the percentage.
-- No zero, neutral 50, median, or mismatched-version value is used. Provider claims remain source-typed and are eligible only for the stated benchmark version and evaluated model/route.
-- AA output speed covers **18/19** selected pages; **Gemini 4 Argon** is missing. If retained, Speed contributes only where a value exists and the gap is included in row coverage.
-- GPQA Diamond remains an explicitly labelled legacy ValueRank input; it is not a component of the v4.3.2 source composite.
-- AA total evaluation cost is available for **19/19** ranked models; the cost component uses **AA evaluation cost per AA Intelligence Index point** consistently across this cohort.
-- LiveBench Instruction Following is available for **12/19** ranked models and is scored where present. Terminal-Bench 4.0 is supplemental in this release under the published dimension-selection policy.
-- Bug Hunt Bench has **25/31** exact owner results. Eligible exact-variant results contribute where present at the published Bug Hunt priority; the separate emphasis view includes **16** rows with eligible results.
+## Cost score and anchors
 
-Dropped candidate dimensions:
+Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100. The anchors are frozen per workload and basis: c_L is half the cheapest reference cost and c_H twice the dearest, so no reference configuration clips. A release is held when more than max(1, 10% of ranked rows) clip on a basis or any row lies beyond an anchor by more than a factor of 2 (owner decision O12).
 
-| Dimension | Missing models | Decision |
+| Workload | Basis | Low anchor c_L (USD) | High anchor c_H (USD) | References | Status |
+|---|---|---:|---:|---:|---|
+| `9a0d376cc6080f3c` (main) | api | $66.43 | $19,978.30 | 16 | frozen |
+| `9a0d376cc6080f3c` (main) | plan | $2.48 | $13,400.04 | 16 | frozen |
+| `1453a9a0576b02ea` (subset) | api | $30.18 | $12,078.25 | 19 | frozen |
+| `1453a9a0576b02ea` (subset) | plan | $0.91 | $8,725.81 | 19 | frozen |
+
+**Anchor policy** (`complete-evidence-panel` v1). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations at their displayed Plan cost: measured routes, owner-named transfers and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
+
+**Exchange rate.** In the unclipped region a cost doubling changes value by −100 × 0.25 × ln 2 / ln(c_H / c_L) points, offset by +100 × 0.25 × ln 2 / ((1 − 0.25) × ln(c_H / c_L)) quality points. At the main-workload anchors:
+
+| Basis | Anchor ratio c_H / c_L | Value points per cost doubling | Quality points that offset it |
+|---|---:|---:|---:|
+| api | 300.7 | 3.04 | 4.05 |
+| plan | 5404.5 | 2.02 | 2.69 |
+
+**Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2).
+
+| Basis | Panel | Cost's share | Status |
+|---|---:|---:|---|
+| api | 16 | 54.9% | defined |
+| plan | 16 | 55.1% | defined |
+
+## Quality
+
+Quality is the weighted mean of the leaves observed for the exact configuration, each placed on fixed 0–100 anchors from its raw value (clipped, with saturation disclosed). Group shares of quality: Software engineering 60%, General professional work 20%, Reliability 10%, Long context, science & knowledge 10%.
+
+| Leaf | Group | Weight in quality | Weight in value | Raw unit | Score | Run by |
+|---|---|---:|---:|---|---|---|
+| [DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) | Software engineering | 30.00% | 22.50% | % pass@1 | z = pass@1 % | AA-run |
+| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | Software engineering | 10.00% | 7.50% | bugs fixed of 105 | z = 100 × bugs fixed / 105 | independent |
+| [AA FrontierCode 1.1](https://artificialanalysis.ai/evaluations/frontiercode) | Software engineering | 10.00% | 7.50% | AA score (0-1) | z = 100 × score | AA-run |
+| [Terminal-Bench 4.0 (tbench.ai)](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | Software engineering | 10.00% | 7.50% | % resolved | z = resolution % | independent |
+| [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | General professional work | 10.00% | 7.50% | Elo | z = 100 × (Elo − 500) / 2000 (AA's integration transform) | AA-run |
+| [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | General professional work | 10.00% | 7.50% | AA score (0-1) | z = 100 × score | AA-run |
+| [AA-Omniscience](https://artificialanalysis.ai/evaluations/omniscience) | Reliability | 10.00% | 7.50% | AA Omniscience Index (-100 to 100) | z = (I + 100) / 2 on AA's Omniscience Index I (O28) | AA-run |
+| [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | Long context, science & knowledge | 5.00% | 3.75% | accuracy (0-1) | z = 100 × accuracy | AA-run |
+| [Humanity's Last Exam](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | Long context, science & knowledge | 1.67% | 1.25% | accuracy (0-1) | z = 100 × accuracy | AA-run |
+| [SciCode](https://artificialanalysis.ai/evaluations/scicode) | Long context, science & knowledge | 1.67% | 1.25% | score (0-1) | z = 100 × score | AA-run |
+| [CritPt](https://artificialanalysis.ai/evaluations/critpt) | Long context, science & knowledge | 1.67% | 1.25% | score (0-1) | z = 100 × score | AA-run |
+
+Coverage is the observed share of quality weight. A row is **provisional** when coverage is below 70%, fewer than 2 software-engineering leaves are observed, observed software-engineering weight is below 40%, or a leaf weighing 20% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
+
+## Plan basis
+
+Plan cost = basket API cost ÷ the Value Multiple of the selected subscription route, at full utilisation. A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged.
+
+**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 19 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`3d83f7643d4a85b7`) re-runs the selection over exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics), without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
+
+**Subscription evidence policy** (as of 2026-10-08; reporting window 2026-09-08 to 2026-10-08):
+
+- Default numerator: Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.
+- Selected source for Anthropic, OpenAI: [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (2026-10-06, owner-selected 2026-10-07): Controlled subscription-account measurements with agentic workload projections.
+- GPT: User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption.
+- Claude: User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model.
+- MiMo: User authorizes provisional 1.5x for both MiMo candidate variants. Plan fee and measured API-equivalent numerator remain unavailable.
+- Other models: Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions.
+- Provider allowance, quota and marketing figures never supply the measured numerator; a provider's published price can be the fee denominator only when the tier mapping is supported.
+
+## Uncertainty outputs
+
+**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `median-definite-frontier` v1: the lower median of non-provisional configurations on the API main-workload definite frontier of the interval outputs, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current reference: GPT-6 Luna.
+
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261017, input hash `c956e60d0bf196b6`):
+
+- **S0**: published-record reporting precision.
+- **S1**: published-record reporting precision + conventional identification of missing leaves.
+- **S2**: published-record reporting precision + conventional identification of missing leaves + weight-specification stress.
+- **S1M**: published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model).
+
+S1 also runs with the endpoint-heavy kernel. S1M draws Terminal-Bench 4.0 (tbench.ai) inside its source's published 95% confidence interval, labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165; estimand: not established from the captured documentation; method: not established from the captured documentation; sampling unit: not established from the captured documentation); values outside the interval are not explored; no tail mass is invented. A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
+
+- benchmark repeatability beyond the conventional Terminal-Bench interval-range sensitivity in S1M (other published intervals, run-to-run ranges): not quantified in v1 scenario shares.
+- fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares.
+
+## Diagnostics
+
+Diagnostics are published beside the ranking and never change a score: Terminal-Bench same-harness agreement, anchor stability (exchange-rate series and trimmed-anchor rank shifts), Omniscience abstention sensitivity, quality source shares, matched-panel quality agreement, non-discriminating leaves, group drift, quality dispersion, deletion sensitivity (leave-one-benchmark-out and source deletions) and the standing removal of the Terminal-Bench cost component. Current results are in [scores.md](scores.md#diagnostics).
+
+## Release gates
+
+| Rule | Status | Detail |
 |---|---|---|
-| None | — | All candidate dimensions have complete coverage. |
-
-## Rank normalization
-
-For each retained quality dimension, models with an eligible value are ranked from best to worst and mapped using that dimension's available sample size:
-
-((n - rank) / (n - 1)) × 100
-
-Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive the average tied rank. The sample size is the number of models with a value for that dimension.
-
-## Cost normalization
-
-Cost is the one lower-is-better dimension and keeps its magnitude. Each ranked model's cost per Index point c is mapped on a log scale between the cheapest (c_min) and dearest (c_max) ranked model:
-
-100 × (ln c_max − ln c) / (ln c_max − ln c_min)
-
-The cheapest model scores 100 and the dearest 0, and equal cost ratios move the score by equal amounts: a model twice as expensive as another sits the same distance below it anywhere on the scale.
-
-## Benchmark evaluation cost (score input)
-
-The Cost input uses **AA evaluation cost per AA Intelligence Index point** where an AA Intelligence Index total evaluation cost is available; lower cost per point is better. Plan Costs further divides that cost by the model's highest eligible subscription Value Multiple. A missing cost remains null and the row is scored on quality alone; no DeepSWE leaderboard cost or missing-value fill is used.
-
-## Quality score and interpretation
-
-Quality Score is the priority-weighted mean of a model's available non-cost dimensions, renormalized to 100%. Overall Score is **25.00%** × cost score + the remainder × Quality Score. Scores are relative to the ranked cohort and the values available for this release, not probabilities and not an absolute model capability scale; row coverage is displayed beside each score.
-
-## Supplemental data
-
-[Artificial Analysis Intelligence Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) exposes additional evaluations—such as MLCR, Harvey, APEX-Agents, MMMU-Pro, EnterpriseOpsGym, ITBench SRE, and legacy fields. They are preserved in aa_metrics.json when published, and their coverage is reported in coverage_matrix.json. AA-Briefcase, GDP.pdf, AutomationBench-AA, and AA's Terminal-Bench 4.0 evaluation are v4.3.2 source components, not standalone ValueRank dimensions. GPQA Diamond and the old τ³-Banking/TB2.1 fields are separately labelled legacy data.
-
-[LiveBench](https://livebench.ai/) is incorporated as the current external Instruction Following source. Its four official task values—paraphrase, simplify, story_generation, and summarize—are averaged into the published Instruction Following value; LiveBench Overall is the mean of its seven category means. The LiveBench chart uses the official Overall Score against the official Cost Per Successful Task for the 24 matched cohort rows plus 1 official supplemental model: Claude Fable 5.1.
-
-[Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) is incorporated as the current external terminal-agent source. The official page shows 23 owner rows; a separate provider-claim row is included for the current DeepSeek V4 Flash API alias and is explicitly labelled. Together they provide 12/31 eligible cohort values, leaving 19 gaps.
-
-## Provider claim policy
-
-When the benchmark owner has not published a result for a model, ValueRank uses a model-provider-published claim when the benchmark version and evaluated model identity match. The claim keeps its source type, direct source link, date, and any alias/variant caveat in the raw data and evidence ledger. A benchmark-owner result supersedes the claim when it becomes available. Claims for different versions or variants remain audit-only.
-
-## Bug Hunt Bench scoring
-
-Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **aec976170df89a371384174ca87646a9a8c82415** and provides **25/31** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **20** (**14.02%** before row-level renormalization).
-
-The companion Bug Hunt emphasis ranking uses **16** eligible owner-result rows and re-ranks the other available dimensions within that subset. Cost keeps its fixed **25.00%**; Bug Hunt gets priority **30** out of **117** quality priority, or **19.23%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
-
-The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. Models remain visible when one or more retained metrics are missing, with their available-priority coverage shown. A model with no rankable primary metric remains unranked. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
+| clip gate (E20) | passed | no basis exceeds the clipping allowance |
+| cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
+| quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
+| subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
+| partial component flag (E37) | vacuous | AA declined- or missing-task markers |
+| route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
+| Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
+| score swing gate (> 5 points without cause) | vacuous | first v3 release: no previous v3 release to compare |
+| configuration map coverage | passed | every cohort row has a pinned identity |
+| quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
+| scenario outputs current (E72) | passed | scenario input hash matches the scored inputs |
 
 ## Limitations
 
-- The AA DeepSWE chart and the other AA Index components measure distinct tasks and use different evaluation setups; ValueRank is a transparent synthesis, not a new benchmark.
-- Bug Hunt results also depend on the tested agent CLI/harness, effort, and route; they measure the tested stack, not model capability in isolation.
-- Rank normalization of the quality dimensions discards magnitude differences; only cost keeps its magnitude. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
-- Page variants can differ by reasoning effort; the selected URL and variant are recorded per model.
-- Provider claims may use a different harness or sampling procedure than the benchmark owner; displayed claim values are not presented as independent benchmark-owner measurements.
-- AA output speed is numeric for **18/19** selected pages; **Gemini 4 Argon** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.
-- LiveBench and Terminal-Bench have different task suites and release surfaces from the AA source component; their displayed values should not be substituted for one another or read as a continuous version-to-version series.
+- Cost is the contestant-model API token cost of AA's runs, not total agent or workflow operating cost.
+- Cost scores use frozen anchors; a new anchor version is a published migration, never a silent change.
+- The basket is AA's SDLC-relevant evaluations at AA's token mix, not your own workload.
+- Results are never transferred between model versions or reasoning efforts; missing evidence stays missing.
+- Published values are rounded; interval outputs and scenario shares show which differences the evidence supports, and benchmark run-to-run noise is not yet quantified.
+- Subscription Value Multiples are measured on their own workloads; none is yet identified on the basket, so the Plan ranking is exploratory.
 
+## Machine-readable files
 
-## Subscription evidence policy
-
-Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API evaluation cost divided by the highest eligible Value Multiple. Effective Plan cost per Index point is that amount divided by the model's AA Intelligence Index; the Plan-basis rank uses it so that a plan allowance is credited with the work it buys and token-efficient models are rewarded, while models without an eligible route are compared on API cost per Index point. The candidate comparison includes unranked source candidates; a Plan route does not establish a primary composite rank or ValueRank quality frontier membership. For Anthropic and Codex, the user-selected SemiAnalysis analysis supplies controlled subscription-account measurements with workload projections; its allocation regime, workload and evaluated model remain in the route evidence. The common ChatGPT multiples (Plus 8.1×; Pro $100 10.55×; Pro $200 10.42×; Pro $500 10.772×) are a provisional cross-model application: the source projections evaluate Astra for Plus and Sol for the Pro tiers, and do not establish the same allowance for every GPT variant. The common Claude multiples (Pro 58.9×; Max $100 57.25×; Max $200 58.63×) are an owner-authorized (2026-10-18) application of Opus 5.5's measured figures to the other Claude models, not measurements of those models; the same source measured Fable 5.1 at 12.4–12.7× on the Max plans, so the applied multiples may overstate the plan value of cheaper Claude models. The highest eligible common GPT route is Pro $500 at 10.772×. MiMo Pro and MiMo Flash use a provisional user assumption of 1.5×; their subscription fee is not established and their API equivalent dollar numerator is not measured. For other providers, eligible measured routes require actual end-user API-priced usage, exact variants, plan tier and report date in the preceding month. Mixed or unidentified model usage remains provider/plan evidence and does not enter a model route. Provider allowance, quota and marketing figures cannot supply a measured numerator.
+- [data/scores.json](data/scores.json): the `v3` section holds every row, workload, anchor, interval output, scenario result, diagnostic and the evidence bundle
+- [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
+- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-10-19`
+- [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
+- [data/aa_deepswe.json](data/aa_deepswe.json), [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots

@@ -19668,6 +19668,102 @@
         },
         "maxAbsChange": 0,
         "maxRow": "gpt-6.1-sol"
+      },
+      "calibration": {
+        "rule": "each workload's measured-only rows with complete cost evidence are the references: c_L = cheapest / 2, c_H = dearest x 2 (diagnostic only; the official anchors are unchanged)",
+        "status": "evaluated",
+        "workloads": {
+          "9a0d376cc6080f3c": {
+            "rows": [
+              "claude-opus-5-5",
+              "gpt-6.1-sol"
+            ],
+            "references": [
+              "claude-opus-5-5",
+              "gpt-6.1-sol"
+            ],
+            "officialAnchorProvenance": {
+              "low": {
+                "row": "claude-haiku-5-5",
+                "evidence": "owner-named transfer"
+              },
+              "high": {
+                "row": "grok-4.7",
+                "evidence": "API-cost fallback"
+              }
+            },
+            "status": "evaluated",
+            "anchors": {
+              "basis": "plan",
+              "workload": "9a0d376cc6080f3c",
+              "units": "USD per workload pass",
+              "referenceIds": [
+                "claude-opus-5-5",
+                "gpt-6.1-sol"
+              ],
+              "referenceCosts": {
+                "claude-opus-5-5": 169.59510082164388,
+                "gpt-6.1-sol": 117.68127216138434
+              },
+              "low": 58.84063608069217,
+              "high": 339.19020164328776,
+              "padding": 2.0
+            },
+            "exchangeRate": {
+              "valuePointsPerCostDoubling": 9.89233285036445,
+              "qualityPointsPerCostDoubling": 13.189777133819268,
+              "anchorRatio": 5.76455701767284
+            },
+            "officialExchangeRate": {
+              "valuePointsPerCostDoubling": 2.0161368842840726,
+              "qualityPointsPerCostDoubling": 2.6881825123787633,
+              "anchorRatio": 5404.523487958324
+            }
+          },
+          "1453a9a0576b02ea": {
+            "rows": [
+              "gpt-6-astra"
+            ],
+            "references": [
+              "gpt-6-astra"
+            ],
+            "officialAnchorProvenance": {
+              "low": {
+                "row": "claude-haiku-5-5",
+                "evidence": "owner-named transfer"
+              },
+              "high": {
+                "row": "qwen3.8-max",
+                "evidence": "API-cost fallback"
+              }
+            },
+            "status": "measured-evidence calibration unavailable (fewer than two measured references)"
+          }
+        },
+        "values": {
+          "gpt-6.1-sol": 61.103098052817295,
+          "claude-opus-5-5": 58.03799460777584
+        },
+        "rankChange": {
+          "panel": [
+            "claude-opus-5-5",
+            "gpt-6.1-sol"
+          ],
+          "excluded": [],
+          "changes": {
+            "claude-opus-5-5": 1,
+            "gpt-6.1-sol": -1
+          },
+          "maxAbsChange": 1,
+          "maxRow": "gpt-6.1-sol"
+        },
+        "reversals": [
+          [
+            "claude-opus-5-5",
+            "gpt-6.1-sol"
+          ]
+        ],
+        "maxAbsValueChange": 2.8173929088787304
       }
     },
     "diagnostics": {
@@ -21605,19 +21701,41 @@
     "scenarios": {
       "status": "current",
       "schemaVersion": 1,
-      "inputHash": "bc23c1fe9f52b50e9be24dbc92f246e8a91325e991ec6442a0fc5d34914ad994",
+      "inputHash": "c956e60d0bf196b6c270af43bf3cbf9370116231b846a69cde6abaf90bd315d5",
       "seed": 20261017,
       "scenarios": 10000,
       "streamDescriptions": {
         "S0": "published-record reporting precision",
         "S1": "published-record reporting precision + conventional identification of missing leaves",
         "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "S1M": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)"
+        "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)"
       },
       "notQuantified": [
-        "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares",
+        "benchmark repeatability beyond the conventional Terminal-Bench interval-range sensitivity in S1M (other published intervals, run-to-run ranges): not quantified in v1 scenario shares",
         "fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares"
       ],
+      "intervalInterpretation": {
+        "S1M": [
+          {
+            "leaf": "terminalBench",
+            "source": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
+            "sourceStatement": "The whiskers span the 95% confidence interval",
+            "confidenceLevel": 0.95,
+            "sourceFields": [
+              "accuracy_ci95_half_width",
+              "n_trials"
+            ],
+            "sourceEstimand": "not established from the captured documentation",
+            "sourceIntervalMethod": "not established from the captured documentation",
+            "samplingUnit": "not established from the captured documentation",
+            "repeatedTaskTreatment": "not established from the captured documentation",
+            "kernelStatus": "conventional-within-CI",
+            "kernel": "uniform on [z - h, z + h] clipped to [0, 100] (arcsine alternative), h the published half-width",
+            "tailTreatment": "values outside the interval are not explored; no tail mass is invented",
+            "permittedLabel": "conventional CI-range sensitivity (endpoint-conditioned; no tail model)"
+          }
+        ]
+      },
       "results": {
         "api": [
           {
@@ -22758,22 +22876,22 @@
           },
           {
             "stratum": "S1M",
-            "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+            "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
             "permittedTargets": [
-              "expected performance",
               "identification convention",
+              "published-interval range (conventional)",
               "reporting precision"
             ],
             "variedTargets": [
-              "expected performance",
               "identification convention",
+              "published-interval range (conventional)",
               "reporting precision"
             ],
             "qualityEquation": "full composite, nominal weights",
             "events": {
               "top1": "rank-1 frequency (competition ranks on value)",
               "top3": "rank 3 or better frequency (competition ranks on value)",
-              "frontier": "full-composite frontier frequency under missing-evidence and published-interval draws",
+              "frontier": "full-composite frontier frequency under missing-evidence draws and conventional draws inside published intervals",
               "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
             },
             "scenarios": 10000,
@@ -24182,22 +24300,22 @@
           },
           {
             "stratum": "S1M",
-            "targetProfile": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+            "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
             "permittedTargets": [
-              "expected performance",
               "identification convention",
+              "published-interval range (conventional)",
               "reporting precision"
             ],
             "variedTargets": [
-              "expected performance",
               "identification convention",
+              "published-interval range (conventional)",
               "reporting precision"
             ],
             "qualityEquation": "full composite, nominal weights",
             "events": {
               "top1": "rank-1 frequency (competition ranks on value)",
               "top3": "rank 3 or better frequency (competition ranks on value)",
-              "frontier": "full-composite frontier frequency under missing-evidence and published-interval draws",
+              "frontier": "full-composite frontier frequency under missing-evidence draws and conventional draws inside published intervals",
               "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
             },
             "scenarios": 10000,

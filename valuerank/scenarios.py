@@ -38,8 +38,9 @@ TARGET_PROFILES = {
     "S0": "published-record reporting precision",
     "S1": "published-record reporting precision + conventional identification of missing leaves",
     "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-    # E162: the separately named stream for source-documented expected-performance intervals (Terminal-Bench's 95% CI).
-    "S1M": "published-record reporting precision + conventional identification of missing leaves + source-documented 95% confidence intervals (expected performance)",
+    # E162/E165: the separately named stream that draws inside published 95% confidence intervals (Terminal-Bench's)
+    # under a conventional kernel: a range sensitivity, not a source-estimated distribution of expected performance.
+    "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
 }
 STRATA = ("S0", "S1", "S2", "S1M")
 # E161: every stream's events name the quality equation they use, so S0-to-S1 changes are never read as uncertainty alone.
@@ -53,7 +54,7 @@ FRONTIER_EVENTS = {
     "S0": "observed-only score frontier frequency",
     "S1": "full-composite frontier frequency under conventional missing-evidence draws",
     "S2": "full-composite frontier frequency under missing-evidence and weight-stress draws",
-    "S1M": "full-composite frontier frequency under missing-evidence and published-interval draws",
+    "S1M": "full-composite frontier frequency under missing-evidence draws and conventional draws inside published intervals",
 }
 # E145: the target profile governs which inputs a stream may vary (an explicit allowlist); source-supported
 # uncertainty about expected performance or future runs enters only separately named streams (none in v1).
@@ -61,11 +62,14 @@ REPORTING_PRECISION = "reporting precision"
 IDENTIFICATION_CONVENTION = "identification convention"
 SPECIFICATION_STRESS = "specification stress"
 EXPECTED_PERFORMANCE = "expected performance"
+# E165: draws inside a published confidence interval whose estimand, method and sampling unit the source does not
+# document are a conventional range sensitivity; they never stand in for expected-performance uncertainty.
+INTERVAL_RANGE = "published-interval range (conventional)"
 STREAM_TARGETS = {
     "S0": frozenset({REPORTING_PRECISION}),
     "S1": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION}),
     "S2": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, SPECIFICATION_STRESS}),
-    "S1M": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, EXPECTED_PERFORMANCE}),
+    "S1M": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, INTERVAL_RANGE}),
 }
 GROUP_CONCENTRATION = 100.0
 LEAF_CONCENTRATION = 50.0
@@ -154,6 +158,26 @@ def missing_ranges(rows: list[RowInputs]) -> dict:
         values += [sum(row.leaves[leaf.key].params) / len(row.leaves[leaf.key].params) for row in rows if leaf.key in row.leaves and row.leaves[leaf.key].family != "fixed"]
         ranges[leaf.key] = (min(values), max(values)) if values else (0.0, 100.0)
     return ranges
+
+
+NOT_ESTABLISHED = "not established from the captured documentation"
+INTERVAL_CONTRACT_FIELDS = ("sourceEstimand", "sourceIntervalMethod", "samplingUnit", "repeatedTaskTreatment")
+INTERVAL_LABELS = {
+    True: "source-supported expected-performance uncertainty",
+    False: "conventional CI-range sensitivity (endpoint-conditioned; no tail model)",
+}
+
+
+def interval_interpretation(contract: dict) -> dict:
+    """E165: the label a stream drawing inside a published interval may carry, derived from what the source documents.
+
+    Only a source-derived kernel whose estimand, interval method, sampling unit and treatment of
+    repeated tasks are all documented supports "expected-performance uncertainty"; anything else
+    is a conventional sensitivity over the interval's range, with no mass outside it.
+    """
+
+    supported = contract["kernelStatus"] == "source-derived" and all(contract[field] != NOT_ESTABLISHED for field in INTERVAL_CONTRACT_FIELDS)
+    return {**contract, "permittedLabel": INTERVAL_LABELS[supported]}
 
 
 def validate_stream(rows: list[RowInputs], stratum: str) -> list[str]:

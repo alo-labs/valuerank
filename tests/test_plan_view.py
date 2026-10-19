@@ -1,5 +1,4 @@
-"""The Plan Costs view prices subscriptions in USD per AA Intelligence Index point
-and is the view the site opens on."""
+"""The Plan view prices subscriptions per SDLC basket run and is the view the site opens on."""
 
 import json
 
@@ -40,12 +39,11 @@ def test_public_models_carry_basket_run_plan_costs(repo_copy, tmp_path):
     assert sol["fallback"] is None and sol["route"]["id"] == "chatgpt-pro500-common-semianalysis-assumption"
 
 
-def test_readme_candidate_table_shows_cost_per_index_point(repo_copy, pinned_clock):
+def test_readme_prices_each_configuration_per_basket_run_on_both_bases(repo_copy, pinned_clock):
     readme = regenerate(repo_copy)
+    rows = {row["id"]: row for row in json.loads((repo_copy / "data" / "scores.json").read_text())["v3"]["rows"]}
 
-    assert "| Effective Plan cost per Index point |" in readme
-    sol_row = next(line for line in readme.splitlines() if line.startswith("| GPT-6.1 Sol |"))
-    assert "| $100.40 | $1.94 |" in sol_row
-    opus_row = next(line for line in readme.splitlines() if line.startswith("| Claude Opus 5.5 |"))
-    assert "| $147.85 | $2.57 |" in opus_row
-    assert "divided by the model's AA Intelligence Index" in readme
+    assert "| Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags |" in readme
+    sol_row = next(line for line in readme.splitlines() if line.startswith("| 3 | 2 | [GPT-6.1 Sol (max)]"))
+    assert f"| ${rows['gpt-6.1-sol']['api']['costUsd']:,.2f} | ${rows['gpt-6.1-sol']['api']['costUsd'] / 10.772:,.2f} |" in sol_row
+    assert "divides the basket's API cost by the selected subscription route's Value Multiple" in readme

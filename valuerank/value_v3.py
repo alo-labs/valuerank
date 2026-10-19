@@ -58,7 +58,23 @@ CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (la
 DEFAULT_TB_HARNESS = "Terminus 2"  # E125: the named default harness of the same-harness diagnostic
 SCENARIO_COUNT = 10_000
 SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False))
-MEASUREMENT_STREAM = "S1M"  # E162: S1 plus source-documented 95% confidence intervals (Terminal-Bench today)
+MEASUREMENT_STREAM = "S1M"  # E162/E165: S1 plus conventional range sensitivity inside published 95% intervals (Terminal-Bench today)
+# E165: Terminal-Bench documents a 95% confidence interval (its leaderboard whiskers; accuracy_ci95_half_width with
+# n_trials) but not its estimand, method or sampling unit, so S1M's draws inside it are a conventional sensitivity.
+TB_INTERVAL_CONTRACT = {
+    "leaf": "terminalBench",
+    "source": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
+    "sourceStatement": "The whiskers span the 95% confidence interval",
+    "confidenceLevel": 0.95,
+    "sourceFields": ["accuracy_ci95_half_width", "n_trials"],
+    "sourceEstimand": scenarios.NOT_ESTABLISHED,
+    "sourceIntervalMethod": scenarios.NOT_ESTABLISHED,
+    "samplingUnit": scenarios.NOT_ESTABLISHED,
+    "repeatedTaskTreatment": scenarios.NOT_ESTABLISHED,
+    "kernelStatus": "conventional-within-CI",
+    "kernel": "uniform on [z - h, z + h] clipped to [0, 100] (arcsine alternative), h the published half-width",
+    "tailTreatment": "values outside the interval are not explored; no tail mass is invented",
+}
 FROZEN_FILE = "v3_frozen.json"
 SCENARIO_FILE = "v3_scenarios.json"
 
@@ -716,7 +732,88 @@ def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict) -> dict:
     official = {row_id: entry["plan"]["value"] for row_id, entry in per_row.items() if entry["plan"]["value"] is not None}
     specification = dict(MEASURED_VIEW_SPEC)
     specification["id"] = hashlib.sha256(json.dumps(specification, sort_keys=True).encode()).hexdigest()[:16]
-    return {"specification": specification, "rows": entries, "rankChangeVsOfficial": diagnostics.paired_rank_change(official, values)}
+    return {
+        "specification": specification,
+        "rows": entries,
+        "rankChangeVsOfficial": diagnostics.paired_rank_change(official, values),
+        "calibration": _measured_calibration(rows, frozen, entries),
+    }
+
+
+MEASURED_CALIBRATION_RULE = (
+    "each workload's measured-only rows with complete cost evidence are the references: c_L = cheapest / 2, "
+    "c_H = dearest x 2 (diagnostic only; the official anchors are unchanged)"
+)
+
+
+def _plan_evidence(row: dict | None) -> str:
+    """How a row's displayed Plan cost is supported: measured route, owner-named transfer or API-cost fallback."""
+
+    if row is None:
+        return "not in the current table"
+    if row["plan"]["fallback"]:
+        return "API-cost fallback"
+    return {"controlled": "controlled measurement", "reports": "concordant reports"}.get(row["plan"]["grade"], "owner-named transfer")
+
+
+def _reversals(baseline: dict, branch: dict) -> list[list[str]]:
+    """Pairs ordered one way by ``baseline`` and the other way by ``branch`` (ties are not reversals)."""
+
+    panel = sorted(row for row in set(baseline) & set(branch) if baseline[row] is not None and branch[row] is not None)
+    return [
+        [a, b]
+        for index, a in enumerate(panel)
+        for b in panel[index + 1:]
+        if (baseline[a] - baseline[b]) * (branch[a] - branch[b]) < 0
+    ]
+
+
+def _measured_calibration(rows: list[dict], frozen: dict, entries: dict) -> dict:
+    """E164: the measured-only rows rescored on anchors built from measured evidence alone.
+
+    The official Plan anchors include owner-named transfers and API-cost fallbacks (E160), so an
+    assumption can move measured-only ranks through the exchange rate even though no assumed route
+    is in the view. Holding rows, routes, costs and quality fixed, this reports what calibration alone does.
+    """
+
+    by_id = {row["id"]: row for row in rows}
+    measured = {row_id: entry for row_id, entry in entries.items() if "costUsd" in entry}
+    workloads, official, calibrated = {}, {}, {}
+    for workload, frozen_entry in frozen["workloads"].items():
+        members = [row_id for row_id in measured if by_id[row_id]["cost"]["workload"] == workload]
+        anchors_official = frozen_entry["anchors"]["plan"]
+        provenance = None
+        if anchors_official:
+            references = anchors_official["referenceCosts"]
+            low, high = min(references, key=references.get), max(references, key=references.get)
+            provenance = {"low": {"row": low, "evidence": _plan_evidence(by_id.get(low))}, "high": {"row": high, "evidence": _plan_evidence(by_id.get(high))}}
+        references = {row_id: measured[row_id]["costUsd"] for row_id in members if not by_id[row_id]["cost"]["partialComponents"]}
+        entry = {"rows": sorted(members), "references": sorted(references), "officialAnchorProvenance": provenance}
+        if len(references) < MIN_ANCHOR_REFERENCES:
+            workloads[workload] = {**entry, "status": "measured-evidence calibration unavailable (fewer than two measured references)"}
+            continue
+        anchors = anchor_math.anchor_object(references, basis="plan", workload=workload)
+        workloads[workload] = {
+            **entry,
+            "status": "evaluated",
+            "anchors": anchors,
+            "exchangeRate": anchor_math.exchange_rate(anchors, BETA),
+            "officialExchangeRate": anchor_math.exchange_rate(anchors_official, BETA) if anchors_official else None,
+        }
+        for row_id in members:
+            official[row_id] = measured[row_id]["value"]
+            calibrated[row_id] = anchor_math.value_score(anchor_math.cost_score(measured[row_id]["costUsd"], anchors), by_id[row_id]["summary"].displayed, BETA)
+    return {
+        "rule": MEASURED_CALIBRATION_RULE,
+        "status": "evaluated" if calibrated else "measured-evidence calibration unavailable",
+        "workloads": workloads,
+        "values": calibrated,
+        "rankChange": diagnostics.paired_rank_change(official, calibrated),
+        "reversals": _reversals(official, calibrated),
+        "maxAbsValueChange": max(
+            (abs(calibrated[row_id] - official[row_id]) for row_id in calibrated if calibrated[row_id] is not None and official[row_id] is not None), default=None
+        ),
+    }
 
 
 def _complete_panel(rows: list[dict]) -> tuple[list[str], dict, dict]:
@@ -869,7 +966,7 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
 
 # E155: uncertainty outside every v1 stream, printed beside the scenario outputs.
 NOT_QUANTIFIED = (
-    "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares",
+    "benchmark repeatability beyond the conventional Terminal-Bench interval-range sensitivity in S1M (other published intervals, run-to-run ranges): not quantified in v1 scenario shares",
     "fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares",
 )
 
@@ -903,8 +1000,8 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False) ->
     """The declared panel for one basis (E96): rows with a cost on the main workload, in a fixed order.
 
     With ``measurement`` (the E162 stream), a leaf whose source documents a 95%
-    confidence interval (Terminal-Bench's published half-width) is drawn on that
-    interval as an expected-performance input: uniform with the arcsine
+    confidence interval (Terminal-Bench's published half-width) is drawn inside that
+    interval under a conventional kernel (E165): uniform with the arcsine
     alternative, never assumed normal, clipped to the leaf's domain.
     """
 
@@ -918,7 +1015,7 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False) ->
         half = (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct")
         if measurement and half:
             z = observations["terminalBench"].z
-            leaves["terminalBench"] = scenarios.Kernel("uniform", (max(0.0, z - half), min(100.0, z + half)), "endpoint-heavy", scenarios.EXPECTED_PERFORMANCE)
+            leaves["terminalBench"] = scenarios.Kernel("uniform", (max(0.0, z - half), min(100.0, z + half)), "endpoint-heavy", scenarios.INTERVAL_RANGE)
         panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional))
     return panel
 
@@ -965,6 +1062,7 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
         # E155: uncertainty descriptions come from the stream manifests, including what v1 does not quantify.
         "streamDescriptions": dict(scenarios.TARGET_PROFILES),
         "notQuantified": list(NOT_QUANTIFIED),
+        "intervalInterpretation": {MEASUREMENT_STREAM: [scenarios.interval_interpretation(TB_INTERVAL_CONTRACT)]},
         "results": results,
         "barLabels": bar_labels(assembled, frozen, seed=seed, batch=n),
     }

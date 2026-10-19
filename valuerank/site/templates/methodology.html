@@ -66,7 +66,7 @@
   {%- if mi.nearFrontierFamilies %}
   <h3 class="sub-title">Near-frontier families</h3>
   <ul class="plain-list">
-    {%- for f in mi.nearFrontierFamilies %}<li><strong>{{ f.family }}</strong>: {{ f.configuration }}, {{ f.gap }} Index points below the frontier</li>{% endfor %}
+    {%- for f in mi.nearFrontierFamilies %}<li><strong>{{ f.family }}</strong>: {{ f.configuration }}, {{ f.gap }} Index point{{ "" if f.gap == "1" else "s" }} below the frontier</li>{% endfor %}
   </ul>
   {%- endif %}
   {%- for n in mi.footnotes %}
