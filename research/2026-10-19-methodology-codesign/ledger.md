@@ -284,3 +284,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Retire pending components after two releases: rejected; pending components do not enter C_W and are visible in the readiness table, so retiring them only adds workload churn.
 - Drop GPQA as "no current AA series": rejected; AA still publishes a GPQA Diamond evaluation page and per-model values (field gpqa, present for current models); pinned as a legacy series.
 - Bug Hunt single-run rows "unidentified, pair unevaluable": modified; under O19 the full score domain is an admissible constraint (E11), so the row is bounded, not unevaluable.
+
+## Editor decisions after reviewer 17 (owner may override)
+- E37. Cost completeness predicates: per component required / executed / cost-observed task counts; CompleteCostEvidence and FullCost(i, W). Displayed score keeps AA's published totals with a "partial component (k of n tasks priced)" flag; interval outputs require FullCost (verified 2026-10-19: Coding Agent Index totals are complete for 13 of the 16 matched rows; Gemini 4 Argon 302/303 tasks, GPT-6.1 Sol 301.6, Qwen3.8 Max 301.3).
+- E38. Cheapest-above-a-bar quantifies over j ∈ R_W∖{i} (no self-comparison); ties prevent a unique label and go to the candidate set (answers Kimi Q1: no separate co-cheapest label); every frontier/bar result publishes its universe and whether it extends to the selected cohort (answers Kimi Q2: certify the named evaluable set, and state the cohort extension separately); two-stage evidence-loss test.
+- E39. Plan capacity schedule contract: published grid and boundary treatment; session-start variables or schedule enumeration; conservative feasible schedule when semantics are insufficient; every identified capacity result carries a feasible schedule, else a lower/upper interval.
+- E40. Interval outputs use a deterministic decision procedure (extreme-point search over shared factors, monotone bounds), statuses certified / disproved / unresolved / unevaluable, tolerance and witnesses; never Monte Carlo.
+- E41. Workload cross-check warning pre-registered at τ_b < 0.5; "uncertain agreement" when the interval spans 0.5.
+- E42. Task-family overlap matrix beside the expenditure HHI.
+
+## Reviewer 17 (Kimi K3, round 3, Thinking) — adopted
+- Critical: confirmed-cheapest self-comparison fixed (E38). Partial-telemetry eligibility (E37), scope fields (E38), session-start schedule contract (E39), interval decision procedure (E40), cross-check threshold (E41), overlap matrix (E42).
+- Note: the first Kimi run (r17) failed in the browser driver before answering; the review was re-run on the same prompt.
