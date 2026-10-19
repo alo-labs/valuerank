@@ -1,7 +1,7 @@
 const model = (slug, over) => ({
   slug, name: slug.toUpperCase(), shortName: slug, developer: 'OpenAI', tier: 'Budget', speed: null,
   overall: { api: null, plan: null }, rank: { api: null, plan: null }, quality: null, qualityRank: null,
-  dims: {}, costDims: { api: null, plan: null }, cost: { apiUsd: null, planUsdPerPoint: null }, pareto: { api: false, plan: false },
+  dims: {}, costDims: { api: null, plan: null }, cost: { apiUsd: null, apiUsdPerPoint: null, planUsdPerPoint: null }, pareto: { api: false, plan: false },
   ...over,
 });
 
@@ -10,25 +10,25 @@ export const models = [
     developer: 'OpenAI', tier: 'Near-Budget', speed: 86, quality: 74.6, qualityRank: 2,
     overall: { api: 74.3, plan: 75.7 }, rank: { api: 1, plan: 2 },
     dims: { deepswe: 100, bug: 93.3, hle: null }, costDims: { api: 73.3, plan: 80 },
-    cost: { apiUsd: 1081.55, planUsdPerPoint: 1.931 }, pareto: { api: true, plan: true },
+    cost: { apiUsd: 1081.55, apiUsdPerPoint: 20.87, planUsdPerPoint: 1.931 }, pareto: { api: true, plan: true },
   }),
   model('beta', {
     developer: 'Anthropic', tier: 'Premium', speed: 40, quality: 80, qualityRank: 1,
     overall: { api: 70, plan: 78 }, rank: { api: 2, plan: 1 },
     dims: { deepswe: 90, bug: 80, hle: 60 }, costDims: { api: 40, plan: 90 },
-    cost: { apiUsd: 3000, planUsdPerPoint: 1.2 }, pareto: { api: true, plan: false },
+    cost: { apiUsd: 3000, apiUsdPerPoint: 57.69, planUsdPerPoint: 1.2 }, pareto: { api: true, plan: false },
   }),
   model('gamma', {
     developer: 'Unknown Lab', tier: 'Mystery', speed: null, quality: 60, qualityRank: 3,
     overall: { api: 60, plan: 61 }, rank: { api: 3, plan: 3 },
     dims: { deepswe: 50, bug: 50, hle: 50 }, costDims: { api: 55, plan: 50 },
-    cost: { apiUsd: 500, planUsdPerPoint: 2.5 }, pareto: { api: false, plan: false },
+    cost: { apiUsd: 500, apiUsdPerPoint: 10.42, planUsdPerPoint: 2.5 }, pareto: { api: false, plan: false },
   }),
   model('delta', {
     developer: 'DeepSeek', tier: 'Budget', speed: 40, quality: 50, qualityRank: 4,
     overall: { api: 55, plan: 52 }, rank: { api: 4, plan: 5 },
     dims: { deepswe: 20, bug: 30, hle: 10 }, costDims: { api: 90, plan: 20 },
-    cost: { apiUsd: 100, planUsdPerPoint: 4 }, pareto: { api: false, plan: false },
+    cost: { apiUsd: 100, apiUsdPerPoint: 2.5, planUsdPerPoint: 4 }, pareto: { api: false, plan: false },
   }),
   model('omega', { name: 'Omega (unranked)' }),
 ];

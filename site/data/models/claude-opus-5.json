@@ -7,19 +7,20 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5",
   "summary": {
     "rank": {
-      "api": 14,
+      "api": 15,
       "plan": 9
     },
     "overall": {
-      "api": 40.7,
-      "plan": 52.2
+      "api": 37.0,
+      "plan": 49.5
     },
     "quality": 48.9,
     "qualityRank": 9,
     "coverage": {
       "pct": 100.0,
-      "availablePriority": 132,
-      "totalPriority": 132,
+      "costAvailable": true,
+      "availablePriority": 107,
+      "totalPriority": 107,
       "missing": []
     },
     "grade": "measured",
@@ -31,12 +32,12 @@
       "key": "costComposite",
       "label": "Cost",
       "category": "cost",
-      "weightPct": 18.9394,
-      "value": 7274.7418382622345,
-      "unit": "USD per Index run",
-      "normalized": 5.6,
+      "weightPct": 25.0,
+      "value": 143.26813030384275,
+      "unit": "USD per Index point",
+      "normalized": 1.3,
       "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index",
+        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
         "url": "https://artificialanalysis.ai/models/claude-opus-5"
       },
       "observedAt": "2026-10-17",
@@ -44,15 +45,15 @@
       "note": null,
       "grade": "measured",
       "normalizedByBasis": {
-        "api": 5.6,
-        "plan": 66.7
+        "api": 1.3,
+        "plan": 51.2
       }
     },
     {
       "key": "deepswePassAt1",
       "label": "DeepSWE v1.1",
       "category": "code",
-      "weightPct": 18.9394,
+      "weightPct": 17.5234,
       "value": 62.5,
       "unit": "% pass@1",
       "normalized": 33.3,
@@ -69,7 +70,7 @@
       "key": "bugHuntFixedOf105",
       "label": "Bug Hunt Bench",
       "category": "code",
-      "weightPct": 15.1515,
+      "weightPct": 14.0187,
       "value": 27.0,
       "unit": "bugs fixed of 105",
       "normalized": 47.1,
@@ -86,7 +87,7 @@
       "key": "omniNonHallucination",
       "label": "Non-Hallucination",
       "category": "rely",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "value": 39.18,
       "unit": "% non-hallucination",
       "normalized": 27.8,
@@ -103,7 +104,7 @@
       "key": "terminalBenchV4",
       "label": "Terminal-Bench 4.0",
       "category": "code",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "value": 53.9,
       "unit": "% resolved",
       "normalized": 83.3,
@@ -120,7 +121,7 @@
       "key": "gdpvalV21",
       "label": "GDPval-AA v2.1",
       "category": "prod",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "value": 1721.15,
       "unit": "Elo",
       "normalized": 88.9,
@@ -137,7 +138,7 @@
       "key": "intelligenceIndex",
       "label": "AA Intelligence Index",
       "category": "intel",
-      "weightPct": 4.5455,
+      "weightPct": 4.2056,
       "value": 50.7771115797629,
       "unit": "Index points",
       "normalized": 72.2,
@@ -154,7 +155,7 @@
       "key": "livebenchInstructionFollowing",
       "label": "Instruction Following (LiveBench)",
       "category": "language",
-      "weightPct": 3.7879,
+      "weightPct": 3.5047,
       "value": 63.7665,
       "unit": "score",
       "normalized": 36.4,
@@ -171,7 +172,7 @@
       "key": "automationBenchAA",
       "label": "AutomationBench-AA",
       "category": "prod",
-      "weightPct": 3.7879,
+      "weightPct": 3.5047,
       "value": 56.57,
       "unit": "% score",
       "normalized": 27.8,
@@ -188,7 +189,7 @@
       "key": "speed",
       "label": "Speed",
       "category": "prod",
-      "weightPct": 3.7879,
+      "weightPct": 3.5047,
       "value": 59.8728104023725,
       "unit": "tokens per second",
       "normalized": 23.5,
@@ -205,7 +206,7 @@
       "key": "aaLcr",
       "label": "AA-LCR v1.1",
       "category": "language",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "value": 79.33,
       "unit": "% accuracy",
       "normalized": 16.7,
@@ -222,7 +223,7 @@
       "key": "omniAccuracy",
       "label": "AA-Omniscience Accuracy",
       "category": "rely",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "value": 60.87,
       "unit": "% accuracy",
       "normalized": 83.3,
@@ -239,7 +240,7 @@
       "key": "hle",
       "label": "HLE",
       "category": "intel",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "value": 54.87,
       "unit": "% accuracy",
       "normalized": 83.3,
@@ -256,7 +257,7 @@
       "key": "gpqaDiamond",
       "label": "GPQA Diamond (legacy)",
       "category": "intel",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "value": 93.23,
       "unit": "% accuracy",
       "normalized": 62.5,
@@ -273,7 +274,7 @@
       "key": "scicode",
       "label": "SciCode",
       "category": "intel",
-      "weightPct": 3.0303,
+      "weightPct": 2.8037,
       "value": 56.37,
       "unit": "% score",
       "normalized": 50.0,
@@ -290,7 +291,7 @@
       "key": "critpt",
       "label": "CritPt",
       "category": "intel",
-      "weightPct": 2.2727,
+      "weightPct": 2.1028,
       "value": 29.14,
       "unit": "% score",
       "normalized": 66.7,
@@ -306,6 +307,7 @@
   ],
   "cost": {
     "apiUsd": 7274.7418382622345,
+    "apiUsdPerPoint": 143.26813030384275,
     "planUsdPerRun": 123.51004818781384,
     "planUsdPerPoint": 2.4323961002350214,
     "planComparableUsdPerPoint": 2.4323961002350214,
@@ -438,9 +440,17 @@
     },
     {
       "version": "v1.9.8",
-      "date": "2026-10-18",
+      "date": null,
       "rank": {
         "api": 14,
+        "plan": null
+      }
+    },
+    {
+      "version": "v2.0.0",
+      "date": "2026-10-19",
+      "rank": {
+        "api": 15,
         "plan": 9
       }
     }

@@ -1,37 +1,37 @@
 # ValueRank
 **Frontier AI model ranking focused on production value**
 
-**Version:** v1.9.8
-**Updated:** October 18, 2026
+**Version:** v2.0.0
+**Updated:** October 19, 2026
 **Scope:** 19 primary-ranked models from a 31-model AA-mapped comparison roster, 16 retained dimensions including Bug Hunt Bench
 
 Publication updated October 8, 2026 with the current AA frontier reconciliation and selected benchmark updates. The complete 31-configuration DeepSWE v1.1 chart was observed October 8; the original 25 configuration records retain their earlier per-row observation dates. Earlier AA component snapshots retain their recorded dates, while the newly captured AA frontier profiles are dated October 8 and MiMo owner run notes October 7. See per-model dates and capture precision in raw-data.md.
 
 ## Current result
 
-The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model family on that observed frontier plus every near-frontier family (see Model inclusion below). The primary score uses each model's available exact-version values across the 16 retained dimensions; missing values remain null and each row's available priorities are renormalized to 100%. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
+The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model family on that observed frontier plus every near-frontier family (see Model inclusion below). ValueRank ranks those models by value: token efficiency, measured as AA's total cost to run its Intelligence Index benchmarks per Index point, carries a fixed **25.00%** of each overall score, and benchmark quality carries the rest. In the API view that cost is priced at API rates; in the Plan view it is also divided by the API-equivalent usage value a subscription delivers per dollar of fee. The quality part uses each model's available exact-version values across the other retained dimensions; missing values remain null and each row's available quality priorities are renormalized. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
 
-| Rank | Model | Overall | Quality | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
+| Rank | Model | Overall | Quality | API cost per Index point (USD, lower better) | Weight coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---|
-| 1 | Gemini 4 Argon | 74.1 | 82.6 | 27.64 | 84.85% (112/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy), Speed |
-| 2 | GPT-6.1 Sol | 70.1 | 71.0 | 12.42 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 3 | Claude Sonnet 5.5 | 69.5 | 85.4 | 83.36 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 4 | GPT-6 Astra | 64.1 | 75.2 | 43.67 | 81.06% (107/132 priority) | Missing: DeepSWE v1.1 |
-| 5 | GPT-5.6 Sol | 62.9 | 69.8 | 39.79 | 100.00% (132/132 priority) | Missing: none |
-| 6 | Claude Opus 5.5 | 60.3 | 76.7 | 100.00 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 7 | GPT-6 Sol | 58.6 | 59.3 | 17.64 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 8 | Grok 4.7 | 56.6 | 66.9 | 57.04 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 9 | MiMo-V2.6-Pro | 53.7 | 42.7 | 2.37 | 69.70% (92/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy) |
-| 10 | MiMo-V2.6-Flash | 50.7 | 24.5 | 1.26 | 54.55% (72/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy), Bug Hunt Bench |
-| 11 | GPT-5.6 Luna | 46.0 | 38.6 | 3.67 | 100.00% (132/132 priority) | Missing: none |
-| 12 | Gemini 3.8 Flash | 43.5 | 42.0 | 18.63 | 100.00% (132/132 priority) | Missing: none |
-| 13 | GPT-6 Luna | 42.4 | 29.0 | 1.40 | 92.42% (122/132 priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
-| 14 | Claude Opus 5 | 40.7 | 48.9 | 83.54 | 100.00% (132/132 priority) | Missing: none |
-| 15 | GLM-5.3 | 40.5 | 40.8 | 28.75 | 100.00% (132/132 priority) | Missing: none |
-| 16 | Claude Haiku 5.5 | 37.9 | 24.0 | 1.81 | 88.64% (117/132 priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
-| 17 | DeepSeek V4 Flash | 31.4 | 21.9 | 5.45 | 100.00% (132/132 priority) | Missing: none |
-| 18 | Qwen3.8 Max | 31.3 | 33.5 | 56.67 | 95.45% (126/132 priority) | Missing: Terminal-Bench 4.0 |
-| 19 | DeepSeek V4 Pro | 26.5 | 17.9 | 12.89 | 95.45% (126/132 priority) | Missing: Terminal-Bench 4.0 |
+| 1 | Gemini 4 Argon | 69.5 | 82.6 | 45.80 | 85.98% (cost + 87/107 quality priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy), Speed |
+| 2 | GPT-6.1 Sol | 65.7 | 71.0 | 20.87 | 89.49% (cost + 92/107 quality priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 3 | Claude Sonnet 5.5 | 65.0 | 85.4 | 129.63 | 89.49% (cost + 92/107 quality priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 4 | GPT-6 Astra | 61.0 | 75.2 | 72.59 | 82.48% (cost + 82/107 quality priority) | Missing: DeepSWE v1.1 |
+| 5 | Claude Opus 5.5 | 57.5 | 76.7 | 151.13 | 89.49% (cost + 92/107 quality priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 6 | GPT-5.6 Sol | 56.8 | 69.8 | 73.76 | 100.00% (cost + 107/107 quality priority) | Missing: none |
+| 7 | MiMo-V2.6-Pro | 54.3 | 42.7 | 4.46 | 71.96% (cost + 67/107 quality priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy) |
+| 8 | GPT-6 Sol | 54.3 | 59.3 | 32.24 | 92.99% (cost + 97/107 quality priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 9 | Grok 4.7 | 52.3 | 66.9 | 106.95 | 92.99% (cost + 97/107 quality priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 10 | GPT-5.6 Luna | 47.1 | 38.6 | 8.57 | 100.00% (cost + 107/107 quality priority) | Missing: none |
+| 11 | GPT-6 Luna | 46.1 | 29.0 | 3.20 | 92.99% (cost + 97/107 quality priority) | Missing: Terminal-Bench 4.0, GPQA Diamond (legacy) |
+| 12 | MiMo-V2.6-Flash | 43.4 | 24.5 | 2.89 | 57.94% (cost + 47/107 quality priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), DeepSWE v1.1, GPQA Diamond (legacy), Bug Hunt Bench |
+| 13 | Claude Haiku 5.5 | 41.3 | 24.0 | 3.82 | 89.49% (cost + 92/107 quality priority) | Missing: Terminal-Bench 4.0, Instruction Following (LiveBench), GPQA Diamond (legacy) |
+| 14 | Gemini 3.8 Flash | 39.9 | 42.0 | 39.65 | 100.00% (cost + 107/107 quality priority) | Missing: none |
+| 15 | Claude Opus 5 | 37.0 | 48.9 | 143.27 | 100.00% (cost + 107/107 quality priority) | Missing: none |
+| 16 | GLM-5.3 | 36.9 | 40.8 | 55.91 | 100.00% (cost + 107/107 quality priority) | Missing: none |
+| 17 | DeepSeek V4 Flash | 31.6 | 21.9 | 13.81 | 100.00% (cost + 107/107 quality priority) | Missing: none |
+| 18 | Qwen3.8 Max | 27.2 | 33.5 | 108.66 | 95.79% (cost + 101/107 quality priority) | Missing: Terminal-Bench 4.0 |
+| 19 | DeepSeek V4 Pro | 23.4 | 17.9 | 31.18 | 95.79% (cost + 101/107 quality priority) | Missing: Terminal-Bench 4.0 |
 
 The current Pareto frontier—undominated on composite cost versus quality—is: **GPT-6.1 Sol, GPT-6 Luna, MiMo-V2.6-Pro, MiMo-V2.6-Flash, Claude Sonnet 5.5, Gemini 4 Argon**.
 
@@ -68,20 +68,28 @@ Near-frontier families and the configuration selected for each:
 
 AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.
 
+## v2.0 value scoring
+
+- **Cost weight.** Cost carries a fixed **25.00%** of the overall score in both the API and Plan views; the quality dimensions share the other 75.00% in proportion to their priorities. A model missing a quality metric keeps cost at its fixed share instead of letting cost grow.
+- **Token efficiency per unit of intelligence.** Both views compare cost per AA Intelligence Index point. The API view divides AA total evaluation cost at API rates by the model's Index; the Plan view further divides it by the highest eligible subscription Value Multiple. Earlier releases compared raw API cost, which credited cheap but weak models fully.
+- **Token efficiency means total benchmark cost.** AA's total cost to run the Intelligence Index combines the tokens a model spends with its per-token price; ValueRank uses that dollar figure as its measure of token efficiency and does not score token counts separately.
+- **Cost keeps its magnitude.** Cost is scored on a log scale within the ranked cohort: the cheapest model per Index point scores 100, the dearest 0, and equal cost ratios move the score equally. Earlier releases rank-normalized cost, so a 10x and a 1.1x price gap could count the same. Quality dimensions remain rank-normalized.
+- Earlier ValueRank versions are not numerically comparable with v2.0.
+
 ## Refresh basis and v1.9 scoring update
 
 - The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **12** candidates have no rankable primary score: **Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Grok 4.6, Kimi K3, Muse Spark 1.2**.
-- For each model, ValueRank retains only its observed metrics, renormalizes that row's available dimension priorities, and reports `availablePriority / totalPriority` coverage plus missing metric names. No missing value receives a zero or neutral fill.
-- Bug Hunt Bench has priority **20** and weight **15.15%** in the main rank. DeepSWE v1.1 has priority **25** and weight **18.94%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
+- For each model, ValueRank retains only its observed metrics, renormalizes that row's available quality priorities, and reports weight coverage (cost's fixed share plus `availablePriority / totalPriority` of the quality share) with missing metric names. No missing value receives a zero or neutral fill.
+- Bug Hunt Bench has priority **20** and weight **14.02%** in the main rank. DeepSWE v1.1 has priority **25** and weight **17.52%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
 - AA's Coding Agent Index v1.5 chart reports **42 configurations** for DeepSWE v1.1 across **113 tasks**, observed **2026-10-17T19:26:26Z**. All configurations and model-version mapping decisions are retained in [data/aa_deepswe.json](data/aa_deepswe.json); **16** configurations map to selected model variants.
 - Artificial Analysis now uses **Artificial Analysis Intelligence Index v4.3.2**: AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-LCR v1.1, and split AA-Omniscience accuracy/reliability components. τ³-Banking and Terminal-Bench 2.1 remain historical source fields only.
 - The standalone Terminal-Bench page has **23 official rows**, including **11/31** direct cohort matches. One separately labelled DeepSeek V4.1-Flash provider claim is used for the current `deepseek-v4-flash` API alias; official and claim counts are kept distinct.
 - **[LiveBench](https://livebench.ai/) 2026-06-25** provides the four-task Instruction Following mean plus Overall Score and Cost Per Successful Task views; Instruction Following contributes where a selected model has an eligible value and is included in the row's available-priority calculation.
-- The companion Bug Hunt emphasis ranking covers **16** eligible exact-variant owner results and raises Bug Hunt to **21.13%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [data/bug_hunt.json](data/bug_hunt.json).
+- The companion Bug Hunt emphasis ranking covers **16** eligible exact-variant owner results and raises Bug Hunt to **19.23%** within that separate view; its ranked table and source snapshot are documented in [scores.md](scores.md#bug-hunt-emphasis-ranking) and [data/bug_hunt.json](data/bug_hunt.json).
 - The AA chart's full **42-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
 - The score retains **16 primary dimensions**; **none** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
 - AA output speed is numeric for **18/19** selected pages; **Gemini 4 Argon** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
-- AA total evaluation cost is available for **19/19** primary models. API Costs uses that amount where available; Plan Costs divides the same amount by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point), and both views renormalize each row over its available dimensions.
+- AA total evaluation cost is available for **19/19** primary models. API Costs divides that amount by the model's AA Intelligence Index (USD per Index point); Plan Costs also divides it by each model's highest eligible subscription Value Multiple. Both views give cost its fixed share and renormalize each row over its available quality dimensions.
 - Earlier ValueRank versions are not numerically comparable because this release changes benchmark weights and the ranked cohort.
 
 ## Sources and audit trail
@@ -152,18 +160,18 @@ Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API e
 | GPT-6.1 Sol | 2 | 51.83 | $1,081.55 | $100.40 | $1.94 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Sonnet 5.5 | 3 | 56.00 | $7,259.50 | $123.25 | $2.20 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | GPT-6 Astra | 4 | 52.39 | $3,802.98 | $353.04 | $6.74 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-5.6 Sol | 5 | 46.97 | $3,464.84 | $321.65 | $6.85 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5.5 | 6 | 57.62 | $8,708.20 | $147.85 | $2.57 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-6 Sol | 7 | 47.63 | $1,535.80 | $142.57 | $2.99 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Grok 4.7 | 8 | 46.45 | $4,967.35 | $858.66 | $18.49 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
-| MiMo-V2.6-Pro | 9 | 46.32 | $206.66 | $137.77 | $2.97 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| MiMo-V2.6-Flash | 10 | 37.88 | $109.55 | $73.03 | $1.93 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| GPT-5.6 Luna | 11 | 37.32 | $319.93 | $29.70 | $0.80 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Gemini 3.8 Flash | 12 | 40.93 | $1,622.73 | API fallback | $39.65 (API fallback) | No eligible route | API fallback | — | — |
-| GPT-6 Luna | 13 | 38.12 | $122.05 | $11.33 | $0.30 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5 | 14 | 50.78 | $7,274.74 | $123.51 | $2.43 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GLM-5.3 | 15 | 44.78 | $2,503.48 | API fallback | $55.91 (API fallback) | No eligible route | API fallback | — | — |
-| Claude Haiku 5.5 | 16 | 41.25 | $157.58 | $2.68 | $0.06 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Opus 5.5 | 5 | 57.62 | $8,708.20 | $147.85 | $2.57 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-5.6 Sol | 6 | 46.97 | $3,464.84 | $321.65 | $6.85 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| MiMo-V2.6-Pro | 7 | 46.32 | $206.66 | $137.77 | $2.97 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
+| GPT-6 Sol | 8 | 47.63 | $1,535.80 | $142.57 | $2.99 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Grok 4.7 | 9 | 46.45 | $4,967.35 | $858.66 | $18.49 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
+| GPT-5.6 Luna | 10 | 37.32 | $319.93 | $29.70 | $0.80 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-6 Luna | 11 | 38.12 | $122.05 | $11.33 | $0.30 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| MiMo-V2.6-Flash | 12 | 37.88 | $109.55 | $73.03 | $1.93 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
+| Claude Haiku 5.5 | 13 | 41.25 | $157.58 | $2.68 | $0.06 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Gemini 3.8 Flash | 14 | 40.93 | $1,622.73 | API fallback | $39.65 (API fallback) | No eligible route | API fallback | — | — |
+| Claude Opus 5 | 15 | 50.78 | $7,274.74 | $123.51 | $2.43 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GLM-5.3 | 16 | 44.78 | $2,503.48 | API fallback | $55.91 (API fallback) | No eligible route | API fallback | — | — |
 | DeepSeek V4 Flash | 17 | 34.33 | $474.19 | API fallback | $13.81 (API fallback) | No eligible route | API fallback | — | — |
 | Qwen3.8 Max | 18 | 45.42 | $4,934.79 | API fallback | $108.66 (API fallback) | No eligible route | API fallback | — | — |
 | DeepSeek V4 Pro | 19 | 36.00 | $1,122.27 | API fallback | $31.18 (API fallback) | No eligible route | API fallback | — | — |

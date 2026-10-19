@@ -42,7 +42,7 @@ test('columnValue reads basis-specific and nested fields', () => {
   const b = models[1];
   assert.equal(columnValue(b, 'rank', 'api'), 1);
   assert.equal(columnValue(b, 'overall', 'plan'), 69.4);
-  assert.equal(columnValue(b, 'quality', 'plan'), 90);
+  assert.equal(columnValue(b, 'quality', 'plan'), 84);
   assert.equal(columnValue(b, 'qualityRank', 'plan'), 1);
   assert.equal(columnValue(b, 'cost', 'api'), 2500);
   assert.equal(columnValue(b, 'cost', 'plan'), 2.25);
@@ -53,7 +53,7 @@ test('columnValue reads basis-specific and nested fields', () => {
   assert.equal(columnValue(b, 'ii', 'plan'), 50);
   assert.equal(columnValue(b, 'name', 'plan'), 'Beta');
   assert.equal(columnValue(b, 'developer', 'plan'), 'Bolt AI');
-  assert.equal(columnValue(b, 'a', 'plan'), 90);
+  assert.equal(columnValue(b, 'a', 'plan'), 84);
   assert.equal(columnValue(b, 'b', 'plan'), null);
   assert.equal(columnValue(b, 'nonexistent', 'plan'), null);
 });

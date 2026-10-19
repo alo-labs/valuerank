@@ -86,15 +86,15 @@ def metric_coverage_summary(model, weights):
     }
     available_priority = coverage.get("availablePriority")
     if not isinstance(available_priority, (int, float)):
-        available_priority = sum(weight.get("priority", 0) for weight in weights if weight["key"] in available_keys)
+        available_priority = sum(weight.get("priority") or 0 for weight in weights if weight["key"] in available_keys)
     total_priority = coverage.get("totalPriority")
     if not isinstance(total_priority, (int, float)):
-        total_priority = sum(weight.get("priority", 0) for weight in weights)
+        total_priority = sum(weight.get("priority") or 0 for weight in weights)
     coverage_pct = coverage.get("coveragePct")
     if not isinstance(coverage_pct, (int, float)) and total_priority:
         coverage_pct = 100 * available_priority / total_priority
     if isinstance(coverage_pct, (int, float)):
-        coverage_text = f"{coverage_pct:.2f}% ({available_priority:g}/{total_priority:g} priority)"
+        coverage_text = f"{coverage_pct:.2f}% (cost + {available_priority:g}/{total_priority:g} quality priority)" if coverage.get("costAvailable") else f"{coverage_pct:.2f}% ({available_priority:g}/{total_priority:g} quality priority)"
     else:
         coverage_text = "—"
     return coverage_text, ", ".join(missing_labels) or "none"
@@ -391,7 +391,9 @@ def main(*, root=ROOT, data=DATA) -> int:
     bug_hunt_source_matches_n = scores.get("externalBenchmarks", {}).get("bugHunt", {}).get("matchedN", bug_hunt_ranking["matchedN"])
     aa_version = scores.get("benchmarkVersion") or "Artificial Analysis Intelligence Index v4.3.2"
     cost_mode = scores.get("costMode") or manifest.get("scoring", {}).get("costMode", "unknown")
-    cost_mode_label = "AA evaluation cost only" if cost_mode == "aa-only" else cost_mode
+    cost_mode_label = (
+        "AA evaluation cost per AA Intelligence Index point" if cost_mode == "aa-per-index-point" else cost_mode
+    )
     cost_coverage = scores.get("costCoverage") or manifest.get("scoring", {}).get("costCoverage", {})
     cost_missing_text = ", ".join(cost_coverage.get("missingModels", [])) or "none"
     dropped = scores.get("droppedDimensions")
@@ -498,19 +500,27 @@ Publication updated October 8, 2026 with the current AA frontier reconciliation 
 
 ## Current result
 
-The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model family on that observed frontier plus every near-frontier family (see Model inclusion below). The primary score uses each model's available exact-version values across the {d} retained dimensions; missing values remain null and each row's available priorities are renormalized to 100%. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
+The selected catalog is reconciled against AA's [Intelligence Index score versus total benchmark-run cost Pareto frontier](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index), and includes every model family on that observed frontier plus every near-frontier family (see Model inclusion below). ValueRank ranks those models by value: token efficiency, measured as AA's total cost to run its Intelligence Index benchmarks per Index point, carries a fixed **{cost_weight_text}** of each overall score, and benchmark quality carries the rest. In the API view that cost is priced at API rates; in the Plan view it is also divided by the API-equivalent usage value a subscription delivers per dollar of fee. The quality part uses each model's available exact-version values across the other retained dimensions; missing values remain null and each row's available quality priorities are renormalized. Every DeepSWE result retains its displayed agent, model and effort; results from other model versions or composite agents are not transferred. Provider claims fill owner gaps only for the exact benchmark version and evaluated variant, remain visibly labelled, and are replaced by owner results when available. Coverage and missing metrics are shown beside each score.
 
-| Rank | Model | Overall | Quality | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
+| Rank | Model | Overall | Quality | API cost per Index point (USD, lower better) | Weight coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---|
 {primary_rows(models, weights)}
 
 The current Pareto frontier—undominated on composite cost versus quality—is: **{pareto_text}**.
 
 {inclusion_md}
+## v2.0 value scoring
+
+- **Cost weight.** Cost carries a fixed **{cost_weight_text}** of the overall score in both the API and Plan views; the quality dimensions share the other {100 - (cost_weight['weightPct'] if cost_weight else 0):.2f}% in proportion to their priorities. A model missing a quality metric keeps cost at its fixed share instead of letting cost grow.
+- **Token efficiency per unit of intelligence.** Both views compare cost per AA Intelligence Index point. The API view divides AA total evaluation cost at API rates by the model's Index; the Plan view further divides it by the highest eligible subscription Value Multiple. Earlier releases compared raw API cost, which credited cheap but weak models fully.
+- **Token efficiency means total benchmark cost.** AA's total cost to run the Intelligence Index combines the tokens a model spends with its per-token price; ValueRank uses that dollar figure as its measure of token efficiency and does not score token counts separately.
+- **Cost keeps its magnitude.** Cost is scored on a log scale within the ranked cohort: the cheapest model per Index point scores 100, the dearest 0, and equal cost ratios move the score equally. Earlier releases rank-normalized cost, so a 10x and a 1.1x price gap could count the same. Quality dimensions remain rank-normalized.
+- Earlier ValueRank versions are not numerically comparable with v2.0.
+
 ## Refresh basis and v1.9 scoring update
 
 - The primary rank includes available exact-version evidence for each selected AA frontier model; it does not require every model to have every retained metric. The remaining **{len(unranked_models)}** candidates have no rankable primary score: **{unranked_names}**.
-- For each model, ValueRank retains only its observed metrics, renormalizes that row's available dimension priorities, and reports `availablePriority / totalPriority` coverage plus missing metric names. No missing value receives a zero or neutral fill.
+- For each model, ValueRank retains only its observed metrics, renormalizes that row's available quality priorities, and reports weight coverage (cost's fixed share plus `availablePriority / totalPriority` of the quality share) with missing metric names. No missing value receives a zero or neutral fill.
 - Bug Hunt Bench has priority **{bug_hunt_weight['priority']}** and weight **{bug_hunt_weight['weightPct']:.2f}%** in the main rank. DeepSWE v1.1 has priority **{deepswe_weight['priority']}** and weight **{deepswe_weight['weightPct']:.2f}%**. A separate Bug Hunt emphasis view gives Bug Hunt still more weight.
 - AA's Coding Agent Index v1.5 chart reports **{len(deepswe_configurations)} configurations** for DeepSWE v1.1 across **{deepswe_chart_doc['benchmarkTasks']} tasks**, observed **{deepswe_updated}**. All configurations and model-version mapping decisions are retained in [data/aa_deepswe.json](data/aa_deepswe.json); **{deepswe_overlap_n}** configurations map to selected model variants.
 - Artificial Analysis now uses **{aa_version}**: AA-Briefcase v1.1, GDPval-AA v2.1, AutomationBench-AA, Terminal-Bench 4.0, SciCode, HLE, GDP.pdf, CritPt, AA-LCR v1.1, and split AA-Omniscience accuracy/reliability components. τ³-Banking and Terminal-Bench 2.1 remain historical source fields only.
@@ -520,7 +530,7 @@ The current Pareto frontier—undominated on composite cost versus quality—is:
 - The AA chart's full **{len(deepswe_configurations)}-configuration** DeepSWE v1.1 result set remains available in the raw-data table; model variants and Devin composite-agent results stay separate.
 - The score retains **{d} primary dimensions**; **{names([item['label'] for item in dropped])}** remain supplemental under the published dimension-selection policy. A missing value in a retained dimension remains null and is omitted from that model's weighted score.
 - AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. Where Speed is retained, its weight is applied only to rows with a value and included in their displayed coverage.
-- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** primary models. API Costs uses that amount where available; Plan Costs divides the same amount by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point), and both views renormalize each row over its available dimensions.
+- AA total evaluation cost is available for **{cost_coverage.get('availableN', '—')}/{n}** primary models. API Costs divides that amount by the model's AA Intelligence Index (USD per Index point); Plan Costs also divides it by each model's highest eligible subscription Value Multiple. Both views give cost its fixed share and renormalize each row over its available quality dimensions.
 - Earlier ValueRank versions are not numerically comparable because this release changes benchmark weights and the ranked cohort.
 
 ## Sources and audit trail
@@ -568,7 +578,7 @@ Earlier publications used different source snapshots, weights, or cohorts. They 
 {inclusion_md}
 ## Primary dimensions
 
-The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Each model's available dimension priorities are then renormalized to 100%, and its `availablePriority / totalPriority` coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
+The retained dimension set is selected from eligible current source coverage and the published priority policy. For each dimension, only models with a genuine exact-version value are ranked; scores remain missing for other rows. Cost takes a fixed **{cost_weight_text}** of each model's score; the model's available quality priorities are renormalized over the rest, and its weight coverage and missing metrics are published with the score. Raw benchmark values remain in scores.json; normalized rank scores are calculated from available values only.
 
 | # | Dimension | ValueRank weight | Direction |
 |---:|---|---:|---|
@@ -594,13 +604,13 @@ These AA methodology weights describe the source index, not the combined ValueRa
 
 ## API Costs and Plan Costs
 
-The API Costs basis uses each model's AA total evaluation cost in USD. Plan Costs divides that same value by the model's highest eligible subscription Value Multiple and then by its AA Intelligence Index, so the Plan input is USD per Index point: a plan allowance is credited with the work it buys, which rewards token-efficient models. Models without an eligible route are compared on API cost per Index point. Lower cost ranks better in both views; the site opens on Plan Costs and the site switcher recalculates the primary composite when the cost basis changes.
+Both bases measure token efficiency as AA's total cost to run its Intelligence Index benchmarks per Index point. The API Costs basis divides each model's AA total evaluation cost in USD by its AA Intelligence Index. Plan Costs also divides by the model's highest eligible subscription Value Multiple, so a plan allowance is credited with the API-equivalent usage it delivers per dollar of fee. Models without an eligible route are compared on API cost per Index point. Lower cost ranks better in both views, cost carries a fixed **{cost_weight_text}** of the score in both, and the site switcher recalculates the primary composite when the cost basis changes.
 
 ## Missing-metric handling
 
 - A retained dimension contributes to a model only when that model has an eligible value from the benchmark owner or an exact-version provider claim. Ranking within each dimension uses only models with eligible values.
 - Missing values remain null in aa_metrics.json and are listed in coverage_matrix.json.
-- Each row's retained priorities are renormalized over that model's available values. Coverage is available priority divided by total retained priority; missing metric names accompany the percentage.
+- Cost keeps its fixed share; each row's retained quality priorities are renormalized over that model's available values. Coverage is cost's share (when the model has a cost) plus the quality share times available quality priority divided by total quality priority; missing metric names accompany the percentage.
 - No zero, neutral 50, median, or mismatched-version value is used. Provider claims remain source-typed and are eligible only for the stated benchmark version and evaluated model/route.
 - AA output speed covers **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** is missing. If retained, Speed contributes only where a value exists and the gap is included in row coverage.
 - GPQA Diamond remains an explicitly labelled legacy ValueRank input; it is not a component of the v4.3.2 source composite.
@@ -616,19 +626,27 @@ Dropped candidate dimensions:
 
 ## Rank normalization
 
-For each retained dimension, models with an eligible value are ranked from best to worst and mapped using that dimension's available sample size:
+For each retained quality dimension, models with an eligible value are ranked from best to worst and mapped using that dimension's available sample size:
 
 ((n - rank) / (n - 1)) × 100
 
-Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive the average tied rank. The sample size is the number of models with a value for that dimension. Lower-is-better dimensions, including composite Cost, reverse the ordering before normalization.
+Rank 1 maps to 100, the worst observed rank maps to 0, and exact ties receive the average tied rank. The sample size is the number of models with a value for that dimension.
+
+## Cost normalization
+
+Cost is the one lower-is-better dimension and keeps its magnitude. Each ranked model's cost per Index point c is mapped on a log scale between the cheapest (c_min) and dearest (c_max) ranked model:
+
+100 × (ln c_max − ln c) / (ln c_max − ln c_min)
+
+The cheapest model scores 100 and the dearest 0, and equal cost ratios move the score by equal amounts: a model twice as expensive as another sits the same distance below it anywhere on the scale.
 
 ## Benchmark evaluation cost (score input)
 
-The Cost input uses **{cost_mode_label}** where an AA Intelligence Index total evaluation cost is available; lower evaluation cost is better. Plan Costs divides that same total benchmark cost by the model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). A missing cost remains null and the row's other available priorities are renormalized; no DeepSWE leaderboard cost or missing-value fill is used.
+The Cost input uses **{cost_mode_label}** where an AA Intelligence Index total evaluation cost is available; lower cost per point is better. Plan Costs further divides that cost by the model's highest eligible subscription Value Multiple. A missing cost remains null and the row is scored on quality alone; no DeepSWE leaderboard cost or missing-value fill is used.
 
 ## Quality score and interpretation
 
-Overall Score is the weighted sum of a model's available retained dimensions, with that row's available priorities renormalized to 100%. Quality Score removes Cost and renormalizes the available non-cost dimensions to 100%. Scores are rank-relative to the values available for this release, not probabilities and not an absolute model capability scale; row coverage is displayed beside each score.
+Quality Score is the priority-weighted mean of a model's available non-cost dimensions, renormalized to 100%. Overall Score is **{cost_weight_text}** × cost score + the remainder × Quality Score. Scores are relative to the ranked cohort and the values available for this release, not probabilities and not an absolute model capability scale; row coverage is displayed beside each score.
 
 ## Supplemental data
 
@@ -646,7 +664,7 @@ When the benchmark owner has not published a result for a model, ValueRank uses 
 
 Bug Hunt Bench reports planted bugs fixed out of **105** across two repositories. The owner scoreboard snapshot is pinned at commit **{bug_hunt_ranking['sourceCommit']}** and provides **{bug_hunt_source_matches_n}/{source_n}** exact results in the AA-mapped comparison roster. Each eligible exact-variant owner value contributes to that model's primary score at Bug Hunt priority **{bug_hunt_weight['priority']}** (**{bug_hunt_weight['weightPct']:.2f}%** before row-level renormalization).
 
-The companion Bug Hunt emphasis ranking uses **{bug_hunt_ranking['matchedN']}** eligible owner-result rows and re-ranks the other available dimensions within that subset. It gives Bug Hunt priority **{bug_hunt_ranking['benchmarkPriority']}** out of **{bug_hunt_ranking['totalPriority']}**, or **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
+The companion Bug Hunt emphasis ranking uses **{bug_hunt_ranking['matchedN']}** eligible owner-result rows and re-ranks the other available dimensions within that subset. Cost keeps its fixed **{cost_weight_text}**; Bug Hunt gets priority **{bug_hunt_ranking['benchmarkPriority']}** out of **{bug_hunt_ranking['totalPriority']}** quality priority, or **{bug_hunt_ranking['benchmarkWeightPct']:.2f}%** before row-level renormalization. Ties use average rank, then lower cost and model name. Its scores are a separate weighting view and should not be compared numerically with the primary composite.
 
 The scoreboard tests an agentic model-and-harness configuration. Runs vary in effort, agent CLI, route, and repeat count; those details remain in the table, and single-run rows are noisy. Models remain visible when one or more retained metrics are missing, with their available-priority coverage shown. A model with no rankable primary metric remains unranked. No values are inferred or neutral-filled. A provider claim may fill an owner gap only for an exact benchmark version and evaluated model variant, and an owner result supersedes it when published.
 
@@ -654,7 +672,7 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
 
 - The AA DeepSWE chart and the other AA Index components measure distinct tasks and use different evaluation setups; ValueRank is a transparent synthesis, not a new benchmark.
 - Bug Hunt results also depend on the tested agent CLI/harness, effort, and route; they measure the tested stack, not model capability in isolation.
-- Rank normalization discards magnitude differences. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
+- Rank normalization of the quality dimensions discards magnitude differences; only cost keeps its magnitude. The AA DeepSWE chart publishes rounded percentage values without uncertainty intervals; read them alongside the exact agent and effort configuration.
 - Page variants can differ by reasoning effort; the selected URL and variant are recorded per model.
 - Provider claims may use a different harness or sampling procedure than the benchmark owner; displayed claim values are not presented as independent benchmark-owner measurements.
 - AA output speed is numeric for **{speed_selected_available_n}/{n}** selected pages; **{speed_missing_text}** has no value. When retained, Speed affects only rows with a value and the per-row coverage makes that difference visible.
@@ -669,13 +687,13 @@ The scoreboard tests an agentic model-and-harness configuration. Runs vary in ef
     )
     scores_md = f"""# ValueRank {VERSION} Scores
 
-**Updated:** {DATE} · **Cohort:** {n} · **Retained dimensions:** {d} · **Default cost basis:** API Costs (AA total evaluation cost)
+**Updated:** {DATE} · **Cohort:** {n} · **Retained dimensions:** {d} · **Default cost basis:** API Costs (AA total evaluation cost per Index point) · **Cost weight:** {cost_weight_text}
 
-API Costs uses the AA total evaluation cost in USD; Plan Costs divides that same value by the highest eligible subscription Value Multiple and by the model's AA Intelligence Index (USD per Index point). The site switcher recalculates the main rank and cost-based charts using the selected basis.
+API Costs uses the AA total evaluation cost in USD divided by the model's AA Intelligence Index (USD per Index point); Plan Costs also divides by the highest eligible subscription Value Multiple. Cost carries a fixed {cost_weight_text} of the overall score on both bases. The site switcher recalculates the main rank and cost-based charts using the selected basis.
 
 ## Final ranking
 
-| Rank | Model | Overall | Quality | Quality Rank | AA eval-cost penalty (lower better) | Baseline priority coverage | Missing metrics |
+| Rank | Model | Overall | Quality | Quality Rank | API cost per Index point (USD, lower better) | Weight coverage | Missing metrics |
 |---:|---|---:|---:|---:|---:|---:|---|
 {chr(10).join(f"| {m.get('rank') or '—'} | {m['name']} | {fnum(m.get('overallScore'), 1)} | {fnum(m.get('qualityScore'), 1)} | {m.get('qualityRank') or '—'} | {fnum(m.get('costComposite'))} | {metric_coverage_summary(m, weights)[0]} | {metric_coverage_summary(m, weights)[1]} |" for m in models)}
 
@@ -711,7 +729,7 @@ Dimension order is the order in weights above:
 
 ## Coverage decision
 
-The current AA Intelligence Index score-versus-total-benchmark-cost frontier, and its near-frontier families, are reconciled into the selected catalog (see Model inclusion in methodology.md). The primary rank uses each model's available exact-version values and renormalizes its retained priorities per row; the ranking table reports the available-priority percentage and missing metric names. {len(unranked_models)} source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
+The current AA Intelligence Index score-versus-total-benchmark-cost frontier, and its near-frontier families, are reconciled into the selected catalog (see Model inclusion in methodology.md). The primary rank gives cost per Index point a fixed {cost_weight_text} share, uses each model's available exact-version quality values and renormalizes its retained quality priorities per row; the ranking table reports the weight-coverage percentage and missing metric names. {len(unranked_models)} source candidates have no rankable primary score. Dropped candidate dimensions are listed below; missing values remain null rather than receiving zero or neutral scores.
 
 ## External benchmark coverage
 
@@ -832,11 +850,11 @@ The ledger contains **{len(eligible_provider_claims)} ranking-eligible provider 
 
 ## Benchmark evaluation cost (score input)
 
-The API Costs baseline uses AA total evaluation cost in USD. AA cost is available for **{cost_coverage.get('availableN', '—')}/{cost_coverage.get('cohortN', n)}** ranked models; missing values are **{cost_missing_text}**. Plan Costs divides the same AA cost by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). No DeepSWE leaderboard cost is used.
+The API Costs baseline uses AA total evaluation cost in USD divided by the AA Intelligence Index. AA cost is available for **{cost_coverage.get('availableN', '—')}/{cost_coverage.get('cohortN', n)}** ranked models; missing values are **{cost_missing_text}**. Plan Costs further divides by each model's highest eligible subscription Value Multiple. No DeepSWE leaderboard cost is used.
 
-| Model | AA evaluation cost (USD) | AA cost penalty | Composite cost |
-|---|---:|---:|---:|
-{chr(10).join(f"| {m['name']} | {fnum(m.get('aaEvalCost'))} | {fnum(m.get('aaCostNorm'))} | {fnum(m.get('costComposite'))} |" for m in models)}
+| Model | AA evaluation cost (USD) | AA Intelligence Index | API cost per Index point (USD) | API cost score (log scale) |
+|---|---:|---:|---:|---:|
+{chr(10).join(f"| {m['name']} | {fnum(m.get('aaEvalCost'))} | {fnum(m.get('intelligenceIndex'))} | {fnum(m.get('aaCostPerIndexPoint'))} | {fnum((m.get('dims') or {}).get('costComposite'), 1)} |" for m in models)}
 
 ## Supplemental Artificial Analysis coverage
 

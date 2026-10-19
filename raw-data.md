@@ -1,6 +1,6 @@
-# ValueRank v1.9.8 Raw Data
+# ValueRank v2.0.0 Raw Data
 
-**Version:** v1.9.8 · **Updated:** October 18, 2026 · **AA DeepSWE chart observed:** 2026-10-17T19:26:26Z · **AA source:** [Artificial Analysis Intelligence Index v4.3.2](https://artificialanalysis.ai/methodology/intelligence-benchmarking)
+**Version:** v2.0.0 · **Updated:** October 19, 2026 · **AA DeepSWE chart observed:** 2026-10-17T19:26:26Z · **AA source:** [Artificial Analysis Intelligence Index v4.3.2](https://artificialanalysis.ai/methodology/intelligence-benchmarking)
 
 This publication combines source snapshots with different observation dates. The complete AA DeepSWE v1.1 chart inventory was observed October 8 and contains 31 configurations; the original 25 configuration records retain their prior per-row observation dates. Earlier AA component snapshots retain their recorded dates, while newly captured AA frontier profiles were observed October 8. Bug Hunt's base snapshot remains pinned separately from the selectively added MiMo owner run notes observed October 7. The publication date does not imply that every benchmark row was recaptured October 8. Per-model AA dates, precision, and source notes appear below; rounded public chart/tooltips preserve their displayed precision and do not establish hidden unrounded payload values.
 
@@ -63,18 +63,18 @@ The visible chart contains all 42 configurations in the October 8 capture. Pass@
 | GPT-6.1 Sol | gpt-6-1-sol | max | [page](https://artificialanalysis.ai/models/gpt-6-1-sol) |
 | Claude Sonnet 5.5 | claude-sonnet-5-5 | max | [page](https://artificialanalysis.ai/models/claude-sonnet-5-5) |
 | GPT-6 Astra | gpt-6-astra-xhigh | xhigh | [page](https://artificialanalysis.ai/models/gpt-6-astra-xhigh) |
-| GPT-5.6 Sol | gpt-5-6-sol | max | [page](https://artificialanalysis.ai/models/gpt-5-6-sol) |
 | Claude Opus 5.5 | claude-opus-5-5 | max | [page](https://artificialanalysis.ai/models/claude-opus-5-5) |
+| GPT-5.6 Sol | gpt-5-6-sol | max | [page](https://artificialanalysis.ai/models/gpt-5-6-sol) |
+| MiMo-V2.6-Pro | mimo-v2-6-pro | not stated | [page](https://artificialanalysis.ai/models/mimo-v2-6-pro) |
 | GPT-6 Sol | gpt-6-sol | max | [page](https://artificialanalysis.ai/models/gpt-6-sol) |
 | Grok 4.7 | grok-4-7 | xhigh | [page](https://artificialanalysis.ai/models/grok-4-7) |
-| MiMo-V2.6-Pro | mimo-v2-6-pro | not stated | [page](https://artificialanalysis.ai/models/mimo-v2-6-pro) |
-| MiMo-V2.6-Flash | mimo-v2-6-flash | not stated | [page](https://artificialanalysis.ai/models/mimo-v2-6-flash) |
 | GPT-5.6 Luna | gpt-5-6-luna | max | [page](https://artificialanalysis.ai/models/gpt-5-6-luna) |
-| Gemini 3.8 Flash | gemini-3-8-flash | high | [page](https://artificialanalysis.ai/models/gemini-3-8-flash) |
 | GPT-6 Luna | gpt-6-luna | max | [page](https://artificialanalysis.ai/models/gpt-6-luna) |
+| MiMo-V2.6-Flash | mimo-v2-6-flash | not stated | [page](https://artificialanalysis.ai/models/mimo-v2-6-flash) |
+| Claude Haiku 5.5 | claude-haiku-5-5-xhigh | xhigh | [page](https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh) |
+| Gemini 3.8 Flash | gemini-3-8-flash | high | [page](https://artificialanalysis.ai/models/gemini-3-8-flash) |
 | Claude Opus 5 | claude-opus-5 | max | [page](https://artificialanalysis.ai/models/claude-opus-5) |
 | GLM-5.3 | glm-5-3 | max | [page](https://artificialanalysis.ai/models/glm-5-3) |
-| Claude Haiku 5.5 | claude-haiku-5-5-xhigh | xhigh | [page](https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh) |
 | DeepSeek V4 Flash | deepseek-v4-flash | max | [page](https://artificialanalysis.ai/models/deepseek-v4-flash) |
 | Qwen3.8 Max | qwen3-8-max | not stated | [page](https://artificialanalysis.ai/models/qwen3-8-max) |
 | DeepSeek V4 Pro | deepseek-v4-pro | max | [page](https://artificialanalysis.ai/models/deepseek-v4-pro) |
@@ -99,18 +99,18 @@ The visible chart contains all 42 configurations in the October 8 capture. Pass@
 | GPT-6.1 Sol | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | Claude Sonnet 5.5 | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | GPT-6 Astra | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
-| GPT-5.6 Sol | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | Claude Opus 5.5 | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
+| GPT-5.6 Sol | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
+| MiMo-V2.6-Pro | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | GPT-6 Sol | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | Grok 4.7 | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
-| MiMo-V2.6-Pro | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
-| MiMo-V2.6-Flash | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | GPT-5.6 Luna | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
-| Gemini 3.8 Flash | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | GPT-6 Luna | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
+| MiMo-V2.6-Flash | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Claude Haiku 5.5 | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
+| Gemini 3.8 Flash | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | Claude Opus 5 | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | GLM-5.3 | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
-| Claude Haiku 5.5 | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | DeepSeek V4 Flash | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | Qwen3.8 Max | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
 | DeepSeek V4 Pro | 2026-10-17T19:25:14Z | No rounding metadata recorded | Retained earlier source snapshot |
@@ -135,18 +135,18 @@ The visible chart contains all 42 configurations in the October 8 capture. Pass@
 | 2 | GPT-6.1 Sol | Codex / GPT-6.1 Sol / max | 69.6% | 1557.00 | 1593.8 | 64.87% | 56.06% | — | — | 54.17% | 31.00% | 83.00% | 52.92% | — | 31.71% | 62.10% | 45.73% | 51.83 | $1081.55 | 66.0 |
 | 3 | Claude Sonnet 5.5 | Claude Code / Sonnet 5.5 / max | 72.0% | 1817.26 | 1837.8 | 71.77% | 63.64% | — | — | 61.00% | 25.80% | 82.67% | 54.96% | — | 31.43% | 53.95% | 52.99% | 56.00 | $7259.50 | 141.4 |
 | 4 | GPT-6 Astra | — / — / not shown | —% | 1546.70 | 1555.9 | 67.18% | 59.60% | — | 43.09% | 55.67% | 32.20% | 80.00% | 54.59% | 96.26% | 31.43% | 61.85% | 51.68% | 52.39 | $3802.98 | 54.5 |
-| 5 | GPT-5.6 Sol | Codex / GPT-5.6 Sol / max | 72.3% | 1480.04 | 1608.6 | 60.08% | 39.90% | — | 44.33% | 57.06% | 27.20% | 84.00% | 49.49% | 94.14% | 32.29% | 59.40% | 7.80% | 46.97 | $3464.84 | 89.3 |
-| 6 | Claude Opus 5.5 | Claude Code / Opus 5.5 / max | 68.4% | 1802.99 | 1866.3 | 69.54% | 59.60% | — | — | 66.90% | 26.20% | 84.67% | 61.35% | — | 31.71% | 66.22% | 41.39% | 57.62 | $8708.20 | 97.5 |
-| 7 | GPT-6 Sol | Codex / GPT-6 Sol / max | 69.0% | 1480.92 | 1508.2 | 61.63% | 43.94% | — | — | 57.64% | 25.20% | 83.67% | 47.91% | — | 30.86% | 54.48% | 39.88% | 47.63 | $1535.80 | 107.8 |
-| 8 | Grok 4.7 | Grok Build / Grok 4.7 / xhigh | 72.6% | 1641.75 | 1711.1 | 65.56% | 25.76% | — | — | 57.41% | 20.00% | 76.67% | 43.14% | — | 17.71% | 47.45% | 70.66% | 46.45 | $4967.35 | 93.1 |
-| 9 | MiMo-V2.6-Pro | — / — / not shown | —% | 1514.66 | 1684.3 | 58.62% | 34.85% | — | — | 60.88% | 19.20% | 86.33% | 49.35% | — | 26.57% | 34.85% | 59.38% | 46.32 | $206.66 | 48.0 |
-| 10 | MiMo-V2.6-Flash | — / — / not shown | —% | 1490.91 | 1607.5 | 64.05% | 22.73% | — | — | 51.27% | 9.00% | 74.33% | 35.08% | — | 12.00% | 27.00% | 45.64% | 37.88 | $109.55 | 51.9 |
-| 11 | GPT-5.6 Luna | Codex / GPT-5.6 Luna / max | 66.4% | 1342.18 | 1459.2 | 50.21% | 11.62% | — | 31.13% | 53.59% | 24.00% | 83.67% | 39.48% | 91.11% | 20.57% | 42.73% | 7.42% | 37.32 | $319.93 | 129.4 |
-| 12 | Gemini 3.8 Flash | Antigravity SDK / Gemini 3.8 Flash / high | 65.8% | 1202.59 | 1436.3 | 59.93% | 19.70% | — | 44.95% | 56.60% | 21.00% | 81.33% | 47.82% | 95.25% | 18.29% | 54.60% | 44.82% | 40.93 | $1622.73 | 147.1 |
-| 13 | GPT-6 Luna | Codex / GPT-6 Luna / max | 63.7% | 1334.83 | 1431.9 | 53.17% | 12.63% | — | — | 54.63% | 22.80% | 83.33% | 38.51% | — | 19.43% | 43.78% | 23.27% | 38.12 | $122.05 | 120.4 |
-| 14 | Claude Opus 5 | Claude Code / Opus 5 / max | 62.5% | 1659.48 | 1721.2 | 56.57% | 48.99% | — | 42.06% | 56.37% | 21.60% | 79.33% | 54.87% | 93.23% | 29.14% | 60.87% | 39.18% | 50.78 | $7274.74 | 59.9 |
-| 15 | GLM-5.3 | Opencode / GLM-5.3 / max | 61.4% | 1506.86 | 1650.3 | 62.20% | 41.92% | — | 50.31% | 59.03% | 11.20% | 79.67% | 42.26% | 91.72% | 19.14% | 33.85% | 70.45% | 44.78 | $2503.48 | 80.6 |
-| 16 | Claude Haiku 5.5 | Claude Code / Haiku 5.5 / xhigh | 49.0% | 1531.52 | 1513.0 | 35.95% | 29.29% | — | — | 51.74% | 18.20% | 78.33% | 42.68% | — | 22.57% | 34.95% | 55.57% | 41.25 | $157.58 | 195.3 |
+| 5 | Claude Opus 5.5 | Claude Code / Opus 5.5 / max | 68.4% | 1802.99 | 1866.3 | 69.54% | 59.60% | — | — | 66.90% | 26.20% | 84.67% | 61.35% | — | 31.71% | 66.22% | 41.39% | 57.62 | $8708.20 | 97.5 |
+| 6 | GPT-5.6 Sol | Codex / GPT-5.6 Sol / max | 72.3% | 1480.04 | 1608.6 | 60.08% | 39.90% | — | 44.33% | 57.06% | 27.20% | 84.00% | 49.49% | 94.14% | 32.29% | 59.40% | 7.80% | 46.97 | $3464.84 | 89.3 |
+| 7 | MiMo-V2.6-Pro | — / — / not shown | —% | 1514.66 | 1684.3 | 58.62% | 34.85% | — | — | 60.88% | 19.20% | 86.33% | 49.35% | — | 26.57% | 34.85% | 59.38% | 46.32 | $206.66 | 48.0 |
+| 8 | GPT-6 Sol | Codex / GPT-6 Sol / max | 69.0% | 1480.92 | 1508.2 | 61.63% | 43.94% | — | — | 57.64% | 25.20% | 83.67% | 47.91% | — | 30.86% | 54.48% | 39.88% | 47.63 | $1535.80 | 107.8 |
+| 9 | Grok 4.7 | Grok Build / Grok 4.7 / xhigh | 72.6% | 1641.75 | 1711.1 | 65.56% | 25.76% | — | — | 57.41% | 20.00% | 76.67% | 43.14% | — | 17.71% | 47.45% | 70.66% | 46.45 | $4967.35 | 93.1 |
+| 10 | GPT-5.6 Luna | Codex / GPT-5.6 Luna / max | 66.4% | 1342.18 | 1459.2 | 50.21% | 11.62% | — | 31.13% | 53.59% | 24.00% | 83.67% | 39.48% | 91.11% | 20.57% | 42.73% | 7.42% | 37.32 | $319.93 | 129.4 |
+| 11 | GPT-6 Luna | Codex / GPT-6 Luna / max | 63.7% | 1334.83 | 1431.9 | 53.17% | 12.63% | — | — | 54.63% | 22.80% | 83.33% | 38.51% | — | 19.43% | 43.78% | 23.27% | 38.12 | $122.05 | 120.4 |
+| 12 | MiMo-V2.6-Flash | — / — / not shown | —% | 1490.91 | 1607.5 | 64.05% | 22.73% | — | — | 51.27% | 9.00% | 74.33% | 35.08% | — | 12.00% | 27.00% | 45.64% | 37.88 | $109.55 | 51.9 |
+| 13 | Claude Haiku 5.5 | Claude Code / Haiku 5.5 / xhigh | 49.0% | 1531.52 | 1513.0 | 35.95% | 29.29% | — | — | 51.74% | 18.20% | 78.33% | 42.68% | — | 22.57% | 34.95% | 55.57% | 41.25 | $157.58 | 195.3 |
+| 14 | Gemini 3.8 Flash | Antigravity SDK / Gemini 3.8 Flash / high | 65.8% | 1202.59 | 1436.3 | 59.93% | 19.70% | — | 44.95% | 56.60% | 21.00% | 81.33% | 47.82% | 95.25% | 18.29% | 54.60% | 44.82% | 40.93 | $1622.73 | 147.1 |
+| 15 | Claude Opus 5 | Claude Code / Opus 5 / max | 62.5% | 1659.48 | 1721.2 | 56.57% | 48.99% | — | 42.06% | 56.37% | 21.60% | 79.33% | 54.87% | 93.23% | 29.14% | 60.87% | 39.18% | 50.78 | $7274.74 | 59.9 |
+| 16 | GLM-5.3 | Opencode / GLM-5.3 / max | 61.4% | 1506.86 | 1650.3 | 62.20% | 41.92% | — | 50.31% | 59.03% | 11.20% | 79.67% | 42.26% | 91.72% | 19.14% | 33.85% | 70.45% | 44.78 | $2503.48 | 80.6 |
 | 17 | DeepSeek V4 Flash | Codex / DeepSeek V4 Flash 0731 / max | 54.3% | 1258.64 | 1433.7 | 53.97% | 12.12% | — | 39.38% | 50.35% | 11.00% | 79.67% | 38.55% | 90.81% | 16.57% | 40.38% | 8.30% | 34.33 | $474.19 | 172.7 |
 | 18 | Qwen3.8 Max | Claude Code / Qwen3.8 Max / not shown | 51.0% | 1612.80 | 1665.6 | 56.19% | 38.89% | — | 47.84% | 52.08% | 22.80% | 80.33% | 43.10% | 92.83% | 17.71% | 31.68% | 71.16% | 45.42 | $4934.79 | 38.3 |
 | 19 | DeepSeek V4 Pro | Codex / DeepSeek V4 Pro 0813 / max | 57.2% | 1256.94 | 1450.5 | 56.71% | 14.14% | — | 39.59% | 51.04% | 11.40% | 80.33% | 41.01% | 92.83% | 18.00% | 49.10% | 5.17% | 36.00 | $1122.27 | 78.8 |
@@ -207,18 +207,18 @@ The benchmark owner reports planted bugs fixed out of 105 across two repositorie
 | [GPT-6.1 Sol](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-61-sol-max-effort---mean-of-3) | 44.3 | 3 / mean | GPT-6.1 Sol (max effort) - mean of 3 | max (verified first-party tier; below ultra ceiling) | Codex CLI | OpenAI ChatGPT account | Matched |
 | [Claude Sonnet 5.5](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-sonnet-55-max-effort---mean-of-3) | 51.3 | 3 / mean | Sonnet 5.5 (max effort) - mean of 3 | max (max) | Claude Code | Anthropic | Matched |
 | [GPT-6 Astra](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-astra-max-effort---mean-of-3) | 45.0 | 3 / mean | GPT-6 Astra (max effort) - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
-| [GPT-5.6 Sol](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-56-sol-max-effort---mean-of-2) | 43.5 | 2 / mean | GPT-5.6 Sol (max effort) - mean of 2 | max (max) | Codex CLI | OpenAI | Matched |
 | [Claude Opus 5.5](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-opus-55-max-effort---mean-of-3) | 41.7 | 3 / mean | Opus 5.5 (max effort) - mean of 3 | max (max) | Claude Code | Anthropic | Matched |
+| [GPT-5.6 Sol](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-56-sol-max-effort---mean-of-2) | 43.5 | 2 / mean | GPT-5.6 Sol (max effort) - mean of 2 | max (max) | Codex CLI | OpenAI | Matched |
+| [MiMo-V2.6-Pro](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-pro-first-party) | 18 | 1 / single | MiMo-V2.6-Pro (first-party, thinking enabled) | enabled (verified binary thinking toggle) | Claude Code / Anthropic-compatible shim | Xiaomi first-party | Matched |
 | [GPT-6 Sol](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-sol-max-effort---mean-of-3) | 29.3 | 3 / mean | GPT-6 Sol MAX - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
 | [Grok 4.7](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-grok-47-xhigh---mean-of-5) | 29.0 | 5 / mean | Grok 4.7 (xhigh) - mean of 5 | xhigh (verified ceiling) | Grok Build CLI (ACP) | xAI | Matched |
-| [MiMo-V2.6-Pro](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-pro-first-party) | 18 | 1 / single | MiMo-V2.6-Pro (first-party, thinking enabled) | enabled (verified binary thinking toggle) | Claude Code / Anthropic-compatible shim | Xiaomi first-party | Matched |
-| [MiMo-V2.6-Flash](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-flash---mean-of-3) | — | None / None | None | None (None) | None | None | reasoning_variant_unverified |
 | [GPT-5.6 Luna](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-56-luna-max-effort---mean-of-3) | 31.3 | 3 / mean | GPT-5.6 Luna (max effort) - mean of 3 | max (max) | Codex CLI | OpenAI | Matched |
-| [Gemini 3.8 Flash](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gemini-38-flash---mean-of-3) | 18.0 | 3 / mean | Gemini 3.8 Flash - mean of 3 | high (verified ceiling) | Antigravity CLI | Google | Matched |
 | [GPT-6 Luna](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-luna-max-effort---mean-of-3) | 18.3 | 3 / mean | GPT-6 Luna MAX - mean of 3 | max (verified ceiling) | Codex CLI | OpenAI | Matched |
+| [MiMo-V2.6-Flash](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-flash---mean-of-3) | — | None / None | None | None (None) | None | None | reasoning_variant_unverified |
+| [Claude Haiku 5.5](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-haiku-55-xhigh-effort---mean-of-3) | 18.3 | 3 / mean | Haiku 5.5 (xhigh effort) - mean of 3 | xhigh (xhigh) | Claude Code | Anthropic | Matched |
+| [Gemini 3.8 Flash](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gemini-38-flash---mean-of-3) | 18.0 | 3 / mean | Gemini 3.8 Flash - mean of 3 | high (verified ceiling) | Antigravity CLI | Google | Matched |
 | [Claude Opus 5](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-opus-5-max-effort) | 27.0 | 1 / single | Opus 5 (max effort) | max (max) | Claude Code | Anthropic | Matched |
 | [GLM-5.3](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-glm-53-max-effort-zai-api) | 19.0 | 1 / single | GLM-5.3 (max effort, Z.ai API) | max (verified setting) | Claude Code / Z.ai API | Z.ai API | Matched |
-| [Claude Haiku 5.5](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-haiku-55-xhigh-effort---mean-of-3) | 18.3 | 3 / mean | Haiku 5.5 (xhigh effort) - mean of 3 | xhigh (xhigh) | Claude Code | Anthropic | Matched |
 | [DeepSeek V4 Flash](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-deepseek-v41-flash-max-effort---mean-of-3) | 21.7 | 3 / mean | DeepSeek V4.1 Flash (max effort) - mean of 3 | max (verified ceiling) | Claude Code / DeepSeek API | DeepSeek API | Matched |
 | [Qwen3.8 Max](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-qwen38-max-max-effort-alibaba-api---mean-of-3) | 25.7 | 3 / mean | Qwen3.8-Max (max effort, Alibaba API) - mean of 3 | max (verified ceiling) | Claude Code / Alibaba API | Alibaba API | Matched |
 | [DeepSeek V4 Pro](https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-deepseek-v4-pro-max-effort-deepseek-api) | 16.0 | 1 / single | DeepSeek V4-Pro (max effort, DeepSeek API) | max (first-party; effort effect inconclusive) | Claude Code / DeepSeek API | DeepSeek API | Matched |
@@ -284,29 +284,29 @@ The ledger contains **1 ranking-eligible provider claim** and separately records
 
 ## Benchmark evaluation cost (score input)
 
-The API Costs baseline uses AA total evaluation cost in USD. AA cost is available for **19/19** ranked models; missing values are **none**. Plan Costs divides the same AA cost by each model's highest eligible subscription Value Multiple and by its AA Intelligence Index (USD per Index point). No DeepSWE leaderboard cost is used.
+The API Costs baseline uses AA total evaluation cost in USD divided by the AA Intelligence Index. AA cost is available for **19/19** ranked models; missing values are **none**. Plan Costs further divides by each model's highest eligible subscription Value Multiple. No DeepSWE leaderboard cost is used.
 
-| Model | AA evaluation cost (USD) | AA cost penalty | Composite cost |
-|---|---:|---:|---:|
-| Gemini 4 Argon | 2407.24 | 27.64 | 27.64 |
-| GPT-6.1 Sol | 1081.55 | 12.42 | 12.42 |
-| Claude Sonnet 5.5 | 7259.50 | 83.36 | 83.36 |
-| GPT-6 Astra | 3802.98 | 43.67 | 43.67 |
-| GPT-5.6 Sol | 3464.84 | 39.79 | 39.79 |
-| Claude Opus 5.5 | 8708.20 | 100.00 | 100.00 |
-| GPT-6 Sol | 1535.80 | 17.64 | 17.64 |
-| Grok 4.7 | 4967.35 | 57.04 | 57.04 |
-| MiMo-V2.6-Pro | 206.66 | 2.37 | 2.37 |
-| MiMo-V2.6-Flash | 109.55 | 1.26 | 1.26 |
-| GPT-5.6 Luna | 319.93 | 3.67 | 3.67 |
-| Gemini 3.8 Flash | 1622.73 | 18.63 | 18.63 |
-| GPT-6 Luna | 122.05 | 1.40 | 1.40 |
-| Claude Opus 5 | 7274.74 | 83.54 | 83.54 |
-| GLM-5.3 | 2503.48 | 28.75 | 28.75 |
-| Claude Haiku 5.5 | 157.58 | 1.81 | 1.81 |
-| DeepSeek V4 Flash | 474.19 | 5.45 | 5.45 |
-| Qwen3.8 Max | 4934.79 | 56.67 | 56.67 |
-| DeepSeek V4 Pro | 1122.27 | 12.89 | 12.89 |
+| Model | AA evaluation cost (USD) | AA Intelligence Index | API cost per Index point (USD) | API cost score (log scale) |
+|---|---:|---:|---:|---:|
+| Gemini 4 Argon | 2407.24 | 52.56 | 45.80 | 30.2 |
+| GPT-6.1 Sol | 1081.55 | 51.83 | 20.87 | 50.0 |
+| Claude Sonnet 5.5 | 7259.50 | 56.00 | 129.63 | 3.9 |
+| GPT-6 Astra | 3802.98 | 52.39 | 72.59 | 18.5 |
+| Claude Opus 5.5 | 8708.20 | 57.62 | 151.13 | 0.0 |
+| GPT-5.6 Sol | 3464.84 | 46.97 | 73.76 | 18.1 |
+| MiMo-V2.6-Pro | 206.66 | 46.32 | 4.46 | 89.0 |
+| GPT-6 Sol | 1535.80 | 47.63 | 32.24 | 39.0 |
+| Grok 4.7 | 4967.35 | 46.45 | 106.95 | 8.7 |
+| GPT-5.6 Luna | 319.93 | 37.32 | 8.57 | 72.5 |
+| GPT-6 Luna | 122.05 | 38.12 | 3.20 | 97.4 |
+| MiMo-V2.6-Flash | 109.55 | 37.88 | 2.89 | 100.0 |
+| Claude Haiku 5.5 | 157.58 | 41.25 | 3.82 | 93.0 |
+| Gemini 3.8 Flash | 1622.73 | 40.93 | 39.65 | 33.8 |
+| Claude Opus 5 | 7274.74 | 50.78 | 143.27 | 1.3 |
+| GLM-5.3 | 2503.48 | 44.78 | 55.91 | 25.1 |
+| DeepSeek V4 Flash | 474.19 | 34.33 | 13.81 | 60.5 |
+| Qwen3.8 Max | 4934.79 | 45.42 | 108.66 | 8.3 |
+| DeepSeek V4 Pro | 1122.27 | 36.00 | 31.18 | 39.9 |
 
 ## Supplemental Artificial Analysis coverage
 
@@ -399,18 +399,18 @@ Plan route evidence as of 2026-10-08. Effective Plan evaluation cost is AA API e
 | GPT-6.1 Sol | 2 | 51.83 | $1,081.55 | $100.40 | $1.94 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Sonnet 5.5 | 3 | 56.00 | $7,259.50 | $123.25 | $2.20 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | GPT-6 Astra | 4 | 52.39 | $3,802.98 | $353.04 | $6.74 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-5.6 Sol | 5 | 46.97 | $3,464.84 | $321.65 | $6.85 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5.5 | 6 | 57.62 | $8,708.20 | $147.85 | $2.57 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GPT-6 Sol | 7 | 47.63 | $1,535.80 | $142.57 | $2.99 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Grok 4.7 | 8 | 46.45 | $4,967.35 | $858.66 | $18.49 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
-| MiMo-V2.6-Pro | 9 | 46.32 | $206.66 | $137.77 | $2.97 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| MiMo-V2.6-Flash | 10 | 37.88 | $109.55 | $73.03 | $1.93 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
-| GPT-5.6 Luna | 11 | 37.32 | $319.93 | $29.70 | $0.80 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Gemini 3.8 Flash | 12 | 40.93 | $1,622.73 | API fallback | $39.65 (API fallback) | No eligible route | API fallback | — | — |
-| GPT-6 Luna | 13 | 38.12 | $122.05 | $11.33 | $0.30 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Opus 5 | 14 | 50.78 | $7,274.74 | $123.51 | $2.43 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| GLM-5.3 | 15 | 44.78 | $2,503.48 | API fallback | $55.91 (API fallback) | No eligible route | API fallback | — | — |
-| Claude Haiku 5.5 | 16 | 41.25 | $157.58 | $2.68 | $0.06 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Opus 5.5 | 5 | 57.62 | $8,708.20 | $147.85 | $2.57 | Claude Pro $20 · Opus 5.5 / 58.9× | Controlled account measurement / workload projection / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-5.6 Sol | 6 | 46.97 | $3,464.84 | $321.65 | $6.85 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| MiMo-V2.6-Pro | 7 | 46.32 | $206.66 | $137.77 | $2.97 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
+| GPT-6 Sol | 8 | 47.63 | $1,535.80 | $142.57 | $2.99 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Grok 4.7 | 9 | 46.45 | $4,967.35 | $858.66 | $18.49 | SuperGrok Heavy $300 · Grok 4.7 XHigh / 5.785× | user reported projection / Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
+| GPT-5.6 Luna | 10 | 37.32 | $319.93 | $29.70 | $0.80 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GPT-6 Luna | 11 | 38.12 | $122.05 | $11.33 | $0.30 | ChatGPT Pro $500 · common GPT assumption / 10.772× | Provisional assumption / GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| MiMo-V2.6-Flash | 12 | 37.88 | $109.55 | $73.03 | $1.93 | MiMo · provisional 1.5x assumption / 1.5× | Provisional assumption | 2026-10-08 | User assumption |
+| Claude Haiku 5.5 | 13 | 41.25 | $157.58 | $2.68 | $0.06 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Gemini 3.8 Flash | 14 | 40.93 | $1,622.73 | API fallback | $39.65 (API fallback) | No eligible route | API fallback | — | — |
+| Claude Opus 5 | 15 | 50.78 | $7,274.74 | $123.51 | $2.43 | Claude Pro $20 · common Claude assumption / 58.9× | Provisional assumption / Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| GLM-5.3 | 16 | 44.78 | $2,503.48 | API fallback | $55.91 (API fallback) | No eligible route | API fallback | — | — |
 | DeepSeek V4 Flash | 17 | 34.33 | $474.19 | API fallback | $13.81 (API fallback) | No eligible route | API fallback | — | — |
 | Qwen3.8 Max | 18 | 45.42 | $4,934.79 | API fallback | $108.66 (API fallback) | No eligible route | API fallback | — | — |
 | DeepSeek V4 Pro | 19 | 36.00 | $1,122.27 | API fallback | $31.18 (API fallback) | No eligible route | API fallback | — | — |

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -165,7 +166,7 @@ DOC = {
 }
 WEIGHTS = [
     {"key": "hle", "label": "HLE", "higherBetter": True, "priority": 10},
-    {"key": "costComposite", "label": "Cost", "higherBetter": False, "priority": 20},
+    {"key": "costComposite", "label": "Cost", "higherBetter": False, "priority": None},
 ]
 
 
@@ -205,18 +206,20 @@ def test_emphasis_weight_matches_published_percentage_and_scores():
     ranking, ranked, weights = build_scores.build_bug_hunt_emphasis(rows, WEIGHTS, DOC)
     # hle has only two matched rows (a, b) so it stays; cost has three.
     assert [w["key"] for w in weights] == ["hle", "costComposite", "bugHuntFixedOf105"]
-    assert sum(w["priority"] for w in weights) == 60
-    assert ranking["totalPriority"] == 60
-    assert ranking["basePrioritySum"] == 30
-    assert ranking["benchmarkWeightPct"] == round(100 * 30 / 60, 4) == weights[-1]["weightPct"]
+    # Cost keeps its fixed share; hle and Bug Hunt split the rest by quality priority (10 + 30).
+    assert ranking["totalPriority"] == 40
+    assert ranking["basePrioritySum"] == 10
+    assert weights[1]["weightPct"] == build_scores.COST_WEIGHT_PCT == 25.0
+    assert ranking["benchmarkWeightPct"] == round(75 * 30 / 40, 4) == weights[-1]["weightPct"]
     assert sum(w["weightPct"] for w in weights) == pytest.approx(100.0, abs=1e-3)
     assert ranking["coveragePct"] == 75.0
     assert ranking["missingModels"] == ["D"]
-    # a: hle 100, cost(lower better, highest cost -> 0), bh 100 -> (1000+0+3000)/60
+    # a: cost 30 is the dearest (log score 0); hle 100 and bh 100 -> quality 100
     by_id = {item["modelId"]: item for item in ranking["ranking"]}
-    assert by_id["a"]["emphasisScore"] == round((100 * 10 + 0 * 20 + 100 * 30) / 60, 1)
-    # c has no hle dim: priorities renormalize over cost + bug hunt only
-    assert by_id["c"]["emphasisScore"] == round((50 * 20 + 50 * 30) / 50, 1)
+    assert by_id["a"]["emphasisScore"] == round(0.25 * 0 + 0.75 * 100, 1)
+    # c has no hle dim: quality is Bug Hunt alone (50); cost 20 on the log scale between 10 and 30
+    cost_c = round(100 * (math.log(30) - math.log(20)) / (math.log(30) - math.log(10)), 1)
+    assert by_id["c"]["emphasisScore"] == round(0.25 * cost_c + 0.75 * 50, 1)
     assert [r.pop("rank") for r in ranking["ranking"]] == [1, 2, 3]
     assert [r["id"] for r in ranked] == [item["modelId"] for item in ranking["ranking"]]
     assert by_id["b"]["primaryRank"] == 2
@@ -229,9 +232,10 @@ def test_emphasis_skips_dimensions_with_one_measured_row_and_breaks_ties_by_cost
         bh_row("c", 10, None, 4),
     ]
     ranking, ranked, weights = build_scores.build_bug_hunt_emphasis(rows, WEIGHTS, DOC)
-    # hle is measured for one row only -> dropped; cost for one row only -> dropped
+    # hle is measured for one row only -> dropped; cost for one row only -> dropped,
+    # so Bug Hunt carries all of the weight
     assert [w["key"] for w in weights] == ["bugHuntFixedOf105"]
-    assert weights[0]["weightPct"] == 100.0
+    assert weights[0]["weightPct"] == 100.0 == ranking["benchmarkWeightPct"]
     assert {r["emphasisScore"] for r in ranking["ranking"]} == {50.0}
     # equal scores: lower cost first, missing cost (inf) last, then name
     assert [r["id"] for r in ranked] == ["c", "a", "b"]
@@ -251,9 +255,12 @@ def built(world):
 def test_weights_reflect_priorities_and_sum_to_100(built):
     weights = built["scores.json"]["weights"]
     assert sum(w["weightPct"] for w in weights) == pytest.approx(100.0, abs=0.01)
-    total = sum(w["priority"] for w in weights)
-    for w in weights:
-        assert w["weightPct"] == round(100.0 * w["priority"] / total, 4)
+    cost = next(w for w in weights if w["key"] == "costComposite")
+    assert cost["priority"] is None and cost["weightPct"] == build_scores.COST_WEIGHT_PCT == 25.0
+    quality = [w for w in weights if w["key"] != "costComposite"]
+    total = sum(w["priority"] for w in quality)
+    for w in quality:
+        assert w["weightPct"] == round(75.0 * w["priority"] / total, 4)
     bug = next(w for w in weights if w["key"] == "bugHuntFixedOf105")
     assert bug["priority"] == build_scores.BUG_HUNT_PRIORITY
     assert built["scores.json"]["externalBenchmarks"]["bugHunt"]["primaryWeightPct"] == bug["weightPct"]
@@ -261,7 +268,7 @@ def test_weights_reflect_priorities_and_sum_to_100(built):
 
 def test_bug_hunt_emphasis_weight_matches_published_percentage(built):
     emphasis = built["scores.json"]["bugHuntEmphasisRanking"]
-    expected = round(100.0 * build_scores.BUG_HUNT_EMPHASIS_PRIORITY / emphasis["totalPriority"], 4)
+    expected = round(75.0 * build_scores.BUG_HUNT_EMPHASIS_PRIORITY / emphasis["totalPriority"], 4)
     assert emphasis["benchmarkWeightPct"] == expected
     assert built["ranking_summary.json"]["bugHuntEmphasis"]["benchmarkWeightPct"] == expected
     assert built["coverage_matrix.json"]["externalBenchmarks"]["bugHunt"]["emphasisWeightPct"] == expected
@@ -269,25 +276,27 @@ def test_bug_hunt_emphasis_weight_matches_published_percentage(built):
 
 def test_metric_coverage_percentage_and_renormalized_priority(built):
     models = built["scores.json"]["models"]
-    weights = {w["key"]: w["priority"] for w in built["scores.json"]["weights"]}
+    weights = {w["key"]: w["priority"] for w in built["scores.json"]["weights"] if w["key"] != "costComposite"}
     total = sum(weights.values())
     partial = 0
     for row in models:
         coverage = row["metricCoverage"]
+        has_cost = "costComposite" in row["dims"]
+        assert coverage["costAvailable"] is has_cost
         assert coverage["totalPriority"] == total
         assert coverage["availablePriority"] == sum(p for k, p in weights.items() if k in row["dims"])
-        assert coverage["coveragePct"] == round(100.0 * coverage["availablePriority"] / total, 2)
+        expected_coverage = (25.0 if has_cost else 0.0) + 75.0 * coverage["availablePriority"] / total
+        assert coverage["coveragePct"] == round(expected_coverage, 2)
         if not row["rankingEligible"]:
             continue
         if coverage["missingKeys"]:
             partial += 1
             assert row["isMissing"] is True
-        available = [k for k in weights if k in row["dims"]]
-        quality = [k for k in available if k != "costComposite"]
-        expected = sum(row["dims"][k] * weights[k] for k in available) / sum(weights[k] for k in available)
-        assert row["overallScore"] == round(expected, 1)
+        quality = [k for k in weights if k in row["dims"]]
         expected_q = sum(row["dims"][k] * weights[k] for k in quality) / sum(weights[k] for k in quality)
         assert row["qualityScore"] == round(expected_q, 1)
+        # Cost carries exactly 25% whatever quality metrics are missing.
+        assert row["overallScore"] == round(0.25 * row["dims"]["costComposite"] + 0.75 * expected_q, 1)
     assert partial > 0  # the committed data contains rows with missing metrics
 
 
@@ -328,13 +337,21 @@ def test_pareto_frontier_excludes_dominated_rows(built):
     assert any(m["pareto"] is False for m in candidates)
 
 
-def test_cost_normalization_is_relative_to_most_expensive_primary_model(built):
-    primary = [m for m in built["scores.json"]["models"] if m["rankingEligible"] and m["aaEvalCost"] is not None]
-    top = max(m["aaEvalCost"] for m in primary)
+def test_cost_is_api_cost_per_index_point_on_a_log_scale(built):
+    models = built["scores.json"]["models"]
+    primary = [m for m in models if m["rankingEligible"] and m["aaEvalCost"] is not None]
+    for m in models:
+        if m["aaEvalCost"] is not None:
+            assert m["aaCostPerIndexPoint"] == m["aaEvalCost"] / m["intelligenceIndex"]
+        assert m["costComposite"] == (m["aaCostPerIndexPoint"] if m["rankingEligible"] else None)
+    low = math.log(min(m["costComposite"] for m in primary))
+    high = math.log(max(m["costComposite"] for m in primary))
     for m in primary:
-        assert m["aaCostNorm"] == round(m["aaEvalCost"] / top * 100, 2)
-    assert max(m["aaCostNorm"] for m in primary) == 100.0
-    assert built["scores.json"]["costMode"] == "aa-only"
+        expected = 100 * (high - math.log(m["costComposite"])) / (high - low)
+        assert m["dims"]["costComposite"] == round(expected, 1)
+    assert max(m["dims"]["costComposite"] for m in primary) == 100.0
+    assert min(m["dims"]["costComposite"] for m in primary) == 0.0
+    assert built["scores.json"]["costMode"] == "aa-per-index-point"
 
 
 DEEPSEEK_CLAIM = {"model": "DeepSeek V4 Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://api-docs.deepseek.com/updates/"}
@@ -579,12 +596,9 @@ def test_unknown_display_name_is_rejected(world):
         run_main(world)
 
 
-def test_non_positive_cost_maximum_is_rejected(world):
-    def fn(document):
-        for model in document["models"].values():
-            model["metrics"]["aaEvalCost"] = 0
-    edit(world, "aa", fn)
-    with pytest.raises(ValueError, match="requires a positive maximum"):
+def test_non_positive_cost_is_rejected(world):
+    edit(world, "aa", lambda d: d["models"]["gpt-6.1-sol"]["metrics"].update(aaEvalCost=0))
+    with pytest.raises(ValueError, match="AA evaluation cost must be positive: gpt-6.1-sol"):
         run_main(world)
 
 
@@ -693,8 +707,11 @@ def test_single_missing_cost_leaves_that_row_unnormalized(world):
     edit(world, "aa", lambda d: d["models"]["gpt-6.1-sol"]["metrics"].update(aaEvalCost=None))
     run_main(world)
     rows = {m["id"]: m for m in outputs(world)["scores.json"]["models"]}
-    assert rows["gpt-6.1-sol"]["aaCostNorm"] is None
+    assert rows["gpt-6.1-sol"]["aaCostPerIndexPoint"] is None
     assert "costComposite" in rows["gpt-6.1-sol"]["metricCoverage"]["missingKeys"]
+    assert rows["gpt-6.1-sol"]["metricCoverage"]["costAvailable"] is False
+    # without a cost the row is scored on quality alone
+    assert rows["gpt-6.1-sol"]["overallScore"] == rows["gpt-6.1-sol"]["qualityScore"]
     assert rows["gpt-6.1-sol"]["isMissing"] is True
     assert rows["gpt-6.1-sol"]["pareto"] is None  # no cost, so it never enters the Pareto comparison
 

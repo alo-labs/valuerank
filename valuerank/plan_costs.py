@@ -3,11 +3,17 @@
 The route file deliberately keeps evidence and eligibility next to the
 arithmetic. A missing route is not treated as free usage: callers receive an
 explicit API fallback marker and can explain it in the UI.
+
+This module also owns the value rule shared by ``build_scores``, the site view
+models and the site JavaScript: both bases compare cost per AA Intelligence
+Index point, scored on a log scale, and cost carries a fixed ``COST_WEIGHT_PCT``
+share of every overall score.
 """
 
 from __future__ import annotations
 
 import json
+import math
 from collections import defaultdict
 from pathlib import Path
 
@@ -15,6 +21,8 @@ from pathlib import Path
 from valuerank.paths import DATA, ROOT
 DEFAULT_ROUTE_PATH = DATA / "plan_cost_routes.json"
 CONFIDENCE_ORDER = {"high": 4, "medium-high": 3, "medium": 2, "low-medium": 1, "low": 0}
+# Cost's fixed share of the overall score on both bases; the quality dimensions share the rest.
+COST_WEIGHT_PCT = 25.0
 
 
 def load_plan_routes(path: str | Path = DEFAULT_ROUTE_PATH) -> dict:
@@ -89,54 +97,79 @@ def cost_per_index_point(cost: float | int | None, intelligence_index) -> float 
     return float(cost) / float(intelligence_index)
 
 
-def rank_cost_scores(costs: list[float | int | None]) -> list[float | None]:
-    """Convert lower-is-better costs to 0-100 scores with average ties."""
+def cost_scores(costs: list[float | int | None]) -> list[float | None]:
+    """Convert lower-is-better costs to 0-100 scores on a log scale.
+
+    The cheapest known cost scores 100 and the dearest 0; in between, equal cost
+    ratios move the score by equal amounts, so a model ten times dearer than
+    another is penalised by the same distance wherever it sits on the scale.
+    When every known cost is equal there is no spread to compare and each scores 50.
+    """
 
     numeric = [(index, float(value)) for index, value in enumerate(costs) if value is not None]
-    if not numeric:
-        return [None] * len(costs)
-    ordered = sorted(value for _index, value in numeric)
-    n = len(ordered)
+    for _index, value in numeric:
+        if value <= 0:
+            raise ValueError("cost scores need positive costs")
     scores: list[float | None] = [None] * len(costs)
+    if not numeric:
+        return scores
+    low = math.log(min(value for _index, value in numeric))
+    high = math.log(max(value for _index, value in numeric))
     for index, value in numeric:
-        first = ordered.index(value) + 1
-        last = n - ordered[::-1].index(value)
-        average_rank = (first + last) / 2
         # One decimal, the precision of every dimension stored in scores.json, so a composite
         # recomputed from the public data reproduces the committed score exactly.
-        scores[index] = round(((n - average_rank) / (n - 1)) * 100, 1) if n > 1 else 50.0
+        scores[index] = round(100 * (high - math.log(value)) / (high - low), 1) if high > low else 50.0
     return scores
+
+
+def blend(cost_score: float | None, quality_score: float | None, cost_weight_pct: float = COST_WEIGHT_PCT) -> float | None:
+    """Overall score: cost carries ``cost_weight_pct`` and quality the rest.
+
+    A model without a quality score has no overall score; a model without a cost
+    score is scored on quality alone. Neither gap is filled in.
+    """
+
+    if quality_score is None:
+        return None
+    if cost_score is None:
+        return round(quality_score, 1)
+    share = cost_weight_pct / 100
+    return round(share * cost_score + (1 - share) * quality_score, 1)
 
 
 def build_cost_fields(models: list[dict], route_document: dict) -> list[dict]:
     """Return API and plan cost values plus normalized scores for each model.
 
-    ``apiCost`` is the AA total evaluation cost (USD per Index run).
-    ``planCostPerRun`` divides it by the selected route's Value Multiple, and
-    ``planCost`` divides that by the model's AA Intelligence Index (USD per
-    Index point), which is what the Plan-basis rank compares. A model
-    without an eligible route is not treated as free usage: it is compared
-    on API cost per Index point and carries an explicit fallback marker.
+    ``apiCost`` is the AA total evaluation cost (USD per Index run) and
+    ``apiCostPerPoint`` divides it by the model's AA Intelligence Index (USD
+    per Index point), which is what the API-basis rank compares.
+    ``planCostPerRun`` divides the run cost by the selected route's Value
+    Multiple, and ``planCost`` divides that by the Index, which is what the
+    Plan-basis rank compares. A model without an eligible route is not
+    treated as free usage: it is compared on API cost per Index point and
+    carries an explicit fallback marker. Both scores come from ``cost_scores``.
     """
 
     api_costs = [model.get("aaEvalCost") for model in models]
     indices = [model.get("intelligenceIndex") for model in models]
     routes = [select_best_route(model["id"], route_document, model.get("aaVariant")) for model in models]
+    api_point_costs = [cost_per_index_point(api_cost, index) for api_cost, index in zip(api_costs, indices)]
     plan_run_costs = [effective_cost(api_cost, route) for api_cost, route in zip(api_costs, routes)]
     plan_costs = [cost_per_index_point(run_cost, index) for run_cost, index in zip(plan_run_costs, indices)]
     comparable_plan_costs = [
-        plan_cost if plan_cost is not None else cost_per_index_point(api_cost, index)
-        for plan_cost, api_cost, index in zip(plan_costs, api_costs, indices)
+        plan_cost if plan_cost is not None else api_point_cost
+        for plan_cost, api_point_cost in zip(plan_costs, api_point_costs)
     ]
-    api_scores = rank_cost_scores(api_costs)
-    plan_scores = rank_cost_scores(comparable_plan_costs)
+    api_scores = cost_scores(api_point_costs)
+    plan_scores = cost_scores(comparable_plan_costs)
     result = []
-    for api_cost, index, run_cost, plan_cost, comparable, api_score, plan_score, route in zip(
-        api_costs, indices, plan_run_costs, plan_costs, comparable_plan_costs, api_scores, plan_scores, routes
+    for api_cost, api_point_cost, index, run_cost, plan_cost, comparable, api_score, plan_score, route in zip(
+        api_costs, api_point_costs, indices, plan_run_costs, plan_costs, comparable_plan_costs, api_scores, plan_scores, routes
     ):
         result.append(
             {
                 "apiCost": api_cost,
+                "apiCostPerPoint": api_point_cost,
                 "intelligenceIndex": index,
                 "planCostPerRun": run_cost,
                 "planCost": plan_cost,

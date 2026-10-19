@@ -73,7 +73,7 @@ def _bug_hunt(model: Mapping):
 
 
 DIMENSION_META: dict[str, dict[str, Any]] = {
-    "costComposite": {"category": "cost", "unit": "USD per Index run", "urlLabel": None, "raw": _field("aaEvalCost")},
+    "costComposite": {"category": "cost", "unit": "USD per Index point", "urlLabel": None, "raw": _field("aaCostPerIndexPoint")},
     "omniNonHallucination": {"category": "rely", "unit": "% non-hallucination", "urlLabel": "AA-Omniscience Non-Hallucination Rate", "raw": _field("omniNonHallucination", _percent)},
     "omniAccuracy": {"category": "rely", "unit": "% accuracy", "urlLabel": "AA-Omniscience Accuracy", "raw": _field("omniAccuracy", _percent)},
     "terminalBenchV4": {"category": "code", "unit": "% resolved", "urlLabel": "Terminal-Bench 4.0", "raw": _field("terminalBenchV4Pct")},
@@ -168,7 +168,7 @@ def dimension_evidence(key: str, model: Mapping, context: Mapping) -> dict[str, 
     if key == "costComposite":
         selection = model.get("frontierSelection") or {}
         return {
-            "source": {"name": "Artificial Analysis total cost to run the Intelligence Index", "url": selection.get("url") or model["aaUrl"]},
+            "source": {"name": "Artificial Analysis total cost to run the Intelligence Index, per Index point", "url": selection.get("url") or model["aaUrl"]},
             "observedAt": _day((scores.get("frontierSelection") or {}).get("capturedAt")),
             "evaluatedVariant": model.get("aaVariant"),
             "note": model.get("aaFrontierFootnote"),

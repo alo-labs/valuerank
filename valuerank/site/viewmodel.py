@@ -17,11 +17,13 @@ Page view-model helpers take the bundle and return the ``page`` mapping for one 
 Scoring rules
 -------------
 * ``slug`` is the model id with dots replaced by hyphens (``gpt-6.1-sol`` -> ``gpt-6-1-sol``).
-* Cost arithmetic is delegated to ``valuerank.plan_costs``. Cost *scores* are ranked within the ranked
-  cohort (as ``emit_docs`` does); cost *numbers* (USD) are computed for all 28 roster models.
-* The overall score on a basis replaces the cost dimension score with that basis' cost score and
-  renormalises over the available priorities (the rule of ``build_scores`` and the site JavaScript).
-  Models rank by score descending, then name. The API-basis result reproduces ``data/scores.json``.
+* Cost arithmetic is delegated to ``valuerank.plan_costs``. Both bases compare cost per AA Intelligence
+  Index point; cost *scores* are log-scaled within the ranked cohort (as ``emit_docs`` does), and cost
+  *numbers* (USD) are computed for every roster model.
+* The overall score on a basis gives that basis' cost score a fixed ``COST_WEIGHT_PCT`` share and the
+  priority-weighted quality score (renormalised over the available quality dimensions) the rest: the rule
+  of ``build_scores`` and the site JavaScript. Models rank by score descending, then lower cost on that basis, then name. The API-basis
+  result reproduces ``data/scores.json``.
 * Historic ranks predate the plan basis; see ``valuerank.site.changelog``.
 """
 
@@ -36,6 +38,8 @@ from typing import Any
 from valuerank.emit_docs import AA_METHODOLOGY_URL, BENCHMARK_URLS, model_inclusion, plan_evidence_label
 from valuerank.paths import DATA
 from valuerank.plan_costs import (
+    COST_WEIGHT_PCT,
+    blend,
     build_cost_fields,
     cost_per_index_point,
     effective_cost,
@@ -51,8 +55,8 @@ BASES = {
     "api": {
         "label": "API ranking",
         "costLabel": "API cost",
-        "costUnit": "USD per Index run",
-        "description": "AA total evaluation cost at API rates.",
+        "costUnit": "USD per Index point",
+        "description": "AA total evaluation cost at API rates ÷ AA Intelligence Index.",
         "pickLabel": "Best at API rates",
         "pickPhrase": "at API rates",
     },
@@ -101,22 +105,33 @@ def slugify(model_id: str) -> str:
 
 
 def composite_score(dims: dict, cost_score: float | None, weights: list[dict]) -> float | None:
-    """Priority-weighted mean over the available dimensions, with ``cost_score`` standing in for cost."""
+    """Cost's fixed share of ``cost_score`` plus the rest of the available quality mean (``plan_costs.blend``)."""
 
     total = priority = 0.0
     for weight in weights:
-        value = cost_score if weight["key"] == COST_KEY else dims.get(weight["key"])
+        value = dims.get(weight["key"]) if weight["key"] != COST_KEY else None
         if value is not None:
             total += value * weight["priority"]
             priority += weight["priority"]
-    return round(total / priority, 1) if priority else None
+    return blend(cost_score, total / priority if priority else None)
 
 
-def rank_scores(scores: dict, names: dict) -> dict:
-    """1-based ranks by score descending then name; entries without a score are skipped."""
+def coverage_pct(has_cost: bool, available_priority: float, total_priority: float) -> float:
+    """Share of the scoring weight with an eligible value: cost's fixed share plus the quality share."""
 
+    quality = (100.0 - COST_WEIGHT_PCT) * available_priority / total_priority if total_priority else 0.0
+    return round((COST_WEIGHT_PCT if has_cost else 0.0) + quality, 2)
+
+
+def rank_scores(scores: dict, names: dict, costs: dict | None = None) -> dict:
+    """1-based ranks by score descending, then lower cost (unknown last), then name; entries without a score are skipped."""
+
+    costs = costs or {}
     scored = [key for key, score in scores.items() if score is not None]
-    ordered = sorted(scored, key=lambda key: (-scores[key], names[key]))
+    ordered = sorted(
+        scored,
+        key=lambda key: (-scores[key], costs[key] if costs.get(key) is not None else float("inf"), names[key]),
+    )
     return {key: position for position, key in enumerate(ordered, 1)}
 
 
@@ -184,6 +199,7 @@ def _route_view(route: dict | None) -> dict | None:
 def _cost_view(fields: dict) -> dict:
     return {
         "apiUsd": fields["apiCost"],
+        "apiUsdPerPoint": fields["apiCostPerPoint"],
         "planUsdPerRun": fields["planCostPerRun"],
         "planUsdPerPoint": fields["planCost"],
         "planComparableUsdPerPoint": fields["planComparableCost"],
@@ -255,7 +271,11 @@ def build_bundle(data: Path = DATA) -> Bundle:
         overall[basis] = {
             source["id"]: composite_score(source["dims"], cohort_fields[source["id"]][score_key], weights) for source in ranked
         }
-    ranks = {basis: rank_scores(overall[basis], names) for basis in overall}
+    tie_costs = {
+        basis: {source["id"]: cohort_fields[source["id"]][cost_key] for source in ranked}
+        for basis, cost_key in (("api", "apiCostPerPoint"), ("plan", "planComparableCost"))
+    }
+    ranks = {basis: rank_scores(overall[basis], names, tie_costs[basis]) for basis in overall}
     pareto = {
         basis: _pareto(
             {
@@ -267,7 +287,7 @@ def build_bundle(data: Path = DATA) -> Bundle:
     }
 
     entries, docs = {}, {}
-    total_priority = sum(w["priority"] for w in weights)
+    total_priority = sum(w["priority"] for w in weights if w["key"] != COST_KEY)
     for source in roster:
         model_id, slug = source["id"], slugify(source["id"])
         is_ranked = source in ranked
@@ -276,9 +296,11 @@ def build_bundle(data: Path = DATA) -> Bundle:
         normalized = source["dims"] if is_ranked else {}
         dimension_docs = _dimension_docs(source, slug, weights, normalized, cost_dims, inputs)
         present = [doc for doc in dimension_docs if doc["value"] is not None]
-        available = sum(w["priority"] for w in weights if any(d["key"] == w["key"] for d in present))
+        present_keys = {d["key"] for d in present}
+        available = sum(w["priority"] for w in weights if w["key"] != COST_KEY and w["key"] in present_keys)
         coverage = {
-            "pct": round(100.0 * available / total_priority, 2),
+            "pct": coverage_pct(COST_KEY in present_keys, available, total_priority),
+            "costAvailable": COST_KEY in present_keys,
             "availablePriority": available,
             "totalPriority": total_priority,
             "missing": [w["label"] for w in weights if not any(d["key"] == w["key"] for d in present)],
@@ -801,15 +823,15 @@ def changelog_page(bundle: Bundle) -> dict:
 
 
 FAQ_TEMPLATE = (
-    ("How is the overall score calculated?", "Each dimension is rank-normalised to 0-100 across the ranked cohort, multiplied by its weight and divided by the weights that are available for that model. Cost carries {cost:.1f}% of the weight by default."),
-    ("What happens when a benchmark has no result for a model?", "The dimension is dropped for that model and the remaining weights are renormalised. Nothing is filled in, and the gap is shown on the model page."),
-    ("What is the difference between the API ranking and the Plan ranking?", "The API ranking prices the Intelligence Index run at API rates. The Plan ranking divides that cost by the best eligible subscription Value Multiple and by the Index score, giving USD per Index point."),
+    ("How is the overall score calculated?", "Cost carries a fixed {cost:.0f}% of the score and quality the rest. The cost score compares USD per Intelligence Index point on a log scale, so the cheapest model scores 100, the dearest 0, and equal cost ratios count equally. Each quality dimension is rank-normalised to 0-100 across the ranked cohort, multiplied by its weight and divided by the quality weights that are available for that model."),
+    ("What happens when a benchmark has no result for a model?", "The dimension is dropped for that model and the remaining quality weights are renormalised; cost keeps its fixed share. Nothing is filled in, and the gap is shown on the model page."),
+    ("What is the difference between the API ranking and the Plan ranking?", "Both rank on token efficiency: what it costs to run the Artificial Analysis Intelligence Index, per Index point. The API ranking prices the run at API rates. The Plan ranking also divides by the best eligible subscription Value Multiple, the API-priced usage a plan delivers per dollar of fee."),
     ("What do the evidence grades mean?", "Measured values come from the benchmark owner or a controlled account measurement. Claims come from the model provider, estimates are owner estimates or user-reported projections, and assumptions are explicitly authorised stand-ins."),
     ("Why is a model not ranked?", "Ranked models need an exact-variant DeepSWE and Bug Hunt result or a required place on the Artificial Analysis frontier. Unranked models still have pages with every value we hold."),
 )
 
 LIMITATIONS = (
-    "Rank scores are relative to the ranked cohort and change when the cohort changes.",
+    "Rank and cost scores are relative to the ranked cohort and change when the cohort changes.",
     "Public benchmark displays are rounded, so small differences between models are not meaningful.",
     "Subscription value multiples are projections or assumptions, not guarantees of what a plan delivers.",
     "Results are never transferred between model versions or reasoning efforts; missing coverage lowers confidence.",
@@ -824,12 +846,19 @@ def methodology_page(bundle: Bundle) -> dict:
     dimensions = rankings["dimensions"]
     normalized = {d["key"]: (chosen["costDims"]["plan"] if d["key"] == COST_KEY else chosen["dims"][d["key"]]) for d in dimensions}
     available = sum(d["weightPct"] for d in dimensions if normalized[d["key"]] is not None)
-    available_priority = sum(d["priority"] for d in dimensions if normalized[d["key"]] is not None)
+    quality_available = sum(d["weightPct"] for d in dimensions if d["key"] != COST_KEY and normalized[d["key"]] is not None)
+    available_priority = sum(d["priority"] for d in dimensions if d["key"] != COST_KEY and normalized[d["key"]] is not None)
+    cost_share = rankings["costWeightPct"] if normalized.get(COST_KEY) is not None else 0.0
     rows = []
     for d in dimensions:
         value = normalized[d["key"]]
         included = value is not None
-        effective = round(100 * d["weightPct"] / available, 4) if included else 0.0
+        if not included:
+            effective = 0.0
+        elif d["key"] == COST_KEY:
+            effective = cost_share
+        else:
+            effective = round((100 - cost_share) * d["weightPct"] / quality_available, 4)
         rows.append(
             {
                 "key": d["key"],
@@ -843,6 +872,7 @@ def methodology_page(bundle: Bundle) -> dict:
         )
     return {
         "dimensions": dimensions,
+        "costWeightPct": rankings["costWeightPct"],
         "modelInclusion": rankings["modelInclusion"],
         "weights": {d["key"]: d["weightPct"] for d in dimensions},
         "workedExample": {
@@ -852,7 +882,7 @@ def methodology_page(bundle: Bundle) -> dict:
             "overall": chosen["overall"]["plan"],
             "availableWeightPct": round(available, 4),
             "availablePriority": available_priority,
-            "totalPriority": sum(d["priority"] for d in dimensions),
+            "totalPriority": sum(d["priority"] for d in dimensions if d["key"] != COST_KEY),
             "steps": rows,
             "missing": [row["label"] for row in rows if not row["included"]],
         },

@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import { buildDecomposition, contributions } from '../../../valuerank/site/assets/js/charts/decomposition.js';
 import { models, dimensions, baseOptions } from './_fixtures.mjs';
 
-test('contributions renormalise over the available dimensions and sum to the weighted mean', () => {
+test('contributions give cost its fixed share and renormalise quality over the available dimensions', () => {
   const alpha = models[0];
   const c = contributions(alpha, dimensions, 'plan', undefined);
-  assert.ok(Math.abs(c.cost - 20) < 1e-9, 'cost 80 x 20 / 80');
-  assert.ok(Math.abs(c.code - ((100 * 40 + 93.3 * 20) / 80)) < 1e-9);
+  assert.ok(Math.abs(c.cost - 16) < 1e-9, 'cost 80 x 20%, not inflated by the missing hle');
+  assert.ok(Math.abs(c.code - (0.8 * (100 * 40 + 93.3 * 20)) / 60) < 1e-9);
   assert.equal(c.intel, 0, 'missing hle contributes nothing');
   const full = contributions(models[1], dimensions, 'plan');
   assert.ok(Math.abs(Object.values(full).reduce((a, b) => a + b, 0) - (90 * 20 + 90 * 40 + 80 * 20 + 60 * 20) / 100) < 1e-9);
@@ -20,6 +20,10 @@ test('cost weight override rescales the other dimensions', () => {
   const same = contributions(models[1], dimensions, 'plan', 20);
   assert.deepEqual(same, contributions(models[1], dimensions, 'plan'));
   assert.deepEqual(contributions({ dims: {}, costDims: {} }, dimensions, 'api'), { cost: 0, code: 0, intel: 0 });
+  // A cost alone, with no quality dimension, is not a score.
+  assert.deepEqual(contributions({ dims: {}, costDims: { api: 70 } }, dimensions, 'api'), { cost: 0, code: 0, intel: 0 });
+  const noQuality = contributions({ dims: { deepswe: 50 }, costDims: { api: null } }, dimensions, 'api', 90);
+  assert.ok(Math.abs(noQuality.code - 50) < 1e-9, 'without a cost score quality carries the whole score');
 });
 
 test('one stacked horizontal bar trace per category, models sorted by overall', () => {

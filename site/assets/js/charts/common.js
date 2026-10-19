@@ -30,7 +30,7 @@ export const money = (value, digits = 2) => (finite(value) ? `$${value.toLocaleS
 /** One-line cost description in the unit of the active basis. */
 export function costText(model, basis) {
   const cost = model.cost ?? {};
-  return basis === 'api' ? `${money(cost.apiUsd, 0)} per Index run` : `${money(cost.planUsdPerPoint, 3)} per Index point`;
+  return `${money(basis === 'api' ? cost.apiUsdPerPoint : cost.planUsdPerPoint, 3)} per Index point`;
 }
 
 export const baseLayout = (opts, title, titleSize) => ({

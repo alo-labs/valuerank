@@ -1,4 +1,4 @@
-// Pure scoring: client-side port of the cost-weight renormalisation rule.
+// Pure scoring: client-side port of the fixed cost-share rule (valuerank.plan_costs.blend).
 import { fmtScore } from './format.js';
 
 export const COST_KEY = 'costComposite';
@@ -12,17 +12,20 @@ function dimValue(model, dim, basis) {
   return dim.key === COST_KEY ? model.costDims[basis] : model.dims[dim.key];
 }
 
-/** Weight fractions per dimension key: available priorities only, summing to 1 (or all zero). */
+/**
+ * Weight fractions per dimension key (valuerank.plan_costs.blend): cost takes the requested share
+ * when the model has a cost score, and the available quality dimensions share the rest in
+ * proportion to their weights. All zero when no quality dimension is available.
+ */
 export function effectiveWeights(model, dimensions, costWeightPct, basis = 'plan') {
-  const defaultCost = dimensions.find((d) => d.key === COST_KEY).weightPct / 100;
   const requested = clamp(costWeightPct, 0, 100) / 100;
-  const scale = defaultCost < 1 ? (1 - requested) / (1 - defaultCost) : 0;
-  const raw = dimensions.map((d) => {
-    if (!has(dimValue(model, d, basis))) return 0;
-    return d.key === COST_KEY ? requested : (d.weightPct / 100) * scale;
-  });
-  const total = raw.reduce((sum, w) => sum + w, 0);
-  return Object.fromEntries(dimensions.map((d, i) => [d.key, total > 0 ? raw[i] / total : 0]));
+  const available = (d) => has(dimValue(model, d, basis));
+  const qualityTotal = dimensions.reduce((sum, d) => sum + (d.key !== COST_KEY && available(d) ? d.weightPct : 0), 0);
+  const costShare = dimensions.some((d) => d.key === COST_KEY && available(d)) ? requested : 0;
+  return Object.fromEntries(dimensions.map((d) => {
+    if (qualityTotal <= 0 || !available(d)) return [d.key, 0];
+    return [d.key, d.key === COST_KEY ? costShare : ((1 - costShare) * d.weightPct) / qualityTotal];
+  }));
 }
 
 /** Weighted score rounded to one decimal, or null when no weighted dimension is available. */
@@ -39,7 +42,7 @@ export function compositeScore(model, dimensions, basis, costWeightPct) {
   return total > 0 ? round1(sum / total) : null;
 }
 
-/** Copies of the models with overall[basis] and rank[basis] recomputed; ranking is score desc then name. */
+/** Copies of the models with overall[basis] and rank[basis] recomputed; ranking is score desc, then lower cost, then name. */
 export function recompute(models, dimensions, basis, costWeightPct) {
   const scored = models.map((m) => ({
     ...m,
@@ -48,14 +51,21 @@ export function recompute(models, dimensions, basis, costWeightPct) {
   }));
   scored
     .filter((m) => m.overall[basis] !== null)
-    .sort((a, b) => b.overall[basis] - a.overall[basis] || byName(a, b))
+    .sort((a, b) => b.overall[basis] - a.overall[basis] || byCost(a, b, basis) || byName(a, b))
     .forEach((m, i) => { m.rank[basis] = i + 1; });
   return scored;
 }
 
-/** Cost in the unit of the basis; a model without a plan route shows its API-derived comparable plan cost. */
+/** Lower cost first; a model without a cost on the basis sorts after every priced model. */
+function byCost(a, b, basis) {
+  const cost = (m) => costValue(m, basis) ?? Infinity;
+  const [ca, cb] = [cost(a), cost(b)];
+  return ca === cb ? 0 : (ca < cb ? -1 : 1);
+}
+
+/** Cost per Index point on the basis; a model without a plan route shows its API-derived comparable plan cost. */
 export function costValue(model, basis) {
-  if (basis === 'api') return model.cost.apiUsd;
+  if (basis === 'api') return model.cost.apiUsdPerPoint;
   return model.cost.planUsdPerPoint ?? model.cost.planComparableUsdPerPoint ?? null;
 }
 

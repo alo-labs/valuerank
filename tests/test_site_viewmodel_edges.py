@@ -73,6 +73,7 @@ def test_a_model_without_cost_or_index_has_no_plan_numbers_and_a_missing_cost_di
     def change(scores):
         pro = model(scores, "deepseek-v4-pro")
         pro["aaEvalCost"] = None
+        pro["aaCostPerIndexPoint"] = None
         pro["frontierSelection"] = None
     edit(data, "scores.json", change)
     bundle = viewmodel.build_bundle(data)
@@ -96,7 +97,7 @@ def test_models_with_no_values_at_all_grade_as_missing(data):
     def change(scores):
         fable = model(scores, "claude-fable-5")
         for key in list(fable):
-            if key in {"omniNonHallucination", "deepswePassAt1Pct", "gdpvalV21", "automationBenchAA", "aaLcr", "omniAccuracy", "hle", "gpqaDiamond", "scicode", "critpt", "intelligenceIndex", "speed", "terminalBenchV4Pct", "livebenchInstructionFollowing", "aaEvalCost"}:
+            if key in {"omniNonHallucination", "deepswePassAt1Pct", "gdpvalV21", "automationBenchAA", "aaLcr", "omniAccuracy", "hle", "gpqaDiamond", "scicode", "critpt", "intelligenceIndex", "speed", "terminalBenchV4Pct", "livebenchInstructionFollowing", "aaEvalCost", "aaCostPerIndexPoint"}:
                 fable[key] = None
         fable["bugHunt"]["matched"] = False
     edit(data, "scores.json", change)

@@ -28,15 +28,23 @@ def test_benchmark_links():
 class TestMetricCoverageSummary:
     def test_uses_declared_coverage(self):
         model = {"dims": {"a": 1.0}, "metricCoverage": {"missingKeys": ["b"], "availablePriority": 3, "totalPriority": 4, "coveragePct": 75}}
-        assert ed.metric_coverage_summary(model, WEIGHTS) == ("75.00% (3/4 priority)", "Beta")
+        assert ed.metric_coverage_summary(model, WEIGHTS) == ("75.00% (3/4 quality priority)", "Beta")
 
     def test_derives_everything_when_coverage_is_absent(self):
         model = {"dims": {"a": 1.0, "b": None}}
-        assert ed.metric_coverage_summary(model, WEIGHTS) == ("75.00% (3/4 priority)", "Beta")
+        assert ed.metric_coverage_summary(model, WEIGHTS) == ("75.00% (3/4 quality priority)", "Beta")
 
     def test_nothing_missing(self):
         model = {"dims": {"a": 1.0, "b": 2.0}, "metricCoverage": {"missingKeys": None}}
-        assert ed.metric_coverage_summary(model, WEIGHTS) == ("100.00% (4/4 priority)", "none")
+        assert ed.metric_coverage_summary(model, WEIGHTS) == ("100.00% (4/4 quality priority)", "none")
+
+    def test_cost_share_is_named_when_the_model_has_a_cost(self):
+        model = {"dims": {"a": 1.0}, "metricCoverage": {"costAvailable": True, "missingKeys": ["b"], "availablePriority": 3, "totalPriority": 4, "coveragePct": 81.25}}
+        assert ed.metric_coverage_summary(model, WEIGHTS) == ("81.25% (cost + 3/4 quality priority)", "Beta")
+
+    def test_a_cost_weight_without_priority_counts_as_zero_priority(self):
+        weights = [{"key": "costComposite", "label": "Cost", "priority": None}, *WEIGHTS]
+        assert ed.metric_coverage_summary({"dims": {"a": 1.0, "costComposite": 5.0}}, weights) == ("75.00% (3/4 quality priority)", "Beta")
 
     def test_zero_total_priority_has_no_percentage(self):
         zero = [{"key": "a", "label": "Alpha"}]
@@ -56,8 +64,8 @@ class TestTables:
              {"name": "M2", "dims": {}}],
             WEIGHTS,
         ).splitlines()
-        assert rows[0].startswith("| 1 | M1 | 80.0 | 70.0 | 55.50 | 100.00% (4/4 priority) | Missing: none |")
-        assert rows[1].startswith("| — | M2 | — | — | — | 0.00% (0/4 priority)") and rows[1].endswith("Missing: Alpha, Beta |")
+        assert rows[0].startswith("| 1 | M1 | 80.0 | 70.0 | 55.50 | 100.00% (4/4 quality priority) | Missing: none |")
+        assert rows[1].startswith("| — | M2 | — | — | — | 0.00% (0/4 quality priority)") and rows[1].endswith("Missing: Alpha, Beta |")
 
     def test_livebench_and_tb4_tables(self):
         live = ed.livebench_table([{"name": "N", "livebenchModel": "lb", "instructionFollowingScore": 1.0, "overallScore": 2.0, "costPerSuccessfulTaskUsd": 0.5}])
