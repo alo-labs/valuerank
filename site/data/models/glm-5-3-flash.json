@@ -17,50 +17,40 @@
     "quality": null,
     "qualityRank": null,
     "coverage": {
-      "pct": 78.27,
-      "costAvailable": true,
-      "availablePriority": 76,
-      "totalPriority": 107,
+      "pct": 0.0,
+      "costAvailable": false,
       "missing": [
-        "Terminal-Bench 4.0",
-        "DeepSWE v1.1"
-      ]
+        "DeepSWE v1.1",
+        "Bug Hunt Bench",
+        "AA FrontierCode 1.1",
+        "Terminal-Bench 4.0 (tbench.ai)",
+        "GDPval-AA v2.1",
+        "AutomationBench-AA",
+        "AA-Omniscience",
+        "AA-LCR v1.1",
+        "Humanity's Last Exam",
+        "SciCode",
+        "CritPt"
+      ],
+      "provisional": null,
+      "provisionalReasons": []
     },
-    "grade": "measured",
+    "grade": "missing",
     "rankingEligible": false,
     "exclusionReasons": [
       "No exact-variant AA DeepSWE result in the selected source snapshot",
       "Not a required AA frontier or near-frontier family model"
-    ]
+    ],
+    "flags": []
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": 7.307697438479367,
-      "unit": "USD per Index point",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
-      "note": null,
-      "grade": "measured",
-      "normalizedByBasis": {
-        "api": null,
-        "plan": null
-      }
-    },
-    {
-      "key": "deepswePassAt1",
+      "key": "deepswe",
       "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
+      "category": "Software engineering",
+      "weightPct": 22.5,
       "value": null,
+      "decimals": 1,
       "unit": "% pass@1",
       "normalized": null,
       "source": null,
@@ -70,45 +60,42 @@
       "grade": "missing"
     },
     {
-      "key": "bugHuntFixedOf105",
+      "key": "bugHunt",
       "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
-      "value": 17.7,
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
       "unit": "bugs fixed of 105",
       "normalized": null,
-      "source": {
-        "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-glm-53-flash-max-effort-zai-api---mean-of-3"
-      },
-      "observedAt": "2026-10-18",
-      "evaluatedVariant": "GLM-5.3 Flash (max effort, Z.ai API) - mean of 3",
-      "note": "Owner-published mean of three runs.",
-      "grade": "measured"
-    },
-    {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 72.37,
-      "unit": "% non-hallucination",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
+      "key": "frontierCode",
+      "label": "AA FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 7.5,
       "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
       "unit": "% resolved",
       "normalized": null,
       "source": null,
@@ -118,203 +105,138 @@
       "grade": "missing"
     },
     {
-      "key": "gdpvalV21",
+      "key": "gdpval",
       "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
-      "value": 1642.18,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
       "unit": "Elo",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 41.807466113455,
-      "unit": "Index points",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
-      "value": 52.82075,
-      "unit": "score",
-      "normalized": null,
-      "source": {
-        "name": "LiveBench release 2026_06_25",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "glm-5.3-flash",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "automationBenchAA",
+      "key": "automationBench",
       "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 60.37,
-      "unit": "% score",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 70.8312344302647,
-      "unit": "tokens per second",
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "aaLcr",
+      "key": "lcr",
       "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 80.0,
-      "unit": "% accuracy",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 27.5,
-      "unit": "% accuracy",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
-      "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 39.85,
-      "unit": "% accuracy",
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 91.21,
-      "unit": "% accuracy",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
-      "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "scicode",
       "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 51.62,
-      "unit": "% score",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "critpt",
       "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 15.43,
-      "unit": "% score",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     }
   ],
   "cost": {
-    "apiUsd": 305.51631302660803,
-    "apiUsdPerPoint": 7.307697438479367,
-    "planUsdPerRun": null,
-    "planUsdPerPoint": null,
-    "planComparableUsdPerPoint": 7.307697438479367,
-    "fallback": "api",
-    "route": null
+    "apiUsd": null,
+    "planUsd": null,
+    "fallback": null,
+    "route": null,
+    "subset": null,
+    "partialComponents": [],
+    "workload": null,
+    "planFlags": [],
+    "costScore": {
+      "api": null,
+      "plan": null
+    },
+    "components": [],
+    "aaCostCaveat": null,
+    "selectionReason": null
   },
   "plans": [],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.5.0",

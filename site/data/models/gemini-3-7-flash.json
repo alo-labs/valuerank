@@ -17,50 +17,41 @@
     "quality": null,
     "qualityRank": null,
     "coverage": {
-      "pct": 39.95,
+      "pct": 0.0,
       "costAvailable": false,
-      "availablePriority": 57,
-      "totalPriority": 107,
       "missing": [
-        "Cost",
         "DeepSWE v1.1",
+        "Bug Hunt Bench",
+        "AA FrontierCode 1.1",
+        "Terminal-Bench 4.0 (tbench.ai)",
+        "GDPval-AA v2.1",
         "AutomationBench-AA",
-        "Bug Hunt Bench"
-      ]
+        "AA-Omniscience",
+        "AA-LCR v1.1",
+        "Humanity's Last Exam",
+        "SciCode",
+        "CritPt"
+      ],
+      "provisional": null,
+      "provisionalReasons": []
     },
-    "grade": "estimate",
+    "grade": "missing",
     "rankingEligible": false,
     "exclusionReasons": [
       "No eligible exact-model Bug Hunt result in the selected source snapshot",
       "No exact-variant AA DeepSWE result in the selected source snapshot",
       "Not a required AA frontier or near-frontier family model"
-    ]
+    ],
+    "flags": []
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": null,
-      "unit": "USD per Index point",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing",
-      "normalizedByBasis": {
-        "api": null,
-        "plan": null
-      }
-    },
-    {
-      "key": "deepswePassAt1",
+      "key": "deepswe",
       "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
+      "category": "Software engineering",
+      "weightPct": 22.5,
       "value": null,
+      "decimals": 1,
       "unit": "% pass@1",
       "normalized": null,
       "source": null,
@@ -70,11 +61,12 @@
       "grade": "missing"
     },
     {
-      "key": "bugHuntFixedOf105",
+      "key": "bugHunt",
       "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
+      "category": "Software engineering",
+      "weightPct": 7.5,
       "value": null,
+      "decimals": 1,
       "unit": "bugs fixed of 105",
       "normalized": null,
       "source": null,
@@ -84,97 +76,13 @@
       "grade": "missing"
     },
     {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 34.13,
-      "unit": "% non-hallucination",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
-      "value": 11.2,
-      "unit": "% resolved",
-      "normalized": null,
-      "source": {
-        "name": "Terminal-Bench 4.0 leaderboard",
-        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "mini-SWE-agent / Gemini 3.7 Flash",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gdpvalV21",
-      "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
-      "value": 1360.38,
-      "unit": "Elo",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 39.617751842555,
-      "unit": "Index points",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
-      "note": null,
-      "grade": "estimate"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
-      "value": 79.92525,
-      "unit": "score",
-      "normalized": null,
-      "source": {
-        "name": "LiveBench release 2026_06_25",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "gemini-3.7-flash-high",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "automationBenchAA",
-      "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
+      "key": "frontierCode",
+      "label": "AA FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 7.5,
       "value": null,
-      "unit": "% score",
+      "decimals": 3,
+      "unit": "AA score (0-1)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -183,135 +91,153 @@
       "grade": "missing"
     },
     {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 284.400260828273,
-      "unit": "tokens per second",
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% resolved",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "aaLcr",
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "automationBench",
+      "label": "AutomationBench-AA",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "lcr",
       "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 83.0,
-      "unit": "% accuracy",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 54.0,
-      "unit": "% accuracy",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
-      "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 38.97,
-      "unit": "% accuracy",
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 92.12,
-      "unit": "% accuracy",
-      "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
-      "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "scicode",
       "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 59.84,
-      "unit": "% score",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "critpt",
       "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 9.43,
-      "unit": "% score",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
       "normalized": null,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-3-7-flash-medium"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "medium",
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     }
   ],
   "cost": {
     "apiUsd": null,
-    "apiUsdPerPoint": null,
-    "planUsdPerRun": null,
-    "planUsdPerPoint": null,
-    "planComparableUsdPerPoint": null,
-    "fallback": "api",
-    "route": null
+    "planUsd": null,
+    "fallback": null,
+    "route": null,
+    "subset": null,
+    "partialComponents": [],
+    "workload": null,
+    "planFlags": [],
+    "costScore": {
+      "api": null,
+      "plan": null
+    },
+    "components": [],
+    "aaCostCaveat": null,
+    "selectionReason": null
   },
   "plans": [],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.5.0",

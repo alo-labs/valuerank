@@ -234,7 +234,7 @@
     "policyId": "median-definite-frontier",
     "version": 1,
     "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
-    "populationRule": "non-provisional configurations on the API main-workload definite frontier (E40 interval outputs)",
+    "populationRule": "non-provisional configurations on the API main-workload definite frontier of the interval outputs",
     "order": "displayed quality ascending, then configuration ID",
     "position": "lower median",
     "emptyPopulation": "no bar pinned; the bar is published as unavailable",

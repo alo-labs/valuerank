@@ -1,905 +1,238 @@
 {
   "sources": [
     {
-      "id": "aa-intelligence-index",
-      "name": "Artificial Analysis Intelligence Index",
-      "owner": "Artificial Analysis",
-      "version": "Artificial Analysis Intelligence Index v4.3.2",
-      "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
-      "observedAt": "2026-10-17",
-      "role": "primary dimensions",
-      "weightPct": 60.7475,
-      "coverage": {
-        "available": 19,
-        "cohort": 19
-      },
-      "unit": "Index points and component scores",
-      "notes": "Cost, speed, Intelligence Index and its components for the selected variants. Use a provider-published value only while the benchmark owner has no result, for the same benchmark version and evaluated model identity; keep claims visibly distinct from owner results."
-    },
-    {
       "id": "deepswe",
       "name": "DeepSWE v1.1",
-      "owner": "Artificial Analysis",
-      "version": "Coding Agent Index v1.5",
+      "owner": "Artificial Analysis Coding Agent Index",
       "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1",
       "observedAt": "2026-10-17T19:26:26Z",
-      "role": "primary dimension",
-      "weightPct": 17.5234,
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 22.5,
       "coverage": {
         "available": 16,
         "cohort": 19
       },
       "unit": "% pass@1",
-      "notes": "The chart states each benchmark score averages pass@1 across three attempts per task."
+      "execution": "AA-run",
+      "notes": null
     },
     {
-      "id": "bug-hunt",
+      "id": "bugHunt",
       "name": "Bug Hunt Bench",
       "owner": "Bug Hunt Bench benchmark owner",
-      "version": "105 planted bugs across two repositories; rolling public results snapshot",
       "url": "https://bughunt.productcompass.pm/",
       "observedAt": "2026-10-17",
-      "role": "primary dimension",
-      "weightPct": 14.0187,
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 7.5,
       "coverage": {
-        "available": 18,
+        "available": 17,
         "cohort": 19
       },
-      "unit": "independently verified planted bugs fixed out of 105",
-      "notes": "Use the benchmark owner's exact evaluated model identity and current route. Use the owner's published mean when repeated runs exist; otherwise retain the single official result with sample size 1. Do not transfer across model versions or variants, and do not use mixed-route runs when a single-route official result exists."
+      "unit": "bugs fixed of 105",
+      "execution": "independent",
+      "notes": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness."
     },
     {
-      "id": "livebench",
-      "name": "LiveBench",
-      "owner": "LiveBench",
-      "version": "release 2026_06_25",
-      "url": "https://livebench.ai/",
+      "id": "frontierCode",
+      "name": "AA FrontierCode 1.1",
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/frontiercode",
       "observedAt": "2026-10-17",
-      "role": "primary dimension",
-      "weightPct": 3.5047,
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 7.5,
       "coverage": {
         "available": 12,
         "cohort": 19
       },
-      "unit": "Instruction Following score",
-      "notes": "Release data pinned to commit 7be9f746f36a6f007dd78461f67cb7d06cfe2304."
+      "unit": "AA score (0-1)",
+      "execution": "AA-run",
+      "notes": null
     },
     {
-      "id": "terminal-bench-4",
-      "name": "Terminal-Bench 4.0",
+      "id": "terminalBench",
+      "name": "Terminal-Bench 4.0 (tbench.ai)",
       "owner": "Terminal-Bench / Harbor",
-      "version": "4.0",
       "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
       "observedAt": "2026-10-17",
-      "role": "primary dimension",
-      "weightPct": 4.2056,
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 7.5,
       "coverage": {
-        "available": 7,
+        "available": 11,
         "cohort": 19
       },
       "unit": "% resolved",
-      "notes": "Use exact-version provider claims only while the benchmark owner has no result; preserve claim type and evaluated model/alias details."
+      "execution": "independent",
+      "notes": "Official tbench.ai rows run on mixed harnesses; a same-harness (Terminus 2) diagnostic is published beside it."
     },
     {
-      "id": "provider-claims",
-      "name": "Provider claims",
-      "owner": "Model providers",
-      "version": "valuerank-provider-claims/v1",
-      "url": null,
-      "observedAt": "2026-09-22",
-      "role": "fallback evidence",
-      "weightPct": null,
+      "id": "gdpval",
+      "name": "GDPval-AA v2.1",
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "observedAt": "2026-10-17",
+      "role": "quality leaf (Professional work)",
+      "weightPct": 7.5,
       "coverage": {
-        "available": 1,
-        "cohort": 5
+        "available": 19,
+        "cohort": 19
       },
-      "unit": "claimed value",
-      "notes": "Use a provider-published value only while the benchmark owner has no result, for the same benchmark version and evaluated model identity; keep claims visibly distinct from owner results."
-    }
-  ],
-  "aaComponents": [
-    {
-      "name": "AA-Briefcase",
-      "weightPct": 15,
-      "url": "https://artificialanalysis.ai/evaluations/aa-briefcase"
+      "unit": "Elo",
+      "execution": "AA-run",
+      "notes": "Scored with AA's integration transform, (Elo - 500) / 2000, on the rating as integrated in the pinned Index."
     },
     {
-      "name": "GDPval-AA v2.1 Elo",
-      "weightPct": 10,
-      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
-    },
-    {
+      "id": "automationBench",
       "name": "AutomationBench-AA",
-      "weightPct": 5,
-      "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/automationbench-aa",
+      "observedAt": "2026-10-17",
+      "role": "quality leaf (Professional work)",
+      "weightPct": 7.5,
+      "coverage": {
+        "available": 19,
+        "cohort": 19
+      },
+      "unit": "AA score (0-1)",
+      "execution": "AA-run",
+      "notes": null
     },
     {
-      "name": "Terminal-Bench 4.0 (AA evaluation)",
-      "weightPct": 10,
-      "url": "https://artificialanalysis.ai/evaluations/terminalbench-4-0"
+      "id": "omniscience",
+      "name": "AA-Omniscience",
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/omniscience",
+      "observedAt": "2026-10-17",
+      "role": "quality leaf (Reliability)",
+      "weightPct": 7.5,
+      "coverage": {
+        "available": 19,
+        "cohort": 19
+      },
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "execution": "AA-run",
+      "notes": "Scored as AA's Omniscience Index I (correct minus incorrect over all questions), z = (I + 100) / 2 (owner decision O28)."
     },
     {
-      "name": "SciCode",
-      "weightPct": 10,
-      "url": "https://artificialanalysis.ai/evaluations/scicode"
-    },
-    {
-      "name": "Humanity's Last Exam",
-      "weightPct": 10,
-      "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
-    },
-    {
-      "name": "GDP.pdf",
-      "weightPct": 10,
-      "url": "https://artificialanalysis.ai/evaluations/gdp-pdf"
-    },
-    {
-      "name": "CritPt",
-      "weightPct": 10,
-      "url": "https://artificialanalysis.ai/evaluations/critpt"
-    },
-    {
-      "name": "AA-Omniscience Accuracy",
-      "weightPct": 10,
-      "url": "https://artificialanalysis.ai/evaluations/omniscience"
-    },
-    {
-      "name": "AA-Omniscience Non-Hallucination Rate",
-      "weightPct": 5,
-      "url": "https://artificialanalysis.ai/evaluations/omniscience"
-    },
-    {
+      "id": "lcr",
       "name": "AA-LCR v1.1",
-      "weightPct": 5,
-      "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
+      "observedAt": "2026-10-17",
+      "role": "quality leaf (Knowledge and science)",
+      "weightPct": 3.75,
+      "coverage": {
+        "available": 19,
+        "cohort": 19
+      },
+      "unit": "accuracy (0-1)",
+      "execution": "AA-run",
+      "notes": null
+    },
+    {
+      "id": "hle",
+      "name": "Humanity's Last Exam",
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
+      "observedAt": "2026-10-17",
+      "role": "quality leaf (Knowledge and science)",
+      "weightPct": 1.25,
+      "coverage": {
+        "available": 19,
+        "cohort": 19
+      },
+      "unit": "accuracy (0-1)",
+      "execution": "AA-run",
+      "notes": null
+    },
+    {
+      "id": "scicode",
+      "name": "SciCode",
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/scicode",
+      "observedAt": "2026-10-17",
+      "role": "quality leaf (Knowledge and science)",
+      "weightPct": 1.25,
+      "coverage": {
+        "available": 19,
+        "cohort": 19
+      },
+      "unit": "score (0-1)",
+      "execution": "AA-run",
+      "notes": null
+    },
+    {
+      "id": "critpt",
+      "name": "CritPt",
+      "owner": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/evaluations/critpt",
+      "observedAt": "2026-10-17",
+      "role": "quality leaf (Knowledge and science)",
+      "weightPct": 1.25,
+      "coverage": {
+        "available": 19,
+        "cohort": 19
+      },
+      "unit": "score (0-1)",
+      "execution": "AA-run",
+      "notes": null
     }
   ],
-  "coverageMatrix": {
-    "cohort": "Artificial Analysis v4.3.2 mapped 31-model ValueRank comparison roster",
-    "cohortN": 31,
-    "observedAt": "2026-10-17T19:25:14Z",
-    "note": "Missing values are preserved as null. Provider claims are separately source-typed and only eligible when benchmark version and evaluated model variant match; no legacy-version value is substituted into v4.3.2 components.",
-    "fields": {
-      "briefcaseElo": {
-        "group": "primary",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
+  "basket": {
+    "version": "SDLC basket v1",
+    "admitted": [
+      {
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index"
       },
-      "gdpvalV21": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase"
       },
-      "automationBenchAA": {
-        "group": "primary",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
+      {
+        "key": "gdpval-aa",
+        "label": "GDPval-AA"
       },
-      "terminalBenchV40": {
-        "group": "primary",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf"
       },
-      "scicode": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA"
       },
-      "hle": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)"
       },
-      "gdpPdfAllPass": {
-        "group": "primary",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
+      {
+        "key": "scicode",
+        "label": "SciCode"
       },
-      "critpt": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
-      },
-      "omniAccuracy": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
-      },
-      "omniNonHallucination": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
-      },
-      "aaLcr": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
-      },
-      "intelligenceIndex": {
-        "group": "primary",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": true,
-        "providerClaimN": 0
-      },
-      "aaEvalCost": {
-        "group": "primary",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "speed": {
-        "group": "primary",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "gpqaDiamond": {
-        "group": "additional",
-        "availableN": 21,
-        "cohortN": 31,
-        "coveragePct": 67.74,
-        "missingModels": [
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "briefcaseNormalized": {
-        "group": "additional",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "gdpvalV21Normalized": {
-        "group": "additional",
-        "availableN": 31,
-        "cohortN": 31,
-        "coveragePct": 100.0,
-        "missingModels": [],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "mlcrOverall": {
-        "group": "supplemental",
-        "availableN": 25,
-        "cohortN": 31,
-        "coveragePct": 80.65,
-        "missingModels": [
-          "gpt-6-astra",
-          "grok-4.6",
-          "gemini-3.7-flash",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "harveyLab": {
-        "group": "supplemental",
-        "availableN": 11,
-        "cohortN": 31,
-        "coveragePct": 35.48,
-        "missingModels": [
-          "gpt-6-astra",
-          "claude-opus-5",
-          "gpt-5.6-sol",
-          "claude-fable-5",
-          "grok-4.6",
-          "gpt-5.6-luna",
-          "gpt-5.5",
-          "gemini-3.7-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "qwen3.8-max",
-          "muse-spark-1.2",
-          "claude-sonnet-5",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "glm-5.2",
-          "gemini-3.5-flash",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "apexAgents": {
-        "group": "supplemental",
-        "availableN": 6,
-        "cohortN": 31,
-        "coveragePct": 19.35,
-        "missingModels": [
-          "gpt-6-astra",
-          "gemini-3.8-flash",
-          "claude-opus-5",
-          "gpt-5.6-sol",
-          "claude-fable-5",
-          "glm-5.3",
-          "grok-4.6",
-          "gemini-3.7-flash",
-          "glm-5.3-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "muse-spark-1.2",
-          "claude-sonnet-5",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "mmmuPro": {
-        "group": "supplemental",
-        "availableN": 17,
-        "cohortN": 31,
-        "coveragePct": 54.84,
-        "missingModels": [
-          "claude-fable-5",
-          "glm-5.3",
-          "grok-4.6",
-          "glm-5.3-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "muse-spark-1.2",
-          "deepseek-v4-flash",
-          "glm-5.2",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "livecodebench": {
-        "group": "supplemental",
-        "availableN": 0,
-        "cohortN": 31,
-        "coveragePct": 0.0,
-        "missingModels": [
-          "gpt-6-astra",
-          "gemini-3.8-flash",
-          "claude-opus-5",
-          "gpt-5.6-sol",
-          "claude-fable-5",
-          "glm-5.3",
-          "kimi-k3",
-          "grok-4.6",
-          "gpt-5.6-luna",
-          "gpt-5.5",
-          "gemini-3.7-flash",
-          "glm-5.3-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "qwen3.8-max",
-          "muse-spark-1.2",
-          "claude-sonnet-5",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "glm-5.2",
-          "gemini-3.5-flash",
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "aime25": {
-        "group": "supplemental",
-        "availableN": 0,
-        "cohortN": 31,
-        "coveragePct": 0.0,
-        "missingModels": [
-          "gpt-6-astra",
-          "gemini-3.8-flash",
-          "claude-opus-5",
-          "gpt-5.6-sol",
-          "claude-fable-5",
-          "glm-5.3",
-          "kimi-k3",
-          "grok-4.6",
-          "gpt-5.6-luna",
-          "gpt-5.5",
-          "gemini-3.7-flash",
-          "glm-5.3-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "qwen3.8-max",
-          "muse-spark-1.2",
-          "claude-sonnet-5",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "glm-5.2",
-          "gemini-3.5-flash",
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "analystAgent": {
-        "group": "supplemental",
-        "availableN": 19,
-        "cohortN": 31,
-        "coveragePct": 61.29,
-        "missingModels": [
-          "gpt-6-astra",
-          "grok-4.6",
-          "gpt-5.6-luna",
-          "gemini-3.7-flash",
-          "deepseek-v4-pro",
-          "muse-spark-1.2",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "glm-5.2",
-          "gpt-6-sol",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "automationBenchPartialScore": {
-        "group": "supplemental",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "enterpriseOpsGym": {
-        "group": "supplemental",
-        "availableN": 16,
-        "cohortN": 31,
-        "coveragePct": 51.61,
-        "missingModels": [
-          "gpt-6-astra",
-          "gemini-3.8-flash",
-          "grok-4.6",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "itBenchSre": {
-        "group": "supplemental",
-        "availableN": 13,
-        "cohortN": 31,
-        "coveragePct": 41.94,
-        "missingModels": [
-          "gpt-6-astra",
-          "claude-opus-5",
-          "claude-fable-5",
-          "grok-4.6",
-          "gemini-3.7-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "muse-spark-1.2",
-          "claude-sonnet-5",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "briefcaseRubricPassRate": {
-        "group": "supplemental",
-        "availableN": 30,
-        "cohortN": 31,
-        "coveragePct": 96.77,
-        "missingModels": [
-          "gemini-3.7-flash"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "briefcaseTotalCost": {
-        "group": "supplemental",
-        "availableN": 0,
-        "cohortN": 31,
-        "coveragePct": 0.0,
-        "missingModels": [
-          "gpt-6-astra",
-          "gemini-3.8-flash",
-          "claude-opus-5",
-          "gpt-5.6-sol",
-          "claude-fable-5",
-          "glm-5.3",
-          "kimi-k3",
-          "grok-4.6",
-          "gpt-5.6-luna",
-          "gpt-5.5",
-          "gemini-3.7-flash",
-          "glm-5.3-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "qwen3.8-max",
-          "muse-spark-1.2",
-          "claude-sonnet-5",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "glm-5.2",
-          "gemini-3.5-flash",
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "tauBanking": {
-        "group": "supplemental",
-        "availableN": 21,
-        "cohortN": 31,
-        "coveragePct": 67.74,
-        "missingModels": [
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "terminalBenchV21": {
-        "group": "supplemental",
-        "availableN": 0,
-        "cohortN": 31,
-        "coveragePct": 0.0,
-        "missingModels": [
-          "gpt-6-astra",
-          "gemini-3.8-flash",
-          "claude-opus-5",
-          "gpt-5.6-sol",
-          "claude-fable-5",
-          "glm-5.3",
-          "kimi-k3",
-          "grok-4.6",
-          "gpt-5.6-luna",
-          "gpt-5.5",
-          "gemini-3.7-flash",
-          "glm-5.3-flash",
-          "deepseek-v4-pro",
-          "claude-opus-4.8",
-          "qwen3.8-max",
-          "muse-spark-1.2",
-          "claude-sonnet-5",
-          "deepseek-v4-flash",
-          "gemini-3.6-flash",
-          "glm-5.2",
-          "gemini-3.5-flash",
-          "claude-opus-5-5",
-          "gpt-6-sol",
-          "gpt-6.1-sol",
-          "gpt-6-luna",
-          "grok-4.7",
-          "mimo-v2-6-pro",
-          "mimo-v2-6-flash",
-          "claude-haiku-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon"
-        ],
-        "includedInPrimaryScore": false,
-        "providerClaimN": 0
-      },
-      "livebenchOverall": {
-        "group": "supplemental",
-        "label": "LiveBench Overall Score",
-        "availableN": 12,
-        "cohortN": 19,
-        "coveragePct": 63.16,
-        "missingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "sourceAvailableN": 24,
-        "sourceCohortN": 31,
-        "sourceMissingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "includedInPrimaryScore": false,
-        "sourceRelease": "2026_06_25",
-        "publishedN": 64,
-        "supplementalMatchedN": 1,
-        "supplementalModels": [
-          "Claude Fable 5.1"
-        ]
-      },
-      "livebenchInstructionFollowing": {
-        "group": "primary",
-        "label": "Instruction Following (LiveBench)",
-        "availableN": 12,
-        "cohortN": 19,
-        "coveragePct": 63.16,
-        "missingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "sourceAvailableN": 24,
-        "sourceCohortN": 31,
-        "sourceMissingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "includedInPrimaryScore": true,
-        "sourceRelease": "2026_06_25",
-        "publishedN": 64,
-        "supplementalMatchedN": 1,
-        "supplementalModels": [
-          "Claude Fable 5.1"
-        ]
-      },
-      "livebenchCostPerSuccessfulTask": {
-        "group": "supplemental",
-        "label": "LiveBench Cost Per Successful Task",
-        "availableN": 12,
-        "cohortN": 19,
-        "coveragePct": 63.16,
-        "missingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "sourceAvailableN": 24,
-        "sourceCohortN": 31,
-        "sourceMissingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "includedInPrimaryScore": false,
-        "sourceRelease": "2026_06_25",
-        "publishedN": 64,
-        "supplementalMatchedN": 1,
-        "supplementalModels": [
-          "Claude Fable 5.1"
-        ]
-      },
-      "terminalBenchV4": {
-        "group": "primary",
-        "label": "Terminal-Bench 4.0",
-        "availableN": 7,
-        "cohortN": 19,
-        "coveragePct": 36.84,
-        "sourceAvailableN": 12,
-        "sourceCohortN": 31,
-        "officialMatchedN": 11,
-        "providerClaimMatchedN": 1,
-        "missingModels": [
-          "DeepSeek V4 Pro",
-          "Qwen3.8 Max",
-          "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "sourceMissingModels": [
-          "Kimi K3",
-          "GPT-5.5",
-          "GLM-5.3 Flash",
-          "DeepSeek V4 Pro",
-          "Qwen3.8 Max",
-          "Muse Spark 1.2",
-          "Gemini 3.6 Flash",
-          "GLM-5.2",
-          "Gemini 3.5 Flash",
-          "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "includedInPrimaryScore": true,
-        "sourceRelease": "4.0"
-      },
-      "bugHuntFixedOf105": {
-        "group": "primary",
-        "label": "Bug Hunt Bench bugs fixed out of 105",
-        "availableN": 18,
-        "cohortN": 19,
-        "coveragePct": 94.74,
-        "missingModels": [
-          "MiMo-V2.6-Flash"
-        ],
-        "sourceAvailableN": 25,
-        "sourceCohortN": 31,
-        "sourceCoveragePct": 80.65,
-        "sourceMissingModels": [
-          "GPT-5.5",
-          "Gemini 3.7 Flash",
-          "Gemini 3.6 Flash",
-          "GLM-5.2",
-          "Gemini 3.5 Flash",
-          "MiMo-V2.6-Flash"
-        ],
-        "includedInPrimaryScore": true,
-        "includedInBugHuntEmphasisRanking": true,
-        "sourceRelease": "105 planted bugs across two repositories; rolling public results snapshot",
-        "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415"
+      {
+        "key": "artificial-analysis-long-context-reasoning",
+        "label": "AA-LCR"
       }
-    }
+    ],
+    "pending": [
+      {
+        "key": "frontiercode",
+        "label": "FrontierCode",
+        "covered": 10,
+        "ranked": 19
+      },
+      {
+        "key": "itbench-aa",
+        "label": "ITBench-AA",
+        "covered": 7,
+        "ranked": 19
+      }
+    ],
+    "referencePanelSize": 16,
+    "requiredPanelSize": 13
+  },
+  "qualitySourceShares": {
+    "aa": 0.8000000000000002,
+    "independent": 0.2
   },
   "frontier": {
     "status": "complete",

@@ -24,7 +24,7 @@ function costHeader(data, basis) {
 function costTitle(model, basis) {
   if (basis !== 'plan') return null;
   if (model.cost.route) return model.cost.route.planLabel;
-  return model.cost.fallback ? 'Fallback estimate derived from API cost' : null;
+  return model.cost.fallback ? 'API-cost fallback: no admitted Plan route' : null;
 }
 
 function coverageCell(doc, model, expanded) {
@@ -238,7 +238,7 @@ export function initRankings(win) {
   }
 
   function render() {
-    scored = recompute(data.models, data.dimensions, state.basis, state.w);
+    scored = recompute(data.models, state.basis, state.w);
     visible = catalog.filter((c) => c.key === 'name' || state.cols.includes(c.key));
     shown = sortModels(applyFilters(scored, state), state.sort, state.dir, state.basis);
     const ctx = { basis: state.basis, expanded, modelBase, compare: state.compare, onCompare };
@@ -317,7 +317,7 @@ export function initIndex(win) {
   };
 
   // The second pick compares against the other basis, so score that one at the same cost weight.
-  const withOtherBasis = (scored) => recompute(scored, data.dimensions, Object.keys(data.bases).find((k) => k !== state.basis), state.w);
+  const withOtherBasis = (scored) => recompute(scored, Object.keys(data.bases).find((k) => k !== state.basis), state.w);
 
   function renderPicks(scored) {
     const chosen = state.w === data.costWeightPct ? data.picks[state.basis] : picks(withOtherBasis(scored), state.basis, data.bases);
@@ -337,7 +337,7 @@ export function initIndex(win) {
   }
 
   function render() {
-    const scored = recompute(data.models, data.dimensions, state.basis, state.w);
+    const scored = recompute(data.models, state.basis, state.w);
     const top = scored.filter((m) => m.rank[state.basis] !== null).sort((a, b) => a.rank[state.basis] - b.rank[state.basis]).slice(0, INDEX_ROWS);
     fillBody(doc, tbody, top, columns, { ...ctx, basis: state.basis }, false);
     renderPicks(scored);

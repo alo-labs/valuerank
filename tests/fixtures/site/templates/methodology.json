@@ -34,6 +34,8 @@
     "slug": "alpha-one",
     "name": "Alpha <b>x</b> One",
     "basis": "plan",
+    "overall": 75.7,
+    "qualityCoveragePct": 88.64,
     "steps": [
       {
         "label": "DeepSWE",
@@ -43,9 +45,9 @@
         "effectiveWeightPct": 18.94
       }
     ],
-    "availablePriority": 117,
-    "totalPriority": 132,
-    "overall": 75.7
+    "missing": [
+      "Terminal-Bench 4.0"
+    ]
   },
   "faq": [
     {
@@ -88,5 +90,74 @@
         ]
       }
     ]
-  }
+  },
+  "method": {
+    "methodologyVersion": "3.0.0",
+    "costLabel": "contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)",
+    "basket": {
+      "version": "SDLC basket v1",
+      "admitted": [
+        {
+          "key": "scicode",
+          "label": "SciCode"
+        },
+        {
+          "key": "coding-agent-index",
+          "label": "Coding Agent Index"
+        }
+      ],
+      "pending": [
+        {
+          "key": "frontiercode",
+          "label": "FrontierCode"
+        }
+      ]
+    },
+    "anchorVersion": "v3-2030-01-01",
+    "anchors": {
+      "api": {
+        "low": 100.0,
+        "high": 10000.0
+      },
+      "plan": {
+        "low": 1.0,
+        "high": 1000.0
+      }
+    },
+    "exchangeRate": {
+      "api": {
+        "valuePointsPerCostDoubling": 3.76,
+        "qualityPointsPerCostDoubling": 5.02,
+        "anchorRatio": 100.0
+      },
+      "plan": {
+        "valuePointsPerCostDoubling": 2.51,
+        "qualityPointsPerCostDoubling": 3.34,
+        "anchorRatio": 1000.0
+      }
+    },
+    "planExploratory": true,
+    "streamDescriptions": {
+      "S0": "published-record reporting precision",
+      "S1": "published-record reporting precision + conventional identification of missing leaves"
+    },
+    "notQuantified": [
+      "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares"
+    ],
+    "barReference": "Alpha <b>x</b> One",
+    "barPolicy": "lower median of non-provisional configurations on the API main-workload definite frontier"
+  },
+  "exchangeRate": {
+    "api": {
+      "valuePointsPerCostDoubling": 3.76,
+      "qualityPointsPerCostDoubling": 5.02,
+      "anchorRatio": 100.0
+    },
+    "plan": {
+      "valuePointsPerCostDoubling": 2.51,
+      "qualityPointsPerCostDoubling": 3.34,
+      "anchorRatio": 1000.0
+    }
+  },
+  "basketVersion": "SDLC basket v1"
 }

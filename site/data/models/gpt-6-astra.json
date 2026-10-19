@@ -7,56 +7,48 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
   "summary": {
     "rank": {
-      "api": 4,
-      "plan": 4
+      "api": 8,
+      "plan": 5
     },
     "overall": {
-      "api": 61.0,
-      "plan": 65.8
+      "api": 53.82151363902366,
+      "plan": 56.575444031061075
     },
-    "quality": 75.2,
+    "quality": 63.82404708464152,
     "qualityRank": 4,
     "coverage": {
-      "pct": 82.48,
+      "pct": 40.0,
       "costAvailable": true,
-      "availablePriority": 82,
-      "totalPriority": 107,
       "missing": [
-        "DeepSWE v1.1"
+        "DeepSWE v1.1",
+        "Bug Hunt Bench",
+        "AA FrontierCode 1.1",
+        "Terminal-Bench 4.0 (tbench.ai)"
+      ],
+      "provisional": true,
+      "provisionalReasons": [
+        "coverage 40% below 70%",
+        "0 SWE leaves observed (need 2)",
+        "observed SWE weight 0% below 40%",
+        "DeepSWE v1.1 missing"
       ]
     },
     "grade": "measured",
     "rankingEligible": true,
-    "exclusionReasons": []
+    "exclusionReasons": [],
+    "flags": [
+      "Subset cost: scored on its own workload; cross-workload ordering not identified",
+      "Provisional quality: coverage 40% below 70%; 0 SWE leaves observed (need 2); observed SWE weight 0% below 40%; DeepSWE v1.1 missing"
+    ]
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": 72.59489472616798,
-      "unit": "USD per Index point",
-      "normalized": 18.5,
-      "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
-      "note": null,
-      "grade": "measured",
-      "normalizedByBasis": {
-        "api": 18.5,
-        "plan": 37.5
-      }
-    },
-    {
-      "key": "deepswePassAt1",
+      "key": "deepswe",
       "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
+      "category": "Software engineering",
+      "weightPct": 22.5,
       "value": null,
+      "decimals": 1,
       "unit": "% pass@1",
       "normalized": null,
       "source": null,
@@ -66,264 +58,280 @@
       "grade": "missing"
     },
     {
-      "key": "bugHuntFixedOf105",
+      "key": "bugHunt",
       "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
-      "value": 45.0,
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
       "unit": "bugs fixed of 105",
-      "normalized": 94.1,
-      "source": {
-        "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-astra-max-effort---mean-of-3"
-      },
-      "observedAt": "2026-10-18",
-      "evaluatedVariant": "GPT-6 Astra (max effort) - mean of 3",
-      "note": "Owner-published mean of three runs.",
-      "grade": "measured"
-    },
-    {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 51.68,
-      "unit": "% non-hallucination",
-      "normalized": 61.1,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
-      "value": 58.2,
+      "key": "frontierCode",
+      "label": "AA FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
       "unit": "% resolved",
-      "normalized": 100.0,
-      "source": {
-        "name": "Terminal-Bench 4.0 leaderboard",
-        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "Codex / GPT-6 Astra",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "gdpvalV21",
+      "key": "gdpval",
       "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
+      "category": "Professional work",
+      "weightPct": 7.5,
       "value": 1555.91,
+      "decimals": 1,
       "unit": "Elo",
-      "normalized": 38.9,
+      "normalized": 52.795500000000004,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 52.3863277108782,
-      "unit": "Index points",
-      "normalized": 80.6,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
-      "value": 75.579,
-      "unit": "score",
-      "normalized": 90.9,
-      "source": {
-        "name": "LiveBench release 2026_06_25",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "gpt-6-astra-max",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "automationBenchAA",
+      "key": "automationBench",
       "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 67.18,
-      "unit": "% score",
-      "normalized": 83.3,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 0.6717778020215392,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 67.17778020215393,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 54.5251481651355,
-      "unit": "tokens per second",
-      "normalized": 17.6,
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": 43.416666666666664,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": 71.70833333333333,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "aaLcr",
+      "key": "lcr",
       "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 80.0,
-      "unit": "% accuracy",
-      "normalized": 38.9,
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": 0.8,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 80.0,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 61.85,
-      "unit": "% accuracy",
-      "normalized": 88.9,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 54.59,
-      "unit": "% accuracy",
-      "normalized": 77.8,
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.545875810936052,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 54.587581093605195,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 96.26,
-      "unit": "% accuracy",
-      "normalized": 100.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "scicode",
       "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 55.67,
-      "unit": "% score",
-      "normalized": 44.4,
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.556712962962963,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 55.671296296296305,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "critpt",
       "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 31.43,
-      "unit": "% score",
-      "normalized": 80.6,
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.314285714285714,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 31.4285714285714,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "xhigh",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 3802.9799452617394,
-    "apiUsdPerPoint": 72.59489472616798,
-    "planUsdPerRun": 353.04306955641846,
-    "planUsdPerPoint": 6.739221567598216,
-    "planComparableUsdPerPoint": 6.739221567598216,
+    "apiUsd": 2899.4244152617393,
+    "planUsd": 357.953631513795,
     "fallback": null,
     "route": {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
-      "planFeeUsd": 500,
-      "valueMultiple": 10.772,
-      "grade": "assumption",
+      "id": "chatgpt-plus-common-semianalysis-assumption",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "grade": "measured",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6.1 Sol",
+      "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06"
-    }
+    },
+    "subset": true,
+    "partialComponents": [],
+    "workload": "1453a9a0576b02ea",
+    "planFlags": [
+      "workload-unmatched",
+      "valuation basis unverified"
+    ],
+    "costScore": {
+      "api": 23.81391330217006,
+      "plan": 34.829634870319715
+    },
+    "components": [
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase",
+        "costUsd": 597.2804405834573,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdpval-aa",
+        "label": "GDPval-AA",
+        "costUsd": 668.3910426927665,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf",
+        "costUsd": 191.27230999999998,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA",
+        "costUsd": 923.9973856310602,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)",
+        "costUsd": 386.46184635445536,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "costUsd": 35.03037,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "artificial-analysis-long-context-reasoning",
+        "label": "AA-LCR",
+        "costUsd": 96.99102,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "higher evidence grade"
   },
   "plans": [
+    {
+      "id": "chatgpt-plus-common-semianalysis-assumption",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 357.953631513795,
+      "selected": true
+    },
     {
       "id": "chatgpt-pro500-common-semianalysis-assumption",
       "planLabel": "ChatGPT Pro $500 · common GPT assumption",
@@ -333,9 +341,11 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "usdPerRun": 353.04306955641846,
-      "usdPerPoint": 6.739221567598216,
-      "selected": true
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 269.16305377476226,
+      "selected": false
     },
     {
       "id": "chatgpt-pro100-common-semianalysis-assumption",
@@ -346,8 +356,10 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "usdPerRun": 360.4720327262312,
-      "usdPerPoint": 6.881032675466159,
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 274.82695879258193,
       "selected": false
     },
     {
@@ -359,24 +371,22 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "usdPerRun": 364.9692845740633,
-      "usdPerPoint": 6.966880491954701,
-      "selected": false
-    },
-    {
-      "id": "chatgpt-plus-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-      "planFeeUsd": 20,
-      "valueMultiple": 8.1,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "usdPerRun": 469.50369694589375,
-      "usdPerPoint": 8.96233268224296,
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 278.25570204047403,
       "selected": false
     }
   ],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.5.0",
@@ -462,8 +472,8 @@
       "version": "v2.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 4,
-        "plan": 4
+        "api": 8,
+        "plan": 5
       }
     }
   ],

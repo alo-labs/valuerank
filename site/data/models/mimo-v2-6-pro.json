@@ -7,59 +7,45 @@
   "selectedPage": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
   "summary": {
     "rank": {
-      "api": 7,
-      "plan": 11
+      "api": 5,
+      "plan": 13
     },
     "overall": {
-      "api": 54.3,
-      "plan": 44.2
+      "api": 56.28497168063865,
+      "plan": 50.01857796368787
     },
-    "quality": 42.7,
-    "qualityRank": 10,
+    "quality": 50.09288635616183,
+    "qualityRank": 13,
     "coverage": {
-      "pct": 71.96,
+      "pct": 60.0,
       "costAvailable": true,
-      "availablePriority": 67,
-      "totalPriority": 107,
       "missing": [
-        "Terminal-Bench 4.0",
-        "Instruction Following (LiveBench)",
         "DeepSWE v1.1",
-        "GPQA Diamond (legacy)"
+        "Terminal-Bench 4.0 (tbench.ai)"
+      ],
+      "provisional": true,
+      "provisionalReasons": [
+        "coverage 60% below 70%",
+        "observed SWE weight 20% below 40%",
+        "DeepSWE v1.1 missing"
       ]
     },
     "grade": "measured",
     "rankingEligible": true,
-    "exclusionReasons": []
+    "exclusionReasons": [],
+    "flags": [
+      "Subset cost: scored on its own workload; cross-workload ordering not identified",
+      "Provisional quality: coverage 60% below 70%; observed SWE weight 20% below 40%; DeepSWE v1.1 missing"
+    ]
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": 4.461065915513719,
-      "unit": "USD per Index point",
-      "normalized": 89.0,
-      "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured",
-      "normalizedByBasis": {
-        "api": 89.0,
-        "plan": 48.5
-      }
-    },
-    {
-      "key": "deepswePassAt1",
+      "key": "deepswe",
       "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
+      "category": "Software engineering",
+      "weightPct": 22.5,
       "value": null,
+      "decimals": 1,
       "unit": "% pass@1",
       "normalized": null,
       "source": null,
@@ -69,33 +55,35 @@
       "grade": "missing"
     },
     {
-      "key": "bugHuntFixedOf105",
+      "key": "bugHunt",
       "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
+      "category": "Software engineering",
+      "weightPct": 7.5,
       "value": 18,
+      "decimals": 1,
       "unit": "bugs fixed of 105",
-      "normalized": 8.8,
+      "normalized": 17.142857142857142,
       "source": {
-        "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-pro-first-party"
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-18",
-      "evaluatedVariant": "MiMo-V2.6-Pro (first-party, thinking enabled)",
-      "note": "Single owner run with thinking explicitly enabled on Xiaomi's first-party endpoint. Do not substitute the OpenRouter default mean, whose reasoning state was not asserted and whose three runs used two judge standards.",
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "MiMo-V2.6-Pro (first-party, thinking enabled) / Claude Code / Anthropic-compatible shim",
+      "note": null,
       "grade": "measured"
     },
     {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 59.38,
-      "unit": "% non-hallucination",
-      "normalized": 77.8,
+      "key": "frontierCode",
+      "label": "AA FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 0.454153333333333,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 45.4153333333333,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -103,11 +91,12 @@
       "grade": "measured"
     },
     {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
       "value": null,
+      "decimals": 1,
       "unit": "% resolved",
       "normalized": null,
       "source": null,
@@ -117,16 +106,17 @@
       "grade": "missing"
     },
     {
-      "key": "gdpvalV21",
+      "key": "gdpval",
       "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
+      "category": "Professional work",
+      "weightPct": 7.5,
       "value": 1684.34,
+      "decimals": 1,
       "unit": "Elo",
-      "normalized": 77.8,
+      "normalized": 59.21699999999999,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -134,47 +124,17 @@
       "grade": "measured"
     },
     {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 46.3242065310383,
-      "unit": "Index points",
-      "normalized": 52.8,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
-      "value": null,
-      "unit": "score",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
-      "key": "automationBenchAA",
+      "key": "automationBench",
       "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 58.62,
-      "unit": "% score",
-      "normalized": 38.9,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 0.5862340943419085,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 58.623409434190854,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -182,16 +142,17 @@
       "grade": "measured"
     },
     {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 48.0431227818126,
-      "unit": "tokens per second",
-      "normalized": 5.9,
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": 8.383333333333333,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": 54.19166666666666,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -199,33 +160,17 @@
       "grade": "measured"
     },
     {
-      "key": "aaLcr",
+      "key": "lcr",
       "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 86.33,
-      "unit": "% accuracy",
-      "normalized": 100.0,
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": 0.863333333333333,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 86.3333333333333,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 34.85,
-      "unit": "% accuracy",
-      "normalized": 16.7,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -234,15 +179,16 @@
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 49.35,
-      "unit": "% accuracy",
-      "normalized": 61.1,
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.493512511584801,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 49.351251158480096,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -250,30 +196,17 @@
       "grade": "measured"
     },
     {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": null,
-      "unit": "% accuracy",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
       "key": "scicode",
       "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 60.88,
-      "unit": "% score",
-      "normalized": 83.3,
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.608796296296296,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 60.8796296296296,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -283,14 +216,15 @@
     {
       "key": "critpt",
       "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 26.57,
-      "unit": "% score",
-      "normalized": 55.6,
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.265714285714286,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 26.5714285714286,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
       "observedAt": "2026-10-17",
       "evaluatedVariant": null,
@@ -299,11 +233,8 @@
     }
   ],
   "cost": {
-    "apiUsd": 206.65533881883294,
-    "apiUsdPerPoint": 4.461065915513719,
-    "planUsdPerRun": 137.77022587922195,
-    "planUsdPerPoint": 2.974043943675812,
-    "planComparableUsdPerPoint": 2.974043943675812,
+    "apiUsd": 136.12695920883297,
+    "planUsd": 90.75130613922198,
     "fallback": null,
     "route": {
       "id": "mimo-provisional-user-assumption",
@@ -315,7 +246,88 @@
       "sourceModel": null,
       "sourceUrl": null,
       "sourceDate": null
-    }
+    },
+    "subset": true,
+    "partialComponents": [],
+    "workload": "1453a9a0576b02ea",
+    "planFlags": [
+      "workload-unmatched",
+      "owner-named transfer (assumption)",
+      "valuation basis unverified",
+      "observed-usage multiple; full utilisation not established"
+    ],
+    "costScore": {
+      "api": 74.86122765406913,
+      "plan": 49.795652786266
+    },
+    "components": [
+      {
+        "key": "frontiercode",
+        "label": "FrontierCode",
+        "costUsd": 18.0,
+        "completeness": "confirmed-complete",
+        "source": "AA FrontierCode total cost chart (labels rounded to USD 1)",
+        "admitted": false
+      },
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase",
+        "costUsd": 34.596611763440706,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdpval-aa",
+        "label": "GDPval-AA",
+        "costUsd": 35.467746449717595,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf",
+        "costUsd": 2.402207025,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA",
+        "costUsd": 27.765931976685117,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)",
+        "costUsd": 28.911314773989552,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "costUsd": 2.245203345,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "artificial-analysis-long-context-reasoning",
+        "label": "AA-LCR",
+        "costUsd": 4.737943874999999,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "only remaining eligible route"
   },
   "plans": [
     {
@@ -327,11 +339,22 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": null,
       "sourceDate": null,
-      "usdPerRun": 137.77022587922195,
-      "usdPerPoint": 2.974043943675812,
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 90.75130613922198,
       "selected": true
     }
   ],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.9.6",
@@ -361,8 +384,8 @@
       "version": "v2.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 7,
-        "plan": 11
+        "api": 5,
+        "plan": 13
       }
     }
   ],

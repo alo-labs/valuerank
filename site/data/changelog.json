@@ -4,102 +4,138 @@
       "version": "v2.0.0",
       "date": "October 19, 2026",
       "models": 19,
-      "dimensions": 16,
-      "summary": "19 models ranked on 16 dimensions; Gemini 4 Argon is first on the API basis.",
+      "dimensions": 12,
+      "summary": "19 models ranked on 12 dimensions; MiMo-V2.6-Flash is first on the API basis.",
       "rankChanges": [
         {
-          "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
-          "from": 6,
-          "to": 5
-        },
-        {
-          "slug": "gpt-5-6-sol",
-          "name": "GPT-5.6 Sol",
-          "from": 5,
-          "to": 6
-        },
-        {
-          "slug": "mimo-v2-6-pro",
-          "name": "MiMo-V2.6-Pro",
-          "from": 9,
-          "to": 7
-        },
-        {
-          "slug": "gpt-6-sol",
-          "name": "GPT-6 Sol",
-          "from": 7,
-          "to": 8
-        },
-        {
-          "slug": "grok-4-7",
-          "name": "Grok 4.7",
-          "from": 8,
-          "to": 9
-        },
-        {
-          "slug": "gpt-5-6-luna",
-          "name": "GPT-5.6 Luna",
-          "from": 11,
-          "to": 10
+          "slug": "mimo-v2-6-flash",
+          "name": "MiMo-V2.6-Flash",
+          "from": 10,
+          "to": 1
         },
         {
           "slug": "gpt-6-luna",
           "name": "GPT-6 Luna",
           "from": 13,
-          "to": 11
+          "to": 3
         },
         {
-          "slug": "mimo-v2-6-flash",
-          "name": "MiMo-V2.6-Flash",
-          "from": 10,
-          "to": 12
+          "slug": "gemini-4-argon",
+          "name": "Gemini 4 Argon",
+          "from": 1,
+          "to": 4
+        },
+        {
+          "slug": "mimo-v2-6-pro",
+          "name": "MiMo-V2.6-Pro",
+          "from": 9,
+          "to": 5
+        },
+        {
+          "slug": "gpt-5-6-luna",
+          "name": "GPT-5.6 Luna",
+          "from": 11,
+          "to": 6
+        },
+        {
+          "slug": "deepseek-v4-flash",
+          "name": "DeepSeek V4 Flash",
+          "from": 17,
+          "to": 7
+        },
+        {
+          "slug": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "from": 4,
+          "to": 8
+        },
+        {
+          "slug": "gpt-6-sol",
+          "name": "GPT-6 Sol",
+          "from": 7,
+          "to": 9
         },
         {
           "slug": "claude-haiku-5-5",
           "name": "Claude Haiku 5.5",
           "from": 16,
+          "to": 10
+        },
+        {
+          "slug": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro",
+          "from": 19,
+          "to": 11
+        },
+        {
+          "slug": "gpt-5-6-sol",
+          "name": "GPT-5.6 Sol",
+          "from": 5,
+          "to": 12
+        },
+        {
+          "slug": "claude-sonnet-5-5",
+          "name": "Claude Sonnet 5.5",
+          "from": 3,
           "to": 13
+        },
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "from": 6,
+          "to": 14
         },
         {
           "slug": "gemini-3-8-flash",
           "name": "Gemini 3.8 Flash",
           "from": 12,
-          "to": 14
+          "to": 15
         },
         {
-          "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
-          "from": 14,
-          "to": 15
+          "slug": "grok-4-7",
+          "name": "Grok 4.7",
+          "from": 8,
+          "to": 16
         },
         {
           "slug": "glm-5-3",
           "name": "GLM-5.3",
           "from": 15,
-          "to": 16
+          "to": 17
+        },
+        {
+          "slug": "claude-opus-5",
+          "name": "Claude Opus 5",
+          "from": 14,
+          "to": 18
+        },
+        {
+          "slug": "qwen3-8-max",
+          "name": "Qwen3.8 Max",
+          "from": 18,
+          "to": 19
         }
       ],
       "ranks": {
-        "claude-haiku-5-5": 13,
-        "claude-opus-5": 15,
-        "claude-opus-5-5": 5,
-        "claude-sonnet-5-5": 3,
-        "deepseek-v4-flash": 17,
-        "deepseek-v4-pro": 19,
-        "gemini-3-8-flash": 14,
-        "gemini-4-argon": 1,
-        "glm-5-3": 16,
-        "gpt-5-6-luna": 10,
-        "gpt-5-6-sol": 6,
-        "gpt-6-astra": 4,
-        "gpt-6-luna": 11,
-        "gpt-6-sol": 8,
+        "claude-haiku-5-5": 10,
+        "claude-opus-5": 18,
+        "claude-opus-5-5": 14,
+        "claude-sonnet-5-5": 13,
+        "deepseek-v4-flash": 7,
+        "deepseek-v4-pro": 11,
+        "gemini-3-8-flash": 15,
+        "gemini-4-argon": 4,
+        "glm-5-3": 17,
+        "gpt-5-6-luna": 6,
+        "gpt-5-6-sol": 12,
+        "gpt-6-astra": 8,
+        "gpt-6-luna": 3,
+        "gpt-6-sol": 9,
         "gpt-6-1-sol": 2,
-        "grok-4-7": 9,
-        "mimo-v2-6-flash": 12,
-        "mimo-v2-6-pro": 7,
-        "qwen3-8-max": 18
+        "grok-4-7": 16,
+        "mimo-v2-6-flash": 1,
+        "mimo-v2-6-pro": 5,
+        "qwen3-8-max": 19
       },
       "added": [],
       "removed": []

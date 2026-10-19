@@ -7,36 +7,35 @@
 <header class="page-head">
   <p class="eyebrow">Subscription value &middot; as of {{ page.plansJson.asOf }}</p>
   <h1 id="page-title">Plans: what a subscription is really worth</h1>
-  <p class="lead">A flat monthly fee can be a much cheaper way to use a model than paying per token. ValueRank converts that into one number, USD per Intelligence Index point, so a plan model and an API-only model can be ranked together.</p>
+  <p class="lead">A flat monthly fee can be a much cheaper way to use a model than paying per token. ValueRank prices the same SDLC basket both ways: at API rates, and on a subscription by dividing that API cost by the plan's Value Multiple, so plan and API-only models can be ranked together.</p>
 </header>
 
 <section class="block" id="worked-example" aria-labelledby="example-title">
   <h2 id="example-title" class="section-title">How the number is built</h2>
   <ol class="steps">
-    <li><strong>API cost of the benchmark.</strong> Artificial Analysis reports what it cost to run the whole Intelligence Index on the model at API rates.</li>
-    <li><strong>Divide by the value multiple.</strong> The value multiple is how many dollars of API-priced work one subscription dollar buys, taken from measured usage.</li>
-    <li><strong>Divide by the Index score.</strong> The result is plan dollars per Intelligence Index point.</li>
+    <li><strong>API cost of the basket.</strong> Artificial Analysis publishes what it cost to run each evaluation on the model at API rates. The SDLC basket adds up seven Intelligence Index evaluations and the Coding Agent Index.</li>
+    <li><strong>Divide by the Value Multiple.</strong> The Value Multiple is how many dollars of API-priced work one subscription dollar buys at full use of the plan, taken from measured usage.</li>
+    <li><strong>The result is the plan cost of one basket run.</strong> It is scored on a log scale against frozen anchors, like the API cost.</li>
   </ol>
   <div class="table-wrap" tabindex="0" role="region" aria-label="How the number is built table">
     <table class="data-table">
       <caption class="sr-only">Worked example of the plan cost calculation</caption>
-      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">API cost per run</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">Plan cost per run</th><th scope="col" class="col-num">Index score</th><th scope="col" class="col-num">USD per Index point</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">API cost per basket run</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th><th scope="col">Route</th></tr></thead>
       <tbody>
         {%- for m in page.workedExample.models %}
         <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a></span></th>
-          <td class="cell-num">{{ usd(m.apiUsd, 0) }}</td>
-          <td class="cell-num">{{ num(m.valueMultiple, 1) }}&times;</td>
-          <td class="cell-num">{{ usd(m.planUsdPerRun) }}</td>
-          <td class="cell-num">{{ num(m.indexValue, 1) }}</td>
-          <td class="cell-num"><strong>{{ usd(m.planUsdPerPoint, 3) }}</strong></td>
+          <td class="cell-num">{{ usd(m.apiUsd, 2) }}</td>
+          <td class="cell-num">{{ num(m.valueMultiple, 2) }}&times;</td>
+          <td class="cell-num"><strong>{{ usd(m.planUsd, 2) }}</strong></td>
+          <td>{{ badge(m.grade, hint=m.evidenceLabel) }} <span class="muted small">{{ m.routeLabel }}</span></td>
         </tr>
         {%- endfor %}
       </tbody>
     </table>
   </div>
   <div class="callout callout-info">
-    <p><strong>What this does and does not claim.</strong> It estimates the price of one benchmark run on a plan, not what your own usage will cost. Provisional assumptions are flagged on every route.</p>
+    <p><strong>What this does and does not claim.</strong> It prices one run of the basket on a plan at full utilisation, not what your own usage will cost. Each Value Multiple was measured on its own workload; {% if page.plansJson.identificationYield.exploratory %}none is yet identified on the basket, so the Plan ranking is exploratory{% else %}routes identified on the basket are marked{% endif %}. Assumptions are flagged on every route.</p>
   </div>
 </section>
 
@@ -46,7 +45,7 @@
   <h3 class="subhead">{{ provider }}</h3>
   <div class="table-wrap" tabindex="0" role="region" aria-label="{{ provider }} routes">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
       <tbody>
         {%- for r in routes %}
         <tr>
@@ -81,20 +80,21 @@
 
 <section class="block" id="candidates" aria-labelledby="candidates-title">
   <h2 id="candidates-title" class="section-title">Every candidate side by side</h2>
+  {%- set y = page.plansJson.identificationYield %}
+  <p class="muted">Value Multiples identified on the basket: {{ y.pointIdentified + y.setIdentified }} of {{ y.rows }} ranked configurations.{% if y.exploratory %} The Plan ranking is labelled exploratory.{% endif %}</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Every candidate side by side table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">Index</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col" class="col-num">USD per Index point</th><th scope="col">Route</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">API cost (USD per run)</th><th scope="col" class="col-num">Plan cost (USD per run)</th><th scope="col">Route</th></tr></thead>
       <tbody>
         {%- for c in page.plansJson.candidates %}
-        {%- set r = routes_by_id.get(c.routeId) if c.routeId else none %}
+        {%- set r = routes_by_id.get(c.routeId.split("#")[0]) if c.routeId else none %}
         <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ c.slug }}/">{{ c.name }}</a></span></th>
           <td class="cell-num">{{ rank(c.rank.plan) }}</td>
           <td class="cell-num">{{ rank(c.rank.api) }}</td>
-          <td class="cell-num">{{ num(c.intelligenceIndex.value) }}</td>
-          <td class="cell-num">{{ usd(c.apiUsd, 0) }}</td>
-          <td class="cell-num">{{ usd(c.planUsdPerPoint, 3) }}</td>
-          <td>{% if r %}{{ badge(r.grade, hint=r.evidenceLabel) }} <span class="muted small">{{ r.planLabel }}</span>{% else %}{{ badge("missing", label="API fallback", hint="No subscription route; the plan ranking uses API cost.") }}{% endif %}</td>
+          <td class="cell-num">{{ usd(c.apiUsd, 2) }}</td>
+          <td class="cell-num">{{ usd(c.planUsd, 2) }}</td>
+          <td>{% if r %}{{ badge(r.grade, hint=r.evidenceLabel) }} <span class="muted small">{{ r.planLabel }}</span>{% else %}{{ badge("missing", label="API fallback", hint="No admitted subscription route; the plan ranking uses API cost.") }}{% endif %}{% if c.flags %}<details class="evidence"><summary>Flags</summary><ul class="small">{% for f in c.flags %}<li>{{ f }}</li>{% endfor %}</ul></details>{% endif %}</td>
         </tr>
         {%- endfor %}
       </tbody>

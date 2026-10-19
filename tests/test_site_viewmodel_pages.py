@@ -59,7 +59,8 @@ def test_models_index_lists_every_roster_model_ranked_first(bundle):
     assert len(models) == 31
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rankingEligible"]]
-    assert [m["rank"]["plan"] for m in ranked] == list(range(1, 20))
+    plan_ranks = [m["rank"]["plan"] for m in ranked]
+    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 19
     assert models[:19] == ranked
     assert all(m["rank"]["plan"] is None for m in models[19:])
     assert page["rankedCount"] == 19 and page["unrankedCount"] == 12
@@ -67,14 +68,14 @@ def test_models_index_lists_every_roster_model_ranked_first(bundle):
 
 def test_index_models_carry_the_coverage_object(bundle):
     first = viewmodel.index_page(bundle)["models"][0]
-    assert set(first["coverage"]) == {"pct", "costAvailable", "availablePriority", "totalPriority", "missing"}
+    assert set(first["coverage"]) == {"pct", "costAvailable", "missing", "provisional", "provisionalReasons"}
 
 
 def test_rankings_columns_use_the_script_catalogue_keys(bundle):
     columns = viewmodel.rankings_page(bundle)["columns"]
     keys = [c["key"] for c in columns]
     assert keys[:7] == ["rank", "name", "overall", "quality", "cost", "grade", "coverage"]
-    assert {"developer", "qualityRank", "speed", "ii", "deepswePassAt1"} <= set(keys)
+    assert {"developer", "qualityRank", "speed", "ii", "deepswe", "omniscience"} <= set(keys)
     assert "costComposite" not in keys and "model" not in keys
     assert all(c["sortable"] is True and c["label"] for c in columns)
     assert [c["key"] for c in columns if c["default"]] == keys[:7]
@@ -84,16 +85,15 @@ def test_plans_worked_example_has_a_models_list(bundle):
     example = viewmodel.plans_page(bundle)["workedExample"]
     assert [m["slug"] for m in example["models"]] == ["claude-opus-5-5", "gpt-6-1-sol"]
     sol = example["models"][1]
-    assert set(sol) >= {"slug", "name", "apiUsd", "valueMultiple", "planUsdPerRun", "indexValue", "planUsdPerPoint", "routeLabel", "grade"}
-    assert sol["planUsdPerPoint"] == pytest.approx(sol["planUsdPerRun"] / sol["indexValue"])
+    assert set(sol) >= {"slug", "name", "apiUsd", "valueMultiple", "planUsd", "routeLabel", "grade", "evidenceLabel", "planFeeUsd"}
+    assert sol["planUsd"] == pytest.approx(sol["apiUsd"] / sol["valueMultiple"])
 
 
 def test_methodology_worked_example_lists_steps_and_priorities(bundle):
     example = viewmodel.methodology_page(bundle)["workedExample"]
     assert example["name"] and example["steps"] and "rows" not in example
     assert {"label", "weightPct", "normalized", "contribution", "included", "effectiveWeightPct"} <= set(example["steps"][0])
-    assert example["totalPriority"] == 107
-    assert 0 < example["availablePriority"] <= example["totalPriority"]
+    assert 0 < example["qualityCoveragePct"] < 100 and example["missing"]
     cost = next(step for step in example["steps"] if step["key"] == "costComposite")
     assert cost["included"] and cost["effectiveWeightPct"] == 25.0
 

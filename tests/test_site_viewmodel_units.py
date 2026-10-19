@@ -1,37 +1,10 @@
-"""Pure-function tests for the site view-model helpers (grades, picks, changelog, scoring)."""
+"""Pure-function tests for the site view-model helpers (grades, picks, changelog, v3 entry helpers)."""
 
 from __future__ import annotations
 
 import pytest
 
 from valuerank.site import changelog, evidence, picks, viewmodel
-
-
-def test_worst_grade_orders_measured_claim_estimate_assumption():
-    assert evidence.worst_grade(["measured", "claim"]) == "claim"
-    assert evidence.worst_grade(["measured", "estimate", "claim"]) == "estimate"
-    assert evidence.worst_grade(["assumption", "measured", "estimate"]) == "assumption"
-    assert evidence.worst_grade(["measured"]) == "measured"
-
-
-def test_worst_grade_ignores_missing_and_reports_missing_when_nothing_enters():
-    assert evidence.worst_grade(["missing", "claim"]) == "claim"
-    assert evidence.worst_grade(["missing"]) == "missing"
-    assert evidence.worst_grade([]) == "missing"
-
-
-@pytest.mark.parametrize(
-    ("source_type", "status", "expected"),
-    [
-        ("benchmark_owner", None, "measured"),
-        ("benchmark_owner", "measured", "measured"),
-        ("benchmark_owner", "estimated", "estimate"),
-        ("benchmark_owner_estimate", None, "estimate"),
-        ("model_provider_claim", None, "claim"),
-    ],
-)
-def test_grade_for_source_type(source_type, status, expected):
-    assert evidence.grade_for_source_type(source_type, status) == expected
 
 
 @pytest.mark.parametrize(
@@ -52,46 +25,70 @@ def test_slugify_replaces_dots_with_hyphens():
     assert viewmodel.slugify("kimi-k3") == "kimi-k3"
 
 
-WEIGHTS = [
-    {"key": "costComposite", "priority": None},
-    {"key": "a", "priority": 6},
-    {"key": "b", "priority": 2},
-]
+def test_competition_ranks_share_the_better_rank_and_skip_missing_values():
+    assert viewmodel.competition_ranks({"a": 10.0, "b": 10.0, "c": 50.0, "d": None}) == {"c": 1, "a": 2, "b": 2}
+    assert viewmodel.competition_ranks({}) == {}
 
 
-def test_composite_score_gives_cost_a_fixed_quarter_and_renormalises_quality_only():
-    # quality (6 * 100 + 2 * 0) / 8 = 75; overall 0.25 * 50 + 0.75 * 75
-    assert viewmodel.composite_score({"a": 100.0, "b": 0.0}, 50.0, WEIGHTS) == 68.8
-    # a missing quality dimension leaves cost at 25%: 0.25 * 50 + 0.75 * 100
-    assert viewmodel.composite_score({"a": 100.0, "b": None}, 50.0, WEIGHTS) == 87.5
-    # without a cost the score is quality alone
-    assert viewmodel.composite_score({"a": 100.0, "b": 0.0}, None, WEIGHTS) == 75.0
+def test_cost_tiers_follow_the_cost_score():
+    assert viewmodel._tier(None) is None
+    assert [viewmodel._tier(score) for score in (90.0, 80.0, 70.0, 50.0, 30.0)] == ["Budget", "Near-Budget", "Mid-Range", "Premium", "Expensive"]
 
 
-def test_composite_score_needs_a_quality_dimension():
-    assert viewmodel.composite_score({"a": None, "b": None}, 80.0, WEIGHTS) is None
+def test_dimensions_give_cost_a_fixed_share_and_split_the_rest_by_leaf_weight():
+    rows = viewmodel.dimensions()
+    assert rows[0]["key"] == viewmodel.COST_KEY and rows[0]["weightPct"] == 25.0 and rows[0]["category"] == "cost"
+    leaves = rows[1:]
+    assert len(leaves) == 11 and sum(row["weightPct"] for row in leaves) == pytest.approx(75.0)
+    deepswe = next(row for row in leaves if row["key"] == "deepswe")
+    assert deepswe["weightPct"] == 22.5 and deepswe["priority"] == 30.0 and deepswe["category"] == "code"
+    assert {row["category"] for row in leaves} == {"code", "prod", "rely", "intel"}
 
 
-def test_coverage_pct_counts_cost_share_and_quality_share():
-    assert viewmodel.coverage_pct(True, 92, 107) == round(25 + 75 * 92 / 107, 2)
-    assert viewmodel.coverage_pct(False, 107, 107) == 75.0
-    assert viewmodel.coverage_pct(True, 0, 0) == 25.0
+def test_route_view_grades_selected_routes_by_engine_grade_and_others_by_class():
+    route = {"id": "r", "planLabel": "Pro", "planPriceUsd": 20, "valueMultiple": 8.0, "evidenceClass": "user_assumption", "sourceModel": "M",
+             "sourceUrl": "https://example.test", "sourcePublicationDate": "2026-10-06", "valueMultipleKind": "user_assumption"}
+    assert viewmodel._route_view(None) is None
+    assert viewmodel._route_view(route)["grade"] == "assumption"
+    assert viewmodel._route_view(route, "controlled")["grade"] == "measured"
+    assert viewmodel._route_view(route, "reports")["grade"] == "estimate"
+    assert viewmodel._route_view(route)["planFeeUsd"] == 20 and viewmodel._route_view(route)["sourceDate"] == "2026-10-06"
 
 
-def test_composite_score_is_none_without_any_available_dimension():
-    assert viewmodel.composite_score({"a": None, "b": None}, None, WEIGHTS) is None
+def _v3_row(row_id, cost, quality, *, workload="w", plan_cost=None, subset=False, provisional=False, partial=(), caveat=None):
+    return {
+        "id": row_id,
+        "cost": {"subset": subset, "partialComponents": list(partial), "workload": workload},
+        "quality": {"displayed": quality, "provisional": provisional, "provisionalReasons": ["coverage 40% below 70%"] if provisional else []},
+        "api": {"costUsd": cost},
+        "planScore": {"costUsd": plan_cost if plan_cost is not None else cost},
+        "aaCostCaveat": caveat,
+    }
 
 
-def test_rank_scores_orders_by_score_then_name_and_skips_none():
-    scores = {"z": 10.0, "a": 10.0, "m": 50.0, "n": None}
-    names = {"z": "Zed", "a": "Alpha", "m": "Mid", "n": "Nope"}
-    assert viewmodel.rank_scores(scores, names) == {"m": 1, "a": 2, "z": 3}
+def test_row_flags_name_subset_provisional_partial_and_caveat_in_order():
+    assert viewmodel._row_flags(_v3_row("a", 1.0, 50.0)) == []
+    flags = viewmodel._row_flags(_v3_row("a", 1.0, 50.0, subset=True, provisional=True, partial=["x"], caveat="long-context pricing"))
+    assert [flag.split(":")[0] for flag in flags] == ["Subset cost", "Provisional quality", "Partial cost component", "AA cost caveat"]
 
 
-def test_rank_scores_break_ties_by_lower_cost_before_name():
-    scores = {"z": 10.0, "a": 10.0, "u": 10.0}
-    names = {"z": "Zed", "a": "Alpha", "u": "Unpriced"}
-    assert viewmodel.rank_scores(scores, names, {"z": 1.0, "a": 2.0, "u": None}) == {"z": 1, "a": 2, "u": 3}
+def test_pareto_set_uses_point_estimates_on_the_main_workload_only():
+    rows = [
+        _v3_row("cheap", 10.0, 40.0), _v3_row("good", 100.0, 80.0), _v3_row("dominated", 100.0, 60.0),
+        _v3_row("tie", 10.0, 40.0), _v3_row("subset", 1.0, 99.0, workload="other"), _v3_row("nocost", None, 99.0),
+        _v3_row("plan-only", 50.0, 70.0, plan_cost=5.0),
+    ]
+    assert viewmodel.pareto_set(rows, "w", "api") == {"cheap", "tie", "good", "plan-only"}
+    assert viewmodel.pareto_set(rows, "w", "plan") == {"plan-only", "good"}
+
+
+def test_scenario_view_reads_the_s1_core_stream_only_when_current():
+    assert viewmodel._scenario_view({}) == {"api": {}, "plan": {}}
+    assert viewmodel._scenario_view({"scenarios": {"status": "missing"}}) == {"api": {}, "plan": {}}
+    shares = {"a": {key: {"share": value} for key, value in (("top1", 0.5), ("top3", 1.0), ("frontier", 0.25))}}
+    runs = [{"stratum": "S0", "alternative": False, "rows": {}}, {"stratum": "S1", "alternative": False, "rows": shares}, {"stratum": "S1", "alternative": True, "rows": {}}]
+    view = viewmodel._scenario_view({"scenarios": {"status": "current", "results": {"api": runs, "plan": runs}}})
+    assert view["api"] == {"a": {"top1": 0.5, "top3": 1.0, "frontier": 0.25}} and view["plan"] == view["api"]
 
 
 def _model(slug, name, api, plan, quality_rank, cost_api, cost_plan, fallback=None):
@@ -103,7 +100,7 @@ def _model(slug, name, api, plan, quality_rank, cost_api, cost_plan, fallback=No
         "quality": 70.0,
         "qualityRank": quality_rank,
         "costDims": {"api": cost_api, "plan": cost_plan},
-        "cost": {"apiUsd": 1081.5, "planComparableUsdPerPoint": 1.931, "fallback": fallback},
+        "cost": {"apiUsd": 1081.5, "planUsd": 101.5, "fallback": fallback, "subset": False},
     }
 
 
@@ -132,9 +129,8 @@ def test_picks_show_the_leader_the_other_basis_leader_and_a_budget_model():
     plan = picks.build_picks(models, "plan", BASES)
     assert _slugs(plan) == ("mid", "big", "cheap")
     assert plan["other"]["label"] == "Best at API rates"
-    assert "API fallback" in plan["value"]["reason"]
-    assert "per Index point" in plan["value"]["reason"]
-    assert "per Index run" in api["value"]["reason"]
+    assert "API fallback" in plan["value"]["reason"] and "$101.50 per basket run" in plan["value"]["reason"]
+    assert "$1,081.50 per basket run" in api["value"]["reason"] and "API fallback" not in api["other"]["reason"]
     for pick in (*api.values(), *plan.values()):
         assert len(pick["reason"].split()) < 25
 
@@ -277,9 +273,17 @@ def test_model_history_omits_versions_without_a_record_and_never_infers_ranks():
 
 def test_picks_say_so_when_a_pick_has_no_cost_data():
     models = [_model("only", "Only", 1, 1, 1, 50.0, 50.0)]
-    models[0]["cost"] = {"apiUsd": None, "planComparableUsdPerPoint": None, "fallback": None}
+    models[0]["cost"] = {"apiUsd": None, "planUsd": None, "fallback": None, "subset": False}
     assert "no cost data" in picks.build_picks(models, "api", BASES)["value"]["reason"]
     assert "no cost data" in picks.build_picks(models, "plan", BASES)["value"]["reason"]
+
+
+def test_subset_cost_picks_say_their_cross_workload_ordering_is_not_identified():
+    models = [_model("only", "Only", 1, 1, 1, 50.0, 50.0)]
+    models[0]["cost"]["subset"] = True
+    result = picks.build_picks(models, "api", BASES)
+    assert result["value"]["reason"].endswith("Subset cost: cross-workload ordering not identified.")
+    assert len(result["value"]["reason"].split()) < 25
 
 
 def test_budget_pick_is_none_when_no_ranked_model_has_a_cost_score():

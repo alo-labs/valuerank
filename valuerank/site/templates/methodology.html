@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {%- from "partials/badge.html" import legend -%}
-{%- from "partials/fmt.html" import num -%}
+{%- from "partials/fmt.html" import num, usd -%}
 {% block content %}
 {%- set w = page.workedExample -%}
 <header class="page-head">
-  <p class="eyebrow">Methodology</p>
+  <p class="eyebrow">Methodology {{ page.method.methodologyVersion }}</p>
   <h1 id="page-title">How ValueRank scores a model</h1>
-  <p class="lead">A model's score is its value: cost per Intelligence Index point carries a fixed {{ num(page.costWeightPct, 0) }}% of the score and benchmark quality the other {{ num(100 - page.costWeightPct, 0) }}%. The quality part is a weighted average of 0&ndash;100 dimension scores. If a quality dimension has no eligible value for a model it is left out and the remaining quality weights are scaled up, so a gap never counts as zero and never gets filled in.</p>
+  <p class="lead">A configuration's score is its value: a cost score carries a fixed {{ num(page.costWeightPct, 0) }}% and benchmark quality the other {{ num(100 - page.costWeightPct, 0) }}%. Cost is what it costs to run the SDLC basket once, scored on a log scale so cost ratios keep their size. Quality is the weighted mean of the benchmark leaves observed for that exact configuration: a missing leaf is left out and never filled in, and a configuration without a cost gets no value score.</p>
 </header>
 
 <nav class="toc" aria-label="On this page">
   <ul>
-    <li><a href="#weights">Dimensions and weights</a></li>
+    <li><a href="#cost">Cost: the SDLC basket</a></li>
+    <li><a href="#weights">Quality leaves and weights</a></li>
+    <li><a href="#uncertainty">What the uncertainty outputs cover</a></li>
     <li><a href="#model-inclusion">Model inclusion</a></li>
     <li><a href="#worked-example">Worked example</a></li>
     <li><a href="#evidence-grades">Evidence grades</a></li>
@@ -20,8 +22,16 @@
   </ul>
 </nav>
 
+{%- set m = page.method -%}
+<section class="block" id="cost" aria-labelledby="cost-title">
+  <h2 id="cost-title" class="section-title">Cost: the SDLC basket</h2>
+  <p>The cost figure is the <strong>{{ m.costLabel }}</strong>: Artificial Analysis' published cost of running {{ m.basket.admitted | map(attribute="label") | join(", ") }} once at API rates ({{ m.basket.version }}).{% if m.basket.pending %} Pending capture: {{ m.basket.pending | map(attribute="label") | join(", ") }}.{% endif %} A configuration missing a component is scored on its own subset of the basket, flagged, and never compared as if it had run the whole basket.</p>
+  <p>The cost score is 100 &times; (ln c<sub>H</sub> &minus; ln c) / (ln c<sub>H</sub> &minus; ln c<sub>L</sub>), clipped to 0&ndash;100, against anchors frozen with anchor version <span class="mono">{{ m.anchorVersion }}</span>: API anchors {{ usd(m.anchors.api.low, 2) }} to {{ usd(m.anchors.api.high, 2) }} per basket run. At these anchors, doubling the cost costs {{ num(m.exchangeRate.api.valuePointsPerCostDoubling, 2) }} value points, which {{ num(m.exchangeRate.api.qualityPointsPerCostDoubling, 2) }} quality points offset.</p>
+  <p>On the Plan basis the basket's API cost is divided by the selected subscription route's Value Multiple at full utilisation; a configuration without an admitted route falls back to its API cost, flagged.{% if m.planExploratory %} No Value Multiple is yet identified on the basket itself, so the Plan ranking is labelled exploratory.{% endif %}</p>
+</section>
+
 <section class="block" id="weights" aria-labelledby="weights-title">
-  <h2 id="weights-title" class="section-title">Dimensions and weights</h2>
+  <h2 id="weights-title" class="section-title">Quality leaves and weights</h2>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Dimensions and weights table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col">Category</th><th scope="col" class="col-num">Weight</th><th scope="col">Better when</th></tr></thead>
@@ -66,7 +76,7 @@
 
 <section class="block" id="worked-example" aria-labelledby="example-title">
   <h2 id="example-title" class="section-title">Worked example: {{ w.name }}</h2>
-  <p>Cost takes its fixed {{ num(page.costWeightPct, 0) }}% share. Each quality score is multiplied by its weight, the products are added, and the sum is divided by the quality weight that actually had data ({{ w.availablePriority }} of {{ w.totalPriority }} priority points), which fills the remaining {{ num(100 - page.costWeightPct, 0) }}%.</p>
+  <p>Cost takes its fixed {{ num(page.costWeightPct, 0) }}% share. Each observed quality leaf is multiplied by its weight, the products are added, and the sum is divided by the quality weight that has data ({{ num(w.qualityCoveragePct, 0) }}% of the total), which fills the remaining {{ num(100 - page.costWeightPct, 0) }}%.{% if w.missing %} Missing here: {{ w.missing | join(", ") }}.{% endif %}</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Worked example: {{ w.name }} table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Weight</th><th scope="col" class="col-num">Effective weight</th><th scope="col" class="col-num">Score (0&ndash;100)</th><th scope="col" class="col-num">Contribution</th></tr></thead>
@@ -78,6 +88,16 @@
       <tfoot><tr><th scope="row" colspan="4">Overall score</th><td class="cell-num"><strong>{{ num(w.overall) }}</strong></td></tr></tfoot>
     </table>
   </div>
+</section>
+
+<section class="block" id="uncertainty" aria-labelledby="uncertainty-title">
+  <h2 id="uncertainty-title" class="section-title">What the uncertainty outputs cover</h2>
+  <p>Frontier and cheapest-above-a-bar labels come from interval calculations that protect the published record against its reporting precision and against missing evidence. Scenario shares are frequencies over declared streams, never probabilities:</p>
+  <ul class="plain-list">
+    {%- for key, text in m.streamDescriptions.items() %}<li><strong>{{ key }}</strong>: {{ text }}</li>{% endfor %}
+    {%- for text in m.notQuantified %}<li>{{ text }}</li>{% endfor %}
+  </ul>
+  {%- if m.barReference %}<p>The quality bar is pinned to {{ m.barReference }} ({{ m.barPolicy }}), fixed for the anchor version.</p>{% endif %}
 </section>
 
 <section class="block" id="evidence-grades" aria-labelledby="grades-title">

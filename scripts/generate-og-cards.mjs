@@ -162,12 +162,12 @@ const CORE_PAGES = [
     path: "/plans/",
     kicker: "Plans",
     headline: "Subscription plan value",
-    description: "Allowances and token efficiency, combined into cost per Index point.",
+    description: "Allowances and token efficiency, combined into the cost of one basket run.",
     stats({ plans }) {
-      const priced = plans.candidates.filter((candidate) => candidate.planUsdPerPoint !== null);
-      const cheapest = Math.min(...priced.map((candidate) => candidate.planUsdPerPoint));
+      const priced = plans.candidates.filter((candidate) => candidate.routeId !== null && candidate.planUsd !== null);
+      const cheapest = Math.min(...priced.map((candidate) => candidate.planUsd));
       return [
-        stat(formatUsd(cheapest), "Best cost per Index point"),
+        stat(formatUsd(cheapest), "Best plan cost per basket run"),
         stat(String(plans.routes.length), "Plan routes"),
         stat(String(priced.length), "Models priced on a plan"),
       ];
@@ -182,8 +182,8 @@ const CORE_PAGES = [
     stats({ benchmarks }) {
       return [
         stat(String(benchmarks.sources.length), "Benchmark sources"),
-        stat(String(benchmarks.aaComponents.length), "Index components"),
-        stat(String(benchmarks.coverageMatrix.cohortN), "Cohort models"),
+        stat(String(benchmarks.basket.admitted.length), "Basket components"),
+        stat(String(benchmarks.sources[0].coverage.cohort), "Cohort models"),
       ];
     },
   },

@@ -28,16 +28,16 @@ def test_public_rankings_open_on_the_plan_basis(repo_copy, tmp_path):
     assert "plan" in rankings["bases"] and rankings["defaultBasis"] in rankings["bases"]
 
 
-def test_public_models_carry_per_point_and_per_run_plan_costs(repo_copy, tmp_path):
+def test_public_models_carry_basket_run_plan_costs(repo_copy, tmp_path):
     models = {model["name"]: model for model in public_rankings(repo_copy, tmp_path)["models"]}
     sol = models["GPT-6.1 Sol"]["cost"]
     opus = models["Claude Opus 5.5"]["cost"]
-    scored = {m["name"]: m for m in json.loads((repo_copy / "data" / "scores.json").read_text())["models"]}["GPT-6.1 Sol"]
+    rows = {row["id"]: row for row in json.loads((repo_copy / "data" / "scores.json").read_text())["v3"]["rows"]}
 
-    assert sol["planUsdPerRun"] == pytest.approx(scored["aaEvalCost"] / 10.772)
-    assert sol["planUsdPerPoint"] == pytest.approx(scored["aaEvalCost"] / 10.772 / scored["intelligenceIndex"])
-    assert opus["planUsdPerPoint"] > sol["planUsdPerPoint"]
-    assert sol["fallback"] is None
+    assert sol["apiUsd"] == rows["gpt-6.1-sol"]["api"]["costUsd"]
+    assert sol["planUsd"] == pytest.approx(rows["gpt-6.1-sol"]["api"]["costUsd"] / 10.772)
+    assert opus["planUsd"] > sol["planUsd"]
+    assert sol["fallback"] is None and sol["route"]["id"] == "chatgpt-pro500-common-semianalysis-assumption"
 
 
 def test_readme_candidate_table_shows_cost_per_index_point(repo_copy, pinned_clock):

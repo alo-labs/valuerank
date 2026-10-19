@@ -1,4 +1,4 @@
-"""Server-side view models for the multi-page site (docs/site-data-contract.md).
+"""Server-side view models for the multi-page site (docs/site-data-contract.md), methodology v3.
 
 Entry point: ``build_bundle(data: Path = DATA) -> Bundle`` computes every public JSON document once:
 
@@ -14,16 +14,16 @@ Page view-model helpers take the bundle and return the ``page`` mapping for one 
 ``index_page``, ``rankings_page``, ``model_page(bundle, slug)``, ``plans_page``, ``benchmarks_page``,
 ``tb4_page``, ``methodology_page``, ``changelog_page``, ``data_page`` and ``models_page`` (the ``/models/`` index).
 
-Scoring rules
--------------
+Scoring rules (methodology v3; every number comes from the ``v3`` section of ``data/scores.json``)
+--------------------------------------------------------------------------------------------------
 * ``slug`` is the model id with dots replaced by hyphens (``gpt-6.1-sol`` -> ``gpt-6-1-sol``).
-* Cost arithmetic is delegated to ``valuerank.plan_costs``. Both bases compare cost per AA Intelligence
-  Index point; cost *scores* are log-scaled within the ranked cohort (as ``emit_docs`` does), and cost
-  *numbers* (USD) are computed for every roster model.
-* The overall score on a basis gives that basis' cost score a fixed ``COST_WEIGHT_PCT`` share and the
-  priority-weighted quality score (renormalised over the available quality dimensions) the rest: the rule
-  of ``build_scores`` and the site JavaScript. Models rank by score descending, then lower cost on that basis, then name. The API-basis
-  result reproduces ``data/scores.json``.
+* Value on a basis = ``COST_WEIGHT_PCT``% of the cost score + the rest of the quality score. The cost
+  score is log-scaled against frozen anchors; cost is the SDLC basket (AA's published cost to run seven
+  Intelligence Index SDLC evaluations and the Coding Agent Index once, USD per basket run), divided on
+  the Plan basis by the selected subscription route's Value Multiple. Quality is the weighted mean of
+  eleven benchmark leaves on fixed 0-100 anchors over the leaves observed for the exact configuration.
+* A configuration without a cost score has no value score; ranks are competition ranks (ties share the
+  better rank). The site's JavaScript recomputes the same rule when the cost weight moves.
 * Historic ranks predate the plan basis; see ``valuerank.site.changelog``.
 """
 
@@ -35,17 +35,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from valuerank import basket
+from valuerank import plan_routes
+from valuerank import quality as q
 from valuerank.emit_docs import AA_METHODOLOGY_URL, BENCHMARK_URLS, model_inclusion, plan_evidence_label
 from valuerank.paths import DATA
-from valuerank.plan_costs import (
-    COST_WEIGHT_PCT,
-    blend,
-    build_cost_fields,
-    cost_per_index_point,
-    effective_cost,
-    load_plan_routes,
-    route_summary,
-)
+from valuerank.plan_costs import COST_WEIGHT_PCT
 from valuerank.release import DATE, VERSION
 from valuerank.site import evidence
 from valuerank.site.changelog import build_changelog, model_history
@@ -55,31 +50,61 @@ BASES = {
     "api": {
         "label": "API ranking",
         "costLabel": "API cost",
-        "costUnit": "USD per Index point",
-        "description": "AA total evaluation cost at API rates ÷ AA Intelligence Index.",
+        "costUnit": "USD per basket run",
+        "description": "AA's published cost to run the SDLC basket once at API rates: seven Intelligence Index SDLC evaluations and the Coding Agent Index.",
         "pickLabel": "Best at API rates",
         "pickPhrase": "at API rates",
     },
     "plan": {
         "label": "Plan ranking",
         "costLabel": "Plan cost",
-        "costUnit": "USD per Index point",
-        "description": "AA total evaluation cost ÷ highest eligible Value Multiple ÷ AA Intelligence Index.",
+        "costUnit": "USD per basket run",
+        "description": "The basket's API cost divided by the selected subscription route's Value Multiple at full utilisation; API cost when no route is admitted.",
         "pickLabel": "Best on a subscription",
         "pickPhrase": "on a subscription",
     },
 }
+# Quality groups (valuerank.quality) shown under the site's category keys, which the chart palette uses.
+GROUP_CATEGORY = {"swe": "code", "professional": "prod", "reliability": "rely", "knowledge": "intel"}
 CATEGORIES = {
     "cost": "Cost",
+    "code": "Software engineering",
+    "prod": "Professional work",
     "rely": "Reliability",
-    "code": "Code/Agentic",
-    "prod": "Production",
-    "intel": "Intelligence",
-    "language": "Language",
+    "intel": "Knowledge and science",
 }
 COST_KEY = "costComposite"
 TIERS = ((15, "Budget"), (22, "Near-Budget"), (35, "Mid-Range"), (55, "Premium"))
-AA_ONLY_EXCLUDED = {"deepswePassAt1", "bugHuntFixedOf105", "livebenchInstructionFollowing", "terminalBenchV4"}
+FRONTIERCODE_URL = "https://artificialanalysis.ai/evaluations/frontiercode"
+LEAF_INFO = {
+    "deepswe": {"unit": "% pass@1", "url": BENCHMARK_URLS["DeepSWE pass@1"]},
+    "bugHunt": {"unit": "bugs fixed of 105", "url": BENCHMARK_URLS["Bug Hunt Bench"]},
+    "frontierCode": {"unit": "AA score (0-1)", "url": FRONTIERCODE_URL},
+    "terminalBench": {"unit": "% resolved", "url": BENCHMARK_URLS["Terminal-Bench 4.0"]},
+    "gdpval": {"unit": "Elo", "url": BENCHMARK_URLS["GDPval-AA v2.1"]},
+    "automationBench": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["AutomationBench-AA"]},
+    "omniscience": {"unit": "AA Omniscience Index (-100 to 100)", "url": BENCHMARK_URLS["AA-Omniscience Accuracy"]},
+    "lcr": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["AA-LCR v1.1"]},
+    "hle": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["HLE"]},
+    "scicode": {"unit": "score (0-1)", "url": BENCHMARK_URLS["SciCode"]},
+    "critpt": {"unit": "score (0-1)", "url": BENCHMARK_URLS["CritPt"]},
+}
+# Public source names (the engine's provenance strings are internal and stay in scores.json).
+AA_SOURCE = "Artificial Analysis model page (Intelligence Index v4.3.2)"
+SOURCE_NAMES = {
+    "deepswe": "AA Coding Agent Index (DeepSWE v1.1)",
+    "bugHunt": "Bug Hunt Bench published runs",
+    "terminalBench": "tbench.ai Terminal-Bench 4.0 leaderboard",
+}
+LEAF_NOTES = {
+    "gdpval": "Scored with AA's integration transform, (Elo - 500) / 2000, on the rating as integrated in the pinned Index.",
+    "omniscience": "Scored as AA's Omniscience Index I (correct minus incorrect over all questions), z = (I + 100) / 2 (owner decision O28).",
+    "bugHunt": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness.",
+    "terminalBench": "Official tbench.ai rows run on mixed harnesses; a same-harness (Terminus 2) diagnostic is published beside it.",
+}
+# v3 Plan evidence grades shown with the site's grade vocabulary (controlled measurements are measured).
+ROUTE_GRADES = {"controlled": "measured", "reports": "estimate", "assumption": "assumption", "diagnostic": "assumption"}
+SCENARIO_STRATUM = "S1"  # the full-composite stream that authorises scenario labels (E100)
 
 
 @dataclass
@@ -97,42 +122,18 @@ class Bundle:
     extras: dict = field(default_factory=dict)
 
 
-# --- scoring ---------------------------------------------------------------------------------
+# --- helpers ---------------------------------------------------------------------------------
 
 
 def slugify(model_id: str) -> str:
     return model_id.replace(".", "-")
 
 
-def composite_score(dims: dict, cost_score: float | None, weights: list[dict]) -> float | None:
-    """Cost's fixed share of ``cost_score`` plus the rest of the available quality mean (``plan_costs.blend``)."""
+def competition_ranks(values: dict) -> dict:
+    """1 = highest; equal values share the better rank; entries without a value are skipped."""
 
-    total = priority = 0.0
-    for weight in weights:
-        value = dims.get(weight["key"]) if weight["key"] != COST_KEY else None
-        if value is not None:
-            total += value * weight["priority"]
-            priority += weight["priority"]
-    return blend(cost_score, total / priority if priority else None)
-
-
-def coverage_pct(has_cost: bool, available_priority: float, total_priority: float) -> float:
-    """Share of the scoring weight with an eligible value: cost's fixed share plus the quality share."""
-
-    quality = (100.0 - COST_WEIGHT_PCT) * available_priority / total_priority if total_priority else 0.0
-    return round((COST_WEIGHT_PCT if has_cost else 0.0) + quality, 2)
-
-
-def rank_scores(scores: dict, names: dict, costs: dict | None = None) -> dict:
-    """1-based ranks by score descending, then lower cost (unknown last), then name; entries without a score are skipped."""
-
-    costs = costs or {}
-    scored = [key for key, score in scores.items() if score is not None]
-    ordered = sorted(
-        scored,
-        key=lambda key: (-scores[key], costs[key] if costs.get(key) is not None else float("inf"), names[key]),
-    )
-    return {key: position for position, key in enumerate(ordered, 1)}
+    scored = {key: value for key, value in values.items() if value is not None}
+    return {key: 1 + sum(1 for other in scored.values() if other > value) for key, value in scored.items()}
 
 
 def _tier(cost_score: float | None) -> str | None:
@@ -142,45 +143,40 @@ def _tier(cost_score: float | None) -> str | None:
     return next((name for limit, name in TIERS if penalty <= limit), "Expensive")
 
 
-def _pareto(entries: dict[str, tuple[float | None, float | None]]) -> dict[str, bool]:
-    """Non-dominated models on (cost score, quality score), both higher-is-better."""
-
-    scored = {key: pair for key, pair in entries.items() if pair[0] is not None and pair[1] is not None}
-    return {
-        key: not any(
-            other != key
-            and scored[other][0] >= cost
-            and scored[other][1] >= quality
-            and (scored[other][0] > cost or scored[other][1] > quality)
-            for other in scored
-        )
-        for key, (cost, quality) in scored.items()
-    }
-
-
-# --- loading ---------------------------------------------------------------------------------
-
-
 def _load(data: Path) -> dict[str, Any]:
     def read(name: str):
         return json.loads((data / name).read_text())
 
     return {
         "scores": read("scores.json"),
-        "aa": read("aa_metrics.json"),
         "history": read("ranking_history_v1.5.json"),
         "report": read("aa_reconciliation_report.json"),
-        "coverage": read("coverage_matrix.json"),
         "tb4": read("tb4.json"),
         "livebench": read("livebench.json"),
-        "claims": read("provider_claims.json"),
         "deepswe": read("aa_deepswe.json"),
         "bugHunt": read("bug_hunt.json"),
-        "routes": load_plan_routes(data / "plan_cost_routes.json"),
+        "routes": read("plan_cost_routes.json"),
     }
 
 
-def _route_view(route: dict | None) -> dict | None:
+def dimensions() -> list[dict]:
+    """The value's dimensions: the cost score (fixed share) and the eleven quality leaves."""
+
+    quality_share = (100.0 - COST_WEIGHT_PCT) / 100.0
+    rows = [{
+        "key": COST_KEY, "label": "Cost", "fullLabel": "Cost (selected basis)", "category": "cost",
+        "weightPct": COST_WEIGHT_PCT, "priority": None, "higherBetter": True, "sourceUrl": None,
+    }]
+    for leaf in q.LEAVES:
+        rows.append({
+            "key": leaf.key, "label": leaf.label, "fullLabel": leaf.label, "category": GROUP_CATEGORY[leaf.group],
+            "weightPct": round(quality_share * leaf.weight, 4), "priority": leaf.weight, "higherBetter": True,
+            "sourceUrl": LEAF_INFO[leaf.key]["url"],
+        })
+    return rows
+
+
+def _route_view(route: dict | None, grade: str | None = None) -> dict | None:
     if route is None:
         return None
     return {
@@ -188,7 +184,7 @@ def _route_view(route: dict | None) -> dict | None:
         "planLabel": route.get("planLabel"),
         "planFeeUsd": route.get("planPriceUsd"),
         "valueMultiple": route["valueMultiple"],
-        "grade": evidence.route_grade(route.get("evidenceClass")),
+        "grade": ROUTE_GRADES[grade] if grade else evidence.route_grade(route.get("evidenceClass")),
         "evidenceLabel": plan_evidence_label(route),
         "sourceModel": route.get("sourceModel"),
         "sourceUrl": route.get("sourceUrl"),
@@ -196,51 +192,51 @@ def _route_view(route: dict | None) -> dict | None:
     }
 
 
-def _cost_view(fields: dict) -> dict:
+def _row_flags(row: dict) -> list[str]:
+    """Plain-language flags for one v3 row, in a fixed order."""
+
+    flags = []
+    if row["cost"]["subset"]:
+        flags.append("Subset cost: scored on its own workload; cross-workload ordering not identified")
+    if row["quality"]["provisional"]:
+        flags.append("Provisional quality: " + "; ".join(row["quality"]["provisionalReasons"]))
+    if row["cost"]["partialComponents"]:
+        flags.append("Partial cost component: AA marks tasks missing or declined")
+    if row.get("aaCostCaveat"):
+        flags.append("AA cost caveat: " + row["aaCostCaveat"])
+    return flags
+
+
+def pareto_set(rows: list[dict], workload: str, basis: str) -> set:
+    """Point-estimate Pareto set on one basis: main-workload rows no other row beats on both cost and quality.
+
+    Subset-cost rows sit on another workload, so their ordering against these rows is not identified (O17).
+    """
+
+    key = "api" if basis == "api" else "planScore"
+    points = {
+        row["id"]: (row[key]["costUsd"], row["quality"]["displayed"])
+        for row in rows
+        if row["cost"]["workload"] == workload and row[key]["costUsd"] is not None and row["quality"]["displayed"] is not None
+    }
     return {
-        "apiUsd": fields["apiCost"],
-        "apiUsdPerPoint": fields["apiCostPerPoint"],
-        "planUsdPerRun": fields["planCostPerRun"],
-        "planUsdPerPoint": fields["planCost"],
-        "planComparableUsdPerPoint": fields["planComparableCost"],
-        "fallback": fields["planCostFallback"],
-        "route": _route_view(fields["planRoute"]),
+        row_id for row_id, (cost, quality) in points.items()
+        if not any(c <= cost and qv >= quality and (c < cost or qv > quality) for other, (c, qv) in points.items() if other != row_id)
     }
 
 
-def _dimension_docs(source: dict, slug: str, weights: list[dict], normalized: dict, cost_dims: dict, inputs: dict) -> list[dict]:
-    """Every retained dimension in weight order for one model, including missing ones."""
+def _scenario_view(v3: dict) -> dict:
+    """S1 core shares per basis and row (rank 1, top 3, frontier), when the scenario outputs are current."""
 
-    context = {
-        "scores": inputs["scores"],
-        "aaSources": inputs["aa"]["models"].get(source["id"], {}).get("metricSources", {}),
-        "livebench": inputs["livebench"],
-        "tb4": inputs["tb4"],
-    }
-    docs = []
-    for weight in sorted(weights, key=lambda item: -item["weightPct"]):
-        key = weight["key"]
-        meta = evidence.DIMENSION_META[key]
-        value = evidence.raw_value(key, source)
-        proof = (
-            evidence.dimension_evidence(key, source, context)
-            if value is not None
-            else {"source": None, "observedAt": None, "evaluatedVariant": None, "note": None, "grade": "missing"}
-        )
-        doc = {
-            "key": key,
-            "label": weight["label"],
-            "category": meta["category"],
-            "weightPct": weight["weightPct"],
-            "value": value,
-            "unit": meta["unit"],
-            "normalized": cost_dims["api"] if key == COST_KEY else normalized.get(key),
-            **proof,
-        }
-        if key == COST_KEY:
-            doc["normalizedByBasis"] = dict(cost_dims)
-        docs.append(doc)
-    return docs
+    scenarios = v3.get("scenarios") or {}
+    result = {"api": {}, "plan": {}}
+    if scenarios.get("status") != "current":
+        return result
+    for basis in result:
+        for run in scenarios["results"][basis]:
+            if run["stratum"] == SCENARIO_STRATUM and not run["alternative"]:
+                result[basis] = {row_id: {key: shares[key]["share"] for key in ("top1", "top3", "frontier")} for row_id, shares in run["rows"].items()}
+    return result
 
 
 # --- bundle ----------------------------------------------------------------------------------
@@ -249,174 +245,276 @@ def _dimension_docs(source: dict, slug: str, weights: list[dict], normalized: di
 FRONTIER_TIER_KEYS = ("aaFrontierTier", "aaFrontierConfiguration", "aaFrontierIntelligenceGap", "aaFrontierFootnote")
 
 
+def _entry(source: dict, row: dict | None, quality_ranks: dict, frontier: dict, shares: dict, routes: dict, pareto: dict) -> dict:
+    """One ``rankings.json`` model entry (v3 values for ranked rows; nulls for unranked roster rows)."""
+
+    model_id = source["id"]
+    base = {
+        "slug": slugify(model_id),
+        "name": source["name"],
+        "shortName": source["shortName"],
+        "developer": source["developer"],
+        "aaUrl": source["aaUrl"],
+        "aaVariant": source.get("aaVariant"),
+        "rankingEligible": row is not None,
+        "exclusionReasons": list(source.get("rankingExclusionReasons") or []),
+        "intelligenceIndex": {"value": source.get("intelligenceIndex"), "status": source.get("intelligenceIndexStatus")},
+        "speed": source.get("speed"),
+        **{key: source.get(key) for key in FRONTIER_TIER_KEYS},
+    }
+    if row is None:
+        return {
+            **base,
+            "rank": {"api": None, "plan": None},
+            "overall": {"api": None, "plan": None},
+            "quality": None,
+            "qualityRank": None,
+            "dims": {COST_KEY: None, **{leaf.key: None for leaf in q.LEAVES}},
+            "costDims": {"api": None, "plan": None},
+            "raw": {leaf.key: None for leaf in q.LEAVES},
+            "coverage": {"pct": 0.0, "costAvailable": False, "missing": [leaf.label for leaf in q.LEAVES], "provisional": None, "provisionalReasons": []},
+            "cost": {"apiUsd": None, "planUsd": None, "fallback": None, "route": None, "subset": None, "partialComponents": [], "workload": None, "planFlags": []},
+            "grade": "missing",
+            "pareto": {"api": False, "plan": False},
+            "frontierStatus": {"api": None, "plan": None},
+            "scenario": {"api": None, "plan": None},
+            "flags": [],
+            "tier": None,
+        }
+    leaves = row["quality"]["leaves"]
+    audit = {item["leaf"]: item for item in row["quality"]["clipAudit"]}
+    plan = row["plan"]
+    route = routes.get((plan.get("routeId") or "").split("#")[0])
+    cost_available = row["api"]["costScore"] is not None
+    api_frontier = frontier.get(model_id)
+    return {
+        **base,
+        "rank": {"api": row["api"]["rank"], "plan": row["planScore"]["rank"]},
+        "overall": {"api": row["api"]["value"], "plan": row["planScore"]["value"]},
+        "quality": row["quality"]["displayed"],
+        "qualityRank": quality_ranks.get(model_id),
+        "dims": {COST_KEY: None, **{leaf.key: (leaves[leaf.key]["z"] if leaf.key in leaves else None) for leaf in q.LEAVES}},
+        "costDims": {"api": row["api"]["costScore"], "plan": row["planScore"]["costScore"]},
+        "raw": {leaf.key: (audit[leaf.key]["raw"] if leaf.key in audit else None) for leaf in q.LEAVES},
+        "coverage": {
+            "pct": round(100.0 * row["quality"]["coverage"], 2),
+            "costAvailable": cost_available,
+            "missing": [leaf.label for leaf in q.LEAVES if leaf.key not in leaves],
+            "provisional": row["quality"]["provisional"],
+            "provisionalReasons": row["quality"]["provisionalReasons"],
+        },
+        "cost": {
+            "apiUsd": row["api"]["costUsd"],
+            "planUsd": row["planScore"]["costUsd"],
+            "fallback": plan.get("fallback"),
+            "route": _route_view(route, plan.get("grade")),
+            "subset": row["cost"]["subset"],
+            "partialComponents": row["cost"]["partialComponents"],
+            "workload": row["cost"]["workload"],
+            "planFlags": plan["flags"],
+        },
+        # Every scored value is an owner or AA measurement (provider claims never enter); Plan routes grade separately.
+        "grade": "measured" if leaves else "missing",
+        "pareto": {basis: model_id in pareto[basis] for basis in BASES},
+        "frontierStatus": {"api": {"definite": api_frontier["definite"], "possible": api_frontier["possible"]} if api_frontier else None, "plan": None},
+        "scenario": {basis: shares[basis].get(model_id) for basis in ("api", "plan")},
+        "flags": _row_flags(row),
+        "tier": _tier(row["planScore"]["costScore"]),
+    }
+
+
 def build_bundle(data: Path = DATA) -> Bundle:
     inputs = _load(data)
     scores = inputs["scores"]
-    weights = scores["weights"]
+    v3 = scores["v3"]
     roster = scores["models"]
     slugs = [slugify(source["id"]) for source in roster]
     if len(set(slugs)) != len(slugs):
         raise ValueError("duplicate model slug in data/scores.json")
-    ranked = [source for source in roster if source.get("rankingEligible") is True]
-    if not ranked:
-        raise ValueError("no ranked models in data/scores.json")
-
-    all_fields = dict(zip((s["id"] for s in roster), build_cost_fields(roster, inputs["routes"])))
-    cohort_fields = dict(zip((s["id"] for s in ranked), build_cost_fields(ranked, inputs["routes"])))
+    rows = {row["id"]: row for row in v3["rows"]}
+    if not rows:
+        raise ValueError("no ranked models in the v3 section of data/scores.json")
     names = {source["id"]: source["name"] for source in roster}
-    non_cost = [w["key"] for w in weights if w["key"] != COST_KEY]
+    quality_ranks = competition_ranks({row_id: row["quality"]["displayed"] for row_id, row in rows.items()})
+    api_intervals = v3["intervals"]["api"]
+    frontier = api_intervals.get("frontier") or {}
+    shares = _scenario_view(v3)
+    routes = {route["id"]: route for route in inputs["routes"]["routes"]}
+    ranks = {basis: {row_id: row[key]["rank"] for row_id, row in rows.items()} for basis, key in (("api", "api"), ("plan", "planScore"))}
 
-    overall: dict[str, dict] = {"api": {}, "plan": {}}
-    for basis, score_key in (("api", "apiCostScore"), ("plan", "planCostScore")):
-        overall[basis] = {
-            source["id"]: composite_score(source["dims"], cohort_fields[source["id"]][score_key], weights) for source in ranked
-        }
-    tie_costs = {
-        basis: {source["id"]: cohort_fields[source["id"]][cost_key] for source in ranked}
-        for basis, cost_key in (("api", "apiCostPerPoint"), ("plan", "planComparableCost"))
-    }
-    ranks = {basis: rank_scores(overall[basis], names, tie_costs[basis]) for basis in overall}
-    pareto = {
-        basis: _pareto(
-            {
-                source["id"]: (cohort_fields[source["id"]][score_key], source.get("qualityScore"))
-                for source in ranked
-            }
-        )
-        for basis, score_key in (("api", "apiCostScore"), ("plan", "planCostScore"))
-    }
-
-    entries, docs = {}, {}
-    total_priority = sum(w["priority"] for w in weights if w["key"] != COST_KEY)
-    for source in roster:
-        model_id, slug = source["id"], slugify(source["id"])
-        is_ranked = source in ranked
-        cohort = cohort_fields.get(model_id, {})
-        cost_dims = {"api": cohort.get("apiCostScore"), "plan": cohort.get("planCostScore")}
-        normalized = source["dims"] if is_ranked else {}
-        dimension_docs = _dimension_docs(source, slug, weights, normalized, cost_dims, inputs)
-        present = [doc for doc in dimension_docs if doc["value"] is not None]
-        present_keys = {d["key"] for d in present}
-        available = sum(w["priority"] for w in weights if w["key"] != COST_KEY and w["key"] in present_keys)
-        coverage = {
-            "pct": coverage_pct(COST_KEY in present_keys, available, total_priority),
-            "costAvailable": COST_KEY in present_keys,
-            "availablePriority": available,
-            "totalPriority": total_priority,
-            "missing": [w["label"] for w in weights if not any(d["key"] == w["key"] for d in present)],
-        }
-        entries[slug] = {
-            "slug": slug,
-            "name": source["name"],
-            "shortName": source["shortName"],
-            "developer": source["developer"],
-            "aaUrl": source["aaUrl"],
-            "aaVariant": source.get("aaVariant"),
-            "rankingEligible": is_ranked,
-            "exclusionReasons": list(source.get("rankingExclusionReasons") or []),
-            "rank": {basis: ranks[basis].get(model_id) for basis in BASES},
-            "overall": {basis: overall[basis].get(model_id) for basis in BASES},
-            "quality": source.get("qualityScore"),
-            "qualityRank": source.get("qualityRank"),
-            "dims": {key: (normalized.get(key) if is_ranked else None) for key in [COST_KEY, *non_cost]} | {COST_KEY: None},
-            "costDims": cost_dims,
-            "raw": {key: evidence.raw_value(key, source) for key in non_cost},
-            "coverage": coverage,
-            "cost": _cost_view(all_fields[model_id]),
-            "intelligenceIndex": {"value": source.get("intelligenceIndex"), "status": source.get("intelligenceIndexStatus")},
-            "speed": source.get("speed"),
-            "grade": evidence.worst_grade(doc["grade"] for doc in dimension_docs),
-            "pareto": {basis: pareto[basis].get(model_id, False) for basis in BASES},
-            "tier": _tier(cost_dims["plan"]),
-            **{key: source.get(key) for key in FRONTIER_TIER_KEYS},
-        }
-        docs[slug] = dimension_docs
-
-    ordered = sorted(
-        entries.values(),
-        key=lambda entry: (entry["rank"]["plan"] is None, entry["rank"]["plan"] or 0, entry["name"]),
-    )
-    cost_weight = next(w["weightPct"] for w in weights if w["key"] == COST_KEY)
+    pareto = {basis: pareto_set(v3["rows"], v3["mainWorkload"], basis) for basis in BASES}
+    entries = {slugify(source["id"]): _entry(source, rows.get(source["id"]), quality_ranks, frontier, shares, routes, pareto) for source in roster}
+    ordered = sorted(entries.values(), key=lambda entry: (entry["rank"]["plan"] is None, entry["rank"]["plan"] or 0, entry["name"]))
     rankings = {
         "version": VERSION,
         "publishDate": DATE,
         "observedAt": scores["observedAt"],
+        "methodologyVersion": v3["methodologyVersion"],
+        "basketVersion": v3["basketVersion"],
         "bases": BASES,
         "defaultBasis": "plan",
-        "costWeightPct": cost_weight,
+        "costWeightPct": COST_WEIGHT_PCT,
+        "exchangeRate": {basis: {k: v3["exchangeRate"][basis][k] for k in ("valuePointsPerCostDoubling", "qualityPointsPerCostDoubling", "anchorRatio")} for basis in BASES},
+        "planExploratory": v3["identificationYield"]["exploratory"],
         "modelInclusion": model_inclusion(scores.get("frontierSelection"), roster),
-        "dimensions": [
-            {
-                "key": w["key"],
-                "label": w["label"],
-                "fullLabel": "Cost (selected basis)" if w["key"] == COST_KEY else w["label"],
-                "category": evidence.DIMENSION_META[w["key"]]["category"],
-                "weightPct": w["weightPct"],
-                "priority": w["priority"],
-                "higherBetter": w["higherBetter"],
-                "sourceUrl": evidence.dimension_url(w["key"]),
-            }
-            for w in weights
-        ],
+        "dimensions": dimensions(),
         "categories": CATEGORIES,
         "models": ordered,
         "picks": {basis: build_picks(ordered, basis, BASES) for basis in BASES},
-        "planMeta": {
-            **{k: v for k, v in route_summary(inputs["routes"], list(cohort_fields.values())).items() if k != "mixId"},
-            "totalModelCount": len(ranked),
-        },
     }
-
     current = {
         "version": VERSION,
         "dateIso": dt.datetime.strptime(DATE, "%B %d, %Y").date().isoformat(),
         "dateHuman": DATE,
-        "modelCount": len(ranked),
-        "dimensionCount": len(weights),
-        "ranks": {
-            source["id"]: {basis: ranks[basis][source["id"]] for basis in BASES} for source in ranked
-        },
+        "modelCount": len(rows),
+        "dimensionCount": len(rankings["dimensions"]),
+        "ranks": {row_id: {basis: ranks[basis][row_id] for basis in BASES} for row_id in rows},
     }
     bundle = Bundle(
         data=data,
+        extras={"method": _method_summary(v3, names)},
         rankings=rankings,
         models={},
-        plans=_plans(inputs, entries, slugs),
-        benchmarks=_benchmarks(inputs, rankings),
+        plans=_plans(inputs, entries, v3),
+        benchmarks=_benchmarks(inputs, v3),
         tb4=_tb4(inputs, roster),
         changelog=build_changelog(inputs["history"], current, names),
         livebench=_livebench(inputs),
     )
     bundle.models = {
-        slugify(source["id"]): _model_doc(source, entries[slugify(source["id"])], docs[slugify(source["id"])], inputs, current)
+        slugify(source["id"]): _model_doc(source, entries[slugify(source["id"])], rows.get(source["id"]), inputs, current, v3)
         for source in roster
     }
     return bundle
 
 
+def _method_summary(v3: dict, names: dict) -> dict:
+    """The methodology facts the pages quote: cost label, basket, anchors, exchange rate, streams and the bar."""
+
+    main = v3["mainWorkload"]
+    admission = v3["admission"]
+    scenarios = v3.get("scenarios") or {}
+    reference = (v3["barPolicy"]["referenceIds"] or [None])[0]
+    return {
+        "methodologyVersion": v3["methodologyVersion"],
+        "costLabel": v3["costBoundary"]["label"],
+        "basket": {
+            "version": v3["basketVersion"],
+            "admitted": [{"key": key, "label": basket.COMPONENT_LABELS.get(key, key)} for key in admission["admitted"]],
+            "pending": [{"key": key, "label": basket.COMPONENT_LABELS.get(key, key)} for key, item in admission["components"].items() if not item["admitted"]],
+        },
+        "anchorVersion": v3["anchorVersion"],
+        "anchors": {basis: {key: v3["workloads"][main]["anchors"][basis][key] for key in ("low", "high")} for basis in BASES},
+        "exchangeRate": v3["exchangeRate"],
+        "planExploratory": v3["identificationYield"]["exploratory"],
+        "streamDescriptions": scenarios.get("streamDescriptions", {}),
+        "notQuantified": scenarios.get("notQuantified", []),
+        "barReference": names.get(reference) if reference else None,
+        "barPolicy": f"{v3['barPolicy']['position']} of {v3['barPolicy']['populationRule']}",
+    }
+
+
 # --- per-model documents --------------------------------------------------------------------
 
 
-def _model_doc(source: dict, entry: dict, dimension_docs: list[dict], inputs: dict, current: dict) -> dict:
-    model_id = source["id"]
-    index = source.get("intelligenceIndex")
-    selected = entry["cost"]["route"]["id"] if entry["cost"]["route"] else None
-    plans = []
-    for route in inputs["routes"]["routes"]:
-        if model_id not in route["modelIds"] or route.get("requiredVariant") not in (None, source.get("aaVariant")):
-            continue
-        per_run = effective_cost(entry["cost"]["apiUsd"], route)
-        plans.append(
+def _leaf_docs(row: dict | None, inputs: dict) -> list[dict]:
+    """Every quality leaf for one model in weight order, with its source and evidence (missing ones included)."""
+
+    leaves = row["quality"]["leaves"] if row else {}
+    audit = {item["leaf"]: item for item in row["quality"]["clipAudit"]} if row else {}
+    observed = {
+        "deepswe": inputs["deepswe"].get("observedAt"),
+        "bugHunt": inputs["bugHunt"].get("snapshotDate"),
+        "terminalBench": (inputs["tb4"].get("observedAt") or "")[:10] or None,
+    }
+    docs = []
+    for leaf in sorted(q.LEAVES, key=lambda item: -item.weight):
+        present = leaf.key in leaves
+        detail = leaves.get(leaf.key, {})
+        variant = " / ".join(str(part) for part in (detail.get("configuration"), detail.get("agent") or detail.get("harness")) if part) or None
+        docs.append({
+            "key": leaf.key,
+            "label": leaf.label,
+            "category": CATEGORIES[GROUP_CATEGORY[leaf.group]],
+            "weightPct": round((100.0 - COST_WEIGHT_PCT) * leaf.weight / 100.0, 4),
+            "value": audit[leaf.key]["raw"] if present else None,
+            "decimals": 3 if "(0-1)" in LEAF_INFO[leaf.key]["unit"] else 1,
+            "unit": LEAF_INFO[leaf.key]["unit"],
+            "normalized": detail.get("z"),
+            "source": {"name": SOURCE_NAMES.get(leaf.key, AA_SOURCE), "url": LEAF_INFO[leaf.key]["url"]} if present else None,
+            "observedAt": (observed.get(leaf.key) or (inputs["scores"]["observedAt"] or "")[:10]) if present else None,
+            "evaluatedVariant": variant,
+            "note": f"Saturates the scoring anchor ({audit[leaf.key]['anchorPosition']})." if present and audit[leaf.key]["anchorPosition"] != "inside" else None,
+            "grade": "measured" if present else "missing",
+        })
+    return docs
+
+
+def _component_docs(row: dict | None) -> list[dict]:
+    if row is None:
+        return []
+    detail = row["cost"]["componentsDetail"]
+    return [
+        {
+            "key": key,
+            "label": basket.COMPONENT_LABELS.get(key, key),
+            "costUsd": detail[key]["costUsd"],
+            "completeness": detail[key]["completeness"],
+            "source": detail[key]["source"],
+            "admitted": key in row["cost"]["components"],
+        }
+        for key in basket.TARGET_COMPONENTS
+        if key in detail
+    ]
+
+
+def _plan_rows(row: dict | None, routes: dict) -> list[dict]:
+    """Every route-measurement pair naming the model, classified (E106), with its cost on this model's basket."""
+
+    if row is None:
+        return []
+    selected = row["plan"].get("routeId")
+    api = row["api"]["costUsd"]
+    result = []
+    for item in row["plan"]["admission"]:
+        route = routes[item["routeId"].split("#")[0]]
+        multiple = plan_routes.comparison_multiple(route)
+        result.append({
+            **{k: v for k, v in _route_view(route).items() if k != "sourceModel"},
+            "case": item["case"],
+            "officialDisplayEligible": item["officialDisplayEligible"],
+            "planIntervalEligible": item["planIntervalEligible"],
+            "usdPerRun": api / multiple if api is not None and multiple > 0 else None,
+            "selected": item["routeId"] == selected,
+        })
+    result.sort(key=lambda plan: (not plan["selected"], plan["usdPerRun"] is None, plan["usdPerRun"] or 0, plan["id"]))
+    return result
+
+
+def _scenario_doc(v3: dict, model_id: str) -> dict:
+    scenarios = v3.get("scenarios") or {}
+    if scenarios.get("status") != "current":
+        return {"status": scenarios.get("status"), "api": [], "plan": []}
+    result = {"status": "current"}
+    for basis in ("api", "plan"):
+        result[basis] = [
             {
-                **{k: v for k, v in _route_view(route).items() if k != "sourceModel"},
-                "usdPerRun": per_run,
-                "usdPerPoint": cost_per_index_point(per_run, index),
-                "selected": route["id"] == selected,
+                "stratum": run["stratum"],
+                "kernel": "endpoint-heavy" if run["alternative"] else "primary",
+                "targetProfile": run.get("targetProfile"),
+                **{key: run["rows"][model_id][key]["share"] for key in ("top1", "top3", "frontier")},
             }
-        )
-    plans.sort(key=lambda plan: (plan["usdPerPoint"] is None, plan["usdPerPoint"] or 0, plan["id"]))
-    rows = [row for row in inputs["report"]["frontier"] if row.get("valueRankModelId") == model_id]
-    on_frontier = bool(rows)
+            for run in scenarios["results"][basis]
+            if model_id in run["rows"]
+        ]
+    return result
+
+
+def _model_doc(source: dict, entry: dict, row: dict | None, inputs: dict, current: dict, v3: dict) -> dict:
+    model_id = source["id"]
+    routes = {route["id"]: route for route in inputs["routes"]["routes"]}
+    frontier_rows = [item for item in inputs["report"]["frontier"] if item.get("valueRankModelId") == model_id]
+    on_frontier = bool(frontier_rows)
     return {
         "slug": entry["slug"],
         "name": entry["name"],
@@ -433,15 +531,24 @@ def _model_doc(source: dict, entry: dict, dimension_docs: list[dict], inputs: di
             "grade": entry["grade"],
             "rankingEligible": entry["rankingEligible"],
             "exclusionReasons": entry["exclusionReasons"],
+            "flags": entry["flags"],
         },
-        "dimensions": dimension_docs,
-        "cost": entry["cost"],
-        "plans": plans,
+        "dimensions": _leaf_docs(row, inputs),
+        "cost": {
+            **entry["cost"],
+            "costScore": entry["costDims"],
+            "components": _component_docs(row),
+            "aaCostCaveat": row.get("aaCostCaveat") if row else None,
+            "selectionReason": row["plan"]["selectionReason"] if row else None,
+        },
+        "plans": _plan_rows(row, routes),
+        "scenarios": _scenario_doc(v3, model_id),
+        "intervals": {"api": entry["frontierStatus"]["api"], "plan": None},
         "history": model_history(inputs["history"], current, model_id),
         "frontier": {
             "onAaFrontier": on_frontier,
             "aaFrontierNote": (
-                f"On the observed Artificial Analysis Intelligence Index versus total cost frontier as {rows[0]['name']}."
+                f"On the observed Artificial Analysis Intelligence Index versus total cost frontier as {frontier_rows[0]['name']}."
                 if on_frontier
                 else "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier."
             ),
@@ -456,11 +563,13 @@ def _model_doc(source: dict, entry: dict, dimension_docs: list[dict], inputs: di
 # --- plans, benchmarks, TB4 -------------------------------------------------------------------
 
 
-def _plans(inputs: dict, entries: dict, slugs: list[str]) -> dict:
+def _plans(inputs: dict, entries: dict, v3: dict) -> dict:
     routes = inputs["routes"]
+    measured = {slugify(model_id): row for model_id, row in v3["measuredOnlyPlanView"]["rows"].items()}
     return {
         "asOf": routes.get("asOf"),
         "policy": routes["evidencePolicy"],
+        "identificationYield": v3["identificationYield"],
         "routes": [
             {
                 "id": route["id"],
@@ -484,123 +593,64 @@ def _plans(inputs: dict, entries: dict, slugs: list[str]) -> dict:
                 "slug": slug,
                 "name": entry["name"],
                 "rank": entry["rank"],
-                "intelligenceIndex": entry["intelligenceIndex"],
                 "apiUsd": entry["cost"]["apiUsd"],
-                "planUsdPerRun": entry["cost"]["planUsdPerRun"],
-                "planUsdPerPoint": entry["cost"]["planUsdPerPoint"],
+                "planUsd": entry["cost"]["planUsd"],
                 "fallback": entry["cost"]["fallback"],
                 "routeId": entry["cost"]["route"]["id"] if entry["cost"]["route"] else None,
+                "flags": entry["cost"]["planFlags"],
+                "measuredOnly": measured.get(slug),
             }
             for slug, entry in sorted(entries.items())
+            if entry["rankingEligible"]
         ],
         "workedExample": {"slugs": ["claude-opus-5-5", "gpt-6-1-sol"]},
     }
 
 
-def _benchmarks(inputs: dict, rankings: dict) -> dict:
-    scores, deepswe, bug_hunt = inputs["scores"], inputs["deepswe"], inputs["bugHunt"]
-    livebench, tb4, claims = inputs["livebench"], inputs["tb4"], inputs["claims"]["claims"]
-    dimension = {d["key"]: d for d in rankings["dimensions"]}
-    ranked = [m for m in rankings["models"] if m["rankingEligible"]]
+def _benchmarks(inputs: dict, v3: dict) -> dict:
+    tb4, deepswe, bug_hunt = inputs["tb4"], inputs["deepswe"], inputs["bugHunt"]
+    rows = v3["rows"]
 
     def coverage(key: str) -> dict:
-        return {"available": sum(1 for m in ranked if m["raw"].get(key) is not None), "cohort": len(ranked)}
+        return {"available": sum(1 for row in rows if key in row["quality"]["leaves"]), "cohort": len(rows)}
 
-    aa_keys = [key for key in dimension if key not in AA_ONLY_EXCLUDED]
-    sources = [
-        {
-            "id": "aa-intelligence-index",
-            "name": "Artificial Analysis Intelligence Index",
-            "owner": "Artificial Analysis",
-            "version": scores["benchmarkVersion"],
-            "url": BENCHMARK_URLS["AA Intelligence Index"],
-            "observedAt": scores["observedAt"][:10],
-            "role": "primary dimensions",
-            "weightPct": round(sum(dimension[key]["weightPct"] for key in aa_keys), 4),
-            "coverage": coverage("intelligenceIndex"),
-            "unit": "Index points and component scores",
-            "notes": f"Cost, speed, Intelligence Index and its components for the selected variants. {inputs['aa']['providerClaimPolicy']}",
-        },
-        {
-            "id": "deepswe",
-            "name": scores["deepsweBenchmarkVersion"],
-            "owner": deepswe["source"]["publisher"],
-            "version": f"Coding Agent Index {deepswe['source']['indexVersion']}",
-            "url": deepswe["source"]["url"],
-            "observedAt": deepswe["observedAt"],
-            "role": "primary dimension",
-            "weightPct": dimension["deepswePassAt1"]["weightPct"],
-            "coverage": coverage("deepswePassAt1"),
-            "unit": "% pass@1",
-            "notes": deepswe["source"]["methodology"],
-        },
-        {
-            "id": "bug-hunt",
-            "name": "Bug Hunt Bench",
-            "owner": "Bug Hunt Bench benchmark owner",
-            "version": bug_hunt["benchmarkVersion"],
-            "url": bug_hunt["sources"]["homepage"],
-            "observedAt": bug_hunt["snapshotDate"],
-            "role": "primary dimension",
-            "weightPct": dimension["bugHuntFixedOf105"]["weightPct"],
-            "coverage": coverage("bugHuntFixedOf105"),
-            "unit": bug_hunt["scoreUnit"],
-            "notes": bug_hunt["matchingPolicy"],
-        },
-        {
-            "id": "livebench",
-            "name": "LiveBench",
-            "owner": livebench["source"]["publisher"],
-            "version": f"release {livebench['release']}",
-            "url": livebench["source"]["homepage"],
-            "observedAt": livebench["observedAt"][:10],
-            "role": "primary dimension",
-            "weightPct": dimension["livebenchInstructionFollowing"]["weightPct"],
-            "coverage": coverage("livebenchInstructionFollowing"),
-            "unit": "Instruction Following score",
-            "notes": f"Release data pinned to commit {livebench['source']['releaseDataCommit']}.",
-        },
-        {
-            "id": "terminal-bench-4",
-            "name": "Terminal-Bench 4.0",
-            "owner": tb4["source"]["publisher"],
-            "version": tb4["version"],
-            "url": tb4["source"]["targetUrl"],
-            "observedAt": tb4["observedAt"][:10],
-            "role": "primary dimension",
-            "weightPct": dimension["terminalBenchV4"]["weightPct"],
-            "coverage": coverage("terminalBenchV4"),
-            "unit": "% resolved",
-            "notes": tb4["providerClaimPolicy"],
-        },
-        {
-            "id": "provider-claims",
-            "name": "Provider claims",
-            "owner": "Model providers",
-            "version": inputs["claims"]["schemaVersion"],
-            "url": None,
-            "observedAt": max(claim["publishedOn"] for claim in claims),
-            "role": "fallback evidence",
-            "weightPct": None,
-            "coverage": {"available": sum(1 for c in claims if c["eligibleForRanking"] is True), "cohort": len(claims)},
-            "unit": "claimed value",
-            "notes": inputs["claims"]["policy"],
-        },
-    ]
+    owners = {
+        "deepswe": ("Artificial Analysis Coding Agent Index", deepswe.get("observedAt")),
+        "bugHunt": ("Bug Hunt Bench benchmark owner", bug_hunt.get("snapshotDate")),
+        "terminalBench": (tb4["source"]["publisher"], (tb4.get("observedAt") or "")[:10] or None),
+    }
+    sources = []
+    for leaf in q.LEAVES:
+        owner, observed = owners.get(leaf.key, ("Artificial Analysis", (inputs["scores"]["observedAt"] or "")[:10]))
+        sources.append({
+            "id": leaf.key,
+            "name": leaf.label,
+            "owner": owner,
+            "url": LEAF_INFO[leaf.key]["url"],
+            "observedAt": observed,
+            "role": f"quality leaf ({CATEGORIES[GROUP_CATEGORY[leaf.group]]})",
+            "weightPct": round((100.0 - COST_WEIGHT_PCT) * leaf.weight / 100.0, 4),
+            "coverage": coverage(leaf.key),
+            "unit": LEAF_INFO[leaf.key]["unit"],
+            "execution": "AA-run" if leaf.source == "aa" else "independent",
+            "notes": LEAF_NOTES.get(leaf.key),
+        })
+    admission = v3["admission"]
     report = inputs["report"]
     return {
         "sources": sources,
-        "aaComponents": [
-            {"name": item["label"], "weightPct": item["weightPct"], "url": BENCHMARK_URLS.get(item["label"], AA_METHODOLOGY_URL)}
-            for item in inputs["aa"]["primaryEvaluations"]
-        ],
-        "coverageMatrix": {
-            "cohort": inputs["coverage"]["cohort"],
-            "cohortN": inputs["coverage"]["cohortN"],
-            "observedAt": inputs["coverage"]["observedAt"],
-            "note": inputs["coverage"]["note"],
-            "fields": inputs["coverage"]["fields"],
+        "basket": {
+            "version": v3["basketVersion"],
+            "admitted": [{"key": key, "label": basket.COMPONENT_LABELS.get(key, key)} for key in admission["admitted"]],
+            "pending": [
+                {"key": key, "label": basket.COMPONENT_LABELS.get(key, key), "covered": item["covered"], "ranked": item["ranked"]}
+                for key, item in admission["components"].items()
+                if not item["admitted"]
+            ],
+            "referencePanelSize": admission["jointCovered"],
+            "requiredPanelSize": admission["requiredPanelSize"],
         },
+        "qualitySourceShares": v3["diagnostics"]["qualitySourceShares"],
         "frontier": {
             "status": report["completeness"]["status"],
             "checkedAt": report["checkedAt"],
@@ -627,7 +677,7 @@ def _benchmarks(inputs: dict, rankings: dict) -> dict:
 
 
 def _livebench(inputs: dict) -> dict:
-    """Matched LiveBench rows (roster and supplemental) for the cost-versus-score chart, cheapest first."""
+    """Matched LiveBench rows (retired as a quality leaf, owner decision O26), cheapest first."""
 
     document = inputs["livebench"]
     frontier = set(document.get("pareto", []))
@@ -674,26 +724,22 @@ def _tb4(inputs: dict, roster: list[dict]) -> dict:
 
 
 def _cost_label(entry: dict, basis: str) -> str:
-    cost = entry["cost"]
-    if basis == "api":
-        return f"${cost['apiUsd']:,.2f} per Index run"
-    return f"${cost['planComparableUsdPerPoint']:,.2f} per Index point"
+    value = entry["cost"]["apiUsd"] if basis == "api" else entry["cost"]["planUsd"]
+    return "no cost data" if value is None else f"${value:,.2f} per basket run"
 
 
 def index_page(bundle: Bundle) -> dict:
     rankings = bundle.rankings
     ranked = [m for m in rankings["models"] if m["rankingEligible"]]
     by_slug = {m["slug"]: m for m in rankings["models"]}
-    quality = min(ranked, key=lambda m: m["qualityRank"])
+    quality = min((m for m in ranked if m["qualityRank"] is not None), key=lambda m: (m["qualityRank"], m["name"]))
     headline = {}
     for basis, picks in rankings["picks"].items():
         value = by_slug[picks["value"]["slug"]]
-        lead = f"{value['name']} leads the {rankings['bases'][basis]['label']} at {value['overall'][basis]:.1f}"
-        headline[basis] = (
-            f"{lead} and also leads on quality."
-            if value is quality
-            else f"{lead}; {quality['name']} leads on quality."
-        )
+        # O17 and the provisional rule: a leader scored on a subset workload or with provisional quality says so.
+        caveats = [label for flag, label in ((value["cost"]["subset"], "subset cost"), (value["coverage"]["provisional"], "provisional quality")) if flag]
+        lead = f"{value['name']} leads the {rankings['bases'][basis]['label']} at {value['overall'][basis]:.1f}" + (f" ({', '.join(caveats)})" if caveats else "")
+        headline[basis] = f"{lead} and also leads on quality." if value is quality else f"{lead}; {quality['name']} leads on quality."
     return {
         "headline": headline,
         "picks": rankings["picks"],
@@ -712,6 +758,7 @@ def index_page(bundle: Bundle) -> dict:
                 "coveragePct": m["coverage"]["pct"],
                 "coverage": m["coverage"],
                 "tier": m["tier"],
+                "flags": m["flags"],
             }
             for m in ranked
         ],
@@ -721,12 +768,13 @@ def index_page(bundle: Bundle) -> dict:
                 {
                     "slug": m["slug"],
                     "name": m["name"],
-                    "x": m["cost"]["apiUsd"] if basis == "api" else m["cost"]["planComparableUsdPerPoint"],
+                    "x": m["cost"]["apiUsd"] if basis == "api" else m["cost"]["planUsd"],
                     "y": m["quality"],
                     "pareto": m["pareto"][basis],
                     "costLabel": _cost_label(m, basis),
                 }
                 for m in ranked
+                if (m["cost"]["apiUsd"] if basis == "api" else m["cost"]["planUsd"]) is not None
             ]
             for basis in rankings["bases"]
         },
@@ -735,7 +783,7 @@ def index_page(bundle: Bundle) -> dict:
 
 
 COLUMN_ORDER = (
-    ("rank", "Rank"), ("name", "Model"), ("overall", "Overall"), ("quality", "Quality"), ("cost", "Cost"),
+    ("rank", "Rank"), ("name", "Model"), ("overall", "Value"), ("quality", "Quality"), ("cost", "Cost"),
     ("grade", "Evidence"), ("coverage", "Coverage"), ("developer", "Developer"), ("qualityRank", "Quality rank"),
     ("speed", "Speed"), ("ii", "Intelligence Index"),
 )
@@ -798,10 +846,8 @@ def plans_page(bundle: Bundle) -> dict:
                 "valueMultiple": route["valueMultiple"],
                 "grade": route["grade"],
                 "evidenceLabel": route["evidenceLabel"],
-                "indexValue": entry["intelligenceIndex"]["value"],
                 "apiUsd": entry["cost"]["apiUsd"],
-                "planUsdPerRun": entry["cost"]["planUsdPerRun"],
-                "planUsdPerPoint": entry["cost"]["planUsdPerPoint"],
+                "planUsd": entry["cost"]["planUsd"],
             }
         )
     providers: dict[str, list] = {}
@@ -823,71 +869,69 @@ def changelog_page(bundle: Bundle) -> dict:
 
 
 FAQ_TEMPLATE = (
-    ("How is the overall score calculated?", "Cost carries a fixed {cost:.0f}% of the score and quality the rest. The cost score compares USD per Intelligence Index point on a log scale, so the cheapest model scores 100, the dearest 0, and equal cost ratios count equally. Each quality dimension is rank-normalised to 0-100 across the ranked cohort, multiplied by its weight and divided by the quality weights that are available for that model."),
-    ("What happens when a benchmark has no result for a model?", "The dimension is dropped for that model and the remaining quality weights are renormalised; cost keeps its fixed share. Nothing is filled in, and the gap is shown on the model page."),
-    ("What is the difference between the API ranking and the Plan ranking?", "Both rank on token efficiency: what it costs to run the Artificial Analysis Intelligence Index, per Index point. The API ranking prices the run at API rates. The Plan ranking also divides by the best eligible subscription Value Multiple, the API-priced usage a plan delivers per dollar of fee."),
-    ("What do the evidence grades mean?", "Measured values come from the benchmark owner or a controlled account measurement. Claims come from the model provider, estimates are owner estimates or user-reported projections, and assumptions are explicitly authorised stand-ins."),
-    ("Why is a model not ranked?", "Ranked models need an exact-variant DeepSWE and Bug Hunt result or a required place on the Artificial Analysis frontier. Unranked models still have pages with every value we hold."),
+    ("How is the value score calculated?", "Cost carries a fixed {cost:.0f}% of the value score and quality the rest. The cost score compares what each configuration costs to run the SDLC cost basket once, on a log scale against frozen anchors, so equal cost ratios count equally. Quality is the weighted mean of eleven benchmark leaves on fixed 0-100 anchors."),
+    ("What happens when a benchmark has no result for a model?", "The leaf stays missing: quality is averaged over the leaves observed for that exact configuration, nothing is filled in, and the coverage and any provisional flag are shown. A configuration without a cost gets no value score."),
+    ("What is the difference between the API ranking and the Plan ranking?", "Both price the same SDLC basket. The API ranking uses Artificial Analysis' cost at API rates. The Plan ranking divides it by the selected subscription route's Value Multiple, the API-priced usage a plan delivers per dollar of fee at full utilisation; a model without an admitted route falls back to API cost, flagged."),
+    ("What do the evidence grades mean?", "Measured values come from the benchmark owner or a controlled account measurement. Estimates are concordant end-user reports, and assumptions are owner-authorised transfers of one model's measured multiple to another."),
+    ("Why is a model not ranked?", "The ranked cohort is fixed policy: configurations on Artificial Analysis' Intelligence-versus-cost frontier or near it. Other models still have pages with what we hold."),
 )
 
 LIMITATIONS = (
-    "Rank and cost scores are relative to the ranked cohort and change when the cohort changes.",
-    "Public benchmark displays are rounded, so small differences between models are not meaningful.",
-    "Subscription value multiples are projections or assumptions, not guarantees of what a plan delivers.",
-    "Results are never transferred between model versions or reasoning efforts; missing coverage lowers confidence.",
-    "Cost per Index point assumes the Artificial Analysis token mix, not your own workload.",
+    "Cost is the contestant-model API token cost of AA's runs, not total agent or workflow operating cost.",
+    "Cost scores use frozen anchors; a new anchor version is a published migration, never a silent change.",
+    "The basket is AA's SDLC-relevant evaluations at AA's token mix, not your own workload.",
+    "Results are never transferred between model versions or reasoning efforts; missing evidence stays missing.",
+    "Published values are rounded; interval outputs and scenario shares show which differences the evidence supports, and benchmark run-to-run noise is not yet quantified.",
 )
+EXPLORATORY_LIMITATION = "Subscription Value Multiples are measured on their own workloads; none is yet identified on the basket, so the Plan ranking is exploratory."
 
 
 def methodology_page(bundle: Bundle) -> dict:
     rankings = bundle.rankings
-    ranked = sorted((m for m in rankings["models"] if m["rank"]["plan"] is not None), key=lambda m: m["rank"]["plan"])
+    ranked = sorted((m for m in rankings["models"] if m["rank"]["plan"] is not None), key=lambda m: (m["rank"]["plan"], m["name"]))
     chosen = next((m for m in ranked if m["coverage"]["pct"] < 100), ranked[0])
-    dimensions = rankings["dimensions"]
-    normalized = {d["key"]: (chosen["costDims"]["plan"] if d["key"] == COST_KEY else chosen["dims"][d["key"]]) for d in dimensions}
-    available = sum(d["weightPct"] for d in dimensions if normalized[d["key"]] is not None)
-    quality_available = sum(d["weightPct"] for d in dimensions if d["key"] != COST_KEY and normalized[d["key"]] is not None)
-    available_priority = sum(d["priority"] for d in dimensions if d["key"] != COST_KEY and normalized[d["key"]] is not None)
-    cost_share = rankings["costWeightPct"] if normalized.get(COST_KEY) is not None else 0.0
+    quality_share = 100.0 - rankings["costWeightPct"]
+    observed = [d for d in rankings["dimensions"] if d["key"] != COST_KEY and chosen["dims"][d["key"]] is not None]
+    observed_priority = sum(d["priority"] for d in observed)
     rows = []
-    for d in dimensions:
-        value = normalized[d["key"]]
+    for d in rankings["dimensions"]:
+        value = chosen["costDims"]["plan"] if d["key"] == COST_KEY else chosen["dims"][d["key"]]
         included = value is not None
         if not included:
             effective = 0.0
         elif d["key"] == COST_KEY:
-            effective = cost_share
+            effective = rankings["costWeightPct"]
         else:
-            effective = round((100 - cost_share) * d["weightPct"] / quality_available, 4)
-        rows.append(
-            {
-                "key": d["key"],
-                "label": d["label"],
-                "weightPct": d["weightPct"],
-                "normalized": value,
-                "included": included,
-                "effectiveWeightPct": effective,
-                "contribution": round((value or 0.0) * effective / 100, 3),
-            }
-        )
+            effective = round(quality_share * d["priority"] / observed_priority, 4)
+        rows.append({
+            "key": d["key"],
+            "label": d["label"],
+            "weightPct": d["weightPct"],
+            "normalized": value,
+            "included": included,
+            "effectiveWeightPct": effective,
+            "contribution": round((value or 0.0) * effective / 100, 3),
+        })
     return {
-        "dimensions": dimensions,
+        "method": bundle.extras["method"],
+        "dimensions": rankings["dimensions"],
         "costWeightPct": rankings["costWeightPct"],
+        "exchangeRate": rankings["exchangeRate"],
+        "basketVersion": rankings["basketVersion"],
         "modelInclusion": rankings["modelInclusion"],
-        "weights": {d["key"]: d["weightPct"] for d in dimensions},
+        "weights": {d["key"]: d["weightPct"] for d in rankings["dimensions"]},
         "workedExample": {
             "slug": chosen["slug"],
             "name": chosen["name"],
             "basis": "plan",
             "overall": chosen["overall"]["plan"],
-            "availableWeightPct": round(available, 4),
-            "availablePriority": available_priority,
-            "totalPriority": sum(d["priority"] for d in dimensions if d["key"] != COST_KEY),
+            "qualityCoveragePct": chosen["coverage"]["pct"],
             "steps": rows,
             "missing": [row["label"] for row in rows if not row["included"]],
         },
-        "faq": [{"q": q, "a": a.format(cost=rankings["costWeightPct"])} for q, a in FAQ_TEMPLATE],
-        "limitations": list(LIMITATIONS),
+        "faq": [{"q": question, "a": answer.format(cost=rankings["costWeightPct"])} for question, answer in FAQ_TEMPLATE],
+        "limitations": [*LIMITATIONS, *([EXPLORATORY_LIMITATION] if rankings["planExploratory"] else [])],
+        "methodologyUrl": AA_METHODOLOGY_URL,
     }
 
 
@@ -897,12 +941,12 @@ def data_page(bundle: Bundle) -> dict:
 
     sample = next(iter(bundle.models.values()))
     files = [
-        ("/data/rankings.json", "Every roster model with scores, ranks, cost and evidence on both bases.", schema(bundle.rankings)),
-        ("/data/models/<slug>.json", "One document per roster model with every dimension, source, plan route and history.", schema(sample)),
-        ("/data/plans.json", "Subscription routes, their evidence and the full candidate cost comparison.", schema(bundle.plans)),
-        ("/data/benchmarks.json", "Benchmark source registry, coverage matrix and the Artificial Analysis frontier.", schema(bundle.benchmarks)),
+        ("/data/rankings.json", "Every roster model with v3 value scores, ranks, basket cost and evidence on both bases.", schema(bundle.rankings)),
+        ("/data/models/<slug>.json", "One document per roster model with every quality leaf, its source, the cost basket, plan routes, scenario shares and history.", schema(sample)),
+        ("/data/plans.json", "Subscription routes, their evidence and every candidate's API and Plan basket cost.", schema(bundle.plans)),
+        ("/data/benchmarks.json", "Quality-leaf sources and coverage, the admitted cost basket and the Artificial Analysis frontier.", schema(bundle.benchmarks)),
         ("/data/benchmarks/terminal-bench-4.json", "Terminal-Bench 4.0 official rows, provider claims and cohort mapping.", schema(bundle.tb4)),
         ("/data/changelog.json", "Versions, newest first, with recorded ranks and rank changes between consecutive releases.", schema(bundle.changelog)),
-        ("/data/livebench.json", "Matched LiveBench rows with overall score, instruction following and cost per successful task.", schema(bundle.livebench)),
+        ("/data/livebench.json", "Matched LiveBench rows (no longer scored; owner decision O26), with cost per successful task.", schema(bundle.livebench)),
     ]
     return {"files": [{"path": path, "description": description, "schema": shape} for path, description, shape in files]}

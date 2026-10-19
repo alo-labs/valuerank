@@ -22,15 +22,19 @@
     "qualityRank": 2,
     "coverage": {
       "pct": 88.64,
-      "availablePriority": 117,
-      "totalPriority": 132,
+      "costAvailable": true,
       "missing": [
         "Terminal-Bench 4.0"
-      ]
+      ],
+      "provisional": false,
+      "provisionalReasons": []
     },
     "grade": "measured",
     "rankingEligible": true,
-    "exclusionReasons": []
+    "exclusionReasons": [],
+    "flags": [
+      "Subset cost: scored on its own workload; cross-workload ordering not identified"
+    ]
   },
   "dimensions": [
     {
@@ -48,7 +52,8 @@
       },
       "observedAt": "2030-01-01",
       "evaluatedVariant": "Codex / Alpha / max",
-      "note": "Exact owner row."
+      "note": "Exact owner row.",
+      "decimals": 1
     },
     {
       "key": "tb4",
@@ -62,15 +67,13 @@
       "source": null,
       "observedAt": null,
       "evaluatedVariant": null,
-      "note": "No eligible row."
+      "note": "No eligible row.",
+      "decimals": 1
     }
   ],
   "cost": {
     "apiUsd": 1081.55,
-    "apiUsdPerPoint": 20.802,
-    "planUsdPerRun": 100.4,
-    "planUsdPerPoint": 1.931,
-    "planComparableUsdPerPoint": 1.931,
+    "planUsd": 100.4,
     "fallback": null,
     "route": {
       "id": "r1",
@@ -82,7 +85,37 @@
       "sourceModel": "Alpha <b>x</b> One",
       "sourceUrl": "https://example.test/src",
       "sourceDate": "2030-01-01"
-    }
+    },
+    "subset": false,
+    "partialComponents": [],
+    "workload": "abc123",
+    "planFlags": [
+      "workload-unmatched"
+    ],
+    "costScore": {
+      "api": 70.0,
+      "plan": 80.0
+    },
+    "components": [
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "costUsd": 30.4,
+        "completeness": "complete",
+        "source": "AA Intelligence Index evaluation cost",
+        "admitted": true
+      },
+      {
+        "key": "frontiercode",
+        "label": "FrontierCode",
+        "costUsd": 81.0,
+        "completeness": "complete",
+        "source": "AA cost chart",
+        "admitted": false
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "only remaining eligible route"
   },
   "plans": [
     {
@@ -95,8 +128,10 @@
       "sourceUrl": "https://example.test/src",
       "sourceDate": "2030-01-01",
       "usdPerRun": 100.4,
-      "usdPerPoint": 1.931,
-      "selected": true
+      "selected": true,
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false
     }
   ],
   "history": [
@@ -209,18 +244,16 @@
         },
         "coverage": {
           "pct": 88.64,
-          "availablePriority": 117,
-          "totalPriority": 132,
+          "costAvailable": true,
           "missing": [
             "Terminal-Bench 4.0"
-          ]
+          ],
+          "provisional": false,
+          "provisionalReasons": []
         },
         "cost": {
           "apiUsd": 1081.55,
-          "apiUsdPerPoint": 20.802,
-          "planUsdPerRun": 100.4,
-          "planUsdPerPoint": 1.931,
-          "planComparableUsdPerPoint": 1.931,
+          "planUsd": 100.4,
           "fallback": null,
           "route": {
             "id": "r1",
@@ -232,7 +265,13 @@
             "sourceModel": "Alpha <b>x</b> One",
             "sourceUrl": "https://example.test/src",
             "sourceDate": "2030-01-01"
-          }
+          },
+          "subset": false,
+          "partialComponents": [],
+          "workload": "abc123",
+          "planFlags": [
+            "workload-unmatched"
+          ]
         },
         "intelligenceIndex": {
           "value": 52.0,
@@ -244,7 +283,8 @@
           "api": true,
           "plan": true
         },
-        "tier": "Near-Budget"
+        "tier": "Near-Budget",
+        "flags": []
       },
       {
         "slug": "beta-two",
@@ -278,18 +318,16 @@
         },
         "coverage": {
           "pct": 88.64,
-          "availablePriority": 117,
-          "totalPriority": 132,
+          "costAvailable": true,
           "missing": [
             "Terminal-Bench 4.0"
-          ]
+          ],
+          "provisional": false,
+          "provisionalReasons": []
         },
         "cost": {
           "apiUsd": 900.0,
-          "apiUsdPerPoint": 17.31,
-          "planUsdPerRun": 100.4,
-          "planUsdPerPoint": 1.931,
-          "planComparableUsdPerPoint": 1.931,
+          "planUsd": 100.4,
           "fallback": null,
           "route": {
             "id": "r1",
@@ -301,7 +339,13 @@
             "sourceModel": "Beta Two",
             "sourceUrl": "https://example.test/src",
             "sourceDate": "2030-01-01"
-          }
+          },
+          "subset": false,
+          "partialComponents": [],
+          "workload": "abc123",
+          "planFlags": [
+            "workload-unmatched"
+          ]
         },
         "intelligenceIndex": {
           "value": 52.0,
@@ -313,7 +357,8 @@
           "api": true,
           "plan": true
         },
-        "tier": "Near-Budget"
+        "tier": "Near-Budget",
+        "flags": []
       },
       {
         "slug": "gamma-three",
@@ -347,18 +392,16 @@
         },
         "coverage": {
           "pct": 88.64,
-          "availablePriority": 117,
-          "totalPriority": 132,
+          "costAvailable": true,
           "missing": [
             "Terminal-Bench 4.0"
-          ]
+          ],
+          "provisional": false,
+          "provisionalReasons": []
         },
         "cost": {
           "apiUsd": 500.0,
-          "apiUsdPerPoint": 9.617,
-          "planUsdPerRun": 100.4,
-          "planUsdPerPoint": 1.931,
-          "planComparableUsdPerPoint": 1.931,
+          "planUsd": 100.4,
           "fallback": null,
           "route": {
             "id": "r1",
@@ -370,7 +413,13 @@
             "sourceModel": "Gamma Three",
             "sourceUrl": "https://example.test/src",
             "sourceDate": "2030-01-01"
-          }
+          },
+          "subset": false,
+          "partialComponents": [],
+          "workload": "abc123",
+          "planFlags": [
+            "workload-unmatched"
+          ]
         },
         "intelligenceIndex": {
           "value": 52.0,
@@ -382,7 +431,8 @@
           "api": true,
           "plan": true
         },
-        "tier": "Near-Budget"
+        "tier": "Near-Budget",
+        "flags": []
       },
       {
         "slug": "delta-four",
@@ -418,18 +468,16 @@
         },
         "coverage": {
           "pct": 88.64,
-          "availablePriority": 117,
-          "totalPriority": 132,
+          "costAvailable": true,
           "missing": [
             "Terminal-Bench 4.0"
-          ]
+          ],
+          "provisional": false,
+          "provisionalReasons": []
         },
         "cost": {
           "apiUsd": null,
-          "apiUsdPerPoint": null,
-          "planUsdPerRun": 100.4,
-          "planUsdPerPoint": 1.931,
-          "planComparableUsdPerPoint": 1.931,
+          "planUsd": 100.4,
           "fallback": null,
           "route": {
             "id": "r1",
@@ -441,7 +489,13 @@
             "sourceModel": "Delta Four",
             "sourceUrl": "https://example.test/src",
             "sourceDate": "2030-01-01"
-          }
+          },
+          "subset": false,
+          "partialComponents": [],
+          "workload": "abc123",
+          "planFlags": [
+            "workload-unmatched"
+          ]
         },
         "intelligenceIndex": {
           "value": 52.0,
@@ -453,7 +507,8 @@
           "api": true,
           "plan": true
         },
-        "tier": "Near-Budget"
+        "tier": "Near-Budget",
+        "flags": []
       }
     ],
     "picks": {
@@ -497,5 +552,35 @@
   "key": "model",
   "scripts": [
     "/assets/js/pages/static.js"
-  ]
+  ],
+  "scenarios": {
+    "status": "current",
+    "api": [
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "top1": 0.25,
+        "top3": 0.9,
+        "frontier": 0.5
+      }
+    ],
+    "plan": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "top1": 0.6,
+        "top3": 1.0,
+        "frontier": 1.0
+      }
+    ]
+  },
+  "intervals": {
+    "api": {
+      "definite": "certified",
+      "possible": "certified"
+    },
+    "plan": null
+  }
 }

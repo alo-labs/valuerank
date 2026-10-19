@@ -1,18 +1,56 @@
 {
   "sources": [
-    {"id": "aa-intelligence-index", "name": "Artificial Analysis Intelligence Index", "owner": "Artificial Analysis", "version": "v4.3.2", "url": "https://example.test/aa", "observedAt": "2026-10-07", "role": "primary dimensions", "weightPct": 57.5759, "coverage": {"available": 3, "cohort": 3}, "unit": "Index points", "notes": "Fixture source."},
-    {"id": "terminal-bench-4", "name": "Terminal-Bench 4.0", "owner": "Terminal-Bench / Harbor", "version": "4.0", "url": "https://example.test/tb4", "observedAt": "2026-10-07", "role": "supplemental", "weightPct": 0, "coverage": {"available": 1, "cohort": 3}, "unit": "resolution rate", "notes": "Fixture source."}
+    {
+      "id": "aa-intelligence-index",
+      "name": "Artificial Analysis Intelligence Index",
+      "owner": "Artificial Analysis",
+      "version": "v4.3.2",
+      "url": "https://example.test/aa",
+      "observedAt": "2026-10-07",
+      "role": "primary dimensions",
+      "weightPct": 57.5759,
+      "coverage": {
+        "available": 3,
+        "cohort": 3
+      },
+      "unit": "Index points",
+      "notes": "Fixture source."
+    },
+    {
+      "id": "terminal-bench-4",
+      "name": "Terminal-Bench 4.0",
+      "owner": "Terminal-Bench / Harbor",
+      "version": "4.0",
+      "url": "https://example.test/tb4",
+      "observedAt": "2026-10-07",
+      "role": "supplemental",
+      "weightPct": 0,
+      "coverage": {
+        "available": 1,
+        "cohort": 3
+      },
+      "unit": "resolution rate",
+      "notes": "Fixture source."
+    }
   ],
-  "aaComponents": [
-    {"name": "AA-Briefcase", "weightPct": 15, "url": "https://example.test/briefcase"},
-    {"name": "AA-LCR", "weightPct": 10, "url": "https://example.test/lcr"},
-    {"name": "HLE", "weightPct": 12, "url": "https://example.test/hle"}
-  ],
-  "coverageMatrix": {
-    "cohort": "Fixture cohort of three models",
-    "cohortN": 3,
-    "observedAt": "2026-10-07T17:23:20Z",
-    "note": "Fixture coverage matrix.",
-    "fields": {}
+  "basket": {
+    "version": "SDLC basket v1",
+    "admitted": [
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase"
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode"
+      },
+      {
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index"
+      }
+    ],
+    "pending": [],
+    "referencePanelSize": 3,
+    "requiredPanelSize": 2
   }
 }

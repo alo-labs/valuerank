@@ -52,39 +52,37 @@
 <header class="page-head">
   <p class="eyebrow">Subscription value &middot; as of 2026-10-08</p>
   <h1 id="page-title">Plans: what a subscription is really worth</h1>
-  <p class="lead">A flat monthly fee can be a much cheaper way to use a model than paying per token. ValueRank converts that into one number, USD per Intelligence Index point, so a plan model and an API-only model can be ranked together.</p>
+  <p class="lead">A flat monthly fee can be a much cheaper way to use a model than paying per token. ValueRank prices the same SDLC basket both ways: at API rates, and on a subscription by dividing that API cost by the plan's Value Multiple, so plan and API-only models can be ranked together.</p>
 </header>
 
 <section class="block" id="worked-example" aria-labelledby="example-title">
   <h2 id="example-title" class="section-title">How the number is built</h2>
   <ol class="steps">
-    <li><strong>API cost of the benchmark.</strong> Artificial Analysis reports what it cost to run the whole Intelligence Index on the model at API rates.</li>
-    <li><strong>Divide by the value multiple.</strong> The value multiple is how many dollars of API-priced work one subscription dollar buys, taken from measured usage.</li>
-    <li><strong>Divide by the Index score.</strong> The result is plan dollars per Intelligence Index point.</li>
+    <li><strong>API cost of the basket.</strong> Artificial Analysis publishes what it cost to run each evaluation on the model at API rates. The SDLC basket adds up seven Intelligence Index evaluations and the Coding Agent Index.</li>
+    <li><strong>Divide by the Value Multiple.</strong> The Value Multiple is how many dollars of API-priced work one subscription dollar buys at full use of the plan, taken from measured usage.</li>
+    <li><strong>The result is the plan cost of one basket run.</strong> It is scored on a log scale against frozen anchors, like the API cost.</li>
   </ol>
   <div class="table-wrap" tabindex="0" role="region" aria-label="How the number is built table">
     <table class="data-table">
       <caption class="sr-only">Worked example of the plan cost calculation</caption>
-      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">API cost per run</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">Plan cost per run</th><th scope="col" class="col-num">Index score</th><th scope="col" class="col-num">USD per Index point</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">API cost per basket run</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th><th scope="col">Route</th></tr></thead>
       <tbody>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-opus-5-5/">Claude Opus 5.5</a></span></th>
-          <td class="cell-num">$8,708</td>
-          <td class="cell-num">58.9&times;</td>
-          <td class="cell-num">$147.85</td>
-          <td class="cell-num">57.6</td>
-          <td class="cell-num"><strong>$2.566</strong></td>
+          <td class="cell-num">$9,989.15</td>
+          <td class="cell-num">58.90&times;</td>
+          <td class="cell-num"><strong>$169.60</strong></td>
+          <td><span class="badge badge-measured" title="Controlled account measurement / workload projection">Owner-measured</span> <span class="muted small">Claude Pro $20 · Opus 5.5</span></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a></span></th>
-          <td class="cell-num">$1,082</td>
-          <td class="cell-num">10.8&times;</td>
-          <td class="cell-num">$100.40</td>
-          <td class="cell-num">51.8</td>
-          <td class="cell-num"><strong>$1.937</strong></td>
+          <td class="cell-num">$1,267.66</td>
+          <td class="cell-num">10.77&times;</td>
+          <td class="cell-num"><strong>$117.68</strong></td>
+          <td><span class="badge badge-measured" title="Provisional assumption">Owner-measured</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
         </tr>      </tbody>
     </table>
   </div>
   <div class="callout callout-info">
-    <p><strong>What this does and does not claim.</strong> It estimates the price of one benchmark run on a plan, not what your own usage will cost. Provisional assumptions are flagged on every route.</p>
+    <p><strong>What this does and does not claim.</strong> It prices one run of the basket on a plan at full utilisation, not what your own usage will cost. Each Value Multiple was measured on its own workload; none is yet identified on the basket, so the Plan ranking is exploratory. Assumptions are flagged on every route.</p>
   </div>
 </section>
 
@@ -92,7 +90,7 @@
   <h2 id="routes-title" class="section-title">Routes and their evidence</h2>  <h3 class="subhead">Anthropic</h3>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Anthropic routes">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
       <tbody>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Claude Max 20x $200 · common Claude assumption</span><span class="model-dev">6 models</span></span></th>
           <td class="cell-num">$200</td>
@@ -140,7 +138,7 @@
   </div>  <h3 class="subhead">OpenAI</h3>
   <div class="table-wrap" tabindex="0" role="region" aria-label="OpenAI routes">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
       <tbody>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">ChatGPT Plus $20 · common GPT assumption</span><span class="model-dev">7 models</span></span></th>
           <td class="cell-num">$20</td>
@@ -174,7 +172,7 @@
   </div>  <h3 class="subhead">Xiaomi</h3>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Xiaomi routes">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
       <tbody>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">MiMo · provisional 1.5x assumption</span><span class="model-dev">2 models</span></span></th>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
@@ -187,7 +185,7 @@
   </div>  <h3 class="subhead">xAI</h3>
   <div class="table-wrap" tabindex="0" role="region" aria-label="xAI routes">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Plan</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">API-equivalent (USD)</th><th scope="col">Evidence</th><th scope="col">Source</th></tr></thead>
       <tbody>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">SuperGrok Heavy $300 · Grok 4.7 XHigh</span><span class="model-dev">1 model</span></span></th>
           <td class="cell-num">$300</td>
@@ -214,258 +212,143 @@
 </section>
 
 <section class="block" id="candidates" aria-labelledby="candidates-title">
-  <h2 id="candidates-title" class="section-title">Every candidate side by side</h2>
+  <h2 id="candidates-title" class="section-title">Every candidate side by side</h2>  <p class="muted">Value Multiples identified on the basket: 0 of 19 ranked configurations. The Plan ranking is labelled exploratory.</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Every candidate side by side table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">Index</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col" class="col-num">USD per Index point</th><th scope="col">Route</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">API cost (USD per run)</th><th scope="col" class="col-num">Plan cost (USD per run)</th><th scope="col">Route</th></tr></thead>
       <tbody>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-fable-5/">Claude Fable 5</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">49.6</td>
-          <td class="cell-num">$11,161</td>
-          <td class="cell-num">$3.818</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span></td>
-        </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-haiku-5-5/">Claude Haiku 5.5</a></span></th>
-          <td class="cell-num">12</td>
-          <td class="cell-num">13</td>
-          <td class="cell-num">41.2</td>
-          <td class="cell-num">$158</td>
-          <td class="cell-num">$0.065</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-opus-4-8/">Claude Opus 4.8</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">41.8</td>
-          <td class="cell-num">$6,874</td>
-          <td class="cell-num">$2.793</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span></td>
+          <td class="cell-num">4</td>
+          <td class="cell-num">10</td>
+          <td class="cell-num">$292.07</td>
+          <td class="cell-num">$4.96</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-opus-5/">Claude Opus 5</a></span></th>
-          <td class="cell-num">9</td>
-          <td class="cell-num">15</td>
-          <td class="cell-num">50.8</td>
-          <td class="cell-num">$7,275</td>
-          <td class="cell-num">$2.432</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span></td>
+          <td class="cell-num">6</td>
+          <td class="cell-num">18</td>
+          <td class="cell-num">$8,733.13</td>
+          <td class="cell-num">$148.27</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-opus-5-5/">Claude Opus 5.5</a></span></th>
           <td class="cell-num">2</td>
-          <td class="cell-num">5</td>
-          <td class="cell-num">57.6</td>
-          <td class="cell-num">$8,708</td>
-          <td class="cell-num">$2.566</td>
-          <td><span class="badge badge-measured" title="Controlled account measurement / workload projection">Owner-measured</span> <span class="muted small">Claude Pro $20 · Opus 5.5</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-sonnet-5/">Claude Sonnet 5</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">38.2</td>
-          <td class="cell-num">$6,998</td>
-          <td class="cell-num">$3.113</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span></td>
+          <td class="cell-num">14</td>
+          <td class="cell-num">$9,989.15</td>
+          <td class="cell-num">$169.60</td>
+          <td><span class="badge badge-measured" title="Controlled account measurement / workload projection">Owner-measured</span> <span class="muted small">Claude Pro $20 · Opus 5.5</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/claude-sonnet-5-5/">Claude Sonnet 5.5</a></span></th>
           <td class="cell-num">1</td>
-          <td class="cell-num">3</td>
-          <td class="cell-num">56.0</td>
-          <td class="cell-num">$7,260</td>
-          <td class="cell-num">$2.201</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span></td>
+          <td class="cell-num">13</td>
+          <td class="cell-num">$9,373.65</td>
+          <td class="cell-num">$159.15</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">Claude Pro $20 · common Claude assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/deepseek-v4-flash/">DeepSeek V4 Flash</a></span></th>
-          <td class="cell-num">18</td>
-          <td class="cell-num">17</td>
-          <td class="cell-num">34.3</td>
-          <td class="cell-num">$474</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">14</td>
+          <td class="cell-num">7</td>
+          <td class="cell-num">$279.51</td>
+          <td class="cell-num">$279.51</td>
+          <td><span class="badge badge-missing" title="No admitted subscription route; the plan ranking uses API cost.">API fallback</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>API-cost fallback: no admitted Plan route</li><li>cross-estimand ordering not identified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/deepseek-v4-pro/">DeepSeek V4 Pro</a></span></th>
-          <td class="cell-num">19</td>
-          <td class="cell-num">19</td>
-          <td class="cell-num">36.0</td>
-          <td class="cell-num">$1,122</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-5-flash/">Gemini 3.5 Flash</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">32.6</td>
-          <td class="cell-num">$4,222</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-6-flash/">Gemini 3.6 Flash</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">34.0</td>
-          <td class="cell-num">$1,614</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-7-flash/">Gemini 3.7 Flash</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">39.6</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">11</td>
+          <td class="cell-num">$801.50</td>
+          <td class="cell-num">$801.50</td>
+          <td><span class="badge badge-missing" title="No admitted subscription route; the plan ranking uses API cost.">API fallback</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>API-cost fallback: no admitted Plan route</li><li>cross-estimand ordering not identified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a></span></th>
-          <td class="cell-num">14</td>
-          <td class="cell-num">14</td>
-          <td class="cell-num">40.9</td>
-          <td class="cell-num">$1,623</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">18</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">$2,073.44</td>
+          <td class="cell-num">$2,073.44</td>
+          <td><span class="badge badge-missing" title="No admitted subscription route; the plan ranking uses API cost.">API fallback</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>API-cost fallback: no admitted Plan route</li><li>cross-estimand ordering not identified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gemini-4-argon/">Gemini 4 Argon</a></span></th>
-          <td class="cell-num">5</td>
-          <td class="cell-num">1</td>
-          <td class="cell-num">52.6</td>
-          <td class="cell-num">$2,407</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/glm-5-2/">GLM-5.2</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">33.7</td>
-          <td class="cell-num">$2,097</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">12</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num">$3,628.64</td>
+          <td class="cell-num">$3,628.64</td>
+          <td><span class="badge badge-missing" title="No admitted subscription route; the plan ranking uses API cost.">API fallback</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>API-cost fallback: no admitted Plan route</li><li>cross-estimand ordering not identified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/glm-5-3/">GLM-5.3</a></span></th>
-          <td class="cell-num">15</td>
-          <td class="cell-num">16</td>
-          <td class="cell-num">44.8</td>
-          <td class="cell-num">$2,503</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/glm-5-3-flash/">GLM-5.3 Flash</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">41.8</td>
-          <td class="cell-num">$306</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-5-5/">GPT-5.5</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">38.4</td>
-          <td class="cell-num">$5,294</td>
-          <td class="cell-num">$12.814</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
+          <td class="cell-num">17</td>
+          <td class="cell-num">17</td>
+          <td class="cell-num">$3,186.29</td>
+          <td class="cell-num">$3,186.29</td>
+          <td><span class="badge badge-missing" title="No admitted subscription route; the plan ranking uses API cost.">API fallback</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>API-cost fallback: no admitted Plan route</li><li>cross-estimand ordering not identified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-5-6-luna/">GPT-5.6 Luna</a></span></th>
-          <td class="cell-num">10</td>
-          <td class="cell-num">10</td>
-          <td class="cell-num">37.3</td>
-          <td class="cell-num">$320</td>
-          <td class="cell-num">$0.796</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num">$319.25</td>
+          <td class="cell-num">$29.64</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a></span></th>
-          <td class="cell-num">6</td>
-          <td class="cell-num">6</td>
-          <td class="cell-num">47.0</td>
-          <td class="cell-num">$3,465</td>
-          <td class="cell-num">$6.848</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
+          <td class="cell-num">10</td>
+          <td class="cell-num">12</td>
+          <td class="cell-num">$4,238.14</td>
+          <td class="cell-num">$393.44</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a></span></th>
           <td class="cell-num">3</td>
           <td class="cell-num">2</td>
-          <td class="cell-num">51.8</td>
-          <td class="cell-num">$1,082</td>
-          <td class="cell-num">$1.937</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
+          <td class="cell-num">$1,267.66</td>
+          <td class="cell-num">$117.68</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-astra/">GPT-6 Astra</a></span></th>
-          <td class="cell-num">4</td>
-          <td class="cell-num">4</td>
-          <td class="cell-num">52.4</td>
-          <td class="cell-num">$3,803</td>
-          <td class="cell-num">$6.739</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
+          <td class="cell-num">5</td>
+          <td class="cell-num">8</td>
+          <td class="cell-num">$2,899.42</td>
+          <td class="cell-num">$357.95</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Plus $20 · common GPT assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-luna/">GPT-6 Luna</a></span></th>
-          <td class="cell-num">13</td>
-          <td class="cell-num">11</td>
-          <td class="cell-num">38.1</td>
-          <td class="cell-num">$122</td>
-          <td class="cell-num">$0.297</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
+          <td class="cell-num">8</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num">$132.87</td>
+          <td class="cell-num">$12.33</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/gpt-6-sol/">GPT-6 Sol</a></span></th>
           <td class="cell-num">7</td>
-          <td class="cell-num">8</td>
-          <td class="cell-num">47.6</td>
-          <td class="cell-num">$1,536</td>
-          <td class="cell-num">$2.993</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/grok-4-6/">Grok 4.6</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">42.8</td>
-          <td class="cell-num">$1,557</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">$1,999.41</td>
+          <td class="cell-num">$185.61</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">ChatGPT Pro $500 · common GPT assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/grok-4-7/">Grok 4.7</a></span></th>
-          <td class="cell-num">8</td>
-          <td class="cell-num">9</td>
-          <td class="cell-num">46.4</td>
-          <td class="cell-num">$4,967</td>
-          <td class="cell-num">$18.487</td>
-          <td><span class="badge badge-estimate" title="user reported projection">Modelled</span> <span class="muted small">SuperGrok Heavy $300 · Grok 4.7 XHigh</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/kimi-k3/">Kimi K3</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">43.6</td>
-          <td class="cell-num">$3,658</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">$6,700.02</td>
+          <td class="cell-num">$6,700.02</td>
+          <td><span class="badge badge-missing" title="No admitted subscription route; the plan ranking uses API cost.">API fallback</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>API-cost fallback: no admitted Plan route</li><li>cross-estimand ordering not identified</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/mimo-v2-6-flash/">MiMo-V2.6-Flash</a></span></th>
-          <td class="cell-num">16</td>
-          <td class="cell-num">12</td>
-          <td class="cell-num">37.9</td>
-          <td class="cell-num">$110</td>
-          <td class="cell-num">$1.928</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">MiMo · provisional 1.5x assumption</span></td>
+          <td class="cell-num">11</td>
+          <td class="cell-num">1</td>
+          <td class="cell-num">$60.37</td>
+          <td class="cell-num">$40.25</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">MiMo · provisional 1.5x assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li><li>observed-usage multiple; full utilisation not established</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/mimo-v2-6-pro/">MiMo-V2.6-Pro</a></span></th>
-          <td class="cell-num">11</td>
-          <td class="cell-num">7</td>
-          <td class="cell-num">46.3</td>
-          <td class="cell-num">$207</td>
-          <td class="cell-num">$2.974</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">MiMo · provisional 1.5x assumption</span></td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/muse-spark-1-2/">Muse Spark 1.2</a></span></th>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num"><span class="na" title="Not ranked">&ndash;</span></td>
-          <td class="cell-num">39.6</td>
-          <td class="cell-num">$1,385</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">13</td>
+          <td class="cell-num">5</td>
+          <td class="cell-num">$136.13</td>
+          <td class="cell-num">$90.75</td>
+          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="muted small">MiMo · provisional 1.5x assumption</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>workload-unmatched</li><li>owner-named transfer (assumption)</li><li>valuation basis unverified</li><li>observed-usage multiple; full utilisation not established</li></ul></details></td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/qwen3-8-max/">Qwen3.8 Max</a></span></th>
-          <td class="cell-num">17</td>
-          <td class="cell-num">18</td>
-          <td class="cell-num">45.4</td>
-          <td class="cell-num">$4,935</td>
-          <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No subscription route; the plan ranking uses API cost.">API fallback</span></td>
+          <td class="cell-num">19</td>
+          <td class="cell-num">19</td>
+          <td class="cell-num">$5,417.03</td>
+          <td class="cell-num">$5,417.03</td>
+          <td><span class="badge badge-missing" title="No admitted subscription route; the plan ranking uses API cost.">API fallback</span><details class="evidence"><summary>Flags</summary><ul class="small"><li>API-cost fallback: no admitted Plan route</li><li>cross-estimand ordering not identified</li></ul></details></td>
         </tr>      </tbody>
     </table>
   </div>
@@ -487,5 +370,5 @@
       </ul>
     </nav>
   </div>
-</footer><script type="application/json" id="page-data">{"asOf": "2026-10-08", "candidates": [{"apiUsd": 11160.864676562578, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 49.6258202733378}, "name": "Claude Fable 5", "planUsdPerPoint": 3.818342217495867, "planUsdPerRun": 189.488364627548, "rank": {"api": null, "plan": null}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-fable-5"}, {"apiUsd": 157.5758646895501, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 41.2489304677024}, "name": "Claude Haiku 5.5", "planUsdPerPoint": 0.06485772513506487, "planUsdPerRun": 2.675311794389645, "rank": {"api": 13, "plan": 12}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-haiku-5-5"}, {"apiUsd": 6873.860602077013, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 41.7899103794639}, "name": "Claude Opus 4.8", "planUsdPerPoint": 2.7926337741793708, "planUsdPerRun": 116.70391514561992, "rank": {"api": null, "plan": null}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-opus-4-8"}, {"apiUsd": 7274.7418382622345, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 50.7771115797629}, "name": "Claude Opus 5", "planUsdPerPoint": 2.4323961002350214, "planUsdPerRun": 123.51004818781384, "rank": {"api": 15, "plan": 9}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-opus-5"}, {"apiUsd": 8708.197642611496, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 57.6223698102963}, "name": "Claude Opus 5.5", "planUsdPerPoint": 2.5657944840681233, "planUsdPerRun": 147.8471586181918, "rank": {"api": 5, "plan": 2}, "routeId": "claude-pro-opus55-semianalysis", "slug": "claude-opus-5-5"}, {"apiUsd": 6998.250634094257, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 38.1638712882576}, "name": "Claude Sonnet 5", "planUsdPerPoint": 3.113305758261714, "planUsdPerRun": 118.81580023929129, "rank": {"api": null, "plan": null}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-sonnet-5"}, {"apiUsd": 7259.502265782336, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 56.0001286580794}, "name": "Claude Sonnet 5.5", "planUsdPerPoint": 2.200911225855922, "planUsdPerRun": 123.25131181294289, "rank": {"api": 3, "plan": 1}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-sonnet-5-5"}, {"apiUsd": 474.192204864049, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 34.3305129347816}, "name": "DeepSeek V4 Flash", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": 17, "plan": 18}, "routeId": null, "slug": "deepseek-v4-flash"}, {"apiUsd": 1122.2711228899416, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 35.9967791278402}, "name": "DeepSeek V4 Pro", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": 19, "plan": 19}, "routeId": null, "slug": "deepseek-v4-pro"}, {"apiUsd": 4222.120097385288, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 32.5983283695905}, "name": "Gemini 3.5 Flash", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "gemini-3-5-flash"}, {"apiUsd": 1614.4196428711296, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 33.9785928920714}, "name": "Gemini 3.6 Flash", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "gemini-3-6-flash"}, {"apiUsd": null, "fallback": "api", "intelligenceIndex": {"status": "estimated", "value": 39.617751842555}, "name": "Gemini 3.7 Flash", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "gemini-3-7-flash"}, {"apiUsd": 1622.7263776021543, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 40.9262321765904}, "name": "Gemini 3.8 Flash", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": 14, "plan": 14}, "routeId": null, "slug": "gemini-3-8-flash"}, {"apiUsd": 2407.239010161643, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 52.5605655745982}, "name": "Gemini 4 Argon", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": 1, "plan": 5}, "routeId": null, "slug": "gemini-4-argon"}, {"apiUsd": 2097.288029425553, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 33.7054572377545}, "name": "GLM-5.2", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "glm-5-2"}, {"apiUsd": 2503.478685148468, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 44.777392385614}, "name": "GLM-5.3", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": 16, "plan": 15}, "routeId": null, "slug": "glm-5-3"}, {"apiUsd": 305.51631302660803, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 41.807466113455}, "name": "GLM-5.3 Flash", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "glm-5-3-flash"}, {"apiUsd": 5294.3643471784235, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 38.3556437590607}, "name": "GPT-5.5", "planUsdPerPoint": 12.814102812484204, "planUsdPerRun": 491.49316256762194, "rank": {"api": null, "plan": null}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-5-5"}, {"apiUsd": 319.92851141699316, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 37.3244239690841}, "name": "GPT-5.6 Luna", "planUsdPerPoint": 0.7957258862937724, "planUsdPerRun": 29.700010343203967, "rank": {"api": 10, "plan": 10}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-5-6-luna"}, {"apiUsd": 3464.843215149396, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 46.9727068915036}, "name": "GPT-5.6 Sol", "planUsdPerPoint": 6.847651583024457, "planUsdPerRun": 321.65273070454845, "rank": {"api": 6, "plan": 6}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-5-6-sol"}, {"apiUsd": 1081.552560620246, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 51.8332597011541}, "name": "GPT-6.1 Sol", "planUsdPerPoint": 1.9370586187405516, "planUsdPerRun": 100.40406244153786, "rank": {"api": 2, "plan": 3}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-6-1-sol"}, {"apiUsd": 3802.9799452617394, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 52.3863277108782}, "name": "GPT-6 Astra", "planUsdPerPoint": 6.739221567598216, "planUsdPerRun": 353.04306955641846, "rank": {"api": 4, "plan": 4}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-6-astra"}, {"apiUsd": 122.05438368649308, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 38.1245186869738}, "name": "GPT-6 Luna", "planUsdPerPoint": 0.29720264339046043, "planUsdPerRun": 11.33070773175762, "rank": {"api": 11, "plan": 13}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-6-luna"}, {"apiUsd": 1535.7958440173156, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 47.6305176437724}, "name": "GPT-6 Sol", "planUsdPerPoint": 2.9933110015152993, "planUsdPerRun": 142.5729524709725, "rank": {"api": 8, "plan": 7}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-6-sol"}, {"apiUsd": 1557.039406856376, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 42.836322654063}, "name": "Grok 4.6", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "grok-4-6"}, {"apiUsd": 4967.354257472305, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 46.4465506302286}, "name": "Grok 4.7", "planUsdPerPoint": 18.487079292967767, "planUsdPerRun": 858.6610643858781, "rank": {"api": 9, "plan": 8}, "routeId": "supergrok-heavy-grok47-xhigh-user-projection", "slug": "grok-4-7"}, {"apiUsd": 3658.0675385043187, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 43.5938229518782}, "name": "Kimi K3", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "kimi-k3"}, {"apiUsd": 109.54875236182735, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 37.8843590141754}, "name": "MiMo-V2.6-Flash", "planUsdPerPoint": 1.9277745083986928, "planUsdPerRun": 73.03250157455157, "rank": {"api": 12, "plan": 16}, "routeId": "mimo-provisional-user-assumption", "slug": "mimo-v2-6-flash"}, {"apiUsd": 206.65533881883294, "fallback": null, "intelligenceIndex": {"status": "measured", "value": 46.3242065310383}, "name": "MiMo-V2.6-Pro", "planUsdPerPoint": 2.974043943675812, "planUsdPerRun": 137.77022587922195, "rank": {"api": 7, "plan": 11}, "routeId": "mimo-provisional-user-assumption", "slug": "mimo-v2-6-pro"}, {"apiUsd": 1385.40074776, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 39.5758607970943}, "name": "Muse Spark 1.2", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": null, "plan": null}, "routeId": null, "slug": "muse-spark-1-2"}, {"apiUsd": 4934.789930721673, "fallback": "api", "intelligenceIndex": {"status": "measured", "value": 45.4152084980521}, "name": "Qwen3.8 Max", "planUsdPerPoint": null, "planUsdPerRun": null, "rank": {"api": 18, "plan": 17}, "routeId": null, "slug": "qwen3-8-max"}], "policy": {"claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5\u0027s measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model.", "defaultNumerator": "Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.", "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption.", "mimoApplication": "User authorizes provisional 1.5x for both MiMo candidate variants. Plan fee and measured API-equivalent numerator remain unavailable.", "reportingWindow": {"end": "2026-10-08", "start": "2026-09-08"}, "selectedSourceException": {"authorizedOn": "2026-10-07", "evidenceType": "Controlled subscription-account measurements with agentic workload projections.", "providers": ["Anthropic", "OpenAI"], "publicationDate": "2026-10-06", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"}, "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions."}, "routes": [{"apiEquivalentUsd": 162, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-plus-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: Astra\u0027s 8.1x for Plus. $162 is the applied monthly equivalent estimate at the $20 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.", "planFeeUsd": 20, "planLabel": "ChatGPT Plus $20 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6 Astra", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 8.1}, {"apiEquivalentUsd": 1055, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-pro100-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol\u0027s 10.55x for Pro 100. $1,055 is the applied monthly equivalent estimate at the $100 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.", "planFeeUsd": 100, "planLabel": "ChatGPT Pro $100 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6.1 Sol", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 10.55}, {"apiEquivalentUsd": 2084, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-pro200-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol\u0027s 10.42x for Pro 200. $2,084 is the applied monthly equivalent estimate at the $200 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. Historical pre-cut $5,734 Astra and $5,904 GPT-6 Sol figures are excluded.", "planFeeUsd": 200, "planLabel": "ChatGPT Pro $200 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6.1 Sol", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 10.42}, {"apiEquivalentUsd": 5386, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-pro500-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol\u0027s 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers.", "planFeeUsd": 500, "planLabel": "ChatGPT Pro $500 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6.1 Sol", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 10.772}, {"apiEquivalentUsd": 1178, "evidenceLabel": "Controlled account measurement / workload projection", "grade": "measured", "id": "claude-pro-opus55-semianalysis", "modelSlugs": ["claude-opus-5-5"], "notes": "October 6 controlled account measurements with agentic workload projections: $1,178/month divided by $20/month = 58.9x. Exact Opus 5.5 only. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis. This is the highest Opus 5.5 multiple among the three eligible Claude tiers.", "planFeeUsd": 20, "planLabel": "Claude Pro $20 \u00b7 Opus 5.5", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.9}, {"apiEquivalentUsd": 5725, "evidenceLabel": "Controlled account measurement / workload projection", "grade": "measured", "id": "claude-max5x-opus55-semianalysis", "modelSlugs": ["claude-opus-5-5"], "notes": "October 6 controlled account measurements with agentic workload projections: $5,725/month divided by $100/month = 57.25x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.", "planFeeUsd": 100, "planLabel": "Claude Max $100 \u00b7 Opus 5.5", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 57.25}, {"apiEquivalentUsd": 11726, "evidenceLabel": "Controlled account measurement / workload projection", "grade": "measured", "id": "claude-max20x-opus55-semianalysis", "modelSlugs": ["claude-opus-5-5"], "notes": "October 6 controlled account measurements with agentic workload projections: $11,726/month divided by $200/month = 58.63x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.", "planFeeUsd": 200, "planLabel": "Claude Max $200 \u00b7 Opus 5.5", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.63}, {"apiEquivalentUsd": 1735.5, "evidenceLabel": "user reported projection", "grade": "estimate", "id": "supergrok-heavy-grok47-xhigh-user-projection", "modelSlugs": ["grok-4-7"], "notes": "Account owner reports API-equivalent receipts and projects approximately $400.5/week from deduplicated calibration receipts; monthly annualization is $400.5 x 52 / 12 = $1,735.5, divided by owner-reported $300 fee = 5.785x (about 5.79x). Ranked grok-4.7 is XHigh, matching the report. This is projected capacity from a partial interval, not measured full-week use. Linked audit receipts were not independently reproduced; shared pools, possible unlogged activity and interrupted runs limit inference.", "planFeeUsd": 300, "planLabel": "SuperGrok Heavy $300 \u00b7 Grok 4.7 XHigh", "provider": "xAI", "sourceDate": "2026-09-25", "sourceModel": "Grok 4.7 XHigh", "sourceUrl": "https://www.remakebench.com/capacity/plans/supergrok-heavy", "valueMultiple": 5.785}, {"apiEquivalentUsd": null, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "mimo-provisional-user-assumption", "modelSlugs": ["mimo-v2-6-pro", "mimo-v2-6-flash"], "notes": "Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable.", "planFeeUsd": null, "planLabel": "MiMo \u00b7 provisional 1.5x assumption", "provider": "Xiaomi", "sourceDate": null, "sourceModel": null, "sourceUrl": null, "valueMultiple": 1.5}, {"apiEquivalentUsd": 1178, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "claude-pro-common-opus55-assumption", "modelSlugs": ["claude-opus-5", "claude-fable-5", "claude-opus-4-8", "claude-sonnet-5", "claude-haiku-5-5", "claude-sonnet-5-5"], "notes": "Applies Opus 5.5\u0027s measured Claude Pro figure ($1,178/month at $20, 58.9x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5\u0027s 57.25x and 58.63x, and Haiku 5.5\u0027s per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5\u0027s measured figure, not a measurement of the listed models.", "planFeeUsd": 20, "planLabel": "Claude Pro $20 \u00b7 common Claude assumption", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.9}, {"apiEquivalentUsd": 5725, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "claude-max5x-common-opus55-assumption", "modelSlugs": ["claude-opus-5", "claude-fable-5", "claude-opus-4-8", "claude-sonnet-5", "claude-haiku-5-5", "claude-sonnet-5-5"], "notes": "Applies Opus 5.5\u0027s measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5\u0027s 57.25x and 58.63x, and Haiku 5.5\u0027s per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5\u0027s measured figure, not a measurement of the listed models.", "planFeeUsd": 100, "planLabel": "Claude Max 5x $100 \u00b7 common Claude assumption", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 57.25}, {"apiEquivalentUsd": 11726, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "claude-max20x-common-opus55-assumption", "modelSlugs": ["claude-opus-5", "claude-fable-5", "claude-opus-4-8", "claude-sonnet-5", "claude-haiku-5-5", "claude-sonnet-5-5"], "notes": "Applies Opus 5.5\u0027s measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5\u0027s 57.25x and 58.63x, and Haiku 5.5\u0027s per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5\u0027s measured figure, not a measurement of the listed models.", "planFeeUsd": 200, "planLabel": "Claude Max 20x $200 \u00b7 common Claude assumption", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.63}], "workedExample": {"slugs": ["claude-opus-5-5", "gpt-6-1-sol"]}}</script>  <script type="module" src="/assets/js/pages/static.js"></script></body>
+</footer><script type="application/json" id="page-data">{"asOf": "2026-10-08", "candidates": [{"apiUsd": 292.07481065705014, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified"], "measuredOnly": {"status": "no measured route"}, "name": "Claude Haiku 5.5", "planUsd": 4.958825308269103, "rank": {"api": 10, "plan": 4}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-haiku-5-5"}, {"apiUsd": 8733.127052137232, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified"], "measuredOnly": {"status": "no measured route"}, "name": "Claude Opus 5", "planUsd": 148.27040835547083, "rank": {"api": 18, "plan": 6}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-opus-5"}, {"apiUsd": 9989.151438394825, "fallback": null, "flags": ["workload-unmatched", "valuation basis unverified"], "measuredOnly": {"costScore": 50.838903036972745, "costUsd": 169.59510082164388, "rank": 1, "routeId": "claude-pro-opus55-semianalysis", "status": "measured, target-workload unmatched", "value": 60.855387516654574}, "name": "Claude Opus 5.5", "planUsd": 169.59510082164388, "rank": {"api": 14, "plan": 2}, "routeId": "claude-pro-opus55-semianalysis", "slug": "claude-opus-5-5"}, {"apiUsd": 9373.65305908234, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified"], "measuredOnly": {"status": "no measured route"}, "name": "Claude Sonnet 5.5", "planUsd": 159.14521322720444, "rank": {"api": 13, "plan": 1}, "routeId": "claude-pro-common-opus55-assumption", "slug": "claude-sonnet-5-5"}, {"apiUsd": 279.5120478141823, "fallback": "api", "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"], "measuredOnly": {"status": "no measured route"}, "name": "DeepSeek V4 Flash", "planUsd": 279.5120478141823, "rank": {"api": 7, "plan": 14}, "routeId": null, "slug": "deepseek-v4-flash"}, {"apiUsd": 801.4967532139415, "fallback": "api", "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"], "measuredOnly": {"status": "no measured route"}, "name": "DeepSeek V4 Pro", "planUsd": 801.4967532139415, "rank": {"api": 11, "plan": 15}, "routeId": null, "slug": "deepseek-v4-pro"}, {"apiUsd": 2073.444227327155, "fallback": "api", "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"], "measuredOnly": {"status": "no measured route"}, "name": "Gemini 3.8 Flash", "planUsd": 2073.444227327155, "rank": {"api": 15, "plan": 18}, "routeId": null, "slug": "gemini-3-8-flash"}, {"apiUsd": 3628.6386911634218, "fallback": "api", "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"], "measuredOnly": {"status": "no measured route"}, "name": "Gemini 4 Argon", "planUsd": 3628.6386911634218, "rank": {"api": 4, "plan": 12}, "routeId": null, "slug": "gemini-4-argon"}, {"apiUsd": 3186.289595775135, "fallback": "api", "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"], "measuredOnly": {"status": "no measured route"}, "name": "GLM-5.3", "planUsd": 3186.289595775135, "rank": {"api": 17, "plan": 17}, "routeId": null, "slug": "glm-5-3"}, {"apiUsd": 319.25290369032655, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified"], "measuredOnly": {"status": "no measured route"}, "name": "GPT-5.6 Luna", "planUsd": 29.637291467724335, "rank": {"api": 6, "plan": 9}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-5-6-luna"}, {"apiUsd": 4238.135507049396, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified"], "measuredOnly": {"status": "no measured route"}, "name": "GPT-5.6 Sol", "planUsd": 393.4399839444297, "rank": {"api": 12, "plan": 10}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-5-6-sol"}, {"apiUsd": 1267.6626637224322, "fallback": null, "flags": ["workload-unmatched", "valuation basis unverified"], "measuredOnly": {"costScore": 55.09061110368823, "costUsd": 117.68127216138434, "rank": 2, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "status": "measured, target-workload unmatched", "value": 59.768083679103796}, "name": "GPT-6.1 Sol", "planUsd": 117.68127216138434, "rank": {"api": 2, "plan": 3}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-6-1-sol"}, {"apiUsd": 2899.4244152617393, "fallback": null, "flags": ["workload-unmatched", "valuation basis unverified"], "measuredOnly": {"costScore": 34.829634870319715, "costUsd": 357.953631513795, "rank": 3, "routeId": "chatgpt-plus-common-semianalysis-assumption", "status": "measured, target-workload unmatched", "value": 56.575444031061075}, "name": "GPT-6 Astra", "planUsd": 357.953631513795, "rank": {"api": 8, "plan": 5}, "routeId": "chatgpt-plus-common-semianalysis-assumption", "slug": "gpt-6-astra"}, {"apiUsd": 132.8652049689931, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified"], "measuredOnly": {"status": "no measured route"}, "name": "GPT-6 Luna", "planUsd": 12.334311638413768, "rank": {"api": 3, "plan": 8}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-6-luna"}, {"apiUsd": 1999.4094902839818, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified"], "measuredOnly": {"status": "no measured route"}, "name": "GPT-6 Sol", "planUsd": 185.61172394021366, "rank": {"api": 9, "plan": 7}, "routeId": "chatgpt-pro500-common-semianalysis-assumption", "slug": "gpt-6-sol"}, {"apiUsd": 6700.021962805636, "fallback": "api", "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"], "measuredOnly": {"status": "no measured route"}, "name": "Grok 4.7", "planUsd": 6700.021962805636, "rank": {"api": 16, "plan": 16}, "routeId": null, "slug": "grok-4-7"}, {"apiUsd": 60.36787614182735, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified", "observed-usage multiple; full utilisation not established"], "measuredOnly": {"status": "no measured route"}, "name": "MiMo-V2.6-Flash", "planUsd": 40.24525076121824, "rank": {"api": 1, "plan": 11}, "routeId": "mimo-provisional-user-assumption", "slug": "mimo-v2-6-flash"}, {"apiUsd": 136.12695920883297, "fallback": null, "flags": ["workload-unmatched", "owner-named transfer (assumption)", "valuation basis unverified", "observed-usage multiple; full utilisation not established"], "measuredOnly": {"status": "no measured route"}, "name": "MiMo-V2.6-Pro", "planUsd": 90.75130613922198, "rank": {"api": 5, "plan": 13}, "routeId": "mimo-provisional-user-assumption", "slug": "mimo-v2-6-pro"}, {"apiUsd": 5417.032020806289, "fallback": "api", "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"], "measuredOnly": {"status": "no measured route"}, "name": "Qwen3.8 Max", "planUsd": 5417.032020806289, "rank": {"api": 19, "plan": 19}, "routeId": null, "slug": "qwen3-8-max"}], "identificationYield": {"exploratory": true, "pointIdentified": 0, "rows": 19, "setIdentified": 0, "unidentified": 19}, "policy": {"claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5\u0027s measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model.", "defaultNumerator": "Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.", "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption.", "mimoApplication": "User authorizes provisional 1.5x for both MiMo candidate variants. Plan fee and measured API-equivalent numerator remain unavailable.", "reportingWindow": {"end": "2026-10-08", "start": "2026-09-08"}, "selectedSourceException": {"authorizedOn": "2026-10-07", "evidenceType": "Controlled subscription-account measurements with agentic workload projections.", "providers": ["Anthropic", "OpenAI"], "publicationDate": "2026-10-06", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"}, "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions."}, "routes": [{"apiEquivalentUsd": 162, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-plus-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: Astra\u0027s 8.1x for Plus. $162 is the applied monthly equivalent estimate at the $20 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.", "planFeeUsd": 20, "planLabel": "ChatGPT Plus $20 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6 Astra", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 8.1}, {"apiEquivalentUsd": 1055, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-pro100-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol\u0027s 10.55x for Pro 100. $1,055 is the applied monthly equivalent estimate at the $100 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis.", "planFeeUsd": 100, "planLabel": "ChatGPT Pro $100 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6.1 Sol", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 10.55}, {"apiEquivalentUsd": 2084, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-pro200-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol\u0027s 10.42x for Pro 200. $2,084 is the applied monthly equivalent estimate at the $200 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. Historical pre-cut $5,734 Astra and $5,904 GPT-6 Sol figures are excluded.", "planFeeUsd": 200, "planLabel": "ChatGPT Pro $200 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6.1 Sol", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 10.42}, {"apiEquivalentUsd": 5386, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "chatgpt-pro500-common-semianalysis-assumption", "modelSlugs": ["gpt-6-astra", "gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-5", "gpt-6-sol", "gpt-6-1-sol", "gpt-6-luna"], "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol\u0027s 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank\u0027s stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers.", "planFeeUsd": 500, "planLabel": "ChatGPT Pro $500 \u00b7 common GPT assumption", "provider": "OpenAI", "sourceDate": "2026-10-06", "sourceModel": "GPT-6.1 Sol", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 10.772}, {"apiEquivalentUsd": 1178, "evidenceLabel": "Controlled account measurement / workload projection", "grade": "measured", "id": "claude-pro-opus55-semianalysis", "modelSlugs": ["claude-opus-5-5"], "notes": "October 6 controlled account measurements with agentic workload projections: $1,178/month divided by $20/month = 58.9x. Exact Opus 5.5 only. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis. This is the highest Opus 5.5 multiple among the three eligible Claude tiers.", "planFeeUsd": 20, "planLabel": "Claude Pro $20 \u00b7 Opus 5.5", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.9}, {"apiEquivalentUsd": 5725, "evidenceLabel": "Controlled account measurement / workload projection", "grade": "measured", "id": "claude-max5x-opus55-semianalysis", "modelSlugs": ["claude-opus-5-5"], "notes": "October 6 controlled account measurements with agentic workload projections: $5,725/month divided by $100/month = 57.25x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.", "planFeeUsd": 100, "planLabel": "Claude Max $100 \u00b7 Opus 5.5", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 57.25}, {"apiEquivalentUsd": 11726, "evidenceLabel": "Controlled account measurement / workload projection", "grade": "measured", "id": "claude-max20x-opus55-semianalysis", "modelSlugs": ["claude-opus-5-5"], "notes": "October 6 controlled account measurements with agentic workload projections: $11,726/month divided by $200/month = 58.63x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis.", "planFeeUsd": 200, "planLabel": "Claude Max $200 \u00b7 Opus 5.5", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.63}, {"apiEquivalentUsd": 1735.5, "evidenceLabel": "user reported projection", "grade": "estimate", "id": "supergrok-heavy-grok47-xhigh-user-projection", "modelSlugs": ["grok-4-7"], "notes": "Account owner reports API-equivalent receipts and projects approximately $400.5/week from deduplicated calibration receipts; monthly annualization is $400.5 x 52 / 12 = $1,735.5, divided by owner-reported $300 fee = 5.785x (about 5.79x). Ranked grok-4.7 is XHigh, matching the report. This is projected capacity from a partial interval, not measured full-week use. Linked audit receipts were not independently reproduced; shared pools, possible unlogged activity and interrupted runs limit inference.", "planFeeUsd": 300, "planLabel": "SuperGrok Heavy $300 \u00b7 Grok 4.7 XHigh", "provider": "xAI", "sourceDate": "2026-09-25", "sourceModel": "Grok 4.7 XHigh", "sourceUrl": "https://www.remakebench.com/capacity/plans/supergrok-heavy", "valueMultiple": 5.785}, {"apiEquivalentUsd": null, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "mimo-provisional-user-assumption", "modelSlugs": ["mimo-v2-6-pro", "mimo-v2-6-flash"], "notes": "Provisional 1.5x assumption explicitly requested by the user for MiMo Pro and MiMo Flash. No plan tier, monthly fee, measured usage numerator or public allowance source is established. Effective Plan cost can apply the assumed multiplier, but fee and usage must display as unavailable.", "planFeeUsd": null, "planLabel": "MiMo \u00b7 provisional 1.5x assumption", "provider": "Xiaomi", "sourceDate": null, "sourceModel": null, "sourceUrl": null, "valueMultiple": 1.5}, {"apiEquivalentUsd": 1178, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "claude-pro-common-opus55-assumption", "modelSlugs": ["claude-opus-5", "claude-fable-5", "claude-opus-4-8", "claude-sonnet-5", "claude-haiku-5-5", "claude-sonnet-5-5"], "notes": "Applies Opus 5.5\u0027s measured Claude Pro figure ($1,178/month at $20, 58.9x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5\u0027s 57.25x and 58.63x, and Haiku 5.5\u0027s per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5\u0027s measured figure, not a measurement of the listed models.", "planFeeUsd": 20, "planLabel": "Claude Pro $20 \u00b7 common Claude assumption", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.9}, {"apiEquivalentUsd": 5725, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "claude-max5x-common-opus55-assumption", "modelSlugs": ["claude-opus-5", "claude-fable-5", "claude-opus-4-8", "claude-sonnet-5", "claude-haiku-5-5", "claude-sonnet-5-5"], "notes": "Applies Opus 5.5\u0027s measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5\u0027s 57.25x and 58.63x, and Haiku 5.5\u0027s per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5\u0027s measured figure, not a measurement of the listed models.", "planFeeUsd": 100, "planLabel": "Claude Max 5x $100 \u00b7 common Claude assumption", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 57.25}, {"apiEquivalentUsd": 11726, "evidenceLabel": "Provisional assumption", "grade": "assumption", "id": "claude-max20x-common-opus55-assumption", "modelSlugs": ["claude-opus-5", "claude-fable-5", "claude-opus-4-8", "claude-sonnet-5", "claude-haiku-5-5", "claude-sonnet-5-5"], "notes": "Applies Opus 5.5\u0027s measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5\u0027s 57.25x and 58.63x, and Haiku 5.5\u0027s per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5\u0027s measured figure, not a measurement of the listed models.", "planFeeUsd": 200, "planLabel": "Claude Max 20x $200 \u00b7 common Claude assumption", "provider": "Anthropic", "sourceDate": "2026-10-06", "sourceModel": "Opus 5.5", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "valueMultiple": 58.63}], "workedExample": {"slugs": ["claude-opus-5-5", "gpt-6-1-sol"]}}</script>  <script type="module" src="/assets/js/pages/static.js"></script></body>
 </html>

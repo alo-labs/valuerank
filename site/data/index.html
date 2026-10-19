@@ -58,20 +58,20 @@
   <h2 id="files-title" class="section-title">Files</h2>
   <ul class="file-list">    <li class="file">
       <a class="file-path mono" href="/data/rankings.json" download>/data/rankings.json</a>
-      <p>Every roster model with scores, ranks, cost and evidence on both bases.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{version, publishDate, observedAt, bases, defaultBasis, costWeightPct, modelInclusion, dimensions, categories, models, picks, planMeta}</p></details>
+      <p>Every roster model with v3 value scores, ranks, basket cost and evidence on both bases.</p>
+      <details class="evidence"><summary>Schema</summary><p class="small">{version, publishDate, observedAt, methodologyVersion, basketVersion, bases, defaultBasis, costWeightPct, exchangeRate, planExploratory, modelInclusion, dimensions, categories, models, picks}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/models/&lt;slug&gt;.json">/data/models/&lt;slug&gt;.json</a>
-      <p>One document per roster model with every dimension, source, plan route and history.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{slug, name, developer, aaUrl, aaVariant, selectedPage, summary, dimensions, cost, plans, history, frontier}</p></details>
+      <p>One document per roster model with every quality leaf, its source, the cost basket, plan routes, scenario shares and history.</p>
+      <details class="evidence"><summary>Schema</summary><p class="small">{slug, name, developer, aaUrl, aaVariant, selectedPage, summary, dimensions, cost, plans, scenarios, intervals, history, frontier}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/plans.json" download>/data/plans.json</a>
-      <p>Subscription routes, their evidence and the full candidate cost comparison.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{asOf, policy, routes, candidates, workedExample}</p></details>
+      <p>Subscription routes, their evidence and every candidate&#39;s API and Plan basket cost.</p>
+      <details class="evidence"><summary>Schema</summary><p class="small">{asOf, policy, identificationYield, routes, candidates, workedExample}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/benchmarks.json" download>/data/benchmarks.json</a>
-      <p>Benchmark source registry, coverage matrix and the Artificial Analysis frontier.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{sources, aaComponents, coverageMatrix, frontier}</p></details>
+      <p>Quality-leaf sources and coverage, the admitted cost basket and the Artificial Analysis frontier.</p>
+      <details class="evidence"><summary>Schema</summary><p class="small">{sources, basket, qualitySourceShares, frontier}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/benchmarks/terminal-bench-4.json" download>/data/benchmarks/terminal-bench-4.json</a>
       <p>Terminal-Bench 4.0 official rows, provider claims and cohort mapping.</p>
@@ -82,7 +82,7 @@
       <details class="evidence"><summary>Schema</summary><p class="small">{versions}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/livebench.json" download>/data/livebench.json</a>
-      <p>Matched LiveBench rows with overall score, instruction following and cost per successful task.</p>
+      <p>Matched LiveBench rows (no longer scored; owner decision O26), with cost per successful task.</p>
       <details class="evidence"><summary>Schema</summary><p class="small">{release, observedAt, rows}</p></details>
     </li>  </ul>
 </section>

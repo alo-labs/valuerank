@@ -7526,7 +7526,7 @@
       "policyId": "median-definite-frontier",
       "version": 1,
       "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
-      "populationRule": "non-provisional configurations on the API main-workload definite frontier (E40 interval outputs)",
+      "populationRule": "non-provisional configurations on the API main-workload definite frontier of the interval outputs",
       "order": "displayed quality ascending, then configuration ID",
       "position": "lower median",
       "emptyPopulation": "no bar pinned; the bar is published as unavailable",
@@ -21572,12 +21572,12 @@
         {
           "key": "anchors",
           "artifact": "data/v3_frozen.json",
-          "sha256": "64d874243350cd4c13bf054eba812f29176f0ce47b3c4001a882b5029994efcc",
+          "sha256": "5e3251ab53724aa1dcb84dbffd31e31fcb6bf0273f57fd7cc4014fa6a87f4d26",
           "capturedAt": "2026-10-19",
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "98d6ad04aa8f0340e0ca31f913b15704a8e38a029f1f1f159121a3787eb06401",
+      "bundleHash": "d3f5a02353d10995aadd87f8fa73de22e285b7b6149288de36ecd8db7b3dc7d2",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "scenarios": {

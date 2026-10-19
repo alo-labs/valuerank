@@ -45,7 +45,7 @@ export function applyFilters(models, state) {
   return models.filter((m) => {
     if (state.provider.length && !state.provider.includes(m.developer)) return false;
     if (state.grade.length && !state.grade.includes(m.grade)) return false;
-    if (state.route === 'eligible' && !m.rankingEligible) return false;
+    if (state.route === 'eligible' && !m.cost.route) return false;
     if (state.route === 'fallback' && !m.cost.fallback) return false;
     if (state.cov > 0 && !(m.coverage && m.coverage.pct >= state.cov)) return false;
     if (q && !`${m.name} ${m.developer}`.toLowerCase().includes(q)) return false;

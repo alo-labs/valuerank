@@ -36,7 +36,7 @@ test('axes, hover data and label points', () => {
   assert.deepEqual(spec.layout.xaxis.range, [0, 105]);
   assert.deepEqual(spec.layout.yaxis.range, [42, 88]);
   const frontier = byName(spec, 'Pareto frontier');
-  assert.match(frontier.customdata[0][2], /per Index point/);
+  assert.match(frontier.customdata[0][2], /per basket run/);
   assert.match(frontier.hovertemplate, /<extra>Frontier<\/extra>/);
   assert.equal(spec.labels.points.length, 4);
   assert.deepEqual(spec.labels.points.filter((p) => p.frontier).map((p) => p.label), ['alpha']);

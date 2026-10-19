@@ -22,10 +22,10 @@ test('renders one dense row per model in plan-rank order with the cost unit in t
   assert.equal(cell(alpha, 'name').textContent, 'AlphaAcme');
   assert.equal(cell(alpha, 'name').querySelector('a').getAttribute('href'), '/models/alpha/');
   assert.equal(cell(alpha, 'overall').textContent, '71.6');
-  assert.equal(cell(alpha, 'quality').textContent, '70.4');
+  assert.equal(cell(alpha, 'quality').textContent, '72.0');
   assert.equal(cell(alpha, 'cost').textContent, '$0.50');
   assert.equal(cell(alpha, 'grade').textContent, 'Owner-measured');
-  assert.match(header(p, 'cost').textContent, /Plan cost \(USD per Index point\)/);
+  assert.match(header(p, 'cost').textContent, /Plan cost \(USD per basket run\)/);
 });
 
 test('headers are sortable with aria-sort reflecting the active column', () => {
@@ -55,7 +55,7 @@ test('the basis toggle switches rank order, cost header and unit, and the URL', 
   const p = mount();
   p.toggle.api.click();
   assert.deepEqual(slugsInOrder(p).slice(0, 3), ['beta', 'alpha', 'gamma']);
-  assert.match(header(p, 'cost').textContent, /API cost \(USD per Index point\)/);
+  assert.match(header(p, 'cost').textContent, /API cost \(USD per basket run\)/);
   assert.equal(cell(rows(p)[0], 'cost').textContent, '$2,500.00');
   assert.equal(lastUrl(p), '/rankings/?basis=api');
   assert.equal(p.toggle.api.getAttribute('aria-pressed'), 'true');
@@ -266,8 +266,8 @@ test('CSV export builds a blob URL on click with basis and version in the filena
   assert.equal(p.csv.getAttribute('download'), 'valuerank-v9.9.9-plan.csv');
   assert.equal(first.blob.type, 'text/csv;charset=utf-8');
   const text = first.blob.text();
-  assert.equal(text.split('\r\n')[0], 'Rank,Model,Overall,Quality,Plan cost (USD per Index point),Evidence,Coverage');
-  assert.equal(text.split('\r\n')[1], '1,Alpha,71.6,70.4,0.5,measured,100');
+  assert.equal(text.split('\r\n')[0], 'Rank,Model,Overall,Quality,Plan cost (USD per basket run),Evidence,Coverage');
+  assert.equal(text.split('\r\n')[1], '1,Alpha,71.6,72,0.5,measured,100');
   p.toggle.api.click();
   p.csv.click();
   assert.equal(p.csv.getAttribute('download'), 'valuerank-v9.9.9-api.csv');
@@ -298,10 +298,10 @@ test('the loading row is replaced by the table; basis labels and units follow th
   assert.equal(p.body.querySelector('[data-state="loading"]'), null);
   assert.equal(p.error.hidden, true);
   assert.equal(p.basisLabel.textContent, 'Plan ranking');
-  assert.equal(p.costUnit.textContent, 'USD per Index point');
+  assert.equal(p.costUnit.textContent, 'USD per basket run');
   p.toggle.api.click();
   assert.equal(p.basisLabel.textContent, 'API ranking');
-  assert.equal(p.costUnit.textContent, 'USD per Index point');
+  assert.equal(p.costUnit.textContent, 'USD per basket run');
   assert.equal(p.win.document.documentElement.getAttribute('data-basis'), 'api');
 });
 
@@ -357,7 +357,7 @@ test('answer page renders the compact table of ranked models only, in rank order
   assert.equal(cell(rows(p)[0], 'name').querySelector('a').getAttribute('href'), '/models/alpha/');
   assert.equal(cell(rows(p)[0], 'overall').textContent, '71.6');
   assert.equal(p.sliderOut.textContent, '20.0%');
-  assert.equal(cell(rows(p)[0], 'quality').textContent, '70.4');
+  assert.equal(cell(rows(p)[0], 'quality').textContent, '72.0');
   assert.equal(cell(rows(p)[1], 'coverage').getAttribute('data-label'), 'Coverage');
 });
 
