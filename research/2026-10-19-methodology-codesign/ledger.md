@@ -406,3 +406,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - All findings (E79–E82).
 
 # Round 4 complete (reviewers 20–25). Every panel model returned HAS FEEDBACK; round 5 starts with GPT-6.1 Sol on draft r25.
+
+# Round 5 (reviewer 26 onward)
+
+## Editor decisions after reviewer 26 (owner may override)
+- E83. Scenarios sample the primitive variables of the constrained evidence model and derive costs, capacities, multiples and scores; identity and feasibility checks per scenario; no undeclared rejection sampling; fixtures.
+- E84. Demand–cost reconciliation contract for the Plan demand vector (same aggregation and telemetry support as the scored cost; never rescaled; otherwise transport unidentified).
+- E85. Executable route comparator: point > set > unidentified; controlled measurement > concordant reports > owner-named transfer; comparison multiple (point or lower bound); lower gross cash under the declared purchase policy; route ID (answers GPT Q1 and Q2).
+- E86. Per-row workload ID, anchor-object ID and applicable exchange rate; subset rows marked; slider keeps row-specific anchors.
+- E87. Row-level scenario dispersion per stratum with a separate covariance term; cohort SD reserved for the influence diagnostic.
+
+## Reviewer 26 (GPT-6.1 Sol, round 5, Thinking) — adopted
+- All findings (E83–E87).
