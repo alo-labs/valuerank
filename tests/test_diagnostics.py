@@ -107,3 +107,19 @@ def test_paired_rank_change_on_the_common_panel():
     assert empty["maxAbsChange"] is None and empty["maxRow"] is None
     cheaper = dg.paired_rank_change({"a": 1.0, "b": 2.0}, {"a": 3.0, "b": 2.0}, higher_is_better=False)
     assert cheaper["changes"] == {"a": 1, "b": -1}
+
+
+def test_matched_cost_diagnostic_object_and_bridge():
+    leaf_map = {"deepswe": "deepswe", "frontierCode": "frontiercode"}
+    old = dg.diagnostic_object({"deepswe": 3, "frontiercode": 1}, leaf_map, "first-party list", "frozen before ranks")
+    same = dg.diagnostic_object({"frontiercode": 1, "deepswe": 3}, dict(reversed(list(leaf_map.items()))), "first-party list", "frozen before ranks")
+    assert old["id"] == same["id"] and old["families"] == ["deepswe", "frontiercode"]
+    new = dg.diagnostic_object({"deepswe": 1, "frontiercode": 1}, leaf_map, "first-party list", "frozen before ranks")
+    assert new["id"] != old["id"]
+    old_costs = {"a": {"deepswe": 100.0, "frontiercode": 50.0}, "b": {"deepswe": 10.0}, "gone": {"deepswe": 1.0, "frontiercode": 1.0}}
+    new_costs = {"a": {"deepswe": 120.0, "frontiercode": 50.0}, "b": {"deepswe": 10.0, "frontiercode": 5.0}}
+    bridge = dg.matched_cost_bridge(old, new, old_costs, new_costs)
+    assert bridge["panel"] == ["a"] and bridge["sameObject"] is False
+    row = bridge["rows"]["a"]
+    assert row["old"] == pytest.approx(87.5) and row["dataRefresh"] == pytest.approx(15.0)
+    assert row["composition"] == pytest.approx(85.0 - 102.5) and row["new"] == pytest.approx(85.0)

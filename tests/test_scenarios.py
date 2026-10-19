@@ -137,13 +137,14 @@ def test_sequential_threshold_met_not_met_and_unresolved():
 def test_scenario_supported_cheapest_needs_a_non_provisional_candidate():
     reference = full_row("ref", 50.0, 100.0)
     rule = {"batch": 100, "looks": 2}
-    eligible = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), reference], "c", "ref", "S0", random.Random(5), **rule)
+    eligible = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), reference], "c", "ref", "S1", random.Random(5), **rule)
     assert eligible["status"] == "met" and eligible["label"] is True
+    assert eligible["decisionTarget"]["qualityEquation"] == "full composite"
     # A provisional singleton that is cheapest in every scenario keeps its frequency but gets no label.
-    provisional = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0, provisional=True), reference], "c", "ref", "S0", random.Random(5), **rule)
+    provisional = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0, provisional=True), reference], "c", "ref", "S1", random.Random(5), **rule)
     assert provisional["share"] == 1.0 and provisional["uniqueLabelEligible"] is False and provisional["label"] is False
     # A cheaper provisional qualifier still competes and blocks the candidate.
-    blocked = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), full_row("p", 70.0, 5.0, provisional=True), reference], "c", "ref", "S0", random.Random(5), **rule)
+    blocked = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), full_row("p", 70.0, 5.0, provisional=True), reference], "c", "ref", "S1", random.Random(5), **rule)
     assert blocked["status"] == "not met" and blocked["label"] is False
 
 
@@ -168,3 +169,20 @@ def test_singleton_group_within_weight_is_exactly_one():
     for group in single:
         leaf = next(leaf for leaf in q.LEAVES if leaf.group == group)
         assert weights[leaf.key] == 100.0 * replay[groups.index(group)]
+
+
+def test_only_the_full_composite_s1_core_branch_authorises_the_label():
+    """E100 fixture: 70% coverage, observed leaves at 100, against a fully observed reference at 80."""
+
+    observed = {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in {"bugHunt", "terminalBench", "automationBench"}}
+    candidate = RowInputs("c", observed, Kernel("fixed", (10.0,)))
+    reference = full_row("ref", 80.0, 100.0)
+    s0 = sc.scenario_supported_cheapest([candidate, reference], "c", "ref", "S0", random.Random(11), batch=500, looks=2)
+    assert s0["share"] == 1.0 and s0["labelAuthorized"] is False and s0["label"] is False
+    assert s0["decisionTarget"]["qualityEquation"] == "observed leaves"
+    # Full composite: 70 + 0.1 * (U1 + U2 + U3) >= 80 holds with probability 5/6, below the 90% bar.
+    s1 = sc.scenario_supported_cheapest([candidate, reference], "c", "ref", "S1", random.Random(11), batch=1000, looks=2)
+    assert s1["labelAuthorized"] is True and s1["status"] == "not met" and s1["label"] is False
+    assert s1["share"] == pytest.approx(5 / 6, abs=0.04)
+    alternative = sc.scenario_supported_cheapest([full_row("c", 60.0, 10.0), reference], "c", "ref", "S1", random.Random(5), alternative=True, batch=100, looks=1)
+    assert alternative["labelAuthorized"] is False and alternative["decisionTarget"]["specificationBranch"] == "endpoint-heavy alternative"

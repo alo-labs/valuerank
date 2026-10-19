@@ -7,6 +7,9 @@ undefined results (too few rows, no rank variation) are reported as such.
 
 from __future__ import annotations
 
+import hashlib
+import json
+
 import random
 import statistics
 
@@ -113,6 +116,38 @@ def matched_cost(family_costs: dict, weights: dict) -> float | None:
         return None
     total_weight = sum(weights.values())
     return sum(weights[family] / total_weight * family_costs[family] for family in weights)
+
+
+def diagnostic_object(weights: dict, leaf_map: dict, price_rule: str, panel_rule: str) -> dict:
+    """E103: the matched-cost diagnostic as a versioned object D with an identity hash."""
+
+    payload = {
+        "families": sorted(weights),
+        "weights": {family: weights[family] for family in sorted(weights)},
+        "leafToFamily": {leaf: leaf_map[leaf] for leaf in sorted(leaf_map)},
+        "priceRule": price_rule,
+        "panelRule": panel_rule,
+    }
+    identity = hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()[:16]
+    return {"id": identity, **payload}
+
+
+def matched_cost_bridge(old: dict, new: dict, old_costs: dict, new_costs: dict) -> dict:
+    """E103: old/new bridge on the common evidenced panel, separating cost-data from composition changes.
+
+    For each row: dataRefresh = C(old D, new costs) - C(old D, old costs) and
+    composition = C(new D, new costs) - C(old D, new costs).
+    """
+
+    rows = {}
+    for row in sorted(set(old_costs) & set(new_costs)):
+        before = matched_cost(old_costs[row], old["weights"])
+        refreshed = matched_cost(new_costs[row], old["weights"])
+        after = matched_cost(new_costs[row], new["weights"])
+        if None in (before, refreshed, after):
+            continue
+        rows[row] = {"old": before, "new": after, "dataRefresh": refreshed - before, "composition": after - refreshed}
+    return {"oldId": old["id"], "newId": new["id"], "sameObject": old["id"] == new["id"], "panel": sorted(rows), "rows": rows}
 
 
 def matched_cost_warnings(matched: dict, basket: dict) -> dict:

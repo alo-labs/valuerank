@@ -100,15 +100,19 @@ def test_chart_component_rounding_and_declined_marker():
     assert b.chart_component(dict(row, totalUsd=None), source="chart") is None
 
 
+FULL = b.component_cost(1.0, source="s")
+DECLINED = b.component_cost(1.0, completeness=b.INCOMPLETE, source="s")
+
+
 def test_admitted_components_require_two_thirds_of_ranked_rows():
     ranked = ["a", "b", "c"]
     costs = {
-        "a": {b.CODING_AGENT_INDEX: {}, "frontiercode": {}, "scicode": {}},
-        "b": {b.CODING_AGENT_INDEX: {}, "scicode": {}},
-        "c": {"scicode": {}},
+        "a": {b.CODING_AGENT_INDEX: FULL, "frontiercode": FULL, "scicode": FULL},
+        "b": {b.CODING_AGENT_INDEX: FULL, "scicode": FULL},
+        "c": {"scicode": FULL},
     }
     admitted = b.admitted_components(costs, ranked)
-    assert admitted[b.CODING_AGENT_INDEX] == {"admitted": True, "referencePanel": ["a", "b"], "covered": 2, "ranked": 3}
+    assert admitted[b.CODING_AGENT_INDEX] == {"admitted": True, "referencePanel": ["a", "b"], "covered": 2, "available": 2, "ranked": 3}
     assert admitted["frontiercode"]["admitted"] is False
     assert admitted["scicode"]["admitted"] is True
     assert admitted["itbench-aa"]["covered"] == 0
@@ -119,13 +123,13 @@ def test_admission_panel_is_joint_and_deterministic():
     """E95: components that pass alone but not together are admitted in coverage order."""
 
     ranked = ["a", "b", "c", "d", "e", "f"]
-    costs = {row: {"scicode": {}} for row in ranked}
+    costs = {row: {"scicode": FULL} for row in ranked}
     for row in ("a", "b", "c", "d", "e"):
-        costs[row][b.CODING_AGENT_INDEX] = {}
+        costs[row][b.CODING_AGENT_INDEX] = FULL
     for row in ("b", "c", "d", "e", "f"):
-        costs[row]["frontiercode"] = {}
+        costs[row]["frontiercode"] = FULL
     for row in ("a", "b", "c", "d"):
-        costs[row]["itbench-aa"] = {}
+        costs[row]["itbench-aa"] = FULL
     panel = b.admission_panel(costs, ranked)
     assert panel["admissionOrder"][:4] == ["scicode", b.CODING_AGENT_INDEX, "frontiercode", "itbench-aa"]
     components = panel["components"]
@@ -135,6 +139,19 @@ def test_admission_panel_is_joint_and_deterministic():
     assert components["itbench-aa"]["covered"] == 4 and components["itbench-aa"]["admitted"] is False
     assert panel["referencePanel"] == ["b", "c", "d", "e"] and panel["jointCovered"] == 4
     assert panel["requiredPanelSize"] == 4 and panel["ranked"] == 6
+
+
+def test_admission_counts_complete_evidence_not_mere_availability():
+    """E101 fixture: exact costs for two-thirds of rows, some carrying AA's declined-task marker."""
+
+    ranked = ["a", "b", "c"]
+    costs = {"a": {"frontiercode": FULL, "scicode": FULL}, "b": {"frontiercode": DECLINED, "scicode": FULL}, "c": {"scicode": FULL}}
+    panel = b.admission_panel(costs, ranked)
+    frontiercode = panel["components"]["frontiercode"]
+    assert frontiercode["available"] == 2 and frontiercode["covered"] == 1 and frontiercode["admitted"] is False
+    assert panel["matrices"]["exactCostAvailable"]["b"]["frontiercode"] is True
+    assert panel["matrices"]["completeCostEvidence"]["b"]["frontiercode"] is False
+    assert panel["admitted"] == ["scicode"] and panel["exactCostPanel"] == ["a", "b", "c"]
 
 
 def test_admitted_components_with_no_ranked_rows():

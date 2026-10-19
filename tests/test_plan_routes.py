@@ -39,6 +39,30 @@ def test_concordant_pool_checks_unpooled_reports_then_takes_the_geometric_mean()
     assert pr.concordant_pool([10.0, 0, None]) is None
 
 
+def comparable_report(identifier, multiple, **overrides):
+    record = {field: "same" for field in pr.COMPARABILITY_FIELDS}
+    record.update(overrides)
+    return {"id": identifier, "multiple": multiple, "comparability": record}
+
+
+def test_comparable_groups_and_pooling():
+    reports = [
+        comparable_report("a", 10.0),
+        comparable_report("b", 11.0),
+        comparable_report("c", 30.0, measurementWorkload="chat"),
+        comparable_report("d", 31.0, measurementWorkload="chat"),
+        comparable_report("e", 50.0, valuationBasis=None),
+        {"id": "f", "multiple": 12.0},
+    ]
+    groups, separate = pr.comparable_groups(reports)
+    assert [[item["id"] for item in group] for group in groups] == [["a", "b"], ["c", "d"]]
+    assert [item["id"] for item in separate] == ["e", "f"]
+    pooled = pr.pooled_reports(reports)
+    assert pooled["reportIds"] == ["c", "d"] and pooled["multiple"] == pytest.approx((30 * 31) ** 0.5)
+    assert pr.pooled_reports([comparable_report("a", 10.0), comparable_report("b", 13.0)]) is None
+    assert pr.pooled_reports([]) is None
+
+
 def test_evidence_grades():
     measured = route("a", 50, models=("claude-opus-5-5",), source="Opus 5.5")
     assert pr.evidence_grade(measured, "claude-opus-5-5") == "controlled"
@@ -49,8 +73,11 @@ def test_evidence_grades():
     assert pr.evidence_grade(transfer, "gpt-6-sol") == "assumption"
     report = route("d", 5, kind="user_reported_projection", models=("grok-4.7",), source="Grok 4.7 XHigh")
     assert pr.evidence_grade(report, "grok-4.7") == "diagnostic"
-    concordant = dict(report, independentReports=[5.0, 5.5])
+    concordant = dict(report, independentReports=[comparable_report("r1", 5.0), comparable_report("r2", 5.5)])
     assert pr.evidence_grade(concordant, "grok-4.7") == "reports"
+    # E102: numerically concordant reports on different measurement workloads are never pooled.
+    mixed = dict(report, independentReports=[comparable_report("r1", 5.0), comparable_report("r2", 5.5, measurementWorkload="chat")])
+    assert pr.evidence_grade(mixed, "grok-4.7") == "diagnostic"
     assert pr.evidence_grade(route("e", 1, kind="press_claim"), "m") == "diagnostic"
 
 

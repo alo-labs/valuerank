@@ -158,33 +158,50 @@ def chart_component(row: dict | None, *, source: str) -> dict | None:
 
 
 def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
-    """E26/E95: one reference panel per workload version, built deterministically.
+    """E26/E95/E101: one reference panel per workload version, built deterministically on complete evidence.
 
-    Candidate components are taken in descending order of exact-cost coverage
-    (target order breaks ties). A component is admitted only if the rows with
-    exact cost on it and on every component admitted before it still number at
-    least two-thirds of the ranked rows; that complete-row set is the workload's
-    reference panel, frozen at admission. Marginal and joint coverage are both
-    published.
+    A_ie = exact compatible cost available; K_ie = CompleteCostEvidence(i, e)
+    (exact cost without AA's missing- or declined-task marker). Candidate
+    components are taken in descending order of complete-evidence coverage (target
+    order breaks ties). A component is admitted only if the rows complete on it and
+    on every component admitted before it still number at least two-thirds of the
+    ranked rows; that set is the reference panel P_K, frozen at admission. P_A,
+    the exact-cost panel on the same admitted components, is published beside it.
     """
 
-    def has(row_id: str, component: str) -> bool:
+    def available(row_id: str, component: str) -> bool:
         return (costs_by_row.get(row_id) or {}).get(component) is not None
 
-    marginal = {component: sum(1 for row_id in ranked_ids if has(row_id, component)) for component in TARGET_COMPONENTS}
+    def complete(row_id: str, component: str) -> bool:
+        return available(row_id, component) and costs_by_row[row_id][component]["completeness"] == COMPLETE
+
+    marginal = {component: sum(1 for row_id in ranked_ids if complete(row_id, component)) for component in TARGET_COMPONENTS}
     order = sorted(TARGET_COMPONENTS, key=lambda component: (-marginal[component], TARGET_COMPONENTS.index(component)))
     panel = list(ranked_ids)
     components = {}
     for component in order:
-        candidate = [row_id for row_id in panel if has(row_id, component)]
+        candidate = [row_id for row_id in panel if complete(row_id, component)]
         admitted = bool(ranked_ids) and Fraction(len(candidate), len(ranked_ids)) >= ADMISSION_SHARE
         if admitted:
             panel = candidate
-        components[component] = {"admitted": admitted, "referencePanel": candidate, "covered": marginal[component], "ranked": len(ranked_ids)}
+        components[component] = {
+            "admitted": admitted,
+            "referencePanel": candidate,
+            "covered": marginal[component],
+            "available": sum(1 for row_id in ranked_ids if available(row_id, component)),
+            "ranked": len(ranked_ids),
+        }
+    admitted_set = [component for component in TARGET_COMPONENTS if components[component]["admitted"]]
     return {
         "components": {component: components[component] for component in TARGET_COMPONENTS},
         "admissionOrder": order,
+        "admitted": admitted_set,
         "referencePanel": panel,
+        "exactCostPanel": [row_id for row_id in ranked_ids if all(available(row_id, component) for component in admitted_set)],
+        "matrices": {
+            "exactCostAvailable": {row_id: {component: available(row_id, component) for component in TARGET_COMPONENTS} for row_id in ranked_ids},
+            "completeCostEvidence": {row_id: {component: complete(row_id, component) for component in TARGET_COMPONENTS} for row_id in ranked_ids},
+        },
         "jointCovered": len(panel),
         "ranked": len(ranked_ids),
         "requiredPanelSize": math.ceil(ADMISSION_SHARE * len(ranked_ids)),
@@ -192,7 +209,7 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
 
 
 def admitted_components(costs_by_row: dict, ranked_ids: list[str]) -> dict:
-    """Per-component admission under the E95 joint panel rule."""
+    """Per-component admission under the E95/E101 joint panel rule."""
 
     return admission_panel(costs_by_row, ranked_ids)["components"]
 

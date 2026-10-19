@@ -166,13 +166,17 @@ def cheapest_qualifier(scenario: dict, reference: str) -> str | None:
     return qualifiers[0][1]
 
 
+LABEL_STRATUM = "S1"
+
+
 def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference: str, stratum: str, rng: random.Random, *, alternative: bool = False, **rule) -> dict:
     """E92: the scenario-supported unique-cheapest label for one bar and one candidate.
 
     The event is "the candidate qualifies and is strictly cheaper than every other
     qualifier in the same scenario"; every row, provisional or not, competes in it.
-    The label also needs UniqueLabelEligible: a provisional candidate keeps its
-    published event frequency but never receives the label.
+    The label also needs UniqueLabelEligible (a provisional candidate keeps its
+    published event frequency but never receives the label) and the authorising
+    branch, S1 core (E100); other strata and branches publish the frequency only.
     """
 
     ranges = missing_ranges(rows) if alternative else None
@@ -183,7 +187,21 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
 
     outcome = sequential_threshold(event, rng, **rule)
     eligible = not next(row.provisional for row in rows if row.row == candidate)
-    return {**outcome, "uniqueLabelEligible": eligible, "label": eligible and outcome["status"] == "met"}
+    # E100: only the full-composite S1 core branch authorises the label; elsewhere it is a frequency.
+    authorized = stratum == LABEL_STRATUM and not alternative
+    signature = {
+        "qualityEquation": "observed leaves" if stratum == "S0" else "full composite",
+        "scenarioStratum": stratum,
+        "specificationBranch": "endpoint-heavy alternative" if alternative else "core",
+        "referenceObjectId": reference,
+    }
+    return {
+        **outcome,
+        "uniqueLabelEligible": eligible,
+        "labelAuthorized": authorized,
+        "decisionTarget": signature,
+        "label": authorized and eligible and outcome["status"] == "met",
+    }
 
 
 def standard_error(share: float, n: int) -> float:

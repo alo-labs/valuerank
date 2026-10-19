@@ -445,3 +445,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 29 (Kimi K3, round 5, Thinking) — adopted
 - All findings (E95–E99).
+
+## Editor decisions after reviewer 30 (owner may override)
+- E100. The scenario-supported-cheapest label is authorised only in the S1 core branch (full-composite quality with identification draws, nominal weights, transfers off, primary kernels); other strata and branches publish the event as a frequency only (S0: "observed-leaves qualifying-and-cheapest frequency"); 70%-coverage fixture; every label carries a decision target signature (quality equation, workload hash, basis, reference object, stratum, branch, route-selection version, panel ID, kernel version). Answers GLM Q1 without escalation: one designated full-composite branch, because the bar's normative definition is full-composite and S2's weight draws are a sensitivity around the owner's nominal weights.
+- E101. Component admission tests complete cost evidence (exact cost without AA's missing- or declined-task marker), not exact-cost availability; matrices A_ie and K_ie and both joint panels P_A(W), P_K(W) are published; only P_K is called complete; declined-marker fixture. Answers GLM Q2 without escalation (E26/E95 are editor decisions; the complete-evidence predicate aligns admission with interval-output eligibility).
+- E102. Report comparability before concordance: fee period and gross-cash accounting, route and limit schema, eligible-consumption treatment, valuation basis (repriced where receipts permit) and measurement workload must match; otherwise reports stay separate objects; report IDs and comparability failures published.
+- E103. The matched-cost diagnostic is a versioned object D (families, weights, leaf-to-family map, price rule, panel rule); changes to D create a new version with an old/new bridge on the common panel.
+- E104 (editor correction found while implementing). The source contract still named `sums.costUsd` as the Coding Agent Index cost; corrected to `mean.costUsd` × 303 under O27, with `sums.costUsd` as a reconciliation diagnostic.
+
+## Reviewer 30 (GLM 5.3, round 5, Thinking) — adopted
+- All findings (E100–E103).

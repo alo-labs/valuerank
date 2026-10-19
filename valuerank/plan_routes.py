@@ -5,8 +5,9 @@ route's evidence is classified:
 
 - ``controlled``: a controlled saturation measurement of this exact model
   (e.g. SemiAnalysis);
-- ``reports``: at least two independent end-user reports concordant within 20%
-  (max/min <= 1.2 on the unpooled reports, then a geometric mean);
+- ``reports``: at least two independent, comparable end-user reports concordant
+  within 20% (E102 comparability record first, then max/min <= 1.2 on the
+  unpooled reports, then a geometric mean);
 - ``assumption``: an owner-named model-to-model transfer (labelled; it never
   identifies the scored-workload multiple M_W).
 - ``diagnostic``: single-source reports and anything else the admission rule
@@ -36,6 +37,8 @@ CONTROLLED_KINDS = {"controlled_account_workload_projection", "controlled_measur
 ASSUMPTION_KINDS = {"user_assumption"}
 REPORT_KINDS = {"user_reported_projection", "end_user_report", "community_observed"}
 GRADE = {"controlled": 3, "reports": 2, "assumption": 1, "diagnostic": 0}
+# E102: reports are pooled only when their public comparability records agree on all of these.
+COMPARABILITY_FIELDS = ("feePeriod", "grossCashAccounting", "limitSchema", "eligibleConsumption", "valuationBasis", "measurementWorkload")
 IDENTIFICATION = {"point-identified": 2, "set-identified": 1, "unidentified": 0}
 # Route source-model labels mapped to ValueRank model ids (the donor of a measured multiple).
 SOURCE_MODEL_IDS = {
@@ -55,6 +58,32 @@ def concordant_pool(reports: list[float]) -> float | None:
     return math.exp(sum(math.log(value) for value in values) / len(values))
 
 
+def comparable_groups(reports: list[dict]) -> tuple[list[list[dict]], list[dict]]:
+    """E102: reports sharing a complete comparability record; reports without one stay separate objects."""
+
+    groups: dict[tuple, list[dict]] = {}
+    separate = []
+    for report in reports:
+        record = report.get("comparability") or {}
+        if any(not record.get(field) for field in COMPARABILITY_FIELDS):
+            separate.append(report)
+            continue
+        groups.setdefault(tuple(record[field] for field in COMPARABILITY_FIELDS), []).append(report)
+    return list(groups.values()), separate
+
+
+def pooled_reports(reports: list[dict]) -> dict | None:
+    """The concordant comparable group with the highest pooled multiple (the owner's highest-eligible rule), or None."""
+
+    groups, _separate = comparable_groups(reports)
+    pooled = []
+    for group in groups:
+        value = concordant_pool([report.get("multiple") for report in group])
+        if value is not None:
+            pooled.append({"multiple": value, "reportIds": sorted(report["id"] for report in group)})
+    return max(pooled, key=lambda item: (item["multiple"], item["reportIds"]), default=None)
+
+
 def evidence_grade(route: dict, model_id: str) -> str:
     """Classify a route's evidence for one model (see the module docstring)."""
 
@@ -66,7 +95,7 @@ def evidence_grade(route: dict, model_id: str) -> str:
     if kind in ASSUMPTION_KINDS:
         # The donor model's own route is its measurement; other models carry the owner-named transfer.
         return "controlled" if same_model and source_kind in CONTROLLED_KINDS else "assumption"
-    if kind in REPORT_KINDS and concordant_pool(route.get("independentReports") or []) is not None:
+    if kind in REPORT_KINDS and pooled_reports(route.get("independentReports") or []) is not None:
         return "reports"
     return "diagnostic"
 
