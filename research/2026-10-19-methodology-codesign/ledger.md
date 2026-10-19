@@ -179,3 +179,18 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Reviewer 10 (Grok 4.7) — rejected or modified
 - Withhold Plan scores without identified AA-mix multiple: modified by owner (O16) — scored and flagged; certification only with identification.
 - Expired routes leave the Plan ranking entirely: O13 kept (API-cost fallback, flagged, excluded from Plan claims).
+
+## Owner decisions (after round-2 reviewer 11)
+- O17. A row missing a basket component's cost is scored on its available subset, flagged "subset cost — not comparable for certification", with its cost compared against the cohort on the identical subset.
+
+## Editor decisions after reviewer 11 (owner may override)
+- E8. Common-support quality is renormalised within each pair (keeps 25:75 on retained evidence; 1/p_ij published).
+- E9. The basket prices one deployment-equivalent pass per task (evaluation repetitions excluded, as in AA's totals).
+
+## Reviewer 11 (Kimi K3, round 2, Thinking) — adopted
+- Critical: Plan transport targets the versioned scored workload W (M_W), bound to workload hash, price list and quota schema; old AA-suite transport qualifies only if it covers W.
+- Governing pairwise common-support certificate formula; directed certification matrix; cycles allowed; full-composite bounds only for frontier/threshold outputs.
+- Omniscience denominator corrected to AA's definition (N = 100[1 − i/(i+p+a)]); test vector.
+- Workload object: unique execution components, aggregate/component exclusivity, frozen membership per version, migration bridge.
+- Matched-cost blocker reads C_W; either blocker fails certification; reversal defined with interval separation.
+- Exchange rates computed from active anchors; additional release tests.
