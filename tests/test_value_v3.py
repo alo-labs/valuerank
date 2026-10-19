@@ -77,7 +77,7 @@ def documents(**overrides) -> dict:
 
 
 CONFIGURATIONS = [
-    {"id": "a", "name": "A", "effort": "max", "aaSlug": "a-max"},
+    {"id": "a", "name": "A", "effort": "max", "aaSlug": "a-max", "aaNote": "A has higher pricing on long inputs not reflected in cost figures."},
     {"id": "b", "name": "B", "effort": "max", "aaSlug": "b-max"},
     {"id": "c", "name": "C", "effort": "max", "aaSlug": "c-max"},
 ]
@@ -174,6 +174,7 @@ def test_score_ranks_gates_disclosures_and_intervals():
     rows = {row["id"]: row for row in output["rows"]}
     assert {row["api"]["rank"] for row in output["rows"]} == {1, 2, 3}
     assert rows["c"]["quality"]["status"] == "scored" and rows["a"]["plan"]["selectionReason"] == "only remaining eligible route"
+    assert rows["a"]["aaCostCaveat"].startswith("A has higher pricing") and rows["b"]["aaCostCaveat"] is None
     assert output["gates"]["hold"] is False and output["intervals"]["api"]["status"] == "evaluated"
     assert output["intervals"]["plan"]["universe"] == ["b"]
     assert output["costInfluence"]["api"]["commonWorkload"]["panel"] == ["a", "b"]
@@ -413,3 +414,12 @@ def test_abstention_sensitivity_and_demand_registry():
     assert population["componentOutputTokens"] == {"scicode": 2880.0, "critpt": 70.0} and population["scoredComponents"] == ["gdp-pdf", "scicode"]
     assert population["outputEqualsReasoningPlusAnswer"] is True and set(tokens["populations"]) == {"intelligence-index"}
     assert tokens["tokenOntology"]["canonicalIntelligenceIndexTokenCount.output"]["mapping"] == "inclusive"
+
+
+def test_unknown_fees_are_written_as_null():
+    routes = documents()["planRoutes"]
+    del routes["routes"][0]["planPriceUsd"]
+    result, frozen = scored(planRoutes=routes)
+    row_a = next(row for row in v.score(result, frozen)["rows"] if row["id"] == "a")
+    assert row_a["plan"]["comparisonTuples"]["plan-a"][-1] is None
+    json.dumps(row_a, allow_nan=False)

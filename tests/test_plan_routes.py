@@ -320,3 +320,16 @@ def test_measurement_capacity_status():
     flagged = pr.plan_cost(100.0, {"route": reports, "grade": "reports", "identification": "unidentified", "expiry": "fresh"})
     assert "observed-usage multiple; full utilisation not established" in flagged["flags"]
     assert flagged["measurementCapacityStatus"] == pr.CAPACITY_UNVERIFIED
+
+
+def test_expired_routes_leave_selection_before_any_fallback():
+    """E142: expiry first, then reselection among survivors; API fallback only when nothing survives."""
+
+    fresh = route("fresh", 8.0, models=("m",))
+    stale = route("stale", 50.0, models=("m",), checked="2026-04-01")  # past expiry and grace: demoted
+    survivors = pr.route_candidates("m", "max", [stale, fresh], TODAY)
+    assert pr.select_route(survivors)["route"]["id"] == "fresh"
+    transfer_only = route("transfer", 9.0, kind="user_assumption", models=("m", "donor"), source="GPT-6.1 Sol", source_kind="controlled_account_workload_projection")
+    assert pr.select_route(pr.route_candidates("m", "max", [stale, transfer_only], TODAY))["route"]["id"] == "transfer"
+    nothing = pr.route_candidates("m", "max", [stale], TODAY)
+    assert pr.select_route(nothing) is None and pr.plan_cost(100.0, None)["fallback"] == "api"

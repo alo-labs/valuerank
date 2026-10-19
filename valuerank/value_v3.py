@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import sys
 from datetime import date
 from pathlib import Path
@@ -589,6 +590,9 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
         "effort": row.get("effort"),
         "aaSlug": row["aaSlug"],
         "configurationMapped": row["configurationMapped"],
+        # E141: AA's own note on what its cost omits (e.g. a long-context surcharge), shown as a cost caveat.
+        "aaCostCaveat": row.get("aaNote") if row.get("aaNote") and any(word in row["aaNote"].lower() for word in ("pricing", "cost", "price")) else None,
+        "tariffStatus": "as published by AA (effective dates not recorded)",
         "demandRegistry": demand_registry(row["page"], row["cost"]["components"]),
         "quality": {
             **_summary_json(row["summary"]),
@@ -605,7 +609,8 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
             **row["plan"],
             "selectionReason": selection["reason"],
             "dominatedRoutes": selection["dominated"],
-            "comparisonTuples": {key: list(value) for key, value in selection["tuples"].items()},
+            # Strict JSON: an unknown fee (infinite gross cash) is written as null.
+            "comparisonTuples": {key: [item if math.isfinite(item) else None for item in value] for key, value in selection["tuples"].items()},
             "selectedIdentification": selected["identification"] if selected else None,
             "admission": [{"routeId": item["route"]["id"], "case": item["case"], "officialDisplayEligible": item["officialDisplayEligible"], "planIntervalEligible": item["planIntervalEligible"]} for item in row["admissionTable"]],
         },
@@ -735,7 +740,7 @@ def configurations_from_scores(scores: dict) -> list[dict]:
     """The ranked cohort (fixed cohort policy: the ranking-eligible rows, in table order) with each AA identity."""
 
     return [
-        {"id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"]}
+        {"id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote")}
         for row in scores["models"]
         if row.get("rankingEligible") is True
     ]

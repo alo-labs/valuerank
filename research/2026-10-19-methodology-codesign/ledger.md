@@ -555,3 +555,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 40 (Grok 4.7, round 7, Thinking) — adopted
 - All findings (E139–E140).
+
+## Editor decisions after reviewer 41 (owner may override)
+- E141. Effective-dated tariff records (observed_at, effective_from/until, tariff_status, applicability_conditions, scheduled_refresh_at, source evidence ID); prices applicable at the valuation timestamp; promotional flag and a documented-standard-tariff S2 branch; AA cost caveats shown per row (verified on the 2026-10-17 snapshot: Claude Haiku 5.5's long-context surcharge is not reflected in AA cost). Kimi's example could not be verified: AA's Gemini 4 Argon page (2026-10-19) shows standard Google prices ($2 / $10 per 1M tokens) and only a 95% cache discount, no launch discount.
+- E142. Release-time route order: classify eligibility and expiry, drop diagnostic candidates, dominance filter, comparator, API fallback only when nothing survives; eligibility-transition reason; five fixtures. Answers Kimi Q1 without escalation: O13's fallback describes the effect when a demoted route leaves no eligible candidate; selecting a surviving eligible candidate is the comparator's ordinary rule (the implementation already behaves this way).
+- E143. Scenario target profiles in every stream and decision signature, with build-time compatibility validation; v1 profiles: S0 reporting precision, S1 + conventional identification of missing leaves, S2 + weight-specification stress.
+
+## Reviewer 41 (Kimi K3, round 7, Thinking) — adopted
+- All findings (E141–E143).

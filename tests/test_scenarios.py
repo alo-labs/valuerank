@@ -152,6 +152,7 @@ def test_shares_fix_the_panel_and_report_pairwise_win_tie_loss():
     rows = [full_row("a", 60.0, 10.0), full_row("b", 60.0, 10.0), full_row("c", 40.0, 10.0)]
     result = sc.shares(rows, "S0", 20, 9, ANCHORS, 0.25, pairs=(("a", "b"), ("a", "c"), ("c", "a")))
     assert result["panel"] == ["a", "b", "c"] and result["panelSize"] == 3
+    assert result["targetProfile"] == "published-record reporting precision"  # E143
     # Tied rows share the better competition rank, so both hold rank 1.
     assert result["rows"]["a"]["top1"]["share"] == result["rows"]["b"]["top1"]["share"] == 1.0
     assert [item["tie"] for item in result["pairwise"]] == [1.0, 0.0, 0.0]

@@ -1269,7 +1269,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
 
     v3_section = value_v3.build(
         [
-            {"id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"]}
+            {"id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote")}
             for row in by_overall + unscored_primary_rows
         ],
         data,

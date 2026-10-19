@@ -31,6 +31,12 @@ from dataclasses import dataclass, field
 from valuerank import anchors as anchor_math
 from valuerank import quality as q
 
+# E143: what each v1 stream concerns, separately from its uncertainty layer.
+TARGET_PROFILES = {
+    "S0": "published-record reporting precision",
+    "S1": "published-record reporting precision + conventional identification of missing leaves",
+    "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+}
 STRATA = ("S0", "S1", "S2")
 GROUP_CONCENTRATION = 100.0
 LEAF_CONCENTRATION = 50.0
@@ -199,6 +205,7 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
     signature = {
         "qualityEquation": "observed leaves" if stratum == "S0" else "full composite",
         "scenarioStratum": stratum,
+        "scenarioTargetProfileId": TARGET_PROFILES[stratum],
         "specificationBranch": "core",
         "kernel": "endpoint-heavy alternative" if alternative else "primary" if alternative_rows is None else "block assignment",
         "endpointHeavyRows": sorted(alternative_rows) if alternative_rows is not None else None,
@@ -326,7 +333,10 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
         result[row.row] = entry
     pairwise = [{"pair": list(pair), **{key: count / n for key, count in counts_.items()}} for pair, counts_ in outcomes.items()]
     panel = sorted(row.row for row in rows)
-    return {"stratum": stratum, "scenarios": n, "seed": seed, "alternative": alternative, "panel": panel, "panelSize": len(panel), "rows": result, "pairwise": pairwise}
+    return {
+        "stratum": stratum, "targetProfile": TARGET_PROFILES[stratum], "scenarios": n, "seed": seed, "alternative": alternative,
+        "panel": panel, "panelSize": len(panel), "rows": result, "pairwise": pairwise,
+    }
 
 
 def _beta_continued_fraction(a: float, b: float, x: float) -> float:
