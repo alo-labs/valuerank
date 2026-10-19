@@ -383,3 +383,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 23 (Kimi K3, round 4, Thinking) — adopted
 - All findings (E68–E72).
+
+## Editor decisions after reviewer 24 (owner may override)
+- E73. Constrained evidence model: the primitive-variable constraint graph is authoritative; box reductions only with a decision-specific proof; outer enclosures prune, original constraints certify; infeasible-favourable-state fixture.
+- E74. A set-identified M_W enters the displayed score at its lower bound (lower-capacity-bound convention), also for Plan anchors; joint cost and value intervals and upper-bound rank sensitivity published (answers GLM Q1, consistent with the existing lower-bound route rule).
+- E75. Plan numerator eligibility ledger: delivered execution under the declared policy, including permitted retries, counts; failed/rejected requests, platform overhead and evaluation-only repetitions do not; unseparable receipts → bound or unidentified transport (answers GLM Q2 from the existing "eligible usage delivered" definition).
+- E76. Completed-work diagnostic in workload-equivalent passes on identical support; restricted-support diagnostic otherwise.
+- E77. Sequential Monte Carlo rule: 16 looks to 160,000; Clopper–Pearson at α/16, α = 0.05 per published event; met / not met / continue / unresolved (answers GLM Q3: per event, family declared).
+- E78. "Configuration" terminology, configuration IDs and per-leaf execution manifests.
+
+## Reviewer 24 (GLM 5.3, round 4, Thinking) — adopted
+- All findings (E73–E78).

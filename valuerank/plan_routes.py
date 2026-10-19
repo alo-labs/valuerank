@@ -1,0 +1,178 @@
+"""v3 Plan routes: evidence admission, expiry, lexicographic route choice and Plan cost (O3, O4/O7, O11, O13, O16).
+
+A route gives a Value Multiple M for a model on a plan tier. For each model the
+route's evidence is classified:
+
+- ``measured``: a controlled saturation measurement of this exact model
+  (e.g. SemiAnalysis), or at least two independent end-user reports concordant
+  within 20% (max/min <= 1.2 on the unpooled reports, then a geometric mean).
+- ``assumption``: an owner-named model-to-model transfer (labelled; it never
+  identifies the scored-workload multiple M_W).
+- ``diagnostic``: single-source reports and anything else the admission rule
+  does not admit; shown, never in the official Plan ranking.
+
+Routes past the 90-day hard expiry plus a 30-day grace are demoted to
+diagnostic; the model then falls back to API cost, flagged and labelled
+"cross-estimand ordering not identified". The official route is chosen
+lexicographically: identified M_W first, then evidence grade, then the
+multiple, then the lower fee. Plan cost is the API basket cost divided by M.
+"""
+
+from __future__ import annotations
+
+import math
+from datetime import date
+
+SOFT_EXPIRY_DAYS = 30
+HARD_EXPIRY_DAYS = 90
+GRACE_DAYS = 30
+CONCORDANCE_RATIO = 1.2
+CONTROLLED_KINDS = {"controlled_account_workload_projection", "controlled_measurement"}
+ASSUMPTION_KINDS = {"user_assumption"}
+REPORT_KINDS = {"user_reported_projection", "end_user_report", "community_observed"}
+GRADE = {"measured": 2, "assumption": 1, "diagnostic": 0}
+# Route source-model labels mapped to ValueRank model ids (the donor of a measured multiple).
+SOURCE_MODEL_IDS = {
+    "Opus 5.5": "claude-opus-5-5",
+    "GPT-6 Astra": "gpt-6-astra",
+    "GPT-6.1 Sol": "gpt-6.1-sol",
+    "Grok 4.7 XHigh": "grok-4.7",
+}
+
+
+def concordant_pool(reports: list[float]) -> float | None:
+    """Geometric-mean pool of at least two independent reports that agree within 20% (checked unpooled)."""
+
+    values = [float(value) for value in reports if value and value > 0]
+    if len(values) < 2 or max(values) / min(values) > CONCORDANCE_RATIO:
+        return None
+    return math.exp(sum(math.log(value) for value in values) / len(values))
+
+
+def evidence_grade(route: dict, model_id: str) -> str:
+    """Classify a route's evidence for one model (see the module docstring)."""
+
+    kind = route.get("valueMultipleKind")
+    source_kind = route.get("sourceEvidenceClass")
+    same_model = SOURCE_MODEL_IDS.get(route.get("sourceModel")) == model_id
+    if kind in CONTROLLED_KINDS:
+        return "measured" if same_model or len(route.get("modelIds", [])) == 1 else "assumption"
+    if kind in ASSUMPTION_KINDS:
+        # The donor model's own route is its measurement; other models carry the owner-named transfer.
+        return "measured" if same_model and source_kind in CONTROLLED_KINDS else "assumption"
+    if kind in REPORT_KINDS and concordant_pool(route.get("independentReports") or []) is not None:
+        return "measured"
+    return "diagnostic"
+
+
+def age_days(route: dict, release_day: date) -> int | None:
+    stamp = route.get("checkedOn") or route.get("validFrom")
+    if not stamp:
+        return None
+    return (release_day - date.fromisoformat(stamp)).days
+
+
+def expiry_status(route: dict, release_day: date) -> str:
+    """fresh / possibly-superseded (soft expiry) / expired (hard expiry, in grace) / demoted (past grace)."""
+
+    age = age_days(route, release_day)
+    if age is None:
+        return "fresh"
+    if age > HARD_EXPIRY_DAYS + GRACE_DAYS:
+        return "demoted"
+    if age > HARD_EXPIRY_DAYS:
+        return "expired"
+    if age > SOFT_EXPIRY_DAYS:
+        return "possibly-superseded"
+    return "fresh"
+
+
+def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date) -> list[dict]:
+    """Every route that names this model, classified; variant-restricted routes need an exact effort match."""
+
+    candidates = []
+    for route in routes:
+        if model_id not in route.get("modelIds", []):
+            continue
+        required = route.get("requiredVariant")
+        if required is not None and (configuration_effort or "").casefold() != required.casefold():
+            continue
+        grade = evidence_grade(route, model_id)
+        expiry = expiry_status(route, release_day)
+        if expiry == "demoted":
+            grade = "diagnostic"
+        candidates.append(
+            {
+                "route": route,
+                "grade": grade,
+                "expiry": expiry,
+                "identification": route.get("identification", "unidentified"),
+            }
+        )
+    return candidates
+
+
+def select_route(candidates: list[dict]) -> dict | None:
+    """The official route: identified M_W first, then evidence grade, then the multiple, then the lower fee."""
+
+    eligible = [candidate for candidate in candidates if candidate["grade"] != "diagnostic"]
+    if not eligible:
+        return None
+
+    def key(candidate):
+        route = candidate["route"]
+        fee = route.get("planPriceUsd")
+        return (
+            candidate["identification"] in {"point-identified", "set-identified"},
+            GRADE[candidate["grade"]],
+            float(route["valueMultiple"]),
+            -(fee if isinstance(fee, (int, float)) else math.inf),
+            route["id"],
+        )
+
+    return max(eligible, key=key)
+
+
+def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
+    """Plan cost for one row: API basket cost / M, or an API fallback with its flags."""
+
+    if api_cost is None:
+        return {"costUsd": None, "fallback": None, "flags": []}
+    if selected is None:
+        return {
+            "costUsd": api_cost,
+            "fallback": "api",
+            "flags": ["API-cost fallback: no admitted Plan route", "cross-estimand ordering not identified"],
+        }
+    route = selected["route"]
+    flags = []
+    if selected["identification"] not in {"point-identified", "set-identified"}:
+        flags.append("workload-unmatched")
+    if selected["grade"] == "assumption":
+        flags.append("owner-named transfer (assumption)")
+    if selected["expiry"] in {"possibly-superseded", "expired"}:
+        flags.append(selected["expiry"])
+    return {
+        "costUsd": api_cost / float(route["valueMultiple"]),
+        "fallback": None,
+        "routeId": route["id"],
+        "multiple": float(route["valueMultiple"]),
+        "grade": selected["grade"],
+        "identification": selected["identification"],
+        "flags": flags,
+    }
+
+
+def identification_yield(selected_by_row: dict) -> dict:
+    """E61/E67: counts of point- and set-identified official routes, and the exploratory label rule."""
+
+    rows = len(selected_by_row)
+    point = sum(1 for item in selected_by_row.values() if item and item["identification"] == "point-identified")
+    set_identified = sum(1 for item in selected_by_row.values() if item and item["identification"] == "set-identified")
+    return {
+        "rows": rows,
+        "pointIdentified": point,
+        "setIdentified": set_identified,
+        "unidentified": rows - point - set_identified,
+        "exploratory": rows > 0 and 2 * (point + set_identified) < rows,
+    }
