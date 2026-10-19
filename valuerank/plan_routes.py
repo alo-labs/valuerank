@@ -122,6 +122,14 @@ def expiry_status(route: dict, release_day: date) -> str:
     return "fresh"
 
 
+def valuation_status(route: dict) -> str:
+    """E138: release / revalued / different (O7 price-basis mismatch) / unverified (basis not recorded)."""
+
+    if route.get("valuationBasisReconciled") is False:
+        return "different"
+    return route.get("valuationBasis") if route.get("valuationBasis") in {"release", "revalued", "different"} else "unverified"
+
+
 def _divisor_eligible(route: dict) -> bool:
     """E109: every multiple a route can divide by is finite and strictly positive."""
 
@@ -157,7 +165,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
         grade = evidence_grade(route, model_id)
         expiry = expiry_status(route, release_day)
         # O7/E123: a measurement on an unreconciled price basis is unmatched; E109: divisors must be positive.
-        if expiry == "demoted" or not _divisor_eligible(route) or route.get("valuationBasisReconciled") is False:
+        if expiry == "demoted" or not _divisor_eligible(route) or valuation_status(route) == "different":
             grade = "diagnostic"
         candidates.append(
             {
@@ -194,7 +202,7 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
             continue
         for candidate in candidates:
             identified = candidate["identification"] in IDENTIFIED
-            if candidate["route"].get("valuationBasisReconciled") is False:
+            if valuation_status(candidate["route"]) == "different":
                 case = 4
             elif candidate["grade"] == "diagnostic":
                 case = 5
@@ -203,7 +211,11 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
             else:
                 case = "identified" if identified else 3
             transport = case == "identified"
-            table.append({**candidate, "case": case, "officialDisplayEligible": case not in (4, 5), "targetTransportIdentified": transport, "planIntervalEligible": transport})
+            valued = valuation_status(candidate["route"]) in {"release", "revalued"}
+            table.append({
+                **candidate, "case": case, "valuation": valuation_status(candidate["route"]), "officialDisplayEligible": case not in (4, 5),
+                "targetTransportIdentified": transport, "planIntervalEligible": transport and valued,
+            })
     return table
 
 
@@ -328,6 +340,8 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         flags.append("owner-named transfer (assumption)")
     if selected["expiry"] in {"possibly-superseded", "expired"}:
         flags.append(selected["expiry"])
+    if valuation_status(route) == "unverified":
+        flags.append("valuation basis unverified")
     return {
         "costUsd": api_cost / comparison_multiple(route),
         "fallback": None,

@@ -69,7 +69,7 @@ def documents(**overrides) -> dict:
         "planRoutes": {"routes": [
             {"id": "plan-a", "valueMultiple": 10.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10"},
             {"id": "plan-b", "valueMultiple": 2.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["b"], "planPriceUsd": 20, "checkedOn": "2026-10-10",
-             "identification": "point-identified"},
+             "identification": "point-identified", "valuationBasis": "release"},
         ]},
     }
     base.update(overrides)
@@ -158,6 +158,9 @@ def test_plan_boxes_need_an_identified_finite_multiple():
     open_set = documents()["planRoutes"]
     open_set["routes"][1].update(identification="set-identified", valueMultipleLower=1.0)
     assert v.plan_boxes(assembled(planRoutes=open_set)) == []
+    unrecorded = documents()["planRoutes"]
+    del unrecorded["routes"][1]["valuationBasis"]
+    assert v.plan_boxes(assembled(planRoutes=unrecorded)) == []  # E138: an unrecorded basis is never interval-eligible
 
 
 def scored(**overrides):

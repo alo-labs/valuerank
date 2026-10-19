@@ -289,7 +289,8 @@ def plan_boxes(assembled: dict) -> list[intervals.Box]:
         if selected is None or not cost["fullCost"] or cost["workload"] != assembled["mainWorkload"]:
             continue
         bounds = plan_routes.identified_bounds(selected)
-        if bounds is None or not anchor_math.scoreable(bounds[1]):
+        # E138: an unrecorded or different valuation basis is never interval-eligible.
+        if bounds is None or not anchor_math.scoreable(bounds[1]) or plan_routes.valuation_status(selected["route"]) not in {"release", "revalued"}:
             continue
         summary = row["summary"]
         boxes.append(intervals.Box(row["id"], cost["lowUsd"] / bounds[1], cost["highUsd"] / bounds[0], summary.lower, summary.upper, summary.provisional))

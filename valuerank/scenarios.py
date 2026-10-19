@@ -21,7 +21,9 @@ upper bound < 0.90, otherwise continue, ending "unresolved" at the cap.
 
 from __future__ import annotations
 
+import hashlib
 import itertools
+import json
 import math
 import random
 from dataclasses import dataclass, field
@@ -254,11 +256,17 @@ def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str
         )
     primary = runs["UUU"]
     met = all(run["status"] == "met" for run in runs.values())
+    unresolved = any(run["status"] == "scenario threshold unresolved" for run in runs.values())
     eligible = primary["uniqueLabelEligible"]
-    if met and eligible:
+    # E137: distinct outcomes; the label needs every registered assignment met.
+    if not eligible:
+        reading = "frequency only (provisional row)"
+    elif met:
         reading = "supported under all registered role-group kernel checks"
+    elif unresolved:
+        reading = "scenario threshold unresolved"
     elif primary["status"] == "met":
-        reading = "primary-kernel frequency >= 90%; kernel-sensitive" if eligible else "frequency only (provisional row)"
+        reading = "primary-kernel frequency >= 90%; kernel-sensitive"
     else:
         reading = "not scenario-supported"
     shares_ = [run["share"] for run in runs.values()]
@@ -267,6 +275,7 @@ def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str
         "dependencyComponents": [[row.row] for row in rows],
         "switchGroups": {"candidate": [candidate], "reference": [reference], "competitors": sorted({row.row for row in rows} - {candidate, reference})},
         "assignments": [{"id": item["id"], "endpointHeavyRows": sorted(item["endpointHeavyRows"])} for item in assignments],
+        "assignmentSetHash": hashlib.sha256(json.dumps(sorted(item["id"] for item in assignments)).encode()).hexdigest()[:16],
         "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
         "executionStatus": "threshold unresolved" if any(run["status"] == "scenario threshold unresolved" for run in runs.values()) else "completed",
     }

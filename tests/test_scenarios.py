@@ -213,6 +213,12 @@ def test_kernel_robust_label_needs_every_kernel():
     assert result["kernelCheck"]["dependencyComponents"] == [["c"], ["ref"]]
     borderline = sc.kernel_robust_cheapest([candidate, full_row("ref", 79.0, 100.0)], "c", "ref", 2, batch=200, looks=1)
     assert borderline["kernelCheck"]["executionStatus"] == "threshold unresolved"
+    assert borderline["reading"] == "scenario threshold unresolved" and borderline["label"] is False
+    assert len(borderline["kernelCheck"]["assignmentSetHash"]) == 16
+    # Several independent competitor components map to one competitor group: group assignments only.
+    crowd = [full_row("c", 80.0, 10.0), reference] + [full_row(f"x{i}", 90.0, 500.0) for i in range(4)]
+    grouped = sc.kernel_robust_cheapest(crowd, "c", "ref", 4, batch=100, looks=1)
+    assert len(grouped["assignments"]) == 8 and grouped["kernelCheck"]["switchGroups"]["competitors"] == ["x0", "x1", "x2", "x3"]
     provisional = sc.kernel_robust_cheapest([full_row("c", 80.0, 10.0, provisional=True), reference], "c", "ref", 3, batch=100, looks=1)
     assert provisional["label"] is False and provisional["reading"] == "frequency only (provisional row)"
     never = sc.kernel_robust_cheapest([full_row("c", 50.0, 10.0), reference], "c", "ref", 3, batch=100, looks=1)

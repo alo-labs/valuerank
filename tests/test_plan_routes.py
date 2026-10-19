@@ -194,8 +194,8 @@ def test_plan_cost_routes_fallbacks_and_flags():
     selected = candidate("r", 50.0, "assumption", expiry="possibly-superseded")
     result = pr.plan_cost(1000.0, selected)
     assert result["costUsd"] == 20.0 and result["multiple"] == 50.0
-    assert result["flags"] == ["workload-unmatched", "owner-named transfer (assumption)", "possibly-superseded"]
-    identified = pr.plan_cost(1000.0, candidate("r", 50.0, "controlled", identification="point-identified"))
+    assert result["flags"] == ["workload-unmatched", "owner-named transfer (assumption)", "possibly-superseded", "valuation basis unverified"]
+    identified = pr.plan_cost(1000.0, {**candidate("r", 50.0, "controlled", identification="point-identified"), "route": route("r", 50.0, valuationBasis="release")})
     assert identified["flags"] == [] and identified["identification"] == "point-identified"
     ranged = {"route": route("s", 50.0, valueMultipleLower=40.0, valueMultipleUpper=60.0), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
     assert pr.plan_cost(1000.0, ranged)["costUsd"] == 25.0  # scored at the lower bound (E74)
@@ -222,7 +222,7 @@ def test_admission_table_classifies_every_route_once():
         route("unmatched", 9, models=("m",)),
         route("basis", 9, models=("m",), valuationBasisReconciled=False),
         route("single-report", 9, kind="user_reported_projection", models=("m",)),
-        route("identified", 9, models=("m",), identification="point-identified"),
+        route("identified", 9, models=("m",), identification="point-identified", valuationBasis="release"),
         route("other-model", 9, models=("x",)),
     ]
     table = {item["route"]["id"]: item for item in pr.admission_table("m", "max", routes, TODAY)}
@@ -288,3 +288,20 @@ def test_route_selection_is_permutation_invariant():
     candidates = pr.route_candidates("m", "max", [base, route("q", 10.0, kind="user_reported_projection", models=("m",), independentReports=reports)], TODAY)
     chosen = {pr.select_route(_random.Random(seed).sample(candidates, len(candidates)))["route"]["id"] for seed in range(20)}
     assert chosen == {"q#m1"}
+
+
+def test_valuation_status_and_interval_eligibility():
+    """E138: release / revalued continue; different is diagnostic; an unrecorded basis is flagged and never interval-eligible."""
+
+    assert pr.valuation_status(route("a", 1)) == "unverified"
+    assert pr.valuation_status(route("a", 1, valuationBasis="release")) == "release"
+    assert pr.valuation_status(route("a", 1, valuationBasis="revalued")) == "revalued"
+    assert pr.valuation_status(route("a", 1, valuationBasis="different")) == "different"
+    assert pr.valuation_status(route("a", 1, valuationBasisReconciled=False)) == "different"
+    same_multiple = [route("now", 9, models=("m",), identification="point-identified", valuationBasis="release"),
+                     route("old", 9, models=("m",), identification="point-identified", valuationBasis="different"),
+                     route("unknown", 9, models=("m",), identification="point-identified")]
+    table = {item["route"]["id"]: item for item in pr.admission_table("m", "max", same_multiple, TODAY)}
+    assert table["now"]["officialDisplayEligible"] and table["now"]["planIntervalEligible"]
+    assert table["old"]["case"] == 4 and not table["old"]["officialDisplayEligible"]
+    assert table["unknown"]["officialDisplayEligible"] and not table["unknown"]["planIntervalEligible"]

@@ -541,3 +541,10 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 38 (GPT-6.1 Sol, round 7, Thinking) — adopted
 - All findings (E133–E136).
+
+## Editor decisions after reviewer 39 (owner may override)
+- E137. One governing kernel-check definition (consolidating E112, E121, E132, E133): dependency components → role switch groups (merged when roles share a component) → A = {uniform, arcsine}^G → published assignment list and hash; label iff UniqueLabelEligible and every assignment completed with its E77 lower bound ≥ 0.90; distinct outcomes (withheld, threshold unresolved, kernel-sensitive, not supported); fixture with several competitor components in one group. The superseded E121/E132 enumeration and "block-exhaustive" label text are removed.
+- E138. Valuation compatibility consolidated into the admission rule: release basis → workload checks (O16 applies); revalued from a public ledger → continues; different and not revaluable → diagnostic-only (E106 case 4); basis not recorded → displayed with "valuation basis unverified", never interval-eligible. The stale "keeps the original valuation basis under O16" sentence is removed. Partly adopted: Sonnet proposed treating an unknown basis as not display-eligible; that would remove every current Plan route for missing metadata although O7 excludes only established mismatches, so unknown bases are flagged instead and the registry is to record them.
+
+## Reviewer 39 (Claude Sonnet 5.5, round 7, Thinking) — adopted (E138 partly, reason above)
+- E137, E138.
