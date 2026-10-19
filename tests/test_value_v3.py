@@ -310,6 +310,7 @@ def test_scenarios_hash_attach_and_bar_labels():
     document = v.run_scenarios(result, frozen, n=200, seed=7)
     assert document["inputHash"] == v.scenario_hash(result, frozen, n=200, seed=7)
     assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1"]
+    assert document["streamDescriptions"]["S0"] == "published-record reporting precision" and len(document["notQuantified"]) == 2
     assert document["barLabels"][0]["status"] == "evaluated"
     current = v.attach_scenarios(v.score(result, frozen), document, document["inputHash"])
     assert current["scenarios"]["status"] == "current" and current["gates"]["hold"] is False
@@ -501,3 +502,20 @@ def test_cost_removal_is_typed_by_basis():
     assert v.basis_cost_on(row, removed, "api") == 80.0  # scored only against API anchors
     fallback = dict(row, routeSelection={"selected": None})
     assert v.basis_cost_on(fallback, removed, "plan") == 80.0
+
+
+def test_cost_kernels_derive_the_basket_cost_from_component_draws():
+    """E154: two rounded components are drawn separately and summed with the exact part; never one uniform on the sum."""
+
+    def component(cost, half=0.0):
+        return basket.component_cost(cost, half_width=half, completeness=basket.COMPLETE, source="s")
+
+    components = {"scicode": component(100.0), "frontiercode": component(10.0, 0.5), "itbench-aa": component(20.0, 0.5)}
+    row = {"components": components, "cost": {**basket.row_cost(components, list(components)), "components": list(components)}}
+    kernel = v._cost_kernel(row, 130.0)
+    assert kernel.family == "uniform-sum" and kernel.params == (100.0, (9.5, 10.5), (19.5, 20.5))
+    halved = v._cost_kernel(row, 65.0)  # a Plan cost at multiple 2 scales every term
+    assert halved.params == (50.0, (4.75, 5.25), (9.75, 10.25))
+    single = {"components": {"scicode": component(100.0), "frontiercode": component(10.0, 0.5)}}
+    single["cost"] = basket.row_cost(single["components"], list(single["components"]))
+    assert v._cost_kernel(single, 110.0) == v._kernel(109.5, 110.5, 110.0)

@@ -590,3 +590,10 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 44 (GPT-6.1 Sol, round 8, Thinking) — adopted
 - All findings (E150–E153).
+
+## Editor decisions after reviewer 45 (owner may override)
+- E154. Joint rounding law: compiled constraint components of rounded records with registered joint-law objects; singletons keep independent kernels; derived quantities from drawn primitives (the basket cost is now the exact part plus each rounded component's own draw — previously one uniform on the summed interval, harmless only while at most one rounded component entered); affine-linked components use a registered polytope convention and exact sampler, otherwise bounds and "joint rounding law not evaluated". Verified: v1 admitted costs are unrounded at source, so all v1 components are singletons and aggregates are validation identities only.
+- E155. Benchmark repeatability and fitted-parameter uncertainty are stated as outside v1 scenario shares (the contradictory "reported through the scenario shares" and Bug Hunt "enters the scenario shares" sentences are replaced); uncertainty descriptions come from the stream manifests (the scenario file now carries them and the not-quantified list); a release-text lint is required for the docs build.
+
+## Reviewer 45 (Claude Sonnet 5.5, round 8, Thinking) — adopted
+- All findings (E154–E155).

@@ -771,12 +771,36 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
 # --------------------------------------------------------------------------
 
 
+# E155: uncertainty outside every v1 stream, printed beside the scenario outputs.
+NOT_QUANTIFIED = (
+    "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares",
+    "fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares",
+)
+
 # E147: the registered kernel-check object for v1 (multiples and price lists are fixed inputs, not drawn).
 REGISTERED_DEPENDENCY = "every row its own dependency component: no shared varying primitive in v1 streams"
 
 
 def _kernel(low: float, high: float, point: float) -> scenarios.Kernel:
     return scenarios.Kernel("uniform", (low, high), "endpoint-heavy") if high > low else scenarios.Kernel("fixed", (point,))
+
+
+def _cost_kernel(row: dict, cost: float) -> scenarios.Kernel:
+    """E154: the basis cost derived from its components' draws, never one uniform on the summed interval.
+
+    Each rounded component record is a primitive with its own uniform kernel (arcsine
+    alternative); exact components are a fixed offset; a single rounded component is
+    a plain uniform. Plan costs scale every term by the row's API-to-Plan ratio.
+    """
+
+    ratio = cost / row["cost"]["costUsd"]
+    detail = row["components"]
+    rounded = [detail[key] for key in row["cost"]["components"] if detail[key]["halfWidthUsd"] > 0]
+    if len(rounded) <= 1:
+        return _kernel(row["cost"]["lowUsd"] * ratio, row["cost"]["highUsd"] * ratio, cost)
+    exact = sum(detail[key]["costUsd"] for key in row["cost"]["components"] if detail[key]["halfWidthUsd"] <= 0)
+    terms = tuple(((item["costUsd"] - item["halfWidthUsd"]) * ratio, (item["costUsd"] + item["halfWidthUsd"]) * ratio) for item in rounded)
+    return scenarios.Kernel("uniform-sum", (exact * ratio, *terms), "endpoint-heavy")
 
 
 def scenario_panel(assembled: dict, basis: str) -> list[scenarios.RowInputs]:
@@ -787,9 +811,8 @@ def scenario_panel(assembled: dict, basis: str) -> list[scenarios.RowInputs]:
         cost = _basis_cost(row, basis)
         if row["cost"]["workload"] != assembled["mainWorkload"] or not anchor_math.scoreable(cost):
             continue
-        ratio = cost / row["cost"]["costUsd"]
         leaves = {key: _kernel(value.low, value.high, value.z) for key, value in row["evidence"]["observations"].items()}
-        panel.append(scenarios.RowInputs(row["id"], leaves, _kernel(row["cost"]["lowUsd"] * ratio, row["cost"]["highUsd"] * ratio, cost), row["summary"].provisional))
+        panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional))
     return panel
 
 
@@ -828,6 +851,9 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
         "inputHash": scenario_hash(assembled, frozen, n=n, seed=seed),
         "seed": seed,
         "scenarios": n,
+        # E155: uncertainty descriptions come from the stream manifests, including what v1 does not quantify.
+        "streamDescriptions": dict(scenarios.TARGET_PROFILES),
+        "notQuantified": list(NOT_QUANTIFIED),
         "results": results,
         "barLabels": bar_labels(assembled, frozen, seed=seed, batch=n),
     }

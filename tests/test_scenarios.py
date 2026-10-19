@@ -33,6 +33,9 @@ def test_kernels_draw_their_families():
         Kernel("normal", (0, 1)).draw(rng)
     with pytest.raises(ValueError, match="never reporting precision"):
         Kernel("runs", (40.0, 50.0))
+    summed = Kernel("uniform-sum", (100.0, (9.5, 10.5), (19.5, 20.5)), "endpoint-heavy")
+    for heavy in (False, True):
+        assert 129.0 <= summed.draw(rng, use_alternative=heavy) <= 131.0
 
 
 def test_stream_target_profiles_are_an_allowlist():

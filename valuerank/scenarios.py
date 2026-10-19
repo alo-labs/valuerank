@@ -61,7 +61,7 @@ THRESHOLD = 0.90
 
 @dataclass(frozen=True)
 class Kernel:
-    """A draw kernel: 'fixed' (value), 'uniform' (low, high) or 'runs' (public run values to bootstrap)."""
+    """A draw kernel: 'fixed' (value), 'uniform' (low, high), 'uniform-sum' (offset, (low, high), ...) or 'runs' (public run values)."""
 
     family: str
     params: tuple
@@ -83,6 +83,11 @@ class Kernel:
         if self.family == "runs":
             values = self.params
             return sum(rng.choice(values) for _ in values) / len(values)
+        if self.family == "uniform-sum":
+            # E154: a derived sum of independently rounded primitives (an exact offset plus one interval per record).
+            offset, *intervals = self.params
+            heavy = use_alternative and self.alternative == "endpoint-heavy"
+            return offset + sum(low + (high - low) * rng.betavariate(0.5, 0.5) if heavy else rng.uniform(low, high) for low, high in intervals)
         raise ValueError(f"unknown kernel family: {self.family}")
 
 

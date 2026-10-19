@@ -20343,6 +20343,15 @@
       "inputHash": "0f45ea79e15d8f63cbaaea2b4338104b721af82360bbd7c1ca09a566c55ca225",
       "seed": 20261017,
       "scenarios": 10000,
+      "streamDescriptions": {
+        "S0": "published-record reporting precision",
+        "S1": "published-record reporting precision + conventional identification of missing leaves",
+        "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress"
+      },
+      "notQuantified": [
+        "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares",
+        "fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares"
+      ],
       "results": {
         "api": [
           {
