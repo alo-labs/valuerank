@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from valuerank import basket
+from valuerank import diagnostics
 from valuerank import quality as q
 from valuerank import value_v3 as v
 
@@ -182,7 +183,8 @@ def test_score_ranks_gates_disclosures_and_intervals():
     assert manifest["subset scoring (O17)"] == "fired" and manifest["Plan exploratory label (E61)"] == "fired"
     assert output["measuredOnlyPlanView"]["rows"]["b"]["status"] == "measured, target-workload identified"
     assert output["measuredOnlyPlanView"]["rows"]["c"]["status"] == "no measured route"
-    assert output["diagnostics"]["groupDrift"]["status"] == "not estimable"
+    assert output["diagnostics"]["groupDrift"]["status"] == diagnostics.INSUFFICIENT_PANEL
+    assert output["diagnostics"]["qualityDispersion"]["weightedSpread"]["status"] == diagnostics.INSUFFICIENT_PANEL
     assert manifest["configuration map coverage"] == "passed"
     mapping = documents()["configurationMap"]
     del mapping["rows"]["c"]
@@ -484,3 +486,18 @@ def test_standing_cost_removal_has_fixed_and_recalibrated_calculations():
     assert api["fixedAnchors"]["rankChanges"]["maxAbsChange"] == 0 and api["recalibrated"]["rankChanges"]["maxAbsChange"] == 0
     per_row = {row["id"]: {basis: {"value": None} for basis in v.BASES} for row in result["rows"]}
     assert v.cost_removal(result, frozen, per_row, component="frontiercode") == {"component": "frontiercode", "status": "not in the admitted basket"}
+
+
+def test_cost_removal_is_typed_by_basis():
+    """E152 fixture: API basket 100 with Index-run Terminal-Bench 20 and displayed multiple 4 -> Plan 25, removal (100 - 20) / 4 = 20."""
+
+    def component(cost):
+        return basket.component_cost(cost, completeness=basket.COMPLETE, source="s")
+
+    route_ = {"id": "p", "valueMultiple": 4.0}
+    row = {"components": {"scicode": component(80.0), "terminalbench-4-0": component(20.0)}, "routeSelection": {"selected": {"route": route_}}}
+    full, removed = ["scicode", "terminalbench-4-0"], ["scicode"]
+    assert v.basis_cost_on(row, full, "plan") == 25.0 and v.basis_cost_on(row, removed, "plan") == 20.0  # never 25 - 20 = 5
+    assert v.basis_cost_on(row, removed, "api") == 80.0  # scored only against API anchors
+    fallback = dict(row, routeSelection={"selected": None})
+    assert v.basis_cost_on(fallback, removed, "plan") == 80.0

@@ -137,6 +137,27 @@ def test_group_drift_on_a_common_complete_panel():
     assert swe["nominalShare"] == pytest.approx(0.75) and knowledge["nominalShare"] == pytest.approx(0.25)
     assert knowledge["spreadShare"] == pytest.approx(408.248 / (244.949 + 408.248), rel=1e-4)
     assert knowledge["flag"] is True and swe["flag"] is False
-    assert dg.group_drift({"a": [1.0, 2.0]}, weights, groups)["status"] == "not estimable"
-    assert dg.group_drift({"a": [1.0, 2.0, 3.0], "b": [1.0, 2.0]}, weights, groups)["status"] == "not estimable"
-    assert dg.group_drift({"a": [1.0, 1.0, 1.0]}, weights, groups)["status"] == "not estimable"
+    assert result["excludedLeaves"] == ["b"]
+    assert dg.group_drift({"a": [1.0, 2.0]}, weights, groups)["status"] == dg.INSUFFICIENT_PANEL
+    assert dg.group_drift({"a": [1.0, 2.0, 3.0], "b": [1.0, 2.0]}, weights, groups)["status"] == dg.INSUFFICIENT_PANEL
+    # E153: no eligible leaf, or eligible leaves without weight, leave nothing to allocate and raise no flag.
+    flat = dg.group_drift({"a": [1.0, 1.0, 1.0]}, weights, groups)
+    assert flat["status"] == dg.NO_DISPERSION and flat["groups"] == {} and flat["excludedLeaves"] == ["a"]
+    assert dg.group_drift({"a": [10.0, 20.0, 30.0]}, {"a": 0.0}, groups)["status"] == dg.NO_DISPERSION
+
+
+def test_dispersion_shares_and_covariance_allocation():
+    """E153/E81: normalised weighted spread and signed covariance allocation on one common complete panel."""
+
+    weights = {"a": 30.0, "b": 10.0}
+    z = {"a": [10.0, 20.0, 30.0], "b": [30.0, 20.0, 10.0]}
+    spread = dg.dispersion_shares(z, weights)
+    assert spread["status"] == "estimated" and spread["shares"]["a"] == pytest.approx(0.75)
+    allocation = dg.covariance_allocation(z, weights)
+    assert allocation["status"] == "estimated" and sum(allocation["allocation"].values()) == pytest.approx(1.0)
+    assert allocation["allocation"]["b"] < 0  # b moves against the composite
+    assert dg.dispersion_shares({"a": [1.0, 2.0]}, weights)["status"] == dg.INSUFFICIENT_PANEL
+    assert dg.dispersion_shares({"a": [5.0, 5.0, 5.0]}, weights) == {"status": dg.NO_DISPERSION, "shares": {}}
+    assert dg.covariance_allocation({"a": [1.0, 2.0]}, weights)["status"] == dg.INSUFFICIENT_PANEL
+    cancel = dg.covariance_allocation({"a": [10.0, 20.0, 30.0], "b": [60.0, 30.0, 0.0]}, weights)
+    assert cancel["status"].startswith("not estimable on this panel")

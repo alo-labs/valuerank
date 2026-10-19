@@ -185,6 +185,8 @@ def effective_weights(z_by_leaf: dict, weights: dict) -> dict:
 
 
 DRIFT_LOW, DRIFT_HIGH, DRIFT_MIN_ROWS = 0.5, 1.5, 3
+INSUFFICIENT_PANEL = "not estimable (insufficient panel)"
+NO_DISPERSION = "undefined (no eligible quality dispersion)"
 
 
 def group_drift(z_by_leaf: dict, weights: dict, groups: dict) -> dict:
@@ -195,21 +197,65 @@ def group_drift(z_by_leaf: dict, weights: dict, groups: dict) -> dict:
     flagged outside [0.5, 1.5] x its renormalised nominal share.
     """
 
-    rows = {len(values) for values in z_by_leaf.values()}
-    if len(rows) != 1 or rows.pop() < DRIFT_MIN_ROWS:
-        return {"status": "not estimable", "eligibleLeaves": [], "groups": {}}
+    if not _common_panel(z_by_leaf):
+        return {"status": INSUFFICIENT_PANEL, "eligibleLeaves": [], "excludedLeaves": sorted(z_by_leaf), "groups": {}}
     eligible = sorted(leaf for leaf, values in z_by_leaf.items() if statistics.pstdev(values) >= NON_DISCRIMINATING_SD)
     spread = {leaf: weights[leaf] * statistics.pstdev(z_by_leaf[leaf]) for leaf in eligible}
     total_spread, total_weight = sum(spread.values()), sum(weights[leaf] for leaf in eligible)
-    if not eligible:
-        return {"status": "not estimable", "eligibleLeaves": [], "groups": {}}
+    if total_spread <= 0:
+        # E153: no eligible leaf (or no weighted dispersion among them): nothing to allocate, no drift flags.
+        return {"status": NO_DISPERSION, "eligibleLeaves": [], "excludedLeaves": sorted(z_by_leaf), "groups": {}}
     result = {}
     for group in sorted({groups[leaf] for leaf in eligible}):
         members = [leaf for leaf in eligible if groups[leaf] == group]
         share = sum(spread[leaf] for leaf in members) / total_spread
         nominal = sum(weights[leaf] for leaf in members) / total_weight
         result[group] = {"spreadShare": share, "nominalShare": nominal, "flag": share < DRIFT_LOW * nominal or share > DRIFT_HIGH * nominal}
-    return {"status": "estimated", "eligibleLeaves": eligible, "groups": result}
+    return {"status": "estimated", "eligibleLeaves": eligible, "excludedLeaves": sorted(set(z_by_leaf) - set(eligible)), "groups": result}
+
+
+def _common_panel(z_by_leaf: dict) -> int:
+    """The common complete panel's size, or 0 when the leaves disagree on it or it has fewer than DRIFT_MIN_ROWS rows."""
+
+    sizes = {len(values) for values in z_by_leaf.values()}
+    size = sizes.pop() if len(sizes) == 1 else 0
+    return size if size >= DRIFT_MIN_ROWS else 0
+
+
+def dispersion_shares(z_by_leaf: dict, weights: dict) -> dict:
+    """E153: the normalised weighted spread d_b / sum_h d_h, d_b = w_b SD(z_b), on one common complete panel."""
+
+    if not _common_panel(z_by_leaf):
+        return {"status": INSUFFICIENT_PANEL, "shares": {}}
+    spread = {leaf: weights[leaf] * statistics.pstdev(values) for leaf, values in z_by_leaf.items()}
+    total = sum(spread.values())
+    if total <= 0:
+        return {"status": NO_DISPERSION, "shares": {}}
+    return {"status": "estimated", "shares": {leaf: spread[leaf] / total for leaf in sorted(spread)}}
+
+
+def covariance_allocation(z_by_leaf: dict, weights: dict) -> dict:
+    """E81: Cov(c_b z_b, Q) / Var(Q) with fixed coefficients c_b = w_b / sum w on one common complete panel.
+
+    The terms sum to one and can be negative; a panel without composite variance is not estimable.
+    """
+
+    size = _common_panel(z_by_leaf)
+    if not size:
+        return {"status": INSUFFICIENT_PANEL, "allocation": {}}
+    leaves = sorted(z_by_leaf)
+    total_weight = sum(weights[leaf] for leaf in leaves)
+    composite = [sum(weights[leaf] * z_by_leaf[leaf][index] for leaf in leaves) / total_weight for index in range(size)]
+    centre = statistics.fmean(composite)
+    variance = sum((value - centre) ** 2 for value in composite) / size
+    if variance <= 0:
+        return {"status": "not estimable on this panel (no composite variance)", "allocation": {}}
+    allocation = {}
+    for leaf in leaves:
+        mean = statistics.fmean(z_by_leaf[leaf])
+        covariance = sum((z_by_leaf[leaf][index] - mean) * (composite[index] - centre) for index in range(size)) / size
+        allocation[leaf] = weights[leaf] / total_weight * covariance / variance
+    return {"status": "estimated", "allocation": allocation}
 
 
 def non_discriminating(z_by_leaf: dict) -> list:

@@ -194,19 +194,45 @@ def _divisor_eligible(route: dict) -> bool:
     return all(isinstance(value, (int, float)) and not isinstance(value, bool) and 0 < value < math.inf for value in values)
 
 
-def measurement_objects(route: dict) -> list[dict]:
-    """E111: a route's measurement objects — its own measurement, or one per concordant comparable report partition."""
+STAGES = ("fresh", "possibly-superseded", "expired", "demoted")
+
+
+def report_stage(report: dict, route: dict, release_day: date) -> str:
+    """E151: one report's own expiry stage (its measurement window's end, else its report date; else the route's)."""
+
+    stamp = (report.get("measurementWindow") or {}).get("end") or report.get("reportDate")
+    source = {"id": report["id"], "sourcePublicationDate": stamp, "changeDetectedOn": route.get("changeDetectedOn")} if stamp else route
+    return expiry_status(source, release_day)
+
+
+def measurement_objects(route: dict, release_day: date | None = None) -> list[dict]:
+    """E111/E151: a route's measurement objects — its own measurement, or one per concordant comparable report partition.
+
+    With a release day, each report is first classified by its own clock; reports
+    past expiry and grace leave their partition, and the complete surviving
+    partition is pooled and re-tested for source count and concordance (never a
+    searched-for passing subset). The object carries its contributors, the
+    excluded reports and its partition stage (the most advanced contributor stage).
+    """
 
     reports = route.get("independentReports")
     if route.get("valueMultipleKind") not in REPORT_KINDS or not reports:
         return [route]
+    stages = {report["id"]: report_stage(report, route, release_day) if release_day else "fresh" for report in reports}
+    excluded = sorted(report_id for report_id, stage in stages.items() if stage == "demoted")
     groups, _separate = comparable_groups(reports)
     objects = []
     for index, group in enumerate(groups, start=1):
-        pooled = concordant_pool([report.get("multiple") for report in group])
+        surviving = [report for report in group if stages[report["id"]] != "demoted"]
+        pooled = concordant_pool([report.get("multiple") for report in surviving])
         if pooled is not None:
-            objects.append({**route, "id": f"{route['id']}#m{index}", "routeId": route["id"], "valueMultiple": pooled, "reportIds": sorted(report["id"] for report in group)})
-    return objects or [route]
+            objects.append({
+                **route, "id": f"{route['id']}#m{index}", "routeId": route["id"], "valueMultiple": pooled, "independentReports": surviving,
+                "reportIds": sorted(report["id"] for report in surviving), "excludedReportIds": excluded,
+                "partitionStage": max((stages[report["id"]] for report in surviving), key=STAGES.index),
+            })
+    # No surviving partition: the route keeps only its unexpired reports, so it cannot grade as pooled evidence.
+    return objects or [{**route, "independentReports": [report for report in reports if stages[report["id"]] != "demoted"], "excludedReportIds": excluded}]
 
 
 def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None) -> list[dict]:
@@ -217,14 +243,15 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
 
     by_id = {item["id"]: item for item in (registry if registry is not None else routes)}
     candidates = []
-    for route in [item for base in routes for item in measurement_objects(base)]:
+    for route in [item for base in routes for item in measurement_objects(base, release_day)]:
         if model_id not in route.get("modelIds", []):
             continue
         required = route.get("requiredVariant")
         if required is not None and (configuration_effort or "").casefold() != required.casefold():
             continue
         grade = evidence_grade(route, model_id)
-        expiry = expiry_status(route, release_day, by_id)
+        # E151: a pooled partition ages with its contributors; any other object with its own (or its donor's) clock.
+        expiry = route.get("partitionStage") or expiry_status(route, release_day, by_id)
         source = donor(route, by_id)
         # O7/E123: a measurement on an unreconciled price basis is unmatched; E109: divisors must be positive;
         # E144: a transfer is diagnostic whenever its donor measurement is.

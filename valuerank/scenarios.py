@@ -17,7 +17,7 @@ Each scenario draws:
 Results are scenario frequencies per stratum, never probabilities, each with a
 Monte Carlo standard error. Threshold labels (90%) use the sequential rule:
 looks every 10,000 scenarios up to 160,000, an exact Clopper-Pearson interval at
-level alpha/16 per look, "met" when the lower bound >= 0.90, "not met" when the
+error allocation alpha/16 per look (confidence 1 - alpha/16, equal tails), "met" when the lower bound >= 0.90, "not met" when the
 upper bound < 0.90, otherwise continue, ending "unresolved" at the cap.
 """
 
@@ -464,7 +464,11 @@ def _beta_quantile(target: float, a: float, b: float) -> float:
 
 
 def clopper_pearson(successes: int, n: int, alpha: float) -> tuple[float, float]:
-    """Exact two-sided binomial interval at level alpha, from Beta quantiles."""
+    """Exact equal-tailed binomial interval with error allocation ``alpha`` (confidence 1 - alpha, alpha/2 per tail).
+
+    ``alpha`` is the error allocation, not the confidence level (E150): SciPy's
+    equivalent call takes ``confidence_level=1 - alpha``.
+    """
 
     lower = 0.0 if successes == 0 else _beta_quantile(alpha / 2.0, successes, n - successes + 1)
     upper = 1.0 if successes == n else _beta_quantile(1.0 - alpha / 2.0, successes + 1, n - successes)
@@ -475,13 +479,18 @@ def sequential_threshold(event, rng: random.Random, *, threshold: float = THRESH
     """The E77 rule for one event: batches until the interval clears the threshold, else unresolved at the cap."""
 
     successes = trials = 0
+    error = alpha / looks  # E150: Bonferroni error allocation per look; confidence level 1 - alpha / looks
     for look in range(1, looks + 1):
         for _ in range(batch):
             successes += bool(event(rng))
             trials += 1
-        lower, upper = clopper_pearson(successes, trials, alpha / looks)
+        lower, upper = clopper_pearson(successes, trials, error)
+        certificate = {
+            "share": successes / trials, "successes": successes, "scenarios": trials, "interval": (lower, upper),
+            "perLookError": error, "confidenceLevel": 1.0 - error, "tailAllocation": "equal (half the per-look error in each tail)",
+        }
         if lower >= threshold:
-            return {"status": "met", "share": successes / trials, "scenarios": trials, "interval": (lower, upper), "looks": look}
+            return {"status": "met", **certificate, "looks": look}
         if upper < threshold:
-            return {"status": "not met", "share": successes / trials, "scenarios": trials, "interval": (lower, upper), "looks": look}
-    return {"status": "scenario threshold unresolved", "share": successes / trials, "scenarios": trials, "interval": (lower, upper), "looks": looks}
+            return {"status": "not met", **certificate, "looks": look}
+    return {"status": "scenario threshold unresolved", **certificate, "looks": looks}

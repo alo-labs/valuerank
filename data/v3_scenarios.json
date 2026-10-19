@@ -2235,11 +2235,15 @@
             "UUU": {
               "status": "met",
               "share": 1.0,
+              "successes": 10000,
               "scenarios": 10000,
               "interval": [
                 0.9993540618902661,
                 1.0
               ],
+              "perLookError": 0.003125,
+              "confidenceLevel": 0.996875,
+              "tailAllocation": "equal (half the per-look error in each tail)",
               "looks": 1,
               "uniqueLabelEligible": true,
               "labelAuthorized": true,
@@ -2261,11 +2265,15 @@
             "UUH": {
               "status": "met",
               "share": 1.0,
+              "successes": 10000,
               "scenarios": 10000,
               "interval": [
                 0.9993540618902661,
                 1.0
               ],
+              "perLookError": 0.003125,
+              "confidenceLevel": 0.996875,
+              "tailAllocation": "equal (half the per-look error in each tail)",
               "looks": 1,
               "uniqueLabelEligible": true,
               "labelAuthorized": true,
@@ -2303,11 +2311,15 @@
             "HHU": {
               "status": "met",
               "share": 1.0,
+              "successes": 10000,
               "scenarios": 10000,
               "interval": [
                 0.9993540618902661,
                 1.0
               ],
+              "perLookError": 0.003125,
+              "confidenceLevel": 0.996875,
+              "tailAllocation": "equal (half the per-look error in each tail)",
               "looks": 1,
               "uniqueLabelEligible": true,
               "labelAuthorized": true,
@@ -2331,11 +2343,15 @@
             "HHH": {
               "status": "met",
               "share": 1.0,
+              "successes": 10000,
               "scenarios": 10000,
               "interval": [
                 0.9993540618902661,
                 1.0
               ],
+              "perLookError": 0.003125,
+              "confidenceLevel": 0.996875,
+              "tailAllocation": "equal (half the per-look error in each tail)",
               "looks": 1,
               "uniqueLabelEligible": true,
               "labelAuthorized": true,

@@ -330,8 +330,36 @@ def test_measurement_objects_make_route_measurement_pairs():
     selection = pr.route_selection(candidates)
     assert selection["selected"]["route"]["id"] == "r#m2" and selection["selected"]["route"]["routeId"] == "r"
     failing = route("f", 1.0, kind="user_reported_projection", models=("m",), independentReports=[comparable_report("a", 10.0), comparable_report("b", 20.0)])
-    assert pr.measurement_objects(failing) == [failing]
+    assert pr.measurement_objects(failing) == [{**failing, "excludedReportIds": []}]
     assert pr.measurement_objects(route("plain", 5.0)) == [route("plain", 5.0)]
+
+
+def test_pooled_partitions_age_with_their_contributing_reports():
+    """E151: each report keeps its own clock; demoted reports leave the partition before pooling and re-testing."""
+
+    def dated(identifier, multiple, day, **overrides):
+        return {**comparable_report(identifier, multiple, **overrides), "measurementWindow": {"start": day, "end": day}}
+
+    fresh_pair = [dated("a", 10.0, "2026-10-12"), dated("b", 11.0, "2026-09-01")]
+    base = route("r", 1.0, kind="user_reported_projection", models=("m",), checked="2026-10-15", independentReports=fresh_pair + [dated("old", 30.0, "2026-04-01")])
+    (pooled,) = pr.measurement_objects(base, TODAY)
+    # The demoted report leaves; the rest pool; the partition takes its most advanced contributor stage.
+    assert pooled["reportIds"] == ["a", "b"] and pooled["excludedReportIds"] == ["old"]
+    assert pooled["partitionStage"] == "possibly-superseded" and pooled["valueMultiple"] == pytest.approx((10 * 11) ** 0.5)
+    (candidate_,) = pr.route_candidates("m", "max", [base], TODAY)
+    assert (candidate_["grade"], candidate_["expiry"]) == ("reports", "possibly-superseded")
+    # Without a release day nothing is excluded, so the three reports fail concordance as a set.
+    assert pr.measurement_objects(base)[0]["excludedReportIds"] == [] and "partitionStage" not in pr.measurement_objects(base)[0]
+    # When expiry leaves fewer than two reports the route cannot grade as pooled evidence.
+    lonely = route("l", 1.0, kind="user_reported_projection", models=("m",), independentReports=[dated("a", 10.0, "2026-10-12"), dated("gone", 10.5, "2026-04-01")])
+    (left,) = pr.route_candidates("m", "max", [lonely], TODAY)
+    assert left["grade"] == "diagnostic" and left["route"]["excludedReportIds"] == ["gone"]
+    # An undated report ages with the route; a report date counts when no window is stated.
+    undated = {**comparable_report("u", 10.0)}
+    assert pr.report_stage(undated, route("x", 1, checked="2026-05-01"), TODAY) == "demoted"
+    assert pr.report_stage({**undated, "reportDate": "2026-10-18"}, route("x", 1, checked="2026-05-01"), TODAY) == "fresh"
+    changed = route("x", 1, checked="2026-10-15", changeDetectedOn="2026-10-16")
+    assert pr.report_stage({**undated, "reportDate": "2026-10-14"}, changed, TODAY) == "possibly-superseded"
 
 
 def test_measured_only_selection_drops_transfers_and_reruns_the_selector():

@@ -255,6 +255,13 @@ def workload_catalog(assembled: dict) -> dict:
     return catalog
 
 
+def basis_cost_on(row: dict, workload_components: list[str], basis: str) -> float | None:
+    """E152: a row's cost on a workload, typed by basis: the API sum A, or P = A / m with the row's selected
+    displayed multiple m (an API-fallback row's Plan cost is A, as on the primary workload)."""
+
+    return restricted_cost(row["components"], workload_components) if basis == "api" else _plan_cost_on(row, workload_components)
+
+
 def _plan_cost_on(row: dict, workload_components: list[str]) -> float | None:
     cost = restricted_cost(row["components"], workload_components)
     if cost is None:
@@ -474,14 +481,12 @@ def cost_removal(assembled: dict, frozen: dict, per_row: dict, component: str = 
     rows = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
     bases = {}
     for basis in BASES:
-        def cost_on(row):
-            return restricted_cost(row["components"], remaining) if basis == "api" else _plan_cost_on(row, remaining)
-
+        costs = {row["id"]: basis_cost_on(row, remaining, basis) for row in assembled["rows"]}
         original = frozen["workloads"][main]["anchors"][basis]
-        rebuilt = anchor_math.anchor_object({row["id"]: cost_on(row) for row in assembled["rows"]}, basis=basis, workload=workload)
+        rebuilt = anchor_math.anchor_object(costs, basis=basis, workload=workload)
         primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows}
-        fixed = {row["id"]: anchor_math.value_score(anchor_math.cost_score(cost_on(row), original), row["summary"].displayed, BETA) for row in rows}
-        recalibrated = {row["id"]: anchor_math.value_score(anchor_math.cost_score(cost_on(row), rebuilt), row["summary"].displayed, BETA) for row in rows}
+        fixed = {row["id"]: anchor_math.value_score(anchor_math.cost_score(costs[row["id"]], original), row["summary"].displayed, BETA) for row in rows}
+        recalibrated = {row["id"]: anchor_math.value_score(anchor_math.cost_score(costs[row["id"]], rebuilt), row["summary"].displayed, BETA) for row in rows}
         bases[basis] = {
             "multiplePolicy": FIXED_MULTIPLE_LABEL if basis == "plan" else None,
             "fixedAnchors": {"label": FIXED_ANCHOR_LABEL, "rankChanges": diagnostics.paired_rank_change(primary, fixed)},
@@ -579,6 +584,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "qualityAgreement": agreement,
             "nonDiscriminatingLeaves": diagnostics.non_discriminating(_z_by_leaf(rows)),
             "groupDrift": _group_drift(rows),
+            "qualityDispersion": _panel_dispersion(rows),
             "deletionSensitivity": _deletion_sensitivity(rows, per_row),
             "costRemoval": cost_removal(assembled, frozen, per_row),
         },
@@ -619,13 +625,26 @@ def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict) -> dict:
     return {"specification": specification, "rows": entries, "rankChangeVsOfficial": diagnostics.paired_rank_change(official, values)}
 
 
-def _group_drift(rows: list[dict]) -> dict:
-    """E114 on the common complete panel: rows with every leaf observed."""
+def _complete_panel(rows: list[dict]) -> tuple[list[str], dict, dict]:
+    """The declared common complete panel (rows with every leaf observed), its z values and nominal weights."""
 
     complete = [row for row in rows if len(row["evidence"]["observations"]) == len(q.LEAVES)]
     z = {leaf.key: [row["evidence"]["observations"][leaf.key].z for row in complete] for leaf in q.LEAVES}
-    result = diagnostics.group_drift(z, {leaf.key: leaf.weight for leaf in q.LEAVES}, {leaf.key: leaf.group for leaf in q.LEAVES})
-    return {**result, "panel": sorted(row["id"] for row in complete)}
+    return sorted(row["id"] for row in complete), z, {leaf.key: leaf.weight for leaf in q.LEAVES}
+
+
+def _group_drift(rows: list[dict]) -> dict:
+    """E114 on the common complete panel."""
+
+    panel, z, weights = _complete_panel(rows)
+    return {**diagnostics.group_drift(z, weights, {leaf.key: leaf.group for leaf in q.LEAVES}), "panel": panel}
+
+
+def _panel_dispersion(rows: list[dict]) -> dict:
+    """E153/E81: the normalised weighted spread and the signed covariance allocation on the common complete panel."""
+
+    panel, z, weights = _complete_panel(rows)
+    return {"panel": panel, "weightedSpread": diagnostics.dispersion_shares(z, weights), "covarianceAllocation": diagnostics.covariance_allocation(z, weights)}
 
 
 def _tb_same_harness(rows: list[dict], tb4_rows: list[dict]) -> dict:
@@ -731,7 +750,16 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
             # Strict JSON: an unknown fee (infinite gross cash) is written as null.
             "comparisonTuples": {key: [item if math.isfinite(item) else None for item in value] for key, value in selection["tuples"].items()},
             "selectedIdentification": selected["identification"] if selected else None,
-            "admission": [{"routeId": item["route"]["id"], "case": item["case"], "officialDisplayEligible": item["officialDisplayEligible"], "planIntervalEligible": item["planIntervalEligible"]} for item in row["admissionTable"]],
+            "admission": [
+                {
+                    "routeId": item["route"]["id"], "case": item["case"], "officialDisplayEligible": item["officialDisplayEligible"],
+                    "planIntervalEligible": item["planIntervalEligible"],
+                    # E144/E151: the evidence clock behind the classification.
+                    "expiry": item.get("expiry"), "evidenceDate": item.get("evidenceDate"), "donorRouteId": item.get("donorRouteId"),
+                    "contributingReportIds": item["route"].get("reportIds"), "excludedReportIds": item["route"].get("excludedReportIds"),
+                }
+                for item in row["admissionTable"]
+            ],
         },
         "api": {**scores["api"], "rank": ranks["api"].get(row["id"])},
         "planScore": {**scores["plan"], "rank": ranks["plan"].get(row["id"])},

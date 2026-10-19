@@ -579,3 +579,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 43 (Gemini 3.8 Flash, round 7, Thinking) — adopted
 - All findings (E148–E149). Round 7 is complete; round 8 starts on r43.
+
+# Round 8 (reviewer 44 onward)
+
+## Editor decisions after reviewer 44 (owner may override)
+- E150. The sequential interval names its parameters: per-look error allocation δ = 0.05/16, confidence 1 − δ = 0.996875, equal tails, Beta-quantile endpoints with the k = 0 and k = n cases, SciPy's confidence_level = 1 − δ; certificates record per_look_error, confidence_level, tail_allocation, k, n, L, U; closed-form endpoint fixture. Verified: the implementation already passed the error allocation (alpha / looks) to an equal-tailed construction; only the wording and certificate were missing.
+- E151. Pooled Plan evidence ages by contributor: each report's own clock first, demoted reports leave before pooling, the complete surviving partition is re-tested, and the partition stage is its most advanced contributor's; contributors, exclusions and stages are published. Implemented, including the case where expiry leaves fewer than two reports (pooled evidence becomes diagnostic).
+- E152. The cost-removal arithmetic is typed by basis (A, m, P = A/m; removal before division; each scored only on its own basis' anchors; fallback rows take the API cost); the 100/20/4 fixture. Verified: the implementation already divided after subtracting; the fixture now guards it.
+- E153. Dispersion boundary cases: insufficient panel, no eligible leaves and zero dispersion are distinct statuses with no drift flag; the normalised weighted spread and the covariance allocation (E81), required by the draft but not yet computed, are now implemented on the common complete panel.
+
+## Reviewer 44 (GPT-6.1 Sol, round 8, Thinking) — adopted
+- All findings (E150–E153).

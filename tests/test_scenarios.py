@@ -177,6 +177,22 @@ def test_regularized_beta_and_clopper_pearson():
     assert sc.clopper_pearson(10, 10, 0.05) == (pytest.approx(0.6915, abs=1e-4), 1.0)
 
 
+def test_clopper_pearson_takes_the_error_allocation_not_the_confidence_level():
+    """E150: per-look error 0.05/16, confidence 0.996875, equal tails; closed forms at k = n and k = 0."""
+
+    delta, n = 0.05 / 16, 10_000
+    lower, upper = sc.clopper_pearson(n, n, delta)
+    assert upper == 1.0 and lower == pytest.approx((delta / 2) ** (1 / n), abs=1e-9)  # 0.999354...
+    lower, upper = sc.clopper_pearson(0, n, delta)
+    assert lower == 0.0 and upper == pytest.approx(1 - (delta / 2) ** (1 / n), abs=1e-9)
+    # Reading 0.05/16 as a confidence level instead would give a far narrower interval.
+    wide, narrow = sc.clopper_pearson(9_100, n, delta), sc.clopper_pearson(9_100, n, 1 - delta)
+    assert wide[0] < narrow[0] and wide[1] > narrow[1]
+    result = sc.sequential_threshold(lambda r: True, random.Random(1), batch=100, looks=16)
+    assert result["perLookError"] == pytest.approx(delta) and result["confidenceLevel"] == pytest.approx(0.996875)
+    assert result["successes"] == result["scenarios"] and result["tailAllocation"].startswith("equal")
+
+
 def test_sequential_threshold_met_not_met_and_unresolved():
     rng = random.Random(5)
     met = sc.sequential_threshold(lambda r: True, rng, batch=100, looks=4)
