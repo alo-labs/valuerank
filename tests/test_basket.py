@@ -204,3 +204,27 @@ def test_admission_enumerates_subsets_instead_of_a_greedy_order():
     panel = b.admission_panel(costs, ranked)
     assert panel["admitted"] == ["frontiercode", "itbench-aa"] and panel["referencePanel"] == ["1", "2", "3", "6"]
     assert panel["objective"] == [2, 4] and panel["components"][b.CODING_AGENT_INDEX]["admitted"] is False
+
+
+def test_admission_units_are_the_named_targets_whatever_the_accounting_representation():
+    """E148 fixture (N = 6): unit A on rows 1-4; units B and C on rows 3-6; A with B or C covers only rows 3-4.
+
+    Counting units selects B + C. A finer accounting representation of A (its
+    sub-benchmarks as children) is not a set of units: it is rejected, so it can
+    never outvote B + C.
+    """
+
+    ranked = ["1", "2", "3", "4", "5", "6"]
+    costs = {row: {} for row in ranked}
+    for row in ("1", "2", "3", "4"):
+        costs[row][b.CODING_AGENT_INDEX] = FULL
+    for row in ("3", "4", "5", "6"):
+        costs[row]["frontiercode"] = FULL
+        costs[row]["itbench-aa"] = FULL
+    panel = b.admission_panel(costs, ranked)
+    assert panel["admitted"] == ["frontiercode", "itbench-aa"] and panel["referencePanel"] == ["3", "4", "5", "6"]
+    children = {row: {key: value for key, value in entry.items() if key != b.CODING_AGENT_INDEX} for row, entry in costs.items()}
+    for row in ("1", "2", "3", "4"):
+        children[row].update({task: FULL for task in b.CODING_AGENT_TASKS})
+    with pytest.raises(ValueError, match="not a unit: deep-swe-v1.1, swe-atlas-qna, terminal-bench-v4"):
+        b.admission_panel(children, ranked)

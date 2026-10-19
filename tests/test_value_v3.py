@@ -465,3 +465,22 @@ def test_bar_labels_fail_when_the_compiled_dependency_graph_is_not_the_registere
     monkeypatch.setattr(v, "scenario_panel", linked)
     with pytest.raises(ValueError, match="registered kernel-check object"):
         v.bar_labels(result, frozen, seed=1, batch=50)
+
+
+def test_standing_cost_removal_has_fixed_and_recalibrated_calculations():
+    """E64/E149: AA's Index-run Terminal-Bench cost removed, scored on the original and on rebuilt anchors."""
+
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    removal = output["diagnostics"]["costRemoval"]
+    assert removal["status"] == "evaluated" and removal["component"] == "terminalbench-4-0"
+    assert "terminalbench-4-0" not in removal["alternativeWorkload"]["components"]
+    api, plan = removal["bases"]["api"], removal["bases"]["plan"]
+    assert api["fixedAnchors"]["label"] == v.FIXED_ANCHOR_LABEL and api["multiplePolicy"] is None
+    assert plan["multiplePolicy"] == v.FIXED_MULTIPLE_LABEL
+    assert api["recalibrated"]["rankChanges"]["panel"] == ["a", "b"]
+    assert api["recalibrated"]["anchors"]["high"] < frozen["workloads"][result["mainWorkload"]]["anchors"]["api"]["high"]
+    # Uniform per-task costs make the removal proportional: no rank changes on either calculation.
+    assert api["fixedAnchors"]["rankChanges"]["maxAbsChange"] == 0 and api["recalibrated"]["rankChanges"]["maxAbsChange"] == 0
+    per_row = {row["id"]: {basis: {"value": None} for basis in v.BASES} for row in result["rows"]}
+    assert v.cost_removal(result, frozen, per_row, component="frontiercode") == {"component": "frontiercode", "status": "not in the admitted basket"}

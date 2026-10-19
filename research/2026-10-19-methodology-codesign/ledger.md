@@ -572,3 +572,10 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 42 (GLM 5.3, round 7, Thinking) — adopted
 - All findings (E144–E147).
+
+## Editor decisions after reviewer 43 (owner may override)
+- E148. Admission units are exactly O15's ten named targets, each counted once whatever its accounting representation; unit evidence enters only at unit level (accepted aggregate or a composed complete decomposition), raw accounting children are rejected by the build, and a new unit is a basket migration; Gemini's six-row fixture added. Answers Gemini Q1 without escalation: O15 names the components, E140 already enumerated 2¹⁰ subsets of them, and the implementation already counted the Coding Agent Index as one unit.
+- E149. E64's standing Terminal-Bench cost-removal column defined as a cost-deletion object separate from quality deletion, with two named calculations — original anchors (sensitivity of the published scale) and recalibrated anchors for W∖TB (exchange rate published) — and the Plan basis labelled a fixed-multiple arithmetic stress. Answers Gemini Q2 without escalation: E64 is an editor decision and both readings answer different questions, so both are published. Implemented (it had not been computed before).
+
+## Reviewer 43 (Gemini 3.8 Flash, round 7, Thinking) — adopted
+- All findings (E148–E149). Round 7 is complete; round 8 starts on r43.

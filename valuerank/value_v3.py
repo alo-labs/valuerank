@@ -447,6 +447,61 @@ def _deletion_sensitivity(rows: list[dict], per_row: dict) -> list[dict]:
     return results
 
 
+# E64/E149: the standing cost-component removal. The Coding Agent Index runs Terminal-Bench v4 too, so the
+# column removes AA's Index-run Terminal-Bench 4.0 cost; quality stays primary (E146 governs quality deletion).
+STANDING_COST_REMOVAL = "terminalbench-4-0"
+FIXED_ANCHOR_LABEL = "cost-component removal, original anchors"
+RECALIBRATED_LABEL = "alternative workload, recalibrated anchors"
+FIXED_MULTIPLE_LABEL = "fixed-multiple arithmetic stress (not identified Plan economics for the altered workload)"
+
+
+def cost_removal(assembled: dict, frozen: dict, per_row: dict, component: str = STANDING_COST_REMOVAL) -> dict:
+    """The cost-deletion branch object D_cost = (R_C, W - R_C, anchor, route, multiple and panel policies).
+
+    Two calculations on the main-workload panel, each compared with the primary
+    ranks on the common panel (E65): the removed component's cost subtracted and
+    scored on the original anchor object, and the alternative workload scored on
+    anchors rebuilt by the freeze rule (its exchange rate published). The Plan
+    basis keeps each row's selected route and displayed multiple, labelled as a
+    fixed-multiple arithmetic stress.
+    """
+
+    main = assembled["mainWorkload"]
+    if component not in assembled["admitted"]:
+        return {"component": component, "status": "not in the admitted basket"}
+    remaining = [item for item in assembled["admitted"] if item != component]
+    workload = basket.workload_hash(remaining)
+    rows = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
+    bases = {}
+    for basis in BASES:
+        def cost_on(row):
+            return restricted_cost(row["components"], remaining) if basis == "api" else _plan_cost_on(row, remaining)
+
+        original = frozen["workloads"][main]["anchors"][basis]
+        rebuilt = anchor_math.anchor_object({row["id"]: cost_on(row) for row in assembled["rows"]}, basis=basis, workload=workload)
+        primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows}
+        fixed = {row["id"]: anchor_math.value_score(anchor_math.cost_score(cost_on(row), original), row["summary"].displayed, BETA) for row in rows}
+        recalibrated = {row["id"]: anchor_math.value_score(anchor_math.cost_score(cost_on(row), rebuilt), row["summary"].displayed, BETA) for row in rows}
+        bases[basis] = {
+            "multiplePolicy": FIXED_MULTIPLE_LABEL if basis == "plan" else None,
+            "fixedAnchors": {"label": FIXED_ANCHOR_LABEL, "rankChanges": diagnostics.paired_rank_change(primary, fixed)},
+            "recalibrated": {
+                "label": RECALIBRATED_LABEL,
+                "anchors": {key: rebuilt[key] for key in ("low", "high", "referenceIds")},
+                "exchangeRate": anchor_math.exchange_rate(rebuilt, BETA),
+                "rankChanges": diagnostics.paired_rank_change(primary, recalibrated),
+            },
+        }
+    return {
+        "component": component,
+        "status": "evaluated",
+        "alternativeWorkload": {"id": workload, "components": remaining},
+        "routePolicy": "each row's selected route on the primary workload",
+        "panelRule": "main-workload rows with a value in both runs (E65)",
+        "bases": bases,
+    }
+
+
 def _rule(rule: str, status: str, detail: str) -> dict:
     return {"rule": rule, "status": status, "detail": detail}
 
@@ -525,6 +580,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "nonDiscriminatingLeaves": diagnostics.non_discriminating(_z_by_leaf(rows)),
             "groupDrift": _group_drift(rows),
             "deletionSensitivity": _deletion_sensitivity(rows, per_row),
+            "costRemoval": cost_removal(assembled, frozen, per_row),
         },
         "manifest": manifest,
     }

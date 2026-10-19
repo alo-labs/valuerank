@@ -170,6 +170,12 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
     panel on the same components, is published beside it.
     """
 
+    # E148: the admission units are the ten named targets of O15, whatever their accounting representation;
+    # an accounting child (e.g. one Coding Agent Index sub-benchmark) never counts as a unit of its own.
+    unknown = sorted({component for costs in costs_by_row.values() for component in (costs or {})} - set(TARGET_COMPONENTS))
+    if unknown:
+        raise ValueError("admission units are the named basket targets (O15); not a unit: " + ", ".join(unknown))
+
     def available(row_id: str, component: str) -> bool:
         return (costs_by_row.get(row_id) or {}).get(component) is not None
 
