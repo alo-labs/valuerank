@@ -11,7 +11,7 @@ prints one line per part: <path>\t<last 12 words>
 import sys
 from pathlib import Path
 
-MAX_CHARS = 21_000
+MAX_CHARS = 22_000
 
 draft = Path(sys.argv[1])
 out = Path(sys.argv[2])

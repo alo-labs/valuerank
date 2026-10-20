@@ -2,7 +2,7 @@
 
 Perplexity accepts at most 40,000 characters of typed query text; longer pastes become a file
 upload, which the plan's weekly upload limit can block. Its GitHub connector truncates a file
-after about 27,900 characters, so the draft is read as parts of at most 21,000 characters
+after about 27,900 characters, so the draft is read as parts of at most 22,000 characters
 (split_draft.py) from a pushed commit of the public repository, and the reviewer proves it read
 every part to its end by quoting each part's last words.
 
