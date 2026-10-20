@@ -1,4 +1,4 @@
-# ValueRank v2.0.0 Raw Data
+# ValueRank v3.0.0 Raw Data
 
 **Updated:** October 19, 2026 · methodology 3.0.0
 

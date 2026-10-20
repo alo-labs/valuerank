@@ -1,7 +1,7 @@
 {
   "versions": [
     {
-      "version": "v2.0.0",
+      "version": "v3.0.0",
       "date": "October 19, 2026",
       "models": 19,
       "dimensions": 12,
@@ -10,13 +10,13 @@
         {
           "slug": "mimo-v2-6-flash",
           "name": "MiMo-V2.6-Flash",
-          "from": 10,
+          "from": 12,
           "to": 1
         },
         {
           "slug": "gpt-6-luna",
           "name": "GPT-6 Luna",
-          "from": 13,
+          "from": 11,
           "to": 3
         },
         {
@@ -28,13 +28,13 @@
         {
           "slug": "mimo-v2-6-pro",
           "name": "MiMo-V2.6-Pro",
-          "from": 9,
+          "from": 7,
           "to": 5
         },
         {
           "slug": "gpt-5-6-luna",
           "name": "GPT-5.6 Luna",
-          "from": 11,
+          "from": 10,
           "to": 6
         },
         {
@@ -52,13 +52,13 @@
         {
           "slug": "gpt-6-sol",
           "name": "GPT-6 Sol",
-          "from": 7,
+          "from": 8,
           "to": 9
         },
         {
           "slug": "claude-haiku-5-5",
           "name": "Claude Haiku 5.5",
-          "from": 16,
+          "from": 13,
           "to": 10
         },
         {
@@ -70,7 +70,7 @@
         {
           "slug": "gpt-5-6-sol",
           "name": "GPT-5.6 Sol",
-          "from": 5,
+          "from": 6,
           "to": 12
         },
         {
@@ -82,31 +82,31 @@
         {
           "slug": "claude-opus-5-5",
           "name": "Claude Opus 5.5",
-          "from": 6,
+          "from": 5,
           "to": 14
         },
         {
           "slug": "gemini-3-8-flash",
           "name": "Gemini 3.8 Flash",
-          "from": 12,
+          "from": 14,
           "to": 15
         },
         {
           "slug": "grok-4-7",
           "name": "Grok 4.7",
-          "from": 8,
+          "from": 9,
           "to": 16
         },
         {
           "slug": "glm-5-3",
           "name": "GLM-5.3",
-          "from": 15,
+          "from": 16,
           "to": 17
         },
         {
           "slug": "claude-opus-5",
           "name": "Claude Opus 5",
-          "from": 14,
+          "from": 15,
           "to": 18
         },
         {
@@ -136,6 +136,110 @@
         "mimo-v2-6-flash": 1,
         "mimo-v2-6-pro": 5,
         "qwen3-8-max": 19
+      },
+      "added": [],
+      "removed": []
+    },
+    {
+      "version": "v2.0.0",
+      "date": "October 19, 2026",
+      "models": 19,
+      "dimensions": null,
+      "summary": "19 models ranked; Gemini 4 Argon first.",
+      "rankChanges": [
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "from": 6,
+          "to": 5
+        },
+        {
+          "slug": "gpt-5-6-sol",
+          "name": "GPT-5.6 Sol",
+          "from": 5,
+          "to": 6
+        },
+        {
+          "slug": "mimo-v2-6-pro",
+          "name": "MiMo-V2.6-Pro",
+          "from": 9,
+          "to": 7
+        },
+        {
+          "slug": "gpt-6-sol",
+          "name": "GPT-6 Sol",
+          "from": 7,
+          "to": 8
+        },
+        {
+          "slug": "grok-4-7",
+          "name": "Grok 4.7",
+          "from": 8,
+          "to": 9
+        },
+        {
+          "slug": "gpt-5-6-luna",
+          "name": "GPT-5.6 Luna",
+          "from": 11,
+          "to": 10
+        },
+        {
+          "slug": "gpt-6-luna",
+          "name": "GPT-6 Luna",
+          "from": 13,
+          "to": 11
+        },
+        {
+          "slug": "mimo-v2-6-flash",
+          "name": "MiMo-V2.6-Flash",
+          "from": 10,
+          "to": 12
+        },
+        {
+          "slug": "claude-haiku-5-5",
+          "name": "Claude Haiku 5.5",
+          "from": 16,
+          "to": 13
+        },
+        {
+          "slug": "gemini-3-8-flash",
+          "name": "Gemini 3.8 Flash",
+          "from": 12,
+          "to": 14
+        },
+        {
+          "slug": "claude-opus-5",
+          "name": "Claude Opus 5",
+          "from": 14,
+          "to": 15
+        },
+        {
+          "slug": "glm-5-3",
+          "name": "GLM-5.3",
+          "from": 15,
+          "to": 16
+        }
+      ],
+      "ranks": {
+        "claude-haiku-5-5": 13,
+        "claude-opus-5": 15,
+        "claude-opus-5-5": 5,
+        "claude-sonnet-5-5": 3,
+        "deepseek-v4-flash": 17,
+        "deepseek-v4-pro": 19,
+        "gemini-3-8-flash": 14,
+        "gemini-4-argon": 1,
+        "glm-5-3": 16,
+        "gpt-5-6-luna": 10,
+        "gpt-5-6-sol": 6,
+        "gpt-6-astra": 4,
+        "gpt-6-luna": 11,
+        "gpt-6-sol": 8,
+        "gpt-6-1-sol": 2,
+        "grok-4-7": 9,
+        "mimo-v2-6-flash": 12,
+        "mimo-v2-6-pro": 7,
+        "qwen3-8-max": 18
       },
       "added": [],
       "removed": []

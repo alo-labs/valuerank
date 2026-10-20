@@ -632,3 +632,7 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Reviewer 49 (Gemini 3.8 Flash, round 8, Thinking) — adopted
 - M1 (E165) and M2 (E164). Delivery changed: Perplexity's weekly file-upload limit now blocks long pastes (they become paste.txt uploads) and typed queries are capped at 40,000 characters; its GitHub connector truncates a file after about 27,900 characters (Gemini refused a first, truncated read of the whole file). Drafts are therefore read from the public repository at a pinned commit as parts of at most 20,000 characters (review-input/), with the condensed ledger inline, and every review must open with a read check (the draft's first line and the last 12 words of each part); Gemini's matched all seven parts.
 
+## Round 9 (draft r49, read from review-input/ at commit 9a89e37)
+- Reviewer 50 (GPT-6.1 Sol, Thinking): VERDICT: NO FURTHER FEEDBACK. Read check passed (first line and each part's last 12 words; part 5's first quoted word reads "Q." for "i." in both this and the next review, a rendering artifact of that formula line, with the other eleven words exact).
+- Reviewer 51 (Claude Sonnet 5.5, Thinking): VERDICT: NO FURTHER FEEDBACK. Read check passed.
+- Reviewer 52 (Grok 4.7, Thinking): VERDICT: NO FURTHER FEEDBACK. Read check passed (part 5 quoted from its 11th-to-last word).

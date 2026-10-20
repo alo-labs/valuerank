@@ -1,4 +1,4 @@
-# ValueRank v2.0.0 Scores
+# ValueRank v3.0.0 Scores
 
 **Updated:** October 19, 2026 · methodology 3.0.0 · SDLC basket v1 · anchor version `v3-2026-10-19`
 

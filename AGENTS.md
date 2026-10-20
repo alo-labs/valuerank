@@ -10,9 +10,11 @@
 
 ## Value scoring
 
-- ValueRank ranks the AA Pareto and near-Pareto models by actual value. Token efficiency is AA's total cost to run the AA Intelligence Index benchmarks; on the Plan basis, value is the API-equivalent usage a subscription delivers against its fee.
-- On 2026-10-19 the owner set cost at a fixed 25% of the overall score on both the API and Plan bases (`COST_WEIGHT_PCT` in `valuerank/plan_costs.py`). Quality dimensions share the other 75% by their priorities. Missing quality metrics never change cost's share.
-- Both bases compare cost per AA Intelligence Index point. The Plan basis also divides by the highest eligible Value Multiple. Cost is scored on a log scale so cost ratios keep their magnitude; see `research/2026-10-19-valuerank-v2-value-scoring/`.
+- ValueRank ranks the AA Pareto and near-Pareto models by actual value, separately for API buyers and Plan (subscription) buyers. Methodology v3 (2026-10-19) is specified, with every owner and editor decision, in `research/2026-10-19-methodology-codesign/`; the published summary is `methodology.md`.
+- On 2026-10-19 the owner set cost at a fixed 25% of the value score on both the API and Plan bases (`COST_WEIGHT_PCT` in `valuerank/plan_costs.py`); quality takes the other 75%. Missing quality evidence never changes cost's share, and a configuration without a cost gets no value score.
+- Token efficiency is AA's published cost to run the SDLC cost basket for the exact configuration: the Intelligence Index's software-development evaluations plus the Coding Agent Index, each component admitted once its exact-configuration cost is captured (owner decision O15); total Index cost is a diagnostic only. A configuration missing an admitted component is scored on its own subset of the basket and flagged (O17). Cost is scored on a log scale against frozen, versioned anchors, so cost ratios keep their magnitude and one model's entry never moves another's score.
+- On the Plan basis, cost is the basket's API cost divided by the selected subscription route's Value Multiple at full utilisation (O3). Routes whose multiple is not identified on the basket are scored and flagged (O16); routes past expiry fall back to API cost, flagged (O13).
+- Quality is the weighted mean of the benchmark leaves observed for the exact configuration, each on fixed 0-100 anchors (software engineering 60%, general professional work 20%, reliability 10% as AA's Omniscience Index (O28), long context, science and knowledge 10%). Missing leaves stay missing, low coverage marks a row provisional, and there is no quality floor (O8). Interval outputs protect the published record (O25); scenario shares and diagnostics never change a score.
 
 ## Subscription allowance value-multiple evidence
 

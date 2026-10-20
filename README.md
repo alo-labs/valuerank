@@ -1,7 +1,7 @@
 # ValueRank
 **Frontier AI configurations ranked by value: benchmark quality against what the work costs**
 
-**Version:** v2.0.0
+**Version:** v3.0.0
 **Updated:** October 19, 2026
 **Methodology:** 3.0.0 · SDLC basket v1 · anchor version v3-2026-10-19
 **Scope:** 19 ranked configurations from a 31-model AA-mapped roster; value is a 25% cost score plus 75% quality over 11 benchmark leaves
