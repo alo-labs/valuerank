@@ -2,7 +2,7 @@
 
 Perplexity accepts at most 40,000 characters of typed query text; longer pastes become a file
 upload, which the plan's weekly upload limit can block. Its GitHub connector truncates a file
-after about 27,900 characters, so the draft is read as parts of at most 20,000 characters
+after about 27,900 characters, so the draft is read as parts of at most 21,000 characters
 (split_draft.py) from a pushed commit of the public repository, and the reviewer proves it read
 every part to its end by quoting each part's last words.
 
@@ -18,6 +18,7 @@ LIMIT = 40_000
 header_path, draft_path, parts_path, ledger_path, sha, out = sys.argv[1:7]
 draft = Path(draft_path)
 parts = [line.split("\t")[0] for line in Path(parts_path).read_text().splitlines() if line.strip()]
+longest = max(len(Path(part).read_text()) for part in parts)
 header = Path(header_path).read_text()
 header = header.replace("Review the methodology draft below", "Review the methodology draft linked above")
 header = header.replace("=== METHODOLOGY DRAFT ===", "").rstrip()
@@ -25,7 +26,7 @@ assert "linked above" in header, "reviewer header wording changed; update the su
 listing = "\n".join(
     f"{index}. {part} (raw: https://raw.githubusercontent.com/{REPO}/{sha}/{part})" for index, part in enumerate(parts, 1)
 )
-prompt = f"""@GitHub The methodology draft under review is {draft.name} ({len(draft.read_text()):,} characters) in the public GitHub repository {REPO} at commit {sha}. Because the GitHub connector truncates long files, read it as these {len(parts)} consecutive parts, each under 20,000 characters, which together are the whole draft in order:
+prompt = f"""@GitHub The methodology draft under review is {draft.name} ({len(draft.read_text()):,} characters) in the public GitHub repository {REPO} at commit {sha}. Because the GitHub connector truncates long files, read it as these {len(parts)} consecutive parts, each at most {longest:,} characters, which together are the whole draft in order:
 {listing}
 Open every part through the GitHub connector and read each one to its end before reviewing. Your tool calls are limited: spend them on the parts only (one file read per part), with no repository search or tool discovery first. Do not review from a summary or from search snippets.
 
