@@ -656,3 +656,9 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Reviewer 56 (GPT-6.1 Sol, round 10, Thinking) — adopted
 - H1 (E168). Read check passed.
 
+## Editor decision after reviewer 57 (owner may override)
+- E169. Two summaries aligned with their governing definitions (verified in r51): the interval procedure's opening "Θ = per-row input boxes × shared-factor box" now says primitive domains have a box enclosure and Θ is E73's constrained set (a product box replaces it only under a decision-specific equivalence proof); the uncertainty "Measurement" layer is restated as a taxonomy that names only what v1 quantifies (reporting precision in S0, conventional Terminal-Bench CI-range sensitivity in S1M). Wording only; the implementation already certifies against the constraints.
+
+## Reviewer 57 (Claude Sonnet 5.5, round 10, Thinking) — adopted
+- Both Low findings (E169). Read check passed.
+
