@@ -49,14 +49,15 @@ def plan_evidence_label(route):
 
 FRONTIER_RULE = (
     "Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus "
-    "total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA's "
-    "rendered line as observed; ValueRank never recomputes it from rounded values."
+    "total cost to run chart is ranked at its highest point on that line (along the strictly rising line also its dearest). "
+    "Frontier membership is AA's rendered line as observed; ValueRank never recomputes it from rounded values."
 )
 NEAR_FRONTIER_RULE = (
     "A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within {gap} points of the "
     "rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. "
-    "Every near-frontier family is ranked (its selected configuration may differ from the near configuration) or is explicitly "
-    "deferred by a dated, reasoned roster decision. The cost ratio to the frontier is reported for information only."
+    "Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Its selected configuration "
+    "may differ from the near configuration: it is the configuration already ranked for exact DeepSWE and Bug Hunt evidence when there "
+    "is one, else the near point with the smallest Index gap. The cost ratio to the frontier is reported for information only."
 )
 DEFAULT_NEAR_GAP = 3
 

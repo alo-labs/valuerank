@@ -53,9 +53,9 @@ def test_stale_scenarios_leave_shares_empty_and_documents_report_the_status(data
     assert bundle.extras["method"]["streamDescriptions"] == {} and bundle.extras["method"]["notQuantified"] == []
 
 
-def test_an_empty_bar_population_names_no_reference(data):
-    edit(data, "scores.json", lambda scores: scores["v3"]["barPolicy"].__setitem__("referenceIds", []))
-    assert viewmodel.build_bundle(data).extras["method"]["barReference"] is None
+def test_an_empty_bar_population_pins_no_level(data):
+    edit(data, "scores.json", lambda scores: scores["v3"]["barPolicy"].__setitem__("bars", []))
+    assert viewmodel.build_bundle(data).extras["method"]["barLevel"] is None
 
 
 def test_a_row_without_observed_leaves_grades_as_missing_and_saturated_leaves_carry_a_note(data):

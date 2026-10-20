@@ -7523,21 +7523,42 @@
     "beta": 0.25,
     "anchorVersion": "v3-2026-10-19",
     "barPolicy": {
-      "policyId": "median-definite-frontier",
-      "version": 1,
+      "policyId": "median-quality-level",
+      "version": 2,
       "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
-      "populationRule": "non-provisional configurations on the API main-workload definite frontier of the interval outputs",
+      "populationRule": "non-provisional ranked configurations with a displayed quality",
       "order": "displayed quality ascending, then configuration ID",
       "position": "lower median",
-      "emptyPopulation": "no bar pinned; the bar is published as unavailable",
+      "reference": "the displayed quality of the population's lower-median configuration, frozen as a level; the configuration itself is recorded for audit and competes like any other",
+      "minimumPopulation": 2,
+      "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
+      "nonTautology": "with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives",
       "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
       "selectionCutoff": "2026-10-19",
       "population": [
+        "claude-haiku-5-5",
+        "claude-opus-5",
+        "claude-opus-5-5",
+        "claude-sonnet-5-5",
+        "deepseek-v4-flash",
+        "deepseek-v4-pro",
+        "gemini-3.8-flash",
+        "gemini-4-argon",
+        "glm-5.3",
+        "gpt-5.6-luna",
+        "gpt-5.6-sol",
         "gpt-6-luna",
-        "gpt-6.1-sol"
+        "gpt-6-sol",
+        "gpt-6.1-sol",
+        "grok-4.7",
+        "qwen3.8-max"
       ],
-      "referenceIds": [
-        "gpt-6-luna"
+      "bars": [
+        {
+          "id": "bar:median-quality",
+          "level": 52.09441344290625,
+          "medianConfiguration": "glm-5.3"
+        }
       ]
     },
     "anchorPolicy": {
@@ -21209,12 +21230,10 @@
         "bars": [
           {
             "reference": {
-              "id": "gpt-6-luna",
-              "rule": "median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)"
-            },
-            "referenceQuality": {
-              "lower": 47.72717391795683,
-              "upper": 47.746697727480644
+              "id": "bar:median-quality",
+              "level": 52.09441344290625,
+              "medianConfiguration": "glm-5.3",
+              "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)"
             },
             "status": "certified",
             "rows": {
@@ -21227,8 +21246,8 @@
               "gpt-6.1-sol": {
                 "confirmed": "certified",
                 "possible": "certified",
-                "possibleCheapest": "disproved",
-                "witnessReferenceQuality": null
+                "possibleCheapest": "certified",
+                "witnessReferenceQuality": 52.09441344290625
               },
               "claude-sonnet-5-5": {
                 "confirmed": "certified",
@@ -21263,24 +21282,24 @@
               "gpt-5.6-luna": {
                 "confirmed": "disproved",
                 "possible": "certified",
+                "possibleCheapest": "certified",
+                "witnessReferenceQuality": 52.09441344290625
+              },
+              "gpt-6-luna": {
+                "confirmed": "disproved",
+                "possible": "disproved",
                 "possibleCheapest": "disproved",
                 "witnessReferenceQuality": null
               },
-              "gpt-6-luna": {
-                "confirmed": "certified",
-                "possible": "certified",
-                "possibleCheapest": "certified",
-                "witnessReferenceQuality": 47.746697727480644
-              },
               "claude-haiku-5-5": {
                 "confirmed": "disproved",
-                "possible": "certified",
+                "possible": "disproved",
                 "possibleCheapest": "disproved",
                 "witnessReferenceQuality": null
               },
               "gemini-3.8-flash": {
-                "confirmed": "certified",
-                "possible": "certified",
+                "confirmed": "disproved",
+                "possible": "disproved",
                 "possibleCheapest": "disproved",
                 "witnessReferenceQuality": null
               },
@@ -21291,7 +21310,7 @@
                 "witnessReferenceQuality": null
               },
               "glm-5.3": {
-                "confirmed": "certified",
+                "confirmed": "disproved",
                 "possible": "certified",
                 "possibleCheapest": "disproved",
                 "witnessReferenceQuality": null
@@ -21299,8 +21318,8 @@
               "deepseek-v4-flash": {
                 "confirmed": "disproved",
                 "possible": "certified",
-                "possibleCheapest": "disproved",
-                "witnessReferenceQuality": null
+                "possibleCheapest": "certified",
+                "witnessReferenceQuality": 52.09441344290625
               },
               "qwen3.8-max": {
                 "confirmed": "disproved",
@@ -21311,14 +21330,17 @@
               "deepseek-v4-pro": {
                 "confirmed": "disproved",
                 "possible": "certified",
-                "possibleCheapest": "disproved",
-                "witnessReferenceQuality": null
+                "possibleCheapest": "certified",
+                "witnessReferenceQuality": 52.09441344290625
               }
             },
             "possibleCheapest": [
-              "gpt-6-luna"
+              "gpt-6.1-sol",
+              "gpt-5.6-luna",
+              "deepseek-v4-flash",
+              "deepseek-v4-pro"
             ],
-            "confirmedCheapest": "gpt-6-luna"
+            "confirmedCheapest": null
           }
         ]
       },
@@ -21586,12 +21608,10 @@
           "bars": [
             {
               "reference": {
-                "id": "gpt-6-luna",
-                "rule": "median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)"
-              },
-              "referenceQuality": {
-                "lower": 47.72717391795683,
-                "upper": 47.746697727480644
+                "id": "bar:median-quality",
+                "level": 52.09441344290625,
+                "medianConfiguration": "glm-5.3",
+                "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)"
               },
               "status": "certified",
               "rows": {
@@ -21604,8 +21624,8 @@
                 "gpt-6.1-sol": {
                   "confirmed": "certified",
                   "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 52.09441344290625
                 },
                 "claude-sonnet-5-5": {
                   "confirmed": "certified",
@@ -21634,8 +21654,8 @@
                 "mimo-v2-6-pro": {
                   "confirmed": "disproved",
                   "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 52.09441344290625
                 },
                 "gpt-6-sol": {
                   "confirmed": "certified",
@@ -21652,30 +21672,30 @@
                 "gpt-5.6-luna": {
                   "confirmed": "disproved",
                   "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 52.09441344290625
                 },
                 "gpt-6-luna": {
-                  "confirmed": "certified",
-                  "possible": "certified",
-                  "possibleCheapest": "certified",
-                  "witnessReferenceQuality": 47.746697727480644
+                  "confirmed": "disproved",
+                  "possible": "disproved",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
                 },
                 "mimo-v2-6-flash": {
                   "confirmed": "disproved",
                   "possible": "certified",
                   "possibleCheapest": "certified",
-                  "witnessReferenceQuality": 47.746697727480644
+                  "witnessReferenceQuality": 52.09441344290625
                 },
                 "claude-haiku-5-5": {
                   "confirmed": "disproved",
-                  "possible": "certified",
+                  "possible": "disproved",
                   "possibleCheapest": "disproved",
                   "witnessReferenceQuality": null
                 },
                 "gemini-3.8-flash": {
-                  "confirmed": "certified",
-                  "possible": "certified",
+                  "confirmed": "disproved",
+                  "possible": "disproved",
                   "possibleCheapest": "disproved",
                   "witnessReferenceQuality": null
                 },
@@ -21686,7 +21706,7 @@
                   "witnessReferenceQuality": null
                 },
                 "glm-5.3": {
-                  "confirmed": "certified",
+                  "confirmed": "disproved",
                   "possible": "certified",
                   "possibleCheapest": "disproved",
                   "witnessReferenceQuality": null
@@ -21694,8 +21714,8 @@
                 "deepseek-v4-flash": {
                   "confirmed": "disproved",
                   "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 52.09441344290625
                 },
                 "qwen3.8-max": {
                   "confirmed": "disproved",
@@ -21706,13 +21726,17 @@
                 "deepseek-v4-pro": {
                   "confirmed": "disproved",
                   "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 52.09441344290625
                 }
               },
               "possibleCheapest": [
-                "gpt-6-luna",
-                "mimo-v2-6-flash"
+                "gpt-6.1-sol",
+                "mimo-v2-6-pro",
+                "gpt-5.6-luna",
+                "mimo-v2-6-flash",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro"
               ],
               "confirmedCheapest": null
             }
@@ -28285,12 +28309,12 @@
         {
           "key": "anchors",
           "artifact": "data/v3_frozen.json",
-          "sha256": "f3fb3db7a8302da941a2a35ee1ec11a284959baf025fc1a1943377a1fbfe5924",
+          "sha256": "91fbbe17c5d8d545f8fe885c251af2d2785f535c1e0b527904d0b284f286c843",
           "capturedAt": "2026-10-19",
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "0b4001c4f98d5c613ec419118f21a155b90b0a00f882fd774d8a07cfe05dd53f",
+      "bundleHash": "4e198807ffe0dd21802b5fefc30e641784dc8c3b223bfa2b08be29b9898c149e",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "scenarios": {
@@ -32211,19 +32235,20 @@
       ],
       "barLabels": [
         {
-          "reference": "gpt-6-luna",
+          "reference": "bar:median-quality",
+          "level": 52.09441344290625,
           "status": "evaluated",
           "candidates": {
-            "gpt-6-luna": {
+            "gpt-6.1-sol": {
               "assignments": {
-                "UUU": {
-                  "status": "met",
-                  "share": 1.0,
-                  "successes": 10000,
+                "UU": {
+                  "status": "not met",
+                  "share": 0.3827,
+                  "successes": 3827,
                   "scenarios": 10000,
                   "interval": [
-                    0.9993540618902661,
-                    1.0
+                    0.3683624909712607,
+                    0.39718258061049727
                   ],
                   "perLookError": 0.003125,
                   "confidenceLevel": 0.996875,
@@ -32242,18 +32267,20 @@
                     "specificationBranch": "core",
                     "kernel": "block assignment",
                     "endpointHeavyRows": [],
-                    "referenceObjectId": "gpt-6-luna"
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
                   },
-                  "label": true
+                  "label": false
                 },
-                "UUH": {
-                  "status": "met",
-                  "share": 1.0,
-                  "successes": 10000,
+                "UH": {
+                  "status": "not met",
+                  "share": 0.3176,
+                  "successes": 3176,
                   "scenarios": 10000,
                   "interval": [
-                    0.9993540618902661,
-                    1.0
+                    0.3039083710463123,
+                    0.33151726127270786
                   ],
                   "perLookError": 0.003125,
                   "confidenceLevel": 0.996875,
@@ -32283,23 +32310,25 @@
                       "glm-5.3",
                       "gpt-5.6-luna",
                       "gpt-5.6-sol",
+                      "gpt-6-luna",
                       "gpt-6-sol",
-                      "gpt-6.1-sol",
                       "grok-4.7",
                       "qwen3.8-max"
                     ],
-                    "referenceObjectId": "gpt-6-luna"
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
                   },
-                  "label": true
+                  "label": false
                 },
-                "HHU": {
-                  "status": "met",
-                  "share": 1.0,
-                  "successes": 10000,
+                "HU": {
+                  "status": "not met",
+                  "share": 0.3863,
+                  "successes": 3863,
                   "scenarios": 10000,
                   "interval": [
-                    0.9993540618902661,
-                    1.0
+                    0.37193501805870843,
+                    0.4008056000084862
                   ],
                   "perLookError": 0.003125,
                   "confidenceLevel": 0.996875,
@@ -32318,20 +32347,22 @@
                     "specificationBranch": "core",
                     "kernel": "block assignment",
                     "endpointHeavyRows": [
-                      "gpt-6-luna"
+                      "gpt-6.1-sol"
                     ],
-                    "referenceObjectId": "gpt-6-luna"
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
                   },
-                  "label": true
+                  "label": false
                 },
-                "HHH": {
-                  "status": "met",
-                  "share": 1.0,
-                  "successes": 10000,
+                "HH": {
+                  "status": "not met",
+                  "share": 0.3182,
+                  "successes": 3182,
                   "scenarios": 10000,
                   "interval": [
-                    0.9993540618902661,
-                    1.0
+                    0.3045010692791986,
+                    0.3321238202587715
                   ],
                   "perLookError": 0.003125,
                   "confidenceLevel": 0.996875,
@@ -32367,9 +32398,11 @@
                       "grok-4.7",
                       "qwen3.8-max"
                     ],
-                    "referenceObjectId": "gpt-6-luna"
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
                   },
-                  "label": true
+                  "label": false
                 }
               },
               "kernelCheck": {
@@ -32424,19 +32457,12 @@
                   ]
                 ],
                 "dependencyGraphHash": "df28ecb25535268c",
-                "mergedBlocks": [
-                  [
-                    "candidate",
-                    "reference"
-                  ]
-                ],
+                "mergedBlocks": [],
                 "switchGroups": {
                   "candidate": [
-                    "gpt-6-luna"
+                    "gpt-6.1-sol"
                   ],
-                  "reference": [
-                    "gpt-6-luna"
-                  ],
+                  "reference": [],
                   "competitors": [
                     "claude-haiku-5-5",
                     "claude-opus-5",
@@ -32449,19 +32475,19 @@
                     "glm-5.3",
                     "gpt-5.6-luna",
                     "gpt-5.6-sol",
+                    "gpt-6-luna",
                     "gpt-6-sol",
-                    "gpt-6.1-sol",
                     "grok-4.7",
                     "qwen3.8-max"
                   ]
                 },
                 "assignments": [
                   {
-                    "id": "UUU",
+                    "id": "UU",
                     "endpointHeavyRows": []
                   },
                   {
-                    "id": "UUH",
+                    "id": "UH",
                     "endpointHeavyRows": [
                       "claude-haiku-5-5",
                       "claude-opus-5",
@@ -32474,20 +32500,20 @@
                       "glm-5.3",
                       "gpt-5.6-luna",
                       "gpt-5.6-sol",
+                      "gpt-6-luna",
                       "gpt-6-sol",
-                      "gpt-6.1-sol",
                       "grok-4.7",
                       "qwen3.8-max"
                     ]
                   },
                   {
-                    "id": "HHU",
+                    "id": "HU",
                     "endpointHeavyRows": [
-                      "gpt-6-luna"
+                      "gpt-6.1-sol"
                     ]
                   },
                   {
-                    "id": "HHH",
+                    "id": "HH",
                     "endpointHeavyRows": [
                       "claude-haiku-5-5",
                       "claude-opus-5",
@@ -32508,16 +32534,934 @@
                     ]
                   }
                 ],
-                "assignmentSetHash": "eb8a127a0608fbd5",
+                "assignmentSetHash": "3af3c99768eb3581",
                 "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
                 "executionStatus": "completed"
               },
               "frequencyRange": [
-                1.0,
-                1.0
+                0.3176,
+                0.3863
               ],
-              "label": true,
-              "reading": "supported under all registered role-group kernel checks"
+              "label": false,
+              "reading": "not scenario-supported"
+            },
+            "gpt-5.6-luna": {
+              "assignments": {
+                "UU": {
+                  "status": "not met",
+                  "share": 0.2369,
+                  "successes": 2369,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.22445053050076452,
+                    0.2496750844248487
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "UH": {
+                  "status": "not met",
+                  "share": 0.2207,
+                  "successes": 2207,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.20856957924039327,
+                    0.23317613281142752
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "HU": {
+                  "status": "not met",
+                  "share": 0.2972,
+                  "successes": 2972,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.28377258357152824,
+                    0.31087830743831113
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "gpt-5.6-luna"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "HH": {
+                  "status": "not met",
+                  "share": 0.2791,
+                  "successes": 2791,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.2659339256030646,
+                    0.29253938395330537
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                }
+              },
+              "kernelCheck": {
+                "dependencyComponents": [
+                  [
+                    "claude-haiku-5-5"
+                  ],
+                  [
+                    "claude-opus-5"
+                  ],
+                  [
+                    "claude-opus-5-5"
+                  ],
+                  [
+                    "claude-sonnet-5-5"
+                  ],
+                  [
+                    "deepseek-v4-flash"
+                  ],
+                  [
+                    "deepseek-v4-pro"
+                  ],
+                  [
+                    "gemini-3.8-flash"
+                  ],
+                  [
+                    "gemini-4-argon"
+                  ],
+                  [
+                    "glm-5.3"
+                  ],
+                  [
+                    "gpt-5.6-luna"
+                  ],
+                  [
+                    "gpt-5.6-sol"
+                  ],
+                  [
+                    "gpt-6-luna"
+                  ],
+                  [
+                    "gpt-6-sol"
+                  ],
+                  [
+                    "gpt-6.1-sol"
+                  ],
+                  [
+                    "grok-4.7"
+                  ],
+                  [
+                    "qwen3.8-max"
+                  ]
+                ],
+                "dependencyGraphHash": "df28ecb25535268c",
+                "mergedBlocks": [],
+                "switchGroups": {
+                  "candidate": [
+                    "gpt-5.6-luna"
+                  ],
+                  "reference": [],
+                  "competitors": [
+                    "claude-haiku-5-5",
+                    "claude-opus-5",
+                    "claude-opus-5-5",
+                    "claude-sonnet-5-5",
+                    "deepseek-v4-flash",
+                    "deepseek-v4-pro",
+                    "gemini-3.8-flash",
+                    "gemini-4-argon",
+                    "glm-5.3",
+                    "gpt-5.6-sol",
+                    "gpt-6-luna",
+                    "gpt-6-sol",
+                    "gpt-6.1-sol",
+                    "grok-4.7",
+                    "qwen3.8-max"
+                  ]
+                },
+                "assignments": [
+                  {
+                    "id": "UU",
+                    "endpointHeavyRows": []
+                  },
+                  {
+                    "id": "UH",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ]
+                  },
+                  {
+                    "id": "HU",
+                    "endpointHeavyRows": [
+                      "gpt-5.6-luna"
+                    ]
+                  },
+                  {
+                    "id": "HH",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ]
+                  }
+                ],
+                "assignmentSetHash": "3af3c99768eb3581",
+                "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
+                "executionStatus": "completed"
+              },
+              "frequencyRange": [
+                0.2207,
+                0.2972
+              ],
+              "label": false,
+              "reading": "not scenario-supported"
+            },
+            "deepseek-v4-flash": {
+              "assignments": {
+                "UU": {
+                  "status": "not met",
+                  "share": 0.2007,
+                  "successes": 2007,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.1890012391750147,
+                    0.2127693023020985
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "UH": {
+                  "status": "not met",
+                  "share": 0.1986,
+                  "successes": 1986,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.18694914685422093,
+                    0.2106240030655112
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "HU": {
+                  "status": "not met",
+                  "share": 0.2451,
+                  "successes": 2451,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.2324987682232696,
+                    0.25801667830990505
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "deepseek-v4-flash"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "HH": {
+                  "status": "not met",
+                  "share": 0.2429,
+                  "successes": 2429,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.2303388635396132,
+                    0.25577931084222894
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                }
+              },
+              "kernelCheck": {
+                "dependencyComponents": [
+                  [
+                    "claude-haiku-5-5"
+                  ],
+                  [
+                    "claude-opus-5"
+                  ],
+                  [
+                    "claude-opus-5-5"
+                  ],
+                  [
+                    "claude-sonnet-5-5"
+                  ],
+                  [
+                    "deepseek-v4-flash"
+                  ],
+                  [
+                    "deepseek-v4-pro"
+                  ],
+                  [
+                    "gemini-3.8-flash"
+                  ],
+                  [
+                    "gemini-4-argon"
+                  ],
+                  [
+                    "glm-5.3"
+                  ],
+                  [
+                    "gpt-5.6-luna"
+                  ],
+                  [
+                    "gpt-5.6-sol"
+                  ],
+                  [
+                    "gpt-6-luna"
+                  ],
+                  [
+                    "gpt-6-sol"
+                  ],
+                  [
+                    "gpt-6.1-sol"
+                  ],
+                  [
+                    "grok-4.7"
+                  ],
+                  [
+                    "qwen3.8-max"
+                  ]
+                ],
+                "dependencyGraphHash": "df28ecb25535268c",
+                "mergedBlocks": [],
+                "switchGroups": {
+                  "candidate": [
+                    "deepseek-v4-flash"
+                  ],
+                  "reference": [],
+                  "competitors": [
+                    "claude-haiku-5-5",
+                    "claude-opus-5",
+                    "claude-opus-5-5",
+                    "claude-sonnet-5-5",
+                    "deepseek-v4-pro",
+                    "gemini-3.8-flash",
+                    "gemini-4-argon",
+                    "glm-5.3",
+                    "gpt-5.6-luna",
+                    "gpt-5.6-sol",
+                    "gpt-6-luna",
+                    "gpt-6-sol",
+                    "gpt-6.1-sol",
+                    "grok-4.7",
+                    "qwen3.8-max"
+                  ]
+                },
+                "assignments": [
+                  {
+                    "id": "UU",
+                    "endpointHeavyRows": []
+                  },
+                  {
+                    "id": "UH",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ]
+                  },
+                  {
+                    "id": "HU",
+                    "endpointHeavyRows": [
+                      "deepseek-v4-flash"
+                    ]
+                  },
+                  {
+                    "id": "HH",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ]
+                  }
+                ],
+                "assignmentSetHash": "3af3c99768eb3581",
+                "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
+                "executionStatus": "completed"
+              },
+              "frequencyRange": [
+                0.1986,
+                0.2451
+              ],
+              "label": false,
+              "reading": "not scenario-supported"
+            },
+            "deepseek-v4-pro": {
+              "assignments": {
+                "UU": {
+                  "status": "not met",
+                  "share": 0.1797,
+                  "successes": 1797,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.16850417924685018,
+                    0.19129246041371228
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "UH": {
+                  "status": "not met",
+                  "share": 0.1464,
+                  "successes": 1464,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.13612366329789483,
+                    0.1571144412405367
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "HU": {
+                  "status": "not met",
+                  "share": 0.1923,
+                  "successes": 1923,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.18079597240609013,
+                    0.20418500457509448
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "deepseek-v4-pro"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                },
+                "HH": {
+                  "status": "not met",
+                  "share": 0.1598,
+                  "successes": 1598,
+                  "scenarios": 10000,
+                  "interval": [
+                    0.1491339182717626,
+                    0.17088748631484396
+                  ],
+                  "perLookError": 0.003125,
+                  "confidenceLevel": 0.996875,
+                  "tailAllocation": "equal (half the per-look error in each tail)",
+                  "looks": 1,
+                  "uniqueLabelEligible": true,
+                  "labelAuthorized": true,
+                  "decisionTarget": {
+                    "qualityEquation": "full composite, nominal weights",
+                    "scenarioStratum": "S1",
+                    "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                    "variedTargets": [
+                      "identification convention",
+                      "reporting precision"
+                    ],
+                    "specificationBranch": "core",
+                    "kernel": "block assignment",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ],
+                    "referenceObjectId": {
+                      "level": 52.09441344290625
+                    }
+                  },
+                  "label": false
+                }
+              },
+              "kernelCheck": {
+                "dependencyComponents": [
+                  [
+                    "claude-haiku-5-5"
+                  ],
+                  [
+                    "claude-opus-5"
+                  ],
+                  [
+                    "claude-opus-5-5"
+                  ],
+                  [
+                    "claude-sonnet-5-5"
+                  ],
+                  [
+                    "deepseek-v4-flash"
+                  ],
+                  [
+                    "deepseek-v4-pro"
+                  ],
+                  [
+                    "gemini-3.8-flash"
+                  ],
+                  [
+                    "gemini-4-argon"
+                  ],
+                  [
+                    "glm-5.3"
+                  ],
+                  [
+                    "gpt-5.6-luna"
+                  ],
+                  [
+                    "gpt-5.6-sol"
+                  ],
+                  [
+                    "gpt-6-luna"
+                  ],
+                  [
+                    "gpt-6-sol"
+                  ],
+                  [
+                    "gpt-6.1-sol"
+                  ],
+                  [
+                    "grok-4.7"
+                  ],
+                  [
+                    "qwen3.8-max"
+                  ]
+                ],
+                "dependencyGraphHash": "df28ecb25535268c",
+                "mergedBlocks": [],
+                "switchGroups": {
+                  "candidate": [
+                    "deepseek-v4-pro"
+                  ],
+                  "reference": [],
+                  "competitors": [
+                    "claude-haiku-5-5",
+                    "claude-opus-5",
+                    "claude-opus-5-5",
+                    "claude-sonnet-5-5",
+                    "deepseek-v4-flash",
+                    "gemini-3.8-flash",
+                    "gemini-4-argon",
+                    "glm-5.3",
+                    "gpt-5.6-luna",
+                    "gpt-5.6-sol",
+                    "gpt-6-luna",
+                    "gpt-6-sol",
+                    "gpt-6.1-sol",
+                    "grok-4.7",
+                    "qwen3.8-max"
+                  ]
+                },
+                "assignments": [
+                  {
+                    "id": "UU",
+                    "endpointHeavyRows": []
+                  },
+                  {
+                    "id": "UH",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ]
+                  },
+                  {
+                    "id": "HU",
+                    "endpointHeavyRows": [
+                      "deepseek-v4-pro"
+                    ]
+                  },
+                  {
+                    "id": "HH",
+                    "endpointHeavyRows": [
+                      "claude-haiku-5-5",
+                      "claude-opus-5",
+                      "claude-opus-5-5",
+                      "claude-sonnet-5-5",
+                      "deepseek-v4-flash",
+                      "deepseek-v4-pro",
+                      "gemini-3.8-flash",
+                      "gemini-4-argon",
+                      "glm-5.3",
+                      "gpt-5.6-luna",
+                      "gpt-5.6-sol",
+                      "gpt-6-luna",
+                      "gpt-6-sol",
+                      "gpt-6.1-sol",
+                      "grok-4.7",
+                      "qwen3.8-max"
+                    ]
+                  }
+                ],
+                "assignmentSetHash": "3af3c99768eb3581",
+                "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
+                "executionStatus": "completed"
+              },
+              "frequencyRange": [
+                0.1464,
+                0.1923
+              ],
+              "label": false,
+              "reading": "not scenario-supported"
             }
           }
         }

@@ -144,8 +144,9 @@
     "notQuantified": [
       "benchmark repeatability (published confidence intervals, run-to-run ranges): not quantified in v1 scenario shares"
     ],
-    "barReference": "Alpha <b>x</b> One",
-    "barPolicy": "lower median of non-provisional configurations on the API main-workload definite frontier"
+    "costVarianceShare": {"api": 0.8, "plan": 0.6},
+    "barLevel": "quality 50.0 (the displayed quality of Alpha <b>x</b> One at freeze)",
+    "barPolicy": "lower median of non-provisional ranked configurations with a displayed quality"
   },
   "exchangeRate": {
     "api": {

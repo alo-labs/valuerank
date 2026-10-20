@@ -777,3 +777,34 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
   - M3, the owner decision challenge to O12. A clip hold is resolved by a versioned re-freeze in the same release cycle, so no entrant is excluded; O12 stands.
   - The S1T task-resampling stream. A binomial task model is an analyst assumption without a documented estimand (E145, E155).
   - The bar ladder. More bars change the registered bar policy (E156); this is noted as a possible owner question.
+
+## Internal review I2 (Claude Sonnet 5.5, effort low, on r61) — adopted, modified or rejected
+- E192 (H1, adopted). The bar was tautological. v1 pinned a non-provisional API definite-frontier configuration r. Any other row confirmed cheapest at r's quality would have to dominate r in every θ, contradicting r's definite membership, and a 90% scenario share contradicts it the same way. Verified on the build: the 2026-10-19 freeze pinned GPT-6 Luna (max), and the API output was "GPT-6 Luna (max), confirmed".
+  - The bar is now a quality level, policy "median-quality-level" v2: the lower-median displayed quality of the non-provisional ranked configurations, frozen with the anchor version (2026-10-19: 16 configurations, Q̄ = 52.09, GLM-5.3's displayed quality).
+  - Fewer than two population configurations pin no bar; with two or more, at least two reach Q̄ at freeze (non-tautology).
+  - The reference object is the constant level on both bases and every workload. The median configuration has no special role, and kernel checks run over candidate and competitor groups (an empty reference group takes no letter).
+  - A pre-release correction: no v3 release was published, so data/v3_frozen.json's bar fields were migrated in place. A re-freeze on the same evidence reproduced every anchor exactly; only the bar fields changed.
+  - Result: API main workload "not unique; possibly GPT-6.1 Sol (max), GPT-5.6 Luna (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max)". No scenario label (frequency ranges 15–39%).
+  - Taken as an editor decision rather than I2's Q3 to the owner: O2's "cheapest-above-bar view" is kept, and only its defect is fixed.
+- E193 (M1, modified). The configuration rule was misstated: GPT-5.6 Luna is ranked at max, its near point is low, and E188's near rule would pick low.
+  - Family = AA model identity: the plotted name without effort and fallback qualifiers, equal to the catalog display name. The MiMo Pro and Flash models are separate frontier families.
+  - A frontier family ranks its highest point on the rendered line; along the strictly rising line that is also its dearest, so a rounded-Index tie never decides it.
+  - A near family ranks the configuration retention already ranks, else its smallest-gap near point (AGENTS.md: "the family's selected configuration may differ from the near configuration").
+  - Built and enforced: build_scores fails when the tracked catalog ranks any other configuration. Verified on all 10 families.
+  - Ranking every rendered-frontier point is rejected: AGENTS.md requires one selected configuration per family. Scoring alternatives is rejected too, because their exact-configuration SDLC evidence is not captured; they stay in the reconciliation inventory.
+  - The "worse-value point" argument is rejected as a selection rule: choosing the configuration by its score would select on the outcome.
+- E194 (M2, adopted). The report window is the 30 days ending on the evidence search cutoff, the registry's reportingWindow (2026-09-08 to 2026-10-08), which is AGENTS.md's "preceding month".
+  - A report's date is its measurement window's end, else its report date, else its publication date.
+  - A report admitted earlier records admittedOn and ages under E151/O13.
+  - The build fails on a newly admitted report dated outside the window. The current Grok 4.7 SuperGrok Heavy report, 2026-09-25, passes.
+  - I2's alternative, letting O13's 90 days replace the window, would change AGENTS.md policy and is not adopted.
+- E195 (M3, modified). Frontier membership extraction is now registered: the rendered Pareto path's vertices matched to circle centres (0.5 px tolerance; on 2026-10-17 all 18 matched at 0 px). The build checks that the points equal the vertices and that the path rises strictly in chart coordinates.
+  - I2's proposed "non-dominated in (cost, Index)" check on rounded values is rejected: it would fail on the real capture (GPT-6 Luna (max) and MiMo-V2.6-Flash both display 38), and AGENTS.md forbids recomputing membership from rounded values.
+- E196 (L1, adopted as disclosure). The README scope line and lead, and the site's methodology lead, state the 25% weight as nominal with cost's value-variance allocation beside it (80% API, 63% Plan).
+  - Recalibrating anchors to equalise influence is not adopted: the weight is owner policy, and the anchors are frozen evidence ranges.
+  - Whether "25%" is meant as nominal weight or as influence goes to the owner in the final summary (I2 Q1).
+- E197 (L2, adopted). The re-anchoring path is pre-built: `python3 -m valuerank.value_v3 dual-run --previous <old v3_frozen.json>` scores the same evidence on both anchor objects and writes data/v3_dual_run.json, with per-row cost score, value and rank and per-bar results under both versions (O12). The clip clause itself stays (I1 M3).
+- M4 (conditional Plan frontier on observed-workload multiples): not adopted.
+  - Interval outputs need an identified M_W (E32, E49, O19).
+  - The exploratory Plan ranking (O16) and the measured-only Plan view already give Plan buyers scored, flagged results.
+- I2 Q2 (one row per family) and Q4 (report window) are answered from AGENTS.md (E193, E194). Q3 is resolved by E192.

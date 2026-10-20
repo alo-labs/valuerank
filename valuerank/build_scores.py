@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 from pathlib import Path
 
 from valuerank import value_v3
@@ -190,6 +191,43 @@ def frontier_effort(variant):
 
 NO_FRONTIER_TIER = {"tier": None, "configuration": None, "intelligenceGap": None, "footnote": None}
 
+# E195: frontier membership is AA's rendered Pareto path as observed. Each frontier point must sit on a path vertex
+# (one point per vertex) and the path must rise strictly in chart coordinates; rounded tooltip values tie (GPT-6 Luna
+# (max) and MiMo-V2.6-Flash both display 38) and are never used to recompute or check membership.
+PATH_TOLERANCE_PX = 0.5
+_PATH_NUMBER = r"-?\d+(?:\.\d+)?"
+_PATH = re.compile(rf"M {_PATH_NUMBER} {_PATH_NUMBER}(?: L {_PATH_NUMBER} {_PATH_NUMBER})*")
+
+
+def check_rendered_path(capture):
+    """E195: the captured frontier points are exactly the vertices of the rendered Pareto path, which rises strictly."""
+
+    path = capture.get("rendered_pareto_svg_path")
+    if not isinstance(path, str) or not _PATH.fullmatch(path):
+        raise ValueError("AA frontier capture must carry the rendered Pareto path as M/L coordinate pairs")
+    numbers = [float(token) for token in re.findall(_PATH_NUMBER, path)]
+    vertices = list(zip(numbers[0::2], numbers[1::2]))
+    points = sorted((require_number(item.get("svg_x"), "svg_x"), require_number(item.get("svg_y"), "svg_y")) for item in capture.get("frontier", []))
+    if len(vertices) != len(points) or any(
+        abs(vx - px) > PATH_TOLERANCE_PX or abs(vy - py) > PATH_TOLERANCE_PX for (vx, vy), (px, py) in zip(vertices, points)
+    ):
+        raise ValueError("AA frontier capture points do not match the rendered Pareto path vertices")
+    # Chart y grows downward, so a rising path has x strictly increasing and y strictly decreasing.
+    if any(x2 <= x1 or y2 >= y1 for (x1, y1), (x2, y2) in zip(vertices, vertices[1:])):
+        raise ValueError("AA rendered Pareto path does not rise strictly in chart coordinates")
+
+
+def frontier_order(row):
+    """E193: a family's highest rendered-frontier point first; along the strictly rising line that is also its dearest."""
+
+    return (-row["intelligenceIndex"], -row["totalCostUsd"], row["name"])
+
+
+def near_order(row):
+    """E193: smallest Index gap to the rendered frontier, then the lower total cost, then the name."""
+
+    return (row["intelligenceGap"], row["totalCostUsd"], row["name"])
+
 
 def capture_row_matches(item, capture_item):
     """True when an inventory row agrees with its capture row on identity, display index and cost."""
@@ -277,13 +315,13 @@ def frontier_tiers(frontier_families, near_families):
 
     annotations, frontier_list, near_list = {}, [], []
     for family, group in near_families.items():
-        best = min(group["rows"], key=lambda row: (row["intelligenceGap"], row["totalCostUsd"], row["name"]))
+        best = min(group["rows"], key=near_order)
         annotations[family] = {"tier": "near", "configuration": best["name"],
                                "intelligenceGap": best["intelligenceGap"], "footnote": best.get("sourceFootnote")}
         near_list.append({"family": family, "modelId": group["modelId"], "configuration": best["name"],
                           "intelligenceGap": best["intelligenceGap"]})
     for family, family_rows in frontier_families.items():
-        best = min(family_rows, key=lambda row: (-row["intelligenceIndex"], row["totalCostUsd"], row["name"]))
+        best = min(family_rows, key=frontier_order)
         annotations[family] = {"tier": "frontier", "configuration": best["name"],
                                "intelligenceGap": 0, "footnote": best.get("sourceFootnote")}
         frontier_list.append({"family": family, "modelId": best["requiredFamilyModelId"], "configuration": best["name"]})
@@ -507,6 +545,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         or capture_universe.get("plotted_models_with_both_coordinates") != frontier_universe.get("plottedPointN")
     ):
         raise ValueError("AA reconciliation inventory no longer matches its complete direct-observation capture")
+    check_rendered_path(frontier_capture)
     frontier_families = {}
     frontier_urls = set()
     for item in frontier_rows:
@@ -538,6 +577,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         if len(selected_rows) != 1:
             raise ValueError(f"AA frontier family must identify one exact selected source URL: {family}")
         frontier_item = selected_rows[0]
+        if frontier_item is not min(family_rows, key=frontier_order):
+            raise ValueError(f"AA frontier family must rank its highest rendered-frontier point (E193): {family}")
         if aa_model.get("aaSlug") != frontier_item.get("aaId"):
             raise ValueError(f"AA frontier source slug does not match selected catalog identity for {model_id}")
         if aa_model.get("displayName") != family:
@@ -711,6 +752,13 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     frontier_primary_ids = set(frontier_selection_by_id)
     near_only_primary_ids = near_frontier_primary_ids - frontier_primary_ids
     primary_ids = overlap_primary_ids | frontier_primary_ids | near_frontier_primary_ids
+    # E193: a near-frontier family ranks its smallest-gap near point, unless retention (E187) already ranks its tracked
+    # configuration (AGENTS.md: the selected configuration may differ from the near configuration).
+    for family, group in near_families.items():
+        model_id = group["modelId"]
+        if model_id in near_only_primary_ids and model_id not in overlap_primary_ids:
+            if aa_models[model_id].get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
+                raise ValueError(f"AA near-frontier family must rank its smallest-gap near point or a retained configuration (E193): {family}")
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
 

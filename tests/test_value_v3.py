@@ -153,7 +153,9 @@ def test_freeze_anchors_and_bar_reference():
     assert main["role"] == "main" and main["anchors"]["api"]["referenceIds"] == ["a", "b"]
     subset = next(entry for entry in frozen["workloads"].values() if entry["role"] == "subset")
     assert subset["anchors"]["api"]["referenceIds"] == ["a", "b", "c"]
-    assert frozen["barReferences"][0]["id"] in {"a", "b"}
+    # E192: the bar is the lower-median displayed quality of the non-provisional rows (a 58.28 and b 64.38; c is provisional).
+    assert frozen["barReferences"][0]["id"] == v.BAR_ID and frozen["barReferences"][0]["medianConfiguration"] == "a"
+    assert frozen["barReferences"][0]["level"] == pytest.approx(58.2804, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b"]
     assert frozen["anchorPolicy"]["policyId"] == "complete-evidence-panel" and main["anchorStatus"] == "frozen"
     # E160: the main workload needs at least two complete-evidence references.
     lone = v.assemble(CONFIGURATIONS[:1], documents(), release_day=DAY)
@@ -254,11 +256,9 @@ def test_score_manifest_branches_and_unevaluable_bars():
     for entry in tight["workloads"].values():
         for basis in ("api", "plan"):
             entry["anchors"][basis].update(low=1e6, high=2e6)
-    tight["barReferences"] = [{"id": "gone", "rule": "x"}]
     output = v.score(result, tight)
     manifest = {item["rule"]: item["status"] for item in output["manifest"]}
     assert output["gates"]["hold"] is True and manifest["clip gate (E20)"] == "fired"
-    assert output["intervals"]["api"]["bars"][0]["status"] == "unevaluable"
     zero_quality = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5, **{key: None for key in (
         "gdpval", "automationBenchPartialScore", "frontierCode", "lcr", "hle", "scicode", "critpt", "omniscience")})]},
         deepswe={"configurations": []}, bugHunt={"models": []})
@@ -358,12 +358,26 @@ def test_disjoint_evidence_agreement_compares_aa_only_with_independent_only_qual
     assert set(result["retainedLeaves"]["aaExecuted"]) == {leaf.key for leaf in q.LEAVES if leaf.source == "aa"}
 
 
-def test_freeze_without_definite_members_pins_no_bar():
+def test_freeze_with_fewer_than_two_population_rows_pins_no_bar():
+    """E192: a bar met by one configuration compares nothing, so fewer than two population rows pin no bar."""
+
     result = assembled()
-    for item in result["rows"]:
-        item["cost"] = dict(item["cost"], fullCost=False)
+    result["rows"][1]["summary"] = q.summarize({"deepswe": q.Observation(50.0)})  # b becomes provisional
     frozen = v.freeze(result, frozen_at="d")
-    assert frozen["barReferences"] == [] and frozen["barPolicy"]["referenceIds"] == [] and frozen["barPolicy"]["population"] == []
+    assert frozen["barReferences"] == [] and frozen["barPolicy"]["bars"] == [] and frozen["barPolicy"]["population"] == ["a"]
+
+
+def test_bar_is_a_quality_level_that_is_never_its_own_answer():
+    """E192: at freeze at least two population rows are at or above the level, and the median row competes like any other."""
+
+    result = assembled()
+    frozen = v.freeze(result, frozen_at="2026-10-19")
+    level = frozen["barReferences"][0]["level"]
+    assert sum(row["summary"].displayed >= level for row in result["rows"] if row["id"] in frozen["barPolicy"]["population"]) >= 2
+    bar = v.interval_outputs(result, frozen, "api")["bars"][0]
+    assert bar["reference"]["id"] == v.BAR_ID and set(bar["rows"]) == {"a", "b"}
+    # a qualifies only possibly: its quality interval straddles its own displayed quality, which set the level.
+    assert bar["rows"]["a"]["possible"] == "certified" and bar["rows"]["a"]["confirmed"] == "disproved"
 
 
 def test_bar_reference_selection_is_registered_and_outcome_independent(monkeypatch):
@@ -372,8 +386,8 @@ def test_bar_reference_selection_is_registered_and_outcome_independent(monkeypat
     result = assembled()
     frozen = v.freeze(result, frozen_at="2026-10-19")
     policy = frozen["barPolicy"]
-    assert policy["policyId"] == "median-definite-frontier" and policy["selectionCutoff"] == "2026-10-19"
-    assert policy["referenceIds"] == [item["id"] for item in frozen["barReferences"]]
+    assert policy["policyId"] == "median-quality-level" and policy["version"] == 2 and policy["selectionCutoff"] == "2026-10-19"
+    assert policy["bars"] == [{key: item[key] for key in ("id", "level", "medianConfiguration")} for item in frozen["barReferences"]]
     reordered = dict(result, rows=list(reversed(result["rows"])))
     assert v.freeze(reordered, frozen_at="2026-10-19")["barReferences"] == frozen["barReferences"]
 
@@ -420,8 +434,7 @@ def test_scenarios_hash_attach_and_bar_labels():
     assert stale["scenarios"]["status"].startswith("stale") and stale["gates"]["hold"] is True
     missing = v.attach_scenarios(v.score(result, frozen), None, "x")
     assert missing["scenarios"] == {"status": "missing"} and missing["manifest"][-1]["status"] == "fired"
-    outside = dict(frozen, barReferences=[{"id": "c", "rule": "x"}])
-    assert v.bar_labels(result, outside, seed=1, batch=50)[0]["status"] == "unevaluable"
+    assert document["barLabels"][0]["level"] == frozen["barReferences"][0]["level"]
     # E19/E34/E122: the named S2 branches are listed; one agent per configuration leaves the harness band unevaluable.
     band, cache, price = document["namedBranches"]
     assert band["status"] == "unevaluable" and band["width"] is None and "results" not in band
@@ -502,7 +515,7 @@ def write_world(root: Path) -> Path:
         "aa/coding_agents_capture.json": documents()["codingAgents"],
         "aa/cost_charts_capture.json": documents()["costCharts"],
         "v3_configuration_map.json": documents()["configurationMap"],
-        "plan_cost_routes.json": documents()["planRoutes"],
+        "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}}},
         "price_records.json": documents()["priceRecords"],
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
@@ -526,6 +539,33 @@ def test_command_line_freeze_scenarios_and_build(tmp_path, capsys, monkeypatch):
     built = v.build(configurations, data, release_day=DAY)
     assert built["scenarios"]["status"] == "current" and built["scenarios"]["scenarios"] == 100
     assert v.scenario_seed(DAY) == 20261019
+
+
+def test_dual_run_scores_one_evidence_set_on_two_anchor_versions(tmp_path, capsys, monkeypatch):
+    """O12/E197: a re-anchoring publishes old- and new-anchor results side by side, bars included."""
+
+    result, frozen = scored()
+    wider = json.loads(json.dumps(frozen))
+    wider["anchorVersion"] = "v3-next"
+    for entry in wider["workloads"].values():
+        for basis in ("api", "plan"):
+            entry["anchors"][basis].update(high=entry["anchors"][basis]["high"] * 4)
+    document = v.dual_run(result, frozen, wider)
+    assert document["previousAnchorVersion"] == frozen["anchorVersion"] and document["anchorVersion"] == "v3-next"
+    row = next(item for item in document["rows"] if item["row"] == "a")
+    assert row["api"]["current"]["costScore"] > row["api"]["previous"]["costScore"]
+    assert document["bars"]["api"]["previous"][0]["reference"]["id"] == v.BAR_ID and "previous" in document["bars"]["plan"]
+    data = write_world(tmp_path)
+    monkeypatch.setenv("VALUERANK_NOW", "2026-10-19T12:00:00Z")
+    assert v.main(["freeze"], data=data) == 0
+    capsys.readouterr()
+    previous = tmp_path / "previous.json"
+    previous.write_text((data / v.FROZEN_FILE).read_text())
+    assert v.main(["dual-run", "--previous", str(previous)], data=data) == 0
+    assert json.loads(capsys.readouterr().out)["wrote"] == f"data/{v.DUAL_RUN_FILE}"
+    assert all(item["api"]["previous"] == item["api"]["current"] for item in json.loads((data / v.DUAL_RUN_FILE).read_text())["rows"])
+    with pytest.raises(SystemExit):
+        v.main(["dual-run"], data=data)
 
 
 def test_module_entry_point(tmp_path, monkeypatch):
@@ -1000,7 +1040,7 @@ def gated_world_documents(gate_page, records):
     return documents(snapshot={"pages": pages}, codingAgents=agents, configurationMap=mapping, planRoutes=routes, priceRecords={"records": records})
 
 
-def test_gate_effects_on_costs_anchors_routes_and_interval_labels():
+def test_gate_effects_on_costs_anchors_routes_and_interval_labels(monkeypatch):
     record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
     base = gated_world(priced_page("a-max", 1.0, PRICES), [record])
     doubled = gated_world(priced_page("a-max", 1.0, PRICES, price1mInputTokens=4.0, cacheHitPrice=0.4, price1mOutputTokens=20.0), [record])
@@ -1018,9 +1058,11 @@ def test_gate_effects_on_costs_anchors_routes_and_interval_labels():
     assert "a" not in output["universe"] and "a" not in output["unevaluable"]
     box = next(item for item in v.api_boxes(flagged) if item.row == "a")
     assert box.provisional is True and box.c_high == pytest.approx(rows["a"]["cost"]["highUsd"] * 1.5)
-    # A bar whose reference is unevaluable carries no row table to withhold from.
-    unevaluable_bar = v.interval_outputs(flagged, dict(frozen, barReferences=[{"id": "gone", "rule": "x"}]), "api")
-    assert unevaluable_bar["bars"][0]["status"] == "unevaluable" and unevaluable_bar["blockers"] == ["a"]
+    # An unresolved bar (e.g. coupled boxes, E89) carries no row table to withhold from.
+    with monkeypatch.context() as patch:
+        patch.setattr(v.intervals, "cheapest_above_bar", lambda *_args, **_kwargs: {"status": v.intervals.UNRESOLVED, "reason": "coupled"})
+        unresolved_bar = v.interval_outputs(flagged, frozen, "api")
+    assert unresolved_bar["bars"][0]["status"] == v.intervals.UNRESOLVED and unresolved_bar["blockers"] == ["a"]
     # O29: a multiple valued on the row's own superseded record stays eligible.
     routes = documents()["planRoutes"]
     routes["routes"][0].update(identification="point-identified", valuationBasis="release", valuationPriceRecord="old")
@@ -1118,18 +1160,19 @@ def test_scenario_labels_never_go_to_or_past_an_unsafe_blocker(monkeypatch):
     record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
     flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
     frozen = v.freeze(flagged, frozen_at="2026-10-19")
-    frozen["barReferences"] = [{"id": "b", "rule": "x"}]
+    # At level 60 b and d can be cheapest, and the blocker a can reach the level and undercut both.
+    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 60.0, "medianConfiguration": "b", "rule": "x"}]
     monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda *args, **kwargs: {"label": True, "reading": "supported"})
     (bar,) = v.bar_labels(flagged, frozen, seed=1, batch=20)
-    assert "a" not in bar["candidates"]
+    assert sorted(bar["candidates"]) == ["b", "d"]
     assert all(result == {"label": False, "reading": v.BLOCKER_UNRESOLVED} for result in bar["candidates"].values())
     boxes = v.api_boxes(flagged)
-    reference = v.intervals.Reference("b", 0.0, 0.0)
+    reference = v.intervals.Reference(v.BAR_ID, 0.0, 0.0)
     assert v.blocker_safe("b", reference, boxes, {"a"}) is False  # the blocker can qualify and be cheaper
     far = [box if box.row != "a" else v.intervals.Box("a", 1e9, 2e9, box.q_low, box.q_high, True) for box in boxes]
-    assert v.blocker_safe("b", v.intervals.Reference("b", 0.0, 0.0), far, {"a"}) is True
+    assert v.blocker_safe("b", reference, far, {"a"}) is True
     assert v.blocker_safe("b", reference, [box for box in boxes if box.row != "a"], {"a"}) is False  # no constructible domain
-    assert v.blocker_safe("b", v.intervals.Reference("a", 0.0, 0.0), far, {"a"}) is True  # the blocker as the bar, dearer than b
+    assert v.blocker_safe("b", v.intervals.Reference(v.BAR_ID, 101.0, 101.0), boxes, {"a"}) is True  # the blocker cannot reach the bar
 
 
 def test_a_category_free_under_both_tariffs_is_left_out_of_the_bound():

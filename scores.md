@@ -209,26 +209,26 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value c
 | Qwen3.8 Max | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-6 Luna (max), Gemini 3.8 Flash (high), GLM-5.3 (max) |
 | DeepSeek V4 Pro (max) | certified | disproved | GPT-5.6 Luna (max) | — |
 
-**API basis, main workload: cheapest at or above GPT-6 Luna (max)'s quality** (median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)). Status certified; confirmed cheapest: GPT-6 Luna (max).
+**API basis, main workload: cheapest at or above quality 52.1** (lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)). Status certified; confirmed cheapest: none.
 
 | Configuration | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---|---|---|
 | Gemini 4 Argon (high) | certified | certified | disproved |
-| GPT-6.1 Sol (max) | certified | certified | disproved |
+| GPT-6.1 Sol (max) | certified | certified | certified |
 | Claude Sonnet 5.5 (max) | certified | certified | disproved |
 | Claude Opus 5.5 (max) | certified | certified | disproved |
 | GPT-5.6 Sol (max) | certified | certified | disproved |
 | GPT-6 Sol (max) | certified | certified | disproved |
 | Grok 4.7 (xhigh) | certified | certified | disproved |
-| GPT-5.6 Luna (max) | disproved | certified | disproved |
-| GPT-6 Luna (max) | certified | certified | certified |
-| Claude Haiku 5.5 (xhigh) | disproved | certified | disproved |
-| Gemini 3.8 Flash (high) | certified | certified | disproved |
+| GPT-5.6 Luna (max) | disproved | certified | certified |
+| GPT-6 Luna (max) | disproved | disproved | disproved |
+| Claude Haiku 5.5 (xhigh) | disproved | disproved | disproved |
+| Gemini 3.8 Flash (high) | disproved | disproved | disproved |
 | Claude Opus 5 (max) | disproved | certified | disproved |
-| GLM-5.3 (max) | certified | certified | disproved |
-| DeepSeek V4 Flash (max) | disproved | certified | disproved |
+| GLM-5.3 (max) | disproved | certified | disproved |
+| DeepSeek V4 Flash (max) | disproved | certified | certified |
 | Qwen3.8 Max | disproved | disproved | disproved |
-| DeepSeek V4 Pro (max) | disproved | certified | disproved |
+| DeepSeek V4 Pro (max) | disproved | certified | certified |
 
 **Plan basis, main workload:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
@@ -256,29 +256,29 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value c
 | Qwen3.8 Max | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), GPT-5.6 Sol (max), GPT-6 Sol (max), Grok 4.7 (xhigh), GPT-6 Luna (max), Gemini 3.8 Flash (high), GLM-5.3 (max) |
 | DeepSeek V4 Pro (max) | certified | disproved | MiMo-V2.6-Pro | — |
 
-**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above GPT-6 Luna (max)'s quality** (median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)). Status certified; confirmed cheapest: none.
+**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 52.1** (lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)). Status certified; confirmed cheapest: none.
 
 | Configuration | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---|---|---|
 | Gemini 4 Argon (high) | certified | certified | disproved |
-| GPT-6.1 Sol (max) | certified | certified | disproved |
+| GPT-6.1 Sol (max) | certified | certified | certified |
 | Claude Sonnet 5.5 (max) | certified | certified | disproved |
 | GPT-6 Astra (xhigh) | disproved | certified | disproved |
 | Claude Opus 5.5 (max) | certified | certified | disproved |
 | GPT-5.6 Sol (max) | certified | certified | disproved |
-| MiMo-V2.6-Pro | disproved | certified | disproved |
+| MiMo-V2.6-Pro | disproved | certified | certified |
 | GPT-6 Sol (max) | certified | certified | disproved |
 | Grok 4.7 (xhigh) | certified | certified | disproved |
-| GPT-5.6 Luna (max) | disproved | certified | disproved |
-| GPT-6 Luna (max) | certified | certified | certified |
+| GPT-5.6 Luna (max) | disproved | certified | certified |
+| GPT-6 Luna (max) | disproved | disproved | disproved |
 | MiMo-V2.6-Flash | disproved | certified | certified |
-| Claude Haiku 5.5 (xhigh) | disproved | certified | disproved |
-| Gemini 3.8 Flash (high) | certified | certified | disproved |
+| Claude Haiku 5.5 (xhigh) | disproved | disproved | disproved |
+| Gemini 3.8 Flash (high) | disproved | disproved | disproved |
 | Claude Opus 5 (max) | disproved | certified | disproved |
-| GLM-5.3 (max) | certified | certified | disproved |
-| DeepSeek V4 Flash (max) | disproved | certified | disproved |
+| GLM-5.3 (max) | disproved | certified | disproved |
+| DeepSeek V4 Flash (max) | disproved | certified | certified |
 | Qwen3.8 Max | disproved | disproved | disproved |
-| DeepSeek V4 Pro (max) | disproved | certified | disproved |
+| DeepSeek V4 Pro (max) | disproved | certified | certified |
 
 **Plan basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified):** not evaluated (unevaluable: no Plan multiple is identified for a subset workload (E149, E190)).
 
@@ -464,11 +464,14 @@ Plan streams S1, S2, S1 endpoint-heavy and S1M run with owner-named transfers of
 
 ### Cheapest-above-the-bar labels (API basis)
 
-Each kernel assignment code gives the kernel used for the candidate, the reference and the competitors, in that order (U uniform, H endpoint-heavy); the label needs every assignment met.
+Each kernel assignment code gives the kernel used for the candidate and the competitors, in that order (U uniform, H endpoint-heavy; a quality-level bar has no reference rows, so it takes no letter); the label needs every assignment met.
 
 | Bar | Candidate | Reading | Frequency range | Kernel assignments | Label |
 |---|---|---|---|---|---|
-| GPT-6 Luna (max) | GPT-6 Luna (max) | supported under all registered role-group kernel checks | 100.0% to 100.0% | UUU met, UUH met, HHU met, HHH met | yes |
+| quality 52.1 | GPT-6.1 Sol (max) | not scenario-supported | 31.8% to 38.6% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 52.1 | GPT-5.6 Luna (max) | not scenario-supported | 22.1% to 29.7% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 52.1 | DeepSeek V4 Flash (max) | not scenario-supported | 19.9% to 24.5% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 52.1 | DeepSeek V4 Pro (max) | not scenario-supported | 14.6% to 19.2% | UU not met, UH not met, HU not met, HH not met | no |
 
 ## Diagnostics
 

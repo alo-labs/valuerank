@@ -282,15 +282,33 @@ def interval_sentences(facts):
         if result.get("blockers"):
             text += f" Competing without a label (AA cost on a price not in force, O29): {facts.labels(result['blockers'])}."
         for bar in result.get("bars", []):
-            reference = facts.label(bar["reference"]["id"])
+            reference = bar_name(bar["reference"])
             if bar["status"] != "certified":
-                text += f" Cheapest at or above {reference}'s quality: {bar['status']}."
+                text += f" Cheapest at or above {reference}: {bar['status']}."
             elif bar["confirmedCheapest"]:
-                text += f" Cheapest at or above {reference}'s quality: {facts.label(bar['confirmedCheapest'])} (confirmed)."
+                text += f" Cheapest at or above {reference}: {facts.label(bar['confirmedCheapest'])} (confirmed)."
             else:
-                text += f" Cheapest at or above {reference}'s quality: not unique; possibly {facts.labels(bar['possibleCheapest'])}."
+                text += f" Cheapest at or above {reference}: not unique; possibly {facts.labels(bar['possibleCheapest'])}."
         sentences.append(text)
     return sentences
+
+
+def influence_text(v3, short=False):
+    """E196: cost's nominal weight beside its share of the variance in value on the common panel (E189)."""
+
+    shares = {basis: (v3["costInfluence"][basis]["commonWorkload"]["varianceAllocation"] or {}).get("cost") for basis in ("api", "plan")}
+    if None in shares.values():
+        return ""
+    if short:
+        return f"; {pct(shares['api'], 0)} of API and {pct(shares['plan'], 0)} of Plan value variance"
+    return (f" That weight is nominal: on the current panel cost accounts for {pct(shares['api'], 0)} of the variance in API value and "
+            f"{pct(shares['plan'], 0)} in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)).")
+
+
+def bar_name(bar):
+    """E192: a bar is a frozen quality level."""
+
+    return f"quality {bar['level']:.1f}"
 
 
 def run_label(run):
@@ -346,11 +364,11 @@ def readme(facts):
 **Version:** {VERSION}
 **Updated:** {DATE}
 **Methodology:** {v3['methodologyVersion']} · {v3['basketVersion']} · anchor version {v3['anchorVersion']}
-**Scope:** {len(facts.ranked)} ranked configurations from a {len(facts.scores['models'])}-model AA-mapped roster; value is a {facts.cost_pct:.0f}% cost score plus {facts.quality_pct:.0f}% quality over {len(q.LEAVES)} benchmark leaves
+**Scope:** {len(facts.ranked)} ranked configurations from a {len(facts.scores['models'])}-model AA-mapped roster; value is a {facts.cost_pct:.0f}% cost score (nominal weight{influence_text(v3, short=True)}) plus {facts.quality_pct:.0f}% quality over {len(q.LEAVES)} benchmark leaves
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality. Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
 
 {leaders(facts)}
 
@@ -537,7 +555,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 ## Uncertainty outputs
 
-**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `{bar['policyId']}` v{bar['version']}: the {bar['position']} of {bar['populationRule']}, ordered by {bar['order']}, selected {bar['selectionMode']}; {bar['lifetime']}. Current reference: {method['barReference'] or 'none'}.
+**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `{bar['policyId']}` v{bar['version']}: the {bar['position']} of {bar['populationRule']}, ordered by {bar['order']}, selected {bar['selectionMode']}; {bar['reference']}; {bar['nonTautology']}; {bar['lifetime']}. Current bar: {method['barLevel'] or 'none'}.
 
 **Scenario shares** are frequencies over declared streams, never probabilities ({scenario_scope}):
 
@@ -759,8 +777,8 @@ def interval_block(facts, result, label, workload_label):
     text += "\n\n"
     text += markdown_table(["Configuration", "Possible frontier", "Definite frontier", "Definite counterexample", "Possible frontier blocked by"], rows)
     for bar in result.get("bars", []):
-        reference = facts.label(bar["reference"]["id"])
-        text += f"\n\n**{label} basis, {workload_label}: cheapest at or above {reference}'s quality** ({bar['reference']['rule']}). Status {bar['status']}"
+        reference = bar_name(bar["reference"])
+        text += f"\n\n**{label} basis, {workload_label}: cheapest at or above {reference}** ({bar['reference']['rule']}). Status {bar['status']}"
         if bar["status"] == "certified":
             text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
             bar_rows = [[facts.label(row_id), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
@@ -807,11 +825,11 @@ def scenario_tables(facts):
         for candidate, result in item.get("candidates", {}).items():
             low, high = result["frequencyRange"]
             labels.append([
-                facts.label(item["reference"]), facts.label(candidate), result["reading"], f"{share(low)} to {share(high)}",
+                bar_name(item), facts.label(candidate), result["reading"], f"{share(low)} to {share(high)}",
                 ", ".join(f"{code} {outcome['status']}" for code, outcome in result["assignments"].items()), "yes" if result["label"] else "no",
             ])
     if labels:
-        parts.append("### Cheapest-above-the-bar labels (API basis)\n\nEach kernel assignment code gives the kernel used for the candidate, the reference and the competitors, in that order (U uniform, H endpoint-heavy); the label needs every assignment met.\n\n"
+        parts.append("### Cheapest-above-the-bar labels (API basis)\n\nEach kernel assignment code gives the kernel used for the candidate and the competitors, in that order (U uniform, H endpoint-heavy; a quality-level bar has no reference rows, so it takes no letter); the label needs every assignment met.\n\n"
                      + markdown_table(["Bar", "Candidate", "Reading", "Frequency range", "Kernel assignments", "Label"], labels))
     return "\n\n".join(parts)
 

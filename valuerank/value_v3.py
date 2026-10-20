@@ -536,16 +536,39 @@ def plan_boxes(assembled: dict) -> list[intervals.Box]:
     return boxes
 
 
+# E192: the bar is a quality level. A configuration on the frontier it tests can never be beaten there, so a
+# configuration reference made the cheapest-above-the-bar output its own answer (version 1, superseded before release).
 BAR_POLICY = {
-    "policyId": "median-definite-frontier",
-    "version": 1,
+    "policyId": "median-quality-level",
+    "version": 2,
     "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
-    "populationRule": "non-provisional configurations on the API main-workload definite frontier of the interval outputs",
+    "populationRule": "non-provisional ranked configurations with a displayed quality",
     "order": "displayed quality ascending, then configuration ID",
     "position": "lower median",
-    "emptyPopulation": "no bar pinned; the bar is published as unavailable",
+    "reference": "the displayed quality of the population's lower-median configuration, frozen as a level; the configuration itself is recorded for audit and competes like any other",
+    "minimumPopulation": 2,
+    "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
+    "nonTautology": "with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
 }
+BAR_ID = "bar:median-quality"
+MIN_BAR_POPULATION = 2
+
+
+def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
+    """E156/E192: the bar population and the frozen quality level, chosen before any bar outcome is computed."""
+
+    rows = [row for row in assembled["rows"] if row["summary"].displayed is not None and not row["summary"].provisional]
+    ordered = sorted(rows, key=lambda row: (row["summary"].displayed, row["id"]))
+    if len(ordered) < MIN_BAR_POPULATION:
+        return [row["id"] for row in ordered], []
+    median = ordered[(len(ordered) - 1) // 2]
+    return [row["id"] for row in ordered], [{
+        "id": BAR_ID,
+        "level": median["summary"].displayed,
+        "medianConfiguration": median["id"],
+        "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)",
+    }]
 
 
 # E160: the registered rule that selects each workload's anchor references (separate from workload admission).
@@ -603,17 +626,8 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
             },
             "anchorStatus": "frozen",
         }
-    frontier = intervals.frontier(api_boxes(assembled))
-    by_id = {row["id"]: row for row in assembled["rows"]}
-    # E156: the bar reference comes from the registered policy, at freeze, before any bar outcome is computed.
-    population = [row_id for row_id, result in frontier.items() if result["definite"] == intervals.CERTIFIED and not by_id[row_id]["summary"].provisional]
-    definite = sorted(population, key=lambda row_id: (by_id[row_id]["summary"].displayed, row_id))
-    references = []
-    if definite:
-        references.append({
-            "id": definite[(len(definite) - 1) // 2],
-            "rule": "median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)",
-        })
+    # E156/E192: the bar comes from the registered policy, at freeze, before any bar outcome is computed.
+    population, references = bar_levels(assembled)
     return {
         "schemaVersion": 1,
         "methodologyVersion": METHODOLOGY_VERSION,
@@ -624,7 +638,7 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
         "workloads": workloads,
         "barReferences": references,
         "anchorPolicy": ANCHOR_POLICY,
-        "barPolicy": {**BAR_POLICY, "selectionCutoff": frozen_at, "population": sorted(population), "referenceIds": [item["id"] for item in references]},
+        "barPolicy": {**BAR_POLICY, "selectionCutoff": frozen_at, "population": sorted(population), "bars": [{key: item[key] for key in ("id", "level", "medianConfiguration")} for item in references]},
     }
 
 
@@ -674,7 +688,7 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
         unevaluable = [row_id for row_id in unevaluable if row_id not in unconstructible]
         return {"universe": universe, "blockers": sorted(set(blockers) | set(unconstructible)), "unevaluable": unevaluable, "status": intervals.UNRESOLVED,
                 "reason": "a blocker's current-tariff domain cannot be constructed (E183, E185): " + ", ".join(unconstructible)}
-    frontier, bars = intervals.frontier(boxes), _bar_results(boxes, assembled, frozen)
+    frontier, bars = intervals.frontier(boxes), _bar_results(boxes, frozen)
     # E170/O29: a blocker competes over its hull but earns no interval label of its own.
     for row_id in blockers:
         frontier[row_id] = {"status": WITHHELD_LABEL}
@@ -702,18 +716,14 @@ def subset_interval_outputs(assembled: dict, frozen: dict) -> dict:
     }
 
 
-def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> list[dict]:
-    by_id = {row["id"]: row for row in assembled["rows"]}
-    results = []
-    for reference in frozen["barReferences"]:
-        row = by_id.get(reference["id"])
-        if row is None or row["summary"].displayed is None:
-            results.append({"reference": reference, "status": intervals.UNEVALUABLE, "reason": "reference quality is not evaluable"})
-            continue
-        summary = row["summary"]
-        outcome = intervals.cheapest_above_bar(boxes, intervals.Reference(row["id"], summary.lower, summary.upper))
-        results.append({"reference": reference, "referenceQuality": {"lower": summary.lower, "upper": summary.upper}, **outcome})
-    return results
+def _bar_reference(bar: dict) -> intervals.Reference:
+    """E192: a frozen quality level is a reference with no uncertainty of its own."""
+
+    return intervals.Reference(bar["id"], bar["level"], bar["level"])
+
+
+def _bar_results(boxes: list[intervals.Box], frozen: dict) -> list[dict]:
+    return [{"reference": bar, **intervals.cheapest_above_bar(boxes, _bar_reference(bar))} for bar in frozen["barReferences"]]
 
 
 # E146: registered deletion branches. Displayed-score sensitivity removes the leaf set R globally and
@@ -1722,40 +1732,55 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     """E100/E112: kernel-robust scenario-supported cheapest labels for each pinned bar on the API basis."""
 
     panel = scenario_panel(assembled, "api")
-    members = {item.row for item in panel}
     boxes = api_boxes(assembled)
-    by_id = {row["id"]: row for row in assembled["rows"]}
     # E147: the compiled dependency graph must be the registered kernel-check object, or the build fails.
     if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
         raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
     blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
     labels = []
     for reference in frozen["barReferences"]:
-        if reference["id"] not in members:
-            labels.append({"reference": reference["id"], "status": "unevaluable", "reason": "reference outside the declared scenario panel"})
-            continue
-        summary = by_id[reference["id"]]["summary"]
-        bar = intervals.Reference(reference["id"], summary.lower, summary.upper)
+        bar = _bar_reference(reference)
         # E186: a blocker is never a candidate.
         candidates = [item for item in intervals.cheapest_above_bar(boxes, bar)["possibleCheapest"] if item not in blocked]
         results = {}
         for candidate in candidates:  # interval rows are main-workload rows with a cost, so all are panel members
-            result = scenarios.kernel_robust_cheapest(panel, candidate, reference["id"], seed, batch=batch)
+            result = scenarios.kernel_robust_cheapest(panel, candidate, reference["level"], seed, batch=batch)
             if result["label"] and not blocker_safe(candidate, bar, boxes, blocked):
                 result = {**result, "label": False, "reading": BLOCKER_UNRESOLVED}
             results[candidate] = result
-        labels.append({"reference": reference["id"], "status": "evaluated", "candidates": results})
+        labels.append({"reference": reference["id"], "level": reference["level"], "status": "evaluated", "candidates": results})
     return labels
 
 
 BLOCKER_UNRESOLVED = "scenario frequency passes; superseded-price blocker unresolved"
 
+DUAL_RUN_FILE = "v3_dual_run.json"
+
+
+def dual_run(assembled: dict, previous: dict, current: dict) -> dict:
+    """O12/E197: a re-anchoring scores the same evidence on the previous and the new anchor objects, side by side.
+
+    Each row's cost score, value and rank are published under both anchor versions, and each bar's result under
+    both bar objects (a reference-policy transition, E156), so the migration's effect is separated from any change
+    in evidence.
+    """
+
+    old, new = score(assembled, previous), score(assembled, current)
+    fields = ("costScore", "value", "rank")
+    rows = [
+        {"row": before["id"], **{basis: {"previous": {field: before[key][field] for field in fields}, "current": {field: after[key][field] for field in fields}}
+                                 for basis, key in (("api", "api"), ("plan", "planScore"))}}
+        for before, after in zip(old["rows"], new["rows"])
+    ]
+    bars = {basis: {"previous": old["intervals"][basis].get("bars", []), "current": new["intervals"][basis].get("bars", [])} for basis in ("api", "plan")}
+    return {"previousAnchorVersion": previous["anchorVersion"], "anchorVersion": current["anchorVersion"], "rows": rows, "bars": bars}
+
 
 def blocker_safe(candidate: str, bar: intervals.Reference, boxes: list[intervals.Box], blocked: set) -> bool:
     """E186: no superseded-price blocker can qualify at the bar and be no dearer than the candidate in any state.
 
-    Over independent boxes, some state has Q_b >= Q_r and C_b <= C_i exactly when b's best quality reaches the bar's
-    lowest and b's lowest cost reaches the candidate's highest; a blocker without a constructible box is never safe.
+    Over independent boxes, some state has Q_b >= the bar and C_b <= C_i exactly when b's best quality reaches the bar
+    level (E192) and b's lowest cost reaches the candidate's highest; a blocker without a constructible box is never safe.
     """
 
     by_row = {box.row: box for box in boxes}
@@ -1764,8 +1789,7 @@ def blocker_safe(candidate: str, bar: intervals.Reference, boxes: list[intervals
     own = by_row[candidate]
     for row_id in blocked:
         box = by_row[row_id]
-        qualifies = row_id == bar.row or box.q_high >= bar.q_low
-        if qualifies and box.c_low <= own.c_high:
+        if box.q_high >= bar.q_low and box.c_low <= own.c_high:
             return False
     return True
 
@@ -1806,7 +1830,9 @@ CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt"
 
 
 def load_documents(data: Path) -> dict:
-    return {key: json.loads((data / relative).read_text()) for key, (relative, _extractor) in EVIDENCE_FILES.items()}
+    documents = {key: json.loads((data / relative).read_text()) for key, (relative, _extractor) in EVIDENCE_FILES.items()}
+    plan_routes.check_report_window(documents["planRoutes"])
+    return documents
 
 
 def evidence_bundle(data: Path) -> dict:
@@ -1861,9 +1887,10 @@ def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:
 
 
 def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
-    parser = argparse.ArgumentParser(description="ValueRank v3: freeze anchors or run the scenario engine")
-    parser.add_argument("command", choices=("freeze", "scenarios"))
+    parser = argparse.ArgumentParser(description="ValueRank v3: freeze anchors, run the scenario engine, or compare two anchor versions")
+    parser.add_argument("command", choices=("freeze", "scenarios", "dual-run"))
     parser.add_argument("--scenarios", type=int, default=SCENARIO_COUNT)
+    parser.add_argument("--previous", type=Path, help="dual-run: the previous anchor object (a v3_frozen.json)")
     args = parser.parse_args(argv)
     scores = json.loads((data / "scores.json").read_text())
     release_day = utcnow().date()
@@ -1871,6 +1898,12 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
     if args.command == "freeze":
         document = freeze(assemble(configurations, documents, release_day=release_day), frozen_at=release_day.isoformat())
         target = data / FROZEN_FILE
+    elif args.command == "dual-run":
+        if args.previous is None:
+            parser.error("dual-run needs --previous")
+        frozen = json.loads((data / FROZEN_FILE).read_text())
+        document = dual_run(assemble_for_release(configurations, documents, frozen, release_day=release_day), json.loads(args.previous.read_text()), frozen)
+        target = data / DUAL_RUN_FILE
     else:
         frozen = json.loads((data / FROZEN_FILE).read_text())
         assembled = assemble_for_release(configurations, documents, frozen, release_day=release_day)

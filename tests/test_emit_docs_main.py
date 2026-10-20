@@ -70,7 +70,11 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     readme = (emitted / "README.md").read_text()
     assert "the definite frontier (no configuration can beat it on both cost and quality" in readme
     assert "is GPT-6.1 Sol (max), GPT-6 Luna (max);" in readme
-    assert "Cheapest at or above GPT-6 Luna (max)'s quality: GPT-6 Luna (max) (confirmed)." in readme
+    # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter.
+    assert "Cheapest at or above quality 52.1: not unique; possibly GPT-6.1 Sol (max), GPT-5.6 Luna (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max)." in readme
+    # E196: the nominal cost weight is printed with cost's share of the variance in value.
+    assert "value is a 25% cost score (nominal weight; 80% of API and 63% of Plan value variance)" in readme
+    assert "That weight is nominal: on the current panel cost accounts for 80% of the variance in API value and 63% in Plan value" in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
     assert "Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality." in readme
@@ -104,7 +108,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert "| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |" in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
-    assert "| GPT-6 Luna (max) | GPT-6 Luna (max) | supported under all registered role-group kernel checks |" in text
+    assert "| quality 52.1 | GPT-6.1 Sol (max) | not scenario-supported |" in text
 
 
 def test_raw_data_lists_every_deepswe_configuration_and_bundle_artifact(emitted):
@@ -177,6 +181,7 @@ def evaluated_plan_intervals(document):
     bar["confirmedCheapest"] = None
     bar["possibleCheapest"] = ["gpt-6-luna", "deepseek-v4-flash"]
     plan["bars"].append({**copy.deepcopy(bar), "status": "unresolved"})
+    plan["bars"].append({**copy.deepcopy(bar), "confirmedCheapest": "deepseek-v4-flash"})
     # E183: an O29 blocker competes without a label of its own.
     plan["blockers"] = ["grok-4.7"]
     plan["frontier"]["grok-4.7"] = {"status": "no interval label"}
@@ -190,14 +195,22 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     readme = (repo_copy / "README.md").read_text()
     plan_sentence = next(line for line in readme.splitlines() if line.startswith("- Plan basis, main workload"))
     assert "Not evaluable" not in plan_sentence
-    assert "Cheapest at or above GPT-6 Luna (max)'s quality: not unique; possibly GPT-6 Luna (max), DeepSeek V4 Flash (max)." in plan_sentence
-    assert plan_sentence.endswith("Cheapest at or above GPT-6 Luna (max)'s quality: unresolved.")
+    assert "Cheapest at or above quality 52.1: not unique; possibly GPT-6 Luna (max), DeepSeek V4 Flash (max)." in plan_sentence
+    assert "Cheapest at or above quality 52.1: unresolved." in plan_sentence
+    assert plan_sentence.endswith("Cheapest at or above quality 52.1: DeepSeek V4 Flash (max) (confirmed).")
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores
     assert "Status unresolved." in scores
     assert "Competing without a label (AA cost on a price not in force, O29): Grok 4.7 (xhigh)." in plan_sentence
     assert "Competing without a label (AA cost on a price not in force, O29, E183): Grok 4.7 (xhigh)." in scores
+
+
+def test_an_undefined_variance_allocation_prints_only_the_nominal_weight(repo_copy, pinned_clock):
+    edit_json(repo_copy, "scores.json", lambda doc: doc["v3"]["costInfluence"]["plan"]["commonWorkload"].__setitem__("varianceAllocation", None))
+    assert emit(repo_copy) == 0
+    readme = (repo_copy / "README.md").read_text()
+    assert "value is a 25% cost score (nominal weight) plus 75% quality" in readme and "That weight is nominal" not in readme
 
 
 def test_policy_applications_are_printed_only_when_recorded(repo_copy, pinned_clock):

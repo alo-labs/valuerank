@@ -6,7 +6,7 @@
 <header class="page-head">
   <p class="eyebrow">Methodology {{ page.method.methodologyVersion }}</p>
   <h1 id="page-title">How ValueRank scores a model</h1>
-  <p class="lead">A configuration's score is its value: a cost score carries a fixed {{ num(page.costWeightPct, 0) }}% and benchmark quality the other {{ num(100 - page.costWeightPct, 0) }}%. Cost is what it costs to run the SDLC basket once, scored on a log scale so cost ratios keep their size. Quality is the weighted mean of the benchmark leaves observed for that exact configuration: a missing leaf is left out and never filled in, and a configuration without a cost gets no value score.</p>
+  <p class="lead">A configuration's score is its value: a cost score carries a fixed {{ num(page.costWeightPct, 0) }}% and benchmark quality the other {{ num(100 - page.costWeightPct, 0) }}%.{% set share = page.method.costVarianceShare %}{% if share.api is not none and share.plan is not none %} That weight is nominal: on the current panel, cost accounts for {{ num(100 * share.api, 0) }}% of the spread in API value and {{ num(100 * share.plan, 0) }}% in Plan value, because cost scores vary more across configurations than quality scores do.{% endif %} Cost is what it costs to run the SDLC basket once, scored on a log scale so cost ratios keep their size. Quality is the weighted mean of the benchmark leaves observed for that exact configuration: a missing leaf is left out and never filled in, and a configuration without a cost gets no value score.</p>
 </header>
 
 <nav class="toc" aria-label="On this page">
@@ -97,7 +97,7 @@
     {%- for key, text in m.streamDescriptions.items() %}<li><strong>{{ key }}</strong>: {{ text }}</li>{% endfor %}
     {%- for text in m.notQuantified %}<li>{{ text }}</li>{% endfor %}
   </ul>
-  {%- if m.barReference %}<p>The quality bar is pinned to {{ m.barReference }} ({{ m.barPolicy }}), fixed for the anchor version.</p>{% endif %}
+  {%- if m.barLevel %}<p>The quality bar is a fixed quality level: {{ m.barLevel }}, the {{ m.barPolicy }}. It stays fixed for the anchor version.</p>{% endif %}
 </section>
 
 <section class="block" id="evidence-grades" aria-labelledby="grades-title">

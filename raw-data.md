@@ -547,7 +547,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `0b4001c4f98d5c613ec419118f21a155b90b0a00f882fd774d8a07cfe05dd53f`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `4e198807ffe0dd21802b5fefc30e641784dc8c3b223bfa2b08be29b9898c149e`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -560,7 +560,7 @@ Bundle hash `0b4001c4f98d5c613ec419118f21a155b90b0a00f882fd774d8a07cfe05dd53f`: 
 | configurationMap | `data/v3_configuration_map.json` | `2f2147fb801356a4050394d1747ae81f3d6627979880453ced7a3523031b01f4` | 2026-10-19 | editorial pinning from the research capture |
 | planRoutes | `data/plan_cost_routes.json` | `70b6bd160e8d890e867ea4998bf047c1e7acb22726c1cfb7450e1ddacc82a197` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `41e71ffea3a13f0cec1573493a8baf24b274d2de5290224d1107ee818c05cd95` | 2026-10-17T19:25:14Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| anchors | `data/v3_frozen.json` | `f3fb3db7a8302da941a2a35ee1ec11a284959baf025fc1a1943377a1fbfe5924` | 2026-10-19 | valuerank.value_v3 freeze |
+| anchors | `data/v3_frozen.json` | `91fbbe17c5d8d545f8fe885c251af2d2785f535c1e0b527904d0b284f286c843` | 2026-10-19 | valuerank.value_v3 freeze |
 
 
 ## AA intelligence and total-cost comparison

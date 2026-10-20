@@ -321,8 +321,8 @@ def test_kernel_robust_label_needs_every_kernel():
     candidate = RowInputs("c", {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in missing}, Kernel("fixed", (10.0,)))
     reference = full_row("ref", 78.0, 100.0)
     result = sc.kernel_robust_cheapest([candidate, reference], "c", "ref", 21, batch=10000, looks=2)
-    primary, heavy = result["assignments"]["UUU"], result["assignments"]["HUU"]
-    assert sorted(result["assignments"]) == ["HHU", "HUU", "UHU", "UUU"]  # no competitors: the competitor block is empty
+    primary, heavy = result["assignments"]["UU"], result["assignments"]["HU"]
+    assert sorted(result["assignments"]) == ["HH", "HU", "UH", "UU"]  # no competitors: the empty competitor block takes no letter
     assert primary["status"] == "met" and primary["share"] == pytest.approx(0.915, abs=0.01)
     assert heavy["status"] == "not met" and heavy["share"] == pytest.approx(0.867, abs=0.01)
     assert result["label"] is False and result["reading"] == "primary-kernel frequency >= 90%; kernel-sensitive"
@@ -344,7 +344,23 @@ def test_kernel_robust_label_needs_every_kernel():
     never = sc.kernel_robust_cheapest([full_row("c", 50.0, 10.0), reference], "c", "ref", 3, batch=100, looks=1)
     assert never["reading"] == "not scenario-supported"
     itself = sc.kernel_assignments([reference], "ref", "ref")
-    assert [item["id"] for item in itself] == ["UUU", "HHU"]  # candidate and reference blocks coincide
+    assert [item["id"] for item in itself] == ["UU", "HH"]  # candidate and reference blocks coincide
+
+
+def test_a_quality_level_bar_has_no_reference_block():
+    """E192: the E121 fixture with the bar as the level 78 gives the same frequencies; codes cover candidate and competitors."""
+
+    missing = {"bugHunt", "automationBench", "omniscience"}
+    candidate = RowInputs("c", {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in missing}, Kernel("fixed", (10.0,)))
+    result = sc.kernel_robust_cheapest([candidate], "c", 78.0, 21, batch=10000, looks=2)
+    assert sorted(result["assignments"]) == ["H", "U"]
+    assert result["assignments"]["U"]["share"] == pytest.approx(0.915, abs=0.01) and result["assignments"]["H"]["share"] == pytest.approx(0.867, abs=0.01)
+    assert result["assignments"]["U"]["decisionTarget"]["referenceObjectId"] == {"level": 78.0}
+    assert result["kernelCheck"]["switchGroups"] == {"candidate": ["c"], "reference": [], "competitors": []}
+    rival = full_row("x", 90.0, 500.0)
+    assert [item["id"] for item in sc.kernel_assignments([candidate, rival], "c", 78.0)] == ["UU", "UH", "HU", "HH"]
+    assert sc.cheapest_qualifier({"c": (10.0, 80.0), "x": (500.0, 90.0)}, 78.0) == "c"
+    assert sc.cheapest_qualifier({"c": (10.0, 70.0), "x": (500.0, 90.0)}, 78.0) == "x"
 
 
 def test_a_published_interval_supports_expected_performance_only_when_the_source_documents_it():

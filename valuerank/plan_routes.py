@@ -196,6 +196,32 @@ def _divisor_eligible(route: dict) -> bool:
 
 STAGES = ("fresh", "possibly-superseded", "expired", "demoted")
 
+# E194: AGENTS.md's "reports from the preceding month" is the 30 days ending on the evidence search cutoff.
+REPORT_WINDOW_DAYS = 30
+
+
+def check_report_window(document: dict) -> None:
+    """E194: every newly admitted end-user report is dated inside the release's report window.
+
+    A report's date is its measurement window's end, else its report date, else its
+    publication date. A report admitted at an earlier release records ``admittedOn``
+    and ages under E151/O13 instead of being re-tested against later windows.
+    """
+
+    window = document["evidencePolicy"]["reportingWindow"]
+    start, end = date.fromisoformat(window["start"]), date.fromisoformat(window["end"])
+    if (end - start).days != REPORT_WINDOW_DAYS:
+        raise ValueError(f"the report window must span {REPORT_WINDOW_DAYS} days ending at the search cutoff (E194)")
+    for route in document["routes"]:
+        if route.get("valueMultipleKind") not in REPORT_KINDS:
+            continue
+        for report in route.get("independentReports") or [route]:
+            if report.get("admittedOn"):
+                continue
+            stamp = (report.get("measurementWindow") or {}).get("end") or report.get("reportDate") or report.get("sourcePublicationDate")
+            if stamp is None or not start <= date.fromisoformat(stamp) <= end:
+                raise ValueError(f"{report['id']}: end-user report dated outside the report window {start} to {end} (E194)")
+
 
 def report_stage(report: dict, route: dict, release_day: date) -> str:
     """E151: one report's own expiry stage (its measurement window's end, else its report date; else the route's)."""

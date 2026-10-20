@@ -429,3 +429,23 @@ def test_expired_routes_leave_selection_before_any_fallback():
     assert pr.select_route(pr.route_candidates("m", "max", [stale, transfer_only], TODAY))["route"]["id"] == "transfer"
     nothing = pr.route_candidates("m", "max", [stale], TODAY)
     assert pr.select_route(nothing) is None and pr.plan_cost(100.0, None)["fallback"] == "api"
+
+
+def test_report_window_admits_only_reports_dated_inside_it():
+    """E194: the window is the 30 days ending at the search cutoff; admitted reports age under E151 instead."""
+
+    def document(*routes, start="2026-09-08", end="2026-10-08"):
+        return {"evidencePolicy": {"reportingWindow": {"start": start, "end": end}}, "routes": list(routes)}
+
+    inside = {"id": "r1", "valueMultipleKind": "user_reported_projection", "measurementWindow": {"end": "2026-09-25"}}
+    controlled = {"id": "c1", "valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-01-01"}
+    pr.check_report_window(document(inside, controlled))
+    old = {"id": "r2", "valueMultipleKind": "end_user_report", "reportDate": "2026-08-01"}
+    with pytest.raises(ValueError, match=r"r2: end-user report dated outside the report window 2026-09-08 to 2026-10-08 \(E194\)"):
+        pr.check_report_window(document(old))
+    pr.check_report_window(document({**old, "admittedOn": "2026-08-05"}))
+    pooled = {"id": "p", "valueMultipleKind": "community_observed", "independentReports": [{"id": "p1", "reportDate": "2026-10-01"}, {"id": "p2"}]}
+    with pytest.raises(ValueError, match="p2: end-user report dated outside"):
+        pr.check_report_window(document(pooled))
+    with pytest.raises(ValueError, match="must span 30 days"):
+        pr.check_report_window(document(inside, end="2026-10-31"))

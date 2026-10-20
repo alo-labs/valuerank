@@ -327,10 +327,20 @@ def frontier_rows(scenario: dict) -> set:
     return members
 
 
-def cheapest_qualifier(scenario: dict, reference: str) -> str | None:
+def bar_quality(scenario: dict, reference: str | float) -> float:
+    """A row reference's quality in this scenario, or a frozen quality level (E192), which no scenario varies."""
+
+    return scenario[reference][1] if isinstance(reference, str) else float(reference)
+
+
+def _reference_rows(reference: str | float) -> set:
+    return {reference} if isinstance(reference, str) else set()
+
+
+def cheapest_qualifier(scenario: dict, reference: str | float) -> str | None:
     """The strictly cheapest row qualifying against the reference in this scenario, or None on a tie or no qualifier."""
 
-    bar = scenario[reference][1]
+    bar = bar_quality(scenario, reference)
     qualifiers = sorted((cost, row) for row, (cost, quality) in scenario.items() if quality >= bar)
     if not qualifiers or (len(qualifiers) > 1 and qualifiers[0][0] == qualifiers[1][0]):
         return None
@@ -340,7 +350,7 @@ def cheapest_qualifier(scenario: dict, reference: str) -> str | None:
 LABEL_STRATUM = "S1"
 
 
-def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference: str, stratum: str, rng: random.Random, *, alternative: bool = False, alternative_rows: frozenset | None = None, **rule) -> dict:
+def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference: str | float, stratum: str, rng: random.Random, *, alternative: bool = False, alternative_rows: frozenset | None = None, **rule) -> dict:
     """E92: the scenario-supported unique-cheapest label for one bar and one candidate.
 
     The event is "the candidate qualifies and is strictly cheaper than every other
@@ -368,7 +378,7 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
         "specificationBranch": "core",
         "kernel": "endpoint-heavy alternative" if alternative else "primary" if alternative_rows is None else "block assignment",
         "endpointHeavyRows": sorted(alternative_rows) if alternative_rows is not None else None,
-        "referenceObjectId": reference,
+        "referenceObjectId": reference if isinstance(reference, str) else {"level": reference},
     }
     return {
         **outcome,
@@ -382,23 +392,29 @@ def scenario_supported_cheapest(rows: list[RowInputs], candidate: str, reference
 BLOCKS = ("candidate", "reference", "competitors")
 
 
-def kernel_assignments(rows: list[RowInputs], candidate: str, reference: str) -> list[dict]:
+def _blocks(rows: list[RowInputs], candidate: str, reference: str | float) -> dict:
+    """The event-relevant role groups; a quality-level bar (E192) has no reference rows, so its block is empty."""
+
+    references = _reference_rows(reference)
+    return {"candidate": {candidate}, "reference": references, "competitors": {row.row for row in rows} - {candidate} - references}
+
+
+def kernel_assignments(rows: list[RowInputs], candidate: str, reference: str | float) -> list[dict]:
     """E121: every uniform/arcsine assignment over the event-relevant blocks (candidate, reference, competitors).
 
     Rows of one block share one kernel family; when the candidate is the
     reference, the two blocks coincide and duplicate assignments are dropped.
+    An empty block (a quality-level bar's reference) takes no letter in the
+    assignment code. The first assignment is the all-uniform primary.
     """
 
-    members = {
-        "candidate": {candidate},
-        "reference": {reference},
-        "competitors": {row.row for row in rows} - {candidate, reference},
-    }
+    members = _blocks(rows, candidate, reference)
+    named = [block for block in BLOCKS if members[block]]
     components = dependency_components(rows)
     assignments, seen = [], set()
-    for flags in itertools.product((False, True), repeat=len(BLOCKS)):
-        heavy = frozenset().union(*(members[block] for block, flag in zip(BLOCKS, flags) if flag))
-        light = frozenset().union(*(members[block] for block, flag in zip(BLOCKS, flags) if not flag))
+    for flags in itertools.product((False, True), repeat=len(named)):
+        heavy = frozenset().union(*(members[block] for block, flag in zip(named, flags) if flag))
+        light = frozenset().union(*(members[block] for block, flag in zip(named, flags) if not flag))
         # E147: rows of one dependency component share primitives, so they always take one kernel family.
         split = any(heavy.intersection(component) and not heavy.issuperset(component) for component in components)
         if heavy & light or split or heavy in seen:
@@ -408,7 +424,7 @@ def kernel_assignments(rows: list[RowInputs], candidate: str, reference: str) ->
     return assignments
 
 
-def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str, seed: int, **rule) -> dict:
+def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str | float, seed: int, **rule) -> dict:
     """E112/E121: the scenario-supported label needs the S1 threshold met under every registered block assignment.
 
     Each assignment is resolved by the E77 sequential rule; the frequency range
@@ -423,7 +439,7 @@ def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str
         runs[assignment["id"]] = scenario_supported_cheapest(
             rows, candidate, reference, LABEL_STRATUM, random.Random(seed + index), alternative_rows=assignment["endpointHeavyRows"], **rule
         )
-    primary = runs["UUU"]
+    primary = runs[assignments[0]["id"]]
     met = all(run["status"] == "met" for run in runs.values())
     unresolved = any(run["status"] == "scenario threshold unresolved" for run in runs.values())
     eligible = primary["uniqueLabelEligible"]
@@ -440,14 +456,14 @@ def kernel_robust_cheapest(rows: list[RowInputs], candidate: str, reference: str
         reading = "not scenario-supported"
     shares_ = [run["share"] for run in runs.values()]
     components = dependency_components(rows)
-    blocks = {"candidate": {candidate}, "reference": {reference}, "competitors": {row.row for row in rows} - {candidate, reference}}
+    blocks = _blocks(rows, candidate, reference)
     check = {
         # E133/E147: components are compiled from the stream's shared primitives; kernels switch by role group,
         # and role groups linked by one component switch together.
         "dependencyComponents": components,
         "dependencyGraphHash": hashlib.sha256(json.dumps(components).encode()).hexdigest()[:16],
         "mergedBlocks": [sorted(block for block in BLOCKS if blocks[block] & set(component)) for component in components if sum(1 for block in BLOCKS if blocks[block] & set(component)) > 1],
-        "switchGroups": {"candidate": [candidate], "reference": [reference], "competitors": sorted({row.row for row in rows} - {candidate, reference})},
+        "switchGroups": {block: sorted(members) for block, members in blocks.items()},
         "assignments": [{"id": item["id"], "endpointHeavyRows": sorted(item["endpointHeavyRows"])} for item in assignments],
         "assignmentSetHash": hashlib.sha256(json.dumps(sorted(item["id"] for item in assignments)).encode()).hexdigest()[:16],
         "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
@@ -527,7 +543,7 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
             counts[row.row]["top1"] += rank[row.row] == 1
             counts[row.row]["frontier"] += row.row in front
         for reference in references:
-            bar = scenario[reference][1]
+            bar = bar_quality(scenario, reference)
             for row in rows:
                 qualify[reference][row.row] += scenario[row.row][1] >= bar
     result = {}

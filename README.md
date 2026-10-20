@@ -4,11 +4,11 @@
 **Version:** v3.0.0
 **Updated:** October 19, 2026
 **Methodology:** 3.0.0 · SDLC basket v1 · anchor version v3-2026-10-19
-**Scope:** 19 ranked configurations from a 31-model AA-mapped roster; value is a 25% cost score plus 75% quality over 11 benchmark leaves
+**Scope:** 19 ranked configurations from a 31-model AA-mapped roster; value is a 25% cost score (nominal weight; 80% of API and 63% of Plan value variance) plus 75% quality over 11 benchmark leaves
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **25%** cost score plus **75%** benchmark quality. Cost is the contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost): Artificial Analysis' (AA) published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of 11 benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted. No Value Multiple is yet identified on the basket itself (0 of 19 rows), so the Plan ranking is labelled exploratory.
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **25%** cost score plus **75%** benchmark quality. That weight is nominal: on the current panel cost accounts for 80% of the variance in API value and 63% in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)). Cost is the contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost): Artificial Analysis' (AA) published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of 11 benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted. No Value Multiple is yet identified on the basket itself (0 of 19 rows), so the Plan ranking is labelled exploratory.
 
 Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality.
 
@@ -46,16 +46,16 @@ Not ranked (12 roster models): Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5,
 
 ### What the evidence supports
 
-- API basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere inside the published record's precision and missing-evidence bounds) is GPT-6.1 Sol (max), GPT-6 Luna (max); the possible frontier adds Gemini 4 Argon (high), Claude Sonnet 5.5 (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-5.6 Luna (max), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). Not evaluable on this workload: GPT-6 Astra (xhigh), MiMo-V2.6-Flash, MiMo-V2.6-Pro. Cheapest at or above GPT-6 Luna (max)'s quality: GPT-6 Luna (max) (confirmed).
+- API basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere inside the published record's precision and missing-evidence bounds) is GPT-6.1 Sol (max), GPT-6 Luna (max); the possible frontier adds Gemini 4 Argon (high), Claude Sonnet 5.5 (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-5.6 Luna (max), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). Not evaluable on this workload: GPT-6 Astra (xhigh), MiMo-V2.6-Flash, MiMo-V2.6-Pro. Cheapest at or above quality 52.1: not unique; possibly GPT-6.1 Sol (max), GPT-5.6 Luna (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max).
 - Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
 Scenario shares by stream, diagnostics and the release gates are in [scores.md](scores.md); the inputs behind every number are in [raw-data.md](raw-data.md).
 
 ## Model inclusion
 
-**Frontier rule.** Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA's rendered line as observed; ValueRank never recomputes it from rounded values.
+**Frontier rule.** Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked at its highest point on that line (along the strictly rising line also its dearest). Frontier membership is AA's rendered line as observed; ValueRank never recomputes it from rounded values.
 
-**Near-frontier rule.** A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked (its selected configuration may differ from the near configuration) or is explicitly deferred by a dated, reasoned roster decision. The cost ratio to the frontier is reported for information only.
+**Near-frontier rule.** A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Its selected configuration may differ from the near configuration: it is the configuration already ranked for exact DeepSWE and Bug Hunt evidence when there is one, else the near point with the smallest Index gap. The cost ratio to the frontier is reported for information only.
 
 Policy as recorded: A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only.
 
@@ -99,7 +99,7 @@ AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer
 - [AA Coding Agent Index, DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
 - [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) official leaderboard rows and [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs.
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `0b4001c4f98d5c613ec419118f21a155b90b0a00f882fd774d8a07cfe05dd53f`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `4e198807ffe0dd21802b5fefc30e641784dc8c3b223bfa2b08be29b9898c149e`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files

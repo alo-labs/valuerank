@@ -228,8 +228,10 @@
   },
   "barReferences": [
     {
-      "id": "gpt-6-luna",
-      "rule": "median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)"
+      "id": "bar:median-quality",
+      "level": 52.09441344290625,
+      "medianConfiguration": "glm-5.3",
+      "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)"
     }
   ],
   "anchorPolicy": {
@@ -242,21 +244,42 @@
     "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor"
   },
   "barPolicy": {
-    "policyId": "median-definite-frontier",
-    "version": 1,
+    "policyId": "median-quality-level",
+    "version": 2,
     "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
-    "populationRule": "non-provisional configurations on the API main-workload definite frontier of the interval outputs",
+    "populationRule": "non-provisional ranked configurations with a displayed quality",
     "order": "displayed quality ascending, then configuration ID",
     "position": "lower median",
-    "emptyPopulation": "no bar pinned; the bar is published as unavailable",
+    "reference": "the displayed quality of the population's lower-median configuration, frozen as a level; the configuration itself is recorded for audit and competes like any other",
+    "minimumPopulation": 2,
+    "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
+    "nonTautology": "with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
     "selectionCutoff": "2026-10-19",
     "population": [
+      "claude-haiku-5-5",
+      "claude-opus-5",
+      "claude-opus-5-5",
+      "claude-sonnet-5-5",
+      "deepseek-v4-flash",
+      "deepseek-v4-pro",
+      "gemini-3.8-flash",
+      "gemini-4-argon",
+      "glm-5.3",
+      "gpt-5.6-luna",
+      "gpt-5.6-sol",
       "gpt-6-luna",
-      "gpt-6.1-sol"
+      "gpt-6-sol",
+      "gpt-6.1-sol",
+      "grok-4.7",
+      "qwen3.8-max"
     ],
-    "referenceIds": [
-      "gpt-6-luna"
+    "bars": [
+      {
+        "id": "bar:median-quality",
+        "level": 52.09441344290625,
+        "medianConfiguration": "glm-5.3"
+      }
     ]
   }
 }

@@ -500,6 +500,25 @@ CAPTURE_CASES = [
 ]
 
 
+def _capture_point_off_its_vertex(document):
+    document["frontier"][0]["svg_x"] += 5
+
+
+def _capture_path_falls(document):
+    points = sorted(document["frontier"], key=lambda item: item["svg_x"])
+    points[1]["svg_y"] = points[0]["svg_y"] + 1
+    document["rendered_pareto_svg_path"] = "M " + " L ".join(f"{item['svg_x']} {item['svg_y']}" for item in points)
+
+
+CAPTURE_CASES += [
+    ("capture", _capture_point_off_its_vertex, "do not match the rendered Pareto path vertices"),
+    ("capture", lambda d: d.update(rendered_pareto_svg_path=d["rendered_pareto_svg_path"].rsplit(" L ", 1)[0]), "do not match the rendered Pareto path vertices"),
+    ("capture", lambda d: d.update(rendered_pareto_svg_path="M 1 2 Q 3 4"), "M/L coordinate pairs"),
+    ("capture", lambda d: d.pop("rendered_pareto_svg_path"), "M/L coordinate pairs"),
+    ("capture", _capture_path_falls, "does not rise strictly"),
+]
+
+
 @pytest.mark.parametrize(("name", "mutation", "message"), CAPTURE_CASES)
 def test_capture_must_match_inventory(world, name, mutation, message):
     edit(world, name, mutation)
@@ -624,8 +643,18 @@ def unmatch_all_bug_hunt(document):
         model["matched"] = False
 
 
+def defer_near_family(family):
+    def fn(document):
+        for row in document["nearFrontierRows"]:
+            if row["family"] == family:
+                row["requiredFamilyModelId"] = None
+    return fn
+
+
 def test_without_bug_hunt_overlap_the_dimension_is_dropped(world):
     edit(world, "bughunt", unmatch_all_bug_hunt)
+    # GPT-5.6 Luna is ranked at max only through retention; without it E193 needs its near point, so this world defers it.
+    edit(world, "inventory", defer_near_family("GPT-5.6 Luna"))
     run_main(world)
     out = outputs(world)
     scores = out["scores.json"]
@@ -934,12 +963,14 @@ def front(name, intelligence, cost, family="Fam A", model_id="fam-a", note=None)
 
 
 def test_frontier_tiers_pick_the_highest_intelligence_frontier_configuration():
-    frontier = {"Fam A": [front("A low", 20, 5), front("A max", 40, 90, note="priced differently"),
+    """E193: on a rounded-Index tie the dearer point is the higher one, because the rendered line rises strictly (E195)."""
+
+    frontier = {"Fam A": [front("A low", 20, 5), front("A max", 40, 90, note="higher on the line"),
                           front("A high", 40, 80, note="cheaper tie")]}
     annotations, frontier_families, near_families = build_scores.frontier_tiers(frontier, {})
-    assert annotations == {"Fam A": {"tier": "frontier", "configuration": "A high", "intelligenceGap": 0,
-                                     "footnote": "cheaper tie"}}
-    assert frontier_families == [{"family": "Fam A", "modelId": "fam-a", "configuration": "A high"}]
+    assert annotations == {"Fam A": {"tier": "frontier", "configuration": "A max", "intelligenceGap": 0,
+                                     "footnote": "higher on the line"}}
+    assert frontier_families == [{"family": "Fam A", "modelId": "fam-a", "configuration": "A max"}]
     assert near_families == []
 
 
@@ -1081,7 +1112,7 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
             best_near[row["family"]] = (key, row)
     best_front = {}
     for row in inventory["rows"]:
-        key = (-row["intelligenceIndex"], row["totalCostUsd"], row["name"])
+        key = (-row["intelligenceIndex"], -row["totalCostUsd"], row["name"])
         if row["family"] not in best_front or key < best_front[row["family"]][0]:
             best_front[row["family"]] = (key, row)
     seen_tiers = set()
@@ -1142,7 +1173,7 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     assert model_rows(world)["gpt-5.5"]["rankingEligible"] is False
     base_frontier_n = base["scores.json"]["cohort"]["frontierRequiredModelN"]
     base_cohort_n = base["scores.json"]["cohort"]["n"]
-    add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="synthetic-gpt-5-5")
+    add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="gpt-5-5")
     run_main(world)
     out = outputs(world)
     model = model_rows(world)["gpt-5.5"]
@@ -1151,7 +1182,7 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
         "Near-frontier AA family (within 3 Index points of the rendered frontier)"]
     assert model["rankingExclusionReasons"] == []
     assert (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"]) == ("near", "GPT-5.5 (medium)", 1)
-    assert model["aaFrontierFootnote"] == "note for synthetic-gpt-5-5"
+    assert model["aaFrontierFootnote"] == "note for gpt-5-5"
     assert out["scores.json"]["cohort"]["n"] == base_cohort_n + 1
     assert out["scores.json"]["cohort"]["frontierRequiredModelN"] == base_frontier_n
     assert out["ranking_summary.json"]["frontierRequiredModelN"] == base_frontier_n
@@ -1169,6 +1200,25 @@ def test_frontier_family_that_is_also_near_keeps_only_the_frontier_inclusion_rea
         reasons = names[family]["rankingInclusionReasons"]
         assert "Required AA Intelligence Index versus total-evaluation-cost frontier family" in reasons
         assert not any(reason.startswith("Near-frontier AA family") for reason in reasons)
+
+
+def test_a_frontier_family_must_rank_its_highest_rendered_frontier_point(world):
+    """E193: a catalog that tracks a lower frontier point of a frontier family fails the build."""
+
+    def fn(document):
+        document["models"]["claude-haiku-5-5"].update(
+            aaUrl=AA_URL + "claude-haiku-5-5-high", aaSlug="claude-haiku-5-5-high", aaVariant="high")
+    edit(world, "aa", fn)
+    with pytest.raises(ValueError, match=r"must rank its highest rendered-frontier point \(E193\): Claude Haiku 5.5"):
+        run_main(world)
+
+
+def test_a_near_family_must_rank_its_near_point_unless_retained(world):
+    """E193: a near family without retention ranks its smallest-gap near point, not another tracked configuration."""
+
+    add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="synthetic-gpt-5-5")
+    with pytest.raises(ValueError, match=r"smallest-gap near point or a retained configuration \(E193\): GPT-5.5"):
+        run_main(world)
 
 
 def test_deferred_near_family_counts_but_adds_no_ranked_model(world):

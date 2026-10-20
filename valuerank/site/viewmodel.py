@@ -394,7 +394,7 @@ def _method_summary(v3: dict, names: dict) -> dict:
     main = v3["mainWorkload"]
     admission = v3["admission"]
     scenarios = v3.get("scenarios") or {}
-    reference = (v3["barPolicy"]["referenceIds"] or [None])[0]
+    bar = (v3["barPolicy"]["bars"] or [None])[0]
     return {
         "methodologyVersion": v3["methodologyVersion"],
         "costLabel": v3["costBoundary"]["label"],
@@ -407,9 +407,12 @@ def _method_summary(v3: dict, names: dict) -> dict:
         "anchors": {basis: {key: v3["workloads"][main]["anchors"][basis][key] for key in ("low", "high")} for basis in BASES},
         "exchangeRate": v3["exchangeRate"],
         "planExploratory": v3["identificationYield"]["exploratory"],
+        # E196: the nominal 25% next to cost's share of the variance in value on the common panel (E189).
+        "costVarianceShare": {basis: (v3["costInfluence"][basis]["commonWorkload"]["varianceAllocation"] or {}).get("cost") for basis in BASES},
         "streamDescriptions": scenarios.get("streamDescriptions", {}),
         "notQuantified": scenarios.get("notQuantified", []),
-        "barReference": names.get(reference) if reference else None,
+        # E192: the bar is a frozen quality level; the configuration at the median is named for audit only.
+        "barLevel": f"quality {bar['level']:.1f} (the displayed quality of {names.get(bar['medianConfiguration'], bar['medianConfiguration'])} at freeze)" if bar else None,
         "barPolicy": f"{v3['barPolicy']['position']} of {v3['barPolicy']['populationRule']}",
     }
 
