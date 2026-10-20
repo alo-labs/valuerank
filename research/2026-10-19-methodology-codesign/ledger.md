@@ -729,3 +729,18 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 63 (Claude Sonnet 5.5, round 11, Thinking) — adopted
 - High (E184). Read check accepted with a note: part 7's quoted words stop six words before its end ("…of ranked rows jointly"), a counting slip. The review cites part 7's Governance content, and the part is 14,000 characters, far below the connector's truncation point.
+
+## Editor decisions after reviewer 64 (owner may override)
+- E185. Bound domain (Grok Medium). The E170 ratio bounds need a strictly positive applied price for every category that can carry demand.
+  - A newly priced category (applied price 0, positive price in force at V) makes the bound unavailable, because v1 has no public per-component category demand (E157). Grok's constrained-demand optimisation therefore has nothing to optimise over in v1.
+  - A zero price in force gives min r = 0: the API bound starts at 0 and the Plan bound has no finite upper end.
+  - In both cases the blocker's domain cannot be built, and the claims it could affect are "unresolved" (E183).
+  - Implemented: reconciliation accepts free cache categories, valuation_gate types the bound, blocker_domain refuses unconstructible domains, and interval outputs turn unresolved.
+- E184 amended (Grok Low).
+  - A workload migration is atomic across bases. Both bases share the workload object and E160's reference configurations (the Plan references are the same configurations at their displayed Plan cost), so availability cannot differ. Grok's owner question (API migrates while Plan stays) therefore cannot arise and needs no owner answer.
+  - A first freeze of a new methodology version that cannot anchor its main workload is not published; the previous version stays live (O12). A subset workload takes the unavailable state.
+  - Implemented: assemble_for_release defers a gained component when the new workload cannot be anchored, with an "anchor migration (E184)" manifest rule and the deferred components in the output.
+- E177 implemented (valuerank/swing_bridge.py). The replay classes are method and clock, price, token use (with the cache-rate label), benchmark record, Plan evidence and cohort. Every evidence document belongs to exactly one class. A replay the current anchors cannot score is a migration governed by its dual-run comparison.
+
+## Reviewer 64 (Grok 4.7, round 11, Thinking) — adopted
+- Medium (E185) and Low (E184 amended). Read check passed.
