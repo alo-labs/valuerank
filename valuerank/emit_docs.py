@@ -612,6 +612,26 @@ def scores_markdown(facts):
             configuration_label(row, facts.names), route_text(entry), plan_amount_text(plan["amount"]), plan.get("selectedIdentification") or DASH,
             usd(row["planScore"]["costUsd"]), "; ".join(plan["flags"]) or DASH, plan.get("selectionReason") or DASH,
         ])
+    # E171/E179: each row's admissible route-measurement pairs and the comparator's pick without the selected one.
+    alternative_rows = []
+    for entry in facts.ranked:
+        row = facts.row(entry)
+        table = row["plan"]["routeAlternatives"]
+        if not table["pairs"]:
+            continue
+        fallback = table["leaveSelectedOut"]
+        alternative_rows.append([
+            configuration_label(row, facts.names), table["admissiblePairs"], table["unidentifiedPairs"],
+            "; ".join(f"{item['routeId']} ({item['displayedMultiple']:g}×, {item['status']})" for item in table["pairs"]),
+            f"{fallback['routeId']} ({fallback['displayedMultiple']:g}×, value {fnum(fallback['displayedPlanValue'], 2)})" if fallback else "none: the row would fall back to API cost (O13)",
+        ])
+    routed = [row for row in v3["rows"] if row["plan"]["routeAlternatives"]["pairs"]]
+    workday = sorted({row["plan"]["workday"]["status"] for row in routed})
+    gate_outcomes = sorted({row["valuationGate"]["outcome"] for row in v3["rows"]})
+    gate_counts = ", ".join(f"{sum(1 for row in v3['rows'] if row['valuationGate']['outcome'] == outcome)} {outcome}" for outcome in gate_outcomes)
+    flagged_gate = [row["id"] for row in v3["rows"] if row["valuationGate"]["flag"]]
+    metering = ", ".join(f"{count} {label}" for label, count in v3["meteringMix"].items() if count)
+    intervals_text = "; ".join(f"{item['leaf']}: {item['status']}, level {item['level']}" for item in v3["sourceIntervals"])
     measured = v3["measuredOnlyPlanView"]
     measured_rows = [
         [facts.label(model_id), item["status"], item.get("routeId") or DASH, usd(item.get("costUsd")), fnum(item.get("value"), 2), item.get("rank") or DASH]
@@ -644,11 +664,21 @@ USD at API rates for the exact configuration; "—" marks a component without an
 
 {markdown_table(['Configuration'] + [component_label(key) for key in components] + ['Basket cost', 'Missing admitted components'], cost_rows, numeric=set(range(1, len(components) + 2)))}
 
+### Valuation basis
+
+Valuation-basis gate (E170): {gate_counts}{(' (flagged: ' + facts.labels(flagged_gate) + ')') if flagged_gate else ''}. AA's Index category costs reconcile exactly with the prices AA displays for each configuration at capture, so its applied prices are the prices in force at the release cutoff. Token metering (E176): {metering}; AA values cached input at live measurements of each model's typical cache-hit rate. Source intervals (E174): {intervals_text}.
+
 ## Plan route selection
 
-The Plan amount is the selected multiple times the cash paid for the fee period (E166), typed by what the measurement establishes; it is not capacity unless it says so.
+The Plan amount is the selected multiple times the cash paid for the fee period (E166), typed by what the measurement establishes; it is not capacity unless it says so. The multiple values only the measured workload's API-equivalent consumption; other plan features are not valued.
 
 {markdown_table(['Configuration', 'Selected route', 'Plan amount', 'Identification', 'Plan cost (USD per basket run)', 'Flags', 'Selection reason'], plan_rows, numeric={4})}
+
+### Route alternatives
+
+Every admissible route-measurement pair in comparator order (E171) and the comparator's pick with the selected pair removed (E179). A larger displayed multiple is arithmetic on the measured workload, never a claim that the route is cheaper on the scored workload. Workday-feasible multiple (E15), for the {len(routed)} routed rows: {'; '.join(workday) or 'none routed'}.
+
+{markdown_table(['Configuration', 'Admissible pairs', 'Unidentified', 'Pairs (multiple, status)', 'Leave-selected-out choice'], alternative_rows, numeric={1, 2})}
 
 ### Measured-only Plan view
 
@@ -754,6 +784,11 @@ def scenario_tables(facts):
         for event, event_label in (("top1", "rank 1"), ("top3", "rank 3 or better"), ("frontier", "on the frontier")):
             rows = [[facts.label(row_id)] + [share(run["rows"][row_id][event]["share"]) if row_id in run["rows"] else DASH for run in runs] for row_id in row_ids]
             parts.append(f"### {label} basis: {event_label}\n\n" + markdown_table(["Configuration"] + [run_label(run) for run in runs], rows, numeric=set(range(1, len(runs) + 1))))
+        # E87: the row-level scenario dispersion of the value score, with the cost-quality covariance term beside it.
+        rows = [[facts.label(row_id)] + [dispersion_text(run["rows"][row_id]["dispersion"]) if row_id in run["rows"] else DASH for run in runs] for row_id in row_ids]
+        parts.append(f"### {label} basis: value-score dispersion (SD; covariance term)\n\n" + markdown_table(["Configuration"] + [run_label(run) for run in runs], rows, numeric=set(range(1, len(runs) + 1))))
+    branches = [f"- **{item['id']}** ({item['stratum']}): {item['status']}" + (f"; {item['reason']}" if item.get("reason") else f"; band width {fnum(item['width'], 1)} points") for item in scenarios["namedBranches"]]
+    parts.append("### Named S2 specification branches\n\n" + "\n".join(branches))
     labels = []
     for item in scenarios["barLabels"]:
         for candidate, result in item.get("candidates", {}).items():
@@ -768,12 +803,70 @@ def scenario_tables(facts):
     return "\n\n".join(parts)
 
 
+def dispersion_text(spread):
+    """E87: the value-score SD over a stream's scenarios with the covariance term, or the undefined status."""
+
+    if spread["status"] != "defined":
+        return spread["status"]
+    return f"{spread['valueSd']:.2f} ({spread['covarianceTerm']:+.2f})"
+
+
 def rank_change_text(changes, names_label):
     moved = {row_id: change for row_id, change in changes.items() if change}
     if not moved:
         return "no rank changes"
     largest = max(abs(change) for change in moved.values())
     return f"{len(moved)} rows move; largest move {largest} ({names_label([row_id for row_id, change in moved.items() if abs(change) == largest])})"
+
+
+LEAF_LABELS = {leaf.key: leaf.label for leaf in q.LEAVES}
+
+
+def agreement_text(result):
+    """One agreement statistic: its label, status and, when defined, tau with its bootstrap interval and panel size."""
+
+    if result["tau"] is None:
+        return f"{result['label']}: {result['status']}; panel of {len(result['panel'])} rows."
+    return f"{result['label']}: Kendall tau {result['tau']:.2f} (interval {result['interval'][0]:.2f} to {result['interval'][1]:.2f}) on {len(result['panel'])} rows."
+
+
+def cost_diagnostics_markdown(facts):
+    """Basket readiness (E22), the SWE companion (O14), the matched-cost object (E55), the leave-one-component-out
+    family (E172) and the paired full/subset bridges with missing shares (E10, E173)."""
+
+    diagnostics = facts.v3["diagnostics"]
+    readiness, companion, matched = diagnostics["basketReadiness"], diagnostics["sweCompanion"], diagnostics["matchedCost"]
+    pending = [component_label(key) for key, item in readiness["components"].items() if item["status"] != "admitted"]
+    flagged = [row_id for row_id, item in companion["rows"].items() if item["flag"]]
+    lines = [
+        f"- **Basket readiness (E22):** priced leaves cover {pct(readiness['pricedMixCoverage'], 0)} of nominal quality weight ({names([LEAF_LABELS.get(key, key) for key in readiness['pricedLeaves']])}); pending components: {names(pending) or 'none'}.",
+        f"- **SWE cost companion (O14, diagnostic):** {len(companion['rows'])} rows evaluated; flagged far from the median ratio: {facts.labels(flagged) if flagged else 'none'}.",
+        f"- **Matched-cost diagnostic (E55):** {matched['status']}" + (f" at {pct(matched['pricedQualityWeight'], 0)} priced quality weight; basket/matched cost-order reversals with separated intervals: {len(matched['reversals'])}; rank-gap warnings: {len(matched['warnings'])}." if matched["status"] == "evaluated" else "."),
+    ]
+    family_rows = []
+    for item in diagnostics["costComponentFamily"]:
+        bases = item.get("bases", {})
+        family_rows.append([component_label(item["component"])] + [
+            rank_change_text(bases[basis]["recalibrated"]["rankChanges"]["changes"], facts.labels) if basis in bases else DASH for basis in ("api", "plan")
+        ] + [fnum(bases["api"]["recalibrated"]["exchangeRate"]["valuePointsPerCostDoubling"], 2) if "api" in bases else DASH])
+    bridge_lines = []
+    for bridge in diagnostics["subsetBridges"]:
+        missing = "; ".join(
+            f"{component_label(key)} is {pct(share['median'], 0)} of the full basket (median; {pct(share['min'], 0)} to {pct(share['max'], 0)} over {share['n']} rows)"
+            if share["n"] else f"{component_label(key)}: no expenditure evidence" for key, share in bridge["missingExpenditureShare"].items()
+        )
+        effects = []
+        for basis, label in (("api", "API"), ("plan", "Plan")):
+            result = bridge["bases"][basis]
+            if result["status"] == "evaluated":
+                spread = result["valueDifference"]
+                effects.append(f"{label}: the full rows' values change by {fnum(spread['median'], 2)} points (median; {fnum(spread['min'], 2)} to {fnum(spread['max'], 2)}), {rank_change_text(result['rankChanges']['changes'], facts.labels)}")
+            else:
+                effects.append(f"{label}: {result['status']}")
+        bridge_lines.append(f"- **{facts.labels(bridge['subsetRows'])}** (subset without {names([component_label(key) for key in bridge['missingComponents']])}): {missing}. Scored on its own subset anchors, the direction of its subset effect is not known. Paired bridge on the {len(bridge['pairedRows'])} full rows: {'; '.join(effects)}.")
+    return "\n".join(lines) + "\n\n### Leave-one-component-out cost family (E172)\n\nEach admitted basket unit removed in turn, scored on anchors rebuilt by the freeze rule (rank changes against the primary ranking; quality held fixed).\n\n" + markdown_table(
+        ["Removed component", "API rank changes", "Plan rank changes", "API value points per cost doubling"], family_rows, numeric={3}
+    ) + "\n\n### Subset rows: paired bridge and missing spend (E10, E173)\n\n" + ("\n".join(bridge_lines) or "No row is scored on a subset workload.")
 
 
 def diagnostics_markdown(facts):
@@ -783,13 +876,17 @@ def diagnostics_markdown(facts):
     drift = diagnostics["groupDrift"]
     shares = diagnostics["qualitySourceShares"]
     abstention = diagnostics["omniscienceAbstentionSensitivity"]
+    logistic = diagnostics["gdpvalLogisticSensitivity"]
     lines = [
         f"- **Terminal-Bench same-harness ({harness['defaultHarness']}):** {harness['agreement']['status']}; {len(harness['harnessMixed'])} rows ran on mixed harnesses.",
-        f"- **Quality agreement:** {agreement['label']}: {agreement['status']}" + (f", Kendall tau {agreement['tau']:.2f} (interval {agreement['interval'][0]:.2f} to {agreement['interval'][1]:.2f}) on {len(agreement['panel'])} rows." if agreement["tau"] is not None else "."),
+        f"- **Quality agreement:** {agreement_text(agreement)}",
+        *(f"- **Quality-substitution value agreement ({label}):** {agreement_text(diagnostics['qualitySubstitutionAgreement'][basis])}" for basis, label in (("api", "API"), ("plan", "Plan"))),
+        f"- **Disjoint-evidence agreement:** {agreement_text(diagnostics['disjointEvidenceAgreement'])}",
         "- **Quality source shares:** " + ", ".join(f"{SOURCE_LABELS[source]} {share_value:.0%}" for source, share_value in shares.items()) + ".",
         f"- **Non-discriminating leaves:** {names(diagnostics['nonDiscriminatingLeaves'])}.",
         f"- **Group drift:** {drift['status']}" + ("; flagged: " + names([group for group, item in drift.get('groups', {}).items() if item['flag']]) if drift.get("groups") else "") + ".",
         f"- **Omniscience abstention sensitivity** ({abstention['rule']}): {rank_change_text(abstention['rankChanges']['changes'], facts.labels)}.",
+        f"- **GDPval-AA logistic sensitivity** ({logistic['rule']}): API {rank_change_text(logistic['api']['rankChanges']['changes'], facts.labels)}; Plan {rank_change_text(logistic['plan']['rankChanges']['changes'], facts.labels)}.",
     ]
     stability = diagnostics["anchorStability"]
     lines.append(
@@ -809,7 +906,7 @@ def diagnostics_markdown(facts):
         for basis, item in removal.get("bases", {}).items()
         for key in ("fixedAnchors", "recalibrated")
     ]
-    return "\n".join(lines) + "\n\n### Deletion sensitivity\n\n" + markdown_table(
+    return "\n".join(lines) + "\n\n" + cost_diagnostics_markdown(facts) + "\n\n### Deletion sensitivity\n\n" + markdown_table(
         ["Branch", "Retained nominal weight", "Status", "API rank changes", "Plan rank changes"], deletion_rows, numeric={1}
     ) + f"\n\n### Cost-component removal ({component_label(removal['component'])}: {removal['status']})\n\n" + markdown_table(["Basis", "Run", "Rank changes"], removal_rows)
 

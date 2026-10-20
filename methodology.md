@@ -157,7 +157,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 **Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `median-definite-frontier` v1: the lower median of non-provisional configurations on the API main-workload definite frontier of the interval outputs, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current reference: GPT-6 Luna.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261017, input hash `a91dd5d2b2456e58`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261017, input hash `8d0163fa5dbce441`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.

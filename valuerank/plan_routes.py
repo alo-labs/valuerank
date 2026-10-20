@@ -386,6 +386,12 @@ def _order(candidate: dict) -> tuple:
     return tuple(-value for value in comparison_tuple(candidate)), route.get("routeId", route["id"]), route["id"]
 
 
+def comparator_key(candidate: dict) -> tuple:
+    """The total comparator order (E85/E116); sorting ascending puts the official choice first."""
+
+    return _order(candidate)
+
+
 def route_selection(candidates: list[dict]) -> dict:
     """The official route with its published selection reason, dominated routes and comparison tuples (E85, E88, E93)."""
 

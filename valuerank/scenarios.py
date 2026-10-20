@@ -88,7 +88,8 @@ ANALYST_CONVENTION = "analyst convention"
 
 @dataclass(frozen=True)
 class Kernel:
-    """A draw kernel: 'fixed' (value), 'uniform' (low, high), 'uniform-sum' (offset, (low, high), ...) or 'runs' (public run values)."""
+    """A draw kernel: 'fixed' (value), 'uniform' (low, high), 'split-uniform' (low, point, high), 'uniform-sum'
+    (offset, (low, high), ...) or 'runs' (public run values)."""
 
     family: str
     params: tuple
@@ -108,6 +109,13 @@ class Kernel:
             if use_alternative and self.alternative == "endpoint-heavy":
                 return low + (high - low) * rng.betavariate(0.5, 0.5)
             return rng.uniform(low, high)
+        if self.family == "split-uniform":
+            # E182: half the mass on each side of the published point, so an asymmetric interval keeps it as the median.
+            low, point, high = self.params
+            start, end = (low, point) if rng.random() < 0.5 else (point, high)
+            if use_alternative and self.alternative == "endpoint-heavy":
+                return start + (end - start) * rng.betavariate(0.5, 0.5)
+            return rng.uniform(start, end)
         if self.family == "runs":
             values = self.params
             return sum(rng.choice(values) for _ in values) / len(values)
@@ -450,6 +458,42 @@ def standard_error(share: float, n: int) -> float:
     return math.sqrt(share * (1.0 - share) / n) if n else 0.0
 
 
+DISPERSION_LABEL = "scenario dispersion under the declared kernels"
+
+
+class Comoments:
+    """Running means, variances and covariance of (S_C, Q) over a stream's scenarios (Welford's update)."""
+
+    def __init__(self):
+        self.count, self.mean_cost, self.mean_quality = 0, 0.0, 0.0
+        self.square_cost, self.square_quality, self.cross = 0.0, 0.0, 0.0
+
+    def add(self, cost_score: float, quality: float) -> None:
+        self.count += 1
+        cost_step = cost_score - self.mean_cost
+        self.mean_cost += cost_step / self.count
+        quality_step = quality - self.mean_quality
+        self.mean_quality += quality_step / self.count
+        self.square_cost += cost_step * (cost_score - self.mean_cost)
+        self.square_quality += quality_step * (quality - self.mean_quality)
+        self.cross += cost_step * (quality - self.mean_quality)
+
+    def decomposition(self, beta: float) -> dict:
+        """E87: Var_s(V) = beta^2 Var_s(S_C) + (1 - beta)^2 Var_s(Q) + 2 beta (1 - beta) Cov_s(S_C, Q), terms published separately."""
+
+        if not self.count:
+            return {"status": "no scenario SD defined", "label": DISPERSION_LABEL}
+        cost_term = beta * beta * self.square_cost / self.count
+        quality_term = (1.0 - beta) ** 2 * self.square_quality / self.count
+        covariance_term = 2.0 * beta * (1.0 - beta) * self.cross / self.count
+        variance = max(0.0, cost_term + quality_term + covariance_term)
+        return {
+            "status": "defined", "label": DISPERSION_LABEL, "scenarios": self.count,
+            "valueVariance": variance, "valueSd": math.sqrt(variance),
+            "costTerm": cost_term, "qualityTerm": quality_term, "covarianceTerm": covariance_term,
+        }
+
+
 def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict, beta: float, *, references: tuple = (), pairs: tuple = (), alternative: bool = False) -> dict:
     """Per-row scenario frequencies for one stratum: rank <= 3, rank 1, frontier, per-bar qualification.
 
@@ -465,9 +509,12 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
     counts = {row.row: {"top3": 0, "top1": 0, "frontier": 0} for row in rows}
     qualify = {reference: {row.row: 0 for row in rows} for reference in references}
     outcomes = {pair: {"win": 0, "tie": 0, "loss": 0} for pair in pairs}
+    moments = {row.row: Comoments() for row in rows}
     for _ in range(n):
         scenario = draw_scenario(rows, stratum, rng, alternative=alternative, ranges=ranges)
         values = scenario_values(scenario, anchors, beta)
+        for row_id, (cost, quality) in scenario.items():
+            moments[row_id].add(anchor_math.cost_score(cost, anchors), quality)
         rank = ranks(values)
         for first, second in pairs:
             gap = values[first] - values[second]
@@ -488,6 +535,7 @@ def shares(rows: list[RowInputs], stratum: str, n: int, seed: int, anchors: dict
             share = count / n
             entry[key] = {"share": share, "monteCarloSe": standard_error(share, n)}
         entry["qualifies"] = {reference: qualify[reference][row.row] / n for reference in references}
+        entry["dispersion"] = moments[row.row].decomposition(beta)
         result[row.row] = entry
     pairwise = [{"pair": list(pair), **{key: count / n for key, count in counts_.items()}} for pair, counts_ in outcomes.items()]
     panel = sorted(row.row for row in rows)

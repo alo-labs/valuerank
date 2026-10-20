@@ -15,6 +15,7 @@ from valuerank import anchors as anchor_math
 from valuerank import basket
 from valuerank import diagnostics
 from valuerank import quality as q
+from valuerank import scenarios
 from valuerank import value_v3 as v
 
 DAY = date(2026, 10, 19)
@@ -37,6 +38,9 @@ def page(slug: str, cost_per_task: float, **fields) -> dict:
         "omniscience": 30.0,
         "omniscienceAccuracy": 0.5,
         "omniscienceHallucinationRate": 0.4,
+        "price1mInputTokens": 2.0,
+        "price1mOutputTokens": 10.0,
+        "cacheHitPrice": 0.2,
     }
     model.update(fields)
     return {"model": model}
@@ -74,6 +78,7 @@ def documents(**overrides) -> dict:
             {"id": "plan-b", "valueMultiple": 2.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["b"], "planPriceUsd": 20, "checkedOn": "2026-10-10",
              "identification": "point-identified", "valuationBasis": "release"},
         ]},
+        "priceRecords": {"records": []},
     }
     base.update(overrides)
     return base
@@ -316,6 +321,42 @@ def test_quality_agreement_and_drift_on_real_panels():
     assert matched["panel"] == ["x", "y", "z"] and matched["tau"] == pytest.approx(1.0)
 
 
+def agreement_row(identifier, bug, tb, **aa):
+    observations = {"bugHunt": q.Observation(bug), "terminalBench": q.Observation(tb), **{key: q.Observation(z) for key, z in aa.items()}}
+    return {"id": identifier, "evidence": {"observations": observations}, "summary": q.summarize(observations)}
+
+
+def test_quality_substitution_agreement_holds_cost_fixed_and_swaps_quality():
+    rows = [agreement_row("x", 40.0, 40.0), agreement_row("y", 50.0, 50.0), agreement_row("z", 60.0, 60.0), agreement_row("solo", 90.0, 90.0)]
+    del rows[3]["evidence"]["observations"]["terminalBench"]  # off the matched panel
+    # Displayed value orders z > y > x on both bases; with Q_ind swapped in, x's cheap cost puts it first on the Plan basis.
+    per_row = {
+        "x": {"api": {"value": 10.0, "costScore": 50.0}, "plan": {"value": 10.0, "costScore": 100.0}},
+        "y": {"api": {"value": 20.0, "costScore": 50.0}, "plan": {"value": 20.0, "costScore": 0.0}},
+        "z": {"api": {"value": 30.0, "costScore": 50.0}, "plan": {"value": 30.0, "costScore": 0.0}},
+        "solo": {"api": {"value": 99.0, "costScore": 50.0}, "plan": {"value": 99.0, "costScore": 50.0}},
+    }
+    result = v._substitution_agreement(rows, per_row)
+    assert result["api"]["panel"] == ["x", "y", "z"] and result["api"]["tau"] == pytest.approx(1.0)
+    assert result["api"]["label"].startswith("quality-substitution value agreement, api basis")
+    # Plan: substituted values x = 0.25*100 + 0.75*40 = 55, y = 37.5, z = 45 -> x > z > y against displayed z > y > x.
+    assert result["plan"]["tau"] == pytest.approx(-1.0 / 3.0)
+
+
+def test_disjoint_evidence_agreement_compares_aa_only_with_independent_only_quality():
+    rows = [
+        agreement_row("x", 40.0, 40.0, deepswe=30.0, gdpval=30.0),
+        agreement_row("y", 50.0, 50.0, deepswe=50.0),
+        agreement_row("z", 60.0, 60.0, deepswe=70.0, omniscience=70.0),
+        agreement_row("none", 70.0, 70.0),  # no AA-executed leaf: left out of the panel
+    ]
+    result = v._disjoint_agreement(rows)
+    assert result["panel"] == ["x", "y", "z"] and result["excluded"] == ["none"] and result["tau"] == pytest.approx(1.0)
+    assert result["label"].startswith("disjoint-evidence agreement (restricted evidence comparison")
+    assert result["retainedLeaves"]["independent"] == {"bugHunt": 50.0, "terminalBench": 50.0}
+    assert set(result["retainedLeaves"]["aaExecuted"]) == {leaf.key for leaf in q.LEAVES if leaf.source == "aa"}
+
+
 def test_freeze_without_definite_members_pins_no_bar():
     result = assembled()
     for item in result["rows"]:
@@ -380,6 +421,74 @@ def test_scenarios_hash_attach_and_bar_labels():
     assert missing["scenarios"] == {"status": "missing"} and missing["manifest"][-1]["status"] == "fired"
     outside = dict(frozen, barReferences=[{"id": "c", "rule": "x"}])
     assert v.bar_labels(result, outside, seed=1, batch=50)[0]["status"] == "unevaluable"
+    # E19/E34/E122: the named S2 branches are listed; one agent per configuration leaves the harness band unevaluable.
+    band, cache, price = document["namedBranches"]
+    assert band["status"] == "unevaluable" and band["width"] is None and "results" not in band
+    assert cache["status"] == price["status"] == "unevaluable" and cache["id"].startswith("cache-hit")
+    # E87: every row of every stream publishes its dispersion decomposition.
+    assert document["results"]["api"][0]["rows"]["a"]["dispersion"]["status"] == "defined"
+
+
+def test_harness_band_runs_a_named_s2_branch_when_a_configuration_has_two_agents():
+    rows = [
+        {"model": "M (max)", "agent": "Terminus 2", "resolutionRatePct": 50.0},
+        {"model": "M (max)", "agent": "Claude Code", "resolutionRatePct": 58.0},
+        {"model": "N (high)", "agent": "Terminus 2", "resolutionRatePct": 40.0},
+        {"model": "N (high)", "agent": "Codex", "resolutionRatePct": 44.0},
+        {"model": "N (high)", "agent": "Muse Code", "resolutionRatePct": None},
+        {"model": "Solo (max)", "agent": "Codex", "resolutionRatePct": 70.0},
+    ]
+    band = v.harness_band(rows)
+    assert band["status"] == "evaluated" and band["spreads"] == {"M (max)": 8.0, "N (high)": 4.0} and band["width"] == 6.0
+    result, frozen = scored(tb4={"rows": rows})
+    panel = {item.row: item for item in v.scenario_panel(result, "api", harness=6.0)}
+    stressed = panel["a"].leaves["bugHunt"]  # a's Bug Hunt z is 52 of 105 bugs, on the 0-100 scale
+    observed = result["rows"][0]["evidence"]["observations"]["bugHunt"].z
+    assert stressed.params == pytest.approx((observed - 3.0, observed + 3.0)) and stressed.target == scenarios.SPECIFICATION_STRESS
+    assert "bugHunt" not in panel["b"].leaves
+    document = v.run_scenarios(result, frozen, n=50, seed=7)
+    branch = document["namedBranches"][0]
+    assert branch["results"]["api"]["stratum"] == "S2" and branch["results"]["plan"]["transfers"] == "off"
+    assert document["inputHash"] != v.scenario_hash(scored()[0], frozen, n=50, seed=7)  # the band width is a scenario input
+
+
+def test_subset_bridges_pair_full_rows_on_both_workloads_and_disclose_missing_shares():
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    (bridge,) = output["diagnostics"]["subsetBridges"]
+    assert bridge["subsetRows"] == ["c"] and bridge["pairedRows"] == ["a", "b"] and bridge["missingComponents"] == ["coding-agent-index"]
+    share = bridge["missingExpenditureShare"]["coding-agent-index"]
+    assert share["n"] == 2 and share["min"] <= share["median"] <= share["max"] and bridge["direction"].startswith("not known")
+    api = bridge["bases"]["api"]
+    assert api["status"] == "evaluated" and set(api["rows"]) == {"a", "b"} and api["valueDifference"]["n"] == 2
+    assert api["rows"]["a"]["fullValue"] == pytest.approx(next(row for row in output["rows"] if row["id"] == "a")["api"]["value"])
+    assert api["exchangeRates"]["subset"]["anchorRatio"] != api["exchangeRates"]["main"]["anchorRatio"]
+    # A subset workload without anchors reports their status; no expenditure evidence leaves the shares empty.
+    unanchored = json.loads(json.dumps(frozen))
+    subset = next(key for key, entry in unanchored["workloads"].items() if entry["role"] == "subset")
+    unanchored["workloads"][subset].update(anchors={"api": None, "plan": None}, anchorStatus="unavailable: fewer than 2 complete-evidence references")
+    per_row = {row["id"]: {basis: {"value": row[key]["value"]} for basis, key in (("api", "api"), ("plan", "planScore"))} for row in output["rows"]}
+    (empty,) = v.subset_bridges(result, unanchored, per_row, {})
+    assert empty["bases"]["api"] == {"status": "unavailable: fewer than 2 complete-evidence references"}
+    assert empty["missingExpenditureShare"]["coding-agent-index"] == {"median": None, "min": None, "max": None, "n": 0}
+
+
+def test_cost_component_family_registers_one_removal_per_admitted_unit():
+    result, frozen = scored()
+    family = v.score(result, frozen)["diagnostics"]["costComponentFamily"]
+    assert [item["component"] for item in family] == result["admitted"] and {item["status"] for item in family} == {"evaluated"}
+    assert all(item["component"] not in item["alternativeWorkload"]["components"] for item in family)
+
+
+def test_workday_status_needs_an_evidenced_quota_schema():
+    assert v.workday_status(None)["status"].startswith("not applicable")
+    route = {"route": {"id": "r"}}
+    assert v.workday_status(route) == {"status": "not evaluated: no evidenced quota schema for this route", "rule": v.WORKDAY_RULE}
+    with pytest.raises(ValueError, match="E70 capacity program"):
+        v.workday_status({"route": {"id": "r", "quotaSchema": {"windows": ["5h"]}}})
+    result, frozen = scored()
+    rows = {row["id"]: row for row in v.score(result, frozen)["rows"]}
+    assert rows["b"]["plan"]["workday"]["status"].startswith("not evaluated") and rows["c"]["plan"]["workday"]["status"].startswith("not applicable")
 
 
 def write_world(root: Path) -> Path:
@@ -393,6 +502,7 @@ def write_world(root: Path) -> Path:
         "aa/cost_charts_capture.json": documents()["costCharts"],
         "v3_configuration_map.json": documents()["configurationMap"],
         "plan_cost_routes.json": documents()["planRoutes"],
+        "price_records.json": documents()["priceRecords"],
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
             + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
@@ -460,6 +570,13 @@ def test_abstention_sensitivity_and_demand_registry():
     rows = {row["id"]: row for row in output["rows"]}
     assert rows["a"]["quality"]["leaves"]["omniscience"]["abstentionPenalisedZ"] == 0.0
     assert rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == pytest.approx(0.5 * 0.6)
+    # E181: the GDPval-AA logistic alternative is published per basis as rank changes on the common panel.
+    logistic = output["diagnostics"]["gdpvalLogisticSensitivity"]
+    assert logistic["rule"].startswith("z = 100 / (1 + 10^((1600 - E) / 400))") and logistic["api"]["rankChanges"]["panel"] == ["a", "b", "c"]
+    # E128: with every question correct nothing is unanswered (the conditional hallucination rate is undefined).
+    perfect = [page("a-max", 1.0, omniscience=100.0, omniscienceAccuracy=1.0, omniscienceHallucinationRate=None), page("b-max", 4.0), page("c-max", 0.5, gdpval=None)]
+    perfect_rows = {row["id"]: row for row in v.score(*scored(snapshot={"pages": perfect}))["rows"]}
+    assert perfect_rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == 0.0
     registry = rows["a"]["demandRegistry"]
     assert set(registry["populations"]) == {"intelligence-index", basket.CODING_AGENT_INDEX}
     index_population = registry["populations"]["intelligence-index"]
@@ -492,7 +609,9 @@ def test_deletion_branches_renormalise_the_remaining_observed_leaves():
     """E146: displayed-score deletion sensitivity per registered branch; leave-AA-out is not identifiable today."""
 
     branches = {item["id"]: item for item in v.deletion_branches()}
-    assert len(branches) == len(q.LEAVES) + 1
+    assert len(branches) == len(q.LEAVES) + 2
+    # E178: the basket-scope branch removes the leaves of the benchmarks O15 excludes from the cost basket.
+    assert sorted(branches["basket-scope"]["removed"]) == ["critpt", "hle", "omniscience"] and len(basket.INDEX_RESIDUAL_TASKS) == 3
     assert branches["leave-out:bugHunt"]["labels"] == ["leave-one-benchmark-out", "leave-one-source-out"]
     assert branches["leave-out:deepswe"]["labels"] == ["leave-one-benchmark-out"]
     observations = {"deepswe": q.Observation(80.0), "bugHunt": q.Observation(20.0)}
@@ -504,6 +623,7 @@ def test_deletion_branches_renormalise_the_remaining_observed_leaves():
     assert aa_out["status"] == "not identifiable under the coverage rule" and aa_out["retainedNominalWeight"] == pytest.approx(0.2)
     deep = sensitivity["leave-out:deepswe"]
     assert deep["status"] == "evaluated" and deep["retainedNominalWeight"] == pytest.approx(0.7)
+    assert sensitivity["basket-scope"]["status"] == "evaluated" and sensitivity["basket-scope"]["retainedNominalWeight"] == pytest.approx(0.8667, abs=1e-4)
     assert deep["bases"]["api"]["rankChanges"]["panel"] == ["a", "b", "c"] and deep["unevaluableRows"] == []
     rows = [{"id": "x", "evidence": {"observations": {"deepswe": q.Observation(50.0)}}}]
     per_row = {"x": {"api": {"value": 40.0, "costScore": 20.0}, "plan": {"value": None, "costScore": None}}}
@@ -635,7 +755,9 @@ def test_measurement_stream_draws_the_published_confidence_interval():
     assert plain["a"].leaves["terminalBench"].target == "reporting precision"
     kernel = measured["a"].leaves["terminalBench"]
     assert kernel.params == pytest.approx((56.9, 63.1)) and kernel.target == "published-interval range (conventional)" and kernel.alternative == "endpoint-heavy"
-    assert measured["b"].leaves["terminalBench"].params == pytest.approx((95.9, 100.0))
+    # E182: b's interval is clipped at 100, so the kernel keeps its published 99 as the median.
+    assert measured["b"].leaves["terminalBench"].family == "split-uniform" and measured["b"].leaves["terminalBench"].params == pytest.approx((95.9, 99.0, 100.0))
+    assert kernel.family == "uniform"
     assert measured["a"].leaves["deepswe"] == plain["a"].leaves["deepswe"]
     document = v.run_scenarios(result, frozen, n=50, seed=3)
     s1m = document["results"]["api"][-1]
@@ -645,12 +767,13 @@ def test_measurement_stream_draws_the_published_confidence_interval():
     assert interpretation["permittedLabel"] == "conventional CI-range sensitivity (endpoint-conditioned; no tail model)"
 
 
-def calibration_row(row_id, workload, quality, *, partial=(), fallback=None, grade="controlled"):
+def calibration_row(row_id, workload, quality, *, partial=(), fallback=None, grade="controlled", gate=None):
     return {
         "id": row_id,
         "cost": {"workload": workload, "partialComponents": list(partial)},
         "plan": {"fallback": fallback, "grade": grade},
         "summary": SimpleNamespace(displayed=quality),
+        "valuationGate": {"outcome": gate or v.GATE_COMPATIBLE},
     }
 
 
@@ -688,6 +811,14 @@ def test_measured_calibration_rescores_measured_rows_on_measured_anchors():
     assert result["reversals"] == [["p", "x"], ["p", "y"], ["x", "y"]]
     assert result["rankChange"]["changes"] == {"p": 0, "x": -2, "y": 2}
     assert result["maxAbsValueChange"] == pytest.approx(max(abs(result["values"][key] - entries[key]["value"]) for key in ("p", "x", "y")))
+
+
+def test_measured_calibration_never_takes_a_row_on_a_price_not_in_force_as_reference():
+    official = anchor_math.anchor_object({"x": 10.0, "y": 40.0}, basis="plan", workload="w1")
+    rows = [calibration_row("x", "w1", 60.0), calibration_row("y", "w1", 70.0), calibration_row("stale", "w1", 45.0, gate=v.GATE_NOT_IN_FORCE)]
+    entries = {row_id: {"status": "measured", "costUsd": cost, "costScore": None, "value": None} for row_id, cost in (("x", 10.0), ("y", 40.0), ("stale", 1000.0))}
+    w1 = v._measured_calibration(rows, {"workloads": {"w1": {"anchors": {"plan": official}}}}, entries)["workloads"]["w1"]
+    assert w1["references"] == ["x", "y"] and w1["rows"] == ["stale", "x", "y"]  # O29: it stays in the view, never an anchor
 
 
 def test_measured_calibration_without_references_and_unknown_anchor_rows():
@@ -768,3 +899,150 @@ def test_plan_amount_is_typed_by_what_the_measurement_establishes():
     assert unpriced["amountUsd"] is None and unpriced["grossCashUsd"] is None and unpriced["amountKind"] == "observed eligible consumption (capacity not established)"
     assert v.plan_amount({**base, "grade": "assumption", "route": {"id": "x", "valueMultiple": 1.5}})["amountUsd"] is None
     assert v.plan_amount(None) is None
+
+
+def test_route_alternatives_list_every_admissible_pair_with_its_displayed_score():
+    routes = documents()["planRoutes"]
+    routes["routes"].append({"id": "plan-a-low", "valueMultiple": 1.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"],
+                             "planPriceUsd": 20, "checkedOn": "2026-10-10", "identification": "point-identified"})
+    routes["routes"].append({"id": "plan-a-high", "valueMultiple": 50.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"],
+                             "planPriceUsd": 20, "checkedOn": "2026-10-10", "identification": "point-identified"})
+    result, frozen = scored(planRoutes=routes)
+    rows = {row["id"]: row for row in v.score(result, frozen)["rows"]}
+    alternatives = rows["a"]["plan"]["routeAlternatives"]
+    table = alternatives["pairs"]
+    assert [item["routeId"] for item in table] == ["plan-a-high", "plan-a-low", "plan-a"]  # comparator order
+    # E179: counts and the leave-selected-out choice (plan-a-low is no longer dominated once plan-a-high leaves).
+    assert alternatives["admissiblePairs"] == 3 and alternatives["unidentifiedPairs"] == 1
+    assert alternatives["leaveSelectedOut"]["routeId"] == "plan-a-low"
+    by_id = {item["routeId"]: item for item in table}
+    assert by_id["plan-a-high"]["status"] == "selected" and by_id["plan-a-low"]["status"] == "dominated by plan-a-high (E88)"
+    assert by_id["plan-a"]["status"] == "not selected by the comparator" and by_id["plan-a"]["comparisonWithSelected"] == v.ALTERNATIVE_ARITHMETIC
+    assert by_id["plan-a-high"]["comparisonWithSelected"] == v.ALTERNATIVE_IDENTIFIED
+    assert by_id["plan-a-high"]["displayedPlanValue"] == pytest.approx(rows["a"]["planScore"]["value"])
+    assert by_id["plan-a-high"]["displayedPlanValue"] > by_id["plan-a-low"]["displayedPlanValue"]
+    assert rows["c"]["plan"]["routeAlternatives"] == {"pairs": [], "admissiblePairs": 0, "unidentifiedPairs": 0, "leaveSelectedOut": None}
+    unanchored = result["rows"][0]
+    assert v.route_alternatives(unanchored, None)["pairs"][0]["displayedPlanValue"] is None
+
+
+PRICES = {"input": 2.0, "cacheRead": 0.2, "cacheWrite": 2.0, "output": 10.0}
+
+
+def priced_page(slug, cost_per_task, prices, **fields):
+    """A page whose Index category costs come from 10M uncached, 100M cache-read, 5M cache-write and 2M output tokens
+    priced at ``prices`` (no cache-write price is displayed, so cache writes bill at the input rate)."""
+
+    base = page(slug, cost_per_task, **fields)
+    base["model"]["intelligenceIndexCost"].update(nonCacheInput=10 * prices["input"], cacheRead=100 * prices["cacheRead"], cacheWrite=5 * prices["cacheWrite"], output=2 * prices["output"])
+    base["model"]["canonicalIntelligenceIndexTokenCount"] = {"input": 115e6, "output": 2e6}
+    return base
+
+
+def test_displayed_prices_and_reconciliation():
+    model = priced_page("a-max", 1.0, PRICES)["model"]
+    assert v.displayed_prices(model) == PRICES  # cache writes at the input rate where none is listed
+    assert v.displayed_prices({**model, "cacheWritePrice": 2.5})["cacheWrite"] == 2.5
+    assert v.displayed_prices({**model, "cacheHitPrice": None}) is None
+    assert v.reconciles(model, PRICES) is True
+    assert v.reconciles(model, {**PRICES, "output": 20.0}) is False
+    assert v.reconciles(page("a-max", 1.0)["model"], PRICES) is None  # category costs not published
+
+
+def test_valuation_gate_outcomes():
+    model = priced_page("a-max", 1.0, PRICES)["model"]
+    assert v.valuation_gate(model, [], "t")["outcome"] == v.GATE_COMPATIBLE
+    unpublished = v.valuation_gate(page("a-max", 1.0)["model"], [], "t")
+    assert unpublished["outcome"] == v.GATE_COMPATIBLE and unpublished["reason"].startswith("category costs not published")
+    record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded", "effectiveFrom": "2026-01-01", "effectiveUntil": "2026-10-10"}
+    # Every displayed price doubled since AA's valuation: exact revaluation by k = 2.
+    doubled = {**model, "price1mInputTokens": 4.0, "cacheHitPrice": 0.4, "price1mOutputTokens": 20.0}
+    stranger = {"id": "other", "aaSlug": "a-max", "prices": {**PRICES, "output": 7.0}}
+    revalued = v.valuation_gate(doubled, [stranger, record], "t")  # a record that does not reconcile is skipped
+    assert revalued["outcome"] == v.GATE_REVALUED and revalued["factor"] == pytest.approx(2.0) and revalued["appliedRecord"]["id"] == "old"
+    # Only the output price moved: not in force at V (O29), with the convex-combination bounds.
+    output_only = {**model, "price1mOutputTokens": 15.0}
+    flagged = v.valuation_gate(output_only, [record], "t")
+    assert flagged["outcome"] == v.GATE_NOT_IN_FORCE and flagged["flag"] == "AA cost at superseded price"
+    assert flagged["bounds"]["apiCost"] == pytest.approx([1.0, 1.5]) and flagged["bounds"]["planCost"] == pytest.approx([1 / 1.5, 1.5])
+    promotion = v.valuation_gate(output_only, [{**record, "tariffStatus": "promotional"}], "t")
+    assert promotion["flag"] == "AA cost at standard price during a promotion"
+    assert v.valuation_gate(output_only, [], "t")["outcome"] == v.GATE_UNVERIFIED
+    assert v.valuation_gate({**model, "price1mOutputTokens": None}, [], "t")["reason"].startswith("AA displays no complete price vector")
+    # The bounds bracket the exact repriced cost for any demand vector (C'/C is a demand-weighted mean of the ratios).
+    ratios = flagged["bounds"]["ratios"]
+    for demand in ({"input": 1, "cacheRead": 0, "cacheWrite": 0, "output": 9}, {"input": 5, "cacheRead": 50, "cacheWrite": 1, "output": 1}):
+        before = sum(PRICES[key] * demand[key] for key in demand)
+        after = sum(PRICES[key] * ratios[key] * demand[key] for key in demand)
+        assert before * flagged["bounds"]["apiCost"][0] - 1e-9 <= after <= before * flagged["bounds"]["apiCost"][1] + 1e-9
+
+
+def test_revalue_scales_every_priced_component():
+    components = {"x": {"costUsd": 10.0, "halfWidthUsd": 0.5, "completeness": "complete"}, "y": {"costUsd": None, "halfWidthUsd": 0.0}}
+    scaled = v.revalue(components, 2.0)
+    assert scaled["x"]["costUsd"] == 20.0 and scaled["x"]["halfWidthUsd"] == 1.0 and scaled["y"] == components["y"]
+
+
+def gated_world(gate_page, records):
+    configurations = CONFIGURATIONS + [{"id": "d", "name": "D", "effort": "max", "aaSlug": "d-max"}]
+    return v.assemble(configurations, gated_world_documents(gate_page, records), release_day=DAY)
+
+
+def gated_world_documents(gate_page, records):
+    pages = [gate_page, page("b-max", 4.0), page("c-max", 0.5), page("d-max", 2.0)]
+    agents = documents()["codingAgents"]
+    agents["configurations"].append({"label": "agent-d", "meanCostPerTaskUsd": 3.0, "totalCostUsd": 900.0, "components": []})
+    mapping = documents()["configurationMap"]
+    mapping["rows"]["d"] = {"coding-agent-index": "agent-d", "frontiercode": None, "itbench-aa": None}
+    routes = documents()["planRoutes"]
+    routes["routes"][0].update(identification="point-identified", valuationBasis="release")
+    return documents(snapshot={"pages": pages}, codingAgents=agents, configurationMap=mapping, planRoutes=routes, priceRecords={"records": records})
+
+
+def test_gate_effects_on_costs_anchors_routes_and_interval_labels():
+    record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
+    base = gated_world(priced_page("a-max", 1.0, PRICES), [record])
+    doubled = gated_world(priced_page("a-max", 1.0, PRICES, price1mInputTokens=4.0, cacheHitPrice=0.4, price1mOutputTokens=20.0), [record])
+    rows = {row["id"]: row for row in doubled["rows"]}
+    assert rows["a"]["valuationGate"]["outcome"] == v.GATE_REVALUED
+    assert rows["a"]["cost"]["costUsd"] == pytest.approx(2.0 * next(row for row in base["rows"] if row["id"] == "a")["cost"]["costUsd"])
+    flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
+    rows = {row["id"]: row for row in flagged["rows"]}
+    assert rows["a"]["valuationGate"]["outcome"] == v.GATE_NOT_IN_FORCE
+    assert rows["a"]["routeSelection"]["selected"] is None  # O29: no multiple on the row's own price record
+    assert v.anchor_population(flagged, flagged["admitted"]) == ["b", "d"]
+    frozen = v.freeze(flagged, frozen_at="2026-10-19")
+    output = v.interval_outputs(flagged, frozen, "api")
+    assert output["labelWithheld"] == ["a"] and output["frontier"]["a"] == {"status": v.WITHHELD_LABEL}
+    assert "a" in output["universe"]
+    box = next(item for item in v.api_boxes(flagged) if item.row == "a")
+    assert box.provisional is True and box.c_high == pytest.approx(rows["a"]["cost"]["highUsd"] * 1.5)
+    # A bar whose reference is unevaluable carries no row table to withhold from.
+    unevaluable_bar = v.interval_outputs(flagged, dict(frozen, barReferences=[{"id": "gone", "rule": "x"}]), "api")
+    assert unevaluable_bar["bars"][0]["status"] == "unevaluable" and unevaluable_bar["labelWithheld"] == ["a"]
+    # O29: a multiple valued on the row's own superseded record stays eligible.
+    routes = documents()["planRoutes"]
+    routes["routes"][0].update(identification="point-identified", valuationBasis="release", valuationPriceRecord="old")
+    kept = v.assemble(
+        CONFIGURATIONS + [{"id": "d", "name": "D", "effort": "max", "aaSlug": "d-max"}],
+        {**gated_world_documents(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record]), "planRoutes": routes},
+        release_day=DAY,
+    )
+    assert next(row for row in kept["rows"] if row["id"] == "a")["routeSelection"]["selected"]["route"]["id"] == "plan-a"
+    unverified = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [])
+    assert "a" not in [item.row for item in v.api_boxes(unverified)]
+    assert "a" not in [item.row for item in v.plan_boxes(unverified)]  # never interval-eligible, on either basis
+    assert {row["id"]: row for row in unverified["rows"]}["a"]["valuationGate"]["outcome"] == v.GATE_UNVERIFIED
+
+
+def test_release_publishes_gate_metering_and_source_registry_facts():
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    rows = {row["id"]: row for row in output["rows"]}
+    assert rows["a"]["valuationGate"]["outcome"] == rows["a"]["tariffStatus"] == v.GATE_COMPATIBLE
+    assert rows["a"]["valuation"]["tokenMeteringBasis"].startswith("not published per configuration")
+    assert rows["a"]["valuation"]["cacheRateProvenance"].startswith("AA's live measurement")
+    assert output["meteringMix"] == {"provider-reported": 0, "canonical-tokenizer fallback": 0, "not published per configuration": 3}
+    gdpval = next(item for item in output["sourceIntervals"] if item["leaf"] == "gdpval")
+    assert gdpval["status"] == "published, not captured" and gdpval["level"].startswith("not stated")
+    assert output["sourceDates"]["LiveBench 2.0"]["release"] == "2026-10-14"

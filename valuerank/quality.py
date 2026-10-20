@@ -95,6 +95,18 @@ def gdpval_z(elo: float, half_width_elo: float = 0.0) -> Observation:
     return Observation(clip(100.0 * (elo - GDPVAL_ELO_LOW) / GDPVAL_ELO_SPAN), 100.0 * half_width_elo / GDPVAL_ELO_SPAN)
 
 
+# E181: the specification-layer alternative for GDPval-AA, the win probability against AA's pinned scale anchor
+# (DeepSeek V4.1 Flash (max) at 1600) on the conventional Elo scale (AA does not state its scale factor).
+GDPVAL_ANCHOR_ELO = 1600.0
+ELO_SCALE = 400.0
+
+
+def gdpval_logistic_z(elo: float) -> float:
+    """z = 100 / (1 + 10^((E_A - E) / 400)): the logistic win probability against AA's anchor, in percent."""
+
+    return 100.0 / (1.0 + 10.0 ** ((GDPVAL_ANCHOR_ELO - elo) / ELO_SCALE))
+
+
 def bug_hunt_z(bugs_fixed: float, half_width_bugs: float = 0.0) -> Observation:
     """Bugs fixed out of 105 (release test vector: 52 -> 49.52)."""
 

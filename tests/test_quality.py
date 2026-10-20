@@ -39,6 +39,14 @@ def test_percent_and_fraction_transforms_clip_and_scale_precision():
     assert observation.half_width == pytest.approx(0.05)
 
 
+def test_gdpval_logistic_alternative_is_the_win_probability_against_aa_anchor():
+    """E181: 50 at AA's anchor (1600), 100/(1 + 10^-1) one tenfold-odds step (400 Elo) above it."""
+
+    assert q.gdpval_logistic_z(1600.0) == pytest.approx(50.0)
+    assert q.gdpval_logistic_z(2000.0) == pytest.approx(100.0 / 1.1)
+    assert q.gdpval_logistic_z(1200.0) == pytest.approx(100.0 / 11.0)
+
+
 def test_gdpval_transform_matches_aa_integration():
     assert q.gdpval_z(1555.91).z == pytest.approx(52.7955)
     assert q.gdpval_z(400.0).z == 0.0

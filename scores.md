@@ -97,9 +97,13 @@ USD at API rates for the exact configuration; "—" marks a component without an
 | Gemini 3.8 Flash (high) | $747.62 | $372.00 | $86.00 | $245.87 | $372.82 | $10.90 | $278.70 | $385.54 | $22.12 | $9.88 | $2,073.44 | none |
 | Qwen3.8 Max | $1,054.13 | $675.00 | $327.00 | $1,781.49 | $998.39 | $33.31 | $261.64 | $1,232.62 | $32.57 | $22.88 | $5,417.03 | none |
 
+### Valuation basis
+
+Valuation-basis gate (E170): 19 compatible as captured. AA's Index category costs reconcile exactly with the prices AA displays for each configuration at capture, so its applied prices are the prices in force at the release cutoff. Token metering (E176): 19 not published per configuration; AA values cached input at live measurements of each model's typical cache-hit rate. Source intervals (E174): terminalBench: captured, level 95% (tbench.ai: "The whiskers span the 95% confidence interval"); gdpval: published, not captured, level not stated by the source (the 95% level on AA's methodology page belongs to AA-Briefcase).
+
 ## Plan route selection
 
-The Plan amount is the selected multiple times the cash paid for the fee period (E166), typed by what the measurement establishes; it is not capacity unless it says so.
+The Plan amount is the selected multiple times the cash paid for the fee period (E166), typed by what the measurement establishes; it is not capacity unless it says so. The multiple values only the measured workload's API-equivalent consumption; other plan features are not valued.
 
 | Configuration | Selected route | Plan amount | Identification | Plan cost (USD per basket run) | Flags | Selection reason |
 |---|---|---|---|---:|---|---|
@@ -122,6 +126,25 @@ The Plan amount is the selected multiple times the cash paid for the fee period 
 | GLM-5.3 (max) | — | — | — | $3,186.29 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
 | Gemini 3.8 Flash (high) | — | — | — | $2,073.44 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
 | Qwen3.8 Max | — | — | — | $5,417.03 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+
+### Route alternatives
+
+Every admissible route-measurement pair in comparator order (E171) and the comparator's pick with the selected pair removed (E179). A larger displayed multiple is arithmetic on the measured workload, never a claim that the route is cheaper on the scored workload. Workday-feasible multiple (E15), for the 12 routed rows: not evaluated: no evidenced quota schema for this route.
+
+| Configuration | Admissible pairs | Unidentified | Pairs (multiple, status) | Leave-selected-out choice |
+|---|---:|---:|---|---|
+| Claude Sonnet 5.5 (max) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 61.12) |
+| Claude Opus 5.5 (max) | 3 | 3 | claude-pro-opus55-semianalysis (58.9×, selected); claude-max20x-opus55-semianalysis (58.63×, not selected by the comparator); claude-max5x-opus55-semianalysis (57.25×, not selected by the comparator) | claude-max20x-opus55-semianalysis (58.63×, value 60.84) |
+| GPT-6.1 Sol (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 59.71) |
+| Claude Haiku 5.5 (xhigh) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 56.99) |
+| GPT-6 Astra (xhigh) | 4 | 4 | chatgpt-plus-common-semianalysis-assumption (8.1×, selected); chatgpt-pro500-common-semianalysis-assumption (10.772×, not selected by the comparator); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator) | chatgpt-pro500-common-semianalysis-assumption (10.772×, value 57.35) |
+| Claude Opus 5 (max) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 56.44) |
+| GPT-6 Sol (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 56.09) |
+| GPT-6 Luna (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 56.08) |
+| GPT-5.6 Luna (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 55.23) |
+| GPT-5.6 Sol (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 54.97) |
+| MiMo-V2.6-Flash | 1 | 1 | mimo-provisional-user-assumption (1.5×, selected) | none: the row would fall back to API cost (O13) |
+| MiMo-V2.6-Pro | 1 | 1 | mimo-provisional-user-assumption (1.5×, selected) | none: the row would fall back to API cost (O13) |
 
 ### Measured-only Plan view
 
@@ -276,6 +299,27 @@ Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined i
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
+### API basis: value-score dispersion (SD; covariance term)
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | 2.17 (+0.00) | 2.45 (+0.00) | 2.64 (+0.00) | 2.16 (+0.00) |
+| Claude Opus 5 (max) | 0.00 (+0.00) | 3.07 (+0.00) | 3.34 (+0.00) | 3.72 (+0.00) | 3.07 (+0.00) |
+| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.80 (+0.00) | 0.00 (+0.00) | 0.13 (+0.00) |
+| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.77 (+0.00) | 0.00 (+0.00) | 0.13 (+0.00) |
+| DeepSeek V4 Flash (max) | 0.00 (+0.00) | 3.06 (+0.00) | 3.31 (+0.00) | 3.73 (+0.00) | 3.07 (+0.00) |
+| DeepSeek V4 Pro (max) | 0.00 (+0.00) | 3.09 (+0.00) | 3.34 (+0.00) | 3.76 (+0.00) | 3.04 (+0.00) |
+| GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.14 (+0.00) |
+| GPT-5.6 Luna (max) | 0.00 (+0.00) | 2.16 (+0.00) | 2.62 (+0.00) | 2.66 (+0.00) | 2.18 (+0.00) |
+| GPT-5.6 Sol (max) | 0.00 (+0.00) | 2.16 (+0.00) | 2.48 (+0.00) | 2.65 (+0.00) | 2.18 (+0.00) |
+| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 0.00 (+0.00) | 0.12 (+0.00) |
+| GPT-6 Sol (max) | 0.00 (+0.00) | 2.16 (+0.00) | 2.49 (+0.00) | 2.65 (+0.00) | 2.20 (+0.00) |
+| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.78 (+0.00) | 0.00 (+0.00) | 0.13 (+0.00) |
+| Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.51 (+0.00) | 0.00 (+0.00) | 0.15 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 2.16 (+0.00) | 2.58 (+0.00) | 2.66 (+0.00) | 2.16 (+0.00) |
+| Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 0.00 (+0.00) | 0.15 (+0.00) |
+| Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.17 (+0.00) |
+
 Plan streams S1, S2, S1 endpoint-heavy and S1M run with owner-named transfers off (E167): Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), Claude Sonnet 5.5 (max), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Luna (max), GPT-6 Sol (max) depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
@@ -341,6 +385,33 @@ Plan streams S1, S2, S1 endpoint-heavy and S1M run with owner-named transfers of
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
+### Plan basis: value-score dispersion (SD; covariance term)
+
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | — | — | — | — |
+| Claude Opus 5 (max) | 0.00 (+0.00) | — | — | — | — |
+| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.13 (+0.00) |
+| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | — | — | — | — |
+| DeepSeek V4 Flash (max) | 0.00 (+0.00) | 3.07 (+0.00) | 3.33 (+0.00) | 3.77 (+0.00) | 3.09 (+0.00) |
+| DeepSeek V4 Pro (max) | 0.00 (+0.00) | 3.07 (+0.00) | 3.35 (+0.00) | 3.70 (+0.00) | 3.06 (+0.00) |
+| GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.14 (+0.00) |
+| GPT-5.6 Luna (max) | 0.00 (+0.00) | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.00 (+0.00) | — | — | — | — |
+| GPT-6 Luna (max) | 0.00 (+0.00) | — | — | — | — |
+| GPT-6 Sol (max) | 0.00 (+0.00) | — | — | — | — |
+| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.78 (+0.00) | 0.00 (+0.00) | 0.13 (+0.00) |
+| Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.51 (+0.00) | 0.00 (+0.00) | 0.15 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 2.15 (+0.00) | 2.57 (+0.00) | 2.65 (+0.00) | 2.18 (+0.00) |
+| Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 0.00 (+0.00) | 0.15 (+0.00) |
+| Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.16 (+0.00) |
+
+### Named S2 specification branches
+
+- **Bug Hunt harness band (E19)** (S2): unevaluable; the captured tbench.ai leaderboard lists no configuration under two or more agents, so no cross-agent spread exists
+- **cache-hit variation (E34)** (S2): unevaluable; AA's published cost embeds its cache-pricing protocol; varying the cache-hit rate needs each basket component's cache-read and uncached-input demand, which AA publishes only for the whole Index (E157)
+- **first-party list versus cross-provider median price rule (E122)** (S2): unevaluable; AA publishes one price per configuration under its own rule; the alternative rule's prices are not captured
+
 ### Cheapest-above-the-bar labels (API basis)
 
 Each kernel assignment code gives the kernel used for the candidate, the reference and the competitors, in that order (U uniform, H endpoint-heavy); the label needs every assignment met.
@@ -352,12 +423,39 @@ Each kernel assignment code gives the kernel used for the candidate, the referen
 ## Diagnostics
 
 - **Terminal-Bench same-harness (Terminus 2):** undefined (panel too small); 11 rows ran on mixed harnesses.
-- **Quality agreement:** quality agreement (matched-panel sensitivity): defined, Kendall tau 0.85 (interval 0.48 to 1.00) on 11 rows.
+- **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.85 (interval 0.48 to 1.00) on 11 rows.
+- **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.38 (interval -0.14 to 0.76) on 11 rows.
+- **Quality-substitution value agreement (Plan):** quality-substitution value agreement, plan basis (matched-panel sensitivity): Kendall tau 0.82 (interval 0.53 to 1.00) on 11 rows.
+- **Disjoint-evidence agreement:** disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking): Kendall tau 0.75 (interval 0.40 to 1.00) on 11 rows.
 - **Quality source shares:** AA-run 80%, independent 20%.
 - **Non-discriminating leaves:** lcr.
 - **Group drift:** estimated; flagged: none.
 - **Omniscience abstention sensitivity** (z_pen = max(0, I)): 15 rows move; largest move 5 (Claude Opus 5.5 (max)).
+- **GDPval-AA logistic sensitivity** (z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed): API 13 rows move; largest move 4 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max)); Plan 8 rows move; largest move 2 (Claude Opus 5 (max), GPT-6 Astra (xhigh)).
 - **Anchor stability:** trimmed anchors (P10 / 2 and P90 x 2 (diagnostic only)) give $142.90 to $18,106.78; 9 rows move; largest move 2 (Gemini 4 Argon (high)).
+
+- **Basket readiness (E22):** priced leaves cover 67% of nominal quality weight (AutomationBench-AA, DeepSWE v1.1, GDPval-AA v2.1, AA-LCR v1.1, SciCode, Terminal-Bench 4.0 (tbench.ai)); pending components: FrontierCode, ITBench-AA.
+- **SWE cost companion (O14, diagnostic):** 16 rows evaluated; flagged far from the median ratio: none.
+- **Matched-cost diagnostic (E55):** evaluated at 50% priced quality weight; basket/matched cost-order reversals with separated intervals: 4; rank-gap warnings: 0.
+
+### Leave-one-component-out cost family (E172)
+
+Each admitted basket unit removed in turn, scored on anchors rebuilt by the freeze rule (rank changes against the primary ranking; quality held fixed).
+
+| Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
+|---|---|---|---:|
+| Coding Agent Index | 9 rows move; largest move 3 (DeepSeek V4 Pro (max)) | 6 rows move; largest move 1 (Claude Opus 5 (max), DeepSeek V4 Pro (max), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Sol (max), Grok 4.7 (xhigh)) | 2.89 |
+| AA-Briefcase | 6 rows move; largest move 2 (Claude Sonnet 5.5 (max), GPT-5.6 Sol (max)) | no rank changes | 3.08 |
+| GDPval-AA | 2 rows move; largest move 1 (Claude Sonnet 5.5 (max), GPT-5.6 Sol (max)) | 2 rows move; largest move 1 (GPT-6 Luna (max), GPT-6 Sol (max)) | 3.07 |
+| GDP.pdf | 2 rows move; largest move 1 (DeepSeek V4 Pro (max), GPT-5.6 Sol (max)) | no rank changes | 3.03 |
+| AutomationBench-AA | 2 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), DeepSeek V4 Pro (max)) | 4 rows move; largest move 1 (Gemini 3.8 Flash (high), GLM-5.3 (max), GPT-6 Luna (max), GPT-6 Sol (max)) | 2.98 |
+| Terminal-Bench 4.0 (AA Index run) | 2 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), DeepSeek V4 Pro (max)) | no rank changes | 3.02 |
+| SciCode | 2 rows move; largest move 1 (Claude Sonnet 5.5 (max), GPT-5.6 Sol (max)) | no rank changes | 3.04 |
+| AA-LCR | no rank changes | no rank changes | 3.04 |
+
+### Subset rows: paired bridge and missing spend (E10, E173)
+
+- **GPT-6 Astra (xhigh), MiMo-V2.6-Flash, MiMo-V2.6-Pro** (subset without Coding Agent Index): Coding Agent Index is 40% of the full basket (median; 9% to 63% over 16 rows). Scored on its own subset anchors, the direction of its subset effect is not known. Paired bridge on the 16 full rows: API: the full rows' values change by -0.32 points (median; -2.59 to 1.20), 9 rows move; largest move 3 (DeepSeek V4 Pro (max)); Plan: the full rows' values change by -0.45 points (median; -1.61 to 0.42), 6 rows move; largest move 1 (Claude Opus 5 (max), DeepSeek V4 Pro (max), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Sol (max), Grok 4.7 (xhigh)).
 
 ### Deletion sensitivity
 
@@ -375,6 +473,7 @@ Each kernel assignment code gives the kernel used for the candidate, the referen
 | leave-out:scicode | 98% | evaluated | 3 rows move; largest move 2 (DeepSeek V4 Pro (max)) | no rank changes |
 | leave-out:critpt | 98% | evaluated | 2 rows move; largest move 1 (Claude Sonnet 5.5 (max), GPT-5.6 Sol (max)) | 2 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), GPT-6 Astra (xhigh)) |
 | leave-source-out:Artificial Analysis | 20% | not identifiable under the coverage rule | — | — |
+| basket-scope | 87% | evaluated | 11 rows move; largest move 2 (Gemini 3.8 Flash (high), GLM-5.3 (max), GPT-5.6 Luna (max)) | 8 rows move; largest move 7 (MiMo-V2.6-Flash) |
 
 ### Cost-component removal (Terminal-Bench 4.0 (AA Index run): evaluated)
 

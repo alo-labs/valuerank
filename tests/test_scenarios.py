@@ -38,6 +38,17 @@ def test_kernels_draw_their_families():
         assert 129.0 <= summed.draw(rng, use_alternative=heavy) <= 131.0
 
 
+def test_split_uniform_keeps_the_published_point_as_the_median():
+    """E182: an interval clipped off-centre puts half its mass on each side of the published point."""
+
+    rng = random.Random(4)
+    split = Kernel("split-uniform", (95.0, 98.0, 100.0), "endpoint-heavy")
+    for heavy in (False, True):
+        draws = [split.draw(rng, use_alternative=heavy) for _ in range(4000)]
+        assert all(95.0 <= value <= 100.0 for value in draws)
+        assert 0.46 < sum(value < 98.0 for value in draws) / len(draws) < 0.54
+
+
 def test_stream_target_profiles_are_an_allowlist():
     """E145: v1 S0 varies only reporting precision; other uncertainty enters only streams that name it."""
 
@@ -173,6 +184,29 @@ def test_shares_report_frequencies_with_monte_carlo_errors():
     # E161: each stream's events name their quality equation.
     assert result["qualityEquation"].startswith("observed leaves") and result["events"]["frontier"] == "observed-only score frontier frequency"
     assert alternative["events"]["frontier"].startswith("full-composite frontier frequency") and alternative["qualityEquation"] == "full composite, nominal weights"
+
+
+def test_row_dispersion_decomposes_the_value_variance():
+    """E87: Var(V) = b^2 Var(S_C) + (1 - b)^2 Var(Q) + 2 b (1 - b) Cov(S_C, Q), computed over the stream's scenarios."""
+
+    leaves = {leaf.key: Kernel("uniform", (40.0, 60.0)) for leaf in q.LEAVES}
+    rows = [RowInputs("varied", leaves, Kernel("uniform", (50.0, 200.0))), full_row("fixed", 50.0, 100.0)]
+    result = sc.shares(rows, "S0", 400, 3, ANCHORS, 0.25)
+    spread = result["rows"]["varied"]["dispersion"]
+    assert spread["status"] == "defined" and spread["label"] == sc.DISPERSION_LABEL and spread["scenarios"] == 400
+    # Recompute V directly from the same draws: the decomposition must reproduce its population variance.
+    rng = random.Random(3)
+    values = []
+    for _ in range(400):
+        scenario = sc.draw_scenario(rows, "S0", rng)
+        values.append(sc.scenario_values(scenario, ANCHORS, 0.25)["varied"])
+    mean = sum(values) / len(values)
+    assert spread["valueVariance"] == pytest.approx(sum((value - mean) ** 2 for value in values) / len(values))
+    assert spread["costTerm"] + spread["qualityTerm"] + spread["covarianceTerm"] == pytest.approx(spread["valueVariance"])
+    assert spread["valueSd"] == pytest.approx(spread["valueVariance"] ** 0.5) and spread["costTerm"] > 0 and spread["qualityTerm"] > 0
+    fixed = result["rows"]["fixed"]["dispersion"]
+    assert fixed["valueVariance"] == pytest.approx(0.0, abs=1e-12) and fixed["covarianceTerm"] == pytest.approx(0.0, abs=1e-12)
+    assert sc.Comoments().decomposition(0.25) == {"status": "no scenario SD defined", "label": sc.DISPERSION_LABEL}
 
 
 def test_regularized_beta_and_clopper_pearson():

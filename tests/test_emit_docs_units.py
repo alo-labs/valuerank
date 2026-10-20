@@ -119,3 +119,58 @@ def test_plan_amount_text_names_the_kind_and_the_donor():
     assert ed.plan_amount_text(amount) == "$1,178 per month: measured-workload capacity"
     assert ed.plan_amount_text({**amount, "amountUsd": None, "donorRouteId": "d"}) == "fee not established: measured-workload capacity from d"
     assert ed.plan_amount_text(None) == "—"
+
+
+def test_agreement_text_reports_tau_or_the_undefined_status():
+    defined = {"label": "quality agreement", "tau": 0.5, "interval": [0.1, 0.8], "panel": ["a", "b", "c"], "status": "defined"}
+    assert ed.agreement_text(defined) == "quality agreement: Kendall tau 0.50 (interval 0.10 to 0.80) on 3 rows."
+    undefined = {"label": "x", "tau": None, "interval": None, "panel": ["a"], "status": "undefined (panel too small)"}
+    assert ed.agreement_text(undefined) == "x: undefined (panel too small); panel of 1 rows."
+
+
+def test_dispersion_text_shows_the_sd_and_covariance_term():
+    assert ed.dispersion_text({"status": "defined", "valueSd": 1.234, "covarianceTerm": -0.05}) == "1.23 (-0.05)"
+    assert ed.dispersion_text({"status": "no scenario SD defined"}) == "no scenario SD defined"
+
+
+class StubFacts:
+    """The slice of emit_docs.Facts the cost-diagnostics section reads."""
+
+    def __init__(self, diagnostics):
+        self.v3 = {"diagnostics": diagnostics}
+
+    @staticmethod
+    def labels(row_ids):
+        return ", ".join(row_ids)
+
+
+def cost_world(**overrides):
+    diagnostics = {
+        "basketReadiness": {"pricedMixCoverage": 2 / 3, "pricedLeaves": ["deepswe", "lcr"], "components": {"frontiercode": {"status": "pending capture"}, "scicode": {"status": "admitted"}}},
+        "sweCompanion": {"rows": {"a": {"flag": True}, "b": {"flag": False}}},
+        "matchedCost": {"status": "evaluated", "pricedQualityWeight": 0.5, "reversals": [["a", "b"]], "warnings": []},
+        "costComponentFamily": [
+            {"component": "scicode", "bases": {basis: {"recalibrated": {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 5.0}}} for basis in ("api", "plan")}},
+            {"component": "frontiercode", "status": "not in the admitted basket"},
+        ],
+        "subsetBridges": [{
+            "subsetRows": ["s"], "missingComponents": ["coding-agent-index"], "pairedRows": ["a", "b"],
+            "missingExpenditureShare": {"coding-agent-index": {"median": 0.4, "min": 0.1, "max": 0.6, "n": 2}, "other": {"median": None, "min": None, "max": None, "n": 0}},
+            "bases": {"api": {"status": "evaluated", "valueDifference": {"median": -1.0, "min": -2.0, "max": 0.5}, "rankChanges": {"changes": {"a": 0, "b": 0}}},
+                      "plan": {"status": "unavailable: fewer than 2 complete-evidence references"}},
+        }],
+    }
+    diagnostics.update(overrides)
+    return StubFacts(diagnostics)
+
+
+def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
+    text = ed.cost_diagnostics_markdown(cost_world())
+    assert "priced leaves cover 67% of nominal quality weight (DeepSWE v1.1, AA-LCR v1.1)" in text and "pending components: FrontierCode" in text
+    assert "flagged far from the median ratio: a." in text and "reversals with separated intervals: 1" in text
+    assert "| FrontierCode | — | — | — |" in text and "2 rows move; largest move 1" in text
+    assert "values change by -1.00 points (median; -2.00 to 0.50)" in text
+    assert "is 40% of the full basket (median; 10% to 60% over 2 rows)" in text and "other: no expenditure evidence" in text
+    assert "Plan: unavailable: fewer than 2 complete-evidence references" in text and "the direction of its subset effect is not known" in text
+    quiet = ed.cost_diagnostics_markdown(cost_world(subsetBridges=[], matchedCost={"status": "unidentified (priced quality weight below 40%)"}, sweCompanion={"rows": {}}))
+    assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet

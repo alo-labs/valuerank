@@ -24,12 +24,14 @@ import argparse
 import hashlib
 import json
 import math
+import statistics
 import sys
 from datetime import date
 from pathlib import Path
 
 from valuerank import anchors as anchor_math
 from valuerank import basket
+from valuerank import cost_diagnostics
 from valuerank import diagnostics
 from valuerank import exact_match
 from valuerank import intervals
@@ -123,7 +125,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict |
     if page.get("omniscience") is not None:
         accuracy, hallucination = page.get("omniscienceAccuracy"), page.get("omniscienceHallucinationRate")
         rebuilt = q.omniscience_index_from_rates(accuracy, hallucination) if accuracy is not None and hallucination is not None else None
-        unanswered = (1.0 - accuracy) * (1.0 - hallucination) if rebuilt is not None else None
+        # E128: with every question correct the conditional hallucination rate is undefined and nothing is unanswered.
+        unanswered = 0.0 if accuracy == 1.0 else (1.0 - accuracy) * (1.0 - hallucination) if rebuilt is not None else None
         add("omniscience", page["omniscience"], q.omniscience_index_z(page["omniscience"]),
             {"source": "AA Omniscience Index (O28)", "accuracy": accuracy, "hallucinationRate": hallucination, "indexFromRates": rebuilt,
              "unansweredOrPartialShare": unanswered, "abstentionPenalisedZ": max(0.0, page["omniscience"])},
@@ -209,6 +212,24 @@ def cost_boundary(component: str) -> dict:
     return {charge: "included" if charge == "contestantModelTokens" else COMPONENT_BOUNDARY.get(component, {}).get(charge, "unknown") for charge in CHARGE_CLASSES}
 
 
+# E176: AA's documented metering and cache rules (methodology page, 2026-10-20).
+TOKEN_METERING_UNPUBLISHED = "not published per configuration (AA: provider-reported token counts where available, a canonical-tokenizer fallback otherwise)"
+CACHE_RATE_PROVENANCE = "AA's live measurement of the model's typical cache-hit rate, not the run's one-off rate (measurement window not published)"
+METERING_BASES = ("provider-reported", "canonical-tokenizer fallback", "not published per configuration")
+# E174/E175: source facts the registry pins (each source's own displayed dates and documented interval levels).
+SOURCE_INTERVALS = [
+    {"leaf": "terminalBench", "status": "captured", "level": "95% (tbench.ai: \"The whiskers span the 95% confidence interval\")", "stream": "S1M"},
+    {
+        "leaf": "gdpval", "status": "published, not captured",
+        "method": "Crowd-BT maximum likelihood with sandwich-estimator confidence intervals (AA methodology, GDPval-AA v2.1)",
+        "level": "not stated by the source (the 95% level on AA's methodology page belongs to AA-Briefcase)",
+        "stream": "none until captured with a documented level; otherwise published beside the leaf outside every stream",
+        "captureTask": "capture the GDPval-AA leaderboard CI column for the exact configurations",
+    },
+]
+SOURCE_DATES = {"LiveBench 2.0": {"release": "2026-10-14", "lastUpdated": "2026-10-18", "observedOn": "2026-10-20", "role": "retired quality source (O26)"}}
+
+
 def valuation_contract(caveat: str | None) -> dict:
     """E157: AA's valuation is linear in token categories, so category totals suffice to reconcile it; a provider tariff
     banded by request (e.g. context length) needs band-allocated demand or a request ledger, which no source publishes."""
@@ -219,7 +240,89 @@ def valuation_contract(caveat: str | None) -> dict:
         "providerBillingRule": "banded tariff not reflected in AA's cost (AA cost caveat)" if caveat else "not recorded",
         "tariffCorrectedValuation": "unidentified: billing-band allocation unavailable" if caveat else "not assessed: provider billing rule not recorded",
         "tariffAllocationSupport": "unavailable",
+        # E176: how AA metered the tokens and valued cached input (AA does not say per configuration which basis applies).
+        "tokenMeteringBasis": TOKEN_METERING_UNPUBLISHED,
+        "cacheRateProvenance": CACHE_RATE_PROVENANCE,
     }
+
+
+# E170: the valuation-basis gate. AA's Index cost reconciles exactly with the prices AA displays for the configuration
+# at capture (cache writes at the input rate where AA lists no cache-write price; exact to 1e-15 for every ranked row of
+# the 2026-10-17 snapshot), which identifies the prices AA applied. Price records registered beyond AA's displayed
+# prices (E141) name superseded or promotional tariffs; when AA's cost reconciles with one of them instead, the join
+# decides between exact revaluation and owner decision O29.
+VALUATION_TOLERANCE = 1e-9
+INPUT_CATEGORIES = {"input": "nonCacheInput", "cacheRead": "cacheRead", "cacheWrite": "cacheWrite"}
+GATE_COMPATIBLE = "compatible as captured"
+GATE_REVALUED = "compatible after evidenced revaluation"
+GATE_NOT_IN_FORCE = "AA's applied price not in force at V (O29)"
+GATE_UNVERIFIED = "valuation basis unverified"
+GATE_SCORED = (GATE_COMPATIBLE, GATE_REVALUED)
+NOT_IN_FORCE_FLAGS = {"superseded": "AA cost at superseded price", "promotional": "AA cost at standard price during a promotion"}
+
+
+def displayed_prices(page: dict) -> dict | None:
+    """AA's displayed per-category prices (USD per 1M tokens); cache writes at the input rate where none is listed."""
+
+    prices = {"input": page.get("price1mInputTokens"), "cacheRead": page.get("cacheHitPrice"), "output": page.get("price1mOutputTokens")}
+    prices["cacheWrite"] = page.get("cacheWritePrice") if page.get("cacheWritePrice") is not None else prices["input"]
+    return prices if all(anchor_math.scoreable(value) for value in prices.values()) else None
+
+
+def reconciles(page: dict, prices: dict) -> bool | None:
+    """p . d = C on AA's Index categories, or None when the category costs or token totals are not published.
+
+    The output cost over the output price gives the output tokens; the input categories' costs over their prices
+    give implied tokens that must sum to the input total.
+    """
+
+    cost, tokens = page.get("intelligenceIndexCost") or {}, page.get("canonicalIntelligenceIndexTokenCount") or {}
+    if any(cost.get(field) is None for field in (*INPUT_CATEGORIES.values(), "output")) or not tokens.get("input") or not tokens.get("output"):
+        return None
+    output = cost["output"] / prices["output"] * 1e6
+    inputs = sum(cost[field] / prices[key] for key, field in INPUT_CATEGORIES.items()) * 1e6
+    return abs(output - tokens["output"]) <= VALUATION_TOLERANCE * tokens["output"] and abs(inputs - tokens["input"]) <= VALUATION_TOLERANCE * tokens["input"]
+
+
+def valuation_gate(page: dict, records: list[dict], captured_at: str | None) -> dict:
+    """E170: the one outcome of joining the prices AA applied with the price records in force at the release cutoff V.
+
+    v1's records in force at V are AA's displayed prices at capture. A component without published category costs
+    (the Coding Agent Index, the chart components) is valued by AA at the configuration's listed prices, so it shares
+    the Index outcome. Ratios r = in-force price / applied price run over categories with a positive Index cost.
+    """
+
+    in_force = displayed_prices(page)
+    gate = {"inForce": {"source": "AA's displayed prices at capture", "observedAt": captured_at, "prices": in_force}, "factor": None, "bounds": None, "flag": None, "appliedRecord": None}
+    if in_force is None:
+        return {**gate, "outcome": GATE_UNVERIFIED, "flag": GATE_UNVERIFIED, "reason": "AA displays no complete price vector for the configuration"}
+    check = reconciles(page, in_force)
+    if check is not False:
+        reason = "AA's Index category costs reconcile exactly with its displayed prices" if check else "category costs not published: AA's documented rule (listed prices) names the basis"
+        return {**gate, "outcome": GATE_COMPATIBLE, "reason": reason}
+    cost = page["intelligenceIndexCost"]
+    active = [key for key in in_force if cost[INPUT_CATEGORIES.get(key, key)] > 0]
+    for record in records:
+        if not reconciles(page, record["prices"]):
+            continue
+        ratios = {key: in_force[key] / record["prices"][key] for key in active}
+        low, high = min(ratios.values()), max(ratios.values())
+        applied = {key: record[key] for key in ("id", "tariffStatus", "effectiveFrom", "effectiveUntil") if key in record}
+        if high - low <= VALUATION_TOLERANCE * high:
+            return {**gate, "outcome": GATE_REVALUED, "factor": high, "appliedRecord": applied, "reason": "every priced category moved by one common factor; C' = k C for any demand mix"}
+        return {
+            **gate, "outcome": GATE_NOT_IN_FORCE, "appliedRecord": applied, "flag": NOT_IN_FORCE_FLAGS[record.get("tariffStatus", "superseded")],
+            # C'/C and M'/M are demand- and consumption-weighted means of the same ratios.
+            "bounds": {"ratios": ratios, "apiCost": [low, high], "planCost": [low / high, high / low]},
+            "reason": "AA's cost reconciles with a registered price record that is not in force at V",
+        }
+    return {**gate, "outcome": GATE_UNVERIFIED, "flag": GATE_UNVERIFIED, "reason": "AA's cost reconciles with neither its displayed prices nor a registered price record"}
+
+
+def revalue(components: dict, factor: float) -> dict:
+    """E170 outcome 2: every component's cost and reporting half-width scaled by the common price factor."""
+
+    return {key: {**value, "costUsd": value["costUsd"] * factor, "halfWidthUsd": value["halfWidthUsd"] * factor} if value.get("costUsd") is not None else value for key, value in components.items()}
 
 
 def restricted_cost(components: dict, workload_components: list[str]) -> float | None:
@@ -257,6 +360,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date) 
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
     mapping = documents["configurationMap"]["rows"]
     routes = documents["planRoutes"]["routes"]
+    price_records = documents["priceRecords"]["records"]
     rows = []
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
@@ -271,8 +375,17 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date) 
             agent_records.get(labels.get(basket.CODING_AGENT_INDEX)),
             {slug: chart_rows[slug].get(labels.get(slug)) for slug in basket.CHART_COMPONENTS},
         )
+        gate = valuation_gate(page, [item for item in price_records if item["aaSlug"] == configuration["aaSlug"]], documents["snapshot"].get("capturedAt"))
+        if gate["outcome"] == GATE_REVALUED:
+            components = revalue(components, gate["factor"])
         candidates = plan_routes.route_candidates(model_id, effort, routes, release_day)
+        if gate["outcome"] == GATE_NOT_IN_FORCE:
+            # O29: the Plan cost divides only by a multiple valued on the row's own (superseded) price record.
+            for candidate in candidates:
+                if candidate["route"].get("valuationPriceRecord") != gate["appliedRecord"].get("id"):
+                    candidate.update(grade="diagnostic", valuation="different")
         rows.append({
+            "valuationGate": gate,
             "page": page,
             "routeCandidates": candidates,
             **configuration,
@@ -326,6 +439,23 @@ def _plan_cost_on(row: dict, workload_components: list[str]) -> float | None:
 # --------------------------------------------------------------------------
 
 
+def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box | None:
+    """E170: a row's admissible box after the valuation-basis gate, or None when it is not interval-eligible.
+
+    An unverified basis is never interval-eligible. A row on a price not in force at V (O29) competes over the hull
+    of its published record and its current-tariff bound, flagged provisional so it never earns a unique label.
+    """
+
+    gate, summary = row["valuationGate"], row["summary"]
+    if gate["outcome"] == GATE_UNVERIFIED:
+        return None
+    provisional = summary.provisional
+    if gate["outcome"] == GATE_NOT_IN_FORCE:
+        ratio_low, ratio_high = gate["bounds"]["apiCost" if basis == "api" else "planCost"]
+        low, high, provisional = low * min(1.0, ratio_low), high * max(1.0, ratio_high), True
+    return intervals.Box(row["id"], low, high, summary.lower, summary.upper, provisional)
+
+
 def api_boxes(assembled: dict) -> list[intervals.Box]:
     """R_W on the API basis: ranked rows with FullCost on the main workload (E37), as admissible boxes."""
 
@@ -333,8 +463,9 @@ def api_boxes(assembled: dict) -> list[intervals.Box]:
     for row in assembled["rows"]:
         cost = row["cost"]
         if cost["fullCost"] and cost["workload"] == assembled["mainWorkload"] and anchor_math.scoreable(cost["lowUsd"]):
-            summary = row["summary"]
-            boxes.append(intervals.Box(row["id"], cost["lowUsd"], cost["highUsd"], summary.lower, summary.upper, summary.provisional))
+            box = _gated_box(row, cost["lowUsd"], cost["highUsd"], "api")
+            if box is not None:
+                boxes.append(box)
     return boxes
 
 
@@ -351,8 +482,9 @@ def plan_boxes(assembled: dict) -> list[intervals.Box]:
         # E138: an unrecorded or different valuation basis is never interval-eligible.
         if bounds is None or not anchor_math.scoreable(bounds[1]) or selected["valuation"] not in {"release", "revalued"}:
             continue
-        summary = row["summary"]
-        boxes.append(intervals.Box(row["id"], cost["lowUsd"] / bounds[1], cost["highUsd"] / bounds[0], summary.lower, summary.upper, summary.provisional))
+        box = _gated_box(row, cost["lowUsd"] / bounds[1], cost["highUsd"] / bounds[0], "plan")
+        if box is not None:
+            boxes.append(box)
     return boxes
 
 
@@ -387,6 +519,8 @@ def anchor_population(assembled: dict, components: list[str]) -> list[str]:
     return sorted(
         row["id"] for row in assembled["rows"]
         if all((row["components"].get(component) or {}).get("completeness") == basket.COMPLETE for component in components)
+        # E170/O29: a row whose AA cost is not on the price in force at V is never an anchor reference.
+        and row["valuationGate"]["outcome"] in GATE_SCORED
     )
 
 
@@ -472,7 +606,19 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str) -> dict:
     if not boxes:
         reason = "no row has FullCost and an identified M_W (E61/E67)" if basis == "plan" else "no row has FullCost on the main workload"
         return {"universe": [], "unevaluable": unevaluable, "status": intervals.UNEVALUABLE, "reason": reason}
-    return {"universe": universe, "unevaluable": unevaluable, "status": "evaluated", "frontier": intervals.frontier(boxes), "bars": _bar_results(boxes, assembled, frozen)}
+    frontier, bars = intervals.frontier(boxes), _bar_results(boxes, assembled, frozen)
+    # E170/O29: such a row competes (it can block) but earns no interval label of its own.
+    withheld = sorted(row["id"] for row in assembled["rows"] if row["id"] in universe and row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE)
+    for row_id in withheld:
+        frontier[row_id] = {"status": WITHHELD_LABEL}
+        for bar in bars:
+            if "rows" in bar:
+                bar["rows"][row_id] = {"status": WITHHELD_LABEL}
+                bar["possibleCheapest"] = [item for item in bar["possibleCheapest"] if item != row_id]
+    return {"universe": universe, "unevaluable": unevaluable, "labelWithheld": withheld, "status": "evaluated", "frontier": frontier, "bars": bars}
+
+
+WITHHELD_LABEL = "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
 
 
 def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> list[dict]:
@@ -496,6 +642,11 @@ LEAVE_OUT_MIN_WEIGHT = 0.40
 SOURCE_LEAVES = {"Artificial Analysis": tuple(leaf.key for leaf in q.LEAVES if leaf.source == "aa")}
 
 
+# E178: the leaves whose benchmarks O15 excludes from the cost basket (basket.INDEX_RESIDUAL_TASKS), removed jointly.
+BASKET_SCOPE_EXCLUDED = ("hle", "critpt", "omniscience")
+BASKET_SCOPE_LABEL = "quality restricted to the cost basket's scope"
+
+
 def deletion_branches() -> list[dict]:
     """Every registered branch: one per leaf (leave-one-benchmark-out) and one per multi-leaf source.
 
@@ -511,6 +662,7 @@ def deletion_branches() -> list[dict]:
         branches.append({"id": f"leave-out:{leaf.key}", "labels": labels, "removed": [leaf.key]})
     for source, keys in SOURCE_LEAVES.items():
         branches.append({"id": f"leave-source-out:{source}", "labels": ["leave-one-source-out"], "removed": list(keys)})
+    branches.append({"id": "basket-scope", "labels": [BASKET_SCOPE_LABEL], "removed": list(BASKET_SCOPE_EXCLUDED)})
     return branches
 
 
@@ -604,6 +756,114 @@ def cost_removal(assembled: dict, frozen: dict, per_row: dict, component: str = 
     }
 
 
+# E171: every admissible route-measurement pair beside the selected one. No separate "best" route ranking exists: the
+# owner's highest-eligible Value Multiple rule is comparator key 3, and a larger displayed score here is arithmetic.
+ALTERNATIVE_IDENTIFIED = "identified on the scored workload"
+ALTERNATIVE_ARITHMETIC = "observed-workload arithmetic only (target-workload ordering not identified)"
+
+
+def route_alternatives(row: dict, anchors: dict | None) -> dict:
+    """E171/E179: the route-alternative table for one row, in comparator order, with its selection summary."""
+
+    selection = row["routeSelection"]
+    selected = selection["selected"]
+    api_cost = row["cost"]["costUsd"]
+    table = []
+    for candidate in sorted((item for item in row["routeCandidates"] if item["grade"] != "diagnostic"), key=plan_routes.comparator_key):
+        route = candidate["route"]
+        multiple = plan_routes.comparison_multiple(route)
+        cost = api_cost / multiple if anchor_math.scoreable(api_cost) else None
+        score = anchor_math.cost_score(cost, anchors) if anchors and cost is not None else None
+        dominated_by = selection["dominated"].get(route["id"])
+        tuple_ = plan_routes.comparison_tuple(candidate)
+        table.append({
+            "routeId": route["id"],
+            "identification": candidate["identification"],
+            "grade": candidate["grade"],
+            "measurementWorkload": route.get("measurementWorkload", "the route's measurement workload"),
+            "valuationStatus": candidate["valuation"],
+            "displayedMultiple": multiple,
+            "displayedPlanValue": anchor_math.value_score(score, row["summary"].displayed, BETA),
+            "comparisonTuple": [item if math.isfinite(item) else None for item in tuple_],
+            "status": "selected" if selected is candidate else f"dominated by {dominated_by} (E88)" if dominated_by else "not selected by the comparator",
+            "comparisonWithSelected": ALTERNATIVE_IDENTIFIED if candidate["identification"] in plan_routes.IDENTIFIED else ALTERNATIVE_ARITHMETIC,
+        })
+    # E179: the comparator's pick with the selected pair removed shows what choosing the largest observed multiple gained.
+    fallback = plan_routes.route_selection([item for item in row["routeCandidates"] if item is not selected])["selected"] if selected else None
+    by_route = {item["routeId"]: item for item in table}
+    return {
+        "pairs": table,
+        "admissiblePairs": len(table),
+        "unidentifiedPairs": sum(1 for item in table if item["identification"] not in plan_routes.IDENTIFIED),
+        "leaveSelectedOut": None if fallback is None else {key: by_route[fallback["route"]["id"]][key] for key in ("routeId", "displayedMultiple", "displayedPlanValue")},
+    }
+
+
+def cost_component_family(assembled: dict, frozen: dict, per_row: dict) -> list[dict]:
+    """E172: the E149 cost-deletion object registered once per admitted basket unit (the Coding Agent Index is one unit)."""
+
+    return [cost_removal(assembled, frozen, per_row, component) for component in assembled["admitted"]]
+
+
+def _spread(values: list[float]) -> dict:
+    """Median and range of a list, or nulls when it is empty."""
+
+    if not values:
+        return {"median": None, "min": None, "max": None, "n": 0}
+    return {"median": statistics.median(values), "min": min(values), "max": max(values), "n": len(values)}
+
+
+def subset_bridges(assembled: dict, frozen: dict, per_row: dict, expenditure: dict) -> list[dict]:
+    """E10/E173: each subset workload's paired full/subset results and the missing components' expenditure shares.
+
+    The rows evidenced on both the main workload W and the subset W_S are the
+    main-workload rows (W_S is a subset of W). Each is scored on both workloads
+    against that workload's own frozen anchors; missing costs are never filled.
+    The missing components' shares come from the E22 expenditure object, so a
+    subset row's readers see how large the omitted spend is among full rows.
+    """
+
+    main = assembled["mainWorkload"]
+    main_components = frozen["workloads"][main]["components"]
+    paired = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
+    bridges = []
+    for workload, entry in sorted(frozen["workloads"].items()):
+        if entry.get("role") != "subset":
+            continue
+        components = entry["components"]
+        members = sorted(row["id"] for row in assembled["rows"] if row["cost"]["workload"] == workload)
+        missing = [component for component in main_components if component not in components]
+        shares = {component: _spread([item["shares"][component] for item in expenditure.values() if component in item["shares"]]) for component in missing}
+        bases = {}
+        for basis in BASES:
+            anchors = entry["anchors"][basis]
+            if anchors is None:
+                bases[basis] = {"status": entry.get("anchorStatus", "unavailable")}
+                continue
+            full = {row["id"]: per_row[row["id"]][basis]["value"] for row in paired}
+            restricted = {
+                row["id"]: anchor_math.value_score(anchor_math.cost_score(basis_cost_on(row, components, basis), anchors), row["summary"].displayed, BETA)
+                for row in paired
+            }
+            changes = diagnostics.paired_rank_change(full, restricted)
+            differences = [restricted[key] - full[key] for key in full if full[key] is not None and restricted[key] is not None]
+            bases[basis] = {
+                "status": "evaluated",
+                "exchangeRates": {"main": anchor_math.exchange_rate(frozen["workloads"][main]["anchors"][basis], BETA), "subset": anchor_math.exchange_rate(anchors, BETA)},
+                "valueDifference": _spread(differences),
+                "rows": {key: {"fullValue": full[key], "subsetValue": restricted[key]} for key in sorted(full)},
+                "rankChanges": changes,
+            }
+        bridges.append({
+            "workload": workload, "components": components, "subsetRows": members, "missingComponents": missing,
+            "missingExpenditureShare": shares, "pairedRows": sorted(row["id"] for row in paired),
+            "label": "paired full/subset bridge on rows evidenced on both workloads (E10); missing costs are never filled",
+            "direction": "not known: a subset row's effect depends on its unobserved share of the missing components relative to the reference configurations",
+            "bases": bases,
+        })
+    return bridges
+
+
 def _rule(rule: str, status: str, detail: str) -> dict:
     return {"rule": rule, "status": status, "detail": detail}
 
@@ -645,6 +905,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     yield_ = plan_routes.identification_yield({row["id"]: row["routeSelection"]["selected"] for row in rows})
     agreement = _quality_agreement(rows)
     measured = _measured_only_view(rows, frozen, per_row)
+    readiness = cost_diagnostics.basket_readiness(rows, assembled["admission"], main)
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", "release held" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
@@ -679,23 +940,35 @@ def score(assembled: dict, frozen: dict) -> dict:
             for workload, entry in frozen["workloads"].items()
         },
         "exchangeRate": exchange,
+        # E176: rows by token metering basis; AA does not publish the basis per configuration today.
+        "meteringMix": {basis_name: (len(rows) if basis_name == METERING_BASES[-1] else 0) for basis_name in METERING_BASES},
+        "sourceIntervals": SOURCE_INTERVALS,
+        "sourceDates": SOURCE_DATES,
         "costInfluence": influence,
         "gates": {"clip": gates, "hold": hold},
         "identificationYield": yield_,
-        "rows": [_row_json(row, per_row[row["id"]], ranks) for row in rows],
+        "rows": [_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))) for row in rows],
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
         "measuredOnlyPlanView": measured,
         "diagnostics": {
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
             "omniscienceAbstentionSensitivity": _abstention_sensitivity(rows, per_row),
+            "gdpvalLogisticSensitivity": _gdpval_logistic_sensitivity(rows, per_row),
             "qualitySourceShares": q.source_shares(),
             "qualityAgreement": agreement,
+            "qualitySubstitutionAgreement": _substitution_agreement(rows, per_row),
+            "disjointEvidenceAgreement": _disjoint_agreement(rows),
             "nonDiscriminatingLeaves": diagnostics.non_discriminating(_z_by_leaf(rows)),
             "groupDrift": _group_drift(rows),
             "qualityDispersion": _panel_dispersion(rows),
             "deletionSensitivity": _deletion_sensitivity(rows, per_row),
             "costRemoval": cost_removal(assembled, frozen, per_row),
+            "costComponentFamily": cost_component_family(assembled, frozen, per_row),
+            "subsetBridges": subset_bridges(assembled, frozen, per_row, readiness["expenditure"]),
+            "basketReadiness": readiness,
+            "sweCompanion": cost_diagnostics.swe_companion(rows, main),
+            "matchedCost": cost_diagnostics.matched_cost(rows, main),
         },
         "manifest": manifest,
     }
@@ -787,7 +1060,11 @@ def _measured_calibration(rows: list[dict], frozen: dict, entries: dict) -> dict
             references = anchors_official["referenceCosts"]
             low, high = min(references, key=references.get), max(references, key=references.get)
             provenance = {"low": {"row": low, "evidence": _plan_evidence(by_id.get(low))}, "high": {"row": high, "evidence": _plan_evidence(by_id.get(high))}}
-        references = {row_id: measured[row_id]["costUsd"] for row_id in members if not by_id[row_id]["cost"]["partialComponents"]}
+        # E170/O29: a row whose AA cost is not on the price in force at V is never a measured reference.
+        references = {
+            row_id: measured[row_id]["costUsd"] for row_id in members
+            if not by_id[row_id]["cost"]["partialComponents"] and by_id[row_id]["valuationGate"]["outcome"] in GATE_SCORED
+        }
         entry = {"rows": sorted(members), "references": sorted(references), "officialAnchorProvenance": provenance}
         if len(references) < MIN_ANCHOR_REFERENCES:
             workloads[workload] = {**entry, "status": "measured-evidence calibration unavailable (fewer than two measured references)"}
@@ -894,20 +1171,94 @@ def _abstention_sensitivity(rows: list[dict], per_row: dict) -> dict:
     return {"rule": "z_pen = max(0, I)", "rankChanges": diagnostics.paired_rank_change(primary, penalised)}
 
 
+def _gdpval_logistic_sensitivity(rows: list[dict], per_row: dict) -> dict:
+    """E181: ranks per basis with the GDPval-AA leaf mapped by the logistic win probability against AA's anchor."""
+
+    result = {"rule": "z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed"}
+    for basis in BASES:
+        primary, logistic = {}, {}
+        for row in rows:
+            value = per_row[row["id"]][basis]["value"]
+            if value is None:
+                continue
+            observations = dict(row["evidence"]["observations"])
+            source = row["evidence"]["provenance"].get("gdpval")
+            if source is not None:
+                observations["gdpval"] = q.Observation(q.gdpval_logistic_z(source["evidence"]["publishedValue"]))
+            primary[row["id"]] = value
+            logistic[row["id"]] = anchor_math.value_score(per_row[row["id"]][basis]["costScore"], q.summarize(observations).displayed, BETA)
+        result[basis] = {"rankChanges": diagnostics.paired_rank_change(primary, logistic)}
+    return result
+
+
 def _z_by_leaf(rows: list[dict]) -> dict:
     return {leaf.key: [row["evidence"]["observations"][leaf.key].z for row in rows if leaf.key in row["evidence"]["observations"]] for leaf in q.LEAVES}
+
+
+def _independent_quality(rows: list[dict]) -> dict:
+    """Q_ind = (z_BugHunt + z_TB) / 2 on the matched panel: rows with both independently executed leaves."""
+
+    independent = {}
+    for row in rows:
+        values = row["evidence"]["observations"]
+        if "bugHunt" in values and "terminalBench" in values:
+            independent[row["id"]] = (values["bugHunt"].z + values["terminalBench"].z) / 2.0
+    return independent
 
 
 def _quality_agreement(rows: list[dict]) -> dict:
     """E62 (a): Kendall tau-b between observed quality and the independent-only quality on the matched panel."""
 
-    observed, independent = {}, {}
+    independent = _independent_quality(rows)
+    observed = {row["id"]: row["summary"].displayed for row in rows if row["id"] in independent}
+    return diagnostics.agreement(observed, independent, label="quality agreement (matched-panel sensitivity)")
+
+
+def _substitution_agreement(rows: list[dict], per_row: dict) -> dict:
+    """E62 (b): tau-b between displayed value and value with Q_ind in place of quality (cost, anchors, basis, route fixed)."""
+
+    independent = _independent_quality(rows)
+    result = {}
+    for basis in BASES:
+        displayed = {row_id: per_row[row_id][basis]["value"] for row_id in independent}
+        substituted = {row_id: anchor_math.value_score(per_row[row_id][basis]["costScore"], independent[row_id], BETA) for row_id in independent}
+        result[basis] = diagnostics.agreement(displayed, substituted, label=f"quality-substitution value agreement, {basis} basis (matched-panel sensitivity)")
+    return result
+
+
+AA_LEAVES = tuple(leaf for leaf in q.LEAVES if leaf.source == "aa")
+
+
+def _disjoint_agreement(rows: list[dict]) -> dict:
+    """E71 (c): tau-b between AA-executed-only quality and independently-executed-only quality on the matched panel."""
+
+    independent = _independent_quality(rows)
+    aa_only = {}
     for row in rows:
         values = row["evidence"]["observations"]
-        if "bugHunt" in values and "terminalBench" in values:
-            observed[row["id"]] = row["summary"].displayed
-            independent[row["id"]] = (values["bugHunt"].z + values["terminalBench"].z) / 2.0
-    return diagnostics.agreement(observed, independent, label="quality agreement (matched-panel sensitivity)")
+        observed = [leaf for leaf in AA_LEAVES if leaf.key in values]
+        if row["id"] in independent and observed:
+            aa_only[row["id"]] = sum(leaf.weight * values[leaf.key].z for leaf in observed) / sum(leaf.weight for leaf in observed)
+    result = diagnostics.agreement(aa_only, independent, label="disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking)")
+    result["retainedLeaves"] = {"aaExecuted": {leaf.key: leaf.weight for leaf in AA_LEAVES}, "independent": {"bugHunt": 50.0, "terminalBench": 50.0}}
+    return result
+
+
+# E15: the workday-feasible multiple re-solves the route's capacity program with consumption only in a pre-registered
+# 40-hour week. No route records an evidenced quota schema, so there is no program to re-solve; a route that records one
+# fails the build until the capacity program (E70, E117) exists, rather than being skipped silently.
+WORKDAY_RULE = "capacity program re-solved with consumption allowed only in a 40-hour week (8 h x 5 days, versioned calendar, E117); diagnostic, never scored"
+
+
+def workday_status(selected: dict | None) -> dict:
+    """E15: the workday-feasible Plan multiple's status for the selected route."""
+
+    if selected is None:
+        return {"status": "not applicable: no Plan route selected", "rule": WORKDAY_RULE}
+    route = selected["route"]
+    if route.get("quotaSchema"):
+        raise ValueError(f"{route['id']}: a recorded quota schema needs the E70 capacity program and the E15 workday solve")
+    return {"status": "not evaluated: no evidenced quota schema for this route", "rule": WORKDAY_RULE}
 
 
 # E166: what the selected measurement's API-priced amount measures, so a displayed amount never reads as capacity it
@@ -977,7 +1328,7 @@ def plan_amount(selected: dict | None, workload: str | None = None) -> dict | No
     }
 
 
-def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
+def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) -> dict:
     selection = row["routeSelection"]
     selected = selection["selected"]
     caveat = row.get("aaNote") if row.get("aaNote") and any(word in row["aaNote"].lower() for word in ("pricing", "cost", "price")) else None
@@ -990,7 +1341,11 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
         # E141: AA's own note on what its cost omits (e.g. a long-context surcharge), shown as a cost caveat.
         "aaCostCaveat": caveat,
         "valuation": valuation_contract(caveat),
-        "tariffStatus": "as published by AA (effective dates not recorded)",
+        # E170: the valuation-basis gate's outcome for this row's AA cost (O29 governs a price not in force at V).
+        "valuationGate": row["valuationGate"],
+        "tariffStatus": row["valuationGate"]["outcome"],
+        # Outputs item 4: AA's Index figures for the exact configuration (diagnostics only, never scored).
+        "indexDiagnostics": cost_diagnostics.index_diagnostics(row["page"]),
         "demandRegistry": demand_registry(row["page"], row["cost"]["components"]),
         "quality": {
             **_summary_json(row["summary"]),
@@ -1011,6 +1366,8 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
             "comparisonTuples": {key: [item if math.isfinite(item) else None for item in value] for key, value in selection["tuples"].items()},
             "selectedIdentification": selected["identification"] if selected else None,
             "amount": plan_amount(selected, row["cost"]["workload"]),
+            "workday": workday_status(selected),
+            "routeAlternatives": alternatives,
             "admission": [
                 {
                     "routeId": item["route"]["id"], "case": item["case"], "officialDisplayEligible": item["officialDisplayEligible"],
@@ -1105,13 +1462,15 @@ def transfer_dependent(row: dict) -> bool:
     return row["plan"].get("grade") == "assumption"
 
 
-def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, transfers: bool = True) -> list[scenarios.RowInputs]:
+def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, transfers: bool = True, harness: float | None = None) -> list[scenarios.RowInputs]:
     """The declared panel for one basis (E96): rows with a cost on the main workload, in a fixed order.
 
     With ``measurement`` (the E162 stream), a leaf whose source documents a 95%
     confidence interval (Terminal-Bench's published half-width) is drawn inside that
     interval under a conventional kernel (E165): uniform with the arcsine
-    alternative, never assumed normal, clipped to the leaf's domain.
+    alternative, never assumed normal, clipped to the leaf's domain. With
+    ``harness`` (the E19 band width), Bug Hunt is drawn inside the harness-mismatch
+    band centred on its observed score, a specification stress for S2 only.
     """
 
     panel = []
@@ -1126,7 +1485,13 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, tr
         half = (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct")
         if measurement and half:
             z = observations["terminalBench"].z
-            leaves["terminalBench"] = scenarios.Kernel("uniform", (max(0.0, z - half), min(100.0, z + half)), "endpoint-heavy", scenarios.INTERVAL_RANGE)
+            low, high = max(0.0, z - half), min(100.0, z + half)
+            # E182: an interval clipped off-centre keeps the published point as its median.
+            family, params = ("uniform", (low, high)) if math.isclose(z - low, high - z) else ("split-uniform", (low, z, high))
+            leaves["terminalBench"] = scenarios.Kernel(family, params, "endpoint-heavy", scenarios.INTERVAL_RANGE)
+        if harness is not None and "bugHunt" in observations:
+            z = observations["bugHunt"].z
+            leaves["bugHunt"] = scenarios.Kernel("uniform", (max(0.0, z - harness / 2.0), min(100.0, z + harness / 2.0)), "endpoint-heavy", scenarios.SPECIFICATION_STRESS)
         panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional))
     return panel
 
@@ -1139,6 +1504,7 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
         "n": n,
         "seed": seed,
         "anchors": {basis: frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis] for basis in BASES},
+        "harnessBand": harness_band(assembled["tb4Rows"])["width"],
         "panels": {
             f"{basis}{'-measurement' if measurement else ''}{'' if transfers else '-transfers-off'}": [
                 {
@@ -1153,6 +1519,39 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
         },
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+# E19: Bug Hunt runs on vendor CLIs, so a named S2 branch draws it inside a harness-mismatch band whose width is the
+# median spread of one configuration's Terminal-Bench score across agents on the tbench.ai leaderboard (pre-registered).
+HARNESS_BAND_RULE = (
+    "width = median over leaderboard configurations listed under two or more agents of (highest - lowest resolution rate, "
+    "percentage points); Bug Hunt drawn uniformly within the band centred on its observed score; S2 specification stress, never in Θ"
+)
+# E34 and E122: the other named S2 branches, unevaluable from the captured evidence (stated, never silently skipped).
+CACHE_BRANCH = {
+    "id": "cache-hit variation (E34)", "stratum": "S2", "status": "unevaluable",
+    "reason": "AA's published cost embeds its cache-pricing protocol; varying the cache-hit rate needs each basket component's cache-read and uncached-input demand, which AA publishes only for the whole Index (E157)",
+}
+PRICE_RULE_BRANCH = {
+    "id": "first-party list versus cross-provider median price rule (E122)", "stratum": "S2", "status": "unevaluable",
+    "reason": "AA publishes one price per configuration under its own rule; the alternative rule's prices are not captured",
+}
+
+
+def harness_band(tb4_rows: list[dict]) -> dict:
+    """E19: the pre-registered harness-mismatch band from same-configuration cross-agent spreads, or why it is unevaluable."""
+
+    by_configuration = {}
+    for item in tb4_rows:
+        if item.get("resolutionRatePct") is not None:
+            by_configuration.setdefault(item["model"], {})[item.get("agent")] = item["resolutionRatePct"]
+    spreads = {model: max(rates.values()) - min(rates.values()) for model, rates in sorted(by_configuration.items()) if len(rates) >= 2}
+    if not spreads:
+        return {
+            "id": "Bug Hunt harness band (E19)", "stratum": "S2", "rule": HARNESS_BAND_RULE, "status": "unevaluable", "spreads": {}, "width": None,
+            "reason": "the captured tbench.ai leaderboard lists no configuration under two or more agents, so no cross-agent spread exists",
+        }
+    return {"id": "Bug Hunt harness band (E19)", "stratum": "S2", "rule": HARNESS_BAND_RULE, "status": "evaluated", "spreads": spreads, "width": statistics.median(spreads.values())}
 
 
 def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, seed: int) -> dict:
@@ -1173,6 +1572,15 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
                 run["transfers"] = "on (the displayed record)" if transfers_on(stratum) else "off"
                 run["excluded"] = [] if transfers_on(stratum) else [{"row": row_id, "reason": TRANSFER_EXCLUSION} for row_id in excluded]
             results[basis].append(run)
+    band = harness_band(assembled["tb4Rows"])
+    if band["width"] is not None:
+        band["results"] = {}
+        for basis in BASES:
+            anchors = frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis]
+            run = scenarios.shares(scenario_panel(assembled, basis, transfers=False, harness=band["width"]), "S2", n, seed + len(SCENARIO_RUNS), anchors, BETA)
+            if basis == "plan":
+                run["transfers"], run["excluded"] = "off", [{"row": row_id, "reason": TRANSFER_EXCLUSION} for row_id in excluded]
+            band["results"][basis] = run
     return {
         "schemaVersion": 1,
         "inputHash": scenario_hash(assembled, frozen, n=n, seed=seed),
@@ -1184,6 +1592,7 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
         "intervalInterpretation": {MEASUREMENT_STREAM: [scenarios.interval_interpretation(TB_INTERVAL_CONTRACT)]},
         "jointRoundingLaw": {"samplingIdentities": list(SAMPLING_IDENTITIES), "registeredLaws": JOINT_LAWS, "components": "every rounded record is a singleton"},
         "results": results,
+        "namedBranches": [band, CACHE_BRANCH, PRICE_RULE_BRANCH],
         "barLabels": bar_labels(assembled, frozen, seed=seed, batch=n),
     }
 
@@ -1240,6 +1649,7 @@ EVIDENCE_FILES = {
     "costCharts": ("aa/cost_charts_capture.json", "scripts/capture-aa-cost-charts.js"),
     "configurationMap": ("v3_configuration_map.json", "editorial pinning from the research capture"),
     "planRoutes": ("plan_cost_routes.json", "editorial Plan evidence registry"),
+    "priceRecords": ("price_records.json", "editorial E141 price-record registry (superseded and promotional tariffs)"),
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 

@@ -218,7 +218,7 @@ def test_terminal_bench_harness_diagnostic_reports_tau_when_defined(repo_copy, p
     edit_json(repo_copy, "scores.json", undefined_agreement)
     assert emit(repo_copy) == 0
     text = (repo_copy / "scores.md").read_text()
-    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small)." in text
+    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small); panel of 11 rows." in text
     assert re.search(r"- \*\*Group drift:\*\* estimated\.\n", text)
 
 
