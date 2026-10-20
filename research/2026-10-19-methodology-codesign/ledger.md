@@ -747,3 +747,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 65 (Kimi K3, round 11, Thinking)
 - VERDICT: NO FURTHER FEEDBACK on draft r59. Read check passed (seven parts at 01b3ed8).
+
+## Editor decisions after reviewer 66 (owner may override)
+- E186. Blocker safety (GLM High). The scenario draws keep a superseded-price row at its published record, so the scenario-supported label also requires BlockerSafe(i): no blocker can qualify at the bar and be no dearer than the candidate anywhere in its E183 hull domain. Otherwise the frequency is published with "scenario frequency passes; superseded-price blocker unresolved" and no label, and a blocker is never a candidate. Implemented (blocker_safe in bar_labels).
+- E185 amended (GLM Medium 1). A category free under both tariffs contributes zero to both valuations and is left out of the ratios. Zero demand is never inferred from zero expenditure at a zero price. The implementation already behaved this way (ratios run over categories with positive Index cost); a fixture now covers it.
+- E184 clarified (GLM Medium 2, rejected as proposed). GLM proposed requiring each reference to pass the Plan evidence's valuation check too. That would leave the Plan anchors with no references today (every Plan route is "valuation basis unverified"), and E160 deliberately builds Plan anchors from the same configurations at their displayed Plan cost so that the whole displayed Plan table stays unclipped. Shared eligibility is therefore complete cost evidence plus an E170 outcome of 1 or 2. The Plan evidence's own valuation status governs Plan interval eligibility (E138), never anchor eligibility, and E164's measured-evidence calibration shows the effect. Each freeze and release publishes a row-level anchor-eligibility table (implemented).
+
+## Reviewer 66 (GLM 5.3, round 11, Thinking) — adopted or modified
+- High (E186), Medium 1 (E185 amended), Medium 2 (E184 clarified; intersection not adopted). Read check passed at 01b3ed8.
+
+# Process change (owner, 2026-10-20)
+- Before each further Perplexity round, the same review runs inside Claude Code: Claude Sonnet 5.5 at Low, Medium, High, XHigh and Max effort, then Claude Opus 5.5 at the same five levels. Each level is repeated until it returns no further feedback, and the feedback is folded into the draft, before the next level starts. The Perplexity multi-AI round resumes only after Opus 5.5 Max has no further feedback. Convergence still requires all six Perplexity panel models to return NO FURTHER FEEDBACK on the same draft. Internal reviews are numbered I1, I2, ….

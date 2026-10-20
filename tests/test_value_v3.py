@@ -1102,3 +1102,41 @@ def test_bound_domain_checks_and_unconstructible_blockers():
     output = v.interval_outputs(world, frozen, "api")
     assert output["status"] == "unresolved" and output["blockers"] == ["a"] and "a" not in output["unevaluable"]
     assert output["reason"].startswith("a blocker's current-tariff domain cannot be constructed")
+
+
+def test_anchor_eligibility_table_names_each_exclusion():
+    record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
+    flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
+    table = {item["row"]: item for item in v.anchor_eligibility(flagged, flagged["admitted"])}
+    assert table["a"]["eligible"] is False and table["a"]["reason"] == f"valuation gate: {v.GATE_NOT_IN_FORCE}"
+    assert table["c"]["reason"] == "incomplete cost evidence" and table["b"] == {"row": "b", "completeEvidence": True, "valuationGate": v.GATE_COMPATIBLE, "eligible": True, "reason": None}
+
+
+def test_scenario_labels_never_go_to_or_past_an_unsafe_blocker(monkeypatch):
+    """E186: a qualifying, possibly cheaper blocker withholds the scenario label; a blocker is never a candidate."""
+
+    record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
+    flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
+    frozen = v.freeze(flagged, frozen_at="2026-10-19")
+    frozen["barReferences"] = [{"id": "b", "rule": "x"}]
+    monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda *args, **kwargs: {"label": True, "reading": "supported"})
+    (bar,) = v.bar_labels(flagged, frozen, seed=1, batch=20)
+    assert "a" not in bar["candidates"]
+    assert all(result == {"label": False, "reading": v.BLOCKER_UNRESOLVED} for result in bar["candidates"].values())
+    boxes = v.api_boxes(flagged)
+    reference = v.intervals.Reference("b", 0.0, 0.0)
+    assert v.blocker_safe("b", reference, boxes, {"a"}) is False  # the blocker can qualify and be cheaper
+    far = [box if box.row != "a" else v.intervals.Box("a", 1e9, 2e9, box.q_low, box.q_high, True) for box in boxes]
+    assert v.blocker_safe("b", v.intervals.Reference("b", 0.0, 0.0), far, {"a"}) is True
+    assert v.blocker_safe("b", reference, [box for box in boxes if box.row != "a"], {"a"}) is False  # no constructible domain
+    assert v.blocker_safe("b", v.intervals.Reference("a", 0.0, 0.0), far, {"a"}) is True  # the blocker as the bar, dearer than b
+
+
+def test_a_category_free_under_both_tariffs_is_left_out_of_the_bound():
+    """E185: free then and free now contributes zero to both valuations; the other ratios still bound the cost."""
+
+    free = {**PRICES, "cacheWrite": 0.0}
+    model = priced_page("a-max", 1.0, free)["model"]
+    gate = v.valuation_gate({**model, "cacheWritePrice": 0.0, "price1mOutputTokens": 15.0}, [{"id": "old", "aaSlug": "a-max", "prices": free}], "t")
+    assert gate["outcome"] == v.GATE_NOT_IN_FORCE and set(gate["bounds"]["ratios"]) == {"input", "cacheRead", "output"}
+    assert gate["bounds"]["apiCost"] == pytest.approx([1.0, 1.5])

@@ -26341,6 +26341,141 @@
           "coding-agent-index": "unidentified: the component publishes one pooled cost across its families"
         }
       },
+      "anchorEligibility": [
+        {
+          "row": "gemini-4-argon",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "gpt-6.1-sol",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "claude-sonnet-5-5",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "gpt-6-astra",
+          "completeEvidence": false,
+          "valuationGate": "compatible as captured",
+          "eligible": false,
+          "reason": "incomplete cost evidence"
+        },
+        {
+          "row": "claude-opus-5-5",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "gpt-5.6-sol",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "mimo-v2-6-pro",
+          "completeEvidence": false,
+          "valuationGate": "compatible as captured",
+          "eligible": false,
+          "reason": "incomplete cost evidence"
+        },
+        {
+          "row": "gpt-6-sol",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "grok-4.7",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "gpt-5.6-luna",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "gpt-6-luna",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "mimo-v2-6-flash",
+          "completeEvidence": false,
+          "valuationGate": "compatible as captured",
+          "eligible": false,
+          "reason": "incomplete cost evidence"
+        },
+        {
+          "row": "claude-haiku-5-5",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "gemini-3.8-flash",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "claude-opus-5",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "glm-5.3",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "deepseek-v4-flash",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "qwen3.8-max",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        },
+        {
+          "row": "deepseek-v4-pro",
+          "completeEvidence": true,
+          "valuationGate": "compatible as captured",
+          "eligible": true,
+          "reason": null
+        }
+      ],
       "sweCompanion": {
         "rule": "c_SWE = Coding Agent Index cost + Terminal-Bench 4.0 (AA Index run) cost, from published per-task costs; flagged when its ratio to the basket cost deviates by more than 50% from the panel median",
         "excludedComponents": {

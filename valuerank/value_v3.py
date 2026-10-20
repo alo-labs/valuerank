@@ -559,15 +559,23 @@ ANCHOR_POLICY = {
 MIN_ANCHOR_REFERENCES = 2
 
 
+def anchor_eligibility(assembled: dict, components: list[str]) -> list[dict]:
+    """E184: each row's anchor-reference eligibility on a workload, with the reason it is excluded."""
+
+    table = []
+    for row in assembled["rows"]:
+        complete = all((row["components"].get(component) or {}).get("completeness") == basket.COMPLETE for component in components)
+        outcome = row["valuationGate"]["outcome"]
+        reason = None if complete and outcome in GATE_SCORED else "incomplete cost evidence" if not complete else f"valuation gate: {outcome}"
+        table.append({"row": row["id"], "completeEvidence": complete, "valuationGate": outcome, "eligible": reason is None, "reason": reason})
+    return table
+
+
 def anchor_population(assembled: dict, components: list[str]) -> list[str]:
     """E160: ranked configurations with complete cost evidence on every component of a workload."""
 
-    return sorted(
-        row["id"] for row in assembled["rows"]
-        if all((row["components"].get(component) or {}).get("completeness") == basket.COMPLETE for component in components)
-        # E170/O29: a row whose AA cost is not on the price in force at V is never an anchor reference.
-        and row["valuationGate"]["outcome"] in GATE_SCORED
-    )
+    # E170/O29: a row whose AA cost is not on the price in force at V is never an anchor reference.
+    return sorted(item["row"] for item in anchor_eligibility(assembled, components) if item["eligible"])
 
 
 def freeze(assembled: dict, *, frozen_at: str) -> dict:
@@ -1023,6 +1031,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "costComponentFamily": cost_component_family(assembled, frozen, per_row),
             "subsetBridges": subset_bridges(assembled, frozen, per_row, readiness["expenditure"]),
             "basketReadiness": readiness,
+            "anchorEligibility": anchor_eligibility(assembled, assembled["admitted"]),
             "sweCompanion": cost_diagnostics.swe_companion(rows, main),
             "matchedCost": cost_diagnostics.matched_cost(rows, main),
         },
@@ -1663,16 +1672,46 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     # E147: the compiled dependency graph must be the registered kernel-check object, or the build fails.
     if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
         raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
+    blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
     labels = []
     for reference in frozen["barReferences"]:
         if reference["id"] not in members:
             labels.append({"reference": reference["id"], "status": "unevaluable", "reason": "reference outside the declared scenario panel"})
             continue
         summary = by_id[reference["id"]]["summary"]
-        candidates = intervals.cheapest_above_bar(boxes, intervals.Reference(reference["id"], summary.lower, summary.upper))["possibleCheapest"]
-        results = {candidate: scenarios.kernel_robust_cheapest(panel, candidate, reference["id"], seed, batch=batch) for candidate in candidates if candidate in members}
+        bar = intervals.Reference(reference["id"], summary.lower, summary.upper)
+        # E186: a blocker is never a candidate.
+        candidates = [item for item in intervals.cheapest_above_bar(boxes, bar)["possibleCheapest"] if item not in blocked]
+        results = {}
+        for candidate in candidates:  # interval rows are main-workload rows with a cost, so all are panel members
+            result = scenarios.kernel_robust_cheapest(panel, candidate, reference["id"], seed, batch=batch)
+            if result["label"] and not blocker_safe(candidate, bar, boxes, blocked):
+                result = {**result, "label": False, "reading": BLOCKER_UNRESOLVED}
+            results[candidate] = result
         labels.append({"reference": reference["id"], "status": "evaluated", "candidates": results})
     return labels
+
+
+BLOCKER_UNRESOLVED = "scenario frequency passes; superseded-price blocker unresolved"
+
+
+def blocker_safe(candidate: str, bar: intervals.Reference, boxes: list[intervals.Box], blocked: set) -> bool:
+    """E186: no superseded-price blocker can qualify at the bar and be no dearer than the candidate in any state.
+
+    Over independent boxes, some state has Q_b >= Q_r and C_b <= C_i exactly when b's best quality reaches the bar's
+    lowest and b's lowest cost reaches the candidate's highest; a blocker without a constructible box is never safe.
+    """
+
+    by_row = {box.row: box for box in boxes}
+    if any(row_id not in by_row for row_id in blocked):
+        return False
+    own = by_row[candidate]
+    for row_id in blocked:
+        box = by_row[row_id]
+        qualifies = row_id == bar.row or box.q_high >= bar.q_low
+        if qualifies and box.c_low <= own.c_high:
+            return False
+    return True
 
 
 def attach_scenarios(scored: dict, document: dict | None, expected_hash: str) -> dict:
