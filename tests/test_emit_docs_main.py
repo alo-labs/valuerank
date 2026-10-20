@@ -177,6 +177,10 @@ def evaluated_plan_intervals(document):
     bar["confirmedCheapest"] = None
     bar["possibleCheapest"] = ["gpt-6-luna", "deepseek-v4-flash"]
     plan["bars"].append({**copy.deepcopy(bar), "status": "unresolved"})
+    # E183: an O29 blocker competes without a label of its own.
+    plan["blockers"] = ["grok-4.7"]
+    plan["frontier"]["grok-4.7"] = {"status": "no interval label"}
+    bar["rows"]["grok-4.7"] = {"status": "no interval label"}
     v3["intervals"]["plan"] = plan
 
 
@@ -192,6 +196,8 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores
     assert "Status unresolved." in scores
+    assert "Competing without a label (AA cost on a price not in force, O29): Grok 4.7 (xhigh)." in plan_sentence
+    assert "Competing without a label (AA cost on a price not in force, O29, E183): Grok 4.7 (xhigh)." in scores
 
 
 def test_policy_applications_are_printed_only_when_recorded(repo_copy, pinned_clock):

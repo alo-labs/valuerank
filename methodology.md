@@ -184,7 +184,8 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
-| score swing gate (> 5 points without cause) | vacuous | first v3 release: no previous v3 release to compare |
+| score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
+| anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | passed | every cohort row has a pinned identity |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
 | scenario outputs current (E72) | passed | scenario input hash matches the scored inputs |

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import runpy
 import sys
@@ -1046,3 +1047,58 @@ def test_release_publishes_gate_metering_and_source_registry_facts():
     gdpval = next(item for item in output["sourceIntervals"] if item["leaf"] == "gdpval")
     assert gdpval["status"] == "published, not captured" and gdpval["level"].startswith("not stated")
     assert output["sourceDates"]["LiveBench 2.0"]["release"] == "2026-10-14"
+
+
+def test_a_migration_without_two_eligible_references_is_deferred():
+    """E184: a newly admissible component stays pending when its workload could not be anchored; no hold."""
+
+    result, frozen = scored()
+    charts = documents()["costCharts"]
+    charts["evaluations"][0]["rows"] = [{"model": "A (max)", "totalUsd": 9, "declinedTasks": False}, {"model": "B (max)", "totalUsd": 30, "declinedTasks": False}]
+    mapping = documents()["configurationMap"]
+    mapping["rows"]["b"]["frontiercode"] = "B (max)"
+    gained = documents(costCharts=charts, configurationMap=mapping)
+    assert "frontiercode" in v.assemble(CONFIGURATIONS, gained, release_day=DAY)["admitted"]
+    # Both full rows pass the valuation gate: an ordinary migration, scored only after a new freeze.
+    ordinary = v.assemble_for_release(CONFIGURATIONS, gained, frozen, release_day=DAY)
+    assert ordinary["mainWorkload"] != frozen["mainWorkload"] and ordinary["deferred"] == []
+    # b's AA cost cannot be valued: one eligible reference, so the migration is deferred.
+    unpriced = copy.deepcopy(gained)
+    unpriced["snapshot"]["pages"][1]["model"]["price1mOutputTokens"] = None
+    deferred = v.assemble_for_release(CONFIGURATIONS, unpriced, frozen, release_day=DAY)
+    assert deferred["mainWorkload"] == frozen["mainWorkload"] and deferred["deferred"] == [{"component": "frontiercode", "reason": v.DEFERRED_MIGRATION}]
+    output = v.score(deferred, frozen)
+    manifest = {item["rule"]: item for item in output["manifest"]}
+    assert manifest["anchor migration (E184)"]["status"] == "fired" and output["deferredComponents"][0]["component"] == "frontiercode"
+    assert output["gates"]["hold"] is False
+    # An unchanged workload is returned as assembled.
+    assert v.assemble_for_release(CONFIGURATIONS, documents(), frozen, release_day=DAY)["mainWorkload"] == result["mainWorkload"]
+
+
+def test_bound_domain_checks_and_unconstructible_blockers():
+    """E185: a newly priced category leaves no bound; a zero price in force leaves the Plan bound open; both unresolve."""
+
+    model = priced_page("a-max", 1.0, PRICES)["model"]
+    free_write = {"id": "free", "aaSlug": "a-max", "prices": {**PRICES, "cacheWrite": 0.0}}
+    priced = {**model, "price1mOutputTokens": 15.0, "intelligenceIndexCost": {**model["intelligenceIndexCost"], "cacheWrite": 0.0}}
+    gate = v.valuation_gate({**priced, "canonicalIntelligenceIndexTokenCount": {"input": 110e6, "output": 2e6}}, [free_write], "t")
+    assert gate["outcome"] == v.GATE_NOT_IN_FORCE and gate["bounds"] == {"status": v.BOUND_UNAVAILABLE}
+    assert v.blocker_domain(gate, "api") is None
+    # Cache reads became free: r = 0 for them, so the API bound starts at 0 and the Plan bound has no upper end.
+    zero_now = v.valuation_gate({**model, "cacheHitPrice": 0.0, "price1mOutputTokens": 15.0}, [{"id": "old", "aaSlug": "a-max", "prices": PRICES}], "t")
+    assert zero_now["bounds"]["apiCost"] == pytest.approx([0.0, 1.5]) and zero_now["bounds"]["planCost"][1] is None
+    assert v.blocker_domain(zero_now, "api") is None
+    assert v.displayed_prices({**model, "price1mOutputTokens": 0.0}) is None and v.displayed_prices({**model, "cacheHitPrice": True}) is None
+    assert v.reconciles(model, {**PRICES, "output": 0.0}) is False and v.reconciles(model, {**PRICES, "cacheRead": 0.0}) is False
+    open_plan = {"bounds": {"status": "available", "apiCost": [0.0, 1.5], "planCost": [0.0, None]}}
+    assert v.blocker_domain(open_plan, "api") is None and v.blocker_domain(open_plan, "plan") is None
+    assert v.blocker_domain({"bounds": {"status": "available", "apiCost": [0.5, 1.5], "planCost": [0.3, 3.0]}}, "plan") == (0.3, 3.0)
+    record = {"id": "free", "aaSlug": "a-max", "prices": {**PRICES, "cacheWrite": 0.0}}
+    page_free = priced_page("a-max", 1.0, {**PRICES, "cacheWrite": 0.0}, price1mOutputTokens=15.0)
+    world = gated_world(page_free, [record])
+    rows = {row["id"]: row for row in world["rows"]}
+    assert rows["a"]["valuationGate"]["bounds"] == {"status": v.BOUND_UNAVAILABLE}
+    frozen = v.freeze(gated_world(priced_page("a-max", 1.0, PRICES), []), frozen_at="2026-10-19")
+    output = v.interval_outputs(world, frozen, "api")
+    assert output["status"] == "unresolved" and output["blockers"] == ["a"] and "a" not in output["unevaluable"]
+    assert output["reason"].startswith("a blocker's current-tariff domain cannot be constructed")

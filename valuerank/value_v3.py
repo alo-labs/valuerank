@@ -258,6 +258,7 @@ GATE_REVALUED = "compatible after evidenced revaluation"
 GATE_NOT_IN_FORCE = "AA's applied price not in force at V (O29)"
 GATE_UNVERIFIED = "valuation basis unverified"
 GATE_SCORED = (GATE_COMPATIBLE, GATE_REVALUED)
+BOUND_UNAVAILABLE = "unavailable: a category priced at zero when AA valued the cost is priced at V (E185)"
 NOT_IN_FORCE_FLAGS = {"superseded": "AA cost at superseded price", "promotional": "AA cost at standard price during a promotion"}
 
 
@@ -266,7 +267,9 @@ def displayed_prices(page: dict) -> dict | None:
 
     prices = {"input": page.get("price1mInputTokens"), "cacheRead": page.get("cacheHitPrice"), "output": page.get("price1mOutputTokens")}
     prices["cacheWrite"] = page.get("cacheWritePrice") if page.get("cacheWritePrice") is not None else prices["input"]
-    return prices if all(anchor_math.scoreable(value) for value in prices.values()) else None
+    # A cache category may be free (E185); uncached input and output must carry a price.
+    valid = all(isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value >= 0 for value in prices.values())
+    return prices if valid and prices["input"] > 0 and prices["output"] > 0 else None
 
 
 def reconciles(page: dict, prices: dict) -> bool | None:
@@ -279,9 +282,16 @@ def reconciles(page: dict, prices: dict) -> bool | None:
     cost, tokens = page.get("intelligenceIndexCost") or {}, page.get("canonicalIntelligenceIndexTokenCount") or {}
     if any(cost.get(field) is None for field in (*INPUT_CATEGORIES.values(), "output")) or not tokens.get("input") or not tokens.get("output"):
         return None
+    if prices["output"] <= 0:
+        return False  # a priced output cost cannot come from a free output tariff
+    if any(prices[key] == 0 and cost[field] > 0 for key, field in INPUT_CATEGORIES.items()):
+        return False
     output = cost["output"] / prices["output"] * 1e6
-    inputs = sum(cost[field] / prices[key] for key, field in INPUT_CATEGORIES.items()) * 1e6
-    return abs(output - tokens["output"]) <= VALUATION_TOLERANCE * tokens["output"] and abs(inputs - tokens["input"]) <= VALUATION_TOLERANCE * tokens["input"]
+    inputs = sum(cost[field] / prices[key] for key, field in INPUT_CATEGORIES.items() if prices[key] > 0) * 1e6
+    # E185: a free input category hides its tokens, so the priced ones may only fall short of the input total.
+    free = any(prices[key] == 0 for key in INPUT_CATEGORIES)
+    input_ok = inputs <= tokens["input"] * (1 + VALUATION_TOLERANCE) if free else abs(inputs - tokens["input"]) <= VALUATION_TOLERANCE * tokens["input"]
+    return abs(output - tokens["output"]) <= VALUATION_TOLERANCE * tokens["output"] and input_ok
 
 
 def valuation_gate(page: dict, records: list[dict], captured_at: str | None) -> dict:
@@ -305,17 +315,18 @@ def valuation_gate(page: dict, records: list[dict], captured_at: str | None) -> 
     for record in records:
         if not reconciles(page, record["prices"]):
             continue
+        applied = {key: record[key] for key in ("id", "tariffStatus", "effectiveFrom", "effectiveUntil") if key in record}
+        flagged = {**gate, "outcome": GATE_NOT_IN_FORCE, "appliedRecord": applied, "flag": NOT_IN_FORCE_FLAGS[record.get("tariffStatus", "superseded")],
+                   "reason": "AA's cost reconciles with a registered price record that is not in force at V"}
+        # E185: a free category that is now priced may carry demand no published total bounds.
+        if any(record["prices"][key] == 0 and in_force[key] > 0 for key in in_force):
+            return {**flagged, "bounds": {"status": BOUND_UNAVAILABLE}}
         ratios = {key: in_force[key] / record["prices"][key] for key in active}
         low, high = min(ratios.values()), max(ratios.values())
-        applied = {key: record[key] for key in ("id", "tariffStatus", "effectiveFrom", "effectiveUntil") if key in record}
         if high - low <= VALUATION_TOLERANCE * high:
             return {**gate, "outcome": GATE_REVALUED, "factor": high, "appliedRecord": applied, "reason": "every priced category moved by one common factor; C' = k C for any demand mix"}
-        return {
-            **gate, "outcome": GATE_NOT_IN_FORCE, "appliedRecord": applied, "flag": NOT_IN_FORCE_FLAGS[record.get("tariffStatus", "superseded")],
-            # C'/C and M'/M are demand- and consumption-weighted means of the same ratios.
-            "bounds": {"ratios": ratios, "apiCost": [low, high], "planCost": [low / high, high / low]},
-            "reason": "AA's cost reconciles with a registered price record that is not in force at V",
-        }
+        # C'/C and M'/M are demand- and consumption-weighted means of the same ratios; a zero price in force has no finite Plan upper end.
+        return {**flagged, "bounds": {"status": "available", "ratios": ratios, "apiCost": [low, high], "planCost": [low / high, high / low if low > 0 else None]}}
     return {**gate, "outcome": GATE_UNVERIFIED, "flag": GATE_UNVERIFIED, "reason": "AA's cost reconciles with neither its displayed prices nor a registered price record"}
 
 
@@ -350,7 +361,7 @@ def _summary_json(summary: q.QualitySummary) -> dict:
     }
 
 
-def assemble(configurations: list[dict], documents: dict, *, release_day: date) -> dict:
+def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
     """Evidence, admission, basket costs and Plan routes for every ranked configuration (no anchors yet)."""
 
     pages = {page["model"]["slug"]: page["model"] for page in documents["snapshot"]["pages"]}
@@ -400,12 +411,37 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date) 
     ids = [row["id"] for row in rows]
     admission = basket.admission_panel({row["id"]: row["components"] for row in rows}, ids)
     admitted = admission["admitted"]
+    # E184: a deferred migration keeps the frozen admitted set; the newly admissible components stay pending.
+    deferred = [component for component in admitted if pinned is not None and component not in pinned]
+    admitted = [component for component in admitted if component not in deferred]
     main = basket.workload_hash(admitted)
     for row in rows:
         row["cost"] = basket.row_cost(row["components"], admitted)
         selected = row["routeSelection"]["selected"]
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
-    return {"rows": rows, "admission": admission, "admitted": admitted, "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"]}
+    return {
+        "rows": rows, "admission": admission, "admitted": admitted, "deferred": [{"component": component, "reason": DEFERRED_MIGRATION} for component in deferred],
+        "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"],
+    }
+
+
+DEFERRED_MIGRATION = "anchor migration unavailable — insufficient valuation-eligible references (E184)"
+
+
+def assemble_for_release(configurations: list[dict], documents: dict, frozen: dict, *, release_day: date) -> dict:
+    """E184: assemble, deferring a main-workload migration whose new workload could not be anchored.
+
+    A component that gained admission since the anchors were frozen stays pending, and the release publishes on
+    the frozen workload, when the new workload has fewer than two valuation-eligible anchor references; any other
+    workload change is an ordinary migration (run `freeze`).
+    """
+
+    assembled = assemble(configurations, documents, release_day=release_day)
+    frozen_components = frozen["workloads"][frozen["mainWorkload"]]["components"]
+    gained = set(assembled["admitted"]) > set(frozen_components)
+    if assembled["mainWorkload"] != frozen["mainWorkload"] and gained and len(anchor_population(assembled, assembled["admitted"])) < MIN_ANCHOR_REFERENCES:
+        return assemble(configurations, documents, release_day=release_day, pinned=frozen_components)
+    return assembled
 
 
 def workload_catalog(assembled: dict) -> dict:
@@ -447,13 +483,23 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
     """
 
     gate, summary = row["valuationGate"], row["summary"]
-    if gate["outcome"] == GATE_UNVERIFIED:
+    if gate["outcome"] == GATE_UNVERIFIED or (gate["outcome"] == GATE_NOT_IN_FORCE and blocker_domain(gate, basis) is None):
         return None
     provisional = summary.provisional
     if gate["outcome"] == GATE_NOT_IN_FORCE:
-        ratio_low, ratio_high = gate["bounds"]["apiCost" if basis == "api" else "planCost"]
+        ratio_low, ratio_high = blocker_domain(gate, basis)
         low, high, provisional = low * min(1.0, ratio_low), high * max(1.0, ratio_high), True
     return intervals.Box(row["id"], low, high, summary.lower, summary.upper, provisional)
+
+
+def blocker_domain(gate: dict, basis: str) -> tuple[float, float] | None:
+    """E183/E185: the current-tariff ratio range a blocker's box is widened by, or None when it cannot be constructed."""
+
+    bounds = gate["bounds"]
+    if bounds["status"] != "available":
+        return None
+    low, high = bounds["apiCost" if basis == "api" else "planCost"]
+    return (low, high) if high is not None and low > 0 else None
 
 
 def api_boxes(assembled: dict) -> list[intervals.Box]:
@@ -603,12 +649,17 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str) -> dict:
     boxes = api_boxes(assembled) if basis == "api" else plan_boxes(assembled)
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
     blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
+    unconstructible = sorted(row["id"] for row in assembled["rows"] if row["id"] in blocked and blocker_domain(row["valuationGate"], basis) is None)
     universe = sorted(box.row for box in boxes if box.row not in blocked)
     blockers = sorted(box.row for box in boxes if box.row in blocked)
     unevaluable = sorted(row["id"] for row in assembled["rows"] if row["id"] not in universe and row["id"] not in blockers)
     if not boxes:
         reason = "no row has FullCost and an identified M_W (E61/E67)" if basis == "plan" else "no row has FullCost on the main workload"
         return {"universe": [], "unevaluable": unevaluable, "status": intervals.UNEVALUABLE, "reason": reason}
+    if unconstructible:
+        unevaluable = [row_id for row_id in unevaluable if row_id not in unconstructible]
+        return {"universe": universe, "blockers": sorted(set(blockers) | set(unconstructible)), "unevaluable": unevaluable, "status": intervals.UNRESOLVED,
+                "reason": "a blocker's current-tariff domain cannot be constructed (E183, E185): " + ", ".join(unconstructible)}
     frontier, bars = intervals.frontier(boxes), _bar_results(boxes, assembled, frozen)
     # E170/O29: a blocker competes over its hull but earns no interval label of its own.
     for row_id in blockers:
@@ -916,7 +967,9 @@ def score(assembled: dict, frozen: dict) -> dict:
         _rule("partial component flag (E37)", "fired" if any(row["cost"]["partialComponents"] for row in rows) else "vacuous", "AA declined- or missing-task markers"),
         _rule("route dominance filter (E88)", "fired" if any(row["routeSelection"]["dominated"] for row in rows) else "vacuous", "certifiably dearer routes set aside"),
         _rule("Plan exploratory label (E61)", "fired" if yield_["exploratory"] else "passed", "fewer than half of Plan rows have an identified M_W"),
-        _rule("score swing gate (> 5 points without cause)", "vacuous", "first v3 release: no previous v3 release to compare"),
+        _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
+        _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
+              "deferred: " + ", ".join(item["component"] for item in assembled["deferred"]) if assembled.get("deferred") else "no main-workload migration deferred"),
         _rule("configuration map coverage", "fired" if not all(row["configurationMapped"] for row in rows) else "passed",
               "cohort rows without a pinned agent/chart configuration identity: " + ", ".join(sorted(row["id"] for row in rows if not row["configurationMapped"])) if not all(row["configurationMapped"] for row in rows) else "every cohort row has a pinned identity"),
         _rule("quality clipping audit (E110)", "fired" if any(item["anchorPosition"] != "inside" for row in rows for item in row["evidence"]["clipAudit"]) else "passed", "saturation disclosed; domain violations block the build"),
@@ -936,6 +989,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         },
         "mainWorkload": main,
         "admission": {key: value for key, value in assembled["admission"].items() if key != "matrices"},
+        "deferredComponents": assembled.get("deferred", []),
         "admissionMatrices": assembled["admission"]["matrices"],
         "workloads": {
             workload: {"components": entry["components"], "role": entry["role"], "anchors": entry["anchors"], "anchorStatus": entry["anchorStatus"]}
@@ -1693,8 +1747,8 @@ def scenario_seed(release_day: date) -> int:
 def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:
     """The v3 section of scores.json for this release."""
 
-    assembled = assemble(configurations, load_documents(data), release_day=release_day)
     frozen = json.loads((data / FROZEN_FILE).read_text())
+    assembled = assemble_for_release(configurations, load_documents(data), frozen, release_day=release_day)
     scored = score(assembled, frozen)
     scored["evidenceBundle"] = evidence_bundle(data)
     scenario_path = data / SCENARIO_FILE
@@ -1711,12 +1765,13 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
     args = parser.parse_args(argv)
     scores = json.loads((data / "scores.json").read_text())
     release_day = utcnow().date()
-    assembled = assemble(configurations_from_scores(scores), load_documents(data), release_day=release_day)
+    configurations, documents = configurations_from_scores(scores), load_documents(data)
     if args.command == "freeze":
-        document = freeze(assembled, frozen_at=release_day.isoformat())
+        document = freeze(assemble(configurations, documents, release_day=release_day), frozen_at=release_day.isoformat())
         target = data / FROZEN_FILE
     else:
         frozen = json.loads((data / FROZEN_FILE).read_text())
+        assembled = assemble_for_release(configurations, documents, frozen, release_day=release_day)
         document = run_scenarios(assembled, frozen, n=args.scenarios, seed=scenario_seed(release_day))
         target = data / SCENARIO_FILE
     target.write_text(json.dumps(document, indent=2, ensure_ascii=False, default=_json_default) + "\n")

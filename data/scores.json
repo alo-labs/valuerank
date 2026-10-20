@@ -7747,6 +7747,7 @@
       "ranked": 19,
       "requiredPanelSize": 13
     },
+    "deferredComponents": [],
     "admissionMatrices": {
       "exactCostAvailable": {
         "gemini-4-argon": {
@@ -27475,9 +27476,14 @@
         "detail": "fewer than half of Plan rows have an identified M_W"
       },
       {
-        "rule": "score swing gate (> 5 points without cause)",
+        "rule": "score swing gate (E177)",
         "status": "vacuous",
         "detail": "first v3 release: no previous v3 release to compare"
+      },
+      {
+        "rule": "anchor migration (E184)",
+        "status": "vacuous",
+        "detail": "no main-workload migration deferred"
       },
       {
         "rule": "configuration map coverage",

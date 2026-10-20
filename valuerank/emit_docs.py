@@ -270,8 +270,8 @@ def interval_sentences(facts):
             sentences.append(f"{label} basis: interval outputs not evaluated ({result.get('reason', result['status'])}).")
             continue
         frontier = result["frontier"]
-        definite = [row_id for row_id, item in frontier.items() if item["definite"] == "certified"]
-        possible = [row_id for row_id, item in frontier.items() if item["possible"] == "certified" and item["definite"] != "certified"]
+        definite = [row_id for row_id, item in frontier.items() if item.get("definite") == "certified"]
+        possible = [row_id for row_id, item in frontier.items() if item.get("possible") == "certified" and item.get("definite") != "certified"]
         text = (
             f"{label} basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere "
             f"inside the published record's precision and missing-evidence bounds) is {facts.labels(definite)}; "
@@ -279,6 +279,8 @@ def interval_sentences(facts):
         )
         if result["unevaluable"]:
             text += f" Not evaluable on this workload: {facts.labels(result['unevaluable'])}."
+        if result.get("blockers"):
+            text += f" Competing without a label (AA cost on a price not in force, O29): {facts.labels(result['blockers'])}."
         for bar in result.get("bars", []):
             reference = facts.label(bar["reference"]["id"])
             if bar["status"] != "certified":
@@ -750,15 +752,19 @@ def interval_tables(facts):
             [facts.label(row_id), item["possible"], item["definite"], facts.label(item["definiteCounterexample"]) if item["definiteCounterexample"] else DASH,
              facts.labels(item["possibleBlockedBy"]) if item["possibleBlockedBy"] else DASH]
             for row_id, item in result["frontier"].items()
+            if "possible" in item
         ]
-        text = f"**{label} basis, main workload: frontier.** Not evaluable: {facts.labels(result['unevaluable'])}.\n\n"
+        text = f"**{label} basis, main workload: frontier.** Not evaluable: {facts.labels(result['unevaluable'])}."
+        if result.get("blockers"):
+            text += f" Competing without a label (AA cost on a price not in force, O29, E183): {facts.labels(result['blockers'])}."
+        text += "\n\n"
         text += markdown_table(["Configuration", "Possible frontier", "Definite frontier", "Definite counterexample", "Possible frontier blocked by"], rows)
         for bar in result.get("bars", []):
             reference = facts.label(bar["reference"]["id"])
             text += f"\n\n**{label} basis: cheapest at or above {reference}'s quality** ({bar['reference']['rule']}). Status {bar['status']}"
             if bar["status"] == "certified":
                 text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
-                bar_rows = [[facts.label(row_id), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items()]
+                bar_rows = [[facts.label(row_id), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
                 text += markdown_table(["Configuration", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows)
             else:
                 text += "."
