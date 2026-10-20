@@ -271,7 +271,7 @@ def test_changelog_document(bundle):
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
     assert page["headline"]["api"] == "MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality."
-    assert page["headline"]["plan"] == "Claude Sonnet 5.5 leads the Plan ranking at 61.1; Gemini 4 Argon leads on quality."
+    assert page["headline"]["plan"] == "Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); Gemini 4 Argon leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
     assert len(page["models"]) == 19 and page["dimensions"] == bundle.rankings["dimensions"]
     assert len(page["chart"]["api"]) == 19 and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}

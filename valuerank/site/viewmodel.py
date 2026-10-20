@@ -736,8 +736,10 @@ def index_page(bundle: Bundle) -> dict:
     headline = {}
     for basis, picks in rankings["picks"].items():
         value = by_slug[picks["value"]["slug"]]
-        # O17 and the provisional rule: a leader scored on a subset workload or with provisional quality says so.
-        caveats = [label for flag, label in ((value["cost"]["subset"], "subset cost"), (value["coverage"]["provisional"], "provisional quality")) if flag]
+        # O17, the provisional rule and E167: a leader scored on a subset workload, with provisional quality or, on the
+        # Plan basis, through an owner-named transfer says so.
+        transfer = basis == "plan" and (value["cost"]["route"] or {}).get("grade") == "assumption"
+        caveats = [label for flag, label in ((value["cost"]["subset"], "subset cost"), (value["coverage"]["provisional"], "provisional quality"), (transfer, "owner-named transfer")) if flag]
         lead = f"{value['name']} leads the {rankings['bases'][basis]['label']} at {value['overall'][basis]:.1f}" + (f" ({', '.join(caveats)})" if caveats else "")
         headline[basis] = f"{lead} and also leads on quality." if value is quality else f"{lead}; {quality['name']} leads on quality."
     return {

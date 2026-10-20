@@ -734,20 +734,37 @@ def test_core_plan_streams_run_with_transfers_off():
 
 
 def test_plan_amount_is_typed_by_what_the_measurement_establishes():
-    """E166: the amount M x F_gross is capacity only when the measurement establishes it; fallbacks publish none."""
+    """E166/E168: an amount is capacity only when the measurement establishes it, and M x F reproduces it only within one object."""
 
     route = {"id": "r", "valueMultiple": 10.0, "planPriceUsd": 20, "additionalCashUsd": 5}
     base = {"route": route, "grade": "controlled", "identification": "unidentified", "valuation": "unverified", "donorRouteId": None}
-    capacity = v.plan_amount({**base, "measurementCapacityStatus": "capacity established on the measurement workload"})
-    assert capacity["amountKind"] == "measured-workload capacity" and capacity["amountUsd"] == pytest.approx(250.0)
+    established = {"measurementCapacityStatus": "capacity established on the measurement workload"}
+    capacity = v.plan_amount({**base, **established})
+    assert capacity["amountKind"] == "measured-workload capacity" and capacity["amountTarget"] == "measured-workload capacity"
+    assert capacity["amountUsd"] == pytest.approx(250.0) and capacity["derivation"] == "measurement identity: U_obs = M_obs x F_obs"
     assert capacity["grossCashUsd"] == 25.0 and capacity["additionalCashUsd"] == 5.0 and capacity["feePeriod"] == "month"
+    assert capacity["cashObjectId"] == "r:month cash" and capacity["measurementObjectId"] == "r" and capacity["capacitySolutionId"] is None
     assert capacity["interpretationLabel"] == "measured-workload capacity, API-priced USD per month" and capacity["valuationStatus"] == "unverified"
+    recorded = v.plan_amount({**base, **established, "route": {**route, "apiEquivalentUsd": 240.0, "measurementWorkload": "w-meas"}, "measurementObjectId": "m1"})
+    assert recorded["amountUsd"] == 240.0 and recorded["derivation"] == "measurement record: its recorded numerator U_obs = M_obs x F_obs (kind not recorded)" and recorded["workload"] == "w-meas"
+    projected = v.plan_amount({**base, **established, "route": {**route, "apiEquivalentUsd": 240.0, "numeratorKind": "workload_capacity_projection"}})
+    assert projected["derivation"].endswith("(workload capacity projection)")
+    assert recorded["measurementObjectId"] == "m1"
     observed = v.plan_amount({**base, "grade": "reports", "measurementCapacityStatus": "eligible delivered consumption observed, capacity not established"})
-    assert observed["amountKind"] == "observed eligible consumption (capacity not established)"
-    transfer = v.plan_amount({**base, "grade": "assumption", "donorRouteId": "donor", "measurementCapacityStatus": "capacity established on the measurement workload"})
+    assert observed["amountKind"] == "observed eligible consumption (capacity not established)" and observed["amountTarget"] == "measured-workload consumption"
+    transfer = v.plan_amount({**base, **established, "grade": "assumption", "donorRouteId": "donor"})
     assert transfer["amountKind"] == "assumed API-equivalent consumption (owner-named transfer)" and transfer["donorRouteId"] == "donor"
-    identified = v.plan_amount({**base, "identification": "point-identified", "route": {**route, "feePeriod": "week"}})
-    assert identified["amountKind"] == "identified target-workload capacity" and identified["workload"] == "the scored workload W" and identified["feePeriod"] == "week"
+    assert transfer["amountUsd"] == pytest.approx(250.0) and transfer["derivation"].startswith("authorised assumption")
+    identified = {**base, "identification": "point-identified"}
+    fixed = v.plan_amount({**identified, "route": {**route, "paymentRule": "fixed", "feePeriod": "week", "capacitySolutionId": "s1"}}, "w-main")
+    assert fixed["amountKind"] == "identified target-workload capacity" and fixed["workload"] == "scored workload w-main" and fixed["feePeriod"] == "week"
+    assert fixed["amountUsd"] == pytest.approx(250.0) and fixed["derivation"].startswith("valid multiplication") and fixed["capacitySolutionId"] == "s1"
+    solver = v.plan_amount({**identified, "route": {**route, "targetCapacityUsd": 100.0}}, "w-main")
+    assert solver["amountUsd"] == 100.0 and solver["derivation"] == "capacity solver projection (U_W*)"
+    # A target multiple times another object's cash is never published as capacity (consumption-dependent payment).
+    hybrid = v.plan_amount({**identified, "route": {**route, "paymentRule": "consumption-dependent"}}, "w-main")
+    assert hybrid["amountUsd"] is None and hybrid["derivation"] == v.NO_TARGET_LINEAGE
     unpriced = v.plan_amount({**base, "route": {"id": "x", "valueMultiple": 1.5}})
     assert unpriced["amountUsd"] is None and unpriced["grossCashUsd"] is None and unpriced["amountKind"] == "observed eligible consumption (capacity not established)"
+    assert v.plan_amount({**base, "grade": "assumption", "route": {"id": "x", "valueMultiple": 1.5}})["amountUsd"] is None
     assert v.plan_amount(None) is None

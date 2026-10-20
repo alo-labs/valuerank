@@ -10,7 +10,7 @@
 
 ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **25%** cost score plus **75%** benchmark quality. Cost is the contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost): Artificial Analysis' (AA) published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of 11 benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted. No Value Multiple is yet identified on the basket itself (0 of 19 rows), so the Plan ranking is labelled exploratory.
 
-Claude Sonnet 5.5 leads the Plan ranking at 61.1; MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality.
+Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality.
 
 | Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|

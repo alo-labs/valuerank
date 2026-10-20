@@ -650,3 +650,9 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Reviewer 55 (Gemini 3.8 Flash, round 9, Thinking) — adopted
 - Medium (E166) and Low (E167). The first attempt stopped at Perplexity's tool-call budget after parts 1 and 2 (Gemini stopped as instructed); the retry, with a note to spend tool calls only on the seven parts, passed the read check.
 
+## Editor decisions after reviewer 56 (owner may override)
+- E168. Amount lineage: E166 multiplied the selected multiple by the route's recorded cash, which for an identified target-workload multiple under consumption-dependent payment mixes the target solution's multiple with the measurement's cash (verified: measured U = 60 at cash 20, target U* = 100 at cash 50, M_W = 2, product 40 matches neither). Every amount now records amount_target, workload, measurement object, capacity solution, cash object, purchase policy and derivation; M × F reproduces an amount only within one object (the measurement record, or fixed cash for a target solution); a target-workload capacity comes from the capacity solver (or fixed cash) and is otherwise not published. No published amount changes in v1 (no route is identified on the basket, and every recorded numerator equals multiple × fee); raw-data.md lists each amount's lineage.
+
+## Reviewer 56 (GPT-6.1 Sol, round 10, Thinking) — adopted
+- H1 (E168). Read check passed.
+

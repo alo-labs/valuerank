@@ -526,6 +526,25 @@ Route evidence as of 2026-10-08. Full allocation regimes, workloads and notes ar
 | Claude Max 5x $100 · common Claude assumption | Claude Opus 5, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Haiku 5.5, Claude Sonnet 5.5 | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Max 20x $200 · common Claude assumption | Claude Opus 5, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Haiku 5.5, Claude Sonnet 5.5 | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 
+### Plan amounts and their lineage
+
+Each routed row's amount with what it measures, how it was derived and which objects it comes from (E166, E168); API-fallback rows have none.
+
+| Configuration | Amount (USD per fee period) | Measures | Derivation | Workload | Cash object | Measurement object |
+|---|---:|---|---|---|---|---|
+| GPT-6.1 Sol (max) | $5,386 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| Claude Sonnet 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
+| GPT-6 Astra (xhigh) | $162 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-plus-common-semianalysis-assumption:month cash | chatgpt-plus-common-semianalysis-assumption |
+| Claude Opus 5.5 (max) | $1,178 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | claude-pro-opus55-semianalysis:month cash | claude-pro-opus55-semianalysis |
+| GPT-5.6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| MiMo-V2.6-Pro | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
+| GPT-6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| GPT-5.6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| GPT-6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| MiMo-V2.6-Flash | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
+| Claude Haiku 5.5 (xhigh) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
+| Claude Opus 5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
+
 ## Evidence bundle
 
 Bundle hash `15f19ba84998746ebec56dcf98f74ea25a757867b71c05e9575483982b3aea84`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.

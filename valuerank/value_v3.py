@@ -910,18 +910,37 @@ def _quality_agreement(rows: list[dict]) -> dict:
     return diagnostics.agreement(observed, independent, label="quality agreement (matched-panel sensitivity)")
 
 
-# E166: what the selected measurement's API-priced amount M x F_gross measures, so a displayed amount never reads
-# as capacity it does not establish. API-fallback rows publish no Plan amount.
+# E166: what the selected measurement's API-priced amount measures, so a displayed amount never reads as capacity it
+# does not establish. API-fallback rows publish no Plan amount.
 AMOUNT_KINDS = {
     "transfer": "assumed API-equivalent consumption (owner-named transfer)",
     "identified": "identified target-workload capacity",
     "capacity": "measured-workload capacity",
     "observed": "observed eligible consumption (capacity not established)",
 }
+AMOUNT_TARGETS = {"transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
+NO_TARGET_LINEAGE = "not derivable: the target solution's cash lineage is not established"
 
 
-def plan_amount(selected: dict | None) -> dict | None:
-    """E166: the selected measurement's amount M x F_gross with its kind, cash components and statuses."""
+def _amount_derivation(kind: str, route: dict, multiple: float, gross: float) -> tuple[float | None, str]:
+    """E168: an amount and how it was derived; M x F reproduces an amount only within one object."""
+
+    if kind == "transfer":
+        return (multiple * gross if math.isfinite(gross) else None), "authorised assumption: the donor's multiple times this route's cash"
+    if kind == "identified":
+        if route.get("targetCapacityUsd") is not None:
+            return float(route["targetCapacityUsd"]), "capacity solver projection (U_W*)"
+        if route.get("paymentRule") == "fixed" and math.isfinite(gross):
+            return multiple * gross, "valid multiplication: fixed cash, U_W* = M_W x F_0"
+        return None, NO_TARGET_LINEAGE
+    if route.get("apiEquivalentUsd") is not None:
+        kind_of_numerator = str(route.get("numeratorKind", "kind not recorded")).replace("_", " ")
+        return float(route["apiEquivalentUsd"]), f"measurement record: its recorded numerator U_obs = M_obs x F_obs ({kind_of_numerator})"
+    return (multiple * gross if math.isfinite(gross) else None), "measurement identity: U_obs = M_obs x F_obs"
+
+
+def plan_amount(selected: dict | None, workload: str | None = None) -> dict | None:
+    """E166/E168: the selected measurement's amount with its kind, cash, statuses and lineage."""
 
     if selected is None:
         return None
@@ -936,14 +955,21 @@ def plan_amount(selected: dict | None) -> dict | None:
         kind = "observed"
     gross = plan_routes.gross_cash(route)
     period = route.get("feePeriod", "month")
+    amount, derivation = _amount_derivation(kind, route, plan_routes.comparison_multiple(route), gross)
     return {
         "amountKind": AMOUNT_KINDS[kind],
-        "amountUsd": plan_routes.comparison_multiple(route) * gross if math.isfinite(gross) else None,
+        "amountTarget": AMOUNT_TARGETS[kind],
+        "amountUsd": amount,
+        "derivation": derivation,
         "feePeriod": period,
         "subscriptionCashUsd": route.get("planPriceUsd"),
         "additionalCashUsd": float(route.get("additionalCashUsd") or 0.0),
         "grossCashUsd": gross if math.isfinite(gross) else None,
-        "workload": "the scored workload W" if kind == "identified" else "the route's measurement workload",
+        "workload": f"scored workload {workload}" if kind == "identified" else route.get("measurementWorkload", "the route's measurement workload"),
+        "measurementObjectId": selected.get("measurementObjectId", route["id"]),
+        "capacitySolutionId": route.get("capacitySolutionId") if kind == "identified" else None,
+        "cashObjectId": f"{route['id']}:{period} cash",
+        "purchasePolicyId": route.get("purchasePolicy", "subscription fee for the fee period, no additional cash declared"),
         "capacityStatus": selected.get("measurementCapacityStatus"),
         "valuationStatus": selected.get("valuation"),
         "donorRouteId": selected.get("donorRouteId"),
@@ -984,7 +1010,7 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
             # Strict JSON: an unknown fee (infinite gross cash) is written as null.
             "comparisonTuples": {key: [item if math.isfinite(item) else None for item in value] for key, value in selection["tuples"].items()},
             "selectedIdentification": selected["identification"] if selected else None,
-            "amount": plan_amount(selected),
+            "amount": plan_amount(selected, row["cost"]["workload"]),
             "admission": [
                 {
                     "routeId": item["route"]["id"], "case": item["case"], "officialDisplayEligible": item["officialDisplayEligible"],

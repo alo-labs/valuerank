@@ -73,7 +73,7 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert "Cheapest at or above GPT-6 Luna (max)'s quality: GPT-6 Luna (max) (confirmed)." in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
-    assert "Claude Sonnet 5.5 leads the Plan ranking at 61.1; MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality." in readme
+    assert "Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality." in readme
     assert "SciCode and AA-LCR once at API rates" in readme
 
 

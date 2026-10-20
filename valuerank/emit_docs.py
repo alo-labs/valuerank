@@ -304,7 +304,8 @@ def leaders(facts):
     parts = []
     for basis, label in (("plan", "Plan"), ("api", "API")):
         leader = min((entry for entry in facts.ranked if entry["rank"][basis] is not None), key=lambda entry: (entry["rank"][basis], entry["name"]))
-        caveats = [word for word, present in (("subset cost", leader["cost"]["subset"]), ("provisional quality", leader["coverage"]["provisional"])) if present]
+        transfer = basis == "plan" and (leader["cost"]["route"] or {}).get("grade") == "assumption"
+        caveats = [word for word, present in (("subset cost", leader["cost"]["subset"]), ("provisional quality", leader["coverage"]["provisional"]), ("owner-named transfer", transfer)) if present]
         parts.append(f"{leader['name']} leads the {label} ranking at {leader['overall'][basis]:.1f}" + (f" ({', '.join(caveats)})" if caveats else ""))
     quality = min(facts.ranked, key=lambda entry: (entry["qualityRank"], entry["name"]))
     return "; ".join(parts) + f"; {quality['name']} leads on quality."
@@ -858,6 +859,12 @@ def raw_data(facts):
          md_link("Source", route.get("sourceUrl")) if route.get("sourceUrl") else "User assumption"]
         for route in facts.routes_document["routes"]
     ]
+    amount_rows = [
+        [facts.label(row["id"]), usd(row["plan"]["amount"]["amountUsd"], 0), row["plan"]["amount"]["amountTarget"], row["plan"]["amount"]["derivation"],
+         row["plan"]["amount"]["workload"], row["plan"]["amount"]["cashObjectId"], row["plan"]["amount"]["measurementObjectId"]]
+        for row in v3["rows"]
+        if row["plan"]["amount"]
+    ]
     bundle = v3["evidenceBundle"]
     bundle_rows = [[item["key"], f"`{item['artifact']}`", f"`{item['sha256']}`", item.get("capturedAt") or DASH, item.get("extractor") or DASH] for item in bundle["artifacts"]]
     deepswe = facts.deepswe["configurations"]
@@ -909,6 +916,12 @@ Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the score is 
 Route evidence as of {facts.routes_document['asOf']}. Full allocation regimes, workloads and notes are in [data/plan_cost_routes.json](data/plan_cost_routes.json).
 
 {markdown_table(['Plan', 'Eligible configurations', 'Monthly fee', 'Value Multiple', 'Evidence', 'Source model', 'Source date', 'Source'], route_rows, numeric={2, 3})}
+
+### Plan amounts and their lineage
+
+Each routed row's amount with what it measures, how it was derived and which objects it comes from (E166, E168); API-fallback rows have none.
+
+{markdown_table(['Configuration', 'Amount (USD per fee period)', 'Measures', 'Derivation', 'Workload', 'Cash object', 'Measurement object'], amount_rows, numeric={1})}
 
 ## Evidence bundle
 
