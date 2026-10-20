@@ -19,6 +19,8 @@ def test_number_formatters():
     assert ed.share(0.5734) == "57.3%"
     assert ed.names(["a", "b"]) == "a, b"
     assert ed.names([]) == "none"
+    assert ed.series([]) == "none" and ed.series(["a"]) == "a"
+    assert ed.series(["a", "b"]) == "a and b" and ed.series(["a", "b", "c"]) == "a, b and c"
 
 
 def test_markdown_table_aligns_numeric_columns_and_escapes_cells():

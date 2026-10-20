@@ -95,6 +95,12 @@ def names(values):
     return ", ".join(values) if values else "none"
 
 
+def series(values):
+    """``a``, ``a and b``, ``a, b and c``."""
+
+    return " and ".join([", ".join(values[:-1]), values[-1]]) if len(values) > 1 else names(values)
+
+
 def markdown_table(headers, rows, numeric=()):
     """A Markdown table; ``numeric`` holds the indices of right-aligned columns. Pipes and newlines in cells are escaped."""
 
@@ -282,9 +288,20 @@ def run_label(run):
 # --- README ------------------------------------------------------------------------------------
 
 
+def leaders(facts):
+    """One sentence naming each basis' leader (with its subset and provisional caveats) and the quality leader."""
+
+    parts = []
+    for basis, label in (("plan", "Plan"), ("api", "API")):
+        leader = min((entry for entry in facts.ranked if entry["rank"][basis] is not None), key=lambda entry: (entry["rank"][basis], entry["name"]))
+        caveats = [word for word, present in (("subset cost", leader["cost"]["subset"]), ("provisional quality", leader["coverage"]["provisional"])) if present]
+        parts.append(f"{leader['name']} leads the {label} ranking at {leader['overall'][basis]:.1f}" + (f" ({', '.join(caveats)})" if caveats else ""))
+    quality = min(facts.ranked, key=lambda entry: (entry["qualityRank"], entry["name"]))
+    return "; ".join(parts) + f"; {quality['name']} leads on quality."
+
+
 def readme(facts):
     v3, method = facts.v3, facts.method
-    headline = viewmodel.index_page(facts.bundle)["headline"]
     admitted = [item["label"] for item in method["basket"]["admitted"]]
     yield_ = v3["identificationYield"]
     table_rows = []
@@ -320,9 +337,9 @@ def readme(facts):
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality. Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running {', '.join(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality. Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
 
-{headline['plan']} {headline['api']}
+{leaders(facts)}
 
 {markdown_table(['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)', 'Plan cost (USD per basket run)', 'Plan route', 'Flags'], table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
 
@@ -341,7 +358,7 @@ Scenario shares by stream, diagnostics and the release gates are in [scores.md](
 {model_inclusion_markdown(facts.inclusion)}
 ## How v3 scores value
 
-- **Cost is the SDLC basket.** {v3['basketVersion']}: AA's published cost of running {', '.join(admitted)} once at API rates, in USD per basket run. Pending capture: {names([item['label'] for item in method['basket']['pending']])}. v2 used AA's cost to run the whole Intelligence Index per Index point.
+- **Cost is the SDLC basket.** {v3['basketVersion']}: AA's published cost of running the {series(admitted)} once at API rates, in USD per basket run. Pending capture: {names([item['label'] for item in method['basket']['pending']])}. v2 used AA's cost to run the whole Intelligence Index per Index point.
 - **Cost keeps its magnitude.** The cost score is 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100, against anchors frozen with anchor version `{v3['anchorVersion']}`. A model entering or leaving the cohort does not move another model's score. At the API anchors, doubling cost costs {method['exchangeRate']['api']['valuePointsPerCostDoubling']:.2f} value points, which {method['exchangeRate']['api']['qualityPointsPerCostDoubling']:.2f} quality points offset.
 - **Quality is measured, not ranked.** Each of the {len(q.LEAVES)} leaves is placed on fixed 0–100 anchors from its raw value, so quality no longer depends on which other models are ranked. A missing leaf is left out of that configuration's mean, its coverage is shown, and low coverage marks the row provisional.
 - **Plan value is route evidence.** Each subscription route carries its Value Multiple, evidence grade (controlled measurement, concordant reports, owner-named assumption) and identification status; the Plan ranking is labelled exploratory until multiples are identified on the basket.
