@@ -718,3 +718,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 62 (GPT-6.1 Sol, round 11, Thinking) — adopted
 - High (E183) and Medium (E182 amended). Read check passed. The prompt no longer lists raw URLs.
+
+## Editor decision after reviewer 63 (owner may override)
+- E184. Anchor availability after the valuation gate (Sonnet High). E160's two-reference minimum, E170's anchor exclusion and O29's no-hold rule are reconciled from existing rules, so the owner is not asked:
+  - A reference must pass the gate (outcome 1 or 2) at its freeze.
+  - A frozen anchor keeps its references when one later fails the gate (E160: evidence lost after freezing never rebuilds an anchor).
+  - A subset workload short of references takes E160's existing unavailable state.
+  - A main-workload migration that would be short of references is deferred. The release publishes on the current anchor version and admitted set, and the would-be component stays pending with a stated reason. The release is not held (O29), and old-workload anchors are never relabelled.
+  Sonnet's owner question (publish without a ranking, or delay, when no prior anchor exists) needs no answer. The v3 main workload is frozen, so only a migration can lack a prior anchor, and deferral keeps the ranking (the owner's core requirement). Reaching the case at all needs 12 or more of the 13 or more admission-panel rows to fail the gate.
+
+## Reviewer 63 (Claude Sonnet 5.5, round 11, Thinking) — adopted
+- High (E184). Read check accepted with a note: part 7's quoted words stop six words before its end ("…of ranked rows jointly"), a counting slip. The review cites part 7's Governance content, and the part is 14,000 characters, far below the connector's truncation point.
