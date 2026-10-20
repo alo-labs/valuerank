@@ -100,6 +100,10 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert [row[6] for row in rows] == [f"{row['api']['costScore']:.2f}" for row in by_plan]
     assert len(table_rows(text, "| Model | Reasons")) == 12
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy and S1M run with owner-named transfers off (E167): Claude Haiku 5.5 (xhigh)," in text
+    assert "| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |" in text
+    assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
+    assert "| Gemini 4 Argon (high) | — | — | — |" in text
     assert "| GPT-6 Luna (max) | GPT-6 Luna (max) | supported under all registered role-group kernel checks |" in text
 
 

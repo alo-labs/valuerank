@@ -497,16 +497,15 @@ def _scenario_doc(v3: dict, model_id: str) -> dict:
         return {"status": scenarios.get("status"), "api": [], "plan": []}
     result = {"status": "current"}
     for basis in ("api", "plan"):
-        result[basis] = [
-            {
-                "stratum": run["stratum"],
-                "kernel": "endpoint-heavy" if run["alternative"] else "primary",
-                "targetProfile": run.get("targetProfile"),
-                **{key: run["rows"][model_id][key]["share"] for key in ("top1", "top3", "frontier")},
-            }
-            for run in scenarios["results"][basis]
-            if model_id in run["rows"]
-        ]
+        result[basis] = []
+        for run in scenarios["results"][basis]:
+            base = {"stratum": run["stratum"], "kernel": "endpoint-heavy" if run["alternative"] else "primary", "targetProfile": run.get("targetProfile")}
+            # E167: a transfer-dependent row is declared unevaluable in the transfers-off Plan streams.
+            reason = next((item["reason"] for item in run.get("excluded", []) if item["row"] == model_id), None)
+            if model_id in run["rows"]:
+                result[basis].append({**base, "unevaluable": None, **{key: run["rows"][model_id][key]["share"] for key in ("top1", "top3", "frontier")}})
+            elif reason:
+                result[basis].append({**base, "unevaluable": reason, "top1": None, "top3": None, "frontier": None})
     return result
 
 
@@ -540,6 +539,7 @@ def _model_doc(source: dict, entry: dict, row: dict | None, inputs: dict, curren
             "components": _component_docs(row),
             "aaCostCaveat": row.get("aaCostCaveat") if row else None,
             "selectionReason": row["plan"]["selectionReason"] if row else None,
+            "planAmount": row["plan"]["amount"] if row else None,
         },
         "plans": _plan_rows(row, routes),
         "scenarios": _scenario_doc(v3, model_id),

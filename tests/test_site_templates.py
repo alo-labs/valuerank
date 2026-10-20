@@ -425,3 +425,19 @@ def test_plans_page_states_the_claude_shared_plan_assumption(env):
     policy = dom.one("details", id="evidence-policy")
     text = policy.all_text()
     assert "Claude models" in text and page["plansJson"]["policy"]["claudeApplication"] in text
+
+
+def test_model_page_types_the_plan_amount_and_marks_unevaluable_streams(pages, env):
+    """E166: the selected route's amount is labelled by what it measures; E167: transfers-off streams read unevaluable."""
+
+    _, dom, page = pages["model"]
+    routes = dom.one("section", id="plan-routes").all_text()
+    assert "$2,140" in routes and "per month" in routes and "assumed API-equivalent consumption (owner-named transfer)" in routes
+    assert "r0-donor" in routes and "not a promise of what your own usage will reach" in routes
+    scenarios = dom.one("section", id="scenarios").all_text()
+    assert "Unevaluable: owner-named transfer: unevaluable with transfers off" in scenarios
+    _, bare = render_with(env, "model", lambda p: p["cost"].update(planAmount=None))
+    assert "Selected route's amount" not in bare.one("section", id="plan-routes").all_text()
+    _, unpriced = render_with(env, "model", lambda p: p["cost"]["planAmount"].update(amountUsd=None, grossCashUsd=None, donorRouteId=None))
+    text = unpriced.one("section", id="plan-routes").all_text()
+    assert "fee not established" in text and "per month" not in text and "transferred from" not in text

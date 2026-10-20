@@ -91,6 +91,8 @@ Rules:
 
 `dimensions` lists every retained dimension in weight order, including missing ones (`value: null`, `grade: "missing"`), so the page can show the gap. `history` comes from `data/ranking_history_v1.5.json` plus the current release; versions without a record are omitted, never inferred.
 
+`cost.planAmount` types the selected route's amount (methodology v3, E166): `amountKind` (measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer, or identified target-workload capacity), `amountUsd` (the multiple times `grossCashUsd`), `feePeriod`, `subscriptionCashUsd`, `additionalCashUsd`, `grossCashUsd`, `workload`, `capacityStatus`, `valuationStatus`, `donorRouteId` and `interpretationLabel`. It is `null` for API-fallback and unranked rows. `scenarios` holds the scenario `status` and, per basis, one entry per stream run with `stratum`, `kernel`, `targetProfile`, `top1`, `top3`, `frontier` and `unevaluable`. `unevaluable` is a reason when the row is excluded from that run (an owner-named transfer in the transfers-off Plan streams, E167), and the shares are then `null`.
+
 ### `site/data/plans.json`
 
 Routes, their evidence and the full candidate comparison (all 28 models): `{ "asOf", "policy": {…evidencePolicy text…}, "routes": [ {"id", "provider", "planLabel", "planFeeUsd", "valueMultiple", "apiEquivalentUsd", "grade", "evidenceLabel", "sourceModel", "sourceUrl", "sourceDate", "modelSlugs": [], "notes"} ], "candidates": [ {"slug", "name", "rank": {"api","plan"}, "intelligenceIndex": {…}, "apiUsd", "planUsdPerRun", "planUsdPerPoint", "fallback", "routeId"} ], "workedExample": {"slugs": ["claude-opus-5-5", "gpt-6-1-sol"]} }`.

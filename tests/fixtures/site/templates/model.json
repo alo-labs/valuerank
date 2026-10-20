@@ -115,7 +115,20 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "only remaining eligible route"
+    "selectionReason": "only remaining eligible route",
+    "planAmount": {
+      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+      "amountUsd": 2140.0,
+      "feePeriod": "month",
+      "subscriptionCashUsd": 200,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 200.0,
+      "workload": "the route's measurement workload",
+      "capacityStatus": "capacity established on the measurement workload",
+      "valuationStatus": "unverified",
+      "donorRouteId": "r0-donor",
+      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+    }
   },
   "plans": [
     {
@@ -562,7 +575,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "top1": 0.25,
         "top3": 0.9,
-        "frontier": 0.5
+        "frontier": 0.5,
+        "unevaluable": null
       }
     ],
     "plan": [
@@ -572,7 +586,17 @@
         "targetProfile": "published-record reporting precision",
         "top1": 0.6,
         "top3": 1.0,
-        "frontier": 1.0
+        "frontier": 1.0,
+        "unevaluable": null
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       }
     ]
   },

@@ -353,11 +353,7 @@
           "top3": 0.0,
           "frontier": 0.5533
         },
-        "plan": {
-          "top1": 0.9776,
-          "top3": 1.0,
-          "frontier": 0.9847
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Premium"
@@ -470,9 +466,9 @@
           "frontier": 0.0
         },
         "plan": {
-          "top1": 0.0,
-          "top3": 0.9992,
-          "frontier": 0.0
+          "top1": 1.0,
+          "top3": 1.0,
+          "frontier": 1.0
         }
       },
       "flags": [],
@@ -587,7 +583,7 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.7526,
+          "top3": 1.0,
           "frontier": 1.0
         }
       },
@@ -704,11 +700,7 @@
           "top3": 0.0373,
           "frontier": 0.1798
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.1713,
-          "frontier": 1.0
-        }
+        "plan": null
       },
       "flags": [
         "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
@@ -944,11 +936,7 @@
           "top3": 0.0,
           "frontier": 0.0445
         },
-        "plan": {
-          "top1": 0.0224,
-          "top3": 0.0769,
-          "frontier": 0.1219
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Premium"
@@ -1063,11 +1051,7 @@
           "top3": 0.0485,
           "frontier": 0.115
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Premium"
@@ -1180,11 +1164,7 @@
           "top3": 0.8873,
           "frontier": 1.0
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.6856
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Near-Budget"
@@ -1299,11 +1279,7 @@
           "top3": 0.367,
           "frontier": 0.5054
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.683
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Mid-Range"
@@ -1418,11 +1394,7 @@
           "top3": 0.0022,
           "frontier": 0.0876
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Expensive"
@@ -1647,8 +1619,8 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.4376
+          "top3": 0.8068,
+          "frontier": 0.4525
         }
       },
       "flags": [],
@@ -1873,7 +1845,7 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0,
+          "top3": 0.1429,
           "frontier": 0.0
         }
       },
@@ -1982,7 +1954,7 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0,
+          "top3": 0.0503,
           "frontier": 0.0
         }
       },

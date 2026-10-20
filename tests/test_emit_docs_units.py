@@ -112,3 +112,10 @@ def test_model_inclusion_markdown_with_no_data_renders_only_the_rules():
     assert text.startswith("### Model inclusion")
     assert "Frontier families" not in text and "Near-frontier families" not in text and "footnote" not in text
     assert "Near-frontier rule" in text
+
+
+def test_plan_amount_text_names_the_kind_and_the_donor():
+    amount = {"amountUsd": 1178.0, "feePeriod": "month", "amountKind": "measured-workload capacity", "donorRouteId": None}
+    assert ed.plan_amount_text(amount) == "$1,178 per month: measured-workload capacity"
+    assert ed.plan_amount_text({**amount, "amountUsd": None, "donorRouteId": "d"}) == "fee not established: measured-workload capacity from d"
+    assert ed.plan_amount_text(None) == "—"

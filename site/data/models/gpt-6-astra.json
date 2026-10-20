@@ -314,7 +314,20 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "higher evidence grade"
+    "selectionReason": "higher evidence grade",
+    "planAmount": {
+      "amountKind": "measured-workload capacity",
+      "amountUsd": 162.0,
+      "feePeriod": "month",
+      "subscriptionCashUsd": 20,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 20.0,
+      "workload": "the route's measurement workload",
+      "capacityStatus": "capacity established on the measurement workload",
+      "valuationStatus": "unverified",
+      "donorRouteId": null,
+      "interpretationLabel": "measured-workload capacity, API-priced USD per month"
+    }
   },
   "plans": [
     {

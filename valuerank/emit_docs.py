@@ -187,6 +187,15 @@ def short_flags(entry, row):
     return ", ".join(flags) or DASH
 
 
+def plan_amount_text(amount):
+    """E166: the selected route's amount with its kind; none for API-fallback rows."""
+
+    if amount is None:
+        return DASH
+    value = f"{usd(amount['amountUsd'], 0)} per {amount['feePeriod']}: " if amount["amountUsd"] is not None else "fee not established: "
+    return value + amount["amountKind"] + (f" from {amount['donorRouteId']}" if amount["donorRouteId"] else "")
+
+
 def route_text(entry):
     route = entry["cost"]["route"]
     if route is None:
@@ -511,7 +520,7 @@ Coverage is the observed share of quality weight. A row is **provisional** when 
 
 ## Plan basis
 
-Plan cost = basket API cost ÷ the Value Multiple of the selected subscription route, at full utilisation. A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged.
+Plan cost = basket API cost ÷ the Value Multiple of the selected subscription route, at full utilisation. A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged. Each Plan row publishes its fee period, the cash paid and the selected multiple's amount (multiple × gross cash), typed by what the measurement establishes (E166): measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer (with its donor), or identified target-workload capacity; API-fallback rows publish none.
 
 **Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today {yield_['pointIdentified']} of {yield_['rows']} Plan rows are point-identified and {yield_['setIdentified']} set-identified, so the Plan ranking is {'labelled exploratory' if yield_['exploratory'] else 'not labelled exploratory'}. A measured-only Plan view (`{measured['id']}`) re-runs the selection over {measured['admission']}, without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
@@ -530,7 +539,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 {streams}
 
-S1 also runs with the endpoint-heavy kernel. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
+S1 also runs with the endpoint-heavy kernel. On the Plan basis the core streams (S1, S2 and S1M) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
 
 {not_quantified}
 
@@ -599,7 +608,7 @@ def scores_markdown(facts):
         row = facts.row(entry)
         plan = row["plan"]
         plan_rows.append([
-            configuration_label(row, facts.names), route_text(entry), plan.get("selectedIdentification") or DASH,
+            configuration_label(row, facts.names), route_text(entry), plan_amount_text(plan["amount"]), plan.get("selectedIdentification") or DASH,
             usd(row["planScore"]["costUsd"]), "; ".join(plan["flags"]) or DASH, plan.get("selectionReason") or DASH,
         ])
     measured = v3["measuredOnlyPlanView"]
@@ -636,7 +645,9 @@ USD at API rates for the exact configuration; "—" marks a component without an
 
 ## Plan route selection
 
-{markdown_table(['Configuration', 'Selected route', 'Identification', 'Plan cost (USD per basket run)', 'Flags', 'Selection reason'], plan_rows, numeric={3})}
+The Plan amount is the selected multiple times the cash paid for the fee period (E166), typed by what the measurement establishes; it is not capacity unless it says so.
+
+{markdown_table(['Configuration', 'Selected route', 'Plan amount', 'Identification', 'Plan cost (USD per basket run)', 'Flags', 'Selection reason'], plan_rows, numeric={4})}
 
 ### Measured-only Plan view
 
@@ -731,9 +742,16 @@ def scenario_tables(facts):
     parts = [f"Frequencies over {scenarios['scenarios']:,} scenarios per run (seed {scenarios['seed']}); streams are defined in [methodology.md](methodology.md#uncertainty-outputs)."]
     for basis, label in (("api", "API"), ("plan", "Plan")):
         runs = scenarios["results"][basis]
+        row_ids = sorted({row_id for run in runs for row_id in run["panel"]}, key=facts.label)
+        excluded = {item["row"] for run in runs for item in run.get("excluded", [])}
+        if excluded:
+            off = [run_label(run) for run in runs if run.get("excluded")]
+            parts.append(
+                f"{label} streams {series(off)} run with owner-named transfers off (E167): {facts.labels(sorted(excluded, key=facts.label))} "
+                "depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost."
+            )
         for event, event_label in (("top1", "rank 1"), ("top3", "rank 3 or better"), ("frontier", "on the frontier")):
-            row_ids = runs[0]["panel"]
-            rows = [[facts.label(row_id)] + [share(run["rows"][row_id][event]["share"]) for run in runs] for row_id in row_ids]
+            rows = [[facts.label(row_id)] + [share(run["rows"][row_id][event]["share"]) if row_id in run["rows"] else DASH for run in runs] for row_id in row_ids]
             parts.append(f"### {label} basis: {event_label}\n\n" + markdown_table(["Configuration"] + [run_label(run) for run in runs], rows, numeric=set(range(1, len(runs) + 1))))
     labels = []
     for item in scenarios["barLabels"]:

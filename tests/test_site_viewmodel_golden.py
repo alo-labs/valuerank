@@ -193,6 +193,23 @@ def test_unranked_and_subset_documents(bundle):
     assert glm["plans"] == [] and glm["cost"]["fallback"] == "api" and glm["cost"]["planUsd"] == glm["cost"]["apiUsd"]
     grok = bundle.models["grok-4-7"]  # one user report is diagnostic only (O11), so the row falls back to API cost
     assert grok["cost"]["fallback"] == "api" and [plan["officialDisplayEligible"] for plan in grok["plans"]] == [False]
+    assert glm["cost"]["planAmount"] is None and unranked["cost"]["planAmount"] is None
+
+
+def test_transfer_rows_are_unevaluable_in_the_transfers_off_plan_streams(bundle):
+    """E167: the core Plan streams run with owner-named transfers off; E166: the selected amount says what it measures."""
+
+    sonnet = bundle.models["claude-sonnet-5-5"]
+    plan = {(run["stratum"], run["kernel"]): run for run in sonnet["scenarios"]["plan"]}
+    assert plan[("S0", "primary")]["unevaluable"] is None and plan[("S0", "primary")]["top1"] is not None
+    for key in (("S1", "primary"), ("S2", "primary"), ("S1", "endpoint-heavy"), ("S1M", "primary")):
+        assert plan[key]["unevaluable"].startswith("owner-named transfer") and plan[key]["top1"] is None
+    assert all(run["unevaluable"] is None for run in sonnet["scenarios"]["api"])
+    assert sonnet["cost"]["planAmount"]["amountKind"] == "assumed API-equivalent consumption (owner-named transfer)"
+    assert sonnet["cost"]["planAmount"]["amountUsd"] == pytest.approx(58.9 * 20) and sonnet["cost"]["planAmount"]["donorRouteId"] == "claude-pro-opus55-semianalysis"
+    opus = bundle.models["claude-opus-5-5"]
+    assert all(run["unevaluable"] is None for run in opus["scenarios"]["plan"]) and len(opus["scenarios"]["plan"]) == 5
+    assert opus["cost"]["planAmount"]["amountKind"] == "measured-workload capacity"
 
 
 def test_model_history_and_frontier_notes(bundle):

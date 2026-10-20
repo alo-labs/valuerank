@@ -709,3 +709,45 @@ def test_rounded_records_need_a_registered_joint_law():
     with pytest.raises(ValueError, match=r"no registered joint rounding law \(E154\) for the rounded-record components \[\['a', 'b', 'c'\]\]"):
         v.rounding_components(["a", "b", "c", "d"], (("a", "b"), ("b", "c")))
     assert v.JOINT_LAWS == {"singleton": "independent uniform within the reporting interval (arcsine alternative)"} and v.SAMPLING_IDENTITIES == ()
+
+
+def test_core_plan_streams_run_with_transfers_off():
+    """E167: a transfer-dependent row is unevaluable in S1, S2 and S1M on the Plan basis; S0 keeps the displayed record."""
+
+    routes = documents()["planRoutes"]
+    routes["routes"][0].update(valueMultipleKind="user_assumption", evidenceClass="user_assumption")
+    result, frozen = scored(planRoutes=routes)
+    rows = {row["id"]: row for row in result["rows"]}
+    assert v.transfer_dependent(rows["a"]) and not v.transfer_dependent(rows["b"]) and not v.transfer_dependent(rows["c"])
+    assert [item.row for item in v.scenario_panel(result, "plan")] == ["a", "b"]
+    assert [item.row for item in v.scenario_panel(result, "plan", transfers=False)] == ["b"]
+    assert [item.row for item in v.scenario_panel(result, "api", transfers=False)] == [item.row for item in v.scenario_panel(result, "api")]
+    assert v.transfers_on("S0") and not any(v.transfers_on(stratum) for stratum in ("S1", "S2", "S1M"))
+    document = v.run_scenarios(result, frozen, n=50, seed=3)
+    runs = {(run["stratum"], run["alternative"]): run for run in document["results"]["plan"]}
+    assert runs[("S0", False)]["transfers"] == "on (the displayed record)" and runs[("S0", False)]["excluded"] == [] and "a" in runs[("S0", False)]["rows"]
+    for key in (("S1", False), ("S2", False), ("S1", True), ("S1M", False)):
+        assert runs[key]["transfers"] == "off" and runs[key]["excluded"] == [{"row": "a", "reason": v.TRANSFER_EXCLUSION}]
+        assert list(runs[key]["rows"]) == ["b"]
+    assert all("transfers" not in run and "excluded" not in run for run in document["results"]["api"])
+    assert document["inputHash"] != v.run_scenarios(*scored(), n=50, seed=3)["inputHash"]
+
+
+def test_plan_amount_is_typed_by_what_the_measurement_establishes():
+    """E166: the amount M x F_gross is capacity only when the measurement establishes it; fallbacks publish none."""
+
+    route = {"id": "r", "valueMultiple": 10.0, "planPriceUsd": 20, "additionalCashUsd": 5}
+    base = {"route": route, "grade": "controlled", "identification": "unidentified", "valuation": "unverified", "donorRouteId": None}
+    capacity = v.plan_amount({**base, "measurementCapacityStatus": "capacity established on the measurement workload"})
+    assert capacity["amountKind"] == "measured-workload capacity" and capacity["amountUsd"] == pytest.approx(250.0)
+    assert capacity["grossCashUsd"] == 25.0 and capacity["additionalCashUsd"] == 5.0 and capacity["feePeriod"] == "month"
+    assert capacity["interpretationLabel"] == "measured-workload capacity, API-priced USD per month" and capacity["valuationStatus"] == "unverified"
+    observed = v.plan_amount({**base, "grade": "reports", "measurementCapacityStatus": "eligible delivered consumption observed, capacity not established"})
+    assert observed["amountKind"] == "observed eligible consumption (capacity not established)"
+    transfer = v.plan_amount({**base, "grade": "assumption", "donorRouteId": "donor", "measurementCapacityStatus": "capacity established on the measurement workload"})
+    assert transfer["amountKind"] == "assumed API-equivalent consumption (owner-named transfer)" and transfer["donorRouteId"] == "donor"
+    identified = v.plan_amount({**base, "identification": "point-identified", "route": {**route, "feePeriod": "week"}})
+    assert identified["amountKind"] == "identified target-workload capacity" and identified["workload"] == "the scored workload W" and identified["feePeriod"] == "week"
+    unpriced = v.plan_amount({**base, "route": {"id": "x", "valueMultiple": 1.5}})
+    assert unpriced["amountUsd"] is None and unpriced["grossCashUsd"] is None and unpriced["amountKind"] == "observed eligible consumption (capacity not established)"
+    assert v.plan_amount(None) is None

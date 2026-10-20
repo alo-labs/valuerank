@@ -910,6 +910,47 @@ def _quality_agreement(rows: list[dict]) -> dict:
     return diagnostics.agreement(observed, independent, label="quality agreement (matched-panel sensitivity)")
 
 
+# E166: what the selected measurement's API-priced amount M x F_gross measures, so a displayed amount never reads
+# as capacity it does not establish. API-fallback rows publish no Plan amount.
+AMOUNT_KINDS = {
+    "transfer": "assumed API-equivalent consumption (owner-named transfer)",
+    "identified": "identified target-workload capacity",
+    "capacity": "measured-workload capacity",
+    "observed": "observed eligible consumption (capacity not established)",
+}
+
+
+def plan_amount(selected: dict | None) -> dict | None:
+    """E166: the selected measurement's amount M x F_gross with its kind, cash components and statuses."""
+
+    if selected is None:
+        return None
+    route = selected["route"]
+    if selected["grade"] == "assumption":
+        kind = "transfer"
+    elif selected["identification"] in plan_routes.IDENTIFIED:
+        kind = "identified"
+    elif selected.get("measurementCapacityStatus") == "capacity established on the measurement workload":
+        kind = "capacity"
+    else:
+        kind = "observed"
+    gross = plan_routes.gross_cash(route)
+    period = route.get("feePeriod", "month")
+    return {
+        "amountKind": AMOUNT_KINDS[kind],
+        "amountUsd": plan_routes.comparison_multiple(route) * gross if math.isfinite(gross) else None,
+        "feePeriod": period,
+        "subscriptionCashUsd": route.get("planPriceUsd"),
+        "additionalCashUsd": float(route.get("additionalCashUsd") or 0.0),
+        "grossCashUsd": gross if math.isfinite(gross) else None,
+        "workload": "the scored workload W" if kind == "identified" else "the route's measurement workload",
+        "capacityStatus": selected.get("measurementCapacityStatus"),
+        "valuationStatus": selected.get("valuation"),
+        "donorRouteId": selected.get("donorRouteId"),
+        "interpretationLabel": f"{AMOUNT_KINDS[kind]}, API-priced USD per {period}",
+    }
+
+
 def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
     selection = row["routeSelection"]
     selected = selection["selected"]
@@ -943,6 +984,7 @@ def _row_json(row: dict, scores: dict, ranks: dict) -> dict:
             # Strict JSON: an unknown fee (infinite gross cash) is written as null.
             "comparisonTuples": {key: [item if math.isfinite(item) else None for item in value] for key, value in selection["tuples"].items()},
             "selectedIdentification": selected["identification"] if selected else None,
+            "amount": plan_amount(selected),
             "admission": [
                 {
                     "routeId": item["route"]["id"], "case": item["case"], "officialDisplayEligible": item["officialDisplayEligible"],
@@ -1019,7 +1061,25 @@ def _cost_kernel(row: dict, cost: float) -> scenarios.Kernel:
     return scenarios.Kernel("uniform-sum", (exact * ratio, *terms), "endpoint-heavy")
 
 
-def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False) -> list[scenarios.RowInputs]:
+# E167: the core scenario branches run with owner-named transfers off. On the Plan basis a row whose selected route is
+# a transfer is unevaluable there (selected-evidence removal: never reselected, never replaced by API cost; the
+# measured-only view answers reselection). S0 describes the displayed record, transfers included.
+TRANSFER_EXCLUSION = "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+
+
+def transfers_on(stratum: str) -> bool:
+    """E167: only S0, the displayed record's reporting precision, keeps owner-named transfers."""
+
+    return stratum == "S0"
+
+
+def transfer_dependent(row: dict) -> bool:
+    """A row whose selected Plan route is an owner-named transfer (API-fallback rows carry no grade)."""
+
+    return row["plan"].get("grade") == "assumption"
+
+
+def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, transfers: bool = True) -> list[scenarios.RowInputs]:
     """The declared panel for one basis (E96): rows with a cost on the main workload, in a fixed order.
 
     With ``measurement`` (the E162 stream), a leaf whose source documents a 95%
@@ -1032,6 +1092,8 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False) ->
     for row in assembled["rows"]:
         cost = _basis_cost(row, basis)
         if row["cost"]["workload"] != assembled["mainWorkload"] or not anchor_math.scoreable(cost):
+            continue
+        if basis == "plan" and not transfers and transfer_dependent(row):
             continue
         observations = row["evidence"]["observations"]
         leaves = {key: _kernel(value.low, value.high, value.z) for key, value in observations.items()}
@@ -1052,15 +1114,16 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
         "seed": seed,
         "anchors": {basis: frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis] for basis in BASES},
         "panels": {
-            f"{basis}{'-measurement' if measurement else ''}": [
+            f"{basis}{'-measurement' if measurement else ''}{'' if transfers else '-transfers-off'}": [
                 {
                     "row": item.row, "provisional": item.provisional, "cost": [item.cost.family, list(item.cost.params)],
                     "leaves": {key: [kernel.family, list(kernel.params), kernel.target] for key, kernel in sorted(item.leaves.items())},
                 }
-                for item in scenario_panel(assembled, basis, measurement=measurement)
+                for item in scenario_panel(assembled, basis, measurement=measurement, transfers=transfers)
             ]
             for basis in BASES
             for measurement in (False, True)
+            for transfers in (True, False)
         },
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
@@ -1070,13 +1133,20 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
     """Per-basis, per-stratum scenario shares with the published seed and the input hash."""
 
     results = {}
+    excluded = sorted(
+        row["id"] for row in assembled["rows"]
+        if row["cost"]["workload"] == assembled["mainWorkload"] and anchor_math.scoreable(_basis_cost(row, "plan")) and transfer_dependent(row)
+    )
     for basis in BASES:
-        panels = {False: scenario_panel(assembled, basis), True: scenario_panel(assembled, basis, measurement=True)}
         anchors = frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis]
-        results[basis] = [
-            scenarios.shares(panels[stratum == MEASUREMENT_STREAM], stratum, n, seed + index, anchors, BETA, alternative=alternative)
-            for index, (stratum, alternative) in enumerate(SCENARIO_RUNS)
-        ]
+        results[basis] = []
+        for index, (stratum, alternative) in enumerate(SCENARIO_RUNS):
+            panel = scenario_panel(assembled, basis, measurement=stratum == MEASUREMENT_STREAM, transfers=transfers_on(stratum))
+            run = scenarios.shares(panel, stratum, n, seed + index, anchors, BETA, alternative=alternative)
+            if basis == "plan":
+                run["transfers"] = "on (the displayed record)" if transfers_on(stratum) else "off"
+                run["excluded"] = [] if transfers_on(stratum) else [{"row": row_id, "reason": TRANSFER_EXCLUSION} for row_id in excluded]
+            results[basis].append(run)
     return {
         "schemaVersion": 1,
         "inputHash": scenario_hash(assembled, frozen, n=n, seed=seed),

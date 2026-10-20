@@ -99,27 +99,29 @@ USD at API rates for the exact configuration; "—" marks a component without an
 
 ## Plan route selection
 
-| Configuration | Selected route | Identification | Plan cost (USD per basket run) | Flags | Selection reason |
-|---|---|---|---:|---|---|
-| Claude Sonnet 5.5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | unidentified | $159.15 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| Claude Opus 5.5 (max) | Claude Pro $20 · Opus 5.5 (58.9×, measured) | unidentified | $169.60 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6.1 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | unidentified | $117.68 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| Claude Haiku 5.5 (xhigh) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | unidentified | $4.96 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6 Astra (xhigh) | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | unidentified | $357.95 | workload-unmatched; valuation basis unverified | higher evidence grade |
-| Claude Opus 5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | unidentified | $148.27 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $185.61 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $12.33 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-5.6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $29.64 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-5.6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | unidentified | $393.44 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| MiMo-V2.6-Flash | MiMo · provisional 1.5x assumption (1.5×, assumption) | unidentified | $40.25 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | only remaining eligible route |
-| Gemini 4 Argon (high) | — | — | $3,628.64 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| MiMo-V2.6-Pro | MiMo · provisional 1.5x assumption (1.5×, assumption) | unidentified | $90.75 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | only remaining eligible route |
-| DeepSeek V4 Flash (max) | — | — | $279.51 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| DeepSeek V4 Pro (max) | — | — | $801.50 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| Grok 4.7 (xhigh) | — | — | $6,700.02 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| GLM-5.3 (max) | — | — | $3,186.29 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| Gemini 3.8 Flash (high) | — | — | $2,073.44 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| Qwen3.8 Max | — | — | $5,417.03 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+The Plan amount is the selected multiple times the cash paid for the fee period (E166), typed by what the measurement establishes; it is not capacity unless it says so.
+
+| Configuration | Selected route | Plan amount | Identification | Plan cost (USD per basket run) | Flags | Selection reason |
+|---|---|---|---|---:|---|---|
+| Claude Sonnet 5.5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | unidentified | $159.15 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| Claude Opus 5.5 (max) | Claude Pro $20 · Opus 5.5 (58.9×, measured) | $1,178 per month: measured-workload capacity | unidentified | $169.60 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6.1 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | $5,386 per month: measured-workload capacity | unidentified | $117.68 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| Claude Haiku 5.5 (xhigh) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | unidentified | $4.96 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Astra (xhigh) | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | $162 per month: measured-workload capacity | unidentified | $357.95 | workload-unmatched; valuation basis unverified | higher evidence grade |
+| Claude Opus 5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | unidentified | $148.27 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | unidentified | $185.61 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | unidentified | $12.33 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-5.6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | unidentified | $29.64 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-5.6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | unidentified | $393.44 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| MiMo-V2.6-Flash | MiMo · provisional 1.5x assumption (1.5×, assumption) | fee not established: assumed API-equivalent consumption (owner-named transfer) | unidentified | $40.25 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | only remaining eligible route |
+| Gemini 4 Argon (high) | — | — | — | $3,628.64 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| MiMo-V2.6-Pro | MiMo · provisional 1.5x assumption (1.5×, assumption) | fee not established: assumed API-equivalent consumption (owner-named transfer) | unidentified | $90.75 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | only remaining eligible route |
+| DeepSeek V4 Flash (max) | — | — | — | $279.51 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| DeepSeek V4 Pro (max) | — | — | — | $801.50 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| Grok 4.7 (xhigh) | — | — | — | $6,700.02 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| GLM-5.3 (max) | — | — | — | $3,186.29 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| Gemini 3.8 Flash (high) | — | — | — | $2,073.44 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| Qwen3.8 Max | — | — | — | $5,417.03 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
 
 ### Measured-only Plan view
 
@@ -221,14 +223,14 @@ Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined i
 | Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | DeepSeek V4 Flash (max) | 0.0% | 17.1% | 14.3% | 20.1% | 16.4% |
 | DeepSeek V4 Pro (max) | 0.0% | 0.6% | 1.4% | 2.5% | 0.6% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 9.8% | 8.7% | 15.6% | 9.6% |
 | GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-5.6 Luna (max) | 0.0% | 14.7% | 12.2% | 21.0% | 14.8% |
 | GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Luna (max) | 0.0% | 0.0% | 25.6% | 0.0% | 2.4% |
 | GPT-6 Sol (max) | 0.0% | 0.0% | 0.4% | 0.0% | 0.0% |
 | GPT-6.1 Sol (max) | 100.0% | 57.8% | 36.6% | 40.8% | 56.1% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 9.8% | 8.7% | 15.6% | 9.6% |
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
@@ -242,14 +244,14 @@ Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined i
 | Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | DeepSeek V4 Flash (max) | 0.0% | 31.3% | 31.3% | 30.5% | 31.3% |
 | DeepSeek V4 Pro (max) | 0.0% | 4.9% | 5.9% | 8.7% | 4.2% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 100.0% | 30.2% | 30.3% | 34.5% | 30.4% |
 | GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-5.6 Luna (max) | 0.0% | 36.7% | 35.6% | 39.0% | 36.5% |
 | GPT-5.6 Sol (max) | 0.0% | 0.2% | 0.3% | 0.5% | 0.2% |
 | GPT-6 Luna (max) | 100.0% | 88.7% | 88.0% | 78.7% | 89.5% |
 | GPT-6 Sol (max) | 0.0% | 4.9% | 6.2% | 5.8% | 5.1% |
 | GPT-6.1 Sol (max) | 100.0% | 99.5% | 95.5% | 97.8% | 99.1% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 100.0% | 30.2% | 30.3% | 34.5% | 30.4% |
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
@@ -263,35 +265,37 @@ Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined i
 | Claude Sonnet 5.5 (max) | 0.0% | 55.3% | 50.3% | 49.8% | 54.0% |
 | DeepSeek V4 Flash (max) | 100.0% | 57.5% | 54.4% | 56.9% | 57.5% |
 | DeepSeek V4 Pro (max) | 1.0% | 37.4% | 36.3% | 36.1% | 37.0% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 100.0% | 73.8% | 75.4% | 65.2% | 73.8% |
 | GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-5.6 Luna (max) | 100.0% | 50.5% | 50.3% | 45.9% | 50.0% |
 | GPT-5.6 Sol (max) | 0.0% | 8.8% | 8.4% | 14.4% | 8.3% |
 | GPT-6 Luna (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
 | GPT-6 Sol (max) | 0.0% | 11.5% | 11.2% | 21.9% | 11.6% |
 | GPT-6.1 Sol (max) | 100.0% | 100.0% | 99.3% | 100.0% | 100.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 100.0% | 73.8% | 75.4% | 65.2% | 73.8% |
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+Plan streams S1, S2, S1 endpoint-heavy and S1M run with owner-named transfers off (E167): Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), Claude Sonnet 5.5 (max), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Luna (max), GPT-6 Sol (max) depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
 |---|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 5.4% | 0.0% | 0.5% |
-| Claude Opus 5 (max) | 0.0% | 2.2% | 3.0% | 6.9% | 2.6% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 18.4% | 0.0% | 6.7% |
-| Claude Sonnet 5.5 (max) | 100.0% | 97.8% | 71.5% | 93.1% | 90.2% |
+| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — |
+| Claude Opus 5 (max) | 0.0% | — | — | — | — |
+| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |
 | DeepSeek V4 Flash (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.0% | — | — | — | — |
+| GPT-6 Luna (max) | 0.0% | — | — | — | — |
+| GPT-6 Sol (max) | 0.0% | — | — | — | — |
+| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | 0.0% | 1.0% | 0.0% | 0.0% |
-| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Sol (max) | 0.0% | 0.0% | 0.6% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
@@ -299,20 +303,20 @@ Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined i
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
 |---|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (xhigh) | 0.0% | 17.1% | 15.1% | 25.3% | 17.0% |
-| Claude Opus 5 (max) | 0.0% | 7.7% | 7.4% | 12.5% | 7.4% |
-| Claude Opus 5.5 (max) | 100.0% | 99.9% | 99.4% | 99.0% | 99.9% |
-| Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 99.4% | 100.0% | 100.0% |
-| DeepSeek V4 Flash (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — |
+| Claude Opus 5 (max) | 0.0% | — | — | — | — |
+| Claude Opus 5.5 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |
+| DeepSeek V4 Flash (max) | 0.0% | 14.3% | 14.2% | 18.8% | 13.9% |
+| DeepSeek V4 Pro (max) | 0.0% | 5.0% | 5.4% | 7.8% | 4.8% |
 | GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | 0.0% | 3.5% | 0.0% | 0.0% |
-| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.5% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Sol (max) | 0.0% | 0.0% | 2.4% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) | 100.0% | 75.3% | 72.2% | 63.2% | 75.7% |
+| GPT-5.6 Luna (max) | 0.0% | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.0% | — | — | — | — |
+| GPT-6 Luna (max) | 0.0% | — | — | — | — |
+| GPT-6 Sol (max) | 0.0% | — | — | — | — |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 80.7% | 80.4% | 73.4% | 81.3% |
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
@@ -320,20 +324,20 @@ Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined i
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
 |---|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Opus 5 (max) | 0.0% | 12.2% | 11.8% | 17.5% | 12.2% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 38.1% | 0.0% | 30.4% |
-| Claude Sonnet 5.5 (max) | 100.0% | 98.5% | 97.0% | 94.0% | 97.9% |
+| Claude Haiku 5.5 (xhigh) | 100.0% | — | — | — | — |
+| Claude Opus 5 (max) | 0.0% | — | — | — | — |
+| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |
 | DeepSeek V4 Flash (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 100.0% | 43.8% | 42.5% | 46.5% | 44.1% |
 | GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 100.0% | 68.3% | 67.8% | 60.0% | 67.8% |
-| GPT-5.6 Sol (max) | 0.0% | 0.0% | 3.5% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 100.0% | 68.6% | 73.1% | 63.1% | 68.6% |
-| GPT-6 Sol (max) | 0.0% | 0.0% | 1.1% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 100.0% | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.0% | — | — | — | — |
+| GPT-6 Luna (max) | 100.0% | — | — | — | — |
+| GPT-6 Sol (max) | 0.0% | — | — | — | — |
 | GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 100.0% | 45.2% | 47.4% | 46.8% | 45.4% |
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 

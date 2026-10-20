@@ -337,7 +337,20 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)"
+    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+    "planAmount": {
+      "amountKind": "measured-workload capacity",
+      "amountUsd": 1178.0,
+      "feePeriod": "month",
+      "subscriptionCashUsd": 20,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 20.0,
+      "workload": "the route's measurement workload",
+      "capacityStatus": "capacity established on the measurement workload",
+      "valuationStatus": "unverified",
+      "donorRouteId": null,
+      "interpretationLabel": "measured-workload capacity, API-priced USD per month"
+    }
   },
   "plans": [
     {
@@ -393,6 +406,7 @@
         "stratum": "S0",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0
@@ -401,6 +415,7 @@
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0
@@ -409,6 +424,7 @@
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0001,
         "frontier": 0.2093
@@ -417,6 +433,7 @@
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0
@@ -425,6 +442,7 @@
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.1667
@@ -435,6 +453,7 @@
         "stratum": "S0",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 1.0,
         "frontier": 0.0
@@ -443,33 +462,37 @@
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "top1": 0.0,
-        "top3": 0.9992,
-        "frontier": 0.0
+        "unevaluable": null,
+        "top1": 1.0,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "top1": 0.1836,
-        "top3": 0.9941,
-        "frontier": 0.3809
+        "unevaluable": null,
+        "top1": 0.9996,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "top1": 0.0,
-        "top3": 0.9898,
-        "frontier": 0.0
+        "unevaluable": null,
+        "top1": 1.0,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "top1": 0.0668,
-        "top3": 0.9987,
-        "frontier": 0.3038
+        "unevaluable": null,
+        "top1": 1.0,
+        "top3": 1.0,
+        "frontier": 1.0
       }
     ]
   },

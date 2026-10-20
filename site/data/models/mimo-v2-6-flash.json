@@ -318,7 +318,20 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "only remaining eligible route"
+    "selectionReason": "only remaining eligible route",
+    "planAmount": {
+      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+      "amountUsd": null,
+      "feePeriod": "month",
+      "subscriptionCashUsd": null,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": null,
+      "workload": "the route's measurement workload",
+      "capacityStatus": "saturation unverified",
+      "valuationStatus": "unverified",
+      "donorRouteId": null,
+      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+    }
   },
   "plans": [
     {

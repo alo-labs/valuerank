@@ -60,6 +60,10 @@
   <h2 id="routes-title" class="section-title">Cost and plan routes</h2>
   <p class="muted">Cost is the contestant-model API token cost of one run of the SDLC basket: <strong>{{ usd(page.cost.apiUsd, 2) }}</strong> at API rates{% if page.cost.planUsd is not none %} and <strong>{{ usd(page.cost.planUsd, 2) }}</strong> on the plan basis{% endif %}.
     {% if page.cost.fallback %}No subscription route is admitted for this model, so the plan ranking uses its API cost.{% elif page.cost.selectionReason %}Route chosen by: {{ page.cost.selectionReason }}.{% endif %}</p>
+  {%- set pa = page.cost.planAmount %}
+  {%- if pa %}
+  <p class="muted small">Selected route's amount: {% if pa.amountUsd is not none %}<strong>{{ usd(pa.amountUsd, 0) }}</strong> per {{ pa.feePeriod }} &mdash; {% endif %}{{ pa.amountKind }}{% if pa.donorRouteId %} (transferred from <span class="mono">{{ pa.donorRouteId }}</span>){% endif %}. It is the Value Multiple times the cash paid ({{ usd(pa.grossCashUsd, 0) if pa.grossCashUsd is not none else "fee not established" }}), not a promise of what your own usage will reach.</p>
+  {%- endif %}
   {%- if s.flags %}
   <ul class="plain-list small">{% for f in s.flags %}<li>{{ f }}</li>{% endfor %}</ul>
   {%- endif %}
@@ -115,7 +119,7 @@
       <thead><tr><th scope="col" class="col-model">Stream</th><th scope="col">Basis</th><th scope="col" class="col-num">Rank 1</th><th scope="col" class="col-num">Top 3</th><th scope="col" class="col-num">Frontier</th></tr></thead>
       <tbody>
         {%- for basis in ["plan", "api"] %}{% for r in sc[basis] %}
-        <tr><th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ r.stratum }}{% if r.kernel != "primary" %} ({{ r.kernel }}){% endif %}</span><span class="model-dev">{{ r.targetProfile }}</span></span></th><td>{{ basis }}</td><td class="cell-num">{{ num(100 * r.top1, 1) }}%</td><td class="cell-num">{{ num(100 * r.top3, 1) }}%</td><td class="cell-num">{{ num(100 * r.frontier, 1) }}%</td></tr>
+        <tr><th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ r.stratum }}{% if r.kernel != "primary" %} ({{ r.kernel }}){% endif %}</span><span class="model-dev">{{ r.targetProfile }}</span></span></th><td>{{ basis }}</td>{% if r.unevaluable %}<td class="cell-num" colspan="3"><span class="muted small">Unevaluable: {{ r.unevaluable }}</span></td>{% else %}<td class="cell-num">{{ num(100 * r.top1, 1) }}%</td><td class="cell-num">{{ num(100 * r.top3, 1) }}%</td><td class="cell-num">{{ num(100 * r.frontier, 1) }}%</td>{% endif %}</tr>
         {%- endfor %}{% endfor %}
       </tbody>
     </table>

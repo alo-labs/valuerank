@@ -319,7 +319,20 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)"
+    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+    "planAmount": {
+      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+      "amountUsd": 1178.0,
+      "feePeriod": "month",
+      "subscriptionCashUsd": 20,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 20.0,
+      "workload": "the route's measurement workload",
+      "capacityStatus": "capacity established on the measurement workload",
+      "valuationStatus": "unverified",
+      "donorRouteId": "claude-pro-opus55-semianalysis",
+      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+    }
   },
   "plans": [
     {
@@ -375,6 +388,7 @@
         "stratum": "S0",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0
@@ -383,6 +397,7 @@
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0445
@@ -391,6 +406,7 @@
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0002,
         "frontier": 0.0492
@@ -399,6 +415,7 @@
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0769
@@ -407,6 +424,7 @@
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0462
@@ -417,6 +435,7 @@
         "stratum": "S0",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0
@@ -425,33 +444,37 @@
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "top1": 0.0224,
-        "top3": 0.0769,
-        "frontier": 0.1219
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "top1": 0.0304,
-        "top3": 0.0744,
-        "frontier": 0.1177
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "top1": 0.0688,
-        "top3": 0.125,
-        "frontier": 0.1754
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "top1": 0.0257,
-        "top3": 0.0736,
-        "frontier": 0.1219
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       }
     ]
   },
