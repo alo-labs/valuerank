@@ -709,3 +709,12 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - High 1 (E180, modified), High 2 (E177), Medium 1 (editorial), Medium 2 (E181), Medium 3 (E128), Low 1 (E179), Low 2 (E182). The first attempt stopped at Perplexity's tool-call limit after parts 1-2, having spent calls on tool setup and failing raw-URL fetches. The retry dropped the raw URLs and told Gemini to start with part 1; it read all seven parts and passed the read check.
 
 # Round 10 complete (reviewers 56-61). Every panel model returned HAS FEEDBACK on its draft; round 11 starts with GPT-6.1 Sol on draft r56.
+
+# Round 11 (reviewer 62 onward)
+
+## Editor decisions after reviewer 62 (owner may override)
+- E183. Competitor universe (GPT High). E170's "block but never enable" rule is now written into the governing predicates. B_W holds the rows whose AA cost is on a price not in force at V. Each enters with the hull of its published record and its current-tariff bound as an outer admissible domain, and on the Plan basis only where its own route is interval-eligible on its basis. Competitors range over U_W = R_W ∪ B_W, while definite and possible frontier membership, K_r membership and confirmed cheapest go to rows of R_W only. A blocker whose domain cannot be built makes the affected claims "unresolved". Six fixtures. The implementation already competed such rows over the hull and withheld their labels; its output now names them as "blockers", separate from the universe.
+- E182 amended (GPT Medium). The published point must lie inside the transformed interval, or the build fails. A zero-length side is a point mass at the point (half the mass when the point is an endpoint), a point interval is a point mass, and atoms are published in the kernel object. The implementation validates the point and draws zero-length sides as atoms.
+
+## Reviewer 62 (GPT-6.1 Sol, round 11, Thinking) — adopted
+- High (E183) and Medium (E182 amended). Read check passed. The prompt no longer lists raw URLs.
