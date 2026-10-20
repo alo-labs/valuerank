@@ -100,6 +100,8 @@ class Kernel:
     def __post_init__(self):
         if self.family == "runs" and self.target == REPORTING_PRECISION:
             raise ValueError("a run-level bootstrap concerns expected performance or future runs, never reporting precision")
+        if self.family == "split-uniform" and not self.params[0] <= self.params[1] <= self.params[2]:
+            raise ValueError("a split-uniform kernel's published point must lie inside its interval (E182)")
 
     def draw(self, rng: random.Random, *, use_alternative: bool = False) -> float:
         if self.family == "fixed":

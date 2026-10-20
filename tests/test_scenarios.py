@@ -47,6 +47,12 @@ def test_split_uniform_keeps_the_published_point_as_the_median():
         draws = [split.draw(rng, use_alternative=heavy) for _ in range(4000)]
         assert all(95.0 <= value <= 100.0 for value in draws)
         assert 0.46 < sum(value < 98.0 for value in draws) / len(draws) < 0.54
+    # A point at an endpoint puts an atom of half the mass there; a point interval is a point mass.
+    edge = Kernel("split-uniform", (98.0, 98.0, 100.0))
+    assert 0.46 < sum(edge.draw(rng) == 98.0 for _ in range(2000)) / 2000 < 0.54
+    assert Kernel("split-uniform", (98.0, 98.0, 98.0)).draw(rng) == 98.0
+    with pytest.raises(ValueError, match="must lie inside its interval"):
+        Kernel("split-uniform", (95.0, 101.0, 100.0))
 
 
 def test_stream_target_profiles_are_an_allowlist():

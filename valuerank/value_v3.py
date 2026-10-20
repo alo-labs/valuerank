@@ -601,21 +601,23 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str) -> dict:
     """Frontier and bar results over R_W for one basis, with the universe and the unevaluable rows (E38)."""
 
     boxes = api_boxes(assembled) if basis == "api" else plan_boxes(assembled)
-    universe = sorted(box.row for box in boxes)
-    unevaluable = sorted(row["id"] for row in assembled["rows"] if row["id"] not in universe)
+    # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
+    blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
+    universe = sorted(box.row for box in boxes if box.row not in blocked)
+    blockers = sorted(box.row for box in boxes if box.row in blocked)
+    unevaluable = sorted(row["id"] for row in assembled["rows"] if row["id"] not in universe and row["id"] not in blockers)
     if not boxes:
         reason = "no row has FullCost and an identified M_W (E61/E67)" if basis == "plan" else "no row has FullCost on the main workload"
         return {"universe": [], "unevaluable": unevaluable, "status": intervals.UNEVALUABLE, "reason": reason}
     frontier, bars = intervals.frontier(boxes), _bar_results(boxes, assembled, frozen)
-    # E170/O29: such a row competes (it can block) but earns no interval label of its own.
-    withheld = sorted(row["id"] for row in assembled["rows"] if row["id"] in universe and row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE)
-    for row_id in withheld:
+    # E170/O29: a blocker competes over its hull but earns no interval label of its own.
+    for row_id in blockers:
         frontier[row_id] = {"status": WITHHELD_LABEL}
         for bar in bars:
             if "rows" in bar:
                 bar["rows"][row_id] = {"status": WITHHELD_LABEL}
                 bar["possibleCheapest"] = [item for item in bar["possibleCheapest"] if item != row_id]
-    return {"universe": universe, "unevaluable": unevaluable, "labelWithheld": withheld, "status": "evaluated", "frontier": frontier, "bars": bars}
+    return {"universe": universe, "blockers": blockers, "unevaluable": unevaluable, "status": "evaluated", "frontier": frontier, "bars": bars}
 
 
 WITHHELD_LABEL = "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"

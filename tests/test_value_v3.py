@@ -1013,13 +1013,13 @@ def test_gate_effects_on_costs_anchors_routes_and_interval_labels():
     assert v.anchor_population(flagged, flagged["admitted"]) == ["b", "d"]
     frozen = v.freeze(flagged, frozen_at="2026-10-19")
     output = v.interval_outputs(flagged, frozen, "api")
-    assert output["labelWithheld"] == ["a"] and output["frontier"]["a"] == {"status": v.WITHHELD_LABEL}
-    assert "a" in output["universe"]
+    assert output["blockers"] == ["a"] and output["frontier"]["a"] == {"status": v.WITHHELD_LABEL}
+    assert "a" not in output["universe"] and "a" not in output["unevaluable"]
     box = next(item for item in v.api_boxes(flagged) if item.row == "a")
     assert box.provisional is True and box.c_high == pytest.approx(rows["a"]["cost"]["highUsd"] * 1.5)
     # A bar whose reference is unevaluable carries no row table to withhold from.
     unevaluable_bar = v.interval_outputs(flagged, dict(frozen, barReferences=[{"id": "gone", "rule": "x"}]), "api")
-    assert unevaluable_bar["bars"][0]["status"] == "unevaluable" and unevaluable_bar["labelWithheld"] == ["a"]
+    assert unevaluable_bar["bars"][0]["status"] == "unevaluable" and unevaluable_bar["blockers"] == ["a"]
     # O29: a multiple valued on the row's own superseded record stays eligible.
     routes = documents()["planRoutes"]
     routes["routes"][0].update(identification="point-identified", valuationBasis="release", valuationPriceRecord="old")
