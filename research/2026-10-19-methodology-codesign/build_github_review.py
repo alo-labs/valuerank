@@ -24,11 +24,11 @@ header = header.replace("Review the methodology draft below", "Review the method
 header = header.replace("=== METHODOLOGY DRAFT ===", "").rstrip()
 assert "linked above" in header, "reviewer header wording changed; update the substitution"
 listing = "\n".join(
-    f"{index}. {part} (raw: https://raw.githubusercontent.com/{REPO}/{sha}/{part})" for index, part in enumerate(parts, 1)
+    f"{index}. {part}" for index, part in enumerate(parts, 1)
 )
 prompt = f"""@GitHub The methodology draft under review is {draft.name} ({len(draft.read_text()):,} characters) in the public GitHub repository {REPO} at commit {sha}. Because the GitHub connector truncates long files, read it as these {len(parts)} consecutive parts, each at most {longest:,} characters, which together are the whole draft in order:
 {listing}
-Open every part through the GitHub connector and read each one to its end before reviewing. Your tool calls are limited: spend them on the parts only (one file read per part), with no repository search or tool discovery first. Do not review from a summary or from search snippets.
+Open every part through the GitHub connector and read each one to its end before reviewing. Your tool calls are limited (about one per part): start immediately with part 1 and spend every call on one GitHub connector file read per part, in order. Do not fetch raw.githubusercontent.com URLs (they fail here), and do not search the repository or discover tools first. Do not review from a summary or from search snippets.
 
 Begin your answer with a section "## 0. Read check" that quotes exactly the draft's first line and then, for each part in order, its last 12 words. If any part could not be read to its end, say which one and stop.
 
