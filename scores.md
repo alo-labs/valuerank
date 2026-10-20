@@ -209,7 +209,7 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value c
 | Qwen3.8 Max | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-6 Luna (max), Gemini 3.8 Flash (high), GLM-5.3 (max) |
 | DeepSeek V4 Pro (max) | certified | disproved | GPT-5.6 Luna (max) | — |
 
-**API basis: cheapest at or above GPT-6 Luna (max)'s quality** (median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)). Status certified; confirmed cheapest: GPT-6 Luna (max).
+**API basis, main workload: cheapest at or above GPT-6 Luna (max)'s quality** (median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)). Status certified; confirmed cheapest: GPT-6 Luna (max).
 
 | Configuration | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---|---|---|
@@ -230,11 +230,61 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value c
 | Qwen3.8 Max | disproved | disproved | disproved |
 | DeepSeek V4 Pro (max) | disproved | certified | disproved |
 
-**Plan basis:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
+**Plan basis, main workload:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
+
+**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): frontier.** Not evaluable: none.
+
+| Configuration | Possible frontier | Definite frontier | Definite counterexample | Possible frontier blocked by |
+|---|---|---|---|---|
+| Gemini 4 Argon (high) | certified | disproved | GPT-6.1 Sol (max) | — |
+| GPT-6.1 Sol (max) | certified | disproved | MiMo-V2.6-Pro | — |
+| Claude Sonnet 5.5 (max) | certified | disproved | Gemini 4 Argon (high) | — |
+| GPT-6 Astra (xhigh) | certified | disproved | Gemini 4 Argon (high) | — |
+| Claude Opus 5.5 (max) | disproved | disproved | Gemini 4 Argon (high) | Claude Sonnet 5.5 (max) |
+| GPT-5.6 Sol (max) | certified | disproved | Gemini 4 Argon (high) | — |
+| MiMo-V2.6-Pro | certified | disproved | GPT-6 Luna (max) | — |
+| GPT-6 Sol (max) | certified | disproved | GPT-6.1 Sol (max) | — |
+| Grok 4.7 (xhigh) | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max) |
+| GPT-5.6 Luna (max) | certified | disproved | MiMo-V2.6-Pro | — |
+| GPT-6 Luna (max) | certified | disproved | MiMo-V2.6-Flash | — |
+| MiMo-V2.6-Flash | certified | certified | — | — |
+| Claude Haiku 5.5 (xhigh) | certified | disproved | GPT-6 Luna (max) | — |
+| Gemini 3.8 Flash (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Sol (max) |
+| Claude Opus 5 (max) | certified | disproved | Gemini 4 Argon (high) | — |
+| GLM-5.3 (max) | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), GPT-6 Sol (max) |
+| DeepSeek V4 Flash (max) | certified | disproved | MiMo-V2.6-Pro | — |
+| Qwen3.8 Max | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), GPT-5.6 Sol (max), GPT-6 Sol (max), Grok 4.7 (xhigh), GPT-6 Luna (max), Gemini 3.8 Flash (high), GLM-5.3 (max) |
+| DeepSeek V4 Pro (max) | certified | disproved | MiMo-V2.6-Pro | — |
+
+**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above GPT-6 Luna (max)'s quality** (median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)). Status certified; confirmed cheapest: none.
+
+| Configuration | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---|---|---|
+| Gemini 4 Argon (high) | certified | certified | disproved |
+| GPT-6.1 Sol (max) | certified | certified | disproved |
+| Claude Sonnet 5.5 (max) | certified | certified | disproved |
+| GPT-6 Astra (xhigh) | disproved | certified | disproved |
+| Claude Opus 5.5 (max) | certified | certified | disproved |
+| GPT-5.6 Sol (max) | certified | certified | disproved |
+| MiMo-V2.6-Pro | disproved | certified | disproved |
+| GPT-6 Sol (max) | certified | certified | disproved |
+| Grok 4.7 (xhigh) | certified | certified | disproved |
+| GPT-5.6 Luna (max) | disproved | certified | disproved |
+| GPT-6 Luna (max) | certified | certified | certified |
+| MiMo-V2.6-Flash | disproved | certified | certified |
+| Claude Haiku 5.5 (xhigh) | disproved | certified | disproved |
+| Gemini 3.8 Flash (high) | certified | certified | disproved |
+| Claude Opus 5 (max) | disproved | certified | disproved |
+| GLM-5.3 (max) | certified | certified | disproved |
+| DeepSeek V4 Flash (max) | disproved | certified | disproved |
+| Qwen3.8 Max | disproved | disproved | disproved |
+| DeepSeek V4 Pro (max) | disproved | certified | disproved |
+
+**Plan basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified):** not evaluated (unevaluable: no Plan multiple is identified for a subset workload (E149, E190)).
 
 ## Scenario shares
 
-Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined in [methodology.md](methodology.md#uncertainty-outputs).
+Frequencies over 10,000 scenarios per run (seed 20261017); streams are defined in [methodology.md](methodology.md#uncertainty-outputs). The shares exclude benchmark sampling noise beyond S1M and fitted-rating uncertainty (E155).
 
 ### API basis: rank 1
 
@@ -437,6 +487,7 @@ Each kernel assignment code gives the kernel used for the candidate, the referen
 - **Basket readiness (E22):** priced leaves cover 67% of nominal quality weight (AutomationBench-AA, DeepSWE v1.1, GDPval-AA v2.1, AA-LCR v1.1, SciCode, Terminal-Bench 4.0 (tbench.ai)); pending components: FrontierCode, ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 16 rows evaluated; flagged far from the median ratio: none.
 - **Matched-cost diagnostic (E55):** evaluated at 50% priced quality weight; basket/matched cost-order reversals with separated intervals: 4; rank-gap warnings: 0.
+- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 16 frontier and near-frontier references move API no rank changes (value points per cost doubling 3.04 vs 3.04 frozen); Plan no rank changes (value points per cost doubling 2.02 vs 2.02 frozen).
 
 ### Leave-one-component-out cost family (E172)
 

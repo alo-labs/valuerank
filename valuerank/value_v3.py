@@ -502,13 +502,15 @@ def blocker_domain(gate: dict, basis: str) -> tuple[float, float] | None:
     return (low, high) if high is not None and low > 0 else None
 
 
-def api_boxes(assembled: dict) -> list[intervals.Box]:
-    """R_W on the API basis: ranked rows with FullCost on the main workload (E37), as admissible boxes."""
+def api_boxes(assembled: dict, components: list[str] | None = None) -> list[intervals.Box]:
+    """R_W on the API basis: ranked rows with FullCost on the main workload (E37), or on the subset workload of
+    ``components`` (E190), as admissible boxes."""
 
     boxes = []
     for row in assembled["rows"]:
-        cost = row["cost"]
-        if cost["fullCost"] and cost["workload"] == assembled["mainWorkload"] and anchor_math.scoreable(cost["lowUsd"]):
+        cost = row["cost"] if components is None else basket.row_cost(row["components"], components)
+        on_workload = components is not None or cost["workload"] == assembled["mainWorkload"]
+        if cost["fullCost"] and on_workload and anchor_math.scoreable(cost["lowUsd"]):
             box = _gated_box(row, cost["lowUsd"], cost["highUsd"], "api")
             if box is not None:
                 boxes.append(box)
@@ -651,10 +653,14 @@ def _anchors_for(frozen: dict, workload: str | None, basis: str) -> dict | None:
     return entry["anchors"][basis]
 
 
-def interval_outputs(assembled: dict, frozen: dict, basis: str) -> dict:
-    """Frontier and bar results over R_W for one basis, with the universe and the unevaluable rows (E38)."""
+def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list[str] | None = None) -> dict:
+    """Frontier and bar results over R_W for one basis, with the universe and the unevaluable rows (E38).
 
-    boxes = api_boxes(assembled) if basis == "api" else plan_boxes(assembled)
+    With ``components``, the outputs are for that subset workload (E190; API basis only: no Plan multiple is
+    identified for a subset workload).
+    """
+
+    boxes = api_boxes(assembled, components) if basis == "api" else plan_boxes(assembled)
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
     blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
     unconstructible = sorted(row["id"] for row in assembled["rows"] if row["id"] in blocked and blocker_domain(row["valuationGate"], basis) is None)
@@ -680,6 +686,20 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str) -> dict:
 
 
 WITHHELD_LABEL = "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
+
+
+SUBSET_PLAN_INTERVALS = "unevaluable: no Plan multiple is identified for a subset workload (E149, E190)"
+
+
+def subset_interval_outputs(assembled: dict, frozen: dict) -> dict:
+    """E190: frontier and bar outputs on each subset workload over every row with FullCost there."""
+
+    return {
+        workload: {"components": entry["components"], "api": interval_outputs(assembled, frozen, "api", entry["components"]),
+                   "plan": {"status": intervals.UNEVALUABLE, "reason": SUBSET_PLAN_INTERVALS}}
+        for workload, entry in sorted(frozen["workloads"].items())
+        if entry.get("role") == "subset"
+    }
 
 
 def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> list[dict]:
@@ -860,6 +880,33 @@ def route_alternatives(row: dict, anchors: dict | None) -> dict:
     }
 
 
+FRONTIER_ANCHOR_LABEL = "anchors from frontier and near-frontier configurations only (diagnostic; the frozen anchors stay primary)"
+
+
+def frontier_anchor_diagnostic(assembled: dict, frozen: dict, per_row: dict) -> dict:
+    """E187: each basis rescored on anchors built from the frontier and near-frontier references alone."""
+
+    main = assembled["mainWorkload"]
+    by_id = {row["id"]: row for row in assembled["rows"]}
+    references = [row_id for row_id in anchor_population(assembled, assembled["admitted"]) if by_id[row_id].get("frontierFamily", True)]
+    if len(references) < MIN_ANCHOR_REFERENCES:
+        return {"label": FRONTIER_ANCHOR_LABEL, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} frontier-family references", "references": references}
+    rows = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
+    bases = {}
+    for basis in BASES:
+        costs = {row_id: basis_cost_on(by_id[row_id], assembled["admitted"], basis) for row_id in references}
+        rebuilt = anchor_math.anchor_object(costs, basis=basis, workload=main)
+        primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows}
+        rescored = {row["id"]: anchor_math.value_score(anchor_math.cost_score(_basis_cost(row, basis), rebuilt), row["summary"].displayed, BETA) for row in rows}
+        bases[basis] = {
+            "anchors": {key: rebuilt[key] for key in ("low", "high", "referenceIds")},
+            "exchangeRate": anchor_math.exchange_rate(rebuilt, BETA),
+            "frozenExchangeRate": anchor_math.exchange_rate(frozen["workloads"][main]["anchors"][basis], BETA),
+            "rankChanges": diagnostics.paired_rank_change(primary, rescored),
+        }
+    return {"label": FRONTIER_ANCHOR_LABEL, "status": "evaluated", "references": references, "bases": bases}
+
+
 def cost_component_family(assembled: dict, frozen: dict, per_row: dict) -> list[dict]:
     """E172: the E149 cost-deletion object registered once per admitted basket unit (the Coding Agent Index is one unit)."""
 
@@ -960,6 +1007,13 @@ def score(assembled: dict, frozen: dict) -> dict:
             BETA,
             main,
         )
+        # E189: how closely the cost-only and quality-only orderings follow the value ordering on the same panel.
+        panel_rows = [row for row in rows if row["cost"]["workload"] == main and per_row[row["id"]][basis]["value"] is not None]
+        values = [per_row[row["id"]][basis]["value"] for row in panel_rows]
+        influence[basis]["orderingAgreement"] = {
+            "costVsValue": diagnostics.kendall_tau_b([per_row[row["id"]][basis]["costScore"] for row in panel_rows], values) if len(panel_rows) >= 2 else None,
+            "qualityVsValue": diagnostics.kendall_tau_b([row["summary"].displayed for row in panel_rows], values) if len(panel_rows) >= 2 else None,
+        }
         main_anchors = frozen["workloads"][main]["anchors"][basis]
         exchange[basis] = {**anchor_math.exchange_rate(main_anchors, BETA), "curve": anchor_math.exchange_rate_curve(BETA, [4.0, 16.0, 64.0, 256.0, 1024.0])}
     hold = any(item["hold"] for basis in BASES for item in gates[basis])
@@ -1013,6 +1067,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "identificationYield": yield_,
         "rows": [_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))) for row in rows],
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
+        "subsetIntervals": subset_interval_outputs(assembled, frozen),
         "measuredOnlyPlanView": measured,
         "diagnostics": {
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
@@ -1029,6 +1084,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "deletionSensitivity": _deletion_sensitivity(rows, per_row),
             "costRemoval": cost_removal(assembled, frozen, per_row),
             "costComponentFamily": cost_component_family(assembled, frozen, per_row),
+            "frontierAnchors": frontier_anchor_diagnostic(assembled, frozen, per_row),
             "subsetBridges": subset_bridges(assembled, frozen, per_row, readiness["expenditure"]),
             "basketReadiness": readiness,
             "anchorEligibility": anchor_eligibility(assembled, assembled["admitted"]),
@@ -1769,11 +1825,18 @@ def evidence_bundle(data: Path) -> dict:
     }
 
 
+RETAINED_REASON = "Exact AA DeepSWE and eligible Bug Hunt overlap"
+
+
 def configurations_from_scores(scores: dict) -> list[dict]:
     """The ranked cohort (fixed cohort policy: the ranking-eligible rows, in table order) with each AA identity."""
 
     return [
-        {"id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote")}
+        {
+            "id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote"),
+            # E187: whether the row is ranked as a frontier or near-frontier family (not only retained).
+            "frontierFamily": any(reason != RETAINED_REASON for reason in row.get("rankingInclusionReasons") or []),
+        }
         for row in scores["models"]
         if row.get("rankingEligible") is True
     ]

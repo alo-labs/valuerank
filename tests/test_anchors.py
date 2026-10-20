@@ -87,11 +87,21 @@ def test_cost_influence_flags_a_low_cost_share():
     result = a.cost_influence([0.0, 100.0], [40.0, 60.0], 0.25)
     assert result["costShare"] == pytest.approx(0.25 * 50 / (0.25 * 50 + 0.75 * 10))
     assert result["flag"] is False
-    assert a.cost_influence([1.0], [2.0, 3.0], 0.25) == {"costShare": None, "flag": False, "qualityFlag": False}
+    assert a.cost_influence([1.0], [2.0, 3.0], 0.25) == {"costShare": None, "flag": False, "qualityFlag": False, "varianceAllocation": None}
     dominant = a.cost_influence([0.0, 100.0], [50.0, 50.1], 0.25)
     assert dominant["costShare"] > 0.9 and dominant["qualityFlag"] is True and dominant["flag"] is False
     flat = a.cost_influence([5.0, 5.0], [7.0, 7.0], 0.25)
-    assert flat["costShare"] is None and flat["flag"] is False
+    assert flat["costShare"] is None and flat["flag"] is False and flat["varianceAllocation"] is None
+
+
+def test_variance_allocation_splits_value_variance_and_sees_offsetting_terms():
+    """E189: the two contributions sum to 1; negatively correlated terms can contribute less than their SDs suggest."""
+
+    allocation = a.variance_allocation([0.0, 50.0, 100.0], [40.0, 50.0, 60.0], 0.25)
+    assert allocation["cost"] + allocation["quality"] == pytest.approx(1.0)
+    # Dearer models score higher on quality: cost and quality offset, and cost's contribution can turn negative.
+    offset = a.variance_allocation([100.0, 50.0, 0.0], [10.0, 50.0, 100.0], 0.25)
+    assert offset["cost"] < 0 < offset["quality"] and offset["cost"] + offset["quality"] == pytest.approx(1.0)
 
 
 def test_panel_cost_influence_uses_the_common_workload_panel():

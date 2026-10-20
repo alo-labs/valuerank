@@ -115,7 +115,7 @@ def cost_influence(cost_scores: list[float], quality_scores: list[float], beta: 
     """
 
     if len(cost_scores) < 2 or len(quality_scores) < 2:
-        return {"costShare": None, "flag": False, "qualityFlag": False}
+        return {"costShare": None, "flag": False, "qualityFlag": False, "varianceAllocation": None}
     cost_sd = statistics.pstdev(cost_scores)
     quality_sd = statistics.pstdev(quality_scores)
     denominator = beta * cost_sd + (1.0 - beta) * quality_sd
@@ -126,7 +126,25 @@ def cost_influence(cost_scores: list[float], quality_scores: list[float], beta: 
         "costShare": share,
         "flag": share is not None and share < LOW_INFLUENCE_FLAG,
         "qualityFlag": share is not None and share > HIGH_INFLUENCE_FLAG,
+        "varianceAllocation": variance_allocation(cost_scores, quality_scores, beta),
     }
+
+
+def variance_allocation(cost_scores: list[float], quality_scores: list[float], beta: float) -> dict | None:
+    """E189: Cov(beta S_C, V) / Var(V) and Cov((1 - beta) Q, V) / Var(V), which sum to 1 (population moments).
+
+    Cost and quality covary across a cohort, so the SD ratio above describes dispersion; this splits the value
+    variance into what each term contributes. None when the value scores do not vary.
+    """
+
+    values = [beta * cost + (1.0 - beta) * quality for cost, quality in zip(cost_scores, quality_scores)]
+    centre, cost_mean, quality_mean = statistics.fmean(values), statistics.fmean(cost_scores), statistics.fmean(quality_scores)
+    variance = statistics.fmean([(value - centre) ** 2 for value in values])
+    if variance <= 0:
+        return None
+    cost_part = statistics.fmean([beta * (cost - cost_mean) * (value - centre) for cost, value in zip(cost_scores, values)])
+    quality_part = statistics.fmean([(1.0 - beta) * (quality - quality_mean) * (value - centre) for quality, value in zip(quality_scores, values)])
+    return {"cost": cost_part / variance, "quality": quality_part / variance}
 
 
 def _influence_status(rows: list[dict], result: dict) -> str:

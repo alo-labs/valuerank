@@ -433,7 +433,8 @@ def methodology(facts):
         for basis, rate in v3["exchangeRate"].items()
     ]
     influence_rows = [
-        [basis, len(item["commonWorkload"]["panel"]), pct(item["commonWorkload"]["costShare"], 1), item["commonWorkload"]["status"]]
+        [basis, len(item["commonWorkload"]["panel"]), pct(item["commonWorkload"]["costShare"], 1), item["commonWorkload"]["status"],
+         pct((item["commonWorkload"]["varianceAllocation"] or {}).get("cost"), 1), fnum(item["orderingAgreement"]["costVsValue"], 2), fnum(item["orderingAgreement"]["qualityVsValue"], 2)]
         for basis, item in v3["costInfluence"].items()
     ]
     policy = v3["anchorPolicy"]
@@ -509,9 +510,9 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 {markdown_table(['Basis', 'Anchor ratio c_H / c_L', 'Value points per cost doubling', 'Quality points that offset it'], rate_rows, numeric={1, 2, 3})}
 
-**Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2).
+**Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2). Because cost and quality covary, that ratio describes dispersion; the value-variance allocation Cov(0.25 S_C, V) / Var(V) and the Kendall tau of the cost-only and quality-only orderings against the value ordering show contribution (E189).
 
-{markdown_table(['Basis', 'Panel', "Cost's share", 'Status'], influence_rows, numeric={1, 2})}
+{markdown_table(['Basis', 'Panel', "Cost's share", 'Status', "Cost's variance allocation", 'Tau, cost vs value', 'Tau, quality vs value'], influence_rows, numeric={1, 2, 4, 5, 6})}
 
 ## Quality
 
@@ -741,34 +742,40 @@ def calibration_markdown(facts):
     return "\n".join(lines)
 
 
+def interval_block(facts, result, label, workload_label):
+    """One basis's frontier and bar tables on one workload (E21, E38, E183)."""
+
+    if result["status"] != "evaluated":
+        return f"**{label} basis, {workload_label}:** not evaluated ({result.get('reason', result['status'])})."
+    rows = [
+        [facts.label(row_id), item["possible"], item["definite"], facts.label(item["definiteCounterexample"]) if item["definiteCounterexample"] else DASH,
+         facts.labels(item["possibleBlockedBy"]) if item["possibleBlockedBy"] else DASH]
+        for row_id, item in result["frontier"].items()
+        if "possible" in item
+    ]
+    text = f"**{label} basis, {workload_label}: frontier.** Not evaluable: {facts.labels(result['unevaluable'])}."
+    if result.get("blockers"):
+        text += f" Competing without a label (AA cost on a price not in force, O29, E183): {facts.labels(result['blockers'])}."
+    text += "\n\n"
+    text += markdown_table(["Configuration", "Possible frontier", "Definite frontier", "Definite counterexample", "Possible frontier blocked by"], rows)
+    for bar in result.get("bars", []):
+        reference = facts.label(bar["reference"]["id"])
+        text += f"\n\n**{label} basis, {workload_label}: cheapest at or above {reference}'s quality** ({bar['reference']['rule']}). Status {bar['status']}"
+        if bar["status"] == "certified":
+            text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
+            bar_rows = [[facts.label(row_id), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
+            text += markdown_table(["Configuration", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows)
+        else:
+            text += "."
+    return text
+
+
 def interval_tables(facts):
-    sections = []
-    for basis, label in (("api", "API"), ("plan", "Plan")):
-        result = facts.v3["intervals"][basis]
-        if result["status"] != "evaluated":
-            sections.append(f"**{label} basis:** not evaluated ({result.get('reason', result['status'])}).")
-            continue
-        rows = [
-            [facts.label(row_id), item["possible"], item["definite"], facts.label(item["definiteCounterexample"]) if item["definiteCounterexample"] else DASH,
-             facts.labels(item["possibleBlockedBy"]) if item["possibleBlockedBy"] else DASH]
-            for row_id, item in result["frontier"].items()
-            if "possible" in item
-        ]
-        text = f"**{label} basis, main workload: frontier.** Not evaluable: {facts.labels(result['unevaluable'])}."
-        if result.get("blockers"):
-            text += f" Competing without a label (AA cost on a price not in force, O29, E183): {facts.labels(result['blockers'])}."
-        text += "\n\n"
-        text += markdown_table(["Configuration", "Possible frontier", "Definite frontier", "Definite counterexample", "Possible frontier blocked by"], rows)
-        for bar in result.get("bars", []):
-            reference = facts.label(bar["reference"]["id"])
-            text += f"\n\n**{label} basis: cheapest at or above {reference}'s quality** ({bar['reference']['rule']}). Status {bar['status']}"
-            if bar["status"] == "certified":
-                text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
-                bar_rows = [[facts.label(row_id), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
-                text += markdown_table(["Configuration", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows)
-            else:
-                text += "."
-        sections.append(text)
+    sections = [interval_block(facts, facts.v3["intervals"][basis], label, "main workload") for basis, label in (("api", "API"), ("plan", "Plan"))]
+    # E190: the same outputs on each subset workload, over every row with full cost there.
+    for item in facts.v3["subsetIntervals"].values():
+        workload_label = "subset workload (" + ", ".join(component_label(key) for key in item["components"]) + "; orderings across workloads not identified)"
+        sections += [interval_block(facts, item[basis], label, workload_label) for basis, label in (("api", "API"), ("plan", "Plan"))]
     return "\n\n".join(sections)
 
 
@@ -776,7 +783,7 @@ def scenario_tables(facts):
     scenarios = facts.v3["scenarios"]
     if scenarios.get("status") != "current":
         return f"Scenario outputs are {scenarios.get('status')}; no shares are published for this release."
-    parts = [f"Frequencies over {scenarios['scenarios']:,} scenarios per run (seed {scenarios['seed']}); streams are defined in [methodology.md](methodology.md#uncertainty-outputs)."]
+    parts = [f"Frequencies over {scenarios['scenarios']:,} scenarios per run (seed {scenarios['seed']}); streams are defined in [methodology.md](methodology.md#uncertainty-outputs). The shares exclude benchmark sampling noise beyond S1M and fitted-rating uncertainty (E155)."]
     for basis, label in (("api", "API"), ("plan", "Plan")):
         runs = scenarios["results"][basis]
         row_ids = sorted({row_id for run in runs for row_id in run["panel"]}, key=facts.label)
@@ -855,6 +862,15 @@ def cost_diagnostics_markdown(facts):
         family_rows.append([component_label(item["component"])] + [
             rank_change_text(bases[basis]["recalibrated"]["rankChanges"]["changes"], facts.labels) if basis in bases else DASH for basis in ("api", "plan")
         ] + [fnum(bases["api"]["recalibrated"]["exchangeRate"]["valuePointsPerCostDoubling"], 2) if "api" in bases else DASH])
+    frontier = diagnostics["frontierAnchors"]
+    if frontier["status"] == "evaluated":
+        lines.append(
+            f"- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the {len(frontier['references'])} frontier and near-frontier references move "
+            + "; ".join(f"{label} {rank_change_text(frontier['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling {fnum(frontier['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(frontier['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)" for basis, label in (("api", "API"), ("plan", "Plan")))
+            + "."
+        )
+    else:
+        lines.append(f"- **Frontier-families anchors (E187, diagnostic):** {frontier['status']}.")
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(

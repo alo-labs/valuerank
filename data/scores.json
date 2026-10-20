@@ -8534,6 +8534,10 @@
           "costShare": 0.5493548637334424,
           "flag": false,
           "qualityFlag": false,
+          "varianceAllocation": {
+            "cost": 0.800656635359436,
+            "quality": 0.19934336464056382
+          },
           "status": "defined",
           "panel": [
             "claude-haiku-5-5",
@@ -8566,6 +8570,10 @@
             "costShare": 0.6023725029578468,
             "flag": false,
             "qualityFlag": false,
+            "varianceAllocation": {
+              "cost": 2.0783768153728057,
+              "quality": -1.078376815372806
+            },
             "status": "defined",
             "panel": [
               "gpt-6-astra",
@@ -8580,6 +8588,10 @@
           "costShare": 0.5695460839322449,
           "flag": false,
           "qualityFlag": false,
+          "varianceAllocation": {
+            "cost": 0.9093806039690852,
+            "quality": 0.0906193960309146
+          },
           "status": "defined",
           "panel": [
             "claude-haiku-5-5",
@@ -8604,7 +8616,11 @@
           ]
         },
         "flag": false,
-        "qualityFlag": false
+        "qualityFlag": false,
+        "orderingAgreement": {
+          "costVsValue": 0.48333333333333334,
+          "qualityVsValue": 0.03333333333333333
+        }
       },
       "plan": {
         "commonWorkload": {
@@ -8613,6 +8629,10 @@
           "costShare": 0.5514885222280267,
           "flag": false,
           "qualityFlag": false,
+          "varianceAllocation": {
+            "cost": 0.6272433832617152,
+            "quality": 0.37275661673828475
+          },
           "status": "defined",
           "panel": [
             "claude-haiku-5-5",
@@ -8645,6 +8665,10 @@
             "costShare": 0.34879011085560996,
             "flag": false,
             "qualityFlag": false,
+            "varianceAllocation": {
+              "cost": -0.5478321481423196,
+              "quality": 1.5478321481423185
+            },
             "status": "defined",
             "panel": [
               "gpt-6-astra",
@@ -8659,6 +8683,10 @@
           "costShare": 0.5370915149663488,
           "flag": false,
           "qualityFlag": false,
+          "varianceAllocation": {
+            "cost": 0.5969172287466626,
+            "quality": 0.4030827712533374
+          },
           "status": "defined",
           "panel": [
             "claude-haiku-5-5",
@@ -8683,7 +8711,11 @@
           ]
         },
         "flag": false,
-        "qualityFlag": false
+        "qualityFlag": false,
+        "orderingAgreement": {
+          "costVsValue": 0.5666666666666667,
+          "qualityVsValue": 0.31666666666666665
+        }
       }
     },
     "gates": {
@@ -21317,6 +21349,381 @@
         "reason": "no row has FullCost and an identified M_W (E61/E67)"
       }
     },
+    "subsetIntervals": {
+      "1453a9a0576b02ea": {
+        "components": [
+          "aa-briefcase",
+          "gdpval-aa",
+          "gdp-pdf",
+          "automationbench-aa",
+          "terminalbench-4-0",
+          "scicode",
+          "artificial-analysis-long-context-reasoning"
+        ],
+        "api": {
+          "universe": [
+            "claude-haiku-5-5",
+            "claude-opus-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
+            "gemini-3.8-flash",
+            "gemini-4-argon",
+            "glm-5.3",
+            "gpt-5.6-luna",
+            "gpt-5.6-sol",
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6-sol",
+            "gpt-6.1-sol",
+            "grok-4.7",
+            "mimo-v2-6-flash",
+            "mimo-v2-6-pro",
+            "qwen3.8-max"
+          ],
+          "blockers": [],
+          "unevaluable": [],
+          "status": "evaluated",
+          "frontier": {
+            "gemini-4-argon": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gpt-6.1-sol"
+            },
+            "gpt-6.1-sol": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "mimo-v2-6-pro"
+            },
+            "claude-sonnet-5-5": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "gpt-6-astra": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "claude-opus-5-5": {
+              "possible": "disproved",
+              "possibleWitness": null,
+              "possibleBlockedBy": [
+                "claude-sonnet-5-5"
+              ],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "gpt-5.6-sol": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "mimo-v2-6-pro": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gpt-6-luna"
+            },
+            "gpt-6-sol": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gpt-6.1-sol"
+            },
+            "grok-4.7": {
+              "possible": "disproved",
+              "possibleWitness": null,
+              "possibleBlockedBy": [
+                "gemini-4-argon",
+                "gpt-6.1-sol"
+              ],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "gpt-5.6-luna": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "mimo-v2-6-pro"
+            },
+            "gpt-6-luna": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "mimo-v2-6-flash"
+            },
+            "mimo-v2-6-flash": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "certified",
+              "definiteCounterexample": null
+            },
+            "claude-haiku-5-5": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gpt-6-luna"
+            },
+            "gemini-3.8-flash": {
+              "possible": "disproved",
+              "possibleWitness": null,
+              "possibleBlockedBy": [
+                "gpt-6.1-sol",
+                "gpt-6-sol"
+              ],
+              "definite": "disproved",
+              "definiteCounterexample": "gpt-6.1-sol"
+            },
+            "claude-opus-5": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "glm-5.3": {
+              "possible": "disproved",
+              "possibleWitness": null,
+              "possibleBlockedBy": [
+                "gemini-4-argon",
+                "gpt-6.1-sol",
+                "gpt-6-sol"
+              ],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "deepseek-v4-flash": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "mimo-v2-6-pro"
+            },
+            "qwen3.8-max": {
+              "possible": "disproved",
+              "possibleWitness": null,
+              "possibleBlockedBy": [
+                "gemini-4-argon",
+                "gpt-6.1-sol",
+                "gpt-5.6-sol",
+                "gpt-6-sol",
+                "grok-4.7",
+                "gpt-6-luna",
+                "gemini-3.8-flash",
+                "glm-5.3"
+              ],
+              "definite": "disproved",
+              "definiteCounterexample": "gemini-4-argon"
+            },
+            "deepseek-v4-pro": {
+              "possible": "certified",
+              "possibleWitness": {
+                "row": "best corner",
+                "others": "worst corners"
+              },
+              "possibleBlockedBy": [],
+              "definite": "disproved",
+              "definiteCounterexample": "mimo-v2-6-pro"
+            }
+          },
+          "bars": [
+            {
+              "reference": {
+                "id": "gpt-6-luna",
+                "rule": "median definite-frontier configuration on the API basis at freeze, by displayed quality (lower median)"
+              },
+              "referenceQuality": {
+                "lower": 47.72717391795683,
+                "upper": 47.746697727480644
+              },
+              "status": "certified",
+              "rows": {
+                "gemini-4-argon": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "gpt-6.1-sol": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "claude-sonnet-5-5": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "gpt-6-astra": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "claude-opus-5-5": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "gpt-5.6-sol": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "mimo-v2-6-pro": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "gpt-6-sol": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "grok-4.7": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "gpt-5.6-luna": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "gpt-6-luna": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 47.746697727480644
+                },
+                "mimo-v2-6-flash": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 47.746697727480644
+                },
+                "claude-haiku-5-5": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "gemini-3.8-flash": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "claude-opus-5": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "glm-5.3": {
+                  "confirmed": "certified",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "deepseek-v4-flash": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "qwen3.8-max": {
+                  "confirmed": "disproved",
+                  "possible": "disproved",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                },
+                "deepseek-v4-pro": {
+                  "confirmed": "disproved",
+                  "possible": "certified",
+                  "possibleCheapest": "disproved",
+                  "witnessReferenceQuality": null
+                }
+              },
+              "possibleCheapest": [
+                "gpt-6-luna",
+                "mimo-v2-6-flash"
+              ],
+              "confirmedCheapest": null
+            }
+          ]
+        },
+        "plan": {
+          "status": "unevaluable",
+          "reason": "unevaluable: no Plan multiple is identified for a subset workload (E149, E190)"
+        }
+      }
+    },
     "measuredOnlyPlanView": {
       "specification": {
         "admission": "exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics)",
@@ -25694,6 +26101,180 @@
           }
         }
       ],
+      "frontierAnchors": {
+        "label": "anchors from frontier and near-frontier configurations only (diagnostic; the frozen anchors stay primary)",
+        "status": "evaluated",
+        "references": [
+          "claude-haiku-5-5",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-flash",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "qwen3.8-max"
+        ],
+        "bases": {
+          "api": {
+            "anchors": {
+              "low": 66.43260248449656,
+              "high": 19978.30287678965,
+              "referenceIds": [
+                "claude-haiku-5-5",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "grok-4.7",
+                "qwen3.8-max"
+              ]
+            },
+            "exchangeRate": {
+              "valuePointsPerCostDoubling": 3.0368084682790406,
+              "qualityPointsPerCostDoubling": 4.0490779577053875,
+              "anchorRatio": 300.73039636603136
+            },
+            "frozenExchangeRate": {
+              "valuePointsPerCostDoubling": 3.0368084682790406,
+              "qualityPointsPerCostDoubling": 4.0490779577053875,
+              "anchorRatio": 300.73039636603136
+            },
+            "rankChanges": {
+              "panel": [
+                "claude-haiku-5-5",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "grok-4.7",
+                "qwen3.8-max"
+              ],
+              "excluded": [],
+              "changes": {
+                "claude-haiku-5-5": 0,
+                "claude-opus-5": 0,
+                "claude-opus-5-5": 0,
+                "claude-sonnet-5-5": 0,
+                "deepseek-v4-flash": 0,
+                "deepseek-v4-pro": 0,
+                "gemini-3.8-flash": 0,
+                "gemini-4-argon": 0,
+                "glm-5.3": 0,
+                "gpt-5.6-luna": 0,
+                "gpt-5.6-sol": 0,
+                "gpt-6-luna": 0,
+                "gpt-6-sol": 0,
+                "gpt-6.1-sol": 0,
+                "grok-4.7": 0,
+                "qwen3.8-max": 0
+              },
+              "maxAbsChange": 0,
+              "maxRow": "qwen3.8-max"
+            }
+          },
+          "plan": {
+            "anchors": {
+              "low": 2.4794126541345514,
+              "high": 13400.043925611271,
+              "referenceIds": [
+                "claude-haiku-5-5",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "grok-4.7",
+                "qwen3.8-max"
+              ]
+            },
+            "exchangeRate": {
+              "valuePointsPerCostDoubling": 2.0161368842840726,
+              "qualityPointsPerCostDoubling": 2.6881825123787633,
+              "anchorRatio": 5404.523487958324
+            },
+            "frozenExchangeRate": {
+              "valuePointsPerCostDoubling": 2.0161368842840726,
+              "qualityPointsPerCostDoubling": 2.6881825123787633,
+              "anchorRatio": 5404.523487958324
+            },
+            "rankChanges": {
+              "panel": [
+                "claude-haiku-5-5",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "grok-4.7",
+                "qwen3.8-max"
+              ],
+              "excluded": [],
+              "changes": {
+                "claude-haiku-5-5": 0,
+                "claude-opus-5": 0,
+                "claude-opus-5-5": 0,
+                "claude-sonnet-5-5": 0,
+                "deepseek-v4-flash": 0,
+                "deepseek-v4-pro": 0,
+                "gemini-3.8-flash": 0,
+                "gemini-4-argon": 0,
+                "glm-5.3": 0,
+                "gpt-5.6-luna": 0,
+                "gpt-5.6-sol": 0,
+                "gpt-6-luna": 0,
+                "gpt-6-sol": 0,
+                "gpt-6.1-sol": 0,
+                "grok-4.7": 0,
+                "qwen3.8-max": 0
+              },
+              "maxAbsChange": 0,
+              "maxRow": "qwen3.8-max"
+            }
+          }
+        }
+      },
       "subsetBridges": [
         {
           "workload": "1453a9a0576b02ea",

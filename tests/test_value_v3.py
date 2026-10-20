@@ -1140,3 +1140,29 @@ def test_a_category_free_under_both_tariffs_is_left_out_of_the_bound():
     gate = v.valuation_gate({**model, "cacheWritePrice": 0.0, "price1mOutputTokens": 15.0}, [{"id": "old", "aaSlug": "a-max", "prices": free}], "t")
     assert gate["outcome"] == v.GATE_NOT_IN_FORCE and set(gate["bounds"]["ratios"]) == {"input", "cacheRead", "output"}
     assert gate["bounds"]["apiCost"] == pytest.approx([1.0, 1.5])
+
+
+def test_frontier_anchor_diagnostic_and_subset_intervals():
+    """E187: anchors rebuilt from frontier families only; E190: interval outputs on the subset workload."""
+
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    frontier = output["diagnostics"]["frontierAnchors"]
+    assert frontier["status"] == "evaluated" and frontier["references"] == ["a", "b"]
+    assert frontier["bases"]["api"]["rankChanges"]["panel"] == ["a", "b"] and "frozenExchangeRate" in frontier["bases"]["plan"]
+    (subset,) = output["subsetIntervals"].values()
+    assert subset["api"]["universe"] == ["a", "b", "c"] and subset["plan"]["reason"] == v.SUBSET_PLAN_INTERVALS
+    assert output["costInfluence"]["api"]["orderingAgreement"]["qualityVsValue"] is not None
+    assert output["costInfluence"]["api"]["commonWorkload"]["varianceAllocation"] is not None
+    retained = [dict(item, frontierFamily=item["id"] != "b") for item in CONFIGURATIONS]
+    narrow = v.assemble(retained, documents(), release_day=DAY)
+    per_row = {row["id"]: {basis: {"value": 1.0} for basis in v.BASES} for row in narrow["rows"]}
+    assert v.frontier_anchor_diagnostic(narrow, frozen, per_row)["status"].startswith("unavailable")
+
+
+def test_configurations_record_frontier_family_membership():
+    scores = {"models": [
+        {"id": "f", "name": "F", "aaSlug": "f", "rankingEligible": True, "rankingInclusionReasons": [v.RETAINED_REASON, "Required AA Intelligence Index versus total-evaluation-cost frontier family"]},
+        {"id": "r", "name": "R", "aaSlug": "r", "rankingEligible": True, "rankingInclusionReasons": [v.RETAINED_REASON]},
+    ]}
+    assert [item["frontierFamily"] for item in v.configurations_from_scores(scores)] == [True, False]

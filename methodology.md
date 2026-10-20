@@ -110,12 +110,12 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 | api | 300.7 | 3.04 | 4.05 |
 | plan | 5404.5 | 2.02 | 2.69 |
 
-**Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2).
+**Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2). Because cost and quality covary, that ratio describes dispersion; the value-variance allocation Cov(0.25 S_C, V) / Var(V) and the Kendall tau of the cost-only and quality-only orderings against the value ordering show contribution (E189).
 
-| Basis | Panel | Cost's share | Status |
-|---|---:|---:|---|
-| api | 16 | 54.9% | defined |
-| plan | 16 | 55.1% | defined |
+| Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
+|---|---:|---:|---|---:|---:|---:|
+| api | 16 | 54.9% | defined | 80.1% | 0.48 | 0.03 |
+| plan | 16 | 55.1% | defined | 62.7% | 0.57 | 0.32 |
 
 ## Quality
 

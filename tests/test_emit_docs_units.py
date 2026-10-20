@@ -149,6 +149,7 @@ def cost_world(**overrides):
         "basketReadiness": {"pricedMixCoverage": 2 / 3, "pricedLeaves": ["deepswe", "lcr"], "components": {"frontiercode": {"status": "pending capture"}, "scicode": {"status": "admitted"}}},
         "sweCompanion": {"rows": {"a": {"flag": True}, "b": {"flag": False}}},
         "matchedCost": {"status": "evaluated", "pricedQualityWeight": 0.5, "reversals": [["a", "b"]], "warnings": []},
+        "frontierAnchors": {"status": "evaluated", "references": ["a", "b"], "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.0}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 3.5}} for basis in ("api", "plan")}},
         "costComponentFamily": [
             {"component": "scicode", "bases": {basis: {"recalibrated": {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 5.0}}} for basis in ("api", "plan")}},
             {"component": "frontiercode", "status": "not in the admitted basket"},
@@ -172,5 +173,8 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     assert "values change by -1.00 points (median; -2.00 to 0.50)" in text
     assert "is 40% of the full basket (median; 10% to 60% over 2 rows)" in text and "other: no expenditure evidence" in text
     assert "Plan: unavailable: fewer than 2 complete-evidence references" in text and "the direction of its subset effect is not known" in text
-    quiet = ed.cost_diagnostics_markdown(cost_world(subsetBridges=[], matchedCost={"status": "unidentified (priced quality weight below 40%)"}, sweCompanion={"rows": {}}))
+    assert "anchors rebuilt from the 2 frontier and near-frontier references move API 2 rows move" in text and "(value points per cost doubling 3.00 vs 3.50 frozen)" in text
+    quiet = ed.cost_diagnostics_markdown(cost_world(subsetBridges=[], matchedCost={"status": "unidentified (priced quality weight below 40%)"}, sweCompanion={"rows": {}},
+                                                    frontierAnchors={"status": "unavailable: fewer than 2 frontier-family references"}))
+    assert "- **Frontier-families anchors (E187, diagnostic):** unavailable: fewer than 2 frontier-family references." in quiet
     assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet

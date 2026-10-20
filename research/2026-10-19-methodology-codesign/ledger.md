@@ -758,3 +758,22 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 # Process change (owner, 2026-10-20)
 - Before each further Perplexity round, the same review runs inside Claude Code: Claude Sonnet 5.5 at Low, Medium, High, XHigh and Max effort, then Claude Opus 5.5 at the same five levels. Each level is repeated until it returns no further feedback, and the feedback is folded into the draft, before the next level starts. The Perplexity multi-AI round resumes only after Opus 5.5 Max has no further feedback. Convergence still requires all six Perplexity panel models to return NO FURTHER FEEDBACK on the same draft. Internal reviews are numbered I1, I2, ….
+
+# Internal review ladder (owner process, 2026-10-20)
+
+## Internal review I1 (Claude Sonnet 5.5, effort low, on r60) — adopted, modified or rejected
+- E187 (H1). The retention rule is now stated as implemented in build_scores: a tracked-catalog configuration with both an exact AA DeepSWE result and a matched exact Bug Hunt result is ranked, and leaves when either stops being exact or is withdrawn. So retention is not path-dependent; the draft's "ranked in earlier releases" wording was misleading. Retained rows can set anchor extremes (verified: Grok 4.7, retained, sets the Plan upper anchor on 2026-10-17), so a frontier-families anchor diagnostic now rebuilds each basis's anchors from frontier and near-frontier references and publishes rank changes. Narrowing the cohort stays the open owner question (b).
+- E188 (H2). The configuration rule is stated as implemented (frontier.family_selection, build_scores.frontier_tiers):
+  - frontier family: highest-Index rendered-frontier point, then lower total cost, then name;
+  - near-frontier family: smallest Index gap, then lower cost, then name;
+  - the alternatives are published.
+- E189 (M1, modified). The SD ratio stays as the flag's statistic (E60, E91, E126). Beside it, the common-workload panel publishes the value-variance allocation Cov(0.25 S_C, V)/Var(V) and Cov(0.75 Q, V)/Var(V), plus the tau of the cost-only and quality-only orderings against the value ordering. On 2026-10-17 the API cost allocation is 80% against an SD ratio of 55%, and the quality-only tau is 0.03: cost decides most of the API ordering, a fact now visible.
+- E190 (M2). Frontier and bar outputs are also published on each subset workload over every row with full cost there (today the seven Index SDLC evaluations, all 19 rows). They carry the workload label; the main-workload outputs stay primary, and Plan subset outputs are unevaluable (no identified multiple).
+- E191 (M5). Every O- or E-tagged rule is normative wherever it appears. Owner decisions govern editor decisions, and an amending rule governs the rule it amends.
+- M4 (editorial). Bug Hunt is published by its maintainer (Bug Hunt Bench, github.com/phuryn/bug-hunt-bench, Product Compass); ValueRank does not run it. "Independent" is defined as executed by a party other than AA. This answers I1's first owner question from the data.
+- L1, L2 (editorial). Slider results are sensitivity columns, and headline ranks always use 25%. The bar policy pins one bar in v1.
+- E155 caption (from recommendation 3). Each scenario-share table states that it excludes benchmark sampling noise beyond S1M and fitted-rating uncertainty.
+- Not adopted:
+  - M3, the owner decision challenge to O12. A clip hold is resolved by a versioned re-freeze in the same release cycle, so no entrant is excluded; O12 stands.
+  - The S1T task-resampling stream. A binomial task model is an analyst assumption without a documented estimand (E145, E155).
+  - The bar ladder. More bars change the registered bar policy (E156); this is noted as a possible owner question.
