@@ -695,3 +695,17 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 
 ## Reviewer 60 (GLM 5.3, round 10, Thinking) — adopted or modified
 - Medium 2 (E178), Medium 3 (E179, modified), both Lows (editorial). Medium 1 was rejected on its premise and E174 was reworded to prevent the confusion. Read check passed. GLM re-executed the draft's numerical fixtures and all verified.
+
+## Editor decisions after reviewer 61 (owner may override)
+- E180. Dispersion convention (Gemini High 1, modified). Every cohort SD and variance (within-cohort influence, non-discriminating threshold, drift spreads, covariance allocation) is the population statistic over the declared panel (divisor n), and a panel of fewer than two rows is "undefined (insufficient panel)". Gemini's n-1 estimator is not adopted: the panel is the population being described, not a sample, and the implementation already uses the population statistic. Scenario dispersion (E87) is the population variance over scenarios.
+- E177 amended (Gemini High 2). The swing gate compares rows ranked in both releases. New rows are published as "cohort admission (no prior score)" and departed rows as "cohort exit"; this gate holds neither.
+- Gemini Medium 1 (editorial). "leave-AA-out is a headline robustness column" contradicted E146. It now reads as a registered branch that is not identifiable at 20% independent weight, with independent-source robustness reported by the E62 matched-panel statistics.
+- E181. GDPval-AA logistic sensitivity formula (Gemini Medium 2): z = 100 / (1 + 10^((E_A - E)/400)), with E_A = 1600 (DeepSeek V4.1 Flash (max), AA's pinned anchor, verified on AA's methodology page 2026-10-20) and the conventional Elo scale (AA does not state its scale factor). It is published as rank changes on the common panel. Gemini's owner question (bar reference or Elo anchor) is answered from the draft's own text ("vs the pinned anchor model"): it is AA's scale anchor, not an owner matter. The sensitivity was specified but not implemented; implementation is queued.
+- E128 amended (Gemini Medium 3). The unanswered-or-partial share is 0 when A = 1 (h undefined) and (p + a)/T where counts are published.
+- E179 amended (Gemini Low 1). With a single admissible pair, the leave-selected-out choice reads "none: the row would fall back to API cost (O13)".
+- E182. Asymmetric intervals (Gemini Low 2). When an interval, as published or after domain clipping, is not centred on the published point, the S1M kernel puts half its mass on each side (uniform per side, with an arcsine alternative per side), so the point stays the median. All v1 Terminal-Bench intervals are symmetric and unclipped at current scores.
+
+## Reviewer 61 (Gemini 3.8 Flash, round 10, Thinking) — adopted or modified
+- High 1 (E180, modified), High 2 (E177), Medium 1 (editorial), Medium 2 (E181), Medium 3 (E128), Low 1 (E179), Low 2 (E182). The first attempt stopped at Perplexity's tool-call limit after parts 1-2, having spent calls on tool setup and failing raw-URL fetches. The retry dropped the raw URLs and told Gemini to start with part 1; it read all seven parts and passed the read check.
+
+# Round 10 complete (reviewers 56-61). Every panel model returned HAS FEEDBACK on its draft; round 11 starts with GPT-6.1 Sol on draft r56.
