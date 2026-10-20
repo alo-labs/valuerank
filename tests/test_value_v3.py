@@ -699,3 +699,13 @@ def test_measured_calibration_without_references_and_unknown_anchor_rows():
     assert result["workloads"]["w1"]["officialAnchorProvenance"]["low"] == {"row": "retired", "evidence": "not in the current table"}
     assert result["values"] == {} and result["reversals"] == [] and result["maxAbsValueChange"] is None
     assert v._plan_evidence(calibration_row("r", "w1", 1.0, grade="reports")) == "concordant reports"
+
+
+def test_rounded_records_need_a_registered_joint_law():
+    """E154: v1 registers only the singleton law; records linked by a sampling identity fail the build."""
+
+    assert v.rounding_components(["frontiercode", "itbench-aa"]) == [["frontiercode"], ["itbench-aa"]]
+    assert v.rounding_components(["frontiercode"], (("index-total", "residual"),)) == [["frontiercode"]]
+    with pytest.raises(ValueError, match=r"no registered joint rounding law \(E154\) for the rounded-record components \[\['a', 'b', 'c'\]\]"):
+        v.rounding_components(["a", "b", "c", "d"], (("a", "b"), ("b", "c")))
+    assert v.JOINT_LAWS == {"singleton": "independent uniform within the reporting interval (arcsine alternative)"} and v.SAMPLING_IDENTITIES == ()

@@ -317,3 +317,30 @@ def test_a_published_interval_supports_expected_performance_only_when_the_source
     assert sc.interval_interpretation(documented)["permittedLabel"] == "source-supported expected-performance uncertainty"
     assert sc.interval_interpretation({**documented, "samplingUnit": sc.NOT_ESTABLISHED})["permittedLabel"].startswith("conventional CI-range sensitivity")
     assert sc.interval_interpretation({**documented, "kernelStatus": "conventional-within-CI"})["permittedLabel"].startswith("conventional CI-range sensitivity")
+
+
+def test_release_text_lint_rejects_interval_and_run_claims_without_an_admitting_stream():
+    """E155: a source interval may enter only through S1M (its allowlist admits it); run ranges enter no v1 stream."""
+
+    assert sc.lint_release_text("Scenario shares include Terminal-Bench's published confidence interval.") == [
+        "Scenario shares include Terminal-Bench's published confidence interval."
+    ]
+    assert sc.lint_release_text("S2 draws benchmark run-to-run ranges; nothing else changes.") == ["S2 draws benchmark run-to-run ranges;"]
+    assert sc.lint_release_text("S1M draws run values inside the published interval.") == ["S1M draws run values inside the published interval."]
+    passing = (
+        "S1M draws inside the published 95% confidence interval. "
+        "Other published intervals and run-to-run ranges are not quantified in v1 scenario shares. "
+        "Benchmark repeatability is outside the S0-S2 shares.\n"
+        "The leaderboard publishes a confidence interval. Scenario shares are frequencies over declared streams."
+    )
+    assert sc.lint_release_text(passing) == []
+
+
+def test_s0_rejects_a_draw_derived_only_from_an_analyst_convention():
+    """E134: S0 cost and leaf draws rest on published reporting precision, never on an analyst convention alone."""
+
+    convention = RowInputs("g", {}, Kernel("uniform", (90.0, 110.0), derivation=sc.ANALYST_CONVENTION))
+    with pytest.raises(ValueError, match=r"S0 cannot vary g cost: its parameters derive only from an analyst convention \(E134\)"):
+        sc.validate_stream([convention], "S0")
+    assert sc.validate_stream([convention], "S1") == ["identification convention", "reporting precision"]
+    assert Kernel("uniform", (1.0, 2.0)).derivation == sc.PUBLISHED_PRECISION

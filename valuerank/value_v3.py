@@ -978,6 +978,28 @@ def _kernel(low: float, high: float, point: float) -> scenarios.Kernel:
     return scenarios.Kernel("uniform", (low, high), "endpoint-heavy") if high > low else scenarios.Kernel("fixed", (point,))
 
 
+# E154: rounded published records linked by an accounting identity that is used as a sampling constraint form one
+# compiled component, which needs a registered joint law. v1 uses no identity as a sampling constraint (AA's Index
+# total and the Coding Agent Index published sum are validation identities), so every rounded record is a singleton.
+SAMPLING_IDENTITIES: tuple = ()
+JOINT_LAWS = {"singleton": "independent uniform within the reporting interval (arcsine alternative)"}
+
+
+def rounding_components(records: list[str], identities: tuple = SAMPLING_IDENTITIES) -> list[list[str]]:
+    """E154: connected components of rounded records under the sampling identities; only singletons have a registered law."""
+
+    components = [{record} for record in records]
+    for identity in identities:
+        members = set(identity)
+        linked = [component for component in components if component & members]
+        if linked:
+            components = [component for component in components if not component & members] + [set().union(*linked)]
+    unregistered = sorted(sorted(component) for component in components if len(component) > 1)
+    if unregistered:
+        raise ValueError(f"no registered joint rounding law (E154) for the rounded-record components {unregistered}")
+    return sorted(sorted(component) for component in components)
+
+
 def _cost_kernel(row: dict, cost: float) -> scenarios.Kernel:
     """E154: the basis cost derived from its components' draws, never one uniform on the summed interval.
 
@@ -988,6 +1010,7 @@ def _cost_kernel(row: dict, cost: float) -> scenarios.Kernel:
 
     ratio = cost / row["cost"]["costUsd"]
     detail = row["components"]
+    rounding_components([key for key in row["cost"]["components"] if detail[key]["halfWidthUsd"] > 0])
     rounded = [detail[key] for key in row["cost"]["components"] if detail[key]["halfWidthUsd"] > 0]
     if len(rounded) <= 1:
         return _kernel(row["cost"]["lowUsd"] * ratio, row["cost"]["highUsd"] * ratio, cost)
@@ -1063,6 +1086,7 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
         "streamDescriptions": dict(scenarios.TARGET_PROFILES),
         "notQuantified": list(NOT_QUANTIFIED),
         "intervalInterpretation": {MEASUREMENT_STREAM: [scenarios.interval_interpretation(TB_INTERVAL_CONTRACT)]},
+        "jointRoundingLaw": {"samplingIdentities": list(SAMPLING_IDENTITIES), "registeredLaws": JOINT_LAWS, "components": "every rounded record is a singleton"},
         "results": results,
         "barLabels": bar_labels(assembled, frozen, seed=seed, batch=n),
     }

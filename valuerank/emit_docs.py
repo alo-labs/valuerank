@@ -12,6 +12,7 @@ import json
 
 from valuerank import basket
 from valuerank import quality as q
+from valuerank import scenarios
 from valuerank.aa_reconciliation import publication as aa_reconciliation_publication, reconcile as reconcile_aa
 from valuerank.paths import DATA, ROOT
 from valuerank.publication import (
@@ -912,6 +913,10 @@ def main(*, root=ROOT, data=DATA) -> int:
         "scores.md": scores_markdown(facts),
         "raw-data.md": raw_data(facts),
     }
+    # E155: no published sentence may put a source interval or run range into scenario shares without an admitting stream.
+    violations = [f"{name}: {sentence}" for name, text in documents.items() for sentence in scenarios.lint_release_text(text)]
+    if violations:
+        raise ValueError("release-text lint (E155) rejects: " + " | ".join(violations))
     for name in OUTPUTS:
         (root / name).write_text(documents[name])
     print(json.dumps({

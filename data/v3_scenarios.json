@@ -35,6 +35,13 @@
       }
     ]
   },
+  "jointRoundingLaw": {
+    "samplingIdentities": [],
+    "registeredLaws": {
+      "singleton": "independent uniform within the reporting interval (arcsine alternative)"
+    },
+    "components": "every rounded record is a singleton"
+  },
   "results": {
     "api": [
       {

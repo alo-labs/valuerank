@@ -241,3 +241,9 @@ def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted)
     assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max)." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology
+
+
+def test_release_text_lint_blocks_a_sentence_that_puts_run_ranges_into_scenario_shares(repo_copy, pinned_clock):
+    edit_json(repo_copy, "scores.json", lambda doc: doc["v3"]["scenarios"].__setitem__("notQuantified", ["benchmark run-to-run ranges enter the S2 scenario shares"]))
+    with pytest.raises(ValueError, match=r"release-text lint \(E155\) rejects: methodology.md: - benchmark run-to-run ranges enter the S2 scenario shares"):
+        emit(repo_copy)

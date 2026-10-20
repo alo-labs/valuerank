@@ -637,3 +637,9 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Reviewer 51 (Claude Sonnet 5.5, Thinking): VERDICT: NO FURTHER FEEDBACK. Read check passed.
 - Reviewer 52 (Grok 4.7, Thinking): VERDICT: NO FURTHER FEEDBACK. Read check passed (part 5 quoted from its 11th-to-last word).
 - Reviewer 53 (Kimi K3, Thinking): VERDICT: NO FURTHER FEEDBACK. Read check passed (raw-URL fetches failed; the connector parts were used).
+- Reviewer 54 (GLM 5.3, Thinking): VERDICT: NO FURTHER FEEDBACK. Read check passed.
+
+## Implementation audit against r49 (editor, while round 9 ran)
+- E155 release-text lint was specified but not implemented: added (scenarios.lint_release_text); the Markdown emitter refuses to publish a sentence that puts a source interval or run range into scenario shares unless it names an admitting stream (S1M, for intervals) or states the target is outside the shares. The published documents pass.
+- E134 and E154 guards were specified but not explicit: kernels now record their parameter derivation and S0 rejects one derived only from an analyst convention; rounded cost records are compiled into components under the sampling identities (none in v1) and a multi-record component without a registered joint law fails the build. No output changes (every admitted basket cost is unrounded; the scenario file records the joint-law registry).
+

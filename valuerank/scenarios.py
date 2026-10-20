@@ -28,6 +28,7 @@ import itertools
 import json
 import math
 import random
+import re
 from dataclasses import dataclass, field
 
 from valuerank import anchors as anchor_math
@@ -80,6 +81,11 @@ ALPHA = 0.05
 THRESHOLD = 0.90
 
 
+# E134: where a kernel's parameters come from; an S0 draw must rest on published evidence, never on an analyst convention alone.
+PUBLISHED_PRECISION = "published reporting precision"
+ANALYST_CONVENTION = "analyst convention"
+
+
 @dataclass(frozen=True)
 class Kernel:
     """A draw kernel: 'fixed' (value), 'uniform' (low, high), 'uniform-sum' (offset, (low, high), ...) or 'runs' (public run values)."""
@@ -88,6 +94,7 @@ class Kernel:
     params: tuple
     alternative: str | None = None  # 'endpoint-heavy' for interval-only inputs
     target: str = REPORTING_PRECISION  # E145: what the kernel's variation is uncertainty about
+    derivation: str = PUBLISHED_PRECISION  # E134: what its parameters are derived from
 
     def __post_init__(self):
         if self.family == "runs" and self.target == REPORTING_PRECISION:
@@ -180,6 +187,28 @@ def interval_interpretation(contract: dict) -> dict:
     return {**contract, "permittedLabel": INTERVAL_LABELS[supported]}
 
 
+# E155: the release-text lint. A published sentence that puts a source interval or a run range into scenario
+# shares must name a stream whose allowlist admits that target, or state that the target is outside the shares.
+_SHARES = re.compile(r"scenario (?:share|frequenc)|\bS[0-2]M?\b|\bstreams?\b", re.IGNORECASE)
+_SOURCE_INTERVAL = re.compile(r"confidence interval|published interval|source interval", re.IGNORECASE)
+_RUN_RANGE = re.compile(r"run-to-run|run ranges?\b|run values|repeated runs", re.IGNORECASE)
+_OUTSIDE = re.compile(r"\bnot quantified\b|\boutside\b|\bnever\b|\bnot\b", re.IGNORECASE)
+
+
+def lint_release_text(text: str) -> list[str]:
+    """E155: sentences that claim a source interval or run range enters scenario shares without an admitting stream."""
+
+    admitting = [stratum for stratum in STRATA if INTERVAL_RANGE in STREAM_TARGETS[stratum]]
+    violations = []
+    for sentence in re.split(r"(?<=[.;])\s+|\n+", text):
+        interval, runs = _SOURCE_INTERVAL.search(sentence), _RUN_RANGE.search(sentence)
+        if not (interval or runs) or not _SHARES.search(sentence) or _OUTSIDE.search(sentence):
+            continue
+        if runs or not any(re.search(rf"\b{stratum}\b", sentence) for stratum in admitting):
+            violations.append(sentence.strip())
+    return violations
+
+
 def validate_stream(rows: list[RowInputs], stratum: str) -> list[str]:
     """E145: every varying input must be one the stratum's target profile allows; returns the varied targets.
 
@@ -197,6 +226,8 @@ def validate_stream(rows: list[RowInputs], stratum: str) -> list[str]:
                 continue
             if kernel.target not in STREAM_TARGETS[stratum]:
                 raise ValueError(f"{stratum} ({TARGET_PROFILES[stratum]}) cannot vary {row.row} {name}: its kernel concerns {kernel.target}")
+            if stratum == "S0" and kernel.derivation == ANALYST_CONVENTION:
+                raise ValueError(f"S0 cannot vary {row.row} {name}: its parameters derive only from an analyst convention (E134)")
             varied.add(kernel.target)
     if stratum != "S0":
         varied.add(IDENTIFICATION_CONVENTION)  # missing-leaf domains (drawn in the scenario)
