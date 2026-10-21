@@ -283,6 +283,18 @@ def measurement_objects(route: dict, release_day: date | None = None, window: di
     return objects or [{**route, "independentReports": [report for report in reports if report["id"] in counted], "excludedReportIds": excluded}]
 
 
+# E208: the token-mix comparison is against the basket's own demand region (E124), never AA's Index-wide shares. AA
+# publishes that region only as set-identified totals, so no route's category shares can be compared with it today.
+MIX_NOT_REPORTED = "mix not reported: the measurement publishes no token-category shares"
+MIX_UNIDENTIFIED = "mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed"
+
+
+def mix_check(measurement: dict) -> str:
+    """E208: the token-mix status of a measurement against the basket's demand region."""
+
+    return MIX_UNIDENTIFIED if measurement.get("workloadMix") else MIX_NOT_REPORTED
+
+
 def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None, window: dict | None = None) -> list[dict]:
     """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match.
 
@@ -322,6 +334,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
                 # E144: valuation compatibility and capacity status are the donor measurement's for a transfer.
                 "valuation": "different" if "different" in {valuation_status(item) for item in checks} else valuation_status(provenance),
                 "measurementCapacityStatus": measurement_capacity_status(provenance),
+                "mixCheck": mix_check(provenance),
             }
         )
     return candidates
@@ -510,6 +523,7 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         "grade": selected["grade"],
         "identification": selected["identification"],
         "measurementCapacityStatus": capacity,
+        "mixCheck": selected.get("mixCheck", mix_check(route)),
         "evidenceDate": selected.get("evidenceDate"),
         "donorRouteId": selected.get("donorRouteId"),
         "flags": flags,

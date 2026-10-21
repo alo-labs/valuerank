@@ -15,6 +15,7 @@ import pytest
 from valuerank import anchors as anchor_math
 from valuerank import basket
 from valuerank import diagnostics
+from valuerank import plan_routes as pr
 from valuerank import quality as q
 from valuerank import scenarios
 from valuerank import value_v3 as v
@@ -1318,3 +1319,30 @@ def test_displayed_cheapest_reads_the_headline_scale_with_ties_listed():
     low, high = v.displayed_cheapest(result, ladder, "api")["bars"]
     assert low["cheapest"] and low["qualifierN"] >= 1 and low["costUsd"] is not None
     assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": []}
+
+
+def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_range():
+    """E207: reach of each frozen bar in the current population, and an informational flag (no score changes)."""
+
+    result, frozen = scored()
+    current = v.bar_currency(result, frozen)
+    assert current["flag"] is None and current["lifetime"] == v.BAR_LIFETIME and len(current["bars"]) == len(frozen["barReferences"])
+    assert all(item["reachN"] <= item["populationN"] for item in current["bars"])
+
+    def moved(level):
+        return {**frozen, "barReferences": [dict(bar, level=level) if bar["id"] == v.BAR_ID else bar for bar in frozen["barReferences"]]}
+
+    assert v.bar_currency(result, moved(-1.0))["flag"] == v.BAR_STALE_LOW and v.bar_currency(result, moved(1000.0))["flag"] == v.BAR_STALE_HIGH
+    empty = v.bar_currency({**result, "rows": []}, {**frozen, "barReferences": []})
+    assert empty["flag"] is None and empty["bars"] == [] and empty["currentLadder"] == []
+
+
+def test_routes_inherit_their_sources_workload_mix():
+    """E208: a route's token-mix status uses the category shares its source publishes; never AA's Index-wide shares."""
+
+    routes = documents()["planRoutes"]
+    sourced = {**routes, "sourceEvidence": {"lab": {"workloadMix": {"outputPct": 0.3}}},
+               "routes": [dict(routes["routes"][0], sourceEvidenceId="lab"), routes["routes"][1]]}
+    rows = {row["id"]: row for row in v.assemble(CONFIGURATIONS, documents(planRoutes=sourced), release_day=DAY)["rows"]}
+    statuses = {row_id: [item["mixCheck"] for item in rows[row_id]["routeCandidates"]] for row_id in ("a", "b")}
+    assert statuses == {"a": [pr.MIX_UNIDENTIFIED], "b": [pr.MIX_NOT_REPORTED]}

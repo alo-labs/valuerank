@@ -159,8 +159,8 @@ def test_dispersion_text_shows_the_sd_and_covariance_term():
 class StubFacts:
     """The slice of emit_docs.Facts the cost-diagnostics section reads."""
 
-    def __init__(self, diagnostics):
-        self.v3 = {"diagnostics": diagnostics}
+    def __init__(self, diagnostics, **v3):
+        self.v3 = {"diagnostics": diagnostics, **v3}
 
     @staticmethod
     def labels(row_ids):
@@ -188,7 +188,9 @@ def cost_world(**overrides):
         }],
     }
     diagnostics.update(overrides)
-    return StubFacts(diagnostics)
+    currency = {"lifetime": "until the next re-freeze", "bars": [{"level": 56.7, "reachN": 18, "populationN": 35}], "currentLadder": [{"level": 56.7}], "flag": None}
+    rows = [{"plan": {"mixCheck": "mix unidentified"}}, {"plan": {"mixCheck": "mix unidentified"}}, {"plan": {"mixCheck": "mix not reported"}}, {"plan": None}]
+    return StubFacts(diagnostics, barCurrency=currency, rows=rows)
 
 
 def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
@@ -205,6 +207,11 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     assert "- **Frontier-families anchors (E187, diagnostic):** unavailable: fewer than 2 frontier-family references." in quiet
     assert "the ladder (headline, lower quartile, upper quartile) would be 58.3 / 50.0 / 60.9 against 56.7 / 48.1 / 60.9 frozen; anchors rebuilt from its 2 references move API 2 rows move" in text
     assert "(value points per cost doubling 3.04 vs 2.74 frozen)." in text
+    assert "- **Bar currency (E207, informational):** rows reaching each frozen bar: quality 56.7: 18 of 35; the current population would freeze 56.7; lifetime until the next re-freeze; no staleness flag." in text
+    assert "- **Token mix (E208):** 1 selected routes: mix not reported; 2 selected routes: mix unidentified." in text
+    stale = ed.bar_currency_text({"lifetime": "l", "bars": [], "currentLadder": [], "flag": "headline bar below"})
+    assert "no bar frozen; the current population would freeze unavailable" in stale and stale.endswith("flag: headline bar below.")
+    assert ed.mix_check_text([{"plan": None}]) == "- **Token mix (E208):** no selected Plan route."
     lone = ed.family_primary_text({"status": "unavailable: fewer than 2 family-primary references", "population": ["a"], "references": ["a"], "ladder": [], "frozenLadder": []}, StubFacts({}))
     assert lone.endswith("would be unavailable against unavailable frozen; anchors unavailable: fewer than 2 family-primary references.")
     assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet

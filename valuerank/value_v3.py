@@ -389,7 +389,13 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     agent_records = {item["label"]: item for item in documents["codingAgents"]["configurations"]}
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
     mapping = documents["configurationMap"]["rows"]
-    routes = documents["planRoutes"]["routes"]
+    # E208: a route inherits the token-category mix its source publishes for the measured workload.
+    sources = documents["planRoutes"].get("sourceEvidence") or {}
+    routes = [
+        {**route, "workloadMix": sources[route["sourceEvidenceId"]]["workloadMix"]}
+        if "workloadMix" not in route and (sources.get(route.get("sourceEvidenceId")) or {}).get("workloadMix") else route
+        for route in documents["planRoutes"]["routes"]
+    ]
     # O32: only end-user reports dated in the release's report window count toward admission.
     window = (documents["planRoutes"].get("evidencePolicy") or {}).get("reportingWindow")
     price_records = documents["priceRecords"]["records"]
@@ -1104,6 +1110,28 @@ def subset_bridges(assembled: dict, frozen: dict, per_row: dict, expenditure: di
     return bridges
 
 
+# E207: the frozen ladder's standing in the current population, so a bar most rows have outgrown is flagged, not silent.
+BAR_LIFETIME = "until the next anchor re-freeze or methodology version, whichever comes first"
+BAR_STALE_LOW = "headline bar below the current population's lower quartile: re-freeze the ladder at the next anchor version (informational; no score changes)"
+BAR_STALE_HIGH = "headline bar above the current population's upper quartile: re-freeze the ladder at the next anchor version (informational; no score changes)"
+
+
+def bar_currency(assembled: dict, frozen: dict) -> dict:
+    """E207: each frozen bar's reach in the current bar population, the ladder this population would freeze, and a flag
+    when the headline bar has left the current interquartile range."""
+
+    population, current = bar_levels(assembled)
+    displayed = [row["summary"].displayed for row in assembled["rows"] if row["id"] in set(population)]
+    bars = [{"bar": bar["id"], "level": bar["level"], "reachN": sum(1 for value in displayed if value >= bar["level"]), "populationN": len(displayed)}
+            for bar in frozen["barReferences"]]
+    levels = {bar["id"]: bar["level"] for bar in current}
+    headline = next((bar["level"] for bar in frozen["barReferences"] if bar["id"] == BAR_ID), None)
+    flag = None
+    if headline is not None and levels:
+        flag = BAR_STALE_LOW if headline < levels[BAR_LADDER[1][0]] else BAR_STALE_HIGH if headline > levels[BAR_LADDER[2][0]] else None
+    return {"lifetime": BAR_LIFETIME, "bars": bars, "currentLadder": [{key: bar[key] for key in ("id", "level")} for bar in current], "flag": flag}
+
+
 def _rule(rule: str, status: str, detail: str) -> dict:
     return {"rule": rule, "status": status, "detail": detail}
 
@@ -1200,6 +1228,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "rows": [_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))) for row in rows],
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
         "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis) for basis in BASES},
+        "barCurrency": bar_currency(assembled, frozen),
         "subsetIntervals": subset_interval_outputs(assembled, frozen),
         "measuredOnlyPlanView": measured,
         "diagnostics": {

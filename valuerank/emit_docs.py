@@ -377,6 +377,26 @@ def family_primary_text(diagnostic, facts):
     ) + "."
 
 
+def bar_currency_text(currency):
+    """E207: how many bar-population rows reach each frozen bar now, the ladder this population would freeze, and the flag."""
+
+    reach = "; ".join(f"{bar_name(item)}: {item['reachN']} of {item['populationN']}" for item in currency["bars"]) or "no bar frozen"
+    ladder = " / ".join(f"{item['level']:.1f}" for item in currency["currentLadder"]) or "unavailable"
+    return (f"- **Bar currency (E207, informational):** rows reaching each frozen bar: {reach}; the current population would freeze {ladder}; "
+            f"lifetime {currency['lifetime']}; " + (f"flag: {currency['flag']}." if currency["flag"] else "no staleness flag."))
+
+
+def mix_check_text(rows):
+    """E208: the token-mix status of each selected Plan route (never compared with AA's Index-wide shares)."""
+
+    counts = {}
+    for row in rows:
+        status = (row.get("plan") or {}).get("mixCheck")
+        if status:
+            counts[status] = counts.get(status, 0) + 1
+    return "- **Token mix (E208):** " + ("; ".join(f"{count} selected routes: {status}" for status, count in sorted(counts.items())) or "no selected Plan route") + "."
+
+
 def bar_name(bar):
     """E192: a bar is a frozen quality level."""
 
@@ -981,6 +1001,8 @@ def cost_diagnostics_markdown(facts):
         lines.append(f"- **Frontier-families anchors (E187, diagnostic):** {frontier['status']}.")
     lines.append(policy_bar_text(frontier["bar"], facts))
     lines.append(family_primary_text(diagnostics["familyPrimary"], facts))
+    lines.append(bar_currency_text(facts.v3["barCurrency"]))
+    lines.append(mix_check_text(facts.v3["rows"]))
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(
