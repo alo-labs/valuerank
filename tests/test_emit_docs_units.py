@@ -231,3 +231,18 @@ def test_coding_share_text_reports_the_median_coding_share():
     text = ed.coding_share_text({"rows": rows})
     assert "make up 30% of the basket's cost (median over 2 configurations with the full basket; 20% to 40%)" in text
     assert ed.coding_share_text({"rows": rows[2:]}) == ""
+
+
+def test_displayed_cheapest_sentences_name_the_row_or_none():
+    """E203: one sentence per basis, each bar with its cheapest row and cost, or none."""
+
+    class Facts:
+        labels = staticmethod(lambda row_ids: ", ".join(row_ids))
+        v3 = {"displayedCheapest": {basis: {"bars": [
+            {"level": 50.0, "cheapest": ["a"], "costUsd": 12.0, "qualifierN": 3},
+            {"level": 70.0, "cheapest": [], "costUsd": None, "qualifierN": 0},
+        ]} for basis in ("api", "plan")}}
+
+    api, plan = ed.displayed_cheapest_sentences(Facts)
+    assert api == "API basis, displayed record (not a claim; E203): cheapest at or above quality 50.0: a ($12.00 per basket run; 3 reach it); at or above quality 70.0: none."
+    assert plan.startswith("Plan basis, displayed record")

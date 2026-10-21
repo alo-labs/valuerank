@@ -38911,6 +38911,72 @@
         "reason": "no row has FullCost and an identified M_W (E61/E67)"
       }
     },
+    "displayedCheapest": {
+      "api": {
+        "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
+        "bars": [
+          {
+            "bar": "bar:median-quality",
+            "level": 56.70256809558702,
+            "qualifierN": 17,
+            "costUsd": 531.5621485772531,
+            "cheapest": [
+              "gpt-6.1-sol-medium"
+            ]
+          },
+          {
+            "bar": "bar:lower-quartile-quality",
+            "level": 48.061482895190444,
+            "qualifierN": 26,
+            "costUsd": 279.5120478141823,
+            "cheapest": [
+              "deepseek-v4-flash"
+            ]
+          },
+          {
+            "bar": "bar:upper-quartile-quality",
+            "level": 60.88196620399156,
+            "qualifierN": 9,
+            "costUsd": 531.5621485772531,
+            "cheapest": [
+              "gpt-6.1-sol-medium"
+            ]
+          }
+        ]
+      },
+      "plan": {
+        "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
+        "bars": [
+          {
+            "bar": "bar:median-quality",
+            "level": 56.70256809558702,
+            "qualifierN": 17,
+            "costUsd": 48.15020028061748,
+            "cheapest": [
+              "claude-sonnet-5-5-xhigh"
+            ]
+          },
+          {
+            "bar": "bar:lower-quartile-quality",
+            "level": 48.061482895190444,
+            "qualifierN": 26,
+            "costUsd": 12.421550833156402,
+            "cheapest": [
+              "claude-sonnet-5-5-medium"
+            ]
+          },
+          {
+            "bar": "bar:upper-quartile-quality",
+            "level": 60.88196620399156,
+            "qualifierN": 9,
+            "costUsd": 49.346653228486176,
+            "cheapest": [
+              "gpt-6.1-sol-medium"
+            ]
+          }
+        ]
+      }
+    },
     "subsetIntervals": {
       "1453a9a0576b02ea": {
         "components": [

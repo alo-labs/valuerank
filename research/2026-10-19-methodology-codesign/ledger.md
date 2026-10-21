@@ -915,3 +915,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L1 (adopted): E184's panel sizes are stated for both freezes.
 - L2 (adopted): the "non-tautology" sentence now names the property that matters (a level is never a configuration).
 - Recommendation 3 (one counts object beside the headline): partly met by the README scope line (cohort and scored counts); not adopted further.
+
+## Internal review I7 (Claude Sonnet 5.5, effort low, on r66) — adopted, modified or rejected
+- H1 (adopted): the bar policy now states the O34 positions, zero-based floor((n − 1)k/4) for k = 1, 2, 3, as elements of the order (never interpolated), frozen together, all unavailable when n < 2, published in the order k = 2, 1, 3, with the fixture n = 35 → 9th, 18th and 26th ascending values. "v2 pins one bar" is replaced by policy version 3. The reviewer's owner question (elements or interpolated percentiles) is already settled by O34's option text; not re-asked.
+- M1 (adopted): "21 of the 23 cohort rows" → "35 of the 37". The proposed prose-count lint is not adopted; the README's counts are generated, and the draft is regenerated from the ledger at each re-freeze.
+- M2 (adopted, modified): the valuation outcome (4) becomes E202. E191 now says an E number names one decision record, a record holding several rules labels them, and an amendment cites the record it amends. The other reuses the reviewer lists (E177, E182, E184) are records with several labelled rules or later amendments; not renumbered.
+- M3 (adopted as E203): each bar and basis publishes the displayed-record cheapest row (lowest-cost scored, non-provisional main-workload row whose displayed quality reaches the bar, ties listed, count of rows reaching it), labelled "displayed record on the headline scale, not a claim". Implemented in `value_v3.displayed_cheapest` and printed in the README. Today API headline: GPT-6.1 Sol (medium), $531.56, 17 rows reach it.
+- L1 (adopted): the brief's coding share is now 53% over 33 rows.
+- L2 (adopted, E203): the summary prints the median basket share carried by admitted components with no quality leaf (AA-Briefcase, GDP.pdf; 15%). ITBench-AA is not admitted, so it is not in the share. No score changes (O6, O15).

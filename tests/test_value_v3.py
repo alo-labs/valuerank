@@ -1293,3 +1293,13 @@ def test_cheaper_siblings_leave_out_ranked_configurations_and_match_on_family():
     sibling = {"name": "Fam (high)", "family": "Fam", "effort": "high"}
     assert v.cheaper_siblings(sibling, {"intelligenceIndexCost": {"total": 5.0}}, points, {"max", "high", "low"}) == ["Fam (medium)"]
     assert v.configuration_family({"name": "Solo"}) == "Solo"
+
+
+def test_displayed_cheapest_reads_the_headline_scale_with_ties_listed():
+    """E203: the cheapest non-provisional scored main-workload row reaching each bar, or none."""
+
+    result, frozen = scored()
+    ladder = dict(frozen, barReferences=[{"id": "low", "level": 0.0}, {"id": "high", "level": 101.0}])
+    low, high = v.displayed_cheapest(result, ladder, "api")["bars"]
+    assert low["cheapest"] and low["qualifierN"] >= 1 and low["costUsd"] is not None
+    assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": []}

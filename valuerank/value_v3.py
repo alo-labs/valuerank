@@ -779,6 +779,22 @@ def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> l
 
 VACUOUS_COMPARISON = "vacuous: fewer than two evaluable configurations can qualify"
 
+DISPLAYED_CHEAPEST_LABEL = "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)"
+
+
+def displayed_cheapest(assembled: dict, frozen: dict, basis: str) -> dict:
+    """E203: per bar, the cheapest non-provisional scored main-workload rows whose displayed quality reaches the level (ties listed)."""
+
+    rows = [row for row in assembled["rows"] if row["cost"]["workload"] == assembled["mainWorkload"] and not row["summary"].provisional
+            and row["summary"].displayed is not None and _basis_cost(row, basis) is not None]
+    bars = []
+    for bar in frozen["barReferences"]:
+        qualifying = [row for row in rows if row["summary"].displayed >= bar["level"]]
+        low = min((_basis_cost(row, basis) for row in qualifying), default=None)
+        bars.append({"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low,
+                     "cheapest": sorted(row["id"] for row in qualifying if _basis_cost(row, basis) == low)})
+    return {"label": DISPLAYED_CHEAPEST_LABEL, "bars": bars}
+
 
 def _comparison(bar: dict) -> None:
     """E198: how many configurations of R_W can possibly qualify, so a one-candidate result is never read as a comparison."""
@@ -1156,6 +1172,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "identificationYield": yield_,
         "rows": [_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))) for row in rows],
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
+        "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis) for basis in BASES},
         "subsetIntervals": subset_interval_outputs(assembled, frozen),
         "measuredOnlyPlanView": measured,
         "diagnostics": {

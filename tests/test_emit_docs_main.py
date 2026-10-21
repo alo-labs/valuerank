@@ -91,7 +91,9 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert "so the Plan ranking is labelled exploratory" in readme
     assert "GPT-6.1 Sol (xhigh) leads the Plan ranking at 60.9 (owner-named transfer); GPT-6.1 Sol (xhigh) leads the API ranking at 60.6; Muse Wonder Full leads on quality." in readme
     # The quality rank covers every cohort row with quality evidence, a cost-less one included (its quality is shown).
-    assert "Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 53% of the basket's cost (median over 33 configurations with the full basket; 35% to 85%)." in readme
+    # E203: the displayed record on the headline scale, beside the interval claims.
+    assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 56.7: GPT-6.1 Sol (medium) ($531.56 per basket run; 17 reach it)" in readme
+    assert "Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 53% of the basket's cost (median over 33 configurations with the full basket; 35% to 85%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 15%." in readme
     assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 60.9 over 8 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Sol (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), Claude Sonnet 5.5 (high), GPT-6.1 Sol (low) (compares 17 configurations that can qualify)." in (emitted / "scores.md").read_text()
     assert "SciCode and AA-LCR once at API rates" in readme
 

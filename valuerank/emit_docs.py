@@ -310,21 +310,30 @@ def interval_sentences(facts):
 
 
 CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-0", "scicode")
+# Basket components priced in the cost but with no quality leaf of their own (E203 disclosure; O6 and O15 stand).
+UNREWARDED_COMPONENTS = ("aa-briefcase", "gdp-pdf")
+
+
+def _median_share(v3, keys):
+    shares = [
+        sum(row["cost"]["componentsDetail"][key]["costUsd"] for key in keys if key in row["cost"]["components"]) / row["cost"]["costUsd"]
+        for row in v3["rows"] if row["cost"]["fullCost"] and row["cost"]["costUsd"]
+    ]
+    return (statistics.median(shares), min(shares), max(shares), len(shares)) if shares else None
 
 
 def coding_share_text(v3):
     """E200: the share of the basket's cost that coding and terminal tasks carry, beside the basket label."""
 
-    shares = sorted(
-        sum(row["cost"]["componentsDetail"][key]["costUsd"] for key in CODING_COMPONENTS if key in row["cost"]["components"]) / row["cost"]["costUsd"]
-        for row in v3["rows"] if row["cost"]["fullCost"] and row["cost"]["costUsd"]
-    )
-    if not shares:
+    coding = _median_share(v3, CODING_COMPONENTS)
+    if coding is None:
         return ""
-    middle = statistics.median(shares)
+    middle, low, high, n = coding
     labels = ", ".join(component_label(key) for key in CODING_COMPONENTS)
-    return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {len(shares)} configurations "
-            f"with the full basket; {pct(shares[0], 0)} to {pct(shares[-1], 0)}).")
+    unrewarded = _median_share(v3, UNREWARDED_COMPONENTS)[0]
+    return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {n} configurations "
+            f"with the full basket; {pct(low, 0)} to {pct(high, 0)}); {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
+            f"which have no quality leaf, make up {pct(unrewarded, 0)}.")
 
 
 def influence_text(v3, short=False):
@@ -356,6 +365,20 @@ def bar_name(bar):
     """E192: a bar is a frozen quality level."""
 
     return f"quality {bar['level']:.1f}"
+
+
+def displayed_cheapest_sentences(facts):
+    """E203: the displayed-record cheapest row at each bar, on the headline scale (a record, not a claim)."""
+
+    sentences = []
+    for basis, label in (("api", "API"), ("plan", "Plan")):
+        parts = [
+            f"at or above {bar_name(item)}: {facts.labels(item['cheapest'])} ({usd(item['costUsd'])} per basket run; {item['qualifierN']} reach it)"
+            if item["cheapest"] else f"at or above {bar_name(item)}: none"
+            for item in facts.v3["displayedCheapest"][basis]["bars"]
+        ]
+        sentences.append(f"{label} basis, displayed record (not a claim; E203): cheapest " + "; ".join(parts) + ".")
+    return sentences
 
 
 def run_label(run):
@@ -404,7 +427,7 @@ def readme(facts):
         if yield_["exploratory"] else ""
     )
     legend = "\n".join(f"- **{word}**: {text}." for word, text in FLAG_LEGEND)
-    intervals = "\n".join(f"- {sentence}" for sentence in interval_sentences(facts))
+    intervals = "\n".join(f"- {sentence}" for sentence in interval_sentences(facts) + displayed_cheapest_sentences(facts))
     return f"""# ValueRank
 **Frontier AI configurations ranked by value for software engineering and DevOps: benchmark quality against what the work costs**
 
