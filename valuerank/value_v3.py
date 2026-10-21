@@ -537,14 +537,15 @@ def _plan_cost_on(row: dict, workload_components: list[str]) -> float | None:
 def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box | None:
     """E170: a row's admissible box after the valuation-basis gate, or None when it is not interval-eligible.
 
-    An unverified basis is never interval-eligible. A row on a price not in force at V (O29) competes over the hull
-    of its published record and its current-tariff bound, flagged provisional so it never earns a unique label.
+    A row on an unverified basis competes at its published record, flagged provisional so it never earns a label but
+    can still deny one (E222: O25 protects the published record). A row on a price not in force at V (O29) competes
+    over the hull of its published record and its current-tariff bound, flagged provisional likewise.
     """
 
     gate, summary = row["valuationGate"], row["summary"]
-    if gate["outcome"] == GATE_UNVERIFIED or (gate["outcome"] == GATE_NOT_IN_FORCE and blocker_domain(gate, basis) is None):
+    if gate["outcome"] == GATE_NOT_IN_FORCE and blocker_domain(gate, basis) is None:
         return None
-    provisional = summary.provisional
+    provisional = summary.provisional or gate["outcome"] == GATE_UNVERIFIED
     if gate["outcome"] == GATE_NOT_IN_FORCE:
         ratio_low, ratio_high = blocker_domain(gate, basis)
         low, high, provisional = low * min(1.0, ratio_low), high * max(1.0, ratio_high), True

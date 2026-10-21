@@ -1115,8 +1115,9 @@ def test_gate_effects_on_costs_anchors_routes_and_interval_labels(monkeypatch):
     )
     assert next(row for row in kept["rows"] if row["id"] == "a")["routeSelection"]["selected"]["route"]["id"] == "plan-a"
     unverified = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [])
-    assert "a" not in [item.row for item in v.api_boxes(unverified)]
-    assert "a" not in [item.row for item in v.plan_boxes(unverified)]  # never interval-eligible, on either basis
+    # E222: an unverified basis competes at its published record, provisional, so it can deny a label but never earn one.
+    (box,) = [item for item in v.api_boxes(unverified) if item.row == "a"]
+    assert box.provisional and all(item.provisional for item in v.plan_boxes(unverified) if item.row == "a")
     assert {row["id"]: row for row in unverified["rows"]}["a"]["valuationGate"]["outcome"] == v.GATE_UNVERIFIED
 
 
@@ -1432,3 +1433,14 @@ def test_routes_inherit_their_sources_workload_mix():
     rows = {row["id"]: row for row in v.assemble(CONFIGURATIONS, documents(planRoutes=sourced), release_day=DAY)["rows"]}
     statuses = {row_id: [item["mixCheck"] for item in rows[row_id]["routeCandidates"]] for row_id in ("a", "b")}
     assert statuses == {"a": [pr.MIX_UNIDENTIFIED], "b": [pr.MIX_NOT_REPORTED]}
+
+
+def test_a_plan_row_whose_tariff_bound_cannot_be_built_leaves_r_w(monkeypatch):
+    """E183: a row on a price not in force without a current-tariff domain is not a Plan box (its claims stay unresolved)."""
+
+    result, _frozen = scored()
+    assert "b" in [box.row for box in v.plan_boxes(result)]
+    row = next(item for item in result["rows"] if item["id"] == "b")
+    row["valuationGate"] = {**row["valuationGate"], "outcome": v.GATE_NOT_IN_FORCE}
+    monkeypatch.setattr(v, "blocker_domain", lambda gate, basis: None)
+    assert "b" not in [box.row for box in v.plan_boxes(result)]

@@ -1014,3 +1014,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (adopted): every plotted point keeps its exact name, effort, fallback state and direct AA owner link with the capture time, so unscored inventory rows keep them too.
 - L4 (adopted): the E37 completeness sentence is rewritten as a pointer to E209.
 - R2: covered by M1. R3: rejected with M3. R4 (adopted): the headline bar is noted as a median over configurations, with E205's 58.3 for one row per family.
+
+## Internal review I16 (Claude Sonnet 5.5, effort low, on r75) — adopted, modified or rejected
+- M1 (adopted as E222; new argument from O25 over E202's "not a blocker"; Q1 not escalated, E170/E202 are editor decisions): a row on an unverified basis with FullCost on W now enters R_W at its published point, flagged provisional, so it can deny a confirmed label but never earn one (`value_v3._gated_box`). Without FullCost it stays listed as an omitted competitor. Today Claude Fable 5.1 lacks FullCost (E209), so no result changes.
+- M2 (adopted): E212 gains the O32 row (a counting report leaves at day 31 with no grace; the partition is rebuilt and the route turns diagnostic below two concordant reports), and the age rows are stated to cover controlled measurements, transfers and earlier-admitted diagnostic reports only.
+- M3 (adopted, modified; Q2 not escalated): E206's key is (roster name, effort); harness and route are chosen by the largest-N rule and recorded. A harness switch from a later larger-N run is published as a leaf-source change with both values (fixture added). A pooled mean across harnesses is rejected (Bug Hunt's estimand is model plus harness, E29), and a fixed harness preference would discard the owner's larger samples.
+- L1 (rejected): third repeat of the numbering tie-break point (I13 L1, I14 9).
+- L2 (adopted): off-line overlaps and on-vertex ties are separate cases; an on-vertex tie that hovering cannot separate stops the build until the owner decides.
+- L3 (adopted): "ranked rows" is replaced by "cohort rows" throughout (5 places).
+- L4 (adopted): comparator key 3 is named "the larger multiple within the same identification class and evidence grade", with the v2 AGENTS.md wording kept as history.
+- L5 (rejected): a row failing only the reconstruction test is scored on W at its published costs and flagged (E209); a [C_7 − gap, C_7] interval would assign the gap to the basket without evidence of where it lies.
+- R4 (rejected): a leaf-composition shift is an estimate of missing leaves from cohort means, which the no-imputation rule forbids even as a column; E219 and E221 bound the effect without estimating it.
