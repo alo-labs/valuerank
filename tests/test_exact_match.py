@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from valuerank import exact_match as em
 
 
@@ -69,3 +71,12 @@ def test_bug_hunt_matches_owner_matched_exact_effort_records_only():
     assert em.bug_hunt_matches("mimo-v2-6-flash", None, {"matched": False, "effort": None, "fixedOf105": None}) is False
     assert em.bug_hunt_matches("x", "max", {"matched": True, "effort": "max", "fixedOf105": None}) is False
     assert em.bug_hunt_matches("x", "max", None) is False
+
+
+def test_a_second_row_for_the_chosen_agent_stops_the_build():
+    """E225: two tbench.ai rows for the same model, effort and agent are never chosen between silently."""
+
+    rows = [{"model": "Opus 5.5 (max)", "agent": "Claude Code", "resolutionRatePct": 64.8},
+            {"model": "Opus 5.5 (max)", "agent": "Claude Code", "resolutionRatePct": 60.0}]
+    with pytest.raises(ValueError, match=r"several rows for agent Claude Code; .*\(E225\)"):
+        em.select_tb4_row("claude-opus-5-5", "max", rows)

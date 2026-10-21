@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import math
-from datetime import date
+from datetime import date, timedelta
 
 import pytest
 
@@ -519,3 +519,11 @@ def test_pooled_reports_name_distinct_observers_and_no_shared_source():
     for bad in ([one, {**two, "observer": "alice"}], [one, {**two, "upstreamSource": "post-1"}], [one, {**two, "observer": " "}]):
         with pytest.raises(ValueError, match=r"x: pooled reports must name distinct observers .* \(E223\)"):
             pr.check_report_independence({"routes": [{"id": "x", "independentReports": bad}]})
+
+
+@pytest.mark.parametrize(("age", "stage"), [(30, "fresh"), (31, "possibly-superseded"), (90, "possibly-superseded"), (91, "expired"), (120, "expired"), (121, "demoted")])
+def test_route_ages_are_whole_utc_calendar_days_with_strict_thresholds(age, stage):
+    """E212: age = date(V) - observation date in whole UTC calendar days; 'more than N days' is strict."""
+
+    release = date(2026, 10, 21)
+    assert pr.expiry_status({"id": "r", "sourcePublicationDate": (release - timedelta(days=age)).isoformat()}, release) == stage

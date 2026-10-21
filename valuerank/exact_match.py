@@ -104,7 +104,11 @@ def select_tb4_row(model_id: str, configuration_effort: str | None, rows: list[d
         rank = TB4_AGENT_PREFERENCE.index(agent) if agent in TB4_AGENT_PREFERENCE else len(TB4_AGENT_PREFERENCE)
         return rank, agent
 
-    return min(candidates, key=preference)
+    best = min(candidates, key=preference)
+    # E225: the leaderboard lists one row per model and agent; a second row for the chosen agent is never picked silently.
+    if sum(1 for row in candidates if preference(row) == preference(best)) > 1:
+        raise ValueError(f"{model_id}: tbench.ai lists several rows for agent {best.get('agent')}; record which one is the configuration's (E225)")
+    return best
 
 
 def bug_hunt_matches(model_id: str, configuration_effort: str | None, record: dict | None) -> bool:

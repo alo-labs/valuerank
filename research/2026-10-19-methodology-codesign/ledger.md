@@ -1032,3 +1032,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L1 (adopted): weights are percent points summing to 100; p_i and both quality equations divide by 100; fixture added (DeepSWE missing, others at 60 → p = 0.70, Q̄ = 60, Q ∈ [42, 72]).
 - L2 (adopted): the window compares UTC calendar dates, date(V) − 30 days ≤ d ≤ date(V), a timestamped E194 date truncated to its UTC date (as `plan_routes.in_window` does).
 - L3 (adopted): the non-discriminating SD is over the cohort rows that observe the leaf (`diagnostics.non_discriminating`); S_C and S_Q are defined where the influence statistic uses them.
+
+## Internal review I18 (Claude Sonnet 5.5, effort low, on r77) — adopted, modified or rejected
+- M1 (adopted, modified, as E225; Q1 not escalated): tbench.ai lists one row per model, effort and agent (no duplicates in the 23 captured rows) and publishes no trial count or submission ID, so a trials/date/ID order cannot be implemented from public data. `exact_match.select_tb4_row` now stops the build when a second row exists for the chosen agent, until a recorded selection names the configuration's row; "by name" is ascending code-point order.
+- M2 (adopted; Q2 answered from the code): E222's flag is the interval box's label denial (`intervals.Box.provisional`), separate from the coverage-defined provisional status (`QualitySummary.provisional`); the row stays in the bar population and the ladder, and UniqueLabelEligible needs both. Rows on a price not in force are label-denied the same way.
+- M3 (adopted): ages are whole UTC calendar days, date(V) minus the observation date, with strict "more than" thresholds (`plan_routes.age_days`); boundary tests added at 30, 31, 90, 91, 120 and 121.
+- L1 (adopted): the window spans 31 calendar dates.
+- L2 (rejected): repeat of the generated-prose lint (I7 M1, I12 R1).
+- R1 (rejected): repeat of the full-coverage universe (I8 M4, I16 R2); E219 and E221 now cover what it would show.
+- R4 (rejected): the README's "What the evidence supports" list already carries these statements, generated from the release data.
+- R5 (rejected): the headline table stays the one ranking; E199 and E205 are published diagnostics, and a second equally prominent column would compete with the owner's cohort rule (O1, O33).
