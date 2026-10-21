@@ -990,12 +990,19 @@ def policy_cohort_bar(assembled: dict, frozen: dict) -> dict:
 def frontier_anchor_diagnostic(assembled: dict, frozen: dict, per_row: dict) -> dict:
     """E187: each basis rescored on anchors built from the frontier and near-frontier references alone (and E199's bar)."""
 
-    main = assembled["mainWorkload"]
     by_id = {row["id"]: row for row in assembled["rows"]}
     references = [row_id for row_id in anchor_population(assembled, assembled["admitted"]) if by_id[row_id].get("frontierFamily", True)]
     policy_bar = policy_cohort_bar(assembled, frozen)
     if len(references) < MIN_ANCHOR_REFERENCES:
         return {"label": FRONTIER_ANCHOR_LABEL, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} frontier-family references", "references": references, "bar": policy_bar}
+    return {"label": FRONTIER_ANCHOR_LABEL, "status": "evaluated", "references": references, "bases": _rebuilt_anchor_bases(assembled, frozen, per_row, references), "bar": policy_bar}
+
+
+def _rebuilt_anchor_bases(assembled: dict, frozen: dict, per_row: dict, references: list[str]) -> dict:
+    """Each basis rescored on anchors rebuilt from ``references`` by the freeze rule, against the frozen anchors."""
+
+    main = assembled["mainWorkload"]
+    by_id = {row["id"]: row for row in assembled["rows"]}
     rows = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
     bases = {}
     for basis in BASES:
@@ -1009,7 +1016,27 @@ def frontier_anchor_diagnostic(assembled: dict, frozen: dict, per_row: dict) -> 
             "frozenExchangeRate": anchor_math.exchange_rate(frozen["workloads"][main]["anchors"][basis], BETA),
             "rankChanges": diagnostics.paired_rank_change(primary, rescored),
         }
-    return {"label": FRONTIER_ANCHOR_LABEL, "status": "evaluated", "references": references, "bases": bases, "bar": policy_bar}
+    return bases
+
+
+FAMILY_PRIMARY_LABEL = "one row per family, each family's primary configuration (diagnostic, E205); the frozen ladder and anchors stay primary"
+
+
+def family_primary_diagnostic(assembled: dict, frozen: dict, per_row: dict) -> dict:
+    """E205: the bar ladder and the anchors recomputed with one row per family, so the effect of how many efforts a family
+    has evidenced is separable from E199's narrowing to frontier families (same rules, primary rows only)."""
+
+    keep = {row["id"] for row in assembled["rows"] if row.get("familyPrimary", True)}
+    population, bars = bar_levels({**assembled, "rows": [row for row in assembled["rows"] if row["id"] in keep]})
+    references = [row_id for row_id in anchor_population(assembled, assembled["admitted"]) if row_id in keep]
+    result = {
+        "label": FAMILY_PRIMARY_LABEL, "population": population, "references": references,
+        "ladder": [{key: bar[key] for key in ("id", "level", "levelConfiguration")} for bar in bars],
+        "frozenLadder": [{key: bar[key] for key in ("id", "level")} for bar in frozen["barReferences"]],
+    }
+    if len(references) < MIN_ANCHOR_REFERENCES:
+        return {**result, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} family-primary references"}
+    return {**result, "status": "evaluated", "bases": _rebuilt_anchor_bases(assembled, frozen, per_row, references)}
 
 
 def cost_component_family(assembled: dict, frozen: dict, per_row: dict) -> list[dict]:
@@ -1191,6 +1218,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "costRemoval": cost_removal(assembled, frozen, per_row),
             "costComponentFamily": cost_component_family(assembled, frozen, per_row),
             "frontierAnchors": frontier_anchor_diagnostic(assembled, frozen, per_row),
+            "familyPrimary": family_primary_diagnostic(assembled, frozen, per_row),
             "subsetBridges": subset_bridges(assembled, frozen, per_row, readiness["expenditure"]),
             "basketReadiness": readiness,
             "anchorEligibility": anchor_eligibility(assembled, assembled["admitted"]),
@@ -1961,6 +1989,7 @@ def configuration(row: dict) -> dict:
         "id": row["id"], "name": row["name"], "family": row.get("family") or row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"],
         "aaNote": row.get("aaFrontierFootnote"),
         "frontierFamily": any(reason != RETAINED_REASON for reason in row.get("rankingInclusionReasons") or []),
+        "familyPrimary": row.get("familyPrimary", True),
     }
 
 

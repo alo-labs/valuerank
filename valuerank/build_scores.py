@@ -260,6 +260,11 @@ def check_rendered_path(capture):
     # Chart y grows downward, so a rising path has x strictly increasing and y strictly decreasing.
     if any(x2 <= x1 or y2 >= y1 for (x1, y1), (x2, y2) in zip(vertices, vertices[1:])):
         raise ValueError("AA rendered Pareto path does not rise strictly in chart coordinates")
+    # E204: a plotted point left of the path's first vertex is neither frontier nor near (no F(c) there), so it would
+    # drop out silently; the build stops until the owner records a decision for it.
+    left = sorted(item["model_name"] for item in capture.get("points", []) if require_number(item.get("svg_x"), "svg_x") < vertices[0][0] - PATH_TOLERANCE_PX)
+    if left:
+        raise ValueError("AA plotted points lie left of the rendered Pareto path (an owner decision is required, E204): " + "; ".join(left))
 
 
 def frontier_order(row):
@@ -309,6 +314,39 @@ def best_evidenced_effort(aa_model, efforts, points):
     if not efforts <= set(plotted):
         raise ValueError(f"evidenced efforts of {family} cannot be ordered: not all are plotted on AA's chart")
     return min(efforts, key=lambda effort: (-plotted[effort]["intelligence_index_display"], plotted[effort]["total_cost_usd"], effort))
+
+
+MEAN_OF = re.compile(r"mean of (\d+)")
+
+
+def scoreboard_sample(name):
+    """The run count a scoreboard row reports ("... - mean of 3"); a row without one is a single run."""
+
+    match = MEAN_OF.search(name)
+    return int(match.group(1)) if match else 1
+
+
+def check_bug_hunt_selection(model_id, aa_model, record, scoreboard_rows):
+    """E206: a matched record is the owner's largest-sample published result for the model at the configuration's exact
+    effort, over every harness and route, unless the record states its selection reason.
+
+    Effort tokens match exactly (xhigh is not max) or by a documented single-mode equivalent; a record read from the
+    run notes under a name the scoreboard does not parse has no candidates here and keeps its recorded effort status.
+    """
+
+    if record.get("matched") is not True or record.get("selectionReason"):
+        return
+    names = roster_names(aa_model)
+    candidates = [
+        row for row in scoreboard_rows for effort, _name in scoreboard_matches(names, [row])
+        if exact_match.efforts_match(model_id, aa_model.get("aaVariant"), effort)
+    ]
+    if not candidates:
+        return
+    largest = max(scoreboard_sample(row["model"]) for row in candidates)
+    values = {row["fixedOf105"] for row in candidates if scoreboard_sample(row["model"]) == largest}
+    if record.get("sampleN") != largest or values != {record.get("fixedOf105")}:
+        raise ValueError(f"Bug Hunt record for {model_id} is not the owner's largest-sample result at its effort and carries no selection reason (E206)")
 
 
 def exact_bug_hunt(model_id, effort, record):
@@ -868,6 +906,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         if display_name not in DEVELOPER or display_name not in SHORT:
             raise ValueError(f"identity mapping missing: {display_name}")
         family = model_family(aa_model)
+        bug_hunt = exact_bug_hunt(model_id, aa_model.get("aaVariant"), bug_hunt_by_id[model_id])
+        check_bug_hunt_selection(model_id, aa_model, bug_hunt, scoreboard_rows)
         if family_primary_ids.get(family) == model_id:
             tier = aa_tiers[family]
         else:
@@ -883,7 +923,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "aaFrontierConfiguration": tier["configuration"],
             "aaFrontierIntelligenceGap": tier["intelligenceGap"],
             "aaFrontierFootnote": tier["footnote"],
-            "bugHunt": exact_bug_hunt(model_id, aa_model.get("aaVariant"), bug_hunt_by_id[model_id]),
+            "bugHunt": bug_hunt,
             "rankDeepSWE": deepswe_model.get("sourceOrder") if deepswe_model else None,
             "deepsweEffort": deepswe_model.get("effort") if deepswe_model else None,
             "deepswePassAt1": (require_number(deepswe_model["scorePct"], f"{model_id}.DeepSWE scorePct") / 100) if deepswe_model else None,
@@ -1070,6 +1110,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             )
         row["missingFields"] = [key for key, _label, _higher, _priority in CANDIDATES if row.get(key) is None]
         row["rankingExclusionReasons"] = []
+        row["familyPrimary"] = False
         if row["bugHunt"].get("matched") is not True and row["rankingEligible"]:
             row["missingFields"].append("bugHuntFixedOf105")
         if not row["rankingEligible"] and row["bugHunt"].get("matched") is not True:
@@ -1104,6 +1145,17 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             row["pareto"] = None
             row["isMissing"] = True
             row["rankingStatus"] = "excluded_from_primary_cohort"
+    # E205: each family's primary row (its frontier or near configuration; for a family ranked only through retention,
+    # the highest-Index evidenced effort, then the lower cost), for the one-row-per-family diagnostic.
+    ranked_families = {}
+    for row in primary_rows:
+        ranked_families.setdefault(row["family"], []).append(row)
+    for group in ranked_families.values():
+        primary = [row for row in group if row["id"] in frontier_primary_ids | near_only_primary_ids]
+        if not primary:
+            by_effort = {aa_models[row["id"]].get("aaVariant"): row for row in group}
+            primary = [by_effort[best_evidenced_effort(aa_models[group[0]["id"]], set(by_effort), frontier_capture["points"])]]
+        primary[0]["familyPrimary"] = True
     for weight in weights:
         key = weight["key"]
         available_rows = []

@@ -536,6 +536,8 @@ CAPTURE_CASES += [
     ("capture", lambda d: d.update(rendered_pareto_svg_path="M 1 2 Q 3 4"), "M/L coordinate pairs"),
     ("capture", lambda d: d.pop("rendered_pareto_svg_path"), "M/L coordinate pairs"),
     ("capture", _capture_path_falls, "does not rise strictly"),
+    ("capture", lambda d: d["points"].append({**d["points"][0], "model_name": "Cheaper Model", "svg_x": min(item["svg_x"] for item in d["frontier"]) - 10}),
+     r"left of the rendered Pareto path \(an owner decision is required, E204\): Cheaper Model"),
 ]
 
 
@@ -1345,6 +1347,29 @@ def test_a_bug_hunt_result_at_another_effort_is_not_used():
     assert build_scores.exact_bug_hunt("gpt-6-astra", "max", record) is record
     moved = build_scores.exact_bug_hunt("gpt-6-astra", "xhigh", record)
     assert moved["matched"] is False and moved["matchStatus"] == "effort_mismatch" and "No result is transferred" in moved["note"]
+
+
+def test_bug_hunt_selection_is_the_largest_sample_result_at_the_exact_effort():
+    """E206: the owner's largest-sample result over every harness at the configuration's effort, unless a reason is recorded."""
+
+    model = {"displayName": "GPT-6 Astra", "aaVariant": "max"}
+    rows = [{"model": "GPT-6 Astra (max effort)", "fixedOf105": 40.0}, {"model": "GPT-6 Astra (max effort) - mean of 3", "fixedOf105": 45.0},
+            {"model": "GPT-6 Astra (xhigh effort) - mean of 5", "fixedOf105": 41.0}, {"model": "Other Model (max effort) - mean of 9", "fixedOf105": 1.0}]
+    record = {"matched": True, "sampleN": 3, "fixedOf105": 45.0}
+    assert build_scores.check_bug_hunt_selection("gpt-6-astra", model, record, rows) is None
+    for wrong in ({"sampleN": 1, "fixedOf105": 40.0}, {"sampleN": 3, "fixedOf105": 44.0}):
+        with pytest.raises(ValueError, match=r"largest-sample result at its effort .*\(E206\)"):
+            build_scores.check_bug_hunt_selection("gpt-6-astra", model, {**record, **wrong}, rows)
+    assert build_scores.check_bug_hunt_selection("gpt-6-astra", model, {**record, "sampleN": 1, "selectionReason": "reasoning state asserted"}, rows) is None
+    assert build_scores.check_bug_hunt_selection("gpt-6-astra", model, {**record, "matched": False, "sampleN": 1}, rows) is None
+    assert build_scores.check_bug_hunt_selection("gpt-6-astra", {**model, "aaVariant": "low"}, {**record, "sampleN": 1}, rows) is None  # no candidate
+    assert build_scores.scoreboard_sample("X (max effort) - mean of 12") == 12 and build_scores.scoreboard_sample("X (max effort)") == 1
+
+
+def test_the_build_rejects_a_bug_hunt_record_that_is_not_the_largest_sample(world):
+    edit(world, "bughunt", lambda d: next(item for item in d["models"] if item["modelId"] == "gpt-6-astra").update(sampleN=1))
+    with pytest.raises(ValueError, match=r"gpt-6-astra is not the owner's largest-sample result"):
+        run_main(world)
 
 
 def test_unrostered_evidence_flags_a_deepswe_configuration_bug_hunt_also_reports():

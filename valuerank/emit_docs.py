@@ -361,6 +361,22 @@ def policy_bar_text(policy, facts):
     return head + f"{text}; cheapest at or above it on the API main workload: {answer} ({result['comparison']})."
 
 
+def family_primary_text(diagnostic, facts):
+    """E205: the ladder and anchors with one row per family, beside the frozen ones (a diagnostic)."""
+
+    head = "- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** "
+    ladder = " / ".join(f"{item['level']:.1f}" for item in diagnostic["ladder"]) or "unavailable"
+    frozen = " / ".join(f"{item['level']:.1f}" for item in diagnostic["frozenLadder"]) or "unavailable"
+    text = head + f"with each family's primary configuration only ({len(diagnostic['population'])} bar-population rows), the ladder (headline, lower quartile, upper quartile) would be {ladder} against {frozen} frozen"
+    if diagnostic["status"] != "evaluated":
+        return text + f"; anchors {diagnostic['status']}."
+    return text + "; anchors rebuilt from its " + f"{len(diagnostic['references'])} references move " + "; ".join(
+        f"{label} {rank_change_text(diagnostic['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling "
+        f"{fnum(diagnostic['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(diagnostic['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)"
+        for basis, label in (("api", "API"), ("plan", "Plan"))
+    ) + "."
+
+
 def bar_name(bar):
     """E192: a bar is a frozen quality level."""
 
@@ -964,6 +980,7 @@ def cost_diagnostics_markdown(facts):
     else:
         lines.append(f"- **Frontier-families anchors (E187, diagnostic):** {frontier['status']}.")
     lines.append(policy_bar_text(frontier["bar"], facts))
+    lines.append(family_primary_text(diagnostics["familyPrimary"], facts))
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(

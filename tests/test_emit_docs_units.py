@@ -173,6 +173,9 @@ def cost_world(**overrides):
         "sweCompanion": {"rows": {"a": {"flag": True}, "b": {"flag": False}}},
         "matchedCost": {"status": "evaluated", "pricedQualityWeight": 0.5, "reversals": [["a", "b"]], "warnings": []},
         "frontierAnchors": {"status": "evaluated", "references": ["a", "b"], "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.0}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 3.5}} for basis in ("api", "plan")}, "bar": {"status": "unavailable: fewer than 2 non-provisional frontier-family configurations"}},
+        "familyPrimary": {"status": "evaluated", "population": ["a", "b"], "references": ["a", "b"],
+                          "ladder": [{"level": 58.27}, {"level": 50.01}, {"level": 60.88}], "frozenLadder": [{"level": 56.7}, {"level": 48.06}, {"level": 60.88}],
+                          "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.04}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 2.74}} for basis in ("api", "plan")}},
         "costComponentFamily": [
             {"component": "scicode", "bases": {basis: {"recalibrated": {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 5.0}}} for basis in ("api", "plan")}},
             {"component": "frontiercode", "status": "not in the admitted basket"},
@@ -200,6 +203,10 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     quiet = ed.cost_diagnostics_markdown(cost_world(subsetBridges=[], matchedCost={"status": "unidentified (priced quality weight below 40%)"}, sweCompanion={"rows": {}},
                                                     frontierAnchors={"status": "unavailable: fewer than 2 frontier-family references", "bar": {"status": "unavailable"}}))
     assert "- **Frontier-families anchors (E187, diagnostic):** unavailable: fewer than 2 frontier-family references." in quiet
+    assert "the ladder (headline, lower quartile, upper quartile) would be 58.3 / 50.0 / 60.9 against 56.7 / 48.1 / 60.9 frozen; anchors rebuilt from its 2 references move API 2 rows move" in text
+    assert "(value points per cost doubling 3.04 vs 2.74 frozen)." in text
+    lone = ed.family_primary_text({"status": "unavailable: fewer than 2 family-primary references", "population": ["a"], "references": ["a"], "ladder": [], "frozenLadder": []}, StubFacts({}))
+    assert lone.endswith("would be unavailable against unavailable frozen; anchors unavailable: fewer than 2 family-primary references.")
     assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet
 
 

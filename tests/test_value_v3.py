@@ -1242,6 +1242,21 @@ def test_frontier_anchor_diagnostic_and_subset_intervals():
     assert v.frontier_anchor_diagnostic(narrow, frozen, per_row)["status"].startswith("unavailable")
 
 
+def test_family_primary_diagnostic_rebuilds_ladder_and_anchors_on_primary_rows():
+    """E205: one row per family, beside the frozen ladder and anchors (a diagnostic)."""
+
+    result, frozen = scored()
+    family = v.score(result, frozen)["diagnostics"]["familyPrimary"]
+    assert family["status"] == "evaluated" and family["references"] == ["a", "b"] and len(family["ladder"]) == 3
+    assert family["frozenLadder"] == [{"id": bar["id"], "level": bar["level"]} for bar in frozen["barReferences"]]
+    assert "frozenExchangeRate" in family["bases"]["plan"]
+    siblings = [dict(item, familyPrimary=item["id"] != "b") for item in CONFIGURATIONS]
+    narrow = v.assemble(siblings, documents(), release_day=DAY)
+    per_row = {row["id"]: {basis: {"value": 1.0} for basis in v.BASES} for row in narrow["rows"]}
+    lone = v.family_primary_diagnostic(narrow, frozen, per_row)
+    assert lone["status"].startswith("unavailable") and "b" not in lone["population"] and "bases" not in lone
+
+
 def test_configurations_record_frontier_family_membership():
     scores = {"models": [
         {"id": "f", "name": "F", "aaSlug": "f", "rankingEligible": True, "rankingInclusionReasons": [v.RETAINED_REASON, "Required AA Intelligence Index versus total-evaluation-cost frontier family"]},
@@ -1255,9 +1270,9 @@ def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
 
     frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note",
                 "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
-    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True}
-    retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON]}
-    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": False}
+    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True}
+    retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON], "familyPrimary": False}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": False, "familyPrimary": False}
     # O33: an evidenced sibling carries its AA family, which its display name no longer equals.
     sibling = {"id": "f-high", "name": "F (high)", "family": "F", "aaVariant": "high", "aaSlug": "f-high", "rankingInclusionReasons": [v.RETAINED_REASON]}
     assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is False
