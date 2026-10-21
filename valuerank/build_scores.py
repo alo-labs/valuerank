@@ -232,17 +232,42 @@ def frontier_order(row):
     return (-row["intelligenceIndex"], -row["totalCostUsd"], row["name"])
 
 
-def evidenced_effort(aa_model, deepswe_configurations, bug_hunt):
-    """O30: the effort at which a model has an exact DeepSWE result and a matched Bug Hunt result, or None.
+# O31: a Bug Hunt scoreboard name may add only a version number to AA's model name ("Muse Wonder 1.0").
+VERSION_SUFFIX = r"( v?\d+(\.\d+)*)?"
 
-    Bug Hunt publishes one configuration per model, so a family has at most one such effort.
+
+def scoreboard_matches(names, scoreboard_rows):
+    """Bug Hunt scoreboard rows for a model answering to one of ``names``, as (effort, row name) pairs."""
+
+    matches = []
+    for row in scoreboard_rows:
+        base, _, rest = row["model"].partition(" (")
+        effort = re.match(r"(\w+) effort", rest)
+        if effort and any(re.fullmatch(re.escape(name) + VERSION_SUFFIX, normalise_name(base)) for name in names):
+            matches.append((effort.group(1), row["model"]))
+    return matches
+
+
+def evidenced_efforts(aa_model, deepswe_configurations, scoreboard_rows):
+    """O30/O31: the efforts at which a model has both an exact AA DeepSWE result and a Bug Hunt result."""
+
+    names = roster_names(aa_model)
+    deepswe = {item["effort"] for item in deepswe_configurations if item.get("effort") and normalise_name(item["model"]) in names}
+    return deepswe & {effort for effort, _name in scoreboard_matches(names, scoreboard_rows)}
+
+
+def best_evidenced_effort(aa_model, efforts, points):
+    """O30/O31: the evidenced effort with the highest AA Index, then the lower total cost, or None without evidence.
+
+    A single evidenced effort needs no chart point; several are ordered by their plotted points on AA's chart.
     """
 
-    if not bug_hunt or bug_hunt.get("matched") is not True:
-        return None
-    names = roster_names(aa_model)
-    efforts = {item["effort"] for item in deepswe_configurations if normalise_name(item["model"]) in names}
-    return bug_hunt.get("effort") if bug_hunt.get("effort") in efforts else None
+    if len(efforts) <= 1:
+        return next(iter(efforts), None)
+    plotted = {point["effort"]: point for point in points if point.get("family") == aa_model["displayName"]}
+    if not efforts <= set(plotted):
+        raise ValueError(f"evidenced efforts of {aa_model['displayName']} cannot be ordered: not all are plotted on AA's chart")
+    return min(efforts, key=lambda effort: (-plotted[effort]["intelligence_index_display"], plotted[effort]["total_cost_usd"], effort))
 
 
 def exact_bug_hunt(model_id, effort, record):
@@ -266,13 +291,9 @@ def unrostered_evidence(deepswe_configurations, scoreboard_rows):
     for item in deepswe_configurations:
         if item.get("matchStatus") != "not_in_roster" or not item.get("effort"):
             continue
-        name = normalise_name(item["model"])
-        for row in scoreboard_rows:
-            base, _, rest = row["model"].partition(" (")
-            base = normalise_name(base)
-            if re.fullmatch(re.escape(name) + r"( v?\d+(\.\d+)*)?", base) and rest.startswith(f"{item['effort']} effort"):
-                found.append(f"{item['displayLabel']} / Bug Hunt {row['model']}")
-                break
+        names = [name for effort, name in scoreboard_matches({normalise_name(item["model"])}, scoreboard_rows) if effort == item["effort"]]
+        if names:
+            found.append(f"{item['displayLabel']} / Bug Hunt {names[0]}")
     return found
 
 
@@ -536,7 +557,8 @@ def build_bug_hunt_emphasis(rows, weights, document):
 def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     deepswe_chart = json.loads((data / "aa_deepswe.json").read_text())
     # O31: every configuration with an exact AA DeepSWE result and a Bug Hunt result must be in the roster.
-    missing = unrostered_evidence(deepswe_chart["configurations"], json.loads((data / "bug_hunt_scoreboard.json").read_text())["rows"])
+    scoreboard_rows = json.loads((data / "bug_hunt_scoreboard.json").read_text())["rows"]
+    missing = unrostered_evidence(deepswe_chart["configurations"], scoreboard_rows)
     if missing:
         raise ValueError("Configurations with both exact DeepSWE and Bug Hunt results are missing from the roster (O31): " + "; ".join(missing))
     aa_document = json.loads((data / "aa_metrics.json").read_text())
@@ -812,20 +834,22 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     frontier_primary_ids = set(frontier_selection_by_id)
     near_only_primary_ids = near_frontier_primary_ids - frontier_primary_ids
     primary_ids = overlap_primary_ids | frontier_primary_ids | near_frontier_primary_ids
-    # E193/O30: a near-frontier family ranks its configuration with exact DeepSWE and matched Bug Hunt results when it
-    # has one (AGENTS.md: the selected configuration may differ from the near configuration), else its smallest-gap
-    # near point.
-    for family, group in near_families.items():
-        model_id = group["modelId"]
-        if model_id not in near_only_primary_ids:
-            continue
+    # E193/O30/O31: a near-frontier or retained family ranks its evidenced effort (exact DeepSWE and Bug Hunt results;
+    # several: the highest AA Index, then the lower cost); a near family without one ranks its smallest-gap near point.
+    # A frontier family ranks its highest rendered point instead (checked above).
+    near_groups = {group["modelId"]: (family, group) for family, group in near_families.items()}
+    # Every roster model, ranked or not: a model tracked at an effort without both results would otherwise drop out silently.
+    for model_id in sorted(set(aa_models) - frontier_primary_ids):
         aa_model = aa_models[model_id]
-        evidenced = evidenced_effort(aa_model, deepswe_chart["configurations"], bug_hunt_by_id[model_id])
-        if evidenced is not None:
-            if aa_model.get("aaVariant") != evidenced:
-                raise ValueError(f"AA near-frontier family must rank its configuration with exact DeepSWE and Bug Hunt results (O30): {family} at {evidenced}")
-        elif aa_model.get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
-            raise ValueError(f"AA near-frontier family without exact DeepSWE and Bug Hunt results must rank its smallest-gap near point (E193): {family}")
+        best = best_evidenced_effort(aa_model, evidenced_efforts(aa_model, deepswe_chart["configurations"], scoreboard_rows), frontier_capture["points"])
+        if model_id in near_groups:
+            family, group = near_groups[model_id]
+            if best is not None and aa_model.get("aaVariant") != best:
+                raise ValueError(f"AA near-frontier family must rank its configuration with exact DeepSWE and Bug Hunt results (O30): {family} at {best}")
+            if best is None and aa_model.get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
+                raise ValueError(f"AA near-frontier family without exact DeepSWE and Bug Hunt results must rank its smallest-gap near point (E193): {family}")
+        elif best is not None and aa_model.get("aaVariant") != best:
+            raise ValueError(f"Retained family must rank its highest-Index evidenced effort (O31): {aa_model['displayName']} at {best}")
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
 

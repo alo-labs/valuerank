@@ -539,6 +539,7 @@ def write_world(root: Path) -> Path:
         "v3_configuration_map.json": documents()["configurationMap"],
         "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}}},
         "price_records.json": documents()["priceRecords"],
+        "aa_frontier_capture.json": {"points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
         "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
         "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
@@ -1249,3 +1250,17 @@ def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
     retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON]}
     assert v.configuration(retained) == {"id": "r", "name": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": False}
     assert v.configuration({"id": "x", "name": "X", "aaSlug": "x"})["frontierFamily"] is False  # no stated reason
+
+
+def test_cheaper_siblings_lists_same_family_points_below_the_row_cost():
+    """E201: cheaper plotted configurations of the same family, never the row's own effort or another family."""
+
+    configuration = {"name": "Fam", "effort": "max", "aaSlug": "fam"}
+    points = [
+        {"model_name": "Fam (high)", "family": "Fam", "effort": "high", "total_cost_usd": 5.0},
+        {"model_name": "Fam (max)", "family": "Fam", "effort": "max", "total_cost_usd": 4.0},
+        {"model_name": "Fam (low)", "family": "Fam", "effort": "low", "total_cost_usd": 50.0},
+        {"model_name": "Other", "family": "Other", "effort": None, "total_cost_usd": 1.0},
+    ]
+    assert v.cheaper_siblings(configuration, {"intelligenceIndexCost": {"total": 10.0}}, points) == ["Fam (high)"]
+    assert v.cheaper_siblings(configuration, {}, points) == []

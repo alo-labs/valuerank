@@ -216,6 +216,13 @@ def in_window(report: dict, window: dict | None) -> bool:
     return stamp is not None and date.fromisoformat(window["start"]) <= stamp <= date.fromisoformat(window["end"])
 
 
+def straddles(report: dict, window: dict | None) -> bool:
+    """E201: a counted report whose measurement window starts before the report window is flagged window-straddling."""
+
+    start = (report.get("measurementWindow") or {}).get("start")
+    return window is not None and start is not None and date.fromisoformat(start) < date.fromisoformat(window["start"])
+
+
 def check_report_window(document: dict) -> None:
     """E194: every newly admitted end-user report is dated inside the release's report window.
 
@@ -236,10 +243,10 @@ def check_report_window(document: dict) -> None:
 
 
 def report_stage(report: dict, route: dict, release_day: date) -> str:
-    """E151: one report's own expiry stage (its measurement window's end, else its report date; else the route's)."""
+    """E151: one report's own expiry stage, by its E194 date (window end, report date, publication date); else the route's."""
 
-    stamp = (report.get("measurementWindow") or {}).get("end") or report.get("reportDate")
-    source = {"id": report["id"], "sourcePublicationDate": stamp, "changeDetectedOn": route.get("changeDetectedOn")} if stamp else route
+    stamp = report_date(report)
+    source = {"id": report["id"], "sourcePublicationDate": stamp.isoformat(), "changeDetectedOn": route.get("changeDetectedOn")} if stamp else route
     return expiry_status(source, release_day)
 
 
@@ -269,6 +276,7 @@ def measurement_objects(route: dict, release_day: date | None = None, window: di
             objects.append({
                 **route, "id": f"{route['id']}#m{index}", "routeId": route["id"], "valueMultiple": pooled, "independentReports": surviving,
                 "reportIds": sorted(report["id"] for report in surviving), "excludedReportIds": excluded,
+                "windowStraddlingReportIds": sorted(report["id"] for report in surviving if straddles(report, window)),
                 "partitionStage": max((stages[report["id"]] for report in surviving), key=STAGES.index),
             })
     # No surviving partition: the route keeps only its unexpired reports, so it cannot grade as pooled evidence.
@@ -297,7 +305,9 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
         # O7/E123: a measurement on an unreconciled price basis is unmatched; E109: divisors must be positive;
         # E144: a transfer is diagnostic whenever its donor measurement is.
         checks = [route] + ([source] if source is not None else [])
-        if expiry == "demoted" or any(not _divisor_eligible(item) or valuation_status(item) == "different" for item in checks):
+        # O32: a transfer whose donor is an end-user report partition follows the donor's window status.
+        lapsed_donor = source is not None and source.get("valueMultipleKind") in REPORT_KINDS and evidence_grade(measurement_objects(source, release_day, window)[0], model_id) == "diagnostic"
+        if lapsed_donor or expiry == "demoted" or any(not _divisor_eligible(item) or valuation_status(item) == "different" for item in checks):
             grade = "diagnostic"
         stamp = evidence_date(route, by_id)
         provenance = source if source is not None else route

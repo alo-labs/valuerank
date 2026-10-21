@@ -24929,7 +24929,20 @@
               "deepseek-v4-pro"
             ],
             "confirmedCheapest": null,
+            "uncheckedCheaperSiblings": {
+              "gpt-6.1-sol": [
+                "GPT-6.1 Sol (xhigh)",
+                "GPT-6.1 Sol (high)",
+                "GPT-6.1 Sol (medium)",
+                "GPT-6.1 Sol (low)"
+              ],
+              "deepseek-v4-flash": [
+                "DeepSeek V4 Flash (high)"
+              ],
+              "deepseek-v4-pro": []
+            },
             "possibleQualifierN": 12,
+            "confirmedQualifierN": 5,
             "comparison": "compares 12 configurations that can qualify"
           }
         ]
@@ -25394,7 +25407,22 @@
                 "deepseek-v4-pro"
               ],
               "confirmedCheapest": null,
+              "uncheckedCheaperSiblings": {
+                "gpt-6.1-sol": [
+                  "GPT-6.1 Sol (xhigh)",
+                  "GPT-6.1 Sol (high)",
+                  "GPT-6.1 Sol (medium)",
+                  "GPT-6.1 Sol (low)"
+                ],
+                "mimo-v2-6-pro": [],
+                "mimo-v2-6-flash": [],
+                "deepseek-v4-flash": [
+                  "DeepSeek V4 Flash (high)"
+                ],
+                "deepseek-v4-pro": []
+              },
               "possibleQualifierN": 14,
+              "confirmedQualifierN": 5,
               "comparison": "compares 14 configurations that can qualify"
             }
           ]
@@ -30684,7 +30712,16 @@
               "gpt-6.1-sol"
             ],
             "confirmedCheapest": "gpt-6.1-sol",
+            "uncheckedCheaperSiblings": {
+              "gpt-6.1-sol": [
+                "GPT-6.1 Sol (xhigh)",
+                "GPT-6.1 Sol (high)",
+                "GPT-6.1 Sol (medium)",
+                "GPT-6.1 Sol (low)"
+              ]
+            },
             "possibleQualifierN": 10,
+            "confirmedQualifierN": 3,
             "comparison": "compares 10 configurations that can qualify"
           }
         }
@@ -33059,6 +33096,13 @@
           "extractor": "editorial pinning from the research capture"
         },
         {
+          "key": "frontierCapture",
+          "artifact": "data/aa_frontier_capture.json",
+          "sha256": "8426c98260619827f4b1fa8182f7a2aa1c83d003f5d92b6431a35e9ef0e89b30",
+          "capturedAt": null,
+          "extractor": "browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201)"
+        },
+        {
           "key": "roster",
           "artifact": "data/aa_mapping.json",
           "sha256": "536fc909db35d266f91b9874b674dbf4082160e9b7c61f96e500a1b59768d1f2",
@@ -33094,7 +33138,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "59bd847ca2ca49730fea1cfda6fbd4dcb80cdd959a1b0bc76f728edd91eea3ea",
+      "bundleHash": "4aebf11c06b112c328b71649054532576de36bd41381b61506060769a1533a93",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "scenarios": {

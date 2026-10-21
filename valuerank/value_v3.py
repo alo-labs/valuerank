@@ -361,6 +361,16 @@ def _summary_json(summary: q.QualitySummary) -> dict:
     }
 
 
+def cheaper_siblings(configuration: dict, page: dict, points: list[dict]) -> list[str]:
+    """E201: same-family configurations AA plots at a lower total Index cost; unevaluated (one configuration per family)."""
+
+    total = (page.get("intelligenceIndexCost") or {}).get("total")
+    if total is None:
+        return []
+    return [point["model_name"] for point in points
+            if point.get("family") == configuration["name"] and point["total_cost_usd"] < total and point.get("effort") != configuration.get("effort")]
+
+
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
     """Evidence, admission, basket costs and Plan routes for every ranked configuration (no anchors yet)."""
 
@@ -374,6 +384,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # O32: only end-user reports dated in the release's report window count toward admission.
     window = (documents["planRoutes"].get("evidencePolicy") or {}).get("reportingWindow")
     price_records = documents["priceRecords"]["records"]
+    points = (documents.get("frontierCapture") or {}).get("points", [])
     rows = []
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
@@ -409,6 +420,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "configurationMapped": model_id in mapping,
             "routeSelection": plan_routes.route_selection(candidates),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window),
+            "cheaperSiblings": cheaper_siblings(configuration, page, points),
         })
     ids = [row["id"] for row in rows]
     admission = basket.admission_panel({row["id"]: row["components"] for row in rows}, ids)
@@ -698,6 +710,7 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
             if "rows" in bar:
                 bar["rows"][row_id] = {"status": WITHHELD_LABEL}
                 bar["possibleCheapest"] = [item for item in bar["possibleCheapest"] if item != row_id]
+                bar["uncheckedCheaperSiblings"].pop(row_id, None)
     for bar in bars:
         if "rows" in bar:
             _comparison(bar)
@@ -730,12 +743,16 @@ def _bar_reference(bar: dict) -> intervals.Reference:
 def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> list[dict]:
     """Each bar's interval outcome; every row also gets its displayed-quality margin to the level (E198)."""
 
-    displayed = {row["id"]: row["summary"].displayed for row in assembled["rows"]}
+    by_id = {row["id"]: row for row in assembled["rows"]}
     results = []
     for bar in frozen["barReferences"]:
         outcome = intervals.cheapest_above_bar(boxes, _bar_reference(bar))
         for row_id, item in outcome.get("rows", {}).items():
-            item["displayedMargin"] = None if displayed[row_id] is None else displayed[row_id] - bar["level"]
+            displayed = by_id[row_id]["summary"].displayed
+            item["displayedMargin"] = None if displayed is None else displayed - bar["level"]
+        if "possibleCheapest" in outcome:
+            # E201: cheaper plotted configurations of each candidate's family were not evaluated (one per family is ranked).
+            outcome["uncheckedCheaperSiblings"] = {row_id: by_id[row_id].get("cheaperSiblings", []) for row_id in outcome["possibleCheapest"]}
         results.append({"reference": bar, **outcome})
     return results
 
@@ -748,6 +765,8 @@ def _comparison(bar: dict) -> None:
 
     count = sum(1 for item in bar["rows"].values() if item.get("possible") == intervals.CERTIFIED)
     bar["possibleQualifierN"] = count
+    # E201: confirmed qualification needs a row's full-composite lower bound (missing leaves at 0, O25) to clear the level.
+    bar["confirmedQualifierN"] = sum(1 for item in bar["rows"].values() if item.get("confirmed") == intervals.CERTIFIED)
     bar["comparison"] = VACUOUS_COMPARISON if count < 2 else f"compares {count} configurations that can qualify"
 
 
@@ -1863,6 +1882,7 @@ EVIDENCE_FILES = {
     "codingAgents": ("aa/coding_agents_capture.json", "valuerank.capture_coding_agents"),
     "costCharts": ("aa/cost_charts_capture.json", "scripts/capture-aa-cost-charts.js"),
     "configurationMap": ("v3_configuration_map.json", "editorial pinning from the research capture"),
+    "frontierCapture": ("aa_frontier_capture.json", "browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201)"),
     "roster": ("aa_mapping.json", "editorial roster: AA frontier and near-frontier families plus every configuration with exact DeepSWE and Bug Hunt results (O31)"),
     "bugHuntScoreboard": ("bug_hunt_scoreboard.json", "the owner's combined scoreboard at the pinned commit (O31 roster check)"),
     "planRoutes": ("plan_cost_routes.json", "editorial Plan evidence registry"),

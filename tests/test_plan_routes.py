@@ -465,3 +465,30 @@ def test_only_reports_in_the_current_window_count(monkeypatch):
     assert left["grade"] == "diagnostic" and left["route"]["excludedReportIds"] == ["old"]
     assert pr.in_window({"id": "x"}, window) is False and pr.in_window({"id": "x"}, None) is True
     assert pr.admission_table("m", "max", [base], TODAY, window)[0]["case"] == 5
+
+
+def test_a_transfer_from_a_report_donor_follows_the_donors_window_status():
+    """O32: a transfer whose donor is an end-user report partition lapses when the donor's reports leave the window."""
+
+    def dated(identifier, multiple, day):
+        return {**comparable_report(identifier, multiple), "measurementWindow": {"start": day, "end": day}}
+
+    donor_route = route("donor", 1.0, kind="user_reported_projection", models=("x",), checked="2026-10-15",
+                        independentReports=[dated("new", 10.0, "2026-10-12"), dated("old", 11.0, "2026-09-01")])
+    transfer = route("t", 10.0, kind="user_assumption", models=("m",), checked="2026-10-18", donorRouteId="donor", sourceEvidenceClass="user_reported_projection")
+    assert pr.route_candidates("m", "max", [transfer], TODAY, registry=[transfer, donor_route])[0]["grade"] == "assumption"
+    lapsed = pr.route_candidates("m", "max", [transfer], TODAY, registry=[transfer, donor_route], window={"start": "2026-09-20", "end": "2026-10-20"})
+    assert lapsed[0]["grade"] == "diagnostic"
+    assert pr.report_stage({"id": "u", "sourcePublicationDate": "2026-10-18"}, route("x", 1, checked="2026-05-01"), TODAY) == "fresh"
+
+
+def test_a_report_starting_before_the_window_is_flagged_window_straddling():
+    """E201: a counted report whose measurement started before the window is flagged, not dropped."""
+
+    window = {"start": "2026-09-20", "end": "2026-10-20"}
+    straddler = {**comparable_report("s", 10.0), "measurementWindow": {"start": "2026-09-10", "end": "2026-10-01"}}
+    inside = {**comparable_report("i", 10.5), "measurementWindow": {"start": "2026-10-01", "end": "2026-10-05"}}
+    base = route("r", 1.0, kind="user_reported_projection", models=("m",), checked="2026-10-15", independentReports=[straddler, inside])
+    (pooled,) = pr.measurement_objects(base, TODAY, window)
+    assert pooled["reportIds"] == ["i", "s"] and pooled["windowStraddlingReportIds"] == ["s"]
+    assert pr.straddles(straddler, None) is False and pr.straddles({"id": "x"}, window) is False

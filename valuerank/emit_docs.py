@@ -827,6 +827,9 @@ def interval_block(facts, result, label, workload_label):
         text += f"\n\n**{label} basis, {workload_label}: cheapest at or above {reference}** ({bar['reference']['rule']}). Status {bar['status']}"
         if bar["status"] == "certified":
             text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
+            siblings = "; ".join(f"{facts.label(row_id)}: {', '.join(names)}" for row_id, names in bar["uncheckedCheaperSiblings"].items() if names)
+            text += f"Configurations that can be confirmed to qualify: {bar['confirmedQualifierN']} (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). "
+            text += f"Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): {siblings or 'none'}.\n\n"
             text += f"Bar comparison: {bar['comparison']}. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).\n\n"
             bar_rows = [[facts.label(row_id), fnum(item["displayedMargin"], 1), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
             text += markdown_table(["Configuration", "Displayed quality − bar", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows, numeric={1})

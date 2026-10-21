@@ -1253,13 +1253,29 @@ def test_a_near_family_must_rank_its_configuration_with_exact_deepswe_and_bug_hu
         run_main(world)
 
 
-def test_evidenced_effort_needs_both_results_at_one_effort():
-    model = {"displayName": "GPT-6 Astra", "aaShortName": "GPT-6 Astra (max)"}
-    deepswe = [{"model": "GPT-6 Astra", "effort": "max"}, {"model": "Other", "effort": "high"}]
-    assert build_scores.evidenced_effort(model, deepswe, {"matched": True, "effort": "max"}) == "max"
-    assert build_scores.evidenced_effort(model, deepswe, {"matched": True, "effort": "high"}) is None
-    assert build_scores.evidenced_effort(model, deepswe, {"matched": False, "effort": "max"}) is None
-    assert build_scores.evidenced_effort(model, deepswe, None) is None
+def test_evidenced_efforts_need_both_results_and_order_by_index_then_cost():
+    """O30/O31: efforts with exact DeepSWE and Bug Hunt results; several are ordered by AA Index, then cost."""
+
+    model = {"displayName": "Muse Spark 1.3", "aaShortName": "Muse Spark 1.3 (max)"}
+    deepswe = [{"model": "Muse Spark 1.3", "effort": "max"}, {"model": "Muse Spark 1.3", "effort": "xhigh"}, {"model": "Muse Spark 1.3", "effort": None}, {"model": "Other", "effort": "high"}]
+    board = [{"model": "Muse Spark 1.3 (max effort, Muse Code)"}, {"model": "Muse Spark 1.3 (xhigh effort) - mean of 3"},
+             {"model": "Muse Spark 1.3 (low effort)"}, {"model": "Muse Spark 1.3"}, {"model": "Muse Spark 1.3 Open (max effort)"}]
+    efforts = build_scores.evidenced_efforts(model, deepswe, board)
+    assert efforts == {"max", "xhigh"}
+    points = [{"family": "Muse Spark 1.3", "effort": "max", "intelligence_index_display": 48, "total_cost_usd": 2000.0},
+              {"family": "Muse Spark 1.3", "effort": "xhigh", "intelligence_index_display": 48, "total_cost_usd": 1600.0}]
+    assert build_scores.best_evidenced_effort(model, efforts, points) == "xhigh"  # equal Index: the lower cost wins
+    assert build_scores.best_evidenced_effort(model, {"max"}, []) == "max" and build_scores.best_evidenced_effort(model, set(), []) is None
+    with pytest.raises(ValueError, match="cannot be ordered"):
+        build_scores.best_evidenced_effort(model, efforts, points[:1])
+
+
+def test_a_retained_family_must_rank_its_highest_index_evidenced_effort(world):
+    """O31: Muse Spark 1.3 has both results at max and xhigh; tracking xhigh (Index 45 < 48) fails the build."""
+
+    edit(world, "aa", lambda d: d["models"]["muse-spark-1-3"].update(aaVariant="xhigh"))
+    with pytest.raises(ValueError, match=r"Retained family must rank its highest-Index evidenced effort \(O31\): Muse Spark 1.3 at max"):
+        run_main(world)
 
 
 def test_a_bug_hunt_result_at_another_effort_is_not_used():

@@ -630,7 +630,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `59bd847ca2ca49730fea1cfda6fbd4dcb80cdd959a1b0bc76f728edd91eea3ea`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `4aebf11c06b112c328b71649054532576de36bd41381b61506060769a1533a93`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -641,6 +641,7 @@ Bundle hash `59bd847ca2ca49730fea1cfda6fbd4dcb80cdd959a1b0bc76f728edd91eea3ea`: 
 | codingAgents | `data/aa/coding_agents_capture.json` | `944b4082d89e451c9383b662a8b3c4b3c32423d31dca2316a8ff9dc6eca6ca7c` | 2026-10-19T19:31:46Z | valuerank.capture_coding_agents |
 | costCharts | `data/aa/cost_charts_capture.json` | `2e2cd3653c5f2add06595161e3839062e0ce1e989f8f3ba781cdc00814c3b5d3` | 2026-10-19T19:39:55.048Z | scripts/capture-aa-cost-charts.js |
 | configurationMap | `data/v3_configuration_map.json` | `0f4d5164ce177f9c580f05f536ba928a2b755eda9cd22a7ea83df744165aa249` | 2026-10-19 | editorial pinning from the research capture |
+| frontierCapture | `data/aa_frontier_capture.json` | `8426c98260619827f4b1fa8182f7a2aa1c83d003f5d92b6431a35e9ef0e89b30` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `536fc909db35d266f91b9874b674dbf4082160e9b7c61f96e500a1b59768d1f2` | — | editorial roster: AA frontier and near-frontier families plus every configuration with exact DeepSWE and Bug Hunt results (O31) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `d11b49c46c60f43909e2c8e02067a9bbfd17dd3b56d5210ff047316449ef1ebb` | 2026-10-21T06:30:00Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
 | planRoutes | `data/plan_cost_routes.json` | `a98a84692c8139de085ef40f155322eb7fbad8e6efd11d08b0b266374f2086d4` | 2026-10-08 | editorial Plan evidence registry |

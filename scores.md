@@ -237,6 +237,8 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value c
 
 **API basis, main workload: cheapest at or above quality 58.3** (lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)). Status certified; confirmed cheapest: none.
 
+Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); DeepSeek V4 Flash (max): DeepSeek V4 Flash (high).
+
 Bar comparison: compares 12 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
@@ -290,6 +292,8 @@ Bar comparison: compares 12 configurations that can qualify. The bar is a displa
 | DeepSeek V4 Pro (max) | certified | disproved | MiMo-V2.6-Pro | — |
 
 **API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 58.3** (lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)). Status certified; confirmed cheapest: none.
+
+Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); DeepSeek V4 Flash (max): DeepSeek V4 Flash (high).
 
 Bar comparison: compares 14 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 

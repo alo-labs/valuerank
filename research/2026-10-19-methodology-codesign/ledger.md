@@ -855,3 +855,26 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - README flags gain "valuation basis unverified" and "no cost".
 
 - Follow-up fixes (test update run): scores.md printed "None" for a missing rank (now a dash, workload a dash for a no-cost row); short_flags now follow the legend order; README scope reads "23 cohort configurations (22 with a value score)"; the site flags a no-cost row "No cost" instead of "Subset cost"; the O31 roster check accepts only a version-number suffix, so "Muse Wonder Full 1.0" cannot be read as a version of "Muse Wonder".
+
+## Internal review I5 (Claude Sonnet 5.5, effort low, on r64) — adopted, modified or rejected
+- H1 (adopted): r64 still had r63's sentence letting earlier-admitted reports age under E151/O13, which contradicts O32. It is removed, and the parenthesis is repaired.
+  - Under O32, each release rebuilds report partitions from in-window reports only, so a report-based route lapses without fresh reports.
+  - E151/O13 clocks govern controlled measurements and transfers.
+  - A transfer whose donor is a report partition follows the donor's O32 status (implemented in route_candidates, with a test). Report dates are computed one way everywhere (report_stage uses report_date).
+  - I5 Q1 is answered by O32.
+- M1 (adopted, E201): a counted report whose measurement window starts before the report window is flagged window-straddling (windowStraddlingReportIds). Where a report isolates per-period figures, the registry records only the in-window periods and the multiple recomputed from them, as an editorial step.
+- M2 (modified, E201): the observation is right. Confirmed qualification uses the full-composite lower bound with missing leaves at 0, so confirmed labels in practice go to full-coverage rows. This is O25's published-record target, not a hidden rule, so I5 Q2 is answered by O25. Each result now publishes confirmedQualifierN beside possibleQualifierN (today 5 against 12).
+- M3 (adopted): "Bug Hunt publishes one configuration per model" was false. The scoreboard has five efforts with both results for GPT-6.1 Sol, Claude Haiku 5.5 and Claude Sonnet 5.5, and two for Muse Spark 1.3. The build now:
+  - orders evidenced efforts from the full scoreboard and AA's chart points (highest Index, then the lower cost);
+  - enforces this for every non-frontier roster model, ranked or not.
+  - Found by the new test: a roster model tracked at an effort without both results had silently dropped out of the cohort. No current model does.
+- M4 (adopted): the "cohort" (23) and the "scored" rows (22) are defined. N for ⌈2N/3⌉ counts every cohort row. The bar population counts every non-provisional cohort row with a displayed quality. W_S covers 21 of 23 rows (the stale "19" is corrected).
+- M5 (adopted): the cost boundary now says AA prices provider-reported counts or its canonical-tokenizer fallback (basis not published per configuration; E176).
+- M6 (adopted, E201): each possibly-cheapest row lists the same-family configurations AA plots at a lower total Index cost; they are not evaluated because one configuration per family is ranked. Today: GPT-6.1 Sol's four lower efforts and DeepSeek V4 Flash (high). The chart capture is now in the evidence bundle.
+- M7 (adopted): SemiAnalysis results are labelled controlled subscription-account measurements with workload projections in O11's text; the site's route label already says so.
+- L1, L2 and L5 (adopted): F(c) is undefined left of the first frontier point (no near status there); "lower median" means the ⌈n/2⌉-th ascending value; the family key strips the trailing parenthesised qualifier and must equal the catalog display name.
+- L4 (adopted): see H1.
+- Not adopted:
+  - L3 (identifier collisions): an E-number names an editor decision record that may cover several items and later amendments. The record makes each one traceable.
+  - Recommendation 2 (dormant appendix): editorial restructuring with no change in behaviour; the dormant definitions already have executable tests.
+  - Recommendation 4 (harness for the numeric fixtures): the test suite already asserts them.
