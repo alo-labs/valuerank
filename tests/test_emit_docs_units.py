@@ -278,3 +278,16 @@ def test_displayed_cheapest_sentences_name_the_row_or_none():
     api, plan = ed.displayed_cheapest_sentences(Facts)
     assert api == "API basis, displayed record (not a claim; E203): cheapest at or above quality 50.0: a ($12.00 per basket run; 3 reach it); at or above quality 70.0: none."
     assert plan.startswith("Plan basis, displayed record")
+
+
+def test_cross_harness_text_lists_or_says_none():
+    """E224: the Bug Hunt cross-harness sentence."""
+
+    class Facts:
+        names = {"g": "Gemini"}
+        scores = {"models": [{"id": "g", "rankingEligible": True, "bugHuntCrossHarness": [{"harness": "A CLI", "fixedOf105": 40.7, "runs": 3}, {"harness": "B CLI", "fixedOf105": 33.0, "runs": 1}]},
+                             {"id": "h", "rankingEligible": False, "bugHuntCrossHarness": [{"harness": "A", "fixedOf105": 1.0, "runs": 1}]}]}
+
+    assert ed.cross_harness_text(Facts) == "Cross-harness results at the same effort (E224, diagnostic): Gemini: A CLI 40.7 (3 runs), B CLI 33.0 (1 run)."
+    Facts.scores = {"models": []}
+    assert ed.cross_harness_text(Facts).startswith("No ranked configuration has Bug Hunt results on two harnesses")

@@ -242,6 +242,18 @@ def check_report_window(document: dict) -> None:
                 raise ValueError(f"{report['id']}: end-user report dated outside the report window {start} to {end} (E194)")
 
 
+def check_report_independence(document: dict) -> None:
+    """E223: reports pooled for one route are independent: each names its observer, observers are distinct, and no two
+    share an upstream source (a post, thread or derivation). Calendar spacing is not required (O11)."""
+
+    for route in document["routes"]:
+        reports = route.get("independentReports") or []
+        observers = [str(report.get("observer") or "").strip() for report in reports]
+        sources = [report.get("upstreamSource") for report in reports if report.get("upstreamSource")]
+        if reports and (not all(observers) or len(set(observers)) < len(observers) or len(set(sources)) < len(sources)):
+            raise ValueError(f"{route['id']}: pooled reports must name distinct observers and share no upstream source (E223)")
+
+
 CONTROLLED_KINDS = {"controlled_account_workload_projection"}
 
 

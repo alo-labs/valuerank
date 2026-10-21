@@ -509,3 +509,13 @@ def test_controlled_measurements_record_their_allocation_regime():
     pr.check_allocation_regimes({"routes": [controlled, {"id": "t", "valueMultipleKind": "user_assumption"}]})
     with pytest.raises(ValueError, match=r"c: a controlled measurement must record its allocation regime \(E220\)"):
         pr.check_allocation_regimes({"routes": [{**controlled, "allocationRegime": " "}]})
+
+
+def test_pooled_reports_name_distinct_observers_and_no_shared_source():
+    """E223: independence is distinct observers and no shared upstream source; calendar spacing is not required."""
+
+    one, two = {"id": "r1", "observer": "alice", "upstreamSource": "post-1"}, {"id": "r2", "observer": "bob", "upstreamSource": "post-2"}
+    pr.check_report_independence({"routes": [{"id": "x", "independentReports": [one, two]}, {"id": "y"}]})
+    for bad in ([one, {**two, "observer": "alice"}], [one, {**two, "upstreamSource": "post-1"}], [one, {**two, "observer": " "}]):
+        with pytest.raises(ValueError, match=r"x: pooled reports must name distinct observers .* \(E223\)"):
+            pr.check_report_independence({"routes": [{"id": "x", "independentReports": bad}]})

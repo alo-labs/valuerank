@@ -1368,6 +1368,20 @@ def test_bug_hunt_selection_is_the_largest_sample_result_at_the_exact_effort():
     assert build_scores.scoreboard_sample("X (max effort) - mean of 12") == 12 and build_scores.scoreboard_sample("X (max effort)") == 1
 
 
+def test_bug_hunt_cross_harness_lists_each_harness_at_the_exact_effort():
+    """E224: the largest-sample result per harness, only when two or more harnesses report the configuration's effort."""
+
+    model = {"displayName": "Gemini 4 Argon", "aaVariant": "high"}
+    rows = [{"model": "Gemini 4 Argon (high effort)", "harness": "Gemini CLI", "fixedOf105": 33.0},
+            {"model": "Gemini 4 Argon (high effort, Antigravity CLI)", "harness": "Antigravity CLI", "fixedOf105": 41.0},
+            {"model": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3", "harness": "Antigravity CLI", "fixedOf105": 40.7},
+            {"model": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 2", "harness": "Antigravity CLI", "fixedOf105": 39.0},
+            {"model": "Gemini 4 Argon (low effort, Antigravity CLI)", "harness": "Antigravity CLI", "fixedOf105": 32.0}]
+    assert build_scores.bug_hunt_cross_harness("gemini-4-argon", model, rows) == [
+        {"harness": "Antigravity CLI", "fixedOf105": 40.7, "runs": 3}, {"harness": "Gemini CLI", "fixedOf105": 33.0, "runs": 1}]
+    assert build_scores.bug_hunt_cross_harness("gemini-4-argon", {**model, "aaVariant": "low"}, rows) is None
+
+
 def test_the_build_rejects_a_bug_hunt_record_that_is_not_the_largest_sample(world):
     edit(world, "bughunt", lambda d: next(item for item in d["models"] if item["modelId"] == "gpt-6-astra").update(sampleN=1))
     with pytest.raises(ValueError, match=r"gpt-6-astra is not the owner's largest-sample result"):

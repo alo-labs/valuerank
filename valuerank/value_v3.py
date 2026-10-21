@@ -2092,6 +2092,7 @@ def load_documents(data: Path) -> dict:
     documents = {key: json.loads((data / relative).read_text()) for key, (relative, _extractor) in EVIDENCE_FILES.items()}
     plan_routes.check_report_window(documents["planRoutes"])
     plan_routes.check_allocation_regimes(documents["planRoutes"])
+    plan_routes.check_report_independence(documents["planRoutes"])
     return documents
 
 

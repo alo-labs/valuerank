@@ -357,6 +357,20 @@ def check_bug_hunt_selection(model_id, aa_model, record, scoreboard_rows):
         raise ValueError(f"Bug Hunt record for {model_id} is not the owner's largest-sample result at its effort and carries no selection reason (E206)")
 
 
+def bug_hunt_cross_harness(model_id, aa_model, scoreboard_rows):
+    """E224: the owner's largest-sample result on each harness for the configuration's exact effort, when Bug Hunt
+    reports it on two or more harnesses; None otherwise (a diagnostic of how much the harness moves the leaf)."""
+
+    best = {}
+    for row in scoreboard_rows:
+        for effort, _name in scoreboard_matches(roster_names(aa_model), [row]):
+            if exact_match.efforts_match(model_id, aa_model.get("aaVariant"), effort):
+                current = best.get(row["harness"])
+                if current is None or scoreboard_sample(row["model"]) > current["runs"]:
+                    best[row["harness"]] = {"harness": row["harness"], "fixedOf105": row["fixedOf105"], "runs": scoreboard_sample(row["model"])}
+    return sorted(best.values(), key=lambda item: item["harness"]) if len(best) > 1 else None
+
+
 def exact_bug_hunt(model_id, effort, record):
     """The Bug Hunt record as it applies to the ranked configuration: an owner match at another effort is not used."""
 
@@ -932,6 +946,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "aaFrontierIntelligenceGap": tier["intelligenceGap"],
             "aaFrontierFootnote": tier["footnote"],
             "bugHunt": bug_hunt,
+            "bugHuntCrossHarness": bug_hunt_cross_harness(model_id, aa_model, scoreboard_rows),
             "rankDeepSWE": deepswe_model.get("sourceOrder") if deepswe_model else None,
             "deepsweEffort": deepswe_model.get("effort") if deepswe_model else None,
             "deepswePassAt1": (require_number(deepswe_model["scorePct"], f"{model_id}.DeepSWE scorePct") / 100) if deepswe_model else None,

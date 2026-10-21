@@ -389,6 +389,14 @@ def search_gap_text(policy):
     return f"; end-user reports were last searched on {searched}, so reports dated in the {gap} days after it were not searched"
 
 
+def cross_harness_text(facts):
+    """E224: configurations Bug Hunt reports on two or more harnesses at the same effort (a diagnostic, no score change)."""
+
+    parts = [f"{facts.names.get(row['id'], row['id'])}: " + ", ".join(f"{item['harness']} {fnum(item['fixedOf105'], 1)} ({item['runs']} run{'s' if item['runs'] != 1 else ''})" for item in row["bugHuntCrossHarness"])
+             for row in facts.scores["models"] if row.get("rankingEligible") and row.get("bugHuntCrossHarness")]
+    return ("Cross-harness results at the same effort (E224, diagnostic): " + "; ".join(parts) + ".") if parts else "No ranked configuration has Bug Hunt results on two harnesses at the same effort (E224)."
+
+
 def bar_currency_text(currency):
     """E207: how many bar-population rows reach each frozen bar now, the ladder this population would freeze, and the flag."""
 
@@ -1199,7 +1207,7 @@ The AA chart publishes {len(deepswe)} DeepSWE v1.1 configurations across {facts.
 
 ## Bug Hunt Bench matched runs
 
-Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the score is the mean bugs fixed of 105 over the runs for the exact model, effort and harness.
+Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the score is the owner's largest-sample mean of bugs fixed of 105 for the exact model and effort, with the harness that result was run on (E206). {cross_harness_text(facts)}
 
 {markdown_table(['Model', 'Evaluated model', 'Bugs fixed of 105', 'Runs', 'Effort', 'Harness'], bug_rows, numeric={2, 3})}
 

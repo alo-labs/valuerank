@@ -816,7 +816,7 @@ The AA chart publishes 42 DeepSWE v1.1 configurations across 113 tasks, observed
 
 ## Bug Hunt Bench matched runs
 
-Owner-published runs at commit `aec976170df89a371384174ca87646a9a8c82415`; the score is the mean bugs fixed of 105 over the runs for the exact model, effort and harness.
+Owner-published runs at commit `aec976170df89a371384174ca87646a9a8c82415`; the score is the owner's largest-sample mean of bugs fixed of 105 for the exact model and effort, with the harness that result was run on (E206). Cross-harness results at the same effort (E224, diagnostic): Gemini 4 Argon: Antigravity CLI 40.7 (3 runs), Gemini CLI 33.0 (1 run).
 
 | Model | Evaluated model | Bugs fixed of 105 | Runs | Effort | Harness |
 |---|---|---:|---:|---|---|
