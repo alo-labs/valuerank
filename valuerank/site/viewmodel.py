@@ -351,6 +351,10 @@ def build_bundle(data: Path = DATA) -> Bundle:
 
     pareto = {basis: pareto_set(v3["rows"], v3["mainWorkload"], basis) for basis in BASES}
     entries = {slugify(source["id"]): _entry(source, rows.get(source["id"]), quality_ranks, frontier, shares, routes, pareto) for source in roster}
+    # O42: the band of rank positions each ranked row cannot be separated from under benchmark sampling noise.
+    bands = {basis: v3["diagnostics"]["rankSeparability"][basis]["bands"] for basis in BASES}
+    for source in roster:
+        entries[slugify(source["id"])]["band"] = {basis: bands[basis].get(source["id"]) for basis in BASES}
     ordered = sorted(entries.values(), key=lambda entry: (entry["rank"]["plan"] is None, entry["rank"]["plan"] or 0, entry["name"]))
     rankings = {
         "version": VERSION,
@@ -810,7 +814,7 @@ def index_page(bundle: Bundle) -> dict:
 COLUMN_ORDER = (
     ("rank", "Rank"), ("name", "Model"), ("overall", "Value"), ("quality", "Quality"), ("cost", "Cost"),
     ("grade", "Evidence"), ("coverage", "Coverage"), ("developer", "Developer"), ("qualityRank", "Quality rank"),
-    ("speed", "Speed"), ("ii", "Intelligence Index"),
+    ("speed", "Speed"), ("ii", "Intelligence Index"), ("band", "Noise band"),
 )
 DEFAULT_COLUMNS = tuple(key for key, _label in COLUMN_ORDER[:7])
 

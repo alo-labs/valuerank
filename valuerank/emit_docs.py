@@ -553,6 +553,7 @@ def readme(facts):
             usd(entry["cost"]["planUsd"]),
             route_text(entry),
             short_flags(entry, row),
+            band_text(facts, row["id"]),
         ])
     exploratory = (
         f" No Value Multiple is yet identified on the basket itself ({yield_['pointIdentified'] + yield_['setIdentified']} of {yield_['rows']} rows), "
@@ -575,13 +576,13 @@ ValueRank ranks frontier AI model configurations (see Model inclusion) by value 
 
 {leaders(facts)}
 
-{markdown_table(['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)', 'Plan cost (USD per basket run)', 'Plan route', 'Flags'], table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
+{markdown_table(['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)', 'Plan cost (USD per basket run)', 'Plan route', 'Flags', 'Noise band (Plan / API)'], table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
 
 Values are rounded for display; ranks are competition ranks (equal values share the better rank).{separability_text(facts)}
 
 {legend}
 
-Not ranked ({len(facts.unranked)} roster models): {names([entry['name'] for entry in facts.unranked])}. Reasons are listed in [scores.md](scores.md#not-ranked).{incomplete_text(facts)}
+Not ranked ({len(facts.unranked)} roster models): {names([entry['name'] for entry in facts.unranked])}. Reasons are listed in [scores.md](scores.md#not-ranked).{incomplete_text(facts)}{listed_indicative_text(facts)}
 
 ### What the evidence supports
 
@@ -701,7 +702,7 @@ ValueRank asks which frontier AI model configuration is lowest cost for the valu
 
 {len(facts.rows)} configurations are ranked:
 
-{cohort_lines}{incomplete_line}
+{cohort_lines}{incomplete_line}{" A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41)." if v3["listedIndicative"] else ""}
 
 The remaining {len(facts.unranked) - len(incomplete)} roster models are not ranked; each keeps a page with the evidence held for it.
 
@@ -771,7 +772,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 {streams}
 
-S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39)** redraws every leaf with plug-in binomial noise from its published task count (DeepSWE 113, FrontierCode 100, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs, AA-Omniscience's 6,000 questions scored +1/0/−1), with GDPval-AA drawn from its displayed rating interval read as a 95% normal interval (an assumption). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
+S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39)** redraws every leaf with plug-in binomial noise from its published task count (DeepSWE 113, FrontierCode 100, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs, AA-Omniscience's 6,000 questions scored +1/0/−1), with GDPval-AA drawn from its displayed rating interval read as a 95% normal interval (an assumption). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. From the same noise the ranking prints a **noise band** beside each rank (O42): rows in value order join the current band while their value is not separable from the band's first row (1.96 × the root sum of their value SDs), otherwise they start a new one. Because every configuration is scored on the same tasks, their errors correlate and the true threshold is smaller, so the bands are conservative; separable adjacent ranks at correlations 0.3 and 0.6 are published beside them. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
 
 {not_quantified}
 
@@ -1079,14 +1080,42 @@ def gap_fill_text(sensitivity, facts):
     return f"- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — {rows} — {moves}."
 
 
+def band_text(facts, row_id):
+    """O42: the row's band of ranks it cannot be separated from under benchmark sampling noise, Plan then API."""
+
+    result = facts.v3["diagnostics"]["rankSeparability"]
+    parts = []
+    for basis in ("plan", "api"):
+        band = result[basis]["bands"].get(row_id)
+        parts.append(DASH if band is None else (f"{band[0]}" if band[0] == band[1] else f"{band[0]}–{band[1]}"))
+    return " / ".join(parts)
+
+
+def listed_indicative_text(facts):
+    """O41: a separated, non-ranked indicative value for each listed frontier or near-frontier family."""
+
+    items = facts.v3["listedIndicative"]
+    if not items:
+        return ""
+    rows = [[item["name"], ", ".join(LEAF_LABELS[key] for key in item["missing"]), fnum(item["quality"], 1), f"{100 * item['coverage']:.0f}%",
+             fnum(item["plan"]["value"], 1), fnum(item["api"]["value"], 1), usd(item["api"]["costUsd"]), usd(item["plan"]["costUsd"])] for item in items]
+    return ("\n\n**Listed frontier families: indicative value, not ranked and not comparable (O41).** Quality is the mean over the leaves the "
+            "configuration has, renormalised, with no imputation, so these values cannot be compared with the ranking above.\n\n"
+            + markdown_table(["Configuration", "Missing", "Quality (remaining leaves)", "Quality coverage", "Plan value (indicative)", "API value (indicative)",
+                              "API cost (USD per basket run)", "Plan cost (USD per basket run)"], rows, numeric={2, 3, 4, 5, 6, 7}))
+
+
 def separability_text(facts):
     """O39: how far apart two values must be to separate under benchmark sampling noise (independent-task approximation)."""
 
     result = facts.v3["diagnostics"]["rankSeparability"]
     api, plan = result["api"], result["plan"]
+    grid = lambda item: ", ".join(f"{count} at correlation {rho}" for rho, count in item["byCorrelation"].items() if rho != "0.0")
     return (f" Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about {api['medianSeparation']:.1f} value points "
             f"(median, 95%) to separate, and {api['separableAdjacentPairs']} of {api['adjacentPairs']} adjacent API ranks and {plan['separableAdjacentPairs']} of "
-            f"{plan['adjacentPairs']} adjacent Plan ranks do; the S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.")
+            f"{plan['adjacentPairs']} adjacent Plan ranks do. That threshold is conservative: every configuration is scored on the same tasks, which correlates "
+            f"their errors and narrows the true threshold (API {grid(api)}; Plan {grid(plan)}). The noise band column groups ranks that cannot be told apart (O42); "
+            "the S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.")
 
 
 def gap_fill_bars_text(result, facts):

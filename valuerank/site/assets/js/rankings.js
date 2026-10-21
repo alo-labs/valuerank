@@ -85,6 +85,13 @@ function fillNotes(doc, list, models) {
   list.replaceChildren(...models.map((m) => noteItem(doc, m)));
 }
 
+/** O42: a row's noise band as a rank range ("4–9"), one position ("31") or a dash when unranked. */
+export function bandText(model, basis) {
+  const band = model.band ? model.band[basis] : null;
+  if (!band) return '—';
+  return band[0] === band[1] ? String(band[0]) : `${band[0]}–${band[1]}`;
+}
+
 function cellChildren(doc, key, model, ctx) {
   switch (key) {
     case 'rank': return [orDash(model.rank[ctx.basis])];
@@ -102,6 +109,7 @@ function cellChildren(doc, key, model, ctx) {
     case 'cost': return [fmtUsd(costValue(model, ctx.basis), 2)];
     case 'coverage': return coverageCell(doc, model, ctx.expanded);
     case 'qualityRank': return [orDash(model.qualityRank, (v) => `#${v}`)];
+    case 'band': return [bandText(model, ctx.basis)];
     default: return [fmtScore(columnValue(model, key, ctx.basis))];
   }
 }

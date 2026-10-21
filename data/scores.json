@@ -36714,6 +36714,29 @@
         ]
       }
     ],
+    "listedIndicative": [
+      {
+        "id": "mimo-v2-6-flash",
+        "name": "MiMo-V2.6-Flash",
+        "label": "not ranked, not comparable: quality on the leaves the configuration has, renormalised, with no imputation (O41)",
+        "workload": "1453a9a0576b02ea",
+        "missing": [
+          "bugHunt"
+        ],
+        "quality": 53.904330669888246,
+        "coverage": 0.9,
+        "api": {
+          "costUsd": 60.36787614182735,
+          "costScore": 78.43135833762534,
+          "value": 60.03608758682252
+        },
+        "plan": {
+          "costUsd": 40.24525076121824,
+          "costScore": 51.19700170357489,
+          "value": 53.22749842830991
+        }
+      }
+    ],
     "displayedCheapest": {
       "api": {
         "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
@@ -38336,6 +38359,8 @@
           "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
           "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate"
         ],
+        "bias": "conservative: the threshold treats two rows' errors as independent, but every row is scored on the same tasks, so shared task difficulty correlates them and the true paired threshold is smaller; averaging attempts within a task narrows it further",
+        "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x the root sum of their value SDs), otherwise it starts a new band; a band is printed as its rank range",
         "valueSd": {
           "gemini-4-argon": 1.126758826236831,
           "gpt-6.1-sol-xhigh": 1.1885212473903872,
@@ -38373,12 +38398,282 @@
         "api": {
           "adjacentPairs": 30,
           "separableAdjacentPairs": 0,
-          "medianSeparation": 3.3380563443877707
+          "medianSeparation": 3.3380563443877707,
+          "byCorrelation": {
+            "0.0": 0,
+            "0.3": 1,
+            "0.6": 2
+          },
+          "gdpvalWide": {
+            "separableAdjacentPairs": 0,
+            "medianSeparation": 3.3461389807396618
+          },
+          "bands": {
+            "gpt-6.1-sol-xhigh": [
+              1,
+              5
+            ],
+            "gpt-6.1-sol-medium": [
+              1,
+              5
+            ],
+            "mimo-v2-6-pro": [
+              1,
+              5
+            ],
+            "gpt-6.1-sol-high": [
+              1,
+              5
+            ],
+            "gpt-6.1-sol": [
+              1,
+              5
+            ],
+            "gpt-6-luna": [
+              6,
+              11
+            ],
+            "gpt-6.1-sol-low": [
+              6,
+              11
+            ],
+            "gemini-4-argon": [
+              6,
+              11
+            ],
+            "gpt-5.6-luna": [
+              6,
+              11
+            ],
+            "claude-sonnet-5-5-high": [
+              6,
+              11
+            ],
+            "claude-sonnet-5-5-xhigh": [
+              6,
+              11
+            ],
+            "gpt-6-sol": [
+              12,
+              21
+            ],
+            "claude-sonnet-5-5": [
+              12,
+              21
+            ],
+            "claude-opus-5-5": [
+              12,
+              21
+            ],
+            "gpt-6-astra": [
+              12,
+              21
+            ],
+            "gpt-5.6-sol": [
+              12,
+              21
+            ],
+            "muse-spark-1-3": [
+              12,
+              21
+            ],
+            "claude-sonnet-5-5-medium": [
+              12,
+              21
+            ],
+            "claude-haiku-5-5": [
+              12,
+              21
+            ],
+            "claude-haiku-5-5-high": [
+              12,
+              21
+            ],
+            "claude-haiku-5-5-medium": [
+              12,
+              21
+            ],
+            "claude-haiku-5-5-low": [
+              22,
+              30
+            ],
+            "claude-sonnet-5-5-low": [
+              22,
+              30
+            ],
+            "claude-fable-5-1": [
+              22,
+              30
+            ],
+            "gemini-3.8-flash": [
+              22,
+              30
+            ],
+            "deepseek-v4-pro": [
+              22,
+              30
+            ],
+            "glm-5.3": [
+              22,
+              30
+            ],
+            "grok-4.7": [
+              22,
+              30
+            ],
+            "claude-opus-5": [
+              22,
+              30
+            ],
+            "claude-haiku-5-5-max": [
+              22,
+              30
+            ],
+            "qwen3.8-max": [
+              31,
+              31
+            ]
+          }
         },
         "plan": {
           "adjacentPairs": 30,
           "separableAdjacentPairs": 0,
-          "medianSeparation": 3.351700728313146
+          "medianSeparation": 3.351700728313146,
+          "byCorrelation": {
+            "0.0": 0,
+            "0.3": 3,
+            "0.6": 3
+          },
+          "gdpvalWide": {
+            "separableAdjacentPairs": 0,
+            "medianSeparation": 3.359750541800388
+          },
+          "bands": {
+            "claude-sonnet-5-5": [
+              1,
+              8
+            ],
+            "gpt-6.1-sol-xhigh": [
+              1,
+              8
+            ],
+            "claude-opus-5-5": [
+              1,
+              8
+            ],
+            "claude-sonnet-5-5-xhigh": [
+              1,
+              8
+            ],
+            "gpt-6.1-sol-high": [
+              1,
+              8
+            ],
+            "gpt-6.1-sol-medium": [
+              1,
+              8
+            ],
+            "gpt-6.1-sol": [
+              1,
+              8
+            ],
+            "claude-sonnet-5-5-high": [
+              1,
+              8
+            ],
+            "gpt-6.1-sol-low": [
+              9,
+              22
+            ],
+            "claude-sonnet-5-5-medium": [
+              9,
+              22
+            ],
+            "gpt-6-sol": [
+              9,
+              22
+            ],
+            "claude-opus-5": [
+              9,
+              22
+            ],
+            "gpt-6-luna": [
+              9,
+              22
+            ],
+            "gpt-6-astra": [
+              9,
+              22
+            ],
+            "gpt-5.6-sol": [
+              9,
+              22
+            ],
+            "claude-haiku-5-5": [
+              9,
+              22
+            ],
+            "mimo-v2-6-pro": [
+              9,
+              22
+            ],
+            "claude-sonnet-5-5-low": [
+              9,
+              22
+            ],
+            "gemini-4-argon": [
+              9,
+              22
+            ],
+            "gpt-5.6-luna": [
+              9,
+              22
+            ],
+            "claude-haiku-5-5-high": [
+              9,
+              22
+            ],
+            "claude-fable-5-1": [
+              9,
+              22
+            ],
+            "claude-haiku-5-5-medium": [
+              23,
+              25
+            ],
+            "claude-haiku-5-5-max": [
+              23,
+              25
+            ],
+            "claude-haiku-5-5-low": [
+              23,
+              25
+            ],
+            "muse-spark-1-3": [
+              26,
+              27
+            ],
+            "grok-4.7": [
+              26,
+              27
+            ],
+            "glm-5.3": [
+              28,
+              30
+            ],
+            "gemini-3.8-flash": [
+              28,
+              30
+            ],
+            "deepseek-v4-pro": [
+              28,
+              30
+            ],
+            "qwen3.8-max": [
+              31,
+              31
+            ]
+          }
         }
       },
       "terminalBenchSameHarness": {

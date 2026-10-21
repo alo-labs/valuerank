@@ -239,7 +239,7 @@ test('picking columns keeps the data-only grade out of the view when the URL dro
 });
 
 test('every optional column renders a value', () => {
-  const keys = ['developer', 'qualityRank', 'speed', 'ii', 'a'].join(',');
+  const keys = ['developer', 'qualityRank', 'speed', 'ii', 'band', 'a'].join(',');
   const p = mount({ search: `?cols=rank,${keys}` });
   const beta = rows(p)[1];
   assert.equal(cell(beta, 'developer').textContent, 'Bolt AI');
@@ -247,6 +247,7 @@ test('every optional column renders a value', () => {
   assert.equal(cell(rows(p)[3], 'qualityRank').textContent, '—');
   assert.equal(cell(beta, 'speed').textContent, '80.0');
   assert.equal(cell(beta, 'ii').textContent, '50.0');
+  assert.equal(cell(beta, 'band').textContent, '—');
 });
 
 test('coverage is a bar plus an expander listing missing metrics, and stays open across re-renders', () => {
@@ -558,4 +559,16 @@ test('frontier tier badges carry text and a tooltip with the configuration and g
       delete m.aaFrontierTier; delete m.aaFrontierConfiguration; delete m.aaFrontierIntelligenceGap;
     }
   }
+});
+
+test('noise band column prints the rank range a row cannot be told apart from (O42)', async () => {
+  const { bandText } = await import('../../../valuerank/site/assets/js/rankings.js');
+  const { columnValue } = await import('../../../valuerank/site/assets/js/filters.js');
+  const model = { band: { plan: [4, 9], api: [3, 3] } };
+  assert.equal(bandText(model, 'plan'), '4–9');
+  assert.equal(bandText(model, 'api'), '3');
+  assert.equal(bandText({ band: { plan: null, api: null } }, 'plan'), '—');
+  assert.equal(bandText({}, 'api'), '—');
+  assert.equal(columnValue(model, 'band', 'plan'), 4);
+  assert.equal(columnValue({}, 'band', 'plan'), null);
 });

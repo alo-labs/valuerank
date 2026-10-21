@@ -574,6 +574,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # O36: only configurations with every leaf are ranked; the rest stay listed with their missing leaves and searches.
     incomplete = [entry for entry in (incomplete_entry(row, row["evidence"]) for row in rows) if entry is not None]
     check_leaf_searches(incomplete, documents, release_day)
+    # O41: a listed frontier or near-frontier family keeps its assembled evidence for the separated indicative value.
+    listed = [row for row in rows if incomplete_entry(row, row["evidence"]) is not None and row.get("frontierFamily")]
     rows = [row for row in rows if incomplete_entry(row, row["evidence"]) is None]
     # O33: several efforts of one family can be ranked; only unranked cheaper configurations (an O36-incomplete one
     # included) are listed as unchecked.
@@ -589,13 +591,13 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     deferred = [component for component in admitted if pinned is not None and component not in pinned]
     admitted = [component for component in admitted if component not in deferred]
     main = basket.workload_hash(admitted)
-    for row in rows:
+    for row in rows + listed:
         row["cost"] = basket.row_cost(row["components"], admitted)
         selected = row["routeSelection"]["selected"]
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
     return {
         "rows": rows, "admission": admission, "admitted": admitted, "deferred": [{"component": component, "reason": DEFERRED_MIGRATION} for component in deferred],
-        "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete,
+        "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete, "listed": listed,
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
     }
 
@@ -1473,6 +1475,28 @@ def bar_currency(assembled: dict, frozen: dict) -> dict:
     return {"lifetime": BAR_LIFETIME, "bars": bars, "currentLadder": [{key: bar[key] for key in ("id", "level")} for bar in current], "flag": flag}
 
 
+INDICATIVE_LABEL = "not ranked, not comparable: quality on the leaves the configuration has, renormalised, with no imputation (O41)"
+
+
+def listed_indicative(assembled: dict, frozen: dict) -> list[dict]:
+    """O41: for each frontier or near-frontier family listed under O38, an indicative value on its remaining leaves,
+    published apart from the ranking with no rank and no label."""
+
+    result = []
+    for row in assembled.get("listed", []):
+        entry = {"id": row["id"], "name": row["name"], "label": INDICATIVE_LABEL, "workload": row["cost"]["workload"],
+                 "missing": [leaf.key for leaf in q.LEAVES if leaf.key not in row["evidence"]["observations"]],
+                 "quality": row["summary"].displayed, "coverage": row["summary"].coverage}
+        for basis in BASES:
+            # A workload no ranked row uses has no frozen anchors, so the indicative row then has no cost score.
+            anchors = (frozen["workloads"].get(row["cost"]["workload"]) or {}).get("anchors", {}).get(basis)
+            cost = _basis_cost(row, basis)
+            cost_score = anchor_math.cost_score(cost, anchors) if anchors and cost is not None else None
+            entry[basis] = {"costUsd": cost, "costScore": cost_score, "value": anchor_math.value_score(cost_score, row["summary"].displayed, BETA)}
+        result.append(entry)
+    return result
+
+
 def _rule(rule: str, status: str, detail: str) -> dict:
     return {"rule": rule, "status": status, "detail": detail}
 
@@ -1580,6 +1604,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "rows": [_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))) for row in rows],
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
         "incompleteEvidence": assembled.get("incomplete", []),
+        "listedIndicative": listed_indicative(assembled, frozen),
         "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis) for basis in BASES},
         "barCurrency": bar_currency(assembled, frozen),
         "observedRangeBars": observed_range_bars(assembled, frozen),
@@ -2042,12 +2067,12 @@ NOT_QUANTIFIED = (
 REGISTERED_DEPENDENCY = "every row its own dependency component: no shared varying primitive in v1 streams"
 
 
-def sampling_sd(key: str, observation: q.Observation, source: dict) -> float:
+def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float = GDPVAL_RATING_SD) -> float:
     """O39: the plug-in standard error of one leaf's z score under the independent-task approximation."""
 
     z = observation.z
     if key == "gdpval":
-        return GDPVAL_RATING_SD * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
+        return gdpval_sd * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
     tasks = SAMPLING_TASKS[key]
     if key == "omniscience" and source.get("accuracy") is not None and source.get("hallucinationRate") is not None:
         correct = source["accuracy"]
@@ -2069,19 +2094,65 @@ def rank_separability(assembled: dict, per_row: dict) -> dict:
     """O39: how far apart two values must be to separate under the task-sampling approximation, and how many
     adjacent ranks are separable, per basis (a diagnostic beside the ranks; scores and labels unchanged)."""
 
-    sd = {}
-    for row in assembled["rows"]:
+    def value_sd(row: dict, gdpval_sd: float) -> float:
         observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
-        variance = sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {})) ** 2 for key, value in observations.items())
-        sd[row["id"]] = (1.0 - BETA) * math.sqrt(variance)
-    result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "valueSd": sd}
+        variance = sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd)) ** 2 for key, value in observations.items())
+        return (1.0 - BETA) * math.sqrt(variance)
+
+    sd = {row["id"]: value_sd(row, GDPVAL_RATING_SD) for row in assembled["rows"]}
+    wide = {row["id"]: value_sd(row, GDPVAL_WIDE_SD) for row in assembled["rows"]}
+    result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "bias": SEPARABILITY_BIAS, "bandRule": BAND_RULE, "valueSd": sd}
     for basis in BASES:
         ranked = sorted((per_row[row_id][basis]["value"], row_id) for row_id in sd if per_row[row_id][basis]["value"] is not None)
         ranked.reverse()
-        thresholds = [1.96 * math.hypot(sd[first], sd[second]) for (_, first), (_, second) in zip(ranked, ranked[1:])]
-        separable = sum(first - second >= threshold for ((first, _), (second, _)), threshold in zip(zip(ranked, ranked[1:]), thresholds))
-        result[basis] = {"adjacentPairs": len(thresholds), "separableAdjacentPairs": separable,
-                         "medianSeparation": statistics.median(thresholds) if thresholds else None}
+
+        def adjacent(sds: dict, rho: float) -> tuple[int, float | None]:
+            thresholds = [separation(sds[first], sds[second], rho) for (_, first), (_, second) in zip(ranked, ranked[1:])]
+            separable = sum(high - low >= threshold for ((high, _), (low, _)), threshold in zip(zip(ranked, ranked[1:]), thresholds))
+            return separable, statistics.median(thresholds) if thresholds else None
+
+        separable, median = adjacent(sd, 0.0)
+        result[basis] = {
+            "adjacentPairs": max(0, len(ranked) - 1), "separableAdjacentPairs": separable, "medianSeparation": median,
+            # I26: a shared task set correlates two rows' errors, which narrows the true threshold; the grid shows how far.
+            "byCorrelation": {f"{rho:.1f}": adjacent(sd, rho)[0] for rho in SEPARABILITY_CORRELATIONS},
+            "gdpvalWide": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(wide, 0.0))),
+            "bands": rank_bands(ranked, sd),
+        }
+    return result
+
+
+SEPARABILITY_CORRELATIONS = (0.0, 0.3, 0.6)
+GDPVAL_WIDE_SD = 26.0  # I26: AA's displayed +/-26 Elo read as one SD, the wide reading of an interval whose level is unstated
+SEPARABILITY_BIAS = ("conservative: the threshold treats two rows' errors as independent, but every row is scored on the same tasks, "
+                     "so shared task difficulty correlates them and the true paired threshold is smaller; averaging attempts within a task "
+                     "narrows it further")
+BAND_RULE = ("O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at "
+             "correlation 0 (1.96 x the root sum of their value SDs), otherwise it starts a new band; a band is printed as its rank range")
+
+
+def separation(first: float, second: float, rho: float) -> float:
+    """O39: the 95% separation threshold for two value SDs whose errors correlate at rho."""
+
+    return 1.96 * math.sqrt(max(0.0, first ** 2 + second ** 2 - 2.0 * rho * first * second))
+
+
+def rank_bands(ranked: list[tuple[float, str]], sd: dict) -> dict:
+    """O42: each row's band, as the first and last positions of the rows it cannot be separated from by the band rule."""
+
+    bands, current = [], []
+    for value, row_id in ranked:
+        if current and current[0][0] - value >= separation(sd[current[0][1]], sd[row_id], 0.0):
+            bands.append(current)
+            current = []
+        current.append((value, row_id))
+    if current:
+        bands.append(current)
+    result, position = {}, 0
+    for band in bands:
+        first, last = position + 1, position + len(band)
+        result.update({row_id: [first, last] for _, row_id in band})
+        position = last
     return result
 
 

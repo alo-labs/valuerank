@@ -12,42 +12,42 @@ ValueRank ranks frontier AI model configurations (see Model inclusion) by value 
 
 Claude Sonnet 5.5 leads the Plan ranking at 59.5 (owner-named transfer); GPT-6.1 Sol (xhigh) leads the API ranking at 58.8; Claude Sonnet 5.5 leads on quality.
 
-| Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags |
-|---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|
-| 1 | 13 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 59.5 | 51.4 | 64.5 | 100% | $9,373.65 | $159.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 2 | 1 | [GPT-6.1 Sol (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-xhigh/) | 59.1 | 58.8 | 61.6 | 100% | $827.23 | $76.79 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 3 | 14 | [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 58.7 | 50.5 | 63.7 | 100% | $9,989.15 | $169.60 | Claude Pro $20 · Opus 5.5 (58.9×, measured) | — |
-| 4 | 11 | [Claude Sonnet 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-xhigh/) | 58.6 | 52.3 | 59.4 | 100% | $2,836.05 | $48.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 5 | 4 | [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 58.0 | 57.9 | 59.6 | 100% | $700.51 | $65.03 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 6 | 2 | [GPT-6.1 Sol (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-medium/) | 57.9 | 58.2 | 58.5 | 100% | $531.56 | $49.35 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 7 | 5 | [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 57.7 | 56.7 | 61.1 | 100% | $1,267.66 | $117.68 | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | — |
-| 8 | 10 | [Claude Sonnet 5.5 (high)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-high/) | 57.6 | 52.4 | 55.3 | 100% | $1,248.00 | $21.19 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 9 | 7 | [GPT-6.1 Sol (low)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-low/) | 54.3 | 55.1 | 52.6 | 100% | $375.21 | $34.83 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 10 | 18 | [Claude Sonnet 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-medium/) | 54.2 | 49.8 | 49.0 | 100% | $731.63 | $12.42 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 11 | 12 | [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 53.3 | 51.7 | 56.8 | 100% | $1,999.41 | $185.61 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 12 | 29 | [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 53.2 | 45.2 | 55.9 | 100% | $8,733.13 | $148.27 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 13 | 6 | [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 53.0 | 55.3 | 47.4 | 100% | $132.87 | $12.33 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 14 | 15 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 52.9 | 50.4 | 61.0 | 100% | $6,107.09 | $753.96 | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | — |
-| 15 | 16 | [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 52.9 | 50.2 | 58.7 | 100% | $4,238.14 | $393.44 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 16 | 19 | [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 52.6 | 49.5 | 43.7 | 100% | $292.07 | $4.96 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 17 | 3 | [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 52.2 | 57.9 | 55.1 | 100% | $136.13 | $90.75 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provider-claimed leaf |
-| 18 | 23 | [Claude Sonnet 5.5 (low)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-low/) | 51.6 | 47.6 | 44.8 | 100% | $578.39 | $9.82 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 19 | 8 | [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 51.6 | 55.1 | 64.5 | 100% | $3,628.64 | $3,628.64 | — | API-cost fallback |
-| 20 | 9 | [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 51.6 | 52.7 | 48.4 | 100% | $319.25 | $29.64 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 21 | 20 | [Claude Haiku 5.5 (high)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-high/) | 51.5 | 49.2 | 40.8 | 100% | $181.35 | $3.08 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 22 | 24 | [Claude Fable 5.1 (max)](https://valuerank.alolabs.dev/models/claude-fable-5-1/) | 51.5 | 46.9 | 59.7 | 100% | $11,580.62 | $909.71 | Claude Max $100 · Fable 5.1 (12.73×, measured) | partial component, valuation basis unverified |
-| 23 | 21 | [Claude Haiku 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-medium/) | 50.9 | 49.2 | 38.4 | 100% | $114.51 | $1.94 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 24 | 30 | [Claude Haiku 5.5 (max)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-max/) | 49.8 | 45.0 | 44.1 | 100% | $973.34 | $16.53 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 25 | 22 | [Claude Haiku 5.5 (low)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-low/) | 49.1 | 48.1 | 34.5 | 100% | $71.52 | $1.21 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 26 | 17 | [Muse Spark 1.3 (max)](https://valuerank.alolabs.dev/models/muse-spark-1-3/) | 46.1 | 50.0 | 56.3 | 100% | $2,764.98 | $2,764.98 | — | API-cost fallback |
-| 27 | 28 | [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 43.4 | 46.0 | 55.5 | 100% | $6,700.02 | $6,700.02 | — | API-cost fallback |
-| 28 | 27 | [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 42.7 | 46.3 | 52.1 | 100% | $3,186.29 | $3,186.29 | — | API-cost fallback |
-| 29 | 25 | [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 42.4 | 46.7 | 50.3 | 100% | $2,073.44 | $2,073.44 | — | API-cost fallback |
-| 30 | 26 | [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 41.0 | 46.7 | 45.3 | 100% | $801.50 | $801.50 | — | API-cost fallback |
-| 31 | 31 | [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 38.9 | 41.8 | 48.9 | 100% | $5,417.03 | $5,417.03 | — | API-cost fallback |
-| — | — | [Muse Wonder Full (max)](https://valuerank.alolabs.dev/models/muse-wonder-full/) | — | — | 64.4 | 100% | — | — | — | no cost |
+| Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags | Noise band (Plan / API) |
+|---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|---|
+| 1 | 13 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 59.5 | 51.4 | 64.5 | 100% | $9,373.65 | $159.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 1–8 / 12–21 |
+| 2 | 1 | [GPT-6.1 Sol (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-xhigh/) | 59.1 | 58.8 | 61.6 | 100% | $827.23 | $76.79 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 1–8 / 1–5 |
+| 3 | 14 | [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 58.7 | 50.5 | 63.7 | 100% | $9,989.15 | $169.60 | Claude Pro $20 · Opus 5.5 (58.9×, measured) | — | 1–8 / 12–21 |
+| 4 | 11 | [Claude Sonnet 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-xhigh/) | 58.6 | 52.3 | 59.4 | 100% | $2,836.05 | $48.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 1–8 / 6–11 |
+| 5 | 4 | [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 58.0 | 57.9 | 59.6 | 100% | $700.51 | $65.03 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 1–8 / 1–5 |
+| 6 | 2 | [GPT-6.1 Sol (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-medium/) | 57.9 | 58.2 | 58.5 | 100% | $531.56 | $49.35 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 1–8 / 1–5 |
+| 7 | 5 | [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 57.7 | 56.7 | 61.1 | 100% | $1,267.66 | $117.68 | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | — | 1–8 / 1–5 |
+| 8 | 10 | [Claude Sonnet 5.5 (high)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-high/) | 57.6 | 52.4 | 55.3 | 100% | $1,248.00 | $21.19 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 1–8 / 6–11 |
+| 9 | 7 | [GPT-6.1 Sol (low)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-low/) | 54.3 | 55.1 | 52.6 | 100% | $375.21 | $34.83 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 9–22 / 6–11 |
+| 10 | 18 | [Claude Sonnet 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-medium/) | 54.2 | 49.8 | 49.0 | 100% | $731.63 | $12.42 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 9–22 / 12–21 |
+| 11 | 12 | [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 53.3 | 51.7 | 56.8 | 100% | $1,999.41 | $185.61 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 9–22 / 12–21 |
+| 12 | 29 | [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 53.2 | 45.2 | 55.9 | 100% | $8,733.13 | $148.27 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 9–22 / 22–30 |
+| 13 | 6 | [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 53.0 | 55.3 | 47.4 | 100% | $132.87 | $12.33 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 9–22 / 6–11 |
+| 14 | 15 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 52.9 | 50.4 | 61.0 | 100% | $6,107.09 | $753.96 | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | — | 9–22 / 12–21 |
+| 15 | 16 | [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 52.9 | 50.2 | 58.7 | 100% | $4,238.14 | $393.44 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 9–22 / 12–21 |
+| 16 | 19 | [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 52.6 | 49.5 | 43.7 | 100% | $292.07 | $4.96 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat | 9–22 / 12–21 |
+| 17 | 3 | [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 52.2 | 57.9 | 55.1 | 100% | $136.13 | $90.75 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provider-claimed leaf | 9–22 / 1–5 |
+| 18 | 23 | [Claude Sonnet 5.5 (low)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-low/) | 51.6 | 47.6 | 44.8 | 100% | $578.39 | $9.82 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 9–22 / 22–30 |
+| 19 | 8 | [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 51.6 | 55.1 | 64.5 | 100% | $3,628.64 | $3,628.64 | — | API-cost fallback | 9–22 / 6–11 |
+| 20 | 9 | [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 51.6 | 52.7 | 48.4 | 100% | $319.25 | $29.64 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — | 9–22 / 6–11 |
+| 21 | 20 | [Claude Haiku 5.5 (high)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-high/) | 51.5 | 49.2 | 40.8 | 100% | $181.35 | $3.08 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat | 9–22 / 12–21 |
+| 22 | 24 | [Claude Fable 5.1 (max)](https://valuerank.alolabs.dev/models/claude-fable-5-1/) | 51.5 | 46.9 | 59.7 | 100% | $11,580.62 | $909.71 | Claude Max $100 · Fable 5.1 (12.73×, measured) | partial component, valuation basis unverified | 9–22 / 22–30 |
+| 23 | 21 | [Claude Haiku 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-medium/) | 50.9 | 49.2 | 38.4 | 100% | $114.51 | $1.94 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat | 23–25 / 12–21 |
+| 24 | 30 | [Claude Haiku 5.5 (max)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-max/) | 49.8 | 45.0 | 44.1 | 100% | $973.34 | $16.53 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat | 23–25 / 22–30 |
+| 25 | 22 | [Claude Haiku 5.5 (low)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-low/) | 49.1 | 48.1 | 34.5 | 100% | $71.52 | $1.21 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat | 23–25 / 22–30 |
+| 26 | 17 | [Muse Spark 1.3 (max)](https://valuerank.alolabs.dev/models/muse-spark-1-3/) | 46.1 | 50.0 | 56.3 | 100% | $2,764.98 | $2,764.98 | — | API-cost fallback | 26–27 / 12–21 |
+| 27 | 28 | [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 43.4 | 46.0 | 55.5 | 100% | $6,700.02 | $6,700.02 | — | API-cost fallback | 26–27 / 22–30 |
+| 28 | 27 | [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 42.7 | 46.3 | 52.1 | 100% | $3,186.29 | $3,186.29 | — | API-cost fallback | 28–30 / 22–30 |
+| 29 | 25 | [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 42.4 | 46.7 | 50.3 | 100% | $2,073.44 | $2,073.44 | — | API-cost fallback | 28–30 / 22–30 |
+| 30 | 26 | [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 41.0 | 46.7 | 45.3 | 100% | $801.50 | $801.50 | — | API-cost fallback | 28–30 / 22–30 |
+| 31 | 31 | [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 38.9 | 41.8 | 48.9 | 100% | $5,417.03 | $5,417.03 | — | API-cost fallback | 31 / 31 |
+| — | — | [Muse Wonder Full (max)](https://valuerank.alolabs.dev/models/muse-wonder-full/) | — | — | 64.4 | 100% | — | — | — | no cost | — / — |
 
-Values are rounded for display; ranks are competition ranks (equal values share the better rank). Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 3.3 value points (median, 95%) to separate, and 0 of 30 adjacent API ranks and 0 of 30 adjacent Plan ranks do; the S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.
+Values are rounded for display; ranks are competition ranks (equal values share the better rank). Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 3.3 value points (median, 95%) to separate, and 0 of 30 adjacent API ranks and 0 of 30 adjacent Plan ranks do. That threshold is conservative: every configuration is scored on the same tasks, which correlates their errors and narrows the true threshold (API 1 at correlation 0.3, 2 at correlation 0.6; Plan 3 at correlation 0.3, 3 at correlation 0.6). The noise band column groups ranks that cannot be told apart (O42); the S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.
 
 - **subset cost**: scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17).
 - **provider-claimed leaf**: a quality leaf comes from the model provider's own published result (O36's last source); the row competes but earns no interval label (E233).
@@ -59,6 +59,12 @@ Values are rounded for display; ranks are competition ranks (equal values share 
 - **API-cost fallback**: no admitted Plan route; the Plan ranking uses the API cost (O13).
 
 Not ranked (17 roster models): Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Grok 4.6, Grok 4.6 (xhigh), Kimi K3, MiMo-V2.6-Flash, Muse Spark 1.2, Muse Spark 1.3 (xhigh), Muse Wonder. Reasons are listed in [scores.md](scores.md#not-ranked). Of these, 5 qualify for the cohort but are listed, not ranked, because a benchmark is still missing after a logged search (O36, O38): DeepSeek V4 Flash (no FrontierCode 1.1); Grok 4.6 (xhigh) (no FrontierCode 1.1); MiMo-V2.6-Flash (an AA frontier family; no Bug Hunt Bench); Muse Spark 1.3 (xhigh) (no FrontierCode 1.1); Muse Wonder (no FrontierCode 1.1).
+
+**Listed frontier families: indicative value, not ranked and not comparable (O41).** Quality is the mean over the leaves the configuration has, renormalised, with no imputation, so these values cannot be compared with the ranking above.
+
+| Configuration | Missing | Quality (remaining leaves) | Quality coverage | Plan value (indicative) | API value (indicative) | API cost (USD per basket run) | Plan cost (USD per basket run) |
+|---|---|---:|---:|---:|---:|---:|---:|
+| MiMo-V2.6-Flash | Bug Hunt Bench | 53.9 | 90% | 53.2 | 60.0 | $60.37 | $40.25 |
 
 ### What the evidence supports
 

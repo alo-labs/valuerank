@@ -17,6 +17,8 @@ const CORE = [
   { key: 'qualityRank', label: 'Quality rank', defaultDir: 'asc' },
   { key: 'speed', label: 'Speed', defaultDir: 'desc' },
   { key: 'ii', label: 'Intelligence Index', defaultDir: 'desc' },
+  // O42: the rank positions a row cannot be told apart from under benchmark sampling noise; sorts by its first position.
+  { key: 'band', label: 'Noise band', defaultDir: 'asc' },
 ];
 
 export function columnCatalog(dimensions) {
@@ -35,6 +37,7 @@ export function columnValue(model, key, basis) {
     case 'cost': return costValue(model, basis);
     case 'coverage': return model.coverage ? model.coverage.pct : null;
     case 'ii': return model.intelligenceIndex.value;
+    case 'band': return model.band && model.band[basis] ? model.band[basis][0] : null;
     case 'name': case 'developer': case 'grade': case 'quality': case 'qualityRank': case 'speed':
       return model[key];
     default: return model.dims[key] ?? null;

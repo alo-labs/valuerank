@@ -360,7 +360,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "gpt-6-1-sol-xhigh",
@@ -473,7 +483,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          1,
+          5
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "claude-opus-5-5",
@@ -589,7 +609,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "claude-sonnet-5-5-xhigh",
@@ -702,7 +732,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          6,
+          11
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "gpt-6-1-sol-high",
@@ -815,7 +855,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          1,
+          5
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "gpt-6-1-sol-medium",
@@ -928,7 +978,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          1,
+          5
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "gpt-6-1-sol",
@@ -1044,7 +1104,17 @@
         }
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          1,
+          5
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "claude-sonnet-5-5-high",
@@ -1157,7 +1227,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          6,
+          11
+        ],
+        "plan": [
+          1,
+          8
+        ]
+      }
     },
     {
       "slug": "gpt-6-1-sol-low",
@@ -1270,7 +1350,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          6,
+          11
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "claude-sonnet-5-5-medium",
@@ -1383,7 +1473,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Mid-Range"
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "gpt-6-sol",
@@ -1496,7 +1596,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "claude-opus-5",
@@ -1609,7 +1719,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "gpt-6-luna",
@@ -1722,7 +1842,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Mid-Range"
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          6,
+          11
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "gpt-6-astra",
@@ -1838,7 +1968,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "gpt-5-6-sol",
@@ -1951,7 +2091,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "claude-haiku-5-5",
@@ -2066,7 +2216,17 @@
       "flags": [
         "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
       ],
-      "tier": "Near-Budget"
+      "tier": "Near-Budget",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "mimo-v2-6-pro",
@@ -2176,7 +2336,17 @@
         "Subset cost: scored on its own workload; cross-workload ordering not identified",
         "Provider-claimed leaf: DeepSWE v1.1 is the model provider's own result; competes but earns no interval label"
       ],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          1,
+          5
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "claude-sonnet-5-5-low",
@@ -2289,7 +2459,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Mid-Range"
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "gemini-4-argon",
@@ -2395,7 +2575,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          6,
+          11
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "gpt-5-6-luna",
@@ -2508,7 +2698,17 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Premium",
+      "band": {
+        "api": [
+          6,
+          11
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "claude-haiku-5-5-high",
@@ -2623,7 +2823,17 @@
       "flags": [
         "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
       ],
-      "tier": "Near-Budget"
+      "tier": "Near-Budget",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "claude-fable-5-1",
@@ -2746,7 +2956,17 @@
       "flags": [
         "Partial cost component: AA marks tasks missing or declined"
       ],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          9,
+          22
+        ]
+      }
     },
     {
       "slug": "claude-haiku-5-5-medium",
@@ -2861,7 +3081,17 @@
       "flags": [
         "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
       ],
-      "tier": "Budget"
+      "tier": "Budget",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          23,
+          25
+        ]
+      }
     },
     {
       "slug": "claude-haiku-5-5-max",
@@ -2976,7 +3206,17 @@
       "flags": [
         "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
       ],
-      "tier": "Mid-Range"
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          23,
+          25
+        ]
+      }
     },
     {
       "slug": "claude-haiku-5-5-low",
@@ -3091,7 +3331,17 @@
       "flags": [
         "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
       ],
-      "tier": "Budget"
+      "tier": "Budget",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          23,
+          25
+        ]
+      }
     },
     {
       "slug": "muse-spark-1-3",
@@ -3197,7 +3447,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          12,
+          21
+        ],
+        "plan": [
+          26,
+          27
+        ]
+      }
     },
     {
       "slug": "grok-4-7",
@@ -3303,7 +3563,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          26,
+          27
+        ]
+      }
     },
     {
       "slug": "glm-5-3",
@@ -3409,7 +3679,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          28,
+          30
+        ]
+      }
     },
     {
       "slug": "gemini-3-8-flash",
@@ -3515,7 +3795,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          28,
+          30
+        ]
+      }
     },
     {
       "slug": "deepseek-v4-pro",
@@ -3621,7 +3911,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          22,
+          30
+        ],
+        "plan": [
+          28,
+          30
+        ]
+      }
     },
     {
       "slug": "qwen3-8-max",
@@ -3727,7 +4027,17 @@
         }
       },
       "flags": [],
-      "tier": "Expensive"
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          31,
+          31
+        ],
+        "plan": [
+          31,
+          31
+        ]
+      }
     },
     {
       "slug": "claude-fable-5",
@@ -3834,7 +4144,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "claude-opus-4-8",
@@ -3941,7 +4255,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "claude-sonnet-5",
@@ -4048,7 +4366,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "deepseek-v4-flash",
@@ -4154,7 +4476,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "glm-5-2",
@@ -4262,7 +4588,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "glm-5-3-flash",
@@ -4369,7 +4699,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "gpt-5-5",
@@ -4477,7 +4811,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "gemini-3-5-flash",
@@ -4585,7 +4923,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "gemini-3-6-flash",
@@ -4693,7 +5035,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "gemini-3-7-flash",
@@ -4801,7 +5147,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "grok-4-6",
@@ -4909,7 +5259,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "grok-4-6-xhigh",
@@ -5015,7 +5369,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "kimi-k3",
@@ -5123,7 +5481,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "mimo-v2-6-flash",
@@ -5229,7 +5591,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "muse-spark-1-2",
@@ -5337,7 +5703,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "muse-spark-1-3-xhigh",
@@ -5443,7 +5813,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "muse-wonder",
@@ -5549,7 +5923,11 @@
         "plan": null
       },
       "flags": [],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     },
     {
       "slug": "muse-wonder-full",
@@ -5643,7 +6021,11 @@
       "flags": [
         "No cost: AA publishes no cost for this configuration, so it has no value score and no rank"
       ],
-      "tier": null
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      }
     }
   ],
   "picks": {

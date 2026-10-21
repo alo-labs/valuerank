@@ -43,7 +43,9 @@ def plan_evidence_label(route):
     if route.get("evidenceClass") == "user_assumption":
         return "Provisional assumption"
     if route.get("evidenceClass") == "controlled_account_workload_projection":
-        return "Controlled account measurement / workload projection"
+        # O40: an exact measurement the selected article added after the owner's selection replaces the transfer at once.
+        added = f" (added after selection, {route['addedAfterSelection']})" if route.get("addedAfterSelection") else ""
+        return "Controlled account measurement / workload projection" + added
     return str(route.get("evidenceClass", "Unclassified")).replace("_", " ")
 
 

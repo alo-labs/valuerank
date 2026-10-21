@@ -360,3 +360,13 @@ def test_gap_fill_bars_text_says_whether_each_bar_survives():
     assert "lowered by the mean offset 2.5 points" in text and "API quality 55.3: a in all three" in text
     assert text.endswith("Plan quality 59.6: a as published, none with the fills removed, b with third-party fills lowered by the offset.")
     assert "no measured offset" in ed.gap_fill_bars_text({"meanOffset": None, "bases": {"api": [], "plan": []}}, Facts)
+
+
+def test_band_and_listed_indicative_texts():
+    """O42 bands print as a rank range (or one rank); O41's table is omitted when nothing is listed."""
+
+    class Facts:
+        v3 = {"listedIndicative": [], "diagnostics": {"rankSeparability": {"plan": {"bands": {"x": [3, 3]}}, "api": {"bands": {"x": [1, 4]}}}}}
+
+    assert ed.listed_indicative_text(Facts) == ""
+    assert ed.band_text(Facts, "x") == "3 / 1–4" and ed.band_text(Facts, "y") == "— / —"

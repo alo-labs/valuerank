@@ -1597,7 +1597,8 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     assert set(separability["valueSd"]) == {"a", "b", "c"} and separability["api"]["adjacentPairs"] == 2
     assert separability["api"]["medianSeparation"] > 0 and len(separability["assumptions"]) == 3
     lone = v.rank_separability({"rows": result["rows"][:1]}, {"a": {basis: {"value": 1.0} for basis in v.BASES}})
-    assert lone["api"] == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
+    assert {key: lone["api"][key] for key in ("adjacentPairs", "separableAdjacentPairs", "medianSeparation")} == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
+    assert lone["api"]["bands"] == {"a": [1, 1]}
 
 
 
@@ -1609,3 +1610,26 @@ def test_gap_fill_bars_report_each_variant():
     entry = bars["bases"]["api"][0]
     assert set(entry) >= {"published", "removed", "lowered", "survives"} and bars["meanOffset"] == 5.0
     assert v.gap_fill_bars(result, frozen, None)["meanOffset"] is None
+
+
+def test_rank_bands_correlation_grid_and_listed_indicative_values():
+    """O42: bands of ranks within noise of the band's first row; I26: a correlation grid; O41: listed families' indicative values."""
+
+    assert v.separation(1.0, 1.0, 0.0) == pytest.approx(1.96 * 2 ** 0.5) and v.separation(1.0, 1.0, 1.0) == 0.0
+    bands = v.rank_bands([(60.0, "a"), (59.0, "b"), (50.0, "c"), (49.5, "d")], {"a": 1.0, "b": 1.0, "c": 1.0, "d": 1.0})
+    assert bands == {"a": [1, 2], "b": [1, 2], "c": [3, 4], "d": [3, 4]} and v.rank_bands([], {}) == {}
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    separability = output["diagnostics"]["rankSeparability"]
+    assert set(separability["api"]["byCorrelation"]) == {"0.0", "0.3", "0.6"} and separability["bias"].startswith("conservative")
+    assert set(separability["api"]["gdpvalWide"]) == {"separableAdjacentPairs", "medianSeparation"} and set(separability["api"]["bands"]) == {"a", "b", "c"}
+    assert output["listedIndicative"] == []
+    # O41: a frontier-family configuration listed for a missing leaf keeps an indicative value apart from the ranking.
+    configurations = [dict(item, frontierFamily=True) for item in CONFIGURATIONS]
+    pages = [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5, hle=None)]
+    listed = v.assemble(configurations, documents(snapshot={"pages": pages}, leafEvidence=searched("c")), release_day=DAY)
+    (entry,) = v.listed_indicative(listed, frozen)
+    assert entry["id"] == "c" and entry["missing"] == ["hle"] and entry["label"].startswith("not ranked, not comparable")
+    assert entry["api"]["value"] is not None and entry["coverage"] < 1.0
+    orphan = v.listed_indicative({"listed": [dict(listed["listed"][0], cost=dict(listed["listed"][0]["cost"], workload="other"))]}, frozen)
+    assert orphan[0]["api"] == {"costUsd": orphan[0]["api"]["costUsd"], "costScore": None, "value": None}

@@ -25,6 +25,8 @@ def test_evidence_labels():
     assert pub.plan_evidence_label({"evidenceClass": "user_assumption"}) == "Provisional assumption"
     assert pub.plan_evidence_label({"evidenceClass": "controlled_account_workload_projection"}).startswith("Controlled account")
     assert pub.plan_evidence_label({"evidenceClass": "other_kind"}) == "other kind"
+    # O40: an exact measurement added to the selected article after selection is labelled as such.
+    assert pub.plan_evidence_label({"evidenceClass": "controlled_account_workload_projection", "addedAfterSelection": "2026-11-02"}).endswith("(added after selection, 2026-11-02)")
     assert pub.plan_evidence_label({}) == "Unclassified"
 
 

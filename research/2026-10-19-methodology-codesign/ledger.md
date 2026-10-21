@@ -1134,3 +1134,20 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Owner decision (2026-10-21, after internal review I25)
 - O39. Benchmark sampling noise. Asked whether to add a non-authorising task-sampling stream, the owner chose "Add it, labelled". Implemented as stream S1T: every observed leaf is redrawn from a normal with its plug-in binomial standard error from the published task count (DeepSWE 113, FrontierCode 1.1 Main 100 per AA's evaluation page, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs), AA-Omniscience from its 6,000 +1/0/−1 questions, and GDPval-AA from AA's displayed rating interval read as a 95% normal interval (SD 13.3 Elo, an assumption marked analyst-derived). Tasks are treated as independent ("independent-task approximation"). It never authorises a label or changes a score. A rank-separability diagnostic prints the median value gap two rows need to separate (today 3.34 API, 3.35 Plan) and how many adjacent ranks separate (0 of 30 on each basis); the README states it beside the ranking. AGENTS.md records O39.
 - Draft r85.
+
+## Internal review I26 (Claude Sonnet 5.5, effort low, on r85) — adopted, modified or rejected
+- Three questions went to the owner through the questions UI (the reviewer's Q1 and Q2, and its design recommendation 1). Answers recorded as O40–O42 below.
+- M1 (adopted): the separability statement says the threshold is conservative and why, and prints separable adjacent ranks at correlations 0, 0.3 and 0.6 (API 0 / 1 / 2, Plan 0 / 3 / 3). A paired bootstrap is not possible: no source publishes task-level outcomes for the cohort.
+- M2 (modified): GDPval stays in S1T, labelled analyst-derived, with the wide reading (±26 Elo as one SD) published as a sensitivity; it leaves the count unchanged today (median 3.35 against 3.34). Per-row rating intervals are not yet captured; the draft says each row's own interval replaces the single width once captured.
+- M3: owner decision O40.
+- M4: owner decision O41.
+- L1 (adopted): E238 is scoped to Claude plans and ChatGPT plans for Codex; every OpenAI route in v1 is a Codex plan.
+- L2 (adopted as a definition): reports are recorded by date, so the report window's cutoff is V's UTC date, whole.
+- L3 (rejected): the ladder positions are elements of the order by owner decision O34; the setter's status is disclosed (E201b).
+- Design 1: owner decision O42. Design 2: as M1. Design 3 (rejected): as I21 Design 2 and I25 Design 3. Design 4: as M2.
+
+## Owner decisions (2026-10-21, after internal review I26)
+- O40. Asked whether an exact per-(plan, model) measurement added later to the selected SemiAnalysis article replaces the transfer at once or only after re-selection, the owner chose "Replace immediately": it replaces that model's transfer, labelled "added after selection" with its date (`publication.plan_evidence_label`); every other change to the article stays diagnostic until re-selection. AGENTS.md records it.
+- O41. Asked whether to show a reduced-leaf value for a listed frontier family, the owner chose "Show it, separated": each listed frontier or near-frontier family shows, apart from the ranking, an indicative value on its remaining leaves (renormalised, no imputation) with its cost on its own workload's frozen anchors, labelled "not ranked, not comparable", with no rank, band or label (`value_v3.listed_indicative`; today MiMo-V2.6-Flash: quality 53.9 over 90% of the weight, API 60.0, Plan 53.2). README prints it under the ranking.
+- O42. Asked whether to group ranks into noise bands, the owner chose "Add bands": rows in value order join the current band while not separable from its first row at correlation 0 (`value_v3.rank_bands`); the README's ranking prints "Noise band (Plan / API)" beside the ordinal ranks, and the site offers it as a "Noise band" column. Today API 1–5, 6–11, 12–21, 22–30, 31; Plan 1–8, 9–22, 23–25, 26–27, 28–30, 31.
+- Draft r86.
