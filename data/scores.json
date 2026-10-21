@@ -39179,6 +39179,334 @@
         }
       ]
     },
+    "requiredMissingScores": {
+      "label": "required mean score on the missing leaves for the full composite to reach the bar (E221; not a claim)",
+      "status": "evaluated",
+      "bars": [
+        {
+          "bar": "bar:median-quality",
+          "level": 56.70256809558702,
+          "rows": [
+            {
+              "row": "muse-wonder",
+              "required": 25.8177168418606,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-xhigh",
+              "required": 27.33915338947777,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-5.6-sol",
+              "required": 29.761764858156038,
+              "missing": [
+                "frontierCode"
+              ]
+            },
+            {
+              "row": "claude-sonnet-5-5-xhigh",
+              "required": 29.792076538579657,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-high",
+              "required": 35.47325167555973,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "muse-spark-1-3",
+              "required": 37.650919512084236,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-medium",
+              "required": 39.94189441238878,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6-sol",
+              "required": 42.548931489413825,
+              "missing": [
+                "frontierCode"
+              ]
+            },
+            {
+              "row": "grok-4.6-xhigh",
+              "required": 48.05114571419099,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-opus-5",
+              "required": 52.292318555409565,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-sonnet-5-5-high",
+              "required": 57.90241669382667,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-low",
+              "required": 58.88331418750854,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "muse-spark-1-3-xhigh",
+              "required": 75.17182991352266,
+              "missing": [
+                "frontierCode"
+              ]
+            },
+            {
+              "row": "deepseek-v4-pro",
+              "required": 83.51356001955756,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "deepseek-v4-flash",
+              "required": 91.26690889717334,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "grok-4.7",
+              "required": null,
+              "missing": []
+            }
+          ]
+        },
+        {
+          "bar": "bar:lower-quartile-quality",
+          "level": 48.061482895190444,
+          "rows": [
+            {
+              "row": "grok-4.6-xhigh",
+              "required": 4.84571971220812,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-opus-5",
+              "required": 9.086892553426697,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-low",
+              "required": 15.67788818552567,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-sonnet-5-5-medium",
+              "required": 20.067650013012734,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-5.6-luna",
+              "required": 30.504955427956066,
+              "missing": [
+                "frontierCode"
+              ]
+            },
+            {
+              "row": "deepseek-v4-pro",
+              "required": 40.30813401757469,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "deepseek-v4-flash",
+              "required": 48.061482895190466,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-sonnet-5-5-low",
+              "required": 53.408747406245126,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-haiku-5-5",
+              "required": 72.4195434809119,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-haiku-5-5-max",
+              "required": 72.63326481790637,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-haiku-5-5-high",
+              "required": 94.26261399485175,
+              "missing": [
+                "terminalBench"
+              ]
+            }
+          ]
+        },
+        {
+          "bar": "bar:upper-quartile-quality",
+          "level": 60.88196620399156,
+          "rows": [
+            {
+              "row": "gemini-4-argon",
+              "required": 21.143536026991207,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "muse-wonder",
+              "required": 46.714707383883294,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-xhigh",
+              "required": 48.236143931500465,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-high",
+              "required": 56.37024221758243,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-medium",
+              "required": 60.83888495441147,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "grok-4.6-xhigh",
+              "required": 68.94813625621369,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-5.6-sol",
+              "required": 71.55574594220143,
+              "missing": [
+                "frontierCode"
+              ]
+            },
+            {
+              "row": "claude-sonnet-5-5-xhigh",
+              "required": 71.58605762262505,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "claude-opus-5",
+              "required": 73.18930909743226,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "muse-spark-1-3",
+              "required": 79.44490059612963,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6.1-sol-low",
+              "required": 79.78030472953124,
+              "missing": [
+                "frontierCode",
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6-sol",
+              "required": 84.34291257345922,
+              "missing": [
+                "frontierCode"
+              ]
+            },
+            {
+              "row": "claude-sonnet-5-5-high",
+              "required": 99.69639777787206,
+              "missing": [
+                "terminalBench"
+              ]
+            },
+            {
+              "row": "gpt-6-astra",
+              "required": null,
+              "missing": []
+            }
+          ]
+        }
+      ]
+    },
     "subsetIntervals": {
       "1453a9a0576b02ea": {
         "components": [

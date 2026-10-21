@@ -1402,6 +1402,18 @@ def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():
     assert v.score(result, frozen)["observedRangeBars"]["bars"] == output["bars"]
 
 
+def test_required_missing_scores_say_what_would_settle_each_open_row():
+    """E221: u* = (100 H - sum of observed w z) / missing weight, for rows that can but need not reach a bar."""
+
+    summary = SimpleNamespace(observations={leaf.key: SimpleNamespace(z=60.0) for leaf in q.LEAVES if leaf.key != "deepswe"})
+    assert v.required_missing_score(summary, 50.0) == pytest.approx((5000.0 - 60.0 * 70.0) / 30.0)
+    assert v.required_missing_score(SimpleNamespace(observations={leaf.key: None for leaf in q.LEAVES}), 50.0) is None
+    result, frozen = scored()
+    output = v.required_missing_scores(result, frozen)
+    assert output["label"] == v.REQUIRED_LABEL and output["status"] == "evaluated" and [bar["bar"] for bar in output["bars"]] == [bar["id"] for bar in frozen["barReferences"]]
+    assert v.score(result, frozen)["requiredMissingScores"] == output
+
+
 def test_the_quartile_bars_need_four_configurations():
     """E215: with fewer than four, the quartile positions coincide with the headline's, so only the headline is pinned."""
 

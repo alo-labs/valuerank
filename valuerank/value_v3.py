@@ -1179,6 +1179,37 @@ def observed_range_bars(assembled: dict, frozen: dict) -> dict:
     return {"label": BAND_LABEL, "status": result["status"], "ranges": ranges, "bars": bars}
 
 
+# E221: for each row that can but need not reach a bar, the mean score its missing leaves would need (at the observed
+# leaves' point values) for its full composite to reach the bar. It says what evidence would settle the row; it is a
+# deterministic reading of published values, never a claim and never a label.
+REQUIRED_LABEL = "required mean score on the missing leaves for the full composite to reach the bar (E221; not a claim)"
+
+
+def required_missing_score(summary, level: float) -> float | None:
+    """u* = (100 H - sum of observed w z) / sum of missing w; None when no leaf is missing."""
+
+    missing = sum(leaf.weight for leaf in q.LEAVES if leaf.key not in summary.observations)
+    if not missing:
+        return None
+    observed = sum(leaf.weight * summary.observations[leaf.key].z for leaf in q.LEAVES if leaf.key in summary.observations)
+    return (100.0 * level - observed) / missing
+
+
+def required_missing_scores(assembled: dict, frozen: dict) -> dict:
+    """E221: the API rows that can possibly but not certainly reach each bar, with u* and their missing leaves."""
+
+    by_id = {row["id"]: row for row in assembled["rows"]}
+    result = interval_outputs(assembled, frozen, "api")
+    bars = []
+    for bar in result.get("bars", []):
+        level = bar["reference"]["level"]
+        open_rows = [row_id for row_id, status in bar["rows"].items() if status["possible"] == "certified" and status["confirmed"] != "certified"]
+        rows = [{"row": row_id, "required": required_missing_score(by_id[row_id]["summary"], level),
+                 "missing": [leaf.key for leaf in q.LEAVES if leaf.key not in by_id[row_id]["summary"].observations]} for row_id in open_rows]
+        bars.append({"bar": bar["reference"]["id"], "level": level, "rows": sorted(rows, key=lambda item: (item["required"] is None, item["required"] or 0.0, item["row"]))})
+    return {"label": REQUIRED_LABEL, "status": result["status"], "bars": bars}
+
+
 # E207: the frozen ladder's standing in the current population, so a bar most rows have outgrown is flagged, not silent.
 BAR_LIFETIME = "until the next anchor re-freeze or methodology version, whichever comes first"
 BAR_STALE_LOW = "headline bar below the current population's lower quartile: re-freeze the ladder at the next anchor version (informational; no score changes)"
@@ -1299,6 +1330,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis) for basis in BASES},
         "barCurrency": bar_currency(assembled, frozen),
         "observedRangeBars": observed_range_bars(assembled, frozen),
+        "requiredMissingScores": required_missing_scores(assembled, frozen),
         "subsetIntervals": subset_interval_outputs(assembled, frozen),
         "measuredOnlyPlanView": measured,
         "diagnostics": {

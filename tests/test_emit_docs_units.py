@@ -197,7 +197,8 @@ def cost_world(**overrides):
     observed = {"status": "evaluated", "bars": [{"bar": "bar:x", "possibleQualifierN": 17, "confirmedQualifierN": 5, "confirmedCheapest": None, "possibleCheapest": ["a", "b"]},
                                                 {"bar": "bar:y", "possibleQualifierN": 3, "confirmedQualifierN": 3, "confirmedCheapest": "a", "possibleCheapest": ["a"]}]}
     policy = {"bars": [{"id": "bar:x", "level": 56.7}, {"id": "bar:y", "level": 60.9}]}
-    return StubFacts(diagnostics, barCurrency=currency, rows=rows, observedRangeBars=observed, barPolicy=policy)
+    required = {"status": "evaluated", "bars": [{"bar": "bar:x", "level": 56.7, "rows": [{"row": "a", "required": 27.3, "missing": ["frontierCode", "terminalBench"]}, {"row": "b", "required": None, "missing": []}]}]}
+    return StubFacts(diagnostics, barCurrency=currency, rows=rows, observedRangeBars=observed, barPolicy=policy, requiredMissingScores=required)
 
 
 def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
@@ -224,6 +225,11 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     assert ("- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, "
             "quality 56.7: 17 can qualify, 5 confirmed; possibly cheapest a, b; quality 60.9: 3 can qualify, 3 confirmed; a confirmed cheapest.") in text
     assert ed.observed_range_text({"status": "unavailable: no bar"}, StubFacts({})).endswith("unavailable: no bar.")
+    assert ("- **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 56.7, with the mean score their missing leaves would need: "
+            "a 27.3 (AA FrontierCode 1.1, Terminal-Bench 4.0 (tbench.ai)); b (no missing leaf; reporting precision only).") in text
+    assert ed.required_scores_text({"status": "evaluated", "bars": [{"bar": "x", "level": 50.0, "rows": []}]}, StubFacts({})).endswith("no row is open at quality 50.0.")
+    assert ed.required_scores_text({"status": "evaluated", "bars": []}, StubFacts({})).endswith("no bar.")
+    assert ed.required_scores_text({"status": "unavailable: x", "bars": []}, StubFacts({})).endswith("unavailable: x.")
     lone = ed.family_primary_text({"status": "unavailable: fewer than 2 family-primary references", "population": ["a"], "references": ["a"], "ladder": [], "frozenLadder": []}, StubFacts({}))
     assert lone.endswith("would be unavailable against unavailable frozen; anchors unavailable: fewer than 2 family-primary references.")
     assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet

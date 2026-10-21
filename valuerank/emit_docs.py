@@ -412,6 +412,19 @@ def observed_range_text(result, facts):
     return head + "with each missing leaf inside the cohort's observed range for that leaf, " + "; ".join(parts) + "."
 
 
+def required_scores_text(result, facts):
+    """E221: for the headline bar, what each open row's missing leaves would need to average (not a claim)."""
+
+    head = "- **What would settle the headline bar (E221, not a claim):** "
+    if result["status"] != "evaluated" or not result["bars"]:
+        return head + (result["status"] if result["status"] != "evaluated" else "no bar") + "."
+    bar = result["bars"][0]
+    parts = [f"{facts.label(item['row'])} {fnum(item['required'], 1)} ({', '.join(LEAF_LABELS[key] for key in item['missing'])})" if item["required"] is not None
+             else f"{facts.label(item['row'])} (no missing leaf; reporting precision only)" for item in bar["rows"]]
+    return head + (f"rows that can but need not reach quality {bar['level']:.1f}, with the mean score their missing leaves would need: " + "; ".join(parts) + "."
+                   if parts else f"no row is open at quality {bar['level']:.1f}.")
+
+
 def mix_check_text(rows):
     """E208: the token-mix status of each selected Plan route (never compared with AA's Index-wide shares)."""
 
@@ -1030,6 +1043,7 @@ def cost_diagnostics_markdown(facts):
     lines.append(bar_currency_text(facts.v3["barCurrency"]))
     lines.append(mix_check_text(facts.v3["rows"]))
     lines.append(observed_range_text(facts.v3["observedRangeBars"], facts))
+    lines.append(required_scores_text(facts.v3["requiredMissingScores"], facts))
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(
