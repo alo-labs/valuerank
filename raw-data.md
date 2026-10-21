@@ -918,7 +918,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `ec986d416b4c72704af1032cac7dbfc8816fb903380c47ccc5879ef6eb2c9847`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `15dd4ea9c6287ccd873a7d565f8fb13edb281b4bca574e90445a9a2b7557b750`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -932,7 +932,7 @@ Bundle hash `ec986d416b4c72704af1032cac7dbfc8816fb903380c47ccc5879ef6eb2c9847`: 
 | frontierCapture | `data/aa_frontier_capture.json` | `8426c98260619827f4b1fa8182f7a2aa1c83d003f5d92b6431a35e9ef0e89b30` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `cf8eaf85e125fa675e3b6928ceb924794ba6d1a2920152c5263474d1190e87a7` | — | editorial roster: AA frontier and near-frontier families plus every configuration with exact DeepSWE and Bug Hunt results (O31) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `d11b49c46c60f43909e2c8e02067a9bbfd17dd3b56d5210ff047316449ef1ebb` | 2026-10-21T06:30:00Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `f8e9b027c4925a23e74cbd8244b104cf99643c46ef304edd7c6cf84014178f60` | 2026-10-08 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `6e72d796297481210442eeff95c15586d37b0b3c546c3e81cdd81313f139d1cf` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `41e71ffea3a13f0cec1573493a8baf24b274d2de5290224d1107ee818c05cd95` | 2026-10-17T19:25:14Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | anchors | `data/v3_frozen.json` | `c0738b154e26564b8629f3e923a83dce9091ebf16ddc78ffae4f206044c65dfc` | 2026-10-21 | valuerank.value_v3 freeze |
 

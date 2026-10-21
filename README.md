@@ -121,7 +121,7 @@ AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 
 - [AA Coding Agent Index, DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
 - [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) official leaderboard rows and [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs.
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `ec986d416b4c72704af1032cac7dbfc8816fb903380c47ccc5879ef6eb2c9847`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `15dd4ea9c6287ccd873a7d565f8fb13edb281b4bca574e90445a9a2b7557b750`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files

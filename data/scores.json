@@ -39089,6 +39089,96 @@
       ],
       "flag": null
     },
+    "observedRangeBars": {
+      "label": "observed-range sensitivity, not evidence: missing leaves bounded by the cohort's observed range for that leaf (E219)",
+      "status": "evaluated",
+      "ranges": {
+        "deepswe": [
+          45.4,
+          78.8
+        ],
+        "bugHunt": [
+          10.476190476190476,
+          48.857142857142854
+        ],
+        "frontierCode": [
+          26.4162666666667,
+          52.17309999999999
+        ],
+        "terminalBench": [
+          14.5,
+          64.8
+        ],
+        "gdpval": [
+          31.140999999999995,
+          68.3135
+        ],
+        "automationBench": [
+          22.910812181110643,
+          77.51346945899195
+        ],
+        "omniscience": [
+          42.858333333333334,
+          73.20833333333333
+        ],
+        "lcr": [
+          72.0,
+          86.3333333333333
+        ],
+        "hle": [
+          27.0157553290083,
+          61.353104726598694
+        ],
+        "scicode": [
+          48.7268518518519,
+          66.8981481481482
+        ],
+        "critpt": [
+          9.14285714285714,
+          32.857142857142904
+        ]
+      },
+      "bars": [
+        {
+          "status": "certified",
+          "possibleQualifierN": 17,
+          "confirmedQualifierN": 5,
+          "confirmedCheapest": null,
+          "possibleCheapest": [
+            "gpt-6.1-sol-xhigh",
+            "gpt-6.1-sol",
+            "gpt-6.1-sol-high",
+            "gpt-6.1-sol-medium",
+            "claude-sonnet-5-5-high"
+          ],
+          "bar": "bar:median-quality"
+        },
+        {
+          "status": "certified",
+          "possibleQualifierN": 26,
+          "confirmedQualifierN": 21,
+          "confirmedCheapest": null,
+          "possibleCheapest": [
+            "gpt-6.1-sol-low",
+            "gpt-5.6-luna",
+            "deepseek-v4-flash"
+          ],
+          "bar": "bar:lower-quartile-quality"
+        },
+        {
+          "status": "certified",
+          "possibleQualifierN": 8,
+          "confirmedQualifierN": 3,
+          "confirmedCheapest": null,
+          "possibleCheapest": [
+            "gpt-6.1-sol-xhigh",
+            "gpt-6.1-sol",
+            "gpt-6.1-sol-high"
+          ],
+          "bar": "bar:upper-quartile-quality"
+        }
+      ]
+    },
     "subsetIntervals": {
       "1453a9a0576b02ea": {
         "components": [
@@ -51961,7 +52051,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "f8e9b027c4925a23e74cbd8244b104cf99643c46ef304edd7c6cf84014178f60",
+          "sha256": "6e72d796297481210442eeff95c15586d37b0b3c546c3e81cdd81313f139d1cf",
           "capturedAt": "2026-10-08",
           "extractor": "editorial Plan evidence registry"
         },
@@ -51980,7 +52070,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "ec986d416b4c72704af1032cac7dbfc8816fb903380c47ccc5879ef6eb2c9847",
+      "bundleHash": "15dd4ea9c6287ccd873a7d565f8fb13edb281b4bca574e90445a9a2b7557b750",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "scenarios": {

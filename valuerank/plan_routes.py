@@ -242,6 +242,18 @@ def check_report_window(document: dict) -> None:
                 raise ValueError(f"{report['id']}: end-user report dated outside the report window {start} to {end} (E194)")
 
 
+CONTROLLED_KINDS = {"controlled_account_workload_projection"}
+
+
+def check_allocation_regimes(document: dict) -> None:
+    """E220: a controlled subscription-account measurement keeps the allocation regime it was measured under (AGENTS.md),
+    so measurements under different regimes are never compared or pooled as one."""
+
+    for route in document["routes"]:
+        if route.get("valueMultipleKind") in CONTROLLED_KINDS and not str(route.get("allocationRegime") or "").strip():
+            raise ValueError(f"{route['id']}: a controlled measurement must record its allocation regime (E220)")
+
+
 def report_stage(report: dict, route: dict, release_day: date) -> str:
     """E151: one report's own expiry stage, by its E194 date (window end, report date, publication date); else the route's."""
 

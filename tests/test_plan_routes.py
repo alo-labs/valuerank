@@ -500,3 +500,12 @@ def test_the_report_window_includes_both_end_days():
     window = {"start": "2026-09-21", "end": "2026-10-21"}
     assert pr.in_window({"id": "a", "reportDate": "2026-09-21"}, window) and pr.in_window({"id": "b", "reportDate": "2026-10-21"}, window)
     assert not pr.in_window({"id": "c", "reportDate": "2026-09-20"}, window)
+
+
+def test_controlled_measurements_record_their_allocation_regime():
+    """E220: AGENTS.md requires SemiAnalysis results to preserve the allocation regime they were measured under."""
+
+    controlled = {"id": "c", "valueMultipleKind": "controlled_account_workload_projection", "allocationRegime": "All-Opus allocation"}
+    pr.check_allocation_regimes({"routes": [controlled, {"id": "t", "valueMultipleKind": "user_assumption"}]})
+    with pytest.raises(ValueError, match=r"c: a controlled measurement must record its allocation regime \(E220\)"):
+        pr.check_allocation_regimes({"routes": [{**controlled, "allocationRegime": " "}]})

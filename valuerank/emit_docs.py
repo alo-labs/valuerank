@@ -398,6 +398,20 @@ def bar_currency_text(currency):
             f"lifetime {currency['lifetime']}; " + (f"flag: {currency['flag']}." if currency["flag"] else "no staleness flag."))
 
 
+def observed_range_text(result, facts):
+    """E219: the API bar results with missing leaves bounded by the cohort's observed range (a sensitivity, not evidence)."""
+
+    head = "- **Observed-range sensitivity (E219, not evidence; no label changes):** "
+    if result["status"] != "evaluated":
+        return head + result["status"] + "."
+    parts = []
+    for bar in result["bars"]:
+        level = next(item["level"] for item in facts.v3["barPolicy"]["bars"] if item["id"] == bar["bar"])
+        answer = facts.label(bar["confirmedCheapest"]) + " confirmed cheapest" if bar["confirmedCheapest"] else f"possibly cheapest {facts.labels(bar['possibleCheapest'])}"
+        parts.append(f"quality {level:.1f}: {bar['possibleQualifierN']} can qualify, {bar['confirmedQualifierN']} confirmed; {answer}")
+    return head + "with each missing leaf inside the cohort's observed range for that leaf, " + "; ".join(parts) + "."
+
+
 def mix_check_text(rows):
     """E208: the token-mix status of each selected Plan route (never compared with AA's Index-wide shares)."""
 
@@ -1015,6 +1029,7 @@ def cost_diagnostics_markdown(facts):
     lines.append(family_primary_text(diagnostics["familyPrimary"], facts))
     lines.append(bar_currency_text(facts.v3["barCurrency"]))
     lines.append(mix_check_text(facts.v3["rows"]))
+    lines.append(observed_range_text(facts.v3["observedRangeBars"], facts))
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(

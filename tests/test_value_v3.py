@@ -76,8 +76,9 @@ def documents(**overrides) -> dict:
             "c": {"coding-agent-index": None, "frontiercode": None, "itbench-aa": None},
         }},
         "planRoutes": {"routes": [
-            {"id": "plan-a", "valueMultiple": 10.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10"},
-            {"id": "plan-b", "valueMultiple": 2.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["b"], "planPriceUsd": 20, "checkedOn": "2026-10-10",
+            {"id": "plan-a", "valueMultiple": 10.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10",
+             "allocationRegime": "single-model allocation"},
+            {"id": "plan-b", "valueMultiple": 2.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["b"], "planPriceUsd": 20, "checkedOn": "2026-10-10", "allocationRegime": "single-model allocation",
              "identification": "point-identified", "valuationBasis": "release"},
         ]},
         "priceRecords": {"records": []},
@@ -547,7 +548,7 @@ def write_world(root: Path) -> Path:
         "aa/coding_agents_capture.json": documents()["codingAgents"],
         "aa/cost_charts_capture.json": documents()["costCharts"],
         "v3_configuration_map.json": documents()["configurationMap"],
-        "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}}},
+        "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}, "searchCutoff": "2026-10-19"}},
         "price_records.json": documents()["priceRecords"],
         "aa_frontier_capture.json": {"points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
@@ -1370,6 +1371,35 @@ def test_the_chart_capture_and_model_pages_describe_one_aa_state():
     far = documents(snapshot=pages, frontierCapture={"captured_at": "2026-10-10T19:25:13Z", "points": []})
     with pytest.raises(ValueError, match=r"more than 7 days apart \(E217\)"):
         v.assemble(CONFIGURATIONS, far, release_day=DAY)
+
+
+def test_reports_are_searched_within_7_days_of_the_cutoff():
+    """E218: the end-user report search reaches to at most 7 days before the release cutoff."""
+
+    def policy(searched):
+        window = {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}}
+        return {**documents()["planRoutes"], "evidencePolicy": {**window, **({"searchCutoff": searched} if searched else {})}}
+
+    assert v.assemble(CONFIGURATIONS, documents(planRoutes=policy("2026-10-12")), release_day=DAY)["rows"]
+    for searched in ("2026-10-11", None):
+        with pytest.raises(ValueError, match=r"more than 7 days before the release cutoff 2026-10-19 \(E218\)"):
+            v.assemble(CONFIGURATIONS, documents(planRoutes=policy(searched)), release_day=DAY)
+
+
+def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():
+    """E219: a sensitivity, not evidence: missing leaves inside the cohort's observed range, bar results recomputed."""
+
+    result, frozen = scored()
+    ranges = v.leaf_ranges(result)
+    assert set(ranges) == {leaf.key for leaf in q.LEAVES} and all(low <= high for low, high in ranges.values())
+    unobserved = v.leaf_ranges({"rows": []})
+    assert set(unobserved.values()) == {(0.0, 100.0)}
+    for row in result["rows"]:
+        band = v.band_summary(row["summary"], ranges)
+        assert row["summary"].lower - 1e-9 <= band.lower <= band.upper <= row["summary"].upper + 1e-9
+    output = v.observed_range_bars(result, frozen)
+    assert output["label"] == v.BAND_LABEL and output["status"] == "evaluated" and [bar["bar"] for bar in output["bars"]] == [bar["id"] for bar in frozen["barReferences"]]
+    assert v.score(result, frozen)["observedRangeBars"]["bars"] == output["bars"]
 
 
 def test_the_quartile_bars_need_four_configurations():

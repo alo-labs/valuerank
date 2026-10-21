@@ -166,6 +166,10 @@ class StubFacts:
     def labels(row_ids):
         return ", ".join(row_ids)
 
+    @staticmethod
+    def label(row_id):
+        return row_id
+
 
 def cost_world(**overrides):
     diagnostics = {
@@ -190,7 +194,10 @@ def cost_world(**overrides):
     diagnostics.update(overrides)
     currency = {"lifetime": "until the next re-freeze", "bars": [{"level": 56.7, "reachN": 18, "populationN": 35}], "currentLadder": [{"level": 56.7}], "flag": None}
     rows = [{"plan": {"mixCheck": "mix unidentified"}}, {"plan": {"mixCheck": "mix unidentified"}}, {"plan": {"mixCheck": "mix not reported"}}, {"plan": None}]
-    return StubFacts(diagnostics, barCurrency=currency, rows=rows)
+    observed = {"status": "evaluated", "bars": [{"bar": "bar:x", "possibleQualifierN": 17, "confirmedQualifierN": 5, "confirmedCheapest": None, "possibleCheapest": ["a", "b"]},
+                                                {"bar": "bar:y", "possibleQualifierN": 3, "confirmedQualifierN": 3, "confirmedCheapest": "a", "possibleCheapest": ["a"]}]}
+    policy = {"bars": [{"id": "bar:x", "level": 56.7}, {"id": "bar:y", "level": 60.9}]}
+    return StubFacts(diagnostics, barCurrency=currency, rows=rows, observedRangeBars=observed, barPolicy=policy)
 
 
 def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
@@ -214,6 +221,9 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     stale = ed.bar_currency_text({"lifetime": "l", "bars": [], "currentLadder": [], "flag": "headline bar below"})
     assert "no bar frozen; the current population would freeze unavailable" in stale and stale.endswith("flag: headline bar below.")
     assert ed.mix_check_text([{"plan": None}]) == "- **Token mix (E208):** no selected Plan route."
+    assert ("- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, "
+            "quality 56.7: 17 can qualify, 5 confirmed; possibly cheapest a, b; quality 60.9: 3 can qualify, 3 confirmed; a confirmed cheapest.") in text
+    assert ed.observed_range_text({"status": "unavailable: no bar"}, StubFacts({})).endswith("unavailable: no bar.")
     lone = ed.family_primary_text({"status": "unavailable: fewer than 2 family-primary references", "population": ["a"], "references": ["a"], "ladder": [], "frozenLadder": []}, StubFacts({}))
     assert lone.endswith("would be unavailable against unavailable frozen; anchors unavailable: fewer than 2 family-primary references.")
     assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet

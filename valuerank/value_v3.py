@@ -21,6 +21,7 @@ intervals, scenarios, diagnostics) into the published v3 ranking:
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import hashlib
 import json
 import math
@@ -381,6 +382,7 @@ def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked
 
 
 COST_EVIDENCE_MAX_AGE_DAYS = 45
+REPORT_SEARCH_MAX_AGE_DAYS = 7
 CAPTURE_GAP_MAX_DAYS = 7
 
 
@@ -409,6 +411,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # E213: one release cutoff; the report window is the 30 days ending on it (the evidence search cutoff is recorded apart).
     if window and window["end"] != release_day.isoformat():
         raise ValueError(f"the report window must end on the release cutoff {release_day} (E213), not {window['end']}")
+    # E218: end-user reports are searched up to at most 7 days before the release cutoff, like the cohort capture (E211).
+    searched = (documents["planRoutes"].get("evidencePolicy") or {}).get("searchCutoff")
+    if window and (not searched or (release_day - date.fromisoformat(searched)).days > REPORT_SEARCH_MAX_AGE_DAYS):
+        raise ValueError(f"end-user reports were last searched on {searched}, more than {REPORT_SEARCH_MAX_AGE_DAYS} days before the release cutoff {release_day} (E218)")
     # E216: the AA model-page snapshot and the price records are at most 45 days old at the release cutoff (the chart
     # and catalog capture that defines the cohort has its own 7-day gate, E211).
     for name, stamp in (("AA model-page snapshot", documents["snapshot"].get("capturedAt")), ("price records", documents["priceRecords"].get("observedAt"))):
@@ -1135,6 +1141,44 @@ def subset_bridges(assembled: dict, frozen: dict, per_row: dict, expenditure: di
     return bridges
 
 
+# E219: the quality section's sensitivity band applied to the bar outputs. Each missing leaf is bounded by the cohort's
+# observed range for that leaf instead of 0-100, which shows how much of the possible/confirmed gap is missing-leaf
+# ignorance. It is a sensitivity, never evidence: it enters no label, no Θ and no published claim (O19, O25).
+BAND_LABEL = "observed-range sensitivity, not evidence: missing leaves bounded by the cohort's observed range for that leaf (E219)"
+
+
+def leaf_ranges(assembled: dict) -> dict:
+    """The cohort's observed z range for each leaf (a leaf no row observes keeps its 0-100 domain)."""
+
+    ranges = {}
+    for leaf in q.LEAVES:
+        values = [row["summary"].observations[leaf.key].z for row in assembled["rows"] if leaf.key in row["summary"].observations]
+        ranges[leaf.key] = (min(values), max(values)) if values else (0.0, 100.0)
+    return ranges
+
+
+def band_summary(summary, ranges: dict):
+    """A row's quality bounds with each missing leaf inside the cohort's observed range (E219)."""
+
+    lower = upper = 0.0
+    for leaf in q.LEAVES:
+        observation = summary.observations.get(leaf.key)
+        low, high = (observation.low, observation.high) if observation else ranges[leaf.key]
+        lower, upper = lower + leaf.weight * low, upper + leaf.weight * high
+    return dataclasses.replace(summary, lower=lower / 100.0, upper=upper / 100.0)
+
+
+def observed_range_bars(assembled: dict, frozen: dict) -> dict:
+    """E219: the API bar results recomputed on the band bounds, beside the published ones."""
+
+    ranges = leaf_ranges(assembled)
+    banded = {**assembled, "rows": [{**row, "summary": band_summary(row["summary"], ranges)} for row in assembled["rows"]]}
+    result = interval_outputs(banded, frozen, "api")
+    bars = [{key: bar.get(key) for key in ("status", "possibleQualifierN", "confirmedQualifierN", "confirmedCheapest", "possibleCheapest")} | {"bar": bar["reference"]["id"]}
+            for bar in result.get("bars", [])]
+    return {"label": BAND_LABEL, "status": result["status"], "ranges": ranges, "bars": bars}
+
+
 # E207: the frozen ladder's standing in the current population, so a bar most rows have outgrown is flagged, not silent.
 BAR_LIFETIME = "until the next anchor re-freeze or methodology version, whichever comes first"
 BAR_STALE_LOW = "headline bar below the current population's lower quartile: re-freeze the ladder at the next anchor version (informational; no score changes)"
@@ -1254,6 +1298,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
         "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis) for basis in BASES},
         "barCurrency": bar_currency(assembled, frozen),
+        "observedRangeBars": observed_range_bars(assembled, frozen),
         "subsetIntervals": subset_interval_outputs(assembled, frozen),
         "measuredOnlyPlanView": measured,
         "diagnostics": {
@@ -2013,6 +2058,7 @@ CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt"
 def load_documents(data: Path) -> dict:
     documents = {key: json.loads((data / relative).read_text()) for key, (relative, _extractor) in EVIDENCE_FILES.items()}
     plan_routes.check_report_window(documents["planRoutes"])
+    plan_routes.check_allocation_regimes(documents["planRoutes"])
     return documents
 
 
