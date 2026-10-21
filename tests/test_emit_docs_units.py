@@ -38,6 +38,8 @@ def test_configuration_and_model_labels():
     names = {"m": "Model M"}
     assert ed.configuration_label({"id": "m", "effort": "max"}, names) == "Model M (max)"
     assert ed.configuration_label({"id": "m", "effort": None}, names) == "Model M"
+    # O33: a ranked sibling's name already carries its effort, which is not repeated.
+    assert ed.configuration_label({"id": "s", "effort": "xhigh"}, {"s": "Model M (xhigh)"}) == "Model M (xhigh)"
     entry = {"name": "Model M", "slug": "model-m"}
     assert ed.model_link(entry) == "[Model M](https://valuerank.alolabs.dev/models/model-m/)"
     assert ed.model_link(entry, "Model M (max)") == "[Model M (max)](https://valuerank.alolabs.dev/models/model-m/)"

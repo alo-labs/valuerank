@@ -26,14 +26,14 @@
   "costWeightPct": 25.0,
   "exchangeRate": {
     "api": {
-      "valuePointsPerCostDoubling": 3.0368084682790406,
-      "qualityPointsPerCostDoubling": 4.0490779577053875,
-      "anchorRatio": 300.73039636603136
+      "valuePointsPerCostDoubling": 2.7394846647388067,
+      "qualityPointsPerCostDoubling": 3.6526462196517424,
+      "anchorRatio": 558.6511875569362
     },
     "plan": {
-      "valuePointsPerCostDoubling": 2.0161368842840726,
-      "qualityPointsPerCostDoubling": 2.6881825123787633,
-      "anchorRatio": 5404.523487958324
+      "valuePointsPerCostDoubling": 1.73252533899049,
+      "qualityPointsPerCostDoubling": 2.310033785320653,
+      "anchorRatio": 22070.066930266188
     }
   },
   "planExploratory": true,
@@ -110,7 +110,11 @@
       {
         "text": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
         "models": [
-          "Claude Haiku 5.5"
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (xhigh)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)"
         ]
       }
     ]
@@ -246,6 +250,354 @@
   },
   "models": [
     {
+      "slug": "gpt-6-1-sol-xhigh",
+      "name": "GPT-6.1 Sol (xhigh)",
+      "shortName": "GPT-6.1 Sol (xhigh)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+      "aaVariant": "xhigh",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 51.0377679093761,
+        "status": "measured"
+      },
+      "speed": 49.984900015628,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6.1 Sol (xhigh)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 1,
+        "plan": 1
+      },
+      "overall": {
+        "api": 60.617743906409615,
+        "plan": 60.93470411660212
+      },
+      "quality": 64.04342177211433,
+      "qualityRank": 6,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 73.2,
+        "bugHunt": 40.666666666666664,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 51.9025,
+        "automationBench": 66.57372141364344,
+        "omniscience": 70.43333333333334,
+        "lcr": 79.6666666666667,
+        "hle": 52.6413345690454,
+        "scicode": 55.671296296296305,
+        "critpt": 31.7142857142857
+      },
+      "costDims": {
+        "api": 50.34071030929547,
+        "plan": 51.60855115006548
+      },
+      "raw": {
+        "deepswe": 73.2,
+        "bugHunt": 42.7,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 1538.05,
+        "automationBench": 0.6657372141364344,
+        "omniscience": 40.86666666666667,
+        "lcr": 0.796666666666667,
+        "hle": 0.526413345690454,
+        "scicode": 0.556712962962963,
+        "critpt": 0.317142857142857
+      },
+      "coverage": {
+        "pct": 80.0,
+        "costAvailable": true,
+        "missing": [
+          "AA FrontierCode 1.1",
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 827.2341182369406,
+        "planUsd": 76.7948494464297,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-common-semianalysis-assumption",
+          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+          "planFeeUsd": 500,
+          "valueMultiple": 10.772,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.2983,
+          "top3": 0.6582,
+          "frontier": 0.4561
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium"
+    },
+    {
+      "slug": "gpt-6-1-sol-high",
+      "name": "GPT-6.1 Sol (high)",
+      "shortName": "GPT-6.1 Sol (high)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 50.2377777519769,
+        "status": "measured"
+      },
+      "speed": 47.8118000562256,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6.1 Sol (high)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 3,
+        "plan": 2
+      },
+      "overall": {
+        "api": 59.74975997863963,
+        "plan": 59.82516640449342
+      },
+      "quality": 62.00989720059384,
+      "qualityRank": 7,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 70.5,
+        "bugHunt": 34.76190476190476,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 50.567499999999995,
+        "automationBench": 64.49523732184466,
+        "omniscience": 70.725,
+        "lcr": 82.3333333333333,
+        "hle": 51.390176088971295,
+        "scicode": 55.787037037037,
+        "critpt": 30.0
+      },
+      "costDims": {
+        "api": 52.96934831277702,
+        "plan": 53.27097401619218
+      },
+      "raw": {
+        "deepswe": 70.5,
+        "bugHunt": 36.5,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 1511.35,
+        "automationBench": 0.6449523732184466,
+        "omniscience": 41.45,
+        "lcr": 0.823333333333333,
+        "hle": 0.513901760889713,
+        "scicode": 0.55787037037037,
+        "critpt": 0.3
+      },
+      "coverage": {
+        "pct": 80.0,
+        "costAvailable": true,
+        "missing": [
+          "AA FrontierCode 1.1",
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 700.5127639425643,
+        "planUsd": 65.03089156540702,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-common-semianalysis-assumption",
+          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+          "planFeeUsd": 500,
+          "valueMultiple": 10.772,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.2343,
+          "top3": 0.5835,
+          "frontier": 0.4879
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium"
+    },
+    {
+      "slug": "gpt-6-1-sol-medium",
+      "name": "GPT-6.1 Sol (medium)",
+      "shortName": "GPT-6.1 Sol (medium)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+      "aaVariant": "medium",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 47.7833271274065,
+        "status": "measured"
+      },
+      "speed": 45.5119827016729,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6.1 Sol (medium)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 2,
+        "plan": 3
+      },
+      "overall": {
+        "api": 60.00267818617599,
+        "plan": 59.677140635646396
+      },
+      "quality": 60.892736516386584,
+      "qualityRank": 9,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 72.0,
+        "bugHunt": 27.61904761904762,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 47.504999999999995,
+        "automationBench": 62.573509704356866,
+        "omniscience": 69.975,
+        "lcr": 83.3333333333333,
+        "hle": 49.8609823911029,
+        "scicode": 53.2407407407407,
+        "critpt": 27.7142857142857
+      },
+      "costDims": {
+        "api": 57.3325031955442,
+        "plan": 56.03035299342581
+      },
+      "raw": {
+        "deepswe": 72.0,
+        "bugHunt": 29.0,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 1450.1,
+        "automationBench": 0.6257350970435687,
+        "omniscience": 39.95,
+        "lcr": 0.833333333333333,
+        "hle": 0.498609823911029,
+        "scicode": 0.532407407407407,
+        "critpt": 0.277142857142857
+      },
+      "coverage": {
+        "pct": 80.0,
+        "costAvailable": true,
+        "missing": [
+          "AA FrontierCode 1.1",
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 531.5621485772531,
+        "planUsd": 49.346653228486176,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-common-semianalysis-assumption",
+          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+          "planFeeUsd": 500,
+          "valueMultiple": 10.772,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.2857,
+          "top3": 0.6439,
+          "frontier": 0.7143
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium"
+    },
+    {
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "shortName": "Sonnet 5.5",
@@ -264,12 +616,12 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 14,
-        "plan": 1
+        "api": 19,
+        "plan": 4
       },
       "overall": {
-        "api": 51.55492313031626,
-        "plan": 61.134193057915695
+        "api": 51.230319650625816,
+        "plan": 59.32028447302209
       },
       "quality": 64.3193136891795,
       "qualityRank": 4,
@@ -288,8 +640,8 @@
         "critpt": 31.4285714285714
       },
       "costDims": {
-        "api": 13.261751453726564,
-        "plan": 51.578831164124296
+        "api": 11.963337534964765,
+        "plan": 44.323196824549875
       },
       "raw": {
         "deepswe": 72.0,
@@ -351,12 +703,12 @@
         "api": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 0.4008
+          "frontier": 0.2342
         },
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Expensive"
     },
     {
       "slug": "claude-opus-5-5",
@@ -377,12 +729,12 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 15,
-        "plan": 2
+        "api": 22,
+        "plan": 5
       },
       "overall": {
-        "api": 51.18247022569043,
-        "plan": 60.855387516654574
+        "api": 50.8851464221502,
+        "plan": 59.067500498201156
       },
       "quality": 64.19421567654852,
       "qualityRank": 5,
@@ -401,8 +753,8 @@
         "critpt": 31.7142857142857
       },
       "costDims": {
-        "api": 12.147233873116166,
-        "plan": 50.838903036972745
+        "api": 10.95793865895523,
+        "plan": 43.68735496315907
       },
       "raw": {
         "deepswe": 68.4,
@@ -472,6 +824,236 @@
         }
       },
       "flags": [],
+      "tier": "Expensive"
+    },
+    {
+      "slug": "claude-sonnet-5-5-xhigh",
+      "name": "Claude Sonnet 5.5 (xhigh)",
+      "shortName": "Sonnet 5.5 (xhigh)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+      "aaVariant": "xhigh",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 51.8955544183089,
+        "status": "measured"
+      },
+      "speed": 110.414517674387,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Sonnet 5.5 (xhigh with fallback)",
+      "aaFrontierIntelligenceGap": 2,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 15,
+        "plan": 6
+      },
+      "overall": {
+        "api": 52.485172969076025,
+        "plan": 58.83840477301843
+      },
+      "quality": 59.692622713032286,
+      "qualityRank": 13,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 68.4,
+        "bugHunt": 34.285714285714285,
+        "frontierCode": 46.1498666666667,
+        "terminalBench": null,
+        "gdpval": 61.422,
+        "automationBench": 65.52026949665557,
+        "omniscience": 61.75,
+        "lcr": 79.6666666666667,
+        "hle": 50.0,
+        "scicode": 57.2916666666667,
+        "critpt": 31.1428571428571
+      },
+      "costDims": {
+        "api": 30.862823737207236,
+        "plan": 56.275750952976864
+      },
+      "raw": {
+        "deepswe": 68.4,
+        "bugHunt": 36.0,
+        "frontierCode": 0.461498666666667,
+        "terminalBench": null,
+        "gdpval": 1728.44,
+        "automationBench": 0.6552026949665557,
+        "omniscience": 23.5,
+        "lcr": 0.796666666666667,
+        "hle": 0.5,
+        "scicode": 0.572916666666667,
+        "critpt": 0.311428571428571
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 2836.0467965283697,
+        "planUsd": 48.15020028061748,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0856
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium"
+    },
+    {
+      "slug": "claude-sonnet-5-5-high",
+      "name": "Claude Sonnet 5.5 (high)",
+      "shortName": "Sonnet 5.5 (high)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 46.7533528066958,
+        "status": "measured"
+      },
+      "speed": 105.065796731467,
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 11,
+        "plan": 7
+      },
+      "overall": {
+        "api": 53.38692449906321,
+        "plan": 58.54764812116228
+      },
+      "quality": 56.569251584671505,
+      "qualityRank": 19,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 66.7,
+        "bugHunt": 32.666666666666664,
+        "frontierCode": 44.2987666666667,
+        "terminalBench": null,
+        "gdpval": 52.46950000000001,
+        "automationBench": 59.42923026067375,
+        "omniscience": 60.475,
+        "lcr": 78.0,
+        "hle": 45.8294717330862,
+        "scicode": 53.703703703703695,
+        "critpt": 24.571428571428598
+      },
+      "costDims": {
+        "api": 43.83994324223836,
+        "plan": 64.48283773063464
+      },
+      "raw": {
+        "deepswe": 66.7,
+        "bugHunt": 34.3,
+        "frontierCode": 0.442987666666667,
+        "terminalBench": null,
+        "gdpval": 1549.39,
+        "automationBench": 0.5942923026067375,
+        "omniscience": 20.95,
+        "lcr": 0.78,
+        "hle": 0.458294717330862,
+        "scicode": 0.537037037037037,
+        "critpt": 0.245714285714286
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 1247.9973342182716,
+        "planUsd": 21.188409749036868,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0051,
+          "frontier": 0.029
+        },
+        "plan": null
+      },
+      "flags": [],
       "tier": "Premium"
     },
     {
@@ -493,15 +1075,15 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
-        "plan": 3
+        "api": 6,
+        "plan": 8
       },
       "overall": {
-        "api": 58.07643576777958,
-        "plan": 59.768083679103796
+        "api": 56.893624815277896,
+        "plan": 57.83067388961014
       },
       "quality": 61.32724120424232,
-      "qualityRank": 6,
+      "qualityRank": 8,
       "dims": {
         "costComposite": null,
         "deepswe": 69.6,
@@ -517,8 +1099,8 @@
         "critpt": 31.7142857142857
       },
       "costDims": {
-        "api": 48.32401945839134,
-        "plan": 55.09061110368823
+        "api": 43.592775648384624,
+        "plan": 47.3409719457136
       },
       "raw": {
         "deepswe": 69.6,
@@ -565,21 +1147,21 @@
       },
       "grade": "measured",
       "pareto": {
-        "api": true,
-        "plan": true
+        "api": false,
+        "plan": false
       },
       "frontierStatus": {
         "api": {
-          "definite": "certified",
+          "definite": "disproved",
           "possible": "certified"
         },
         "plan": null
       },
       "scenario": {
         "api": {
-          "top1": 0.5885,
-          "top3": 0.9947,
-          "frontier": 1.0
+          "top1": 0.0111,
+          "top3": 0.3526,
+          "frontier": 0.2308
         },
         "plan": {
           "top1": 0.0,
@@ -591,63 +1173,179 @@
       "tier": "Premium"
     },
     {
-      "slug": "claude-haiku-5-5",
-      "name": "Claude Haiku 5.5",
-      "shortName": "Haiku 5.5",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
-      "aaVariant": "xhigh",
+      "slug": "gpt-6-1-sol-low",
+      "name": "GPT-6.1 Sol (low)",
+      "shortName": "GPT-6.1 Sol (low)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+      "aaVariant": "low",
       "rankingEligible": true,
       "exclusionReasons": [],
       "intelligenceIndex": {
-        "value": 41.2489304677024,
+        "value": 42.0835618555848,
         "status": "measured"
       },
-      "speed": 195.273087468701,
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "speed": 43.0685501204559,
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
       "rank": {
-        "api": 11,
-        "plan": 4
+        "api": 5,
+        "plan": 9
       },
       "overall": {
-        "api": 52.52851330172449,
-        "plan": 57.00013690496531
+        "api": 57.82786606007349,
+        "plan": 56.99628989880085
       },
-      "quality": 45.35503171899917,
-      "qualityRank": 23,
+      "quality": 56.15738157260664,
+      "qualityRank": 20,
       "dims": {
         "costComposite": null,
-        "deepswe": 49.0,
-        "bugHunt": 17.428571428571427,
-        "frontierCode": 45.471000000000004,
+        "deepswe": 67.6,
+        "bugHunt": 21.428571428571427,
+        "frontierCode": null,
         "terminalBench": null,
-        "gdpval": 50.6525,
-        "automationBench": 35.953889773428195,
-        "omniscience": 53.025,
-        "lcr": 78.3333333333333,
-        "hle": 42.678405931418,
-        "scicode": 51.73611111111111,
-        "critpt": 22.5714285714286
+        "gdpval": 40.7335,
+        "automationBench": 52.57088964747538,
+        "omniscience": 68.81666666666666,
+        "lcr": 84.0,
+        "hle": 47.3586654309546,
+        "scicode": 53.2407407407407,
+        "critpt": 24.8571428571429
       },
       "costDims": {
-        "api": 74.04895804990042,
-        "plan": 91.93545246286371
+        "api": 62.83931952247407,
+        "plan": 59.513014877383526
       },
       "raw": {
-        "deepswe": 49.0,
-        "bugHunt": 18.3,
-        "frontierCode": 0.45471,
+        "deepswe": 67.6,
+        "bugHunt": 22.5,
+        "frontierCode": null,
         "terminalBench": null,
-        "gdpval": 1513.05,
-        "automationBench": 0.35953889773428194,
-        "omniscience": 6.05,
-        "lcr": 0.783333333333333,
-        "hle": 0.42678405931418,
-        "scicode": 0.517361111111111,
-        "critpt": 0.225714285714286
+        "gdpval": 1314.67,
+        "automationBench": 0.5257088964747538,
+        "omniscience": 37.63333333333333,
+        "lcr": 0.84,
+        "hle": 0.473586654309546,
+        "scicode": 0.532407407407407,
+        "critpt": 0.248571428571429
+      },
+      "coverage": {
+        "pct": 80.0,
+        "costAvailable": true,
+        "missing": [
+          "AA FrontierCode 1.1",
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 375.2096972444586,
+        "planUsd": 34.83194367289812,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-common-semianalysis-assumption",
+          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+          "planFeeUsd": 500,
+          "valueMultiple": 10.772,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.1479,
+          "top3": 0.4549,
+          "frontier": 0.7575
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium"
+    },
+    {
+      "slug": "claude-sonnet-5-5-medium",
+      "name": "Claude Sonnet 5.5 (medium)",
+      "shortName": "Sonnet 5.5 (medium)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+      "aaVariant": "medium",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 40.838652287929,
+        "status": "measured"
+      },
+      "speed": 107.206054673678,
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 18,
+        "plan": 10
+      },
+      "overall": {
+        "api": 51.44949858041265,
+        "plan": 55.83443052132506
+      },
+      "quality": 51.17190877098797,
+      "qualityRank": 24,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 65.5,
+        "bugHunt": 22.19047619047619,
+        "frontierCode": 29.307566666666702,
+        "terminalBench": null,
+        "gdpval": 41.1635,
+        "automationBench": 54.90962996121462,
+        "omniscience": 60.05,
+        "lcr": 76.3333333333333,
+        "hle": 39.805375347544,
+        "scicode": 52.8935185185185,
+        "critpt": 16.8571428571429
+      },
+      "costDims": {
+        "api": 52.28226800868667,
+        "plan": 69.82199577233634
+      },
+      "raw": {
+        "deepswe": 65.5,
+        "bugHunt": 23.3,
+        "frontierCode": 0.293075666666667,
+        "terminalBench": null,
+        "gdpval": 1323.27,
+        "automationBench": 0.5490962996121462,
+        "omniscience": 20.1,
+        "lcr": 0.763333333333333,
+        "hle": 0.39805375347544,
+        "scicode": 0.528935185185185,
+        "critpt": 0.168571428571429
       },
       "coverage": {
         "pct": 90.0,
@@ -659,8 +1357,8 @@
         "provisionalReasons": []
       },
       "cost": {
-        "apiUsd": 292.07481065705014,
-        "planUsd": 4.958825308269103,
+        "apiUsd": 731.6293440729121,
+        "planUsd": 12.421550833156402,
         "fallback": null,
         "route": {
           "id": "claude-pro-common-opus55-assumption",
@@ -697,15 +1395,13 @@
       "scenario": {
         "api": {
           "top1": 0.0,
-          "top3": 0.0317,
-          "frontier": 0.1785
+          "top3": 0.0,
+          "frontier": 0.0032
         },
         "plan": null
       },
-      "flags": [
-        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
-      ],
-      "tier": "Budget"
+      "flags": [],
+      "tier": "Mid-Range"
     },
     {
       "slug": "claude-opus-5",
@@ -726,15 +1422,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 21,
-        "plan": 5
+        "api": 33,
+        "plan": 11
       },
       "overall": {
-        "api": 46.97938355711471,
-        "plan": 56.454429576647016
+        "api": 46.624419431304325,
+        "plan": 54.61156054640844
       },
       "quality": 57.805130480631384,
-      "qualityRank": 12,
+      "qualityRank": 17,
       "dims": {
         "costComposite": null,
         "deepswe": 62.5,
@@ -750,8 +1446,8 @@
         "critpt": 29.1428571428571
       },
       "costDims": {
-        "api": 14.5021427865647,
-        "plan": 52.402326864693926
+        "api": 13.082286283323159,
+        "plan": 45.03085074373962
       },
       "raw": {
         "deepswe": 62.5,
@@ -816,7 +1512,7 @@
         "api": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 0.0301
+          "frontier": 0.0125
         },
         "plan": null
       },
@@ -842,15 +1538,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 8,
-        "plan": 6
+        "api": 13,
+        "plan": 12
       },
       "overall": {
-        "api": 53.79099337727841,
-        "plan": 56.15363394361307
+        "api": 52.803644012483915,
+        "plan": 54.40267126085996
       },
       "quality": 58.27519438516182,
-      "qualityRank": 11,
+      "qualityRank": 16,
       "dims": {
         "costComposite": null,
         "deepswe": 69.0,
@@ -866,8 +1562,8 @@
         "critpt": 30.8571428571429
       },
       "costDims": {
-        "api": 40.33839035362819,
-        "plan": 49.78895261896684
+        "api": 36.38899289445022,
+        "plan": 42.7851018879544
       },
       "raw": {
         "deepswe": 69.0,
@@ -930,207 +1626,94 @@
       "scenario": {
         "api": {
           "top1": 0.0,
-          "top3": 0.0464,
-          "frontier": 0.1146
+          "top3": 0.0014,
+          "frontier": 0.032
         },
         "plan": null
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Expensive"
     },
     {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna",
-      "shortName": "GPT-6 Luna",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
+      "slug": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "shortName": "Haiku 5.5",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
+      "aaVariant": "xhigh",
       "rankingEligible": true,
       "exclusionReasons": [],
       "intelligenceIndex": {
-        "value": 38.1245186869738,
+        "value": 41.2489304677024,
         "status": "measured"
       },
-      "speed": 120.357052380923,
+      "speed": 195.273087468701,
       "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
       "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
-        "api": 3,
-        "plan": 7
+        "api": 24,
+        "plan": 13
       },
       "overall": {
-        "api": 57.765893398760014,
-        "plan": 56.13613753232722
+        "api": 50.71604158301379,
+        "plan": 53.76697898504606
       },
-      "quality": 47.73693582271874,
-      "qualityRank": 21,
+      "quality": 45.35503171899917,
+      "qualityRank": 33,
       "dims": {
         "costComposite": null,
-        "deepswe": 63.7,
+        "deepswe": 49.0,
         "bugHunt": 17.428571428571427,
-        "frontierCode": 41.9269666666667,
-        "terminalBench": 16.4,
-        "gdpval": 46.59299999999999,
-        "automationBench": 53.16814034483175,
-        "omniscience": 50.325,
-        "lcr": 83.3333333333333,
-        "hle": 38.5078776645042,
-        "scicode": 54.6296296296296,
-        "critpt": 19.428571428571402
+        "frontierCode": 45.471000000000004,
+        "terminalBench": null,
+        "gdpval": 50.6525,
+        "automationBench": 35.953889773428195,
+        "omniscience": 53.025,
+        "lcr": 78.3333333333333,
+        "hle": 42.678405931418,
+        "scicode": 51.73611111111111,
+        "critpt": 22.5714285714286
       },
       "costDims": {
-        "api": 87.85276612688384,
-        "plan": 81.33374266115266
+        "api": 66.79907117505765,
+        "plan": 79.0028207831867
       },
       "raw": {
-        "deepswe": 63.7,
+        "deepswe": 49.0,
         "bugHunt": 18.3,
-        "frontierCode": 0.419269666666667,
-        "terminalBench": 16.4,
-        "gdpval": 1431.86,
-        "automationBench": 0.5316814034483175,
-        "omniscience": 0.65,
-        "lcr": 0.833333333333333,
-        "hle": 0.385078776645042,
-        "scicode": 0.546296296296296,
-        "critpt": 0.194285714285714
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 132.8652049689931,
-        "planUsd": 12.334311638413768,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro500-common-semianalysis-assumption",
-          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "9a0d376cc6080f3c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.8938,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Near-Budget"
-    },
-    {
-      "slug": "gpt-5-6-luna",
-      "name": "GPT-5.6 Luna",
-      "shortName": "GPT-5.6 Luna",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 37.3244239690841,
-        "status": "measured"
-      },
-      "speed": 129.43507988099,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-5.6 Luna (low)",
-      "aaFrontierIntelligenceGap": 1,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 6,
-        "plan": 8
-      },
-      "overall": {
-        "api": 55.63158543768209,
-        "plan": 55.29271007979614
-      },
-      "quality": 50.0122081693276,
-      "qualityRank": 18,
-      "dims": {
-        "costComposite": null,
-        "deepswe": 66.4,
-        "bugHunt": 29.80952380952381,
-        "frontierCode": null,
-        "terminalBench": 17.3,
-        "gdpval": 47.96,
-        "automationBench": 50.208617637561936,
-        "omniscience": 44.858333333333334,
-        "lcr": 83.6666666666667,
-        "hle": 39.4810009267841,
-        "scicode": 53.587962962963,
-        "critpt": 20.571428571428598
-      },
-      "costDims": {
-        "api": 72.48971724274558,
-        "plan": 71.13421581120176
-      },
-      "raw": {
-        "deepswe": 66.4,
-        "bugHunt": 31.3,
-        "frontierCode": null,
-        "terminalBench": 17.3,
-        "gdpval": 1459.2,
-        "automationBench": 0.5020861763756194,
-        "omniscience": -10.283333333333333,
-        "lcr": 0.836666666666667,
-        "hle": 0.394810009267841,
-        "scicode": 0.53587962962963,
-        "critpt": 0.205714285714286
+        "frontierCode": 0.45471,
+        "terminalBench": null,
+        "gdpval": 1513.05,
+        "automationBench": 0.35953889773428194,
+        "omniscience": 6.05,
+        "lcr": 0.783333333333333,
+        "hle": 0.42678405931418,
+        "scicode": 0.517361111111111,
+        "critpt": 0.225714285714286
       },
       "coverage": {
         "pct": 90.0,
         "costAvailable": true,
         "missing": [
-          "AA FrontierCode 1.1"
+          "Terminal-Bench 4.0 (tbench.ai)"
         ],
         "provisional": false,
         "provisionalReasons": []
       },
       "cost": {
-        "apiUsd": 319.25290369032655,
-        "planUsd": 29.637291467724335,
+        "apiUsd": 292.07481065705014,
+        "planUsd": 4.958825308269103,
         "fallback": null,
         "route": {
-          "id": "chatgpt-pro500-common-semianalysis-assumption",
-          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
           "grade": "assumption",
           "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
+          "sourceModel": "Opus 5.5",
           "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
           "sourceDate": "2026-10-06"
         },
@@ -1145,7 +1728,7 @@
       },
       "grade": "measured",
       "pareto": {
-        "api": true,
+        "api": false,
         "plan": true
       },
       "frontierStatus": {
@@ -1157,9 +1740,126 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.1413,
-          "top3": 0.3522,
-          "frontier": 0.5048
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.1768
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Near-Budget"
+    },
+    {
+      "slug": "claude-sonnet-5-5-low",
+      "name": "Claude Sonnet 5.5 (low)",
+      "shortName": "Sonnet 5.5 (low)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+      "aaVariant": "low",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 35.8681594577587,
+        "status": "measured"
+      },
+      "speed": 106.133093824055,
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 28,
+        "plan": 14
+      },
+      "overall": {
+        "api": 49.599935556529275,
+        "plan": 53.643443425067694
+      },
+      "quality": 47.46734239396215,
+      "qualityRank": 32,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 61.9,
+        "bugHunt": 18.095238095238095,
+        "frontierCode": 26.4162666666667,
+        "terminalBench": null,
+        "gdpval": 33.766999999999996,
+        "automationBench": 49.42092641344955,
+        "omniscience": 59.68333333333334,
+        "lcr": 76.0,
+        "hle": 36.2372567191844,
+        "scicode": 49.0740740740741,
+        "critpt": 11.4285714285714
+      },
+      "costDims": {
+        "api": 55.99771504423066,
+        "plan": 72.17174651838434
+      },
+      "raw": {
+        "deepswe": 61.9,
+        "bugHunt": 19.0,
+        "frontierCode": 0.264162666666667,
+        "terminalBench": null,
+        "gdpval": 1175.34,
+        "automationBench": 0.4942092641344955,
+        "omniscience": 19.366666666666667,
+        "lcr": 0.76,
+        "hle": 0.362372567191844,
+        "scicode": 0.490740740740741,
+        "critpt": 0.114285714285714
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 578.392372482358,
+        "planUsd": 9.819904456406759,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0017
         },
         "plan": null
       },
@@ -1185,15 +1885,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 13,
-        "plan": 9
+        "api": 21,
+        "plan": 15
       },
       "overall": {
-        "api": 51.56512830163886,
-        "plan": 55.034029624718045
+        "api": 50.90003504846763,
+        "plan": 53.59046094375534
       },
       "quality": 59.695990677523795,
-      "qualityRank": 9,
+      "qualityRank": 12,
       "dims": {
         "costComposite": null,
         "deepswe": 72.3,
@@ -1209,8 +1909,8 @@
         "critpt": 32.2857142857143
       },
       "costDims": {
-        "api": 27.17254117398406,
-        "plan": 41.04814646630081
+        "api": 24.512168161299158,
+        "plan": 35.27387174244998
       },
       "raw": {
         "deepswe": 72.3,
@@ -1273,13 +1973,243 @@
       "scenario": {
         "api": {
           "top1": 0.0,
-          "top3": 0.0008,
-          "frontier": 0.0919
+          "top3": 0.0,
+          "frontier": 0.0271
         },
         "plan": null
       },
       "flags": [],
       "tier": "Expensive"
+    },
+    {
+      "slug": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "shortName": "GPT-6 Luna",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 38.1245186869738,
+        "status": "measured"
+      },
+      "speed": 120.357052380923,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6 Luna (max)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 8,
+        "plan": 16
+      },
+      "overall": {
+        "api": 55.61555046067061,
+        "plan": 53.275817305505015
+      },
+      "quality": 47.73693582271874,
+      "qualityRank": 30,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 63.7,
+        "bugHunt": 17.428571428571427,
+        "frontierCode": 41.9269666666667,
+        "terminalBench": 16.4,
+        "gdpval": 46.59299999999999,
+        "automationBench": 53.16814034483175,
+        "omniscience": 50.325,
+        "lcr": 83.3333333333333,
+        "hle": 38.5078776645042,
+        "scicode": 54.6296296296296,
+        "critpt": 19.428571428571402
+      },
+      "costDims": {
+        "api": 79.25139437452623,
+        "plan": 69.89246175386386
+      },
+      "raw": {
+        "deepswe": 63.7,
+        "bugHunt": 18.3,
+        "frontierCode": 0.419269666666667,
+        "terminalBench": 16.4,
+        "gdpval": 1431.86,
+        "automationBench": 0.5316814034483175,
+        "omniscience": 0.65,
+        "lcr": 0.833333333333333,
+        "hle": 0.385078776645042,
+        "scicode": 0.546296296296296,
+        "critpt": 0.194285714285714
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 132.8652049689931,
+        "planUsd": 12.334311638413768,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-common-semianalysis-assumption",
+          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+          "planFeeUsd": 500,
+          "valueMultiple": 10.772,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0128,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Mid-Range"
+    },
+    {
+      "slug": "claude-haiku-5-5-high",
+      "name": "Claude Haiku 5.5 (high)",
+      "shortName": "Haiku 5.5 (high)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 37.8240211671094,
+        "status": "measured"
+      },
+      "speed": 179.433325369244,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (high)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 23,
+        "plan": 17
+      },
+      "overall": {
+        "api": 50.77942623793126,
+        "plan": 53.13798911290682
+      },
+      "quality": 42.92802388411697,
+      "qualityRank": 35,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 46.3,
+        "bugHunt": 15.238095238095237,
+        "frontierCode": 43.6422666666667,
+        "terminalBench": null,
+        "gdpval": 45.8775,
+        "automationBench": 33.72685311767238,
+        "omniscience": 52.875,
+        "lcr": 77.3333333333333,
+        "hle": 37.25671918443,
+        "scicode": 48.7268518518519,
+        "critpt": 18.5714285714286
+      },
+      "costDims": {
+        "api": 74.33363329937414,
+        "plan": 83.76788479927639
+      },
+      "raw": {
+        "deepswe": 46.3,
+        "bugHunt": 16.0,
+        "frontierCode": 0.436422666666667,
+        "terminalBench": null,
+        "gdpval": 1417.55,
+        "automationBench": 0.3372685311767238,
+        "omniscience": 5.75,
+        "lcr": 0.773333333333333,
+        "hle": 0.3725671918443,
+        "scicode": 0.487268518518519,
+        "critpt": 0.185714285714286
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 181.3464586928498,
+        "planUsd": 3.0788872443607778,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.087
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Near-Budget"
     },
     {
       "slug": "gpt-6-astra",
@@ -1300,15 +2230,15 @@
       "aaFrontierIntelligenceGap": 2,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 16,
-        "plan": 10
+        "api": 25,
+        "plan": 18
       },
       "overall": {
-        "api": 50.854043663318265,
-        "plan": 54.031673829760464
+        "api": 50.34565652451074,
+        "plan": 52.85423139445634
       },
       "quality": 60.88196620399156,
-      "qualityRank": 7,
+      "qualityRank": 10,
       "dims": {
         "costComposite": null,
         "deepswe": 67.6,
@@ -1324,8 +2254,8 @@
         "critpt": 31.7142857142857
       },
       "costDims": {
-        "api": 20.770276041298384,
-        "plan": 33.480796707067185
+        "api": 18.73672748606827,
+        "plan": 28.771026965850698
       },
       "raw": {
         "deepswe": 67.6,
@@ -1390,7 +2320,7 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.7867,
+          "top3": 0.6855,
           "frontier": 0.0
         }
       },
@@ -1398,123 +2328,344 @@
       "tier": "Expensive"
     },
     {
-      "slug": "mimo-v2-6-flash",
-      "name": "MiMo-V2.6-Flash",
-      "shortName": "MiMo V2.6 Flash",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
-      "aaVariant": null,
+      "slug": "claude-haiku-5-5-medium",
+      "name": "Claude Haiku 5.5 (medium)",
+      "shortName": "Haiku 5.5 (medium)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+      "aaVariant": "medium",
       "rankingEligible": true,
       "exclusionReasons": [],
       "intelligenceIndex": {
-        "value": 37.8843590141754,
+        "value": 34.4646519474657,
         "status": "measured"
       },
-      "speed": 51.9430960183717,
+      "speed": 177.838410437741,
       "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "MiMo-V2.6-Flash",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (medium)",
       "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
-        "api": 1,
-        "plan": 11
+        "api": 20,
+        "plan": 19
       },
       "overall": {
-        "api": 60.914714869668224,
-        "plan": 53.472658994498275
+        "api": 51.10915133545137,
+        "plan": 52.799762295600885
       },
-      "quality": 51.7423406603443,
-      "qualityRank": 15,
+      "quality": 40.944727270549365,
+      "qualityRank": 36,
       "dims": {
         "costComposite": null,
-        "deepswe": null,
-        "bugHunt": null,
-        "frontierCode": 42.0675333333333,
+        "deepswe": 47.5,
+        "bugHunt": 11.428571428571429,
+        "frontierCode": 40.4265666666667,
         "terminalBench": null,
-        "gdpval": 55.3755,
-        "automationBench": 64.05168250285656,
-        "omniscience": 43.65833333333333,
-        "lcr": 74.3333333333333,
-        "hle": 35.0787766450417,
-        "scicode": 51.273148148148195,
-        "critpt": 12.0
+        "gdpval": 38.725,
+        "automationBench": 28.589614814293164,
+        "omniscience": 52.233333333333334,
+        "lcr": 77.3333333333333,
+        "hle": 33.7812789620019,
+        "scicode": 48.9583333333333,
+        "critpt": 12.8571428571429
       },
       "costDims": {
-        "api": 88.43183749764,
-        "plan": 58.66361399696022
+        "api": 81.6024235301574,
+        "plan": 88.36486737075545
       },
       "raw": {
-        "deepswe": null,
-        "bugHunt": null,
-        "frontierCode": 0.420675333333333,
+        "deepswe": 47.5,
+        "bugHunt": 12.0,
+        "frontierCode": 0.404265666666667,
         "terminalBench": null,
-        "gdpval": 1607.51,
-        "automationBench": 0.6405168250285657,
-        "omniscience": -12.683333333333334,
-        "lcr": 0.743333333333333,
-        "hle": 0.350787766450417,
-        "scicode": 0.512731481481482,
-        "critpt": 0.12
+        "gdpval": 1274.5,
+        "automationBench": 0.2858961481429316,
+        "omniscience": 4.466666666666667,
+        "lcr": 0.773333333333333,
+        "hle": 0.337812789620019,
+        "scicode": 0.489583333333333,
+        "critpt": 0.128571428571429
       },
       "coverage": {
-        "pct": 50.0,
+        "pct": 90.0,
         "costAvailable": true,
         "missing": [
-          "DeepSWE v1.1",
-          "Bug Hunt Bench",
           "Terminal-Bench 4.0 (tbench.ai)"
         ],
-        "provisional": true,
-        "provisionalReasons": [
-          "coverage 50% below 70%",
-          "1 SWE leaves observed (need 2)",
-          "observed SWE weight 10% below 40%",
-          "DeepSWE v1.1 missing"
-        ]
+        "provisional": false,
+        "provisionalReasons": []
       },
       "cost": {
-        "apiUsd": 60.36787614182735,
-        "planUsd": 40.24525076121824,
+        "apiUsd": 114.50519282185142,
+        "planUsd": 1.9440609986731991,
         "fallback": null,
         "route": {
-          "id": "mimo-provisional-user-assumption",
-          "planLabel": "MiMo · provisional 1.5x assumption",
-          "planFeeUsd": null,
-          "valueMultiple": 1.5,
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
           "grade": "assumption",
           "evidenceLabel": "Provisional assumption",
-          "sourceModel": null,
-          "sourceUrl": null,
-          "sourceDate": null
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
         },
-        "subset": true,
+        "subset": false,
         "partialComponents": [],
-        "workload": "1453a9a0576b02ea",
+        "workload": "9a0d376cc6080f3c",
         "planFlags": [
           "workload-unmatched",
           "owner-named transfer (assumption)",
-          "valuation basis unverified",
-          "observed-usage multiple; full utilisation not established"
+          "valuation basis unverified"
         ]
       },
       "grade": "measured",
       "pareto": {
-        "api": false,
-        "plan": false
+        "api": true,
+        "plan": true
       },
       "frontierStatus": {
-        "api": null,
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
         "plan": null
       },
       "scenario": {
-        "api": null,
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0004,
+          "frontier": 0.8054
+        },
         "plan": null
       },
       "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified",
-        "Provisional quality: coverage 50% below 70%; 1 SWE leaves observed (need 2); observed SWE weight 10% below 40%; DeepSWE v1.1 missing"
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
       ],
+      "tier": "Budget"
+    },
+    {
+      "slug": "gpt-5-6-luna",
+      "name": "GPT-5.6 Luna",
+      "shortName": "GPT-5.6 Luna",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 37.3244239690841,
+        "status": "measured"
+      },
+      "speed": 129.43507988099,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "GPT-5.6 Luna (low)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 10,
+        "plan": 20
+      },
+      "overall": {
+        "api": 53.857278737630054,
+        "plan": 52.7910836988292
+      },
+      "quality": 50.0122081693276,
+      "qualityRank": 27,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 66.4,
+        "bugHunt": 29.80952380952381,
+        "frontierCode": null,
+        "terminalBench": 17.3,
+        "gdpval": 47.96,
+        "automationBench": 50.208617637561936,
+        "omniscience": 44.858333333333334,
+        "lcr": 83.6666666666667,
+        "hle": 39.4810009267841,
+        "scicode": 53.587962962963,
+        "critpt": 20.571428571428598
+      },
+      "costDims": {
+        "api": 65.39249044253741,
+        "plan": 61.12771028733398
+      },
+      "raw": {
+        "deepswe": 66.4,
+        "bugHunt": 31.3,
+        "frontierCode": null,
+        "terminalBench": 17.3,
+        "gdpval": 1459.2,
+        "automationBench": 0.5020861763756194,
+        "omniscience": -10.283333333333333,
+        "lcr": 0.836666666666667,
+        "hle": 0.394810009267841,
+        "scicode": 0.53587962962963,
+        "critpt": 0.205714285714286
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "AA FrontierCode 1.1"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 319.25290369032655,
+        "planUsd": 29.637291467724335,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-common-semianalysis-assumption",
+          "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+          "planFeeUsd": 500,
+          "valueMultiple": 10.772,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0018,
+          "top3": 0.0533,
+          "frontier": 0.5034
+        },
+        "plan": null
+      },
+      "flags": [],
       "tier": "Premium"
+    },
+    {
+      "slug": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "shortName": "Gem 4 Argon",
+      "developer": "Google DeepMind",
+      "aaUrl": "https://artificialanalysis.ai/models/gemini-4-argon",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 52.5605655745982,
+        "status": "measured"
+      },
+      "speed": null,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Gemini 4 Argon (high)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 7,
+        "plan": 21
+      },
+      "overall": {
+        "api": 55.7147006769527,
+        "plan": 52.238365824776295
+      },
+      "quality": 65.29734733476938,
+      "qualityRank": 2,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 78.8,
+        "bugHunt": 38.761904761904766,
+        "frontierCode": 43.453199999999995,
+        "terminalBench": null,
+        "gdpval": 56.1995,
+        "automationBench": 77.51346945899195,
+        "omniscience": 71.175,
+        "lcr": 79.6666666666667,
+        "hle": 57.089898053753494,
+        "scicode": 61.8055555555556,
+        "critpt": 27.142857142857103
+      },
+      "costDims": {
+        "api": 26.96676070350264,
+        "plan": 13.061421294797029
+      },
+      "raw": {
+        "deepswe": 78.8,
+        "bugHunt": 40.7,
+        "frontierCode": 0.434532,
+        "terminalBench": null,
+        "gdpval": 1623.99,
+        "automationBench": 0.7751346945899195,
+        "omniscience": 42.35,
+        "lcr": 0.796666666666667,
+        "hle": 0.570898980537535,
+        "scicode": 0.618055555555556,
+        "critpt": 0.271428571428571
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 3628.6386911634218,
+        "planUsd": 3628.6386911634218,
+        "fallback": "api",
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "API-cost fallback: no admitted Plan route",
+          "cross-estimand ordering not identified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0057,
+          "top3": 0.1219,
+          "frontier": 0.4545
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.2501,
+          "frontier": 0.445
+        }
+      },
+      "flags": [],
+      "tier": "Expensive"
     },
     {
       "slug": "claude-fable-5-1",
@@ -1535,15 +2686,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 18,
-        "plan": 12
+        "api": 30,
+        "plan": 22
       },
       "overall": {
-        "api": 47.577898205128555,
-        "plan": 53.012769060297536
+        "api": 47.343987109986124,
+        "plan": 51.91216172586273
       },
       "quality": 60.25170001758842,
-      "qualityRank": 8,
+      "qualityRank": 11,
       "dims": {
         "costComposite": null,
         "deepswe": 64.3,
@@ -1559,8 +2710,8 @@
         "critpt": 29.714285714285698
       },
       "costDims": {
-        "api": 9.556492767748956,
-        "plan": 31.295976188424866
+        "api": 8.620848387179226,
+        "plan": 26.89354685068565
       },
       "raw": {
         "deepswe": 64.3,
@@ -1640,63 +2791,182 @@
       "tier": "Expensive"
     },
     {
-      "slug": "gemini-4-argon",
-      "name": "Gemini 4 Argon",
-      "shortName": "Gem 4 Argon",
-      "developer": "Google DeepMind",
-      "aaUrl": "https://artificialanalysis.ai/models/gemini-4-argon",
-      "aaVariant": "high",
+      "slug": "mimo-v2-6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "shortName": "MiMo V2.6 Flash",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
+      "aaVariant": null,
       "rankingEligible": true,
       "exclusionReasons": [],
       "intelligenceIndex": {
-        "value": 52.5605655745982,
+        "value": 37.8843590141754,
         "status": "measured"
       },
-      "speed": null,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Gemini 4 Argon (high)",
-      "aaFrontierIntelligenceGap": 1,
+      "speed": 51.9430960183717,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "MiMo-V2.6-Flash",
+      "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 13
+        "plan": 23
       },
       "overall": {
-        "api": 56.44639484964934,
-        "plan": 52.77289911467703
+        "api": 58.41459507966456,
+        "plan": 51.60600592115195
       },
-      "quality": 65.29734733476938,
-      "qualityRank": 2,
+      "quality": 51.7423406603443,
+      "qualityRank": 23,
       "dims": {
         "costComposite": null,
-        "deepswe": 78.8,
-        "bugHunt": 38.761904761904766,
-        "frontierCode": 43.453199999999995,
+        "deepswe": null,
+        "bugHunt": null,
+        "frontierCode": 42.0675333333333,
         "terminalBench": null,
-        "gdpval": 56.1995,
-        "automationBench": 77.51346945899195,
-        "omniscience": 71.175,
-        "lcr": 79.6666666666667,
-        "hle": 57.089898053753494,
-        "scicode": 61.8055555555556,
-        "critpt": 27.142857142857103
+        "gdpval": 55.3755,
+        "automationBench": 64.05168250285656,
+        "omniscience": 43.65833333333333,
+        "lcr": 74.3333333333333,
+        "hle": 35.0787766450417,
+        "scicode": 51.273148148148195,
+        "critpt": 12.0
       },
       "costDims": {
-        "api": 29.893537394289176,
-        "plan": 15.199554454399971
+        "api": 78.43135833762534,
+        "plan": 51.19700170357489
       },
       "raw": {
-        "deepswe": 78.8,
-        "bugHunt": 40.7,
-        "frontierCode": 0.434532,
+        "deepswe": null,
+        "bugHunt": null,
+        "frontierCode": 0.420675333333333,
         "terminalBench": null,
-        "gdpval": 1623.99,
-        "automationBench": 0.7751346945899195,
-        "omniscience": 42.35,
-        "lcr": 0.796666666666667,
-        "hle": 0.570898980537535,
-        "scicode": 0.618055555555556,
-        "critpt": 0.271428571428571
+        "gdpval": 1607.51,
+        "automationBench": 0.6405168250285657,
+        "omniscience": -12.683333333333334,
+        "lcr": 0.743333333333333,
+        "hle": 0.350787766450417,
+        "scicode": 0.512731481481482,
+        "critpt": 0.12
+      },
+      "coverage": {
+        "pct": 50.0,
+        "costAvailable": true,
+        "missing": [
+          "DeepSWE v1.1",
+          "Bug Hunt Bench",
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": true,
+        "provisionalReasons": [
+          "coverage 50% below 70%",
+          "1 SWE leaves observed (need 2)",
+          "observed SWE weight 10% below 40%",
+          "DeepSWE v1.1 missing"
+        ]
+      },
+      "cost": {
+        "apiUsd": 60.36787614182735,
+        "planUsd": 40.24525076121824,
+        "fallback": null,
+        "route": {
+          "id": "mimo-provisional-user-assumption",
+          "planLabel": "MiMo · provisional 1.5x assumption",
+          "planFeeUsd": null,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": null,
+          "sourceUrl": null,
+          "sourceDate": null
+        },
+        "subset": true,
+        "partialComponents": [],
+        "workload": "1453a9a0576b02ea",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified",
+          "observed-usage multiple; full utilisation not established"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [
+        "Subset cost: scored on its own workload; cross-workload ordering not identified",
+        "Provisional quality: coverage 50% below 70%; 1 SWE leaves observed (need 2); observed SWE weight 10% below 40%; DeepSWE v1.1 missing"
+      ],
+      "tier": "Premium"
+    },
+    {
+      "slug": "claude-haiku-5-5-low",
+      "name": "Claude Haiku 5.5 (low)",
+      "shortName": "Haiku 5.5 (low)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+      "aaVariant": "low",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.4523685891139,
+        "status": "measured"
+      },
+      "speed": 171.346235560927,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (low)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 27,
+        "plan": 24
+      },
+      "overall": {
+        "api": 49.919810380129064,
+        "plan": 50.92676970587739
+      },
+      "quality": 36.879060059823836,
+      "qualityRank": 37,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 45.4,
+        "bugHunt": 10.476190476190476,
+        "frontierCode": 29.3338,
+        "terminalBench": null,
+        "gdpval": 31.140999999999995,
+        "automationBench": 22.910812181110643,
+        "omniscience": 51.625,
+        "lcr": 72.0,
+        "hle": 27.0157553290083,
+        "scicode": 49.189814814814795,
+        "critpt": 9.14285714285714
+      },
+      "costDims": {
+        "api": 89.04206134104477,
+        "plan": 93.06989864403805
+      },
+      "raw": {
+        "deepswe": 45.4,
+        "bugHunt": 11.0,
+        "frontierCode": 0.293338,
+        "terminalBench": null,
+        "gdpval": 1122.82,
+        "automationBench": 0.22910812181110643,
+        "omniscience": 3.25,
+        "lcr": 0.72,
+        "hle": 0.270157553290083,
+        "scicode": 0.491898148148148,
+        "critpt": 0.0914285714285714
       },
       "coverage": {
         "pct": 90.0,
@@ -1708,16 +2978,27 @@
         "provisionalReasons": []
       },
       "cost": {
-        "apiUsd": 3628.6386911634218,
-        "planUsd": 3628.6386911634218,
-        "fallback": "api",
-        "route": null,
+        "apiUsd": 71.52335239510617,
+        "planUsd": 1.21431837682693,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
         "subset": false,
         "partialComponents": [],
         "workload": "9a0d376cc6080f3c",
         "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
         ]
       },
       "grade": "measured",
@@ -1727,25 +3008,140 @@
       },
       "frontierStatus": {
         "api": {
-          "definite": "disproved",
+          "definite": "certified",
           "possible": "certified"
         },
         "plan": null
       },
       "scenario": {
         "api": {
-          "top1": 0.1025,
-          "top3": 0.2986,
-          "frontier": 0.7282
-        },
-        "plan": {
           "top1": 0.0,
-          "top3": 0.1807,
-          "frontier": 0.4636
-        }
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
       },
-      "flags": [],
-      "tier": "Expensive"
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Budget"
+    },
+    {
+      "slug": "claude-haiku-5-5-max",
+      "name": "Claude Haiku 5.5 (max)",
+      "shortName": "Haiku 5.5 (max)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 43.3950199670746,
+        "status": "measured"
+      },
+      "speed": 235.9744787533,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (max)",
+      "aaFrontierIntelligenceGap": 3,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 35,
+        "plan": 25
+      },
+      "overall": {
+        "api": 45.940837160678534,
+        "plan": 50.740462054669685
+      },
+      "quality": 45.331284903777565,
+      "qualityRank": 34,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 46.0,
+        "bugHunt": 20.476190476190474,
+        "frontierCode": 41.8067,
+        "terminalBench": null,
+        "gdpval": 55.9165,
+        "automationBench": 35.411015132783625,
+        "omniscience": 55.333333333333336,
+        "lcr": 82.6666666666667,
+        "hle": 44.3929564411492,
+        "scicode": 54.976851851851805,
+        "critpt": 18.8571428571429
+      },
+      "costDims": {
+        "api": 47.76949393138144,
+        "plan": 66.96799350734605
+      },
+      "raw": {
+        "deepswe": 46.0,
+        "bugHunt": 21.5,
+        "frontierCode": 0.418067,
+        "terminalBench": null,
+        "gdpval": 1618.33,
+        "automationBench": 0.35411015132783624,
+        "omniscience": 10.666666666666666,
+        "lcr": 0.826666666666667,
+        "hle": 0.443929564411492,
+        "scicode": 0.549768518518518,
+        "critpt": 0.188571428571429
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 973.3373083091135,
+        "planUsd": 16.52525141441619,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-common-opus55-assumption",
+          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "disproved"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Mid-Range"
     },
     {
       "slug": "muse-wonder",
@@ -1766,12 +3162,12 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 9,
-        "plan": 14
+        "api": 14,
+        "plan": 26
       },
       "overall": {
-        "api": 53.214268146216554,
-        "plan": 50.40688615826427
+        "api": 52.73487475038151,
+        "plan": 50.11301780118249
       },
       "quality": 64.42378090901863,
       "qualityRank": 3,
@@ -1790,8 +3186,8 @@
         "critpt": 28.2857142857143
       },
       "costDims": {
-        "api": 19.58572985781032,
-        "plan": 8.356201906001193
+        "api": 17.668156274470125,
+        "plan": 7.180728477674061
       },
       "raw": {
         "deepswe": 75.8,
@@ -1843,14 +3239,14 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.001,
-          "top3": 0.0273,
-          "frontier": 0.2933
+          "top1": 0.0003,
+          "top3": 0.0078,
+          "frontier": 0.2058
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0249,
-          "frontier": 0.2077
+          "top3": 0.0506,
+          "frontier": 0.2139
         }
       },
       "flags": [],
@@ -1875,15 +3271,15 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 5,
-        "plan": 15
+        "api": 9,
+        "plan": 27
       },
       "overall": {
-        "api": 56.28497168063865,
-        "plan": 50.01857796368787
+        "api": 54.16851631729846,
+        "plan": 48.43409992049082
       },
       "quality": 50.09288635616183,
-      "qualityRank": 17,
+      "qualityRank": 26,
       "dims": {
         "costComposite": null,
         "deepswe": null,
@@ -1899,8 +3295,8 @@
         "critpt": 26.5714285714286
       },
       "costDims": {
-        "api": 74.86122765406913,
-        "plan": 49.795652786266
+        "api": 66.39540620070838,
+        "plan": 43.45774061347782
       },
       "raw": {
         "deepswe": null,
@@ -1971,7 +3367,7 @@
         "Subset cost: scored on its own workload; cross-workload ordering not identified",
         "Provisional quality: coverage 60% below 70%; observed SWE weight 20% below 40%; DeepSWE v1.1 missing"
       ],
-      "tier": "Premium"
+      "tier": "Expensive"
     },
     {
       "slug": "muse-spark-1-3",
@@ -1992,15 +3388,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 10,
-        "plan": 16
+        "api": 16,
+        "plan": 28
       },
       "overall": {
-        "api": 52.778856481251694,
-        "plan": 48.705096238156386
+        "api": 51.93056440591581,
+        "plan": 48.0593424171318
       },
       "quality": 58.81941793819844,
-      "qualityRank": 10,
+      "qualityRank": 15,
       "dims": {
         "costComposite": null,
         "deepswe": 71.7,
@@ -2016,8 +3412,8 @@
         "critpt": 24.8571428571429
       },
       "costDims": {
-        "api": 34.657172110411466,
-        "plan": 18.362131138030232
+        "api": 31.264003809067937,
+        "plan": 15.779115853931893
       },
       "raw": {
         "deepswe": 71.7,
@@ -2069,13 +3465,122 @@
       "scenario": {
         "api": {
           "top1": 0.0,
-          "top3": 0.012,
-          "frontier": 0.155
+          "top3": 0.0,
+          "frontier": 0.0508
         },
         "plan": {
           "top1": 0.0,
           "top3": 0.0,
           "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive"
+    },
+    {
+      "slug": "grok-4-6-xhigh",
+      "name": "Grok 4.6 (xhigh)",
+      "shortName": "Grok 4.6 (xhigh)",
+      "developer": "xAI",
+      "aaUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+      "aaVariant": "xhigh",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 44.199810436996,
+        "status": "measured"
+      },
+      "speed": 67.4029968742691,
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 17,
+        "plan": 29
+      },
+      "overall": {
+        "api": 51.66423090009161,
+        "plan": 47.90358863189008
+      },
+      "quality": 58.865423690936026,
+      "qualityRank": 14,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 64.9,
+        "bugHunt": 27.333333333333332,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 57.269000000000005,
+        "automationBench": 66.99736836183247,
+        "omniscience": 64.65833333333333,
+        "lcr": 81.0,
+        "hle": 44.0685820203893,
+        "scicode": 53.0092592592593,
+        "critpt": 19.7142857142857
+      },
+      "costDims": {
+        "api": 30.06065252755837,
+        "plan": 15.018083454752258
+      },
+      "raw": {
+        "deepswe": 64.9,
+        "bugHunt": 28.7,
+        "frontierCode": null,
+        "terminalBench": null,
+        "gdpval": 1645.38,
+        "automationBench": 0.6699736836183247,
+        "omniscience": 29.316666666666666,
+        "lcr": 0.81,
+        "hle": 0.440685820203893,
+        "scicode": 0.530092592592593,
+        "critpt": 0.197142857142857
+      },
+      "coverage": {
+        "pct": 80.0,
+        "costAvailable": true,
+        "missing": [
+          "AA FrontierCode 1.1",
+          "Terminal-Bench 4.0 (tbench.ai)"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 2983.665720539929,
+        "planUsd": 2983.665720539929,
+        "fallback": "api",
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "API-cost fallback: no admitted Plan route",
+          "cross-estimand ordering not identified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0047,
+          "frontier": 0.0709
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0112,
+          "frontier": 0.0459
         }
       },
       "flags": [],
@@ -2100,15 +3605,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
-        "plan": 17
+        "api": 12,
+        "plan": 30
       },
       "overall": {
-        "api": 54.75096876971568,
-        "plan": 47.30257425811922
+        "api": 52.91963855360902,
+        "plan": 45.719118972002214
       },
       "quality": 48.061482895190444,
-      "qualityRank": 20,
+      "qualityRank": 29,
       "dims": {
         "costComposite": null,
         "deepswe": 54.3,
@@ -2124,8 +3629,8 @@
         "critpt": 16.5714285714286
       },
       "costDims": {
-        "api": 74.81942639329138,
-        "plan": 45.025848346905555
+        "api": 67.49410552886475,
+        "plan": 38.69202720243751
       },
       "raw": {
         "deepswe": 54.3,
@@ -2177,18 +3682,126 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.16,
-          "top3": 0.2996,
-          "frontier": 0.569
+          "top1": 0.0149,
+          "top3": 0.0958,
+          "frontier": 0.5731
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0077,
+          "top3": 0.0026,
           "frontier": 0.0
         }
       },
       "flags": [],
-      "tier": "Premium"
+      "tier": "Expensive"
+    },
+    {
+      "slug": "muse-spark-1-3-xhigh",
+      "name": "Muse Spark 1.3 (xhigh)",
+      "shortName": "Muse Spark 1.3 (xhigh)",
+      "developer": "Meta",
+      "aaUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+      "aaVariant": "xhigh",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 45.0732966922226,
+        "status": "measured"
+      },
+      "speed": 280.688197998976,
+      "aaFrontierTier": null,
+      "aaFrontierConfiguration": null,
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 29,
+        "plan": 31
+      },
+      "overall": {
+        "api": 49.4194426593855,
+        "plan": 45.321935376693624
+      },
+      "quality": 54.65042789359417,
+      "qualityRank": 21,
+      "dims": {
+        "costComposite": null,
+        "deepswe": 73.2,
+        "bugHunt": 19.333333333333332,
+        "frontierCode": null,
+        "terminalBench": 14.5,
+        "gdpval": 56.330499999999994,
+        "automationBench": 56.83609003249621,
+        "omniscience": 61.55833333333334,
+        "lcr": 83.0,
+        "hle": 47.451343836886004,
+        "scicode": 59.7222222222222,
+        "critpt": 26.0
+      },
+      "costDims": {
+        "api": 33.726486956759494,
+        "plan": 17.336457825991978
+      },
+      "raw": {
+        "deepswe": 73.2,
+        "bugHunt": 20.3,
+        "frontierCode": null,
+        "terminalBench": 14.5,
+        "gdpval": 1626.61,
+        "automationBench": 0.5683609003249621,
+        "omniscience": 23.116666666666667,
+        "lcr": 0.83,
+        "hle": 0.47451343836886,
+        "scicode": 0.597222222222222,
+        "critpt": 0.26
+      },
+      "coverage": {
+        "pct": 90.0,
+        "costAvailable": true,
+        "missing": [
+          "AA FrontierCode 1.1"
+        ],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 2366.1623199016663,
+        "planUsd": 2366.1623199016663,
+        "fallback": "api",
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "API-cost fallback: no admitted Plan route",
+          "cross-estimand ordering not identified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "disproved"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive"
     },
     {
       "slug": "deepseek-v4-pro",
@@ -2209,15 +3822,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 12,
-        "plan": 18
+        "api": 26,
+        "plan": 32
       },
       "overall": {
-        "api": 51.58942206012668,
-        "plan": 45.692230144014914
+        "api": 50.209960459726744,
+        "plan": 44.539803772651155
       },
       "quality": 49.999820114594385,
-      "qualityRank": 19,
+      "qualityRank": 28,
       "dims": {
         "costComposite": null,
         "deepswe": 57.2,
@@ -2233,8 +3846,8 @@
         "critpt": 18.0
       },
       "costDims": {
-        "api": 56.35822789672358,
-        "plan": 32.76946023227653
+        "api": 50.84038149512382,
+        "plan": 28.159754746821474
       },
       "raw": {
         "deepswe": 57.2,
@@ -2286,9 +3899,9 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.0067,
-          "top3": 0.0429,
-          "frontier": 0.3701
+          "top1": 0.0,
+          "top3": 0.0037,
+          "frontier": 0.0085
         },
         "plan": {
           "top1": 0.0,
@@ -2318,15 +3931,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 19,
-        "plan": 19
+        "api": 31,
+        "plan": 33
       },
       "overall": {
-        "api": 47.31353235518217,
-        "plan": 44.543062955974335
+        "api": 46.84489167496702,
+        "plan": 44.259451410680754
       },
       "quality": 56.70256809558702,
-      "qualityRank": 13,
+      "qualityRank": 18,
       "dims": {
         "costComposite": null,
         "deepswe": 72.6,
@@ -2342,8 +3955,8 @@
         "critpt": 17.714285714285698
       },
       "costDims": {
-        "api": 19.146425133967615,
-        "plan": 8.064547537136292
+        "api": 17.271862413107044,
+        "plan": 6.930101355961961
       },
       "raw": {
         "deepswe": 72.6,
@@ -2424,15 +4037,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 20,
-        "plan": 20
+        "api": 34,
+        "plan": 34
       },
       "overall": {
-        "api": 47.113750944691965,
-        "plan": 43.248827217032584
+        "api": 46.32629339052936,
+        "plan": 42.66110229363312
       },
       "quality": 52.09441344290625,
-      "qualityRank": 14,
+      "qualityRank": 22,
       "dims": {
         "costComposite": null,
         "deepswe": 61.4,
@@ -2448,8 +4061,8 @@
         "critpt": 19.1428571428571
       },
       "costDims": {
-        "api": 32.1717634500491,
-        "plan": 16.712068539411586
+        "api": 29.021933233398656,
+        "plan": 14.361168845813719
       },
       "raw": {
         "deepswe": 61.4,
@@ -2530,15 +4143,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 17,
-        "plan": 21
+        "api": 32,
+        "plan": 35
       },
       "overall": {
-        "api": 47.62322227391877,
-        "plan": 43.125637147775
+        "api": 46.65146910861138,
+        "plan": 42.36211613120964
       },
       "quality": 50.26389504587976,
-      "qualityRank": 16,
+      "qualityRank": 25,
       "dims": {
         "costComposite": null,
         "deepswe": 65.8,
@@ -2554,8 +4167,8 @@
         "critpt": 18.2857142857143
       },
       "costDims": {
-        "api": 39.70120395803583,
-        "plan": 21.710863453460735
+        "api": 35.814191296806264,
+        "plan": 18.656779387199297
       },
       "raw": {
         "deepswe": 65.8,
@@ -2636,15 +4249,15 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 22,
-        "plan": 22
+        "api": 36,
+        "plan": 36
       },
       "overall": {
-        "api": 41.4985743207113,
-        "plan": 38.41510250132095
+        "api": 40.9387553696936,
+        "plan": 38.04451773029972
       },
       "quality": 47.7075874885913,
-      "qualityRank": 22,
+      "qualityRank": 31,
       "dims": {
         "costComposite": null,
         "deepswe": 51.0,
@@ -2660,8 +4273,8 @@
         "critpt": 17.714285714285698
       },
       "costDims": {
-        "api": 22.87153481707129,
-        "plan": 10.537647539509894
+        "api": 20.632259013000503,
+        "plan": 9.055308455424953
       },
       "raw": {
         "deepswe": 51.0,
@@ -4116,47 +5729,47 @@
   "picks": {
     "api": {
       "value": {
-        "slug": "mimo-v2-6-flash",
+        "slug": "gpt-6-1-sol-xhigh",
         "label": "Best overall value",
-        "reason": "MiMo-V2.6-Flash has the highest overall score in the API ranking at 60.9, costing $60.37 per basket run. Subset cost: cross-workload ordering not identified.",
-        "score": 60.914714869668224,
+        "reason": "GPT-6.1 Sol (xhigh) has the highest overall score in the API ranking at 60.6, costing $827.23 per basket run.",
+        "score": 60.617743906409615,
         "unit": "overall"
       },
       "other": {
-        "slug": "claude-sonnet-5-5",
-        "label": "Best on a subscription",
-        "reason": "Claude Sonnet 5.5 ranks #1 on a subscription and #14 in the API ranking.",
-        "score": 61.134193057915695,
-        "unit": "overall on a subscription"
+        "slug": "gemini-4-argon",
+        "label": "Best quality, any cost",
+        "reason": "Gemini 4 Argon has the best quality score (65.3) before cost; it ranks #7 in the API ranking.",
+        "score": 65.29734733476938,
+        "unit": "quality"
       },
       "budget": {
-        "slug": "gpt-6-1-sol",
+        "slug": "gpt-6-1-sol-medium",
         "label": "Best on a budget",
-        "reason": "GPT-6.1 Sol scores best overall (58.1) among the cheapest third, at $1,267.66 per basket run.",
-        "score": 58.07643576777958,
+        "reason": "GPT-6.1 Sol (medium) scores best overall (60.0) among the cheapest third, at $531.56 per basket run.",
+        "score": 60.00267818617599,
         "unit": "overall"
       }
     },
     "plan": {
       "value": {
-        "slug": "claude-sonnet-5-5",
+        "slug": "gpt-6-1-sol-xhigh",
         "label": "Best overall value",
-        "reason": "Claude Sonnet 5.5 has the highest overall score in the Plan ranking at 61.1, costing $159.15 per basket run.",
-        "score": 61.134193057915695,
+        "reason": "GPT-6.1 Sol (xhigh) has the highest overall score in the Plan ranking at 60.9, costing $76.79 per basket run.",
+        "score": 60.93470411660212,
         "unit": "overall"
       },
       "other": {
-        "slug": "mimo-v2-6-flash",
-        "label": "Best at API rates",
-        "reason": "MiMo-V2.6-Flash ranks #1 at API rates and #11 in the Plan ranking. Subset cost: cross-workload ordering not identified.",
-        "score": 60.914714869668224,
-        "unit": "overall at API rates"
+        "slug": "gemini-4-argon",
+        "label": "Best quality, any cost",
+        "reason": "Gemini 4 Argon has the best quality score (65.3) before cost; it ranks #21 in the Plan ranking.",
+        "score": 65.29734733476938,
+        "unit": "quality"
       },
       "budget": {
-        "slug": "claude-opus-5-5",
+        "slug": "claude-sonnet-5-5-xhigh",
         "label": "Best on a budget",
-        "reason": "Claude Opus 5.5 scores best overall (60.9) among the cheapest third, at $169.60 per basket run.",
-        "score": 60.855387516654574,
+        "reason": "Claude Sonnet 5.5 (xhigh) scores best overall (58.8) among the cheapest third, at $48.15 per basket run.",
+        "score": 58.83840477301843,
         "unit": "overall"
       }
     }

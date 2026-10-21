@@ -7,12 +7,12 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5-5",
   "summary": {
     "rank": {
-      "api": 15,
-      "plan": 2
+      "api": 22,
+      "plan": 5
     },
     "overall": {
-      "api": 51.18247022569043,
-      "plan": 60.855387516654574
+      "api": 50.8851464221502,
+      "plan": 59.067500498201156
     },
     "quality": 64.19421567654852,
     "qualityRank": 5,
@@ -251,8 +251,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 12.147233873116166,
-      "plan": 50.838903036972745
+      "api": 10.95793865895523,
+      "plan": 43.68735496315907
     },
     "components": [
       {
@@ -432,8 +432,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0001,
-        "frontier": 0.1489
+        "top3": 0.0,
+        "frontier": 0.0773
       },
       {
         "stratum": "S1",
@@ -451,7 +451,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1204
+        "frontier": 0.0717
       }
     ],
     "plan": [
@@ -461,7 +461,7 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -478,7 +478,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.9996,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -586,8 +586,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 15,
-        "plan": 2
+        "api": 22,
+        "plan": 5
       }
     }
   ],

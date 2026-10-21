@@ -89,7 +89,7 @@ def test_catalogue_gives_every_page_a_key_and_its_boot_module(generated):
     from valuerank.site import viewmodel
 
     pages = {path: page for path, _template, page in build.pages(viewmodel.build_bundle())}
-    assert len(pages) == 44 and "/models/" in pages
+    assert len(pages) == 58 and "/models/" in pages
     assert pages["/"]["scripts"] == ["/assets/js/pages/index.js"]
     assert pages["/rankings/"]["scripts"] == ["/assets/js/pages/rankings.js"]
     assert pages["/benchmarks/terminal-bench-4/"]["scripts"] == ["/assets/js/pages/tb4.js"]
@@ -114,7 +114,7 @@ def test_pages_embed_the_data_the_scripts_read(generated):
         html = (generated / path).read_text()
         start = html.index('<script type="application/json" id="rankings-data">') + len('<script type="application/json" id="rankings-data">')
         payload = json.loads(html[start:html.index("</script>", start)])
-        assert payload["version"] == build.VERSION and len(payload["models"]) == 35
+        assert payload["version"] == build.VERSION and len(payload["models"]) == 49
 
 
 def test_stale_model_pages_are_removed_on_rebuild(tmp_path):
@@ -143,7 +143,7 @@ def test_module_entry_point_generates_into_a_copy(repo_copy, monkeypatch, capsys
         runpy.run_module("valuerank.site.build", run_name="__main__", alter_sys=True)
 
     assert exit_info.value.code == 0
-    assert json.loads(capsys.readouterr().out)["pages"] == 44
+    assert json.loads(capsys.readouterr().out)["pages"] == 58
     assert (repo_copy / "site" / "rankings" / "index.html").is_file()
 
 
@@ -155,8 +155,8 @@ def test_og_image_meta_points_each_generated_page_at_its_share_card(generated):
         assert meta_content(html, 'property="og:image"') == build.BASE_URL + card, path
         assert meta_content(html, 'name="twitter:image"') == build.BASE_URL + card, path
         cards.add(card)
-    # 9 core pages, one card per roster model (35) and the archive page.
-    assert len(cards) == 45
+    # 9 core pages, one card per roster model (49) and the archive page.
+    assert len(cards) == 59
 
 
 def test_share_cards_on_disk_are_exactly_the_ones_the_pages_reference():

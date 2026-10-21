@@ -340,7 +340,7 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     output, coverage = world.run()
     model = output["models"]["full"]
     metrics = model["metrics"]
-    assert model["displayName"] == "Mapped Full"
+    assert model["displayName"] == "Mapped Full" and model["family"] == "Mapped Full"  # family defaults to the name
     assert (model["aaSlug"], model["aaName"], model["aaShortName"], model["aaVariant"]) == ("full", "Full (Max)", "Full", "max")
     assert model["release"] == "2026-07" and model["isReasoning"] is True
     assert metrics["intelligenceIndex"] == 61.0
@@ -378,7 +378,7 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
 
 def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
     world.write(
-        mapping=[{"id": "haiku", "displayName": "Haiku", "aaSlug": "claude-haiku-5-5-xhigh", "aaVariant": "xhigh"}],
+        mapping=[{"id": "haiku", "displayName": "Haiku (xhigh)", "family": "Claude Haiku 5.5", "aaSlug": "claude-haiku-5-5-xhigh", "aaVariant": "xhigh"}],
         extract=[entry("haiku", slug="claude-haiku-5-5-xhigh")],
     )
     slug = "claude-haiku-5-5-xhigh"
@@ -389,6 +389,7 @@ def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
     model = output["models"]["haiku"]
     metrics = model["metrics"]
     assert (model["aaSlug"], model["aaName"], model["aaVariant"]) == (slug, "Claude Haiku 5.5 (Xhigh)", "xhigh")
+    assert (model["displayName"], model["family"]) == ("Haiku (xhigh)", "Claude Haiku 5.5")  # O33: a sibling's AA family
     assert model["release"] == {"slug": "claude-haiku-5-5", "name": "Claude Haiku 5.5", "deprecatedTo": None}
     assert metrics["intelligenceIndex"] == pytest.approx(41.2489304677024)
     assert metrics["aaEvalCost"] == pytest.approx(157.5758646895501)

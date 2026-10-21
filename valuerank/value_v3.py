@@ -361,14 +361,23 @@ def _summary_json(summary: q.QualitySummary) -> dict:
     }
 
 
-def cheaper_siblings(configuration: dict, page: dict, points: list[dict]) -> list[str]:
-    """E201: same-family configurations AA plots at a lower total Index cost; unevaluated (one configuration per family)."""
+def configuration_family(configuration: dict) -> str:
+    """The AA family of a ranked configuration (its chart points' family); the name for a record without one."""
+
+    return configuration.get("family") or configuration["name"]
+
+
+def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked_efforts: set | frozenset = frozenset()) -> list[str]:
+    """E201/O33: same-family configurations AA plots at a lower total Index cost that are not ranked (they lack an exact
+    DeepSWE or Bug Hunt result); ``ranked_efforts`` are the efforts of the family's ranked configurations."""
 
     total = (page.get("intelligenceIndexCost") or {}).get("total")
     if total is None:
         return []
+    family = configuration_family(configuration)
     return [point["model_name"] for point in points
-            if point.get("family") == configuration["name"] and point["total_cost_usd"] < total and point.get("effort") != configuration.get("effort")]
+            if point.get("family") == family and point["total_cost_usd"] < total
+            and point.get("effort") != configuration.get("effort") and point.get("effort") not in ranked_efforts]
 
 
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
@@ -385,6 +394,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     window = (documents["planRoutes"].get("evidencePolicy") or {}).get("reportingWindow")
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
+    # O33: several efforts of one family can be ranked; only unranked cheaper configurations are listed as unchecked.
+    ranked_efforts: dict[str, set] = {}
+    for configuration in configurations:
+        ranked_efforts.setdefault(configuration_family(configuration), set()).add(configuration.get("effort"))
     rows = []
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
@@ -420,7 +433,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "configurationMapped": model_id in mapping,
             "routeSelection": plan_routes.route_selection(candidates),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window),
-            "cheaperSiblings": cheaper_siblings(configuration, page, points),
+            "cheaperSiblings": cheaper_siblings(configuration, page, points, ranked_efforts[configuration_family(configuration)]),
         })
     ids = [row["id"] for row in rows]
     admission = basket.admission_panel({row["id"]: row["components"] for row in rows}, ids)
@@ -758,7 +771,7 @@ def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> l
             displayed = by_id[row_id]["summary"].displayed
             item["displayedMargin"] = None if displayed is None else displayed - bar["level"]
         if "possibleCheapest" in outcome:
-            # E201: cheaper plotted configurations of each candidate's family were not evaluated (one per family is ranked).
+            # E201/O33: cheaper plotted configurations of each candidate's family that are not ranked were not evaluated.
             outcome["uncheckedCheaperSiblings"] = {row_id: by_id[row_id].get("cheaperSiblings", []) for row_id in outcome["possibleCheapest"]}
         results.append({"reference": bar, **outcome})
     return results
@@ -1928,7 +1941,8 @@ def configuration(row: dict) -> dict:
     """A ranked score row's AA identity and whether it is ranked as a frontier or near-frontier family (E187)."""
 
     return {
-        "id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote"),
+        "id": row["id"], "name": row["name"], "family": row.get("family") or row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"],
+        "aaNote": row.get("aaFrontierFootnote"),
         "frontierFamily": any(reason != RETAINED_REASON for reason in row.get("rankingInclusionReasons") or []),
     }
 

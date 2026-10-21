@@ -73,10 +73,10 @@ def test_dimensions_are_cost_and_the_eleven_quality_leaves(bundle):
     assert all(d["sourceUrl"] for d in dims[1:]) and dims[0]["sourceUrl"] is None
 
 
-def test_roster_has_35_models_with_the_22_ranked_first(bundle, v3_rows):
+def test_roster_has_49_models_with_the_36_ranked_first(bundle, v3_rows):
     models = bundle.rankings["models"]
-    assert len(models) == 35 and sum(m["rankingEligible"] for m in models) == len(v3_rows) == 23
-    leading, trailing = models[:22], models[22:]
+    assert len(models) == 49 and sum(m["rankingEligible"] for m in models) == len(v3_rows) == 37
+    leading, trailing = models[:36], models[36:]
     assert all(m["rankingEligible"] and m["rank"]["plan"] is not None for m in leading)
     plan_ranks = [m["rank"]["plan"] for m in leading]
     assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1
@@ -115,7 +115,7 @@ def test_value_is_the_fixed_cost_share_rule_on_unrounded_inputs(bundle):
 
 def test_ranks_are_competition_ranks_on_unrounded_values(bundle):
     ranked = [m for m in bundle.rankings["models"] if m["rankingEligible"] and m["overall"]["plan"] is not None]
-    assert len(ranked) == 22
+    assert len(ranked) == 36
     for basis in ("api", "plan"):
         for model in ranked:
             assert model["rank"][basis] == 1 + sum(1 for other in ranked if other["overall"][basis] > model["overall"][basis])
@@ -159,14 +159,16 @@ def test_picks_reference_ranked_models_with_plain_reasons(bundle):
         for pick in picks.values():
             assert models[pick["slug"]]["rankingEligible"] and len(pick["reason"].split()) < 25
         assert "per basket run" in picks["value"]["reason"]
-    assert bundle.rankings["picks"]["api"]["value"]["reason"].endswith("Subset cost: cross-workload ordering not identified.")
+    # O33: an evidenced sibling effort is a configuration of its own and can be a pick.
+    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "gpt-6-1-sol-xhigh"
+    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("GPT-6.1 Sol (xhigh) has the highest overall score")
 
 
 # --- per-model documents -------------------------------------------------------------------------
 
 
 def test_model_documents_cover_the_roster(bundle):
-    assert set(bundle.models) == {m["slug"] for m in bundle.rankings["models"]} and len(bundle.models) == 35
+    assert set(bundle.models) == {m["slug"] for m in bundle.rankings["models"]} and len(bundle.models) == 49
 
 
 def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
@@ -189,7 +191,8 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     for plan in doc["plans"]:
         assert plan["usdPerRun"] == pytest.approx(doc["cost"]["apiUsd"] / plan["valueMultiple"]) and plan["case"] in (2, 3, "identified")
     assert doc["scenarios"]["status"] == "current" and {run["stratum"] for run in doc["scenarios"]["api"]} == {"S0", "S1", "S2", "S1M"}
-    assert doc["intervals"]["api"]["definite"] == "certified"
+    # O33: GPT-6.1 Sol (xhigh), now ranked, can beat the max row on both cost and quality, so max is no longer definite.
+    assert doc["intervals"]["api"] == {"definite": "disproved", "possible": "certified"}
 
 
 def test_unranked_and_subset_documents(bundle):
@@ -234,7 +237,7 @@ def test_model_history_and_frontier_notes(bundle):
 
 def test_plans_document(bundle, v3):
     plans = bundle.plans
-    assert plans["asOf"] == "2026-10-08" and len(plans["routes"]) == 14 and len(plans["candidates"]) == 23
+    assert plans["asOf"] == "2026-10-08" and len(plans["routes"]) == 14 and len(plans["candidates"]) == 37
     assert plans["identificationYield"] == v3["identificationYield"]
     route = next(r for r in plans["routes"] if r["id"] == "claude-pro-opus55-semianalysis")
     assert route["grade"] == "measured" and route["modelSlugs"] == ["claude-opus-5-5"] and route["valueMultiple"] == 58.9
@@ -249,7 +252,7 @@ def test_benchmarks_document(bundle, v3):
     doc = bundle.benchmarks
     assert [s["id"] for s in doc["sources"]] == [leaf.key for leaf in q.LEAVES]
     deepswe = next(s for s in doc["sources"] if s["id"] == "deepswe")
-    assert deepswe["weightPct"] == 22.5 and deepswe["coverage"] == {"available": 21, "cohort": 23} and deepswe["execution"] == "AA-run"
+    assert deepswe["weightPct"] == 22.5 and deepswe["coverage"] == {"available": 35, "cohort": 37} and deepswe["execution"] == "AA-run"
     assert next(s for s in doc["sources"] if s["id"] == "bugHunt")["execution"] == "independent"
     assert next(s for s in doc["sources"] if s["id"] == "omniscience")["notes"].startswith("Scored as AA's Omniscience Index")
     assert [c["key"] for c in doc["basket"]["admitted"]] == v3["admission"]["admitted"]
@@ -263,14 +266,17 @@ def test_benchmarks_document(bundle, v3):
 def test_tb4_document(bundle, data):
     tb4 = json.loads((data / "tb4.json").read_text())
     doc = bundle.tb4
-    assert doc["rows"] == tb4["rows"] and doc["frontierCount"] >= 1 and len(doc["cohortMapping"]) == 35
+    assert doc["rows"] == tb4["rows"] and doc["frontierCount"] >= 1 and len(doc["cohortMapping"]) == 49
     assert doc["cohortMapping"]["deepseek-v4-flash"]["status"] == "provider_claim"
     assert doc["cohortMapping"]["claude-opus-5"]["status"] == "official"
+    # O33: the exact Muse Spark 1.3 (xhigh) row belongs to that effort only.
+    assert doc["cohortMapping"]["muse-spark-1-3-xhigh"]["evaluatedModel"] == "Muse Spark 1.3 (xhigh)"
+    assert doc["cohortMapping"]["muse-spark-1-3"]["status"] == "missing"
 
 
 def test_changelog_document(bundle):
     versions = bundle.changelog["versions"]
-    assert versions[0]["version"] == VERSION and versions[0]["models"] == 23 and versions[0]["dimensions"] == 12
+    assert versions[0]["version"] == VERSION and versions[0]["models"] == 37 and versions[0]["dimensions"] == 12
     assert versions[-1]["version"] == "v1.5.0" and versions[-1]["rankChanges"] == []
 
 
@@ -279,11 +285,11 @@ def test_changelog_document(bundle):
 
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
-    assert page["headline"]["api"] == "MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Muse Wonder Full leads on quality."
-    assert page["headline"]["plan"] == "Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); Muse Wonder Full leads on quality."
+    assert page["headline"]["api"] == "GPT-6.1 Sol (xhigh) leads the API ranking at 60.6; Muse Wonder Full leads on quality."
+    assert page["headline"]["plan"] == "GPT-6.1 Sol (xhigh) leads the Plan ranking at 60.9 (owner-named transfer); Muse Wonder Full leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
-    assert len(page["models"]) == 23 and page["dimensions"] == bundle.rankings["dimensions"]
-    assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 22  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
+    assert len(page["models"]) == 37 and page["dimensions"] == bundle.rankings["dimensions"]
+    assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 36  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
     assert page["chart"]["api"][0]["costLabel"].endswith("per basket run")
 
 
@@ -293,7 +299,7 @@ def test_rankings_and_models_pages(bundle):
     assert [c["key"] for c in page["columns"] if c["default"]] == ["rank", "name", "overall", "quality", "cost", "grade", "coverage"]
     assert {c["key"] for c in page["columns"]} >= {leaf.key for leaf in q.LEAVES}
     models = viewmodel.models_page(bundle)
-    assert models["rankedCount"] == 23 and models["unrankedCount"] == 12
+    assert models["rankedCount"] == 37 and models["unrankedCount"] == 12
 
 
 def test_model_page(bundle):
@@ -320,7 +326,7 @@ def test_benchmark_pages_wrap_their_documents(bundle):
 def test_methodology_page(bundle, v3):
     page = viewmodel.methodology_page(bundle)
     method = page["method"]
-    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 58.3 (the displayed quality of GPT-6 Sol at freeze)"
+    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 56.7 (the displayed quality of Grok 4.7 at freeze)"
     assert method["anchors"]["api"]["low"] == v3["workloads"][v3["mainWorkload"]]["anchors"]["api"]["low"]
     assert method["streamDescriptions"]["S0"] == "published-record reporting precision" and method["notQuantified"]
     example = page["workedExample"]
@@ -349,7 +355,7 @@ def test_export_writes_every_public_file_deterministically(data, tmp_path):
     first = export.export_public_data(data, tmp_path / "one")
     second = export.export_public_data(data, tmp_path / "two")
     relative = sorted(p.relative_to(tmp_path / "one").as_posix() for p in first)
-    assert len(first) == 41 and "plans.json" in relative  # 6 site documents and 35 model documents and "rankings.json" in relative
+    assert len(first) == 55 and "plans.json" in relative  # 6 site documents and 49 model documents and "rankings.json" in relative
     for left, right in zip(sorted(first), sorted(second)):
         assert left.read_bytes() == right.read_bytes()
     text = (tmp_path / "one" / "rankings.json").read_text()

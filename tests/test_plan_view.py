@@ -44,6 +44,6 @@ def test_readme_prices_each_configuration_per_basket_run_on_both_bases(repo_copy
     rows = {row["id"]: row for row in json.loads((repo_copy / "data" / "scores.json").read_text())["v3"]["rows"]}
 
     assert "| Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags |" in readme
-    sol_row = next(line for line in readme.splitlines() if line.startswith("| 3 | 2 | [GPT-6.1 Sol (max)]"))
+    sol_row = next(line for line in readme.splitlines() if line.startswith("| 8 | 6 | [GPT-6.1 Sol (max)]"))
     assert f"| ${rows['gpt-6.1-sol']['api']['costUsd']:,.2f} | ${rows['gpt-6.1-sol']['api']['costUsd'] / 10.772:,.2f} |" in sol_row
     assert "divides the basket's API cost by the selected subscription route's Value Multiple" in readme

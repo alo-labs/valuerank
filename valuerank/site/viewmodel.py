@@ -884,7 +884,7 @@ FAQ_TEMPLATE = (
     ("What happens when a benchmark has no result for a model?", "The leaf stays missing: quality is averaged over the leaves observed for that exact configuration, nothing is filled in, and the coverage and any provisional flag are shown. A configuration without a cost gets no value score."),
     ("What is the difference between the API ranking and the Plan ranking?", "Both price the same SDLC basket. The API ranking uses Artificial Analysis' cost at API rates. The Plan ranking divides it by the selected subscription route's Value Multiple, the API-priced usage a plan delivers per dollar of fee at full utilisation; a model without an admitted route falls back to API cost, flagged."),
     ("What do the evidence grades mean?", "Measured values come from the benchmark owner or a controlled account measurement. Estimates are concordant end-user reports, and assumptions are owner-authorised transfers of one model's measured multiple to another."),
-    ("Why is a model not ranked?", "The ranked cohort is fixed policy: configurations on Artificial Analysis' Intelligence-versus-cost frontier or near it. Other models still have pages with what we hold."),
+    ("Why is a model not ranked?", "The ranked cohort is fixed policy: configurations on Artificial Analysis' Intelligence-versus-cost frontier or near it, and every configuration with exact DeepSWE and Bug Hunt results, each effort as its own row. Other models still have pages with what we hold."),
 )
 
 LIMITATIONS = (

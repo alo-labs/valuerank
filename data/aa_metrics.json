@@ -1,7 +1,7 @@
 {
   "schemaVersion": "v1.6",
   "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
-  "observedAt": "2026-10-21T06:07:28Z",
+  "observedAt": "2026-10-21T05:24:16Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
   "primaryEvaluations": [
@@ -95,6 +95,7 @@
     "gpt-6-astra": {
       "id": "gpt-6-astra",
       "displayName": "GPT-6 Astra",
+      "family": "GPT-6 Astra",
       "aaSlug": "gpt-6-astra",
       "aaName": "GPT-6 Astra (Max)",
       "aaShortName": "GPT-6 Astra (max)",
@@ -263,6 +264,7 @@
     "gemini-3.8-flash": {
       "id": "gemini-3.8-flash",
       "displayName": "Gemini 3.8 Flash",
+      "family": "Gemini 3.8 Flash",
       "aaSlug": "gemini-3-8-flash",
       "aaName": "Gemini 3.8 Flash (High)",
       "aaShortName": "Gemini 3.8 Flash (high)",
@@ -431,6 +433,7 @@
     "claude-opus-5": {
       "id": "claude-opus-5",
       "displayName": "Claude Opus 5",
+      "family": "Claude Opus 5",
       "aaSlug": "claude-opus-5",
       "aaName": "Claude Opus 5 (Max)",
       "aaShortName": "Claude Opus 5 (max)",
@@ -599,6 +602,7 @@
     "gpt-5.6-sol": {
       "id": "gpt-5.6-sol",
       "displayName": "GPT-5.6 Sol",
+      "family": "GPT-5.6 Sol",
       "aaSlug": "gpt-5-6-sol",
       "aaName": "GPT-5.6 Sol (Max)",
       "aaShortName": "GPT-5.6 Sol (max)",
@@ -767,6 +771,7 @@
     "claude-fable-5": {
       "id": "claude-fable-5",
       "displayName": "Claude Fable 5",
+      "family": "Claude Fable 5",
       "aaSlug": "claude-fable-5",
       "aaName": "Claude Fable 5 (Max, Opus 4.8 Fallback)",
       "aaShortName": "Claude Fable 5 (with fallback)",
@@ -935,6 +940,7 @@
     "glm-5.3": {
       "id": "glm-5.3",
       "displayName": "GLM-5.3",
+      "family": "GLM-5.3",
       "aaSlug": "glm-5-3",
       "aaName": "GLM-5.3 (Max)",
       "aaShortName": "GLM-5.3 (max)",
@@ -1103,6 +1109,7 @@
     "kimi-k3": {
       "id": "kimi-k3",
       "displayName": "Kimi K3",
+      "family": "Kimi K3",
       "aaSlug": "kimi-k3",
       "aaName": "Kimi K3 (Max)",
       "aaShortName": "Kimi K3 (max)",
@@ -1271,6 +1278,7 @@
     "grok-4.6": {
       "id": "grok-4.6",
       "displayName": "Grok 4.6",
+      "family": "Grok 4.6",
       "aaSlug": "grok-4-6-medium",
       "aaName": "Grok 4.6 (Medium)",
       "aaShortName": "Grok 4.6 (medium)",
@@ -1439,6 +1447,7 @@
     "gpt-5.6-luna": {
       "id": "gpt-5.6-luna",
       "displayName": "GPT-5.6 Luna",
+      "family": "GPT-5.6 Luna",
       "aaSlug": "gpt-5-6-luna",
       "aaName": "GPT-5.6 Luna (Max)",
       "aaShortName": "GPT-5.6 Luna (max)",
@@ -1607,6 +1616,7 @@
     "gpt-5.5": {
       "id": "gpt-5.5",
       "displayName": "GPT-5.5",
+      "family": "GPT-5.5",
       "aaSlug": "gpt-5-5",
       "aaName": "GPT-5.5 (Xhigh)",
       "aaShortName": "GPT-5.5 (xhigh)",
@@ -1775,6 +1785,7 @@
     "gemini-3.7-flash": {
       "id": "gemini-3.7-flash",
       "displayName": "Gemini 3.7 Flash",
+      "family": "Gemini 3.7 Flash",
       "aaSlug": "gemini-3-7-flash-medium",
       "aaName": "Gemini 3.7 Flash (Medium)",
       "aaShortName": "Gemini 3.7 Flash (medium)",
@@ -1947,6 +1958,7 @@
     "glm-5.3-flash": {
       "id": "glm-5.3-flash",
       "displayName": "GLM-5.3 Flash",
+      "family": "GLM-5.3 Flash",
       "aaSlug": "glm-5-3-flash",
       "aaName": "GLM-5.3-Flash",
       "aaShortName": "GLM-5.3-Flash",
@@ -2115,6 +2127,7 @@
     "deepseek-v4-pro": {
       "id": "deepseek-v4-pro",
       "displayName": "DeepSeek V4 Pro",
+      "family": "DeepSeek V4 Pro",
       "aaSlug": "deepseek-v4-pro",
       "aaName": "DeepSeek V4 Pro 0813 (Max)",
       "aaShortName": "DeepSeek V4 Pro 0813 (max)",
@@ -2283,6 +2296,7 @@
     "claude-opus-4.8": {
       "id": "claude-opus-4.8",
       "displayName": "Claude Opus 4.8",
+      "family": "Claude Opus 4.8",
       "aaSlug": "claude-opus-4-8",
       "aaName": "Claude Opus 4.8 (Max)",
       "aaShortName": "Claude Opus 4.8 (max)",
@@ -2451,6 +2465,7 @@
     "qwen3.8-max": {
       "id": "qwen3.8-max",
       "displayName": "Qwen3.8 Max",
+      "family": "Qwen3.8 Max",
       "aaSlug": "qwen3-8-max",
       "aaName": "Qwen3.8 Max (0902)",
       "aaShortName": "Qwen3.8 Max (0902)",
@@ -2619,6 +2634,7 @@
     "muse-spark-1.2": {
       "id": "muse-spark-1.2",
       "displayName": "Muse Spark 1.2",
+      "family": "Muse Spark 1.2",
       "aaSlug": "muse-spark-1-2",
       "aaName": "Muse Spark 1.2 (Xhigh)",
       "aaShortName": "Muse Spark 1.2 (xhigh)",
@@ -2787,6 +2803,7 @@
     "claude-sonnet-5": {
       "id": "claude-sonnet-5",
       "displayName": "Claude Sonnet 5",
+      "family": "Claude Sonnet 5",
       "aaSlug": "claude-sonnet-5",
       "aaName": "Claude Sonnet 5 (Max)",
       "aaShortName": "Claude Sonnet 5 (max)",
@@ -2955,6 +2972,7 @@
     "deepseek-v4-flash": {
       "id": "deepseek-v4-flash",
       "displayName": "DeepSeek V4 Flash",
+      "family": "DeepSeek V4 Flash",
       "aaSlug": "deepseek-v4-flash",
       "aaName": "DeepSeek V4 Flash 0731 (Max)",
       "aaShortName": "DeepSeek V4 Flash 0731 (max)",
@@ -3143,6 +3161,7 @@
     "gemini-3.6-flash": {
       "id": "gemini-3.6-flash",
       "displayName": "Gemini 3.6 Flash",
+      "family": "Gemini 3.6 Flash",
       "aaSlug": "gemini-3-6-flash",
       "aaName": "Gemini 3.6 Flash (High)",
       "aaShortName": "Gemini 3.6 Flash (high)",
@@ -3311,6 +3330,7 @@
     "glm-5.2": {
       "id": "glm-5.2",
       "displayName": "GLM-5.2",
+      "family": "GLM-5.2",
       "aaSlug": "glm-5-2",
       "aaName": "GLM-5.2 (Max)",
       "aaShortName": "GLM-5.2 (max)",
@@ -3479,6 +3499,7 @@
     "gemini-3.5-flash": {
       "id": "gemini-3.5-flash",
       "displayName": "Gemini 3.5 Flash",
+      "family": "Gemini 3.5 Flash",
       "aaSlug": "gemini-3-5-flash",
       "aaName": "Gemini 3.5 Flash (High)",
       "aaShortName": "Gemini 3.5 Flash (high)",
@@ -3647,6 +3668,7 @@
     "claude-opus-5-5": {
       "id": "claude-opus-5-5",
       "displayName": "Claude Opus 5.5",
+      "family": "Claude Opus 5.5",
       "aaSlug": "claude-opus-5-5",
       "aaName": "Claude Opus 5.5 (Max, Default Fallback)",
       "aaShortName": "Claude Opus 5.5 (max with fallback)",
@@ -3809,6 +3831,7 @@
     "gpt-6-sol": {
       "id": "gpt-6-sol",
       "displayName": "GPT-6 Sol",
+      "family": "GPT-6 Sol",
       "aaSlug": "gpt-6-sol",
       "aaName": "GPT-6 Sol (Max)",
       "aaShortName": "GPT-6 Sol (max)",
@@ -3971,6 +3994,7 @@
     "gpt-6.1-sol": {
       "id": "gpt-6.1-sol",
       "displayName": "GPT-6.1 Sol",
+      "family": "GPT-6.1 Sol",
       "aaSlug": "gpt-6-1-sol",
       "aaName": "GPT-6.1 Sol (Max)",
       "aaShortName": "GPT-6.1 Sol (max)",
@@ -4133,6 +4157,7 @@
     "gpt-6-luna": {
       "id": "gpt-6-luna",
       "displayName": "GPT-6 Luna",
+      "family": "GPT-6 Luna",
       "aaSlug": "gpt-6-luna",
       "aaName": "GPT-6 Luna (Max)",
       "aaShortName": "GPT-6 Luna (max)",
@@ -4295,6 +4320,7 @@
     "grok-4.7": {
       "id": "grok-4.7",
       "displayName": "Grok 4.7",
+      "family": "Grok 4.7",
       "aaSlug": "grok-4-7",
       "aaName": "Grok 4.7 (Xhigh)",
       "aaShortName": "Grok 4.7 (xhigh)",
@@ -4457,6 +4483,7 @@
     "mimo-v2-6-pro": {
       "id": "mimo-v2-6-pro",
       "displayName": "MiMo-V2.6-Pro",
+      "family": "MiMo-V2.6-Pro",
       "aaSlug": "mimo-v2-6-pro",
       "aaName": "MiMo-V2.6-Pro",
       "aaShortName": "MiMo-V2.6-Pro",
@@ -4637,6 +4664,7 @@
     "mimo-v2-6-flash": {
       "id": "mimo-v2-6-flash",
       "displayName": "MiMo-V2.6-Flash",
+      "family": "MiMo-V2.6-Flash",
       "aaSlug": "mimo-v2-6-flash",
       "aaName": "MiMo-V2.6-Flash",
       "aaShortName": "MiMo-V2.6-Flash",
@@ -4817,6 +4845,7 @@
     "claude-haiku-5-5": {
       "id": "claude-haiku-5-5",
       "displayName": "Claude Haiku 5.5",
+      "family": "Claude Haiku 5.5",
       "aaSlug": "claude-haiku-5-5-xhigh",
       "aaName": "Claude Haiku 5.5 (Xhigh)",
       "aaShortName": "Claude Haiku 5.5 (xhigh)",
@@ -4979,6 +5008,7 @@
     "claude-sonnet-5-5": {
       "id": "claude-sonnet-5-5",
       "displayName": "Claude Sonnet 5.5",
+      "family": "Claude Sonnet 5.5",
       "aaSlug": "claude-sonnet-5-5",
       "aaName": "Claude Sonnet 5.5 (Max, Default Fallback)",
       "aaShortName": "Claude Sonnet 5.5 (max with fallback)",
@@ -5141,6 +5171,7 @@
     "gemini-4-argon": {
       "id": "gemini-4-argon",
       "displayName": "Gemini 4 Argon",
+      "family": "Gemini 4 Argon",
       "aaSlug": "gemini-4-argon",
       "aaName": "Gemini 4 Argon (High)",
       "aaShortName": "Gemini 4 Argon (high)",
@@ -5297,6 +5328,7 @@
     "claude-fable-5-1": {
       "id": "claude-fable-5-1",
       "displayName": "Claude Fable 5.1",
+      "family": "Claude Fable 5.1",
       "aaSlug": "claude-fable-5-1",
       "aaName": "Claude Fable 5.1 (Max, Default Fallback)",
       "aaShortName": "Claude Fable 5.1 (max with fallback)",
@@ -5465,6 +5497,7 @@
     "muse-spark-1-3": {
       "id": "muse-spark-1-3",
       "displayName": "Muse Spark 1.3",
+      "family": "Muse Spark 1.3",
       "aaSlug": "muse-spark-1-3",
       "aaName": "Muse Spark 1.3 (Max)",
       "aaShortName": "Muse Spark 1.3 (max)",
@@ -5633,6 +5666,7 @@
     "muse-wonder": {
       "id": "muse-wonder",
       "displayName": "Muse Wonder",
+      "family": "Muse Wonder",
       "aaSlug": "muse-wonder",
       "aaName": "Muse Wonder (Max)",
       "aaShortName": "Muse Wonder (max)",
@@ -5795,6 +5829,7 @@
     "muse-wonder-full": {
       "id": "muse-wonder-full",
       "displayName": "Muse Wonder Full",
+      "family": "Muse Wonder Full",
       "aaSlug": "muse-wonder-full",
       "aaName": "Muse Wonder Full (Max)",
       "aaShortName": "Muse Wonder Full (max)",
@@ -5939,6 +5974,2300 @@
         "precision": null,
         "note": "Added by owner decision O31 (2026-10-21): retention is checked over every model in AA's selected catalog with both an exact AA DeepSWE result and a matched exact Bug Hunt result; captured separately from the rest of the snapshot.",
         "responseSha256": "c09429a48b3f93d5d8255656b298bd20847b0b2f9c940064f88f3795f62ccf0b",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "gpt-6.1-sol-xhigh": {
+      "id": "gpt-6.1-sol-xhigh",
+      "displayName": "GPT-6.1 Sol (xhigh)",
+      "family": "GPT-6.1 Sol",
+      "aaSlug": "gpt-6-1-sol-xhigh",
+      "aaName": "GPT-6.1 Sol (Xhigh)",
+      "aaShortName": "GPT-6.1 Sol (xhigh)",
+      "aaVariant": "xhigh",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+      "release": {
+        "slug": "gpt-6-1-sol",
+        "name": "GPT-6.1 Sol",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.5017999999999999,
+        "gdpvalV21Normalized": 0.519025,
+        "briefcaseElo": 1503.6,
+        "intelligenceIndex": 51.0377679093761,
+        "gdpvalV21": 1538.05,
+        "automationBenchAA": 0.6657372141364344,
+        "terminalBenchV40": 0.54040404040404,
+        "scicode": 0.556712962962963,
+        "gdpPdfAllPass": 0.318,
+        "aaLcr": 0.796666666666667,
+        "hle": 0.526413345690454,
+        "gpqaDiamond": null,
+        "critpt": 0.317142857142857,
+        "omniAccuracy": 0.6081666666666666,
+        "omniNonHallucination": 0.49085495533815393,
+        "aaEvalCost": 662.2797575003286,
+        "speed": 49.984900015628
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.355555555555556,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": 0.850867052023121,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6657372141364344,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.5161616161616162,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1503.6
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:36Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "e0b95c06b70ea7641f8d7586de7aeb92a3d40ed9cf0055f2829eaeeba34eaa12",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "gpt-6.1-sol-high": {
+      "id": "gpt-6.1-sol-high",
+      "displayName": "GPT-6.1 Sol (high)",
+      "family": "GPT-6.1 Sol",
+      "aaSlug": "gpt-6-1-sol-high",
+      "aaName": "GPT-6.1 Sol (High)",
+      "aaShortName": "GPT-6.1 Sol (high)",
+      "aaVariant": "high",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+      "release": {
+        "slug": "gpt-6-1-sol",
+        "name": "GPT-6.1 Sol",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.482625,
+        "gdpvalV21Normalized": 0.505675,
+        "briefcaseElo": 1465.25,
+        "intelligenceIndex": 50.2377777519769,
+        "gdpvalV21": 1511.35,
+        "automationBenchAA": 0.6449523732184466,
+        "terminalBenchV40": 0.515151515151515,
+        "scicode": 0.55787037037037,
+        "gdpPdfAllPass": 0.32,
+        "aaLcr": 0.823333333333333,
+        "hle": 0.513901760889713,
+        "gpqaDiamond": null,
+        "critpt": 0.3,
+        "omniAccuracy": 0.608,
+        "omniNonHallucination": 0.5063775510204082,
+        "aaEvalCost": 521.3175499431111,
+        "speed": 47.8118000562256
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+          "observedAt": "2026-10-21T07:21:36Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.316666666666667,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": 0.849132947976879,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6449523732184466,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.4909090909090909,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1465.25
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:36Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "5e0283946ddc24736241a268ec832feb4bbf11dd42bb26923c3912904ca775f3",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "gpt-6.1-sol-medium": {
+      "id": "gpt-6.1-sol-medium",
+      "displayName": "GPT-6.1 Sol (medium)",
+      "family": "GPT-6.1 Sol",
+      "aaSlug": "gpt-6-1-sol-medium",
+      "aaName": "GPT-6.1 Sol (Medium)",
+      "aaShortName": "GPT-6.1 Sol (medium)",
+      "aaVariant": "medium",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+      "release": {
+        "slug": "gpt-6-1-sol",
+        "name": "GPT-6.1 Sol",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.43058,
+        "gdpvalV21Normalized": 0.47505,
+        "briefcaseElo": 1361.16,
+        "intelligenceIndex": 47.7833271274065,
+        "gdpvalV21": 1450.1,
+        "automationBenchAA": 0.6257350970435687,
+        "terminalBenchV40": 0.47979797979798,
+        "scicode": 0.532407407407407,
+        "gdpPdfAllPass": 0.3,
+        "aaLcr": 0.833333333333333,
+        "hle": 0.498609823911029,
+        "gpqaDiamond": null,
+        "critpt": 0.277142857142857,
+        "omniAccuracy": 0.604,
+        "omniNonHallucination": 0.48358585858585856,
+        "aaEvalCost": 361.36843723681613,
+        "speed": 45.5119827016729
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+          "observedAt": "2026-10-21T07:21:37Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.322222222222222,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": 0.839306358381503,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6257350970435687,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.4404040404040404,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1361.16
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:37Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "42dfaf100bcd633a3cc5bfe136c7db04a14af7e3d5c730395f5fc4d7559e86c9",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "gpt-6.1-sol-low": {
+      "id": "gpt-6.1-sol-low",
+      "displayName": "GPT-6.1 Sol (low)",
+      "family": "GPT-6.1 Sol",
+      "aaSlug": "gpt-6-1-sol-low",
+      "aaName": "GPT-6.1 Sol (Low)",
+      "aaShortName": "GPT-6.1 Sol (low)",
+      "aaVariant": "low",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+      "release": {
+        "slug": "gpt-6-1-sol",
+        "name": "GPT-6.1 Sol",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.30837,
+        "gdpvalV21Normalized": 0.40733500000000006,
+        "briefcaseElo": 1116.74,
+        "intelligenceIndex": 42.0835618555848,
+        "gdpvalV21": 1314.67,
+        "automationBenchAA": 0.5257088964747538,
+        "terminalBenchV40": 0.308080808080808,
+        "scicode": 0.532407407407407,
+        "gdpPdfAllPass": 0.27,
+        "aaLcr": 0.84,
+        "hle": 0.473586654309546,
+        "gpqaDiamond": null,
+        "critpt": 0.248571428571429,
+        "omniAccuracy": 0.5886666666666667,
+        "omniNonHallucination": 0.48379254457050247,
+        "aaEvalCost": 250.4765467783383,
+        "speed": 43.0685501204559
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+          "observedAt": "2026-10-21T07:21:38Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.266666666666667,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": 0.83121387283237,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.5257088964747538,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.3333333333333333,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1116.74
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:38Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "112973c437a4e82bfc575488af49765ead1635ebc0cdf54ad31b0bfd0aa4578a",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-haiku-5-5-max": {
+      "id": "claude-haiku-5-5-max",
+      "displayName": "Claude Haiku 5.5 (max)",
+      "family": "Claude Haiku 5.5",
+      "aaSlug": "claude-haiku-5-5",
+      "aaName": "Claude Haiku 5.5 (Max)",
+      "aaShortName": "Claude Haiku 5.5 (max)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+      "release": {
+        "slug": "claude-haiku-5-5",
+        "name": "Claude Haiku 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.5384249999999999,
+        "gdpvalV21Normalized": 0.5591649999999999,
+        "briefcaseElo": 1576.85,
+        "intelligenceIndex": 43.3950199670746,
+        "gdpvalV21": 1618.33,
+        "automationBenchAA": 0.35411015132783624,
+        "terminalBenchV40": 0.328282828282828,
+        "scicode": 0.549768518518518,
+        "gdpPdfAllPass": 0.208,
+        "aaLcr": 0.826666666666667,
+        "hle": 0.443929564411492,
+        "gpqaDiamond": null,
+        "critpt": 0.188571428571429,
+        "omniAccuracy": 0.36383333333333334,
+        "omniNonHallucination": 0.5957558291852241,
+        "aaEvalCost": 330.2539429478554,
+        "speed": 235.9744787533
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.35,
+        "harveyLab": 0.005555555555555555,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": 0.5375,
+        "automationBenchPartialScore": 0.35411015132783624,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.5232323232323233,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1576.85
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:39Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "1323041f33faa395a7cfd79b7e1052be8b2c48cd8ee7a0585c07a04cf00db84c",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-haiku-5-5-high": {
+      "id": "claude-haiku-5-5-high",
+      "displayName": "Claude Haiku 5.5 (high)",
+      "family": "Claude Haiku 5.5",
+      "aaSlug": "claude-haiku-5-5-high",
+      "aaName": "Claude Haiku 5.5 (High)",
+      "aaShortName": "Claude Haiku 5.5 (high)",
+      "aaVariant": "high",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+      "release": {
+        "slug": "claude-haiku-5-5",
+        "name": "Claude Haiku 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.47133500000000006,
+        "gdpvalV21Normalized": 0.458775,
+        "briefcaseElo": 1442.67,
+        "intelligenceIndex": 37.8240211671094,
+        "gdpvalV21": 1417.55,
+        "automationBenchAA": 0.3372685311767238,
+        "terminalBenchV40": 0.217171717171717,
+        "scicode": 0.487268518518519,
+        "gdpPdfAllPass": 0.172,
+        "aaLcr": 0.773333333333333,
+        "hle": 0.3725671918443,
+        "gpqaDiamond": null,
+        "critpt": 0.185714285714286,
+        "omniAccuracy": 0.3478333333333333,
+        "omniNonHallucination": 0.5548172757475083,
+        "aaEvalCost": 94.06688065451641,
+        "speed": 179.433325369244
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "observedAt": "2026-10-21T07:21:39Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.15,
+        "harveyLab": 0.01111111111111111,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.3372685311767238,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.4696969696969697,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1442.67
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:39Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "c560938b1ebf1e8b05913d6f0c1b972a6c1551213e84d357b3eee6f7ad856019",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-haiku-5-5-medium": {
+      "id": "claude-haiku-5-5-medium",
+      "displayName": "Claude Haiku 5.5 (medium)",
+      "family": "Claude Haiku 5.5",
+      "aaSlug": "claude-haiku-5-5-medium",
+      "aaName": "Claude Haiku 5.5 (Medium)",
+      "aaShortName": "Claude Haiku 5.5 (medium)",
+      "aaVariant": "medium",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+      "release": {
+        "slug": "claude-haiku-5-5",
+        "name": "Claude Haiku 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.43577,
+        "gdpvalV21Normalized": 0.38725,
+        "briefcaseElo": 1371.54,
+        "intelligenceIndex": 34.4646519474657,
+        "gdpvalV21": 1274.5,
+        "automationBenchAA": 0.2858961481429316,
+        "terminalBenchV40": 0.151515151515152,
+        "scicode": 0.489583333333333,
+        "gdpPdfAllPass": 0.152,
+        "aaLcr": 0.773333333333333,
+        "hle": 0.337812789620019,
+        "gpqaDiamond": null,
+        "critpt": 0.128571428571429,
+        "omniAccuracy": 0.3403333333333333,
+        "omniNonHallucination": 0.5517938352703385,
+        "aaEvalCost": 56.359270851851434,
+        "speed": 177.838410437741
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.161111111111111,
+        "harveyLab": 0.005555555555555555,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.2858961481429316,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.4494949494949495,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1371.54
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:40Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "d2a1cd4bb846a143bf30e7f20cf7ca76202430fd71f52a982903e72c42f2f8a3",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-haiku-5-5-low": {
+      "id": "claude-haiku-5-5-low",
+      "displayName": "Claude Haiku 5.5 (low)",
+      "family": "Claude Haiku 5.5",
+      "aaSlug": "claude-haiku-5-5-low",
+      "aaName": "Claude Haiku 5.5 (Low)",
+      "aaShortName": "Claude Haiku 5.5 (low)",
+      "aaVariant": "low",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+      "release": {
+        "slug": "claude-haiku-5-5",
+        "name": "Claude Haiku 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.30584000000000006,
+        "gdpvalV21Normalized": 0.31140999999999996,
+        "briefcaseElo": 1111.68,
+        "intelligenceIndex": 29.4523685891139,
+        "gdpvalV21": 1122.82,
+        "automationBenchAA": 0.22910812181110643,
+        "terminalBenchV40": 0.126262626262626,
+        "scicode": 0.491898148148148,
+        "gdpPdfAllPass": 0.112,
+        "aaLcr": 0.72,
+        "hle": 0.270157553290083,
+        "gpqaDiamond": null,
+        "critpt": 0.0914285714285714,
+        "omniAccuracy": 0.3325,
+        "omniNonHallucination": 0.550561797752809,
+        "aaEvalCost": 34.30614811843952,
+        "speed": 171.346235560927
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+          "observedAt": "2026-10-21T07:21:40Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.122222222222222,
+        "harveyLab": 0.016666666666666666,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.22910812181110643,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.3383838383838384,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1111.68
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:40Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "81f2dc96cafb14dbe88c36004312530651b826db0a80f09b4d9c8313305b3309",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-sonnet-5-5-xhigh": {
+      "id": "claude-sonnet-5-5-xhigh",
+      "displayName": "Claude Sonnet 5.5 (xhigh)",
+      "family": "Claude Sonnet 5.5",
+      "aaSlug": "claude-sonnet-5-5-xhigh",
+      "aaName": "Claude Sonnet 5.5 (Xhigh, Default Fallback)",
+      "aaShortName": "Claude Sonnet 5.5 (xhigh with fallback)",
+      "aaVariant": "xhigh",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+      "release": {
+        "slug": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.62548,
+        "gdpvalV21Normalized": 0.61422,
+        "briefcaseElo": 1750.96,
+        "intelligenceIndex": 51.8955544183089,
+        "gdpvalV21": 1728.44,
+        "automationBenchAA": 0.6552026949665557,
+        "terminalBenchV40": 0.570707070707071,
+        "scicode": 0.572916666666667,
+        "gdpPdfAllPass": 0.246,
+        "aaLcr": 0.796666666666667,
+        "hle": 0.5,
+        "gpqaDiamond": null,
+        "critpt": 0.311428571428571,
+        "omniAccuracy": 0.5303333333333333,
+        "omniNonHallucination": 0.37118523775727463,
+        "aaEvalCost": 2176.8152244617027,
+        "speed": 110.414517674387
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.205555555555556,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6552026949665557,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.6222222222222222,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1750.96
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:41Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "b26e374e6e2b10ba8fcfaf95a851d69360defaa202e2b1e95ea4965f0337e43f",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-sonnet-5-5-high": {
+      "id": "claude-sonnet-5-5-high",
+      "displayName": "Claude Sonnet 5.5 (high)",
+      "family": "Claude Sonnet 5.5",
+      "aaSlug": "claude-sonnet-5-5-high",
+      "aaName": "Claude Sonnet 5.5 (High, Default Fallback)",
+      "aaShortName": "Claude Sonnet 5.5 (high with fallback)",
+      "aaVariant": "high",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+      "release": {
+        "slug": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.567885,
+        "gdpvalV21Normalized": 0.524695,
+        "briefcaseElo": 1635.77,
+        "intelligenceIndex": 46.7533528066958,
+        "gdpvalV21": 1549.39,
+        "automationBenchAA": 0.5942923026067375,
+        "terminalBenchV40": 0.439393939393939,
+        "scicode": 0.537037037037037,
+        "gdpPdfAllPass": 0.252,
+        "aaLcr": 0.78,
+        "hle": 0.458294717330862,
+        "gpqaDiamond": null,
+        "critpt": 0.245714285714286,
+        "omniAccuracy": 0.5198333333333334,
+        "omniNonHallucination": 0.3536966331135023,
+        "aaEvalCost": 1027.4041526849376,
+        "speed": 105.065796731467
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+          "observedAt": "2026-10-21T07:21:41Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.188888888888889,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.5942923026067375,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.602020202020202,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1635.77
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:41Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "6d8725b8f903fba899049c9a75f46261e697d9ce00c6018968f946b880155c5c",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-sonnet-5-5-medium": {
+      "id": "claude-sonnet-5-5-medium",
+      "displayName": "Claude Sonnet 5.5 (medium)",
+      "family": "Claude Sonnet 5.5",
+      "aaSlug": "claude-sonnet-5-5-medium",
+      "aaName": "Claude Sonnet 5.5 (Medium, Default Fallback)",
+      "aaShortName": "Claude Sonnet 5.5 (medium with fallback)",
+      "aaVariant": "medium",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+      "release": {
+        "slug": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.47069000000000005,
+        "gdpvalV21Normalized": 0.411635,
+        "briefcaseElo": 1441.38,
+        "intelligenceIndex": 40.838652287929,
+        "gdpvalV21": 1323.27,
+        "automationBenchAA": 0.5490962996121462,
+        "terminalBenchV40": 0.297979797979798,
+        "scicode": 0.528935185185185,
+        "gdpPdfAllPass": 0.202,
+        "aaLcr": 0.763333333333333,
+        "hle": 0.39805375347544,
+        "gpqaDiamond": null,
+        "critpt": 0.168571428571429,
+        "omniAccuracy": 0.4716666666666667,
+        "omniNonHallucination": 0.48769716088328074,
+        "aaEvalCost": 622.2791171562454,
+        "speed": 107.206054673678
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.177777777777778,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.5490962996121462,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.509090909090909,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1441.38
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:42Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "24dca9a497ab68ac006c5dd0804ab5f46a4147bad6db96f61ee11ff0f7ba4b72",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-sonnet-5-5-low": {
+      "id": "claude-sonnet-5-5-low",
+      "displayName": "Claude Sonnet 5.5 (low)",
+      "family": "Claude Sonnet 5.5",
+      "aaSlug": "claude-sonnet-5-5-low",
+      "aaName": "Claude Sonnet 5.5 (Low, Default Fallback)",
+      "aaShortName": "Claude Sonnet 5.5 (low with fallback)",
+      "aaVariant": "low",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+      "release": {
+        "slug": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.38576499999999997,
+        "gdpvalV21Normalized": 0.33766999999999997,
+        "briefcaseElo": 1271.53,
+        "intelligenceIndex": 35.8681594577587,
+        "gdpvalV21": 1175.34,
+        "automationBenchAA": 0.4942092641344955,
+        "terminalBenchV40": 0.207070707070707,
+        "scicode": 0.490740740740741,
+        "gdpPdfAllPass": 0.16,
+        "aaLcr": 0.76,
+        "hle": 0.362372567191844,
+        "gpqaDiamond": null,
+        "critpt": 0.114285714285714,
+        "omniAccuracy": 0.463,
+        "omniNonHallucination": 0.49844816883923027,
+        "aaEvalCost": 482.13173971569154,
+        "speed": 106.133093824055
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.194444444444444,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.4942092641344955,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.4171717171717172,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1271.53
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:42Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "fb75b925842f66f1c68f774a7c7bccf5ff930f19357b3fc52ff28153d2fc9294",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "muse-spark-1-3-xhigh": {
+      "id": "muse-spark-1-3-xhigh",
+      "displayName": "Muse Spark 1.3 (xhigh)",
+      "family": "Muse Spark 1.3",
+      "aaSlug": "muse-spark-1-3-xhigh",
+      "aaName": "Muse Spark 1.3 (Xhigh)",
+      "aaShortName": "Muse Spark 1.3 (xhigh)",
+      "aaVariant": "xhigh",
+      "aaUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+      "release": {
+        "slug": "muse-spark-1-3",
+        "name": "Muse Spark 1.3",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.49173,
+        "gdpvalV21Normalized": 0.563305,
+        "briefcaseElo": 1483.46,
+        "intelligenceIndex": 45.0732966922226,
+        "gdpvalV21": 1626.61,
+        "automationBenchAA": 0.5683609003249621,
+        "terminalBenchV40": 0.166666666666667,
+        "scicode": 0.597222222222222,
+        "gdpPdfAllPass": 0.242,
+        "aaLcr": 0.83,
+        "hle": 0.47451343836886,
+        "gpqaDiamond": 0.941414141414141,
+        "critpt": 0.26,
+        "omniAccuracy": 0.4151666666666667,
+        "omniNonHallucination": 0.6853804502707324,
+        "aaEvalCost": 1655.2659660850002,
+        "speed": 280.688197998976
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "gpqaDiamond": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "observedAt": "2026-10-21T07:21:42Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.155555555555556,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": 0.820231213872832,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.5683609003249621,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.5161616161616162,
+        "briefcaseTotalCost": null,
+        "tauBanking": 0.472164948453608,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1483.46
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:42Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "47279657bfc1ca0dfc9fcc9615e1bb298da781de22f9527ddc3f57e4b9705a58",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "grok-4.6-xhigh": {
+      "id": "grok-4.6-xhigh",
+      "displayName": "Grok 4.6 (xhigh)",
+      "family": "Grok 4.6",
+      "aaSlug": "grok-4-6-xhigh",
+      "aaName": "Grok 4.6 (Xhigh)",
+      "aaShortName": "Grok 4.6 (xhigh)",
+      "aaVariant": "xhigh",
+      "aaUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+      "release": {
+        "slug": "grok-4-6",
+        "name": "Grok 4.6",
+        "deprecatedTo": "grok-4-7"
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.52246,
+        "gdpvalV21Normalized": 0.57269,
+        "briefcaseElo": 1544.92,
+        "intelligenceIndex": 44.199810436996,
+        "gdpvalV21": 1645.38,
+        "automationBenchAA": 0.6699736836183247,
+        "terminalBenchV40": 0.171717171717172,
+        "scicode": 0.530092592592593,
+        "gdpPdfAllPass": 0.172,
+        "aaLcr": 0.81,
+        "hle": 0.440685820203893,
+        "gpqaDiamond": 0.935353535353535,
+        "critpt": 0.197142857142857,
+        "omniAccuracy": 0.43,
+        "omniNonHallucination": 0.7599415204678363,
+        "aaEvalCost": 2241.9076745399293,
+        "speed": 67.4029968742691
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "gpqaDiamond": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "observedAt": "2026-10-21T07:21:43Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.172222222222222,
+        "harveyLab": null,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6699736836183247,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.5383838383838384,
+        "briefcaseTotalCost": null,
+        "tauBanking": 0.43298969072165,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1544.92
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T07:21:43Z",
+        "precision": null,
+        "note": "Added by owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row (exact AA DeepSWE result and matched exact Bug Hunt result); captured separately from the rest of the snapshot.",
+        "responseSha256": "8a03db7f78fd7be9a52c98f9150cd66fc6dc6439457841a1e369160b4d7770d4",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
     }

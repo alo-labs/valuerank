@@ -22,18 +22,19 @@ EFFORT_EQUIVALENTS = {
     "mimo-v2-6-flash": ({"enabled"}, "AA lists one reasoning mode; thinking toggle switched on"),
 }
 
-# tbench.ai leaderboard base names (effort removed) mapped to ValueRank model ids.
+# tbench.ai leaderboard base names (effort removed) mapped to ValueRank model ids. O33: a family ranked at several
+# efforts names every configuration; the effort match below still picks only the row for the configuration's own effort.
 TB4_BASE_NAMES = {
     "Opus 5.5": "claude-opus-5-5",
-    "Sonnet 5.5": "claude-sonnet-5-5",
-    "Haiku 5.5": "claude-haiku-5-5",
+    "Sonnet 5.5": ("claude-sonnet-5-5", "claude-sonnet-5-5-xhigh", "claude-sonnet-5-5-high", "claude-sonnet-5-5-medium", "claude-sonnet-5-5-low"),
+    "Haiku 5.5": ("claude-haiku-5-5", "claude-haiku-5-5-max", "claude-haiku-5-5-high", "claude-haiku-5-5-medium", "claude-haiku-5-5-low"),
     "Opus 5": "claude-opus-5",
     "Sonnet 5": "claude-sonnet-5",
     "Opus 4.8": "claude-opus-4.8",
     "Fable 5": "claude-fable-5",
     "Fable 5.1": "claude-fable-5-1",
     "GPT-6 Astra": "gpt-6-astra",
-    "GPT-6.1 Sol": "gpt-6.1-sol",
+    "GPT-6.1 Sol": ("gpt-6.1-sol", "gpt-6.1-sol-xhigh", "gpt-6.1-sol-high", "gpt-6.1-sol-medium", "gpt-6.1-sol-low"),
     "GPT-6 Sol": "gpt-6-sol",
     "GPT-6 Luna": "gpt-6-luna",
     "GPT-5.6 Sol": "gpt-5.6-sol",
@@ -42,7 +43,7 @@ TB4_BASE_NAMES = {
     "GLM-5.3": "glm-5.3",
     "GLM-5.3-Flash": "glm-5.3-flash",
     "Grok 4.7": "grok-4.7",
-    "Grok 4.6": "grok-4.6",
+    "Grok 4.6": ("grok-4.6", "grok-4.6-xhigh"),
     "Gemini 4 Argon": "gemini-4-argon",
     "Gemini 3.8 Flash": "gemini-3.8-flash",
     "Gemini 3.7 Flash": "gemini-3.7-flash",
@@ -50,12 +51,20 @@ TB4_BASE_NAMES = {
     "Kimi K3": "kimi-k3",
     "DeepSeek V4 Pro": "deepseek-v4-pro",
     "DeepSeek V4 Flash": "deepseek-v4-flash",
+    "Muse Spark 1.3": ("muse-spark-1-3", "muse-spark-1-3-xhigh"),
 }
 
 # Pre-registered agent preference: vendor-neutral harnesses first, never best-of-agent.
 TB4_AGENT_PREFERENCE = ("Terminus 2", "mini-SWE-agent", "OpenHands")
 
 EFFORT_SUFFIX = re.compile(r"^(?P<base>.*?)\s+\((?P<effort>[^()]*)\)$")
+
+
+def tb4_model_ids(base: str) -> tuple[str, ...]:
+    """The ValueRank configurations a tbench.ai base name can belong to (one, or a family ranked at several efforts)."""
+
+    ids = TB4_BASE_NAMES.get(base, ())
+    return (ids,) if isinstance(ids, str) else ids
 
 
 def split_effort(name: str) -> tuple[str, str | None]:
@@ -85,7 +94,7 @@ def select_tb4_row(model_id: str, configuration_effort: str | None, rows: list[d
     candidates = []
     for row in rows:
         base, effort = split_effort(row["model"])
-        if TB4_BASE_NAMES.get(base) == model_id and efforts_match(model_id, configuration_effort, effort):
+        if model_id in tb4_model_ids(base) and efforts_match(model_id, configuration_effort, effort):
             candidates.append(row)
     if not candidates:
         return None

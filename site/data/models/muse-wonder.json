@@ -7,12 +7,12 @@
   "selectedPage": "https://artificialanalysis.ai/models/muse-wonder",
   "summary": {
     "rank": {
-      "api": 9,
-      "plan": 14
+      "api": 14,
+      "plan": 26
     },
     "overall": {
-      "api": 53.214268146216554,
-      "plan": 50.40688615826427
+      "api": 52.73487475038151,
+      "plan": 50.11301780118249
     },
     "quality": 64.42378090901863,
     "qualityRank": 3,
@@ -238,8 +238,8 @@
       "cross-estimand ordering not identified"
     ],
     "costScore": {
-      "api": 19.58572985781032,
-      "plan": 8.356201906001193
+      "api": 17.668156274470125,
+      "plan": 7.180728477674061
     },
     "components": [
       {
@@ -329,36 +329,36 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.001,
-        "top3": 0.0273,
-        "frontier": 0.2933
+        "top1": 0.0003,
+        "top3": 0.0078,
+        "frontier": 0.2058
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0049,
-        "top3": 0.0359,
-        "frontier": 0.2793
+        "top1": 0.0006,
+        "top3": 0.012,
+        "frontier": 0.2013
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.008,
-        "top3": 0.0544,
-        "frontier": 0.2993
+        "top1": 0.002,
+        "top3": 0.0257,
+        "frontier": 0.2035
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.0014,
-        "top3": 0.0259,
-        "frontier": 0.2969
+        "top1": 0.0002,
+        "top3": 0.0076,
+        "frontier": 0.204
       }
     ],
     "plan": [
@@ -377,8 +377,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0249,
-        "frontier": 0.2077
+        "top3": 0.0506,
+        "frontier": 0.2139
       },
       {
         "stratum": "S2",
@@ -386,8 +386,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.03,
-        "frontier": 0.2172
+        "top3": 0.0576,
+        "frontier": 0.2106
       },
       {
         "stratum": "S1",
@@ -395,8 +395,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0637,
-        "frontier": 0.2298
+        "top3": 0.1039,
+        "frontier": 0.2377
       },
       {
         "stratum": "S1M",
@@ -404,8 +404,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0217,
-        "frontier": 0.209
+        "top3": 0.0511,
+        "frontier": 0.206
       }
     ]
   },
@@ -421,8 +421,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 9,
-        "plan": 14
+        "api": 14,
+        "plan": 26
       }
     }
   ],

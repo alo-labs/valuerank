@@ -9,8 +9,8 @@
       "role": "quality leaf (Software engineering)",
       "weightPct": 22.5,
       "coverage": {
-        "available": 21,
-        "cohort": 23
+        "available": 35,
+        "cohort": 37
       },
       "unit": "% pass@1",
       "execution": "AA-run",
@@ -25,8 +25,8 @@
       "role": "quality leaf (Software engineering)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 22,
-        "cohort": 23
+        "available": 36,
+        "cohort": 37
       },
       "unit": "bugs fixed of 105",
       "execution": "independent",
@@ -41,8 +41,8 @@
       "role": "quality leaf (Software engineering)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 15,
-        "cohort": 23
+        "available": 23,
+        "cohort": 37
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -57,8 +57,8 @@
       "role": "quality leaf (Software engineering)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 13,
-        "cohort": 23
+        "available": 14,
+        "cohort": 37
       },
       "unit": "% resolved",
       "execution": "independent",
@@ -73,8 +73,8 @@
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 23,
-        "cohort": 23
+        "available": 37,
+        "cohort": 37
       },
       "unit": "Elo",
       "execution": "AA-run",
@@ -89,8 +89,8 @@
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 23,
-        "cohort": 23
+        "available": 37,
+        "cohort": 37
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -105,8 +105,8 @@
       "role": "quality leaf (Reliability)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 23,
-        "cohort": 23
+        "available": 37,
+        "cohort": 37
       },
       "unit": "AA Omniscience Index (-100 to 100)",
       "execution": "AA-run",
@@ -121,8 +121,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 3.75,
       "coverage": {
-        "available": 23,
-        "cohort": 23
+        "available": 37,
+        "cohort": 37
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
@@ -137,8 +137,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 23,
-        "cohort": 23
+        "available": 37,
+        "cohort": 37
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
@@ -153,8 +153,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 23,
-        "cohort": 23
+        "available": 37,
+        "cohort": 37
       },
       "unit": "score (0-1)",
       "execution": "AA-run",
@@ -169,8 +169,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 23,
-        "cohort": 23
+        "available": 37,
+        "cohort": 37
       },
       "unit": "score (0-1)",
       "execution": "AA-run",
@@ -217,18 +217,18 @@
       {
         "key": "frontiercode",
         "label": "FrontierCode",
-        "covered": 12,
-        "ranked": 23
+        "covered": 13,
+        "ranked": 37
       },
       {
         "key": "itbench-aa",
         "label": "ITBench-AA",
         "covered": 9,
-        "ranked": 23
+        "ranked": 37
       }
     ],
-    "referencePanelSize": 19,
-    "requiredPanelSize": 16
+    "referencePanelSize": 33,
+    "requiredPanelSize": 25
   },
   "qualitySourceShares": {
     "aa": 0.8000000000000002,
@@ -280,7 +280,7 @@
         "intelligenceIndex": 34,
         "totalCostUsd": 56.36,
         "family": "Claude Haiku 5.5",
-        "slug": null,
+        "slug": "claude-haiku-5-5-medium",
         "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium"
       },
       {
@@ -300,7 +300,7 @@
         "intelligenceIndex": 38,
         "totalCostUsd": 94.07,
         "family": "Claude Haiku 5.5",
-        "slug": null,
+        "slug": "claude-haiku-5-5-high",
         "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high"
       },
       {
@@ -350,7 +350,7 @@
         "intelligenceIndex": 48,
         "totalCostUsd": 361.37,
         "family": "GPT-6.1 Sol",
-        "slug": null,
+        "slug": "gpt-6-1-sol-medium",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium"
       },
       {
@@ -360,7 +360,7 @@
         "intelligenceIndex": 50,
         "totalCostUsd": 521.32,
         "family": "GPT-6.1 Sol",
-        "slug": null,
+        "slug": "gpt-6-1-sol-high",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high"
       },
       {
@@ -370,7 +370,7 @@
         "intelligenceIndex": 51,
         "totalCostUsd": 662.28,
         "family": "GPT-6.1 Sol",
-        "slug": null,
+        "slug": "gpt-6-1-sol-xhigh",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh"
       },
       {

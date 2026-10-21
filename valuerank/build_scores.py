@@ -16,6 +16,13 @@ like frontier rows.  Every model row reports ``aaFrontierTier`` ("frontier",
 configuration, or its smallest-gap near configuration), ``aaFrontierIntelligenceGap``
 and ``aaFrontierFootnote``; ``frontierSelection`` summarises frontier and near
 families.  Near families that are also frontier families keep the frontier tier.
+
+Owner decision O33: every evidenced effort (an exact AA DeepSWE result and a
+matched exact Bug Hunt result) is ranked as its own row, so a family can have
+several roster configurations.  The family annotations above and the frontier
+or near inclusion reason belong to the family's primary configuration only; an
+evidenced sibling is ranked through the overlap reason and reports its own tier
+(the tier of its exact plotted configuration, or null).
 """
 
 from __future__ import annotations
@@ -73,6 +80,21 @@ DEVELOPER = {
     "Muse Spark 1.3": "Meta",
     "Muse Wonder": "Meta",
     "Muse Wonder Full": "Meta",
+    # O33: other evidenced efforts of a family, ranked as their own rows.
+    "GPT-6.1 Sol (xhigh)": "OpenAI",
+    "GPT-6.1 Sol (high)": "OpenAI",
+    "GPT-6.1 Sol (medium)": "OpenAI",
+    "GPT-6.1 Sol (low)": "OpenAI",
+    "Claude Haiku 5.5 (max)": "Anthropic",
+    "Claude Haiku 5.5 (high)": "Anthropic",
+    "Claude Haiku 5.5 (medium)": "Anthropic",
+    "Claude Haiku 5.5 (low)": "Anthropic",
+    "Claude Sonnet 5.5 (xhigh)": "Anthropic",
+    "Claude Sonnet 5.5 (high)": "Anthropic",
+    "Claude Sonnet 5.5 (medium)": "Anthropic",
+    "Claude Sonnet 5.5 (low)": "Anthropic",
+    "Muse Spark 1.3 (xhigh)": "Meta",
+    "Grok 4.6 (xhigh)": "xAI",
 }
 
 SHORT = {
@@ -111,6 +133,20 @@ SHORT = {
     "Muse Spark 1.3": "Muse Spark 1.3",
     "Muse Wonder": "Muse Wonder",
     "Muse Wonder Full": "Muse Wonder Full",
+    "GPT-6.1 Sol (xhigh)": "GPT-6.1 Sol (xhigh)",
+    "GPT-6.1 Sol (high)": "GPT-6.1 Sol (high)",
+    "GPT-6.1 Sol (medium)": "GPT-6.1 Sol (medium)",
+    "GPT-6.1 Sol (low)": "GPT-6.1 Sol (low)",
+    "Claude Haiku 5.5 (max)": "Haiku 5.5 (max)",
+    "Claude Haiku 5.5 (high)": "Haiku 5.5 (high)",
+    "Claude Haiku 5.5 (medium)": "Haiku 5.5 (medium)",
+    "Claude Haiku 5.5 (low)": "Haiku 5.5 (low)",
+    "Claude Sonnet 5.5 (xhigh)": "Sonnet 5.5 (xhigh)",
+    "Claude Sonnet 5.5 (high)": "Sonnet 5.5 (high)",
+    "Claude Sonnet 5.5 (medium)": "Sonnet 5.5 (medium)",
+    "Claude Sonnet 5.5 (low)": "Sonnet 5.5 (low)",
+    "Muse Spark 1.3 (xhigh)": "Muse Spark 1.3 (xhigh)",
+    "Grok 4.6 (xhigh)": "Grok 4.6 (xhigh)",
 }
 
 # The priority values are ValueRank's quality priorities, not the Artificial
@@ -234,6 +270,10 @@ def frontier_order(row):
 
 # O31: a Bug Hunt scoreboard name may add only a version number to AA's model name ("Muse Wonder 1.0").
 VERSION_SUFFIX = r"( v?\d+(\.\d+)*)?"
+# O33: the effort follows the name as "(<effort> effort, ...)", or on some rows as a bare known effort ("Grok 4.6 (xhigh) seq").
+SCOREBOARD_EFFORT = re.compile(r"(\w+) effort|(minimal|low|medium|high|xhigh|max)(?=[),;])")
+# DeepSWE statuses that place a chart configuration on a roster entry (a duplicate row of a mapped configuration included).
+MAPPED_STATUSES = {"exact_variant", "duplicate_configuration"}
 
 
 def scoreboard_matches(names, scoreboard_rows):
@@ -242,9 +282,9 @@ def scoreboard_matches(names, scoreboard_rows):
     matches = []
     for row in scoreboard_rows:
         base, _, rest = row["model"].partition(" (")
-        effort = re.match(r"(\w+) effort", rest)
+        effort = SCOREBOARD_EFFORT.match(rest)
         if effort and any(re.fullmatch(re.escape(name) + VERSION_SUFFIX, normalise_name(base)) for name in names):
-            matches.append((effort.group(1), row["model"]))
+            matches.append((effort.group(1) or effort.group(2), row["model"]))
     return matches
 
 
@@ -264,9 +304,10 @@ def best_evidenced_effort(aa_model, efforts, points):
 
     if len(efforts) <= 1:
         return next(iter(efforts), None)
-    plotted = {point["effort"]: point for point in points if point.get("family") == aa_model["displayName"]}
+    family = model_family(aa_model)
+    plotted = {point["effort"]: point for point in points if point.get("family") == family}
     if not efforts <= set(plotted):
-        raise ValueError(f"evidenced efforts of {aa_model['displayName']} cannot be ordered: not all are plotted on AA's chart")
+        raise ValueError(f"evidenced efforts of {family} cannot be ordered: not all are plotted on AA's chart")
     return min(efforts, key=lambda effort: (-plotted[effort]["intelligence_index_display"], plotted[effort]["total_cost_usd"], effort))
 
 
@@ -279,21 +320,57 @@ def exact_bug_hunt(model_id, effort, record):
     return record
 
 
-def unrostered_evidence(deepswe_configurations, scoreboard_rows):
-    """O31: DeepSWE configurations outside the roster whose model and effort Bug Hunt's scoreboard also reports.
+def model_family(aa_model):
+    """The AA family a roster configuration belongs to (its chart points' family); the display name when not recorded."""
 
-    A scoreboard name may add only a version number ("Muse Wonder 1.0" for AA's "Muse Wonder", but not "Muse Wonder
-    Full 1.0"), so a match is flagged
-    for a roster decision rather than silently skipped; identity is then settled when the model is added.
+    return aa_model.get("family") or aa_model["displayName"]
+
+
+def family_names(model, aa_models):
+    """O33: the names a DeepSWE chart model answers to: its own, and every name of the roster configurations it matches."""
+
+    key = normalise_name(model)
+    names = {key}
+    for entry in aa_models.values():
+        entry_names = roster_names(entry)
+        if key in entry_names:
+            names |= set(entry_names)
+    return names
+
+
+def unrostered_evidence(deepswe_configurations, scoreboard_rows, aa_models):
+    """O31/O33: DeepSWE configurations with an effort that Bug Hunt's scoreboard also reports at that effort, but that
+    are not mapped to a roster entry (any match status other than an exact variant or a duplicate of one).
+
+    Since O33 this includes another effort of a model already in the roster ("effort_mismatch"). A scoreboard name may
+    add only a version number ("Muse Wonder 1.0" for AA's "Muse Wonder", but not "Muse Wonder Full 1.0"), so a match
+    is flagged for a roster decision rather than silently skipped; identity is then settled when the model is added.
     """
 
     found = []
     for item in deepswe_configurations:
-        if item.get("matchStatus") != "not_in_roster" or not item.get("effort"):
+        if item.get("matchStatus") in MAPPED_STATUSES or not item.get("effort"):
             continue
-        names = [name for effort, name in scoreboard_matches({normalise_name(item["model"])}, scoreboard_rows) if effort == item["effort"]]
-        if names:
-            found.append(f"{item['displayLabel']} / Bug Hunt {names[0]}")
+        names = family_names(item["model"], aa_models)
+        rows = [name for effort, name in scoreboard_matches(names, scoreboard_rows) if effort == item["effort"]]
+        if rows:
+            found.append(f"{item['displayLabel']} / Bug Hunt {rows[0]}")
+    return found
+
+
+def unranked_evidence(deepswe_configurations, scoreboard_rows, aa_models, bug_hunt_by_id):
+    """O33: roster configurations mapped to an exact DeepSWE result whose effort Bug Hunt's scoreboard also reports, but
+    whose Bug Hunt record is not a matched result at that effort, so the configuration would silently go unranked."""
+
+    found = []
+    for item in deepswe_configurations:
+        model_id = item.get("valueRankModelId")
+        if not model_id or not item.get("effort"):
+            continue
+        aa_model = aa_models[model_id]
+        efforts = {effort for effort, _name in scoreboard_matches(roster_names(aa_model), scoreboard_rows)}
+        if item["effort"] in efforts and not exact_match.bug_hunt_matches(model_id, aa_model.get("aaVariant"), bug_hunt_by_id.get(model_id)):
+            found.append(f"{model_id} ({item['effort']})")
     return found
 
 
@@ -382,6 +459,22 @@ def near_frontier_selection(inventory, capture, frontier_urls, frontier_family_i
                 raise ValueError(f"AA near-frontier family does not match selected catalog identity for {model_id}")
         selection[family] = {"modelId": model_id, "rows": family_rows}
     return selection
+
+
+def configuration_tiers(frontier_rows, near_rows):
+    """O33: each plotted frontier or near configuration's own tier annotation, keyed by its AA owner URL.
+
+    A ranked sibling of a family reports the tier of its own exact configuration, never the family's.
+    """
+
+    tiers = {}
+    for item in near_rows:
+        tiers[item["sourceUrl"]] = {"tier": "near", "configuration": item["name"],
+                                    "intelligenceGap": item["intelligenceGap"], "footnote": item.get("sourceFootnote")}
+    for item in frontier_rows:
+        tiers[item["sourceUrl"]] = {"tier": "frontier", "configuration": item["name"],
+                                    "intelligenceGap": 0, "footnote": item.get("sourceFootnote")}
+    return tiers
 
 
 def frontier_tiers(frontier_families, near_families):
@@ -556,12 +649,13 @@ def build_bug_hunt_emphasis(rows, weights, document):
 
 def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     deepswe_chart = json.loads((data / "aa_deepswe.json").read_text())
-    # O31: every configuration with an exact AA DeepSWE result and a Bug Hunt result must be in the roster.
-    scoreboard_rows = json.loads((data / "bug_hunt_scoreboard.json").read_text())["rows"]
-    missing = unrostered_evidence(deepswe_chart["configurations"], scoreboard_rows)
-    if missing:
-        raise ValueError("Configurations with both exact DeepSWE and Bug Hunt results are missing from the roster (O31): " + "; ".join(missing))
     aa_document = json.loads((data / "aa_metrics.json").read_text())
+    # O31/O33: every configuration (model and effort) with an exact AA DeepSWE result and a Bug Hunt result must be in
+    # the roster, even when another effort of the same model is already there.
+    scoreboard_rows = json.loads((data / "bug_hunt_scoreboard.json").read_text())["rows"]
+    missing = unrostered_evidence(deepswe_chart["configurations"], scoreboard_rows, aa_document["models"])
+    if missing:
+        raise ValueError("Configurations with both exact DeepSWE and Bug Hunt results are missing from the roster (O33): " + "; ".join(missing))
     frontier_inventory = json.loads((data / "aa_reconciliation_inventory.json").read_text())
     livebench_document = json.loads((data / "livebench.json").read_text())
     tb4_document = json.loads((data / "tb4.json").read_text())
@@ -699,6 +793,10 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     )
     near_policy = frontier_inventory["nearFrontierPolicy"]
     aa_tiers, frontier_family_list, near_family_list = frontier_tiers(frontier_families, near_families)
+    own_tiers = configuration_tiers(frontier_rows, frontier_inventory["nearFrontierRows"])
+    # O33: the family annotations go to each family's primary configuration only.
+    family_primary_ids = {family: group["modelId"] for family, group in near_families.items()}
+    family_primary_ids.update({selection["family"]: model_id for model_id, selection in frontier_selection_by_id.items()})
     near_frontier_primary_ids = {group["modelId"] for group in near_families.values() if group["modelId"]}
     frontier_selection = {
         "sourceUrl": frontier_inventory["sourceUrl"],
@@ -730,6 +828,9 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         ],
     }
     cohort_ids = set(aa_models)
+    display_names = [item["displayName"] for item in aa_models.values()]
+    if len(set(display_names)) != len(display_names):
+        raise ValueError("Roster display names must be unique: several efforts of one family need distinct names (O33)")
     if set(livebench_models) != cohort_ids:
         raise ValueError("LiveBench snapshot must contain exactly the current AA model cohort")
     bug_hunt_by_id = {item["modelId"]: item for item in bug_hunt_document["models"]}
@@ -741,6 +842,10 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             if not 0 <= item["fixedOf105"] <= 105 or item.get("sampleN", 0) < 1:
                 raise ValueError(f"invalid Bug Hunt score/sample for {model_id}")
 
+    # O33: a rostered configuration with both results is ranked, so its Bug Hunt record must be the matched result at its effort.
+    unranked = unranked_evidence(deepswe_chart["configurations"], scoreboard_rows, aa_models, bug_hunt_by_id)
+    if unranked:
+        raise ValueError("Configurations with both exact DeepSWE and Bug Hunt results lack a matched Bug Hunt record at their effort (O33): " + "; ".join(unranked))
     bug_hunt_owner_matches = [item for item in bug_hunt_by_id.values() if item.get("matched") is True]
     bug_hunt_owner_missing_names = [
         aa_models[model_id]["displayName"]
@@ -755,14 +860,22 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         supplemental = aa_model.get("supplemental", {})
         livebench = livebench_models[model_id]
         tb4 = tb4_models.get(model_id)
+        # The legacy composite takes a Terminal-Bench row only at the configuration's own effort (AGENTS.md: no transfer).
+        if tb4 is not None and not exact_match.efforts_match(model_id, aa_model.get("aaVariant"), exact_match.split_effort(tb4["model"])[1]):
+            tb4 = None
         tb4_claim = tb4_provider_claims.get(model_id) if not tb4 else None
         display_name = aa_model["displayName"]
         if display_name not in DEVELOPER or display_name not in SHORT:
             raise ValueError(f"identity mapping missing: {display_name}")
-        tier = aa_tiers.get(display_name, NO_FRONTIER_TIER)
+        family = model_family(aa_model)
+        if family_primary_ids.get(family) == model_id:
+            tier = aa_tiers[family]
+        else:
+            tier = own_tiers.get(aa_model["aaUrl"], NO_FRONTIER_TIER)
         row = {
             "id": model_id,
             "name": display_name,
+            "family": family,
             "shortName": SHORT[display_name],
             "developer": DEVELOPER[display_name],
             "frontierSelection": frontier_selection_by_id.get(model_id),
@@ -834,22 +947,20 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     frontier_primary_ids = set(frontier_selection_by_id)
     near_only_primary_ids = near_frontier_primary_ids - frontier_primary_ids
     primary_ids = overlap_primary_ids | frontier_primary_ids | near_frontier_primary_ids
-    # E193/O30/O31: a near-frontier or retained family ranks its evidenced effort (exact DeepSWE and Bug Hunt results;
-    # several: the highest AA Index, then the lower cost); a near family without one ranks its smallest-gap near point.
-    # A frontier family ranks its highest rendered point instead (checked above).
-    near_groups = {group["modelId"]: (family, group) for family, group in near_families.items()}
-    # Every roster model, ranked or not: a model tracked at an effort without both results would otherwise drop out silently.
-    for model_id in sorted(set(aa_models) - frontier_primary_ids):
+    # O33: every evidenced effort is ranked as its own row (checked above) through the overlap reason. The frontier and
+    # near rules still decide which configuration is a family's primary and carries its inclusion reason: a frontier
+    # family's highest rendered point (checked above); a near family's highest-Index evidenced effort (several: the
+    # highest AA Index, then the lower cost; E193/O30), else its smallest-gap near point.
+    for family, group in sorted(near_families.items()):
+        model_id = group["modelId"]
+        if model_id is None or model_id in frontier_primary_ids:
+            continue
         aa_model = aa_models[model_id]
         best = best_evidenced_effort(aa_model, evidenced_efforts(aa_model, deepswe_chart["configurations"], scoreboard_rows), frontier_capture["points"])
-        if model_id in near_groups:
-            family, group = near_groups[model_id]
-            if best is not None and aa_model.get("aaVariant") != best:
-                raise ValueError(f"AA near-frontier family must rank its configuration with exact DeepSWE and Bug Hunt results (O30): {family} at {best}")
-            if best is None and aa_model.get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
-                raise ValueError(f"AA near-frontier family without exact DeepSWE and Bug Hunt results must rank its smallest-gap near point (E193): {family}")
-        elif best is not None and aa_model.get("aaVariant") != best:
-            raise ValueError(f"Retained family must rank its highest-Index evidenced effort (O31): {aa_model['displayName']} at {best}")
+        if best is not None and aa_model.get("aaVariant") != best:
+            raise ValueError(f"AA near-frontier family must rank its configuration with exact DeepSWE and Bug Hunt results (O30): {family} at {best}")
+        if best is None and aa_model.get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
+            raise ValueError(f"AA near-frontier family without exact DeepSWE and Bug Hunt results must rank its smallest-gap near point (E193): {family}")
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
 

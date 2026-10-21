@@ -83,3 +83,15 @@ class TestModelInclusion:
             {"text": FOOTNOTE, "models": ["Haiku A", "Haiku B"]},
             {"text": "Another note.", "models": ["Distinct"]},
         ]
+
+    def test_footnote_names_carry_the_effort_so_ranked_siblings_read_distinctly(self):
+        """O33: a family's primary is named without its effort, so the effort is added unless the name ends with it."""
+
+        models = [
+            {"name": "Claude Haiku 5.5", "aaVariant": "xhigh", "aaFrontierFootnote": FOOTNOTE},
+            {"name": "Claude Haiku 5.5 (max)", "aaVariant": "max", "aaFrontierFootnote": FOOTNOTE},
+            {"name": "MiMo-V2.6-Flash", "aaVariant": None, "aaFrontierFootnote": FOOTNOTE},
+        ]
+        assert pub.model_inclusion(None, models)["footnotes"] == [
+            {"text": FOOTNOTE, "models": ["Claude Haiku 5.5 (xhigh)", "Claude Haiku 5.5 (max)", "MiMo-V2.6-Flash"]},
+        ]

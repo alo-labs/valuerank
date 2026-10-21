@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5",
   "summary": {
     "rank": {
-      "api": 21,
-      "plan": 5
+      "api": 33,
+      "plan": 11
     },
     "overall": {
-      "api": 46.97938355711471,
-      "plan": 56.454429576647016
+      "api": 46.624419431304325,
+      "plan": 54.61156054640844
     },
     "quality": 57.805130480631384,
-    "qualityRank": 12,
+    "qualityRank": 17,
     "coverage": {
       "pct": 80.0,
       "costAvailable": true,
@@ -249,8 +249,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 14.5021427865647,
-      "plan": 52.402326864693926
+      "api": 13.082286283323159,
+      "plan": 45.03085074373962
     },
     "components": [
       {
@@ -406,7 +406,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0301
+        "frontier": 0.0125
       },
       {
         "stratum": "S2",
@@ -414,8 +414,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0001,
-        "frontier": 0.0335
+        "top3": 0.0,
+        "frontier": 0.015
       },
       {
         "stratum": "S1",
@@ -424,7 +424,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0499
+        "frontier": 0.0234
       },
       {
         "stratum": "S1M",
@@ -433,7 +433,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0273
+        "frontier": 0.014
       }
     ],
     "plan": [
@@ -584,8 +584,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 21,
-        "plan": 5
+        "api": 33,
+        "plan": 11
       }
     }
   ],

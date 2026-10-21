@@ -36,7 +36,7 @@ OUTPUTS = ("README.md", "methodology.md", "scores.md", "raw-data.md")
 COHORT_ROUTES = (
     ("Required AA Intelligence Index versus total-evaluation-cost frontier family", "On AA's rendered frontier"),
     ("Near-frontier AA family", "Near-frontier family"),
-    ("Exact AA DeepSWE and eligible Bug Hunt overlap", "Retained from earlier releases for exact DeepSWE and Bug Hunt evidence"),
+    ("Exact AA DeepSWE and eligible Bug Hunt overlap", "Exact DeepSWE and Bug Hunt results for the exact configuration (O31, O33)"),
 )
 LEAF_TRANSFORMS = {
     "deepswe": "z = pass@1 %",
@@ -134,7 +134,7 @@ def model_inclusion_markdown(inclusion, level="##"):
         lines += ["", "Frontier families and the configuration selected for each:", ""]
         lines += [f"- {item['family']}: {item['configuration']}" for item in inclusion["frontierFamilies"]]
     if inclusion["nearFrontierFamilies"]:
-        lines += ["", "Near-frontier families and each family's near point closest to the frontier (a family is ranked at its configuration with exact DeepSWE and Bug Hunt results when it has one, O30, so the ranked configuration can differ):", ""]
+        lines += ["", "Near-frontier families and each family's near point closest to the frontier (a family's primary configuration is its configuration with exact DeepSWE and Bug Hunt results when it has one, O30, and every other effort with both results is ranked as its own row, O33, so the ranked configurations can differ):", ""]
         lines += [
             f"- {item['family']}: {item['configuration']}, {item['gap']} Index point{'' if item['gap'] == '1' else 's'} below the frontier"
             for item in inclusion["nearFrontierFamilies"]
@@ -162,10 +162,11 @@ def deepswe_chart_table(deepswe_configurations):
 
 
 def configuration_label(row, names_by_id):
-    """``Name (effort)``: the configuration a v3 row scores."""
+    """``Name (effort)``: the configuration a v3 row scores. A sibling effort's name already ends with it (O33)."""
 
     name = names_by_id[row["id"]]
-    return f"{name} ({row['effort']})" if row.get("effort") else name
+    suffix = f" ({row['effort']})" if row.get("effort") else ""
+    return name if name.endswith(suffix) else name + suffix
 
 
 def model_link(entry, label=None):
@@ -829,7 +830,7 @@ def interval_block(facts, result, label, workload_label):
             text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
             siblings = "; ".join(f"{facts.label(row_id)}: {', '.join(names)}" for row_id, names in bar["uncheckedCheaperSiblings"].items() if names)
             text += f"Configurations that can be confirmed to qualify: {bar['confirmedQualifierN']} (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). "
-            text += f"Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): {siblings or 'none'}.\n\n"
+            text += f"Cheaper same-family configurations on AA's chart that were not evaluated (not ranked: no exact DeepSWE and Bug Hunt pair; E201, O33): {siblings or 'none'}.\n\n"
             text += f"Bar comparison: {bar['comparison']}. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).\n\n"
             bar_rows = [[facts.label(row_id), fnum(item["displayedMargin"], 1), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
             text += markdown_table(["Configuration", "Displayed quality − bar", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows, numeric={1})

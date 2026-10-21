@@ -16,16 +16,16 @@
       "authorizedOn": "2026-10-07",
       "evidenceType": "Controlled subscription-account measurements with agentic workload projections."
     },
-    "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption.",
+    "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption. Owner decision O33 (2026-10-21) ranks GPT-6.1 Sol at xhigh, high, medium and low as their own rows; they take the common GPT routes as user assumptions. SemiAnalysis names GPT-6.1 Sol without an effort, so its figure is not treated as a measurement of any of these efforts.",
     "mimoApplication": "User authorizes provisional 1.5x for both MiMo candidate variants. Plan fee and measured API-equivalent numerator remain unavailable.",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions.",
-    "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume."
+    "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes."
   },
   "identificationYield": {
-    "rows": 23,
+    "rows": 37,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 23,
+    "unidentified": 37,
     "exploratory": true
   },
   "routes": [
@@ -48,7 +48,11 @@
         "gpt-5-5",
         "gpt-6-sol",
         "gpt-6-1-sol",
-        "gpt-6-luna"
+        "gpt-6-luna",
+        "gpt-6-1-sol-xhigh",
+        "gpt-6-1-sol-high",
+        "gpt-6-1-sol-medium",
+        "gpt-6-1-sol-low"
       ],
       "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: Astra's 8.1x for Plus. $162 is the applied monthly equivalent estimate at the $20 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis."
     },
@@ -71,7 +75,11 @@
         "gpt-5-5",
         "gpt-6-sol",
         "gpt-6-1-sol",
-        "gpt-6-luna"
+        "gpt-6-luna",
+        "gpt-6-1-sol-xhigh",
+        "gpt-6-1-sol-high",
+        "gpt-6-1-sol-medium",
+        "gpt-6-1-sol-low"
       ],
       "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.55x for Pro 100. $1,055 is the applied monthly equivalent estimate at the $100 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis."
     },
@@ -94,7 +102,11 @@
         "gpt-5-5",
         "gpt-6-sol",
         "gpt-6-1-sol",
-        "gpt-6-luna"
+        "gpt-6-luna",
+        "gpt-6-1-sol-xhigh",
+        "gpt-6-1-sol-high",
+        "gpt-6-1-sol-medium",
+        "gpt-6-1-sol-low"
       ],
       "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.42x for Pro 200. $2,084 is the applied monthly equivalent estimate at the $200 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. Historical pre-cut $5,734 Astra and $5,904 GPT-6 Sol figures are excluded."
     },
@@ -117,7 +129,11 @@
         "gpt-5-5",
         "gpt-6-sol",
         "gpt-6-1-sol",
-        "gpt-6-luna"
+        "gpt-6-luna",
+        "gpt-6-1-sol-xhigh",
+        "gpt-6-1-sol-high",
+        "gpt-6-1-sol-medium",
+        "gpt-6-1-sol-low"
       ],
       "notes": "User authorizes shared ChatGPT plan multiples across GPT models. ValueRank applies the conservative lower source estimate per plan: GPT-6.1 Sol's 10.772x for Pro 500. $5,386 is the applied monthly equivalent estimate at the $500 fee; it does not measure every listed variant. The shared scope is user-authorized; the numerical lower-estimate selection is ValueRank's stated implementation assumption. Original source figures and workload are retained in sourceEvidence.semianalysis. This is the highest common GPT multiple among the four eligible ChatGPT tiers."
     },
@@ -259,7 +275,15 @@
         "claude-opus-4-8",
         "claude-sonnet-5",
         "claude-haiku-5-5",
-        "claude-sonnet-5-5"
+        "claude-sonnet-5-5",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low"
       ],
       "notes": "Applies Opus 5.5's measured Claude Pro figure ($1,178/month at $20, 58.9x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
     },
@@ -281,7 +305,15 @@
         "claude-opus-4-8",
         "claude-sonnet-5",
         "claude-haiku-5-5",
-        "claude-sonnet-5-5"
+        "claude-sonnet-5-5",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low"
       ],
       "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
     },
@@ -303,7 +335,15 @@
         "claude-opus-4-8",
         "claude-sonnet-5",
         "claude-haiku-5-5",
-        "claude-sonnet-5-5"
+        "claude-sonnet-5-5",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low"
       ],
       "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
     }
@@ -313,8 +353,8 @@
       "slug": "claude-fable-5-1",
       "name": "Claude Fable 5.1",
       "rank": {
-        "api": 18,
-        "plan": 12
+        "api": 30,
+        "plan": 22
       },
       "apiUsd": 11580.618526030545,
       "planUsd": 909.7108033016924,
@@ -328,8 +368,8 @@
         "status": "measured, target-workload unmatched",
         "routeId": "claude-max5x-fable51-semianalysis",
         "costUsd": 909.7108033016924,
-        "costScore": 31.295976188424866,
-        "value": 53.012769060297536,
+        "costScore": 26.89354685068565,
+        "value": 51.91216172586273,
         "rank": 4
       }
     },
@@ -337,8 +377,8 @@
       "slug": "claude-haiku-5-5",
       "name": "Claude Haiku 5.5",
       "rank": {
-        "api": 11,
-        "plan": 4
+        "api": 24,
+        "plan": 13
       },
       "apiUsd": 292.07481065705014,
       "planUsd": 4.958825308269103,
@@ -354,11 +394,91 @@
       }
     },
     {
+      "slug": "claude-haiku-5-5-high",
+      "name": "Claude Haiku 5.5 (high)",
+      "rank": {
+        "api": 23,
+        "plan": 17
+      },
+      "apiUsd": 181.3464586928498,
+      "planUsd": 3.0788872443607778,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5-low",
+      "name": "Claude Haiku 5.5 (low)",
+      "rank": {
+        "api": 27,
+        "plan": 24
+      },
+      "apiUsd": 71.52335239510617,
+      "planUsd": 1.21431837682693,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5-max",
+      "name": "Claude Haiku 5.5 (max)",
+      "rank": {
+        "api": 35,
+        "plan": 25
+      },
+      "apiUsd": 973.3373083091135,
+      "planUsd": 16.52525141441619,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5-medium",
+      "name": "Claude Haiku 5.5 (medium)",
+      "rank": {
+        "api": 20,
+        "plan": 19
+      },
+      "apiUsd": 114.50519282185142,
+      "planUsd": 1.9440609986731991,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
       "slug": "claude-opus-5",
       "name": "Claude Opus 5",
       "rank": {
-        "api": 21,
-        "plan": 5
+        "api": 33,
+        "plan": 11
       },
       "apiUsd": 8733.127052137232,
       "planUsd": 148.27040835547083,
@@ -377,8 +497,8 @@
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "rank": {
-        "api": 15,
-        "plan": 2
+        "api": 22,
+        "plan": 5
       },
       "apiUsd": 9989.151438394825,
       "planUsd": 169.59510082164388,
@@ -392,8 +512,8 @@
         "status": "measured, target-workload unmatched",
         "routeId": "claude-pro-opus55-semianalysis",
         "costUsd": 169.59510082164388,
-        "costScore": 50.838903036972745,
-        "value": 60.855387516654574,
+        "costScore": 43.68735496315907,
+        "value": 59.067500498201156,
         "rank": 1
       }
     },
@@ -401,8 +521,8 @@
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
-        "api": 14,
-        "plan": 1
+        "api": 19,
+        "plan": 4
       },
       "apiUsd": 9373.65305908234,
       "planUsd": 159.14521322720444,
@@ -418,11 +538,91 @@
       }
     },
     {
+      "slug": "claude-sonnet-5-5-high",
+      "name": "Claude Sonnet 5.5 (high)",
+      "rank": {
+        "api": 11,
+        "plan": 7
+      },
+      "apiUsd": 1247.9973342182716,
+      "planUsd": 21.188409749036868,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-sonnet-5-5-low",
+      "name": "Claude Sonnet 5.5 (low)",
+      "rank": {
+        "api": 28,
+        "plan": 14
+      },
+      "apiUsd": 578.392372482358,
+      "planUsd": 9.819904456406759,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-sonnet-5-5-medium",
+      "name": "Claude Sonnet 5.5 (medium)",
+      "rank": {
+        "api": 18,
+        "plan": 10
+      },
+      "apiUsd": 731.6293440729121,
+      "planUsd": 12.421550833156402,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-sonnet-5-5-xhigh",
+      "name": "Claude Sonnet 5.5 (xhigh)",
+      "rank": {
+        "api": 15,
+        "plan": 6
+      },
+      "apiUsd": 2836.0467965283697,
+      "planUsd": 48.15020028061748,
+      "fallback": null,
+      "routeId": "claude-pro-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
       "slug": "deepseek-v4-flash",
       "name": "DeepSeek V4 Flash",
       "rank": {
-        "api": 7,
-        "plan": 17
+        "api": 12,
+        "plan": 30
       },
       "apiUsd": 279.5120478141823,
       "planUsd": 279.5120478141823,
@@ -440,8 +640,8 @@
       "slug": "deepseek-v4-pro",
       "name": "DeepSeek V4 Pro",
       "rank": {
-        "api": 12,
-        "plan": 18
+        "api": 26,
+        "plan": 32
       },
       "apiUsd": 801.4967532139415,
       "planUsd": 801.4967532139415,
@@ -459,8 +659,8 @@
       "slug": "gemini-3-8-flash",
       "name": "Gemini 3.8 Flash",
       "rank": {
-        "api": 17,
-        "plan": 21
+        "api": 32,
+        "plan": 35
       },
       "apiUsd": 2073.444227327155,
       "planUsd": 2073.444227327155,
@@ -478,8 +678,8 @@
       "slug": "gemini-4-argon",
       "name": "Gemini 4 Argon",
       "rank": {
-        "api": 4,
-        "plan": 13
+        "api": 7,
+        "plan": 21
       },
       "apiUsd": 3628.6386911634218,
       "planUsd": 3628.6386911634218,
@@ -497,8 +697,8 @@
       "slug": "glm-5-3",
       "name": "GLM-5.3",
       "rank": {
-        "api": 20,
-        "plan": 20
+        "api": 34,
+        "plan": 34
       },
       "apiUsd": 3186.289595775135,
       "planUsd": 3186.289595775135,
@@ -516,8 +716,8 @@
       "slug": "gpt-5-6-luna",
       "name": "GPT-5.6 Luna",
       "rank": {
-        "api": 6,
-        "plan": 8
+        "api": 10,
+        "plan": 20
       },
       "apiUsd": 319.25290369032655,
       "planUsd": 29.637291467724335,
@@ -536,8 +736,8 @@
       "slug": "gpt-5-6-sol",
       "name": "GPT-5.6 Sol",
       "rank": {
-        "api": 13,
-        "plan": 9
+        "api": 21,
+        "plan": 15
       },
       "apiUsd": 4238.135507049396,
       "planUsd": 393.4399839444297,
@@ -556,8 +756,8 @@
       "slug": "gpt-6-1-sol",
       "name": "GPT-6.1 Sol",
       "rank": {
-        "api": 2,
-        "plan": 3
+        "api": 6,
+        "plan": 8
       },
       "apiUsd": 1267.6626637224322,
       "planUsd": 117.68127216138434,
@@ -571,17 +771,97 @@
         "status": "measured, target-workload unmatched",
         "routeId": "chatgpt-pro500-common-semianalysis-assumption",
         "costUsd": 117.68127216138434,
-        "costScore": 55.09061110368823,
-        "value": 59.768083679103796,
+        "costScore": 47.3409719457136,
+        "value": 57.83067388961014,
         "rank": 2
+      }
+    },
+    {
+      "slug": "gpt-6-1-sol-high",
+      "name": "GPT-6.1 Sol (high)",
+      "rank": {
+        "api": 3,
+        "plan": 2
+      },
+      "apiUsd": 700.5127639425643,
+      "planUsd": 65.03089156540702,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-common-semianalysis-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "gpt-6-1-sol-low",
+      "name": "GPT-6.1 Sol (low)",
+      "rank": {
+        "api": 5,
+        "plan": 9
+      },
+      "apiUsd": 375.2096972444586,
+      "planUsd": 34.83194367289812,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-common-semianalysis-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "gpt-6-1-sol-medium",
+      "name": "GPT-6.1 Sol (medium)",
+      "rank": {
+        "api": 2,
+        "plan": 3
+      },
+      "apiUsd": 531.5621485772531,
+      "planUsd": 49.346653228486176,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-common-semianalysis-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "gpt-6-1-sol-xhigh",
+      "name": "GPT-6.1 Sol (xhigh)",
+      "rank": {
+        "api": 1,
+        "plan": 1
+      },
+      "apiUsd": 827.2341182369406,
+      "planUsd": 76.7948494464297,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-common-semianalysis-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
       }
     },
     {
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "rank": {
-        "api": 16,
-        "plan": 10
+        "api": 25,
+        "plan": 18
       },
       "apiUsd": 6107.090015422354,
       "planUsd": 753.9617302990561,
@@ -595,8 +875,8 @@
         "status": "measured, target-workload unmatched",
         "routeId": "chatgpt-plus-common-semianalysis-assumption",
         "costUsd": 753.9617302990561,
-        "costScore": 33.480796707067185,
-        "value": 54.031673829760464,
+        "costScore": 28.771026965850698,
+        "value": 52.85423139445634,
         "rank": 3
       }
     },
@@ -604,8 +884,8 @@
       "slug": "gpt-6-luna",
       "name": "GPT-6 Luna",
       "rank": {
-        "api": 3,
-        "plan": 7
+        "api": 8,
+        "plan": 16
       },
       "apiUsd": 132.8652049689931,
       "planUsd": 12.334311638413768,
@@ -624,8 +904,8 @@
       "slug": "gpt-6-sol",
       "name": "GPT-6 Sol",
       "rank": {
-        "api": 8,
-        "plan": 6
+        "api": 13,
+        "plan": 12
       },
       "apiUsd": 1999.4094902839818,
       "planUsd": 185.61172394021366,
@@ -641,11 +921,30 @@
       }
     },
     {
+      "slug": "grok-4-6-xhigh",
+      "name": "Grok 4.6 (xhigh)",
+      "rank": {
+        "api": 17,
+        "plan": 29
+      },
+      "apiUsd": 2983.665720539929,
+      "planUsd": 2983.665720539929,
+      "fallback": "api",
+      "routeId": null,
+      "flags": [
+        "API-cost fallback: no admitted Plan route",
+        "cross-estimand ordering not identified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
       "slug": "grok-4-7",
       "name": "Grok 4.7",
       "rank": {
-        "api": 19,
-        "plan": 19
+        "api": 31,
+        "plan": 33
       },
       "apiUsd": 6700.021962805636,
       "planUsd": 6700.021962805636,
@@ -663,8 +962,8 @@
       "slug": "mimo-v2-6-flash",
       "name": "MiMo-V2.6-Flash",
       "rank": {
-        "api": 1,
-        "plan": 11
+        "api": 4,
+        "plan": 23
       },
       "apiUsd": 60.36787614182735,
       "planUsd": 40.24525076121824,
@@ -684,8 +983,8 @@
       "slug": "mimo-v2-6-pro",
       "name": "MiMo-V2.6-Pro",
       "rank": {
-        "api": 5,
-        "plan": 15
+        "api": 9,
+        "plan": 27
       },
       "apiUsd": 136.12695920883297,
       "planUsd": 90.75130613922198,
@@ -705,8 +1004,8 @@
       "slug": "muse-spark-1-3",
       "name": "Muse Spark 1.3",
       "rank": {
-        "api": 10,
-        "plan": 16
+        "api": 16,
+        "plan": 28
       },
       "apiUsd": 2764.9826567800033,
       "planUsd": 2764.9826567800033,
@@ -721,11 +1020,30 @@
       }
     },
     {
+      "slug": "muse-spark-1-3-xhigh",
+      "name": "Muse Spark 1.3 (xhigh)",
+      "rank": {
+        "api": 29,
+        "plan": 31
+      },
+      "apiUsd": 2366.1623199016663,
+      "planUsd": 2366.1623199016663,
+      "fallback": "api",
+      "routeId": null,
+      "flags": [
+        "API-cost fallback: no admitted Plan route",
+        "cross-estimand ordering not identified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
       "slug": "muse-wonder",
       "name": "Muse Wonder",
       "rank": {
-        "api": 9,
-        "plan": 14
+        "api": 14,
+        "plan": 26
       },
       "apiUsd": 6534.155660296668,
       "planUsd": 6534.155660296668,
@@ -759,8 +1077,8 @@
       "slug": "qwen3-8-max",
       "name": "Qwen3.8 Max",
       "rank": {
-        "api": 22,
-        "plan": 22
+        "api": 36,
+        "plan": 36
       },
       "apiUsd": 5417.032020806289,
       "planUsd": 5417.032020806289,

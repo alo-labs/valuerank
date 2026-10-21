@@ -12,6 +12,31 @@
   "supplementalSourceCaptures": [
     {
       "modelIds": [
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
+      ],
+      "observedAt": "2026-10-21",
+      "siteUpdatedOn": "2026-10-17",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "leaderboard": "https://bughunt.productcompass.pm/",
+      "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md",
+      "captureMethod": "raw files from the benchmark owner's repository at the pinned commit",
+      "note": "Owner decision O33 (2026-10-21): records added for every other evidenced effort (exact AA DeepSWE result and matched exact Bug Hunt result), read from the same pinned 2026-10-17 scoreboard and run notes; each takes the owner's largest-sample published mean on its own effort and route. The rows previously listed as other-effort exclusions are now matched records of their own configurations. combined-scoreboard.csv sha256 fcf4b396c46fa07ad8bb0836ddaa1eb227fae776e356f78f03df482033d5e987, run-notes.md sha256 d3200281a839204914d154692d355a8236810871898ca3311547e6171150cb22."
+    },
+    {
+      "modelIds": [
         "claude-fable-5-1",
         "muse-spark-1-3",
         "muse-wonder",
@@ -260,8 +285,8 @@
     },
     {
       "modelId": "grok-4.6",
-      "matched": true,
-      "matchStatus": "matched",
+      "matched": false,
+      "matchStatus": "effort_mismatch",
       "evaluatedModel": "Grok 4.6 (xhigh) seq - mean of 3",
       "fixedOf105": 28.7,
       "sampleN": 3,
@@ -271,7 +296,7 @@
       "harness": "Grok Build CLI (ACP)",
       "route": "xAI",
       "sourceType": "benchmark_owner",
-      "note": "Sequential repo runs; owner-published mean of three runs.",
+      "note": "The roster tracks Grok 4.6 at medium; the owner's xhigh run (sequential, mean of three) belongs to grok-4.6-xhigh (O33). No result is transferred between efforts.",
       "observedAt": "2026-10-18",
       "reportedOn": "2026-09-14",
       "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
@@ -724,7 +749,7 @@
       "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
       "wallMinutes": 24.1,
       "listRateCostUsd": 4.8,
-      "note": "Owner-published mean of three runs of Claude Haiku 5.5 at xhigh effort through Claude Code on the first-party API (16, 19 and 20 of 105); xhigh is the cohort-selected variant (Artificial Analysis frontier configurations medium, high and xhigh; max is not on the frontier). The xhigh effort was read off the wire because the CLI did not yet recognise the model: accepted, not magnitude-probed, and not the ceiling (max exists). Cost is a list-rate estimate priced per request, not an invoice. The max, high, medium and low rows are other efforts and are excluded."
+      "note": "Owner-published mean of three runs of Claude Haiku 5.5 at xhigh effort through Claude Code on the first-party API (16, 19 and 20 of 105); xhigh is the cohort-selected variant (Artificial Analysis frontier configurations medium, high and xhigh; max is not on the frontier). The xhigh effort was read off the wire because the CLI did not yet recognise the model: accepted, not magnitude-probed, and not the ceiling (max exists). Cost is a list-rate estimate priced per request, not an invoice. The max, high, medium and low rows are other efforts; since owner decision O33 (2026-10-21) each is the matched record of its own ranked configuration."
     },
     {
       "modelId": "claude-sonnet-5-5",
@@ -814,7 +839,7 @@
       "harness": "Muse Code / Meta API",
       "route": "Meta API",
       "sourceType": "benchmark_owner",
-      "note": "Owner-published mean of five runs on Meta's first-party API (33, 33, 35, 29 and 31 of 105), the largest-sample published mean for this configuration and route; it supersedes the owner's mean of three (33.7) and single run (33). Two runs straddle a self-updating harness (Muse Code 1.2.1 to 1.3.0 on their repo-2 legs); the owner's notes attribute the spread to run-to-run variance. Both max and xhigh have exact DeepSWE and Bug Hunt results; max is ranked as the higher AA Intelligence Index (48 against 45).",
+      "note": "Owner-published mean of five runs on Meta's first-party API (33, 33, 35, 29 and 31 of 105), the largest-sample published mean for this configuration and route; it supersedes the owner's mean of three (33.7) and single run (33). Two runs straddle a self-updating harness (Muse Code 1.2.1 to 1.3.0 on their repo-2 legs); the owner's notes attribute the spread to run-to-run variance. Both max and xhigh have exact DeepSWE and Bug Hunt results; since owner decision O33 (2026-10-21) each is ranked as its own row.",
       "observedAt": "2026-10-21",
       "reportedOn": "2026-09-17",
       "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
@@ -877,6 +902,384 @@
         40
       ],
       "observedRange": 4
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6.1 Sol (xhigh effort) - mean of 3",
+      "fixedOf105": 42.7,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "xhigh",
+      "effortStatus": "verified first-party Codex tier",
+      "harness": "Codex CLI",
+      "harnessVersion": "0.159.0",
+      "route": "OpenAI ChatGPT account",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-30",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-61-sol-xhigh-effort---mean-of-3",
+      "runScores": [
+        41,
+        43,
+        44
+      ],
+      "observedRange": 3,
+      "judge": "grok-4.7 blinded to arm identity",
+      "wallMinutes": 98.7,
+      "listRateCostUsd": 4.35,
+      "note": "Owner-published mean of three identical xhigh configurations through Codex 0.159.0 on a ChatGPT account (41, 43, 44 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single xhigh run (41 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6.1 Sol (high effort) - mean of 2",
+      "fixedOf105": 36.5,
+      "sampleN": 2,
+      "aggregation": "mean",
+      "effort": "high",
+      "effortStatus": "verified first-party Codex tier",
+      "harness": "Codex CLI",
+      "harnessVersion": "0.159.0",
+      "route": "OpenAI ChatGPT account",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-30",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-61-sol-high-effort---mean-of-2",
+      "runScores": [
+        38,
+        35
+      ],
+      "observedRange": 3,
+      "judge": "grok-4.7 blinded to arm identity",
+      "wallMinutes": 70.3,
+      "listRateCostUsd": 3.26,
+      "note": "Owner-published mean of two identical high configurations through Codex 0.159.0 on a ChatGPT account (38, 35 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single high run (38 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6.1 Sol (medium effort) - mean of 2",
+      "fixedOf105": 29.0,
+      "sampleN": 2,
+      "aggregation": "mean",
+      "effort": "medium",
+      "effortStatus": "verified first-party Codex tier",
+      "harness": "Codex CLI",
+      "harnessVersion": "0.159.0",
+      "route": "OpenAI ChatGPT account",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-30",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-61-sol-medium-effort---mean-of-2",
+      "runScores": [
+        28,
+        30
+      ],
+      "observedRange": 2,
+      "judge": "grok-4.7 blinded to arm identity",
+      "wallMinutes": 29.8,
+      "listRateCostUsd": 1.76,
+      "note": "Owner-published mean of two identical medium configurations through Codex 0.159.0 on a ChatGPT account (28, 30 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single medium run (28 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "gpt-6.1-sol-low",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "GPT-6.1 Sol (low effort) - mean of 2",
+      "fixedOf105": 22.5,
+      "sampleN": 2,
+      "aggregation": "mean",
+      "effort": "low",
+      "effortStatus": "verified first-party Codex tier",
+      "harness": "Codex CLI",
+      "harnessVersion": "0.159.0",
+      "route": "OpenAI ChatGPT account",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-10-01",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-61-sol-low-effort---mean-of-2",
+      "runScores": [
+        31,
+        14
+      ],
+      "observedRange": 17,
+      "judge": "grok-4.7 blinded to arm identity",
+      "wallMinutes": 25.4,
+      "listRateCostUsd": 1.34,
+      "note": "Owner-published mean of two identical low configurations through Codex 0.159.0 on a ChatGPT account (31, 14 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single low run (31 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-haiku-5-5-max",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Haiku 5.5 (max effort) - mean of 2",
+      "fixedOf105": 21.5,
+      "sampleN": 2,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "max",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-10-07",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-haiku-55-max-effort---mean-of-2",
+      "runScores": [
+        22,
+        21
+      ],
+      "observedRange": 1,
+      "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
+      "wallMinutes": 32.5,
+      "listRateCostUsd": 5.83,
+      "note": "Owner-published mean of two runs of Claude Haiku 5.5 at max effort through Claude Code on the first-party API (22 and 21 of 105), superseding the owner's single max run (22). Max is the model's top tier, read off the wire: accepted, not magnitude-probed. Each run took its two repository legs at the same time on one account, so walls include contention. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Haiku 5.5 (high effort) - mean of 2",
+      "fixedOf105": 16.0,
+      "sampleN": 2,
+      "aggregation": "mean",
+      "effort": "high",
+      "effortStatus": "high",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-10-07",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-haiku-55-high-effort---mean-of-2",
+      "runScores": [
+        15,
+        17
+      ],
+      "observedRange": 2,
+      "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
+      "wallMinutes": 19.3,
+      "listRateCostUsd": 3.56,
+      "note": "Owner-published mean of two runs of Claude Haiku 5.5 at high effort through Claude Code on the first-party API (15 and 17 of 105), superseding the owner's single high run (15). The owner did not capture high on the wire separately; the xhigh and max captures on the same CLI build showed the effort flag passed through verbatim. Each run took its two repository legs at the same time on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Haiku 5.5 (medium effort)",
+      "fixedOf105": 12.0,
+      "sampleN": 1,
+      "aggregation": "single",
+      "effort": "medium",
+      "effortStatus": "medium",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-10-08",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-haiku-55-medium-effort",
+      "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
+      "wallMinutes": 15.5,
+      "listRateCostUsd": 2.66,
+      "note": "Single official run of Claude Haiku 5.5 at medium effort (the model's API default) through Claude Code on the first-party API (repo 1 5/45, repo 2 7/60); the owner publishes no repeated medium runs, so treat it as one draw. Four legs ran at once on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Haiku 5.5 (low effort)",
+      "fixedOf105": 11.0,
+      "sampleN": 1,
+      "aggregation": "single",
+      "effort": "low",
+      "effortStatus": "low",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-10-08",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-haiku-55-low-effort",
+      "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
+      "wallMinutes": 8.7,
+      "listRateCostUsd": 1.61,
+      "note": "Single official run of Claude Haiku 5.5 at low effort through Claude Code on the first-party API (repo 1 4/45, repo 2 7/60); the owner publishes no repeated low runs, so treat it as one draw. Four legs ran at once on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-sonnet-5-5-xhigh",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Sonnet 5.5 (xhigh effort) - mean of 3",
+      "fixedOf105": 36.0,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "xhigh",
+      "effortStatus": "xhigh",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-29",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-sonnet-55-xhigh-effort---mean-of-3",
+      "runScores": [
+        39,
+        34,
+        35
+      ],
+      "observedRange": 5,
+      "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
+      "wallMinutes": 72.7,
+      "listRateCostUsd": 42.86,
+      "note": "Owner-published mean of three Sonnet 5.5 xhigh-effort runs through Claude Code on the first-party API (39, 34, 35 of 105; spread 5), superseding the owner's single run (39 of 105). The AA 'xhigh with fallback' configuration maps to the owner's '(xhigh effort)' row, the same convention as the Sonnet 5.5 max entry. Cost is a list-rate estimate, not an invoice; the owner notes the harness priced this model on another model's table. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-sonnet-5-5-high",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Sonnet 5.5 (high effort) - mean of 3",
+      "fixedOf105": 34.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "high",
+      "effortStatus": "high",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-29",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-sonnet-55-high-effort---mean-of-3",
+      "runScores": [
+        32,
+        34,
+        37
+      ],
+      "observedRange": 5,
+      "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
+      "wallMinutes": 27.9,
+      "listRateCostUsd": 19.85,
+      "note": "Owner-published mean of three Sonnet 5.5 high-effort runs through Claude Code on the first-party API (32, 34, 37 of 105; spread 5), superseding the owner's single run (32 of 105). The AA 'high with fallback' configuration maps to the owner's '(high effort)' row, the same convention as the Sonnet 5.5 max entry. Cost is a list-rate estimate, not an invoice; the owner notes the harness priced this model on another model's table. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-sonnet-5-5-medium",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Sonnet 5.5 (medium effort) - mean of 3",
+      "fixedOf105": 23.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "medium",
+      "effortStatus": "medium",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-30",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-sonnet-55-medium-effort---mean-of-3",
+      "runScores": [
+        18,
+        28,
+        24
+      ],
+      "observedRange": 10,
+      "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
+      "wallMinutes": 17.4,
+      "listRateCostUsd": 11.11,
+      "note": "Owner-published mean of three Sonnet 5.5 medium-effort runs through Claude Code on the first-party API (18, 28, 24 of 105; spread 10), superseding the owner's single run (18 of 105). The AA 'medium with fallback' configuration maps to the owner's '(medium effort)' row, the same convention as the Sonnet 5.5 max entry. Cost is a list-rate estimate, not an invoice; the owner notes the harness priced this model on another model's table. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "claude-sonnet-5-5-low",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Sonnet 5.5 (low effort) - mean of 3",
+      "fixedOf105": 19.0,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "low",
+      "effortStatus": "low",
+      "harness": "Claude Code",
+      "route": "Anthropic",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-30",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-sonnet-55-low-effort---mean-of-3",
+      "runScores": [
+        20,
+        17,
+        20
+      ],
+      "observedRange": 3,
+      "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
+      "wallMinutes": 8.5,
+      "listRateCostUsd": 5.73,
+      "note": "Owner-published mean of three Sonnet 5.5 low-effort runs through Claude Code on the first-party API (20, 17, 20 of 105; spread 3), superseding the owner's single run (20 of 105). The AA 'low with fallback' configuration maps to the owner's '(low effort)' row, the same convention as the Sonnet 5.5 max entry. Cost is a list-rate estimate, not an invoice; the owner notes the harness priced this model on another model's table. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "muse-spark-1-3-xhigh",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3",
+      "fixedOf105": 20.3,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "xhigh",
+      "effortStatus": "second tier of Meta's effort dial",
+      "harness": "Muse Code / Meta API",
+      "route": "Meta API",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-14",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-muse-spark-13-xhigh-effort-muse-code-meta-api---mean-of-3",
+      "runScores": [
+        20,
+        25,
+        16
+      ],
+      "observedRange": 9,
+      "wallMinutes": 63.8,
+      "listRateCostUsd": 13.71,
+      "note": "Owner-published mean of three runs on Meta's first-party API (20, 25 and 16 of 105), superseding the owner's single xhigh run (20) on the same route. The effort label describes the main loop; Muse Code runs a reminder-observer side agent at fixed efforts the flag does not control. Cost is a list-rate estimate, not a bill. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "grok-4.6-xhigh",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "Grok 4.6 (xhigh) seq - mean of 3",
+      "fixedOf105": 28.7,
+      "sampleN": 3,
+      "aggregation": "mean",
+      "effort": "xhigh",
+      "effortStatus": "verified ceiling",
+      "harness": "Grok Build CLI (ACP)",
+      "route": "xAI",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-21",
+      "reportedOn": "2026-09-14",
+      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-grok-46-xhigh-seq---mean-of-3",
+      "runScores": [
+        27,
+        30,
+        29
+      ],
+      "observedRange": 3,
+      "judge": "Codex gpt-5.5",
+      "wallMinutes": 43.1,
+      "listRateCostUsd": 18.6,
+      "note": "Sequential repo runs; owner-published mean of three runs (27, 30 and 29 of 105), superseding the single sequential run (27). The owner's concurrent-legs Grok 4.6 (xhigh) row (27) is a separate single run. Effort verified active by an ACP readback before each launch. Cost is a reconstructed floor at xAI list rates, not a bill. The scoreboard row names the effort without the word 'effort'; O33's catalog-wide check reads it as xhigh. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
     }
   ],
   "excludedResults": [
@@ -907,62 +1310,6 @@
       "fixedOf105": 16,
       "sampleN": 1,
       "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the medium variant."
-    },
-    {
-      "modelId": "claude-haiku-5-5",
-      "evaluatedModel": "Haiku 5.5 (max effort) - mean of 2",
-      "fixedOf105": 21.5,
-      "sampleN": 2,
-      "exclusionReason": "Benchmark owner evaluated max effort; the cohort selects the xhigh variant."
-    },
-    {
-      "modelId": "claude-haiku-5-5",
-      "evaluatedModel": "Haiku 5.5 (high effort) - mean of 2",
-      "fixedOf105": 16,
-      "sampleN": 2,
-      "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the xhigh variant."
-    },
-    {
-      "modelId": "claude-haiku-5-5",
-      "evaluatedModel": "Haiku 5.5 (medium effort)",
-      "fixedOf105": 12,
-      "sampleN": 1,
-      "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the xhigh variant."
-    },
-    {
-      "modelId": "claude-haiku-5-5",
-      "evaluatedModel": "Haiku 5.5 (low effort)",
-      "fixedOf105": 11,
-      "sampleN": 1,
-      "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the xhigh variant."
-    },
-    {
-      "modelId": "claude-sonnet-5-5",
-      "evaluatedModel": "Sonnet 5.5 (xhigh effort) - mean of 3",
-      "fixedOf105": 36,
-      "sampleN": 3,
-      "exclusionReason": "Benchmark owner evaluated xhigh effort; the cohort selects the max variant."
-    },
-    {
-      "modelId": "claude-sonnet-5-5",
-      "evaluatedModel": "Sonnet 5.5 (high effort) - mean of 3",
-      "fixedOf105": 34.3,
-      "sampleN": 3,
-      "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the max variant."
-    },
-    {
-      "modelId": "claude-sonnet-5-5",
-      "evaluatedModel": "Sonnet 5.5 (medium effort) - mean of 3",
-      "fixedOf105": 23.3,
-      "sampleN": 3,
-      "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the max variant."
-    },
-    {
-      "modelId": "claude-sonnet-5-5",
-      "evaluatedModel": "Sonnet 5.5 (low effort) - mean of 3",
-      "fixedOf105": 19,
-      "sampleN": 3,
-      "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the max variant."
     },
     {
       "modelId": "gemini-4-argon",
@@ -1029,13 +1376,6 @@
     },
     {
       "modelId": "muse-spark-1-3",
-      "evaluatedModel": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3",
-      "fixedOf105": 20.3,
-      "sampleN": 3,
-      "exclusionReason": "Benchmark owner evaluated xhigh effort; the cohort selects the max variant (higher AA Intelligence Index, 48 against 45)."
-    },
-    {
-      "modelId": "muse-spark-1-3",
       "evaluatedModel": "Muse Spark 1.3 (high effort, Muse Code, Meta API) - mean of 3",
       "fixedOf105": 18.7,
       "sampleN": 3,
@@ -1075,6 +1415,90 @@
       "fixedOf105": 41.5,
       "sampleN": 2,
       "exclusionReason": "Benchmark owner evaluated xhigh effort; AA lists only the max configuration, which the cohort selects."
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "evaluatedModel": "GPT-6.1 Sol (xhigh effort)",
+      "fixedOf105": 41,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (42.7); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "evaluatedModel": "GPT-6.1 Sol (high effort)",
+      "fixedOf105": 38,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (36.5); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "evaluatedModel": "GPT-6.1 Sol (medium effort)",
+      "fixedOf105": 28,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (29.0); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "gpt-6.1-sol-low",
+      "evaluatedModel": "GPT-6.1 Sol (low effort)",
+      "fixedOf105": 31,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (22.5); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "claude-haiku-5-5-max",
+      "evaluatedModel": "Haiku 5.5 (max effort)",
+      "fixedOf105": 22,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (21.5); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "evaluatedModel": "Haiku 5.5 (high effort)",
+      "fixedOf105": 15,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (16.0); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "claude-sonnet-5-5-xhigh",
+      "evaluatedModel": "Sonnet 5.5 (xhigh effort)",
+      "fixedOf105": 39,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (36.0); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "claude-sonnet-5-5-high",
+      "evaluatedModel": "Sonnet 5.5 (high effort)",
+      "fixedOf105": 32,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (34.3); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "claude-sonnet-5-5-medium",
+      "evaluatedModel": "Sonnet 5.5 (medium effort)",
+      "fixedOf105": 18,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (23.3); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "muse-spark-1-3-xhigh",
+      "evaluatedModel": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API)",
+      "fixedOf105": 20,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (20.3); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "grok-4.6-xhigh",
+      "evaluatedModel": "Grok 4.6 (xhigh) seq",
+      "fixedOf105": 27,
+      "sampleN": 1,
+      "exclusionReason": "Single run superseded by the owner's sequential mean of three at the same effort and route (28.7); the largest-sample published mean is used."
+    },
+    {
+      "modelId": "grok-4.6-xhigh",
+      "evaluatedModel": "Grok 4.6 (xhigh)",
+      "fixedOf105": 27,
+      "sampleN": 1,
+      "exclusionReason": "Single concurrent-legs run (both repositories at once); the owner's sequential mean of three at the same effort and route (28.7) is the largest-sample published mean and is used."
     }
   ]
 }

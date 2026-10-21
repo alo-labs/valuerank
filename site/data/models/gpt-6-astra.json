@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-astra",
   "summary": {
     "rank": {
-      "api": 16,
-      "plan": 10
+      "api": 25,
+      "plan": 18
     },
     "overall": {
-      "api": 50.854043663318265,
-      "plan": 54.031673829760464
+      "api": 50.34565652451074,
+      "plan": 52.85423139445634
     },
     "quality": 60.88196620399156,
-    "qualityRank": 7,
+    "qualityRank": 10,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -251,8 +251,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 20.770276041298384,
-      "plan": 33.480796707067185
+      "api": 18.73672748606827,
+      "plan": 28.771026965850698
     },
     "components": [
       {
@@ -448,7 +448,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0009
+        "frontier": 0.0002
       },
       {
         "stratum": "S1",
@@ -466,7 +466,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0047
+        "frontier": 0.0008
       }
     ],
     "plan": [
@@ -485,7 +485,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.7867,
+        "top3": 0.6855,
         "frontier": 0.0
       },
       {
@@ -494,7 +494,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.7763,
+        "top3": 0.6608,
         "frontier": 0.0
       },
       {
@@ -503,7 +503,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.6343,
+        "top3": 0.5239,
         "frontier": 0.0
       },
       {
@@ -512,7 +512,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.789,
+        "top3": 0.6749,
         "frontier": 0.0
       }
     ]
@@ -617,8 +617,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 16,
-        "plan": 10
+        "api": 25,
+        "plan": 18
       }
     }
   ],

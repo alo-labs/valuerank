@@ -56,16 +56,16 @@ def test_export_writes_frontier_tier_fields_and_model_inclusion(data, tmp_path):
 def test_models_index_lists_every_roster_model_ranked_first(bundle):
     page = viewmodel.models_page(bundle)
     models = page["models"]
-    assert len(models) == 35
+    assert len(models) == 49
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rank"]["plan"] is not None]
     plan_ranks = [m["rank"]["plan"] for m in ranked]
-    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 22
-    assert models[:22] == ranked
-    assert all(m["rank"]["plan"] is None for m in models[22:])
+    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 36
+    assert models[:36] == ranked
+    assert all(m["rank"]["plan"] is None for m in models[36:])
     # Muse Wonder Full is in the cohort but has no cost, so no value score and no rank (AGENTS.md).
-    assert [m["slug"] for m in models[22:] if m["rankingEligible"]] == ["muse-wonder-full"]
-    assert page["rankedCount"] == 23 and page["unrankedCount"] == 12
+    assert [m["slug"] for m in models[36:] if m["rankingEligible"]] == ["muse-wonder-full"]
+    assert page["rankedCount"] == 37 and page["unrankedCount"] == 12
 
 
 def test_index_models_carry_the_coverage_object(bundle):

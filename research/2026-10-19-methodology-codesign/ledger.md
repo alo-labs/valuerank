@@ -882,3 +882,36 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 ## Owner decisions (2026-10-21, after internal review I6)
 - O33. Every evidenced effort is ranked as its own row. A configuration in AA's catalog with an exact AA DeepSWE result and a matched exact Bug Hunt result is ranked, even when another effort of the same model is already ranked. This supersedes the one-configuration-per-family part of E193 and O30. The frontier and near rules still decide which configuration carries the frontier or near inclusion reason. Asked because I6's H1 showed that the stated reason for not evaluating siblings (missing evidence) was false for GPT-6.1 Sol, Claude Haiku 5.5 and Claude Sonnet 5.5 (both results at five efforts each) and for Muse Spark 1.3 (two). Not chosen: unranked diagnostic rows; listing only. Implementation follows in r66.
 - O34. The cheapest-above-the-bar output publishes a quartile ladder. The levels are the lower quartile, the lower median (the headline bar) and the upper quartile of the non-provisional cohort's displayed quality, each at zero-based position floor((n − 1)k/4), frozen with the anchor version. Bar policy "quality-quartile-ladder" v3. Implemented: pre-release re-freeze (anchors unchanged); today's levels are 50.0 (GPT-5.6 Luna), 58.3 (GPT-6 Sol) and 61.3 (GPT-6.1 Sol). Not chosen: the single median bar.
+
+## O33 implementation (2026-10-21)
+- Added 14 configurations as their own rows: GPT-6.1 Sol (xhigh, high, medium, low), Claude Haiku 5.5 (max, high, medium, low), Claude Sonnet 5.5 (xhigh, high, medium, low), Muse Spark 1.3 (xhigh), and Grok 4.6 (xhigh).
+  - Grok 4.6 (xhigh) was found because the scoreboard parser now also reads a bare effort ("(xhigh) seq").
+  - Each has its AA page captured on 2026-10-21 (Index and cost match the chart capture), an exact DeepSWE row, and a Bug Hunt record on the owner's largest-sample mean for its own effort and route.
+  - Spot-checked against the pinned scoreboard: GPT-6.1 Sol (xhigh) 42.7 (mean of 3), Claude Haiku 5.5 (medium) 12 (single run), Claude Sonnet 5.5 (low) 19.0 (mean of 3), Muse Spark 1.3 (xhigh) 20.3, Grok 4.6 (xhigh) 28.7.
+- Sibling rows are named "Family (effort)". Only the family's primary row carries the frontier or near inclusion reason; a sibling shows the tier of its own plotted point.
+- The build:
+  - fails on any evidenced configuration missing from the roster;
+  - fails on any rostered evidenced configuration without its matched Bug Hunt record;
+  - no longer checks a single retained effort per family, which O33 supersedes.
+  - E201 now lists only unranked cheaper siblings.
+- Plan routes: GPT-6.1 Sol siblings join the owner-named ChatGPT common-assumption routes, graded as assumptions because SemiAnalysis names GPT-6.1 Sol without an effort. Claude siblings join the shared Claude assumption routes. Muse Spark 1.3 (xhigh) and Grok 4.6 (xhigh) fall back to API cost.
+- Pre-release re-freeze under the same anchor version: 33 references; low anchors API $66.43 → $35.76 and Plan $2.48 → $0.61; high anchors unchanged; ladder 48.06 / 56.70 / 60.88 over 35 configurations.
+  - The dual run (old against new anchors) moved 27 rows on at least one basis.
+  - GPT-6.1 Sol (xhigh) now leads both bases (API 60.6, Plan 60.9).
+  - Cost's share of value variance: API 82% → 47%, Plan 64% → 61%.
+  - Cohort 37, scored 36, roster 49.
+- Also fixed (AGENTS.md exact variants):
+  - The legacy composite now takes a Terminal-Bench row only at the configuration's own effort. Claude Opus 5 (max) had been given Opus 5 (xhigh)'s 0.539, and Grok 4.6 (medium) the high row's value.
+  - The unranked grok-4.6 (medium) record no longer holds the xhigh Bug Hunt run, which belongs to grok-4.6-xhigh.
+- Open, recorded for the owner summary:
+  - GPT-6.1 Sol (max)'s ChatGPT route is graded measured although SemiAnalysis states no effort (pre-existing).
+  - Several sibling Bug Hunt values rest on one or two runs (Haiku medium and low single runs; GPT-6.1 Sol low runs 31 and 14).
+
+## Internal review I6 (Claude Sonnet 5.5, effort low, on r65) — adopted, modified or rejected
+- H1 → O33 (owner). Its (a) is moot: evidenced siblings are now ranked, and E201 lists only unranked cheaper siblings, for the right reason.
+- Recommendation 2 (several bars) → O34 (owner).
+- M1 (adopted): cohort, scored and bar-population rows are defined once (37, 36 and 35 today), and "ranked rows" elsewhere means cohort rows.
+- M2 (adopted): every near point publishes its cost ratio to the frontier for information only (it never gates inclusion), and a near family is deferred only by a dated, reasoned roster decision kept in the reconciliation inventory.
+- L1 (adopted): E184's panel sizes are stated for both freezes.
+- L2 (adopted): the "non-tautology" sentence now names the property that matters (a level is never a configuration).
+- Recommendation 3 (one counts object beside the headline): partly met by the README scope line (cohort and scored counts); not adopted further.

@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/muse-spark-1-3",
   "summary": {
     "rank": {
-      "api": 10,
-      "plan": 16
+      "api": 16,
+      "plan": 28
     },
     "overall": {
-      "api": 52.778856481251694,
-      "plan": 48.705096238156386
+      "api": 51.93056440591581,
+      "plan": 48.0593424171318
     },
     "quality": 58.81941793819844,
-    "qualityRank": 10,
+    "qualityRank": 15,
     "coverage": {
       "pct": 90.0,
       "costAvailable": true,
@@ -240,8 +240,8 @@
       "cross-estimand ordering not identified"
     ],
     "costScore": {
-      "api": 34.657172110411466,
-      "plan": 18.362131138030232
+      "api": 31.264003809067937,
+      "plan": 15.779115853931893
     },
     "components": [
       {
@@ -332,17 +332,17 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.012,
-        "frontier": 0.155
+        "top3": 0.0,
+        "frontier": 0.0508
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0005,
-        "top3": 0.026,
-        "frontier": 0.1366
+        "top1": 0.0,
+        "top3": 0.0009,
+        "frontier": 0.0453
       },
       {
         "stratum": "S1",
@@ -350,8 +350,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0149,
-        "frontier": 0.2472
+        "top3": 0.0,
+        "frontier": 0.0744
       },
       {
         "stratum": "S1M",
@@ -359,8 +359,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0117,
-        "frontier": 0.1552
+        "top3": 0.0001,
+        "frontier": 0.0498
       }
     ],
     "plan": [
@@ -388,8 +388,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0012,
-        "frontier": 0.0133
+        "top3": 0.002,
+        "frontier": 0.0104
       },
       {
         "stratum": "S1",
@@ -423,8 +423,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 10,
-        "plan": 16
+        "api": 16,
+        "plan": 28
       }
     }
   ],

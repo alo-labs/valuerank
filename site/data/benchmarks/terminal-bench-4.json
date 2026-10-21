@@ -15,8 +15,8 @@
   },
   "rowN": 23,
   "rowsWithoutCostN": 1,
-  "cohortN": 35,
-  "matchedN": 12,
+  "cohortN": 49,
+  "matchedN": 13,
   "missingModels": [
     "Kimi K3",
     "GPT-5.5",
@@ -40,9 +40,22 @@
     "Gemini 4 Argon",
     "Muse Spark 1.3",
     "Muse Wonder",
-    "Muse Wonder Full"
+    "Muse Wonder Full",
+    "GPT-6.1 Sol (xhigh)",
+    "GPT-6.1 Sol (high)",
+    "GPT-6.1 Sol (medium)",
+    "GPT-6.1 Sol (low)",
+    "Claude Haiku 5.5 (max)",
+    "Claude Haiku 5.5 (high)",
+    "Claude Haiku 5.5 (medium)",
+    "Claude Haiku 5.5 (low)",
+    "Claude Sonnet 5.5 (xhigh)",
+    "Claude Sonnet 5.5 (high)",
+    "Claude Sonnet 5.5 (medium)",
+    "Claude Sonnet 5.5 (low)",
+    "Grok 4.6 (xhigh)"
   ],
-  "rankingAvailableN": 13,
+  "rankingAvailableN": 14,
   "rankingMissingModels": [
     "Kimi K3",
     "GPT-5.5",
@@ -65,7 +78,20 @@
     "Gemini 4 Argon",
     "Muse Spark 1.3",
     "Muse Wonder",
-    "Muse Wonder Full"
+    "Muse Wonder Full",
+    "GPT-6.1 Sol (xhigh)",
+    "GPT-6.1 Sol (high)",
+    "GPT-6.1 Sol (medium)",
+    "GPT-6.1 Sol (low)",
+    "Claude Haiku 5.5 (max)",
+    "Claude Haiku 5.5 (high)",
+    "Claude Haiku 5.5 (medium)",
+    "Claude Haiku 5.5 (low)",
+    "Claude Sonnet 5.5 (xhigh)",
+    "Claude Sonnet 5.5 (high)",
+    "Claude Sonnet 5.5 (medium)",
+    "Claude Sonnet 5.5 (low)",
+    "Grok 4.6 (xhigh)"
   ],
   "providerClaimN": 1,
   "providerClaims": [
@@ -369,7 +395,7 @@
       "releaseDate": "Sep 2, 2026",
       "tokens": "9.0B",
       "costUsd": null,
-      "cohortModelId": null
+      "cohortModelId": "muse-spark-1-3-xhigh"
     },
     {
       "rank": 21,
@@ -582,11 +608,31 @@
       "tokens": "2.7B",
       "costUsd": 6200.0,
       "cohortModelId": "claude-fable-5-1"
+    },
+    "muse-spark-1-3-xhigh": {
+      "rank": 20,
+      "rankLabel": "20",
+      "model": "Muse Spark 1.3 (xhigh)",
+      "baseModel": "Muse Spark 1.3",
+      "agent": "Muse Code",
+      "resolutionRate": 0.145,
+      "resolutionRatePct": 14.5,
+      "uncertaintyPct": 2.9,
+      "releaseDate": "Sep 2, 2026",
+      "tokens": "9.0B",
+      "costUsd": null,
+      "cohortModelId": "muse-spark-1-3-xhigh"
     }
   },
   "frontierCount": 4,
   "cohortMapping": {
     "gemini-4-argon": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-1-sol-xhigh": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
@@ -604,7 +650,19 @@
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
+    "gpt-6-1-sol-high": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
     "muse-wonder": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-1-sol-medium": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
@@ -634,11 +692,17 @@
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "mimo-v2-6-pro": {
+    "claude-sonnet-5-5-xhigh": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
+    },
+    "muse-spark-1-3-xhigh": {
+      "status": "official",
+      "rank": 20,
+      "resolutionRatePct": 14.5,
+      "evaluatedModel": "Muse Spark 1.3 (xhigh)"
     },
     "gpt-6-sol": {
       "status": "missing",
@@ -652,11 +716,29 @@
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
+    "mimo-v2-6-pro": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
     "claude-fable-5-1": {
       "status": "official",
       "rank": 5,
       "resolutionRatePct": 57.9,
       "evaluatedModel": "Fable 5.1 (max)"
+    },
+    "claude-sonnet-5-5-high": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-1-sol-low": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
     },
     "gpt-5-6-luna": {
       "status": "official",
@@ -664,19 +746,19 @@
       "resolutionRatePct": 17.3,
       "evaluatedModel": "GPT-5.6 Luna (max)"
     },
+    "grok-4-6-xhigh": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
     "gpt-6-luna": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "mimo-v2-6-flash": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "claude-haiku-5-5": {
+    "claude-haiku-5-5-max": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
@@ -688,11 +770,23 @@
       "resolutionRatePct": 19.1,
       "evaluatedModel": "Gemini 3.8 Flash (high)"
     },
-    "glm-5-3": {
-      "status": "official",
-      "rank": 9,
-      "resolutionRatePct": 41.8,
-      "evaluatedModel": "GLM-5.3 (max)"
+    "claude-haiku-5-5": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "mimo-v2-6-flash": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "claude-sonnet-5-5-medium": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
     },
     "claude-opus-5": {
       "status": "official",
@@ -700,11 +794,41 @@
       "resolutionRatePct": 53.9,
       "evaluatedModel": "Opus 5 (xhigh)"
     },
+    "glm-5-3": {
+      "status": "official",
+      "rank": 9,
+      "resolutionRatePct": 41.8,
+      "evaluatedModel": "GLM-5.3 (max)"
+    },
+    "claude-haiku-5-5-high": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "claude-haiku-5-5-medium": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
     "deepseek-v4-flash": {
       "status": "provider_claim",
       "rank": null,
       "resolutionRatePct": 31.2,
       "evaluatedModel": "DeepSeek V4.1-Flash"
+    },
+    "claude-haiku-5-5-low": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "claude-sonnet-5-5-low": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
     },
     "qwen3-8-max": {
       "status": "missing",

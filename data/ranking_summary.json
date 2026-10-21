@@ -2,9 +2,9 @@
   "version": "v3.0.0",
   "publishDate": "October 19, 2026",
   "observedAt": "2026-10-21T05:24:16Z",
-  "cohortN": 23,
-  "scoredN": 22,
-  "exactBenchmarkOverlapN": 21,
+  "cohortN": 37,
+  "scoredN": 36,
+  "exactBenchmarkOverlapN": 35,
   "frontierRequiredModelN": 7,
   "frontierSelection": {
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
@@ -182,7 +182,7 @@
       }
     ]
   },
-  "sourceCohortN": 35,
+  "sourceCohortN": 49,
   "rankingExcludedModels": [
     "Claude Fable 5",
     "Kimi K3",
@@ -342,10 +342,10 @@
   "zeroGap": false,
   "costMode": "aa-per-index-point",
   "costCoverage": {
-    "availableN": 22,
-    "cohortN": 23,
-    "sourceAvailableN": 33,
-    "sourceCohortN": 35,
+    "availableN": 36,
+    "cohortN": 37,
+    "sourceAvailableN": 47,
+    "sourceCohortN": 49,
     "missingModels": [
       "Muse Wonder Full"
     ],
@@ -356,89 +356,94 @@
     "selectiveSubstitution": false
   },
   "pareto": [
-    "GPT-6.1 Sol",
     "GPT-6 Luna",
     "MiMo-V2.6-Pro",
     "MiMo-V2.6-Flash",
     "Claude Sonnet 5.5",
-    "Gemini 4 Argon"
+    "Gemini 4 Argon",
+    "GPT-6.1 Sol (xhigh)",
+    "GPT-6.1 Sol (high)",
+    "GPT-6.1 Sol (medium)",
+    "Claude Haiku 5.5 (high)",
+    "Claude Haiku 5.5 (medium)",
+    "Claude Haiku 5.5 (low)"
   ],
   "topFive": [
     {
       "rank": 1,
       "name": "Gemini 4 Argon",
-      "overallScore": 69.1,
-      "qualityScore": 79.6
+      "overallScore": 71.1,
+      "qualityScore": 84.3
     },
     {
       "rank": 2,
-      "name": "Claude Sonnet 5.5",
-      "overallScore": 65.5,
-      "qualityScore": 82.5
+      "name": "GPT-6.1 Sol (xhigh)",
+      "overallScore": 68.2,
+      "qualityScore": 72.7
     },
     {
       "rank": 3,
-      "name": "GPT-6.1 Sol",
-      "overallScore": 63.4,
-      "qualityScore": 66.0
+      "name": "Claude Sonnet 5.5",
+      "overallScore": 66.4,
+      "qualityScore": 84.6
     },
     {
       "rank": 4,
-      "name": "Muse Wonder",
-      "overallScore": 59.3,
-      "qualityScore": 73.0
+      "name": "GPT-6.1 Sol",
+      "overallScore": 64.3,
+      "qualityScore": 70.4
     },
     {
       "rank": 5,
-      "name": "Claude Opus 5.5",
-      "overallScore": 57.6,
-      "qualityScore": 73.2
+      "name": "GPT-6.1 Sol (high)",
+      "overallScore": 63.0,
+      "qualityScore": 64.3
     }
   ],
   "bugHuntEmphasis": {
-    "matchedN": 20,
-    "cohortN": 35,
+    "matchedN": 34,
+    "cohortN": 49,
     "benchmarkWeightPct": 19.2308,
     "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
     "topFive": [
       {
         "rank": 1,
         "name": "Gemini 4 Argon",
-        "score": 67.5,
+        "score": 70.2,
         "fixedOf105": 40.7
       },
       {
         "rank": 2,
-        "name": "Claude Sonnet 5.5",
-        "score": 66.5,
-        "fixedOf105": 51.3
+        "name": "GPT-6.1 Sol (xhigh)",
+        "score": 68.9,
+        "fixedOf105": 42.7
       },
       {
         "rank": 3,
-        "name": "GPT-6.1 Sol",
-        "score": 64.8,
-        "fixedOf105": 44.3
+        "name": "Claude Sonnet 5.5",
+        "score": 67.4,
+        "fixedOf105": 51.3
       },
       {
         "rank": 4,
-        "name": "GPT-6 Astra",
-        "score": 58.2,
-        "fixedOf105": 45.0
+        "name": "GPT-6.1 Sol",
+        "score": 65.8,
+        "fixedOf105": 44.3
       },
       {
         "rank": 5,
-        "name": "Claude Opus 5.5",
-        "score": 57.2,
-        "fixedOf105": 41.7
+        "name": "GPT-6.1 Sol (high)",
+        "score": 63.4,
+        "fixedOf105": 36.5
       }
     ]
   },
   "externalCoverage": {
-    "livebench": "25/35",
+    "livebench": "25/49",
     "livebenchPublishedN": 64,
     "livebenchSupplementalModels": [],
-    "bugHunt": "29/35 owner matches; 21 exact DeepSWE and Bug Hunt overlaps plus 7 selected AA frontier family models enter the primary cohort",
-    "terminalBenchV4": "13/35 including 1 provider claim"
+    "bugHunt": "42/49 owner matches; 35 exact DeepSWE and Bug Hunt overlaps plus 7 selected AA frontier family models enter the primary cohort",
+    "terminalBenchV4": "14/49 including 1 provider claim"
   },
   "weights": [
     {
@@ -563,9 +568,9 @@
       "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv",
       "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md"
     },
-    "matchedN": 20,
-    "cohortN": 35,
-    "coveragePct": 57.14,
+    "matchedN": 34,
+    "cohortN": 49,
+    "coveragePct": 69.39,
     "basePrioritySum": 87,
     "benchmarkPriority": 30,
     "totalPriority": 117,
@@ -730,62 +735,6 @@
         "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the medium variant."
       },
       {
-        "modelId": "claude-haiku-5-5",
-        "evaluatedModel": "Haiku 5.5 (max effort) - mean of 2",
-        "fixedOf105": 21.5,
-        "sampleN": 2,
-        "exclusionReason": "Benchmark owner evaluated max effort; the cohort selects the xhigh variant."
-      },
-      {
-        "modelId": "claude-haiku-5-5",
-        "evaluatedModel": "Haiku 5.5 (high effort) - mean of 2",
-        "fixedOf105": 16,
-        "sampleN": 2,
-        "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the xhigh variant."
-      },
-      {
-        "modelId": "claude-haiku-5-5",
-        "evaluatedModel": "Haiku 5.5 (medium effort)",
-        "fixedOf105": 12,
-        "sampleN": 1,
-        "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the xhigh variant."
-      },
-      {
-        "modelId": "claude-haiku-5-5",
-        "evaluatedModel": "Haiku 5.5 (low effort)",
-        "fixedOf105": 11,
-        "sampleN": 1,
-        "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the xhigh variant."
-      },
-      {
-        "modelId": "claude-sonnet-5-5",
-        "evaluatedModel": "Sonnet 5.5 (xhigh effort) - mean of 3",
-        "fixedOf105": 36,
-        "sampleN": 3,
-        "exclusionReason": "Benchmark owner evaluated xhigh effort; the cohort selects the max variant."
-      },
-      {
-        "modelId": "claude-sonnet-5-5",
-        "evaluatedModel": "Sonnet 5.5 (high effort) - mean of 3",
-        "fixedOf105": 34.3,
-        "sampleN": 3,
-        "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the max variant."
-      },
-      {
-        "modelId": "claude-sonnet-5-5",
-        "evaluatedModel": "Sonnet 5.5 (medium effort) - mean of 3",
-        "fixedOf105": 23.3,
-        "sampleN": 3,
-        "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the max variant."
-      },
-      {
-        "modelId": "claude-sonnet-5-5",
-        "evaluatedModel": "Sonnet 5.5 (low effort) - mean of 3",
-        "fixedOf105": 19,
-        "sampleN": 3,
-        "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the max variant."
-      },
-      {
         "modelId": "gemini-4-argon",
         "evaluatedModel": "Gemini 4 Argon (high effort)",
         "fixedOf105": 33,
@@ -850,13 +799,6 @@
       },
       {
         "modelId": "muse-spark-1-3",
-        "evaluatedModel": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3",
-        "fixedOf105": 20.3,
-        "sampleN": 3,
-        "exclusionReason": "Benchmark owner evaluated xhigh effort; the cohort selects the max variant (higher AA Intelligence Index, 48 against 45)."
-      },
-      {
-        "modelId": "muse-spark-1-3",
         "evaluatedModel": "Muse Spark 1.3 (high effort, Muse Code, Meta API) - mean of 3",
         "fixedOf105": 18.7,
         "sampleN": 3,
@@ -896,6 +838,90 @@
         "fixedOf105": 41.5,
         "sampleN": 2,
         "exclusionReason": "Benchmark owner evaluated xhigh effort; AA lists only the max configuration, which the cohort selects."
+      },
+      {
+        "modelId": "gpt-6.1-sol-xhigh",
+        "evaluatedModel": "GPT-6.1 Sol (xhigh effort)",
+        "fixedOf105": 41,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (42.7); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "gpt-6.1-sol-high",
+        "evaluatedModel": "GPT-6.1 Sol (high effort)",
+        "fixedOf105": 38,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (36.5); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "gpt-6.1-sol-medium",
+        "evaluatedModel": "GPT-6.1 Sol (medium effort)",
+        "fixedOf105": 28,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (29.0); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "gpt-6.1-sol-low",
+        "evaluatedModel": "GPT-6.1 Sol (low effort)",
+        "fixedOf105": 31,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (22.5); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "claude-haiku-5-5-max",
+        "evaluatedModel": "Haiku 5.5 (max effort)",
+        "fixedOf105": 22,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (21.5); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "claude-haiku-5-5-high",
+        "evaluatedModel": "Haiku 5.5 (high effort)",
+        "fixedOf105": 15,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (16.0); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "claude-sonnet-5-5-xhigh",
+        "evaluatedModel": "Sonnet 5.5 (xhigh effort)",
+        "fixedOf105": 39,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (36.0); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "claude-sonnet-5-5-high",
+        "evaluatedModel": "Sonnet 5.5 (high effort)",
+        "fixedOf105": 32,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (34.3); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "claude-sonnet-5-5-medium",
+        "evaluatedModel": "Sonnet 5.5 (medium effort)",
+        "fixedOf105": 18,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (23.3); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "muse-spark-1-3-xhigh",
+        "evaluatedModel": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API)",
+        "fixedOf105": 20,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of three at the same effort and route (20.3); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "grok-4.6-xhigh",
+        "evaluatedModel": "Grok 4.6 (xhigh) seq",
+        "fixedOf105": 27,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's sequential mean of three at the same effort and route (28.7); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "grok-4.6-xhigh",
+        "evaluatedModel": "Grok 4.6 (xhigh)",
+        "fixedOf105": 27,
+        "sampleN": 1,
+        "exclusionReason": "Single concurrent-legs run (both repositories at once); the owner's sequential mean of three at the same effort and route (28.7) is the largest-sample published mean and is used."
       }
     ],
     "providerClaimAudit": {
@@ -911,160 +937,272 @@
         "modelId": "gemini-4-argon",
         "name": "Gemini 4 Argon",
         "fixedOf105": 40.7,
-        "emphasisScore": 67.5,
+        "emphasisScore": 70.2,
         "primaryRank": 1
       },
       {
         "rank": 2,
-        "modelId": "claude-sonnet-5-5",
-        "name": "Claude Sonnet 5.5",
-        "fixedOf105": 51.3,
-        "emphasisScore": 66.5,
+        "modelId": "gpt-6.1-sol-xhigh",
+        "name": "GPT-6.1 Sol (xhigh)",
+        "fixedOf105": 42.7,
+        "emphasisScore": 68.9,
         "primaryRank": 2
       },
       {
         "rank": 3,
-        "modelId": "gpt-6.1-sol",
-        "name": "GPT-6.1 Sol",
-        "fixedOf105": 44.3,
-        "emphasisScore": 64.8,
+        "modelId": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "fixedOf105": 51.3,
+        "emphasisScore": 67.4,
         "primaryRank": 3
       },
       {
         "rank": 4,
-        "modelId": "gpt-6-astra",
-        "name": "GPT-6 Astra",
-        "fixedOf105": 45.0,
-        "emphasisScore": 58.2,
-        "primaryRank": 6
+        "modelId": "gpt-6.1-sol",
+        "name": "GPT-6.1 Sol",
+        "fixedOf105": 44.3,
+        "emphasisScore": 65.8,
+        "primaryRank": 4
       },
       {
         "rank": 5,
-        "modelId": "claude-opus-5-5",
-        "name": "Claude Opus 5.5",
-        "fixedOf105": 41.7,
-        "emphasisScore": 57.2,
+        "modelId": "gpt-6.1-sol-high",
+        "name": "GPT-6.1 Sol (high)",
+        "fixedOf105": 36.5,
+        "emphasisScore": 63.4,
         "primaryRank": 5
       },
       {
         "rank": 6,
-        "modelId": "gpt-5.6-sol",
-        "name": "GPT-5.6 Sol",
-        "fixedOf105": 43.5,
-        "emphasisScore": 57.1,
-        "primaryRank": 7
+        "modelId": "gpt-6-astra",
+        "name": "GPT-6 Astra",
+        "fixedOf105": 45.0,
+        "emphasisScore": 60.4,
+        "primaryRank": 9
       },
       {
         "rank": 7,
         "modelId": "muse-wonder",
         "name": "Muse Wonder",
         "fixedOf105": 31.7,
-        "emphasisScore": 57.1,
-        "primaryRank": 4
+        "emphasisScore": 60.4,
+        "primaryRank": 6
       },
       {
         "rank": 8,
-        "modelId": "muse-spark-1-3",
-        "name": "Muse Spark 1.3",
-        "fixedOf105": 32.2,
-        "emphasisScore": 55.4,
+        "modelId": "claude-opus-5-5",
+        "name": "Claude Opus 5.5",
+        "fixedOf105": 41.7,
+        "emphasisScore": 59.5,
         "primaryRank": 8
       },
       {
         "rank": 9,
-        "modelId": "gpt-6-sol",
-        "name": "GPT-6 Sol",
-        "fixedOf105": 29.3,
-        "emphasisScore": 50.2,
+        "modelId": "gpt-5.6-sol",
+        "name": "GPT-5.6 Sol",
+        "fixedOf105": 43.5,
+        "emphasisScore": 59.4,
         "primaryRank": 10
       },
       {
         "rank": 10,
-        "modelId": "claude-fable-5-1",
-        "name": "Claude Fable 5.1",
-        "fixedOf105": 43.0,
-        "emphasisScore": 48.6,
-        "primaryRank": 12
+        "modelId": "gpt-6.1-sol-medium",
+        "name": "GPT-6.1 Sol (medium)",
+        "fixedOf105": 29.0,
+        "emphasisScore": 58.9,
+        "primaryRank": 7
       },
       {
         "rank": 11,
-        "modelId": "grok-4.7",
-        "name": "Grok 4.7",
-        "fixedOf105": 29.0,
-        "emphasisScore": 47.0,
+        "modelId": "muse-spark-1-3",
+        "name": "Muse Spark 1.3",
+        "fixedOf105": 32.2,
+        "emphasisScore": 57.5,
         "primaryRank": 11
       },
       {
         "rank": 12,
-        "modelId": "gpt-5.6-luna",
-        "name": "GPT-5.6 Luna",
-        "fixedOf105": 31.3,
-        "emphasisScore": 44.6,
-        "primaryRank": 13
+        "modelId": "claude-sonnet-5-5-xhigh",
+        "name": "Claude Sonnet 5.5 (xhigh)",
+        "fixedOf105": 36.0,
+        "emphasisScore": 56.5,
+        "primaryRank": 12
       },
       {
         "rank": 13,
-        "modelId": "gpt-6-luna",
-        "name": "GPT-6 Luna",
-        "fixedOf105": 18.3,
-        "emphasisScore": 41.6,
+        "modelId": "gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "fixedOf105": 29.3,
+        "emphasisScore": 52.8,
         "primaryRank": 14
       },
       {
         "rank": 14,
-        "modelId": "claude-haiku-5-5",
-        "name": "Claude Haiku 5.5",
-        "fixedOf105": 18.3,
-        "emphasisScore": 37.9,
-        "primaryRank": 16
-      },
-      {
-        "rank": 15,
-        "modelId": "gemini-3.8-flash",
-        "name": "Gemini 3.8 Flash",
-        "fixedOf105": 18.0,
-        "emphasisScore": 36.7,
+        "modelId": "claude-fable-5-1",
+        "name": "Claude Fable 5.1",
+        "fixedOf105": 43.0,
+        "emphasisScore": 51.0,
         "primaryRank": 17
       },
       {
+        "rank": 15,
+        "modelId": "muse-spark-1-3-xhigh",
+        "name": "Muse Spark 1.3 (xhigh)",
+        "fixedOf105": 20.3,
+        "emphasisScore": 50.9,
+        "primaryRank": 13
+      },
+      {
         "rank": 16,
-        "modelId": "claude-opus-5",
-        "name": "Claude Opus 5",
-        "fixedOf105": 27.0,
-        "emphasisScore": 32.7,
-        "primaryRank": 19
+        "modelId": "grok-4.7",
+        "name": "Grok 4.7",
+        "fixedOf105": 29.0,
+        "emphasisScore": 50.7,
+        "primaryRank": 15
       },
       {
         "rank": 17,
-        "modelId": "glm-5.3",
-        "name": "GLM-5.3",
-        "fixedOf105": 19.0,
-        "emphasisScore": 32.6,
+        "modelId": "claude-sonnet-5-5-high",
+        "name": "Claude Sonnet 5.5 (high)",
+        "fixedOf105": 34.3,
+        "emphasisScore": 49.9,
         "primaryRank": 18
       },
       {
         "rank": 18,
-        "modelId": "deepseek-v4-flash",
-        "name": "DeepSeek V4 Flash",
-        "fixedOf105": 21.7,
-        "emphasisScore": 30.2,
-        "primaryRank": 20
+        "modelId": "gpt-6.1-sol-low",
+        "name": "GPT-6.1 Sol (low)",
+        "fixedOf105": 22.5,
+        "emphasisScore": 48.0,
+        "primaryRank": 19
       },
       {
         "rank": 19,
-        "modelId": "qwen3.8-max",
-        "name": "Qwen3.8 Max",
-        "fixedOf105": 25.7,
-        "emphasisScore": 25.2,
-        "primaryRank": 21
+        "modelId": "gpt-5.6-luna",
+        "name": "GPT-5.6 Luna",
+        "fixedOf105": 31.3,
+        "emphasisScore": 45.3,
+        "primaryRank": 20
       },
       {
         "rank": 20,
+        "modelId": "grok-4.6-xhigh",
+        "name": "Grok 4.6 (xhigh)",
+        "fixedOf105": 28.7,
+        "emphasisScore": 43.0,
+        "primaryRank": 21
+      },
+      {
+        "rank": 21,
+        "modelId": "gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "fixedOf105": 18.3,
+        "emphasisScore": 40.2,
+        "primaryRank": 22
+      },
+      {
+        "rank": 22,
+        "modelId": "claude-haiku-5-5-max",
+        "name": "Claude Haiku 5.5 (max)",
+        "fixedOf105": 21.5,
+        "emphasisScore": 40.1,
+        "primaryRank": 23
+      },
+      {
+        "rank": 23,
+        "modelId": "claude-sonnet-5-5-medium",
+        "name": "Claude Sonnet 5.5 (medium)",
+        "fixedOf105": 23.3,
+        "emphasisScore": 38.9,
+        "primaryRank": 27
+      },
+      {
+        "rank": 24,
+        "modelId": "claude-haiku-5-5",
+        "name": "Claude Haiku 5.5",
+        "fixedOf105": 18.3,
+        "emphasisScore": 38.6,
+        "primaryRank": 25
+      },
+      {
+        "rank": 25,
+        "modelId": "gemini-3.8-flash",
+        "name": "Gemini 3.8 Flash",
+        "fixedOf105": 18.0,
+        "emphasisScore": 38.4,
+        "primaryRank": 24
+      },
+      {
+        "rank": 26,
+        "modelId": "claude-opus-5",
+        "name": "Claude Opus 5",
+        "fixedOf105": 27.0,
+        "emphasisScore": 35.9,
+        "primaryRank": 28
+      },
+      {
+        "rank": 27,
+        "modelId": "glm-5.3",
+        "name": "GLM-5.3",
+        "fixedOf105": 19.0,
+        "emphasisScore": 34.7,
+        "primaryRank": 29
+      },
+      {
+        "rank": 28,
+        "modelId": "claude-haiku-5-5-high",
+        "name": "Claude Haiku 5.5 (high)",
+        "fixedOf105": 16.0,
+        "emphasisScore": 33.8,
+        "primaryRank": 30
+      },
+      {
+        "rank": 29,
+        "modelId": "claude-haiku-5-5-medium",
+        "name": "Claude Haiku 5.5 (medium)",
+        "fixedOf105": 12.0,
+        "emphasisScore": 33.3,
+        "primaryRank": 31
+      },
+      {
+        "rank": 30,
+        "modelId": "deepseek-v4-flash",
+        "name": "DeepSeek V4 Flash",
+        "fixedOf105": 21.7,
+        "emphasisScore": 32.0,
+        "primaryRank": 32
+      },
+      {
+        "rank": 31,
+        "modelId": "claude-haiku-5-5-low",
+        "name": "Claude Haiku 5.5 (low)",
+        "fixedOf105": 11.0,
+        "emphasisScore": 31.1,
+        "primaryRank": 33
+      },
+      {
+        "rank": 32,
+        "modelId": "claude-sonnet-5-5-low",
+        "name": "Claude Sonnet 5.5 (low)",
+        "fixedOf105": 19.0,
+        "emphasisScore": 30.4,
+        "primaryRank": 34
+      },
+      {
+        "rank": 33,
+        "modelId": "qwen3.8-max",
+        "name": "Qwen3.8 Max",
+        "fixedOf105": 25.7,
+        "emphasisScore": 30.3,
+        "primaryRank": 35
+      },
+      {
+        "rank": 34,
         "modelId": "deepseek-v4-pro",
         "name": "DeepSeek V4 Pro",
         "fixedOf105": 16.0,
-        "emphasisScore": 21.8,
-        "primaryRank": 22
+        "emphasisScore": 24.0,
+        "primaryRank": 36
       }
     ]
   },
@@ -1073,6 +1211,7 @@
       "Muse Wonder Full"
     ],
     "terminalBenchV4": [
+      "Claude Opus 5",
       "DeepSeek V4 Pro",
       "Qwen3.8 Max",
       "Claude Opus 5.5",
@@ -1087,7 +1226,20 @@
       "Gemini 4 Argon",
       "Muse Spark 1.3",
       "Muse Wonder",
-      "Muse Wonder Full"
+      "Muse Wonder Full",
+      "GPT-6.1 Sol (xhigh)",
+      "GPT-6.1 Sol (high)",
+      "GPT-6.1 Sol (medium)",
+      "GPT-6.1 Sol (low)",
+      "Claude Haiku 5.5 (max)",
+      "Claude Haiku 5.5 (high)",
+      "Claude Haiku 5.5 (medium)",
+      "Claude Haiku 5.5 (low)",
+      "Claude Sonnet 5.5 (xhigh)",
+      "Claude Sonnet 5.5 (high)",
+      "Claude Sonnet 5.5 (medium)",
+      "Claude Sonnet 5.5 (low)",
+      "Grok 4.6 (xhigh)"
     ],
     "livebenchInstructionFollowing": [
       "Claude Opus 5.5",
@@ -1099,7 +1251,21 @@
       "Gemini 4 Argon",
       "Muse Spark 1.3",
       "Muse Wonder",
-      "Muse Wonder Full"
+      "Muse Wonder Full",
+      "GPT-6.1 Sol (xhigh)",
+      "GPT-6.1 Sol (high)",
+      "GPT-6.1 Sol (medium)",
+      "GPT-6.1 Sol (low)",
+      "Claude Haiku 5.5 (max)",
+      "Claude Haiku 5.5 (high)",
+      "Claude Haiku 5.5 (medium)",
+      "Claude Haiku 5.5 (low)",
+      "Claude Sonnet 5.5 (xhigh)",
+      "Claude Sonnet 5.5 (high)",
+      "Claude Sonnet 5.5 (medium)",
+      "Claude Sonnet 5.5 (low)",
+      "Muse Spark 1.3 (xhigh)",
+      "Grok 4.6 (xhigh)"
     ],
     "deepswePassAt1": [
       "MiMo-V2.6-Pro",
@@ -1117,7 +1283,19 @@
       "Claude Sonnet 5.5",
       "Gemini 4 Argon",
       "Muse Wonder",
-      "Muse Wonder Full"
+      "Muse Wonder Full",
+      "GPT-6.1 Sol (xhigh)",
+      "GPT-6.1 Sol (high)",
+      "GPT-6.1 Sol (medium)",
+      "GPT-6.1 Sol (low)",
+      "Claude Haiku 5.5 (max)",
+      "Claude Haiku 5.5 (high)",
+      "Claude Haiku 5.5 (medium)",
+      "Claude Haiku 5.5 (low)",
+      "Claude Sonnet 5.5 (xhigh)",
+      "Claude Sonnet 5.5 (high)",
+      "Claude Sonnet 5.5 (medium)",
+      "Claude Sonnet 5.5 (low)"
     ],
     "speed": [
       "Gemini 4 Argon",

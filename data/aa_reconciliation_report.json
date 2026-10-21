@@ -97,21 +97,12 @@
       "family": "Claude Haiku 5.5",
       "requiredFamilyModelId": "claude-haiku-5-5",
       "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-haiku-5-5-medium",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-haiku-5-5-medium",
-        "name": "Claude Haiku 5.5 (medium)",
-        "evaluatedVariant": "medium",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "gpt-6-luna-xhigh",
@@ -151,21 +142,12 @@
       "family": "Claude Haiku 5.5",
       "requiredFamilyModelId": "claude-haiku-5-5",
       "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-haiku-5-5-high",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-haiku-5-5-high",
-        "name": "Claude Haiku 5.5 (high)",
-        "evaluatedVariant": "high",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "mimo-v2-6-flash",
@@ -250,21 +232,12 @@
       "family": "GPT-6.1 Sol",
       "requiredFamilyModelId": "gpt-6.1-sol",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "gpt-6.1-sol-medium",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol-medium",
-        "name": "GPT-6.1 Sol (medium)",
-        "evaluatedVariant": "medium",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "gpt-6-1-sol-high",
@@ -277,21 +250,12 @@
       "family": "GPT-6.1 Sol",
       "requiredFamilyModelId": "gpt-6.1-sol",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "gpt-6.1-sol-high",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol-high",
-        "name": "GPT-6.1 Sol (high)",
-        "evaluatedVariant": "high",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "gpt-6-1-sol-xhigh",
@@ -304,21 +268,12 @@
       "family": "GPT-6.1 Sol",
       "requiredFamilyModelId": "gpt-6.1-sol",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "gpt-6.1-sol-xhigh",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol-xhigh",
-        "name": "GPT-6.1 Sol (xhigh)",
-        "evaluatedVariant": "xhigh",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "gpt-6-1-sol",
@@ -512,33 +467,6 @@
       "rankStatus": "Deferred comparison candidate"
     },
     {
-      "aaId": "claude-haiku-5-5-medium",
-      "name": "Claude Haiku 5.5 (medium)",
-      "evaluatedVariant": "medium",
-      "intelligenceIndex": 34,
-      "totalCostUsd": 56.36,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
-      "family": "Claude Haiku 5.5",
-      "requiredFamilyModelId": "claude-haiku-5-5",
-      "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-haiku-5-5-medium",
-        "name": "Claude Haiku 5.5 (medium)",
-        "evaluatedVariant": "medium",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
       "aaId": "gpt-6-luna-xhigh",
       "name": "GPT-6 Luna (xhigh)",
       "evaluatedVariant": "xhigh",
@@ -558,114 +486,6 @@
         "decision": "defer",
         "reviewedAt": "2026-10-17T19:16:08Z",
         "reason": "Alternate configuration retained in the AA frontier comparison; the GPT-6 Luna family is represented in the primary ranking by its selected configuration (gpt-6-luna). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "claude-haiku-5-5-high",
-      "name": "Claude Haiku 5.5 (high)",
-      "evaluatedVariant": "high",
-      "intelligenceIndex": 38,
-      "totalCostUsd": 94.07,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
-      "family": "Claude Haiku 5.5",
-      "requiredFamilyModelId": "claude-haiku-5-5",
-      "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-haiku-5-5-high",
-        "name": "Claude Haiku 5.5 (high)",
-        "evaluatedVariant": "high",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "gpt-6-1-sol-medium",
-      "name": "GPT-6.1 Sol (medium)",
-      "evaluatedVariant": "medium",
-      "intelligenceIndex": 48,
-      "totalCostUsd": 361.37,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
-      "family": "GPT-6.1 Sol",
-      "requiredFamilyModelId": "gpt-6.1-sol",
-      "sourceFootnote": null,
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol-medium",
-        "name": "GPT-6.1 Sol (medium)",
-        "evaluatedVariant": "medium",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "gpt-6-1-sol-high",
-      "name": "GPT-6.1 Sol (high)",
-      "evaluatedVariant": "high",
-      "intelligenceIndex": 50,
-      "totalCostUsd": 521.32,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
-      "family": "GPT-6.1 Sol",
-      "requiredFamilyModelId": "gpt-6.1-sol",
-      "sourceFootnote": null,
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol-high",
-        "name": "GPT-6.1 Sol (high)",
-        "evaluatedVariant": "high",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
-    },
-    {
-      "aaId": "gpt-6-1-sol-xhigh",
-      "name": "GPT-6.1 Sol (xhigh)",
-      "evaluatedVariant": "xhigh",
-      "intelligenceIndex": 51,
-      "totalCostUsd": 662.28,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
-      "family": "GPT-6.1 Sol",
-      "requiredFamilyModelId": "gpt-6.1-sol",
-      "sourceFootnote": null,
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-1-sol-xhigh",
-        "name": "GPT-6.1 Sol (xhigh)",
-        "evaluatedVariant": "xhigh",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA frontier comparison; the GPT-6.1 Sol family is represented in the primary ranking by its selected configuration (gpt-6-1-sol). No result is transferred between efforts."
       },
       "primaryRankingGaps": [
         "Exact evaluated variant absent from source roster"
@@ -784,21 +604,12 @@
       "family": "Claude Haiku 5.5",
       "requiredFamilyModelId": "claude-haiku-5-5",
       "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-haiku-5-5-low",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-haiku-5-5-low",
-        "name": "Claude Haiku 5.5 (low)",
-        "evaluatedVariant": "low",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA near-frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "claude-haiku-5-5",
@@ -814,21 +625,12 @@
       "family": "Claude Haiku 5.5",
       "requiredFamilyModelId": "claude-haiku-5-5",
       "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-haiku-5-5-max",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-haiku-5-5",
-        "name": "Claude Haiku 5.5 (max)",
-        "evaluatedVariant": "max",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA near-frontier comparison; the Claude Haiku 5.5 family is represented in the primary ranking by its selected configuration (claude-haiku-5-5-xhigh). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "claude-opus-5-5-medium",
@@ -874,21 +676,12 @@
       "family": "Claude Sonnet 5.5",
       "requiredFamilyModelId": "claude-sonnet-5-5",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-sonnet-5-5-xhigh",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "claude-sonnet-5-5-xhigh",
-        "name": "Claude Sonnet 5.5 (xhigh with fallback)",
-        "evaluatedVariant": "xhigh with fallback",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA near-frontier comparison; the Claude Sonnet 5.5 family is represented in the primary ranking by its selected configuration (claude-sonnet-5-5). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     },
     {
       "aaId": "gemini-4-argon",
@@ -1038,10 +831,7 @@
   ],
   "missingNearFrontierIds": [
     "gpt-5-6-luna-low :: GPT-5.6 Luna (low)",
-    "claude-haiku-5-5-low :: Claude Haiku 5.5 (low)",
-    "claude-haiku-5-5 :: Claude Haiku 5.5 (max)",
     "claude-opus-5-5-medium :: Claude Opus 5.5 (medium with fallback)",
-    "claude-sonnet-5-5-xhigh :: Claude Sonnet 5.5 (xhigh with fallback)",
     "gpt-6-astra-high :: GPT-6 Astra (high)",
     "gpt-6-astra-xhigh :: GPT-6 Astra (xhigh)"
   ],
@@ -1050,10 +840,7 @@
   ],
   "deferredNearFrontierIds": [
     "gpt-5-6-luna-low :: GPT-5.6 Luna (low)",
-    "claude-haiku-5-5-low :: Claude Haiku 5.5 (low)",
-    "claude-haiku-5-5 :: Claude Haiku 5.5 (max)",
     "claude-opus-5-5-medium :: Claude Opus 5.5 (medium with fallback)",
-    "claude-sonnet-5-5-xhigh :: Claude Sonnet 5.5 (xhigh with fallback)",
     "gpt-6-astra-high :: GPT-6 Astra (high)"
   ],
   "observedAt": "2026-10-17T18:48:27Z",
@@ -1118,12 +905,7 @@
     "gpt-6-luna-low :: GPT-6 Luna (low)",
     "gpt-6-luna-medium :: GPT-6 Luna (medium)",
     "gpt-6-luna-high :: GPT-6 Luna (high)",
-    "claude-haiku-5-5-medium :: Claude Haiku 5.5 (medium)",
     "gpt-6-luna-xhigh :: GPT-6 Luna (xhigh)",
-    "claude-haiku-5-5-high :: Claude Haiku 5.5 (high)",
-    "gpt-6-1-sol-medium :: GPT-6.1 Sol (medium)",
-    "gpt-6-1-sol-high :: GPT-6.1 Sol (high)",
-    "gpt-6-1-sol-xhigh :: GPT-6.1 Sol (xhigh)",
     "claude-opus-5-5-high :: Claude Opus 5.5 (high with fallback)",
     "claude-opus-5-5-xhigh :: Claude Opus 5.5 (xhigh with fallback)"
   ],
@@ -1132,12 +914,7 @@
     "gpt-6-luna-low :: GPT-6 Luna (low)",
     "gpt-6-luna-medium :: GPT-6 Luna (medium)",
     "gpt-6-luna-high :: GPT-6 Luna (high)",
-    "claude-haiku-5-5-medium :: Claude Haiku 5.5 (medium)",
     "gpt-6-luna-xhigh :: GPT-6 Luna (xhigh)",
-    "claude-haiku-5-5-high :: Claude Haiku 5.5 (high)",
-    "gpt-6-1-sol-medium :: GPT-6.1 Sol (medium)",
-    "gpt-6-1-sol-high :: GPT-6.1 Sol (high)",
-    "gpt-6-1-sol-xhigh :: GPT-6.1 Sol (xhigh)",
     "claude-opus-5-5-high :: Claude Opus 5.5 (high with fallback)",
     "claude-opus-5-5-xhigh :: Claude Opus 5.5 (xhigh with fallback)"
   ],

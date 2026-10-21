@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/deepseek-v4-pro",
   "summary": {
     "rank": {
-      "api": 12,
-      "plan": 18
+      "api": 26,
+      "plan": 32
     },
     "overall": {
-      "api": 51.58942206012668,
-      "plan": 45.692230144014914
+      "api": 50.209960459726744,
+      "plan": 44.539803772651155
     },
     "quality": 49.999820114594385,
-    "qualityRank": 19,
+    "qualityRank": 28,
     "coverage": {
       "pct": 80.0,
       "costAvailable": true,
@@ -238,8 +238,8 @@
       "cross-estimand ordering not identified"
     ],
     "costScore": {
-      "api": 56.35822789672358,
-      "plan": 32.76946023227653
+      "api": 50.84038149512382,
+      "plan": 28.159754746821474
     },
     "components": [
       {
@@ -322,43 +322,43 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0116
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0067,
-        "top3": 0.0429,
-        "frontier": 0.3701
+        "top1": 0.0,
+        "top3": 0.0037,
+        "frontier": 0.0085
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0152,
-        "top3": 0.0598,
-        "frontier": 0.362
+        "top1": 0.0014,
+        "top3": 0.0116,
+        "frontier": 0.0125
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0253,
-        "top3": 0.0795,
-        "frontier": 0.3572
+        "top1": 0.0008,
+        "top3": 0.0159,
+        "frontier": 0.0198
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.0063,
-        "top3": 0.0464,
-        "frontier": 0.3765
+        "top1": 0.0,
+        "top3": 0.0031,
+        "frontier": 0.0073
       }
     ],
     "plan": [
@@ -386,8 +386,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0041,
-        "frontier": 0.0003
+        "top3": 0.0039,
+        "frontier": 0.0004
       },
       {
         "stratum": "S1",
@@ -453,8 +453,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 12,
-        "plan": 18
+        "api": 26,
+        "plan": 32
       }
     }
   ],

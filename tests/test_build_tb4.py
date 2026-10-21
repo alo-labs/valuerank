@@ -122,9 +122,19 @@ def test_main_keeps_a_row_without_a_published_cost_and_counts_it(data_dir, capsy
     assert document["rowN"] == 5
     assert document["rowsWithoutCostN"] == 1
     assert document["rows"][4]["costUsd"] is None
-    assert document["rows"][4]["cohortModelId"] is None
+    assert document["rows"][4]["cohortModelId"] == "muse-spark-1-3-xhigh"  # O33: exact model and effort alias
     assert document["rows"][0]["costUsd"] == 3300.0
     assert json.loads(capsys.readouterr().out)["rowsWithoutCostN"] == 1
+
+
+def test_an_exact_alias_names_one_effort_and_never_its_family(data_dir):
+    """O33: a family ranked at several efforts is aliased by the exact displayed model and effort only."""
+
+    scrape_document = synthetic_scrape()
+    scrape_document["rows"].append(["21", "Muse Spark 1.3 (high)", "Muse Code", "12.0% ± 2.9%", "Sep 2, 2026", "9.0B", "—"])
+    output = data_dir / "tb4.json"
+    assert build_tb4.main([str(write_json(data_dir / "scrape.json", scrape_document)), str(output)], data=data_dir) == 0
+    assert read_document(output)["rows"][4]["cohortModelId"] is None
 
 
 def test_parse_cost_refuses_a_malformed_decimal_rather_than_guessing():

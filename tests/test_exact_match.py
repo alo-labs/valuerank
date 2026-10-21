@@ -45,6 +45,19 @@ def test_select_tb4_row_exact_configuration_and_agent_preference():
     assert em.select_tb4_row("claude-fable-5", "max", ROWS) is None
 
 
+def test_select_tb4_row_gives_each_ranked_effort_of_a_family_only_its_own_row():
+    """O33: a base name shared by several ranked efforts maps each effort to its own row, never to a sibling's."""
+
+    rows = [{"model": "Muse Spark 1.3 (xhigh)", "agent": "Muse Code", "resolutionRatePct": 14.5},
+            {"model": "GPT-6.1 Sol (max)", "agent": "Codex", "resolutionRatePct": 58.2}]
+    assert em.select_tb4_row("muse-spark-1-3-xhigh", "xhigh", rows) == rows[0]
+    assert em.select_tb4_row("muse-spark-1-3", "max", rows) is None
+    assert em.select_tb4_row("gpt-6.1-sol", "max", rows) == rows[1]
+    assert em.select_tb4_row("gpt-6.1-sol-xhigh", "xhigh", rows) is None
+    assert em.tb4_model_ids("Opus 5.5") == ("claude-opus-5-5",)
+    assert em.tb4_model_ids("Unknown") == ()
+
+
 def test_select_tb4_row_handles_rows_without_an_agent():
     rows = [{"model": "GLM-5.3 (max)", "resolutionRatePct": 41.8}]
     assert em.select_tb4_row("glm-5.3", "max", rows) == rows[0]

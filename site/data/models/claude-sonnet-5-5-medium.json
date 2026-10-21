@@ -1,0 +1,514 @@
+{
+  "slug": "claude-sonnet-5-5-medium",
+  "name": "Claude Sonnet 5.5 (medium)",
+  "developer": "Anthropic",
+  "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+  "aaVariant": "medium",
+  "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+  "summary": {
+    "rank": {
+      "api": 18,
+      "plan": 10
+    },
+    "overall": {
+      "api": 51.44949858041265,
+      "plan": 55.83443052132506
+    },
+    "quality": 51.17190877098797,
+    "qualityRank": 24,
+    "coverage": {
+      "pct": 90.0,
+      "costAvailable": true,
+      "missing": [
+        "Terminal-Bench 4.0 (tbench.ai)"
+      ],
+      "provisional": false,
+      "provisionalReasons": []
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": [],
+    "flags": []
+  },
+  "dimensions": [
+    {
+      "key": "deepswe",
+      "label": "DeepSWE v1.1",
+      "category": "Software engineering",
+      "weightPct": 22.5,
+      "value": 65.5,
+      "decimals": 1,
+      "unit": "% pass@1",
+      "normalized": 65.5,
+      "source": {
+        "name": "AA Coding Agent Index (DeepSWE v1.1)",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-17T19:26:26Z",
+      "evaluatedVariant": "Claude Code - Sonnet 5.5 (medium) / Claude Code",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 23.3,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 22.19047619047619,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "Sonnet 5.5 (medium effort) - mean of 3 / Claude Code",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "frontierCode",
+      "label": "AA FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 0.293075666666667,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 29.307566666666702,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/frontiercode"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% resolved",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 1323.27,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": 41.1635,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBench",
+      "label": "AutomationBench-AA",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 0.5490962996121462,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 54.90962996121462,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": 20.1,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": 60.05,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/omniscience"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "lcr",
+      "label": "AA-LCR v1.1",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": 0.763333333333333,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 76.3333333333333,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.39805375347544,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 39.805375347544,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.528935185185185,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 52.8935185185185,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/scicode"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.168571428571429,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 16.8571428571429,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/critpt"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 731.6293440729121,
+    "planUsd": 12.421550833156402,
+    "fallback": null,
+    "route": {
+      "id": "claude-pro-common-opus55-assumption",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06"
+    },
+    "subset": false,
+    "partialComponents": [],
+    "workload": "9a0d376cc6080f3c",
+    "planFlags": [
+      "workload-unmatched",
+      "owner-named transfer (assumption)",
+      "valuation basis unverified"
+    ],
+    "costScore": {
+      "api": 52.28226800868667,
+      "plan": 69.82199577233634
+    },
+    "components": [
+      {
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index",
+        "costUsd": 187.4814849166666,
+        "completeness": "confirmed-complete",
+        "source": "AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks",
+        "admitted": true
+      },
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase",
+        "costUsd": 126.67869302785986,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdpval-aa",
+        "label": "GDPval-AA",
+        "costUsd": 69.91030483971242,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf",
+        "costUsd": 38.142374,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA",
+        "costUsd": 172.19848700938007,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)",
+        "costUsd": 104.15875627929312,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "costUsd": 3.8985379999999994,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "artificial-analysis-long-context-reasoning",
+        "label": "AA-LCR",
+        "costUsd": 29.160705999999998,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+    "planAmount": {
+      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+      "amountTarget": "assumed consumption",
+      "amountUsd": 1178.0,
+      "derivation": "authorised assumption: the donor's multiple times this route's cash",
+      "feePeriod": "month",
+      "subscriptionCashUsd": 20,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 20.0,
+      "workload": "the route's measurement workload",
+      "measurementObjectId": "claude-pro-common-opus55-assumption",
+      "capacitySolutionId": null,
+      "cashObjectId": "claude-pro-common-opus55-assumption:month cash",
+      "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
+      "capacityStatus": "capacity established on the measurement workload",
+      "valuationStatus": "unverified",
+      "donorRouteId": "claude-pro-opus55-semianalysis",
+      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+    }
+  },
+  "plans": [
+    {
+      "id": "claude-pro-common-opus55-assumption",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 12.421550833156402,
+      "selected": true
+    },
+    {
+      "id": "claude-max20x-common-opus55-assumption",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 12.47875394973413,
+      "selected": false
+    },
+    {
+      "id": "claude-max5x-common-opus55-assumption",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 12.779551861535582,
+      "selected": false
+    }
+  ],
+  "scenarios": {
+    "status": "current",
+    "api": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0032
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0037,
+        "frontier": 0.0081
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0092
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0044
+      }
+    ],
+    "plan": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
+      }
+    ]
+  },
+  "intervals": {
+    "api": {
+      "definite": "disproved",
+      "possible": "certified"
+    },
+    "plan": null
+  },
+  "history": [
+    {
+      "version": "v3.0.0",
+      "date": "2026-10-19",
+      "rank": {
+        "api": 18,
+        "plan": 10
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
+  }
+}

@@ -90,6 +90,23 @@ COHORT_MAP = {
     "muse-spark-1-3": None,
     "muse-wonder": None,
     "muse-wonder-full": None,
+    # Added by owner decision O33 (2026-10-21): every evidenced effort is its own row. The pinned June 25 release
+    # predates GPT-6.1 Sol, Claude Haiku 5.5, Claude Sonnet 5.5 and Muse Spark 1.3, and no exact Grok 4.6 (xhigh)
+    # row is verified in it.
+    "gpt-6.1-sol-xhigh": None,
+    "gpt-6.1-sol-high": None,
+    "gpt-6.1-sol-medium": None,
+    "gpt-6.1-sol-low": None,
+    "claude-haiku-5-5-max": None,
+    "claude-haiku-5-5-high": None,
+    "claude-haiku-5-5-medium": None,
+    "claude-haiku-5-5-low": None,
+    "claude-sonnet-5-5-xhigh": None,
+    "claude-sonnet-5-5-high": None,
+    "claude-sonnet-5-5-medium": None,
+    "claude-sonnet-5-5-low": None,
+    "muse-spark-1-3-xhigh": None,
+    "grok-4.6-xhigh": None,
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in

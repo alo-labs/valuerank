@@ -7,12 +7,12 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
   "summary": {
     "rank": {
-      "api": 14,
-      "plan": 1
+      "api": 19,
+      "plan": 4
     },
     "overall": {
-      "api": 51.55492313031626,
-      "plan": 61.134193057915695
+      "api": 51.230319650625816,
+      "plan": 59.32028447302209
     },
     "quality": 64.3193136891795,
     "qualityRank": 4,
@@ -252,8 +252,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 13.261751453726564,
-      "plan": 51.578831164124296
+      "api": 11.963337534964765,
+      "plan": 44.323196824549875
     },
     "components": [
       {
@@ -417,7 +417,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.4008
+        "frontier": 0.2342
       },
       {
         "stratum": "S2",
@@ -426,7 +426,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.365
+        "frontier": 0.221
       },
       {
         "stratum": "S1",
@@ -435,7 +435,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.3589
+        "frontier": 0.1547
       },
       {
         "stratum": "S1M",
@@ -444,7 +444,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.3983
+        "frontier": 0.2316
       }
     ],
     "plan": [
@@ -453,8 +453,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 1.0,
-        "top3": 1.0,
+        "top1": 0.0,
+        "top3": 0.0,
         "frontier": 1.0
       },
       {
@@ -531,8 +531,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 14,
-        "plan": 1
+        "api": 19,
+        "plan": 4
       }
     }
   ],

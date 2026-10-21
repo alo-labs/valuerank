@@ -31,6 +31,11 @@ COHORT_ALIAS = {
     "Fable 5.1": "claude-fable-5-1",
 }
 
+# O33: a family ranked at several efforts is aliased by the exact displayed model and effort, never by base name.
+EXACT_ALIAS = {
+    "Muse Spark 1.3 (xhigh)": "muse-spark-1-3-xhigh",
+}
+
 
 def parse_rate(value: str) -> tuple[float, float]:
     match = re.fullmatch(r"\s*([0-9.]+)%\s*±\s*([0-9.]+)%\s*", value)
@@ -80,7 +85,7 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
             "releaseDate": release_date,
             "tokens": tokens,
             "costUsd": parse_cost(cost),
-            "cohortModelId": COHORT_ALIAS.get(base_model),
+            "cohortModelId": EXACT_ALIAS.get(model) or COHORT_ALIAS.get(base_model),
         })
     aa_models = json.loads((data / "aa_metrics.json").read_text())["models"]
     cohort = [{"slug": model_id, "displayName": item["displayName"]} for model_id, item in aa_models.items()]

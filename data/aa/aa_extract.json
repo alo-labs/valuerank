@@ -1298,7 +1298,7 @@
     "displayName": "Muse Spark 1.3",
     "url": "https://artificialanalysis.ai/models/muse-spark-1-3",
     "variant": "muse-spark-1-3",
-    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Both max and xhigh have exact DeepSWE and Bug Hunt results; max is selected as the higher AA Intelligence Index (48 against 45)."
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Both max and xhigh have exact DeepSWE and Bug Hunt results; max was selected as the higher AA Intelligence Index (48 against 45); since owner decision O33 (2026-10-21) xhigh is ranked as its own row (muse-spark-1-3-xhigh)."
   },
   {
     "id": "muse-wonder",
@@ -1313,5 +1313,103 @@
     "url": "https://artificialanalysis.ai/models/muse-wonder-full",
     "variant": "muse-wonder-full",
     "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Selected configuration: Muse Wonder Full (max), AA's only Muse Wonder Full configuration. AA publishes an Intelligence Index but no prices or Index cost for it, so it is not plotted on the cost chart and has no cost."
+  },
+  {
+    "id": "gpt-6.1-sol-xhigh",
+    "displayName": "GPT-6.1 Sol (xhigh)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+    "variant": "gpt-6-1-sol-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (xhigh), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6.1-sol-high",
+    "displayName": "GPT-6.1 Sol (high)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+    "variant": "gpt-6-1-sol-high",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (high), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6.1-sol-medium",
+    "displayName": "GPT-6.1 Sol (medium)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+    "variant": "gpt-6-1-sol-medium",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (medium), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6.1-sol-low",
+    "displayName": "GPT-6.1 Sol (low)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+    "variant": "gpt-6-1-sol-low",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (low), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-max",
+    "displayName": "Claude Haiku 5.5 (max)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+    "variant": "claude-haiku-5-5",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (max), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-high",
+    "displayName": "Claude Haiku 5.5 (high)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+    "variant": "claude-haiku-5-5-high",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (high), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-medium",
+    "displayName": "Claude Haiku 5.5 (medium)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+    "variant": "claude-haiku-5-5-medium",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (medium), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-low",
+    "displayName": "Claude Haiku 5.5 (low)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+    "variant": "claude-haiku-5-5-low",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (low), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-xhigh",
+    "displayName": "Claude Sonnet 5.5 (xhigh)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+    "variant": "claude-sonnet-5-5-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (xhigh with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-high",
+    "displayName": "Claude Sonnet 5.5 (high)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+    "variant": "claude-sonnet-5-5-high",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (high with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-medium",
+    "displayName": "Claude Sonnet 5.5 (medium)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+    "variant": "claude-sonnet-5-5-medium",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (medium with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-low",
+    "displayName": "Claude Sonnet 5.5 (low)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+    "variant": "claude-sonnet-5-5-low",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (low with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "muse-spark-1-3-xhigh",
+    "displayName": "Muse Spark 1.3 (xhigh)",
+    "url": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+    "variant": "muse-spark-1-3-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Muse Spark 1.3 (xhigh), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Muse Spark 1.3 family's other roster entry is Muse Spark 1.3 (max); no result is transferred between efforts."
+  },
+  {
+    "id": "grok-4.6-xhigh",
+    "displayName": "Grok 4.6 (xhigh)",
+    "url": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+    "variant": "grok-4-6-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Grok 4.6 (xhigh), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Grok 4.6 family's other roster entry is Grok 4.6 (medium), tracked unranked; no result is transferred between efforts."
   }
 ]

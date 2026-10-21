@@ -70,6 +70,13 @@ def _clean_number(value):
     return str(int(value)) if isinstance(value, (int, float)) and float(value).is_integer() else str(value)
 
 
+def _configuration_name(model):
+    """``Name (effort)``, so several ranked efforts of one family read distinctly (O33)."""
+
+    suffix = f" ({model['aaVariant']})" if model.get("aaVariant") else ""
+    return model["name"] if model["name"].endswith(suffix) else model["name"] + suffix
+
+
 def model_inclusion(selection, models):
     """The model-inclusion policy and its observed facts, read from ``frontierSelection`` (optional, every field)."""
 
@@ -109,7 +116,7 @@ def model_inclusion(selection, models):
     footnotes = {}
     for model in models:
         if model.get("aaFrontierFootnote"):
-            footnotes.setdefault(model["aaFrontierFootnote"], []).append(model["name"])
+            footnotes.setdefault(model["aaFrontierFootnote"], []).append(_configuration_name(model))
     gap = _clean_number(policy.get("maxIntelligenceGap", DEFAULT_NEAR_GAP))
     return {
         "frontierRule": FRONTIER_RULE,

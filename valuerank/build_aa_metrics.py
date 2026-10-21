@@ -374,9 +374,12 @@ def main() -> int:
             current.get("terminalBenchV21", current.get("terminalbenchV21"))
         )
 
+        display_name = mapping.get(model_id, {}).get("displayName", entry["displayName"])
         models[model_id] = {
             "id": model_id,
-            "displayName": mapping.get(model_id, {}).get("displayName", entry["displayName"]),
+            "displayName": display_name,
+            # O33: several efforts of one AA family can be ranked; each carries the family its chart points use.
+            "family": mapping.get(model_id, {}).get("family", display_name),
             "aaSlug": current.get("slug", slug),
             "aaName": current.get("name"),
             "aaShortName": current.get("shortName"),

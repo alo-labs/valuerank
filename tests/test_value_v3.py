@@ -1255,9 +1255,12 @@ def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
 
     frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note",
                 "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
-    assert v.configuration(frontier) == {"id": "f", "name": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True}
+    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True}
     retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON]}
-    assert v.configuration(retained) == {"id": "r", "name": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": False}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": False}
+    # O33: an evidenced sibling carries its AA family, which its display name no longer equals.
+    sibling = {"id": "f-high", "name": "F (high)", "family": "F", "aaVariant": "high", "aaSlug": "f-high", "rankingInclusionReasons": [v.RETAINED_REASON]}
+    assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is False
     assert v.configuration({"id": "x", "name": "X", "aaSlug": "x"})["frontierFamily"] is False  # no stated reason
 
 
@@ -1273,3 +1276,20 @@ def test_cheaper_siblings_lists_same_family_points_below_the_row_cost():
     ]
     assert v.cheaper_siblings(configuration, {"intelligenceIndexCost": {"total": 10.0}}, points) == ["Fam (high)"]
     assert v.cheaper_siblings(configuration, {}, points) == []
+
+
+def test_cheaper_siblings_leave_out_ranked_configurations_and_match_on_family():
+    """E201/O33: a cheaper configuration of the family that is itself ranked is evaluated, so it is not listed; a
+    sibling whose name carries its effort is matched to the chart through its AA family."""
+
+    points = [
+        {"model_name": "Fam (high)", "family": "Fam", "effort": "high", "total_cost_usd": 5.0},
+        {"model_name": "Fam (medium)", "family": "Fam", "effort": "medium", "total_cost_usd": 3.0},
+        {"model_name": "Fam (low)", "family": "Fam", "effort": "low", "total_cost_usd": 1.0},
+    ]
+    page = {"intelligenceIndexCost": {"total": 10.0}}
+    primary = {"name": "Fam", "effort": "max"}
+    assert v.cheaper_siblings(primary, page, points, {"max", "high"}) == ["Fam (medium)", "Fam (low)"]
+    sibling = {"name": "Fam (high)", "family": "Fam", "effort": "high"}
+    assert v.cheaper_siblings(sibling, {"intelligenceIndexCost": {"total": 5.0}}, points, {"max", "high", "low"}) == ["Fam (medium)"]
+    assert v.configuration_family({"name": "Solo"}) == "Solo"

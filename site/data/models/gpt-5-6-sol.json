@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-sol",
   "summary": {
     "rank": {
-      "api": 13,
-      "plan": 9
+      "api": 21,
+      "plan": 15
     },
     "overall": {
-      "api": 51.56512830163886,
-      "plan": 55.034029624718045
+      "api": 50.90003504846763,
+      "plan": 53.59046094375534
     },
     "quality": 59.695990677523795,
-    "qualityRank": 9,
+    "qualityRank": 12,
     "coverage": {
       "pct": 90.0,
       "costAvailable": true,
@@ -251,8 +251,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 27.17254117398406,
-      "plan": 41.04814646630081
+      "api": 24.512168161299158,
+      "plan": 35.27387174244998
     },
     "components": [
       {
@@ -430,8 +430,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0008,
-        "frontier": 0.0919
+        "top3": 0.0,
+        "frontier": 0.0271
       },
       {
         "stratum": "S2",
@@ -439,8 +439,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.004,
-        "frontier": 0.0801
+        "top3": 0.0001,
+        "frontier": 0.0327
       },
       {
         "stratum": "S1",
@@ -448,8 +448,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0018,
-        "frontier": 0.1304
+        "top3": 0.0,
+        "frontier": 0.0343
       },
       {
         "stratum": "S1M",
@@ -457,8 +457,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0014,
-        "frontier": 0.0818
+        "top3": 0.0,
+        "frontier": 0.0271
       }
     ],
     "plan": [
@@ -609,8 +609,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 13,
-        "plan": 9
+        "api": 21,
+        "plan": 15
       }
     }
   ],

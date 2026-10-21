@@ -16,6 +16,8 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - O30 (2026-10-21) A near-frontier family ranks its configuration with exact DeepSWE and matched Bug Hunt results when it has one (Bug Hunt: one configuration per model), else its smallest-gap near point; GPT-6 Astra is ranked at max (not xhigh), GPT-5.6 Luna at max. The tracked catalog holds one configuration per family; retention never adds a second row.
 - O31 (2026-10-21) Retention is checked over every AA-catalog model with exact DeepSWE and matched Bug Hunt results; the build fails if one is missing from the roster (Bug Hunt full scoreboard and roster are bundle artifacts). Claude Fable 5.1, Muse Spark 1.3, Muse Wonder, Muse Wonder Full joined (23 ranked; Muse Wonder Full has no AA cost, so no value score).
 - O32 (2026-10-21) Only reports dated in the current 30-day window count toward O11's source count and concordance; older reports are diagnostics until they expire.
+- O33 (2026-10-21) Every evidenced effort (exact DeepSWE + matched Bug Hunt) is ranked as its own row, supersedes one-configuration-per-family; the family rule only picks the primary row carrying the frontier/near reason. Cohort 37, scored 36.
+- O34 (2026-10-21) Quartile ladder of frozen bars (lower quartile, lower median = headline, upper quartile; zero-based position floor((n−1)k/4)); today 48.1 / 56.7 / 60.9 over 35.
 - O23 MMMU-Pro dropped from the basket. O24 Both priced Terminal-Bench executions stay (AA Index run and Coding Agent Index vendor-agent run); overlap disclosed.
 
 ## Editor decisions in force (owner may override)
