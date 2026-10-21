@@ -6476,7 +6476,7 @@
     {
       "id": "Bug Hunt harness band (E19)",
       "stratum": "S2",
-      "rule": "width = median over leaderboard configurations listed under two or more agents of (highest - lowest resolution rate, percentage points); Bug Hunt, DeepSWE and Terminal-Bench each drawn uniformly within the band centred on its observed score, since all three run each lab's model in that lab's own agent (E227); S2 specification stress, never in Θ",
+      "rule": "width = median over leaderboard configurations listed under two or more agents of (highest - lowest resolution rate, percentage points); each agent-run leaf (Bug Hunt, DeepSWE, and Terminal-Bench when it is a tbench.ai gap fill rather than AA's single-harness run, O37) drawn uniformly within the band centred on its observed score (E227); S2 specification stress, never in Θ",
       "status": "unevaluable",
       "spreads": {},
       "width": null,

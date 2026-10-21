@@ -1994,9 +1994,10 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, tr
             # E182: an interval clipped off-centre keeps the published point as its median.
             family, params = ("uniform", (low, high)) if math.isclose(z - low, high - z) else ("split-uniform", (low, z, high))
             leaves["terminalBench"] = scenarios.Kernel(family, params, "endpoint-heavy", scenarios.INTERVAL_RANGE)
-        if harness is not None and "bugHunt" in observations:
-            z = observations["bugHunt"].z
-            leaves["bugHunt"] = scenarios.Kernel("uniform", (max(0.0, z - harness / 2.0), min(100.0, z + harness / 2.0)), "endpoint-heavy", scenarios.SPECIFICATION_STRESS)
+        if harness is not None:
+            for key in agent_run_leaves(row):
+                z = observations[key].z
+                leaves[key] = scenarios.Kernel("uniform", (max(0.0, z - harness / 2.0), min(100.0, z + harness / 2.0)), "endpoint-heavy", scenarios.SPECIFICATION_STRESS)
         panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional))
     return panel
 
@@ -2026,13 +2027,23 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-# E19: Bug Hunt runs on vendor CLIs, so a named S2 branch draws it inside a harness-mismatch band whose width is the
-# median spread of one configuration's Terminal-Bench score across agents on the tbench.ai leaderboard (pre-registered).
+# E19/E227: Bug Hunt and DeepSWE run each lab's model in that lab's own agent (and so does a tbench.ai Terminal-Bench gap
+# fill; AA's own Terminal-Bench run uses one harness, O37), so a named S2 branch draws those leaves inside a harness-mismatch
+# band whose width is the median spread of one configuration's Terminal-Bench score across agents on tbench.ai (pre-registered).
 HARNESS_BAND_RULE = (
     "width = median over leaderboard configurations listed under two or more agents of (highest - lowest resolution rate, "
-    "percentage points); Bug Hunt, DeepSWE and Terminal-Bench each drawn uniformly within the band centred on its observed "
-    "score, since all three run each lab's model in that lab's own agent (E227); S2 specification stress, never in Θ"
+    "percentage points); each agent-run leaf (Bug Hunt, DeepSWE, and Terminal-Bench when it is a tbench.ai gap fill rather "
+    "than AA's single-harness run, O37) drawn uniformly within the band centred on its observed score (E227); S2 "
+    "specification stress, never in Θ"
 )
+
+
+def agent_run_leaves(row: dict) -> list[str]:
+    """E227/O37: the observed leaves scored in a lab's own agent, which the harness band stresses."""
+
+    evidence = row["evidence"]
+    agent_tb = (evidence["provenance"].get("terminalBench") or {}).get("agent") not in (None, DEFAULT_TB_HARNESS)
+    return [key for key in ("deepswe", "bugHunt", "terminalBench") if key in evidence["observations"] and (key != "terminalBench" or agent_tb)]
 # E34 and E122: the other named S2 branches, unevaluable from the captured evidence (stated, never silently skipped).
 CACHE_BRANCH = {
     "id": "cache-hit variation (E34)", "stratum": "S2", "status": "unevaluable",

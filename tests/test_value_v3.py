@@ -527,6 +527,10 @@ def test_harness_band_runs_a_named_s2_branch_when_a_configuration_has_two_agents
     observed = result["rows"][0]["evidence"]["observations"]["bugHunt"].z
     assert stressed.params == pytest.approx((observed - 3.0, observed + 3.0)) and stressed.target == scenarios.SPECIFICATION_STRESS
     assert panel["b"].leaves["bugHunt"].target == scenarios.SPECIFICATION_STRESS  # every Bug Hunt leaf, an O36 supplement included
+    # E227: DeepSWE runs in each lab's own agent too; AA's single-harness Terminal-Bench run is not stressed (O37).
+    assert panel["a"].leaves["deepswe"].target == scenarios.SPECIFICATION_STRESS and panel["a"].leaves["terminalBench"].target != scenarios.SPECIFICATION_STRESS
+    gap = {**result["rows"][0], "evidence": {**result["rows"][0]["evidence"], "provenance": {**result["rows"][0]["evidence"]["provenance"], "terminalBench": {"agent": "Codex"}}}}
+    assert v.agent_run_leaves(gap) == ["deepswe", "bugHunt", "terminalBench"]
     document = v.run_scenarios(result, frozen, n=50, seed=7)
     branch = document["namedBranches"][0]
     assert branch["results"]["api"]["stratum"] == "S2" and branch["results"]["plan"]["transfers"] == "off"
