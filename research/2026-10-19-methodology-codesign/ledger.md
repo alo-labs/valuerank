@@ -1087,3 +1087,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Also fixed while verifying: the swing-attribution bridge (E177) rejected the release bundle because four documents (Bug Hunt scoreboard, Cognition data, frontier capture, roster) had no class; they are now classified, and the test runs the real bundle.
 - Draft r81.
 
+
+## Internal review I22 (Claude Sonnet 5.5, effort low, on r81) — adopted, modified or rejected
+- H1 (modified): the reviewer read AGENTS.md as it stood before 2026-10-21; the checked-in AGENTS.md already states O36 and O38. The draft now says "no quality floor on a score; ranking itself requires the full benchmark set (O36, O38), which supersedes O8's ranking of partially covered rows", and that AGENTS.md was amended. (c), showing a listed frontier family's partial-coverage quality in the ranking table, is rejected: the owner ruled that only full-set configurations are compared (O36), and I21 L5 already names the listed rows under the table.
+- M1 (rejected with the reason now in the draft): a third-party fill keeps label eligibility because O37 names its source and that source ran the same benchmark version on the exact configuration; a 10%-weight leaf moves quality by a tenth of the offset (0.25 points on average, 1.2 at most), and E234's removal sensitivity shows the result without it. A provider claim is the last source O36 admits and has no such check (E233).
+- M2 (adopted): "Plan evidence today": SemiAnalysis published 2026-10-06 (E194 date), Current until 2026-11-05, expiry 2027-01-04, demotion after grace 2027-02-03, each route's allocation regime, and Fable 5.1 scored on its own measured Max routes.
+- L1 (adopted): 12 of the 13 matched tbench.ai rows run in the lab's own agent.
+- L2 (rejected): the bar is a quality level over the non-provisional cohort rows with a displayed quality; cost is not required (counts defined once, E192), and E233 concerns labels, not bar membership.
+- L3 (rejected): E201a already flags window-straddling reports and uses isolated per-period figures where a report publishes them, as AGENTS.md says; no new argument.
+- Design 1–2: as H1(c) and M1. Design 3 (rejected for now): a standard-error margin needs a sampling model for every leaf, and only Terminal-Bench publishes one; the leaves without one would need assumed noise, which O25 keeps out of the published-record claims. Design 4 (adopted as E236): the manifest marks S1M dormant while no ranked leaf carries a published interval. Design 5: M2.
+- Draft r82.

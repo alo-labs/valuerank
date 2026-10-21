@@ -49060,6 +49060,11 @@
         "detail": "no ranked row has a missing leaf (O36)"
       },
       {
+        "rule": "S1M interval stream (E145)",
+        "status": "vacuous",
+        "detail": "dormant: no ranked leaf carries a published confidence interval since O37, so S1M equals S1 (E236)"
+      },
+      {
         "rule": "provider-claim label denial (E233)",
         "status": "fired",
         "detail": "competes, earns no label: mimo-v2-6-pro"

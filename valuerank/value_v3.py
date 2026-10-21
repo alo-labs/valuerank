@@ -1456,6 +1456,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     agreement = _quality_agreement(rows)
     measured = _measured_only_view(rows, frozen, per_row)
     readiness = cost_diagnostics.basket_readiness(rows, assembled["admission"], main)
+    interval_rows = sorted(row["id"] for row in rows if (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct"))
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", "release held" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
@@ -1475,6 +1476,9 @@ def score(assembled: dict, frozen: dict) -> dict:
         # E235: the missing-leaf rules stay defined but cannot fire on a ranked row while O36 holds.
         _rule("missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226)", "fired" if any(row["summary"].coverage < 1.0 - 1e-9 for row in rows) else "vacuous",
               "no ranked row has a missing leaf (O36)"),
+        _rule("S1M interval stream (E145)", "fired" if interval_rows else "vacuous",
+              "widens the published confidence intervals of: " + ", ".join(interval_rows) if interval_rows
+              else "dormant: no ranked leaf carries a published confidence interval since O37, so S1M equals S1 (E236)"),
         _rule("provider-claim label denial (E233)", "fired" if any(provider_claimed(row) for row in rows) else "vacuous",
               "competes, earns no label: " + ", ".join(sorted(row["id"] for row in rows if provider_claimed(row))) if any(provider_claimed(row) for row in rows) else "no row has a provider-claimed leaf"),
     ]

@@ -968,5 +968,6 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
 | full benchmark set (O36, O38) | fired | listed, not ranked: deepseek-v4-flash, grok-4.6-xhigh, mimo-v2-6-flash, muse-spark-1-3-xhigh, muse-wonder |
 | missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226) | vacuous | no ranked row has a missing leaf (O36) |
+| S1M interval stream (E145) | vacuous | dormant: no ranked leaf carries a published confidence interval since O37, so S1M equals S1 (E236) |
 | provider-claim label denial (E233) | fired | competes, earns no label: mimo-v2-6-pro |
 | scenario outputs current (E72) | passed | scenario input hash matches the scored inputs |
