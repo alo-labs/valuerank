@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-10-19",
-  "frozenAt": "2026-10-19",
+  "anchorVersion": "v3-2026-10-21",
+  "frozenAt": "2026-10-21",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "9a0d376cc6080f3c",
   "workloads": {
@@ -35,6 +35,7 @@
             "glm-5.3",
             "gpt-5.6-luna",
             "gpt-5.6-sol",
+            "gpt-6-astra",
             "gpt-6-luna",
             "gpt-6-sol",
             "gpt-6.1-sol",
@@ -53,6 +54,7 @@
             "glm-5.3": 3186.289595775135,
             "gpt-5.6-luna": 319.25290369032655,
             "gpt-5.6-sol": 4238.135507049396,
+            "gpt-6-astra": 6107.090015422354,
             "gpt-6-luna": 132.8652049689931,
             "gpt-6-sol": 1999.4094902839818,
             "gpt-6.1-sol": 1267.6626637224322,
@@ -79,6 +81,7 @@
             "glm-5.3",
             "gpt-5.6-luna",
             "gpt-5.6-sol",
+            "gpt-6-astra",
             "gpt-6-luna",
             "gpt-6-sol",
             "gpt-6.1-sol",
@@ -97,6 +100,7 @@
             "glm-5.3": 3186.289595775135,
             "gpt-5.6-luna": 29.637291467724335,
             "gpt-5.6-sol": 393.4399839444297,
+            "gpt-6-astra": 753.9617302990561,
             "gpt-6-luna": 12.334311638413768,
             "gpt-6-sol": 185.61172394021366,
             "gpt-6.1-sol": 117.68127216138434,
@@ -159,7 +163,7 @@
             "glm-5.3": 1901.1496881484682,
             "gpt-5.6-luna": 186.53206681699322,
             "gpt-5.6-sol": 2313.0800831493957,
-            "gpt-6-astra": 2899.4244152617393,
+            "gpt-6-astra": 3844.5595179524043,
             "gpt-6-luna": 79.56395288649308,
             "gpt-6-sol": 1093.5216020173157,
             "gpt-6.1-sol": 796.764446620246,
@@ -209,7 +213,7 @@
             "glm-5.3": 1901.1496881484682,
             "gpt-5.6-luna": 17.316381991922874,
             "gpt-5.6-sol": 214.7307912318414,
-            "gpt-6-astra": 357.953631513795,
+            "gpt-6-astra": 474.6369775249882,
             "gpt-6-luna": 7.386182035508084,
             "gpt-6-sol": 101.51518771048232,
             "gpt-6.1-sol": 73.96625015041273,
@@ -229,8 +233,8 @@
   "barReferences": [
     {
       "id": "bar:median-quality",
-      "level": 52.09441344290625,
-      "medianConfiguration": "glm-5.3",
+      "level": 56.70256809558702,
+      "medianConfiguration": "grok-4.7",
       "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)"
     }
   ],
@@ -255,7 +259,7 @@
     "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
     "nonTautology": "with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
-    "selectionCutoff": "2026-10-19",
+    "selectionCutoff": "2026-10-21",
     "population": [
       "claude-haiku-5-5",
       "claude-opus-5",
@@ -268,6 +272,7 @@
       "glm-5.3",
       "gpt-5.6-luna",
       "gpt-5.6-sol",
+      "gpt-6-astra",
       "gpt-6-luna",
       "gpt-6-sol",
       "gpt-6.1-sol",
@@ -277,8 +282,8 @@
     "bars": [
       {
         "id": "bar:median-quality",
-        "level": 52.09441344290625,
-        "medianConfiguration": "glm-5.3"
+        "level": 56.70256809558702,
+        "medianConfiguration": "grok-4.7"
       }
     ]
   }

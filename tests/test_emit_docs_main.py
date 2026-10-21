@@ -61,7 +61,9 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     readme = (emitted / "README.md").read_text()
     rows = {cells(row)[2].split("](")[0].lstrip("["): cells(row) for row in table_rows(readme, "| Plan rank | API rank | Configuration")}
     assert rows["Gemini 4 Argon (high)"][9] == "—" and rows["Gemini 4 Argon (high)"][10] == "API-cost fallback"
-    assert rows["GPT-6 Astra (xhigh)"][10] == "subset cost, provisional quality"
+    assert rows["MiMo-V2.6-Pro"][10] == "subset cost, provisional quality"
+    # O30: GPT-6 Astra is ranked at max, its configuration with exact DeepSWE and Bug Hunt results.
+    assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "—"
     assert rows["Claude Haiku 5.5 (xhigh)"][10] == "AA cost caveat"
     assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Pro $500 · common GPT assumption (10.772×, measured)"
 
@@ -71,10 +73,10 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert "the definite frontier (no configuration can beat it on both cost and quality" in readme
     assert "is GPT-6.1 Sol (max), GPT-6 Luna (max);" in readme
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter.
-    assert "Cheapest at or above quality 52.1: not unique; possibly GPT-6.1 Sol (max), GPT-5.6 Luna (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max)." in readme
+    assert "Cheapest at or above quality 56.7: not unique; possibly GPT-6.1 Sol (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). (Bar comparison: compares 11 configurations that can qualify.)" in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 80% of API and 63% of Plan value variance)" in readme
-    assert "That weight is nominal: on the current panel cost accounts for 80% of the variance in API value and 63% in Plan value" in readme
+    assert "value is a 25% cost score (nominal weight; 81% of API and 62% of Plan value variance)" in readme
+    assert "That weight is nominal: on the current panel cost accounts for 81% of the variance in API value and 62% in Plan value" in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
     assert "Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality." in readme
@@ -108,7 +110,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert "| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |" in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
-    assert "| quality 52.1 | GPT-6.1 Sol (max) | not scenario-supported |" in text
+    assert "| quality 56.7 | GPT-6.1 Sol (max) | primary-kernel frequency >= 90%; kernel-sensitive |" in text
 
 
 def test_raw_data_lists_every_deepswe_configuration_and_bundle_artifact(emitted):
@@ -195,9 +197,9 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     readme = (repo_copy / "README.md").read_text()
     plan_sentence = next(line for line in readme.splitlines() if line.startswith("- Plan basis, main workload"))
     assert "Not evaluable" not in plan_sentence
-    assert "Cheapest at or above quality 52.1: not unique; possibly GPT-6 Luna (max), DeepSeek V4 Flash (max)." in plan_sentence
-    assert "Cheapest at or above quality 52.1: unresolved." in plan_sentence
-    assert plan_sentence.endswith("Cheapest at or above quality 52.1: DeepSeek V4 Flash (max) (confirmed).")
+    assert "Cheapest at or above quality 56.7: not unique; possibly GPT-6 Luna (max), DeepSeek V4 Flash (max)." in plan_sentence
+    assert "Cheapest at or above quality 56.7: unresolved." in plan_sentence
+    assert plan_sentence.endswith("Cheapest at or above quality 56.7: DeepSeek V4 Flash (max) (confirmed). (Bar comparison: compares 11 configurations that can qualify.)")
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores
@@ -237,7 +239,7 @@ def test_terminal_bench_harness_diagnostic_reports_tau_when_defined(repo_copy, p
     edit_json(repo_copy, "scores.json", undefined_agreement)
     assert emit(repo_copy) == 0
     text = (repo_copy / "scores.md").read_text()
-    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small); panel of 11 rows." in text
+    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small); panel of 12 rows." in text
     assert re.search(r"- \*\*Group drift:\*\* estimated\.\n", text)
 
 

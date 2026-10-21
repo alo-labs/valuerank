@@ -1,34 +1,34 @@
 # ValueRank
-**Frontier AI configurations ranked by value: benchmark quality against what the work costs**
+**Frontier AI configurations ranked by value for software engineering and DevOps: benchmark quality against what the work costs**
 
 **Version:** v3.0.0
 **Updated:** October 19, 2026
-**Methodology:** 3.0.0 · SDLC basket v1 · anchor version v3-2026-10-19
-**Scope:** 19 ranked configurations from a 31-model AA-mapped roster; value is a 25% cost score (nominal weight; 80% of API and 63% of Plan value variance) plus 75% quality over 11 benchmark leaves
+**Methodology:** 3.0.0 · SDLC basket v1 · anchor version v3-2026-10-21
+**Scope:** 19 ranked configurations from a 31-model AA-mapped roster; value is a 25% cost score (nominal weight; 81% of API and 62% of Plan value variance) plus 75% quality over 11 benchmark leaves
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **25%** cost score plus **75%** benchmark quality. That weight is nominal: on the current panel cost accounts for 80% of the variance in API value and 63% in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)). Cost is the contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost): Artificial Analysis' (AA) published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of 11 benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted. No Value Multiple is yet identified on the basket itself (0 of 19 rows), so the Plan ranking is labelled exploratory.
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **25%** cost score plus **75%** benchmark quality. That weight is nominal: on the current panel cost accounts for 81% of the variance in API value and 62% in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)). Cost is the contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost): Artificial Analysis' (AA) published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of 11 benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted. No Value Multiple is yet identified on the basket itself (0 of 19 rows), so the Plan ranking is labelled exploratory.
 
 Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality.
 
 | Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|
-| 1 | 13 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 61.1 | 51.6 | 64.3 | 100% | $9,373.65 | $159.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 2 | 14 | [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 60.9 | 51.2 | 64.2 | 100% | $9,989.15 | $169.60 | Claude Pro $20 · Opus 5.5 (58.9×, measured) | — |
+| 1 | 12 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 61.1 | 51.6 | 64.3 | 100% | $9,373.65 | $159.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
+| 2 | 13 | [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 60.9 | 51.2 | 64.2 | 100% | $9,989.15 | $169.60 | Claude Pro $20 · Opus 5.5 (58.9×, measured) | — |
 | 3 | 2 | [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 59.8 | 58.1 | 61.3 | 100% | $1,267.66 | $117.68 | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | — |
-| 4 | 10 | [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 57.0 | 52.5 | 45.4 | 90% | $292.07 | $4.96 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 5 | 8 | [GPT-6 Astra (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 56.6 | 53.8 | 63.8 | 40% | $2,899.42 | $357.95 | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | subset cost, provisional quality |
-| 6 | 18 | [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 56.5 | 47.0 | 57.8 | 80% | $8,733.13 | $148.27 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 7 | 9 | [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 56.2 | 53.8 | 58.3 | 90% | $1,999.41 | $185.61 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 8 | 3 | [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 56.1 | 57.8 | 47.7 | 100% | $132.87 | $12.33 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 9 | 6 | [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 55.3 | 55.6 | 50.0 | 90% | $319.25 | $29.64 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 10 | 12 | [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 55.0 | 51.6 | 59.7 | 90% | $4,238.14 | $393.44 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
+| 4 | 9 | [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 57.0 | 52.5 | 45.4 | 90% | $292.07 | $4.96 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
+| 5 | 18 | [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 56.5 | 47.0 | 57.8 | 80% | $8,733.13 | $148.27 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
+| 6 | 8 | [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 56.2 | 53.8 | 58.3 | 90% | $1,999.41 | $185.61 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
+| 7 | 3 | [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 56.1 | 57.8 | 47.7 | 100% | $132.87 | $12.33 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
+| 8 | 6 | [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 55.3 | 55.6 | 50.0 | 90% | $319.25 | $29.64 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
+| 9 | 11 | [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 55.0 | 51.6 | 59.7 | 90% | $4,238.14 | $393.44 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
+| 10 | 14 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 54.0 | 50.9 | 60.9 | 100% | $6,107.09 | $753.96 | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | — |
 | 11 | 1 | [MiMo-V2.6-Flash](https://valuerank.alolabs.dev/models/mimo-v2-6-flash/) | 53.5 | 60.9 | 51.7 | 50% | $60.37 | $40.25 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provisional quality |
 | 12 | 4 | [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 52.8 | 56.4 | 65.3 | 90% | $3,628.64 | $3,628.64 | — | API-cost fallback |
 | 13 | 5 | [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 50.0 | 56.3 | 50.1 | 60% | $136.13 | $90.75 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provisional quality |
 | 14 | 7 | [DeepSeek V4 Flash (max)](https://valuerank.alolabs.dev/models/deepseek-v4-flash/) | 47.3 | 54.8 | 48.1 | 80% | $279.51 | $279.51 | — | API-cost fallback |
-| 15 | 11 | [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 45.7 | 51.6 | 50.0 | 80% | $801.50 | $801.50 | — | API-cost fallback |
+| 15 | 10 | [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 45.7 | 51.6 | 50.0 | 80% | $801.50 | $801.50 | — | API-cost fallback |
 | 16 | 16 | [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 44.5 | 47.3 | 56.7 | 100% | $6,700.02 | $6,700.02 | — | API-cost fallback |
 | 17 | 17 | [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 43.2 | 47.1 | 52.1 | 100% | $3,186.29 | $3,186.29 | — | API-cost fallback |
 | 18 | 15 | [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 43.1 | 47.6 | 50.3 | 100% | $2,073.44 | $2,073.44 | — | API-cost fallback |
@@ -46,7 +46,7 @@ Not ranked (12 roster models): Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5,
 
 ### What the evidence supports
 
-- API basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere inside the published record's precision and missing-evidence bounds) is GPT-6.1 Sol (max), GPT-6 Luna (max); the possible frontier adds Gemini 4 Argon (high), Claude Sonnet 5.5 (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-5.6 Luna (max), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). Not evaluable on this workload: GPT-6 Astra (xhigh), MiMo-V2.6-Flash, MiMo-V2.6-Pro. Cheapest at or above quality 52.1: not unique; possibly GPT-6.1 Sol (max), GPT-5.6 Luna (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max).
+- API basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere inside the published record's precision and missing-evidence bounds) is GPT-6.1 Sol (max), GPT-6 Luna (max); the possible frontier adds Gemini 4 Argon (high), Claude Sonnet 5.5 (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-5.6 Luna (max), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). Not evaluable on this workload: MiMo-V2.6-Flash, MiMo-V2.6-Pro. Cheapest at or above quality 56.7: not unique; possibly GPT-6.1 Sol (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). (Bar comparison: compares 11 configurations that can qualify.)
 - Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
 Scenario shares by stream, diagnostics and the release gates are in [scores.md](scores.md); the inputs behind every number are in [raw-data.md](raw-data.md).
@@ -73,7 +73,7 @@ Frontier families and the configuration selected for each:
 - MiMo-V2.6-Flash: MiMo-V2.6-Flash
 - MiMo-V2.6-Pro: MiMo-V2.6-Pro
 
-Near-frontier families and the configuration selected for each:
+Near-frontier families and each family's near point closest to the frontier (a family is ranked at its configuration with exact DeepSWE and Bug Hunt results when it has one, O30, so the ranked configuration can differ):
 
 - Claude Haiku 5.5: Claude Haiku 5.5 (low), 1 Index point below the frontier
 - Claude Opus 5.5: Claude Opus 5.5 (medium with fallback), 1 Index point below the frontier
@@ -87,7 +87,7 @@ AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer
 ## How v3 scores value
 
 - **Cost is the SDLC basket.** SDLC basket v1: AA's published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, in USD per basket run. Pending capture: FrontierCode, ITBench-AA. v2 used AA's cost to run the whole Intelligence Index per Index point.
-- **Cost keeps its magnitude.** The cost score is 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100, against anchors frozen with anchor version `v3-2026-10-19`. A model entering or leaving the cohort does not move another model's score. At the API anchors, doubling cost costs 3.04 value points, which 4.05 quality points offset.
+- **Cost keeps its magnitude.** The cost score is 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100, against anchors frozen with anchor version `v3-2026-10-21`. A model entering or leaving the cohort does not move another model's score. At the API anchors, doubling cost costs 3.04 value points, which 4.05 quality points offset.
 - **Quality is measured, not ranked.** Each of the 11 leaves is placed on fixed 0–100 anchors from its raw value, so quality no longer depends on which other models are ranked. A missing leaf is left out of that configuration's mean, its coverage is shown, and low coverage marks the row provisional.
 - **Plan value is route evidence.** Each subscription route carries its Value Multiple, evidence grade (controlled measurement, concordant reports, owner-named assumption) and identification status; the Plan ranking is labelled exploratory until multiples are identified on the basket.
 - **Uncertainty is shown, not hidden.** Interval outputs certify which frontier and cheapest-above-a-bar claims the published record supports; scenario shares report frequencies over declared streams.
@@ -99,7 +99,7 @@ AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer
 - [AA Coding Agent Index, DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
 - [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) official leaderboard rows and [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs.
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `4e198807ffe0dd21802b5fefc30e641784dc8c3b223bfa2b08be29b9898c149e`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `29df9f27025585ff50b54d1d12e89f2a04f87d176dfa94810bfedfe8fd771904`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files
@@ -144,5 +144,5 @@ Observed 2026-10-17T18:48:27Z; Artificial Analysis Intelligence Index v4.3.2. Sc
 | [Claude Sonnet 5.5 (xhigh with fallback)](https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh) | claude-sonnet-5-5-xhigh | 52 (rounded) | $2,176.82 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the Claude Sonnet 5.5 family is represented in the primary ranking by its selected configuration (claude-sonnet-5-5). No result is transferred between efforts. |
 | [Gemini 4 Argon (high)](https://artificialanalysis.ai/models/gemini-4-argon) | gemini-4-argon | 53 (rounded) | $2,407.24 | Near AA frontier (within 3 Index points) | Primary ranked | None |
 | [GPT-6 Astra (high)](https://artificialanalysis.ai/models/gpt-6-astra-high) | gpt-6-astra-high | 51 (rounded) | $2,925.01 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the GPT-6 Astra family is represented in the primary ranking by its selected configuration (gpt-6-astra-xhigh). No result is transferred between efforts. |
-| [GPT-6 Astra (xhigh)](https://artificialanalysis.ai/models/gpt-6-astra-xhigh) | gpt-6-astra-xhigh | 52 (rounded) | $3,802.98 | Near AA frontier (within 3 Index points) | Primary ranked | None |
-| [GPT-6 Astra (max)](https://artificialanalysis.ai/models/gpt-6-astra) | gpt-6-astra | 53 (rounded) | $5,324.10 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the GPT-6 Astra family is represented in the primary ranking by its selected configuration (gpt-6-astra-xhigh). No result is transferred between efforts. |
+| [GPT-6 Astra (xhigh)](https://artificialanalysis.ai/models/gpt-6-astra-xhigh) | gpt-6-astra-xhigh | 52 (rounded) | $3,802.98 | Near AA frontier (within 3 Index points) | Missing from source roster | Exact evaluated variant absent from source roster |
+| [GPT-6 Astra (max)](https://artificialanalysis.ai/models/gpt-6-astra) | gpt-6-astra | 53 (rounded) | $5,324.10 | Near AA frontier (within 3 Index points) | Primary ranked | None |

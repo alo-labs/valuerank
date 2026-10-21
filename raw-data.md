@@ -51,13 +51,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (xhigh) | Humanity's Last Exam | 0.42678405931418 | fraction | 42.68 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-xhigh].model.hle` |
 | Claude Haiku 5.5 (xhigh) | SciCode | 0.517361111111111 | fraction | 51.74 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-xhigh].model.scicode` |
 | Claude Haiku 5.5 (xhigh) | CritPt | 0.225714285714286 | fraction | 22.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-xhigh].model.critpt` |
-| GPT-6 Astra (xhigh) | GDPval-AA v2.1 | 1555.91 | Elo | 52.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.gdpval` |
-| GPT-6 Astra (xhigh) | AutomationBench-AA | 0.6717778020215392 | fraction | 67.18 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.automationBenchPartialScore` |
-| GPT-6 Astra (xhigh) | AA-Omniscience | 43.416666666666664 | AA Omniscience Index | 71.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.omniscience` |
-| GPT-6 Astra (xhigh) | AA-LCR v1.1 | 0.8 | fraction | 80.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.lcr` |
-| GPT-6 Astra (xhigh) | Humanity's Last Exam | 0.545875810936052 | fraction | 54.59 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.hle` |
-| GPT-6 Astra (xhigh) | SciCode | 0.556712962962963 | fraction | 55.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.scicode` |
-| GPT-6 Astra (xhigh) | CritPt | 0.314285714285714 | fraction | 31.43 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.critpt` |
 | Claude Opus 5 (max) | DeepSWE v1.1 | 62.5 | percent | 62.50 | Claude Code - Opus 5 (max) / Claude Code | `data/aa_deepswe.json` `configurations[valueRankModelId=claude-opus-5].scorePct` |
 | Claude Opus 5 (max) | Bug Hunt Bench | 27.0 | bugs fixed of 105 | 25.71 | Opus 5 (max effort) | `data/bug_hunt.json` `models[modelId=claude-opus-5].fixedOf105` |
 | Claude Opus 5 (max) | GDPval-AA v2.1 | 1721.15 | Elo | 61.06 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5].model.gdpval` |
@@ -108,6 +101,17 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-5.6 Sol (max) | Humanity's Last Exam | 0.494902687673772 | fraction | 49.49 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-sol].model.hle` |
 | GPT-5.6 Sol (max) | SciCode | 0.570601851851852 | fraction | 57.06 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-sol].model.scicode` |
 | GPT-5.6 Sol (max) | CritPt | 0.322857142857143 | fraction | 32.29 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-sol].model.critpt` |
+| GPT-6 Astra (max) | DeepSWE v1.1 | 67.6 | percent | 67.60 | Codex - GPT-6 Astra (max) / Codex | `data/aa_deepswe.json` `configurations[valueRankModelId=gpt-6-astra].scorePct` |
+| GPT-6 Astra (max) | Bug Hunt Bench | 45.0 | bugs fixed of 105 | 42.86 | GPT-6 Astra (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6-astra].fixedOf105` |
+| GPT-6 Astra (max) | AA FrontierCode 1.1 | 0.469827666666667 | fraction | 46.98 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.frontierCode` |
+| GPT-6 Astra (max) | Terminal-Bench 4.0 (tbench.ai) | 58.2 | percent | 58.20 | GPT-6 Astra (max) / Codex | `data/tb4.json` `rows[model=GPT-6 Astra (max), agent=Codex].resolutionRatePct` |
+| GPT-6 Astra (max) | GDPval-AA v2.1 | 1572.84 | Elo | 53.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.gdpval` |
+| GPT-6 Astra (max) | AutomationBench-AA | 0.6849174806688876 | fraction | 68.49 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.automationBenchPartialScore` |
+| GPT-6 Astra (max) | AA-Omniscience | 43.4 | AA Omniscience Index | 71.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.omniscience` |
+| GPT-6 Astra (max) | AA-LCR v1.1 | 0.806666666666667 | fraction | 80.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.lcr` |
+| GPT-6 Astra (max) | Humanity's Last Exam | 0.546802594995366 | fraction | 54.68 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.hle` |
+| GPT-6 Astra (max) | SciCode | 0.564814814814815 | fraction | 56.48 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.scicode` |
+| GPT-6 Astra (max) | CritPt | 0.317142857142857 | fraction | 31.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.critpt` |
 | MiMo-V2.6-Flash | AA FrontierCode 1.1 | 0.420675333333333 | fraction | 42.07 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-flash].model.frontierCode` |
 | MiMo-V2.6-Flash | GDPval-AA v2.1 | 1607.51 | Elo | 55.38 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-flash].model.gdpval` |
 | MiMo-V2.6-Flash | AutomationBench-AA | 0.6405168250285657 | fraction | 64.05 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-flash].model.automationBenchPartialScore` |
@@ -239,13 +243,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (xhigh) | AA-LCR | $1.53 | confirmed-complete | 100 | $0.0153 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (xhigh) | Coding Agent Index | $184.98 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
 | Claude Haiku 5.5 (xhigh) | FrontierCode | $16.00 | confirmed-incomplete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
-| GPT-6 Astra (xhigh) | AA-Briefcase | $597.28 | confirmed-complete | 91 | $6.5635 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (xhigh) | GDPval-AA | $668.39 | confirmed-complete | 220 | $3.0381 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (xhigh) | GDP.pdf | $191.27 | confirmed-complete | 100 | $1.9127 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (xhigh) | AutomationBench-AA | $924.00 | confirmed-complete | 657 | $1.4064 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (xhigh) | Terminal-Bench 4.0 (AA Index run) | $386.46 | confirmed-complete | 66 | $5.8555 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (xhigh) | SciCode | $35.03 | confirmed-complete | 288 | $0.1216 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (xhigh) | AA-LCR | $96.99 | confirmed-complete | 100 | $0.9699 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Opus 5 (max) | AA-Briefcase | $1,619.19 | confirmed-complete | 91 | $17.7933 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Opus 5 (max) | GDPval-AA | $1,488.52 | confirmed-complete | 220 | $6.7660 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Opus 5 (max) | GDP.pdf | $108.57 | confirmed-complete | 100 | $1.0857 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -289,6 +286,16 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-5.6 Sol (max) | AA-LCR | $40.16 | confirmed-complete | 100 | $0.4016 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-5.6 Sol (max) | Coding Agent Index | $1,925.06 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
 | GPT-5.6 Sol (max) | ITBench-AA | $106.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
+| GPT-6 Astra (max) | AA-Briefcase | $864.69 | confirmed-complete | 91 | $9.5021 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | GDPval-AA | $996.49 | confirmed-complete | 220 | $4.5295 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | GDP.pdf | $207.58 | confirmed-complete | 100 | $2.0758 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | AutomationBench-AA | $1,048.30 | confirmed-complete | 657 | $1.5956 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | Terminal-Bench 4.0 (AA Index run) | $560.88 | confirmed-complete | 66 | $8.4981 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | SciCode | $66.89 | confirmed-complete | 288 | $0.2323 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | AA-LCR | $99.73 | confirmed-complete | 100 | $0.9973 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | Coding Agent Index | $2,262.53 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
+| GPT-6 Astra (max) | FrontierCode | $422.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
+| GPT-6 Astra (max) | ITBench-AA | $133.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
 | MiMo-V2.6-Flash | AA-Briefcase | $13.81 | confirmed-complete | 91 | $0.1517 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Flash | GDPval-AA | $16.10 | confirmed-complete | 220 | $0.0732 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Flash | GDP.pdf | $2.01 | confirmed-complete | 100 | $0.0201 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -380,12 +387,12 @@ The seven Index components plus AA's residual reproduce AA's published Intellige
 | Claude Opus 5.5 (max) | $6,039.13 | $2,669.07 | $8,708.20 | $8,708.20 | yes |
 | GPT-6.1 Sol (max) | $796.76 | $284.79 | $1,081.55 | $1,081.55 | yes |
 | Claude Haiku 5.5 (xhigh) | $107.10 | $50.48 | $157.58 | $157.58 | yes |
-| GPT-6 Astra (xhigh) | $2,899.42 | $903.56 | $3,802.98 | $3,802.98 | yes |
 | Claude Opus 5 (max) | $5,464.01 | $1,810.73 | $7,274.74 | $7,274.74 | yes |
 | GPT-6 Sol (max) | $1,093.52 | $442.27 | $1,535.80 | $1,535.80 | yes |
 | GPT-6 Luna (max) | $79.56 | $42.49 | $122.05 | $122.05 | yes |
 | GPT-5.6 Luna (max) | $186.53 | $133.40 | $319.93 | $319.93 | yes |
 | GPT-5.6 Sol (max) | $2,313.08 | $1,151.76 | $3,464.84 | $3,464.84 | yes |
+| GPT-6 Astra (max) | $3,844.56 | $1,479.54 | $5,324.10 | $5,324.10 | yes |
 | MiMo-V2.6-Flash | $60.37 | $49.18 | $109.55 | $109.55 | yes |
 | Gemini 4 Argon (high) | $1,857.94 | $549.30 | $2,407.24 | $2,407.24 | yes |
 | MiMo-V2.6-Pro | $136.13 | $70.53 | $206.66 | $206.66 | yes |
@@ -419,7 +426,7 @@ The AA chart publishes 42 DeepSWE v1.1 configurations across 113 tasks, observed
 | 15 | Claude Code | Opus 5.5 | max | 68.4% | Exact: claude-opus-5-5 | Exact variant: chart model Opus 5.5 (max) matches the roster display name 'Claude Opus 5.5' at effort max. |
 | 16 | Claude Code | Sonnet 5.5 | xhigh | 68.4% | effort mismatch | Model family matches the roster display name 'Claude Sonnet 5.5', but the chart row's effort (xhigh) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
 | 17 | Kimi Code CLI | Kimi K3 | not shown | 68.4% | effort unconfirmed | The chart row shows no effort; the roster's selected configuration is max, so the variant cannot be confirmed and no result is transferred. |
-| 18 | Codex | GPT-6 Astra | max | 67.6% | effort mismatch | Model family matches the roster display name 'GPT-6 Astra', but the chart row's effort (max) differs from the roster variant (xhigh); ValueRank never substitutes a different reasoning effort. |
+| 18 | Codex | GPT-6 Astra | max | 67.6% | Exact: gpt-6-astra | Exact variant: chart model GPT-6 Astra (max) matches the roster display name 'GPT-6 Astra' at effort max. |
 | 19 | Codex | GPT-6.1 Sol | low | 67.6% | effort mismatch | Model family matches the roster display name 'GPT-6.1 Sol', but the chart row's effort (low) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
 | 20 | Devin Fusion CLI | GPT-6 Astra XHigh + SWE-2 Medium | not shown | 67.3% | not in roster | No ValueRank roster model has this chart model name. It is a composite agent configuration. |
 | 21 | Claude Code | Sonnet 5.5 | high | 66.7% | effort mismatch | Model family matches the roster display name 'Claude Sonnet 5.5', but the chart row's effort (high) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
@@ -534,11 +541,11 @@ Each routed row's amount with what it measures, how it was derived and which obj
 |---|---:|---|---|---|---|---|
 | GPT-6.1 Sol (max) | $5,386 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | Claude Sonnet 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| GPT-6 Astra (xhigh) | $162 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-plus-common-semianalysis-assumption:month cash | chatgpt-plus-common-semianalysis-assumption |
 | Claude Opus 5.5 (max) | $1,178 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | claude-pro-opus55-semianalysis:month cash | claude-pro-opus55-semianalysis |
 | GPT-5.6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| MiMo-V2.6-Pro | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
+| GPT-6 Astra (max) | $162 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-plus-common-semianalysis-assumption:month cash | chatgpt-plus-common-semianalysis-assumption |
 | GPT-6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| MiMo-V2.6-Pro | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
 | GPT-5.6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | GPT-6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | MiMo-V2.6-Flash | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
@@ -547,20 +554,20 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `4e198807ffe0dd21802b5fefc30e641784dc8c3b223bfa2b08be29b9898c149e`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `29df9f27025585ff50b54d1d12e89f2a04f87d176dfa94810bfedfe8fd771904`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
-| snapshot | `data/aa/aa_v432_snapshot.json` | `312aa15650c35064d16359de73ed91c236b9bdd8d4561891bc236d024a5c8878` | 2026-10-17T19:25:14Z | valuerank.capture_aa |
-| deepswe | `data/aa_deepswe.json` | `1c7d350ff9069b378ec37c6ee442770200d30c24f5ff32da5622e85b68acdd92` | 2026-10-17T19:26:26Z | valuerank.fetch_deepswe |
+| snapshot | `data/aa/aa_v432_snapshot.json` | `52153f886fd0016d762d7e22a278885bfcd8cfc37dfd2b6a5f9ad83224b373b5` | 2026-10-17T19:25:14Z | valuerank.capture_aa |
+| deepswe | `data/aa_deepswe.json` | `77ba0f45a999bb6561d9ac006835916bcd51c4cfd88e5046d1467d920b04a852` | 2026-10-17T19:26:26Z | valuerank.fetch_deepswe |
 | bugHunt | `data/bug_hunt.json` | `1a13cffc13f53068129011d8a9e0515fec9bc8487f7b39f01764daaefaf1606d` | 2026-10-17 | editorial capture of the owner's published results (source commit recorded) |
 | tb4 | `data/tb4.json` | `dd29b617afa1c868f0903092167a62d324997a197abfbf63693b36b1e9c6f940` | 2026-10-17T19:25:15Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
 | codingAgents | `data/aa/coding_agents_capture.json` | `944b4082d89e451c9383b662a8b3c4b3c32423d31dca2316a8ff9dc6eca6ca7c` | 2026-10-19T19:31:46Z | valuerank.capture_coding_agents |
 | costCharts | `data/aa/cost_charts_capture.json` | `2e2cd3653c5f2add06595161e3839062e0ce1e989f8f3ba781cdc00814c3b5d3` | 2026-10-19T19:39:55.048Z | scripts/capture-aa-cost-charts.js |
-| configurationMap | `data/v3_configuration_map.json` | `2f2147fb801356a4050394d1747ae81f3d6627979880453ced7a3523031b01f4` | 2026-10-19 | editorial pinning from the research capture |
+| configurationMap | `data/v3_configuration_map.json` | `2078c11c789213f6117b1c9789ef3673c8fff2d1c51e1928dc7addc7b359e7a3` | 2026-10-19 | editorial pinning from the research capture |
 | planRoutes | `data/plan_cost_routes.json` | `70b6bd160e8d890e867ea4998bf047c1e7acb22726c1cfb7450e1ddacc82a197` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `41e71ffea3a13f0cec1573493a8baf24b274d2de5290224d1107ee818c05cd95` | 2026-10-17T19:25:14Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| anchors | `data/v3_frozen.json` | `91fbbe17c5d8d545f8fe885c251af2d2785f535c1e0b527904d0b284f286c843` | 2026-10-19 | valuerank.value_v3 freeze |
+| anchors | `data/v3_frozen.json` | `c706cb8ef237bfc68bce672f29f64a3bb4ba7ab960599dc5cd19017584388a97` | 2026-10-21 | valuerank.value_v3 freeze |
 
 
 ## AA intelligence and total-cost comparison
@@ -594,5 +601,5 @@ Observed 2026-10-17T18:48:27Z; Artificial Analysis Intelligence Index v4.3.2. Sc
 | [Claude Sonnet 5.5 (xhigh with fallback)](https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh) | claude-sonnet-5-5-xhigh | 52 (rounded) | $2,176.82 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the Claude Sonnet 5.5 family is represented in the primary ranking by its selected configuration (claude-sonnet-5-5). No result is transferred between efforts. |
 | [Gemini 4 Argon (high)](https://artificialanalysis.ai/models/gemini-4-argon) | gemini-4-argon | 53 (rounded) | $2,407.24 | Near AA frontier (within 3 Index points) | Primary ranked | None |
 | [GPT-6 Astra (high)](https://artificialanalysis.ai/models/gpt-6-astra-high) | gpt-6-astra-high | 51 (rounded) | $2,925.01 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the GPT-6 Astra family is represented in the primary ranking by its selected configuration (gpt-6-astra-xhigh). No result is transferred between efforts. |
-| [GPT-6 Astra (xhigh)](https://artificialanalysis.ai/models/gpt-6-astra-xhigh) | gpt-6-astra-xhigh | 52 (rounded) | $3,802.98 | Near AA frontier (within 3 Index points) | Primary ranked | None |
-| [GPT-6 Astra (max)](https://artificialanalysis.ai/models/gpt-6-astra) | gpt-6-astra | 53 (rounded) | $5,324.10 | Near AA frontier (within 3 Index points) | Deferred comparison candidate | Exact evaluated variant absent from source roster; Reviewed 2026-10-17T19:16:08Z: Alternate configuration retained in the AA near-frontier comparison; the GPT-6 Astra family is represented in the primary ranking by its selected configuration (gpt-6-astra-xhigh). No result is transferred between efforts. |
+| [GPT-6 Astra (xhigh)](https://artificialanalysis.ai/models/gpt-6-astra-xhigh) | gpt-6-astra-xhigh | 52 (rounded) | $3,802.98 | Near AA frontier (within 3 Index points) | Missing from source roster | Exact evaluated variant absent from source roster |
+| [GPT-6 Astra (max)](https://artificialanalysis.ai/models/gpt-6-astra) | gpt-6-astra | 53 (rounded) | $5,324.10 | Near AA frontier (within 3 Index points) | Primary ranked | None |

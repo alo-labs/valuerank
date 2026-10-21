@@ -81,6 +81,75 @@ describe('answer page', () => {
   });
 });
 
+// Evidence is footnoted, not a column: every row's marker matches its note, in the order the rows are shown.
+function notesMatchRows(page, body, list) {
+  return page.evaluate(([bodySel, listSel]) => {
+    const rows = [...document.querySelectorAll(`${bodySel} tr[data-slug]`)];
+    const notes = [...document.querySelectorAll(`${listSel} > li`)];
+    return rows.length > 0 && rows.length === notes.length && rows.every((row, i) => {
+      const ref = row.querySelector('.fn-ref a');
+      return ref.textContent === String(i + 1) && ref.getAttribute('href') === `#${notes[i].id}`
+        && notes[i].id === `ev-${row.dataset.slug}` && notes[i].querySelector('.fn-back').getAttribute('href') === `#${ref.id}`;
+    });
+  }, [body, list]);
+}
+
+describe('evidence footnotes', () => {
+  test('the answer page has no Evidence column and its notes follow the basis', async () => {
+    const { page, context, errors } = await open('/');
+    assert.equal(await page.locator('#answer-table thead th', { hasText: 'Evidence' }).count(), 0);
+    assert.equal(await page.locator('#index-evidence li').count(), 16);
+    assert.equal(await notesMatchRows(page, '#index-body', '#index-evidence'), true);
+    await page.locator('#basis-toggle [data-basis="api"]').click();
+    assert.equal(await notesMatchRows(page, '#index-body', '#index-evidence'), true);
+    assert.equal(await page.locator('#index-evidence .badge', { hasText: 'Owner-measured' }).count(), 0);
+    assert.deepEqual(errors, []);
+    await context.close();
+  });
+
+  test('a marker is a keyboard link to its note and the note links back to the row', async () => {
+    const { page, context } = await open('/');
+    const ref = page.locator('#index-body tr').first().locator('.fn-ref a');
+    const target = await ref.getAttribute('href');
+    await ref.focus();
+    await page.keyboard.press('Enter');
+    await page.waitForFunction((hash) => window.location.hash === hash, target);
+    const back = page.locator(`${target} .fn-back`);
+    await back.focus();
+    await page.keyboard.press('Enter');
+    await page.waitForFunction((hash) => window.location.hash === hash, `#${await ref.getAttribute('id')}`);
+    await context.close();
+  });
+
+  test('rankings notes stay in step with sorting and filtering, and the grade is still exported', async () => {
+    const { page, context } = await open('/rankings/');
+    assert.equal(await page.locator('#rankings-head th[data-col="grade"]').count(), 0);
+    assert.equal(await page.locator('#column-picker-list input[data-col="grade"]').count(), 0);
+    assert.equal(await notesMatchRows(page, '#rankings-body', '#rankings-evidence'), true);
+    await page.locator('#rankings-head th[data-col="quality"] .sort-btn').click();
+    assert.equal(await notesMatchRows(page, '#rankings-body', '#rankings-evidence'), true);
+    await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
+    assert.equal(await notesMatchRows(page, '#rankings-body', '#rankings-evidence'), true);
+    const [download] = await Promise.all([page.waitForEvent('download'), page.locator('#export-csv').click()]);
+    const csv = await (await import('node:fs/promises')).readFile(await download.path(), 'utf8');
+    assert.match(csv.split('\r\n')[0], /,Evidence,/);
+    await context.close();
+  });
+
+  test('table pages close with an Evidence section and no table has an Evidence column', async () => {
+    const { page, context } = await open('/models/');
+    for (const path of ['/models/', '/models/gpt-6-1-sol/', '/plans/', '/benchmarks/terminal-bench-4/']) {
+      await page.goto(server.baseUrl + path, { waitUntil: 'load' });
+      assert.equal(await page.locator('table thead th', { hasText: /^Evidence$/ }).count(), 0, path);
+      assert.equal(await page.locator('#evidence-notes h2').innerText(), 'Evidence', path);
+      const broken = await page.evaluate(() => [...document.querySelectorAll('.fn-ref a, .fn-back')]
+        .filter((a) => !document.getElementById(a.getAttribute('href').slice(1))).length);
+      assert.equal(broken, 0, path);
+    }
+    await context.close();
+  });
+});
+
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');

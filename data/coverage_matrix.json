@@ -1,6 +1,6 @@
 {
   "schemaVersion": "v1.6",
-  "observedAt": "2026-10-17T19:25:14Z",
+  "observedAt": "2026-10-21T05:22:32Z",
   "cohort": "Artificial Analysis v4.3.2 mapped 31-model ValueRank comparison roster",
   "cohortN": 31,
   "primaryEvaluations": [
@@ -271,11 +271,10 @@
     },
     "mlcrOverall": {
       "group": "supplemental",
-      "availableN": 25,
+      "availableN": 26,
       "cohortN": 31,
-      "coveragePct": 80.65,
+      "coveragePct": 83.87,
       "missingModels": [
-        "gpt-6-astra",
         "grok-4.6",
         "gemini-3.7-flash",
         "mimo-v2-6-flash",
@@ -287,11 +286,10 @@
     },
     "harveyLab": {
       "group": "supplemental",
-      "availableN": 11,
+      "availableN": 12,
       "cohortN": 31,
-      "coveragePct": 35.48,
+      "coveragePct": 38.71,
       "missingModels": [
-        "gpt-6-astra",
         "claude-opus-5",
         "gpt-5.6-sol",
         "claude-fable-5",
@@ -458,11 +456,10 @@
     },
     "analystAgent": {
       "group": "supplemental",
-      "availableN": 19,
+      "availableN": 20,
       "cohortN": 31,
-      "coveragePct": 61.29,
+      "coveragePct": 64.52,
       "missingModels": [
-        "gpt-6-astra",
         "grok-4.6",
         "gpt-5.6-luna",
         "gemini-3.7-flash",
@@ -516,11 +513,10 @@
     },
     "itBenchSre": {
       "group": "supplemental",
-      "availableN": 13,
+      "availableN": 14,
       "cohortN": 31,
-      "coveragePct": 41.94,
+      "coveragePct": 45.16,
       "missingModels": [
-        "gpt-6-astra",
         "claude-opus-5",
         "claude-fable-5",
         "grok-4.6",
@@ -1055,7 +1051,7 @@
       "version": "105 planted bugs across two repositories; rolling public results snapshot",
       "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
       "matchedN": 25,
-      "rankableOverlapN": 16,
+      "rankableOverlapN": 17,
       "sourceCohortN": 31,
       "primaryCohortN": 19,
       "sourceCoveragePct": 80.65,
@@ -1068,7 +1064,7 @@
     "version": "v3.0.0",
     "cohortN": 19,
     "scoredN": 19,
-    "exactBenchmarkOverlapN": 16,
+    "exactBenchmarkOverlapN": 17,
     "frontierRequiredModelN": 7,
     "frontierRequiredModelIds": [
       "claude-haiku-5-5",
@@ -1283,6 +1279,7 @@
         "modelId": "kimi-k3",
         "name": "Kimi K3",
         "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
           "No exact-variant AA DeepSWE result in the selected source snapshot",
           "Not a required AA frontier or near-frontier family model"
         ]
@@ -1291,6 +1288,7 @@
         "modelId": "grok-4.6",
         "name": "Grok 4.6",
         "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
           "No exact-variant AA DeepSWE result in the selected source snapshot",
           "Not a required AA frontier or near-frontier family model"
         ]
@@ -1333,6 +1331,7 @@
         "modelId": "muse-spark-1.2",
         "name": "Muse Spark 1.2",
         "reasons": [
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
           "No exact-variant AA DeepSWE result in the selected source snapshot",
           "Not a required AA frontier or near-frontier family model"
         ]
@@ -1519,19 +1518,17 @@
       },
       "deepswePassAt1": {
         "label": "DeepSWE v1.1",
-        "availableN": 16,
+        "availableN": 17,
         "cohortN": 19,
-        "coveragePct": 84.21,
-        "normalizableN": 16,
+        "coveragePct": 89.47,
+        "normalizableN": 17,
         "missingModels": [
-          "GPT-6 Astra",
           "MiMo-V2.6-Pro",
           "MiMo-V2.6-Flash"
         ],
-        "sourceAvailableN": 16,
+        "sourceAvailableN": 17,
         "sourceCohortN": 31,
         "sourceMissingModels": [
-          "GPT-6 Astra",
           "Claude Fable 5",
           "Kimi K3",
           "Grok 4.6",
@@ -1716,13 +1713,13 @@
           "Gemini 3.5 Flash",
           "MiMo-V2.6-Flash"
         ],
-        "rankableOverlapN": 16,
+        "rankableOverlapN": 17,
         "includedInPrimaryScore": true
       }
     },
     "alternateRankings": {
       "bugHuntEmphasis": {
-        "matchedN": 16,
+        "matchedN": 17,
         "cohortN": 31,
         "benchmarkWeightPct": 19.2308,
         "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
@@ -1730,82 +1727,87 @@
           {
             "rank": 1,
             "modelId": "gemini-4-argon",
-            "score": 69.0
+            "score": 67.8
           },
           {
             "rank": 2,
             "modelId": "gpt-6.1-sol",
-            "score": 68.2
+            "score": 66.7
           },
           {
             "rank": 3,
             "modelId": "claude-sonnet-5-5",
-            "score": 65.7
+            "score": 66.0
           },
           {
             "rank": 4,
-            "modelId": "gpt-5.6-sol",
-            "score": 59.3
+            "modelId": "gpt-6-astra",
+            "score": 57.9
           },
           {
             "rank": 5,
             "modelId": "claude-opus-5-5",
-            "score": 58.3
+            "score": 57.7
           },
           {
             "rank": 6,
-            "modelId": "gpt-6-sol",
-            "score": 55.6
+            "modelId": "gpt-5.6-sol",
+            "score": 57.3
           },
           {
             "rank": 7,
-            "modelId": "grok-4.7",
-            "score": 51.0
+            "modelId": "gpt-6-sol",
+            "score": 54.3
           },
           {
             "rank": 8,
-            "modelId": "gpt-5.6-luna",
-            "score": 49.7
+            "modelId": "grok-4.7",
+            "score": 49.9
           },
           {
             "rank": 9,
-            "modelId": "gpt-6-luna",
-            "score": 45.2
+            "modelId": "gpt-5.6-luna",
+            "score": 48.1
           },
           {
             "rank": 10,
-            "modelId": "claude-haiku-5-5",
-            "score": 40.7
+            "modelId": "gpt-6-luna",
+            "score": 44.3
           },
           {
             "rank": 11,
-            "modelId": "gemini-3.8-flash",
-            "score": 38.4
+            "modelId": "claude-haiku-5-5",
+            "score": 40.1
           },
           {
             "rank": 12,
-            "modelId": "claude-opus-5",
-            "score": 37.5
+            "modelId": "gemini-3.8-flash",
+            "score": 37.1
           },
           {
             "rank": 13,
-            "modelId": "glm-5.3",
-            "score": 36.2
+            "modelId": "claude-opus-5",
+            "score": 35.0
           },
           {
             "rank": 14,
-            "modelId": "deepseek-v4-flash",
-            "score": 32.6
+            "modelId": "glm-5.3",
+            "score": 34.7
           },
           {
             "rank": 15,
-            "modelId": "qwen3.8-max",
-            "score": 27.8
+            "modelId": "deepseek-v4-flash",
+            "score": 31.5
           },
           {
             "rank": 16,
+            "modelId": "qwen3.8-max",
+            "score": 26.6
+          },
+          {
+            "rank": 17,
             "modelId": "deepseek-v4-pro",
-            "score": 22.4
+            "score": 21.7
           }
         ]
       }

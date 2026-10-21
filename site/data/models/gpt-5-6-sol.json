@@ -7,8 +7,8 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-sol",
   "summary": {
     "rank": {
-      "api": 12,
-      "plan": 10
+      "api": 11,
+      "plan": 9
     },
     "overall": {
       "api": 51.56512830163886,
@@ -113,7 +113,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -131,7 +131,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -149,7 +149,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -167,7 +167,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -185,7 +185,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -203,7 +203,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -221,7 +221,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -430,17 +430,17 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0022,
-        "frontier": 0.0876
+        "top3": 0.0021,
+        "frontier": 0.091
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0001,
-        "top3": 0.0033,
-        "frontier": 0.0842
+        "top1": 0.0,
+        "top3": 0.0038,
+        "frontier": 0.0778
       },
       {
         "stratum": "S1",
@@ -448,8 +448,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0051,
-        "frontier": 0.1438
+        "top3": 0.0046,
+        "frontier": 0.1346
       },
       {
         "stratum": "S1M",
@@ -457,8 +457,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.002,
-        "frontier": 0.0828
+        "top3": 0.0033,
+        "frontier": 0.0892
       }
     ],
     "plan": [
@@ -609,8 +609,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 12,
-        "plan": 10
+        "api": 11,
+        "plan": 9
       }
     }
   ],

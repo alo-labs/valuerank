@@ -14,8 +14,8 @@ ValueRank asks which frontier AI model configuration is lowest cost for the valu
 19 configurations are ranked:
 
 - On AA's rendered frontier (7): GPT-6.1 Sol (max), Claude Sonnet 5.5 (max), Claude Opus 5.5 (max), MiMo-V2.6-Pro, GPT-6 Luna (max), MiMo-V2.6-Flash, Claude Haiku 5.5 (xhigh)
-- Near-frontier family (3): Gemini 4 Argon (high), GPT-6 Astra (xhigh), GPT-5.6 Luna (max)
-- Retained from earlier releases for exact DeepSWE and Bug Hunt evidence (9): GPT-5.6 Sol (max), GPT-6 Sol (max), Grok 4.7 (xhigh), Gemini 3.8 Flash (high), Claude Opus 5 (max), GLM-5.3 (max), DeepSeek V4 Flash (max), Qwen3.8 Max, DeepSeek V4 Pro (max)
+- Near-frontier family (3): Gemini 4 Argon (high), GPT-6 Astra (max), GPT-5.6 Luna (max)
+- Retained from earlier releases for exact DeepSWE and Bug Hunt evidence (9): GPT-5.6 Sol (max), GPT-6 Sol (max), Grok 4.7 (xhigh), Gemini 3.8 Flash (high), GLM-5.3 (max), Claude Opus 5 (max), DeepSeek V4 Flash (max), Qwen3.8 Max, DeepSeek V4 Pro (max)
 
 The remaining 12 roster models are not ranked; each keeps a page with the evidence held for it.
 
@@ -41,7 +41,7 @@ Frontier families and the configuration selected for each:
 - MiMo-V2.6-Flash: MiMo-V2.6-Flash
 - MiMo-V2.6-Pro: MiMo-V2.6-Pro
 
-Near-frontier families and the configuration selected for each:
+Near-frontier families and each family's near point closest to the frontier (a family is ranked at its configuration with exact DeepSWE and Bug Hunt results when it has one, O30, so the ranked configuration can differ):
 
 - Claude Haiku 5.5: Claude Haiku 5.5 (low), 1 Index point below the frontier
 - Claude Opus 5.5: Claude Opus 5.5 (medium with fallback), 1 Index point below the frontier
@@ -58,13 +58,13 @@ Value on a basis = **25%** × cost score + **75%** × quality score (owner decis
 
 ## Cost: the SDLC basket
 
-The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 16 of the 19 ranked configurations (at least 13 required):
+The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 17 of the 19 ranked configurations (at least 13 required):
 
 | Component | Status | Exact cost available | Complete | Ranked |
 |---|---|---:|---:|---:|
-| Coding Agent Index | admitted | 16 | 16 | 19 |
-| FrontierCode | pending capture | 11 | 10 | 19 |
-| ITBench-AA | pending capture | 7 | 7 | 19 |
+| Coding Agent Index | admitted | 17 | 17 | 19 |
+| FrontierCode | pending capture | 12 | 11 | 19 |
+| ITBench-AA | pending capture | 8 | 8 | 19 |
 | AA-Briefcase | admitted | 19 | 19 | 19 |
 | GDPval-AA | admitted | 19 | 19 | 19 |
 | GDP.pdf | admitted | 19 | 19 | 19 |
@@ -96,8 +96,8 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Workload | Basis | Low anchor c_L (USD) | High anchor c_H (USD) | References | Status |
 |---|---|---:|---:|---:|---|
-| `9a0d376cc6080f3c` (main) | api | $66.43 | $19,978.30 | 16 | frozen |
-| `9a0d376cc6080f3c` (main) | plan | $2.48 | $13,400.04 | 16 | frozen |
+| `9a0d376cc6080f3c` (main) | api | $66.43 | $19,978.30 | 17 | frozen |
+| `9a0d376cc6080f3c` (main) | plan | $2.48 | $13,400.04 | 17 | frozen |
 | `1453a9a0576b02ea` (subset) | api | $30.18 | $12,078.25 | 19 | frozen |
 | `1453a9a0576b02ea` (subset) | plan | $0.91 | $8,725.81 | 19 | frozen |
 
@@ -114,8 +114,8 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
 |---|---:|---:|---|---:|---:|---:|
-| api | 16 | 54.9% | defined | 80.1% | 0.48 | 0.03 |
-| plan | 16 | 55.1% | defined | 62.7% | 0.57 | 0.32 |
+| api | 17 | 54.9% | defined | 81.1% | 0.47 | 0.04 |
+| plan | 17 | 54.7% | defined | 61.8% | 0.60 | 0.29 |
 
 ## Quality
 
@@ -155,9 +155,9 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 ## Uncertainty outputs
 
-**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `median-quality-level` v2: the lower median of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality of the population's lower-median configuration, frozen as a level; the configuration itself is recorded for audit and competes like any other; with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives; fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current bar: quality 52.1 (the displayed quality of GLM-5.3 at freeze).
+**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `median-quality-level` v2: the lower median of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality of the population's lower-median configuration, frozen as a level; the configuration itself is recorded for audit and competes like any other; with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives; fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current bar: quality 56.7 (the displayed quality of Grok 4.7 at freeze).
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261017, input hash `8d0163fa5dbce441`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261021, input hash `551abe507e20a0d4`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
@@ -203,6 +203,6 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 
 - [data/scores.json](data/scores.json): the `v3` section holds every row, workload, anchor, interval output, scenario result, diagnostic and the evidence bundle
 - [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
-- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-10-19`
+- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-10-21`
 - [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
 - [data/aa_deepswe.json](data/aa_deepswe.json), [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots

@@ -378,6 +378,14 @@ def test_bar_is_a_quality_level_that_is_never_its_own_answer():
     assert bar["reference"]["id"] == v.BAR_ID and set(bar["rows"]) == {"a", "b"}
     # a qualifies only possibly: its quality interval straddles its own displayed quality, which set the level.
     assert bar["rows"]["a"]["possible"] == "certified" and bar["rows"]["a"]["confirmed"] == "disproved"
+    # E198: the result counts the configurations that can qualify and gives each row's displayed margin to the level.
+    assert bar["possibleQualifierN"] == 2 and bar["comparison"] == "compares 2 configurations that can qualify"
+    assert bar["rows"]["a"]["displayedMargin"] == pytest.approx(0.0) and bar["rows"]["b"]["displayedMargin"] > 0
+    high = json.loads(json.dumps(frozen))
+    high["barReferences"][0]["level"] = 100.5
+    assert v.interval_outputs(result, high, "api")["bars"][0]["comparison"] == v.VACUOUS_COMPARISON
+    result["rows"][0]["summary"] = q.summarize({})
+    assert v.interval_outputs(result, frozen, "api")["bars"][0]["rows"]["a"]["displayedMargin"] is None
 
 
 def test_bar_reference_selection_is_registered_and_outcome_independent(monkeypatch):

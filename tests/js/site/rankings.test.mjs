@@ -19,13 +19,64 @@ test('renders one dense row per model in plan-rank order with the cost unit in t
   assert.equal(p.count.textContent, '5 of 5 models');
   const alpha = rows(p)[0];
   assert.equal(cell(alpha, 'rank').textContent, '1');
-  assert.equal(cell(alpha, 'name').textContent, 'AlphaAcme');
+  assert.equal(cell(alpha, 'name').textContent, 'Alpha1Acme');
   assert.equal(cell(alpha, 'name').querySelector('a').getAttribute('href'), '/models/alpha/');
   assert.equal(cell(alpha, 'overall').textContent, '71.6');
   assert.equal(cell(alpha, 'quality').textContent, '72.0');
   assert.equal(cell(alpha, 'cost').textContent, '$0.50');
-  assert.equal(cell(alpha, 'grade').textContent, 'Owner-measured');
+  assert.equal(cell(alpha, 'grade'), null);
+  assert.equal(header(p, 'grade'), null);
   assert.match(header(p, 'cost').textContent, /Plan cost \(USD per basket run\)/);
+});
+
+// Evidence is footnoted, not a column: markers in the name cells and the notes list must match the rows shown.
+const notes = (p) => [...p.notes.children];
+const markers = (p) => rows(p).map((r) => r.querySelector('.fn-ref a'));
+const assertNotesMatchRows = (p) => {
+  const slugs = slugsInOrder(p);
+  assert.deepEqual(notes(p).map((li) => li.getAttribute('id')), slugs.map((s) => `ev-${s}`));
+  assert.deepEqual(markers(p).map((a) => a.textContent), slugs.map((_, i) => String(i + 1)));
+  assert.deepEqual(markers(p).map((a) => a.getAttribute('href')), slugs.map((s) => `#ev-${s}`));
+  assert.deepEqual(markers(p).map((a) => a.getAttribute('id')), slugs.map((s) => `evref-${s}`));
+  assert.deepEqual(notes(p).map((li) => li.querySelector('.fn-back').getAttribute('href')), slugs.map((s) => `#evref-${s}`));
+};
+
+test('each row carries a numbered evidence marker linking to its note, and each note links back', () => {
+  const p = mount();
+  assertNotesMatchRows(p);
+  const alpha = markers(p)[0];
+  assert.equal(cell(rows(p)[0], 'name').querySelector('.fn-host .model-name').textContent, 'Alpha');
+  assert.equal(alpha.getAttribute('aria-label'), 'Evidence note 1 for Alpha');
+  const note = notes(p)[0];
+  assert.equal(note.querySelector('.fn-label').textContent, 'Alpha');
+  assert.equal(note.querySelector('.fn-back').getAttribute('aria-label'), 'Back to Alpha in the table');
+  const badge = note.querySelector('.badge');
+  assert.equal(badge.className, 'badge badge-measured');
+  assert.equal(badge.textContent, 'User-measured');
+  assert.equal(badge.getAttribute('title'), 'Measured by the benchmark owner or in a controlled account measurement.');
+  assert.match(note.querySelector('.fn-text').textContent, /^Weakest grade of any value inside the score\. Measured by/);
+  assert.equal(notes(p)[1].querySelector('.badge').textContent, 'Modelled');
+});
+
+test('evidence markers and notes follow re-sorting, filtering and the basis toggle', () => {
+  const p = mount();
+  header(p, 'overall').querySelector('button').click();
+  header(p, 'overall').querySelector('button').click();
+  assert.deepEqual(slugsInOrder(p).slice(0, 3), ['gamma', 'beta', 'alpha']);
+  assertNotesMatchRows(p);
+  check(p.providers[0]);
+  assert.deepEqual(slugsInOrder(p), ['gamma', 'alpha']);
+  assertNotesMatchRows(p);
+  p.toggle.api.click();
+  assertNotesMatchRows(p);
+  type(p.q, 'zzz');
+  assert.deepEqual(notes(p), []);
+});
+
+test('the evidence grade stays sortable from the URL although it is not drawn', () => {
+  const p = mount({ search: '?sort=grade' });
+  assert.deepEqual(slugsInOrder(p), ['alpha', 'delta', 'beta', 'gamma', 'eps']);
+  assertNotesMatchRows(p);
 });
 
 test('headers are sortable with aria-sort reflecting the active column', () => {
@@ -158,11 +209,12 @@ test('state in the URL wins on load: controls, headers and columns reflect it', 
   assert.equal(slugsInOrder(p)[0], 'alpha');
 });
 
-test('column picker lists every column, toggles columns, and keeps Model mandatory', () => {
+test('column picker lists every drawable column, toggles columns, and keeps Model mandatory', () => {
   const p = mount();
   const boxes = [...p.columns.querySelectorAll('input')];
   const byKey = (k) => boxes.find((b) => b.getAttribute('data-col') === k);
   assert.ok(byKey('a') && byKey('b') && byKey('developer'));
+  assert.equal(byKey('grade'), undefined); // evidence is footnoted, so it has no column to pick
   assert.equal(byKey('name').hasAttribute('disabled'), true);
   assert.equal(byKey('quality').checked, true);
   assert.equal(byKey('a').checked, false);
@@ -174,6 +226,16 @@ test('column picker lists every column, toggles columns, and keeps Model mandato
   [...p.columns.querySelectorAll('input')].find((b) => b.getAttribute('data-col') === 'a').fire('change');
   assert.ok(header(p, 'a'));
   assert.match(cell(rows(p)[0], 'a').textContent, /80\.0/);
+});
+
+test('picking columns keeps the data-only grade out of the view when the URL dropped it', () => {
+  const p = mount({ search: '?cols=rank,name,overall' });
+  const box = [...p.columns.querySelectorAll('input')].find((b) => b.getAttribute('data-col') === 'quality');
+  box.checked = true;
+  box.fire('change');
+  assert.equal(lastUrl(p), '/rankings/?cols=rank,name,overall,quality');
+  p.csv.click();
+  assert.equal(p.win.URL.created[0].blob.text().split('\r\n')[0], 'Rank,Model,Overall,Quality');
 });
 
 test('every optional column renders a value', () => {
@@ -359,6 +421,25 @@ test('answer page renders the compact table of ranked models only, in rank order
   assert.equal(p.sliderOut.textContent, '20.0%');
   assert.equal(cell(rows(p)[0], 'quality').textContent, '72.0');
   assert.equal(cell(rows(p)[1], 'coverage').getAttribute('data-label'), 'Coverage');
+  assert.equal(cell(rows(p)[0], 'grade'), null);
+});
+
+test('answer page evidence notes match the rows after a basis switch and a weight change', () => {
+  const p = mountIndex();
+  const check = () => {
+    const slugs = slugsInOrder(p);
+    assert.deepEqual([...p.notes.children].map((li) => li.getAttribute('id')), slugs.map((s) => `ev-${s}`));
+    assert.deepEqual(rows(p).map((r) => r.querySelector('.fn-ref a').textContent), slugs.map((_, i) => String(i + 1)));
+    assert.deepEqual(rows(p).map((r) => r.querySelector('.fn-ref a').getAttribute('href')), slugs.map((s) => `#ev-${s}`));
+  };
+  check();
+  p.toggle.api.click();
+  assert.deepEqual(slugsInOrder(p), ['beta', 'alpha', 'gamma']);
+  check();
+  p.slider.value = '100';
+  p.slider.fire('input');
+  check();
+  assert.equal(p.notes.children[0].querySelector('.badge').textContent, 'Assumption');
 });
 
 test('answer page lists at most 16 models', () => {

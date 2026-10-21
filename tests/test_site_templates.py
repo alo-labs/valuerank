@@ -212,7 +212,8 @@ def test_rankings_instrument(pages):
     assert table.attrs["data-basis"] == "plan"
     head = dom.one("thead", id="rankings-head")  # server-rendered skeleton: default columns only; the script refills it
     ths = [n for n in head.walk() if n.tag == "th"]
-    assert [t.attrs["data-col"] for t in ths] == [c["key"] for c in page["columns"] if c["default"]]
+    # evidence is footnoted, so the default grade column is never drawn
+    assert [t.attrs["data-col"] for t in ths] == [c["key"] for c in page["columns"] if c["default"] and c["key"] != "grade"]
     for th in ths:
         assert th.attrs["scope"] == "col" and "aria-sort" in th.attrs
         assert any(c.tag == "button" and "sort-btn" in c.attrs.get("class", "") for c in th.walk())
@@ -240,6 +241,8 @@ def test_rankings_instrument(pages):
     assert any(n.attrs.get("id") == "compare-clear" for n in drawer.walk())
     assert dom.one("a", id="export-csv") and dom.one("a", id="export-json")
     assert dom.one("button", **{"data-share": True})
+    notes = dom.one("section", id="evidence-notes")
+    assert any(n.tag == "ol" and n.attrs.get("id") == "rankings-evidence" for n in notes.walk())  # filled by the script
     tabs = [n.attrs["data-chart-tab"] for n in dom.find_all("button", role="tab")]
     assert tabs == ["pareto", "decomposition", "displacement", "frontier2", "bubble", "heatmap"]
     for key in tabs:
@@ -252,10 +255,13 @@ def test_models_index(pages):
     _, dom, page = pages["models"]
     rows = [n for n in dom.one("tbody").walk() if n.tag == "tr"]
     assert [r.attrs["data-slug"] for r in rows] == [m["slug"] for m in page["models"]]
-    links = [n.attrs["href"] for n in dom.one("tbody").walk() if n.tag == "a"]
+    links = [n.attrs["href"] for n in dom.one("tbody").walk() if n.tag == "a" and "model-name" in n.attrs.get("class", "")]
     assert links == [f"/models/{m['slug']}/" for m in page["models"]]
     assert "not ranked" in rows[2].all_text()
-    assert [c.tag for c in dom.one("tr", **{"data-slug": "gamma"}).children].count("td") == 5
+    assert [c.tag for c in dom.one("tr", **{"data-slug": "gamma"}).children].count("td") == 4
+    notes = [n for n in dom.one("section", id="evidence-notes").walk() if n.tag == "li"]
+    assert [n.attrs["id"] for n in notes] == [f"ev-{m['slug']}" for m in page["models"]]
+    assert [n.attrs["class"] for n in notes[0].walk() if "badge" in n.attrs.get("class", "")] == [f"badge badge-{page['models'][0]['grade']}"]
 
 
 def test_answer_page(pages):
@@ -303,11 +309,17 @@ def test_model_page(pages):
     _, dom, page = pages["model"]
     table = dom.one("table", id="dimension-table")
     heads = [t.all_text().strip() for t in table.walk() if t.tag == "th" and t.attrs.get("scope") == "col"]
-    assert heads[:4] == ["Dimension", "Value", "Unit", "Normalised"]
-    badges = [n.attrs["class"] for n in table.walk() if n.tag == "span" and "badge" in n.attrs.get("class", "")]
-    assert "badge badge-measured" in badges and "badge badge-missing" in badges
+    assert heads == ["Dimension", "Value", "Unit", "Normalised", "Source and date", "Weight"]
+    assert not [n for n in table.walk() if "badge" in n.attrs.get("class", "").split()]  # grades live in the notes
     assert any(n.tag == "a" and n.attrs.get("href") == "https://example.test/deepswe" for n in table.walk())
-    assert any(n.tag == "details" for n in table.walk())
+    notes = dom.one("section", id="evidence-notes")
+    badges = [n.attrs["class"] for n in notes.walk() if n.tag == "span" and "badge" in n.attrs.get("class", "")]
+    assert "badge badge-measured" in badges and "badge badge-missing" in badges
+    dim1 = dom.one("li", id="ev-dim-1")
+    assert any(n.tag == "dl" for n in dim1.walk()) and "Evaluated variant" in dim1.all_text()
+    refs = [n.all_text() for n in dom.find_all("sup", **{"class": "fn-ref"})]
+    assert refs == [str(i) for i in range(1, len(refs) + 1)]  # one numbering through the dimension, component and route tables
+    assert len(refs) == len(page["dimensions"]) + len(page["cost"]["components"]) + len(page["plans"])
     assert dom.one("section", id="plan-routes") and dom.one("section", id="rank-history")
 
 
@@ -441,3 +453,73 @@ def test_model_page_types_the_plan_amount_and_marks_unevaluable_streams(pages, e
     _, unpriced = render_with(env, "model", lambda p: p["cost"]["planAmount"].update(amountUsd=None, grossCashUsd=None, donorRouteId=None))
     text = unpriced.one("section", id="plan-routes").all_text()
     assert "fee not established" in text and "per month" not in text and "transferred from" not in text
+
+
+# --- evidence footnotes (owner request 2026-10-21: no Evidence column; evidence is footnoted at the bottom) ---
+
+FOOTNOTED = ["index", "rankings", "models", "model", "plans", "benchmark_tb4"]
+
+
+@pytest.mark.parametrize("name", FULL_PAGES)
+def test_no_table_has_an_evidence_column(pages, name):
+    _, dom, _ = pages[name]
+    for table in dom.find_all("table"):
+        heads = [n.all_text().strip() for n in table.walk() if n.tag == "th" and n.attrs.get("scope") == "col"]
+        assert "Evidence" not in heads, f"{name} still has an Evidence column"
+        assert not [n for n in table.walk() if n.attrs.get("data-col") == "grade"]
+
+
+@pytest.mark.parametrize("name", FOOTNOTED)
+def test_evidence_footnotes_link_both_ways(pages, name):
+    _, dom, _ = pages[name]
+    ids = [n.attrs["id"] for n in dom.root.walk() if "id" in n.attrs]
+    assert len(ids) == len(set(ids)), "duplicate ids"
+    section = dom.one("section", id="evidence-notes")
+    assert section.attrs["aria-labelledby"] == "evidence-notes-title" and dom.one(id="evidence-notes-title").all_text().strip() == "Evidence"
+    # the Evidence section closes the page
+    blocks = [n for n in dom.one("main").walk() if n.tag == "section" and n.parent.tag in ("main", "div") and "block" in n.attrs.get("class", "")]
+    assert blocks[-1] is section
+    refs = [a for sup in dom.find_all("sup", **{"class": "fn-ref"}) for a in sup.children if a.tag == "a"]
+    items = [n for n in section.walk() if n.tag == "li" and "fn-item" in n.attrs.get("class", "")]
+    for a in refs:  # every marker is a real link to an entry
+        assert a.attrs["href"].startswith("#ev-") and a.attrs["href"][1:] in [i.attrs["id"] for i in items]
+        assert a.attrs["aria-label"].startswith(f"Evidence note {a.all_text()} for ")
+    for item in items:  # every entry links back to an element on the page
+        back = [n for n in item.walk() if n.tag == "a" and "fn-back" in n.attrs.get("class", "")]
+        assert len(back) == 1 and back[0].attrs["href"][1:] in ids and back[0].attrs["aria-label"]
+    if name != "rankings":  # rankings' markers and entries are built by the script
+        assert refs and items
+        assert sorted({int(a.all_text()) for a in refs}) == list(range(1, len(items) + 1))
+
+
+def test_answer_page_footnotes_follow_the_server_rows(pages):
+    _, dom, page = pages["index"]
+    rows = [n for n in dom.one("tbody", id="index-body").walk() if n.tag == "tr"]
+    assert [r.attrs["data-slug"] for r in rows] == [m["slug"] for m in page["models"]]
+    for i, (row, m) in enumerate(zip(rows, page["models"]), start=1):
+        ref = [n for n in row.walk() if n.tag == "a" and n.attrs.get("id") == f"evref-{m['slug']}"]
+        assert ref and ref[0].attrs["href"] == f"#ev-{m['slug']}" and ref[0].all_text() == str(i)
+    notes = dom.one("ol", id="index-evidence")  # assets/js/rankings.js refills this list with the rows it draws
+    assert [n.attrs["id"] for n in notes.children] == [f"ev-{m['slug']}" for m in page["models"]]
+    assert "Weakest grade of any value inside the score." in notes.all_text()
+    assert dom.one("section", **{"aria-labelledby": "legend-title"})  # the grade legend stays
+
+
+def test_plans_and_tb4_footnotes(pages):
+    _, dom, page = pages["plans"]
+    n_routes = sum(len(r) for r in page["routesByProvider"].values())
+    assert len(dom.find_all("li", **{"class": "fn-item"})) == n_routes
+    assert dom.one("section", **{"aria-labelledby": "legend-title"})  # the grade legend stays
+    _, dom, page = pages["benchmark_tb4"]
+    official = dom.one("li", id="ev-tb4-official")
+    assert "User-measured" in official.all_text()
+    refs = [n for n in dom.one("section", id="official-rows").walk() if n.tag == "a" and n.attrs.get("href") == "#ev-tb4-official"]
+    assert len(refs) == len(page["tb4Json"]["rows"]) and len({r.attrs["id"] for r in refs}) == len(refs)
+    claims = [n for n in dom.find_all("li", **{"class": "fn-item"}) if n.attrs["id"].startswith("ev-tb4-claim-")]
+    assert len(claims) == len(page["tb4Json"]["providerClaims"])
+
+
+def test_badge_label_reads_user_measured(env):
+    macros = env.get_template("partials/badge.html").module
+    assert ">User-measured<" in str(macros.badge("measured")) and "Owner-measured" not in str(macros.legend())
+    assert str(macros.describe("bogus")) == str(macros.describe("missing"))

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-17T20:23:57+00:00",
+  "checkedAt": "2026-10-21T05:24:16+00:00",
   "inventoryPath": "data/aa_reconciliation_inventory.json",
   "maxAgeDays": 7,
   "issues": [],
@@ -955,12 +955,14 @@
       "family": "GPT-6 Astra",
       "requiredFamilyModelId": "gpt-6-astra",
       "sourceFootnote": null,
-      "valueRankModelId": "gpt-6-astra",
+      "valueRankModelId": null,
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
-      "primaryRankingGaps": [],
+      "primaryRankingGaps": [
+        "Exact evaluated variant absent from source roster"
+      ],
       "metricGap": null,
-      "rankStatus": "Primary ranked"
+      "rankStatus": "Missing from source roster"
     },
     {
       "aaId": "gpt-6-astra",
@@ -976,21 +978,12 @@
       "family": "GPT-6 Astra",
       "requiredFamilyModelId": "gpt-6-astra",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "gpt-6-astra",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": {
-        "aaId": "gpt-6-astra",
-        "name": "GPT-6 Astra (max)",
-        "evaluatedVariant": "max",
-        "decision": "defer",
-        "reviewedAt": "2026-10-17T19:16:08Z",
-        "reason": "Alternate configuration retained in the AA near-frontier comparison; the GPT-6 Astra family is represented in the primary ranking by its selected configuration (gpt-6-astra-xhigh). No result is transferred between efforts."
-      },
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Deferred comparison candidate"
+      "rankStatus": "Primary ranked"
     }
   ],
   "nearFrontierFamilies": [
@@ -1050,17 +1043,18 @@
     "claude-opus-5-5-medium :: Claude Opus 5.5 (medium with fallback)",
     "claude-sonnet-5-5-xhigh :: Claude Sonnet 5.5 (xhigh with fallback)",
     "gpt-6-astra-high :: GPT-6 Astra (high)",
-    "gpt-6-astra :: GPT-6 Astra (max)"
+    "gpt-6-astra-xhigh :: GPT-6 Astra (xhigh)"
   ],
-  "unresolvedNearFrontierIds": [],
+  "unresolvedNearFrontierIds": [
+    "gpt-6-astra-xhigh :: GPT-6 Astra (xhigh)"
+  ],
   "deferredNearFrontierIds": [
     "gpt-5-6-luna-low :: GPT-5.6 Luna (low)",
     "claude-haiku-5-5-low :: Claude Haiku 5.5 (low)",
     "claude-haiku-5-5 :: Claude Haiku 5.5 (max)",
     "claude-opus-5-5-medium :: Claude Opus 5.5 (medium with fallback)",
     "claude-sonnet-5-5-xhigh :: Claude Sonnet 5.5 (xhigh with fallback)",
-    "gpt-6-astra-high :: GPT-6 Astra (high)",
-    "gpt-6-astra :: GPT-6 Astra (max)"
+    "gpt-6-astra-high :: GPT-6 Astra (high)"
   ],
   "observedAt": "2026-10-17T18:48:27Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
@@ -1072,7 +1066,7 @@
     "observedFrontierPointN": 18,
     "nearFrontierPointN": 9
   },
-  "ageDays": 0.066,
+  "ageDays": 3.442,
   "requiredFamilies": [
     {
       "family": "GPT-6 Luna",

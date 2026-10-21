@@ -433,7 +433,7 @@ def test_main_writes_the_release_document_with_the_pinned_observation_instant(sm
     document = read_document(small_world)
     assert document["schemaVersion"] == "valuerank-livebench-v1"
     assert document["release"] == "2026_06_25"
-    assert document["observedAt"] == "2026-10-17T20:23:57Z"
+    assert document["observedAt"] == "2026-10-21T05:24:16Z"
     assert document["categories"]["Instruction Following"] == ["ifeval"]
     assert "IF" not in document["categories"]
     assert document["cohortN"] == 4

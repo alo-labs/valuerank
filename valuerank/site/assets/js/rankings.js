@@ -7,10 +7,10 @@ import { recompute, costValue, picks } from './scoring.js';
 import { applyFilters, sortModels, columnCatalog, columnValue } from './filters.js';
 import { toCsv, toJson, exportFilename } from './export.js';
 import { compareRows, bestIndexes } from './compare.js';
-import { fmtUsd, fmtPct, fmtScore, gradeLabel } from './format.js';
+import { fmtUsd, fmtPct, fmtScore, gradeLabel, gradeDescription } from './format.js';
 
 const MAX_COMPARE = 4;
-const LEFT_ALIGNED = ['name', 'developer', 'grade', 'coverage'];
+const LEFT_ALIGNED = ['name', 'developer', 'coverage'];
 const DEFAULT_MODEL_BASE = '/models/';
 
 const dash = '—';
@@ -62,12 +62,37 @@ function tierBadge(doc, model) {
   return h(doc, 'span', { class: `badge badge-tier badge-tier-${tier}`, 'data-aa-tier': tier, title, text: TIER_LABELS[tier] });
 }
 
+// Evidence is footnoted rather than drawn as a column: a numbered marker after the model name links to the row's
+// entry (#ev-<slug>) in the page's Evidence section, and the entry links back (#evref-<slug>). The ids match the
+// server-rendered fallback in templates/partials/table.html, and numbering follows the rows as currently shown.
+function noteRef(doc, model, n) {
+  return h(doc, 'sup', { class: 'fn-ref' },
+    h(doc, 'a', { href: `#ev-${model.slug}`, id: `evref-${model.slug}`, 'aria-label': `Evidence note ${n} for ${model.name}`, text: String(n) }));
+}
+
+function noteItem(doc, model) {
+  const description = gradeDescription(model.grade);
+  return h(doc, 'li', { id: `ev-${model.slug}`, class: 'fn-item' },
+    h(doc, 'span', { class: 'fn-label', text: model.name }), ' ',
+    h(doc, 'a', { class: 'fn-back', href: `#evref-${model.slug}`, 'aria-label': `Back to ${model.name} in the table`, text: '\u21A9\uFE0E' }),
+    h(doc, 'div', { class: 'fn-body' },
+      h(doc, 'span', { class: `badge badge-${model.grade}`, title: description, text: gradeLabel(model.grade) }), ' ',
+      h(doc, 'span', { class: 'fn-text', text: `Weakest grade of any value inside the score. ${description}` })));
+}
+
+/** Rebuild the Evidence notes so they match the rows just drawn, in the same order. */
+function fillNotes(doc, list, models) {
+  list.replaceChildren(...models.map((m) => noteItem(doc, m)));
+}
+
 function cellChildren(doc, key, model, ctx) {
   switch (key) {
     case 'rank': return [orDash(model.rank[ctx.basis])];
     case 'name': return [
       h(doc, 'span', { class: 'model-id' },
-        h(doc, 'a', { href: `${ctx.modelBase}${model.slug}/`, class: 'model-name', text: model.name }),
+        h(doc, 'span', { class: 'fn-host' },
+          h(doc, 'a', { href: `${ctx.modelBase}${model.slug}/`, class: 'model-name', text: model.name }),
+          noteRef(doc, model, ctx.notes.get(model.slug))),
         h(doc, 'span', { class: 'model-dev', text: model.developer }),
         tierBadge(doc, model),
         model.rankingEligible ? null : h(doc, 'span', { class: 'tag', text: 'Not ranked' })),
@@ -75,7 +100,6 @@ function cellChildren(doc, key, model, ctx) {
     case 'developer': return [model.developer];
     case 'overall': return [orDash(model.overall[ctx.basis], fmtScore)];
     case 'cost': return [fmtUsd(costValue(model, ctx.basis), 2)];
-    case 'grade': return [h(doc, 'span', { class: `badge badge-${model.grade}`, text: gradeLabel(model.grade) })];
     case 'coverage': return coverageCell(doc, model, ctx.expanded);
     case 'qualityRank': return [orDash(model.qualityRank, (v) => `#${v}`)];
     default: return [fmtScore(columnValue(model, key, ctx.basis))];
@@ -92,7 +116,8 @@ function buildCell(doc, column, model, ctx) {
   return h(doc, 'td', attrs, ...cellChildren(doc, key, model, ctx));
 }
 
-function fillBody(doc, tbody, models, columns, ctx, comparable) {
+function fillBody(doc, tbody, models, columns, baseCtx, comparable) {
+  const ctx = { ...baseCtx, notes: new Map(models.map((m, i) => [m.slug, i + 1])) };
   const rowNodes = models.map((m) => {
     const cells = columns.map((c) => buildCell(doc, c, m, ctx));
     if (comparable) {
@@ -161,6 +186,7 @@ export function initRankings(win) {
   const routes = [...form.querySelectorAll('input[name="route"]')];
   let state = store.initial();
   let scored = [];
+  let selected = [];
   let visible = [];
   let shown = [];
   const exportUrls = { csv: null, json: null };
@@ -239,13 +265,16 @@ export function initRankings(win) {
 
   function render() {
     scored = recompute(data.models, state.basis, state.w);
-    visible = catalog.filter((c) => c.key === 'name' || state.cols.includes(c.key));
+    // Selected columns feed the export; data-only ones (the evidence grade) are not drawn, they are footnoted.
+    selected = catalog.filter((c) => c.key === 'name' || state.cols.includes(c.key));
+    visible = selected.filter((c) => !c.dataOnly);
     shown = sortModels(applyFilters(scored, state), state.sort, state.dir, state.basis);
     const ctx = { basis: state.basis, expanded, modelBase, compare: state.compare, onCompare };
     $('rankings-head').replaceChildren(h(doc, 'tr', {},
       h(doc, 'th', { scope: 'col', 'data-col': 'compare' }, h(doc, 'span', { class: 'sr-only', text: 'Compare' })),
       ...visible.map(headerCell)));
     fillBody(doc, $('rankings-body'), shown, visible, ctx, true);
+    fillNotes(doc, $('rankings-evidence'), shown);
     $('rankings-empty').hidden = shown.length > 0;
     $('rankings-error').hidden = true;
     $('rankings-count').textContent = `${shown.length} of ${scored.length} models`;
@@ -258,7 +287,7 @@ export function initRankings(win) {
   function exporter(id, ext, mime, build) {
     const link = $(id);
     link.addEventListener('click', () => {
-      const columns = visible.map((c) => (c.key === 'cost' ? { ...c, label: costHeader(data, state.basis) } : c));
+      const columns = selected.map((c) => (c.key === 'cost' ? { ...c, label: costHeader(data, state.basis) } : c));
       const url = win.URL.createObjectURL(new win.Blob([build(shown, columns, state.basis)], { type: mime }));
       if (exportUrls[ext]) win.URL.revokeObjectURL(exportUrls[ext]);
       exportUrls[ext] = url;
@@ -286,17 +315,20 @@ export function initRankings(win) {
     }
   });
   $('compare-clear').addEventListener('click', () => update({ compare: [] }));
-  $('column-picker-list').replaceChildren(...catalog.map((c) => h(doc, 'label', { class: 'col-option' },
+  const pickable = catalog.filter((c) => !c.dataOnly);
+  $('column-picker-list').replaceChildren(...pickable.map((c) => h(doc, 'label', { class: 'col-option' },
     h(doc, 'input', { type: 'checkbox', 'data-col': c.key, disabled: c.key === 'name' }), ` ${c.label}`)));
-  $('column-picker-list').querySelectorAll('input').forEach((i) => i.addEventListener('change', () => update({
-    cols: [...$('column-picker-list').querySelectorAll('input')].filter((b) => b.checked).map((b) => b.getAttribute('data-col')),
-  })));
+  // Data-only columns have no checkbox, so they keep whatever the state holds; catalogue order keeps the URL stable.
+  $('column-picker-list').querySelectorAll('input').forEach((i) => i.addEventListener('change', () => {
+    const ticked = [...$('column-picker-list').querySelectorAll('input')].filter((b) => b.checked).map((b) => b.getAttribute('data-col'));
+    update({ cols: catalog.filter((c) => (c.dataOnly ? state.cols : ticked).includes(c.key)).map((c) => c.key) });
+  }));
   exporter('export-csv', 'csv', 'text/csv;charset=utf-8', toCsv);
   exporter('export-json', 'json', 'application/json', toJson);
   render();
 }
 
-const INDEX_COLUMNS = ['rank', 'name', 'overall', 'quality', 'cost', 'grade', 'coverage'];
+const INDEX_COLUMNS = ['rank', 'name', 'overall', 'quality', 'cost', 'coverage'];
 const INDEX_ROWS = 16;
 
 export function initIndex(win) {
@@ -340,6 +372,7 @@ export function initIndex(win) {
     const scored = recompute(data.models, state.basis, state.w);
     const top = scored.filter((m) => m.rank[state.basis] !== null).sort((a, b) => a.rank[state.basis] - b.rank[state.basis]).slice(0, INDEX_ROWS);
     fillBody(doc, tbody, top, columns, { ...ctx, basis: state.basis }, false);
+    fillNotes(doc, $('index-evidence'), top);
     renderPicks(scored);
     bindWeight($('cost-weight'), $('cost-weight-value'), state);
     toggle.set(state.basis);

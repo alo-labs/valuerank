@@ -1,7 +1,7 @@
 {
   "schemaVersion": "v1.6",
   "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
-  "observedAt": "2026-10-17T19:25:14Z",
+  "observedAt": "2026-10-21T05:22:32Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
   "primaryEvaluations": [
@@ -95,11 +95,11 @@
     "gpt-6-astra": {
       "id": "gpt-6-astra",
       "displayName": "GPT-6 Astra",
-      "aaSlug": "gpt-6-astra-xhigh",
-      "aaName": "GPT-6 Astra (Xhigh)",
-      "aaShortName": "GPT-6 Astra (xhigh)",
-      "aaVariant": "xhigh",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+      "aaSlug": "gpt-6-astra",
+      "aaName": "GPT-6 Astra (Max)",
+      "aaShortName": "GPT-6 Astra (max)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
       "release": {
         "slug": "gpt-6-astra",
         "name": "GPT-6 Astra",
@@ -107,156 +107,156 @@
       },
       "isReasoning": true,
       "metrics": {
-        "briefcaseNormalized": 0.52335,
-        "gdpvalV21Normalized": 0.5279550000000001,
-        "briefcaseElo": 1546.7,
-        "intelligenceIndex": 52.3863277108782,
-        "gdpvalV21": 1555.91,
-        "automationBenchAA": 0.6717778020215392,
-        "terminalBenchV40": 0.595959595959596,
-        "scicode": 0.556712962962963,
-        "gdpPdfAllPass": 0.322,
-        "aaLcr": 0.8,
-        "hle": 0.545875810936052,
-        "gpqaDiamond": 0.962626262626263,
-        "critpt": 0.314285714285714,
-        "omniAccuracy": 0.6185,
-        "omniNonHallucination": 0.5168195718654434,
-        "aaEvalCost": 3802.9799452617394,
-        "speed": 54.5251481651355
+        "briefcaseNormalized": 0.534495,
+        "gdpvalV21Normalized": 0.53642,
+        "briefcaseElo": 1568.99,
+        "intelligenceIndex": 52.673669395513,
+        "gdpvalV21": 1572.84,
+        "automationBenchAA": 0.6849174806688876,
+        "terminalBenchV40": 0.590909090909091,
+        "scicode": 0.564814814814815,
+        "gdpPdfAllPass": 0.31,
+        "aaLcr": 0.806666666666667,
+        "hle": 0.546802594995366,
+        "gpqaDiamond": 0.960606060606061,
+        "critpt": 0.317142857142857,
+        "omniAccuracy": 0.626,
+        "omniNonHallucination": 0.4866310160427807,
+        "aaEvalCost": 5324.104027952404,
+        "speed": 61.7127772965509
       },
       "metricSources": {
         "briefcaseNormalized": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "gdpvalV21Normalized": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "briefcaseElo": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "intelligenceIndex": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "gdpvalV21": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "automationBenchAA": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "terminalBenchV40": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "scicode": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "gdpPdfAllPass": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "aaLcr": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "hle": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "gpqaDiamond": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "critpt": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "omniAccuracy": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "omniNonHallucination": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "aaEvalCost": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         },
         "speed": {
           "sourceType": "benchmark_owner",
-          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-          "observedAt": "2026-10-17T19:25:14Z",
+          "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+          "observedAt": "2026-10-21T05:21:34Z",
           "precision": null
         }
       },
       "intelligenceIndexStatus": "measured",
       "providerClaims": [],
       "supplemental": {
-        "mlcrOverall": null,
-        "harveyLab": null,
+        "mlcrOverall": 0.416666666666667,
+        "harveyLab": 0.0861111111111111,
         "apexAgents": null,
-        "mmmuPro": 0.86242774566474,
+        "mmmuPro": 0.86878612716763,
         "livecodebench": null,
         "aime25": null,
-        "analystAgent": null,
-        "automationBenchPartialScore": 0.6717778020215392,
+        "analystAgent": 0.5125,
+        "automationBenchPartialScore": 0.6849174806688876,
         "enterpriseOpsGym": null,
-        "itBenchSre": null,
-        "briefcaseRubricPassRate": 0.5232323232323233,
+        "itBenchSre": 0.485875706214689,
+        "briefcaseRubricPassRate": 0.5202020202020202,
         "briefcaseTotalCost": null,
-        "tauBanking": 0.430927835051546,
+        "tauBanking": 0.414432989690722,
         "terminalBenchV21": null,
-        "briefcaseElo": 1546.7
+        "briefcaseElo": 1568.99
       },
       "extraction": {
         "captureMode": null,
         "htmlSnapshot": null,
         "textSnapshot": null,
         "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
-        "sourceObservedAt": "2026-10-17T19:25:14Z",
+        "sourceObservedAt": "2026-10-21T05:21:34Z",
         "precision": null,
-        "note": null,
-        "responseSha256": "3835bdb0c6d009a3eb4447877b237626e85ae76616a44db794d87c7af3e5905b",
+        "note": "Re-pointed from GPT-6 Astra (xhigh) to GPT-6 Astra (max), the near-frontier family's configuration with exact DeepSWE and Bug Hunt results (owner decision O30, 2026-10-21); captured separately from the rest of the snapshot.",
+        "responseSha256": "7ea84f9ea363f6ed0b7b3696d53bc69b85a53b94ec2b118dd46b1c7f58879972",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
     },

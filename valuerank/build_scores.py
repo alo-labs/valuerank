@@ -25,7 +25,8 @@ import math
 import re
 from pathlib import Path
 
-from valuerank import value_v3
+from valuerank import exact_match, value_v3
+from valuerank.fetch_deepswe import normalise_name, roster_names
 from valuerank.clock import iso_z, utcnow
 
 
@@ -221,6 +222,28 @@ def frontier_order(row):
     """E193: a family's highest rendered-frontier point first; along the strictly rising line that is also its dearest."""
 
     return (-row["intelligenceIndex"], -row["totalCostUsd"], row["name"])
+
+
+def evidenced_effort(aa_model, deepswe_configurations, bug_hunt):
+    """O30: the effort at which a model has an exact DeepSWE result and a matched Bug Hunt result, or None.
+
+    Bug Hunt publishes one configuration per model, so a family has at most one such effort.
+    """
+
+    if not bug_hunt or bug_hunt.get("matched") is not True:
+        return None
+    names = roster_names(aa_model)
+    efforts = {item["effort"] for item in deepswe_configurations if normalise_name(item["model"]) in names}
+    return bug_hunt.get("effort") if bug_hunt.get("effort") in efforts else None
+
+
+def exact_bug_hunt(model_id, effort, record):
+    """The Bug Hunt record as it applies to the ranked configuration: an owner match at another effort is not used."""
+
+    if record.get("matched") is True and not exact_match.efforts_match(model_id, effort, record.get("effort")):
+        return {**record, "matched": False, "matchStatus": "effort_mismatch",
+                "note": f"The owner's result is for effort {record.get('effort')}; the ranked configuration is {effort}. No result is transferred between efforts."}
+    return record
 
 
 def near_order(row):
@@ -688,7 +711,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "aaFrontierConfiguration": tier["configuration"],
             "aaFrontierIntelligenceGap": tier["intelligenceGap"],
             "aaFrontierFootnote": tier["footnote"],
-            "bugHunt": bug_hunt_by_id[model_id],
+            "bugHunt": exact_bug_hunt(model_id, aa_model.get("aaVariant"), bug_hunt_by_id[model_id]),
             "rankDeepSWE": deepswe_model.get("sourceOrder") if deepswe_model else None,
             "deepsweEffort": deepswe_model.get("effort") if deepswe_model else None,
             "deepswePassAt1": (require_number(deepswe_model["scorePct"], f"{model_id}.DeepSWE scorePct") / 100) if deepswe_model else None,
@@ -752,13 +775,20 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     frontier_primary_ids = set(frontier_selection_by_id)
     near_only_primary_ids = near_frontier_primary_ids - frontier_primary_ids
     primary_ids = overlap_primary_ids | frontier_primary_ids | near_frontier_primary_ids
-    # E193: a near-frontier family ranks its smallest-gap near point, unless retention (E187) already ranks its tracked
-    # configuration (AGENTS.md: the selected configuration may differ from the near configuration).
+    # E193/O30: a near-frontier family ranks its configuration with exact DeepSWE and matched Bug Hunt results when it
+    # has one (AGENTS.md: the selected configuration may differ from the near configuration), else its smallest-gap
+    # near point.
     for family, group in near_families.items():
         model_id = group["modelId"]
-        if model_id in near_only_primary_ids and model_id not in overlap_primary_ids:
-            if aa_models[model_id].get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
-                raise ValueError(f"AA near-frontier family must rank its smallest-gap near point or a retained configuration (E193): {family}")
+        if model_id not in near_only_primary_ids:
+            continue
+        aa_model = aa_models[model_id]
+        evidenced = evidenced_effort(aa_model, deepswe_chart["configurations"], bug_hunt_by_id[model_id])
+        if evidenced is not None:
+            if aa_model.get("aaVariant") != evidenced:
+                raise ValueError(f"AA near-frontier family must rank its configuration with exact DeepSWE and Bug Hunt results (O30): {family} at {evidenced}")
+        elif aa_model.get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
+            raise ValueError(f"AA near-frontier family without exact DeepSWE and Bug Hunt results must rank its smallest-gap near point (E193): {family}")
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
 

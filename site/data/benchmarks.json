@@ -9,7 +9,7 @@
       "role": "quality leaf (Software engineering)",
       "weightPct": 22.5,
       "coverage": {
-        "available": 16,
+        "available": 17,
         "cohort": 19
       },
       "unit": "% pass@1",
@@ -25,7 +25,7 @@
       "role": "quality leaf (Software engineering)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 17,
+        "available": 18,
         "cohort": 19
       },
       "unit": "bugs fixed of 105",
@@ -37,11 +37,11 @@
       "name": "AA FrontierCode 1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/frontiercode",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Software engineering)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 12,
+        "available": 13,
         "cohort": 19
       },
       "unit": "AA score (0-1)",
@@ -57,7 +57,7 @@
       "role": "quality leaf (Software engineering)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 11,
+        "available": 12,
         "cohort": 19
       },
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "name": "GDPval-AA v2.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
@@ -85,7 +85,7 @@
       "name": "AutomationBench-AA",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/automationbench-aa",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
@@ -101,7 +101,7 @@
       "name": "AA-Omniscience",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/omniscience",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Reliability)",
       "weightPct": 7.5,
       "coverage": {
@@ -117,7 +117,7 @@
       "name": "AA-LCR v1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 3.75,
       "coverage": {
@@ -133,7 +133,7 @@
       "name": "Humanity's Last Exam",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
@@ -149,7 +149,7 @@
       "name": "SciCode",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/scicode",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
@@ -165,7 +165,7 @@
       "name": "CritPt",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/critpt",
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
@@ -217,17 +217,17 @@
       {
         "key": "frontiercode",
         "label": "FrontierCode",
-        "covered": 10,
+        "covered": 11,
         "ranked": 19
       },
       {
         "key": "itbench-aa",
         "label": "ITBench-AA",
-        "covered": 7,
+        "covered": 8,
         "ranked": 19
       }
     ],
-    "referencePanelSize": 16,
+    "referencePanelSize": 17,
     "requiredPanelSize": 13
   },
   "qualitySourceShares": {
@@ -236,7 +236,7 @@
   },
   "frontier": {
     "status": "complete",
-    "checkedAt": "2026-10-17T20:23:57+00:00",
+    "checkedAt": "2026-10-21T05:24:16+00:00",
     "observedAt": "2026-10-17T18:48:27Z",
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
     "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",

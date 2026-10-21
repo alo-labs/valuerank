@@ -111,7 +111,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -129,7 +129,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -147,7 +147,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -165,7 +165,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -183,7 +183,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -201,7 +201,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -219,7 +219,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -329,36 +329,36 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1705,
-        "top3": 0.3126,
-        "frontier": 0.5746
+        "top1": 0.1599,
+        "top3": 0.3017,
+        "frontier": 0.5651
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.1431,
-        "top3": 0.3126,
-        "frontier": 0.5439
+        "top1": 0.1469,
+        "top3": 0.3139,
+        "frontier": 0.5354
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.201,
-        "top3": 0.305,
-        "frontier": 0.5687
+        "top1": 0.1999,
+        "top3": 0.3071,
+        "frontier": 0.5691
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.1645,
-        "top3": 0.3131,
-        "frontier": 0.5747
+        "top1": 0.1663,
+        "top3": 0.311,
+        "frontier": 0.5767
       }
     ],
     "plan": [
@@ -377,7 +377,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.1429,
+        "top3": 0.0087,
         "frontier": 0.0
       },
       {
@@ -386,7 +386,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.1422,
+        "top3": 0.0263,
         "frontier": 0.0001
       },
       {
@@ -395,7 +395,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.1881,
+        "top3": 0.0373,
         "frontier": 0.0
       },
       {
@@ -404,7 +404,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.139,
+        "top3": 0.0085,
         "frontier": 0.0
       }
     ]

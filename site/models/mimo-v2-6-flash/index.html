@@ -58,7 +58,7 @@ Ranked <strong>#11</strong> on the plan basis and <strong>#1</strong> at API rat
     <div class="stat"><dt>Plan ranking</dt><dd class="stat-val">#11<small>53.5 pts</small></dd></div>
     <div class="stat"><dt>API ranking</dt><dd class="stat-val">#1<small>60.9 pts</small></dd></div>
     <div class="stat"><dt>Quality</dt><dd class="stat-val">51.7<small>rank #11</small></dd></div>
-    <div class="stat"><dt>Evidence</dt><dd class="stat-val"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span><small>weakest value in the score</small></dd></div>
+    <div class="stat"><dt>Evidence</dt><dd class="stat-val"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><small>weakest value in the score</small></dd></div>
     <div class="stat"><dt>Coverage</dt><dd class="stat-val"><span class="cov" title="50.0% of the quality weight is observed for this exact configuration. Missing: DeepSWE v1.1, Bug Hunt Bench, Terminal-Bench 4.0 (tbench.ai)">
   <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: 50%"></span></span>
   <span class="cov-num">50%</span>
@@ -70,187 +70,88 @@ Ranked <strong>#11</strong> on the plan basis and <strong>#1</strong> at API rat
 
 <section class="block" id="score-breakdown" aria-labelledby="breakdown-title">
   <h2 id="breakdown-title" class="section-title">Score breakdown</h2>
-  <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains.</p>
+  <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains. The number after each dimension links to its evidence grade and provenance in the <a href="#evidence-notes">Evidence</a> section.</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Score breakdown table">
     <table id="dimension-table" class="data-table">
       <thead><tr>
-        <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Evidence</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
+        <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
       </tr></thead>
       <tbody>        <tr class="row-missing">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSWE v1.1</span><span class="model-dev">Software engineering</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">DeepSWE v1.1</span><sup class="fn-ref"><a href="#ev-dim-1" id="evref-dim-1" aria-label="Evidence note 1 for DeepSWE v1.1">1</a></sup></span><span class="model-dev">Software engineering</span></span></th>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
           <td class="muted">% pass@1</td>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span></td>
-          <td><span class="na">No source</span><br><span class="muted small">no observation</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span></dd></div>
-    <div><dt>Source</dt><dd>None</dd></div>
-    <div><dt>Observed</dt><dd>Not observed</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><span class="na">No source</span><br><span class="muted small">no observation</span></td>
           <td class="cell-num">22.5%</td>
         </tr>        <tr class="row-missing">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Bug Hunt Bench</span><span class="model-dev">Software engineering</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Bug Hunt Bench</span><sup class="fn-ref"><a href="#ev-dim-2" id="evref-dim-2" aria-label="Evidence note 2 for Bug Hunt Bench">2</a></sup></span><span class="model-dev">Software engineering</span></span></th>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
           <td class="muted">bugs fixed of 105</td>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span></td>
-          <td><span class="na">No source</span><br><span class="muted small">no observation</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span></dd></div>
-    <div><dt>Source</dt><dd>None</dd></div>
-    <div><dt>Observed</dt><dd>Not observed</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><span class="na">No source</span><br><span class="muted small">no observation</span></td>
           <td class="cell-num">7.5%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">AA FrontierCode 1.1</span><span class="model-dev">Software engineering</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">AA FrontierCode 1.1</span><sup class="fn-ref"><a href="#ev-dim-3" id="evref-dim-3" aria-label="Evidence note 3 for AA FrontierCode 1.1">3</a></sup></span><span class="model-dev">Software engineering</span></span></th>
           <td class="cell-num">0.421</td>
           <td class="muted">AA score (0-1)</td>
           <td class="cell-num">42.1</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/frontiercode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/frontiercode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/frontiercode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">7.5%</td>
         </tr>        <tr class="row-missing">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Terminal-Bench 4.0 (tbench.ai)</span><span class="model-dev">Software engineering</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Terminal-Bench 4.0 (tbench.ai)</span><sup class="fn-ref"><a href="#ev-dim-4" id="evref-dim-4" aria-label="Evidence note 4 for Terminal-Bench 4.0 (tbench.ai)">4</a></sup></span><span class="model-dev">Software engineering</span></span></th>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
           <td class="muted">% resolved</td>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
-          <td><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span></td>
-          <td><span class="na">No source</span><br><span class="muted small">no observation</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span></dd></div>
-    <div><dt>Source</dt><dd>None</dd></div>
-    <div><dt>Observed</dt><dd>Not observed</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><span class="na">No source</span><br><span class="muted small">no observation</span></td>
           <td class="cell-num">7.5%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GDPval-AA v2.1</span><span class="model-dev">Professional work</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GDPval-AA v2.1</span><sup class="fn-ref"><a href="#ev-dim-5" id="evref-dim-5" aria-label="Evidence note 5 for GDPval-AA v2.1">5</a></sup></span><span class="model-dev">Professional work</span></span></th>
           <td class="cell-num">1607.5</td>
           <td class="muted">Elo</td>
           <td class="cell-num">55.4</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/gdpval-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/gdpval-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/gdpval-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">7.5%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">AutomationBench-AA</span><span class="model-dev">Professional work</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">AutomationBench-AA</span><sup class="fn-ref"><a href="#ev-dim-6" id="evref-dim-6" aria-label="Evidence note 6 for AutomationBench-AA">6</a></sup></span><span class="model-dev">Professional work</span></span></th>
           <td class="cell-num">0.641</td>
           <td class="muted">AA score (0-1)</td>
           <td class="cell-num">64.1</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/automationbench-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/automationbench-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/automationbench-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">7.5%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">AA-Omniscience</span><span class="model-dev">Reliability</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">AA-Omniscience</span><sup class="fn-ref"><a href="#ev-dim-7" id="evref-dim-7" aria-label="Evidence note 7 for AA-Omniscience">7</a></sup></span><span class="model-dev">Reliability</span></span></th>
           <td class="cell-num">-12.7</td>
           <td class="muted">AA Omniscience Index (-100 to 100)</td>
           <td class="cell-num">43.7</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/omniscience" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/omniscience" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/omniscience" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">7.5%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">AA-LCR v1.1</span><span class="model-dev">Knowledge and science</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">AA-LCR v1.1</span><sup class="fn-ref"><a href="#ev-dim-8" id="evref-dim-8" aria-label="Evidence note 8 for AA-LCR v1.1">8</a></sup></span><span class="model-dev">Knowledge and science</span></span></th>
           <td class="cell-num">0.743</td>
           <td class="muted">accuracy (0-1)</td>
           <td class="cell-num">74.3</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">3.8%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Humanity&#39;s Last Exam</span><span class="model-dev">Knowledge and science</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Humanity&#39;s Last Exam</span><sup class="fn-ref"><a href="#ev-dim-9" id="evref-dim-9" aria-label="Evidence note 9 for Humanity&#39;s Last Exam">9</a></sup></span><span class="model-dev">Knowledge and science</span></span></th>
           <td class="cell-num">0.351</td>
           <td class="muted">accuracy (0-1)</td>
           <td class="cell-num">35.1</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/humanitys-last-exam" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/humanitys-last-exam" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/humanitys-last-exam" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">1.2%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">SciCode</span><span class="model-dev">Knowledge and science</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">SciCode</span><sup class="fn-ref"><a href="#ev-dim-10" id="evref-dim-10" aria-label="Evidence note 10 for SciCode">10</a></sup></span><span class="model-dev">Knowledge and science</span></span></th>
           <td class="cell-num">0.513</td>
           <td class="muted">score (0-1)</td>
           <td class="cell-num">51.3</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/scicode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/scicode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/scicode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">1.2%</td>
         </tr>        <tr class="">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">CritPt</span><span class="model-dev">Knowledge and science</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">CritPt</span><sup class="fn-ref"><a href="#ev-dim-11" id="evref-dim-11" aria-label="Evidence note 11 for CritPt">11</a></sup></span><span class="model-dev">Knowledge and science</span></span></th>
           <td class="cell-num">0.120</td>
           <td class="muted">score (0-1)</td>
           <td class="cell-num">12.0</td>
-          <td><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></td>
-          <td><a href="https://artificialanalysis.ai/evaluations/critpt" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-17</span>
-            <details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span></dd></div>
-    <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/critpt" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
-    <div><dt>Observed</dt><dd>2026-10-17</dd></div>
-    <div><dt>Evaluated variant</dt><dd>None</dd></div>  </dl>
-</details></td>
+          <td><a href="https://artificialanalysis.ai/evaluations/critpt" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a><br><span class="muted small">2026-10-21</span></td>
           <td class="cell-num">1.2%</td>
         </tr>      </tbody>
     </table>
@@ -262,53 +163,45 @@ Ranked <strong>#11</strong> on the plan basis and <strong>#1</strong> at API rat
   <p class="muted">Cost is the contestant-model API token cost of one run of the SDLC basket: <strong>$60.37</strong> at API rates and <strong>$40.25</strong> on the plan basis.
 Route chosen by: only remaining eligible route.</p>  <p class="muted small">Selected route's amount: assumed API-equivalent consumption (owner-named transfer). It is the Value Multiple times the cash paid (fee not established), not a promise of what your own usage will reach.</p>  <ul class="plain-list small"><li>Subset cost: scored on its own workload; cross-workload ordering not identified</li><li>Provisional quality: coverage 50% below 70%; 1 SWE leaves observed (need 2); observed SWE weight 10% below 40%; DeepSWE v1.1 missing</li></ul>  <div class="table-wrap" tabindex="0" role="region" aria-label="Basket components table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Basket component</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col">Evidence</th><th scope="col">In the scored basket</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Basket component</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col">In the scored basket</th></tr></thead>
       <tbody>        <tr>
-          <th scope="row" class="cell-model"><span class="model-name">AA-Briefcase</span></th>
+          <th scope="row" class="cell-model"><span class="fn-host"><span class="model-name">AA-Briefcase</span><sup class="fn-ref"><a href="#ev-cost-1" id="evref-cost-1" aria-label="Evidence note 12 for AA-Briefcase">12</a></sup></span></th>
           <td class="cell-num">$13.81</td>
-          <td class="small">confirmed-complete<br><span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></td>
           <td>yes</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-name">GDPval-AA</span></th>
+          <th scope="row" class="cell-model"><span class="fn-host"><span class="model-name">GDPval-AA</span><sup class="fn-ref"><a href="#ev-cost-2" id="evref-cost-2" aria-label="Evidence note 13 for GDPval-AA">13</a></sup></span></th>
           <td class="cell-num">$16.10</td>
-          <td class="small">confirmed-complete<br><span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></td>
           <td>yes</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-name">GDP.pdf</span></th>
+          <th scope="row" class="cell-model"><span class="fn-host"><span class="model-name">GDP.pdf</span><sup class="fn-ref"><a href="#ev-cost-3" id="evref-cost-3" aria-label="Evidence note 14 for GDP.pdf">14</a></sup></span></th>
           <td class="cell-num">$2.01</td>
-          <td class="small">confirmed-complete<br><span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></td>
           <td>yes</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-name">AutomationBench-AA</span></th>
+          <th scope="row" class="cell-model"><span class="fn-host"><span class="model-name">AutomationBench-AA</span><sup class="fn-ref"><a href="#ev-cost-4" id="evref-cost-4" aria-label="Evidence note 15 for AutomationBench-AA">15</a></sup></span></th>
           <td class="cell-num">$10.94</td>
-          <td class="small">confirmed-complete<br><span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></td>
           <td>yes</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-name">Terminal-Bench 4.0 (AA Index run)</span></th>
+          <th scope="row" class="cell-model"><span class="fn-host"><span class="model-name">Terminal-Bench 4.0 (AA Index run)</span><sup class="fn-ref"><a href="#ev-cost-5" id="evref-cost-5" aria-label="Evidence note 16 for Terminal-Bench 4.0 (AA Index run)">16</a></sup></span></th>
           <td class="cell-num">$15.19</td>
-          <td class="small">confirmed-complete<br><span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></td>
           <td>yes</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-name">SciCode</span></th>
+          <th scope="row" class="cell-model"><span class="fn-host"><span class="model-name">SciCode</span><sup class="fn-ref"><a href="#ev-cost-6" id="evref-cost-6" aria-label="Evidence note 17 for SciCode">17</a></sup></span></th>
           <td class="cell-num">$0.81</td>
-          <td class="small">confirmed-complete<br><span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></td>
           <td>yes</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-name">AA-LCR</span></th>
+          <th scope="row" class="cell-model"><span class="fn-host"><span class="model-name">AA-LCR</span><sup class="fn-ref"><a href="#ev-cost-7" id="evref-cost-7" aria-label="Evidence note 18 for AA-LCR">18</a></sup></span></th>
           <td class="cell-num">$1.51</td>
-          <td class="small">confirmed-complete<br><span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></td>
           <td>yes</td>
         </tr>      </tbody>
     </table>
   </div>  <div class="table-wrap" tabindex="0" role="region" aria-label="Plan routes table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th><th scope="col">Evidence</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th></tr></thead>
       <tbody>        <tr class="row-selected" aria-label="Selected route">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">MiMo · provisional 1.5x assumption</span><span class="model-dev">Selected route</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">MiMo · provisional 1.5x assumption</span><sup class="fn-ref"><a href="#ev-route-1" id="evref-route-1" aria-label="Evidence note 19 for MiMo · provisional 1.5x assumption">19</a></sup></span><span class="model-dev">Selected route</span></span></th>
           <td class="cell-num"><span class="na" title="No value">&ndash;</span></td>
           <td class="cell-num">1.50&times;</td>
           <td class="cell-num">$40.25</td>
-          <td><span class="badge badge-assumption" title="Provisional assumption">Assumption</span><br><span class="muted small">None</span></td>
         </tr>      </tbody>
     </table>
   </div></section>
@@ -322,12 +215,51 @@ Route chosen by: only remaining eligible route.</p>  <p class="muted small">Sele
   <p class="note">Versions without a recorded rank are omitted, never inferred.</p></section><section class="block" id="related" aria-labelledby="related-title">
   <h2 id="related-title" class="section-title">More from Xiaomi</h2>
   <ul class="chip-list">    <li><a class="chip" href="/models/mimo-v2-6-pro/">MiMo-V2.6-Pro</a></li>  </ul>
+</section>
+<section class="block" id="evidence-notes" aria-labelledby="evidence-notes-title">
+  <h2 id="evidence-notes-title" class="section-title">Evidence</h2>    <h3 class="subhead">Score breakdown</h3>
+  <ol class="footnotes"><li id="ev-dim-1" class="fn-item"><span class="fn-label">DeepSWE v1.1</span> <a class="fn-back" href="#evref-dim-1" aria-label="Back to DeepSWE v1.1 in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd>None</dd></div>
+  <div><dt>Observed</dt><dd>Not observed</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-2" class="fn-item"><span class="fn-label">Bug Hunt Bench</span> <a class="fn-back" href="#evref-dim-2" aria-label="Back to Bug Hunt Bench in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd>None</dd></div>
+  <div><dt>Observed</dt><dd>Not observed</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-3" class="fn-item"><span class="fn-label">AA FrontierCode 1.1</span> <a class="fn-back" href="#evref-dim-3" aria-label="Back to AA FrontierCode 1.1 in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/frontiercode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-4" class="fn-item"><span class="fn-label">Terminal-Bench 4.0 (tbench.ai)</span> <a class="fn-back" href="#evref-dim-4" aria-label="Back to Terminal-Bench 4.0 (tbench.ai) in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd>None</dd></div>
+  <div><dt>Observed</dt><dd>Not observed</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-5" class="fn-item"><span class="fn-label">GDPval-AA v2.1</span> <a class="fn-back" href="#evref-dim-5" aria-label="Back to GDPval-AA v2.1 in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/gdpval-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-6" class="fn-item"><span class="fn-label">AutomationBench-AA</span> <a class="fn-back" href="#evref-dim-6" aria-label="Back to AutomationBench-AA in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/automationbench-aa" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-7" class="fn-item"><span class="fn-label">AA-Omniscience</span> <a class="fn-back" href="#evref-dim-7" aria-label="Back to AA-Omniscience in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/omniscience" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-8" class="fn-item"><span class="fn-label">AA-LCR v1.1</span> <a class="fn-back" href="#evref-dim-8" aria-label="Back to AA-LCR v1.1 in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-9" class="fn-item"><span class="fn-label">Humanity&#39;s Last Exam</span> <a class="fn-back" href="#evref-dim-9" aria-label="Back to Humanity&#39;s Last Exam in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/humanitys-last-exam" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-10" class="fn-item"><span class="fn-label">SciCode</span> <a class="fn-back" href="#evref-dim-10" aria-label="Back to SciCode in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/scicode" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li><li id="ev-dim-11" class="fn-item"><span class="fn-label">CritPt</span> <a class="fn-back" href="#evref-dim-11" aria-label="Back to CritPt in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">User-measured</span><dl class="evidence-list">
+  <div><dt>Source</dt><dd><a href="https://artificialanalysis.ai/evaluations/critpt" rel="noopener">Artificial Analysis model page (Intelligence Index v4.3.2)</a></dd></div>
+  <div><dt>Observed</dt><dd>2026-10-21</dd></div>
+  <div><dt>Evaluated variant</dt><dd>None</dd></div></dl></div></li>  </ol>  <h3 class="subhead">Basket components</h3>
+  <ol class="footnotes" start="12"><li id="ev-cost-1" class="fn-item"><span class="fn-label">AA-Briefcase</span> <a class="fn-back" href="#evref-cost-1" aria-label="Back to AA-Briefcase in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="fn-text">confirmed-complete</span> <span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></div></li><li id="ev-cost-2" class="fn-item"><span class="fn-label">GDPval-AA</span> <a class="fn-back" href="#evref-cost-2" aria-label="Back to GDPval-AA in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="fn-text">confirmed-complete</span> <span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></div></li><li id="ev-cost-3" class="fn-item"><span class="fn-label">GDP.pdf</span> <a class="fn-back" href="#evref-cost-3" aria-label="Back to GDP.pdf in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="fn-text">confirmed-complete</span> <span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></div></li><li id="ev-cost-4" class="fn-item"><span class="fn-label">AutomationBench-AA</span> <a class="fn-back" href="#evref-cost-4" aria-label="Back to AutomationBench-AA in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="fn-text">confirmed-complete</span> <span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></div></li><li id="ev-cost-5" class="fn-item"><span class="fn-label">Terminal-Bench 4.0 (AA Index run)</span> <a class="fn-back" href="#evref-cost-5" aria-label="Back to Terminal-Bench 4.0 (AA Index run) in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="fn-text">confirmed-complete</span> <span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></div></li><li id="ev-cost-6" class="fn-item"><span class="fn-label">SciCode</span> <a class="fn-back" href="#evref-cost-6" aria-label="Back to SciCode in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="fn-text">confirmed-complete</span> <span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></div></li><li id="ev-cost-7" class="fn-item"><span class="fn-label">AA-LCR</span> <a class="fn-back" href="#evref-cost-7" aria-label="Back to AA-LCR in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="fn-text">confirmed-complete</span> <span class="muted">AA Intelligence Index evaluation cost (cost per task x task count)</span></div></li>  </ol>  <h3 class="subhead">Plan routes</h3>
+  <ol class="footnotes" start="19"><li id="ev-route-1" class="fn-item"><span class="fn-label">MiMo · provisional 1.5x assumption</span> <a class="fn-back" href="#evref-route-1" aria-label="Back to MiMo · provisional 1.5x assumption in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-assumption" title="Provisional assumption">Assumption</span> <span class="fn-text">Provisional assumption</span> <span class="muted small">None</span></div></li>  </ol>
 </section>  </main>
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
       <p class="footer-brand">ValueRank <span class="mono">v3.0.0</span></p>
-      <p class="muted">Published October 19, 2026. Data observed 2026-10-17. Every score is traceable to a source, a date and an evidence grade.</p>
+      <p class="muted">Published October 19, 2026. Data observed 2026-10-21. Every score is traceable to a source, a date and an evidence grade.</p>
     </div>
     <nav aria-label="Footer">
       <ul class="footer-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>

@@ -1,6 +1,7 @@
 {#- Ranking table pieces shared by the answer page and the rankings instrument.
     Cells carry data-col (the column key used by assets/js/filters.js; the model column is "name") and data-label. -#}
-{%- from "partials/badge.html" import badge -%}
+{%- from "partials/badge.html" import badge, describe -%}
+{%- from "partials/footnotes.html" import fn_name, fn_item -%}
 {%- from "partials/fmt.html" import num, usd, rank -%}
 {%- from "partials/coverage_bar.html" import coverage_bar -%}
 
@@ -9,17 +10,22 @@ Cost <small class="unit" data-cost-unit>{{ site.basis[site.defaultBasis].costUni
 {%- endmacro -%}
 
 {#- Server-rendered fallback row (default basis); replaced by the script when it loads. -#}
-{%- macro answer_row(m, site) -%}
+{#- n is the row's evidence footnote number; its entry comes from model_note below. -#}
+{%- macro answer_row(m, site, n) -%}
 {%- set b = site.defaultBasis -%}
 <tr data-slug="{{ m.slug }}">
   <td data-col="rank" data-label="Rank" class="num">{{ rank(m.rank[b]) }}</td>
-  <th scope="row" data-col="name" data-label="Model" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a><span class="model-dev">{{ m.developer }}</span></span></th>
+  <th scope="row" data-col="name" data-label="Model" class="cell-model"><span class="model-id">{% call fn_name(m.slug, n, m.name) %}<a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a>{% endcall %}<span class="model-dev">{{ m.developer }}</span></span></th>
   <td data-col="overall" data-label="Score" class="num">{{ num(m.overall[b]) }}</td>
   <td data-col="quality" data-label="Quality" class="num">{{ num(m.quality) }}</td>
   <td data-col="cost" data-label="Cost" class="num">{{ usd(m.cost.planUsd if b == "plan" else m.cost.apiUsd, 2) }}</td>
-  <td data-col="grade" data-label="Evidence">{{ badge(m.grade) }}</td>
   <td data-col="coverage" data-label="Coverage">{{ coverage_bar(m.coverage) }}</td>
 </tr>
+{%- endmacro -%}
+
+{#- A ranked model's evidence entry: its grade is the weakest of any value inside its score (same text as rankings.js). -#}
+{%- macro model_note(m) -%}
+{% call fn_item(m.slug, m.name) %}{{ badge(m.grade) }} <span class="fn-text">Weakest grade of any value inside the score. {{ describe(m.grade) }}</span>{% endcall %}
 {%- endmacro -%}
 
 {%- macro head_cells(cols, site, sortable=true, active="overall") -%}

@@ -584,12 +584,6 @@
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "gpt-6-astra": {
-      "status": "official",
-      "rank": 3,
-      "resolutionRatePct": 58.2,
-      "evaluatedModel": "GPT-6 Astra (max)"
-    },
     "claude-opus-5-5": {
       "status": "missing",
       "rank": null,
@@ -602,13 +596,19 @@
       "resolutionRatePct": 37.3,
       "evaluatedModel": "GPT-5.6 Sol (max)"
     },
-    "mimo-v2-6-pro": {
+    "gpt-6-astra": {
+      "status": "official",
+      "rank": 3,
+      "resolutionRatePct": 58.2,
+      "evaluatedModel": "GPT-6 Astra (max)"
+    },
+    "gpt-6-sol": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "gpt-6-sol": {
+    "mimo-v2-6-pro": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
@@ -650,17 +650,17 @@
       "resolutionRatePct": 19.1,
       "evaluatedModel": "Gemini 3.8 Flash (high)"
     },
-    "claude-opus-5": {
-      "status": "official",
-      "rank": 6,
-      "resolutionRatePct": 53.9,
-      "evaluatedModel": "Opus 5 (xhigh)"
-    },
     "glm-5-3": {
       "status": "official",
       "rank": 9,
       "resolutionRatePct": 41.8,
       "evaluatedModel": "GLM-5.3 (max)"
+    },
+    "claude-opus-5": {
+      "status": "official",
+      "rank": 6,
+      "resolutionRatePct": 53.9,
+      "evaluatedModel": "Opus 5 (xhigh)"
     },
     "deepseek-v4-flash": {
       "status": "provider_claim",

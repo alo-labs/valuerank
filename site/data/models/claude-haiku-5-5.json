@@ -7,7 +7,7 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
   "summary": {
     "rank": {
-      "api": 10,
+      "api": 9,
       "plan": 4
     },
     "overall": {
@@ -82,7 +82,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -115,7 +115,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -133,7 +133,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -151,7 +151,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -169,7 +169,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -187,7 +187,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -205,7 +205,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -223,7 +223,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-21",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -417,17 +417,17 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0373,
-        "frontier": 0.1798
+        "top3": 0.0387,
+        "frontier": 0.1839
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0079,
-        "top3": 0.0689,
-        "frontier": 0.1531
+        "top1": 0.0086,
+        "top3": 0.067,
+        "frontier": 0.1559
       },
       {
         "stratum": "S1",
@@ -435,8 +435,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0447,
-        "frontier": 0.2296
+        "top3": 0.0461,
+        "frontier": 0.2308
       },
       {
         "stratum": "S1M",
@@ -444,8 +444,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0366,
-        "frontier": 0.1777
+        "top3": 0.0386,
+        "frontier": 0.1786
       }
     ],
     "plan": [
@@ -532,7 +532,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 10,
+        "api": 9,
         "plan": 4
       }
     }

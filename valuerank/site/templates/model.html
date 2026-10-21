@@ -3,8 +3,12 @@
 {%- from "partials/fmt.html" import num, usd, rank -%}
 {%- from "partials/coverage_bar.html" import coverage_bar -%}
 {%- from "partials/evidence_drawer.html" import evidence -%}
+{%- from "partials/footnotes.html" import fn_name, fn_item, fn_section -%}
 {% block content %}
 {%- set s = page.summary -%}
+{#- Evidence footnotes number through the dimension, basket-component and route tables in that order. -#}
+{%- set n_dims = page.dimensions | length -%}
+{%- set n_cost = n_dims + (page.cost.components | length if page.cost.components else 0) -%}
 <header class="page-head model-head">
   <p class="eyebrow"><a href="/rankings/">Rankings</a> / {{ page.developer }}</p>
   <h1 id="page-title">{{ page.name }}</h1>
@@ -32,22 +36,20 @@
 
 <section class="block" id="score-breakdown" aria-labelledby="breakdown-title">
   <h2 id="breakdown-title" class="section-title">Score breakdown</h2>
-  <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains.</p>
+  <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains. The number after each dimension links to its evidence grade and provenance in the <a href="#evidence-notes">Evidence</a> section.</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Score breakdown table">
     <table id="dimension-table" class="data-table">
       <thead><tr>
-        <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Evidence</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
+        <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
       </tr></thead>
       <tbody>
         {%- for d in page.dimensions %}
         <tr class="{{ 'row-missing' if d.grade == 'missing' else '' }}">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ d.label }}</span><span class="model-dev">{{ d.category }}</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id">{% call fn_name("dim-" ~ loop.index, loop.index, d.label) %}<span class="model-name">{{ d.label }}</span>{% endcall %}<span class="model-dev">{{ d.category }}</span></span></th>
           <td class="cell-num">{{ num(d.value, d.decimals) }}</td>
           <td class="muted">{{ d.unit }}</td>
           <td class="cell-num">{{ num(d.normalized) }}</td>
-          <td>{{ badge(d.grade) }}</td>
-          <td>{% if d.source %}<a href="{{ d.source.url }}" rel="noopener">{{ d.source.name }}</a>{% else %}<span class="na">No source</span>{% endif %}<br><span class="muted small">{{ d.observedAt if d.observedAt else "no observation" }}</span>
-            {{ evidence(d) }}</td>
+          <td>{% if d.source %}<a href="{{ d.source.url }}" rel="noopener">{{ d.source.name }}</a>{% else %}<span class="na">No source</span>{% endif %}<br><span class="muted small">{{ d.observedAt if d.observedAt else "no observation" }}</span></td>
           <td class="cell-num">{{ num(d.weightPct, 1) }}%</td>
         </tr>
         {%- endfor %}
@@ -73,13 +75,12 @@
   {%- if page.cost.components %}
   <div class="table-wrap" tabindex="0" role="region" aria-label="Basket components table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Basket component</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col">Evidence</th><th scope="col">In the scored basket</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Basket component</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col">In the scored basket</th></tr></thead>
       <tbody>
         {%- for c in page.cost.components %}
         <tr>
-          <th scope="row" class="cell-model"><span class="model-name">{{ c.label }}</span></th>
+          <th scope="row" class="cell-model">{% call fn_name("cost-" ~ loop.index, n_dims + loop.index, c.label) %}<span class="model-name">{{ c.label }}</span>{% endcall %}</th>
           <td class="cell-num">{{ usd(c.costUsd, 2) }}</td>
-          <td class="small">{{ c.completeness }}<br><span class="muted">{{ c.source }}</span></td>
           <td>{{ "yes" if c.admitted else "no (pending)" }}</td>
         </tr>
         {%- endfor %}
@@ -90,15 +91,14 @@
   {%- if page.plans %}
   <div class="table-wrap" tabindex="0" role="region" aria-label="Plan routes table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th><th scope="col">Evidence</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th></tr></thead>
       <tbody>
         {%- for r in page.plans %}
         <tr{% if r.selected %} class="row-selected" aria-label="Selected route"{% endif %}>
-          <th scope="row" class="cell-model"><span class="model-id">{% if r.sourceUrl %}<a class="model-name" href="{{ r.sourceUrl }}" rel="noopener">{{ r.planLabel }}</a>{% else %}<span class="model-name">{{ r.planLabel }}</span>{% endif %}{% if r.selected %}<span class="model-dev">Selected route</span>{% elif not r.officialDisplayEligible %}<span class="model-dev">Diagnostic only</span>{% endif %}</span></th>
+          <th scope="row" class="cell-model"><span class="model-id">{% call fn_name("route-" ~ loop.index, n_cost + loop.index, r.planLabel) %}{% if r.sourceUrl %}<a class="model-name" href="{{ r.sourceUrl }}" rel="noopener">{{ r.planLabel }}</a>{% else %}<span class="model-name">{{ r.planLabel }}</span>{% endif %}{% endcall %}{% if r.selected %}<span class="model-dev">Selected route</span>{% elif not r.officialDisplayEligible %}<span class="model-dev">Diagnostic only</span>{% endif %}</span></th>
           <td class="cell-num">{{ usd(r.planFeeUsd, 0) }}</td>
           <td class="cell-num">{{ num(r.valueMultiple, 2) }}&times;</td>
           <td class="cell-num">{{ usd(r.usdPerRun, 2) }}</td>
-          <td>{{ badge(r.grade, hint=r.evidenceLabel) }}<br><span class="muted small">{{ r.sourceDate }}</span></td>
         </tr>
         {%- endfor %}
       </tbody>
@@ -156,4 +156,29 @@
   </ul>
 </section>
 {%- endif %}
+
+{% call fn_section() %}
+  <h3 class="subhead">Score breakdown</h3>
+  <ol class="footnotes">
+    {%- for d in page.dimensions %}
+    {% call fn_item("dim-" ~ loop.index, d.label) %}{{ badge(d.grade) }}{{ evidence(d) }}{% endcall %}
+    {%- endfor %}
+  </ol>
+  {%- if page.cost.components %}
+  <h3 class="subhead">Basket components</h3>
+  <ol class="footnotes" start="{{ n_dims + 1 }}">
+    {%- for c in page.cost.components %}
+    {% call fn_item("cost-" ~ loop.index, c.label) %}<span class="fn-text">{{ c.completeness }}</span> <span class="muted">{{ c.source }}</span>{% endcall %}
+    {%- endfor %}
+  </ol>
+  {%- endif %}
+  {%- if page.plans %}
+  <h3 class="subhead">Plan routes</h3>
+  <ol class="footnotes" start="{{ n_cost + 1 }}">
+    {%- for r in page.plans %}
+    {% call fn_item("route-" ~ loop.index, r.planLabel) %}{{ badge(r.grade, hint=r.evidenceLabel) }} <span class="fn-text">{{ r.evidenceLabel }}</span> <span class="muted small">{{ r.sourceDate }}</span>{% if r.sourceUrl %} <a href="{{ r.sourceUrl }}" rel="noopener">Source</a>{% endif %}{% endcall %}
+    {%- endfor %}
+  </ol>
+  {%- endif %}
+{% endcall %}
 {% endblock %}

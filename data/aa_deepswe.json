@@ -18,7 +18,7 @@
     "responseBytes": 950389
   },
   "selectionPolicy": "Use the benchmark-owner chart for the exact displayed model version and retain its agent and effort configuration. Do not transfer scores across model versions or composite-agent configurations. A ValueRank family row is mapped only when its evaluated model variant matches the chart row.",
-  "freshnessNote": "All 42 configurations with a DeepSWE v1.1 evaluation were captured automatically on 2026-10-17; 16 map to an exact ValueRank roster variant. Against the previous capture of 2026-10-08: 28 retained, 14 new and 3 removed (by agent, model, effort and fallback). Scores are the owner's mean reward at full precision, rounded to one decimal place.",
+  "freshnessNote": "All 42 configurations with a DeepSWE v1.1 evaluation were captured automatically on 2026-10-17; 17 map to an exact ValueRank roster variant. Against the previous capture of 2026-10-08: 28 retained, 14 new and 3 removed (by agent, model, effort and fallback). Scores are the owner's mean reward at full precision, rounded to one decimal place. On 2026-10-21 the GPT-6 Astra roster variant moved from xhigh to max (owner decision O30) and the mapping was re-run on this capture without re-fetching it.",
   "configurations": [
     {
       "sourceOrder": 1,
@@ -409,9 +409,9 @@
       "meanOutputTokens": 56420.18289085546,
       "scorePrecision": "payload_full_precision",
       "agentVersion": "0.153.4",
-      "valueRankModelId": null,
-      "matchStatus": "effort_mismatch",
-      "matchNote": "Model family matches the roster display name 'GPT-6 Astra', but the chart row's effort (max) differs from the roster variant (xhigh); ValueRank never substitutes a different reasoning effort.",
+      "valueRankModelId": "gpt-6-astra",
+      "matchStatus": "exact_variant",
+      "matchNote": "Exact variant: chart model GPT-6 Astra (max) matches the roster display name 'GPT-6 Astra' at effort max.",
       "observedAt": "2026-10-17T19:26:26Z",
       "previouslyObservedAt": "2026-10-08",
       "previousScorePct": 68

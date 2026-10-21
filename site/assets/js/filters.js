@@ -10,7 +10,8 @@ const CORE = [
   { key: 'overall', label: 'Overall', defaultDir: 'desc' },
   { key: 'quality', label: 'Quality', defaultDir: 'desc' },
   { key: 'cost', label: 'Cost', defaultDir: 'asc' },
-  { key: 'grade', label: 'Evidence', defaultDir: 'asc' },
+  // Data only: kept in the view state, URL, sort and export, but never drawn as a table column (evidence is footnoted).
+  { key: 'grade', label: 'Evidence', defaultDir: 'asc', dataOnly: true },
   { key: 'coverage', label: 'Coverage', defaultDir: 'desc' },
   { key: 'developer', label: 'Developer', defaultDir: 'asc' },
   { key: 'qualityRank', label: 'Quality rank', defaultDir: 'asc' },

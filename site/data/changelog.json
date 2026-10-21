@@ -44,45 +44,39 @@
           "to": 7
         },
         {
-          "slug": "gpt-6-astra",
-          "name": "GPT-6 Astra",
-          "from": 4,
-          "to": 8
-        },
-        {
-          "slug": "gpt-6-sol",
-          "name": "GPT-6 Sol",
-          "from": 8,
-          "to": 9
-        },
-        {
           "slug": "claude-haiku-5-5",
           "name": "Claude Haiku 5.5",
           "from": 13,
-          "to": 10
+          "to": 9
         },
         {
           "slug": "deepseek-v4-pro",
           "name": "DeepSeek V4 Pro",
           "from": 19,
-          "to": 11
+          "to": 10
         },
         {
           "slug": "gpt-5-6-sol",
           "name": "GPT-5.6 Sol",
           "from": 6,
-          "to": 12
+          "to": 11
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "from": 3,
-          "to": 13
+          "to": 12
         },
         {
           "slug": "claude-opus-5-5",
           "name": "Claude Opus 5.5",
           "from": 5,
+          "to": 13
+        },
+        {
+          "slug": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "from": 4,
           "to": 14
         },
         {
@@ -117,20 +111,20 @@
         }
       ],
       "ranks": {
-        "claude-haiku-5-5": 10,
+        "claude-haiku-5-5": 9,
         "claude-opus-5": 18,
-        "claude-opus-5-5": 14,
-        "claude-sonnet-5-5": 13,
+        "claude-opus-5-5": 13,
+        "claude-sonnet-5-5": 12,
         "deepseek-v4-flash": 7,
-        "deepseek-v4-pro": 11,
+        "deepseek-v4-pro": 10,
         "gemini-3-8-flash": 15,
         "gemini-4-argon": 4,
         "glm-5-3": 17,
         "gpt-5-6-luna": 6,
-        "gpt-5-6-sol": 12,
-        "gpt-6-astra": 8,
+        "gpt-5-6-sol": 11,
+        "gpt-6-astra": 14,
         "gpt-6-luna": 3,
-        "gpt-6-sol": 9,
+        "gpt-6-sol": 8,
         "gpt-6-1-sol": 2,
         "grok-4-7": 16,
         "mimo-v2-6-flash": 1,

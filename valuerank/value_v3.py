@@ -688,7 +688,7 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
         unevaluable = [row_id for row_id in unevaluable if row_id not in unconstructible]
         return {"universe": universe, "blockers": sorted(set(blockers) | set(unconstructible)), "unevaluable": unevaluable, "status": intervals.UNRESOLVED,
                 "reason": "a blocker's current-tariff domain cannot be constructed (E183, E185): " + ", ".join(unconstructible)}
-    frontier, bars = intervals.frontier(boxes), _bar_results(boxes, frozen)
+    frontier, bars = intervals.frontier(boxes), _bar_results(boxes, assembled, frozen)
     # E170/O29: a blocker competes over its hull but earns no interval label of its own.
     for row_id in blockers:
         frontier[row_id] = {"status": WITHHELD_LABEL}
@@ -696,6 +696,9 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
             if "rows" in bar:
                 bar["rows"][row_id] = {"status": WITHHELD_LABEL}
                 bar["possibleCheapest"] = [item for item in bar["possibleCheapest"] if item != row_id]
+    for bar in bars:
+        if "rows" in bar:
+            _comparison(bar)
     return {"universe": universe, "blockers": blockers, "unevaluable": unevaluable, "status": "evaluated", "frontier": frontier, "bars": bars}
 
 
@@ -722,8 +725,28 @@ def _bar_reference(bar: dict) -> intervals.Reference:
     return intervals.Reference(bar["id"], bar["level"], bar["level"])
 
 
-def _bar_results(boxes: list[intervals.Box], frozen: dict) -> list[dict]:
-    return [{"reference": bar, **intervals.cheapest_above_bar(boxes, _bar_reference(bar))} for bar in frozen["barReferences"]]
+def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> list[dict]:
+    """Each bar's interval outcome; every row also gets its displayed-quality margin to the level (E198)."""
+
+    displayed = {row["id"]: row["summary"].displayed for row in assembled["rows"]}
+    results = []
+    for bar in frozen["barReferences"]:
+        outcome = intervals.cheapest_above_bar(boxes, _bar_reference(bar))
+        for row_id, item in outcome.get("rows", {}).items():
+            item["displayedMargin"] = None if displayed[row_id] is None else displayed[row_id] - bar["level"]
+        results.append({"reference": bar, **outcome})
+    return results
+
+
+VACUOUS_COMPARISON = "vacuous: fewer than two evaluable configurations can qualify"
+
+
+def _comparison(bar: dict) -> None:
+    """E198: how many configurations of R_W can possibly qualify, so a one-candidate result is never read as a comparison."""
+
+    count = sum(1 for item in bar["rows"].values() if item.get("possible") == intervals.CERTIFIED)
+    bar["possibleQualifierN"] = count
+    bar["comparison"] = VACUOUS_COMPARISON if count < 2 else f"compares {count} configurations that can qualify"
 
 
 # E146: registered deletion branches. Displayed-score sensitivity removes the leaf set R globally and

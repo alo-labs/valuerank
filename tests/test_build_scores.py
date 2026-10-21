@@ -366,7 +366,7 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-10-17T20:23:57Z"
+    assert scoring["observedAt"] == "2026-10-21T05:24:16Z"
     # The DeepSeek V4 Flash claim is used because that model is primary-ranked; the other claim targets a non-primary model.
     assert scoring["providerClaimsUsed"] == [DEEPSEEK_CLAIM]
     assert scoring["primaryMissingFields"]
@@ -653,8 +653,10 @@ def defer_near_family(family):
 
 def test_without_bug_hunt_overlap_the_dimension_is_dropped(world):
     edit(world, "bughunt", unmatch_all_bug_hunt)
-    # GPT-5.6 Luna is ranked at max only through retention; without it E193 needs its near point, so this world defers it.
+    # GPT-5.6 Luna and GPT-6 Astra are ranked at max for their exact DeepSWE and Bug Hunt results (O30); without Bug Hunt
+    # E193 needs their near points, so this world defers them.
     edit(world, "inventory", defer_near_family("GPT-5.6 Luna"))
+    edit(world, "inventory", defer_near_family("GPT-6 Astra"))
     run_main(world)
     out = outputs(world)
     scores = out["scores.json"]
@@ -1217,8 +1219,33 @@ def test_a_near_family_must_rank_its_near_point_unless_retained(world):
     """E193: a near family without retention ranks its smallest-gap near point, not another tracked configuration."""
 
     add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="synthetic-gpt-5-5")
-    with pytest.raises(ValueError, match=r"smallest-gap near point or a retained configuration \(E193\): GPT-5.5"):
+    with pytest.raises(ValueError, match=r"without exact DeepSWE and Bug Hunt results must rank its smallest-gap near point \(E193\): GPT-5.5"):
         run_main(world)
+
+
+def test_a_near_family_must_rank_its_configuration_with_exact_deepswe_and_bug_hunt(world):
+    """O30: GPT-6 Astra has exact DeepSWE and Bug Hunt results at max, so tracking its xhigh near point fails the build."""
+
+    edit(world, "aa", lambda d: d["models"]["gpt-6-astra"].update(
+        aaUrl=AA_URL + "gpt-6-astra-xhigh", aaSlug="gpt-6-astra-xhigh", aaVariant="xhigh"))
+    with pytest.raises(ValueError, match=r"exact DeepSWE and Bug Hunt results \(O30\): GPT-6 Astra at max"):
+        run_main(world)
+
+
+def test_evidenced_effort_needs_both_results_at_one_effort():
+    model = {"displayName": "GPT-6 Astra", "aaShortName": "GPT-6 Astra (max)"}
+    deepswe = [{"model": "GPT-6 Astra", "effort": "max"}, {"model": "Other", "effort": "high"}]
+    assert build_scores.evidenced_effort(model, deepswe, {"matched": True, "effort": "max"}) == "max"
+    assert build_scores.evidenced_effort(model, deepswe, {"matched": True, "effort": "high"}) is None
+    assert build_scores.evidenced_effort(model, deepswe, {"matched": False, "effort": "max"}) is None
+    assert build_scores.evidenced_effort(model, deepswe, None) is None
+
+
+def test_a_bug_hunt_result_at_another_effort_is_not_used():
+    record = {"matched": True, "effort": "max", "fixedOf105": 45.0}
+    assert build_scores.exact_bug_hunt("gpt-6-astra", "max", record) is record
+    moved = build_scores.exact_bug_hunt("gpt-6-astra", "xhigh", record)
+    assert moved["matched"] is False and moved["matchStatus"] == "effort_mismatch" and "No result is transferred" in moved["note"]
 
 
 def test_deferred_near_family_counts_but_adds_no_ranked_model(world):

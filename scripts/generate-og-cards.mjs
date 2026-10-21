@@ -118,8 +118,8 @@ const CORE_PAGES = [
     key: "index",
     path: "/",
     kicker: "Overview",
-    headline: "Which AI model delivers the most value?",
-    description: "Frontier models ranked on measured quality against API and plan cost.",
+    headline: "Which AI model delivers the most value for software engineering and DevOps?",
+    description: "Frontier models ranked for software engineering and DevOps work: measured quality against API and plan cost.",
     stats({ rankings }) {
       const pick = rankings.models.find((model) => model.slug === rankings.picks.plan.value.slug);
       return [

@@ -131,7 +131,7 @@ def model_inclusion_markdown(inclusion, level="##"):
         lines += ["", "Frontier families and the configuration selected for each:", ""]
         lines += [f"- {item['family']}: {item['configuration']}" for item in inclusion["frontierFamilies"]]
     if inclusion["nearFrontierFamilies"]:
-        lines += ["", "Near-frontier families and the configuration selected for each:", ""]
+        lines += ["", "Near-frontier families and each family's near point closest to the frontier (a family is ranked at its configuration with exact DeepSWE and Bug Hunt results when it has one, O30, so the ranked configuration can differ):", ""]
         lines += [
             f"- {item['family']}: {item['configuration']}, {item['gap']} Index point{'' if item['gap'] == '1' else 's'} below the frontier"
             for item in inclusion["nearFrontierFamilies"]
@@ -289,6 +289,8 @@ def interval_sentences(facts):
                 text += f" Cheapest at or above {reference}: {facts.label(bar['confirmedCheapest'])} (confirmed)."
             else:
                 text += f" Cheapest at or above {reference}: not unique; possibly {facts.labels(bar['possibleCheapest'])}."
+            if bar["status"] == "certified":
+                text += f" (Bar comparison: {bar['comparison']}.)"
         sentences.append(text)
     return sentences
 
@@ -359,7 +361,7 @@ def readme(facts):
     legend = "\n".join(f"- **{word}**: {text}." for word, text in FLAG_LEGEND)
     intervals = "\n".join(f"- {sentence}" for sentence in interval_sentences(facts))
     return f"""# ValueRank
-**Frontier AI configurations ranked by value: benchmark quality against what the work costs**
+**Frontier AI configurations ranked by value for software engineering and DevOps: benchmark quality against what the work costs**
 
 **Version:** {VERSION}
 **Updated:** {DATE}
@@ -368,7 +370,7 @@ def readme(facts):
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software-development work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
 
 {leaders(facts)}
 
@@ -781,8 +783,9 @@ def interval_block(facts, result, label, workload_label):
         text += f"\n\n**{label} basis, {workload_label}: cheapest at or above {reference}** ({bar['reference']['rule']}). Status {bar['status']}"
         if bar["status"] == "certified":
             text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
-            bar_rows = [[facts.label(row_id), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
-            text += markdown_table(["Configuration", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows)
+            text += f"Bar comparison: {bar['comparison']}. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).\n\n"
+            bar_rows = [[facts.label(row_id), fnum(item["displayedMargin"], 1), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
+            text += markdown_table(["Configuration", "Displayed quality − bar", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows, numeric={1})
         else:
             text += "."
     return text
@@ -829,7 +832,7 @@ def scenario_tables(facts):
                 ", ".join(f"{code} {outcome['status']}" for code, outcome in result["assignments"].items()), "yes" if result["label"] else "no",
             ])
     if labels:
-        parts.append("### Cheapest-above-the-bar labels (API basis)\n\nEach kernel assignment code gives the kernel used for the candidate and the competitors, in that order (U uniform, H endpoint-heavy; a quality-level bar has no reference rows, so it takes no letter); the label needs every assignment met.\n\n"
+        parts.append("### Cheapest-above-the-bar labels (API basis)\n\nThe 90% rule's error bound holds per published event (candidate and kernel assignment); it is not corrected across the listed candidates (E198). Each kernel assignment code gives the kernel used for the candidate and the competitors, in that order (U uniform, H endpoint-heavy; a quality-level bar has no reference rows, so it takes no letter); the label needs every assignment met.\n\n"
                      + markdown_table(["Bar", "Candidate", "Reading", "Frequency range", "Kernel assignments", "Label"], labels))
     return "\n\n".join(parts)
 

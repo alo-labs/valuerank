@@ -747,6 +747,8 @@ def index_page(bundle: Bundle) -> dict:
         headline[basis] = f"{lead} and also leads on quality." if value is quality else f"{lead}; {quality['name']} leads on quality."
     return {
         "headline": headline,
+        # ValueRank's scope: the software-engineering share of quality and its leaves, stated on the home page.
+        "focus": {"swePct": q.GROUPS["swe"], "sweLeaves": [leaf.label for leaf in q.LEAVES if leaf.group == "swe"]},
         "picks": rankings["picks"],
         "models": [
             {

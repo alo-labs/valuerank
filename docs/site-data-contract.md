@@ -6,7 +6,7 @@ All numbers are JSON numbers or `null`; no value is ever filled in. Identifiers 
 
 ## Evidence grades
 
-Every value that reaches a page carries a grade. One enum, rendered by one component (`badge`):
+Every value that reaches a page carries a grade. One enum, rendered by one component (`badge`). The `measured` badge reads "User-measured". Tables have no Evidence column: grades are footnoted (see "Evidence footnotes" below).
 
 | Grade | Meaning | Examples |
 |---|---|---|
@@ -130,7 +130,7 @@ site = {"version", "publishDate", "observedAt", "nav": [{"label", "href", "key"}
 | Template | `page` keys |
 |---|---|
 | `index.html` | `headline` (one sentence per basis of at most 18 words, leading with the model name: `{"plan": "…", "api": "…"}`), `picks`, `models` (ranked 16, compact fields including `coverage`), `dimensions`, `chart`, `rankingsJson` (embedded as `rankings-data`) |
-| `rankings.html` | `rankingsJson`, `nearFrontierGap` (string, from `modelInclusion`), `providers` (sorted developers), `grades`, `columns` (`[{key, label, sortable, default}]`; keys are the script catalogue: `rank`, `name`, `overall`, `quality`, `cost`, `grade`, `coverage`, `developer`, `qualityRank`, `speed`, `ii`, then one per non-cost dimension) |
+| `rankings.html` | `rankingsJson`, `nearFrontierGap` (string, from `modelInclusion`), `providers` (sorted developers), `grades`, `columns` (`[{key, label, sortable, default}]`; keys are the script catalogue: `rank`, `name`, `overall`, `quality`, `cost`, `grade`, `coverage`, `developer`, `qualityRank`, `speed`, `ii`, then one per non-cost dimension; `grade` is data only: it stays in the view state, URL, sort and CSV/JSON export but is never drawn as a column or offered in the column picker) |
 | `models.html` | `models` (all 28 roster models, ranked first: `slug`, `name`, `developer`, `rank`, `overall`, `grade`, `rankingEligible`, `coveragePct`), `rankedCount`, `unrankedCount` |
 | `model.html` | the model JSON above plus `related` (same developer) |
 | `plans.html` | `plansJson`, `workedExample: {models: [{slug, name, routeLabel, planFeeUsd, valueMultiple, grade, evidenceLabel, indexValue, apiUsd, planUsdPerRun, planUsdPerPoint}]}`, `routesByProvider` |
@@ -193,6 +193,7 @@ Every boot calls `initApp` (theme, menu, FAQ).
 - Answer page: `#index-body`, `[data-pick]` with `[data-pick-name]` (the link), `[data-pick-score]`, `[data-pick-reason]`.
 - Rankings: `form#filters` (`input[name=q|provider|grade|cov]`, radios `name=route`; no provider or grade selected means no filter), `[data-action="reset-filters"]` (any number), `#filter-cov-value`, `#column-picker-list` (filled by the script), `#rankings-head` and `#rankings-body` (filled by the script; the server renders a skeleton header and a `[data-state="loading"]` row), `#rankings-count`, `#rankings-empty`, `#rankings-error`, `#compare-drawer` / `#compare-body` / `#compare-clear`, `#export-csv` / `#export-json` (anchors; the script sets a blob `href` and `download` on click), `[data-share]`.
 - Table cells carry `data-col` (the column key; the model column is `name`, rendered as a row header) and `data-label`. Rows carry `data-slug`; compare checkboxes carry `data-compare="<slug>"`.
+- Evidence footnotes: no table has an Evidence column. A row whose evidence is described carries `sup.fn-ref > a` after its name (`href="#ev-<id>"`, `id="evref-<id>"`, text = the note number, numbered through the page). Every page with such tables ends with `section#evidence-notes` (heading "Evidence") holding `ol.footnotes` of `li.fn-item#ev-<id>` entries: the badge, the row's explanation or source, and an `a.fn-back` link to the marker. Ranked-model rows use the slug as `<id>`; the scripts refill `#index-evidence` (answer page) and `#rankings-evidence` (rankings) with the rows they draw, in the same order, on every render.
 - Charts: `[data-chart="<key>"]` containers inside `[data-chart-panel="<key>"]`, tabs `[data-chart-tab="<key>"]`, and a `[data-chart-summary]` element in the same panel. Keys: `pareto`, `decomposition`, `displacement`, `frontier2`, `bubble`, `heatmap` (rankings), `heatmapData`, `livebenchPareto` (benchmarks), `bump` (changelog), `tb4`. Panels hide through `hidden`; `data-chart-status` becomes `ready`, `empty` or `error`.
 
 ### Events

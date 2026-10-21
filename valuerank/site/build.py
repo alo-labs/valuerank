@@ -191,8 +191,8 @@ def pages(bundle) -> list[tuple[str, str, dict]]:
     n = sum(1 for model in bundle.rankings["models"] if model["rankingEligible"])
     catalogue = [
         ("/", "index.html", viewmodel.index_page(bundle), "index",
-         f"ValueRank {version}: which AI model delivers the most value",
-         f"{n} frontier models ranked on measured quality against API and subscription-plan cost, with every number traced to its source."),
+         f"ValueRank {version}: which AI model delivers the most value for software engineering and DevOps",
+         f"{n} frontier models ranked for software engineering and DevOps work: measured coding, debugging and terminal quality against API and subscription-plan cost, with every number traced to its source."),
         ("/rankings/", "rankings.html", viewmodel.rankings_page(bundle), "rankings",
          f"Rankings · ValueRank {version}",
          "Filter, sort, compare and export the full ValueRank table; every view has a shareable URL."),
