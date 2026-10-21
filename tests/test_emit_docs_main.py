@@ -131,8 +131,8 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert rows[-1][2] == rows[-1][6] == "—"
     assert len(table_rows(text, "| Model | Reasons")) == 17  # 12 outside the cohort, 5 listed for incomplete benchmarks (O36)
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
-    assert "Plan streams S1, S2, S1 endpoint-heavy and S1M run with owner-named transfers off (E167): Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (max)," in text
-    assert "| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — |" in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (max)," in text
+    assert "| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — | — |" in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
     assert "| quality 55.3 | GPT-6.1 Sol (medium) | supported under all registered role-group kernel checks | 100.0% to 100.0% |" in text

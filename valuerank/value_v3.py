@@ -60,7 +60,24 @@ FRACTION_LEAVES = {
 CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (labels rounded to USD 1)" for slug in basket.CHART_COMPONENTS}
 DEFAULT_TB_HARNESS = "mini-SWE-agent"  # E125/O37: AA's Terminal-Bench harness; a leaf on any other agent is a gap fill
 SCENARIO_COUNT = 10_000
-SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False))
+SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False), ("S1T", False))
+SAMPLING_STREAM = "S1T"  # O39: benchmark sampling noise, independent-task approximation (never a label)
+# O39: each leaf's sampling unit, the published task count of the run the leaf reads (AA's evaluation pages and
+# methodology; the Coding Agent Index's DeepSWE count; FrontierCode 1.1 Main's 100 tasks; Bug Hunt's 105 planted bugs).
+SAMPLING_TASKS = {
+    "deepswe": basket.CODING_AGENT_TASKS["deep-swe-v1.1"], "frontierCode": 100, "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-0"],
+    "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": basket.INDEX_SDLC_TASKS["artificial-analysis-long-context-reasoning"],
+    "scicode": basket.INDEX_SDLC_TASKS["scicode"], "hle": basket.INDEX_RESIDUAL_TASKS["humanitys-last-exam"], "critpt": basket.INDEX_RESIDUAL_TASKS["critpt"],
+    "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
+}
+# O39: GDPval-AA is a fitted Elo with no task-level outcome; AA displays a rating interval (e.g. -26/+26 for Claude
+# Opus 5.5 on 2026-10-20) without its level, so the stream reads it as a 95% normal interval: an assumption, labelled.
+GDPVAL_RATING_SD = 26.0 / 1.96
+SAMPLING_ASSUMPTIONS = (
+    "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
+    "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
+    "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
+)
 MEASUREMENT_STREAM = "S1M"  # E162/E165: S1 plus conventional range sensitivity inside published 95% intervals (Terminal-Bench today)
 # E165: Terminal-Bench documents a 95% confidence interval (its leaderboard whiskers; accuracy_ci95_half_width with
 # n_trials) but not its estimand, method or sampling unit, so S1M's draws inside it are a conventional sensitivity.
@@ -1052,6 +1069,35 @@ def gap_fill_sensitivity(rows: list[dict], per_row: dict) -> dict:
             "rows": filled, "bases": bases}
 
 
+def gap_fill_bars(assembled: dict, frozen: dict, offset: float | None) -> dict:
+    """E234 (as extended after I25): the displayed-record cheapest row at each frozen bar on both bases with the gap
+    fills as published, removed (the rest renormalised), and with each third-party fill lowered by the measured mean
+    offset; a sensitivity that changes no score and no label."""
+
+    def variants(row: dict) -> dict:
+        observations, filled = row["evidence"]["observations"], gap_filled_leaves(row)
+        third_party = [key for key in filled if row["evidence"]["provenance"][key].get("sourceType") == "independent"]
+        lowered = {**observations, **{key: q.Observation(max(0.0, observations[key].z - (offset or 0.0))) for key in third_party}}
+        return {"published": row["summary"].displayed, "removed": deletion_quality(observations, set(filled)), "lowered": q.summarize(lowered).displayed}
+
+    rows = [row for row in assembled["rows"] if row["cost"]["workload"] == assembled["mainWorkload"] and not row["summary"].provisional]
+    quality = {row["id"]: variants(row) for row in rows}
+    result = {"meanOffset": offset, "bases": {}}
+    for basis in BASES:
+        costs = {row["id"]: _basis_cost(row, basis) for row in rows if _basis_cost(row, basis) is not None}
+        bars = []
+        for bar in frozen["barReferences"]:
+            entry = {"bar": bar["id"], "level": bar["level"]}
+            for variant in ("published", "removed", "lowered"):
+                qualifying = [row_id for row_id in costs if quality[row_id][variant] >= bar["level"]]
+                low = min((costs[row_id] for row_id in qualifying), default=None)
+                entry[variant] = sorted(row_id for row_id in qualifying if costs[row_id] == low)
+            entry["survives"] = entry["published"] == entry["removed"] == entry["lowered"]
+            bars.append(entry)
+        result["bases"][basis] = bars
+    return result
+
+
 def frontiercode_cross_source(rows: list[dict], cognition: dict) -> dict:
     """E234: AA's FrontierCode against Cognition's main score for the same name and effort, where both exist."""
 
@@ -1541,9 +1587,11 @@ def score(assembled: dict, frozen: dict) -> dict:
         "subsetIntervals": subset_interval_outputs(assembled, frozen),
         "measuredOnlyPlanView": measured,
         "diagnostics": {
+            "rankSeparability": rank_separability(assembled, per_row),
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
             "frontierCodeCrossSource": frontiercode_cross_source(rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
+            "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(rows, assembled["cognition"])["meanOffset"]),
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
             "omniscienceAbstentionSensitivity": _abstention_sensitivity(rows, per_row),
             "gdpvalLogisticSensitivity": _gdpval_logistic_sensitivity(rows, per_row),
@@ -1986,12 +2034,55 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
 
 # E155: uncertainty outside every v1 stream, printed beside the scenario outputs.
 NOT_QUANTIFIED = (
-    "benchmark repeatability beyond the conventional Terminal-Bench interval-range sensitivity in S1M (other published intervals, run-to-run ranges): not quantified in v1 scenario shares",
-    "fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares",
+    "benchmark repeatability beyond S1T's independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares",
+    "fitted-parameter uncertainty beyond S1T's assumed GDPval-AA rating interval: not quantified in v1 scenario shares",
 )
 
 # E147: the registered kernel-check object for v1 (multiples and price lists are fixed inputs, not drawn).
 REGISTERED_DEPENDENCY = "every row its own dependency component: no shared varying primitive in v1 streams"
+
+
+def sampling_sd(key: str, observation: q.Observation, source: dict) -> float:
+    """O39: the plug-in standard error of one leaf's z score under the independent-task approximation."""
+
+    z = observation.z
+    if key == "gdpval":
+        return GDPVAL_RATING_SD * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
+    tasks = SAMPLING_TASKS[key]
+    if key == "omniscience" and source.get("accuracy") is not None and source.get("hallucinationRate") is not None:
+        correct = source["accuracy"]
+        wrong = source["hallucinationRate"] * (1.0 - correct)
+        index_sd = 100.0 * math.sqrt(max(0.0, correct + wrong - (correct - wrong) ** 2) / tasks)
+        return index_sd / 2.0  # O28: z = (I + 100) / 2
+    p = min(1.0, max(0.0, z / 100.0))
+    return 100.0 * math.sqrt(p * (1.0 - p) / tasks)
+
+
+def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scenarios.Kernel:
+    """O39: the task-sampling kernel of one leaf, clipped to the 0-100 score domain."""
+
+    derivation = scenarios.ANALYST_CONVENTION if key == "gdpval" else scenarios.PUBLISHED_PRECISION
+    return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, 100.0), None, scenarios.TASK_SAMPLING, derivation)
+
+
+def rank_separability(assembled: dict, per_row: dict) -> dict:
+    """O39: how far apart two values must be to separate under the task-sampling approximation, and how many
+    adjacent ranks are separable, per basis (a diagnostic beside the ranks; scores and labels unchanged)."""
+
+    sd = {}
+    for row in assembled["rows"]:
+        observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
+        variance = sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {})) ** 2 for key, value in observations.items())
+        sd[row["id"]] = (1.0 - BETA) * math.sqrt(variance)
+    result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "valueSd": sd}
+    for basis in BASES:
+        ranked = sorted((per_row[row_id][basis]["value"], row_id) for row_id in sd if per_row[row_id][basis]["value"] is not None)
+        ranked.reverse()
+        thresholds = [1.96 * math.hypot(sd[first], sd[second]) for (_, first), (_, second) in zip(ranked, ranked[1:])]
+        separable = sum(first - second >= threshold for ((first, _), (second, _)), threshold in zip(zip(ranked, ranked[1:]), thresholds))
+        result[basis] = {"adjacentPairs": len(thresholds), "separableAdjacentPairs": separable,
+                         "medianSeparation": statistics.median(thresholds) if thresholds else None}
+    return result
 
 
 def _kernel(low: float, high: float, point: float) -> scenarios.Kernel:
@@ -2057,7 +2148,8 @@ def transfer_dependent(row: dict) -> bool:
     return row["plan"].get("grade") == "assumption"
 
 
-def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, transfers: bool = True, harness: float | None = None) -> list[scenarios.RowInputs]:
+def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, transfers: bool = True, harness: float | None = None,
+                   sampling: bool = False) -> list[scenarios.RowInputs]:
     """The declared panel for one basis (E96): rows with a cost on the main workload, in a fixed order.
 
     With ``measurement`` (the E162 stream), a leaf whose source documents a 95%
@@ -2077,6 +2169,8 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, tr
             continue
         observations = row["evidence"]["observations"]
         leaves = {key: _kernel(value.low, value.high, value.z) for key, value in observations.items()}
+        if sampling:  # O39: the S1T stream redraws every leaf with its task-sampling noise
+            leaves = {key: sampling_kernel(key, value, row["evidence"]["provenance"].get(key) or {}) for key, value in observations.items()}
         half = (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct")
         if measurement and half:
             z = observations["terminalBench"].z
@@ -2102,15 +2196,15 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
         "anchors": {basis: frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis] for basis in BASES},
         "harnessBand": harness_band(assembled["tb4Rows"])["width"],
         "panels": {
-            f"{basis}{'-measurement' if measurement else ''}{'' if transfers else '-transfers-off'}": [
+            f"{basis}{'-measurement' if measurement else ''}{'-sampling' if sampling else ''}{'' if transfers else '-transfers-off'}": [
                 {
                     "row": item.row, "provisional": item.provisional, "cost": [item.cost.family, list(item.cost.params)],
                     "leaves": {key: [kernel.family, list(kernel.params), kernel.target] for key, kernel in sorted(item.leaves.items())},
                 }
-                for item in scenario_panel(assembled, basis, measurement=measurement, transfers=transfers)
+                for item in scenario_panel(assembled, basis, measurement=measurement, transfers=transfers, sampling=sampling)
             ]
             for basis in BASES
-            for measurement in (False, True)
+            for measurement, sampling in ((False, False), (True, False), (False, True))
             for transfers in (True, False)
         },
     }
@@ -2173,7 +2267,7 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
         anchors = frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis]
         results[basis] = []
         for index, (stratum, alternative) in enumerate(SCENARIO_RUNS):
-            panel = scenario_panel(assembled, basis, measurement=stratum == MEASUREMENT_STREAM, transfers=transfers_on(stratum))
+            panel = scenario_panel(assembled, basis, measurement=stratum == MEASUREMENT_STREAM, transfers=transfers_on(stratum), sampling=stratum == SAMPLING_STREAM)
             run = scenarios.shares(panel, stratum, n, seed + index, anchors, BETA, alternative=alternative)
             if basis == "plan":
                 run["transfers"] = "on (the displayed record)" if transfers_on(stratum) else "off"

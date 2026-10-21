@@ -906,7 +906,7 @@ LIMITATIONS = (
     "Cost scores use frozen anchors; a new anchor version is a published migration, never a silent change.",
     "The basket is AA's SDLC-relevant evaluations at AA's token mix, not your own workload.",
     "Results are never transferred between model versions or reasoning efforts; missing evidence stays missing.",
-    "Published values are rounded; interval outputs and scenario shares show which differences the evidence supports, and benchmark run-to-run noise is not yet quantified.",
+    "Published values are rounded; interval outputs and scenario shares show which differences the evidence supports. Benchmark sampling noise is approximated in one scenario stream (S1T) that treats tasks as independent, so adjacent ranks often lie within that noise.",
 )
 EXPLORATORY_LIMITATION = "Subscription Value Multiples are measured on their own workloads; none is yet identified on the basket, so the Plan ranking is exploratory."
 

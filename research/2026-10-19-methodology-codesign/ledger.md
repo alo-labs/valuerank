@@ -1120,3 +1120,17 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (rejected): each Bug Hunt harness string already names the shim or API route (E227 and raw-data.md); no new argument for a separate flag.
 - Design 5 (rejected): E235 and E236 mark the inactive rules that matter for the published outputs; the Plan identification blocks are dormant by E61/E67, which the summary states.
 - Draft r84.
+
+## Internal review I25 (Claude Sonnet 5.5, effort low, on r84) — adopted, modified or rejected
+- Owner question 2 was put to the owner (task-sampling stream). Answer: "Add it, labelled". Recorded as O39 below. Owner question 1 (a revised article at the same URL) is answered editorially under M3.
+- M1 (adopted): every description of S1M now says it is dormant while no ranked leaf carries a published interval (E236); the Measurement layer bullet says no confidence interval enters any v1 stream today, and S1T is the stream that carries sampling noise.
+- M2 (adopted, extending E234): `value_v3.gap_fill_bars` names, for every frozen bar on both bases, the displayed-record cheapest row with the fills as published, removed and with third-party fills lowered by the mean offset. Today the headline and lower bars keep their rows; at the upper bar lowering Cognition's fills moves the cheapest row from GPT-6.1 Sol (high) to GPT-6.1 Sol (xhigh) on both bases. Labels never change.
+- M3 (adopted as a rule, modified): the selection is pinned by URL and by the figures transcribed at selection; a change to the article is a scoped change detection whose new measurements stay diagnostic until the owner re-selects, with the clock from the revision date. The article is not captured in the bundle, so no content hash is published.
+- L1 (adopted): the cost ratio is the point's total Index cost over the lowest rendered-frontier cost whose plotted (rounded) Index reaches it, as `frontier.frontier_gaps` computes.
+- L2 (adopted): the comparability records and cross-checks are the diagnostics.
+- L3 (rejected as stated, wording fixed): the harness band already uses every configuration on the captured leaderboard, cohort or not; none is listed under two agents, so it stays unevaluable.
+- Design 2: adopted by the owner as O39. Design 3 (rejected): E235 and E236 index the inactive rules that affect the published outputs; the Plan interval machinery is dormant by E61/E67, which the headline states.
+
+## Owner decision (2026-10-21, after internal review I25)
+- O39. Benchmark sampling noise. Asked whether to add a non-authorising task-sampling stream, the owner chose "Add it, labelled". Implemented as stream S1T: every observed leaf is redrawn from a normal with its plug-in binomial standard error from the published task count (DeepSWE 113, FrontierCode 1.1 Main 100 per AA's evaluation page, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs), AA-Omniscience from its 6,000 +1/0/−1 questions, and GDPval-AA from AA's displayed rating interval read as a 95% normal interval (SD 13.3 Elo, an assumption marked analyst-derived). Tasks are treated as independent ("independent-task approximation"). It never authorises a label or changes a score. A rank-separability diagnostic prints the median value gap two rows need to separate (today 3.34 API, 3.35 Plan) and how many adjacent ranks separate (0 of 30 on each basis); the README states it beside the ranking. AGENTS.md records O39.
+- Draft r85.

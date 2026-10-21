@@ -452,6 +452,15 @@
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 1.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0017,
+        "top3": 0.0414,
+        "frontier": 0.9623
       }
     ],
     "plan": [
@@ -495,6 +504,15 @@
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,

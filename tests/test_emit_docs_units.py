@@ -346,3 +346,17 @@ def test_gap_fill_and_incomplete_texts_without_rows():
     Facts.v3 = {"incompleteEvidence": [{"id": "x", "name": "X", "missing": ["bugHunt"]}]}
     Facts.scores = {"models": [{"id": "x", "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}]}
     assert ed.incomplete_text(Facts).endswith("(O36, O38): X (an AA frontier family; no Bug Hunt Bench).")
+
+
+def test_gap_fill_bars_text_says_whether_each_bar_survives():
+    """E234: the displayed-record cheapest row with fills as published, removed and lowered by the offset."""
+
+    class Facts:
+        labels = staticmethod(lambda row_ids: ", ".join(row_ids))
+
+    same = {"level": 55.3, "published": ["a"], "removed": ["a"], "lowered": ["a"], "survives": True}
+    flip = {"level": 59.6, "published": ["a"], "removed": [], "lowered": ["b"], "survives": False}
+    text = ed.gap_fill_bars_text({"meanOffset": 2.53, "bases": {"api": [same], "plan": [flip]}}, Facts)
+    assert "lowered by the mean offset 2.5 points" in text and "API quality 55.3: a in all three" in text
+    assert text.endswith("Plan quality 59.6: a as published, none with the fills removed, b with third-party fills lowered by the offset.")
+    assert "no measured offset" in ed.gap_fill_bars_text({"meanOffset": None, "bases": {"api": [], "plan": []}}, Facts)

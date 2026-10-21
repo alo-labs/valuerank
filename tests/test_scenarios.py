@@ -29,10 +29,15 @@ def test_kernels_draw_their_families():
     assert 10.0 <= Kernel("uniform", (10.0, 20.0)).draw(rng, use_alternative=True) <= 20.0
     runs = Kernel("runs", (40.0, 50.0, 60.0), target="expected performance").draw(rng)
     assert 40.0 <= runs <= 60.0
-    with pytest.raises(ValueError, match="unknown kernel family: normal"):
-        Kernel("normal", (0, 1)).draw(rng)
+    with pytest.raises(ValueError, match="unknown kernel family: gamma"):
+        Kernel("gamma", (0, 1)).draw(rng)
     with pytest.raises(ValueError, match="never reporting precision"):
         Kernel("runs", (40.0, 50.0))
+    # O39: the task-sampling kernel is a normal clipped to the score domain, never a reporting-precision kernel.
+    with pytest.raises(ValueError, match="a normal kernel concerns sampling noise"):
+        Kernel("normal", (50.0, 5.0, 0.0, 100.0))
+    sampled = [Kernel("normal", (99.0, 5.0, 0.0, 100.0), target="task sampling (independent-task approximation)").draw(rng) for _ in range(200)]
+    assert max(sampled) == 100.0 and min(sampled) < 99.0
     summed = Kernel("uniform-sum", (100.0, (9.5, 10.5), (19.5, 20.5)), "endpoint-heavy")
     for heavy in (False, True):
         assert 129.0 <= summed.draw(rng, use_alternative=heavy) <= 131.0
@@ -383,6 +388,8 @@ def test_release_text_lint_rejects_interval_and_run_claims_without_an_admitting_
     ]
     assert sc.lint_release_text("S2 draws benchmark run-to-run ranges; nothing else changes.") == ["S2 draws benchmark run-to-run ranges;"]
     assert sc.lint_release_text("S1M draws run values inside the published interval.") == ["S1M draws run values inside the published interval."]
+    # O39: run-to-run noise may enter S1T, the stream whose allowlist admits task sampling.
+    assert sc.lint_release_text("S1T draws benchmark run-to-run noise from task counts.") == []
     passing = (
         "S1M draws inside the published 95% confidence interval. "
         "Other published intervals and run-to-run ranges are not quantified in v1 scenario shares. "

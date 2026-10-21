@@ -362,6 +362,15 @@
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0011
       }
     ],
     "plan": [
@@ -405,6 +414,15 @@
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,

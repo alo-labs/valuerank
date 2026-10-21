@@ -1,17 +1,18 @@
 {
   "schemaVersion": 1,
-  "inputHash": "8be36ab0af157f81445ab38e42426ca995a83667f02e64b21958c0ed2e191e59",
+  "inputHash": "b1fc400a07fcfff6203935749731bb79ce08b24532e35329409e9e840cc96632",
   "seed": 20261021,
   "scenarios": 10000,
   "streamDescriptions": {
     "S0": "published-record reporting precision",
     "S1": "published-record reporting precision + conventional identification of missing leaves",
     "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-    "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)"
+    "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+    "S1T": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
   },
   "notQuantified": [
-    "benchmark repeatability beyond the conventional Terminal-Bench interval-range sensitivity in S1M (other published intervals, run-to-run ranges): not quantified in v1 scenario shares",
-    "fitted-parameter uncertainty (e.g. Elo rating intervals): not quantified in v1 scenario shares"
+    "benchmark repeatability beyond S1T's independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares",
+    "fitted-parameter uncertainty beyond S1T's assumed GDPval-AA rating interval: not quantified in v1 scenario shares"
   ],
   "intervalInterpretation": {
     "S1M": [
@@ -4084,6 +4085,815 @@
           }
         },
         "pairwise": []
+      },
+      {
+        "stratum": "S1T",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision",
+          "task sampling (independent-task approximation)"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "task sampling (independent-task approximation)"
+        ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under task-sampling draws (independent-task approximation)",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
+        "scenarios": 10000,
+        "seed": 20261026,
+        "alternative": false,
+        "panel": [
+          "claude-fable-5-1",
+          "claude-haiku-5-5",
+          "claude-haiku-5-5-high",
+          "claude-haiku-5-5-low",
+          "claude-haiku-5-5-max",
+          "claude-haiku-5-5-medium",
+          "claude-opus-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "claude-sonnet-5-5-high",
+          "claude-sonnet-5-5-low",
+          "claude-sonnet-5-5-medium",
+          "claude-sonnet-5-5-xhigh",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-astra",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol",
+          "gpt-6.1-sol-high",
+          "gpt-6.1-sol-low",
+          "gpt-6.1-sol-medium",
+          "gpt-6.1-sol-xhigh",
+          "grok-4.7",
+          "muse-spark-1-3",
+          "qwen3.8-max"
+        ],
+        "panelSize": 30,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.0339,
+              "monteCarloSe": 0.0018097179338228374
+            },
+            "top1": {
+              "share": 0.0005,
+              "monteCarloSe": 0.0002235508890610816
+            },
+            "frontier": {
+              "share": 0.8532,
+              "monteCarloSe": 0.0035390642831121337
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.260187297230794,
+              "valueSd": 1.1225806417495332,
+              "costTerm": 0.0,
+              "qualityTerm": 1.260187297230794,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-xhigh": {
+            "top3": {
+              "share": 0.924,
+              "monteCarloSe": 0.002649981132008301
+            },
+            "top1": {
+              "share": 0.4801,
+              "monteCarloSe": 0.004996038330517491
+            },
+            "frontier": {
+              "share": 0.7743,
+              "monteCarloSe": 0.004180424739186199
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.410970460232583,
+              "valueSd": 1.187842775889378,
+              "costTerm": 0.0,
+              "qualityTerm": 1.410970460232583,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-sonnet-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.4754,
+              "monteCarloSe": 0.0049939447333746095
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4281103524403984,
+              "valueSd": 1.1950357117845467,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4281103524403984,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 0.3431,
+              "monteCarloSe": 0.004747445523647428
+            },
+            "top1": {
+              "share": 0.0432,
+              "monteCarloSe": 0.0020330705841165478
+            },
+            "frontier": {
+              "share": 0.3784,
+              "monteCarloSe": 0.004849880823278032
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.5349868995088065,
+              "valueSd": 1.2389458823971313,
+              "costTerm": 0.0,
+              "qualityTerm": 1.5349868995088065,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-high": {
+            "top3": {
+              "share": 0.7598,
+              "monteCarloSe": 0.0042720482207016346
+            },
+            "top1": {
+              "share": 0.1953,
+              "monteCarloSe": 0.0039643146948747645
+            },
+            "frontier": {
+              "share": 0.6719,
+              "monteCarloSe": 0.004695214478594135
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.479642542027151,
+              "valueSd": 1.2164055828658265,
+              "costTerm": 0.0,
+              "qualityTerm": 1.479642542027151,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-medium": {
+            "top3": {
+              "share": 0.8413,
+              "monteCarloSe": 0.003653961001433923
+            },
+            "top1": {
+              "share": 0.2768,
+              "monteCarloSe": 0.004474167632085324
+            },
+            "frontier": {
+              "share": 0.9954,
+              "monteCarloSe": 0.0006766712643522
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4088276237548432,
+              "valueSd": 1.1869404465915057,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4088276237548432,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.1991,
+              "monteCarloSe": 0.003993234152914152
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4994271044920928,
+              "valueSd": 1.2245109654437942,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4994271044920928,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-astra": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0393,
+              "monteCarloSe": 0.0019430777133197736
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.5106229841693168,
+              "valueSd": 1.2290740352677363,
+              "costTerm": 0.0,
+              "qualityTerm": 1.5106229841693168,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-5.6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0016,
+              "monteCarloSe": 0.0003996798718974975
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.424104861490235,
+              "valueSd": 1.1933586474695002,
+              "costTerm": 0.0,
+              "qualityTerm": 1.424104861490235,
+              "covarianceTerm": 0.0
+            }
+          },
+          "muse-spark-1-3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0011,
+              "monteCarloSe": 0.00033148001448051134
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.3698440107190335,
+              "valueSd": 1.1704033538567093,
+              "costTerm": 0.0,
+              "qualityTerm": 1.3698440107190335,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-sonnet-5-5-xhigh": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0703,
+              "monteCarloSe": 0.002556519313441618
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.5086713815041555,
+              "valueSd": 1.228279846575753,
+              "costTerm": 0.0,
+              "qualityTerm": 1.5086713815041555,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-sol": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0023,
+              "monteCarloSe": 0.0004790313142165134
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4516277798901411,
+              "valueSd": 1.2048351671038413,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4516277798901411,
+              "covarianceTerm": 0.0
+            }
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.341872186114816,
+              "valueSd": 1.1583920692558354,
+              "costTerm": 0.0,
+              "qualityTerm": 1.341872186114816,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-fable-5-1": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0015,
+              "monteCarloSe": 0.0003870077518603471
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.583382983484409,
+              "valueSd": 1.2583254680266187,
+              "costTerm": 0.0,
+              "qualityTerm": 1.583382983484409,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-low": {
+            "top3": {
+              "share": 0.0414,
+              "monteCarloSe": 0.001992135537557623
+            },
+            "top1": {
+              "share": 0.0017,
+              "monteCarloSe": 0.00041195994950965806
+            },
+            "frontier": {
+              "share": 0.9623,
+              "monteCarloSe": 0.0019046970887781594
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.459090100515602,
+              "valueSd": 1.2079280195920625,
+              "costTerm": 0.0,
+              "qualityTerm": 1.459090100515602,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-sonnet-5-5-high": {
+            "top3": {
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0009,
+              "monteCarloSe": 0.0002998649696113236
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.508976140372172,
+              "valueSd": 1.228403899526606,
+              "costTerm": 0.0,
+              "qualityTerm": 1.508976140372172,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-5.6-luna": {
+            "top3": {
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6892,
+              "monteCarloSe": 0.004628210885428623
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.3821613837623925,
+              "valueSd": 1.1756535985409957,
+              "costTerm": 0.0,
+              "qualityTerm": 1.3821613837623925,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0561,
+              "monteCarloSe": 0.002301147322532827
+            },
+            "top1": {
+              "share": 0.0024,
+              "monteCarloSe": 0.0004893097178679368
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.3941380541845698,
+              "valueSd": 1.1807362339593759,
+              "costTerm": 0.0,
+              "qualityTerm": 1.3941380541845698,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-haiku-5-5-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.523496055120724,
+              "valueSd": 1.234299823835653,
+              "costTerm": 0.0,
+              "qualityTerm": 1.523496055120724,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-haiku-5-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0618,
+              "monteCarloSe": 0.0024079194338681685
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.5813943599462736,
+              "valueSd": 1.2575350332878499,
+              "costTerm": 0.0,
+              "qualityTerm": 1.5813943599462736,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4063569546797712,
+              "valueSd": 1.1858992177583099,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4063569546797712,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-sonnet-5-5-medium": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4569816721175,
+              "valueSd": 1.207054958200951,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4569816721175,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.5860111736936116,
+              "valueSd": 1.25936935554809,
+              "costTerm": 0.0,
+              "qualityTerm": 1.5860111736936116,
+              "covarianceTerm": 0.0
+            }
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.529520326957485,
+              "valueSd": 1.2367377761504195,
+              "costTerm": 0.0,
+              "qualityTerm": 1.529520326957485,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-haiku-5-5-high": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0014,
+              "monteCarloSe": 0.0003739037309254884
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.491373777813957,
+              "valueSd": 1.2212181532445205,
+              "costTerm": 0.0,
+              "qualityTerm": 1.491373777813957,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-haiku-5-5-medium": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.9576,
+              "monteCarloSe": 0.002014999751861027
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4869087496492963,
+              "valueSd": 1.2193886786620975,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4869087496492963,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-haiku-5-5-low": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4170872882630379,
+              "valueSd": 1.1904147547233435,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4170872882630379,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-sonnet-5-5-low": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.3977061983337304,
+              "valueSd": 1.182246251139639,
+              "costTerm": 0.0,
+              "qualityTerm": 1.3977061983337304,
+              "covarianceTerm": 0.0
+            }
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.6581200365199191,
+              "valueSd": 1.2876800986735484,
+              "costTerm": 0.0,
+              "qualityTerm": 1.6581200365199191,
+              "covarianceTerm": 0.0
+            }
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4592165904847214,
+              "valueSd": 1.207980376696874,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4592165904847214,
+              "covarianceTerm": 0.0
+            }
+          }
+        },
+        "pairwise": []
       }
     ],
     "plan": [
@@ -6385,6 +7195,400 @@
               "valueSd": 0.0020666723562648513,
               "costTerm": 0.0,
               "qualityTerm": 4.271134628149313e-06,
+              "covarianceTerm": 0.0
+            }
+          }
+        },
+        "pairwise": [],
+        "transfers": "off",
+        "excluded": [
+          {
+            "row": "claude-haiku-5-5",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-high",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-low",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-max",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-medium",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-opus-5",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-sonnet-5-5",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-sonnet-5-5-high",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-sonnet-5-5-low",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-sonnet-5-5-medium",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-sonnet-5-5-xhigh",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-5.6-luna",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-5.6-sol",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-sol",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-sol-high",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-sol-low",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-sol-medium",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-sol-xhigh",
+            "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+          }
+        ]
+      },
+      {
+        "stratum": "S1T",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision",
+          "task sampling (independent-task approximation)"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "task sampling (independent-task approximation)"
+        ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under task-sampling draws (independent-task approximation)",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
+        "scenarios": 10000,
+        "seed": 20261026,
+        "alternative": false,
+        "panel": [
+          "claude-fable-5-1",
+          "claude-opus-5-5",
+          "deepseek-v4-pro",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "glm-5.3",
+          "gpt-6-astra",
+          "gpt-6.1-sol",
+          "grok-4.7",
+          "muse-spark-1-3",
+          "qwen3.8-max"
+        ],
+        "panelSize": 11,
+        "rows": {
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.171,
+              "monteCarloSe": 0.0037650896403671453
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6113,
+              "monteCarloSe": 0.004874549312500593
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.2725301690348896,
+              "valueSd": 1.128064789378203,
+              "costTerm": 0.0,
+              "qualityTerm": 1.2725301690348896,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.2811,
+              "monteCarloSe": 0.004495361943158749
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4548494505674319,
+              "valueSd": 1.2061714018195888,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4548494505674319,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5": {
+            "top3": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.7188,
+              "monteCarloSe": 0.004495848751904361
+            },
+            "frontier": {
+              "share": 0.8689,
+              "monteCarloSe": 0.0033750968874981945
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4619074536196577,
+              "valueSd": 1.209093649648222,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4619074536196577,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-astra": {
+            "top3": {
+              "share": 0.6718,
+              "monteCarloSe": 0.004695580475298023
+            },
+            "top1": {
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
+            },
+            "frontier": {
+              "share": 0.0958,
+              "monteCarloSe": 0.0029431676812577295
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4952140090613388,
+              "valueSd": 1.2227894377452477,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4952140090613388,
+              "covarianceTerm": 0.0
+            }
+          },
+          "muse-spark-1-3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4264166322770644,
+              "valueSd": 1.1943268532010256,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4264166322770644,
+              "covarianceTerm": 0.0
+            }
+          },
+          "grok-4.7": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.353015367918086,
+              "valueSd": 1.1631918878319631,
+              "costTerm": 0.0,
+              "qualityTerm": 1.353015367918086,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-fable-5-1": {
+            "top3": {
+              "share": 0.1572,
+              "monteCarloSe": 0.003639892306099179
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0243,
+              "monteCarloSe": 0.0015397892712965629
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.5431957281462465,
+              "valueSd": 1.2422542928669018,
+              "costTerm": 0.0,
+              "qualityTerm": 1.5431957281462465,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gemini-3.8-flash": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.3962218096127654,
+              "valueSd": 1.181618301150065,
+              "costTerm": 0.0,
+              "qualityTerm": 1.3962218096127654,
+              "covarianceTerm": 0.0
+            }
+          },
+          "glm-5.3": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.5762204060842937,
+              "valueSd": 1.2554761670713999,
+              "costTerm": 0.0,
+              "qualityTerm": 1.5762204060842937,
+              "covarianceTerm": 0.0
+            }
+          },
+          "qwen3.8-max": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.6603917532709183,
+              "valueSd": 1.2885618934575547,
+              "costTerm": 0.0,
+              "qualityTerm": 1.6603917532709183,
+              "covarianceTerm": 0.0
+            }
+          },
+          "deepseek-v4-pro": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.4340982920384187,
+              "valueSd": 1.1975384302970902,
+              "costTerm": 0.0,
+              "qualityTerm": 1.4340982920384187,
               "covarianceTerm": 0.0
             }
           }

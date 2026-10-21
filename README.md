@@ -47,7 +47,7 @@ Claude Sonnet 5.5 leads the Plan ranking at 59.5 (owner-named transfer); GPT-6.1
 | 31 | 31 | [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 38.9 | 41.8 | 48.9 | 100% | $5,417.03 | $5,417.03 | — | API-cost fallback |
 | — | — | [Muse Wonder Full (max)](https://valuerank.alolabs.dev/models/muse-wonder-full/) | — | — | 64.4 | 100% | — | — | — | no cost |
 
-Values are rounded for display; ranks are competition ranks (equal values share the better rank).
+Values are rounded for display; ranks are competition ranks (equal values share the better rank). Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 3.3 value points (median, 95%) to separate, and 0 of 30 adjacent API ranks and 0 of 30 adjacent Plan ranks do; the S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.
 
 - **subset cost**: scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17).
 - **provider-claimed leaf**: a quality leaf comes from the model provider's own published result (O36's last source); the row competes but earns no interval label (E233).

@@ -574,289 +574,289 @@ Bar comparison: compares 7 configurations that can qualify. The bar is a display
 
 ## Scenario shares
 
-Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined in [methodology.md](methodology.md#uncertainty-outputs). The shares exclude benchmark sampling noise beyond S1M and fitted-rating uncertainty (E155).
+Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined in [methodology.md](methodology.md#uncertainty-outputs). S1T adds benchmark sampling noise under an independent-task approximation (O39); the other streams exclude it, and every stream excludes correlated-task, harness and attempt effects (E155).
 
 ### API basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 4.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 96.0% | 100.0% | 100.0% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
+| GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.5% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
+| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.3% |
+| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 4.0% | 0.0% | 0.0% | 27.7% |
+| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 96.0% | 100.0% | 100.0% | 48.0% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% |
-| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.6% |
+| GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 76.0% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.1% |
+| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 34.3% |
+| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 84.1% |
+| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 92.4% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.4% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% |
-| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 3.1% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 51.4% | 100.0% | 100.0% |
-| Claude Sonnet 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 100.0% | 100.0% | 99.2% | 100.0% | 100.0% |
-| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (max) | 0.0% | 0.0% | 2.9% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| Claude Haiku 5.5 (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 95.8% |
+| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 6.2% |
+| Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 3.1% | 0.0% | 0.0% | 19.9% |
+| Claude Sonnet 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| Claude Sonnet 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 51.4% | 100.0% | 100.0% | 47.5% |
+| Claude Sonnet 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 7.0% |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 100.0% | 100.0% | 99.2% | 100.0% | 100.0% | 68.9% |
+| GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.9% |
+| GPT-6 Luna (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 67.2% |
+| GPT-6.1 Sol (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 96.2% |
+| GPT-6.1 Sol (max) | 0.0% | 0.0% | 2.9% | 0.0% | 0.0% | 37.8% |
+| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.5% |
+| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 77.4% |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 85.3% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.74 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.01 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Haiku 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.89 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Opus 5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Sonnet 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 0.92 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Sonnet 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.77 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Sonnet 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Sonnet 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.88 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| DeepSeek V4 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-5.6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-5.6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.06 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6.1 Sol (high) | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6.1 Sol (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.78 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6.1 Sol (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Muse Spark 1.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.74 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
+| Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.01 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| Claude Haiku 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
+| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.89 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
+| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
+| Claude Opus 5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
+| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| Claude Sonnet 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 0.92 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
+| Claude Sonnet 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
+| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.77 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
+| Claude Sonnet 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| Claude Sonnet 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.88 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
+| DeepSeek V4 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
+| GPT-5.6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
+| GPT-5.6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
+| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
+| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
+| GPT-6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.06 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
+| GPT-6.1 Sol (high) | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| GPT-6.1 Sol (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.78 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
+| GPT-6.1 Sol (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
+| GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
+| Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) |
+| Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) |
+| Muse Spark 1.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.17 (+0.00) |
+| Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy and S1M run with owner-named transfers off (E167): Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (max), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), Claude Sonnet 5.5 (high), Claude Sonnet 5.5 (low), Claude Sonnet 5.5 (max), Claude Sonnet 5.5 (medium), Claude Sonnet 5.5 (xhigh), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Luna (max), GPT-6 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh) depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (max), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), Claude Sonnet 5.5 (high), Claude Sonnet 5.5 (low), Claude Sonnet 5.5 (max), Claude Sonnet 5.5 (medium), Claude Sonnet 5.5 (xhigh), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Luna (max), GPT-6 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh) depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (high) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (low) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — |
-| Claude Opus 5 (max) | 0.0% | — | — | — | — |
-| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Sonnet 5.5 (high) | 0.0% | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 0.0% | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 0.0% | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.0% | — | — | — | — |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | — | — | — | — |
-| GPT-6 Sol (max) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (high) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 0.0% | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (high) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (low) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — | — |
+| Claude Opus 5 (max) | 0.0% | — | — | — | — | — |
+| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 71.9% |
+| Claude Sonnet 5.5 (high) | 0.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (low) | 0.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (medium) | 0.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | — | — | — | — | — |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | — | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.0% | — | — | — | — | — |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | — | — | — | — | — |
+| GPT-6 Sol (max) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (high) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (low) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 28.1% |
+| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (xhigh) | 0.0% | — | — | — | — | — |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (high) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (low) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — |
-| Claude Opus 5 (max) | 0.0% | — | — | — | — |
-| Claude Opus 5.5 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Sonnet 5.5 (high) | 0.0% | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 0.0% | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 0.0% | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.0% | — | — | — | — |
-| GPT-6 Astra (max) | 0.0% | 100.0% | 99.5% | 100.0% | 100.0% |
-| GPT-6 Luna (max) | 0.0% | — | — | — | — |
-| GPT-6 Sol (max) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (high) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.5% | 0.0% | 0.0% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 15.7% |
+| Claude Haiku 5.5 (high) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (low) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — | — |
+| Claude Opus 5 (max) | 0.0% | — | — | — | — | — |
+| Claude Opus 5.5 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Claude Sonnet 5.5 (high) | 0.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (low) | 0.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (medium) | 0.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | — | — | — | — | — |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | — | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.0% | — | — | — | — | — |
+| GPT-6 Astra (max) | 0.0% | 100.0% | 99.5% | 100.0% | 100.0% | 67.2% |
+| GPT-6 Luna (max) | 0.0% | — | — | — | — | — |
+| GPT-6 Sol (max) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (high) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (low) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — | — |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.5% | 0.0% | 0.0% | 17.1% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (high) | 100.0% | — | — | — | — |
-| Claude Haiku 5.5 (low) | 100.0% | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 100.0% | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 100.0% | — | — | — | — |
-| Claude Opus 5 (max) | 0.0% | — | — | — | — |
-| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Sonnet 5.5 (high) | 100.0% | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 100.0% | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 100.0% | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 100.0% | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.0% | — | — | — | — |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 100.0% | — | — | — | — |
-| GPT-6 Sol (max) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (high) | 100.0% | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 100.0% | 84.6% | 100.0% | 100.0% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.4% |
+| Claude Haiku 5.5 (high) | 100.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (low) | 100.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) | 100.0% | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) | 100.0% | — | — | — | — | — |
+| Claude Opus 5 (max) | 0.0% | — | — | — | — | — |
+| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 86.9% |
+| Claude Sonnet 5.5 (high) | 100.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (low) | 100.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (medium) | 100.0% | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) | 100.0% | — | — | — | — | — |
+| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-5.6 Luna (max) | 0.0% | — | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.0% | — | — | — | — | — |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.6% |
+| GPT-6 Luna (max) | 100.0% | — | — | — | — | — |
+| GPT-6 Sol (max) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (high) | 100.0% | — | — | — | — | — |
+| GPT-6.1 Sol (low) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — | — |
+| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — | — |
+| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 100.0% | 84.6% | 100.0% | 100.0% | 61.1% |
+| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M |
-|---|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.75 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Haiku 5.5 (high) | 0.00 (+0.00) | — | — | — | — |
-| Claude Haiku 5.5 (low) | 0.00 (+0.00) | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.00 (+0.00) | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | — | — | — | — |
-| Claude Opus 5 (max) | 0.00 (+0.00) | — | — | — | — |
-| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Claude Sonnet 5.5 (high) | 0.00 (+0.00) | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 0.00 (+0.00) | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 0.00 (+0.00) | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 0.00 (+0.00) | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-5.6 Luna (max) | 0.00 (+0.00) | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.00 (+0.00) | — | — | — | — |
-| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6 Luna (max) | 0.00 (+0.00) | — | — | — | — |
-| GPT-6 Sol (max) | 0.00 (+0.00) | — | — | — | — |
-| GPT-6.1 Sol (high) | 0.00 (+0.00) | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.00 (+0.00) | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.79 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| GPT-6.1 Sol (medium) | 0.00 (+0.00) | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Muse Spark 1.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
-| Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
+|---|---:|---:|---:|---:|---:|---:|
+| Claude Fable 5.1 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.75 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
+| Claude Haiku 5.5 (high) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Haiku 5.5 (low) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Haiku 5.5 (max) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Opus 5 (max) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| Claude Sonnet 5.5 (high) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Sonnet 5.5 (low) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Sonnet 5.5 (medium) | 0.00 (+0.00) | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) | 0.00 (+0.00) | — | — | — | — | — |
+| DeepSeek V4 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
+| GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
+| GPT-5.6 Luna (max) | 0.00 (+0.00) | — | — | — | — | — |
+| GPT-5.6 Sol (max) | 0.00 (+0.00) | — | — | — | — | — |
+| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| GPT-6 Luna (max) | 0.00 (+0.00) | — | — | — | — | — |
+| GPT-6 Sol (max) | 0.00 (+0.00) | — | — | — | — | — |
+| GPT-6.1 Sol (high) | 0.00 (+0.00) | — | — | — | — | — |
+| GPT-6.1 Sol (low) | 0.00 (+0.00) | — | — | — | — | — |
+| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.79 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| GPT-6.1 Sol (medium) | 0.00 (+0.00) | — | — | — | — | — |
+| GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | — | — | — | — | — |
+| Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) |
+| Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) |
+| Muse Spark 1.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
+| Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
 
 ### Named S2 specification branches
 
@@ -879,8 +879,10 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 ## Diagnostics
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
+- **Rank separability (O39, independent-task approximation):** median separation 3.34 value points (API) and 3.35 (Plan); separable adjacent ranks: API 0 of 30, Plan 0 of 30. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row; AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate.
 - **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234): Kendall tau 0.73 (interval 0.41 to 1.00) on 10 rows. Cognition minus AA: mean +2.5 points, largest 11.8.
 - **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — GPT-6.1 Sol (xhigh) (FrontierCode 1.1); GPT-6.1 Sol (high) (FrontierCode 1.1); GPT-6.1 Sol (medium) (FrontierCode 1.1); GPT-5.6 Sol (max) (FrontierCode 1.1); GPT-6 Sol (max) (FrontierCode 1.1); MiMo-V2.6-Pro (DeepSWE v1.1); GPT-6.1 Sol (low) (FrontierCode 1.1); GPT-5.6 Luna (max) (FrontierCode 1.1); Claude Opus 5 (max) (FrontierCode 1.1) — API 11 rows move; largest move 6 (MiMo-V2.6-Pro); Plan 15 rows move; largest move 8 (MiMo-V2.6-Pro).
+- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset 2.5 points — API quality 55.3: GPT-6.1 Sol (medium) in all three; API quality 47.4: GPT-6 Luna (max) in all three; API quality 59.6: GPT-6.1 Sol (high) as published, GPT-6.1 Sol (high) with the fills removed, GPT-6.1 Sol (xhigh) with third-party fills lowered by the offset; Plan quality 55.3: Claude Sonnet 5.5 (high) in all three; Plan quality 47.4: GPT-6 Luna (max) in all three; Plan quality 59.6: GPT-6.1 Sol (high) as published, GPT-6.1 Sol (high) with the fills removed, GPT-6.1 Sol (xhigh) with third-party fills lowered by the offset.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.71 (interval 0.57 to 0.83) on 32 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.59 (interval 0.39 to 0.76) on 31 rows.
 - **Quality-substitution value agreement (Plan):** quality-substitution value agreement, plan basis (matched-panel sensitivity): Kendall tau 0.61 (interval 0.40 to 0.77) on 31 rows.

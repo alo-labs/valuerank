@@ -195,7 +195,7 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     assert len(selected) == 1 and selected[0]["id"] == doc["cost"]["route"]["id"] and doc["plans"][0] is selected[0]
     for plan in doc["plans"]:
         assert plan["usdPerRun"] == pytest.approx(doc["cost"]["apiUsd"] / plan["valueMultiple"]) and plan["case"] in (2, 3, "identified")
-    assert doc["scenarios"]["status"] == "current" and {run["stratum"] for run in doc["scenarios"]["api"]} == {"S0", "S1", "S2", "S1M"}
+    assert doc["scenarios"]["status"] == "current" and {run["stratum"] for run in doc["scenarios"]["api"]} == {"S0", "S1", "S2", "S1M", "S1T"}
     # O33/O36: GPT-6.1 Sol (xhigh) beats the max row on both cost and quality on every leaf, so max is off the frontier.
     assert doc["intervals"]["api"] == {"definite": "disproved", "possible": "disproved"}
 
@@ -219,13 +219,13 @@ def test_transfer_rows_are_unevaluable_in_the_transfers_off_plan_streams(bundle)
     sonnet = bundle.models["claude-sonnet-5-5"]
     plan = {(run["stratum"], run["kernel"]): run for run in sonnet["scenarios"]["plan"]}
     assert plan[("S0", "primary")]["unevaluable"] is None and plan[("S0", "primary")]["top1"] is not None
-    for key in (("S1", "primary"), ("S2", "primary"), ("S1", "endpoint-heavy"), ("S1M", "primary")):
+    for key in (("S1", "primary"), ("S2", "primary"), ("S1", "endpoint-heavy"), ("S1M", "primary"), ("S1T", "primary")):
         assert plan[key]["unevaluable"].startswith("owner-named transfer") and plan[key]["top1"] is None
     assert all(run["unevaluable"] is None for run in sonnet["scenarios"]["api"])
     assert sonnet["cost"]["planAmount"]["amountKind"] == "assumed API-equivalent consumption (owner-named transfer)"
     assert sonnet["cost"]["planAmount"]["amountUsd"] == pytest.approx(58.9 * 20) and sonnet["cost"]["planAmount"]["donorRouteId"] == "claude-pro-opus55-semianalysis"
     opus = bundle.models["claude-opus-5-5"]
-    assert all(run["unevaluable"] is None for run in opus["scenarios"]["plan"]) and len(opus["scenarios"]["plan"]) == 5
+    assert all(run["unevaluable"] is None for run in opus["scenarios"]["plan"]) and len(opus["scenarios"]["plan"]) == 6
     assert opus["cost"]["planAmount"]["amountKind"] == "measured-workload capacity"
 
 

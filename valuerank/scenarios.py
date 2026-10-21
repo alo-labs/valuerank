@@ -42,20 +42,25 @@ TARGET_PROFILES = {
     # E162/E165: the separately named stream that draws inside published 95% confidence intervals (Terminal-Bench's)
     # under a conventional kernel: a range sensitivity, not a source-estimated distribution of expected performance.
     "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+    # O39: benchmark sampling noise under an independent-task approximation (owner decision, 2026-10-21); it never
+    # authorises a label and never changes a score.
+    "S1T": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
 }
-STRATA = ("S0", "S1", "S2", "S1M")
+STRATA = ("S0", "S1", "S2", "S1M", "S1T")
 # E161: every stream's events name the quality equation they use, so S0-to-S1 changes are never read as uncertainty alone.
 QUALITY_EQUATIONS = {
     "S0": "observed leaves, renormalised (observed-only score)",
     "S1": "full composite, nominal weights",
     "S2": "full composite, hierarchical weight draw",
     "S1M": "full composite, nominal weights",
+    "S1T": "full composite, nominal weights",
 }
 FRONTIER_EVENTS = {
     "S0": "observed-only score frontier frequency",
     "S1": "full-composite frontier frequency under conventional missing-evidence draws",
     "S2": "full-composite frontier frequency under missing-evidence and weight-stress draws",
     "S1M": "full-composite frontier frequency under missing-evidence draws and conventional draws inside published intervals",
+    "S1T": "full-composite frontier frequency under task-sampling draws (independent-task approximation)",
 }
 # E145: the target profile governs which inputs a stream may vary (an explicit allowlist); source-supported
 # uncertainty about expected performance or future runs enters only separately named streams (none in v1).
@@ -66,11 +71,13 @@ EXPECTED_PERFORMANCE = "expected performance"
 # E165: draws inside a published confidence interval whose estimand, method and sampling unit the source does not
 # document are a conventional range sensitivity; they never stand in for expected-performance uncertainty.
 INTERVAL_RANGE = "published-interval range (conventional)"
+TASK_SAMPLING = "task sampling (independent-task approximation)"
 STREAM_TARGETS = {
     "S0": frozenset({REPORTING_PRECISION}),
     "S1": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION}),
     "S2": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, SPECIFICATION_STRESS}),
     "S1M": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, INTERVAL_RANGE}),
+    "S1T": frozenset({REPORTING_PRECISION, IDENTIFICATION_CONVENTION, TASK_SAMPLING}),
 }
 GROUP_CONCENTRATION = 100.0
 LEAF_CONCENTRATION = 50.0
@@ -89,7 +96,7 @@ ANALYST_CONVENTION = "analyst convention"
 @dataclass(frozen=True)
 class Kernel:
     """A draw kernel: 'fixed' (value), 'uniform' (low, high), 'split-uniform' (low, point, high), 'uniform-sum'
-    (offset, (low, high), ...) or 'runs' (public run values)."""
+    (offset, (low, high), ...), 'runs' (public run values) or 'normal' (mean, sd, low, high: clipped, O39 task sampling)."""
 
     family: str
     params: tuple
@@ -98,8 +105,8 @@ class Kernel:
     derivation: str = PUBLISHED_PRECISION  # E134: what its parameters are derived from
 
     def __post_init__(self):
-        if self.family == "runs" and self.target == REPORTING_PRECISION:
-            raise ValueError("a run-level bootstrap concerns expected performance or future runs, never reporting precision")
+        if self.family in ("runs", "normal") and self.target == REPORTING_PRECISION:
+            raise ValueError(f"a {self.family} kernel concerns sampling noise or future runs, never reporting precision")
         if self.family == "split-uniform" and not self.params[0] <= self.params[1] <= self.params[2]:
             raise ValueError("a split-uniform kernel's published point must lie inside its interval (E182)")
 
@@ -121,6 +128,9 @@ class Kernel:
         if self.family == "runs":
             values = self.params
             return sum(rng.choice(values) for _ in values) / len(values)
+        if self.family == "normal":
+            mean, sd, low, high = self.params
+            return min(high, max(low, rng.gauss(mean, sd)))
         if self.family == "uniform-sum":
             # E154: a derived sum of independently rounded primitives (an exact offset plus one interval per record).
             offset, *intervals = self.params
@@ -199,7 +209,7 @@ def interval_interpretation(contract: dict) -> dict:
 
 # E155: the release-text lint. A published sentence that puts a source interval or a run range into scenario
 # shares must name a stream whose allowlist admits that target, or state that the target is outside the shares.
-_SHARES = re.compile(r"scenario (?:share|frequenc)|\bS[0-2]M?\b|\bstreams?\b", re.IGNORECASE)
+_SHARES = re.compile(r"scenario (?:share|frequenc)|\bS[0-2][MT]?\b|\bstreams?\b", re.IGNORECASE)
 _SOURCE_INTERVAL = re.compile(r"confidence interval|published interval|source interval", re.IGNORECASE)
 _RUN_RANGE = re.compile(r"run-to-run|run ranges?\b|run values|repeated runs", re.IGNORECASE)
 _OUTSIDE = re.compile(r"\bnot quantified\b|\boutside\b|\bnever\b|\bnot\b", re.IGNORECASE)
@@ -209,12 +219,14 @@ def lint_release_text(text: str) -> list[str]:
     """E155: sentences that claim a source interval or run range enters scenario shares without an admitting stream."""
 
     admitting = [stratum for stratum in STRATA if INTERVAL_RANGE in STREAM_TARGETS[stratum]]
+    sampling = [stratum for stratum in STRATA if TASK_SAMPLING in STREAM_TARGETS[stratum]]
     violations = []
     for sentence in re.split(r"(?<=[.;])\s+|\n+", text):
         interval, runs = _SOURCE_INTERVAL.search(sentence), _RUN_RANGE.search(sentence)
         if not (interval or runs) or not _SHARES.search(sentence) or _OUTSIDE.search(sentence):
             continue
-        if runs or not any(re.search(rf"\b{stratum}\b", sentence) for stratum in admitting):
+        named = lambda strata: any(re.search(rf"\b{stratum}\b", sentence) for stratum in strata)
+        if (runs and not named(sampling)) or (interval and not named(admitting)):
             violations.append(sentence.strip())
     return violations
 

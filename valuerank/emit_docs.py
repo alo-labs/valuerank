@@ -577,7 +577,7 @@ ValueRank ranks frontier AI model configurations (see Model inclusion) by value 
 
 {markdown_table(['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)', 'Plan cost (USD per basket run)', 'Plan route', 'Flags'], table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
 
-Values are rounded for display; ranks are competition ranks (equal values share the better rank).
+Values are rounded for display; ranks are competition ranks (equal values share the better rank).{separability_text(facts)}
 
 {legend}
 
@@ -771,7 +771,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 {streams}
 
-S1 also runs with the endpoint-heavy kernel. On the Plan basis the core streams (S1, S2 and S1M) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
+S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39)** redraws every leaf with plug-in binomial noise from its published task count (DeepSWE 113, FrontierCode 100, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs, AA-Omniscience's 6,000 questions scored +1/0/−1), with GDPval-AA drawn from its displayed rating interval read as a 95% normal interval (an assumption). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
 
 {not_quantified}
 
@@ -1016,7 +1016,7 @@ def scenario_tables(facts):
     scenarios = facts.v3["scenarios"]
     if scenarios.get("status") != "current":
         return f"Scenario outputs are {scenarios.get('status')}; no shares are published for this release."
-    parts = [f"Frequencies over {scenarios['scenarios']:,} scenarios per run (seed {scenarios['seed']}); streams are defined in [methodology.md](methodology.md#uncertainty-outputs). The shares exclude benchmark sampling noise beyond S1M and fitted-rating uncertainty (E155)."]
+    parts = [f"Frequencies over {scenarios['scenarios']:,} scenarios per run (seed {scenarios['seed']}); streams are defined in [methodology.md](methodology.md#uncertainty-outputs). S1T adds benchmark sampling noise under an independent-task approximation (O39); the other streams exclude it, and every stream excludes correlated-task, harness and attempt effects (E155)."]
     for basis, label in (("api", "API"), ("plan", "Plan")):
         runs = scenarios["results"][basis]
         row_ids = sorted({row_id for run in runs for row_id in run["panel"]}, key=facts.label)
@@ -1077,6 +1077,31 @@ def gap_fill_text(sensitivity, facts):
     rows = "; ".join(f"{facts.label(row_id)} ({', '.join(LEAF_LABELS[key] for key in leaves)})" for row_id, leaves in filled.items())
     moves = "; ".join(f"{label} {rank_change_text(sensitivity['bases'][basis]['rankChanges']['changes'], facts.labels)}" for basis, label in (("api", "API"), ("plan", "Plan")))
     return f"- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — {rows} — {moves}."
+
+
+def separability_text(facts):
+    """O39: how far apart two values must be to separate under benchmark sampling noise (independent-task approximation)."""
+
+    result = facts.v3["diagnostics"]["rankSeparability"]
+    api, plan = result["api"], result["plan"]
+    return (f" Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about {api['medianSeparation']:.1f} value points "
+            f"(median, 95%) to separate, and {api['separableAdjacentPairs']} of {api['adjacentPairs']} adjacent API ranks and {plan['separableAdjacentPairs']} of "
+            f"{plan['adjacentPairs']} adjacent Plan ranks do; the S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.")
+
+
+def gap_fill_bars_text(result, facts):
+    """E234: whether each bar's displayed-record cheapest row survives removing the gap fills or lowering them by the offset."""
+
+    parts = []
+    for basis, label in (("api", "API"), ("plan", "Plan")):
+        for entry in result["bases"][basis]:
+            if entry["survives"]:
+                parts.append(f"{label} quality {entry['level']:.1f}: {facts.labels(entry['published']) or 'none'} in all three")
+            else:
+                parts.append(f"{label} quality {entry['level']:.1f}: {facts.labels(entry['published']) or 'none'} as published, {facts.labels(entry['removed']) or 'none'} "
+                             f"with the fills removed, {facts.labels(entry['lowered']) or 'none'} with third-party fills lowered by the offset")
+    offset = "no measured offset" if result["meanOffset"] is None else f"lowered by the mean offset {result['meanOffset']:.1f} points"
+    return "- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills " + offset + " — " + "; ".join(parts) + "."
 
 
 def incomplete_text(facts):
@@ -1165,10 +1190,15 @@ def diagnostics_markdown(facts):
     logistic = diagnostics["gdpvalLogisticSensitivity"]
     lines = [
         f"- **Terminal-Bench cross-source agreement (AA's {harness['defaultHarness']} run against tbench.ai):** {harness['agreement']['status']}; {len(harness['harnessMixed'])} rows take the leaf from tbench.ai (gap fill).",
+        f"- **Rank separability (O39, independent-task approximation):** median separation {diagnostics['rankSeparability']['api']['medianSeparation']:.2f} value points (API) and "
+        f"{diagnostics['rankSeparability']['plan']['medianSeparation']:.2f} (Plan); separable adjacent ranks: API {diagnostics['rankSeparability']['api']['separableAdjacentPairs']} of "
+        f"{diagnostics['rankSeparability']['api']['adjacentPairs']}, Plan {diagnostics['rankSeparability']['plan']['separableAdjacentPairs']} of {diagnostics['rankSeparability']['plan']['adjacentPairs']}. "
+        "Assumptions: " + "; ".join(diagnostics["rankSeparability"]["assumptions"]) + ".",
         f"- **FrontierCode against Cognition:** {agreement_text(diagnostics['frontierCodeCrossSource'])}"
         + (f" Cognition minus AA: mean {diagnostics['frontierCodeCrossSource']['meanOffset']:+.1f} points, largest {diagnostics['frontierCodeCrossSource']['maxAbsOffset']:.1f}."
            if diagnostics["frontierCodeCrossSource"]["tau"] is not None else ""),
         gap_fill_text(diagnostics["gapFillSensitivity"], facts),
+        gap_fill_bars_text(diagnostics["gapFillBars"], facts),
         f"- **Quality agreement:** {agreement_text(agreement)}",
         *(f"- **Quality-substitution value agreement ({label}):** {agreement_text(diagnostics['qualitySubstitutionAgreement'][basis])}" for basis, label in (("api", "API"), ("plan", "Plan"))),
         f"- **Disjoint-evidence agreement:** {agreement_text(diagnostics['disjointEvidenceAgreement'])}",

@@ -501,7 +501,11 @@ def test_scenarios_hash_attach_and_bar_labels():
     assert panel[0].leaves["deepswe"].family == "fixed" and panel[1].leaves["deepswe"].family == "uniform"
     document = v.run_scenarios(result, frozen, n=200, seed=7)
     assert document["inputHash"] == v.scenario_hash(result, frozen, n=200, seed=7)
-    assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M"]
+    assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M", "S1T"]
+    # O39: S1T redraws every observed leaf with its task-sampling noise.
+    sampled = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
+    assert sampled["a"].leaves["deepswe"].family == "normal" and sampled["a"].leaves["gdpval"].derivation == scenarios.ANALYST_CONVENTION
+    assert document["results"]["api"][-1]["variedTargets"] == ["identification convention", "task sampling (independent-task approximation)"]
     assert document["streamDescriptions"]["S0"] == "published-record reporting precision" and len(document["notQuantified"]) == 2
     assert document["barLabels"][0]["status"] == "evaluated"
     current = v.attach_scenarios(v.score(result, frozen), document, document["inputHash"])
@@ -896,7 +900,7 @@ def test_measurement_stream_draws_the_published_confidence_interval():
     assert kernel.family == "uniform"
     assert measured["a"].leaves["deepswe"] == plain["a"].leaves["deepswe"]
     document = v.run_scenarios(result, frozen, n=50, seed=3)
-    s1m = document["results"]["api"][-1]
+    s1m = document["results"]["api"][-2]
     assert s1m["stratum"] == "S1M" and s1m["variedTargets"] == ["identification convention", "published-interval range (conventional)", "reporting precision"]
     interpretation = document["intervalInterpretation"]["S1M"][0]
     assert interpretation["leaf"] == "terminalBench" and interpretation["kernelStatus"] == "conventional-within-CI"
@@ -1576,3 +1580,32 @@ def test_incomplete_configurations_are_listed_not_ranked_and_need_a_logged_searc
             v.check_leaf_searches(incomplete, {"leafEvidence": {"searches": stale}}, DAY)
     with pytest.raises(ValueError, match=r"x: no exhaustive search for deepswe"):
         v.check_leaf_searches([{"id": "x", "missing": ["deepswe"]}], {}, DAY)
+
+
+def test_sampling_noise_per_leaf_and_rank_separability():
+    """O39: plug-in binomial noise from each leaf's task count, GDPval-AA from its assumed rating interval, Omniscience
+    from its +1/0/-1 question shares; the separability diagnostic counts adjacent ranks apart by more than that noise."""
+
+    assert v.sampling_sd("deepswe", q.Observation(50.0), {}) == pytest.approx(100 * (0.25 / 113) ** 0.5)
+    assert v.sampling_sd("gdpval", q.Observation(55.0), {}) == pytest.approx(26.0 / 1.96 / 20.0)
+    ternary = v.sampling_sd("omniscience", q.Observation(60.0), {"accuracy": 0.5, "hallucinationRate": 0.4})
+    assert ternary == pytest.approx(100 * ((0.5 + 0.2 - 0.3 ** 2) / 6000) ** 0.5 / 2)
+    assert v.sampling_sd("omniscience", q.Observation(60.0), {}) == pytest.approx(100 * (0.24 / 6000) ** 0.5)
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    separability = output["diagnostics"]["rankSeparability"]
+    assert set(separability["valueSd"]) == {"a", "b", "c"} and separability["api"]["adjacentPairs"] == 2
+    assert separability["api"]["medianSeparation"] > 0 and len(separability["assumptions"]) == 3
+    lone = v.rank_separability({"rows": result["rows"][:1]}, {"a": {basis: {"value": 1.0} for basis in v.BASES}})
+    assert lone["api"] == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
+
+
+
+def test_gap_fill_bars_report_each_variant():
+    """E234: removing or lowering the fills is a sensitivity on the displayed-record cheapest row; labels never change."""
+
+    result, frozen = scored()
+    bars = v.gap_fill_bars(result, frozen, 5.0)
+    entry = bars["bases"]["api"][0]
+    assert set(entry) >= {"published", "removed", "lowered", "survives"} and bars["meanOffset"] == 5.0
+    assert v.gap_fill_bars(result, frozen, None)["meanOffset"] is None
