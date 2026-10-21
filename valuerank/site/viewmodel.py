@@ -196,7 +196,9 @@ def _row_flags(row: dict) -> list[str]:
     """Plain-language flags for one v3 row, in a fixed order."""
 
     flags = []
-    if row["cost"]["subset"]:
+    if row["api"]["costUsd"] is None:
+        flags.append("No cost: AA publishes no cost for this configuration, so it has no value score and no rank")
+    elif row["cost"]["subset"]:
         flags.append("Subset cost: scored on its own workload; cross-workload ordering not identified")
     if row["quality"]["provisional"]:
         flags.append("Provisional quality: " + "; ".join(row["quality"]["provisionalReasons"]))

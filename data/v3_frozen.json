@@ -40,6 +40,8 @@
             "gpt-6-sol",
             "gpt-6.1-sol",
             "grok-4.7",
+            "muse-spark-1-3",
+            "muse-wonder",
             "qwen3.8-max"
           ],
           "referenceCosts": {
@@ -59,6 +61,8 @@
             "gpt-6-sol": 1999.4094902839818,
             "gpt-6.1-sol": 1267.6626637224322,
             "grok-4.7": 6700.021962805636,
+            "muse-spark-1-3": 2764.9826567800033,
+            "muse-wonder": 6534.155660296668,
             "qwen3.8-max": 5417.032020806289
           },
           "low": 66.43260248449656,
@@ -86,6 +90,8 @@
             "gpt-6-sol",
             "gpt-6.1-sol",
             "grok-4.7",
+            "muse-spark-1-3",
+            "muse-wonder",
             "qwen3.8-max"
           ],
           "referenceCosts": {
@@ -105,6 +111,8 @@
             "gpt-6-sol": 185.61172394021366,
             "gpt-6.1-sol": 117.68127216138434,
             "grok-4.7": 6700.021962805636,
+            "muse-spark-1-3": 2764.9826567800033,
+            "muse-wonder": 6534.155660296668,
             "qwen3.8-max": 5417.032020806289
           },
           "low": 2.4794126541345514,
@@ -149,6 +157,8 @@
             "grok-4.7",
             "mimo-v2-6-flash",
             "mimo-v2-6-pro",
+            "muse-spark-1-3",
+            "muse-wonder",
             "qwen3.8-max"
           ],
           "referenceCosts": {
@@ -170,6 +180,8 @@
             "grok-4.7": 4028.328937472306,
             "mimo-v2-6-flash": 60.36787614182735,
             "mimo-v2-6-pro": 136.12695920883297,
+            "muse-spark-1-3": 1559.7989154050006,
+            "muse-wonder": 4094.3292120300007,
             "qwen3.8-max": 4362.905450721673
           },
           "low": 30.183938070913676,
@@ -199,6 +211,8 @@
             "grok-4.7",
             "mimo-v2-6-flash",
             "mimo-v2-6-pro",
+            "muse-spark-1-3",
+            "muse-wonder",
             "qwen3.8-max"
           ],
           "referenceCosts": {
@@ -220,6 +234,8 @@
             "grok-4.7": 4028.328937472306,
             "mimo-v2-6-flash": 40.24525076121824,
             "mimo-v2-6-pro": 90.75130613922198,
+            "muse-spark-1-3": 1559.7989154050006,
+            "muse-wonder": 4094.3292120300007,
             "qwen3.8-max": 4362.905450721673
           },
           "low": 0.9091279727466054,
@@ -233,8 +249,8 @@
   "barReferences": [
     {
       "id": "bar:median-quality",
-      "level": 56.70256809558702,
-      "medianConfiguration": "grok-4.7",
+      "level": 58.27519438516182,
+      "medianConfiguration": "gpt-6-sol",
       "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)"
     }
   ],
@@ -261,6 +277,7 @@
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
     "selectionCutoff": "2026-10-21",
     "population": [
+      "claude-fable-5-1",
       "claude-haiku-5-5",
       "claude-opus-5",
       "claude-opus-5-5",
@@ -277,13 +294,16 @@
       "gpt-6-sol",
       "gpt-6.1-sol",
       "grok-4.7",
+      "muse-spark-1-3",
+      "muse-wonder",
+      "muse-wonder-full",
       "qwen3.8-max"
     ],
     "bars": [
       {
         "id": "bar:median-quality",
-        "level": 56.70256809558702,
-        "medianConfiguration": "grok-4.7"
+        "level": 58.27519438516182,
+        "medianConfiguration": "gpt-6-sol"
       }
     ]
   }

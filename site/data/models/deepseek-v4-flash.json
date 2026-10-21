@@ -8,14 +8,14 @@
   "summary": {
     "rank": {
       "api": 7,
-      "plan": 14
+      "plan": 17
     },
     "overall": {
       "api": 54.75096876971568,
       "plan": 47.30257425811922
     },
     "quality": 48.061482895190444,
-    "qualityRank": 16,
+    "qualityRank": 20,
     "coverage": {
       "pct": 80.0,
       "costAvailable": true,
@@ -329,27 +329,27 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1599,
-        "top3": 0.3017,
-        "frontier": 0.5651
+        "top1": 0.16,
+        "top3": 0.2996,
+        "frontier": 0.569
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.1469,
-        "top3": 0.3139,
-        "frontier": 0.5354
+        "top1": 0.1515,
+        "top3": 0.3018,
+        "frontier": 0.5397
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1999,
-        "top3": 0.3071,
-        "frontier": 0.5691
+        "top1": 0.2057,
+        "top3": 0.302,
+        "frontier": 0.5771
       },
       {
         "stratum": "S1M",
@@ -357,8 +357,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.1663,
-        "top3": 0.311,
-        "frontier": 0.5767
+        "top3": 0.3005,
+        "frontier": 0.5686
       }
     ],
     "plan": [
@@ -377,7 +377,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0087,
+        "top3": 0.0077,
         "frontier": 0.0
       },
       {
@@ -386,8 +386,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0263,
-        "frontier": 0.0001
+        "top3": 0.0245,
+        "frontier": 0.0002
       },
       {
         "stratum": "S1",
@@ -395,7 +395,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0373,
+        "top3": 0.0353,
         "frontier": 0.0
       },
       {
@@ -404,7 +404,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0085,
+        "top3": 0.008,
         "frontier": 0.0
       }
     ]
@@ -454,7 +454,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 7,
-        "plan": 14
+        "plan": 17
       }
     }
   ],

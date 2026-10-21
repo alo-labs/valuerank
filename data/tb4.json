@@ -15,8 +15,8 @@
   },
   "rowN": 23,
   "rowsWithoutCostN": 1,
-  "cohortN": 31,
-  "matchedN": 11,
+  "cohortN": 35,
+  "matchedN": 12,
   "missingModels": [
     "Kimi K3",
     "GPT-5.5",
@@ -37,9 +37,12 @@
     "MiMo-V2.6-Flash",
     "Claude Haiku 5.5",
     "Claude Sonnet 5.5",
-    "Gemini 4 Argon"
+    "Gemini 4 Argon",
+    "Muse Spark 1.3",
+    "Muse Wonder",
+    "Muse Wonder Full"
   ],
-  "rankingAvailableN": 12,
+  "rankingAvailableN": 13,
   "rankingMissingModels": [
     "Kimi K3",
     "GPT-5.5",
@@ -59,7 +62,10 @@
     "MiMo-V2.6-Flash",
     "Claude Haiku 5.5",
     "Claude Sonnet 5.5",
-    "Gemini 4 Argon"
+    "Gemini 4 Argon",
+    "Muse Spark 1.3",
+    "Muse Wonder",
+    "Muse Wonder Full"
   ],
   "providerClaimN": 1,
   "providerClaims": [
@@ -153,7 +159,7 @@
       "releaseDate": "Sep 1, 2026",
       "tokens": "2.7B",
       "costUsd": 6200.0,
-      "cohortModelId": null
+      "cohortModelId": "claude-fable-5-1"
     },
     {
       "rank": 6,
@@ -562,6 +568,20 @@
       "tokens": "21.6B",
       "costUsd": 9600.0,
       "cohortModelId": "claude-sonnet-5"
+    },
+    "claude-fable-5-1": {
+      "rank": 5,
+      "rankLabel": "5",
+      "model": "Fable 5.1 (max)",
+      "baseModel": "Fable 5.1",
+      "agent": "Claude Code",
+      "resolutionRate": 0.579,
+      "resolutionRatePct": 57.9,
+      "uncertaintyPct": 3.8,
+      "releaseDate": "Sep 1, 2026",
+      "tokens": "2.7B",
+      "costUsd": 6200.0,
+      "cohortModelId": "claude-fable-5-1"
     }
   }
 }

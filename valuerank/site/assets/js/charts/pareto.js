@@ -35,7 +35,8 @@ export function buildPareto(models, options) {
   const base = baseLayout(opts, `ValueRank Pareto frontier: quality vs ${costLabel}`);
   const layout = {
     ...base,
-    xaxis: axisWith(base.xaxis, `${costLabel} score (0–100, higher is cheaper)`, { type: 'linear', range: [0, 105], autorange: false, tickvals: [0, 20, 40, 60, 80, 100] }),
+    // Cheaper to the left, dearer to the right, as on AA's cost charts: the score axis runs from 100 down to 0.
+    xaxis: axisWith(base.xaxis, `${costLabel} score (cheaper ← · → dearer; 100 = cheapest)`, { type: 'linear', range: [105, 0], autorange: false, tickvals: [100, 80, 60, 40, 20, 0] }),
     yaxis: axisWith(base.yaxis, 'Quality sub-score (0–100)', { range: [Math.max(0, Math.min(...quality) - 8), Math.min(100, Math.max(...quality) + 8)], autorange: false }),
     annotations: [],
     legend: { orientation: 'h', y: -0.18 },

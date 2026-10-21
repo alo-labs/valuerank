@@ -161,10 +161,10 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
     }
     assert document["rowN"] == 4
     assert document["rowsWithoutCostN"] == 0
-    assert document["cohortN"] == 5
-    assert document["matchedN"] == 3
+    assert document["cohortN"] == 6
+    assert document["matchedN"] == 4
     assert document["missingModels"] == ["Gemini 3.7 Flash", "Claude Sonnet 5"]
-    assert document["rankingAvailableN"] == 4
+    assert document["rankingAvailableN"] == 5
     assert document["rankingMissingModels"] == ["Claude Sonnet 5"]
     assert document["providerClaimN"] == 2
     assert [claim["claimId"] for claim in document["providerClaims"]] == [
@@ -185,11 +185,11 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
         "costUsd": 3300.0,
         "cohortModelId": "gpt-6-astra",
     }
-    assert document["rows"][1]["cohortModelId"] is None, "an alias-less model keeps no cohort id"
+    assert document["rows"][1]["cohortModelId"] == "claude-fable-5-1", "Fable 5.1 joined the cohort (O31)"
     assert document["rows"][1]["baseModel"] == "Fable 5.1"
     assert document["rows"][3]["baseModel"] == "Grok 4.6", "a name without a parenthetical is its own base"
     assert document["rows"][3]["costUsd"] == 450.0
-    assert list(document["cohortRows"]) == ["gpt-6-astra", "claude-opus-5", "grok-4.6"]
+    assert list(document["cohortRows"]) == ["gpt-6-astra", "claude-opus-5", "grok-4.6", "claude-fable-5-1"]
     assert document["cohortRows"]["claude-opus-5"]["model"] == "Opus 5 (max)"
     assert document["cohortRows"]["claude-opus-5"]["costUsd"] == 6000.0
     assert "providerClaimPolicy" in document
@@ -206,9 +206,9 @@ def test_main_summary_reports_counts_missing_models_and_the_output_path(data_dir
         "version": "4.0",
         "rows": 4,
         "rowsWithoutCostN": 0,
-        "cohortN": 5,
-        "matchedN": 3,
-        "rankingAvailableN": 4,
+        "cohortN": 6,
+        "matchedN": 4,
+        "rankingAvailableN": 5,
         "providerClaimN": 2,
         "missingModels": ["Gemini 3.7 Flash", "Claude Sonnet 5"],
         "rankingMissingModels": ["Claude Sonnet 5"],
@@ -266,7 +266,7 @@ def test_main_treats_a_claims_file_without_a_claims_list_as_having_no_claims(dat
     document = read_document(output)
     assert document["providerClaimN"] == 0
     assert document["providerClaims"] == []
-    assert document["rankingAvailableN"] == 3
+    assert document["rankingAvailableN"] == 4
     assert document["rankingMissingModels"] == ["Gemini 3.7 Flash", "Claude Sonnet 5"]
 
 

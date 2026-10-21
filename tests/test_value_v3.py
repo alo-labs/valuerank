@@ -358,6 +358,20 @@ def test_disjoint_evidence_agreement_compares_aa_only_with_independent_only_qual
     assert set(result["retainedLeaves"]["aaExecuted"]) == {leaf.key for leaf in q.LEAVES if leaf.source == "aa"}
 
 
+def test_policy_cohort_bar_is_a_sensitivity_over_frontier_families():
+    """E199: the bar recomputed over frontier and near-frontier rows only, with its API result, or unavailable."""
+
+    result, frozen = scored()
+    policy = v.policy_cohort_bar(result, frozen)
+    assert policy["status"] == "evaluated" and policy["bar"]["id"] == v.POLICY_BAR_ID and policy["api"]["status"] == "certified"
+    result["rows"][1]["frontierFamily"] = False
+    assert v.policy_cohort_bar(result, frozen)["status"].startswith("unavailable") and v.frontier_anchor_diagnostic(result, frozen, {})["bar"]["status"].startswith("unavailable")
+    result["rows"][1]["frontierFamily"] = True
+    for row in result["rows"]:
+        row["cost"] = dict(row["cost"], fullCost=False)
+    assert v.policy_cohort_bar(result, frozen)["api"] == {"status": "unevaluable"}
+
+
 def test_freeze_with_fewer_than_two_population_rows_pins_no_bar():
     """E192: a bar met by one configuration compares nothing, so fewer than two population rows pin no bar."""
 
@@ -525,6 +539,9 @@ def write_world(root: Path) -> Path:
         "v3_configuration_map.json": documents()["configurationMap"],
         "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}}},
         "price_records.json": documents()["priceRecords"],
+        # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
+        "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
+        "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
             + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
@@ -780,6 +797,10 @@ def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
     import hashlib
     assert snapshot["sha256"] == hashlib.sha256((data / "aa/aa_v432_snapshot.json").read_bytes()).hexdigest()
     assert snapshot["capturedAt"] is None and bundle["artifacts"][-1]["capturedAt"] == "2026-10-19"
+    by_key = {item["key"]: item for item in bundle["artifacts"]}
+    assert by_key["roster"]["artifact"] == "data/aa_mapping.json" and by_key["roster"]["capturedAt"] is None  # a list has no capture time
+    assert by_key["roster"]["sha256"] == hashlib.sha256((data / "aa_mapping.json").read_bytes()).hexdigest()
+    assert by_key["bugHuntScoreboard"]["artifact"] == "data/bug_hunt_scoreboard.json" and by_key["bugHuntScoreboard"]["capturedAt"] == "2026-10-21T06:30:00Z"
     assert len(bundle["bundleHash"]) == 64
     configurations = v.configurations_from_scores(json.loads((data / "scores.json").read_text()))
     built = v.build(configurations, data, release_day=DAY)
@@ -1217,3 +1238,14 @@ def test_configurations_record_frontier_family_membership():
         {"id": "r", "name": "R", "aaSlug": "r", "rankingEligible": True, "rankingInclusionReasons": [v.RETAINED_REASON]},
     ]}
     assert [item["frontierFamily"] for item in v.configurations_from_scores(scores)] == [True, False]
+
+
+def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
+    """E187: build_scores passes every scored row through configuration(), so retained rows reach v3 as non-frontier."""
+
+    frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note",
+                "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
+    assert v.configuration(frontier) == {"id": "f", "name": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True}
+    retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON]}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": False}
+    assert v.configuration({"id": "x", "name": "X", "aaSlug": "x"})["frontierFamily"] is False  # no stated reason

@@ -70,6 +70,8 @@ def test_row_flags_name_subset_provisional_partial_and_caveat_in_order():
     assert viewmodel._row_flags(_v3_row("a", 1.0, 50.0)) == []
     flags = viewmodel._row_flags(_v3_row("a", 1.0, 50.0, subset=True, provisional=True, partial=["x"], caveat="long-context pricing"))
     assert [flag.split(":")[0] for flag in flags] == ["Subset cost", "Provisional quality", "Partial cost component", "AA cost caveat"]
+    # A row without a cost says so instead of claiming a subset workload (AGENTS.md: no cost, no value score).
+    assert viewmodel._row_flags(_v3_row("a", None, 50.0, subset=True))[0].startswith("No cost: AA publishes no cost")
 
 
 def test_pareto_set_uses_point_estimates_on_the_main_workload_only():
@@ -312,3 +314,14 @@ def test_changelog_slugs_replace_dots_so_links_match_model_pages():
     assert latest["ranks"] == {"gpt-6-1-sol": 1, "kimi-k3": 2}
     assert [c["slug"] for c in latest["rankChanges"]] == ["gpt-6-1-sol", "kimi-k3"]
     assert latest["removed"] == ["old-model"]
+
+
+def test_changelog_leaves_a_model_without_an_api_rank_out_of_the_current_snapshot():
+    """AGENTS.md: a configuration without a cost has no value score and no rank, so it is neither ranked nor 'added'."""
+
+    current = _current(ranks={"a": {"api": 1, "plan": 1}, "e": {"api": None, "plan": None}})
+    result = changelog.build_changelog(HISTORY, current, {**NAMES, "e": "Epsilon"})
+    latest = result["versions"][0]
+    assert latest["ranks"] == {"a": 1} and "e" not in latest["added"]
+    assert latest["summary"].startswith("1 model ranked on 16 dimensions; Alpha")
+    assert latest["models"] == 3  # the cohort count is the release's own, not the ranked count

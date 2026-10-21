@@ -44,20 +44,41 @@ def test_configuration_and_model_labels():
 
 
 def entry_with(**cost):
-    base = {"subset": False, "partialComponents": [], "fallback": None, "route": None}
+    base = {"subset": False, "partialComponents": [], "fallback": None, "route": None, "apiUsd": 100.0}
     return {"cost": {**base, **cost}, "coverage": {"provisional": False}}
 
 
-def test_short_flags_name_every_condition_in_legend_order():
+UNVERIFIED = {"valuationGate": {"outcome": "valuation basis unverified"}}
+
+
+def test_short_flags_name_every_condition():
     assert ed.short_flags(entry_with(), {}) == "—"
     everything = entry_with(subset=True, partialComponents=["gdp-pdf"], fallback="api")
     everything["coverage"]["provisional"] = True
-    assert ed.short_flags(everything, {"aaCostCaveat": "note"}) == (
-        "subset cost, provisional quality, partial component, AA cost caveat, API-cost fallback"
-    )
+    flags = ed.short_flags(everything, {"aaCostCaveat": "note", **UNVERIFIED}).split(", ")
+    assert sorted(flags) == sorted(["subset cost", "provisional quality", "partial component", "valuation basis unverified", "AA cost caveat", "API-cost fallback"])
     assert [word for word, _text in ed.FLAG_LEGEND] == [
-        "subset cost", "provisional quality", "partial component", "AA cost caveat", "API-cost fallback",
+        "subset cost", "provisional quality", "partial component", "valuation basis unverified", "no cost", "AA cost caveat", "API-cost fallback",
     ]
+    assert ed.short_flags(entry_with(), {"valuationGate": {"outcome": "compatible as captured"}}) == "—"
+    assert ed.short_flags(entry_with(), UNVERIFIED) == "valuation basis unverified"
+
+
+def test_a_row_without_a_cost_is_flagged_no_cost_and_nothing_cost_derived():
+    """AGENTS.md: no cost means no value score; "subset cost" and "valuation basis unverified" describe a cost, so they are suppressed."""
+
+    costless = entry_with(subset=True, apiUsd=None)
+    costless["coverage"]["provisional"] = True
+    assert ed.short_flags(costless, UNVERIFIED) == "provisional quality, no cost"
+    assert ed.short_flags(entry_with(apiUsd=None), {}) == "no cost"
+
+
+def test_short_flags_follow_the_legend_order():
+    everything = entry_with(subset=True, partialComponents=["gdp-pdf"], fallback="api")
+    everything["coverage"]["provisional"] = True
+    flags = ed.short_flags(everything, {"aaCostCaveat": "note", **UNVERIFIED}).split(", ")
+    legend = [word for word, _text in ed.FLAG_LEGEND]
+    assert flags == sorted(flags, key=legend.index)
 
 
 def test_route_text_names_the_route_or_a_dash():
@@ -149,7 +170,7 @@ def cost_world(**overrides):
         "basketReadiness": {"pricedMixCoverage": 2 / 3, "pricedLeaves": ["deepswe", "lcr"], "components": {"frontiercode": {"status": "pending capture"}, "scicode": {"status": "admitted"}}},
         "sweCompanion": {"rows": {"a": {"flag": True}, "b": {"flag": False}}},
         "matchedCost": {"status": "evaluated", "pricedQualityWeight": 0.5, "reversals": [["a", "b"]], "warnings": []},
-        "frontierAnchors": {"status": "evaluated", "references": ["a", "b"], "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.0}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 3.5}} for basis in ("api", "plan")}},
+        "frontierAnchors": {"status": "evaluated", "references": ["a", "b"], "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.0}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 3.5}} for basis in ("api", "plan")}, "bar": {"status": "unavailable: fewer than 2 non-provisional frontier-family configurations"}},
         "costComponentFamily": [
             {"component": "scicode", "bases": {basis: {"recalibrated": {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 5.0}}} for basis in ("api", "plan")}},
             {"component": "frontiercode", "status": "not in the admitted basket"},
@@ -175,6 +196,36 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     assert "Plan: unavailable: fewer than 2 complete-evidence references" in text and "the direction of its subset effect is not known" in text
     assert "anchors rebuilt from the 2 frontier and near-frontier references move API 2 rows move" in text and "(value points per cost doubling 3.00 vs 3.50 frozen)" in text
     quiet = ed.cost_diagnostics_markdown(cost_world(subsetBridges=[], matchedCost={"status": "unidentified (priced quality weight below 40%)"}, sweCompanion={"rows": {}},
-                                                    frontierAnchors={"status": "unavailable: fewer than 2 frontier-family references"}))
+                                                    frontierAnchors={"status": "unavailable: fewer than 2 frontier-family references", "bar": {"status": "unavailable"}}))
     assert "- **Frontier-families anchors (E187, diagnostic):** unavailable: fewer than 2 frontier-family references." in quiet
     assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet
+
+
+def test_policy_bar_text_covers_each_outcome():
+    """E199: the frontier-families bar sentence for unavailable, unresolved, confirmed and non-unique results."""
+
+    class Facts:
+        label = staticmethod(lambda row_id: row_id.upper())
+        labels = staticmethod(lambda row_ids: ", ".join(row_id.upper() for row_id in row_ids))
+
+    bar = {"level": 55.04}
+    assert ed.policy_bar_text({"status": "unavailable: too few"}, Facts).endswith("unavailable: too few.")
+    unresolved = {"status": "evaluated", "population": ["a", "b"], "bar": bar, "api": {"status": "unresolved"}}
+    assert ed.policy_bar_text(unresolved, Facts).endswith("quality 55.0 over 2 configurations; API main workload unresolved.")
+    confirmed = {**unresolved, "api": {"status": "certified", "confirmedCheapest": "a", "possibleCheapest": ["a"], "comparison": "compares 2 configurations that can qualify"}}
+    assert "cheapest at or above it on the API main workload: A (confirmed) (compares 2" in ed.policy_bar_text(confirmed, Facts)
+    open_ = {**unresolved, "api": {**confirmed["api"], "confirmedCheapest": None, "possibleCheapest": ["a", "b"]}}
+    assert "not unique; possibly A, B" in ed.policy_bar_text(open_, Facts)
+
+
+def test_coding_share_text_reports_the_median_coding_share():
+    """E200: coding and terminal tasks' share of the basket's cost, over full-basket rows only."""
+
+    def row(costs, full=True):
+        return {"cost": {"fullCost": full, "costUsd": sum(costs.values()), "components": list(costs),
+                         "componentsDetail": {key: {"costUsd": value} for key, value in costs.items()}}}
+
+    rows = [row({"coding-agent-index": 40.0, "gdpval-aa": 60.0}), row({"coding-agent-index": 10.0, "scicode": 10.0, "gdpval-aa": 80.0}), row({"gdpval-aa": 5.0}, full=False)]
+    text = ed.coding_share_text({"rows": rows})
+    assert "make up 30% of the basket's cost (median over 2 configurations with the full basket; 20% to 40%)" in text
+    assert ed.coding_share_text({"rows": rows[2:]}) == ""

@@ -55,6 +55,7 @@ FILES = {
     "livebench": "data/livebench.json",
     "tb4": "data/tb4.json",
     "bughunt": "data/bug_hunt.json",
+    "scoreboard": "data/bug_hunt_scoreboard.json",
 }
 
 
@@ -227,18 +228,30 @@ def test_emphasis_weight_matches_published_percentage_and_scores():
 
 def test_emphasis_skips_dimensions_with_one_measured_row_and_breaks_ties_by_cost_then_name():
     rows = [
-        bh_row("a", 10, 0.9, None),
-        bh_row("b", 10, None, None),
+        bh_row("a", 10, None, None),
         bh_row("c", 10, None, 4),
+        bh_row("b", 10, None, 4),
+        bh_row("d", 10, 0.9, None),
     ]
     ranking, ranked, weights = build_scores.build_bug_hunt_emphasis(rows, WEIGHTS, DOC)
-    # hle is measured for one row only -> dropped; cost for one row only -> dropped,
-    # so Bug Hunt carries all of the weight
-    assert [w["key"] for w in weights] == ["bugHuntFixedOf105"]
-    assert weights[0]["weightPct"] == 100.0 == ranking["benchmarkWeightPct"]
+    # hle is measured for one row only -> dropped; cost (two rows) keeps its fixed share
+    assert [w["key"] for w in weights] == ["costComposite", "bugHuntFixedOf105"]
+    assert weights[1]["weightPct"] == 75.0 == ranking["benchmarkWeightPct"]
     assert {r["emphasisScore"] for r in ranking["ranking"]} == {50.0}
-    # equal scores: lower cost first, missing cost (inf) last, then name
-    assert [r["id"] for r in ranked] == ["c", "a", "b"]
+    # equal scores and equal cost: by name
+    assert [r["id"] for r in ranked] == ["b", "c"]
+
+
+def test_emphasis_gives_a_row_without_cost_no_score_and_no_rank():
+    """AGENTS.md: a configuration without a cost gets no value score, so it is left out of the emphasis ranking."""
+
+    rows = [bh_row("a", 10, None, None), bh_row("b", 20, None, 4), bh_row("c", 30, None, 8)]
+    ranking, ranked, _weights = build_scores.build_bug_hunt_emphasis(rows, WEIGHTS, DOC)
+    assert [r["id"] for r in ranked] == ["c", "b"]
+    assert rows[0]["bugHuntEmphasisScore"] is None and rows[0]["bugHuntEmphasisRank"] is None
+    assert rows[0]["bugHuntEmphasisDims"]["bugHuntFixedOf105"] == 0.0  # it keeps its normalised Bug Hunt value
+    assert ranking["matchedN"] == 2 and ranking["coveragePct"] == round(100 * 2 / 3, 2)
+    assert [r["rank"] for r in ranking["ranking"]] == [1, 2]
 
 
 # --------------------------------------------------------------------------
@@ -278,7 +291,7 @@ def test_metric_coverage_percentage_and_renormalized_priority(built):
     models = built["scores.json"]["models"]
     weights = {w["key"]: w["priority"] for w in built["scores.json"]["weights"] if w["key"] != "costComposite"}
     total = sum(weights.values())
-    partial = 0
+    partial = no_cost = 0
     for row in models:
         coverage = row["metricCoverage"]
         has_cost = "costComposite" in row["dims"]
@@ -295,9 +308,15 @@ def test_metric_coverage_percentage_and_renormalized_priority(built):
         quality = [k for k in weights if k in row["dims"]]
         expected_q = sum(row["dims"][k] * weights[k] for k in quality) / sum(weights[k] for k in quality)
         assert row["qualityScore"] == round(expected_q, 1)
+        if not has_cost:
+            # AGENTS.md: a configuration without a cost gets no value score and no rank.
+            no_cost += 1
+            assert row["overallScore"] is None and row["rank"] is None and row["rankingStatus"] == "unranked_no_cost"
+            continue
         # Cost carries exactly 25% whatever quality metrics are missing.
         assert row["overallScore"] == round(0.25 * row["dims"]["costComposite"] + 0.75 * expected_q, 1)
     assert partial > 0  # the committed data contains rows with missing metrics
+    assert no_cost == 1  # Muse Wonder Full: AA publishes no cost for it
 
 
 def test_ranked_order_and_exclusions(built):
@@ -741,8 +760,10 @@ def test_single_missing_cost_leaves_that_row_unnormalized(world):
     assert rows["gpt-6.1-sol"]["aaCostPerIndexPoint"] is None
     assert "costComposite" in rows["gpt-6.1-sol"]["metricCoverage"]["missingKeys"]
     assert rows["gpt-6.1-sol"]["metricCoverage"]["costAvailable"] is False
-    # without a cost the row is scored on quality alone
-    assert rows["gpt-6.1-sol"]["overallScore"] == rows["gpt-6.1-sol"]["qualityScore"]
+    # without a cost the row has no value score and no rank (AGENTS.md); its quality still stands
+    assert rows["gpt-6.1-sol"]["overallScore"] is None and rows["gpt-6.1-sol"]["qualityScore"] is not None
+    assert rows["gpt-6.1-sol"]["rank"] is None and rows["gpt-6.1-sol"]["rankingStatus"] == "unranked_no_cost"
+    assert rows["gpt-6.1-sol"]["bugHuntEmphasisRank"] is None
     assert rows["gpt-6.1-sol"]["isMissing"] is True
     assert rows["gpt-6.1-sol"]["pareto"] is None  # no cost, so it never enters the Pareto comparison
 
@@ -1248,6 +1269,46 @@ def test_a_bug_hunt_result_at_another_effort_is_not_used():
     assert moved["matched"] is False and moved["matchStatus"] == "effort_mismatch" and "No result is transferred" in moved["note"]
 
 
+def test_unrostered_evidence_flags_a_deepswe_configuration_bug_hunt_also_reports():
+    """O31: an unrostered DeepSWE configuration with a Bug Hunt row for the same model (version suffix allowed) and effort."""
+
+    deepswe = [
+        {"model": "Muse Wonder", "effort": "max", "matchStatus": "not_in_roster", "displayLabel": "Muse Code - Muse Wonder (max)"},
+        {"model": "Beam 1.0", "effort": None, "matchStatus": "not_in_roster", "displayLabel": "Beam 1.0"},
+        {"model": "GPT-6 Astra", "effort": "max", "matchStatus": "exact_variant", "displayLabel": "Codex - GPT-6 Astra (max)"},
+        {"model": "Muse Spark Open", "effort": "xhigh", "matchStatus": "not_in_roster", "displayLabel": "Muse Spark Open (xhigh)"},
+    ]
+    scoreboard = [
+        {"model": "Beam 1.0 (max effort)"},
+        {"model": "GPT-6 Astra (max effort)"},
+        {"model": "Muse Wonder 1.0 (xhigh effort, Muse Code)"},  # another effort
+        {"model": "Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3"},
+        {"model": "Muse Wonder (max effort)"},  # a second match is not reported twice
+        {"model": "Muse Spark Openly (xhigh effort)"},  # a longer name is not a version suffix
+        {"model": "Muse Spark Open"},  # no effort stated
+    ]
+    assert build_scores.unrostered_evidence(deepswe, scoreboard) == [
+        "Muse Code - Muse Wonder (max) / Bug Hunt Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3",
+    ]
+    assert build_scores.unrostered_evidence(deepswe, scoreboard[:3]) == []
+
+
+def test_committed_data_has_no_unrostered_evidenced_configuration():
+    deepswe = json.loads((ROOT / "data" / "aa_deepswe.json").read_text())["configurations"]
+    scoreboard = json.loads((ROOT / "data" / "bug_hunt_scoreboard.json").read_text())["rows"]
+    assert build_scores.unrostered_evidence(deepswe, scoreboard) == []
+
+
+def test_build_fails_when_an_evidenced_configuration_is_missing_from_the_roster(world):
+    """O31: the build refuses to drop a model with exact DeepSWE and Bug Hunt results at one effort."""
+
+    edit(world, "deepswe", lambda d: d["configurations"].append(
+        {"model": "Phantom", "effort": "max", "matchStatus": "not_in_roster", "displayLabel": "CLI - Phantom (max)"}))
+    edit(world, "scoreboard", lambda d: d["rows"].append({"model": "Phantom 2.0 (max effort, CLI)", "harness": "CLI", "fixedOf105": 1.0}))
+    with pytest.raises(ValueError, match=r"missing from the roster \(O31\): CLI - Phantom \(max\) / Bug Hunt Phantom 2.0 \(max effort, CLI\)"):
+        run_main(world)
+
+
 def test_deferred_near_family_counts_but_adds_no_ranked_model(world):
     run_main(world)
     base = outputs(world)
@@ -1289,3 +1350,17 @@ def test_module_entry_point_runs_main_and_exits_zero(world, monkeypatch, capsys)
     assert exit_info.value.code == 0
     assert json.loads(capsys.readouterr().out)["version"] == build_scores.VERSION
     assert (world / "data/scores.json").read_bytes() == (ROOT / "data/scores.json").read_bytes()
+
+
+def test_frontier_family_diagnostics_use_only_frontier_and_near_frontier_rows():
+    """E187: build_scores hands each row's frontier-family flag to the v3 engine, so retained-only rows are not references."""
+
+    from valuerank import value_v3
+
+    scores = json.loads((ROOT / "data" / "scores.json").read_text())
+    family = {row["id"] for row in scores["models"] if row["rankingEligible"] and value_v3.configuration(row)["frontierFamily"]}
+    retained = {row["id"] for row in scores["models"] if row["rankingEligible"]} - family
+    assert {"muse-wonder", "claude-fable-5-1", "gpt-5.6-sol"} <= retained
+    frontier = scores["v3"]["diagnostics"]["frontierAnchors"]
+    assert len(frontier["references"]) == 8 and set(frontier["references"]) <= family
+    assert set(frontier["bar"]["population"]) <= family and frontier["bar"]["bar"]["id"] == value_v3.POLICY_BAR_ID

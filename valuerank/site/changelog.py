@@ -56,7 +56,8 @@ def _snapshots(history: dict, current: dict) -> list[dict]:
         {
             "version": current["version"],
             "dateIso": current["dateIso"],
-            "ranks": {model_id: ranks["api"] for model_id, ranks in current["ranks"].items()},
+            # A configuration without a cost has no value score and no rank (AGENTS.md), so it is left out.
+            "ranks": {model_id: ranks["api"] for model_id, ranks in current["ranks"].items() if ranks["api"] is not None},
             "models": current["modelCount"],
             "dimensions": current["dimensionCount"],
         }

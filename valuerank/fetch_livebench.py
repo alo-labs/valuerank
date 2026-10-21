@@ -84,13 +84,19 @@ COHORT_MAP = {
     "claude-haiku-5-5": None,
     "claude-sonnet-5-5": None,
     "gemini-4-argon": None,
+    # Retained by owner decision O31 (2026-10-21). The pinned release lists Fable 5.1 at max effort; the Muse
+    # models were released after it.
+    "claude-fable-5-1": "claude-fable-5-1-max-effort",
+    "muse-spark-1-3": None,
+    "muse-wonder": None,
+    "muse-wonder-full": None,
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in
 # the benchmark-specific views without silently changing the primary ranking
 # population.  These rows are stored separately as `supplementalModels`.
-SUPPLEMENTAL_MAP = {
-    "claude-fable-5-1": ("Claude Fable 5.1", "claude-fable-5-1-max-effort"),
+SUPPLEMENTAL_MAP: dict[str, tuple[str, str]] = {
+    # Claude Fable 5.1 moved into the cohort on 2026-10-21 (owner decision O31).
 }
 
 

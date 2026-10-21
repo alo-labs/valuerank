@@ -15,7 +15,7 @@
       "plan": 56.15363394361307
     },
     "quality": 58.27519438516182,
-    "qualityRank": 7,
+    "qualityRank": 11,
     "coverage": {
       "pct": 90.0,
       "costAvailable": true,
@@ -430,17 +430,17 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0536,
-        "frontier": 0.1122
+        "top3": 0.0464,
+        "frontier": 0.1146
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0047,
-        "top3": 0.0573,
-        "frontier": 0.1049
+        "top1": 0.0042,
+        "top3": 0.0558,
+        "frontier": 0.1125
       },
       {
         "stratum": "S1",
@@ -448,8 +448,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0569,
-        "frontier": 0.2156
+        "top3": 0.0529,
+        "frontier": 0.2108
       },
       {
         "stratum": "S1M",
@@ -457,8 +457,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.051,
-        "frontier": 0.1184
+        "top3": 0.0456,
+        "frontier": 0.1151
       }
     ],
     "plan": [

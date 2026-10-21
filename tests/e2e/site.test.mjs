@@ -153,7 +153,7 @@ describe('evidence footnotes', () => {
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
-    assert.equal(await page.locator('#rankings-body tr').count(), 31);
+    assert.equal(await page.locator('#rankings-body tr').count(), 35); // every roster model (35)
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
@@ -267,9 +267,9 @@ describe('charts, model, plans and listing pages', () => {
     await context.close();
   });
 
-  test('the models index lists all 31 models and links to their pages', async () => {
+  test('the models index lists all 35 models and links to their pages', async () => {
     const { page, context } = await open('/models/');
-    assert.equal(await page.locator('#models-table tbody tr').count(), 31);
+    assert.equal(await page.locator('#models-table tbody tr').count(), 35);
     await page.locator('#models-table a.model-name', { hasText: 'GPT-6.1 Sol' }).first().click();
     await page.waitForURL(/\/models\/gpt-6-1-sol\/$/);
     assert.equal(await page.locator('h1').innerText(), 'GPT-6.1 Sol');

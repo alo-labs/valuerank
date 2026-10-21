@@ -1285,5 +1285,33 @@
     "displayName": "Gemini 4 Argon",
     "url": "https://artificialanalysis.ai/models/gemini-4-argon",
     "variant": "gemini-4-argon"
+  },
+  {
+    "id": "claude-fable-5-1",
+    "displayName": "Claude Fable 5.1",
+    "url": "https://artificialanalysis.ai/models/claude-fable-5-1",
+    "variant": "claude-fable-5-1",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Selected configuration: Claude Fable 5.1 (max with fallback), the effort of the exact DeepSWE and Bug Hunt results."
+  },
+  {
+    "id": "muse-spark-1-3",
+    "displayName": "Muse Spark 1.3",
+    "url": "https://artificialanalysis.ai/models/muse-spark-1-3",
+    "variant": "muse-spark-1-3",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Both max and xhigh have exact DeepSWE and Bug Hunt results; max is selected as the higher AA Intelligence Index (48 against 45)."
+  },
+  {
+    "id": "muse-wonder",
+    "displayName": "Muse Wonder",
+    "url": "https://artificialanalysis.ai/models/muse-wonder",
+    "variant": "muse-wonder",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Selected configuration: Muse Wonder (max), AA's only Muse Wonder configuration."
+  },
+  {
+    "id": "muse-wonder-full",
+    "displayName": "Muse Wonder Full",
+    "url": "https://artificialanalysis.ai/models/muse-wonder-full",
+    "variant": "muse-wonder-full",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Selected configuration: Muse Wonder Full (max), AA's only Muse Wonder Full configuration. AA publishes an Intelligence Index but no prices or Index cost for it, so it is not plotted on the cost chart and has no cost."
   }
 ]

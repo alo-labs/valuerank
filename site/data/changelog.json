@@ -3,9 +3,9 @@
     {
       "version": "v3.0.0",
       "date": "October 19, 2026",
-      "models": 19,
+      "models": 23,
       "dimensions": 12,
-      "summary": "19 models ranked on 12 dimensions; MiMo-V2.6-Flash is first on the API basis.",
+      "summary": "22 models ranked on 12 dimensions; MiMo-V2.6-Flash is first on the API basis.",
       "rankChanges": [
         {
           "slug": "mimo-v2-6-flash",
@@ -47,91 +47,98 @@
           "slug": "claude-haiku-5-5",
           "name": "Claude Haiku 5.5",
           "from": 13,
-          "to": 9
+          "to": 11
         },
         {
           "slug": "deepseek-v4-pro",
           "name": "DeepSeek V4 Pro",
           "from": 19,
-          "to": 10
+          "to": 12
         },
         {
           "slug": "gpt-5-6-sol",
           "name": "GPT-5.6 Sol",
           "from": 6,
-          "to": 11
+          "to": 13
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "from": 3,
-          "to": 12
+          "to": 14
         },
         {
           "slug": "claude-opus-5-5",
           "name": "Claude Opus 5.5",
           "from": 5,
-          "to": 13
+          "to": 15
         },
         {
           "slug": "gpt-6-astra",
           "name": "GPT-6 Astra",
           "from": 4,
-          "to": 14
+          "to": 16
         },
         {
           "slug": "gemini-3-8-flash",
           "name": "Gemini 3.8 Flash",
           "from": 14,
-          "to": 15
+          "to": 17
         },
         {
           "slug": "grok-4-7",
           "name": "Grok 4.7",
           "from": 9,
-          "to": 16
+          "to": 19
         },
         {
           "slug": "glm-5-3",
           "name": "GLM-5.3",
           "from": 16,
-          "to": 17
+          "to": 20
         },
         {
           "slug": "claude-opus-5",
           "name": "Claude Opus 5",
           "from": 15,
-          "to": 18
+          "to": 21
         },
         {
           "slug": "qwen3-8-max",
           "name": "Qwen3.8 Max",
           "from": 18,
-          "to": 19
+          "to": 22
         }
       ],
       "ranks": {
-        "claude-haiku-5-5": 9,
-        "claude-opus-5": 18,
-        "claude-opus-5-5": 13,
-        "claude-sonnet-5-5": 12,
+        "claude-fable-5-1": 18,
+        "claude-haiku-5-5": 11,
+        "claude-opus-5": 21,
+        "claude-opus-5-5": 15,
+        "claude-sonnet-5-5": 14,
         "deepseek-v4-flash": 7,
-        "deepseek-v4-pro": 10,
-        "gemini-3-8-flash": 15,
+        "deepseek-v4-pro": 12,
+        "gemini-3-8-flash": 17,
         "gemini-4-argon": 4,
-        "glm-5-3": 17,
+        "glm-5-3": 20,
         "gpt-5-6-luna": 6,
-        "gpt-5-6-sol": 11,
-        "gpt-6-astra": 14,
+        "gpt-5-6-sol": 13,
+        "gpt-6-astra": 16,
         "gpt-6-luna": 3,
         "gpt-6-sol": 8,
         "gpt-6-1-sol": 2,
-        "grok-4-7": 16,
+        "grok-4-7": 19,
         "mimo-v2-6-flash": 1,
         "mimo-v2-6-pro": 5,
-        "qwen3-8-max": 19
+        "muse-spark-1-3": 10,
+        "muse-wonder": 9,
+        "qwen3-8-max": 22
       },
-      "added": [],
+      "added": [
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder"
+      ],
       "removed": []
     },
     {

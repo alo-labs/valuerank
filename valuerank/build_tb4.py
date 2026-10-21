@@ -28,6 +28,7 @@ COHORT_ALIAS = {
     "GPT-5.6 Luna": "gpt-5.6-luna",
     "Sonnet 5": "claude-sonnet-5",
     "Gemini 3.7 Flash": "gemini-3.7-flash",
+    "Fable 5.1": "claude-fable-5-1",
 }
 
 

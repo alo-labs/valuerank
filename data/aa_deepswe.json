@@ -18,7 +18,7 @@
     "responseBytes": 950389
   },
   "selectionPolicy": "Use the benchmark-owner chart for the exact displayed model version and retain its agent and effort configuration. Do not transfer scores across model versions or composite-agent configurations. A ValueRank family row is mapped only when its evaluated model variant matches the chart row.",
-  "freshnessNote": "All 42 configurations with a DeepSWE v1.1 evaluation were captured automatically on 2026-10-17; 17 map to an exact ValueRank roster variant. Against the previous capture of 2026-10-08: 28 retained, 14 new and 3 removed (by agent, model, effort and fallback). Scores are the owner's mean reward at full precision, rounded to one decimal place. On 2026-10-21 the GPT-6 Astra roster variant moved from xhigh to max (owner decision O30) and the mapping was re-run on this capture without re-fetching it.",
+  "freshnessNote": "All 42 configurations with a DeepSWE v1.1 evaluation were captured automatically on 2026-10-17; 21 map to an exact ValueRank roster variant. Against the previous capture of 2026-10-08: 28 retained, 14 new and 3 removed (by agent, model, effort and fallback). Scores are the owner's mean reward at full precision, rounded to one decimal place. On 2026-10-21 the GPT-6 Astra roster variant moved from xhigh to max (owner decision O30) and the mapping was re-run on this capture without re-fetching it. On 2026-10-21 Claude Fable 5.1, Muse Spark 1.3, Muse Wonder and Muse Wonder Full joined the roster as retained configurations with exact DeepSWE and Bug Hunt results (owner decision O31) and the mapping was again re-run on this capture without re-fetching it.",
   "configurations": [
     {
       "sourceOrder": 1,
@@ -57,9 +57,9 @@
       "meanOutputTokens": 98151.375,
       "scorePrecision": "payload_full_precision",
       "agentVersion": "1.4.5-R5426.1",
-      "valueRankModelId": null,
-      "matchStatus": "not_in_roster",
-      "matchNote": "No ValueRank roster model has this chart model name.",
+      "valueRankModelId": "muse-wonder-full",
+      "matchStatus": "exact_variant",
+      "matchNote": "Exact variant: chart model Muse Wonder Full (max) matches the roster display name 'Muse Wonder Full' at effort max.",
       "observedAt": "2026-10-17T19:26:26Z",
       "previouslyObservedAt": null,
       "previousScorePct": null
@@ -79,9 +79,9 @@
       "meanOutputTokens": 93286.2581120944,
       "scorePrecision": "payload_full_precision",
       "agentVersion": "1.4.5-R5426.1",
-      "valueRankModelId": null,
-      "matchStatus": "not_in_roster",
-      "matchNote": "No ValueRank roster model has this chart model name.",
+      "valueRankModelId": "muse-wonder",
+      "matchStatus": "exact_variant",
+      "matchNote": "Exact variant: chart model Muse Wonder (max) matches the roster display name 'Muse Wonder' at effort max.",
       "observedAt": "2026-10-17T19:26:26Z",
       "previouslyObservedAt": null,
       "previousScorePct": null
@@ -124,8 +124,8 @@
       "scorePrecision": "payload_full_precision",
       "agentVersion": "1.0.2-R2040.1",
       "valueRankModelId": null,
-      "matchStatus": "not_in_roster",
-      "matchNote": "No ValueRank roster model has this chart model name.",
+      "matchStatus": "effort_mismatch",
+      "matchNote": "Model family matches the roster display name 'Muse Spark 1.3', but the chart row's effort (xhigh) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort.",
       "observedAt": "2026-10-17T19:26:26Z",
       "previouslyObservedAt": "2026-10-08",
       "previousScorePct": 73
@@ -255,9 +255,9 @@
       "meanOutputTokens": 122491.69026548673,
       "scorePrecision": "payload_full_precision",
       "agentVersion": "1.0.3-R2198.1",
-      "valueRankModelId": null,
-      "matchStatus": "not_in_roster",
-      "matchNote": "No ValueRank roster model has this chart model name.",
+      "valueRankModelId": "muse-spark-1-3",
+      "matchStatus": "exact_variant",
+      "matchNote": "Exact variant: chart model Muse Spark 1.3 (max) matches the roster display name 'Muse Spark 1.3' at effort max.",
       "observedAt": "2026-10-17T19:26:26Z",
       "previouslyObservedAt": "2026-10-08",
       "previousScorePct": 72
@@ -585,9 +585,9 @@
       "meanOutputTokens": 155542.35398230088,
       "scorePrecision": "payload_full_precision",
       "agentVersion": "2.1.263",
-      "valueRankModelId": null,
-      "matchStatus": "not_in_roster",
-      "matchNote": "No ValueRank roster model has this chart model name. AA labels this configuration 'with fallback'; the marker is recorded but does not affect matching.",
+      "valueRankModelId": "claude-fable-5-1",
+      "matchStatus": "exact_variant",
+      "matchNote": "Exact variant: chart model Fable 5.1 (max) matches the roster display name 'Claude Fable 5.1' at effort max. AA labels this configuration 'with fallback'; the marker is recorded but does not affect matching.",
       "observedAt": "2026-10-17T19:26:26Z",
       "previouslyObservedAt": "2026-10-08",
       "previousScorePct": 64

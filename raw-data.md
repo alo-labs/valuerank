@@ -120,6 +120,17 @@ Every input behind the published scores, with the artifact and locator that hold
 | MiMo-V2.6-Flash | Humanity's Last Exam | 0.350787766450417 | fraction | 35.08 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-flash].model.hle` |
 | MiMo-V2.6-Flash | SciCode | 0.512731481481482 | fraction | 51.27 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-flash].model.scicode` |
 | MiMo-V2.6-Flash | CritPt | 0.12 | fraction | 12.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-flash].model.critpt` |
+| Claude Fable 5.1 (max) | DeepSWE v1.1 | 64.3 | percent | 64.30 | Claude Code - Fable 5.1 (max) (with fallback) / Claude Code | `data/aa_deepswe.json` `configurations[valueRankModelId=claude-fable-5-1].scorePct` |
+| Claude Fable 5.1 (max) | Bug Hunt Bench | 43.0 | bugs fixed of 105 | 40.95 | Fable 5.1 (max effort) | `data/bug_hunt.json` `models[modelId=claude-fable-5-1].fixedOf105` |
+| Claude Fable 5.1 (max) | AA FrontierCode 1.1 | 0.489732333333333 | fraction | 48.97 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.frontierCode` |
+| Claude Fable 5.1 (max) | Terminal-Bench 4.0 (tbench.ai) | 57.9 | percent | 57.90 | Fable 5.1 (max) / Claude Code | `data/tb4.json` `rows[model=Fable 5.1 (max), agent=Claude Code].resolutionRatePct` |
+| Claude Fable 5.1 (max) | GDPval-AA v2.1 | 1754.07 | Elo | 62.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.gdpval` |
+| Claude Fable 5.1 (max) | AutomationBench-AA | 0.5937591715646424 | fraction | 59.38 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.automationBenchPartialScore` |
+| Claude Fable 5.1 (max) | AA-Omniscience | 43.45 | AA Omniscience Index | 71.72 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.omniscience` |
+| Claude Fable 5.1 (max) | AA-LCR v1.1 | 0.853333333333333 | fraction | 85.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.lcr` |
+| Claude Fable 5.1 (max) | Humanity's Last Exam | 0.591288229842447 | fraction | 59.13 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.hle` |
+| Claude Fable 5.1 (max) | SciCode | 0.630787037037037 | fraction | 63.08 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.scicode` |
+| Claude Fable 5.1 (max) | CritPt | 0.297142857142857 | fraction | 29.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-1].model.critpt` |
 | Gemini 4 Argon (high) | DeepSWE v1.1 | 78.8 | percent | 78.80 | Antigravity CLI - Gemini 4 Argon (high) / Antigravity CLI | `data/aa_deepswe.json` `configurations[valueRankModelId=gemini-4-argon].scorePct` |
 | Gemini 4 Argon (high) | Bug Hunt Bench | 40.7 | bugs fixed of 105 | 38.76 | Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 | `data/bug_hunt.json` `models[modelId=gemini-4-argon].fixedOf105` |
 | Gemini 4 Argon (high) | AA FrontierCode 1.1 | 0.434532 | fraction | 43.45 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.frontierCode` |
@@ -130,6 +141,15 @@ Every input behind the published scores, with the artifact and locator that hold
 | Gemini 4 Argon (high) | Humanity's Last Exam | 0.570898980537535 | fraction | 57.09 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.hle` |
 | Gemini 4 Argon (high) | SciCode | 0.618055555555556 | fraction | 61.81 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.scicode` |
 | Gemini 4 Argon (high) | CritPt | 0.271428571428571 | fraction | 27.14 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.critpt` |
+| Muse Wonder (max) | DeepSWE v1.1 | 75.8 | percent | 75.80 | Muse Code - Muse Wonder (max) / Muse Code | `data/aa_deepswe.json` `configurations[valueRankModelId=muse-wonder].scorePct` |
+| Muse Wonder (max) | Bug Hunt Bench | 31.7 | bugs fixed of 105 | 30.19 | Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3 | `data/bug_hunt.json` `models[modelId=muse-wonder].fixedOf105` |
+| Muse Wonder (max) | GDPval-AA v2.1 | 1770.34 | Elo | 63.52 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder].model.gdpval` |
+| Muse Wonder (max) | AutomationBench-AA | 0.6809455131207758 | fraction | 68.09 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder].model.automationBenchPartialScore` |
+| Muse Wonder (max) | AA-Omniscience | 25.483333333333334 | AA Omniscience Index | 62.74 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder].model.omniscience` |
+| Muse Wonder (max) | AA-LCR v1.1 | 0.806666666666667 | fraction | 80.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder].model.lcr` |
+| Muse Wonder (max) | Humanity's Last Exam | 0.500926784059314 | fraction | 50.09 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder].model.hle` |
+| Muse Wonder (max) | SciCode | 0.603009259259259 | fraction | 60.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder].model.scicode` |
+| Muse Wonder (max) | CritPt | 0.282857142857143 | fraction | 28.29 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder].model.critpt` |
 | MiMo-V2.6-Pro | Bug Hunt Bench | 18 | bugs fixed of 105 | 17.14 | MiMo-V2.6-Pro (first-party, thinking enabled) | `data/bug_hunt.json` `models[modelId=mimo-v2-6-pro].fixedOf105` |
 | MiMo-V2.6-Pro | AA FrontierCode 1.1 | 0.454153333333333 | fraction | 45.42 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.frontierCode` |
 | MiMo-V2.6-Pro | GDPval-AA v2.1 | 1684.34 | Elo | 59.22 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.gdpval` |
@@ -139,6 +159,16 @@ Every input behind the published scores, with the artifact and locator that hold
 | MiMo-V2.6-Pro | Humanity's Last Exam | 0.493512511584801 | fraction | 49.35 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.hle` |
 | MiMo-V2.6-Pro | SciCode | 0.608796296296296 | fraction | 60.88 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.scicode` |
 | MiMo-V2.6-Pro | CritPt | 0.265714285714286 | fraction | 26.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.critpt` |
+| Muse Spark 1.3 (max) | DeepSWE v1.1 | 71.7 | percent | 71.70 | Muse Code - Muse Spark 1.3 (max) / Muse Code | `data/aa_deepswe.json` `configurations[valueRankModelId=muse-spark-1-3].scorePct` |
+| Muse Spark 1.3 (max) | Bug Hunt Bench | 32.2 | bugs fixed of 105 | 30.67 | Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 5 | `data/bug_hunt.json` `models[modelId=muse-spark-1-3].fixedOf105` |
+| Muse Spark 1.3 (max) | AA FrontierCode 1.1 | 0.406458333333333 | fraction | 40.65 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.frontierCode` |
+| Muse Spark 1.3 (max) | GDPval-AA v2.1 | 1680.99 | Elo | 59.05 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.gdpval` |
+| Muse Spark 1.3 (max) | AutomationBench-AA | 0.5785343786538614 | fraction | 57.85 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.automationBenchPartialScore` |
+| Muse Spark 1.3 (max) | AA-Omniscience | 25 | AA Omniscience Index | 62.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.omniscience` |
+| Muse Spark 1.3 (max) | AA-LCR v1.1 | 0.83 | fraction | 83.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.lcr` |
+| Muse Spark 1.3 (max) | Humanity's Last Exam | 0.487025023169602 | fraction | 48.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.hle` |
+| Muse Spark 1.3 (max) | SciCode | 0.587962962962963 | fraction | 58.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.scicode` |
+| Muse Spark 1.3 (max) | CritPt | 0.248571428571429 | fraction | 24.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-spark-1-3].model.critpt` |
 | DeepSeek V4 Flash (max) | DeepSWE v1.1 | 54.3 | percent | 54.30 | Codex - DeepSeek V4 Flash 0731 (max) / Codex | `data/aa_deepswe.json` `configurations[valueRankModelId=deepseek-v4-flash].scorePct` |
 | DeepSeek V4 Flash (max) | Bug Hunt Bench | 21.7 | bugs fixed of 105 | 20.67 | DeepSeek V4.1 Flash (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=deepseek-v4-flash].fixedOf105` |
 | DeepSeek V4 Flash (max) | GDPval-AA v2.1 | 1433.74 | Elo | 46.69 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-flash].model.gdpval` |
@@ -201,6 +231,15 @@ Every input behind the published scores, with the artifact and locator that hold
 | Qwen3.8 Max | Humanity's Last Exam | 0.430954587581094 | fraction | 43.10 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=qwen3-8-max].model.hle` |
 | Qwen3.8 Max | SciCode | 0.520833333333333 | fraction | 52.08 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=qwen3-8-max].model.scicode` |
 | Qwen3.8 Max | CritPt | 0.177142857142857 | fraction | 17.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=qwen3-8-max].model.critpt` |
+| Muse Wonder Full (max) | DeepSWE v1.1 | 77.0 | percent | 77.00 | Muse Code - Muse Wonder Full (max) / Muse Code | `data/aa_deepswe.json` `configurations[valueRankModelId=muse-wonder-full].scorePct` |
+| Muse Wonder Full (max) | Bug Hunt Bench | 42.0 | bugs fixed of 105 | 40.00 | Muse Wonder Full 1.0 (max effort, Muse Code, Meta API) - mean of 2 | `data/bug_hunt.json` `models[modelId=muse-wonder-full].fixedOf105` |
+| Muse Wonder Full (max) | GDPval-AA v2.1 | 1857.09 | Elo | 67.85 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder-full].model.gdpval` |
+| Muse Wonder Full (max) | AutomationBench-AA | 0.7133074973223975 | fraction | 71.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder-full].model.automationBenchPartialScore` |
+| Muse Wonder Full (max) | AA-Omniscience | 30.15 | AA Omniscience Index | 65.08 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder-full].model.omniscience` |
+| Muse Wonder Full (max) | AA-LCR v1.1 | 0.836666666666667 | fraction | 83.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder-full].model.lcr` |
+| Muse Wonder Full (max) | Humanity's Last Exam | 0.536144578313253 | fraction | 53.61 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder-full].model.hle` |
+| Muse Wonder Full (max) | SciCode | 0.626157407407407 | fraction | 62.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder-full].model.scicode` |
+| Muse Wonder Full (max) | CritPt | 0.328571428571429 | fraction | 32.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=muse-wonder-full].model.critpt` |
 
 ## Basket cost components
 
@@ -303,6 +342,16 @@ Every input behind the published scores, with the artifact and locator that hold
 | MiMo-V2.6-Flash | Terminal-Bench 4.0 (AA Index run) | $15.19 | confirmed-complete | 66 | $0.2302 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Flash | SciCode | $0.81 | confirmed-complete | 288 | $0.0028 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Flash | AA-LCR | $1.51 | confirmed-complete | 100 | $0.0151 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | AA-Briefcase | $2,066.92 | unresolved | 91 | $22.7135 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | GDPval-AA | $2,150.47 | unresolved | 220 | $9.7749 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | GDP.pdf | $277.49 | unresolved | 100 | $2.7749 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | AutomationBench-AA | $1,715.62 | unresolved | 657 | $2.6113 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | Terminal-Bench 4.0 (AA Index run) | $1,268.42 | unresolved | 66 | $19.2185 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | SciCode | $189.65 | unresolved | 288 | $0.6585 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | AA-LCR | $158.45 | unresolved | 100 | $1.5845 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Fable 5.1 (max) | Coding Agent Index | $3,753.59 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
+| Claude Fable 5.1 (max) | FrontierCode | $1,200.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
+| Claude Fable 5.1 (max) | ITBench-AA | $237.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
 | Gemini 4 Argon (high) | AA-Briefcase | $530.33 | confirmed-complete | 91 | $5.8277 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | GDPval-AA | $400.23 | confirmed-complete | 220 | $1.8192 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | GDP.pdf | $25.93 | confirmed-complete | 100 | $0.2593 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -312,6 +361,14 @@ Every input behind the published scores, with the artifact and locator that hold
 | Gemini 4 Argon (high) | AA-LCR | $23.64 | confirmed-complete | 100 | $0.2364 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | Coding Agent Index | $1,770.70 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
 | Gemini 4 Argon (high) | FrontierCode | $670.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
+| Muse Wonder (max) | AA-Briefcase | $1,133.00 | confirmed-complete | 91 | $12.4506 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Wonder (max) | GDPval-AA | $1,075.46 | confirmed-complete | 220 | $4.8885 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Wonder (max) | GDP.pdf | $72.26 | confirmed-complete | 100 | $0.7226 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Wonder (max) | AutomationBench-AA | $545.12 | confirmed-complete | 657 | $0.8297 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Wonder (max) | Terminal-Bench 4.0 (AA Index run) | $1,185.90 | confirmed-complete | 66 | $17.9681 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Wonder (max) | SciCode | $38.88 | confirmed-complete | 288 | $0.1350 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Wonder (max) | AA-LCR | $43.70 | confirmed-complete | 100 | $0.4370 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Wonder (max) | Coding Agent Index | $2,439.83 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
 | MiMo-V2.6-Pro | AA-Briefcase | $34.60 | confirmed-complete | 91 | $0.3802 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | GDPval-AA | $35.47 | confirmed-complete | 220 | $0.1612 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | GDP.pdf | $2.40 | confirmed-complete | 100 | $0.0240 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -320,6 +377,14 @@ Every input behind the published scores, with the artifact and locator that hold
 | MiMo-V2.6-Pro | SciCode | $2.25 | confirmed-complete | 288 | $0.0078 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | AA-LCR | $4.74 | confirmed-complete | 100 | $0.0474 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | FrontierCode | $18.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
+| Muse Spark 1.3 (max) | AA-Briefcase | $369.37 | confirmed-complete | 91 | $4.0590 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Spark 1.3 (max) | GDPval-AA | $448.59 | confirmed-complete | 220 | $2.0390 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Spark 1.3 (max) | GDP.pdf | $20.51 | confirmed-complete | 100 | $0.2051 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Spark 1.3 (max) | AutomationBench-AA | $238.77 | confirmed-complete | 657 | $0.3634 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Spark 1.3 (max) | Terminal-Bench 4.0 (AA Index run) | $457.96 | confirmed-complete | 66 | $6.9388 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Spark 1.3 (max) | SciCode | $11.31 | confirmed-complete | 288 | $0.0393 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Spark 1.3 (max) | AA-LCR | $13.29 | confirmed-complete | 100 | $0.1329 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Muse Spark 1.3 (max) | Coding Agent Index | $1,205.18 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
 | DeepSeek V4 Flash (max) | AA-Briefcase | $38.53 | confirmed-complete | 91 | $0.4234 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4 Flash (max) | GDPval-AA | $63.77 | confirmed-complete | 220 | $0.2899 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4 Flash (max) | GDP.pdf | $4.66 | confirmed-complete | 100 | $0.0466 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -394,14 +459,18 @@ The seven Index components plus AA's residual reproduce AA's published Intellige
 | GPT-5.6 Sol (max) | $2,313.08 | $1,151.76 | $3,464.84 | $3,464.84 | yes |
 | GPT-6 Astra (max) | $3,844.56 | $1,479.54 | $5,324.10 | $5,324.10 | yes |
 | MiMo-V2.6-Flash | $60.37 | $49.18 | $109.55 | $109.55 | yes |
+| Claude Fable 5.1 (max) | $7,827.03 | $5,432.49 | $13,259.52 | $13,128.86 | no |
 | Gemini 4 Argon (high) | $1,857.94 | $549.30 | $2,407.24 | $2,407.24 | yes |
+| Muse Wonder (max) | $4,094.33 | $1,638.86 | $5,733.19 | $5,733.19 | yes |
 | MiMo-V2.6-Pro | $136.13 | $70.53 | $206.66 | $206.66 | yes |
+| Muse Spark 1.3 (max) | $1,559.80 | $440.55 | $2,000.35 | $2,000.35 | yes |
 | DeepSeek V4 Flash (max) | $253.74 | $220.45 | $474.19 | $474.19 | yes |
 | DeepSeek V4 Pro (max) | $729.37 | $392.90 | $1,122.27 | $1,122.27 | yes |
 | Grok 4.7 (xhigh) | $4,028.33 | $939.03 | $4,967.35 | $4,967.35 | yes |
 | GLM-5.3 (max) | $1,901.15 | $602.33 | $2,503.48 | $2,503.48 | yes |
 | Gemini 3.8 Flash (high) | $1,325.82 | $296.90 | $1,622.73 | $1,622.73 | yes |
 | Qwen3.8 Max | $4,362.91 | $571.88 | $4,934.79 | $4,934.79 | yes |
+| Muse Wonder Full (max) | $0.00 | $0.00 | $0.00 | — | no |
 
 ## DeepSWE v1.1 AA chart configurations
 
@@ -410,16 +479,16 @@ The AA chart publishes 42 DeepSWE v1.1 configurations across 113 tasks, observed
 | # | Agent | Evaluated model variant | Effort | pass@1 | ValueRank match | Note |
 |---:|---|---|---|---:|---|---|
 | 1 | Antigravity CLI | Gemini 4 Argon | high | 78.8% | Exact: gemini-4-argon | Exact variant: chart model Gemini 4 Argon (high) matches the roster display name 'Gemini 4 Argon' at effort high. |
-| 2 | Muse Code | Muse Wonder Full | max | 77.0% | not in roster | No ValueRank roster model has this chart model name. |
-| 3 | Muse Code | Muse Wonder | max | 75.8% | not in roster | No ValueRank roster model has this chart model name. |
+| 2 | Muse Code | Muse Wonder Full | max | 77.0% | Exact: muse-wonder-full | Exact variant: chart model Muse Wonder Full (max) matches the roster display name 'Muse Wonder Full' at effort max. |
+| 3 | Muse Code | Muse Wonder | max | 75.8% | Exact: muse-wonder | Exact variant: chart model Muse Wonder (max) matches the roster display name 'Muse Wonder' at effort max. |
 | 4 | Codex | GPT-6.1 Sol | xhigh | 73.2% | effort mismatch | Model family matches the roster display name 'GPT-6.1 Sol', but the chart row's effort (xhigh) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
-| 5 | Muse Code | Muse Spark 1.3 | xhigh | 73.2% | not in roster | No ValueRank roster model has this chart model name. |
+| 5 | Muse Code | Muse Spark 1.3 | xhigh | 73.2% | effort mismatch | Model family matches the roster display name 'Muse Spark 1.3', but the chart row's effort (xhigh) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
 | 6 | Devin Fusion CLI | Claude Opus 5.5 Max + GPT-6 Luna High | not shown | 72.6% | not in roster | No ValueRank roster model has this chart model name. It is a composite agent configuration. |
 | 7 | Grok Build | Grok 4.7 | xhigh | 72.6% | Exact: grok-4.7 | Exact variant: chart model Grok 4.7 (xhigh) matches the roster display name 'Grok 4.7' at effort xhigh. |
 | 8 | Codex | GPT-5.6 Sol | max | 72.3% | Exact: gpt-5.6-sol | Exact variant: chart model GPT-5.6 Sol (max) matches the roster display name 'GPT-5.6 Sol' at effort max. |
 | 9 | Claude Code | Sonnet 5.5 | max | 72.0% | Exact: claude-sonnet-5-5 | Exact variant: chart model Sonnet 5.5 (max) matches the roster display name 'Claude Sonnet 5.5' at effort max. |
 | 10 | Codex | GPT-6.1 Sol | medium | 72.0% | effort mismatch | Model family matches the roster display name 'GPT-6.1 Sol', but the chart row's effort (medium) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
-| 11 | Muse Code | Muse Spark 1.3 | max | 71.7% | not in roster | No ValueRank roster model has this chart model name. |
+| 11 | Muse Code | Muse Spark 1.3 | max | 71.7% | Exact: muse-spark-1-3 | Exact variant: chart model Muse Spark 1.3 (max) matches the roster display name 'Muse Spark 1.3' at effort max. |
 | 12 | Codex | GPT-6.1 Sol | high | 70.5% | effort mismatch | Model family matches the roster display name 'GPT-6.1 Sol', but the chart row's effort (high) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
 | 13 | Codex | GPT-6.1 Sol | max | 69.6% | Exact: gpt-6.1-sol | Exact variant: chart model GPT-6.1 Sol (max) matches the roster display name 'GPT-6.1 Sol' at effort max. |
 | 14 | Codex | GPT-6 Sol | max | 69.0% | Exact: gpt-6-sol | Exact variant: chart model GPT-6 Sol (max) matches the roster display name 'GPT-6 Sol' at effort max. |
@@ -434,7 +503,7 @@ The AA chart publishes 42 DeepSWE v1.1 configurations across 113 tasks, observed
 | 23 | Antigravity SDK | Gemini 3.8 Flash | high | 65.8% | Exact: gemini-3.8-flash | Exact variant: chart model Gemini 3.8 Flash (high) matches the roster display name 'Gemini 3.8 Flash' at effort high. |
 | 24 | Claude Code | Sonnet 5.5 | medium | 65.5% | effort mismatch | Model family matches the roster display name 'Claude Sonnet 5.5', but the chart row's effort (medium) differs from the roster variant (max); ValueRank never substitutes a different reasoning effort. |
 | 25 | Grok Build | Grok 4.6 | xhigh | 64.9% | effort mismatch | Model family matches the roster display name 'Grok 4.6', but the chart row's effort (xhigh) differs from the roster variant (medium); ValueRank never substitutes a different reasoning effort. |
-| 26 | Claude Code | Fable 5.1 | max | 64.3% | not in roster | No ValueRank roster model has this chart model name. AA labels this configuration 'with fallback'; the marker is recorded but does not affect matching. |
+| 26 | Claude Code | Fable 5.1 | max | 64.3% | Exact: claude-fable-5-1 | Exact variant: chart model Fable 5.1 (max) matches the roster display name 'Claude Fable 5.1' at effort max. AA labels this configuration 'with fallback'; the marker is recorded but does not affect matching. |
 | 27 | Codex | GPT-6 Luna | max | 63.7% | Exact: gpt-6-luna | Exact variant: chart model GPT-6 Luna (max) matches the roster display name 'GPT-6 Luna' at effort max. |
 | 28 | Devin Fusion CLI | Claude Fable 5.1 XHigh + SWE-2 Medium | not shown | 63.1% | not in roster | No ValueRank roster model has this chart model name. It is a composite agent configuration. |
 | 29 | Claude Code | Opus 5 | max | 62.5% | Exact: claude-opus-5 | Exact variant: chart model Opus 5 (max) matches the roster display name 'Claude Opus 5' at effort max. |
@@ -454,7 +523,7 @@ The AA chart publishes 42 DeepSWE v1.1 configurations across 113 tasks, observed
 
 ## Terminal-Bench 4.0 official rows
 
-23 official rows (11 of 31 cohort matches), observed 2026-10-17T19:25:15Z. The published ± is the source's 95% confidence interval (used by stream S1M).
+23 official rows (12 of 35 cohort matches), observed 2026-10-17T19:25:15Z. The published ± is the source's 95% confidence interval (used by stream S1M).
 
 | Rank | Base model | Agent | Resolution rate | Tokens | Cost |
 |---|---|---|---:|---|---:|
@@ -513,6 +582,10 @@ Owner-published runs at commit `aec976170df89a371384174ca87646a9a8c82415`; the s
 | Claude Haiku 5.5 | Haiku 5.5 (xhigh effort) - mean of 3 | 18.3 | 3 | xhigh | Claude Code |
 | Claude Sonnet 5.5 | Sonnet 5.5 (max effort) - mean of 3 | 51.3 | 3 | max | Claude Code |
 | Gemini 4 Argon | Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 | 40.7 | 3 | high | Antigravity CLI |
+| Claude Fable 5.1 | Fable 5.1 (max effort) | 43.0 | 1 | max | Claude Code |
+| Muse Spark 1.3 | Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 5 | 32.2 | 5 | max | Muse Code / Meta API |
+| Muse Wonder | Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3 | 31.7 | 3 | max | Muse Code / Meta API |
+| Muse Wonder Full | Muse Wonder Full 1.0 (max effort, Muse Code, Meta API) - mean of 2 | 42.0 | 2 | max | Muse Code / Meta API |
 
 ## Plan routes
 
@@ -527,6 +600,8 @@ Route evidence as of 2026-10-08. Full allocation regimes, workloads and notes ar
 | Claude Pro $20 · Opus 5.5 | Claude Opus 5.5 | $20.00 | 58.9× | Controlled account measurement / workload projection | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Max $100 · Opus 5.5 | Claude Opus 5.5 | $100.00 | 57.25× | Controlled account measurement / workload projection | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Max $200 · Opus 5.5 | Claude Opus 5.5 | $200.00 | 58.63× | Controlled account measurement / workload projection | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max $100 · Fable 5.1 | Claude Fable 5.1 | $100.00 | 12.73× | Controlled account measurement / workload projection | Fable 5.1 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max $200 · Fable 5.1 | Claude Fable 5.1 | $200.00 | 12.425× | Controlled account measurement / workload projection | Fable 5.1 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | SuperGrok Heavy $300 · Grok 4.7 XHigh | Grok 4.7 | $300.00 | 5.785× | user reported projection | Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
 | MiMo · provisional 1.5x assumption | MiMo-V2.6-Pro, MiMo-V2.6-Flash | — | 1.5× | Provisional assumption | — | — | User assumption |
 | Claude Pro $20 · common Claude assumption | Claude Opus 5, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Haiku 5.5, Claude Sonnet 5.5 | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
@@ -539,13 +614,14 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 | Configuration | Amount (USD per fee period) | Measures | Derivation | Workload | Cash object | Measurement object |
 |---|---:|---|---|---|---|---|
-| GPT-6.1 Sol (max) | $5,386 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | Claude Sonnet 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
+| GPT-6.1 Sol (max) | $5,386 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | Claude Opus 5.5 (max) | $1,178 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | claude-pro-opus55-semianalysis:month cash | claude-pro-opus55-semianalysis |
-| GPT-5.6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | GPT-6 Astra (max) | $162 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-plus-common-semianalysis-assumption:month cash | chatgpt-plus-common-semianalysis-assumption |
-| GPT-6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| GPT-5.6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | MiMo-V2.6-Pro | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
+| GPT-6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| Claude Fable 5.1 (max) | $1,273 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | claude-max5x-fable51-semianalysis:month cash | claude-max5x-fable51-semianalysis |
 | GPT-5.6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | GPT-6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
 | MiMo-V2.6-Flash | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
@@ -554,20 +630,22 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `29df9f27025585ff50b54d1d12e89f2a04f87d176dfa94810bfedfe8fd771904`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `59bd847ca2ca49730fea1cfda6fbd4dcb80cdd959a1b0bc76f728edd91eea3ea`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
-| snapshot | `data/aa/aa_v432_snapshot.json` | `52153f886fd0016d762d7e22a278885bfcd8cfc37dfd2b6a5f9ad83224b373b5` | 2026-10-17T19:25:14Z | valuerank.capture_aa |
-| deepswe | `data/aa_deepswe.json` | `77ba0f45a999bb6561d9ac006835916bcd51c4cfd88e5046d1467d920b04a852` | 2026-10-17T19:26:26Z | valuerank.fetch_deepswe |
-| bugHunt | `data/bug_hunt.json` | `1a13cffc13f53068129011d8a9e0515fec9bc8487f7b39f01764daaefaf1606d` | 2026-10-17 | editorial capture of the owner's published results (source commit recorded) |
-| tb4 | `data/tb4.json` | `dd29b617afa1c868f0903092167a62d324997a197abfbf63693b36b1e9c6f940` | 2026-10-17T19:25:15Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
+| snapshot | `data/aa/aa_v432_snapshot.json` | `61a4d5f57185b45fc1c927fe1bada600723491e5cdd5c3a3326ed52ff3737fa3` | 2026-10-17T19:25:14Z | valuerank.capture_aa |
+| deepswe | `data/aa_deepswe.json` | `26ead79dd9cd6c70beb331c100c77954562c56587e085dab611d64fddb900274` | 2026-10-17T19:26:26Z | valuerank.fetch_deepswe |
+| bugHunt | `data/bug_hunt.json` | `d2c9c1a5278be956080d7964dafbb59ca696978f92ebc73d5f6815bbff77a9d1` | 2026-10-17 | editorial capture of the owner's published results (source commit recorded) |
+| tb4 | `data/tb4.json` | `5b3dc4a99c84ca22930b53514c3f04967e629d0a74abe9da85cfeb43244e7386` | 2026-10-17T19:25:15Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
 | codingAgents | `data/aa/coding_agents_capture.json` | `944b4082d89e451c9383b662a8b3c4b3c32423d31dca2316a8ff9dc6eca6ca7c` | 2026-10-19T19:31:46Z | valuerank.capture_coding_agents |
 | costCharts | `data/aa/cost_charts_capture.json` | `2e2cd3653c5f2add06595161e3839062e0ce1e989f8f3ba781cdc00814c3b5d3` | 2026-10-19T19:39:55.048Z | scripts/capture-aa-cost-charts.js |
-| configurationMap | `data/v3_configuration_map.json` | `2078c11c789213f6117b1c9789ef3673c8fff2d1c51e1928dc7addc7b359e7a3` | 2026-10-19 | editorial pinning from the research capture |
-| planRoutes | `data/plan_cost_routes.json` | `70b6bd160e8d890e867ea4998bf047c1e7acb22726c1cfb7450e1ddacc82a197` | 2026-10-08 | editorial Plan evidence registry |
+| configurationMap | `data/v3_configuration_map.json` | `0f4d5164ce177f9c580f05f536ba928a2b755eda9cd22a7ea83df744165aa249` | 2026-10-19 | editorial pinning from the research capture |
+| roster | `data/aa_mapping.json` | `536fc909db35d266f91b9874b674dbf4082160e9b7c61f96e500a1b59768d1f2` | — | editorial roster: AA frontier and near-frontier families plus every configuration with exact DeepSWE and Bug Hunt results (O31) |
+| bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `d11b49c46c60f43909e2c8e02067a9bbfd17dd3b56d5210ff047316449ef1ebb` | 2026-10-21T06:30:00Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
+| planRoutes | `data/plan_cost_routes.json` | `a98a84692c8139de085ef40f155322eb7fbad8e6efd11d08b0b266374f2086d4` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `41e71ffea3a13f0cec1573493a8baf24b274d2de5290224d1107ee818c05cd95` | 2026-10-17T19:25:14Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| anchors | `data/v3_frozen.json` | `c706cb8ef237bfc68bce672f29f64a3bb4ba7ab960599dc5cd19017584388a97` | 2026-10-21 | valuerank.value_v3 freeze |
+| anchors | `data/v3_frozen.json` | `e8e74a3f7f9ee30991553af90ba878a2a6077a1c65fbe3187a320c6cbd73c5c2` | 2026-10-21 | valuerank.value_v3 freeze |
 
 
 ## AA intelligence and total-cost comparison

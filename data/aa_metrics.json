@@ -1,7 +1,7 @@
 {
   "schemaVersion": "v1.6",
   "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
-  "observedAt": "2026-10-21T05:22:32Z",
+  "observedAt": "2026-10-21T06:07:28Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
   "primaryEvaluations": [
@@ -5291,6 +5291,654 @@
         "precision": null,
         "note": null,
         "responseSha256": "cf1ee11f45050d8789193f93b8e2d20eb575b8e5f2b6e7efd16f73157196d71b",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "claude-fable-5-1": {
+      "id": "claude-fable-5-1",
+      "displayName": "Claude Fable 5.1",
+      "aaSlug": "claude-fable-5-1",
+      "aaName": "Claude Fable 5.1 (Max, Default Fallback)",
+      "aaShortName": "Claude Fable 5.1 (max with fallback)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+      "release": {
+        "slug": "claude-fable-5-1",
+        "name": "Claude Fable 5.1",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.58613,
+        "gdpvalV21Normalized": 0.627035,
+        "briefcaseElo": 1672.26,
+        "intelligenceIndex": 53.3549259623252,
+        "gdpvalV21": 1754.07,
+        "automationBenchAA": 0.5937591715646424,
+        "terminalBenchV40": 0.52020202020202,
+        "scicode": 0.630787037037037,
+        "gdpPdfAllPass": 0.262,
+        "aaLcr": 0.853333333333333,
+        "hle": 0.591288229842447,
+        "gpqaDiamond": 0.937373737373737,
+        "critpt": 0.297142857142857,
+        "omniAccuracy": 0.6723333333333333,
+        "omniNonHallucination": 0.2741607324516785,
+        "aaEvalCost": 13128.859210511622,
+        "speed": 68.821418407711
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gpqaDiamond": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-1",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.155555555555556,
+        "harveyLab": 0.06388888888888888,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": 0.575,
+        "automationBenchPartialScore": 0.5937591715646424,
+        "enterpriseOpsGym": null,
+        "itBenchSre": 0.495291902071563,
+        "briefcaseRubricPassRate": 0.6151515151515151,
+        "briefcaseTotalCost": null,
+        "tauBanking": 0.472164948453608,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1672.26
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T06:07:22Z",
+        "precision": null,
+        "note": "Added by owner decision O31 (2026-10-21): retention is checked over every model in AA's selected catalog with both an exact AA DeepSWE result and a matched exact Bug Hunt result; captured separately from the rest of the snapshot.",
+        "responseSha256": "38e5ca4027f4bdfdadc5d667f5b24ec24582200f8731195fe91e36b6031ade67",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "muse-spark-1-3": {
+      "id": "muse-spark-1-3",
+      "displayName": "Muse Spark 1.3",
+      "aaSlug": "muse-spark-1-3",
+      "aaName": "Muse Spark 1.3 (Max)",
+      "aaShortName": "Muse Spark 1.3 (max)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+      "release": {
+        "slug": "muse-spark-1-3",
+        "name": "Muse Spark 1.3",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.54067,
+        "gdpvalV21Normalized": 0.590495,
+        "briefcaseElo": 1581.34,
+        "intelligenceIndex": 48.0923107719685,
+        "gdpvalV21": 1680.99,
+        "automationBenchAA": 0.5785343786538614,
+        "terminalBenchV40": 0.333333333333333,
+        "scicode": 0.587962962962963,
+        "gdpPdfAllPass": 0.266,
+        "aaLcr": 0.83,
+        "hle": 0.487025023169602,
+        "gpqaDiamond": 0.935353535353535,
+        "critpt": 0.248571428571429,
+        "omniAccuracy": 0.43583333333333335,
+        "omniNonHallucination": 0.670605612998523,
+        "aaEvalCost": 2000.3526584050005,
+        "speed": 114.515686666536
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "gpqaDiamond": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "observedAt": "2026-10-21T06:07:22Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": 0.138888888888889,
+        "harveyLab": 0.08888888888888888,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": 0.375,
+        "automationBenchPartialScore": 0.5785343786538614,
+        "enterpriseOpsGym": null,
+        "itBenchSre": 0.332391713747646,
+        "briefcaseRubricPassRate": 0.5868686868686869,
+        "briefcaseTotalCost": null,
+        "tauBanking": 0.505154639175258,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1581.34
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T06:07:22Z",
+        "precision": null,
+        "note": "Added by owner decision O31 (2026-10-21): retention is checked over every model in AA's selected catalog with both an exact AA DeepSWE result and a matched exact Bug Hunt result; captured separately from the rest of the snapshot.",
+        "responseSha256": "10f076fc898b3bf69ef542423e8294e0f8bcc088b436f593fe5ccb7331b515d9",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "muse-wonder": {
+      "id": "muse-wonder",
+      "displayName": "Muse Wonder",
+      "aaSlug": "muse-wonder",
+      "aaName": "Muse Wonder (Max)",
+      "aaShortName": "Muse Wonder (max)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/muse-wonder",
+      "release": {
+        "slug": "muse-wonder",
+        "name": "Muse Wonder",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.5793250000000001,
+        "gdpvalV21Normalized": 0.63517,
+        "briefcaseElo": 1658.65,
+        "intelligenceIndex": 52.393894697293,
+        "gdpvalV21": 1770.34,
+        "automationBenchAA": 0.6809455131207758,
+        "terminalBenchV40": 0.52020202020202,
+        "scicode": 0.603009259259259,
+        "gdpPdfAllPass": 0.306,
+        "aaLcr": 0.806666666666667,
+        "hle": 0.500926784059314,
+        "gpqaDiamond": null,
+        "critpt": 0.282857142857143,
+        "omniAccuracy": 0.411,
+        "omniNonHallucination": 0.7348613469156763,
+        "aaEvalCost": 5733.191656030001,
+        "speed": 160.966467832478
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "aaEvalCost": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        },
+        "speed": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder",
+          "observedAt": "2026-10-21T06:07:23Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": null,
+        "harveyLab": 0.1,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.6809455131207758,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.6121212121212121,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1658.65
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T06:07:23Z",
+        "precision": null,
+        "note": "Added by owner decision O31 (2026-10-21): retention is checked over every model in AA's selected catalog with both an exact AA DeepSWE result and a matched exact Bug Hunt result; captured separately from the rest of the snapshot.",
+        "responseSha256": "bb1555edcca0ddb7ff5b8c11c1f00c82ed9c1f413cdd18aff9c8b820aec4d005",
+        "method": "captured currentModel object from first-party page payload; raw HTML not retained"
+      }
+    },
+    "muse-wonder-full": {
+      "id": "muse-wonder-full",
+      "displayName": "Muse Wonder Full",
+      "aaSlug": "muse-wonder-full",
+      "aaName": "Muse Wonder Full (Max)",
+      "aaShortName": "Muse Wonder Full (max)",
+      "aaVariant": "max",
+      "aaUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+      "release": {
+        "slug": "muse-wonder-full",
+        "name": "Muse Wonder Full",
+        "deprecatedTo": null
+      },
+      "isReasoning": true,
+      "metrics": {
+        "briefcaseNormalized": 0.61466,
+        "gdpvalV21Normalized": 0.678545,
+        "briefcaseElo": 1729.32,
+        "intelligenceIndex": 55.8021199855616,
+        "gdpvalV21": 1857.09,
+        "automationBenchAA": 0.7133074973223975,
+        "terminalBenchV40": 0.570707070707071,
+        "scicode": 0.626157407407407,
+        "gdpPdfAllPass": 0.326,
+        "aaLcr": 0.836666666666667,
+        "hle": 0.536144578313253,
+        "gpqaDiamond": null,
+        "critpt": 0.328571428571429,
+        "omniAccuracy": 0.43216666666666664,
+        "omniNonHallucination": 0.7698855297916055,
+        "aaEvalCost": null,
+        "speed": null
+      },
+      "metricSources": {
+        "briefcaseNormalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "gdpvalV21Normalized": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "briefcaseElo": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "intelligenceIndex": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "gdpvalV21": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "automationBenchAA": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "terminalBenchV40": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "scicode": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "gdpPdfAllPass": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "aaLcr": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "hle": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "critpt": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "omniAccuracy": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        },
+        "omniNonHallucination": {
+          "sourceType": "benchmark_owner",
+          "sourceUrl": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "observedAt": "2026-10-21T06:07:24Z",
+          "precision": null
+        }
+      },
+      "intelligenceIndexStatus": "measured",
+      "providerClaims": [],
+      "supplemental": {
+        "mlcrOverall": null,
+        "harveyLab": 0.13055555555555556,
+        "apexAgents": null,
+        "mmmuPro": null,
+        "livecodebench": null,
+        "aime25": null,
+        "analystAgent": null,
+        "automationBenchPartialScore": 0.7133074973223975,
+        "enterpriseOpsGym": null,
+        "itBenchSre": null,
+        "briefcaseRubricPassRate": 0.6131313131313131,
+        "briefcaseTotalCost": null,
+        "tauBanking": null,
+        "terminalBenchV21": null,
+        "briefcaseElo": 1729.32
+      },
+      "extraction": {
+        "captureMode": null,
+        "htmlSnapshot": null,
+        "textSnapshot": null,
+        "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
+        "sourceObservedAt": "2026-10-21T06:07:24Z",
+        "precision": null,
+        "note": "Added by owner decision O31 (2026-10-21): retention is checked over every model in AA's selected catalog with both an exact AA DeepSWE result and a matched exact Bug Hunt result; captured separately from the rest of the snapshot.",
+        "responseSha256": "c09429a48b3f93d5d8255656b298bd20847b0b2f9c940064f88f3795f62ccf0b",
         "method": "captured currentModel object from first-party page payload; raw HTML not retained"
       }
     }

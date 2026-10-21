@@ -828,3 +828,30 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - Not adopted:
   - Recommendation 1 (a claims-supported table): the README's "What the evidence supports" section and the manifest already give each basis's evaluable and unevaluable rows, and E198 adds the qualifier count.
   - Recommendation 2 (sibling diagnostic): siblings cannot have matched Bug Hunt results, because Bug Hunt publishes one configuration per model. Their AA Index and cost are already in the reconciliation inventory.
+
+## Owner decisions (2026-10-21, after internal review I4)
+- O31. Retention is checked over every model in AA's selected catalog that has both an exact AA DeepSWE result and a matched exact Bug Hunt result, and the build fails if one is missing from the roster. Asked because I4's H1 showed the retained set was reproducible only from a hand-maintained roster.
+  - Verified gap: Claude Fable 5.1 (max), Muse Spark 1.3 (max), Muse Wonder (max) and Muse Wonder Full (max) each had an exact DeepSWE result (2026-10-17 capture) and a Bug Hunt result at the pinned commit aec97617, but were not in the roster.
+  - Not chosen: keeping the curated roster; narrowing to the policy cohort.
+  - Applied: AA pages for the four were captured 2026-10-21. Bug Hunt runs: Fable 5.1 43/105 (single run); Muse Spark 1.3 32.2 (mean of 5, Meta API); Muse Wonder 31.7 (mean of 3); Muse Wonder Full 42.0 (mean of 2). Superseded and other-effort rows were added to excludedResults. Identity of "Muse Wonder 1.0" with AA's "Muse Wonder" rests on the owner's run notes and AA's release date (2026-10-12).
+  - Fable 5.1 takes SemiAnalysis's exact measured Max 5x (12.73×) and Max 20x (12.425×) routes and no Pro route (Fable is unavailable on Pro), replacing the shared Opus 5.5 assumption as AGENTS.md requires once a measurement exists.
+  - The Bug Hunt owner's full scoreboard is captured (data/bug_hunt_scoreboard.json, sha256 recorded). It and the roster file are in the evidence bundle, and the build check (unrostered_evidence) now fails on any unrostered DeepSWE configuration with a scoreboard row at the same effort.
+  - Results: 23 ranked configurations; 13 retained. Muse Wonder Full has no AA cost, so it has no value score and no rank (shown with quality 67.7). Claude Fable 5.1's AA category costs do not reconcile with its displayed prices (output 98.0% and input 102.3% of AA's token totals at those prices; the per-evaluation costs sum 1.0% above AA's total), so its gate is E170 outcome (4), valuation basis unverified. It is ranked and flagged, and outside interval outputs and anchors.
+  - Pre-release re-freeze: anchor values unchanged, 19 references, Q̄ = 58.28 (GPT-6 Sol) over 21 configurations, no rank changes (dual-run-2026-10-21-o31.json).
+- O32. Only reports dated in the current 30-day window count toward O11's two-report minimum and concordance; older reports stay visible as diagnostics until they expire. This is AGENTS.md's "preceding month" read strictly. It supersedes r63's "admitted reports keep counting" clarification of E194. Implemented in plan_routes (measurement_objects and route_candidates take the release's window).
+
+## Internal review I4 (Claude Sonnet 5.5, effort low, on r63) — adopted, modified or rejected
+- H1 → O31.
+- H2 (adopted as E199): the frontier-families diagnostic also recomputes the bar over frontier and near-frontier configurations and publishes the cheapest-above-the-bar result at that level (today quality 60.9 over 8 configurations; GPT-6.1 Sol (max) confirmed cheapest). The frozen bar stays primary. I3 Q2 (making the policy-cohort bar primary) would challenge E163 and was not put to the owner, because the sensitivity answers it.
+- Found while implementing H2: build_scores never passed the frontier-family flag to the v3 engine, so the E187 diagnostic had used every row (19 references). It now uses 8. With retained rows excluded, the Plan upper anchor is $7,257 rather than the frozen $13,400. Fixed with a shared value_v3.configuration helper.
+- M1 (modified, E200): the premise is wrong. Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0, SciCode) carry a median 56% of basket cost (35% to 74% over 19 full-basket rows), not a minority. The share is now printed beside the basket label. The Owner decision challenge to O15's composition is not adopted. The c_SWE standing column is not adopted (O14 keeps c_SWE diagnostic).
+- M2 → O32.
+- M3 (adopted as E200 text): a held release is still built; its manifest names each clipped row with its unclipped values and the flag "off-anchor scale, release held", and that output is published with the clearing dual run.
+- L1 (adopted): the influence example is marked illustrative and generated each release.
+- L2 (adopted): the frontier versus near asymmetry is stated as intentional.
+- Also fixed (AGENTS.md "a configuration without a cost gets no value score"):
+  - The legacy composite's blend() scored a cost-less row on quality alone. Muse Wonder Full would have been legacy rank 1. It now gets no overall score (rankingStatus "unranked_no_cost").
+  - The changelog and README handle rows without a rank.
+- README flags gain "valuation basis unverified" and "no cost".
+
+- Follow-up fixes (test update run): scores.md printed "None" for a missing rank (now a dash, workload a dash for a no-cost row); short_flags now follow the legend order; README scope reads "23 cohort configurations (22 with a value score)"; the site flags a no-cost row "No cost" instead of "Subset cost"; the O31 roster check accepts only a version-number suffix, so "Muse Wonder Full 1.0" cannot be read as a version of "Muse Wonder".

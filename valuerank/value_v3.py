@@ -371,6 +371,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
     mapping = documents["configurationMap"]["rows"]
     routes = documents["planRoutes"]["routes"]
+    # O32: only end-user reports dated in the release's report window count toward admission.
+    window = (documents["planRoutes"].get("evidencePolicy") or {}).get("reportingWindow")
     price_records = documents["priceRecords"]["records"]
     rows = []
     for configuration in configurations:
@@ -389,7 +391,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         gate = valuation_gate(page, [item for item in price_records if item["aaSlug"] == configuration["aaSlug"]], documents["snapshot"].get("capturedAt"))
         if gate["outcome"] == GATE_REVALUED:
             components = revalue(components, gate["factor"])
-        candidates = plan_routes.route_candidates(model_id, effort, routes, release_day)
+        candidates = plan_routes.route_candidates(model_id, effort, routes, release_day, window=window)
         if gate["outcome"] == GATE_NOT_IN_FORCE:
             # O29: the Plan cost divides only by a multiple valued on the row's own (superseded) price record.
             for candidate in candidates:
@@ -406,7 +408,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "indexReconciliation": reconciliation,
             "configurationMapped": model_id in mapping,
             "routeSelection": plan_routes.route_selection(candidates),
-            "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day),
+            "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window),
         })
     ids = [row["id"] for row in rows]
     admission = basket.admission_panel({row["id"]: row["components"] for row in rows}, ids)
@@ -916,14 +918,29 @@ def route_alternatives(row: dict, anchors: dict | None) -> dict:
 FRONTIER_ANCHOR_LABEL = "anchors from frontier and near-frontier configurations only (diagnostic; the frozen anchors stay primary)"
 
 
+POLICY_BAR_ID = "bar:policy-cohort-median"
+
+
+def policy_cohort_bar(assembled: dict, frozen: dict) -> dict:
+    """E199: the bar recomputed over the frontier and near-frontier configurations alone, with its API result (a sensitivity)."""
+
+    population, bars = bar_levels({**assembled, "rows": [row for row in assembled["rows"] if row.get("frontierFamily", True)]})
+    if not bars:
+        return {"status": f"unavailable: fewer than {MIN_BAR_POPULATION} non-provisional frontier-family configurations", "population": population}
+    bar = {**bars[0], "id": POLICY_BAR_ID, "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"}
+    result = interval_outputs(assembled, {**frozen, "barReferences": [bar]}, "api")
+    return {"status": "evaluated", "population": population, "bar": bar, "api": result["bars"][0] if result["status"] == "evaluated" else {"status": result["status"]}}
+
+
 def frontier_anchor_diagnostic(assembled: dict, frozen: dict, per_row: dict) -> dict:
-    """E187: each basis rescored on anchors built from the frontier and near-frontier references alone."""
+    """E187: each basis rescored on anchors built from the frontier and near-frontier references alone (and E199's bar)."""
 
     main = assembled["mainWorkload"]
     by_id = {row["id"]: row for row in assembled["rows"]}
     references = [row_id for row_id in anchor_population(assembled, assembled["admitted"]) if by_id[row_id].get("frontierFamily", True)]
+    policy_bar = policy_cohort_bar(assembled, frozen)
     if len(references) < MIN_ANCHOR_REFERENCES:
-        return {"label": FRONTIER_ANCHOR_LABEL, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} frontier-family references", "references": references}
+        return {"label": FRONTIER_ANCHOR_LABEL, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} frontier-family references", "references": references, "bar": policy_bar}
     rows = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
     bases = {}
     for basis in BASES:
@@ -937,7 +954,7 @@ def frontier_anchor_diagnostic(assembled: dict, frozen: dict, per_row: dict) -> 
             "frozenExchangeRate": anchor_math.exchange_rate(frozen["workloads"][main]["anchors"][basis], BETA),
             "rankChanges": diagnostics.paired_rank_change(primary, rescored),
         }
-    return {"label": FRONTIER_ANCHOR_LABEL, "status": "evaluated", "references": references, "bases": bases}
+    return {"label": FRONTIER_ANCHOR_LABEL, "status": "evaluated", "references": references, "bases": bases, "bar": policy_bar}
 
 
 def cost_component_family(assembled: dict, frozen: dict, per_row: dict) -> list[dict]:
@@ -1846,6 +1863,8 @@ EVIDENCE_FILES = {
     "codingAgents": ("aa/coding_agents_capture.json", "valuerank.capture_coding_agents"),
     "costCharts": ("aa/cost_charts_capture.json", "scripts/capture-aa-cost-charts.js"),
     "configurationMap": ("v3_configuration_map.json", "editorial pinning from the research capture"),
+    "roster": ("aa_mapping.json", "editorial roster: AA frontier and near-frontier families plus every configuration with exact DeepSWE and Bug Hunt results (O31)"),
+    "bugHuntScoreboard": ("bug_hunt_scoreboard.json", "the owner's combined scoreboard at the pinned commit (O31 roster check)"),
     "planRoutes": ("plan_cost_routes.json", "editorial Plan evidence registry"),
     "priceRecords": ("price_records.json", "editorial E141 price-record registry (superseded and promotional tariffs)"),
 }
@@ -1865,7 +1884,8 @@ def evidence_bundle(data: Path) -> dict:
     for key, (relative, extractor) in [*EVIDENCE_FILES.items(), ("anchors", (FROZEN_FILE, "valuerank.value_v3 freeze"))]:
         content = (data / relative).read_bytes()
         document = json.loads(content)
-        captured = next((document[field] for field in CAPTURE_FIELDS if isinstance(document.get(field), str)), None)
+        # The roster is a bare list with no capture time of its own.
+        captured = next((document[field] for field in CAPTURE_FIELDS if isinstance(document.get(field), str)), None) if isinstance(document, dict) else None
         artifacts.append({"key": key, "artifact": f"data/{relative}", "sha256": hashlib.sha256(content).hexdigest(), "capturedAt": captured, "extractor": extractor})
     return {
         "artifacts": artifacts,
@@ -1877,18 +1897,19 @@ def evidence_bundle(data: Path) -> dict:
 RETAINED_REASON = "Exact AA DeepSWE and eligible Bug Hunt overlap"
 
 
+def configuration(row: dict) -> dict:
+    """A ranked score row's AA identity and whether it is ranked as a frontier or near-frontier family (E187)."""
+
+    return {
+        "id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote"),
+        "frontierFamily": any(reason != RETAINED_REASON for reason in row.get("rankingInclusionReasons") or []),
+    }
+
+
 def configurations_from_scores(scores: dict) -> list[dict]:
     """The ranked cohort (fixed cohort policy: the ranking-eligible rows, in table order) with each AA identity."""
 
-    return [
-        {
-            "id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote"),
-            # E187: whether the row is ranked as a frontier or near-frontier family (not only retained).
-            "frontierFamily": any(reason != RETAINED_REASON for reason in row.get("rankingInclusionReasons") or []),
-        }
-        for row in scores["models"]
-        if row.get("rankingEligible") is True
-    ]
+    return [configuration(row) for row in scores["models"] if row.get("rankingEligible") is True]
 
 
 def scenario_seed(release_day: date) -> int:

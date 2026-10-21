@@ -1,0 +1,439 @@
+{
+  "slug": "muse-spark-1-3",
+  "name": "Muse Spark 1.3",
+  "developer": "Meta",
+  "aaUrl": "https://artificialanalysis.ai/models/muse-spark-1-3",
+  "aaVariant": "max",
+  "selectedPage": "https://artificialanalysis.ai/models/muse-spark-1-3",
+  "summary": {
+    "rank": {
+      "api": 10,
+      "plan": 16
+    },
+    "overall": {
+      "api": 52.778856481251694,
+      "plan": 48.705096238156386
+    },
+    "quality": 58.81941793819844,
+    "qualityRank": 10,
+    "coverage": {
+      "pct": 90.0,
+      "costAvailable": true,
+      "missing": [
+        "Terminal-Bench 4.0 (tbench.ai)"
+      ],
+      "provisional": false,
+      "provisionalReasons": []
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": [],
+    "flags": []
+  },
+  "dimensions": [
+    {
+      "key": "deepswe",
+      "label": "DeepSWE v1.1",
+      "category": "Software engineering",
+      "weightPct": 22.5,
+      "value": 71.7,
+      "decimals": 1,
+      "unit": "% pass@1",
+      "normalized": 71.7,
+      "source": {
+        "name": "AA Coding Agent Index (DeepSWE v1.1)",
+        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+      },
+      "observedAt": "2026-10-17T19:26:26Z",
+      "evaluatedVariant": "Muse Code - Muse Spark 1.3 (max) / Muse Code",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 32.2,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 30.66666666666667,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 5 / Muse Code / Meta API",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "frontierCode",
+      "label": "AA FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 0.406458333333333,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 40.6458333333333,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/frontiercode"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% resolved",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 1680.99,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": 59.0495,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBench",
+      "label": "AutomationBench-AA",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 0.5785343786538614,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 57.853437865386134,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": 25,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": 62.5,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/omniscience"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "lcr",
+      "label": "AA-LCR v1.1",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": 0.83,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 83.0,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.487025023169602,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 48.7025023169602,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "scicode",
+      "label": "SciCode",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.587962962962963,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 58.796296296296305,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/scicode"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.248571428571429,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 24.8571428571429,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/critpt"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 2764.9826567800033,
+    "planUsd": 2764.9826567800033,
+    "fallback": "api",
+    "route": null,
+    "subset": false,
+    "partialComponents": [],
+    "workload": "9a0d376cc6080f3c",
+    "planFlags": [
+      "API-cost fallback: no admitted Plan route",
+      "cross-estimand ordering not identified"
+    ],
+    "costScore": {
+      "api": 34.657172110411466,
+      "plan": 18.362131138030232
+    },
+    "components": [
+      {
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index",
+        "costUsd": 1205.183741375003,
+        "completeness": "confirmed-complete",
+        "source": "AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks",
+        "admitted": true
+      },
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase",
+        "costUsd": 369.3705321100002,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdpval-aa",
+        "label": "GDPval-AA",
+        "costUsd": 448.5854755150001,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf",
+        "costUsd": 20.510461,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA",
+        "costUsd": 238.76788254999997,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)",
+        "costUsd": 457.9604374800002,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "costUsd": 11.3110845,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "artificial-analysis-long-context-reasoning",
+        "label": "AA-LCR",
+        "costUsd": 13.293042250000001,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "no eligible route",
+    "planAmount": null
+  },
+  "plans": [],
+  "scenarios": {
+    "status": "current",
+    "api": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.012,
+        "frontier": 0.155
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0005,
+        "top3": 0.026,
+        "frontier": 0.1366
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0149,
+        "frontier": 0.2472
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0117,
+        "frontier": 0.1552
+      }
+    ],
+    "plan": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0012,
+        "frontier": 0.0133
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      }
+    ]
+  },
+  "intervals": {
+    "api": {
+      "definite": "disproved",
+      "possible": "certified"
+    },
+    "plan": null
+  },
+  "history": [
+    {
+      "version": "v3.0.0",
+      "date": "2026-10-19",
+      "rank": {
+        "api": 10,
+        "plan": 16
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": null,
+    "configuration": null,
+    "intelligenceGap": null,
+    "footnote": null
+  }
+}

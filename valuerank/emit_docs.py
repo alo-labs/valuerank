@@ -9,6 +9,7 @@ The website under site/ is owned by ``python -m valuerank.site.build``.
 from __future__ import annotations
 
 import json
+import statistics
 
 from valuerank import basket
 from valuerank import quality as q
@@ -69,7 +70,9 @@ CHARGE_LABELS = {
 FLAG_LEGEND = (
     ("subset cost", "scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17)"),
     ("provisional quality", "observed leaves cover under 70% of quality weight, fewer than two software-engineering leaves or under 40% software-engineering weight are observed, or DeepSWE is missing; ranked and flagged, never floored (O8)"),
-    ("partial component", "AA marks tasks of a basket component missing or declined (E37)"),
+    ("partial component", "AA marks tasks of a basket component missing or declined (E37), or the component's cost cannot be reconciled with AA's prices (E170)"),
+    ("valuation basis unverified", "AA's cost reconciles with neither its displayed prices nor a registered price record; ranked, but outside interval outputs and cost anchors (E170 outcome 4)"),
+    ("no cost", "AA publishes no cost for the configuration, so it has no value score and no rank (AGENTS.md); its quality is shown"),
     ("AA cost caveat", "AA states that its published cost omits a pricing term"),
     ("API-cost fallback", "no admitted Plan route; the Plan ranking uses the API cost (O13)"),
 )
@@ -169,22 +172,32 @@ def model_link(entry, label=None):
     return f"[{label or entry['name']}]({SITE_URL}/models/{entry['slug']}/)"
 
 
+def rank_text(rank):
+    return DASH if rank is None else rank
+
+
+def workload_text(entry):
+    """The workload a row is scored on; a row without a cost has none."""
+
+    if entry["cost"]["apiUsd"] is None:
+        return DASH
+    return "subset" if entry["cost"]["subset"] else "main"
+
+
 def short_flags(entry, row):
-    """The row's flags as the short words of ``FLAG_LEGEND``."""
+    """The row's flags as the short words of ``FLAG_LEGEND``, in the legend's order."""
 
     cost = entry["cost"]
-    flags = [
-        word
-        for word, present in (
-            ("subset cost", cost["subset"]),
-            ("provisional quality", entry["coverage"]["provisional"]),
-            ("partial component", bool(cost["partialComponents"])),
-            ("AA cost caveat", bool(row.get("aaCostCaveat"))),
-            ("API-cost fallback", cost["fallback"] is not None),
-        )
-        if present
-    ]
-    return ", ".join(flags) or DASH
+    present = {
+        "subset cost": cost["subset"] and cost["apiUsd"] is not None,
+        "provisional quality": entry["coverage"]["provisional"],
+        "partial component": bool(cost["partialComponents"]),
+        "valuation basis unverified": (row.get("valuationGate") or {}).get("outcome") == "valuation basis unverified" and cost["apiUsd"] is not None,
+        "no cost": cost["apiUsd"] is None,
+        "AA cost caveat": bool(row.get("aaCostCaveat")),
+        "API-cost fallback": cost["fallback"] is not None,
+    }
+    return ", ".join(word for word, _text in FLAG_LEGEND if present[word]) or DASH
 
 
 def plan_amount_text(amount):
@@ -295,6 +308,24 @@ def interval_sentences(facts):
     return sentences
 
 
+CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-0", "scicode")
+
+
+def coding_share_text(v3):
+    """E200: the share of the basket's cost that coding and terminal tasks carry, beside the basket label."""
+
+    shares = sorted(
+        sum(row["cost"]["componentsDetail"][key]["costUsd"] for key in CODING_COMPONENTS if key in row["cost"]["components"]) / row["cost"]["costUsd"]
+        for row in v3["rows"] if row["cost"]["fullCost"] and row["cost"]["costUsd"]
+    )
+    if not shares:
+        return ""
+    middle = statistics.median(shares)
+    labels = ", ".join(component_label(key) for key in CODING_COMPONENTS)
+    return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {len(shares)} configurations "
+            f"with the full basket; {pct(shares[0], 0)} to {pct(shares[-1], 0)}).")
+
+
 def influence_text(v3, short=False):
     """E196: cost's nominal weight beside its share of the variance in value on the common panel (E189)."""
 
@@ -305,6 +336,19 @@ def influence_text(v3, short=False):
         return f"; {pct(shares['api'], 0)} of API and {pct(shares['plan'], 0)} of Plan value variance"
     return (f" That weight is nominal: on the current panel cost accounts for {pct(shares['api'], 0)} of the variance in API value and "
             f"{pct(shares['plan'], 0)} in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)).")
+
+
+def policy_bar_text(policy, facts):
+    """E199: the bar recomputed over the frontier and near-frontier configurations alone, as a sensitivity."""
+
+    head = "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** "
+    if policy["status"] != "evaluated":
+        return head + policy["status"] + "."
+    result, text = policy["api"], f"{bar_name(policy['bar'])} over {len(policy['population'])} configurations"
+    if result["status"] != "certified":
+        return head + f"{text}; API main workload {result['status']}."
+    answer = f"{facts.label(result['confirmedCheapest'])} (confirmed)" if result["confirmedCheapest"] else f"not unique; possibly {facts.labels(result['possibleCheapest'])}"
+    return head + f"{text}; cheapest at or above it on the API main workload: {answer} ({result['comparison']})."
 
 
 def bar_name(bar):
@@ -341,8 +385,8 @@ def readme(facts):
     for entry in facts.ranked:
         row = facts.row(entry)
         table_rows.append([
-            entry["rank"]["plan"],
-            entry["rank"]["api"],
+            rank_text(entry["rank"]["plan"]),
+            rank_text(entry["rank"]["api"]),
             model_link(entry, configuration_label(row, facts.names)),
             fnum(entry["overall"]["plan"], 1),
             fnum(entry["overall"]["api"], 1),
@@ -366,11 +410,11 @@ def readme(facts):
 **Version:** {VERSION}
 **Updated:** {DATE}
 **Methodology:** {v3['methodologyVersion']} · {v3['basketVersion']} · anchor version {v3['anchorVersion']}
-**Scope:** {len(facts.ranked)} ranked configurations from a {len(facts.scores['models'])}-model AA-mapped roster; value is a {facts.cost_pct:.0f}% cost score (nominal weight{influence_text(v3, short=True)}) plus {facts.quality_pct:.0f}% quality over {len(q.LEAVES)} benchmark leaves
+**Scope:** {len(facts.ranked)} cohort configurations ({sum(1 for entry in facts.ranked if entry['rank']['api'] is not None)} with a value score) from a {len(facts.scores['models'])}-model AA-mapped roster; value is a {facts.cost_pct:.0f}% cost score (nominal weight{influence_text(v3, short=True)}) plus {facts.quality_pct:.0f}% quality over {len(q.LEAVES)} benchmark leaves
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
 
 {leaders(facts)}
 
@@ -603,9 +647,9 @@ def scores_markdown(facts):
         row = facts.row(entry)
         ranking_rows.append([
             model_link(entry, configuration_label(row, facts.names)),
-            entry["rank"]["plan"], fnum(entry["overall"]["plan"], 2), fnum(entry["costDims"]["plan"], 2),
-            entry["rank"]["api"], fnum(entry["overall"]["api"], 2), fnum(entry["costDims"]["api"], 2),
-            fnum(entry["quality"], 2), f"{entry['coverage']['pct']:.0f}%", "subset" if entry["cost"]["subset"] else "main",
+            rank_text(entry["rank"]["plan"]), fnum(entry["overall"]["plan"], 2), fnum(entry["costDims"]["plan"], 2),
+            rank_text(entry["rank"]["api"]), fnum(entry["overall"]["api"], 2), fnum(entry["costDims"]["api"], 2),
+            fnum(entry["quality"], 2), f"{entry['coverage']['pct']:.0f}%", workload_text(entry),
         ])
     leaf_headers = ["Configuration"] + [leaf.label for leaf in q.LEAVES] + ["Quality", "Provisional"]
     leaf_rows = []
@@ -892,6 +936,7 @@ def cost_diagnostics_markdown(facts):
         )
     else:
         lines.append(f"- **Frontier-families anchors (E187, diagnostic):** {frontier['status']}.")
+    lines.append(policy_bar_text(frontier["bar"], facts))
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(

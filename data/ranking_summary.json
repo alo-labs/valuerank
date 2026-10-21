@@ -2,9 +2,9 @@
   "version": "v3.0.0",
   "publishDate": "October 19, 2026",
   "observedAt": "2026-10-21T05:24:16Z",
-  "cohortN": 19,
-  "scoredN": 19,
-  "exactBenchmarkOverlapN": 17,
+  "cohortN": 23,
+  "scoredN": 22,
+  "exactBenchmarkOverlapN": 21,
   "frontierRequiredModelN": 7,
   "frontierSelection": {
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
@@ -182,7 +182,7 @@
       }
     ]
   },
-  "sourceCohortN": 31,
+  "sourceCohortN": 35,
   "rankingExcludedModels": [
     "Claude Fable 5",
     "Kimi K3",
@@ -342,13 +342,16 @@
   "zeroGap": false,
   "costMode": "aa-per-index-point",
   "costCoverage": {
-    "availableN": 19,
-    "cohortN": 19,
-    "sourceAvailableN": 30,
-    "sourceCohortN": 31,
-    "missingModels": [],
+    "availableN": 22,
+    "cohortN": 23,
+    "sourceAvailableN": 33,
+    "sourceCohortN": 35,
+    "missingModels": [
+      "Muse Wonder Full"
+    ],
     "sourceMissingModels": [
-      "Gemini 3.7 Flash"
+      "Gemini 3.7 Flash",
+      "Muse Wonder Full"
     ],
     "selectiveSubstitution": false
   },
@@ -364,80 +367,78 @@
     {
       "rank": 1,
       "name": "Gemini 4 Argon",
-      "overallScore": 69.3,
-      "qualityScore": 82.4
+      "overallScore": 69.1,
+      "qualityScore": 79.6
     },
     {
       "rank": 2,
-      "name": "GPT-6.1 Sol",
-      "overallScore": 65.7,
-      "qualityScore": 70.9
+      "name": "Claude Sonnet 5.5",
+      "overallScore": 65.5,
+      "qualityScore": 82.5
     },
     {
       "rank": 3,
-      "name": "Claude Sonnet 5.5",
-      "overallScore": 65.2,
-      "qualityScore": 85.7
+      "name": "GPT-6.1 Sol",
+      "overallScore": 63.4,
+      "qualityScore": 66.0
     },
     {
       "rank": 4,
-      "name": "Claude Opus 5.5",
-      "overallScore": 58.0,
-      "qualityScore": 77.3
+      "name": "Muse Wonder",
+      "overallScore": 59.3,
+      "qualityScore": 73.0
     },
     {
       "rank": 5,
-      "name": "GPT-5.6 Sol",
-      "overallScore": 57.0,
-      "qualityScore": 69.9
+      "name": "Claude Opus 5.5",
+      "overallScore": 57.6,
+      "qualityScore": 73.2
     }
   ],
   "bugHuntEmphasis": {
-    "matchedN": 17,
-    "cohortN": 31,
+    "matchedN": 20,
+    "cohortN": 35,
     "benchmarkWeightPct": 19.2308,
     "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
     "topFive": [
       {
         "rank": 1,
         "name": "Gemini 4 Argon",
-        "score": 67.8,
+        "score": 67.5,
         "fixedOf105": 40.7
       },
       {
         "rank": 2,
-        "name": "GPT-6.1 Sol",
-        "score": 66.7,
-        "fixedOf105": 44.3
+        "name": "Claude Sonnet 5.5",
+        "score": 66.5,
+        "fixedOf105": 51.3
       },
       {
         "rank": 3,
-        "name": "Claude Sonnet 5.5",
-        "score": 66.0,
-        "fixedOf105": 51.3
+        "name": "GPT-6.1 Sol",
+        "score": 64.8,
+        "fixedOf105": 44.3
       },
       {
         "rank": 4,
         "name": "GPT-6 Astra",
-        "score": 57.9,
+        "score": 58.2,
         "fixedOf105": 45.0
       },
       {
         "rank": 5,
         "name": "Claude Opus 5.5",
-        "score": 57.7,
+        "score": 57.2,
         "fixedOf105": 41.7
       }
     ]
   },
   "externalCoverage": {
-    "livebench": "24/31",
+    "livebench": "25/35",
     "livebenchPublishedN": 64,
-    "livebenchSupplementalModels": [
-      "claude-fable-5-1"
-    ],
-    "bugHunt": "25/31 owner matches; 17 exact DeepSWE and Bug Hunt overlaps plus 7 selected AA frontier family models enter the primary cohort",
-    "terminalBenchV4": "12/31 including 1 provider claim"
+    "livebenchSupplementalModels": [],
+    "bugHunt": "29/35 owner matches; 21 exact DeepSWE and Bug Hunt overlaps plus 7 selected AA frontier family models enter the primary cohort",
+    "terminalBenchV4": "13/35 including 1 provider claim"
   },
   "weights": [
     {
@@ -562,9 +563,9 @@
       "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv",
       "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md"
     },
-    "matchedN": 17,
-    "cohortN": 31,
-    "coveragePct": 54.84,
+    "matchedN": 20,
+    "cohortN": 35,
+    "coveragePct": 57.14,
     "basePrioritySum": 87,
     "benchmarkPriority": 30,
     "totalPriority": 117,
@@ -804,6 +805,97 @@
         "fixedOf105": 35.3,
         "sampleN": 3,
         "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the high variant."
+      },
+      {
+        "modelId": "claude-fable-5-1",
+        "evaluatedModel": "Fable 5.1",
+        "fixedOf105": 33,
+        "sampleN": 1,
+        "exclusionReason": "Benchmark owner evaluated high effort (the default row is labelled high); the cohort selects the max variant."
+      },
+      {
+        "modelId": "claude-fable-5-1",
+        "evaluatedModel": "Fable 5.1 (xhigh effort)",
+        "fixedOf105": 29,
+        "sampleN": 1,
+        "exclusionReason": "Benchmark owner evaluated xhigh effort; the cohort selects the max variant."
+      },
+      {
+        "modelId": "claude-fable-5-1",
+        "evaluatedModel": "Fable 5.1 (medium effort)",
+        "fixedOf105": 21,
+        "sampleN": 1,
+        "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the max variant."
+      },
+      {
+        "modelId": "claude-fable-5-1",
+        "evaluatedModel": "Fable 5.1 (low effort)",
+        "fixedOf105": 29,
+        "sampleN": 1,
+        "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the max variant."
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "evaluatedModel": "Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 3",
+        "fixedOf105": 33.7,
+        "sampleN": 3,
+        "exclusionReason": "Superseded by the owner's mean of five at the same effort and route (32.2); the largest-sample published mean is used."
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "evaluatedModel": "Muse Spark 1.3 (max effort, Muse Code, Meta API)",
+        "fixedOf105": 33,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's means of three and five at the same effort and route; the largest-sample published mean (32.2, n=5) is used."
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "evaluatedModel": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3",
+        "fixedOf105": 20.3,
+        "sampleN": 3,
+        "exclusionReason": "Benchmark owner evaluated xhigh effort; the cohort selects the max variant (higher AA Intelligence Index, 48 against 45)."
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "evaluatedModel": "Muse Spark 1.3 (high effort, Muse Code, Meta API) - mean of 3",
+        "fixedOf105": 18.7,
+        "sampleN": 3,
+        "exclusionReason": "Benchmark owner evaluated high effort; the cohort selects the max variant."
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "evaluatedModel": "Muse Spark 1.3 (medium effort, Muse Code, Meta API) - mean of 3",
+        "fixedOf105": 13.0,
+        "sampleN": 3,
+        "exclusionReason": "Benchmark owner evaluated medium effort; the cohort selects the max variant."
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "evaluatedModel": "Muse Spark 1.3 (low effort, Muse Code, Meta API) - mean of 3",
+        "fixedOf105": 9.7,
+        "sampleN": 3,
+        "exclusionReason": "Benchmark owner evaluated low effort; the cohort selects the max variant."
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "evaluatedModel": "Muse Spark 1.3 (high effort, Muse Code, OpenRouter)",
+        "fixedOf105": 18,
+        "sampleN": 1,
+        "exclusionReason": "Benchmark owner evaluated high effort through the OpenRouter aggregator; the owner supersedes it with the Meta first-party row at the same tier, and the cohort selects the max variant."
+      },
+      {
+        "modelId": "muse-wonder-full",
+        "evaluatedModel": "Muse Wonder Full 1.0 (max effort, Muse Code, Meta API)",
+        "fixedOf105": 44,
+        "sampleN": 1,
+        "exclusionReason": "Single run superseded by the owner's mean of two at the same effort and route (42.0)."
+      },
+      {
+        "modelId": "muse-wonder-full",
+        "evaluatedModel": "Muse Wonder Full 1.0 (xhigh effort, Muse Code, Meta API) - mean of 2",
+        "fixedOf105": 41.5,
+        "sampleN": 2,
+        "exclusionReason": "Benchmark owner evaluated xhigh effort; AA lists only the max configuration, which the cohort selects."
       }
     ],
     "providerClaimAudit": {
@@ -819,23 +911,23 @@
         "modelId": "gemini-4-argon",
         "name": "Gemini 4 Argon",
         "fixedOf105": 40.7,
-        "emphasisScore": 67.8,
+        "emphasisScore": 67.5,
         "primaryRank": 1
       },
       {
         "rank": 2,
-        "modelId": "gpt-6.1-sol",
-        "name": "GPT-6.1 Sol",
-        "fixedOf105": 44.3,
-        "emphasisScore": 66.7,
+        "modelId": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "fixedOf105": 51.3,
+        "emphasisScore": 66.5,
         "primaryRank": 2
       },
       {
         "rank": 3,
-        "modelId": "claude-sonnet-5-5",
-        "name": "Claude Sonnet 5.5",
-        "fixedOf105": 51.3,
-        "emphasisScore": 66.0,
+        "modelId": "gpt-6.1-sol",
+        "name": "GPT-6.1 Sol",
+        "fixedOf105": 44.3,
+        "emphasisScore": 64.8,
         "primaryRank": 3
       },
       {
@@ -843,7 +935,7 @@
         "modelId": "gpt-6-astra",
         "name": "GPT-6 Astra",
         "fixedOf105": 45.0,
-        "emphasisScore": 57.9,
+        "emphasisScore": 58.2,
         "primaryRank": 6
       },
       {
@@ -851,108 +943,135 @@
         "modelId": "claude-opus-5-5",
         "name": "Claude Opus 5.5",
         "fixedOf105": 41.7,
-        "emphasisScore": 57.7,
-        "primaryRank": 4
+        "emphasisScore": 57.2,
+        "primaryRank": 5
       },
       {
         "rank": 6,
         "modelId": "gpt-5.6-sol",
         "name": "GPT-5.6 Sol",
         "fixedOf105": 43.5,
-        "emphasisScore": 57.3,
-        "primaryRank": 5
-      },
-      {
-        "rank": 7,
-        "modelId": "gpt-6-sol",
-        "name": "GPT-6 Sol",
-        "fixedOf105": 29.3,
-        "emphasisScore": 54.3,
+        "emphasisScore": 57.1,
         "primaryRank": 7
       },
       {
+        "rank": 7,
+        "modelId": "muse-wonder",
+        "name": "Muse Wonder",
+        "fixedOf105": 31.7,
+        "emphasisScore": 57.1,
+        "primaryRank": 4
+      },
+      {
         "rank": 8,
-        "modelId": "grok-4.7",
-        "name": "Grok 4.7",
-        "fixedOf105": 29.0,
-        "emphasisScore": 49.9,
-        "primaryRank": 9
+        "modelId": "muse-spark-1-3",
+        "name": "Muse Spark 1.3",
+        "fixedOf105": 32.2,
+        "emphasisScore": 55.4,
+        "primaryRank": 8
       },
       {
         "rank": 9,
-        "modelId": "gpt-5.6-luna",
-        "name": "GPT-5.6 Luna",
-        "fixedOf105": 31.3,
-        "emphasisScore": 48.1,
+        "modelId": "gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "fixedOf105": 29.3,
+        "emphasisScore": 50.2,
         "primaryRank": 10
       },
       {
         "rank": 10,
-        "modelId": "gpt-6-luna",
-        "name": "GPT-6 Luna",
-        "fixedOf105": 18.3,
-        "emphasisScore": 44.3,
-        "primaryRank": 11
+        "modelId": "claude-fable-5-1",
+        "name": "Claude Fable 5.1",
+        "fixedOf105": 43.0,
+        "emphasisScore": 48.6,
+        "primaryRank": 12
       },
       {
         "rank": 11,
-        "modelId": "claude-haiku-5-5",
-        "name": "Claude Haiku 5.5",
-        "fixedOf105": 18.3,
-        "emphasisScore": 40.1,
-        "primaryRank": 13
+        "modelId": "grok-4.7",
+        "name": "Grok 4.7",
+        "fixedOf105": 29.0,
+        "emphasisScore": 47.0,
+        "primaryRank": 11
       },
       {
         "rank": 12,
-        "modelId": "gemini-3.8-flash",
-        "name": "Gemini 3.8 Flash",
-        "fixedOf105": 18.0,
-        "emphasisScore": 37.1,
-        "primaryRank": 14
+        "modelId": "gpt-5.6-luna",
+        "name": "GPT-5.6 Luna",
+        "fixedOf105": 31.3,
+        "emphasisScore": 44.6,
+        "primaryRank": 13
       },
       {
         "rank": 13,
-        "modelId": "claude-opus-5",
-        "name": "Claude Opus 5",
-        "fixedOf105": 27.0,
-        "emphasisScore": 35.0,
-        "primaryRank": 16
+        "modelId": "gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "fixedOf105": 18.3,
+        "emphasisScore": 41.6,
+        "primaryRank": 14
       },
       {
         "rank": 14,
-        "modelId": "glm-5.3",
-        "name": "GLM-5.3",
-        "fixedOf105": 19.0,
-        "emphasisScore": 34.7,
-        "primaryRank": 15
+        "modelId": "claude-haiku-5-5",
+        "name": "Claude Haiku 5.5",
+        "fixedOf105": 18.3,
+        "emphasisScore": 37.9,
+        "primaryRank": 16
       },
       {
         "rank": 15,
-        "modelId": "deepseek-v4-flash",
-        "name": "DeepSeek V4 Flash",
-        "fixedOf105": 21.7,
-        "emphasisScore": 31.5,
+        "modelId": "gemini-3.8-flash",
+        "name": "Gemini 3.8 Flash",
+        "fixedOf105": 18.0,
+        "emphasisScore": 36.7,
         "primaryRank": 17
       },
       {
         "rank": 16,
-        "modelId": "qwen3.8-max",
-        "name": "Qwen3.8 Max",
-        "fixedOf105": 25.7,
-        "emphasisScore": 26.6,
-        "primaryRank": 18
+        "modelId": "claude-opus-5",
+        "name": "Claude Opus 5",
+        "fixedOf105": 27.0,
+        "emphasisScore": 32.7,
+        "primaryRank": 19
       },
       {
         "rank": 17,
+        "modelId": "glm-5.3",
+        "name": "GLM-5.3",
+        "fixedOf105": 19.0,
+        "emphasisScore": 32.6,
+        "primaryRank": 18
+      },
+      {
+        "rank": 18,
+        "modelId": "deepseek-v4-flash",
+        "name": "DeepSeek V4 Flash",
+        "fixedOf105": 21.7,
+        "emphasisScore": 30.2,
+        "primaryRank": 20
+      },
+      {
+        "rank": 19,
+        "modelId": "qwen3.8-max",
+        "name": "Qwen3.8 Max",
+        "fixedOf105": 25.7,
+        "emphasisScore": 25.2,
+        "primaryRank": 21
+      },
+      {
+        "rank": 20,
         "modelId": "deepseek-v4-pro",
         "name": "DeepSeek V4 Pro",
         "fixedOf105": 16.0,
-        "emphasisScore": 21.7,
-        "primaryRank": 19
+        "emphasisScore": 21.8,
+        "primaryRank": 22
       }
     ]
   },
   "primaryMissingFields": {
+    "costComposite": [
+      "Muse Wonder Full"
+    ],
     "terminalBenchV4": [
       "DeepSeek V4 Pro",
       "Qwen3.8 Max",
@@ -965,7 +1084,10 @@
       "MiMo-V2.6-Flash",
       "Claude Haiku 5.5",
       "Claude Sonnet 5.5",
-      "Gemini 4 Argon"
+      "Gemini 4 Argon",
+      "Muse Spark 1.3",
+      "Muse Wonder",
+      "Muse Wonder Full"
     ],
     "livebenchInstructionFollowing": [
       "Claude Opus 5.5",
@@ -974,7 +1096,10 @@
       "MiMo-V2.6-Flash",
       "Claude Haiku 5.5",
       "Claude Sonnet 5.5",
-      "Gemini 4 Argon"
+      "Gemini 4 Argon",
+      "Muse Spark 1.3",
+      "Muse Wonder",
+      "Muse Wonder Full"
     ],
     "deepswePassAt1": [
       "MiMo-V2.6-Pro",
@@ -990,10 +1115,13 @@
       "MiMo-V2.6-Flash",
       "Claude Haiku 5.5",
       "Claude Sonnet 5.5",
-      "Gemini 4 Argon"
+      "Gemini 4 Argon",
+      "Muse Wonder",
+      "Muse Wonder Full"
     ],
     "speed": [
-      "Gemini 4 Argon"
+      "Gemini 4 Argon",
+      "Muse Wonder Full"
     ]
   },
   "providerClaimsUsed": [

@@ -7,7 +7,7 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5-5",
   "summary": {
     "rank": {
-      "api": 13,
+      "api": 15,
       "plan": 2
     },
     "overall": {
@@ -15,7 +15,7 @@
       "plan": 60.855387516654574
     },
     "quality": 64.19421567654852,
-    "qualityRank": 3,
+    "qualityRank": 5,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -432,8 +432,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.2126
+        "top3": 0.0001,
+        "frontier": 0.1489
       },
       {
         "stratum": "S1",
@@ -451,7 +451,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1737
+        "frontier": 0.1204
       }
     ],
     "plan": [
@@ -586,7 +586,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 13,
+        "api": 15,
         "plan": 2
       }
     }

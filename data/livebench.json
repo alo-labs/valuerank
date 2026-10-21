@@ -76,8 +76,8 @@
       "summarize"
     ]
   },
-  "cohortN": 31,
-  "matchedN": 24,
+  "cohortN": 35,
+  "matchedN": 25,
   "missingModels": [
     "Claude Opus 5.5",
     "GPT-6.1 Sol",
@@ -85,7 +85,10 @@
     "MiMo-V2.6-Flash",
     "Claude Haiku 5.5",
     "Claude Sonnet 5.5",
-    "Gemini 4 Argon"
+    "Gemini 4 Argon",
+    "Muse Spark 1.3",
+    "Muse Wonder",
+    "Muse Wonder Full"
   ],
   "models": {
     "gpt-6-astra": {
@@ -1258,13 +1261,7 @@
       "overallScore": null,
       "instructionFollowingScore": null,
       "costPerSuccessfulTaskUsd": null
-    }
-  },
-  "supplementalN": 1,
-  "supplementalMatchedN": 1,
-  "publishedN": 64,
-  "representedN": 25,
-  "supplementalModels": {
+    },
     "claude-fable-5-1": {
       "modelId": "claude-fable-5-1",
       "name": "Claude Fable 5.1",
@@ -1309,8 +1306,52 @@
       "overallScore": 83.414155,
       "instructionFollowingScore": 72.98775,
       "costPerSuccessfulTaskUsd": 1.2117
+    },
+    "muse-spark-1-3": {
+      "modelId": "muse-spark-1-3",
+      "name": "Muse Spark 1.3",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "muse-wonder": {
+      "modelId": "muse-wonder",
+      "name": "Muse Wonder",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
+    },
+    "muse-wonder-full": {
+      "modelId": "muse-wonder-full",
+      "name": "Muse Wonder Full",
+      "livebenchModel": null,
+      "matched": false,
+      "matchStatus": "no_verified_exact_mapping",
+      "coverageNote": "No exact mapped task-and-cost result in the pinned LiveBench snapshot; no score is imputed.",
+      "tasks": {},
+      "categoryScores": {},
+      "overallScore": null,
+      "instructionFollowingScore": null,
+      "costPerSuccessfulTaskUsd": null
     }
   },
+  "supplementalN": 0,
+  "supplementalMatchedN": 0,
+  "publishedN": 64,
+  "representedN": 25,
+  "supplementalModels": {},
   "pareto": [
     "deepseek-v4-flash",
     "gpt-6-luna",

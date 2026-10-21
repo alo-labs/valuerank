@@ -19,13 +19,13 @@
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption.",
     "mimoApplication": "User authorizes provisional 1.5x for both MiMo candidate variants. Plan fee and measured API-equivalent numerator remain unavailable.",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions.",
-    "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model."
+    "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume."
   },
   "identificationYield": {
-    "rows": 19,
+    "rows": 23,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 19,
+    "unidentified": 23,
     "exploratory": true
   },
   "routes": [
@@ -173,6 +173,40 @@
       "notes": "October 6 controlled account measurements with agentic workload projections: $11,726/month divided by $200/month = 58.63x. Exact Opus 5.5 only; do not add the Fable 5.1 allowance. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis."
     },
     {
+      "id": "claude-max5x-fable51-semianalysis",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max $100 · Fable 5.1",
+      "planFeeUsd": 100,
+      "valueMultiple": 12.73,
+      "apiEquivalentUsd": 1273,
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
+      "sourceModel": "Fable 5.1",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-1"
+      ],
+      "notes": "October 6 controlled account measurements with agentic workload projections: $1,273/month divided by $100/month = 12.73x. Exact Fable 5.1 only; do not add the Opus 5.5 allowance. Claude Fable 5.1 joined the roster on 2026-10-21 (owner decision O31), so this exact measurement, recorded since 2026-10-07 as unranked provider-level evidence, replaces the shared Opus 5.5 assumption for the model, as AGENTS.md requires. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis; the source does not state the reasoning effort of the measured Fable 5.1 use."
+    },
+    {
+      "id": "claude-max20x-fable51-semianalysis",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max $200 · Fable 5.1",
+      "planFeeUsd": 200,
+      "valueMultiple": 12.425,
+      "apiEquivalentUsd": 2485,
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
+      "sourceModel": "Fable 5.1",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-1"
+      ],
+      "notes": "October 6 controlled account measurements with agentic workload projections: $2,485/month divided by $200/month = 12.425x. Exact Fable 5.1 only; do not add the Opus 5.5 allowance. Claude Fable 5.1 joined the roster on 2026-10-21 (owner decision O31), so this exact measurement, recorded since 2026-10-07 as unranked provider-level evidence, replaces the shared Opus 5.5 assumption for the model, as AGENTS.md requires. Workload, uncertainty and unavailable experiment interval are retained in sourceEvidence.semianalysis; the source does not state the reasoning effort of the measured Fable 5.1 use."
+    },
+    {
       "id": "supergrok-heavy-grok47-xhigh-user-projection",
       "provider": "xAI",
       "planLabel": "SuperGrok Heavy $300 · Grok 4.7 XHigh",
@@ -276,10 +310,34 @@
   ],
   "candidates": [
     {
+      "slug": "claude-fable-5-1",
+      "name": "Claude Fable 5.1",
+      "rank": {
+        "api": 18,
+        "plan": 12
+      },
+      "apiUsd": 11580.618526030545,
+      "planUsd": 909.7108033016924,
+      "fallback": null,
+      "routeId": "claude-max5x-fable51-semianalysis",
+      "flags": [
+        "workload-unmatched",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "measured, target-workload unmatched",
+        "routeId": "claude-max5x-fable51-semianalysis",
+        "costUsd": 909.7108033016924,
+        "costScore": 31.295976188424866,
+        "value": 53.012769060297536,
+        "rank": 4
+      }
+    },
+    {
       "slug": "claude-haiku-5-5",
       "name": "Claude Haiku 5.5",
       "rank": {
-        "api": 9,
+        "api": 11,
         "plan": 4
       },
       "apiUsd": 292.07481065705014,
@@ -299,7 +357,7 @@
       "slug": "claude-opus-5",
       "name": "Claude Opus 5",
       "rank": {
-        "api": 18,
+        "api": 21,
         "plan": 5
       },
       "apiUsd": 8733.127052137232,
@@ -319,7 +377,7 @@
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "rank": {
-        "api": 13,
+        "api": 15,
         "plan": 2
       },
       "apiUsd": 9989.151438394825,
@@ -343,7 +401,7 @@
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
-        "api": 12,
+        "api": 14,
         "plan": 1
       },
       "apiUsd": 9373.65305908234,
@@ -364,7 +422,7 @@
       "name": "DeepSeek V4 Flash",
       "rank": {
         "api": 7,
-        "plan": 14
+        "plan": 17
       },
       "apiUsd": 279.5120478141823,
       "planUsd": 279.5120478141823,
@@ -382,8 +440,8 @@
       "slug": "deepseek-v4-pro",
       "name": "DeepSeek V4 Pro",
       "rank": {
-        "api": 10,
-        "plan": 15
+        "api": 12,
+        "plan": 18
       },
       "apiUsd": 801.4967532139415,
       "planUsd": 801.4967532139415,
@@ -401,8 +459,8 @@
       "slug": "gemini-3-8-flash",
       "name": "Gemini 3.8 Flash",
       "rank": {
-        "api": 15,
-        "plan": 18
+        "api": 17,
+        "plan": 21
       },
       "apiUsd": 2073.444227327155,
       "planUsd": 2073.444227327155,
@@ -421,7 +479,7 @@
       "name": "Gemini 4 Argon",
       "rank": {
         "api": 4,
-        "plan": 12
+        "plan": 13
       },
       "apiUsd": 3628.6386911634218,
       "planUsd": 3628.6386911634218,
@@ -439,8 +497,8 @@
       "slug": "glm-5-3",
       "name": "GLM-5.3",
       "rank": {
-        "api": 17,
-        "plan": 17
+        "api": 20,
+        "plan": 20
       },
       "apiUsd": 3186.289595775135,
       "planUsd": 3186.289595775135,
@@ -478,7 +536,7 @@
       "slug": "gpt-5-6-sol",
       "name": "GPT-5.6 Sol",
       "rank": {
-        "api": 11,
+        "api": 13,
         "plan": 9
       },
       "apiUsd": 4238.135507049396,
@@ -522,7 +580,7 @@
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "rank": {
-        "api": 14,
+        "api": 16,
         "plan": 10
       },
       "apiUsd": 6107.090015422354,
@@ -586,8 +644,8 @@
       "slug": "grok-4-7",
       "name": "Grok 4.7",
       "rank": {
-        "api": 16,
-        "plan": 16
+        "api": 19,
+        "plan": 19
       },
       "apiUsd": 6700.021962805636,
       "planUsd": 6700.021962805636,
@@ -627,7 +685,7 @@
       "name": "MiMo-V2.6-Pro",
       "rank": {
         "api": 5,
-        "plan": 13
+        "plan": 15
       },
       "apiUsd": 136.12695920883297,
       "planUsd": 90.75130613922198,
@@ -644,11 +702,65 @@
       }
     },
     {
+      "slug": "muse-spark-1-3",
+      "name": "Muse Spark 1.3",
+      "rank": {
+        "api": 10,
+        "plan": 16
+      },
+      "apiUsd": 2764.9826567800033,
+      "planUsd": 2764.9826567800033,
+      "fallback": "api",
+      "routeId": null,
+      "flags": [
+        "API-cost fallback: no admitted Plan route",
+        "cross-estimand ordering not identified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "muse-wonder",
+      "name": "Muse Wonder",
+      "rank": {
+        "api": 9,
+        "plan": 14
+      },
+      "apiUsd": 6534.155660296668,
+      "planUsd": 6534.155660296668,
+      "fallback": "api",
+      "routeId": null,
+      "flags": [
+        "API-cost fallback: no admitted Plan route",
+        "cross-estimand ordering not identified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "muse-wonder-full",
+      "name": "Muse Wonder Full",
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "apiUsd": null,
+      "planUsd": null,
+      "fallback": null,
+      "routeId": null,
+      "flags": [],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
       "slug": "qwen3-8-max",
       "name": "Qwen3.8 Max",
       "rank": {
-        "api": 19,
-        "plan": 19
+        "api": 22,
+        "plan": 22
       },
       "apiUsd": 5417.032020806289,
       "planUsd": 5417.032020806289,

@@ -69,6 +69,10 @@ DEVELOPER = {
     "Grok 4.7": "xAI",
     "MiMo-V2.6-Pro": "Xiaomi",
     "MiMo-V2.6-Flash": "Xiaomi",
+    "Claude Fable 5.1": "Anthropic",
+    "Muse Spark 1.3": "Meta",
+    "Muse Wonder": "Meta",
+    "Muse Wonder Full": "Meta",
 }
 
 SHORT = {
@@ -103,6 +107,10 @@ SHORT = {
     "Grok 4.7": "Grok 4.7",
     "MiMo-V2.6-Pro": "MiMo V2.6 Pro",
     "MiMo-V2.6-Flash": "MiMo V2.6 Flash",
+    "Claude Fable 5.1": "Fable 5.1",
+    "Muse Spark 1.3": "Muse Spark 1.3",
+    "Muse Wonder": "Muse Wonder",
+    "Muse Wonder Full": "Muse Wonder Full",
 }
 
 # The priority values are ValueRank's quality priorities, not the Artificial
@@ -244,6 +252,28 @@ def exact_bug_hunt(model_id, effort, record):
         return {**record, "matched": False, "matchStatus": "effort_mismatch",
                 "note": f"The owner's result is for effort {record.get('effort')}; the ranked configuration is {effort}. No result is transferred between efforts."}
     return record
+
+
+def unrostered_evidence(deepswe_configurations, scoreboard_rows):
+    """O31: DeepSWE configurations outside the roster whose model and effort Bug Hunt's scoreboard also reports.
+
+    A scoreboard name may add only a version number ("Muse Wonder 1.0" for AA's "Muse Wonder", but not "Muse Wonder
+    Full 1.0"), so a match is flagged
+    for a roster decision rather than silently skipped; identity is then settled when the model is added.
+    """
+
+    found = []
+    for item in deepswe_configurations:
+        if item.get("matchStatus") != "not_in_roster" or not item.get("effort"):
+            continue
+        name = normalise_name(item["model"])
+        for row in scoreboard_rows:
+            base, _, rest = row["model"].partition(" (")
+            base = normalise_name(base)
+            if re.fullmatch(re.escape(name) + r"( v?\d+(\.\d+)*)?", base) and rest.startswith(f"{item['effort']} effort"):
+                found.append(f"{item['displayLabel']} / Bug Hunt {row['model']}")
+                break
+    return found
 
 
 def near_order(row):
@@ -457,8 +487,11 @@ def build_bug_hunt_emphasis(rows, weights, document):
             row["bugHuntEmphasisDims"].get(COST_KEY),
             quality_score(row["bugHuntEmphasisDims"], emphasis_weights),
         )
+    # A row without a cost gets no score and no emphasis rank (AGENTS.md); it keeps its normalised Bug Hunt value.
+    for row in matched_rows:
+        row["bugHuntEmphasisRank"] = None
     ranked_rows = sorted(
-        matched_rows,
+        [row for row in matched_rows if row["bugHuntEmphasisScore"] is not None],
         key=lambda row: (
             -row["bugHuntEmphasisScore"],
             row["costComposite"] if row["costComposite"] is not None else math.inf,
@@ -502,6 +535,10 @@ def build_bug_hunt_emphasis(rows, weights, document):
 
 def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     deepswe_chart = json.loads((data / "aa_deepswe.json").read_text())
+    # O31: every configuration with an exact AA DeepSWE result and a Bug Hunt result must be in the roster.
+    missing = unrostered_evidence(deepswe_chart["configurations"], json.loads((data / "bug_hunt_scoreboard.json").read_text())["rows"])
+    if missing:
+        raise ValueError("Configurations with both exact DeepSWE and Bug Hunt results are missing from the roster (O31): " + "; ".join(missing))
     aa_document = json.loads((data / "aa_metrics.json").read_text())
     frontier_inventory = json.loads((data / "aa_reconciliation_inventory.json").read_text())
     livebench_document = json.loads((data / "livebench.json").read_text())
@@ -975,8 +1012,9 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         row["qualityRank"] = None
         row["pareto"] = None
         row["rankingStatus"] = (
-            "rankable" if row["qualityScore"] is not None
-            else "unranked_no_quality_dimension"
+            "unranked_no_quality_dimension" if row["qualityScore"] is None
+            else "unranked_no_cost" if row["overallScore"] is None
+            else "rankable"
         )
         row["vRanks"] = {
             weight["key"]: row["dims"][weight["key"]]
@@ -1346,10 +1384,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     ]
 
     v3_section = value_v3.build(
-        [
-            {"id": row["id"], "name": row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"], "aaNote": row.get("aaFrontierFootnote")}
-            for row in by_overall + unscored_primary_rows
-        ],
+        # E187: the frontier-family flag rides with each configuration, so the frontier-families diagnostics exclude retained rows.
+        [value_v3.configuration(row) for row in by_overall + unscored_primary_rows],
         data,
         release_day=utcnow().date(),
     )

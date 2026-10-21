@@ -31,6 +31,7 @@ TB4_BASE_NAMES = {
     "Sonnet 5": "claude-sonnet-5",
     "Opus 4.8": "claude-opus-4.8",
     "Fable 5": "claude-fable-5",
+    "Fable 5.1": "claude-fable-5-1",
     "GPT-6 Astra": "gpt-6-astra",
     "GPT-6.1 Sol": "gpt-6.1-sol",
     "GPT-6 Sol": "gpt-6-sol",

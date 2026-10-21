@@ -4,41 +4,47 @@
 **Version:** v3.0.0
 **Updated:** October 19, 2026
 **Methodology:** 3.0.0 · SDLC basket v1 · anchor version v3-2026-10-21
-**Scope:** 19 ranked configurations from a 31-model AA-mapped roster; value is a 25% cost score (nominal weight; 81% of API and 62% of Plan value variance) plus 75% quality over 11 benchmark leaves
+**Scope:** 23 cohort configurations (22 with a value score) from a 35-model AA-mapped roster; value is a 25% cost score (nominal weight; 82% of API and 64% of Plan value variance) plus 75% quality over 11 benchmark leaves
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **25%** cost score plus **75%** benchmark quality. That weight is nominal: on the current panel cost accounts for 81% of the variance in API value and 62% in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)). Cost is the contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost): Artificial Analysis' (AA) published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Quality is the weighted mean of 11 benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted. No Value Multiple is yet identified on the basket itself (0 of 19 rows), so the Plan ranking is labelled exploratory.
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **25%** cost score plus **75%** benchmark quality. That weight is nominal: on the current panel cost accounts for 82% of the variance in API value and 64% in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)). Cost is the contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost): Artificial Analysis' (AA) published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size. Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 56% of the basket's cost (median over 19 configurations with the full basket; 35% to 74%). Quality is the weighted mean of 11 benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted. No Value Multiple is yet identified on the basket itself (0 of 23 rows), so the Plan ranking is labelled exploratory.
 
-Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Gemini 4 Argon leads on quality.
+Claude Sonnet 5.5 leads the Plan ranking at 61.1 (owner-named transfer); MiMo-V2.6-Flash leads the API ranking at 60.9 (subset cost, provisional quality); Muse Wonder Full leads on quality.
 
 | Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|
-| 1 | 12 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 61.1 | 51.6 | 64.3 | 100% | $9,373.65 | $159.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
-| 2 | 13 | [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 60.9 | 51.2 | 64.2 | 100% | $9,989.15 | $169.60 | Claude Pro $20 · Opus 5.5 (58.9×, measured) | — |
+| 1 | 14 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 61.1 | 51.6 | 64.3 | 100% | $9,373.65 | $159.15 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
+| 2 | 15 | [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 60.9 | 51.2 | 64.2 | 100% | $9,989.15 | $169.60 | Claude Pro $20 · Opus 5.5 (58.9×, measured) | — |
 | 3 | 2 | [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 59.8 | 58.1 | 61.3 | 100% | $1,267.66 | $117.68 | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | — |
-| 4 | 9 | [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 57.0 | 52.5 | 45.4 | 90% | $292.07 | $4.96 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 5 | 18 | [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 56.5 | 47.0 | 57.8 | 80% | $8,733.13 | $148.27 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
+| 4 | 11 | [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 57.0 | 52.5 | 45.4 | 90% | $292.07 | $4.96 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
+| 5 | 21 | [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 56.5 | 47.0 | 57.8 | 80% | $8,733.13 | $148.27 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
 | 6 | 8 | [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 56.2 | 53.8 | 58.3 | 90% | $1,999.41 | $185.61 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
 | 7 | 3 | [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 56.1 | 57.8 | 47.7 | 100% | $132.87 | $12.33 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
 | 8 | 6 | [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 55.3 | 55.6 | 50.0 | 90% | $319.25 | $29.64 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 9 | 11 | [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 55.0 | 51.6 | 59.7 | 90% | $4,238.14 | $393.44 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
-| 10 | 14 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 54.0 | 50.9 | 60.9 | 100% | $6,107.09 | $753.96 | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | — |
+| 9 | 13 | [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 55.0 | 51.6 | 59.7 | 90% | $4,238.14 | $393.44 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
+| 10 | 16 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 54.0 | 50.9 | 60.9 | 100% | $6,107.09 | $753.96 | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | — |
 | 11 | 1 | [MiMo-V2.6-Flash](https://valuerank.alolabs.dev/models/mimo-v2-6-flash/) | 53.5 | 60.9 | 51.7 | 50% | $60.37 | $40.25 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provisional quality |
-| 12 | 4 | [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 52.8 | 56.4 | 65.3 | 90% | $3,628.64 | $3,628.64 | — | API-cost fallback |
-| 13 | 5 | [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 50.0 | 56.3 | 50.1 | 60% | $136.13 | $90.75 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provisional quality |
-| 14 | 7 | [DeepSeek V4 Flash (max)](https://valuerank.alolabs.dev/models/deepseek-v4-flash/) | 47.3 | 54.8 | 48.1 | 80% | $279.51 | $279.51 | — | API-cost fallback |
-| 15 | 10 | [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 45.7 | 51.6 | 50.0 | 80% | $801.50 | $801.50 | — | API-cost fallback |
-| 16 | 16 | [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 44.5 | 47.3 | 56.7 | 100% | $6,700.02 | $6,700.02 | — | API-cost fallback |
-| 17 | 17 | [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 43.2 | 47.1 | 52.1 | 100% | $3,186.29 | $3,186.29 | — | API-cost fallback |
-| 18 | 15 | [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 43.1 | 47.6 | 50.3 | 100% | $2,073.44 | $2,073.44 | — | API-cost fallback |
-| 19 | 19 | [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 38.4 | 41.5 | 47.7 | 100% | $5,417.03 | $5,417.03 | — | API-cost fallback |
+| 12 | 18 | [Claude Fable 5.1 (max)](https://valuerank.alolabs.dev/models/claude-fable-5-1/) | 53.0 | 47.6 | 60.3 | 100% | $11,580.62 | $909.71 | Claude Max $100 · Fable 5.1 (12.73×, measured) | partial component, valuation basis unverified |
+| 13 | 4 | [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 52.8 | 56.4 | 65.3 | 90% | $3,628.64 | $3,628.64 | — | API-cost fallback |
+| 14 | 9 | [Muse Wonder (max)](https://valuerank.alolabs.dev/models/muse-wonder/) | 50.4 | 53.2 | 64.4 | 80% | $6,534.16 | $6,534.16 | — | API-cost fallback |
+| 15 | 5 | [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 50.0 | 56.3 | 50.1 | 60% | $136.13 | $90.75 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provisional quality |
+| 16 | 10 | [Muse Spark 1.3 (max)](https://valuerank.alolabs.dev/models/muse-spark-1-3/) | 48.7 | 52.8 | 58.8 | 90% | $2,764.98 | $2,764.98 | — | API-cost fallback |
+| 17 | 7 | [DeepSeek V4 Flash (max)](https://valuerank.alolabs.dev/models/deepseek-v4-flash/) | 47.3 | 54.8 | 48.1 | 80% | $279.51 | $279.51 | — | API-cost fallback |
+| 18 | 12 | [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 45.7 | 51.6 | 50.0 | 80% | $801.50 | $801.50 | — | API-cost fallback |
+| 19 | 19 | [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 44.5 | 47.3 | 56.7 | 100% | $6,700.02 | $6,700.02 | — | API-cost fallback |
+| 20 | 20 | [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 43.2 | 47.1 | 52.1 | 100% | $3,186.29 | $3,186.29 | — | API-cost fallback |
+| 21 | 17 | [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 43.1 | 47.6 | 50.3 | 100% | $2,073.44 | $2,073.44 | — | API-cost fallback |
+| 22 | 22 | [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 38.4 | 41.5 | 47.7 | 100% | $5,417.03 | $5,417.03 | — | API-cost fallback |
+| — | — | [Muse Wonder Full (max)](https://valuerank.alolabs.dev/models/muse-wonder-full/) | — | — | 67.7 | 80% | — | — | — | no cost |
 
 Values are rounded for display; ranks are competition ranks (equal values share the better rank).
 
 - **subset cost**: scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17).
 - **provisional quality**: observed leaves cover under 70% of quality weight, fewer than two software-engineering leaves or under 40% software-engineering weight are observed, or DeepSWE is missing; ranked and flagged, never floored (O8).
-- **partial component**: AA marks tasks of a basket component missing or declined (E37).
+- **partial component**: AA marks tasks of a basket component missing or declined (E37), or the component's cost cannot be reconciled with AA's prices (E170).
+- **valuation basis unverified**: AA's cost reconciles with neither its displayed prices nor a registered price record; ranked, but outside interval outputs and cost anchors (E170 outcome 4).
+- **no cost**: AA publishes no cost for the configuration, so it has no value score and no rank (AGENTS.md); its quality is shown.
 - **AA cost caveat**: AA states that its published cost omits a pricing term.
 - **API-cost fallback**: no admitted Plan route; the Plan ranking uses the API cost (O13).
 
@@ -46,7 +52,7 @@ Not ranked (12 roster models): Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5,
 
 ### What the evidence supports
 
-- API basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere inside the published record's precision and missing-evidence bounds) is GPT-6.1 Sol (max), GPT-6 Luna (max); the possible frontier adds Gemini 4 Argon (high), Claude Sonnet 5.5 (max), GPT-5.6 Sol (max), GPT-6 Sol (max), GPT-5.6 Luna (max), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). Not evaluable on this workload: MiMo-V2.6-Flash, MiMo-V2.6-Pro. Cheapest at or above quality 56.7: not unique; possibly GPT-6.1 Sol (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). (Bar comparison: compares 11 configurations that can qualify.)
+- API basis, main workload: the definite frontier (no configuration can beat it on both cost and quality anywhere inside the published record's precision and missing-evidence bounds) is GPT-6.1 Sol (max), GPT-6 Luna (max); the possible frontier adds Gemini 4 Argon (high), Claude Sonnet 5.5 (max), Muse Wonder (max), GPT-5.6 Sol (max), Muse Spark 1.3 (max), GPT-6 Sol (max), GPT-5.6 Luna (max), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). Not evaluable on this workload: Claude Fable 5.1 (max), MiMo-V2.6-Flash, MiMo-V2.6-Pro, Muse Wonder Full (max). Cheapest at or above quality 58.3: not unique; possibly GPT-6.1 Sol (max), DeepSeek V4 Flash (max), DeepSeek V4 Pro (max). (Bar comparison: compares 12 configurations that can qualify.)
 - Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
 Scenario shares by stream, diagnostics and the release gates are in [scores.md](scores.md); the inputs behind every number are in [raw-data.md](raw-data.md).
@@ -99,7 +105,7 @@ AA footnote (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer
 - [AA Coding Agent Index, DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
 - [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) official leaderboard rows and [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs.
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `29df9f27025585ff50b54d1d12e89f2a04f87d176dfa94810bfedfe8fd771904`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `59bd847ca2ca49730fea1cfda6fbd4dcb80cdd959a1b0bc76f728edd91eea3ea`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files

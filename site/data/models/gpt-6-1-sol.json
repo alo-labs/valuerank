@@ -15,7 +15,7 @@
       "plan": 59.768083679103796
     },
     "quality": 61.32724120424232,
-    "qualityRank": 4,
+    "qualityRank": 6,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -429,8 +429,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.5829,
-        "top3": 0.9954,
+        "top1": 0.5885,
+        "top3": 0.9947,
         "frontier": 1.0
       },
       {
@@ -438,8 +438,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.3621,
-        "top3": 0.957,
+        "top1": 0.3609,
+        "top3": 0.9556,
         "frontier": 0.9935
       },
       {
@@ -447,8 +447,8 @@
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.4118,
-        "top3": 0.9786,
+        "top1": 0.3997,
+        "top3": 0.9767,
         "frontier": 1.0
       },
       {
@@ -456,8 +456,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.5656,
-        "top3": 0.9922,
+        "top1": 0.549,
+        "top3": 0.9908,
         "frontier": 1.0
       }
     ],

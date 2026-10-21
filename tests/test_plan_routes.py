@@ -449,3 +449,19 @@ def test_report_window_admits_only_reports_dated_inside_it():
         pr.check_report_window(document(pooled))
     with pytest.raises(ValueError, match="must span 30 days"):
         pr.check_report_window(document(inside, end="2026-10-31"))
+
+
+def test_only_reports_in_the_current_window_count(monkeypatch):
+    """O32: a report older than the current 30-day window stays visible but no longer counts toward pooling."""
+
+    def dated(identifier, multiple, day):
+        return {**comparable_report(identifier, multiple), "measurementWindow": {"start": day, "end": day}}
+
+    window = {"start": "2026-09-20", "end": "2026-10-20"}
+    pair = [dated("new", 10.0, "2026-10-12"), dated("old", 11.0, "2026-09-01")]  # 41 days apart
+    base = route("r", 1.0, kind="user_reported_projection", models=("m",), checked="2026-10-15", independentReports=pair)
+    assert pr.measurement_objects(base, TODAY)[0]["reportIds"] == ["new", "old"]  # no window: both pool
+    (left,) = pr.route_candidates("m", "max", [base], TODAY, window=window)
+    assert left["grade"] == "diagnostic" and left["route"]["excludedReportIds"] == ["old"]
+    assert pr.in_window({"id": "x"}, window) is False and pr.in_window({"id": "x"}, None) is True
+    assert pr.admission_table("m", "max", [base], TODAY, window)[0]["case"] == 5

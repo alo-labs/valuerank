@@ -200,12 +200,27 @@ STAGES = ("fresh", "possibly-superseded", "expired", "demoted")
 REPORT_WINDOW_DAYS = 30
 
 
+def report_date(report: dict) -> date | None:
+    """E194: a report's date is its measurement window's end, else its report date, else its publication date."""
+
+    stamp = (report.get("measurementWindow") or {}).get("end") or report.get("reportDate") or report.get("sourcePublicationDate")
+    return date.fromisoformat(stamp) if stamp else None
+
+
+def in_window(report: dict, window: dict | None) -> bool:
+    """O32: a report counts toward source count and concordance only while dated inside the current report window."""
+
+    if window is None:
+        return True
+    stamp = report_date(report)
+    return stamp is not None and date.fromisoformat(window["start"]) <= stamp <= date.fromisoformat(window["end"])
+
+
 def check_report_window(document: dict) -> None:
     """E194: every newly admitted end-user report is dated inside the release's report window.
 
-    A report's date is its measurement window's end, else its report date, else its
-    publication date. A report admitted at an earlier release records ``admittedOn``
-    and ages under E151/O13 instead of being re-tested against later windows.
+    A report admitted at an earlier release records ``admittedOn``; it stays published as a
+    diagnostic until it expires (E151/O13) but no longer counts once it leaves the window (O32).
     """
 
     window = document["evidencePolicy"]["reportingWindow"]
@@ -216,10 +231,7 @@ def check_report_window(document: dict) -> None:
         if route.get("valueMultipleKind") not in REPORT_KINDS:
             continue
         for report in route.get("independentReports") or [route]:
-            if report.get("admittedOn"):
-                continue
-            stamp = (report.get("measurementWindow") or {}).get("end") or report.get("reportDate") or report.get("sourcePublicationDate")
-            if stamp is None or not start <= date.fromisoformat(stamp) <= end:
+            if not report.get("admittedOn") and not in_window(report, window):
                 raise ValueError(f"{report['id']}: end-user report dated outside the report window {start} to {end} (E194)")
 
 
@@ -231,7 +243,7 @@ def report_stage(report: dict, route: dict, release_day: date) -> str:
     return expiry_status(source, release_day)
 
 
-def measurement_objects(route: dict, release_day: date | None = None) -> list[dict]:
+def measurement_objects(route: dict, release_day: date | None = None, window: dict | None = None) -> list[dict]:
     """E111/E151: a route's measurement objects — its own measurement, or one per concordant comparable report partition.
 
     With a release day, each report is first classified by its own clock; reports
@@ -239,17 +251,19 @@ def measurement_objects(route: dict, release_day: date | None = None) -> list[di
     partition is pooled and re-tested for source count and concordance (never a
     searched-for passing subset). The object carries its contributors, the
     excluded reports and its partition stage (the most advanced contributor stage).
+    With a report window, only reports dated inside it count (O32); older ones are excluded.
     """
 
     reports = route.get("independentReports")
     if route.get("valueMultipleKind") not in REPORT_KINDS or not reports:
         return [route]
     stages = {report["id"]: report_stage(report, route, release_day) if release_day else "fresh" for report in reports}
-    excluded = sorted(report_id for report_id, stage in stages.items() if stage == "demoted")
+    counted = {report["id"] for report in reports if stages[report["id"]] != "demoted" and in_window(report, window)}
+    excluded = sorted(report["id"] for report in reports if report["id"] not in counted)
     groups, _separate = comparable_groups(reports)
     objects = []
     for index, group in enumerate(groups, start=1):
-        surviving = [report for report in group if stages[report["id"]] != "demoted"]
+        surviving = [report for report in group if report["id"] in counted]
         pooled = concordant_pool([report.get("multiple") for report in surviving])
         if pooled is not None:
             objects.append({
@@ -258,18 +272,19 @@ def measurement_objects(route: dict, release_day: date | None = None) -> list[di
                 "partitionStage": max((stages[report["id"]] for report in surviving), key=STAGES.index),
             })
     # No surviving partition: the route keeps only its unexpired reports, so it cannot grade as pooled evidence.
-    return objects or [{**route, "independentReports": [report for report in reports if stages[report["id"]] != "demoted"], "excludedReportIds": excluded}]
+    return objects or [{**route, "independentReports": [report for report in reports if report["id"] in counted], "excludedReportIds": excluded}]
 
 
-def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None) -> list[dict]:
+def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None, window: dict | None = None) -> list[dict]:
     """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match.
 
-    ``registry`` is the full route list donors are resolved in (default: ``routes``).
+    ``registry`` is the full route list donors are resolved in (default: ``routes``); ``window`` is the
+    release's report window (O32).
     """
 
     by_id = {item["id"]: item for item in (registry if registry is not None else routes)}
     candidates = []
-    for route in [item for base in routes for item in measurement_objects(base, release_day)]:
+    for route in [item for base in routes for item in measurement_objects(base, release_day, window)]:
         if model_id not in route.get("modelIds", []):
             continue
         required = route.get("requiredVariant")
@@ -305,7 +320,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
 IDENTIFIED = {"point-identified", "set-identified"}
 
 
-def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date) -> list[dict]:
+def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, window: dict | None = None) -> list[dict]:
     """E106/E123: every route-measurement pair naming the model, classified once by case and the three predicates.
 
     1 execution-identity incompatibility (excluded); 2 owner-named transfer
@@ -320,7 +335,7 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
     for route in routes:
         if model_id not in route.get("modelIds", []):
             continue
-        candidates = route_candidates(model_id, configuration_effort, [route], release_day, registry=routes)
+        candidates = route_candidates(model_id, configuration_effort, [route], release_day, registry=routes, window=window)
         if not candidates:
             table.append({"route": route, "case": 1, "officialDisplayEligible": False, "targetTransportIdentified": False, "planIntervalEligible": False})
             continue
