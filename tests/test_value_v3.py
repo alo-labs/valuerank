@@ -49,6 +49,12 @@ def page(slug: str, cost_per_task: float, **fields) -> dict:
     return {"model": model}
 
 
+def comparable(leaf: str) -> dict:
+    """E237: the comparability record every gap fill carries."""
+
+    return {"benchmarkVersion": v.SUPPLEMENT_VERSIONS[leaf], "metric": "headline score"}
+
+
 def documents(**overrides) -> dict:
     base = {
         "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5)]},
@@ -85,9 +91,9 @@ def documents(**overrides) -> dict:
         "priceRecords": {"records": []},
         # O36: the fixture rows carry every leaf; b and c take their missing leaves from supplements.
         "leafEvidence": {"supplements": [
-            {"modelId": "b", "leaf": "bugHunt", "value": 40.0, "unit": "fixedOf105", "sourceType": "independent"},
-            {"modelId": "c", "leaf": "bugHunt", "value": 30.0, "unit": "fixedOf105", "sourceType": "independent"},
-            {"modelId": "c", "leaf": "deepswe", "value": 50.0, "unit": "percent", "sourceType": "model_provider_claim"},
+            {"modelId": "b", "leaf": "bugHunt", "value": 40.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
+            {"modelId": "c", "leaf": "bugHunt", "value": 30.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
+            {"modelId": "c", "leaf": "deepswe", "value": 50.0, "unit": "percent", "sourceType": "model_provider_claim", **comparable("deepswe")},
         ], "searches": []},
     }
     base.update(overrides)
@@ -105,7 +111,7 @@ def filled(*model_ids, leaves=("deepswe", "bugHunt")) -> dict:
     """O36: fixture rows outside a, b and c take their missing SWE leaves from supplements."""
 
     base = documents()["leafEvidence"]
-    extra = [{"modelId": model_id, "leaf": leaf, "value": 50.0, "unit": "percent" if leaf != "bugHunt" else "fixedOf105", "sourceType": "independent"}
+    extra = [{"modelId": model_id, "leaf": leaf, "value": 50.0, "unit": "percent" if leaf != "bugHunt" else "fixedOf105", "sourceType": "independent", **comparable(leaf)}
              for model_id in model_ids for leaf in leaves]
     return {**base, "supplements": base["supplements"] + extra}
 
@@ -1530,10 +1536,10 @@ def test_supplements_fill_only_missing_leaves_in_source_order():
     """O36: an independent result beats a provider claim; neither replaces a leaf the primary source has."""
 
     documents_ = {"leafEvidence": {"supplements": [
-        {"modelId": "a", "leaf": "terminalBench", "value": 40.0, "unit": "percent", "sourceType": "model_provider_claim", "url": "p"},
-        {"modelId": "a", "leaf": "terminalBench", "value": 30.0, "unit": "percent", "sourceType": "independent", "url": "i"},
-        {"modelId": "a", "leaf": "bugHunt", "value": 52.0, "unit": "fixedOf105", "sourceType": "independent"},
-        {"modelId": "a", "leaf": "frontierCode", "value": 0.5, "unit": "fraction", "sourceType": "independent"}]},
+        {"modelId": "a", "leaf": "terminalBench", "value": 40.0, "unit": "percent", "sourceType": "model_provider_claim", "url": "p", **comparable("terminalBench")},
+        {"modelId": "a", "leaf": "terminalBench", "value": 30.0, "unit": "percent", "sourceType": "independent", "url": "i", **comparable("terminalBench")},
+        {"modelId": "a", "leaf": "bugHunt", "value": 52.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
+        {"modelId": "a", "leaf": "frontierCode", "value": 0.5, "unit": "fraction", "sourceType": "independent", **comparable("frontierCode")}]},
         "tb4": {"providerClaims": [{"cohortModelId": "b", "valuePct": 31.2, "eligibleForRanking": True, "claimId": "c1"},
                                    {"cohortModelId": "z", "valuePct": 9.0, "eligibleForRanking": False}]}}
     chosen = v.leaf_supplements(documents_)
@@ -1541,6 +1547,11 @@ def test_supplements_fill_only_missing_leaves_in_source_order():
     evidence = v.leaf_evidence("a", "max", {"slug": "a"}, None, [], None, chosen)
     assert evidence["observations"]["terminalBench"].z == 30.0 and evidence["provenance"]["terminalBench"]["sourceType"] == "independent"
     assert evidence["observations"]["bugHunt"].z == pytest.approx(100 * 52 / 105, abs=0.1) and evidence["observations"]["frontierCode"].z == 50.0
+    # E237: a fill without the leaf's benchmark version, or without its metric, stops the build; another leaf needs its label.
+    for broken in ({"benchmarkVersion": "DeepSWE v1.0", "metric": "pass@1"}, {"benchmarkVersion": "DeepSWE v1.1"}):
+        with pytest.raises(ValueError, match=r"a: the deepswe gap fill must state benchmark version 'DeepSWE v1.1' and its metric \(E237\)"):
+            v.leaf_supplements({"leafEvidence": {"supplements": [{"modelId": "a", "leaf": "deepswe", "sourceType": "independent", **broken}]}, "tb4": {}})
+    v.check_comparability({"modelId": "a", "leaf": "hle", "benchmarkVersion": v.LEAF_LABELS["hle"], "metric": "accuracy"})
 
 
 def test_incomplete_configurations_are_listed_not_ranked_and_need_a_logged_search():

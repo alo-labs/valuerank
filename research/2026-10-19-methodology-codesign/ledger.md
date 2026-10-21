@@ -1097,3 +1097,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (rejected): E201a already flags window-straddling reports and uses isolated per-period figures where a report publishes them, as AGENTS.md says; no new argument.
 - Design 1–2: as H1(c) and M1. Design 3 (rejected for now): a standard-error margin needs a sampling model for every leaf, and only Terminal-Bench publishes one; the leaves without one would need assumed noise, which O25 keeps out of the published-record claims. Design 4 (adopted as E236): the manifest marks S1M dormant while no ranked leaf carries a published interval. Design 5: M2.
 - Draft r82.
+
+## Internal review I23 (Claude Sonnet 5.5, effort low, on r82) — adopted, modified or rejected
+- M1 (adopted): the sibling list now matches the cohort (Muse Spark 1.3 (xhigh) and Grok 4.6 (xhigh) are listed under O36), and the draft states that a ranked sibling stays ranked by retention when its family's frontier or near configuration is listed under O38 (owner question 1, answered from O33 and O38; none today).
+- M2 (adopted): the frontier-families population (E187, E199) is defined as the rows carrying a frontier or near-frontier inclusion reason, each such family's primary row; the nine rows are named, and E205's every-family primary rows are distinguished. This matches the build (`value_v3.configuration`'s frontierFamily flag).
+- M3 (adopted as E237): every gap fill carries a comparability record, benchmark version and metric, and the build fails when the version is not the leaf's or the metric is missing (`value_v3.check_comparability`); raw-data.md prints both. The rank band the reviewer asks for is E234's removal sensitivity. Owner question 2 challenges O37 and is not relayed: the owner admitted that claim knowing it is a provider claim, and E233 already denies it labels.
+- L1 (adopted): the lifecycle dates give each stage's first day (possibly superseded from 2026-11-06, expired from 2027-01-05, demoted from 2027-02-04).
+- L2 (rejected): E216's 45 days is the snapshot's own backstop if E211 or E217 change; it cannot disagree with them.
+- L3 (rejected): no release has been published, so the version string names the pre-release freeze; the dual runs record each re-freeze, and the first release freezes the content the string names.
+- Design 1 (rejected): the published documents are generated; the draft is the specification and its "today" figures are refreshed from the build each revision. Design 2: E237. Design 3 (rejected for now): Reddit and X are unreachable from the build environment, which the search log records; a recall audit needs those channels. Design 4 (adopted): the label wording states what "confirmed" means while every row is complete.
+- Draft r83.

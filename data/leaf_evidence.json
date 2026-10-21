@@ -13,7 +13,9 @@
    "configuration": "Muse Wonder Full (Max)",
    "url": "https://artificialanalysis.ai/models/muse-wonder-full",
    "publishedOn": "2026-10-21",
-   "quote": "\"slug\":\"muse-wonder-full\",\"name\":\"Muse Wonder Full (Max)\" ... \"frontierCode\":0.448865666666667 (also in the FrontierCode leaderboard payload)"
+   "quote": "\"slug\":\"muse-wonder-full\",\"name\":\"Muse Wonder Full (Max)\" ... \"frontierCode\":0.448865666666667 (also in the FrontierCode leaderboard payload)",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "AA's headline FrontierCode score (field frontierCode, 0-1), the field the leaf reads for every other row"
   },
   {
    "modelId": "deepseek-v4-pro",
@@ -25,7 +27,9 @@
    "configuration": "DeepSeek V4 Pro 0813 (Max)",
    "url": "https://artificialanalysis.ai/models/deepseek-v4-pro",
    "publishedOn": "2026-10-21",
-   "quote": "model object slug 'deepseek-v4-pro', name 'DeepSeek V4 Pro 0813 (Max)': \"frontierCode\":0.388022666666667 (model page; not yet in the leaderboard's scored rows)"
+   "quote": "model object slug 'deepseek-v4-pro', name 'DeepSeek V4 Pro 0813 (Max)': \"frontierCode\":0.388022666666667 (model page; not yet in the leaderboard's scored rows)",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "AA's headline FrontierCode score (field frontierCode, 0-1), the field the leaf reads for every other row"
   },
   {
    "modelId": "mimo-v2-6-pro",
@@ -38,7 +42,9 @@
    "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
    "publishedOn": "2026-09-21",
    "quote": "README '3. Evaluation Results': '| DeepSWE v1.1 | 71.9 | 67.9 | ...' (columns Pro, Flash, ...)",
-   "notes": "Owner admitted this provider claim on 2026-10-21 (O37). No thinking mode is stated; taken as the released model's single reasoning mode. datacurve's DeepSWE leaderboard repeats the same figure."
+   "notes": "Owner admitted this provider claim on 2026-10-21 (O37). No thinking mode is stated; taken as the released model's single reasoning mode. datacurve's DeepSWE leaderboard repeats the same figure.",
+   "benchmarkVersion": "DeepSWE v1.1",
+   "metric": "pass@1 (%) as published in Xiaomi's model card; attempts and aggregation not stated (AA's leaf averages 3 attempts)"
   },
   {
    "modelId": "mimo-v2-6-flash",
@@ -50,7 +56,9 @@
    "configuration": "MiMo-V2.6-Flash-RL (released checkpoint; single reasoning mode)",
    "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
    "publishedOn": "2026-09-21",
-   "quote": "Same README table row: 'DeepSWE v1.1 | 71.9 | 67.9 | ...' (Flash is the second column)"
+   "quote": "Same README table row: 'DeepSWE v1.1 | 71.9 | 67.9 | ...' (Flash is the second column)",
+   "benchmarkVersion": "DeepSWE v1.1",
+   "metric": "pass@1 (%) as published in Xiaomi's model card; attempts and aggregation not stated (AA's leaf averages 3 attempts)"
   },
   {
    "modelId": "gpt-6.1-sol-xhigh",
@@ -65,7 +73,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['GPT-6.1 Sol'].xhigh.main.new_score",
    "quote": "v1_1.data['GPT-6.1 Sol'].xhigh.main.new_score = 0.4929",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   },
   {
    "modelId": "gpt-6.1-sol-high",
@@ -80,7 +90,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['GPT-6.1 Sol'].high.main.new_score",
    "quote": "v1_1.data['GPT-6.1 Sol'].high.main.new_score = 0.4798",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   },
   {
    "modelId": "gpt-6.1-sol-medium",
@@ -95,7 +107,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['GPT-6.1 Sol'].medium.main.new_score",
    "quote": "v1_1.data['GPT-6.1 Sol'].medium.main.new_score = 0.5023",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   },
   {
    "modelId": "gpt-6.1-sol-low",
@@ -110,7 +124,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['GPT-6.1 Sol'].low.main.new_score",
    "quote": "v1_1.data['GPT-6.1 Sol'].low.main.new_score = 0.4546",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   },
   {
    "modelId": "claude-opus-5",
@@ -125,7 +141,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['Claude Opus 5'].max.main.new_score",
    "quote": "v1_1.data['Claude Opus 5'].max.main.new_score = 0.4804",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   },
   {
    "modelId": "gpt-6-sol",
@@ -140,7 +158,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['GPT-6 Sol'].max.main.new_score",
    "quote": "v1_1.data['GPT-6 Sol'].max.main.new_score = 0.4927",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   },
   {
    "modelId": "gpt-5.6-sol",
@@ -155,7 +175,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['GPT-5.6 Sol'].max.main.new_score",
    "quote": "v1_1.data['GPT-5.6 Sol'].max.main.new_score = 0.4749",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   },
   {
    "modelId": "gpt-5.6-luna",
@@ -170,7 +192,9 @@
    "artifact": "cognitionFrontierCode",
    "locator": "v1_1.data['GPT-5.6 Luna'].max.main.new_score",
    "quote": "v1_1.data['GPT-5.6 Luna'].max.main.new_score = 0.3981",
-   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+   "benchmarkVersion": "FrontierCode 1.1",
+   "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
   }
  ],
  "searches": [

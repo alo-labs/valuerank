@@ -96,11 +96,25 @@ SUPPLEMENT_UNITS = {"percent": lambda value: q.percent_z(value), "fraction": lam
 LEAF_SEARCH_MAX_AGE_DAYS = 7
 
 
+# E237: the benchmark version a gap fill must state (O36: "the same benchmark version on the exact configuration").
+SUPPLEMENT_VERSIONS = {"deepswe": "DeepSWE v1.1", "bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 1.1", "terminalBench": "Terminal-Bench 4.0"}
+
+
+def check_comparability(entry: dict) -> None:
+    """E237: a gap fill records the benchmark version (which must be the leaf's) and the metric it reports, or the build fails."""
+
+    required = SUPPLEMENT_VERSIONS.get(entry["leaf"], LEAF_LABELS[entry["leaf"]])
+    if entry.get("benchmarkVersion") != required or not entry.get("metric"):
+        raise ValueError(f"{entry['modelId']}: the {entry['leaf']} gap fill must state benchmark version {required!r} and its metric (E237)")
+
+
 def leaf_supplements(documents: dict) -> dict:
     """O36: the eligible supplementary observations per (model, leaf), best source first; Terminal-Bench provider claims
     recorded in the tbench.ai capture count as provider claims."""
 
     entries = list((documents.get("leafEvidence") or {}).get("supplements", []))
+    for entry in entries:
+        check_comparability(entry)
     entries += [{"modelId": claim["cohortModelId"], "leaf": "terminalBench", "value": claim["valuePct"], "unit": "percent", "sourceType": "model_provider_claim",
                  "configuration": claim.get("evaluatedModel"), "url": claim.get("sourceUrl"), "publishedOn": claim.get("publishedOn"), "publisher": claim.get("publisher"),
                  "artifact": "tb4", "locator": f"providerClaims[claimId={claim.get('claimId')}].valuePct"}

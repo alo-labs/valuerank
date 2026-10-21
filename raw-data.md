@@ -365,19 +365,19 @@ Every input behind the published scores, with the artifact and locator that hold
 
 Leaves a ranked configuration takes from beyond its primary source, in the order a newer AA capture, another party's run of the same benchmark on the exact configuration, then the model provider's published result (O36/O37). Tbench.ai Terminal-Bench rows used as gap fills are in the leaf inputs above with their agent.
 
-| Configuration | Leaf | Value | Unit | Source type | Publisher | Evaluated configuration | Source |
-|---|---|---:|---|---|---|---|---|
-| Muse Wonder Full | FrontierCode 1.1 | 0.448866 | fraction | newer AA capture | Artificial Analysis | Muse Wonder Full (Max) | [Source](https://artificialanalysis.ai/models/muse-wonder-full) |
-| DeepSeek V4 Pro | FrontierCode 1.1 | 0.388023 | fraction | newer AA capture | Artificial Analysis | DeepSeek V4 Pro 0813 (Max) | [Source](https://artificialanalysis.ai/models/deepseek-v4-pro) |
-| MiMo-V2.6-Pro | DeepSWE v1.1 | 71.9 | percent | model-provider result | Xiaomi | MiMo-V2.6-Pro-RL (released checkpoint; single reasoning mode) | [Source](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL) |
-| GPT-6.1 Sol (xhigh) | FrontierCode 1.1 | 0.4929 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (xhigh), harness codex | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
-| GPT-6.1 Sol (high) | FrontierCode 1.1 | 0.4798 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (high), harness codex | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
-| GPT-6.1 Sol (medium) | FrontierCode 1.1 | 0.5023 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (medium), harness codex | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
-| GPT-6.1 Sol (low) | FrontierCode 1.1 | 0.4546 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (low), harness codex | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
-| Claude Opus 5 | FrontierCode 1.1 | 0.4804 | fraction | independent run | Cognition (FrontierCode's author) | Claude Opus 5 (max), harness claude-code | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
-| GPT-6 Sol | FrontierCode 1.1 | 0.4927 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6 Sol (max), harness codex | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
-| GPT-5.6 Sol | FrontierCode 1.1 | 0.4749 | fraction | independent run | Cognition (FrontierCode's author) | GPT-5.6 Sol (max), harness codex | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
-| GPT-5.6 Luna | FrontierCode 1.1 | 0.3981 | fraction | independent run | Cognition (FrontierCode's author) | GPT-5.6 Luna (max), harness codex | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| Configuration | Leaf | Value | Unit | Source type | Publisher | Evaluated configuration | Benchmark version | Metric (E237) | Source |
+|---|---|---:|---|---|---|---|---|---|---|
+| Muse Wonder Full | FrontierCode 1.1 | 0.448866 | fraction | newer AA capture | Artificial Analysis | Muse Wonder Full (Max) | FrontierCode 1.1 | AA's headline FrontierCode score (field frontierCode, 0-1), the field the leaf reads for every other row | [Source](https://artificialanalysis.ai/models/muse-wonder-full) |
+| DeepSeek V4 Pro | FrontierCode 1.1 | 0.388023 | fraction | newer AA capture | Artificial Analysis | DeepSeek V4 Pro 0813 (Max) | FrontierCode 1.1 | AA's headline FrontierCode score (field frontierCode, 0-1), the field the leaf reads for every other row | [Source](https://artificialanalysis.ai/models/deepseek-v4-pro) |
+| MiMo-V2.6-Pro | DeepSWE v1.1 | 71.9 | percent | model-provider result | Xiaomi | MiMo-V2.6-Pro-RL (released checkpoint; single reasoning mode) | DeepSWE v1.1 | pass@1 (%) as published in Xiaomi's model card; attempts and aggregation not stated (AA's leaf averages 3 attempts) | [Source](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL) |
+| GPT-6.1 Sol (xhigh) | FrontierCode 1.1 | 0.4929 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (xhigh), harness codex | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| GPT-6.1 Sol (high) | FrontierCode 1.1 | 0.4798 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (high), harness codex | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| GPT-6.1 Sol (medium) | FrontierCode 1.1 | 0.5023 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (medium), harness codex | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| GPT-6.1 Sol (low) | FrontierCode 1.1 | 0.4546 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6.1 Sol (low), harness codex | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| Claude Opus 5 | FrontierCode 1.1 | 0.4804 | fraction | independent run | Cognition (FrontierCode's author) | Claude Opus 5 (max), harness claude-code | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| GPT-6 Sol | FrontierCode 1.1 | 0.4927 | fraction | independent run | Cognition (FrontierCode's author) | GPT-6 Sol (max), harness codex | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| GPT-5.6 Sol | FrontierCode 1.1 | 0.4749 | fraction | independent run | Cognition (FrontierCode's author) | GPT-5.6 Sol (max), harness codex | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
+| GPT-5.6 Luna | FrontierCode 1.1 | 0.3981 | fraction | independent run | Cognition (FrontierCode's author) | GPT-5.6 Luna (max), harness codex | FrontierCode 1.1 | Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check) | [Source](https://cognition.com/data/frontiercode-leaderboard/data.json) |
 
 Exhaustive searches for the leaves a cohort configuration still lacks (each within 7 days of the cutoff; the configuration is listed, not ranked). The sources searched are in [data/leaf_evidence.json](data/leaf_evidence.json).
 
@@ -886,7 +886,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `04d37748c85e7391459da632af71f6bbc1f061dd6ff36b2e8cdec825860fb40b`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `ff4bc4eed0fce70d1c542bfbdf299c95213b08d4123af67e01a58a577c9da662`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -902,7 +902,7 @@ Bundle hash `04d37748c85e7391459da632af71f6bbc1f061dd6ff36b2e8cdec825860fb40b`: 
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `d11b49c46c60f43909e2c8e02067a9bbfd17dd3b56d5210ff047316449ef1ebb` | 2026-10-21T06:30:00Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
 | planRoutes | `data/plan_cost_routes.json` | `6e72d796297481210442eeff95c15586d37b0b3c546c3e81cdd81313f139d1cf` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `41e71ffea3a13f0cec1573493a8baf24b274d2de5290224d1107ee818c05cd95` | 2026-10-17T19:25:14Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `13eb7a7b64c8b3ecb397e9b89bab4424a87521f8fa2775c4df9fce6f089ee5c2` | 2026-10-21 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| leafEvidence | `data/leaf_evidence.json` | `d44e9c12b26fc2c5fad1df6d05ccc309a6a4c105f0d70d1d6e6553c604d6541a` | 2026-10-21 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | — | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | anchors | `data/v3_frozen.json` | `0c3c398a871ea1dca2fef706e0e55cee7f0684cda3d0114700c008b43cf22030` | 2026-10-21 | valuerank.value_v3 freeze |
 

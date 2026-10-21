@@ -1251,7 +1251,7 @@ def raw_data(facts):
     ranked_ids = {row["id"] for row in v3["rows"]}
     fill_rows = [
         [facts.names.get(item["modelId"], item["modelId"]), LEAF_LABELS[item["leaf"]], f"{item['value']:g}", item["unit"], SOURCE_TYPE_LABELS[item["sourceType"]],
-         item.get("publisher") or DASH, item.get("configuration") or DASH, md_link("Source", item["url"]) if item.get("url") else DASH]
+         item.get("publisher") or DASH, item.get("configuration") or DASH, item["benchmarkVersion"], item["metric"], md_link("Source", item["url"]) if item.get("url") else DASH]
         for item in facts.leaf_evidence["supplements"] if item["modelId"] in ranked_ids
     ]
     search_rows = [
@@ -1276,7 +1276,7 @@ Every input behind the published scores, with the artifact and locator that hold
 
 Leaves a ranked configuration takes from beyond its primary source, in the order a newer AA capture, another party's run of the same benchmark on the exact configuration, then the model provider's published result (O36/O37). Tbench.ai Terminal-Bench rows used as gap fills are in the leaf inputs above with their agent.
 
-{markdown_table(['Configuration', 'Leaf', 'Value', 'Unit', 'Source type', 'Publisher', 'Evaluated configuration', 'Source'], fill_rows, numeric={2})}
+{markdown_table(['Configuration', 'Leaf', 'Value', 'Unit', 'Source type', 'Publisher', 'Evaluated configuration', 'Benchmark version', 'Metric (E237)', 'Source'], fill_rows, numeric={2})}
 
 Exhaustive searches for the leaves a cohort configuration still lacks (each within {LEAF_SEARCH_DAYS} days of the cutoff; the configuration is listed, not ranked). The sources searched are in [data/leaf_evidence.json](data/leaf_evidence.json).
 
