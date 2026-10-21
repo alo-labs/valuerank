@@ -202,6 +202,9 @@ def _row_flags(row: dict) -> list[str]:
         flags.append("No cost: AA publishes no cost for this configuration, so it has no value score and no rank")
     elif row["cost"]["subset"]:
         flags.append("Subset cost: scored on its own workload; cross-workload ordering not identified")
+    claimed = [q.LEAF_BY_KEY[key].label for key, leaf in row["quality"].get("leaves", {}).items() if leaf.get("sourceType") == "model_provider_claim"]
+    if claimed:
+        flags.append("Provider-claimed leaf: " + ", ".join(claimed) + " is the model provider's own result; competes but earns no interval label")
     if row["quality"]["provisional"]:
         flags.append("Provisional quality: " + "; ".join(row["quality"]["provisionalReasons"]))
     if row["cost"]["partialComponents"]:

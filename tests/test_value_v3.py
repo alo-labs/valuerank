@@ -52,7 +52,10 @@ def page(slug: str, cost_per_task: float, **fields) -> dict:
 def comparable(leaf: str) -> dict:
     """E237: the comparability record every gap fill carries."""
 
-    return {"benchmarkVersion": v.SUPPLEMENT_VERSIONS[leaf], "metric": "headline score"}
+    return {"benchmarkVersion": v.SUPPLEMENT_VERSIONS[leaf], "metric": "headline score", "publisher": "Registered party"}
+
+
+REGISTRY = {leaf.key: ["Registered party"] for leaf in q.LEAVES}
 
 
 def documents(**overrides) -> dict:
@@ -94,7 +97,7 @@ def documents(**overrides) -> dict:
             {"modelId": "b", "leaf": "bugHunt", "value": 40.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
             {"modelId": "c", "leaf": "bugHunt", "value": 30.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
             {"modelId": "c", "leaf": "deepswe", "value": 50.0, "unit": "percent", "sourceType": "model_provider_claim", **comparable("deepswe")},
-        ], "searches": []},
+        ], "searches": [], "sourceRegistry": REGISTRY},
     }
     base.update(overrides)
     return base
@@ -1539,7 +1542,7 @@ def test_supplements_fill_only_missing_leaves_in_source_order():
         {"modelId": "a", "leaf": "terminalBench", "value": 40.0, "unit": "percent", "sourceType": "model_provider_claim", "url": "p", **comparable("terminalBench")},
         {"modelId": "a", "leaf": "terminalBench", "value": 30.0, "unit": "percent", "sourceType": "independent", "url": "i", **comparable("terminalBench")},
         {"modelId": "a", "leaf": "bugHunt", "value": 52.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
-        {"modelId": "a", "leaf": "frontierCode", "value": 0.5, "unit": "fraction", "sourceType": "independent", **comparable("frontierCode")}]},
+        {"modelId": "a", "leaf": "frontierCode", "value": 0.5, "unit": "fraction", "sourceType": "independent", **comparable("frontierCode")}], "sourceRegistry": REGISTRY},
         "tb4": {"providerClaims": [{"cohortModelId": "b", "valuePct": 31.2, "eligibleForRanking": True, "claimId": "c1"},
                                    {"cohortModelId": "z", "valuePct": 9.0, "eligibleForRanking": False}]}}
     chosen = v.leaf_supplements(documents_)
@@ -1552,6 +1555,10 @@ def test_supplements_fill_only_missing_leaves_in_source_order():
         with pytest.raises(ValueError, match=r"a: the deepswe gap fill must state benchmark version 'DeepSWE v1.1' and its metric \(E237\)"):
             v.leaf_supplements({"leafEvidence": {"supplements": [{"modelId": "a", "leaf": "deepswe", "sourceType": "independent", **broken}]}, "tb4": {}})
     v.check_comparability({"modelId": "a", "leaf": "hle", "benchmarkVersion": v.LEAF_LABELS["hle"], "metric": "accuracy"})
+    # E239: another party's result counts only from a source registered for the leaf.
+    unregistered = {"modelId": "a", "leaf": "frontierCode", "sourceType": "independent", **comparable("frontierCode"), "publisher": "Some blog"}
+    with pytest.raises(ValueError, match=r"a: 'Some blog' is not a registered frontierCode source \(E239\)"):
+        v.leaf_supplements({"leafEvidence": {"supplements": [unregistered], "sourceRegistry": REGISTRY}, "tb4": {}})
 
 
 def test_incomplete_configurations_are_listed_not_ranked_and_need_a_logged_search():

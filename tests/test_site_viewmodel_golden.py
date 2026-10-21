@@ -151,7 +151,8 @@ def test_flags_name_subset_rows(bundle):
     mimo = by_slug(bundle.rankings)["mimo-v2-6-pro"]
     # O36: a ranked row has every leaf, so none is provisional; the subset-cost flag stays.
     assert mimo["cost"]["subset"] is True and mimo["coverage"]["provisional"] is False
-    assert mimo["flags"] == ["Subset cost: scored on its own workload; cross-workload ordering not identified"]
+    assert mimo["flags"] == ["Subset cost: scored on its own workload; cross-workload ordering not identified",
+                             "Provider-claimed leaf: DeepSWE v1.1 is the model provider's own result; competes but earns no interval label"]
     haiku = by_slug(bundle.rankings)["claude-haiku-5-5"]
     assert any(flag.startswith("AA cost caveat") for flag in haiku["flags"])
 

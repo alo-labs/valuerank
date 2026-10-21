@@ -71,7 +71,8 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     readme = (emitted / "README.md").read_text()
     rows = {cells(row)[2].split("](")[0].lstrip("["): cells(row) for row in table_rows(readme, "| Plan rank | API rank | Configuration")}
     assert rows["Gemini 4 Argon (high)"][9] == "—" and rows["Gemini 4 Argon (high)"][10] == "API-cost fallback"
-    assert rows["MiMo-V2.6-Pro"][10] == "subset cost"  # O36: every ranked row has all eleven leaves, so none is provisional
+    # O36: every ranked row has all eleven leaves, so none is provisional; E233: Xiaomi's DeepSWE is a provider claim.
+    assert rows["MiMo-V2.6-Pro"][10] == "subset cost, provider-claimed leaf"
     # O30: GPT-6 Astra is ranked at max, its configuration with exact DeepSWE and Bug Hunt results.
     assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "—"
     assert rows["Claude Haiku 5.5 (xhigh)"][10] == "AA cost caveat"

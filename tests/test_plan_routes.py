@@ -511,6 +511,21 @@ def test_controlled_measurements_record_their_allocation_regime():
         pr.check_allocation_regimes({"routes": [{**controlled, "allocationRegime": " "}]})
 
 
+def test_selected_providers_cite_only_the_owner_selected_analysis():
+    """E238: a newer analysis enters only by the owner's selection; until then a route citing it stops the build."""
+
+    selected = {"providers": ["Anthropic"], "sourceUrl": "https://example.test/selected"}
+    routes = [{"id": "m", "provider": "Anthropic", "valueMultipleKind": "controlled_account_workload_projection", "sourceUrl": selected["sourceUrl"]},
+              {"id": "t", "provider": "Anthropic", "valueMultipleKind": "user_assumption", "sourceEvidenceId": "semianalysis", "sourceUrl": selected["sourceUrl"]},
+              {"id": "x", "provider": "xAI", "valueMultipleKind": "user_reported_projection", "sourceUrl": "https://example.test/other"},
+              {"id": "o", "provider": "Anthropic", "valueMultipleKind": "user_assumption", "sourceUrl": None}]
+    pr.check_selected_analysis({"evidencePolicy": {"selectedSourceException": selected}, "routes": routes})
+    pr.check_selected_analysis({"evidencePolicy": {}, "routes": routes})
+    newer = {**routes[0], "sourceUrl": "https://example.test/newer"}
+    with pytest.raises(ValueError, match=r"m: cites https://example.test/newer, not the owner-selected analysis https://example.test/selected \(E238\)"):
+        pr.check_selected_analysis({"evidencePolicy": {"selectedSourceException": selected}, "routes": [newer]})
+
+
 def test_pooled_reports_name_distinct_observers_and_no_shared_source():
     """E223: independence is distinct observers and no shared upstream source; calendar spacing is not required."""
 

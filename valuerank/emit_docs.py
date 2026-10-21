@@ -74,6 +74,7 @@ CHARGE_LABELS = {
 }
 FLAG_LEGEND = (
     ("subset cost", "scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17)"),
+    ("provider-claimed leaf", "a quality leaf comes from the model provider's own published result (O36's last source); the row competes but earns no interval label (E233)"),
     ("provisional quality", "observed leaves cover under 70% of quality weight, fewer than two software-engineering leaves or under 40% software-engineering weight are observed, or DeepSWE is missing; ranked and flagged, never floored (O8)"),
     ("partial component", "AA marks tasks of a basket component missing or declined (E37), or the component's cost cannot be reconciled with AA's prices (E170)"),
     ("valuation basis unverified", "AA's cost reconciles with neither its displayed prices nor a registered price record; ranked, but outside interval outputs and cost anchors (E170 outcome 4)"),
@@ -196,6 +197,7 @@ def short_flags(entry, row):
     cost = entry["cost"]
     present = {
         "subset cost": cost["subset"] and cost["apiUsd"] is not None,
+        "provider-claimed leaf": any(leaf.get("sourceType") == "model_provider_claim" for leaf in (row.get("quality") or {}).get("leaves", {}).values()),
         "provisional quality": entry["coverage"]["provisional"],
         "partial component": bool(cost["partialComponents"]),
         "valuation basis unverified": (row.get("valuationGate") or {}).get("outcome") == "valuation basis unverified" and cost["apiUsd"] is not None,

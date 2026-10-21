@@ -2,6 +2,23 @@
  "schemaVersion": 1,
  "observedAt": "2026-10-21",
  "rule": "Owner decisions O36/O37 (2026-10-21): every ranked configuration has all eleven quality leaves. A leaf the primary source lacks comes, in order, from a newer capture of the same primary source (aa_recapture), from another party that ran the same benchmark version on the exact configuration (independent; Cognition counts for FrontierCode), or from the model provider's own published result (model_provider_claim). Each leaf a cohort configuration still lacks has an exhaustive search logged here within 7 days of the release cutoff.",
+ "sourceRegistry": {
+  "deepswe": [
+   "Artificial Analysis"
+  ],
+  "bugHunt": [
+   "Bug Hunt Bench owner (Product Compass)"
+  ],
+  "frontierCode": [
+   "Artificial Analysis",
+   "Cognition (FrontierCode's author)"
+  ],
+  "terminalBench": [
+   "Artificial Analysis",
+   "tbench.ai"
+  ],
+  "_note": "E239 (2026-10-21): the closed per-leaf list of parties whose run of the same benchmark version may fill a leaf (O36/O37); a provider claim is the model provider's own document. A new source enters by a dated registry update recorded in the ledger."
+ },
  "supplements": [
   {
    "modelId": "muse-wonder-full",

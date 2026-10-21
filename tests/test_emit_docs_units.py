@@ -57,10 +57,11 @@ def test_short_flags_name_every_condition():
     assert ed.short_flags(entry_with(), {}) == "—"
     everything = entry_with(subset=True, partialComponents=["gdp-pdf"], fallback="api")
     everything["coverage"]["provisional"] = True
-    flags = ed.short_flags(everything, {"aaCostCaveat": "note", **UNVERIFIED}).split(", ")
-    assert sorted(flags) == sorted(["subset cost", "provisional quality", "partial component", "valuation basis unverified", "AA cost caveat", "API-cost fallback"])
+    claimed = {"quality": {"leaves": {"deepswe": {"sourceType": "model_provider_claim"}, "hle": {}}}}
+    flags = ed.short_flags(everything, {"aaCostCaveat": "note", **UNVERIFIED, **claimed}).split(", ")
+    assert sorted(flags) == sorted(["subset cost", "provider-claimed leaf", "provisional quality", "partial component", "valuation basis unverified", "AA cost caveat", "API-cost fallback"])
     assert [word for word, _text in ed.FLAG_LEGEND] == [
-        "subset cost", "provisional quality", "partial component", "valuation basis unverified", "no cost", "AA cost caveat", "API-cost fallback",
+        "subset cost", "provider-claimed leaf", "provisional quality", "partial component", "valuation basis unverified", "no cost", "AA cost caveat", "API-cost fallback",
     ]
     assert ed.short_flags(entry_with(), {"valuationGate": {"outcome": "compatible as captured"}}) == "—"
     assert ed.short_flags(entry_with(), UNVERIFIED) == "valuation basis unverified"

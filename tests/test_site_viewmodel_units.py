@@ -70,6 +70,10 @@ def test_row_flags_name_subset_provisional_partial_and_caveat_in_order():
     assert viewmodel._row_flags(_v3_row("a", 1.0, 50.0)) == []
     flags = viewmodel._row_flags(_v3_row("a", 1.0, 50.0, subset=True, provisional=True, partial=["x"], caveat="long-context pricing"))
     assert [flag.split(":")[0] for flag in flags] == ["Subset cost", "Provisional quality", "Partial cost component", "AA cost caveat"]
+    # E233: a provider-claimed leaf is named on the row.
+    claimed = _v3_row("a", 1.0, 50.0)
+    claimed["quality"]["leaves"] = {"deepswe": {"sourceType": "model_provider_claim"}, "hle": {"sourceType": None}}
+    assert viewmodel._row_flags(claimed) == ["Provider-claimed leaf: DeepSWE v1.1 is the model provider's own result; competes but earns no interval label"]
     # A row without a cost says so instead of claiming a subset workload (AGENTS.md: no cost, no value score).
     assert viewmodel._row_flags(_v3_row("a", None, 50.0, subset=True))[0].startswith("No cost: AA publishes no cost")
 

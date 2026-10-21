@@ -272,6 +272,20 @@ def check_allocation_regimes(document: dict) -> None:
             raise ValueError(f"{route['id']}: a controlled measurement must record its allocation regime (E220)")
 
 
+def check_selected_analysis(document: dict) -> None:
+    """E238: for the providers whose comparison the owner tied to one selected analysis (AGENTS.md), every controlled
+    measurement and every transfer of one cites that analysis. A newer analysis enters only when the owner selects it;
+    the selection then replaces the old one outright (its routes become diagnostics), whatever their multiples."""
+
+    selected = document["evidencePolicy"].get("selectedSourceException")
+    if not selected:
+        return
+    for route in document["routes"]:
+        cites_series = route.get("sourceEvidenceId") == "semianalysis" or route.get("valueMultipleKind") in CONTROLLED_KINDS
+        if route.get("provider") in selected["providers"] and cites_series and route.get("sourceUrl") != selected["sourceUrl"]:
+            raise ValueError(f"{route['id']}: cites {route.get('sourceUrl')}, not the owner-selected analysis {selected['sourceUrl']} (E238)")
+
+
 def report_stage(report: dict, route: dict, release_day: date) -> str:
     """E151: one report's own expiry stage, by its E194 date (window end, report date, publication date); else the route's."""
 

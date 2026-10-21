@@ -886,7 +886,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `ff4bc4eed0fce70d1c542bfbdf299c95213b08d4123af67e01a58a577c9da662`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `49bedfdc847fdc2773d5b8417bbf4228a1ea752e45eb633484e7c136ee5ad410`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -902,7 +902,7 @@ Bundle hash `ff4bc4eed0fce70d1c542bfbdf299c95213b08d4123af67e01a58a577c9da662`: 
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `d11b49c46c60f43909e2c8e02067a9bbfd17dd3b56d5210ff047316449ef1ebb` | 2026-10-21T06:30:00Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
 | planRoutes | `data/plan_cost_routes.json` | `6e72d796297481210442eeff95c15586d37b0b3c546c3e81cdd81313f139d1cf` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `41e71ffea3a13f0cec1573493a8baf24b274d2de5290224d1107ee818c05cd95` | 2026-10-17T19:25:14Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `d44e9c12b26fc2c5fad1df6d05ccc309a6a4c105f0d70d1d6e6553c604d6541a` | 2026-10-21 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| leafEvidence | `data/leaf_evidence.json` | `a506b8f343cda754575693e20a32fe69162282ba09cb05cb0bfec4a4f8d04cb5` | 2026-10-21 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | — | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | anchors | `data/v3_frozen.json` | `0c3c398a871ea1dca2fef706e0e55cee7f0684cda3d0114700c008b43cf22030` | 2026-10-21 | valuerank.value_v3 freeze |
 

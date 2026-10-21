@@ -30,7 +30,7 @@ Claude Sonnet 5.5 leads the Plan ranking at 59.5 (owner-named transfer); GPT-6.1
 | 14 | 15 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 52.9 | 50.4 | 61.0 | 100% | $6,107.09 | $753.96 | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | — |
 | 15 | 16 | [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 52.9 | 50.2 | 58.7 | 100% | $4,238.14 | $393.44 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
 | 16 | 19 | [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 52.6 | 49.5 | 43.7 | 100% | $292.07 | $4.96 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat |
-| 17 | 3 | [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 52.2 | 57.9 | 55.1 | 100% | $136.13 | $90.75 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost |
+| 17 | 3 | [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 52.2 | 57.9 | 55.1 | 100% | $136.13 | $90.75 | MiMo · provisional 1.5x assumption (1.5×, assumption) | subset cost, provider-claimed leaf |
 | 18 | 23 | [Claude Sonnet 5.5 (low)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-low/) | 51.6 | 47.6 | 44.8 | 100% | $578.39 | $9.82 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — |
 | 19 | 8 | [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 51.6 | 55.1 | 64.5 | 100% | $3,628.64 | $3,628.64 | — | API-cost fallback |
 | 20 | 9 | [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 51.6 | 52.7 | 48.4 | 100% | $319.25 | $29.64 | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | — |
@@ -50,6 +50,7 @@ Claude Sonnet 5.5 leads the Plan ranking at 59.5 (owner-named transfer); GPT-6.1
 Values are rounded for display; ranks are competition ranks (equal values share the better rank).
 
 - **subset cost**: scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17).
+- **provider-claimed leaf**: a quality leaf comes from the model provider's own published result (O36's last source); the row competes but earns no interval label (E233).
 - **provisional quality**: observed leaves cover under 70% of quality weight, fewer than two software-engineering leaves or under 40% software-engineering weight are observed, or DeepSWE is missing; ranked and flagged, never floored (O8).
 - **partial component**: AA marks tasks of a basket component missing or declined (E37), or the component's cost cannot be reconciled with AA's prices (E170).
 - **valuation basis unverified**: AA's cost reconciles with neither its displayed prices nor a registered price record; ranked, but outside interval outputs and cost anchors (E170 outcome 4).
@@ -116,7 +117,7 @@ AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 
 - [AA Coding Agent Index, DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
 - AA's own Terminal-Bench 4.0 run (the leaf; [tbench.ai](https://www.tbench.ai/leaderboard/terminal-bench/4.0) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs, [Cognition's FrontierCode leaderboard](https://cognition.com/data/frontiercode-leaderboard/data.json) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `ff4bc4eed0fce70d1c542bfbdf299c95213b08d4123af67e01a58a577c9da662`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `49bedfdc847fdc2773d5b8417bbf4228a1ea752e45eb633484e7c136ee5ad410`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files

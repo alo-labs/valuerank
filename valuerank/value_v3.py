@@ -112,9 +112,15 @@ def leaf_supplements(documents: dict) -> dict:
     """O36: the eligible supplementary observations per (model, leaf), best source first; Terminal-Bench provider claims
     recorded in the tbench.ai capture count as provider claims."""
 
-    entries = list((documents.get("leafEvidence") or {}).get("supplements", []))
+    evidence = documents.get("leafEvidence") or {}
+    entries = list(evidence.get("supplements", []))
+    registry = evidence.get("sourceRegistry") or {}
     for entry in entries:
         check_comparability(entry)
+        # E239: another party's or a newer AA result counts only from a source registered for that leaf; a provider claim
+        # is the model provider's own document. A new source enters by a registry update, as E225 does for agents.
+        if entry["sourceType"] != "model_provider_claim" and entry.get("publisher") not in registry.get(entry["leaf"], []):
+            raise ValueError(f"{entry['modelId']}: {entry.get('publisher')!r} is not a registered {entry['leaf']} source (E239)")
     entries += [{"modelId": claim["cohortModelId"], "leaf": "terminalBench", "value": claim["valuePct"], "unit": "percent", "sourceType": "model_provider_claim",
                  "configuration": claim.get("evaluatedModel"), "url": claim.get("sourceUrl"), "publishedOn": claim.get("publishedOn"), "publisher": claim.get("publisher"),
                  "artifact": "tb4", "locator": f"providerClaims[claimId={claim.get('claimId')}].valuePct"}
@@ -2311,6 +2317,7 @@ def load_documents(data: Path) -> dict:
     plan_routes.check_report_window(documents["planRoutes"])
     plan_routes.check_allocation_regimes(documents["planRoutes"])
     plan_routes.check_report_independence(documents["planRoutes"])
+    plan_routes.check_selected_analysis(documents["planRoutes"])
     return documents
 
 

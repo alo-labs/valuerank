@@ -1107,3 +1107,16 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (rejected): no release has been published, so the version string names the pre-release freeze; the dual runs record each re-freeze, and the first release freezes the content the string names.
 - Design 1 (rejected): the published documents are generated; the draft is the specification and its "today" figures are refreshed from the build each revision. Design 2: E237. Design 3 (rejected for now): Reddit and X are unreachable from the build environment, which the search log records; a recall audit needs those channels. Design 4 (adopted): the label wording states what "confirmed" means while every row is complete.
 - Draft r83.
+
+## Internal review I24 (Claude Sonnet 5.5, effort low, on r83) — adopted, modified or rejected
+- H1 (adopted as E238, modified): AGENTS.md ties the Anthropic and OpenAI comparison to one analysis the owner selected (2026-10-07), so "latest" means the owner's selection, not publication order. The build now fails when a controlled measurement or a transfer for those providers cites another analysis (`plan_routes.check_selected_analysis`); a newer analysis enters only by the owner's selection and then replaces the old one outright, whatever its multiples. Owner question 2 is answered by AGENTS.md.
+- M1 (adopted as a statement of the existing rule): selection precedes the benchmark check; a near family's selected configuration that lacks a leaf is listed under O38 (AGENTS.md: "selected configuration"), never replaced by another effort; another complete evidenced effort stays ranked by retention; the gate needs no roster decision because the configuration is in the roster. Owner question 1 is answered by O38's wording.
+- M2 (adopted as E239): a closed per-leaf source registry in `data/leaf_evidence.json`; a fill from an unregistered party stops the build, and a new source enters by a dated registry update.
+- M3 (modified): the ranking table now flags "provider-claimed leaf" (README, scores pages and the site). The best-case rank bound for subset rows is rejected: O17 keeps a subset row's table position with its flag, and the flag already says its cross-workload ordering is not identified.
+- M4 (adopted): E210's domain ranges over categories with measured or basket demand (ρ = ∞ where the basket has none), with the reviewer's two-category fixture; the bound is not implemented in code because it cannot fire today.
+- M5 (adopted): E92 restated once as the full conjunction with blocker(i) (O29, E222, E228, E233).
+- L1 (adopted): the 14-against-15 gap is the bar's own configuration, whose displayed quality equals the frozen level; disclosed, not changed (O34).
+- L2 (adopted in wording): the offset estimates, not bounds, the fills' effect, and leans favourable. The bias-adjusted variant is not added; the removal sensitivity already shows the result without the fills.
+- L3 (rejected): each Bug Hunt harness string already names the shim or API route (E227 and raw-data.md); no new argument for a separate flag.
+- Design 5 (rejected): E235 and E236 mark the inactive rules that matter for the published outputs; the Plan identification blocks are dormant by E61/E67, which the summary states.
+- Draft r84.
