@@ -291,3 +291,16 @@ def test_cross_harness_text_lists_or_says_none():
     assert ed.cross_harness_text(Facts) == "Cross-harness results at the same effort (E224, diagnostic): Gemini: A CLI 40.7 (3 runs), B CLI 33.0 (1 run)."
     Facts.scores = {"models": []}
     assert ed.cross_harness_text(Facts).startswith("No ranked configuration has Bug Hunt results on two harnesses")
+
+
+def test_selected_agents_text_counts_in_registered_order():
+    """E225: cohort rows per selected Terminal-Bench agent."""
+
+    class Facts:
+        scores = {"models": [{"id": "claude-opus-5-5", "aaVariant": "max", "rankingEligible": True},
+                             {"id": "gpt-6-astra", "aaVariant": "max", "rankingEligible": True},
+                             {"id": "glm-5.3", "aaVariant": "max", "rankingEligible": False}]}
+
+    rows = [{"model": "Opus 5.5 (max)", "agent": "Claude Code"}, {"model": "GPT-6 Astra (max)", "agent": "Codex"}]
+    assert ed.selected_agents_text(Facts, {"rows": rows}).endswith("(E225): Claude Code 1, Codex 1.")
+    assert ed.selected_agents_text(Facts, {"rows": []}).endswith("(E225): none.")

@@ -786,7 +786,7 @@ The AA chart publishes 42 DeepSWE v1.1 configurations across 113 tasks, observed
 
 ## Terminal-Bench 4.0 official rows
 
-23 official rows (13 of 49 cohort matches), observed 2026-10-17T19:25:15Z. The published ± is the source's 95% confidence interval (used by stream S1M).
+23 official rows (13 of 49 cohort matches), observed 2026-10-17T19:25:15Z. The published ± is the source's 95% confidence interval (used by stream S1M). Selected agents for cohort rows, in the registered preference order (E225): mini-SWE-agent 1, Claude Code 5, Codex 6, Grok Build 1, Muse Code 1.
 
 | Rank | Base model | Agent | Resolution rate | Tokens | Cost |
 |---|---|---|---:|---|---:|

@@ -382,6 +382,7 @@ def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked
 
 
 COST_EVIDENCE_MAX_AGE_DAYS = 45
+PRICE_RECORD_MAX_AGE_DAYS = 7
 REPORT_SEARCH_MAX_AGE_DAYS = 7
 CAPTURE_GAP_MAX_DAYS = 7
 
@@ -417,9 +418,11 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         raise ValueError(f"end-user reports were last searched on {searched}, more than {REPORT_SEARCH_MAX_AGE_DAYS} days before the release cutoff {release_day} (E218)")
     # E216: the AA model-page snapshot and the price records are at most 45 days old at the release cutoff (the chart
     # and catalog capture that defines the cohort has its own 7-day gate, E211).
-    for name, stamp in (("AA model-page snapshot", documents["snapshot"].get("capturedAt")), ("price records", documents["priceRecords"].get("observedAt"))):
-        if stamp and (release_day - date.fromisoformat(stamp[:10])).days > COST_EVIDENCE_MAX_AGE_DAYS:
-            raise ValueError(f"the {name} ({stamp[:10]}) is more than {COST_EVIDENCE_MAX_AGE_DAYS} days old at the release cutoff {release_day} (E216)")
+    # The price records decide which tariff is in force at V (E170), so they share the cohort capture's 7-day gate.
+    for name, stamp, limit in (("AA model-page snapshot", documents["snapshot"].get("capturedAt"), COST_EVIDENCE_MAX_AGE_DAYS),
+                               ("price records", documents["priceRecords"].get("observedAt"), PRICE_RECORD_MAX_AGE_DAYS)):
+        if stamp and (release_day - date.fromisoformat(stamp[:10])).days > limit:
+            raise ValueError(f"the {name} ({stamp[:10]}) is more than {limit} days old at the release cutoff {release_day} (E216)")
     # E217: the model pages (costs and AA-run leaves) and the chart that defines the cohort describe one AA state.
     chart, pages_at = (documents.get("frontierCapture") or {}).get("captured_at"), documents["snapshot"].get("capturedAt")
     if chart and pages_at and abs(_instant(chart) - _instant(pages_at)).total_seconds() > CAPTURE_GAP_MAX_DAYS * 86400:

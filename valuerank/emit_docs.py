@@ -13,6 +13,7 @@ import statistics
 from datetime import date
 
 from valuerank import basket
+from valuerank import exact_match
 from valuerank import quality as q
 from valuerank import scenarios
 from valuerank.aa_reconciliation import publication as aa_reconciliation_publication, reconcile as reconcile_aa
@@ -395,6 +396,19 @@ def cross_harness_text(facts):
     parts = [f"{facts.names.get(row['id'], row['id'])}: " + ", ".join(f"{item['harness']} {fnum(item['fixedOf105'], 1)} ({item['runs']} run{'s' if item['runs'] != 1 else ''})" for item in row["bugHuntCrossHarness"])
              for row in facts.scores["models"] if row.get("rankingEligible") and row.get("bugHuntCrossHarness")]
     return ("Cross-harness results at the same effort (E224, diagnostic): " + "; ".join(parts) + ".") if parts else "No ranked configuration has Bug Hunt results on two harnesses at the same effort (E224)."
+
+
+def selected_agents_text(facts, tb4):
+    """E225: how many cohort rows take their Terminal-Bench leaf from each registered agent."""
+
+    counts = {}
+    for row in facts.scores["models"]:
+        if row.get("rankingEligible"):
+            chosen = exact_match.select_tb4_row(row["id"], row.get("aaVariant"), tb4["rows"])
+            if chosen is not None:
+                counts[chosen["agent"]] = counts.get(chosen["agent"], 0) + 1
+    order = ", ".join(f"{agent} {counts[agent]}" for agent in exact_match.TB4_AGENT_PREFERENCE if agent in counts)
+    return f"Selected agents for cohort rows, in the registered preference order (E225): {order or 'none'}."
 
 
 def bar_currency_text(currency):
@@ -1199,7 +1213,7 @@ The AA chart publishes {len(deepswe)} DeepSWE v1.1 configurations across {facts.
 
 ## Terminal-Bench 4.0 official rows
 
-{tb4['rowN']} official rows ({tb4['matchedN']} of {tb4['cohortN']} cohort matches), observed {tb4.get('observedAt', DASH)}. The published ± is the source's 95% confidence interval (used by stream S1M).
+{tb4['rowN']} official rows ({tb4['matchedN']} of {tb4['cohortN']} cohort matches), observed {tb4.get('observedAt', DASH)}. The published ± is the source's 95% confidence interval (used by stream S1M). {selected_agents_text(facts, tb4)}
 
 | Rank | Base model | Agent | Resolution rate | Tokens | Cost |
 |---|---|---|---:|---|---:|

@@ -54,8 +54,10 @@ TB4_BASE_NAMES = {
     "Muse Spark 1.3": ("muse-spark-1-3", "muse-spark-1-3-xhigh"),
 }
 
-# Pre-registered agent preference: vendor-neutral harnesses first, never best-of-agent.
-TB4_AGENT_PREFERENCE = ("Terminus 2", "mini-SWE-agent", "OpenHands")
+# Pre-registered agent preference (E225): vendor-neutral harnesses first, then the vendor agents observed for cohort rows,
+# never best-of-agent. The list is closed: an agent not on it stops the build until a registry update places it, so a
+# new submission never switches a leaf by sort order.
+TB4_AGENT_PREFERENCE = ("Terminus 2", "mini-SWE-agent", "OpenHands", "Claude Code", "Codex", "Grok Build", "Muse Code")
 
 EFFORT_SUFFIX = re.compile(r"^(?P<base>.*?)\s+\((?P<effort>[^()]*)\)$")
 
@@ -99,10 +101,13 @@ def select_tb4_row(model_id: str, configuration_effort: str | None, rows: list[d
     if not candidates:
         return None
 
+    unregistered = sorted({row.get("agent") or "" for row in candidates} - set(TB4_AGENT_PREFERENCE))
+    if unregistered:
+        raise ValueError(f"{model_id}: tbench.ai agent(s) not in the registered preference list: {', '.join(unregistered)} (E225)")
+
     def preference(row):
         agent = row.get("agent") or ""
-        rank = TB4_AGENT_PREFERENCE.index(agent) if agent in TB4_AGENT_PREFERENCE else len(TB4_AGENT_PREFERENCE)
-        return rank, agent
+        return TB4_AGENT_PREFERENCE.index(agent), agent
 
     best = min(candidates, key=preference)
     # E225: the leaderboard lists one row per model and agent; a second row for the chosen agent is never picked silently.

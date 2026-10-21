@@ -26,12 +26,12 @@ def test_efforts_match_requires_the_same_label_or_a_documented_equivalent():
 ROWS = [
     {"model": "Opus 5.5 (max)", "agent": "Claude Code", "resolutionRatePct": 64.8},
     {"model": "GPT-6 Astra (max)", "agent": "Codex", "resolutionRatePct": 58.2},
-    {"model": "Gemini 3.8 Flash (high)", "agent": "Gemini CLI", "resolutionRatePct": 22.0},
+    {"model": "Gemini 3.8 Flash (high)", "agent": "Claude Code", "resolutionRatePct": 22.0},
     {"model": "Gemini 3.8 Flash (high)", "agent": "mini-SWE-agent", "resolutionRatePct": 19.1},
     {"model": "Qwen3.8-Max-0902 (max)", "agent": "Claude Code", "resolutionRatePct": 27.0},
     {"model": "Fable 5.1 (max)", "agent": "Claude Code", "resolutionRatePct": 57.9},
-    {"model": "Grok 4.7 (xhigh)", "agent": "Zeta Agent", "resolutionRatePct": 30.0},
-    {"model": "Grok 4.7 (xhigh)", "agent": "Alpha Agent", "resolutionRatePct": 37.6},
+    {"model": "Grok 4.7 (xhigh)", "agent": "Grok Build", "resolutionRatePct": 30.0},
+    {"model": "Grok 4.7 (xhigh)", "agent": "Codex", "resolutionRatePct": 37.6},
 ]
 
 
@@ -43,7 +43,7 @@ def test_select_tb4_row_exact_configuration_and_agent_preference():
     assert em.select_tb4_row("gemini-3.8-flash", "high", ROWS)["agent"] == "mini-SWE-agent"
     assert em.select_tb4_row("qwen3.8-max", None, ROWS)["resolutionRatePct"] == 27.0
     # Agents outside the preference list are ordered by name, never by score.
-    assert em.select_tb4_row("grok-4.7", "xhigh", ROWS)["agent"] == "Alpha Agent"
+    assert em.select_tb4_row("grok-4.7", "xhigh", ROWS)["agent"] == "Codex"  # registered order, never by score
     assert em.select_tb4_row("claude-fable-5", "max", ROWS) is None
 
 
@@ -62,7 +62,8 @@ def test_select_tb4_row_gives_each_ranked_effort_of_a_family_only_its_own_row():
 
 def test_select_tb4_row_handles_rows_without_an_agent():
     rows = [{"model": "GLM-5.3 (max)", "resolutionRatePct": 41.8}]
-    assert em.select_tb4_row("glm-5.3", "max", rows) == rows[0]
+    with pytest.raises(ValueError, match=r"glm-5.3: tbench.ai agent\(s\) not in the registered preference list"):
+        em.select_tb4_row("glm-5.3", "max", rows)
 
 
 def test_bug_hunt_matches_owner_matched_exact_effort_records_only():
@@ -80,3 +81,13 @@ def test_a_second_row_for_the_chosen_agent_stops_the_build():
             {"model": "Opus 5.5 (max)", "agent": "Claude Code", "resolutionRatePct": 60.0}]
     with pytest.raises(ValueError, match=r"several rows for agent Claude Code; .*\(E225\)"):
         em.select_tb4_row("claude-opus-5-5", "max", rows)
+
+
+def test_an_unregistered_agent_stops_the_build():
+    """E225: the agent preference list is closed; a new agent never switches a leaf by sort order."""
+
+    rows = [{"model": "Opus 5.5 (max)", "agent": "Aardvark CLI", "resolutionRatePct": 70.0},
+            {"model": "Opus 5.5 (max)", "agent": "Claude Code", "resolutionRatePct": 64.8}]
+    with pytest.raises(ValueError, match=r"not in the registered preference list: Aardvark CLI \(E225\)"):
+        em.select_tb4_row("claude-opus-5-5", "max", rows)
+    assert em.select_tb4_row("claude-opus-5-5", "max", rows[1:])["agent"] == "Claude Code"
