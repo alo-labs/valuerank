@@ -447,6 +447,33 @@ def required_scores_text(result, facts):
                    if parts else f"no row is open at quality {bar['level']:.1f}.")
 
 
+def common_leaf_text(diagnostic, facts):
+    """E226: the leaf-availability effect: quality on the leaves (nearly) every row has, beside the displayed quality."""
+
+    sparse = ", ".join(LEAF_LABELS[key] for key in diagnostic["sparseLeaves"]) or "none"
+    reach = "; ".join(f"quality {item['level']:.1f}: {item['displayedReachN']} → {item['commonLeafReachN']}" for item in diagnostic["barReach"])
+    moves = "; ".join(f"{label} {rank_change_text(diagnostic['bases'][basis]['rankChanges']['changes'], facts.labels)}" for basis, label in (("api", "API"), ("plan", "Plan")))
+    flagged = ", ".join(f"{facts.label(row_id)} {fnum(diagnostic['rows'][row_id]['effect'], 1)}" for row_id in diagnostic["flagged"]) or "none"
+    return (f"- **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of cohort rows have ({sparse}), {moves}; "
+            f"rows reaching each bar: {reach}; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: {flagged}.")
+
+
+def harness_by_leaf_text(facts):
+    """E227: the agent or harness each harness-run leaf was scored on, by cohort rows (each lab's model in its own agent)."""
+
+    leaves = (("DeepSWE", lambda row: row.get("deepsweAgent")), ("Terminal-Bench", lambda row: (exact_match.select_tb4_row(row["id"], row.get("aaVariant"), facts.tb4["rows"]) or {}).get("agent")),
+              ("Bug Hunt", lambda row: (row.get("bugHunt") or {}).get("harness") if (row.get("bugHunt") or {}).get("matched") else None))
+    parts = []
+    for name, pick in leaves:
+        counts = {}
+        for row in facts.scores["models"]:
+            agent = pick(row) if row.get("rankingEligible") else None
+            if agent:
+                counts[agent] = counts.get(agent, 0) + 1
+        parts.append(f"{name}: " + (", ".join(f"{agent} {count}" for agent, count in sorted(counts.items(), key=lambda item: (-item[1], item[0]))) or "none"))
+    return "- **Harness by leaf (E227):** " + "; ".join(parts) + "."
+
+
 def mix_check_text(rows):
     """E208: the token-mix status of each selected Plan route (never compared with AA's Index-wide shares)."""
 
@@ -1066,6 +1093,8 @@ def cost_diagnostics_markdown(facts):
     lines.append(mix_check_text(facts.v3["rows"]))
     lines.append(observed_range_text(facts.v3["observedRangeBars"], facts))
     lines.append(required_scores_text(facts.v3["requiredMissingScores"], facts))
+    lines.append(common_leaf_text(diagnostics["commonLeaf"], facts))
+    lines.append(harness_by_leaf_text(facts))
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(

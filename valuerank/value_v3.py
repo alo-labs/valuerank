@@ -751,8 +751,13 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
 
     boxes = api_boxes(assembled, components) if basis == "api" else plan_boxes(assembled)
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
-    blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
-    unconstructible = sorted(row["id"] for row in assembled["rows"] if row["id"] in blocked and blocker_domain(row["valuationGate"], basis) is None)
+    not_in_force = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
+    unconstructible = sorted(row["id"] for row in assembled["rows"] if row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
+    # E222/E228: an unverified basis, or (Plan) a route whose evidence a detected change may have superseded, competes but
+    # earns no label, exactly like an O29 blocker.
+    blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED}
+    if basis == "plan":
+        blocked |= {row["id"] for row in assembled["rows"] if plan_routes.change_flagged(row["routeSelection"]["selected"])}
     universe = sorted(box.row for box in boxes if box.row not in blocked)
     blockers = sorted(box.row for box in boxes if box.row in blocked)
     unevaluable = sorted(row["id"] for row in assembled["rows"] if row["id"] not in universe and row["id"] not in blockers)
@@ -913,6 +918,40 @@ def _deletion_sensitivity(rows: list[dict], per_row: dict) -> list[dict]:
             }
         results.append({**entry, "status": "evaluated", "unevaluableRows": unevaluable, "bases": bases})
     return results
+
+
+# E226: renormalising over each row's own leaves is not neutral when the sparse leaves are the hard ones. The common-leaf
+# branch drops, for every row, the leaves fewer than 90% of cohort rows observe, and publishes each row's effect
+# (displayed minus common-leaf quality, also in cost-doubling equivalents), the rank changes and the bar reach. It is a
+# deletion diagnostic like E146: nothing is imputed and no score changes (O8).
+COMMON_LEAF_SHARE = 0.90
+COMMON_LEAF_LABEL = "common leaf set: leaves observed by fewer than 90% of cohort rows removed for every row (E226; diagnostic)"
+
+
+def common_leaf_diagnostic(rows: list[dict], per_row: dict, frozen: dict, quality_per_doubling: float) -> dict:
+    """E226: each row's leaf-availability effect, the value-rank changes and the frozen bars' reach on the common leaves."""
+
+    counts = {leaf.key: sum(1 for row in rows if leaf.key in row["evidence"]["observations"]) for leaf in q.LEAVES}
+    sparse = sorted(key for key, count in counts.items() if count < COMMON_LEAF_SHARE * len(rows))
+    common = {row["id"]: deletion_quality(row["evidence"]["observations"], set(sparse)) for row in rows}
+    effects = {}
+    for row in rows:
+        displayed = row["summary"].displayed
+        if displayed is not None and common[row["id"]] is not None:
+            effect = displayed - common[row["id"]]
+            effects[row["id"]] = {"effect": effect, "costDoublings": effect / quality_per_doubling}
+    bases = {}
+    for basis in BASES:
+        primary = {row_id: per_row[row_id][basis]["value"] for row_id in effects if per_row[row_id][basis]["value"] is not None}
+        branched = {row_id: anchor_math.value_score(per_row[row_id][basis]["costScore"], common[row_id], BETA) for row_id in primary}
+        panel = sorted(primary)
+        bases[basis] = {"rankChanges": diagnostics.paired_rank_change(primary, branched),
+                        "kendallTauB": diagnostics.kendall_tau_b([primary[key] for key in panel], [branched[key] for key in panel])}
+    population = [row for row in rows if row["summary"].displayed is not None and not row["summary"].provisional and common[row["id"]] is not None]
+    reach = [{"bar": bar["id"], "level": bar["level"], "displayedReachN": sum(1 for row in population if row["summary"].displayed >= bar["level"]),
+              "commonLeafReachN": sum(1 for row in population if common[row["id"]] >= bar["level"])} for bar in frozen["barReferences"]]
+    flagged = sorted(row_id for row_id, item in effects.items() if abs(item["costDoublings"]) > 1.0)
+    return {"label": COMMON_LEAF_LABEL, "sparseLeaves": sparse, "coverage": counts, "rows": effects, "flagged": flagged, "bases": bases, "barReach": reach}
 
 
 # E64/E149: the standing cost-component removal. The Coding Agent Index runs Terminal-Bench v4 too, so the
@@ -1207,7 +1246,7 @@ def required_missing_scores(assembled: dict, frozen: dict) -> dict:
     bars = []
     for bar in result.get("bars", []):
         level = bar["reference"]["level"]
-        open_rows = [row_id for row_id, status in bar["rows"].items() if status["possible"] == "certified" and status["confirmed"] != "certified"]
+        open_rows = [row_id for row_id, status in bar["rows"].items() if status.get("possible") == "certified" and status.get("confirmed") != "certified"]
         rows = [{"row": row_id, "required": required_missing_score(by_id[row_id]["summary"], level),
                  "missing": [leaf.key for leaf in q.LEAVES if leaf.key not in by_id[row_id]["summary"].observations]} for row_id in open_rows]
         bars.append({"bar": bar["reference"]["id"], "level": level, "rows": sorted(rows, key=lambda item: (item["required"] is None, item["required"] or 0.0, item["row"]))})
@@ -1350,6 +1389,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "groupDrift": _group_drift(rows),
             "qualityDispersion": _panel_dispersion(rows),
             "deletionSensitivity": _deletion_sensitivity(rows, per_row),
+            "commonLeaf": common_leaf_diagnostic(rows, per_row, frozen, exchange["api"]["qualityPointsPerCostDoubling"]),
             "costRemoval": cost_removal(assembled, frozen, per_row),
             "costComponentFamily": cost_component_family(assembled, frozen, per_row),
             "frontierAnchors": frontier_anchor_diagnostic(assembled, frozen, per_row),
@@ -1915,7 +1955,8 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
 # median spread of one configuration's Terminal-Bench score across agents on the tbench.ai leaderboard (pre-registered).
 HARNESS_BAND_RULE = (
     "width = median over leaderboard configurations listed under two or more agents of (highest - lowest resolution rate, "
-    "percentage points); Bug Hunt drawn uniformly within the band centred on its observed score; S2 specification stress, never in Θ"
+    "percentage points); Bug Hunt, DeepSWE and Terminal-Bench each drawn uniformly within the band centred on its observed "
+    "score, since all three run each lab's model in that lab's own agent (E227); S2 specification stress, never in Θ"
 )
 # E34 and E122: the other named S2 branches, unevaluable from the captured evidence (stated, never silently skipped).
 CACHE_BRANCH = {

@@ -161,6 +161,7 @@ class StubFacts:
 
     def __init__(self, diagnostics, **v3):
         self.v3 = {"diagnostics": diagnostics, **v3}
+        self.scores, self.tb4 = {"models": []}, {"rows": []}
 
     @staticmethod
     def labels(row_ids):
@@ -176,6 +177,7 @@ def cost_world(**overrides):
         "basketReadiness": {"pricedMixCoverage": 2 / 3, "pricedLeaves": ["deepswe", "lcr"], "components": {"frontiercode": {"status": "pending capture"}, "scicode": {"status": "admitted"}}},
         "sweCompanion": {"rows": {"a": {"flag": True}, "b": {"flag": False}}},
         "matchedCost": {"status": "evaluated", "pricedQualityWeight": 0.5, "reversals": [["a", "b"]], "warnings": []},
+        "commonLeaf": {"sparseLeaves": [], "barReach": [], "bases": {basis: {"rankChanges": {"changes": {}}} for basis in ("api", "plan")}, "rows": {}, "flagged": []},
         "frontierAnchors": {"status": "evaluated", "references": ["a", "b"], "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.0}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 3.5}} for basis in ("api", "plan")}, "bar": {"status": "unavailable: fewer than 2 non-provisional frontier-family configurations"}},
         "familyPrimary": {"status": "evaluated", "population": ["a", "b"], "references": ["a", "b"],
                           "ladder": [{"level": 58.27}, {"level": 50.01}, {"level": 60.88}], "frozenLadder": [{"level": 56.7}, {"level": 48.06}, {"level": 60.88}],
@@ -304,3 +306,25 @@ def test_selected_agents_text_counts_in_registered_order():
     rows = [{"model": "Opus 5.5 (max)", "agent": "Claude Code"}, {"model": "GPT-6 Astra (max)", "agent": "Codex"}]
     assert ed.selected_agents_text(Facts, {"rows": rows}).endswith("(E225): Claude Code 1, Codex 1.")
     assert ed.selected_agents_text(Facts, {"rows": []}).endswith("(E225): none.")
+
+
+def test_common_leaf_and_harness_texts():
+    """E226/E227 diagnostic sentences."""
+
+    class Facts:
+        label = staticmethod(lambda row_id: row_id.upper())
+        labels = staticmethod(lambda row_ids: ", ".join(row_id.upper() for row_id in row_ids))
+        tb4 = {"rows": [{"model": "Opus 5.5 (max)", "agent": "Claude Code"}]}
+        scores = {"models": [{"id": "claude-opus-5-5", "aaVariant": "max", "rankingEligible": True, "deepsweAgent": "Claude Code", "bugHunt": {"matched": True, "harness": "Claude Code"}},
+                             {"id": "x", "rankingEligible": True, "deepsweAgent": "Codex", "bugHunt": {"matched": False, "harness": "Codex CLI"}},
+                             {"id": "y", "rankingEligible": False, "deepsweAgent": "Codex"}]}
+
+    diagnostic = {"sparseLeaves": ["frontierCode"], "barReach": [{"level": 56.7, "displayedReachN": 18, "commonLeafReachN": 20}],
+                  "bases": {basis: {"rankChanges": {"changes": {"a": 2, "b": -2}}} for basis in ("api", "plan")},
+                  "rows": {"a": {"effect": -5.04}}, "flagged": ["a"]}
+    text = ed.common_leaf_text(diagnostic, Facts)
+    assert "(AA FrontierCode 1.1), API 2 rows move; largest move 2 (A, B)" in text and "quality 56.7: 18 → 20" in text and text.endswith("A -5.0.")
+    assert ed.common_leaf_text({**diagnostic, "sparseLeaves": [], "flagged": []}, Facts).endswith("one cost doubling's worth: none.")
+    assert ed.harness_by_leaf_text(Facts) == "- **Harness by leaf (E227):** DeepSWE: Claude Code 1, Codex 1; Terminal-Bench: Claude Code 1; Bug Hunt: Claude Code 1."
+    Facts.scores = {"models": []}
+    assert ed.harness_by_leaf_text(Facts).endswith("Bug Hunt: none.")

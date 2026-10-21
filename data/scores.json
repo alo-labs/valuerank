@@ -43975,6 +43975,373 @@
           }
         }
       ],
+      "commonLeaf": {
+        "label": "common leaf set: leaves observed by fewer than 90% of cohort rows removed for every row (E226; diagnostic)",
+        "sparseLeaves": [
+          "frontierCode",
+          "terminalBench"
+        ],
+        "coverage": {
+          "deepswe": 35,
+          "bugHunt": 36,
+          "frontierCode": 23,
+          "terminalBench": 14,
+          "gdpval": 37,
+          "automationBench": 37,
+          "omniscience": 37,
+          "lcr": 37,
+          "hle": 37,
+          "scicode": 37,
+          "critpt": 37
+        },
+        "rows": {
+          "gemini-4-argon": {
+            "effect": -2.7305184168461807,
+            "costDoublings": -0.7475452733844339
+          },
+          "gpt-6.1-sol-xhigh": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "claude-sonnet-5-5": {
+            "effect": -2.6261867556282112,
+            "costDoublings": -0.7189819647736381
+          },
+          "gpt-6.1-sol": {
+            "effect": -1.9166936343939156,
+            "costDoublings": -0.5247411107272965
+          },
+          "gpt-6.1-sol-high": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "muse-wonder": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "gpt-6.1-sol-medium": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "claude-opus-5-5": {
+            "effect": -1.4269164191371289,
+            "costDoublings": -0.3906527852218813
+          },
+          "gpt-6-astra": {
+            "effect": -2.0726457176645496,
+            "costDoublings": -0.5674367548966086
+          },
+          "gpt-5.6-sol": {
+            "effect": -2.799498834690475,
+            "costDoublings": -0.7664303264928268
+          },
+          "muse-spark-1-3": {
+            "effect": -2.2716980756081426,
+            "costDoublings": -0.621932138783683
+          },
+          "claude-sonnet-5-5-xhigh": {
+            "effect": -1.6928445057956907,
+            "costDoublings": -0.46345701280566204
+          },
+          "muse-spark-1-3-xhigh": {
+            "effect": -5.018803486699277,
+            "costDoublings": -1.3740185019007367
+          },
+          "gpt-6-sol": {
+            "effect": -1.1093992981452274,
+            "costDoublings": -0.30372481522478295
+          },
+          "grok-4.7": {
+            "effect": -5.2463670238967595,
+            "costDoublings": -1.4363195087634215
+          },
+          "mimo-v2-6-pro": {
+            "effect": -0.9355106045657138,
+            "costDoublings": -0.25611859137425824
+          },
+          "claude-fable-5-1": {
+            "effect": -1.7037708377304384,
+            "costDoublings": -0.46644835970259463
+          },
+          "claude-sonnet-5-5-high": {
+            "effect": -1.5338106147505997,
+            "costDoublings": -0.4199176494286488
+          },
+          "gpt-6.1-sol-low": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "gpt-5.6-luna": {
+            "effect": -4.0890260211659495,
+            "costDoublings": -1.119469495612913
+          },
+          "grok-4.6-xhigh": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "gpt-6-luna": {
+            "effect": -4.643363122346351,
+            "costDoublings": -1.2712326469955986
+          },
+          "claude-haiku-5-5-max": {
+            "effect": -0.4405731129721957,
+            "costDoublings": -0.12061751576209362
+          },
+          "gemini-3.8-flash": {
+            "effect": -5.633661261469946,
+            "costDoublings": -1.5423506473635658
+          },
+          "claude-haiku-5-5": {
+            "effect": 0.014496035125098672,
+            "costDoublings": 0.003968639242176808
+          },
+          "mimo-v2-6-flash": {
+            "effect": -2.418701831752749,
+            "costDoublings": -0.6621779625795124
+          },
+          "claude-sonnet-5-5-medium": {
+            "effect": -2.733042763040153,
+            "costDoublings": -0.7482363740391841
+          },
+          "claude-opus-5": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "glm-5.3": {
+            "effect": -2.7892033607265674,
+            "costDoublings": -0.7636116921809364
+          },
+          "claude-haiku-5-5-high": {
+            "effect": 0.08928034781871474,
+            "costDoublings": 0.024442648548434313
+          },
+          "claude-haiku-5-5-medium": {
+            "effect": -0.06477007548533464,
+            "costDoublings": -0.017732370339307066
+          },
+          "deepseek-v4-flash": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "claude-haiku-5-5-low": {
+            "effect": -0.9431575074779772,
+            "costDoublings": -0.25821211548045886
+          },
+          "claude-sonnet-5-5-low": {
+            "effect": -2.6313844659119283,
+            "costDoublings": -0.720404963326236
+          },
+          "qwen3.8-max": {
+            "effect": -3.1573593721478233,
+            "costDoublings": -0.8644032797813247
+          },
+          "deepseek-v4-pro": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          },
+          "muse-wonder-full": {
+            "effect": 0.0,
+            "costDoublings": 0.0
+          }
+        },
+        "flagged": [
+          "gemini-3.8-flash",
+          "gpt-5.6-luna",
+          "gpt-6-luna",
+          "grok-4.7",
+          "muse-spark-1-3-xhigh"
+        ],
+        "bases": {
+          "api": {
+            "rankChanges": {
+              "panel": [
+                "claude-fable-5-1",
+                "claude-haiku-5-5",
+                "claude-haiku-5-5-high",
+                "claude-haiku-5-5-low",
+                "claude-haiku-5-5-max",
+                "claude-haiku-5-5-medium",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "claude-sonnet-5-5-high",
+                "claude-sonnet-5-5-low",
+                "claude-sonnet-5-5-medium",
+                "claude-sonnet-5-5-xhigh",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-astra",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "gpt-6.1-sol-high",
+                "gpt-6.1-sol-low",
+                "gpt-6.1-sol-medium",
+                "gpt-6.1-sol-xhigh",
+                "grok-4.6-xhigh",
+                "grok-4.7",
+                "mimo-v2-6-flash",
+                "mimo-v2-6-pro",
+                "muse-spark-1-3",
+                "muse-spark-1-3-xhigh",
+                "muse-wonder",
+                "qwen3.8-max"
+              ],
+              "excluded": [],
+              "changes": {
+                "claude-fable-5-1": 2,
+                "claude-haiku-5-5": 5,
+                "claude-haiku-5-5-high": 5,
+                "claude-haiku-5-5-low": 3,
+                "claude-haiku-5-5-max": 0,
+                "claude-haiku-5-5-medium": 5,
+                "claude-opus-5": 1,
+                "claude-opus-5-5": -1,
+                "claude-sonnet-5-5": -3,
+                "claude-sonnet-5-5-high": 0,
+                "claude-sonnet-5-5-low": -4,
+                "claude-sonnet-5-5-medium": -3,
+                "claude-sonnet-5-5-xhigh": -3,
+                "deepseek-v4-flash": 7,
+                "deepseek-v4-pro": 5,
+                "gemini-3.8-flash": -6,
+                "gemini-4-argon": 1,
+                "glm-5.3": -1,
+                "gpt-5.6-luna": -1,
+                "gpt-5.6-sol": -3,
+                "gpt-6-astra": -3,
+                "gpt-6-luna": -3,
+                "gpt-6-sol": 0,
+                "gpt-6.1-sol": 0,
+                "gpt-6.1-sol-high": 1,
+                "gpt-6.1-sol-low": 2,
+                "gpt-6.1-sol-medium": 1,
+                "gpt-6.1-sol-xhigh": 0,
+                "grok-4.6-xhigh": 6,
+                "grok-4.7": -4,
+                "mimo-v2-6-flash": -2,
+                "mimo-v2-6-pro": 1,
+                "muse-spark-1-3": -2,
+                "muse-spark-1-3-xhigh": -12,
+                "muse-wonder": 6,
+                "qwen3.8-max": 0
+              },
+              "maxAbsChange": 12,
+              "maxRow": "muse-spark-1-3-xhigh"
+            },
+            "kendallTauB": 0.8126984126984127
+          },
+          "plan": {
+            "rankChanges": {
+              "panel": [
+                "claude-fable-5-1",
+                "claude-haiku-5-5",
+                "claude-haiku-5-5-high",
+                "claude-haiku-5-5-low",
+                "claude-haiku-5-5-max",
+                "claude-haiku-5-5-medium",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "claude-sonnet-5-5-high",
+                "claude-sonnet-5-5-low",
+                "claude-sonnet-5-5-medium",
+                "claude-sonnet-5-5-xhigh",
+                "deepseek-v4-flash",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-astra",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "gpt-6.1-sol-high",
+                "gpt-6.1-sol-low",
+                "gpt-6.1-sol-medium",
+                "gpt-6.1-sol-xhigh",
+                "grok-4.6-xhigh",
+                "grok-4.7",
+                "mimo-v2-6-flash",
+                "mimo-v2-6-pro",
+                "muse-spark-1-3",
+                "muse-spark-1-3-xhigh",
+                "muse-wonder",
+                "qwen3.8-max"
+              ],
+              "excluded": [],
+              "changes": {
+                "claude-fable-5-1": -1,
+                "claude-haiku-5-5": 6,
+                "claude-haiku-5-5-high": 5,
+                "claude-haiku-5-5-low": 0,
+                "claude-haiku-5-5-max": 0,
+                "claude-haiku-5-5-medium": 4,
+                "claude-opus-5": 5,
+                "claude-opus-5-5": -2,
+                "claude-sonnet-5-5": -3,
+                "claude-sonnet-5-5-high": -1,
+                "claude-sonnet-5-5-low": 0,
+                "claude-sonnet-5-5-medium": -1,
+                "claude-sonnet-5-5-xhigh": -2,
+                "deepseek-v4-flash": 3,
+                "deepseek-v4-pro": 3,
+                "gemini-3.8-flash": -3,
+                "gemini-4-argon": -3,
+                "glm-5.3": 0,
+                "gpt-5.6-luna": -8,
+                "gpt-5.6-sol": -2,
+                "gpt-6-astra": -1,
+                "gpt-6-luna": -5,
+                "gpt-6-sol": 3,
+                "gpt-6.1-sol": 0,
+                "gpt-6.1-sol-high": 3,
+                "gpt-6.1-sol-low": 1,
+                "gpt-6.1-sol-medium": 4,
+                "gpt-6.1-sol-xhigh": 1,
+                "grok-4.6-xhigh": 2,
+                "grok-4.7": -3,
+                "mimo-v2-6-flash": -3,
+                "mimo-v2-6-pro": 1,
+                "muse-spark-1-3": -1,
+                "muse-spark-1-3-xhigh": -2,
+                "muse-wonder": 0,
+                "qwen3.8-max": 0
+              },
+              "maxAbsChange": 8,
+              "maxRow": "gpt-5.6-luna"
+            },
+            "kendallTauB": 0.8412698412698413
+          }
+        },
+        "barReach": [
+          {
+            "bar": "bar:median-quality",
+            "level": 56.70256809558702,
+            "displayedReachN": 18,
+            "commonLeafReachN": 20
+          },
+          {
+            "bar": "bar:lower-quartile-quality",
+            "level": 48.061482895190444,
+            "displayedReachN": 27,
+            "commonLeafReachN": 30
+          },
+          {
+            "bar": "bar:upper-quartile-quality",
+            "level": 60.88196620399156,
+            "displayedReachN": 10,
+            "commonLeafReachN": 15
+          }
+        ]
+      },
       "costRemoval": {
         "component": "terminalbench-4-0",
         "status": "evaluated",

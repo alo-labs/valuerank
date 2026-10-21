@@ -1444,3 +1444,36 @@ def test_a_plan_row_whose_tariff_bound_cannot_be_built_leaves_r_w(monkeypatch):
     row["valuationGate"] = {**row["valuationGate"], "outcome": v.GATE_NOT_IN_FORCE}
     monkeypatch.setattr(v, "blocker_domain", lambda gate, basis: None)
     assert "b" not in [box.row for box in v.plan_boxes(result)]
+
+
+def test_common_leaf_diagnostic_drops_sparse_leaves_for_every_row():
+    """E226: leaves fewer than 90% of rows observe are removed for all rows; effects, rank changes and bar reach."""
+
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    common = output["diagnostics"]["commonLeaf"]
+    rows = result["rows"]
+    counts = {leaf.key: sum(1 for row in rows if leaf.key in row["evidence"]["observations"]) for leaf in q.LEAVES}
+    assert common["sparseLeaves"] == sorted(key for key, count in counts.items() if count < 0.9 * len(rows)) and common["label"] == v.COMMON_LEAF_LABEL
+    per_row = {row["id"]: output_row for row in rows for output_row in [None]}
+    direct = v.common_leaf_diagnostic(rows, {row["id"]: {basis: {"value": 1.0, "costScore": 50.0} for basis in v.BASES} for row in rows}, frozen, 1.0)
+    for row in rows:
+        quality = v.deletion_quality(row["evidence"]["observations"], set(direct["sparseLeaves"]))
+        assert direct["rows"][row["id"]]["effect"] == pytest.approx(row["summary"].displayed - quality)
+    assert direct["flagged"] == sorted(row_id for row_id, item in direct["rows"].items() if abs(item["costDoublings"]) > 1.0)
+    assert [item["bar"] for item in direct["barReach"]] == [bar["id"] for bar in frozen["barReferences"]] and per_row
+
+
+def test_unverified_and_change_flagged_rows_compete_without_labels():
+    """E222/E228: such rows enter as blockers: their own frontier and bar statuses are withheld."""
+
+    result, frozen = scored()
+    row = next(item for item in result["rows"] if item["id"] == "a")
+    row["valuationGate"] = {**row["valuationGate"], "outcome": v.GATE_UNVERIFIED}
+    api = v.interval_outputs(result, frozen, "api")
+    assert "a" in api["blockers"] and api["frontier"]["a"] == {"status": v.WITHHELD_LABEL}
+    b = next(item for item in result["rows"] if item["id"] == "b")
+    selected = b["routeSelection"]["selected"]
+    b["routeSelection"] = {**b["routeSelection"], "selected": {**selected, "expiry": "possibly-superseded", "route": {**selected["route"], "changeDetectedOn": "2026-10-15"}}}
+    plan = v.interval_outputs(result, frozen, "plan")
+    assert "b" in plan.get("blockers", []) or plan["status"] != "evaluated"

@@ -254,6 +254,12 @@ def check_report_independence(document: dict) -> None:
             raise ValueError(f"{route['id']}: pooled reports must name distinct observers and share no upstream source (E223)")
 
 
+def change_flagged(candidate: dict | None) -> bool:
+    """E228: a selected route whose evidence a scoped change (or two reports of a limit change) may have superseded."""
+
+    return bool(candidate and candidate["route"].get("changeDetectedOn") and candidate.get("expiry") in {"possibly-superseded", "expired"})
+
+
 CONTROLLED_KINDS = {"controlled_account_workload_projection"}
 
 

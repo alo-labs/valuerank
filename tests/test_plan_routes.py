@@ -527,3 +527,12 @@ def test_route_ages_are_whole_utc_calendar_days_with_strict_thresholds(age, stag
 
     release = date(2026, 10, 21)
     assert pr.expiry_status({"id": "r", "sourcePublicationDate": (release - timedelta(days=age)).isoformat()}, release) == stage
+
+
+def test_change_flagged_needs_a_detected_change_and_a_superseded_stage():
+    """E228: only a detected change (not age alone) marks the selected route's evidence as possibly stale."""
+
+    route = {"id": "r", "changeDetectedOn": "2026-10-15"}
+    assert pr.change_flagged({"route": route, "expiry": "possibly-superseded"}) and pr.change_flagged({"route": route, "expiry": "expired"})
+    assert not pr.change_flagged({"route": {"id": "r"}, "expiry": "possibly-superseded"})
+    assert not pr.change_flagged({"route": route, "expiry": "fresh"}) and not pr.change_flagged(None)
