@@ -398,6 +398,9 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     ]
     # O32: only end-user reports dated in the release's report window count toward admission.
     window = (documents["planRoutes"].get("evidencePolicy") or {}).get("reportingWindow")
+    # E213: one release cutoff; the report window is the 30 days ending on it (the evidence search cutoff is recorded apart).
+    if window and window["end"] != release_day.isoformat():
+        raise ValueError(f"the report window must end on the release cutoff {release_day} (E213), not {window['end']}")
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
     # O33: several efforts of one family can be ranked; only unranked cheaper configurations are listed as unchecked.
@@ -581,11 +584,14 @@ BAR_POLICY = {
     "reference": "the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other",
     "minimumPopulation": 2,
     "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
+    "ladderPopulation": "fewer than four population configurations: only the headline bar is pinned, because the quartile positions would coincide with it (E215)",
     "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
 }
 BAR_ID = "bar:median-quality"
 MIN_BAR_POPULATION = 2
+# E215: below four configurations the quartile positions coincide with the headline's, so only the headline is pinned.
+MIN_LADDER_POPULATION = 4
 
 
 # O34: the ladder of frozen levels, the median first (it is the headline bar). Each level is the displayed quality at
@@ -606,6 +612,8 @@ def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
         return [row["id"] for row in ordered], []
     bars = []
     for bar_id, quarter, rule in BAR_LADDER:
+        if quarter != 2 and len(ordered) < MIN_LADDER_POPULATION:
+            continue
         row = ordered[(len(ordered) - 1) * quarter // 4]
         bars.append({"id": bar_id, "level": row["summary"].displayed, "levelConfiguration": row["id"], "rule": rule})
     return [row["id"] for row in ordered], bars
@@ -1127,7 +1135,7 @@ def bar_currency(assembled: dict, frozen: dict) -> dict:
     levels = {bar["id"]: bar["level"] for bar in current}
     headline = next((bar["level"] for bar in frozen["barReferences"] if bar["id"] == BAR_ID), None)
     flag = None
-    if headline is not None and levels:
+    if headline is not None and len(levels) == len(BAR_LADDER):
         flag = BAR_STALE_LOW if headline < levels[BAR_LADDER[1][0]] else BAR_STALE_HIGH if headline > levels[BAR_LADDER[2][0]] else None
     return {"lifetime": BAR_LIFETIME, "bars": bars, "currentLadder": [{key: bar[key] for key in ("id", "level")} for bar in current], "flag": flag}
 

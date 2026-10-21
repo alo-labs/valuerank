@@ -12,7 +12,8 @@
   },
   "fallback": "api",
   "evidencePolicy": {
-    "reportingWindow": {"start": "2026-09-08", "end": "2026-10-08"},
+    "reportingWindow": {"start": "2026-09-21", "end": "2026-10-21"},
+    "searchCutoff": "2026-10-08",
     "defaultNumerator": "Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.",
     "selectedSourceException": {"providers": ["Anthropic", "OpenAI"], "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "publicationDate": "2026-10-06", "authorizedOn": "2026-10-07", "evidenceType": "Controlled subscription-account measurements with agentic workload projections."},
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Use the lower reported model-conditional figure per plan, preserve its original evaluated variant, and label cross-model application as an assumption. Owner decision O33 (2026-10-21) ranks GPT-6.1 Sol at xhigh, high, medium and low as their own rows; they take the common GPT routes as user assumptions. SemiAnalysis names GPT-6.1 Sol without an effort, so its figure is not treated as a measurement of any of these efforts.",

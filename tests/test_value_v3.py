@@ -606,6 +606,7 @@ def test_dual_run_scores_one_evidence_set_on_two_anchor_versions(tmp_path, capsy
 
 def test_module_entry_point(tmp_path, monkeypatch):
     data = write_world(tmp_path)
+    monkeypatch.setenv("VALUERANK_NOW", "2026-10-19T12:00:00Z")
     monkeypatch.setattr(v, "DATA", data)
     monkeypatch.setattr(sys, "argv", ["value_v3", "freeze"])
     monkeypatch.setattr("valuerank.paths.DATA", data)
@@ -1248,7 +1249,7 @@ def test_family_primary_diagnostic_rebuilds_ladder_and_anchors_on_primary_rows()
 
     result, frozen = scored()
     family = v.score(result, frozen)["diagnostics"]["familyPrimary"]
-    assert family["status"] == "evaluated" and family["references"] == ["a", "b"] and len(family["ladder"]) == 3
+    assert family["status"] == "evaluated" and family["references"] == ["a", "b"] and [bar["id"] for bar in family["ladder"]] == [v.BAR_ID]
     assert family["frozenLadder"] == [{"id": bar["id"], "level": bar["level"]} for bar in frozen["barReferences"]]
     assert "frozenExchangeRate" in family["bases"]["plan"]
     siblings = [dict(item, familyPrimary=item["id"] != "b") for item in CONFIGURATIONS]
@@ -1324,17 +1325,38 @@ def test_displayed_cheapest_reads_the_headline_scale_with_ties_listed():
 def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_range():
     """E207: reach of each frozen bar in the current population, and an informational flag (no score changes)."""
 
-    result, frozen = scored()
-    current = v.bar_currency(result, frozen)
-    assert current["flag"] is None and current["lifetime"] == v.BAR_LIFETIME and len(current["bars"]) == len(frozen["barReferences"])
-    assert all(item["reachN"] <= item["populationN"] for item in current["bars"])
+    population = {"rows": [{"id": f"r{i}", "summary": SimpleNamespace(displayed=10.0 * i, provisional=False)} for i in range(5)]}
+    _ids, bars = v.bar_levels(population)
+    frozen = {"barReferences": bars}
+    current = v.bar_currency(population, frozen)
+    assert current["flag"] is None and current["lifetime"] == v.BAR_LIFETIME
+    assert [(item["level"], item["reachN"], item["populationN"]) for item in current["bars"]] == [(20.0, 3, 5), (10.0, 4, 5), (30.0, 2, 5)]
 
     def moved(level):
-        return {**frozen, "barReferences": [dict(bar, level=level) if bar["id"] == v.BAR_ID else bar for bar in frozen["barReferences"]]}
+        return {"barReferences": [dict(bar, level=level) if bar["id"] == v.BAR_ID else bar for bar in bars]}
 
-    assert v.bar_currency(result, moved(-1.0))["flag"] == v.BAR_STALE_LOW and v.bar_currency(result, moved(1000.0))["flag"] == v.BAR_STALE_HIGH
-    empty = v.bar_currency({**result, "rows": []}, {**frozen, "barReferences": []})
+    assert v.bar_currency(population, moved(5.0))["flag"] == v.BAR_STALE_LOW and v.bar_currency(population, moved(35.0))["flag"] == v.BAR_STALE_HIGH
+    small, frozen_small = scored()
+    assert v.bar_currency(small, frozen_small)["flag"] is None  # fewer than four rows: no quartiles to compare with
+    empty = v.bar_currency({"rows": []}, {"barReferences": []})
     assert empty["flag"] is None and empty["bars"] == [] and empty["currentLadder"] == []
+
+
+def test_the_report_window_ends_on_the_release_cutoff():
+    """E213: one release cutoff; a window ending elsewhere stops the build."""
+
+    routes = {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-08", "end": "2026-10-08"}}}
+    with pytest.raises(ValueError, match=r"report window must end on the release cutoff 2026-10-19 \(E213\), not 2026-10-08"):
+        v.assemble(CONFIGURATIONS, documents(planRoutes=routes), release_day=DAY)
+
+
+def test_the_quartile_bars_need_four_configurations():
+    """E215: with fewer than four, the quartile positions coincide with the headline's, so only the headline is pinned."""
+
+    def ladder(n):
+        return [bar["id"] for bar in v.bar_levels({"rows": [{"id": f"r{i}", "summary": SimpleNamespace(displayed=float(i), provisional=False)} for i in range(n)]})[1]]
+
+    assert ladder(1) == [] and ladder(3) == [v.BAR_ID] and ladder(4) == [item[0] for item in v.BAR_LADDER]
 
 
 def test_routes_inherit_their_sources_workload_mix():

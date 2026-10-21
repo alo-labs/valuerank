@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import statistics
+from datetime import date
 
 from valuerank import basket
 from valuerank import quality as q
@@ -333,7 +334,8 @@ def coding_share_text(v3):
     unrewarded = _median_share(v3, UNREWARDED_COMPONENTS)[0]
     return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {n} configurations "
             f"with the full basket; {pct(low, 0)} to {pct(high, 0)}); {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
-            f"which have no quality leaf, make up {pct(unrewarded, 0)}.")
+            f"which have no quality leaf, make up {pct(unrewarded, 0)}; the Coding Agent Index's SWE-Atlas QnA ({basket.CODING_AGENT_TASKS['swe-atlas-qna']} "
+            f"of its {sum(basket.CODING_AGENT_TASKS.values())} tasks) has no quality leaf either, and its cost share is not separable because AA publishes one pooled cost.")
 
 
 def influence_text(v3, short=False):
@@ -367,7 +369,7 @@ def family_primary_text(diagnostic, facts):
     head = "- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** "
     ladder = " / ".join(f"{item['level']:.1f}" for item in diagnostic["ladder"]) or "unavailable"
     frozen = " / ".join(f"{item['level']:.1f}" for item in diagnostic["frozenLadder"]) or "unavailable"
-    text = head + f"with each family's primary configuration only ({len(diagnostic['population'])} bar-population rows), the ladder (headline, lower quartile, upper quartile) would be {ladder} against {frozen} frozen"
+    text = head + f"with each family's primary configuration only ({len(diagnostic['population'])} rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be {ladder} against {frozen} frozen"
     if diagnostic["status"] != "evaluated":
         return text + f"; anchors {diagnostic['status']}."
     return text + "; anchors rebuilt from its " + f"{len(diagnostic['references'])} references move " + "; ".join(
@@ -375,6 +377,16 @@ def family_primary_text(diagnostic, facts):
         f"{fnum(diagnostic['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(diagnostic['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)"
         for basis, label in (("api", "API"), ("plan", "Plan"))
     ) + "."
+
+
+def search_gap_text(policy):
+    """E213: the days between the evidence search cutoff and the release cutoff, which no report search covered."""
+
+    searched, end = policy.get("searchCutoff"), policy["reportingWindow"]["end"]
+    if not searched or searched >= end:
+        return ""
+    gap = (date.fromisoformat(end) - date.fromisoformat(searched)).days
+    return f"; end-user reports were last searched on {searched}, so reports dated in the {gap} days after it were not searched"
 
 
 def bar_currency_text(currency):
@@ -652,7 +664,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 **Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today {yield_['pointIdentified']} of {yield_['rows']} Plan rows are point-identified and {yield_['setIdentified']} set-identified, so the Plan ranking is {'labelled exploratory' if yield_['exploratory'] else 'not labelled exploratory'}. A measured-only Plan view (`{measured['id']}`) re-runs the selection over {measured['admission']}, without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
-**Subscription evidence policy** (as of {facts.routes_document['asOf']}; reporting window {routes_policy['reportingWindow']['start']} to {routes_policy['reportingWindow']['end']}):
+**Subscription evidence policy** (as of {facts.routes_document['asOf']}; reporting window {routes_policy['reportingWindow']['start']} to {routes_policy['reportingWindow']['end']}{search_gap_text(routes_policy)}):
 
 - Default numerator: {routes_policy['defaultNumerator']}
 - Selected source for {', '.join(exception['providers'])}: [SemiAnalysis]({exception['sourceUrl']}) ({exception['publicationDate']}, owner-selected {exception['authorizedOn']}): {exception['evidenceType']}

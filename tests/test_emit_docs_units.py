@@ -207,6 +207,8 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     assert "- **Frontier-families anchors (E187, diagnostic):** unavailable: fewer than 2 frontier-family references." in quiet
     assert "the ladder (headline, lower quartile, upper quartile) would be 58.3 / 50.0 / 60.9 against 56.7 / 48.1 / 60.9 frozen; anchors rebuilt from its 2 references move API 2 rows move" in text
     assert "(value points per cost doubling 3.04 vs 2.74 frozen)." in text
+    assert ed.search_gap_text({"reportingWindow": {"end": "2026-10-21"}, "searchCutoff": "2026-10-08"}) == "; end-user reports were last searched on 2026-10-08, so reports dated in the 13 days after it were not searched"
+    assert ed.search_gap_text({"reportingWindow": {"end": "2026-10-21"}, "searchCutoff": "2026-10-21"}) == ed.search_gap_text({"reportingWindow": {"end": "2026-10-21"}}) == ""
     assert "- **Bar currency (E207, informational):** rows reaching each frozen bar: quality 56.7: 18 of 35; the current population would freeze 56.7; lifetime until the next re-freeze; no staleness flag." in text
     assert "- **Token mix (E208):** 1 selected routes: mix not reported; 2 selected routes: mix unidentified." in text
     stale = ed.bar_currency_text({"lifetime": "l", "bars": [], "currentLadder": [], "flag": "headline bar below"})

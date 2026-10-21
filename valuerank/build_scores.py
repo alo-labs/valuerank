@@ -265,6 +265,14 @@ def check_rendered_path(capture):
     left = sorted(item["model_name"] for item in capture.get("points", []) if require_number(item.get("svg_x"), "svg_x") < vertices[0][0] - PATH_TOLERANCE_PX)
     if left:
         raise ValueError("AA plotted points lie left of the rendered Pareto path (an owner decision is required, E204): " + "; ".join(left))
+    # E214: AA plots each Claude configuration only "with fallback", so the qualifier names AA's serving setting and a
+    # third-party record matches by model and effort. Were AA to plot both states, that match would be ambiguous.
+    states = {}
+    for item in capture.get("points", []):
+        states.setdefault((item.get("family"), item.get("effort")), set()).add(bool(item.get("fallback")))
+    twins = sorted(f"{family} ({effort})" for (family, effort), seen in states.items() if len(seen) > 1)
+    if twins:
+        raise ValueError("AA plots configurations both with and without fallback (a matching decision is required, E214): " + "; ".join(twins))
 
 
 def frontier_order(row):

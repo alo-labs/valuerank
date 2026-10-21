@@ -536,6 +536,8 @@ CAPTURE_CASES += [
     ("capture", lambda d: d.update(rendered_pareto_svg_path="M 1 2 Q 3 4"), "M/L coordinate pairs"),
     ("capture", lambda d: d.pop("rendered_pareto_svg_path"), "M/L coordinate pairs"),
     ("capture", _capture_path_falls, "does not rise strictly"),
+    ("capture", lambda d: d["points"].append({**next(item for item in d["points"] if item["fallback"]), "model_name": "Twin", "fallback": None}),
+     r"both with and without fallback \(a matching decision is required, E214\): Claude"),
     ("capture", lambda d: d["points"].append({**d["points"][0], "model_name": "Cheaper Model", "svg_x": min(item["svg_x"] for item in d["frontier"]) - 10}),
      r"left of the rendered Pareto path \(an owner decision is required, E204\): Cheaper Model"),
 ]
