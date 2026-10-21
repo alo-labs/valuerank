@@ -36740,6 +36740,7 @@
     "displayedCheapest": {
       "api": {
         "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
+        "margin": 4.458737974062387,
         "bars": [
           {
             "bar": "bar:median-quality",
@@ -36748,7 +36749,15 @@
             "costUsd": 531.5621485772531,
             "cheapest": [
               "gpt-6.1-sol-medium"
-            ]
+            ],
+            "margin": {
+              "level": 59.76500379420613,
+              "qualifierN": 6,
+              "costUsd": 827.2341182369406,
+              "cheapest": [
+                "gpt-6.1-sol-xhigh"
+              ]
+            }
           },
           {
             "bar": "bar:lower-quartile-quality",
@@ -36757,7 +36766,15 @@
             "costUsd": 132.8652049689931,
             "cheapest": [
               "gpt-6-luna"
-            ]
+            ],
+            "margin": {
+              "level": 51.818300059407385,
+              "qualifierN": 18,
+              "costUsd": 375.2096972444586,
+              "cheapest": [
+                "gpt-6.1-sol-low"
+              ]
+            }
           },
           {
             "bar": "bar:upper-quartile-quality",
@@ -36766,12 +36783,21 @@
             "costUsd": 700.5127639425643,
             "cheapest": [
               "gpt-6.1-sol-high"
-            ]
+            ],
+            "margin": {
+              "level": 64.0161708860526,
+              "qualifierN": 2,
+              "costUsd": 3628.6386911634218,
+              "cheapest": [
+                "gemini-4-argon"
+              ]
+            }
           }
         ]
       },
       "plan": {
         "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
+        "margin": 4.458737974062387,
         "bars": [
           {
             "bar": "bar:median-quality",
@@ -36780,7 +36806,15 @@
             "costUsd": 21.188409749036868,
             "cheapest": [
               "claude-sonnet-5-5-high"
-            ]
+            ],
+            "margin": {
+              "level": 59.76500379420613,
+              "qualifierN": 6,
+              "costUsd": 76.7948494464297,
+              "cheapest": [
+                "gpt-6.1-sol-xhigh"
+              ]
+            }
           },
           {
             "bar": "bar:lower-quartile-quality",
@@ -36789,7 +36823,15 @@
             "costUsd": 12.334311638413768,
             "cheapest": [
               "gpt-6-luna"
-            ]
+            ],
+            "margin": {
+              "level": 51.818300059407385,
+              "qualifierN": 18,
+              "costUsd": 21.188409749036868,
+              "cheapest": [
+                "claude-sonnet-5-5-high"
+              ]
+            }
           },
           {
             "bar": "bar:upper-quartile-quality",
@@ -36798,7 +36840,15 @@
             "costUsd": 65.03089156540702,
             "cheapest": [
               "gpt-6.1-sol-high"
-            ]
+            ],
+            "margin": {
+              "level": 64.0161708860526,
+              "qualifierN": 2,
+              "costUsd": 159.14521322720444,
+              "cheapest": [
+                "claude-sonnet-5-5"
+              ]
+            }
           }
         ]
       }
@@ -38359,8 +38409,8 @@
           "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
           "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate"
         ],
-        "bias": "conservative: the threshold treats two rows' errors as independent, but every row is scored on the same tasks, so shared task difficulty correlates them and the true paired threshold is smaller; averaging attempts within a task narrows it further",
-        "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x the root sum of their value SDs), otherwise it starts a new band; a band is printed as its rank range",
+        "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way",
+        "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable",
         "valueSd": {
           "gemini-4-argon": 1.126758826236831,
           "gpt-6.1-sol-xhigh": 1.1885212473903872,
@@ -38395,6 +38445,29 @@
           "deepseek-v4-pro": 1.2065901934563519,
           "muse-wonder-full": 1.1474482100367531
         },
+        "qualityMargin": 4.458737974062387,
+        "planAssumedRouteRows": [
+          "claude-haiku-5-5",
+          "claude-haiku-5-5-high",
+          "claude-haiku-5-5-low",
+          "claude-haiku-5-5-max",
+          "claude-haiku-5-5-medium",
+          "claude-opus-5",
+          "claude-sonnet-5-5",
+          "claude-sonnet-5-5-high",
+          "claude-sonnet-5-5-low",
+          "claude-sonnet-5-5-medium",
+          "claude-sonnet-5-5-xhigh",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-luna",
+          "gpt-6-sol",
+          "gpt-6.1-sol-high",
+          "gpt-6.1-sol-low",
+          "gpt-6.1-sol-medium",
+          "gpt-6.1-sol-xhigh",
+          "mimo-v2-6-pro"
+        ],
         "api": {
           "adjacentPairs": 30,
           "separableAdjacentPairs": 0,

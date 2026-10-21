@@ -26,6 +26,8 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - O40 (2026-10-21) An exact measurement the selected SemiAnalysis article adds later replaces the transfer at once, labelled "added after selection"; other article changes wait for re-selection.
 - O41 (2026-10-21) A listed frontier or near-frontier family shows an indicative value on its remaining leaves, apart from the ranking, "not ranked, not comparable" (MiMo-V2.6-Flash).
 - O42 (2026-10-21) Noise bands beside ordinal ranks (fixed rule, conservative independent-task threshold; correlation grid 0 / 0.3 / 0.6 published).
+- O43 (2026-10-21) Listed families stay outside every frontier and bar claim; the summary says the claims cover ranked configurations only.
+- O44 (2026-10-21) Each bar gets a noise-margin companion: the cheapest configuration clearing the bar by the quality noise margin (4.5 points today); bars unchanged.
 - Current figures (2026-10-21, cohort 32, 31 scored): coding share median 53% over 29 full-basket rows (40–85%); unrewarded share 14%; frontier-families bar 61.0 over 9 (GPT-6.1 Sol (xhigh) confirmed); one-row-per-family ladder 55.9 / 48.9 / 61.0; admission, anchor and R_W panels 29, common-workload panel 30.
 - E233 (I21) A row with a provider-claimed leaf competes but earns no label (MiMo-V2.6-Pro). E234 FrontierCode AA vs Cognition cross-check (τ_b 0.73 on 10, Cognition +2.5 mean) and gap-fill removal sensitivity. E235 Rules inactive while O36 holds are indexed and listed as one vacuous manifest entry.
 - O23 MMMU-Pro dropped from the basket. O24 Both priced Terminal-Bench executions stay (AA Index run and Coding Agent Index vendor-agent run); overlap disclosed.

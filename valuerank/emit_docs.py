@@ -208,6 +208,14 @@ def short_flags(entry, row):
     return ", ".join(word for word, _text in FLAG_LEGEND if present[word]) or DASH
 
 
+def basket_runs_text(amount, api_cost):
+    """I27: basket runs one fee period buys at full utilisation, the selected amount over the basket's API cost (O3)."""
+
+    if not amount or amount.get("amountUsd") is None or not api_cost:
+        return DASH
+    return f"{amount['amountUsd'] / api_cost:.2f} per {amount['feePeriod']}"
+
+
 def plan_amount_text(amount):
     """E166: the selected route's amount with its kind; none for API-fallback rows."""
 
@@ -511,6 +519,22 @@ def displayed_cheapest_sentences(facts):
             for item in facts.v3["displayedCheapest"][basis]["bars"]
         ]
         sentences.append(f"{label} basis, displayed record (not a claim; E203): cheapest " + "; ".join(parts) + ".")
+        margin = facts.v3["displayedCheapest"][basis].get("margin")
+        companions = [f"at or above quality {item['margin']['level']:.1f}: {facts.labels(item['margin']['cheapest']) or 'none'}"
+                      + (f" ({usd(item['margin']['costUsd'])} per basket run)" if item["margin"]["cheapest"] else "")
+                      for item in facts.v3["displayedCheapest"][basis]["bars"] if "margin" in item]
+        if companions:
+            sentences.append(f"{label} basis, noise-margin companion (O44; each bar plus {margin:.1f} quality points, so the bar's own configuration cannot "
+                             "decide it): cheapest " + "; ".join(companions) + ".")
+    sensitive = [f"{label} quality {entry['level']:.1f}" for basis, label in (("api", "API"), ("plan", "Plan"))
+                 for entry in facts.v3["diagnostics"]["gapFillBars"]["bases"][basis] if not entry["survives"]]
+    if sensitive:
+        sentences.append("Fill-sensitive (E234): the displayed-record cheapest row changes when gap-filled leaves are removed or lowered by the measured offset at "
+                         + ", ".join(sensitive) + ".")
+    # O43: the claims cover ranked configurations only; a listed family (O41) is outside them.
+    if facts.v3.get("listedIndicative"):
+        sentences.append("These outputs compare ranked configurations only; listed families shown with an indicative value (O41) are outside them (O43): "
+                         + ", ".join(item["name"] for item in facts.v3["listedIndicative"]) + ".")
     return sentences
 
 
@@ -772,7 +796,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 {streams}
 
-S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39)** redraws every leaf with plug-in binomial noise from its published task count (DeepSWE 113, FrontierCode 100, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs, AA-Omniscience's 6,000 questions scored +1/0/−1), with GDPval-AA drawn from its displayed rating interval read as a 95% normal interval (an assumption). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. From the same noise the ranking prints a **noise band** beside each rank (O42): rows in value order join the current band while their value is not separable from the band's first row (1.96 × the root sum of their value SDs), otherwise they start a new one. Because every configuration is scored on the same tasks, their errors correlate and the true threshold is smaller, so the bands are conservative; separable adjacent ranks at correlations 0.3 and 0.6 are published beside them. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
+S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39)** redraws every leaf with plug-in binomial noise from its published task count (DeepSWE 113, FrontierCode 100, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs, AA-Omniscience's 6,000 questions scored +1/0/−1), with GDPval-AA drawn from its displayed rating interval read as a 95% normal interval (an assumption). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. From the same noise the ranking prints a **noise band** beside each rank (O42): rows in value order join the current band while their value is not separable from the band's first row (1.96 × √(SD_i² + SD_j²), with analytic quality-leaf SDs; cost is not drawn), otherwise they start a new one, so every row is inseparable from its band's first row and adjacent rows in different bands may also be inseparable. Shared tasks correlate two rows' errors and narrow the true threshold (separable adjacent ranks at correlations 0.3 and 0.6 are published), while omitted sources widen it (run-to-run and harness variance, AA's single cost run, owner-named transfer error on the Plan basis); the net direction is not established. Each bar also has a **noise-margin companion** (O44): the cheapest configuration whose displayed quality clears the bar by at least the quality noise margin, 1.96 × √2 × the median row's quality SD. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
 
 {not_quantified}
 
@@ -842,7 +866,8 @@ def scores_markdown(facts):
         row = facts.row(entry)
         plan = row["plan"]
         plan_rows.append([
-            configuration_label(row, facts.names), route_text(entry), plan_amount_text(plan["amount"]), plan.get("selectedIdentification") or DASH,
+            configuration_label(row, facts.names), route_text(entry), plan_amount_text(plan["amount"]), basket_runs_text(plan["amount"], row["api"]["costUsd"]),
+            plan.get("selectedIdentification") or DASH,
             usd(row["planScore"]["costUsd"]), "; ".join(plan["flags"]) or DASH, plan.get("selectionReason") or DASH,
         ])
     # E171/E179: each row's admissible route-measurement pairs and the comparator's pick without the selected one.
@@ -905,7 +930,7 @@ Valuation-basis gate (E170): {gate_counts}{(' (flagged: ' + facts.labels(flagged
 
 The Plan amount is the selected multiple times the cash paid for the fee period (E166), typed by what the measurement establishes; it is not capacity unless it says so. The multiple values only the measured workload's API-equivalent consumption; other plan features are not valued.
 
-{markdown_table(['Configuration', 'Selected route', 'Plan amount', 'Identification', 'Plan cost (USD per basket run)', 'Flags', 'Selection reason'], plan_rows, numeric={4})}
+{markdown_table(['Configuration', 'Selected route', 'Plan amount', 'Basket runs per fee period', 'Identification', 'Plan cost (USD per basket run)', 'Flags', 'Selection reason'], plan_rows, numeric={5})}
 
 ### Route alternatives
 
@@ -1113,9 +1138,11 @@ def separability_text(facts):
     grid = lambda item: ", ".join(f"{count} at correlation {rho}" for rho, count in item["byCorrelation"].items() if rho != "0.0")
     return (f" Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about {api['medianSeparation']:.1f} value points "
             f"(median, 95%) to separate, and {api['separableAdjacentPairs']} of {api['adjacentPairs']} adjacent API ranks and {plan['separableAdjacentPairs']} of "
-            f"{plan['adjacentPairs']} adjacent Plan ranks do. That threshold is conservative: every configuration is scored on the same tasks, which correlates "
-            f"their errors and narrows the true threshold (API {grid(api)}; Plan {grid(plan)}). The noise band column groups ranks that cannot be told apart (O42); "
-            "the S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.")
+            f"{plan['adjacentPairs']} adjacent Plan ranks do. Its net direction is not established: every configuration is scored on the same tasks, which "
+            f"correlates their errors and narrows the true threshold (API {grid(api)}; Plan {grid(plan)}), while sources it leaves out widen it (run-to-run and "
+            f"harness variance, AA's single cost run and, for the {len(result['planAssumedRouteRows'])} Plan rows on owner-named transfers, the transfer's error). "
+            "The noise band column groups each row with the band's first row it cannot be told apart from (O42); the S1T scenario shares in [scores.md](scores.md) "
+            "show each row's rank-1 and top-3 frequencies under that noise.")
 
 
 def gap_fill_bars_text(result, facts):

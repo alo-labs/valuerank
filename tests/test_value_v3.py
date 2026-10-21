@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import json
 import runpy
+import statistics
 import sys
 from datetime import date
 from pathlib import Path
@@ -1621,7 +1622,7 @@ def test_rank_bands_correlation_grid_and_listed_indicative_values():
     result, frozen = scored()
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
-    assert set(separability["api"]["byCorrelation"]) == {"0.0", "0.3", "0.6"} and separability["bias"].startswith("conservative")
+    assert set(separability["api"]["byCorrelation"]) == {"0.0", "0.3", "0.6"} and separability["bias"].startswith("net direction not established")
     assert set(separability["api"]["gdpvalWide"]) == {"separableAdjacentPairs", "medianSeparation"} and set(separability["api"]["bands"]) == {"a", "b", "c"}
     assert output["listedIndicative"] == []
     # O41: a frontier-family configuration listed for a missing leaf keeps an indicative value apart from the ranking.
@@ -1633,3 +1634,15 @@ def test_rank_bands_correlation_grid_and_listed_indicative_values():
     assert entry["api"]["value"] is not None and entry["coverage"] < 1.0
     orphan = v.listed_indicative({"listed": [dict(listed["listed"][0], cost=dict(listed["listed"][0]["cost"], workload="other"))]}, frozen)
     assert orphan[0]["api"] == {"costUsd": orphan[0]["api"]["costUsd"], "costScore": None, "value": None}
+
+
+def test_noise_margin_companion_and_quality_margin():
+    """O44: each bar's displayed-record result gets a companion at the bar plus the quality noise margin."""
+
+    result, frozen = scored()
+    margin = v.quality_margin(result)
+    assert margin == pytest.approx(1.96 * 2 ** 0.5 * statistics.median(v.quality_sd(row) for row in result["rows"]))
+    assert v.quality_margin({"rows": []}) is None
+    entry = v.displayed_cheapest(result, frozen, "api", margin)["bars"][0]
+    assert entry["margin"]["level"] == pytest.approx(entry["level"] + margin)
+    assert "margin" not in v.displayed_cheapest(result, frozen, "api")["bars"][0]

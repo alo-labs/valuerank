@@ -277,11 +277,25 @@ def test_displayed_cheapest_sentences_name_the_row_or_none():
         v3 = {"displayedCheapest": {basis: {"bars": [
             {"level": 50.0, "cheapest": ["a"], "costUsd": 12.0, "qualifierN": 3},
             {"level": 70.0, "cheapest": [], "costUsd": None, "qualifierN": 0},
-        ]} for basis in ("api", "plan")}}
+        ]} for basis in ("api", "plan")},
+              "diagnostics": {"gapFillBars": {"bases": {"api": [], "plan": []}}}}
 
     api, plan = ed.displayed_cheapest_sentences(Facts)
     assert api == "API basis, displayed record (not a claim; E203): cheapest at or above quality 50.0: a ($12.00 per basket run; 3 reach it); at or above quality 70.0: none."
     assert plan.startswith("Plan basis, displayed record")
+    # O44 companions, E234 fill sensitivity and O43's scope note appear only when present.
+    for basis in ("api", "plan"):
+        Facts.v3["displayedCheapest"][basis]["margin"] = 4.5
+        Facts.v3["displayedCheapest"][basis]["bars"][0]["margin"] = {"level": 54.5, "cheapest": ["b"], "costUsd": 20.0, "qualifierN": 2}
+        Facts.v3["displayedCheapest"][basis]["bars"][1]["margin"] = {"level": 74.5, "cheapest": [], "costUsd": None, "qualifierN": 0}
+    Facts.v3["diagnostics"]["gapFillBars"]["bases"]["api"] = [{"level": 50.0, "survives": False}]
+    Facts.v3["listedIndicative"] = [{"name": "Listed X"}]
+    sentences = ed.displayed_cheapest_sentences(Facts)
+    assert sentences[1] == ("API basis, noise-margin companion (O44; each bar plus 4.5 quality points, so the bar's own configuration cannot decide it): "
+                            "cheapest at or above quality 54.5: b ($20.00 per basket run); at or above quality 74.5: none.")
+    assert sentences[-2].endswith("at API quality 50.0.") and sentences[-1].endswith("(O43): Listed X.")
+    assert ed.basket_runs_text({"amountUsd": 1178.0, "feePeriod": "month"}, 9373.65) == "0.13 per month"
+    assert ed.basket_runs_text(None, 10.0) == ed.basket_runs_text({"amountUsd": None}, 10.0) == ed.basket_runs_text({"amountUsd": 5.0}, None) == "—"
 
 
 def test_cross_harness_text_lists_or_says_none():

@@ -949,18 +949,35 @@ VACUOUS_COMPARISON = "vacuous: fewer than two evaluable configurations can quali
 DISPLAYED_CHEAPEST_LABEL = "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)"
 
 
-def displayed_cheapest(assembled: dict, frozen: dict, basis: str) -> dict:
-    """E203: per bar, the cheapest non-provisional scored main-workload rows whose displayed quality reaches the level (ties listed)."""
+def quality_margin(assembled: dict) -> float | None:
+    """O44: the quality gap two typical rows need to separate under O39's task-sampling noise, 1.96 x sqrt(2) x the
+    median row's quality SD (independent-task approximation, correlation 0)."""
+
+    sds = [quality_sd(row) for row in assembled["rows"]]
+    return 1.96 * math.sqrt(2.0) * statistics.median(sds) if sds else None
+
+
+def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float | None = None) -> dict:
+    """E203: per bar, the cheapest non-provisional scored main-workload rows whose displayed quality reaches the level (ties
+    listed); O44: beside it, the cheapest whose displayed quality clears the level by at least the quality noise margin."""
 
     rows = [row for row in assembled["rows"] if row["cost"]["workload"] == assembled["mainWorkload"] and not row["summary"].provisional
             and row["summary"].displayed is not None and _basis_cost(row, basis) is not None]
+
+    def cheapest(level: float) -> tuple[list[dict], float | None, list[str]]:
+        qualifying = [row for row in rows if row["summary"].displayed >= level]
+        low = min((_basis_cost(row, basis) for row in qualifying), default=None)
+        return qualifying, low, sorted(row["id"] for row in qualifying if _basis_cost(row, basis) == low)
+
     bars = []
     for bar in frozen["barReferences"]:
-        qualifying = [row for row in rows if row["summary"].displayed >= bar["level"]]
-        low = min((_basis_cost(row, basis) for row in qualifying), default=None)
-        bars.append({"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low,
-                     "cheapest": sorted(row["id"] for row in qualifying if _basis_cost(row, basis) == low)})
-    return {"label": DISPLAYED_CHEAPEST_LABEL, "bars": bars}
+        qualifying, low, rows_at = cheapest(bar["level"])
+        entry = {"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low, "cheapest": rows_at}
+        if margin is not None:
+            above, above_low, above_rows = cheapest(bar["level"] + margin)
+            entry["margin"] = {"level": bar["level"] + margin, "qualifierN": len(above), "costUsd": above_low, "cheapest": above_rows}
+        bars.append(entry)
+    return {"label": DISPLAYED_CHEAPEST_LABEL, "margin": margin, "bars": bars}
 
 
 def _comparison(bar: dict) -> None:
@@ -1605,7 +1622,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
         "incompleteEvidence": assembled.get("incomplete", []),
         "listedIndicative": listed_indicative(assembled, frozen),
-        "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis) for basis in BASES},
+        "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis, quality_margin(assembled)) for basis in BASES},
         "barCurrency": bar_currency(assembled, frozen),
         "observedRangeBars": observed_range_bars(assembled, frozen),
         "requiredMissingScores": required_missing_scores(assembled, frozen),
@@ -2090,18 +2107,24 @@ def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scena
     return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, 100.0), None, scenarios.TASK_SAMPLING, derivation)
 
 
+def quality_sd(row: dict, gdpval_sd: float = GDPVAL_RATING_SD) -> float:
+    """O39: a row's analytic quality SD from its leaves' task-sampling SDs (cost is not drawn)."""
+
+    observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
+    return math.sqrt(sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd)) ** 2
+                         for key, value in observations.items()))
+
+
 def rank_separability(assembled: dict, per_row: dict) -> dict:
     """O39: how far apart two values must be to separate under the task-sampling approximation, and how many
     adjacent ranks are separable, per basis (a diagnostic beside the ranks; scores and labels unchanged)."""
 
-    def value_sd(row: dict, gdpval_sd: float) -> float:
-        observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
-        variance = sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd)) ** 2 for key, value in observations.items())
-        return (1.0 - BETA) * math.sqrt(variance)
-
-    sd = {row["id"]: value_sd(row, GDPVAL_RATING_SD) for row in assembled["rows"]}
-    wide = {row["id"]: value_sd(row, GDPVAL_WIDE_SD) for row in assembled["rows"]}
-    result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "bias": SEPARABILITY_BIAS, "bandRule": BAND_RULE, "valueSd": sd}
+    sd = {row["id"]: (1.0 - BETA) * quality_sd(row) for row in assembled["rows"]}
+    wide = {row["id"]: (1.0 - BETA) * quality_sd(row, GDPVAL_WIDE_SD) for row in assembled["rows"]}
+    # I27: the Plan basis also carries owner-named transfer error, which this noise does not include.
+    assumed = sorted(row["id"] for row in assembled["rows"] if transfer_dependent(row))
+    result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "bias": SEPARABILITY_BIAS, "bandRule": BAND_RULE, "valueSd": sd,
+              "qualityMargin": quality_margin(assembled), "planAssumedRouteRows": assumed}
     for basis in BASES:
         ranked = sorted((per_row[row_id][basis]["value"], row_id) for row_id in sd if per_row[row_id][basis]["value"] is not None)
         ranked.reverse()
@@ -2124,11 +2147,12 @@ def rank_separability(assembled: dict, per_row: dict) -> dict:
 
 SEPARABILITY_CORRELATIONS = (0.0, 0.3, 0.6)
 GDPVAL_WIDE_SD = 26.0  # I26: AA's displayed +/-26 Elo read as one SD, the wide reading of an interval whose level is unstated
-SEPARABILITY_BIAS = ("conservative: the threshold treats two rows' errors as independent, but every row is scored on the same tasks, "
-                     "so shared task difficulty correlates them and the true paired threshold is smaller; averaging attempts within a task "
-                     "narrows it further")
+SEPARABILITY_BIAS = ("net direction not established: treating two rows' errors as independent overstates the threshold, because every row "
+                     "is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness "
+                     "variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way")
 BAND_RULE = ("O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at "
-             "correlation 0 (1.96 x the root sum of their value SDs), otherwise it starts a new band; a band is printed as its rank range")
+             "correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; "
+             "every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable")
 
 
 def separation(first: float, second: float, rho: float) -> float:
