@@ -553,36 +553,43 @@ def plan_boxes(assembled: dict) -> list[intervals.Box]:
 # E192: the bar is a quality level. A configuration on the frontier it tests can never be beaten there, so a
 # configuration reference made the cheapest-above-the-bar output its own answer (version 1, superseded before release).
 BAR_POLICY = {
-    "policyId": "median-quality-level",
-    "version": 2,
+    "policyId": "quality-quartile-ladder",
+    "version": 3,
     "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
     "populationRule": "non-provisional ranked configurations with a displayed quality",
     "order": "displayed quality ascending, then configuration ID",
-    "position": "lower median",
-    "reference": "the displayed quality of the population's lower-median configuration, frozen as a level; the configuration itself is recorded for audit and competes like any other",
+    "position": "lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34)",
+    "reference": "the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other",
     "minimumPopulation": 2,
     "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
-    "nonTautology": "with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives",
+    "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
 }
 BAR_ID = "bar:median-quality"
 MIN_BAR_POPULATION = 2
 
 
+# O34: the ladder of frozen levels, the median first (it is the headline bar). Each level is the displayed quality at
+# zero-based position floor((n - 1) * k / 4) of the ascending population, so k = 2 is the lower median.
+BAR_LADDER = (
+    (BAR_ID, 2, "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"),
+    ("bar:lower-quartile-quality", 1, "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"),
+    ("bar:upper-quartile-quality", 3, "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"),
+)
+
+
 def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
-    """E156/E192: the bar population and the frozen quality level, chosen before any bar outcome is computed."""
+    """E156/E192/O34: the bar population and the frozen quality ladder, chosen before any bar outcome is computed."""
 
     rows = [row for row in assembled["rows"] if row["summary"].displayed is not None and not row["summary"].provisional]
     ordered = sorted(rows, key=lambda row: (row["summary"].displayed, row["id"]))
     if len(ordered) < MIN_BAR_POPULATION:
         return [row["id"] for row in ordered], []
-    median = ordered[(len(ordered) - 1) // 2]
-    return [row["id"] for row in ordered], [{
-        "id": BAR_ID,
-        "level": median["summary"].displayed,
-        "medianConfiguration": median["id"],
-        "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)",
-    }]
+    bars = []
+    for bar_id, quarter, rule in BAR_LADDER:
+        row = ordered[(len(ordered) - 1) * quarter // 4]
+        bars.append({"id": bar_id, "level": row["summary"].displayed, "levelConfiguration": row["id"], "rule": rule})
+    return [row["id"] for row in ordered], bars
 
 
 # E160: the registered rule that selects each workload's anchor references (separate from workload admission).
@@ -652,7 +659,7 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
         "workloads": workloads,
         "barReferences": references,
         "anchorPolicy": ANCHOR_POLICY,
-        "barPolicy": {**BAR_POLICY, "selectionCutoff": frozen_at, "population": sorted(population), "bars": [{key: item[key] for key in ("id", "level", "medianConfiguration")} for item in references]},
+        "barPolicy": {**BAR_POLICY, "selectionCutoff": frozen_at, "population": sorted(population), "bars": [{key: item[key] for key in ("id", "level", "levelConfiguration")} for item in references]},
     }
 
 

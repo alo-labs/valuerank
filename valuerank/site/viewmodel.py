@@ -414,8 +414,10 @@ def _method_summary(v3: dict, names: dict) -> dict:
         "streamDescriptions": scenarios.get("streamDescriptions", {}),
         "notQuantified": scenarios.get("notQuantified", []),
         # E192: the bar is a frozen quality level; the configuration at the median is named for audit only.
-        "barLevel": f"quality {bar['level']:.1f} (the displayed quality of {names.get(bar['medianConfiguration'], bar['medianConfiguration'])} at freeze)" if bar else None,
-        "barPolicy": f"{v3['barPolicy']['position']} of {v3['barPolicy']['populationRule']}",
+        "barLevel": f"quality {bar['level']:.1f} (the displayed quality of {names.get(bar['levelConfiguration'], bar['levelConfiguration'])} at freeze)" if bar else None,
+        "barPolicy": f"lower median of {v3['barPolicy']['populationRule']}",
+        # O34: the other ladder levels (lower and upper quartile), each a frozen quality level.
+        "barLadder": [f"quality {item['level']:.1f}" for item in v3["barPolicy"]["bars"][1:]],
     }
 
 

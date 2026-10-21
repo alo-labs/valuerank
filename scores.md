@@ -235,7 +235,7 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value c
 | Qwen3.8 Max | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), GPT-5.6 Sol (max), Muse Spark 1.3 (max), GPT-6 Sol (max), GPT-6 Luna (max), Gemini 3.8 Flash (high), GLM-5.3 (max) |
 | DeepSeek V4 Pro (max) | certified | disproved | GPT-5.6 Luna (max) | — |
 
-**API basis, main workload: cheapest at or above quality 58.3** (lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)). Status certified; confirmed cheapest: none.
+**API basis, main workload: cheapest at or above quality 58.3** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: none.
 
 Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); DeepSeek V4 Flash (max): DeepSeek V4 Flash (high).
 
@@ -262,6 +262,62 @@ Bar comparison: compares 12 configurations that can qualify. The bar is a displa
 | DeepSeek V4 Flash (max) | -10.2 | disproved | certified | certified |
 | Qwen3.8 Max | -10.6 | disproved | disproved | disproved |
 | DeepSeek V4 Pro (max) | -8.3 | disproved | certified | certified |
+
+**API basis, main workload: cheapest at or above quality 50.0** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
+
+Configurations that can be confirmed to qualify: 12 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-5.6 Luna (max): GPT-5.6 Luna (xhigh), GPT-5.6 Luna (high), GPT-5.6 Luna (medium), GPT-5.6 Luna (low), GPT-5.6 Luna (non-reasoning); Claude Haiku 5.5 (xhigh): Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low); DeepSeek V4 Flash (max): DeepSeek V4 Flash (high).
+
+Bar comparison: compares 17 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+
+| Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---:|---|---|---|
+| Gemini 4 Argon (high) | 15.3 | certified | certified | disproved |
+| Claude Sonnet 5.5 (max) | 14.3 | certified | certified | disproved |
+| GPT-6.1 Sol (max) | 11.3 | certified | certified | certified |
+| Muse Wonder (max) | 14.4 | certified | certified | disproved |
+| Claude Opus 5.5 (max) | 14.2 | certified | certified | disproved |
+| GPT-6 Astra (max) | 10.9 | certified | certified | disproved |
+| GPT-5.6 Sol (max) | 9.7 | certified | certified | disproved |
+| Muse Spark 1.3 (max) | 8.8 | certified | certified | disproved |
+| GPT-6 Sol (max) | 8.3 | certified | certified | disproved |
+| Grok 4.7 (xhigh) | 6.7 | certified | certified | disproved |
+| GPT-5.6 Luna (max) | 0.0 | disproved | certified | certified |
+| GPT-6 Luna (max) | -2.3 | disproved | disproved | disproved |
+| Claude Haiku 5.5 (xhigh) | -4.7 | disproved | certified | certified |
+| Gemini 3.8 Flash (high) | 0.3 | certified | certified | disproved |
+| GLM-5.3 (max) | 2.1 | certified | certified | disproved |
+| Claude Opus 5 (max) | 7.8 | disproved | certified | disproved |
+| DeepSeek V4 Flash (max) | -2.0 | disproved | certified | certified |
+| Qwen3.8 Max | -2.3 | disproved | disproved | disproved |
+| DeepSeek V4 Pro (max) | -0.0 | disproved | certified | certified |
+
+**API basis, main workload: cheapest at or above quality 61.3** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
+
+Configurations that can be confirmed to qualify: 2 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): Claude Sonnet 5.5 (max): Claude Sonnet 5.5 (xhigh with fallback), Claude Sonnet 5.5 (high with fallback), Claude Sonnet 5.5 (medium with fallback), Claude Sonnet 5.5 (low with fallback); GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-5.6 Sol (max): GPT-5.6 Sol (xhigh), GPT-5.6 Sol (high), GPT-5.6 Sol (medium), GPT-5.6 Sol (low); Muse Spark 1.3 (max): Muse Spark 1.3 (xhigh); GPT-6 Sol (max): GPT-6 Sol (xhigh), GPT-6 Sol (high), GPT-6 Sol (medium), GPT-6 Sol (low), GPT-6 Sol (non-reasoning); Claude Opus 5 (max): Claude Opus 5 (xhigh), Claude Opus 5 (high), Claude Opus 5 (medium), Claude Opus 5 (low).
+
+Bar comparison: compares 9 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+
+| Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---:|---|---|---|
+| Gemini 4 Argon (high) | 4.0 | disproved | certified | certified |
+| Claude Sonnet 5.5 (max) | 3.0 | certified | certified | certified |
+| GPT-6.1 Sol (max) | 0.0 | disproved | certified | certified |
+| Muse Wonder (max) | 3.1 | disproved | certified | certified |
+| Claude Opus 5.5 (max) | 2.9 | certified | certified | disproved |
+| GPT-6 Astra (max) | -0.4 | disproved | disproved | disproved |
+| GPT-5.6 Sol (max) | -1.6 | disproved | certified | certified |
+| Muse Spark 1.3 (max) | -2.5 | disproved | certified | certified |
+| GPT-6 Sol (max) | -3.1 | disproved | certified | certified |
+| Grok 4.7 (xhigh) | -4.6 | disproved | disproved | disproved |
+| GPT-5.6 Luna (max) | -11.3 | disproved | disproved | disproved |
+| GPT-6 Luna (max) | -13.6 | disproved | disproved | disproved |
+| Claude Haiku 5.5 (xhigh) | -16.0 | disproved | disproved | disproved |
+| Gemini 3.8 Flash (high) | -11.1 | disproved | disproved | disproved |
+| GLM-5.3 (max) | -9.2 | disproved | disproved | disproved |
+| Claude Opus 5 (max) | -3.5 | disproved | certified | certified |
+| DeepSeek V4 Flash (max) | -13.3 | disproved | disproved | disproved |
+| Qwen3.8 Max | -13.6 | disproved | disproved | disproved |
+| DeepSeek V4 Pro (max) | -11.3 | disproved | disproved | disproved |
 
 **Plan basis, main workload:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
@@ -291,7 +347,7 @@ Bar comparison: compares 12 configurations that can qualify. The bar is a displa
 | Qwen3.8 Max | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (max), Muse Wonder (max), GPT-6 Astra (max), GPT-5.6 Sol (max), Muse Spark 1.3 (max), GPT-6 Sol (max), Grok 4.7 (xhigh), GPT-6 Luna (max), Gemini 3.8 Flash (high), GLM-5.3 (max) |
 | DeepSeek V4 Pro (max) | certified | disproved | MiMo-V2.6-Pro | — |
 
-**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 58.3** (lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)). Status certified; confirmed cheapest: none.
+**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 58.3** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: none.
 
 Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); DeepSeek V4 Flash (max): DeepSeek V4 Flash (high).
 
@@ -320,6 +376,66 @@ Bar comparison: compares 14 configurations that can qualify. The bar is a displa
 | DeepSeek V4 Flash (max) | -10.2 | disproved | certified | certified |
 | Qwen3.8 Max | -10.6 | disproved | disproved | disproved |
 | DeepSeek V4 Pro (max) | -8.3 | disproved | certified | certified |
+
+**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 50.0** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
+
+Configurations that can be confirmed to qualify: 12 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-5.6 Luna (max): GPT-5.6 Luna (xhigh), GPT-5.6 Luna (high), GPT-5.6 Luna (medium), GPT-5.6 Luna (low), GPT-5.6 Luna (non-reasoning); Claude Haiku 5.5 (xhigh): Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low); DeepSeek V4 Flash (max): DeepSeek V4 Flash (high).
+
+Bar comparison: compares 19 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+
+| Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---:|---|---|---|
+| Gemini 4 Argon (high) | 15.3 | certified | certified | disproved |
+| Claude Sonnet 5.5 (max) | 14.3 | certified | certified | disproved |
+| GPT-6.1 Sol (max) | 11.3 | certified | certified | certified |
+| Muse Wonder (max) | 14.4 | certified | certified | disproved |
+| Claude Opus 5.5 (max) | 14.2 | certified | certified | disproved |
+| GPT-6 Astra (max) | 10.9 | certified | certified | disproved |
+| GPT-5.6 Sol (max) | 9.7 | certified | certified | disproved |
+| Muse Spark 1.3 (max) | 8.8 | certified | certified | disproved |
+| MiMo-V2.6-Pro | 0.1 | disproved | certified | certified |
+| GPT-6 Sol (max) | 8.3 | certified | certified | disproved |
+| Grok 4.7 (xhigh) | 6.7 | certified | certified | disproved |
+| GPT-5.6 Luna (max) | 0.0 | disproved | certified | certified |
+| GPT-6 Luna (max) | -2.3 | disproved | disproved | disproved |
+| MiMo-V2.6-Flash | 1.7 | disproved | certified | certified |
+| Claude Haiku 5.5 (xhigh) | -4.7 | disproved | certified | certified |
+| Gemini 3.8 Flash (high) | 0.3 | certified | certified | disproved |
+| GLM-5.3 (max) | 2.1 | certified | certified | disproved |
+| Claude Opus 5 (max) | 7.8 | disproved | certified | disproved |
+| DeepSeek V4 Flash (max) | -2.0 | disproved | certified | certified |
+| Qwen3.8 Max | -2.3 | disproved | disproved | disproved |
+| DeepSeek V4 Pro (max) | -0.0 | disproved | certified | certified |
+
+**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 61.3** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
+
+Configurations that can be confirmed to qualify: 2 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (one configuration per family is ranked, E193; E201): Claude Sonnet 5.5 (max): Claude Sonnet 5.5 (xhigh with fallback), Claude Sonnet 5.5 (high with fallback), Claude Sonnet 5.5 (medium with fallback), Claude Sonnet 5.5 (low with fallback); GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-5.6 Sol (max): GPT-5.6 Sol (xhigh), GPT-5.6 Sol (high), GPT-5.6 Sol (medium), GPT-5.6 Sol (low); Muse Spark 1.3 (max): Muse Spark 1.3 (xhigh); GPT-6 Sol (max): GPT-6 Sol (xhigh), GPT-6 Sol (high), GPT-6 Sol (medium), GPT-6 Sol (low), GPT-6 Sol (non-reasoning).
+
+Bar comparison: compares 11 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+
+| Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---:|---|---|---|
+| Gemini 4 Argon (high) | 4.0 | disproved | certified | certified |
+| Claude Sonnet 5.5 (max) | 3.0 | certified | certified | certified |
+| GPT-6.1 Sol (max) | 0.0 | disproved | certified | certified |
+| Muse Wonder (max) | 3.1 | disproved | certified | certified |
+| Claude Opus 5.5 (max) | 2.9 | certified | certified | disproved |
+| GPT-6 Astra (max) | -0.4 | disproved | disproved | disproved |
+| GPT-5.6 Sol (max) | -1.6 | disproved | certified | certified |
+| Muse Spark 1.3 (max) | -2.5 | disproved | certified | certified |
+| MiMo-V2.6-Pro | -11.2 | disproved | certified | certified |
+| GPT-6 Sol (max) | -3.1 | disproved | certified | certified |
+| Grok 4.7 (xhigh) | -4.6 | disproved | disproved | disproved |
+| GPT-5.6 Luna (max) | -11.3 | disproved | disproved | disproved |
+| GPT-6 Luna (max) | -13.6 | disproved | disproved | disproved |
+| MiMo-V2.6-Flash | -9.6 | disproved | certified | certified |
+| Claude Haiku 5.5 (xhigh) | -16.0 | disproved | disproved | disproved |
+| Gemini 3.8 Flash (high) | -11.1 | disproved | disproved | disproved |
+| GLM-5.3 (max) | -9.2 | disproved | disproved | disproved |
+| Claude Opus 5 (max) | -3.5 | disproved | certified | disproved |
+| DeepSeek V4 Flash (max) | -13.3 | disproved | disproved | disproved |
+| Qwen3.8 Max | -13.6 | disproved | disproved | disproved |
+| DeepSeek V4 Pro (max) | -11.3 | disproved | disproved | disproved |
 
 **Plan basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified):** not evaluated (unevaluable: no Plan multiple is identified for a subset workload (E149, E190)).
 
@@ -544,6 +660,19 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 | quality 58.3 | GPT-6.1 Sol (max) | supported under all registered role-group kernel checks | 93.7% to 98.8% | UU met, UH met, HU met, HH met | yes |
 | quality 58.3 | DeepSeek V4 Flash (max) | not scenario-supported | 0.0% to 0.6% | UU not met, UH not met, HU not met, HH not met | no |
 | quality 58.3 | DeepSeek V4 Pro (max) | not scenario-supported | 1.2% to 5.7% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 50.0 | GPT-6.1 Sol (max) | not scenario-supported | 13.1% to 15.0% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 50.0 | GPT-5.6 Luna (max) | not scenario-supported | 25.5% to 29.4% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 50.0 | Claude Haiku 5.5 (xhigh) | not scenario-supported | 5.2% to 11.8% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 50.0 | DeepSeek V4 Flash (max) | not scenario-supported | 35.6% to 36.7% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 50.0 | DeepSeek V4 Pro (max) | not scenario-supported | 13.0% to 14.7% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | Gemini 4 Argon (high) | not scenario-supported | 19.2% to 27.0% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | Claude Sonnet 5.5 (max) | not scenario-supported | 2.6% to 3.1% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | GPT-6.1 Sol (max) | not scenario-supported | 50.1% to 51.0% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | Muse Wonder (max) | not scenario-supported | 3.4% to 4.0% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | GPT-5.6 Sol (max) | not scenario-supported | 2.3% to 3.1% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | Muse Spark 1.3 (max) | not scenario-supported | 6.4% to 12.0% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | GPT-6 Sol (max) | not scenario-supported | 5.5% to 10.6% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 61.3 | Claude Opus 5 (max) | not scenario-supported | 0.4% to 0.5% | UU not met, UH not met, HU not met, HH not met | no |
 
 ## Diagnostics
 

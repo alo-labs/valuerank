@@ -97,7 +97,7 @@
     {%- for key, text in m.streamDescriptions.items() %}<li><strong>{{ key }}</strong>: {{ text }}</li>{% endfor %}
     {%- for text in m.notQuantified %}<li>{{ text }}</li>{% endfor %}
   </ul>
-  {%- if m.barLevel %}<p>The quality bar is a fixed quality level: {{ m.barLevel }}, the {{ m.barPolicy }}. It stays fixed for the anchor version.</p>{% endif %}
+  {%- if m.barLevel %}<p>The headline quality bar is a fixed quality level: {{ m.barLevel }}, the {{ m.barPolicy }}.{% if m.barLadder %} The ladder adds the lower and upper quartiles, {{ m.barLadder | join(" and ") }}, so the cheapest model is shown at three quality levels.{% endif %} The levels stay fixed for the anchor version.</p>{% endif %}
 </section>
 
 <section class="block" id="evidence-grades" aria-labelledby="grades-title">

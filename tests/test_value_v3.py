@@ -154,7 +154,7 @@ def test_freeze_anchors_and_bar_reference():
     subset = next(entry for entry in frozen["workloads"].values() if entry["role"] == "subset")
     assert subset["anchors"]["api"]["referenceIds"] == ["a", "b", "c"]
     # E192: the bar is the lower-median displayed quality of the non-provisional rows (a 58.28 and b 64.38; c is provisional).
-    assert frozen["barReferences"][0]["id"] == v.BAR_ID and frozen["barReferences"][0]["medianConfiguration"] == "a"
+    assert frozen["barReferences"][0]["id"] == v.BAR_ID and frozen["barReferences"][0]["levelConfiguration"] == "a"
     assert frozen["barReferences"][0]["level"] == pytest.approx(58.2804, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b"]
     assert frozen["anchorPolicy"]["policyId"] == "complete-evidence-panel" and main["anchorStatus"] == "frozen"
     # E160: the main workload needs at least two complete-evidence references.
@@ -372,6 +372,15 @@ def test_policy_cohort_bar_is_a_sensitivity_over_frontier_families():
     assert v.policy_cohort_bar(result, frozen)["api"] == {"status": "unevaluable"}
 
 
+def test_the_bar_ladder_freezes_three_levels_with_the_median_first():
+    """O34: the lower quartile, median and upper quartile of the population, median first (the headline bar)."""
+
+    rows = [{"id": f"r{index}", "summary": SimpleNamespace(displayed=value, provisional=False)} for index, value in enumerate((10.0, 20.0, 30.0, 40.0, 50.0))]
+    population, bars = v.bar_levels({"rows": rows})
+    assert [bar["id"] for bar in bars] == [v.BAR_ID, "bar:lower-quartile-quality", "bar:upper-quartile-quality"]
+    assert [bar["levelConfiguration"] for bar in bars] == ["r2", "r1", "r3"] and population == ["r0", "r1", "r2", "r3", "r4"]
+
+
 def test_freeze_with_fewer_than_two_population_rows_pins_no_bar():
     """E192: a bar met by one configuration compares nothing, so fewer than two population rows pin no bar."""
 
@@ -408,8 +417,8 @@ def test_bar_reference_selection_is_registered_and_outcome_independent(monkeypat
     result = assembled()
     frozen = v.freeze(result, frozen_at="2026-10-19")
     policy = frozen["barPolicy"]
-    assert policy["policyId"] == "median-quality-level" and policy["version"] == 2 and policy["selectionCutoff"] == "2026-10-19"
-    assert policy["bars"] == [{key: item[key] for key in ("id", "level", "medianConfiguration")} for item in frozen["barReferences"]]
+    assert policy["policyId"] == "quality-quartile-ladder" and policy["version"] == 3 and policy["selectionCutoff"] == "2026-10-19"
+    assert policy["bars"] == [{key: item[key] for key in ("id", "level", "levelConfiguration")} for item in frozen["barReferences"]]
     reordered = dict(result, rows=list(reversed(result["rows"])))
     assert v.freeze(reordered, frozen_at="2026-10-19")["barReferences"] == frozen["barReferences"]
 
@@ -1191,7 +1200,7 @@ def test_scenario_labels_never_go_to_or_past_an_unsafe_blocker(monkeypatch):
     flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
     frozen = v.freeze(flagged, frozen_at="2026-10-19")
     # At level 60 b and d can be cheapest, and the blocker a can reach the level and undercut both.
-    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 60.0, "medianConfiguration": "b", "rule": "x"}]
+    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 60.0, "levelConfiguration": "b", "rule": "x"}]
     monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda *args, **kwargs: {"label": True, "reading": "supported"})
     (bar,) = v.bar_labels(flagged, frozen, seed=1, batch=20)
     assert sorted(bar["candidates"]) == ["b", "d"]

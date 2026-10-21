@@ -250,8 +250,20 @@
     {
       "id": "bar:median-quality",
       "level": 58.27519438516182,
-      "medianConfiguration": "gpt-6-sol",
-      "rule": "lower-median displayed quality of the non-provisional ranked configurations at freeze (E192)"
+      "levelConfiguration": "gpt-6-sol",
+      "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
+    },
+    {
+      "id": "bar:lower-quartile-quality",
+      "level": 50.0122081693276,
+      "levelConfiguration": "gpt-5.6-luna",
+      "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
+    },
+    {
+      "id": "bar:upper-quartile-quality",
+      "level": 61.32724120424232,
+      "levelConfiguration": "gpt-6.1-sol",
+      "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
   ],
   "anchorPolicy": {
@@ -264,16 +276,16 @@
     "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor"
   },
   "barPolicy": {
-    "policyId": "median-quality-level",
-    "version": 2,
+    "policyId": "quality-quartile-ladder",
+    "version": 3,
     "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
     "populationRule": "non-provisional ranked configurations with a displayed quality",
     "order": "displayed quality ascending, then configuration ID",
-    "position": "lower median",
-    "reference": "the displayed quality of the population's lower-median configuration, frozen as a level; the configuration itself is recorded for audit and competes like any other",
+    "position": "lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34)",
+    "reference": "the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other",
     "minimumPopulation": 2,
     "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
-    "nonTautology": "with at least two population configurations, at least two are at or above the level at freeze, so the output always compares alternatives",
+    "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
     "selectionCutoff": "2026-10-21",
     "population": [
@@ -303,7 +315,17 @@
       {
         "id": "bar:median-quality",
         "level": 58.27519438516182,
-        "medianConfiguration": "gpt-6-sol"
+        "levelConfiguration": "gpt-6-sol"
+      },
+      {
+        "id": "bar:lower-quartile-quality",
+        "level": 50.0122081693276,
+        "levelConfiguration": "gpt-5.6-luna"
+      },
+      {
+        "id": "bar:upper-quartile-quality",
+        "level": 61.32724120424232,
+        "levelConfiguration": "gpt-6.1-sol"
       }
     ]
   }
