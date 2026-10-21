@@ -1350,6 +1350,17 @@ def test_the_report_window_ends_on_the_release_cutoff():
         v.assemble(CONFIGURATIONS, documents(planRoutes=routes), release_day=DAY)
 
 
+def test_cost_evidence_is_at_most_45_days_old_at_the_cutoff():
+    """E216: the AA model-page snapshot and the price records each pass a 45-day age gate at the release cutoff."""
+
+    fresh = {**documents()["snapshot"], "capturedAt": "2026-09-04T00:00:00Z"}
+    assert v.assemble(CONFIGURATIONS, documents(snapshot=fresh, priceRecords={"records": [], "observedAt": "2026-09-04T00:00:00Z"}), release_day=DAY)["rows"]
+    with pytest.raises(ValueError, match=r"AA model-page snapshot \(2026-09-03\) is more than 45 days old .* \(E216\)"):
+        v.assemble(CONFIGURATIONS, documents(snapshot={**fresh, "capturedAt": "2026-09-03T23:00:00Z"}), release_day=DAY)
+    with pytest.raises(ValueError, match=r"price records \(2026-08-01\) is more than 45 days old"):
+        v.assemble(CONFIGURATIONS, documents(priceRecords={"records": [], "observedAt": "2026-08-01T00:00:00Z"}), release_day=DAY)
+
+
 def test_the_quartile_bars_need_four_configurations():
     """E215: with fewer than four, the quartile positions coincide with the headline's, so only the headline is pinned."""
 

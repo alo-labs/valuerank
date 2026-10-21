@@ -380,6 +380,9 @@ def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked
             and point.get("effort") != configuration.get("effort") and point.get("effort") not in ranked_efforts]
 
 
+COST_EVIDENCE_MAX_AGE_DAYS = 45
+
+
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
     """Evidence, admission, basket costs and Plan routes for every ranked configuration (no anchors yet)."""
 
@@ -401,6 +404,11 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # E213: one release cutoff; the report window is the 30 days ending on it (the evidence search cutoff is recorded apart).
     if window and window["end"] != release_day.isoformat():
         raise ValueError(f"the report window must end on the release cutoff {release_day} (E213), not {window['end']}")
+    # E216: the AA model-page snapshot and the price records are at most 45 days old at the release cutoff (the chart
+    # and catalog capture that defines the cohort has its own 7-day gate, E211).
+    for name, stamp in (("AA model-page snapshot", documents["snapshot"].get("capturedAt")), ("price records", documents["priceRecords"].get("observedAt"))):
+        if stamp and (release_day - date.fromisoformat(stamp[:10])).days > COST_EVIDENCE_MAX_AGE_DAYS:
+            raise ValueError(f"the {name} ({stamp[:10]}) is more than {COST_EVIDENCE_MAX_AGE_DAYS} days old at the release cutoff {release_day} (E216)")
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
     # O33: several efforts of one family can be ranked; only unranked cheaper configurations are listed as unchecked.
