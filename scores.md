@@ -422,7 +422,7 @@ Bar comparison: compares 7 configurations that can qualify. The bar is a display
 
 **Plan basis, main workload:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
-**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): frontier.** Not evaluable: Claude Fable 5.1 (max), Muse Wonder Full (max).
+**API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): frontier.** Not evaluable: Claude Fable 5.1 (max), Muse Wonder Full (max). Competing without a label (AA cost on a price not in force, O29, E183): MiMo-V2.6-Pro.
 
 | Configuration | Possible frontier | Definite frontier | Definite counterexample | Possible frontier blocked by |
 |---|---|---|---|---|
@@ -439,7 +439,6 @@ Bar comparison: compares 7 configurations that can qualify. The bar is a display
 | Claude Sonnet 5.5 (xhigh) | disproved | disproved | GPT-6.1 Sol (xhigh) | GPT-6.1 Sol (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high) |
 | GPT-6 Sol (max) | disproved | disproved | GPT-6.1 Sol (xhigh) | GPT-6.1 Sol (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium) |
 | Grok 4.7 (xhigh) | disproved | disproved | Gemini 4 Argon (high) | Gemini 4 Argon (high), GPT-6.1 Sol (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6 Astra (max), GPT-5.6 Sol (max), Muse Spark 1.3 (max), Claude Sonnet 5.5 (xhigh), GPT-6 Sol (max) |
-| MiMo-V2.6-Pro | certified | certified | — | — |
 | GPT-6.1 Sol (low) | disproved | disproved | MiMo-V2.6-Pro | MiMo-V2.6-Pro |
 | Claude Sonnet 5.5 (high) | disproved | disproved | GPT-6.1 Sol (xhigh) | GPT-6.1 Sol (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium) |
 | GPT-5.6 Luna (max) | disproved | disproved | MiMo-V2.6-Pro | MiMo-V2.6-Pro |
@@ -478,7 +477,6 @@ Bar comparison: compares 15 configurations that can qualify. The bar is a displa
 | Claude Sonnet 5.5 (xhigh) | 4.1 | certified | certified | disproved |
 | GPT-6 Sol (max) | 1.5 | certified | certified | disproved |
 | Grok 4.7 (xhigh) | 0.2 | certified | certified | disproved |
-| MiMo-V2.6-Pro | -0.2 | disproved | disproved | disproved |
 | GPT-6.1 Sol (low) | -2.8 | disproved | disproved | disproved |
 | Claude Sonnet 5.5 (high) | 0.0 | disproved | certified | disproved |
 | GPT-5.6 Luna (max) | -6.9 | disproved | disproved | disproved |
@@ -498,9 +496,9 @@ Bar comparison: compares 15 configurations that can qualify. The bar is a displa
 
 **API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 47.4** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
 
-Configurations that can be confirmed to qualify: 22 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked: no exact DeepSWE and Bug Hunt pair; E201, O33): GPT-6 Luna (max): GPT-6 Luna (xhigh), GPT-6 Luna (high), GPT-6 Luna (medium), GPT-6 Luna (low), GPT-6 Luna (non-reasoning).
+Configurations that can be confirmed to qualify: 21 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked: no exact DeepSWE and Bug Hunt pair; E201, O33): GPT-6 Luna (max): GPT-6 Luna (xhigh), GPT-6 Luna (high), GPT-6 Luna (medium), GPT-6 Luna (low), GPT-6 Luna (non-reasoning).
 
-Bar comparison: compares 23 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 22 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -517,7 +515,6 @@ Bar comparison: compares 23 configurations that can qualify. The bar is a displa
 | Claude Sonnet 5.5 (xhigh) | 12.1 | certified | certified | disproved |
 | GPT-6 Sol (max) | 9.5 | certified | certified | disproved |
 | Grok 4.7 (xhigh) | 8.2 | certified | certified | disproved |
-| MiMo-V2.6-Pro | 7.8 | certified | certified | certified |
 | GPT-6.1 Sol (low) | 5.2 | certified | certified | disproved |
 | Claude Sonnet 5.5 (high) | 7.9 | certified | certified | disproved |
 | GPT-5.6 Luna (max) | 1.1 | certified | certified | disproved |
@@ -556,7 +553,6 @@ Bar comparison: compares 7 configurations that can qualify. The bar is a display
 | Claude Sonnet 5.5 (xhigh) | -0.1 | disproved | disproved | disproved |
 | GPT-6 Sol (max) | -2.7 | disproved | disproved | disproved |
 | Grok 4.7 (xhigh) | -4.0 | disproved | disproved | disproved |
-| MiMo-V2.6-Pro | -4.4 | disproved | disproved | disproved |
 | GPT-6.1 Sol (low) | -7.0 | disproved | disproved | disproved |
 | Claude Sonnet 5.5 (high) | -4.3 | disproved | disproved | disproved |
 | GPT-5.6 Luna (max) | -11.1 | disproved | disproved | disproved |
@@ -883,6 +879,8 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 ## Diagnostics
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
+- **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234): Kendall tau 0.73 (interval 0.41 to 1.00) on 10 rows. Cognition minus AA: mean +2.5 points, largest 11.8.
+- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — GPT-6.1 Sol (xhigh) (FrontierCode 1.1); GPT-6.1 Sol (high) (FrontierCode 1.1); GPT-6.1 Sol (medium) (FrontierCode 1.1); GPT-5.6 Sol (max) (FrontierCode 1.1); GPT-6 Sol (max) (FrontierCode 1.1); MiMo-V2.6-Pro (DeepSWE v1.1); GPT-6.1 Sol (low) (FrontierCode 1.1); GPT-5.6 Luna (max) (FrontierCode 1.1); Claude Opus 5 (max) (FrontierCode 1.1) — API 11 rows move; largest move 6 (MiMo-V2.6-Pro); Plan 15 rows move; largest move 8 (MiMo-V2.6-Pro).
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.71 (interval 0.57 to 0.83) on 32 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.59 (interval 0.39 to 0.76) on 31 rows.
 - **Quality-substitution value agreement (Plan):** quality-substitution value agreement, plan basis (matched-panel sensitivity): Kendall tau 0.61 (interval 0.40 to 0.77) on 31 rows.
@@ -968,4 +966,7 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | passed | every cohort row has a pinned identity |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
+| full benchmark set (O36, O38) | fired | listed, not ranked: deepseek-v4-flash, grok-4.6-xhigh, mimo-v2-6-flash, muse-spark-1-3-xhigh, muse-wonder |
+| missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226) | vacuous | no ranked row has a missing leaf (O36) |
+| provider-claim label denial (E233) | fired | competes, earns no label: mimo-v2-6-pro |
 | scenario outputs current (E72) | passed | scenario input hash matches the scored inputs |

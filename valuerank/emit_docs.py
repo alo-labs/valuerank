@@ -579,7 +579,7 @@ Values are rounded for display; ranks are competition ranks (equal values share 
 
 {legend}
 
-Not ranked ({len(facts.unranked)} roster models): {names([entry['name'] for entry in facts.unranked])}. Reasons are listed in [scores.md](scores.md#not-ranked).
+Not ranked ({len(facts.unranked)} roster models): {names([entry['name'] for entry in facts.unranked])}. Reasons are listed in [scores.md](scores.md#not-ranked).{incomplete_text(facts)}
 
 ### What the evidence supports
 
@@ -744,7 +744,7 @@ Quality is the weighted mean of the leaves observed for the exact configuration,
 
 {markdown_table(['Leaf', 'Group', 'Weight in quality', 'Weight in value', 'Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
 
-Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A configuration still missing a leaf after an exhaustive search logged within {LEAF_SEARCH_DAYS} days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
+Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within {LEAF_SEARCH_DAYS} days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 
 Coverage is the observed share of quality weight. A row is **provisional** when coverage is below {q.MIN_COVERAGE:.0%}, fewer than {q.MIN_SWE_LEAVES} software-engineering leaves are observed, observed software-engineering weight is below {q.MIN_SWE_WEIGHT:.0%}, or a leaf weighing {q.REQUIRED_LEAF_WEIGHT:.0f}% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
 
@@ -775,7 +775,7 @@ S1 also runs with the endpoint-heavy kernel. On the Plan basis the core streams 
 
 ## Diagnostics
 
-Diagnostics are published beside the ranking and never change a score: Terminal-Bench cross-source agreement (AA's run against tbench.ai), anchor stability (exchange-rate series and trimmed-anchor rank shifts), Omniscience abstention sensitivity, quality source shares, matched-panel quality agreement, non-discriminating leaves, group drift, quality dispersion, deletion sensitivity (leave-one-benchmark-out and source deletions) and the standing removal of the Terminal-Bench cost component. Current results are in [scores.md](scores.md#diagnostics).
+Diagnostics are published beside the ranking and never change a score: Terminal-Bench cross-source agreement (AA's run against tbench.ai), FrontierCode cross-source agreement (AA against Cognition) and gap-fill removal (E234), anchor stability (exchange-rate series and trimmed-anchor rank shifts), Omniscience abstention sensitivity, quality source shares, matched-panel quality agreement, non-discriminating leaves, group drift, quality dispersion, deletion sensitivity (leave-one-benchmark-out and source deletions) and the standing removal of the Terminal-Bench cost component. Current results are in [scores.md](scores.md#diagnostics).
 
 ## Release gates
 
@@ -1066,6 +1066,29 @@ def rank_change_text(changes, names_label):
 LEAF_LABELS = {leaf.key: leaf.label for leaf in q.LEAVES}
 
 
+def gap_fill_text(sensitivity, facts):
+    """E234: rank changes when each row's leaves from another party or the provider are removed."""
+
+    filled = sensitivity["rows"]
+    if not filled:
+        return "- **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider."
+    rows = "; ".join(f"{facts.label(row_id)} ({', '.join(LEAF_LABELS[key] for key in leaves)})" for row_id, leaves in filled.items())
+    moves = "; ".join(f"{label} {rank_change_text(sensitivity['bases'][basis]['rankChanges']['changes'], facts.labels)}" for basis, label in (("api", "API"), ("plan", "Plan")))
+    return f"- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — {rows} — {moves}."
+
+
+def incomplete_text(facts):
+    """O36/O38: the cohort configurations listed, not ranked, for a benchmark still missing after the logged search."""
+
+    items = facts.v3["incompleteEvidence"]
+    if not items:
+        return ""
+    frontier = {row["id"] for row in facts.scores["models"] if any(reason.startswith("Required AA") for reason in row.get("rankingInclusionReasons") or [])}
+    parts = [f"{item['name']} ({'an AA frontier family; ' if item['id'] in frontier else ''}no {', '.join(LEAF_LABELS[key] for key in item['missing'])})" for item in items]
+    return (f" Of these, {len(items)} qualify for the cohort but are listed, not ranked, because a benchmark is still missing after a logged search "
+            f"(O36, O38): " + "; ".join(parts) + ".")
+
+
 def agreement_text(result):
     """One agreement statistic: its label, status and, when defined, tau with its bootstrap interval and panel size."""
 
@@ -1140,6 +1163,10 @@ def diagnostics_markdown(facts):
     logistic = diagnostics["gdpvalLogisticSensitivity"]
     lines = [
         f"- **Terminal-Bench cross-source agreement (AA's {harness['defaultHarness']} run against tbench.ai):** {harness['agreement']['status']}; {len(harness['harnessMixed'])} rows take the leaf from tbench.ai (gap fill).",
+        f"- **FrontierCode against Cognition:** {agreement_text(diagnostics['frontierCodeCrossSource'])}"
+        + (f" Cognition minus AA: mean {diagnostics['frontierCodeCrossSource']['meanOffset']:+.1f} points, largest {diagnostics['frontierCodeCrossSource']['maxAbsOffset']:.1f}."
+           if diagnostics["frontierCodeCrossSource"]["tau"] is not None else ""),
+        gap_fill_text(diagnostics["gapFillSensitivity"], facts),
         f"- **Quality agreement:** {agreement_text(agreement)}",
         *(f"- **Quality-substitution value agreement ({label}):** {agreement_text(diagnostics['qualitySubstitutionAgreement'][basis])}" for basis, label in (("api", "API"), ("plan", "Plan"))),
         f"- **Disjoint-evidence agreement:** {agreement_text(diagnostics['disjointEvidenceAgreement'])}",

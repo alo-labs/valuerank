@@ -93,6 +93,9 @@ def test_unscoreable_values_and_class_ownership():
     assert "c-max" in sb._pages(priced["documents"]) and "c-max" not in sb._pages(sb.apply_class(priced, shrunk, "cohort")["documents"])
     with pytest.raises(ValueError, match="unclassified evidence documents"):
         sb._classified({**documents(), "extra": {}})
+    # Every document the release bundle loads belongs to a class.
+    from valuerank.paths import DATA
+    sb._classified(v.load_documents(DATA))
 
 
 def test_an_admitted_workload_change_is_a_migration():

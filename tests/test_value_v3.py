@@ -1283,7 +1283,8 @@ def test_frontier_anchor_diagnostic_and_subset_intervals():
     assert frontier["status"] == "evaluated" and frontier["references"] == ["a", "b"]
     assert frontier["bases"]["api"]["rankChanges"]["panel"] == ["a", "b"] and "frozenExchangeRate" in frontier["bases"]["plan"]
     (subset,) = output["subsetIntervals"].values()
-    assert subset["api"]["universe"] == ["a", "b", "c"] and subset["plan"]["reason"] == v.SUBSET_PLAN_INTERVALS
+    # E233: c's DeepSWE is a provider claim, so it competes as a blocker and earns no label.
+    assert subset["api"]["universe"] == ["a", "b"] and subset["api"]["blockers"] == ["c"] and subset["plan"]["reason"] == v.SUBSET_PLAN_INTERVALS
     assert output["costInfluence"]["api"]["orderingAgreement"]["qualityVsValue"] is not None
     assert output["costInfluence"]["api"]["commonWorkload"]["varianceAllocation"] is not None
     retained = [dict(item, frontierFamily=item["id"] != "b") for item in CONFIGURATIONS]

@@ -559,6 +559,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     return {
         "rows": rows, "admission": admission, "admitted": admitted, "deferred": [{"component": component, "reason": DEFERRED_MIGRATION} for component in deferred],
         "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete,
+        "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
     }
 
 
@@ -628,6 +629,12 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
         ratio_low, ratio_high = blocker_domain(gate, basis)
         low, high, provisional = low * min(1.0, ratio_low), high * max(1.0, ratio_high), True
     return intervals.Box(row["id"], low, high, summary.lower, summary.upper, provisional)
+
+
+def provider_claimed(row: dict) -> bool:
+    """E233: a row with a leaf taken from the model provider's own published result (O36's last source)."""
+
+    return any(source.get("sourceType") == "model_provider_claim" for source in row["evidence"]["provenance"].values())
 
 
 def blocker_domain(gate: dict, basis: str) -> tuple[float, float] | None:
@@ -828,9 +835,9 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
     not_in_force = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
     unconstructible = sorted(row["id"] for row in assembled["rows"] if row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
-    # E222/E228: an unverified basis, or (Plan) a route whose evidence a detected change may have superseded, competes but
-    # earns no label, exactly like an O29 blocker.
-    blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED}
+    # E222/E228/E233: an unverified basis, a provider-claimed leaf, or (Plan) a route whose evidence a detected change may
+    # have superseded, competes but earns no label, exactly like an O29 blocker.
+    blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row)}
     if basis == "plan":
         blocked |= {row["id"] for row in assembled["rows"] if plan_routes.change_flagged(row["routeSelection"]["selected"])}
     universe = sorted(box.row for box in boxes if box.row not in blocked)
@@ -993,6 +1000,56 @@ def _deletion_sensitivity(rows: list[dict], per_row: dict) -> list[dict]:
             }
         results.append({**entry, "status": "evaluated", "unevaluableRows": unevaluable, "bases": bases})
     return results
+
+
+GAP_FILL_TYPES = ("independent", "model_provider_claim")
+
+
+def gap_filled_leaves(row: dict) -> list[str]:
+    """E234: the leaves a row takes from another party or the provider (O36), a tbench.ai Terminal-Bench fill included."""
+
+    provenance = row["evidence"]["provenance"]
+    return [key for key, source in provenance.items()
+            if source.get("sourceType") in GAP_FILL_TYPES or (key == "terminalBench" and source.get("agent") not in (None, DEFAULT_TB_HARNESS))]
+
+
+def gap_fill_sensitivity(rows: list[dict], per_row: dict) -> dict:
+    """E234: rank changes when each row's gap-filled leaves are removed and its other leaves renormalised (no score changes)."""
+
+    filled = {row["id"]: gap_filled_leaves(row) for row in rows if gap_filled_leaves(row)}
+    bases = {}
+    for basis in BASES:
+        primary, branched = {}, {}
+        for row in rows:
+            scores = per_row[row["id"]][basis]
+            if scores["value"] is None:
+                continue
+            primary[row["id"]] = scores["value"]
+            quality = deletion_quality(row["evidence"]["observations"], set(filled.get(row["id"], [])))
+            branched[row["id"]] = anchor_math.value_score(scores["costScore"], quality, BETA)
+        bases[basis] = {"rankChanges": diagnostics.paired_rank_change(primary, branched)}
+    return {"label": "gap-fill removal: each row's leaves from another party or the provider removed, the rest renormalised (E234; diagnostic)",
+            "rows": filled, "bases": bases}
+
+
+def frontiercode_cross_source(rows: list[dict], cognition: dict) -> dict:
+    """E234: AA's FrontierCode against Cognition's main score for the same name and effort, where both exist."""
+
+    data = cognition["v1_1"]["data"]
+    aa, other = {}, {}
+    for row in rows:
+        source = row["evidence"]["provenance"].get("frontierCode") or {}
+        if source.get("sourceType") in (None, "aa_recapture") and "frontierCode" in row["evidence"]["observations"]:
+            aa[row["id"]] = row["evidence"]["observations"]["frontierCode"].z
+        score = (((data.get(row["name"]) or {}).get(row.get("effort")) or {}).get("main") or {}).get("new_score")
+        if score is not None:
+            other[row["id"]] = 100.0 * score
+    result = diagnostics.agreement(aa, other, label="FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)")
+    offsets = [other[row_id] - aa[row_id] for row_id in result["panel"]]
+    result["meanOffset"] = statistics.fmean(offsets) if offsets else None
+    result["maxAbsOffset"] = max((abs(value) for value in offsets), default=None)
+    result["scale"] = "tested" if result["tau"] is not None else "scale equivalence not tested"
+    return result
 
 
 # E226: renormalising over each row's own leaves is not neutral when the sparse leaves are the hard ones. The common-leaf
@@ -1413,6 +1470,13 @@ def score(assembled: dict, frozen: dict) -> dict:
         _rule("configuration map coverage", "fired" if not all(row["configurationMapped"] for row in rows) else "passed",
               "cohort rows without a pinned agent/chart configuration identity: " + ", ".join(sorted(row["id"] for row in rows if not row["configurationMapped"])) if not all(row["configurationMapped"] for row in rows) else "every cohort row has a pinned identity"),
         _rule("quality clipping audit (E110)", "fired" if any(item["anchorPosition"] != "inside" for row in rows for item in row["evidence"]["clipAudit"]) else "passed", "saturation disclosed; domain violations block the build"),
+        _rule("full benchmark set (O36, O38)", "fired" if assembled.get("incomplete") else "passed",
+              "listed, not ranked: " + ", ".join(item["id"] for item in assembled["incomplete"]) if assembled.get("incomplete") else "every cohort configuration has every leaf"),
+        # E235: the missing-leaf rules stay defined but cannot fire on a ranked row while O36 holds.
+        _rule("missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226)", "fired" if any(row["summary"].coverage < 1.0 - 1e-9 for row in rows) else "vacuous",
+              "no ranked row has a missing leaf (O36)"),
+        _rule("provider-claim label denial (E233)", "fired" if any(provider_claimed(row) for row in rows) else "vacuous",
+              "competes, earns no label: " + ", ".join(sorted(row["id"] for row in rows if provider_claimed(row))) if any(provider_claimed(row) for row in rows) else "no row has a provider-claimed leaf"),
     ]
     return {
         "methodologyVersion": METHODOLOGY_VERSION,
@@ -1454,6 +1518,8 @@ def score(assembled: dict, frozen: dict) -> dict:
         "measuredOnlyPlanView": measured,
         "diagnostics": {
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
+            "frontierCodeCrossSource": frontiercode_cross_source(rows, assembled["cognition"]),
+            "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
             "omniscienceAbstentionSensitivity": _abstention_sensitivity(rows, per_row),
             "gdpvalLogisticSensitivity": _gdpval_logistic_sensitivity(rows, per_row),
@@ -2123,11 +2189,13 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
         raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
     blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
+    # E233: a provider-claimed row competes in every scenario but is never a candidate for a label.
+    claimed = {row["id"] for row in assembled["rows"] if provider_claimed(row)}
     labels = []
     for reference in frozen["barReferences"]:
         bar = _bar_reference(reference)
         # E186: a blocker is never a candidate.
-        candidates = [item for item in intervals.cheapest_above_bar(boxes, bar)["possibleCheapest"] if item not in blocked]
+        candidates = [item for item in intervals.cheapest_above_bar(boxes, bar)["possibleCheapest"] if item not in blocked | claimed]
         results = {}
         for candidate in candidates:  # interval rows are main-workload rows with a cost, so all are panel members
             result = scenarios.kernel_robust_cheapest(panel, candidate, reference["level"], seed, batch=batch)

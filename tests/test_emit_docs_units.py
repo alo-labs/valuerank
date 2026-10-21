@@ -331,3 +331,17 @@ def test_common_leaf_and_harness_texts():
     assert ed.harness_by_leaf_text(Facts) == "- **Harness by leaf (E227):** DeepSWE: Claude Code 1, Codex 1; Terminal-Bench: mini-SWE-agent 1; Bug Hunt: Claude Code 1."
     Facts.scores = {"models": []}
     assert ed.harness_by_leaf_text(Facts).endswith("Bug Hunt: none.")
+
+
+def test_gap_fill_and_incomplete_texts_without_rows():
+    """E234/O36: with no gap fill and no listed configuration the sentences say so or are omitted."""
+
+    class Facts:
+        v3 = {"incompleteEvidence": []}
+        scores = {"models": []}
+
+    assert ed.gap_fill_text({"rows": {}, "bases": {}}, Facts).endswith("no ranked row has a leaf from another party or the provider.")
+    assert ed.incomplete_text(Facts) == ""
+    Facts.v3 = {"incompleteEvidence": [{"id": "x", "name": "X", "missing": ["bugHunt"]}]}
+    Facts.scores = {"models": [{"id": "x", "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}]}
+    assert ed.incomplete_text(Facts).endswith("(O36, O38): X (an AA frontier family; no Bug Hunt Bench).")

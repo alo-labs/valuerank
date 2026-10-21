@@ -36981,11 +36981,12 @@
             "gpt-6.1-sol-medium",
             "gpt-6.1-sol-xhigh",
             "grok-4.7",
-            "mimo-v2-6-pro",
             "muse-spark-1-3",
             "qwen3.8-max"
           ],
-          "blockers": [],
+          "blockers": [
+            "mimo-v2-6-pro"
+          ],
           "unevaluable": [
             "claude-fable-5-1",
             "muse-wonder-full"
@@ -37140,14 +37141,7 @@
               "definiteCounterexample": "gemini-4-argon"
             },
             "mimo-v2-6-pro": {
-              "possible": "certified",
-              "possibleWitness": {
-                "row": "best corner",
-                "others": "worst corners"
-              },
-              "possibleBlockedBy": [],
-              "definite": "certified",
-              "definiteCounterexample": null
+              "status": "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
             },
             "gpt-6.1-sol-low": {
               "possible": "disproved",
@@ -37464,11 +37458,7 @@
                   "displayedMargin": 0.21205985120085558
                 },
                 "mimo-v2-6-pro": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -0.19568552159815056
+                  "status": "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
                 },
                 "gpt-6.1-sol-low": {
                   "confirmed": "disproved",
@@ -37695,11 +37685,7 @@
                   "displayedMargin": 8.158763585999601
                 },
                 "mimo-v2-6-pro": {
-                  "confirmed": "certified",
-                  "possible": "certified",
-                  "possibleCheapest": "certified",
-                  "witnessReferenceQuality": 47.359562085345,
-                  "displayedMargin": 7.751018213200595
+                  "status": "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
                 },
                 "gpt-6.1-sol-low": {
                   "confirmed": "certified",
@@ -37815,12 +37801,10 @@
                 }
               },
               "possibleCheapest": [
-                "mimo-v2-6-pro",
                 "gpt-6-luna"
               ],
               "confirmedCheapest": null,
               "uncheckedCheaperSiblings": {
-                "mimo-v2-6-pro": [],
                 "gpt-6-luna": [
                   "GPT-6 Luna (xhigh)",
                   "GPT-6 Luna (high)",
@@ -37829,9 +37813,9 @@
                   "GPT-6 Luna (non-reasoning)"
                 ]
               },
-              "possibleQualifierN": 23,
-              "confirmedQualifierN": 22,
-              "comparison": "compares 23 configurations that can qualify"
+              "possibleQualifierN": 22,
+              "confirmedQualifierN": 21,
+              "comparison": "compares 22 configurations that can qualify"
             },
             {
               "reference": {
@@ -37934,11 +37918,7 @@
                   "displayedMargin": -4.039107240645627
                 },
                 "mimo-v2-6-pro": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -4.446852613444634
+                  "status": "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
                 },
                 "gpt-6.1-sol-low": {
                   "confirmed": "disproved",
@@ -38412,6 +38392,230 @@
             1.0
           ],
           "status": "defined"
+        }
+      },
+      "frontierCodeCrossSource": {
+        "label": "FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)",
+        "panel": [
+          "claude-fable-5-1",
+          "claude-haiku-5-5",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "gemini-3.8-flash",
+          "gemini-4-argon",
+          "gpt-6-astra",
+          "gpt-6-luna",
+          "gpt-6.1-sol",
+          "grok-4.7"
+        ],
+        "excluded": [
+          "claude-haiku-5-5-high",
+          "claude-haiku-5-5-low",
+          "claude-haiku-5-5-max",
+          "claude-haiku-5-5-medium",
+          "claude-opus-5",
+          "claude-sonnet-5-5-high",
+          "claude-sonnet-5-5-low",
+          "claude-sonnet-5-5-medium",
+          "claude-sonnet-5-5-xhigh",
+          "deepseek-v4-pro",
+          "glm-5.3",
+          "gpt-5.6-luna",
+          "gpt-5.6-sol",
+          "gpt-6-sol",
+          "mimo-v2-6-pro",
+          "muse-spark-1-3",
+          "muse-wonder-full",
+          "qwen3.8-max"
+        ],
+        "tau": 0.7333333333333333,
+        "interval": [
+          0.4117647058823529,
+          1.0
+        ],
+        "status": "defined",
+        "meanOffset": 2.529696666666672,
+        "maxAbsOffset": 11.755800000000008,
+        "scale": "tested"
+      },
+      "gapFillSensitivity": {
+        "label": "gap-fill removal: each row's leaves from another party or the provider removed, the rest renormalised (E234; diagnostic)",
+        "rows": {
+          "gpt-6.1-sol-xhigh": [
+            "frontierCode"
+          ],
+          "gpt-6.1-sol-high": [
+            "frontierCode"
+          ],
+          "gpt-6.1-sol-medium": [
+            "frontierCode"
+          ],
+          "gpt-5.6-sol": [
+            "frontierCode"
+          ],
+          "gpt-6-sol": [
+            "frontierCode"
+          ],
+          "mimo-v2-6-pro": [
+            "deepswe"
+          ],
+          "gpt-6.1-sol-low": [
+            "frontierCode"
+          ],
+          "gpt-5.6-luna": [
+            "frontierCode"
+          ],
+          "claude-opus-5": [
+            "frontierCode"
+          ]
+        },
+        "bases": {
+          "api": {
+            "rankChanges": {
+              "panel": [
+                "claude-fable-5-1",
+                "claude-haiku-5-5",
+                "claude-haiku-5-5-high",
+                "claude-haiku-5-5-low",
+                "claude-haiku-5-5-max",
+                "claude-haiku-5-5-medium",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "claude-sonnet-5-5-high",
+                "claude-sonnet-5-5-low",
+                "claude-sonnet-5-5-medium",
+                "claude-sonnet-5-5-xhigh",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-astra",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "gpt-6.1-sol-high",
+                "gpt-6.1-sol-low",
+                "gpt-6.1-sol-medium",
+                "gpt-6.1-sol-xhigh",
+                "grok-4.7",
+                "mimo-v2-6-pro",
+                "muse-spark-1-3",
+                "qwen3.8-max"
+              ],
+              "excluded": [],
+              "changes": {
+                "claude-fable-5-1": 0,
+                "claude-haiku-5-5": 0,
+                "claude-haiku-5-5-high": 0,
+                "claude-haiku-5-5-low": 0,
+                "claude-haiku-5-5-max": 0,
+                "claude-haiku-5-5-medium": 0,
+                "claude-opus-5": 0,
+                "claude-opus-5-5": 1,
+                "claude-sonnet-5-5": 0,
+                "claude-sonnet-5-5-high": 0,
+                "claude-sonnet-5-5-low": 0,
+                "claude-sonnet-5-5-medium": 0,
+                "claude-sonnet-5-5-xhigh": 1,
+                "deepseek-v4-pro": 0,
+                "gemini-3.8-flash": 0,
+                "gemini-4-argon": -1,
+                "glm-5.3": 0,
+                "gpt-5.6-luna": -1,
+                "gpt-5.6-sol": -2,
+                "gpt-6-astra": 1,
+                "gpt-6-luna": 0,
+                "gpt-6-sol": -1,
+                "gpt-6.1-sol": -1,
+                "gpt-6.1-sol-high": -1,
+                "gpt-6.1-sol-low": -2,
+                "gpt-6.1-sol-medium": 0,
+                "gpt-6.1-sol-xhigh": 0,
+                "grok-4.7": 0,
+                "mimo-v2-6-pro": 6,
+                "muse-spark-1-3": 0,
+                "qwen3.8-max": 0
+              },
+              "maxAbsChange": 6,
+              "maxRow": "mimo-v2-6-pro"
+            }
+          },
+          "plan": {
+            "rankChanges": {
+              "panel": [
+                "claude-fable-5-1",
+                "claude-haiku-5-5",
+                "claude-haiku-5-5-high",
+                "claude-haiku-5-5-low",
+                "claude-haiku-5-5-max",
+                "claude-haiku-5-5-medium",
+                "claude-opus-5",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "claude-sonnet-5-5-high",
+                "claude-sonnet-5-5-low",
+                "claude-sonnet-5-5-medium",
+                "claude-sonnet-5-5-xhigh",
+                "deepseek-v4-pro",
+                "gemini-3.8-flash",
+                "gemini-4-argon",
+                "glm-5.3",
+                "gpt-5.6-luna",
+                "gpt-5.6-sol",
+                "gpt-6-astra",
+                "gpt-6-luna",
+                "gpt-6-sol",
+                "gpt-6.1-sol",
+                "gpt-6.1-sol-high",
+                "gpt-6.1-sol-low",
+                "gpt-6.1-sol-medium",
+                "gpt-6.1-sol-xhigh",
+                "grok-4.7",
+                "mimo-v2-6-pro",
+                "muse-spark-1-3",
+                "qwen3.8-max"
+              ],
+              "excluded": [],
+              "changes": {
+                "claude-fable-5-1": -1,
+                "claude-haiku-5-5": 0,
+                "claude-haiku-5-5-high": -1,
+                "claude-haiku-5-5-low": -1,
+                "claude-haiku-5-5-max": -1,
+                "claude-haiku-5-5-medium": -1,
+                "claude-opus-5": 0,
+                "claude-opus-5-5": 1,
+                "claude-sonnet-5-5": 1,
+                "claude-sonnet-5-5-high": 0,
+                "claude-sonnet-5-5-low": 0,
+                "claude-sonnet-5-5-medium": 0,
+                "claude-sonnet-5-5-xhigh": 1,
+                "deepseek-v4-pro": 0,
+                "gemini-3.8-flash": 0,
+                "gemini-4-argon": 0,
+                "glm-5.3": 0,
+                "gpt-5.6-luna": -3,
+                "gpt-5.6-sol": -2,
+                "gpt-6-astra": 1,
+                "gpt-6-luna": 1,
+                "gpt-6-sol": 0,
+                "gpt-6.1-sol": 0,
+                "gpt-6.1-sol-high": -2,
+                "gpt-6.1-sol-low": 0,
+                "gpt-6.1-sol-medium": 0,
+                "gpt-6.1-sol-xhigh": -1,
+                "grok-4.7": 0,
+                "mimo-v2-6-pro": 8,
+                "muse-spark-1-3": 0,
+                "qwen3.8-max": 0
+              },
+              "maxAbsChange": 8,
+              "maxRow": "mimo-v2-6-pro"
+            }
+          }
         }
       },
       "anchorStability": {
@@ -48844,6 +49048,21 @@
         "rule": "quality clipping audit (E110)",
         "status": "passed",
         "detail": "saturation disclosed; domain violations block the build"
+      },
+      {
+        "rule": "full benchmark set (O36, O38)",
+        "status": "fired",
+        "detail": "listed, not ranked: deepseek-v4-flash, grok-4.6-xhigh, mimo-v2-6-flash, muse-spark-1-3-xhigh, muse-wonder"
+      },
+      {
+        "rule": "missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226)",
+        "status": "vacuous",
+        "detail": "no ranked row has a missing leaf (O36)"
+      },
+      {
+        "rule": "provider-claim label denial (E233)",
+        "status": "fired",
+        "detail": "competes, earns no label: mimo-v2-6-pro"
       },
       {
         "rule": "scenario outputs current (E72)",

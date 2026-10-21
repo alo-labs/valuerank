@@ -57,7 +57,7 @@ Values are rounded for display; ranks are competition ranks (equal values share 
 - **AA cost caveat**: AA states that its published cost omits a pricing term.
 - **API-cost fallback**: no admitted Plan route; the Plan ranking uses the API cost (O13).
 
-Not ranked (17 roster models): Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Grok 4.6, Grok 4.6 (xhigh), Kimi K3, MiMo-V2.6-Flash, Muse Spark 1.2, Muse Spark 1.3 (xhigh), Muse Wonder. Reasons are listed in [scores.md](scores.md#not-ranked).
+Not ranked (17 roster models): Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, DeepSeek V4 Flash, GLM-5.2, GLM-5.3 Flash, GPT-5.5, Gemini 3.5 Flash, Gemini 3.6 Flash, Gemini 3.7 Flash, Grok 4.6, Grok 4.6 (xhigh), Kimi K3, MiMo-V2.6-Flash, Muse Spark 1.2, Muse Spark 1.3 (xhigh), Muse Wonder. Reasons are listed in [scores.md](scores.md#not-ranked). Of these, 5 qualify for the cohort but are listed, not ranked, because a benchmark is still missing after a logged search (O36, O38): DeepSeek V4 Flash (no FrontierCode 1.1); Grok 4.6 (xhigh) (no FrontierCode 1.1); MiMo-V2.6-Flash (an AA frontier family; no Bug Hunt Bench); Muse Spark 1.3 (xhigh) (no FrontierCode 1.1); Muse Wonder (no FrontierCode 1.1).
 
 ### What the evidence supports
 

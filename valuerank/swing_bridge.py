@@ -29,9 +29,9 @@ TOKEN_FIELDS = ("intelligenceIndexEvaluations", "intelligenceIndexCost", "canoni
 CLASSES = {
     "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords",)},
     "tokenUse": {"fields": TOKEN_FIELDS, "documents": ("codingAgents", "costCharts")},
-    "benchmarkRecord": {"fields": "*", "documents": ("deepswe", "bugHunt", "tb4", "leafEvidence")},
+    "benchmarkRecord": {"fields": "*", "documents": ("deepswe", "bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode")},
     "planEvidence": {"fields": (), "documents": ("planRoutes",)},
-    "cohort": {"fields": (), "documents": ("configurationMap",)},
+    "cohort": {"fields": (), "documents": ("configurationMap", "frontierCapture", "roster")},
 }
 ORDER = tuple(CLASSES)
 METHOD_STEP = "method and clock"
@@ -43,8 +43,8 @@ def _classified(documents: dict) -> None:
     """Every evidence document belongs to exactly one class (the snapshot is split by field)."""
 
     owned = {key for spec in CLASSES.values() for key in spec["documents"]} | {"snapshot"}
-    if set(documents) != owned:
-        raise ValueError(f"unclassified evidence documents: {sorted(set(documents) ^ set(owned))}")
+    if set(documents) - owned:
+        raise ValueError(f"unclassified evidence documents: {sorted(set(documents) - owned)}")
 
 
 def _pages(documents: dict) -> dict:
@@ -61,7 +61,8 @@ def apply_class(state: dict, current: dict, name: str) -> dict:
     state = copy.deepcopy(state)
     spec = CLASSES[name]
     for key in spec["documents"]:
-        state["documents"][key] = copy.deepcopy(current["documents"][key])
+        if key in current["documents"]:
+            state["documents"][key] = copy.deepcopy(current["documents"][key])
     pages, new_pages = _pages(state["documents"]), _pages(current["documents"])
     for slug, page in pages.items():
         if slug not in new_pages:
@@ -86,7 +87,7 @@ def changed_fields(previous: dict, current: dict) -> dict:
 
     changes = {name: [] for name in ORDER}
     for name, spec in CLASSES.items():
-        changes[name] += [key for key in spec["documents"] if previous["documents"][key] != current["documents"][key]]
+        changes[name] += [key for key in spec["documents"] if previous["documents"].get(key) != current["documents"].get(key)]
     old_pages, new_pages = _pages(previous["documents"]), _pages(current["documents"])
     for slug in sorted(set(old_pages) & set(new_pages)):
         for field in sorted(set(old_pages[slug]) | set(new_pages[slug])):
