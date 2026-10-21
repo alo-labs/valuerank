@@ -1061,7 +1061,7 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
-| partial component flag (E37) | fired | AA declined- or missing-task markers |
+| partial component flag (E37) | fired | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |

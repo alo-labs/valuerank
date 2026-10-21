@@ -492,3 +492,11 @@ def test_a_report_starting_before_the_window_is_flagged_window_straddling():
     (pooled,) = pr.measurement_objects(base, TODAY, window)
     assert pooled["reportIds"] == ["i", "s"] and pooled["windowStraddlingReportIds"] == ["s"]
     assert pr.straddles(straddler, None) is False and pr.straddles({"id": "x"}, window) is False
+
+
+def test_the_report_window_includes_both_end_days():
+    """E213: the window is the closed day interval [V - 30 days, V]: day 30 before the cutoff is in, day 31 is out."""
+
+    window = {"start": "2026-09-21", "end": "2026-10-21"}
+    assert pr.in_window({"id": "a", "reportDate": "2026-09-21"}, window) and pr.in_window({"id": "b", "reportDate": "2026-10-21"}, window)
+    assert not pr.in_window({"id": "c", "reportDate": "2026-09-20"}, window)

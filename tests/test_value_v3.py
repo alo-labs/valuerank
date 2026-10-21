@@ -1361,6 +1361,17 @@ def test_cost_evidence_is_at_most_45_days_old_at_the_cutoff():
         v.assemble(CONFIGURATIONS, documents(priceRecords={"records": [], "observedAt": "2026-08-01T00:00:00Z"}), release_day=DAY)
 
 
+def test_the_chart_capture_and_model_pages_describe_one_aa_state():
+    """E217: the chart that defines the cohort and the model-page snapshot are at most 7 days apart."""
+
+    pages = {**documents()["snapshot"], "capturedAt": "2026-10-17T19:25:14Z"}
+    near = documents(snapshot=pages, frontierCapture={"captured_at": "2026-10-10T19:25:14Z", "points": []})
+    assert v.assemble(CONFIGURATIONS, near, release_day=DAY)["rows"]
+    far = documents(snapshot=pages, frontierCapture={"captured_at": "2026-10-10T19:25:13Z", "points": []})
+    with pytest.raises(ValueError, match=r"more than 7 days apart \(E217\)"):
+        v.assemble(CONFIGURATIONS, far, release_day=DAY)
+
+
 def test_the_quartile_bars_need_four_configurations():
     """E215: with fewer than four, the quartile positions coincide with the headline's, so only the headline is pinned."""
 

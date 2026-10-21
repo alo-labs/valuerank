@@ -977,3 +977,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - 6 (adopted): the quality-side Terminal-Bench leaf is tbench.ai's independent run; AA's Terminal-Bench executions are only in the cost basket, a cost-side exposure.
 - R1, R2 (rejected): repeats of I8 L4 / I10 R5 without a new argument; methodology.md is the short published version.
 - R3 (adopted, modified): the counts paragraph now also gives R_W (33), the admission reference panel (33), the anchor references (33) and the common-workload panel (34).
+
+## Internal review I13 (Claude Sonnet 5.5, effort low, on r72) — adopted, modified or rejected
+- M1 (adopted; Q1 answered from the code): a row is scored on W, with W's anchors, when every admitted component has a published cost whatever its E209 status (`basket.row_cost`); FullCost also needs every component confirmed complete. Claude Fable 5.1 is scored on W at $11,580.62 (API rank 30), flagged "partial component", counted in the clip-gate n and the common-workload panel (its 34th row), and kept out of R_W, P_K and the anchor references. The manifest's partial-component rule now names the Index-reconstruction cause too.
+- M2 (adopted): the report window is the closed day interval [V − 30 days, V], both end days included (`plan_routes.in_window`); boundary test added (day 30 in, day 31 out).
+- M3 (adopted as E217): the chart capture and the model-page snapshot must be at most 7 days apart, or `assemble` fails; today they are 37 minutes apart (18:48:27Z and 19:25:14Z on 2026-10-17).
+- M4 (rejected; the reviewer's arithmetic is wrong): 2.74 is the value-point loss per cost doubling, 100 × 0.25 × ln 2 ÷ ln(19,978.30 / 35.76) = 17.33 / 6.33; the quality-point offset is 3.65. The label is correct.
+- L1 (rejected): E numbers are assigned in adoption order; a renumbering takes a new, later number (E198's outcome became E202), so "later-numbered" and "later-adopted" coincide.
+- L2 (adopted): capture timestamps are printed instead of dates.
+- L3 (adopted): an exact tie at a vertex is resolved at capture by hovering and recorded in the capture; otherwise the vertex check fails.
+- R1 (rejected): a transfer-multiplier grid is an analyst assumption about the Opus 5.5 donor's error, which O35 just declined in its Fable form; the transfers-off stratum already shows the Plan ranking without any transfer.
+- R2 (rejected): E208 forbids AA's Index-wide shares as the basket's demand, and a sensitivity built on them would carry the same mismatch.

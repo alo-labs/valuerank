@@ -26,7 +26,7 @@ import json
 import math
 import statistics
 import sys
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 from valuerank import anchors as anchor_math
@@ -381,6 +381,11 @@ def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked
 
 
 COST_EVIDENCE_MAX_AGE_DAYS = 45
+CAPTURE_GAP_MAX_DAYS = 7
+
+
+def _instant(stamp: str) -> datetime:
+    return datetime.fromisoformat(stamp.replace("Z", "+00:00"))
 
 
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
@@ -409,6 +414,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     for name, stamp in (("AA model-page snapshot", documents["snapshot"].get("capturedAt")), ("price records", documents["priceRecords"].get("observedAt"))):
         if stamp and (release_day - date.fromisoformat(stamp[:10])).days > COST_EVIDENCE_MAX_AGE_DAYS:
             raise ValueError(f"the {name} ({stamp[:10]}) is more than {COST_EVIDENCE_MAX_AGE_DAYS} days old at the release cutoff {release_day} (E216)")
+    # E217: the model pages (costs and AA-run leaves) and the chart that defines the cohort describe one AA state.
+    chart, pages_at = (documents.get("frontierCapture") or {}).get("captured_at"), documents["snapshot"].get("capturedAt")
+    if chart and pages_at and abs(_instant(chart) - _instant(pages_at)).total_seconds() > CAPTURE_GAP_MAX_DAYS * 86400:
+        raise ValueError(f"the AA chart capture ({chart}) and model-page snapshot ({pages_at}) are more than {CAPTURE_GAP_MAX_DAYS} days apart (E217)")
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
     # O33: several efforts of one family can be ranked; only unranked cheaper configurations are listed as unchecked.
@@ -1202,7 +1211,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
         _rule("quality influence flag (E126)", "fired" if influence["api"]["qualityFlag"] or influence["plan"]["qualityFlag"] else "passed", "quality not discriminating (cost share > 90%); informational only"),
         _rule("subset scoring (O17)", "fired" if any(row["cost"]["subset"] for row in rows) else "vacuous", "subset rows scored on their own workload and anchors"),
-        _rule("partial component flag (E37)", "fired" if any(row["cost"]["partialComponents"] for row in rows) else "vacuous", "AA declined- or missing-task markers"),
+        _rule("partial component flag (E37)", "fired" if any(row["cost"]["partialComponents"] for row in rows) else "vacuous", "AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209)"),
         _rule("route dominance filter (E88)", "fired" if any(row["routeSelection"]["dominated"] for row in rows) else "vacuous", "certifiably dearer routes set aside"),
         _rule("Plan exploratory label (E61)", "fired" if yield_["exploratory"] else "passed", "fewer than half of Plan rows have an identified M_W"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
