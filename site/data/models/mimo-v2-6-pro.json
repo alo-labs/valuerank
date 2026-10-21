@@ -7,35 +7,27 @@
   "selectedPage": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
   "summary": {
     "rank": {
-      "api": 9,
-      "plan": 27
+      "api": 3,
+      "plan": 17
     },
     "overall": {
-      "api": 54.16851631729846,
-      "plan": 48.43409992049082
+      "api": 57.93178677408629,
+      "plan": 52.19737037727865
     },
-    "quality": 50.09288635616183,
-    "qualityRank": 26,
+    "quality": 55.11058029854559,
+    "qualityRank": 18,
     "coverage": {
-      "pct": 60.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "DeepSWE v1.1",
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
-      "provisional": true,
-      "provisionalReasons": [
-        "coverage 60% below 70%",
-        "observed SWE weight 20% below 40%",
-        "DeepSWE v1.1 missing"
-      ]
+      "missing": [],
+      "provisional": false,
+      "provisionalReasons": []
     },
     "grade": "measured",
     "rankingEligible": true,
     "exclusionReasons": [],
     "flags": [
-      "Subset cost: scored on its own workload; cross-workload ordering not identified",
-      "Provisional quality: coverage 60% below 70%; observed SWE weight 20% below 40%; DeepSWE v1.1 missing"
+      "Subset cost: scored on its own workload; cross-workload ordering not identified"
     ]
   },
   "dimensions": [
@@ -44,15 +36,18 @@
       "label": "DeepSWE v1.1",
       "category": "Software engineering",
       "weightPct": 22.5,
-      "value": null,
+      "value": 71.9,
       "decimals": 1,
       "unit": "% pass@1",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 71.9,
+      "source": {
+        "name": "Xiaomi",
+        "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+      },
+      "observedAt": "2026-10-17T19:26:26Z",
+      "evaluatedVariant": "MiMo-V2.6-Pro-RL (released checkpoint; single reasoning mode)",
       "note": null,
-      "grade": "missing"
+      "grade": "claim"
     },
     {
       "key": "bugHunt",
@@ -74,7 +69,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.454153333333333,
@@ -92,18 +87,21 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 34.8484848484849,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 34.8484848484849,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",
@@ -411,8 +409,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 9,
-        "plan": 27
+        "api": 3,
+        "plan": 17
       }
     }
   ],

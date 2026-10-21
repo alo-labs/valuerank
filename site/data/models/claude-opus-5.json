@@ -7,22 +7,19 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5",
   "summary": {
     "rank": {
-      "api": 33,
-      "plan": 11
+      "api": 29,
+      "plan": 12
     },
     "overall": {
-      "api": 46.624419431304325,
-      "plan": 54.61156054640844
+      "api": 45.23089228345204,
+      "plan": 53.21803339855616
     },
-    "quality": 57.805130480631384,
-    "qualityRank": 17,
+    "quality": 55.947094283495005,
+    "qualityRank": 15,
     "coverage": {
-      "pct": 80.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "AA FrontierCode 1.1",
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -70,33 +67,39 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.4804,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 48.04,
+      "source": {
+        "name": "Cognition (FrontierCode's author)",
+        "url": "https://cognition.com/data/frontiercode-leaderboard/data.json"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "Claude Opus 5 (max), harness claude-code",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 48.989898989899,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 48.989898989899,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",
@@ -406,7 +409,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0125
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
@@ -415,7 +418,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.015
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -424,7 +427,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0234
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -433,7 +436,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.014
+        "frontier": 0.0
       }
     ],
     "plan": [
@@ -487,7 +490,7 @@
   "intervals": {
     "api": {
       "definite": "disproved",
-      "possible": "certified"
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -584,8 +587,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 33,
-        "plan": 11
+        "api": 29,
+        "plan": 12
       }
     }
   ],

@@ -163,9 +163,11 @@
       "valueRankModelId": "mimo-v2-6-flash",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
-      "primaryRankingGaps": [],
+      "primaryRankingGaps": [
+        "Incomplete benchmark evidence after an exhaustive search (O36): no Bug Hunt Bench"
+      ],
       "metricGap": null,
-      "rankStatus": "Primary ranked"
+      "rankStatus": "Unranked: incomplete benchmark evidence (O36)"
     },
     {
       "aaId": "gpt-6-luna",
@@ -786,7 +788,8 @@
       "configurationN": 1,
       "inRoster": true,
       "primaryRanked": true,
-      "deferred": false
+      "deferred": false,
+      "incompleteEvidence": false
     },
     {
       "family": "Claude Haiku 5.5",
@@ -794,7 +797,8 @@
       "configurationN": 2,
       "inRoster": true,
       "primaryRanked": true,
-      "deferred": false
+      "deferred": false,
+      "incompleteEvidence": false
     },
     {
       "family": "Claude Opus 5.5",
@@ -802,7 +806,8 @@
       "configurationN": 1,
       "inRoster": true,
       "primaryRanked": true,
-      "deferred": false
+      "deferred": false,
+      "incompleteEvidence": false
     },
     {
       "family": "Claude Sonnet 5.5",
@@ -810,7 +815,8 @@
       "configurationN": 1,
       "inRoster": true,
       "primaryRanked": true,
-      "deferred": false
+      "deferred": false,
+      "incompleteEvidence": false
     },
     {
       "family": "Gemini 4 Argon",
@@ -818,7 +824,8 @@
       "configurationN": 1,
       "inRoster": true,
       "primaryRanked": true,
-      "deferred": false
+      "deferred": false,
+      "incompleteEvidence": false
     },
     {
       "family": "GPT-6 Astra",
@@ -826,7 +833,8 @@
       "configurationN": 3,
       "inRoster": true,
       "primaryRanked": true,
-      "deferred": false
+      "deferred": false,
+      "incompleteEvidence": false
     }
   ],
   "missingNearFrontierIds": [
@@ -859,43 +867,50 @@
       "family": "GPT-6 Luna",
       "modelId": "gpt-6-luna",
       "selectedFrontierConfigurationN": 1,
-      "primaryRanked": true
+      "primaryRanked": true,
+      "incompleteEvidence": false
     },
     {
       "family": "Claude Haiku 5.5",
       "modelId": "claude-haiku-5-5",
       "selectedFrontierConfigurationN": 1,
-      "primaryRanked": true
+      "primaryRanked": true,
+      "incompleteEvidence": false
     },
     {
       "family": "MiMo-V2.6-Flash",
       "modelId": "mimo-v2-6-flash",
       "selectedFrontierConfigurationN": 1,
-      "primaryRanked": true
+      "primaryRanked": false,
+      "incompleteEvidence": true
     },
     {
       "family": "MiMo-V2.6-Pro",
       "modelId": "mimo-v2-6-pro",
       "selectedFrontierConfigurationN": 1,
-      "primaryRanked": true
+      "primaryRanked": true,
+      "incompleteEvidence": false
     },
     {
       "family": "GPT-6.1 Sol",
       "modelId": "gpt-6.1-sol",
       "selectedFrontierConfigurationN": 1,
-      "primaryRanked": true
+      "primaryRanked": true,
+      "incompleteEvidence": false
     },
     {
       "family": "Claude Opus 5.5",
       "modelId": "claude-opus-5-5",
       "selectedFrontierConfigurationN": 1,
-      "primaryRanked": true
+      "primaryRanked": true,
+      "incompleteEvidence": false
     },
     {
       "family": "Claude Sonnet 5.5",
       "modelId": "claude-sonnet-5-5",
       "selectedFrontierConfigurationN": 1,
-      "primaryRanked": true
+      "primaryRanked": true,
+      "incompleteEvidence": false
     }
   ],
   "metricGaps": [],

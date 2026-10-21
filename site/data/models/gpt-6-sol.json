@@ -7,21 +7,19 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-sol",
   "summary": {
     "rank": {
-      "api": 13,
-      "plan": 12
+      "api": 12,
+      "plan": 11
     },
     "overall": {
-      "api": 52.803644012483915,
-      "plan": 54.40267126085996
+      "api": 51.71870897905132,
+      "plan": 53.31773622742737
     },
-    "quality": 58.27519438516182,
-    "qualityRank": 16,
+    "quality": 56.82861434058503,
+    "qualityRank": 13,
     "coverage": {
-      "pct": 90.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "AA FrontierCode 1.1"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -69,34 +67,37 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.4927,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 49.27,
+      "source": {
+        "name": "Cognition (FrontierCode's author)",
+        "url": "https://cognition.com/data/frontiercode-leaderboard/data.json"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "GPT-6 Sol (max), harness codex",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 49.4,
+      "value": 43.9393939393939,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 49.4,
+      "normalized": 43.9393939393939,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "GPT-6 Sol (max) / Codex",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -430,17 +431,17 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0014,
-        "frontier": 0.032
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0003,
-        "top3": 0.0084,
-        "frontier": 0.0375
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -448,8 +449,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0026,
-        "frontier": 0.0584
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -457,8 +458,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0009,
-        "frontier": 0.0346
+        "top3": 0.0,
+        "frontier": 0.0
       }
     ],
     "plan": [
@@ -512,7 +513,7 @@
   "intervals": {
     "api": {
       "definite": "disproved",
-      "possible": "certified"
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -577,8 +578,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 13,
-        "plan": 12
+        "api": 12,
+        "plan": 11
       }
     }
   ],

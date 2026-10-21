@@ -22,8 +22,9 @@ def test_leaf_weights_sum_to_the_group_shares_and_to_100():
 
 def test_source_shares_split_aa_run_and_independent_weight():
     shares = q.source_shares()
-    assert shares["aa"] == pytest.approx(0.8)
-    assert shares["independent"] == pytest.approx(0.2)
+    # O37: Terminal-Bench is AA's own run, so only Bug Hunt is independent.
+    assert shares["aa"] == pytest.approx(0.9)
+    assert shares["independent"] == pytest.approx(0.1)
 
 
 def test_observation_bounds_are_clipped_to_the_domain():

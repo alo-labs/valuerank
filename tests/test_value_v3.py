@@ -33,6 +33,7 @@ def page(slug: str, cost_per_task: float, **fields) -> dict:
         "gdpval": 1500.0,
         "automationBenchPartialScore": 0.5,
         "frontierCode": 0.45,
+        "terminalBench40": 0.5,
         "lcr": 0.8,
         "hle": 0.3,
         "scicode": 0.4,
@@ -82,6 +83,12 @@ def documents(**overrides) -> dict:
              "identification": "point-identified", "valuationBasis": "release"},
         ]},
         "priceRecords": {"records": []},
+        # O36: the fixture rows carry every leaf; b and c take their missing leaves from supplements.
+        "leafEvidence": {"supplements": [
+            {"modelId": "b", "leaf": "bugHunt", "value": 40.0, "unit": "fixedOf105", "sourceType": "independent"},
+            {"modelId": "c", "leaf": "bugHunt", "value": 30.0, "unit": "fixedOf105", "sourceType": "independent"},
+            {"modelId": "c", "leaf": "deepswe", "value": 50.0, "unit": "percent", "sourceType": "model_provider_claim"},
+        ], "searches": []},
     }
     base.update(overrides)
     return base
@@ -94,6 +101,22 @@ CONFIGURATIONS = [
 ]
 
 
+def filled(*model_ids, leaves=("deepswe", "bugHunt")) -> dict:
+    """O36: fixture rows outside a, b and c take their missing SWE leaves from supplements."""
+
+    base = documents()["leafEvidence"]
+    extra = [{"modelId": model_id, "leaf": leaf, "value": 50.0, "unit": "percent" if leaf != "bugHunt" else "fixedOf105", "sourceType": "independent"}
+             for model_id in model_ids for leaf in leaves]
+    return {**base, "supplements": base["supplements"] + extra}
+
+
+def searched(*model_ids) -> dict:
+    """O36: an exhaustive search logged for every leaf of the given fixture rows, so incomplete rows are listed, not errors."""
+
+    base = documents()["leafEvidence"]
+    return {**base, "searches": [{"modelId": model_id, "leaf": leaf.key, "searchedOn": DAY.isoformat()} for model_id in model_ids for leaf in q.LEAVES]}
+
+
 def assembled(**overrides):
     return v.assemble(CONFIGURATIONS, documents(**overrides), release_day=DAY)
 
@@ -104,10 +127,13 @@ def test_leaf_evidence_uses_exact_configurations_only():
     evidence = v.leaf_evidence("claude-opus-5-5", "max", model, {"scorePct": 70.0, "effort": "max", "scorePrecision": 0.1}, tb4, {"matched": True, "effort": "max", "fixedOf105": 52.0})
     observations = evidence["observations"]
     assert set(observations) == {leaf.key for leaf in q.LEAVES}
-    assert observations["deepswe"].half_width == pytest.approx(0.05) and observations["terminalBench"].z == 60.0
+    # O37: AA's own Terminal-Bench 4.0 run is the leaf; tbench.ai fills a gap only.
+    assert observations["deepswe"].half_width == pytest.approx(0.05) and observations["terminalBench"].z == 50.0
     assert observations["omniscience"].z == pytest.approx(65.0)
     assert evidence["provenance"]["omniscience"]["indexFromRates"] == pytest.approx(30.0)
-    assert evidence["provenance"]["terminalBench"]["agent"] == "Terminus 2"
+    assert evidence["provenance"]["terminalBench"]["agent"] == "mini-SWE-agent"
+    gap = v.leaf_evidence("claude-opus-5-5", "max", {**model, "terminalBench40": None}, None, tb4, None)
+    assert gap["observations"]["terminalBench"].z == 60.0 and gap["provenance"]["terminalBench"]["agent"] == "Terminus 2"
     # A different effort never transfers; absent fields stay missing.
     sparse = v.leaf_evidence("x", "max", {"gdpval": None}, {"scorePct": 70.0, "effort": "high"}, [], None)
     assert sparse["observations"] == {} and sparse["clipAudit"] == []
@@ -137,14 +163,14 @@ def test_assemble_admission_subset_rows_and_plan_costs():
     assert [entry["role"] for entry in catalog.values()] == ["main", "subset"]
     with pytest.raises(ValueError, match="missing from the pinned snapshot"):
         v.assemble([{"id": "z", "name": "Z", "aaSlug": "z-max"}], documents(), release_day=DAY)
-    unmapped = v.assemble([{"id": "z", "name": "Z", "aaSlug": "a-max"}], documents(), release_day=DAY)
+    unmapped = v.assemble([{"id": "z", "name": "Z", "aaSlug": "a-max"}], documents(leafEvidence=filled("z")), release_day=DAY)
     assert unmapped["rows"][0]["configurationMapped"] is False and basket.CODING_AGENT_INDEX not in unmapped["rows"][0]["components"]
 
 
 def test_workload_catalog_skips_rows_without_any_cost():
-    result = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), {"model": {"slug": "c-max"}}]})
-    rows = {row["id"]: row for row in result["rows"]}
-    assert rows["c"]["cost"]["workload"] is None
+    result = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), {"model": {"slug": "c-max"}}]}, leafEvidence=searched("c"))
+    # O36: a page without leaves leaves the configuration incomplete, so it is listed, not ranked.
+    assert [item["id"] for item in result["incomplete"]] == ["c"] and {row["id"] for row in result["rows"]} == {"a", "b"}
     assert len(v.workload_catalog(result)) == 1
 
 
@@ -155,9 +181,9 @@ def test_freeze_anchors_and_bar_reference():
     assert main["role"] == "main" and main["anchors"]["api"]["referenceIds"] == ["a", "b"]
     subset = next(entry for entry in frozen["workloads"].values() if entry["role"] == "subset")
     assert subset["anchors"]["api"]["referenceIds"] == ["a", "b", "c"]
-    # E192: the bar is the lower-median displayed quality of the non-provisional rows (a 58.28 and b 64.38; c is provisional).
+    # E192: the bar is the lower-median displayed quality of the population (c 49.36, a 57.45, b 60.31; O36 makes every row complete).
     assert frozen["barReferences"][0]["id"] == v.BAR_ID and frozen["barReferences"][0]["levelConfiguration"] == "a"
-    assert frozen["barReferences"][0]["level"] == pytest.approx(58.2804, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b"]
+    assert frozen["barReferences"][0]["level"] == pytest.approx(57.4524, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b", "c"]
     assert frozen["anchorPolicy"]["policyId"] == "complete-evidence-panel" and main["anchorStatus"] == "frozen"
     # E160: the main workload needs at least two complete-evidence references.
     lone = v.assemble(CONFIGURATIONS[:1], documents(), release_day=DAY)
@@ -231,8 +257,9 @@ def test_score_ranks_gates_disclosures_and_intervals():
     assert manifest["subset scoring (O17)"] == "fired" and manifest["Plan exploratory label (E61)"] == "fired"
     assert output["measuredOnlyPlanView"]["rows"]["b"]["status"] == "measured, target-workload identified"
     assert output["measuredOnlyPlanView"]["rows"]["c"]["status"] == "no measured route"
-    assert output["diagnostics"]["groupDrift"]["status"] == diagnostics.INSUFFICIENT_PANEL
-    assert output["diagnostics"]["qualityDispersion"]["weightedSpread"]["status"] == diagnostics.INSUFFICIENT_PANEL
+    # O36: every fixture row is complete, so both panel statistics are estimable.
+    assert output["diagnostics"]["groupDrift"]["status"] == "estimated"
+    assert output["diagnostics"]["qualityDispersion"]["weightedSpread"]["status"] == "estimated"
     assert manifest["configuration map coverage"] == "passed"
     mapping = documents()["configurationMap"]
     del mapping["rows"]["c"]
@@ -261,9 +288,11 @@ def test_score_manifest_branches_and_unevaluable_bars():
     output = v.score(result, tight)
     manifest = {item["rule"]: item["status"] for item in output["manifest"]}
     assert output["gates"]["hold"] is True and manifest["clip gate (E20)"] == "fired"
-    zero_quality = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5, **{key: None for key in (
-        "gdpval", "automationBenchPartialScore", "frontierCode", "lcr", "hle", "scicode", "critpt", "omniscience")})]},
-        deepswe={"configurations": []}, bugHunt={"models": []})
+    # O36 keeps leafless rows out of the cohort; the scoring path still handles one defensively.
+    zero_quality = assembled()
+    row = next(item for item in zero_quality["rows"] if item["id"] == "c")
+    row["evidence"] = {**row["evidence"], "observations": {}}
+    row["summary"] = q.summarize({})
     output = v.score(zero_quality, v.freeze(zero_quality, frozen_at="d"))
     row_c = next(row for row in output["rows"] if row["id"] == "c")
     assert row_c["quality"]["status"] == "quality not scoreable — no observed leaves" and row_c["api"]["value"] is None
@@ -313,8 +342,8 @@ def test_cost_influence_flag_fires_when_quality_dominates():
 def test_quality_agreement_and_drift_on_real_panels():
     result, frozen = scored()
     agreement = v._quality_agreement(result["rows"])
-    assert agreement["panel"] == []  # no synthetic row has both independent leaves
-    assert v._group_drift(result["rows"])["panel"] == []
+    assert agreement["panel"] == ["a", "b", "c"]  # O36/O37: every row has Bug Hunt, the one independent leaf
+    assert v._group_drift(result["rows"])["panel"] == ["a", "b", "c"]
 
     def row(identifier, displayed, bug, tb):
         observations = {"bugHunt": q.Observation(bug), "terminalBench": q.Observation(tb)}
@@ -331,7 +360,7 @@ def agreement_row(identifier, bug, tb, **aa):
 
 def test_quality_substitution_agreement_holds_cost_fixed_and_swaps_quality():
     rows = [agreement_row("x", 40.0, 40.0), agreement_row("y", 50.0, 50.0), agreement_row("z", 60.0, 60.0), agreement_row("solo", 90.0, 90.0)]
-    del rows[3]["evidence"]["observations"]["terminalBench"]  # off the matched panel
+    del rows[3]["evidence"]["observations"]["bugHunt"]  # off the matched panel (Bug Hunt is the one independent leaf, O37)
     # Displayed value orders z > y > x on both bases; with Q_ind swapped in, x's cheap cost puts it first on the Plan basis.
     per_row = {
         "x": {"api": {"value": 10.0, "costScore": 50.0}, "plan": {"value": 10.0, "costScore": 100.0}},
@@ -353,10 +382,11 @@ def test_disjoint_evidence_agreement_compares_aa_only_with_independent_only_qual
         agreement_row("z", 60.0, 60.0, deepswe=70.0, omniscience=70.0),
         agreement_row("none", 70.0, 70.0),  # no AA-executed leaf: left out of the panel
     ]
+    del rows[3]["evidence"]["observations"]["terminalBench"]  # Terminal-Bench is AA's run since O37
     result = v._disjoint_agreement(rows)
     assert result["panel"] == ["x", "y", "z"] and result["excluded"] == ["none"] and result["tau"] == pytest.approx(1.0)
     assert result["label"].startswith("disjoint-evidence agreement (restricted evidence comparison")
-    assert result["retainedLeaves"]["independent"] == {"bugHunt": 50.0, "terminalBench": 50.0}
+    assert result["retainedLeaves"]["independent"] == {"bugHunt": 100.0}
     assert set(result["retainedLeaves"]["aaExecuted"]) == {leaf.key for leaf in q.LEAVES if leaf.source == "aa"}
 
 
@@ -366,9 +396,11 @@ def test_policy_cohort_bar_is_a_sensitivity_over_frontier_families():
     result, frozen = scored()
     policy = v.policy_cohort_bar(result, frozen)
     assert policy["status"] == "evaluated" and policy["bar"]["id"] == v.POLICY_BAR_ID and policy["api"]["status"] == "certified"
-    result["rows"][1]["frontierFamily"] = False
+    for row in result["rows"][1:]:
+        row["frontierFamily"] = False
     assert v.policy_cohort_bar(result, frozen)["status"].startswith("unavailable") and v.frontier_anchor_diagnostic(result, frozen, {})["bar"]["status"].startswith("unavailable")
-    result["rows"][1]["frontierFamily"] = True
+    for row in result["rows"][1:]:
+        row["frontierFamily"] = True
     for row in result["rows"]:
         row["cost"] = dict(row["cost"], fullCost=False)
     assert v.policy_cohort_bar(result, frozen)["api"] == {"status": "unevaluable"}
@@ -387,7 +419,8 @@ def test_freeze_with_fewer_than_two_population_rows_pins_no_bar():
     """E192: a bar met by one configuration compares nothing, so fewer than two population rows pin no bar."""
 
     result = assembled()
-    result["rows"][1]["summary"] = q.summarize({"deepswe": q.Observation(50.0)})  # b becomes provisional
+    for row in result["rows"][1:]:
+        row["summary"] = q.summarize({"deepswe": q.Observation(50.0)})  # b and c become provisional
     frozen = v.freeze(result, frozen_at="d")
     assert frozen["barReferences"] == [] and frozen["barPolicy"]["bars"] == [] and frozen["barPolicy"]["population"] == ["a"]
 
@@ -435,7 +468,8 @@ def test_bar_reference_selection_is_registered_and_outcome_independent(monkeypat
 
 
 def test_score_handles_rows_without_cost_and_empty_workloads():
-    result = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), {"model": {"slug": "c-max"}}]})
+    # c keeps every leaf (O36) but AA publishes no Index evaluation costs for it.
+    result = assembled(snapshot={"pages": [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5, intelligenceIndexEvaluations=[], intelligenceIndexCost=None)]})
     frozen = v.freeze(result, frozen_at="d")
     frozen["workloads"]["unused"] = json.loads(json.dumps(frozen["workloads"][result["mainWorkload"]]))
     output = v.score(result, frozen)
@@ -492,7 +526,7 @@ def test_harness_band_runs_a_named_s2_branch_when_a_configuration_has_two_agents
     stressed = panel["a"].leaves["bugHunt"]  # a's Bug Hunt z is 52 of 105 bugs, on the 0-100 scale
     observed = result["rows"][0]["evidence"]["observations"]["bugHunt"].z
     assert stressed.params == pytest.approx((observed - 3.0, observed + 3.0)) and stressed.target == scenarios.SPECIFICATION_STRESS
-    assert "bugHunt" not in panel["b"].leaves
+    assert panel["b"].leaves["bugHunt"].target == scenarios.SPECIFICATION_STRESS  # every Bug Hunt leaf, an O36 supplement included
     document = v.run_scenarios(result, frozen, n=50, seed=7)
     branch = document["namedBranches"][0]
     assert branch["results"]["api"]["stratum"] == "S2" and branch["results"]["plan"]["transfers"] == "off"
@@ -550,6 +584,8 @@ def write_world(root: Path) -> Path:
         "v3_configuration_map.json": documents()["configurationMap"],
         "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}, "searchCutoff": "2026-10-19"}},
         "price_records.json": documents()["priceRecords"],
+        "leaf_evidence.json": documents()["leafEvidence"],
+        "cognition_frontiercode.json": {"v1_1": {"data": {}}},
         "aa_frontier_capture.json": {"points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
         "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
@@ -622,7 +658,7 @@ def test_json_default_rejects_unknown_objects():
 
 
 def test_terminal_bench_same_harness_diagnostic():
-    """E125: the default-harness variant, harness-mixed rows and their agreement panel."""
+    """E125/O37: rows whose Terminal-Bench leaf is a tbench.ai gap fill are harness-mixed; AA's run is compared with tbench.ai."""
 
     tb4 = [
         {"model": "Opus 5.5 (max)", "agent": "Claude Code", "resolutionRatePct": 64.0},
@@ -633,28 +669,31 @@ def test_terminal_bench_same_harness_diagnostic():
     for model_id in ("claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"):
         evidence = v.leaf_evidence(model_id, "max", {}, None, tb4, None)
         rows.append({"id": model_id, "effort": "max", "evidence": evidence})
+    rows[0]["evidence"] = v.leaf_evidence("claude-opus-5-5", "max", {"terminalBench40": 0.6}, None, tb4, None)  # AA's own run
     result = v._tb_same_harness(rows, tb4)
-    assert result["harnessMixed"] == ["claude-opus-5-5"]
-    assert result["restricted"] == {"claude-sonnet-5-5": 50.0, "claude-haiku-5-5": 30.0}
-    assert result["agreement"]["panel"] == ["claude-haiku-5-5", "claude-sonnet-5-5"]
+    assert result["defaultHarness"] == "mini-SWE-agent" and result["harnessMixed"] == ["claude-haiku-5-5", "claude-sonnet-5-5"]
+    assert result["restricted"] == {"claude-opus-5-5": 64.0, "claude-sonnet-5-5": 50.0, "claude-haiku-5-5": 30.0}
+    assert result["agreement"]["panel"] == ["claude-haiku-5-5", "claude-opus-5-5", "claude-sonnet-5-5"]
 
 
 def test_abstention_sensitivity_and_demand_registry():
     pages = [page("a-max", 1.0, omniscience=-40.0), page("b-max", 4.0), page("c-max", 0.5)]
     del pages[2]["model"]["omniscience"]
-    result, frozen = scored(snapshot={"pages": pages})
+    # O36: c lacks the Omniscience leaf after a logged search, so it is listed, not scored.
+    result, frozen = scored(snapshot={"pages": pages}, leafEvidence=searched("c"))
+    assert result["incomplete"] == [{"id": "c", "name": "C", "effort": "max", "missing": ["omniscience"]}]
     output = v.score(result, frozen)
     sensitivity = output["diagnostics"]["omniscienceAbstentionSensitivity"]
-    assert sensitivity["rule"] == "z_pen = max(0, I)" and sensitivity["rankChanges"]["panel"] == ["a", "b", "c"]
+    assert sensitivity["rule"] == "z_pen = max(0, I)" and sensitivity["rankChanges"]["panel"] == ["a", "b"]
     rows = {row["id"]: row for row in output["rows"]}
     assert rows["a"]["quality"]["leaves"]["omniscience"]["abstentionPenalisedZ"] == 0.0
     assert rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == pytest.approx(0.5 * 0.6)
     # E181: the GDPval-AA logistic alternative is published per basis as rank changes on the common panel.
     logistic = output["diagnostics"]["gdpvalLogisticSensitivity"]
-    assert logistic["rule"].startswith("z = 100 / (1 + 10^((1600 - E) / 400))") and logistic["api"]["rankChanges"]["panel"] == ["a", "b", "c"]
+    assert logistic["rule"].startswith("z = 100 / (1 + 10^((1600 - E) / 400))") and logistic["api"]["rankChanges"]["panel"] == ["a", "b"]
     # E128: with every question correct nothing is unanswered (the conditional hallucination rate is undefined).
     perfect = [page("a-max", 1.0, omniscience=100.0, omniscienceAccuracy=1.0, omniscienceHallucinationRate=None), page("b-max", 4.0), page("c-max", 0.5, gdpval=None)]
-    perfect_rows = {row["id"]: row for row in v.score(*scored(snapshot={"pages": perfect}))["rows"]}
+    perfect_rows = {row["id"]: row for row in v.score(*scored(snapshot={"pages": perfect}, leafEvidence=searched("c")))["rows"]}
     assert perfect_rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == 0.0
     registry = rows["a"]["demandRegistry"]
     assert set(registry["populations"]) == {"intelligence-index", basket.CODING_AGENT_INDEX}
@@ -699,7 +738,8 @@ def test_deletion_branches_renormalise_the_remaining_observed_leaves():
     result, frozen = scored()
     sensitivity = {item["id"]: item for item in v.score(result, frozen)["diagnostics"]["deletionSensitivity"]}
     aa_out = sensitivity["leave-source-out:Artificial Analysis"]
-    assert aa_out["status"] == "not identifiable under the coverage rule" and aa_out["retainedNominalWeight"] == pytest.approx(0.2)
+    # O37: Bug Hunt is the only leaf another party runs, so leave-AA-out retains 10% of the nominal weight.
+    assert aa_out["status"] == "not identifiable under the coverage rule" and aa_out["retainedNominalWeight"] == pytest.approx(0.1)
     deep = sensitivity["leave-out:deepswe"]
     assert deep["status"] == "evaluated" and deep["retainedNominalWeight"] == pytest.approx(0.7)
     assert sensitivity["basket-scope"]["status"] == "evaluated" and sensitivity["basket-scope"]["retainedNominalWeight"] == pytest.approx(0.8667, abs=1e-4)
@@ -1079,7 +1119,8 @@ def gated_world_documents(gate_page, records):
     mapping["rows"]["d"] = {"coding-agent-index": "agent-d", "frontiercode": None, "itbench-aa": None}
     routes = documents()["planRoutes"]
     routes["routes"][0].update(identification="point-identified", valuationBasis="release")
-    return documents(snapshot={"pages": pages}, codingAgents=agents, configurationMap=mapping, planRoutes=routes, priceRecords={"records": records})
+    return documents(snapshot={"pages": pages}, codingAgents=agents, configurationMap=mapping, planRoutes=routes, priceRecords={"records": records},
+                     leafEvidence=filled("d"))
 
 
 def test_gate_effects_on_costs_anchors_routes_and_interval_labels(monkeypatch):
@@ -1203,11 +1244,12 @@ def test_scenario_labels_never_go_to_or_past_an_unsafe_blocker(monkeypatch):
     record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
     flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
     frozen = v.freeze(flagged, frozen_at="2026-10-19")
-    # At level 60 b and d can be cheapest, and the blocker a can reach the level and undercut both.
-    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 60.0, "levelConfiguration": "b", "rule": "x"}]
+    # At level 57.45 (inside the blocker a's reporting-precision bounds) b is cheapest whenever a falls short, and a can
+    # reach the level and undercut it; d falls short.
+    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 57.45, "levelConfiguration": "b", "rule": "x"}]
     monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda *args, **kwargs: {"label": True, "reading": "supported"})
     (bar,) = v.bar_labels(flagged, frozen, seed=1, batch=20)
-    assert sorted(bar["candidates"]) == ["b", "d"]
+    assert sorted(bar["candidates"]) == ["b"]
     assert all(result == {"label": False, "reading": v.BLOCKER_UNRESOLVED} for result in bar["candidates"].values())
     boxes = v.api_boxes(flagged)
     reference = v.intervals.Reference(v.BAR_ID, 0.0, 0.0)
@@ -1477,3 +1519,37 @@ def test_unverified_and_change_flagged_rows_compete_without_labels():
     b["routeSelection"] = {**b["routeSelection"], "selected": {**selected, "expiry": "possibly-superseded", "route": {**selected["route"], "changeDetectedOn": "2026-10-15"}}}
     plan = v.interval_outputs(result, frozen, "plan")
     assert "b" in plan.get("blockers", []) or plan["status"] != "evaluated"
+
+
+def test_supplements_fill_only_missing_leaves_in_source_order():
+    """O36: an independent result beats a provider claim; neither replaces a leaf the primary source has."""
+
+    documents_ = {"leafEvidence": {"supplements": [
+        {"modelId": "a", "leaf": "terminalBench", "value": 40.0, "unit": "percent", "sourceType": "model_provider_claim", "url": "p"},
+        {"modelId": "a", "leaf": "terminalBench", "value": 30.0, "unit": "percent", "sourceType": "independent", "url": "i"},
+        {"modelId": "a", "leaf": "bugHunt", "value": 52.0, "unit": "fixedOf105", "sourceType": "independent"},
+        {"modelId": "a", "leaf": "frontierCode", "value": 0.5, "unit": "fraction", "sourceType": "independent"}]},
+        "tb4": {"providerClaims": [{"cohortModelId": "b", "valuePct": 31.2, "eligibleForRanking": True, "claimId": "c1"},
+                                   {"cohortModelId": "z", "valuePct": 9.0, "eligibleForRanking": False}]}}
+    chosen = v.leaf_supplements(documents_)
+    assert chosen[("a", "terminalBench")]["url"] == "i" and chosen[("b", "terminalBench")]["artifact"] == "tb4" and ("z", "terminalBench") not in chosen
+    evidence = v.leaf_evidence("a", "max", {"slug": "a"}, None, [], None, chosen)
+    assert evidence["observations"]["terminalBench"].z == 30.0 and evidence["provenance"]["terminalBench"]["sourceType"] == "independent"
+    assert evidence["observations"]["bugHunt"].z == pytest.approx(100 * 52 / 105, abs=0.1) and evidence["observations"]["frontierCode"].z == 50.0
+
+
+def test_incomplete_configurations_are_listed_not_ranked_and_need_a_logged_search():
+    """O36: a configuration missing a leaf leaves the ranking; each missing leaf needs a search logged within 7 days."""
+
+    result = assembled()
+    assert all(len(row["evidence"]["observations"]) == len(q.LEAVES) for row in result["rows"])
+    incomplete = result["incomplete"]
+    missing = {(item["id"], leaf) for item in incomplete for leaf in item["missing"]}
+    searches = [{"modelId": model_id, "leaf": leaf, "searchedOn": "2026-10-19"} for model_id, leaf in missing]
+    v.check_leaf_searches(incomplete, {"leafEvidence": {"searches": searches}}, DAY)
+    if missing:
+        stale = [dict(item, searchedOn="2026-10-11") for item in searches]
+        with pytest.raises(ValueError, match=r"no exhaustive search for .* \(O36\)"):
+            v.check_leaf_searches(incomplete, {"leafEvidence": {"searches": stale}}, DAY)
+    with pytest.raises(ValueError, match=r"x: no exhaustive search for deepswe"):
+        v.check_leaf_searches([{"id": "x", "missing": ["deepswe"]}], {}, DAY)

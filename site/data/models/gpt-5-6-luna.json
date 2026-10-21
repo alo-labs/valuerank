@@ -7,21 +7,19 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-luna",
   "summary": {
     "rank": {
-      "api": 10,
+      "api": 9,
       "plan": 20
     },
     "overall": {
-      "api": 53.857278737630054,
-      "plan": 52.7910836988292
+      "api": 52.6658252461426,
+      "plan": 51.59963020734175
     },
-    "quality": 50.0122081693276,
-    "qualityRank": 27,
+    "quality": 48.423603514011,
+    "qualityRank": 24,
     "coverage": {
-      "pct": 90.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "AA FrontierCode 1.1"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -69,34 +67,37 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.3981,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 39.81,
+      "source": {
+        "name": "Cognition (FrontierCode's author)",
+        "url": "https://cognition.com/data/frontiercode-leaderboard/data.json"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "GPT-5.6 Luna (max), harness codex",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 17.3,
+      "value": 11.6161616161616,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 17.3,
+      "normalized": 11.6161616161616,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "GPT-5.6 Luna (max) / Codex",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -421,36 +422,36 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0018,
-        "top3": 0.0533,
-        "frontier": 0.5034
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0073,
-        "top3": 0.074,
-        "frontier": 0.4989
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.9919
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0048,
-        "top3": 0.094,
-        "frontier": 0.4454
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.002,
-        "top3": 0.0537,
-        "frontier": 0.5018
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
       }
     ],
     "plan": [
@@ -503,7 +504,7 @@
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
+      "definite": "certified",
       "possible": "certified"
     },
     "plan": null
@@ -601,7 +602,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 10,
+        "api": 9,
         "plan": 20
       }
     }

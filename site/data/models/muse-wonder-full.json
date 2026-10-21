@@ -14,15 +14,12 @@
       "api": null,
       "plan": null
     },
-    "quality": 67.74268416297181,
-    "qualityRank": 1,
+    "quality": 64.38987470411483,
+    "qualityRank": 3,
     "coverage": {
-      "pct": 80.0,
+      "pct": 100.0,
       "costAvailable": false,
-      "missing": [
-        "AA FrontierCode 1.1",
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -72,33 +69,39 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.448865666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 44.8865666666667,
+      "source": {
+        "name": "Artificial Analysis",
+        "url": "https://artificialanalysis.ai/models/muse-wonder-full"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "Muse Wonder Full (Max)",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 57.07070707070711,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 57.07070707070711,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",

@@ -7,21 +7,19 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
   "summary": {
     "rank": {
-      "api": 24,
-      "plan": 13
+      "api": 19,
+      "plan": 16
     },
     "overall": {
-      "api": 50.71604158301379,
-      "plan": 53.76697898504606
+      "api": 49.51138390105855,
+      "plan": 52.56232130309082
     },
-    "quality": 45.35503171899917,
-    "qualityRank": 33,
+    "quality": 43.74882147639219,
+    "qualityRank": 29,
     "coverage": {
-      "pct": 90.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -71,7 +69,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.45471,
@@ -89,18 +87,21 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 29.292929292929298,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 29.292929292929298,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",
@@ -418,16 +419,16 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1768
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0002,
-        "top3": 0.0023,
-        "frontier": 0.1443
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0007
       },
       {
         "stratum": "S1",
@@ -436,7 +437,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.2193
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -445,7 +446,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1774
+        "frontier": 0.0
       }
     ],
     "plan": [
@@ -499,7 +500,7 @@
   "intervals": {
     "api": {
       "definite": "disproved",
-      "possible": "certified"
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -532,8 +533,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 24,
-        "plan": 13
+        "api": 19,
+        "plan": 16
       }
     }
   ],

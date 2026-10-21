@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/glm-5-3",
   "summary": {
     "rank": {
-      "api": 34,
-      "plan": 34
+      "api": 27,
+      "plan": 28
     },
     "overall": {
-      "api": 46.32629339052936,
-      "plan": 42.66110229363312
+      "api": 46.33523278446876,
+      "plan": 42.67004168757252
     },
-    "quality": 52.09441344290625,
-    "qualityRank": 22,
+    "quality": 52.10633263482545,
+    "qualityRank": 20,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -67,7 +67,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.400752,
@@ -85,19 +85,19 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 41.8,
+      "value": 41.9191919191919,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 41.8,
+      "normalized": 41.9191919191919,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "GLM-5.3 (max) / Claude Code",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -528,8 +528,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 34,
-        "plan": 34
+        "api": 27,
+        "plan": 28
       }
     }
   ],

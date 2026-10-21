@@ -45,10 +45,10 @@
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes."
   },
   "identificationYield": {
-    "rows": 37,
+    "rows": 32,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 37,
+    "unidentified": 32,
     "exploratory": true
   },
   "routes": [
@@ -376,7 +376,7 @@
       "slug": "claude-fable-5-1",
       "name": "Claude Fable 5.1",
       "rank": {
-        "api": 30,
+        "api": 24,
         "plan": 22
       },
       "apiUsd": 11580.618526030545,
@@ -392,7 +392,7 @@
         "routeId": "claude-max5x-fable51-semianalysis",
         "costUsd": 909.7108033016924,
         "costScore": 26.89354685068565,
-        "value": 51.91216172586273,
+        "value": 51.47117687737787,
         "rank": 4
       }
     },
@@ -400,8 +400,8 @@
       "slug": "claude-haiku-5-5",
       "name": "Claude Haiku 5.5",
       "rank": {
-        "api": 24,
-        "plan": 13
+        "api": 19,
+        "plan": 16
       },
       "apiUsd": 292.07481065705014,
       "planUsd": 4.958825308269103,
@@ -420,8 +420,8 @@
       "slug": "claude-haiku-5-5-high",
       "name": "Claude Haiku 5.5 (high)",
       "rank": {
-        "api": 23,
-        "plan": 17
+        "api": 20,
+        "plan": 21
       },
       "apiUsd": 181.3464586928498,
       "planUsd": 3.0788872443607778,
@@ -440,8 +440,8 @@
       "slug": "claude-haiku-5-5-low",
       "name": "Claude Haiku 5.5 (low)",
       "rank": {
-        "api": 27,
-        "plan": 24
+        "api": 22,
+        "plan": 25
       },
       "apiUsd": 71.52335239510617,
       "planUsd": 1.21431837682693,
@@ -460,8 +460,8 @@
       "slug": "claude-haiku-5-5-max",
       "name": "Claude Haiku 5.5 (max)",
       "rank": {
-        "api": 35,
-        "plan": 25
+        "api": 30,
+        "plan": 24
       },
       "apiUsd": 973.3373083091135,
       "planUsd": 16.52525141441619,
@@ -480,8 +480,8 @@
       "slug": "claude-haiku-5-5-medium",
       "name": "Claude Haiku 5.5 (medium)",
       "rank": {
-        "api": 20,
-        "plan": 19
+        "api": 21,
+        "plan": 23
       },
       "apiUsd": 114.50519282185142,
       "planUsd": 1.9440609986731991,
@@ -500,8 +500,8 @@
       "slug": "claude-opus-5",
       "name": "Claude Opus 5",
       "rank": {
-        "api": 33,
-        "plan": 11
+        "api": 29,
+        "plan": 12
       },
       "apiUsd": 8733.127052137232,
       "planUsd": 148.27040835547083,
@@ -520,8 +520,8 @@
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "rank": {
-        "api": 22,
-        "plan": 5
+        "api": 14,
+        "plan": 3
       },
       "apiUsd": 9989.151438394825,
       "planUsd": 169.59510082164388,
@@ -536,7 +536,7 @@
         "routeId": "claude-pro-opus55-semianalysis",
         "costUsd": 169.59510082164388,
         "costScore": 43.68735496315907,
-        "value": 59.067500498201156,
+        "value": 58.67719746789812,
         "rank": 1
       }
     },
@@ -544,8 +544,8 @@
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
-        "api": 19,
-        "plan": 4
+        "api": 13,
+        "plan": 1
       },
       "apiUsd": 9373.65305908234,
       "planUsd": 159.14521322720444,
@@ -564,8 +564,8 @@
       "slug": "claude-sonnet-5-5-high",
       "name": "Claude Sonnet 5.5 (high)",
       "rank": {
-        "api": 11,
-        "plan": 7
+        "api": 10,
+        "plan": 8
       },
       "apiUsd": 1247.9973342182716,
       "planUsd": 21.188409749036868,
@@ -584,8 +584,8 @@
       "slug": "claude-sonnet-5-5-low",
       "name": "Claude Sonnet 5.5 (low)",
       "rank": {
-        "api": 28,
-        "plan": 14
+        "api": 23,
+        "plan": 18
       },
       "apiUsd": 578.392372482358,
       "planUsd": 9.819904456406759,
@@ -624,8 +624,8 @@
       "slug": "claude-sonnet-5-5-xhigh",
       "name": "Claude Sonnet 5.5 (xhigh)",
       "rank": {
-        "api": 15,
-        "plan": 6
+        "api": 11,
+        "plan": 4
       },
       "apiUsd": 2836.0467965283697,
       "planUsd": 48.15020028061748,
@@ -641,30 +641,11 @@
       }
     },
     {
-      "slug": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "rank": {
-        "api": 12,
-        "plan": 30
-      },
-      "apiUsd": 279.5120478141823,
-      "planUsd": 279.5120478141823,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
       "slug": "deepseek-v4-pro",
       "name": "DeepSeek V4 Pro",
       "rank": {
         "api": 26,
-        "plan": 32
+        "plan": 30
       },
       "apiUsd": 801.4967532139415,
       "planUsd": 801.4967532139415,
@@ -682,8 +663,8 @@
       "slug": "gemini-3-8-flash",
       "name": "Gemini 3.8 Flash",
       "rank": {
-        "api": 32,
-        "plan": 35
+        "api": 25,
+        "plan": 29
       },
       "apiUsd": 2073.444227327155,
       "planUsd": 2073.444227327155,
@@ -701,8 +682,8 @@
       "slug": "gemini-4-argon",
       "name": "Gemini 4 Argon",
       "rank": {
-        "api": 7,
-        "plan": 21
+        "api": 8,
+        "plan": 19
       },
       "apiUsd": 3628.6386911634218,
       "planUsd": 3628.6386911634218,
@@ -720,8 +701,8 @@
       "slug": "glm-5-3",
       "name": "GLM-5.3",
       "rank": {
-        "api": 34,
-        "plan": 34
+        "api": 27,
+        "plan": 28
       },
       "apiUsd": 3186.289595775135,
       "planUsd": 3186.289595775135,
@@ -739,7 +720,7 @@
       "slug": "gpt-5-6-luna",
       "name": "GPT-5.6 Luna",
       "rank": {
-        "api": 10,
+        "api": 9,
         "plan": 20
       },
       "apiUsd": 319.25290369032655,
@@ -759,7 +740,7 @@
       "slug": "gpt-5-6-sol",
       "name": "GPT-5.6 Sol",
       "rank": {
-        "api": 21,
+        "api": 16,
         "plan": 15
       },
       "apiUsd": 4238.135507049396,
@@ -779,8 +760,8 @@
       "slug": "gpt-6-1-sol",
       "name": "GPT-6.1 Sol",
       "rank": {
-        "api": 6,
-        "plan": 8
+        "api": 5,
+        "plan": 7
       },
       "apiUsd": 1267.6626637224322,
       "planUsd": 117.68127216138434,
@@ -795,7 +776,7 @@
         "routeId": "chatgpt-pro500-common-semianalysis-assumption",
         "costUsd": 117.68127216138434,
         "costScore": 47.3409719457136,
-        "value": 57.83067388961014,
+        "value": 57.6702193441556,
         "rank": 2
       }
     },
@@ -803,8 +784,8 @@
       "slug": "gpt-6-1-sol-high",
       "name": "GPT-6.1 Sol (high)",
       "rank": {
-        "api": 3,
-        "plan": 2
+        "api": 4,
+        "plan": 5
       },
       "apiUsd": 700.5127639425643,
       "planUsd": 65.03089156540702,
@@ -823,7 +804,7 @@
       "slug": "gpt-6-1-sol-low",
       "name": "GPT-6.1 Sol (low)",
       "rank": {
-        "api": 5,
+        "api": 7,
         "plan": 9
       },
       "apiUsd": 375.2096972444586,
@@ -844,7 +825,7 @@
       "name": "GPT-6.1 Sol (medium)",
       "rank": {
         "api": 2,
-        "plan": 3
+        "plan": 6
       },
       "apiUsd": 531.5621485772531,
       "planUsd": 49.346653228486176,
@@ -864,7 +845,7 @@
       "name": "GPT-6.1 Sol (xhigh)",
       "rank": {
         "api": 1,
-        "plan": 1
+        "plan": 2
       },
       "apiUsd": 827.2341182369406,
       "planUsd": 76.7948494464297,
@@ -883,8 +864,8 @@
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "rank": {
-        "api": 25,
-        "plan": 18
+        "api": 15,
+        "plan": 14
       },
       "apiUsd": 6107.090015422354,
       "planUsd": 753.9617302990561,
@@ -899,7 +880,7 @@
         "routeId": "chatgpt-plus-common-semianalysis-assumption",
         "costUsd": 753.9617302990561,
         "costScore": 28.771026965850698,
-        "value": 52.85423139445634,
+        "value": 52.92104957627453,
         "rank": 3
       }
     },
@@ -907,8 +888,8 @@
       "slug": "gpt-6-luna",
       "name": "GPT-6 Luna",
       "rank": {
-        "api": 8,
-        "plan": 16
+        "api": 6,
+        "plan": 13
       },
       "apiUsd": 132.8652049689931,
       "planUsd": 12.334311638413768,
@@ -927,8 +908,8 @@
       "slug": "gpt-6-sol",
       "name": "GPT-6 Sol",
       "rank": {
-        "api": 13,
-        "plan": 12
+        "api": 12,
+        "plan": 11
       },
       "apiUsd": 1999.4094902839818,
       "planUsd": 185.61172394021366,
@@ -944,30 +925,11 @@
       }
     },
     {
-      "slug": "grok-4-6-xhigh",
-      "name": "Grok 4.6 (xhigh)",
-      "rank": {
-        "api": 17,
-        "plan": 29
-      },
-      "apiUsd": 2983.665720539929,
-      "planUsd": 2983.665720539929,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
       "slug": "grok-4-7",
       "name": "Grok 4.7",
       "rank": {
-        "api": 31,
-        "plan": 33
+        "api": 28,
+        "plan": 27
       },
       "apiUsd": 6700.021962805636,
       "planUsd": 6700.021962805636,
@@ -982,32 +944,11 @@
       }
     },
     {
-      "slug": "mimo-v2-6-flash",
-      "name": "MiMo-V2.6-Flash",
-      "rank": {
-        "api": 4,
-        "plan": 23
-      },
-      "apiUsd": 60.36787614182735,
-      "planUsd": 40.24525076121824,
-      "fallback": null,
-      "routeId": "mimo-provisional-user-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified",
-        "observed-usage multiple; full utilisation not established"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
       "slug": "mimo-v2-6-pro",
       "name": "MiMo-V2.6-Pro",
       "rank": {
-        "api": 9,
-        "plan": 27
+        "api": 3,
+        "plan": 17
       },
       "apiUsd": 136.12695920883297,
       "planUsd": 90.75130613922198,
@@ -1027,49 +968,11 @@
       "slug": "muse-spark-1-3",
       "name": "Muse Spark 1.3",
       "rank": {
-        "api": 16,
-        "plan": 28
+        "api": 17,
+        "plan": 26
       },
       "apiUsd": 2764.9826567800033,
       "planUsd": 2764.9826567800033,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "muse-spark-1-3-xhigh",
-      "name": "Muse Spark 1.3 (xhigh)",
-      "rank": {
-        "api": 29,
-        "plan": 31
-      },
-      "apiUsd": 2366.1623199016663,
-      "planUsd": 2366.1623199016663,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "muse-wonder",
-      "name": "Muse Wonder",
-      "rank": {
-        "api": 14,
-        "plan": 26
-      },
-      "apiUsd": 6534.155660296668,
-      "planUsd": 6534.155660296668,
       "fallback": "api",
       "routeId": null,
       "flags": [
@@ -1100,8 +1003,8 @@
       "slug": "qwen3-8-max",
       "name": "Qwen3.8 Max",
       "rank": {
-        "api": 36,
-        "plan": 36
+        "api": 31,
+        "plan": 31
       },
       "apiUsd": 5417.032020806289,
       "planUsd": 5417.032020806289,

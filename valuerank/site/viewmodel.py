@@ -38,6 +38,7 @@ from typing import Any
 from valuerank import basket
 from valuerank import plan_routes
 from valuerank import quality as q
+from valuerank import value_v3
 from valuerank.paths import DATA
 from valuerank.plan_costs import COST_WEIGHT_PCT
 from valuerank.publication import AA_METHODOLOGY_URL, BENCHMARK_URLS, model_inclusion, plan_evidence_label
@@ -94,13 +95,14 @@ AA_SOURCE = "Artificial Analysis model page (Intelligence Index v4.3.2)"
 SOURCE_NAMES = {
     "deepswe": "AA Coding Agent Index (DeepSWE v1.1)",
     "bugHunt": "Bug Hunt Bench published runs",
-    "terminalBench": "tbench.ai Terminal-Bench 4.0 leaderboard",
+    "terminalBench": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
 }
+TB_GAP_SOURCE = "tbench.ai Terminal-Bench 4.0 leaderboard (gap fill, O37)"
 LEAF_NOTES = {
     "gdpval": "Scored with AA's integration transform, (Elo - 500) / 2000, on the rating as integrated in the pinned Index.",
     "omniscience": "Scored as AA's Omniscience Index I (correct minus incorrect over all questions), z = (I + 100) / 2 (owner decision O28).",
     "bugHunt": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness.",
-    "terminalBench": "Official tbench.ai rows run on mixed harnesses; a same-harness (Terminus 2) diagnostic is published beside it.",
+    "terminalBench": "AA's own run on one harness (mini-SWE-agent) since O37; tbench.ai rows fill a gap and are compared with it as a diagnostic.",
 }
 # v3 Plan evidence grades shown with the site's grade vocabulary (controlled measurements are measured).
 ROUTE_GRADES = {"controlled": "measured", "reports": "estimate", "assumption": "assumption", "diagnostic": "assumption"}
@@ -448,13 +450,23 @@ def _leaf_docs(row: dict | None, inputs: dict) -> list[dict]:
             "decimals": 3 if "(0-1)" in LEAF_INFO[leaf.key]["unit"] else 1,
             "unit": LEAF_INFO[leaf.key]["unit"],
             "normalized": detail.get("z"),
-            "source": {"name": SOURCE_NAMES.get(leaf.key, AA_SOURCE), "url": LEAF_INFO[leaf.key]["url"]} if present else None,
+            "source": _leaf_source(leaf.key, detail) if present else None,
             "observedAt": (observed.get(leaf.key) or (inputs["scores"]["observedAt"] or "")[:10]) if present else None,
             "evaluatedVariant": variant,
             "note": f"Saturates the scoring anchor ({audit[leaf.key]['anchorPosition']})." if present and audit[leaf.key]["anchorPosition"] != "inside" else None,
-            "grade": "measured" if present else "missing",
+            "grade": ("claim" if detail.get("sourceType") == "model_provider_claim" else "measured") if present else "missing",
         })
     return docs
+
+
+def _leaf_source(key: str, detail: dict) -> dict:
+    """The public source of one leaf: an O36/O37 gap fill names its publisher; a Terminal-Bench gap fill is tbench.ai's."""
+
+    if detail.get("sourceType"):
+        return {"name": detail["source"], "url": detail.get("url") or LEAF_INFO[key]["url"]}
+    if key == "terminalBench" and detail.get("agent") != value_v3.DEFAULT_TB_HARNESS:
+        return {"name": TB_GAP_SOURCE, "url": LEAF_INFO[key]["url"]}
+    return {"name": SOURCE_NAMES.get(key, AA_SOURCE), "url": LEAF_INFO[key]["url"]}
 
 
 def _component_docs(row: dict | None) -> list[dict]:
@@ -615,7 +627,7 @@ def _plans(inputs: dict, entries: dict, v3: dict) -> dict:
 
 
 def _benchmarks(inputs: dict, v3: dict) -> dict:
-    tb4, deepswe, bug_hunt = inputs["tb4"], inputs["deepswe"], inputs["bugHunt"]
+    deepswe, bug_hunt = inputs["deepswe"], inputs["bugHunt"]
     rows = v3["rows"]
 
     def coverage(key: str) -> dict:
@@ -624,7 +636,6 @@ def _benchmarks(inputs: dict, v3: dict) -> dict:
     owners = {
         "deepswe": ("Artificial Analysis Coding Agent Index", deepswe.get("observedAt")),
         "bugHunt": ("Bug Hunt Bench benchmark owner", bug_hunt.get("snapshotDate")),
-        "terminalBench": (tb4["source"]["publisher"], (tb4.get("observedAt") or "")[:10] or None),
     }
     sources = []
     for leaf in q.LEAVES:
@@ -881,10 +892,10 @@ def changelog_page(bundle: Bundle) -> dict:
 
 FAQ_TEMPLATE = (
     ("How is the value score calculated?", "Cost carries a fixed {cost:.0f}% of the value score and quality the rest. The cost score compares what each configuration costs to run the SDLC cost basket once, on a log scale against frozen anchors, so equal cost ratios count equally. Quality is the weighted mean of eleven benchmark leaves on fixed 0-100 anchors."),
-    ("What happens when a benchmark has no result for a model?", "The leaf stays missing: quality is averaged over the leaves observed for that exact configuration, nothing is filled in, and the coverage and any provisional flag are shown. A configuration without a cost gets no value score."),
+    ("What happens when a benchmark has no result for a model?", "Only configurations with all eleven benchmark results are ranked, so every ranked model is scored on the same benchmarks. A result Artificial Analysis has not run comes from another party's run of the same benchmark on the exact configuration, then from the model provider's published result. A configuration still missing one after a logged exhaustive search is listed with the gap, not ranked. A configuration without a cost gets no value score."),
     ("What is the difference between the API ranking and the Plan ranking?", "Both price the same SDLC basket. The API ranking uses Artificial Analysis' cost at API rates. The Plan ranking divides it by the selected subscription route's Value Multiple, the API-priced usage a plan delivers per dollar of fee at full utilisation; a model without an admitted route falls back to API cost, flagged."),
     ("What do the evidence grades mean?", "Measured values come from the benchmark owner or a controlled account measurement. Estimates are concordant end-user reports, and assumptions are owner-authorised transfers of one model's measured multiple to another."),
-    ("Why is a model not ranked?", "The ranked cohort is fixed policy: configurations on Artificial Analysis' Intelligence-versus-cost frontier or near it, and every configuration with exact DeepSWE and Bug Hunt results, each effort as its own row. Other models still have pages with what we hold."),
+    ("Why is a model not ranked?", "The ranked cohort is fixed policy: configurations on Artificial Analysis' Intelligence-versus-cost frontier or near it, and every configuration with exact DeepSWE and Bug Hunt results, each effort as its own row. A cohort configuration missing any of the eleven benchmarks after an exhaustive search is listed with the gap, not ranked. Other models still have pages with what we hold."),
 )
 
 LIMITATIONS = (

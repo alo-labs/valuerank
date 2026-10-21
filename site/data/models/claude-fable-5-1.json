@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-fable-5-1",
   "summary": {
     "rank": {
-      "api": 30,
+      "api": 24,
       "plan": 22
     },
     "overall": {
-      "api": 47.343987109986124,
-      "plan": 51.91216172586273
+      "api": 46.903002261501264,
+      "plan": 51.47117687737787
     },
-    "quality": 60.25170001758842,
-    "qualityRank": 11,
+    "quality": 59.663720219608614,
+    "qualityRank": 8,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -69,7 +69,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.489732333333333,
@@ -87,19 +87,19 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 57.9,
+      "value": 52.020202020202,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 57.9,
+      "normalized": 52.020202020202,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "Fable 5.1 (max) / Claude Code",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -474,7 +474,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0003,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -506,7 +506,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 30,
+        "api": 24,
         "plan": 22
       }
     }

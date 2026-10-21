@@ -195,7 +195,8 @@ def cost_world(**overrides):
     }
     diagnostics.update(overrides)
     currency = {"lifetime": "until the next re-freeze", "bars": [{"level": 56.7, "reachN": 18, "populationN": 35}], "currentLadder": [{"level": 56.7}], "flag": None}
-    rows = [{"plan": {"mixCheck": "mix unidentified"}}, {"plan": {"mixCheck": "mix unidentified"}}, {"plan": {"mixCheck": "mix not reported"}}, {"plan": None}]
+    rows = [{"id": row_id, "quality": {"leaves": {}}, "plan": plan} for row_id, plan in
+            (("a", {"mixCheck": "mix unidentified"}), ("b", {"mixCheck": "mix unidentified"}), ("c", {"mixCheck": "mix not reported"}), ("d", None))]
     observed = {"status": "evaluated", "bars": [{"bar": "bar:x", "possibleQualifierN": 17, "confirmedQualifierN": 5, "confirmedCheapest": None, "possibleCheapest": ["a", "b"]},
                                                 {"bar": "bar:y", "possibleQualifierN": 3, "confirmedQualifierN": 3, "confirmedCheapest": "a", "possibleCheapest": ["a"]}]}
     policy = {"bars": [{"id": "bar:x", "level": 56.7}, {"id": "bar:y", "level": 60.9}]}
@@ -228,7 +229,7 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
             "quality 56.7: 17 can qualify, 5 confirmed; possibly cheapest a, b; quality 60.9: 3 can qualify, 3 confirmed; a confirmed cheapest.") in text
     assert ed.observed_range_text({"status": "unavailable: no bar"}, StubFacts({})).endswith("unavailable: no bar.")
     assert ("- **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 56.7, with the mean score their missing leaves would need: "
-            "a 27.3 (AA FrontierCode 1.1, Terminal-Bench 4.0 (tbench.ai)); b (no missing leaf; reporting precision only).") in text
+            "a 27.3 (FrontierCode 1.1, Terminal-Bench 4.0 (AA run)); b (no missing leaf; reporting precision only).") in text
     assert ed.required_scores_text({"status": "evaluated", "bars": [{"bar": "x", "level": 50.0, "rows": []}]}, StubFacts({})).endswith("no row is open at quality 50.0.")
     assert ed.required_scores_text({"status": "evaluated", "bars": []}, StubFacts({})).endswith("no bar.")
     assert ed.required_scores_text({"status": "unavailable: x", "bars": []}, StubFacts({})).endswith("unavailable: x.")
@@ -315,6 +316,8 @@ def test_common_leaf_and_harness_texts():
         label = staticmethod(lambda row_id: row_id.upper())
         labels = staticmethod(lambda row_ids: ", ".join(row_id.upper() for row_id in row_ids))
         tb4 = {"rows": [{"model": "Opus 5.5 (max)", "agent": "Claude Code"}]}
+        # O37: the Terminal-Bench leaf's agent is its provenance (AA's own run), not tbench.ai's row.
+        v3 = {"rows": [{"id": "claude-opus-5-5", "quality": {"leaves": {"terminalBench": {"agent": "mini-SWE-agent"}}}}, {"id": "x", "quality": {"leaves": {}}}]}
         scores = {"models": [{"id": "claude-opus-5-5", "aaVariant": "max", "rankingEligible": True, "deepsweAgent": "Claude Code", "bugHunt": {"matched": True, "harness": "Claude Code"}},
                              {"id": "x", "rankingEligible": True, "deepsweAgent": "Codex", "bugHunt": {"matched": False, "harness": "Codex CLI"}},
                              {"id": "y", "rankingEligible": False, "deepsweAgent": "Codex"}]}
@@ -323,8 +326,8 @@ def test_common_leaf_and_harness_texts():
                   "bases": {basis: {"rankChanges": {"changes": {"a": 2, "b": -2}}} for basis in ("api", "plan")},
                   "rows": {"a": {"effect": -5.04}}, "flagged": ["a"]}
     text = ed.common_leaf_text(diagnostic, Facts)
-    assert "(AA FrontierCode 1.1), API 2 rows move; largest move 2 (A, B)" in text and "quality 56.7: 18 → 20" in text and text.endswith("A -5.0.")
+    assert "(FrontierCode 1.1), API 2 rows move; largest move 2 (A, B)" in text and "quality 56.7: 18 → 20" in text and text.endswith("A -5.0.")
     assert ed.common_leaf_text({**diagnostic, "sparseLeaves": [], "flagged": []}, Facts).endswith("one cost doubling's worth: none.")
-    assert ed.harness_by_leaf_text(Facts) == "- **Harness by leaf (E227):** DeepSWE: Claude Code 1, Codex 1; Terminal-Bench: Claude Code 1; Bug Hunt: Claude Code 1."
+    assert ed.harness_by_leaf_text(Facts) == "- **Harness by leaf (E227):** DeepSWE: Claude Code 1, Codex 1; Terminal-Bench: mini-SWE-agent 1; Bug Hunt: Claude Code 1."
     Facts.scores = {"models": []}
     assert ed.harness_by_leaf_text(Facts).endswith("Bug Hunt: none.")

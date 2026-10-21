@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from valuerank import build_scores
+from valuerank import build_scores, quality
 from valuerank.paths import ROOT
 
 GENERATED = ("scores.json", "coverage_matrix.json", "ranking_summary.json", "run_manifest.json")
@@ -56,7 +56,17 @@ FILES = {
     "tb4": "data/tb4.json",
     "bughunt": "data/bug_hunt.json",
     "scoreboard": "data/bug_hunt_scoreboard.json",
+    "leaves": "data/leaf_evidence.json",
 }
+
+
+def log_searches(*model_ids):
+    """O36: an exhaustive search logged on the cutoff for every leaf of the named configurations."""
+
+    def fn(document):
+        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-21", "result": "not found", "sources": []}
+                                 for model_id in model_ids for leaf in quality.LEAVES]
+    return fn
 
 
 def edit(root: Path, name: str, fn) -> None:
@@ -327,14 +337,20 @@ def test_ranked_order_and_exclusions(built):
     overall = [m["overallScore"] for m in ranked]
     assert overall == sorted(overall, reverse=True)
     assert all(m["rankingStatus"] == "ranked" for m in ranked)
-    excluded = [m for m in scores["models"] if not m["rankingEligible"]]
+    # O36: a cohort configuration without the full benchmark set after the logged search is listed, not ranked.
+    incomplete = [m for m in scores["models"] if m["rankingStatus"] == "excluded_incomplete_benchmarks"]
+    assert {m["id"] for m in incomplete} == {item["id"] for item in scores["v3"]["incompleteEvidence"]}
+    for m in incomplete:
+        assert not m["rankingEligible"] and m["rank"] is None and m["overallScore"] is None and m["costComposite"] is None
+        assert m["rankingInclusionReasons"] and m["rankingExclusionReasons"][-1].startswith("Incomplete benchmark evidence after an exhaustive search (O36): no ")
+    excluded = [m for m in scores["models"] if not m["rankingEligible"] and m not in incomplete]
     assert excluded
     for m in excluded:
         assert m["rank"] is None and m["overallScore"] is None and m["vRanks"] == {}
         assert m["rankingStatus"] == "excluded_from_primary_cohort"
         assert "Not a required AA frontier or near-frontier family model" in m["rankingExclusionReasons"]
     assert {a["id"] for a in scores["appendixNonRanked"]} == {m["id"] for m in excluded}
-    assert [m["name"] for m in scores["models"] if not m["rankingEligible"]] == sorted(m["name"] for m in excluded)
+    assert [m["name"] for m in scores["models"] if not m["rankingEligible"] and m not in incomplete] == sorted(m["name"] for m in excluded)
 
 
 def test_pareto_frontier_excludes_dominated_rows(built):
@@ -645,18 +661,6 @@ def test_non_positive_cost_is_rejected(world):
         run_main(world)
 
 
-def test_frontier_model_without_quality_dimension_is_rejected(world):
-    def fn(document):
-        metrics = document["models"]["mimo-v2-6-flash"]["metrics"]
-        for key in metrics:
-            if key != "aaEvalCost":
-                metrics[key] = None
-    edit(world, "aa", fn)
-    edit(world, "livebench", lambda d: d["models"]["mimo-v2-6-flash"].update(instructionFollowingScore=None))
-    with pytest.raises(ValueError, match=r"finite non-cost quality score: \['mimo-v2-6-flash'\]"):
-        run_main(world)
-
-
 # --------------------------------------------------------------------------
 # alternative scoring scenarios
 # --------------------------------------------------------------------------
@@ -675,36 +679,15 @@ def defer_near_family(family):
     return fn
 
 
-def test_without_bug_hunt_overlap_the_dimension_is_dropped(world):
+def test_without_bug_hunt_every_configuration_needs_a_logged_search(world):
+    """O36: Bug Hunt is a required leaf, so with no match anywhere the build refuses until each gap's search is logged."""
+
     edit(world, "bughunt", unmatch_all_bug_hunt)
-    # O33: an unmatched record is only consistent when the owner's scoreboard publishes no matching row either.
     edit(world, "scoreboard", lambda d: d["rows"].clear())
-    # GPT-5.6 Luna and GPT-6 Astra are ranked at max for their exact DeepSWE and Bug Hunt results (O30); without Bug Hunt
-    # E193 needs their near points, so this world defers them.
     edit(world, "inventory", defer_near_family("GPT-5.6 Luna"))
     edit(world, "inventory", defer_near_family("GPT-6 Astra"))
-    run_main(world)
-    out = outputs(world)
-    scores = out["scores.json"]
-    assert all(w["key"] != "bugHuntFixedOf105" for w in scores["weights"])
-    assert scores["cohort"]["exactBenchmarkOverlapN"] == 0
-    selection = scores["frontierSelection"]
-    forced_ids = {item["modelId"] for item in selection["selectedFamilyModelIds"]} | {
-        item["modelId"] for item in selection["nearFrontierFamilies"] if item["modelId"]}
-    assert scores["cohort"]["n"] == len(forced_ids)
-    assert scores["cohort"]["frontierRequiredModelN"] == len(selection["selectedFamilyModelIds"])
-    assert scores["externalBenchmarks"]["bugHunt"]["primaryWeightPct"] == 0.0
-    dropped = out["ranking_summary.json"]["droppedDimensions"]
-    assert dropped[-1]["key"] == "bugHuntFixedOf105"
-    assert dropped[-1]["availableN"] == 0
-    assert all(d["availableN"] < 2 for d in dropped)
-    assert out["coverage_matrix.json"]["scoring"]["zeroGap"] is False
-    emphasis = scores["bugHuntEmphasisRanking"]
-    assert emphasis["matchedN"] == 0 and emphasis["ranking"] == []
-    assert emphasis["benchmarkWeightPct"] == 100.0
-    assert out["ranking_summary.json"]["bugHuntEmphasis"]["topFive"] == []
-    # every primary weight still normalizes to 100%
-    assert sum(w["weightPct"] for w in scores["weights"]) == pytest.approx(100.0, abs=0.01)
+    with pytest.raises(ValueError, match=r"no exhaustive search for bugHunt logged within 7 days of the cutoff \(O36\)"):
+        run_main(world)
 
 
 def unverified(configs):
@@ -1214,13 +1197,18 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     base_frontier_n = base["scores.json"]["cohort"]["frontierRequiredModelN"]
     base_cohort_n = base["scores.json"]["cohort"]["n"]
     add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="gpt-5-5")
+    # O36: without DeepSWE and Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
+    with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for deepswe"):
+        run_main(world)
+    edit(world, "leaves", log_searches("gpt-5.5"))
     run_main(world)
     out = outputs(world)
     model = model_rows(world)["gpt-5.5"]
-    assert model["rankingEligible"] is True and model["rank"] is not None
+    assert model["rankingEligible"] is False and model["rank"] is None and model["rankingStatus"] == "excluded_incomplete_benchmarks"
     assert model["rankingInclusionReasons"] == [
         "Near-frontier AA family (within 3 Index points of the rendered frontier)"]
-    assert model["rankingExclusionReasons"] == []
+    assert model["rankingExclusionReasons"] == [
+        "Incomplete benchmark evidence after an exhaustive search (O36): no DeepSWE v1.1, Bug Hunt Bench, FrontierCode 1.1"]
     assert (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"]) == ("near", "GPT-5.5 (medium)", 1)
     assert model["aaFrontierFootnote"] == "note for gpt-5-5"
     assert out["scores.json"]["cohort"]["n"] == base_cohort_n + 1
@@ -1309,11 +1297,13 @@ def test_evidenced_efforts_need_both_results_and_order_by_index_then_cost():
 
 
 def test_every_evidenced_effort_is_ranked_as_its_own_row(world):
-    """O33: Muse Spark 1.3 has both results at max and xhigh, and both efforts are ranked."""
+    """O33: Muse Spark 1.3 has both results at max and xhigh, and both efforts enter the cohort; xhigh lacks FrontierCode,
+    so it is listed, not ranked (O36)."""
 
     run_main(world)
     rows = model_rows(world)
-    assert rows["muse-spark-1-3"]["rankingEligible"] is True and rows["muse-spark-1-3-xhigh"]["rankingEligible"] is True
+    assert rows["muse-spark-1-3"]["rankingEligible"] is True and rows["muse-spark-1-3-xhigh"]["rankingStatus"] == "excluded_incomplete_benchmarks"
+    assert rows["muse-spark-1-3-xhigh"]["rankingInclusionReasons"] == rows["muse-spark-1-3"]["rankingInclusionReasons"]
     assert rows["muse-spark-1-3-xhigh"]["bugHunt"]["effort"] == "xhigh" and rows["muse-spark-1-3-xhigh"]["deepsweEffort"] == "xhigh"
 
 
@@ -1507,7 +1497,7 @@ def test_frontier_family_diagnostics_use_only_frontier_and_near_frontier_rows():
     scores = json.loads((ROOT / "data" / "scores.json").read_text())
     family = {row["id"] for row in scores["models"] if row["rankingEligible"] and value_v3.configuration(row)["frontierFamily"]}
     retained = {row["id"] for row in scores["models"] if row["rankingEligible"]} - family
-    assert {"muse-wonder", "claude-fable-5-1", "gpt-5.6-sol"} <= retained
+    assert {"muse-wonder-full", "claude-fable-5-1", "gpt-5.6-sol"} <= retained
     frontier = scores["v3"]["diagnostics"]["frontierAnchors"]
     assert len(frontier["references"]) == 8 and set(frontier["references"]) <= family
     assert set(frontier["bar"]["population"]) <= family and frontier["bar"]["bar"]["id"] == value_v3.POLICY_BAR_ID

@@ -7,21 +7,19 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5",
   "summary": {
     "rank": {
-      "api": 35,
-      "plan": 25
+      "api": 30,
+      "plan": 24
     },
     "overall": {
-      "api": 45.940837160678534,
-      "plan": 50.740462054669685
+      "api": 45.003112005016426,
+      "plan": 49.80273689900758
     },
-    "quality": 45.331284903777565,
-    "qualityRank": 34,
+    "quality": 44.080984696228086,
+    "qualityRank": 28,
     "coverage": {
-      "pct": 90.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -71,7 +69,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.418067,
@@ -89,18 +87,21 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 32.8282828282828,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 32.8282828282828,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",
@@ -508,8 +509,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 35,
-        "plan": 25
+        "api": 30,
+        "plan": 24
       }
     }
   ],

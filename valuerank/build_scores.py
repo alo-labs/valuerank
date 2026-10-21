@@ -1179,11 +1179,18 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             by_effort = {aa_models[row["id"]].get("aaVariant"): row for row in group}
             primary = [by_effort[best_evidenced_effort(aa_models[group[0]["id"]], set(by_effort), frontier_capture["points"])]]
         primary[0]["familyPrimary"] = True
+    # O36: a configuration without the full benchmark set after the exhaustive search is listed, never ranked or normalised.
+    incomplete = {
+        item["id"]: item
+        for item in value_v3.incomplete_configurations([value_v3.configuration(row) for row in primary_rows], value_v3.load_documents(data))
+    }
     for weight in weights:
         key = weight["key"]
         available_rows = []
         values = []
         for row in primary_rows:
+            if row["id"] in incomplete:
+                continue
             if key == "bugHuntFixedOf105":
                 value = row["bugHunt"].get("fixedOf105") if row["bugHunt"].get("matched") is True else None
             else:
@@ -1222,7 +1229,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         row["qualityRank"] = None
         row["pareto"] = None
         row["rankingStatus"] = (
-            "unranked_no_quality_dimension" if row["qualityScore"] is None
+            "excluded_incomplete_benchmarks" if row["id"] in incomplete
+            else "unranked_no_quality_dimension" if row["qualityScore"] is None
             else "unranked_no_cost" if row["overallScore"] is None
             else "rankable"
         )
@@ -1231,6 +1239,11 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             for weight in weights
             if weight["key"] in row["dims"]
         }
+        if row["id"] in incomplete:
+            missing = ", ".join(value_v3.LEAF_LABELS[key] for key in incomplete[row["id"]]["missing"])
+            row["rankingEligible"] = False
+            row["costComposite"] = None
+            row["rankingExclusionReasons"].append(f"Incomplete benchmark evidence after an exhaustive search (O36): no {missing}")
 
     by_overall = sorted(
         [
@@ -1280,21 +1293,6 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         row["pareto"] = not dominated
         if row["pareto"]:
             pareto.append(row["name"])
-
-    frontier_rows_without_quality = [
-        row["id"]
-        for row in primary_rows
-        if row["id"] in frontier_primary_ids | near_frontier_primary_ids
-        and (
-            row["qualityScore"] is None
-            or not math.isfinite(row["qualityScore"])
-        )
-    ]
-    if frontier_rows_without_quality:
-        raise ValueError(
-            "Every required AA frontier or near-frontier model must have a finite non-cost quality score: "
-            f"{frontier_rows_without_quality}"
-        )
 
     # Retain a stronger Bug Hunt emphasis view as an optional companion to the primary rank.
     bug_hunt_emphasis, bug_hunt_ranked_rows, bug_hunt_weights = build_bug_hunt_emphasis(

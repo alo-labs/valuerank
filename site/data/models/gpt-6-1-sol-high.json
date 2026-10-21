@@ -7,22 +7,19 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
   "summary": {
     "rank": {
-      "api": 3,
-      "plan": 2
+      "api": 4,
+      "plan": 5
     },
     "overall": {
-      "api": 59.74975997863963,
-      "plan": 59.82516640449342
+      "api": 57.910411762186925,
+      "plan": 57.98581818804072
     },
-    "quality": 62.00989720059384,
-    "qualityRank": 7,
+    "quality": 59.557432911990226,
+    "qualityRank": 9,
     "coverage": {
-      "pct": 80.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "AA FrontierCode 1.1",
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -70,33 +67,39 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.4798,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 47.980000000000004,
+      "source": {
+        "name": "Cognition (FrontierCode's author)",
+        "url": "https://cognition.com/data/frontiercode-leaderboard/data.json"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "GPT-6.1 Sol (high), harness codex",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 51.5151515151515,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 51.5151515151515,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",
@@ -419,36 +422,36 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2343,
-        "top3": 0.5835,
-        "frontier": 0.4879
+        "top1": 0.0,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.2325,
-        "top3": 0.5812,
-        "frontier": 0.4966
+        "top1": 0.0,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2326,
-        "top3": 0.5636,
-        "frontier": 0.4708
+        "top1": 0.0,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.2477,
-        "top3": 0.6029,
-        "frontier": 0.5062
+        "top1": 0.0,
+        "top3": 1.0,
+        "frontier": 1.0
       }
     ],
     "plan": [
@@ -458,7 +461,7 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 1.0
       },
       {
@@ -501,7 +504,7 @@
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
+      "definite": "certified",
       "possible": "certified"
     },
     "plan": null
@@ -511,8 +514,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 3,
-        "plan": 2
+        "api": 4,
+        "plan": 5
       }
     }
   ],

@@ -1,0 +1,265 @@
+{
+ "schemaVersion": 1,
+ "observedAt": "2026-10-21",
+ "rule": "Owner decisions O36/O37 (2026-10-21): every ranked configuration has all eleven quality leaves. A leaf the primary source lacks comes, in order, from a newer capture of the same primary source (aa_recapture), from another party that ran the same benchmark version on the exact configuration (independent; Cognition counts for FrontierCode), or from the model provider's own published result (model_provider_claim). Each leaf a cohort configuration still lacks has an exhaustive search logged here within 7 days of the release cutoff.",
+ "supplements": [
+  {
+   "modelId": "muse-wonder-full",
+   "leaf": "frontierCode",
+   "value": 0.448865666666667,
+   "unit": "fraction",
+   "sourceType": "aa_recapture",
+   "publisher": "Artificial Analysis",
+   "configuration": "Muse Wonder Full (Max)",
+   "url": "https://artificialanalysis.ai/models/muse-wonder-full",
+   "publishedOn": "2026-10-21",
+   "quote": "\"slug\":\"muse-wonder-full\",\"name\":\"Muse Wonder Full (Max)\" ... \"frontierCode\":0.448865666666667 (also in the FrontierCode leaderboard payload)"
+  },
+  {
+   "modelId": "deepseek-v4-pro",
+   "leaf": "frontierCode",
+   "value": 0.388022666666667,
+   "unit": "fraction",
+   "sourceType": "aa_recapture",
+   "publisher": "Artificial Analysis",
+   "configuration": "DeepSeek V4 Pro 0813 (Max)",
+   "url": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+   "publishedOn": "2026-10-21",
+   "quote": "model object slug 'deepseek-v4-pro', name 'DeepSeek V4 Pro 0813 (Max)': \"frontierCode\":0.388022666666667 (model page; not yet in the leaderboard's scored rows)"
+  },
+  {
+   "modelId": "mimo-v2-6-pro",
+   "leaf": "deepswe",
+   "value": 71.9,
+   "unit": "percent",
+   "sourceType": "model_provider_claim",
+   "publisher": "Xiaomi",
+   "configuration": "MiMo-V2.6-Pro-RL (released checkpoint; single reasoning mode)",
+   "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+   "publishedOn": "2026-09-21",
+   "quote": "README '3. Evaluation Results': '| DeepSWE v1.1 | 71.9 | 67.9 | ...' (columns Pro, Flash, ...)",
+   "notes": "Owner admitted this provider claim on 2026-10-21 (O37). No thinking mode is stated; taken as the released model's single reasoning mode. datacurve's DeepSWE leaderboard repeats the same figure."
+  },
+  {
+   "modelId": "mimo-v2-6-flash",
+   "leaf": "deepswe",
+   "value": 67.9,
+   "unit": "percent",
+   "sourceType": "model_provider_claim",
+   "publisher": "Xiaomi",
+   "configuration": "MiMo-V2.6-Flash-RL (released checkpoint; single reasoning mode)",
+   "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+   "publishedOn": "2026-09-21",
+   "quote": "Same README table row: 'DeepSWE v1.1 | 71.9 | 67.9 | ...' (Flash is the second column)"
+  },
+  {
+   "modelId": "gpt-6.1-sol-xhigh",
+   "leaf": "frontierCode",
+   "value": 0.4929,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "GPT-6.1 Sol (xhigh), harness codex",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['GPT-6.1 Sol'].xhigh.main.new_score",
+   "quote": "v1_1.data['GPT-6.1 Sol'].xhigh.main.new_score = 0.4929",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  },
+  {
+   "modelId": "gpt-6.1-sol-high",
+   "leaf": "frontierCode",
+   "value": 0.4798,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "GPT-6.1 Sol (high), harness codex",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['GPT-6.1 Sol'].high.main.new_score",
+   "quote": "v1_1.data['GPT-6.1 Sol'].high.main.new_score = 0.4798",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  },
+  {
+   "modelId": "gpt-6.1-sol-medium",
+   "leaf": "frontierCode",
+   "value": 0.5023,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "GPT-6.1 Sol (medium), harness codex",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['GPT-6.1 Sol'].medium.main.new_score",
+   "quote": "v1_1.data['GPT-6.1 Sol'].medium.main.new_score = 0.5023",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  },
+  {
+   "modelId": "gpt-6.1-sol-low",
+   "leaf": "frontierCode",
+   "value": 0.4546,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "GPT-6.1 Sol (low), harness codex",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['GPT-6.1 Sol'].low.main.new_score",
+   "quote": "v1_1.data['GPT-6.1 Sol'].low.main.new_score = 0.4546",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  },
+  {
+   "modelId": "claude-opus-5",
+   "leaf": "frontierCode",
+   "value": 0.4804,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "Claude Opus 5 (max), harness claude-code",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['Claude Opus 5'].max.main.new_score",
+   "quote": "v1_1.data['Claude Opus 5'].max.main.new_score = 0.4804",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  },
+  {
+   "modelId": "gpt-6-sol",
+   "leaf": "frontierCode",
+   "value": 0.4927,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "GPT-6 Sol (max), harness codex",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['GPT-6 Sol'].max.main.new_score",
+   "quote": "v1_1.data['GPT-6 Sol'].max.main.new_score = 0.4927",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  },
+  {
+   "modelId": "gpt-5.6-sol",
+   "leaf": "frontierCode",
+   "value": 0.4749,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "GPT-5.6 Sol (max), harness codex",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['GPT-5.6 Sol'].max.main.new_score",
+   "quote": "v1_1.data['GPT-5.6 Sol'].max.main.new_score = 0.4749",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  },
+  {
+   "modelId": "gpt-5.6-luna",
+   "leaf": "frontierCode",
+   "value": 0.3981,
+   "unit": "fraction",
+   "sourceType": "independent",
+   "publisher": "Cognition (FrontierCode's author)",
+   "configuration": "GPT-5.6 Luna (max), harness codex",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "publishedOn": "2026-10-21",
+   "artifact": "cognitionFrontierCode",
+   "locator": "v1_1.data['GPT-5.6 Luna'].max.main.new_score",
+   "quote": "v1_1.data['GPT-5.6 Luna'].max.main.new_score = 0.3981",
+   "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own."
+  }
+ ],
+ "searches": [
+  {
+   "modelId": "mimo-v2-6-flash",
+   "leaf": "bugHunt",
+   "searchedOn": "2026-10-21",
+   "result": "not found",
+   "sources": [
+    "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md (updated 2026-10-19)",
+    "https://bughunt.productcompass.pm/ (no table text rendered)"
+   ],
+   "notes": "The only Flash row is 'MiMo-V2.6-Flash - mean of 3' (OpenRouter, default effort; reasoning state not asserted and untested for Flash). No first-party or thinking-enabled Flash run exists."
+  },
+  {
+   "modelId": "grok-4.6-xhigh",
+   "leaf": "frontierCode",
+   "searchedOn": "2026-10-21",
+   "result": "not found",
+   "sources": [
+    "https://x.ai/news/grok-4-6 (2026-08-12)",
+    "https://cognition.ai FrontierCode leaderboard data.json (captured 2026-10-21; no row at this effort)",
+    "https://artificialanalysis.ai FrontierCode chart (no row for this configuration)",
+    "https://llm-stats.com/benchmarks/frontiercode",
+    "https://llmlearner.com/rankings/frontiercode-v1-1-main",
+    "https://agentsdirectory.dev/benchmarks/frontiercode-main",
+    "https://codingfleet.com/blog/frontiercode-v11-main-leaderboard-2026/"
+   ],
+   "notes": "xAI publishes FrontierCode v1.1 Extended 61.3% for Grok 4.6 at High effort only; xhigh appears nowhere. Cognition and its relays list Grok 4.6 at high effort (Main 48.0%). No exact-effort (xhigh) score exists; efforts are not transferred."
+  },
+  {
+   "modelId": "deepseek-v4-flash",
+   "leaf": "frontierCode",
+   "searchedOn": "2026-10-21",
+   "result": "not found",
+   "sources": [
+    "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731 (README)",
+    "https://api-docs.deepseek.com/news/news0731",
+    "https://cognition.ai FrontierCode leaderboard data.json (captured 2026-10-21; no row at this effort)",
+    "https://artificialanalysis.ai FrontierCode chart (no row for this configuration)",
+    "https://llm-stats.com/benchmarks/frontiercode",
+    "https://llmlearner.com/rankings/frontiercode-v1-1-main",
+    "https://agentsdirectory.dev/benchmarks/frontiercode-main",
+    "https://codingfleet.com/blog/frontiercode-v11-main-leaderboard-2026/"
+   ],
+   "notes": "DeepSeek's model card and release note publish no FrontierCode result. Cognition (relayed by codingfleet) lists DeepSeek V4 Flash 0731 at high effort only (18.8%); AA's 44% is DeepSeek V4.1 Flash, a different version. No max-effort score exists."
+  },
+  {
+   "modelId": "muse-wonder",
+   "leaf": "frontierCode",
+   "searchedOn": "2026-10-21",
+   "result": "not found",
+   "sources": [
+    "https://research.meta.ai/blog/introducing-muse-wonder (2026-10-12; evaluation-table image read in full)",
+    "https://research.meta.ai/static/muse-wonder-model-card (PDF)",
+    "https://developer.meta.com/ai/models/muse-wonder/",
+    "https://cognition.ai FrontierCode leaderboard data.json (captured 2026-10-21; no row at this effort)",
+    "https://artificialanalysis.ai FrontierCode chart (no row for this configuration)",
+    "https://llm-stats.com/benchmarks/frontiercode",
+    "https://llmlearner.com/rankings/frontiercode-v1-1-main",
+    "https://agentsdirectory.dev/benchmarks/frontiercode-main",
+    "https://codingfleet.com/blog/frontiercode-v11-main-leaderboard-2026/"
+   ],
+   "notes": "Meta's evaluation table has fourteen rows, none FrontierCode; the model card does not mention it. No independent run was found."
+  },
+  {
+   "modelId": "muse-spark-1-3-xhigh",
+   "leaf": "frontierCode",
+   "searchedOn": "2026-10-21",
+   "result": "not found",
+   "sources": [
+    "https://research.meta.ai/blog/introducing-muse-spark-1-3 (2026-09-02; scorecard image read in full)",
+    "https://developer.meta.com/ai/models/muse-spark/",
+    "https://artificialanalysis.ai/articles/muse-spark-1-3",
+    "https://cognition.ai FrontierCode leaderboard data.json (captured 2026-10-21; no row at this effort)",
+    "https://artificialanalysis.ai FrontierCode chart (no row for this configuration)",
+    "https://llm-stats.com/benchmarks/frontiercode",
+    "https://llmlearner.com/rankings/frontiercode-v1-1-main",
+    "https://agentsdirectory.dev/benchmarks/frontiercode-main",
+    "https://codingfleet.com/blog/frontiercode-v11-main-leaderboard-2026/"
+   ],
+   "notes": "Meta's scorecard (published before FrontierCode's AA launch on 2026-10-12) has no FrontierCode row and shows 1.3 only at max. No independent run was found at xhigh."
+  }
+ ],
+ "cognitionCapture": {
+  "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+  "lastModified": "2026-10-21T03:01:32Z",
+  "capturedOn": "2026-10-21",
+  "sha256": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
+  "file": "data/cognition_frontiercode.json"
+ }
+}

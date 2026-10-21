@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/grok-4-7",
   "summary": {
     "rank": {
-      "api": 31,
-      "plan": 33
+      "api": 28,
+      "plan": 27
     },
     "overall": {
-      "api": 46.84489167496702,
-      "plan": 44.259451410680754
+      "api": 45.95670985678521,
+      "plan": 43.37126959249894
     },
-    "quality": 56.70256809558702,
-    "qualityRank": 18,
+    "quality": 55.5183256713446,
+    "qualityRank": 16,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -67,7 +67,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.338342,
@@ -85,19 +85,19 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 37.6,
+      "value": 25.7575757575758,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 37.6,
+      "normalized": 25.7575757575758,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "Grok 4.7 (xhigh) / Grok Build",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -512,8 +512,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 31,
-        "plan": 33
+        "api": 28,
+        "plan": 27
       }
     }
   ],

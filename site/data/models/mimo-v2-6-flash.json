@@ -7,38 +7,40 @@
   "selectedPage": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
   "summary": {
     "rank": {
-      "api": 4,
-      "plan": 23
+      "api": null,
+      "plan": null
     },
     "overall": {
-      "api": 58.41459507966456,
-      "plan": 51.60600592115195
+      "api": null,
+      "plan": null
     },
-    "quality": 51.7423406603443,
-    "qualityRank": 23,
+    "quality": null,
+    "qualityRank": null,
     "coverage": {
-      "pct": 50.0,
-      "costAvailable": true,
+      "pct": 0.0,
+      "costAvailable": false,
       "missing": [
         "DeepSWE v1.1",
         "Bug Hunt Bench",
-        "Terminal-Bench 4.0 (tbench.ai)"
+        "FrontierCode 1.1",
+        "Terminal-Bench 4.0 (AA run)",
+        "GDPval-AA v2.1",
+        "AutomationBench-AA",
+        "AA-Omniscience",
+        "AA-LCR v1.1",
+        "Humanity's Last Exam",
+        "SciCode",
+        "CritPt"
       ],
-      "provisional": true,
-      "provisionalReasons": [
-        "coverage 50% below 70%",
-        "1 SWE leaves observed (need 2)",
-        "observed SWE weight 10% below 40%",
-        "DeepSWE v1.1 missing"
-      ]
+      "provisional": null,
+      "provisionalReasons": []
     },
-    "grade": "measured",
-    "rankingEligible": true,
-    "exclusionReasons": [],
-    "flags": [
-      "Subset cost: scored on its own workload; cross-workload ordering not identified",
-      "Provisional quality: coverage 50% below 70%; 1 SWE leaves observed (need 2); observed SWE weight 10% below 40%; DeepSWE v1.1 missing"
-    ]
+    "grade": "missing",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "Incomplete benchmark evidence after an exhaustive search (O36): no Bug Hunt Bench"
+    ],
+    "flags": []
   },
   "dimensions": [
     {
@@ -73,25 +75,22 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 0.420675333333333,
+      "value": null,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": 42.0675333333333,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/frontiercode"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": null,
@@ -109,253 +108,126 @@
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1607.51,
+      "value": null,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 55.3755,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "automationBench",
       "label": "AutomationBench-AA",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 0.6405168250285657,
+      "value": null,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": 64.05168250285656,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "omniscience",
       "label": "AA-Omniscience",
       "category": "Reliability",
       "weightPct": 7.5,
-      "value": -12.683333333333334,
+      "value": null,
       "decimals": 1,
       "unit": "AA Omniscience Index (-100 to 100)",
-      "normalized": 43.65833333333333,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/omniscience"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
       "weightPct": 3.75,
-      "value": 0.743333333333333,
+      "value": null,
       "decimals": 3,
       "unit": "accuracy (0-1)",
-      "normalized": 74.3333333333333,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "hle",
       "label": "Humanity's Last Exam",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.350787766450417,
+      "value": null,
       "decimals": 3,
       "unit": "accuracy (0-1)",
-      "normalized": 35.0787766450417,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "scicode",
       "label": "SciCode",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.512731481481482,
+      "value": null,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 51.273148148148195,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/scicode"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "critpt",
       "label": "CritPt",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.12,
+      "value": null,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 12.0,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/critpt"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     }
   ],
   "cost": {
-    "apiUsd": 60.36787614182735,
-    "planUsd": 40.24525076121824,
+    "apiUsd": null,
+    "planUsd": null,
     "fallback": null,
-    "route": {
-      "id": "mimo-provisional-user-assumption",
-      "planLabel": "MiMo · provisional 1.5x assumption",
-      "planFeeUsd": null,
-      "valueMultiple": 1.5,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceModel": null,
-      "sourceUrl": null,
-      "sourceDate": null
-    },
-    "subset": true,
+    "route": null,
+    "subset": null,
     "partialComponents": [],
-    "workload": "1453a9a0576b02ea",
-    "planFlags": [
-      "workload-unmatched",
-      "owner-named transfer (assumption)",
-      "valuation basis unverified",
-      "observed-usage multiple; full utilisation not established"
-    ],
+    "workload": null,
+    "planFlags": [],
     "costScore": {
-      "api": 78.43135833762534,
-      "plan": 51.19700170357489
+      "api": null,
+      "plan": null
     },
-    "components": [
-      {
-        "key": "aa-briefcase",
-        "label": "AA-Briefcase",
-        "costUsd": 13.806623258609111,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "gdpval-aa",
-        "label": "GDPval-AA",
-        "costUsd": 16.09881096468858,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "gdp-pdf",
-        "label": "GDP.pdf",
-        "costUsd": 2.0133731800000003,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "automationbench-aa",
-        "label": "AutomationBench-AA",
-        "costUsd": 10.943240774916466,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "terminalbench-4-0",
-        "label": "Terminal-Bench 4.0 (AA Index run)",
-        "costUsd": 15.190454063613196,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "scicode",
-        "label": "SciCode",
-        "costUsd": 0.8094480800000001,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "artificial-analysis-long-context-reasoning",
-        "label": "AA-LCR",
-        "costUsd": 1.50592582,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      }
-    ],
+    "components": [],
     "aaCostCaveat": null,
-    "selectionReason": "only remaining eligible route",
-    "planAmount": {
-      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
-      "amountTarget": "assumed consumption",
-      "amountUsd": null,
-      "derivation": "authorised assumption: the donor's multiple times this route's cash",
-      "feePeriod": "month",
-      "subscriptionCashUsd": null,
-      "additionalCashUsd": 0.0,
-      "grossCashUsd": null,
-      "workload": "the route's measurement workload",
-      "measurementObjectId": "mimo-provisional-user-assumption",
-      "capacitySolutionId": null,
-      "cashObjectId": "mimo-provisional-user-assumption:month cash",
-      "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
-      "capacityStatus": "saturation unverified",
-      "valuationStatus": "unverified",
-      "donorRouteId": null,
-      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
-    }
+    "selectionReason": null,
+    "planAmount": null
   },
-  "plans": [
-    {
-      "id": "mimo-provisional-user-assumption",
-      "planLabel": "MiMo · provisional 1.5x assumption",
-      "planFeeUsd": null,
-      "valueMultiple": 1.5,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": null,
-      "sourceDate": null,
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 40.24525076121824,
-      "selected": true
-    }
-  ],
+  "plans": [],
   "scenarios": {
     "status": "current",
     "api": [],
@@ -396,14 +268,6 @@
       "rank": {
         "api": 12,
         "plan": null
-      }
-    },
-    {
-      "version": "v3.0.0",
-      "date": "2026-10-19",
-      "rank": {
-        "api": 4,
-        "plan": 23
       }
     }
   ],

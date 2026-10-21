@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gemini-3-8-flash",
   "summary": {
     "rank": {
-      "api": 32,
-      "plan": 35
+      "api": 25,
+      "plan": 29
     },
     "overall": {
-      "api": 46.65146910861138,
-      "plan": 42.36211613120964
+      "api": 46.69624183588411,
+      "plan": 42.40688885848237
     },
-    "quality": 50.26389504587976,
-    "qualityRank": 25,
+    "quality": 50.32359201557672,
+    "qualityRank": 21,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -67,7 +67,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.363585,
@@ -85,19 +85,19 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 19.1,
+      "value": 19.6969696969697,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 19.1,
+      "normalized": 19.6969696969697,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "Gemini 3.8 Flash (high) / mini-SWE-agent",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -528,8 +528,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 32,
-        "plan": 35
+        "api": 25,
+        "plan": 29
       }
     }
   ],

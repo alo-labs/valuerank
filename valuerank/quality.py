@@ -43,8 +43,8 @@ class Leaf:
 LEAVES = (
     Leaf("deepswe", "DeepSWE v1.1", "swe", 30.0, "aa"),
     Leaf("bugHunt", "Bug Hunt Bench", "swe", 10.0, "independent"),
-    Leaf("frontierCode", "AA FrontierCode 1.1", "swe", 10.0, "aa"),
-    Leaf("terminalBench", "Terminal-Bench 4.0 (tbench.ai)", "swe", 10.0, "independent"),
+    Leaf("frontierCode", "FrontierCode 1.1", "swe", 10.0, "aa"),
+    Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 10.0, "aa"),
     Leaf("gdpval", "GDPval-AA v2.1", "professional", 10.0, "aa"),
     Leaf("automationBench", "AutomationBench-AA", "professional", 10.0, "aa"),
     # LiveBench instruction following is retired (owner decision O26): Omniscience takes the group's 10%.

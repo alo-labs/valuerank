@@ -200,7 +200,8 @@ def test_reconciled_report_for_complete_observed_frontier(world):
     assert report["frontier"][0]["rankStatus"] == "Primary ranked"
     assert report["frontier"][0]["metricGap"] is None
     assert report["requiredFamilies"] == [{"family": "Family A", "modelId": "m-a",
-                                           "selectedFrontierConfigurationN": 1, "primaryRanked": True}]
+                                           "selectedFrontierConfigurationN": 1, "primaryRanked": True,
+                                           "incompleteEvidence": False}]
     assert report["comparisonCandidates"] == [] and report["missingFrontierIds"] == []
     assert report["unresolvedFrontierIds"] == [] and report["deferredFrontierIds"] == []
     assert (report["observedRowN"], report["validRowN"]) == (1, 1)
@@ -492,6 +493,18 @@ def test_unranked_roster_model_fails_family_inclusion(world):
     assert has_issue(report, "Required AA frontier family Family A (m-a) must resolve to one exact selected frontier configuration")
 
 
+def test_logged_incomplete_evidence_exclusion_satisfies_family_inclusion(world):
+    # O36/O38: the score build lists a family whose selected configuration lacks a benchmark after the logged search.
+    reason = "Incomplete benchmark evidence after an exhaustive search (O36): no Bug Hunt Bench"
+    scores = {"models": [{"id": "m-a", "rankingEligible": False, "rankingStatus": rec.INCOMPLETE_STATUS, "rankingExclusionReasons": [reason]}]}
+    report = run(world, scores=scores)
+    assert report["status"] == "reconciled" and report["issues"] == []
+    assert report["frontier"][0]["rankStatus"] == "Unranked: incomplete benchmark evidence (O36)"
+    assert report["frontier"][0]["primaryRankingGaps"] == [reason]
+    assert report["requiredFamilies"][0] == {"family": "Family A", "modelId": "m-a", "selectedFrontierConfigurationN": 1,
+                                             "primaryRanked": False, "incompleteEvidence": True}
+
+
 # --------------------------------------------------------------------------- fullNumericUniverse mode
 
 
@@ -555,7 +568,7 @@ def test_near_family_in_roster_may_differ_from_the_near_configuration(world):
     assert near["rosterDecision"] is None and near["intelligenceGap"] == 2
     assert near["primaryRankingGaps"] == ["Exact evaluated variant absent from source roster"]
     assert report["nearFrontierFamilies"] == [{"family": "Family A", "modelId": "m-a", "configurationN": 1,
-                                               "inRoster": True, "primaryRanked": True, "deferred": False}]
+                                               "inRoster": True, "primaryRanked": True, "deferred": False, "incompleteEvidence": False}]
     assert report["missingNearFrontierIds"] == ["model-a :: Model A (medium)"]
     assert report["unresolvedNearFrontierIds"] == ["model-a :: Model A (medium)"]
     assert report["deferredNearFrontierIds"] == []
@@ -578,8 +591,8 @@ def test_near_rows_are_sorted_by_cost_and_families_grouped(world):
     report = run(world, near_doc(rows), roster=C_ROSTER, scores=C_SCORES)
     assert [item["name"] for item in report["nearFrontier"]] == ["Model A (low)", "Model C (high)", "Model A (medium)"]
     assert report["nearFrontierFamilies"] == [
-        {"family": "Family A", "modelId": "m-a", "configurationN": 2, "inRoster": True, "primaryRanked": True, "deferred": False},
-        {"family": "Family C", "modelId": "m-c", "configurationN": 1, "inRoster": True, "primaryRanked": True, "deferred": False}]
+        {"family": "Family A", "modelId": "m-a", "configurationN": 2, "inRoster": True, "primaryRanked": True, "deferred": False, "incompleteEvidence": False},
+        {"family": "Family C", "modelId": "m-c", "configurationN": 1, "inRoster": True, "primaryRanked": True, "deferred": False, "incompleteEvidence": False}]
 
 
 def test_deferred_near_family_needs_a_dated_decision_per_row(world):
@@ -591,7 +604,7 @@ def test_deferred_near_family_needs_a_dated_decision_per_row(world):
     report = run(world, near_doc(both, rosterDecisions=decisions))
     assert report["status"] == "reconciled" and report["issues"] == []
     assert report["nearFrontierFamilies"] == [{"family": "Family D", "modelId": None, "configurationN": 2,
-                                               "inRoster": False, "primaryRanked": False, "deferred": True}]
+                                               "inRoster": False, "primaryRanked": False, "deferred": True, "incompleteEvidence": False}]
     assert report["deferredNearFrontierIds"] == ["model-d :: Model D (low)", "model-d :: Model D (max)"]
     assert report["unresolvedNearFrontierIds"] == []
     assert report["nearFrontier"][0]["rankStatus"] == "Deferred comparison candidate"
@@ -621,6 +634,12 @@ def test_near_family_with_required_id_must_be_in_roster_and_ranked(world):
     assert has_issue(report, "Near-frontier AA family Family C (m-c) must appear in the primary ranking")
     assert report["nearFrontierFamilies"][0]["inRoster"] is True and report["nearFrontierFamilies"][0]["primaryRanked"] is False
     assert report["nearFrontier"][0]["rankStatus"] == "Unranked source candidate"
+    # O36/O38: a logged incomplete-evidence exclusion lists the family explicitly instead of blocking.
+    listed = {"models": [*SCORES["models"], {"id": "m-c", "rankingEligible": False, "rankingStatus": rec.INCOMPLETE_STATUS,
+                                             "rankingExclusionReasons": ["no FrontierCode"]}]}
+    report = run(world, near_doc([absent]), roster=C_ROSTER, scores=listed)
+    assert not has_issue(report, "Near-frontier AA family Family C (m-c) must appear in the primary ranking")
+    assert report["nearFrontierFamilies"][0]["incompleteEvidence"] is True and report["nearFrontierFamilies"][0]["primaryRanked"] is False
 
 
 @pytest.mark.parametrize("override, fragment", [
@@ -851,7 +870,7 @@ def test_publication_near_summary_tolerates_missing_policy_and_fractional_gap():
     fractional = dict(base, nearFrontierPolicy={"maxIntelligenceGap": 2.5},
                       nearFrontier=[{"aaId": "n", "name": "N", "sourceUrl": "https://artificialanalysis.ai/models/n",
                                      "intelligenceIndex": 5, "totalCostUsd": 1, "rankStatus": "Primary ranked", "primaryRankingGaps": []}],
-                      nearFrontierFamilies=[{"family": "N", "primaryRanked": True, "deferred": False}])
+                      nearFrontierFamilies=[{"family": "N", "primaryRanked": True, "deferred": False, "incompleteEvidence": False}])
     text, _ = rec.publication(fractional)
     assert "1 plotted configurations from 1 families lie within 2.5 Index points" in text
     assert "| Near AA frontier (within 2.5 Index points) |" in text

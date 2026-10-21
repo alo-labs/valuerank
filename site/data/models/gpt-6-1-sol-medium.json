@@ -8,21 +8,18 @@
   "summary": {
     "rank": {
       "api": 2,
-      "plan": 3
+      "plan": 6
     },
     "overall": {
-      "api": 60.00267818617599,
-      "plan": 59.677140635646396
+      "api": 58.23450255720285,
+      "plan": 57.908965006673256
     },
-    "quality": 60.892736516386584,
-    "qualityRank": 9,
+    "quality": 58.53516901108907,
+    "qualityRank": 12,
     "coverage": {
-      "pct": 80.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "AA FrontierCode 1.1",
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -70,33 +67,39 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.5023,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 50.23,
+      "source": {
+        "name": "Cognition (FrontierCode's author)",
+        "url": "https://cognition.com/data/frontiercode-leaderboard/data.json"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "GPT-6.1 Sol (medium), harness codex",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 47.979797979798,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 47.979797979798,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",
@@ -419,36 +422,36 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2857,
-        "top3": 0.6439,
-        "frontier": 0.7143
+        "top1": 0.0,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.2775,
-        "top3": 0.6203,
-        "frontier": 0.7017
+        "top1": 0.0405,
+        "top3": 0.9992,
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2724,
-        "top3": 0.6086,
-        "frontier": 0.6544
+        "top1": 0.0,
+        "top3": 1.0,
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.2783,
-        "top3": 0.6368,
-        "frontier": 0.7209
+        "top1": 0.0,
+        "top3": 1.0,
+        "frontier": 1.0
       }
     ],
     "plan": [
@@ -458,8 +461,8 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
-        "frontier": 1.0
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -501,7 +504,7 @@
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
+      "definite": "certified",
       "possible": "certified"
     },
     "plan": null
@@ -512,7 +515,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 2,
-        "plan": 3
+        "plan": 6
       }
     }
   ],

@@ -8,21 +8,18 @@
   "summary": {
     "rank": {
       "api": 26,
-      "plan": 32
+      "plan": 30
     },
     "overall": {
-      "api": 50.209960459726744,
-      "plan": 44.539803772651155
+      "api": 46.68076350314365,
+      "plan": 41.01060681606806
     },
-    "quality": 49.999820114594385,
-    "qualityRank": 28,
+    "quality": 45.29422417248359,
+    "qualityRank": 26,
     "coverage": {
-      "pct": 80.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "AA FrontierCode 1.1",
-        "Terminal-Bench 4.0 (tbench.ai)"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -70,33 +67,39 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.388022666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 38.8022666666667,
+      "source": {
+        "name": "Artificial Analysis",
+        "url": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "DeepSeek V4 Pro 0813 (Max)",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 14.1414141414141,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 14.1414141414141,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-17",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "gdpval",
@@ -330,26 +333,26 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0037,
-        "frontier": 0.0085
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0014,
-        "top3": 0.0116,
-        "frontier": 0.0125
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0008,
-        "top3": 0.0159,
-        "frontier": 0.0198
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -357,8 +360,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0031,
-        "frontier": 0.0073
+        "top3": 0.0,
+        "frontier": 0.0
       }
     ],
     "plan": [
@@ -386,8 +389,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0039,
-        "frontier": 0.0004
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -412,7 +415,7 @@
   "intervals": {
     "api": {
       "definite": "disproved",
-      "possible": "certified"
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -454,7 +457,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 26,
-        "plan": 32
+        "plan": 30
       }
     }
   ],

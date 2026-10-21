@@ -58,7 +58,7 @@ FRACTION_LEAVES = {
     "critpt": "critpt",
 }
 CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (labels rounded to USD 1)" for slug in basket.CHART_COMPONENTS}
-DEFAULT_TB_HARNESS = "Terminus 2"  # E125: the named default harness of the same-harness diagnostic
+DEFAULT_TB_HARNESS = "mini-SWE-agent"  # E125/O37: AA's Terminal-Bench harness; a leaf on any other agent is a gap fill
 SCENARIO_COUNT = 10_000
 SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False))
 MEASUREMENT_STREAM = "S1M"  # E162/E165: S1 plus conventional range sensitivity inside published 95% intervals (Terminal-Bench today)
@@ -87,7 +87,32 @@ SCENARIO_FILE = "v3_scenarios.json"
 # --------------------------------------------------------------------------
 
 
-def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict | None, tb4_rows: list[dict], bug_hunt: dict | None) -> dict:
+# O36: a leaf the primary source lacks is taken, in this order, from another independent party that ran the same
+# benchmark version on the exact configuration, else from the model provider's own published result (a provider claim).
+SUPPLEMENT_ORDER = ("aa_recapture", "independent", "model_provider_claim")
+LEAF_LABELS = {leaf.key: leaf.label for leaf in q.LEAVES}
+SUPPLEMENT_UNITS = {"percent": lambda value: q.percent_z(value), "fraction": lambda value: q.fraction_z(value),
+                    "fixedOf105": lambda value: q.bug_hunt_z(value, BUG_HUNT_HALF_WIDTH)}
+LEAF_SEARCH_MAX_AGE_DAYS = 7
+
+
+def leaf_supplements(documents: dict) -> dict:
+    """O36: the eligible supplementary observations per (model, leaf), best source first; Terminal-Bench provider claims
+    recorded in the tbench.ai capture count as provider claims."""
+
+    entries = list((documents.get("leafEvidence") or {}).get("supplements", []))
+    entries += [{"modelId": claim["cohortModelId"], "leaf": "terminalBench", "value": claim["valuePct"], "unit": "percent", "sourceType": "model_provider_claim",
+                 "configuration": claim.get("evaluatedModel"), "url": claim.get("sourceUrl"), "publishedOn": claim.get("publishedOn"), "publisher": claim.get("publisher"),
+                 "artifact": "tb4", "locator": f"providerClaims[claimId={claim.get('claimId')}].valuePct"}
+                for claim in documents["tb4"].get("providerClaims", []) if claim.get("eligibleForRanking") is True]
+    chosen = {}
+    for entry in sorted(entries, key=lambda item: SUPPLEMENT_ORDER.index(item["sourceType"])):
+        chosen.setdefault((entry["modelId"], entry["leaf"]), entry)
+    return chosen
+
+
+def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict | None, tb4_rows: list[dict], bug_hunt: dict | None,
+                  supplements: dict | None = None) -> dict:
     """Exact-configuration observations for the eleven leaves, with provenance, evidence locators (E159) and the clipping audit (E110)."""
 
     observations, provenance, audit = {}, {}, []
@@ -112,7 +137,12 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict |
         add("bugHunt", bug_hunt["fixedOf105"], q.bug_hunt_z(bug_hunt["fixedOf105"], BUG_HUNT_HALF_WIDTH),
             {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN")},
             "bugHunt", f"models[modelId={model_id}].fixedOf105")
-    tb4 = exact_match.select_tb4_row(model_id, effort, tb4_rows)
+    # O37: AA's own Terminal-Bench 4.0 run (one harness, every configuration) is the leaf; tbench.ai fills a gap.
+    if page.get("terminalBench40") is not None:
+        add("terminalBench", 100.0 * page["terminalBench40"], q.percent_z(100.0 * page["terminalBench40"]),
+            {"source": "AA Terminal-Bench 4.0 run (Intelligence Index, mini-SWE-agent harness)", "agent": "mini-SWE-agent"},
+            "snapshot", f"{page_path}.terminalBench40")
+    tb4 = None if "terminalBench" in observations else exact_match.select_tb4_row(model_id, effort, tb4_rows)
     if tb4 is not None:
         add("terminalBench", tb4["resolutionRatePct"], q.percent_z(tb4["resolutionRatePct"], TB4_HALF_WIDTH_PCT),
             {"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "configuration": tb4["model"], "agent": tb4.get("agent"),
@@ -132,7 +162,46 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict |
             {"source": "AA Omniscience Index (O28)", "accuracy": accuracy, "hallucinationRate": hallucination, "indexFromRates": rebuilt,
              "unansweredOrPartialShare": unanswered, "abstentionPenalisedZ": max(0.0, page["omniscience"])},
             "snapshot", f"{page_path}.omniscience")
+    for leaf in q.LEAVES:
+        entry = (supplements or {}).get((model_id, leaf.key))
+        if leaf.key not in observations and entry is not None:
+            add(leaf.key, entry["value"], SUPPLEMENT_UNITS[entry["unit"]](entry["value"]),
+                {"source": entry.get("publisher") or entry["sourceType"], "sourceType": entry["sourceType"], "configuration": entry.get("configuration"),
+                 "url": entry.get("url"), "publishedOn": entry.get("publishedOn")},
+                entry.get("artifact", "leafEvidence"), entry.get("locator", f"supplements[modelId={model_id}, leaf={leaf.key}].value"))
     return {"observations": observations, "provenance": provenance, "clipAudit": audit}
+
+
+def incomplete_entry(configuration: dict, evidence: dict) -> dict | None:
+    """O36: a configuration's missing leaves, or None when it has the full benchmark set."""
+
+    missing = [leaf.key for leaf in q.LEAVES if leaf.key not in evidence["observations"]]
+    return {"id": configuration["id"], "name": configuration["name"], "effort": configuration.get("effort"), "missing": missing} if missing else None
+
+
+def incomplete_configurations(configurations: list[dict], documents: dict) -> list[dict]:
+    """O36: the configurations the ranking must list but not rank, each with the leaves it lacks after every source."""
+
+    pages = {page["model"]["slug"]: page["model"] for page in documents["snapshot"]["pages"]}
+    deepswe_by_id = {item["valueRankModelId"]: item for item in documents["deepswe"]["configurations"] if item.get("valueRankModelId")}
+    bug_hunt_by_id = {item["modelId"]: item for item in documents["bugHunt"]["models"]}
+    supplements = leaf_supplements(documents)
+    entries = [incomplete_entry(configuration, leaf_evidence(configuration["id"], configuration.get("effort"), pages[configuration["aaSlug"]],
+                                                             deepswe_by_id.get(configuration["id"]), documents["tb4"]["rows"],
+                                                             bug_hunt_by_id.get(configuration["id"]), supplements))
+               for configuration in configurations]
+    return [entry for entry in entries if entry is not None]
+
+
+def check_leaf_searches(incomplete: list[dict], documents: dict, release_day: date) -> None:
+    """O36: every leaf a cohort configuration lacks has a logged exhaustive search at most 7 days before the cutoff."""
+
+    log = {(item["modelId"], item["leaf"]): item for item in (documents.get("leafEvidence") or {}).get("searches", [])}
+    for row in incomplete:
+        for leaf in row["missing"]:
+            entry = log.get((row["id"], leaf))
+            if entry is None or (release_day - date.fromisoformat(entry["searchedOn"])).days > LEAF_SEARCH_MAX_AGE_DAYS:
+                raise ValueError(f"{row['id']}: no exhaustive search for {leaf} logged within {LEAF_SEARCH_MAX_AGE_DAYS} days of the cutoff (O36)")
 
 
 def row_components(page: dict, cai_record: dict | None, chart_rows: dict) -> tuple[dict, dict]:
@@ -429,11 +498,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         raise ValueError(f"the AA chart capture ({chart}) and model-page snapshot ({pages_at}) are more than {CAPTURE_GAP_MAX_DAYS} days apart (E217)")
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
-    # O33: several efforts of one family can be ranked; only unranked cheaper configurations are listed as unchecked.
-    ranked_efforts: dict[str, set] = {}
-    for configuration in configurations:
-        ranked_efforts.setdefault(configuration_family(configuration), set()).add(configuration.get("effort"))
-    rows = []
+    rows, supplements = [], leaf_supplements(documents)
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
         page = pages.get(configuration["aaSlug"])
@@ -441,7 +506,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             raise ValueError(f"{model_id}: AA model page {configuration['aaSlug']} is missing from the pinned snapshot")
         # A cohort row without a pinned map entry keeps its Index evidence; its agent and chart costs are missing (flagged).
         labels = mapping.get(model_id) or {}
-        evidence = leaf_evidence(model_id, effort, page, deepswe_by_id.get(model_id), documents["tb4"]["rows"], bug_hunt_by_id.get(model_id))
+        evidence = leaf_evidence(model_id, effort, page, deepswe_by_id.get(model_id), documents["tb4"]["rows"], bug_hunt_by_id.get(model_id), supplements)
         components, reconciliation = row_components(
             page,
             agent_records.get(labels.get(basket.CODING_AGENT_INDEX)),
@@ -468,8 +533,18 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "configurationMapped": model_id in mapping,
             "routeSelection": plan_routes.route_selection(candidates),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window),
-            "cheaperSiblings": cheaper_siblings(configuration, page, points, ranked_efforts[configuration_family(configuration)]),
         })
+    # O36: only configurations with every leaf are ranked; the rest stay listed with their missing leaves and searches.
+    incomplete = [entry for entry in (incomplete_entry(row, row["evidence"]) for row in rows) if entry is not None]
+    check_leaf_searches(incomplete, documents, release_day)
+    rows = [row for row in rows if incomplete_entry(row, row["evidence"]) is None]
+    # O33: several efforts of one family can be ranked; only unranked cheaper configurations (an O36-incomplete one
+    # included) are listed as unchecked.
+    ranked_efforts: dict[str, set] = {}
+    for row in rows:
+        ranked_efforts.setdefault(configuration_family(row), set()).add(row.get("effort"))
+    for row in rows:
+        row["cheaperSiblings"] = cheaper_siblings(row, row["page"], points, ranked_efforts[configuration_family(row)])
     ids = [row["id"] for row in rows]
     admission = basket.admission_panel({row["id"]: row["components"] for row in rows}, ids)
     admitted = admission["admitted"]
@@ -483,7 +558,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
     return {
         "rows": rows, "admission": admission, "admitted": admitted, "deferred": [{"component": component, "reason": DEFERRED_MIGRATION} for component in deferred],
-        "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"],
+        "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete,
     }
 
 
@@ -1370,6 +1445,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "identificationYield": yield_,
         "rows": [_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))) for row in rows],
         "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
+        "incompleteEvidence": assembled.get("incomplete", []),
         "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis) for basis in BASES},
         "barCurrency": bar_currency(assembled, frozen),
         "observedRangeBars": observed_range_bars(assembled, frozen),
@@ -1546,24 +1622,24 @@ def _panel_dispersion(rows: list[dict]) -> dict:
 
 
 def _tb_same_harness(rows: list[dict], tb4_rows: list[dict]) -> dict:
-    """E125: the restricted single-harness Terminal-Bench variant, its agreement with the primary leaf, harness-mixed rows."""
+    """E125 (as amended by O37): the leaf is AA's own run on one harness; rows whose leaf came from another agent are
+    harness-mixed, and the leaf's agreement with tbench.ai's vendor-agent results is published on their common panel."""
 
-    same = [item for item in tb4_rows if item.get("agent") == DEFAULT_TB_HARNESS]
     primary, restricted, mixed = {}, {}, []
     for row in rows:
         source = row["evidence"]["provenance"].get("terminalBench")
-        if source is not None:
+        if source is not None and "terminalBench" in row["evidence"]["observations"]:
             primary[row["id"]] = row["evidence"]["observations"]["terminalBench"].z
             if source.get("agent") != DEFAULT_TB_HARNESS:
                 mixed.append(row["id"])
-        selected = exact_match.select_tb4_row(row["id"], row.get("effort"), same)
+        selected = exact_match.select_tb4_row(row["id"], row.get("effort"), tb4_rows)
         if selected is not None:
             restricted[row["id"]] = selected["resolutionRatePct"]
     return {
         "defaultHarness": DEFAULT_TB_HARNESS,
         "restricted": restricted,
         "harnessMixed": sorted(mixed),
-        "agreement": diagnostics.agreement(primary, restricted, label="Terminal-Bench same-harness diagnostic"),
+        "agreement": diagnostics.agreement(primary, restricted, label="Terminal-Bench cross-source agreement (AA's run against tbench.ai)"),
     }
 
 
@@ -1589,13 +1665,11 @@ def _abstention_sensitivity(rows: list[dict], per_row: dict) -> dict:
 
     primary, penalised = {}, {}
     for row in rows:
-        observations = dict(row["evidence"]["observations"])
-        source = row["evidence"]["provenance"].get("omniscience")
         value = per_row[row["id"]]["api"]["value"]
         if value is None:
             continue
-        if source is not None:
-            observations["omniscience"] = q.Observation(source["abstentionPenalisedZ"])
+        # O36: every scored row has the Omniscience leaf.
+        observations = {**row["evidence"]["observations"], "omniscience": q.Observation(row["evidence"]["provenance"]["omniscience"]["abstentionPenalisedZ"])}
         primary[row["id"]] = value
         penalised[row["id"]] = anchor_math.value_score(per_row[row["id"]]["api"]["costScore"], q.summarize(observations).displayed, BETA)
     return {"rule": "z_pen = max(0, I)", "rankChanges": diagnostics.paired_rank_change(primary, penalised)}
@@ -1611,10 +1685,9 @@ def _gdpval_logistic_sensitivity(rows: list[dict], per_row: dict) -> dict:
             value = per_row[row["id"]][basis]["value"]
             if value is None:
                 continue
-            observations = dict(row["evidence"]["observations"])
-            source = row["evidence"]["provenance"].get("gdpval")
-            if source is not None:
-                observations["gdpval"] = q.Observation(q.gdpval_logistic_z(source["evidence"]["publishedValue"]))
+            # O36: every scored row has the GDPval-AA leaf.
+            published = row["evidence"]["provenance"]["gdpval"]["evidence"]["publishedValue"]
+            observations = {**row["evidence"]["observations"], "gdpval": q.Observation(q.gdpval_logistic_z(published))}
             primary[row["id"]] = value
             logistic[row["id"]] = anchor_math.value_score(per_row[row["id"]][basis]["costScore"], q.summarize(observations).displayed, BETA)
         result[basis] = {"rankChanges": diagnostics.paired_rank_change(primary, logistic)}
@@ -1626,13 +1699,14 @@ def _z_by_leaf(rows: list[dict]) -> dict:
 
 
 def _independent_quality(rows: list[dict]) -> dict:
-    """Q_ind = (z_BugHunt + z_TB) / 2 on the matched panel: rows with both independently executed leaves."""
+    """Q_ind = the mean z of the independently executed leaves (Bug Hunt alone since O37 moved Terminal-Bench to AA's
+    run) on the matched panel: rows with every such leaf."""
 
     independent = {}
     for row in rows:
         values = row["evidence"]["observations"]
-        if "bugHunt" in values and "terminalBench" in values:
-            independent[row["id"]] = (values["bugHunt"].z + values["terminalBench"].z) / 2.0
+        if all(leaf.key in values for leaf in INDEPENDENT_LEAVES):
+            independent[row["id"]] = sum(values[leaf.key].z for leaf in INDEPENDENT_LEAVES) / len(INDEPENDENT_LEAVES)
     return independent
 
 
@@ -1657,6 +1731,7 @@ def _substitution_agreement(rows: list[dict], per_row: dict) -> dict:
 
 
 AA_LEAVES = tuple(leaf for leaf in q.LEAVES if leaf.source == "aa")
+INDEPENDENT_LEAVES = tuple(leaf for leaf in q.LEAVES if leaf.source == "independent")
 
 
 def _disjoint_agreement(rows: list[dict]) -> dict:
@@ -1670,7 +1745,7 @@ def _disjoint_agreement(rows: list[dict]) -> dict:
         if row["id"] in independent and observed:
             aa_only[row["id"]] = sum(leaf.weight * values[leaf.key].z for leaf in observed) / sum(leaf.weight for leaf in observed)
     result = diagnostics.agreement(aa_only, independent, label="disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking)")
-    result["retainedLeaves"] = {"aaExecuted": {leaf.key: leaf.weight for leaf in AA_LEAVES}, "independent": {"bugHunt": 50.0, "terminalBench": 50.0}}
+    result["retainedLeaves"] = {"aaExecuted": {leaf.key: leaf.weight for leaf in AA_LEAVES}, "independent": {leaf.key: 100.0 / len(INDEPENDENT_LEAVES) for leaf in INDEPENDENT_LEAVES}}
     return result
 
 
@@ -2128,6 +2203,8 @@ EVIDENCE_FILES = {
     "bugHuntScoreboard": ("bug_hunt_scoreboard.json", "the owner's combined scoreboard at the pinned commit (O31 roster check)"),
     "planRoutes": ("plan_cost_routes.json", "editorial Plan evidence registry"),
     "priceRecords": ("price_records.json", "editorial E141 price-record registry (superseded and promotional tariffs)"),
+    "leafEvidence": ("leaf_evidence.json", "editorial supplementary leaf evidence and the exhaustive-search log (O36)"),
+    "cognitionFrontierCode": ("cognition_frontiercode.json", "Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37)"),
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 

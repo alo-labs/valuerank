@@ -19,6 +19,9 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - O33 (2026-10-21) Every evidenced effort (exact DeepSWE + matched Bug Hunt) is ranked as its own row, supersedes one-configuration-per-family; the family rule only picks the primary row carrying the frontier/near reason. Cohort 37, scored 36.
 - O34 (2026-10-21) Quartile ladder of frozen bars (lower quartile, lower median = headline, upper quartile; zero-based position floor((n−1)k/4)); today 48.1 / 56.7 / 60.9 over 35.
 - O35 (2026-10-21) Fable 5.1 is not a donor-error gauge: its 12.4–12.7x Max multiples reflect Fable's own tighter allowance ("Fable use is indeed much limited in Claude"); no Fable-based transfer diagnostic.
+- O36 (2026-10-21) Only configurations with all eleven leaves are ranked; a leaf AA lacks comes from another party's run of the same benchmark on the exact configuration, then the provider's result; a configuration still missing one after a search logged within 7 days of the cutoff is listed with the gap, not ranked.
+- O37 (2026-10-21) Terminal-Bench leaf = AA's own run (tbench.ai fills gaps); FrontierCode = AA, then Cognition; MiMo-V2.6-Pro DeepSWE admitted as a provider claim.
+- O38 (2026-10-21) A required frontier family missing a leaf after the logged search is listed, not ranked (MiMo-V2.6-Flash, no Bug Hunt); the reconciliation gate accepts only this logged exclusion. Cohort 32 (31 scored) of 37; bars 47.4 / 55.3 / 59.6.
 - O23 MMMU-Pro dropped from the basket. O24 Both priced Terminal-Bench executions stay (AA Index run and Coding Agent Index vendor-agent run); overlap disclosed.
 
 ## Editor decisions in force (owner may override)

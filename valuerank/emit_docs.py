@@ -16,6 +16,7 @@ from valuerank import basket
 from valuerank import exact_match
 from valuerank import quality as q
 from valuerank import scenarios
+from valuerank import value_v3
 from valuerank.aa_reconciliation import publication as aa_reconciliation_publication, reconcile as reconcile_aa
 from valuerank.paths import DATA, ROOT
 from valuerank.publication import (
@@ -54,6 +55,8 @@ LEAF_TRANSFORMS = {
     "critpt": "z = 100 × score",
 }
 SOURCE_LABELS = {"aa": "AA-run", "independent": "independent"}
+SOURCE_TYPE_LABELS = {"aa_recapture": "newer AA capture", "independent": "independent run", "model_provider_claim": "model-provider result"}
+LEAF_SEARCH_DAYS = value_v3.LEAF_SEARCH_MAX_AGE_DAYS
 # Owner-authorised route applications in the Plan evidence policy, printed when recorded.
 POLICY_APPLICATIONS = (
     ("gptApplication", "GPT"),
@@ -239,6 +242,7 @@ class Facts:
         self.routes_document = json.loads((data / "plan_cost_routes.json").read_text())
         self.deepswe = json.loads((data / "aa_deepswe.json").read_text())
         self.tb4 = json.loads((data / "tb4.json").read_text())
+        self.leaf_evidence = json.loads((data / "leaf_evidence.json").read_text())
         self.bug_hunt = json.loads((data / "bug_hunt.json").read_text())
         self.v3 = self.scores["v3"]
         self.rows = {row["id"]: row for row in self.v3["rows"]}
@@ -399,7 +403,7 @@ def cross_harness_text(facts):
 
 
 def selected_agents_text(facts, tb4):
-    """E225: how many cohort rows take their Terminal-Bench leaf from each registered agent."""
+    """E225/O37: how many cohort rows each registered tbench.ai agent matches (the cross-check and gap-fill pool)."""
 
     counts = {}
     for row in facts.scores["models"]:
@@ -408,7 +412,8 @@ def selected_agents_text(facts, tb4):
             if chosen is not None:
                 counts[chosen["agent"]] = counts.get(chosen["agent"], 0) + 1
     order = ", ".join(f"{agent} {counts[agent]}" for agent in exact_match.TB4_AGENT_PREFERENCE if agent in counts)
-    return f"Selected agents for cohort rows, in the registered preference order (E225): {order or 'none'}."
+    return (f"Since O37 the Terminal-Bench leaf is AA's own run; these rows cross-check it and fill a gap. Matched agents for cohort rows, "
+            f"in the registered preference order (E225): {order or 'none'}.")
 
 
 def bar_currency_text(currency):
@@ -461,7 +466,9 @@ def common_leaf_text(diagnostic, facts):
 def harness_by_leaf_text(facts):
     """E227: the agent or harness each harness-run leaf was scored on, by cohort rows (each lab's model in its own agent)."""
 
-    leaves = (("DeepSWE", lambda row: row.get("deepsweAgent")), ("Terminal-Bench", lambda row: (exact_match.select_tb4_row(row["id"], row.get("aaVariant"), facts.tb4["rows"]) or {}).get("agent")),
+    # O37: the Terminal-Bench leaf is AA's own run, so its agent is the leaf's provenance (tbench.ai's only for a gap fill).
+    tb_agents = {row["id"]: (row["quality"]["leaves"].get("terminalBench") or {}).get("agent") for row in facts.v3["rows"]}
+    leaves = (("DeepSWE", lambda row: row.get("deepsweAgent")), ("Terminal-Bench", lambda row: tb_agents.get(row["id"])),
               ("Bug Hunt", lambda row: (row.get("bugHunt") or {}).get("harness") if (row.get("bugHunt") or {}).get("matched") else None))
     parts = []
     for name, pick in leaves:
@@ -562,7 +569,7 @@ def readme(facts):
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, over the leaves observed for the exact configuration; missing evidence is never filled in. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, and every ranked configuration has all {len(q.LEAVES)} for its exact configuration (O36): a leaf AA has not run comes from another party's run of the same benchmark, then from the model provider's published result, and a configuration still missing one after a logged exhaustive search is listed, not ranked. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
 
 {leaders(facts)}
 
@@ -585,7 +592,7 @@ Scenario shares by stream, diagnostics and the release gates are in [scores.md](
 
 - **Cost is the SDLC basket.** {v3['basketVersion']}: AA's published cost of running the {series(admitted)} once at API rates, in USD per basket run. Pending capture: {names([item['label'] for item in method['basket']['pending']])}. v2 used AA's cost to run the whole Intelligence Index per Index point.
 - **Cost keeps its magnitude.** The cost score is 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100, against anchors frozen with anchor version `{v3['anchorVersion']}`. A model entering or leaving the cohort does not move another model's score. At the API anchors, doubling cost costs {method['exchangeRate']['api']['valuePointsPerCostDoubling']:.2f} value points, which {method['exchangeRate']['api']['qualityPointsPerCostDoubling']:.2f} quality points offset.
-- **Quality is measured, not ranked.** Each of the {len(q.LEAVES)} leaves is placed on fixed 0–100 anchors from its raw value, so quality no longer depends on which other models are ranked. A missing leaf is left out of that configuration's mean, its coverage is shown, and low coverage marks the row provisional.
+- **Quality is measured, not ranked.** Each of the {len(q.LEAVES)} leaves is placed on fixed 0–100 anchors from its raw value, so quality no longer depends on which other models are ranked. Only configurations with every leaf are ranked (O36), so all ranked rows are scored on the same benchmarks; each leaf filled from another party or a provider is listed in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 - **Plan value is route evidence.** Each subscription route carries its Value Multiple, evidence grade (controlled measurement, concordant reports, owner-named assumption) and identification status; the Plan ranking is labelled exploratory until multiples are identified on the basket.
 - **Uncertainty is shown, not hidden.** Interval outputs certify which frontier and cheapest-above-a-bar claims the published record supports; scenario shares report frequencies over declared streams.
 - v3 values are not numerically comparable with v2 or earlier releases.
@@ -594,7 +601,7 @@ Scenario shares by stream, diagnostics and the release gates are in [scores.md](
 
 - [Artificial Analysis methodology]({AA_METHODOLOGY_URL}) and its model pages: Intelligence Index component scores and the per-task evaluation costs of the basket.
 - [AA Coding Agent Index, DeepSWE v1.1]({AA_DEEPSWE_URL}): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
-- [Terminal-Bench 4.0]({TERMINAL_BENCH_URL}) official leaderboard rows and [Bug Hunt Bench]({BUG_HUNT_URL}) owner-published runs.
+- AA's own Terminal-Bench 4.0 run (the leaf; [tbench.ai]({TERMINAL_BENCH_URL}) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench]({BUG_HUNT_URL}) owner-published runs, [Cognition's FrontierCode leaderboard]({facts.leaf_evidence['cognitionCapture']['url']}) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements]({SEMIANALYSIS_URL}) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
 - The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `{v3['evidenceBundle']['bundleHash']}`.
 - [Methodology co-design record]({SPEC_DIR}): the reviewed specification, every owner and editor decision, and each reviewer's findings.
@@ -622,6 +629,11 @@ def methodology(facts):
     for row_id in facts.rows:
         cohort[facts.cohort_route(row_id)].append(facts.label(row_id))
     cohort_lines = "\n".join(f"- {route} ({len(members)}): {', '.join(members)}" for route, members in cohort.items() if members)
+    incomplete = v3["incompleteEvidence"]
+    incomplete_line = (f"\n\n{len(incomplete)} more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive "
+                       f"search logged within {LEAF_SEARCH_DAYS} days of the cutoff (O36; a required frontier family is listed the same way, O38): "
+                       + "; ".join(f"{item['name']} (no {', '.join(LEAF_LABELS[key] for key in item['missing'])})" for item in incomplete) + "."
+                       ) if incomplete else ""
     component_rows = [
         [component_label(key), "admitted" if item["admitted"] else "pending capture", item["available"], item["covered"], item["ranked"]]
         for key, item in admission["components"].items()
@@ -687,9 +699,9 @@ ValueRank asks which frontier AI model configuration is lowest cost for the valu
 
 {len(facts.rows)} configurations are ranked:
 
-{cohort_lines}
+{cohort_lines}{incomplete_line}
 
-The remaining {len(facts.unranked)} roster models are not ranked; each keeps a page with the evidence held for it.
+The remaining {len(facts.unranked) - len(incomplete)} roster models are not ranked; each keeps a page with the evidence held for it.
 
 {model_inclusion_markdown(facts.inclusion)}
 ## Value
@@ -732,6 +744,8 @@ Quality is the weighted mean of the leaves observed for the exact configuration,
 
 {markdown_table(['Leaf', 'Group', 'Weight in quality', 'Weight in value', 'Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
 
+Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A configuration still missing a leaf after an exhaustive search logged within {LEAF_SEARCH_DAYS} days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
+
 Coverage is the observed share of quality weight. A row is **provisional** when coverage is below {q.MIN_COVERAGE:.0%}, fewer than {q.MIN_SWE_LEAVES} software-engineering leaves are observed, observed software-engineering weight is below {q.MIN_SWE_WEIGHT:.0%}, or a leaf weighing {q.REQUIRED_LEAF_WEIGHT:.0f}% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
 
 ## Plan basis
@@ -761,7 +775,7 @@ S1 also runs with the endpoint-heavy kernel. On the Plan basis the core streams 
 
 ## Diagnostics
 
-Diagnostics are published beside the ranking and never change a score: Terminal-Bench same-harness agreement, anchor stability (exchange-rate series and trimmed-anchor rank shifts), Omniscience abstention sensitivity, quality source shares, matched-panel quality agreement, non-discriminating leaves, group drift, quality dispersion, deletion sensitivity (leave-one-benchmark-out and source deletions) and the standing removal of the Terminal-Bench cost component. Current results are in [scores.md](scores.md#diagnostics).
+Diagnostics are published beside the ranking and never change a score: Terminal-Bench cross-source agreement (AA's run against tbench.ai), anchor stability (exchange-rate series and trimmed-anchor rank shifts), Omniscience abstention sensitivity, quality source shares, matched-panel quality agreement, non-discriminating leaves, group drift, quality dispersion, deletion sensitivity (leave-one-benchmark-out and source deletions) and the standing removal of the Terminal-Bench cost component. Current results are in [scores.md](scores.md#diagnostics).
 
 ## Release gates
 
@@ -778,6 +792,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 - [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `{v3['anchorVersion']}`
 - [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
 - [data/aa_deepswe.json](data/aa_deepswe.json), [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots
+- [data/leaf_evidence.json](data/leaf_evidence.json), [data/cognition_frontiercode.json](data/cognition_frontiercode.json): leaf gap fills and the exhaustive-search log (O36/O37)
 """
 
 
@@ -1124,7 +1139,7 @@ def diagnostics_markdown(facts):
     abstention = diagnostics["omniscienceAbstentionSensitivity"]
     logistic = diagnostics["gdpvalLogisticSensitivity"]
     lines = [
-        f"- **Terminal-Bench same-harness ({harness['defaultHarness']}):** {harness['agreement']['status']}; {len(harness['harnessMixed'])} rows ran on mixed harnesses.",
+        f"- **Terminal-Bench cross-source agreement (AA's {harness['defaultHarness']} run against tbench.ai):** {harness['agreement']['status']}; {len(harness['harnessMixed'])} rows take the leaf from tbench.ai (gap fill).",
         f"- **Quality agreement:** {agreement_text(agreement)}",
         *(f"- **Quality-substitution value agreement ({label}):** {agreement_text(diagnostics['qualitySubstitutionAgreement'][basis])}" for basis, label in (("api", "API"), ("plan", "Plan"))),
         f"- **Disjoint-evidence agreement:** {agreement_text(diagnostics['disjointEvidenceAgreement'])}",
@@ -1166,9 +1181,7 @@ def raw_data(facts):
     for entry in facts.ranked:
         row = facts.row(entry)
         audit = {item["leaf"]: item for item in row["quality"]["clipAudit"]}
-        for leaf in q.LEAVES:
-            if leaf.key not in row["quality"]["leaves"]:
-                continue
+        for leaf in q.LEAVES:  # O36: a ranked row has every leaf
             detail = row["quality"]["leaves"][leaf.key]
             evidence = detail.get("evidence") or {}
             leaf_rows.append([
@@ -1208,6 +1221,16 @@ def raw_data(facts):
         for row in v3["rows"]
         if row["plan"]["amount"]
     ]
+    ranked_ids = {row["id"] for row in v3["rows"]}
+    fill_rows = [
+        [facts.names.get(item["modelId"], item["modelId"]), LEAF_LABELS[item["leaf"]], f"{item['value']:g}", item["unit"], SOURCE_TYPE_LABELS[item["sourceType"]],
+         item.get("publisher") or DASH, item.get("configuration") or DASH, md_link("Source", item["url"]) if item.get("url") else DASH]
+        for item in facts.leaf_evidence["supplements"] if item["modelId"] in ranked_ids
+    ]
+    search_rows = [
+        [facts.names.get(item["modelId"], item["modelId"]), LEAF_LABELS[item["leaf"]], item["searchedOn"], item["result"], len(item.get("sources") or []), item.get("notes") or DASH]
+        for item in facts.leaf_evidence["searches"]
+    ]
     bundle = v3["evidenceBundle"]
     bundle_rows = [[item["key"], f"`{item['artifact']}`", f"`{item['sha256']}`", item.get("capturedAt") or DASH, item.get("extractor") or DASH] for item in bundle["artifacts"]]
     deepswe = facts.deepswe["configurations"]
@@ -1221,6 +1244,16 @@ Every input behind the published scores, with the artifact and locator that hold
 ## Quality leaf inputs
 
 {markdown_table(['Configuration', 'Leaf', 'Raw value', 'Unit', 'Score z', 'Evaluated configuration / agent', 'Evidence'], leaf_rows, numeric={2, 4})}
+
+## Leaf gap fills and searches (O36)
+
+Leaves a ranked configuration takes from beyond its primary source, in the order a newer AA capture, another party's run of the same benchmark on the exact configuration, then the model provider's published result (O36/O37). Tbench.ai Terminal-Bench rows used as gap fills are in the leaf inputs above with their agent.
+
+{markdown_table(['Configuration', 'Leaf', 'Value', 'Unit', 'Source type', 'Publisher', 'Evaluated configuration', 'Source'], fill_rows, numeric={2})}
+
+Exhaustive searches for the leaves a cohort configuration still lacks (each within {LEAF_SEARCH_DAYS} days of the cutoff; the configuration is listed, not ranked). The sources searched are in [data/leaf_evidence.json](data/leaf_evidence.json).
+
+{markdown_table(['Configuration', 'Leaf', 'Searched', 'Result', 'Sources checked', 'Notes'], search_rows, numeric={4})}
 
 ## Basket cost components
 

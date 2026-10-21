@@ -7,21 +7,19 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-sol",
   "summary": {
     "rank": {
-      "api": 21,
+      "api": 16,
       "plan": 15
     },
     "overall": {
-      "api": 50.90003504846763,
-      "plan": 53.59046094375534
+      "api": 50.17950999007759,
+      "plan": 52.8699358853653
     },
-    "quality": 59.695990677523795,
-    "qualityRank": 12,
+    "quality": 58.73529059967041,
+    "qualityRank": 11,
     "coverage": {
-      "pct": 90.0,
+      "pct": 100.0,
       "costAvailable": true,
-      "missing": [
-        "AA FrontierCode 1.1"
-      ],
+      "missing": [],
       "provisional": false,
       "provisionalReasons": []
     },
@@ -69,34 +67,37 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": null,
+      "value": 0.4749,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 47.49,
+      "source": {
+        "name": "Cognition (FrontierCode's author)",
+        "url": "https://cognition.com/data/frontiercode-leaderboard/data.json"
+      },
+      "observedAt": "2026-10-21",
+      "evaluatedVariant": "GPT-5.6 Sol (max), harness codex",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 37.3,
+      "value": 39.8989898989899,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 37.3,
+      "normalized": 39.8989898989899,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "GPT-5.6 Sol (max) / Codex",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -431,7 +432,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0271
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
@@ -439,8 +440,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0001,
-        "frontier": 0.0327
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -449,7 +450,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0343
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -458,7 +459,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0271
+        "frontier": 0.0
       }
     ],
     "plan": [
@@ -512,7 +513,7 @@
   "intervals": {
     "api": {
       "definite": "disproved",
-      "possible": "certified"
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -609,7 +610,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 21,
+        "api": 16,
         "plan": 15
       }
     }

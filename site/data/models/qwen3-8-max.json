@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/qwen3-8-max",
   "summary": {
     "rank": {
-      "api": 36,
-      "plan": 36
+      "api": 31,
+      "plan": 31
     },
     "overall": {
-      "api": 40.9387553696936,
-      "plan": 38.04451773029972
+      "api": 41.83042203636026,
+      "plan": 38.936184396966375
     },
-    "quality": 47.7075874885913,
-    "qualityRank": 31,
+    "quality": 48.896476377480184,
+    "qualityRank": 23,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -67,7 +67,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.431563,
@@ -85,19 +85,19 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 27.0,
+      "value": 38.8888888888889,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 27.0,
+      "normalized": 38.8888888888889,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "Qwen3.8-Max-0902 (max) / Claude Code",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -528,8 +528,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 36,
-        "plan": 36
+        "api": 31,
+        "plan": 31
       }
     }
   ],

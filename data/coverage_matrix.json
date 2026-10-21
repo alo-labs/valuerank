@@ -1385,7 +1385,7 @@
   "scoring": {
     "version": "v3.0.0",
     "cohortN": 37,
-    "scoredN": 36,
+    "scoredN": 31,
     "exactBenchmarkOverlapN": 35,
     "frontierRequiredModelN": 7,
     "frontierRequiredModelIds": [
@@ -2148,7 +2148,7 @@
     },
     "alternateRankings": {
       "bugHuntEmphasis": {
-        "matchedN": 34,
+        "matchedN": 30,
         "cohortN": 49,
         "benchmarkWeightPct": 19.2308,
         "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
@@ -2185,141 +2185,121 @@
           },
           {
             "rank": 7,
-            "modelId": "muse-wonder",
-            "score": 60.4
-          },
-          {
-            "rank": 8,
             "modelId": "claude-opus-5-5",
             "score": 59.5
           },
           {
-            "rank": 9,
+            "rank": 8,
             "modelId": "gpt-5.6-sol",
             "score": 59.4
           },
           {
-            "rank": 10,
+            "rank": 9,
             "modelId": "gpt-6.1-sol-medium",
             "score": 58.9
           },
           {
-            "rank": 11,
+            "rank": 10,
             "modelId": "muse-spark-1-3",
             "score": 57.5
           },
           {
-            "rank": 12,
+            "rank": 11,
             "modelId": "claude-sonnet-5-5-xhigh",
             "score": 56.5
           },
           {
-            "rank": 13,
+            "rank": 12,
             "modelId": "gpt-6-sol",
             "score": 52.8
           },
           {
-            "rank": 14,
+            "rank": 13,
             "modelId": "claude-fable-5-1",
             "score": 51.0
           },
           {
-            "rank": 15,
-            "modelId": "muse-spark-1-3-xhigh",
-            "score": 50.9
-          },
-          {
-            "rank": 16,
+            "rank": 14,
             "modelId": "grok-4.7",
             "score": 50.7
           },
           {
-            "rank": 17,
+            "rank": 15,
             "modelId": "claude-sonnet-5-5-high",
             "score": 49.9
           },
           {
-            "rank": 18,
+            "rank": 16,
             "modelId": "gpt-6.1-sol-low",
             "score": 48.0
           },
           {
-            "rank": 19,
+            "rank": 17,
             "modelId": "gpt-5.6-luna",
             "score": 45.3
           },
           {
-            "rank": 20,
-            "modelId": "grok-4.6-xhigh",
-            "score": 43.0
-          },
-          {
-            "rank": 21,
+            "rank": 18,
             "modelId": "gpt-6-luna",
             "score": 40.2
           },
           {
-            "rank": 22,
+            "rank": 19,
             "modelId": "claude-haiku-5-5-max",
             "score": 40.1
           },
           {
-            "rank": 23,
+            "rank": 20,
             "modelId": "claude-sonnet-5-5-medium",
             "score": 38.9
           },
           {
-            "rank": 24,
+            "rank": 21,
             "modelId": "claude-haiku-5-5",
             "score": 38.6
           },
           {
-            "rank": 25,
+            "rank": 22,
             "modelId": "gemini-3.8-flash",
             "score": 38.4
           },
           {
-            "rank": 26,
+            "rank": 23,
             "modelId": "claude-opus-5",
             "score": 35.9
           },
           {
-            "rank": 27,
+            "rank": 24,
             "modelId": "glm-5.3",
             "score": 34.7
           },
           {
-            "rank": 28,
+            "rank": 25,
             "modelId": "claude-haiku-5-5-high",
             "score": 33.8
           },
           {
-            "rank": 29,
+            "rank": 26,
             "modelId": "claude-haiku-5-5-medium",
             "score": 33.3
           },
           {
-            "rank": 30,
-            "modelId": "deepseek-v4-flash",
-            "score": 32.0
-          },
-          {
-            "rank": 31,
+            "rank": 27,
             "modelId": "claude-haiku-5-5-low",
             "score": 31.1
           },
           {
-            "rank": 32,
+            "rank": 28,
             "modelId": "claude-sonnet-5-5-low",
             "score": 30.4
           },
           {
-            "rank": 33,
+            "rank": 29,
             "modelId": "qwen3.8-max",
             "score": 30.3
           },
           {
-            "rank": 34,
+            "rank": 30,
             "modelId": "deepseek-v4-pro",
             "score": 24.0
           }

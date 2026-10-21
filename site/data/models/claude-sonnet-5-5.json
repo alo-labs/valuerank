@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
   "summary": {
     "rank": {
-      "api": 19,
-      "plan": 4
+      "api": 13,
+      "plan": 1
     },
     "overall": {
-      "api": 51.230319650625816,
-      "plan": 59.32028447302209
+      "api": 51.36804692335308,
+      "plan": 59.45801174574936
     },
-    "quality": 64.3193136891795,
-    "qualityRank": 4,
+    "quality": 64.50295005281585,
+    "qualityRank": 1,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -67,7 +67,7 @@
     },
     {
       "key": "frontierCode",
-      "label": "AA FrontierCode 1.1",
+      "label": "FrontierCode 1.1",
       "category": "Software engineering",
       "weightPct": 7.5,
       "value": 0.458291333333333,
@@ -85,19 +85,19 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (tbench.ai)",
+      "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 61.8,
+      "value": 63.636363636363605,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 61.8,
+      "normalized": 63.636363636363605,
       "source": {
-        "name": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
       "observedAt": "2026-10-17",
-      "evaluatedVariant": "Sonnet 5.5 (max) / Claude Code",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
     },
@@ -408,7 +408,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -417,7 +417,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.2342
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
@@ -426,7 +426,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.221
+        "frontier": 0.5145
       },
       {
         "stratum": "S1",
@@ -435,7 +435,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1547
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
@@ -444,7 +444,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.2316
+        "frontier": 1.0
       }
     ],
     "plan": [
@@ -453,8 +453,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
+        "top1": 1.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -497,7 +497,7 @@
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
+      "definite": "certified",
       "possible": "certified"
     },
     "plan": null
@@ -531,8 +531,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 19,
-        "plan": 4
+        "api": 13,
+        "plan": 1
       }
     }
   ],
