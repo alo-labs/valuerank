@@ -22,9 +22,9 @@ def test_leaf_weights_sum_to_the_group_shares_and_to_100():
 
 def test_source_shares_split_aa_run_and_independent_weight():
     shares = q.source_shares()
-    # O37: Terminal-Bench is AA's own run, so only Bug Hunt is independent.
-    assert shares["aa"] == pytest.approx(0.9)
-    assert shares["independent"] == pytest.approx(0.1)
+    # O37: Terminal-Bench is AA's own run, so only Bug Hunt (15% since O49) is independent.
+    assert shares["aa"] == pytest.approx(0.85)
+    assert shares["independent"] == pytest.approx(0.15)
 
 
 def test_observation_bounds_are_clipped_to_the_domain():
@@ -79,7 +79,7 @@ def test_summarize_full_coverage_row():
     assert summary.displayed == pytest.approx(50.0)
     assert (summary.lower, summary.upper) == (pytest.approx(50.0), pytest.approx(50.0))
     assert summary.provisional is False and summary.provisional_reasons == ()
-    assert summary.swe_leaves == 4 and summary.swe_weight == pytest.approx(0.6)
+    assert summary.swe_leaves == 3 and summary.swe_weight == pytest.approx(0.6)
 
 
 def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
@@ -91,8 +91,8 @@ def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
     assert summary.coverage == pytest.approx(expected_coverage)
     weighted = sum(leaf.weight * observations[leaf.key].z for leaf in q.LEAVES if leaf.key in observations)
     assert summary.displayed == pytest.approx(weighted / (100 * expected_coverage))
-    assert summary.lower == pytest.approx((weighted - 10 * 1.0) / 100)
-    assert summary.upper == pytest.approx((weighted + 10 * 1.0 + (5 / 3) * 100) / 100)
+    assert summary.lower == pytest.approx((weighted - 15 * 1.0) / 100)
+    assert summary.upper == pytest.approx((weighted + 15 * 1.0 + (5 / 3) * 100) / 100)
     assert summary.provisional is False
 
 
@@ -101,20 +101,21 @@ def test_provisional_rule_reports_every_failed_condition():
     summary = q.summarize(observations)
     assert summary.provisional is True
     assert summary.provisional_reasons == (
-        "coverage 20% below 70%",
+        "coverage 25% below 70%",
         "1 SWE leaves observed (need 2)",
-        "observed SWE weight 10% below 40%",
-        "DeepSWE v1.1 missing",
+        "observed SWE weight 15% below 40%",
+        "FrontierCode 1.1 missing",
+        "Terminal-Bench 4.0 (AA run) missing",
     )
 
 
-def test_provisional_when_only_deepswe_is_missing():
+def test_provisional_when_only_frontiercode_is_missing():
     observations = full_observations()
-    del observations["deepswe"]
+    del observations["frontierCode"]
     summary = q.summarize(observations)
-    assert summary.coverage == pytest.approx(0.7)
-    # Coverage sits exactly at 70%, but the other SWE leaves carry only 30% of quality.
-    assert summary.provisional_reasons == ("observed SWE weight 30% below 40%", "DeepSWE v1.1 missing")
+    assert summary.coverage == pytest.approx(0.75)
+    # Coverage clears 70%, but the other SWE leaves carry only 35% of quality, and FrontierCode weighs 25% (O49).
+    assert summary.provisional_reasons == ("observed SWE weight 35% below 40%", "FrontierCode 1.1 missing")
 
 
 def test_summarize_with_no_observations_has_no_displayed_quality():
@@ -139,7 +140,7 @@ def test_composite_requires_every_leaf():
 def test_clip_audit_discloses_saturation_and_rejects_domain_violations():
     """E110: valid saturation is disclosed; values outside the documented domain are rejected."""
 
-    inside = q.clip_audit("deepswe", 72.0)
+    inside = q.clip_audit("terminalBench", 72.0)
     assert inside["domainValid"] and inside["anchorPosition"] == "inside" and inside["action"] == "none" and inside["clippingAmount"] == 0.0
     high_elo = q.clip_audit("gdpval", 2700.0)
     assert high_elo["anchorPosition"] == "above" and high_elo["clippingAmount"] == pytest.approx(10.0) and high_elo["action"] == "disclose saturation"
@@ -148,6 +149,6 @@ def test_clip_audit_discloses_saturation_and_rejects_domain_violations():
     assert q.clip_audit("hle", 0.5)["unclippedZ"] == 50.0
     omni = q.clip_audit("omniscience", 43.4)
     assert omni["raw"] == 43.4 and omni["unclippedZ"] == pytest.approx(71.7)
-    for key, raw in (("deepswe", 101.0), ("scicode", -0.1), ("omniscience", 120.0), ("gdpval", float("nan")), ("lcr", True), ("hle", None)):
+    for key, raw in (("terminalBench", 101.0), ("scicode", -0.1), ("omniscience", 120.0), ("gdpval", float("nan")), ("lcr", True), ("hle", None)):
         bad = q.clip_audit(key, raw)
         assert bad["domainValid"] is False and bad["action"].startswith("reject") and bad["unclippedZ"] is None

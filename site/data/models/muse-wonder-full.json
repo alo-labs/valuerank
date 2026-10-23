@@ -14,220 +14,184 @@
       "api": null,
       "plan": null
     },
-    "quality": 64.38987470411483,
-    "qualityRank": 3,
+    "quality": null,
+    "qualityRank": null,
     "coverage": {
-      "pct": 100.0,
+      "pct": 0.0,
       "costAvailable": false,
-      "missing": [],
-      "provisional": false,
+      "missing": [
+        "FrontierCode 1.1",
+        "Terminal-Bench 4.0 (AA run)",
+        "Bug Hunt Bench",
+        "GDPval-AA v2.1",
+        "AutomationBench-AA",
+        "AA-Omniscience",
+        "AA-LCR v1.1",
+        "Humanity's Last Exam",
+        "SciCode",
+        "CritPt"
+      ],
+      "provisional": null,
       "provisionalReasons": []
     },
-    "grade": "measured",
-    "rankingEligible": true,
-    "exclusionReasons": [],
-    "flags": [
-      "No cost: AA publishes no cost for this configuration, so it has no value score and no rank"
-    ]
+    "grade": "missing",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "No exact-variant AA DeepSWE result in the selected source snapshot",
+      "Not a required AA frontier or near-frontier family model"
+    ],
+    "flags": []
   },
   "dimensions": [
-    {
-      "key": "deepswe",
-      "label": "DeepSWE v1.1",
-      "category": "Software engineering",
-      "weightPct": 22.5,
-      "value": 77.0,
-      "decimals": 1,
-      "unit": "% pass@1",
-      "normalized": 77.0,
-      "source": {
-        "name": "AA Coding Agent Index (DeepSWE v1.1)",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-      },
-      "observedAt": "2026-10-17T19:26:26Z",
-      "evaluatedVariant": "Muse Code - Muse Wonder Full (max) / Muse Code",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "bugHunt",
-      "label": "Bug Hunt Bench",
-      "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 42.0,
-      "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 40.0,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "Muse Wonder Full 1.0 (max effort, Muse Code, Meta API) - mean of 2 / Muse Code / Meta API",
-      "note": null,
-      "grade": "measured"
-    },
     {
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 0.448865666666667,
+      "weightPct": 18.75,
+      "value": null,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": 44.8865666666667,
-      "source": {
-        "name": "Artificial Analysis",
-        "url": "https://artificialanalysis.ai/models/muse-wonder-full"
-      },
-      "observedAt": "2026-10-21",
-      "evaluatedVariant": "Muse Wonder Full (Max)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 57.07070707070711,
+      "weightPct": 15.0,
+      "value": null,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 57.07070707070711,
-      "source": {
-        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
-        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "mini-SWE-agent",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
+    },
+    {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": null,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
     },
     {
       "key": "gdpval",
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1857.09,
+      "value": null,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 67.8545,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "automationBench",
       "label": "AutomationBench-AA",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 0.7133074973223975,
+      "value": null,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": 71.33074973223975,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "omniscience",
       "label": "AA-Omniscience",
       "category": "Reliability",
       "weightPct": 7.5,
-      "value": 30.15,
+      "value": null,
       "decimals": 1,
       "unit": "AA Omniscience Index (-100 to 100)",
-      "normalized": 65.075,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/omniscience"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
       "weightPct": 3.75,
-      "value": 0.836666666666667,
+      "value": null,
       "decimals": 3,
       "unit": "accuracy (0-1)",
-      "normalized": 83.6666666666667,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "hle",
       "label": "Humanity's Last Exam",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.536144578313253,
+      "value": null,
       "decimals": 3,
       "unit": "accuracy (0-1)",
-      "normalized": 53.6144578313253,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "scicode",
       "label": "SciCode",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.626157407407407,
+      "value": null,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 62.6157407407407,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/scicode"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "critpt",
       "label": "CritPt",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.328571428571429,
+      "value": null,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 32.857142857142904,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/critpt"
-      },
-      "observedAt": "2026-10-21",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     }
   ],
   "cost": {
@@ -235,7 +199,7 @@
     "planUsd": null,
     "fallback": null,
     "route": null,
-    "subset": true,
+    "subset": null,
     "partialComponents": [],
     "workload": null,
     "planFlags": [],
@@ -245,7 +209,7 @@
     },
     "components": [],
     "aaCostCaveat": null,
-    "selectionReason": "no eligible route",
+    "selectionReason": null,
     "planAmount": null
   },
   "plans": [],
@@ -258,16 +222,7 @@
     "api": null,
     "plan": null
   },
-  "history": [
-    {
-      "version": "v3.0.0",
-      "date": "2026-10-19",
-      "rank": {
-        "api": null,
-        "plan": null
-      }
-    }
-  ],
+  "history": [],
   "frontier": {
     "onAaFrontier": false,
     "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",

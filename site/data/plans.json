@@ -2,8 +2,8 @@
   "asOf": "2026-10-08",
   "policy": {
     "reportingWindow": {
-      "start": "2026-09-21",
-      "end": "2026-10-21"
+      "start": "2026-09-23",
+      "end": "2026-10-23"
     },
     "searchCutoff": "2026-10-21",
     "searchLog": [
@@ -46,10 +46,10 @@
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes."
   },
   "identificationYield": {
-    "rows": 90,
+    "rows": 91,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 90,
+    "unidentified": 91,
     "exploratory": true
   },
   "routes": [
@@ -1752,42 +1752,647 @@
         "claude-sonnet-5-5-low"
       ],
       "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-pro-claude-opus-5-5-high-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "apiEquivalentUsd": 1178,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-high"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Pro figure ($1,178/month at $20, 58.9x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max5x-claude-opus-5-5-high-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "apiEquivalentUsd": 5725,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-high"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max20x-claude-opus-5-5-high-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "apiEquivalentUsd": 11726,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-high"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-pro-claude-opus-5-5-xhigh-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "apiEquivalentUsd": 1178,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-xhigh"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Pro figure ($1,178/month at $20, 58.9x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max5x-claude-opus-5-5-xhigh-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "apiEquivalentUsd": 5725,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-xhigh"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max20x-claude-opus-5-5-xhigh-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "apiEquivalentUsd": 11726,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-xhigh"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 58.9,
+      "apiEquivalentUsd": 1178,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-medium"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Pro figure ($1,178/month at $20, 58.9x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max5x-claude-opus-5-5-medium-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "apiEquivalentUsd": 5725,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-medium"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "claude-max20x-claude-opus-5-5-medium-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "apiEquivalentUsd": 11726,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-opus-5-5-medium"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models."
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-gpt-6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 1055,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-gpt-6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "apiEquivalentUsd": 2084,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "apiEquivalentUsd": 5386,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-luna-medium-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-medium"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-gpt-6-luna-medium-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 1055,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-medium"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-gpt-6-luna-medium-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "apiEquivalentUsd": 2084,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-medium"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-luna-medium-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "apiEquivalentUsd": 5386,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-medium"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-luna-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-gpt-6-luna-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 1055,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-gpt-6-luna-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "apiEquivalentUsd": 2084,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-luna-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "apiEquivalentUsd": 5386,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-luna-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-gpt-6-luna-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 1055,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-gpt-6-luna-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "apiEquivalentUsd": 2084,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-luna-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "apiEquivalentUsd": 5386,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-luna-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 1055,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "apiEquivalentUsd": 2084,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "apiEquivalentUsd": 5386,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-high"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-astra-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-gpt-6-astra-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 1055,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-gpt-6-astra-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "apiEquivalentUsd": 2084,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-astra-xhigh-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "apiEquivalentUsd": 5386,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-6-astra-xhigh"
+      ],
+      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-plus-gpt-5.6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-5-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro100-gpt-5.6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 1055,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-5-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro200-gpt-5.6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.42,
+      "apiEquivalentUsd": 2084,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-5-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "chatgpt-pro500-gpt-5.6-luna-low-common-gpt-assumption",
+      "provider": "OpenAI",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "apiEquivalentUsd": 5386,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "GPT-6.1 Sol",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "gpt-5-6-luna-low"
+      ],
+      "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     }
   ],
   "candidates": [
     {
-      "slug": "claude-fable-5-1",
-      "name": "Claude Fable 5.1",
-      "rank": {
-        "api": 24,
-        "plan": 69
-      },
-      "apiUsd": 11580.618526030545,
-      "planUsd": 909.7108033016924,
-      "fallback": null,
-      "routeId": "claude-max5x-fable51-semianalysis",
-      "flags": [
-        "workload-unmatched",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "measured, target-workload unmatched",
-        "routeId": "claude-max5x-fable51-semianalysis",
-        "costUsd": 909.7108033016924,
-        "costScore": 26.89354685068565,
-        "value": 51.47117687737787,
-        "rank": 4
-      }
-    },
-    {
       "slug": "claude-haiku-5-5",
       "name": "Claude Haiku 5.5",
       "rank": {
-        "api": 19,
-        "plan": 53
+        "api": 17,
+        "plan": 31
       },
-      "apiUsd": 292.07481065705014,
-      "planUsd": 4.958825308269103,
+      "apiUsd": 107.09527518955011,
+      "planUsd": 1.8182559454932108,
       "fallback": null,
       "routeId": "claude-pro-claude-haiku-5-5-common-opus55-assumption",
       "flags": [
@@ -1803,11 +2408,11 @@
       "slug": "claude-haiku-5-5-high",
       "name": "Claude Haiku 5.5 (high)",
       "rank": {
-        "api": 20,
-        "plan": 65
+        "api": 19,
+        "plan": 48
       },
-      "apiUsd": 181.3464586928498,
-      "planUsd": 3.0788872443607778,
+      "apiUsd": 70.84861795451641,
+      "planUsd": 1.2028627836080885,
       "fallback": null,
       "routeId": "claude-pro-claude-haiku-5-5-high-common-opus55-assumption",
       "flags": [
@@ -1823,11 +2428,11 @@
       "slug": "claude-haiku-5-5-low",
       "name": "Claude Haiku 5.5 (low)",
       "rank": {
-        "api": 22,
-        "plan": 81
+        "api": 25,
+        "plan": 62
       },
-      "apiUsd": 71.52335239510617,
-      "planUsd": 1.21431837682693,
+      "apiUsd": 28.119386018439528,
+      "planUsd": 0.47740893070355733,
       "fallback": null,
       "routeId": "claude-pro-claude-haiku-5-5-low-common-opus55-assumption",
       "flags": [
@@ -1843,11 +2448,11 @@
       "slug": "claude-haiku-5-5-max",
       "name": "Claude Haiku 5.5 (max)",
       "rank": {
-        "api": 30,
-        "plan": 78
+        "api": 18,
+        "plan": 40
       },
-      "apiUsd": 973.3373083091135,
-      "planUsd": 16.52525141441619,
+      "apiUsd": 191.4939970478554,
+      "planUsd": 3.251171426958496,
       "fallback": null,
       "routeId": "claude-pro-claude-haiku-5-5-max-common-opus55-assumption",
       "flags": [
@@ -1864,32 +2469,12 @@
       "name": "Claude Haiku 5.5 (medium)",
       "rank": {
         "api": 21,
-        "plan": 75
+        "plan": 56
       },
-      "apiUsd": 114.50519282185142,
-      "planUsd": 1.9440609986731991,
+      "apiUsd": 45.909504751851436,
+      "planUsd": 0.7794482979940821,
       "fallback": null,
       "routeId": "claude-pro-claude-haiku-5-5-medium-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-opus-5",
-      "name": "Claude Opus 5",
-      "rank": {
-        "api": 29,
-        "plan": 42
-      },
-      "apiUsd": 8733.127052137232,
-      "planUsd": 148.27040835547083,
-      "fallback": null,
-      "routeId": "claude-pro-claude-opus-5-common-opus55-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -1903,11 +2488,11 @@
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "rank": {
-        "api": 14,
-        "plan": 7
+        "api": 13,
+        "plan": 13
       },
-      "apiUsd": 9989.151438394825,
-      "planUsd": 169.59510082164388,
+      "apiUsd": 6039.127262611497,
+      "planUsd": 102.53187203075547,
       "fallback": null,
       "routeId": "claude-pro-opus55-semianalysis",
       "flags": [
@@ -1917,83 +2502,83 @@
       "measuredOnly": {
         "status": "measured, target-workload unmatched",
         "routeId": "claude-pro-opus55-semianalysis",
-        "costUsd": 169.59510082164388,
-        "costScore": 43.68735496315907,
-        "value": 58.67719746789812,
+        "costUsd": 102.53187203075547,
+        "costScore": 37.192922314018006,
+        "value": 53.49204573959555,
         "rank": 1
+      }
+    },
+    {
+      "slug": "claude-opus-5-5-high",
+      "name": "Claude Opus 5.5 (high)",
+      "rank": {
+        "api": 8,
+        "plan": 4
+      },
+      "apiUsd": 1860.1682252236644,
+      "planUsd": 31.58180348427274,
+      "fallback": null,
+      "routeId": "claude-pro-claude-opus-5-5-high-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-opus-5-5-medium",
+      "name": "Claude Opus 5.5 (medium)",
+      "rank": {
+        "api": 7,
+        "plan": 7
+      },
+      "apiUsd": 1423.6963014421185,
+      "planUsd": 24.171414285944287,
+      "fallback": null,
+      "routeId": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "claude-opus-5-5-xhigh",
+      "name": "Claude Opus 5.5 (xhigh)",
+      "rank": {
+        "api": 9,
+        "plan": 1
+      },
+      "apiUsd": 3374.804042649211,
+      "planUsd": 57.29718238793228,
+      "fallback": null,
+      "routeId": "claude-pro-claude-opus-5-5-xhigh-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
       }
     },
     {
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
-        "api": 13,
-        "plan": 1
+        "api": 12,
+        "plan": 9
       },
-      "apiUsd": 9373.65305908234,
-      "planUsd": 159.14521322720444,
+      "apiUsd": 5073.840417782336,
+      "planUsd": 86.1433008112451,
       "fallback": null,
       "routeId": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-sonnet-5-5-high",
-      "name": "Claude Sonnet 5.5 (high)",
-      "rank": {
-        "api": 10,
-        "plan": 23
-      },
-      "apiUsd": 1247.9973342182716,
-      "planUsd": 21.188409749036868,
-      "fallback": null,
-      "routeId": "claude-pro-claude-sonnet-5-5-high-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-sonnet-5-5-low",
-      "name": "Claude Sonnet 5.5 (low)",
-      "rank": {
-        "api": 23,
-        "plan": 58
-      },
-      "apiUsd": 578.392372482358,
-      "planUsd": 9.819904456406759,
-      "fallback": null,
-      "routeId": "claude-pro-claude-sonnet-5-5-low-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-sonnet-5-5-medium",
-      "name": "Claude Sonnet 5.5 (medium)",
-      "rank": {
-        "api": 18,
-        "plan": 33
-      },
-      "apiUsd": 731.6293440729121,
-      "planUsd": 12.421550833156402,
-      "fallback": null,
-      "routeId": "claude-pro-claude-sonnet-5-5-medium-common-opus55-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -2007,11 +2592,11 @@
       "slug": "claude-sonnet-5-5-xhigh",
       "name": "Claude Sonnet 5.5 (xhigh)",
       "rank": {
-        "api": 11,
-        "plan": 9
+        "api": 14,
+        "plan": 16
       },
-      "apiUsd": 2836.0467965283697,
-      "planUsd": 48.15020028061748,
+      "apiUsd": 1826.0306764617026,
+      "planUsd": 31.0022186156486,
       "fallback": null,
       "routeId": "claude-pro-claude-sonnet-5-5-xhigh-common-opus55-assumption",
       "flags": [
@@ -2024,33 +2609,14 @@
       }
     },
     {
-      "slug": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
       "rank": {
-        "api": 26,
-        "plan": 88
+        "api": 6,
+        "plan": 68
       },
-      "apiUsd": 801.4967532139415,
-      "planUsd": 801.4967532139415,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gemini-3-8-flash",
-      "name": "Gemini 3.8 Flash",
-      "rank": {
-        "api": 25,
-        "plan": 87
-      },
-      "apiUsd": 2073.444227327155,
-      "planUsd": 2073.444227327155,
+      "apiUsd": 324.12088388877964,
+      "planUsd": 324.12088388877964,
       "fallback": "api",
       "routeId": null,
       "flags": [
@@ -2065,11 +2631,11 @@
       "slug": "gemini-4-argon",
       "name": "Gemini 4 Argon",
       "rank": {
-        "api": 8,
-        "plan": 61
+        "api": 10,
+        "plan": 65
       },
-      "apiUsd": 3628.6386911634218,
-      "planUsd": 3628.6386911634218,
+      "apiUsd": 1857.935358161643,
+      "planUsd": 1857.935358161643,
       "fallback": "api",
       "routeId": null,
       "flags": [
@@ -2081,55 +2647,16 @@
       }
     },
     {
-      "slug": "glm-5-3",
-      "name": "GLM-5.3",
+      "slug": "gpt-5-6-luna-low",
+      "name": "GPT-5.6 Luna (low)",
       "rank": {
         "api": 27,
-        "plan": 86
+        "plan": 88
       },
-      "apiUsd": 3186.289595775135,
-      "planUsd": 3186.289595775135,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-5-6-luna",
-      "name": "GPT-5.6 Luna",
-      "rank": {
-        "api": 9,
-        "plan": 62
-      },
-      "apiUsd": 319.25290369032655,
-      "planUsd": 29.637291467724335,
+      "apiUsd": 20.709901381529374,
+      "planUsd": 1.922567896540046,
       "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-5-6-sol",
-      "name": "GPT-5.6 Sol",
-      "rank": {
-        "api": 16,
-        "plan": 49
-      },
-      "apiUsd": 4238.135507049396,
-      "planUsd": 393.4399839444297,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-5.6-sol-common-gpt-assumption",
+      "routeId": "chatgpt-pro500-gpt-5.6-luna-low-common-gpt-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -2143,11 +2670,11 @@
       "slug": "gpt-6-1-sol",
       "name": "GPT-6.1 Sol",
       "rank": {
-        "api": 5,
-        "plan": 20
+        "api": 2,
+        "plan": 19
       },
-      "apiUsd": 1267.6626637224322,
-      "planUsd": 117.68127216138434,
+      "apiUsd": 796.764446620246,
+      "planUsd": 73.96625015041273,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
       "flags": [
@@ -2157,9 +2684,9 @@
       "measuredOnly": {
         "status": "measured, target-workload unmatched",
         "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
-        "costUsd": 117.68127216138434,
-        "costScore": 47.3409719457136,
-        "value": 57.6702193441556,
+        "costUsd": 73.96625015041273,
+        "costScore": 40.57599762315757,
+        "value": 51.6252065752049,
         "rank": 2
       }
     },
@@ -2167,33 +2694,13 @@
       "slug": "gpt-6-1-sol-high",
       "name": "GPT-6.1 Sol (high)",
       "rank": {
-        "api": 4,
-        "plan": 14
+        "api": 3,
+        "plan": 26
       },
-      "apiUsd": 700.5127639425643,
-      "planUsd": 65.03089156540702,
+      "apiUsd": 431.0726459431111,
+      "planUsd": 40.01788395312951,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol-low",
-      "name": "GPT-6.1 Sol (low)",
-      "rank": {
-        "api": 7,
-        "plan": 30
-      },
-      "apiUsd": 375.2096972444586,
-      "planUsd": 34.83194367289812,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6.1-sol-low-common-gpt-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -2207,11 +2714,11 @@
       "slug": "gpt-6-1-sol-medium",
       "name": "GPT-6.1 Sol (medium)",
       "rank": {
-        "api": 2,
-        "plan": 16
+        "api": 4,
+        "plan": 34
       },
-      "apiUsd": 531.5621485772531,
-      "planUsd": 49.346653228486176,
+      "apiUsd": 318.04572523681617,
+      "planUsd": 29.525225142667672,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
       "flags": [
@@ -2228,10 +2735,10 @@
       "name": "GPT-6.1 Sol (xhigh)",
       "rank": {
         "api": 1,
-        "plan": 4
+        "plan": 22
       },
-      "apiUsd": 827.2341182369406,
-      "planUsd": 76.7948494464297,
+      "apiUsd": 512.2025635003287,
+      "planUsd": 47.54943961198744,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "flags": [
@@ -2247,11 +2754,11 @@
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "rank": {
-        "api": 15,
-        "plan": 29
+        "api": 16,
+        "plan": 43
       },
-      "apiUsd": 6107.090015422354,
-      "planUsd": 421.6147749687507,
+      "apiUsd": 3844.5595179524043,
+      "planUsd": 265.4166046221888,
       "fallback": null,
       "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
       "flags": [
@@ -2261,21 +2768,61 @@
       "measuredOnly": {
         "status": "measured, target-workload unmatched",
         "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
-        "costUsd": 421.6147749687507,
-        "costScore": 34.582373448985294,
-        "value": 54.37388619705818,
+        "costUsd": 265.4166046221888,
+        "costScore": 27.33964248134631,
+        "value": 48.67367574410948,
         "rank": 3
+      }
+    },
+    {
+      "slug": "gpt-6-astra-high",
+      "name": "GPT-6 Astra (high)",
+      "rank": {
+        "api": 15,
+        "plan": 51
+      },
+      "apiUsd": 2382.0949303383077,
+      "planUsd": 221.13766527462937,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "gpt-6-astra-xhigh",
+      "name": "GPT-6 Astra (xhigh)",
+      "rank": {
+        "api": 11,
+        "plan": 37
+      },
+      "apiUsd": 2899.4244152617393,
+      "planUsd": 269.16305377476226,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-gpt-6-astra-xhigh-common-gpt-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
       }
     },
     {
       "slug": "gpt-6-luna",
       "name": "GPT-6 Luna",
       "rank": {
-        "api": 6,
-        "plan": 45
+        "api": 20,
+        "plan": 59
       },
-      "apiUsd": 132.8652049689931,
-      "planUsd": 12.334311638413768,
+      "apiUsd": 79.56395288649308,
+      "planUsd": 7.386182035508084,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
       "flags": [
@@ -2288,16 +2835,16 @@
       }
     },
     {
-      "slug": "gpt-6-sol",
-      "name": "GPT-6 Sol",
+      "slug": "gpt-6-luna-high",
+      "name": "GPT-6 Luna (high)",
       "rank": {
-        "api": 12,
-        "plan": 39
+        "api": 23,
+        "plan": 76
       },
-      "apiUsd": 1999.4094902839818,
-      "planUsd": 185.61172394021366,
+      "apiUsd": 37.39361260343029,
+      "planUsd": 3.4713713891041857,
       "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6-sol-common-gpt-assumption",
+      "routeId": "chatgpt-pro500-gpt-6-luna-high-common-gpt-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -2308,19 +2855,60 @@
       }
     },
     {
-      "slug": "grok-4-7",
-      "name": "Grok 4.7",
+      "slug": "gpt-6-luna-low",
+      "name": "GPT-6 Luna (low)",
       "rank": {
-        "api": 28,
-        "plan": 85
+        "api": 26,
+        "plan": 84
       },
-      "apiUsd": 6700.021962805636,
-      "planUsd": 6700.021962805636,
-      "fallback": "api",
-      "routeId": null,
+      "apiUsd": 8.373510934483381,
+      "planUsd": 0.7773404135242649,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-gpt-6-luna-low-common-gpt-assumption",
       "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "gpt-6-luna-medium",
+      "name": "GPT-6 Luna (medium)",
+      "rank": {
+        "api": 24,
+        "plan": 80
+      },
+      "apiUsd": 25.258630408653993,
+      "planUsd": 2.344841293042517,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-gpt-6-luna-medium-common-gpt-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "gpt-6-luna-xhigh",
+      "name": "GPT-6 Luna (xhigh)",
+      "rank": {
+        "api": 22,
+        "plan": 72
+      },
+      "apiUsd": 49.41412664069927,
+      "planUsd": 4.587275031628228,
+      "fallback": null,
+      "routeId": "chatgpt-pro500-gpt-6-luna-xhigh-common-gpt-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "valuation basis unverified"
       ],
       "measuredOnly": {
         "status": "no measured route"
@@ -2330,8 +2918,8 @@
       "slug": "mimo-v2-6-pro",
       "name": "MiMo-V2.6-Pro",
       "rank": {
-        "api": 3,
-        "plan": 59
+        "api": 5,
+        "plan": 67
       },
       "apiUsd": 136.12695920883297,
       "planUsd": 115.28367141669459,
@@ -2342,60 +2930,6 @@
         "owner-named transfer (assumption)",
         "valuation basis unverified",
         "observed-usage multiple; full utilisation not established"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "muse-spark-1-3",
-      "name": "Muse Spark 1.3",
-      "rank": {
-        "api": 17,
-        "plan": 84
-      },
-      "apiUsd": 2764.9826567800033,
-      "planUsd": 2764.9826567800033,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "muse-wonder-full",
-      "name": "Muse Wonder Full",
-      "rank": {
-        "api": null,
-        "plan": null
-      },
-      "apiUsd": null,
-      "planUsd": null,
-      "fallback": null,
-      "routeId": null,
-      "flags": [],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "qwen3-8-max",
-      "name": "Qwen3.8 Max",
-      "rank": {
-        "api": 31,
-        "plan": 89
-      },
-      "apiUsd": 5417.032020806289,
-      "planUsd": 5417.032020806289,
-      "fallback": "api",
-      "routeId": null,
-      "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
       ],
       "measuredOnly": {
         "status": "no measured route"

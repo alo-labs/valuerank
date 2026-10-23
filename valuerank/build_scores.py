@@ -84,6 +84,18 @@ DEVELOPER = {
     "GPT-6.1 Sol (high)": "OpenAI",
     "GPT-6.1 Sol (medium)": "OpenAI",
     "GPT-6.1 Sol (low)": "OpenAI",
+    "DeepSeek V4.1 Flash 1017": "DeepSeek",
+    "MiniMax-M3.1-Flash": "MiniMax",
+    "GPT-6 Luna (low)": "OpenAI",
+    "GPT-6 Luna (medium)": "OpenAI",
+    "GPT-6 Luna (high)": "OpenAI",
+    "GPT-6 Luna (xhigh)": "OpenAI",
+    "Claude Opus 5.5 (high)": "Anthropic",
+    "Claude Opus 5.5 (xhigh)": "Anthropic",
+    "Claude Opus 5.5 (medium)": "Anthropic",
+    "GPT-5.6 Luna (low)": "OpenAI",
+    "GPT-6 Astra (high)": "OpenAI",
+    "GPT-6 Astra (xhigh)": "OpenAI",
     "Claude Haiku 5.5 (max)": "Anthropic",
     "Claude Haiku 5.5 (high)": "Anthropic",
     "Claude Haiku 5.5 (medium)": "Anthropic",
@@ -136,6 +148,18 @@ SHORT = {
     "GPT-6.1 Sol (high)": "GPT-6.1 Sol (high)",
     "GPT-6.1 Sol (medium)": "GPT-6.1 Sol (medium)",
     "GPT-6.1 Sol (low)": "GPT-6.1 Sol (low)",
+    "DeepSeek V4.1 Flash 1017": "DeepSeek V4.1 Flash 1017",
+    "MiniMax-M3.1-Flash": "MiniMax-M3.1-Flash",
+    "GPT-6 Luna (low)": "GPT-6 Luna (low)",
+    "GPT-6 Luna (medium)": "GPT-6 Luna (medium)",
+    "GPT-6 Luna (high)": "GPT-6 Luna (high)",
+    "GPT-6 Luna (xhigh)": "GPT-6 Luna (xhigh)",
+    "Claude Opus 5.5 (high)": "Opus 5.5 (high)",
+    "Claude Opus 5.5 (xhigh)": "Opus 5.5 (xhigh)",
+    "Claude Opus 5.5 (medium)": "Opus 5.5 (medium)",
+    "GPT-5.6 Luna (low)": "GPT-5.6 Luna (low)",
+    "GPT-6 Astra (high)": "GPT-6 Astra (high)",
+    "GPT-6 Astra (xhigh)": "GPT-6 Astra (xhigh)",
     "Claude Haiku 5.5 (max)": "Haiku 5.5 (max)",
     "Claude Haiku 5.5 (high)": "Haiku 5.5 (high)",
     "Claude Haiku 5.5 (medium)": "Haiku 5.5 (medium)",
@@ -441,7 +465,8 @@ def near_frontier_selection(inventory, capture, frontier_urls, frontier_family_i
             aa_model = aa_models.get(model_id)
             if aa_model is None:
                 raise ValueError(f"AA near-frontier family model is absent from the selected AA metrics roster: {model_id}")
-            if aa_model.get("displayName") != family:
+            # O51: a near family's primary may be one of its effort rows ("GPT-6 Astra (xhigh)"), so the family is compared.
+            if model_family(aa_model) != family:
                 raise ValueError(f"AA near-frontier family does not match selected catalog identity for {model_id}")
         selection[family] = {"modelId": model_id, "rows": family_rows}
     return selection
@@ -505,8 +530,7 @@ def build_bug_hunt_emphasis(rows, weights, document):
     matched_rows = [
         row for row in rows
         if row.get("bugHunt", {}).get("matched") is True
-        and row.get("deepswePassAt1Pct") is not None
-    ]
+    ]  # O49: DeepSWE is withdrawn, so a matched Bug Hunt result alone qualifies a row for the emphasis view
     if len(matched_rows) < 2:
         emphasis_weights = [{
             "key": "bugHuntFixedOf105",
@@ -1321,7 +1345,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     coverage_document["cohortN"] = len(rows)
     coverage_document["deepSweSource"] = deepswe_chart["source"]
     coverage_document["deepSweConfigurationsN"] = len(deepswe_chart["configurations"])
-    coverage_document["deepSweObservedConfigurationN"] = observed_configuration_n
+    coverage_document["deepSweObservedConfigurationN"] = deepswe_chart.get("observedConfigurationN")
     coverage_document["frontierSelection"] = frontier_selection
     source_fields = dict(coverage_document.get("fields", {}))
     source_fields.update(external_coverage)
@@ -1487,7 +1511,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 "deepsweBenchmarkVersion": deepswe_chart["benchmark"],
                 "deepsweSource": deepswe_chart["source"],
                 "deepsweConfigurationsN": len(deepswe_chart["configurations"]),
-                "deepsweObservedConfigurationN": observed_configuration_n,
+                "deepsweObservedConfigurationN": deepswe_chart.get("observedConfigurationN"),
                 "cohort": {
                     "n": len(primary_rows),
                     "scoredN": len(by_overall),

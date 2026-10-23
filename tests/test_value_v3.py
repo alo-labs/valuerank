@@ -61,7 +61,7 @@ REGISTRY = {leaf.key: ["Registered party"] for leaf in q.LEAVES}
 
 def documents(**overrides) -> dict:
     base = {
-        "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5)]},
+        "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5, frontierCode=None)]},
         "deepswe": {"configurations": [
             {"valueRankModelId": "a", "scorePct": 70.0, "effort": "max", "displayLabel": "A", "agent": "x"},
             {"valueRankModelId": "b", "scorePct": 75.0, "effort": "max", "scorePrecision": 0.1},
@@ -78,13 +78,12 @@ def documents(**overrides) -> dict:
             {"label": "agent-b", "meanCostPerTaskUsd": 6.0, "totalCostUsd": 1800.0, "components": []},
         ]},
         "costCharts": {"evaluations": [
-            {"slug": "frontiercode", "rows": [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}]},
-            {"slug": "itbench-aa", "rows": []},
+            {"slug": "itbench-aa", "rows": [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}]},
         ]},
         "configurationMap": {"rows": {
-            "a": {"coding-agent-index": "agent-a", "frontiercode": "A (max)", "itbench-aa": None},
-            "b": {"coding-agent-index": "agent-b", "frontiercode": None, "itbench-aa": None},
-            "c": {"coding-agent-index": None, "frontiercode": None, "itbench-aa": None},
+            "a": {"coding-agent-index": "agent-a", "itbench-aa": "A (max)"},
+            "b": {"coding-agent-index": "agent-b", "itbench-aa": None},
+            "c": {"coding-agent-index": None, "itbench-aa": None},
         }},
         "planRoutes": {"routes": [
             {"id": "plan-a", "valueMultiple": 10.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10",
@@ -97,7 +96,7 @@ def documents(**overrides) -> dict:
         "leafEvidence": {"supplements": [
             {"modelId": "b", "leaf": "bugHunt", "value": 40.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
             {"modelId": "c", "leaf": "bugHunt", "value": 30.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
-            {"modelId": "c", "leaf": "deepswe", "value": 50.0, "unit": "percent", "sourceType": "model_provider_claim", **comparable("deepswe")},
+            {"modelId": "c", "leaf": "frontierCode", "value": 0.5, "unit": "fraction", "sourceType": "model_provider_claim", **comparable("frontierCode")},
         ], "searches": [], "sourceRegistry": REGISTRY},
     }
     base.update(overrides)
@@ -111,7 +110,7 @@ CONFIGURATIONS = [
 ]
 
 
-def filled(*model_ids, leaves=("deepswe", "bugHunt")) -> dict:
+def filled(*model_ids, leaves=("bugHunt",)) -> dict:
     """O36: fixture rows outside a, b and c take their missing SWE leaves from supplements."""
 
     base = documents()["leafEvidence"]
@@ -135,27 +134,27 @@ def assembled(**overrides):
 def test_leaf_evidence_uses_exact_configurations_only():
     model = page("a-max", 1.0)["model"]
     tb4 = [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]
-    evidence = v.leaf_evidence("claude-opus-5-5", "max", model, {"scorePct": 70.0, "effort": "max", "scorePrecision": 0.1}, tb4, {"matched": True, "effort": "max", "fixedOf105": 52.0})
+    evidence = v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {"matched": True, "effort": "max", "fixedOf105": 52.0})
     observations = evidence["observations"]
     assert set(observations) == {leaf.key for leaf in q.LEAVES}
     # O37: AA's own Terminal-Bench 4.0 run is the leaf; tbench.ai fills a gap only.
-    assert observations["deepswe"].half_width == pytest.approx(0.05) and observations["terminalBench"].z == 50.0
+    assert observations["terminalBench"].z == 50.0
     assert observations["omniscience"].z == pytest.approx(65.0)
     assert evidence["provenance"]["omniscience"]["indexFromRates"] == pytest.approx(30.0)
     assert evidence["provenance"]["terminalBench"]["agent"] == "mini-SWE-agent"
-    gap = v.leaf_evidence("claude-opus-5-5", "max", {**model, "terminalBench40": None}, None, tb4, None)
+    gap = v.leaf_evidence("claude-opus-5-5", "max", {**model, "terminalBench40": None}, tb4, None)
     assert gap["observations"]["terminalBench"].z == 60.0 and gap["provenance"]["terminalBench"]["agent"] == "Terminus 2"
     # A different effort never transfers; absent fields stay missing.
-    sparse = v.leaf_evidence("x", "max", {"gdpval": None}, {"scorePct": 70.0, "effort": "high"}, [], None)
+    sparse = v.leaf_evidence("x", "max", {"gdpval": None}, [], None)
     assert sparse["observations"] == {} and sparse["clipAudit"] == []
-    index_only = v.leaf_evidence("x", "max", {"omniscience": -20.0}, None, [], None)
+    index_only = v.leaf_evidence("x", "max", {"omniscience": -20.0}, [], None)
     assert index_only["observations"]["omniscience"].z == 40.0 and index_only["provenance"]["omniscience"]["indexFromRates"] is None
     with pytest.raises(ValueError, match="outside its documented domain"):
-        v.leaf_evidence("x", "max", {"hle": 1.5}, None, [], None)
+        v.leaf_evidence("x", "max", {"hle": 1.5}, [], None)
 
 
 def test_components_and_restricted_cost():
-    components, reconciliation = v.row_components(page("a-max", 1.0)["model"], None, {"frontiercode": None, "itbench-aa": None})
+    components, reconciliation = v.row_components(page("a-max", 1.0)["model"], None, {"itbench-aa": None})
     assert set(components) == set(basket.INDEX_SDLC_TASKS) and reconciliation["reconciled"] is True
     assert v.restricted_cost(components, ["scicode"]) == 288.0
     assert v.restricted_cost(components, ["scicode", basket.CODING_AGENT_INDEX]) is None
@@ -167,7 +166,7 @@ def test_assemble_admission_subset_rows_and_plan_costs():
     rows = {row["id"]: row for row in result["rows"]}
     assert rows["c"]["cost"]["subset"] is True and rows["a"]["cost"]["fullCost"] is True
     # FrontierCode carries AA's declined-task marker for A and is pending (one row of three).
-    assert "frontiercode" in rows["a"]["components"] and result["admission"]["components"]["frontiercode"]["admitted"] is False
+    assert "itbench-aa" in rows["a"]["components"] and result["admission"]["components"]["itbench-aa"]["admitted"] is False
     assert rows["a"]["plan"]["costUsd"] == pytest.approx(rows["a"]["cost"]["costUsd"] / 10.0)
     assert rows["c"]["plan"]["fallback"] == "api"
     catalog = v.workload_catalog(result)
@@ -194,7 +193,7 @@ def test_freeze_anchors_and_bar_reference():
     assert subset["anchors"]["api"]["referenceIds"] == ["a", "b", "c"]
     # E192: the bar is the lower-median displayed quality of the population (c 49.36, a 57.45, b 60.31; O36 makes every row complete).
     assert frozen["barReferences"][0]["id"] == v.BAR_ID and frozen["barReferences"][0]["levelConfiguration"] == "a"
-    assert frozen["barReferences"][0]["level"] == pytest.approx(57.4524, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b", "c"]
+    assert frozen["barReferences"][0]["level"] == pytest.approx(50.6786, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b", "c"]
     assert frozen["anchorPolicy"]["policyId"] == "complete-evidence-panel" and main["anchorStatus"] == "frozen"
     # E160: the main workload needs at least two complete-evidence references.
     lone = v.assemble(CONFIGURATIONS[:1], documents(), release_day=DAY)
@@ -319,11 +318,11 @@ def test_score_flags_partial_components_dominance_and_saturation():
     charts = documents()["costCharts"]
     charts["evaluations"][0]["rows"] = [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}, {"model": "B (max)", "totalUsd": 30, "declinedTasks": False}]
     mapping = documents()["configurationMap"]
-    mapping["rows"]["b"]["frontiercode"] = "B (max)"
+    mapping["rows"]["b"]["itbench-aa"] = "B (max)"
     mapping["rows"]["c"]["coding-agent-index"] = "agent-a"
     result, frozen = scored(planRoutes=routes, costCharts=charts, configurationMap=mapping,
                             snapshot={"pages": [page("a-max", 1.0, gdpval=2700.0), page("b-max", 4.0), page("c-max", 0.5)]})
-    assert result["admission"]["components"]["frontiercode"]["admitted"] is False
+    assert result["admission"]["components"]["itbench-aa"]["admitted"] is False
     output = v.score(result, frozen)
     manifest = {item["rule"]: item["status"] for item in output["manifest"]}
     assert manifest["route dominance filter (E88)"] == "fired" and manifest["quality clipping audit (E110)"] == "fired"
@@ -389,9 +388,9 @@ def test_quality_substitution_agreement_holds_cost_fixed_and_swaps_quality():
 
 def test_disjoint_evidence_agreement_compares_aa_only_with_independent_only_quality():
     rows = [
-        agreement_row("x", 40.0, 40.0, deepswe=30.0, gdpval=30.0),
-        agreement_row("y", 50.0, 50.0, deepswe=50.0),
-        agreement_row("z", 60.0, 60.0, deepswe=70.0, omniscience=70.0),
+        agreement_row("x", 40.0, 40.0, frontierCode=30.0, gdpval=30.0),
+        agreement_row("y", 50.0, 50.0, frontierCode=50.0),
+        agreement_row("z", 60.0, 60.0, frontierCode=70.0, omniscience=70.0),
         agreement_row("none", 70.0, 70.0),  # no AA-executed leaf: left out of the panel
     ]
     del rows[3]["evidence"]["observations"]["terminalBench"]  # Terminal-Bench is AA's run since O37
@@ -432,7 +431,7 @@ def test_freeze_with_fewer_than_two_population_rows_pins_no_bar():
 
     result = assembled()
     for row in result["rows"][1:]:
-        row["summary"] = q.summarize({"deepswe": q.Observation(50.0)})  # b and c become provisional
+        row["summary"] = q.summarize({"frontierCode": q.Observation(50.0)})  # b and c become provisional
     frozen = v.freeze(result, frozen_at="d")
     assert frozen["barReferences"] == [] and frozen["barPolicy"]["bars"] == [] and frozen["barPolicy"]["population"] == ["a"]
 
@@ -475,7 +474,7 @@ def test_bar_reference_selection_is_registered_and_outcome_independent(monkeypat
     monkeypatch.setattr(v.intervals, "cheapest_above_bar", refuse)
     assert v.freeze(result, frozen_at="2026-10-19")["barReferences"] == frozen["barReferences"]
     for row in result["rows"]:
-        row["summary"] = q.summarize({"deepswe": q.Observation(50.0)})  # every row provisional
+        row["summary"] = q.summarize({"frontierCode": q.Observation(50.0)})  # every row provisional
     assert v.freeze(result, frozen_at="2026-10-19")["barReferences"] == []
 
 
@@ -501,13 +500,13 @@ def test_scenarios_hash_attach_and_bar_labels():
     result, frozen = scored()
     panel = v.scenario_panel(result, "api")
     assert [item.row for item in panel] == ["a", "b"]
-    assert panel[0].leaves["deepswe"].family == "fixed" and panel[1].leaves["deepswe"].family == "uniform"
+    assert panel[0].leaves["frontierCode"].family == panel[1].leaves["frontierCode"].family
     document = v.run_scenarios(result, frozen, n=200, seed=7)
     assert document["inputHash"] == v.scenario_hash(result, frozen, n=200, seed=7)
     assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M", "S1T"]
     # O39: S1T redraws every observed leaf with its task-sampling noise.
     sampled = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
-    assert sampled["a"].leaves["deepswe"].family == "normal" and sampled["a"].leaves["gdpval"].derivation == scenarios.ANALYST_CONVENTION
+    assert sampled["a"].leaves["frontierCode"].family == "normal" and sampled["a"].leaves["gdpval"].derivation == scenarios.ANALYST_CONVENTION
     assert document["results"]["api"][-1]["variedTargets"] == ["identification convention", "task sampling (independent-task approximation)"]
     assert document["streamDescriptions"]["S0"] == "published-record reporting precision" and len(document["notQuantified"]) == 2
     assert document["barLabels"][0]["status"] == "evaluated"
@@ -543,10 +542,10 @@ def test_harness_band_runs_a_named_s2_branch_when_a_configuration_has_two_agents
     observed = result["rows"][0]["evidence"]["observations"]["bugHunt"].z
     assert stressed.params == pytest.approx((observed - 3.0, observed + 3.0)) and stressed.target == scenarios.SPECIFICATION_STRESS
     assert panel["b"].leaves["bugHunt"].target == scenarios.SPECIFICATION_STRESS  # every Bug Hunt leaf, an O36 supplement included
-    # E227: DeepSWE runs in each lab's own agent too; AA's single-harness Terminal-Bench run is not stressed (O37).
-    assert panel["a"].leaves["deepswe"].target == scenarios.SPECIFICATION_STRESS and panel["a"].leaves["terminalBench"].target != scenarios.SPECIFICATION_STRESS
+    # E227: AA's single-harness Terminal-Bench and FrontierCode runs are not stressed (O37, O49).
+    assert panel["a"].leaves["frontierCode"].target != scenarios.SPECIFICATION_STRESS and panel["a"].leaves["terminalBench"].target != scenarios.SPECIFICATION_STRESS
     gap = {**result["rows"][0], "evidence": {**result["rows"][0]["evidence"], "provenance": {**result["rows"][0]["evidence"]["provenance"], "terminalBench": {"agent": "Codex"}}}}
-    assert v.agent_run_leaves(gap) == ["deepswe", "bugHunt", "terminalBench"]
+    assert v.agent_run_leaves(gap) == ["bugHunt", "terminalBench"]
     document = v.run_scenarios(result, frozen, n=50, seed=7)
     branch = document["namedBranches"][0]
     assert branch["results"]["api"]["stratum"] == "S2" and branch["results"]["plan"]["transfers"] == "off"
@@ -687,9 +686,9 @@ def test_terminal_bench_same_harness_diagnostic():
     ]
     rows = []
     for model_id in ("claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"):
-        evidence = v.leaf_evidence(model_id, "max", {}, None, tb4, None)
+        evidence = v.leaf_evidence(model_id, "max", {}, tb4, None)
         rows.append({"id": model_id, "effort": "max", "evidence": evidence})
-    rows[0]["evidence"] = v.leaf_evidence("claude-opus-5-5", "max", {"terminalBench40": 0.6}, None, tb4, None)  # AA's own run
+    rows[0]["evidence"] = v.leaf_evidence("claude-opus-5-5", "max", {"terminalBench40": 0.6}, tb4, None)  # AA's own run
     result = v._tb_same_harness(rows, tb4)
     assert result["defaultHarness"] == "mini-SWE-agent" and result["harnessMixed"] == ["claude-haiku-5-5", "claude-sonnet-5-5"]
     assert result["restricted"] == {"claude-opus-5-5": 64.0, "claude-sonnet-5-5": 50.0, "claude-haiku-5-5": 30.0}
@@ -751,24 +750,24 @@ def test_deletion_branches_renormalise_the_remaining_observed_leaves():
     # E178: the basket-scope branch removes the leaves of the benchmarks O15 excludes from the cost basket.
     assert sorted(branches["basket-scope"]["removed"]) == ["critpt", "hle", "omniscience"] and len(basket.INDEX_RESIDUAL_TASKS) == 3
     assert branches["leave-out:bugHunt"]["labels"] == ["leave-one-benchmark-out", "leave-one-source-out"]
-    assert branches["leave-out:deepswe"]["labels"] == ["leave-one-benchmark-out"]
-    observations = {"deepswe": q.Observation(80.0), "bugHunt": q.Observation(20.0)}
+    assert branches["leave-out:frontierCode"]["labels"] == ["leave-one-benchmark-out"]
+    observations = {"frontierCode": q.Observation(80.0), "bugHunt": q.Observation(20.0)}
     assert v.deletion_quality(observations, {"bugHunt"}) == pytest.approx(80.0)
-    assert v.deletion_quality(observations, {"deepswe", "bugHunt"}) is None
+    assert v.deletion_quality(observations, {"frontierCode", "bugHunt"}) is None
     result, frozen = scored()
     sensitivity = {item["id"]: item for item in v.score(result, frozen)["diagnostics"]["deletionSensitivity"]}
     aa_out = sensitivity["leave-source-out:Artificial Analysis"]
-    # O37: Bug Hunt is the only leaf another party runs, so leave-AA-out retains 10% of the nominal weight.
-    assert aa_out["status"] == "not identifiable under the coverage rule" and aa_out["retainedNominalWeight"] == pytest.approx(0.1)
-    deep = sensitivity["leave-out:deepswe"]
-    assert deep["status"] == "evaluated" and deep["retainedNominalWeight"] == pytest.approx(0.7)
+    # O37: Bug Hunt is the only leaf another party runs, so leave-AA-out retains its 15% of the nominal weight (O49).
+    assert aa_out["status"] == "not identifiable under the coverage rule" and aa_out["retainedNominalWeight"] == pytest.approx(0.15)
+    deep = sensitivity["leave-out:frontierCode"]
+    assert deep["status"] == "evaluated" and deep["retainedNominalWeight"] == pytest.approx(0.75)
     assert sensitivity["basket-scope"]["status"] == "evaluated" and sensitivity["basket-scope"]["retainedNominalWeight"] == pytest.approx(0.8667, abs=1e-4)
     assert deep["bases"]["api"]["rankChanges"]["panel"] == ["a", "b", "c"] and deep["unevaluableRows"] == []
-    rows = [{"id": "x", "evidence": {"observations": {"deepswe": q.Observation(50.0)}}}]
+    rows = [{"id": "x", "evidence": {"observations": {"frontierCode": q.Observation(50.0)}}}]
     per_row = {"x": {"api": {"value": 40.0, "costScore": 20.0}, "plan": {"value": None, "costScore": None}}}
     crafted = {item["id"]: item for item in v._deletion_sensitivity(rows, per_row)}
-    assert crafted["leave-out:deepswe"]["unevaluableRows"] == ["x"]
-    assert crafted["leave-out:deepswe"]["bases"]["api"]["kendallTauB"] is None
+    assert crafted["leave-out:frontierCode"]["unevaluableRows"] == ["x"]
+    assert crafted["leave-out:frontierCode"]["bases"]["api"]["kendallTauB"] is None
     assert crafted["leave-out:bugHunt"]["bases"]["plan"]["rankChanges"]["panel"] == []
 
 
@@ -881,7 +880,7 @@ def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
     leaves = {row["id"]: row["quality"]["leaves"] for row in built["rows"]}
     assert leaves["a"]["gdpval"]["evidence"] == {"artifact": "data/aa/aa_v432_snapshot.json", "locator": "pages[model.slug=a-max].model.gdpval", "publishedValue": 1500.0}
     assert leaves["a"]["bugHunt"]["evidence"]["locator"] == "models[modelId=a].fixedOf105"
-    assert leaves["a"]["deepswe"]["evidence"]["artifact"] == "data/aa_deepswe.json"
+    assert leaves["a"]["bugHunt"]["evidence"]["artifact"] == "data/bug_hunt.json"
 
 
 def test_measurement_stream_draws_the_published_confidence_interval():
@@ -901,7 +900,7 @@ def test_measurement_stream_draws_the_published_confidence_interval():
     # E182: b's interval is clipped at 100, so the kernel keeps its published 99 as the median.
     assert measured["b"].leaves["terminalBench"].family == "split-uniform" and measured["b"].leaves["terminalBench"].params == pytest.approx((95.9, 99.0, 100.0))
     assert kernel.family == "uniform"
-    assert measured["a"].leaves["deepswe"] == plain["a"].leaves["deepswe"]
+    assert measured["a"].leaves["frontierCode"] == plain["a"].leaves["frontierCode"]
     document = v.run_scenarios(result, frozen, n=50, seed=3)
     s1m = document["results"]["api"][-2]
     assert s1m["stratum"] == "S1M" and s1m["variedTargets"] == ["identification convention", "published-interval range (conventional)", "reporting precision"]
@@ -1132,11 +1131,12 @@ def gated_world(gate_page, records):
 
 
 def gated_world_documents(gate_page, records):
-    pages = [gate_page, page("b-max", 4.0), page("c-max", 0.5), page("d-max", 2.0)]
+    # O49: b's FrontierCode (25%) keeps it the highest-quality row, as its DeepSWE did before.
+    pages = [gate_page, page("b-max", 4.0, frontierCode=0.75), page("c-max", 0.5), page("d-max", 2.0)]
     agents = documents()["codingAgents"]
     agents["configurations"].append({"label": "agent-d", "meanCostPerTaskUsd": 3.0, "totalCostUsd": 900.0, "components": []})
     mapping = documents()["configurationMap"]
-    mapping["rows"]["d"] = {"coding-agent-index": "agent-d", "frontiercode": None, "itbench-aa": None}
+    mapping["rows"]["d"] = {"coding-agent-index": "agent-d", "itbench-aa": None}
     routes = documents()["planRoutes"]
     routes["routes"][0].update(identification="point-identified", valuationBasis="release")
     return documents(snapshot={"pages": pages}, codingAgents=agents, configurationMap=mapping, planRoutes=routes, priceRecords={"records": records},
@@ -1202,9 +1202,9 @@ def test_a_migration_without_two_eligible_references_is_deferred():
     charts = documents()["costCharts"]
     charts["evaluations"][0]["rows"] = [{"model": "A (max)", "totalUsd": 9, "declinedTasks": False}, {"model": "B (max)", "totalUsd": 30, "declinedTasks": False}]
     mapping = documents()["configurationMap"]
-    mapping["rows"]["b"]["frontiercode"] = "B (max)"
+    mapping["rows"]["b"]["itbench-aa"] = "B (max)"
     gained = documents(costCharts=charts, configurationMap=mapping)
-    assert "frontiercode" in v.assemble(CONFIGURATIONS, gained, release_day=DAY)["admitted"]
+    assert "itbench-aa" in v.assemble(CONFIGURATIONS, gained, release_day=DAY)["admitted"]
     # Both full rows pass the valuation gate: an ordinary migration, scored only after a new freeze.
     ordinary = v.assemble_for_release(CONFIGURATIONS, gained, frozen, release_day=DAY)
     assert ordinary["mainWorkload"] != frozen["mainWorkload"] and ordinary["deferred"] == []
@@ -1212,10 +1212,10 @@ def test_a_migration_without_two_eligible_references_is_deferred():
     unpriced = copy.deepcopy(gained)
     unpriced["snapshot"]["pages"][1]["model"]["price1mOutputTokens"] = None
     deferred = v.assemble_for_release(CONFIGURATIONS, unpriced, frozen, release_day=DAY)
-    assert deferred["mainWorkload"] == frozen["mainWorkload"] and deferred["deferred"] == [{"component": "frontiercode", "reason": v.DEFERRED_MIGRATION}]
+    assert deferred["mainWorkload"] == frozen["mainWorkload"] and deferred["deferred"] == [{"component": "itbench-aa", "reason": v.DEFERRED_MIGRATION}]
     output = v.score(deferred, frozen)
     manifest = {item["rule"]: item for item in output["manifest"]}
-    assert manifest["anchor migration (E184)"]["status"] == "fired" and output["deferredComponents"][0]["component"] == "frontiercode"
+    assert manifest["anchor migration (E184)"]["status"] == "fired" and output["deferredComponents"][0]["component"] == "itbench-aa"
     assert output["gates"]["hold"] is False
     # An unchanged workload is returned as assembled.
     assert v.assemble_for_release(CONFIGURATIONS, documents(), frozen, release_day=DAY)["mainWorkload"] == result["mainWorkload"]
@@ -1264,9 +1264,9 @@ def test_scenario_labels_never_go_to_or_past_an_unsafe_blocker(monkeypatch):
     record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
     flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
     frozen = v.freeze(flagged, frozen_at="2026-10-19")
-    # At level 57.45 (inside the blocker a's reporting-precision bounds) b is cheapest whenever a falls short, and a can
+    # At level 50.68 (inside the blocker a's reporting-precision bounds) b is cheapest whenever a falls short, and a can
     # reach the level and undercut it; d falls short.
-    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 57.45, "levelConfiguration": "b", "rule": "x"}]
+    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 50.68, "levelConfiguration": "b", "rule": "x"}]
     monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda *args, **kwargs: {"label": True, "reading": "supported"})
     (bar,) = v.bar_labels(flagged, frozen, seed=1, batch=20)
     assert sorted(bar["candidates"]) == ["b"]
@@ -1299,7 +1299,7 @@ def test_frontier_anchor_diagnostic_and_subset_intervals():
     assert frontier["status"] == "evaluated" and frontier["references"] == ["a", "b"]
     assert frontier["bases"]["api"]["rankChanges"]["panel"] == ["a", "b"] and "frozenExchangeRate" in frontier["bases"]["plan"]
     (subset,) = output["subsetIntervals"].values()
-    # E233: c's DeepSWE is a provider claim, so it competes as a blocker and earns no label.
+    # E233: c's FrontierCode is a provider claim, so it competes as a blocker and earns no label.
     assert subset["api"]["universe"] == ["a", "b"] and subset["api"]["blockers"] == ["c"] and subset["plan"]["reason"] == v.SUBSET_PLAN_INTERVALS
     assert output["costInfluence"]["api"]["orderingAgreement"]["qualityVsValue"] is not None
     assert output["costInfluence"]["api"]["commonWorkload"]["varianceAllocation"] is not None
@@ -1329,20 +1329,21 @@ def test_configurations_record_frontier_family_membership():
         {"id": "f", "name": "F", "aaSlug": "f", "rankingEligible": True, "rankingInclusionReasons": [v.RETAINED_REASON, "Required AA Intelligence Index versus total-evaluation-cost frontier family"]},
         {"id": "r", "name": "R", "aaSlug": "r", "rankingEligible": True, "rankingInclusionReasons": [v.RETAINED_REASON]},
     ]}
-    assert [item["frontierFamily"] for item in v.configurations_from_scores(scores)] == [True, False]
+    # O51: every cohort configuration is plotted on or near the frontier, so a stated reason makes it a frontier-family row.
+    assert [item["frontierFamily"] for item in v.configurations_from_scores(scores)] == [True, True]
 
 
 def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
-    """E187: build_scores passes every scored row through configuration(), so retained rows reach v3 as non-frontier."""
+    """E187/O51: build_scores passes every scored row through configuration(); a plotted row is a frontier-family row."""
 
     frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note",
                 "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
     assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True}
     retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON], "familyPrimary": False}
-    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": False, "familyPrimary": False}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False}
     # O33: an evidenced sibling carries its AA family, which its display name no longer equals.
     sibling = {"id": "f-high", "name": "F (high)", "family": "F", "aaVariant": "high", "aaSlug": "f-high", "rankingInclusionReasons": [v.RETAINED_REASON]}
-    assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is False
+    assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is True
     assert v.configuration({"id": "x", "name": "X", "aaSlug": "x"})["frontierFamily"] is False  # no stated reason
 
 
@@ -1469,8 +1470,8 @@ def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():
 def test_required_missing_scores_say_what_would_settle_each_open_row():
     """E221: u* = (100 H - sum of observed w z) / missing weight, for rows that can but need not reach a bar."""
 
-    summary = SimpleNamespace(observations={leaf.key: SimpleNamespace(z=60.0) for leaf in q.LEAVES if leaf.key != "deepswe"})
-    assert v.required_missing_score(summary, 50.0) == pytest.approx((5000.0 - 60.0 * 70.0) / 30.0)
+    summary = SimpleNamespace(observations={leaf.key: SimpleNamespace(z=60.0) for leaf in q.LEAVES if leaf.key != "frontierCode"})
+    assert v.required_missing_score(summary, 50.0) == pytest.approx((5000.0 - 60.0 * 75.0) / 25.0)
     assert v.required_missing_score(SimpleNamespace(observations={leaf.key: None for leaf in q.LEAVES}), 50.0) is None
     result, frozen = scored()
     output = v.required_missing_scores(result, frozen)
@@ -1554,13 +1555,13 @@ def test_supplements_fill_only_missing_leaves_in_source_order():
                                    {"cohortModelId": "z", "valuePct": 9.0, "eligibleForRanking": False}]}}
     chosen = v.leaf_supplements(documents_)
     assert chosen[("a", "terminalBench")]["url"] == "i" and chosen[("b", "terminalBench")]["artifact"] == "tb4" and ("z", "terminalBench") not in chosen
-    evidence = v.leaf_evidence("a", "max", {"slug": "a"}, None, [], None, chosen)
+    evidence = v.leaf_evidence("a", "max", {"slug": "a"}, [], None, chosen)
     assert evidence["observations"]["terminalBench"].z == 30.0 and evidence["provenance"]["terminalBench"]["sourceType"] == "independent"
     assert evidence["observations"]["bugHunt"].z == pytest.approx(100 * 52 / 105, abs=0.1) and evidence["observations"]["frontierCode"].z == 50.0
     # E237: a fill without the leaf's benchmark version, or without its metric, stops the build; another leaf needs its label.
-    for broken in ({"benchmarkVersion": "DeepSWE v1.0", "metric": "pass@1"}, {"benchmarkVersion": "DeepSWE v1.1"}):
-        with pytest.raises(ValueError, match=r"a: the deepswe gap fill must state benchmark version 'DeepSWE v1.1' and its metric \(E237\)"):
-            v.leaf_supplements({"leafEvidence": {"supplements": [{"modelId": "a", "leaf": "deepswe", "sourceType": "independent", **broken}]}, "tb4": {}})
+    for broken in ({"benchmarkVersion": "FrontierCode 1.0", "metric": "main"}, {"benchmarkVersion": "FrontierCode 1.1"}):
+        with pytest.raises(ValueError, match=r"a: the frontierCode gap fill must state benchmark version 'FrontierCode 1.1' and its metric \(E237\)"):
+            v.leaf_supplements({"leafEvidence": {"supplements": [{"modelId": "a", "leaf": "frontierCode", "sourceType": "independent", **broken}]}, "tb4": {}})
     v.check_comparability({"modelId": "a", "leaf": "hle", "benchmarkVersion": v.LEAF_LABELS["hle"], "metric": "accuracy"})
     # E239: another party's result counts only from a source registered for the leaf.
     unregistered = {"modelId": "a", "leaf": "frontierCode", "sourceType": "independent", **comparable("frontierCode"), "publisher": "Some blog"}
@@ -1581,8 +1582,8 @@ def test_incomplete_configurations_are_listed_not_ranked_and_need_a_logged_searc
         stale = [dict(item, searchedOn="2026-10-11") for item in searches]
         with pytest.raises(ValueError, match=r"no exhaustive search for .* \(O36\)"):
             v.check_leaf_searches(incomplete, {"leafEvidence": {"searches": stale}}, DAY)
-    with pytest.raises(ValueError, match=r"x: no exhaustive search for deepswe"):
-        v.check_leaf_searches([{"id": "x", "missing": ["deepswe"]}], {}, DAY)
+    with pytest.raises(ValueError, match=r"x: no exhaustive search for frontierCode"):
+        v.check_leaf_searches([{"id": "x", "missing": ["frontierCode"]}], {}, DAY)
 
 
 def test_listed_frontier_family_search_needs_a_resolved_open_web_step():
@@ -1611,7 +1612,7 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     """O39: plug-in binomial noise from each leaf's task count, GDPval-AA from its assumed rating interval, Omniscience
     from its +1/0/-1 question shares; the separability diagnostic counts adjacent ranks apart by more than that noise."""
 
-    assert v.sampling_sd("deepswe", q.Observation(50.0), {}) == pytest.approx(100 * (0.25 / 113) ** 0.5)
+    assert v.sampling_sd("frontierCode", q.Observation(50.0), {}) == pytest.approx(100 * (0.25 / 100) ** 0.5)
     assert v.sampling_sd("gdpval", q.Observation(55.0), {}) == pytest.approx(26.0 / 1.96 / 20.0)
     ternary = v.sampling_sd("omniscience", q.Observation(60.0), {"accuracy": 0.5, "hallucinationRate": 0.4})
     assert ternary == pytest.approx(100 * ((0.5 + 0.2 - 0.3 ** 2) / 6000) ** 0.5 / 2)

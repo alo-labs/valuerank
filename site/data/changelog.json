@@ -3,165 +3,115 @@
     {
       "version": "v3.0.0",
       "date": "October 19, 2026",
-      "models": 32,
-      "dimensions": 12,
-      "summary": "31 models ranked on 12 dimensions; GPT-6.1 Sol (xhigh) is first on the API basis.",
+      "models": 27,
+      "dimensions": 11,
+      "summary": "27 models ranked on 11 dimensions; GPT-6.1 Sol (xhigh) is first on the API basis.",
       "rankChanges": [
         {
           "slug": "mimo-v2-6-pro",
           "name": "MiMo-V2.6-Pro",
           "from": 7,
-          "to": 3
-        },
-        {
-          "slug": "gpt-6-1-sol",
-          "name": "GPT-6.1 Sol",
-          "from": 2,
           "to": 5
-        },
-        {
-          "slug": "gpt-6-luna",
-          "name": "GPT-6 Luna",
-          "from": 11,
-          "to": 6
         },
         {
           "slug": "gemini-4-argon",
           "name": "Gemini 4 Argon",
           "from": 1,
-          "to": 8
-        },
-        {
-          "slug": "gpt-5-6-luna",
-          "name": "GPT-5.6 Luna",
-          "from": 10,
-          "to": 9
-        },
-        {
-          "slug": "gpt-6-sol",
-          "name": "GPT-6 Sol",
-          "from": 8,
-          "to": 12
+          "to": 10
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "from": 3,
-          "to": 13
+          "to": 12
         },
         {
           "slug": "claude-opus-5-5",
           "name": "Claude Opus 5.5",
           "from": 5,
-          "to": 14
+          "to": 13
         },
         {
           "slug": "gpt-6-astra",
           "name": "GPT-6 Astra",
           "from": 4,
-          "to": 15
-        },
-        {
-          "slug": "gpt-5-6-sol",
-          "name": "GPT-5.6 Sol",
-          "from": 6,
           "to": 16
         },
         {
           "slug": "claude-haiku-5-5",
           "name": "Claude Haiku 5.5",
           "from": 13,
-          "to": 19
+          "to": 17
         },
         {
-          "slug": "gemini-3-8-flash",
-          "name": "Gemini 3.8 Flash",
-          "from": 14,
-          "to": 25
-        },
-        {
-          "slug": "deepseek-v4-pro",
-          "name": "DeepSeek V4 Pro",
-          "from": 19,
-          "to": 26
-        },
-        {
-          "slug": "glm-5-3",
-          "name": "GLM-5.3",
-          "from": 16,
-          "to": 27
-        },
-        {
-          "slug": "grok-4-7",
-          "name": "Grok 4.7",
-          "from": 9,
-          "to": 28
-        },
-        {
-          "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
-          "from": 15,
-          "to": 29
-        },
-        {
-          "slug": "qwen3-8-max",
-          "name": "Qwen3.8 Max",
-          "from": 18,
-          "to": 31
+          "slug": "gpt-6-luna",
+          "name": "GPT-6 Luna",
+          "from": 11,
+          "to": 20
         }
       ],
       "ranks": {
-        "claude-fable-5-1": 24,
-        "claude-haiku-5-5": 19,
-        "claude-haiku-5-5-high": 20,
-        "claude-haiku-5-5-low": 22,
-        "claude-haiku-5-5-max": 30,
+        "claude-haiku-5-5": 17,
+        "claude-haiku-5-5-high": 19,
+        "claude-haiku-5-5-low": 25,
+        "claude-haiku-5-5-max": 18,
         "claude-haiku-5-5-medium": 21,
-        "claude-opus-5": 29,
-        "claude-opus-5-5": 14,
-        "claude-sonnet-5-5": 13,
-        "claude-sonnet-5-5-high": 10,
-        "claude-sonnet-5-5-low": 23,
-        "claude-sonnet-5-5-medium": 18,
-        "claude-sonnet-5-5-xhigh": 11,
-        "deepseek-v4-pro": 26,
-        "gemini-3-8-flash": 25,
-        "gemini-4-argon": 8,
-        "glm-5-3": 27,
-        "gpt-5-6-luna": 9,
-        "gpt-5-6-sol": 16,
-        "gpt-6-astra": 15,
-        "gpt-6-luna": 6,
-        "gpt-6-sol": 12,
-        "gpt-6-1-sol": 5,
-        "gpt-6-1-sol-high": 4,
-        "gpt-6-1-sol-low": 7,
-        "gpt-6-1-sol-medium": 2,
+        "claude-opus-5-5": 13,
+        "claude-opus-5-5-high": 8,
+        "claude-opus-5-5-medium": 7,
+        "claude-opus-5-5-xhigh": 9,
+        "claude-sonnet-5-5": 12,
+        "claude-sonnet-5-5-xhigh": 14,
+        "deepseek-v4-1-flash-1017": 6,
+        "gemini-4-argon": 10,
+        "gpt-5-6-luna-low": 27,
+        "gpt-6-astra": 16,
+        "gpt-6-astra-high": 15,
+        "gpt-6-astra-xhigh": 11,
+        "gpt-6-luna": 20,
+        "gpt-6-luna-high": 23,
+        "gpt-6-luna-low": 26,
+        "gpt-6-luna-medium": 24,
+        "gpt-6-luna-xhigh": 22,
+        "gpt-6-1-sol": 2,
+        "gpt-6-1-sol-high": 3,
+        "gpt-6-1-sol-medium": 4,
         "gpt-6-1-sol-xhigh": 1,
-        "grok-4-7": 28,
-        "mimo-v2-6-pro": 3,
-        "muse-spark-1-3": 17,
-        "qwen3-8-max": 31
+        "mimo-v2-6-pro": 5
       },
       "added": [
-        "claude-fable-5-1",
         "claude-haiku-5-5-high",
         "claude-haiku-5-5-low",
         "claude-haiku-5-5-max",
         "claude-haiku-5-5-medium",
-        "claude-sonnet-5-5-high",
-        "claude-sonnet-5-5-low",
-        "claude-sonnet-5-5-medium",
+        "claude-opus-5-5-high",
+        "claude-opus-5-5-medium",
+        "claude-opus-5-5-xhigh",
         "claude-sonnet-5-5-xhigh",
+        "deepseek-v4-1-flash-1017",
+        "gpt-5-6-luna-low",
         "gpt-6-1-sol-high",
-        "gpt-6-1-sol-low",
         "gpt-6-1-sol-medium",
         "gpt-6-1-sol-xhigh",
-        "muse-spark-1-3"
+        "gpt-6-astra-high",
+        "gpt-6-astra-xhigh",
+        "gpt-6-luna-high",
+        "gpt-6-luna-low",
+        "gpt-6-luna-medium",
+        "gpt-6-luna-xhigh"
       ],
       "removed": [
+        "claude-opus-5",
         "deepseek-v4-flash",
-        "mimo-v2-6-flash"
+        "deepseek-v4-pro",
+        "gemini-3-8-flash",
+        "glm-5-3",
+        "gpt-5-6-luna",
+        "gpt-5-6-sol",
+        "gpt-6-sol",
+        "grok-4-7",
+        "mimo-v2-6-flash",
+        "qwen3-8-max"
       ]
     },
     {

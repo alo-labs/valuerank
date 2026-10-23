@@ -11,27 +11,27 @@ ValueRank asks which frontier AI model configuration is lowest cost for the valu
 
 ## Cohort
 
-32 configurations are ranked:
+27 configurations are ranked:
 
-- On AA's rendered frontier (6): Claude Sonnet 5.5 (max), GPT-6.1 Sol (max), Claude Opus 5.5 (max), MiMo-V2.6-Pro, GPT-6 Luna (max), Claude Haiku 5.5 (xhigh)
-- Near-frontier family (3): Gemini 4 Argon (high), GPT-6 Astra (max), GPT-5.6 Luna (max)
-- Exact DeepSWE and Bug Hunt results for the exact configuration (O31, O33) (23): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-5.6 Sol (max), Muse Spark 1.3 (max), Claude Sonnet 5.5 (xhigh), GPT-6 Sol (max), Grok 4.7 (xhigh), Claude Fable 5.1 (max), GPT-6.1 Sol (low), Claude Sonnet 5.5 (high), Claude Haiku 5.5 (max), Gemini 3.8 Flash (high), Claude Sonnet 5.5 (medium), Claude Opus 5 (max), GLM-5.3 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low), Claude Sonnet 5.5 (low), Qwen3.8 Max, DeepSeek V4 Pro (max), Muse Wonder Full (max)
+- On AA's rendered frontier (6): Claude Sonnet 5.5 (max), Claude Opus 5.5 (max), GPT-6.1 Sol (max), MiMo-V2.6-Pro, Claude Haiku 5.5 (xhigh), GPT-6 Luna (max)
+- Near-frontier family (4): DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high), GPT-6 Astra (xhigh), GPT-5.6 Luna (low)
+- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (17): GPT-6 Astra (max), Claude Opus 5.5 (xhigh), GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), Claude Opus 5.5 (high), Claude Sonnet 5.5 (xhigh), Claude Haiku 5.5 (max), Claude Opus 5.5 (medium), GPT-6.1 Sol (medium), GPT-6 Astra (high), Claude Haiku 5.5 (high), GPT-6 Luna (xhigh), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low), GPT-6 Luna (high), GPT-6 Luna (medium), GPT-6 Luna (low)
 
-5 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days of the cutoff (O36; a required frontier family is listed the same way, O38): DeepSeek V4 Flash (no FrontierCode 1.1); Grok 4.6 (xhigh) (no FrontierCode 1.1); MiMo-V2.6-Flash (no Bug Hunt Bench); Muse Spark 1.3 (xhigh) (no FrontierCode 1.1); Muse Wonder (no FrontierCode 1.1). A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41).
+2 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days of the cutoff (O36; a required frontier family is listed the same way, O38): MiMo-V2.6-Flash (no Bug Hunt Bench); MiniMax-M3.1-Flash (no Bug Hunt Bench). A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41).
 
-The remaining 12 roster models are not ranked; each keeps a page with the evidence held for it.
+The remaining 32 roster models are not ranked; each keeps a page with the evidence held for it.
 
 ## Model inclusion
 
 **Frontier rule.** Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked at its highest point on that line (along the strictly rising line also its dearest). Frontier membership is AA's rendered line as observed; ValueRank never recomputes it from rounded values.
 
-**Near-frontier rule.** A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Its selected configuration may differ from the near configuration: it is the configuration already ranked for exact DeepSWE and Bug Hunt evidence when there is one, else the near point with the smallest Index gap. The cost ratio to the frontier is reported for information only.
+**Near-frontier rule.** A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Every configuration AA plots on the frontier or within the gap is a cohort row (O51); a near family's primary configuration is its near point with the smallest Index gap. The cost ratio to the frontier is reported for information only.
 
 Policy as recorded: A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only.
 
-Chart observed 2026-10-17T18:48:27Z (Intelligence Index v4.3.2): 694 catalog models selected, 189 plotted points and 18 rendered Pareto vertices across 7 families. 9 plotted points across 6 families are near-frontier.
+Chart observed 2026-10-23T05:27:39Z (Intelligence Index v4.3.2): 697 catalog models selected, 189 plotted points and 18 rendered Pareto vertices across 7 families. 11 plotted points across 8 families are near-frontier.
 
-Near-frontier models: 6 required, 0 deferred by roster decision.
+Near-frontier models: 8 required, 0 deferred by roster decision.
 
 Frontier families and the configuration selected for each:
 
@@ -43,14 +43,16 @@ Frontier families and the configuration selected for each:
 - MiMo-V2.6-Flash: MiMo-V2.6-Flash
 - MiMo-V2.6-Pro: MiMo-V2.6-Pro
 
-Near-frontier families and each family's near point closest to the frontier (a family's primary configuration is its configuration with exact DeepSWE and Bug Hunt results when it has one, O30, and every other effort with both results is ranked as its own row, O33, so the ranked configurations can differ):
+Near-frontier families and each family's near point closest to the frontier (every configuration AA plots on or near the frontier is a cohort row, each effort its own row, O51; a family's primary configuration is its near point closest to the frontier, E193):
 
 - Claude Haiku 5.5: Claude Haiku 5.5 (low), 1 Index point below the frontier
 - Claude Opus 5.5: Claude Opus 5.5 (medium with fallback), 1 Index point below the frontier
 - Claude Sonnet 5.5: Claude Sonnet 5.5 (xhigh with fallback), 2 Index points below the frontier
+- DeepSeek V4.1 Flash 1017: DeepSeek V4.1 Flash 1017 (max), 3 Index points below the frontier
 - GPT-5.6 Luna: GPT-5.6 Luna (low), 1 Index point below the frontier
 - GPT-6 Astra: GPT-6 Astra (xhigh), 2 Index points below the frontier
 - Gemini 4 Argon: Gemini 4 Argon (high), 1 Index point below the frontier
+- MiniMax-M3.1-Flash: MiniMax-M3.1-Flash, 3 Index points below the frontier
 
 AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low)): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.
 
@@ -60,20 +62,19 @@ Value on a basis = **25%** × cost score + **75%** × quality score (owner decis
 
 ## Cost: the SDLC basket
 
-The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 29 of the 32 ranked configurations (at least 22 required):
+The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 27 of the 27 ranked configurations (at least 18 required):
 
 | Component | Status | Exact cost available | Complete | Ranked |
 |---|---|---:|---:|---:|
-| Coding Agent Index | admitted | 30 | 30 | 32 |
-| FrontierCode | pending capture | 15 | 13 | 32 |
-| ITBench-AA | pending capture | 9 | 9 | 32 |
-| AA-Briefcase | admitted | 31 | 30 | 32 |
-| GDPval-AA | admitted | 31 | 30 | 32 |
-| GDP.pdf | admitted | 31 | 30 | 32 |
-| AutomationBench-AA | admitted | 31 | 30 | 32 |
-| Terminal-Bench 4.0 (AA Index run) | admitted | 31 | 30 | 32 |
-| SciCode | admitted | 31 | 30 | 32 |
-| AA-LCR | admitted | 31 | 30 | 32 |
+| Coding Agent Index | pending capture | 7 | 7 | 27 |
+| ITBench-AA | pending capture | 2 | 2 | 27 |
+| AA-Briefcase | admitted | 27 | 27 | 27 |
+| GDPval-AA | admitted | 27 | 27 | 27 |
+| GDP.pdf | admitted | 27 | 27 | 27 |
+| AutomationBench-AA | admitted | 27 | 27 | 27 |
+| Terminal-Bench 4.0 (AA Index run) | admitted | 27 | 27 | 27 |
+| SciCode | admitted | 27 | 27 | 27 |
+| AA-LCR | admitted | 27 | 27 | 27 |
 
 A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is read from AA's chart (rounded to USD 1). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
@@ -81,7 +82,6 @@ A configuration's basket cost is the sum of AA's published costs for the admitte
 
 | Component | Contestant tokens | Other model calls | External tools | Execution environment | Preparation | Grading |
 |---|---|---|---|---|---|---|
-| Coding Agent Index | included | unknown | unknown | unknown | unknown | unknown |
 | AA-Briefcase | included | unknown | unknown | unknown | unknown | unknown |
 | GDPval-AA | included | unknown | unknown | unknown | unknown | unknown |
 | GDP.pdf | included | excluded | unknown | unknown | excluded | excluded |
@@ -98,10 +98,8 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Workload | Basis | Low anchor c_L (USD) | High anchor c_H (USD) | References | Status |
 |---|---|---:|---:|---:|---|
-| `9a0d376cc6080f3c` (main) | api | $35.76 | $19,978.30 | 29 | frozen |
-| `9a0d376cc6080f3c` (main) | plan | $0.61 | $13,400.04 | 83 | frozen |
-| `1453a9a0576b02ea` (subset) | api | $14.06 | $12,078.25 | 30 | frozen |
-| `1453a9a0576b02ea` (subset) | plan | $0.24 | $8,725.81 | 87 | frozen |
+| `1453a9a0576b02ea` (main) | api | $4.19 | $12,078.25 | 27 | frozen |
+| `1453a9a0576b02ea` (main) | plan | $0.24 | $3,715.87 | 91 | frozen |
 
 **Anchor policy** (`complete-evidence-panel` v1). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations at their displayed Plan cost: measured routes, owner-named transfers and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
 
@@ -109,15 +107,15 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Basis | Anchor ratio c_H / c_L | Value points per cost doubling | Quality points that offset it |
 |---|---:|---:|---:|
-| api | 558.7 | 2.74 | 3.65 |
-| plan | 22070.1 | 1.73 | 2.31 |
+| api | 2884.9 | 2.17 | 2.90 |
+| plan | 15566.8 | 1.80 | 2.39 |
 
 **Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2). Because cost and quality covary, that ratio describes dispersion; the value-variance allocation Cov(0.25 S_C, V) / Var(V) and the Kendall tau of the cost-only and quality-only orderings against the value ordering show contribution (E189).
 
 | Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
 |---|---:|---:|---|---:|---:|---:|
-| api | 30 | 48.3% | defined | 37.5% | 0.16 | 0.32 |
-| plan | 85 | 45.0% | defined | 17.5% | -0.11 | 0.56 |
+| api | 27 | 38.7% | defined | -108.4% | -0.44 | 0.53 |
+| plan | 91 | 34.9% | defined | -45.4% | -0.26 | 0.65 |
 
 ## Quality
 
@@ -125,10 +123,9 @@ Quality is the weighted mean of the leaves observed for the exact configuration,
 
 | Leaf | Group | Weight in quality | Weight in value | Raw unit | Score | Run by |
 |---|---|---:|---:|---|---|---|
-| [DeepSWE v1.1](https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1) | Software engineering | 30.00% | 22.50% | % pass@1 | z = pass@1 % | AA-run |
-| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | Software engineering | 10.00% | 7.50% | bugs fixed of 105 | z = 100 × bugs fixed / 105 | independent |
-| [FrontierCode 1.1](https://artificialanalysis.ai/evaluations/frontiercode) | Software engineering | 10.00% | 7.50% | AA score (0-1) | z = 100 × score | AA-run |
-| [Terminal-Bench 4.0 (AA run)](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | Software engineering | 10.00% | 7.50% | % resolved | z = resolution % | AA-run |
+| [FrontierCode 1.1](https://artificialanalysis.ai/evaluations/frontiercode) | Software engineering | 25.00% | 18.75% | AA score (0-1) | z = 100 × score | AA-run |
+| [Terminal-Bench 4.0 (AA run)](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | Software engineering | 20.00% | 15.00% | % resolved | z = resolution % | AA-run |
+| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | Software engineering | 15.00% | 11.25% | bugs fixed of 105 | z = 100 × bugs fixed / 105 | independent |
 | [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | General professional work | 10.00% | 7.50% | Elo | z = 100 × (Elo − 500) / 2000 (AA's integration transform) | AA-run |
 | [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | General professional work | 10.00% | 7.50% | AA score (0-1) | z = 100 × score | AA-run |
 | [AA-Omniscience](https://artificialanalysis.ai/evaluations/omniscience) | Reliability | 10.00% | 7.50% | AA Omniscience Index (-100 to 100) | z = (I + 100) / 2 on AA's Omniscience Index I (O28) | AA-run |
@@ -137,17 +134,17 @@ Quality is the weighted mean of the leaves observed for the exact configuration,
 | [SciCode](https://artificialanalysis.ai/evaluations/scicode) | Long context, science & knowledge | 1.67% | 1.25% | score (0-1) | z = 100 × score | AA-run |
 | [CritPt](https://artificialanalysis.ai/evaluations/critpt) | Long context, science & knowledge | 1.67% | 1.25% | score (0-1) | z = 100 × score | AA-run |
 
-Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within 7 days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
+Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within 7 days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). For a listed frontier or near-frontier family the search also logs an open-web discovery step: its queries and every candidate result, each resolved by a dated registry addition or a dated rejection with its reason, and the build fails on an unresolved candidate (E240). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 
 Coverage is the observed share of quality weight. A row is **provisional** when coverage is below 70%, fewer than 2 software-engineering leaves are observed, observed software-engineering weight is below 40%, or a leaf weighing 20% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
 
 ## Plan basis
 
-Plan cost = basket API cost ÷ the Value Multiple of the selected subscription route, at full utilisation. A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged. Each Plan row publishes its fee period, the cash paid and the selected multiple's amount (multiple × gross cash), typed by what the measurement establishes (E166): measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer (with its donor), or identified target-workload capacity; API-fallback rows publish none.
+Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full utilisation. **The Plan ranking has one row per configuration and plan (owner decision O48)**: every plan on which the configuration has an eligible route, each plan's route chosen by the comparator below among that plan's candidates; rows of one configuration share its quality and API cost and differ only by the plan's multiple, share every scenario draw, and are told apart by any value gap; a configuration's own Plan figures (the main table, model pages, and the Plan diagnostics that rebuild anchors or move evidence) are those of its selected route's plan row. Every route record names one model and one plan (O45). A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Two owner-authorised classes sit beside them: GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figure on every ChatGPT plan (a figure that names a model without an effort binds to its unsuffixed, max row), and every other GPT row takes the lower of the two figures per plan as a labelled assumption (O45); each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling — the tier's monthly credits valued at Xiaomi's API rate for that model over the list fee — labelled provider-derived and not a measurement (O46), because Xiaomi prices credits at parity with its API and no end-user measurement of a V2.6 billing period exists. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged. Each Plan row publishes its fee period, the cash paid and the selected multiple's amount (multiple × gross cash), typed by what the measurement establishes (E166): measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer (with its donor), or identified target-workload capacity; API-fallback rows publish none.
 
-**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 90 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`3d83f7643d4a85b7`) re-runs the selection over exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics), without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
+**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 91 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`3d83f7643d4a85b7`) re-runs the selection over exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics), without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
-**Subscription evidence policy** (as of 2026-10-08; reporting window 2026-09-21 to 2026-10-21):
+**Subscription evidence policy** (as of 2026-10-08; reporting window 2026-09-23 to 2026-10-23; end-user reports were last searched on 2026-10-21, so reports dated in the 2 days after it were not searched):
 
 - Default numerator: Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.
 - Selected source for Anthropic, OpenAI: [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (2026-10-06, owner-selected 2026-10-07): Controlled subscription-account measurements with agentic workload projections.
@@ -159,9 +156,9 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 ## Uncertainty outputs
 
-**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 55.3 (the displayed quality of Claude Sonnet 5.5 (high) at freeze); ladder: quality 47.4, quality 59.6.
+**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 48.9 (the displayed quality of GPT-6.1 Sol (medium) at freeze); ladder: quality 32.3, quality 55.0.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261021, input hash `e99001a331c80fca`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261023, input hash `ea22eb039f736ffa`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
@@ -185,18 +182,18 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | clip gate (E20) | passed | no basis exceeds the clipping allowance |
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
-| subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
-| partial component flag (E37) | fired | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
+| subset scoring (O17) | vacuous | subset rows scored on their own workload and anchors |
+| partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | passed | every cohort row has a pinned identity |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
-| full benchmark set (O36, O38) | fired | listed, not ranked: deepseek-v4-flash, grok-4.6-xhigh, mimo-v2-6-flash, muse-spark-1-3-xhigh, muse-wonder |
+| full benchmark set (O36, O38) | fired | listed, not ranked: mimo-v2-6-flash, minimax-m3-1-flash |
 | missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226) | vacuous | no ranked row has a missing leaf (O36) |
 | S1M interval stream (E145) | vacuous | dormant: no ranked leaf carries a published confidence interval since O37, so S1M equals S1 (E236) |
-| provider-claim label denial (E233) | fired | competes, earns no label: mimo-v2-6-pro |
+| provider-claim label denial (E233) | vacuous | no row has a provider-claimed leaf |
 | scenario outputs current (E72) | passed | scenario input hash matches the scored inputs |
 
 ## Limitations
@@ -212,7 +209,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 
 - [data/scores.json](data/scores.json): the `v3` section holds every row, workload, anchor, interval output, scenario result, diagnostic and the evidence bundle
 - [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
-- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-10-21`
+- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-10-23`
 - [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
-- [data/aa_deepswe.json](data/aa_deepswe.json), [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots
+- [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots ([data/aa_deepswe.json](data/aa_deepswe.json) keeps AA's last DeepSWE v1.1 capture, no longer scored, O49)
 - [data/leaf_evidence.json](data/leaf_evidence.json), [data/cognition_frontiercode.json](data/cognition_frontiercode.json): leaf gap fills and the exhaustive-search log (O36/O37)

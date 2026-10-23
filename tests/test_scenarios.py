@@ -63,8 +63,8 @@ def test_split_uniform_keeps_the_published_point_as_the_median():
 def test_stream_target_profiles_are_an_allowlist():
     """E145: v1 S0 varies only reporting precision; other uncertainty enters only streams that name it."""
 
-    rounding = RowInputs("a", {"deepswe": Kernel("uniform", (49.95, 50.05))}, Kernel("uniform", (99.5, 100.5)))
-    fixed = RowInputs("b", {"deepswe": Kernel("fixed", (40.0,))}, Kernel("fixed", (80.0,)))
+    rounding = RowInputs("a", {"frontierCode": Kernel("uniform", (49.95, 50.05))}, Kernel("uniform", (99.5, 100.5)))
+    fixed = RowInputs("b", {"frontierCode": Kernel("fixed", (40.0,))}, Kernel("fixed", (80.0,)))
     assert sc.validate_stream([rounding, fixed], "S0") == ["reporting precision"]
     assert sc.validate_stream([fixed], "S0") == []
     assert sc.validate_stream([fixed], "S1") == ["identification convention"]
@@ -122,7 +122,7 @@ def test_dirichlet_and_hierarchical_weights_preserve_totals():
     weights = sc.hierarchical_weights(rng)
     assert set(weights) == {leaf.key for leaf in q.LEAVES}
     assert sum(weights.values()) == pytest.approx(100.0)
-    assert sc.nominal_weights()["deepswe"] == 30.0
+    assert sc.nominal_weights()["frontierCode"] == 25.0
 
 
 def test_hierarchical_weights_keep_the_nominal_means():
@@ -138,24 +138,24 @@ def test_hierarchical_weights_keep_the_nominal_means():
 
 def test_missing_ranges_use_observed_values_and_default_to_the_domain():
     rows = [
-        RowInputs("a", {"deepswe": Kernel("fixed", (40.0,)), "bugHunt": Kernel("runs", (30.0, 50.0), target="expected performance")}, Kernel("fixed", (1.0,))),
-        RowInputs("b", {"deepswe": Kernel("fixed", (70.0,))}, Kernel("fixed", (1.0,))),
+        RowInputs("a", {"frontierCode": Kernel("fixed", (40.0,)), "bugHunt": Kernel("runs", (30.0, 50.0), target="expected performance")}, Kernel("fixed", (1.0,))),
+        RowInputs("b", {"frontierCode": Kernel("fixed", (70.0,))}, Kernel("fixed", (1.0,))),
     ]
     ranges = sc.missing_ranges(rows)
-    assert ranges["deepswe"] == (40.0, 70.0)
+    assert ranges["frontierCode"] == (40.0, 70.0)
     assert ranges["bugHunt"] == (40.0, 40.0)
     assert ranges["critpt"] == (0.0, 100.0)
 
 
 def test_draw_scenario_strata():
     rng = random.Random(4)
-    partial = RowInputs("p", {"deepswe": Kernel("fixed", (80.0,))}, Kernel("uniform", (90.0, 110.0)))
+    partial = RowInputs("p", {"frontierCode": Kernel("fixed", (80.0,))}, Kernel("uniform", (90.0, 110.0)))
     s0 = sc.draw_scenario([partial], "S0", rng)
     assert s0["p"][1] == pytest.approx(80.0) and 90.0 <= s0["p"][0] <= 110.0
     s1 = sc.draw_scenario([partial], "S1", rng)
     assert 0.0 <= s1["p"][1] <= 100.0 and s1["p"][1] != pytest.approx(80.0)
-    alternative = sc.draw_scenario([partial], "S1", rng, alternative=True, ranges={"deepswe": (0, 0), **{leaf.key: (50.0, 50.0) for leaf in q.LEAVES}})
-    assert alternative["p"][1] == pytest.approx(0.3 * 80 + 0.7 * 50)
+    alternative = sc.draw_scenario([partial], "S1", rng, alternative=True, ranges={"frontierCode": (0, 0), **{leaf.key: (50.0, 50.0) for leaf in q.LEAVES}})
+    assert alternative["p"][1] == pytest.approx(0.25 * 80 + 0.75 * 50)
     alternative_default = sc.draw_scenario([partial], "S1", rng, alternative=True)
     assert 0.0 <= alternative_default["p"][1] <= 100.0
     s2 = sc.draw_scenario([full_row("f", 60.0, 100.0)], "S2", rng)
@@ -299,7 +299,7 @@ def test_singleton_group_within_weight_is_exactly_one():
 def test_only_the_full_composite_s1_core_branch_authorises_the_label():
     """E100 fixture: 70% coverage, observed leaves at 100, against a fully observed reference at 80."""
 
-    observed = {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in {"bugHunt", "terminalBench", "automationBench"}}
+    observed = {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in {"gdpval", "automationBench", "omniscience"}}
     candidate = RowInputs("c", observed, Kernel("fixed", (10.0,)))
     reference = full_row("ref", 80.0, 100.0)
     s0 = sc.scenario_supported_cheapest([candidate, reference], "c", "ref", "S0", random.Random(11), batch=500, looks=2)
@@ -316,13 +316,13 @@ def test_only_the_full_composite_s1_core_branch_authorises_the_label():
 
 
 def test_kernel_robust_label_needs_every_kernel():
-    """E112 fixture: 70% coverage, one missing 10% leaf in each of three groups, reference at 78.
+    """E112 fixture: 70% coverage, three missing 10% leaves (GDPval-AA, AutomationBench-AA, Omniscience), reference at 78.
 
     The candidate qualifies when 70 + 0.1 * (U1 + U2 + U3) >= 78: about 91.5% of
     uniform draws but 86.7% of arcsine (endpoint-heavy) draws, so no label.
     """
 
-    missing = {"bugHunt", "automationBench", "omniscience"}
+    missing = {"gdpval", "automationBench", "omniscience"}
     candidate = RowInputs("c", {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in missing}, Kernel("fixed", (10.0,)))
     reference = full_row("ref", 78.0, 100.0)
     result = sc.kernel_robust_cheapest([candidate, reference], "c", "ref", 21, batch=10000, looks=2)
@@ -355,7 +355,7 @@ def test_kernel_robust_label_needs_every_kernel():
 def test_a_quality_level_bar_has_no_reference_block():
     """E192: the E121 fixture with the bar as the level 78 gives the same frequencies; codes cover candidate and competitors."""
 
-    missing = {"bugHunt", "automationBench", "omniscience"}
+    missing = {"gdpval", "automationBench", "omniscience"}
     candidate = RowInputs("c", {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in missing}, Kernel("fixed", (10.0,)))
     result = sc.kernel_robust_cheapest([candidate], "c", 78.0, 21, batch=10000, looks=2)
     assert sorted(result["assignments"]) == ["H", "U"]

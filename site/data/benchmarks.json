@@ -1,48 +1,16 @@
 {
   "sources": [
     {
-      "id": "deepswe",
-      "name": "DeepSWE v1.1",
-      "owner": "Artificial Analysis Coding Agent Index",
-      "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1",
-      "observedAt": "2026-10-17T19:26:26Z",
-      "role": "quality leaf (Software engineering)",
-      "weightPct": 22.5,
-      "coverage": {
-        "available": 32,
-        "cohort": 32
-      },
-      "unit": "% pass@1",
-      "execution": "AA-run",
-      "notes": null
-    },
-    {
-      "id": "bugHunt",
-      "name": "Bug Hunt Bench",
-      "owner": "Bug Hunt Bench benchmark owner",
-      "url": "https://bughunt.productcompass.pm/",
-      "observedAt": "2026-10-17",
-      "role": "quality leaf (Software engineering)",
-      "weightPct": 7.5,
-      "coverage": {
-        "available": 32,
-        "cohort": 32
-      },
-      "unit": "bugs fixed of 105",
-      "execution": "independent",
-      "notes": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness."
-    },
-    {
       "id": "frontierCode",
       "name": "FrontierCode 1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/frontiercode",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 7.5,
+      "weightPct": 18.75,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -53,28 +21,44 @@
       "name": "Terminal-Bench 4.0 (AA run)",
       "owner": "Artificial Analysis",
       "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 7.5,
+      "weightPct": 15.0,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "% resolved",
       "execution": "AA-run",
       "notes": "AA's own run on one harness (mini-SWE-agent) since O37; tbench.ai rows fill a gap and are compared with it as a diagnostic."
     },
     {
+      "id": "bugHunt",
+      "name": "Bug Hunt Bench",
+      "owner": "Bug Hunt Bench benchmark owner",
+      "url": "https://bughunt.productcompass.pm/",
+      "observedAt": "2026-10-19",
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 11.25,
+      "coverage": {
+        "available": 27,
+        "cohort": 27
+      },
+      "unit": "bugs fixed of 105",
+      "execution": "independent",
+      "notes": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness."
+    },
+    {
       "id": "gdpval",
       "name": "GDPval-AA v2.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "Elo",
       "execution": "AA-run",
@@ -85,12 +69,12 @@
       "name": "AutomationBench-AA",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/automationbench-aa",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -101,12 +85,12 @@
       "name": "AA-Omniscience",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/omniscience",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Reliability)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "AA Omniscience Index (-100 to 100)",
       "execution": "AA-run",
@@ -117,12 +101,12 @@
       "name": "AA-LCR v1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 3.75,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
@@ -133,12 +117,12 @@
       "name": "Humanity's Last Exam",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
@@ -149,12 +133,12 @@
       "name": "SciCode",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/scicode",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "score (0-1)",
       "execution": "AA-run",
@@ -165,12 +149,12 @@
       "name": "CritPt",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/critpt",
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 32,
-        "cohort": 32
+        "available": 27,
+        "cohort": 27
       },
       "unit": "score (0-1)",
       "execution": "AA-run",
@@ -180,10 +164,6 @@
   "basket": {
     "version": "SDLC basket v1",
     "admitted": [
-      {
-        "key": "coding-agent-index",
-        "label": "Coding Agent Index"
-      },
       {
         "key": "aa-briefcase",
         "label": "AA-Briefcase"
@@ -215,33 +195,33 @@
     ],
     "pending": [
       {
-        "key": "frontiercode",
-        "label": "FrontierCode",
-        "covered": 13,
-        "ranked": 32
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index",
+        "covered": 7,
+        "ranked": 27
       },
       {
         "key": "itbench-aa",
         "label": "ITBench-AA",
-        "covered": 9,
-        "ranked": 32
+        "covered": 2,
+        "ranked": 27
       }
     ],
-    "referencePanelSize": 29,
-    "requiredPanelSize": 22
+    "referencePanelSize": 27,
+    "requiredPanelSize": 18
   },
   "qualitySourceShares": {
-    "aa": 0.9000000000000001,
-    "independent": 0.1
+    "aa": 0.8500000000000002,
+    "independent": 0.15
   },
   "frontier": {
     "status": "complete",
-    "checkedAt": "2026-10-21T05:24:16+00:00",
-    "observedAt": "2026-10-17T18:48:27Z",
+    "checkedAt": "2026-10-23T06:26:23+00:00",
+    "observedAt": "2026-10-23T05:27:39Z",
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
     "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
     "definition": "Directly observed AA displayed intelligence-versus-total-cost frontier; not recomputed from a subset.",
-    "note": "All 694 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost). One overlapped circle pair was resolved by an offset hover with colour and axis confirmation. No hidden state or paid export used.",
+    "note": "All 697 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-23. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used.",
     "rows": [
       {
         "aaId": "gpt-6-luna-low",
@@ -250,7 +230,7 @@
         "intelligenceIndex": 22,
         "totalCostUsd": 10.63,
         "family": "GPT-6 Luna",
-        "slug": null,
+        "slug": "gpt-6-luna-low",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-low"
       },
       {
@@ -260,7 +240,7 @@
         "intelligenceIndex": 30,
         "totalCostUsd": 31.17,
         "family": "GPT-6 Luna",
-        "slug": null,
+        "slug": "gpt-6-luna-medium",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-medium"
       },
       {
@@ -270,7 +250,7 @@
         "intelligenceIndex": 33,
         "totalCostUsd": 47.85,
         "family": "GPT-6 Luna",
-        "slug": null,
+        "slug": "gpt-6-luna-high",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-high"
       },
       {
@@ -290,7 +270,7 @@
         "intelligenceIndex": 35,
         "totalCostUsd": 66.81,
         "family": "GPT-6 Luna",
-        "slug": null,
+        "slug": "gpt-6-luna-xhigh",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-xhigh"
       },
       {
@@ -390,7 +370,7 @@
         "intelligenceIndex": 54,
         "totalCostUsd": 2172.43,
         "family": "Claude Opus 5.5",
-        "slug": null,
+        "slug": "claude-opus-5-5-high",
         "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-high"
       },
       {
@@ -400,7 +380,7 @@
         "intelligenceIndex": 56,
         "totalCostUsd": 4056.65,
         "family": "Claude Opus 5.5",
-        "slug": null,
+        "slug": "claude-opus-5-5-xhigh",
         "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh"
       },
       {

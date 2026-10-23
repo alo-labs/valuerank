@@ -361,6 +361,11 @@ def influence_text(v3, short=False):
         return ""
     if short:
         return f"; {pct(shares['api'], 0)} of API and {pct(shares['plan'], 0)} of Plan value variance"
+    if min(shares.values()) < 0:
+        # The covariance allocation is negative when dearer configurations score higher on quality: cost then offsets quality.
+        return (f" That weight is nominal: on the current panel cost's covariance allocation of value variance is {pct(shares['api'], 0)} on the API basis "
+                f"and {pct(shares['plan'], 0)} on the Plan basis; a negative allocation means dearer configurations score higher on quality, so cost "
+                "offsets quality differences instead of adding spread of its own (see [methodology.md](methodology.md)).")
     return (f" That weight is nominal: on the current panel cost accounts for {pct(shares['api'], 0)} of the variance in API value and "
             f"{pct(shares['plan'], 0)} in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)).")
 

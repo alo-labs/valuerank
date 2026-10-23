@@ -51,14 +51,16 @@ def test_basket_readiness_prices_leaves_by_family_and_reports_concentration():
     rows = [make_row("a"), make_row("b", cai=None), make_row("s", workload="w-subset"), make_row("z", cost=0.0)]
     result = cd.basket_readiness(rows, admission(rows), MAIN)
     agents = result["components"][basket.CODING_AGENT_INDEX]
-    assert agents["status"] == "admitted" and agents["tasks"] == 303 and agents["missingConfigurations"] == ["b"]
-    assert agents["pricedQualityWeight"] == pytest.approx(0.40)  # DeepSWE 30% and Terminal-Bench 10% run inside it
-    assert result["components"]["frontiercode"]["status"] == "pending capture"
-    assert result["components"]["frontiercode"]["tasks"] == "chart total (no task count)"
-    assert result["components"]["frontiercode"]["missingConfigurations"] == ["a", "b", "s", "z"]
+    assert agents["status"] == "admitted" and agents["tasks"] == 290 and agents["missingConfigurations"] == ["b"]
+    # O50: FrontierCode 25% and Terminal-Bench 20% run inside the Coding Agent Index v2.0.
+    assert agents["pricedQualityWeight"] == pytest.approx(0.45)
+    assert "frontiercode" not in result["components"]
+    assert result["components"]["itbench-aa"]["tasks"] == "chart total (no task count)"
+    assert result["components"]["itbench-aa"]["missingConfigurations"] == ["a", "b", "s", "z"]
     assert result["components"]["scicode"]["tasks"] == 288 and result["components"]["aa-briefcase"]["pricedQualityWeight"] == 0.0
-    assert result["pricedLeaves"] == ["automationBench", "deepswe", "gdpval", "lcr", "scicode", "terminalBench"]
-    assert result["pricedMixCoverage"] == pytest.approx(2.0 / 3.0)
+    assert result["pricedLeaves"] == ["automationBench", "frontierCode", "gdpval", "lcr", "scicode", "terminalBench"]
+    # FrontierCode 25, Terminal-Bench 20, GDPval 10, AutomationBench 10, AA-LCR 5 and SciCode 5/3 percent of quality.
+    assert result["pricedMixCoverage"] == pytest.approx((25 + 20 + 10 + 10 + 5 + 5 / 3) / 100)
     assert set(result["expenditure"]) == {"a", "b"}  # main workload with a positive cost only
     shares = result["expenditure"]["a"]["shares"]
     assert sum(shares.values()) == pytest.approx(1.0) and result["expenditure"]["a"]["hhi"] == pytest.approx(sum(s * s for s in shares.values()))
@@ -82,8 +84,8 @@ def test_matched_cost_reversals_need_separated_basket_intervals_and_warnings_nee
     rows.append(make_row("subset", workload="w-subset"))
     rows.append(make_row("unsolved", index_cost=2.0, z=0.0))
     result = cd.matched_cost(rows, MAIN)
-    assert result["status"] == "evaluated" and result["pricedQualityWeight"] == pytest.approx(0.5)
-    assert set(result["unpricedLeaves"]) == {"deepswe", "bugHunt", "frontierCode"}
+    assert result["status"] == "evaluated" and result["pricedQualityWeight"] == pytest.approx(0.6)
+    assert set(result["unpricedLeaves"]) == {"bugHunt", "frontierCode"}
     assert result["unidentified"] == ["gap", "subset"]
     assert sum(result["definition"]["weights"].values()) == pytest.approx(1.0) and len(result["definition"]["id"]) == 16
     # The r-rows price in opposite orders on C^match and C_W; the wide 'overlap' row never forms a reversal.

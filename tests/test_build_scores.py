@@ -195,7 +195,7 @@ def bh_row(ident, fixed, hle, cost, deepswe=50.0, matched=True, rank=None):
 
 
 def test_emphasis_with_fewer_than_two_matched_rows_is_empty():
-    rows = [bh_row("a", 10, 0.5, 5), bh_row("b", None, 0.4, 6, matched=False), bh_row("c", 5, 0.1, 7, deepswe=None)]
+    rows = [bh_row("a", 10, 0.5, 5), bh_row("b", None, 0.4, 6, matched=False), bh_row("c", 5, 0.1, 7, matched=False)]
     ranking, ranked, weights = build_scores.build_bug_hunt_emphasis(rows, WEIGHTS, dict(DOC, excludedResults=[1]))
     assert ranked == []
     assert ranking["matchedN"] == 0
@@ -327,7 +327,7 @@ def test_metric_coverage_percentage_and_renormalized_priority(built):
         # Cost carries exactly 25% whatever quality metrics are missing.
         assert row["overallScore"] == round(0.25 * row["dims"]["costComposite"] + 0.75 * expected_q, 1)
     assert partial > 0  # the committed data contains rows with missing metrics
-    assert no_cost == 1  # Muse Wonder Full: AA publishes no cost for it
+    assert no_cost == 0  # O51: Muse Wonder Full, the one configuration AA published no cost for, is off the frontier
 
 
 def test_ranked_order_and_exclusions(built):
@@ -402,9 +402,9 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-10-21T05:24:16Z"
-    # The DeepSeek V4 Flash claim is used because that model is primary-ranked; the other claim targets a non-primary model.
-    assert scoring["providerClaimsUsed"] == [DEEPSEEK_CLAIM]
+    assert scoring["observedAt"] == "2026-10-23T06:26:23Z"
+    # O51: DeepSeek V4 Flash is off the frontier, so no committed claim targets a cohort configuration.
+    assert scoring["providerClaimsUsed"] == []
     assert scoring["primaryMissingFields"]
     assert printed["version"] == build_scores.VERSION
     assert printed["n"] == scoring["cohortN"]
@@ -431,42 +431,11 @@ def _set(key, value):
     return fn
 
 
-def _mut_dup_config(document):
-    mapped = [c for c in document["configurations"] if c["valueRankModelId"]]
-    mapped[1]["valueRankModelId"] = mapped[0]["valueRankModelId"]
-
-
-def _mut_not_exact(document):
-    # A mapped row without an effort (Qwen3.8 Max), so the O33 evidence check does not read it as missing first.
-    next(c for c in document["configurations"] if c["valueRankModelId"] and not c["effort"])["matchStatus"] = "new_model_variant"
-
-
-def _mut_score_range(document):
-    first_mapped(document)["scorePct"] = 101
-
-
-def _mut_score_text(document):
-    first_mapped(document)["scorePct"] = "high"
-
-
-def _mut_ghost_model(document):
-    first_mapped(document)["valueRankModelId"] = "ghost-model"
-
-
 def _mut_empty_aa(document):
     document["models"] = {}
 
 
 CASES = [
-    ("deepswe", _set("observedConfigurationN", True), "capture-backed configuration count"),
-    ("deepswe", _set("observedConfigurationN", 0), "capture-backed configuration count"),
-    ("deepswe", _set("observedConfigurationN", 30), "capture-backed configuration count"),
-    ("deepswe", _set("benchmarkTasks", 100), "113-task source"),
-    ("deepswe", _mut_dup_config, "invalid or duplicate exact AA DeepSWE mapping"),
-    ("deepswe", _mut_not_exact, "invalid or duplicate exact AA DeepSWE mapping"),
-    ("deepswe", _mut_score_range, "invalid AA DeepSWE score"),
-    ("deepswe", _mut_score_text, "non-numeric required value"),
-    ("deepswe", _mut_ghost_model, "must belong to the current ValueRank roster"),
     ("aa", _mut_empty_aa, "non-empty comparison roster"),
 ]
 
@@ -771,7 +740,6 @@ def test_provider_claim_for_primary_model_is_recorded(world):
     assert row["terminalBenchV4SourceType"] == "model_provider_claim"
     assert row["terminalBenchV4"] == 0.312
     assert out["run_manifest.json"]["scoring"]["providerClaimsUsed"] == [
-        DEEPSEEK_CLAIM,
         {"model": "MiMo-V2.6-Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://example.invalid/claim"}
     ]
 
@@ -1154,8 +1122,10 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
     assert seen_tiers == {"frontier", "near", None}
     assert sibling_tiers == {"frontier", "near", None}  # e.g. GPT-6.1 Sol (xhigh), Claude Haiku 5.5 (max), GPT-6.1 Sol (low)
     rows = model_rows(world)
-    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
-    assert rows["gpt-6.1-sol-low"]["frontierSelection"] is None and rows["gpt-6.1-sol-low"]["family"] == "GPT-6.1 Sol"
+    # O51: a plotted sibling enters the cohort on its own point; an unplotted one (GPT-6.1 Sol (low)) does not.
+    assert rows["claude-haiku-5-5-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
+    assert rows["claude-haiku-5-5-low"]["frontierSelection"] is None and rows["claude-haiku-5-5-low"]["family"] == "Claude Haiku 5.5"
+    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == [] and rows["gpt-6.1-sol-low"]["rankingEligible"] is False
 
 
 def test_footnote_of_the_best_configuration_is_passed_through(world):
@@ -1193,13 +1163,13 @@ def test_frontier_selection_summarises_near_families(world):
 def test_near_family_without_overlap_coverage_still_ranks(world):
     run_main(world)
     base = outputs(world)
-    # gpt-5.5 has no DeepSWE/Bug Hunt overlap and is not a frontier family: excluded until it becomes a near family.
+    # gpt-5.5 is not plotted on or near the frontier: excluded until it becomes a near family (O51).
     assert model_rows(world)["gpt-5.5"]["rankingEligible"] is False
     base_frontier_n = base["scores.json"]["cohort"]["frontierRequiredModelN"]
     base_cohort_n = base["scores.json"]["cohort"]["n"]
     add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="gpt-5-5")
-    # O36: without DeepSWE and Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
-    with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for deepswe"):
+    # O36: without Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
+    with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for (bugHunt|frontierCode)"):
         run_main(world)
     edit(world, "leaves", log_searches("gpt-5.5"))
     run_main(world)
@@ -1209,7 +1179,7 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     assert model["rankingInclusionReasons"] == [
         "Near-frontier AA family (within 3 Index points of the rendered frontier)"]
     assert model["rankingExclusionReasons"] == [
-        "Incomplete benchmark evidence after an exhaustive search (O36): no DeepSWE v1.1, Bug Hunt Bench, FrontierCode 1.1"]
+        "Incomplete benchmark evidence after an exhaustive search (O36): no FrontierCode 1.1, Bug Hunt Bench"]
     assert (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"]) == ("near", "GPT-5.5 (medium)", 1)
     assert model["aaFrontierFootnote"] == "note for gpt-5-5"
     assert out["scores.json"]["cohort"]["n"] == base_cohort_n + 1
@@ -1242,11 +1212,11 @@ def test_a_frontier_family_must_rank_its_highest_rendered_frontier_point(world):
         run_main(world)
 
 
-def test_a_near_family_must_rank_its_near_point_unless_retained(world):
-    """E193: a near family without retention ranks its smallest-gap near point, not another tracked configuration."""
+def test_a_near_family_must_rank_its_smallest_gap_near_point(world):
+    """E193/O51: a near family's primary configuration is its smallest-gap near point, not another tracked configuration."""
 
     add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="synthetic-gpt-5-5")
-    with pytest.raises(ValueError, match=r"without exact DeepSWE and Bug Hunt results must rank its smallest-gap near point \(E193\): GPT-5.5"):
+    with pytest.raises(ValueError, match=r"must rank its smallest-gap near point as its primary configuration \(E193, O51\): GPT-5.5"):
         run_main(world)
 
 
@@ -1269,64 +1239,18 @@ def add_sibling(root: Path, monkeypatch, source_id: str, new_id: str, display: s
     monkeypatch.setitem(build_scores.SHORT, display, display)
 
 
-def test_a_near_family_must_rank_its_configuration_with_exact_deepswe_and_bug_hunt(world, monkeypatch):
-    """O30/O33: GPT-6 Astra has exact DeepSWE and Bug Hunt results at max, so a primary at its xhigh near point fails the
-    build even when max is ranked as a sibling."""
-
-    add_sibling(world, monkeypatch, "gpt-6-astra", "gpt-6-astra-max", "GPT-6 Astra (max)")
-    edit(world, "aa", lambda d: d["models"]["gpt-6-astra"].update(
-        aaUrl=AA_URL + "gpt-6-astra-xhigh", aaSlug="gpt-6-astra-xhigh", aaVariant="xhigh"))
-    with pytest.raises(ValueError, match=r"exact DeepSWE and Bug Hunt results \(O30\): GPT-6 Astra at max"):
-        run_main(world)
-
-
-def test_evidenced_efforts_need_both_results_and_order_by_index_then_cost():
-    """O30/O31: efforts with exact DeepSWE and Bug Hunt results; several are ordered by AA Index, then cost."""
-
-    model = {"displayName": "Muse Spark 1.3", "aaShortName": "Muse Spark 1.3 (max)"}
-    deepswe = [{"model": "Muse Spark 1.3", "effort": "max"}, {"model": "Muse Spark 1.3", "effort": "xhigh"}, {"model": "Muse Spark 1.3", "effort": None}, {"model": "Other", "effort": "high"}]
-    board = [{"model": "Muse Spark 1.3 (max effort, Muse Code)"}, {"model": "Muse Spark 1.3 (xhigh effort) - mean of 3"},
-             {"model": "Muse Spark 1.3 (low effort)"}, {"model": "Muse Spark 1.3"}, {"model": "Muse Spark 1.3 Open (max effort)"}]
-    efforts = build_scores.evidenced_efforts(model, deepswe, board)
-    assert efforts == {"max", "xhigh"}
-    points = [{"family": "Muse Spark 1.3", "effort": "max", "intelligence_index_display": 48, "total_cost_usd": 2000.0},
-              {"family": "Muse Spark 1.3", "effort": "xhigh", "intelligence_index_display": 48, "total_cost_usd": 1600.0}]
-    assert build_scores.best_evidenced_effort(model, efforts, points) == "xhigh"  # equal Index: the lower cost wins
-    assert build_scores.best_evidenced_effort(model, {"max"}, []) == "max" and build_scores.best_evidenced_effort(model, set(), []) is None
-    with pytest.raises(ValueError, match="cannot be ordered"):
-        build_scores.best_evidenced_effort(model, efforts, points[:1])
-
-
-def test_every_evidenced_effort_is_ranked_as_its_own_row(world):
-    """O33: Muse Spark 1.3 has both results at max and xhigh, and both efforts enter the cohort; xhigh lacks FrontierCode,
-    so it is listed, not ranked (O36)."""
+def test_the_cohort_is_every_plotted_frontier_and_near_configuration(world):
+    """O51: every rostered configuration AA plots on its rendered frontier or within the near gap is a cohort row, each
+    effort its own row; an off-frontier roster entry (Muse Spark 1.3, formerly retained under O31/O33) is not."""
 
     run_main(world)
+    inventory = json.loads((world / FILES["inventory"]).read_text())
+    plotted = {row["sourceUrl"] for row in inventory["rows"] + inventory["nearFrontierRows"]}
+    for model in model_rows(world).values():
+        assert bool(model["rankingInclusionReasons"]) is (model["aaUrl"] in plotted), model["id"]
     rows = model_rows(world)
-    assert rows["muse-spark-1-3"]["rankingEligible"] is True and rows["muse-spark-1-3-xhigh"]["rankingStatus"] == "excluded_incomplete_benchmarks"
-    assert rows["muse-spark-1-3-xhigh"]["rankingInclusionReasons"] == rows["muse-spark-1-3"]["rankingInclusionReasons"]
-    assert rows["muse-spark-1-3-xhigh"]["bugHunt"]["effort"] == "xhigh" and rows["muse-spark-1-3-xhigh"]["deepsweEffort"] == "xhigh"
-
-
-def test_an_evidenced_sibling_with_an_unmatched_bug_hunt_record_fails_the_build(world):
-    """O33: a rostered configuration with both results must carry the matched Bug Hunt record at its own effort."""
-
-    def fn(document):
-        next(model for model in document["models"] if model["modelId"] == "muse-spark-1-3-xhigh")["matched"] = False
-    edit(world, "bughunt", fn)
-    with pytest.raises(ValueError, match=r"lack a matched Bug Hunt record at their effort \(O33\): muse-spark-1-3-xhigh \(xhigh\)"):
-        run_main(world)
-
-
-def test_another_evidenced_effort_of_a_rostered_model_must_be_in_the_roster(world):
-    """O33: an effort_mismatch DeepSWE row with a Bug Hunt row at its effort is missing, even though its model is rostered."""
-
-    def fn(document):
-        item = next(c for c in document["configurations"] if c["valueRankModelId"] == "muse-spark-1-3-xhigh")
-        item.update(valueRankModelId=None, matchStatus="effort_mismatch")
-    edit(world, "deepswe", fn)
-    with pytest.raises(ValueError, match=r"missing from the roster \(O33\): Muse Code - Muse Spark 1.3 \(xhigh\) / Bug Hunt Muse Spark 1.3 \(xhigh effort"):
-        run_main(world)
+    assert rows["muse-spark-1-3"]["rankingStatus"] == "excluded_from_primary_cohort"
+    assert rows["gpt-6-luna-low"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankingEligible"] is True
 
 
 def test_roster_display_names_must_be_unique(world):
@@ -1379,74 +1303,6 @@ def test_the_build_rejects_a_bug_hunt_record_that_is_not_the_largest_sample(worl
         run_main(world)
 
 
-def test_unrostered_evidence_flags_a_deepswe_configuration_bug_hunt_also_reports():
-    """O31/O33: an unmapped DeepSWE configuration with a Bug Hunt row for the same model (version suffix allowed) and effort."""
-
-    deepswe = [
-        {"model": "Muse Wonder", "effort": "max", "matchStatus": "not_in_roster", "displayLabel": "Muse Code - Muse Wonder (max)"},
-        {"model": "Beam 1.0", "effort": None, "matchStatus": "not_in_roster", "displayLabel": "Beam 1.0"},
-        {"model": "GPT-6 Astra", "effort": "max", "matchStatus": "exact_variant", "displayLabel": "Codex - GPT-6 Astra (max)"},
-        {"model": "Muse Spark Open", "effort": "xhigh", "matchStatus": "not_in_roster", "displayLabel": "Muse Spark Open (xhigh)"},
-    ]
-    scoreboard = [
-        {"model": "Beam 1.0 (max effort)"},
-        {"model": "GPT-6 Astra (max effort)"},
-        {"model": "Muse Wonder 1.0 (xhigh effort, Muse Code)"},  # another effort
-        {"model": "Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3"},
-        {"model": "Muse Wonder (max effort)"},  # a second match is not reported twice
-        {"model": "Muse Spark Openly (xhigh effort)"},  # a longer name is not a version suffix
-        {"model": "Muse Spark Open"},  # no effort stated
-    ]
-    assert build_scores.unrostered_evidence(deepswe, scoreboard, {}) == [
-        "Muse Code - Muse Wonder (max) / Bug Hunt Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3",
-    ]
-    assert build_scores.unrostered_evidence(deepswe, scoreboard[:3], {}) == []
-
-
-def test_unrostered_evidence_reads_other_efforts_bare_efforts_and_roster_names():
-    """O33: another effort of a rostered model is missing too; the scoreboard may give a bare effort, and the chart's
-    model name is matched through the roster's names (DeepSeek's dated chart name, the owner's undated one)."""
-
-    roster = {"deepseek-v4-pro": {"displayName": "DeepSeek V4 Pro", "aaShortName": "DeepSeek V4 Pro 0813 (max)"}}
-    deepswe = [
-        {"model": "Grok 4.6", "effort": "xhigh", "matchStatus": "effort_mismatch", "displayLabel": "Grok Build - Grok 4.6 (xhigh)"},
-        {"model": "Grok 4.6", "effort": "low", "matchStatus": "effort_mismatch", "displayLabel": "Grok Build - Grok 4.6 (low)"},
-        {"model": "DeepSeek V4 Pro 0813", "effort": "high", "matchStatus": "effort_mismatch", "displayLabel": "Codex - DeepSeek V4 Pro 0813 (high)"},
-        {"model": "Haiku 5.5", "effort": "max", "matchStatus": "duplicate_configuration", "displayLabel": "Claude Code - Haiku 5.5 (max)"},
-    ]
-    scoreboard = [
-        {"model": "Grok 4.6 (xhigh) seq - mean of 3"},
-        {"model": "Grok 4.6 (low re-run - CLI has no max)"},  # not a bare effort
-        {"model": "DeepSeek V4-Pro (high effort, DeepSeek API)"},
-        {"model": "Haiku 5.5 (max effort)"},
-    ]
-    assert build_scores.unrostered_evidence(deepswe, scoreboard, roster) == [
-        "Grok Build - Grok 4.6 (xhigh) / Bug Hunt Grok 4.6 (xhigh) seq - mean of 3",
-        "Codex - DeepSeek V4 Pro 0813 (high) / Bug Hunt DeepSeek V4-Pro (high effort, DeepSeek API)",
-    ]
-    assert build_scores.scoreboard_matches({"muse spark 1.2"}, [{"model": "Muse Spark 1.2 (xhigh, Meta API)"}]) == [
-        ("xhigh", "Muse Spark 1.2 (xhigh, Meta API)")]
-
-
-def test_committed_data_has_no_unrostered_or_unranked_evidenced_configuration():
-    deepswe = json.loads((ROOT / "data" / "aa_deepswe.json").read_text())["configurations"]
-    scoreboard = json.loads((ROOT / "data" / "bug_hunt_scoreboard.json").read_text())["rows"]
-    models = json.loads((ROOT / "data" / "aa_metrics.json").read_text())["models"]
-    bug_hunt = {item["modelId"]: item for item in json.loads((ROOT / "data" / "bug_hunt.json").read_text())["models"]}
-    assert build_scores.unrostered_evidence(deepswe, scoreboard, models) == []
-    assert build_scores.unranked_evidence(deepswe, scoreboard, models, bug_hunt) == []
-
-
-def test_build_fails_when_an_evidenced_configuration_is_missing_from_the_roster(world):
-    """O31: the build refuses to drop a model with exact DeepSWE and Bug Hunt results at one effort."""
-
-    edit(world, "deepswe", lambda d: d["configurations"].append(
-        {"model": "Phantom", "effort": "max", "matchStatus": "not_in_roster", "displayLabel": "CLI - Phantom (max)"}))
-    edit(world, "scoreboard", lambda d: d["rows"].append({"model": "Phantom 2.0 (max effort, CLI)", "harness": "CLI", "fixedOf105": 1.0}))
-    with pytest.raises(ValueError, match=r"missing from the roster \(O33\): CLI - Phantom \(max\) / Bug Hunt Phantom 2.0 \(max effort, CLI\)"):
-        run_main(world)
-
-
 def test_deferred_near_family_counts_but_adds_no_ranked_model(world):
     run_main(world)
     base = outputs(world)
@@ -1491,16 +1347,16 @@ def test_module_entry_point_runs_main_and_exits_zero(world, monkeypatch, capsys)
 
 
 def test_frontier_family_diagnostics_use_only_frontier_and_near_frontier_rows():
-    """E187: build_scores hands each row's frontier-family flag to the v3 engine, so retained-only rows are not references."""
+    """E187/O51: build_scores hands each row's frontier-family flag to the v3 engine; since O51 every cohort row is plotted."""
 
     from valuerank import value_v3
 
     scores = json.loads((ROOT / "data" / "scores.json").read_text())
     family = {row["id"] for row in scores["models"] if row["rankingEligible"] and value_v3.configuration(row)["frontierFamily"]}
     retained = {row["id"] for row in scores["models"] if row["rankingEligible"]} - family
-    assert {"muse-wonder-full", "claude-fable-5-1", "gpt-5.6-sol"} <= retained
+    assert retained == set()
     frontier = scores["v3"]["diagnostics"]["frontierAnchors"]
-    assert len(frontier["references"]) == 8 and set(frontier["references"]) <= family
+    assert frontier["references"] and set(frontier["references"]) <= family
     assert set(frontier["bar"]["population"]) <= family and frontier["bar"]["bar"]["id"] == value_v3.POLICY_BAR_ID
 
 

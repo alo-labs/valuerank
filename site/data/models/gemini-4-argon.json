@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gemini-4-argon",
   "summary": {
     "rank": {
-      "api": 8,
-      "plan": 61
+      "api": 10,
+      "plan": 65
     },
     "overall": {
-      "api": 55.09770265714803,
-      "plan": 51.62136780497163
+      "api": 47.118943591788465,
+      "plan": 43.04025103414369
     },
-    "quality": 64.47468330836315,
-    "qualityRank": 2,
+    "quality": 54.9934292535291,
+    "qualityRank": 8,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -30,46 +30,10 @@
   },
   "dimensions": [
     {
-      "key": "deepswe",
-      "label": "DeepSWE v1.1",
-      "category": "Software engineering",
-      "weightPct": 22.5,
-      "value": 78.8,
-      "decimals": 1,
-      "unit": "% pass@1",
-      "normalized": 78.8,
-      "source": {
-        "name": "AA Coding Agent Index (DeepSWE v1.1)",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-      },
-      "observedAt": "2026-10-17T19:26:26Z",
-      "evaluatedVariant": "Antigravity CLI - Gemini 4 Argon (high) / Antigravity CLI",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "bugHunt",
-      "label": "Bug Hunt Bench",
-      "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 40.7,
-      "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 38.761904761904766,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 / Antigravity CLI",
-      "note": null,
-      "grade": "measured"
-    },
-    {
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 7.5,
+      "weightPct": 18.75,
       "value": 0.434532,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -78,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -87,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 7.5,
+      "weightPct": 15.0,
       "value": 57.07070707070711,
       "decimals": 1,
       "unit": "% resolved",
@@ -96,8 +60,26 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "mini-SWE-agent",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 40.7,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 38.761904761904766,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-19",
+      "evaluatedVariant": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 / Antigravity CLI",
       "note": null,
       "grade": "measured"
     },
@@ -106,15 +88,15 @@
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1623.99,
+      "value": 1623.11,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 56.1995,
+      "normalized": 56.15549999999999,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +114,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -168,7 +150,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -186,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -204,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,43 +204,35 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 3628.6386911634218,
-    "planUsd": 3628.6386911634218,
+    "apiUsd": 1857.935358161643,
+    "planUsd": 1857.935358161643,
     "fallback": "api",
     "route": null,
     "subset": false,
     "partialComponents": [],
-    "workload": "9a0d376cc6080f3c",
+    "workload": "1453a9a0576b02ea",
     "planFlags": [
       "API-cost fallback: no admitted Plan route",
       "cross-estimand ordering not identified"
     ],
     "costScore": {
-      "api": 26.96676070350264,
-      "plan": 13.061421294797029
+      "api": 23.49548660656656,
+      "plan": 7.180716375987432
     },
     "components": [
       {
         "key": "coding-agent-index",
         "label": "Coding Agent Index",
-        "costUsd": 1770.703333001779,
+        "costUsd": 1699.8309599579943,
         "completeness": "confirmed-complete",
-        "source": "AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks",
-        "admitted": true
-      },
-      {
-        "key": "frontiercode",
-        "label": "FrontierCode",
-        "costUsd": 670.0,
-        "completeness": "confirmed-complete",
-        "source": "AA FrontierCode total cost chart (labels rounded to USD 1)",
+        "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
         "admitted": false
       },
       {
@@ -333,7 +307,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -342,7 +316,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
@@ -351,7 +325,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.2524
       },
       {
         "stratum": "S1",
@@ -360,7 +334,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -369,16 +343,16 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1T",
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0006,
-        "top3": 0.0341,
-        "frontier": 0.852
+        "top1": 0.0094,
+        "top3": 0.0749,
+        "frontier": 0.2862
       }
     ],
     "plan": [
@@ -398,7 +372,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
@@ -407,7 +381,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.8461
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -416,7 +390,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -425,7 +399,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1T",
@@ -434,14 +408,14 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.6107
+        "frontier": 0.0496
       }
     ]
   },
   "intervals": {
     "api": {
-      "definite": "certified",
-      "possible": "certified"
+      "definite": "disproved",
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -474,8 +448,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 8,
-        "plan": 61
+        "api": 10,
+        "plan": 65
       }
     }
   ],

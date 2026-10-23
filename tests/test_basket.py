@@ -47,7 +47,7 @@ def test_index_components_without_a_full_set_or_published_total_cannot_reconcile
     assert reconciliation["sdlcSevenUsd"] == 0
 
 
-def cai_record(total=303.0, mean=1.0, attempts=(339, 372, 198)):
+def cai_record(total=290.0, mean=1.0, attempts=(300, 372, 198)):
     return {
         "label": "Codex - GPT (max)",
         "totalCostUsd": total,
@@ -57,25 +57,27 @@ def cai_record(total=303.0, mean=1.0, attempts=(339, 372, 198)):
     }
 
 
-def test_coding_agent_component_prices_the_per_task_metric_over_303_tasks():
-    component = b.coding_agent_component(cai_record(total=301.6, mean=1.0))
-    assert component["costUsd"] == pytest.approx(303.0) and component["completeness"] == b.COMPLETE
+def test_coding_agent_component_prices_the_per_task_metric_over_290_tasks():
+    """O50: the Coding Agent Index v2.0 (FrontierCode 100, SWE-Atlas-QnA 124, Terminal-Bench 66 tasks)."""
+
+    component = b.coding_agent_component(cai_record(total=288.6, mean=1.0))
+    assert component["costUsd"] == pytest.approx(290.0) and component["completeness"] == b.COMPLETE
     assert component["configuration"] == "Codex - GPT (max)"
     assert component["detail"] == {
         "meanCostPerTaskUsd": 1.0,
-        "requiredTasks": 303,
-        "publishedSumUsd": 301.6,
-        "sumTaskEquivalent": pytest.approx(301.6),
-        "attempts": 909,
-        "requiredAttempts": 909,
+        "requiredTasks": 290,
+        "publishedSumUsd": 288.6,
+        "sumTaskEquivalent": pytest.approx(288.6),
+        "attempts": 870,
+        "requiredAttempts": 870,
     }
 
 
 def test_coding_agent_component_keeps_attempt_coverage_as_a_diagnostic():
-    record = cai_record(attempts=(335, 372, 198))
+    record = cai_record(attempts=(296, 372, 198))
     record["components"].append({"attempts": None})
     component = b.coding_agent_component(record)
-    assert component["detail"]["attempts"] == 905
+    assert component["detail"]["attempts"] == 866
     assert component["completeness"] == b.COMPLETE  # attempt coverage is a precision diagnostic (E53)
 
 
@@ -107,13 +109,13 @@ DECLINED = b.component_cost(1.0, completeness=b.INCOMPLETE, source="s")
 def test_admitted_components_require_two_thirds_of_ranked_rows():
     ranked = ["a", "b", "c"]
     costs = {
-        "a": {b.CODING_AGENT_INDEX: FULL, "frontiercode": FULL, "scicode": FULL},
+        "a": {b.CODING_AGENT_INDEX: FULL, "aa-briefcase": FULL, "scicode": FULL},
         "b": {b.CODING_AGENT_INDEX: FULL, "scicode": FULL},
         "c": {"scicode": FULL},
     }
     admitted = b.admitted_components(costs, ranked)
     assert admitted[b.CODING_AGENT_INDEX] == {"admitted": True, "covered": 2, "available": 2, "ranked": 3}
-    assert admitted["frontiercode"]["admitted"] is False
+    assert admitted["aa-briefcase"]["admitted"] is False
     assert admitted["scicode"]["admitted"] is True
     assert admitted["itbench-aa"]["covered"] == 0
     assert set(admitted) == set(b.TARGET_COMPONENTS)
@@ -127,16 +129,16 @@ def test_admission_panel_is_joint_and_deterministic():
     for row in ("a", "b", "c", "d", "e"):
         costs[row][b.CODING_AGENT_INDEX] = FULL
     for row in ("b", "c", "d", "e", "f"):
-        costs[row]["frontiercode"] = FULL
-    for row in ("a", "b", "c", "d"):
         costs[row]["itbench-aa"] = FULL
+    for row in ("a", "b", "c", "d"):
+        costs[row]["aa-briefcase"] = FULL
     panel = b.admission_panel(costs, ranked)
     components = panel["components"]
     assert components[b.CODING_AGENT_INDEX]["admitted"] is True
-    # {CAI, FrontierCode, SciCode} and {CAI, ITBench, SciCode} both reach (3 components, 4 rows): target order picks FrontierCode.
-    assert components["frontiercode"]["admitted"] is True and panel["objective"] == [3, 4] and panel["feasibleAlternatives"] == 11
-    # ITBench alone covers 4/6, but jointly only b, c, d (3/6): pending.
-    assert components["itbench-aa"]["covered"] == 4 and components["itbench-aa"]["admitted"] is False
+    # {CAI, ITBench, SciCode} and {CAI, AA-Briefcase, SciCode} both reach (3 components, 4 rows): target order picks ITBench.
+    assert components["itbench-aa"]["admitted"] is True and panel["objective"] == [3, 4] and panel["feasibleAlternatives"] == 11
+    # AA-Briefcase alone covers 4/6, but jointly only b, c, d (3/6): pending.
+    assert components["aa-briefcase"]["covered"] == 4 and components["aa-briefcase"]["admitted"] is False
     assert panel["referencePanel"] == ["b", "c", "d", "e"] and panel["jointCovered"] == 4
     assert panel["requiredPanelSize"] == 4 and panel["ranked"] == 6
 
@@ -145,12 +147,12 @@ def test_admission_counts_complete_evidence_not_mere_availability():
     """E101 fixture: exact costs for two-thirds of rows, some carrying AA's declined-task marker."""
 
     ranked = ["a", "b", "c"]
-    costs = {"a": {"frontiercode": FULL, "scicode": FULL}, "b": {"frontiercode": DECLINED, "scicode": FULL}, "c": {"scicode": FULL}}
+    costs = {"a": {"aa-briefcase": FULL, "scicode": FULL}, "b": {"aa-briefcase": DECLINED, "scicode": FULL}, "c": {"scicode": FULL}}
     panel = b.admission_panel(costs, ranked)
-    frontiercode = panel["components"]["frontiercode"]
-    assert frontiercode["available"] == 2 and frontiercode["covered"] == 1 and frontiercode["admitted"] is False
-    assert panel["matrices"]["exactCostAvailable"]["b"]["frontiercode"] is True
-    assert panel["matrices"]["completeCostEvidence"]["b"]["frontiercode"] is False
+    briefcase = panel["components"]["aa-briefcase"]
+    assert briefcase["available"] == 2 and briefcase["covered"] == 1 and briefcase["admitted"] is False
+    assert panel["matrices"]["exactCostAvailable"]["b"]["aa-briefcase"] is True
+    assert panel["matrices"]["completeCostEvidence"]["b"]["aa-briefcase"] is False
     assert panel["admitted"] == ["scicode"] and panel["exactCostPanel"] == ["a", "b", "c"]
 
 
@@ -199,10 +201,10 @@ def test_admission_enumerates_subsets_instead_of_a_greedy_order():
     for row in ("1", "2", "3", "4", "5"):
         costs[row][b.CODING_AGENT_INDEX] = FULL
     for row in ("1", "2", "3", "6"):
-        costs[row]["frontiercode"] = FULL
+        costs[row]["aa-briefcase"] = FULL
         costs[row]["itbench-aa"] = FULL
     panel = b.admission_panel(costs, ranked)
-    assert panel["admitted"] == ["frontiercode", "itbench-aa"] and panel["referencePanel"] == ["1", "2", "3", "6"]
+    assert panel["admitted"] == ["itbench-aa", "aa-briefcase"] and panel["referencePanel"] == ["1", "2", "3", "6"]
     assert panel["objective"] == [2, 4] and panel["components"][b.CODING_AGENT_INDEX]["admitted"] is False
 
 
@@ -219,12 +221,12 @@ def test_admission_units_are_the_named_targets_whatever_the_accounting_represent
     for row in ("1", "2", "3", "4"):
         costs[row][b.CODING_AGENT_INDEX] = FULL
     for row in ("3", "4", "5", "6"):
-        costs[row]["frontiercode"] = FULL
+        costs[row]["aa-briefcase"] = FULL
         costs[row]["itbench-aa"] = FULL
     panel = b.admission_panel(costs, ranked)
-    assert panel["admitted"] == ["frontiercode", "itbench-aa"] and panel["referencePanel"] == ["3", "4", "5", "6"]
+    assert panel["admitted"] == ["itbench-aa", "aa-briefcase"] and panel["referencePanel"] == ["3", "4", "5", "6"]
     children = {row: {key: value for key, value in entry.items() if key != b.CODING_AGENT_INDEX} for row, entry in costs.items()}
     for row in ("1", "2", "3", "4"):
         children[row].update({task: FULL for task in b.CODING_AGENT_TASKS})
-    with pytest.raises(ValueError, match="not a unit: deep-swe-v1.1, swe-atlas-qna, terminal-bench-v4"):
+    with pytest.raises(ValueError, match="not a unit: frontiercode-v1.1-main, swe-atlas-qna, terminal-bench-v4"):
         b.admission_panel(children, ranked)

@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
   "summary": {
     "rank": {
-      "api": 13,
-      "plan": 1
+      "api": 12,
+      "plan": 9
     },
     "overall": {
-      "api": 51.36804692335308,
-      "plan": 59.45801174574936
+      "api": 46.6593456754297,
+      "plan": 53.68715091310015
     },
-    "quality": 64.50295005281585,
-    "qualityRank": 1,
+    "quality": 58.58381355930935,
+    "qualityRank": 2,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -30,46 +30,10 @@
   },
   "dimensions": [
     {
-      "key": "deepswe",
-      "label": "DeepSWE v1.1",
-      "category": "Software engineering",
-      "weightPct": 22.5,
-      "value": 72.0,
-      "decimals": 1,
-      "unit": "% pass@1",
-      "normalized": 72.0,
-      "source": {
-        "name": "AA Coding Agent Index (DeepSWE v1.1)",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-      },
-      "observedAt": "2026-10-17T19:26:26Z",
-      "evaluatedVariant": "Claude Code - Sonnet 5.5 (max) / Claude Code",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "bugHunt",
-      "label": "Bug Hunt Bench",
-      "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 51.3,
-      "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 48.857142857142854,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "Sonnet 5.5 (max effort) - mean of 3 / Claude Code",
-      "note": null,
-      "grade": "measured"
-    },
-    {
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 7.5,
+      "weightPct": 18.75,
       "value": 0.458291333333333,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -78,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -87,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 7.5,
+      "weightPct": 15.0,
       "value": 63.636363636363605,
       "decimals": 1,
       "unit": "% resolved",
@@ -96,8 +60,26 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "mini-SWE-agent",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 51.3,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 48.857142857142854,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-19",
+      "evaluatedVariant": "Sonnet 5.5 (max effort) - mean of 3 / Claude Code",
       "note": null,
       "grade": "measured"
     },
@@ -114,7 +96,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +114,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -168,7 +150,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -186,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -204,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,15 +204,15 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-21",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 9373.65305908234,
-    "planUsd": 159.14521322720444,
+    "apiUsd": 5073.840417782336,
+    "planUsd": 86.1433008112451,
     "fallback": null,
     "route": {
       "id": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
@@ -245,31 +227,23 @@
     },
     "subset": false,
     "partialComponents": [],
-    "workload": "9a0d376cc6080f3c",
+    "workload": "1453a9a0576b02ea",
     "planFlags": [
       "workload-unmatched",
       "owner-named transfer (assumption)",
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 11.963337534964765,
-      "plan": 44.323196824549875
+      "api": 10.885942023790772,
+      "plan": 38.997162974472566
     },
     "components": [
       {
         "key": "coding-agent-index",
         "label": "Coding Agent Index",
-        "costUsd": 4299.812641300004,
+        "costUsd": 3857.4373964285724,
         "completeness": "confirmed-complete",
-        "source": "AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks",
-        "admitted": true
-      },
-      {
-        "key": "frontiercode",
-        "label": "FrontierCode",
-        "costUsd": 826.0,
-        "completeness": "confirmed-complete",
-        "source": "AA FrontierCode total cost chart (labels rounded to USD 1)",
+        "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
         "admitted": false
       },
       {
@@ -364,10 +338,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 159.14521322720444,
+      "usdPerRun": 86.1433008112451,
       "selected": true,
-      "planRank": 1,
-      "planValue": 59.45801174574936
+      "planRank": 9,
+      "planValue": 53.68715091310015
     },
     {
       "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
@@ -381,10 +355,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 159.87810095654683,
+      "usdPerRun": 86.54000371452048,
       "selected": false,
-      "planRank": 2,
-      "planValue": 59.44652756757866
+      "planRank": 10,
+      "planValue": 53.67525142966992
     },
     {
       "id": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
@@ -398,10 +372,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 163.7319311630103,
+      "usdPerRun": 88.62603349838142,
       "selected": false,
-      "planRank": 3,
-      "planValue": 59.386992169539
+      "planRank": 12,
+      "planValue": 53.613563037870776
     }
   ],
   "scenarios": {
@@ -432,7 +406,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.5145
+        "frontier": 0.9121
       },
       {
         "stratum": "S1",
@@ -457,9 +431,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.4752
+        "top1": 0.0036,
+        "top3": 0.0343,
+        "frontier": 0.4842
       }
     ],
     "plan": [
@@ -468,8 +442,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 1.0,
-        "top3": 1.0,
+        "top1": 0.0,
+        "top3": 0.0,
         "frontier": 1.0
       },
       {
@@ -555,8 +529,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 13,
-        "plan": 1
+        "api": 12,
+        "plan": 9
       }
     }
   ],

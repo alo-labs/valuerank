@@ -99,7 +99,7 @@
           <td class="cell-num">{{ usd(r.planFeeUsd, 0) }}</td>
           <td class="cell-num">{{ num(r.valueMultiple, 2) }}&times;</td>
           <td class="cell-num">{{ usd(r.usdPerRun, 2) }}</td>
-          <td class="cell-num">{{ r.planRank if r.planRank is not none else "—" }}</td>
+          <td class="cell-num">{{ r.get("planRank") if r.get("planRank") is not none else "—" }}</td>
         </tr>
         {%- endfor %}
       </tbody>
