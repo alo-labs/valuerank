@@ -614,7 +614,7 @@ def write_world(root: Path) -> Path:
         "aa/coding_agents_capture.json": documents()["codingAgents"],
         "aa/cost_charts_capture.json": documents()["costCharts"],
         "v3_configuration_map.json": documents()["configurationMap"],
-        "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}, "searchCutoff": "2026-10-19"}},
+        "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}, "searchCutoff": "2026-10-19", "searchLog": [{"searchedOn": "2026-10-19"}]}},
         "price_records.json": documents()["priceRecords"],
         "leaf_evidence.json": documents()["leafEvidence"],
         "cognition_frontiercode.json": {"v1_1": {"data": {}}},
@@ -1456,14 +1456,27 @@ def test_the_chart_capture_and_model_pages_describe_one_aa_state():
 def test_reports_are_searched_within_7_days_of_the_cutoff():
     """E218: the end-user report search reaches to at most 7 days before the release cutoff."""
 
-    def policy(searched):
-        window = {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}}
+    def policy(searched, logged=None):
+        window = {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}, "searchLog": [{"searchedOn": logged or searched}]}
         return {**documents()["planRoutes"], "evidencePolicy": {**window, **({"searchCutoff": searched} if searched else {})}}
 
     assert v.assemble(CONFIGURATIONS, documents(planRoutes=policy("2026-10-12")), release_day=DAY)["rows"]
     for searched in ("2026-10-11", None):
         with pytest.raises(ValueError, match=r"more than 7 days before the release cutoff 2026-10-19 \(E218\)"):
             v.assemble(CONFIGURATIONS, documents(planRoutes=policy(searched)), release_day=DAY)
+    # I51 L6: the cutoff is the date of a logged search.
+    with pytest.raises(ValueError, match=r"search cutoff 2026-10-12 is not the date of any search"):
+        v.assemble(CONFIGURATIONS, documents(planRoutes=policy("2026-10-12", logged="2026-10-13")), release_day=DAY)
+
+
+def test_an_o46_ceiling_is_recomputed_from_its_credits_rate_and_fee():
+    """I51 L7: the stored multiple of an O46 ceiling must equal credits x rate / fee."""
+
+    routes = documents()["planRoutes"]
+    ceiling = {"id": "ceiling", "evidenceClass": "provider_quota_ceiling", "quotaCredits": 4_100_000_000, "usdPerBillionCredits": 1.44,
+               "planPriceUsd": 6, "valueMultiple": 0.984}
+    with pytest.raises(ValueError, match=r"ceiling: the stored multiple 0.99 is not the quota ceiling 0.9840 \(O46\)"):
+        v.assemble(CONFIGURATIONS, documents(planRoutes={**routes, "routes": routes["routes"] + [dict(ceiling, valueMultiple=0.99)]}), release_day=DAY)
 
 
 def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():
@@ -1781,15 +1794,30 @@ def test_costed_bar_ladder_drops_rows_without_a_cost():
     assert ladder["excluded"] == costless and ladder["population"] == len(output["rows"]) - len(costless)
 
 
-def test_an_empty_agent_pin_with_an_exact_record_stops_the_build():
-    """I50 H1: a ranked configuration whose exact Coding Agent Index record exists cannot be left unpinned."""
+def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
+    """E267 (I50 H1, I51 M1): one model, its identity and effort, read from the whole label; an empty or dangling pin stops
+    the build when an exact record exists; a mixed-model record is never exact; effort-less rows are covered."""
 
     records = {"DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})": {}, "Claude Code - Opus 5.5 (high)": {},
-               "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)": {}}
-    configurations = [{"id": "ds", "name": "DeepSeek V4.1 Flash 1017 (max)", "family": "DeepSeek V4.1 Flash 1017", "effort": "max"},
-                      {"id": "opus", "name": "Claude Opus 5.5 (max)", "family": "Claude Opus 5.5", "effort": "max"},
-                      {"id": "luna", "name": "GPT-6 Luna (max)", "effort": "max"}]
-    pinned = {"ds": {basket.CODING_AGENT_INDEX: "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"}}
-    v.check_agent_pins(configurations, pinned, records)
-    with pytest.raises(ValueError, match="ds: AA's Coding Agent Index has the exact record"):
-        v.check_agent_pins(configurations, {}, records)
+               "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)": {}, "Claude Code - Fable 5.1 (max) (with fallback)": {},
+               "Claude Code - MiMo-V2.6-Pro": {}, "Kimi Code CLI - MiMo-V2.6-Flash (high)": {}, "Odd - X (max) ({'reasoning_effort': 'low'})": {}}
+    ds = {"id": "ds", "name": "DeepSeek V4.1 Flash 1017 (max)", "family": "DeepSeek V4.1 Flash 1017", "effort": "max"}
+    luna = {"id": "luna", "name": "GPT-6 Luna (max)", "family": "GPT-6 Luna", "effort": "max"}
+    fable = {"id": "fable", "name": "Claude Fable 5.1 (max)", "family": "Claude Fable 5.1", "effort": "max"}
+    mimo = {"id": "mimo-v2-6-pro", "name": "MiMo-V2.6-Pro", "family": "MiMo-V2.6-Pro", "effort": None}
+    flash = {"id": "mimo-v2-6-flash", "name": "MiMo-V2.6-Flash", "family": "MiMo-V2.6-Flash", "effort": None}
+    odd = {"id": "odd", "name": "X (max)", "family": "X", "effort": "max"}
+    assert v.parse_agent_label("Codex - GPT-6 Luna (max) + GPT-6 Sol (max)") is None and v.parse_agent_label("no separator") is None
+    assert v.parse_agent_label("Claude Code - Fable 5.1 (max) (with fallback)") == {"agent": "Claude Code", "model": "Fable 5.1", "effort": "max"}
+    assert v.exact_agent_records(luna, records) == [] and v.exact_agent_records(odd, records) == []  # mixed or self-contradicting labels
+    assert v.exact_agent_records(fable, records) == ["Claude Code - Fable 5.1 (max) (with fallback)"]
+    assert v.exact_agent_records(mimo, records) == ["Claude Code - MiMo-V2.6-Pro"] and v.exact_agent_records(flash, records) == []
+    pins = {"ds": {basket.CODING_AGENT_INDEX: "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"},
+            "fable": {basket.CODING_AGENT_INDEX: "Claude Code - Fable 5.1 (max) (with fallback)"},
+            "mimo-v2-6-pro": {basket.CODING_AGENT_INDEX: "Claude Code - MiMo-V2.6-Pro"}}
+    v.check_agent_pins([ds, luna, fable, mimo, flash, odd], pins, records)
+    for row, pin in ((ds, None), (mimo, None), (ds, "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (max)")):
+        with pytest.raises(ValueError, match=f"{row['id']}: AA's Coding Agent Index has the exact record"):
+            v.check_agent_pins([row], {**pins, row["id"]: {basket.CODING_AGENT_INDEX: pin}}, records)
+    # O54: MiMo-V2.6-Pro's record at high is exact too.
+    assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]

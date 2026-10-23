@@ -220,7 +220,6 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     policy = plan_document["evidencePolicy"]
     window, cutoff = policy["reportingWindow"], policy["searchCutoff"]
     figures = {"evidence.windowStart": window["start"], "evidence.windowEnd": window["end"], "evidence.searchCutoff": cutoff,
-               "evidence.lastSearch": max(entry["searchedOn"] for entry in policy["searchLog"]),
                "evidence.searchGapDays": (date.fromisoformat(release) - date.fromisoformat(cutoff)).days}
     reports = [route for route in plan_document["routes"] if route.get("valueMultipleKind") in pr.REPORT_KINDS]
     figures["evidence.reportDates"] = series([route.get("reportDate") or route["sourcePublicationDate"] for route in reports]) or "none"
@@ -457,8 +456,8 @@ def published(source: Path) -> Path:
 # sentence that speaks of the fact, its current value must come from a placeholder.
 REGISTRY_FACTS = (
     ("evidence.windowStart", r"\bwindow\b", "{v}"),
+    ("evidence.windowEnd", r"\bwindow (?:is|ends?|runs)\b", "{v}"),
     ("evidence.searchCutoff", r"\bsearch cutoff\b|\blast search\b", "{v}"),
-    ("evidence.lastSearch", r"\bsearch cutoff\b|\blast search\b", "{v}"),
     ("evidence.searchGapDays", r"\bsearch cutoff\b", r"\b{v} days? before\b|\bthose {v} days\b"),
     ("semianalysis.lastCurrent", r"\bCurrent day\b|\bsuperseded\b|\bexpired\b|\bdemoted\b", "{v}"),
     ("semianalysis.supersededFrom", r"\bsuperseded\b", "{v}"),
@@ -467,7 +466,8 @@ REGISTRY_FACTS = (
     ("aa.vertices", r"\bvertices\b", r"\b{v} vertices\b"),
     ("aa.vertexMatchPx", r"\bvertices\b", r"\bat {v} px\b"),
     ("evidence.reportDates", r"\breport route\b", "{v}"),
-    ("aa.capturedAt", r"\bcapture\b", "{v}"),
+    ("aa.capturedAt", r"\bcaptur\w*", "{v}"),
+    ("aa.previousCapture", r"\bcaptur\w*", r"\bpreviously {v}\b|\bprevious capture \({v}\)"),
     ("release.cutoff", r"\bcutoff\b", "{v}"),
 )
 

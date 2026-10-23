@@ -78,8 +78,10 @@ def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict
     picked = [row for row in rows if harness and row["harness"].casefold() == harness]
     rule = "the harness of its Bug Hunt record"
     if len(picked) != 1:
-        latest = max(row["tested"] for row in rows)
-        picked, rule = [row for row in rows if row["tested"] == latest], "the latest test date"
+        # I51 L5: among the rows on the matched harness if several share it, else among all rows.
+        pool = picked or rows
+        latest = max(row["tested"] for row in pool)
+        picked, rule = [row for row in pool if row["tested"] == latest], "the latest test date"
     if len(picked) != 1:
         raise ValueError(f"{model_id}: AI Coding Daily lists {label!r} {len(rows)} times and the rule cannot pick one (I50 M2)")
     return {"row": picked[0], "rule": rule, "alternates": [row for row in rows if row is not picked[0]]}

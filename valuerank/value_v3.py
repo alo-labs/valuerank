@@ -589,22 +589,58 @@ def check_source_clocks(clocks: list[dict], release_day: date, cutoff: datetime)
                              f"({updated or 'not recorded'}) does not predate the cutoff's day (O60)")
 
 
-_AGENT_LABEL = re.compile(r"^(?P<agent>.+?) - (?P<model>[^+]+?) \((?:\{'reasoning_effort': '(?P<keyed>\w+)'\}|(?P<plain>\w+))\)")
+_KEYED_EFFORT = re.compile(r" \(\{'reasoning_effort': '(?P<effort>\w+)'\}\)$")
+_PLAIN_EFFORT = re.compile(r" \((?P<effort>\w+)\)$")
+# O54: the owner stated that AA's effort-less MiMo-V2.6-Pro configuration is high, so a record at high is exact too.
+OWNER_STATED_EFFORT = {"mimo-v2-6-pro": "high"}
+
+
+def parse_agent_label(label: str) -> dict | None:
+    """E267: "<agent> - <model>[ (<effort>)][ ({'reasoning_effort': '<effort>'})][ (with fallback)]", read whole; a label
+    naming more than one model (" + ") is never an exact record and parses to None."""
+
+    agent, separator, rest = label.partition(" - ")
+    if not separator or " + " in rest:
+        return None
+    rest = rest.removesuffix(" (with fallback)")
+    efforts = []
+    for pattern in (_KEYED_EFFORT, _PLAIN_EFFORT):
+        if match := pattern.search(rest):
+            efforts.append(match["effort"])
+            rest = rest[:match.start()]
+    if len(set(efforts)) > 1:
+        return None
+    return {"agent": agent, "model": rest, "effort": efforts[0] if efforts else None}
+
+
+def exact_agent_records(configuration: dict, agent_records) -> list[str]:
+    """E267: the Coding Agent Index records that are this configuration's exact record: one model, the configuration's
+    model identity (with or without the "Claude " prefix and the fallback token) and its effort."""
+
+    family = configuration.get("family") or configuration["name"]
+    names = {family, family.removeprefix("Claude ")}
+    efforts = {configuration.get("effort")}
+    if configuration.get("effort") is None and configuration["id"] in OWNER_STATED_EFFORT:
+        efforts.add(OWNER_STATED_EFFORT[configuration["id"]])
+    found = []
+    for label in agent_records:
+        parsed = parse_agent_label(label)
+        if parsed and parsed["model"] in names and parsed["effort"] in efforts:
+            found.append(label)
+    return sorted(found)
 
 
 def check_agent_pins(configurations: list[dict], mapping: dict, agent_records: dict) -> None:
-    """I50 H1: an exact Coding Agent Index record (one model, its effort) for a ranked configuration whose pin is empty
-    stops the build, so a missing pin can never silently move a configuration onto a subset workload."""
+    """E267 (I50 H1, I51 M1): when AA's Coding Agent Index has an exact record for a ranked configuration, its pin must be
+    one of those records; an empty or dangling pin stops the build, so a pin can never silently move a configuration
+    onto a subset workload while its exact record exists."""
 
     for configuration in configurations:
-        if (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX):
-            continue
-        family = configuration.get("family") or configuration["name"]
-        names = {family, family.removeprefix("Claude ")}
-        for label in agent_records:
-            match = _AGENT_LABEL.match(label)
-            if match and match["model"] in names and (match["keyed"] or match["plain"]) == configuration.get("effort"):
-                raise ValueError(f"{configuration['id']}: AA's Coding Agent Index has the exact record {label!r}, but its pin is empty (I50)")
+        exact = exact_agent_records(configuration, agent_records)
+        pin = (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX)
+        if exact and pin not in exact:
+            raise ValueError(f"{configuration['id']}: AA's Coding Agent Index has the exact record(s) {exact}, "
+                             f"but its pin is {pin!r} (E267)")
 
 
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
@@ -629,7 +665,17 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     if window and window["end"] != release_day.isoformat():
         raise ValueError(f"the report window must end on the release cutoff {release_day} (E213), not {window['end']}")
     # E218: end-user reports are searched up to at most 7 days before the release cutoff, like the cohort capture (E211).
-    searched = (documents["planRoutes"].get("evidencePolicy") or {}).get("searchCutoff")
+    policy = documents["planRoutes"].get("evidencePolicy") or {}
+    searched = policy.get("searchCutoff")
+    # I51 L6: the search cutoff is the date of a logged search, never a free-standing date.
+    if searched and searched not in {entry.get("searchedOn") for entry in policy.get("searchLog") or []}:
+        raise ValueError(f"the search cutoff {searched} is not the date of any search in the search log (E218)")
+    # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
+    for route in documents["planRoutes"]["routes"]:
+        if route.get("evidenceClass") == "provider_quota_ceiling":
+            ceiling = route["quotaCredits"] * route["usdPerBillionCredits"] / 1e9 / route["planPriceUsd"]
+            if abs(ceiling - route["valueMultiple"]) > 0.0005:
+                raise ValueError(f"{route['id']}: the stored multiple {route['valueMultiple']} is not the quota ceiling {ceiling:.4f} (O46)")
     if window and (not searched or (release_day - date.fromisoformat(searched)).days > REPORT_SEARCH_MAX_AGE_DAYS):
         raise ValueError(f"end-user reports were last searched on {searched}, more than {REPORT_SEARCH_MAX_AGE_DAYS} days before the release cutoff {release_day} (E218)")
     # E216: the AA model-page snapshot and the price records are at most 45 days old at the release cutoff (the chart

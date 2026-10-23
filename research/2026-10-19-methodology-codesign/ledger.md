@@ -1446,3 +1446,21 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L6 (adopted): the max-effort ranking's one-configuration-per-family shape is described as a consequence of what LiveBench 2.0 and Vals run, not a rule.
 - Recommendations: 1 (pin gate) adopted as above; 2 (selection contract) adopted for AI Coding Daily, the other boards keep E206/E224/E225; 3 (route clock basis field) and 5 (automatic correction bridge) recorded for the release tidy-up.
 - Round status (O56): not clean (one High, two Mediums). Draft r109.
+
+## Editor decision E267 (2026-10-23, from I50 H1 and I51 M1): the exact Coding Agent Index record and the pin gate
+A Coding Agent Index record is a configuration's exact record when its whole label (agent, one model, an optional effort in either of AA's two forms, an optional "(with fallback)") names the configuration's model identity, with or without the "Claude " prefix, and its effort; a record without an effort is exact for a configuration AA plots without one, and by O54 a MiMo-V2.6-Pro record at high is exact too; a two-model label is never exact. When exact records exist, the configuration's pin must be one of them; an empty or different pin stops the build (`value_v3.parse_agent_label`, `exact_agent_records`, `check_agent_pins`). A pin with no exact record in the capture is inert.
+
+## Editor decision E268 (2026-10-23, from I50 M2 and I51 L5): a board that lists a configuration twice
+For AI Coding Daily (the one added-leaf board run on several harnesses): the row whose harness name equals, ignoring case, the configuration's Bug Hunt harness (its name before any " / " route); if none or several match, the latest test date among the matching rows, or among all rows; a remaining tie stops the build. The other rows are published as `alternates` (`build_swe_tracks.select_aicd`).
+
+## Internal review I51 (Claude Sonnet 5.5, effort xhigh, on r109) — adopted, modified or rejected
+- M1 (adopted, engine changed; E267): the pin gate missed configurations without an effort, pins naming another label while an exact record exists, and could read a two-model label as exact; its test passed vacuously. The gate now parses the whole label and requires the pin to be an exact record whenever one exists; one fixture per case. The real build passes it unchanged.
+- L1 (adopted): the two new rules are E267 and E268; no review label in the body.
+- L2 (adopted; the check widened): the capture context matches "captured", and the previous capture date and the window's end are registry facts; the Source contract's capture instants are placeholders. The "at O<n>" exemption is stated in E265's text.
+- L3 (adopted): the agent page "may omit" the fallback token; the match ignores it.
+- L4 (adopted): E180 says the non-discriminating test leaves a leaf unmarked below two observed rows.
+- L5 (adopted; E268): harness names compared by name, ties on the matched harness broken by date among them, no unstated override, scope stated.
+- L6 (adopted, data and engine changed): the 2026-10-22 MiMo search is logged as a single-provider search, and the build fails when the search cutoff is not the date of a logged search.
+- L7 (adopted in part, engine changed): the build recomputes each O46 ceiling from its recorded credits, rate and fee and fails on a difference; capturing Xiaomi's pages into the evidence bundle is recorded for the release tidy-up.
+- L8 (adopted): wording.
+- Round status (O56): not clean (one Medium). Draft r110.

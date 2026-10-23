@@ -171,6 +171,7 @@ def test_registry_facts_are_figures_and_typed_values_fail_even_in_dated_sentence
     text = "\n".join([
         f"On 2026-10-17 all {manifest['aa.vertices']} vertices matched at {manifest['aa.vertexMatchPx']} px.",
         f"Today all {{{{fig:aa.vertices}}}} vertices matched; the window is {{{{fig:evidence.windowStart}}}} to now.",
+        f"AA's chart was captured {manifest['aa.capturedAt']}, previously {manifest['aa.previousCapture']}.",
         f"The report window opened on {manifest['evidence.windowStart']}; on 2026-09-01 it was expired from {manifest['semianalysis.expiredFrom']}.",
         "## Revision history",
         f"r1 typed {manifest['aa.vertices']} vertices.",
@@ -178,7 +179,8 @@ def test_registry_facts_are_figures_and_typed_values_fail_even_in_dated_sentence
     problems = f.registry_problems(text, manifest)
     assert [problem.split(";")[0] for problem in problems] == [
         "line 1: registry value(s) typed by hand (aa.vertices, aa.vertexMatchPx)",
-        "line 3: registry value(s) typed by hand (evidence.windowStart, semianalysis.expiredFrom)"]
+        "line 3: registry value(s) typed by hand (aa.capturedAt, aa.previousCapture)",
+        "line 4: registry value(s) typed by hand (evidence.windowStart, semianalysis.expiredFrom)"]
 
 
 def test_registry_figures_name_changes_and_refuse_two_semianalysis_dates():
