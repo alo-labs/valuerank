@@ -1494,3 +1494,10 @@ For AI Coding Daily (the one added-leaf board run on several harnesses): the row
 - L4 (recorded): the `singleProvider` mark is editorial; a per-entry `providers` field is recorded for the tidy-up.
 - L5 (recorded): the clauses beside the missing-leaves figure explain each row's absence and are true today; generating them needs per-row search notes in the build.
 - Round status (O56): not clean (one Medium). Draft r113.
+
+## Internal review I55 (Claude Sonnet 5.5, effort xhigh, on r113) — adopted, modified or rejected
+- M1 (adopted; the class removed at its source, E267 amended): six rounds (I50–I55) each found a label shape the guard did not list, because the guard enumerated rejected shapes. It is replaced by a complete classification (`value_v3.unclassified_agent_labels`): every captured label that mentions a cohort model's name, compared ignoring case, spacing and punctuation, must be an exact record, a two-model label, a strictly read other effort, or an entry in the configuration map's new `agentLabelRegister` (reviewed, with a reason; empty today), or the build stops. The effort patterns are anchored at the true end of the string (a trailing newline no longer reads). A mutation fixture applies thirteen perturbations to every real cohort label in the capture; none is silently dropped. No score changed.
+- L1 (adopted): the stop forms have fixtures (the mutation test), and the draft names them.
+- L2 (adopted): E189's withholding names the one-configuration Plan stratum.
+- L3 (recorded for the owner report): the Plan-basis dispersion statistics count plan rows, so a configuration with more plans weighs more (max-effort Plan allocation 28.2% over plan rows, 68.6% over one row per configuration). The plan rows are the ranking's units under O48; whether these diagnostics should weight per configuration, as E258 does for separability, is an owner question for the convergence report.
+- Round status (O56): not clean (one Medium). Draft r114.

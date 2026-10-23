@@ -734,7 +734,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `f8a9727162cc225fbb188dab78bb441c82df38241651eadc2515fbdb189580ec`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `178e3f1ea9aa14a2f94c08e69424c2a463425f0d9b704e8188e187e2bc97677b`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -743,7 +743,7 @@ Bundle hash `f8a9727162cc225fbb188dab78bb441c82df38241651eadc2515fbdb189580ec`: 
 | tb4 | `data/tb4.json` | `dee07f85c6286fa8a94b5205b539fb5c8929b7d72e240ff1ee525dd542fe96e5` | 2026-10-23T05:35:48Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
 | codingAgents | `data/aa/coding_agents_capture.json` | `ce4cfb8ac8a0909e0201fa5710f97f3fa3901e889fbda3bcc77497ec7d306a66` | 2026-10-23T05:31:41Z | valuerank.capture_coding_agents |
 | costCharts | `data/aa/cost_charts_capture.json` | `9c000c036842409d8de48163bd77ff2e64a18a8ac2a1562760ad368472c8ed80` | 2026-10-23T05:35:10.660Z | scripts/capture-aa-cost-charts.js |
-| configurationMap | `data/v3_configuration_map.json` | `64845d210a4acb31c1032e7c8b57bee0403e6b1cdb8426e1295dc1d40246a049` | 2026-10-23 | editorial pinning from the research capture |
+| configurationMap | `data/v3_configuration_map.json` | `5b31e5993c9e614eb9909718465f2dbf7e9e7ecdacb33454d06c2ac3642d5167` | 2026-10-23 | editorial pinning from the research capture |
 | frontierCapture | `data/aa_frontier_capture.json` | `5bf1cf99ab60f97a5c250638a3001cad2f268df6b8e3cc13f44038ded361fb61` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `c5a3a57c71a093fed39353f1ccc18a6583b8bb2392964775ef802e6e78f5fd6f` | — | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `094855a7ca761618645c2da1c6c006190d97e77c1b1bce7a7bb5630f60a0862a` | 2026-10-23T05:37:06Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |

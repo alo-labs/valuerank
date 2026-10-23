@@ -591,11 +591,8 @@ def check_source_clocks(clocks: list[dict], release_day: date, cutoff: datetime)
 
 # E267: the effort names AA prints, lower case; any other parenthesis after a model name is not a recognised form.
 AGENT_EFFORTS = "minimal|low|medium|high|xhigh|max"
-_KEYED_EFFORT = re.compile(rf" \(\{{'reasoning_effort': '(?P<effort>{AGENT_EFFORTS})'\}}\)$")
-_PLAIN_EFFORT = re.compile(rf" \((?P<effort>{AGENT_EFFORTS})\)$")
-# I54 M1: a label whose model text is a cohort model's name followed only by bracketed groups (or stray spaces) is a
-# candidate for that model, and must read exactly under the grammar, or the build stops.
-_CANDIDATE_TAIL = re.compile(r"(?: \((?:\{[^}]*\}|[^()]*)\))*\s*")
+_KEYED_EFFORT = re.compile(rf" \(\{{'reasoning_effort': '(?P<effort>{AGENT_EFFORTS})'\}}\)\Z")
+_PLAIN_EFFORT = re.compile(rf" \((?P<effort>{AGENT_EFFORTS})\)\Z")
 # O54: the owner stated that AA's effort-less MiMo-V2.6-Pro configuration is high, so a record at high is exact too.
 OWNER_STATED_EFFORT = {"mimo-v2-6-pro": "high"}
 
@@ -635,26 +632,41 @@ def exact_agent_records(configuration: dict, agent_records) -> list[str]:
     return sorted(found)
 
 
+def _normalised(text: str) -> str:
+    return " " + " ".join(re.sub(r"[^0-9a-z]+", " ", text.casefold()).split()) + " "
+
+
+def unclassified_agent_labels(configurations: list[dict], agent_records, register: dict) -> list[str]:
+    """E267 (I55 M1): every captured label that mentions a cohort model's name (compared ignoring case, spacing and
+    punctuation) must be classified: an exact record of a cohort configuration, a label naming two models, a strictly
+    read record of another effort of a cohort model, or a reviewed entry in the register of labels that name a different
+    model. Whatever is left is a label form E267 does not read, and the build stops, so no form is ever silently dropped."""
+
+    names = {}
+    for configuration in configurations:
+        family = configuration.get("family") or configuration["name"]
+        for name in (family, family.removeprefix("Claude ")):
+            names.setdefault(name, set()).add(configuration.get("effort"))
+    exact = {label for configuration in configurations for label in exact_agent_records(configuration, agent_records)}
+    left = []
+    for label in agent_records:
+        if not any(_normalised(name) in _normalised(label) for name in names):
+            continue
+        parsed = parse_agent_label(label)
+        other_effort = parsed is not None and parsed["model"] in names and (
+            parsed["effort"] is not None or None in names[parsed["model"]])
+        if label in exact or " + " in label or other_effort or label in register:
+            continue
+        left.append(label)
+    return sorted(left)
+
+
 def agent_record_for(configuration: dict, mapping: dict, agent_records) -> str | None:
     """E267 (I50 H1, I51 M1, I52 M1): the configuration's Coding Agent Index record is derived from the capture: its one
     exact record. A pin is only a recorded choice among several exact records; a pin that is not an exact record, or
     several exact records with no pin, stops the build. No pin can price a row from another configuration's record."""
 
     exact = exact_agent_records(configuration, agent_records)
-    # I53 M1: a single-model label for this model that the grammar cannot read stops the build rather than silently
-    # leaving the row without its record (a new AA label form must be read, not dropped).
-    family = configuration.get("family") or configuration["name"]
-    names = (family, family.removeprefix("Claude "))
-    unread = []
-    for label in agent_records:
-        rest = label.partition(" - ")[2]
-        if " + " in label or not any(rest.startswith(name) and _CANDIDATE_TAIL.fullmatch(rest[len(name):]) for name in names):
-            continue
-        parsed = parse_agent_label(label)
-        if parsed is None or parsed["model"] not in names:
-            unread.append(label)
-    if unread:
-        raise ValueError(f"{configuration['id']}: Coding Agent Index label(s) {unread} are in a form E267 does not read")
     pin = (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX)
     if pin is not None and pin not in exact:
         raise ValueError(f"{configuration['id']}: its Coding Agent Index pin {pin!r} is not an exact record; exact: {exact} (E267)")
@@ -671,6 +683,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     agent_records = {item["label"]: item for item in documents["codingAgents"]["configurations"]}
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
     mapping = documents["configurationMap"]["rows"]
+    register = documents["configurationMap"].get("agentLabelRegister") or {}
+    if unread := unclassified_agent_labels(configurations, agent_records, register):
+        raise ValueError(f"Coding Agent Index label(s) {unread} mention a cohort model but are in no form E267 reads; read them, "
+                         "or record them in the configuration map's agentLabelRegister as naming a different model (E267)")
     agent_labels = {configuration["id"]: agent_record_for(configuration, mapping, agent_records) for configuration in configurations}
     # E208: a route inherits the token-category mix its source publishes for the measured workload.
     sources = documents["planRoutes"].get("sourceEvidence") or {}

@@ -1822,8 +1822,7 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     assert [v.agent_record_for(row, pins, records) for row in (ds, luna, fable, mimo, flash)] == [
         "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})", None, "Claude Code - Fable 5.1 (max) (with fallback)",
         "Claude Code - MiMo-V2.6-Pro", None]
-    with pytest.raises(ValueError, match="odd: Coding Agent Index label"):  # I53 M1: a disagreeing pair is unreadable, not skipped
-        v.agent_record_for(odd, pins, records)
+    assert v.unclassified_agent_labels([odd], records, {}) == ["Odd - X (max) ({'reasoning_effort': 'low'})"]  # unreadable, not skipped
     assert v.agent_record_for(ds, {}, records) == "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"
     for row, pin in ((ds, "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (max)"), (luna, "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)"),
                      (flash, "Kimi Code CLI - MiMo-V2.6-Flash (high)")):
@@ -1837,8 +1836,12 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     luna_real = "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})"
     assert v.parse_agent_label(luna_real) == {"agent": "Codex", "model": "GPT-6 Luna", "effort": "max"}
     assert v.agent_record_for(luna, {}, {luna_real: {}}) == luna_real
-    with pytest.raises(ValueError, match=r"luna: Coding Agent Index label\(s\) .* are in a form E267 does not read"):
-        v.agent_record_for(luna, {}, {"Codex - GPT-6 Luna (max) ({'reasoning_effort': 'low'})": {}})
+    disagreeing = "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'low'})"
+    assert v.unclassified_agent_labels([luna], {disagreeing: {}}, {}) == [disagreeing]
+    assert v.unclassified_agent_labels([luna], {disagreeing: {}}, {disagreeing: "reviewed: a different model"}) == []
+    # A strictly read other effort, and an effort-less label for a model whose configurations all carry an effort.
+    assert v.unclassified_agent_labels([luna], {"Codex - GPT-6 Luna (high)": {}}, {}) == []
+    assert v.unclassified_agent_labels([luna], {"Codex - GPT-6 Luna": {}}, {}) == ["Codex - GPT-6 Luna"]
     # O54: MiMo-V2.6-Pro's record at high is exact too.
     assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]
 
@@ -1855,3 +1858,41 @@ def test_frontiercode_cross_source_joins_cognition_on_family_and_effort():
                                "Fam B": {"max": {"main": {"new_score": 0.31}}}}}}
     result = v.frontiercode_cross_source(rows, board)
     assert result["panel"] == ["a", "b", "c"] and result["meanOffset"] == pytest.approx(2.0) and result["maxAbsOffset"] == pytest.approx(3.0)
+
+
+
+def test_no_perturbation_of_a_real_agent_label_is_silently_dropped():
+    """E267 (I55 M1): every form of a real cohort label other than the label itself stops the build or still reads exactly."""
+
+    from valuerank.paths import DATA
+    capture = {item["label"]: item for item in json.loads((DATA / "aa" / "coding_agents_capture.json").read_text())["configurations"]}
+    scores = json.loads((DATA / "scores.json").read_text())
+    ranked = {row["id"] for row in scores["v3"]["rows"]} | {row["id"] for row in scores["v3Tracks"]["aicd"]["rows"]}
+    configurations = [{"id": m["id"], "name": m["name"], "family": m.get("family") or m["name"], "effort": m.get("aaVariant")}
+                      for m in scores["models"] if m["id"] in ranked]
+    assert v.unclassified_agent_labels(configurations, capture, {}) == []
+    real = sorted({label for configuration in configurations for label in v.exact_agent_records(configuration, capture)})
+    assert len(real) >= 8
+    perturb = (lambda l: l.replace(" (", "("), lambda l: l.replace(" - ", " -  ", 1), lambda l: l.replace("(", "[").replace(")", "]"),
+               lambda l: l + " - preview", lambda l: l.replace("(max)", "((max))"), lambda l: l + "(with fallback)",
+               lambda l: l.replace(" - ", " \u2013 ", 1), lambda l: l.lower(), lambda l: l + "\n", lambda l: l.replace("(max)", "(Max)"),
+               lambda l: l.replace(" (max)", " XHigh"), lambda l: l + " ", lambda l: l.replace(" ", "  "))
+    for label in real:
+        for change in perturb:
+            mutated = change(label)
+            if mutated == label:
+                continue
+            records = {**{key: value for key, value in capture.items() if key != label}, mutated: {}}
+            reads = any(mutated in v.exact_agent_records(configuration, records) for configuration in configurations)
+            assert reads or v.unclassified_agent_labels(configurations, records, {}) == [mutated], mutated
+
+
+def test_an_unread_label_naming_a_cohort_model_stops_assembly_unless_registered():
+    """E267 (I55 M1): the build stops on a label it cannot classify; the reviewed register clears it."""
+
+    agents = documents()["codingAgents"]
+    agents["configurations"].append({"label": "Agent - A [max]", "meanCostPerTaskUsd": 1.0, "components": []})
+    with pytest.raises(ValueError, match=r"\['Agent - A \[max\]'\] mention a cohort model"):
+        v.assemble(CONFIGURATIONS, documents(codingAgents=agents), release_day=DAY)
+    mapping = {**documents()["configurationMap"], "agentLabelRegister": {"Agent - A [max]": "reviewed: names a different model"}}
+    assert v.assemble(CONFIGURATIONS, documents(codingAgents=agents, configurationMap=mapping), release_day=DAY)["rows"]
