@@ -1224,3 +1224,8 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L2 (adopted): the noise margin is on the quality scale and the separability threshold on the value scale, hence the ratio of about 1/0.75; one clause says so.
 - L3 (rejected): the revision history is the draft's standing record of each revision, kept by convention since r16.
 - Round status (O56): not clean (one Medium). Draft r89.
+
+## Internal review I30 (Claude Sonnet 5.5, effort low, on r89) — adopted, modified or rejected
+- M1 (adopted): the list of frontier families' near points omitted Claude Haiku 5.5 (max) (gap 3, the Haiku row ranked in the max-effort ranking); r90 adds it.
+- L1 (adopted): E254's per-ranking admission is now stated as an editor reading of O15/E140's "two-thirds of the cohort", with its effect (the Coding Agent Index v2.0 covers 7 of the max-effort ranking's 9 rows but 7 of all 29 cohort configurations) and that the owner can reverse it.
+- Round status (O56): not clean (one Medium). Draft r90.
