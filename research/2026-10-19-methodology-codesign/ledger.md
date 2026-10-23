@@ -1381,3 +1381,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L6 (adopted): internal review labels removed from the specification's body (the ledger keeps them).
 - Section 2 recommendations: generating the remaining hand-written current-state statements is the E265 path and continues as the check finds them; a flag for ladder bars closer than the noise margin and counting transfers among Plan anchor references are recorded for the owner report, not adopted now.
 - Round status (O56): clean, the first at the Claude Sonnet 5.5 high rung. Draft r103.
+
+## Internal review I45 (Claude Sonnet 5.5, effort high, on r103) — adopted, modified or rejected
+- No Critical, High or Medium finding (VERDICT: NO FURTHER FEEDBACK).
+- L1 (adopted): the display-name convention is stated: the specification writes "Family (effort)", the published tables use AA's display name, which omits the effort where AA does.
+- L2 (adopted): E196 also explains an allocation above 100% (the other term then negative).
+- L3 (adopted): the clipped indicative rows are given on both bases (new figure `<ranking>.indicativeClipped.plan`).
+- L4 (recorded for the owner report): a subset-workload leader carries "(subset cost)" in the headline; adding "cross-workload ordering not identified" to the headline is a presentation choice left to the owner.
+- L5 (rejected for now): E248's band extension overlapping another band is not reachable today (no configuration's plan rows span the threshold, a build figure); revisit if that figure stops being "none".
+- L6 (recorded): README's "Updated" date is the v3.0.0 release date (`release.DATE`), not the data cutoff; the cutoff is stated beside it. "9 cohort configurations" in the README scope line is the README's wording for cohort rows.
+- Round status (O56): clean, the second consecutive clean round at the Claude Sonnet 5.5 high rung (I44, I45). The rung is complete; the next rung is Claude Sonnet 5.5 at xhigh effort, on r104.

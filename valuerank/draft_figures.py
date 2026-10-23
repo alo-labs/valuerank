@@ -169,6 +169,7 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         # E234: rows with a leaf filled by another party, and listed rows whose indicative cost score clips (I35 L5).
         figures[f"{track}.gapFills"] = order(section["diagnostics"]["gapFillSensitivity"]["rows"])
         figures[f"{track}.indicativeClipped"] = order(item["id"] for item in section["listedIndicative"] if item["api"]["costScore"] in (0.0, 100.0))
+        figures[f"{track}.indicativeClipped.plan"] = order(item["id"] for item in section["listedIndicative"] if item["plan"]["costScore"] in (0.0, 100.0))
         main = [row["id"] for row in section["rows"] if row["cost"]["workload"] == section["mainWorkload"]]
         figures[f"{track}.mainWorkloadRows"] = len(main)
         figures[f"{track}.subsetRows"] = order(item for item in ids if item not in main)
@@ -274,7 +275,7 @@ def render(text: str, scores: dict, manifest: dict) -> str:
 
 # A "today" sentence may still hold numbers that are not current-release figures: names, versions, decision tags, dates
 # and the rule constants below. Everything else must be a placeholder.
-RULE_CONSTANTS = ("more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 60 points", "> 5 points", "40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
+RULE_CONSTANTS = ("above 100%", "more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 60 points", "> 5 points", "40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
                   "factor-2", "factor of 2", "two-thirds", "30 days", "7 days", "45 days", "0.5 W_g", "1.5 W_g")
 _NOT_A_FIGURE = re.compile(
     r"\b[OEIL]\d+\b|\br\d+\b|\b\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?\b|\b\d{2}:\d{2}(:\d{2})?Z\b"
