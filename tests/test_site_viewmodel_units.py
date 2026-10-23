@@ -39,9 +39,9 @@ def test_dimensions_give_cost_a_fixed_share_and_split_the_rest_by_leaf_weight():
     rows = viewmodel.dimensions()
     assert rows[0]["key"] == viewmodel.COST_KEY and rows[0]["weightPct"] == 25.0 and rows[0]["category"] == "cost"
     leaves = rows[1:]
-    assert len(leaves) == 11 and sum(row["weightPct"] for row in leaves) == pytest.approx(75.0)
-    deepswe = next(row for row in leaves if row["key"] == "deepswe")
-    assert deepswe["weightPct"] == 22.5 and deepswe["priority"] == 30.0 and deepswe["category"] == "code"
+    assert len(leaves) == 10 and sum(row["weightPct"] for row in leaves) == pytest.approx(75.0)
+    frontiercode = next(row for row in leaves if row["key"] == "frontierCode")
+    assert frontiercode["weightPct"] == 18.75 and frontiercode["priority"] == 25.0 and frontiercode["category"] == "code"
     assert {row["category"] for row in leaves} == {"code", "prod", "rely", "intel"}
 
 
@@ -72,8 +72,8 @@ def test_row_flags_name_subset_provisional_partial_and_caveat_in_order():
     assert [flag.split(":")[0] for flag in flags] == ["Subset cost", "Provisional quality", "Partial cost component", "AA cost caveat"]
     # E233: a provider-claimed leaf is named on the row.
     claimed = _v3_row("a", 1.0, 50.0)
-    claimed["quality"]["leaves"] = {"deepswe": {"sourceType": "model_provider_claim"}, "hle": {"sourceType": None}}
-    assert viewmodel._row_flags(claimed) == ["Provider-claimed leaf: DeepSWE v1.1 is the model provider's own result; competes but earns no interval label"]
+    claimed["quality"]["leaves"] = {"frontierCode": {"sourceType": "model_provider_claim"}, "hle": {"sourceType": None}}
+    assert viewmodel._row_flags(claimed) == ["Provider-claimed leaf: FrontierCode 1.1 is the model provider's own result; competes but earns no interval label"]
     # A row without a cost says so instead of claiming a subset workload (AGENTS.md: no cost, no value score).
     assert viewmodel._row_flags(_v3_row("a", None, 50.0, subset=True))[0].startswith("No cost: AA publishes no cost")
 

@@ -175,8 +175,9 @@ class StubFacts:
 
 def cost_world(**overrides):
     diagnostics = {
-        "basketReadiness": {"pricedMixCoverage": 2 / 3, "pricedLeaves": ["deepswe", "lcr"], "components": {"frontiercode": {"status": "pending capture"}, "scicode": {"status": "admitted"}}},
+        "basketReadiness": {"pricedMixCoverage": 2 / 3, "pricedLeaves": ["terminalBench", "lcr"], "components": {"coding-agent-index": {"status": "pending capture"}, "scicode": {"status": "admitted"}}},
         "sweCompanion": {"rows": {"a": {"flag": True}, "b": {"flag": False}}},
+        "costedBarLadder": {"excluded": ["a"], "population": 2, "levels": [50.0, 45.04, 55.0]},
         "matchedCost": {"status": "evaluated", "pricedQualityWeight": 0.5, "reversals": [["a", "b"]], "warnings": []},
         "commonLeaf": {"sparseLeaves": [], "barReach": [], "bases": {basis: {"rankChanges": {"changes": {}}} for basis in ("api", "plan")}, "rows": {}, "flagged": []},
         "frontierAnchors": {"status": "evaluated", "references": ["a", "b"], "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.0}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 3.5}} for basis in ("api", "plan")}, "bar": {"status": "unavailable: fewer than 2 non-provisional frontier-family configurations"}},
@@ -185,7 +186,7 @@ def cost_world(**overrides):
                           "bases": {basis: {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 3.04}, "frozenExchangeRate": {"valuePointsPerCostDoubling": 2.74}} for basis in ("api", "plan")}},
         "costComponentFamily": [
             {"component": "scicode", "bases": {basis: {"recalibrated": {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 5.0}}} for basis in ("api", "plan")}},
-            {"component": "frontiercode", "status": "not in the admitted basket"},
+            {"component": "coding-agent-index", "status": "not in the admitted basket"},
         ],
         "subsetBridges": [{
             "subsetRows": ["s"], "missingComponents": ["coding-agent-index"], "pairedRows": ["a", "b"],
@@ -207,9 +208,11 @@ def cost_world(**overrides):
 
 def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     text = ed.cost_diagnostics_markdown(cost_world())
-    assert "priced leaves cover 67% of nominal quality weight (DeepSWE v1.1, AA-LCR v1.1)" in text and "pending components: FrontierCode" in text
+    assert "priced leaves cover 67% of nominal quality weight (Terminal-Bench 4.0 (AA run), AA-LCR v1.1)" in text and "pending components: Coding Agent Index" in text
     assert "flagged far from the median ratio: a." in text and "reversals with separated intervals: 1" in text
-    assert "| FrontierCode | — | — | — |" in text and "2 rows move; largest move 1" in text
+    assert "have no cost (a); without them (2 rows) the ladder (headline, lower quartile, upper quartile) would be 50.0 / 45.0 / 55.0." in text
+    assert ed.costed_ladder_text({"excluded": [], "population": 3, "levels": []}, StubFacts({})).endswith("today every such row has a cost, so the ladder is unchanged.")
+    assert "| Coding Agent Index | — | — | — |" in text and "2 rows move; largest move 1" in text
     assert "values change by -1.00 points (median; -2.00 to 0.50)" in text
     assert "is 40% of the full basket (median; 10% to 60% over 2 rows)" in text and "other: no expenditure evidence" in text
     assert "Plan: unavailable: fewer than 2 complete-evidence references" in text and "the direction of its subset effect is not known" in text
@@ -264,9 +267,12 @@ def test_coding_share_text_reports_the_median_coding_share():
                          "componentsDetail": {key: {"costUsd": value} for key, value in costs.items()}}}
 
     rows = [row({"coding-agent-index": 40.0, "gdpval-aa": 60.0}), row({"coding-agent-index": 10.0, "scicode": 10.0, "gdpval-aa": 80.0}), row({"gdpval-aa": 5.0}, full=False)]
-    text = ed.coding_share_text({"rows": rows})
-    assert "make up 30% of the basket's cost (median over 2 configurations with the full basket; 20% to 40%)" in text
-    assert ed.coding_share_text({"rows": rows[2:]}) == ""
+    text = ed.coding_share_text({"rows": rows, "admission": {"admitted": ["gdpval-aa"]}})
+    assert "make up 30% of the basket's cost (median over 2 configurations with the full basket; 20% to 40%)" in text and "SWE-Atlas" not in text
+    # O50: SWE-Atlas QnA's share is stated only while the Coding Agent Index is in the basket.
+    with_index = ed.coding_share_text({"rows": rows, "admission": {"admitted": ["coding-agent-index", "gdpval-aa"]}})
+    assert "SWE-Atlas QnA (124 of its 290 tasks) has no quality leaf either" in with_index
+    assert ed.coding_share_text({"rows": rows[2:], "admission": {"admitted": []}}) == ""
 
 
 def test_displayed_cheapest_sentences_name_the_row_or_none():
@@ -333,9 +339,9 @@ def test_common_leaf_and_harness_texts():
         tb4 = {"rows": [{"model": "Opus 5.5 (max)", "agent": "Claude Code"}]}
         # O37: the Terminal-Bench leaf's agent is its provenance (AA's own run), not tbench.ai's row.
         v3 = {"rows": [{"id": "claude-opus-5-5", "quality": {"leaves": {"terminalBench": {"agent": "mini-SWE-agent"}}}}, {"id": "x", "quality": {"leaves": {}}}]}
-        scores = {"models": [{"id": "claude-opus-5-5", "aaVariant": "max", "rankingEligible": True, "deepsweAgent": "Claude Code", "bugHunt": {"matched": True, "harness": "Claude Code"}},
-                             {"id": "x", "rankingEligible": True, "deepsweAgent": "Codex", "bugHunt": {"matched": False, "harness": "Codex CLI"}},
-                             {"id": "y", "rankingEligible": False, "deepsweAgent": "Codex"}]}
+        scores = {"models": [{"id": "claude-opus-5-5", "aaVariant": "max", "rankingEligible": True, "bugHunt": {"matched": True, "harness": "Claude Code"}},
+                             {"id": "x", "rankingEligible": True, "bugHunt": {"matched": False, "harness": "Codex CLI"}},
+                             {"id": "y", "rankingEligible": False}]}
 
     diagnostic = {"sparseLeaves": ["frontierCode"], "barReach": [{"level": 56.7, "displayedReachN": 18, "commonLeafReachN": 20}],
                   "bases": {basis: {"rankChanges": {"changes": {"a": 2, "b": -2}}} for basis in ("api", "plan")},
@@ -343,7 +349,7 @@ def test_common_leaf_and_harness_texts():
     text = ed.common_leaf_text(diagnostic, Facts)
     assert "(FrontierCode 1.1), API 2 rows move; largest move 2 (A, B)" in text and "quality 56.7: 18 → 20" in text and text.endswith("A -5.0.")
     assert ed.common_leaf_text({**diagnostic, "sparseLeaves": [], "flagged": []}, Facts).endswith("one cost doubling's worth: none.")
-    assert ed.harness_by_leaf_text(Facts) == "- **Harness by leaf (E227):** DeepSWE: Claude Code 1, Codex 1; Terminal-Bench: mini-SWE-agent 1; Bug Hunt: Claude Code 1."
+    assert ed.harness_by_leaf_text(Facts) == "- **Harness by leaf (E227):** Terminal-Bench: mini-SWE-agent 1; Bug Hunt: Claude Code 1."
     Facts.scores = {"models": []}
     assert ed.harness_by_leaf_text(Facts).endswith("Bug Hunt: none.")
 
@@ -421,3 +427,15 @@ def test_open_web_plan_row_and_costed_ladder_texts():
     assert ed.costed_ladder_text({"excluded": ["w"], "population": 2, "levels": [50.0, 40.0, 60.0]}, Labels).endswith(
         "(w); without them (2 rows) the ladder (headline, lower quartile, upper quartile) would be 50.0 / 40.0 / 60.0.")
     assert "would be unavailable" in ed.costed_ladder_text({"excluded": ["w"], "population": 1, "levels": []}, Labels)
+
+
+def test_influence_text_explains_a_negative_cost_allocation_and_workload_dash():
+    """E196: a negative covariance allocation means cost offsets quality; a row without a cost has no workload."""
+
+    def v3(api, plan):
+        return {"costInfluence": {basis: {"commonWorkload": {"varianceAllocation": {"cost": share}}} for basis, share in (("api", api), ("plan", plan))}}
+
+    negative = ed.influence_text(v3(-0.12, 0.3))
+    assert "covariance allocation of value variance is -12% on the API basis and 30% on the Plan basis" in negative
+    assert "cost accounts for 40% of the variance in API value and 30% in Plan value" in ed.influence_text(v3(0.4, 0.3))
+    assert ed.workload_text({"cost": {"apiUsd": None}}) == ed.DASH

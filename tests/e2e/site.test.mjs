@@ -89,7 +89,7 @@ function notesMatchRows(page, body, list) {
     return rows.length > 0 && rows.length === notes.length && rows.every((row, i) => {
       const ref = row.querySelector('.fn-ref a');
       return ref.textContent === String(i + 1) && ref.getAttribute('href') === `#${notes[i].id}`
-        && notes[i].id === `ev-${row.dataset.slug}` && notes[i].querySelector('.fn-back').getAttribute('href') === `#${ref.id}`;
+        && notes[i].id === `ev-${row.dataset.key}` && notes[i].querySelector('.fn-back').getAttribute('href') === `#${ref.id}`;
     });
   }, [body, list]);
 }
@@ -153,12 +153,13 @@ describe('evidence footnotes', () => {
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
-    assert.equal(await page.locator('#rankings-body tr').count(), 49); // every roster model (49; O33 ranks each evidenced effort)
+    // O48: the Plan basis has one row per configuration and plan (91), then every unranked roster model (34).
+    assert.equal(await page.locator('#rankings-body tr').count(), 125);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
     const openAiRows = await page.locator('#rankings-body tr[data-slug]').count();
-    assert.ok(openAiRows > 0 && openAiRows < 28);
+    assert.ok(openAiRows > 0 && openAiRows < 125);
 
     await page.locator('#filters input[name="q"]').fill('sol');
     await page.locator('#filters input[name="q"]').dispatchEvent('input');
@@ -168,8 +169,9 @@ describe('rankings instrument', () => {
     assert.match(await query(page), /sort=quality/);
     assert.equal(await page.locator('#rankings-head th[data-col="quality"]').getAttribute('aria-sort'), 'descending');
 
-    const slugs = await page.locator('#rankings-body tr[data-slug]').evaluateAll((rows) => rows.slice(0, 2).map((row) => row.dataset.slug));
-    for (const slug of slugs) await page.locator(`#rankings-body tr[data-slug="${slug}"] [data-compare]`).check();
+    const slugs = await page.locator('#rankings-body tr[data-slug]').evaluateAll((rows) => [...new Set(rows.map((row) => row.dataset.slug))].slice(0, 2));
+    // O48: a configuration has one row per plan; comparing ticks the configuration, so its first row's box suffices.
+    for (const slug of slugs) await page.locator(`#rankings-body tr[data-slug="${slug}"] [data-compare]`).first().check();
     assert.match(await query(page), new RegExp(`compare=${slugs.join('(%2C|,)')}`));
     assert.equal(await page.locator('#compare-drawer').isVisible(), true);
 
@@ -267,15 +269,15 @@ describe('charts, model, plans and listing pages', () => {
     await context.close();
   });
 
-  test('the models index lists all 49 models and links to their pages', async () => {
+  test('the models index lists all 61 models and links to their pages', async () => {
     const { page, context } = await open('/models/');
-    assert.equal(await page.locator('#models-table tbody tr').count(), 49);
+    assert.equal(await page.locator('#models-table tbody tr').count(), 61);
     // O33: each ranked effort of a family has its own row and page.
     assert.equal(await page.locator('#models-table a.model-name[href$="/models/gpt-6-1-sol-xhigh/"]').innerText(), 'GPT-6.1 Sol (xhigh)');
     await page.locator('#models-table a.model-name', { hasText: /^GPT-6\.1 Sol$/ }).click();
     await page.waitForURL(/\/models\/gpt-6-1-sol\/$/);
     assert.equal(await page.locator('h1').innerText(), 'GPT-6.1 Sol');
-    assert.equal(await page.locator('#dimension-table tbody tr').count() > 10, true);
+    assert.equal(await page.locator('#dimension-table tbody tr').count(), 10); // the ten benchmark leaves (O49)
     assert.equal(await page.locator('nav[aria-label="Primary"] a[aria-current="page"]').innerText(), 'Models');
     await context.close();
   });

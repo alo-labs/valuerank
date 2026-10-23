@@ -107,6 +107,18 @@ COHORT_MAP = {
     "claude-sonnet-5-5-low": None,
     "muse-spark-1-3-xhigh": None,
     "grok-4.6-xhigh": None,
+    "deepseek-v4-1-flash-1017": None,
+    "minimax-m3-1-flash": None,
+    "gpt-6-luna-low": None,
+    "gpt-6-luna-medium": None,
+    "gpt-6-luna-high": None,
+    "gpt-6-luna-xhigh": None,
+    "claude-opus-5-5-high": None,
+    "claude-opus-5-5-xhigh": None,
+    "claude-opus-5-5-medium": None,
+    "gpt-5.6-luna-low": None,
+    "gpt-6-astra-high": None,
+    "gpt-6-astra-xhigh": None,
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in

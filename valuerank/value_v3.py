@@ -1639,7 +1639,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     hold = any(item["hold"] for basis in BASES for item in gates[basis])
     yield_ = plan_routes.identification_yield({row["id"]: row["routeSelection"]["selected"] for row in plan_rows})
     agreement = _quality_agreement(rows)
-    measured = _measured_only_view(rows, frozen, per_row)
+    measured = _measured_only_view(rows, frozen, per_row, plan_rows)
     readiness = cost_diagnostics.basket_readiness(rows, assembled["admission"], main)
     interval_rows = sorted(row["id"] for row in rows if (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct"))
     manifest = [
@@ -1750,7 +1750,7 @@ MEASURED_VIEW_SPEC = {
 }
 
 
-def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict) -> dict:
+def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict, plan_rows: list[dict] = ()) -> dict:
     """E113: the measured-only Plan view D_measured, compared with the official Plan ranks on the common panel."""
 
     entries, values = {}, {}
@@ -1777,7 +1777,7 @@ def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict) -> dict:
         "specification": specification,
         "rows": entries,
         "rankChangeVsOfficial": diagnostics.paired_rank_change(official, values),
-        "calibration": _measured_calibration(rows, frozen, entries),
+        "calibration": _measured_calibration(rows, frozen, entries, plan_rows),
     }
 
 
@@ -1809,7 +1809,7 @@ def _reversals(baseline: dict, branch: dict) -> list[list[str]]:
     ]
 
 
-def _measured_calibration(rows: list[dict], frozen: dict, entries: dict) -> dict:
+def _measured_calibration(rows: list[dict], frozen: dict, entries: dict, plan_rows: list[dict] = ()) -> dict:
     """E164: the measured-only rows rescored on anchors built from measured evidence alone.
 
     The official Plan anchors include owner-named transfers and API-cost fallbacks (E160), so an
@@ -1818,6 +1818,8 @@ def _measured_calibration(rows: list[dict], frozen: dict, entries: dict) -> dict
     """
 
     by_id = {row["id"]: row for row in rows}
+    # O48: the official Plan anchors are set over plan rows, so their provenance is read from those rows.
+    anchor_rows = {**by_id, **{row["id"]: row for row in plan_rows}}
     measured = {row_id: entry for row_id, entry in entries.items() if "costUsd" in entry}
     workloads, official, calibrated = {}, {}, {}
     for workload, frozen_entry in frozen["workloads"].items():
@@ -1827,7 +1829,7 @@ def _measured_calibration(rows: list[dict], frozen: dict, entries: dict) -> dict
         if anchors_official:
             references = anchors_official["referenceCosts"]
             low, high = min(references, key=references.get), max(references, key=references.get)
-            provenance = {"low": {"row": low, "evidence": _plan_evidence(by_id.get(low))}, "high": {"row": high, "evidence": _plan_evidence(by_id.get(high))}}
+            provenance = {"low": {"row": low, "evidence": _plan_evidence(anchor_rows.get(low))}, "high": {"row": high, "evidence": _plan_evidence(anchor_rows.get(high))}}
         # E170/O29: a row whose AA cost is not on the price in force at V is never a measured reference.
         references = {
             row_id: measured[row_id]["costUsd"] for row_id in members
@@ -2288,7 +2290,7 @@ def separation(first: float, second: float, rho: float) -> float:
 
 def rank_bands(ranked: list[tuple[float, str]], sd: dict, configuration_of: dict | None = None) -> dict:
     """O42: each row's band, as the first and last positions of the rows it cannot be separated from by the band rule
-    (O48: a plan row takes its configuration's SD; two rows of one configuration are separated by any value gap)."""
+    (O48: a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band)."""
 
     of = configuration_of or {}
     bands, current = [], []

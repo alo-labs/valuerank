@@ -51,18 +51,15 @@ def test_readme_ranks_configurations_in_plan_order(emitted):
     assert [int(row[1]) for row in ranked] == [row["api"]["rank"] for row in by_plan]
     assert [row[3] for row in ranked] == [f"{row['planScore']['value']:.1f}" for row in by_plan]
     assert [row[4] for row in ranked] == [f"{row['api']['value']:.1f}" for row in by_plan]
-    # O33: an evidenced sibling effort is its own row with its own page.
-    assert rows[0][2].startswith("[Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/)")
+    # O51: each plotted effort is its own row with its own page.
+    assert rows[0][2].startswith("[Claude Opus 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-opus-5-5-xhigh/)")
     assert any(row[2].startswith("[GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/)") for row in ranked)
-    # AGENTS.md: a configuration without a cost gets no value score, so no rank; its quality is still shown.
-    (no_cost,) = unranked
-    assert no_cost[2].startswith("[Muse Wonder Full (max)](https://valuerank.alolabs.dev/models/muse-wonder-full/)")
-    assert no_cost[:2] == ["—", "—"] and no_cost[3:5] == ["—", "—"] and no_cost[5] == "64.4" and no_cost[7:9] == ["—", "—"]
-    assert no_cost[10] == "no cost"
+    # Every cohort configuration has an AA cost today, so no row is unranked for want of one.
+    assert unranked == []
     assert "- **no cost**: AA publishes no cost for the configuration, so it has no value score and no rank (AGENTS.md); its quality is shown." in readme
     assert readme.startswith("# ValueRank\n")
     scored = sum(1 for row in v3["rows"] if row["api"]["rank"] is not None)
-    assert f"**Scope:** {len(v3['rows'])} cohort configurations ({scored} with a value score)" in readme and scored == len(v3["rows"]) - 1
+    assert f"**Scope:** {len(v3['rows'])} cohort configurations ({scored} with a value score)" in readme and scored == len(v3["rows"])
     assert f"**Methodology:** {v3['methodologyVersion']} · {v3['basketVersion']} · anchor version {v3['anchorVersion']}" in readme
     assert "## AA intelligence and total-cost comparison" in readme
 
@@ -71,51 +68,51 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     readme = (emitted / "README.md").read_text()
     rows = {cells(row)[2].split("](")[0].lstrip("["): cells(row) for row in table_rows(readme, "| Plan rank | API rank | Configuration")}
     assert rows["Gemini 4 Argon (high)"][9] == "—" and rows["Gemini 4 Argon (high)"][10] == "API-cost fallback"
-    # O36: every ranked row has all eleven leaves, so none is provisional; E233: Xiaomi's DeepSWE is a provider claim.
-    assert rows["MiMo-V2.6-Pro"][10] == "subset cost, provider-claimed leaf"
-    # O30: GPT-6 Astra is ranked at max, its configuration with exact DeepSWE and Bug Hunt results.
-    assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "—"
+    # O49/O50: MiMo-V2.6-Pro's provider-claimed DeepSWE leaf is gone and its basket is complete; O46: its quota-ceiling route.
+    assert rows["MiMo-V2.6-Pro"][10] == "—"
+    assert rows["MiMo-V2.6-Pro"][9] == "MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption)"
+    assert rows["GPT-6 Astra (xhigh)"][6] == "100%" and rows["GPT-6 Astra (xhigh)"][10] == "—"
     assert rows["Claude Haiku 5.5 (xhigh)"][10] == "AA cost caveat"
-    assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Pro $500 · common GPT assumption (10.772×, measured)"
+    # O45: GPT-6.1 Sol keeps its own SemiAnalysis figure.
+    assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured)"
 
 
 def test_readme_states_what_the_interval_outputs_support(emitted):
     readme = (emitted / "README.md").read_text()
     assert "the definite frontier (no configuration can beat it on both cost and quality" in readme
-    assert "is Gemini 4 Argon (high), GPT-6.1 Sol (xhigh), Claude Sonnet 5.5 (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low), GPT-5.6 Luna (max), GPT-6 Luna (max), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low); the possible frontier adds none." in readme
+    assert "the possible frontier adds none." in readme and "GPT-6 Luna (low); the possible frontier adds none." in readme
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter.
-    assert "Cheapest at or above quality 55.3: GPT-6.1 Sol (medium) (confirmed). (Bar comparison: compares 15 configurations that can qualify.)" in readme
-    # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 37% of API and 51% of Plan value variance)" in readme
-    assert "That weight is nominal: on the current panel cost accounts for 37% of the variance in API value and 51% in Plan value" in readme
+    assert "Cheapest at or above quality 55.0: GPT-6.1 Sol (max) (confirmed)." in readme
+    # E196: the nominal cost weight is printed with cost's share of the variance in value; a negative allocation is explained.
+    assert "value is a 25% cost score (nominal weight; -108% of API and -45% of Plan value variance)" in readme
+    assert "a negative allocation means dearer configurations score higher on quality" in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
-    assert "Claude Sonnet 5.5 leads the Plan ranking at 59.5 (owner-named transfer); GPT-6.1 Sol (xhigh) leads the API ranking at 58.8; Claude Sonnet 5.5 leads on quality." in readme
+    assert "Claude Opus 5.5 (xhigh) leads the Plan ranking at 54.0 (owner-named transfer); GPT-6.1 Sol (xhigh) leads the API ranking at 50.2; Claude Opus 5.5 leads on quality." in readme
     # The quality rank covers every cohort row with quality evidence, a cost-less one included (its quality is shown).
     # E203: the displayed record on the headline scale, beside the interval claims.
-    assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 55.3: GPT-6.1 Sol (medium) ($531.56 per basket run; 16 reach it)" in readme
-    assert "Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 53% of the basket's cost (median over 29 configurations with the full basket; 40% to 85%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 14%; the Coding Agent Index's SWE-Atlas QnA (124 of its 303 tasks) has no quality leaf either, and its cost share is not separable because AA publishes one pooled cost." in readme
-    assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 61.0 over 9 configurations; cheapest at or above it on the API main workload: GPT-6.1 Sol (xhigh) (confirmed) (compares 6 configurations that can qualify)." in (emitted / "scores.md").read_text()
+    assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 48.9: GPT-6.1 Sol (medium) ($318.05 per basket run; 14 reach it)" in readme
+    # O50: the Coding Agent Index v2.0 is not admitted, so the coding share names the admitted coding components only.
+    assert "Coding and terminal tasks (Terminal-Bench 4.0 (AA Index run), SciCode) make up 19% of the basket's cost (median over 27 configurations with the full basket; 6% to 31%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 27%." in readme
+    assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 48.9 over 27 configurations" in (emitted / "scores.md").read_text()
     assert "SciCode and AA-LCR once at API rates" in readme
 
 
 def test_methodology_leaf_weights_fill_the_quality_share(emitted):
     text = (emitted / "methodology.md").read_text()
     rows = [cells(row) for row in table_rows(text, "| Leaf | Group | Weight in quality")]
-    assert len(rows) == 11
+    assert len(rows) == 10
     assert sum(float(row[2].rstrip("%")) for row in rows) == pytest.approx(100.0, abs=0.05)
     assert sum(float(row[3].rstrip("%")) for row in rows) == pytest.approx(75.0, abs=0.05)
     assert "Value on a basis = **25%** × cost score + **75%** × quality score" in text
     cohort = text.split("## Cohort\n", 1)[1].split("\n## ", 1)[0]
-    assert "- On AA's rendered frontier (6):" in cohort and "- Near-frontier family (3):" in cohort
-    assert "- Exact DeepSWE and Bug Hunt results for the exact configuration (O31, O33) (23):" in cohort
-    assert "Claude Fable 5.1 (max)" in cohort and "Muse Wonder Full (max)" in cohort
-    assert "GPT-6.1 Sol (xhigh)" in cohort and "Claude Haiku 5.5 (max)" in cohort
+    assert "- On AA's rendered frontier (6):" in cohort and "- Near-frontier family (4):" in cohort
+    assert "- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (17):" in cohort
+    assert "GPT-6.1 Sol (xhigh)" in cohort and "Claude Haiku 5.5 (max)" in cohort and "GPT-6 Luna (low)" in cohort
     # O36/O38: configurations still missing a benchmark after the logged search are listed with the gap, not ranked.
-    assert ("5 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days "
-            "of the cutoff (O36; a required frontier family is listed the same way, O38): DeepSeek V4 Flash (no FrontierCode 1.1); Grok 4.6 (xhigh) (no FrontierCode 1.1); "
-            "MiMo-V2.6-Flash (no Bug Hunt Bench);") in cohort
-    assert "The remaining 12 roster models are not ranked" in cohort
+    assert ("2 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days "
+            "of the cutoff (O36; a required frontier family is listed the same way, O38): MiMo-V2.6-Flash (no Bug Hunt Bench); MiniMax-M3.1-Flash (no Bug Hunt Bench).") in cohort
+    assert "The remaining 32 roster models are not ranked" in cohort
     assert "- Claude: User authorizes (2026-10-18, Option 2)" in text
 
 
@@ -125,25 +122,33 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert text.startswith(f"# ValueRank {emit_docs.VERSION} Scores")
     rows = [cells(row) for row in table_rows(text, "| Configuration | Plan rank | Plan value")]
     by_plan = sorted(v3["rows"], key=lambda row: (row["planScore"]["rank"] is None, row["planScore"]["rank"] or 0))
-    assert by_plan[-1]["id"] == "muse-wonder-full"  # no cost: no value score, no rank, listed last
-    assert [row[2] for row in rows[:-1]] == [f"{row['planScore']['value']:.2f}" for row in by_plan[:-1]]
-    assert [row[6] for row in rows[:-1]] == [f"{row['api']['costScore']:.2f}" for row in by_plan[:-1]]
-    assert rows[-1][2] == rows[-1][6] == "—"
-    assert len(table_rows(text, "| Model | Reasons")) == 17  # 12 outside the cohort, 5 listed for incomplete benchmarks (O36)
+    assert [row[2] for row in rows] == [f"{row['planScore']['value']:.2f}" for row in by_plan]
+    assert [row[6] for row in rows] == [f"{row['api']['costScore']:.2f}" for row in by_plan]
+    assert len(table_rows(text, "| Model | Reasons")) == 34  # 32 outside the cohort (O51), 2 listed for incomplete benchmarks (O36)
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
-    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (max)," in text
-    assert "| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — | — |" in text
+    # O48: the Plan streams exclude transfer-dependent plan rows, each named as a configuration on its plan.
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (high) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
-    assert "| quality 55.3 | GPT-6.1 Sol (medium) | supported under all registered role-group kernel checks | 100.0% to 100.0% |" in text
+    assert "| quality 48.9 | GPT-6.1 Sol (medium) | not scenario-supported |" in text
 
 
-def test_scores_md_prints_a_dash_for_a_configuration_without_a_rank(emitted):
+def test_scores_md_prints_a_dash_for_a_configuration_without_a_rank(repo_copy, pinned_clock):
     """AGENTS.md: a configuration without a cost has no value score and no rank; like README, scores.md prints "—"."""
 
-    text = (emitted / "scores.md").read_text()
+    def drop_cost(document):
+        row = next(row for row in document["v3"]["rows"] if row["id"] == "gemini-4-argon")
+        for basis in ("api", "planScore"):
+            row[basis].update(rank=None, value=None, costScore=None)
+        for plan_row in document["v3"]["planRows"]:
+            if plan_row["configurationId"] == "gemini-4-argon":
+                plan_row.update(rank=None, value=None, costScore=None)
+
+    edit_json(repo_copy, "scores.json", drop_cost)
+    assert emit(repo_copy) == 0
+    text = (repo_copy / "scores.md").read_text()
     rows = {cells(row)[0].split("](")[0].lstrip("["): cells(row) for row in table_rows(text, "| Configuration | Plan rank | Plan value")}
-    no_cost = rows["Muse Wonder Full (max)"]
+    no_cost = rows["Gemini 4 Argon (high)"]
     assert no_cost[1] == "—" and no_cost[4] == "—", no_cost
 
 
@@ -154,7 +159,7 @@ def test_raw_data_lists_every_deepswe_configuration_and_bundle_artifact(emitted)
     assert len(rows) == len(configs)
     for row, config in zip(rows, configs):
         assert row.startswith(f"| {config['sourceOrder']} | {config['agent']} | {config['model']} |")
-    assert f"The AA chart publishes {len(configs)} DeepSWE v1.1" in text
+    assert f"The AA chart published {len(configs)} DeepSWE v1.1" in text
     bundle = v3_document()["evidenceBundle"]
     assert len(table_rows(text, "| Key | Artifact | SHA-256")) == len(bundle["artifacts"])
     assert bundle["artifacts"][0]["sha256"] in text
@@ -215,13 +220,13 @@ def evaluated_plan_intervals(document):
     plan["unevaluable"] = []
     bar = plan["bars"][0]
     bar["confirmedCheapest"] = None
-    bar["possibleCheapest"] = ["gpt-6-luna", "deepseek-v4-pro"]
+    bar["possibleCheapest"] = ["gpt-6-luna", "deepseek-v4-1-flash-1017"]
     plan["bars"].append({**copy.deepcopy(bar), "status": "unresolved"})
-    plan["bars"].append({**copy.deepcopy(bar), "confirmedCheapest": "deepseek-v4-pro"})
+    plan["bars"].append({**copy.deepcopy(bar), "confirmedCheapest": "deepseek-v4-1-flash-1017"})
     # E183: an O29 blocker competes without a label of its own.
-    plan["blockers"] = ["grok-4.7"]
-    plan["frontier"]["grok-4.7"] = {"status": "no interval label"}
-    bar["rows"]["grok-4.7"] = {"status": "no interval label"}
+    plan["blockers"] = ["gemini-4-argon"]
+    plan["frontier"]["gemini-4-argon"] = {"status": "no interval label"}
+    bar["rows"]["gemini-4-argon"] = {"status": "no interval label"}
     v3["intervals"]["plan"] = plan
 
 
@@ -231,15 +236,30 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     readme = (repo_copy / "README.md").read_text()
     plan_sentence = next(line for line in readme.splitlines() if line.startswith("- Plan basis, main workload"))
     assert "Not evaluable" not in plan_sentence
-    assert "Cheapest at or above quality 55.3: not unique; possibly GPT-6 Luna (max), DeepSeek V4 Pro (max)." in plan_sentence
-    assert "Cheapest at or above quality 55.3: unresolved." in plan_sentence
-    assert plan_sentence.endswith("Cheapest at or above quality 55.3: DeepSeek V4 Pro (max) (confirmed). (Bar comparison: compares 15 configurations that can qualify.)")
+    assert "Cheapest at or above quality 48.9: not unique; possibly GPT-6 Luna (max), DeepSeek V4.1 Flash 1017 (max)." in plan_sentence
+    assert "Cheapest at or above quality 48.9: unresolved." in plan_sentence
+    assert plan_sentence.endswith("Cheapest at or above quality 48.9: DeepSeek V4.1 Flash 1017 (max) (confirmed). (Bar comparison: compares 14 configurations that can qualify.)")
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores
     assert "Status unresolved." in scores
-    assert "Competing without a label (AA cost on a price not in force, O29): Grok 4.7 (xhigh)." in plan_sentence
-    assert "Competing without a label (AA cost on a price not in force, O29, E183): Grok 4.7 (xhigh)." in scores
+    assert "Competing without a label (AA cost on a price not in force, O29): Gemini 4 Argon (high)." in plan_sentence
+    assert "Competing without a label (AA cost on a price not in force, O29, E183): Gemini 4 Argon (high)." in scores
+
+
+def test_unevaluable_rows_and_subset_workload_intervals_are_printed(repo_copy, pinned_clock):
+    """E190: interval outputs on a subset workload follow the main ones; unevaluable rows are named."""
+
+    def subset_intervals(document):
+        v3 = document["v3"]
+        v3["intervals"]["api"]["unevaluable"] = ["gemini-4-argon"]
+        v3["subsetIntervals"] = {"subset": {"components": ["gdpval-aa"], "api": copy.deepcopy(v3["intervals"]["api"]), "plan": copy.deepcopy(v3["intervals"]["plan"])}}
+
+    edit_json(repo_copy, "scores.json", subset_intervals)
+    assert emit(repo_copy) == 0
+    readme = (repo_copy / "README.md").read_text()
+    assert "Not evaluable on this workload: Gemini 4 Argon (high)." in readme
+    assert "subset workload (GDPval-AA; orderings across workloads not identified)" in (repo_copy / "scores.md").read_text()
 
 
 def test_an_undefined_variance_allocation_prints_only_the_nominal_weight(repo_copy, pinned_clock):
@@ -258,10 +278,10 @@ def test_policy_applications_are_printed_only_when_recorded(repo_copy, pinned_cl
 
 def test_a_ranked_row_without_an_inclusion_reason_is_refused(repo_copy, pinned_clock):
     def drop_reasons(document):
-        next(model for model in document["models"] if model["id"] == "glm-5.3")["rankingInclusionReasons"] = []
+        next(model for model in document["models"] if model["id"] == "gemini-4-argon")["rankingInclusionReasons"] = []
 
     edit_json(repo_copy, "scores.json", drop_reasons)
-    with pytest.raises(ValueError, match="glm-5.3 has no recorded cohort inclusion reason"):
+    with pytest.raises(ValueError, match="gemini-4-argon has no recorded cohort inclusion reason"):
         emit(repo_copy)
 
 
@@ -273,7 +293,7 @@ def test_terminal_bench_harness_diagnostic_reports_tau_when_defined(repo_copy, p
     edit_json(repo_copy, "scores.json", undefined_agreement)
     assert emit(repo_copy) == 0
     text = (repo_copy / "scores.md").read_text()
-    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small); panel of 32 rows." in text
+    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small); panel of 27 rows." in text
     assert re.search(r"- \*\*Group drift:\*\* estimated\.\n", text)
 
 
@@ -290,13 +310,13 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
     text = (repo_copy / "scores.md").read_text()
     section = text.split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
     assert "Status: measured-evidence calibration unavailable." in section
-    assert section.count("The workload has no official Plan anchors.") == 2
+    assert section.count("The workload has no official Plan anchors.") == 1
     assert "Value on measured anchors" not in section and "Pairwise reversals" not in section
 
 
 def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted):
     section = (emitted / "scores.md").read_text().split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
-    assert "Official Plan anchors are set by Claude Haiku 5.5 (low) (owner-named transfer) at the low end and Grok 4.7 (xhigh) (API-cost fallback) at the high end." in section
+    assert "Official Plan anchors are set by Claude Haiku 5.5 (low) on Claude Pro (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
     assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max)." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology

@@ -274,6 +274,11 @@ class Facts:
         return next(model["id"] for model in self.scores["models"] if viewmodel.slugify(model["id"]) == entry["slug"])
 
     def label(self, model_id):
+        if model_id not in self.rows and "@" in model_id:
+            # O48: a Plan row "<configuration>@<plan>" reads as the configuration on its plan.
+            configuration, _plan = model_id.split("@", 1)
+            plan = next((row["plan"] for row in self.v3.get("planRows", []) if row["id"] == model_id), None)
+            return f"{self.label(configuration)} on {plan or 'API-cost fallback'}"
         return configuration_label(self.rows[model_id], self.names) if model_id in self.rows else self.names.get(model_id, model_id)
 
     def labels(self, model_ids):
@@ -345,12 +350,16 @@ def coding_share_text(v3):
     if coding is None:
         return ""
     middle, low, high, n = coding
-    labels = ", ".join(component_label(key) for key in CODING_COMPONENTS)
+    admitted = v3["admission"]["admitted"]
+    labels = ", ".join(component_label(key) for key in CODING_COMPONENTS if key in admitted)
     unrewarded = _median_share(v3, UNREWARDED_COMPONENTS)[0]
+    # The Coding Agent Index's SWE-Atlas QnA has no quality leaf; its share is only stated while the index is in the basket (O50).
+    atlas = (f"; the Coding Agent Index's SWE-Atlas QnA ({basket.CODING_AGENT_TASKS['swe-atlas-qna']} of its {sum(basket.CODING_AGENT_TASKS.values())} "
+             "tasks) has no quality leaf either, and its cost share is not separable because AA publishes one pooled cost"
+             if basket.CODING_AGENT_INDEX in admitted else "")
     return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {n} configurations "
             f"with the full basket; {pct(low, 0)} to {pct(high, 0)}); {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
-            f"which have no quality leaf, make up {pct(unrewarded, 0)}; the Coding Agent Index's SWE-Atlas QnA ({basket.CODING_AGENT_TASKS['swe-atlas-qna']} "
-            f"of its {sum(basket.CODING_AGENT_TASKS.values())} tasks) has no quality leaf either, and its cost share is not separable because AA publishes one pooled cost.")
+            f"which have no quality leaf, make up {pct(unrewarded, 0)}{atlas}.")
 
 
 def influence_text(v3, short=False):
@@ -1015,6 +1024,13 @@ Admission: {measured['specification']['admission']}. Selection: {measured['speci
 """
 
 
+def anchor_setter(facts, end):
+    """One official Plan anchor setter; an API-cost fallback plan row already names its evidence (O48)."""
+
+    label = facts.label(end["row"])
+    return label if label.endswith(end["evidence"]) else f"{label} ({end['evidence']})"
+
+
 def calibration_markdown(facts):
     """E164: the measured-only rows rescored on anchors built from measured evidence alone."""
 
@@ -1024,8 +1040,8 @@ def calibration_markdown(facts):
     for workload, item in calibration["workloads"].items():
         provenance = item["officialAnchorProvenance"]
         extremes = (
-            f" Official Plan anchors are set by {facts.label(provenance['low']['row'])} ({provenance['low']['evidence']}) at the low end "
-            f"and {facts.label(provenance['high']['row'])} ({provenance['high']['evidence']}) at the high end."
+            f" Official Plan anchors are set by {anchor_setter(facts, provenance['low'])} at the low end "
+            f"and {anchor_setter(facts, provenance['high'])} at the high end."
             if provenance else " The workload has no official Plan anchors."
         )
         if item["status"] != "evaluated":

@@ -78,12 +78,12 @@ def test_a_row_without_observed_leaves_grades_as_missing_and_saturated_leaves_ca
 def test_route_costs_need_an_api_cost_and_a_positive_multiple(data):
     def change(routes):
         for route in routes["routes"]:
-            if route["id"] == "chatgpt-plus-common-semianalysis-assumption":
+            if route["id"] == "chatgpt-plus-gpt61sol-semianalysis":
                 route["valueMultiple"] = 0.0
     edit(data, "plan_cost_routes.json", change)
     edit(data, "scores.json", lambda scores: v3_row(scores, "gpt-6-luna")["api"].__setitem__("costUsd", None))
     bundle = viewmodel.build_bundle(data)
-    plus = next(plan for plan in bundle.models["gpt-6-1-sol"]["plans"] if plan["id"] == "chatgpt-plus-common-semianalysis-assumption")
+    plus = next(plan for plan in bundle.models["gpt-6-1-sol"]["plans"] if plan["id"] == "chatgpt-plus-gpt61sol-semianalysis")
     assert plus["usdPerRun"] is None
     assert all(plan["usdPerRun"] is None for plan in bundle.models["gpt-6-luna"]["plans"])
 

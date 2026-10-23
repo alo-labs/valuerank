@@ -415,7 +415,8 @@ def _plan_models(v3: dict, entries: dict, routes: dict, shares: dict, bands: dic
         entry = entries[slugify(item["configurationId"])]
         result.append({
             **entry,
-            "key": slugify(item["id"]),
+            # A DOM id and CSS selector token: the plan row id's "@" becomes "--".
+            "key": slugify(item["id"]).replace("@", "--"),
             "name": f"{entry['name']} · {item['plan'] or 'API-cost fallback'}",
             "planRow": {"plan": item["plan"], "routeId": item["routeId"], "multiple": item["multiple"], "representative": item["representative"]},
             "rank": {**entry["rank"], "plan": item["rank"]},

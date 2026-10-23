@@ -1067,10 +1067,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 )
             else:
                 row["rankingExclusionReasons"].append("No eligible exact-model Bug Hunt result in the selected source snapshot")
-        if not row["rankingEligible"] and row.get("deepswePassAt1Pct") is None:
-            row["rankingExclusionReasons"].append("No exact-variant AA DeepSWE result in the selected source snapshot")
         if not row["rankingEligible"]:
-            row["rankingExclusionReasons"].append("Not a required AA frontier or near-frontier family model")
+            row["rankingExclusionReasons"].append("Not plotted on or within the near gap of AA's rendered frontier (O51)")
             row["rank"] = None
             row["qualityRank"] = None
             row["overallScore"] = None

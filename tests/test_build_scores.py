@@ -349,7 +349,7 @@ def test_ranked_order_and_exclusions(built):
     for m in excluded:
         assert m["rank"] is None and m["overallScore"] is None and m["vRanks"] == {}
         assert m["rankingStatus"] == "excluded_from_primary_cohort"
-        assert "Not a required AA frontier or near-frontier family model" in m["rankingExclusionReasons"]
+        assert "Not plotted on or within the near gap of AA's rendered frontier (O51)" in m["rankingExclusionReasons"]
     assert {a["id"] for a in scores["appendixNonRanked"]} == {m["id"] for m in excluded}
     assert [m["name"] for m in scores["models"] if not m["rankingEligible"] and m not in incomplete] == sorted(m["name"] for m in excluded)
 
@@ -688,14 +688,14 @@ def test_unverified_reasoning_variant_without_numeric_scores(world):
     run_main(world)
     reasons = exclusion_reasons(world)
     assert reasons[0].endswith("owner default result available; selected reasoning equivalence is unverified")
-    assert reasons[-1] == "Not a required AA frontier or near-frontier family model"
+    assert reasons[-1] == "Not plotted on or within the near gap of AA's rendered frontier (O51)"
 
 
 def test_missing_owner_result_has_plain_exclusion_reason(world):
     run_main(world)
     assert exclusion_reasons(world)[:2] == [
         "No eligible exact-model Bug Hunt result in the selected source snapshot",
-        "No exact-variant AA DeepSWE result in the selected source snapshot",
+        "Not plotted on or within the near gap of AA's rendered frontier (O51)",
     ]
 
 

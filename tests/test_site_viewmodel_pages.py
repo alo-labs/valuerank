@@ -56,16 +56,16 @@ def test_export_writes_frontier_tier_fields_and_model_inclusion(data, tmp_path):
 def test_models_index_lists_every_roster_model_ranked_first(bundle):
     page = viewmodel.models_page(bundle)
     models = page["models"]
-    assert len(models) == 49
+    assert len(models) == 61
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rank"]["plan"] is not None]
     plan_ranks = [m["rank"]["plan"] for m in ranked]
-    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 31
-    assert models[:31] == ranked
-    assert all(m["rank"]["plan"] is None for m in models[31:])
-    # Muse Wonder Full is in the cohort but has no cost, so no value score and no rank (AGENTS.md).
-    assert [m["slug"] for m in models[31:] if m["rankingEligible"]] == ["muse-wonder-full"]
-    assert page["rankedCount"] == 32 and page["unrankedCount"] == 17
+    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 27
+    assert models[:27] == ranked
+    assert all(m["rank"]["plan"] is None for m in models[27:])
+    # O51: every cohort configuration with the full benchmark set has a cost and a rank.
+    assert [m["slug"] for m in models[27:] if m["rankingEligible"]] == []
+    assert page["rankedCount"] == 27 and page["unrankedCount"] == 34
 
 
 def test_index_models_carry_the_coverage_object(bundle):
@@ -77,7 +77,7 @@ def test_rankings_columns_use_the_script_catalogue_keys(bundle):
     columns = viewmodel.rankings_page(bundle)["columns"]
     keys = [c["key"] for c in columns]
     assert keys[:7] == ["rank", "name", "overall", "quality", "cost", "grade", "coverage"]
-    assert {"developer", "qualityRank", "speed", "ii", "deepswe", "omniscience"} <= set(keys)
+    assert {"developer", "qualityRank", "speed", "ii", "frontierCode", "omniscience"} <= set(keys)
     assert "costComposite" not in keys and "model" not in keys
     assert all(c["sortable"] is True and c["label"] for c in columns)
     assert [c["key"] for c in columns if c["default"]] == keys[:7]
@@ -125,7 +125,7 @@ def test_leaf_sources_name_the_gap_fill_publisher():
 
     filled = {"sourceType": "independent", "source": "Cognition (FrontierCode's author)", "url": "https://example.test/fc"}
     assert viewmodel._leaf_source("frontierCode", filled) == {"name": "Cognition (FrontierCode's author)", "url": "https://example.test/fc"}
-    assert viewmodel._leaf_source("deepswe", {"sourceType": "model_provider_claim", "source": "Xiaomi"})["url"] == viewmodel.LEAF_INFO["deepswe"]["url"]
+    assert viewmodel._leaf_source("bugHunt", {"sourceType": "model_provider_claim", "source": "Xiaomi"})["url"] == viewmodel.LEAF_INFO["bugHunt"]["url"]
     assert viewmodel._leaf_source("terminalBench", {"agent": "Terminus 2"})["name"] == viewmodel.TB_GAP_SOURCE
     assert viewmodel._leaf_source("terminalBench", {"agent": "mini-SWE-agent"})["name"] == viewmodel.SOURCE_NAMES["terminalBench"]
     assert viewmodel._leaf_source("gdpval", {})["name"] == viewmodel.AA_SOURCE

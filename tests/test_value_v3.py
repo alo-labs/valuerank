@@ -62,12 +62,6 @@ REGISTRY = {leaf.key: ["Registered party"] for leaf in q.LEAVES}
 def documents(**overrides) -> dict:
     base = {
         "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5, frontierCode=None)]},
-        "deepswe": {"configurations": [
-            {"valueRankModelId": "a", "scorePct": 70.0, "effort": "max", "displayLabel": "A", "agent": "x"},
-            {"valueRankModelId": "b", "scorePct": 75.0, "effort": "max", "scorePrecision": 0.1},
-            {"valueRankModelId": "c", "scorePct": 50.0, "effort": "high"},
-            {"valueRankModelId": None, "scorePct": 10.0},
-        ]},
         "bugHunt": {"models": [
             {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 52.0, "sampleN": 3},
             {"modelId": "b", "matched": False, "fixedOf105": None},
@@ -595,7 +589,6 @@ def write_world(root: Path) -> Path:
     data = root / "data"
     for relative, content in {
         "aa/aa_v432_snapshot.json": documents()["snapshot"],
-        "aa_deepswe.json": documents()["deepswe"],
         "bug_hunt.json": documents()["bugHunt"],
         "tb4.json": documents()["tb4"],
         "aa/coding_agents_capture.json": documents()["codingAgents"],
