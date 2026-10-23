@@ -68,3 +68,11 @@ def test_a_publisher_of_two_leaves_is_a_source_branch():
     assert branches["leave-out:bugHunt"]["labels"] == ["leave-one-benchmark-out", "leave-one-source-out"]
     with q.active_track("aicd"):
         assert set(v.source_leaves()) == {"Artificial Analysis"}
+
+
+def test_ai_coding_daily_noise_has_a_narrow_reading():
+    """E263: n = 6 (the wide reading) scores the noise; n = 60 is a named sensitivity, smaller by about sqrt(10)."""
+
+    wide = v.sampling_sd("aiCodingDaily", q.Observation(50.0), {})
+    narrow = v.sampling_sd("aiCodingDaily", q.Observation(50.0), {}, tasks_of={**v.SAMPLING_TASKS, "aiCodingDaily": v.AICD_NARROW_TASKS})
+    assert wide == pytest.approx(100 * (3.5 / 7 * (1 - 3.5 / 7) / 6) ** 0.5) and narrow == pytest.approx(100 * (30.5 / 61 * (1 - 30.5 / 61) / 60) ** 0.5)

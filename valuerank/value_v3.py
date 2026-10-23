@@ -2254,7 +2254,7 @@ REGISTERED_DEPENDENCY = ("every row its own dependency component: no shared vary
                          "of one configuration form one group sharing every draw (O48)")
 
 
-def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float = GDPVAL_RATING_SD) -> float:
+def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float = GDPVAL_RATING_SD, tasks_of: dict | None = None) -> float:
     """O39: the plug-in standard error of one leaf's z score under the independent-task approximation (binomial
     leaves with the Jeffreys-type proportion, I28)."""
 
@@ -2263,7 +2263,7 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
         return gdpval_sd * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
     if source.get("stderr") is not None:
         return source["stderr"]  # Vals' published standard error, in percentage points (the leaf's z unit)
-    tasks = SAMPLING_TASKS[key]
+    tasks = (tasks_of or SAMPLING_TASKS)[key]
     if key == "omniscience" and source.get("accuracy") is not None and source.get("hallucinationRate") is not None:
         correct = source["accuracy"]
         wrong = source["hallucinationRate"] * (1.0 - correct)
@@ -2281,11 +2281,11 @@ def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scena
     return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, 100.0), None, scenarios.TASK_SAMPLING, derivation)
 
 
-def quality_sd(row: dict, gdpval_sd: float = GDPVAL_RATING_SD) -> float:
+def quality_sd(row: dict, gdpval_sd: float = GDPVAL_RATING_SD, tasks_of: dict | None = None) -> float:
     """O39: a row's analytic quality SD from its leaves' task-sampling SDs (cost is not drawn)."""
 
     observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
-    return math.sqrt(sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd)) ** 2
+    return math.sqrt(sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd, tasks_of)) ** 2
                          for key, value in observations.items()))
 
 
@@ -2296,6 +2296,9 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
 
     sd = {row["id"]: (1.0 - BETA) * quality_sd(row) for row in assembled["rows"]}
     wide = {row["id"]: (1.0 - BETA) * quality_sd(row, GDPVAL_WIDE_SD) for row in assembled["rows"]}
+    # E263: AI Coding Daily's noise reads its six graded projects as n = 6 trials of the points share (wide); the narrow
+    # reading, n = 60 (one trial per point), is a named sensitivity in the ranking that has the leaf.
+    narrow = {row["id"]: (1.0 - BETA) * quality_sd(row, tasks_of={**SAMPLING_TASKS, "aiCodingDaily": AICD_NARROW_TASKS}) for row in assembled["rows"]}
     # O48: the Plan basis is ranked over plan rows; a plan row carries its configuration's quality noise.
     plan_rows = (plan_assembled or assembled)["rows"]
     configuration_of = {row["id"]: row.get("configurationId", row["id"]) for row in plan_rows}
@@ -2328,6 +2331,7 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
             # I26: a shared task set correlates two rows' errors, which narrows the true threshold; the grid shows how far.
             "byCorrelation": {f"{rho:.1f}": adjacent(sd, rho)[0] for rho in SEPARABILITY_CORRELATIONS},
             "gdpvalWide": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(wide, 0.0))),
+            **({"aicdNarrow": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(narrow, 0.0)))} if "aiCodingDaily" in q.LEAF_BY_KEY else {}),
             "bands": rank_bands(ranked, sd, configuration_of),
         }
         doubling = ((exchange or {}).get(basis) or {}).get("valuePointsPerCostDoubling")
@@ -2338,6 +2342,7 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
 
 
 SEPARABILITY_CORRELATIONS = (0.0, 0.3, 0.6)
+AICD_NARROW_TASKS = 60  # E263: one trial per point of 60, the narrow reading of AI Coding Daily's noise
 GDPVAL_WIDE_SD = 26.0  # I26: AA's displayed +/-26 Elo read as one SD, the wide reading of an interval whose level is unstated
 SEPARABILITY_BIAS = ("net direction not established: treating two rows' errors as independent overstates the threshold, because every row "
                      "is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness "

@@ -679,6 +679,7 @@ def track_rankings_markdown(facts):
                 f"(anchor version `{other.v3['anchorVersion']}`), so its values are not comparable with the {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s. "
                 f"The interactive table is at [valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}](https://valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}).\n\n"
                 + markdown_table(RANKING_HEADERS, ranking_rows(other), numeric={0, 1, 3, 4, 5, 6, 7, 8})
+                + f"\n\n{separability_text(other).strip()}"
                 + f"\n\nCohort configurations without this ranking's full set ({len(listed)}): {names([entry['name'] for entry in listed])}.\n"
             )
     return "\n".join(sections)
@@ -1324,7 +1325,18 @@ def separability_text(facts):
             "The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner-named "
             f"transfer and excludes its error: a transferred multiple can be wrong by a factor of about {plan['costTolerance']:.1f} before the row's value moves by the "
             "median threshold (a tolerance, not an estimate of the transfer's error). The S1T scenario shares in [scores.md](scores.md) "
-            "show each row's rank-1 and top-3 frequencies under that noise.")
+            "show each row's rank-1 and top-3 frequencies under that noise." + aicd_narrow_text(api, plan))
+
+
+def aicd_narrow_text(api, plan):
+    """E263: AI Coding Daily's noise is read as six trials of the points share; the n = 60 reading is a sensitivity."""
+
+    if "aicdNarrow" not in api:
+        return ""
+    return (" AI Coding Daily's noise treats its six graded projects as six trials of the share of 60 points (n = 6, the wide reading, E263); "
+            f"read as 60 trials, the median threshold would be {api['aicdNarrow']['medianSeparation']:.1f} (API) and "
+            f"{plan['aicdNarrow']['medianSeparation']:.1f} (Plan), with {api['aicdNarrow']['separableAdjacentPairs']} and "
+            f"{plan['aicdNarrow']['separableAdjacentPairs']} adjacent ranks separable.")
 
 
 def gap_fill_bars_text(result, facts):

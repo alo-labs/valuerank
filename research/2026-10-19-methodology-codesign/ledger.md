@@ -1285,3 +1285,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (adopted): "listed" replaced by "excluded (O38)" for the nine configurations without either ranking's set.
 - L4 (adopted): the bar-currency count sentence rewritten.
 - Round status (O56): not clean (one Medium). Draft r96.
+
+## Internal review I37 (Claude Sonnet 5.5, effort medium, on r96) — adopted, modified or rejected
+- M1 (adopted as E263, code changed): AI Coding Daily's S1T noise is stated as n = 6 (its graded projects) with p = points ÷ 60, the wide reading; the n = 60 narrow reading is computed beside each separability figure (`aicdNarrow`) and printed with the AI Coding Daily ranking (today median threshold 3.2 API and 3.2 Plan against 4.4 and 4.5; 1 of 14 and 1 of 19 adjacent ranks separable either way). The sample SD of the six project scores replaces both once per-project points are captured. The reviewer's leaf-variance-share diagnostic (its recommendation 2) is not adopted now: the narrow reading already shows how much rests on the assumption.
+- L1 (adopted): the O44 margin's median is over the ranking's configurations, one value each, the same on both bases (as built).
+- L2 (adopted): the O58 "today" list marks every listed row past the factor-2 limit and every rendered-frontier point.
+- L3 (adopted): Output 1 names the O46 quota ceilings and measured multiples with unidentified M_W.
+- L4 (adopted): an anchor object is identified by anchor version, basis and workload hash; the max-effort subset workload and the AI Coding Daily main workload share a hash but are different anchor objects.
+- Round status (O56): not clean (one Medium). Draft r97.
