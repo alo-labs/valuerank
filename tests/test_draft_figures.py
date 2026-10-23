@@ -64,10 +64,10 @@ def test_lint_flags_unmarked_today_figures_names_and_undated_counts():
     names = f.known_names(SCORES)
     configurations = f.configuration_names(SCORES)
     source = "\n".join([
-        "Today the margin is 4.0 points and GPT-6 Luna (max) leads.",
+        "Today the margin is 4.0 and GPT-6 Luna (max) leads.",
         "Today the margin is {{max:x}} under O39 and version 3, with 1.96 × √2 for Claude Opus 5.5 on 2026-10-23.",
-        "The basket prices 7 of 9 rows.",
-        "On 2026-10-19 the basket priced 7 of 9 rows.",
+        "The basket prices 7 of 9.",
+        "On 2026-10-19 the basket priced 7 of 9.",
         "## Revision history",
         "Today the margin was 4.0.",
     ])
@@ -76,6 +76,17 @@ def test_lint_flags_unmarked_today_figures_names_and_undated_counts():
     assert "unmarked configuration name(s) GPT-6 Luna (max)" in problems[0] and "unmarked figure(s) 4.0" in problems[1]
     assert "unmarked count(s) 7 of 9" in problems[2]
     assert f.lint("A rule with no history section.", names, configurations) == []
+    # I43: counts of cohort things and dollar amounts are figures too, and a same-day or bold-label date does not date them.
+    widened = f.lint("\n".join([
+        "The max-effort ranking has 14 leaves.",
+        "- **Cohort (owner decision O51, 2026-10-23)**: 29 configurations at $10.63.",
+        "On 2026-10-19 it had 14 leaves; at O53 it had 13 leaves.",
+        "A fixture with 3 rows; 4 against 5 headline qualifiers.",
+    ]), names, configurations, "2026-10-23")
+    assert [problem.split(" in an")[0] for problem in widened] == [
+        "line 1: unmarked count(s) 14 leaves", "line 2: unmarked count(s) 29 configurations, $10.63", "line 4: unmarked count(s) 4 against 5"]
+    assert f.dated("**Rule (O1, 2026-10-01)**: text", "2026-10-23") is False and f.dated("Seen on 2026-10-23.", "2026-10-23") is False
+    assert f.dated("Seen on 2026-10-01.", None) is True
 
 
 def test_plan_band_figures_name_straddlers_and_wide_spans():

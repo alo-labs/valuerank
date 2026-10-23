@@ -269,7 +269,7 @@ def render(text: str, scores: dict, manifest: dict) -> str:
 
 # A "today" sentence may still hold numbers that are not current-release figures: names, versions, decision tags, dates
 # and the rule constants below. Everything else must be a placeholder.
-RULE_CONSTANTS = ("40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
+RULE_CONSTANTS = ("more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 60 points", "> 5 points", "40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
                   "factor-2", "factor of 2", "two-thirds", "30 days", "7 days", "45 days", "0.5 W_g", "1.5 W_g")
 _NOT_A_FIGURE = re.compile(
     r"\b[OEIL]\d+\b|\br\d+\b|\b\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?\b|\b\d{2}:\d{2}(:\d{2})?Z\b"
@@ -277,8 +277,11 @@ _NOT_A_FIGURE = re.compile(
 )
 _NUMBER = re.compile(r"(?<![\w.])\d[\d,]*(\.\d+)?%?")
 HISTORY_HEADING = "## Revision history"
-_COUNT = re.compile(r"\b\d+ of (the )?\d+\b")
-_DATED = re.compile(r"\b\d{4}-\d{2}-\d{2}\b|\bat O\d+\b")
+_COUNT = re.compile(r"\b\d+ (?:of (?:the )?|against )\d+\b")
+# A number counting cohort things, or a dollar amount, states the current release (I43 M1, L1) unless dated or a fixture.
+_COUNTED = re.compile(r"(?<![\w.])\d[\d,]*(?:\.\d+)? (?:(?:cohort|ranked|plotted|scored|main-workload|full-basket|near|frontier|plan) )*"
+                      r"(?:configurations?|rows?|references|families|points|leaves|components|vertices|plan rows)\b|\$\d[\d,]*(?:\.\d+)?")
+_FIXTURE = re.compile(r"[Ff]ixture|test vector|e\.g\.|for example")
 _SENTENCE = re.compile(r"(?<=[.;])\s+(?=[A-Z*(])")
 
 
@@ -301,7 +304,17 @@ def configuration_names(scores: dict) -> list[str]:
     return sorted((name for name in display_names(scores).values() if name.endswith(")")), key=len, reverse=True)
 
 
-def lint(source: str, names: list[str], configurations: list[str] = ()) -> list[str]:
+def dated(sentence: str, release_day: str | None) -> bool:
+    """A sentence is history when it carries a date before the release day (outside code spans and bold rule labels, which
+    date a decision, not a figure) or says "at O<n>"; a date on the release day itself is today."""
+
+    text = re.sub(r"`[^`]*`|\*\*[^*]*\*\*", "", sentence)
+    if re.search(r"\bat O\d+\b", text):
+        return True
+    return any(release_day is None or found < release_day for found in re.findall(r"\b\d{4}-\d{2}-\d{2}\b", text))
+
+
+def lint(source: str, names: list[str], configurations: list[str] = (), release_day: str | None = None) -> list[str]:
     """Numbers and configuration names left unmarked in a sentence that speaks of today."""
 
     problems = []
@@ -310,11 +323,13 @@ def lint(source: str, names: list[str], configurations: list[str] = ()) -> list[
             break  # the revision history records past drafts' figures as they were
         for sentence in _SENTENCE.split(line):
             # A count "N of M" states the current release unless the sentence dates it, whether or not it says today.
-            if not _DATED.search(re.sub(r"`[^`]*`", "", sentence)):
+            if not dated(sentence, release_day):
                 undated = PLACEHOLDER.sub("", sentence)
                 for constant in RULE_CONSTANTS:
                     undated = undated.replace(constant, "")
                 counts = [match.group(0) for match in _COUNT.finditer(undated)]
+                if not _FIXTURE.search(sentence):
+                    counts += [match.group(0) for match in _COUNTED.finditer(_NOT_A_FIGURE.sub("", undated))]
                 if counts:
                     problems.append(f"line {line_number}: unmarked count(s) {', '.join(counts)} in an undated sentence: {sentence[:160]}")
             if not re.search(r"\b[Tt]oday\b", sentence):
@@ -334,6 +349,12 @@ def lint(source: str, names: list[str], configurations: list[str] = ()) -> list[
             if found:
                 problems.append(f"line {line_number}: unmarked figure(s) {', '.join(found)} in a 'today' sentence: {sentence[:160]}")
     return problems
+
+
+def release_day(scores: dict) -> str:
+    """The release day the draft's figures describe (the release cutoff's date)."""
+
+    return scores["observedAt"][:10]
 
 
 def latest_source(spec_dir: Path = SPEC_DIR) -> Path:
@@ -358,7 +379,7 @@ def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
         rendered = render(text, scores, manifest)
     except FigureError as error:
         return [f"{source.name}: {error}"]
-    problems = [f"{source.name}: {problem}" for problem in lint(text, known_names(scores, data), configuration_names(scores))]
+    problems = [f"{source.name}: {problem}" for problem in lint(text, known_names(scores, data), configuration_names(scores), release_day(scores))]
     target = published(source)
     if not target.exists() or target.read_text() != rendered:
         problems.append(f"{target.name} is not the rendering of {source.name} against the current data (run `python3 -m valuerank.draft_figures render`)")

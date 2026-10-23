@@ -1359,3 +1359,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - The sweep found figures that O61 had already made stale in r100 (e.g. the max-effort separability median 3.01 → 2.84 and 1 → 0 separable API pairs, the band straddler GPT-6 Luna (max) → GPT-6 Astra (max), the bar ladder 49.8/60.7/62.1 → 54.2/64.3/65.0, source shares 72/28 → 66/34): all are placeholders now.
 - One editorial pass for the deferred presentation Lows: Output 1 is split into labelled sub-bullets (I38 L4) and the revision history moved below the body (I41 L2); the lint does not read the revision history, which records past drafts' figures as they were.
 - Guard: this removes the defect class, it does not suppress reviewers. A stale current figure a reviewer still finds is a bug in the check, to be fixed in `valuerank/draft_figures.py` with a test.
+
+## Internal review I43 (Claude Sonnet 5.5, effort high, on r101) — adopted, modified or rejected
+- M1 (adopted; defect in the source and in the check): "the max-effort ranking has 14 leaves" was hard-coded and stale (13 since O61). Now a placeholder; the check is widened (E265 amended): a number counting cohort things (configurations, rows, leaves, references, families, points, components), a dollar amount, and an "N against M" count are figures in any sentence not dated before the release day, and a date in a bold rule label or on the release day no longer dates a sentence. The widened check found and the source now renders the cohort counts, the qualifier counts and setters, and the leaf counts.
+- M2 (adopted): the dated re-freeze history quoted the pre-O61 max-effort ladder as if current. r102 states that O61 re-froze the max-effort bars on the same anchor version (cost anchors unchanged) and points to Output 3 and `barCurrency` for the current ladders.
+- M3 (owner question, answered): the O61 option offered "above every single AA leaf" at 15 while FrontierCode is also 15. Asked (Questions UI), the owner chose "Keep the 15/15 tie": LiveBench 2.0 Overall weighs no less than any single AA leaf and ties FrontierCode; AGENTS.md, the code comment, methodology.md and the draft say so.
+- L1 (adopted): the E265 governance text now says what the check enforces, not more.
+- L2 (adopted): the exchange-rate and within-cohort-influence definitions moved from the noise-band bullet into the cost-weight disclosure bullet (E60).
+- L3 (adopted): E264's formula is written in the draft.
+- L4 (adopted): O55 is cited "as amended for the max-effort ranking by O61".
+- L5 (adopted): the untested remark that Vibe Code Bench separates little is replaced by a pointer to the published leaf spreads.
+- Round status (O56): not clean (three Mediums). Draft r102. The Sonnet high rung's clean count restarts at zero (I42 was clean on r100; I43 is not).

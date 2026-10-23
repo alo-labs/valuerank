@@ -55,7 +55,7 @@ COMMON_LEAVES = (
 )
 # Owner decisions O53-O55 (2026-10-23): ValueRank publishes two rankings, each over the configurations with its complete
 # leaf set (O36, O52). The max-effort ranking adds LiveBench 2.0 Overall (O61, 2026-10-23: the mean of its seven
-# categories, all needed in the SDLC, weighted above every single AA leaf) and two Vals boards, run at each vendor's top effort;
+# categories, all needed in the SDLC, weighted no lower than any single AA leaf, tying FrontierCode) and two Vals boards, run at each vendor's top effort;
 # the AI Coding Daily ranking adds AI Coding Daily (its bug-finding column excluded: it overlaps Bug Hunt). O49 dropped
 # DeepSWE; software engineering stays 60% of quality in both.
 TRACKS = {
