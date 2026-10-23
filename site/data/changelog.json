@@ -3,104 +3,70 @@
     {
       "version": "v3.0.0",
       "date": "October 19, 2026",
-      "models": 27,
-      "dimensions": 11,
-      "summary": "27 models ranked on 11 dimensions; GPT-6.1 Sol (xhigh) is first on the API basis.",
+      "models": 9,
+      "dimensions": 15,
+      "summary": "9 models ranked on 15 dimensions; GPT-6.1 Sol is first on the API basis.",
       "rankChanges": [
+        {
+          "slug": "gpt-6-1-sol",
+          "name": "GPT-6.1 Sol",
+          "from": 2,
+          "to": 1
+        },
         {
           "slug": "mimo-v2-6-pro",
           "name": "MiMo-V2.6-Pro",
           "from": 7,
-          "to": 5
-        },
-        {
-          "slug": "gemini-4-argon",
-          "name": "Gemini 4 Argon",
-          "from": 1,
-          "to": 10
-        },
-        {
-          "slug": "claude-sonnet-5-5",
-          "name": "Claude Sonnet 5.5",
-          "from": 3,
-          "to": 12
-        },
-        {
-          "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
-          "from": 5,
-          "to": 13
-        },
-        {
-          "slug": "gpt-6-astra",
-          "name": "GPT-6 Astra",
-          "from": 4,
-          "to": 16
-        },
-        {
-          "slug": "claude-haiku-5-5",
-          "name": "Claude Haiku 5.5",
-          "from": 13,
-          "to": 17
+          "to": 2
         },
         {
           "slug": "gpt-6-luna",
           "name": "GPT-6 Luna",
           "from": 11,
-          "to": 20
+          "to": 4
+        },
+        {
+          "slug": "gemini-4-argon",
+          "name": "Gemini 4 Argon",
+          "from": 1,
+          "to": 5
+        },
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "from": 5,
+          "to": 6
+        },
+        {
+          "slug": "claude-sonnet-5-5",
+          "name": "Claude Sonnet 5.5",
+          "from": 3,
+          "to": 7
+        },
+        {
+          "slug": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "from": 4,
+          "to": 8
         }
       ],
       "ranks": {
-        "claude-haiku-5-5": 17,
-        "claude-haiku-5-5-high": 19,
-        "claude-haiku-5-5-low": 25,
-        "claude-haiku-5-5-max": 18,
-        "claude-haiku-5-5-medium": 21,
-        "claude-opus-5-5": 13,
-        "claude-opus-5-5-high": 8,
-        "claude-opus-5-5-medium": 7,
-        "claude-opus-5-5-xhigh": 9,
-        "claude-sonnet-5-5": 12,
-        "claude-sonnet-5-5-xhigh": 14,
-        "deepseek-v4-1-flash-1017": 6,
-        "gemini-4-argon": 10,
-        "gpt-5-6-luna-low": 27,
-        "gpt-6-astra": 16,
-        "gpt-6-astra-high": 15,
-        "gpt-6-astra-xhigh": 11,
-        "gpt-6-luna": 20,
-        "gpt-6-luna-high": 23,
-        "gpt-6-luna-low": 26,
-        "gpt-6-luna-medium": 24,
-        "gpt-6-luna-xhigh": 22,
-        "gpt-6-1-sol": 2,
-        "gpt-6-1-sol-high": 3,
-        "gpt-6-1-sol-medium": 4,
-        "gpt-6-1-sol-xhigh": 1,
-        "mimo-v2-6-pro": 5
+        "claude-haiku-5-5-max": 9,
+        "claude-opus-5-5": 6,
+        "claude-sonnet-5-5": 7,
+        "deepseek-v4-1-flash-1017": 3,
+        "gemini-4-argon": 5,
+        "gpt-6-astra": 8,
+        "gpt-6-luna": 4,
+        "gpt-6-1-sol": 1,
+        "mimo-v2-6-pro": 2
       },
       "added": [
-        "claude-haiku-5-5-high",
-        "claude-haiku-5-5-low",
         "claude-haiku-5-5-max",
-        "claude-haiku-5-5-medium",
-        "claude-opus-5-5-high",
-        "claude-opus-5-5-medium",
-        "claude-opus-5-5-xhigh",
-        "claude-sonnet-5-5-xhigh",
-        "deepseek-v4-1-flash-1017",
-        "gpt-5-6-luna-low",
-        "gpt-6-1-sol-high",
-        "gpt-6-1-sol-medium",
-        "gpt-6-1-sol-xhigh",
-        "gpt-6-astra-high",
-        "gpt-6-astra-xhigh",
-        "gpt-6-luna-high",
-        "gpt-6-luna-low",
-        "gpt-6-luna-medium",
-        "gpt-6-luna-xhigh"
+        "deepseek-v4-1-flash-1017"
       ],
       "removed": [
+        "claude-haiku-5-5",
         "claude-opus-5",
         "deepseek-v4-flash",
         "deepseek-v4-pro",

@@ -35,6 +35,12 @@ LEAF_FAMILIES = {
     "hle": "humanitys-last-exam",
     "scicode": "scicode",
     "critpt": "critpt",
+    # O53-O55: leaves run outside AA, whose task families no AA cost component prices.
+    "vibeCode": "vals-vibe-code-bench",
+    "codeMigration": "vals-code-migration",
+    "livebenchAgentic": "livebench-long-agentic",
+    "livebenchCoding": "livebench-coding",
+    "aiCodingDaily": "ai-coding-daily",
 }
 # Task families inside each target component (E42); the Coding Agent Index pools three families.
 COMPONENT_FAMILIES = {
@@ -60,6 +66,11 @@ MATCHED_FAMILIES = {
 UNPRICED_REASONS = {
     "bugHunt": "the owner's runs publish no cost",
     "frontierCode": "the Coding Agent Index v2.0 publishes one pooled cost for FrontierCode, SWE-Atlas-QnA-AA and Terminal-Bench (O50)",
+    "vibeCode": "run by Vals AI, outside every AA cost component",
+    "codeMigration": "run by Vals AI, outside every AA cost component",
+    "livebenchAgentic": "run by LiveBench, outside every AA cost component",
+    "livebenchCoding": "run by LiveBench, outside every AA cost component",
+    "aiCodingDaily": "run by AI Coding Daily, outside every AA cost component",
 }
 # Leaves whose score is a solved fraction, so a cost per solved task is defined (not GDPval's Elo or the Omniscience index).
 SOLVED_FRACTION_LEAVES = {"terminalBench", "lcr", "hle", "scicode", "critpt"}
@@ -183,7 +194,7 @@ def matched_cost(rows: list[dict], main_workload: str) -> dict:
     result = {
         "definition": definition,
         "pricedQualityWeight": priced_weight,
-        "unpricedLeaves": {leaf: UNPRICED_REASONS[leaf] for leaf in UNPRICED_REASONS},
+        "unpricedLeaves": {leaf: UNPRICED_REASONS[leaf] for leaf in UNPRICED_REASONS if leaf in q.LEAF_BY_KEY},
     }
     if priced_weight < MATCHED_MIN_PRICED_WEIGHT:
         return {**result, "status": "unidentified (priced quality weight below 40%)", "rows": {}, "reversals": [], "warnings": []}

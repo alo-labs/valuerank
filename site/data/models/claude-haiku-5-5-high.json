@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
   "summary": {
     "rank": {
-      "api": 19,
-      "plan": 48
+      "api": 7,
+      "plan": 14
     },
     "overall": {
-      "api": 43.41596398783665,
-      "plan": 48.10328415577511
+      "api": 48.753646106194154,
+      "plan": 53.519710877264956
     },
-    "quality": 36.38900060104438,
-    "qualityRank": 20,
+    "quality": 42.12631859238637,
+    "qualityRank": 10,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -35,7 +35,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 15.75,
       "value": 0.436422666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -53,7 +53,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 12.75,
       "value": 21.7171717171717,
       "decimals": 1,
       "unit": "% resolved",
@@ -71,7 +71,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 9.0,
       "value": 16.0,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -82,6 +82,24 @@
       },
       "observedAt": "2026-10-19",
       "evaluatedVariant": "Haiku 5.5 (high effort) - mean of 2 / Claude Code",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aiCodingDaily",
+      "label": "AI Coding Daily (excl. bug finding)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 51.55,
+      "decimals": 1,
+      "unit": "points of 60",
+      "normalized": 85.91666666666667,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://aicodingdaily.com/leaderboard"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "Haiku 5.5 (High) / varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
       "note": null,
       "grade": "measured"
     },
@@ -236,8 +254,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 64.49685414821344,
-      "plan": 83.2461348199673
+      "api": 68.63562864761751,
+      "plan": 87.69988773190073
     },
     "components": [
       {
@@ -334,8 +352,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.2028627836080885,
       "selected": true,
-      "planRank": 48,
-      "planValue": 48.10328415577511
+      "planRank": 14,
+      "planValue": 53.519710877264956
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-high-common-opus55-assumption",
@@ -351,8 +369,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.2084021482946685,
       "selected": false,
-      "planRank": 49,
-      "planValue": 48.09138467234488
+      "planRank": 15,
+      "planValue": 53.50717475936405
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-high-common-opus55-assumption",
@@ -368,8 +386,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.237530444620374,
       "selected": false,
-      "planRank": 50,
-      "planValue": 48.029696280545735
+      "planRank": 16,
+      "planValue": 53.442185975838576
     }
   ],
   "scenarios": {
@@ -425,9 +443,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.9457
+        "top1": 0.0039,
+        "top3": 0.0692,
+        "frontier": 0.8667
       }
     ],
     "plan": [
@@ -499,8 +517,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 19,
-        "plan": 48
+        "api": 7,
+        "plan": 14
       }
     }
   ],
@@ -511,5 +529,37 @@
     "configuration": "Claude Haiku 5.5 (high)",
     "intelligenceGap": 0,
     "footnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 7,
+        "plan": 14
+      },
+      "overall": {
+        "api": 48.753646106194154,
+        "plan": 53.519710877264956
+      }
+    }
+  ]
 }

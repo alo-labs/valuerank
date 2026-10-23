@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-astra",
   "summary": {
     "rank": {
-      "api": 16,
-      "plan": 43
+      "api": 8,
+      "plan": 14
     },
     "overall": {
-      "api": 45.43081282030075,
-      "plan": 48.67367574410948
+      "api": 51.66267856896313,
+      "plan": 56.65954954995409
     },
-    "quality": 55.78502016503054,
-    "qualityRank": 5,
+    "quality": 62.11635481005217,
+    "qualityRank": 3,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 13.5,
       "value": 0.469827666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 10.5,
       "value": 59.09090909090911,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 7.5,
       "value": 45.0,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -138,6 +138,60 @@
       "grade": "measured"
     },
     {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": 80.579,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": 80.579,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "openai/gpt-6-astra / Pi agent harness, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 89.594,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": 89.594,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/vibe-code"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "openai/gpt-6-astra / OpenHands, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchAgentic",
+      "label": "LiveBench 2.0 Long Agentic",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 82.4,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 82.4,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gpt-6-astra / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -152,6 +206,24 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchCoding",
+      "label": "LiveBench 2.0 Coding",
+      "category": "Software engineering",
+      "weightPct": 1.5,
+      "value": 93.7,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 93.7,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gpt-6-astra / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -211,8 +283,8 @@
     }
   ],
   "cost": {
-    "apiUsd": 3844.5595179524043,
-    "planUsd": 265.4166046221888,
+    "apiUsd": 5885.045403144297,
+    "planUsd": 406.2854955570795,
     "fallback": null,
     "route": {
       "id": "chatgpt-pro200-gpt6astra-semianalysis",
@@ -227,14 +299,14 @@
     },
     "subset": false,
     "partialComponents": [],
-    "workload": "1453a9a0576b02ea",
+    "workload": "9a0d376cc6080f3c",
     "planFlags": [
       "workload-unmatched",
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 14.368190786111386,
-      "plan": 27.33964248134631
+      "api": 20.301649845696005,
+      "plan": 40.28913376965987
     },
     "components": [
       {
@@ -243,7 +315,7 @@
         "costUsd": 2040.4858851918927,
         "completeness": "confirmed-complete",
         "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
-        "admitted": false
+        "admitted": true
       },
       {
         "key": "itbench-aa",
@@ -345,10 +417,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 265.4166046221888,
+      "usdPerRun": 406.2854955570795,
       "selected": true,
-      "planRank": 43,
-      "planValue": 48.67367574410948
+      "planRank": 14,
+      "planValue": 56.65954954995409
     },
     {
       "id": "chatgpt-pro500-gpt6astra-semianalysis",
@@ -362,10 +434,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 276.38817526616856,
+      "usdPerRun": 423.0801871419336,
       "selected": false,
-      "planRank": 44,
-      "planValue": 48.568770388159116
+      "planRank": 15,
+      "planValue": 56.517046199041005
     },
     {
       "id": "chatgpt-pro100-gpt6astra-semianalysis",
@@ -379,10 +451,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 290.81388184208805,
+      "usdPerRun": 445.1622846553931,
       "selected": false,
-      "planRank": 46,
-      "planValue": 48.43700380636921
+      "planRank": 16,
+      "planValue": 56.33805458061201
     },
     {
       "id": "chatgpt-plus-gpt6astra-semianalysis",
@@ -396,10 +468,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 474.6369775249882,
+      "usdPerRun": 726.5488152029997,
       "selected": false,
-      "planRank": 54,
-      "planValue": 47.168299822656266
+      "planRank": 20,
+      "planValue": 54.61464811239097
     }
   ],
   "scenarios": {
@@ -412,7 +484,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -421,7 +493,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
@@ -429,8 +501,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0012
+        "top3": 0.0033,
+        "frontier": 0.997
       },
       {
         "stratum": "S1",
@@ -439,7 +511,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
@@ -448,16 +520,16 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1T",
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0004,
-        "top3": 0.0052,
-        "frontier": 0.1212
+        "top1": 0.0,
+        "top3": 0.1304,
+        "frontier": 0.5844
       }
     ],
     "plan": [
@@ -511,16 +583,16 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0034,
-        "top3": 0.0039,
-        "frontier": 0.1057
+        "top1": 0.0001,
+        "top3": 0.0001,
+        "frontier": 0.0596
       }
     ]
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
-      "possible": "disproved"
+      "definite": "certified",
+      "possible": "certified"
     },
     "plan": null
   },
@@ -617,8 +689,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 16,
-        "plan": 43
+        "api": 8,
+        "plan": 14
       }
     }
   ],
@@ -629,5 +701,37 @@
     "configuration": "GPT-6 Astra (max)",
     "intelligenceGap": 3,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 8,
+        "plan": 14
+      },
+      "overall": {
+        "api": 51.66267856896313,
+        "plan": 56.65954954995409
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }

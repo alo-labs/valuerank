@@ -89,6 +89,12 @@ LEAF_INFO = {
     "hle": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["HLE"]},
     "scicode": {"unit": "score (0-1)", "url": BENCHMARK_URLS["SciCode"]},
     "critpt": {"unit": "score (0-1)", "url": BENCHMARK_URLS["CritPt"]},
+    # O53-O55: the leaves the two rankings add.
+    "vibeCode": {"unit": "% of test workflows passed", "url": "https://www.vals.ai/benchmarks/vibe-code"},
+    "codeMigration": {"unit": "% of hidden tests passed", "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"},
+    "livebenchAgentic": {"unit": "mean task score (0-100)", "url": "https://livebench.ai/"},
+    "livebenchCoding": {"unit": "mean task score (0-100)", "url": "https://livebench.ai/"},
+    "aiCodingDaily": {"unit": "points of 60", "url": "https://aicodingdaily.com/leaderboard"},
 }
 # Public source names (the engine's provenance strings are internal and stay in scores.json).
 AA_SOURCE = "Artificial Analysis model page (Intelligence Index v4.3.2)"
@@ -103,6 +109,11 @@ LEAF_NOTES = {
     "omniscience": "Scored as AA's Omniscience Index I (correct minus incorrect over all questions), z = (I + 100) / 2 (owner decision O28).",
     "bugHunt": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness.",
     "terminalBench": "AA's own run on one harness (mini-SWE-agent) since O37; tbench.ai rows fill a gap and are compared with it as a diagnostic.",
+    "vibeCode": "Vals AI's run on one harness (OpenHands) at each vendor's top effort; Vals' published standard error is the sampling noise.",
+    "codeMigration": "Vals AI's run on one harness (Pi) at each vendor's top effort; Vals' published standard error is the sampling noise.",
+    "livebenchAgentic": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14).",
+    "livebenchCoding": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14).",
+    "aiCodingDaily": "Laravel quality, React-TS quality and edge-case testing (max 60); the bug-finding column is left out because it overlaps Bug Hunt. The harness is chosen per model by AI Coding Daily.",
 }
 # v3 Plan evidence grades shown with the site's grade vocabulary (controlled measurements are measured).
 ROUTE_GRADES = {"controlled": "measured", "reports": "estimate", "assumption": "assumption", "diagnostic": "assumption"}
@@ -331,10 +342,43 @@ def _entry(source: dict, row: dict | None, quality_ranks: dict, frontier: dict, 
     }
 
 
-def build_bundle(data: Path = DATA) -> Bundle:
+# O53/O54: the site path of each ranking; the max-effort ranking leads at /rankings/.
+TRACK_PATHS = {"max": "/rankings/", "aicd": "/rankings/ai-coding-daily/"}
+TRACK_LEADS = {
+    "max": "One configuration per model family at its top effort, scored on the AA leaves plus LiveBench 2.0 and two Vals AI boards.",
+    "aicd": "The configurations AI Coding Daily has tested, mostly at high and medium effort, scored on the AA leaves plus AI Coding Daily.",
+}
+
+
+def build_bundle(data: Path = DATA, track: str | None = None) -> Bundle:
+    """The site bundle. With no track, the leading ranking's bundle, carrying every other ranking in ``extras["tracks"]``;
+    a configuration ranked only in another ranking takes its model page from that ranking (O53)."""
+
+    if track is not None:
+        with q.active_track(track):
+            return _track_bundle(data, track)
+    primary = build_bundle(data, q.DEFAULT_TRACK)
+    others = {other: build_bundle(data, other) for other in q.TRACKS if other != q.DEFAULT_TRACK}
+    primary.extras["tracks"] = others
+    for slug, doc in primary.models.items():
+        home = q.DEFAULT_TRACK
+        if not doc["summary"]["rankingEligible"]:
+            home = next((other for other, bundle in others.items() if bundle.models[slug]["summary"]["rankingEligible"]), q.DEFAULT_TRACK)
+        if home != q.DEFAULT_TRACK:
+            primary.models[slug] = others[home].models[slug]
+        bundles = {q.DEFAULT_TRACK: primary, **others}
+        primary.models[slug]["rankings"] = [
+            {"track": key, "label": q.TRACK_LABELS[key], "href": TRACK_PATHS[key], "shown": key == home,
+             "rankingEligible": entry["rankingEligible"], "rank": entry["rank"], "overall": entry["overall"]}
+            for key, bundle in bundles.items() for entry in bundle.rankings["models"] if entry["slug"] == slug
+        ]
+    return primary
+
+
+def _track_bundle(data: Path, track: str) -> Bundle:
     inputs = _load(data)
     scores = inputs["scores"]
-    v3 = scores["v3"]
+    v3 = scores["v3"] if track == q.DEFAULT_TRACK else scores["v3Tracks"][track]
     roster = scores["models"]
     slugs = [slugify(source["id"]) for source in roster]
     if len(set(slugs)) != len(slugs):
@@ -363,6 +407,7 @@ def build_bundle(data: Path = DATA) -> Bundle:
     ordered = sorted(entries.values(), key=lambda entry: (entry["rank"]["plan"] is None, entry["rank"]["plan"] or 0, entry["name"]))
     plan_models = _plan_models(v3, entries, routes, shares, bands, transferred)
     rankings = {
+        "track": {"key": track, "label": q.TRACK_LABELS[track], "href": TRACK_PATHS[track]},
         "version": VERSION,
         "publishDate": DATE,
         "observedAt": scores["observedAt"],
@@ -866,7 +911,13 @@ def rankings_page(bundle: Bundle) -> dict:
     rankings = bundle.rankings
     columns = [{"key": key, "label": label} for key, label in COLUMN_ORDER]
     columns += [{"key": d["key"], "label": d["label"]} for d in rankings["dimensions"] if d["key"] != COST_KEY]
+    track = rankings["track"]["key"]
     return {
+        # O53/O54: each ranking has its own page; the heading names it and links the others.
+        "heading": "Rankings" if track == q.DEFAULT_TRACK else q.TRACK_LABELS[track],
+        "trackLead": TRACK_LEADS[track],
+        "action": TRACK_PATHS[track],
+        "trackLinks": [{"label": q.TRACK_LABELS[key], "href": TRACK_PATHS[key], "current": key == track} for key in q.TRACKS],
         "rankingsJson": rankings,
         "nearFrontierGap": rankings["modelInclusion"]["nearFrontierGap"],
         "providers": sorted({m["developer"] for m in rankings["models"]}),

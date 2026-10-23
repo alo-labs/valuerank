@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5-5-high",
   "summary": {
     "rank": {
-      "api": 8,
-      "plan": 4
+      "api": 6,
+      "plan": 1
     },
     "overall": {
-      "api": 47.331625687969336,
-      "plan": 53.80959570872457
+      "api": 48.93525739115281,
+      "plan": 58.10936818366169
     },
-    "quality": 55.2820304562172,
-    "qualityRank": 7,
+    "quality": 60.13421447353322,
+    "qualityRank": 1,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 15.75,
       "value": 0.539616333333333,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 12.75,
       "value": 56.565656565656596,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 9.0,
       "value": 31.7,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -80,6 +80,24 @@
       },
       "observedAt": "2026-10-19",
       "evaluatedVariant": "Opus 5.5 (high effort) - mean of 3 / Claude Code",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aiCodingDaily",
+      "label": "AI Coding Daily (excl. bug finding)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 57.68,
+      "decimals": 1,
+      "unit": "points of 60",
+      "normalized": 96.13333333333334,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://aicodingdaily.com/leaderboard"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "Opus 5.5 (High) / varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
       "note": null,
       "grade": "measured"
     },
@@ -234,8 +252,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 23.480411383225746,
-      "plan": 49.392291466246675
+      "api": 15.338386144011588,
+      "plan": 52.03482931404711
     },
     "components": [
       {
@@ -332,8 +350,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 31.58180348427274,
       "selected": true,
-      "planRank": 4,
-      "planValue": 53.80959570872457
+      "planRank": 1,
+      "planValue": 58.10936818366169
     },
     {
       "id": "claude-max20x-claude-opus-5-5-high-common-opus55-assumption",
@@ -349,8 +367,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 31.727242456484127,
       "selected": false,
-      "planRank": 5,
-      "planValue": 53.797696225294345
+      "planRank": 2,
+      "planValue": 58.09683206576077
     },
     {
       "id": "claude-max5x-claude-opus-5-5-high-common-opus55-assumption",
@@ -366,8 +384,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 32.49202140128671,
       "selected": false,
-      "planRank": 6,
-      "planValue": 53.736007833495194
+      "planRank": 3,
+      "planValue": 58.03184328223531
     }
   ],
   "scenarios": {
@@ -380,7 +398,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -389,7 +407,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
@@ -398,7 +416,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.4471
+        "frontier": 0.9587
       },
       {
         "stratum": "S1",
@@ -407,7 +425,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
@@ -416,16 +434,16 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1T",
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0107,
-        "top3": 0.0914,
-        "frontier": 0.2659
+        "top1": 0.004,
+        "top3": 0.0578,
+        "frontier": 0.4793
       }
     ],
     "plan": [
@@ -434,8 +452,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
+        "top1": 1.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -487,8 +505,8 @@
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
-      "possible": "disproved"
+      "definite": "certified",
+      "possible": "certified"
     },
     "plan": null
   },
@@ -497,8 +515,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 8,
-        "plan": 4
+        "api": 6,
+        "plan": 1
       }
     }
   ],
@@ -509,5 +527,37 @@
     "configuration": "Claude Opus 5.5 (high with fallback)",
     "intelligenceGap": 0,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 6,
+        "plan": 1
+      },
+      "overall": {
+        "api": 48.93525739115281,
+        "plan": 58.10936818366169
+      }
+    }
+  ]
 }

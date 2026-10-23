@@ -46,10 +46,10 @@
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes."
   },
   "identificationYield": {
-    "rows": 91,
+    "rows": 27,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 91,
+    "unidentified": 27,
     "exploratory": true
   },
   "routes": [
@@ -2385,96 +2385,16 @@
   ],
   "candidates": [
     {
-      "slug": "claude-haiku-5-5",
-      "name": "Claude Haiku 5.5",
-      "rank": {
-        "api": 17,
-        "plan": 31
-      },
-      "apiUsd": 107.09527518955011,
-      "planUsd": 1.8182559454932108,
-      "fallback": null,
-      "routeId": "claude-pro-claude-haiku-5-5-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-haiku-5-5-high",
-      "name": "Claude Haiku 5.5 (high)",
-      "rank": {
-        "api": 19,
-        "plan": 48
-      },
-      "apiUsd": 70.84861795451641,
-      "planUsd": 1.2028627836080885,
-      "fallback": null,
-      "routeId": "claude-pro-claude-haiku-5-5-high-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-haiku-5-5-low",
-      "name": "Claude Haiku 5.5 (low)",
-      "rank": {
-        "api": 25,
-        "plan": 62
-      },
-      "apiUsd": 28.119386018439528,
-      "planUsd": 0.47740893070355733,
-      "fallback": null,
-      "routeId": "claude-pro-claude-haiku-5-5-low-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
       "slug": "claude-haiku-5-5-max",
       "name": "Claude Haiku 5.5 (max)",
       "rank": {
-        "api": 18,
-        "plan": 40
+        "api": 9,
+        "plan": 11
       },
-      "apiUsd": 191.4939970478554,
-      "planUsd": 3.251171426958496,
+      "apiUsd": 966.9203778594009,
+      "planUsd": 16.416305226814956,
       "fallback": null,
       "routeId": "claude-pro-claude-haiku-5-5-max-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-haiku-5-5-medium",
-      "name": "Claude Haiku 5.5 (medium)",
-      "rank": {
-        "api": 21,
-        "plan": 56
-      },
-      "apiUsd": 45.909504751851436,
-      "planUsd": 0.7794482979940821,
-      "fallback": null,
-      "routeId": "claude-pro-claude-haiku-5-5-medium-common-opus55-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -2488,11 +2408,11 @@
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "rank": {
-        "api": 13,
-        "plan": 13
+        "api": 6,
+        "plan": 1
       },
-      "apiUsd": 6039.127262611497,
-      "planUsd": 102.53187203075547,
+      "apiUsd": 9351.716124793993,
+      "planUsd": 158.77276952112044,
       "fallback": null,
       "routeId": "claude-pro-opus55-semianalysis",
       "flags": [
@@ -2502,103 +2422,23 @@
       "measuredOnly": {
         "status": "measured, target-workload unmatched",
         "routeId": "claude-pro-opus55-semianalysis",
-        "costUsd": 102.53187203075547,
-        "costScore": 37.192922314018006,
-        "value": 53.49204573959555,
+        "costUsd": 158.77276952112044,
+        "costScore": 53.511355528972736,
+        "value": 62.32502739723033,
         "rank": 1
-      }
-    },
-    {
-      "slug": "claude-opus-5-5-high",
-      "name": "Claude Opus 5.5 (high)",
-      "rank": {
-        "api": 8,
-        "plan": 4
-      },
-      "apiUsd": 1860.1682252236644,
-      "planUsd": 31.58180348427274,
-      "fallback": null,
-      "routeId": "claude-pro-claude-opus-5-5-high-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-opus-5-5-medium",
-      "name": "Claude Opus 5.5 (medium)",
-      "rank": {
-        "api": 7,
-        "plan": 7
-      },
-      "apiUsd": 1423.6963014421185,
-      "planUsd": 24.171414285944287,
-      "fallback": null,
-      "routeId": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-opus-5-5-xhigh",
-      "name": "Claude Opus 5.5 (xhigh)",
-      "rank": {
-        "api": 9,
-        "plan": 1
-      },
-      "apiUsd": 3374.804042649211,
-      "planUsd": 57.29718238793228,
-      "fallback": null,
-      "routeId": "claude-pro-claude-opus-5-5-xhigh-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
       }
     },
     {
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
-        "api": 12,
-        "plan": 9
+        "api": 7,
+        "plan": 4
       },
-      "apiUsd": 5073.840417782336,
-      "planUsd": 86.1433008112451,
+      "apiUsd": 8931.27781421091,
+      "planUsd": 151.63459786436178,
       "fallback": null,
       "routeId": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "claude-sonnet-5-5-xhigh",
-      "name": "Claude Sonnet 5.5 (xhigh)",
-      "rank": {
-        "api": 14,
-        "plan": 16
-      },
-      "apiUsd": 1826.0306764617026,
-      "planUsd": 31.0022186156486,
-      "fallback": null,
-      "routeId": "claude-pro-claude-sonnet-5-5-xhigh-common-opus55-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -2612,8 +2452,8 @@
       "slug": "deepseek-v4-1-flash-1017",
       "name": "DeepSeek V4.1 Flash 1017",
       "rank": {
-        "api": 6,
-        "plan": 68
+        "api": 3,
+        "plan": 24
       },
       "apiUsd": 324.12088388877964,
       "planUsd": 324.12088388877964,
@@ -2631,11 +2471,11 @@
       "slug": "gemini-4-argon",
       "name": "Gemini 4 Argon",
       "rank": {
-        "api": 10,
-        "plan": 65
+        "api": 5,
+        "plan": 25
       },
-      "apiUsd": 1857.935358161643,
-      "planUsd": 1857.935358161643,
+      "apiUsd": 3557.766318119637,
+      "planUsd": 3557.766318119637,
       "fallback": "api",
       "routeId": null,
       "flags": [
@@ -2647,34 +2487,14 @@
       }
     },
     {
-      "slug": "gpt-5-6-luna-low",
-      "name": "GPT-5.6 Luna (low)",
-      "rank": {
-        "api": 27,
-        "plan": 88
-      },
-      "apiUsd": 20.709901381529374,
-      "planUsd": 1.922567896540046,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-5.6-luna-low-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
       "slug": "gpt-6-1-sol",
       "name": "GPT-6.1 Sol",
       "rank": {
-        "api": 2,
-        "plan": 19
+        "api": 1,
+        "plan": 7
       },
-      "apiUsd": 796.764446620246,
-      "planUsd": 73.96625015041273,
+      "apiUsd": 1233.1097561488218,
+      "planUsd": 114.47361271340715,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
       "flags": [
@@ -2684,81 +2504,21 @@
       "measuredOnly": {
         "status": "measured, target-workload unmatched",
         "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
-        "costUsd": 73.96625015041273,
-        "costScore": 40.57599762315757,
-        "value": 51.6252065752049,
+        "costUsd": 114.47361271340715,
+        "costScore": 58.11487226371908,
+        "value": 60.318198605475146,
         "rank": 2
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol-high",
-      "name": "GPT-6.1 Sol (high)",
-      "rank": {
-        "api": 3,
-        "plan": 26
-      },
-      "apiUsd": 431.0726459431111,
-      "planUsd": 40.01788395312951,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol-medium",
-      "name": "GPT-6.1 Sol (medium)",
-      "rank": {
-        "api": 4,
-        "plan": 34
-      },
-      "apiUsd": 318.04572523681617,
-      "planUsd": 29.525225142667672,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol-xhigh",
-      "name": "GPT-6.1 Sol (xhigh)",
-      "rank": {
-        "api": 1,
-        "plan": 22
-      },
-      "apiUsd": 512.2025635003287,
-      "planUsd": 47.54943961198744,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
       }
     },
     {
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "rank": {
-        "api": 16,
-        "plan": 43
+        "api": 8,
+        "plan": 14
       },
-      "apiUsd": 3844.5595179524043,
-      "planUsd": 265.4166046221888,
+      "apiUsd": 5885.045403144297,
+      "planUsd": 406.2854955570795,
       "fallback": null,
       "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
       "flags": [
@@ -2768,143 +2528,23 @@
       "measuredOnly": {
         "status": "measured, target-workload unmatched",
         "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
-        "costUsd": 265.4166046221888,
-        "costScore": 27.33964248134631,
-        "value": 48.67367574410948,
+        "costUsd": 406.2854955570795,
+        "costScore": 40.28913376965987,
+        "value": 56.65954954995409,
         "rank": 3
-      }
-    },
-    {
-      "slug": "gpt-6-astra-high",
-      "name": "GPT-6 Astra (high)",
-      "rank": {
-        "api": 15,
-        "plan": 51
-      },
-      "apiUsd": 2382.0949303383077,
-      "planUsd": 221.13766527462937,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-astra-xhigh",
-      "name": "GPT-6 Astra (xhigh)",
-      "rank": {
-        "api": 11,
-        "plan": 37
-      },
-      "apiUsd": 2899.4244152617393,
-      "planUsd": 269.16305377476226,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6-astra-xhigh-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
       }
     },
     {
       "slug": "gpt-6-luna",
       "name": "GPT-6 Luna",
       "rank": {
-        "api": 20,
-        "plan": 59
+        "api": 4,
+        "plan": 17
       },
-      "apiUsd": 79.56395288649308,
-      "planUsd": 7.386182035508084,
+      "apiUsd": 125.71906502148906,
+      "planUsd": 11.67091208888684,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-luna-high",
-      "name": "GPT-6 Luna (high)",
-      "rank": {
-        "api": 23,
-        "plan": 76
-      },
-      "apiUsd": 37.39361260343029,
-      "planUsd": 3.4713713891041857,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6-luna-high-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-luna-low",
-      "name": "GPT-6 Luna (low)",
-      "rank": {
-        "api": 26,
-        "plan": 84
-      },
-      "apiUsd": 8.373510934483381,
-      "planUsd": 0.7773404135242649,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6-luna-low-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-luna-medium",
-      "name": "GPT-6 Luna (medium)",
-      "rank": {
-        "api": 24,
-        "plan": 80
-      },
-      "apiUsd": 25.258630408653993,
-      "planUsd": 2.344841293042517,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6-luna-medium-common-gpt-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gpt-6-luna-xhigh",
-      "name": "GPT-6 Luna (xhigh)",
-      "rank": {
-        "api": 22,
-        "plan": 72
-      },
-      "apiUsd": 49.41412664069927,
-      "planUsd": 4.587275031628228,
-      "fallback": null,
-      "routeId": "chatgpt-pro500-gpt-6-luna-xhigh-common-gpt-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
@@ -2918,8 +2558,8 @@
       "slug": "mimo-v2-6-pro",
       "name": "MiMo-V2.6-Pro",
       "rank": {
-        "api": 5,
-        "plan": 67
+        "api": 2,
+        "plan": 22
       },
       "apiUsd": 136.12695920883297,
       "planUsd": 115.28367141669459,

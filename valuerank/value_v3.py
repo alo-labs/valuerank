@@ -70,6 +70,9 @@ SAMPLING_TASKS = {
     "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": basket.INDEX_SDLC_TASKS["artificial-analysis-long-context-reasoning"],
     "scicode": basket.INDEX_SDLC_TASKS["scicode"], "hle": basket.INDEX_RESIDUAL_TASKS["humanitys-last-exam"], "critpt": basket.INDEX_RESIDUAL_TASKS["critpt"],
     "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
+    # O53-O55: LiveBench 2.0's published task counts; AI Coding Daily's six graded projects (judged points read as a
+    # binomial share, an assumption). Vals publishes a standard error per record, which the stream reads instead.
+    "livebenchCoding": 29, "livebenchAgentic": 18, "aiCodingDaily": 6,
 }
 # O39: GDPval-AA is a fitted Elo with no task-level outcome; AA displays a rating interval (e.g. -26/+26 for Claude
 # Opus 5.5 on 2026-10-20) without its level, so the stream reads it as a 95% normal interval: an assumption, labelled.
@@ -78,6 +81,8 @@ SAMPLING_ASSUMPTIONS = (
     "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
     "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
     "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
+    "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
+    "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)",
 )
 MEASUREMENT_STREAM = "S1M"  # E162/E165: S1 plus conventional range sensitivity inside published 95% intervals (Terminal-Bench today)
 # E165: Terminal-Bench documents a 95% confidence interval (its leaderboard whiskers; accuracy_ci95_half_width with
@@ -100,6 +105,12 @@ FROZEN_FILE = "v3_frozen.json"
 SCENARIO_FILE = "v3_scenarios.json"
 
 
+def track_file(name: str, track: str) -> str:
+    """O53: each ranking keeps its own anchor object and scenario run; the default ranking keeps the original names."""
+
+    return name if track == q.DEFAULT_TRACK else name.replace(".json", f"_{track}.json")
+
+
 # --------------------------------------------------------------------------
 # 1. Evidence
 # --------------------------------------------------------------------------
@@ -108,7 +119,7 @@ SCENARIO_FILE = "v3_scenarios.json"
 # O36: a leaf the primary source lacks is taken, in this order, from another independent party that ran the same
 # benchmark version on the exact configuration, else from the model provider's own published result (a provider claim).
 SUPPLEMENT_ORDER = ("aa_recapture", "independent", "model_provider_claim")
-LEAF_LABELS = {leaf.key: leaf.label for leaf in q.LEAVES}
+LEAF_LABELS = {key: leaf.label for key, leaf in q.ALL_LEAVES.items()}
 SUPPLEMENT_UNITS = {"percent": lambda value: q.percent_z(value), "fraction": lambda value: q.fraction_z(value),
                     "fixedOf105": lambda value: q.bug_hunt_z(value, BUG_HUNT_HALF_WIDTH)}
 LEAF_SEARCH_MAX_AGE_DAYS = 7
@@ -149,8 +160,18 @@ def leaf_supplements(documents: dict) -> dict:
     return chosen
 
 
+def track_records(documents: dict) -> dict:
+    """O53-O55: the added software-engineering leaves' exact-configuration records, keyed (model, leaf)."""
+
+    tracks = documents.get("sweTracks") or {"sources": {}, "records": []}
+    return {(record["modelId"], record["leaf"]): {**record, "sourceMeta": tracks["sources"][record["leaf"]]} for record in tracks["records"]}
+
+
+TRACK_UNITS = {"percent": q.percent_z, "points of 60": q.aicd_z}
+
+
 def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[dict], bug_hunt: dict | None,
-                  supplements: dict | None = None) -> dict:
+                  supplements: dict | None = None, tracks: dict | None = None) -> dict:
     """Exact-configuration observations for the quality leaves, with provenance, evidence locators (E159) and the clipping audit (E110)."""
 
     observations, provenance, audit = {}, {}, []
@@ -195,6 +216,14 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
              "unansweredOrPartialShare": unanswered, "abstentionPenalisedZ": max(0.0, page["omniscience"])},
             "snapshot", f"{page_path}.omniscience")
     for leaf in q.LEAVES:
+        record = (tracks or {}).get((model_id, leaf.key))
+        if record is not None:
+            meta = record["sourceMeta"]
+            add(leaf.key, record["value"], TRACK_UNITS[meta["unit"]](record["value"]),
+                {"source": f"{meta['publisher']}: {meta['benchmark']}", "configuration": record.get("sourceLabel"), "effort": record.get("effort"),
+                 "harness": meta["harness"], "url": meta["url"], "publishedOn": meta["updated"], "stderr": record.get("stderr"), "match": record.get("match")},
+                "sweTracks", f"records[modelId={model_id}, leaf={leaf.key}].value")
+    for leaf in q.LEAVES:
         entry = (supplements or {}).get((model_id, leaf.key))
         if leaf.key not in observations and entry is not None:
             add(leaf.key, entry["value"], SUPPLEMENT_UNITS[entry["unit"]](entry["value"]),
@@ -216,10 +245,10 @@ def incomplete_configurations(configurations: list[dict], documents: dict) -> li
 
     pages = {page["model"]["slug"]: page["model"] for page in documents["snapshot"]["pages"]}
     bug_hunt_by_id = {item["modelId"]: item for item in documents["bugHunt"]["models"]}
-    supplements = leaf_supplements(documents)
+    supplements, tracks = leaf_supplements(documents), track_records(documents)
     entries = [incomplete_entry(configuration, leaf_evidence(configuration["id"], configuration.get("effort"), pages[configuration["aaSlug"]],
                                                              documents["tb4"]["rows"],
-                                                             bug_hunt_by_id.get(configuration["id"]), supplements))
+                                                             bug_hunt_by_id.get(configuration["id"]), supplements, tracks))
                for configuration in configurations]
     return [entry for entry in entries if entry is not None]
 
@@ -549,7 +578,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         raise ValueError(f"the AA chart capture ({chart}) and model-page snapshot ({pages_at}) are more than {CAPTURE_GAP_MAX_DAYS} days apart (E217)")
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
-    rows, supplements = [], leaf_supplements(documents)
+    rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
         page = pages.get(configuration["aaSlug"])
@@ -557,7 +586,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             raise ValueError(f"{model_id}: AA model page {configuration['aaSlug']} is missing from the pinned snapshot")
         # A cohort row without a pinned map entry keeps its Index evidence; its agent and chart costs are missing (flagged).
         labels = mapping.get(model_id) or {}
-        evidence = leaf_evidence(model_id, effort, page, documents["tb4"]["rows"], bug_hunt_by_id.get(model_id), supplements)
+        evidence = leaf_evidence(model_id, effort, page, documents["tb4"]["rows"], bug_hunt_by_id.get(model_id), supplements, tracks)
         components, reconciliation = row_components(
             page,
             agent_records.get(labels.get(basket.CODING_AGENT_INDEX)),
@@ -881,7 +910,7 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
     return {
         "schemaVersion": 1,
         "methodologyVersion": METHODOLOGY_VERSION,
-        "anchorVersion": f"v3-{frozen_at}",
+        "anchorVersion": f"v3-{frozen_at}" if q.TRACK == q.DEFAULT_TRACK else f"v3-{frozen_at}-{q.TRACK}",
         "frozenAt": frozen_at,
         "basketVersion": BASKET_VERSION,
         "mainWorkload": assembled["mainWorkload"],
@@ -1048,7 +1077,12 @@ def _comparison(bar: dict) -> None:
 # renormalises the remaining observed weights: Q(-R) = sum_{b in O\R} w_b z_b / sum_{b in O\R} w_b (a zero
 # denominator leaves the row unevaluable); cost, workload, route and anchors stay primary.
 LEAVE_OUT_MIN_WEIGHT = 0.40
-SOURCE_LEAVES = {"Artificial Analysis": tuple(leaf.key for leaf in q.LEAVES if leaf.source == "aa")}
+
+
+def source_leaves() -> dict:
+    """The active ranking's multi-leaf sources (the AA-run leaves)."""
+
+    return {"Artificial Analysis": tuple(leaf.key for leaf in q.LEAVES if leaf.source == "aa")}
 
 
 # E178: the leaves whose benchmarks O15 excludes from the cost basket (basket.INDEX_RESIDUAL_TASKS), removed jointly.
@@ -1069,7 +1103,7 @@ def deletion_branches() -> list[dict]:
     for leaf in q.LEAVES:
         labels = ["leave-one-benchmark-out"] + (["leave-one-source-out"] if leaf.key in single else [])
         branches.append({"id": f"leave-out:{leaf.key}", "labels": labels, "removed": [leaf.key]})
-    for source, keys in SOURCE_LEAVES.items():
+    for source, keys in source_leaves().items():
         branches.append({"id": f"leave-source-out:{source}", "labels": ["leave-one-source-out"], "removed": list(keys)})
     branches.append({"id": "basket-scope", "labels": [BASKET_SCOPE_LABEL], "removed": list(BASKET_SCOPE_EXCLUDED)})
     return branches
@@ -1969,8 +2003,8 @@ def _independent_quality(rows: list[dict]) -> dict:
     independent = {}
     for row in rows:
         values = row["evidence"]["observations"]
-        if all(leaf.key in values for leaf in INDEPENDENT_LEAVES):
-            independent[row["id"]] = sum(values[leaf.key].z for leaf in INDEPENDENT_LEAVES) / len(INDEPENDENT_LEAVES)
+        if all(leaf.key in values for leaf in independent_leaves()):
+            independent[row["id"]] = sum(values[leaf.key].z for leaf in independent_leaves()) / len(independent_leaves())
     return independent
 
 
@@ -1994,8 +2028,12 @@ def _substitution_agreement(rows: list[dict], per_row: dict) -> dict:
     return result
 
 
-AA_LEAVES = tuple(leaf for leaf in q.LEAVES if leaf.source == "aa")
-INDEPENDENT_LEAVES = tuple(leaf for leaf in q.LEAVES if leaf.source == "independent")
+def aa_leaves() -> tuple:
+    return tuple(leaf for leaf in q.LEAVES if leaf.source == "aa")
+
+
+def independent_leaves() -> tuple:
+    return tuple(leaf for leaf in q.LEAVES if leaf.source == "independent")
 
 
 def _disjoint_agreement(rows: list[dict]) -> dict:
@@ -2005,11 +2043,11 @@ def _disjoint_agreement(rows: list[dict]) -> dict:
     aa_only = {}
     for row in rows:
         values = row["evidence"]["observations"]
-        observed = [leaf for leaf in AA_LEAVES if leaf.key in values]
+        observed = [leaf for leaf in aa_leaves() if leaf.key in values]
         if row["id"] in independent and observed:
             aa_only[row["id"]] = sum(leaf.weight * values[leaf.key].z for leaf in observed) / sum(leaf.weight for leaf in observed)
     result = diagnostics.agreement(aa_only, independent, label="disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking)")
-    result["retainedLeaves"] = {"aaExecuted": {leaf.key: leaf.weight for leaf in AA_LEAVES}, "independent": {leaf.key: 100.0 / len(INDEPENDENT_LEAVES) for leaf in INDEPENDENT_LEAVES}}
+    result["retainedLeaves"] = {"aaExecuted": {leaf.key: leaf.weight for leaf in aa_leaves()}, "independent": {leaf.key: 100.0 / len(independent_leaves()) for leaf in independent_leaves()}}
     return result
 
 
@@ -2189,6 +2227,8 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
     z = observation.z
     if key == "gdpval":
         return gdpval_sd * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
+    if source.get("stderr") is not None:
+        return source["stderr"]  # Vals' published standard error, in percentage points (the leaf's z unit)
     tasks = SAMPLING_TASKS[key]
     if key == "omniscience" and source.get("accuracy") is not None and source.get("hallucinationRate") is not None:
         correct = source["accuracy"]
@@ -2627,6 +2667,7 @@ EVIDENCE_FILES = {
     "priceRecords": ("price_records.json", "editorial E141 price-record registry (superseded and promotional tariffs)"),
     "leafEvidence": ("leaf_evidence.json", "editorial supplementary leaf evidence and the exhaustive-search log (O36)"),
     "cognitionFrontierCode": ("cognition_frontiercode.json", "Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37)"),
+    "sweTracks": ("swe_tracks.json", "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"),
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 
@@ -2644,7 +2685,9 @@ def evidence_bundle(data: Path) -> dict:
     """E159: content hashes, capture times and extractors of the release's input artifacts (plus the anchor object)."""
 
     artifacts = []
-    for key, (relative, extractor) in [*EVIDENCE_FILES.items(), ("anchors", (FROZEN_FILE, "valuerank.value_v3 freeze"))]:
+    anchors = [(f"anchors:{track}" if track != q.DEFAULT_TRACK else "anchors", (track_file(FROZEN_FILE, track), "valuerank.value_v3 freeze"))
+               for track in q.TRACKS if (data / track_file(FROZEN_FILE, track)).exists()]
+    for key, (relative, extractor) in [*EVIDENCE_FILES.items(), *anchors]:
         content = (data / relative).read_bytes()
         document = json.loads(content)
         # The roster is a bare list with no capture time of its own.
@@ -2682,14 +2725,33 @@ def scenario_seed(release_day: date) -> int:
     return int(release_day.strftime("%Y%m%d"))
 
 
-def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:
-    """The v3 section of scores.json for this release."""
+def track_summary(track: str) -> dict:
+    """O53: which ranking a v3 section is, with its leaves and weights."""
 
-    frozen = json.loads((data / FROZEN_FILE).read_text())
+    return {"key": track, "label": q.TRACK_LABELS[track], "default": track == q.DEFAULT_TRACK,
+            "leaves": [{"key": leaf.key, "label": leaf.label, "group": leaf.group, "weight": leaf.weight, "source": leaf.source} for leaf in q.TRACKS[track]]}
+
+
+def build_tracks(configurations: list[dict], data: Path, *, release_day: date) -> dict:
+    """O53: one v3 section per ranking, each scored on its own leaf set, anchors and bars."""
+
+    sections = {}
+    for track in q.TRACKS:
+        with q.active_track(track):
+            sections[track] = build(configurations, data, release_day=release_day)
+    return sections
+
+
+def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:
+    """The v3 section of scores.json for this release, for the active ranking (O53)."""
+
+    track = q.TRACK
+    frozen = json.loads((data / track_file(FROZEN_FILE, track)).read_text())
     assembled = assemble_for_release(configurations, load_documents(data), frozen, release_day=release_day)
     scored = score(assembled, frozen)
     scored["evidenceBundle"] = evidence_bundle(data)
-    scenario_path = data / SCENARIO_FILE
+    scored["track"] = track_summary(track)
+    scenario_path = data / track_file(SCENARIO_FILE, track)
     document = json.loads(scenario_path.read_text()) if scenario_path.exists() else None
     seed = document["seed"] if document else scenario_seed(release_day)
     count = document["scenarios"] if document else SCENARIO_COUNT
@@ -2701,26 +2763,29 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
     parser.add_argument("command", choices=("freeze", "scenarios", "dual-run"))
     parser.add_argument("--scenarios", type=int, default=SCENARIO_COUNT)
     parser.add_argument("--previous", type=Path, help="dual-run: the previous anchor object (a v3_frozen.json)")
+    parser.add_argument("--track", choices=tuple(q.TRACKS), help="one ranking only (default: every ranking, O53)")
     args = parser.parse_args(argv)
+    if args.command == "dual-run" and args.previous is None:
+        parser.error("dual-run needs --previous")
     scores = json.loads((data / "scores.json").read_text())
     release_day = utcnow().date()
     configurations, documents = configurations_from_scores(scores), load_documents(data)
-    if args.command == "freeze":
-        document = freeze(assemble(configurations, documents, release_day=release_day), frozen_at=release_day.isoformat())
-        target = data / FROZEN_FILE
-    elif args.command == "dual-run":
-        if args.previous is None:
-            parser.error("dual-run needs --previous")
-        frozen = json.loads((data / FROZEN_FILE).read_text())
-        document = dual_run(assemble_for_release(configurations, documents, frozen, release_day=release_day), json.loads(args.previous.read_text()), frozen)
-        target = data / DUAL_RUN_FILE
-    else:
-        frozen = json.loads((data / FROZEN_FILE).read_text())
-        assembled = assemble_for_release(configurations, documents, frozen, release_day=release_day)
-        document = run_scenarios(assembled, frozen, n=args.scenarios, seed=scenario_seed(release_day))
-        target = data / SCENARIO_FILE
-    target.write_text(json.dumps(document, indent=2, ensure_ascii=False, default=_json_default) + "\n")
-    print(json.dumps({"wrote": str(target.relative_to(data.parent)), "command": args.command}))
+    for track in [args.track] if args.track else list(q.TRACKS):
+        with q.active_track(track):
+            if args.command == "freeze":
+                document = freeze(assemble(configurations, documents, release_day=release_day), frozen_at=release_day.isoformat())
+                target = data / track_file(FROZEN_FILE, track)
+            elif args.command == "dual-run":
+                frozen = json.loads((data / track_file(FROZEN_FILE, track)).read_text())
+                document = dual_run(assemble_for_release(configurations, documents, frozen, release_day=release_day), json.loads(args.previous.read_text()), frozen)
+                target = data / track_file(DUAL_RUN_FILE, track)
+            else:
+                frozen = json.loads((data / track_file(FROZEN_FILE, track)).read_text())
+                assembled = assemble_for_release(configurations, documents, frozen, release_day=release_day)
+                document = run_scenarios(assembled, frozen, n=args.scenarios, seed=scenario_seed(release_day))
+                target = data / track_file(SCENARIO_FILE, track)
+        target.write_text(json.dumps(document, indent=2, ensure_ascii=False, default=_json_default) + "\n")
+        print(json.dumps({"wrote": str(target.relative_to(data.parent)), "command": args.command, "track": track}))
     return 0
 
 

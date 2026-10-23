@@ -11,13 +11,13 @@ ValueRank asks which frontier AI model configuration is lowest cost for the valu
 
 ## Cohort
 
-27 configurations are ranked:
+9 configurations are ranked:
 
-- On AA's rendered frontier (6): Claude Sonnet 5.5 (max), Claude Opus 5.5 (max), GPT-6.1 Sol (max), MiMo-V2.6-Pro, Claude Haiku 5.5 (xhigh), GPT-6 Luna (max)
-- Near-frontier family (4): DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high), GPT-6 Astra (xhigh), GPT-5.6 Luna (low)
-- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (17): GPT-6 Astra (max), Claude Opus 5.5 (xhigh), GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), Claude Opus 5.5 (high), Claude Sonnet 5.5 (xhigh), Claude Haiku 5.5 (max), Claude Opus 5.5 (medium), GPT-6.1 Sol (medium), GPT-6 Astra (high), Claude Haiku 5.5 (high), GPT-6 Luna (xhigh), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low), GPT-6 Luna (high), GPT-6 Luna (medium), GPT-6 Luna (low)
+- On AA's rendered frontier (5): Claude Sonnet 5.5 (max), Claude Opus 5.5 (max), GPT-6.1 Sol (max), MiMo-V2.6-Pro, GPT-6 Luna (max)
+- Near-frontier family (2): DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high)
+- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (2): GPT-6 Astra (max), Claude Haiku 5.5 (max)
 
-2 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days of the cutoff (O36; a required frontier family is listed the same way, O38): MiMo-V2.6-Flash (no Bug Hunt Bench); MiniMax-M3.1-Flash (no Bug Hunt Bench). A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41).
+20 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days of the cutoff (O36; a required frontier family is listed the same way, O38): GPT-6.1 Sol (high) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Opus 5.5 (high) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Opus 5.5 (medium) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6.1 Sol (medium) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6 Astra (high) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Haiku 5.5 (high) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6 Luna (xhigh) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Haiku 5.5 (medium) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6 Luna (high) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6 Luna (medium) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-5.6 Luna (low) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Haiku 5.5 (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Haiku 5.5 (low) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Opus 5.5 (xhigh) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); Claude Sonnet 5.5 (xhigh) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6 Astra (xhigh) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6 Luna (low) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); GPT-6.1 Sol (xhigh) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); MiMo-V2.6-Flash (no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding); MiniMax-M3.1-Flash (no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding). A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41).
 
 The remaining 32 roster models are not ranked; each keeps a page with the evidence held for it.
 
@@ -54,7 +54,7 @@ Near-frontier families and each family's near point closest to the frontier (eve
 - Gemini 4 Argon: Gemini 4 Argon (high), 1 Index point below the frontier
 - MiniMax-M3.1-Flash: MiniMax-M3.1-Flash, 3 Index points below the frontier
 
-AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low)): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.
+AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (low)): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.
 
 ## Value
 
@@ -62,19 +62,19 @@ Value on a basis = **25%** × cost score + **75%** × quality score (owner decis
 
 ## Cost: the SDLC basket
 
-The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 27 of the 27 ranked configurations (at least 18 required):
+The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 7 of the 9 ranked configurations (at least 6 required):
 
 | Component | Status | Exact cost available | Complete | Ranked |
 |---|---|---:|---:|---:|
-| Coding Agent Index | pending capture | 7 | 7 | 27 |
-| ITBench-AA | pending capture | 2 | 2 | 27 |
-| AA-Briefcase | admitted | 27 | 27 | 27 |
-| GDPval-AA | admitted | 27 | 27 | 27 |
-| GDP.pdf | admitted | 27 | 27 | 27 |
-| AutomationBench-AA | admitted | 27 | 27 | 27 |
-| Terminal-Bench 4.0 (AA Index run) | admitted | 27 | 27 | 27 |
-| SciCode | admitted | 27 | 27 | 27 |
-| AA-LCR | admitted | 27 | 27 | 27 |
+| Coding Agent Index | admitted | 7 | 7 | 9 |
+| ITBench-AA | pending capture | 2 | 2 | 9 |
+| AA-Briefcase | admitted | 9 | 9 | 9 |
+| GDPval-AA | admitted | 9 | 9 | 9 |
+| GDP.pdf | admitted | 9 | 9 | 9 |
+| AutomationBench-AA | admitted | 9 | 9 | 9 |
+| Terminal-Bench 4.0 (AA Index run) | admitted | 9 | 9 | 9 |
+| SciCode | admitted | 9 | 9 | 9 |
+| AA-LCR | admitted | 9 | 9 | 9 |
 
 A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is read from AA's chart (rounded to USD 1). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
@@ -82,6 +82,7 @@ A configuration's basket cost is the sum of AA's published costs for the admitte
 
 | Component | Contestant tokens | Other model calls | External tools | Execution environment | Preparation | Grading |
 |---|---|---|---|---|---|---|
+| Coding Agent Index | included | unknown | unknown | unknown | unknown | unknown |
 | AA-Briefcase | included | unknown | unknown | unknown | unknown | unknown |
 | GDPval-AA | included | unknown | unknown | unknown | unknown | unknown |
 | GDP.pdf | included | excluded | unknown | unknown | excluded | excluded |
@@ -98,8 +99,10 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Workload | Basis | Low anchor c_L (USD) | High anchor c_H (USD) | References | Status |
 |---|---|---:|---:|---:|---|
-| `1453a9a0576b02ea` (main) | api | $4.19 | $12,078.25 | 27 | frozen |
-| `1453a9a0576b02ea` (main) | plan | $0.24 | $3,715.87 | 91 | frozen |
+| `9a0d376cc6080f3c` (main) | api | $62.86 | $18,703.43 | 7 | frozen |
+| `9a0d376cc6080f3c` (main) | plan | $5.84 | $7,115.53 | 22 | frozen |
+| `1453a9a0576b02ea` (subset) | api | $39.78 | $12,078.25 | 9 | frozen |
+| `1453a9a0576b02ea` (subset) | plan | $1.63 | $3,715.87 | 27 | frozen |
 
 **Anchor policy** (`complete-evidence-panel` v1). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations at their displayed Plan cost: measured routes, owner-named transfers and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
 
@@ -107,42 +110,49 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Basis | Anchor ratio c_H / c_L | Value points per cost doubling | Quality points that offset it |
 |---|---:|---:|---:|
-| api | 2884.9 | 2.17 | 2.90 |
-| plan | 15566.8 | 1.80 | 2.39 |
+| api | 297.5 | 3.04 | 4.06 |
+| plan | 1219.4 | 2.44 | 3.25 |
 
 **Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2). Because cost and quality covary, that ratio describes dispersion; the value-variance allocation Cov(0.25 S_C, V) / Var(V) and the Kendall tau of the cost-only and quality-only orderings against the value ordering show contribution (E189).
 
 | Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
 |---|---:|---:|---|---:|---:|---:|
-| api | 27 | 38.7% | defined | -108.4% | -0.44 | 0.53 |
-| plan | 91 | 34.9% | defined | -45.4% | -0.26 | 0.65 |
+| api | 7 | 50.7% | defined | 65.5% | 0.14 | -0.05 |
+| plan | 22 | 45.4% | defined | 2.1% | -0.11 | 0.59 |
 
 ## Quality
 
 Quality is the weighted mean of the leaves observed for the exact configuration, each placed on fixed 0–100 anchors from its raw value (clipped, with saturation disclosed). Group shares of quality: Software engineering 60%, General professional work 20%, Reliability 10%, Long context, science & knowledge 10%.
 
-| Leaf | Group | Weight in quality | Weight in value | Raw unit | Score | Run by |
+**Two rankings (owner decisions O52–O55).** ValueRank picks each ranking's benchmark set and ranks the configurations that have all of it, balancing the number of benchmarks against the number of configurations ranked. Outside AA, independent software-engineering benchmarks run few efforts per model, so no single set covers the cohort: LiveBench 2.0 and Vals AI run each model once at its top effort, and AI Coding Daily mostly at high and medium effort. The **max-effort ranking** (leading, O54) adds LiveBench 2.0 Long Agentic and Coding, Vals Vibe Code Bench v1.1 and Vals Code Migration v1.1; the **AI Coding Daily ranking** adds AI Coding Daily (its bug-finding column excluded because it overlaps Bug Hunt). Each ranking has its own frozen anchors, quality bars, scenario run and diagnostics, so values are comparable within a ranking, not across. Surge's Complex Constraints (instruction following, IFBench's successor), CursorBench 4.0, Surge sudo L7, Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench were considered and are not used: each covers too few cohort configurations at their exact effort (O53, O54; [research record](research/2026-10-23-swe-benchmarks/reports/SWE%20benchmark%20candidates.md)). MiMo-V2.6-Pro's results are taken at high, its AA configuration (O54); Vals records its run without a level, read as the same single reasoning mode (E252).
+
+| Leaf | Group | Weight, max-effort ranking | Weight, AI Coding Daily ranking | Raw unit | Score | Run by |
 |---|---|---:|---:|---|---|---|
-| [FrontierCode 1.1](https://artificialanalysis.ai/evaluations/frontiercode) | Software engineering | 25.00% | 18.75% | AA score (0-1) | z = 100 × score | AA-run |
-| [Terminal-Bench 4.0 (AA run)](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | Software engineering | 20.00% | 15.00% | % resolved | z = resolution % | AA-run |
-| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | Software engineering | 15.00% | 11.25% | bugs fixed of 105 | z = 100 × bugs fixed / 105 | independent |
-| [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | General professional work | 10.00% | 7.50% | Elo | z = 100 × (Elo − 500) / 2000 (AA's integration transform) | AA-run |
-| [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | General professional work | 10.00% | 7.50% | AA score (0-1) | z = 100 × score | AA-run |
-| [AA-Omniscience](https://artificialanalysis.ai/evaluations/omniscience) | Reliability | 10.00% | 7.50% | AA Omniscience Index (-100 to 100) | z = (I + 100) / 2 on AA's Omniscience Index I (O28) | AA-run |
-| [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | Long context, science & knowledge | 5.00% | 3.75% | accuracy (0-1) | z = 100 × accuracy | AA-run |
-| [Humanity's Last Exam](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | Long context, science & knowledge | 1.67% | 1.25% | accuracy (0-1) | z = 100 × accuracy | AA-run |
-| [SciCode](https://artificialanalysis.ai/evaluations/scicode) | Long context, science & knowledge | 1.67% | 1.25% | score (0-1) | z = 100 × score | AA-run |
-| [CritPt](https://artificialanalysis.ai/evaluations/critpt) | Long context, science & knowledge | 1.67% | 1.25% | score (0-1) | z = 100 × score | AA-run |
+| [FrontierCode 1.1](https://artificialanalysis.ai/evaluations/frontiercode) | Software engineering | 18.00% | 21.00% | AA score (0-1) | z = 100 × score | AA-run |
+| [Terminal-Bench 4.0 (AA run)](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | Software engineering | 14.00% | 17.00% | % resolved | z = resolution % | AA-run |
+| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | Software engineering | 10.00% | 12.00% | bugs fixed of 105 | z = 100 × bugs fixed / 105 | independent |
+| [Vibe Code Bench v1.1 (Vals)](https://www.vals.ai/benchmarks/vibe-code) | Software engineering | 5.00% | — | % of test workflows passed | z = pass rate % | independent |
+| [Code Migration v1.1 (Vals)](https://www.vals.ai/benchmarks/code-migration-v1-1) | Software engineering | 6.00% | — | % of hidden tests passed | z = pass rate % | independent |
+| [LiveBench 2.0 Long Agentic](https://livebench.ai/) | Software engineering | 5.00% | — | mean task score (0-100) | z = mean task score | independent |
+| [LiveBench 2.0 Coding](https://livebench.ai/) | Software engineering | 2.00% | — | mean task score (0-100) | z = mean task score | independent |
+| [GDPval-AA v2.1](https://artificialanalysis.ai/evaluations/gdpval-aa) | General professional work | 10.00% | 10.00% | Elo | z = 100 × (Elo − 500) / 2000 (AA's integration transform) | AA-run |
+| [AutomationBench-AA](https://artificialanalysis.ai/evaluations/automationbench-aa) | General professional work | 10.00% | 10.00% | AA score (0-1) | z = 100 × score | AA-run |
+| [AA-Omniscience](https://artificialanalysis.ai/evaluations/omniscience) | Reliability | 10.00% | 10.00% | AA Omniscience Index (-100 to 100) | z = (I + 100) / 2 on AA's Omniscience Index I (O28) | AA-run |
+| [AA-LCR v1.1](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) | Long context, science & knowledge | 5.00% | 5.00% | accuracy (0-1) | z = 100 × accuracy | AA-run |
+| [Humanity's Last Exam](https://artificialanalysis.ai/evaluations/humanitys-last-exam) | Long context, science & knowledge | 1.67% | 1.67% | accuracy (0-1) | z = 100 × accuracy | AA-run |
+| [SciCode](https://artificialanalysis.ai/evaluations/scicode) | Long context, science & knowledge | 1.67% | 1.67% | score (0-1) | z = 100 × score | AA-run |
+| [CritPt](https://artificialanalysis.ai/evaluations/critpt) | Long context, science & knowledge | 1.67% | 1.67% | score (0-1) | z = 100 × score | AA-run |
+| [AI Coding Daily (excl. bug finding)](https://aicodingdaily.com/leaderboard) | Software engineering | — | 10.00% | points of 60 | z = 100 × points / 60 | independent |
 
 Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within 7 days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). For a listed frontier or near-frontier family the search also logs an open-web discovery step: its queries and every candidate result, each resolved by a dated registry addition or a dated rejection with its reason, and the build fails on an unresolved candidate (E240). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 
-Coverage is the observed share of quality weight. A row is **provisional** when coverage is below 70%, fewer than 2 software-engineering leaves are observed, observed software-engineering weight is below 40%, or a leaf weighing 20% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
+Coverage is the observed share of quality weight. A row is **provisional** when coverage is below 70%, fewer than 2 software-engineering leaves are observed, observed software-engineering weight is below 40%, or a leaf weighing 20% or more of quality (FrontierCode 1.1) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
 
 ## Plan basis
 
 Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full utilisation. **The Plan ranking has one row per configuration and plan (owner decision O48)**: every plan on which the configuration has an eligible route, each plan's route chosen by the comparator below among that plan's candidates; rows of one configuration share its quality and API cost and differ only by the plan's multiple, share every scenario draw, and are told apart by any value gap; a configuration's own Plan figures (the main table, model pages, and the Plan diagnostics that rebuild anchors or move evidence) are those of its selected route's plan row. Every route record names one model and one plan (O45). A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Two owner-authorised classes sit beside them: GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figure on every ChatGPT plan (a figure that names a model without an effort binds to its unsuffixed, max row), and every other GPT row takes the lower of the two figures per plan as a labelled assumption (O45); each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling — the tier's monthly credits valued at Xiaomi's API rate for that model over the list fee — labelled provider-derived and not a measurement (O46), because Xiaomi prices credits at parity with its API and no end-user measurement of a V2.6 billing period exists. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged. Each Plan row publishes its fee period, the cash paid and the selected multiple's amount (multiple × gross cash), typed by what the measurement establishes (E166): measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer (with its donor), or identified target-workload capacity; API-fallback rows publish none.
 
-**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 91 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`3d83f7643d4a85b7`) re-runs the selection over exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics), without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
+**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 27 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`3d83f7643d4a85b7`) re-runs the selection over exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics), without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
 **Subscription evidence policy** (as of 2026-10-08; reporting window 2026-09-23 to 2026-10-23; end-user reports were last searched on 2026-10-21, so reports dated in the 2 days after it were not searched):
 
@@ -156,9 +166,9 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 ## Uncertainty outputs
 
-**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 48.9 (the displayed quality of GPT-6.1 Sol (medium) at freeze); ladder: quality 32.3, quality 55.0.
+**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 60.7 (the displayed quality of Gemini 4 Argon at freeze); ladder: quality 49.8, quality 62.1.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261023, input hash `ea22eb039f736ffa`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261023, input hash `e0a3d2f1b8d2593d`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
@@ -182,7 +192,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | clip gate (E20) | passed | no basis exceeds the clipping allowance |
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
-| subset scoring (O17) | vacuous | subset rows scored on their own workload and anchors |
+| subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
@@ -190,7 +200,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | passed | every cohort row has a pinned identity |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
-| full benchmark set (O36, O38) | fired | listed, not ranked: mimo-v2-6-flash, minimax-m3-1-flash |
+| full benchmark set (O36, O38) | fired | listed, not ranked: gpt-6.1-sol-high, claude-opus-5-5-high, claude-opus-5-5-medium, gpt-6.1-sol-medium, gpt-6-astra-high, claude-haiku-5-5-high, gpt-6-luna-xhigh, claude-haiku-5-5-medium, gpt-6-luna-high, gpt-6-luna-medium, gpt-5.6-luna-low, claude-haiku-5-5, claude-haiku-5-5-low, claude-opus-5-5-xhigh, claude-sonnet-5-5-xhigh, gpt-6-astra-xhigh, gpt-6-luna-low, gpt-6.1-sol-xhigh, mimo-v2-6-flash, minimax-m3-1-flash |
 | missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226) | vacuous | no ranked row has a missing leaf (O36) |
 | S1M interval stream (E145) | vacuous | dormant: no ranked leaf carries a published confidence interval since O37, so S1M equals S1 (E236) |
 | provider-claim label denial (E233) | vacuous | no row has a provider-claimed leaf |

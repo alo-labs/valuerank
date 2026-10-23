@@ -14,11 +14,15 @@
   <h1 id="page-title">{{ page.name }}</h1>
   <p class="lead">
     {% if s.rankingEligible -%}
-      Ranked <strong>#{{ s.rank.plan }}</strong> on the plan basis and <strong>#{{ s.rank.api }}</strong> at API rates, with {{ s.coverage.pct | round(0) | int }}% of the quality weight observed for this exact configuration.
+      {%- set shown = (page.rankings | default([]) | selectattr("shown") | list) -%}
+      Ranked <strong>#{{ s.rank.plan }}</strong> on the plan basis and <strong>#{{ s.rank.api }}</strong> at API rates{% if shown %} in the {{ shown[0].label }}{% endif %}, with {{ s.coverage.pct | round(0) | int }}% of the quality weight observed for this exact configuration.
     {%- else -%}
       Not ranked. {{ s.exclusionReasons | join("; ") }}. Its evidence is shown below so the gaps are visible.
     {%- endif %}
   </p>
+  {%- if page.rankings %}
+  <p class="note">{% for r in page.rankings %}<a href="{{ r.href }}">{{ r.label }}</a>: {% if r.rankingEligible %}#{{ r.rank.plan }} Plan, #{{ r.rank.api }} API{% else %}not ranked{% endif %}{{ " · " if not loop.last else "." }}{% endfor %}</p>
+  {%- endif %}
   <dl class="stat-row">
     <div class="stat"><dt>Plan ranking</dt><dd class="stat-val">{% if s.rank.plan is none %}&ndash;{% else %}#{{ s.rank.plan }}{% endif %}<small>{{ num(s.overall.plan) }} pts</small></dd></div>
     <div class="stat"><dt>API ranking</dt><dd class="stat-val">{% if s.rank.api is none %}&ndash;{% else %}#{{ s.rank.api }}{% endif %}<small>{{ num(s.overall.api) }} pts</small></dd></div>

@@ -1415,7 +1415,7 @@
   "scoring": {
     "version": "v3.0.0",
     "cohortN": 29,
-    "scoredN": 27,
+    "scoredN": 20,
     "exactBenchmarkOverlapN": 17,
     "frontierRequiredModelN": 7,
     "frontierRequiredModelIds": [
@@ -2445,7 +2445,7 @@
     },
     "alternateRankings": {
       "bugHuntEmphasis": {
-        "matchedN": 27,
+        "matchedN": 20,
         "cohortN": 61,
         "benchmarkWeightPct": 26.1628,
         "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
@@ -2453,137 +2453,102 @@
           {
             "rank": 1,
             "modelId": "claude-sonnet-5-5",
-            "score": 67.8
+            "score": 67.9
           },
           {
             "rank": 2,
-            "modelId": "gpt-6.1-sol",
-            "score": 65.0
+            "modelId": "deepseek-v4-1-flash-1017",
+            "score": 66.4
           },
           {
             "rank": 3,
-            "modelId": "deepseek-v4-1-flash-1017",
-            "score": 64.7
+            "modelId": "gpt-6.1-sol",
+            "score": 66.3
           },
           {
             "rank": 4,
+            "modelId": "gemini-4-argon",
+            "score": 63.4
+          },
+          {
+            "rank": 5,
             "modelId": "claude-opus-5-5",
             "score": 63.2
           },
           {
-            "rank": 5,
-            "modelId": "gemini-4-argon",
-            "score": 62.6
-          },
-          {
             "rank": 6,
-            "modelId": "gpt-6.1-sol-xhigh",
-            "score": 62.4
+            "modelId": "gpt-6.1-sol-high",
+            "score": 62.1
           },
           {
             "rank": 7,
             "modelId": "gpt-6-astra",
-            "score": 61.6
+            "score": 61.9
           },
           {
             "rank": 8,
-            "modelId": "claude-opus-5-5-xhigh",
-            "score": 61.2
-          },
-          {
-            "rank": 9,
-            "modelId": "gpt-6.1-sol-high",
-            "score": 60.3
-          },
-          {
-            "rank": 10,
-            "modelId": "gpt-6-astra-xhigh",
-            "score": 59.4
-          },
-          {
-            "rank": 11,
-            "modelId": "claude-sonnet-5-5-xhigh",
+            "modelId": "claude-opus-5-5-high",
             "score": 57.3
           },
           {
+            "rank": 9,
+            "modelId": "claude-opus-5-5-medium",
+            "score": 53.9
+          },
+          {
+            "rank": 10,
+            "modelId": "gpt-6.1-sol-medium",
+            "score": 53.8
+          },
+          {
+            "rank": 11,
+            "modelId": "gpt-6-astra-high",
+            "score": 53.8
+          },
+          {
             "rank": 12,
-            "modelId": "claude-opus-5-5-high",
-            "score": 56.5
+            "modelId": "mimo-v2-6-pro",
+            "score": 51.6
           },
           {
             "rank": 13,
-            "modelId": "gpt-6-astra-high",
-            "score": 53.1
+            "modelId": "claude-haiku-5-5-max",
+            "score": 49.6
           },
           {
             "rank": 14,
-            "modelId": "claude-opus-5-5-medium",
-            "score": 52.9
+            "modelId": "gpt-6-luna",
+            "score": 44.0
           },
           {
             "rank": 15,
-            "modelId": "gpt-6.1-sol-medium",
-            "score": 51.8
+            "modelId": "claude-haiku-5-5-high",
+            "score": 40.3
           },
           {
             "rank": 16,
-            "modelId": "mimo-v2-6-pro",
-            "score": 49.2
+            "modelId": "gpt-6-luna-xhigh",
+            "score": 38.7
           },
           {
             "rank": 17,
-            "modelId": "claude-haiku-5-5-max",
-            "score": 47.6
+            "modelId": "claude-haiku-5-5-medium",
+            "score": 37.7
           },
           {
             "rank": 18,
-            "modelId": "claude-haiku-5-5",
-            "score": 43.1
+            "modelId": "gpt-6-luna-high",
+            "score": 35.4
           },
           {
             "rank": 19,
-            "modelId": "gpt-6-luna",
-            "score": 41.5
+            "modelId": "gpt-6-luna-medium",
+            "score": 33.6
           },
           {
             "rank": 20,
-            "modelId": "claude-haiku-5-5-high",
-            "score": 37.6
-          },
-          {
-            "rank": 21,
-            "modelId": "gpt-6-luna-xhigh",
-            "score": 35.9
-          },
-          {
-            "rank": 22,
-            "modelId": "claude-haiku-5-5-medium",
-            "score": 34.8
-          },
-          {
-            "rank": 23,
-            "modelId": "claude-haiku-5-5-low",
-            "score": 33.7
-          },
-          {
-            "rank": 24,
-            "modelId": "gpt-6-luna-high",
-            "score": 32.4
-          },
-          {
-            "rank": 25,
-            "modelId": "gpt-6-luna-low",
-            "score": 31.3
-          },
-          {
-            "rank": 26,
-            "modelId": "gpt-6-luna-medium",
-            "score": 30.3
-          },
-          {
-            "rank": 27,
             "modelId": "gpt-5.6-luna-low",
-            "score": 25.7
+            "score": 28.9
           }
         ]
       }

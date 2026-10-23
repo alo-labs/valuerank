@@ -23,6 +23,10 @@
         "FrontierCode 1.1",
         "Terminal-Bench 4.0 (AA run)",
         "Bug Hunt Bench",
+        "Vibe Code Bench v1.1 (Vals)",
+        "Code Migration v1.1 (Vals)",
+        "LiveBench 2.0 Long Agentic",
+        "LiveBench 2.0 Coding",
         "GDPval-AA v2.1",
         "AutomationBench-AA",
         "AA-Omniscience",
@@ -46,7 +50,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 13.5,
       "value": null,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -61,7 +65,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 10.5,
       "value": null,
       "decimals": 1,
       "unit": "% resolved",
@@ -76,7 +80,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 7.5,
       "value": null,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -133,6 +137,51 @@
       "grade": "missing"
     },
     {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "livebenchAgentic",
+      "label": "LiveBench 2.0 Long Agentic",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -140,6 +189,21 @@
       "value": null,
       "decimals": 3,
       "unit": "accuracy (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "livebenchCoding",
+      "label": "LiveBench 2.0 Coding",
+      "category": "Software engineering",
+      "weightPct": 1.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -318,5 +382,37 @@
     "configuration": null,
     "intelligenceGap": null,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }

@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5",
   "summary": {
     "rank": {
-      "api": 18,
-      "plan": 40
+      "api": 9,
+      "plan": 11
     },
     "overall": {
-      "api": 43.643684279397945,
-      "plan": 48.87584226923384
+      "api": 48.48121455469635,
+      "plan": 56.83947547968129
     },
-    "quality": 40.85262750286589,
-    "qualityRank": 17,
+    "quality": 47.3044520093594,
+    "qualityRank": 8,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -35,7 +35,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 13.5,
       "value": 0.418067,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -53,7 +53,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 10.5,
       "value": 32.8282828282828,
       "decimals": 1,
       "unit": "% resolved",
@@ -71,7 +71,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 7.5,
       "value": 21.5,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -140,6 +140,60 @@
       "grade": "measured"
     },
     {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": 52.36,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": 52.36,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "anthropic/claude-haiku-5-5 / Pi agent harness, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 90.444,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": 90.444,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/vibe-code"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "anthropic/claude-haiku-5-5 / OpenHands, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchAgentic",
+      "label": "LiveBench 2.0 Long Agentic",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 57.6,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 57.6,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "claude-haiku-5.5 / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -154,6 +208,24 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchCoding",
+      "label": "LiveBench 2.0 Coding",
+      "category": "Software engineering",
+      "weightPct": 1.5,
+      "value": 91.4,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 91.4,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "claude-haiku-5.5 / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -213,8 +285,8 @@
     }
   ],
   "cost": {
-    "apiUsd": 191.4939970478554,
-    "planUsd": 3.251171426958496,
+    "apiUsd": 966.9203778594009,
+    "planUsd": 16.416305226814956,
     "fallback": null,
     "route": {
       "id": "claude-pro-claude-haiku-5-5-max-common-opus55-assumption",
@@ -229,15 +301,15 @@
     },
     "subset": false,
     "partialComponents": [],
-    "workload": "1453a9a0576b02ea",
+    "workload": "9a0d376cc6080f3c",
     "planFlags": [
       "workload-unmatched",
       "owner-named transfer (assumption)",
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 52.01685460899409,
-      "plan": 72.94548656833767
+      "api": 52.0115021907072,
+      "plan": 85.44454589064696
     },
     "components": [
       {
@@ -246,7 +318,7 @@
         "costUsd": 775.4263808115455,
         "completeness": "confirmed-complete",
         "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
-        "admitted": false
+        "admitted": true
       },
       {
         "key": "aa-briefcase",
@@ -340,10 +412,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 3.251171426958496,
+      "usdPerRun": 16.416305226814956,
       "selected": true,
-      "planRank": 40,
-      "planValue": 48.87584226923384
+      "planRank": 11,
+      "planValue": 56.83947547968129
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -357,10 +429,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 3.2661435621329593,
+      "usdPerRun": 16.491904790370132,
       "selected": false,
-      "planRank": 41,
-      "planValue": 48.86394278580361
+      "planRank": 12,
+      "planValue": 56.823311230987024
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -374,10 +446,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 3.3448733108795703,
+      "usdPerRun": 16.88943891457469,
       "selected": false,
-      "planRank": 42,
-      "planValue": 48.802254394004464
+      "planRank": 13,
+      "planValue": 56.739513769320936
     }
   ],
   "scenarios": {
@@ -390,7 +462,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -399,7 +471,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
@@ -408,7 +480,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -417,7 +489,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
@@ -426,7 +498,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1T",
@@ -435,7 +507,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0665
+        "frontier": 0.9832
       }
     ],
     "plan": [
@@ -497,8 +569,8 @@
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
-      "possible": "disproved"
+      "definite": "certified",
+      "possible": "certified"
     },
     "plan": null
   },
@@ -507,8 +579,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 18,
-        "plan": 40
+        "api": 9,
+        "plan": 11
       }
     }
   ],
@@ -519,5 +591,37 @@
     "configuration": "Claude Haiku 5.5 (max)",
     "intelligenceGap": 3,
     "footnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 9,
+        "plan": 11
+      },
+      "overall": {
+        "api": 48.48121455469635,
+        "plan": 56.83947547968129
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }

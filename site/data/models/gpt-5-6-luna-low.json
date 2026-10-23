@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-luna-low",
   "summary": {
     "rank": {
-      "api": 27,
-      "plan": 88
+      "api": 15,
+      "plan": 47
     },
     "overall": {
-      "api": 32.700225760102825,
-      "plan": 32.313646775657325
+      "api": 38.1570888553376,
+      "plan": 36.628741014084824
     },
-    "quality": 16.955551834848514,
-    "qualityRank": 27,
+    "quality": 21.3110661205628,
+    "qualityRank": 15,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 15.75,
       "value": 0.1538,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 12.75,
       "value": 0.0,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 9.0,
       "value": 4.0,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -80,6 +80,24 @@
       },
       "observedAt": "2026-10-19",
       "evaluatedVariant": "GPT-5.6 Luna (low effort) / Codex CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aiCodingDaily",
+      "label": "AI Coding Daily (excl. bug finding)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 30.51,
+      "decimals": 1,
+      "unit": "points of 60",
+      "normalized": 50.85,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://aicodingdaily.com/leaderboard"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "GPT-5.6-Luna (Low) / varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
       "note": null,
       "grade": "measured"
     },
@@ -234,8 +252,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 79.93424753586575,
-      "plan": 78.38793159808377
+      "api": 88.695157059662,
+      "plan": 82.58176569465091
     },
     "components": [
       {
@@ -332,8 +350,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.922567896540046,
       "selected": true,
-      "planRank": 88,
-      "planValue": 32.313646775657325
+      "planRank": 47,
+      "planValue": 36.628741014084824
     },
     {
       "id": "chatgpt-pro100-gpt-5.6-luna-low-common-gpt-assumption",
@@ -349,8 +367,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.9630238276331158,
       "selected": false,
-      "planRank": 89,
-      "planValue": 32.25971396595655
+      "planRank": 48,
+      "planValue": 36.57192274419093
     },
     {
       "id": "chatgpt-pro200-gpt-5.6-luna-low-common-gpt-assumption",
@@ -366,8 +384,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.987514527977867,
       "selected": false,
-      "planRank": 90,
-      "planValue": 32.22760230261075
+      "planRank": 49,
+      "planValue": 36.53809307418402
     },
     {
       "id": "chatgpt-plus-gpt-5.6-luna-low-common-gpt-assumption",
@@ -383,8 +401,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 2.55677794833696,
       "selected": false,
-      "planRank": 91,
-      "planValue": 31.57530339796456
+      "planRank": 50,
+      "planValue": 35.8508955144555
     }
   ],
   "scenarios": {
@@ -397,7 +415,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -406,7 +424,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
@@ -415,7 +433,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0018
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -424,7 +442,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
@@ -433,7 +451,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1T",
@@ -442,7 +460,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.3884
+        "frontier": 1.0
       }
     ],
     "plan": [
@@ -504,8 +522,8 @@
   },
   "intervals": {
     "api": {
-      "definite": "disproved",
-      "possible": "disproved"
+      "definite": "certified",
+      "possible": "certified"
     },
     "plan": null
   },
@@ -514,8 +532,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 27,
-        "plan": 88
+        "api": 15,
+        "plan": 47
       }
     }
   ],
@@ -526,5 +544,37 @@
     "configuration": "GPT-5.6 Luna (low)",
     "intelligenceGap": 1,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 15,
+        "plan": 47
+      },
+      "overall": {
+        "api": 38.1570888553376,
+        "plan": 36.628741014084824
+      }
+    }
+  ]
 }

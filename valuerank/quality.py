@@ -11,6 +11,7 @@ record, so observed leaves contribute only their reporting-precision intervals).
 from __future__ import annotations
 
 import math
+from contextlib import contextmanager
 from dataclasses import dataclass
 
 # Group shares of the quality score (percent); the leaf weights below sum to them.
@@ -29,6 +30,7 @@ REQUIRED_LEAF_WEIGHT = 20.0  # leaves at or above this nominal weight must be ob
 GDPVAL_ELO_LOW = 500.0
 GDPVAL_ELO_SPAN = 2000.0
 BUG_HUNT_BUGS = 105.0
+AICD_POINTS = 60.0  # AI Coding Daily's Laravel quality, React-TS quality and edge-case columns (20 points each)
 
 
 @dataclass(frozen=True)
@@ -40,12 +42,8 @@ class Leaf:
     source: str  # "aa" (AA-run) or "independent"
 
 
-LEAVES = (
-    # Owner decision O49 (2026-10-23): AA withdrew DeepSWE v1.1, which is dropped in favour of FrontierCode; the
-    # software-engineering 60% is FrontierCode 25, Terminal-Bench 20 and Bug Hunt 15.
-    Leaf("frontierCode", "FrontierCode 1.1", "swe", 25.0, "aa"),
-    Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 20.0, "aa"),
-    Leaf("bugHunt", "Bug Hunt Bench", "swe", 15.0, "independent"),
+# The six leaves outside software engineering, shared by every ranking.
+COMMON_LEAVES = (
     Leaf("gdpval", "GDPval-AA v2.1", "professional", 10.0, "aa"),
     Leaf("automationBench", "AutomationBench-AA", "professional", 10.0, "aa"),
     # LiveBench instruction following is retired (owner decision O26): Omniscience takes the group's 10%.
@@ -55,7 +53,52 @@ LEAVES = (
     Leaf("scicode", "SciCode", "knowledge", 5.0 / 3.0, "aa"),
     Leaf("critpt", "CritPt", "knowledge", 5.0 / 3.0, "aa"),
 )
+# Owner decisions O53-O55 (2026-10-23): ValueRank publishes two rankings, each over the configurations with its complete
+# leaf set (O36, O52). The max-effort ranking adds LiveBench 2.0 and two Vals boards, run at each vendor's top effort;
+# the AI Coding Daily ranking adds AI Coding Daily (its bug-finding column excluded: it overlaps Bug Hunt). O49 dropped
+# DeepSWE; software engineering stays 60% of quality in both.
+TRACKS = {
+    "max": (
+        Leaf("frontierCode", "FrontierCode 1.1", "swe", 18.0, "aa"),
+        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 14.0, "aa"),
+        Leaf("bugHunt", "Bug Hunt Bench", "swe", 10.0, "independent"),
+        Leaf("vibeCode", "Vibe Code Bench v1.1 (Vals)", "swe", 5.0, "independent"),
+        Leaf("codeMigration", "Code Migration v1.1 (Vals)", "swe", 6.0, "independent"),
+        Leaf("livebenchAgentic", "LiveBench 2.0 Long Agentic", "swe", 5.0, "independent"),
+        Leaf("livebenchCoding", "LiveBench 2.0 Coding", "swe", 2.0, "independent"),
+        *COMMON_LEAVES,
+    ),
+    "aicd": (
+        Leaf("frontierCode", "FrontierCode 1.1", "swe", 21.0, "aa"),
+        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 17.0, "aa"),
+        Leaf("bugHunt", "Bug Hunt Bench", "swe", 12.0, "independent"),
+        Leaf("aiCodingDaily", "AI Coding Daily (excl. bug finding)", "swe", 10.0, "independent"),
+        *COMMON_LEAVES,
+    ),
+}
+TRACK_LABELS = {"max": "Max-effort ranking", "aicd": "AI Coding Daily ranking"}
+TRACK_NAMES = {"max": "max-effort ranking", "aicd": "AI Coding Daily ranking"}  # in a sentence
+DEFAULT_TRACK = "max"  # O54: the max-effort ranking leads
+# Every leaf of every ranking, for labels and domains.
+ALL_LEAVES = {leaf.key: leaf for track in TRACKS.values() for leaf in track}
+
+# The active ranking's leaves; every scoring function reads these, and ``active_track`` switches them.
+TRACK = DEFAULT_TRACK
+LEAVES = TRACKS[TRACK]
 LEAF_BY_KEY = {leaf.key: leaf for leaf in LEAVES}
+
+
+@contextmanager
+def active_track(track: str):
+    """Score inside one ranking: the module's leaf table is that ranking's for the duration of the block."""
+
+    global TRACK, LEAVES, LEAF_BY_KEY
+    previous = TRACK
+    TRACK, LEAVES, LEAF_BY_KEY = track, TRACKS[track], {leaf.key: leaf for leaf in TRACKS[track]}
+    try:
+        yield TRACKS[track]
+    finally:
+        TRACK, LEAVES, LEAF_BY_KEY = previous, TRACKS[previous], {leaf.key: leaf for leaf in TRACKS[previous]}
 
 
 @dataclass(frozen=True)
@@ -106,6 +149,12 @@ def gdpval_logistic_z(elo: float) -> float:
     """z = 100 / (1 + 10^((E_A - E) / 400)): the logistic win probability against AA's anchor, in percent."""
 
     return 100.0 / (1.0 + 10.0 ** ((GDPVAL_ANCHOR_ELO - elo) / ELO_SCALE))
+
+
+def aicd_z(points: float) -> Observation:
+    """AI Coding Daily points out of 60 (bug-finding column excluded), on anchors 0 and 60."""
+
+    return Observation(clip(100.0 * points / AICD_POINTS))
 
 
 def bug_hunt_z(bugs_fixed: float, half_width_bugs: float = 0.0) -> Observation:
@@ -204,6 +253,11 @@ LEAF_DOMAINS = {
     "hle": ("fraction", 0.0, 1.0),
     "scicode": ("fraction", 0.0, 1.0),
     "critpt": ("fraction", 0.0, 1.0),
+    "vibeCode": ("percent", 0.0, 100.0),
+    "codeMigration": ("percent", 0.0, 100.0),
+    "livebenchAgentic": ("percent", 0.0, 100.0),
+    "livebenchCoding": ("percent", 0.0, 100.0),
+    "aiCodingDaily": ("points of 60", 0.0, AICD_POINTS),
 }
 
 
@@ -216,6 +270,8 @@ def unclipped_z(key: str, raw) -> float:
         return 100.0 * (raw - GDPVAL_ELO_LOW) / GDPVAL_ELO_SPAN
     if key == "bugHunt":
         return 100.0 * raw / BUG_HUNT_BUGS
+    if key == "aiCodingDaily":
+        return 100.0 * raw / AICD_POINTS
     return raw if LEAF_DOMAINS[key][0] == "percent" else 100.0 * raw
 
 
@@ -238,7 +294,7 @@ def clip_audit(key: str, raw) -> dict:
         "anchorPosition": position,
         "unclippedZ": z,
         "clippingAmount": None if z is None else z - clip(z),
-        "weight": LEAF_BY_KEY[key].weight,
+        "weight": LEAF_BY_KEY[key].weight if key in LEAF_BY_KEY else ALL_LEAVES[key].weight,
         "action": action,
     }
 

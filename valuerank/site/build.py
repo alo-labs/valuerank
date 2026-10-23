@@ -218,6 +218,11 @@ def pages(bundle) -> list[tuple[str, str, dict]]:
          f"Data downloads · ValueRank {version}",
          "Machine-readable JSON for every table on the site, with its schema and provenance."),
     ]
+    # O53: every ranking other than the leading one has its own rankings page.
+    for track, other in bundle.extras.get("tracks", {}).items():
+        catalogue.append((viewmodel.TRACK_PATHS[track], "rankings.html", viewmodel.rankings_page(other), "rankings",
+                          f"{other.rankings['track']['label']} · ValueRank {version}",
+                          f"The {other.rankings['track']['label']}: {viewmodel.TRACK_LEADS[track]}"))
     result = []
     for path, template, page, key, title, description in catalogue:
         page = dict(page)

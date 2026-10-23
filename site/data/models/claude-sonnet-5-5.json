@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
   "summary": {
     "rank": {
-      "api": 12,
-      "plan": 9
+      "api": 7,
+      "plan": 4
     },
     "overall": {
-      "api": 46.6593456754297,
-      "plan": 53.68715091310015
+      "api": 51.830029138237315,
+      "plan": 62.125299890846016
     },
-    "quality": 58.58381355930935,
+    "quality": 64.78083526493705,
     "qualityRank": 2,
     "coverage": {
       "pct": 100.0,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 13.5,
       "value": 0.458291333333333,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 10.5,
       "value": 63.636363636363605,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 7.5,
       "value": 51.3,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -138,6 +138,60 @@
       "grade": "measured"
     },
     {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": 86.875,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": 86.875,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "anthropic/claude-sonnet-5-5 / Pi agent harness, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 92.392,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": 92.392,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/vibe-code"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "anthropic/claude-sonnet-5-5 / OpenHands, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchAgentic",
+      "label": "LiveBench 2.0 Long Agentic",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 78.8,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 78.8,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "claude-sonnet-5.5 / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -152,6 +206,24 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchCoding",
+      "label": "LiveBench 2.0 Coding",
+      "category": "Software engineering",
+      "weightPct": 1.5,
+      "value": 94.7,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 94.7,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "claude-sonnet-5.5 / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -211,8 +283,8 @@
     }
   ],
   "cost": {
-    "apiUsd": 5073.840417782336,
-    "planUsd": 86.1433008112451,
+    "apiUsd": 8931.27781421091,
+    "planUsd": 151.63459786436178,
     "fallback": null,
     "route": {
       "id": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
@@ -227,15 +299,15 @@
     },
     "subset": false,
     "partialComponents": [],
-    "workload": "1453a9a0576b02ea",
+    "workload": "9a0d376cc6080f3c",
     "planFlags": [
       "workload-unmatched",
       "owner-named transfer (assumption)",
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 10.885942023790772,
-      "plan": 38.997162974472566
+      "api": 12.977610758138091,
+      "plan": 54.15869376857291
     },
     "components": [
       {
@@ -244,7 +316,7 @@
         "costUsd": 3857.4373964285724,
         "completeness": "confirmed-complete",
         "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
-        "admitted": false
+        "admitted": true
       },
       {
         "key": "aa-briefcase",
@@ -338,10 +410,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 86.1433008112451,
+      "usdPerRun": 151.63459786436178,
       "selected": true,
-      "planRank": 9,
-      "planValue": 53.68715091310015
+      "planRank": 4,
+      "planValue": 62.125299890846016
     },
     {
       "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
@@ -355,10 +427,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 86.54000371452048,
+      "usdPerRun": 152.33289807625633,
       "selected": false,
-      "planRank": 10,
-      "planValue": 53.67525142966992
+      "planRank": 5,
+      "planValue": 62.10913564215175
     },
     {
       "id": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
@@ -372,10 +444,10 @@
       "case": 2,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 88.62603349838142,
+      "usdPerRun": 156.0048526499722,
       "selected": false,
-      "planRank": 12,
-      "planValue": 53.613563037870776
+      "planRank": 6,
+      "planValue": 62.02533818048566
     }
   ],
   "scenarios": {
@@ -405,8 +477,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.9121
+        "top3": 0.0337,
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -431,9 +503,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0036,
-        "top3": 0.0343,
-        "frontier": 0.4842
+        "top1": 0.0,
+        "top3": 0.1695,
+        "frontier": 0.8763
       }
     ],
     "plan": [
@@ -529,8 +601,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 12,
-        "plan": 9
+        "api": 7,
+        "plan": 4
       }
     }
   ],
@@ -541,5 +613,37 @@
     "configuration": "Claude Sonnet 5.5 (max with fallback)",
     "intelligenceGap": 0,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 7,
+        "plan": 4
+      },
+      "overall": {
+        "api": 51.830029138237315,
+        "plan": 62.125299890846016
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }

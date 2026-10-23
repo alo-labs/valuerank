@@ -59,11 +59,11 @@
   <ul class="file-list">    <li class="file">
       <a class="file-path mono" href="/data/rankings.json" download>/data/rankings.json</a>
       <p>Every roster model with v3 value scores, ranks, basket cost and evidence on both bases.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{version, publishDate, observedAt, methodologyVersion, basketVersion, bases, defaultBasis, costWeightPct, exchangeRate, planExploratory, modelInclusion, dimensions, categories, models, planModels, picks}</p></details>
+      <details class="evidence"><summary>Schema</summary><p class="small">{track, version, publishDate, observedAt, methodologyVersion, basketVersion, bases, defaultBasis, costWeightPct, exchangeRate, planExploratory, modelInclusion, dimensions, categories, models, planModels, picks}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/models/&lt;slug&gt;.json">/data/models/&lt;slug&gt;.json</a>
       <p>One document per roster model with every quality leaf, its source, the cost basket, plan routes, scenario shares and history.</p>
-      <details class="evidence"><summary>Schema</summary><p class="small">{slug, name, developer, aaUrl, aaVariant, selectedPage, summary, dimensions, cost, plans, scenarios, intervals, history, frontier}</p></details>
+      <details class="evidence"><summary>Schema</summary><p class="small">{slug, name, developer, aaUrl, aaVariant, selectedPage, summary, dimensions, cost, plans, scenarios, intervals, history, frontier, rankings}</p></details>
     </li>    <li class="file">
       <a class="file-path mono" href="/data/plans.json" download>/data/plans.json</a>
       <p>Subscription routes, their evidence and every candidate&#39;s API and Plan basket cost.</p>

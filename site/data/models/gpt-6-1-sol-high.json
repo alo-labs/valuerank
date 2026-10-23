@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
   "summary": {
     "rank": {
-      "api": 3,
-      "plan": 26
+      "api": 1,
+      "plan": 7
     },
     "overall": {
-      "api": 49.56051170389132,
-      "plan": 50.837340796008114
+      "api": 52.663051701156505,
+      "plan": 55.22951856775083
     },
-    "quality": 52.13655163493394,
-    "qualityRank": 13,
+    "quality": 57.15568127995559,
+    "qualityRank": 5,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 15.75,
       "value": 0.466056333333333,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 12.75,
       "value": 51.5151515151515,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 9.0,
       "value": 36.5,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -80,6 +80,24 @@
       },
       "observedAt": "2026-10-19",
       "evaluatedVariant": "GPT-6.1 Sol (high effort) - mean of 2 / Codex CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aiCodingDaily",
+      "label": "AI Coding Daily (excl. bug finding)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 56.83,
+      "decimals": 1,
+      "unit": "points of 60",
+      "normalized": 94.71666666666667,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://aicodingdaily.com/leaderboard"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "GPT-6.1-Sol (High) / varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
       "note": null,
       "grade": "measured"
     },
@@ -234,8 +252,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 41.83239191076348,
-      "plan": 46.93970827923064
+      "api": 39.18516296475926,
+      "plan": 49.451030431136545
     },
     "components": [
       {
@@ -332,8 +350,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 40.01788395312951,
       "selected": true,
-      "planRank": 26,
-      "planValue": 50.837340796008114
+      "planRank": 7,
+      "planValue": 55.22951856775083
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
@@ -349,8 +367,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 40.85996644010532,
       "selected": false,
-      "planRank": 28,
-      "planValue": 50.78340798630733
+      "planRank": 8,
+      "planValue": 55.172700297856935
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
@@ -366,8 +384,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 41.36973569511623,
       "selected": false,
-      "planRank": 29,
-      "planValue": 50.75129632296154
+      "planRank": 9,
+      "planValue": 55.13887062785002
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
@@ -383,8 +401,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 53.21884517816187,
       "selected": false,
-      "planRank": 30,
-      "planValue": 50.09899741831535
+      "planRank": 10,
+      "planValue": 54.4516730681215
     }
   ],
   "scenarios": {
@@ -395,7 +413,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -404,7 +422,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -413,8 +431,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.9952,
+        "top1": 0.9627,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -422,7 +440,7 @@
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -431,7 +449,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -440,9 +458,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2036,
-        "top3": 0.6233,
-        "frontier": 0.8469
+        "top1": 0.4918,
+        "top3": 0.893,
+        "frontier": 0.8334
       }
     ],
     "plan": [
@@ -514,8 +532,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 3,
-        "plan": 26
+        "api": 1,
+        "plan": 7
       }
     }
   ],
@@ -526,5 +544,37 @@
     "configuration": "GPT-6.1 Sol (high)",
     "intelligenceGap": 0,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 1,
+        "plan": 7
+      },
+      "overall": {
+        "api": 52.663051701156505,
+        "plan": 55.22951856775083
+      }
+    }
+  ]
 }

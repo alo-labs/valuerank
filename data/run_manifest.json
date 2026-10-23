@@ -60,7 +60,7 @@
     "publishDate": "October 19, 2026",
     "observedAt": "2026-10-23T06:26:23Z",
     "cohortN": 29,
-    "scoredN": 27,
+    "scoredN": 20,
     "exactBenchmarkOverlapN": 17,
     "frontierRequiredModelN": 7,
     "frontierSelection": {
@@ -662,53 +662,50 @@
       "GPT-6.1 Sol",
       "GPT-6 Luna",
       "MiMo-V2.6-Pro",
-      "Claude Haiku 5.5",
       "Claude Sonnet 5.5",
       "Gemini 4 Argon",
       "Claude Haiku 5.5 (max)",
       "Claude Haiku 5.5 (high)",
       "Claude Haiku 5.5 (medium)",
-      "Claude Haiku 5.5 (low)",
       "DeepSeek V4.1 Flash 1017",
-      "GPT-6 Luna (low)",
       "GPT-6 Luna (medium)",
-      "GPT-6 Luna (xhigh)",
-      "Claude Opus 5.5 (xhigh)"
+      "GPT-6 Luna (high)",
+      "GPT-6 Luna (xhigh)"
     ],
     "topFive": [
       {
         "rank": 1,
         "name": "Claude Sonnet 5.5",
-        "overallScore": 66.0,
-        "qualityScore": 87.1
+        "overallScore": 65.8,
+        "qualityScore": 86.7
       },
       {
         "rank": 2,
-        "name": "Claude Opus 5.5",
-        "overallScore": 62.2,
-        "qualityScore": 82.9
+        "name": "DeepSeek V4.1 Flash 1017",
+        "overallScore": 63.6,
+        "qualityScore": 66.5
       },
       {
         "rank": 3,
-        "name": "DeepSeek V4.1 Flash 1017",
-        "overallScore": 61.8,
-        "qualityScore": 66.5
+        "name": "Claude Opus 5.5",
+        "overallScore": 62.7,
+        "qualityScore": 83.6
       },
       {
         "rank": 4,
         "name": "GPT-6.1 Sol",
-        "overallScore": 61.3,
-        "qualityScore": 70.2
+        "overallScore": 61.9,
+        "qualityScore": 69.2
       },
       {
         "rank": 5,
         "name": "Gemini 4 Argon",
-        "overallScore": 60.3,
-        "qualityScore": 73.4
+        "overallScore": 61.4,
+        "qualityScore": 73.8
       }
     ],
     "bugHuntEmphasis": {
-      "matchedN": 27,
+      "matchedN": 20,
       "cohortN": 61,
       "benchmarkWeightPct": 26.1628,
       "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
@@ -716,32 +713,32 @@
         {
           "rank": 1,
           "name": "Claude Sonnet 5.5",
-          "score": 67.8,
+          "score": 67.9,
           "fixedOf105": 51.3
         },
         {
           "rank": 2,
-          "name": "GPT-6.1 Sol",
-          "score": 65.0,
-          "fixedOf105": 44.3
-        },
-        {
-          "rank": 3,
           "name": "DeepSeek V4.1 Flash 1017",
-          "score": 64.7,
+          "score": 66.4,
           "fixedOf105": 42.7
         },
         {
+          "rank": 3,
+          "name": "GPT-6.1 Sol",
+          "score": 66.3,
+          "fixedOf105": 44.3
+        },
+        {
           "rank": 4,
-          "name": "Claude Opus 5.5",
-          "score": 63.2,
-          "fixedOf105": 41.7
+          "name": "Gemini 4 Argon",
+          "score": 63.4,
+          "fixedOf105": 40.7
         },
         {
           "rank": 5,
-          "name": "Gemini 4 Argon",
-          "score": 62.6,
-          "fixedOf105": 40.7
+          "name": "Claude Opus 5.5",
+          "score": 63.2,
+          "fixedOf105": 41.7
         }
       ]
     },
@@ -861,9 +858,9 @@
         "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/combined-scoreboard.csv",
         "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/run-notes.md"
       },
-      "matchedN": 27,
+      "matchedN": 20,
       "cohortN": 61,
-      "coveragePct": 44.26,
+      "coveragePct": 32.79,
       "basePrioritySum": 56,
       "benchmarkPriority": 30,
       "totalPriority": 86,
@@ -1254,216 +1251,160 @@
           "modelId": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "fixedOf105": 51.3,
-          "emphasisScore": 67.8,
+          "emphasisScore": 67.9,
           "primaryRank": 1
         },
         {
           "rank": 2,
-          "modelId": "gpt-6.1-sol",
-          "name": "GPT-6.1 Sol",
-          "fixedOf105": 44.3,
-          "emphasisScore": 65.0,
-          "primaryRank": 4
-        },
-        {
-          "rank": 3,
           "modelId": "deepseek-v4-1-flash-1017",
           "name": "DeepSeek V4.1 Flash 1017",
           "fixedOf105": 42.7,
-          "emphasisScore": 64.7,
-          "primaryRank": 3
+          "emphasisScore": 66.4,
+          "primaryRank": 2
+        },
+        {
+          "rank": 3,
+          "modelId": "gpt-6.1-sol",
+          "name": "GPT-6.1 Sol",
+          "fixedOf105": 44.3,
+          "emphasisScore": 66.3,
+          "primaryRank": 4
         },
         {
           "rank": 4,
+          "modelId": "gemini-4-argon",
+          "name": "Gemini 4 Argon",
+          "fixedOf105": 40.7,
+          "emphasisScore": 63.4,
+          "primaryRank": 5
+        },
+        {
+          "rank": 5,
           "modelId": "claude-opus-5-5",
           "name": "Claude Opus 5.5",
           "fixedOf105": 41.7,
           "emphasisScore": 63.2,
-          "primaryRank": 2
-        },
-        {
-          "rank": 5,
-          "modelId": "gemini-4-argon",
-          "name": "Gemini 4 Argon",
-          "fixedOf105": 40.7,
-          "emphasisScore": 62.6,
-          "primaryRank": 5
+          "primaryRank": 3
         },
         {
           "rank": 6,
-          "modelId": "gpt-6.1-sol-xhigh",
-          "name": "GPT-6.1 Sol (xhigh)",
-          "fixedOf105": 42.7,
-          "emphasisScore": 62.4,
-          "primaryRank": 8
+          "modelId": "gpt-6.1-sol-high",
+          "name": "GPT-6.1 Sol (high)",
+          "fixedOf105": 36.5,
+          "emphasisScore": 62.1,
+          "primaryRank": 7
         },
         {
           "rank": 7,
           "modelId": "gpt-6-astra",
           "name": "GPT-6 Astra",
           "fixedOf105": 45.0,
-          "emphasisScore": 61.6,
+          "emphasisScore": 61.9,
           "primaryRank": 6
         },
         {
           "rank": 8,
-          "modelId": "claude-opus-5-5-xhigh",
-          "name": "Claude Opus 5.5 (xhigh)",
-          "fixedOf105": 36.0,
-          "emphasisScore": 61.2,
-          "primaryRank": 7
+          "modelId": "claude-opus-5-5-high",
+          "name": "Claude Opus 5.5 (high)",
+          "fixedOf105": 31.7,
+          "emphasisScore": 57.3,
+          "primaryRank": 8
         },
         {
           "rank": 9,
-          "modelId": "gpt-6.1-sol-high",
-          "name": "GPT-6.1 Sol (high)",
-          "fixedOf105": 36.5,
-          "emphasisScore": 60.3,
-          "primaryRank": 10
+          "modelId": "claude-opus-5-5-medium",
+          "name": "Claude Opus 5.5 (medium)",
+          "fixedOf105": 30.3,
+          "emphasisScore": 53.9,
+          "primaryRank": 11
         },
         {
           "rank": 10,
-          "modelId": "gpt-6-astra-xhigh",
-          "name": "GPT-6 Astra (xhigh)",
-          "fixedOf105": 43.0,
-          "emphasisScore": 59.4,
-          "primaryRank": 9
+          "modelId": "gpt-6.1-sol-medium",
+          "name": "GPT-6.1 Sol (medium)",
+          "fixedOf105": 29.0,
+          "emphasisScore": 53.8,
+          "primaryRank": 12
         },
         {
           "rank": 11,
-          "modelId": "claude-sonnet-5-5-xhigh",
-          "name": "Claude Sonnet 5.5 (xhigh)",
-          "fixedOf105": 36.0,
-          "emphasisScore": 57.3,
+          "modelId": "gpt-6-astra-high",
+          "name": "GPT-6 Astra (high)",
+          "fixedOf105": 35.0,
+          "emphasisScore": 53.8,
           "primaryRank": 13
         },
         {
           "rank": 12,
-          "modelId": "claude-opus-5-5-high",
-          "name": "Claude Opus 5.5 (high)",
-          "fixedOf105": 31.7,
-          "emphasisScore": 56.5,
-          "primaryRank": 11
-        },
-        {
-          "rank": 13,
-          "modelId": "gpt-6-astra-high",
-          "name": "GPT-6 Astra (high)",
-          "fixedOf105": 35.0,
-          "emphasisScore": 53.1,
-          "primaryRank": 18
-        },
-        {
-          "rank": 14,
-          "modelId": "claude-opus-5-5-medium",
-          "name": "Claude Opus 5.5 (medium)",
-          "fixedOf105": 30.3,
-          "emphasisScore": 52.9,
-          "primaryRank": 15
-        },
-        {
-          "rank": 15,
-          "modelId": "gpt-6.1-sol-medium",
-          "name": "GPT-6.1 Sol (medium)",
-          "fixedOf105": 29.0,
-          "emphasisScore": 51.8,
-          "primaryRank": 17
-        },
-        {
-          "rank": 16,
           "modelId": "mimo-v2-6-pro",
           "name": "MiMo-V2.6-Pro",
           "fixedOf105": 18,
-          "emphasisScore": 49.2,
-          "primaryRank": 12
+          "emphasisScore": 51.6,
+          "primaryRank": 9
         },
         {
-          "rank": 17,
+          "rank": 13,
           "modelId": "claude-haiku-5-5-max",
           "name": "Claude Haiku 5.5 (max)",
           "fixedOf105": 21.5,
-          "emphasisScore": 47.6,
-          "primaryRank": 14
+          "emphasisScore": 49.6,
+          "primaryRank": 10
         },
         {
-          "rank": 18,
-          "modelId": "claude-haiku-5-5",
-          "name": "Claude Haiku 5.5",
-          "fixedOf105": 18.3,
-          "emphasisScore": 43.1,
-          "primaryRank": 16
-        },
-        {
-          "rank": 19,
+          "rank": 14,
           "modelId": "gpt-6-luna",
           "name": "GPT-6 Luna",
           "fixedOf105": 18.3,
-          "emphasisScore": 41.5,
+          "emphasisScore": 44.0,
+          "primaryRank": 14
+        },
+        {
+          "rank": 15,
+          "modelId": "claude-haiku-5-5-high",
+          "name": "Claude Haiku 5.5 (high)",
+          "fixedOf105": 16.0,
+          "emphasisScore": 40.3,
+          "primaryRank": 15
+        },
+        {
+          "rank": 16,
+          "modelId": "gpt-6-luna-xhigh",
+          "name": "GPT-6 Luna (xhigh)",
+          "fixedOf105": 14.0,
+          "emphasisScore": 38.7,
+          "primaryRank": 16
+        },
+        {
+          "rank": 17,
+          "modelId": "claude-haiku-5-5-medium",
+          "name": "Claude Haiku 5.5 (medium)",
+          "fixedOf105": 12.0,
+          "emphasisScore": 37.7,
+          "primaryRank": 17
+        },
+        {
+          "rank": 18,
+          "modelId": "gpt-6-luna-high",
+          "name": "GPT-6 Luna (high)",
+          "fixedOf105": 9.0,
+          "emphasisScore": 35.4,
+          "primaryRank": 18
+        },
+        {
+          "rank": 19,
+          "modelId": "gpt-6-luna-medium",
+          "name": "GPT-6 Luna (medium)",
+          "fixedOf105": 4.0,
+          "emphasisScore": 33.6,
           "primaryRank": 19
         },
         {
           "rank": 20,
-          "modelId": "claude-haiku-5-5-high",
-          "name": "Claude Haiku 5.5 (high)",
-          "fixedOf105": 16.0,
-          "emphasisScore": 37.6,
-          "primaryRank": 20
-        },
-        {
-          "rank": 21,
-          "modelId": "gpt-6-luna-xhigh",
-          "name": "GPT-6 Luna (xhigh)",
-          "fixedOf105": 14.0,
-          "emphasisScore": 35.9,
-          "primaryRank": 21
-        },
-        {
-          "rank": 22,
-          "modelId": "claude-haiku-5-5-medium",
-          "name": "Claude Haiku 5.5 (medium)",
-          "fixedOf105": 12.0,
-          "emphasisScore": 34.8,
-          "primaryRank": 22
-        },
-        {
-          "rank": 23,
-          "modelId": "claude-haiku-5-5-low",
-          "name": "Claude Haiku 5.5 (low)",
-          "fixedOf105": 11.0,
-          "emphasisScore": 33.7,
-          "primaryRank": 23
-        },
-        {
-          "rank": 24,
-          "modelId": "gpt-6-luna-high",
-          "name": "GPT-6 Luna (high)",
-          "fixedOf105": 9.0,
-          "emphasisScore": 32.4,
-          "primaryRank": 24
-        },
-        {
-          "rank": 25,
-          "modelId": "gpt-6-luna-low",
-          "name": "GPT-6 Luna (low)",
-          "fixedOf105": 4.0,
-          "emphasisScore": 31.3,
-          "primaryRank": 26
-        },
-        {
-          "rank": 26,
-          "modelId": "gpt-6-luna-medium",
-          "name": "GPT-6 Luna (medium)",
-          "fixedOf105": 4.0,
-          "emphasisScore": 30.3,
-          "primaryRank": 25
-        },
-        {
-          "rank": 27,
           "modelId": "gpt-5.6-luna-low",
           "name": "GPT-5.6 Luna (low)",
           "fixedOf105": 4.0,
-          "emphasisScore": 25.7,
-          "primaryRank": 27
+          "emphasisScore": 28.9,
+          "primaryRank": 20
         }
       ]
     },

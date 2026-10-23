@@ -7,491 +7,282 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
   "summary": {
     "rank": {
-      "api": 17,
-      "plan": 31
+      "api": null,
+      "plan": null
     },
     "overall": {
-      "api": 44.57513165231167,
-      "plan": 49.488852308244304
+      "api": null,
+      "plan": null
     },
-    "quality": 39.66319297711369,
-    "qualityRank": 18,
+    "quality": null,
+    "qualityRank": null,
     "coverage": {
-      "pct": 100.0,
-      "costAvailable": true,
-      "missing": [],
-      "provisional": false,
+      "pct": 0.0,
+      "costAvailable": false,
+      "missing": [
+        "FrontierCode 1.1",
+        "Terminal-Bench 4.0 (AA run)",
+        "Bug Hunt Bench",
+        "Vibe Code Bench v1.1 (Vals)",
+        "Code Migration v1.1 (Vals)",
+        "LiveBench 2.0 Long Agentic",
+        "LiveBench 2.0 Coding",
+        "GDPval-AA v2.1",
+        "AutomationBench-AA",
+        "AA-Omniscience",
+        "AA-LCR v1.1",
+        "Humanity's Last Exam",
+        "SciCode",
+        "CritPt"
+      ],
+      "provisional": null,
       "provisionalReasons": []
     },
-    "grade": "measured",
-    "rankingEligible": true,
-    "exclusionReasons": [],
-    "flags": [
-      "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
-    ]
+    "grade": "missing",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+    ],
+    "flags": []
   },
   "dimensions": [
     {
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
-      "value": 0.45471,
+      "weightPct": 13.5,
+      "value": null,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": 45.471000000000004,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/frontiercode"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
-      "value": 29.292929292929298,
+      "weightPct": 10.5,
+      "value": null,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": 29.292929292929298,
-      "source": {
-        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
-        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "mini-SWE-agent",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
-      "value": 18.3,
+      "weightPct": 7.5,
+      "value": null,
       "decimals": 1,
       "unit": "bugs fixed of 105",
-      "normalized": 17.428571428571427,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-19",
-      "evaluatedVariant": "Haiku 5.5 (xhigh effort) - mean of 3 / Claude Code",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "gdpval",
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1511.65,
+      "value": null,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 50.58250000000001,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "automationBench",
       "label": "AutomationBench-AA",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 0.35953889773428194,
+      "value": null,
       "decimals": 3,
       "unit": "AA score (0-1)",
-      "normalized": 35.953889773428195,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "omniscience",
       "label": "AA-Omniscience",
       "category": "Reliability",
       "weightPct": 7.5,
-      "value": 6.05,
+      "value": null,
       "decimals": 1,
       "unit": "AA Omniscience Index (-100 to 100)",
-      "normalized": 53.025,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/omniscience"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
+    },
+    {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "livebenchAgentic",
+      "label": "LiveBench 2.0 Long Agentic",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
     },
     {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
       "weightPct": 3.75,
-      "value": 0.783333333333333,
+      "value": null,
       "decimals": 3,
       "unit": "accuracy (0-1)",
-      "normalized": 78.3333333333333,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
+    },
+    {
+      "key": "livebenchCoding",
+      "label": "LiveBench 2.0 Coding",
+      "category": "Software engineering",
+      "weightPct": 1.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
     },
     {
       "key": "hle",
       "label": "Humanity's Last Exam",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.42678405931418,
+      "value": null,
       "decimals": 3,
       "unit": "accuracy (0-1)",
-      "normalized": 42.678405931418,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "scicode",
       "label": "SciCode",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.517361111111111,
+      "value": null,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 51.73611111111111,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/scicode"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "critpt",
       "label": "CritPt",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.225714285714286,
+      "value": null,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 22.5714285714286,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://artificialanalysis.ai/evaluations/critpt"
-      },
-      "observedAt": "2026-10-23",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     }
   ],
   "cost": {
-    "apiUsd": 107.09527518955011,
-    "planUsd": 1.8182559454932108,
+    "apiUsd": null,
+    "planUsd": null,
     "fallback": null,
-    "route": {
-      "id": "claude-pro-claude-haiku-5-5-common-opus55-assumption",
-      "planLabel": "Claude Pro $20 · common Claude assumption",
-      "planFeeUsd": 20,
-      "valueMultiple": 58.9,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceModel": "Opus 5.5",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06"
-    },
-    "subset": false,
+    "route": null,
+    "subset": null,
     "partialComponents": [],
-    "workload": "1453a9a0576b02ea",
-    "planFlags": [
-      "workload-unmatched",
-      "owner-named transfer (assumption)",
-      "valuation basis unverified"
-    ],
+    "workload": null,
+    "planFlags": [],
     "costScore": {
-      "api": 59.3109476779056,
-      "plan": 78.96583030163615
+      "api": null,
+      "plan": null
     },
-    "components": [
-      {
-        "key": "aa-briefcase",
-        "label": "AA-Briefcase",
-        "costUsd": 33.28827048607472,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "gdpval-aa",
-        "label": "GDPval-AA",
-        "costUsd": 20.255510313488188,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "gdp-pdf",
-        "label": "GDP.pdf",
-        "costUsd": 2.725891,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "automationbench-aa",
-        "label": "AutomationBench-AA",
-        "costUsd": 18.14320537691679,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "terminalbench-4-0",
-        "label": "Terminal-Bench 4.0 (AA Index run)",
-        "costUsd": 30.37918871307041,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "scicode",
-        "label": "SciCode",
-        "costUsd": 0.7711030000000001,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      },
-      {
-        "key": "artificial-analysis-long-context-reasoning",
-        "label": "AA-LCR",
-        "costUsd": 1.5321063,
-        "completeness": "confirmed-complete",
-        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
-        "admitted": true
-      }
-    ],
-    "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
-    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
-    "planAmount": {
-      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
-      "amountTarget": "assumed consumption",
-      "amountUsd": 1178.0,
-      "derivation": "authorised assumption: the donor's multiple times this route's cash",
-      "feePeriod": "month",
-      "subscriptionCashUsd": 20,
-      "additionalCashUsd": 0.0,
-      "grossCashUsd": 20.0,
-      "workload": "the route's measurement workload",
-      "measurementObjectId": "claude-pro-claude-haiku-5-5-common-opus55-assumption",
-      "capacitySolutionId": null,
-      "cashObjectId": "claude-pro-claude-haiku-5-5-common-opus55-assumption:month cash",
-      "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
-      "capacityStatus": "capacity established on the measurement workload",
-      "valuationStatus": "unverified",
-      "donorRouteId": "claude-pro-opus55-semianalysis",
-      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
-    }
+    "components": [],
+    "aaCostCaveat": null,
+    "selectionReason": null,
+    "planAmount": null
   },
-  "plans": [
-    {
-      "id": "claude-pro-claude-haiku-5-5-common-opus55-assumption",
-      "planLabel": "Claude Pro $20 · common Claude assumption",
-      "planFeeUsd": 20,
-      "valueMultiple": 58.9,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 1.8182559454932108,
-      "selected": true,
-      "planRank": 31,
-      "planValue": 49.488852308244304
-    },
-    {
-      "id": "claude-max20x-claude-haiku-5-5-common-opus55-assumption",
-      "planLabel": "Claude Max 20x $200 · common Claude assumption",
-      "planFeeUsd": 200,
-      "valueMultiple": 58.63,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 1.8266292885817859,
-      "selected": false,
-      "planRank": 32,
-      "planValue": 49.47695282481408
-    },
-    {
-      "id": "claude-max5x-claude-haiku-5-5-common-opus55-assumption",
-      "planLabel": "Claude Max 5x $100 · common Claude assumption",
-      "planFeeUsd": 100,
-      "valueMultiple": 57.25,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 1.87065982863843,
-      "selected": false,
-      "planRank": 33,
-      "planValue": 49.415264433014926
-    }
-  ],
+  "plans": [],
   "scenarios": {
     "status": "current",
-    "api": [
-      {
-        "stratum": "S0",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 1.0
-      },
-      {
-        "stratum": "S1",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 1.0
-      },
-      {
-        "stratum": "S2",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.9998
-      },
-      {
-        "stratum": "S1",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 1.0
-      },
-      {
-        "stratum": "S1M",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 1.0
-      },
-      {
-        "stratum": "S1T",
-        "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0004,
-        "frontier": 0.8298
-      }
-    ],
-    "plan": [
-      {
-        "stratum": "S0",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 1.0
-      },
-      {
-        "stratum": "S1",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
-      },
-      {
-        "stratum": "S2",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
-      },
-      {
-        "stratum": "S1",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
-      },
-      {
-        "stratum": "S1M",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
-      },
-      {
-        "stratum": "S1T",
-        "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
-      }
-    ]
+    "api": [],
+    "plan": []
   },
   "intervals": {
-    "api": {
-      "definite": "certified",
-      "possible": "certified"
-    },
+    "api": null,
     "plan": null
   },
   "history": [
@@ -518,14 +309,6 @@
         "api": 13,
         "plan": null
       }
-    },
-    {
-      "version": "v3.0.0",
-      "date": "2026-10-19",
-      "rank": {
-        "api": 17,
-        "plan": 31
-      }
     }
   ],
   "frontier": {
@@ -535,5 +318,37 @@
     "configuration": "Claude Haiku 5.5 (xhigh)",
     "intelligenceGap": 0,
     "footnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }

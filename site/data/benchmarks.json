@@ -7,10 +7,10 @@
       "url": "https://artificialanalysis.ai/evaluations/frontiercode",
       "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 18.75,
+      "weightPct": 13.5,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -23,10 +23,10 @@
       "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
       "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 15.0,
+      "weightPct": 10.5,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "% resolved",
       "execution": "AA-run",
@@ -39,14 +39,78 @@
       "url": "https://bughunt.productcompass.pm/",
       "observedAt": "2026-10-19",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 11.25,
+      "weightPct": 7.5,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "bugs fixed of 105",
       "execution": "independent",
       "notes": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness."
+    },
+    {
+      "id": "vibeCode",
+      "name": "Vibe Code Bench v1.1 (Vals)",
+      "owner": "Artificial Analysis",
+      "url": "https://www.vals.ai/benchmarks/vibe-code",
+      "observedAt": "2026-10-23",
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 3.75,
+      "coverage": {
+        "available": 9,
+        "cohort": 9
+      },
+      "unit": "% of test workflows passed",
+      "execution": "independent",
+      "notes": "Vals AI's run on one harness (OpenHands) at each vendor's top effort; Vals' published standard error is the sampling noise."
+    },
+    {
+      "id": "codeMigration",
+      "name": "Code Migration v1.1 (Vals)",
+      "owner": "Artificial Analysis",
+      "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
+      "observedAt": "2026-10-23",
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 4.5,
+      "coverage": {
+        "available": 9,
+        "cohort": 9
+      },
+      "unit": "% of hidden tests passed",
+      "execution": "independent",
+      "notes": "Vals AI's run on one harness (Pi) at each vendor's top effort; Vals' published standard error is the sampling noise."
+    },
+    {
+      "id": "livebenchAgentic",
+      "name": "LiveBench 2.0 Long Agentic",
+      "owner": "Artificial Analysis",
+      "url": "https://livebench.ai/",
+      "observedAt": "2026-10-23",
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 3.75,
+      "coverage": {
+        "available": 9,
+        "cohort": 9
+      },
+      "unit": "mean task score (0-100)",
+      "execution": "independent",
+      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14)."
+    },
+    {
+      "id": "livebenchCoding",
+      "name": "LiveBench 2.0 Coding",
+      "owner": "Artificial Analysis",
+      "url": "https://livebench.ai/",
+      "observedAt": "2026-10-23",
+      "role": "quality leaf (Software engineering)",
+      "weightPct": 1.5,
+      "coverage": {
+        "available": 9,
+        "cohort": 9
+      },
+      "unit": "mean task score (0-100)",
+      "execution": "independent",
+      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14)."
     },
     {
       "id": "gdpval",
@@ -57,8 +121,8 @@
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "Elo",
       "execution": "AA-run",
@@ -73,8 +137,8 @@
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -89,8 +153,8 @@
       "role": "quality leaf (Reliability)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "AA Omniscience Index (-100 to 100)",
       "execution": "AA-run",
@@ -105,8 +169,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 3.75,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
@@ -121,8 +185,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
@@ -137,8 +201,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "score (0-1)",
       "execution": "AA-run",
@@ -153,8 +217,8 @@
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 27,
-        "cohort": 27
+        "available": 9,
+        "cohort": 9
       },
       "unit": "score (0-1)",
       "execution": "AA-run",
@@ -164,6 +228,10 @@
   "basket": {
     "version": "SDLC basket v1",
     "admitted": [
+      {
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index"
+      },
       {
         "key": "aa-briefcase",
         "label": "AA-Briefcase"
@@ -195,24 +263,18 @@
     ],
     "pending": [
       {
-        "key": "coding-agent-index",
-        "label": "Coding Agent Index",
-        "covered": 7,
-        "ranked": 27
-      },
-      {
         "key": "itbench-aa",
         "label": "ITBench-AA",
         "covered": 2,
-        "ranked": 27
+        "ranked": 9
       }
     ],
-    "referencePanelSize": 27,
-    "requiredPanelSize": 18
+    "referencePanelSize": 7,
+    "requiredPanelSize": 6
   },
   "qualitySourceShares": {
-    "aa": 0.8500000000000002,
-    "independent": 0.15
+    "aa": 0.7200000000000002,
+    "independent": 0.28
   },
   "frontier": {
     "status": "complete",

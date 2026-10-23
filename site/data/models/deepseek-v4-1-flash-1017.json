@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
   "summary": {
     "rank": {
-      "api": 6,
-      "plan": 68
+      "api": 3,
+      "plan": 24
     },
     "overall": {
-      "api": 47.42633486925547,
-      "plan": 42.390855334398815
+      "api": 56.23564408760693,
+      "plan": 48.29506758460472
     },
-    "quality": 48.09792934180462,
-    "qualityRank": 15,
+    "quality": 53.88099331150159,
+    "qualityRank": 6,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -26,14 +26,16 @@
     "grade": "measured",
     "rankingEligible": true,
     "exclusionReasons": [],
-    "flags": []
+    "flags": [
+      "Subset cost: scored on its own workload; cross-workload ordering not identified"
+    ]
   },
   "dimensions": [
     {
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 13.5,
       "value": 0.436605666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +53,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 10.5,
       "value": 33.8383838383838,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +71,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 7.5,
       "value": 42.7,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -138,6 +140,60 @@
       "grade": "measured"
     },
     {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": 67.524,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": 67.524,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "deepseek/deepseek-v4.1-flash-1017 / Pi agent harness, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 87.73,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": 87.73,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/vibe-code"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "deepseek/deepseek-v4.1-flash-1017 / OpenHands, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchAgentic",
+      "label": "LiveBench 2.0 Long Agentic",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 50.9,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 50.9,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "deepseek-v4.1-flash-1017 / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -152,6 +208,24 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchCoding",
+      "label": "LiveBench 2.0 Coding",
+      "category": "Software engineering",
+      "weightPct": 1.5,
+      "value": 96.0,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 96.0,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "deepseek-v4.1-flash-1017 / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -215,7 +289,7 @@
     "planUsd": 324.12088388877964,
     "fallback": "api",
     "route": null,
-    "subset": false,
+    "subset": true,
     "partialComponents": [],
     "workload": "1453a9a0576b02ea",
     "planFlags": [
@@ -223,8 +297,8 @@
       "cross-estimand ordering not identified"
     ],
     "costScore": {
-      "api": 45.41155145160799,
-      "plan": 25.269633312181384
+      "api": 63.29959641592294,
+      "plan": 31.537290403914106
     },
     "components": [
       {
@@ -291,124 +365,11 @@
   "plans": [],
   "scenarios": {
     "status": "current",
-    "api": [
-      {
-        "stratum": "S0",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S1",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S2",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "unevaluable": null,
-        "top1": 0.0001,
-        "top3": 0.003,
-        "frontier": 0.2347
-      },
-      {
-        "stratum": "S1",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S1M",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S1T",
-        "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0136,
-        "top3": 0.1021,
-        "frontier": 0.3746
-      }
-    ],
-    "plan": [
-      {
-        "stratum": "S0",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S1",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S2",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S1",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S1M",
-        "kernel": "primary",
-        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      },
-      {
-        "stratum": "S1T",
-        "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
-      }
-    ]
+    "api": [],
+    "plan": []
   },
   "intervals": {
-    "api": {
-      "definite": "disproved",
-      "possible": "disproved"
-    },
+    "api": null,
     "plan": null
   },
   "history": [
@@ -416,8 +377,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 6,
-        "plan": 68
+        "api": 3,
+        "plan": 24
       }
     }
   ],
@@ -428,5 +389,37 @@
     "configuration": "DeepSeek V4.1 Flash 1017 (max)",
     "intelligenceGap": 3,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 3,
+        "plan": 24
+      },
+      "overall": {
+        "api": 56.23564408760693,
+        "plan": 48.29506758460472
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": true,
+      "rank": {
+        "api": 4,
+        "plan": 33
+      },
+      "overall": {
+        "api": 50.576257489052985,
+        "plan": 46.272662471254364
+      }
+    }
+  ]
 }

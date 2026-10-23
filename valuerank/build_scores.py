@@ -33,6 +33,7 @@ import re
 from pathlib import Path
 
 from valuerank import exact_match, value_v3
+from valuerank import quality as q
 from valuerank.fetch_deepswe import normalise_name, roster_names
 from valuerank.clock import iso_z, utcnow
 
@@ -1081,9 +1082,21 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     for row in primary_rows:
         row["familyPrimary"] = row["id"] in frontier_primary_ids | near_only_primary_ids
     # O36: a configuration without the full benchmark set after the exhaustive search is listed, never ranked or normalised.
+    # O53: each ranking has its own leaf set; a configuration is ranked in every ranking whose set it has, and listed when
+    # it has none of them.
+    documents = value_v3.load_documents(data)
+    by_track = {}
+    for track in q.TRACKS:
+        with q.active_track(track):
+            by_track[track] = {
+                item["id"]: item
+                for item in value_v3.incomplete_configurations([value_v3.configuration(row) for row in primary_rows], documents)
+            }
+    for row in primary_rows:
+        row["rankings"] = {track: row["id"] not in items for track, items in by_track.items()}
     incomplete = {
-        item["id"]: item
-        for item in value_v3.incomplete_configurations([value_v3.configuration(row) for row in primary_rows], value_v3.load_documents(data))
+        row["id"]: {"id": row["id"], "missing": sorted({leaf for items in by_track.values() for leaf in items[row["id"]]["missing"]})}
+        for row in primary_rows if not any(row["rankings"].values())
     }
     for weight in weights:
         key = weight["key"]
@@ -1141,10 +1154,11 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             if weight["key"] in row["dims"]
         }
         if row["id"] in incomplete:
-            missing = ", ".join(value_v3.LEAF_LABELS[key] for key in incomplete[row["id"]]["missing"])
+            missing = "; ".join(f"{q.TRACK_LABELS[track]}: no " + ", ".join(value_v3.LEAF_LABELS[key] for key in items[row["id"]]["missing"])
+                                for track, items in by_track.items())
             row["rankingEligible"] = False
             row["costComposite"] = None
-            row["rankingExclusionReasons"].append(f"Incomplete benchmark evidence after an exhaustive search (O36): no {missing}")
+            row["rankingExclusionReasons"].append(f"Incomplete benchmark evidence after an exhaustive search (O36, O53): {missing}")
 
     by_overall = sorted(
         [
@@ -1492,7 +1506,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         for row in primary_rows if row.get("terminalBenchV4Claim")
     ]
 
-    v3_section = value_v3.build(
+    v3_sections = value_v3.build_tracks(
         # E187: the frontier-family flag rides with each configuration, so the frontier-families diagnostics exclude retained rows.
         [value_v3.configuration(row) for row in by_overall + unscored_primary_rows],
         data,
@@ -1563,7 +1577,9 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                     }
                     for row in unranked_rows
                 ],
-                "v3": v3_section,
+                # O53/O54: the max-effort ranking leads; every other ranking has its own section.
+                "v3": v3_sections[q.DEFAULT_TRACK],
+                "v3Tracks": {track: section for track, section in v3_sections.items() if track != q.DEFAULT_TRACK},
             },
             indent=2,
             ensure_ascii=False,

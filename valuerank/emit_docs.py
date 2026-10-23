@@ -53,6 +53,11 @@ LEAF_TRANSFORMS = {
     "hle": "z = 100 × accuracy",
     "scicode": "z = 100 × score",
     "critpt": "z = 100 × score",
+    "vibeCode": "z = pass rate %",
+    "codeMigration": "z = pass rate %",
+    "livebenchAgentic": "z = mean task score",
+    "livebenchCoding": "z = mean task score",
+    "aiCodingDaily": "z = 100 × points / 60",
 }
 SOURCE_LABELS = {"aa": "AA-run", "independent": "independent"}
 SOURCE_TYPE_LABELS = {"aa_recapture": "newer AA capture", "independent": "independent run", "model_provider_claim": "model-provider result"}
@@ -246,15 +251,17 @@ def component_label(key):
 class Facts:
     """Everything the four documents quote, computed once from one data directory."""
 
-    def __init__(self, data):
-        self.bundle = viewmodel.build_bundle(data)
+    def __init__(self, data, track=None):
+        # O53: one Facts per ranking; the leading ranking's Facts carries the others in ``tracks``.
+        self.track = track or q.DEFAULT_TRACK
+        self.bundle = viewmodel.build_bundle(data, track)
         self.scores = json.loads((data / "scores.json").read_text())
         self.routes_document = json.loads((data / "plan_cost_routes.json").read_text())
         self.deepswe = json.loads((data / "aa_deepswe.json").read_text())
         self.tb4 = json.loads((data / "tb4.json").read_text())
         self.leaf_evidence = json.loads((data / "leaf_evidence.json").read_text())
         self.bug_hunt = json.loads((data / "bug_hunt.json").read_text())
-        self.v3 = self.scores["v3"]
+        self.v3 = self.scores["v3"] if self.track == q.DEFAULT_TRACK else self.scores["v3Tracks"][self.track]
         self.rows = {row["id"]: row for row in self.v3["rows"]}
         self.names = {model["id"]: model["name"] for model in self.scores["models"]}
         self.rankings = self.bundle.rankings
@@ -264,8 +271,14 @@ class Facts:
         self.inclusion = model_inclusion(self.scores.get("frontierSelection"), self.scores["models"])
         self.cost_pct = self.rankings["costWeightPct"]
         self.quality_pct = 100.0 - self.cost_pct
-        reconciliation, _html = aa_reconciliation_publication(reconcile_aa(data=data))
-        self.reconciliation_md = reconciliation
+        self.tracks = {}
+        if track is None:
+            reconciliation, _html = aa_reconciliation_publication(reconcile_aa(data=data))
+            self.reconciliation_md = reconciliation
+            for other in q.TRACKS:
+                if other != q.DEFAULT_TRACK:
+                    with q.active_track(other):
+                        self.tracks[other] = Facts(data, other)
 
     def row(self, entry):
         return self.rows[self.source_id(entry)]
@@ -618,10 +631,9 @@ def open_web_text(step):
             f"({registered} registered, {len(candidates) - registered} rejected)")
 
 
-def readme(facts):
-    v3, method = facts.v3, facts.method
-    admitted = [item["label"] for item in method["basket"]["admitted"]]
-    yield_ = v3["identificationYield"]
+def ranking_rows(facts, flags=True):
+    """The ranking table's rows for one ranking (O53)."""
+
     table_rows = []
     for entry in facts.ranked:
         row = facts.row(entry)
@@ -636,9 +648,47 @@ def readme(facts):
             usd(entry["cost"]["apiUsd"]),
             usd(entry["cost"]["planUsd"]),
             route_text(entry),
-            short_flags(entry, row),
+            *([short_flags(entry, row)] if flags else []),
             band_text(facts, row["id"]),
         ])
+    return table_rows
+
+
+RANKING_HEADERS = ['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)',
+                   'Plan cost (USD per basket run)', 'Plan route', 'Flags', 'Noise band (Plan / API)']
+
+
+def leaf_set_text(leaves):
+    """A ranking's software-engineering leaves and weights, then the rest (O53-O55)."""
+
+    swe = [leaf for leaf in leaves if leaf.group == "swe"]
+    return (", ".join(f"{leaf.label} {fnum(leaf.weight, 0)}%" for leaf in swe)
+            + f" (software engineering {fnum(sum(leaf.weight for leaf in swe), 0)}%), plus the {len(leaves) - len(swe)} leaves outside software engineering every ranking shares")
+
+
+def track_rankings_markdown(facts):
+    """O53: every ranking other than the leading one, with its leaf set, table and listed configurations."""
+
+    sections = []
+    for track, other in facts.tracks.items():
+        with q.active_track(track):
+            listed = [entry for entry in other.unranked if entry["slug"] in {viewmodel.slugify(row["id"]) for row in facts.scores["models"] if row.get("rankingInclusionReasons")}]
+            sections.append(
+                f"### {q.TRACK_LABELS[track]}\n\n{viewmodel.TRACK_LEADS[track]} Its leaves: {leaf_set_text(q.LEAVES)}. "
+                f"It ranks {len(other.ranked)} configurations, each with every leaf for its exact configuration (O36); its cost anchors and quality bars are its own "
+                f"(anchor version `{other.v3['anchorVersion']}`), so its values are not comparable with the {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s. "
+                f"The interactive table is at [valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}](https://valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}).\n\n"
+                + markdown_table(RANKING_HEADERS, ranking_rows(other), numeric={0, 1, 3, 4, 5, 6, 7, 8})
+                + f"\n\nCohort configurations without this ranking's full set ({len(listed)}): {names([entry['name'] for entry in listed])}.\n"
+            )
+    return "\n".join(sections)
+
+
+def readme(facts):
+    v3, method = facts.v3, facts.method
+    admitted = [item["label"] for item in method["basket"]["admitted"]]
+    yield_ = v3["identificationYield"]
+    table_rows = ranking_rows(facts)
     exploratory = (
         f" No Value Multiple is yet identified on the basket itself ({yield_['pointIdentified'] + yield_['setIdentified']} of {yield_['rows']} rows), "
         "so the Plan ranking is labelled exploratory."
@@ -656,18 +706,19 @@ def readme(facts):
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, and every ranked configuration has all {len(q.LEAVES)} for its exact configuration (O36): a leaf AA has not run comes from another party's run of the same benchmark, then from the model provider's published result, and a configuration still missing one after a logged exhaustive search is listed, not ranked. The Plan ranking divides the basket's API cost by a subscription route's Value Multiple at full utilisation, with one row per configuration and plan (O48), and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. It publishes {len(q.TRACKS)} rankings (owner decision O53), each over the configurations that have its complete benchmark set: the **{q.TRACK_NAMES[q.DEFAULT_TRACK]}** below ({viewmodel.TRACK_LEADS[q.DEFAULT_TRACK][0].lower()}{viewmodel.TRACK_LEADS[q.DEFAULT_TRACK][1:-1]}) and {names(['the ' + q.TRACK_NAMES[track] for track in facts.tracks])} after it. The {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s leaves: {leaf_set_text(q.LEAVES)}. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, and every ranked configuration has all {len(q.LEAVES)} for its exact configuration (O36): a leaf AA has not run comes from another party's run of the same benchmark, then from the model provider's published result, and a configuration still missing one after a logged exhaustive search is listed, not ranked. The Plan ranking divides the basket's API cost by a subscription route's Value Multiple at full utilisation, with one row per configuration and plan (O48), and uses the API cost, flagged, when no route is admitted.{exploratory}
 
 {leaders(facts)}
 
-{markdown_table(['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)', 'Plan cost (USD per basket run)', 'Plan route', 'Flags', 'Noise band (Plan / API)'], table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
+{markdown_table(RANKING_HEADERS, table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
 
 Values are rounded for display; ranks are competition ranks (equal values share the better rank). The Plan rank is that of the configuration's own plan row (its selected route) in the Plan ranking of every plan below.{separability_text(facts)}{plan_rows_table(facts)}
 
 {legend}
 
-Not ranked ({len(facts.unranked)} roster models): {names([entry['name'] for entry in facts.unranked])}. Reasons are listed in [scores.md](scores.md#not-ranked).{incomplete_text(facts)}{listed_indicative_text(facts)}
+Not ranked in the {q.TRACK_NAMES[facts.track]} ({len(facts.unranked)} roster models): {names([entry['name'] for entry in facts.unranked])}. Reasons are listed in [scores.md](scores.md#not-ranked).{incomplete_text(facts)}{listed_indicative_text(facts)}
 
+{track_rankings_markdown(facts)}
 ### What the evidence supports
 
 {intervals}
@@ -734,11 +785,15 @@ def methodology(facts):
     for workload_id, workload in v3["workloads"].items():
         for basis, anchors in workload["anchors"].items():
             anchor_rows.append([f"`{workload_id}` ({workload['role']})", basis, usd(anchors["low"]), usd(anchors["high"]), len(anchors["referenceIds"]), workload.get("anchorStatus", DASH)])
+    # O53-O55: one column of weights per ranking; a leaf a ranking does not use shows a dash.
     leaf_rows = [
-        [md_link(leaf.label, viewmodel.LEAF_INFO[leaf.key]["url"]), q.GROUP_LABELS[leaf.group], f"{leaf.weight:.2f}%", f"{facts.quality_pct * leaf.weight / 100:.2f}%",
-         viewmodel.LEAF_INFO[leaf.key]["unit"], LEAF_TRANSFORMS[leaf.key], "AA-run" if leaf.source == "aa" else "independent"]
-        for leaf in q.LEAVES
+        [md_link(leaf.label, viewmodel.LEAF_INFO[key]["url"]), q.GROUP_LABELS[leaf.group]]
+        + [f"{weight:.2f}%" if weight is not None else DASH
+           for weight in (next((item.weight for item in q.TRACKS[track] if item.key == key), None) for track in q.TRACKS)]
+        + [viewmodel.LEAF_INFO[key]["unit"], LEAF_TRANSFORMS[key], "AA-run" if leaf.source == "aa" else "independent"]
+        for key, leaf in q.ALL_LEAVES.items()
     ]
+    required = [leaf.label for track in q.TRACKS.values() for leaf in track if leaf.weight >= q.REQUIRED_LEAF_WEIGHT]
     rate_rows = [
         [basis, f"{rate['anchorRatio']:.1f}", f"{rate['valuePointsPerCostDoubling']:.2f}", f"{rate['qualityPointsPerCostDoubling']:.2f}"]
         for basis, rate in v3["exchangeRate"].items()
@@ -829,11 +884,13 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 Quality is the weighted mean of the leaves observed for the exact configuration, each placed on fixed 0–100 anchors from its raw value (clipped, with saturation disclosed). Group shares of quality: {', '.join(f"{q.GROUP_LABELS[group]} {share_value:.0f}%" for group, share_value in q.GROUPS.items())}.
 
-{markdown_table(['Leaf', 'Group', 'Weight in quality', 'Weight in value', 'Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
+**Two rankings (owner decisions O52–O55).** ValueRank picks each ranking's benchmark set and ranks the configurations that have all of it, balancing the number of benchmarks against the number of configurations ranked. Outside AA, independent software-engineering benchmarks run few efforts per model, so no single set covers the cohort: LiveBench 2.0 and Vals AI run each model once at its top effort, and AI Coding Daily mostly at high and medium effort. The **{q.TRACK_NAMES['max']}** (leading, O54) adds LiveBench 2.0 Long Agentic and Coding, Vals Vibe Code Bench v1.1 and Vals Code Migration v1.1; the **{q.TRACK_NAMES['aicd']}** adds AI Coding Daily (its bug-finding column excluded because it overlaps Bug Hunt). Each ranking has its own frozen anchors, quality bars, scenario run and diagnostics, so values are comparable within a ranking, not across. Surge's Complex Constraints (instruction following, IFBench's successor), CursorBench 4.0, Surge sudo L7, Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench were considered and are not used: each covers too few cohort configurations at their exact effort (O53, O54; [research record](research/2026-10-23-swe-benchmarks/reports/SWE%20benchmark%20candidates.md)). MiMo-V2.6-Pro's results are taken at high, its AA configuration (O54); Vals records its run without a level, read as the same single reasoning mode (E252).
+
+{markdown_table(['Leaf', 'Group'] + [f"Weight, {q.TRACK_NAMES[track]}" for track in q.TRACKS] + ['Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
 
 Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within {LEAF_SEARCH_DAYS} days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). For a listed frontier or near-frontier family the search also logs an open-web discovery step: its queries and every candidate result, each resolved by a dated registry addition or a dated rejection with its reason, and the build fails on an unresolved candidate (E240). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 
-Coverage is the observed share of quality weight. A row is **provisional** when coverage is below {q.MIN_COVERAGE:.0%}, fewer than {q.MIN_SWE_LEAVES} software-engineering leaves are observed, observed software-engineering weight is below {q.MIN_SWE_WEIGHT:.0%}, or a leaf weighing {q.REQUIRED_LEAF_WEIGHT:.0f}% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
+Coverage is the observed share of quality weight. A row is **provisional** when coverage is below {q.MIN_COVERAGE:.0%}, fewer than {q.MIN_SWE_LEAVES} software-engineering leaves are observed, observed software-engineering weight is below {q.MIN_SWE_WEIGHT:.0%}, or a leaf weighing {q.REQUIRED_LEAF_WEIGHT:.0f}% or more of quality ({names(sorted(set(required))) or 'none'}) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
 
 ## Plan basis
 
@@ -890,18 +947,27 @@ def md_link(label, url):
 # --- scores ------------------------------------------------------------------------------------
 
 
-def scores_markdown(facts):
-    v3 = facts.v3
-    ranking_rows = []
+SCORE_HEADERS = ['Configuration', 'Plan rank', 'Plan value', 'Plan cost score', 'API rank', 'API value', 'API cost score', 'Quality', 'Quality coverage', 'Workload']
+
+
+def score_rows(facts):
+    """scores.md's ranking table rows for one ranking."""
+
+    rows = []
     for entry in facts.ranked:
         row = facts.row(entry)
-        ranking_rows.append([
+        rows.append([
             model_link(entry, configuration_label(row, facts.names)),
             rank_text(entry["rank"]["plan"]), fnum(entry["overall"]["plan"], 2), fnum(entry["costDims"]["plan"], 2),
             rank_text(entry["rank"]["api"]), fnum(entry["overall"]["api"], 2), fnum(entry["costDims"]["api"], 2),
             fnum(entry["quality"], 2), f"{entry['coverage']['pct']:.0f}%", workload_text(entry),
         ])
-    leaf_headers = ["Configuration"] + [leaf.label for leaf in q.LEAVES] + ["Quality", "Provisional"]
+    return rows
+
+
+def leaf_table(facts):
+    """Each ranked row's leaf scores for the active ranking's leaves."""
+
     leaf_rows = []
     for entry in facts.ranked:
         row = facts.row(entry)
@@ -911,6 +977,26 @@ def scores_markdown(facts):
             + [fnum(leaves[leaf.key]["z"], 1) if leaf.key in leaves else DASH for leaf in q.LEAVES]
             + [fnum(row["quality"]["displayed"], 2), "; ".join(row["quality"]["provisionalReasons"]) or "no"]
         )
+    return markdown_table(["Configuration"] + [leaf.label for leaf in q.LEAVES] + ["Quality", "Provisional"], leaf_rows, numeric=set(range(1, len(q.LEAVES) + 2)))
+
+
+def track_scores_markdown(facts):
+    """O53: each other ranking's table and leaf scores in scores.md."""
+
+    sections = []
+    for track, other in facts.tracks.items():
+        with q.active_track(track):
+            sections.append(
+                f"## {q.TRACK_LABELS[track]}\n\n{viewmodel.TRACK_LEADS[track]} Anchor version `{other.v3['anchorVersion']}`; leaves: {leaf_set_text(q.LEAVES)}.\n\n"
+                + markdown_table(SCORE_HEADERS, score_rows(other), numeric={1, 2, 3, 4, 5, 6, 7, 8})
+                + f"\n\n### {q.TRACK_LABELS[track]}: quality leaf scores\n\n" + leaf_table(other) + "\n"
+            )
+    return "\n".join(sections)
+
+
+def scores_markdown(facts):
+    v3 = facts.v3
+    ranking_rows = score_rows(facts)
     components = list(basket.TARGET_COMPONENTS)
     cost_rows = []
     for entry in facts.ranked:
@@ -964,7 +1050,7 @@ Value = {facts.cost_pct:.0f}% × cost score + {facts.quality_pct:.0f}% × qualit
 
 ## Ranking
 
-{markdown_table(['Configuration', 'Plan rank', 'Plan value', 'Plan cost score', 'API rank', 'API value', 'API cost score', 'Quality', 'Quality coverage', 'Workload'], ranking_rows, numeric={1, 2, 3, 4, 5, 6, 7, 8})}
+{markdown_table(SCORE_HEADERS, ranking_rows, numeric={1, 2, 3, 4, 5, 6, 7, 8})}
 
 ## Not ranked
 
@@ -974,7 +1060,9 @@ Value = {facts.cost_pct:.0f}% × cost score + {facts.quality_pct:.0f}% × qualit
 
 Each leaf's score z on its fixed 0–100 anchors; "—" marks a leaf with no eligible exact-configuration result.
 
-{markdown_table(leaf_headers, leaf_rows, numeric=set(range(1, len(q.LEAVES) + 2)))}
+{leaf_table(facts)}
+
+{track_scores_markdown(facts)}
 
 ## Basket cost by component
 
@@ -1158,7 +1246,7 @@ def rank_change_text(changes, names_label):
     return f"{len(moved)} rows move; largest move {largest} ({names_label([row_id for row_id, change in moved.items() if abs(change) == largest])})"
 
 
-LEAF_LABELS = {leaf.key: leaf.label for leaf in q.LEAVES}
+LEAF_LABELS = {key: leaf.label for key, leaf in q.ALL_LEAVES.items()}
 
 
 def gap_fill_text(sensitivity, facts):
@@ -1364,20 +1452,35 @@ def diagnostics_markdown(facts):
 # --- raw data ----------------------------------------------------------------------------------
 
 
-def raw_data(facts):
-    v3 = facts.v3
-    leaf_rows = []
+def leaf_input_rows(facts, seen):
+    """Every ranked row's leaf inputs in the active ranking, skipping (configuration, leaf) pairs already listed."""
+
+    rows = []
     for entry in facts.ranked:
         row = facts.row(entry)
         audit = {item["leaf"]: item for item in row["quality"]["clipAudit"]}
         for leaf in q.LEAVES:  # O36: a ranked row has every leaf
+            if (row["id"], leaf.key) in seen:
+                continue
+            seen.add((row["id"], leaf.key))
             detail = row["quality"]["leaves"][leaf.key]
             evidence = detail.get("evidence") or {}
-            leaf_rows.append([
+            rows.append([
                 configuration_label(row, facts.names), leaf.label, audit[leaf.key]["raw"], audit[leaf.key]["unit"], fnum(detail["z"], 2),
                 " / ".join(str(part) for part in (detail.get("configuration"), detail.get("agent")) if part) or DASH,
                 f"`{evidence['artifact']}` `{evidence['locator']}`" if evidence else DASH,
             ])
+    return rows
+
+
+def raw_data(facts):
+    v3 = facts.v3
+    seen = set()
+    leaf_rows = leaf_input_rows(facts, seen)
+    # O53: the other rankings' rows and leaves (an AI Coding Daily-only configuration, AI Coding Daily itself).
+    for track, other in facts.tracks.items():
+        with q.active_track(track):
+            leaf_rows += leaf_input_rows(other, seen)
     component_rows = []
     reconciliation_rows = []
     for entry in facts.ranked:

@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-luna-high",
   "summary": {
     "rank": {
-      "api": 23,
-      "plan": 76
+      "api": 13,
+      "plan": 39
     },
     "overall": {
-      "api": 40.26754618329562,
-      "plan": 40.20474730893522
+      "api": 46.6129850513685,
+      "plan": 45.88168729996789
     },
-    "quality": 29.51747045071203,
-    "qualityRank": 23,
+    "quality": 35.79794529053887,
+    "qualityRank": 13,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 15.75,
       "value": 0.320254666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 12.75,
       "value": 4.545454545454549,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 9.0,
       "value": 9.0,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -80,6 +80,24 @@
       },
       "observedAt": "2026-10-19",
       "evaluatedVariant": "GPT-6 Luna (high effort) / Codex CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aiCodingDaily",
+      "label": "AI Coding Daily (excl. bug finding)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 47.73,
+      "decimals": 1,
+      "unit": "points of 60",
+      "normalized": 79.55,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://aicodingdaily.com/leaderboard"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "GPT-6-Luna (High) / varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
       "note": null,
       "grade": "measured"
     },
@@ -234,8 +252,8 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 72.5177733810464,
-      "plan": 72.26657788360478
+      "api": 79.0581043338574,
+      "plan": 76.13291332825499
     },
     "components": [
       {
@@ -332,8 +350,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.4713713891041857,
       "selected": true,
-      "planRank": 76,
-      "planValue": 40.20474730893522
+      "planRank": 39,
+      "planValue": 45.88168729996789
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-high-common-gpt-assumption",
@@ -349,8 +367,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.5444182562493163,
       "selected": false,
-      "planRank": 77,
-      "planValue": 40.15081449923444
+      "planRank": 40,
+      "planValue": 45.824869030074005
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-high-common-gpt-assumption",
@@ -366,8 +384,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.5886384456267075,
       "selected": false,
-      "planRank": 78,
-      "planValue": 40.11870283588864
+      "planRank": 41,
+      "planValue": 45.79103936006709
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-high-common-gpt-assumption",
@@ -383,8 +401,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 4.616495383139543,
       "selected": false,
-      "planRank": 79,
-      "planValue": 39.46640393124245
+      "planRank": 42,
+      "planValue": 45.10384180033857
     }
   ],
   "scenarios": {
@@ -415,7 +433,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9985
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -441,8 +459,8 @@
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.8247
+        "top3": 0.001,
+        "frontier": 0.8776
       }
     ],
     "plan": [
@@ -514,8 +532,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 23,
-        "plan": 76
+        "api": 13,
+        "plan": 39
       }
     }
   ],
@@ -526,5 +544,37 @@
     "configuration": "GPT-6 Luna (high)",
     "intelligenceGap": 0,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 13,
+        "plan": 39
+      },
+      "overall": {
+        "api": 46.6129850513685,
+        "plan": 45.88168729996789
+      }
+    }
+  ]
 }

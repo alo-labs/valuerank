@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-1-sol",
   "summary": {
     "rank": {
-      "api": 2,
-      "plan": 19
+      "api": 1,
+      "plan": 7
     },
     "overall": {
-      "api": 50.01177825473451,
-      "plan": 51.6252065752049
+      "api": 57.724952823327854,
+      "plan": 60.318198605475146
     },
-    "quality": 55.30827622588734,
-    "qualityRank": 6,
+    "quality": 61.05264071939384,
+    "qualityRank": 4,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 18.75,
+      "weightPct": 13.5,
       "value": 0.491209333333333,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -51,7 +51,7 @@
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 15.0,
+      "weightPct": 10.5,
       "value": 56.0606060606061,
       "decimals": 1,
       "unit": "% resolved",
@@ -69,7 +69,7 @@
       "key": "bugHunt",
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
-      "weightPct": 11.25,
+      "weightPct": 7.5,
       "value": 44.3,
       "decimals": 1,
       "unit": "bugs fixed of 105",
@@ -138,6 +138,60 @@
       "grade": "measured"
     },
     {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": 77.324,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": 77.324,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "openai/gpt-6.1-sol / Pi agent harness, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 88.931,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": 88.931,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/vibe-code"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "openai/gpt-6.1-sol / OpenHands, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchAgentic",
+      "label": "LiveBench 2.0 Long Agentic",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 73.0,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 73.0,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gpt-6.1-sol / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -152,6 +206,24 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "livebenchCoding",
+      "label": "LiveBench 2.0 Coding",
+      "category": "Software engineering",
+      "weightPct": 1.5,
+      "value": 96.0,
+      "decimals": 1,
+      "unit": "mean task score (0-100)",
+      "normalized": 96.0,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gpt-6.1-sol / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -211,8 +283,8 @@
     }
   ],
   "cost": {
-    "apiUsd": 796.764446620246,
-    "planUsd": 73.96625015041273,
+    "apiUsd": 1233.1097561488218,
+    "planUsd": 114.47361271340715,
     "fallback": null,
     "route": {
       "id": "chatgpt-pro500-gpt61sol-semianalysis",
@@ -227,14 +299,14 @@
     },
     "subset": false,
     "partialComponents": [],
-    "workload": "1453a9a0576b02ea",
+    "workload": "9a0d376cc6080f3c",
     "planFlags": [
       "workload-unmatched",
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 34.12228434127603,
-      "plan": 40.57599762315757
+      "api": 47.741889135129895,
+      "plan": 58.11487226371908
     },
     "components": [
       {
@@ -243,7 +315,7 @@
         "costUsd": 436.34530952857597,
         "completeness": "confirmed-complete",
         "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
-        "admitted": false
+        "admitted": true
       },
       {
         "key": "aa-briefcase",
@@ -337,10 +409,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 73.96625015041273,
+      "usdPerRun": 114.47361271340715,
       "selected": true,
-      "planRank": 19,
-      "planValue": 51.6252065752049
+      "planRank": 7,
+      "planValue": 60.318198605475146
     },
     {
       "id": "chatgpt-plus-gpt61sol-semianalysis",
@@ -354,10 +426,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 75.52269636210862,
+      "usdPerRun": 116.88244134112054,
       "selected": false,
-      "planRank": 20,
-      "planValue": 51.57127376550412
+      "planRank": 8,
+      "planValue": 60.24493632027633
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -371,10 +443,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 75.52269636210862,
+      "usdPerRun": 116.88244134112054,
       "selected": false,
-      "planRank": 20,
-      "planValue": 51.57127376550412
+      "planRank": 8,
+      "planValue": 60.24493632027633
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -388,10 +460,10 @@
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
-      "usdPerRun": 76.46491810175105,
+      "usdPerRun": 118.34066757666237,
       "selected": false,
-      "planRank": 23,
-      "planValue": 51.539162102158315
+      "planRank": 10,
+      "planValue": 60.20131586268659
     }
   ],
   "scenarios": {
@@ -402,7 +474,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -411,7 +483,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -420,8 +492,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0223,
-        "top3": 0.9999,
+        "top1": 0.9998,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -429,7 +501,7 @@
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -438,7 +510,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -447,9 +519,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.3233,
-        "top3": 0.7334,
-        "frontier": 0.6805
+        "top1": 0.9908,
+        "top3": 1.0,
+        "frontier": 1.0
       }
     ],
     "plan": [
@@ -460,7 +532,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -503,8 +575,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1775,
-        "top3": 0.188,
+        "top1": 0.0988,
+        "top3": 0.1108,
         "frontier": 1.0
       }
     ]
@@ -553,8 +625,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 2,
-        "plan": 19
+        "api": 1,
+        "plan": 7
       }
     }
   ],
@@ -565,5 +637,37 @@
     "configuration": "GPT-6.1 Sol (max)",
     "intelligenceGap": 0,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 1,
+        "plan": 7
+      },
+      "overall": {
+        "api": 57.724952823327854,
+        "plan": 60.318198605475146
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }
