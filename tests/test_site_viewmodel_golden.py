@@ -66,17 +66,17 @@ def test_rankings_header_and_bases(bundle, scores, v3):
     assert rankings["planExploratory"] is v3["identificationYield"]["exploratory"] is True
 
 
-def test_dimensions_are_cost_and_the_ten_quality_leaves(bundle):
+def test_dimensions_are_cost_and_the_leading_rankings_quality_leaves(bundle):
     dims = bundle.rankings["dimensions"]
     assert [d["key"] for d in dims] == [viewmodel.COST_KEY, *(leaf.key for leaf in q.LEAVES)]
     assert all(d["category"] in bundle.rankings["categories"] for d in dims)
     assert all(d["sourceUrl"] for d in dims[1:]) and dims[0]["sourceUrl"] is None
 
 
-def test_roster_has_61_models_with_the_27_ranked_first(bundle, v3_rows):
+def test_roster_has_61_models_with_the_9_max_effort_rows_ranked_first(bundle, v3_rows):
     models = bundle.rankings["models"]
-    assert len(models) == 61 and sum(m["rankingEligible"] for m in models) == len(v3_rows) == 27
-    leading, trailing = models[:27], models[27:]
+    assert len(models) == 61 and sum(m["rankingEligible"] for m in models) == len(v3_rows) == 9
+    leading, trailing = models[:9], models[9:]
     assert all(m["rankingEligible"] and m["rank"]["plan"] is not None for m in leading)
     plan_ranks = [m["rank"]["plan"] for m in leading]
     assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1
@@ -88,10 +88,11 @@ def test_roster_has_61_models_with_the_27_ranked_first(bundle, v3_rows):
         assert model["exclusionReasons"] and all(v is None for v in model["dims"].values())
         assert model["grade"] == "missing" and model["coverage"]["pct"] == 0.0
     # O36/O38: a cohort configuration missing a benchmark after the logged search is listed with the gap, not ranked.
-    mimo_flash = by_slug(bundle.rankings)["mimo-v2-6-flash"]
-    assert not mimo_flash["rankingEligible"] and mimo_flash["exclusionReasons"][-1].endswith("(O36): no Bug Hunt Bench")
-    minimax = by_slug(bundle.rankings)["minimax-m3-1-flash"]
-    assert not minimax["rankingEligible"] and minimax["exclusionReasons"][-1].endswith("(O36): no Bug Hunt Bench")
+    # O53: the reason names what each ranking lacks.
+    for slug in ("mimo-v2-6-flash", "minimax-m3-1-flash"):
+        model = by_slug(bundle.rankings)[slug]
+        assert not model["rankingEligible"] and "(O36, O53): Max-effort ranking: no Bug Hunt Bench" in model["exclusionReasons"][-1]
+        assert model["exclusionReasons"][-1].endswith("AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)")
     # O51: every cohort configuration has an AA cost today, so no ranked row lacks a value score.
     assert not [m for m in trailing if m["rankingEligible"]]
 
@@ -118,7 +119,7 @@ def test_value_is_the_fixed_cost_share_rule_on_unrounded_inputs(bundle):
 
 def test_ranks_are_competition_ranks_on_unrounded_values(bundle):
     ranked = [m for m in bundle.rankings["models"] if m["rankingEligible"] and m["overall"]["plan"] is not None]
-    assert len(ranked) == 27
+    assert len(ranked) == 9
     for model in ranked:
         assert model["rank"]["api"] == 1 + sum(1 for other in ranked if other["overall"]["api"] > model["overall"]["api"])
     # O48: the Plan basis ranks plan rows, so a configuration's Plan rank is its own plan row's rank among every plan row.
@@ -148,14 +149,16 @@ def test_pareto_flags_follow_the_main_workload_point_estimates(bundle, v3):
     for basis in ("api", "plan"):
         expected = {viewmodel.slugify(row_id) for row_id in viewmodel.pareto_set(v3["rows"], v3["mainWorkload"], basis)}
         assert {slug for slug, m in models.items() if m["pareto"][basis]} == expected
-    assert models["mimo-v2-6-pro"]["pareto"]["api"]  # O50: every cohort row now has the full basket, MiMo-V2.6-Pro included
+    # O17: a subset-workload row is never on the main-workload frontier (the max-effort ranking admits the Coding Agent Index).
+    assert not models["mimo-v2-6-pro"]["pareto"]["api"] and models["gpt-6-1-sol"]["pareto"]["api"]
 
 
 def test_flags_name_subset_rows(bundle):
     mimo = by_slug(bundle.rankings)["mimo-v2-6-pro"]
-    # O49/O50: MiMo-V2.6-Pro's provider-claimed DeepSWE leaf is gone and the basket is complete for it, so no flag remains.
-    assert mimo["cost"]["subset"] is False and mimo["coverage"]["provisional"] is False and mimo["flags"] == []
-    haiku = by_slug(bundle.rankings)["claude-haiku-5-5"]
+    # O50/E140: the max-effort ranking admits the Coding Agent Index v2.0 (7 of its 9 rows priced); MiMo-V2.6-Pro has no
+    # Coding Agent Index cost, so it is scored on its own subset workload and flagged (O17).
+    assert mimo["cost"]["subset"] is True and mimo["coverage"]["provisional"] is False and mimo["flags"][0].startswith("Subset cost")
+    haiku = by_slug(bundle.rankings)["claude-haiku-5-5-max"]
     assert any(flag.startswith("AA cost caveat") for flag in haiku["flags"])
 
 
@@ -166,9 +169,8 @@ def test_picks_reference_ranked_models_with_plain_reasons(bundle):
         for pick in picks.values():
             assert models[pick["slug"]]["rankingEligible"] and len(pick["reason"].split()) < 25
         assert "per basket run" in picks["value"]["reason"]
-    # O33: an evidenced sibling effort is a configuration of its own and can be a pick.
-    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "gpt-6-1-sol-xhigh"
-    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("GPT-6.1 Sol (xhigh) has the highest overall score")
+    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "gpt-6-1-sol"
+    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("GPT-6.1 Sol has the highest overall score")
 
 
 # --- per-model documents -------------------------------------------------------------------------
@@ -190,8 +192,8 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     assert leaves["bugHunt"]["value"] == 44.3 and "GPT-6.1 Sol" in leaves["bugHunt"]["evaluatedVariant"]
     assert leaves["omniscience"]["unit"].startswith("AA Omniscience Index")
     components = {c["key"]: c for c in doc["cost"]["components"]}
-    # O50: the Coding Agent Index v2.0 prices too few cohort rows to be admitted; FrontierCode is no longer a chart component.
-    assert components["coding-agent-index"]["admitted"] is False and "frontiercode" not in components
+    # O50: the max-effort ranking admits the Coding Agent Index v2.0; FrontierCode is no longer a chart component.
+    assert components["coding-agent-index"]["admitted"] is True and "frontiercode" not in components
     assert sum(c["costUsd"] for c in components.values() if c["admitted"]) == pytest.approx(doc["cost"]["apiUsd"])
     assert doc["cost"]["costScore"] == by_slug(bundle.rankings)["gpt-6-1-sol"]["costDims"]
     selected = [plan for plan in doc["plans"] if plan["selected"]]
@@ -207,7 +209,7 @@ def test_unranked_and_subset_documents(bundle):
     assert unranked["summary"]["rankingEligible"] is False and unranked["plans"] == [] and unranked["cost"]["components"] == []
     assert all(d["grade"] == "missing" for d in unranked["dimensions"])
     mimo = bundle.models["mimo-v2-6-pro"]
-    assert {run["stratum"] for run in mimo["scenarios"]["api"]} == {"S0", "S1", "S2", "S1M", "S1T"}  # O50: on the main workload now
+    assert mimo["scenarios"]["api"] == []  # O17: a subset-workload row is outside the main-workload scenario streams
     argon = bundle.models["gemini-4-argon"]  # no subscription route names it, so the row falls back to API cost
     assert argon["plans"] == [] and argon["cost"]["fallback"] == "api" and argon["cost"]["planUsd"] == argon["cost"]["apiUsd"]
     assert argon["cost"]["planAmount"] is None and unranked["cost"]["planAmount"] is None
@@ -243,7 +245,7 @@ def test_model_history_and_frontier_notes(bundle):
 def test_plans_document(bundle, v3):
     plans = bundle.plans
     # O45/O46: one route record per model and plan.
-    assert plans["asOf"] == "2026-10-08" and len(plans["routes"]) == 137 and len(plans["candidates"]) == 27
+    assert plans["asOf"] == "2026-10-08" and len(plans["routes"]) == 137 and len(plans["candidates"]) == 9
     assert plans["identificationYield"] == v3["identificationYield"]
     route = next(r for r in plans["routes"] if r["id"] == "claude-pro-opus55-semianalysis")
     assert route["grade"] == "measured" and route["modelSlugs"] == ["claude-opus-5-5"] and route["valueMultiple"] == 58.9
@@ -258,14 +260,14 @@ def test_benchmarks_document(bundle, v3):
     doc = bundle.benchmarks
     assert [s["id"] for s in doc["sources"]] == [leaf.key for leaf in q.LEAVES]
     frontiercode = next(s for s in doc["sources"] if s["id"] == "frontierCode")
-    assert frontiercode["weightPct"] == 18.75 and frontiercode["coverage"] == {"available": 27, "cohort": 27} and frontiercode["execution"] == "AA-run"
+    assert frontiercode["weightPct"] == 13.5 and frontiercode["coverage"] == {"available": 9, "cohort": 9} and frontiercode["execution"] == "AA-run"
     assert next(s for s in doc["sources"] if s["id"] == "bugHunt")["execution"] == "independent"
     # O37: Terminal-Bench is AA's own run; tbench.ai only fills a gap.
     terminal = next(s for s in doc["sources"] if s["id"] == "terminalBench")
     assert terminal["execution"] == "AA-run" and terminal["owner"] == "Artificial Analysis" and terminal["notes"].startswith("AA's own run")
     assert next(s for s in doc["sources"] if s["id"] == "omniscience")["notes"].startswith("Scored as AA's Omniscience Index")
     assert [c["key"] for c in doc["basket"]["admitted"]] == v3["admission"]["admitted"]
-    assert {c["key"] for c in doc["basket"]["pending"]} == {"coding-agent-index", "itbench-aa"}  # O50: v2.0 prices too few rows
+    assert {c["key"] for c in doc["basket"]["pending"]} == {"itbench-aa"}  # O50: v2.0 prices 7 of the max-effort ranking's 9 rows
     assert doc["basket"]["referencePanelSize"] >= doc["basket"]["requiredPanelSize"]
     frontier = doc["frontier"]
     assert frontier["status"] == "complete" and len(frontier["rows"]) == 18
@@ -285,7 +287,7 @@ def test_tb4_document(bundle, data):
 
 def test_changelog_document(bundle):
     versions = bundle.changelog["versions"]
-    assert versions[0]["version"] == VERSION and versions[0]["models"] == 27 and versions[0]["dimensions"] == 11
+    assert versions[0]["version"] == VERSION and versions[0]["models"] == 9 and versions[0]["dimensions"] == len(bundle.rankings["dimensions"]) == 15
     assert versions[-1]["version"] == "v1.5.0" and versions[-1]["rankChanges"] == []
 
 
@@ -294,11 +296,11 @@ def test_changelog_document(bundle):
 
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
-    assert page["headline"]["api"] == "GPT-6.1 Sol (xhigh) leads the API ranking at 50.2; Claude Opus 5.5 leads on quality."
-    assert page["headline"]["plan"] == "Claude Opus 5.5 (xhigh) leads the Plan ranking at 54.0 (owner-named transfer); Claude Opus 5.5 leads on quality."
+    assert page["headline"]["api"] == "GPT-6.1 Sol leads the API ranking at 57.7; Claude Opus 5.5 leads on quality."
+    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 62.3 and also leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
-    assert len(page["models"]) == 27 and page["dimensions"] == bundle.rankings["dimensions"]
-    assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 27  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
+    assert len(page["models"]) == 9 and page["dimensions"] == bundle.rankings["dimensions"]
+    assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 9  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
     assert page["chart"]["api"][0]["costLabel"].endswith("per basket run")
 
 
@@ -308,7 +310,7 @@ def test_rankings_and_models_pages(bundle):
     assert [c["key"] for c in page["columns"] if c["default"]] == ["rank", "name", "overall", "quality", "cost", "grade", "coverage"]
     assert {c["key"] for c in page["columns"]} >= {leaf.key for leaf in q.LEAVES}
     models = viewmodel.models_page(bundle)
-    assert models["rankedCount"] == 27 and models["unrankedCount"] == 34
+    assert models["rankedCount"] == 9 and models["unrankedCount"] == 52
 
 
 def test_model_page(bundle):
@@ -335,7 +337,7 @@ def test_benchmark_pages_wrap_their_documents(bundle):
 def test_methodology_page(bundle, v3):
     page = viewmodel.methodology_page(bundle)
     method = page["method"]
-    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 48.9 (the displayed quality of GPT-6.1 Sol (medium) at freeze)"
+    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 60.7 (the displayed quality of Gemini 4 Argon at freeze)"
     assert method["anchors"]["api"]["low"] == v3["workloads"][v3["mainWorkload"]]["anchors"]["api"]["low"]
     assert method["streamDescriptions"]["S0"] == "published-record reporting precision" and method["notQuantified"]
     example = page["workedExample"]
@@ -352,7 +354,7 @@ def test_methodology_page(bundle, v3):
 def test_data_page(bundle):
     page = viewmodel.data_page(bundle)
     assert [f["path"] for f in page["files"]] == [
-        "/data/rankings.json", "/data/models/<slug>.json", "/data/plans.json",
+        "/data/rankings.json", "/data/rankings-aicd.json", "/data/models/<slug>.json", "/data/plans.json",
         "/data/benchmarks.json", "/data/benchmarks/terminal-bench-4.json", "/data/changelog.json", "/data/livebench.json",
     ]
     assert all(f["description"] and f["schema"] for f in page["files"])
@@ -365,7 +367,7 @@ def test_export_writes_every_public_file_deterministically(data, tmp_path):
     first = export.export_public_data(data, tmp_path / "one")
     second = export.export_public_data(data, tmp_path / "two")
     relative = sorted(p.relative_to(tmp_path / "one").as_posix() for p in first)
-    assert len(first) == 67 and "plans.json" in relative  # 6 site documents and 61 model documents and "rankings.json" in relative
+    assert len(first) == 68 and "plans.json" in relative and "rankings-aicd.json" in relative  # 7 site documents and 61 model documents
     for left, right in zip(sorted(first), sorted(second)):
         assert left.read_bytes() == right.read_bytes()
     text = (tmp_path / "one" / "rankings.json").read_text()
@@ -381,3 +383,26 @@ def test_export_does_not_escape_non_ascii(data, tmp_path):
 def test_no_nan_or_infinity_leaks_into_public_json(data, tmp_path):
     for path in export.export_public_data(data, tmp_path / "out"):
         json.loads(path.read_text(), parse_constant=lambda c: pytest.fail(f"{c} in {path}"))
+
+
+# --- the second ranking (O53) ------------------------------------------------------------------------
+
+
+def test_the_ai_coding_daily_ranking_is_a_bundle_of_its_own(bundle, scores):
+    other = bundle.extras["tracks"]["aicd"]
+    rankings = other.rankings
+    assert rankings["track"] == {"key": "aicd", "label": "AI Coding Daily ranking", "href": "/rankings/ai-coding-daily/"}
+    assert bundle.rankings["track"]["key"] == "max" and set(bundle.extras["tracks"]) == {"aicd"}
+    ranked = {m["slug"] for m in rankings["models"] if m["rankingEligible"]}
+    assert len(ranked) == len(scores["v3Tracks"]["aicd"]["rows"]) == 15
+    assert "aiCodingDaily" in {d["key"] for d in rankings["dimensions"]} and "vibeCode" not in {d["key"] for d in rankings["dimensions"]}
+    # A configuration ranked only there takes its model page from that ranking, and every page lists both rankings.
+    opus_high = bundle.models["claude-opus-5-5-high"]
+    assert opus_high["summary"]["rankingEligible"] is True and "aiCodingDaily" in {d["key"] for d in opus_high["dimensions"]}
+    assert [(r["track"], r["shown"], r["rankingEligible"]) for r in opus_high["rankings"]] == [("max", False, False), ("aicd", True, True)]
+    sol = bundle.models["gpt-6-1-sol"]
+    assert [(r["track"], r["shown"], r["rankingEligible"]) for r in sol["rankings"]] == [("max", True, True), ("aicd", False, False)]
+    page = viewmodel.rankings_page(other)
+    assert page["heading"] == "AI Coding Daily ranking" and page["action"] == "/rankings/ai-coding-daily/"
+    assert [link["current"] for link in page["trackLinks"]] == [False, True]
+    assert viewmodel.rankings_page(bundle)["heading"] == "Rankings"

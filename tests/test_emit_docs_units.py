@@ -360,8 +360,13 @@ def test_gap_fill_and_incomplete_texts_without_rows():
     class Facts:
         v3 = {"incompleteEvidence": []}
         scores = {"models": []}
+        label = staticmethod(lambda row_id: row_id.upper())
+        labels = staticmethod(lambda row_ids: ", ".join(row_id.upper() for row_id in row_ids))
 
     assert ed.gap_fill_text({"rows": {}, "bases": {}}, Facts).endswith("no ranked row has a leaf from another party or the provider.")
+    filled = {"rows": {"claude-opus-5-5": ["frontierCode"]}, "bases": {basis: {"rankChanges": {"changes": {"claude-opus-5-5": -1}}} for basis in ("api", "plan")}}
+    assert ed.gap_fill_text(filled, Facts) == ("- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — "
+                                               "CLAUDE-OPUS-5-5 (FrontierCode 1.1) — API 1 row moves; largest move 1 (CLAUDE-OPUS-5-5); Plan 1 row moves; largest move 1 (CLAUDE-OPUS-5-5).")
     assert ed.incomplete_text(Facts) == ""
     Facts.v3 = {"incompleteEvidence": [{"id": "x", "name": "X", "missing": ["bugHunt"]}]}
     Facts.scores = {"models": [{"id": "x", "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}]}

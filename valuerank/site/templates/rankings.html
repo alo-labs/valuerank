@@ -8,9 +8,9 @@
 {% block content %}
 <header class="page-head">
   <p class="eyebrow">The full instrument</p>
-  <h1 id="page-title">{{ page.heading or "Rankings" }}</h1>
+  <h1 id="page-title">{{ page.get("heading") or "Rankings" }}</h1>
   <p class="lead">Sort, filter and compare every model on either basis. The address bar always holds your current view, so a copied link reproduces it.</p>
-  {%- if page.trackLinks %}
+  {%- if page.get("trackLinks") %}
   <p class="note">{{ page.trackLead }} ValueRank publishes {{ page.trackLinks | length }} rankings, each over the configurations with its complete benchmark set:
     {%- for link in page.trackLinks %} {% if link.current %}<strong>{{ link.label }}</strong>{% else %}<a href="{{ link.href }}">{{ link.label }}</a>{% endif %}{{ "," if not loop.last else "." }}{%- endfor %}</p>
   {%- endif %}
@@ -21,7 +21,7 @@
 </header>
 
 <div class="rank-layout">
-  <form id="filters" class="filters" method="get" action="{{ page.action or '/rankings/' }}" autocomplete="off" role="search" aria-label="Filter rankings">
+  <form id="filters" class="filters" method="get" action="{{ page.get('action') or '/rankings/' }}" autocomplete="off" role="search" aria-label="Filter rankings">
     <details class="filters-details">
     <summary><h2 class="filters-title">Filters</h2></summary>
     <div class="field">

@@ -60,12 +60,12 @@ def test_models_index_lists_every_roster_model_ranked_first(bundle):
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rank"]["plan"] is not None]
     plan_ranks = [m["rank"]["plan"] for m in ranked]
-    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 27
-    assert models[:27] == ranked
-    assert all(m["rank"]["plan"] is None for m in models[27:])
-    # O51: every cohort configuration with the full benchmark set has a cost and a rank.
-    assert [m["slug"] for m in models[27:] if m["rankingEligible"]] == []
-    assert page["rankedCount"] == 27 and page["unrankedCount"] == 34
+    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 9
+    assert models[:9] == ranked
+    assert all(m["rank"]["plan"] is None for m in models[9:])
+    # O51: every configuration with the max-effort ranking's full set has a cost and a rank there.
+    assert [m["slug"] for m in models[9:] if m["rankingEligible"]] == []
+    assert page["rankedCount"] == 9 and page["unrankedCount"] == 52
 
 
 def test_index_models_carry_the_coverage_object(bundle):
@@ -103,7 +103,7 @@ def test_methodology_worked_example_lists_steps_and_priorities(bundle):
 def test_data_page_links_are_absolute_and_include_livebench(bundle):
     paths = [f["path"] for f in viewmodel.data_page(bundle)["files"]]
     assert paths == [
-        "/data/rankings.json", "/data/models/<slug>.json", "/data/plans.json", "/data/benchmarks.json",
+        "/data/rankings.json", "/data/rankings-aicd.json", "/data/models/<slug>.json", "/data/plans.json", "/data/benchmarks.json",
         "/data/benchmarks/terminal-bench-4.json", "/data/changelog.json", "/data/livebench.json",
     ]
 

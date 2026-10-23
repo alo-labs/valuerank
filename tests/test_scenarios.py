@@ -122,7 +122,7 @@ def test_dirichlet_and_hierarchical_weights_preserve_totals():
     weights = sc.hierarchical_weights(rng)
     assert set(weights) == {leaf.key for leaf in q.LEAVES}
     assert sum(weights.values()) == pytest.approx(100.0)
-    assert sc.nominal_weights()["frontierCode"] == 25.0
+    assert sc.nominal_weights()["frontierCode"] == 18.0
 
 
 def test_hierarchical_weights_keep_the_nominal_means():
@@ -155,7 +155,7 @@ def test_draw_scenario_strata():
     s1 = sc.draw_scenario([partial], "S1", rng)
     assert 0.0 <= s1["p"][1] <= 100.0 and s1["p"][1] != pytest.approx(80.0)
     alternative = sc.draw_scenario([partial], "S1", rng, alternative=True, ranges={"frontierCode": (0, 0), **{leaf.key: (50.0, 50.0) for leaf in q.LEAVES}})
-    assert alternative["p"][1] == pytest.approx(0.25 * 80 + 0.75 * 50)
+    assert alternative["p"][1] == pytest.approx(0.18 * 80 + 0.82 * 50)
     alternative_default = sc.draw_scenario([partial], "S1", rng, alternative=True)
     assert 0.0 <= alternative_default["p"][1] <= 100.0
     s2 = sc.draw_scenario([full_row("f", 60.0, 100.0)], "S2", rng)

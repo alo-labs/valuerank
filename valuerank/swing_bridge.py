@@ -29,7 +29,7 @@ TOKEN_FIELDS = ("intelligenceIndexEvaluations", "intelligenceIndexCost", "canoni
 CLASSES = {
     "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords",)},
     "tokenUse": {"fields": TOKEN_FIELDS, "documents": ("codingAgents", "costCharts")},
-    "benchmarkRecord": {"fields": "*", "documents": ("bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode")},
+    "benchmarkRecord": {"fields": "*", "documents": ("bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode", "sweTracks")},
     "planEvidence": {"fields": (), "documents": ("planRoutes",)},
     "cohort": {"fields": (), "documents": ("configurationMap", "frontierCapture", "roster")},
 }

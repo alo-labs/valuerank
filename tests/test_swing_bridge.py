@@ -6,7 +6,7 @@ import copy
 
 import pytest
 
-from test_value_v3 import ALL_TASKS, CONFIGURATIONS, DAY, documents, page
+from test_value_v3 import ALL_TASKS, CONFIGURATIONS, DAY, documents, fixture_ranking, page  # noqa: F401 (fixture_ranking is autouse)
 from valuerank import swing_bridge as sb
 from valuerank import value_v3 as v
 

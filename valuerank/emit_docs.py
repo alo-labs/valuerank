@@ -771,6 +771,9 @@ def methodology(facts):
     incomplete_line = (f"\n\n{len(incomplete)} more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive "
                        f"search logged within {LEAF_SEARCH_DAYS} days of the cutoff (O36; a required frontier family is listed the same way, O38): "
                        + "; ".join(f"{item['name']} (no {', '.join(LEAF_LABELS[key] for key in item['missing'])})" for item in incomplete) + "."
+                       + "".join(f" Of these, {len(ranked)} are ranked in the {q.TRACK_NAMES[track]} (O53): {names(ranked)}."
+                                 for track, other in facts.tracks.items()
+                                 for ranked in [[item['name'] for item in incomplete if item['id'] in other.rows]] if ranked)
                        ) if incomplete else ""
     component_rows = [
         [component_label(key), "admitted" if item["admitted"] else "pending capture", item["available"], item["covered"], item["ranked"]]
@@ -1243,7 +1246,8 @@ def rank_change_text(changes, names_label):
     if not moved:
         return "no rank changes"
     largest = max(abs(change) for change in moved.values())
-    return f"{len(moved)} rows move; largest move {largest} ({names_label([row_id for row_id, change in moved.items() if abs(change) == largest])})"
+    return (f"{len(moved)} {'row moves' if len(moved) == 1 else 'rows move'}; largest move {largest} "
+            f"({names_label([row_id for row_id, change in moved.items() if abs(change) == largest])})")
 
 
 LEAF_LABELS = {key: leaf.label for key, leaf in q.ALL_LEAVES.items()}

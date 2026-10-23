@@ -23,6 +23,26 @@ from valuerank import value_v3 as v
 
 DAY = date(2026, 10, 19)
 ALL_TASKS = {**basket.INDEX_SDLC_TASKS, **basket.INDEX_RESIDUAL_TASKS}
+# The engine's fixtures predate the two rankings (O53): they are scored on one ten-leaf ranking with the O49 weights.
+# The engine is the same for every leaf table; the rankings' own leaf sets are tested in test_tracks.py.
+FIXTURE_LEAVES = (
+    q.Leaf("frontierCode", "FrontierCode 1.1", "swe", 25.0, "aa"),
+    q.Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 20.0, "aa"),
+    q.Leaf("bugHunt", "Bug Hunt Bench", "swe", 15.0, "independent"),
+    *q.COMMON_LEAVES,
+)
+
+
+@pytest.fixture(autouse=True)
+def fixture_ranking():
+    saved = q.TRACKS
+    q.TRACKS = {q.DEFAULT_TRACK: FIXTURE_LEAVES}
+    try:
+        with q.active_track(q.DEFAULT_TRACK):
+            yield
+    finally:
+        q.TRACKS = saved
+        q.TRACK, q.LEAVES, q.LEAF_BY_KEY = q.DEFAULT_TRACK, saved[q.DEFAULT_TRACK], {leaf.key: leaf for leaf in saved[q.DEFAULT_TRACK]}
 
 
 def page(slug: str, cost_per_task: float, **fields) -> dict:
@@ -56,7 +76,7 @@ def comparable(leaf: str) -> dict:
     return {"benchmarkVersion": v.SUPPLEMENT_VERSIONS[leaf], "metric": "headline score", "publisher": "Registered party"}
 
 
-REGISTRY = {leaf.key: ["Registered party"] for leaf in q.LEAVES}
+REGISTRY = {leaf.key: ["Registered party"] for leaf in FIXTURE_LEAVES}
 
 
 def documents(**overrides) -> dict:
@@ -598,6 +618,7 @@ def write_world(root: Path) -> Path:
         "price_records.json": documents()["priceRecords"],
         "leaf_evidence.json": documents()["leafEvidence"],
         "cognition_frontiercode.json": {"v1_1": {"data": {}}},
+        "swe_tracks.json": {"capturedAt": "2026-10-19T00:00:00Z", "sources": {}, "records": []},
         "aa_frontier_capture.json": {"points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
         "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
@@ -1617,7 +1638,7 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
     assert set(separability["valueSd"]) == {"a", "b", "c"} and separability["api"]["adjacentPairs"] == 2
-    assert separability["api"]["medianSeparation"] > 0 and len(separability["assumptions"]) == 3
+    assert separability["api"]["medianSeparation"] > 0 and len(separability["assumptions"]) == len(v.SAMPLING_ASSUMPTIONS) == 5
     lone = v.rank_separability({"rows": result["rows"][:1]}, {"a": {basis: {"value": 1.0} for basis in v.BASES}})
     assert {key: lone["api"][key] for key in ("adjacentPairs", "separableAdjacentPairs", "medianSeparation")} == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
     assert lone["api"]["bands"] == {"a": [1, 1]}

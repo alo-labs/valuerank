@@ -396,6 +396,14 @@ def _track_bundle(data: Path, track: str) -> Bundle:
 
     pareto = {basis: pareto_set(v3["rows"], v3["mainWorkload"], basis) for basis in BASES}
     entries = {slugify(source["id"]): _entry(source, rows.get(source["id"]), quality_ranks, frontier, shares, routes, pareto) for source in roster}
+    # O53: a configuration ranked only in another ranking says which leaves this ranking lacks and where it is ranked.
+    missing = {item["id"]: item["missing"] for item in v3.get("incompleteEvidence", [])}
+    for source in roster:
+        entry = entries[slugify(source["id"])]
+        if not entry["rankingEligible"] and source.get("rankingEligible") and source["id"] in missing:
+            elsewhere = [q.TRACK_NAMES[key] for key, ranked in (source.get("rankings") or {}).items() if ranked and key != track]
+            entry["exclusionReasons"] = [f"Not in the {q.TRACK_NAMES[track]}: no " + ", ".join(q.ALL_LEAVES[key].label for key in missing[source["id"]])
+                                         + (f"; ranked in the {', '.join(elsewhere)}" if elsewhere else "")]
     # O42: the band of rank positions each ranked row cannot be separated from under benchmark sampling noise.
     bands = {basis: v3["diagnostics"]["rankSeparability"][basis]["bands"] for basis in BASES}
     transferred = set(v3["diagnostics"]["rankSeparability"]["planAssumedRouteRows"])
@@ -1062,7 +1070,9 @@ def data_page(bundle: Bundle) -> dict:
 
     sample = next(iter(bundle.models.values()))
     files = [
-        ("/data/rankings.json", "Every roster model with v3 value scores, ranks, basket cost and evidence on both bases.", schema(bundle.rankings)),
+        ("/data/rankings.json", "Every roster model with v3 value scores, ranks, basket cost and evidence on both bases, in the max-effort ranking.", schema(bundle.rankings)),
+        *((f"/data/rankings-{track}.json", f"The same document for the {q.TRACK_NAMES[track]} (O53).", schema(other.rankings))
+          for track, other in bundle.extras.get("tracks", {}).items()),
         ("/data/models/<slug>.json", "One document per roster model with every quality leaf, its source, the cost basket, plan routes, scenario shares and history.", schema(sample)),
         ("/data/plans.json", "Subscription routes, their evidence and every candidate's API and Plan basket cost.", schema(bundle.plans)),
         ("/data/benchmarks.json", "Quality-leaf sources and coverage, the admitted cost basket and the Artificial Analysis frontier.", schema(bundle.benchmarks)),

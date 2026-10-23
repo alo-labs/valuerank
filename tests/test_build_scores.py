@@ -66,7 +66,7 @@ def log_searches(*model_ids):
     def fn(document):
         document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-21", "result": "not found", "sources": [],
                                   "openWeb": {"searchedOn": "2026-10-21", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
-                                 for model_id in model_ids for leaf in quality.LEAVES]
+                                 for model_id in model_ids for leaf in quality.ALL_LEAVES.values()]
     return fn
 
 
@@ -339,11 +339,18 @@ def test_ranked_order_and_exclusions(built):
     assert overall == sorted(overall, reverse=True)
     assert all(m["rankingStatus"] == "ranked" for m in ranked)
     # O36: a cohort configuration without the full benchmark set after the logged search is listed, not ranked.
+    # O53: it is excluded only when it lacks every ranking's set; each ranking lists the configurations it cannot rank.
     incomplete = [m for m in scores["models"] if m["rankingStatus"] == "excluded_incomplete_benchmarks"]
-    assert {m["id"] for m in incomplete} == {item["id"] for item in scores["v3"]["incompleteEvidence"]}
+    listed = [{item["id"] for item in section["incompleteEvidence"]} for section in [scores["v3"], *scores["v3Tracks"].values()]]
+    assert {m["id"] for m in incomplete} == set.intersection(*listed)
     for m in incomplete:
         assert not m["rankingEligible"] and m["rank"] is None and m["overallScore"] is None and m["costComposite"] is None
-        assert m["rankingInclusionReasons"] and m["rankingExclusionReasons"][-1].startswith("Incomplete benchmark evidence after an exhaustive search (O36): no ")
+        assert not any(m["rankings"].values())
+        assert m["rankingInclusionReasons"] and m["rankingExclusionReasons"][-1].startswith(
+            "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no ")
+        assert "; AI Coding Daily ranking: no " in m["rankingExclusionReasons"][-1]
+    ranked_somewhere = [m for m in scores["models"] if m.get("rankings") and any(m["rankings"].values())]
+    assert ranked_somewhere and all(m["rankingEligible"] for m in ranked_somewhere)
     excluded = [m for m in scores["models"] if not m["rankingEligible"] and m not in incomplete]
     assert excluded
     for m in excluded:
@@ -1169,7 +1176,7 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     base_cohort_n = base["scores.json"]["cohort"]["n"]
     add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="gpt-5-5")
     # O36: without Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
-    with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for (bugHunt|frontierCode)"):
+    with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for (bugHunt|frontierCode|vibeCode|aiCodingDaily)"):
         run_main(world)
     edit(world, "leaves", log_searches("gpt-5.5"))
     run_main(world)
@@ -1179,7 +1186,9 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     assert model["rankingInclusionReasons"] == [
         "Near-frontier AA family (within 3 Index points of the rendered frontier)"]
     assert model["rankingExclusionReasons"] == [
-        "Incomplete benchmark evidence after an exhaustive search (O36): no FrontierCode 1.1, Bug Hunt Bench"]
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no FrontierCode 1.1, Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), "
+        "Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no FrontierCode 1.1, Bug Hunt Bench, "
+        "AI Coding Daily (excl. bug finding)"]
     assert (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"]) == ("near", "GPT-5.5 (medium)", 1)
     assert model["aaFrontierFootnote"] == "note for gpt-5-5"
     assert out["scores.json"]["cohort"]["n"] == base_cohort_n + 1
@@ -1250,7 +1259,10 @@ def test_the_cohort_is_every_plotted_frontier_and_near_configuration(world):
         assert bool(model["rankingInclusionReasons"]) is (model["aaUrl"] in plotted), model["id"]
     rows = model_rows(world)
     assert rows["muse-spark-1-3"]["rankingStatus"] == "excluded_from_primary_cohort"
-    assert rows["gpt-6-luna-low"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankingEligible"] is True
+    # O53: a cohort row is ranked in each ranking whose full set it has, and listed when it has none.
+    assert rows["claude-opus-5-5-high"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankings"] == {"max": False, "aicd": True}
+    assert rows["gpt-6.1-sol"]["rankings"] == {"max": True, "aicd": False}
+    assert rows["gpt-6-luna-low"]["rankingInclusionReasons"] and rows["gpt-6-luna-low"]["rankingStatus"] == "excluded_incomplete_benchmarks"
 
 
 def test_roster_display_names_must_be_unique(world):

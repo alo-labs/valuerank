@@ -25,13 +25,13 @@ Value = 25% × cost score + 75% × quality. Costs are USD per basket run; the co
 | Claude Fable 5 | Not plotted on or within the near gap of AA's rendered frontier (O51) |
 | Claude Fable 5.1 | Not plotted on or within the near gap of AA's rendered frontier (O51) |
 | Claude Haiku 5.5 | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
-| Claude Haiku 5.5 (high) | — |
+| Claude Haiku 5.5 (high) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | Claude Haiku 5.5 (low) | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
-| Claude Haiku 5.5 (medium) | — |
+| Claude Haiku 5.5 (medium) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | Claude Opus 4.8 | Not plotted on or within the near gap of AA's rendered frontier (O51) |
 | Claude Opus 5 | Not plotted on or within the near gap of AA's rendered frontier (O51) |
-| Claude Opus 5.5 (high) | — |
-| Claude Opus 5.5 (medium) | — |
+| Claude Opus 5.5 (high) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
+| Claude Opus 5.5 (medium) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | Claude Opus 5.5 (xhigh) | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
 | Claude Sonnet 5 | Not plotted on or within the near gap of AA's rendered frontier (O51) |
 | Claude Sonnet 5.5 (high) | Not plotted on or within the near gap of AA's rendered frontier (O51) |
@@ -45,18 +45,18 @@ Value = 25% × cost score + 75% × quality. Costs are USD per basket run; the co
 | GLM-5.3 Flash | Not plotted on or within the near gap of AA's rendered frontier (O51) |
 | GPT-5.5 | No eligible exact-model Bug Hunt result in the selected source snapshot; Not plotted on or within the near gap of AA's rendered frontier (O51) |
 | GPT-5.6 Luna | Not plotted on or within the near gap of AA's rendered frontier (O51) |
-| GPT-5.6 Luna (low) | — |
+| GPT-5.6 Luna (low) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | GPT-5.6 Sol | Not plotted on or within the near gap of AA's rendered frontier (O51) |
-| GPT-6 Astra (high) | — |
+| GPT-6 Astra (high) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | GPT-6 Astra (xhigh) | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
-| GPT-6 Luna (high) | — |
+| GPT-6 Luna (high) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | GPT-6 Luna (low) | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
-| GPT-6 Luna (medium) | — |
-| GPT-6 Luna (xhigh) | — |
+| GPT-6 Luna (medium) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
+| GPT-6 Luna (xhigh) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | GPT-6 Sol | Not plotted on or within the near gap of AA's rendered frontier (O51) |
-| GPT-6.1 Sol (high) | — |
+| GPT-6.1 Sol (high) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | GPT-6.1 Sol (low) | Not plotted on or within the near gap of AA's rendered frontier (O51) |
-| GPT-6.1 Sol (medium) | — |
+| GPT-6.1 Sol (medium) | Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking |
 | GPT-6.1 Sol (xhigh) | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
 | Gemini 3.5 Flash | No eligible exact-model Bug Hunt result in the selected source snapshot; Not plotted on or within the near gap of AA's rendered frontier (O51) |
 | Gemini 3.6 Flash | No eligible exact-model Bug Hunt result in the selected source snapshot; Not plotted on or within the near gap of AA's rendered frontier (O51) |

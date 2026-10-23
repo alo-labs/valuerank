@@ -22,9 +22,30 @@ def test_leaf_weights_sum_to_the_group_shares_and_to_100():
 
 def test_source_shares_split_aa_run_and_independent_weight():
     shares = q.source_shares()
-    # O37: Terminal-Bench is AA's own run, so only Bug Hunt (15% since O49) is independent.
-    assert shares["aa"] == pytest.approx(0.85)
-    assert shares["independent"] == pytest.approx(0.15)
+    # O37: Terminal-Bench is AA's own run; in the max-effort ranking Bug Hunt and the LiveBench and Vals leaves are independent (O55).
+    assert shares["aa"] == pytest.approx(0.72)
+    assert shares["independent"] == pytest.approx(0.28)
+    with q.active_track("aicd"):
+        assert q.source_shares() == {"aa": pytest.approx(0.78), "independent": pytest.approx(0.22)}
+
+
+def test_each_ranking_weighs_100_percent_with_software_engineering_at_60():
+    """O53-O55: both rankings keep the group shares; the active ranking is restored after the block."""
+
+    for track, leaves in q.TRACKS.items():
+        assert sum(leaf.weight for leaf in leaves) == pytest.approx(100.0), track
+        assert sum(leaf.weight for leaf in leaves if leaf.group == "swe") == pytest.approx(60.0), track
+    with q.active_track("aicd") as leaves:
+        assert q.TRACK == "aicd" and q.LEAVES is leaves and "aiCodingDaily" in q.LEAF_BY_KEY
+    assert q.TRACK == q.DEFAULT_TRACK == "max" and "aiCodingDaily" not in q.LEAF_BY_KEY
+    assert set(q.ALL_LEAVES) == {leaf.key for leaves in q.TRACKS.values() for leaf in leaves}
+
+
+def test_ai_coding_daily_points_are_scored_out_of_60():
+    assert q.aicd_z(45.0).z == pytest.approx(75.0) and q.aicd_z(70.0).z == 100.0
+    assert q.unclipped_z("aiCodingDaily", 66.0) == pytest.approx(110.0)
+    # A leaf outside the active ranking keeps its own nominal weight in the clipping audit.
+    assert q.clip_audit("aiCodingDaily", 30.0)["weight"] == 10.0
 
 
 def test_observation_bounds_are_clipped_to_the_domain():
@@ -79,7 +100,7 @@ def test_summarize_full_coverage_row():
     assert summary.displayed == pytest.approx(50.0)
     assert (summary.lower, summary.upper) == (pytest.approx(50.0), pytest.approx(50.0))
     assert summary.provisional is False and summary.provisional_reasons == ()
-    assert summary.swe_leaves == 3 and summary.swe_weight == pytest.approx(0.6)
+    assert summary.swe_leaves == 7 and summary.swe_weight == pytest.approx(0.6)
 
 
 def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
@@ -91,31 +112,32 @@ def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
     assert summary.coverage == pytest.approx(expected_coverage)
     weighted = sum(leaf.weight * observations[leaf.key].z for leaf in q.LEAVES if leaf.key in observations)
     assert summary.displayed == pytest.approx(weighted / (100 * expected_coverage))
-    assert summary.lower == pytest.approx((weighted - 15 * 1.0) / 100)
-    assert summary.upper == pytest.approx((weighted + 15 * 1.0 + (5 / 3) * 100) / 100)
+    assert summary.lower == pytest.approx((weighted - 10 * 1.0) / 100)
+    assert summary.upper == pytest.approx((weighted + 10 * 1.0 + (5 / 3) * 100) / 100)
     assert summary.provisional is False
 
 
 def test_provisional_rule_reports_every_failed_condition():
     observations = {"bugHunt": q.Observation(40.0), "gdpval": q.Observation(60.0)}
-    summary = q.summarize(observations)
+    with q.active_track("aicd"):
+        summary = q.summarize(observations)
     assert summary.provisional is True
     assert summary.provisional_reasons == (
-        "coverage 25% below 70%",
+        "coverage 22% below 70%",
         "1 SWE leaves observed (need 2)",
-        "observed SWE weight 15% below 40%",
+        "observed SWE weight 12% below 40%",
         "FrontierCode 1.1 missing",
-        "Terminal-Bench 4.0 (AA run) missing",
     )
 
 
 def test_provisional_when_only_frontiercode_is_missing():
-    observations = full_observations()
-    del observations["frontierCode"]
-    summary = q.summarize(observations)
-    assert summary.coverage == pytest.approx(0.75)
-    # Coverage clears 70%, but the other SWE leaves carry only 35% of quality, and FrontierCode weighs 25% (O49).
-    assert summary.provisional_reasons == ("observed SWE weight 35% below 40%", "FrontierCode 1.1 missing")
+    with q.active_track("aicd"):
+        observations = full_observations()
+        del observations["frontierCode"]
+        summary = q.summarize(observations)
+    assert summary.coverage == pytest.approx(0.79)
+    # Coverage clears 70%, but the other SWE leaves carry only 39% of quality, and FrontierCode weighs 21% (O55).
+    assert summary.provisional_reasons == ("observed SWE weight 39% below 40%", "FrontierCode 1.1 missing")
 
 
 def test_summarize_with_no_observations_has_no_displayed_quality():

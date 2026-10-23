@@ -51,8 +51,8 @@ def test_readme_ranks_configurations_in_plan_order(emitted):
     assert [int(row[1]) for row in ranked] == [row["api"]["rank"] for row in by_plan]
     assert [row[3] for row in ranked] == [f"{row['planScore']['value']:.1f}" for row in by_plan]
     assert [row[4] for row in ranked] == [f"{row['api']['value']:.1f}" for row in by_plan]
-    # O51: each plotted effort is its own row with its own page.
-    assert rows[0][2].startswith("[Claude Opus 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-opus-5-5-xhigh/)")
+    # O53/O54: the leading max-effort ranking has one configuration per family at its top effort.
+    assert rows[0][2].startswith("[Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/)")
     assert any(row[2].startswith("[GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/)") for row in ranked)
     # Every cohort configuration has an AA cost today, so no row is unranked for want of one.
     assert unranked == []
@@ -68,11 +68,12 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     readme = (emitted / "README.md").read_text()
     rows = {cells(row)[2].split("](")[0].lstrip("["): cells(row) for row in table_rows(readme, "| Plan rank | API rank | Configuration")}
     assert rows["Gemini 4 Argon (high)"][9] == "—" and rows["Gemini 4 Argon (high)"][10] == "API-cost fallback"
-    # O49/O50: MiMo-V2.6-Pro's provider-claimed DeepSWE leaf is gone and its basket is complete; O46: its quota-ceiling route.
-    assert rows["MiMo-V2.6-Pro"][10] == "—"
+    # O50/O17: the max-effort ranking admits the Coding Agent Index, which MiMo-V2.6-Pro lacks; O46: its quota-ceiling route.
+    assert rows["MiMo-V2.6-Pro"][10] == "subset cost"
     assert rows["MiMo-V2.6-Pro"][9] == "MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption)"
-    assert rows["GPT-6 Astra (xhigh)"][6] == "100%" and rows["GPT-6 Astra (xhigh)"][10] == "—"
-    assert rows["Claude Haiku 5.5 (xhigh)"][10] == "AA cost caveat"
+    assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "—"
+    assert rows["Claude Haiku 5.5 (max)"][10] == "AA cost caveat"
+    assert rows["DeepSeek V4.1 Flash 1017 (max)"][10] == "subset cost, API-cost fallback"
     # O45: GPT-6.1 Sol keeps its own SemiAnalysis figure.
     assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured)"
 
@@ -80,38 +81,42 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
 def test_readme_states_what_the_interval_outputs_support(emitted):
     readme = (emitted / "README.md").read_text()
     assert "the definite frontier (no configuration can beat it on both cost and quality" in readme
-    assert "the possible frontier adds none." in readme and "GPT-6 Luna (low); the possible frontier adds none." in readme
+    assert "GPT-6 Luna (max); the possible frontier adds none. Not evaluable on this workload: DeepSeek V4.1 Flash 1017 (max), MiMo-V2.6-Pro." in readme
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter.
-    assert "Cheapest at or above quality 55.0: GPT-6.1 Sol (max) (confirmed)." in readme
-    # E196: the nominal cost weight is printed with cost's share of the variance in value; a negative allocation is explained.
-    assert "value is a 25% cost score (nominal weight; -108% of API and -45% of Plan value variance)" in readme
-    assert "a negative allocation means dearer configurations score higher on quality" in readme
+    assert "Cheapest at or above quality 49.8: GPT-6.1 Sol (max) (confirmed)." in readme
+    # E196: the nominal cost weight is printed with cost's share of the variance in value.
+    assert "value is a 25% cost score (nominal weight; 65% of API and 2% of Plan value variance)" in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
-    assert "Claude Opus 5.5 (xhigh) leads the Plan ranking at 54.0 (owner-named transfer); GPT-6.1 Sol (xhigh) leads the API ranking at 50.2; Claude Opus 5.5 leads on quality." in readme
+    assert "Claude Opus 5.5 leads the Plan ranking at 62.3; GPT-6.1 Sol leads the API ranking at 57.7; Claude Opus 5.5 leads on quality." in readme
     # The quality rank covers every cohort row with quality evidence, a cost-less one included (its quality is shown).
     # E203: the displayed record on the headline scale, beside the interval claims.
-    assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 48.9: GPT-6.1 Sol (medium) ($318.05 per basket run; 14 reach it)" in readme
-    # O50: the Coding Agent Index v2.0 is not admitted, so the coding share names the admitted coding components only.
-    assert "Coding and terminal tasks (Terminal-Bench 4.0 (AA Index run), SciCode) make up 19% of the basket's cost (median over 27 configurations with the full basket; 6% to 31%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 27%." in readme
-    assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 48.9 over 27 configurations" in (emitted / "scores.md").read_text()
+    assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 60.7: GPT-6.1 Sol (max) ($1,233.11 per basket run; 5 reach it)" in readme
+    # O50: the max-effort ranking admits the Coding Agent Index v2.0, so the coding share names it and its unrewarded SWE-Atlas QnA.
+    assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 50% of the basket's cost (median over 7 configurations "
+            "with the full basket; 45% to 85%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 18%; the Coding Agent Index's SWE-Atlas QnA") in readme
+    assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 60.7 over 9 configurations" in (emitted / "scores.md").read_text()
     assert "SciCode and AA-LCR once at API rates" in readme
 
 
 def test_methodology_leaf_weights_fill_the_quality_share(emitted):
     text = (emitted / "methodology.md").read_text()
-    rows = [cells(row) for row in table_rows(text, "| Leaf | Group | Weight in quality")]
-    assert len(rows) == 10
-    assert sum(float(row[2].rstrip("%")) for row in rows) == pytest.approx(100.0, abs=0.05)
-    assert sum(float(row[3].rstrip("%")) for row in rows) == pytest.approx(75.0, abs=0.05)
+    rows = [cells(row) for row in table_rows(text, "| Leaf | Group | Weight, max-effort ranking | Weight, AI Coding Daily ranking")]
+    # O53-O55: every leaf of either ranking, with a dash where a ranking does not use it; each column fills 100% of quality.
+    assert len(rows) == 15
+    for column in (2, 3):
+        assert sum(float(row[column].rstrip("%")) for row in rows if row[column] != "—") == pytest.approx(100.0, abs=0.05)
     assert "Value on a basis = **25%** × cost score + **75%** × quality score" in text
     cohort = text.split("## Cohort\n", 1)[1].split("\n## ", 1)[0]
-    assert "- On AA's rendered frontier (6):" in cohort and "- Near-frontier family (4):" in cohort
-    assert "- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (17):" in cohort
-    assert "GPT-6.1 Sol (xhigh)" in cohort and "Claude Haiku 5.5 (max)" in cohort and "GPT-6 Luna (low)" in cohort
-    # O36/O38: configurations still missing a benchmark after the logged search are listed with the gap, not ranked.
-    assert ("2 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days "
-            "of the cutoff (O36; a required frontier family is listed the same way, O38): MiMo-V2.6-Flash (no Bug Hunt Bench); MiniMax-M3.1-Flash (no Bug Hunt Bench).") in cohort
+    assert "- On AA's rendered frontier (5):" in cohort and "- Near-frontier family (2):" in cohort
+    assert "- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (2): GPT-6 Astra (max), Claude Haiku 5.5 (max)" in cohort
+    # O36/O38: configurations still missing a benchmark after the logged search are listed with the gap, not ranked; O53 names
+    # those the AI Coding Daily ranking ranks.
+    assert ("20 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days "
+            "of the cutoff (O36; a required frontier family is listed the same way, O38): GPT-6.1 Sol (high) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), "
+            "LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding);") in cohort
+    assert "MiMo-V2.6-Flash (no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals)" in cohort
+    assert "Of these, 11 are ranked in the AI Coding Daily ranking (O53): GPT-6.1 Sol (high), Claude Opus 5.5 (high)," in cohort
     assert "The remaining 32 roster models are not ranked" in cohort
     assert "- Claude: User authorizes (2026-10-18, Option 2)" in text
 
@@ -124,13 +129,14 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     by_plan = sorted(v3["rows"], key=lambda row: (row["planScore"]["rank"] is None, row["planScore"]["rank"] or 0))
     assert [row[2] for row in rows] == [f"{row['planScore']['value']:.2f}" for row in by_plan]
     assert [row[6] for row in rows] == [f"{row['api']['costScore']:.2f}" for row in by_plan]
-    assert len(table_rows(text, "| Model | Reasons")) == 34  # 32 outside the cohort (O51), 2 listed for incomplete benchmarks (O36)
+    # 32 outside the cohort (O51) and 20 cohort rows without the max-effort ranking's set (O36, O53), 11 of them ranked in the other ranking.
+    assert len(table_rows(text, "| Model | Reasons")) == 52
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
     # O48: the Plan streams exclude transfer-dependent plan rows, each named as a configuration on its plan.
-    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (high) on Claude Max 20x," in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
-    assert "| quality 48.9 | GPT-6.1 Sol (medium) | not scenario-supported |" in text
+    assert "| quality 62.1 | Claude Sonnet 5.5 (max) | not scenario-supported |" in text
 
 
 def test_scores_md_prints_a_dash_for_a_configuration_without_a_rank(repo_copy, pinned_clock):
@@ -236,9 +242,9 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     readme = (repo_copy / "README.md").read_text()
     plan_sentence = next(line for line in readme.splitlines() if line.startswith("- Plan basis, main workload"))
     assert "Not evaluable" not in plan_sentence
-    assert "Cheapest at or above quality 48.9: not unique; possibly GPT-6 Luna (max), DeepSeek V4.1 Flash 1017 (max)." in plan_sentence
-    assert "Cheapest at or above quality 48.9: unresolved." in plan_sentence
-    assert plan_sentence.endswith("Cheapest at or above quality 48.9: DeepSeek V4.1 Flash 1017 (max) (confirmed). (Bar comparison: compares 14 configurations that can qualify.)")
+    assert "Cheapest at or above quality 60.7: not unique; possibly GPT-6 Luna (max), DeepSeek V4.1 Flash 1017 (max)." in plan_sentence
+    assert "Cheapest at or above quality 60.7: unresolved." in plan_sentence
+    assert plan_sentence.endswith("Cheapest at or above quality 60.7: DeepSeek V4.1 Flash 1017 (max) (confirmed). (Bar comparison: compares 5 configurations that can qualify.)")
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores
@@ -293,7 +299,7 @@ def test_terminal_bench_harness_diagnostic_reports_tau_when_defined(repo_copy, p
     edit_json(repo_copy, "scores.json", undefined_agreement)
     assert emit(repo_copy) == 0
     text = (repo_copy / "scores.md").read_text()
-    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small); panel of 27 rows." in text
+    assert "- **Quality agreement:** quality agreement (matched-panel sensitivity): undefined (panel too small); panel of 9 rows." in text
     assert re.search(r"- \*\*Group drift:\*\* estimated\.\n", text)
 
 
@@ -310,14 +316,15 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
     text = (repo_copy / "scores.md").read_text()
     section = text.split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
     assert "Status: measured-evidence calibration unavailable." in section
-    assert section.count("The workload has no official Plan anchors.") == 1
+    # The max-effort ranking has a main and a subset workload (O17), each with its own anchors.
+    assert section.count("The workload has no official Plan anchors.") == 2
     assert "Value on measured anchors" not in section and "Pairwise reversals" not in section
 
 
 def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted):
     section = (emitted / "scores.md").read_text().split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
-    assert "Official Plan anchors are set by Claude Haiku 5.5 (low) on Claude Pro (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
-    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max)." in section
+    assert "Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
+    assert "Pairwise reversals: none. Largest value change: 3.94 points." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology
 
