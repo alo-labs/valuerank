@@ -1391,3 +1391,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L5 (rejected for now): E248's band extension overlapping another band is not reachable today (no configuration's plan rows span the threshold, a build figure); revisit if that figure stops being "none".
 - L6 (recorded): README's "Updated" date is the v3.0.0 release date (`release.DATE`), not the data cutoff; the cutoff is stated beside it. "9 cohort configurations" in the README scope line is the README's wording for cohort rows.
 - Round status (O56): clean, the second consecutive clean round at the Claude Sonnet 5.5 high rung (I44, I45). The rung is complete; the next rung is Claude Sonnet 5.5 at xhigh effort, on r104.
+
+## Internal review I46 (Claude Sonnet 5.5, effort xhigh, on r104) — adopted, modified or rejected
+- M1 (adopted as E266, docs changed): the scenario panel is the ranking's main-workload rows (as built, E96); a subset-workload row (today DeepSeek V4.1 Flash 1017 (max) and MiMo-V2.6-Pro in the max-effort ranking) gets no scenario share. r105 states it, and scores.md now names such rows above the scenario tables, so a subset-workload API leader is never shown as absent from rank 1 without the reason.
+- M2 (adopted): the transfers-off streams remove every Plan row whose selected route rests on an owner assumption — an owner-named transfer or an O46 MiMo quota ceiling, both graded "assumption" by the build — as built; r105 says so.
+- L1 (adopted, data changed): the O46 replacement wording in E261, methodology.md (via plan_cost_routes.json `mimoApplication`) and the draft now follows O62 (the O11 admission rule; one report alone does not replace a ceiling).
+- L2 (adopted): the display-name sentence attributes the bare names to the roster, not to AA.
+- L3 (adopted): the clipped-Plan clause names its rankings.
+- L4 (adopted): the "no interval enters any stream" sentence excepts GDPval-AA's interval in S1T.
+- L5 (recorded): true hand-written facts outside the figure check's reach (the MiMo-V2.6-Flash and MiniMax-M3.1-Flash Bug Hunt gap) remain; the check grows when one goes stale.
+- L6 (recorded): stale notes in data and code comments are left for the release tidy-up; they change no output.
+- L7 (adopted): "same rows" is scoped to the main workload.
+- Round status (O56): not clean (two Mediums). Draft r105.

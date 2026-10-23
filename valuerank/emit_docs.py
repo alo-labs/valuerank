@@ -1105,7 +1105,7 @@ Admission: {measured['specification']['admission']}. Selection: {measured['speci
 
 ## Scenario shares
 
-{scenario_tables(facts)}
+{scenario_panel_note(facts)}{scenario_tables(facts)}
 
 ## Diagnostics
 
@@ -1115,6 +1115,16 @@ Admission: {measured['specification']['admission']}. Selection: {measured['speci
 
 {markdown_table(['Rule', 'Status', 'Detail'], [[item['rule'], item['status'], item['detail']] for item in v3['manifest']])}
 """
+
+
+def scenario_panel_note(facts):
+    """E266: the scenario panel is the main workload's rows; a subset-workload row gets no scenario share."""
+
+    subset = [facts.label(row["id"]) for row in facts.v3["rows"] if row["cost"]["workload"] != facts.v3["mainWorkload"]]
+    if not subset:
+        return ""
+    return ("The scenario panel is the rows scored on the main workload (E96, E266); " + series(subset)
+            + " (subset workload) are not in it and have no scenario shares, so the shares below compare the main-workload rows only.\n\n")
 
 
 def anchor_setter(facts, end):

@@ -351,6 +351,8 @@ Bar comparison: compares 3 configurations that can qualify. The bar is a display
 
 ## Scenario shares
 
+The scenario panel is the rows scored on the main workload (E96, E266); DeepSeek V4.1 Flash 1017 (max) and MiMo-V2.6-Pro (subset workload) are not in it and have no scenario shares, so the shares below compare the main-workload rows only.
+
 Frequencies over 10,000 scenarios per run (seed 20261023); streams are defined in [methodology.md](methodology.md#uncertainty-outputs). S1T adds benchmark sampling noise under an independent-task approximation (O39); the other streams exclude it, and every stream excludes correlated-task, harness and attempt effects (E155).
 
 ### API basis: rank 1

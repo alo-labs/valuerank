@@ -458,3 +458,14 @@ def test_listed_beyond_text_names_each_ranking_and_a_frontier_point():
     assert ed.listed_beyond_text(facts) == (
         "Max-effort ranking, listed beyond the API anchors: Z (low) (below the low anchor, by a factor of 4.8, a point on AA's rendered frontier). "
         "AI Coding Daily ranking: no listed configuration lies beyond the API anchors.")
+
+
+def test_scenario_panel_note_names_subset_rows_only_when_there_are_some():
+    """E266: subset-workload rows are not in the scenario panel, and the scenario tables say so."""
+
+    from types import SimpleNamespace
+
+    rows = [{"id": "a", "cost": {"workload": "w"}}, {"id": "b", "cost": {"workload": "s"}}]
+    facts = SimpleNamespace(v3={"rows": rows, "mainWorkload": "w"}, label=lambda model_id: model_id.upper())
+    assert ed.scenario_panel_note(facts).startswith("The scenario panel is the rows scored on the main workload (E96, E266); B (subset workload)")
+    assert ed.scenario_panel_note(SimpleNamespace(v3={"rows": rows[:1], "mainWorkload": "w"}, label=str)) == ""
