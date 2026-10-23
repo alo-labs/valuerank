@@ -1246,3 +1246,12 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (rejected): repeat of I29 L3 without a new argument.
 - L4 (adopted): the bar-reach counts say which population they count and why the interval outputs' lower-bar count is 5 (two rows on the subset workload).
 - Draft r92.
+
+## Internal review I33 (Claude Sonnet 5.5, effort medium, on r92) — adopted, modified or rejected
+- M1 (adopted as E259; the owner question was not needed): "listed" had two senses. E259: a configuration is *listed beside a ranking* when it lacks that ranking's full set (today 20 and 14) and *excluded* (O38) only when it lacks both (today 9); O41's indicative value is shown beside each ranking for every configuration listed there, on that ranking's leaves and anchors, as the build already does. This applies O41 within each ranking created by O53 and changes no score; r93 also gives MiniMax-M3.1-Flash's indicative values beside MiMo-V2.6-Flash's.
+- L1 (adopted): SD_i in the separability formula is named as 0.75 × the row's quality SD, on the value scale.
+- L2 (adopted): IFBench's "1 of 19" is dated to O26 (2026-10-19).
+- L3 (adopted): MiniMax joins the next end-user report search; its only cohort configuration is excluded, so no Plan row is affected today.
+- L4 (adopted): bar triples are given as lower, headline, upper throughout.
+- L5 (adopted): the Cost section's per-ranking admission cites O57.
+- Round status (O56): not clean (one Medium). Draft r93.
