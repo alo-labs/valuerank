@@ -41,10 +41,11 @@ class Leaf:
 
 
 LEAVES = (
-    Leaf("deepswe", "DeepSWE v1.1", "swe", 30.0, "aa"),
-    Leaf("bugHunt", "Bug Hunt Bench", "swe", 10.0, "independent"),
-    Leaf("frontierCode", "FrontierCode 1.1", "swe", 10.0, "aa"),
-    Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 10.0, "aa"),
+    # Owner decision O49 (2026-10-23): AA withdrew DeepSWE v1.1, which is dropped in favour of FrontierCode; the
+    # software-engineering 60% is FrontierCode 25, Terminal-Bench 20 and Bug Hunt 15.
+    Leaf("frontierCode", "FrontierCode 1.1", "swe", 25.0, "aa"),
+    Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 20.0, "aa"),
+    Leaf("bugHunt", "Bug Hunt Bench", "swe", 15.0, "independent"),
     Leaf("gdpval", "GDPval-AA v2.1", "professional", 10.0, "aa"),
     Leaf("automationBench", "AutomationBench-AA", "professional", 10.0, "aa"),
     # LiveBench instruction following is retired (owner decision O26): Omniscience takes the group's 10%.
@@ -193,7 +194,6 @@ def composite(values: dict) -> float:
 
 # E110: each leaf's documented raw domain (unit, low, high); a value outside it is a data-validation error.
 LEAF_DOMAINS = {
-    "deepswe": ("percent", 0.0, 100.0),
     "bugHunt": ("bugs fixed of 105", 0.0, BUG_HUNT_BUGS),
     "frontierCode": ("fraction", 0.0, 1.0),
     "terminalBench": ("percent", 0.0, 100.0),

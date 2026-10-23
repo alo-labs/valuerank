@@ -20,6 +20,7 @@ from valuerank import value_v3
 from valuerank.aa_reconciliation import publication as aa_reconciliation_publication, reconcile as reconcile_aa
 from valuerank.paths import DATA, ROOT
 from valuerank.publication import (
+    AA_CODING_AGENTS_URL,
     AA_DEEPSWE_URL,
     AA_METHODOLOGY_URL,
     BUG_HUNT_URL,
@@ -39,10 +40,9 @@ OUTPUTS = ("README.md", "methodology.md", "scores.md", "raw-data.md")
 COHORT_ROUTES = (
     ("Required AA Intelligence Index versus total-evaluation-cost frontier family", "On AA's rendered frontier"),
     ("Near-frontier AA family", "Near-frontier family"),
-    ("Exact AA DeepSWE and eligible Bug Hunt overlap", "Exact DeepSWE and Bug Hunt results for the exact configuration (O31, O33)"),
+    ("Plotted on or within the near gap of AA's rendered frontier (O51)", "Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51)"),
 )
 LEAF_TRANSFORMS = {
-    "deepswe": "z = pass@1 %",
     "bugHunt": "z = 100 × bugs fixed / 105",
     "frontierCode": "z = 100 × score",
     "terminalBench": "z = resolution %",
@@ -75,7 +75,7 @@ CHARGE_LABELS = {
 FLAG_LEGEND = (
     ("subset cost", "scored on the workload of the components it has, against that workload's own anchors; its ordering against main-workload rows is not identified (O17)"),
     ("provider-claimed leaf", "a quality leaf comes from the model provider's own published result (O36's last source); the row competes but earns no interval label (E233)"),
-    ("provisional quality", "observed leaves cover under 70% of quality weight, fewer than two software-engineering leaves or under 40% software-engineering weight are observed, or DeepSWE is missing; ranked and flagged, never floored (O8)"),
+    ("provisional quality", "observed leaves cover under 70% of quality weight, fewer than two software-engineering leaves or under 40% software-engineering weight are observed, or a leaf of 20% or more (FrontierCode, Terminal-Bench) is missing; ranked and flagged, never floored (O8)"),
     ("partial component", "AA marks tasks of a basket component missing or declined (E37), or the component's cost cannot be reconciled with AA's prices (E170)"),
     ("valuation basis unverified", "AA's cost reconciles with neither its displayed prices nor a registered price record; ranked, but outside interval outputs and cost anchors (E170 outcome 4)"),
     ("no cost", "AA publishes no cost for the configuration, so it has no value score and no rank (AGENTS.md); its quality is shown"),
@@ -140,7 +140,7 @@ def model_inclusion_markdown(inclusion, level="##"):
         lines += ["", "Frontier families and the configuration selected for each:", ""]
         lines += [f"- {item['family']}: {item['configuration']}" for item in inclusion["frontierFamilies"]]
     if inclusion["nearFrontierFamilies"]:
-        lines += ["", "Near-frontier families and each family's near point closest to the frontier (a family's primary configuration is its configuration with exact DeepSWE and Bug Hunt results when it has one, O30, and every other effort with both results is ranked as its own row, O33, so the ranked configurations can differ):", ""]
+        lines += ["", "Near-frontier families and each family's near point closest to the frontier (every configuration AA plots on or near the frontier is a cohort row, each effort its own row, O51; a family's primary configuration is its near point closest to the frontier, E193):", ""]
         lines += [
             f"- {item['family']}: {item['configuration']}, {item['gap']} Index point{'' if item['gap'] == '1' else 's'} below the frontier"
             for item in inclusion["nearFrontierFamilies"]
@@ -488,7 +488,7 @@ def harness_by_leaf_text(facts):
 
     # O37: the Terminal-Bench leaf is AA's own run, so its agent is the leaf's provenance (tbench.ai's only for a gap fill).
     tb_agents = {row["id"]: (row["quality"]["leaves"].get("terminalBench") or {}).get("agent") for row in facts.v3["rows"]}
-    leaves = (("DeepSWE", lambda row: row.get("deepsweAgent")), ("Terminal-Bench", lambda row: tb_agents.get(row["id"])),
+    leaves = (("Terminal-Bench", lambda row: tb_agents.get(row["id"])),
               ("Bug Hunt", lambda row: (row.get("bugHunt") or {}).get("harness") if (row.get("bugHunt") or {}).get("matched") else None))
     parts = []
     for name, pick in leaves:
@@ -673,7 +673,7 @@ Scenario shares by stream, diagnostics and the release gates are in [scores.md](
 ## Sources and audit trail
 
 - [Artificial Analysis methodology]({AA_METHODOLOGY_URL}) and its model pages: Intelligence Index component scores and the per-task evaluation costs of the basket.
-- [AA Coding Agent Index, DeepSWE v1.1]({AA_DEEPSWE_URL}): DeepSWE pass@1 and the Coding Agent Index cost for each exact configuration.
+- [AA Coding Agent Index v2.0]({AA_CODING_AGENTS_URL}): the Coding Agent Index cost (FrontierCode, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
 - AA's own Terminal-Bench 4.0 run (the leaf; [tbench.ai]({TERMINAL_BENCH_URL}) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench]({BUG_HUNT_URL}) owner-published runs, [Cognition's FrontierCode leaderboard]({facts.leaf_evidence['cognitionCapture']['url']}) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements]({SEMIANALYSIS_URL}) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
 - The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `{v3['evidenceBundle']['bundleHash']}`.
@@ -864,7 +864,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 - [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
 - [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `{v3['anchorVersion']}`
 - [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
-- [data/aa_deepswe.json](data/aa_deepswe.json), [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots
+- [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots ([data/aa_deepswe.json](data/aa_deepswe.json) keeps AA's last DeepSWE v1.1 capture, no longer scored, O49)
 - [data/leaf_evidence.json](data/leaf_evidence.json), [data/cognition_frontiercode.json](data/cognition_frontiercode.json): leaf gap fills and the exhaustive-search log (O36/O37)
 """
 
@@ -1066,7 +1066,7 @@ def interval_block(facts, result, label, workload_label):
             text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
             siblings = "; ".join(f"{facts.label(row_id)}: {', '.join(names)}" for row_id, names in bar["uncheckedCheaperSiblings"].items() if names)
             text += f"Configurations that can be confirmed to qualify: {bar['confirmedQualifierN']} (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). "
-            text += f"Cheaper same-family configurations on AA's chart that were not evaluated (not ranked: no exact DeepSWE and Bug Hunt pair; E201, O33): {siblings or 'none'}.\n\n"
+            text += f"Cheaper same-family configurations on AA's chart that were not evaluated (not ranked: not plotted on or near the frontier; E201, O51): {siblings or 'none'}.\n\n"
             text += f"Bar comparison: {bar['comparison']}. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).\n\n"
             bar_rows = [[facts.label(row_id), fnum(item["displayedMargin"], 1), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
             text += markdown_table(["Configuration", "Displayed quality − bar", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows, numeric={1})
@@ -1434,9 +1434,9 @@ The seven Index components plus AA's residual reproduce AA's published Intellige
 
 {markdown_table(['Configuration', 'Index SDLC components', 'Residual', 'Reconstructed total', 'Published total', 'Reconciled'], reconciliation_rows, numeric={1, 2, 3, 4})}
 
-## DeepSWE v1.1 AA chart configurations
+## DeepSWE v1.1 AA chart configurations (withdrawn by AA, not scored)
 
-The AA chart publishes {len(deepswe)} DeepSWE v1.1 configurations across {facts.deepswe['benchmarkTasks']} tasks, observed {facts.deepswe.get('observedAt', DASH)}. Each keeps its displayed agent, model and effort; only exact matches enter a score.
+AA withdrew DeepSWE v1.1 from its Coding Agent Index (v2.0, October 2026) and the owner dropped it as a quality leaf in favour of FrontierCode (O49); this is AA's last capture, kept for the record. The AA chart published {len(deepswe)} DeepSWE v1.1 configurations across {facts.deepswe['benchmarkTasks']} tasks, observed {facts.deepswe.get('observedAt', DASH)}. Each keeps its displayed agent, model and effort; only exact matches enter a score.
 
 | # | Agent | Evaluated model variant | Effort | pass@1 | ValueRank match | Note |
 |---:|---|---|---|---:|---|---|

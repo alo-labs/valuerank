@@ -33,14 +33,15 @@ INDEX_SDLC_TASKS = {
     "artificial-analysis-long-context-reasoning": 100,
 }
 INDEX_RESIDUAL_TASKS = {"humanitys-last-exam": 2158, "critpt": 70, "omniscience": 6000}
-CODING_AGENT_TASKS = {"deep-swe-v1.1": 113, "swe-atlas-qna": 124, "terminal-bench-v4": 66}
+# Owner decision O50 (2026-10-23): AA's Coding Agent Index v2.0 replaced DeepSWE v1.1 with FrontierCode v1.1 Main.
+CODING_AGENT_TASKS = {"frontiercode-v1.1-main": 100, "swe-atlas-qna": 124, "terminal-bench-v4": 66}
 CODING_AGENT_REPETITIONS = 3
 CODING_AGENT_INDEX = "coding-agent-index"
-CHART_COMPONENTS = ("frontiercode", "itbench-aa")
+# FrontierCode's cost is counted inside the Coding Agent Index v2.0 (O50), so it is no longer a separate chart component.
+CHART_COMPONENTS = ("itbench-aa",)
 TARGET_COMPONENTS = (CODING_AGENT_INDEX, *CHART_COMPONENTS, *INDEX_SDLC_TASKS)
 COMPONENT_LABELS = {
     CODING_AGENT_INDEX: "Coding Agent Index",
-    "frontiercode": "FrontierCode",
     "itbench-aa": "ITBench-AA",
     "aa-briefcase": "AA-Briefcase",
     "gdpval-aa": "GDPval-AA",
@@ -117,7 +118,7 @@ def coding_agent_component(record: dict | None) -> dict | None:
 
     The record is AA's documented cost-to-run metric (average API cost per task,
     a pooled per-task-attempt average that excludes missing telemetry) times the
-    303 required tasks. AA's undocumented ``sums.costUsd`` is kept only as a
+    required tasks (290 in v2.0, O50). AA's undocumented ``sums.costUsd`` is kept only as a
     reconciliation diagnostic; attempt coverage is a precision diagnostic (E53).
     """
 
@@ -130,7 +131,7 @@ def coding_agent_component(record: dict | None) -> dict | None:
     return component_cost(
         mean * required_tasks,
         completeness=COMPLETE,
-        source="AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks",
+        source=f"AA Coding Agent Index v2.0 cost to run (mean API cost per task) x {required_tasks} tasks",
         configuration=record["label"],
         detail={
             "meanCostPerTaskUsd": mean,

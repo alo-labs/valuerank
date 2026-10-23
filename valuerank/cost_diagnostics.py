@@ -25,9 +25,8 @@ from valuerank import quality as q
 # Execution family behind each quality leaf (E55): a leaf references exactly one family, and a target component
 # prices the leaf when the family runs inside it (Terminal-Bench runs in AA's Index and in the Coding Agent Index).
 LEAF_FAMILIES = {
-    "deepswe": "deep-swe-v1.1",
     "bugHunt": "bug-hunt",
-    "frontierCode": "frontiercode",
+    "frontierCode": "frontiercode-v1.1-main",
     "terminalBench": "terminal-bench-v4",
     "gdpval": "gdpval-aa",
     "automationBench": "automationbench-aa",
@@ -40,7 +39,6 @@ LEAF_FAMILIES = {
 # Task families inside each target component (E42); the Coding Agent Index pools three families.
 COMPONENT_FAMILIES = {
     basket.CODING_AGENT_INDEX: tuple(basket.CODING_AGENT_TASKS),
-    "frontiercode": ("frontiercode",),
     "itbench-aa": ("itbench-aa",),
     **{component: (component,) for component in basket.INDEX_SDLC_TASKS},
 }
@@ -60,9 +58,8 @@ MATCHED_FAMILIES = {
     "omniscience": ("omniscience", basket.INDEX_RESIDUAL_TASKS["omniscience"]),
 }
 UNPRICED_REASONS = {
-    "deepswe": "the Coding Agent Index publishes one pooled cost for DeepSWE, SWE-Atlas-QnA and Terminal-Bench, and DeepSWE's published mean tokens carry no cache split to price them",
     "bugHunt": "the owner's runs publish no cost",
-    "frontierCode": "pending capture: AA's chart publishes rounded totals for some configurations, with no cost per task",
+    "frontierCode": "the Coding Agent Index v2.0 publishes one pooled cost for FrontierCode, SWE-Atlas-QnA-AA and Terminal-Bench (O50)",
 }
 # Leaves whose score is a solved fraction, so a cost per solved task is defined (not GDPval's Elo or the Omniscience index).
 SOLVED_FRACTION_LEAVES = {"terminalBench", "lcr", "hle", "scicode", "critpt"}
@@ -154,7 +151,7 @@ def swe_companion(rows: list[dict], main_workload: str) -> dict:
     median = statistics.median(ratios.values()) if ratios else None
     return {
         "rule": "c_SWE = Coding Agent Index cost + Terminal-Bench 4.0 (AA Index run) cost, from published per-task costs; flagged when its ratio to the basket cost deviates by more than 50% from the panel median",
-        "excludedComponents": {"frontiercode": "no published cost per task (chart totals only; pending capture)"},
+        "excludedComponents": {},  # O50: FrontierCode is priced inside the Coding Agent Index v2.0
         "medianRatio": median,
         "rows": {
             row_id: {"cSweUsd": costs[row_id], "ratio": ratio, "flag": abs(ratio / median - 1.0) > SWE_DEVIATION_LIMIT}

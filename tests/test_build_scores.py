@@ -1154,7 +1154,7 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
     assert seen_tiers == {"frontier", "near", None}
     assert sibling_tiers == {"frontier", "near", None}  # e.g. GPT-6.1 Sol (xhigh), Claude Haiku 5.5 (max), GPT-6.1 Sol (low)
     rows = model_rows(world)
-    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == ["Exact AA DeepSWE and eligible Bug Hunt overlap"]
+    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
     assert rows["gpt-6.1-sol-low"]["frontierSelection"] is None and rows["gpt-6.1-sol-low"]["family"] == "GPT-6.1 Sol"
 
 

@@ -21,7 +21,7 @@ Scoring rules (methodology v3; every number comes from the ``v3`` section of ``d
   score is log-scaled against frozen anchors; cost is the SDLC basket (AA's published cost to run seven
   Intelligence Index SDLC evaluations and the Coding Agent Index once, USD per basket run), divided on
   the Plan basis by a subscription route's Value Multiple (one row per configuration and plan). Quality is the weighted mean of
-  eleven benchmark leaves on fixed 0-100 anchors over the leaves observed for the exact configuration.
+  ten benchmark leaves on fixed 0-100 anchors over the leaves observed for the exact configuration.
 * A configuration without a cost score has no value score; ranks are competition ranks (ties share the
   better rank). The site's JavaScript recomputes the same rule when the cost weight moves.
 * Historic ranks predate the plan basis; see ``valuerank.site.changelog``.
@@ -162,7 +162,7 @@ def _load(data: Path) -> dict[str, Any]:
 
 
 def dimensions() -> list[dict]:
-    """The value's dimensions: the cost score (fixed share) and the eleven quality leaves."""
+    """The value's dimensions: the cost score (fixed share) and the ten quality leaves."""
 
     quality_share = (100.0 - COST_WEIGHT_PCT) / 100.0
     rows = [{
@@ -938,11 +938,11 @@ def changelog_page(bundle: Bundle) -> dict:
 
 
 FAQ_TEMPLATE = (
-    ("How is the value score calculated?", "Cost carries a fixed {cost:.0f}% of the value score and quality the rest. The cost score compares what each configuration costs to run the SDLC cost basket once, on a log scale against frozen anchors, so equal cost ratios count equally. Quality is the weighted mean of eleven benchmark leaves on fixed 0-100 anchors."),
-    ("What happens when a benchmark has no result for a model?", "Only configurations with all eleven benchmark results are ranked, so every ranked model is scored on the same benchmarks. A result Artificial Analysis has not run comes from another party's run of the same benchmark on the exact configuration, then from the model provider's published result. A configuration still missing one after a logged exhaustive search is listed with the gap, not ranked. A configuration without a cost gets no value score."),
+    ("How is the value score calculated?", "Cost carries a fixed {cost:.0f}% of the value score and quality the rest. The cost score compares what each configuration costs to run the SDLC cost basket once, on a log scale against frozen anchors, so equal cost ratios count equally. Quality is the weighted mean of ten benchmark leaves on fixed 0-100 anchors."),
+    ("What happens when a benchmark has no result for a model?", "Only configurations with all ten benchmark results are ranked, so every ranked model is scored on the same benchmarks. A result Artificial Analysis has not run comes from another party's run of the same benchmark on the exact configuration, then from the model provider's published result. A configuration still missing one after a logged exhaustive search is listed with the gap, not ranked. A configuration without a cost gets no value score."),
     ("What is the difference between the API ranking and the Plan ranking?", "Both price the same SDLC basket. The API ranking uses Artificial Analysis' cost at API rates. The Plan ranking divides it by a subscription route's Value Multiple, the API-priced usage a plan delivers per dollar of fee at full utilisation, and lists one row per configuration and plan; a model without an admitted route falls back to API cost, flagged."),
     ("What do the evidence grades mean?", "Measured values come from the benchmark owner or a controlled account measurement. Estimates are concordant end-user reports, and assumptions are owner-authorised transfers of one model's measured multiple to another."),
-    ("Why is a model not ranked?", "The ranked cohort is fixed policy: configurations on Artificial Analysis' Intelligence-versus-cost frontier or near it, and every configuration with exact DeepSWE and Bug Hunt results, each effort as its own row. A cohort configuration missing any of the eleven benchmarks after an exhaustive search is listed with the gap, not ranked. Other models still have pages with what we hold."),
+    ("Why is a model not ranked?", "The ranked cohort is fixed policy: every configuration Artificial Analysis plots on its Intelligence-versus-cost frontier or within 3 Index points of it, each effort as its own row. A cohort configuration missing any of the ten benchmarks after an exhaustive search is listed with the gap, not ranked. Other models still have pages with what we hold."),
 )
 
 LIMITATIONS = (

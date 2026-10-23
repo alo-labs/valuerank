@@ -64,9 +64,9 @@ SCENARIO_COUNT = 10_000
 SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False), ("S1T", False))
 SAMPLING_STREAM = "S1T"  # O39: benchmark sampling noise, independent-task approximation (never a label)
 # O39: each leaf's sampling unit, the published task count of the run the leaf reads (AA's evaluation pages and
-# methodology; the Coding Agent Index's DeepSWE count; FrontierCode 1.1 Main's 100 tasks; Bug Hunt's 105 planted bugs).
+# methodology; FrontierCode 1.1 Main's 100 tasks; Bug Hunt's 105 planted bugs).
 SAMPLING_TASKS = {
-    "deepswe": basket.CODING_AGENT_TASKS["deep-swe-v1.1"], "frontierCode": 100, "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-0"],
+    "frontierCode": 100, "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-0"],
     "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": basket.INDEX_SDLC_TASKS["artificial-analysis-long-context-reasoning"],
     "scicode": basket.INDEX_SDLC_TASKS["scicode"], "hle": basket.INDEX_RESIDUAL_TASKS["humanitys-last-exam"], "critpt": basket.INDEX_RESIDUAL_TASKS["critpt"],
     "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
@@ -115,7 +115,7 @@ LEAF_SEARCH_MAX_AGE_DAYS = 7
 
 
 # E237: the benchmark version a gap fill must state (O36: "the same benchmark version on the exact configuration").
-SUPPLEMENT_VERSIONS = {"deepswe": "DeepSWE v1.1", "bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 1.1", "terminalBench": "Terminal-Bench 4.0"}
+SUPPLEMENT_VERSIONS = {"bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 1.1", "terminalBench": "Terminal-Bench 4.0"}
 
 
 def check_comparability(entry: dict) -> None:
@@ -149,9 +149,9 @@ def leaf_supplements(documents: dict) -> dict:
     return chosen
 
 
-def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict | None, tb4_rows: list[dict], bug_hunt: dict | None,
+def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[dict], bug_hunt: dict | None,
                   supplements: dict | None = None) -> dict:
-    """Exact-configuration observations for the eleven leaves, with provenance, evidence locators (E159) and the clipping audit (E110)."""
+    """Exact-configuration observations for the quality leaves, with provenance, evidence locators (E159) and the clipping audit (E110)."""
 
     observations, provenance, audit = {}, {}, []
 
@@ -165,12 +165,6 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, deepswe: dict |
 
     page_path = f"pages[model.slug={page.get('slug')}].model"
 
-    if deepswe is not None and exact_match.efforts_match(model_id, effort, deepswe.get("effort")):
-        precision = deepswe.get("scorePrecision")
-        half = precision / 2.0 if isinstance(precision, (int, float)) else 0.0
-        add("deepswe", deepswe["scorePct"], q.percent_z(deepswe["scorePct"], half),
-            {"source": "AA Coding Agent Index, DeepSWE v1.1", "configuration": deepswe.get("displayLabel"), "agent": deepswe.get("agent")},
-            "deepswe", f"configurations[valueRankModelId={model_id}].scorePct")
     if exact_match.bug_hunt_matches(model_id, effort, bug_hunt):
         add("bugHunt", bug_hunt["fixedOf105"], q.bug_hunt_z(bug_hunt["fixedOf105"], BUG_HUNT_HALF_WIDTH),
             {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN")},
@@ -221,11 +215,10 @@ def incomplete_configurations(configurations: list[dict], documents: dict) -> li
     """O36: the configurations the ranking must list but not rank, each with the leaves it lacks after every source."""
 
     pages = {page["model"]["slug"]: page["model"] for page in documents["snapshot"]["pages"]}
-    deepswe_by_id = {item["valueRankModelId"]: item for item in documents["deepswe"]["configurations"] if item.get("valueRankModelId")}
     bug_hunt_by_id = {item["modelId"]: item for item in documents["bugHunt"]["models"]}
     supplements = leaf_supplements(documents)
     entries = [incomplete_entry(configuration, leaf_evidence(configuration["id"], configuration.get("effort"), pages[configuration["aaSlug"]],
-                                                             deepswe_by_id.get(configuration["id"]), documents["tb4"]["rows"],
+                                                             documents["tb4"]["rows"],
                                                              bug_hunt_by_id.get(configuration["id"]), supplements))
                for configuration in configurations]
     return [entry for entry in entries if entry is not None]
@@ -497,8 +490,8 @@ def configuration_family(configuration: dict) -> str:
 
 
 def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked_efforts: set | frozenset = frozenset()) -> list[str]:
-    """E201/O33: same-family configurations AA plots at a lower total Index cost that are not ranked (they lack an exact
-    DeepSWE or Bug Hunt result); ``ranked_efforts`` are the efforts of the family's ranked configurations."""
+    """E201/O33: same-family configurations AA plots at a lower total Index cost that are not ranked (not plotted on or
+    near the frontier with every leaf, O51); ``ranked_efforts`` are the efforts of the family's ranked configurations."""
 
     total = (page.get("intelligenceIndexCost") or {}).get("total")
     if total is None:
@@ -523,7 +516,6 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     """Evidence, admission, basket costs and Plan routes for every ranked configuration (no anchors yet)."""
 
     pages = {page["model"]["slug"]: page["model"] for page in documents["snapshot"]["pages"]}
-    deepswe_by_id = {item["valueRankModelId"]: item for item in documents["deepswe"]["configurations"] if item.get("valueRankModelId")}
     bug_hunt_by_id = {item["modelId"]: item for item in documents["bugHunt"]["models"]}
     agent_records = {item["label"]: item for item in documents["codingAgents"]["configurations"]}
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
@@ -565,7 +557,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             raise ValueError(f"{model_id}: AA model page {configuration['aaSlug']} is missing from the pinned snapshot")
         # A cohort row without a pinned map entry keeps its Index evidence; its agent and chart costs are missing (flagged).
         labels = mapping.get(model_id) or {}
-        evidence = leaf_evidence(model_id, effort, page, deepswe_by_id.get(model_id), documents["tb4"]["rows"], bug_hunt_by_id.get(model_id), supplements)
+        evidence = leaf_evidence(model_id, effort, page, documents["tb4"]["rows"], bug_hunt_by_id.get(model_id), supplements)
         components, reconciliation = row_components(
             page,
             agent_records.get(labels.get(basket.CODING_AGENT_INDEX)),
@@ -2443,12 +2435,12 @@ def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-# E19/E227: Bug Hunt and DeepSWE run each lab's model in that lab's own agent (and so does a tbench.ai Terminal-Bench gap
+# E19/E227: Bug Hunt runs each lab's model in that lab's own agent (and so does a tbench.ai Terminal-Bench gap
 # fill; AA's own Terminal-Bench run uses one harness, O37), so a named S2 branch draws those leaves inside a harness-mismatch
 # band whose width is the median spread of one configuration's Terminal-Bench score across agents on tbench.ai (pre-registered).
 HARNESS_BAND_RULE = (
     "width = median over leaderboard configurations listed under two or more agents of (highest - lowest resolution rate, "
-    "percentage points); each agent-run leaf (Bug Hunt, DeepSWE, and Terminal-Bench when it is a tbench.ai gap fill rather "
+    "percentage points); each agent-run leaf (Bug Hunt, and Terminal-Bench when it is a tbench.ai gap fill rather "
     "than AA's single-harness run, O37) drawn uniformly within the band centred on its observed score (E227); S2 "
     "specification stress, never in Θ"
 )
@@ -2459,7 +2451,7 @@ def agent_run_leaves(row: dict) -> list[str]:
 
     evidence = row["evidence"]
     agent_tb = (evidence["provenance"].get("terminalBench") or {}).get("agent") not in (None, DEFAULT_TB_HARNESS)
-    return [key for key in ("deepswe", "bugHunt", "terminalBench") if key in evidence["observations"] and (key != "terminalBench" or agent_tb)]
+    return [key for key in ("bugHunt", "terminalBench") if key in evidence["observations"] and (key != "terminalBench" or agent_tb)]
 # E34 and E122: the other named S2 branches, unevaluable from the captured evidence (stated, never silently skipped).
 CACHE_BRANCH = {
     "id": "cache-hit variation (E34)", "stratum": "S2", "status": "unevaluable",
@@ -2621,14 +2613,13 @@ def attach_scenarios(scored: dict, document: dict | None, expected_hash: str) ->
 # consults live pages, so the committed artifacts are the release's evidence bundle.
 EVIDENCE_FILES = {
     "snapshot": ("aa/aa_v432_snapshot.json", "valuerank.capture_aa"),
-    "deepswe": ("aa_deepswe.json", "valuerank.fetch_deepswe"),
     "bugHunt": ("bug_hunt.json", "editorial capture of the owner's published results (source commit recorded)"),
     "tb4": ("tb4.json", "scripts/scrape-tb4.js, then valuerank.build_tb4"),
     "codingAgents": ("aa/coding_agents_capture.json", "valuerank.capture_coding_agents"),
     "costCharts": ("aa/cost_charts_capture.json", "scripts/capture-aa-cost-charts.js"),
     "configurationMap": ("v3_configuration_map.json", "editorial pinning from the research capture"),
     "frontierCapture": ("aa_frontier_capture.json", "browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201)"),
-    "roster": ("aa_mapping.json", "editorial roster: AA frontier and near-frontier families plus every configuration with exact DeepSWE and Bug Hunt results (O31)"),
+    "roster": ("aa_mapping.json", "editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51)"),
     "bugHuntScoreboard": ("bug_hunt_scoreboard.json", "the owner's combined scoreboard at the pinned commit (O31 roster check)"),
     "planRoutes": ("plan_cost_routes.json", "editorial Plan evidence registry"),
     "priceRecords": ("price_records.json", "editorial E141 price-record registry (superseded and promotional tariffs)"),
@@ -2664,7 +2655,7 @@ def evidence_bundle(data: Path) -> dict:
     }
 
 
-RETAINED_REASON = "Exact AA DeepSWE and eligible Bug Hunt overlap"
+RETAINED_REASON = "Plotted on or within the near gap of AA's rendered frontier (O51)"
 
 
 def configuration(row: dict) -> dict:
@@ -2673,7 +2664,8 @@ def configuration(row: dict) -> dict:
     return {
         "id": row["id"], "name": row["name"], "family": row.get("family") or row["name"], "effort": row.get("aaVariant"), "aaSlug": row["aaSlug"],
         "aaNote": row.get("aaFrontierFootnote"),
-        "frontierFamily": any(reason != RETAINED_REASON for reason in row.get("rankingInclusionReasons") or []),
+        # O51: every cohort configuration is plotted on or near the frontier, so any inclusion reason makes it a frontier family row.
+        "frontierFamily": bool(row.get("rankingInclusionReasons")),
         "familyPrimary": row.get("familyPrimary", True),
     }
 

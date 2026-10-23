@@ -9,6 +9,7 @@ from __future__ import annotations
 AA_INDEX_URL = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
 AA_METHODOLOGY_URL = "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
 AA_DEEPSWE_URL = "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
+AA_CODING_AGENTS_URL = "https://artificialanalysis.ai/agents/coding-agents"
 LIVEBENCH_URL = "https://livebench.ai/"
 TERMINAL_BENCH_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 BUG_HUNT_URL = "https://bughunt.productcompass.pm/"
@@ -60,9 +61,8 @@ FRONTIER_RULE = (
 NEAR_FRONTIER_RULE = (
     "A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within {gap} points of the "
     "rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. "
-    "Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Its selected configuration "
-    "may differ from the near configuration: it is the configuration already ranked for exact DeepSWE and Bug Hunt evidence when there "
-    "is one, else the near point with the smallest Index gap. The cost ratio to the frontier is reported for information only."
+    "Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Every configuration AA plots on "
+    "the frontier or within the gap is a cohort row (O51); a near family's primary configuration is its near point with the smallest Index gap. The cost ratio to the frontier is reported for information only."
 )
 DEFAULT_NEAR_GAP = 3
 
