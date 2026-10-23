@@ -1316,3 +1316,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L5 (adopted): the plan-row separation statement is scoped to scenario shares, with a pointer to E258.
 - Design recommendations 2–4 (figure lint, Bug Hunt √N sensitivity, DeepSeek harness delta) not adopted this round: recorded for the owner report; the DeepSeek V4.1 Flash 1017 harness tie is already listed for owner review.
 - Round status (O56): not clean (one Medium). Draft r99.
+
+## Internal review I40 (Claude Sonnet 5.5, effort medium, on r99) — adopted, modified or rejected
+- No Critical, High or Medium finding (VERDICT: NO FURTHER FEEDBACK).
+- L1 (adopted): each adjacent pair is tested against its own threshold; the median is a summary.
+- L2 (adopted): O59/O60 arithmetic stated (whole UTC days, strict threshold, as E212; a date-only stamp on the cutoff's day is not after it; a post-cutoff capture with no recorded source update fails, already a fixture).
+- L3 (adopted): the max-effort ranking holds at most one configuration per family, 9 of the 12 families.
+- L4 (adopted, code changed): scores.json's cohort object names the frontier capture as its source and date; the top-level DeepSWE fields carry "withdrawn by AA (O49), kept as raw data, not scored (E250)".
+- Round status (O56): clean, the first at this rung. Draft r100.

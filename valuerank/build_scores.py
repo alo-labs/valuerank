@@ -1532,6 +1532,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 "observedAt": observed_at,
                 "benchmarkVersion": aa_document.get("benchmarkVersion"),
                 "deepsweBenchmarkVersion": deepswe_chart["benchmark"],
+                "deepsweStatus": "withdrawn by AA (O49), kept as raw data, not scored (E250)",
                 "deepsweSource": deepswe_chart["source"],
                 "deepsweConfigurationsN": len(deepswe_chart["configurations"]),
                 "deepsweObservedConfigurationN": deepswe_chart.get("observedConfigurationN"),
@@ -1541,8 +1542,10 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                     "sourceN": len(rows),
                     "exactBenchmarkOverlapN": len(overlap_primary_ids),
                     "frontierRequiredModelN": len(frontier_primary_ids),
-                    "source": "Artificial Analysis Coding Agent Index v1.5 DeepSWE v1.1 chart",
-                    "sourceUpdatedOn": deepswe_chart["observedAt"],
+                    # O51/E250: the cohort is defined by AA's rendered frontier capture; the DeepSWE chart fields
+                    # elsewhere in this file are withdrawn by AA and not scored.
+                    "source": "Artificial Analysis Intelligence Index vs. total cost chart: rendered frontier and near-frontier points (O51)",
+                    "sourceUpdatedOn": frontier_capture["captured_at"],
                 },
                 "frontierSelection": frontier_selection,
                 "aaPlottedNames": plotted_name_state(frontier_capture),
