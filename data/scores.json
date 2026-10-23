@@ -14073,7 +14073,109 @@
           }
         ]
       },
-      "hold": false
+      "hold": false,
+      "listedBeyondAnchors": [
+        {
+          "id": "claude-haiku-5-5-high",
+          "name": "Claude Haiku 5.5 (high)",
+          "basis": "plan",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 1.2028627836080885,
+          "side": "below the low anchor",
+          "factor": 1.3514307164805335,
+          "beyondFactorLimit": false,
+          "renderedFrontier": true
+        },
+        {
+          "id": "claude-haiku-5-5-medium",
+          "name": "Claude Haiku 5.5 (medium)",
+          "basis": "plan",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 0.7794482979940821,
+          "side": "below the low anchor",
+          "factor": 2.085559385609936,
+          "beyondFactorLimit": true,
+          "renderedFrontier": true
+        },
+        {
+          "id": "gpt-6-luna-high",
+          "name": "GPT-6 Luna (high)",
+          "basis": "api",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 37.39361260343029,
+          "side": "below the low anchor",
+          "factor": 1.063870903973508,
+          "beyondFactorLimit": false,
+          "renderedFrontier": true
+        },
+        {
+          "id": "gpt-6-luna-medium",
+          "name": "GPT-6 Luna (medium)",
+          "basis": "api",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 25.258630408653993,
+          "side": "below the low anchor",
+          "factor": 1.5749854920723108,
+          "beyondFactorLimit": false,
+          "renderedFrontier": true
+        },
+        {
+          "id": "gpt-5.6-luna-low",
+          "name": "GPT-5.6 Luna (low)",
+          "basis": "api",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 20.709901381529374,
+          "side": "below the low anchor",
+          "factor": 1.9209157837287945,
+          "beyondFactorLimit": false,
+          "renderedFrontier": false
+        },
+        {
+          "id": "claude-haiku-5-5-low",
+          "name": "Claude Haiku 5.5 (low)",
+          "basis": "api",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 28.119386018439528,
+          "side": "below the low anchor",
+          "factor": 1.4147526698185788,
+          "beyondFactorLimit": false,
+          "renderedFrontier": false
+        },
+        {
+          "id": "claude-haiku-5-5-low",
+          "name": "Claude Haiku 5.5 (low)",
+          "basis": "plan",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 0.47740893070355733,
+          "side": "below the low anchor",
+          "factor": 3.4050173948016074,
+          "beyondFactorLimit": true,
+          "renderedFrontier": false
+        },
+        {
+          "id": "gpt-6-luna-low",
+          "name": "GPT-6 Luna (low)",
+          "basis": "api",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 8.373510934483381,
+          "side": "below the low anchor",
+          "factor": 4.750931449724197,
+          "beyondFactorLimit": true,
+          "renderedFrontier": true
+        },
+        {
+          "id": "gpt-6-luna-low",
+          "name": "GPT-6 Luna (low)",
+          "basis": "plan",
+          "workload": "1453a9a0576b02ea",
+          "costUsd": 0.7773404135242649,
+          "side": "below the low anchor",
+          "factor": 2.091214717769855,
+          "beyondFactorLimit": true,
+          "renderedFrontier": true
+        }
+      ],
+      "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"
     },
     "identificationYield": {
       "rows": 27,
@@ -34987,7 +35089,43 @@
             }
           ]
         },
-        "hold": false
+        "hold": false,
+        "listedBeyondAnchors": [
+          {
+            "id": "claude-sonnet-5-5",
+            "name": "Claude Sonnet 5.5",
+            "basis": "api",
+            "workload": "1453a9a0576b02ea",
+            "costUsd": 5073.840417782336,
+            "side": "above the high anchor",
+            "factor": 1.0649954275881321,
+            "beyondFactorLimit": false,
+            "renderedFrontier": true
+          },
+          {
+            "id": "claude-opus-5-5",
+            "name": "Claude Opus 5.5",
+            "basis": "api",
+            "workload": "1453a9a0576b02ea",
+            "costUsd": 6039.127262611497,
+            "side": "above the high anchor",
+            "factor": 1.267608436947098,
+            "beyondFactorLimit": false,
+            "renderedFrontier": true
+          },
+          {
+            "id": "gpt-6-luna-low",
+            "name": "GPT-6 Luna (low)",
+            "basis": "api",
+            "workload": "1453a9a0576b02ea",
+            "costUsd": 8.373510934483381,
+            "side": "below the low anchor",
+            "factor": 1.2366318945284276,
+            "beyondFactorLimit": false,
+            "renderedFrontier": true
+          }
+        ],
+        "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"
       },
       "identificationYield": {
         "rows": 50,
@@ -61328,5 +61466,9 @@
         ]
       }
     }
+  },
+  "releaseHold": {
+    "hold": false,
+    "heldRankings": []
   }
 }

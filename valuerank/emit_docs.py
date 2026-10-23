@@ -869,7 +869,7 @@ A configuration's basket cost is the sum of AA's published costs for the admitte
 
 ## Cost score and anchors
 
-Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100. The anchors are frozen per workload and basis: c_L is half the cheapest reference cost and c_H twice the dearest, so no reference configuration clips. A release is held when more than max(1, 10% of ranked rows) clip on a basis or any row lies beyond an anchor by more than a factor of 2 (owner decision O12).
+Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100. The anchors are frozen per workload and basis: c_L is half the cheapest reference cost and c_H twice the dearest, so no reference configuration clips. A release is held when more than max(1, 10% of ranked rows) clip on a basis or any ranked row lies beyond an anchor by more than a factor of 2 (owner decision O12). The gate counts ranked rows only; a listed configuration beyond the anchors never holds a release and is disclosed (owner decision O58). {listed_beyond_text(facts)}
 
 {markdown_table(['Workload', 'Basis', 'Low anchor c_L (USD)', 'High anchor c_H (USD)', 'References', 'Status'], anchor_rows, numeric={2, 3, 4})}
 
@@ -1277,6 +1277,22 @@ def band_text(facts, row_id):
         mark = "†" if basis == "plan" and band is not None and key in result["planAssumedRouteRows"] else ""
         parts.append(DASH if band is None else (f"{band[0]}" if band[0] == band[1] else f"{band[0]}–{band[1]}") + mark)
     return " / ".join(parts)
+
+
+def listed_beyond_text(facts):
+    """O58: the listed configurations whose cost lies outside a ranking's frozen anchors, per ranking."""
+
+    parts = []
+    for item_facts in [facts, *facts.tracks.values()]:
+        items = [item for item in item_facts.v3["gates"]["listedBeyondAnchors"] if item["basis"] == "api"]
+        label = q.TRACK_LABELS[item_facts.track]
+        if not items:
+            parts.append(f"{label}: no listed configuration lies beyond the API anchors.")
+            continue
+        listed = "; ".join(f"{item['name']} ({item['side']}, by a factor of {item['factor']:.1f}"
+                           + (", a point on AA's rendered frontier" if item["renderedFrontier"] else "") + ")" for item in items)
+        parts.append(f"{label}, listed beyond the API anchors: {listed}.")
+    return " ".join(parts)
 
 
 def listed_indicative_text(facts):

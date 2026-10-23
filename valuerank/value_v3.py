@@ -1622,6 +1622,26 @@ def listed_indicative(assembled: dict, frozen: dict) -> list[dict]:
     return result
 
 
+def listed_beyond_anchors(listed: list[dict], frozen: dict) -> list[dict]:
+    """O58: listed configurations whose cost lies outside a ranking's frozen anchors. The clip gate counts ranked rows
+    only, so these never hold a release; they are disclosed with the factor, and a rendered-frontier point is marked."""
+
+    result = []
+    for row in listed:
+        for basis in BASES:
+            # As for the indicative value, a workload no ranked row uses has no frozen anchors to lie beyond.
+            anchors = (frozen["workloads"].get(row["cost"]["workload"]) or {}).get("anchors", {}).get(basis)
+            cost = _basis_cost(row, basis)
+            if not anchors or cost is None or cost <= 0:
+                continue
+            factor = anchor_math.beyond_factor(cost, anchors)
+            if factor > 1.0:
+                result.append({"id": row["id"], "name": row["name"], "basis": basis, "workload": row["cost"]["workload"], "costUsd": cost,
+                               "side": "below the low anchor" if cost < anchors["low"] else "above the high anchor", "factor": factor,
+                               "beyondFactorLimit": factor > anchor_math.BEYOND_FACTOR_LIMIT, "renderedFrontier": row.get("aaTier") == "frontier"})
+    return result
+
+
 def _rule(rule: str, status: str, detail: str) -> dict:
     return {"rule": rule, "status": status, "detail": detail}
 
@@ -1739,7 +1759,8 @@ def score(assembled: dict, frozen: dict) -> dict:
         "sourceIntervals": SOURCE_INTERVALS,
         "sourceDates": SOURCE_DATES,
         "costInfluence": influence,
-        "gates": {"clip": gates, "hold": hold},
+        "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),
+                  "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"},
         "identificationYield": yield_,
         "rows": [{**_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))),
                   "planRowId": representative.get(row["id"])} for row in rows],
@@ -2726,6 +2747,8 @@ def configuration(row: dict) -> dict:
         # O51: every cohort configuration is plotted on or near the frontier, so any inclusion reason makes it a frontier family row.
         "frontierFamily": bool(row.get("rankingInclusionReasons")),
         "familyPrimary": row.get("familyPrimary", True),
+        # O58: whether AA plots the configuration on its rendered frontier or within the near gap.
+        "aaTier": row.get("aaFrontierTier"),
     }
 
 

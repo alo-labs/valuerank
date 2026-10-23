@@ -1350,11 +1350,11 @@ def test_configurations_record_frontier_family_membership():
 def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
     """E187/O51: build_scores passes every scored row through configuration(); a plotted row is a frontier-family row."""
 
-    frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note",
+    frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note", "aaFrontierTier": "frontier",
                 "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
-    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True}
+    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True, "aaTier": "frontier"}
     retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON], "familyPrimary": False}
-    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False, "aaTier": None}
     # O33: an evidenced sibling carries its AA family, which its display name no longer equals.
     sibling = {"id": "f-high", "name": "F (high)", "family": "F", "aaVariant": "high", "aaSlug": "f-high", "rankingInclusionReasons": [v.RETAINED_REASON]}
     assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is True
@@ -1676,6 +1676,23 @@ def test_rank_bands_correlation_grid_and_listed_indicative_values():
     assert entry["api"]["value"] is not None and entry["coverage"] < 1.0
     orphan = v.listed_indicative({"listed": [dict(listed["listed"][0], cost=dict(listed["listed"][0]["cost"], workload="other"))]}, frozen)
     assert orphan[0]["api"] == {"costUsd": orphan[0]["api"]["costUsd"], "costScore": None, "value": None}
+
+
+def test_listed_rows_beyond_the_anchors_are_disclosed_and_never_hold_a_release():
+    """O58: the clip gate counts ranked rows only; a listed rendered-frontier row far beyond the low anchor is disclosed."""
+
+    result, frozen = scored()
+    listed = dict(result["rows"][0], id="z", name="Z (low)", aaTier="frontier", plan=dict(result["rows"][0]["plan"]))
+    low = frozen["workloads"][listed["cost"]["workload"]]["anchors"]["api"]["low"]
+    listed["cost"] = dict(listed["cost"], costUsd=low / 5.0)
+    listed["plan"]["costUsd"] = None
+    output = v.score({**result, "listed": [listed]}, frozen)
+    (item,) = output["gates"]["listedBeyondAnchors"]
+    assert item["id"] == "z" and item["basis"] == "api" and item["side"] == "below the low anchor" and item["factor"] == pytest.approx(5.0)
+    assert item["beyondFactorLimit"] and item["renderedFrontier"] and output["gates"]["hold"] is False
+    assert output["gates"]["population"].startswith("ranked rows only")
+    assert v.listed_beyond_anchors([dict(listed, cost=dict(listed["cost"], costUsd=low * 2.0), aaTier="near")], frozen) == []
+    assert v.listed_beyond_anchors([dict(listed, cost=dict(listed["cost"], workload="other"))], frozen) == []
 
 
 def test_noise_margin_companion_and_quality_margin():

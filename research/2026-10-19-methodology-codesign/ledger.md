@@ -1274,3 +1274,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L5 (adopted): indicative costs clip at the frozen anchors like any cost score (Claude Opus 5.5 (max) and Claude Sonnet 5.5 (max) show API cost score 0 beside the AI Coding Daily ranking).
 - L6 (adopted): bands are built forward only, so a configuration's plan rows can straddle a band boundary (GPT-6 Luna (max), GPT-6.1 Sol (medium) today).
 - Round status (O56): not clean (one Medium). Draft r95.
+
+## Owner decision O58 (2026-10-23): listed rows and the clip gate
+- Asked (Questions UI) whether a listed configuration beyond a ranking's anchors (today GPT-6 Luna (low), a rendered-frontier point, 4.75 times below the max-effort ranking's subset-workload low anchor) should be able to hold the release, the owner chose "No — disclose only (Recommended)". The clip gate counts ranked rows only, as the build already did; the gate output discloses every listed row beyond its workload's anchors with basis, side, factor, the factor-2 test and a rendered-frontier marker (scores.json `gates.listedBeyondAnchors`), and methodology.md prints the API list per ranking.
+
+## Internal review I36 (Claude Sonnet 5.5, effort medium, on r95) — adopted, modified or rejected
+- M1 (adopted with owner decision O58): the clip gate's population read onto listed rows. r96 says n and the clip test range over ranked rows, adds the O58 disclosure with today's figures, and a fixture shows a listed rendered-frontier row five times below the low anchor disclosed and not holding. Modified: the reviewer's "about 7.5 times" measured GPT-6 Luna (low) against the main workload's low anchor; the row is on the subset workload, whose anchor it lies 4.75 times below.
+- L1 (adopted as E262, code changed): gates run per ranking on its own anchor objects and rows; the rankings publish together, so a hold in either holds the release, and scores.json `releaseHold` names the held rankings (none today).
+- L2 (adopted): GPT-6 Astra (high) and (max), both at gap 3, named as the remaining near points, completing the 11.
+- L3 (adopted): "listed" replaced by "excluded (O38)" for the nine configurations without either ranking's set.
+- L4 (adopted): the bar-currency count sentence rewritten.
+- Round status (O56): not clean (one Medium). Draft r96.

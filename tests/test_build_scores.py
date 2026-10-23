@@ -342,6 +342,8 @@ def test_ranked_order_and_exclusions(built):
     # O53: it is excluded only when it lacks every ranking's set; each ranking lists the configurations it cannot rank.
     incomplete = [m for m in scores["models"] if m["rankingStatus"] == "excluded_incomplete_benchmarks"]
     listed = [{item["id"] for item in section["incompleteEvidence"]} for section in [scores["v3"], *scores["v3Tracks"].values()]]
+    # E262: a hold in either ranking holds the release.
+    assert scores["releaseHold"]["hold"] is bool(scores["releaseHold"]["heldRankings"])
     assert {m["id"] for m in incomplete} == set.intersection(*listed)
     for m in incomplete:
         assert not m["rankingEligible"] and m["rank"] is None and m["overallScore"] is None and m["costComposite"] is None

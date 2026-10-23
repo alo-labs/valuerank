@@ -1580,6 +1580,10 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 # O53/O54: the max-effort ranking leads; every other ranking has its own section.
                 "v3": v3_sections[q.DEFAULT_TRACK],
                 "v3Tracks": {track: section for track, section in v3_sections.items() if track != q.DEFAULT_TRACK},
+                # E262: gates run per ranking on its own anchor objects; the rankings publish together, so a hold in
+                # either holds the release.
+                "releaseHold": {"hold": any(section["gates"]["hold"] for section in v3_sections.values()),
+                                "heldRankings": [track for track, section in v3_sections.items() if section["gates"]["hold"]]},
             },
             indent=2,
             ensure_ascii=False,

@@ -444,3 +444,17 @@ def test_influence_text_explains_a_negative_cost_allocation_and_workload_dash():
     assert "covariance allocation of value variance is -12% on the API basis and 30% on the Plan basis" in negative
     assert "cost accounts for 40% of the variance in API value and 30% in Plan value" in ed.influence_text(v3(0.4, 0.3))
     assert ed.workload_text({"cost": {"apiUsd": None}}) == ed.DASH
+
+
+def test_listed_beyond_text_names_each_ranking_and_a_frontier_point():
+    """O58: listed rows beyond a ranking's API anchors are disclosed per ranking; a ranking without one says so."""
+
+    from types import SimpleNamespace
+
+    item = {"name": "Z (low)", "basis": "api", "side": "below the low anchor", "factor": 4.8, "renderedFrontier": True}
+    plan = dict(item, basis="plan")
+    other = SimpleNamespace(track="aicd", v3={"gates": {"listedBeyondAnchors": [plan]}})
+    facts = SimpleNamespace(track="max", v3={"gates": {"listedBeyondAnchors": [item]}}, tracks={"aicd": other})
+    assert ed.listed_beyond_text(facts) == (
+        "Max-effort ranking, listed beyond the API anchors: Z (low) (below the low anchor, by a factor of 4.8, a point on AA's rendered frontier). "
+        "AI Coding Daily ranking: no listed configuration lies beyond the API anchors.")
