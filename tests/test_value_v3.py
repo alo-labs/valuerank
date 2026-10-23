@@ -1819,9 +1819,11 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
             "fable": {basket.CODING_AGENT_INDEX: "Claude Code - Fable 5.1 (max) (with fallback)"},
             "mimo-v2-6-pro": {basket.CODING_AGENT_INDEX: "Claude Code - MiMo-V2.6-Pro"}}
     # E267 (I52 M1): the record is derived; a pin is only a choice among several exact records, and any other pin stops.
-    assert [v.agent_record_for(row, pins, records) for row in (ds, luna, fable, mimo, flash, odd)] == [
+    assert [v.agent_record_for(row, pins, records) for row in (ds, luna, fable, mimo, flash)] == [
         "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})", None, "Claude Code - Fable 5.1 (max) (with fallback)",
-        "Claude Code - MiMo-V2.6-Pro", None, None]
+        "Claude Code - MiMo-V2.6-Pro", None]
+    with pytest.raises(ValueError, match="odd: Coding Agent Index label"):  # I53 M1: a disagreeing pair is unreadable, not skipped
+        v.agent_record_for(odd, pins, records)
     assert v.agent_record_for(ds, {}, records) == "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"
     for row, pin in ((ds, "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (max)"), (luna, "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)"),
                      (flash, "Kimi Code CLI - MiMo-V2.6-Flash (high)")):
@@ -1831,5 +1833,11 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     with pytest.raises(ValueError, match="ds: AA's Coding Agent Index has several exact records"):
         v.agent_record_for(ds, {}, twice)
     assert v.agent_record_for(ds, {"ds": {basket.CODING_AGENT_INDEX: "Other Agent - DeepSeek V4.1 Flash 1017 (max)"}}, twice) == "Other Agent - DeepSeek V4.1 Flash 1017 (max)"
+    # I53 M1: AA's real two-form label reads as one effort; a label the grammar cannot read for the model stops the build.
+    luna_real = "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})"
+    assert v.parse_agent_label(luna_real) == {"agent": "Codex", "model": "GPT-6 Luna", "effort": "max"}
+    assert v.agent_record_for(luna, {}, {luna_real: {}}) == luna_real
+    with pytest.raises(ValueError, match=r"luna: Coding Agent Index label\(s\) .* are in a form E267 does not read"):
+        v.agent_record_for(luna, {}, {"Codex - GPT-6 Luna (max) ({'reasoning_effort': 'low'})": {}})
     # O54: MiMo-V2.6-Pro's record at high is exact too.
     assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]

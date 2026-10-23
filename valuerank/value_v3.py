@@ -636,6 +636,14 @@ def agent_record_for(configuration: dict, mapping: dict, agent_records) -> str |
     several exact records with no pin, stops the build. No pin can price a row from another configuration's record."""
 
     exact = exact_agent_records(configuration, agent_records)
+    # I53 M1: a single-model label for this model that the grammar cannot read stops the build rather than silently
+    # leaving the row without its record (a new AA label form must be read, not dropped).
+    family = configuration.get("family") or configuration["name"]
+    names = (family, family.removeprefix("Claude "))
+    unread = [label for label in agent_records if " + " not in label and parse_agent_label(label) is None
+              and label.partition(" - ")[2].startswith(tuple(f"{name} (" for name in names))]
+    if unread:
+        raise ValueError(f"{configuration['id']}: Coding Agent Index label(s) {unread} are in a form E267 does not read")
     pin = (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX)
     if pin is not None and pin not in exact:
         raise ValueError(f"{configuration['id']}: its Coding Agent Index pin {pin!r} is not an exact record; exact: {exact} (E267)")
@@ -704,7 +712,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         page = pages.get(configuration["aaSlug"])
         if page is None:
             raise ValueError(f"{model_id}: AA model page {configuration['aaSlug']} is missing from the pinned snapshot")
-        # A cohort row without a pinned map entry keeps its Index evidence; its agent and chart costs are missing (flagged).
+        # E267: the agent record is derived from the capture; a row without a chart label in the map has no chart cost (flagged).
         labels = mapping.get(model_id) or {}
         evidence = leaf_evidence(model_id, effort, page, documents["tb4"]["rows"], bug_hunt_by_id.get(model_id), supplements, tracks)
         components, reconciliation = row_components(
@@ -1337,7 +1345,7 @@ def gap_fill_bars(assembled: dict, frozen: dict, offset: float | None) -> dict:
 
 
 def frontiercode_cross_source(rows: list[dict], cognition: dict) -> dict:
-    """E234: AA's FrontierCode against Cognition's main score for the same name and effort, where both exist."""
+    """E234: AA's FrontierCode against Cognition's main score for the same family and effort, where both exist."""
 
     data = cognition["v1_1"]["data"]
     aa, other = {}, {}
@@ -1345,7 +1353,8 @@ def frontiercode_cross_source(rows: list[dict], cognition: dict) -> dict:
         source = row["evidence"]["provenance"].get("frontierCode") or {}
         if source.get("sourceType") in (None, "aa_recapture") and "frontierCode" in row["evidence"]["observations"]:
             aa[row["id"]] = row["evidence"]["observations"]["frontierCode"].z
-        score = (((data.get(row["name"]) or {}).get(row.get("effort")) or {}).get("main") or {}).get("new_score")
+        # I53 M3: Cognition's board is keyed by family, then effort; the row's name carries the effort for most rows.
+        score = (((data.get(row.get("family") or row["name"]) or {}).get(row.get("effort")) or {}).get("main") or {}).get("new_score")
         if score is not None:
             other[row["id"]] = 100.0 * score
     result = diagnostics.agreement(aa, other, label="FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)")
@@ -1840,7 +1849,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
               "deferred: " + ", ".join(item["component"] for item in assembled["deferred"]) if assembled.get("deferred") else "no main-workload migration deferred"),
         _rule("configuration map coverage", "fired" if not all(row["configurationMapped"] for row in rows) else "passed",
-              "cohort rows without a pinned agent/chart configuration identity: " + ", ".join(sorted(row["id"] for row in rows if not row["configurationMapped"])) if not all(row["configurationMapped"] for row in rows) else "every cohort row has a pinned identity"),
+              "cohort rows without a configuration-map entry (chart labels; the agent record is derived, E267): " + ", ".join(sorted(row["id"] for row in rows if not row["configurationMapped"])) if not all(row["configurationMapped"] for row in rows) else "every cohort row has a configuration-map entry"),
         _rule("quality clipping audit (E110)", "fired" if any(item["anchorPosition"] != "inside" for row in rows for item in row["evidence"]["clipAudit"]) else "passed", "saturation disclosed; domain violations block the build"),
         _rule("full benchmark set (O36, O38)", "fired" if assembled.get("incomplete") else "passed",
               "listed, not ranked: " + ", ".join(item["id"] for item in assembled["incomplete"]) if assembled.get("incomplete") else "every cohort configuration has every leaf"),

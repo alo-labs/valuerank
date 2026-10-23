@@ -16,8 +16,8 @@
   "aicd.beyondAnchors.api": "Claude Opus 5.5 (max) 1.27 above the high anchor (rendered-frontier point); GPT-6 Luna (low) 1.24 below the low anchor (rendered-frontier point); Claude Sonnet 5.5 (max) 1.06 above the high anchor (rendered-frontier point)",
   "aicd.beyondAnchors.plan": "none",
   "aicd.driftFlags": "the knowledge group (spread share 4.6% against a nominal 10.0%)",
-  "aicd.fillEffect.max": "1.32",
-  "aicd.fillEffect.mean": "0.32",
+  "aicd.fillEffect.max": "2.44",
+  "aicd.fillEffect.mean": "0.55",
   "aicd.gapFills": "GPT-5.6 Luna (low) and GPT-6 Astra (high)",
   "aicd.indicativeClipped": "Claude Opus 5.5 (max), Claude Sonnet 5.5 (max) and GPT-6 Luna (low)",
   "aicd.indicativeClipped.plan": "none",
@@ -61,6 +61,7 @@
   "excluded": "9",
   "excluded.frontierPoints": "Claude Opus 5.5 (xhigh), GPT-6 Luna (low) and GPT-6.1 Sol (xhigh)",
   "excluded.frontierPrimaries": "Claude Haiku 5.5 (xhigh) and MiMo-V2.6-Flash",
+  "excluded.missingCore": "MiMo-V2.6-Flash and MiniMax-M3.1-Flash lack Bug Hunt Bench",
   "excluded.names": "Claude Haiku 5.5 (low), Claude Haiku 5.5 (xhigh), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (xhigh), GPT-6 Astra (xhigh), GPT-6 Luna (low), GPT-6.1 Sol (xhigh), MiMo-V2.6-Flash and MiniMax-M3.1-Flash",
   "excluded.nearPoints": "Claude Haiku 5.5 (low) and Claude Sonnet 5.5 (xhigh)",
   "excluded.nearPrimaries": "GPT-6 Astra (xhigh) and MiniMax-M3.1-Flash",
@@ -73,8 +74,8 @@
   "max.beyondAnchors.api": "GPT-6 Luna (low) 4.75 below the low anchor (rendered-frontier point, past the factor-2 limit); GPT-5.6 Luna (low) 1.92 below the low anchor; GPT-6 Luna (medium) 1.57 below the low anchor (rendered-frontier point); Claude Haiku 5.5 (low) 1.41 below the low anchor; GPT-6 Luna (high) 1.06 below the low anchor (rendered-frontier point)",
   "max.beyondAnchors.plan": "Claude Haiku 5.5 (low) 3.41 below the low anchor (past the factor-2 limit); GPT-6 Luna (low) 2.09 below the low anchor (rendered-frontier point, past the factor-2 limit); Claude Haiku 5.5 (medium) 2.09 below the low anchor (rendered-frontier point, past the factor-2 limit); Claude Haiku 5.5 (high) 1.35 below the low anchor (rendered-frontier point)",
   "max.driftFlags": "none",
-  "max.fillEffect.max": "0.94",
-  "max.fillEffect.mean": "0.23",
+  "max.fillEffect.max": "1.74",
+  "max.fillEffect.mean": "0.39",
   "max.gapFills": "none",
   "max.indicativeClipped": "Claude Haiku 5.5 (low), GPT-5.6 Luna (low), GPT-6 Luna (high), GPT-6 Luna (low) and GPT-6 Luna (medium)",
   "max.indicativeClipped.plan": "Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (medium) and GPT-6 Luna (low)",
@@ -125,5 +126,6 @@
   "source.livebench2Overall.updated": "2026-10-18",
   "source.vibeCode.capturedAt": "2026-10-23T07:58:05Z",
   "source.vibeCode.records": "9",
-  "source.vibeCode.updated": "2026-10-20"
+  "source.vibeCode.updated": "2026-10-20",
+  "subsetStrata": "the max-effort ranking's 1-row subset stratum reads \"undefined (panel too small)\""
 }

@@ -199,7 +199,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
-| configuration map coverage | passed | every cohort row has a pinned identity |
+| configuration map coverage | passed | every cohort row has a configuration-map entry |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
 | full benchmark set (O36, O38) | fired | listed, not ranked: gpt-6.1-sol-high, claude-opus-5-5-high, claude-opus-5-5-medium, gpt-6.1-sol-medium, gpt-6-astra-high, claude-haiku-5-5-high, gpt-6-luna-xhigh, claude-haiku-5-5-medium, gpt-6-luna-high, gpt-6-luna-medium, gpt-5.6-luna-low, claude-haiku-5-5, claude-haiku-5-5-low, claude-opus-5-5-xhigh, claude-sonnet-5-5-xhigh, gpt-6-astra-xhigh, gpt-6-luna-low, gpt-6.1-sol-xhigh, mimo-v2-6-flash, minimax-m3-1-flash |
 | missing-leaf rules (O8 provisional, E198b, E201b, E219, E221, E226) | vacuous | no ranked row has a missing leaf (O36) |

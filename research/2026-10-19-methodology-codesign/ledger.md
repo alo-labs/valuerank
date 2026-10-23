@@ -1474,3 +1474,14 @@ For AI Coding Daily (the one added-leaf board run on several harnesses): the row
 - L5 (adopted in part): E267 names the two effort forms, case-sensitive matching and that other forms are not exact; an ITBench-AA pin gate is recorded for when that component is admitted.
 - L6 (adopted; the check widened): configuration names in any undated sentence are flagged, rendered with a new `{{name:ID}}` placeholder that fails when the configuration is gone, and the gap-fill bar result is a figure.
 - Round status (O56): not clean (one Medium). Draft r111.
+
+## Internal review I53 (Claude Sonnet 5.5, effort xhigh, on r111) — adopted, modified or rejected
+- M1 (adopted, engine changed; E267 amended): the draft's label grammar omitted the two-form label that prices GPT-6 Luna (max). The grammar is now stated exactly (agent, model, optional plain effort, optional keyed effort, optional fallback token; both forms must agree), the real label is a fixture, and, at the source of this four-round class, a single-model label for a cohort model that the grammar cannot read now stops the build instead of leaving the row without its record.
+- M2 (adopted; a figure): the E189 sentence claimed the 1-row subset stratum shows its SD ratio; it reads "undefined (panel too small)". The sentence now renders each subset stratum's status from the build (`subsetStrata`), which also removes a placeholder keyed by a workload hash.
+- M3 (adopted, engine changed; outputs changed): the FrontierCode cross-source check joined Cognition's family-keyed board on the effort-qualified name, so its panel was 7 rows, not the 22 the rule names. It now joins on family and effort: τ_b 0.77, mean offset 2.6 points, largest 11.6; every bar still keeps its row under the fill sensitivities. No score changes (diagnostic only).
+- L1 (adopted): the search cutoff is defined as the latest search not marked `singleProvider`, matching the gate, with the routine search's scope stated.
+- L2 (rejected): the history sentence keeps its `{{name:...}}` placeholder; if that configuration left the roster the build would ask the editor to rewrite the sentence, which is the intended cost.
+- L3 (adopted in part): the excluded rows' missing core leaves are a figure; effort-less names stay outside the name lint because each is also its family's name, which rules cite normatively (O46, O54).
+- L4 (adopted): E237's version gate is stated for gap fills; the added boards' versions come with their capture (O59).
+- L5 (adopted): the configuration-map rule and comment describe the derived agent record.
+- Round status (O56): not clean (three Mediums). Draft r112.

@@ -204,6 +204,11 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
     figures["duplicateRows"] = series([f"{names.get(record['modelId'], record['modelId'])} on {tracks['sources'][record['leaf']]['publisher'].split(' (')[0]} "
                                        f"({record['harness']} chosen over {series([item['harness'] for item in record['alternates']])} by "
                                        f"{record['selection'].split('chosen by ')[1].split(' (')[0]})" for record in tracks_records]) or "none"
+    # I53 M2: each subset-workload stratum's panel and the status its cost-influence statistics read.
+    labels = {"max": "the max-effort ranking", "aicd": "the AI Coding Daily ranking"}
+    strata = [f"{labels.get(track, track)}'s {len(item['panel'])}-row subset stratum reads \"{item['status']}\""
+              for track, section in sections.items() for item in section["costInfluence"]["api"].get("subsetStrata", {}).values()]
+    figures["subsetStrata"] = series(strata) if strata else "no ranking has a subset stratum"
     # E234: whether every frozen bar keeps its displayed-record row with the fills published, removed and lowered.
     changed = [f"{track} {basis} {item['bar'].removeprefix('bar:')}" for track, section in sections.items()
                for basis, items in section["diagnostics"]["gapFillBars"]["bases"].items() for item in items if not item["survives"]]
@@ -214,6 +219,15 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
     figures["rankedAny"] = len(set(ranked["max"]) | set(ranked["aicd"]))
     excluded = {item["id"] for item in sections["max"]["incompleteEvidence"]} & {item["id"] for item in sections["aicd"]["incompleteEvidence"]}
     figures["excluded"], figures["excluded.names"] = len(excluded), order(excluded)
+    # I53 L3: the leaves outside both rankings' added sets that excluded configurations lack, grouped by leaf set.
+    added = {leaf.key for track in q.TRACKS for leaf in q.TRACKS[track]} - {leaf.key for leaf in q.COMMON_LEAVES} - {"frontierCode", "terminalBench", "bugHunt"}
+    missing = {item["id"]: tuple(sorted(set(item["missing"]) - added)) for item in sections["max"]["incompleteEvidence"] if item["id"] in excluded}
+    groups = {}
+    for item_id, keys in missing.items():
+        if keys:
+            groups.setdefault(keys, []).append(item_id)
+    figures["excluded.missingCore"] = "; ".join(
+        f"{order(ids)} {'lacks' if len(ids) == 1 else 'lack'} {series([q.ALL_LEAVES[key].label for key in keys])}" for keys, ids in sorted(groups.items())) or "none"
     figures.update(family_figures(scores, excluded, order))
     return {key: str(value) for key, value in sorted(figures.items())}
 

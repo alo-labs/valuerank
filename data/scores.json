@@ -23953,42 +23953,45 @@
         "label": "FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)",
         "panel": [
           "claude-haiku-5-5",
-          "claude-opus-5-5",
-          "claude-sonnet-5-5",
-          "gemini-4-argon",
-          "gpt-6-astra",
-          "gpt-6-luna",
-          "gpt-6.1-sol"
-        ],
-        "excluded": [
           "claude-haiku-5-5-high",
           "claude-haiku-5-5-low",
           "claude-haiku-5-5-max",
           "claude-haiku-5-5-medium",
+          "claude-opus-5-5",
           "claude-opus-5-5-high",
           "claude-opus-5-5-medium",
           "claude-opus-5-5-xhigh",
+          "claude-sonnet-5-5",
           "claude-sonnet-5-5-xhigh",
-          "deepseek-v4-1-flash-1017",
+          "gemini-4-argon",
+          "gpt-6-astra",
+          "gpt-6-luna",
           "gpt-6-luna-high",
           "gpt-6-luna-low",
           "gpt-6-luna-medium",
           "gpt-6-luna-xhigh",
+          "gpt-6.1-sol",
           "gpt-6.1-sol-high",
           "gpt-6.1-sol-medium",
-          "gpt-6.1-sol-xhigh",
+          "gpt-6.1-sol-xhigh"
+        ],
+        "excluded": [
+          "deepseek-v4-1-flash-1017",
+          "gpt-5.6-luna-low",
+          "gpt-6-astra-high",
+          "gpt-6-astra-xhigh",
           "mimo-v2-6-flash",
           "mimo-v2-6-pro",
           "minimax-m3-1-flash"
         ],
-        "tau": 0.8095238095238095,
+        "tau": 0.7662337662337663,
         "interval": [
-          0.29411764705882354,
-          1.0
+          0.5818181818181818,
+          0.9095022624434389
         ],
         "status": "defined",
-        "meanOffset": 1.5189857142857153,
-        "maxAbsOffset": 6.2772333333332995,
+        "meanOffset": 2.600753030303032,
+        "maxAbsOffset": 11.603866666666699,
         "scale": "tested"
       },
       "gapFillSensitivity": {
@@ -24056,7 +24059,7 @@
         }
       },
       "gapFillBars": {
-        "meanOffset": 1.5189857142857153,
+        "meanOffset": 2.600753030303032,
         "bases": {
           "api": [
             {
@@ -28827,7 +28830,7 @@
       {
         "rule": "configuration map coverage",
         "status": "passed",
-        "detail": "every cohort row has a pinned identity"
+        "detail": "every cohort row has a configuration-map entry"
       },
       {
         "rule": "quality clipping audit (E110)",
@@ -48935,42 +48938,45 @@
           "label": "FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)",
           "panel": [
             "claude-haiku-5-5",
-            "claude-opus-5-5",
-            "claude-sonnet-5-5",
-            "gemini-4-argon",
-            "gpt-6-astra",
-            "gpt-6-luna",
-            "gpt-6.1-sol"
-          ],
-          "excluded": [
             "claude-haiku-5-5-high",
             "claude-haiku-5-5-low",
             "claude-haiku-5-5-max",
             "claude-haiku-5-5-medium",
+            "claude-opus-5-5",
             "claude-opus-5-5-high",
             "claude-opus-5-5-medium",
             "claude-opus-5-5-xhigh",
+            "claude-sonnet-5-5",
             "claude-sonnet-5-5-xhigh",
-            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
+            "gpt-6-astra",
+            "gpt-6-luna",
             "gpt-6-luna-high",
             "gpt-6-luna-low",
             "gpt-6-luna-medium",
             "gpt-6-luna-xhigh",
+            "gpt-6.1-sol",
             "gpt-6.1-sol-high",
             "gpt-6.1-sol-medium",
-            "gpt-6.1-sol-xhigh",
+            "gpt-6.1-sol-xhigh"
+          ],
+          "excluded": [
+            "deepseek-v4-1-flash-1017",
+            "gpt-5.6-luna-low",
+            "gpt-6-astra-high",
+            "gpt-6-astra-xhigh",
             "mimo-v2-6-flash",
             "mimo-v2-6-pro",
             "minimax-m3-1-flash"
           ],
-          "tau": 0.8095238095238095,
+          "tau": 0.7662337662337663,
           "interval": [
-            0.29411764705882354,
-            1.0
+            0.5818181818181818,
+            0.9095022624434389
           ],
           "status": "defined",
-          "meanOffset": 1.5189857142857153,
-          "maxAbsOffset": 6.2772333333332995,
+          "meanOffset": 2.600753030303032,
+          "maxAbsOffset": 11.603866666666699,
           "scale": "tested"
         },
         "gapFillSensitivity": {
@@ -49069,7 +49075,7 @@
           }
         },
         "gapFillBars": {
-          "meanOffset": 1.5189857142857153,
+          "meanOffset": 2.600753030303032,
           "bases": {
             "api": [
               {
@@ -54746,7 +54752,7 @@
         {
           "rule": "configuration map coverage",
           "status": "passed",
-          "detail": "every cohort row has a pinned identity"
+          "detail": "every cohort row has a configuration-map entry"
         },
         {
           "rule": "quality clipping audit (E110)",

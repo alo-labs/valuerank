@@ -221,3 +221,17 @@ def test_gap_fill_bars_figure_names_a_changed_bar():
     changed["v3"]["diagnostics"]["gapFillBars"]["bases"]["api"][0]["survives"] = False
     assert f.named_figures(changed)["gapFillBars"].startswith("a bar's row changes at max api ")
     assert f.named_figures(SCORES)["gapFillBars"] == "every bar of both rankings keeps its row in all three"
+
+
+def test_subset_strata_and_excluded_missing_leaves_render_from_the_build():
+    """I53 M2, L3: the subset stratum's status and the excluded rows' missing leaves are figures."""
+
+    manifest = f.named_figures(SCORES)
+    strata = [item for section in (SCORES["v3"], *SCORES["v3Tracks"].values()) for item in section["costInfluence"]["api"].get("subsetStrata", {}).values()]
+    assert all(item["status"] in manifest["subsetStrata"] for item in strata) and manifest["excluded.missingCore"]
+    empty = json.loads(json.dumps(SCORES))
+    for section in (empty["v3"], *empty["v3Tracks"].values()):
+        section["costInfluence"]["api"]["subsetStrata"] = {}
+        section["incompleteEvidence"] = []
+    figures = f.named_figures(empty)
+    assert figures["subsetStrata"] == "no ranking has a subset stratum" and figures["excluded.missingCore"] == "none"
