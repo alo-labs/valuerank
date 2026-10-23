@@ -589,8 +589,13 @@ def check_source_clocks(clocks: list[dict], release_day: date, cutoff: datetime)
                              f"({updated or 'not recorded'}) does not predate the cutoff's day (O60)")
 
 
-_KEYED_EFFORT = re.compile(r" \(\{'reasoning_effort': '(?P<effort>\w+)'\}\)$")
-_PLAIN_EFFORT = re.compile(r" \((?P<effort>\w+)\)$")
+# E267: the effort names AA prints, lower case; any other parenthesis after a model name is not a recognised form.
+AGENT_EFFORTS = "minimal|low|medium|high|xhigh|max"
+_KEYED_EFFORT = re.compile(rf" \(\{{'reasoning_effort': '(?P<effort>{AGENT_EFFORTS})'\}}\)$")
+_PLAIN_EFFORT = re.compile(rf" \((?P<effort>{AGENT_EFFORTS})\)$")
+# I54 M1: a label whose model text is a cohort model's name followed only by bracketed groups (or stray spaces) is a
+# candidate for that model, and must read exactly under the grammar, or the build stops.
+_CANDIDATE_TAIL = re.compile(r"(?: \((?:\{[^}]*\}|[^()]*)\))*\s*")
 # O54: the owner stated that AA's effort-less MiMo-V2.6-Pro configuration is high, so a record at high is exact too.
 OWNER_STATED_EFFORT = {"mimo-v2-6-pro": "high"}
 
@@ -640,8 +645,14 @@ def agent_record_for(configuration: dict, mapping: dict, agent_records) -> str |
     # leaving the row without its record (a new AA label form must be read, not dropped).
     family = configuration.get("family") or configuration["name"]
     names = (family, family.removeprefix("Claude "))
-    unread = [label for label in agent_records if " + " not in label and parse_agent_label(label) is None
-              and label.partition(" - ")[2].startswith(tuple(f"{name} (" for name in names))]
+    unread = []
+    for label in agent_records:
+        rest = label.partition(" - ")[2]
+        if " + " in label or not any(rest.startswith(name) and _CANDIDATE_TAIL.fullmatch(rest[len(name):]) for name in names):
+            continue
+        parsed = parse_agent_label(label)
+        if parsed is None or parsed["model"] not in names:
+            unread.append(label)
     if unread:
         raise ValueError(f"{configuration['id']}: Coding Agent Index label(s) {unread} are in a form E267 does not read")
     pin = (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX)

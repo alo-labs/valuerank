@@ -1485,3 +1485,12 @@ For AI Coding Daily (the one added-leaf board run on several harnesses): the row
 - L4 (adopted): E237's version gate is stated for gap fills; the added boards' versions come with their capture (O59).
 - L5 (adopted): the configuration-map rule and comment describe the derived agent record.
 - Round status (O56): not clean (three Mediums). Draft r112.
+
+## Internal review I54 (Claude Sonnet 5.5, effort xhigh, on r112) — adopted, modified or rejected
+- M1 (adopted, engine changed; E267 amended): the unreadable-label stop fired only for a disagreeing effort pair; other new forms (an unknown or differently cased effort, an extra bracketed group, a keyed group with other keys, reversed order, trailing spaces) were silently non-exact. The grammar is now strict: efforts are AA's lower-case names, and any single-model label whose model text is a cohort model's name followed only by bracketed groups or spaces is a candidate that must read exactly, or the build stops. Each listed form is a probe; a longer model name is not a candidate. The draft no longer calls a disagreeing pair "not exact": it stops the build.
+- L1 (adopted, engine changed): a Plan stratum of several plan rows from one configuration read "defined" with an allocation fixed by construction (its rows share one quality). It now reads "undefined (one configuration)", and the figure renders both bases' strata.
+- L2 (recorded): E237's version gate on tb4.json provider claims is latent (the one claim is for a model outside the cohort); for the release tidy-up.
+- L3 (adopted): a regression test for the family-and-effort FrontierCode join.
+- L4 (recorded): the `singleProvider` mark is editorial; a per-entry `providers` field is recorded for the tidy-up.
+- L5 (recorded): the clauses beside the missing-leaves figure explain each row's absence and are true today; generating them needs per-row search notes in the build.
+- Round status (O56): not clean (one Medium). Draft r113.

@@ -151,6 +151,9 @@ def variance_allocation(cost_scores: list[float], quality_scores: list[float], b
     return {"cost": cost_part / variance, "quality": quality_part / variance}
 
 
+ONE_CONFIGURATION = "undefined (one configuration)"
+
+
 def _influence_status(rows: list[dict], result: dict) -> str:
     if len(rows) < 2:
         return "undefined (panel too small)"
@@ -170,6 +173,11 @@ def panel_cost_influence(rows: list[dict], beta: float, main_workload: str) -> d
     scored = [row for row in rows if row["costScore"] is not None and row["qualityScore"] is not None]
 
     def summarise(panel: list[dict]) -> dict:
+        # I54 L1: a Plan panel's rows are (configuration, plan) pairs; with one configuration the quality spread is zero
+        # by construction, so the statistics are undefined rather than "quality not discriminating".
+        configurations = {row.get("configurationId") or row["id"].split("@")[0] for row in panel}
+        if len(panel) >= 2 and len(configurations) < 2:
+            return {**cost_influence([], [], beta), "status": ONE_CONFIGURATION, "panel": sorted(row["id"] for row in panel)}
         result = cost_influence([row["costScore"] for row in panel], [row["qualityScore"] for row in panel], beta)
         return {**result, "status": _influence_status(panel, result), "panel": sorted(row["id"] for row in panel)}
 

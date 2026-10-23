@@ -14030,16 +14030,11 @@
         },
         "subsetStrata": {
           "1453a9a0576b02ea": {
-            "costSd": 0.9775791868159828,
-            "qualitySd": 0.0,
-            "costShare": 1.0,
+            "costShare": null,
             "flag": false,
-            "qualityFlag": true,
-            "varianceAllocation": {
-              "cost": 0.9999999999999992,
-              "quality": 0.0
-            },
-            "status": "defined",
+            "qualityFlag": false,
+            "varianceAllocation": null,
+            "status": "undefined (one configuration)",
             "panel": [
               "mimo-v2-6-pro@mimo-token-plan-lite",
               "mimo-v2-6-pro@mimo-token-plan-max",

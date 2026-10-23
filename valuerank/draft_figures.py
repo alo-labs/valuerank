@@ -206,8 +206,9 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
                                        f"{record['selection'].split('chosen by ')[1].split(' (')[0]})" for record in tracks_records]) or "none"
     # I53 M2: each subset-workload stratum's panel and the status its cost-influence statistics read.
     labels = {"max": "the max-effort ranking", "aicd": "the AI Coding Daily ranking"}
-    strata = [f"{labels.get(track, track)}'s {len(item['panel'])}-row subset stratum reads \"{item['status']}\""
-              for track, section in sections.items() for item in section["costInfluence"]["api"].get("subsetStrata", {}).values()]
+    strata = [f"{labels.get(track, track)}'s {len(item['panel'])}-row {basis.upper() if basis == 'api' else 'Plan'} subset stratum reads \"{item['status']}\""
+              for track, section in sections.items() for basis in ("api", "plan")
+              for item in section["costInfluence"][basis].get("subsetStrata", {}).values()]
     figures["subsetStrata"] = series(strata) if strata else "no ranking has a subset stratum"
     # E234: whether every frozen bar keeps its displayed-record row with the fills published, removed and lowered.
     changed = [f"{track} {basis} {item['bar'].removeprefix('bar:')}" for track, section in sections.items()

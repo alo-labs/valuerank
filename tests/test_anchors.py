@@ -150,3 +150,13 @@ def test_trimmed_anchor_object_is_a_percentile_diagnostic():
     assert trimmed["rule"].startswith("P10") and a.anchor_object(costs, basis="api", workload="w")["high"] == 2000.0
     with pytest.raises(ValueError, match="at least two"):
         a.trimmed_anchor_object({"x": 1.0, "y": None}, basis="plan", workload="w")
+
+
+def test_a_plan_stratum_of_one_configuration_is_undefined():
+    """I54 L1: plan rows of one configuration share its quality, so the stratum's statistics are undefined."""
+
+    rows = [{"id": "m@lite", "configurationId": "m", "workloadId": "S", "costScore": 10.0, "qualityScore": 50.0},
+            {"id": "m@max", "workloadId": "S", "costScore": 30.0, "qualityScore": 50.0},
+            {"id": "a", "workloadId": "W", "costScore": 10.0, "qualityScore": 40.0}, {"id": "b", "workloadId": "W", "costScore": 60.0, "qualityScore": 70.0}]
+    stratum = a.panel_cost_influence(rows, 0.25, "W")["subsetStrata"]["S"]
+    assert stratum["status"] == a.ONE_CONFIGURATION and stratum["costShare"] is None and stratum["varianceAllocation"] is None

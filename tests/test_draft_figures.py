@@ -227,11 +227,12 @@ def test_subset_strata_and_excluded_missing_leaves_render_from_the_build():
     """I53 M2, L3: the subset stratum's status and the excluded rows' missing leaves are figures."""
 
     manifest = f.named_figures(SCORES)
-    strata = [item for section in (SCORES["v3"], *SCORES["v3Tracks"].values()) for item in section["costInfluence"]["api"].get("subsetStrata", {}).values()]
+    strata = [item for section in (SCORES["v3"], *SCORES["v3Tracks"].values()) for basis in ("api", "plan")
+              for item in section["costInfluence"][basis].get("subsetStrata", {}).values()]
     assert all(item["status"] in manifest["subsetStrata"] for item in strata) and manifest["excluded.missingCore"]
     empty = json.loads(json.dumps(SCORES))
     for section in (empty["v3"], *empty["v3Tracks"].values()):
-        section["costInfluence"]["api"]["subsetStrata"] = {}
+        section["costInfluence"]["api"]["subsetStrata"] = section["costInfluence"]["plan"]["subsetStrata"] = {}
         section["incompleteEvidence"] = []
     figures = f.named_figures(empty)
     assert figures["subsetStrata"] == "no ranking has a subset stratum" and figures["excluded.missingCore"] == "none"

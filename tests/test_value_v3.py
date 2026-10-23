@@ -1841,3 +1841,17 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
         v.agent_record_for(luna, {}, {"Codex - GPT-6 Luna (max) ({'reasoning_effort': 'low'})": {}})
     # O54: MiMo-V2.6-Pro's record at high is exact too.
     assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]
+
+
+def test_frontiercode_cross_source_joins_cognition_on_family_and_effort():
+    """I53 M3, I54 L3: Cognition's board is keyed by family then effort; effort-qualified names must still join."""
+
+    def row(row_id, family, effort, z):
+        return {"id": row_id, "name": f"{family} ({effort})", "family": family, "effort": effort,
+                "evidence": {"provenance": {}, "observations": {"frontierCode": SimpleNamespace(z=z)}}}
+
+    rows = [row("a", "Fam A", "high", 40.0), row("b", "Fam A", "max", 50.0), row("c", "Fam B", "max", 30.0), row("d", "Fam C", "max", 20.0)]
+    board = {"v1_1": {"data": {"Fam A": {"high": {"main": {"new_score": 0.42}}, "max": {"main": {"new_score": 0.53}}},
+                               "Fam B": {"max": {"main": {"new_score": 0.31}}}}}}
+    result = v.frontiercode_cross_source(rows, board)
+    assert result["panel"] == ["a", "b", "c"] and result["meanOffset"] == pytest.approx(2.0) and result["maxAbsOffset"] == pytest.approx(3.0)
