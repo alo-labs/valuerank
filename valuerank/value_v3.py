@@ -226,7 +226,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
             add(leaf.key, record["value"], TRACK_UNITS[meta["unit"]](record["value"]),
                 {"source": f"{meta['publisher']}: {meta['benchmark']}", "configuration": record.get("sourceLabel"), "effort": record.get("effort"),
                  "harness": meta["harness"], "url": meta["url"], "publishedOn": meta["updated"], "stderr": record.get("stderr"), "match": record.get("match"),
-                 **({"categories": record["categories"]} if record.get("categories") else {})},
+                 **({"categories": record["categories"]} if record.get("categories") else {}),
+                 **({"note": record["note"]} if record.get("note") else {})},
                 "sweTracks", f"records[modelId={model_id}, leaf={leaf.key}].value")
     for leaf in q.LEAVES:
         entry = (supplements or {}).get((model_id, leaf.key))

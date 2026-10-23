@@ -384,11 +384,12 @@ def pointer_problems(text: str, scores: dict) -> list[str]:
 
     sections = [scores["v3"], *scores["v3Tracks"].values()]
     problems = []
-    # A sentence that sends the reader to a generated document also names the field it reads, so the check can verify it.
+    # I47-I49: a pointer to a generated document can promise what the document does not print, and no check can read prose,
+    # so the specification points only to scores.json fields, which every generated document is rendered from.
     for line_number, line in enumerate(text.split(HISTORY_HEADING)[0].splitlines(), 1):
         for sentence in _SENTENCE.split(line):
-            if _DOCUMENT.search(sentence) and not _POINTER.search(sentence):
-                problems.append(f"line {line_number}: a pointer to a generated document names no scores.json field: {sentence[:160]}")
+            if _DOCUMENT.search(sentence):
+                problems.append(f"line {line_number}: the specification cites a generated document; cite the scores.json field instead: {sentence[:160]}")
     for path in sorted(set(_POINTER.findall(text))):
         concrete = [path.replace("<basis>", basis).replace("[]", "[0]") for basis in ("api", "plan")]
         if not (all(_resolves(section, item) for section in sections for item in concrete) or all(_resolves(scores, item) for item in concrete)):

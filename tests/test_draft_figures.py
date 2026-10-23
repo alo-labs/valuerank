@@ -154,5 +154,7 @@ def test_pointers_name_a_field_every_ranking_has():
         "History may cite scores.md freely.",
     ])
     problems = f.pointer_problems(text, SCORES)
-    assert problems == ["line 3: a pointer to a generated document names no scores.json field: Shares are printed in scores.md.",
+    assert problems == ["line 1: the specification cites a generated document; cite the scores.json field instead: Bands are printed beside the ranks "
+                        "(scores.md; scores.json `diagnostics.rankSeparability.<basis>.bands`).",
+                        "line 3: the specification cites a generated document; cite the scores.json field instead: Shares are printed in scores.md.",
                         "pointer scores.json `diagnostics.noSuchThing` does not resolve in every ranking"]

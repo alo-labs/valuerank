@@ -9,6 +9,7 @@ The website under site/ is owned by ``python -m valuerank.site.build``.
 from __future__ import annotations
 
 import json
+import re
 import statistics
 from datetime import date
 
@@ -519,13 +520,18 @@ def harness_by_leaf_text(facts):
 
     # O37: the Terminal-Bench leaf is AA's own run, so its agent is the leaf's provenance (tbench.ai's only for a gap fill).
     tb_agents = {row["id"]: (row["quality"]["leaves"].get("terminalBench") or {}).get("agent") for row in facts.v3["rows"]}
-    leaves = (("Terminal-Bench", lambda row: tb_agents.get(row["id"])),
-              ("Bug Hunt", lambda row: (row.get("bugHunt") or {}).get("harness") if (row.get("bugHunt") or {}).get("matched") else None))
+    # AI Coding Daily names the harness on each record (E257); I49 M1: every count is over this ranking's own rows.
+    aicd = {row["id"]: ((row["quality"]["leaves"].get("aiCodingDaily") or {}).get("note") or "") for row in facts.v3["rows"]}
+    leaves = [("Terminal-Bench", lambda row: tb_agents.get(row["id"])),
+              ("Bug Hunt", lambda row: (row.get("bugHunt") or {}).get("harness") if (row.get("bugHunt") or {}).get("matched") else None)]
+    if "aiCodingDaily" in q.LEAF_BY_KEY:
+        leaves.append(("AI Coding Daily", lambda row: (re.search(r"\bwith ([A-Z][\w.-]*(?: [A-Z][\w.-]*)*)", aicd.get(row["id"], "")) or [None, None])[1]))
+    ranked = {row["id"] for row in facts.v3["rows"]}
     parts = []
     for name, pick in leaves:
         counts = {}
         for row in facts.scores["models"]:
-            agent = pick(row) if row.get("rankingEligible") else None
+            agent = pick(row) if row["id"] in ranked else None
             if agent:
                 counts[agent] = counts.get(agent, 0) + 1
         parts.append(f"{name}: " + (", ".join(f"{agent} {count}" for agent, count in sorted(counts.items(), key=lambda item: (-item[1], item[0]))) or "none"))

@@ -1426,3 +1426,10 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L6 (recorded): two hand-written report-search facts remain outside the check's reach.
 - L7 (recorded): release-gate Detail cells describe the rule even when it passes, by design.
 - Round status (O56): not clean (two Mediums). Draft r107.
+
+## Internal review I49 (Claude Sonnet 5.5, effort xhigh, on r107) — adopted, modified or rejected
+- M1 (adopted, docs changed): the E227 harness line counted Bug Hunt over the configurations ranked in either ranking and omitted AI Coding Daily's harnesses. It now counts each ranking's own rows (today 9 and 15) and reads AI Coding Daily's harness from each record's note, which the evidence now carries in its provenance.
+- M2 (adopted; the pointer class removed at the source, E265 amended): pointers to generated documents were the Medium of three rounds (I47, I48, I49), because no check can verify that a document prints what a sentence promises. The specification now cites only scores.json fields, which every generated document is rendered from and which the check resolves in every ranking; the check fails on any mention of README.md, scores.md, methodology.md or raw-data.md in the specification's body. The unproduced "extends to the selected cohort" statement is replaced by "no published claim extends to them".
+- Lows (adopted): the AGENTS.md quotation is the current one (O48's "the route on each plan chosen by the official comparator"); the evidence-rules sentence names the O46 exception; LiveBench 2.0 Overall is listed among the single-leaf sources; MirrorCode's count is dated at O55; the band-straddle explanation covers both causes. Recorded: the O59 source list (provider documents are not a captured source type), stale labels in data and generated pages, for the release tidy-up.
+- Recommendation (a pointer manifest verified against the generated documents) superseded by the rule above.
+- Round status (O56): not clean (two Mediums). Draft r108.
