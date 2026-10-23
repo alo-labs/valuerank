@@ -62,3 +62,52 @@ Options for the owner:
 2. **Optional leaf.** Score AI Coding Daily (for example 8 points, taken 4 from FrontierCode and 4 from Terminal-Bench) for configurations that have it. Configurations without it are scored on the other leaves. This relaxes O36 for one leaf, and the rows are no longer scored on the same leaves.
 3. **Mandatory leaf.** Add AI Coding Daily as a required leaf. About 13 of 29 configurations stay ranked.
 4. **Ask for the missing runs.** Ask AI Coding Daily, Cursor and LiveBench to run the missing efforts. Nothing is scored until they do. This can be combined with option 1.
+
+## Addendum after O52: benchmark sets and the configurations they rank
+
+O52 picks the benchmarks first and ranks the configurations that have all of them. Two coverage files were built for it, each from captured primary data:
+
+- `vals-catalogue-2026-10-23.json`: all 61 Vals boards, 37 of them active; raw JSON in `vals-capture/`.
+- `other-coverage-2026-10-23.json`: AI Coding Daily, LiveBench 2.0, Surge, CursorBench, Arena, FrontierSWE, SWE-rebench and IFBench; raw captures in `other-capture/`.
+
+`tradeoff.py` counts the configurations each set ranks. The 29-configuration coverage grid (X = exact, p = plausible):
+
+| Configuration | AICD (excl. bug finding) | CursorBench 4.0 | LiveBench 2.0 | Vals Vibe Code v1.1 | Vals Code Migration v1.1 | Surge Complex Constraints |
+|---|---|---|---|---|---|---|
+| Claude Haiku 5.5 (xhigh) | | X | | | | |
+| Claude Haiku 5.5 (high) | X | X | | | | |
+| Claude Haiku 5.5 (low) | | X | | | | |
+| Claude Haiku 5.5 (max) | | X | X | X | X | |
+| Claude Haiku 5.5 (medium) | X | X | | | | |
+| Claude Opus 5.5 (max) | | X | X | X | X | X |
+| Claude Opus 5.5 (high) | X | X | | | | |
+| Claude Opus 5.5 (medium) | X | X | | | | |
+| Claude Opus 5.5 (xhigh) | | X | | | | |
+| Claude Sonnet 5.5 (max) | | X | X | X | X | |
+| Claude Sonnet 5.5 (xhigh) | | X | | | | |
+| DeepSeek V4.1 Flash 1017 (max) | X | | X | X | X | p |
+| Gemini 4 Argon (high) | X | X | X | X | X | X |
+| GPT-5.6 Luna (low) | X | X | | | | |
+| GPT-6 Astra (max) | | | X | X | X | X |
+| GPT-6 Astra (high) | X | | | | | |
+| GPT-6 Astra (xhigh) | | | | | | |
+| GPT-6 Luna (max) | X | | X | X | X | |
+| GPT-6 Luna (high, medium, xhigh) | X | | | | | |
+| GPT-6 Luna (low) | | | | | | |
+| GPT-6.1 Sol (max) | | | X | X | X | |
+| GPT-6.1 Sol (high, medium) | X | | | | | |
+| GPT-6.1 Sol (xhigh) | | | | | | |
+| MiMo-V2.6-Flash | p | | | p | p | |
+| MiMo-V2.6-Pro | p | | p | p | p | |
+| MiniMax-M3.1-Flash | p | | p | p | | |
+
+What the coverage supports:
+
+- **The current ten leaves rank 27.**
+- **The max-effort group:** LiveBench 2.0 Coding and Long Agentic, Vals Vibe Code Bench v1.1 and Vals Code Migration v1.1 together rank 8 exact (9 with MiMo-V2.6-Pro as plausible). That is one configuration per family, at the vendor's top effort: Opus, Sonnet and Haiku 5.5 max; GPT-6.1 Sol, GPT-6 Astra and GPT-6 Luna max; Gemini 4 Argon high; DeepSeek V4.1 Flash 1017 max. Adding Vals SWE-bench Multimodal drops it to 7.
+- **AI Coding Daily alone:** 14 exact, mostly high and medium efforts.
+- **AI Coding Daily with the max-effort group:** 3 (Gemini 4 Argon, GPT-6 Luna max, DeepSeek V4.1 Flash 1017).
+- **Surge Complex Constraints, if required:** at most 3 exact (GPT-6 Astra max, Gemini 4 Argon high, Claude Opus 5.5 max), plus DeepSeek V4.1 Flash as plausible because its snapshot is unstated. With the max-effort group it stays at 3. With AI Coding Daily it is 1 (Gemini 4 Argon).
+- **All three owner-named sources required:** 1 (Gemini 4 Argon).
+- **IFBench:** no source publishes it for the cohort. AA dropped it from the Index in v4.1 (2026-06-16), and every cohort row is null in AA's 2026-10-23 snapshot.
+- **Vals:** the professional-work boards (Finance Agent v2.1, EMB v1.1, Legal Research, HLAB-Vals-1.1, Tax Agent Bench) reach the same 8-plus-3 ceiling as the SWE boards, and they overlap GDPval-AA, AA-Briefcase and AutomationBench-AA. Vals has no instruction-following board. Vals Terminal-Bench 4.0 is the same task set as the AA-run leaf, on a different harness.
