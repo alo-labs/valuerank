@@ -382,6 +382,11 @@ def influence_text(v3, short=False):
         return ""
     if short:
         return f"; {pct(shares['api'], 0)} of API and {pct(shares['plan'], 0)} of Plan value variance"
+    if max(shares.values()) > 1:
+        # E196 (I47 L1): above 100% the quality term is negative: cheaper configurations score higher on quality, so quality offsets cost.
+        return (f" That weight is nominal: on the current panel cost's covariance allocation of value variance is {pct(shares['api'], 0)} on the API basis "
+                f"and {pct(shares['plan'], 0)} on the Plan basis; an allocation above 100% means quality's is negative: cheaper configurations score "
+                "higher on quality, so quality offsets cost differences instead of adding spread of its own (see [methodology.md](methodology.md)).")
     if min(shares.values()) < 0:
         # The covariance allocation is negative when dearer configurations score higher on quality: cost then offsets quality.
         return (f" That weight is nominal: on the current panel cost's covariance allocation of value variance is {pct(shares['api'], 0)} on the API basis "
@@ -859,7 +864,7 @@ The cost figure is the **{boundary['label']}**. {v3['basketVersion']} holds the 
 
 {markdown_table(['Component', 'Status', 'Exact cost available', 'Complete', 'Ranked'], component_rows, numeric={2, 3, 4})}
 
-A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is read from AA's chart (rounded to USD 1). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
+A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is AA's unrounded mean cost per task times its 290 required tasks (O27, O50). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
 **Cost boundary.** Source: {boundary['source']}. AA's cost covers the contestant model's API tokens; other charges are included, excluded or unknown per component:
 
@@ -995,6 +1000,11 @@ def track_scores_markdown(facts):
                 f"## {q.TRACK_LABELS[track]}\n\n{viewmodel.TRACK_LEADS[track]} Anchor version `{other.v3['anchorVersion']}`; leaves: {leaf_set_text(q.LEAVES)}.\n\n"
                 + markdown_table(SCORE_HEADERS, score_rows(other), numeric={1, 2, 3, 4, 5, 6, 7, 8})
                 + f"\n\n### {q.TRACK_LABELS[track]}: quality leaf scores\n\n" + leaf_table(other) + "\n"
+                # I47 M1: the per-ranking disclosures the specification points to are printed for every ranking.
+                + f"\n### {q.TRACK_LABELS[track]}: Plan routes and calibration\n\n{calibration_markdown(other)}\n"
+                + f"\n### {q.TRACK_LABELS[track]}: interval outputs\n\n{interval_tables(other)}\n"
+                + f"\n### {q.TRACK_LABELS[track]}: scenario shares\n\n{scenario_panel_note(other)}{scenario_tables(other)}\n"
+                + f"\n### {q.TRACK_LABELS[track]}: diagnostics\n\n{diagnostics_markdown(other)}\n"
             )
     return "\n".join(sections)
 
@@ -1120,11 +1130,13 @@ Admission: {measured['specification']['admission']}. Selection: {measured['speci
 def scenario_panel_note(facts):
     """E266: the scenario panel is the main workload's rows; a subset-workload row gets no scenario share."""
 
-    subset = [facts.label(row["id"]) for row in facts.v3["rows"] if row["cost"]["workload"] != facts.v3["mainWorkload"]]
+    rows = facts.v3["rows"]
+    subset = [facts.label(row["id"]) for row in rows if row["cost"]["workload"] != facts.v3["mainWorkload"]]
+    panel = f"The scenario panel is the {len(rows) - len(subset)} rows scored on the main workload (E96, E266)"
     if not subset:
-        return ""
-    return ("The scenario panel is the rows scored on the main workload (E96, E266); " + series(subset)
-            + " (subset workload) are not in it and have no scenario shares, so the shares below compare the main-workload rows only.\n\n")
+        return panel + ".\n\n"
+    return (panel + "; " + series(subset) + " (subset workload) are not in it and have no scenario shares, so the shares below compare "
+            "the main-workload rows only.\n\n")
 
 
 def anchor_setter(facts, end):
@@ -1190,7 +1202,7 @@ def interval_block(facts, result, label, workload_label):
             text += f"; confirmed cheapest: {facts.label(bar['confirmedCheapest']) if bar['confirmedCheapest'] else 'none'}.\n\n"
             siblings = "; ".join(f"{facts.label(row_id)}: {', '.join(names)}" for row_id, names in bar["uncheckedCheaperSiblings"].items() if names)
             text += f"Configurations that can be confirmed to qualify: {bar['confirmedQualifierN']} (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). "
-            text += f"Cheaper same-family configurations on AA's chart that were not evaluated (not ranked: not plotted on or near the frontier; E201, O51): {siblings or 'none'}.\n\n"
+            text += f"Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): {siblings or 'none'}.\n\n"
             text += f"Bar comparison: {bar['comparison']}. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).\n\n"
             bar_rows = [[facts.label(row_id), fnum(item["displayedMargin"], 1), item["confirmed"], item["possible"], item["possibleCheapest"]] for row_id, item in bar["rows"].items() if "confirmed" in item]
             text += markdown_table(["Configuration", "Displayed quality − bar", "Confirmed qualifies", "Possibly qualifies", "Possibly cheapest"], bar_rows, numeric={1})
@@ -1220,7 +1232,7 @@ def scenario_tables(facts):
         if excluded:
             off = [run_label(run) for run in runs if run.get("excluded")]
             parts.append(
-                f"{label} streams {series(off)} run with owner-named transfers off (E167): {facts.labels(sorted(excluded, key=facts.label))} "
+                f"{label} streams {series(off)} run with owner assumptions off (owner-named transfers and O46 quota ceilings; E167): {facts.labels(sorted(excluded, key=facts.label))} "
                 "depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost."
             )
         for event, event_label in (("top1", "rank 1"), ("top3", "rank 3 or better"), ("frontier", "on the frontier")):
@@ -1351,10 +1363,10 @@ def separability_text(facts):
             f"{plan['adjacentPairs']} adjacent Plan ranks of different configurations do ({plan['sameConfigurationAdjacentPairs']} more adjacent Plan pairs are one "
             "configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which "
             f"correlates their errors and narrows the true threshold (API {grid(api)}; Plan {grid(plan)}), while sources it leaves out widen it (run-to-run and "
-            f"harness variance, AA's single cost run and, for the {len(result['planAssumedRouteRows'])} Plan rows on owner-named transfers, the transfer's error). "
-            "The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner-named "
-            f"transfer and excludes its error: a transferred multiple can be wrong by a factor of about {plan['costTolerance']:.1f} before the row's value moves by the "
-            "median threshold (a tolerance, not an estimate of the transfer's error). The S1T scenario shares in [scores.md](scores.md) "
+            f"harness variance, AA's single cost run and, for the {len(result['planAssumedRouteRows'])} Plan rows on an owner assumption (an owner-named transfer or an O46 quota ceiling), that assumption's error). "
+            "The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (owner-named "
+            f"transfer or O46 quota ceiling) and excludes its error: an assumed multiple can be wrong by a factor of about {plan['costTolerance']:.1f} before the row's value moves by the "
+            "median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) "
             "show each row's rank-1 and top-3 frequencies under that noise." + aicd_narrow_text(api, plan))
 
 

@@ -1403,3 +1403,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L6 (recorded): stale notes in data and code comments are left for the release tidy-up; they change no output.
 - L7 (adopted): "same rows" is scoped to the main workload.
 - Round status (O56): not clean (two Mediums). Draft r105.
+
+## Internal review I47 (Claude Sonnet 5.5, effort xhigh, on r105) — adopted, modified or rejected
+- M1 (adopted, docs changed): scores.md printed only the leading ranking's interval outputs, scenario shares, calibration and diagnostics, so the draft's per-ranking pointers did not resolve for the AI Coding Daily ranking and some published statements were wrong for it. scores.md now prints, under the AI Coding Daily ranking, its calibration, interval outputs (with the E201c sibling lists), scenario shares (with the E266 panel note) and diagnostics (with its gap-fill removal sensitivity); the draft's pointers name scores.md under each ranking, or the scores.json field; the site's API basket description says the Coding Agent Index enters "where the ranking admits it".
+- L1 (adopted): README's allocation sentence explains an allocation above 100% (quality's term negative) as E196 requires.
+- L2 (adopted): the unevaluated-sibling reason reads "lacking its full benchmark set, or not plotted on or near the frontier".
+- L3 (adopted): methodology.md states the Coding Agent Index cost as AA's unrounded mean cost per task × 290.
+- L4 (adopted): the published transfers-off, separability and † texts name owner assumptions (owner-named transfers and O46 quota ceilings).
+- L5 (recorded): the "valuation basis unverified" label is shared by E138 and E202 by design; their reasons are printed beside it.
+- L6 (recorded): the subscription-policy prose's O31/O33 history is kept as history in plan_cost_routes.json; tidy at release.
+- L7 (adopted): the scenario-panel note prints the panel size, and Output 1 says a subset-workload row has no share.
+- Round status (O56): not clean (one Medium). Draft r106.

@@ -133,7 +133,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert len(table_rows(text, "| Model | Reasons")) == 52
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
     # O48: the Plan streams exclude transfer-dependent plan rows, each named as a configuration on its plan.
-    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (max) on Claude Max 20x," in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions off (owner-named transfers and O46 quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
     assert "| quality 65.0 | Claude Sonnet 5.5 (max) | not scenario-supported |" in text
@@ -215,7 +215,11 @@ def test_stale_scenarios_publish_no_shares(repo_copy, pinned_clock):
 
 
 def test_no_bar_label_candidates_leave_out_the_label_table(repo_copy, pinned_clock):
-    edit_json(repo_copy, "scores.json", lambda doc: doc["v3"]["scenarios"].__setitem__("barLabels", []))
+    def no_labels(doc):
+        for section in (doc["v3"], *doc["v3Tracks"].values()):
+            section["scenarios"]["barLabels"] = []
+
+    edit_json(repo_copy, "scores.json", no_labels)
     assert emit(repo_copy) == 0
     assert "Cheapest-above-the-bar labels" not in (repo_copy / "scores.md").read_text()
 

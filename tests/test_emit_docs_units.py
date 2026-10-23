@@ -467,5 +467,5 @@ def test_scenario_panel_note_names_subset_rows_only_when_there_are_some():
 
     rows = [{"id": "a", "cost": {"workload": "w"}}, {"id": "b", "cost": {"workload": "s"}}]
     facts = SimpleNamespace(v3={"rows": rows, "mainWorkload": "w"}, label=lambda model_id: model_id.upper())
-    assert ed.scenario_panel_note(facts).startswith("The scenario panel is the rows scored on the main workload (E96, E266); B (subset workload)")
-    assert ed.scenario_panel_note(SimpleNamespace(v3={"rows": rows[:1], "mainWorkload": "w"}, label=str)) == ""
+    assert ed.scenario_panel_note(facts).startswith("The scenario panel is the 1 rows scored on the main workload (E96, E266); B (subset workload)")
+    assert ed.scenario_panel_note(SimpleNamespace(v3={"rows": rows[:1], "mainWorkload": "w"}, label=str)) == "The scenario panel is the 1 rows scored on the main workload (E96, E266).\n\n"

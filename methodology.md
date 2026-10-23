@@ -76,7 +76,7 @@ The cost figure is the **contestant-model API token cost for the SDLC basket (no
 | SciCode | admitted | 9 | 9 | 9 |
 | AA-LCR | admitted | 9 | 9 | 9 |
 
-A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is read from AA's chart (rounded to USD 1). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
+A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is AA's unrounded mean cost per task times its 290 required tasks (O27, O50). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
 **Cost boundary.** Source: https://artificialanalysis.ai/methodology/intelligence-benchmarking (fetched 2026-10-19). AA's cost covers the contestant model's API tokens; other charges are included, excluded or unknown per component:
 
