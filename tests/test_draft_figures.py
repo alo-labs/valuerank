@@ -85,6 +85,9 @@ def test_lint_flags_unmarked_today_figures_names_and_undated_counts():
     ]), names, configurations, "2026-10-23")
     assert [problem.split(" in an")[0] for problem in widened] == [
         "line 1: unmarked count(s) 14 leaves", "line 2: unmarked count(s) 29 configurations, $10.63", "line 4: unmarked count(s) 4 against 5"]
+    # I44 L1: a configuration named with its plan or fallback states a current route.
+    routed = f.lint("Low end: GPT-6 Luna (max) on ChatGPT Pro 500 and Gemini 4 Argon (high) on API-cost fallback.", names, configurations, "2026-10-23")
+    assert routed[0].startswith("line 1: unmarked configuration route(s) Gemini 4 Argon (high), GPT-6 Luna (max)")
     assert f.dated("**Rule (O1, 2026-10-01)**: text", "2026-10-23") is False and f.dated("Seen on 2026-10-23.", "2026-10-23") is False
     assert f.dated("Seen on 2026-10-01.", None) is True
 

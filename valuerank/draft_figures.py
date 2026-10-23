@@ -130,6 +130,11 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         "aa.firstVertex": min(capture["frontier"], key=lambda item: item["total_cost_usd"])["model_name"],
         "aa.firstVertexCost": f"{min(item['total_cost_usd'] for item in capture['frontier']):,.2f}",
         "aa.cheapestPlottedCost": f"{min(item['total_cost_usd'] for item in capture['points']):,.2f}",
+        # E195: rendered-frontier points whose rounded tooltip Index ties (I44 L3).
+        "aa.frontierIndexTies": "; ".join(
+            f"{series(sorted(item['model_name'] for item in capture['frontier'] if item['intelligence_index_display'] == index))} all display {index}"
+            for index in sorted({item["intelligence_index_display"] for item in capture["frontier"]})
+            if sum(1 for item in capture["frontier"] if item["intelligence_index_display"] == index) > 1) or "none",
     }
     for track in q.TRACKS:
         section = scores["v3"] if track == q.DEFAULT_TRACK else scores["v3Tracks"][track]
@@ -324,6 +329,9 @@ def lint(source: str, names: list[str], configurations: list[str] = (), release_
         for sentence in _SENTENCE.split(line):
             # A count "N of M" states the current release unless the sentence dates it, whether or not it says today.
             if not dated(sentence, release_day):
+                routed = [name for name in configurations if re.search(re.escape(name) + r" on (?:[A-Z][\w$.]*(?: [\w$.]+){0,3}|API-cost fallback)", PLACEHOLDER.sub("", sentence))]
+                if routed:
+                    problems.append(f"line {line_number}: unmarked configuration route(s) {', '.join(routed)} in an undated sentence: {sentence[:160]}")
                 undated = PLACEHOLDER.sub("", sentence)
                 for constant in RULE_CONSTANTS:
                     undated = undated.replace(constant, "")

@@ -1370,3 +1370,14 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L4 (adopted): O55 is cited "as amended for the max-effort ranking by O61".
 - L5 (adopted): the untested remark that Vibe Code Bench separates little is replaced by a pointer to the published leaf spreads.
 - Round status (O56): not clean (three Mediums). Draft r102. The Sonnet high rung's clean count restarts at zero (I42 was clean on r100; I43 is not).
+
+## Internal review I44 (Claude Sonnet 5.5, effort high, on r102) — adopted, modified or rejected
+- No Critical, High or Medium finding (VERDICT: NO FURTHER FEEDBACK): clean, the first clean round at this rung after I43.
+- L1 (adopted; a defect in the check, fixed): the AI Coding Daily ranking's Plan anchor setters were hand-written and the lint read configuration names only in "today" sentences. The check (E265) now also flags a configuration named with a plan route ("<configuration> on <plan>" or "on API-cost fallback") in any sentence not dated before the release day; the sentence now points to scores.md for each ranking.
+- L2 (adopted): Plan anchor references are every plan row of the reference configurations at its displayed Plan cost (O48), in both places.
+- L3 (adopted): the rendered-frontier Index ties are a build figure (`aa.frontierIndexTies`), today including Claude Haiku 5.5 (high).
+- L4 (adopted): the typographical slip fixed and the duplicate build-check sentence removed.
+- L5 (adopted): the Normative section says which definitions are per ranking and which are common.
+- L6 (adopted): internal review labels removed from the specification's body (the ledger keeps them).
+- Section 2 recommendations: generating the remaining hand-written current-state statements is the E265 path and continues as the check finds them; a flag for ladder bars closer than the noise margin and counting transfers among Plan anchor references are recorded for the owner report, not adopted now.
+- Round status (O56): clean, the first at the Claude Sonnet 5.5 high rung. Draft r103.
