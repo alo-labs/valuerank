@@ -42,7 +42,7 @@ class Leaf:
     source: str  # "aa" (AA-run) or "independent"
 
 
-# The six leaves outside software engineering, shared by every ranking.
+# The seven leaves outside software engineering, shared by every ranking.
 COMMON_LEAVES = (
     Leaf("gdpval", "GDPval-AA v2.1", "professional", 10.0, "aa"),
     Leaf("automationBench", "AutomationBench-AA", "professional", 10.0, "aa"),

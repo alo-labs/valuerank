@@ -411,7 +411,9 @@
       "sourceLabel": "Haiku 5.5 (High)",
       "effort": "high",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-haiku-5-5-high]",
-      "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05."
+      "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05.",
+      "harness": "Claude Code",
+      "tested": "2026-10-08"
     },
     {
       "modelId": "claude-haiku-5-5-medium",
@@ -420,7 +422,9 @@
       "sourceLabel": "Haiku 5.5 (Medium)",
       "effort": "medium",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-haiku-5-5-medium]",
-      "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03."
+      "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03.",
+      "harness": "Claude Code",
+      "tested": "2026-10-08"
     },
     {
       "modelId": "claude-opus-5-5-high",
@@ -429,7 +433,9 @@
       "sourceLabel": "Opus 5.5 (High)",
       "effort": "high",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-opus-5-5-high]",
-      "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83."
+      "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83.",
+      "harness": "Claude Code",
+      "tested": "2026-10-20"
     },
     {
       "modelId": "claude-opus-5-5-medium",
@@ -438,7 +444,9 @@
       "sourceLabel": "Opus 5.5 (Medium)",
       "effort": "medium",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-opus-5-5-medium]",
-      "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57."
+      "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57.",
+      "harness": "Claude Code",
+      "tested": "2026-10-19"
     },
     {
       "modelId": "deepseek-v4-1-flash-1017",
@@ -447,7 +455,17 @@
       "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
       "effort": "max",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[deepseek-v4-1-flash-1017]",
-      "note": "Tested 2026-10-18 with DeepSeek Harness; cost/prompt N/A. Second row for the same configuration: OpenCode total 60.97 (Laravel 17.42, React 18.17, Bug 8.13, Edge 17.25, tested 2026-10-17); value shown is the first-listed row."
+      "note": "Tested 2026-10-18 with DeepSeek Harness; one of 2 rows for this configuration, chosen by the harness of its Bug Hunt record (I50 M2); the other rows are listed under alternates.",
+      "harness": "DeepSeek Harness",
+      "tested": "2026-10-18",
+      "selection": "one of 2 rows for this configuration, chosen by the harness of its Bug Hunt record (I50 M2)",
+      "alternates": [
+        {
+          "harness": "OpenCode",
+          "tested": "2026-10-17",
+          "value": 52.84
+        }
+      ]
     },
     {
       "modelId": "gemini-4-argon",
@@ -456,7 +474,9 @@
       "sourceLabel": "Gemini 4 Argon (High)",
       "effort": "high",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gemini-4-argon]",
-      "note": "Tested 2026-10-14 with Devin; cost/prompt N/A."
+      "note": "Tested 2026-10-14 with Devin; cost/prompt N/A.",
+      "harness": "Devin",
+      "tested": "2026-10-14"
     },
     {
       "modelId": "gpt-5.6-luna-low",
@@ -465,7 +485,9 @@
       "sourceLabel": "GPT-5.6-Luna (Low)",
       "effort": "low",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-5.6-luna-low]",
-      "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html)."
+      "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html).",
+      "harness": "Codex CLI",
+      "tested": "2026-09-12"
     },
     {
       "modelId": "gpt-6-astra-high",
@@ -474,7 +496,9 @@
       "sourceLabel": "GPT-6-Astra (High)",
       "effort": "high",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-astra-high]",
-      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96."
+      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96.",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
     },
     {
       "modelId": "gpt-6-luna",
@@ -483,7 +507,9 @@
       "sourceLabel": "GPT-6-Luna (Max)",
       "effort": "max",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna]",
-      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03.",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
     },
     {
       "modelId": "gpt-6-luna-high",
@@ -492,7 +518,9 @@
       "sourceLabel": "GPT-6-Luna (High)",
       "effort": "high",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-high]",
-      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01."
+      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01.",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
     },
     {
       "modelId": "gpt-6-luna-medium",
@@ -501,7 +529,9 @@
       "sourceLabel": "GPT-6-Luna (Medium)",
       "effort": "medium",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-medium]",
-      "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01."
+      "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01.",
+      "harness": "Codex CLI",
+      "tested": "2026-09-30"
     },
     {
       "modelId": "gpt-6-luna-xhigh",
@@ -510,7 +540,9 @@
       "sourceLabel": "GPT-6-Luna (Xhigh)",
       "effort": "xhigh",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-xhigh]",
-      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+      "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03.",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
     },
     {
       "modelId": "gpt-6.1-sol-high",
@@ -519,7 +551,9 @@
       "sourceLabel": "GPT-6.1-Sol (High)",
       "effort": "high",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6.1-sol-high]",
-      "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23."
+      "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23.",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
     },
     {
       "modelId": "gpt-6.1-sol-medium",
@@ -528,7 +562,9 @@
       "sourceLabel": "GPT-6.1-Sol (Medium)",
       "effort": "medium",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6.1-sol-medium]",
-      "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15."
+      "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15.",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
     },
     {
       "modelId": "mimo-v2-6-pro",
@@ -538,7 +574,9 @@
       "effort": "high",
       "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[mimo-v2-6-pro]",
       "match": "owner (O54): AA's configuration is high; the source labels it high",
-      "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+      "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact.",
+      "harness": "OpenCode",
+      "tested": "2026-10-02"
     }
   ]
 }

@@ -1779,3 +1779,17 @@ def test_costed_bar_ladder_drops_rows_without_a_cost():
     ladder = output["diagnostics"]["costedBarLadder"]
     costless = sorted(row["id"] for row in output["rows"] if row["api"]["value"] is None)
     assert ladder["excluded"] == costless and ladder["population"] == len(output["rows"]) - len(costless)
+
+
+def test_an_empty_agent_pin_with_an_exact_record_stops_the_build():
+    """I50 H1: a ranked configuration whose exact Coding Agent Index record exists cannot be left unpinned."""
+
+    records = {"DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})": {}, "Claude Code - Opus 5.5 (high)": {},
+               "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)": {}}
+    configurations = [{"id": "ds", "name": "DeepSeek V4.1 Flash 1017 (max)", "family": "DeepSeek V4.1 Flash 1017", "effort": "max"},
+                      {"id": "opus", "name": "Claude Opus 5.5 (max)", "family": "Claude Opus 5.5", "effort": "max"},
+                      {"id": "luna", "name": "GPT-6 Luna (max)", "effort": "max"}]
+    pinned = {"ds": {basket.CODING_AGENT_INDEX: "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"}}
+    v.check_agent_pins(configurations, pinned, records)
+    with pytest.raises(ValueError, match="ds: AA's Coding Agent Index has the exact record"):
+        v.check_agent_pins(configurations, {}, records)

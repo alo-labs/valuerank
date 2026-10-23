@@ -225,9 +225,11 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
             meta = record["sourceMeta"]
             add(leaf.key, record["value"], TRACK_UNITS[meta["unit"]](record["value"]),
                 {"source": f"{meta['publisher']}: {meta['benchmark']}", "configuration": record.get("sourceLabel"), "effort": record.get("effort"),
-                 "harness": meta["harness"], "url": meta["url"], "publishedOn": meta["updated"], "stderr": record.get("stderr"), "match": record.get("match"),
+                 "harness": record.get("harness") or meta["harness"], "url": meta["url"], "publishedOn": meta["updated"], "stderr": record.get("stderr"), "match": record.get("match"),
                  **({"categories": record["categories"]} if record.get("categories") else {}),
-                 **({"note": record["note"]} if record.get("note") else {})},
+                 **({"note": record["note"]} if record.get("note") else {}),
+                 # I50 M2: a board that lists the configuration more than once names its selection and the other rows.
+                 **({"selection": record["selection"], "alternates": record["alternates"]} if record.get("alternates") else {})},
                 "sweTracks", f"records[modelId={model_id}, leaf={leaf.key}].value")
     for leaf in q.LEAVES:
         entry = (supplements or {}).get((model_id, leaf.key))
@@ -587,6 +589,24 @@ def check_source_clocks(clocks: list[dict], release_day: date, cutoff: datetime)
                              f"({updated or 'not recorded'}) does not predate the cutoff's day (O60)")
 
 
+_AGENT_LABEL = re.compile(r"^(?P<agent>.+?) - (?P<model>[^+]+?) \((?:\{'reasoning_effort': '(?P<keyed>\w+)'\}|(?P<plain>\w+))\)")
+
+
+def check_agent_pins(configurations: list[dict], mapping: dict, agent_records: dict) -> None:
+    """I50 H1: an exact Coding Agent Index record (one model, its effort) for a ranked configuration whose pin is empty
+    stops the build, so a missing pin can never silently move a configuration onto a subset workload."""
+
+    for configuration in configurations:
+        if (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX):
+            continue
+        family = configuration.get("family") or configuration["name"]
+        names = {family, family.removeprefix("Claude ")}
+        for label in agent_records:
+            match = _AGENT_LABEL.match(label)
+            if match and match["model"] in names and (match["keyed"] or match["plain"]) == configuration.get("effort"):
+                raise ValueError(f"{configuration['id']}: AA's Coding Agent Index has the exact record {label!r}, but its pin is empty (I50)")
+
+
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
     """Evidence, admission, basket costs and Plan routes for every ranked configuration (no anchors yet)."""
 
@@ -595,6 +615,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     agent_records = {item["label"]: item for item in documents["codingAgents"]["configurations"]}
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
     mapping = documents["configurationMap"]["rows"]
+    check_agent_pins(configurations, mapping, agent_records)
     # E208: a route inherits the token-category mix its source publishes for the measured workload.
     sources = documents["planRoutes"].get("sourceEvidence") or {}
     routes = [

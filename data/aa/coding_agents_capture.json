@@ -850,5 +850,5 @@
     }
   ],
   "indexVersion": "Coding Agent Index v2.0 (FrontierCode v1.1 Main, Terminal-Bench 4.0, SWE-Atlas-QnA-AA; DeepSWE v1.1 removed)",
-  "note": "Evidence only, not a pipeline input: AA replaced DeepSWE v1.1 with FrontierCode v1.1 in Coding Agent Index v2.0 (methodology version history, October 2026). data/aa/coding_agents_capture.json keeps the v1.5 capture of 2026-10-19 because valuerank/basket.py prices 303 v1.5 tasks (DeepSWE 113 + SWE-Atlas-QnA 124 + Terminal-Bench 66); a v2.0 record would be mispriced. capturedAt is the time of the HTTPS fetch (curl, 2026-10-23 ~05:31Z)."
+  "note": "Coding Agent Index v2.0 capture (FrontierCode v1.1 Main, Terminal-Bench 4.0, SWE-Atlas-QnA-AA; DeepSWE v1.1 removed; owner decision O50), a pipeline input: valuerank/basket.py prices its 290 required tasks from each pinned record's mean cost per task. capturedAt is the time of the HTTPS fetch."
 }

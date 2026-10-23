@@ -100,6 +100,11 @@ def test_evidence_clock_runs_from_the_observation_never_from_a_record_edit():
     assert pr.age_days(rechecked, TODAY) == 171 and pr.expiry_status(rechecked, TODAY) == "demoted"
     windowed = route("b", 1, checked="2026-10-15", measurementWindow={"start": "2026-10-01", "end": "2026-10-09"})
     assert pr.evidence_date(windowed) == date(2026, 10, 9) and pr.age_days(windowed, TODAY) == 10
+    # I50 M1: an O46 ceiling ages from the read of Xiaomi's pages; re-read unchanged, the clock renews; not re-read, it ages.
+    ceiling = route("c", 1, checked="2026-05-01", evidenceClass="provider_quota_ceiling", capturedOn="2026-10-18")
+    assert pr.evidence_date(ceiling) == date(2026, 10, 18) and pr.expiry_status(ceiling, TODAY) == "fresh"
+    stale = dict(ceiling, capturedOn="2026-05-01")
+    assert pr.age_days(stale, TODAY) == 171 and pr.expiry_status(stale, TODAY) == "demoted"
 
 
 def test_transfers_inherit_their_donor_measurements_clock_and_status():
@@ -432,7 +437,7 @@ def test_expired_routes_leave_selection_before_any_fallback():
 
 
 def test_report_window_admits_only_reports_dated_inside_it():
-    """E194: the window is the 30 days ending at the search cutoff; admitted reports age under E151 instead."""
+    """E194: the window is the 30 days ending at the release cutoff (E213); admitted reports age under E151 instead."""
 
     def document(*routes, start="2026-09-08", end="2026-10-08"):
         return {"evidencePolicy": {"reportingWindow": {"start": start, "end": end}}, "routes": list(routes)}

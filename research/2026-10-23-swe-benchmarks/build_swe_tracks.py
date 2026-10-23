@@ -50,6 +50,45 @@ LEAVES = {
 }
 
 
+def aicd_rows() -> dict[str, list[dict]]:
+    """Every captured AI Coding Daily row by its model label (the board can list one model and effort more than once)."""
+
+    rows: dict[str, list[dict]] = {}
+    for row in json.loads((HERE / "other-capture" / "aicd-leaderboard-allrows-parsed.json").read_text()):
+        rows.setdefault(row["model"], []).append(row)
+    return rows
+
+
+def bug_hunt_harness(model_id: str) -> str | None:
+    for model in json.loads((ROOT / "data" / "bug_hunt.json").read_text())["models"]:
+        if model["modelId"] == model_id and model.get("matched"):
+            return model.get("harness")
+    return None
+
+
+def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict:
+    """I50 M2: when the board lists a model and effort more than once, the record is the row on the harness the
+    configuration's Bug Hunt record uses, else the latest test date; a tie the rule cannot break stops the build. The
+    other rows are published beside the leaf."""
+
+    rows = board[label]
+    if len(rows) == 1:
+        return {"row": rows[0], "alternates": []}
+    harness = (bug_hunt_harness(model_id) or "").split(" / ")[0].casefold()
+    picked = [row for row in rows if harness and row["harness"].casefold() == harness]
+    rule = "the harness of its Bug Hunt record"
+    if len(picked) != 1:
+        latest = max(row["tested"] for row in rows)
+        picked, rule = [row for row in rows if row["tested"] == latest], "the latest test date"
+    if len(picked) != 1:
+        raise ValueError(f"{model_id}: AI Coding Daily lists {label!r} {len(rows)} times and the rule cannot pick one (I50 M2)")
+    return {"row": picked[0], "rule": rule, "alternates": [row for row in rows if row is not picked[0]]}
+
+
+def aicd_points(row: dict) -> float:
+    return round(float(row["laravel"]) + float(row["react"]) + float(row["edge"]), 2)
+
+
 def main() -> None:
     vals_document = json.loads((HERE / "vals-catalogue-2026-10-23.json").read_text())
     other_document = json.loads((HERE / "other-coverage-2026-10-23.json").read_text())
@@ -59,6 +98,7 @@ def main() -> None:
     captured = {"vals": vals_document["capturedAt"], "other": other_document["capturedAt"]}
     cohort = [row["id"] for row in json.loads((HERE / "cohort-2026-10-23.json").read_text())["configurations"]]
     table = {row["model"]: row for row in csv.DictReader((HERE / "other-capture" / "livebench2-table.csv").open())}
+    board = aicd_rows()
     records, sources = [], {}
     for leaf, (key, origin, meta) in LEAVES.items():
         sources[leaf] = {**meta, "capturedAt": captured[origin]}
@@ -83,6 +123,17 @@ def main() -> None:
                         "Vals records reasoning enabled with no level, taken as high (E252)" if origin == "vals" else f"the source labels it {cell.get('effort')}")
                 if cell.get("note"):
                     record["note"] = cell["note"]
+                if leaf == "aiCodingDaily":
+                    chosen = select_aicd(model_id, cell["sourceLabel"], board)
+                    record["value"] = aicd_points(chosen["row"])
+                    record["harness"] = chosen["row"]["harness"]
+                    record["tested"] = chosen["row"]["tested"]
+                    if chosen["alternates"]:
+                        record["selection"] = f"one of {len(chosen['alternates']) + 1} rows for this configuration, chosen by {chosen['rule']} (I50 M2)"
+                        record["alternates"] = [{"harness": row["harness"], "tested": row["tested"], "value": aicd_points(row)}
+                                                for row in chosen["alternates"]]
+                        record["note"] = (f"Tested {chosen['row']['tested']} with {chosen['row']['harness']}; "
+                                          f"{record['selection']}; the other rows are listed under alternates.")
                 records.append(record)
     document = {
         "schemaVersion": 1,

@@ -17,10 +17,13 @@ that a reviewer finds after this is a bug in the check, not in the draft.
 from __future__ import annotations
 
 import json
+import math
 import re
 import sys
+from datetime import date, timedelta
 from pathlib import Path
 
+from valuerank import plan_routes as pr
 from valuerank import quality as q
 from valuerank.paths import DATA, ROOT
 
@@ -158,6 +161,8 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         ceilings = [route for route in routes if route["id"].endswith("-quota-ceiling") and route.get("modelIds") == [model_id]]
         figures[f"mimoCeilings.{model_id}"] = " / ".join(f"{route['valueMultiple']:g}" for route in ceilings)
         figures[f"mimoCeilings.tiers"] = " / ".join(route["plan"].replace("MiMo Token Plan ", "") for route in ceilings)
+    figures["release.cutoff"] = scores["observedAt"]
+    figures.update(registry_figures(capture, json.loads((data / "plan_cost_routes.json").read_text()), release_day(scores)))
     names = display_names(scores)
     family = {model["id"]: model.get("family") or model["name"] for model in scores["models"]}
     sections = {track: scores["v3"] if track == q.DEFAULT_TRACK else scores["v3Tracks"][track] for track in q.TRACKS}
@@ -194,6 +199,11 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         cross = section["diagnostics"]["frontierCodeCrossSource"]
         figures[f"{track}.fillEffect.mean"] = f"{weights['frontierCode'] / 100 * cross['meanOffset']:.2f}"
         figures[f"{track}.fillEffect.max"] = f"{weights['frontierCode'] / 100 * cross['maxAbsOffset']:.2f}"
+    # I50 M2: configurations a board lists twice, with the row the selection rule chose.
+    tracks_records = [record for record in tracks["records"] if record.get("alternates")]
+    figures["duplicateRows"] = series([f"{names.get(record['modelId'], record['modelId'])} on {tracks['sources'][record['leaf']]['publisher'].split(' (')[0]} "
+                                       f"({record['harness']} chosen over {series([item['harness'] for item in record['alternates']])} by "
+                                       f"{record['selection'].split('chosen by ')[1].split(' (')[0]})" for record in tracks_records]) or "none"
     both = set(ranked["max"]) & set(ranked["aicd"])
     figures["both.names"], figures["both.count"] = order(both), len(both)
     figures["rankedAny"] = len(set(ranked["max"]) | set(ranked["aicd"]))
@@ -201,6 +211,41 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
     figures["excluded"], figures["excluded.names"] = len(excluded), order(excluded)
     figures.update(family_figures(scores, excluded, order))
     return {key: str(value) for key, value in sorted(figures.items())}
+
+
+def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
+    """I50 L5: the current release's registry facts (report window, search cutoff, evidence stages, vertex checks), so
+    the draft states them as placeholders even in a sentence that also carries a past date."""
+
+    policy = plan_document["evidencePolicy"]
+    window, cutoff = policy["reportingWindow"], policy["searchCutoff"]
+    figures = {"evidence.windowStart": window["start"], "evidence.windowEnd": window["end"], "evidence.searchCutoff": cutoff,
+               "evidence.lastSearch": max(entry["searchedOn"] for entry in policy["searchLog"]),
+               "evidence.searchGapDays": (date.fromisoformat(release) - date.fromisoformat(cutoff)).days}
+    reports = [route for route in plan_document["routes"] if route.get("valueMultipleKind") in pr.REPORT_KINDS]
+    figures["evidence.reportDates"] = series([route.get("reportDate") or route["sourcePublicationDate"] for route in reports]) or "none"
+    figures["evidence.reportRoutes"] = series([f"{route['plan']}, dated {route.get('reportDate') or route['sourcePublicationDate']}" for route in reports]) or "none"
+    # E144: the SemiAnalysis measurement's lifecycle stages, from its observation date and the expiry constants.
+    published = {route["sourcePublicationDate"] for route in plan_document["routes"]
+                 if route.get("sourceEvidenceId") == "semianalysis" and route.get("valueMultipleKind") == "controlled_account_workload_projection"}
+    if len(published) != 1:
+        raise FigureError(f"expected one SemiAnalysis observation date, found {sorted(published)}")
+    observed = date.fromisoformat(published.pop())
+    figures.update({"semianalysis.observed": observed.isoformat(),
+                    "semianalysis.lastCurrent": (observed + timedelta(pr.SOFT_EXPIRY_DAYS)).isoformat(),
+                    "semianalysis.supersededFrom": (observed + timedelta(pr.SOFT_EXPIRY_DAYS + 1)).isoformat(),
+                    "semianalysis.expiredFrom": (observed + timedelta(pr.HARD_EXPIRY_DAYS + 1)).isoformat(),
+                    "semianalysis.demotedFrom": (observed + timedelta(pr.HARD_EXPIRY_DAYS + pr.GRACE_DAYS + 1)).isoformat()})
+    # E195: the rendered path's vertices against the frontier circles, and the comparison with the previous capture.
+    numbers = [float(item) for item in re.findall(r"-?\d+(?:\.\d+)?", capture["rendered_pareto_svg_path"])]
+    vertices = list(zip(numbers[0::2], numbers[1::2]))
+    worst = max(min(math.dist(vertex, (item["svg_x"], item["svg_y"])) for item in capture["frontier"]) for vertex in vertices)
+    comparison = capture["comparison_to_previous_capture"]
+    changes = [f"{name} entered" for name in comparison["added"]] + [f"{name} left" for name in comparison["removed"]]
+    figures.update({"aa.vertices": len(vertices), "aa.vertexMatchPx": f"{worst:.1f}".rstrip("0").rstrip("."),
+                    "aa.previousCapture": comparison["previous_capture_date"],
+                    "aa.vertexChanges": series(changes) if changes else "no vertex entered or left"})
+    return figures
 
 
 def family_figures(scores: dict, excluded: set, order) -> dict:
@@ -276,7 +321,7 @@ def render(text: str, scores: dict, manifest: dict) -> str:
 # A "today" sentence may still hold numbers that are not current-release figures: names, versions, decision tags, dates
 # and the rule constants below. Everything else must be a placeholder.
 RULE_CONSTANTS = ("above 100%", "more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 60 points", "> 5 points", "40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
-                  "factor-2", "factor of 2", "two-thirds", "30 days", "7 days", "45 days", "0.5 W_g", "1.5 W_g")
+                  "factor-2", "factor of 2", "tolerance 0.5 px", "two-thirds", "30 days", "7 days", "45 days", "0.5 W_g", "1.5 W_g")
 _NOT_A_FIGURE = re.compile(
     r"\b[OEIL]\d+\b|\br\d+\b|\b\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?\b|\b\d{2}:\d{2}(:\d{2})?Z\b"
     r"|\bversion \d+\b|\bv\d+(\.\d+)*\b|\b[A-Z][\w.-]*-\d[\w.]*\b|\bS\d[A-Z]?\b|`[^`]*`|\[[^\]]*\]\([^)]*\)"
@@ -408,6 +453,37 @@ def published(source: Path) -> Path:
     return source.with_name(source.name.replace(".src.md", ".md"))
 
 
+# I50 L5: a registry fact typed by hand goes stale at the next refresh whether or not its sentence is dated, so in any
+# sentence that speaks of the fact, its current value must come from a placeholder.
+REGISTRY_FACTS = (
+    ("evidence.windowStart", r"\bwindow\b", "{v}"),
+    ("evidence.searchCutoff", r"\bsearch cutoff\b|\blast search\b", "{v}"),
+    ("evidence.lastSearch", r"\bsearch cutoff\b|\blast search\b", "{v}"),
+    ("evidence.searchGapDays", r"\bsearch cutoff\b", r"\b{v} days? before\b|\bthose {v} days\b"),
+    ("semianalysis.lastCurrent", r"\bCurrent day\b|\bsuperseded\b|\bexpired\b|\bdemoted\b", "{v}"),
+    ("semianalysis.supersededFrom", r"\bsuperseded\b", "{v}"),
+    ("semianalysis.expiredFrom", r"\bexpired\b", "{v}"),
+    ("semianalysis.demotedFrom", r"\bdemoted\b", "{v}"),
+    ("aa.vertices", r"\bvertices\b", r"\b{v} vertices\b"),
+    ("aa.vertexMatchPx", r"\bvertices\b", r"\bat {v} px\b"),
+    ("evidence.reportDates", r"\breport route\b", "{v}"),
+    ("aa.capturedAt", r"\bcapture\b", "{v}"),
+    ("release.cutoff", r"\bcutoff\b", "{v}"),
+)
+
+
+def registry_problems(text: str, manifest: dict) -> list[str]:
+    problems = []
+    for line_number, line in enumerate(text.split(HISTORY_HEADING)[0].splitlines(), 1):
+        for sentence in _SENTENCE.split(line):
+            typed = PLACEHOLDER.sub("", sentence)
+            found = [key for key, context, pattern in REGISTRY_FACTS
+                     if re.search(context, typed) and re.search(pattern.replace("{v}", re.escape(manifest[key])), typed)]
+            if found:
+                problems.append(f"line {line_number}: registry value(s) typed by hand ({', '.join(found)}); use the placeholder: {sentence[:160]}")
+    return problems
+
+
 def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
     """Every problem with the newest draft: rendering, staleness against its source, and unmarked 'today' figures."""
 
@@ -421,6 +497,7 @@ def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
         return [f"{source.name}: {error}"]
     problems = [f"{source.name}: {problem}" for problem in lint(text, known_names(scores, data), configuration_names(scores), release_day(scores))]
     problems += [f"{source.name}: {problem}" for problem in pointer_problems(text, scores)]
+    problems += [f"{source.name}: {problem}" for problem in registry_problems(text, manifest)]
     target = published(source)
     if not target.exists() or target.read_text() != rendered:
         problems.append(f"{target.name} is not the rendering of {source.name} against the current data (run `python3 -m valuerank.draft_figures render`)")

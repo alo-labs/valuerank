@@ -360,7 +360,7 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -369,7 +369,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -378,8 +378,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
-        "frontier": 0.463
+        "top3": 0.0233,
+        "frontier": 0.4553
       },
       {
         "stratum": "S1",
@@ -387,7 +387,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -396,7 +396,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -404,9 +404,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0004,
-        "top3": 0.7542,
-        "frontier": 0.4862
+        "top1": 0.0,
+        "top3": 0.0737,
+        "frontier": 0.4906
       }
     ],
     "plan": [
@@ -462,7 +462,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.023
+        "frontier": 0.0214
       }
     ]
   },

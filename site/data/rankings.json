@@ -405,8 +405,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -533,8 +533,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -562,7 +562,7 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 7
       },
       "overall": {
@@ -650,7 +650,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 1.0,
+          "top1": 0.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -665,7 +665,7 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           1,
@@ -770,13 +770,13 @@
       },
       "grade": "measured",
       "pareto": {
-        "api": true,
+        "api": false,
         "plan": true
       },
       "frontierStatus": {
         "api": {
-          "definite": "certified",
-          "possible": "certified"
+          "definite": "disproved",
+          "possible": "disproved"
         },
         "plan": null
       },
@@ -784,7 +784,7 @@
         "api": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 1.0
+          "frontier": 0.0
         },
         "plan": null
       },
@@ -794,7 +794,7 @@
       "tier": "Budget",
       "band": {
         "api": [
-          9,
+          6,
           9
         ],
         "plan": [
@@ -925,8 +925,8 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           11,
@@ -1053,8 +1053,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          1,
-          4
+          4,
+          5
         ],
         "plan": [
           11,
@@ -1062,6 +1062,127 @@
         ]
       },
       "bandExcludesTransfer": true
+    },
+    {
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "shortName": "DeepSeek V4.1 Flash 1017",
+      "developer": "DeepSeek",
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 45.0965048681912,
+        "status": "measured"
+      },
+      "speed": 203.742544335617,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017 (max)",
+      "aaFrontierIntelligenceGap": 3,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 1,
+        "plan": 22
+      },
+      "overall": {
+        "api": 60.38662179090506,
+        "plan": 53.6581856331888
+      },
+      "quality": 58.15769146301675,
+      "qualityRank": 6,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 43.6605666666667,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 40.666666666666664,
+        "vibeCode": 87.73,
+        "codeMigration": 67.524,
+        "livebench2Overall": 79.2,
+        "gdpval": 62.2885,
+        "automationBench": 66.64095364949257,
+        "omniscience": 52.35,
+        "lcr": 82.6666666666667,
+        "hle": 43.327154772937895,
+        "scicode": 55.9027777777778,
+        "critpt": 24.0
+      },
+      "costDims": {
+        "api": 67.07341277457002,
+        "plan": 40.15966814370498
+      },
+      "raw": {
+        "frontierCode": 0.436605666666667,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 42.7,
+        "vibeCode": 87.73,
+        "codeMigration": 67.524,
+        "livebench2Overall": 79.2,
+        "gdpval": 1745.77,
+        "automationBench": 0.6664095364949257,
+        "omniscience": 4.7,
+        "lcr": 0.826666666666667,
+        "hle": 0.433271547729379,
+        "scicode": 0.559027777777778,
+        "critpt": 0.24
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 410.04054222171686,
+        "planUsd": 410.04054222171686,
+        "fallback": "api",
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "API-cost fallback: no admitted Plan route",
+          "cross-estimand ordering not identified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 1.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          1,
+          3
+        ],
+        "plan": [
+          22,
+          26
+        ]
+      },
+      "bandExcludesTransfer": false
     },
     {
       "slug": "mimo-v2-6-pro",
@@ -1082,8 +1203,8 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
-        "plan": 22
+        "api": 2,
+        "plan": 23
       },
       "overall": {
         "api": 60.292266592541466,
@@ -1178,126 +1299,14 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           22,
-          27
+          26
         ]
       },
       "bandExcludesTransfer": true
-    },
-    {
-      "slug": "deepseek-v4-1-flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "shortName": "DeepSeek V4.1 Flash 1017",
-      "developer": "DeepSeek",
-      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 45.0965048681912,
-        "status": "measured"
-      },
-      "speed": 203.742544335617,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017 (max)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 3,
-        "plan": 24
-      },
-      "overall": {
-        "api": 59.44316770124329,
-        "plan": 51.502591198241085
-      },
-      "quality": 58.15769146301675,
-      "qualityRank": 6,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 43.6605666666667,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 40.666666666666664,
-        "vibeCode": 87.73,
-        "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
-        "gdpval": 62.2885,
-        "automationBench": 66.64095364949257,
-        "omniscience": 52.35,
-        "lcr": 82.6666666666667,
-        "hle": 43.327154772937895,
-        "scicode": 55.9027777777778,
-        "critpt": 24.0
-      },
-      "costDims": {
-        "api": 63.29959641592294,
-        "plan": 31.537290403914106
-      },
-      "raw": {
-        "frontierCode": 0.436605666666667,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 42.7,
-        "vibeCode": 87.73,
-        "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
-        "gdpval": 1745.77,
-        "automationBench": 0.6664095364949257,
-        "omniscience": 4.7,
-        "lcr": 0.826666666666667,
-        "hle": 0.433271547729379,
-        "scicode": 0.559027777777778,
-        "critpt": 0.24
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 324.12088388877964,
-        "planUsd": 324.12088388877964,
-        "fallback": "api",
-        "route": null,
-        "subset": true,
-        "partialComponents": [],
-        "workload": "1453a9a0576b02ea",
-        "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": null,
-        "plan": null
-      },
-      "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified"
-      ],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          1,
-          4
-        ],
-        "plan": [
-          22,
-          27
-        ]
-      },
-      "bandExcludesTransfer": false
     },
     {
       "slug": "gemini-4-argon",
@@ -1397,7 +1406,7 @@
       "scenario": {
         "api": {
           "top1": 0.0,
-          "top3": 1.0,
+          "top3": 0.0,
           "frontier": 0.0
         },
         "plan": {
@@ -1410,11 +1419,11 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          5,
-          8
+          4,
+          5
         ],
         "plan": [
-          22,
+          27,
           27
         ]
       },
@@ -7635,8 +7644,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -7773,8 +7782,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -7911,8 +7920,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -8046,8 +8055,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -8181,8 +8190,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -8316,8 +8325,8 @@
       "tier": "Premium",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           1,
@@ -8352,7 +8361,7 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 7
       },
       "overall": {
@@ -8440,7 +8449,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 1.0,
+          "top1": 0.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8455,7 +8464,7 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           1,
@@ -8490,7 +8499,7 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 8
       },
       "overall": {
@@ -8578,7 +8587,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 1.0,
+          "top1": 0.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8593,7 +8602,7 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           1,
@@ -8628,7 +8637,7 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 8
       },
       "overall": {
@@ -8716,7 +8725,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 1.0,
+          "top1": 0.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8731,7 +8740,7 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           1,
@@ -8766,7 +8775,7 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 10
       },
       "overall": {
@@ -8854,7 +8863,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 1.0,
+          "top1": 0.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8869,7 +8878,7 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           1,
@@ -8981,13 +8990,13 @@
       },
       "grade": "measured",
       "pareto": {
-        "api": true,
+        "api": false,
         "plan": true
       },
       "frontierStatus": {
         "api": {
-          "definite": "certified",
-          "possible": "certified"
+          "definite": "disproved",
+          "possible": "disproved"
         },
         "plan": null
       },
@@ -8995,7 +9004,7 @@
         "api": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 1.0
+          "frontier": 0.0
         },
         "plan": null
       },
@@ -9005,7 +9014,7 @@
       "tier": "Budget",
       "band": {
         "api": [
-          9,
+          6,
           9
         ],
         "plan": [
@@ -9118,13 +9127,13 @@
       },
       "grade": "measured",
       "pareto": {
-        "api": true,
+        "api": false,
         "plan": true
       },
       "frontierStatus": {
         "api": {
-          "definite": "certified",
-          "possible": "certified"
+          "definite": "disproved",
+          "possible": "disproved"
         },
         "plan": null
       },
@@ -9132,7 +9141,7 @@
         "api": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 1.0
+          "frontier": 0.0
         },
         "plan": null
       },
@@ -9142,7 +9151,7 @@
       "tier": "Budget",
       "band": {
         "api": [
-          9,
+          6,
           9
         ],
         "plan": [
@@ -9255,13 +9264,13 @@
       },
       "grade": "measured",
       "pareto": {
-        "api": true,
+        "api": false,
         "plan": true
       },
       "frontierStatus": {
         "api": {
-          "definite": "certified",
-          "possible": "certified"
+          "definite": "disproved",
+          "possible": "disproved"
         },
         "plan": null
       },
@@ -9269,7 +9278,7 @@
         "api": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 1.0
+          "frontier": 0.0
         },
         "plan": null
       },
@@ -9279,7 +9288,7 @@
       "tier": "Budget",
       "band": {
         "api": [
-          9,
+          6,
           9
         ],
         "plan": [
@@ -9417,8 +9426,8 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           11,
@@ -9555,8 +9564,8 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           11,
@@ -9693,8 +9702,8 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           11,
@@ -9828,8 +9837,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          1,
-          4
+          4,
+          5
         ],
         "plan": [
           11,
@@ -9963,8 +9972,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          1,
-          4
+          4,
+          5
         ],
         "plan": [
           11,
@@ -10098,8 +10107,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          1,
-          4
+          4,
+          5
         ],
         "plan": [
           11,
@@ -10233,8 +10242,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          1,
-          4
+          4,
+          5
         ],
         "plan": [
           11,
@@ -10371,8 +10380,8 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          5,
-          8
+          6,
+          9
         ],
         "plan": [
           21,
@@ -10386,6 +10395,134 @@
         "routeId": "chatgpt-plus-gpt6astra-semianalysis",
         "multiple": 8.1,
         "representative": false
+      }
+    },
+    {
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017 · API-cost fallback",
+      "shortName": "DeepSeek V4.1 Flash 1017",
+      "developer": "DeepSeek",
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 45.0965048681912,
+        "status": "measured"
+      },
+      "speed": 203.742544335617,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017 (max)",
+      "aaFrontierIntelligenceGap": 3,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 1,
+        "plan": 22
+      },
+      "overall": {
+        "api": 60.38662179090506,
+        "plan": 53.6581856331888
+      },
+      "quality": 58.15769146301675,
+      "qualityRank": 6,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 43.6605666666667,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 40.666666666666664,
+        "vibeCode": 87.73,
+        "codeMigration": 67.524,
+        "livebench2Overall": 79.2,
+        "gdpval": 62.2885,
+        "automationBench": 66.64095364949257,
+        "omniscience": 52.35,
+        "lcr": 82.6666666666667,
+        "hle": 43.327154772937895,
+        "scicode": 55.9027777777778,
+        "critpt": 24.0
+      },
+      "costDims": {
+        "api": 67.07341277457002,
+        "plan": 40.15966814370498
+      },
+      "raw": {
+        "frontierCode": 0.436605666666667,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 42.7,
+        "vibeCode": 87.73,
+        "codeMigration": 67.524,
+        "livebench2Overall": 79.2,
+        "gdpval": 1745.77,
+        "automationBench": 0.6664095364949257,
+        "omniscience": 4.7,
+        "lcr": 0.826666666666667,
+        "hle": 0.433271547729379,
+        "scicode": 0.559027777777778,
+        "critpt": 0.24
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 410.04054222171686,
+        "planUsd": 410.04054222171686,
+        "fallback": "api",
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "API-cost fallback: no admitted Plan route",
+          "cross-estimand ordering not identified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 1.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          1,
+          3
+        ],
+        "plan": [
+          22,
+          26
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "deepseek-v4-1-flash-1017--api",
+      "planRow": {
+        "plan": null,
+        "routeId": null,
+        "multiple": null,
+        "representative": true
       }
     },
     {
@@ -10407,8 +10544,8 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
-        "plan": 22
+        "api": 2,
+        "plan": 23
       },
       "overall": {
         "api": 60.292266592541466,
@@ -10503,11 +10640,11 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           22,
-          27
+          26
         ]
       },
       "bandExcludesTransfer": true,
@@ -10538,8 +10675,8 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
-        "plan": 23
+        "api": 2,
+        "plan": 24
       },
       "overall": {
         "api": 60.292266592541466,
@@ -10634,11 +10771,11 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           22,
-          27
+          26
         ]
       },
       "bandExcludesTransfer": true,
@@ -10648,125 +10785,6 @@
         "routeId": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
         "multiple": 1.0944,
         "representative": false
-      }
-    },
-    {
-      "slug": "deepseek-v4-1-flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017 · API-cost fallback",
-      "shortName": "DeepSeek V4.1 Flash 1017",
-      "developer": "DeepSeek",
-      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 45.0965048681912,
-        "status": "measured"
-      },
-      "speed": 203.742544335617,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017 (max)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 3,
-        "plan": 24
-      },
-      "overall": {
-        "api": 59.44316770124329,
-        "plan": 51.502591198241085
-      },
-      "quality": 58.15769146301675,
-      "qualityRank": 6,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 43.6605666666667,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 40.666666666666664,
-        "vibeCode": 87.73,
-        "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
-        "gdpval": 62.2885,
-        "automationBench": 66.64095364949257,
-        "omniscience": 52.35,
-        "lcr": 82.6666666666667,
-        "hle": 43.327154772937895,
-        "scicode": 55.9027777777778,
-        "critpt": 24.0
-      },
-      "costDims": {
-        "api": 63.29959641592294,
-        "plan": 31.537290403914106
-      },
-      "raw": {
-        "frontierCode": 0.436605666666667,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 42.7,
-        "vibeCode": 87.73,
-        "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
-        "gdpval": 1745.77,
-        "automationBench": 0.6664095364949257,
-        "omniscience": 4.7,
-        "lcr": 0.826666666666667,
-        "hle": 0.433271547729379,
-        "scicode": 0.559027777777778,
-        "critpt": 0.24
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 324.12088388877964,
-        "planUsd": 324.12088388877964,
-        "fallback": "api",
-        "route": null,
-        "subset": true,
-        "partialComponents": [],
-        "workload": "1453a9a0576b02ea",
-        "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": null,
-        "plan": null
-      },
-      "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified"
-      ],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          1,
-          4
-        ],
-        "plan": [
-          22,
-          27
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "deepseek-v4-1-flash-1017--api",
-      "planRow": {
-        "plan": null,
-        "routeId": null,
-        "multiple": null,
-        "representative": true
       }
     },
     {
@@ -10788,7 +10806,7 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 25
       },
       "overall": {
@@ -10884,11 +10902,11 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           22,
-          27
+          26
         ]
       },
       "bandExcludesTransfer": true,
@@ -10919,7 +10937,7 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 26
       },
       "overall": {
@@ -11015,11 +11033,11 @@
       "band": {
         "api": [
           1,
-          4
+          3
         ],
         "plan": [
           22,
-          27
+          26
         ]
       },
       "bandExcludesTransfer": true,
@@ -11129,7 +11147,7 @@
       "scenario": {
         "api": {
           "top1": 0.0,
-          "top3": 1.0,
+          "top3": 0.0,
           "frontier": 0.0
         },
         "plan": {
@@ -11142,11 +11160,11 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          5,
-          8
+          4,
+          5
         ],
         "plan": [
-          22,
+          27,
           27
         ]
       },
@@ -17255,10 +17273,10 @@
   "picks": {
     "api": {
       "value": {
-        "slug": "mimo-v2-6-pro",
+        "slug": "deepseek-v4-1-flash-1017",
         "label": "Best overall value",
-        "reason": "MiMo-V2.6-Pro has the highest overall score in the API ranking at 60.3, costing $136.13 per basket run. Subset cost: cross-workload ordering not identified.",
-        "score": 60.292266592541466,
+        "reason": "DeepSeek V4.1 Flash 1017 has the highest overall score in the API ranking at 60.4, costing $410.04 per basket run.",
+        "score": 60.38662179090506,
         "unit": "overall"
       },
       "other": {
@@ -17269,10 +17287,10 @@
         "unit": "overall on a subscription"
       },
       "budget": {
-        "slug": "deepseek-v4-1-flash-1017",
+        "slug": "mimo-v2-6-pro",
         "label": "Best on a budget",
-        "reason": "DeepSeek V4.1 Flash 1017 scores best overall (59.4) among the cheapest third, at $324.12 per basket run. Subset cost: cross-workload ordering not identified.",
-        "score": 59.44316770124329,
+        "reason": "MiMo-V2.6-Pro scores best overall (60.3) among the cheapest third, at $136.13 per basket run. Subset cost: cross-workload ordering not identified.",
+        "score": 60.292266592541466,
         "unit": "overall"
       }
     },
@@ -17285,10 +17303,10 @@
         "unit": "overall"
       },
       "other": {
-        "slug": "mimo-v2-6-pro",
+        "slug": "deepseek-v4-1-flash-1017",
         "label": "Best at API rates",
-        "reason": "MiMo-V2.6-Pro ranks #1 at API rates and #22 in the Plan ranking. Subset cost: cross-workload ordering not identified.",
-        "score": 60.292266592541466,
+        "reason": "DeepSeek V4.1 Flash 1017 ranks #1 at API rates and #22 in the Plan ranking.",
+        "score": 60.38662179090506,
         "unit": "overall at API rates"
       },
       "budget": {

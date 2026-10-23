@@ -5,13 +5,19 @@
       "date": "October 19, 2026",
       "models": 9,
       "dimensions": 14,
-      "summary": "9 models ranked on 14 dimensions; MiMo-V2.6-Pro is first on the API basis.",
+      "summary": "9 models ranked on 14 dimensions; DeepSeek V4.1 Flash 1017 is first on the API basis.",
       "rankChanges": [
         {
           "slug": "mimo-v2-6-pro",
           "name": "MiMo-V2.6-Pro",
           "from": 7,
-          "to": 1
+          "to": 2
+        },
+        {
+          "slug": "gpt-6-1-sol",
+          "name": "GPT-6.1 Sol",
+          "from": 2,
+          "to": 3
         },
         {
           "slug": "gpt-6-luna",
@@ -48,12 +54,12 @@
         "claude-haiku-5-5-max": 9,
         "claude-opus-5-5": 6,
         "claude-sonnet-5-5": 8,
-        "deepseek-v4-1-flash-1017": 3,
+        "deepseek-v4-1-flash-1017": 1,
         "gemini-4-argon": 5,
         "gpt-6-astra": 7,
         "gpt-6-luna": 4,
-        "gpt-6-1-sol": 2,
-        "mimo-v2-6-pro": 1
+        "gpt-6-1-sol": 3,
+        "mimo-v2-6-pro": 2
       },
       "added": [
         "claude-haiku-5-5-max",

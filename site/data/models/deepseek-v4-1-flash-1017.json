@@ -7,12 +7,12 @@
   "selectedPage": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
   "summary": {
     "rank": {
-      "api": 3,
-      "plan": 24
+      "api": 1,
+      "plan": 22
     },
     "overall": {
-      "api": 59.44316770124329,
-      "plan": 51.502591198241085
+      "api": 60.38662179090506,
+      "plan": 53.6581856331888
     },
     "quality": 58.15769146301675,
     "qualityRank": 6,
@@ -26,9 +26,7 @@
     "grade": "measured",
     "rankingEligible": true,
     "exclusionReasons": [],
-    "flags": [
-      "Subset cost: scored on its own workload; cross-workload ordering not identified"
-    ]
+    "flags": []
   },
   "dimensions": [
     {
@@ -267,22 +265,30 @@
     }
   ],
   "cost": {
-    "apiUsd": 324.12088388877964,
-    "planUsd": 324.12088388877964,
+    "apiUsd": 410.04054222171686,
+    "planUsd": 410.04054222171686,
     "fallback": "api",
     "route": null,
-    "subset": true,
+    "subset": false,
     "partialComponents": [],
-    "workload": "1453a9a0576b02ea",
+    "workload": "9a0d376cc6080f3c",
     "planFlags": [
       "API-cost fallback: no admitted Plan route",
       "cross-estimand ordering not identified"
     ],
     "costScore": {
-      "api": 63.29959641592294,
-      "plan": 31.537290403914106
+      "api": 67.07341277457002,
+      "plan": 40.15966814370498
     },
     "components": [
+      {
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index",
+        "costUsd": 85.9196583329372,
+        "completeness": "confirmed-complete",
+        "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
+        "admitted": true
+      },
       {
         "key": "aa-briefcase",
         "label": "AA-Briefcase",
@@ -347,11 +353,124 @@
   "plans": [],
   "scenarios": {
     "status": "current",
-    "api": [],
-    "plan": []
+    "api": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 1.0,
+        "top3": 1.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 1.0,
+        "top3": 1.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.6417,
+        "top3": 1.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 1.0,
+        "top3": 1.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 1.0,
+        "top3": 1.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.5567,
+        "top3": 0.9999,
+        "frontier": 1.0
+      }
+    ],
+    "plan": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      }
+    ]
   },
   "intervals": {
-    "api": null,
+    "api": {
+      "definite": "certified",
+      "possible": "certified"
+    },
     "plan": null
   },
   "history": [
@@ -359,8 +478,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 3,
-        "plan": 24
+        "api": 1,
+        "plan": 22
       }
     }
   ],
@@ -380,12 +499,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 3,
-        "plan": 24
+        "api": 1,
+        "plan": 22
       },
       "overall": {
-        "api": 59.44316770124329,
-        "plan": 51.502591198241085
+        "api": 60.38662179090506,
+        "plan": 53.6581856331888
       }
     },
     {

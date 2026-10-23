@@ -158,3 +158,45 @@ def test_pointers_name_a_field_every_ranking_has():
                         "(scores.md; scores.json `diagnostics.rankSeparability.<basis>.bands`).",
                         "line 3: the specification cites a generated document; cite the scores.json field instead: Shares are printed in scores.md.",
                         "pointer scores.json `diagnostics.noSuchThing` does not resolve in every ranking"]
+
+
+def test_registry_facts_are_figures_and_typed_values_fail_even_in_dated_sentences():
+    """I50 L5: the report window, search cutoff, evidence stages and vertex check come from the registry, and typing one
+    by hand fails in any sentence that speaks of it, dated or not."""
+
+    manifest = f.named_figures(SCORES)
+    assert manifest["evidence.windowStart"] < manifest["evidence.windowEnd"] and int(manifest["evidence.searchGapDays"]) >= 0
+    assert manifest["semianalysis.lastCurrent"] < manifest["semianalysis.supersededFrom"] < manifest["semianalysis.expiredFrom"] < manifest["semianalysis.demotedFrom"]
+    assert manifest["aa.vertices"] == str(len(json.loads((DATA / "aa_frontier_capture.json").read_text())["frontier"]))
+    text = "\n".join([
+        f"On 2026-10-17 all {manifest['aa.vertices']} vertices matched at {manifest['aa.vertexMatchPx']} px.",
+        f"Today all {{{{fig:aa.vertices}}}} vertices matched; the window is {{{{fig:evidence.windowStart}}}} to now.",
+        f"The report window opened on {manifest['evidence.windowStart']}; on 2026-09-01 it was expired from {manifest['semianalysis.expiredFrom']}.",
+        "## Revision history",
+        f"r1 typed {manifest['aa.vertices']} vertices.",
+    ])
+    problems = f.registry_problems(text, manifest)
+    assert [problem.split(";")[0] for problem in problems] == [
+        "line 1: registry value(s) typed by hand (aa.vertices, aa.vertexMatchPx)",
+        "line 3: registry value(s) typed by hand (evidence.windowStart, semianalysis.expiredFrom)"]
+
+
+def test_registry_figures_name_changes_and_refuse_two_semianalysis_dates():
+    capture = json.loads((DATA / "aa_frontier_capture.json").read_text())
+    plan = json.loads((DATA / "plan_cost_routes.json").read_text())
+    capture["comparison_to_previous_capture"].update(added=["A (max)"], removed=["B (low)"])
+    assert f.registry_figures(capture, plan, "2026-10-23")["aa.vertexChanges"] == "A (max) entered and B (low) left"
+    plan["routes"] = [dict(route, sourcePublicationDate="2026-01-01") if i == 0 and route.get("sourceEvidenceId") == "semianalysis" else route
+                      for i, route in enumerate(sorted(plan["routes"], key=lambda route: route.get("sourceEvidenceId") != "semianalysis"))]
+    plan["routes"][0]["valueMultipleKind"] = "controlled_account_workload_projection"
+    with pytest.raises(f.FigureError, match="one SemiAnalysis observation date"):
+        f.registry_figures(capture, plan, "2026-10-23")
+    plan["routes"] = [route for route in plan["routes"] if route.get("sourceEvidenceId") != "semianalysis"] + [plan["routes"][1]]
+    plan["routes"] = [route for route in plan["routes"] if route.get("valueMultipleKind") not in f.pr.REPORT_KINDS]
+    assert f.registry_figures(capture, plan, "2026-10-23")["evidence.reportRoutes"] == "none"
+
+
+def test_duplicate_rows_name_the_chosen_harness():
+    """I50 M2: a configuration a board lists twice is named with the row the selection rule chose."""
+
+    assert "DeepSeek Harness chosen over OpenCode by the harness of its Bug Hunt record" in f.named_figures(SCORES)["duplicateRows"]

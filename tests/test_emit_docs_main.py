@@ -73,7 +73,7 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     assert rows["MiMo-V2.6-Pro"][9] == "MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption)"
     assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "—"
     assert rows["Claude Haiku 5.5 (max)"][10] == "AA cost caveat"
-    assert rows["DeepSeek V4.1 Flash 1017 (max)"][10] == "subset cost, API-cost fallback"
+    assert rows["DeepSeek V4.1 Flash 1017 (max)"][10] == "API-cost fallback"  # I50: its exact Coding Agent Index record is pinned
     # O45: GPT-6.1 Sol keeps its own SemiAnalysis figure.
     assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured)"
 
@@ -81,20 +81,20 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
 def test_readme_states_what_the_interval_outputs_support(emitted):
     readme = (emitted / "README.md").read_text()
     assert "the definite frontier (no configuration can beat it on both cost and quality" in readme
-    assert "GPT-6 Luna (max); the possible frontier adds none. Not evaluable on this workload: DeepSeek V4.1 Flash 1017 (max), MiMo-V2.6-Pro." in readme
+    assert "GPT-6 Luna (max); the possible frontier adds none. Not evaluable on this workload: MiMo-V2.6-Pro." in readme
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter.
-    assert "Cheapest at or above quality 54.2: GPT-6.1 Sol (max) (confirmed)." in readme
+    assert "Cheapest at or above quality 54.2: DeepSeek V4.1 Flash 1017 (max) (confirmed)." in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 103% of API and 20% of Plan value variance)" in readme
+    assert "value is a 25% cost score (nominal weight; 115% of API and 28% of Plan value variance)" in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
-    assert "Claude Opus 5.5 leads the Plan ranking at 64.3; MiMo-V2.6-Pro leads the API ranking at 60.3 (subset cost); Claude Opus 5.5 leads on quality." in readme
+    assert "Claude Opus 5.5 leads the Plan ranking at 64.3; DeepSeek V4.1 Flash 1017 leads the API ranking at 60.4; Claude Opus 5.5 leads on quality." in readme
     # The quality rank covers every cohort row with quality evidence, a cost-less one included (its quality is shown).
     # E203: the displayed record on the headline scale, beside the interval claims.
     assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 64.3: GPT-6.1 Sol (max) ($1,233.11 per basket run; 5 reach it)" in readme
     # O50: the max-effort ranking admits the Coding Agent Index v2.0, so the coding share names it and its unrewarded SWE-Atlas QnA.
-    assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 50% of the basket's cost (median over 7 configurations "
-            "with the full basket; 45% to 85%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 18%; the Coding Agent Index's SWE-Atlas QnA") in readme
+    assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 48% of the basket's cost (median over 8 configurations "
+            "with the full basket; 36% to 85%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 17%; the Coding Agent Index's SWE-Atlas QnA") in readme
     assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 64.3 over 9 configurations" in (emitted / "scores.md").read_text()
     assert "SciCode and AA-LCR once at API rates" in readme
 

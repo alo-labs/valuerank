@@ -155,7 +155,7 @@ def test_pareto_flags_follow_the_main_workload_point_estimates(bundle, v3):
 
 def test_flags_name_subset_rows(bundle):
     mimo = by_slug(bundle.rankings)["mimo-v2-6-pro"]
-    # O50/E140: the max-effort ranking admits the Coding Agent Index v2.0 (7 of its 9 rows priced); MiMo-V2.6-Pro has no
+    # O50/E140: the max-effort ranking admits the Coding Agent Index v2.0 (8 of its 9 rows priced); MiMo-V2.6-Pro has no
     # Coding Agent Index cost, so it is scored on its own subset workload and flagged (O17).
     assert mimo["cost"]["subset"] is True and mimo["coverage"]["provisional"] is False and mimo["flags"][0].startswith("Subset cost")
     haiku = by_slug(bundle.rankings)["claude-haiku-5-5-max"]
@@ -169,8 +169,8 @@ def test_picks_reference_ranked_models_with_plain_reasons(bundle):
         for pick in picks.values():
             assert models[pick["slug"]]["rankingEligible"] and len(pick["reason"].split()) < 25
         assert "per basket run" in picks["value"]["reason"]
-    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "mimo-v2-6-pro"
-    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("MiMo-V2.6-Pro has the highest overall score")
+    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "deepseek-v4-1-flash-1017"
+    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("DeepSeek V4.1 Flash 1017 has the highest overall score")
 
 
 # --- per-model documents -------------------------------------------------------------------------
@@ -296,7 +296,7 @@ def test_changelog_document(bundle):
 
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
-    assert page["headline"]["api"] == "MiMo-V2.6-Pro leads the API ranking at 60.3 (subset cost); Claude Opus 5.5 leads on quality."
+    assert page["headline"]["api"] == "DeepSeek V4.1 Flash 1017 leads the API ranking at 60.4; Claude Opus 5.5 leads on quality."
     assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 64.3 and also leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
     assert len(page["models"]) == 9 and page["dimensions"] == bundle.rankings["dimensions"]

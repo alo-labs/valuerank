@@ -126,11 +126,13 @@ def evidence_date(route: dict, registry: dict | None = None) -> date | None:
     """E144: when the evidence was observed — the donor's date for a transfer, else the measurement window's end,
     the source publication date, or (for an owner assumption without a donor measurement) its authorisation date.
 
-    A record's check or edit date (``checkedOn``) is an editorial event and never restarts the clock.
+    A record's check or edit date (``checkedOn``) is an editorial event and never restarts the clock. An O46 quota
+    ceiling is a function of Xiaomi's pages, so it ages from the read of those pages (``capturedOn``, E261, I50 M1).
     """
 
     source = donor(route, registry) or route
-    stamp = (source.get("measurementWindow") or {}).get("end") or source.get("sourcePublicationDate") or source.get("validFrom")
+    ceiling = source.get("evidenceClass") == "provider_quota_ceiling" and source.get("capturedOn")
+    stamp = ceiling or (source.get("measurementWindow") or {}).get("end") or source.get("sourcePublicationDate") or source.get("validFrom")
     return date.fromisoformat(stamp) if stamp else None
 
 
@@ -196,7 +198,7 @@ def _divisor_eligible(route: dict) -> bool:
 
 STAGES = ("fresh", "possibly-superseded", "expired", "demoted")
 
-# E194: AGENTS.md's "reports from the preceding month" is the 30 days ending on the evidence search cutoff.
+# E194: AGENTS.md's "reports from the preceding month" is the 30 days ending on the release cutoff (E213).
 REPORT_WINDOW_DAYS = 30
 
 
@@ -233,7 +235,7 @@ def check_report_window(document: dict) -> None:
     window = document["evidencePolicy"]["reportingWindow"]
     start, end = date.fromisoformat(window["start"]), date.fromisoformat(window["end"])
     if (end - start).days != REPORT_WINDOW_DAYS:
-        raise ValueError(f"the report window must span {REPORT_WINDOW_DAYS} days ending at the search cutoff (E194)")
+        raise ValueError(f"the report window must span {REPORT_WINDOW_DAYS} days ending at the release cutoff (E194, E213)")
     for route in document["routes"]:
         if route.get("valueMultipleKind") not in REPORT_KINDS:
             continue

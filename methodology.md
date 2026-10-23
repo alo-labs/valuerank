@@ -62,11 +62,11 @@ Value on a basis = **25%** × cost score + **75%** × quality score (owner decis
 
 ## Cost: the SDLC basket
 
-The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 7 of the 9 ranked configurations (at least 6 required):
+The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 8 of the 9 ranked configurations (at least 6 required):
 
 | Component | Status | Exact cost available | Complete | Ranked |
 |---|---|---:|---:|---:|
-| Coding Agent Index | admitted | 7 | 7 | 9 |
+| Coding Agent Index | admitted | 8 | 8 | 9 |
 | ITBench-AA | pending capture | 2 | 2 | 9 |
 | AA-Briefcase | admitted | 9 | 9 | 9 |
 | GDPval-AA | admitted | 9 | 9 | 9 |
@@ -99,8 +99,8 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Workload | Basis | Low anchor c_L (USD) | High anchor c_H (USD) | References | Status |
 |---|---|---:|---:|---:|---|
-| `9a0d376cc6080f3c` (main) | api | $62.86 | $18,703.43 | 7 | frozen |
-| `9a0d376cc6080f3c` (main) | plan | $5.84 | $7,115.53 | 22 | frozen |
+| `9a0d376cc6080f3c` (main) | api | $62.86 | $18,703.43 | 8 | frozen |
+| `9a0d376cc6080f3c` (main) | plan | $5.84 | $7,115.53 | 23 | frozen |
 | `1453a9a0576b02ea` (subset) | api | $39.78 | $12,078.25 | 9 | frozen |
 | `1453a9a0576b02ea` (subset) | plan | $1.63 | $3,715.87 | 27 | frozen |
 
@@ -117,8 +117,8 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
 |---|---:|---:|---|---:|---:|---:|
-| api | 7 | 52.6% | defined | 103.1% | 0.24 | -0.14 |
-| plan | 22 | 47.4% | defined | 19.9% | -0.10 | 0.58 |
+| api | 8 | 54.4% | defined | 115.4% | 0.36 | -0.21 |
+| plan | 23 | 47.8% | defined | 28.2% | -0.03 | 0.55 |
 
 ## Quality
 
@@ -169,7 +169,7 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 **Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 64.3 (the displayed quality of Gemini 4 Argon at freeze); ladder: quality 54.2, quality 65.0.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261023, input hash `06d5c293289743be`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261023, input hash `a7281cc9e1dcee4b`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
