@@ -23700,7 +23700,7 @@
           "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)"
         ],
         "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way",
-        "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and two plan rows of one configuration count as a separable adjacent pair whenever their values differ",
+        "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and adjacent plan rows of one configuration are counted apart from the separability pairs (E258)",
         "valueSd": {
           "claude-sonnet-5-5": 1.0820996837526604,
           "deepseek-v4-1-flash-1017": 1.108139230555651,
@@ -23733,6 +23733,7 @@
           "adjacentPairs": 8,
           "separableAdjacentPairs": 1,
           "medianSeparation": 3.0107923664697314,
+          "sameConfigurationAdjacentPairs": 0,
           "byCorrelation": {
             "0.0": 1,
             "0.3": 1,
@@ -23783,17 +23784,18 @@
           "costTolerance": 1.985609482011215
         },
         "plan": {
-          "adjacentPairs": 26,
-          "separableAdjacentPairs": 16,
-          "medianSeparation": 0.0,
+          "adjacentPairs": 11,
+          "separableAdjacentPairs": 2,
+          "medianSeparation": 3.0129041282605513,
+          "sameConfigurationAdjacentPairs": 15,
           "byCorrelation": {
-            "0.0": 16,
-            "0.3": 16,
-            "0.6": 16
+            "0.0": 2,
+            "0.3": 2,
+            "0.6": 2
           },
           "gdpvalWide": {
-            "separableAdjacentPairs": 16,
-            "medianSeparation": 0.0
+            "separableAdjacentPairs": 2,
+            "medianSeparation": 3.0218565826474086
           },
           "bands": {
             "claude-opus-5-5@claude-pro": [
@@ -23905,7 +23907,7 @@
               27
             ]
           },
-          "costTolerance": 1.0
+          "costTolerance": 2.354663585636912
         }
       },
       "costedBarLadder": {
@@ -24710,8 +24712,7 @@
         {
           "id": "leave-out:vibeCode",
           "labels": [
-            "leave-one-benchmark-out",
-            "leave-one-source-out"
+            "leave-one-benchmark-out"
           ],
           "removed": [
             "vibeCode"
@@ -24785,8 +24786,7 @@
         {
           "id": "leave-out:codeMigration",
           "labels": [
-            "leave-one-benchmark-out",
-            "leave-one-source-out"
+            "leave-one-benchmark-out"
           ],
           "removed": [
             "codeMigration"
@@ -24860,8 +24860,7 @@
         {
           "id": "leave-out:livebenchAgentic",
           "labels": [
-            "leave-one-benchmark-out",
-            "leave-one-source-out"
+            "leave-one-benchmark-out"
           ],
           "removed": [
             "livebenchAgentic"
@@ -24935,8 +24934,7 @@
         {
           "id": "leave-out:livebenchCoding",
           "labels": [
-            "leave-one-benchmark-out",
-            "leave-one-source-out"
+            "leave-one-benchmark-out"
           ],
           "removed": [
             "livebenchCoding"
@@ -25543,6 +25541,156 @@
           ],
           "retainedNominalWeight": 0.28,
           "status": "not identifiable under the coverage rule"
+        },
+        {
+          "id": "leave-source-out:Vals AI",
+          "labels": [
+            "leave-one-source-out"
+          ],
+          "removed": [
+            "vibeCode",
+            "codeMigration"
+          ],
+          "retainedNominalWeight": 0.89,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6.1-sol",
+                  "mimo-v2-6-pro"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5-max": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 1,
+                  "deepseek-v4-1-flash-1017": 0,
+                  "gemini-4-argon": 0,
+                  "gpt-6-astra": -1,
+                  "gpt-6-luna": 0,
+                  "gpt-6.1-sol": 0,
+                  "mimo-v2-6-pro": 0
+                },
+                "maxAbsChange": 1,
+                "maxRow": "gpt-6-astra"
+              },
+              "kendallTauB": 0.9444444444444444
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6.1-sol",
+                  "mimo-v2-6-pro"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5-max": 0,
+                  "claude-opus-5-5": 0,
+                  "claude-sonnet-5-5": 0,
+                  "deepseek-v4-1-flash-1017": 0,
+                  "gemini-4-argon": 0,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6.1-sol": 0,
+                  "mimo-v2-6-pro": 0
+                },
+                "maxAbsChange": 0,
+                "maxRow": "mimo-v2-6-pro"
+              },
+              "kendallTauB": 1.0
+            }
+          }
+        },
+        {
+          "id": "leave-source-out:LiveBench",
+          "labels": [
+            "leave-one-source-out"
+          ],
+          "removed": [
+            "livebenchAgentic",
+            "livebenchCoding"
+          ],
+          "retainedNominalWeight": 0.93,
+          "status": "evaluated",
+          "unevaluableRows": [],
+          "bases": {
+            "api": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6.1-sol",
+                  "mimo-v2-6-pro"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5-max": 0,
+                  "claude-opus-5-5": 1,
+                  "claude-sonnet-5-5": -1,
+                  "deepseek-v4-1-flash-1017": 0,
+                  "gemini-4-argon": 0,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6.1-sol": 0,
+                  "mimo-v2-6-pro": 0
+                },
+                "maxAbsChange": 1,
+                "maxRow": "claude-sonnet-5-5"
+              },
+              "kendallTauB": 0.9444444444444444
+            },
+            "plan": {
+              "rankChanges": {
+                "panel": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-astra",
+                  "gpt-6-luna",
+                  "gpt-6.1-sol",
+                  "mimo-v2-6-pro"
+                ],
+                "excluded": [],
+                "changes": {
+                  "claude-haiku-5-5-max": 0,
+                  "claude-opus-5-5": 1,
+                  "claude-sonnet-5-5": -1,
+                  "deepseek-v4-1-flash-1017": 0,
+                  "gemini-4-argon": 0,
+                  "gpt-6-astra": 0,
+                  "gpt-6-luna": 0,
+                  "gpt-6.1-sol": 0,
+                  "mimo-v2-6-pro": 0
+                },
+                "maxAbsChange": 1,
+                "maxRow": "claude-sonnet-5-5"
+              },
+              "kendallTauB": 0.9444444444444444
+            }
+          }
         },
         {
           "id": "basket-scope",
@@ -47902,7 +48050,7 @@
             "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)"
           ],
           "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way",
-          "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and two plan rows of one configuration count as a separable adjacent pair whenever their values differ",
+          "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and adjacent plan rows of one configuration are counted apart from the separability pairs (E258)",
           "valueSd": {
             "deepseek-v4-1-flash-1017": 1.6723885109601362,
             "gemini-4-argon": 1.7407466700314809,
@@ -47975,6 +48123,7 @@
             "adjacentPairs": 14,
             "separableAdjacentPairs": 1,
             "medianSeparation": 4.446687630341441,
+            "sameConfigurationAdjacentPairs": 0,
             "byCorrelation": {
               "0.0": 1,
               "0.3": 1,
@@ -48049,17 +48198,18 @@
             "costTolerance": 2.9759997470159543
           },
           "plan": {
-            "adjacentPairs": 49,
-            "separableAdjacentPairs": 31,
-            "medianSeparation": 0.0,
+            "adjacentPairs": 19,
+            "separableAdjacentPairs": 1,
+            "medianSeparation": 4.5412725437385735,
+            "sameConfigurationAdjacentPairs": 30,
             "byCorrelation": {
-              "0.0": 31,
-              "0.3": 31,
-              "0.6": 31
+              "0.0": 1,
+              "0.3": 1,
+              "0.6": 1
             },
             "gdpvalWide": {
-              "separableAdjacentPairs": 31,
-              "medianSeparation": 0.0
+              "separableAdjacentPairs": 1,
+              "medianSeparation": 4.547216977065623
             },
             "bands": {
               "claude-opus-5-5-high@claude-pro": [
@@ -48263,7 +48413,7 @@
                 50
               ]
             },
-            "costTolerance": 1.0
+            "costTolerance": 5.28255501628481
           }
         },
         "costedBarLadder": {

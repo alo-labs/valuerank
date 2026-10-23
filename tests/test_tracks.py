@@ -55,3 +55,16 @@ def test_each_ranking_keeps_its_own_files_and_summary():
         assert {leaf.key for leaf in v.aa_leaves()} | {leaf.key for leaf in v.independent_leaves()} == set(q.LEAF_BY_KEY)
         assert "aiCodingDaily" in {leaf.key for leaf in v.independent_leaves()}
         assert v.source_leaves()["Artificial Analysis"][:2] == ("frontierCode", "terminalBench")
+
+
+def test_a_publisher_of_two_leaves_is_a_source_branch():
+    """E258: in the max-effort ranking Vals AI and LiveBench each publish two leaves, so each has a leave-one-source-out
+    branch, and their leaves carry only the leave-one-benchmark-out label; Bug Hunt stays a single-leaf source."""
+
+    branches = {branch["id"]: branch for branch in v.deletion_branches()}
+    assert branches["leave-source-out:Vals AI"]["removed"] == ["vibeCode", "codeMigration"]
+    assert branches["leave-source-out:LiveBench"]["removed"] == ["livebenchAgentic", "livebenchCoding"]
+    assert branches["leave-out:vibeCode"]["labels"] == ["leave-one-benchmark-out"]
+    assert branches["leave-out:bugHunt"]["labels"] == ["leave-one-benchmark-out", "leave-one-source-out"]
+    with q.active_track("aicd"):
+        assert set(v.source_leaves()) == {"Artificial Analysis"}

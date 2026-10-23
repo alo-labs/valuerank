@@ -1079,10 +1079,19 @@ def _comparison(bar: dict) -> None:
 LEAVE_OUT_MIN_WEIGHT = 0.40
 
 
-def source_leaves() -> dict:
-    """The active ranking's multi-leaf sources (the AA-run leaves)."""
+# E258: the publisher of each independently run leaf; a publisher with two or more leaves in a ranking is a multi-leaf source.
+LEAF_PUBLISHERS = {"vibeCode": "Vals AI", "codeMigration": "Vals AI", "livebenchAgentic": "LiveBench", "livebenchCoding": "LiveBench"}
 
-    return {"Artificial Analysis": tuple(leaf.key for leaf in q.LEAVES if leaf.source == "aa")}
+
+def source_leaves() -> dict:
+    """The active ranking's multi-leaf sources: the AA-run leaves and every publisher of two or more independent leaves."""
+
+    groups = {"Artificial Analysis": tuple(leaf.key for leaf in q.LEAVES if leaf.source == "aa")}
+    for leaf in q.LEAVES:
+        if leaf.key in LEAF_PUBLISHERS:
+            groups.setdefault(LEAF_PUBLISHERS[leaf.key], ())
+            groups[LEAF_PUBLISHERS[leaf.key]] += (leaf.key,)
+    return {source: keys for source, keys in groups.items() if len(keys) >= 2}
 
 
 # E178: the leaves whose benchmarks O15 excludes from the cost basket (basket.INDEX_RESIDUAL_TASKS), removed jointly.
@@ -1098,7 +1107,8 @@ def deletion_branches() -> list[dict]:
     standing Bug Hunt removal.
     """
 
-    single = {leaf.key: leaf for leaf in q.LEAVES if leaf.source != "aa"}
+    multi = {key for keys in source_leaves().values() for key in keys}
+    single = {leaf.key: leaf for leaf in q.LEAVES if leaf.source != "aa" and leaf.key not in multi}
     branches = []
     for leaf in q.LEAVES:
         labels = ["leave-one-benchmark-out"] + (["leave-one-source-out"] if leaf.key in single else [])
@@ -2276,20 +2286,21 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
         ranked = sorted((scores_of[row_id][basis]["value"], row_id) for row_id in ids if scores_of[row_id][basis]["value"] is not None)
         ranked.reverse()
 
-        def pair_threshold(sds: dict, first: str, second: str, rho: float) -> float:
-            # O48: two plan rows of one configuration share every quality draw, so only the plans' multiples separate them.
-            if configuration_of[first] == configuration_of[second]:
-                return 0.0
-            return separation(sds[configuration_of[first]], sds[configuration_of[second]], rho)
+        # O48: two plan rows of one configuration share every quality draw, so only the plans' multiples order them; such
+        # pairs are counted apart, and the threshold, its median and the separable count range over pairs of different
+        # configurations (E258), so the median is not pulled to zero by a configuration's many plan rows.
+        pairs = list(zip(ranked, ranked[1:]))
+        cross = [((high, first), (low, second)) for (high, first), (low, second) in pairs if configuration_of[first] != configuration_of[second]]
 
         def adjacent(sds: dict, rho: float) -> tuple[int, float | None]:
-            thresholds = [pair_threshold(sds, first, second, rho) for (_, first), (_, second) in zip(ranked, ranked[1:])]
-            separable = sum(high - low >= threshold and high > low for ((high, _), (low, _)), threshold in zip(zip(ranked, ranked[1:]), thresholds))
+            thresholds = [separation(sds[configuration_of[first]], sds[configuration_of[second]], rho) for (_, first), (_, second) in cross]
+            separable = sum(high - low >= threshold and high > low for ((high, _), (low, _)), threshold in zip(cross, thresholds))
             return separable, statistics.median(thresholds) if thresholds else None
 
         separable, median = adjacent(sd, 0.0)
         result[basis] = {
-            "adjacentPairs": max(0, len(ranked) - 1), "separableAdjacentPairs": separable, "medianSeparation": median,
+            "adjacentPairs": len(cross), "separableAdjacentPairs": separable, "medianSeparation": median,
+            "sameConfigurationAdjacentPairs": len(pairs) - len(cross),
             # I26: a shared task set correlates two rows' errors, which narrows the true threshold; the grid shows how far.
             "byCorrelation": {f"{rho:.1f}": adjacent(sd, rho)[0] for rho in SEPARABILITY_CORRELATIONS},
             "gdpvalWide": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(wide, 0.0))),
@@ -2311,7 +2322,7 @@ BAND_RULE = ("O42: rows in value order; a row joins the current band while its v
              "correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; "
              "every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on "
              "the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in "
-             "the band, and two plan rows of one configuration count as a separable adjacent pair whenever their values differ")
+             "the band, and adjacent plan rows of one configuration are counted apart from the separability pairs (E258)")
 
 
 def _separable(gap: float, first: str, second: str, sd: dict) -> bool:

@@ -1724,6 +1724,11 @@ def test_plan_rows_rank_every_plan_and_share_their_configuration():
     assert v.rank_bands([(60.0, "a@1"), (50.0, "b@1")], sd, of) == {"a@1": [1, 1], "b@1": [2, 2]}
     separability = output["diagnostics"]["rankSeparability"]["plan"]
     assert set(separability["bands"]) <= set(plan_rows)
+    # E258: pairs of one configuration on two plans are counted apart; the threshold ranges over different configurations.
+    ordered = [row_id for row_id, _ in sorted(((row_id, row["value"]) for row_id, row in plan_rows.items() if row["value"] is not None), key=lambda item: -item[1])]
+    same = sum(1 for first, second in zip(ordered, ordered[1:]) if first.split("@")[0] == second.split("@")[0])
+    assert separability["sameConfigurationAdjacentPairs"] == same
+    assert separability["adjacentPairs"] + same == len(ordered) - 1 and separability["medianSeparation"] > 0
 
 
 def test_costed_bar_ladder_drops_rows_without_a_cost():
