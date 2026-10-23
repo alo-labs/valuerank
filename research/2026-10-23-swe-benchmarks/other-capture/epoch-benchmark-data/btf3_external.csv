@@ -1,0 +1,21 @@
+Model version,Pooled score,Binary Brier,Numeric RPS,Harness,Release date,Organization,Country,Training compute (FLOP),Training compute notes,Name,Pooled 95% CI low,Pooled 95% CI high,Source,Notes
+claude-opus-4-8_xhigh,0.132,0.13,0.135,FutureSearch agent,2026-05-28,Anthropic,United States of America,,,Claude Opus 4.8 (xhigh),0.125,0.139,https://evals.futuresearch.ai/#btf3,
+claude-fable-5_high,0.13,0.132,0.128,FutureSearch agent,2026-06-09,Anthropic,United States of America,,,Claude Fable 5 (high),0.123,0.138,https://evals.futuresearch.ai/#btf3,
+gpt-5.5_high,0.134,0.142,0.124,Vendor agent SDK,2026-04-23,OpenAI,United States of America,,,"GPT-5.5 (high, agent SDK)",0.128,0.14,https://evals.futuresearch.ai/#btf3,
+gpt-5.6-sol_high,0.135,0.141,0.129,FutureSearch agent,2026-07-09,OpenAI,United States of America,,,GPT-5.6 Sol (high),0.128,0.143,https://evals.futuresearch.ai/#btf3,
+claude-opus-4-8_high,0.137,0.135,0.14,Vendor agent SDK,2026-05-28,Anthropic,United States of America,,,"Claude Opus 4.8 (high, agent SDK)",0.129,0.145,https://evals.futuresearch.ai/#btf3,
+claude-opus-4-8_high,0.14,0.135,0.145,FutureSearch agent,2026-05-28,Anthropic,United States of America,,,Claude Opus 4.8 (high),0.132,0.147,https://evals.futuresearch.ai/#btf3,
+gpt-5.5_high,0.143,0.148,0.136,FutureSearch agent,2026-04-23,OpenAI,United States of America,,,GPT-5.5 (high),0.136,0.149,https://evals.futuresearch.ai/#btf3,
+claude-sonnet-5_xhigh,0.142,0.139,0.146,FutureSearch agent,2026-06-30,Anthropic,United States of America,,,Claude Sonnet 5 (xhigh),0.135,0.149,https://evals.futuresearch.ai/#btf3,
+claude-opus-5_xhigh,0.12,0.116,0.128,FutureSearch agent,2026-07-24,Anthropic,United States of America,,,Claude Opus 5 (xhigh) §,0.113,0.128,https://evals.futuresearch.ai/#btf3,
+gpt-5.6-sol_max,0.137,0.144,0.129,FutureSearch agent,2026-07-09,OpenAI,United States of America,,,GPT-5.6 Sol (max),0.13,0.145,https://evals.futuresearch.ai/#btf3,
+gpt-6-astra_low,0.135,0.137,0.13,FutureSearch agent,2026-09-03,OpenAI,United States of America,9.4e+26,"per OpenAI and affiliates (e.g. Nvidia), 6 Astra was trained on at least 100,000 GB200s in Abilene, Texas (so 100,000 in ""Hardware quantity"" is a lower bound/underestimate).
+
+This suggests around 9e26 FLOP (corresponding to ~100k GB200s over 90 days at 25% FP8 MFU). See more detailed estimate in this notebook, yielding a CI of ~[5e26, 2e27] FLOP.
+https://colab.research.google.com/drive/1DRlugIQs-_zoV66AJT1gQg6I1-NX7NqN ",GPT-6 Astra (low),0.129,0.141,https://evals.futuresearch.ai/#btf3,
+gpt-5.6-sol_medium,0.137,0.139,0.134,FutureSearch agent,2026-07-09,OpenAI,United States of America,,,GPT-5.6 Sol (medium),0.131,0.144,https://evals.futuresearch.ai/#btf3,
+muse-spark-1.3_xhigh,0.141,0.136,0.15,FutureSearch agent,2026-09-02,Meta AI,United States of America,,,Muse Spark 1.3 (xhigh),0.134,0.148,https://evals.futuresearch.ai/#btf3,
+glm-5.3-flash_unknown,0.149,0.146,0.155,FutureSearch agent,2026-08-20,Z.ai (Zhipu AI),China,3.24e+24,"6 * 18e9 active parameters * 30e12 tokens = 3.24e24 FLOP. 
+
+https://docs.z.ai/guides/vlm/glm-5.3-flash says ""Combined with our latest 30T-token multimodal pre-training corpus, these changes let GLM-5.3-Flash produce more intelligence with less compute."", which is not definitive in saying that all 30T tokens were used exactly once; likely confidence.",GLM-5.3-Flash,0.142,0.156,https://evals.futuresearch.ai/#btf3,
+glm-5.3_unknown,0.149,0.147,0.152,FutureSearch agent,2026-08-14,Z.ai (Zhipu AI),China,,,GLM-5.3,0.143,0.155,https://evals.futuresearch.ai/#btf3,
