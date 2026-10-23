@@ -1264,3 +1264,13 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L4 (adopted): the basket version names the target basket and admission rule; the two rankings' admitted sets share it and differ by components and workload hash.
 - L5 (adopted): E240 applies to every cohort configuration listed beside a ranking (E259); a listed configuration gets no rank and no value score in that ranking, only O41's indicative value.
 - Round status (O56): not clean (one Medium). Draft r94.
+
+## Internal review I35 (Claude Sonnet 5.5, effort medium, on r94) — adopted, modified or rejected
+- M1 (adopted, no owner question needed): E246 is general (a SemiAnalysis figure without an effort binds to the model's max row), but r94 stated it only inside the GPT bullet. r95 states it for Claude: Opus 5.5's measured figures bind to Claude Opus 5.5 (max); Claude Opus 5.5 (high) and (medium), like every other Claude row, take the owner-named common Claude assumption (AGENTS.md, 2026-10-18), as the build already does.
+- L1 (adopted): the AI Coding Daily ranking's basket has no coding-agent component, but Terminal-Bench 4.0's Index run is agentic; wording fixed.
+- L2 (adopted): AGENTS.md now says admission is counted within each ranking's rows (O57).
+- L3 (adopted as E260, code changed): the FrontierCode AA-against-Cognition comparison ranges over every cohort configuration with both results (ranked or listed in the ranking), so both rankings use one panel and one offset; today 7 configurations, τ_b 0.81, mean offset 1.52, largest 6.28. Bar results with lowered fills are unchanged.
+- L4 (adopted as E261): an O46 quota ceiling's evidence date is the capture of Xiaomi's tier, fee and rate pages; each refresh that re-captures them renews it; the authorisation does not expire; an end-user measurement replaces it.
+- L5 (adopted): indicative costs clip at the frozen anchors like any cost score (Claude Opus 5.5 (max) and Claude Sonnet 5.5 (max) show API cost score 0 beside the AI Coding Daily ranking).
+- L6 (adopted): bands are built forward only, so a configuration's plan rows can straddle a band boundary (GPT-6 Luna (max), GPT-6.1 Sol (medium) today).
+- Round status (O56): not clean (one Medium). Draft r95.

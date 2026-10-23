@@ -1683,6 +1683,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     hold = any(item["hold"] for basis in BASES for item in gates[basis])
     yield_ = plan_routes.identification_yield({row["id"]: row["routeSelection"]["selected"] for row in plan_rows})
     agreement = _quality_agreement(rows)
+    cohort_rows = rows + assembled.get("listed", [])
     measured = _measured_only_view(rows, frozen, per_row, plan_rows)
     readiness = cost_diagnostics.basket_readiness(rows, assembled["admission"], main)
     interval_rows = sorted(row["id"] for row in rows if (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct"))
@@ -1757,9 +1758,11 @@ def score(assembled: dict, frozen: dict) -> dict:
             "rankSeparability": rank_separability(assembled, per_row, exchange, plan_assembled, per_plan),
             "costedBarLadder": costed_bar_ladder(assembled, per_row),
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
-            "frontierCodeCrossSource": frontiercode_cross_source(rows, assembled["cognition"]),
+            # E260: the AA-against-Cognition comparison ranges over every cohort configuration (ranked or listed in this
+            # ranking), so both rankings estimate one offset from one panel.
+            "frontierCodeCrossSource": frontiercode_cross_source(cohort_rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
-            "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(rows, assembled["cognition"])["meanOffset"]),
+            "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(cohort_rows, assembled["cognition"])["meanOffset"]),
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
             "omniscienceAbstentionSensitivity": _abstention_sensitivity(rows, per_row),
             "gdpvalLogisticSensitivity": _gdpval_logistic_sensitivity(rows, per_row),

@@ -23955,6 +23955,7 @@
       "frontierCodeCrossSource": {
         "label": "FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)",
         "panel": [
+          "claude-haiku-5-5",
           "claude-opus-5-5",
           "claude-sonnet-5-5",
           "gemini-4-argon",
@@ -23963,17 +23964,33 @@
           "gpt-6.1-sol"
         ],
         "excluded": [
+          "claude-haiku-5-5-high",
+          "claude-haiku-5-5-low",
           "claude-haiku-5-5-max",
+          "claude-haiku-5-5-medium",
+          "claude-opus-5-5-high",
+          "claude-opus-5-5-medium",
+          "claude-opus-5-5-xhigh",
+          "claude-sonnet-5-5-xhigh",
           "deepseek-v4-1-flash-1017",
-          "mimo-v2-6-pro"
+          "gpt-6-luna-high",
+          "gpt-6-luna-low",
+          "gpt-6-luna-medium",
+          "gpt-6-luna-xhigh",
+          "gpt-6.1-sol-high",
+          "gpt-6.1-sol-medium",
+          "gpt-6.1-sol-xhigh",
+          "mimo-v2-6-flash",
+          "mimo-v2-6-pro",
+          "minimax-m3-1-flash"
         ],
-        "tau": 0.8666666666666667,
+        "tau": 0.8095238095238095,
         "interval": [
-          0.3333333333333333,
+          0.29411764705882354,
           1.0
         ],
         "status": "defined",
-        "meanOffset": 1.7123166666666687,
+        "meanOffset": 1.5189857142857153,
         "maxAbsOffset": 6.2772333333332995,
         "scale": "tested"
       },
@@ -24042,7 +24059,7 @@
         }
       },
       "gapFillBars": {
-        "meanOffset": 1.7123166666666687,
+        "meanOffset": 1.5189857142857153,
         "bases": {
           "api": [
             {
@@ -48460,28 +48477,44 @@
         "frontierCodeCrossSource": {
           "label": "FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)",
           "panel": [
+            "claude-haiku-5-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
             "gemini-4-argon",
-            "gpt-6-luna"
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6.1-sol"
           ],
           "excluded": [
             "claude-haiku-5-5-high",
+            "claude-haiku-5-5-low",
+            "claude-haiku-5-5-max",
             "claude-haiku-5-5-medium",
             "claude-opus-5-5-high",
             "claude-opus-5-5-medium",
+            "claude-opus-5-5-xhigh",
+            "claude-sonnet-5-5-xhigh",
             "deepseek-v4-1-flash-1017",
             "gpt-6-luna-high",
+            "gpt-6-luna-low",
             "gpt-6-luna-medium",
             "gpt-6-luna-xhigh",
             "gpt-6.1-sol-high",
             "gpt-6.1-sol-medium",
-            "mimo-v2-6-pro"
+            "gpt-6.1-sol-xhigh",
+            "mimo-v2-6-flash",
+            "mimo-v2-6-pro",
+            "minimax-m3-1-flash"
           ],
-          "tau": null,
-          "interval": null,
-          "status": "undefined (panel too small)",
-          "meanOffset": 1.4549166666666515,
-          "maxAbsOffset": 2.416800000000002,
-          "scale": "scale equivalence not tested"
+          "tau": 0.8095238095238095,
+          "interval": [
+            0.29411764705882354,
+            1.0
+          ],
+          "status": "defined",
+          "meanOffset": 1.5189857142857153,
+          "maxAbsOffset": 6.2772333333332995,
+          "scale": "tested"
         },
         "gapFillSensitivity": {
           "label": "gap-fill removal: each row's leaves from another party or the provider removed, the rest renormalised (E234; diagnostic)",
@@ -48579,7 +48612,7 @@
           }
         },
         "gapFillBars": {
-          "meanOffset": 1.4549166666666515,
+          "meanOffset": 1.5189857142857153,
           "bases": {
             "api": [
               {
