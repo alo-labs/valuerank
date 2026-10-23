@@ -845,7 +845,7 @@ ValueRank asks which frontier AI model configuration is lowest cost for the valu
 
 {len(facts.rows)} configurations are ranked:
 
-{cohort_lines}{incomplete_line}{" A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41)." if v3["listedIndicative"] else ""}
+{cohort_lines}{incomplete_line} {plotted_names_text(facts)}{" A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41)." if v3["listedIndicative"] else ""}
 
 The remaining {len(facts.unranked) - len(incomplete)} roster models are not ranked; each keeps a page with the evidence held for it.
 
@@ -1278,6 +1278,15 @@ def band_text(facts, row_id):
         mark = "†" if basis == "plan" and band is not None and key in result["planAssumedRouteRows"] else ""
         parts.append(DASH if band is None else (f"{band[0]}" if band[0] == band[1] else f"{band[0]}–{band[1]}") + mark)
     return " / ".join(parts)
+
+
+def plotted_names_text(facts):
+    """E214, O54: AA's plotted names as captured, so the fallback and no-effort statements cannot go stale."""
+
+    state = facts.scores["aaPlottedNames"]
+    return (f"AA plots {series(state['withFallback'])} only \"with fallback\", and every other cohort family ({series(state['withoutFallback'])}) without it; "
+            "a third-party record matches by model and effort, and the build stops if AA plots one model and effort both ways (E214). "
+            f"AA plots {series(state['noEffort'])} with no effort (O54).")
 
 
 def listed_beyond_text(facts):

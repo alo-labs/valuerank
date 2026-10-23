@@ -215,6 +215,29 @@
       }
     ]
   },
+  "aaPlottedNames": {
+    "withFallback": [
+      "Claude Opus 5.5",
+      "Claude Sonnet 5.5"
+    ],
+    "withoutFallback": [
+      "Claude Haiku 5.5",
+      "DeepSeek V4.1 Flash 1017",
+      "GPT-5.6 Luna",
+      "GPT-6 Astra",
+      "GPT-6 Luna",
+      "GPT-6.1 Sol",
+      "Gemini 4 Argon",
+      "MiMo-V2.6-Flash",
+      "MiMo-V2.6-Pro",
+      "MiniMax-M3.1-Flash"
+    ],
+    "noEffort": [
+      "MiMo-V2.6-Flash",
+      "MiMo-V2.6-Pro",
+      "MiniMax-M3.1-Flash"
+    ]
+  },
   "weights": [
     {
       "key": "costComposite",
@@ -13875,10 +13898,7 @@
             "costShare": 0.5508522062453236,
             "flag": false,
             "qualityFlag": false,
-            "varianceAllocation": {
-              "cost": 5.4162075445446165,
-              "quality": -4.416207544544622
-            },
+            "varianceAllocation": null,
             "status": "defined",
             "panel": [
               "deepseek-v4-1-flash-1017",

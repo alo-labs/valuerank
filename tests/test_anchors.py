@@ -102,6 +102,9 @@ def test_variance_allocation_splits_value_variance_and_sees_offsetting_terms():
     # Dearer models score higher on quality: cost and quality offset, and cost's contribution can turn negative.
     offset = a.variance_allocation([100.0, 50.0, 0.0], [10.0, 50.0, 100.0], 0.25)
     assert offset["cost"] < 0 < offset["quality"] and offset["cost"] + offset["quality"] == pytest.approx(1.0)
+    # I38: no split below three rows, nor when the value scores do not vary.
+    assert a.variance_allocation([0.0, 100.0], [40.0, 60.0], 0.25) is None
+    assert a.variance_allocation([5.0, 5.0, 5.0], [7.0, 7.0, 7.0], 0.25) is None
 
 
 def test_panel_cost_influence_uses_the_common_workload_panel():

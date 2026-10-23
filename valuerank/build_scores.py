@@ -267,6 +267,17 @@ _PATH_NUMBER = r"-?\d+(?:\.\d+)?"
 _PATH = re.compile(rf"M {_PATH_NUMBER} {_PATH_NUMBER}(?: L {_PATH_NUMBER} {_PATH_NUMBER})*")
 
 
+def plotted_name_state(capture: dict) -> dict:
+    """E214, O54: which cohort families AA plots "with fallback", without it, or with no effort, read from the capture."""
+
+    points = capture.get("frontier", []) + capture.get("near_frontier", [])
+    return {
+        "withFallback": sorted({item["family"] for item in points if item.get("fallback")}),
+        "withoutFallback": sorted({item["family"] for item in points if not item.get("fallback")}),
+        "noEffort": sorted({item["family"] for item in points if not item.get("effort")}),
+    }
+
+
 def check_rendered_path(capture):
     """E195: the captured frontier points are exactly the vertices of the rendered Pareto path, which rises strictly."""
 
@@ -288,8 +299,8 @@ def check_rendered_path(capture):
     left = sorted(item["model_name"] for item in capture.get("points", []) if require_number(item.get("svg_x"), "svg_x") < vertices[0][0] - PATH_TOLERANCE_PX)
     if left:
         raise ValueError("AA plotted points lie left of the rendered Pareto path (an owner decision is required, E204): " + "; ".join(left))
-    # E214: AA plots each Claude configuration only "with fallback", so the qualifier names AA's serving setting and a
-    # third-party record matches by model and effort. Were AA to plot both states, that match would be ambiguous.
+    # E214: the "with fallback" qualifier names AA's serving setting, not a second configuration, so a third-party record
+    # matches by model and effort. Were AA to plot one model and effort in both states, that match would be ambiguous.
     states = {}
     for item in capture.get("points", []):
         states.setdefault((item.get("family"), item.get("effort")), set()).add(bool(item.get("fallback")))
@@ -1534,6 +1545,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                     "sourceUpdatedOn": deepswe_chart["observedAt"],
                 },
                 "frontierSelection": frontier_selection,
+                "aaPlottedNames": plotted_name_state(frontier_capture),
                 "weights": weights,
                 "bugHuntEmphasisRanking": bug_hunt_emphasis,
                 "costMode": cost_mode,

@@ -1293,3 +1293,12 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (adopted): Output 1 names the O46 quota ceilings and measured multiples with unidentified M_W.
 - L4 (adopted): an anchor object is identified by anchor version, basis and workload hash; the max-effort subset workload and the AI Coding Daily main workload share a hash but are different anchor objects.
 - Round status (O56): not clean (one Medium). Draft r97.
+
+## Internal review I38 (Claude Sonnet 5.5, effort medium, on r97) — adopted, modified or rejected
+- M1 (adopted, code changed): the E214 premise was stale; AA plots Claude Haiku 5.5 without "with fallback" (Opus 5.5 and Sonnet 5.5 carry it). r98 states the naming as observed, the matching rule (model and effort; stop on a with/without twin) is unchanged, and the build now reads the plotted-name state from the capture (scores.json `aaPlottedNames`: with fallback, without, no effort) and prints it in methodology.md's cohort section, so it cannot go stale (the reviewer's recommendation 1).
+- L1 (adopted): today's drift result stated (AI Coding Daily knowledge group flagged, 4.6% against 10%; max-effort no flag, AA-LCR non-discriminating).
+- L2 (adopted, code changed): the value-variance allocation is withheld below three rows (`MIN_ALLOCATION_ROWS`), where a two-row split is fixed by construction; the SD ratio still prints from two rows.
+- L3 (adopted): two decimals for the separability medians in the n = 60 sentence.
+- L4 (rejected for now): splitting Output 1 into sub-bullets is presentation only; every item in it is consistent with the data, and a restructure would disturb the text later rungs compare against. Revisit in the final editorial pass.
+- L5 (adopted): the Terminal-Bench agent list is "observed on the captured leaderboard".
+- Round status (O56): not clean (one Medium). Draft r98.

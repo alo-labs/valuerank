@@ -1316,7 +1316,8 @@ def test_frontier_anchor_diagnostic_and_subset_intervals():
     # E233: c's FrontierCode is a provider claim, so it competes as a blocker and earns no label.
     assert subset["api"]["universe"] == ["a", "b"] and subset["api"]["blockers"] == ["c"] and subset["plan"]["reason"] == v.SUBSET_PLAN_INTERVALS
     assert output["costInfluence"]["api"]["orderingAgreement"]["qualityVsValue"] is not None
-    assert output["costInfluence"]["api"]["commonWorkload"]["varianceAllocation"] is not None
+    # I38: the fixture's common workload has two rows, too few for a variance split.
+    assert output["costInfluence"]["api"]["commonWorkload"]["varianceAllocation"] is None
     retained = [dict(item, frontierFamily=item["id"] != "b") for item in CONFIGURATIONS]
     narrow = v.assemble(retained, documents(), release_day=DAY)
     per_row = {row["id"]: {basis: {"value": 1.0} for basis in v.BASES} for row in narrow["rows"]}

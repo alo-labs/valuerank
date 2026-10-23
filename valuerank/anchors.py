@@ -17,6 +17,7 @@ PADDING = 2.0
 CLIP_SHARE_LIMIT = 0.10
 BEYOND_FACTOR_LIMIT = 2.0
 LOW_INFLUENCE_FLAG = 0.10
+MIN_ALLOCATION_ROWS = 3  # I38: a two-row variance split is determined by construction
 HIGH_INFLUENCE_FLAG = 0.90  # E126: the mirror flag, quality not discriminating
 
 
@@ -134,9 +135,12 @@ def variance_allocation(cost_scores: list[float], quality_scores: list[float], b
     """E189: Cov(beta S_C, V) / Var(V) and Cov((1 - beta) Q, V) / Var(V), which sum to 1 (population moments).
 
     Cost and quality covary across a cohort, so the SD ratio above describes dispersion; this splits the value
-    variance into what each term contributes. None when the value scores do not vary.
+    variance into what each term contributes. None when the value scores do not vary, and below three rows, where the
+    two terms' deviations are tied by construction and the split carries no information (I38).
     """
 
+    if len(cost_scores) < MIN_ALLOCATION_ROWS:
+        return None
     values = [beta * cost + (1.0 - beta) * quality for cost, quality in zip(cost_scores, quality_scores)]
     centre, cost_mean, quality_mean = statistics.fmean(values), statistics.fmean(cost_scores), statistics.fmean(quality_scores)
     variance = statistics.fmean([(value - centre) ** 2 for value in values])
