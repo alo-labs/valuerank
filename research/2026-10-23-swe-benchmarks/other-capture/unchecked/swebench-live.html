@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DS89QH4XXM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DS89QH4XXM');
+  </script>
+  
+  <title>SWE-bench-Live Leaderboard</title>
+  <link rel="icon" type="image/png" href="assets/swe-bench-live.png">
+  <link rel="stylesheet" href="style.css?v=20260904-3" />
+  <!-- Import Inter font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Left Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-logo">
+        <img src="assets/swe-bench-live.png" alt="SWE-bench-Live" class="sidebar-logo-img">
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="#intro" class="nav-link">About</a></li>
+        <li><a href="#news" class="nav-link">News</a></li>
+        <li><a href="#leaderboard" class="nav-link">Leaderboard</a></li>
+        <li><a href="#submit" class="nav-link">Submit Results</a></li>
+        <li><a href="#citation" class="nav-link">Citation</a></li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <a href="https://github.com/microsoft/SWE-bench-Live" class="footer-link" target="_blank" rel="noopener noreferrer">
+          <img src="assets/github.svg" alt="GitHub" class="footer-icon">
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <div class="header">
+        <div class="title">
+          <img src="assets/swe-bench-live.png" alt="SWE-bench-Live Logo" class="logo"/>
+          <h1>SWE-bench-Live</h1>
+        </div>
+        <p class="subtitle">Evaluating your AI system on latest software engineering tasks.</p>
+      </div>
+
+      <!-- Navigation buttons -->
+      <div class="nav-buttons">
+        <a href="https://arxiv.org/abs/2505.23419" class="btn btn-paper">
+          <img src="assets/arxiv.svg" alt="ArXiv" class="btn-icon">
+          Paper
+        </a>
+        <a href="https://github.com/microsoft/SWE-bench-Live" class="btn btn-github">
+          <img src="assets/github.svg" alt="GitHub" class="btn-icon">
+          GitHub
+        </a>
+        <a href="https://huggingface.co/collections/SWE-bench-Live/swe-bench-live" class="btn btn-huggingface">
+          <img src="assets/huggingface.svg" alt="HuggingFace" class="btn-icon">
+          HuggingFace
+        </a>
+      </div>
+
+      <!-- Introduction Section -->
+      <section id="intro" class="intro-section">
+        <div class="intro-content">
+          <h3>About</h3>
+          <p>
+            SWE-bench-Live is <b>the first automatically-updating, multi-language and multi-os</b> SWE task set designed for agentic benchmarking and training. Thanks to our automated dataset curation pipeline, we plan to update SWE-bench-Live on a regular basis to provide the community with up-to-date task instances and support rigorous and contamination-free evaluation.
+          </p>
+          <p class="notice"><strong>Note:</strong> If you think your repository is not suitable to be included in our benchmark, please contact us to remove it.</p>
+        </div>
+      </section>
+
+      <!-- News Section -->
+      <section id="news" class="news-section">
+        <h2>News</h2>
+        <div class="news-container">
+          <div class="news-item">
+            <div class="news-date">Aug 2026</div>
+            <div class="news-content">
+              <h4 id="verification-policy">Leaderboard Update</h4>
+              <p>Since this month, we have strengthened our submission verification checks. Each submission must now provide their agent rollout trajectories so that our maintainers can ensure that only the problem statement and the docker image are provided to the agent, and that the other fields as well as the ground truth evaluation results are not leaked to the agent, thereby preventing any form of cheating. All submissions verified by our maintainers from now on are marked with the <a class="verified-tag" href="#verification-policy" title="the result is directly run or manually checked by the maintainer team" aria-label="Verified: the result is directly run or manually checked by the maintainer team"><img class="verified-icon" src="assets/verified-tag.png" alt=""><span class="visually-hidden">Verified</span></a> tag in the leaderboard.</p>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="news-date">Feb 2026</div>
+            <div class="news-content">
+              <h4>Multi Language and OS update</h4>
+              <p>We upgraded <a href="https://github.com/microsoft/RepoLaunch" target="_blank">RepoLaunch Agent</a> to support building repos on all mainstram languages (C C++ C# Python Java Go JS/TS Rust) and on both Linux&Windows platforms. The SWE-bench-Live/MultiLang and SWE-bench-Live/Windows benchmark has been released on HuggingFace. SWE-bench-Live/Windows is aimed at test agents in taking actions in Windows powershell and making Windows-specific code implementation. Through experiments we find none of SWE-agent, OpenHands and ClaudeCode can run on Windows containers, so we implement a minimal Windows-compatible agent with the same tool calls as  SWE-agent and OpenHands, named as <a href="https://github.com/njukenanli/Win-Agent" target="_blank">Win-agent</a>, for benchmarking of LLMs on Windows tasks. On the leaderboard below, Lite, Full and Verified splits are still for Python tasks only.</p>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="news-date">Aug 2025</div>
+            <div class="news-content">
+              <h4>Dataset update (through Aug 2025)</h4>
+              <p>We will continue to add new llm-verified issues to the dataset. The <b>lite</b> and <b>verified</b> splits will remain frozen, ensuring fair leaderboard comparisons and keeping evaluation costs manageable. To access the latest issues, please refer to the <b>test</b> split!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leaderboard Section -->
+      <div class="leaderboard-section" id="leaderboard">
+        <div class="leaderboard-header">
+          <h2>Leaderboard</h2>
+          <div class="header-controls">
+            <div class="dataset-tabs" id="set-tabs">
+              <button class="tab-btn active" data-set="lite" id="set-lite">Lite</button>
+              <button class="tab-btn" data-set="full" id="set-full">Full</button>
+              <button class="tab-btn" data-set="verified" id="set-verified">Verified</button>
+              <button class="tab-btn" data-set="ccpp" id="set-ccpp">C/C++</button>
+              <button class="tab-btn" data-set="csharp" id="set-csharp">C#</button>
+              <button class="tab-btn" data-set="java" id="set-java">Java</button>
+              <button class="tab-btn" data-set="tsjs" id="set-tsjs">TS/JS</button>
+              <button class="tab-btn" data-set="go" id="set-go">Go</button>
+              <button class="tab-btn" data-set="rust" id="set-rust">Rust</button>
+              <button class="tab-btn" data-set="windows" id="set-windows">Windows</button>
+            </div>
+            <div class="header-stats">
+              <span class="stat-item"><strong id="total-models">-</strong> results</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="leaderboard-container">
+          <div class="table-wrapper">
+            <table class="leaderboard-table" id="leaderboard-table">
+              <thead>
+                <tr>
+                  <th class="rank-col">Rank</th>
+                  <th class="model-col">Method</th>
+                  <th class="score-col sortable sorted-desc" data-sort="resolved">
+                    <span class="header-text">Resolved</span>
+                    <span class="sort-arrow">↓</span>
+                  </th>
+                  <th class="instances-col sortable" data-sort="num_valid_inst">
+                    <span class="header-text">num_valid_inst</span>
+                    <span class="sort-arrow">↕</span>
+                  </th>
+                  <th class="date-col sortable" data-sort="date">
+                    <span class="header-text">Date</span>
+                    <span class="sort-arrow">↕</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-body">
+                <!-- Data will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading leaderboard data...</p>
+          </div>
+          
+          <div class="error" id="error" style="display: none;">
+            <p>Error loading data. Please try again later.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="statement" id="submit">
+        <h3>Submit your results</h3>
+        <p>
+          Trajectories of the agents shown above have been archived at <a href="https://github.com/swe-bench-live/submission" target="_blank">SWE-bench-Live/submissions</a>. If you want to submit your success rate with your model-agent combination, please refer to the submission instructions in <a href="https://github.com/swe-bench-live/submission" target="_blank">SWE-bench-Live/submissions</a> and submit a Pull Request to this repository.
+        </p>
+      </div>
+
+      <!-- Correspondence section -->
+      <div class="statement" id="correspondence">
+        <h3>Correspondence</h3>
+        <p>
+          We welcome external open-source collaborators to join us to update our dataset tasks each month and improve the curation & RepoLaunch code.
+        </p>
+        <p>
+          If you have any questions or would like to contribute to our dataset or source code, please raise issues, open discussions and submit pull requests in our GitHub repositories <a href="https://github.com/microsoft/SWE-bench-Live" target="_blank">microsoft/SWE-bench-Live</a> or <a href="https://github.com/microsoft/RepoLaunch" target="_blank">microsoft/RepoLaunch</a>.
+        </p>
+      </div>
+
+      <!-- Acknowledgement section -->
+      <div class="statement">
+        <h3>Acknowledgement</h3>
+        <p>
+          SWE-bench-Live is built upon the foundation of <a href="https://www.swebench.com/" target="_blank">SWE-bench</a>.
+          We extend our gratitude to the original SWE-bench team for their pioneering work in software engineering evaluation benchmarks.
+        </p>
+      </div>
+
+      <div class="statement" id="citation">
+        <h3>Citation</h3>
+        <p>
+          If you refer to the SWE task creation pipeline of SWE-bench-Live, or SWE-bench-Live/SWE-bench-Live (Python only tasks), please cite:
+          <pre>
+@article{zhang2025swebenchgoeslive,
+  title={SWE-bench Goes Live!},
+  author={Linghao Zhang and Shilin He and Chaoyun Zhang and Yu Kang and Bowen Li and Chengxing Xie and Junhao Wang and Maoquan Wang and Yufan Huang and Shengyu Fu and Elsie Nallipogu and Qingwei Lin and Yingnong Dang and Saravan Rajmohan and Dongmei Zhang},
+  journal={arXiv preprint arXiv:2505.23419},
+  year={2025}
+}</pre>
+        If you refer to the automated build and test tool RepoLaunch, SWE benchmarking/training/RFT/RL environment build, SWE-bench-Live/Multi-Language or SWE-bench-Live/Windows, please cite:
+        <pre>
+@article{li2026repolaunch,
+  title={RepoLaunch: Automating Build and Management of Code Repositories across Languages and Platforms},
+  author={Li, Kenan and Li, Rongzhi and Zhang, Linghao and Jin, Qirui and Zhu, Liao and Huang, Xiaosong and Zhang, Geng and Zhang, Yikai and He, Shilin and Xie, Chengxing and others},
+  journal={arXiv preprint arXiv:2603.05026},
+  year={2026}
+}</pre>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const leaderboardScript = document.createElement("script");
+    leaderboardScript.src = "leaderboard.js?v=" + Date.now();
+    document.body.appendChild(leaderboardScript);
+  </script>
+</body>
+</html>

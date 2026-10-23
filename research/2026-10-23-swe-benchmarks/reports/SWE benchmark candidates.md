@@ -111,3 +111,13 @@ What the coverage supports:
 - **All three owner-named sources required:** 1 (Gemini 4 Argon).
 - **IFBench:** no source publishes it for the cohort. AA dropped it from the Index in v4.1 (2026-06-16), and every cohort row is null in AA's 2026-10-23 snapshot.
 - **Vals:** the professional-work boards (Finance Agent v2.1, EMB v1.1, Legal Research, HLAB-Vals-1.1, Tax Agent Bench) reach the same 8-plus-3 ceiling as the SWE boards, and they overlap GDPval-AA, AA-Briefcase and AutomationBench-AA. Vals has no instruction-following board. Vals Terminal-Bench 4.0 is the same task set as the AA-run leaf, on a different harness.
+
+## Check of the three unchecked candidates (O55, 2026-10-23)
+
+Raw captures are in `other-capture/unchecked/` and in Epoch's `mirrorcode.csv`.
+
+- **Epoch MirrorCode** (Epoch's own runs; 13 rows): exact for 3 cohort configurations, Gemini 4 Argon (high) 0.589, Claude Opus 5.5 (max) 0.774 and GPT-6 Astra (high) 0.467. That is 2 in each ranking, so it is not usable as a leaf.
+- **SWE-bench-Live** (`reports-0605.jsonl`, 162 submissions, newest 2026-10-20): submissions are agent products paired with a model ("TianxiCode + Deepseek-v4.1-Flash", "Slingshot + GPT-5.6-Sol"), and the harness is chosen by the submitter. No cohort configuration appears with its exact version and effort, so the cohort has 0 exact matches.
+- **SWE-PolyBench** (Amazon; leaderboard last dated 2026-08-05): the newest models are Claude Opus 4.8 and GPT-5, so the cohort has 0 matches.
+
+None of the three changes O53–O55.
