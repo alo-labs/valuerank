@@ -1,0 +1,854 @@
+{
+  "schemaVersion": "valuerank-aa-coding-agents/v1",
+  "source": "https://artificialanalysis.ai/agents/coding-agents",
+  "capturedAt": "2026-10-23T05:31:41Z",
+  "costFields": {
+    "total": "sums.costUsd (AA 'Total Cost Across the Artificial Analysis Coding Agent Index')",
+    "perTask": "mean.costUsd (AA average pay-per-token API cost per task)"
+  },
+  "responseSha256": "b3388f6a16ff2b4d39e3c8cf79e5dc057e1f21c05ee132421a5ee1f6363c3760",
+  "configurations": [
+    {
+      "id": "ee454ece0aab8dacb7127770643dcb6b",
+      "label": "Antigravity CLI - Gemini 4 Argon (high)",
+      "agent": "Antigravity CLI",
+      "model": "Gemini 4 Argon",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.532462665363311,
+      "totalCostUsd": 1593.62936927867,
+      "meanCostPerTaskUsd": 5.86148606882067,
+      "pricedTaskCount": 271.881456,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.485706666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 371,
+          "reward": 0.551075268817204
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.560606060606061
+        }
+      ]
+    },
+    {
+      "id": "e17ee3a79eab160154a92f31c6c2b1fa",
+      "label": "Antigravity SDK - Gemini 3.8 Flash (high)",
+      "agent": "Antigravity SDK",
+      "model": "Gemini 3.8 Flash (high)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.33272301118714,
+      "totalCostUsd": 686.634277225,
+      "meanCostPerTaskUsd": 2.51071545979138,
+      "pricedTaskCount": 273.481519,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.408156
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.443548387096774
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.146464646464646
+        }
+      ]
+    },
+    {
+      "id": "5c82a7985b08f35190cc0db574fd1773",
+      "label": "Claude Code - Fable 5.1 (max) (with fallback)",
+      "agent": "Claude Code",
+      "model": "Fable 5.1 (max) (with fallback)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.576200245682633,
+      "totalCostUsd": 3042.60256466666,
+      "meanCostPerTaskUsd": 11.5301045391259,
+      "pricedTaskCount": 263.883346,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.488864666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.663978494623656
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.575757575757576
+        }
+      ]
+    },
+    {
+      "id": "2a2fed494e0d1343b14efe96e6bc3669",
+      "label": "Claude Code - Haiku 5.5 (max)",
+      "agent": "Claude Code",
+      "model": "Haiku 5.5 (max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.373496050722277,
+      "totalCostUsd": 794.65870438,
+      "meanCostPerTaskUsd": 2.67388407176395,
+      "pricedTaskCount": 297.192654,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.473697666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.338709677419355
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.308080808080808
+        }
+      ]
+    },
+    {
+      "id": "f8b3c23615b8b60e23364c27e8494d6d",
+      "label": "Claude Code - Opus 5.5 (max)",
+      "agent": "Claude Code",
+      "model": "Opus 5.5 (max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.616528649505811,
+      "totalCostUsd": 3111.91984361667,
+      "meanCostPerTaskUsd": 11.4227202144224,
+      "pricedTaskCount": 272.432467,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.559670666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.658602150537634
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.631313131313131
+        }
+      ]
+    },
+    {
+      "id": "1630d319b5e4dc5183cb88a2b2af1646",
+      "label": "Claude Code - Qwen3.8 Max",
+      "agent": "Claude Code",
+      "model": "Qwen3.8 Max",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.392199207885305,
+      "totalCostUsd": 978.07253625,
+      "meanCostPerTaskUsd": 3.79584401482699,
+      "pricedTaskCount": 257.669317,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.448103
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.561827956989248
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.166666666666667
+        }
+      ]
+    },
+    {
+      "id": "9983e10d68576074ad63407d0ca81e4b",
+      "label": "Claude Code - Sonnet 5.5 (max)",
+      "agent": "Claude Code",
+      "model": "Sonnet 5.5 (max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.593374426631911,
+      "totalCostUsd": 3893.47932905,
+      "meanCostPerTaskUsd": 13.3015082635468,
+      "pricedTaskCount": 292.709612,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.476034
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.64247311827957
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.661616161616162
+        }
+      ]
+    },
+    {
+      "id": "06c2cfad6e3aba9000f2dd5e429d4407",
+      "label": "Claude Code - Step 5 Preview ({'subagents': True})",
+      "agent": "Claude Code",
+      "model": "Step 5 Preview",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.431274491691105,
+      "totalCostUsd": 453.9377269,
+      "meanCostPerTaskUsd": 1.84006320525524,
+      "pricedTaskCount": 246.696812,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.404771666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.586021505376344
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.303030303030303
+        }
+      ]
+    },
+    {
+      "id": "ef847aa89b4f0471ffe5275ba2f11771",
+      "label": "Codex - DeepSeek V4.1 Flash ({'reasoning_effort': 'max'})",
+      "agent": "Codex",
+      "model": "DeepSeek V4.1 Flash",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.473001334419464,
+      "totalCostUsd": 94.5823191093334,
+      "meanCostPerTaskUsd": 0.38619359563592,
+      "pricedTaskCount": 244.909082,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.525960666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.610215053763441
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 197,
+          "reward": 0.282828282828283
+        }
+      ]
+    },
+    {
+      "id": "34e0f78892fac8fd39aff6595d04610e",
+      "label": "Codex - GPT-6 Astra (max)",
+      "agent": "Codex",
+      "model": "GPT-6 Astra (max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.546635690561529,
+      "totalCostUsd": 1889.96355383333,
+      "meanCostPerTaskUsd": 7.03615822479963,
+      "pricedTaskCount": 268.607313,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.492953666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.591397849462366
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.555555555555555
+        }
+      ]
+    },
+    {
+      "id": "c54a3c8e7e89d5a784e98211605eaa53",
+      "label": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+      "agent": "Codex",
+      "model": "GPT-6 Luna (max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.311260251113284,
+      "totalCostUsd": 41.2122148441667,
+      "meanCostPerTaskUsd": 0.159155559086193,
+      "pricedTaskCount": 258.942981,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.395494666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.381720430107527
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.156565656565657
+        }
+      ]
+    },
+    {
+      "id": "3897d72a57138fd2e2353367570b4b37",
+      "label": "Codex - GPT-6.1 Sol (max)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Sol (max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.541279798631476,
+      "totalCostUsd": 391.598093616667,
+      "meanCostPerTaskUsd": 1.5046389983744,
+      "pricedTaskCount": 260.260497,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.494074
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.599462365591398
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.53030303030303
+        }
+      ]
+    },
+    {
+      "id": "24c98f188d41522a849006ac453fdebe",
+      "label": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})",
+      "agent": "DeepSeek Harness",
+      "model": "DeepSeek V4.1 Flash 1017",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.463051957532312,
+      "totalCostUsd": 76.176064894,
+      "meanCostPerTaskUsd": 0.29627468390668,
+      "pricedTaskCount": 257.112973,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.465483666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.615591397849462
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.308080808080808
+        }
+      ]
+    },
+    {
+      "id": "fe6df4d0f0b5360790e73d6d8830d7a0",
+      "label": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "agent": "Devin Fusion CLI",
+      "model": "Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.586619030954708,
+      "totalCostUsd": 2124.39869355,
+      "meanCostPerTaskUsd": 8.19825160322711,
+      "pricedTaskCount": 259.128263,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.516455333333333
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.682795698924731
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 197,
+          "reward": 0.560606060606061
+        }
+      ]
+    },
+    {
+      "id": "736e1c6006fd243c9cc384b61c478e97",
+      "label": "Devin Fusion CLI - Claude Opus 5.5 Max + GPT-6 Luna High",
+      "agent": "Devin Fusion CLI",
+      "model": "Claude Opus 5.5 Max + GPT-6 Luna High",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.615117219506897,
+      "totalCostUsd": 2236.37703522834,
+      "meanCostPerTaskUsd": 7.99768820548534,
+      "pricedTaskCount": 279.627935,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.536293333333333
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.682795698924731
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.626262626262626
+        }
+      ]
+    },
+    {
+      "id": "dabb064c01568bc018ba730cc39c4a96",
+      "label": "Devin Fusion CLI - GPT-6 Astra XHigh + SWE-2 Medium",
+      "agent": "Devin Fusion CLI",
+      "model": "GPT-6 Astra XHigh + SWE-2 Medium",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.530769734767025,
+      "totalCostUsd": 1181.72610203667,
+      "meanCostPerTaskUsd": 4.33822148437056,
+      "pricedTaskCount": 272.398748,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.490158666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.602150537634409
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.5
+        }
+      ]
+    },
+    {
+      "id": "a92c8b68f37df782f0e978e0e302b023",
+      "label": "Grok Build - Grok 4.7 (xhigh)",
+      "agent": "Grok Build",
+      "model": "Grok 4.7 (xhigh)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.465968752688172,
+      "totalCostUsd": 2448.113394,
+      "meanCostPerTaskUsd": 9.47935653344195,
+      "pricedTaskCount": 258.257339,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.435540666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.629032258064516
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.333333333333333
+        }
+      ]
+    },
+    {
+      "id": "88c83705811535bca8ee000bfd3a256c",
+      "label": "Kimi Code CLI - Kimi K3",
+      "agent": "Kimi Code CLI",
+      "model": "Kimi K3",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.41417319257087,
+      "totalCostUsd": 1290.673628555,
+      "meanCostPerTaskUsd": 5.16526976917945,
+      "pricedTaskCount": 249.875357,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.430936
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.599462365591398
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.212121212121212
+        }
+      ]
+    },
+    {
+      "id": "accfbb12d349c0f2c93547ce814534b2",
+      "label": "Mirror - Beam 1.0",
+      "agent": "Mirror",
+      "model": "Beam 1.0",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.20478987379168,
+      "totalCostUsd": null,
+      "meanCostPerTaskUsd": null,
+      "pricedTaskCount": null,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.202672
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.376344086021506
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.0353535353535354
+        }
+      ]
+    },
+    {
+      "id": "f09fd629724ff1b103982a6158d00183",
+      "label": "Muse Code - Muse Spark 1.3 (max)",
+      "agent": "Muse Code",
+      "model": "Muse Spark 1.3 (max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "indexScore": 0.457077885630498,
+      "totalCostUsd": 903.532221575,
+      "meanCostPerTaskUsd": 3.91029139020419,
+      "pricedTaskCount": 231.06519,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.467030333333333
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.586021505376344
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.318181818181818
+        }
+      ]
+    },
+    {
+      "id": "d843fce803ff4f84ababc47040306116",
+      "label": "Muse Code - Muse Spark Open (xhigh)",
+      "agent": "Muse Code",
+      "model": "Muse Spark Open (xhigh)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.263007023894863,
+      "totalCostUsd": 552.135411283333,
+      "meanCostPerTaskUsd": 3.54324946048794,
+      "pricedTaskCount": 155.827417,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 299,
+          "reward": 0.225401
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.508064516129032
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.0555555555555556
+        }
+      ]
+    },
+    {
+      "id": "52f72f7f3393c5edf92b32326e7a678d",
+      "label": "Muse Code - Muse Wonder (max)",
+      "agent": "Muse Code",
+      "model": "Muse Wonder (max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.519768236993592,
+      "totalCostUsd": 1969.91115066667,
+      "meanCostPerTaskUsd": 8.04811220428196,
+      "pricedTaskCount": 244.76686,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.463915333333333
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.615591397849462
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.47979797979798
+        }
+      ]
+    },
+    {
+      "id": "047ef12b001416f72e30e1ad633988e2",
+      "label": "Muse Code - Muse Wonder Full (max)",
+      "agent": "Muse Code",
+      "model": "Muse Wonder Full (max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.588804489084392,
+      "totalCostUsd": null,
+      "meanCostPerTaskUsd": null,
+      "pricedTaskCount": null,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.487332333333333
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.688172043010753
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.590909090909091
+        }
+      ]
+    },
+    {
+      "id": "96d7404e06194027474a6cc3bb31c068",
+      "label": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
+      "agent": "Opencode",
+      "model": "GLM-5.3",
+      "isDefault": true,
+      "isUnavailable": false,
+      "indexScore": 0.489161690344303,
+      "totalCostUsd": 1348.18484175333,
+      "meanCostPerTaskUsd": 5.23102713863476,
+      "pricedTaskCount": 257.728512,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.482473666666667
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.586021505376344
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.398989898989899
+        }
+      ]
+    }
+  ],
+  "indexVersion": "Coding Agent Index v2.0 (FrontierCode v1.1 Main, Terminal-Bench 4.0, SWE-Atlas-QnA-AA; DeepSWE v1.1 removed)",
+  "note": "Coding Agent Index v2.0 capture (FrontierCode v1.1 Main, Terminal-Bench 4.0, SWE-Atlas-QnA-AA; DeepSWE v1.1 removed; owner decision O50), a pipeline input: valuerank/basket.py prices its 290 required tasks from each pinned record's mean cost per task. capturedAt is the time of the HTTPS fetch."
+}

@@ -14,7 +14,7 @@ import pytest
 
 from valuerank import capture_aa as ca
 
-NOW = "2026-10-17T20:23:57Z"  # pinned_clock instant
+NOW = "2026-10-23T06:26:23Z"  # pinned_clock instant
 
 
 def _shifted(delta: timedelta) -> str:
@@ -86,7 +86,7 @@ def entry(model_id="m", **extra):
 
 def preserved(model_id="m", capture=None, **overrides):
     page = {"id": model_id, "url": f"https://artificialanalysis.ai/models/{model_id}", "model": {"slug": model_id},
-            "capture": {"observedAt": "2026-10-15T00:00:00Z", "precision": "rounded", "method": "browser"}}
+            "capture": {"observedAt": "2026-10-19T00:00:00Z", "precision": "rounded", "method": "browser"}}
     if capture is not None:
         page["capture"] = capture
     page.update(overrides)
@@ -102,7 +102,7 @@ def test_fresh_preserved_capture_is_reused_unchanged(pinned_clock):
 
 
 def test_preserved_capture_accepts_captured_at_when_no_observed_at(pinned_clock):
-    existing = preserved(capture={"capturedAt": "2026-10-16T12:00:00+00:00", "precision": "p", "method": "m"})
+    existing = preserved(capture={"capturedAt": "2026-10-19T12:00:00+00:00", "precision": "p", "method": "m"})
     assert ca.preserved_public_capture(entry(), {"m": existing}) is existing
 
 

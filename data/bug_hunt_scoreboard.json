@@ -1,0 +1,1022 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "Bug Hunt Bench",
+  "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/combined-scoreboard.csv",
+  "capturedAt": "2026-10-23T05:37:06Z",
+  "sourceUpdated": "2026-10-19",
+  "sha256": "1636e4e08269a5d9b57214438f030374fb2b127cfe88cbb100734ac0195f490b",
+  "purpose": "Every row of the owner's combined scoreboard at the pinned commit, so the build can check that every configuration with an exact AA DeepSWE result and a Bug Hunt result is in the roster (owner decision O31).",
+  "rows": [
+    {
+      "model": "GPT-5.6 Sol",
+      "harness": "Codex CLI",
+      "fixedOf105": 31.0
+    },
+    {
+      "model": "Fable 5",
+      "harness": "Claude Code",
+      "fixedOf105": 24.0
+    },
+    {
+      "model": "Opus 5",
+      "harness": "Claude Code",
+      "fixedOf105": 21.0
+    },
+    {
+      "model": "Kimi K3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 21.0
+    },
+    {
+      "model": "Grok 4.5",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 16.0
+    },
+    {
+      "model": "Opus 4.8",
+      "harness": "Claude Code",
+      "fixedOf105": 9.0
+    },
+    {
+      "model": "Sonnet 5",
+      "harness": "Claude Code",
+      "fixedOf105": 9.0
+    },
+    {
+      "model": "GPT-5.6 Sol (re-run Jul 31)",
+      "harness": "Codex CLI",
+      "fixedOf105": 34.0
+    },
+    {
+      "model": "GPT-5.6 Luna (max effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 33.0
+    },
+    {
+      "model": "GPT-5.6 Luna (high effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 13.0
+    },
+    {
+      "model": "DeepSeek V4-Flash",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 8.0
+    },
+    {
+      "model": "GPT-5.6 Sol (max effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 42.0
+    },
+    {
+      "model": "Fable 5 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 29.0
+    },
+    {
+      "model": "Opus 5 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 27.0
+    },
+    {
+      "model": "Grok 4.5 (high re-run - CLI has no max)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 13.0
+    },
+    {
+      "model": "DeepSeek V4-Flash 0731",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 14.0
+    },
+    {
+      "model": "DeepSeek V4-Pro",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 10.0
+    },
+    {
+      "model": "Qwen3.8-Max",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "Muse Spark 1.2 (xhigh, Meta API)",
+      "harness": "Claude Code / Meta API",
+      "fixedOf105": 17.0
+    },
+    {
+      "model": "Grok 4.5 (re-run Aug 6)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 17.0
+    },
+    {
+      "model": "Muse Spark 1.2 (default effort, OpenRouter)",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 14.0
+    },
+    {
+      "model": "Grok 4.6 (xhigh)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 27.0
+    },
+    {
+      "model": "Gemini 3.7 Flash (high)",
+      "harness": "Gemini CLI / Google API",
+      "fixedOf105": 22.0
+    },
+    {
+      "model": "Gemini 3.7 Flash (high; Antigravity CLI retest)",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 18.0
+    },
+    {
+      "model": "Ox Alpha (stealth; free)",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 16.0
+    },
+    {
+      "model": "GLM-5.3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "GLM-5.3 Flash",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 13.0
+    },
+    {
+      "model": "GPT-5.6 Luna (low effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 4.0
+    },
+    {
+      "model": "GPT-5.6 Luna (medium effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 9.0
+    },
+    {
+      "model": "Grok 4.6 (low)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 15.0
+    },
+    {
+      "model": "Grok 4.6 (medium)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 23.0
+    },
+    {
+      "model": "Opus 5 (medium effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 24.0
+    },
+    {
+      "model": "GPT-5.6 Terra (max effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "GPT-5.6 Terra (high effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 18.0
+    },
+    {
+      "model": "GPT-5.6 Terra (medium effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 15.0
+    },
+    {
+      "model": "GPT-5.6 Luna (xhigh effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 23.0
+    },
+    {
+      "model": "Grok 4.6 (high)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 23.0
+    },
+    {
+      "model": "GPT-5.6 Terra (xhigh effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 20.0
+    },
+    {
+      "model": "Grok 4.6 (xhigh) seq",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 27.0
+    },
+    {
+      "model": "Grok 4.6 (medium) seq",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 22.0
+    },
+    {
+      "model": "Gemini 3.7 Flash seq",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 16.0
+    },
+    {
+      "model": "GPT-5.6 Sol (xhigh effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 39.0
+    },
+    {
+      "model": "Opus 5 (xhigh effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 26.0
+    },
+    {
+      "model": "Hy4 Preview",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 18.0
+    },
+    {
+      "model": "Fable 5.1 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 43.0
+    },
+    {
+      "model": "Fable 5.1",
+      "harness": "Claude Code",
+      "fixedOf105": 33.0
+    },
+    {
+      "model": "Fable 5.1 (low effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 29.0
+    },
+    {
+      "model": "Gemini 3.8 Flash",
+      "harness": "Claude Code",
+      "fixedOf105": 20.0
+    },
+    {
+      "model": "GPT-6 Astra (max effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 48.0
+    },
+    {
+      "model": "GPT-6 Astra (xhigh effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 43.0
+    },
+    {
+      "model": "GPT-6 Astra (high effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 35.0
+    },
+    {
+      "model": "GPT-6 Astra (medium effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 34.0
+    },
+    {
+      "model": "GPT-6 Astra (low effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 27.0
+    },
+    {
+      "model": "GPT-5.6 Sol (medium effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 29.0
+    },
+    {
+      "model": "DeepSeek V4.1 Flash (max effort)",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 24.0
+    },
+    {
+      "model": "DeepSeek V4.1 Flash (high effort)",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "DeepSeek V4-Pro (max effort, DeepSeek API)",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 16.0
+    },
+    {
+      "model": "DeepSeek V4-Pro (high effort, DeepSeek API)",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 13.0
+    },
+    {
+      "model": "Fable 5.1 (medium effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 21.0
+    },
+    {
+      "model": "Opus 4.8 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 15.0
+    },
+    {
+      "model": "Sonnet 5 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 9.0
+    },
+    {
+      "model": "Fable 5.1 (xhigh effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 29.0
+    },
+    {
+      "model": "GLM-5.3 (max effort, Z.ai API)",
+      "harness": "Claude Code / Z.ai API",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "Qwen3.8-Flash (low effort)",
+      "harness": "Claude Code / Alibaba API",
+      "fixedOf105": 23.0
+    },
+    {
+      "model": "Qwen3.8-Flash (max effort)",
+      "harness": "Claude Code / Alibaba API",
+      "fixedOf105": 26.0
+    },
+    {
+      "model": "Qwen3.8-Max (max effort, Alibaba API)",
+      "harness": "Claude Code / Alibaba API",
+      "fixedOf105": 28.0
+    },
+    {
+      "model": "Qwen3.8-27B (xhigh effort, Alibaba API)",
+      "harness": "Claude Code / Alibaba API",
+      "fixedOf105": 15.0
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 0.0
+    },
+    {
+      "model": "gpt-oss-20b",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 0.0
+    },
+    {
+      "model": "Muse Spark 1.3 (high effort, Muse Code, OpenRouter)",
+      "harness": "Muse Code / OpenRouter",
+      "fixedOf105": 18.0
+    },
+    {
+      "model": "GLM-5.3 Flash (max effort, Z.ai API)",
+      "harness": "Claude Code / Z.ai API",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "Muse Spark 1.3 (max effort, Muse Code, Meta API)",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 33.0
+    },
+    {
+      "model": "Muse Spark 1.3 (high effort, Muse Code, Meta API)",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API)",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 20.0
+    },
+    {
+      "model": "GLM-5.3 Flash (low effort, Z.ai API)",
+      "harness": "Claude Code / Z.ai API",
+      "fixedOf105": 9.0
+    },
+    {
+      "model": "GLM-5.3 Flash (high effort, Z.ai API)",
+      "harness": "Claude Code / Z.ai API",
+      "fixedOf105": 16.0
+    },
+    {
+      "model": "Muse Spark 1.3 (medium effort, Muse Code, Meta API)",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 9.0
+    },
+    {
+      "model": "Muse Spark 1.3 (low effort, Muse Code, Meta API) - mean of 3",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 9.7
+    },
+    {
+      "model": "Muse Spark 1.3 (medium effort, Muse Code, Meta API) - mean of 3",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 13.0
+    },
+    {
+      "model": "Muse Spark 1.3 (high effort, Muse Code, Meta API) - mean of 3",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 18.7
+    },
+    {
+      "model": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 20.3
+    },
+    {
+      "model": "Grok 4.6 (xhigh) seq - mean of 3",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 28.7
+    },
+    {
+      "model": "Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 3",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 33.7
+    },
+    {
+      "model": "GPT-6 Astra (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 45.0
+    },
+    {
+      "model": "DeepSeek V4.1 Flash (max effort) - mean of 3",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 21.7
+    },
+    {
+      "model": "GLM-5.3 Flash (max effort, Z.ai API) - mean of 3",
+      "harness": "Claude Code / Z.ai API",
+      "fixedOf105": 17.7
+    },
+    {
+      "model": "Gemini 3.8 Flash - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 18.0
+    },
+    {
+      "model": "Qwen3.8-27B (xhigh effort, Alibaba API) - mean of 3",
+      "harness": "Claude Code / Alibaba API",
+      "fixedOf105": 15.0
+    },
+    {
+      "model": "Qwen3.8-27B 8-bit (OpenRouter/Parasail)",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 8.0
+    },
+    {
+      "model": "Qwen3.8-Max (max effort, Alibaba API) - mean of 3",
+      "harness": "Claude Code / Alibaba API",
+      "fixedOf105": 25.7
+    },
+    {
+      "model": "gpt-oss-120b - mean of 3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 0.0
+    },
+    {
+      "model": "gpt-oss-20b - mean of 3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 0.0
+    },
+    {
+      "model": "Qwen3.8-27B 8-bit (OpenRouter/Parasail) - mean of 3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 10.7
+    },
+    {
+      "model": "Gemma 4 31B (OpenRouter/Crusoe)",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 4.0
+    },
+    {
+      "model": "Gemma 4 31B 4-bit (OpenRouter/CoreWeave)",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 3.0
+    },
+    {
+      "model": "GPT-5.6 Sol (max effort) - mean of 2",
+      "harness": "Codex CLI",
+      "fixedOf105": 43.5
+    },
+    {
+      "model": "Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 5",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 32.2
+    },
+    {
+      "model": "Union Alpha (stealth; free)",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "Union Alpha (stealth; free) - mean of 3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 30.7
+    },
+    {
+      "model": "Grok 4.7 (xhigh) seq - mean of 3",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 28.7
+    },
+    {
+      "model": "Grok 4.7 (xhigh) seq - mean of 4",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 28.8
+    },
+    {
+      "model": "Grok 4.7 (high)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "Grok 4.7 (medium)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 30.0
+    },
+    {
+      "model": "Grok 4.7 (low)",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 11.0
+    },
+    {
+      "model": "MiMo-V2.6-Pro",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 20.0
+    },
+    {
+      "model": "Grok 4.7 (high) - mean of 3",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 19.3
+    },
+    {
+      "model": "Grok 4.7 (medium) - mean of 3",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 26.7
+    },
+    {
+      "model": "MiMo-V2.6-Pro (first-party)",
+      "harness": "Claude Code / Xiaomi first-party",
+      "fixedOf105": 18.0
+    },
+    {
+      "model": "Grok 4.7 (low) - mean of 3",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 15.7
+    },
+    {
+      "model": "GPT-5.6 Luna (max effort) - mean of 2",
+      "harness": "Codex CLI",
+      "fixedOf105": 31.5
+    },
+    {
+      "model": "MiMo-V2.6-Pro - mean of 2",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 22.0
+    },
+    {
+      "model": "MiMo-V2.6-Pro - mean of 3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 22.7
+    },
+    {
+      "model": "GPT-5.6 Luna (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 31.3
+    },
+    {
+      "model": "Opus 5.5 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 43.0
+    },
+    {
+      "model": "MiMo-V2.6-Flash - mean of 3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 23.3
+    },
+    {
+      "model": "Opus 5.5 (xhigh effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 35.0
+    },
+    {
+      "model": "Opus 5.5 (high effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "Opus 5.5 (medium effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 30.0
+    },
+    {
+      "model": "GPT-6 Sol (max effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "Opus 5.5 (max effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 41.0
+    },
+    {
+      "model": "Opus 5.5 (xhigh effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 36.0
+    },
+    {
+      "model": "Opus 5.5 (high effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "Opus 5.5 (medium effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 30.0
+    },
+    {
+      "model": "Opus 5.5 (max effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 41.7
+    },
+    {
+      "model": "Opus 5.5 (xhigh effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 36.0
+    },
+    {
+      "model": "Opus 5.5 (high effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 31.7
+    },
+    {
+      "model": "Opus 5.5 (medium effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 30.3
+    },
+    {
+      "model": "GPT-6 Sol (max effort) - mean of 2",
+      "harness": "Codex CLI",
+      "fixedOf105": 31.0
+    },
+    {
+      "model": "Opus 5.5 (low effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 23.0
+    },
+    {
+      "model": "Opus 5.5 (low effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 24.0
+    },
+    {
+      "model": "Opus 5.5 (low effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 22.3
+    },
+    {
+      "model": "GPT-6 Sol (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 29.3
+    },
+    {
+      "model": "GPT-6 Sol (xhigh effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 25.0
+    },
+    {
+      "model": "GPT-6 Sol (high effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 20.0
+    },
+    {
+      "model": "GPT-6 Sol (medium effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 14.0
+    },
+    {
+      "model": "GPT-6 Sol (low effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 6.0
+    },
+    {
+      "model": "GPT-6 Luna (max effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 17.0
+    },
+    {
+      "model": "GPT-6 Luna (max effort) - mean of 2",
+      "harness": "Codex CLI",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "GPT-6 Luna (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 18.3
+    },
+    {
+      "model": "GPT-6 Luna (xhigh effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 14.0
+    },
+    {
+      "model": "GPT-6 Luna (high effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 9.0
+    },
+    {
+      "model": "GPT-6 Luna (medium effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 4.0
+    },
+    {
+      "model": "GPT-6 Luna (low effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 4.0
+    },
+    {
+      "model": "Sonnet 5.5 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 57.0
+    },
+    {
+      "model": "Sonnet 5.5 (xhigh effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 39.0
+    },
+    {
+      "model": "Sonnet 5.5 (max effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 55.5
+    },
+    {
+      "model": "Sonnet 5.5 (high effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "Sonnet 5.5 (medium effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 18.0
+    },
+    {
+      "model": "Sonnet 5.5 (low effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 20.0
+    },
+    {
+      "model": "Sonnet 5.5 (max effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 51.3
+    },
+    {
+      "model": "Sonnet 5.5 (xhigh effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 36.0
+    },
+    {
+      "model": "Sonnet 5.5 (high effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 34.3
+    },
+    {
+      "model": "GPT-6.1 Sol (max effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 44.0
+    },
+    {
+      "model": "GPT-6.1 Sol (xhigh effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 41.0
+    },
+    {
+      "model": "Sonnet 5.5 (medium effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 23.3
+    },
+    {
+      "model": "Sonnet 5.5 (low effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 19.0
+    },
+    {
+      "model": "GPT-6.1 Sol (high effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 38.0
+    },
+    {
+      "model": "GPT-6.1 Sol (medium effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 28.0
+    },
+    {
+      "model": "GPT-6.1 Sol (low effort)",
+      "harness": "Codex CLI",
+      "fixedOf105": 31.0
+    },
+    {
+      "model": "GPT-6.1 Sol (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 44.3
+    },
+    {
+      "model": "GPT-6.1 Sol (xhigh effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 42.7
+    },
+    {
+      "model": "GPT-6.1 Sol (high effort) - mean of 2",
+      "harness": "Codex CLI",
+      "fixedOf105": 36.5
+    },
+    {
+      "model": "GPT-6.1 Sol (medium effort) - mean of 2",
+      "harness": "Codex CLI",
+      "fixedOf105": 29.0
+    },
+    {
+      "model": "GPT-6.1 Sol (low effort) - mean of 2",
+      "harness": "Codex CLI",
+      "fixedOf105": 22.5
+    },
+    {
+      "model": "Mistral Large 4 - mean of 3",
+      "harness": "Claude Code / OpenRouter",
+      "fixedOf105": 15.0
+    },
+    {
+      "model": "Haiku 5.5 (xhigh effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 18.3
+    },
+    {
+      "model": "Haiku 5.5 (max effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 22.0
+    },
+    {
+      "model": "Haiku 5.5 (high effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 15.0
+    },
+    {
+      "model": "Haiku 5.5 (max effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 21.5
+    },
+    {
+      "model": "Haiku 5.5 (high effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 16.0
+    },
+    {
+      "model": "Haiku 5.5 (medium effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 12.0
+    },
+    {
+      "model": "Haiku 5.5 (low effort)",
+      "harness": "Claude Code",
+      "fixedOf105": 11.0
+    },
+    {
+      "model": "Haiku 4.5 - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 1.5
+    },
+    {
+      "model": "Grok 4.7 (xhigh) - mean of 5",
+      "harness": "Grok Build CLI (ACP)",
+      "fixedOf105": 29.0
+    },
+    {
+      "model": "Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 31.7
+    },
+    {
+      "model": "Muse Wonder Full 1.0 (max effort, Muse Code, Meta API)",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 44.0
+    },
+    {
+      "model": "Gemini 4 Argon (high effort)",
+      "harness": "Gemini CLI",
+      "fixedOf105": 33.0
+    },
+    {
+      "model": "Muse Wonder Full 1.0 (xhigh effort, Muse Code, Meta API)",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 44.0
+    },
+    {
+      "model": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 40.7
+    },
+    {
+      "model": "Gemini 4 Argon (medium effort, Antigravity CLI) - mean of 2",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 36.0
+    },
+    {
+      "model": "Muse Wonder Full 1.0 (max effort, Muse Code, Meta API) - mean of 2",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 42.0
+    },
+    {
+      "model": "Muse Wonder Full 1.0 (xhigh effort, Muse Code, Meta API) - mean of 2",
+      "harness": "Muse Code / Meta API",
+      "fixedOf105": 41.5
+    },
+    {
+      "model": "Gemini 4 Argon (medium effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 39.3
+    },
+    {
+      "model": "Gemini 4 Argon (low effort, Antigravity CLI)",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "Gemini 4 Argon (low effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 35.3
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort)",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 34.0
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 2",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 35.5
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 3",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 38.7
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort) - mean of 2",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 32.0
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 5",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 39.4
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort) - mean of 5",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 36.4
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (low effort) - mean of 5",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 34.4
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 7",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 39.1
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7",
+      "harness": "DeepSeek Harness / DeepSeek API",
+      "fixedOf105": 42.7
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort, DeepSeek Harness) - mean of 5",
+      "harness": "DeepSeek Harness / DeepSeek API",
+      "fixedOf105": 39.2
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (low effort, DeepSeek Harness) - mean of 5",
+      "harness": "DeepSeek Harness / DeepSeek API",
+      "fixedOf105": 34.8
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort, Pi) - mean of 5",
+      "harness": "Pi / DeepSeek API",
+      "fixedOf105": 42.2
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort, Pi) - mean of 5",
+      "harness": "Pi / DeepSeek API",
+      "fixedOf105": 40.4
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (low effort, Pi) - mean of 5",
+      "harness": "Pi / DeepSeek API",
+      "fixedOf105": 33.8
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort, OpenCode) - mean of 5",
+      "harness": "OpenCode / DeepSeek API",
+      "fixedOf105": 37.6
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort, OpenCode) - mean of 5",
+      "harness": "OpenCode / DeepSeek API",
+      "fixedOf105": 36.6
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (low effort, OpenCode) - mean of 5",
+      "harness": "OpenCode / DeepSeek API",
+      "fixedOf105": 32.8
+    }
+  ]
+}

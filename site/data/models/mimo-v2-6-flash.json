@@ -7,61 +7,52 @@
   "selectedPage": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
   "summary": {
     "rank": {
-      "api": 12,
-      "plan": 16
+      "api": null,
+      "plan": null
     },
     "overall": {
-      "api": 43.4,
-      "plan": 32.0
+      "api": null,
+      "plan": null
     },
-    "quality": 24.5,
-    "qualityRank": 16,
+    "quality": null,
+    "qualityRank": null,
     "coverage": {
-      "pct": 57.94,
-      "costAvailable": true,
-      "availablePriority": 47,
-      "totalPriority": 107,
+      "pct": 0.0,
+      "costAvailable": false,
       "missing": [
-        "Terminal-Bench 4.0",
-        "Instruction Following (LiveBench)",
-        "DeepSWE v1.1",
-        "GPQA Diamond (legacy)",
-        "Bug Hunt Bench"
-      ]
+        "FrontierCode 1.1",
+        "Terminal-Bench 4.0 (AA run)",
+        "Bug Hunt Bench",
+        "Vibe Code Bench v1.1 (Vals)",
+        "Code Migration v1.1 (Vals)",
+        "LiveBench 2.0 Overall",
+        "GDPval-AA v2.1",
+        "AutomationBench-AA",
+        "AA-Omniscience",
+        "AA-LCR v1.1",
+        "Humanity's Last Exam",
+        "SciCode",
+        "CritPt"
+      ],
+      "provisional": null,
+      "provisionalReasons": []
     },
-    "grade": "measured",
-    "rankingEligible": true,
-    "exclusionReasons": []
+    "grade": "missing",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
+    ],
+    "flags": []
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": 2.891661762598039,
-      "unit": "USD per Index point",
-      "normalized": 100.0,
-      "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured",
-      "normalizedByBasis": {
-        "api": 100.0,
-        "plan": 54.3
-      }
-    },
-    {
-      "key": "deepswePassAt1",
-      "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
+      "key": "frontierCode",
+      "label": "FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 11.25,
       "value": null,
-      "unit": "% pass@1",
+      "decimals": 3,
+      "unit": "AA score (0-1)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -70,12 +61,13 @@
       "grade": "missing"
     },
     {
-      "key": "bugHuntFixedOf105",
-      "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
       "value": null,
-      "unit": "bugs fixed of 105",
+      "decimals": 1,
+      "unit": "mean of seven category scores (0-100)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -84,28 +76,12 @@
       "grade": "missing"
     },
     {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 45.64,
-      "unit": "% non-hallucination",
-      "normalized": 50.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (AA run)",
+      "category": "Software engineering",
+      "weightPct": 8.25,
       "value": null,
+      "decimals": 1,
       "unit": "% resolved",
       "normalized": null,
       "source": null,
@@ -115,46 +91,13 @@
       "grade": "missing"
     },
     {
-      "key": "gdpvalV21",
+      "key": "gdpval",
       "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
-      "value": 1607.51,
-      "unit": "Elo",
-      "normalized": 50.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 37.8843590141754,
-      "unit": "Index points",
-      "normalized": 19.4,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
+      "category": "Professional work",
+      "weightPct": 7.5,
       "value": null,
-      "unit": "score",
+      "decimals": 1,
+      "unit": "Elo",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -163,97 +106,103 @@
       "grade": "missing"
     },
     {
-      "key": "automationBenchAA",
+      "key": "automationBench",
       "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 64.05,
-      "unit": "% score",
-      "normalized": 66.7,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 51.9430960183717,
-      "unit": "tokens per second",
-      "normalized": 11.8,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "aaLcr",
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": null,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "lcr",
       "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 74.33,
-      "unit": "% accuracy",
-      "normalized": 0.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 27.0,
-      "unit": "% accuracy",
-      "normalized": 0.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 35.08,
-      "unit": "% accuracy",
-      "normalized": 0.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
       "value": null,
-      "unit": "% accuracy",
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -264,72 +213,62 @@
     {
       "key": "scicode",
       "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 51.27,
-      "unit": "% score",
-      "normalized": 11.1,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "critpt",
       "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 12.0,
-      "unit": "% score",
-      "normalized": 0.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
-      },
-      "observedAt": "2026-10-17",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
       "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     }
   ],
   "cost": {
-    "apiUsd": 109.54875236182735,
-    "apiUsdPerPoint": 2.891661762598039,
-    "planUsdPerRun": 73.03250157455157,
-    "planUsdPerPoint": 1.9277745083986928,
-    "planComparableUsdPerPoint": 1.9277745083986928,
+    "apiUsd": null,
+    "planUsd": null,
     "fallback": null,
-    "route": {
-      "id": "mimo-provisional-user-assumption",
-      "planLabel": "MiMo · provisional 1.5x assumption",
-      "planFeeUsd": null,
-      "valueMultiple": 1.5,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceModel": null,
-      "sourceUrl": null,
-      "sourceDate": null
-    }
+    "route": null,
+    "subset": null,
+    "partialComponents": [],
+    "workload": null,
+    "planFlags": [],
+    "costScore": {
+      "api": null,
+      "plan": null
+    },
+    "components": [],
+    "aaCostCaveat": null,
+    "selectionReason": null,
+    "planAmount": null
   },
-  "plans": [
-    {
-      "id": "mimo-provisional-user-assumption",
-      "planLabel": "MiMo · provisional 1.5x assumption",
-      "planFeeUsd": null,
-      "valueMultiple": 1.5,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": null,
-      "sourceDate": null,
-      "usdPerRun": 73.03250157455157,
-      "usdPerPoint": 1.9277745083986928,
-      "selected": true
-    }
-  ],
+  "plans": [],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.9.6",
@@ -360,7 +299,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 12,
-        "plan": 16
+        "plan": null
       }
     }
   ],
@@ -371,5 +310,37 @@
     "configuration": "MiMo-V2.6-Flash",
     "intelligenceGap": 0,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }

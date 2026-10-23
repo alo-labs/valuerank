@@ -3,18 +3,26 @@
 {%- from "partials/fmt.html" import num, usd, rank -%}
 {%- from "partials/coverage_bar.html" import coverage_bar -%}
 {%- from "partials/evidence_drawer.html" import evidence -%}
+{%- from "partials/footnotes.html" import fn_name, fn_item, fn_section -%}
 {% block content %}
 {%- set s = page.summary -%}
+{#- Evidence footnotes number through the dimension, basket-component and route tables in that order. -#}
+{%- set n_dims = page.dimensions | length -%}
+{%- set n_cost = n_dims + (page.cost.components | length if page.cost.components else 0) -%}
 <header class="page-head model-head">
   <p class="eyebrow"><a href="/rankings/">Rankings</a> / {{ page.developer }}</p>
   <h1 id="page-title">{{ page.name }}</h1>
   <p class="lead">
     {% if s.rankingEligible -%}
-      Ranked <strong>#{{ s.rank.plan }}</strong> on the plan basis and <strong>#{{ s.rank.api }}</strong> at API rates, with {{ s.coverage.pct | round(0) | int }}% of the scoring weight backed by evidence.
+      {%- set shown = (page.get("rankings") or []) | selectattr("shown") | list -%}
+      Ranked <strong>#{{ s.rank.plan }}</strong> on the plan basis and <strong>#{{ s.rank.api }}</strong> at API rates{% if shown %} in the {{ shown[0].label }}{% endif %}, with {{ s.coverage.pct | round(0) | int }}% of the quality weight observed for this exact configuration.
     {%- else -%}
       Not ranked. {{ s.exclusionReasons | join("; ") }}. Its evidence is shown below so the gaps are visible.
     {%- endif %}
   </p>
+  {%- if page.get("rankings") %}
+  <p class="note">{% for r in page.rankings %}<a href="{{ r.href }}">{{ r.label }}</a>: {% if r.rankingEligible %}#{{ r.rank.plan }} Plan, #{{ r.rank.api }} API{% else %}not ranked{% endif %}{{ " · " if not loop.last else "." }}{% endfor %}</p>
+  {%- endif %}
   <dl class="stat-row">
     <div class="stat"><dt>Plan ranking</dt><dd class="stat-val">{% if s.rank.plan is none %}&ndash;{% else %}#{{ s.rank.plan }}{% endif %}<small>{{ num(s.overall.plan) }} pts</small></dd></div>
     <div class="stat"><dt>API ranking</dt><dd class="stat-val">{% if s.rank.api is none %}&ndash;{% else %}#{{ s.rank.api }}{% endif %}<small>{{ num(s.overall.api) }} pts</small></dd></div>
@@ -32,22 +40,20 @@
 
 <section class="block" id="score-breakdown" aria-labelledby="breakdown-title">
   <h2 id="breakdown-title" class="section-title">Score breakdown</h2>
-  <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains.</p>
+  <p class="muted">Each dimension shows the raw value, how it scales to 0&ndash;100, and where it came from. Missing values are left out and the score is renormalised over what remains. The number after each dimension links to its evidence grade and provenance in the <a href="#evidence-notes">Evidence</a> section.</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Score breakdown table">
     <table id="dimension-table" class="data-table">
       <thead><tr>
-        <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Evidence</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
+        <th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Value</th><th scope="col">Unit</th><th scope="col" class="col-num">Normalised</th><th scope="col">Source and date</th><th scope="col" class="col-num">Weight</th>
       </tr></thead>
       <tbody>
         {%- for d in page.dimensions %}
         <tr class="{{ 'row-missing' if d.grade == 'missing' else '' }}">
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ d.label }}</span><span class="model-dev">{{ d.category }}</span></span></th>
-          <td class="cell-num">{{ num(d.value) }}</td>
+          <th scope="row" class="cell-model"><span class="model-id">{% call fn_name("dim-" ~ loop.index, loop.index, d.label) %}<span class="model-name">{{ d.label }}</span>{% endcall %}<span class="model-dev">{{ d.category }}</span></span></th>
+          <td class="cell-num">{{ num(d.value, d.decimals) }}</td>
           <td class="muted">{{ d.unit }}</td>
           <td class="cell-num">{{ num(d.normalized) }}</td>
-          <td>{{ badge(d.grade) }}</td>
-          <td>{% if d.source %}<a href="{{ d.source.url }}" rel="noopener">{{ d.source.name }}</a>{% else %}<span class="na">No source</span>{% endif %}<br><span class="muted small">{{ d.observedAt if d.observedAt else "no observation" }}</span>
-            {{ evidence(d) }}</td>
+          <td>{% if d.source %}<a href="{{ d.source.url }}" rel="noopener">{{ d.source.name }}</a>{% else %}<span class="na">No source</span>{% endif %}<br><span class="muted small">{{ d.observedAt if d.observedAt else "no observation" }}</span></td>
           <td class="cell-num">{{ num(d.weightPct, 1) }}%</td>
         </tr>
         {%- endfor %}
@@ -57,34 +63,74 @@
 </section>
 
 <section class="block" id="plan-routes" aria-labelledby="routes-title">
-  <h2 id="routes-title" class="section-title">Plan routes and cost</h2>
-  <p class="muted">API cost to run the Intelligence Index: <strong>{{ usd(page.cost.apiUsd, 0) }}</strong>{% if page.cost.apiUsdPerPoint is not none %}, or <strong>{{ usd(page.cost.apiUsdPerPoint, 2) }}</strong> per Index point, the cost the API ranking compares{% endif %}.
-    {% if page.cost.fallback %}No subscription route is measured for this model, so the plan ranking falls back to API cost ({{ page.cost.fallback }}).{% endif %}</p>
+  <h2 id="routes-title" class="section-title">Cost and plan routes</h2>
+  <p class="muted">Cost is the contestant-model API token cost of one run of the SDLC basket: <strong>{{ usd(page.cost.apiUsd, 2) }}</strong> at API rates{% if page.cost.planUsd is not none %} and <strong>{{ usd(page.cost.planUsd, 2) }}</strong> on the plan basis{% endif %}.
+    {% if page.cost.fallback %}No subscription route is admitted for this model, so the plan ranking uses its API cost.{% elif page.cost.selectionReason %}Route chosen by: {{ page.cost.selectionReason }}.{% endif %}</p>
+  {%- set pa = page.cost.planAmount %}
+  {%- if pa %}
+  <p class="muted small">Selected route's amount: {% if pa.amountUsd is not none %}<strong>{{ usd(pa.amountUsd, 0) }}</strong> per {{ pa.feePeriod }} &mdash; {% endif %}{{ pa.amountKind }}{% if pa.donorRouteId %} (transferred from <span class="mono">{{ pa.donorRouteId }}</span>){% endif %}. It is the Value Multiple times the cash paid ({{ usd(pa.grossCashUsd, 0) if pa.grossCashUsd is not none else "fee not established" }}), not a promise of what your own usage will reach.</p>
+  {%- endif %}
+  {%- if s.flags %}
+  <ul class="plain-list small">{% for f in s.flags %}<li>{{ f }}</li>{% endfor %}</ul>
+  {%- endif %}
   {%- if page.frontier and page.frontier.footnote %}
   <p class="note" id="aa-footnote"><strong>Artificial Analysis note:</strong> {{ page.frontier.footnote }}</p>
   {%- endif %}
-  {%- if page.plans %}
-  <div class="table-wrap" tabindex="0" role="region" aria-label="Plan routes and cost table">
+  {%- if page.cost.components %}
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Basket components table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value multiple</th><th scope="col" class="col-num">USD per run</th><th scope="col" class="col-num">USD per Index point</th><th scope="col">Evidence</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Basket component</th><th scope="col" class="col-num">API cost (USD)</th><th scope="col">In the scored basket</th></tr></thead>
+      <tbody>
+        {%- for c in page.cost.components %}
+        <tr>
+          <th scope="row" class="cell-model">{% call fn_name("cost-" ~ loop.index, n_dims + loop.index, c.label) %}<span class="model-name">{{ c.label }}</span>{% endcall %}</th>
+          <td class="cell-num">{{ usd(c.costUsd, 2) }}</td>
+          <td>{{ "yes" if c.admitted else "no (pending)" }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  {%- endif %}
+  {%- if page.plans %}
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Plan routes table">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th><th scope="col" class="col-num">Plan rank</th></tr></thead>
       <tbody>
         {%- for r in page.plans %}
         <tr{% if r.selected %} class="row-selected" aria-label="Selected route"{% endif %}>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="{{ r.sourceUrl }}" rel="noopener">{{ r.planLabel }}</a>{% if r.selected %}<span class="model-dev">Selected route</span>{% endif %}</span></th>
+          <th scope="row" class="cell-model"><span class="model-id">{% call fn_name("route-" ~ loop.index, n_cost + loop.index, r.planLabel) %}{% if r.sourceUrl %}<a class="model-name" href="{{ r.sourceUrl }}" rel="noopener">{{ r.planLabel }}</a>{% else %}<span class="model-name">{{ r.planLabel }}</span>{% endif %}{% endcall %}{% if r.selected %}<span class="model-dev">Selected route</span>{% elif not r.officialDisplayEligible %}<span class="model-dev">Diagnostic only</span>{% endif %}</span></th>
           <td class="cell-num">{{ usd(r.planFeeUsd, 0) }}</td>
-          <td class="cell-num">{{ num(r.valueMultiple, 1) }}&times;</td>
-          <td class="cell-num">{{ usd(r.usdPerRun) }}</td>
-          <td class="cell-num">{{ usd(r.usdPerPoint, 3) }}</td>
-          <td>{{ badge(r.grade, hint=r.evidenceLabel) }}<br><span class="muted small">{{ r.sourceDate }}</span></td>
+          <td class="cell-num">{{ num(r.valueMultiple, 2) }}&times;</td>
+          <td class="cell-num">{{ usd(r.usdPerRun, 2) }}</td>
+          <td class="cell-num">{{ r.get("planRank") if r.get("planRank") is not none else "—" }}</td>
         </tr>
         {%- endfor %}
       </tbody>
     </table>
   </div>
   {%- else %}
-  <p class="state-box">No subscription route has an eligible measurement for this model.</p>
+  <p class="state-box">No subscription route names this model.</p>
   {%- endif %}
 </section>
+
+{%- set sc = page.scenarios %}
+{%- if sc.status == "current" and sc.plan %}
+<section class="block" id="scenarios" aria-labelledby="scenarios-title">
+  <h2 id="scenarios-title" class="section-title">How stable is the rank?</h2>
+  <p class="muted">Share of scenarios in which this configuration ranks first, ranks in the top three, or sits on the cost&ndash;quality frontier. Scenario shares are frequencies over declared streams, not probabilities.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Scenario shares table">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-model">Stream</th><th scope="col">Basis</th><th scope="col" class="col-num">Rank 1</th><th scope="col" class="col-num">Top 3</th><th scope="col" class="col-num">Frontier</th></tr></thead>
+      <tbody>
+        {%- for basis in ["plan", "api"] %}{% for r in sc[basis] %}
+        <tr><th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ r.stratum }}{% if r.kernel != "primary" %} ({{ r.kernel }}){% endif %}</span><span class="model-dev">{{ r.targetProfile }}</span></span></th><td>{{ basis }}</td>{% if r.unevaluable %}<td class="cell-num" colspan="3"><span class="muted small">Unevaluable: {{ r.unevaluable }}</span></td>{% else %}<td class="cell-num">{{ num(100 * r.top1, 1) }}%</td><td class="cell-num">{{ num(100 * r.top3, 1) }}%</td><td class="cell-num">{{ num(100 * r.frontier, 1) }}%</td>{% endif %}</tr>
+        {%- endfor %}{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{%- endif %}
 
 <section class="block" id="rank-history" aria-labelledby="history-title">
   <h2 id="history-title" class="section-title">Rank history</h2>
@@ -94,7 +140,7 @@
       <thead><tr><th scope="col" class="col-model">Version</th><th scope="col">Date</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th></tr></thead>
       <tbody>
         {%- for h in page.history | reverse %}
-        <tr><th scope="row" class="cell-model"><span class="mono">{{ h.version }}</span></th><td>{{ h.date }}</td><td class="cell-num">{{ rank(h.rank.plan) }}</td><td class="cell-num">{{ rank(h.rank.api) }}</td></tr>
+        <tr><th scope="row" class="cell-model"><span class="mono">{{ h.version }}</span></th><td>{{ h.date or "&ndash;" | safe }}</td><td class="cell-num">{{ rank(h.rank.plan) }}</td><td class="cell-num">{{ rank(h.rank.api) }}</td></tr>
         {%- endfor %}
       </tbody>
     </table>
@@ -115,4 +161,29 @@
   </ul>
 </section>
 {%- endif %}
+
+{% call fn_section() %}
+  <h3 class="subhead">Score breakdown</h3>
+  <ol class="footnotes">
+    {%- for d in page.dimensions %}
+    {% call fn_item("dim-" ~ loop.index, d.label) %}{{ badge(d.grade) }}{{ evidence(d) }}{% endcall %}
+    {%- endfor %}
+  </ol>
+  {%- if page.cost.components %}
+  <h3 class="subhead">Basket components</h3>
+  <ol class="footnotes" start="{{ n_dims + 1 }}">
+    {%- for c in page.cost.components %}
+    {% call fn_item("cost-" ~ loop.index, c.label) %}<span class="fn-text">{{ c.completeness }}</span> <span class="muted">{{ c.source }}</span>{% endcall %}
+    {%- endfor %}
+  </ol>
+  {%- endif %}
+  {%- if page.plans %}
+  <h3 class="subhead">Plan routes</h3>
+  <ol class="footnotes" start="{{ n_cost + 1 }}">
+    {%- for r in page.plans %}
+    {% call fn_item("route-" ~ loop.index, r.planLabel) %}{{ badge(r.grade, hint=r.evidenceLabel) }} <span class="fn-text">{{ r.evidenceLabel }}</span> <span class="muted small">{{ r.sourceDate }}</span>{% if r.sourceUrl %} <a href="{{ r.sourceUrl }}" rel="noopener">Source</a>{% endif %}{% endcall %}
+    {%- endfor %}
+  </ol>
+  {%- endif %}
+{% endcall %}
 {% endblock %}

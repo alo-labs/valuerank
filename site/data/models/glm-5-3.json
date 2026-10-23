@@ -7,314 +7,268 @@
   "selectedPage": "https://artificialanalysis.ai/models/glm-5-3",
   "summary": {
     "rank": {
-      "api": 16,
-      "plan": 15
+      "api": null,
+      "plan": null
     },
     "overall": {
-      "api": 36.9,
-      "plan": 32.9
+      "api": null,
+      "plan": null
     },
-    "quality": 40.8,
-    "qualityRank": 12,
+    "quality": null,
+    "qualityRank": null,
     "coverage": {
-      "pct": 100.0,
-      "costAvailable": true,
-      "availablePriority": 107,
-      "totalPriority": 107,
-      "missing": []
+      "pct": 0.0,
+      "costAvailable": false,
+      "missing": [
+        "FrontierCode 1.1",
+        "Terminal-Bench 4.0 (AA run)",
+        "Bug Hunt Bench",
+        "Vibe Code Bench v1.1 (Vals)",
+        "Code Migration v1.1 (Vals)",
+        "LiveBench 2.0 Overall",
+        "GDPval-AA v2.1",
+        "AutomationBench-AA",
+        "AA-Omniscience",
+        "AA-LCR v1.1",
+        "Humanity's Last Exam",
+        "SciCode",
+        "CritPt"
+      ],
+      "provisional": null,
+      "provisionalReasons": []
     },
-    "grade": "measured",
-    "rankingEligible": true,
-    "exclusionReasons": []
+    "grade": "missing",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+    ],
+    "flags": []
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": 55.909434466147715,
-      "unit": "USD per Index point",
-      "normalized": 25.1,
-      "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "key": "frontierCode",
+      "label": "FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured",
-      "normalizedByBasis": {
-        "api": 25.1,
-        "plan": 9.0
-      }
+      "grade": "missing"
     },
     {
-      "key": "deepswePassAt1",
-      "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
-      "value": 61.4,
-      "unit": "% pass@1",
-      "normalized": 26.7,
-      "source": {
-        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-      },
-      "observedAt": "2026-10-17T19:26:26Z",
-      "evaluatedVariant": "Opencode / GLM-5.3 / max",
-      "note": "Exact variant: chart model GLM-5.3 (max) matches the roster display name 'GLM-5.3' at effort max.",
-      "grade": "measured"
-    },
-    {
-      "key": "bugHuntFixedOf105",
-      "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
-      "value": 19.0,
-      "unit": "bugs fixed of 105",
-      "normalized": 29.4,
-      "source": {
-        "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-glm-53-max-effort-zai-api"
-      },
-      "observedAt": "2026-10-18",
-      "evaluatedVariant": "GLM-5.3 (max effort, Z.ai API)",
-      "note": "Single official run; treat as one draw.",
-      "grade": "measured"
-    },
-    {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 70.45,
-      "unit": "% non-hallucination",
-      "normalized": 83.3,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": null,
+      "decimals": 1,
+      "unit": "mean of seven category scores (0-100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
-      "value": 41.8,
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (AA run)",
+      "category": "Software engineering",
+      "weightPct": 8.25,
+      "value": null,
+      "decimals": 1,
       "unit": "% resolved",
-      "normalized": 66.7,
-      "source": {
-        "name": "Terminal-Bench 4.0 leaderboard",
-        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "Claude Code / GLM-5.3",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "gdpvalV21",
+      "key": "gdpval",
       "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
-      "value": 1650.31,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
       "unit": "Elo",
-      "normalized": 66.7,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 44.777392385614,
-      "unit": "Index points",
-      "normalized": 41.7,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
-      "value": 69.304,
-      "unit": "score",
-      "normalized": 54.5,
-      "source": {
-        "name": "LiveBench release 2026_06_25",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "glm-5.3",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "automationBenchAA",
+      "key": "automationBench",
       "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 62.2,
-      "unit": "% score",
-      "normalized": 61.1,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 80.6004452857788,
-      "unit": "tokens per second",
-      "normalized": 41.2,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
-      "key": "aaLcr",
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": null,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "lcr",
       "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 79.67,
-      "unit": "% accuracy",
-      "normalized": 27.8,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 33.85,
-      "unit": "% accuracy",
-      "normalized": 11.1,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
-      "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 42.26,
-      "unit": "% accuracy",
-      "normalized": 27.8,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 91.72,
-      "unit": "% accuracy",
-      "normalized": 25.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
-      "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "scicode",
       "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 59.03,
-      "unit": "% score",
-      "normalized": 77.8,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     },
     {
       "key": "critpt",
       "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 19.14,
-      "unit": "% score",
-      "normalized": 33.3,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/glm-5-3"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "max",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
       "note": null,
-      "grade": "measured"
+      "grade": "missing"
     }
   ],
   "cost": {
-    "apiUsd": 2503.478685148468,
-    "apiUsdPerPoint": 55.909434466147715,
-    "planUsdPerRun": null,
-    "planUsdPerPoint": null,
-    "planComparableUsdPerPoint": 55.909434466147715,
-    "fallback": "api",
-    "route": null
+    "apiUsd": null,
+    "planUsd": null,
+    "fallback": null,
+    "route": null,
+    "subset": null,
+    "partialComponents": [],
+    "workload": null,
+    "planFlags": [],
+    "costScore": {
+      "api": null,
+      "plan": null
+    },
+    "components": [],
+    "aaCostCaveat": null,
+    "selectionReason": null,
+    "planAmount": null
   },
   "plans": [],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.5.0",
@@ -401,7 +355,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 16,
-        "plan": 15
+        "plan": null
       }
     }
   ],
@@ -412,5 +366,37 @@
     "configuration": null,
     "intelligenceGap": null,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    }
+  ]
 }

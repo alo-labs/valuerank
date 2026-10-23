@@ -1,0 +1,57 @@
+name: Subscription usage report
+description: Report how much API-priced usage you actually got from an AI subscription plan, for ValueRank's Plan (subscription) ranking.
+title: "[Usage report] <provider> <plan> — <model>"
+labels: ["usage-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ValueRank's Plan ranking divides a configuration's API cost by the plan's **value multiple**: the API-priced value of the usage a subscriber actually consumed in one billing period, divided by the plan's fee. Only end-user measurements count as the numerator; a provider's published quota, allowance or "N times more usage" claim does not.
+        Reports from the last 30 days are used. Please give the exact model you used; mixed or unnamed model use is kept at plan level and not applied to a specific model. Do not paste API keys, cookies or account identifiers.
+  - type: input
+    id: provider_plan
+    attributes:
+      label: Provider, plan tier and price
+      description: e.g. "Xiaomi MiMo Token Plan Pro, CNY 199 per month" or "ChatGPT Plus, USD 20 per month"
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Exact model and reasoning effort
+      description: e.g. "MiMo-V2.6-Pro, thinking on" or "GPT-6.1 Sol, high". Say "mixed" if you used several models.
+    validations:
+      required: true
+  - type: input
+    id: window
+    attributes:
+      label: Measurement window
+      description: Start and end dates (UTC) of the usage you measured, e.g. "2026-10-01 to 2026-10-21", and whether you hit the plan's limit.
+    validations:
+      required: true
+  - type: textarea
+    id: usage
+    attributes:
+      label: Usage measured
+      description: Tokens by category (input, cached input, output) or requests, as your tool or the provider's dashboard reported them.
+    validations:
+      required: true
+  - type: textarea
+    id: api_value
+    attributes:
+      label: API-priced value and how you computed it
+      description: The value of that usage at the provider's pay-as-you-go API prices for the same model, with the prices you used. An estimate is accepted and labelled as one.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence (optional)
+      description: Links or screenshots of usage logs or dashboards, with personal identifiers removed.
+  - type: input
+    id: report_date
+    attributes:
+      label: Report date
+      description: Today's date (UTC).
+    validations:
+      required: true

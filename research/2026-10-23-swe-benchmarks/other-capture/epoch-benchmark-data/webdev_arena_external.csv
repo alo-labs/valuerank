@@ -1,0 +1,194 @@
+Model version,Arena Score,Release date,Organization,Country,Training compute (FLOP),Training compute notes,Score 95% CI,Votes,Last updated,Source,Source link (site from table),Notes,95% CI High,95% CI Low,id
+claude-opus-5-5_max,1820.31,2026-09-22,Anthropic,United States of America,,,,1887,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1837.24,1803.38,recmgLSDio5a8hfWC
+gpt-6-astra_max,1800.28,2026-09-03,OpenAI,United States of America,9.4e+26,"per OpenAI and affiliates (e.g. Nvidia), 6 Astra was trained on at least 100,000 GB200s in Abilene, Texas (so 100,000 in ""Hardware quantity"" is a lower bound/underestimate).
+
+This suggests around 9e26 FLOP (corresponding to ~100k GB200s over 90 days at 25% FP8 MFU). See more detailed estimate in this notebook, yielding a CI of ~[5e26, 2e27] FLOP.
+https://colab.research.google.com/drive/1DRlugIQs-_zoV66AJT1gQg6I1-NX7NqN ",,2281,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1816.76,1783.81,rec5pxBoPZ09DjlAl
+claude-sonnet-5-5_xhigh,1786.26,2026-09-28,Anthropic,United States of America,,,,1531,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1804.45,1768.08,recbYf0qhP7q08OwS
+gpt-6.1-sol_max,1758.72,2026-09-29,OpenAI,United States of America,,,,1264,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1777.82,1739.63,recxV1YByh3vPMhLz
+claude-fable-5-1_max,1758.05,2026-09-01,Anthropic,United States of America,,,,3036,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1771.65,1744.44,recW7c6YS46DN6aYk
+claude-sonnet-5-5_high,1698.82,2026-09-28,Anthropic,United States of America,,,,1205,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1717.81,1679.82,recToBiKpCTvPAk25
+gpt-6-sol_max,1689.33,2026-09-22,OpenAI,United States of America,,,,3197,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1701.14,1677.53,rec7T9l5XF7aKZFWM
+claude-opus-5_max,1686.99,2026-07-24,Anthropic,United States of America,,,,12087,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1694.48,1679.51,recNUvyfQc6Bik8Uv
+gemini-4-argon_high,1679.5,2026-09-30,Google DeepMind,United States of America,,,,2422,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1692.77,1666.24,recwdOhldUOnpwUJK
+kimi-k3_max,1674.26,2026-07-16,Moonshot,China,2.0001e+25,"Based on peer models such as Kimi K2.6 and DeepSeek V4 Pro, plausibly was trained on roughly 30T tokens (likely between 15T and 60T). Using the heuristic that C = 6ND, 30T pretraining tokens would imply ~1.9e25 FLOP. This is a somewhat uncertain estimate (more uncertain than estimates based on disclosed active params and token counts, but comparable to estimates based on disclosed GPU-hours).
+
+K3 was likely pretrained on over 1e25 FLOP. Speculatively, K3's relatively large size compared to other Chinese models may have reduced the training token budget vs smaller models.",,4547,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1685.47,1663.05,recDg44iIUtAe2RhI
+qwen3.8-max_unknown,1670.58,2026-08-02,Alibaba,China,,,,3221,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1683.04,1658.11,recTdVm2qqlGWHUKV
+claude-opus-5_high,1660.45,2026-07-24,Anthropic,United States of America,,,,12566,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1667.4,1653.5,recbSCzHPr3UAWM3V
+muse-spark-1.3_max,1651.94,2026-09-02,Meta AI,United States of America,,,,2972,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1664.07,1639.8,recLl8orHc32h5fTt
+grok-4.7_xhigh,1637.52,2026-09-21,xAI,United States of America,,,,3216,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1649.29,1625.76,recxFONeSIPSZlVez
+claude-fable-5_high,1627.98,2026-06-09,Anthropic,United States of America,,,,10081,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1635.44,1620.53,recldtI0Pj1ckCP0y
+claude-fable-5_unknown,1626.26,2026-06-09,Anthropic,United States of America,,,,8382,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1634.46,1618.06,recSi4QzdnavF3cTZ
+muse-spark-1.3_xhigh,1623.12,2026-09-02,Meta AI,United States of America,,,,2123,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1637.13,1609.11,recJf8XU8Ck0yrLX9
+mimo-v2.6-pro,1618.41,2026-09-21,Xiaomi Corp,China,,,,2734,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1630.66,1606.17,recTM8TiwWWDP1p7Z
+grok-4.6_high,1617.64,2026-08-12,xAI,United States of America,,,,4282,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1627.79,1607.49,recD2YH5MiuyOD1HA
+gpt-5.6-sol_xhigh,1617.32,2026-07-09,OpenAI,United States of America,,,,11916,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1624.28,1610.36,recG5CUO9e2GOfiiz
+glm-5.3_max,1614.45,2026-08-14,Z.ai (Zhipu AI),China,,,,3725,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1625.29,1603.61,recGUmCEUF1DKCZhV
+deepseek-v4.1-flash_max,1613.95,2026-09-09,DeepSeek,China,4.32e+24,"(Pre-training) - 6 * 16e9 active parameters * 45e12 tokens = 4.32e+24 FLOP
+",,1361,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1631.08,1596.82,recUYd9mGJeTahnjd
+glm-5.3-flash_unknown,1607.09,2026-08-20,Z.ai (Zhipu AI),China,3.24e+24,"6 * 18e9 active parameters * 30e12 tokens = 3.24e24 FLOP. 
+
+https://docs.z.ai/guides/vlm/glm-5.3-flash says ""Combined with our latest 30T-token multimodal pre-training corpus, these changes let GLM-5.3-Flash produce more intelligence with less compute."", which is not definitive in saying that all 30T tokens were used exactly once; likely confidence.",,2925,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1619.06,1595.13,recnySn6GWU64r5vn
+qwen3.8-27b,1593.29,2026-08-14,Alibaba,China,,,,4913,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1602.77,1583.81,rec67p0NIVtVh8Fw2
+glm-5.2_max,1593.25,2026-06-16,Z.ai (Zhipu AI),China,,,,1994,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1607.98,1578.51,recluUH4AYBO78ZCx
+gemini-3.7-flash_high,1587.26,2026-08-13,Google DeepMind,United States of America,,,,3007,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1599.36,1575.17,recu8zmVvQ8mmZVig
+gpt-6-luna_max,1581.95,2026-09-22,OpenAI,United States of America,,,,5577,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1590.96,1572.94,recRcRpkzCQ1tA6zz
+deepseek-v4-pro-0813_high,1580.53,2026-08-13,DeepSeek,China,9.702e+24,From https://api-docs.deepseek.com/news/news260813/: built on the DeepSeek-V4-Pro (Preview) model structure with a DSpark speculative-decoding module; agent-focused post-training upgrades. Pre-training compute carried over from DeepSeek-V4-Pro (6 * 49e9 active parameters * 33e12 tokens = 9.702E24).,,4258,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1590.48,1570.59,rec65iBl9WzLAM7JB
+deepseek-v4-flash-0731_high,1580.2,2026-07-31,DeepSeek,China,2.496e+24,"From https://api-docs.deepseek.com/updates/: ""DeepSeek-V4-Flash-0731 keeps the same model architecture and size as DeepSeek-V4-Flash-Preview, and was only re-post-trained.""
+
+6 * 13e9 active parameters * 32e12 tokens = 2.496E24 for pre-training",,4723,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1589.75,1570.65,recsLYLBxCXjXMVIU
+step-5-preview_high,1570.15,2026-09-18,StepFun,China,,,,2506,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1582.93,1557.37,rec83p1OAiaoNleRJ
+gemini-3.8-flash_high,1567.88,2026-09-02,Google DeepMind,United States of America,,,,2732,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1580.25,1555.5,recHMg6xBTMJBE8o8
+claude-opus-4-7_unknown,1566.85,2026-04-16,Anthropic,United States of America,,,,5270,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1576.37,1557.33,recokJu1lFXavDpwj
+claude-opus-4-8_high,1558.83,2026-05-28,Anthropic,United States of America,,,,13787,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1565.35,1552.31,recixLxQOXu4FgGzS
+claude-opus-4-7,1557.37,2026-04-16,Anthropic,United States of America,,,,15914,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1563.34,1551.4,rec1WC4J4E7jHLpxy
+claude-opus-4-6_unknown,1556.29,2026-02-05,Anthropic,United States of America,,,,2553,,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,1570.13,1542.44,rec42aGstj0e6Rset
+claude-opus-4-7_high,1555.22,2026-04-16,Anthropic,United States of America,,,,16387,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1561.2,1549.23,recMCbMMbkma3QX9K
+grok-4.5_unknown,1555.1,2026-07-08,xAI,United States of America,,,,8133,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1562.67,1547.54,rec0CzO93QZUWjPJ1
+claude-opus-4-8_unknown,1552.22,2026-05-28,Anthropic,United States of America,,,,1578,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1568.57,1535.88,recOyBSiqPlt4m1jX
+claude-opus-4-6_high,1546.62,2026-02-05,Anthropic,United States of America,,,,18332,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1552.21,1541.03,recmfqfRYiNWDU56a
+muse-spark-1.1,1541.55,2026-07-09,Meta AI,United States of America,,,,7549,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1549.34,1533.75,rec7oAaI9pcEcm0Bz
+claude-opus-4-8_none,1538.81,2026-05-28,Anthropic,United States of America,,,,12654,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1545.26,1532.36,rec8wkAhd66Iij2V5
+claude-opus-4-6,1537.13,2026-02-05,Anthropic,United States of America,,,,19536,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1542.59,1531.67,recMRozRLKk7DABCI
+gemini-3.6-flash_high,1536.95,2026-07-21,Google DeepMind,United States of America,,,,8259,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1544.62,1529.28,recsNwzTq8uZ9KnQl
+claude-sonnet-5_high,1536.72,2026-06-30,Anthropic,United States of America,,,,9296,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1543.87,1529.57,recP9GzaDk8uq0RYS
+muse-spark-1.2_xhigh,1534.38,2026-08-05,Meta AI,United States of America,,,,2065,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1548.32,1520.43,reczZhOn2A3wQ2kJo
+gemini-3.6-flash_unknown,1527.83,2026-07-21,Google DeepMind,United States of America,,,,2768,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1540.33,1515.33,recHyZi6cCqCKYq3D
+gpt-5.6-terra_xhigh,1521.25,2026-07-09,OpenAI,United States of America,,,,7694,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1529.0,1513.49,recOxZA3Y5CtVv4tH
+claude-sonnet-4-6,1520.99,2026-02-17,Anthropic,United States of America,,,,21642,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1526.24,1515.73,recEydvPq3RwtFg6j
+gpt-5.6-luna_xhigh,1518.87,2026-07-09,OpenAI,United States of America,,,,7828,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1526.48,1511.27,recOBEMJmw7esCPWt
+qwen3.7-max,1517.12,2026-05-19,Alibaba,China,,,,8363,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1524.7,1509.54,recGyDjr4OoaFgvGL
+muse-spark,1512.53,2026-04-08,Meta AI,United States of America,,,,1608,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1528.6,1496.47,recRiDSRbOFjYObWz
+gpt-5.5_xhigh,1510.15,2026-04-23,OpenAI,United States of America,,,,14946,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1516.23,1504.06,recumoLWu0fLBcJe2
+kimi-k2.6,1508.77,2026-04-20,Moonshot,China,,,,9585,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1516.18,1501.37,recLmGhmz9Qq5pJ29
+glm-5.1,1508.29,2026-04-07,Z.ai (Zhipu AI),China,,,,10220,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1515.2,1501.38,reczQ82qDNkFeSOqt
+gemini-3.5-flash_unknown,1506.38,2026-05-19,Google DeepMind,United States of America,,,,2213,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1519.85,1492.91,rec8SXNMSwKDPVpJj
+gemini-3.5-flash_high,1500.04,2026-05-19,Google DeepMind,United States of America,,,,8931,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1507.47,1492.6,recBmp1LntSN6qKM0
+claude-opus-4-5-20251101_32K,1494.89,2025-11-24,Anthropic,United States of America,,Flagship model from a leading developer in mid-2025; very likely it used >1e25 FLOP.,=+11/-11,10592,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1503.27,1486.52,recQLSl4DM4fz7VAt
+gemini-3.5-flash_medium,1491.55,2026-05-19,Google DeepMind,United States of America,,,,11412,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1498.41,1484.7,recLqW9q7NaFnzS7x
+gpt-5.5_high,1486.98,2026-04-23,OpenAI,United States of America,,,,17020,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1493.01,1480.95,recBkymoiC9MVMivU
+MiniMax-M3,1486.7,2026-06-01,MiniMax,China,,,,12686,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1493.15,1480.25,recHxyTnN62z1YBDE
+gpt-5.2-2025-12-11_high,1480.0,2025-12-11,OpenAI,United States of America,,,=+17/-17,1647,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recDCbjVONLP8GhN2
+qwen3.6-max-preview,1479.06,2026-04-20,Alibaba,China,,,,2601,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1491.82,1466.3,recYpwnD5SNup5J30
+mimo-v2.5-pro,1474.92,,Xiaomi Corp,China,6.804e+24,6 FLOPS/token/active parameter * 27e12 tokens * 42e9 active parameters = 6.804E24 FLOP,,15843,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1480.85,1469.0,recW041lycMijl2lH
+kimi-k2.7-code,1472.72,2026-06-12,Moonshot,China,,,,4683,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1482.38,1463.06,recTViJ1YYcJ4mXVa
+claude-opus-4-5-20251101,1468.18,2025-11-24,Anthropic,United States of America,,Flagship model from a leading developer in mid-2025; very likely it used >1e25 FLOP.,=+11/-11,12899,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1475.46,1460.9,recxJC6KaFZO5Yo47
+deepseek-v4-pro_unknown,1463.63,2026-04-24,DeepSeek,China,9.702e+24,6 * 49e9 active parameters * 33e12 tokens = 9.702E24 for pre-training,,3956,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1473.78,1453.48,recyFGtGaq14s9gSg
+deepseek-v4-pro_high,1463.61,2026-04-24,DeepSeek,China,9.702e+24,6 * 49e9 active parameters * 33e12 tokens = 9.702E24 for pre-training,,12405,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1470.1,1457.12,reccESwrA2ewuVNOg
+gpt-5.4-2026-03-05_high,1462.99,2026-03-05,OpenAI,United States of America,,,,1277,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1482.43,1443.55,recVFgIXz9lscMYLN
+qwen3.6-plus,1460.53,2026-03-31,Alibaba,China,,,,17562,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1466.25,1454.81,recH4S2A84nuiTNtP
+gpt-5.5_unknown,1457.76,2026-04-23,OpenAI,United States of America,,,,15012,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1463.81,1451.72,recA3VwnfymOn47qK
+gemini-3.1-pro-preview,1446.64,2026-02-19,Google DeepMind,United States of America,,,,22891,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1451.8,1441.48,reczlQxaml8buBx3t
+gemini-3.5-flash-lite,1446.62,2026-07-21,Google DeepMind,United States of America,,,,228,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1489.11,1404.13,recCFLA2191NzuA8o
+deepseek-v4-pro_none,1445.72,2026-04-24,DeepSeek,China,9.702e+24,6 * 49e9 active parameters * 33e12 tokens = 9.702E24 for pre-training,,13183,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1452.22,1439.22,recXt285XtIYNHwks
+gpt-5.4-2026-03-05_medium,1442.65,2026-03-05,OpenAI,United States of America,,,,1316,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1461.33,1423.97,recmdmHBSo9VpJQUs
+gemini-3-pro-preview,1438.77,2025-11-18,Google DeepMind,United States of America,,Almost certainly >1e25,=+9/-9,13573,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1447.32,1430.22,rec7tzKLSS6JTykAP
+mimo-v2.5,1437.16,,Xiaomi Corp,China,4.32e+24,"MiMo-V2.5 is a 310B-parameter Sparse MoE model (15B active) trained on 48T tokens
+
+6ND:
+6 * 15B * 48T = 4.32e24",,14117,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1443.32,1431.0,recXGMs0h0m6ZmhkY
+kimi-k2.5,1436.37,2026-01-27,Moonshot,China,5.8e+24,"Per section 3.2, ""The joint pre-training stage continues from a near-end Kimi K2 checkpoint over additional 15T vision-text tokens at 4K sequence length""
+
+Kimi K2 was pretrained on 15T tokens. A near-end checkpoint of K2 was trained into K2.5 over another 15T tokens (or 15.2 to 15.5T tokens). This makes for a total of ~30T.
+
+There are an additional 1T tokens in ""Stage 1"" used to train the ViT encoder, which is likely much smaller than the full LLM, so we omit those tokens to calculate training compute.
+
+30e12 tokens * 32B parameters * 6 = 5.76e24 FLOP
+
+Per Kimi talk (timestamp 26:00), the 15 trillion tokens of K2.5 were additive, for 30T training tokens overall: https://x.com/Kimi_Moonshot/status/2035011542115393973?s=20",,19042,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1441.67,1431.07,reckf0B91qmnqnW8u
+glm-5,1435.91,2026-02-11,Z.ai (Zhipu AI),China,6.84e+24,6 * 40B parameters * 28.5e12 tokens = 6.84e24 FLOP estimated,,7056,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1444.25,1427.56,recjSg0H9Q5BhD7ez
+glm-4.7,1434.7,2025-12-22,Z.ai (Zhipu AI),China,4.42e+24,"Training tokens not disclosed.
+
+Presuming this is a post-training update from GLM-4.5 (23T tokens) with minor additional compute, training compute is at least:
+
+6 FLOP/parameter/token * 32B active parameters * 23T tokens = 4.42e24 FLOP",=+13/-13,3811,2026-01-05,https://arena.ai/leaderboard,https://lmarena.ai/leaderboard/webdev,,1447.06,1422.34,reczgCME2AOVMdLPt
+mimo-v2-pro,1433.49,,Xiaomi Corp,China,,,,6963,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1441.77,1425.21,rec76Jd5R8VLqCjHj
+deepseek-v4-flash_high,1430.93,2026-04-24,DeepSeek,China,2.496e+24,6 * 13e9 active parameters * 32e12 tokens = 2.496E24 for pre-training,,9493,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1438.07,1423.79,rec0leyLoZG7Y0EXR
+gpt-5-2025-08-07_medium,1419.52,2025-08-07,OpenAI,United States of America,6.6e+25,"Fairly speculative, possibly around 6e25 [CI: 2e25 to 2e26] FLOP. See document below for details
+
+https://docs.google.com/document/d/1V2jIk365LnhH4WDoCw5dYJjZr1Htw8IHaK1noMf5Y48/edit?tab=t.z871imftkus",=+12/-12,3032,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1435.27,1403.78,rec0jRmpNdEDdrg8X
+gpt-5.2-2025-12-11_unknown,1416.64,2025-12-11,OpenAI,United States of America,,,,1055,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1439.52,1393.77,rechsikgiOhrgerUx
+Inkling,1409.99,2026-07-15,Thinking Machines,United States of America,1.1e+25,6ND = 6 * 41e9 active parameters * 45e12 tokens = 1.1e25 FLOP,,8970,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1417.32,1402.65,recyrSEvcUeFlfbw4
+inkling-small,1406.58,2026-07-15,Thinking Machines,United States of America,,,,5058,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1415.95,1397.21,rectYAkBI8QJesGbq
+kimi-k2.5_none,1405.66,2026-01-27,Moonshot,China,5.8e+24,"Per section 3.2, ""The joint pre-training stage continues from a near-end Kimi K2 checkpoint over additional 15T vision-text tokens at 4K sequence length""
+
+Kimi K2 was pretrained on 15T tokens. A near-end checkpoint of K2 was trained into K2.5 over another 15T tokens (or 15.2 to 15.5T tokens). This makes for a total of ~30T.
+
+There are an additional 1T tokens in ""Stage 1"" used to train the ViT encoder, which is likely much smaller than the full LLM, so we omit those tokens to calculate training compute.
+
+30e12 tokens * 32B parameters * 6 = 5.76e24 FLOP
+
+Per Kimi talk (timestamp 26:00), the 15 trillion tokens of K2.5 were additive, for 30T training tokens overall: https://x.com/Kimi_Moonshot/status/2035011542115393973?s=20",,3095,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1417.93,1393.38,recCxTl1iUkSuSlhf
+qwen3.5-plus,1398.92,2026-02-16,Alibaba,China,,,,19922,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1404.18,1393.66,recHlzBI0TSSPPNFr
+MiniMax-M2.7,1397.52,2026-03-18,MiniMax,China,,,,15194,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1403.42,1391.62,recgWNjrRWlmCExNr
+gpt-5.4-mini-2026-03-17_high,1397.18,2026-03-17,OpenAI,United States of America,,,,11279,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1403.87,1390.5,recILmM7G8gL0RC8d
+gpt-5.2-2025-12-11_medium,1394.0,2025-12-11,OpenAI,United States of America,,,=+15/-15,1641,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recSZOpvwfvrDdO4h
+gpt-5.1-2025-11-13_medium,1392.03,2025-11-13,OpenAI,United States of America,,"Almost certainly > 1e25
+",=+10/-10,4751,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1403.69,1380.37,recoxpFCpzEImK5i4
+claude-sonnet-4-5-20250929_32K,1391.0,2025-09-29,Anthropic,United States of America,,,=+9/-9,8616,2026-01-05,WebDev Arena Leaderboard,https://lmarena.ai/leaderboard/webdev,,,,rectf5pzQGRAR1sZY
+claude-opus-4-1-20250805_unknown,1388.97,2025-08-05,Anthropic,United States of America,,,,6769,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1399.83,1378.11,recmHyx49gXYQP1ER
+MiniMax-M2.1,1387.48,2025-12-23,MiniMax,China,,,,7281,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1397.18,1377.78,recijJiojPfhRLBaH
+gpt-5.4-2026-03-05_unknown,1386.74,2026-03-05,OpenAI,United States of America,,,,2493,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1399.53,1373.94,reclcQbSEOI2eiySg
+claude-opus-4-1-20250805,1386.0,2025-08-05,Anthropic,United States of America,,,=+9/-9,8210,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recDMjkTx9oZNAOzz
+claude-sonnet-4-5-20250929,1385.49,2025-09-29,Anthropic,United States of America,,,=+9/-9,15150,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1392.86,1378.13,recUrHg93mpJgakI0
+MiniMax-M2.5,1384.13,2026-02-12,MiniMax,China,,,,7186,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1392.61,1375.65,reckw2GD2bAw3IoI1
+gemini-3-flash-preview,1383.12,2025-12-17,Google DeepMind,United States of America,,,=+12/-12,20911,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1388.45,1377.79,rec8wVMb44iQySeae
+,1377.0,,,,,,=+14/-14,1885,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recyD2ZNG4gtW9Y0m
+grok-4-20,1373.76,2026-02-17,xAI,United States of America,,,,14571,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1379.98,1367.53,recJM2PnLkEFRQj7g
+gpt-5.3-codex,1369.86,2026-02-05,OpenAI,United States of America,,,,3491,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1381.39,1358.34,recWzul4ypZ1wsTQr
+DeepSeek-V3.2-Exp_thinking,1367.0,2025-09-29,DeepSeek,China,4.18e+24,"3.594058e+24 FLOP [base model] + 2.095014e+23 FLOP = 3.8035594e+24 FLOP for pre-training plus continued pre-training
+
+Then, ""this framework allocates a
+post-training computational budget exceeding 10% of the pre-training cost"", so 4.18e24",=+20/-19,955,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,reciI0uZdChhyGrUw
+gemma-4-31b-it,1364.13,2026-04-02,Google DeepMind,United States of America,,,,10139,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1371.18,1357.08,recHaglQ3fCswDCo6
+gemma-4-26b-a4b,1361.4,2026-04-02,Google DeepMind,United States of America,,,,1442,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1378.63,1344.16,recMiFTjUcXp6kvjc
+gpt-5.1-2025-11-13_low,1359.0,2025-11-13,OpenAI,United States of America,,"Almost certainly > 1e25
+",=+10/-10,6540,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recGfqSb7DIX51ffo
+qwen3.5-27B,1357.38,2026-02-24,Alibaba,China,,,,7427,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1365.55,1349.2,rec9UAZ0xg5glh6F9
+grok-4.3_unknown,1357.17,2026-04-17,xAI,United States of America,,,,14192,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1363.56,1350.78,rectm2PjgBLYazB5n
+claude-sonnet-4-5-20250929_32K,1353.0,2025-09-29,Anthropic,United States of America,,,=+9/-9,7544,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recKmKjyv8AiR9k1T
+laguna-m.1,1347.49,2026-04-28,Poolside,United States of America,,,,5062,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1357.05,1337.92,recInkSCJqwnymPR8
+gpt-5.1-2025-11-13_unknown,1340.9,2025-11-13,OpenAI,United States of America,,"Almost certainly > 1e25
+",,10326,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1349.46,1332.34,recqQAnpZjzh0yuYv
+glm-4.6,1340.6,2025-09-30,"Z.ai (Zhipu AI),Tsinghua University",China,4.42e+24,6 FLOP/parameter/token * 32000000000 active parameters [very likely assumption - everything else is reported to be same as at GLM 4.5] * 23000000000000 tokens = 4.42e24 FLOP,=+9/-9,6600,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1351.49,1329.71,recT1lwdoUHQkrBMV
+gpt-5.2-codex,1338.7,2025-12-18,OpenAI,United States of America,,,,6402,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1347.73,1329.67,rec9X8U1ig36tPXhy
+kimi-k2-thinking-turbo,1337.0,2025-11-06,Moonshot,China,4.2e+24,"Assuming the additional post-training contributed between 1% and 100% of Kimi K2's training compute (which we confidently estimate at 2.976e+24), we get a range of 3.0e24 to 6.0e24, and a geometric mean of 4.2e24.",=+9/-9,7336,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recumTXyHTALFh1iH
+gpt-5.1-codex,1336.28,2025-11-12,OpenAI,United States of America,,,=+10/-10,4861,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1348.01,1324.55,recSXM0s3Vsny5oZP
+mimo-v2-flash,1330.64,,Xiaomi Corp,China,2.43e+24,6 * 15e9 active parameters * 27e12 tokens = 2.43e+24,,5401,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1340.6,1320.68,recz0HuV9vzoIpgOi
+claude-haiku-4-5-20251001_unknown,1329.31,2025-10-15,Anthropic,United States of America,,,,27785,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1334.29,1324.33,recCPUmkyIVkx6rmv
+deepseek/deepseek-v3.2,1324.67,2025-12-01,DeepSeek,China,4.2e+24,"Pre-trained base was DeepSeek-V3.1-Terminus
+3.594058e+24 FLOP [base model] + 2.095014e+23 FLOP = 3.8035594e+24 FLOP for pre-training plus continued pre-training
+
+Then, ""this framework allocates a
+post-training computational budget exceeding 10% of the pre-training cost"", so 4.18e24",=+13/-13,8966,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1332.76,1316.57,recBICRjNsv9JEKQt
+,1313.0,,,,,,=+9/-9,8023,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recneYtrITTW9cMYw
+laguna-xs.2,1302.4,2026-04-28,Poolside,United States of America,,"6 * e12 tokens * 33.4e9 parameters = 
+
+Tokens trained on:
+Pre-training: 30T
+Mid-training: 60B",,3934,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1313.51,1291.3,recSfF9Gf6DhWdjTB
+MiniMax-M2,1297.78,2025-10-27,MiniMax,China,,,,6539,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1308.83,1286.73,recZU91DVcezHiw1W
+claude-haiku-4-5-20251001,1286.0,2025-10-15,Anthropic,United States of America,,,=+9/-9,8276,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,rec4L4znR9E7Yeb7E
+Qwen3-Coder-480B-A35B-Instruct,1273.75,2025-07-31,Alibaba,China,1.575e+24,6 FLOP / parameter / token * 35 * 10^9 active parameters * 7.5 * 10^12 tokens = 1.575e+24 FLOP`,=+9/-9,12265,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1281.64,1265.87,recb5Q2Ez7Shxvl2o
+DeepSeek-V3.2-Exp,1271.75,2025-09-29,DeepSeek,China,4.18e+24,"3.594058e+24 FLOP [base model] + 2.095014e+23 FLOP = 3.8035594e+24 FLOP for pre-training plus continued pre-training
+
+Then, ""this framework allocates a
+post-training computational budget exceeding 10% of the pre-training cost"", so 4.18e24",=+10/-10,3865,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1285.38,1258.11,recoUouxwJTO6jCv1
+mistral-medium-2604,1264.92,2026-04-28,Mistral AI,France,,"Commentary from Mistral researcher - https://x.com/mertunsal2020/status/2049551864556143094?s=20 - says ""nowhere close to those flops"" in response to someone suggesting 2.3e25FLOPS was used",,2154,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1280.24,1249.59,recWpRsMIcDfKiWR8
+,1260.0,,,,,,=+15/-15,1946,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,rec8hNzDMIzA5RXxq
+gemini-3.1-flash-lite,1254.27,2026-03-03,Google,United States of America,,,,13634,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1261.24,1247.29,recJCbQHLFFNCdoMh
+qwen3.6-35b-a3b,1250.15,2026-04-14,Alibaba,China,,,,1535,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1268.05,1232.25,recOYbT19AfMLPU6Z
+gpt-5.1-codex-mini,1247.0,2025-11-12,OpenAI,United States of America,,,=+17/-17,1566,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recPRratljctS351K
+qwen3.5-flash,1238.17,2026-02-25,Alibaba,China,,,,1270,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1258.29,1218.06,recXaGYNzvxoD25Gj
+trinity-large-thinking,1236.61,2026-04-01,Arcee AI,United States of America,,,,1303,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1257.12,1216.09,recOdmWvMBKCrAR2K
+mistral-large-2512,1229.52,2025-12-02,Mistral AI,France,,,,812,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1255.47,1203.57,rec75ePp1KlTVhbON
+,1226.0,,,,,,=+20/-20,1025,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,reclY6B2Wp2f59mld
+gemini-2.5-pro,1225.73,2025-06-17,Google DeepMind,United States of America,,Flagship model from a leading developer in mid-2025; very likely it used >1e25 FLOP.,=+13/-13,2667,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1241.74,1209.73,recmBglMHLXb6m6s8
+grok-4-1-fast-reasoning,1223.0,2025-11-19,xAI,United States of America,,,=+13/-13,3721,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recgHWkkshK8nYtfz
+grok-4-1,1210.95,2025-11-17,xAI,United States of America,,,,939,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1236.05,1185.84,recmY1Sf15dhJzzON
+,1202.0,,,,,,=+19/-19,1262,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,reco07u0phmlUKOm4
+mercury-2,1166.59,,Inception Labs,United States of America,,,,904,,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1191.78,1141.41,rechVEiDFpARu63zz
+grok-code-fast-1,1165.08,2025-08-28,,,,,=+21/-21,783,2026-01-05,https://arena.ai/leaderboard,https://web.lmarena.ai/leaderboard,,1193.32,1136.85,recT6aoJlcWcMufso
+grok-4-fast,1149.0,2025-09-19,xAI,United States of America,,,=+23/-23,945,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,rec8Eg2KdgjeEWepd
+,1099.0,,,,,,=+22/-22,1033,2026-01-05,WebDev Arena Leaderboard,https://web.lmarena.ai/leaderboard,,,,recYBnWjhmTwpsA6r

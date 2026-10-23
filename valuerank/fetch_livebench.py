@@ -84,13 +84,48 @@ COHORT_MAP = {
     "claude-haiku-5-5": None,
     "claude-sonnet-5-5": None,
     "gemini-4-argon": None,
+    # Retained by owner decision O31 (2026-10-21). The pinned release lists Fable 5.1 at max effort; the Muse
+    # models were released after it.
+    "claude-fable-5-1": "claude-fable-5-1-max-effort",
+    "muse-spark-1-3": None,
+    "muse-wonder": None,
+    "muse-wonder-full": None,
+    # Added by owner decision O33 (2026-10-21): every evidenced effort is its own row. The pinned June 25 release
+    # predates GPT-6.1 Sol, Claude Haiku 5.5, Claude Sonnet 5.5 and Muse Spark 1.3, and no exact Grok 4.6 (xhigh)
+    # row is verified in it.
+    "gpt-6.1-sol-xhigh": None,
+    "gpt-6.1-sol-high": None,
+    "gpt-6.1-sol-medium": None,
+    "gpt-6.1-sol-low": None,
+    "claude-haiku-5-5-max": None,
+    "claude-haiku-5-5-high": None,
+    "claude-haiku-5-5-medium": None,
+    "claude-haiku-5-5-low": None,
+    "claude-sonnet-5-5-xhigh": None,
+    "claude-sonnet-5-5-high": None,
+    "claude-sonnet-5-5-medium": None,
+    "claude-sonnet-5-5-low": None,
+    "muse-spark-1-3-xhigh": None,
+    "grok-4.6-xhigh": None,
+    "deepseek-v4-1-flash-1017": None,
+    "minimax-m3-1-flash": None,
+    "gpt-6-luna-low": None,
+    "gpt-6-luna-medium": None,
+    "gpt-6-luna-high": None,
+    "gpt-6-luna-xhigh": None,
+    "claude-opus-5-5-high": None,
+    "claude-opus-5-5-xhigh": None,
+    "claude-opus-5-5-medium": None,
+    "gpt-5.6-luna-low": None,
+    "gpt-6-astra-high": None,
+    "gpt-6-astra-xhigh": None,
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in
 # the benchmark-specific views without silently changing the primary ranking
 # population.  These rows are stored separately as `supplementalModels`.
-SUPPLEMENTAL_MAP = {
-    "claude-fable-5-1": ("Claude Fable 5.1", "claude-fable-5-1-max-effort"),
+SUPPLEMENTAL_MAP: dict[str, tuple[str, str]] = {
+    # Claude Fable 5.1 moved into the cohort on 2026-10-21 (owner decision O31).
 }
 
 

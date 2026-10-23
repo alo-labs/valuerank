@@ -45,6 +45,7 @@ export function rankingsPage(opts = {}) {
   parts.drawer = add(body, 'section', { id: 'compare-drawer', hidden: '' });
   parts.compareBody = add(parts.drawer, 'div', { id: 'compare-body' });
   parts.clear = add(parts.drawer, 'button', { id: 'compare-clear' });
+  parts.notes = add(body, 'ol', { id: 'rankings-evidence' });
   parts.csv = add(body, 'a', { id: 'export-csv', href: '#' });
   parts.json = add(body, 'a', { id: 'export-json', href: '#' });
   return { win, ...parts };
@@ -55,6 +56,7 @@ export function indexPage(opts = {}) {
   const { body } = win.document;
   const parts = shared(win);
   parts.body = add(add(body, 'table'), 'tbody', { id: 'index-body' });
+  parts.notes = add(body, 'ol', { id: 'index-evidence' });
   parts.picks = {};
   for (const kind of ['value', 'other', 'budget']) {
     const box = add(body, 'article', { 'data-pick': kind });

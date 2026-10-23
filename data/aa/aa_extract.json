@@ -2,63 +2,9 @@
   {
     "id": "gpt-6-astra",
     "displayName": "GPT-6 Astra",
-    "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
-    "variant": "gpt-6-astra-xhigh",
-    "metrics": {
-      "intelligenceIndex": 25,
-      "evalCost": null,
-      "omniHalluc": null,
-      "terminalBenchHard": 2.1,
-      "gdpval": 2,
-      "lcr": null,
-      "hle": null,
-      "gpqa": null,
-      "critpt": null
-    },
-    "coverage": 9,
-    "structuredSample": {
-      "Intelligence\n#9 / 202\n61\nArtificial Analysis Intelligence Index\n4 out of 4 units": "Intelligence\n#9 / 202\n61\nArtificial Analysis Intelligence Index\n4 out of 4 units for Intelligence.\nSpeed\nN/A\nOutput tokens per second\nUnknown out of 4 units for Speed.\nCost\n#81 / 202\nIn $10.00\nOut $50",
-      "61\nArtificial Analysis Intelligence Index": "61\nArtificial Analysis Intelligence Index",
-      "Artificial Analysis Intelligence Index": "Artificial Analysis Intelligence Index",
-      "Speed\nN/A\nOutput tokens per second\nUnknown out of 4 units for Speed.": "Intelligence\n#9 / 202\n61\nArtificial Analysis Intelligence Index\n4 out of 4 units for Intelligence.\nSpeed\nN/A\nOutput tokens per second\nUnknown out of 4 units for Speed.\nCost\n#81 / 202\nIn $10.00\nOut $50",
-      "Speed": "Speed\nOutput tokens per second · Higher is better\nGemini 3.8 Flash (high)\nMuse Spark 1.3 (xhigh)\nNemotron 3 Ultra\nGPT-5.6 Luna (max)\nGLM-5.3 (max)\nClaude Fable 5.1 (max with fallback)\nGrok 4.6 (high)\n",
-      "Unknown out of 4 units for Speed.": "Speed\nN/A\nOutput tokens per second\nUnknown out of 4 units for Speed.",
-      "Cost\n#81 / 202\nIn $10.00\nOut $50.00\nCache Discount 90%\n$1.20\nCost per Intelligen": "Intelligence\n#9 / 202\n61\nArtificial Analysis Intelligence Index\n4 out of 4 units for Intelligence.\nSpeed\nN/A\nOutput tokens per second\nUnknown out of 4 units for Speed.\nCost\n#81 / 202\nIn $10.00\nOut $50",
-      "In $10.00\nOut $50.00\nCache Discount 90%\n$1.20\nCost per Intelligence Index task": "Cost\n#81 / 202\nIn $10.00\nOut $50.00\nCache Discount 90%\n$1.20\nCost per Intelligence Index task\n4 out of 4 units for Cost.",
-      "$1.20\nCost per Intelligence Index task": "In $10.00\nOut $50.00\nCache Discount 90%\n$1.20\nCost per Intelligence Index task",
-      "Cost per Intelligence Index task": "$1.20\nCost per Intelligence Index task",
-      "Verbosity\n#27 / 202\n25M\nOutput tokens from Intelligence Index\n2 out of 4 units f": "Intelligence\n#9 / 202\n61\nArtificial Analysis Intelligence Index\n4 out of 4 units for Intelligence.\nSpeed\nN/A\nOutput tokens per second\nUnknown out of 4 units for Speed.\nCost\n#81 / 202\nIn $10.00\nOut $50",
-      "25M\nOutput tokens from Intelligence Index": "25M\nOutput tokens from Intelligence Index",
-      "Output tokens from Intelligence Index": "25M\nOutput tokens from Intelligence Index",
-      "Artificial Analysis Intelligence Index · Higher is better": "Intelligence\nArtificial Analysis Intelligence Index · Higher is better\nClaude Fable 5.1 (max with fallback)\nClaude Opus 5 (max)\nGPT-6 Astra (max)\nGPT-6 Astra (xhigh)\nGrok 4.6 (high)\nMuse Spark 1.3 (xh",
-      "Weighted average cost (USD) per Intelligence Index task · Lower is better": "Cost per Task\nWeighted average cost (USD) per Intelligence Index task · Lower is better\nGPT-5.6 Luna (max)\nDeepSeek V4 Pro 0813 (max)\nNemotron 3 Ultra\nMuse Spark 1.3 (xhigh)\nGemini 3.8 Flash (high)\nGL",
-      "Intelligence\nBenchmarks\nIntelligence Index Comparisons\nToken Use\nCost\nContext Wi": "Intelligence\nBenchmarks\nIntelligence Index Comparisons\nToken Use\nCost\nContext Window",
-      "Intelligence Index Comparisons": "Intelligence Index Comparisons",
-      "Artificial Analysis Intelligence Index by Open Weights / Proprietary": "Artificial Analysis Intelligence Index by Open Weights / Proprietary",
-      "Intelligence Evaluations": "Intelligence Evaluations",
-      "Intelligence Index": "Intelligence Index",
-      "GDPval-AA v2\n\nAgentic real-world work tasks, (Elo-500)/2000": "GDPval-AA v2\n\nAgentic real-world work tasks, (Elo-500)/2000",
-      "GDPval-AA v2": "GDPval-AA v2\n\nAgentic real-world work tasks, (Elo-500)/2000",
-      "Terminal-Bench v2.1\n\nAgentic coding & terminal use": "Terminal-Bench v2.1\n\nAgentic coding & terminal use",
-      "Terminal-Bench v2.1": "Terminal-Bench v2.1\n\nAgentic coding & terminal use",
-      "SciCode\n\nCoding": "SciCode\n\nCoding",
-      "SciCode": "SciCode\n\nCoding",
-      "Humanity's Last Exam\n\nReasoning & knowledge": "Humanity's Last Exam\n\nReasoning & knowledge",
-      "Humanity's Last Exam": "Humanity's Last Exam\n\nReasoning & knowledge",
-      "GPQA Diamond\n\nScientific reasoning": "GPQA Diamond\n\nScientific reasoning",
-      "GPQA Diamond": "GPQA Diamond\n\nScientific reasoning",
-      "CritPt\n\nPhysics reasoning": "CritPt\n\nPhysics reasoning",
-      "CritPt": "CritPt\n\nPhysics reasoning",
-      "AA-Omniscience Accuracy\n\nKnowledge": "AA-Omniscience Accuracy\n\nKnowledge",
-      "AA-Omniscience Accuracy": "AA-Omniscience Accuracy\n\nKnowledge",
-      "AA-Omniscience Non-Hallucination Rate\n\n1 - hallucination rate": "AA-Omniscience Non-Hallucination Rate\n\n1 - hallucination rate",
-      "AA-Omniscience Non-Hallucination Rate": "AA-Omniscience Non-Hallucination Rate\n\n1 - hallucination rate",
-      "AA-LCR\n\nLong context reasoning": "AA-LCR\n\nLong context reasoning",
-      "AA-LCR": "AA-LCR\n\nLong context reasoning",
-      "IFBench\n\nInstruction following": "IFBench\n\nInstruction following",
-      "IFBench": "IFBench\n\nInstruction following"
-    },
-    "textLen": 16051
+    "url": "https://artificialanalysis.ai/models/gpt-6-astra",
+    "variant": "gpt-6-astra",
+    "note": "Owner decision O30 (2026-10-21): the near-frontier family is ranked at max, its configuration with exact DeepSWE and Bug Hunt results; the earlier browser extract of the xhigh page was removed."
   },
   {
     "id": "gemini-3.8-flash",
@@ -1339,5 +1285,215 @@
     "displayName": "Gemini 4 Argon",
     "url": "https://artificialanalysis.ai/models/gemini-4-argon",
     "variant": "gemini-4-argon"
+  },
+  {
+    "id": "claude-fable-5-1",
+    "displayName": "Claude Fable 5.1",
+    "url": "https://artificialanalysis.ai/models/claude-fable-5-1",
+    "variant": "claude-fable-5-1",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Selected configuration: Claude Fable 5.1 (max with fallback), the effort of the exact DeepSWE and Bug Hunt results."
+  },
+  {
+    "id": "muse-spark-1-3",
+    "displayName": "Muse Spark 1.3",
+    "url": "https://artificialanalysis.ai/models/muse-spark-1-3",
+    "variant": "muse-spark-1-3",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Both max and xhigh have exact DeepSWE and Bug Hunt results; max was selected as the higher AA Intelligence Index (48 against 45); since owner decision O33 (2026-10-21) xhigh is ranked as its own row (muse-spark-1-3-xhigh)."
+  },
+  {
+    "id": "muse-wonder",
+    "displayName": "Muse Wonder",
+    "url": "https://artificialanalysis.ai/models/muse-wonder",
+    "variant": "muse-wonder",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Selected configuration: Muse Wonder (max), AA's only Muse Wonder configuration."
+  },
+  {
+    "id": "muse-wonder-full",
+    "displayName": "Muse Wonder Full",
+    "url": "https://artificialanalysis.ai/models/muse-wonder-full",
+    "variant": "muse-wonder-full",
+    "note": "Owner decision O31 (2026-10-21): retained configuration with an exact AA DeepSWE result and a matched exact Bug Hunt result; the catalog-wide retention check added it to the roster. Selected configuration: Muse Wonder Full (max), AA's only Muse Wonder Full configuration. AA publishes an Intelligence Index but no prices or Index cost for it, so it is not plotted on the cost chart and has no cost."
+  },
+  {
+    "id": "gpt-6.1-sol-xhigh",
+    "displayName": "GPT-6.1 Sol (xhigh)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh",
+    "variant": "gpt-6-1-sol-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (xhigh), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6.1-sol-high",
+    "displayName": "GPT-6.1 Sol (high)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+    "variant": "gpt-6-1-sol-high",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (high), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6.1-sol-medium",
+    "displayName": "GPT-6.1 Sol (medium)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+    "variant": "gpt-6-1-sol-medium",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (medium), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6.1-sol-low",
+    "displayName": "GPT-6.1 Sol (low)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-1-sol-low",
+    "variant": "gpt-6-1-sol-low",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: GPT-6.1 Sol (low), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The GPT-6.1 Sol family's other roster entry is GPT-6.1 Sol (max); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-max",
+    "displayName": "Claude Haiku 5.5 (max)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+    "variant": "claude-haiku-5-5",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (max), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-high",
+    "displayName": "Claude Haiku 5.5 (high)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+    "variant": "claude-haiku-5-5-high",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (high), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-medium",
+    "displayName": "Claude Haiku 5.5 (medium)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+    "variant": "claude-haiku-5-5-medium",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (medium), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-haiku-5-5-low",
+    "displayName": "Claude Haiku 5.5 (low)",
+    "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+    "variant": "claude-haiku-5-5-low",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Haiku 5.5 (low), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Haiku 5.5 family's other roster entry is Claude Haiku 5.5 (xhigh); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-xhigh",
+    "displayName": "Claude Sonnet 5.5 (xhigh)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+    "variant": "claude-sonnet-5-5-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (xhigh with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-high",
+    "displayName": "Claude Sonnet 5.5 (high)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-high",
+    "variant": "claude-sonnet-5-5-high",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (high with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-medium",
+    "displayName": "Claude Sonnet 5.5 (medium)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium",
+    "variant": "claude-sonnet-5-5-medium",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (medium with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "claude-sonnet-5-5-low",
+    "displayName": "Claude Sonnet 5.5 (low)",
+    "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-low",
+    "variant": "claude-sonnet-5-5-low",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Claude Sonnet 5.5 (low with fallback), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Claude Sonnet 5.5 family's other roster entry is Claude Sonnet 5.5 (max with fallback); no result is transferred between efforts."
+  },
+  {
+    "id": "muse-spark-1-3-xhigh",
+    "displayName": "Muse Spark 1.3 (xhigh)",
+    "url": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+    "variant": "muse-spark-1-3-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Muse Spark 1.3 (xhigh), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Muse Spark 1.3 family's other roster entry is Muse Spark 1.3 (max); no result is transferred between efforts."
+  },
+  {
+    "id": "grok-4.6-xhigh",
+    "displayName": "Grok 4.6 (xhigh)",
+    "url": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+    "variant": "grok-4-6-xhigh",
+    "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Grok 4.6 (xhigh), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Grok 4.6 family's other roster entry is Grok 4.6 (medium), tracked unranked; no result is transferred between efforts."
+  },
+  {
+    "id": "deepseek-v4-1-flash-1017",
+    "displayName": "DeepSeek V4.1 Flash 1017",
+    "url": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+    "variant": "deepseek-v4-1-flash-1017",
+    "note": "Refresh 2026-10-23 (owner decision O47, cutoff moved to this capture): near-frontier family on AA's rendered Intelligence Index vs. total-cost chart observed 2026-10-23 (DeepSeek V4.1 Flash 1017 (max), Index 45, USD 444.60, 3 points below GPT-6.1 Sol (medium) at its cost); added under the AGENTS.md near-frontier rule. Selected configuration: DeepSeek V4.1 Flash 1017 (max), AA's only configuration of this model version. No result is transferred from DeepSeek V4.1 Flash or DeepSeek V4 Flash 0731, which are other versions."
+  },
+  {
+    "id": "minimax-m3-1-flash",
+    "displayName": "MiniMax-M3.1-Flash",
+    "url": "https://artificialanalysis.ai/models/minimax-m3-1-flash",
+    "variant": "minimax-m3-1-flash",
+    "note": "Refresh 2026-10-23 (owner decision O47, cutoff moved to this capture): near-frontier family on AA's rendered Intelligence Index vs. total-cost chart observed 2026-10-23 (MiniMax-M3.1-Flash, Index 43, USD 283.18, 3 points below MiMo-V2.6-Pro at its cost); added under the AGENTS.md near-frontier rule. Selected configuration: MiniMax-M3.1-Flash, AA's only configuration of this model. No result is transferred from MiniMax-M3 or other MiniMax versions."
+  },
+  {
+    "id": "gpt-6-luna-low",
+    "displayName": "GPT-6 Luna (low)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-luna-low",
+    "variant": "gpt-6-luna-low",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. GPT-6 Luna (low) is a rendered-frontier vertex on the chart observed 2026-10-23T05:27:39Z (Index 22, USD 10.63). The GPT-6 Luna family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6-luna-medium",
+    "displayName": "GPT-6 Luna (medium)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-luna-medium",
+    "variant": "gpt-6-luna-medium",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. GPT-6 Luna (medium) is a rendered-frontier vertex on the chart observed 2026-10-23T05:27:39Z (Index 30, USD 31.17). The GPT-6 Luna family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6-luna-high",
+    "displayName": "GPT-6 Luna (high)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+    "variant": "gpt-6-luna-high",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. GPT-6 Luna (high) is a rendered-frontier vertex on the chart observed 2026-10-23T05:27:39Z (Index 33, USD 47.85). The GPT-6 Luna family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6-luna-xhigh",
+    "displayName": "GPT-6 Luna (xhigh)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-luna-xhigh",
+    "variant": "gpt-6-luna-xhigh",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. GPT-6 Luna (xhigh) is a rendered-frontier vertex on the chart observed 2026-10-23T05:27:39Z (Index 35, USD 66.81). The GPT-6 Luna family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "claude-opus-5-5-high",
+    "displayName": "Claude Opus 5.5 (high)",
+    "url": "https://artificialanalysis.ai/models/claude-opus-5-5-high",
+    "variant": "claude-opus-5-5-high",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. Claude Opus 5.5 (high with fallback) is a rendered-frontier vertex on the chart observed 2026-10-23T05:27:39Z (Index 54, USD 2,172.43). The Claude Opus 5.5 family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "claude-opus-5-5-xhigh",
+    "displayName": "Claude Opus 5.5 (xhigh)",
+    "url": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh",
+    "variant": "claude-opus-5-5-xhigh",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. Claude Opus 5.5 (xhigh with fallback) is a rendered-frontier vertex on the chart observed 2026-10-23T05:27:39Z (Index 56, USD 4,056.65). The Claude Opus 5.5 family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "claude-opus-5-5-medium",
+    "displayName": "Claude Opus 5.5 (medium)",
+    "url": "https://artificialanalysis.ai/models/claude-opus-5-5-medium",
+    "variant": "claude-opus-5-5-medium",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. Claude Opus 5.5 (medium with fallback) is near-frontier (1 point below GPT-6.1 Sol (max) at its cost) on the chart observed 2026-10-23T05:27:39Z (Index 51, USD 1,626.81). The Claude Opus 5.5 family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-5.6-luna-low",
+    "displayName": "GPT-5.6 Luna (low)",
+    "url": "https://artificialanalysis.ai/models/gpt-5-6-luna-low",
+    "variant": "gpt-5-6-luna-low",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. GPT-5.6 Luna (low) is near-frontier (1 point below GPT-6 Luna (low) at its cost) on the chart observed 2026-10-23T05:27:39Z (Index 21, USD 27.02). The GPT-5.6 Luna family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6-astra-high",
+    "displayName": "GPT-6 Astra (high)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-astra-high",
+    "variant": "gpt-6-astra-high",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. GPT-6 Astra (high) is near-frontier (3 points below Claude Opus 5.5 (high with fallback) at its cost) on the chart observed 2026-10-23T05:27:39Z (Index 51, USD 2,925.01). The GPT-6 Astra family's other roster rows keep their own evidence; no result is transferred between efforts."
+  },
+  {
+    "id": "gpt-6-astra-xhigh",
+    "displayName": "GPT-6 Astra (xhigh)",
+    "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+    "variant": "gpt-6-astra-xhigh",
+    "note": "Owner decision O51 (2026-10-23): the cohort is every configuration AA plots on its rendered Intelligence Index vs. Cost to Run frontier or within 3 Index points of it, each plotted effort its own row. GPT-6 Astra (xhigh) is near-frontier (2 points below Claude Opus 5.5 (high with fallback) at its cost) on the chart observed 2026-10-23T05:27:39Z (Index 52, USD 3,802.98). The GPT-6 Astra family's other roster rows keep their own evidence; no result is transferred between efforts."
   }
 ]

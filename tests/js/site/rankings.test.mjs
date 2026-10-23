@@ -19,13 +19,64 @@ test('renders one dense row per model in plan-rank order with the cost unit in t
   assert.equal(p.count.textContent, '5 of 5 models');
   const alpha = rows(p)[0];
   assert.equal(cell(alpha, 'rank').textContent, '1');
-  assert.equal(cell(alpha, 'name').textContent, 'AlphaAcme');
+  assert.equal(cell(alpha, 'name').textContent, 'Alpha1Acme');
   assert.equal(cell(alpha, 'name').querySelector('a').getAttribute('href'), '/models/alpha/');
   assert.equal(cell(alpha, 'overall').textContent, '71.6');
-  assert.equal(cell(alpha, 'quality').textContent, '70.4');
+  assert.equal(cell(alpha, 'quality').textContent, '72.0');
   assert.equal(cell(alpha, 'cost').textContent, '$0.50');
-  assert.equal(cell(alpha, 'grade').textContent, 'Owner-measured');
-  assert.match(header(p, 'cost').textContent, /Plan cost \(USD per Index point\)/);
+  assert.equal(cell(alpha, 'grade'), null);
+  assert.equal(header(p, 'grade'), null);
+  assert.match(header(p, 'cost').textContent, /Plan cost \(USD per basket run\)/);
+});
+
+// Evidence is footnoted, not a column: markers in the name cells and the notes list must match the rows shown.
+const notes = (p) => [...p.notes.children];
+const markers = (p) => rows(p).map((r) => r.querySelector('.fn-ref a'));
+const assertNotesMatchRows = (p) => {
+  const slugs = slugsInOrder(p);
+  assert.deepEqual(notes(p).map((li) => li.getAttribute('id')), slugs.map((s) => `ev-${s}`));
+  assert.deepEqual(markers(p).map((a) => a.textContent), slugs.map((_, i) => String(i + 1)));
+  assert.deepEqual(markers(p).map((a) => a.getAttribute('href')), slugs.map((s) => `#ev-${s}`));
+  assert.deepEqual(markers(p).map((a) => a.getAttribute('id')), slugs.map((s) => `evref-${s}`));
+  assert.deepEqual(notes(p).map((li) => li.querySelector('.fn-back').getAttribute('href')), slugs.map((s) => `#evref-${s}`));
+};
+
+test('each row carries a numbered evidence marker linking to its note, and each note links back', () => {
+  const p = mount();
+  assertNotesMatchRows(p);
+  const alpha = markers(p)[0];
+  assert.equal(cell(rows(p)[0], 'name').querySelector('.fn-host .model-name').textContent, 'Alpha');
+  assert.equal(alpha.getAttribute('aria-label'), 'Evidence note 1 for Alpha');
+  const note = notes(p)[0];
+  assert.equal(note.querySelector('.fn-label').textContent, 'Alpha');
+  assert.equal(note.querySelector('.fn-back').getAttribute('aria-label'), 'Back to Alpha in the table');
+  const badge = note.querySelector('.badge');
+  assert.equal(badge.className, 'badge badge-measured');
+  assert.equal(badge.textContent, 'User-measured');
+  assert.equal(badge.getAttribute('title'), 'Measured by the benchmark owner or in a controlled account measurement.');
+  assert.match(note.querySelector('.fn-text').textContent, /^Weakest grade of any value inside the score\. Measured by/);
+  assert.equal(notes(p)[1].querySelector('.badge').textContent, 'Modelled');
+});
+
+test('evidence markers and notes follow re-sorting, filtering and the basis toggle', () => {
+  const p = mount();
+  header(p, 'overall').querySelector('button').click();
+  header(p, 'overall').querySelector('button').click();
+  assert.deepEqual(slugsInOrder(p).slice(0, 3), ['gamma', 'beta', 'alpha']);
+  assertNotesMatchRows(p);
+  check(p.providers[0]);
+  assert.deepEqual(slugsInOrder(p), ['gamma', 'alpha']);
+  assertNotesMatchRows(p);
+  p.toggle.api.click();
+  assertNotesMatchRows(p);
+  type(p.q, 'zzz');
+  assert.deepEqual(notes(p), []);
+});
+
+test('the evidence grade stays sortable from the URL although it is not drawn', () => {
+  const p = mount({ search: '?sort=grade' });
+  assert.deepEqual(slugsInOrder(p), ['alpha', 'delta', 'beta', 'gamma', 'eps']);
+  assertNotesMatchRows(p);
 });
 
 test('headers are sortable with aria-sort reflecting the active column', () => {
@@ -55,7 +106,7 @@ test('the basis toggle switches rank order, cost header and unit, and the URL', 
   const p = mount();
   p.toggle.api.click();
   assert.deepEqual(slugsInOrder(p).slice(0, 3), ['beta', 'alpha', 'gamma']);
-  assert.match(header(p, 'cost').textContent, /API cost \(USD per Index point\)/);
+  assert.match(header(p, 'cost').textContent, /API cost \(USD per basket run\)/);
   assert.equal(cell(rows(p)[0], 'cost').textContent, '$2,500.00');
   assert.equal(lastUrl(p), '/rankings/?basis=api');
   assert.equal(p.toggle.api.getAttribute('aria-pressed'), 'true');
@@ -158,11 +209,12 @@ test('state in the URL wins on load: controls, headers and columns reflect it', 
   assert.equal(slugsInOrder(p)[0], 'alpha');
 });
 
-test('column picker lists every column, toggles columns, and keeps Model mandatory', () => {
+test('column picker lists every drawable column, toggles columns, and keeps Model mandatory', () => {
   const p = mount();
   const boxes = [...p.columns.querySelectorAll('input')];
   const byKey = (k) => boxes.find((b) => b.getAttribute('data-col') === k);
   assert.ok(byKey('a') && byKey('b') && byKey('developer'));
+  assert.equal(byKey('grade'), undefined); // evidence is footnoted, so it has no column to pick
   assert.equal(byKey('name').hasAttribute('disabled'), true);
   assert.equal(byKey('quality').checked, true);
   assert.equal(byKey('a').checked, false);
@@ -176,8 +228,18 @@ test('column picker lists every column, toggles columns, and keeps Model mandato
   assert.match(cell(rows(p)[0], 'a').textContent, /80\.0/);
 });
 
+test('picking columns keeps the data-only grade out of the view when the URL dropped it', () => {
+  const p = mount({ search: '?cols=rank,name,overall' });
+  const box = [...p.columns.querySelectorAll('input')].find((b) => b.getAttribute('data-col') === 'quality');
+  box.checked = true;
+  box.fire('change');
+  assert.equal(lastUrl(p), '/rankings/?cols=rank,name,overall,quality');
+  p.csv.click();
+  assert.equal(p.win.URL.created[0].blob.text().split('\r\n')[0], 'Rank,Model,Overall,Quality');
+});
+
 test('every optional column renders a value', () => {
-  const keys = ['developer', 'qualityRank', 'speed', 'ii', 'a'].join(',');
+  const keys = ['developer', 'qualityRank', 'speed', 'ii', 'band', 'a'].join(',');
   const p = mount({ search: `?cols=rank,${keys}` });
   const beta = rows(p)[1];
   assert.equal(cell(beta, 'developer').textContent, 'Bolt AI');
@@ -185,6 +247,7 @@ test('every optional column renders a value', () => {
   assert.equal(cell(rows(p)[3], 'qualityRank').textContent, '—');
   assert.equal(cell(beta, 'speed').textContent, '80.0');
   assert.equal(cell(beta, 'ii').textContent, '50.0');
+  assert.equal(cell(beta, 'band').textContent, '—');
 });
 
 test('coverage is a bar plus an expander listing missing metrics, and stays open across re-renders', () => {
@@ -266,8 +329,8 @@ test('CSV export builds a blob URL on click with basis and version in the filena
   assert.equal(p.csv.getAttribute('download'), 'valuerank-v9.9.9-plan.csv');
   assert.equal(first.blob.type, 'text/csv;charset=utf-8');
   const text = first.blob.text();
-  assert.equal(text.split('\r\n')[0], 'Rank,Model,Overall,Quality,Plan cost (USD per Index point),Evidence,Coverage');
-  assert.equal(text.split('\r\n')[1], '1,Alpha,71.6,70.4,0.5,measured,100');
+  assert.equal(text.split('\r\n')[0], 'Rank,Model,Overall,Quality,Plan cost (USD per basket run),Evidence,Coverage');
+  assert.equal(text.split('\r\n')[1], '1,Alpha,71.6,72,0.5,measured,100');
   p.toggle.api.click();
   p.csv.click();
   assert.equal(p.csv.getAttribute('download'), 'valuerank-v9.9.9-api.csv');
@@ -298,10 +361,10 @@ test('the loading row is replaced by the table; basis labels and units follow th
   assert.equal(p.body.querySelector('[data-state="loading"]'), null);
   assert.equal(p.error.hidden, true);
   assert.equal(p.basisLabel.textContent, 'Plan ranking');
-  assert.equal(p.costUnit.textContent, 'USD per Index point');
+  assert.equal(p.costUnit.textContent, 'USD per basket run');
   p.toggle.api.click();
   assert.equal(p.basisLabel.textContent, 'API ranking');
-  assert.equal(p.costUnit.textContent, 'USD per Index point');
+  assert.equal(p.costUnit.textContent, 'USD per basket run');
   assert.equal(p.win.document.documentElement.getAttribute('data-basis'), 'api');
 });
 
@@ -357,8 +420,27 @@ test('answer page renders the compact table of ranked models only, in rank order
   assert.equal(cell(rows(p)[0], 'name').querySelector('a').getAttribute('href'), '/models/alpha/');
   assert.equal(cell(rows(p)[0], 'overall').textContent, '71.6');
   assert.equal(p.sliderOut.textContent, '20.0%');
-  assert.equal(cell(rows(p)[0], 'quality').textContent, '70.4');
+  assert.equal(cell(rows(p)[0], 'quality').textContent, '72.0');
   assert.equal(cell(rows(p)[1], 'coverage').getAttribute('data-label'), 'Coverage');
+  assert.equal(cell(rows(p)[0], 'grade'), null);
+});
+
+test('answer page evidence notes match the rows after a basis switch and a weight change', () => {
+  const p = mountIndex();
+  const check = () => {
+    const slugs = slugsInOrder(p);
+    assert.deepEqual([...p.notes.children].map((li) => li.getAttribute('id')), slugs.map((s) => `ev-${s}`));
+    assert.deepEqual(rows(p).map((r) => r.querySelector('.fn-ref a').textContent), slugs.map((_, i) => String(i + 1)));
+    assert.deepEqual(rows(p).map((r) => r.querySelector('.fn-ref a').getAttribute('href')), slugs.map((s) => `#ev-${s}`));
+  };
+  check();
+  p.toggle.api.click();
+  assert.deepEqual(slugsInOrder(p), ['beta', 'alpha', 'gamma']);
+  check();
+  p.slider.value = '100';
+  p.slider.fire('input');
+  check();
+  assert.equal(p.notes.children[0].querySelector('.badge').textContent, 'Assumption');
 });
 
 test('answer page lists at most 16 models', () => {
@@ -477,4 +559,29 @@ test('frontier tier badges carry text and a tooltip with the configuration and g
       delete m.aaFrontierTier; delete m.aaFrontierConfiguration; delete m.aaFrontierIntelligenceGap;
     }
   }
+});
+
+test('noise band column prints the rank range a row cannot be told apart from (O42)', async () => {
+  const { bandText } = await import('../../../valuerank/site/assets/js/rankings.js');
+  const { columnValue } = await import('../../../valuerank/site/assets/js/filters.js');
+  const model = { band: { plan: [4, 9], api: [3, 3] } };
+  assert.equal(bandText(model, 'plan'), '4–9');
+  assert.equal(bandText(model, 'api'), '3');
+  assert.equal(bandText({ band: { plan: null, api: null } }, 'plan'), '—');
+  assert.equal(bandText({}, 'api'), '—');
+  assert.equal(columnValue(model, 'band', 'plan'), 4);
+  assert.equal(columnValue({}, 'band', 'plan'), null);
+});
+
+test('a Plan band on an owner-named transfer is marked (I28) and the Plan basis lists plan rows (O48)', async () => {
+  const { bandText, modelsFor, rowKey } = await import('../../../valuerank/site/assets/js/rankings.js');
+  const model = { band: { plan: [2, 5], api: [1, 1] }, bandExcludesTransfer: true };
+  assert.equal(bandText(model, 'plan'), '2–5†');
+  assert.equal(bandText(model, 'api'), '1');
+  const data = { models: [{ slug: 'a' }], planModels: [{ slug: 'a', key: 'a@pro' }, { slug: 'a', key: 'a@max' }] };
+  assert.equal(modelsFor(data, 'plan'), data.planModels);
+  assert.equal(modelsFor(data, 'api'), data.models);
+  assert.equal(modelsFor({ models: data.models }, 'plan'), data.models);
+  assert.equal(rowKey(data.planModels[1]), 'a@max');
+  assert.equal(rowKey(data.models[0]), 'a');
 });

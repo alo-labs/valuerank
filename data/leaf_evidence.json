@@ -1,0 +1,2142 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-23",
+  "rule": "Owner decisions O36/O37 (2026-10-21): every ranked configuration has all eleven quality leaves. A leaf the primary source lacks comes, in order, from a newer capture of the same primary source (aa_recapture), from another party that ran the same benchmark version on the exact configuration (independent; Cognition counts for FrontierCode), or from the model provider's own published result (model_provider_claim). Each leaf a cohort configuration still lacks has an exhaustive search logged here within 7 days of the release cutoff.",
+  "sourceRegistry": {
+    "bugHunt": [
+      "Bug Hunt Bench owner (Product Compass)"
+    ],
+    "frontierCode": [
+      "Artificial Analysis",
+      "Cognition (FrontierCode's author)"
+    ],
+    "terminalBench": [
+      "Artificial Analysis",
+      "tbench.ai"
+    ],
+    "_note": "E239 (2026-10-21): the closed per-leaf list of parties whose run of the same benchmark version may fill a leaf (O36/O37); a provider claim is the model provider's own document. A new source enters by a dated registry update recorded in the ledger. DeepSWE removed 2026-10-23 (O49)."
+  },
+  "supplements": [
+    {
+      "modelId": "claude-opus-5",
+      "leaf": "frontierCode",
+      "value": 0.4804,
+      "unit": "fraction",
+      "sourceType": "independent",
+      "publisher": "Cognition (FrontierCode's author)",
+      "configuration": "Claude Opus 5 (max), harness claude-code",
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "publishedOn": "2026-10-21",
+      "artifact": "cognitionFrontierCode",
+      "locator": "v1_1.data['Claude Opus 5'].max.main.new_score",
+      "quote": "v1_1.data['Claude Opus 5'].max.main.new_score = 0.4804",
+      "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+      "benchmarkVersion": "FrontierCode 1.1",
+      "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
+    },
+    {
+      "modelId": "gpt-6-sol",
+      "leaf": "frontierCode",
+      "value": 0.4927,
+      "unit": "fraction",
+      "sourceType": "independent",
+      "publisher": "Cognition (FrontierCode's author)",
+      "configuration": "GPT-6 Sol (max), harness codex",
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "publishedOn": "2026-10-21",
+      "artifact": "cognitionFrontierCode",
+      "locator": "v1_1.data['GPT-6 Sol'].max.main.new_score",
+      "quote": "v1_1.data['GPT-6 Sol'].max.main.new_score = 0.4927",
+      "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+      "benchmarkVersion": "FrontierCode 1.1",
+      "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
+    },
+    {
+      "modelId": "gpt-5.6-sol",
+      "leaf": "frontierCode",
+      "value": 0.4749,
+      "unit": "fraction",
+      "sourceType": "independent",
+      "publisher": "Cognition (FrontierCode's author)",
+      "configuration": "GPT-5.6 Sol (max), harness codex",
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "publishedOn": "2026-10-21",
+      "artifact": "cognitionFrontierCode",
+      "locator": "v1_1.data['GPT-5.6 Sol'].max.main.new_score",
+      "quote": "v1_1.data['GPT-5.6 Sol'].max.main.new_score = 0.4749",
+      "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+      "benchmarkVersion": "FrontierCode 1.1",
+      "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
+    },
+    {
+      "modelId": "gpt-5.6-luna",
+      "leaf": "frontierCode",
+      "value": 0.3981,
+      "unit": "fraction",
+      "sourceType": "independent",
+      "publisher": "Cognition (FrontierCode's author)",
+      "configuration": "GPT-5.6 Luna (max), harness codex",
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "publishedOn": "2026-10-21",
+      "artifact": "cognitionFrontierCode",
+      "locator": "v1_1.data['GPT-5.6 Luna'].max.main.new_score",
+      "quote": "v1_1.data['GPT-5.6 Luna'].max.main.new_score = 0.3981",
+      "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own.",
+      "benchmarkVersion": "FrontierCode 1.1",
+      "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "frontierCode",
+      "value": 0.5094,
+      "unit": "fraction",
+      "sourceType": "independent",
+      "publisher": "Cognition (FrontierCode's author)",
+      "configuration": "GPT-6 Astra (high), harness codex",
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "publishedOn": "2026-10-21",
+      "artifact": "cognitionFrontierCode",
+      "locator": "v1_1.data['GPT-6 Astra'].high.main.new_score",
+      "quote": "v1_1.data['GPT-6 Astra'].high.main.new_score = 0.5094",
+      "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own. Added 2026-10-23: AA publishes no FrontierCode value for this configuration (O37).",
+      "benchmarkVersion": "FrontierCode 1.1",
+      "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "frontierCode",
+      "value": 0.5062,
+      "unit": "fraction",
+      "sourceType": "independent",
+      "publisher": "Cognition (FrontierCode's author)",
+      "configuration": "GPT-6 Astra (xhigh), harness codex",
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "publishedOn": "2026-10-21",
+      "artifact": "cognitionFrontierCode",
+      "locator": "v1_1.data['GPT-6 Astra'].xhigh.main.new_score",
+      "quote": "v1_1.data['GPT-6 Astra'].xhigh.main.new_score = 0.5062",
+      "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own. Added 2026-10-23: AA publishes no FrontierCode value for this configuration (O37).",
+      "benchmarkVersion": "FrontierCode 1.1",
+      "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
+    },
+    {
+      "modelId": "gpt-5.6-luna-low",
+      "leaf": "frontierCode",
+      "value": 0.1538,
+      "unit": "fraction",
+      "sourceType": "independent",
+      "publisher": "Cognition (FrontierCode's author)",
+      "configuration": "GPT-5.6 Luna (low), harness codex",
+      "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+      "publishedOn": "2026-10-21",
+      "artifact": "cognitionFrontierCode",
+      "locator": "v1_1.data['GPT-5.6 Luna'].low.main.new_score",
+      "quote": "v1_1.data['GPT-5.6 Luna'].low.main.new_score = 0.1538",
+      "notes": "FrontierCode 1.1 Main subset (100 tasks), Cognition's headline new_score; Cognition runs each model in its vendor harness, AA in its own. Added 2026-10-23: AA publishes no FrontierCode value for this configuration (O37).",
+      "benchmarkVersion": "FrontierCode 1.1",
+      "metric": "Cognition's Main subset (100 tasks) headline new_score (0-1), the scale of AA's field (E234 cross-check)"
+    }
+  ],
+  "searches": [
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "bugHunt",
+      "searchedOn": "2026-10-21",
+      "result": "not found",
+      "sources": [
+        "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md (updated 2026-10-19)",
+        "https://bughunt.productcompass.pm/ (no table text rendered)"
+      ],
+      "notes": "The only Flash row is 'MiMo-V2.6-Flash - mean of 3' (OpenRouter, default effort; reasoning state not asserted and untested for Flash). No first-party or thinking-enabled Flash run exists.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-19-methodology-codesign/open-web-discovery-2026-10-23.json",
+        "queries": [
+          "MiMo-V2.6-Flash Bug Hunt Bench score",
+          "\"bug-hunt-bench\" MiMo-V2.6-Flash thinking",
+          "Bug Hunt Bench leaderboard Product Compass models results",
+          "小米 MiMo-V2.6-Flash Bug Hunt 评测",
+          "MiMo-V2.6-Flash 代码 bug 修复 第三方评测 thinking 模式 排行榜 Bug Hunt Bench (extended)",
+          "Bug Hunt Bench MiMo Flash reddit OR hackernews OR github thinking enabled (extended)",
+          "github \"bug-hunt-bench\" fork results model run phuryn alternative results",
+          "\"Bug Hunt Bench\" Pawel Huryn Xiaomi MiMo Flash",
+          "Bug Hunt Bench new results added MiMo thinking enabled Flash first-party Xiaomi API productcompass update",
+          "MiMo-V2.6-Flash default thinking mode enabled by default Xiaomi API docs reasoning_content",
+          "WebFetch/curl: bughunt.productcompass.pm/data/benchmark.json (updated 2026-10-19; 47 models, 290 runs), raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md (fetched 2026-10-23, 1573 lines), benchlm.ai/md/benchmarks/bug-hunt-bench.md, plugandship.dev/p/bug-hunt-bench, benchlm.ai/models/mimo-v2-6-flash, mimo.mi.com/docs/en-US/updates/model, docs.litellm.ai/blog/mimo_v2_6"
+        ],
+        "candidates": [
+          {
+            "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+            "publisher": "Product Compass (Pawel Huryn), Bug Hunt Bench owner",
+            "published": "2026-09-22",
+            "reports": "Only MiMo-V2.6-Flash row: 'MiMo-V2.6-Flash - mean of 3', 23.3/105 (runs 19, 25, 26), Claude Code via OpenRouter (xiaomi/mimo-v2.6-flash), effort 'default' (effort_status default), blind Codex gpt-5.5 judge. Re-fetched 2026-10-23: board updated 2026-10-19, no other Flash row (no first-party / thinking-asserted run). Owner notes: reasoning state not asserted and untested for Flash; for sibling Pro the reasoning field was measured inert and Pro first-party thinking.type=enabled row exists (single run).",
+            "resolution": "reject",
+            "reason": "not the exact configuration: registered-source (owner) row exists but at 'default' effort with reasoning state not asserted, as already logged 2026-10-21. Context: Xiaomi's release notes recommend Thinking as default mode and LiteLLM states thinking is on by default for every V2.6 model, so the row is plausibly thinking-enabled, but no party asserts it. Editor's call whether 'default' may stand for the AA-plotted configuration; this is not an unregistered-party finding."
+          },
+          {
+            "url": "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md",
+            "publisher": "Product Compass / phuryn (GitHub raw notes)",
+            "published": "2026-09-22",
+            "reports": "Same Flash mean-of-3 row (23.3/105, $0.49/run, walls 66.6/81.1/64.3 min) with the note 'effort is default ... for this model the dial is untested rather than known-inert'. Live file now longer than the 2026-10-21 capture (1573 vs 1499 lines) but still only one Flash entry.",
+            "resolution": "reject",
+            "reason": "not the exact configuration (same registered-source row; reasoning state not asserted)"
+          },
+          {
+            "url": "https://plugandship.dev/p/bug-hunt-bench",
+            "publisher": "Plug and Ship (directory)",
+            "published": "2026-10-14",
+            "reports": "Lists 'Xiaomi: MiMo-V2.6-Flash (default) 23.3' as 2nd behind Qwen3.8-Flash (max) 26 (snapshot of 185 rows / 227 runs).",
+            "resolution": "reject",
+            "reason": "relay of a registered source (Bug Hunt Bench owner); same default-effort row"
+          },
+          {
+            "url": "https://benchlm.ai/md/benchmarks/bug-hunt-bench.md",
+            "publisher": "BenchLM (aggregator)",
+            "published": "2026-10-19",
+            "reports": "Mirror of owner board (28 featured configs); only MiMo-V2.6-Pro (default, mean of 3, 22.7) is featured; no Flash row.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (Bug Hunt Bench owner); and the featured MiMo row is a different model version (Pro)"
+          },
+          {
+            "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+            "publisher": "Product Compass (Pawel Huryn), Bug Hunt Bench owner",
+            "published": "2026-09-22",
+            "reports": "MiMo-V2.6-Pro rows: first-party thinking.type=enabled single run 18/105 (2026-09-22); OpenRouter default mean of 3 22.7/105.",
+            "resolution": "reject",
+            "reason": "different model version (Pro, not Flash)"
+          },
+          {
+            "url": "https://mimo.mi.com/docs/en-US/updates/model",
+            "publisher": "Xiaomi MiMo docs",
+            "published": "2026-09-21",
+            "reports": "Release notes: thinking mode recommended as default for V2.6; no Bug Hunt score.",
+            "resolution": "reject",
+            "reason": "not a score"
+          }
+        ],
+        "result": "not found"
+      }
+    },
+    {
+      "modelId": "grok-4.6-xhigh",
+      "leaf": "frontierCode",
+      "searchedOn": "2026-10-21",
+      "result": "not found",
+      "sources": [
+        "https://x.ai/news/grok-4-6 (2026-08-12)",
+        "https://cognition.ai FrontierCode leaderboard data.json (captured 2026-10-21; no row at this effort)",
+        "https://artificialanalysis.ai FrontierCode chart (no row for this configuration)",
+        "https://llm-stats.com/benchmarks/frontiercode",
+        "https://llmlearner.com/rankings/frontiercode-v1-1-main",
+        "https://agentsdirectory.dev/benchmarks/frontiercode-main",
+        "https://codingfleet.com/blog/frontiercode-v11-main-leaderboard-2026/"
+      ],
+      "notes": "xAI publishes FrontierCode v1.1 Extended 61.3% for Grok 4.6 at High effort only; xhigh appears nowhere. Cognition and its relays list Grok 4.6 at high effort (Main 48.0%). No exact-effort (xhigh) score exists; efforts are not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-19-methodology-codesign/open-web-discovery-2026-10-23.json",
+        "queries": [
+          "FrontierCode Grok 4.6 xhigh score",
+          "Grok 4.6 FrontierCode 1.1 Main xhigh reasoning effort grok-build Cognition (extended)",
+          "FrontierCode benchmark leaderboard Muse Wonder Full Muse Spark 1.3 DeepSeek V4 Flash Grok 4.6 (extended)",
+          "Cognition FrontierCode leaderboard v1.1 Main Extended results",
+          "reddit FrontierCode benchmark results Muse Wonder Grok 4.6 DeepSeek V4 Flash mergeability independent evaluation",
+          "Grok 4.6 \"xhigh\" FrontierCode \"1.1\" third-party evaluation Artificial Analysis Coding Agent Index grok-build",
+          "arxiv FrontierCode 1.1 Cognition benchmark evaluation Grok 4.6 DeepSeek-V4-Flash Muse results table (extended)",
+          "WebFetch/curl: cognition.com/data/frontiercode-leaderboard/data.json (Last-Modified 2026-10-22T22:28:12Z), cognition.com/frontiercode (changelog to 2026-10-13), artificialanalysis.ai/evaluations/frontiercode (live payload 2026-10-23), artificialanalysis.ai/models/grok-4-6-xhigh, benchlm.ai/models/grok-4-6, llm-stats.com/benchmarks/frontiercode, llmreference.com FrontierCode Main/Extended, codingfleet.com FrontierCode v1.1 leaderboard"
+        ],
+        "candidates": [
+          {
+            "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+            "publisher": "Cognition (FrontierCode author; registered)",
+            "published": "2026-09-01",
+            "reports": "Grok 4.6 FrontierCode 1.1 Main (grok-build harness): low 40.1%, medium 46.1%, high 48.0% (new_score; raw correct 44.6/51.2/53.2%). Efforts listed: low, medium, high only. Low and medium added 2026-09-01. File re-fetched 2026-10-23 (last modified 2026-10-22T22:28Z): still no xhigh row.",
+            "resolution": "reject",
+            "reason": "different effort (low/medium/high; no xhigh run exists on Cognition)"
+          },
+          {
+            "url": "https://x.ai/news/grok-4-6",
+            "publisher": "xAI (model provider)",
+            "published": "2026-08-12",
+            "reports": "FrontierCode v1.1 Extended 61.3% for Grok 4.6 High (Grok Build harness); no xhigh figure on the launch page or model card (media.x.ai card-4p6).",
+            "resolution": "reject",
+            "reason": "different effort (High) and different subset (Extended, not Main); provider claim"
+          },
+          {
+            "url": "https://benchlm.ai/models/grok-4-6",
+            "publisher": "BenchLM, llm-stats.com, CometAPI, AWS Bedrock model card (aggregators)",
+            "published": null,
+            "reports": "Repeat xAI's 61.3% FrontierCode 1.1 Extended at High.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (model provider xAI launch post); different effort"
+          },
+          {
+            "url": "https://www.llmreference.com/benchmark/frontiercode-main",
+            "publisher": "LLM Reference / CodingFleet / BenchLM Main table (aggregators)",
+            "published": "2026-10-16",
+            "reports": "Grok 4.6 high-effort Main 48.0% (grok-build, evaluator Cognition).",
+            "resolution": "reject",
+            "reason": "relay of a registered source (Cognition); different effort"
+          },
+          {
+            "url": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+            "publisher": "Artificial Analysis (registered)",
+            "published": "2026-10-23",
+            "reports": "Live model page/payload fetched 2026-10-23: frontierCode null for Grok 4.6 (xhigh), (high), (medium) and (low). AA's only Grok FrontierCode values are Grok 4.7 (high) 34.2%, (xhigh) 33.8%, (low) 39.6%.",
+            "resolution": "reject",
+            "reason": "not a score (no AA row at this configuration); Grok 4.7 rows are a different model version"
+          },
+          {
+            "url": "https://x.com/XFreeze/status/2091642814606032998",
+            "publisher": "X post by XFreeze (fan account)",
+            "published": null,
+            "reports": "States Grok Build exposes xhigh ('Extra High') effort for Grok 4.6; gives no benchmark score.",
+            "resolution": "reject",
+            "reason": "not a score"
+          }
+        ],
+        "result": "not found"
+      }
+    },
+    {
+      "modelId": "deepseek-v4-flash",
+      "leaf": "frontierCode",
+      "searchedOn": "2026-10-21",
+      "result": "not found",
+      "sources": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731 (README)",
+        "https://api-docs.deepseek.com/news/news0731",
+        "https://cognition.ai FrontierCode leaderboard data.json (captured 2026-10-21; no row at this effort)",
+        "https://artificialanalysis.ai FrontierCode chart (no row for this configuration)",
+        "https://llm-stats.com/benchmarks/frontiercode",
+        "https://llmlearner.com/rankings/frontiercode-v1-1-main",
+        "https://agentsdirectory.dev/benchmarks/frontiercode-main",
+        "https://codingfleet.com/blog/frontiercode-v11-main-leaderboard-2026/"
+      ],
+      "notes": "DeepSeek's model card and release note publish no FrontierCode result. Cognition (relayed by codingfleet) lists DeepSeek V4 Flash 0731 at high effort only (18.8%); AA's 44% is DeepSeek V4.1 Flash, a different version. No max-effort score exists.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-19-methodology-codesign/open-web-discovery-2026-10-23.json",
+        "queries": [
+          "FrontierCode DeepSeek V4 Flash 0731 max effort",
+          "\"FrontierCode\" \"DeepSeek V4\" Flash",
+          "FrontierCode 评测 DeepSeek V4 Flash 0731 得分",
+          "DeepSeek V4 Flash 0731 FrontierCode max reasoning chisel harness score (extended)",
+          "DeepSeek V4 Flash FrontierCode 18.8% Cognition high effort chisel max effort",
+          "DeepSeek V4 Flash 0731 FrontierCode Artificial Analysis max 版 FrontierCode 1.1 DeepSeek 0731 vs 1017",
+          "WebFetch/curl: cognition.com data.json, artificialanalysis.ai/models/deepseek-v4-flash and evaluations/frontiercode payload (2026-10-23), benchlm.ai/models/deepseek-v4-flash-0731, benchlm.ai/md/benchmarks/frontiercode.md, benchleader.com DeepSeek V4.1 Flash vs Muse Spark 1.3, llm-stats.com FrontierCode 1.1, codingfleet.com"
+        ],
+        "candidates": [
+          {
+            "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+            "publisher": "Cognition (registered)",
+            "published": "2026-08-06",
+            "reports": "DeepSeek V4 Flash 0731 FrontierCode 1.1 Main at high effort only: 18.8% (new_score; raw correct 21.1%), chisel harness. Efforts list ['high'].",
+            "resolution": "reject",
+            "reason": "different effort (high, not max)"
+          },
+          {
+            "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+            "publisher": "Cognition (registered)",
+            "published": "2026-10-13",
+            "reports": "DeepSeek V4.1 Flash, high effort, Main 43.9% (new_score; raw 48.6%).",
+            "resolution": "reject",
+            "reason": "different model version (V4.1 Flash, not V4 Flash 0731) and different effort"
+          },
+          {
+            "url": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+            "publisher": "Artificial Analysis (registered)",
+            "published": "2026-10-23",
+            "reports": "Live payload 2026-10-23: frontierCode null for DeepSeek V4 Flash 0731 (max) and for DeepSeek V4 Flash (high)/(max)/(non-reasoning). Non-null rows are other versions: DeepSeek V4.1 Flash (max) 44.0%, V4.1 Flash 1017 (max) 43.7%, V4 Pro 0813 (max) 38.8%.",
+            "resolution": "reject",
+            "reason": "different model version (V4.1 Flash / V4 Pro 0813); no AA row for the 0731 (max) configuration"
+          },
+          {
+            "url": "https://www.benchleader.com/compare/deepseek-v4-1-flash-1017-vs-muse-spark-1-3",
+            "publisher": "BenchLeader, BenchLM, Roo3, codingfleet (aggregators)",
+            "published": "2026-10-20",
+            "reports": "Repeat AA's 43.7% (V4.1 Flash 1017 max) and Cognition's 43.9% (V4.1 Flash high) and 18.8% (V4 Flash 0731 high).",
+            "resolution": "reject",
+            "reason": "relay of a registered source (AA / Cognition); different model version or effort"
+          },
+          {
+            "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731",
+            "publisher": "DeepSeek (model provider)",
+            "published": "2026-07-31",
+            "reports": "Model card reports code-agent results at max effort in the (unreleased) DeepSeek Harness, e.g. Terminal-Bench 2.1 82.7; no FrontierCode result.",
+            "resolution": "reject",
+            "reason": "not a score (no FrontierCode figure)"
+          }
+        ],
+        "result": "not found"
+      }
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "bugHunt",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "sources": [
+        "https://github.com/phuryn/bug-hunt-bench (main = 46802fc312b6fd467b0baee519df05693f120232, 2026-10-19T12:02:52+02:00; all 139 files listed, results/combined-scoreboard.csv, scoreboard.csv, run-notes.md (1573 lines), notes.md: 0 MiniMax rows; only MiniMax artifacts are two minimax-m2.7 effort-dial probe logs from 2026-09-12)",
+        "https://bughunt.productcompass.pm/data/benchmark.json (updated 2026-10-19; 0 MiniMax runs)",
+        "https://bughunt.productcompass.pm/ (client-rendered; no run rows in the fetched page)",
+        "https://www.minimax.io/blog/minimax-m31f and https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash (provider launch post and card: no Bug Hunt Bench result)",
+        "data/bug_hunt_scoreboard.json (project capture at 46802fc: 202 rows, no MiniMax row)"
+      ],
+      "notes": "Bug Hunt Bench's owner has published no MiniMax-M3.1-Flash run (the model was released 2026-10-19, the board and repo main date from 2026-10-19 12:02 CEST). The provider's launch post and model card carry no Bug Hunt Bench result, so the last-resort provider fill does not exist either. No other party reports a Bug Hunt score for this model: BenchLM shows 'Coming soon'. The repo's only MiniMax files are M2.7 effort-dial probes, a different model version. Limitation: the GitHub API was not reachable for this session (repository not enabled), so open issues or pull requests in the repo could not be listed; the pinned commit's files and the site's benchmark.json were inspected directly. Repeat the search on the next refresh.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "queries": [
+          "MiniMax-M3.1-Flash Bug Hunt Bench",
+          "\"Bug Hunt Bench\" MiniMax M3.1 Flash OR \"MiniMax-M3\" results (extended)",
+          "Bug Hunt Bench MiniMax 评测 bug-hunt-bench M3.1 Flash",
+          "Pawel Huryn Bug Hunt Bench new model results October 2026 DeepSeek V4.1 Flash 1017 MiniMax",
+          "git ls-remote https://github.com/phuryn/bug-hunt-bench (main = 46802fc312b6fd467b0baee519df05693f120232, 2026-10-19T12:02:52+02:00); blob-less clone, git ls-tree of all 139 files; grep -i minimax over results/*.csv, run-notes.md, benchmark.json, notes.md",
+          "curl: bughunt.productcompass.pm/data/benchmark.json (updated 2026-10-19; 'minimax' 0 matches; no m3 matches) and raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md (1573 lines; 0 MiniMax matches)",
+          "WebFetch: bughunt.productcompass.pm/ (client-rendered, no run rows), benchlm.ai/compare/deepseek-v4-1-flash-vs-minimax-m3-1-flash, benchlm.ai/compare/glm-5-3-flash-vs-minimax-m3-1-flash; GitHub API (blocked by the session proxy: repository not enabled), so issues/PRs of the repo could not be listed"
+        ],
+        "candidates": [
+          {
+            "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+            "publisher": "Product Compass (Pawel Huryn), Bug Hunt Bench owner (registered)",
+            "published": "2026-10-19",
+            "reports": "Board data updated 2026-10-19: no row for any MiniMax model (0 matches for 'minimax'). Nearest rows are MiMo, GLM-5.3 Flash and DeepSeek V4.1 Flash 1017.",
+            "resolution": "reject",
+            "reason": "not the exact configuration (no MiniMax-M3.1-Flash row exists on the owner's board)"
+          },
+          {
+            "url": "https://github.com/phuryn/bug-hunt-bench/tree/46802fc312b6fd467b0baee519df05693f120232/results/effort-dial-probes",
+            "publisher": "Product Compass / phuryn (GitHub repo at pinned commit)",
+            "published": "2026-09-12",
+            "reports": "Only MiniMax artifacts at main: results/effort-dial-probes/20260912-minimaxm27-openrouter.txt and ...-n5.txt, effort-dial probes of minimax/minimax-m2.7 via OpenRouter ('The arm itself asserts NO tier'). They test whether a reasoning dial exists; they report no Bug Hunt score and no run row.",
+            "resolution": "reject",
+            "reason": "different model version (MiniMax M2.7, not M3.1 Flash) and not a score"
+          },
+          {
+            "url": "https://benchlm.ai/compare/deepseek-v4-1-flash-vs-minimax-m3-1-flash",
+            "publisher": "BenchLM (aggregator; page updated 2026-10-20)",
+            "published": "2026-10-20",
+            "reports": "Bug Hunt Bench row: DeepSeek V4.1 Flash 1017 '39.1 fixes' (the owner's Claude Code mean-of-7 row); MiniMax M3.1 Flash 'Coming soon' (no score). Related BenchLM pages mark the MiniMax entry 'not directly comparable' and not ranked on the public coding lane.",
+            "resolution": "reject",
+            "reason": "not a score (no MiniMax value published; 'Coming soon' placeholder)"
+          },
+          {
+            "url": "https://www.mindstudio.ai/blog/minimax-m3-1-flash-mcode-hands-on/",
+            "publisher": "MindStudio (blog)",
+            "published": null,
+            "reports": "Hands-on test of the MiniMax M3.1 Flash preview in M-Code, including a 'SQL bug hunt' task where the model found a boundary-date bug; no benchmark score.",
+            "resolution": "reject",
+            "reason": "not a score (an anecdotal task, not Bug Hunt Bench; also a preview build)"
+          },
+          {
+            "url": "https://www.minimax.io/blog/minimax-m31f",
+            "publisher": "MiniMax (model provider)",
+            "published": "2026-10-19",
+            "reports": "Launch post and the Hugging Face card benchmark table (14 rows: Automation-Bench, BankerToolBench, Terminal Bench 4.0, DeepSWE v1.1, OSWorld 2.0, and so on) contain no Bug Hunt Bench row.",
+            "resolution": "reject",
+            "reason": "not a score (provider publishes no Bug Hunt result)"
+          },
+          {
+            "url": "https://www.besthub.dev/articles/deepseek-harness-outperforms-claude-code-on-bug-hunt-bench-with-v4-1-flash-1017-7656a8d7e1d0",
+            "publisher": "BestHub, explainx.ai (news)",
+            "published": "2026-10-19",
+            "reports": "Coverage of the owner's Bug Hunt Bench results for DeepSeek V4.1 Flash 1017 only; no MiniMax model mentioned.",
+            "resolution": "reject",
+            "reason": "not a score (no MiniMax result reported)"
+          }
+        ],
+        "result": "not found"
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (90.444), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (90.444), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (90.444), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (90.444), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (90.294), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (90.294), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (90.294), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (92.392), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-5.6-luna-low",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (77.055), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (89.594), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (89.594), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (88.931), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (88.931), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (88.931), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": [
+          {
+            "url": "https://www.vals.ai/benchmarks/vibe-code",
+            "publisher": "www.vals.ai",
+            "published": "2026-10-23",
+            "reports": "xiaomi/mimo-v2.6-flash: 78.96 at effort not stated",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "AA plots this model in reasoning mode with no effort label; Vals effort recorded as max.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": [
+          {
+            "url": "https://www.vals.ai/benchmarks/vibe-code",
+            "publisher": "www.vals.ai",
+            "published": "2026-10-23",
+            "reports": "minimax/MiniMax-M3.1-flash: 73.944 at effort max",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (52.360), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (52.360), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (52.360), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (52.360), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (81.012), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (81.012), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (81.012), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (86.875), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-5.6-luna-low",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "No codeMigration record for this configuration at its exact effort.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (80.579), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (80.579), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (77.324), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (77.324), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "Vals ran this model only at max (77.324), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": [
+          {
+            "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
+            "publisher": "www.vals.ai",
+            "published": "2026-10-23",
+            "reports": "xiaomi/mimo-v2.6-flash: 39.552 at effort not stated",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"
+      ],
+      "notes": "No codeMigration record for this configuration at its exact effort.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-5.6-luna-low",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-5.6-luna at max only (73.6).",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "No MiMo-V2.6-Flash row in LiveBench 2.0.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"
+      ],
+      "notes": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": [
+          {
+            "url": "https://livebench.ai/data/20261014/table.csv",
+            "publisher": "livebench.ai",
+            "published": "2026-10-23",
+            "reports": "minimax-m3.1-flash: 83.9 at effort max",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has Haiku 5.5 Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has Haiku 5.5 Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-max",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has Haiku 5.5 Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has Opus 5.5 Low/Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has Opus 5.5 Low/Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has Sonnet 5.5 Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5-xhigh",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has Sonnet 5.5 Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has GPT-6-Astra Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has GPT-6-Astra Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has GPT-6-Luna Medium/High/Xhigh/Max only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has GPT-6.1-Sol Low/Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "AICD has GPT-6.1-Sol Low/Medium/High only.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": [
+          {
+            "url": "https://aicodingdaily.com/leaderboard,",
+            "publisher": "aicodingdaily.com",
+            "published": "2026-10-23",
+            "reports": "MiMo-V2.6 Flash (High): 45.48 at effort high",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"
+      ],
+      "notes": "Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)"
+        ],
+        "candidates": [
+          {
+            "url": "https://aicodingdaily.com/leaderboard,",
+            "publisher": "aicodingdaily.com",
+            "published": "2026-10-23",
+            "reports": "MiniMax M3.1-Flash (Max): 49.69 at effort max",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    }
+  ],
+  "cognitionCapture": {
+    "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+    "lastModified": "2026-10-22T22:28:12Z",
+    "capturedOn": "2026-10-23",
+    "sha256": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
+    "file": "data/cognition_frontiercode.json"
+  },
+  "openWebRule": "I28 (2026-10-23): each search for a listed frontier or near-frontier family also logs an open-web discovery step: the queries and every candidate found, each resolved by a dated registry addition ('register') or a dated rejection with a reason ('reject'); the build fails on a missing step or an unresolved candidate."
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "v1.6",
-  "observedAt": "2026-10-17T19:25:14Z",
-  "cohort": "Artificial Analysis v4.3.2 mapped 31-model ValueRank comparison roster",
-  "cohortN": 31,
+  "observedAt": "2026-10-21T05:24:16Z",
+  "cohort": "Artificial Analysis v4.3.2 mapped 61-model ValueRank comparison roster",
+  "cohortN": 61,
   "primaryEvaluations": [
     {
       "key": "briefcaseElo",
@@ -93,9 +93,9 @@
   "fields": {
     "briefcaseElo": {
       "group": "primary",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 48,
+      "cohortN": 49,
+      "coveragePct": 97.96,
       "missingModels": [
         "gemini-3.7-flash"
       ],
@@ -104,8 +104,8 @@
     },
     "gdpvalV21": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -113,9 +113,9 @@
     },
     "automationBenchAA": {
       "group": "primary",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 48,
+      "cohortN": 49,
+      "coveragePct": 97.96,
       "missingModels": [
         "gemini-3.7-flash"
       ],
@@ -124,9 +124,9 @@
     },
     "terminalBenchV40": {
       "group": "primary",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 48,
+      "cohortN": 49,
+      "coveragePct": 97.96,
       "missingModels": [
         "gemini-3.7-flash"
       ],
@@ -135,8 +135,8 @@
     },
     "scicode": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -144,8 +144,8 @@
     },
     "hle": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -153,9 +153,9 @@
     },
     "gdpPdfAllPass": {
       "group": "primary",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 48,
+      "cohortN": 49,
+      "coveragePct": 97.96,
       "missingModels": [
         "gemini-3.7-flash"
       ],
@@ -164,8 +164,8 @@
     },
     "critpt": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -173,8 +173,8 @@
     },
     "omniAccuracy": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -182,8 +182,8 @@
     },
     "omniNonHallucination": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -191,8 +191,8 @@
     },
     "aaLcr": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -200,8 +200,8 @@
     },
     "intelligenceIndex": {
       "group": "primary",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": true,
@@ -209,31 +209,33 @@
     },
     "aaEvalCost": {
       "group": "primary",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 47,
+      "cohortN": 49,
+      "coveragePct": 95.92,
       "missingModels": [
-        "gemini-3.7-flash"
+        "gemini-3.7-flash",
+        "muse-wonder-full"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "speed": {
       "group": "primary",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 47,
+      "cohortN": 49,
+      "coveragePct": 95.92,
       "missingModels": [
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "muse-wonder-full"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "gpqaDiamond": {
       "group": "additional",
-      "availableN": 21,
-      "cohortN": 31,
-      "coveragePct": 67.74,
+      "availableN": 25,
+      "cohortN": 49,
+      "coveragePct": 51.02,
       "missingModels": [
         "claude-opus-5-5",
         "gpt-6-sol",
@@ -244,16 +246,30 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "briefcaseNormalized": {
       "group": "additional",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 48,
+      "cohortN": 49,
+      "coveragePct": 97.96,
       "missingModels": [
         "gemini-3.7-flash"
       ],
@@ -262,8 +278,8 @@
     },
     "gdpvalV21Normalized": {
       "group": "additional",
-      "availableN": 31,
-      "cohortN": 31,
+      "availableN": 49,
+      "cohortN": 49,
       "coveragePct": 100.0,
       "missingModels": [],
       "includedInPrimaryScore": false,
@@ -271,27 +287,27 @@
     },
     "mlcrOverall": {
       "group": "supplemental",
-      "availableN": 25,
-      "cohortN": 31,
-      "coveragePct": 80.65,
+      "availableN": 42,
+      "cohortN": 49,
+      "coveragePct": 85.71,
       "missingModels": [
-        "gpt-6-astra",
         "grok-4.6",
         "gemini-3.7-flash",
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "muse-wonder",
+        "muse-wonder-full"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "harveyLab": {
       "group": "supplemental",
-      "availableN": 11,
-      "cohortN": 31,
-      "coveragePct": 35.48,
+      "availableN": 20,
+      "cohortN": 49,
+      "coveragePct": 40.82,
       "missingModels": [
-        "gpt-6-astra",
         "claude-opus-5",
         "gpt-5.6-sol",
         "claude-fable-5",
@@ -310,7 +326,17 @@
         "gemini-3.5-flash",
         "mimo-v2-6-pro",
         "mimo-v2-6-flash",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
@@ -318,8 +344,8 @@
     "apexAgents": {
       "group": "supplemental",
       "availableN": 6,
-      "cohortN": 31,
-      "coveragePct": 19.35,
+      "cohortN": 49,
+      "coveragePct": 12.24,
       "missingModels": [
         "gpt-6-astra",
         "gemini-3.8-flash",
@@ -345,16 +371,34 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "mmmuPro": {
       "group": "supplemental",
-      "availableN": 17,
-      "cohortN": 31,
-      "coveragePct": 54.84,
+      "availableN": 22,
+      "cohortN": 49,
+      "coveragePct": 44.9,
       "missingModels": [
         "claude-fable-5",
         "glm-5.3",
@@ -369,7 +413,20 @@
         "mimo-v2-6-pro",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder",
+        "muse-wonder-full",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
@@ -377,7 +434,7 @@
     "livecodebench": {
       "group": "supplemental",
       "availableN": 0,
-      "cohortN": 31,
+      "cohortN": 49,
       "coveragePct": 0.0,
       "missingModels": [
         "gpt-6-astra",
@@ -410,7 +467,25 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
@@ -418,7 +493,7 @@
     "aime25": {
       "group": "supplemental",
       "availableN": 0,
-      "cohortN": 31,
+      "cohortN": 49,
       "coveragePct": 0.0,
       "missingModels": [
         "gpt-6-astra",
@@ -451,18 +526,35 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "analystAgent": {
       "group": "supplemental",
-      "availableN": 19,
-      "cohortN": 31,
-      "coveragePct": 61.29,
+      "availableN": 23,
+      "cohortN": 49,
+      "coveragePct": 46.94,
       "missingModels": [
-        "gpt-6-astra",
         "grok-4.6",
         "gpt-5.6-luna",
         "gemini-3.7-flash",
@@ -473,16 +565,31 @@
         "glm-5.2",
         "gpt-6-sol",
         "mimo-v2-6-flash",
-        "claude-haiku-5-5"
+        "claude-haiku-5-5",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "automationBenchPartialScore": {
       "group": "supplemental",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 48,
+      "cohortN": 49,
+      "coveragePct": 97.96,
       "missingModels": [
         "gemini-3.7-flash"
       ],
@@ -492,8 +599,8 @@
     "enterpriseOpsGym": {
       "group": "supplemental",
       "availableN": 16,
-      "cohortN": 31,
-      "coveragePct": 51.61,
+      "cohortN": 49,
+      "coveragePct": 32.65,
       "missingModels": [
         "gpt-6-astra",
         "gemini-3.8-flash",
@@ -509,18 +616,35 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "itBenchSre": {
       "group": "supplemental",
-      "availableN": 13,
-      "cohortN": 31,
-      "coveragePct": 41.94,
+      "availableN": 16,
+      "cohortN": 49,
+      "coveragePct": 32.65,
       "missingModels": [
-        "gpt-6-astra",
         "claude-opus-5",
         "claude-fable-5",
         "grok-4.6",
@@ -537,16 +661,32 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "briefcaseRubricPassRate": {
       "group": "supplemental",
-      "availableN": 30,
-      "cohortN": 31,
-      "coveragePct": 96.77,
+      "availableN": 48,
+      "cohortN": 49,
+      "coveragePct": 97.96,
       "missingModels": [
         "gemini-3.7-flash"
       ],
@@ -556,7 +696,7 @@
     "briefcaseTotalCost": {
       "group": "supplemental",
       "availableN": 0,
-      "cohortN": 31,
+      "cohortN": 49,
       "coveragePct": 0.0,
       "missingModels": [
         "gpt-6-astra",
@@ -589,16 +729,34 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
     },
     "tauBanking": {
       "group": "supplemental",
-      "availableN": 21,
-      "cohortN": 31,
-      "coveragePct": 67.74,
+      "availableN": 25,
+      "cohortN": 49,
+      "coveragePct": 51.02,
       "missingModels": [
         "claude-opus-5-5",
         "gpt-6-sol",
@@ -609,7 +767,21 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
@@ -617,7 +789,7 @@
     "terminalBenchV21": {
       "group": "supplemental",
       "availableN": 0,
-      "cohortN": 31,
+      "cohortN": 49,
       "coveragePct": 0.0,
       "missingModels": [
         "gpt-6-astra",
@@ -650,7 +822,25 @@
         "mimo-v2-6-flash",
         "claude-haiku-5-5",
         "claude-sonnet-5-5",
-        "gemini-4-argon"
+        "gemini-4-argon",
+        "claude-fable-5-1",
+        "muse-spark-1-3",
+        "muse-wonder",
+        "muse-wonder-full",
+        "gpt-6.1-sol-xhigh",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "gpt-6.1-sol-low",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-medium",
+        "claude-haiku-5-5-low",
+        "claude-sonnet-5-5-xhigh",
+        "claude-sonnet-5-5-high",
+        "claude-sonnet-5-5-medium",
+        "claude-sonnet-5-5-low",
+        "muse-spark-1-3-xhigh",
+        "grok-4.6-xhigh"
       ],
       "includedInPrimaryScore": false,
       "providerClaimN": 0
@@ -658,9 +848,9 @@
     "livebenchOverall": {
       "group": "supplemental",
       "label": "LiveBench Overall Score",
-      "availableN": 12,
-      "cohortN": 19,
-      "coveragePct": 63.16,
+      "availableN": 2,
+      "cohortN": 29,
+      "coveragePct": 6.9,
       "missingModels": [
         "Claude Opus 5.5",
         "GPT-6.1 Sol",
@@ -668,10 +858,30 @@
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash",
+        "GPT-6 Luna (low)",
+        "GPT-6 Luna (medium)",
+        "GPT-6 Luna (high)",
+        "GPT-6 Luna (xhigh)",
+        "Claude Opus 5.5 (high)",
+        "Claude Opus 5.5 (xhigh)",
+        "Claude Opus 5.5 (medium)",
+        "GPT-5.6 Luna (low)",
+        "GPT-6 Astra (high)",
+        "GPT-6 Astra (xhigh)"
       ],
-      "sourceAvailableN": 24,
-      "sourceCohortN": 31,
+      "sourceAvailableN": 25,
+      "sourceCohortN": 61,
       "sourceMissingModels": [
         "Claude Opus 5.5",
         "GPT-6.1 Sol",
@@ -679,22 +889,39 @@
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "Muse Spark 1.3",
+        "Muse Wonder",
+        "Muse Wonder Full",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (low)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "Claude Sonnet 5.5 (high)",
+        "Claude Sonnet 5.5 (medium)",
+        "Claude Sonnet 5.5 (low)",
+        "Muse Spark 1.3 (xhigh)",
+        "Grok 4.6 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash"
       ],
       "includedInPrimaryScore": false,
       "sourceRelease": "2026_06_25",
       "publishedN": 64,
-      "supplementalMatchedN": 1,
-      "supplementalModels": [
-        "Claude Fable 5.1"
-      ]
+      "supplementalMatchedN": 0,
+      "supplementalModels": []
     },
     "livebenchInstructionFollowing": {
       "group": "primary",
       "label": "Instruction Following (LiveBench)",
-      "availableN": 12,
-      "cohortN": 19,
-      "coveragePct": 63.16,
+      "availableN": 2,
+      "cohortN": 29,
+      "coveragePct": 6.9,
       "missingModels": [
         "Claude Opus 5.5",
         "GPT-6.1 Sol",
@@ -702,10 +929,30 @@
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash",
+        "GPT-6 Luna (low)",
+        "GPT-6 Luna (medium)",
+        "GPT-6 Luna (high)",
+        "GPT-6 Luna (xhigh)",
+        "Claude Opus 5.5 (high)",
+        "Claude Opus 5.5 (xhigh)",
+        "Claude Opus 5.5 (medium)",
+        "GPT-5.6 Luna (low)",
+        "GPT-6 Astra (high)",
+        "GPT-6 Astra (xhigh)"
       ],
-      "sourceAvailableN": 24,
-      "sourceCohortN": 31,
+      "sourceAvailableN": 25,
+      "sourceCohortN": 61,
       "sourceMissingModels": [
         "Claude Opus 5.5",
         "GPT-6.1 Sol",
@@ -713,22 +960,39 @@
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "Muse Spark 1.3",
+        "Muse Wonder",
+        "Muse Wonder Full",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (low)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "Claude Sonnet 5.5 (high)",
+        "Claude Sonnet 5.5 (medium)",
+        "Claude Sonnet 5.5 (low)",
+        "Muse Spark 1.3 (xhigh)",
+        "Grok 4.6 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash"
       ],
       "includedInPrimaryScore": true,
       "sourceRelease": "2026_06_25",
       "publishedN": 64,
-      "supplementalMatchedN": 1,
-      "supplementalModels": [
-        "Claude Fable 5.1"
-      ]
+      "supplementalMatchedN": 0,
+      "supplementalModels": []
     },
     "livebenchCostPerSuccessfulTask": {
       "group": "supplemental",
       "label": "LiveBench Cost Per Successful Task",
-      "availableN": 12,
-      "cohortN": 19,
-      "coveragePct": 63.16,
+      "availableN": 2,
+      "cohortN": 29,
+      "coveragePct": 6.9,
       "missingModels": [
         "Claude Opus 5.5",
         "GPT-6.1 Sol",
@@ -736,10 +1000,30 @@
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash",
+        "GPT-6 Luna (low)",
+        "GPT-6 Luna (medium)",
+        "GPT-6 Luna (high)",
+        "GPT-6 Luna (xhigh)",
+        "Claude Opus 5.5 (high)",
+        "Claude Opus 5.5 (xhigh)",
+        "Claude Opus 5.5 (medium)",
+        "GPT-5.6 Luna (low)",
+        "GPT-6 Astra (high)",
+        "GPT-6 Astra (xhigh)"
       ],
-      "sourceAvailableN": 24,
-      "sourceCohortN": 31,
+      "sourceAvailableN": 25,
+      "sourceCohortN": 61,
       "sourceMissingModels": [
         "Claude Opus 5.5",
         "GPT-6.1 Sol",
@@ -747,39 +1031,72 @@
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "Muse Spark 1.3",
+        "Muse Wonder",
+        "Muse Wonder Full",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (low)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "Claude Sonnet 5.5 (high)",
+        "Claude Sonnet 5.5 (medium)",
+        "Claude Sonnet 5.5 (low)",
+        "Muse Spark 1.3 (xhigh)",
+        "Grok 4.6 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash"
       ],
       "includedInPrimaryScore": false,
       "sourceRelease": "2026_06_25",
       "publishedN": 64,
-      "supplementalMatchedN": 1,
-      "supplementalModels": [
-        "Claude Fable 5.1"
-      ]
+      "supplementalMatchedN": 0,
+      "supplementalModels": []
     },
     "terminalBenchV4": {
-      "group": "primary",
+      "group": "supplemental",
       "label": "Terminal-Bench 4.0",
-      "availableN": 7,
-      "cohortN": 19,
-      "coveragePct": 36.84,
-      "sourceAvailableN": 12,
-      "sourceCohortN": 31,
-      "officialMatchedN": 11,
+      "availableN": 1,
+      "cohortN": 29,
+      "coveragePct": 3.45,
+      "sourceAvailableN": 14,
+      "sourceCohortN": 61,
+      "officialMatchedN": 13,
       "providerClaimMatchedN": 1,
       "missingModels": [
-        "DeepSeek V4 Pro",
-        "Qwen3.8 Max",
         "Claude Opus 5.5",
-        "GPT-6 Sol",
         "GPT-6.1 Sol",
         "GPT-6 Luna",
-        "Grok 4.7",
         "MiMo-V2.6-Pro",
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash",
+        "GPT-6 Luna (low)",
+        "GPT-6 Luna (medium)",
+        "GPT-6 Luna (high)",
+        "GPT-6 Luna (xhigh)",
+        "Claude Opus 5.5 (high)",
+        "Claude Opus 5.5 (xhigh)",
+        "Claude Opus 5.5 (medium)",
+        "GPT-5.6 Luna (low)",
+        "GPT-6 Astra (high)",
+        "GPT-6 Astra (xhigh)"
       ],
       "sourceMissingModels": [
         "Kimi K3",
@@ -800,35 +1117,56 @@
         "MiMo-V2.6-Flash",
         "Claude Haiku 5.5",
         "Claude Sonnet 5.5",
-        "Gemini 4 Argon"
+        "Gemini 4 Argon",
+        "Muse Spark 1.3",
+        "Muse Wonder",
+        "Muse Wonder Full",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (low)",
+        "Claude Haiku 5.5 (max)",
+        "Claude Haiku 5.5 (high)",
+        "Claude Haiku 5.5 (medium)",
+        "Claude Haiku 5.5 (low)",
+        "Claude Sonnet 5.5 (xhigh)",
+        "Claude Sonnet 5.5 (high)",
+        "Claude Sonnet 5.5 (medium)",
+        "Claude Sonnet 5.5 (low)",
+        "Grok 4.6 (xhigh)",
+        "DeepSeek V4.1 Flash 1017",
+        "MiniMax-M3.1-Flash"
       ],
-      "includedInPrimaryScore": true,
+      "includedInPrimaryScore": false,
       "sourceRelease": "4.0"
     },
     "bugHuntFixedOf105": {
       "group": "primary",
       "label": "Bug Hunt Bench bugs fixed out of 105",
-      "availableN": 18,
-      "cohortN": 19,
-      "coveragePct": 94.74,
+      "availableN": 27,
+      "cohortN": 29,
+      "coveragePct": 93.1,
       "missingModels": [
-        "MiMo-V2.6-Flash"
+        "MiMo-V2.6-Flash",
+        "MiniMax-M3.1-Flash"
       ],
-      "sourceAvailableN": 25,
-      "sourceCohortN": 31,
-      "sourceCoveragePct": 80.65,
+      "sourceAvailableN": 53,
+      "sourceCohortN": 61,
+      "sourceCoveragePct": 86.89,
       "sourceMissingModels": [
+        "Grok 4.6",
         "GPT-5.5",
         "Gemini 3.7 Flash",
         "Gemini 3.6 Flash",
         "GLM-5.2",
         "Gemini 3.5 Flash",
-        "MiMo-V2.6-Flash"
+        "MiMo-V2.6-Flash",
+        "MiniMax-M3.1-Flash"
       ],
       "includedInPrimaryScore": true,
       "includedInBugHuntEmphasisRanking": true,
       "sourceRelease": "105 planted bugs across two repositories; rolling public results snapshot",
-      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415"
+      "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232"
     }
   },
   "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
@@ -850,19 +1188,19 @@
   "frontierSelection": {
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
     "captureArtifact": "data/aa_frontier_capture.json",
-    "capturedAt": "2026-10-17T18:48:27Z",
+    "capturedAt": "2026-10-23T05:27:39Z",
     "indexVersion": "4.3.2",
     "chartTitle": "Intelligence Index vs. Cost to Run Artificial Analysis Intelligence Index",
     "costUnit": "USD to run all Intelligence Index evaluations",
     "completeness": {
       "status": "complete",
-      "note": "All 694 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost). One overlapped circle pair was resolved by an offset hover with colour and axis confirmation. No hidden state or paid export used."
+      "note": "All 697 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-23. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
     },
     "sourceUniverse": {
-      "selectedModelN": 694,
+      "selectedModelN": 697,
       "plottedPointN": 189,
       "observedFrontierPointN": 18,
-      "nearFrontierPointN": 9
+      "nearFrontierPointN": 11
     },
     "configurationN": 18,
     "familyN": 7,
@@ -908,9 +1246,9 @@
       "basis": "Public rounded integer Intelligence Index and two-decimal USD total cost from the chart tooltips. The frontier's intelligence at a point's cost is the highest intelligence among rendered-frontier points whose cost is at or below that cost; a point cheaper than every frontier point has no gap.",
       "text": "A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only."
     },
-    "nearFrontierPointN": 9,
-    "nearFrontierFamilyN": 6,
-    "nearFrontierRequiredModelN": 6,
+    "nearFrontierPointN": 11,
+    "nearFrontierFamilyN": 8,
+    "nearFrontierRequiredModelN": 8,
     "nearFrontierDeferredN": 0,
     "nearFrontierFamilies": [
       {
@@ -932,14 +1270,20 @@
         "intelligenceGap": 2
       },
       {
+        "family": "DeepSeek V4.1 Flash 1017",
+        "modelId": "deepseek-v4-1-flash-1017",
+        "configuration": "DeepSeek V4.1 Flash 1017 (max)",
+        "intelligenceGap": 3
+      },
+      {
         "family": "GPT-5.6 Luna",
-        "modelId": "gpt-5.6-luna",
+        "modelId": "gpt-5.6-luna-low",
         "configuration": "GPT-5.6 Luna (low)",
         "intelligenceGap": 1
       },
       {
         "family": "GPT-6 Astra",
-        "modelId": "gpt-6-astra",
+        "modelId": "gpt-6-astra-xhigh",
         "configuration": "GPT-6 Astra (xhigh)",
         "intelligenceGap": 2
       },
@@ -948,6 +1292,12 @@
         "modelId": "gemini-4-argon",
         "configuration": "Gemini 4 Argon (high)",
         "intelligenceGap": 1
+      },
+      {
+        "family": "MiniMax-M3.1-Flash",
+        "modelId": "minimax-m3-1-flash",
+        "configuration": "MiniMax-M3.1-Flash",
+        "intelligenceGap": 3
       }
     ],
     "selectedFamilyModelIds": [
@@ -1026,13 +1376,11 @@
   "externalBenchmarks": {
     "livebench": {
       "release": "2026_06_25",
-      "matchedN": 24,
-      "cohortN": 31,
+      "matchedN": 25,
+      "cohortN": 51,
       "publishedN": 64,
-      "supplementalMatchedN": 1,
-      "supplementalModels": [
-        "claude-fable-5-1"
-      ],
+      "supplementalMatchedN": 0,
+      "supplementalModels": [],
       "pareto": [
         "deepseek-v4-flash",
         "gpt-6-luna",
@@ -1046,29 +1394,29 @@
     },
     "terminalBenchV4": {
       "version": "4.0",
-      "matchedN": 11,
+      "matchedN": 13,
       "providerClaimN": 1,
-      "rankingAvailableN": 12,
-      "cohortN": 31
+      "rankingAvailableN": 14,
+      "cohortN": 51
     },
     "bugHunt": {
       "version": "105 planted bugs across two repositories; rolling public results snapshot",
-      "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
-      "matchedN": 25,
-      "rankableOverlapN": 16,
-      "sourceCohortN": 31,
-      "primaryCohortN": 19,
-      "sourceCoveragePct": 80.65,
-      "primaryCoveragePct": 94.74,
-      "primaryWeightPct": 14.0187,
-      "emphasisWeightPct": 19.2308
+      "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+      "matchedN": 53,
+      "rankableOverlapN": 17,
+      "sourceCohortN": 61,
+      "primaryCohortN": 29,
+      "sourceCoveragePct": 86.89,
+      "primaryCoveragePct": 93.1,
+      "primaryWeightPct": 19.7368,
+      "emphasisWeightPct": 26.1628
     }
   },
   "scoring": {
-    "version": "v2.0.0",
-    "cohortN": 19,
-    "scoredN": 19,
-    "exactBenchmarkOverlapN": 16,
+    "version": "v3.0.0",
+    "cohortN": 29,
+    "scoredN": 20,
+    "otherPlottedEffortN": 17,
     "frontierRequiredModelN": 7,
     "frontierRequiredModelIds": [
       "claude-haiku-5-5",
@@ -1082,19 +1430,19 @@
     "frontierSelection": {
       "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
       "captureArtifact": "data/aa_frontier_capture.json",
-      "capturedAt": "2026-10-17T18:48:27Z",
+      "capturedAt": "2026-10-23T05:27:39Z",
       "indexVersion": "4.3.2",
       "chartTitle": "Intelligence Index vs. Cost to Run Artificial Analysis Intelligence Index",
       "costUnit": "USD to run all Intelligence Index evaluations",
       "completeness": {
         "status": "complete",
-        "note": "All 694 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost). One overlapped circle pair was resolved by an offset hover with colour and axis confirmation. No hidden state or paid export used."
+        "note": "All 697 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-23. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
       },
       "sourceUniverse": {
-        "selectedModelN": 694,
+        "selectedModelN": 697,
         "plottedPointN": 189,
         "observedFrontierPointN": 18,
-        "nearFrontierPointN": 9
+        "nearFrontierPointN": 11
       },
       "configurationN": 18,
       "familyN": 7,
@@ -1140,9 +1488,9 @@
         "basis": "Public rounded integer Intelligence Index and two-decimal USD total cost from the chart tooltips. The frontier's intelligence at a point's cost is the highest intelligence among rendered-frontier points whose cost is at or below that cost; a point cheaper than every frontier point has no gap.",
         "text": "A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only."
       },
-      "nearFrontierPointN": 9,
-      "nearFrontierFamilyN": 6,
-      "nearFrontierRequiredModelN": 6,
+      "nearFrontierPointN": 11,
+      "nearFrontierFamilyN": 8,
+      "nearFrontierRequiredModelN": 8,
       "nearFrontierDeferredN": 0,
       "nearFrontierFamilies": [
         {
@@ -1164,14 +1512,20 @@
           "intelligenceGap": 2
         },
         {
+          "family": "DeepSeek V4.1 Flash 1017",
+          "modelId": "deepseek-v4-1-flash-1017",
+          "configuration": "DeepSeek V4.1 Flash 1017 (max)",
+          "intelligenceGap": 3
+        },
+        {
           "family": "GPT-5.6 Luna",
-          "modelId": "gpt-5.6-luna",
+          "modelId": "gpt-5.6-luna-low",
           "configuration": "GPT-5.6 Luna (low)",
           "intelligenceGap": 1
         },
         {
           "family": "GPT-6 Astra",
-          "modelId": "gpt-6-astra",
+          "modelId": "gpt-6-astra-xhigh",
           "configuration": "GPT-6 Astra (xhigh)",
           "intelligenceGap": 2
         },
@@ -1180,6 +1534,12 @@
           "modelId": "gemini-4-argon",
           "configuration": "Gemini 4 Argon (high)",
           "intelligenceGap": 1
+        },
+        {
+          "family": "MiniMax-M3.1-Flash",
+          "modelId": "minimax-m3-1-flash",
+          "configuration": "MiniMax-M3.1-Flash",
+          "intelligenceGap": 3
         }
       ],
       "selectedFamilyModelIds": [
@@ -1255,44 +1615,98 @@
         }
       ]
     },
-    "sourceCohortN": 31,
+    "sourceCohortN": 61,
     "rankingExcludedModels": [
+      "Gemini 3.8 Flash",
+      "Claude Opus 5",
+      "GPT-5.6 Sol",
       "Claude Fable 5",
+      "GLM-5.3",
       "Kimi K3",
       "Grok 4.6",
+      "GPT-5.6 Luna",
       "GPT-5.5",
       "Gemini 3.7 Flash",
       "GLM-5.3 Flash",
+      "DeepSeek V4 Pro",
       "Claude Opus 4.8",
+      "Qwen3.8 Max",
       "Muse Spark 1.2",
       "Claude Sonnet 5",
+      "DeepSeek V4 Flash",
       "Gemini 3.6 Flash",
       "GLM-5.2",
-      "Gemini 3.5 Flash"
+      "Gemini 3.5 Flash",
+      "GPT-6 Sol",
+      "Grok 4.7",
+      "Claude Fable 5.1",
+      "Muse Spark 1.3",
+      "Muse Wonder",
+      "Muse Wonder Full",
+      "GPT-6.1 Sol (low)",
+      "Claude Sonnet 5.5 (high)",
+      "Claude Sonnet 5.5 (medium)",
+      "Claude Sonnet 5.5 (low)",
+      "Muse Spark 1.3 (xhigh)",
+      "Grok 4.6 (xhigh)"
     ],
     "rankingExclusions": [
+      {
+        "modelId": "gemini-3.8-flash",
+        "name": "Gemini 3.8 Flash",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "claude-opus-5",
+        "name": "Claude Opus 5",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "gpt-5.6-sol",
+        "name": "GPT-5.6 Sol",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
       {
         "modelId": "claude-fable-5",
         "name": "Claude Fable 5",
         "reasons": [
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "glm-5.3",
+        "name": "GLM-5.3",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
         "modelId": "kimi-k3",
         "name": "Kimi K3",
         "reasons": [
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
         "modelId": "grok-4.6",
         "name": "Grok 4.6",
         "reasons": [
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "gpt-5.6-luna",
+        "name": "GPT-5.6 Luna",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
@@ -1300,8 +1714,7 @@
         "name": "GPT-5.5",
         "reasons": [
           "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
@@ -1309,40 +1722,57 @@
         "name": "Gemini 3.7 Flash",
         "reasons": [
           "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
         "modelId": "glm-5.3-flash",
         "name": "GLM-5.3 Flash",
         "reasons": [
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "deepseek-v4-pro",
+        "name": "DeepSeek V4 Pro",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
         "modelId": "claude-opus-4.8",
         "name": "Claude Opus 4.8",
         "reasons": [
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "qwen3.8-max",
+        "name": "Qwen3.8 Max",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
         "modelId": "muse-spark-1.2",
         "name": "Muse Spark 1.2",
         "reasons": [
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "No eligible exact-model Bug Hunt result in the selected source snapshot",
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
         "modelId": "claude-sonnet-5",
         "name": "Claude Sonnet 5",
         "reasons": [
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "deepseek-v4-flash",
+        "name": "DeepSeek V4 Flash",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
@@ -1350,8 +1780,7 @@
         "name": "Gemini 3.6 Flash",
         "reasons": [
           "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
@@ -1359,8 +1788,7 @@
         "name": "GLM-5.2",
         "reasons": [
           "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       },
       {
@@ -1368,29 +1796,111 @@
         "name": "Gemini 3.5 Flash",
         "reasons": [
           "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "No exact-variant AA DeepSWE result in the selected source snapshot",
-          "Not a required AA frontier or near-frontier family model"
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "grok-4.7",
+        "name": "Grok 4.7",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "claude-fable-5-1",
+        "name": "Claude Fable 5.1",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "muse-spark-1-3",
+        "name": "Muse Spark 1.3",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "muse-wonder",
+        "name": "Muse Wonder",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "muse-wonder-full",
+        "name": "Muse Wonder Full",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "gpt-6.1-sol-low",
+        "name": "GPT-6.1 Sol (low)",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "claude-sonnet-5-5-high",
+        "name": "Claude Sonnet 5.5 (high)",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "claude-sonnet-5-5-medium",
+        "name": "Claude Sonnet 5.5 (medium)",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "claude-sonnet-5-5-low",
+        "name": "Claude Sonnet 5.5 (low)",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "muse-spark-1-3-xhigh",
+        "name": "Muse Spark 1.3 (xhigh)",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
+        ]
+      },
+      {
+        "modelId": "grok-4.6-xhigh",
+        "name": "Grok 4.6 (xhigh)",
+        "reasons": [
+          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
         ]
       }
     ],
     "costMode": "aa-per-index-point",
     "costCoverage": {
-      "availableN": 19,
-      "cohortN": 19,
-      "sourceAvailableN": 30,
-      "sourceCohortN": 31,
+      "availableN": 29,
+      "cohortN": 29,
+      "sourceAvailableN": 59,
+      "sourceCohortN": 61,
       "missingModels": [],
       "sourceMissingModels": [
-        "Gemini 3.7 Flash"
+        "Gemini 3.7 Flash",
+        "Muse Wonder Full"
       ],
       "selectiveSubstitution": false
     },
     "retainedDimensions": [
       "costComposite",
       "omniNonHallucination",
-      "terminalBenchV4",
       "livebenchInstructionFollowing",
-      "deepswePassAt1",
       "gdpvalV21",
       "automationBenchAA",
       "aaLcr",
@@ -1403,173 +1913,346 @@
       "speed",
       "bugHuntFixedOf105"
     ],
-    "droppedDimensions": [],
+    "droppedDimensions": [
+      {
+        "key": "terminalBenchV4",
+        "label": "Terminal-Bench 4.0",
+        "missing": [
+          "Claude Opus 5.5",
+          "GPT-6.1 Sol",
+          "GPT-6 Luna",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash",
+          "Claude Haiku 5.5",
+          "Claude Sonnet 5.5",
+          "Gemini 4 Argon",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)",
+          "GPT-5.6 Luna (low)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)"
+        ],
+        "sourceMissing": [
+          "Claude Opus 5",
+          "Kimi K3",
+          "Grok 4.6",
+          "GPT-5.5",
+          "Gemini 3.7 Flash",
+          "GLM-5.3 Flash",
+          "DeepSeek V4 Pro",
+          "Qwen3.8 Max",
+          "Muse Spark 1.2",
+          "Gemini 3.6 Flash",
+          "GLM-5.2",
+          "Gemini 3.5 Flash",
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6.1 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash",
+          "Claude Haiku 5.5",
+          "Claude Sonnet 5.5",
+          "Gemini 4 Argon",
+          "Muse Spark 1.3",
+          "Muse Wonder",
+          "Muse Wonder Full",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (low)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "Claude Sonnet 5.5 (high)",
+          "Claude Sonnet 5.5 (medium)",
+          "Claude Sonnet 5.5 (low)",
+          "Grok 4.6 (xhigh)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)",
+          "GPT-5.6 Luna (low)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)"
+        ],
+        "availableN": 1,
+        "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
+      }
+    ],
     "zeroGap": false,
     "noNeutralFills": true,
     "fields": {
       "costComposite": {
         "label": "Cost",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 19,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 29,
+        "sourceCohortN": 61,
         "sourceMissingModels": [
+          "Gemini 3.8 Flash",
+          "Claude Opus 5",
+          "GPT-5.6 Sol",
           "Claude Fable 5",
+          "GLM-5.3",
           "Kimi K3",
           "Grok 4.6",
+          "GPT-5.6 Luna",
           "GPT-5.5",
           "Gemini 3.7 Flash",
           "GLM-5.3 Flash",
+          "DeepSeek V4 Pro",
           "Claude Opus 4.8",
+          "Qwen3.8 Max",
           "Muse Spark 1.2",
           "Claude Sonnet 5",
+          "DeepSeek V4 Flash",
           "Gemini 3.6 Flash",
           "GLM-5.2",
-          "Gemini 3.5 Flash"
+          "Gemini 3.5 Flash",
+          "GPT-6 Sol",
+          "Grok 4.7",
+          "Claude Fable 5.1",
+          "Muse Spark 1.3",
+          "Muse Wonder",
+          "Muse Wonder Full",
+          "GPT-6.1 Sol (low)",
+          "Claude Sonnet 5.5 (high)",
+          "Claude Sonnet 5.5 (medium)",
+          "Claude Sonnet 5.5 (low)",
+          "Muse Spark 1.3 (xhigh)",
+          "Grok 4.6 (xhigh)"
         ],
         "includedInPrimaryScore": true
       },
       "omniNonHallucination": {
         "label": "Non-Hallucination",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "terminalBenchV4": {
         "label": "Terminal-Bench 4.0",
-        "availableN": 7,
-        "cohortN": 19,
-        "coveragePct": 36.84,
-        "normalizableN": 7,
+        "availableN": 1,
+        "cohortN": 29,
+        "coveragePct": 3.45,
+        "normalizableN": 0,
         "missingModels": [
-          "DeepSeek V4 Pro",
-          "Qwen3.8 Max",
           "Claude Opus 5.5",
-          "GPT-6 Sol",
           "GPT-6.1 Sol",
           "GPT-6 Luna",
-          "Grok 4.7",
           "MiMo-V2.6-Pro",
           "MiMo-V2.6-Flash",
           "Claude Haiku 5.5",
           "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
+          "Gemini 4 Argon",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)",
+          "GPT-5.6 Luna (low)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)"
         ],
-        "sourceAvailableN": 12,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 11,
+        "sourceCohortN": 61,
         "sourceMissingModels": [
-          "Kimi K3",
-          "GPT-5.5",
-          "GLM-5.3 Flash",
-          "DeepSeek V4 Pro",
-          "Qwen3.8 Max",
-          "Muse Spark 1.2",
-          "Gemini 3.6 Flash",
-          "GLM-5.2",
-          "Gemini 3.5 Flash",
-          "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "includedInPrimaryScore": true
-      },
-      "livebenchInstructionFollowing": {
-        "label": "Instruction Following (LiveBench)",
-        "availableN": 12,
-        "cohortN": 19,
-        "coveragePct": 63.16,
-        "normalizableN": 12,
-        "missingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "sourceAvailableN": 24,
-        "sourceCohortN": 31,
-        "sourceMissingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
-        ],
-        "includedInPrimaryScore": true
-      },
-      "deepswePassAt1": {
-        "label": "DeepSWE v1.1",
-        "availableN": 16,
-        "cohortN": 19,
-        "coveragePct": 84.21,
-        "normalizableN": 16,
-        "missingModels": [
-          "GPT-6 Astra",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash"
-        ],
-        "sourceAvailableN": 16,
-        "sourceCohortN": 31,
-        "sourceMissingModels": [
-          "GPT-6 Astra",
-          "Claude Fable 5",
+          "Claude Opus 5",
           "Kimi K3",
           "Grok 4.6",
           "GPT-5.5",
           "Gemini 3.7 Flash",
           "GLM-5.3 Flash",
-          "Claude Opus 4.8",
+          "DeepSeek V4 Pro",
+          "Qwen3.8 Max",
           "Muse Spark 1.2",
-          "Claude Sonnet 5",
           "Gemini 3.6 Flash",
           "GLM-5.2",
           "Gemini 3.5 Flash",
+          "Claude Opus 5.5",
+          "GPT-6 Sol",
+          "GPT-6.1 Sol",
+          "GPT-6 Luna",
+          "Grok 4.7",
           "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash"
+          "MiMo-V2.6-Flash",
+          "Claude Haiku 5.5",
+          "Claude Sonnet 5.5",
+          "Gemini 4 Argon",
+          "Muse Spark 1.3",
+          "Muse Wonder",
+          "Muse Wonder Full",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (low)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "Claude Sonnet 5.5 (high)",
+          "Claude Sonnet 5.5 (medium)",
+          "Claude Sonnet 5.5 (low)",
+          "Grok 4.6 (xhigh)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)",
+          "GPT-5.6 Luna (low)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)"
+        ],
+        "includedInPrimaryScore": false
+      },
+      "livebenchInstructionFollowing": {
+        "label": "Instruction Following (LiveBench)",
+        "availableN": 2,
+        "cohortN": 29,
+        "coveragePct": 6.9,
+        "normalizableN": 2,
+        "missingModels": [
+          "Claude Opus 5.5",
+          "GPT-6.1 Sol",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash",
+          "Claude Haiku 5.5",
+          "Claude Sonnet 5.5",
+          "Gemini 4 Argon",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)",
+          "GPT-5.6 Luna (low)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)"
+        ],
+        "sourceAvailableN": 25,
+        "sourceCohortN": 61,
+        "sourceMissingModels": [
+          "Claude Opus 5.5",
+          "GPT-6.1 Sol",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash",
+          "Claude Haiku 5.5",
+          "Claude Sonnet 5.5",
+          "Gemini 4 Argon",
+          "Muse Spark 1.3",
+          "Muse Wonder",
+          "Muse Wonder Full",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (low)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "Claude Sonnet 5.5 (high)",
+          "Claude Sonnet 5.5 (medium)",
+          "Claude Sonnet 5.5 (low)",
+          "Muse Spark 1.3 (xhigh)",
+          "Grok 4.6 (xhigh)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)",
+          "GPT-5.6 Luna (low)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)"
         ],
         "includedInPrimaryScore": true
       },
       "gdpvalV21": {
         "label": "GDPval-AA v2.1",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "automationBenchAA": {
         "label": "AutomationBench-AA",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 30,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 60,
+        "sourceCohortN": 61,
         "sourceMissingModels": [
           "Gemini 3.7 Flash"
         ],
@@ -1577,60 +2260,75 @@
       },
       "aaLcr": {
         "label": "AA-LCR v1.1",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "omniAccuracy": {
         "label": "AA-Omniscience Accuracy",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "hle": {
         "label": "HLE",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "gpqaDiamond": {
         "label": "GPQA Diamond (legacy)",
-        "availableN": 9,
-        "cohortN": 19,
-        "coveragePct": 47.37,
-        "normalizableN": 9,
+        "availableN": 4,
+        "cohortN": 29,
+        "coveragePct": 13.79,
+        "normalizableN": 4,
         "missingModels": [
           "Claude Opus 5.5",
-          "GPT-6 Sol",
           "GPT-6.1 Sol",
           "GPT-6 Luna",
-          "Grok 4.7",
           "MiMo-V2.6-Pro",
           "MiMo-V2.6-Flash",
           "Claude Haiku 5.5",
           "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
+          "Gemini 4 Argon",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)"
         ],
-        "sourceAvailableN": 21,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 28,
+        "sourceCohortN": 61,
         "sourceMissingModels": [
           "Claude Opus 5.5",
           "GPT-6 Sol",
@@ -1641,171 +2339,216 @@
           "MiMo-V2.6-Flash",
           "Claude Haiku 5.5",
           "Claude Sonnet 5.5",
-          "Gemini 4 Argon"
+          "Gemini 4 Argon",
+          "Muse Wonder",
+          "Muse Wonder Full",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (low)",
+          "Claude Haiku 5.5 (max)",
+          "Claude Haiku 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "Claude Haiku 5.5 (low)",
+          "Claude Sonnet 5.5 (xhigh)",
+          "Claude Sonnet 5.5 (high)",
+          "Claude Sonnet 5.5 (medium)",
+          "Claude Sonnet 5.5 (low)",
+          "DeepSeek V4.1 Flash 1017",
+          "MiniMax-M3.1-Flash",
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "GPT-6 Luna (high)",
+          "GPT-6 Luna (xhigh)",
+          "Claude Opus 5.5 (high)",
+          "Claude Opus 5.5 (xhigh)",
+          "Claude Opus 5.5 (medium)"
         ],
         "includedInPrimaryScore": true
       },
       "scicode": {
         "label": "SciCode",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "critpt": {
         "label": "CritPt",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "intelligenceIndex": {
         "label": "AA Intelligence Index",
-        "availableN": 19,
-        "cohortN": 19,
+        "availableN": 29,
+        "cohortN": 29,
         "coveragePct": 100.0,
-        "normalizableN": 19,
+        "normalizableN": 29,
         "missingModels": [],
-        "sourceAvailableN": 31,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 61,
+        "sourceCohortN": 61,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "speed": {
         "label": "Speed",
-        "availableN": 18,
-        "cohortN": 19,
-        "coveragePct": 94.74,
-        "normalizableN": 18,
-        "missingModels": [
-          "Gemini 4 Argon"
-        ],
-        "sourceAvailableN": 30,
-        "sourceCohortN": 31,
+        "availableN": 29,
+        "cohortN": 29,
+        "coveragePct": 100.0,
+        "normalizableN": 29,
+        "missingModels": [],
+        "sourceAvailableN": 59,
+        "sourceCohortN": 61,
         "sourceMissingModels": [
-          "Gemini 4 Argon"
+          "Gemini 3.7 Flash",
+          "Muse Wonder Full"
         ],
         "includedInPrimaryScore": true
       },
       "bugHuntFixedOf105": {
         "label": "Bug Hunt Bench bugs fixed out of 105",
-        "availableN": 18,
-        "cohortN": 19,
-        "coveragePct": 94.74,
-        "normalizableN": 18,
+        "availableN": 27,
+        "cohortN": 29,
+        "coveragePct": 93.1,
+        "normalizableN": 27,
         "missingModels": [
-          "MiMo-V2.6-Flash"
+          "MiMo-V2.6-Flash",
+          "MiniMax-M3.1-Flash"
         ],
-        "sourceAvailableN": 25,
-        "sourceCohortN": 31,
+        "sourceAvailableN": 53,
+        "sourceCohortN": 61,
         "sourceMissingModels": [
+          "Grok 4.6",
           "GPT-5.5",
           "Gemini 3.7 Flash",
           "Gemini 3.6 Flash",
           "GLM-5.2",
           "Gemini 3.5 Flash",
-          "MiMo-V2.6-Flash"
+          "MiMo-V2.6-Flash",
+          "MiniMax-M3.1-Flash"
         ],
-        "rankableOverlapN": 16,
+        "rankableOverlapN": 17,
         "includedInPrimaryScore": true
       }
     },
     "alternateRankings": {
       "bugHuntEmphasis": {
-        "matchedN": 16,
-        "cohortN": 31,
-        "benchmarkWeightPct": 19.2308,
-        "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+        "matchedN": 20,
+        "cohortN": 61,
+        "benchmarkWeightPct": 26.1628,
+        "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
         "ranking": [
           {
             "rank": 1,
-            "modelId": "gemini-4-argon",
-            "score": 69.0
+            "modelId": "claude-sonnet-5-5",
+            "score": 67.9
           },
           {
             "rank": 2,
-            "modelId": "gpt-6.1-sol",
-            "score": 68.2
+            "modelId": "deepseek-v4-1-flash-1017",
+            "score": 66.4
           },
           {
             "rank": 3,
-            "modelId": "claude-sonnet-5-5",
-            "score": 65.7
+            "modelId": "gpt-6.1-sol",
+            "score": 66.3
           },
           {
             "rank": 4,
-            "modelId": "gpt-5.6-sol",
-            "score": 59.3
+            "modelId": "gemini-4-argon",
+            "score": 63.4
           },
           {
             "rank": 5,
             "modelId": "claude-opus-5-5",
-            "score": 58.3
+            "score": 63.2
           },
           {
             "rank": 6,
-            "modelId": "gpt-6-sol",
-            "score": 55.6
+            "modelId": "gpt-6.1-sol-high",
+            "score": 62.1
           },
           {
             "rank": 7,
-            "modelId": "grok-4.7",
-            "score": 51.0
+            "modelId": "gpt-6-astra",
+            "score": 61.9
           },
           {
             "rank": 8,
-            "modelId": "gpt-5.6-luna",
-            "score": 49.7
+            "modelId": "claude-opus-5-5-high",
+            "score": 57.3
           },
           {
             "rank": 9,
-            "modelId": "gpt-6-luna",
-            "score": 45.2
+            "modelId": "claude-opus-5-5-medium",
+            "score": 53.9
           },
           {
             "rank": 10,
-            "modelId": "claude-haiku-5-5",
-            "score": 40.7
+            "modelId": "gpt-6.1-sol-medium",
+            "score": 53.8
           },
           {
             "rank": 11,
-            "modelId": "gemini-3.8-flash",
-            "score": 38.4
+            "modelId": "gpt-6-astra-high",
+            "score": 53.8
           },
           {
             "rank": 12,
-            "modelId": "claude-opus-5",
-            "score": 37.5
+            "modelId": "mimo-v2-6-pro",
+            "score": 51.6
           },
           {
             "rank": 13,
-            "modelId": "glm-5.3",
-            "score": 36.2
+            "modelId": "claude-haiku-5-5-max",
+            "score": 49.6
           },
           {
             "rank": 14,
-            "modelId": "deepseek-v4-flash",
-            "score": 32.6
+            "modelId": "gpt-6-luna",
+            "score": 44.0
           },
           {
             "rank": 15,
-            "modelId": "qwen3.8-max",
-            "score": 27.8
+            "modelId": "claude-haiku-5-5-high",
+            "score": 40.3
           },
           {
             "rank": 16,
-            "modelId": "deepseek-v4-pro",
-            "score": 22.4
+            "modelId": "gpt-6-luna-xhigh",
+            "score": 38.7
+          },
+          {
+            "rank": 17,
+            "modelId": "claude-haiku-5-5-medium",
+            "score": 37.7
+          },
+          {
+            "rank": 18,
+            "modelId": "gpt-6-luna-high",
+            "score": 35.4
+          },
+          {
+            "rank": 19,
+            "modelId": "gpt-6-luna-medium",
+            "score": 33.6
+          },
+          {
+            "rank": 20,
+            "modelId": "gpt-5.6-luna-low",
+            "score": 28.9
           }
         ]
       }

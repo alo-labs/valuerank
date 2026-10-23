@@ -7,307 +7,472 @@
   "selectedPage": "https://artificialanalysis.ai/models/gemini-4-argon",
   "summary": {
     "rank": {
-      "api": 1,
-      "plan": 5
+      "api": 5,
+      "plan": 27
     },
     "overall": {
-      "api": 69.5,
-      "plan": 64.8
+      "api": 55.47686275090185,
+      "plan": 50.63092404628401
     },
-    "quality": 82.6,
-    "qualityRank": 2,
+    "quality": 64.25647228383212,
+    "qualityRank": 5,
     "coverage": {
-      "pct": 85.98,
+      "pct": 100.0,
       "costAvailable": true,
-      "availablePriority": 87,
-      "totalPriority": 107,
-      "missing": [
-        "Terminal-Bench 4.0",
-        "Instruction Following (LiveBench)",
-        "GPQA Diamond (legacy)",
-        "Speed"
-      ]
+      "missing": [],
+      "provisional": false,
+      "provisionalReasons": []
     },
     "grade": "measured",
     "rankingEligible": true,
-    "exclusionReasons": []
+    "exclusionReasons": [],
+    "flags": []
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": 45.7993361343324,
-      "unit": "USD per Index point",
-      "normalized": 30.2,
+      "key": "frontierCode",
+      "label": "FrontierCode 1.1",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 0.434532,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 43.453199999999995,
       "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
-      "note": null,
-      "grade": "measured",
-      "normalizedByBasis": {
-        "api": 30.2,
-        "plan": 11.6
-      }
-    },
-    {
-      "key": "deepswePassAt1",
-      "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
-      "value": 78.8,
-      "unit": "% pass@1",
-      "normalized": 100.0,
-      "source": {
-        "name": "Artificial Analysis Coding Agent Index v1.5 — DeepSWE v1.1",
-        "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
-      },
-      "observedAt": "2026-10-17T19:26:26Z",
-      "evaluatedVariant": "Antigravity CLI / Gemini 4 Argon / high",
-      "note": "Exact variant: chart model Gemini 4 Argon (high) matches the roster display name 'Gemini 4 Argon' at effort high.",
-      "grade": "measured"
-    },
-    {
-      "key": "bugHuntFixedOf105",
-      "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
-      "value": 40.7,
-      "unit": "bugs fixed of 105",
-      "normalized": 70.6,
-      "source": {
-        "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gemini-4-argon-high-effort-antigravity-cli---mean-of-3"
-      },
-      "observedAt": "2026-10-18",
-      "evaluatedVariant": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3",
-      "note": "Owner-published mean of three high-effort runs (40, 45 and 37 of 105) through Antigravity CLI, the same harness as the Gemini 3.8 Flash entry. High is the model ceiling (the API accepts low, medium and high and rejects max). Run 2 was cut off by an API billing limit and resumed in the same conversation. The owner's separate Gemini CLI single run (33/105, $32.08) is a different harness and is excluded. Cost is a list estimate from Google's per-call usage.",
-      "grade": "measured"
-    },
-    {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 84.93,
-      "unit": "% non-hallucination",
-      "normalized": 100.0,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
-      "value": null,
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 84.1,
+      "decimals": 1,
+      "unit": "mean of seven category scores (0-100)",
+      "normalized": 84.1,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gemini-4-argon / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (AA run)",
+      "category": "Software engineering",
+      "weightPct": 8.25,
+      "value": 57.07070707070711,
+      "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 57.07070707070711,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
-      "key": "gdpvalV21",
+      "key": "gdpval",
       "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
-      "value": 1623.99,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 1623.11,
+      "decimals": 1,
       "unit": "Elo",
-      "normalized": 61.1,
+      "normalized": 56.15549999999999,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 52.5605655745982,
-      "unit": "Index points",
-      "normalized": 88.9,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
-      "value": null,
-      "unit": "score",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
-      "key": "automationBenchAA",
+      "key": "automationBench",
       "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 77.51,
-      "unit": "% score",
-      "normalized": 100.0,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 0.7751346945899195,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 77.51346945899195,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": null,
-      "unit": "tokens per second",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
+      "observedAt": "2026-10-23",
       "evaluatedVariant": null,
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
-      "key": "aaLcr",
-      "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 79.67,
-      "unit": "% accuracy",
-      "normalized": 27.8,
+      "key": "omniscience",
+      "label": "AA-Omniscience",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": 42.35,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": 71.175,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 49.9,
-      "unit": "% accuracy",
-      "normalized": 55.6,
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": 40.7,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 38.761904761904766,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
+      "observedAt": "2026-10-19",
+      "evaluatedVariant": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 / Antigravity CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": 70.796,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": 70.796,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "google/gemini-4-argon / Pi agent harness, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 91.906,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": 91.906,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://www.vals.ai/benchmarks/vibe-code"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "google/gemini-4-argon / OpenHands, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "lcr",
+      "label": "AA-LCR v1.1",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": 0.796666666666667,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 79.6666666666667,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 57.09,
-      "unit": "% accuracy",
-      "normalized": 94.4,
+      "label": "Humanity's Last Exam",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.570898980537535,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 57.089898053753494,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": null,
-      "unit": "% accuracy",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
       "key": "scicode",
       "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 61.81,
-      "unit": "% score",
-      "normalized": 94.4,
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.618055555555556,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 61.8055555555556,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "critpt",
       "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 27.14,
-      "unit": "% score",
-      "normalized": 61.1,
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.271428571428571,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 27.142857142857103,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": "high",
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 2407.239010161643,
-    "apiUsdPerPoint": 45.7993361343324,
-    "planUsdPerRun": null,
-    "planUsdPerPoint": null,
-    "planComparableUsdPerPoint": 45.7993361343324,
+    "apiUsd": 3557.766318119637,
+    "planUsd": 3557.766318119637,
     "fallback": "api",
-    "route": null
+    "route": null,
+    "subset": false,
+    "partialComponents": [],
+    "workload": "9a0d376cc6080f3c",
+    "planFlags": [
+      "API-cost fallback: no admitted Plan route",
+      "cross-estimand ordering not identified"
+    ],
+    "costScore": {
+      "api": 29.138034152111025,
+      "plan": 9.754279333639644
+    },
+    "components": [
+      {
+        "key": "coding-agent-index",
+        "label": "Coding Agent Index",
+        "costUsd": 1699.8309599579943,
+        "completeness": "confirmed-complete",
+        "source": "AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks",
+        "admitted": true
+      },
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase",
+        "costUsd": 530.3251936207944,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdpval-aa",
+        "label": "GDPval-AA",
+        "costUsd": 400.2295241378207,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf",
+        "costUsd": 25.933138,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA",
+        "costUsd": 399.88728044463164,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)",
+        "costUsd": 447.4892519583963,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "costUsd": 30.43532,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      },
+      {
+        "key": "artificial-analysis-long-context-reasoning",
+        "label": "AA-LCR",
+        "costUsd": 23.635650000000002,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "admitted": true
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "no eligible route",
+    "planAmount": null
   },
   "plans": [],
+  "scenarios": {
+    "status": "current",
+    "api": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0233,
+        "frontier": 0.4553
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0737,
+        "frontier": 0.4906
+      }
+    ],
+    "plan": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0214
+      }
+    ]
+  },
+  "intervals": {
+    "api": {
+      "definite": "disproved",
+      "possible": "disproved"
+    },
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.9.7",
@@ -330,7 +495,15 @@
       "date": "2026-10-19",
       "rank": {
         "api": 1,
-        "plan": 5
+        "plan": null
+      }
+    },
+    {
+      "version": "v3.0.0",
+      "date": "2026-10-19",
+      "rank": {
+        "api": 5,
+        "plan": 27
       }
     }
   ],
@@ -341,5 +514,37 @@
     "configuration": "Gemini 4 Argon (high)",
     "intelligenceGap": 1,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 5,
+        "plan": 27
+      },
+      "overall": {
+        "api": 55.47686275090185,
+        "plan": 50.63092404628401
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": true,
+      "rank": {
+        "api": 9,
+        "plan": 37
+      },
+      "overall": {
+        "api": 47.862235940026785,
+        "plan": 45.91396517594987
+      }
+    }
+  ]
 }

@@ -1,11 +1,91 @@
 {
   "versions": [
     {
+      "version": "v3.0.0",
+      "date": "October 19, 2026",
+      "models": 9,
+      "dimensions": 14,
+      "summary": "9 models ranked on 14 dimensions; DeepSeek V4.1 Flash 1017 is first on the API basis.",
+      "rankChanges": [
+        {
+          "slug": "mimo-v2-6-pro",
+          "name": "MiMo-V2.6-Pro",
+          "from": 7,
+          "to": 2
+        },
+        {
+          "slug": "gpt-6-1-sol",
+          "name": "GPT-6.1 Sol",
+          "from": 2,
+          "to": 3
+        },
+        {
+          "slug": "gpt-6-luna",
+          "name": "GPT-6 Luna",
+          "from": 11,
+          "to": 4
+        },
+        {
+          "slug": "gemini-4-argon",
+          "name": "Gemini 4 Argon",
+          "from": 1,
+          "to": 5
+        },
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "from": 5,
+          "to": 6
+        },
+        {
+          "slug": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "from": 4,
+          "to": 7
+        },
+        {
+          "slug": "claude-sonnet-5-5",
+          "name": "Claude Sonnet 5.5",
+          "from": 3,
+          "to": 8
+        }
+      ],
+      "ranks": {
+        "claude-haiku-5-5-max": 9,
+        "claude-opus-5-5": 6,
+        "claude-sonnet-5-5": 8,
+        "deepseek-v4-1-flash-1017": 1,
+        "gemini-4-argon": 5,
+        "gpt-6-astra": 7,
+        "gpt-6-luna": 4,
+        "gpt-6-1-sol": 3,
+        "mimo-v2-6-pro": 2
+      },
+      "added": [
+        "claude-haiku-5-5-max",
+        "deepseek-v4-1-flash-1017"
+      ],
+      "removed": [
+        "claude-haiku-5-5",
+        "claude-opus-5",
+        "deepseek-v4-flash",
+        "deepseek-v4-pro",
+        "gemini-3-8-flash",
+        "glm-5-3",
+        "gpt-5-6-luna",
+        "gpt-5-6-sol",
+        "gpt-6-sol",
+        "grok-4-7",
+        "mimo-v2-6-flash",
+        "qwen3-8-max"
+      ]
+    },
+    {
       "version": "v2.0.0",
       "date": "October 19, 2026",
       "models": 19,
-      "dimensions": 16,
-      "summary": "19 models ranked on 16 dimensions; Gemini 4 Argon is first on the API basis.",
+      "dimensions": null,
+      "summary": "19 models ranked; Gemini 4 Argon first.",
       "rankChanges": [
         {
           "slug": "claude-opus-5-5",
