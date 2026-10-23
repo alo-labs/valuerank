@@ -1238,3 +1238,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (adopted): the re-frozen anchor figures are named as the padded c_L and c_H.
 - L4 (resolved by O57): the per-ranking admission reading went to the owner, who chose it; r91 states it as O57.
 - Draft r91.
+
+## Internal review I32 (Claude Sonnet 5.5, effort low, on r91) — adopted, modified or rejected
+- Round status (O56): clean (no Medium or higher; four Low). Second consecutive clean round: the Sonnet-low rung is complete.
+- L1 (adopted): the remaining three listed configurations (Claude Opus 5.5 (xhigh), GPT-6.1 Sol (xhigh), GPT-6 Luna (low)) are placed as non-primary rendered-frontier points of ranked families.
+- L2 (adopted): the band sentence is split and today's bands get their own sentence.
+- L3 (rejected): repeat of I29 L3 without a new argument.
+- L4 (adopted): the bar-reach counts say which population they count and why the interval outputs' lower-bar count is 5 (two rows on the subset workload).
+- Draft r92.
