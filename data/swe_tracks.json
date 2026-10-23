@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-10-23T08:00:00Z",
+  "capturedAt": "2026-10-23T07:58:31Z",
   "rule": "Owner decisions O53-O55: leaves added by the max-effort and AI Coding Daily rankings; exact configuration only (O36), MiMo-V2.6-Pro matched at high by owner statement (O54, E252)",
   "sources": {
     "vibeCode": {
@@ -13,7 +13,8 @@
       "unit": "percent",
       "sampling": {
         "kind": "publishedStandardError"
-      }
+      },
+      "capturedAt": "2026-10-23T07:58:05Z"
     },
     "codeMigration": {
       "benchmark": "Code Migration v1.1",
@@ -26,7 +27,8 @@
       "sampling": {
         "kind": "publishedStandardError",
         "tasks": 130
-      }
+      },
+      "capturedAt": "2026-10-23T07:58:05Z"
     },
     "livebenchAgentic": {
       "benchmark": "LiveBench 2.0 Long Agentic (release 2026-10-14)",
@@ -39,7 +41,8 @@
       "sampling": {
         "kind": "tasks",
         "tasks": 18
-      }
+      },
+      "capturedAt": "2026-10-23T07:58:31Z"
     },
     "livebenchCoding": {
       "benchmark": "LiveBench 2.0 Coding (release 2026-10-14)",
@@ -52,7 +55,8 @@
       "sampling": {
         "kind": "tasks",
         "tasks": 29
-      }
+      },
+      "capturedAt": "2026-10-23T07:58:31Z"
     },
     "aiCodingDaily": {
       "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
@@ -66,7 +70,8 @@
         "kind": "tasks",
         "tasks": 6,
         "unit": "graded projects (Laravel, React-TS and 4 edge-case projects)"
-      }
+      },
+      "capturedAt": "2026-10-23T07:58:31Z"
     }
   },
   "records": [

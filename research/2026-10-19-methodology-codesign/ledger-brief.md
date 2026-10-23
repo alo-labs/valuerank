@@ -42,6 +42,8 @@ Six Perplexity models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Flash, 
 - O56 (2026-10-23) Review convergence: a round is clean with no finding of medium or higher severity; each ladder rung and each Perplexity model is done after two consecutive clean rounds.
 - O57 (2026-10-23) Basket admission per ranking: the two-thirds admission threshold is counted within each ranking's own rows.
 - O58 (2026-10-23) The clip gate counts ranked rows only; listed rows beyond the anchors are disclosed (with a rendered-frontier marker) and never hold a release.
+- O59 (2026-10-23) Non-AA quality sources are captured at most 30 days before the release cutoff.
+- O60 (2026-10-23) A capture after the cutoff stands when the source's own last update is dated before the cutoff's day.
 - Current figures (2026-10-23, release cutoff 06:26:23Z): cohort 29 plotted configurations; max-effort ranking 9 ranked (Coding Agent Index admitted, 7 of 9 priced; DeepSeek V4.1 Flash 1017 and MiMo-V2.6-Pro on a subset workload), AI Coding Daily ranking 15 ranked (Coding Agent Index pending); 9 cohort configurations in neither ranking; each ranking has its own anchors (v3-2026-10-23, v3-2026-10-23-aicd), bars and scenario run. Editor decisions E247–E263 since r87.
 - E233 (I21) A row with a provider-claimed leaf competes but earns no label (MiMo-V2.6-Pro). E234 FrontierCode AA vs Cognition cross-check (τ_b 0.73 on 10, Cognition +2.5 mean) and gap-fill removal sensitivity. E235 Rules inactive while O36 holds are indexed and listed as one vacuous manifest entry.
 - O23 MMMU-Pro dropped from the basket. O24 Both priced Terminal-Bench executions stay (AA Index run and Coding Agent Index vendor-agent run); overlap disclosed.

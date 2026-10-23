@@ -892,6 +892,8 @@ Quality is the weighted mean of the leaves observed for the exact configuration,
 
 {markdown_table(['Leaf', 'Group'] + [f"Weight, {q.TRACK_NAMES[track]}" for track in q.TRACKS] + ['Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
 
+{source_clocks_text(facts)}
+
 Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within {LEAF_SEARCH_DAYS} days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). For a listed frontier or near-frontier family the search also logs an open-web discovery step: its queries and every candidate result, each resolved by a dated registry addition or a dated rejection with its reason, and the build fails on an unresolved candidate (E240). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 
 Coverage is the observed share of quality weight. A row is **provisional** when coverage is below {q.MIN_COVERAGE:.0%}, fewer than {q.MIN_SWE_LEAVES} software-engineering leaves are observed, observed software-engineering weight is below {q.MIN_SWE_WEIGHT:.0%}, or a leaf weighing {q.REQUIRED_LEAF_WEIGHT:.0f}% or more of quality ({names(sorted(set(required))) or 'none'}) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
@@ -1287,6 +1289,16 @@ def plotted_names_text(facts):
     return (f"AA plots {series(state['withFallback'])} only \"with fallback\", and every other cohort family ({series(state['withoutFallback'])}) without it; "
             "a third-party record matches by model and effort, and the build stops if AA plots one model and effort both ways (E214). "
             f"AA plots {series(state['noEffort'])} with no effort (O54).")
+
+
+def source_clocks_text(facts):
+    """O59/O60: when each non-AA quality source was captured, and its own last update."""
+
+    clocks = facts.v3["sourceClocks"]
+    items = "; ".join(f"{clock['source']}, captured {clock['capturedAt']}" + (f" (source updated {clock['sourceUpdated'][:10]})" if clock["sourceUpdated"] else "")
+                      for clock in clocks)
+    return ("**Source clocks (owner decisions O59, O60).** Each non-AA quality source is captured at most 30 days before the release cutoff; "
+            "a capture taken after the cutoff stands only when the source's own last update is dated before the cutoff's day. " + items + ".")
 
 
 def listed_beyond_text(facts):

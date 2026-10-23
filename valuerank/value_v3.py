@@ -28,7 +28,7 @@ import math
 import re
 import statistics
 import sys
-from datetime import date, datetime
+from datetime import date, datetime, time, timezone
 from pathlib import Path
 
 from valuerank import anchors as anchor_math
@@ -541,6 +541,46 @@ def _instant(stamp: str) -> datetime:
     return datetime.fromisoformat(stamp.replace("Z", "+00:00"))
 
 
+SOURCE_MAX_AGE_DAYS = 30  # O59: non-AA quality evidence, like the end-user report window
+
+
+def source_clocks(documents: dict) -> list[dict]:
+    """O59/O60: each non-AA quality source's capture instant and the source's own last update."""
+
+    tracks = documents.get("sweTracks") or {}
+    clocks = [{"source": f"{source['publisher']}: {source['benchmark']}", "artifact": "data/swe_tracks.json",
+               "capturedAt": source.get("capturedAt") or tracks.get("capturedAt"), "sourceUpdated": source.get("updated")}
+              for source in (tracks.get("sources") or {}).values()]
+    for key, name, artifact, field in (("bugHuntScoreboard", "Bug Hunt Bench scoreboard", "data/bug_hunt_scoreboard.json", "capturedAt"),
+                                       ("tb4", "tbench.ai Terminal-Bench 4.0 leaderboard", "data/tb4.json", "observedAt")):
+        document = documents.get(key) or {}
+        if document:
+            clocks.append({"source": name, "artifact": artifact, "capturedAt": document.get(field), "sourceUpdated": document.get("sourceUpdated")})
+    cognition = (documents.get("leafEvidence") or {}).get("cognitionCapture")
+    if cognition:
+        clocks.append({"source": "Cognition: FrontierCode leaderboard", "artifact": cognition["file"], "capturedAt": cognition["capturedOn"],
+                       "sourceUpdated": cognition.get("lastModified")})
+    return clocks
+
+
+def check_source_clocks(clocks: list[dict], release_day: date, cutoff: datetime) -> None:
+    """O59: a non-AA source is captured at most 30 days before the cutoff; O60: a capture after the cutoff stands only
+    when the source's own last update is dated before the cutoff's day, so the capture shows the board as of the cutoff."""
+
+    for clock in clocks:
+        stamp = clock["capturedAt"]
+        if not stamp:
+            raise ValueError(f"{clock['source']}: no capture instant recorded (O59)")
+        if (release_day - date.fromisoformat(stamp[:10])).days > SOURCE_MAX_AGE_DAYS:
+            raise ValueError(f"{clock['source']}: captured {stamp[:10]}, more than {SOURCE_MAX_AGE_DAYS} days before the release cutoff {release_day} (O59)")
+        # A date-only stamp on the cutoff's day cannot be placed after it.
+        after = _instant(stamp) > cutoff if "T" in stamp else date.fromisoformat(stamp) > release_day
+        updated = clock["sourceUpdated"]
+        if after and not (updated and date.fromisoformat(updated[:10]) < release_day):
+            raise ValueError(f"{clock['source']}: captured {stamp} after the release cutoff, and the source's last update "
+                             f"({updated or 'not recorded'}) does not predate the cutoff's day (O60)")
+
+
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
     """Evidence, admission, basket costs and Plan routes for every ranked configuration (no anchors yet)."""
 
@@ -572,6 +612,11 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
                                ("price records", documents["priceRecords"].get("observedAt"), PRICE_RECORD_MAX_AGE_DAYS)):
         if stamp and (release_day - date.fromisoformat(stamp[:10])).days > limit:
             raise ValueError(f"the {name} ({stamp[:10]}) is more than {limit} days old at the release cutoff {release_day} (E216)")
+    # O59/O60: the non-AA quality sources have their own capture clock. The cutoff instant is the pinned clock on the
+    # release day, otherwise the end of that day.
+    now = utcnow()
+    clocks = source_clocks(documents)
+    check_source_clocks(clocks, release_day, now if now.date() == release_day else datetime.combine(release_day, time.max, tzinfo=timezone.utc))
     # E217: the model pages (costs and AA-run leaves) and the chart that defines the cohort describe one AA state.
     chart, pages_at = (documents.get("frontierCapture") or {}).get("captured_at"), documents["snapshot"].get("capturedAt")
     if chart and pages_at and abs(_instant(chart) - _instant(pages_at)).total_seconds() > CAPTURE_GAP_MAX_DAYS * 86400:
@@ -642,6 +687,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "rows": rows, "admission": admission, "admitted": admitted, "deferred": [{"component": component, "reason": DEFERRED_MIGRATION} for component in deferred],
         "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete, "listed": listed,
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
+        "sourceClocks": clocks,
     }
 
 
@@ -1758,6 +1804,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "meteringMix": {basis_name: (len(rows) if basis_name == METERING_BASES[-1] else 0) for basis_name in METERING_BASES},
         "sourceIntervals": SOURCE_INTERVALS,
         "sourceDates": SOURCE_DATES,
+        "sourceClocks": assembled.get("sourceClocks", []),
         "costInfluence": influence,
         "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),
                   "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"},

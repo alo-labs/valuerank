@@ -49,12 +49,16 @@ LEAVES = {
 
 
 def main() -> None:
-    vals = {item["slug"]: item for item in json.loads((HERE / "vals-catalogue-2026-10-23.json").read_text())["benchmarks"]}
-    other = {item["key"]: item for item in json.loads((HERE / "other-coverage-2026-10-23.json").read_text())["benchmarks"]}
+    vals_document = json.loads((HERE / "vals-catalogue-2026-10-23.json").read_text())
+    other_document = json.loads((HERE / "other-coverage-2026-10-23.json").read_text())
+    vals = {item["slug"]: item for item in vals_document["benchmarks"]}
+    other = {item["key"]: item for item in other_document["benchmarks"]}
+    # O59/O60: each source carries the instant its coverage was captured.
+    captured = {"vals": vals_document["capturedAt"], "other": other_document["capturedAt"]}
     cohort = [row["id"] for row in json.loads((HERE / "cohort-2026-10-23.json").read_text())["configurations"]]
     records, sources = [], {}
     for leaf, (key, origin, meta) in LEAVES.items():
-        sources[leaf] = meta
+        sources[leaf] = {**meta, "capturedAt": captured[origin]}
         coverage = (vals if origin == "vals" else other)[key]["coverage"]
         for model_id in cohort:
             cell = coverage[model_id]
@@ -75,7 +79,7 @@ def main() -> None:
                 records.append(record)
     document = {
         "schemaVersion": 1,
-        "capturedAt": "2026-10-23T08:00:00Z",
+        "capturedAt": max(captured.values()),
         "rule": "Owner decisions O53-O55: leaves added by the max-effort and AI Coding Daily rankings; exact configuration only (O36), "
                 "MiMo-V2.6-Pro matched at high by owner statement (O54, E252)",
         "sources": sources,

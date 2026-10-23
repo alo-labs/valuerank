@@ -1302,3 +1302,17 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L4 (rejected for now): splitting Output 1 into sub-bullets is presentation only; every item in it is consistent with the data, and a restructure would disturb the text later rungs compare against. Revisit in the final editorial pass.
 - L5 (adopted): the Terminal-Bench agent list is "observed on the captured leaderboard".
 - Round status (O56): not clean (one Medium). Draft r98.
+
+## Owner decisions O59 and O60 (2026-10-23): non-AA source clocks
+- Asked (Questions UI) for a maximum capture age for non-AA quality evidence, the owner chose 30 days (O59), matching the report window, over 7 days.
+- Asked how to treat a capture taken after the release cutoff, the owner chose "Allow if source predates (Recommended)" (O60): it stands when the source's own last-update date is before the cutoff's day; the build fails otherwise.
+
+## Internal review I39 (Claude Sonnet 5.5, effort medium, on r98) — adopted, modified or rejected
+- M1 (adopted with O59 and O60, code changed): the non-AA sources had no capture clock. The engine now records each source's capture instant and last-update date (`sourceClocks`) and fails on a capture older than 30 days or on a post-cutoff capture whose source does not predate the cutoff's day; methodology.md prints the clocks under the leaf table. `data/swe_tracks.json` is re-stamped from the raw captures (Vals 07:58:05Z, LiveBench and AI Coding Daily 07:58:31Z) instead of a nominal 08:00Z; the Bug Hunt scoreboard records its source update (2026-10-19). Today every source passes. Modified: the owner chose 30 days, not the reviewer's suggested 7, and allowed post-cutoff captures of boards that predate the cutoff rather than requiring capture at or before V.
+- L1 (adopted): O56 wording says two consecutive clean rounds per rung and per Perplexity model.
+- L2 (adopted): C_W includes the Coding Agent Index where admitted.
+- L3 (adopted, modified): the noise-margin sentence says the 4.0 and 5.9 are the margin; the median SDs are 1.45 and 2.12 (the reviewer's 2.07 recomputed from 5.87 ÷ (1.96 × √2)).
+- L4 (adopted): an explicit "without fallback" record for a model AA plots only with fallback does not match without a dated decision.
+- L5 (adopted): the plan-row separation statement is scoped to scenario shares, with a pointer to E258.
+- Design recommendations 2–4 (figure lint, Bug Hunt √N sensitivity, DeepSeek harness delta) not adopted this round: recorded for the owner report; the DeepSeek V4.1 Flash 1017 harness tie is already listed for owner review.
+- Round status (O56): not clean (one Medium). Draft r99.

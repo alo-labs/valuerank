@@ -86,7 +86,7 @@ def documents(**overrides) -> dict:
             {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 52.0, "sampleN": 3},
             {"modelId": "b", "matched": False, "fixedOf105": None},
         ]},
-        "tb4": {"rows": [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]},
+        "tb4": {"observedAt": "2026-10-19T00:00:00Z", "rows": [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]},
         "codingAgents": {"configurations": [
             {"label": "agent-a", "meanCostPerTaskUsd": 2.0, "totalCostUsd": 600.0, "components": []},
             {"label": "agent-b", "meanCostPerTaskUsd": 6.0, "totalCostUsd": 1800.0, "components": []},
@@ -550,7 +550,7 @@ def test_harness_band_runs_a_named_s2_branch_when_a_configuration_has_two_agents
     ]
     band = v.harness_band(rows)
     assert band["status"] == "evaluated" and band["spreads"] == {"M (max)": 8.0, "N (high)": 4.0} and band["width"] == 6.0
-    result, frozen = scored(tb4={"rows": rows})
+    result, frozen = scored(tb4={"observedAt": "2026-10-19T00:00:00Z", "rows": rows})
     panel = {item.row: item for item in v.scenario_panel(result, "api", harness=6.0)}
     stressed = panel["a"].leaves["bugHunt"]  # a's Bug Hunt z is 52 of 105 bugs, on the 0-100 scale
     observed = result["rows"][0]["evidence"]["observations"]["bugHunt"].z
@@ -622,7 +622,7 @@ def write_world(root: Path) -> Path:
         "aa_frontier_capture.json": {"points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
         "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
-        "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
+        "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "sourceUpdated": "2026-10-17", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
             + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
@@ -1694,6 +1694,28 @@ def test_listed_rows_beyond_the_anchors_are_disclosed_and_never_hold_a_release()
     assert output["gates"]["population"].startswith("ranked rows only")
     assert v.listed_beyond_anchors([dict(listed, cost=dict(listed["cost"], costUsd=low * 2.0), aaTier="near")], frozen) == []
     assert v.listed_beyond_anchors([dict(listed, cost=dict(listed["cost"], workload="other"))], frozen) == []
+
+
+def test_non_aa_sources_have_a_capture_clock():
+    """O59: a non-AA source is at most 30 days old at the cutoff; O60: a capture after the cutoff needs a source that predates it."""
+
+    from datetime import datetime, timezone
+
+    cutoff = datetime(2026, 10, 23, 6, 26, 23, tzinfo=timezone.utc)
+    day = cutoff.date()
+    clock = {"source": "S", "capturedAt": "2026-10-23T07:58:31Z", "sourceUpdated": "2026-10-21"}
+    v.check_source_clocks([clock, dict(clock, capturedAt="2026-10-23", sourceUpdated=None), dict(clock, capturedAt="2026-09-23T00:00:00Z")], day, cutoff)
+    for bad, rule in ((dict(clock, capturedAt=None), "O59"), (dict(clock, capturedAt="2026-09-22T00:00:00Z"), "O59"),
+                      (dict(clock, sourceUpdated="2026-10-23"), "O60"), (dict(clock, sourceUpdated=None), "O60"),
+                      (dict(clock, capturedAt="2026-10-24", sourceUpdated=None), "O60")):
+        with pytest.raises(ValueError, match=rule):
+            v.check_source_clocks([bad], day, cutoff)
+    documents = {"sweTracks": {"capturedAt": "2026-10-23T07:58:31Z", "sources": {"x": {"publisher": "P", "benchmark": "B", "updated": "2026-10-20"}}},
+                 "bugHuntScoreboard": {"capturedAt": "2026-10-23T05:37:06Z", "sourceUpdated": "2026-10-19"}, "tb4": {},
+                 "leafEvidence": {"cognitionCapture": {"file": "data/c.json", "capturedOn": "2026-10-23", "lastModified": "2026-10-22T22:28:12Z"}}}
+    clocks = v.source_clocks(documents)
+    assert [item["source"] for item in clocks] == ["P: B", "Bug Hunt Bench scoreboard", "Cognition: FrontierCode leaderboard"]
+    assert clocks[0]["capturedAt"] == "2026-10-23T07:58:31Z" and v.source_clocks({}) == []
 
 
 def test_noise_margin_companion_and_quality_margin():

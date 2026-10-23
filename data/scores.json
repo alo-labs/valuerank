@@ -13864,6 +13864,56 @@
         "role": "retired quality source (O26)"
       }
     },
+    "sourceClocks": [
+      {
+        "source": "Vals AI: Vibe Code Bench v1.1",
+        "artifact": "data/swe_tracks.json",
+        "capturedAt": "2026-10-23T07:58:05Z",
+        "sourceUpdated": "2026-10-20"
+      },
+      {
+        "source": "Vals AI: Code Migration v1.1",
+        "artifact": "data/swe_tracks.json",
+        "capturedAt": "2026-10-23T07:58:05Z",
+        "sourceUpdated": "2026-10-20"
+      },
+      {
+        "source": "LiveBench: LiveBench 2.0 Long Agentic (release 2026-10-14)",
+        "artifact": "data/swe_tracks.json",
+        "capturedAt": "2026-10-23T07:58:31Z",
+        "sourceUpdated": "2026-10-18"
+      },
+      {
+        "source": "LiveBench: LiveBench 2.0 Coding (release 2026-10-14)",
+        "artifact": "data/swe_tracks.json",
+        "capturedAt": "2026-10-23T07:58:31Z",
+        "sourceUpdated": "2026-10-18"
+      },
+      {
+        "source": "AI Coding Daily (Povilas Korop): AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
+        "artifact": "data/swe_tracks.json",
+        "capturedAt": "2026-10-23T07:58:31Z",
+        "sourceUpdated": "2026-10-21"
+      },
+      {
+        "source": "Bug Hunt Bench scoreboard",
+        "artifact": "data/bug_hunt_scoreboard.json",
+        "capturedAt": "2026-10-23T05:37:06Z",
+        "sourceUpdated": "2026-10-19"
+      },
+      {
+        "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
+        "artifact": "data/tb4.json",
+        "capturedAt": "2026-10-23T05:35:48Z",
+        "sourceUpdated": null
+      },
+      {
+        "source": "Cognition: FrontierCode leaderboard",
+        "artifact": "data/cognition_frontiercode.json",
+        "capturedAt": "2026-10-23",
+        "sourceUpdated": "2026-10-22T22:28:12Z"
+      }
+    ],
     "costInfluence": {
       "api": {
         "commonWorkload": {
@@ -29049,7 +29099,7 @@
         {
           "key": "bugHuntScoreboard",
           "artifact": "data/bug_hunt_scoreboard.json",
-          "sha256": "f5601db9cc5b191bdc0c1284e1339d779dfd6677de77e23665096f8e0efd7467",
+          "sha256": "094855a7ca761618645c2da1c6c006190d97e77c1b1bce7a7bb5630f60a0862a",
           "capturedAt": "2026-10-23T05:37:06Z",
           "extractor": "the owner's combined scoreboard at the pinned commit (O31 roster check)"
         },
@@ -29084,8 +29134,8 @@
         {
           "key": "sweTracks",
           "artifact": "data/swe_tracks.json",
-          "sha256": "bd94fecfd7252932fd5032eecf8431edd89eb7ff5fb62725e17c90b822bb5169",
-          "capturedAt": "2026-10-23T08:00:00Z",
+          "sha256": "885d52777b7895ec986d1197a00570459e4dc7be02fa04a7aa16962d55acf187",
+          "capturedAt": "2026-10-23T07:58:31Z",
           "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
         },
         {
@@ -29103,7 +29153,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "bb8caa5eacb7c9a07463bcdf19ed6083c782d7340527fc019a92f2d78ed395a5",
+      "bundleHash": "77aec5eb02fc7ca25260aebf1c6ff8790f0bc10d75ae314e7094ed212b7be019",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -34876,6 +34926,56 @@
           "role": "retired quality source (O26)"
         }
       },
+      "sourceClocks": [
+        {
+          "source": "Vals AI: Vibe Code Bench v1.1",
+          "artifact": "data/swe_tracks.json",
+          "capturedAt": "2026-10-23T07:58:05Z",
+          "sourceUpdated": "2026-10-20"
+        },
+        {
+          "source": "Vals AI: Code Migration v1.1",
+          "artifact": "data/swe_tracks.json",
+          "capturedAt": "2026-10-23T07:58:05Z",
+          "sourceUpdated": "2026-10-20"
+        },
+        {
+          "source": "LiveBench: LiveBench 2.0 Long Agentic (release 2026-10-14)",
+          "artifact": "data/swe_tracks.json",
+          "capturedAt": "2026-10-23T07:58:31Z",
+          "sourceUpdated": "2026-10-18"
+        },
+        {
+          "source": "LiveBench: LiveBench 2.0 Coding (release 2026-10-14)",
+          "artifact": "data/swe_tracks.json",
+          "capturedAt": "2026-10-23T07:58:31Z",
+          "sourceUpdated": "2026-10-18"
+        },
+        {
+          "source": "AI Coding Daily (Povilas Korop): AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
+          "artifact": "data/swe_tracks.json",
+          "capturedAt": "2026-10-23T07:58:31Z",
+          "sourceUpdated": "2026-10-21"
+        },
+        {
+          "source": "Bug Hunt Bench scoreboard",
+          "artifact": "data/bug_hunt_scoreboard.json",
+          "capturedAt": "2026-10-23T05:37:06Z",
+          "sourceUpdated": "2026-10-19"
+        },
+        {
+          "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
+          "artifact": "data/tb4.json",
+          "capturedAt": "2026-10-23T05:35:48Z",
+          "sourceUpdated": null
+        },
+        {
+          "source": "Cognition: FrontierCode leaderboard",
+          "artifact": "data/cognition_frontiercode.json",
+          "capturedAt": "2026-10-23",
+          "sourceUpdated": "2026-10-22T22:28:12Z"
+        }
+      ],
       "costInfluence": {
         "api": {
           "commonWorkload": {
@@ -54546,7 +54646,7 @@
           {
             "key": "bugHuntScoreboard",
             "artifact": "data/bug_hunt_scoreboard.json",
-            "sha256": "f5601db9cc5b191bdc0c1284e1339d779dfd6677de77e23665096f8e0efd7467",
+            "sha256": "094855a7ca761618645c2da1c6c006190d97e77c1b1bce7a7bb5630f60a0862a",
             "capturedAt": "2026-10-23T05:37:06Z",
             "extractor": "the owner's combined scoreboard at the pinned commit (O31 roster check)"
           },
@@ -54581,8 +54681,8 @@
           {
             "key": "sweTracks",
             "artifact": "data/swe_tracks.json",
-            "sha256": "bd94fecfd7252932fd5032eecf8431edd89eb7ff5fb62725e17c90b822bb5169",
-            "capturedAt": "2026-10-23T08:00:00Z",
+            "sha256": "885d52777b7895ec986d1197a00570459e4dc7be02fa04a7aa16962d55acf187",
+            "capturedAt": "2026-10-23T07:58:31Z",
             "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
           },
           {
@@ -54600,7 +54700,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "bb8caa5eacb7c9a07463bcdf19ed6083c782d7340527fc019a92f2d78ed395a5",
+        "bundleHash": "77aec5eb02fc7ca25260aebf1c6ff8790f0bc10d75ae314e7094ed212b7be019",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
