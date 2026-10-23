@@ -1464,3 +1464,13 @@ For AI Coding Daily (the one added-leaf board run on several harnesses): the row
 - L7 (adopted in part, engine changed): the build recomputes each O46 ceiling from its recorded credits, rate and fee and fails on a difference; capturing Xiaomi's pages into the evidence bundle is recorded for the release tidy-up.
 - L8 (adopted): wording.
 - Round status (O56): not clean (one Medium). Draft r110.
+
+## Internal review I52 (Claude Sonnet 5.5, effort xhigh, on r110) — adopted, modified or rejected
+- M1 (adopted; the class removed at its source, E267 amended): a pin with no exact record was not checked, and the row was priced from whatever record it named. This was the third round in a row on the Coding Agent Index link (I50 H1, I51 M1, I52 M1), each a gap in a hand-kept pin and its gate. Following the owner's rule for recurring findings, the record is now derived from the capture (`value_v3.agent_record_for`: the configuration's one exact record); the map's Coding Agent Index pins are cleared, and a pin may only record a choice among several exact records. A pin that is not an exact record stops the build whether or not an exact record exists, and several exact records without a pin stop it too. Every pin that named a captured record equalled the derived one, so no score changed (only bundle hashes).
+- L1 (adopted, data and engine changed): the search cutoff is defined as the latest all-provider search; the MiMo search is marked `singleProvider`, and the build fails unless the cutoff equals the latest all-provider search in the log.
+- L2 (adopted): AA's axis label and the Coding Agent Index total are quoted as captured.
+- L3 (adopted): E268's selection has unit tests and a test on the real board (`tests/test_swe_tracks_selection.py`); re-verification inside the engine is recorded for the release tidy-up.
+- L4 (adopted in part): the ceiling tolerance is stated; the Lite quota is stored as 4,100,000,000; the editorial `capturedOn` and `check_open_web` dates are recorded for the tidy-up.
+- L5 (adopted in part): E267 names the two effort forms, case-sensitive matching and that other forms are not exact; an ITBench-AA pin gate is recorded for when that component is admitted.
+- L6 (adopted; the check widened): configuration names in any undated sentence are flagged, rendered with a new `{{name:ID}}` placeholder that fails when the configuration is gone, and the gap-fill bar result is a figure.
+- Round status (O56): not clean (one Medium). Draft r111.

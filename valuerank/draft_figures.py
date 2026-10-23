@@ -29,7 +29,7 @@ from valuerank.paths import DATA, ROOT
 
 SPEC_DIR = ROOT / "research" / "2026-10-19-methodology-codesign"
 MANIFEST = "figures.json"
-PLACEHOLDER = re.compile(r"\{\{(?P<scope>max|aicd|top|fig):(?P<path>[^|}]+)(?:\|(?P<fmt>[^}]+))?\}\}")
+PLACEHOLDER = re.compile(r"\{\{(?P<scope>max|aicd|top|fig|name):(?P<path>[^|}]+)(?:\|(?P<fmt>[^}]+))?\}\}")
 _TOKEN = re.compile(r'\[(?P<bracket>[^\]]+)\]|(?P<key>[^.\[\]]+)')
 DRAFT = re.compile(r"draft-r(?P<number>\d+)\.src\.md$")
 
@@ -204,6 +204,11 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
     figures["duplicateRows"] = series([f"{names.get(record['modelId'], record['modelId'])} on {tracks['sources'][record['leaf']]['publisher'].split(' (')[0]} "
                                        f"({record['harness']} chosen over {series([item['harness'] for item in record['alternates']])} by "
                                        f"{record['selection'].split('chosen by ')[1].split(' (')[0]})" for record in tracks_records]) or "none"
+    # E234: whether every frozen bar keeps its displayed-record row with the fills published, removed and lowered.
+    changed = [f"{track} {basis} {item['bar'].removeprefix('bar:')}" for track, section in sections.items()
+               for basis, items in section["diagnostics"]["gapFillBars"]["bases"].items() for item in items if not item["survives"]]
+    figures["gapFillBars"] = ("every bar of both rankings keeps its row in all three" if not changed
+                              else "a bar's row changes at " + series(changed))
     both = set(ranked["max"]) & set(ranked["aicd"])
     figures["both.names"], figures["both.count"] = order(both), len(both)
     figures["rankedAny"] = len(set(ranked["max"]) | set(ranked["aicd"]))
@@ -305,6 +310,11 @@ def render(text: str, scores: dict, manifest: dict) -> str:
 
     def replace(match: re.Match) -> str:
         scope, path, spec = match.group("scope"), match.group("path").strip(), match.group("fmt")
+        if scope == "name":
+            # I52 L6: a configuration named in a sentence about the current release is rendered from its id.
+            if path not in names:
+                raise FigureError(f"no configuration {path!r}")
+            return names[path]
         if scope == "fig":
             if path not in manifest:
                 raise FigureError(f"no named figure {path!r}")
@@ -385,6 +395,11 @@ def lint(source: str, names: list[str], configurations: list[str] = (), release_
                     counts += [match.group(0) for match in _COUNTED.finditer(_NOT_A_FIGURE.sub("", undated))]
                 if counts:
                     problems.append(f"line {line_number}: unmarked count(s) {', '.join(counts)} in an undated sentence: {sentence[:160]}")
+                # I52 L6: an effort-qualified configuration name in an undated sentence states the current release.
+                plain = PLACEHOLDER.sub("", sentence)
+                named = [name for name in configurations if name in plain]
+                if named and not _FIXTURE.search(sentence) and not re.search(r"\b[Tt]oday\b", sentence):
+                    problems.append(f"line {line_number}: unmarked configuration name(s) {', '.join(named)} in an undated sentence: {sentence[:160]}")
             if not re.search(r"\b[Tt]oday\b", sentence):
                 continue
             text = PLACEHOLDER.sub("", sentence)

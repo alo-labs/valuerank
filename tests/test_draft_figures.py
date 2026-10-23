@@ -202,3 +202,22 @@ def test_duplicate_rows_name_the_chosen_harness():
     """I50 M2: a configuration a board lists twice is named with the row the selection rule chose."""
 
     assert "DeepSeek Harness chosen over OpenCode by the harness of its Bug Hunt record" in f.named_figures(SCORES)["duplicateRows"]
+
+
+def test_names_render_from_ids_and_names_in_undated_sentences_are_flagged():
+    """I52 L6: a configuration named in a sentence about the current release is a {{name:ID}} placeholder."""
+
+    names, configurations = f.known_names(SCORES), f.configuration_names(SCORES)
+    assert f.render("{{name:gpt-6-astra}}", SCORES, {}) == f.display_names(SCORES)["gpt-6-astra"]
+    with pytest.raises(f.FigureError, match="no configuration 'gone'"):
+        f.render("{{name:gone}}", SCORES, {})
+    problems = f.lint("The near set grew by GPT-6 Luna (max).\nThe near set grew by {{name:gpt-6-luna}}.\nA fixture with GPT-6 Luna (max).",
+                      names, configurations, "2026-10-23")
+    assert len(problems) == 1 and problems[0].startswith("line 1: unmarked configuration name(s) GPT-6 Luna (max) in an undated sentence")
+
+
+def test_gap_fill_bars_figure_names_a_changed_bar():
+    changed = json.loads(json.dumps(SCORES))
+    changed["v3"]["diagnostics"]["gapFillBars"]["bases"]["api"][0]["survives"] = False
+    assert f.named_figures(changed)["gapFillBars"].startswith("a bar's row changes at max api ")
+    assert f.named_figures(SCORES)["gapFillBars"] == "every bar of both rankings keeps its row in all three"

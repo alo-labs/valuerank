@@ -630,17 +630,18 @@ def exact_agent_records(configuration: dict, agent_records) -> list[str]:
     return sorted(found)
 
 
-def check_agent_pins(configurations: list[dict], mapping: dict, agent_records: dict) -> None:
-    """E267 (I50 H1, I51 M1): when AA's Coding Agent Index has an exact record for a ranked configuration, its pin must be
-    one of those records; an empty or dangling pin stops the build, so a pin can never silently move a configuration
-    onto a subset workload while its exact record exists."""
+def agent_record_for(configuration: dict, mapping: dict, agent_records) -> str | None:
+    """E267 (I50 H1, I51 M1, I52 M1): the configuration's Coding Agent Index record is derived from the capture: its one
+    exact record. A pin is only a recorded choice among several exact records; a pin that is not an exact record, or
+    several exact records with no pin, stops the build. No pin can price a row from another configuration's record."""
 
-    for configuration in configurations:
-        exact = exact_agent_records(configuration, agent_records)
-        pin = (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX)
-        if exact and pin not in exact:
-            raise ValueError(f"{configuration['id']}: AA's Coding Agent Index has the exact record(s) {exact}, "
-                             f"but its pin is {pin!r} (E267)")
+    exact = exact_agent_records(configuration, agent_records)
+    pin = (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX)
+    if pin is not None and pin not in exact:
+        raise ValueError(f"{configuration['id']}: its Coding Agent Index pin {pin!r} is not an exact record; exact: {exact} (E267)")
+    if pin is None and len(exact) > 1:
+        raise ValueError(f"{configuration['id']}: AA's Coding Agent Index has several exact records {exact}; pin the choice (E267)")
+    return pin or (exact[0] if exact else None)
 
 
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
@@ -651,7 +652,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     agent_records = {item["label"]: item for item in documents["codingAgents"]["configurations"]}
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
     mapping = documents["configurationMap"]["rows"]
-    check_agent_pins(configurations, mapping, agent_records)
+    agent_labels = {configuration["id"]: agent_record_for(configuration, mapping, agent_records) for configuration in configurations}
     # E208: a route inherits the token-category mix its source publishes for the measured workload.
     sources = documents["planRoutes"].get("sourceEvidence") or {}
     routes = [
@@ -667,9 +668,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # E218: end-user reports are searched up to at most 7 days before the release cutoff, like the cohort capture (E211).
     policy = documents["planRoutes"].get("evidencePolicy") or {}
     searched = policy.get("searchCutoff")
-    # I51 L6: the search cutoff is the date of a logged search, never a free-standing date.
-    if searched and searched not in {entry.get("searchedOn") for entry in policy.get("searchLog") or []}:
-        raise ValueError(f"the search cutoff {searched} is not the date of any search in the search log (E218)")
+    # I51 L6, I52 L1: the search cutoff is the date of the latest all-provider search in the log, never a free-standing date.
+    all_provider = [entry["searchedOn"] for entry in policy.get("searchLog") or [] if not entry.get("singleProvider")]
+    if searched and searched != max(all_provider, default=None):
+        raise ValueError(f"the search cutoff {searched} is not the date of the latest all-provider search in the search log (E218)")
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
@@ -707,7 +709,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         evidence = leaf_evidence(model_id, effort, page, documents["tb4"]["rows"], bug_hunt_by_id.get(model_id), supplements, tracks)
         components, reconciliation = row_components(
             page,
-            agent_records.get(labels.get(basket.CODING_AGENT_INDEX)),
+            agent_records.get(agent_labels[model_id]),
             {slug: chart_rows[slug].get(labels.get(slug)) for slug in basket.CHART_COMPONENTS},
         )
         gate = valuation_gate(page, [item for item in price_records if item["aaSlug"] == configuration["aaSlug"]], documents["snapshot"].get("capturedAt"))

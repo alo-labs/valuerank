@@ -88,15 +88,15 @@ def documents(**overrides) -> dict:
         ]},
         "tb4": {"observedAt": "2026-10-19T00:00:00Z", "rows": [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]},
         "codingAgents": {"configurations": [
-            {"label": "agent-a", "meanCostPerTaskUsd": 2.0, "totalCostUsd": 600.0, "components": []},
-            {"label": "agent-b", "meanCostPerTaskUsd": 6.0, "totalCostUsd": 1800.0, "components": []},
+            {"label": "Agent - A (max)", "meanCostPerTaskUsd": 2.0, "totalCostUsd": 600.0, "components": []},
+            {"label": "Agent - B (max)", "meanCostPerTaskUsd": 6.0, "totalCostUsd": 1800.0, "components": []},
         ]},
         "costCharts": {"evaluations": [
             {"slug": "itbench-aa", "rows": [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}]},
         ]},
         "configurationMap": {"rows": {
-            "a": {"coding-agent-index": "agent-a", "itbench-aa": "A (max)"},
-            "b": {"coding-agent-index": "agent-b", "itbench-aa": None},
+            "a": {"coding-agent-index": None, "itbench-aa": "A (max)"},
+            "b": {"coding-agent-index": None, "itbench-aa": None},
             "c": {"coding-agent-index": None, "itbench-aa": None},
         }},
         "planRoutes": {"routes": [
@@ -333,8 +333,9 @@ def test_score_flags_partial_components_dominance_and_saturation():
     charts["evaluations"][0]["rows"] = [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}, {"model": "B (max)", "totalUsd": 30, "declinedTasks": False}]
     mapping = documents()["configurationMap"]
     mapping["rows"]["b"]["itbench-aa"] = "B (max)"
-    mapping["rows"]["c"]["coding-agent-index"] = "agent-a"
-    result, frozen = scored(planRoutes=routes, costCharts=charts, configurationMap=mapping,
+    agents = documents()["codingAgents"]
+    agents["configurations"].append({"label": "Agent - C (max)", "meanCostPerTaskUsd": 2.0, "totalCostUsd": 600.0, "components": []})
+    result, frozen = scored(planRoutes=routes, costCharts=charts, configurationMap=mapping, codingAgents=agents,
                             snapshot={"pages": [page("a-max", 1.0, gdpval=2700.0), page("b-max", 4.0), page("c-max", 0.5)]})
     assert result["admission"]["components"]["itbench-aa"]["admitted"] is False
     output = v.score(result, frozen)
@@ -345,9 +346,8 @@ def test_score_flags_partial_components_dominance_and_saturation():
 
 def test_partial_component_rows_are_flagged():
     agents = documents()["codingAgents"]
-    agents["configurations"].append({"label": "agent-c", "meanCostPerTaskUsd": 1.0, "components": []})
+    agents["configurations"].append({"label": "Agent - C (max)", "meanCostPerTaskUsd": 1.0, "components": []})
     mapping = documents()["configurationMap"]
-    mapping["rows"]["c"]["coding-agent-index"] = "agent-c"
     pages = [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5)]
     pages[2]["model"]["intelligenceIndexCost"]["total"] = 1.0  # fails reconciliation: unresolved Index components
     result, frozen = scored(codingAgents=agents, configurationMap=mapping, snapshot={"pages": pages})
@@ -1148,9 +1148,9 @@ def gated_world_documents(gate_page, records):
     # O49: b's FrontierCode (25%) keeps it the highest-quality row, as its DeepSWE did before.
     pages = [gate_page, page("b-max", 4.0, frontierCode=0.75), page("c-max", 0.5), page("d-max", 2.0)]
     agents = documents()["codingAgents"]
-    agents["configurations"].append({"label": "agent-d", "meanCostPerTaskUsd": 3.0, "totalCostUsd": 900.0, "components": []})
+    agents["configurations"].append({"label": "Agent - D (max)", "meanCostPerTaskUsd": 3.0, "totalCostUsd": 900.0, "components": []})
     mapping = documents()["configurationMap"]
-    mapping["rows"]["d"] = {"coding-agent-index": "agent-d", "itbench-aa": None}
+    mapping["rows"]["d"] = {"coding-agent-index": None, "itbench-aa": None}
     routes = documents()["planRoutes"]
     routes["routes"][0].update(identification="point-identified", valuationBasis="release")
     return documents(snapshot={"pages": pages}, codingAgents=agents, configurationMap=mapping, planRoutes=routes, priceRecords={"records": records},
@@ -1465,8 +1465,11 @@ def test_reports_are_searched_within_7_days_of_the_cutoff():
         with pytest.raises(ValueError, match=r"more than 7 days before the release cutoff 2026-10-19 \(E218\)"):
             v.assemble(CONFIGURATIONS, documents(planRoutes=policy(searched)), release_day=DAY)
     # I51 L6: the cutoff is the date of a logged search.
-    with pytest.raises(ValueError, match=r"search cutoff 2026-10-12 is not the date of any search"):
+    with pytest.raises(ValueError, match=r"search cutoff 2026-10-12 is not the date of the latest all-provider search"):
         v.assemble(CONFIGURATIONS, documents(planRoutes=policy("2026-10-12", logged="2026-10-13")), release_day=DAY)
+    single = policy("2026-10-12")
+    single["evidencePolicy"]["searchLog"].append({"searchedOn": "2026-10-14", "singleProvider": True})
+    assert v.assemble(CONFIGURATIONS, documents(planRoutes=single), release_day=DAY)["rows"]
 
 
 def test_an_o46_ceiling_is_recomputed_from_its_credits_rate_and_fee():
@@ -1815,9 +1818,18 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     pins = {"ds": {basket.CODING_AGENT_INDEX: "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"},
             "fable": {basket.CODING_AGENT_INDEX: "Claude Code - Fable 5.1 (max) (with fallback)"},
             "mimo-v2-6-pro": {basket.CODING_AGENT_INDEX: "Claude Code - MiMo-V2.6-Pro"}}
-    v.check_agent_pins([ds, luna, fable, mimo, flash, odd], pins, records)
-    for row, pin in ((ds, None), (mimo, None), (ds, "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (max)")):
-        with pytest.raises(ValueError, match=f"{row['id']}: AA's Coding Agent Index has the exact record"):
-            v.check_agent_pins([row], {**pins, row["id"]: {basket.CODING_AGENT_INDEX: pin}}, records)
+    # E267 (I52 M1): the record is derived; a pin is only a choice among several exact records, and any other pin stops.
+    assert [v.agent_record_for(row, pins, records) for row in (ds, luna, fable, mimo, flash, odd)] == [
+        "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})", None, "Claude Code - Fable 5.1 (max) (with fallback)",
+        "Claude Code - MiMo-V2.6-Pro", None, None]
+    assert v.agent_record_for(ds, {}, records) == "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"
+    for row, pin in ((ds, "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (max)"), (luna, "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)"),
+                     (flash, "Kimi Code CLI - MiMo-V2.6-Flash (high)")):
+        with pytest.raises(ValueError, match=f"{row['id']}: its Coding Agent Index pin .* is not an exact record"):
+            v.agent_record_for(row, {row["id"]: {basket.CODING_AGENT_INDEX: pin}}, records)
+    twice = {**records, "Other Agent - DeepSeek V4.1 Flash 1017 (max)": {}}
+    with pytest.raises(ValueError, match="ds: AA's Coding Agent Index has several exact records"):
+        v.agent_record_for(ds, {}, twice)
+    assert v.agent_record_for(ds, {"ds": {basket.CODING_AGENT_INDEX: "Other Agent - DeepSeek V4.1 Flash 1017 (max)"}}, twice) == "Other Agent - DeepSeek V4.1 Flash 1017 (max)"
     # O54: MiMo-V2.6-Pro's record at high is exact too.
     assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]

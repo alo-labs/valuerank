@@ -102,10 +102,11 @@ def test_an_admitted_workload_change_is_a_migration():
     docs, frozen = baseline()
     previous = release(CONFIGURATIONS, docs, frozen)
     changed = copy.deepcopy(docs)
-    changed["configurationMap"]["rows"]["b"]["coding-agent-index"] = None  # coverage falls below admission
+    # E267: the record is derived from the capture, so b loses it only when AA drops it; coverage falls below admission.
+    changed["codingAgents"]["configurations"] = [item for item in changed["codingAgents"]["configurations"] if item["label"] != "Agent - B (max)"]
     current = {"configurations": CONFIGURATIONS, "documents": changed, "published": previous["published"]}
     result = sb.bridge(previous, current, frozen, DAY)
-    assert result["status"] == sb.MIGRATION and result["rows"] == {} and "configurationMap" in result["changedFields"]["cohort"]
+    assert result["status"] == sb.MIGRATION and result["rows"] == {} and "codingAgents" in result["changedFields"]["tokenUse"]
 
 
 def test_other_build_errors_propagate(monkeypatch):
