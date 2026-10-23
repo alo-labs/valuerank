@@ -1255,3 +1255,12 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L4 (adopted): bar triples are given as lower, headline, upper throughout.
 - L5 (adopted): the Cost section's per-ranking admission cites O57.
 - Round status (O56): not clean (one Medium). Draft r93.
+
+## Internal review I34 (Claude Sonnet 5.5, effort medium, on r93) — adopted, modified or rejected
+- M1 (adopted): the AI Coding Daily one-row-per-family ladder was still printed headline-first under the declared lower/headline/upper order; r94 prints 42.8 / 49.2 / 52.8 against the frozen 38.0 / 49.2 / 57.2.
+- L1 (adopted): the frontier primary is the dearest of the family's rendered-frontier points, not of all its plotted points (Claude Haiku 5.5 (max), a near point, costs more today).
+- L2 (adopted): the O44 margin names its SD as the same per-row analytic quality SD the separability threshold scales by 0.75.
+- L3 (adopted): MiniMax's indicative Plan value is its API cost on the Plan anchors; "no Plan row" now reads "no ranked Plan row".
+- L4 (adopted): the basket version names the target basket and admission rule; the two rankings' admitted sets share it and differ by components and workload hash.
+- L5 (adopted): E240 applies to every cohort configuration listed beside a ranking (E259); a listed configuration gets no rank and no value score in that ranking, only O41's indicative value.
+- Round status (O56): not clean (one Medium). Draft r94.
