@@ -39,9 +39,10 @@ def test_track_records_attach_their_source_and_score_only_in_their_ranking():
 
 def test_a_published_standard_error_is_the_leaf_noise():
     assert v.sampling_sd("vibeCode", q.Observation(90.0), {"stderr": 1.5}) == 1.5
-    # LiveBench 2.0 Long Agentic: 18 tasks under the independent-task approximation.
-    p = (0.5 * 18 + 0.5) / 19
-    assert v.sampling_sd("livebenchAgentic", q.Observation(50.0), {}) == pytest.approx(100 * (p * (1 - p) / 18) ** 0.5)
+    # E264: LiveBench 2.0 Overall is the mean of seven categories, each a binomial share of its published task count.
+    categories = {name: 50.0 for name in v.LIVEBENCH_CATEGORY_TASKS}
+    variance = sum(((0.5 * n + 0.5) / (n + 1)) * (1 - (0.5 * n + 0.5) / (n + 1)) / n for n in v.LIVEBENCH_CATEGORY_TASKS.values())
+    assert v.sampling_sd("livebench2Overall", q.Observation(50.0), {"categories": categories}) == pytest.approx(100 * variance ** 0.5 / 7)
 
 
 def test_each_ranking_keeps_its_own_files_and_summary():
@@ -58,12 +59,13 @@ def test_each_ranking_keeps_its_own_files_and_summary():
 
 
 def test_a_publisher_of_two_leaves_is_a_source_branch():
-    """E258: in the max-effort ranking Vals AI and LiveBench each publish two leaves, so each has a leave-one-source-out
-    branch, and their leaves carry only the leave-one-benchmark-out label; Bug Hunt stays a single-leaf source."""
+    """E258: in the max-effort ranking Vals AI publishes two leaves, so it has a leave-one-source-out branch and its leaves
+    carry only the leave-one-benchmark-out label; Bug Hunt and LiveBench 2.0 Overall (O61) stay single-leaf sources."""
 
     branches = {branch["id"]: branch for branch in v.deletion_branches()}
     assert branches["leave-source-out:Vals AI"]["removed"] == ["vibeCode", "codeMigration"]
-    assert branches["leave-source-out:LiveBench"]["removed"] == ["livebenchAgentic", "livebenchCoding"]
+    assert "leave-source-out:LiveBench" not in branches
+    assert branches["leave-out:livebench2Overall"]["labels"] == ["leave-one-benchmark-out", "leave-one-source-out"]
     assert branches["leave-out:vibeCode"]["labels"] == ["leave-one-benchmark-out"]
     assert branches["leave-out:bugHunt"]["labels"] == ["leave-one-benchmark-out", "leave-one-source-out"]
     with q.active_track("aicd"):

@@ -22,9 +22,10 @@ def test_leaf_weights_sum_to_the_group_shares_and_to_100():
 
 def test_source_shares_split_aa_run_and_independent_weight():
     shares = q.source_shares()
-    # O37: Terminal-Bench is AA's own run; in the max-effort ranking Bug Hunt and the LiveBench and Vals leaves are independent (O55).
-    assert shares["aa"] == pytest.approx(0.72)
-    assert shares["independent"] == pytest.approx(0.28)
+    # O37: Terminal-Bench is AA's own run; in the max-effort ranking Bug Hunt, LiveBench 2.0 Overall and the Vals leaves are
+    # independent (O55, O61).
+    assert shares["aa"] == pytest.approx(0.66)
+    assert shares["independent"] == pytest.approx(0.34)
     with q.active_track("aicd"):
         assert q.source_shares() == {"aa": pytest.approx(0.78), "independent": pytest.approx(0.22)}
 
@@ -100,7 +101,7 @@ def test_summarize_full_coverage_row():
     assert summary.displayed == pytest.approx(50.0)
     assert (summary.lower, summary.upper) == (pytest.approx(50.0), pytest.approx(50.0))
     assert summary.provisional is False and summary.provisional_reasons == ()
-    assert summary.swe_leaves == 7 and summary.swe_weight == pytest.approx(0.6)
+    assert summary.swe_leaves == 6 and summary.swe_weight == pytest.approx(0.6)
 
 
 def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
@@ -112,8 +113,8 @@ def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
     assert summary.coverage == pytest.approx(expected_coverage)
     weighted = sum(leaf.weight * observations[leaf.key].z for leaf in q.LEAVES if leaf.key in observations)
     assert summary.displayed == pytest.approx(weighted / (100 * expected_coverage))
-    assert summary.lower == pytest.approx((weighted - 10 * 1.0) / 100)
-    assert summary.upper == pytest.approx((weighted + 10 * 1.0 + (5 / 3) * 100) / 100)
+    assert summary.lower == pytest.approx((weighted - 8 * 1.0) / 100)
+    assert summary.upper == pytest.approx((weighted + 8 * 1.0 + (5 / 3) * 100) / 100)
     assert summary.provisional is False
 
 

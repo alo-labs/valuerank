@@ -11,10 +11,10 @@
       "plan": 17
     },
     "overall": {
-      "api": 54.26913064902091,
-      "plan": 54.87305010938671
+      "api": 57.516504418501434,
+      "plan": 58.12042387886724
     },
-    "quality": 43.08215992372884,
+    "quality": 47.411991616369534,
     "qualityRank": 9,
     "coverage": {
       "pct": 100.0,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 13.5,
+      "weightPct": 11.25,
       "value": 0.419269666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -48,10 +48,28 @@
       "grade": "measured"
     },
     {
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 69.4,
+      "decimals": 1,
+      "unit": "mean of seven category scores (0-100)",
+      "normalized": 69.4,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gpt-6-luna / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 10.5,
+      "weightPct": 8.25,
       "value": 12.6262626262626,
       "decimals": 1,
       "unit": "% resolved",
@@ -62,24 +80,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": "mini-SWE-agent",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "bugHunt",
-      "label": "Bug Hunt Bench",
-      "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 18.3,
-      "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 17.428571428571427,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-19",
-      "evaluatedVariant": "GPT-6 Luna MAX - mean of 3 / Codex CLI",
       "note": null,
       "grade": "measured"
     },
@@ -138,6 +138,24 @@
       "grade": "measured"
     },
     {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": 18.3,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 17.428571428571427,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-19",
+      "evaluatedVariant": "GPT-6 Luna MAX - mean of 3 / Codex CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "codeMigration",
       "label": "Code Migration v1.1 (Vals)",
       "category": "Software engineering",
@@ -174,24 +192,6 @@
       "grade": "measured"
     },
     {
-      "key": "livebenchAgentic",
-      "label": "LiveBench 2.0 Long Agentic",
-      "category": "Software engineering",
-      "weightPct": 3.75,
-      "value": 48.1,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 48.1,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "gpt-6-luna / LiveBench's own, one run per model at its top effort",
-      "note": null,
-      "grade": "measured"
-    },
-    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -206,24 +206,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchCoding",
-      "label": "LiveBench 2.0 Coding",
-      "category": "Software engineering",
-      "weightPct": 1.5,
-      "value": 84.5,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 84.5,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "gpt-6-luna / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -413,7 +395,7 @@
       "usdPerRun": 11.67091208888684,
       "selected": true,
       "planRank": 17,
-      "planValue": 54.87305010938671
+      "planValue": 58.12042387886724
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
@@ -430,7 +412,7 @@
       "usdPerRun": 11.916499054169579,
       "selected": false,
       "planRank": 18,
-      "planValue": 54.799787824187895
+      "planValue": 58.04716159366842
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
@@ -447,7 +429,7 @@
       "usdPerRun": 12.065169387858834,
       "selected": false,
       "planRank": 19,
-      "planValue": 54.75616736659815
+      "planValue": 58.00354113607868
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
@@ -463,8 +445,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 15.520872224875193,
       "selected": false,
-      "planRank": 21,
-      "planValue": 53.87008506062891
+      "planRank": 20,
+      "planValue": 57.11745883010943
     }
   ],
   "scenarios": {
@@ -493,8 +475,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0002,
-        "top3": 0.9675,
+        "top1": 0.0007,
+        "top3": 0.9985,
         "frontier": 1.0
       },
       {
@@ -520,8 +502,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0087,
-        "top3": 0.9337,
+        "top1": 0.034,
+        "top3": 0.9936,
         "frontier": 1.0
       }
     ],
@@ -675,8 +657,8 @@
         "plan": 17
       },
       "overall": {
-        "api": 54.26913064902091,
-        "plan": 54.87305010938671
+        "api": 57.516504418501434,
+        "plan": 58.12042387886724
       }
     },
     {

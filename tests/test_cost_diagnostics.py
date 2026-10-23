@@ -52,15 +52,15 @@ def test_basket_readiness_prices_leaves_by_family_and_reports_concentration():
     result = cd.basket_readiness(rows, admission(rows), MAIN)
     agents = result["components"][basket.CODING_AGENT_INDEX]
     assert agents["status"] == "admitted" and agents["tasks"] == 290 and agents["missingConfigurations"] == ["b"]
-    # O50: FrontierCode (18% in the max-effort ranking) and Terminal-Bench (14%) run inside the Coding Agent Index v2.0.
-    assert agents["pricedQualityWeight"] == pytest.approx(0.32)
+    # O50: FrontierCode (15% in the max-effort ranking, O61) and Terminal-Bench (11%) run inside the Coding Agent Index v2.0.
+    assert agents["pricedQualityWeight"] == pytest.approx(0.26)
     assert "frontiercode" not in result["components"]
     assert result["components"]["itbench-aa"]["tasks"] == "chart total (no task count)"
     assert result["components"]["itbench-aa"]["missingConfigurations"] == ["a", "b", "s", "z"]
     assert result["components"]["scicode"]["tasks"] == 288 and result["components"]["aa-briefcase"]["pricedQualityWeight"] == 0.0
     assert result["pricedLeaves"] == ["automationBench", "frontierCode", "gdpval", "lcr", "scicode", "terminalBench"]
-    # FrontierCode 18, Terminal-Bench 14, GDPval 10, AutomationBench 10, AA-LCR 5 and SciCode 5/3 percent of quality (O55).
-    assert result["pricedMixCoverage"] == pytest.approx((18 + 14 + 10 + 10 + 5 + 5 / 3) / 100)
+    # FrontierCode 15, Terminal-Bench 11, GDPval 10, AutomationBench 10, AA-LCR 5 and SciCode 5/3 percent of quality (O61).
+    assert result["pricedMixCoverage"] == pytest.approx((15 + 11 + 10 + 10 + 5 + 5 / 3) / 100)
     assert set(result["expenditure"]) == {"a", "b"}  # main workload with a positive cost only
     shares = result["expenditure"]["a"]["shares"]
     assert sum(shares.values()) == pytest.approx(1.0) and result["expenditure"]["a"]["hhi"] == pytest.approx(sum(s * s for s in shares.values()))
@@ -84,9 +84,9 @@ def test_matched_cost_reversals_need_separated_basket_intervals_and_warnings_nee
     rows.append(make_row("subset", workload="w-subset"))
     rows.append(make_row("unsolved", index_cost=2.0, z=0.0))
     result = cd.matched_cost(rows, MAIN)
-    assert result["status"] == "evaluated" and result["pricedQualityWeight"] == pytest.approx(0.54)
-    # O55: the LiveBench and Vals leaves run outside every AA cost component.
-    assert set(result["unpricedLeaves"]) == {"bugHunt", "frontierCode", "vibeCode", "codeMigration", "livebenchAgentic", "livebenchCoding"}
+    assert result["status"] == "evaluated" and result["pricedQualityWeight"] == pytest.approx(0.51)
+    # O55, O61: LiveBench 2.0 Overall and the Vals leaves run outside every AA cost component.
+    assert set(result["unpricedLeaves"]) == {"bugHunt", "frontierCode", "vibeCode", "codeMigration", "livebench2Overall"}
     assert result["unidentified"] == ["gap", "subset"]
     assert sum(result["definition"]["weights"].values()) == pytest.approx(1.0) and len(result["definition"]["id"]) == 16
     # The r-rows price in opposite orders on C^match and C_W; the wide 'overlap' row never forms a reversal.

@@ -150,8 +150,8 @@
       "label": "FrontierCode 1.1",
       "fullLabel": "FrontierCode 1.1",
       "category": "code",
-      "weightPct": 13.5,
-      "priority": 18.0,
+      "weightPct": 11.25,
+      "priority": 15.0,
       "higherBetter": true,
       "sourceUrl": "https://artificialanalysis.ai/evaluations/frontiercode"
     },
@@ -160,8 +160,8 @@
       "label": "Terminal-Bench 4.0 (AA run)",
       "fullLabel": "Terminal-Bench 4.0 (AA run)",
       "category": "code",
-      "weightPct": 10.5,
-      "priority": 14.0,
+      "weightPct": 8.25,
+      "priority": 11.0,
       "higherBetter": true,
       "sourceUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
     },
@@ -170,8 +170,8 @@
       "label": "Bug Hunt Bench",
       "fullLabel": "Bug Hunt Bench",
       "category": "code",
-      "weightPct": 7.5,
-      "priority": 10.0,
+      "weightPct": 6.0,
+      "priority": 8.0,
       "higherBetter": true,
       "sourceUrl": "https://bughunt.productcompass.pm/"
     },
@@ -196,22 +196,12 @@
       "sourceUrl": "https://www.vals.ai/benchmarks/code-migration-v1-1"
     },
     {
-      "key": "livebenchAgentic",
-      "label": "LiveBench 2.0 Long Agentic",
-      "fullLabel": "LiveBench 2.0 Long Agentic",
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "fullLabel": "LiveBench 2.0 Overall",
       "category": "code",
-      "weightPct": 3.75,
-      "priority": 5.0,
-      "higherBetter": true,
-      "sourceUrl": "https://livebench.ai/"
-    },
-    {
-      "key": "livebenchCoding",
-      "label": "LiveBench 2.0 Coding",
-      "fullLabel": "LiveBench 2.0 Coding",
-      "category": "code",
-      "weightPct": 1.5,
-      "priority": 2.0,
+      "weightPct": 11.25,
+      "priority": 15.0,
       "higherBetter": true,
       "sourceUrl": "https://livebench.ai/"
     },
@@ -317,10 +307,10 @@
         "plan": 1
       },
       "overall": {
-        "api": 51.98967780876286,
-        "plan": 62.32502739723033
+        "api": 53.98178468213949,
+        "plan": 64.31713427060696
       },
-      "quality": 65.26291801998286,
+      "quality": 67.91906051781837,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -329,8 +319,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -349,8 +338,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -417,7 +405,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -446,14 +434,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 8,
         "plan": 4
       },
       "overall": {
-        "api": 51.830029138237315,
-        "plan": 62.125299890846016
+        "api": 53.535448313562,
+        "plan": 63.8307190661707
       },
-      "quality": 64.78083526493705,
+      "quality": 67.0547274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -462,8 +450,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -482,8 +469,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -547,7 +533,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -576,14 +562,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 7
       },
       "overall": {
-        "api": 57.724952823327854,
-        "plan": 60.318198605475146
+        "api": 60.156636044107074,
+        "plan": 62.74988182625437
       },
-      "quality": 61.05264071939384,
+      "quality": 64.29488501376613,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -592,8 +578,7 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 54.60499999999999,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
@@ -612,8 +597,7 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 1592.1,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
@@ -681,7 +665,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           1,
@@ -713,10 +697,10 @@
         "plan": 11
       },
       "overall": {
-        "api": 48.48121455469635,
-        "plan": 56.83947547968129
+        "api": 51.47328458391714,
+        "plan": 59.83154550890208
       },
-      "quality": 47.3044520093594,
+      "quality": 51.293878714987116,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -725,8 +709,7 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 55.856500000000004,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
@@ -745,8 +728,7 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 1617.13,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
@@ -841,14 +823,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 14
       },
       "overall": {
-        "api": 51.66267856896313,
-        "plan": 56.65954954995409
+        "api": 53.82841372156053,
+        "plan": 58.8252847025515
       },
-      "quality": 62.11635481005217,
+      "quality": 65.00400168018204,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -857,8 +839,7 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 53.588,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
@@ -877,8 +858,7 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 1571.76,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
@@ -945,7 +925,7 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -978,10 +958,10 @@
         "plan": 17
       },
       "overall": {
-        "api": 54.26913064902091,
-        "plan": 54.87305010938671
+        "api": 57.516504418501434,
+        "plan": 58.12042387886724
       },
-      "quality": 43.08215992372884,
+      "quality": 47.411991616369534,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -990,8 +970,7 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 46.551,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
@@ -1010,8 +989,7 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 1431.02,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
@@ -1075,8 +1053,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          4,
-          8
+          1,
+          4
         ],
         "plan": [
           11,
@@ -1104,14 +1082,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 1,
         "plan": 22
       },
       "overall": {
-        "api": 56.936220358775245,
-        "plan": 48.54244290079133
+        "api": 60.292266592541466,
+        "plan": 51.89848913455756
       },
-      "quality": 49.75580635915165,
+      "quality": 54.23053467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -1120,8 +1098,7 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 59.1645,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
@@ -1140,8 +1117,7 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 1683.29,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
@@ -1202,7 +1178,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           22,
@@ -1234,10 +1210,10 @@
         "plan": 24
       },
       "overall": {
-        "api": 56.23564408760693,
-        "plan": 48.29506758460472
+        "api": 59.44316770124329,
+        "plan": 51.502591198241085
       },
-      "quality": 53.88099331150159,
+      "quality": 58.15769146301675,
       "qualityRank": 6,
       "dims": {
         "costComposite": null,
@@ -1246,8 +1222,7 @@
         "bugHunt": 40.666666666666664,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebenchAgentic": 50.9,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 79.2,
         "gdpval": 62.2885,
         "automationBench": 66.64095364949257,
         "omniscience": 52.35,
@@ -1266,8 +1241,7 @@
         "bugHunt": 42.7,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebenchAgentic": 50.9,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 79.2,
         "gdpval": 1745.77,
         "automationBench": 0.6664095364949257,
         "omniscience": 4.7,
@@ -1316,7 +1290,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           22,
@@ -1345,13 +1319,13 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 25
+        "plan": 27
       },
       "overall": {
-        "api": 52.82557923142134,
-        "plan": 47.97964052680349
+        "api": 55.47686275090185,
+        "plan": 50.63092404628401
       },
-      "quality": 60.72142759119144,
+      "quality": 64.25647228383212,
       "qualityRank": 5,
       "dims": {
         "costComposite": null,
@@ -1360,8 +1334,7 @@
         "bugHunt": 38.761904761904766,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
-        "livebenchAgentic": 69.9,
-        "livebenchCoding": 89.7,
+        "livebench2Overall": 84.1,
         "gdpval": 56.15549999999999,
         "automationBench": 77.51346945899195,
         "omniscience": 71.175,
@@ -1380,8 +1353,7 @@
         "bugHunt": 40.7,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
-        "livebenchAgentic": 69.9,
-        "livebenchCoding": 89.7,
+        "livebench2Overall": 84.1,
         "gdpval": 1623.11,
         "automationBench": 0.7751346945899195,
         "omniscience": 42.35,
@@ -1438,7 +1410,7 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -1485,8 +1457,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1505,8 +1476,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1524,8 +1494,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -1605,8 +1574,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1625,8 +1593,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1644,8 +1611,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -1697,7 +1663,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 41.2489304677024,
@@ -1725,8 +1691,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1745,8 +1710,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1764,8 +1728,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -1817,7 +1780,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 37.8240211671094,
@@ -1845,8 +1808,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1865,8 +1827,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1884,8 +1845,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -1937,7 +1897,7 @@
       "aaVariant": "low",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 29.4523685891139,
@@ -1965,8 +1925,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -1985,8 +1944,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2004,8 +1962,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2057,7 +2014,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 34.4646519474657,
@@ -2085,8 +2042,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2105,8 +2061,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2124,8 +2079,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2205,8 +2159,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2225,8 +2178,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2244,8 +2196,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2325,8 +2276,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2345,8 +2295,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2364,8 +2313,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2417,7 +2365,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 53.5831959822067,
@@ -2445,8 +2393,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2465,8 +2412,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2484,8 +2430,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2537,7 +2482,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 51.2434931792768,
@@ -2565,8 +2510,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2585,8 +2529,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2604,8 +2547,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2657,7 +2599,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 55.9873505840139,
@@ -2685,8 +2627,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2705,8 +2646,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2724,8 +2664,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2805,8 +2744,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2825,8 +2763,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2844,8 +2781,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -2925,8 +2861,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2945,8 +2880,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -2964,8 +2898,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3045,8 +2978,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3065,8 +2997,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3084,8 +3015,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3165,8 +3095,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3185,8 +3114,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3204,8 +3132,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3257,7 +3184,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 51.8955544183089,
@@ -3285,8 +3212,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3305,8 +3231,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3324,8 +3249,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3405,8 +3329,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3425,8 +3348,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3444,8 +3366,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3525,8 +3446,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3545,8 +3465,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3564,8 +3483,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3646,8 +3564,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3666,8 +3583,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3685,8 +3601,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3766,8 +3681,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3786,8 +3700,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3805,8 +3718,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -3886,8 +3798,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3906,8 +3817,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -3925,8 +3835,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4007,8 +3916,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4027,8 +3935,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4046,8 +3953,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4127,8 +4033,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4147,8 +4052,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4166,8 +4070,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4219,7 +4122,7 @@
       "aaVariant": "low",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 21.0124783424265,
@@ -4247,8 +4150,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4267,8 +4169,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4286,8 +4187,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4367,8 +4267,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4387,8 +4286,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4406,8 +4304,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4459,7 +4356,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 50.9191471636152,
@@ -4487,8 +4384,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4507,8 +4403,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4526,8 +4421,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4579,7 +4473,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 52.3863277108782,
@@ -4607,8 +4501,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4627,8 +4520,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4646,8 +4538,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4699,7 +4590,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 32.9282054150837,
@@ -4727,8 +4618,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4747,8 +4637,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4766,8 +4655,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4819,7 +4707,7 @@
       "aaVariant": "low",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 21.5261980080866,
@@ -4847,8 +4735,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4867,8 +4754,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4886,8 +4772,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -4939,7 +4824,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 29.9251773515762,
@@ -4967,8 +4852,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -4987,8 +4871,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5006,8 +4889,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5059,7 +4941,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 34.5587320217785,
@@ -5087,8 +4969,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5107,8 +4988,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5126,8 +5006,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5207,8 +5086,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5227,8 +5105,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5246,8 +5123,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5299,7 +5175,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 50.2377777519769,
@@ -5327,8 +5203,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5347,8 +5222,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5366,8 +5240,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5447,8 +5320,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5467,8 +5339,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5486,8 +5357,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5539,7 +5409,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 47.7833271274065,
@@ -5567,8 +5437,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5587,8 +5456,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5606,8 +5474,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5659,7 +5526,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 51.0377679093761,
@@ -5687,8 +5554,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5707,8 +5573,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5726,8 +5591,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5808,8 +5672,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5828,8 +5691,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5847,8 +5709,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -5929,8 +5790,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5949,8 +5809,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -5968,8 +5827,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6050,8 +5908,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6070,8 +5927,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6089,8 +5945,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6170,8 +6025,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6190,8 +6044,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6209,8 +6062,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6291,8 +6143,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6311,8 +6162,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6330,8 +6180,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6411,8 +6260,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6431,8 +6279,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6450,8 +6297,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6531,8 +6377,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6551,8 +6396,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6570,8 +6414,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6652,8 +6495,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6672,8 +6514,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6691,8 +6532,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6744,7 +6584,7 @@
       "aaVariant": null,
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 37.8843590141754,
@@ -6772,8 +6612,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6792,8 +6631,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6811,8 +6649,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -6864,7 +6701,7 @@
       "aaVariant": null,
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 42.7057475126235,
@@ -6892,8 +6729,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6912,8 +6748,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -6931,8 +6766,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -7013,8 +6847,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7033,8 +6866,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7052,8 +6884,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -7133,8 +6964,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7153,8 +6983,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7172,8 +7001,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -7253,8 +7081,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7273,8 +7100,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7292,8 +7118,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -7373,8 +7198,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7393,8 +7217,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7412,8 +7235,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -7493,8 +7315,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7513,8 +7334,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7532,8 +7352,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -7613,8 +7432,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7633,8 +7451,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -7652,8 +7469,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -7721,10 +7537,10 @@
         "plan": 1
       },
       "overall": {
-        "api": 51.98967780876286,
-        "plan": 62.32502739723033
+        "api": 53.98178468213949,
+        "plan": 64.31713427060696
       },
-      "quality": 65.26291801998286,
+      "quality": 67.91906051781837,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -7733,8 +7549,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -7753,8 +7568,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -7821,7 +7635,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -7861,10 +7675,10 @@
         "plan": 2
       },
       "overall": {
-        "api": 51.98967780876286,
-        "plan": 62.30886314853606
+        "api": 53.98178468213949,
+        "plan": 64.30097002191269
       },
-      "quality": 65.26291801998286,
+      "quality": 67.91906051781837,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -7873,8 +7687,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -7893,8 +7706,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -7961,7 +7773,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -8001,10 +7813,10 @@
         "plan": 3
       },
       "overall": {
-        "api": 51.98967780876286,
-        "plan": 62.225065686869975
+        "api": 53.98178468213949,
+        "plan": 64.21717256024661
       },
-      "quality": 65.26291801998286,
+      "quality": 67.91906051781837,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -8013,8 +7825,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -8033,8 +7844,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebenchAgentic": 85.0,
-        "livebenchCoding": 96.3,
+        "livebench2Overall": 86.53,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -8101,7 +7911,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -8137,14 +7947,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 8,
         "plan": 4
       },
       "overall": {
-        "api": 51.830029138237315,
-        "plan": 62.125299890846016
+        "api": 53.535448313562,
+        "plan": 63.8307190661707
       },
-      "quality": 64.78083526493705,
+      "quality": 67.0547274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -8153,8 +7963,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -8173,8 +7982,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -8238,7 +8046,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -8274,14 +8082,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 8,
         "plan": 5
       },
       "overall": {
-        "api": 51.830029138237315,
-        "plan": 62.10913564215175
+        "api": 53.535448313562,
+        "plan": 63.814554817476434
       },
-      "quality": 64.78083526493705,
+      "quality": 67.0547274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -8290,8 +8098,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -8310,8 +8117,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -8375,7 +8181,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -8411,14 +8217,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 8,
         "plan": 6
       },
       "overall": {
-        "api": 51.830029138237315,
-        "plan": 62.02533818048566
+        "api": 53.535448313562,
+        "plan": 63.73075735581035
       },
-      "quality": 64.78083526493705,
+      "quality": 67.0547274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -8427,8 +8233,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -8447,8 +8252,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebenchAgentic": 78.8,
-        "livebenchCoding": 94.7,
+        "livebench2Overall": 82.46,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -8512,7 +8316,7 @@
       "tier": "Premium",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -8548,14 +8352,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 7
       },
       "overall": {
-        "api": 57.724952823327854,
-        "plan": 60.318198605475146
+        "api": 60.156636044107074,
+        "plan": 62.74988182625437
       },
-      "quality": 61.05264071939384,
+      "quality": 64.29488501376613,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8564,8 +8368,7 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 54.60499999999999,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
@@ -8584,8 +8387,7 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 1592.1,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
@@ -8653,7 +8455,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           1,
@@ -8688,14 +8490,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 8
       },
       "overall": {
-        "api": 57.724952823327854,
-        "plan": 60.24493632027633
+        "api": 60.156636044107074,
+        "plan": 62.67661954105555
       },
-      "quality": 61.05264071939384,
+      "quality": 64.29488501376613,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8704,8 +8506,7 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 54.60499999999999,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
@@ -8724,8 +8525,7 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 1592.1,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
@@ -8793,7 +8593,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           1,
@@ -8828,14 +8628,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 8
       },
       "overall": {
-        "api": 57.724952823327854,
-        "plan": 60.24493632027633
+        "api": 60.156636044107074,
+        "plan": 62.67661954105555
       },
-      "quality": 61.05264071939384,
+      "quality": 64.29488501376613,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8844,8 +8644,7 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 54.60499999999999,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
@@ -8864,8 +8663,7 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 1592.1,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
@@ -8933,7 +8731,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           1,
@@ -8968,14 +8766,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 10
       },
       "overall": {
-        "api": 57.724952823327854,
-        "plan": 60.20131586268659
+        "api": 60.156636044107074,
+        "plan": 62.63299908346581
       },
-      "quality": 61.05264071939384,
+      "quality": 64.29488501376613,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8984,8 +8782,7 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 54.60499999999999,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
@@ -9004,8 +8801,7 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebenchAgentic": 73.0,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 85.41,
         "gdpval": 1592.1,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
@@ -9073,7 +8869,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           1,
@@ -9112,10 +8908,10 @@
         "plan": 11
       },
       "overall": {
-        "api": 48.48121455469635,
-        "plan": 56.83947547968129
+        "api": 51.47328458391714,
+        "plan": 59.83154550890208
       },
-      "quality": 47.3044520093594,
+      "quality": 51.293878714987116,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -9124,8 +8920,7 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 55.856500000000004,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
@@ -9144,8 +8939,7 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 1617.13,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
@@ -9251,10 +9045,10 @@
         "plan": 12
       },
       "overall": {
-        "api": 48.48121455469635,
-        "plan": 56.823311230987024
+        "api": 51.47328458391714,
+        "plan": 59.815381260207815
       },
-      "quality": 47.3044520093594,
+      "quality": 51.293878714987116,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -9263,8 +9057,7 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 55.856500000000004,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
@@ -9283,8 +9076,7 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 1617.13,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
@@ -9390,10 +9182,10 @@
         "plan": 13
       },
       "overall": {
-        "api": 48.48121455469635,
-        "plan": 56.739513769320936
+        "api": 51.47328458391714,
+        "plan": 59.73158379854173
       },
-      "quality": 47.3044520093594,
+      "quality": 51.293878714987116,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -9402,8 +9194,7 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 55.856500000000004,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
@@ -9422,8 +9213,7 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebenchAgentic": 57.6,
-        "livebenchCoding": 91.4,
+        "livebench2Overall": 75.64,
         "gdpval": 1617.13,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
@@ -9525,14 +9315,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 14
       },
       "overall": {
-        "api": 51.66267856896313,
-        "plan": 56.65954954995409
+        "api": 53.82841372156053,
+        "plan": 58.8252847025515
       },
-      "quality": 62.11635481005217,
+      "quality": 65.00400168018204,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -9541,8 +9331,7 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 53.588,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
@@ -9561,8 +9350,7 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 1571.76,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
@@ -9629,7 +9417,7 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -9665,14 +9453,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 15
       },
       "overall": {
-        "api": 51.66267856896313,
-        "plan": 56.517046199041005
+        "api": 53.82841372156053,
+        "plan": 58.68278135163841
       },
-      "quality": 62.11635481005217,
+      "quality": 65.00400168018204,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -9681,8 +9469,7 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 53.588,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
@@ -9701,8 +9488,7 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 1571.76,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
@@ -9769,7 +9555,7 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -9805,14 +9591,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 16
       },
       "overall": {
-        "api": 51.66267856896313,
-        "plan": 56.33805458061201
+        "api": 53.82841372156053,
+        "plan": 58.5037897332094
       },
-      "quality": 62.11635481005217,
+      "quality": 65.00400168018204,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -9821,8 +9607,7 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 53.588,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
@@ -9841,8 +9626,7 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 1571.76,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
@@ -9909,7 +9693,7 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -9949,10 +9733,10 @@
         "plan": 17
       },
       "overall": {
-        "api": 54.26913064902091,
-        "plan": 54.87305010938671
+        "api": 57.516504418501434,
+        "plan": 58.12042387886724
       },
-      "quality": 43.08215992372884,
+      "quality": 47.411991616369534,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -9961,8 +9745,7 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 46.551,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
@@ -9981,8 +9764,7 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 1431.02,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
@@ -10046,8 +9828,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          4,
-          8
+          1,
+          4
         ],
         "plan": [
           11,
@@ -10086,10 +9868,10 @@
         "plan": 18
       },
       "overall": {
-        "api": 54.26913064902091,
-        "plan": 54.799787824187895
+        "api": 57.516504418501434,
+        "plan": 58.04716159366842
       },
-      "quality": 43.08215992372884,
+      "quality": 47.411991616369534,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -10098,8 +9880,7 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 46.551,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
@@ -10118,8 +9899,7 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 1431.02,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
@@ -10183,8 +9963,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          4,
-          8
+          1,
+          4
         ],
         "plan": [
           11,
@@ -10223,10 +10003,10 @@
         "plan": 19
       },
       "overall": {
-        "api": 54.26913064902091,
-        "plan": 54.75616736659815
+        "api": 57.516504418501434,
+        "plan": 58.00354113607868
       },
-      "quality": 43.08215992372884,
+      "quality": 47.411991616369534,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -10235,8 +10015,7 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 46.551,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
@@ -10255,8 +10034,7 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
+        "livebench2Overall": 69.4,
         "gdpval": 1431.02,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
@@ -10320,8 +10098,8 @@
       "tier": "Budget",
       "band": {
         "api": [
-          4,
-          8
+          1,
+          4
         ],
         "plan": [
           11,
@@ -10334,6 +10112,141 @@
         "plan": "ChatGPT Pro 200",
         "routeId": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
         "multiple": 10.42,
+        "representative": false
+      }
+    },
+    {
+      "slug": "gpt-6-luna",
+      "name": "GPT-6 Luna · ChatGPT Plus",
+      "shortName": "GPT-6 Luna",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 38.1245186869738,
+        "status": "measured"
+      },
+      "speed": 135.214499121147,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6 Luna (max)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 4,
+        "plan": 20
+      },
+      "overall": {
+        "api": 57.516504418501434,
+        "plan": 57.11745883010943
+      },
+      "quality": 47.411991616369534,
+      "qualityRank": 9,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 41.9269666666667,
+        "terminalBench": 12.6262626262626,
+        "bugHunt": 17.428571428571427,
+        "vibeCode": 81.649,
+        "codeMigration": 46.669,
+        "livebench2Overall": 69.4,
+        "gdpval": 46.551,
+        "automationBench": 53.16814034483175,
+        "omniscience": 50.325,
+        "lcr": 83.3333333333333,
+        "hle": 38.5078776645042,
+        "scicode": 54.6296296296296,
+        "critpt": 19.428571428571402
+      },
+      "costDims": {
+        "api": 87.83004282489713,
+        "plan": 86.23386047132912
+      },
+      "raw": {
+        "frontierCode": 0.419269666666667,
+        "terminalBench": 12.6262626262626,
+        "bugHunt": 18.3,
+        "vibeCode": 81.649,
+        "codeMigration": 46.669,
+        "livebench2Overall": 69.4,
+        "gdpval": 1431.02,
+        "automationBench": 0.5316814034483175,
+        "omniscience": 0.65,
+        "lcr": 0.833333333333333,
+        "hle": 0.385078776645042,
+        "scicode": 0.546296296296296,
+        "critpt": 0.194285714285714
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 125.71906502148906,
+        "planUsd": 15.520872224875193,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
+          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+          "planFeeUsd": 20,
+          "valueMultiple": 8.1,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6 Astra",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Budget",
+      "band": {
+        "api": [
+          1,
+          4
+        ],
+        "plan": [
+          11,
+          20
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-luna--chatgpt-plus",
+      "planRow": {
+        "plan": "ChatGPT Plus",
+        "routeId": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
+        "multiple": 8.1,
         "representative": false
       }
     },
@@ -10356,14 +10269,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 8,
-        "plan": 20
+        "api": 7,
+        "plan": 21
       },
       "overall": {
-        "api": 51.66267856896313,
-        "plan": 54.61464811239097
+        "api": 53.82841372156053,
+        "plan": 56.780383264988366
       },
-      "quality": 62.11635481005217,
+      "quality": 65.00400168018204,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -10372,8 +10285,7 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 53.588,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
@@ -10392,8 +10304,7 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebenchAgentic": 82.4,
-        "livebenchCoding": 93.7,
+        "livebench2Overall": 86.14,
         "gdpval": 1571.76,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
@@ -10460,144 +10371,7 @@
       "tier": "Expensive",
       "band": {
         "api": [
-          4,
-          8
-        ],
-        "plan": [
-          11,
-          20
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-astra--chatgpt-plus",
-      "planRow": {
-        "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt6astra-semianalysis",
-        "multiple": 8.1,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna · ChatGPT Plus",
-      "shortName": "GPT-6 Luna",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 38.1245186869738,
-        "status": "measured"
-      },
-      "speed": 135.214499121147,
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 21
-      },
-      "overall": {
-        "api": 54.26913064902091,
-        "plan": 53.87008506062891
-      },
-      "quality": 43.08215992372884,
-      "qualityRank": 9,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 41.9269666666667,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 17.428571428571427,
-        "vibeCode": 81.649,
-        "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
-        "gdpval": 46.551,
-        "automationBench": 53.16814034483175,
-        "omniscience": 50.325,
-        "lcr": 83.3333333333333,
-        "hle": 38.5078776645042,
-        "scicode": 54.6296296296296,
-        "critpt": 19.428571428571402
-      },
-      "costDims": {
-        "api": 87.83004282489713,
-        "plan": 86.23386047132912
-      },
-      "raw": {
-        "frontierCode": 0.419269666666667,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 18.3,
-        "vibeCode": 81.649,
-        "codeMigration": 46.669,
-        "livebenchAgentic": 48.1,
-        "livebenchCoding": 84.5,
-        "gdpval": 1431.02,
-        "automationBench": 0.5316814034483175,
-        "omniscience": 0.65,
-        "lcr": 0.833333333333333,
-        "hle": 0.385078776645042,
-        "scicode": 0.546296296296296,
-        "critpt": 0.194285714285714
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 125.71906502148906,
-        "planUsd": 15.520872224875193,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-          "planFeeUsd": 20,
-          "valueMultiple": 8.1,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "9a0d376cc6080f3c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Budget",
-      "band": {
-        "api": [
-          4,
+          5,
           8
         ],
         "plan": [
@@ -10605,11 +10379,11 @@
           21
         ]
       },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-luna--chatgpt-plus",
+      "bandExcludesTransfer": false,
+      "key": "gpt-6-astra--chatgpt-plus",
       "planRow": {
         "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
+        "routeId": "chatgpt-plus-gpt6astra-semianalysis",
         "multiple": 8.1,
         "representative": false
       }
@@ -10633,14 +10407,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 1,
         "plan": 22
       },
       "overall": {
-        "api": 56.936220358775245,
-        "plan": 48.54244290079133
+        "api": 60.292266592541466,
+        "plan": 51.89848913455756
       },
-      "quality": 49.75580635915165,
+      "quality": 54.23053467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -10649,8 +10423,7 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 59.1645,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
@@ -10669,8 +10442,7 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 1683.29,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
@@ -10731,7 +10503,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           22,
@@ -10766,14 +10538,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 1,
         "plan": 23
       },
       "overall": {
-        "api": 56.936220358775245,
-        "plan": 48.29683586150202
+        "api": 60.292266592541466,
+        "plan": 51.652882095268254
       },
-      "quality": 49.75580635915165,
+      "quality": 54.23053467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -10782,8 +10554,7 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 59.1645,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
@@ -10802,8 +10573,7 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 1683.29,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
@@ -10864,7 +10634,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           22,
@@ -10903,10 +10673,10 @@
         "plan": 24
       },
       "overall": {
-        "api": 56.23564408760693,
-        "plan": 48.29506758460472
+        "api": 59.44316770124329,
+        "plan": 51.502591198241085
       },
-      "quality": 53.88099331150159,
+      "quality": 58.15769146301675,
       "qualityRank": 6,
       "dims": {
         "costComposite": null,
@@ -10915,8 +10685,7 @@
         "bugHunt": 40.666666666666664,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebenchAgentic": 50.9,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 79.2,
         "gdpval": 62.2885,
         "automationBench": 66.64095364949257,
         "omniscience": 52.35,
@@ -10935,8 +10704,7 @@
         "bugHunt": 42.7,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebenchAgentic": 50.9,
-        "livebenchCoding": 96.0,
+        "livebench2Overall": 79.2,
         "gdpval": 1745.77,
         "automationBench": 0.6664095364949257,
         "omniscience": 4.7,
@@ -10985,7 +10753,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           22,
@@ -10994,136 +10762,6 @@
       },
       "bandExcludesTransfer": false,
       "key": "deepseek-v4-1-flash-1017--api",
-      "planRow": {
-        "plan": null,
-        "routeId": null,
-        "multiple": null,
-        "representative": true
-      }
-    },
-    {
-      "slug": "gemini-4-argon",
-      "name": "Gemini 4 Argon · API-cost fallback",
-      "shortName": "Gem 4 Argon",
-      "developer": "Google DeepMind",
-      "aaUrl": "https://artificialanalysis.ai/models/gemini-4-argon",
-      "aaVariant": "high",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 52.5605655745982,
-        "status": "measured"
-      },
-      "speed": 81.5023279454512,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Gemini 4 Argon (high)",
-      "aaFrontierIntelligenceGap": 1,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 5,
-        "plan": 25
-      },
-      "overall": {
-        "api": 52.82557923142134,
-        "plan": 47.97964052680349
-      },
-      "quality": 60.72142759119144,
-      "qualityRank": 5,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 43.453199999999995,
-        "terminalBench": 57.07070707070711,
-        "bugHunt": 38.761904761904766,
-        "vibeCode": 91.906,
-        "codeMigration": 70.796,
-        "livebenchAgentic": 69.9,
-        "livebenchCoding": 89.7,
-        "gdpval": 56.15549999999999,
-        "automationBench": 77.51346945899195,
-        "omniscience": 71.175,
-        "lcr": 79.6666666666667,
-        "hle": 57.089898053753494,
-        "scicode": 61.8055555555556,
-        "critpt": 27.142857142857103
-      },
-      "costDims": {
-        "api": 29.138034152111025,
-        "plan": 9.754279333639644
-      },
-      "raw": {
-        "frontierCode": 0.434532,
-        "terminalBench": 57.07070707070711,
-        "bugHunt": 40.7,
-        "vibeCode": 91.906,
-        "codeMigration": 70.796,
-        "livebenchAgentic": 69.9,
-        "livebenchCoding": 89.7,
-        "gdpval": 1623.11,
-        "automationBench": 0.7751346945899195,
-        "omniscience": 42.35,
-        "lcr": 0.796666666666667,
-        "hle": 0.570898980537535,
-        "scicode": 0.618055555555556,
-        "critpt": 0.271428571428571
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 3557.766318119637,
-        "planUsd": 3557.766318119637,
-        "fallback": "api",
-        "route": null,
-        "subset": false,
-        "partialComponents": [],
-        "workload": "9a0d376cc6080f3c",
-        "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          4,
-          8
-        ],
-        "plan": [
-          22,
-          27
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gemini-4-argon--api",
       "planRow": {
         "plan": null,
         "routeId": null,
@@ -11150,14 +10788,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
-        "plan": 26
+        "api": 1,
+        "plan": 25
       },
       "overall": {
-        "api": 56.936220358775245,
-        "plan": 47.972779354275595
+        "api": 60.292266592541466,
+        "plan": 51.32882558804182
       },
-      "quality": 49.75580635915165,
+      "quality": 54.23053467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -11166,8 +10804,7 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 59.1645,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
@@ -11186,8 +10823,7 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 1683.29,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
@@ -11248,7 +10884,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           22,
@@ -11283,14 +10919,14 @@
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
-        "plan": 27
+        "api": 1,
+        "plan": 26
       },
       "overall": {
-        "api": 56.936220358775245,
-        "plan": 47.95313023027478
+        "api": 60.292266592541466,
+        "plan": 51.30917646404101
       },
-      "quality": 49.75580635915165,
+      "quality": 54.23053467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -11299,8 +10935,7 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 59.1645,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
@@ -11319,8 +10954,7 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebenchAgentic": 47.5,
-        "livebenchCoding": 81.5,
+        "livebench2Overall": 74.87,
         "gdpval": 1683.29,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
@@ -11381,7 +11015,7 @@
       "band": {
         "api": [
           1,
-          3
+          4
         ],
         "plan": [
           22,
@@ -11395,6 +11029,134 @@
         "routeId": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
         "multiple": 0.984,
         "representative": false
+      }
+    },
+    {
+      "slug": "gemini-4-argon",
+      "name": "Gemini 4 Argon · API-cost fallback",
+      "shortName": "Gem 4 Argon",
+      "developer": "Google DeepMind",
+      "aaUrl": "https://artificialanalysis.ai/models/gemini-4-argon",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 52.5605655745982,
+        "status": "measured"
+      },
+      "speed": 81.5023279454512,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Gemini 4 Argon (high)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 5,
+        "plan": 27
+      },
+      "overall": {
+        "api": 55.47686275090185,
+        "plan": 50.63092404628401
+      },
+      "quality": 64.25647228383212,
+      "qualityRank": 5,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 43.453199999999995,
+        "terminalBench": 57.07070707070711,
+        "bugHunt": 38.761904761904766,
+        "vibeCode": 91.906,
+        "codeMigration": 70.796,
+        "livebench2Overall": 84.1,
+        "gdpval": 56.15549999999999,
+        "automationBench": 77.51346945899195,
+        "omniscience": 71.175,
+        "lcr": 79.6666666666667,
+        "hle": 57.089898053753494,
+        "scicode": 61.8055555555556,
+        "critpt": 27.142857142857103
+      },
+      "costDims": {
+        "api": 29.138034152111025,
+        "plan": 9.754279333639644
+      },
+      "raw": {
+        "frontierCode": 0.434532,
+        "terminalBench": 57.07070707070711,
+        "bugHunt": 40.7,
+        "vibeCode": 91.906,
+        "codeMigration": 70.796,
+        "livebench2Overall": 84.1,
+        "gdpval": 1623.11,
+        "automationBench": 0.7751346945899195,
+        "omniscience": 42.35,
+        "lcr": 0.796666666666667,
+        "hle": 0.570898980537535,
+        "scicode": 0.618055555555556,
+        "critpt": 0.271428571428571
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 3557.766318119637,
+        "planUsd": 3557.766318119637,
+        "fallback": "api",
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "API-cost fallback: no admitted Plan route",
+          "cross-estimand ordering not identified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "disproved"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 1.0,
+          "frontier": 0.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          5,
+          8
+        ],
+        "plan": [
+          22,
+          27
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "gemini-4-argon--api",
+      "planRow": {
+        "plan": null,
+        "routeId": null,
+        "multiple": null,
+        "representative": true
       }
     },
     {
@@ -11434,8 +11196,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11454,8 +11215,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11473,8 +11233,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -11554,8 +11313,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11574,8 +11332,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11593,8 +11350,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -11646,7 +11402,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 41.2489304677024,
@@ -11674,8 +11430,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11694,8 +11449,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11713,8 +11467,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -11766,7 +11519,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 37.8240211671094,
@@ -11794,8 +11547,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11814,8 +11566,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11833,8 +11584,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -11886,7 +11636,7 @@
       "aaVariant": "low",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 29.4523685891139,
@@ -11914,8 +11664,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11934,8 +11683,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -11953,8 +11701,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12006,7 +11753,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 34.4646519474657,
@@ -12034,8 +11781,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12054,8 +11800,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12073,8 +11818,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12154,8 +11898,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12174,8 +11917,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12193,8 +11935,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12274,8 +12015,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12294,8 +12034,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12313,8 +12052,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12366,7 +12104,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 53.5831959822067,
@@ -12394,8 +12132,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12414,8 +12151,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12433,8 +12169,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12486,7 +12221,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 51.2434931792768,
@@ -12514,8 +12249,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12534,8 +12268,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12553,8 +12286,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12606,7 +12338,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 55.9873505840139,
@@ -12634,8 +12366,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12654,8 +12385,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12673,8 +12403,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12754,8 +12483,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12774,8 +12502,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12793,8 +12520,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12874,8 +12600,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12894,8 +12619,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -12913,8 +12637,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -12994,8 +12717,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13014,8 +12736,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13033,8 +12754,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13114,8 +12834,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13134,8 +12853,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13153,8 +12871,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13206,7 +12923,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 51.8955544183089,
@@ -13234,8 +12951,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13254,8 +12970,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13273,8 +12988,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13354,8 +13068,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13374,8 +13087,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13393,8 +13105,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13474,8 +13185,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13494,8 +13204,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13513,8 +13222,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13595,8 +13303,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13615,8 +13322,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13634,8 +13340,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13715,8 +13420,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13735,8 +13439,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13754,8 +13457,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13835,8 +13537,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13855,8 +13556,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13874,8 +13574,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -13956,8 +13655,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13976,8 +13674,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -13995,8 +13692,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14076,8 +13772,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14096,8 +13791,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14115,8 +13809,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14168,7 +13861,7 @@
       "aaVariant": "low",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 21.0124783424265,
@@ -14196,8 +13889,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14216,8 +13908,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14235,8 +13926,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14316,8 +14006,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14336,8 +14025,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14355,8 +14043,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14408,7 +14095,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 50.9191471636152,
@@ -14436,8 +14123,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14456,8 +14142,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14475,8 +14160,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14528,7 +14212,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 52.3863277108782,
@@ -14556,8 +14240,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14576,8 +14259,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14595,8 +14277,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14648,7 +14329,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 32.9282054150837,
@@ -14676,8 +14357,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14696,8 +14376,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14715,8 +14394,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14768,7 +14446,7 @@
       "aaVariant": "low",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 21.5261980080866,
@@ -14796,8 +14474,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14816,8 +14493,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14835,8 +14511,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -14888,7 +14563,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 29.9251773515762,
@@ -14916,8 +14591,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14936,8 +14610,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -14955,8 +14628,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15008,7 +14680,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 34.5587320217785,
@@ -15036,8 +14708,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15056,8 +14727,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15075,8 +14745,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15156,8 +14825,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15176,8 +14844,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15195,8 +14862,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15248,7 +14914,7 @@
       "aaVariant": "high",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 50.2377777519769,
@@ -15276,8 +14942,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15296,8 +14961,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15315,8 +14979,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15396,8 +15059,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15416,8 +15078,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15435,8 +15096,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15488,7 +15148,7 @@
       "aaVariant": "medium",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; ranked in the AI Coding Daily ranking"
+        "Not in the max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; ranked in the AI Coding Daily ranking"
       ],
       "intelligenceIndex": {
         "value": 47.7833271274065,
@@ -15516,8 +15176,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15536,8 +15195,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15555,8 +15213,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15608,7 +15265,7 @@
       "aaVariant": "xhigh",
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 51.0377679093761,
@@ -15636,8 +15293,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15656,8 +15312,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15675,8 +15330,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15757,8 +15411,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15777,8 +15430,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15796,8 +15448,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15878,8 +15529,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15898,8 +15548,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -15917,8 +15566,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -15999,8 +15647,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16019,8 +15666,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16038,8 +15684,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16119,8 +15764,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16139,8 +15783,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16158,8 +15801,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16240,8 +15882,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16260,8 +15901,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16279,8 +15919,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16360,8 +15999,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16380,8 +16018,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16399,8 +16036,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16480,8 +16116,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16500,8 +16135,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16519,8 +16153,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16601,8 +16234,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16621,8 +16253,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16640,8 +16271,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16693,7 +16323,7 @@
       "aaVariant": null,
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 37.8843590141754,
@@ -16721,8 +16351,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16741,8 +16370,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16760,8 +16388,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16813,7 +16440,7 @@
       "aaVariant": null,
       "rankingEligible": false,
       "exclusionReasons": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench, AI Coding Daily (excl. bug finding)"
       ],
       "intelligenceIndex": {
         "value": 42.7057475126235,
@@ -16841,8 +16468,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16861,8 +16487,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16880,8 +16505,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -16962,8 +16586,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -16982,8 +16605,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17001,8 +16623,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -17082,8 +16703,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17102,8 +16722,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17121,8 +16740,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -17202,8 +16820,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17222,8 +16839,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17241,8 +16857,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -17322,8 +16937,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17342,8 +16956,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17361,8 +16974,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -17442,8 +17054,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17462,8 +17073,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17481,8 +17091,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -17562,8 +17171,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17582,8 +17190,7 @@
         "bugHunt": null,
         "vibeCode": null,
         "codeMigration": null,
-        "livebenchAgentic": null,
-        "livebenchCoding": null,
+        "livebench2Overall": null,
         "gdpval": null,
         "automationBench": null,
         "omniscience": null,
@@ -17601,8 +17208,7 @@
           "Bug Hunt Bench",
           "Vibe Code Bench v1.1 (Vals)",
           "Code Migration v1.1 (Vals)",
-          "LiveBench 2.0 Long Agentic",
-          "LiveBench 2.0 Coding",
+          "LiveBench 2.0 Overall",
           "GDPval-AA v2.1",
           "AutomationBench-AA",
           "AA-Omniscience",
@@ -17649,24 +17255,24 @@
   "picks": {
     "api": {
       "value": {
-        "slug": "gpt-6-1-sol",
+        "slug": "mimo-v2-6-pro",
         "label": "Best overall value",
-        "reason": "GPT-6.1 Sol has the highest overall score in the API ranking at 57.7, costing $1,233.11 per basket run.",
-        "score": 57.724952823327854,
+        "reason": "MiMo-V2.6-Pro has the highest overall score in the API ranking at 60.3, costing $136.13 per basket run. Subset cost: cross-workload ordering not identified.",
+        "score": 60.292266592541466,
         "unit": "overall"
       },
       "other": {
         "slug": "claude-opus-5-5",
         "label": "Best on a subscription",
         "reason": "Claude Opus 5.5 ranks #1 on a subscription and #6 in the API ranking.",
-        "score": 62.32502739723033,
+        "score": 64.31713427060696,
         "unit": "overall on a subscription"
       },
       "budget": {
-        "slug": "mimo-v2-6-pro",
+        "slug": "deepseek-v4-1-flash-1017",
         "label": "Best on a budget",
-        "reason": "MiMo-V2.6-Pro scores best overall (56.9) among the cheapest third, at $136.13 per basket run. Subset cost: cross-workload ordering not identified.",
-        "score": 56.936220358775245,
+        "reason": "DeepSeek V4.1 Flash 1017 scores best overall (59.4) among the cheapest third, at $324.12 per basket run. Subset cost: cross-workload ordering not identified.",
+        "score": 59.44316770124329,
         "unit": "overall"
       }
     },
@@ -17674,22 +17280,22 @@
       "value": {
         "slug": "claude-opus-5-5",
         "label": "Best overall value",
-        "reason": "Claude Opus 5.5 has the highest overall score in the Plan ranking at 62.3, costing $158.77 per basket run.",
-        "score": 62.32502739723033,
+        "reason": "Claude Opus 5.5 has the highest overall score in the Plan ranking at 64.3, costing $158.77 per basket run.",
+        "score": 64.31713427060696,
         "unit": "overall"
       },
       "other": {
-        "slug": "gpt-6-1-sol",
+        "slug": "mimo-v2-6-pro",
         "label": "Best at API rates",
-        "reason": "GPT-6.1 Sol ranks #1 at API rates and #7 in the Plan ranking.",
-        "score": 57.724952823327854,
+        "reason": "MiMo-V2.6-Pro ranks #1 at API rates and #22 in the Plan ranking. Subset cost: cross-workload ordering not identified.",
+        "score": 60.292266592541466,
         "unit": "overall at API rates"
       },
       "budget": {
-        "slug": "claude-haiku-5-5-max",
+        "slug": "gpt-6-1-sol",
         "label": "Best on a budget",
-        "reason": "Claude Haiku 5.5 (max) scores best overall (56.8) among the cheapest third, at $16.42 per basket run.",
-        "score": 56.83947547968129,
+        "reason": "GPT-6.1 Sol scores best overall (62.7) among the cheapest third, at $114.47 per basket run.",
+        "score": 62.74988182625437,
         "unit": "overall"
       }
     }

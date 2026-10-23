@@ -54,18 +54,18 @@ COMMON_LEAVES = (
     Leaf("critpt", "CritPt", "knowledge", 5.0 / 3.0, "aa"),
 )
 # Owner decisions O53-O55 (2026-10-23): ValueRank publishes two rankings, each over the configurations with its complete
-# leaf set (O36, O52). The max-effort ranking adds LiveBench 2.0 and two Vals boards, run at each vendor's top effort;
+# leaf set (O36, O52). The max-effort ranking adds LiveBench 2.0 Overall (O61, 2026-10-23: the mean of its seven
+# categories, all needed in the SDLC, weighted above every single AA leaf) and two Vals boards, run at each vendor's top effort;
 # the AI Coding Daily ranking adds AI Coding Daily (its bug-finding column excluded: it overlaps Bug Hunt). O49 dropped
 # DeepSWE; software engineering stays 60% of quality in both.
 TRACKS = {
     "max": (
-        Leaf("frontierCode", "FrontierCode 1.1", "swe", 18.0, "aa"),
-        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 14.0, "aa"),
-        Leaf("bugHunt", "Bug Hunt Bench", "swe", 10.0, "independent"),
+        Leaf("frontierCode", "FrontierCode 1.1", "swe", 15.0, "aa"),
+        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 11.0, "aa"),
+        Leaf("bugHunt", "Bug Hunt Bench", "swe", 8.0, "independent"),
         Leaf("vibeCode", "Vibe Code Bench v1.1 (Vals)", "swe", 5.0, "independent"),
         Leaf("codeMigration", "Code Migration v1.1 (Vals)", "swe", 6.0, "independent"),
-        Leaf("livebenchAgentic", "LiveBench 2.0 Long Agentic", "swe", 5.0, "independent"),
-        Leaf("livebenchCoding", "LiveBench 2.0 Coding", "swe", 2.0, "independent"),
+        Leaf("livebench2Overall", "LiveBench 2.0 Overall", "swe", 15.0, "independent"),
         *COMMON_LEAVES,
     ),
     "aicd": (
@@ -255,8 +255,7 @@ LEAF_DOMAINS = {
     "critpt": ("fraction", 0.0, 1.0),
     "vibeCode": ("percent", 0.0, 100.0),
     "codeMigration": ("percent", 0.0, 100.0),
-    "livebenchAgentic": ("percent", 0.0, 100.0),
-    "livebenchCoding": ("percent", 0.0, 100.0),
+    "livebench2Overall": ("percent", 0.0, 100.0),
     "aiCodingDaily": ("points of 60", 0.0, AICD_POINTS),
 }
 

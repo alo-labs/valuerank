@@ -4,20 +4,14 @@
       "version": "v3.0.0",
       "date": "October 19, 2026",
       "models": 9,
-      "dimensions": 15,
-      "summary": "9 models ranked on 15 dimensions; GPT-6.1 Sol is first on the API basis.",
+      "dimensions": 14,
+      "summary": "9 models ranked on 14 dimensions; MiMo-V2.6-Pro is first on the API basis.",
       "rankChanges": [
-        {
-          "slug": "gpt-6-1-sol",
-          "name": "GPT-6.1 Sol",
-          "from": 2,
-          "to": 1
-        },
         {
           "slug": "mimo-v2-6-pro",
           "name": "MiMo-V2.6-Pro",
           "from": 7,
-          "to": 2
+          "to": 1
         },
         {
           "slug": "gpt-6-luna",
@@ -38,28 +32,28 @@
           "to": 6
         },
         {
-          "slug": "claude-sonnet-5-5",
-          "name": "Claude Sonnet 5.5",
-          "from": 3,
-          "to": 7
-        },
-        {
           "slug": "gpt-6-astra",
           "name": "GPT-6 Astra",
           "from": 4,
+          "to": 7
+        },
+        {
+          "slug": "claude-sonnet-5-5",
+          "name": "Claude Sonnet 5.5",
+          "from": 3,
           "to": 8
         }
       ],
       "ranks": {
         "claude-haiku-5-5-max": 9,
         "claude-opus-5-5": 6,
-        "claude-sonnet-5-5": 7,
+        "claude-sonnet-5-5": 8,
         "deepseek-v4-1-flash-1017": 3,
         "gemini-4-argon": 5,
-        "gpt-6-astra": 8,
+        "gpt-6-astra": 7,
         "gpt-6-luna": 4,
-        "gpt-6-1-sol": 1,
-        "mimo-v2-6-pro": 2
+        "gpt-6-1-sol": 2,
+        "mimo-v2-6-pro": 1
       },
       "added": [
         "claude-haiku-5-5-max",

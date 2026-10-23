@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-1-sol",
   "summary": {
     "rank": {
-      "api": 1,
+      "api": 2,
       "plan": 7
     },
     "overall": {
-      "api": 57.724952823327854,
-      "plan": 60.318198605475146
+      "api": 60.156636044107074,
+      "plan": 62.74988182625437
     },
-    "quality": 61.05264071939384,
+    "quality": 64.29488501376613,
     "qualityRank": 4,
     "coverage": {
       "pct": 100.0,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 13.5,
+      "weightPct": 11.25,
       "value": 0.491209333333333,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -48,10 +48,28 @@
       "grade": "measured"
     },
     {
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 85.41,
+      "decimals": 1,
+      "unit": "mean of seven category scores (0-100)",
+      "normalized": 85.41,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gpt-6.1-sol / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 10.5,
+      "weightPct": 8.25,
       "value": 56.0606060606061,
       "decimals": 1,
       "unit": "% resolved",
@@ -62,24 +80,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": "mini-SWE-agent",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "bugHunt",
-      "label": "Bug Hunt Bench",
-      "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 44.3,
-      "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 42.19047619047619,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-19",
-      "evaluatedVariant": "GPT-6.1 Sol (max effort) - mean of 3 / Codex CLI",
       "note": null,
       "grade": "measured"
     },
@@ -138,6 +138,24 @@
       "grade": "measured"
     },
     {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": 44.3,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 42.19047619047619,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-19",
+      "evaluatedVariant": "GPT-6.1 Sol (max effort) - mean of 3 / Codex CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "codeMigration",
       "label": "Code Migration v1.1 (Vals)",
       "category": "Software engineering",
@@ -174,24 +192,6 @@
       "grade": "measured"
     },
     {
-      "key": "livebenchAgentic",
-      "label": "LiveBench 2.0 Long Agentic",
-      "category": "Software engineering",
-      "weightPct": 3.75,
-      "value": 73.0,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 73.0,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "gpt-6.1-sol / LiveBench's own, one run per model at its top effort",
-      "note": null,
-      "grade": "measured"
-    },
-    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -206,24 +206,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchCoding",
-      "label": "LiveBench 2.0 Coding",
-      "category": "Software engineering",
-      "weightPct": 1.5,
-      "value": 96.0,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 96.0,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "gpt-6.1-sol / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -412,7 +394,7 @@
       "usdPerRun": 114.47361271340715,
       "selected": true,
       "planRank": 7,
-      "planValue": 60.318198605475146
+      "planValue": 62.74988182625437
     },
     {
       "id": "chatgpt-plus-gpt61sol-semianalysis",
@@ -429,7 +411,7 @@
       "usdPerRun": 116.88244134112054,
       "selected": false,
       "planRank": 8,
-      "planValue": 60.24493632027633
+      "planValue": 62.67661954105555
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -446,7 +428,7 @@
       "usdPerRun": 116.88244134112054,
       "selected": false,
       "planRank": 8,
-      "planValue": 60.24493632027633
+      "planValue": 62.67661954105555
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -463,7 +445,7 @@
       "usdPerRun": 118.34066757666237,
       "selected": false,
       "planRank": 10,
-      "planValue": 60.20131586268659
+      "planValue": 62.63299908346581
     }
   ],
   "scenarios": {
@@ -492,7 +474,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.9998,
+        "top1": 0.9993,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -519,7 +501,7 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9908,
+        "top1": 0.9656,
         "top3": 1.0,
         "frontier": 1.0
       }
@@ -575,8 +557,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0988,
-        "top3": 0.1108,
+        "top1": 0.138,
+        "top3": 0.1562,
         "frontier": 1.0
       }
     ]
@@ -625,7 +607,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 7
       }
     }
@@ -646,12 +628,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 7
       },
       "overall": {
-        "api": 57.724952823327854,
-        "plan": 60.318198605475146
+        "api": 60.156636044107074,
+        "plan": 62.74988182625437
       }
     },
     {

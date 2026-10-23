@@ -11,10 +11,10 @@
       "plan": 24
     },
     "overall": {
-      "api": 56.23564408760693,
-      "plan": 48.29506758460472
+      "api": 59.44316770124329,
+      "plan": 51.502591198241085
     },
-    "quality": 53.88099331150159,
+    "quality": 58.15769146301675,
     "qualityRank": 6,
     "coverage": {
       "pct": 100.0,
@@ -35,7 +35,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 13.5,
+      "weightPct": 11.25,
       "value": 0.436605666666667,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -50,10 +50,28 @@
       "grade": "measured"
     },
     {
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 79.2,
+      "decimals": 1,
+      "unit": "mean of seven category scores (0-100)",
+      "normalized": 79.2,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "deepseek-v4.1-flash-1017 / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 10.5,
+      "weightPct": 8.25,
       "value": 33.8383838383838,
       "decimals": 1,
       "unit": "% resolved",
@@ -64,24 +82,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": "mini-SWE-agent",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "bugHunt",
-      "label": "Bug Hunt Bench",
-      "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 42.7,
-      "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 40.666666666666664,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-19",
-      "evaluatedVariant": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7 / DeepSeek Harness / DeepSeek API",
       "note": null,
       "grade": "measured"
     },
@@ -140,6 +140,24 @@
       "grade": "measured"
     },
     {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": 42.7,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 40.666666666666664,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-19",
+      "evaluatedVariant": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7 / DeepSeek Harness / DeepSeek API",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "codeMigration",
       "label": "Code Migration v1.1 (Vals)",
       "category": "Software engineering",
@@ -176,24 +194,6 @@
       "grade": "measured"
     },
     {
-      "key": "livebenchAgentic",
-      "label": "LiveBench 2.0 Long Agentic",
-      "category": "Software engineering",
-      "weightPct": 3.75,
-      "value": 50.9,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 50.9,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "deepseek-v4.1-flash-1017 / LiveBench's own, one run per model at its top effort",
-      "note": null,
-      "grade": "measured"
-    },
-    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -208,24 +208,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchCoding",
-      "label": "LiveBench 2.0 Coding",
-      "category": "Software engineering",
-      "weightPct": 1.5,
-      "value": 96.0,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 96.0,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "deepseek-v4.1-flash-1017 / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -402,8 +384,8 @@
         "plan": 24
       },
       "overall": {
-        "api": 56.23564408760693,
-        "plan": 48.29506758460472
+        "api": 59.44316770124329,
+        "plan": 51.502591198241085
       }
     },
     {

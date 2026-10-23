@@ -169,8 +169,8 @@ def test_picks_reference_ranked_models_with_plain_reasons(bundle):
         for pick in picks.values():
             assert models[pick["slug"]]["rankingEligible"] and len(pick["reason"].split()) < 25
         assert "per basket run" in picks["value"]["reason"]
-    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "gpt-6-1-sol"
-    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("GPT-6.1 Sol has the highest overall score")
+    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "mimo-v2-6-pro"
+    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("MiMo-V2.6-Pro has the highest overall score")
 
 
 # --- per-model documents -------------------------------------------------------------------------
@@ -260,7 +260,7 @@ def test_benchmarks_document(bundle, v3):
     doc = bundle.benchmarks
     assert [s["id"] for s in doc["sources"]] == [leaf.key for leaf in q.LEAVES]
     frontiercode = next(s for s in doc["sources"] if s["id"] == "frontierCode")
-    assert frontiercode["weightPct"] == 13.5 and frontiercode["coverage"] == {"available": 9, "cohort": 9} and frontiercode["execution"] == "AA-run"
+    assert frontiercode["weightPct"] == 11.25 and frontiercode["coverage"] == {"available": 9, "cohort": 9} and frontiercode["execution"] == "AA-run"
     assert next(s for s in doc["sources"] if s["id"] == "bugHunt")["execution"] == "independent"
     # O37: Terminal-Bench is AA's own run; tbench.ai only fills a gap.
     terminal = next(s for s in doc["sources"] if s["id"] == "terminalBench")
@@ -287,7 +287,7 @@ def test_tb4_document(bundle, data):
 
 def test_changelog_document(bundle):
     versions = bundle.changelog["versions"]
-    assert versions[0]["version"] == VERSION and versions[0]["models"] == 9 and versions[0]["dimensions"] == len(bundle.rankings["dimensions"]) == 15
+    assert versions[0]["version"] == VERSION and versions[0]["models"] == 9 and versions[0]["dimensions"] == len(bundle.rankings["dimensions"]) == 14
     assert versions[-1]["version"] == "v1.5.0" and versions[-1]["rankChanges"] == []
 
 
@@ -296,8 +296,8 @@ def test_changelog_document(bundle):
 
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
-    assert page["headline"]["api"] == "GPT-6.1 Sol leads the API ranking at 57.7; Claude Opus 5.5 leads on quality."
-    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 62.3 and also leads on quality."
+    assert page["headline"]["api"] == "MiMo-V2.6-Pro leads the API ranking at 60.3 (subset cost); Claude Opus 5.5 leads on quality."
+    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 64.3 and also leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
     assert len(page["models"]) == 9 and page["dimensions"] == bundle.rankings["dimensions"]
     assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 9  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
@@ -337,7 +337,7 @@ def test_benchmark_pages_wrap_their_documents(bundle):
 def test_methodology_page(bundle, v3):
     page = viewmodel.methodology_page(bundle)
     method = page["method"]
-    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 60.7 (the displayed quality of Gemini 4 Argon at freeze)"
+    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 64.3 (the displayed quality of Gemini 4 Argon at freeze)"
     assert method["anchors"]["api"]["low"] == v3["workloads"][v3["mainWorkload"]]["anchors"]["api"]["low"]
     assert method["streamDescriptions"]["S0"] == "published-record reporting precision" and method["notQuantified"]
     example = page["workedExample"]

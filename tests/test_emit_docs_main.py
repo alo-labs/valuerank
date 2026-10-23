@@ -83,19 +83,19 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert "the definite frontier (no configuration can beat it on both cost and quality" in readme
     assert "GPT-6 Luna (max); the possible frontier adds none. Not evaluable on this workload: DeepSeek V4.1 Flash 1017 (max), MiMo-V2.6-Pro." in readme
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter.
-    assert "Cheapest at or above quality 49.8: GPT-6.1 Sol (max) (confirmed)." in readme
+    assert "Cheapest at or above quality 54.2: GPT-6.1 Sol (max) (confirmed)." in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 65% of API and 2% of Plan value variance)" in readme
+    assert "value is a 25% cost score (nominal weight; 103% of API and 20% of Plan value variance)" in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
-    assert "Claude Opus 5.5 leads the Plan ranking at 62.3; GPT-6.1 Sol leads the API ranking at 57.7; Claude Opus 5.5 leads on quality." in readme
+    assert "Claude Opus 5.5 leads the Plan ranking at 64.3; MiMo-V2.6-Pro leads the API ranking at 60.3 (subset cost); Claude Opus 5.5 leads on quality." in readme
     # The quality rank covers every cohort row with quality evidence, a cost-less one included (its quality is shown).
     # E203: the displayed record on the headline scale, beside the interval claims.
-    assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 60.7: GPT-6.1 Sol (max) ($1,233.11 per basket run; 5 reach it)" in readme
+    assert "- API basis, displayed record (not a claim; E203): cheapest at or above quality 64.3: GPT-6.1 Sol (max) ($1,233.11 per basket run; 5 reach it)" in readme
     # O50: the max-effort ranking admits the Coding Agent Index v2.0, so the coding share names it and its unrewarded SWE-Atlas QnA.
     assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), SciCode) make up 50% of the basket's cost (median over 7 configurations "
             "with the full basket; 45% to 85%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 18%; the Coding Agent Index's SWE-Atlas QnA") in readme
-    assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 60.7 over 9 configurations" in (emitted / "scores.md").read_text()
+    assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 64.3 over 9 configurations" in (emitted / "scores.md").read_text()
     assert "SciCode and AA-LCR once at API rates" in readme
 
 
@@ -103,7 +103,7 @@ def test_methodology_leaf_weights_fill_the_quality_share(emitted):
     text = (emitted / "methodology.md").read_text()
     rows = [cells(row) for row in table_rows(text, "| Leaf | Group | Weight, max-effort ranking | Weight, AI Coding Daily ranking")]
     # O53-O55: every leaf of either ranking, with a dash where a ranking does not use it; each column fills 100% of quality.
-    assert len(rows) == 15
+    assert len(rows) == 14
     for column in (2, 3):
         assert sum(float(row[column].rstrip("%")) for row in rows if row[column] != "—") == pytest.approx(100.0, abs=0.05)
     assert "Value on a basis = **25%** × cost score + **75%** × quality score" in text
@@ -114,7 +114,7 @@ def test_methodology_leaf_weights_fill_the_quality_share(emitted):
     # those the AI Coding Daily ranking ranks.
     assert ("20 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days "
             "of the cutoff (O36; a required frontier family is listed the same way, O38): GPT-6.1 Sol (high) (no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), "
-            "LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding);") in cohort
+            "LiveBench 2.0 Overall);") in cohort
     assert "MiMo-V2.6-Flash (no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals)" in cohort
     assert "Of these, 11 are ranked in the AI Coding Daily ranking (O53): GPT-6.1 Sol (high), Claude Opus 5.5 (high)," in cohort
     assert "The remaining 32 roster models are not ranked" in cohort
@@ -136,7 +136,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
-    assert "| quality 62.1 | Claude Sonnet 5.5 (max) | not scenario-supported |" in text
+    assert "| quality 65.0 | Claude Sonnet 5.5 (max) | not scenario-supported |" in text
 
 
 def test_scores_md_prints_a_dash_for_a_configuration_without_a_rank(repo_copy, pinned_clock):
@@ -242,9 +242,9 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     readme = (repo_copy / "README.md").read_text()
     plan_sentence = next(line for line in readme.splitlines() if line.startswith("- Plan basis, main workload"))
     assert "Not evaluable" not in plan_sentence
-    assert "Cheapest at or above quality 60.7: not unique; possibly GPT-6 Luna (max), DeepSeek V4.1 Flash 1017 (max)." in plan_sentence
-    assert "Cheapest at or above quality 60.7: unresolved." in plan_sentence
-    assert plan_sentence.endswith("Cheapest at or above quality 60.7: DeepSeek V4.1 Flash 1017 (max) (confirmed). (Bar comparison: compares 5 configurations that can qualify.)")
+    assert "Cheapest at or above quality 64.3: not unique; possibly GPT-6 Luna (max), DeepSeek V4.1 Flash 1017 (max)." in plan_sentence
+    assert "Cheapest at or above quality 64.3: unresolved." in plan_sentence
+    assert plan_sentence.endswith("Cheapest at or above quality 64.3: DeepSeek V4.1 Flash 1017 (max) (confirmed). (Bar comparison: compares 5 configurations that can qualify.)")
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores
@@ -324,7 +324,7 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
 def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted):
     section = (emitted / "scores.md").read_text().split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
     assert "Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
-    assert "Pairwise reversals: none. Largest value change: 3.94 points." in section
+    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 3.94 points." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology
 

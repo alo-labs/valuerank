@@ -289,7 +289,7 @@ describe('charts, model, plans and listing pages', () => {
     await page.locator('#models-table a.model-name', { hasText: /^GPT-6\.1 Sol$/ }).click();
     await page.waitForURL(/\/models\/gpt-6-1-sol\/$/);
     assert.equal(await page.locator('h1').innerText(), 'GPT-6.1 Sol');
-    assert.equal(await page.locator('#dimension-table tbody tr').count(), 14); // the max-effort ranking's fourteen leaves (O55)
+    assert.equal(await page.locator('#dimension-table tbody tr').count(), 13); // the max-effort ranking's thirteen leaves (O55, O61)
     assert.equal(await page.locator('nav[aria-label="Primary"] a[aria-current="page"]').innerText(), 'Models');
     await context.close();
   });

@@ -1331,3 +1331,22 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L2 (rejected for now): moving the revision history below the body is presentation; left for the final editorial pass with I38 L4.
 - L3 (adopted): AGENTS.md separates the owner's exclusions (Surge Complex Constraints dropped for now; CursorBench and sudo L7 excluded) from the benchmarks with too few exact configurations.
 - Round status (O56): clean, the second consecutive clean round at this rung. The Claude Sonnet 5.5 medium rung is complete; the next rung is Claude Sonnet 5.5 at high effort, on r100 (I41 changed no draft text).
+
+## Owner decision O61 (2026-10-23): LiveBench 2.0 Overall replaces its two categories
+- The owner: "instead of just the 2 LB categories, we need to incorporate the LiveBench 'Overall' score, since all its categories are required in SDLC." Asked for its weight, the owner said LiveBench "needs to get more % than AA Intelligence Score's % since LB is a non-contaminated benchmark whereas AA's benchmarks are mostly contaminated", LiveBench preferably within software engineering. Clarified (Questions UI), the owner chose "LB above each AA leaf": the AA component leaves stay, and LiveBench 2.0 Overall enters software engineering at 15, above every single AA leaf. Max-effort ranking only ("Max-effort only (Recommended)"): LiveBench runs each model once at its top effort, so only 6 of the AI Coding Daily ranking's 15 configurations have it.
+- Weights, max-effort ranking: FrontierCode 15, Terminal-Bench 11, Bug Hunt 8, Vibe Code 5, Code Migration 6, LiveBench 2.0 Overall 15 (software engineering 60); the other groups unchanged. Source split 66% AA-run, 34% independent.
+- LiveBench 2.0 Overall is the plain mean of its seven category scores (Long Agentic, Reasoning, Coding, Browser, Data Analysis, Research, Design) to two decimals, as LiveBench's site computes it with no category filter (function `ot` in the captured bundle main.074b2ee8.js); the values come from the captured release table (2026-10-14, updated 2026-10-18). All 9 max-effort configurations have it.
+
+## Editor decision E264 (2026-10-23): LiveBench 2.0 Overall sampling noise
+- The S1T stream reads LiveBench 2.0 Overall as the mean of seven binomial category shares, SD = (100 / 7) × √Σ p̃_c(1 − p̃_c)/n_c, with LiveBench's published task counts (Long Agentic 18, Coding 29, Browser 25, Research 22, Design 25). Reasoning and Data Analysis publish only their parts (4 and 3), each holding several short questions; reading them as 4 and 3 trials overstates their noise (the wide reading, as E263 does for AI Coding Daily). LiveBench becomes a single-leaf source in the deletion branches (E258).
+
+## Owner decision O62 (2026-10-23): replacing an O46 quota ceiling
+- Asked (I42 L5) whether one end-user report replaces a MiMo tier's quota ceiling, the owner chose "Same bar as O11 (Recommended)": the ceiling is replaced once the tier's end-user evidence meets the admission rule of any other provider's route; one stray report does not swap it.
+
+## Internal review I42 (Claude Sonnet 5.5, effort high, on r100) — adopted, modified or rejected
+- No Critical, High or Medium finding (VERDICT: NO FURTHER FEEDBACK): clean, the first round at this rung. O61 then changed the max-effort ranking's leaves and weights, so the second round runs on r101 and must be clean on the new text.
+- L1 (adopted): the E238 example of a change that stays diagnostic no longer cites a model's multiples being added (O40 replaces the transfer at once).
+- L2 (adopted, wording): the Terminal-Bench cross-source panel is per ranking, unlike FrontierCode's cohort-wide one (E260); r101 says so, and says why the AI Coding Daily ranking prints it undefined on one row.
+- L3 (adopted): the E242 tolerance is quoted for the main workload; the subset-workload rows' tolerance is stated beside it.
+- L4 (adopted): separability counts and noise bands span both anchor objects of the max-effort ranking; stated.
+- L5 (owner question, answered as O62).

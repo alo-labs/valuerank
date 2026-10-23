@@ -7,7 +7,7 @@
       "url": "https://artificialanalysis.ai/evaluations/frontiercode",
       "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 13.5,
+      "weightPct": 11.25,
       "coverage": {
         "available": 9,
         "cohort": 9
@@ -23,7 +23,7 @@
       "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
       "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 10.5,
+      "weightPct": 8.25,
       "coverage": {
         "available": 9,
         "cohort": 9
@@ -39,7 +39,7 @@
       "url": "https://bughunt.productcompass.pm/",
       "observedAt": "2026-10-19",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 7.5,
+      "weightPct": 6.0,
       "coverage": {
         "available": 9,
         "cohort": 9
@@ -81,36 +81,20 @@
       "notes": "Vals AI's run on one harness (Pi) at each vendor's top effort; Vals' published standard error is the sampling noise."
     },
     {
-      "id": "livebenchAgentic",
-      "name": "LiveBench 2.0 Long Agentic",
+      "id": "livebench2Overall",
+      "name": "LiveBench 2.0 Overall",
       "owner": "Artificial Analysis",
       "url": "https://livebench.ai/",
       "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
-      "weightPct": 3.75,
+      "weightPct": 11.25,
       "coverage": {
         "available": 9,
         "cohort": 9
       },
-      "unit": "mean task score (0-100)",
+      "unit": "mean of seven category scores (0-100)",
       "execution": "independent",
-      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14)."
-    },
-    {
-      "id": "livebenchCoding",
-      "name": "LiveBench 2.0 Coding",
-      "owner": "Artificial Analysis",
-      "url": "https://livebench.ai/",
-      "observedAt": "2026-10-23",
-      "role": "quality leaf (Software engineering)",
-      "weightPct": 1.5,
-      "coverage": {
-        "available": 9,
-        "cohort": 9
-      },
-      "unit": "mean task score (0-100)",
-      "execution": "independent",
-      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14)."
+      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14); Overall is the mean of its seven categories, as LiveBench computes it."
     },
     {
       "id": "gdpval",
@@ -273,8 +257,8 @@
     "requiredPanelSize": 6
   },
   "qualitySourceShares": {
-    "aa": 0.7200000000000002,
-    "independent": 0.28
+    "aa": 0.6600000000000001,
+    "independent": 0.33999999999999997
   },
   "frontier": {
     "status": "complete",

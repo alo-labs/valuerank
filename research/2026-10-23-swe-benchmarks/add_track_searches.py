@@ -24,8 +24,9 @@ RESEARCH = [
 LEAVES = {
     "vibeCode": ("vals", "vibe-code", "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"),
     "codeMigration": ("vals", "code-migration-v1-1", "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"),
-    "livebenchAgentic": ("other", "livebench2-agentic", "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"),
-    "livebenchCoding": ("other", "livebench2-coding", "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"),
+    # O61: LiveBench 2.0 Overall replaces the Long Agentic and Coding categories; one LiveBench row per model, so its
+    # coverage is the coding capture's.
+    "livebench2Overall": ("other", "livebench2-coding", "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"),
     "aiCodingDaily": ("other", "aicd-non-bug", "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"),
 }
 

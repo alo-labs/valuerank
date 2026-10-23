@@ -70,10 +70,14 @@ SAMPLING_TASKS = {
     "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": basket.INDEX_SDLC_TASKS["artificial-analysis-long-context-reasoning"],
     "scicode": basket.INDEX_SDLC_TASKS["scicode"], "hle": basket.INDEX_RESIDUAL_TASKS["humanitys-last-exam"], "critpt": basket.INDEX_RESIDUAL_TASKS["critpt"],
     "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
-    # O53-O55: LiveBench 2.0's published task counts; AI Coding Daily's six graded projects (judged points read as a
-    # binomial share, an assumption). Vals publishes a standard error per record, which the stream reads instead.
-    "livebenchCoding": 29, "livebenchAgentic": 18, "aiCodingDaily": 6,
+    # O53-O55: AI Coding Daily's six graded projects (judged points read as a binomial share, an assumption). Vals
+    # publishes a standard error per record, which the stream reads instead; LiveBench 2.0 Overall is read per category.
+    "aiCodingDaily": 6,
 }
+# O61, E264: LiveBench 2.0 Overall is the plain mean of seven category means, so its noise is the mean of seven binomial
+# category draws. Counts are LiveBench's published task counts; Reasoning and Data Analysis publish only their parts (4
+# and 3), each holding several short questions, so reading them as 4 and 3 trials overstates their noise (the wide reading).
+LIVEBENCH_CATEGORY_TASKS = {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3, "research": 22, "design": 25}
 # O39: GDPval-AA is a fitted Elo with no task-level outcome; AA displays a rating interval (e.g. -26/+26 for Claude
 # Opus 5.5 on 2026-10-20) without its level, so the stream reads it as a 95% normal interval: an assumption, labelled.
 GDPVAL_RATING_SD = 26.0 / 1.96
@@ -221,7 +225,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
             meta = record["sourceMeta"]
             add(leaf.key, record["value"], TRACK_UNITS[meta["unit"]](record["value"]),
                 {"source": f"{meta['publisher']}: {meta['benchmark']}", "configuration": record.get("sourceLabel"), "effort": record.get("effort"),
-                 "harness": meta["harness"], "url": meta["url"], "publishedOn": meta["updated"], "stderr": record.get("stderr"), "match": record.get("match")},
+                 "harness": meta["harness"], "url": meta["url"], "publishedOn": meta["updated"], "stderr": record.get("stderr"), "match": record.get("match"),
+                 **({"categories": record["categories"]} if record.get("categories") else {})},
                 "sweTracks", f"records[modelId={model_id}, leaf={leaf.key}].value")
     for leaf in q.LEAVES:
         entry = (supplements or {}).get((model_id, leaf.key))
@@ -1126,7 +1131,7 @@ LEAVE_OUT_MIN_WEIGHT = 0.40
 
 
 # E258: the publisher of each independently run leaf; a publisher with two or more leaves in a ranking is a multi-leaf source.
-LEAF_PUBLISHERS = {"vibeCode": "Vals AI", "codeMigration": "Vals AI", "livebenchAgentic": "LiveBench", "livebenchCoding": "LiveBench"}
+LEAF_PUBLISHERS = {"vibeCode": "Vals AI", "codeMigration": "Vals AI", "livebench2Overall": "LiveBench"}
 
 
 def source_leaves() -> dict:
@@ -2301,6 +2306,13 @@ REGISTERED_DEPENDENCY = ("every row its own dependency component: no shared vary
                          "of one configuration form one group sharing every draw (O48)")
 
 
+def _binomial_variance(score: float, tasks: int) -> float:
+    """I28: the Jeffreys-type plug-in proportion's binomial variance for one share scored 0-100."""
+
+    p = (min(1.0, max(0.0, score / 100.0)) * tasks + 0.5) / (tasks + 1.0)
+    return p * (1.0 - p) / tasks
+
+
 def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float = GDPVAL_RATING_SD, tasks_of: dict | None = None) -> float:
     """O39: the plug-in standard error of one leaf's z score under the independent-task approximation (binomial
     leaves with the Jeffreys-type proportion, I28)."""
@@ -2310,6 +2322,10 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
         return gdpval_sd * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
     if source.get("stderr") is not None:
         return source["stderr"]  # Vals' published standard error, in percentage points (the leaf's z unit)
+    if key == "livebench2Overall":
+        categories = source["categories"]
+        variance = sum(_binomial_variance(categories[name], tasks) for name, tasks in LIVEBENCH_CATEGORY_TASKS.items())
+        return 100.0 * math.sqrt(variance) / len(LIVEBENCH_CATEGORY_TASKS)
     tasks = (tasks_of or SAMPLING_TASKS)[key]
     if key == "omniscience" and source.get("accuracy") is not None and source.get("hallucinationRate") is not None:
         correct = source["accuracy"]

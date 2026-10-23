@@ -7,6 +7,7 @@ exception, by owner decision O54 and editor decision E252: AA's configuration is
     python3 research/2026-10-23-swe-benchmarks/build_swe_tracks.py
 """
 
+import csv
 import json
 from pathlib import Path
 
@@ -28,15 +29,16 @@ LEAVES = {
         "metric": "hidden-test pass rate (percent), with Vals' published standard error", "unit": "percent",
         "sampling": {"kind": "publishedStandardError", "tasks": 130},
     }),
-    "livebenchAgentic": ("livebench2-agentic", "other", {
-        "benchmark": "LiveBench 2.0 Long Agentic (release 2026-10-14)", "publisher": "LiveBench", "updated": "2026-10-18",
+    # O61 (2026-10-23): LiveBench 2.0 Overall, the plain mean of its seven category scores as LiveBench's site computes
+    # it (to two decimals), replaces the Long Agentic and Coding categories. The configuration match is the coverage
+    # capture's (one LiveBench row per model, at its top effort); the categories come from the release table.
+    "livebench2Overall": ("livebench2-coding", "other", {
+        "benchmark": "LiveBench 2.0 Overall (release 2026-10-14)", "publisher": "LiveBench", "updated": "2026-10-18",
         "url": "https://livebench.ai/data/20261014/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
-        "metric": "mean task score (0-100)", "unit": "percent", "sampling": {"kind": "tasks", "tasks": 18},
-    }),
-    "livebenchCoding": ("livebench2-coding", "other", {
-        "benchmark": "LiveBench 2.0 Coding (release 2026-10-14)", "publisher": "LiveBench", "updated": "2026-10-18",
-        "url": "https://livebench.ai/data/20261014/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
-        "metric": "mean task score (0-100)", "unit": "percent", "sampling": {"kind": "tasks", "tasks": 29},
+        "metric": "mean of the seven category scores (Long Agentic, Reasoning, Coding, Browser, Data Analysis, Research, Design), 0-100",
+        "unit": "percent",
+        "sampling": {"kind": "categories", "tasks": {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3,
+                                                     "research": 22, "design": 25}},
     }),
     "aiCodingDaily": ("aicd-non-bug", "other", {
         "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
@@ -56,6 +58,7 @@ def main() -> None:
     # O59/O60: each source carries the instant its coverage was captured.
     captured = {"vals": vals_document["capturedAt"], "other": other_document["capturedAt"]}
     cohort = [row["id"] for row in json.loads((HERE / "cohort-2026-10-23.json").read_text())["configurations"]]
+    table = {row["model"]: row for row in csv.DictReader((HERE / "other-capture" / "livebench2-table.csv").open())}
     records, sources = [], {}
     for leaf, (key, origin, meta) in LEAVES.items():
         sources[leaf] = {**meta, "capturedAt": captured[origin]}
@@ -69,6 +72,10 @@ def main() -> None:
                     "locator": f"research/2026-10-23-swe-benchmarks/{'vals-catalogue' if origin == 'vals' else 'other-coverage'}-2026-10-23.json"
                                f" benchmarks[{'slug' if origin == 'vals' else 'key'}={key}].coverage[{model_id}]",
                 }
+                if leaf == "livebench2Overall":
+                    categories = {name: float(value) for name, value in table[cell["sourceLabel"]].items() if name != "model"}
+                    record["value"] = round(sum(categories.values()) / len(categories), 2)
+                    record["categories"] = categories
                 if cell.get("stderr") is not None:
                     record["stderr"] = cell["stderr"]
                 if cell["status"] == "plausible":

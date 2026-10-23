@@ -38,8 +38,7 @@ LEAF_FAMILIES = {
     # O53-O55: leaves run outside AA, whose task families no AA cost component prices.
     "vibeCode": "vals-vibe-code-bench",
     "codeMigration": "vals-code-migration",
-    "livebenchAgentic": "livebench-long-agentic",
-    "livebenchCoding": "livebench-coding",
+    "livebench2Overall": "livebench-2-overall",
     "aiCodingDaily": "ai-coding-daily",
 }
 # Task families inside each target component (E42); the Coding Agent Index pools three families.
@@ -68,8 +67,7 @@ UNPRICED_REASONS = {
     "frontierCode": "the Coding Agent Index v2.0 publishes one pooled cost for FrontierCode, SWE-Atlas-QnA-AA and Terminal-Bench (O50)",
     "vibeCode": "run by Vals AI, outside every AA cost component",
     "codeMigration": "run by Vals AI, outside every AA cost component",
-    "livebenchAgentic": "run by LiveBench, outside every AA cost component",
-    "livebenchCoding": "run by LiveBench, outside every AA cost component",
+    "livebench2Overall": "run by LiveBench, outside every AA cost component",
     "aiCodingDaily": "run by AI Coding Daily, outside every AA cost component",
 }
 # Leaves whose score is a solved fraction, so a cost per solved task is defined (not GDPval's Elo or the Omniscience index).

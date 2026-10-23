@@ -8,13 +8,13 @@
   "summary": {
     "rank": {
       "api": 5,
-      "plan": 25
+      "plan": 27
     },
     "overall": {
-      "api": 52.82557923142134,
-      "plan": 47.97964052680349
+      "api": 55.47686275090185,
+      "plan": 50.63092404628401
     },
-    "quality": 60.72142759119144,
+    "quality": 64.25647228383212,
     "qualityRank": 5,
     "coverage": {
       "pct": 100.0,
@@ -33,7 +33,7 @@
       "key": "frontierCode",
       "label": "FrontierCode 1.1",
       "category": "Software engineering",
-      "weightPct": 13.5,
+      "weightPct": 11.25,
       "value": 0.434532,
       "decimals": 3,
       "unit": "AA score (0-1)",
@@ -48,10 +48,28 @@
       "grade": "measured"
     },
     {
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 84.1,
+      "decimals": 1,
+      "unit": "mean of seven category scores (0-100)",
+      "normalized": 84.1,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
+        "url": "https://livebench.ai/"
+      },
+      "observedAt": "2026-10-23",
+      "evaluatedVariant": "gemini-4-argon / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "terminalBench",
       "label": "Terminal-Bench 4.0 (AA run)",
       "category": "Software engineering",
-      "weightPct": 10.5,
+      "weightPct": 8.25,
       "value": 57.07070707070711,
       "decimals": 1,
       "unit": "% resolved",
@@ -62,24 +80,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": "mini-SWE-agent",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "bugHunt",
-      "label": "Bug Hunt Bench",
-      "category": "Software engineering",
-      "weightPct": 7.5,
-      "value": 40.7,
-      "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 38.761904761904766,
-      "source": {
-        "name": "Bug Hunt Bench published runs",
-        "url": "https://bughunt.productcompass.pm/"
-      },
-      "observedAt": "2026-10-19",
-      "evaluatedVariant": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 / Antigravity CLI",
       "note": null,
       "grade": "measured"
     },
@@ -138,6 +138,24 @@
       "grade": "measured"
     },
     {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": 40.7,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 38.761904761904766,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-19",
+      "evaluatedVariant": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 / Antigravity CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
       "key": "codeMigration",
       "label": "Code Migration v1.1 (Vals)",
       "category": "Software engineering",
@@ -174,24 +192,6 @@
       "grade": "measured"
     },
     {
-      "key": "livebenchAgentic",
-      "label": "LiveBench 2.0 Long Agentic",
-      "category": "Software engineering",
-      "weightPct": 3.75,
-      "value": 69.9,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 69.9,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "gemini-4-argon / LiveBench's own, one run per model at its top effort",
-      "note": null,
-      "grade": "measured"
-    },
-    {
       "key": "lcr",
       "label": "AA-LCR v1.1",
       "category": "Knowledge and science",
@@ -206,24 +206,6 @@
       },
       "observedAt": "2026-10-23",
       "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchCoding",
-      "label": "LiveBench 2.0 Coding",
-      "category": "Software engineering",
-      "weightPct": 1.5,
-      "value": 89.7,
-      "decimals": 1,
-      "unit": "mean task score (0-100)",
-      "normalized": 89.7,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
-        "url": "https://livebench.ai/"
-      },
-      "observedAt": "2026-10-23",
-      "evaluatedVariant": "gemini-4-argon / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
     },
@@ -396,8 +378,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.9776,
-        "frontier": 0.2503
+        "top3": 1.0,
+        "frontier": 0.463
       },
       {
         "stratum": "S1",
@@ -422,9 +404,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0005,
-        "top3": 0.5547,
-        "frontier": 0.4398
+        "top1": 0.0004,
+        "top3": 0.7542,
+        "frontier": 0.4862
       }
     ],
     "plan": [
@@ -480,7 +462,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0125
+        "frontier": 0.023
       }
     ]
   },
@@ -521,7 +503,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 5,
-        "plan": 25
+        "plan": 27
       }
     }
   ],
@@ -542,11 +524,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 5,
-        "plan": 25
+        "plan": 27
       },
       "overall": {
-        "api": 52.82557923142134,
-        "plan": 47.97964052680349
+        "api": 55.47686275090185,
+        "plan": 50.63092404628401
       }
     },
     {

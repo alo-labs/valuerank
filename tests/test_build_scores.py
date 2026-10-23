@@ -1189,7 +1189,7 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
         "Near-frontier AA family (within 3 Index points of the rendered frontier)"]
     assert model["rankingExclusionReasons"] == [
         "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no FrontierCode 1.1, Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), "
-        "Code Migration v1.1 (Vals), LiveBench 2.0 Long Agentic, LiveBench 2.0 Coding; AI Coding Daily ranking: no FrontierCode 1.1, Bug Hunt Bench, "
+        "Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no FrontierCode 1.1, Bug Hunt Bench, "
         "AI Coding Daily (excl. bug finding)"]
     assert (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"]) == ("near", "GPT-5.5 (medium)", 1)
     assert model["aaFrontierFootnote"] == "note for gpt-5-5"
