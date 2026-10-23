@@ -1229,3 +1229,4 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - M1 (adopted): the list of frontier families' near points omitted Claude Haiku 5.5 (max) (gap 3, the Haiku row ranked in the max-effort ranking); r90 adds it.
 - L1 (adopted): E254's per-ranking admission is now stated as an editor reading of O15/E140's "two-thirds of the cohort", with its effect (the Coding Agent Index v2.0 covers 7 of the max-effort ranking's 9 rows but 7 of all 29 cohort configurations) and that the owner can reverse it.
 - Round status (O56): not clean (one Medium). Draft r90.
+- O57 (2026-10-23). Asked whether O15's "two-thirds of the cohort" counts each ranking's rows or all 29 cohort configurations, the owner chose "Per ranking": E254 stands as an owner decision; the Coding Agent Index v2.0 is admitted in the max-effort ranking and pending in the AI Coding Daily ranking.
