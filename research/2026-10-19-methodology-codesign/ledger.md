@@ -1230,3 +1230,11 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L1 (adopted): E254's per-ranking admission is now stated as an editor reading of O15/E140's "two-thirds of the cohort", with its effect (the Coding Agent Index v2.0 covers 7 of the max-effort ranking's 9 rows but 7 of all 29 cohort configurations) and that the owner can reverse it.
 - Round status (O56): not clean (one Medium). Draft r90.
 - O57 (2026-10-23). Asked whether O15's "two-thirds of the cohort" counts each ranking's rows or all 29 cohort configurations, the owner chose "Per ranking": E254 stands as an owner decision; the Coding Agent Index v2.0 is admitted in the max-effort ranking and pending in the AI Coding Daily ranking.
+
+## Internal review I31 (Claude Sonnet 5.5, effort low, on r90) — adopted, modified or rejected
+- Round status (O56): clean (no Medium or higher; four Low). First clean round at the Sonnet-low rung.
+- L1 (adopted): E196's headline states how a negative cost allocation prints (as it is, with the sentence that cost then offsets quality; the AI Coding Daily ranking today about −90% API, −26% Plan); the emitter already prints it so.
+- L2 (adopted): E248's plan-row band extension is bounded: a row of another configuration separable from the band's first row starts a new band, so the invariant holds for every row of another configuration; today no configuration's plan rows span the threshold.
+- L3 (adopted): the re-frozen anchor figures are named as the padded c_L and c_H.
+- L4 (resolved by O57): the per-ranking admission reading went to the owner, who chose it; r91 states it as O57.
+- Draft r91.
