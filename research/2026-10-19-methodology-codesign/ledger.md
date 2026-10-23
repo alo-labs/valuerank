@@ -1414,3 +1414,15 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L6 (recorded): the subscription-policy prose's O31/O33 history is kept as history in plan_cost_routes.json; tidy at release.
 - L7 (adopted): the scenario-panel note prints the panel size, and Output 1 says a subset-workload row has no share.
 - Round status (O56): not clean (one Medium). Draft r106.
+
+## Internal review I48 (Claude Sonnet 5.5, effort xhigh, on r106) — adopted, modified or rejected
+- M1 (adopted; a recurring class, removed at the source under E265): broken pointers to generated documents were raised twice (I47 M1, I48 M1). The check now enforces two rules: every sentence that sends the reader to README.md, scores.md, methodology.md or raw-data.md also names the scores.json field it reads, and every cited scores.json field resolves in every ranking's section (or the file's root; `<basis>` and `[]` stand for each basis and list item). The docs now print what the pointers promise: scores.md prints, under the AI Coding Daily ranking, its displayed-record results (E203), noise-margin companions (O44), separability statement and indicative values (O41, with the O43 sentence); README's basket and leaf statements say they describe the leading ranking and give each ranking's leaf count; the glossary's "leaf of 20% or more" is ranking-relative.
+- M2 (adopted, docs changed): the README explanation of an allocation above 100% had the covariance sign backwards. It now says dearer configurations score higher on quality, so quality differences partly offset cost differences; the draft's E196 parenthetical says the same, so both readers print one explanation.
+- L1 (recorded): the AGENTS.md quotation of "the selected subscription route" predates O48's one row per plan; to be aligned at the next AGENTS.md amendment.
+- L2 (adopted in part): the AI Coding Daily block in scores.md is labelled per section; reordering the max-effort sections is left for the release tidy-up.
+- L3 (recorded): the scenario-panel note counts configurations; the Plan tables' plan rows are named in their own headers.
+- L4 (adopted): the provisional-quality glossary no longer names Terminal-Bench as a 20% leaf.
+- L5 (recorded): the Plan route table's grade label for O46 ceilings still reads as a transfer; the published streams, † and separability texts now say owner assumption.
+- L6 (recorded): two hand-written report-search facts remain outside the check's reach.
+- L7 (recorded): release-gate Detail cells describe the rule even when it passes, by design.
+- Round status (O56): not clean (two Mediums). Draft r107.

@@ -133,6 +133,36 @@ The configurations AI Coding Daily has tested, mostly at high and medium effort,
 | GPT-6 Luna (medium) | 31.8 | 2.5 | 3.8 | 67.0 | 38.1 | 40.5 | 47.5 | 78.3 | 28.3 | 50.9 | 10.6 | 32.28 | no |
 | GPT-5.6 Luna (low) | 15.4 | 0.0 | 3.8 | 50.9 | 24.6 | 11.7 | 42.7 | 70.0 | 19.8 | 46.1 | 2.6 | 21.31 | no |
 
+### AI Coding Daily ranking: displayed record and noise
+
+- API basis, displayed record (not a claim; E203): cheapest at or above quality 49.2: MiMo-V2.6-Pro ($136.13 per basket run; 8 reach it); at or above quality 38.0: Claude Haiku 5.5 (medium) ($45.91 per basket run; 12 reach it); at or above quality 57.2: GPT-6.1 Sol (high) ($431.07 per basket run; 5 reach it).
+- API basis, noise-margin companion (O44; each bar plus 5.9 quality points, so the bar's own configuration cannot decide it): cheapest at or above quality 55.1: GPT-6.1 Sol (high) ($431.07 per basket run); at or above quality 43.9: MiMo-V2.6-Pro ($136.13 per basket run); at or above quality 63.0: none.
+- Plan basis, displayed record (not a claim; E203): cheapest at or above quality 49.2: Claude Opus 5.5 (medium) on Claude Pro ($24.17 per basket run; 24 reach it); at or above quality 38.0: Claude Haiku 5.5 (medium) on Claude Pro ($0.78 per basket run; 38 reach it); at or above quality 57.2: Claude Opus 5.5 (medium) on Claude Pro ($24.17 per basket run; 15 reach it).
+- Plan basis, noise-margin companion (O44; each bar plus 5.9 quality points, so the bar's own configuration cannot decide it): cheapest at or above quality 55.1: Claude Opus 5.5 (medium) on Claude Pro ($24.17 per basket run); at or above quality 43.9: Claude Opus 5.5 (medium) on Claude Pro ($24.17 per basket run); at or above quality 63.0: none.
+- These outputs compare ranked configurations only; listed families shown with an indicative value (O41) are outside them (O43): Claude Sonnet 5.5, Claude Opus 5.5, GPT-6.1 Sol, GPT-6 Astra, Claude Haiku 5.5 (max), Claude Haiku 5.5, Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (xhigh), GPT-6 Astra (xhigh), GPT-6 Luna (low), GPT-6.1 Sol (xhigh), MiMo-V2.6-Flash, MiniMax-M3.1-Flash.
+
+Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 4.4 value points (median, 95%) to separate, and 1 of 14 adjacent API ranks and 1 of 19 adjacent Plan ranks of different configurations do (30 more adjacent Plan pairs are one configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which correlates their errors and narrows the true threshold (API 1 at correlation 0.3, 1 at correlation 0.6; Plan 1 at correlation 0.3, 1 at correlation 0.6), while sources it leaves out widen it (run-to-run and harness variance, AA's single cost run and, for the 48 Plan rows on an owner assumption (an owner-named transfer or an O46 quota ceiling), that assumption's error). The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (owner-named transfer or O46 quota ceiling) and excludes its error: an assumed multiple can be wrong by a factor of about 5.3 before the row's value moves by the median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise. AI Coding Daily's noise treats its six graded projects as six trials of the share of 60 points (n = 6, the wide reading, E263); read as 60 trials, the median threshold would be 3.2 (API) and 3.2 (Plan), with 1 and 1 adjacent ranks separable.
+
+
+**Listed frontier families: indicative value, not ranked and not comparable (O41).** Quality is the mean over the leaves the configuration has, renormalised, with no imputation, so these values cannot be compared with the ranking above.
+
+| Configuration | Missing | Quality (remaining leaves) | Quality coverage | Plan value (indicative) | API value (indicative) | API cost (USD per basket run) | Plan cost (USD per basket run) |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Claude Sonnet 5.5 | AI Coding Daily (excl. bug finding) | 59.3 | 90% | 54.8 | 44.5 | $5,073.84 | $86.14 |
+| Claude Opus 5.5 | AI Coding Daily (excl. bug finding) | 59.8 | 90% | 54.7 | 44.9 | $6,039.13 | $102.53 |
+| GPT-6.1 Sol | AI Coding Daily (excl. bug finding) | 56.0 | 90% | 52.7 | 49.3 | $796.76 | $73.97 |
+| GPT-6 Astra | AI Coding Daily (excl. bug finding) | 56.5 | 90% | 49.6 | 43.2 | $3,844.56 | $265.42 |
+| Claude Haiku 5.5 (max) | AI Coding Daily (excl. bug finding) | 41.8 | 90% | 50.5 | 44.4 | $191.49 | $3.25 |
+| Claude Haiku 5.5 | AI Coding Daily (excl. bug finding) | 40.5 | 90% | 51.2 | 45.8 | $107.10 | $1.82 |
+| Claude Haiku 5.5 (low) | AI Coding Daily (excl. bug finding) | 27.9 | 90% | 45.4 | 41.9 | $28.12 | $0.48 |
+| Claude Opus 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 58.4 | 90% | 55.2 | 45.2 | $3,374.80 | $57.30 |
+| Claude Sonnet 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 54.1 | 90% | 53.6 | 44.5 | $1,826.03 | $31.00 |
+| GPT-6 Astra (xhigh) | AI Coding Daily (excl. bug finding) | 56.9 | 90% | 49.8 | 44.7 | $2,899.42 | $269.16 |
+| GPT-6 Luna (low) | AI Coding Daily (excl. bug finding) | 18.5 | 90% | 37.0 | 38.9 | $8.37 | $0.78 |
+| GPT-6.1 Sol (xhigh) | AI Coding Daily (excl. bug finding) | 54.4 | 90% | 52.7 | 49.9 | $512.20 | $47.55 |
+| MiMo-V2.6-Flash | Bug Hunt Bench, AI Coding Daily (excl. bug finding) | 44.1 | 78% | 44.7 | 50.9 | $60.37 | $52.59 |
+| MiniMax-M3.1-Flash | Bug Hunt Bench, AI Coding Daily (excl. bug finding) | 46.6 | 78% | 42.5 | 47.2 | $234.35 | $234.35 |
+
 ### AI Coding Daily ranking: Plan routes and calibration
 
 #### Measured-evidence calibration (diagnostic)

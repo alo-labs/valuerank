@@ -140,3 +140,19 @@ def test_module_entry_point(monkeypatch):
         runpy.run_module("valuerank.draft_figures", run_name="__main__", alter_sys=True)
     assert exit_info.value.code == 0
     assert ROOT.exists()
+
+
+def test_pointers_name_a_field_every_ranking_has():
+    """I47/I48: a pointer to generated output names a scores.json field, and that field resolves in every ranking."""
+
+    text = "\n".join([
+        "Bands are printed beside the ranks (scores.md; scores.json `diagnostics.rankSeparability.<basis>.bands`).",
+        "The basket is in scores.json `admission` and the naming in scores.json `aaPlottedNames`.",
+        "Shares are printed in scores.md.",
+        "A bad field: scores.json `diagnostics.noSuchThing`.",
+        "## Revision history",
+        "History may cite scores.md freely.",
+    ])
+    problems = f.pointer_problems(text, SCORES)
+    assert problems == ["line 3: a pointer to a generated document names no scores.json field: Shares are printed in scores.md.",
+                        "pointer scores.json `diagnostics.noSuchThing` does not resolve in every ranking"]

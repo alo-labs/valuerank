@@ -366,6 +366,36 @@ def release_day(scores: dict) -> str:
     return scores["observedAt"][:10]
 
 
+_POINTER = re.compile(r"scores\.json `([^`]+)`")
+_DOCUMENT = re.compile(r"\b(?:README|scores|methodology|raw-data)\.md\b")
+
+
+def _resolves(document, path: str) -> bool:
+    try:
+        resolve(document, path)
+        return True
+    except (FigureError, KeyError, IndexError, TypeError):
+        return False
+
+
+def pointer_problems(text: str, scores: dict) -> list[str]:
+    """I47/I48: a pointer to a scores.json field must name a field every ranking's section has (or the file's root has);
+    `<basis>` stands for each basis and `[]` for a list's items."""
+
+    sections = [scores["v3"], *scores["v3Tracks"].values()]
+    problems = []
+    # A sentence that sends the reader to a generated document also names the field it reads, so the check can verify it.
+    for line_number, line in enumerate(text.split(HISTORY_HEADING)[0].splitlines(), 1):
+        for sentence in _SENTENCE.split(line):
+            if _DOCUMENT.search(sentence) and not _POINTER.search(sentence):
+                problems.append(f"line {line_number}: a pointer to a generated document names no scores.json field: {sentence[:160]}")
+    for path in sorted(set(_POINTER.findall(text))):
+        concrete = [path.replace("<basis>", basis).replace("[]", "[0]") for basis in ("api", "plan")]
+        if not (all(_resolves(section, item) for section in sections for item in concrete) or all(_resolves(scores, item) for item in concrete)):
+            problems.append(f"pointer scores.json `{path}` does not resolve in every ranking")
+    return problems
+
+
 def latest_source(spec_dir: Path = SPEC_DIR) -> Path:
     sources = [(int(match.group("number")), path) for path in spec_dir.glob("draft-r*.src.md") if (match := DRAFT.search(path.name))]
     if not sources:
@@ -389,6 +419,7 @@ def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
     except FigureError as error:
         return [f"{source.name}: {error}"]
     problems = [f"{source.name}: {problem}" for problem in lint(text, known_names(scores, data), configuration_names(scores), release_day(scores))]
+    problems += [f"{source.name}: {problem}" for problem in pointer_problems(text, scores)]
     target = published(source)
     if not target.exists() or target.read_text() != rendered:
         problems.append(f"{target.name} is not the rendering of {source.name} against the current data (run `python3 -m valuerank.draft_figures render`)")
