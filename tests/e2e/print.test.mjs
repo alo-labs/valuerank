@@ -54,7 +54,7 @@ describe('print', () => {
       for (const hidden of ['.site-header', '.nav-links', '[data-theme-toggle]', '.footer-links']) {
         assert.equal(await visible(page, hidden), 0, `${hidden} should not print`);
       }
-      assert.equal(await visible(page, '#dimension-table tbody tr'), 10); // the ten benchmark leaves (O49)
+      assert.equal(await visible(page, '#dimension-table tbody tr'), 14); // the max-effort ranking's fourteen leaves (O55)
       assert.equal(await visible(page, 'h1'), 1);
       assert.equal(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), 'rgb(255, 255, 255)');
       await context.close();
