@@ -1407,7 +1407,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         "version": VERSION,
         "cohortN": len(primary_rows),
         "scoredN": len(by_overall),
-        "exactBenchmarkOverlapN": len(overlap_primary_ids),
+        "otherPlottedEffortN": len(overlap_primary_ids),
         "frontierRequiredModelN": len(frontier_primary_ids),
         "frontierRequiredModelIds": sorted(frontier_primary_ids),
         "frontierSelection": frontier_selection,
@@ -1460,7 +1460,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         "observedAt": observed_at,
         "cohortN": len(primary_rows),
         "scoredN": len(by_overall),
-        "exactBenchmarkOverlapN": len(overlap_primary_ids),
+        "otherPlottedEffortN": len(overlap_primary_ids),
         "frontierRequiredModelN": len(frontier_primary_ids),
         "frontierSelection": frontier_selection,
         "sourceCohortN": len(rows),
@@ -1539,8 +1539,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 "cohort": {
                     "n": len(primary_rows),
                     "scoredN": len(by_overall),
-                    "sourceN": len(rows),
-                    "exactBenchmarkOverlapN": len(overlap_primary_ids),
+                    "rosterN": len(rows),
+                    "otherPlottedEffortN": len(overlap_primary_ids),
                     "frontierRequiredModelN": len(frontier_primary_ids),
                     # O51/E250: the cohort is defined by AA's rendered frontier capture; the DeepSWE chart fields
                     # elsewhere in this file are withdrawn by AA and not scored.

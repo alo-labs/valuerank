@@ -1324,3 +1324,10 @@ Six Perplexity Pro models, Search mode, Thinking on: GPT-6.1 Sol, Gemini 3.8 Fla
 - L3 (adopted): the max-effort ranking holds at most one configuration per family, 9 of the 12 families.
 - L4 (adopted, code changed): scores.json's cohort object names the frontier capture as its source and date; the top-level DeepSWE fields carry "withdrawn by AA (O49), kept as raw data, not scored (E250)".
 - Round status (O56): clean, the first at this rung. Draft r100.
+
+## Internal review I41 (Claude Sonnet 5.5, effort medium, on r100) — adopted, modified or rejected
+- No Critical, High or Medium finding (VERDICT: NO FURTHER FEEDBACK).
+- L1 (adopted, code changed): scores.json's cohort counts renamed to what they now are: `rosterN` (AA-mapped roster rows) and `otherPlottedEffortN` (plotted on/near configurations that are not a family primary), replacing `sourceN` and `exactBenchmarkOverlapN` from the withdrawn retention route.
+- L2 (rejected for now): moving the revision history below the body is presentation; left for the final editorial pass with I38 L4.
+- L3 (adopted): AGENTS.md separates the owner's exclusions (Surge Complex Constraints dropped for now; CursorBench and sudo L7 excluded) from the benchmarks with too few exact configurations.
+- Round status (O56): clean, the second consecutive clean round at this rung. The Claude Sonnet 5.5 medium rung is complete; the next rung is Claude Sonnet 5.5 at high effort, on r100 (I41 changed no draft text).
