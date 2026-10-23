@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 9,
-      "plan": 20
+      "plan": 62
     },
     "overall": {
       "api": 52.6658252461426,
@@ -233,8 +233,8 @@
     "planUsd": 29.637291467724335,
     "fallback": null,
     "route": {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "id": "chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "assumption",
@@ -333,20 +333,20 @@
       "additionalCashUsd": 0.0,
       "grossCashUsd": 500.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "chatgpt-pro500-common-semianalysis-assumption",
+      "measurementObjectId": "chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption",
       "capacitySolutionId": null,
-      "cashObjectId": "chatgpt-pro500-common-semianalysis-assumption:month cash",
+      "cashObjectId": "chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
-      "donorRouteId": null,
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
       "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
     }
   },
   "plans": [
     {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "id": "chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "assumption",
@@ -357,11 +357,13 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 29.637291467724335,
-      "selected": true
+      "selected": true,
+      "planRank": 62,
+      "planValue": 51.59963020734175
     },
     {
-      "id": "chatgpt-pro100-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $100 · common GPT assumption",
+      "id": "chatgpt-pro100-gpt-5.6-luna-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "grade": "assumption",
@@ -372,11 +374,13 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 30.260938738419576,
-      "selected": false
+      "selected": false,
+      "planRank": 64,
+      "planValue": 51.547579712924765
     },
     {
-      "id": "chatgpt-pro200-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $200 · common GPT assumption",
+      "id": "chatgpt-pro200-gpt-5.6-luna-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "grade": "assumption",
@@ -387,10 +391,12 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 30.638474442449766,
-      "selected": false
+      "selected": false,
+      "planRank": 67,
+      "planValue": 51.51658878248793
     },
     {
-      "id": "chatgpt-plus-common-semianalysis-assumption",
+      "id": "chatgpt-plus-gpt-5.6-luna-common-gpt-assumption",
       "planLabel": "ChatGPT Plus $20 · common GPT assumption",
       "planFeeUsd": 20,
       "valueMultiple": 8.1,
@@ -402,7 +408,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 39.41393872720081,
-      "selected": false
+      "selected": false,
+      "planRank": 74,
+      "planValue": 50.88705583801769
     }
   ],
   "scenarios": {
@@ -460,7 +468,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0002,
-        "frontier": 0.6892
+        "frontier": 0.6886
       }
     ],
     "plan": [
@@ -621,7 +629,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 9,
-        "plan": 20
+        "plan": 62
       }
     }
   ],

@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 24,
-      "plan": 22
+      "plan": 69
     },
     "overall": {
       "api": 46.903002261501264,
@@ -382,7 +382,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 909.7108033016924,
-      "selected": true
+      "selected": true,
+      "planRank": 69,
+      "planValue": 51.47117687737787
     },
     {
       "id": "claude-max20x-fable51-semianalysis",
@@ -397,7 +399,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 932.0417324773074,
-      "selected": false
+      "selected": false,
+      "planRank": 71,
+      "planValue": 51.410561762743484
     }
   ],
   "scenarios": {
@@ -510,8 +514,8 @@
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.1572,
-        "frontier": 0.0243
+        "top3": 0.0,
+        "frontier": 0.0245
       }
     ]
   },
@@ -525,7 +529,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 24,
-        "plan": 22
+        "plan": 69
       }
     }
   ],

@@ -61,10 +61,11 @@ FILES = {
 
 
 def log_searches(*model_ids):
-    """O36: an exhaustive search logged on the cutoff for every leaf of the named configurations."""
+    """O36: an exhaustive search logged on the cutoff for every leaf of the named configurations, with its open-web step (I28)."""
 
     def fn(document):
-        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-21", "result": "not found", "sources": []}
+        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-21", "result": "not found", "sources": [],
+                                  "openWeb": {"searchedOn": "2026-10-21", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
                                  for model_id in model_ids for leaf in quality.LEAVES]
     return fn
 

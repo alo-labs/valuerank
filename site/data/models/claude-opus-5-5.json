@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 14,
-      "plan": 3
+      "plan": 7
     },
     "overall": {
       "api": 50.49484339184716,
@@ -372,7 +372,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 169.59510082164388,
-      "selected": true
+      "selected": true,
+      "planRank": 7,
+      "planValue": 58.67719746789812
     },
     {
       "id": "claude-max20x-opus55-semianalysis",
@@ -387,7 +389,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 170.37611186073383,
-      "selected": false
+      "selected": false,
+      "planRank": 8,
+      "planValue": 58.66571328972742
     },
     {
       "id": "claude-max5x-opus55-semianalysis",
@@ -402,7 +406,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 174.48299455711486,
-      "selected": false
+      "selected": false,
+      "planRank": 11,
+      "planValue": 58.60617789168776
     }
   ],
   "scenarios": {
@@ -470,7 +476,7 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -488,7 +494,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.9997,
-        "top3": 1.0,
+        "top3": 0.9998,
         "frontier": 1.0
       },
       {
@@ -514,9 +520,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.7188,
-        "top3": 1.0,
-        "frontier": 0.8689
+        "top1": 0.7181,
+        "top3": 0.7288,
+        "frontier": 0.8688
       }
     ]
   },
@@ -605,7 +611,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 14,
-        "plan": 3
+        "plan": 7
       }
     }
   ],

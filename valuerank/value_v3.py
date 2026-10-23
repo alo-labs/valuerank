@@ -25,6 +25,7 @@ import dataclasses
 import hashlib
 import json
 import math
+import re
 import statistics
 import sys
 from datetime import date, datetime
@@ -74,7 +75,7 @@ SAMPLING_TASKS = {
 # Opus 5.5 on 2026-10-20) without its level, so the stream reads it as a 95% normal interval: an assumption, labelled.
 GDPVAL_RATING_SD = 26.0 / 1.96
 SAMPLING_ASSUMPTIONS = (
-    "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
+    "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
     "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
     "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
 )
@@ -230,15 +231,36 @@ def incomplete_configurations(configurations: list[dict], documents: dict) -> li
     return [entry for entry in entries if entry is not None]
 
 
-def check_leaf_searches(incomplete: list[dict], documents: dict, release_day: date) -> None:
-    """O36: every leaf a cohort configuration lacks has a logged exhaustive search at most 7 days before the cutoff."""
+def check_leaf_searches(incomplete: list[dict], documents: dict, release_day: date, frontier: frozenset = frozenset()) -> None:
+    """O36: every leaf a cohort configuration lacks has a logged exhaustive search at most 7 days before the cutoff;
+    for a frontier or near-frontier family the log also holds an open-web discovery step whose every candidate is
+    resolved (I28)."""
 
-    log = {(item["modelId"], item["leaf"]): item for item in (documents.get("leafEvidence") or {}).get("searches", [])}
+    evidence = documents.get("leafEvidence") or {}
+    log = {(item["modelId"], item["leaf"]): item for item in evidence.get("searches", [])}
     for row in incomplete:
         for leaf in row["missing"]:
             entry = log.get((row["id"], leaf))
             if entry is None or (release_day - date.fromisoformat(entry["searchedOn"])).days > LEAF_SEARCH_MAX_AGE_DAYS:
                 raise ValueError(f"{row['id']}: no exhaustive search for {leaf} logged within {LEAF_SEARCH_MAX_AGE_DAYS} days of the cutoff (O36)")
+            if row["id"] in frontier:
+                check_open_web(row["id"], leaf, entry.get("openWeb"), (evidence.get("sourceRegistry") or {}).get(leaf, []))
+
+
+OPEN_WEB_RESOLUTIONS = ("register", "reject")
+
+
+def check_open_web(model_id: str, leaf: str, step: dict | None, registry: list) -> None:
+    """I28: the open-web discovery step of a listed frontier family's search; a candidate is either a dated registry
+    addition (its publisher is now registered for the leaf) or a dated rejection with a reason."""
+
+    if not step or not step.get("queries"):
+        raise ValueError(f"{model_id}: the {leaf} search logs no open-web discovery step (I28)")
+    for candidate in step.get("candidates", []):
+        if candidate.get("resolution") not in OPEN_WEB_RESOLUTIONS or not candidate.get("reason"):
+            raise ValueError(f"{model_id}: open-web candidate {candidate.get('url')} for {leaf} is unresolved (I28)")
+        if candidate["resolution"] == "register" and candidate.get("publisher") not in registry:
+            raise ValueError(f"{model_id}: open-web candidate {candidate.get('url')} for {leaf} awaits its registry addition (I28)")
 
 
 def row_components(page: dict, cai_record: dict | None, chart_rows: dict) -> tuple[dict, dict]:
@@ -573,7 +595,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         })
     # O36: only configurations with every leaf are ranked; the rest stay listed with their missing leaves and searches.
     incomplete = [entry for entry in (incomplete_entry(row, row["evidence"]) for row in rows) if entry is not None]
-    check_leaf_searches(incomplete, documents, release_day)
+    check_leaf_searches(incomplete, documents, release_day, frozenset(row["id"] for row in rows if row.get("frontierFamily")))
     # O41: a listed frontier or near-frontier family keeps its assembled evidence for the separated indicative value.
     listed = [row for row in rows if incomplete_entry(row, row["evidence"]) is not None and row.get("frontierFamily")]
     rows = [row for row in rows if incomplete_entry(row, row["evidence"]) is None]
@@ -630,6 +652,45 @@ def workload_catalog(assembled: dict) -> dict:
         if workload is not None and workload not in catalog:
             catalog[workload] = {"components": list(row["cost"]["components"]), "role": "subset"}
     return catalog
+
+
+PLAN_ROW_RULE = ("O48: the Plan basis ranks one row per configuration and plan: every plan on which the configuration has an eligible "
+                 "(non-diagnostic) route, the route chosen by the official comparator among that plan's candidates (E85, E88); a "
+                 "configuration with no eligible route keeps one API-cost fallback row (O13). Rows of one configuration share its quality "
+                 "and its API cost, so they differ only by the plan's multiple")
+API_FALLBACK_PLAN = "api"
+
+
+def plan_slug(plan: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", plan.lower()).strip("-")
+
+
+def plan_variants(assembled: dict) -> dict:
+    """O48: the Plan-basis population, one row per configuration and plan (``<configuration>@<plan>``), each carrying the
+    configuration's evidence and cost with the plan's selected route; ``configurationId`` names the configuration and
+    ``representative`` marks the row on the configuration's own selected route."""
+
+    rows = []
+    for row in assembled["rows"]:
+        by_plan: dict[str, list] = {}
+        for candidate in row.get("routeCandidates", []):
+            if candidate["grade"] != "diagnostic":
+                # A route without a recorded plan name is its own plan.
+                by_plan.setdefault(candidate["route"].get("plan") or candidate["route"]["id"], []).append(candidate)
+        chosen = row["routeSelection"]["selected"]
+        variants = [(plan, plan_routes.route_selection(candidates)) for plan, candidates in sorted(by_plan.items())] or [(None, row["routeSelection"])]
+        for plan, selection in variants:
+            selected = selection["selected"]
+            rows.append({
+                **row,
+                "id": f"{row['id']}@{plan_slug(plan) if plan else API_FALLBACK_PLAN}",
+                "configurationId": row["id"],
+                "planName": plan,
+                "routeSelection": selection,
+                "plan": plan_routes.plan_cost(row["cost"]["costUsd"], selected),
+                "representative": (selected is None and chosen is None) or (selected is not None and chosen is not None and selected["route"]["id"] == chosen["route"]["id"]),
+            })
+    return {**assembled, "rows": rows}
 
 
 def basis_cost_on(row: dict, workload_components: list[str], basis: str) -> float | None:
@@ -813,7 +874,8 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
             workloads[workload] = {**entry, "anchors": {"api": None, "plan": None}, "anchorStatus": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} complete-evidence references"}
             continue
         api = {row_id: restricted_cost(by_id[row_id]["components"], components) for row_id in population}
-        plan = {row_id: _plan_cost_on(by_id[row_id], components) for row_id in population}
+        # O48: the Plan anchor references are the plan rows of the reference configurations.
+        plan = {item["id"]: _plan_cost_on(item, components) for item in plan_variants(assembled)["rows"] if item["configurationId"] in population}
         workloads[workload] = {
             **entry,
             "anchors": {
@@ -1273,6 +1335,16 @@ FRONTIER_ANCHOR_LABEL = "anchors from frontier and near-frontier configurations 
 POLICY_BAR_ID = "bar:policy-cohort-median"
 
 
+def costed_bar_ladder(assembled: dict, per_row: dict) -> dict:
+    """I28: the bar population keeps full-benchmark rows without a cost by choice; this sensitivity recomputes the
+    ladder over the scored rows alone (the frozen ladder is unchanged)."""
+
+    scored = [row for row in assembled["rows"] if per_row[row["id"]]["api"]["value"] is not None]
+    population, bars = bar_levels({**assembled, "rows": scored})
+    return {"excluded": sorted(row["id"] for row in assembled["rows"] if row not in scored), "population": len(population),
+            "levels": [bar["level"] for bar in bars]}
+
+
 def policy_cohort_bar(assembled: dict, frozen: dict) -> dict:
     """E199: the bar recomputed over the frontier and near-frontier configurations alone, with its API result (a sensitivity)."""
 
@@ -1534,32 +1606,46 @@ def score(assembled: dict, frozen: dict) -> dict:
             cost_score = anchor_math.cost_score(cost, anchors) if anchors else None
             entry[basis] = {"costUsd": cost, "costScore": cost_score, "value": anchor_math.value_score(cost_score, row["summary"].displayed, BETA)}
         per_row[row["id"]] = entry
-    ranks = {basis: competition_ranks({row_id: entry[basis]["value"] for row_id, entry in per_row.items()}) for basis in BASES}
+    # O48: the Plan basis is ranked over one row per configuration and plan; each configuration's own Plan figures are
+    # those of its representative row (its selected route).
+    plan_assembled = plan_variants(assembled)
+    plan_rows = plan_assembled["rows"]
+    per_plan = {}
+    for row in plan_rows:
+        anchors = _anchors_for(frozen, row["cost"]["workload"], "plan")
+        cost = _basis_cost(row, "plan")
+        cost_score = anchor_math.cost_score(cost, anchors) if anchors else None
+        per_plan[row["id"]] = {"plan": {"costUsd": cost, "costScore": cost_score, "value": anchor_math.value_score(cost_score, row["summary"].displayed, BETA)}}
+    plan_ranks = competition_ranks({row_id: entry["plan"]["value"] for row_id, entry in per_plan.items()})
+    representative = {row["configurationId"]: row["id"] for row in plan_rows if row["representative"]}
+    ranks = {"api": competition_ranks({row_id: entry["api"]["value"] for row_id, entry in per_row.items()}),
+             "plan": {row_id: plan_ranks[plan_id] for row_id, plan_id in representative.items() if plan_id in plan_ranks}}
     gates, influence, exchange = {}, {}, {}
     for basis in BASES:
+        basis_rows, scores_of = (rows, per_row) if basis == "api" else (plan_rows, per_plan)
         clip = []
         for workload in frozen["workloads"]:
-            costs = {row["id"]: _basis_cost(row, basis) for row in rows if row["cost"]["workload"] == workload}
+            costs = {row["id"]: _basis_cost(row, basis) for row in basis_rows if row["cost"]["workload"] == workload}
             anchors = frozen["workloads"][workload]["anchors"][basis]
             if costs and anchors:
                 clip.append({"workload": workload, **anchor_math.clip_gate(costs, anchors)})
         gates[basis] = clip
         influence[basis] = anchor_math.panel_cost_influence(
-            [{"id": row["id"], "workloadId": row["cost"]["workload"], "costScore": per_row[row["id"]][basis]["costScore"], "qualityScore": row["summary"].displayed} for row in rows],
+            [{"id": row["id"], "workloadId": row["cost"]["workload"], "costScore": scores_of[row["id"]][basis]["costScore"], "qualityScore": row["summary"].displayed} for row in basis_rows],
             BETA,
             main,
         )
         # E189: how closely the cost-only and quality-only orderings follow the value ordering on the same panel.
-        panel_rows = [row for row in rows if row["cost"]["workload"] == main and per_row[row["id"]][basis]["value"] is not None]
-        values = [per_row[row["id"]][basis]["value"] for row in panel_rows]
+        panel_rows = [row for row in basis_rows if row["cost"]["workload"] == main and scores_of[row["id"]][basis]["value"] is not None]
+        values = [scores_of[row["id"]][basis]["value"] for row in panel_rows]
         influence[basis]["orderingAgreement"] = {
-            "costVsValue": diagnostics.kendall_tau_b([per_row[row["id"]][basis]["costScore"] for row in panel_rows], values) if len(panel_rows) >= 2 else None,
+            "costVsValue": diagnostics.kendall_tau_b([scores_of[row["id"]][basis]["costScore"] for row in panel_rows], values) if len(panel_rows) >= 2 else None,
             "qualityVsValue": diagnostics.kendall_tau_b([row["summary"].displayed for row in panel_rows], values) if len(panel_rows) >= 2 else None,
         }
         main_anchors = frozen["workloads"][main]["anchors"][basis]
         exchange[basis] = {**anchor_math.exchange_rate(main_anchors, BETA), "curve": anchor_math.exchange_rate_curve(BETA, [4.0, 16.0, 64.0, 256.0, 1024.0])}
     hold = any(item["hold"] for basis in BASES for item in gates[basis])
-    yield_ = plan_routes.identification_yield({row["id"]: row["routeSelection"]["selected"] for row in rows})
+    yield_ = plan_routes.identification_yield({row["id"]: row["routeSelection"]["selected"] for row in plan_rows})
     agreement = _quality_agreement(rows)
     measured = _measured_only_view(rows, frozen, per_row)
     readiness = cost_diagnostics.basket_readiness(rows, assembled["admission"], main)
@@ -1618,18 +1704,22 @@ def score(assembled: dict, frozen: dict) -> dict:
         "costInfluence": influence,
         "gates": {"clip": gates, "hold": hold},
         "identificationYield": yield_,
-        "rows": [_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))) for row in rows],
-        "intervals": {basis: interval_outputs(assembled, frozen, basis) for basis in BASES},
+        "rows": [{**_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))),
+                  "planRowId": representative.get(row["id"])} for row in rows],
+        "planRowRule": PLAN_ROW_RULE,
+        "planRows": [_plan_row_json(row, per_plan[row["id"]]["plan"], plan_ranks.get(row["id"])) for row in plan_rows],
+        "intervals": {"api": interval_outputs(assembled, frozen, "api"), "plan": interval_outputs(plan_assembled, frozen, "plan")},
         "incompleteEvidence": assembled.get("incomplete", []),
         "listedIndicative": listed_indicative(assembled, frozen),
-        "displayedCheapest": {basis: displayed_cheapest(assembled, frozen, basis, quality_margin(assembled)) for basis in BASES},
+        "displayedCheapest": {basis: displayed_cheapest(assembled if basis == "api" else plan_assembled, frozen, basis, quality_margin(assembled)) for basis in BASES},
         "barCurrency": bar_currency(assembled, frozen),
         "observedRangeBars": observed_range_bars(assembled, frozen),
         "requiredMissingScores": required_missing_scores(assembled, frozen),
         "subsetIntervals": subset_interval_outputs(assembled, frozen),
         "measuredOnlyPlanView": measured,
         "diagnostics": {
-            "rankSeparability": rank_separability(assembled, per_row),
+            "rankSeparability": rank_separability(assembled, per_row, exchange, plan_assembled, per_plan),
+            "costedBarLadder": costed_bar_ladder(assembled, per_row),
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
             "frontierCodeCrossSource": frontiercode_cross_source(rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
@@ -2069,6 +2159,19 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
     }
 
 
+def _plan_row_json(row: dict, scores: dict, rank: int | None) -> dict:
+    """O48: one Plan-basis row: a configuration on one plan."""
+
+    selected = row["routeSelection"]["selected"]
+    return {
+        "id": row["id"], "configurationId": row["configurationId"], "name": row["name"], "plan": row["planName"],
+        "representative": row["representative"], "routeId": selected["route"]["id"] if selected else None,
+        "planLabel": selected["route"].get("planLabel") if selected else None, "grade": row["plan"].get("grade"),
+        "multiple": row["plan"].get("multiple"), "fallback": row["plan"].get("fallback"), "flags": row["plan"].get("flags", []),
+        "selectionReason": row["routeSelection"]["reason"], "quality": row["summary"].displayed, **scores, "rank": rank,
+    }
+
+
 # --------------------------------------------------------------------------
 # 4. Scenario shares (released as a data file)
 # --------------------------------------------------------------------------
@@ -2081,11 +2184,13 @@ NOT_QUANTIFIED = (
 )
 
 # E147: the registered kernel-check object for v1 (multiples and price lists are fixed inputs, not drawn).
-REGISTERED_DEPENDENCY = "every row its own dependency component: no shared varying primitive in v1 streams"
+REGISTERED_DEPENDENCY = ("every row its own dependency component: no shared varying primitive in v1 streams; on the Plan basis the plan rows "
+                         "of one configuration form one group sharing every draw (O48)")
 
 
 def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float = GDPVAL_RATING_SD) -> float:
-    """O39: the plug-in standard error of one leaf's z score under the independent-task approximation."""
+    """O39: the plug-in standard error of one leaf's z score under the independent-task approximation (binomial
+    leaves with the Jeffreys-type proportion, I28)."""
 
     z = observation.z
     if key == "gdpval":
@@ -2096,7 +2201,8 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
         wrong = source["hallucinationRate"] * (1.0 - correct)
         index_sd = 100.0 * math.sqrt(max(0.0, correct + wrong - (correct - wrong) ** 2) / tasks)
         return index_sd / 2.0  # O28: z = (I + 100) / 2
-    p = min(1.0, max(0.0, z / 100.0))
+    # I28: a Jeffreys-type plug-in, (k + 1/2) / (n + 1), keeps the SD positive at a 0% or 100% score.
+    p = (min(1.0, max(0.0, z / 100.0)) * tasks + 0.5) / (tasks + 1.0)
     return 100.0 * math.sqrt(p * (1.0 - p) / tasks)
 
 
@@ -2115,23 +2221,36 @@ def quality_sd(row: dict, gdpval_sd: float = GDPVAL_RATING_SD) -> float:
                          for key, value in observations.items()))
 
 
-def rank_separability(assembled: dict, per_row: dict) -> dict:
+def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = None, plan_assembled: dict | None = None,
+                      per_plan: dict | None = None) -> dict:
     """O39: how far apart two values must be to separate under the task-sampling approximation, and how many
     adjacent ranks are separable, per basis (a diagnostic beside the ranks; scores and labels unchanged)."""
 
     sd = {row["id"]: (1.0 - BETA) * quality_sd(row) for row in assembled["rows"]}
     wide = {row["id"]: (1.0 - BETA) * quality_sd(row, GDPVAL_WIDE_SD) for row in assembled["rows"]}
+    # O48: the Plan basis is ranked over plan rows; a plan row carries its configuration's quality noise.
+    plan_rows = (plan_assembled or assembled)["rows"]
+    configuration_of = {row["id"]: row.get("configurationId", row["id"]) for row in plan_rows}
+    configuration_of.update({row_id: row_id for row_id in sd})
+    plan_scores = per_plan if per_plan is not None else per_row
     # I27: the Plan basis also carries owner-named transfer error, which this noise does not include.
-    assumed = sorted(row["id"] for row in assembled["rows"] if transfer_dependent(row))
+    assumed = sorted(row["id"] for row in plan_rows if transfer_dependent(row))
     result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "bias": SEPARABILITY_BIAS, "bandRule": BAND_RULE, "valueSd": sd,
               "qualityMargin": quality_margin(assembled), "planAssumedRouteRows": assumed}
     for basis in BASES:
-        ranked = sorted((per_row[row_id][basis]["value"], row_id) for row_id in sd if per_row[row_id][basis]["value"] is not None)
+        ids, scores_of = (list(sd), per_row) if basis == "api" else ([row["id"] for row in plan_rows], plan_scores)
+        ranked = sorted((scores_of[row_id][basis]["value"], row_id) for row_id in ids if scores_of[row_id][basis]["value"] is not None)
         ranked.reverse()
 
+        def pair_threshold(sds: dict, first: str, second: str, rho: float) -> float:
+            # O48: two plan rows of one configuration share every quality draw, so only the plans' multiples separate them.
+            if configuration_of[first] == configuration_of[second]:
+                return 0.0
+            return separation(sds[configuration_of[first]], sds[configuration_of[second]], rho)
+
         def adjacent(sds: dict, rho: float) -> tuple[int, float | None]:
-            thresholds = [separation(sds[first], sds[second], rho) for (_, first), (_, second) in zip(ranked, ranked[1:])]
-            separable = sum(high - low >= threshold for ((high, _), (low, _)), threshold in zip(zip(ranked, ranked[1:]), thresholds))
+            thresholds = [pair_threshold(sds, first, second, rho) for (_, first), (_, second) in zip(ranked, ranked[1:])]
+            separable = sum(high - low >= threshold and high > low for ((high, _), (low, _)), threshold in zip(zip(ranked, ranked[1:]), thresholds))
             return separable, statistics.median(thresholds) if thresholds else None
 
         separable, median = adjacent(sd, 0.0)
@@ -2140,8 +2259,12 @@ def rank_separability(assembled: dict, per_row: dict) -> dict:
             # I26: a shared task set correlates two rows' errors, which narrows the true threshold; the grid shows how far.
             "byCorrelation": {f"{rho:.1f}": adjacent(sd, rho)[0] for rho in SEPARABILITY_CORRELATIONS},
             "gdpvalWide": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(wide, 0.0))),
-            "bands": rank_bands(ranked, sd),
+            "bands": rank_bands(ranked, sd, configuration_of),
         }
+        doubling = ((exchange or {}).get(basis) or {}).get("valuePointsPerCostDoubling")
+        # I28: the factor by which a cost (on the Plan basis, a transferred multiple) can be wrong before the value moves
+        # by the median separation threshold; a tolerance, not an estimate of any transfer's error.
+        result[basis]["costTolerance"] = None if median is None or not doubling else 2.0 ** (median / doubling)
     return result
 
 
@@ -2152,7 +2275,17 @@ SEPARABILITY_BIAS = ("net direction not established: treating two rows' errors a
                      "variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way")
 BAND_RULE = ("O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at "
              "correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; "
-             "every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable")
+             "every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on "
+             "the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in "
+             "the band, and two plan rows of one configuration count as a separable adjacent pair whenever their values differ")
+
+
+def _separable(gap: float, first: str, second: str, sd: dict) -> bool:
+    """O42/O48: whether a row leaves the current band: its value gap to the band's first row separates them at correlation
+    0. A row of the band's first configuration on another plan stays in the band: their order is certain, but the rows
+    between them cannot be told apart from either."""
+
+    return first != second and gap >= separation(sd[first], sd[second], 0.0)
 
 
 def separation(first: float, second: float, rho: float) -> float:
@@ -2161,12 +2294,14 @@ def separation(first: float, second: float, rho: float) -> float:
     return 1.96 * math.sqrt(max(0.0, first ** 2 + second ** 2 - 2.0 * rho * first * second))
 
 
-def rank_bands(ranked: list[tuple[float, str]], sd: dict) -> dict:
-    """O42: each row's band, as the first and last positions of the rows it cannot be separated from by the band rule."""
+def rank_bands(ranked: list[tuple[float, str]], sd: dict, configuration_of: dict | None = None) -> dict:
+    """O42: each row's band, as the first and last positions of the rows it cannot be separated from by the band rule
+    (O48: a plan row takes its configuration's SD; two rows of one configuration are separated by any value gap)."""
 
+    of = configuration_of or {}
     bands, current = [], []
     for value, row_id in ranked:
-        if current and current[0][0] - value >= separation(sd[current[0][1]], sd[row_id], 0.0):
+        if current and _separable(current[0][0] - value, of.get(current[0][1], current[0][1]), of.get(row_id, row_id), sd):
             bands.append(current)
             current = []
         current.append((value, row_id))
@@ -2256,7 +2391,8 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, tr
     """
 
     panel = []
-    for row in assembled["rows"]:
+    # O48: the Plan panel is the plan rows; rows of one configuration share every draw (one dependency group).
+    for row in (plan_variants(assembled)["rows"] if basis == "plan" else assembled["rows"]):
         cost = _basis_cost(row, basis)
         if row["cost"]["workload"] != assembled["mainWorkload"] or not anchor_math.scoreable(cost):
             continue
@@ -2277,7 +2413,8 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, tr
             for key in agent_run_leaves(row):
                 z = observations[key].z
                 leaves[key] = scenarios.Kernel("uniform", (max(0.0, z - harness / 2.0), min(100.0, z + harness / 2.0)), "endpoint-heavy", scenarios.SPECIFICATION_STRESS)
-        panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional))
+        meta = {"group": row["configurationId"], "costRatio": cost / row["cost"]["costUsd"]} if basis == "plan" else {}
+        panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional, meta))
     return panel
 
 
@@ -2355,7 +2492,7 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
 
     results = {}
     excluded = sorted(
-        row["id"] for row in assembled["rows"]
+        row["id"] for row in plan_variants(assembled)["rows"]
         if row["cost"]["workload"] == assembled["mainWorkload"] and anchor_math.scoreable(_basis_cost(row, "plan")) and transfer_dependent(row)
     )
     for basis in BASES:

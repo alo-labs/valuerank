@@ -96,6 +96,17 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Sonnet 5.5 (high) | Humanity's Last Exam | 0.458294717330862 | fraction | 45.83 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5-high].model.hle` |
 | Claude Sonnet 5.5 (high) | SciCode | 0.537037037037037 | fraction | 53.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5-high].model.scicode` |
 | Claude Sonnet 5.5 (high) | CritPt | 0.245714285714286 | fraction | 24.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5-high].model.critpt` |
+| GPT-6 Astra (max) | DeepSWE v1.1 | 67.6 | percent | 67.60 | Codex - GPT-6 Astra (max) / Codex | `data/aa_deepswe.json` `configurations[valueRankModelId=gpt-6-astra].scorePct` |
+| GPT-6 Astra (max) | Bug Hunt Bench | 45.0 | bugs fixed of 105 | 42.86 | GPT-6 Astra (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6-astra].fixedOf105` |
+| GPT-6 Astra (max) | FrontierCode 1.1 | 0.469827666666667 | fraction | 46.98 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.frontierCode` |
+| GPT-6 Astra (max) | Terminal-Bench 4.0 (AA run) | 59.09090909090911 | percent | 59.09 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.terminalBench40` |
+| GPT-6 Astra (max) | GDPval-AA v2.1 | 1572.84 | Elo | 53.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.gdpval` |
+| GPT-6 Astra (max) | AutomationBench-AA | 0.6849174806688876 | fraction | 68.49 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.automationBenchPartialScore` |
+| GPT-6 Astra (max) | AA-Omniscience | 43.4 | AA Omniscience Index | 71.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.omniscience` |
+| GPT-6 Astra (max) | AA-LCR v1.1 | 0.806666666666667 | fraction | 80.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.lcr` |
+| GPT-6 Astra (max) | Humanity's Last Exam | 0.546802594995366 | fraction | 54.68 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.hle` |
+| GPT-6 Astra (max) | SciCode | 0.564814814814815 | fraction | 56.48 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.scicode` |
+| GPT-6 Astra (max) | CritPt | 0.317142857142857 | fraction | 31.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.critpt` |
 | GPT-6.1 Sol (low) | DeepSWE v1.1 | 67.6 | percent | 67.60 | Codex - GPT-6.1 Sol (low) ({'reasoning_effort': 'low'}) / Codex | `data/aa_deepswe.json` `configurations[valueRankModelId=gpt-6.1-sol-low].scorePct` |
 | GPT-6.1 Sol (low) | Bug Hunt Bench | 22.5 | bugs fixed of 105 | 21.43 | GPT-6.1 Sol (low effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol-low].fixedOf105` |
 | GPT-6.1 Sol (low) | FrontierCode 1.1 | 0.4546 | fraction | 45.46 | GPT-6.1 Sol (low), harness codex | `data/cognition_frontiercode.json` `v1_1.data['GPT-6.1 Sol'].low.main.new_score` |
@@ -151,17 +162,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (max) | Humanity's Last Exam | 0.385078776645042 | fraction | 38.51 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.hle` |
 | GPT-6 Luna (max) | SciCode | 0.546296296296296 | fraction | 54.63 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.scicode` |
 | GPT-6 Luna (max) | CritPt | 0.194285714285714 | fraction | 19.43 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.critpt` |
-| GPT-6 Astra (max) | DeepSWE v1.1 | 67.6 | percent | 67.60 | Codex - GPT-6 Astra (max) / Codex | `data/aa_deepswe.json` `configurations[valueRankModelId=gpt-6-astra].scorePct` |
-| GPT-6 Astra (max) | Bug Hunt Bench | 45.0 | bugs fixed of 105 | 42.86 | GPT-6 Astra (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6-astra].fixedOf105` |
-| GPT-6 Astra (max) | FrontierCode 1.1 | 0.469827666666667 | fraction | 46.98 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.frontierCode` |
-| GPT-6 Astra (max) | Terminal-Bench 4.0 (AA run) | 59.09090909090911 | percent | 59.09 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.terminalBench40` |
-| GPT-6 Astra (max) | GDPval-AA v2.1 | 1572.84 | Elo | 53.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.gdpval` |
-| GPT-6 Astra (max) | AutomationBench-AA | 0.6849174806688876 | fraction | 68.49 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.automationBenchPartialScore` |
-| GPT-6 Astra (max) | AA-Omniscience | 43.4 | AA Omniscience Index | 71.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.omniscience` |
-| GPT-6 Astra (max) | AA-LCR v1.1 | 0.806666666666667 | fraction | 80.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.lcr` |
-| GPT-6 Astra (max) | Humanity's Last Exam | 0.546802594995366 | fraction | 54.68 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.hle` |
-| GPT-6 Astra (max) | SciCode | 0.564814814814815 | fraction | 56.48 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.scicode` |
-| GPT-6 Astra (max) | CritPt | 0.317142857142857 | fraction | 31.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.critpt` |
 | GPT-5.6 Sol (max) | DeepSWE v1.1 | 72.3 | percent | 72.30 | Codex - GPT-5.6 Sol (max) ({'reasoning_effort': 'max'}) / Codex | `data/aa_deepswe.json` `configurations[valueRankModelId=gpt-5.6-sol].scorePct` |
 | GPT-5.6 Sol (max) | Bug Hunt Bench | 43.5 | bugs fixed of 105 | 41.43 | GPT-5.6 Sol (max effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=gpt-5.6-sol].fixedOf105` |
 | GPT-5.6 Sol (max) | FrontierCode 1.1 | 0.4749 | fraction | 47.49 | GPT-5.6 Sol (max), harness codex | `data/cognition_frontiercode.json` `v1_1.data['GPT-5.6 Sol'].max.main.new_score` |
@@ -184,17 +184,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (xhigh) | Humanity's Last Exam | 0.42678405931418 | fraction | 42.68 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-xhigh].model.hle` |
 | Claude Haiku 5.5 (xhigh) | SciCode | 0.517361111111111 | fraction | 51.74 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-xhigh].model.scicode` |
 | Claude Haiku 5.5 (xhigh) | CritPt | 0.225714285714286 | fraction | 22.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-xhigh].model.critpt` |
-| MiMo-V2.6-Pro | DeepSWE v1.1 | 71.9 | percent | 71.90 | MiMo-V2.6-Pro-RL (released checkpoint; single reasoning mode) | `data/leaf_evidence.json` `supplements[modelId=mimo-v2-6-pro, leaf=deepswe].value` |
-| MiMo-V2.6-Pro | Bug Hunt Bench | 18 | bugs fixed of 105 | 17.14 | MiMo-V2.6-Pro (first-party, thinking enabled) | `data/bug_hunt.json` `models[modelId=mimo-v2-6-pro].fixedOf105` |
-| MiMo-V2.6-Pro | FrontierCode 1.1 | 0.454153333333333 | fraction | 45.42 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.frontierCode` |
-| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA run) | 34.8484848484849 | percent | 34.85 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.terminalBench40` |
-| MiMo-V2.6-Pro | GDPval-AA v2.1 | 1684.34 | Elo | 59.22 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.gdpval` |
-| MiMo-V2.6-Pro | AutomationBench-AA | 0.5862340943419085 | fraction | 58.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.automationBenchPartialScore` |
-| MiMo-V2.6-Pro | AA-Omniscience | 8.383333333333333 | AA Omniscience Index | 54.19 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.omniscience` |
-| MiMo-V2.6-Pro | AA-LCR v1.1 | 0.863333333333333 | fraction | 86.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.lcr` |
-| MiMo-V2.6-Pro | Humanity's Last Exam | 0.493512511584801 | fraction | 49.35 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.hle` |
-| MiMo-V2.6-Pro | SciCode | 0.608796296296296 | fraction | 60.88 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.scicode` |
-| MiMo-V2.6-Pro | CritPt | 0.265714285714286 | fraction | 26.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.critpt` |
 | Claude Sonnet 5.5 (low) | DeepSWE v1.1 | 61.9 | percent | 61.90 | Claude Code - Sonnet 5.5 (low) / Claude Code | `data/aa_deepswe.json` `configurations[valueRankModelId=claude-sonnet-5-5-low].scorePct` |
 | Claude Sonnet 5.5 (low) | Bug Hunt Bench | 19.0 | bugs fixed of 105 | 18.10 | Sonnet 5.5 (low effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-sonnet-5-5-low].fixedOf105` |
 | Claude Sonnet 5.5 (low) | FrontierCode 1.1 | 0.264162666666667 | fraction | 26.42 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5-low].model.frontierCode` |
@@ -206,6 +195,17 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Sonnet 5.5 (low) | Humanity's Last Exam | 0.362372567191844 | fraction | 36.24 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5-low].model.hle` |
 | Claude Sonnet 5.5 (low) | SciCode | 0.490740740740741 | fraction | 49.07 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5-low].model.scicode` |
 | Claude Sonnet 5.5 (low) | CritPt | 0.114285714285714 | fraction | 11.43 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5-low].model.critpt` |
+| MiMo-V2.6-Pro | DeepSWE v1.1 | 71.9 | percent | 71.90 | MiMo-V2.6-Pro-RL (released checkpoint; single reasoning mode) | `data/leaf_evidence.json` `supplements[modelId=mimo-v2-6-pro, leaf=deepswe].value` |
+| MiMo-V2.6-Pro | Bug Hunt Bench | 18 | bugs fixed of 105 | 17.14 | MiMo-V2.6-Pro (first-party, thinking enabled) | `data/bug_hunt.json` `models[modelId=mimo-v2-6-pro].fixedOf105` |
+| MiMo-V2.6-Pro | FrontierCode 1.1 | 0.454153333333333 | fraction | 45.42 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.frontierCode` |
+| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA run) | 34.8484848484849 | percent | 34.85 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.terminalBench40` |
+| MiMo-V2.6-Pro | GDPval-AA v2.1 | 1684.34 | Elo | 59.22 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.gdpval` |
+| MiMo-V2.6-Pro | AutomationBench-AA | 0.5862340943419085 | fraction | 58.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.automationBenchPartialScore` |
+| MiMo-V2.6-Pro | AA-Omniscience | 8.383333333333333 | AA Omniscience Index | 54.19 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.omniscience` |
+| MiMo-V2.6-Pro | AA-LCR v1.1 | 0.863333333333333 | fraction | 86.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.lcr` |
+| MiMo-V2.6-Pro | Humanity's Last Exam | 0.493512511584801 | fraction | 49.35 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.hle` |
+| MiMo-V2.6-Pro | SciCode | 0.608796296296296 | fraction | 60.88 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.scicode` |
+| MiMo-V2.6-Pro | CritPt | 0.265714285714286 | fraction | 26.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.critpt` |
 | Gemini 4 Argon (high) | DeepSWE v1.1 | 78.8 | percent | 78.80 | Antigravity CLI - Gemini 4 Argon (high) / Antigravity CLI | `data/aa_deepswe.json` `configurations[valueRankModelId=gemini-4-argon].scorePct` |
 | Gemini 4 Argon (high) | Bug Hunt Bench | 40.7 | bugs fixed of 105 | 38.76 | Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 | `data/bug_hunt.json` `models[modelId=gemini-4-argon].fixedOf105` |
 | Gemini 4 Argon (high) | FrontierCode 1.1 | 0.434532 | fraction | 43.45 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.frontierCode` |
@@ -462,6 +462,16 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Claude Sonnet 5.5 (high) | SciCode | $4.61 | confirmed-complete | 288 | $0.0160 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (high) | AA-LCR | $29.39 | confirmed-complete | 100 | $0.2939 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (high) | Coding Agent Index | $374.36 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
+| GPT-6 Astra (max) | AA-Briefcase | $864.69 | confirmed-complete | 91 | $9.5021 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | GDPval-AA | $996.49 | confirmed-complete | 220 | $4.5295 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | GDP.pdf | $207.58 | confirmed-complete | 100 | $2.0758 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | AutomationBench-AA | $1,048.30 | confirmed-complete | 657 | $1.5956 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | Terminal-Bench 4.0 (AA Index run) | $560.88 | confirmed-complete | 66 | $8.4981 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | SciCode | $66.89 | confirmed-complete | 288 | $0.2323 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | AA-LCR | $99.73 | confirmed-complete | 100 | $0.9973 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| GPT-6 Astra (max) | Coding Agent Index | $2,262.53 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
+| GPT-6 Astra (max) | FrontierCode | $422.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
+| GPT-6 Astra (max) | ITBench-AA | $133.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
 | GPT-6.1 Sol (low) | AA-Briefcase | $16.12 | confirmed-complete | 91 | $0.1771 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (low) | GDPval-AA | $23.10 | confirmed-complete | 220 | $0.1050 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (low) | GDP.pdf | $33.41 | confirmed-complete | 100 | $0.3341 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -504,16 +514,6 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6 Luna (max) | AA-LCR | $1.02 | confirmed-complete | 100 | $0.0102 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | Coding Agent Index | $53.30 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
 | GPT-6 Luna (max) | FrontierCode | $9.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
-| GPT-6 Astra (max) | AA-Briefcase | $864.69 | confirmed-complete | 91 | $9.5021 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (max) | GDPval-AA | $996.49 | confirmed-complete | 220 | $4.5295 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (max) | GDP.pdf | $207.58 | confirmed-complete | 100 | $2.0758 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (max) | AutomationBench-AA | $1,048.30 | confirmed-complete | 657 | $1.5956 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (max) | Terminal-Bench 4.0 (AA Index run) | $560.88 | confirmed-complete | 66 | $8.4981 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (max) | SciCode | $66.89 | confirmed-complete | 288 | $0.2323 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (max) | AA-LCR | $99.73 | confirmed-complete | 100 | $0.9973 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| GPT-6 Astra (max) | Coding Agent Index | $2,262.53 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
-| GPT-6 Astra (max) | FrontierCode | $422.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
-| GPT-6 Astra (max) | ITBench-AA | $133.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
 | GPT-5.6 Sol (max) | AA-Briefcase | $365.84 | confirmed-complete | 91 | $4.0203 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-5.6 Sol (max) | GDPval-AA | $618.22 | confirmed-complete | 220 | $2.8101 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-5.6 Sol (max) | GDP.pdf | $92.85 | confirmed-complete | 100 | $0.9285 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -532,14 +532,6 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Claude Haiku 5.5 (xhigh) | AA-LCR | $1.53 | confirmed-complete | 100 | $0.0153 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (xhigh) | Coding Agent Index | $184.98 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
 | Claude Haiku 5.5 (xhigh) | FrontierCode | $16.00 | confirmed-incomplete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
-| MiMo-V2.6-Pro | AA-Briefcase | $34.60 | confirmed-complete | 91 | $0.3802 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | GDPval-AA | $35.47 | confirmed-complete | 220 | $0.1612 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | GDP.pdf | $2.40 | confirmed-complete | 100 | $0.0240 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | AutomationBench-AA | $27.77 | confirmed-complete | 657 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA Index run) | $28.91 | confirmed-complete | 66 | $0.4381 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | SciCode | $2.25 | confirmed-complete | 288 | $0.0078 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | AA-LCR | $4.74 | confirmed-complete | 100 | $0.0474 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | FrontierCode | $18.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
 | Claude Sonnet 5.5 (low) | AA-Briefcase | $73.03 | confirmed-complete | 91 | $0.8025 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (low) | GDPval-AA | $45.90 | confirmed-complete | 220 | $0.2086 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (low) | GDP.pdf | $37.23 | confirmed-complete | 100 | $0.3723 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -548,6 +540,14 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Claude Sonnet 5.5 (low) | SciCode | $3.73 | confirmed-complete | 288 | $0.0129 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (low) | AA-LCR | $29.14 | confirmed-complete | 100 | $0.2914 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (low) | Coding Agent Index | $146.38 | confirmed-complete | — | — | AA Coding Agent Index cost to run (mean API cost per task) x 303 tasks |
+| MiMo-V2.6-Pro | AA-Briefcase | $34.60 | confirmed-complete | 91 | $0.3802 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | GDPval-AA | $35.47 | confirmed-complete | 220 | $0.1612 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | GDP.pdf | $2.40 | confirmed-complete | 100 | $0.0240 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | AutomationBench-AA | $27.77 | confirmed-complete | 657 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA Index run) | $28.91 | confirmed-complete | 66 | $0.4381 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | SciCode | $2.25 | confirmed-complete | 288 | $0.0078 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | AA-LCR | $4.74 | confirmed-complete | 100 | $0.0474 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | FrontierCode | $18.00 | confirmed-complete | — | — | AA FrontierCode total cost chart (labels rounded to USD 1) |
 | Gemini 4 Argon (high) | AA-Briefcase | $530.33 | confirmed-complete | 91 | $5.8277 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | GDPval-AA | $400.23 | confirmed-complete | 220 | $1.8192 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | GDP.pdf | $25.93 | confirmed-complete | 100 | $0.2593 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -679,16 +679,16 @@ The seven Index components plus AA's residual reproduce AA's published Intellige
 | GPT-6.1 Sol (medium) | $318.05 | $43.32 | $361.37 | $361.37 | yes |
 | GPT-6.1 Sol (max) | $796.76 | $284.79 | $1,081.55 | $1,081.55 | yes |
 | Claude Sonnet 5.5 (high) | $873.64 | $153.76 | $1,027.40 | $1,027.40 | yes |
+| GPT-6 Astra (max) | $3,844.56 | $1,479.54 | $5,324.10 | $5,324.10 | yes |
 | GPT-6.1 Sol (low) | $224.07 | $26.40 | $250.48 | $250.48 | yes |
 | Claude Sonnet 5.5 (medium) | $544.15 | $78.13 | $622.28 | $622.28 | yes |
 | GPT-6 Sol (max) | $1,093.52 | $442.27 | $1,535.80 | $1,535.80 | yes |
 | Claude Opus 5 (max) | $5,464.01 | $1,810.73 | $7,274.74 | $7,274.74 | yes |
 | GPT-6 Luna (max) | $79.56 | $42.49 | $122.05 | $122.05 | yes |
-| GPT-6 Astra (max) | $3,844.56 | $1,479.54 | $5,324.10 | $5,324.10 | yes |
 | GPT-5.6 Sol (max) | $2,313.08 | $1,151.76 | $3,464.84 | $3,464.84 | yes |
 | Claude Haiku 5.5 (xhigh) | $107.10 | $50.48 | $157.58 | $157.58 | yes |
-| MiMo-V2.6-Pro | $136.13 | $70.53 | $206.66 | $206.66 | yes |
 | Claude Sonnet 5.5 (low) | $432.01 | $50.12 | $482.13 | $482.13 | yes |
+| MiMo-V2.6-Pro | $136.13 | $70.53 | $206.66 | $206.66 | yes |
 | Gemini 4 Argon (high) | $1,857.94 | $549.30 | $2,407.24 | $2,407.24 | yes |
 | GPT-5.6 Luna (max) | $186.53 | $133.40 | $319.93 | $319.93 | yes |
 | Claude Haiku 5.5 (high) | $70.85 | $23.22 | $94.07 | $94.07 | yes |
@@ -838,20 +838,106 @@ Route evidence as of 2026-10-08. Full allocation regimes, workloads and notes ar
 
 | Plan | Eligible configurations | Monthly fee | Value Multiple | Evidence | Source model | Source date | Source |
 |---|---|---:|---:|---|---|---|---|
-| ChatGPT Plus $20 · common GPT assumption | GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna, GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| ChatGPT Pro $100 · common GPT assumption | GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna, GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| ChatGPT Pro $200 · common GPT assumption | GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna, GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| ChatGPT Pro $500 · common GPT assumption | GPT-6 Astra, GPT-5.6 Sol, GPT-5.6 Luna, GPT-5.5, GPT-6 Sol, GPT-6.1 Sol, GPT-6 Luna, GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · GPT-6.1 Sol | GPT-6.1 Sol | $20.00 | 10.55× | Controlled account measurement / workload projection | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · GPT-6 Astra | GPT-6 Astra | $20.00 | 8.1× | Controlled account measurement / workload projection | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-5.6 Sol | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-5.6 Luna | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-5.5 | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6 Sol | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6 Luna | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Sol (xhigh) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Sol (high) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Sol (medium) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Sol (low) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · GPT-6.1 Sol | GPT-6.1 Sol | $100.00 | 10.55× | Controlled account measurement / workload projection | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · GPT-6 Astra | GPT-6 Astra | $100.00 | 13.22× | Controlled account measurement / workload projection | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-5.6 Sol | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-5.6 Luna | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-5.5 | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6 Sol | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6 Luna | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Sol (xhigh) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Sol (high) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Sol (medium) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Sol (low) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · GPT-6.1 Sol | GPT-6.1 Sol | $200.00 | 10.42× | Controlled account measurement / workload projection | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · GPT-6 Astra | GPT-6 Astra | $200.00 | 14.485× | Controlled account measurement / workload projection | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-5.6 Sol | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-5.6 Luna | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-5.5 | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6 Sol | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6 Luna | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Sol (xhigh) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Sol (high) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Sol (medium) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Sol (low) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · GPT-6.1 Sol | GPT-6.1 Sol | $500.00 | 10.772× | Controlled account measurement / workload projection | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · GPT-6 Astra | GPT-6 Astra | $500.00 | 13.91× | Controlled account measurement / workload projection | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-5.6 Sol | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-5.6 Luna | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-5.5 | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6 Sol | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6 Luna | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Sol (xhigh) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Sol (high) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Sol (medium) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Sol (low) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Pro $20 · Opus 5.5 | Claude Opus 5.5 | $20.00 | 58.9× | Controlled account measurement / workload projection | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Max $100 · Opus 5.5 | Claude Opus 5.5 | $100.00 | 57.25× | Controlled account measurement / workload projection | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Max $200 · Opus 5.5 | Claude Opus 5.5 | $200.00 | 58.63× | Controlled account measurement / workload projection | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Max $100 · Fable 5.1 | Claude Fable 5.1 | $100.00 | 12.73× | Controlled account measurement / workload projection | Fable 5.1 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | Claude Max $200 · Fable 5.1 | Claude Fable 5.1 | $200.00 | 12.425× | Controlled account measurement / workload projection | Fable 5.1 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | SuperGrok Heavy $300 · Grok 4.7 XHigh | Grok 4.7 | $300.00 | 5.785× | user reported projection | Grok 4.7 XHigh | 2026-09-25 | [Source](https://www.remakebench.com/capacity/plans/supergrok-heavy) |
-| MiMo · provisional 1.5x assumption | MiMo-V2.6-Pro, MiMo-V2.6-Flash | — | 1.5× | Provisional assumption | — | — | User assumption |
-| Claude Pro $20 · common Claude assumption | Claude Opus 5, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Haiku 5.5, Claude Sonnet 5.5, Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low), Claude Sonnet 5.5 (xhigh), Claude Sonnet 5.5 (high), Claude Sonnet 5.5 (medium), Claude Sonnet 5.5 (low) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Max 5x $100 · common Claude assumption | Claude Opus 5, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Haiku 5.5, Claude Sonnet 5.5, Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low), Claude Sonnet 5.5 (xhigh), Claude Sonnet 5.5 (high), Claude Sonnet 5.5 (medium), Claude Sonnet 5.5 (low) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
-| Claude Max 20x $200 · common Claude assumption | Claude Opus 5, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Haiku 5.5, Claude Sonnet 5.5, Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low), Claude Sonnet 5.5 (xhigh), Claude Sonnet 5.5 (high), Claude Sonnet 5.5 (medium), Claude Sonnet 5.5 (low) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| MiMo Token Plan Lite $6 · quota ceiling (provider-derived) | MiMo-V2.6-Pro | $6.00 | 0.984× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| MiMo Token Plan Standard $16 · quota ceiling (provider-derived) | MiMo-V2.6-Pro | $16.00 | 0.99× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| MiMo Token Plan Pro $50 · quota ceiling (provider-derived) | MiMo-V2.6-Pro | $50.00 | 1.0944× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| MiMo Token Plan Max $100 · quota ceiling (provider-derived) | MiMo-V2.6-Pro | $100.00 | 1.1808× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| MiMo Token Plan Lite $6 · quota ceiling (provider-derived) | MiMo-V2.6-Flash | $6.00 | 0.9567× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| MiMo Token Plan Standard $16 · quota ceiling (provider-derived) | MiMo-V2.6-Flash | $16.00 | 0.9625× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| MiMo Token Plan Pro $50 · quota ceiling (provider-derived) | MiMo-V2.6-Flash | $50.00 | 1.064× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| MiMo Token Plan Max $100 · quota ceiling (provider-derived) | MiMo-V2.6-Flash | $100.00 | 1.148× | Provider quota ceiling (owner decision O46; not a measurement) | — | 2026-10-21 | [Source](https://mimo.mi.com/docs/en-US/price/token-plan) |
+| Claude Pro $20 · common Claude assumption | Claude Opus 5 | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Fable 5 | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Opus 4.8 | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Sonnet 5 | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Haiku 5.5 | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Sonnet 5.5 | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Haiku 5.5 (max) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Haiku 5.5 (high) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Haiku 5.5 (medium) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Haiku 5.5 (low) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Sonnet 5.5 (xhigh) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Sonnet 5.5 (high) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Sonnet 5.5 (medium) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Pro $20 · common Claude assumption | Claude Sonnet 5.5 (low) | $20.00 | 58.9× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Opus 5 | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Fable 5 | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Opus 4.8 | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Sonnet 5 | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Haiku 5.5 | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Sonnet 5.5 | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Haiku 5.5 (max) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Haiku 5.5 (high) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Haiku 5.5 (medium) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Haiku 5.5 (low) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Sonnet 5.5 (xhigh) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Sonnet 5.5 (high) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Sonnet 5.5 (medium) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Sonnet 5.5 (low) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Opus 5 | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Fable 5 | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Opus 4.8 | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Sonnet 5 | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Haiku 5.5 | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Sonnet 5.5 | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Haiku 5.5 (max) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Haiku 5.5 (high) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Haiku 5.5 (medium) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Haiku 5.5 (low) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Sonnet 5.5 (xhigh) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Sonnet 5.5 (high) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Sonnet 5.5 (medium) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Sonnet 5.5 (low) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 
 ### Plan amounts and their lineage
 
@@ -859,34 +945,34 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 | Configuration | Amount (USD per fee period) | Measures | Derivation | Workload | Cash object | Measurement object |
 |---|---:|---|---|---|---|---|
-| GPT-6.1 Sol (xhigh) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| Claude Sonnet 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| GPT-6.1 Sol (max) | $5,386 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| GPT-6.1 Sol (high) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| GPT-6.1 Sol (medium) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
+| GPT-6.1 Sol (xhigh) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption:month cash | chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption |
+| Claude Sonnet 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-sonnet-5-5-common-opus55-assumption:month cash | claude-pro-claude-sonnet-5-5-common-opus55-assumption |
+| GPT-6.1 Sol (max) | $5,386 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | chatgpt-pro500-gpt61sol-semianalysis:month cash | chatgpt-pro500-gpt61sol-semianalysis |
+| GPT-6.1 Sol (high) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption:month cash | chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption |
+| GPT-6.1 Sol (medium) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption:month cash | chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption |
 | Claude Opus 5.5 (max) | $1,178 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | claude-pro-opus55-semianalysis:month cash | claude-pro-opus55-semianalysis |
-| GPT-6 Astra (max) | $162 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate) | the route's measurement workload | chatgpt-plus-common-semianalysis-assumption:month cash | chatgpt-plus-common-semianalysis-assumption |
-| GPT-5.6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| Claude Sonnet 5.5 (xhigh) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| GPT-6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| MiMo-V2.6-Pro | — | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-provisional-user-assumption:month cash | mimo-provisional-user-assumption |
+| GPT-6 Astra (max) | $2,897 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | chatgpt-pro200-gpt6astra-semianalysis:month cash | chatgpt-pro200-gpt6astra-semianalysis |
+| GPT-5.6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-5.6-sol-common-gpt-assumption:month cash | chatgpt-pro500-gpt-5.6-sol-common-gpt-assumption |
+| Claude Sonnet 5.5 (xhigh) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-sonnet-5-5-xhigh-common-opus55-assumption:month cash | claude-pro-claude-sonnet-5-5-xhigh-common-opus55-assumption |
+| GPT-6 Sol (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-6-sol-common-gpt-assumption:month cash | chatgpt-pro500-gpt-6-sol-common-gpt-assumption |
+| MiMo-V2.6-Pro | $118 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling:month cash | mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling |
 | Claude Fable 5.1 (max) | $1,273 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | claude-max5x-fable51-semianalysis:month cash | claude-max5x-fable51-semianalysis |
-| GPT-6.1 Sol (low) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| Claude Sonnet 5.5 (high) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| GPT-5.6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| GPT-6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-common-semianalysis-assumption:month cash | chatgpt-pro500-common-semianalysis-assumption |
-| Claude Haiku 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| Claude Haiku 5.5 (xhigh) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| Claude Sonnet 5.5 (medium) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| Claude Opus 5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| Claude Haiku 5.5 (high) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| Claude Haiku 5.5 (medium) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| Claude Haiku 5.5 (low) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
-| Claude Sonnet 5.5 (low) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-common-opus55-assumption:month cash | claude-pro-common-opus55-assumption |
+| GPT-6.1 Sol (low) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-6.1-sol-low-common-gpt-assumption:month cash | chatgpt-pro500-gpt-6.1-sol-low-common-gpt-assumption |
+| Claude Sonnet 5.5 (high) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-sonnet-5-5-high-common-opus55-assumption:month cash | claude-pro-claude-sonnet-5-5-high-common-opus55-assumption |
+| GPT-5.6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption:month cash | chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption |
+| GPT-6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-6-luna-common-gpt-assumption:month cash | chatgpt-pro500-gpt-6-luna-common-gpt-assumption |
+| Claude Haiku 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-haiku-5-5-max-common-opus55-assumption:month cash | claude-pro-claude-haiku-5-5-max-common-opus55-assumption |
+| Claude Haiku 5.5 (xhigh) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-haiku-5-5-common-opus55-assumption:month cash | claude-pro-claude-haiku-5-5-common-opus55-assumption |
+| Claude Sonnet 5.5 (medium) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-sonnet-5-5-medium-common-opus55-assumption:month cash | claude-pro-claude-sonnet-5-5-medium-common-opus55-assumption |
+| Claude Opus 5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-opus-5-common-opus55-assumption:month cash | claude-pro-claude-opus-5-common-opus55-assumption |
+| Claude Haiku 5.5 (high) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-haiku-5-5-high-common-opus55-assumption:month cash | claude-pro-claude-haiku-5-5-high-common-opus55-assumption |
+| Claude Haiku 5.5 (medium) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-haiku-5-5-medium-common-opus55-assumption:month cash | claude-pro-claude-haiku-5-5-medium-common-opus55-assumption |
+| Claude Haiku 5.5 (low) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-haiku-5-5-low-common-opus55-assumption:month cash | claude-pro-claude-haiku-5-5-low-common-opus55-assumption |
+| Claude Sonnet 5.5 (low) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-sonnet-5-5-low-common-opus55-assumption:month cash | claude-pro-claude-sonnet-5-5-low-common-opus55-assumption |
 
 ## Evidence bundle
 
-Bundle hash `49bedfdc847fdc2773d5b8417bbf4228a1ea752e45eb633484e7c136ee5ad410`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `634d0ccf66d118be9d426fd205623f1bd981f4de386f4894fc653145d41685fb`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -900,11 +986,11 @@ Bundle hash `49bedfdc847fdc2773d5b8417bbf4228a1ea752e45eb633484e7c136ee5ad410`: 
 | frontierCapture | `data/aa_frontier_capture.json` | `8426c98260619827f4b1fa8182f7a2aa1c83d003f5d92b6431a35e9ef0e89b30` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `cf8eaf85e125fa675e3b6928ceb924794ba6d1a2920152c5263474d1190e87a7` | — | editorial roster: AA frontier and near-frontier families plus every configuration with exact DeepSWE and Bug Hunt results (O31) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `d11b49c46c60f43909e2c8e02067a9bbfd17dd3b56d5210ff047316449ef1ebb` | 2026-10-21T06:30:00Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `6e72d796297481210442eeff95c15586d37b0b3c546c3e81cdd81313f139d1cf` | 2026-10-08 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `5e2ef011e5edf2e8d0172a5a841427debab9213d61f4bce6d77deb96a3737928` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `41e71ffea3a13f0cec1573493a8baf24b274d2de5290224d1107ee818c05cd95` | 2026-10-17T19:25:14Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `a506b8f343cda754575693e20a32fe69162282ba09cb05cb0bfec4a4f8d04cb5` | 2026-10-21 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| leafEvidence | `data/leaf_evidence.json` | `f4345babba84b849a17e0eacd22a929d165a5b5d66fa12bd4cf3997729875555` | 2026-10-21 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | — | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
-| anchors | `data/v3_frozen.json` | `0c3c398a871ea1dca2fef706e0e55cee7f0684cda3d0114700c008b43cf22030` | 2026-10-21 | valuerank.value_v3 freeze |
+| anchors | `data/v3_frozen.json` | `56b03d962800d90039a68783467249f130097b2eb86fd4f1cd36f4a8cdcafe08` | 2026-10-21 | valuerank.value_v3 freeze |
 
 
 ## AA intelligence and total-cost comparison

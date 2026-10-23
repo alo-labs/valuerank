@@ -36,14 +36,14 @@ function coverageCell(doc, model, expanded) {
     h(doc, 'span', { class: 'cov-pct', text: fmtPct(cov.pct) }),
   ];
   if (!cov.missing.length) return [h(doc, 'span', { class: 'cov' }, ...summary, h(doc, 'span', { class: 'cov-complete', text: 'Complete' }))];
-  const id = `cov-${model.slug}`;
-  const panel = h(doc, 'div', { id, class: 'cov-missing', hidden: !expanded.has(model.slug) }, `Missing: ${cov.missing.join(', ')}`);
+  const id = `cov-${rowKey(model)}`;
+  const panel = h(doc, 'div', { id, class: 'cov-missing', hidden: !expanded.has(rowKey(model)) }, `Missing: ${cov.missing.join(', ')}`);
   const button = h(doc, 'button', {
-    type: 'button', class: 'cov-toggle', 'aria-controls': id, 'aria-expanded': String(expanded.has(model.slug)),
+    type: 'button', class: 'cov-toggle', 'aria-controls': id, 'aria-expanded': String(expanded.has(rowKey(model))),
   }, `${cov.missing.length} missing`);
   button.addEventListener('click', () => {
-    const open = !expanded.has(model.slug);
-    if (open) expanded.add(model.slug); else expanded.delete(model.slug);
+    const open = !expanded.has(rowKey(model));
+    if (open) expanded.add(rowKey(model)); else expanded.delete(rowKey(model));
     button.setAttribute('aria-expanded', String(open));
     panel.hidden = !open;
   });
@@ -67,14 +67,14 @@ function tierBadge(doc, model) {
 // server-rendered fallback in templates/partials/table.html, and numbering follows the rows as currently shown.
 function noteRef(doc, model, n) {
   return h(doc, 'sup', { class: 'fn-ref' },
-    h(doc, 'a', { href: `#ev-${model.slug}`, id: `evref-${model.slug}`, 'aria-label': `Evidence note ${n} for ${model.name}`, text: String(n) }));
+    h(doc, 'a', { href: `#ev-${rowKey(model)}`, id: `evref-${rowKey(model)}`, 'aria-label': `Evidence note ${n} for ${model.name}`, text: String(n) }));
 }
 
 function noteItem(doc, model) {
   const description = gradeDescription(model.grade);
-  return h(doc, 'li', { id: `ev-${model.slug}`, class: 'fn-item' },
+  return h(doc, 'li', { id: `ev-${rowKey(model)}`, class: 'fn-item' },
     h(doc, 'span', { class: 'fn-label', text: model.name }), ' ',
-    h(doc, 'a', { class: 'fn-back', href: `#evref-${model.slug}`, 'aria-label': `Back to ${model.name} in the table`, text: '\u21A9\uFE0E' }),
+    h(doc, 'a', { class: 'fn-back', href: `#evref-${rowKey(model)}`, 'aria-label': `Back to ${model.name} in the table`, text: '\u21A9\uFE0E' }),
     h(doc, 'div', { class: 'fn-body' },
       h(doc, 'span', { class: `badge badge-${model.grade}`, title: description, text: gradeLabel(model.grade) }), ' ',
       h(doc, 'span', { class: 'fn-text', text: `Weakest grade of any value inside the score. ${description}` })));
@@ -89,7 +89,9 @@ function fillNotes(doc, list, models) {
 export function bandText(model, basis) {
   const band = model.band ? model.band[basis] : null;
   if (!band) return '—';
-  return band[0] === band[1] ? String(band[0]) : `${band[0]}–${band[1]}`;
+  const text = band[0] === band[1] ? String(band[0]) : `${band[0]}–${band[1]}`;
+  // I28: a Plan band on an owner-named transfer excludes the transfer's error.
+  return basis === 'plan' && model.bandExcludesTransfer ? `${text}†` : text;
 }
 
 function cellChildren(doc, key, model, ctx) {
@@ -99,7 +101,7 @@ function cellChildren(doc, key, model, ctx) {
       h(doc, 'span', { class: 'model-id' },
         h(doc, 'span', { class: 'fn-host' },
           h(doc, 'a', { href: `${ctx.modelBase}${model.slug}/`, class: 'model-name', text: model.name }),
-          noteRef(doc, model, ctx.notes.get(model.slug))),
+          noteRef(doc, model, ctx.notes.get(rowKey(model)))),
         h(doc, 'span', { class: 'model-dev', text: model.developer }),
         tierBadge(doc, model),
         model.rankingEligible ? null : h(doc, 'span', { class: 'tag', text: 'Not ranked' })),
@@ -124,8 +126,18 @@ function buildCell(doc, column, model, ctx) {
   return h(doc, 'td', attrs, ...cellChildren(doc, key, model, ctx));
 }
 
+/** O48: the Plan basis lists one row per configuration and plan; the API basis one row per configuration. */
+export function modelsFor(data, basis) {
+  return basis === 'plan' && data.planModels ? data.planModels : data.models;
+}
+
+/** A row's unique key: the plan row's key on the Plan basis, else the model slug. */
+export function rowKey(model) {
+  return model.key || model.slug;
+}
+
 function fillBody(doc, tbody, models, columns, baseCtx, comparable) {
-  const ctx = { ...baseCtx, notes: new Map(models.map((m, i) => [m.slug, i + 1])) };
+  const ctx = { ...baseCtx, notes: new Map(models.map((m, i) => [rowKey(m), i + 1])) };
   const rowNodes = models.map((m) => {
     const cells = columns.map((c) => buildCell(doc, c, m, ctx));
     if (comparable) {
@@ -135,7 +147,7 @@ function fillBody(doc, tbody, models, columns, baseCtx, comparable) {
       box.addEventListener('change', () => ctx.onCompare(m.slug, box));
       cells.unshift(h(doc, 'td', { 'data-col': 'compare' }, box));
     }
-    return h(doc, 'tr', { 'data-slug': m.slug, class: m.rankingEligible ? null : 'is-unranked' }, ...cells);
+    return h(doc, 'tr', { 'data-slug': m.slug, 'data-key': rowKey(m), class: m.rankingEligible ? null : 'is-unranked' }, ...cells);
   });
   tbody.replaceChildren(...rowNodes);
 }
@@ -272,7 +284,7 @@ export function initRankings(win) {
   }
 
   function render() {
-    scored = recompute(data.models, state.basis, state.w);
+    scored = recompute(modelsFor(data, state.basis), state.basis, state.w);
     // Selected columns feed the export; data-only ones (the evidence grade) are not drawn, they are footnoted.
     selected = catalog.filter((c) => c.key === 'name' || state.cols.includes(c.key));
     visible = selected.filter((c) => !c.dataOnly);
@@ -377,7 +389,7 @@ export function initIndex(win) {
   }
 
   function render() {
-    const scored = recompute(data.models, state.basis, state.w);
+    const scored = recompute(modelsFor(data, state.basis), state.basis, state.w);
     const top = scored.filter((m) => m.rank[state.basis] !== null).sort((a, b) => a.rank[state.basis] - b.rank[state.basis]).slice(0, INDEX_ROWS);
     fillBody(doc, tbody, top, columns, { ...ctx, basis: state.basis }, false);
     fillNotes(doc, $('index-evidence'), top);

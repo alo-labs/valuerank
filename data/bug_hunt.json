@@ -2,12 +2,12 @@
   "schemaVersion": "valuerank-bug-hunt-bench/v1",
   "benchmark": "Bug Hunt Bench",
   "benchmarkVersion": "105 planted bugs across two repositories; rolling public results snapshot",
-  "snapshotDate": "2026-10-17",
-  "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
+  "snapshotDate": "2026-10-19",
+  "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
   "sources": {
     "homepage": "https://bughunt.productcompass.pm/",
-    "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv",
-    "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md"
+    "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/combined-scoreboard.csv",
+    "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/run-notes.md"
   },
   "supplementalSourceCaptures": [
     {
@@ -118,6 +118,19 @@
       "captureMethod": "Built-in browser official all-runs leaderboard and benchmark-owner run notes",
       "note": "Selective MiMo addition; existing model records retain the original source snapshot and are not described as newly observed.",
       "supersededBy": "2026-10-18 full re-pin to commit aec976170df89a371384174ca87646a9a8c82415"
+    },
+    {
+      "modelIds": [
+        "deepseek-v4-1-flash-1017",
+        "minimax-m3-1-flash"
+      ],
+      "observedAt": "2026-10-23",
+      "siteUpdatedOn": "2026-10-19",
+      "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+      "leaderboard": "https://bughunt.productcompass.pm/",
+      "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/run-notes.md",
+      "captureMethod": "raw files from the benchmark owner's repository at the pinned commit (git clone over HTTPS), cross-checked against the owner's site data https://bughunt.productcompass.pm/data/benchmark.json (updated 2026-10-19)",
+      "note": "Refresh 2026-10-23 (owner decision O47): scoreboard re-pinned from aec9761 (2026-10-17) to 46802fc (2026-10-19). The ten added scoreboard rows are all DeepSeek V4.1 Flash 1017 (Claude Code mean of 7 at max; DeepSeek Harness, Pi and OpenCode rows at max, high and low); no existing row changed, so every earlier record was re-verified unchanged at the new commit. Records added for the two near-frontier families added to the roster on 2026-10-23. combined-scoreboard.csv sha256 1636e4e08269a5d9b57214438f030374fb2b127cfe88cbb100734ac0195f490b, run-notes.md sha256 f4d4078f288780d0dac38021a548e71f914ed056546873ca441c14cdf9bccce2."
     }
   ],
   "scoreUnit": "independently verified planted bugs fixed out of 105",
@@ -1280,6 +1293,101 @@
       "wallMinutes": 43.1,
       "listRateCostUsd": 18.6,
       "note": "Sequential repo runs; owner-published mean of three runs (27, 30 and 29 of 105), superseding the single sequential run (27). The owner's concurrent-legs Grok 4.6 (xhigh) row (27) is a separate single run. Effort verified active by an ACP readback before each launch. Cost is a reconstructed floor at xAI list rates, not a bill. The scoreboard row names the effort without the word 'effort'; O33's catalog-wide check reads it as xhigh. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+    },
+    {
+      "modelId": "deepseek-v4-1-flash-1017",
+      "matched": true,
+      "matchStatus": "matched",
+      "evaluatedModel": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7",
+      "fixedOf105": 42.7,
+      "sampleN": 7,
+      "aggregation": "mean",
+      "effort": "max",
+      "effortStatus": "top tier DeepSeek lists; read on the wire for 7,108 of 7,123 requests",
+      "harness": "DeepSeek Harness / DeepSeek API",
+      "harnessVersion": "dsh 0.2.1-rc.2",
+      "route": "DeepSeek API",
+      "sourceType": "benchmark_owner",
+      "observedAt": "2026-10-23",
+      "reportedOn": "2026-10-18",
+      "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/run-notes.md#user-content-deepseek-v41-flash-1017-max-effort-deepseek-harness---mean-of-7",
+      "runScores": [
+        42,
+        41,
+        47,
+        47,
+        40,
+        43,
+        39
+      ],
+      "observedRange": 8,
+      "judge": "Grok (grok-4.7)",
+      "wallMinutes": 62.1,
+      "costUsd": 1.84,
+      "costEvidenceType": "actual_bill",
+      "selectionReason": "Two owner-published means of seven runs exist at max effort: DeepSeek Harness 42.7 and Claude Code 39.1 (both featured on the owner's board). The DeepSeek Harness row is selected because it is DeepSeek's own agent, matching the benchmark's native-CLI method and the harness AA's Coding Agent Index v2.0 uses for this model; the Claude Code row is kept below as an unselected owner configuration. Editor's selection made at the 2026-10-23 refresh for owner review; the cross-harness diagnostic (E224) reports both.",
+      "note": "Owner-published mean of seven runs (42, 41, 47, 47, 40, 43 and 39 of 105) in DeepSeek Harness on DeepSeek's first-party API (model id deepseek-flash). The owner voided the first Harness run (it read the upstream git history outside its folder) and replaced it; every run carried the integrity warning; five runs were resumed in segments after a billing cutoff (active time only). Cost is the owner's actual bill at DeepSeek's off-peak rate. Identity: AA's DeepSeek V4.1 Flash 1017 (Max) is the same DeepSeek-V4.1-Flash-1017 snapshot; no value is transferred from DeepSeek V4.1 Flash or V4 Flash 0731.",
+      "availableOwnerConfigurations": [
+        {
+          "evaluatedModel": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 7",
+          "fixedOf105": 39.1,
+          "sampleN": 7,
+          "aggregation": "mean",
+          "effort": "max",
+          "route": "DeepSeek API",
+          "harness": "Claude Code / DeepSeek API",
+          "runDate": "2026-10-18",
+          "costUsd": 1.01,
+          "costEvidenceType": "actual_bill",
+          "selected": false,
+          "selectionReason": "Same sample size on a non-native harness (Claude Code); runs that read answers outside their folder were voided and 4 of 7 carried the integrity warning. Supersedes the owner's mean of 5 (39.4)."
+        },
+        {
+          "evaluatedModel": "DeepSeek V4.1 Flash 1017 (max effort, Pi) - mean of 5",
+          "fixedOf105": 42.2,
+          "sampleN": 5,
+          "aggregation": "mean",
+          "effort": "max",
+          "route": "DeepSeek API",
+          "harness": "Pi / DeepSeek API",
+          "runDate": "2026-10-18",
+          "costUsd": 0.83,
+          "selected": false,
+          "selectionReason": "Smaller sample on a third-party harness."
+        },
+        {
+          "evaluatedModel": "DeepSeek V4.1 Flash 1017 (max effort, OpenCode) - mean of 5",
+          "fixedOf105": 37.6,
+          "sampleN": 5,
+          "aggregation": "mean",
+          "effort": "max",
+          "route": "DeepSeek API",
+          "harness": "OpenCode / DeepSeek API",
+          "runDate": "2026-10-18",
+          "costUsd": 0.96,
+          "selected": false,
+          "selectionReason": "Smaller sample on a third-party harness; not featured by the owner."
+        }
+      ]
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "matched": false,
+      "matchStatus": "owner_result_missing",
+      "evaluatedModel": null,
+      "fixedOf105": null,
+      "sampleN": null,
+      "aggregation": null,
+      "effort": null,
+      "effortStatus": null,
+      "harness": null,
+      "route": null,
+      "sourceType": null,
+      "providerClaimFound": null,
+      "observedAt": "2026-10-23",
+      "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+      "note": "No Bug Hunt owner result for MiniMax-M3.1-Flash (or any MiniMax model) appears in the 202-row owner scoreboard at commit 46802fc (2026-10-19), in run-notes.md at that commit, or in the owner's site data (benchmark.json, updated 2026-10-19, 201 rows). No provider-claim or open-web search was made at this capture; the O36/O38 exhaustive search for this leaf is still to be logged."
     }
   ],
   "excludedResults": [

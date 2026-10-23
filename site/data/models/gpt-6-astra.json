@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 15,
-      "plan": 14
+      "plan": 29
     },
     "overall": {
       "api": 50.41247470632892,
-      "plan": 52.92104957627453
+      "plan": 54.37388619705818
     },
     "quality": 60.97105711308247,
     "qualityRank": 7,
@@ -230,15 +230,15 @@
   ],
   "cost": {
     "apiUsd": 6107.090015422354,
-    "planUsd": 753.9617302990561,
+    "planUsd": 421.6147749687507,
     "fallback": null,
     "route": {
-      "id": "chatgpt-plus-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-      "planFeeUsd": 20,
-      "valueMultiple": 8.1,
+      "id": "chatgpt-pro200-gpt6astra-semianalysis",
+      "planLabel": "ChatGPT Pro 200 $200 · GPT-6 Astra",
+      "planFeeUsd": 200,
+      "valueMultiple": 14.485,
       "grade": "measured",
-      "evidenceLabel": "Provisional assumption",
+      "evidenceLabel": "Controlled account measurement / workload projection",
       "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06"
@@ -252,7 +252,7 @@
     ],
     "costScore": {
       "api": 18.73672748606827,
-      "plan": 28.771026965850698
+      "plan": 34.582373448985294
     },
     "components": [
       {
@@ -337,20 +337,20 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "higher evidence grade",
+    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
     "planAmount": {
       "amountKind": "measured-workload capacity",
       "amountTarget": "measured-workload capacity",
-      "amountUsd": 162.0,
-      "derivation": "measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate)",
+      "amountUsd": 2897.0,
+      "derivation": "measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection)",
       "feePeriod": "month",
-      "subscriptionCashUsd": 20,
+      "subscriptionCashUsd": 200,
       "additionalCashUsd": 0.0,
-      "grossCashUsd": 20.0,
+      "grossCashUsd": 200.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "chatgpt-plus-common-semianalysis-assumption",
+      "measurementObjectId": "chatgpt-pro200-gpt6astra-semianalysis",
       "capacitySolutionId": null,
-      "cashObjectId": "chatgpt-plus-common-semianalysis-assumption:month cash",
+      "cashObjectId": "chatgpt-pro200-gpt6astra-semianalysis:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
@@ -360,64 +360,72 @@
   },
   "plans": [
     {
-      "id": "chatgpt-plus-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "id": "chatgpt-pro200-gpt6astra-semianalysis",
+      "planLabel": "ChatGPT Pro 200 $200 · GPT-6 Astra",
+      "planFeeUsd": 200,
+      "valueMultiple": 14.485,
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 421.6147749687507,
+      "selected": true,
+      "planRank": 29,
+      "planValue": 54.37388619705818
+    },
+    {
+      "id": "chatgpt-pro500-gpt6astra-semianalysis",
+      "planLabel": "ChatGPT Pro 500 $500 · GPT-6 Astra",
+      "planFeeUsd": 500,
+      "valueMultiple": 13.91,
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 439.043135544382,
+      "selected": false,
+      "planRank": 31,
+      "planValue": 54.27264215517534
+    },
+    {
+      "id": "chatgpt-pro100-gpt6astra-semianalysis",
+      "planLabel": "ChatGPT Pro 100 $100 · GPT-6 Astra",
+      "planFeeUsd": 100,
+      "valueMultiple": 13.22,
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 461.9583975357302,
+      "selected": false,
+      "planRank": 37,
+      "planValue": 54.14547437422992
+    },
+    {
+      "id": "chatgpt-plus-gpt6astra-semianalysis",
+      "planLabel": "ChatGPT Plus $20 · GPT-6 Astra",
       "planFeeUsd": 20,
       "valueMultiple": 8.1,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 753.9617302990561,
-      "selected": true
-    },
-    {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
-      "planFeeUsd": 500,
-      "valueMultiple": 10.772,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 566.9411451376117,
-      "selected": false
-    },
-    {
-      "id": "chatgpt-pro100-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $100 · common GPT assumption",
-      "planFeeUsd": 100,
-      "valueMultiple": 10.55,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 578.8710915092278,
-      "selected": false
-    },
-    {
-      "id": "chatgpt-pro200-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $200 · common GPT assumption",
-      "planFeeUsd": 200,
-      "valueMultiple": 10.42,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 586.0930916912048,
-      "selected": false
+      "selected": false,
+      "planRank": 47,
+      "planValue": 52.92104957627453
     }
   ],
   "scenarios": {
@@ -494,7 +502,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -503,7 +511,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.9951,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -512,7 +520,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -521,7 +529,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 0.0
       },
       {
@@ -529,8 +537,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0001,
-        "top3": 0.6718,
+        "top1": 0.0012,
+        "top3": 0.0018,
         "frontier": 0.0958
       }
     ]
@@ -636,7 +644,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 15,
-        "plan": 14
+        "plan": 29
       }
     }
   ],

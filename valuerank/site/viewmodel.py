@@ -20,7 +20,7 @@ Scoring rules (methodology v3; every number comes from the ``v3`` section of ``d
 * Value on a basis = ``COST_WEIGHT_PCT``% of the cost score + the rest of the quality score. The cost
   score is log-scaled against frozen anchors; cost is the SDLC basket (AA's published cost to run seven
   Intelligence Index SDLC evaluations and the Coding Agent Index once, USD per basket run), divided on
-  the Plan basis by the selected subscription route's Value Multiple. Quality is the weighted mean of
+  the Plan basis by a subscription route's Value Multiple (one row per configuration and plan). Quality is the weighted mean of
   eleven benchmark leaves on fixed 0-100 anchors over the leaves observed for the exact configuration.
 * A configuration without a cost score has no value score; ranks are competition ranks (ties share the
   better rank). The site's JavaScript recomputes the same rule when the cost weight moves.
@@ -60,7 +60,7 @@ BASES = {
         "label": "Plan ranking",
         "costLabel": "Plan cost",
         "costUnit": "USD per basket run",
-        "description": "The basket's API cost divided by the selected subscription route's Value Multiple at full utilisation; API cost when no route is admitted.",
+        "description": "The basket's API cost divided by a subscription route's Value Multiple at full utilisation, one row per configuration and plan (O48); API cost when no route is admitted.",
         "pickLabel": "Best on a subscription",
         "pickPhrase": "on a subscription",
     },
@@ -324,7 +324,8 @@ def _entry(source: dict, row: dict | None, quality_ranks: dict, frontier: dict, 
         "grade": "measured" if leaves else "missing",
         "pareto": {basis: model_id in pareto[basis] for basis in BASES},
         "frontierStatus": {"api": {"definite": api_frontier["definite"], "possible": api_frontier["possible"]} if api_frontier else None, "plan": None},
-        "scenario": {basis: shares[basis].get(model_id) for basis in ("api", "plan")},
+        # O48: the Plan shares are those of the configuration's own plan row (its selected route).
+        "scenario": {"api": shares["api"].get(model_id), "plan": shares["plan"].get(row.get("planRowId"))},
         "flags": _row_flags(row),
         "tier": _tier(row["planScore"]["costScore"]),
     }
@@ -353,9 +354,14 @@ def build_bundle(data: Path = DATA) -> Bundle:
     entries = {slugify(source["id"]): _entry(source, rows.get(source["id"]), quality_ranks, frontier, shares, routes, pareto) for source in roster}
     # O42: the band of rank positions each ranked row cannot be separated from under benchmark sampling noise.
     bands = {basis: v3["diagnostics"]["rankSeparability"][basis]["bands"] for basis in BASES}
+    transferred = set(v3["diagnostics"]["rankSeparability"]["planAssumedRouteRows"])
     for source in roster:
-        entries[slugify(source["id"])]["band"] = {basis: bands[basis].get(source["id"]) for basis in BASES}
+        plan_row = (rows.get(source["id"]) or {}).get("planRowId")
+        entries[slugify(source["id"])]["band"] = {"api": bands["api"].get(source["id"]), "plan": bands["plan"].get(plan_row)}
+        # I28: a Plan band on an owner-named transfer excludes the transfer's error.
+        entries[slugify(source["id"])]["bandExcludesTransfer"] = plan_row in transferred
     ordered = sorted(entries.values(), key=lambda entry: (entry["rank"]["plan"] is None, entry["rank"]["plan"] or 0, entry["name"]))
+    plan_models = _plan_models(v3, entries, routes, shares, bands, transferred)
     rankings = {
         "version": VERSION,
         "publishDate": DATE,
@@ -371,6 +377,7 @@ def build_bundle(data: Path = DATA) -> Bundle:
         "dimensions": dimensions(),
         "categories": CATEGORIES,
         "models": ordered,
+        "planModels": plan_models,
         "picks": {basis: build_picks(ordered, basis, BASES) for basis in BASES},
     }
     current = {
@@ -397,6 +404,33 @@ def build_bundle(data: Path = DATA) -> Bundle:
         for source in roster
     }
     return bundle
+
+
+def _plan_models(v3: dict, entries: dict, routes: dict, shares: dict, bands: dict, transferred: set) -> list[dict]:
+    """O48: the Plan-basis table, one entry per configuration and plan (``key`` is unique; ``slug`` still links the
+    model page), followed by the roster rows that have no ranked configuration."""
+
+    result = []
+    for item in v3["planRows"]:
+        entry = entries[slugify(item["configurationId"])]
+        result.append({
+            **entry,
+            "key": slugify(item["id"]),
+            "name": f"{entry['name']} · {item['plan'] or 'API-cost fallback'}",
+            "planRow": {"plan": item["plan"], "routeId": item["routeId"], "multiple": item["multiple"], "representative": item["representative"]},
+            "rank": {**entry["rank"], "plan": item["rank"]},
+            "overall": {**entry["overall"], "plan": item["value"]},
+            "costDims": {**entry["costDims"], "plan": item["costScore"]},
+            "cost": {**entry["cost"], "planUsd": item["costUsd"], "fallback": item["fallback"], "route": _route_view(routes.get(item["routeId"] or ""), item["grade"]),
+                     "planFlags": item["flags"]},
+            "band": {**entry["band"], "plan": bands["plan"].get(item["id"])},
+            "bandExcludesTransfer": item["id"] in transferred,
+            "scenario": {**entry["scenario"], "plan": shares["plan"].get(item["id"])},
+            "tier": _tier(item["costScore"]),
+        })
+    ranked = {item["configurationId"] for item in v3["planRows"]}
+    result += [entry for entry in entries.values() if entry["slug"] not in {slugify(row_id) for row_id in ranked}]
+    return sorted(result, key=lambda entry: (entry["rank"]["plan"] is None, entry["rank"]["plan"] or 0, entry["name"]))
 
 
 def _method_summary(v3: dict, names: dict) -> dict:
@@ -494,11 +528,13 @@ def _component_docs(row: dict | None) -> list[dict]:
     ]
 
 
-def _plan_rows(row: dict | None, routes: dict) -> list[dict]:
-    """Every route-measurement pair naming the model, classified (E106), with its cost on this model's basket."""
+def _plan_rows(row: dict | None, routes: dict, plan_rows: list | None = None) -> list[dict]:
+    """Every route-measurement pair naming the model, classified (E106), with its cost on this model's basket and, for
+    the route its plan row ranks on (O48), that row's Plan rank and value."""
 
     if row is None:
         return []
+    ranked = {item["routeId"]: item for item in plan_rows or [] if item["configurationId"] == row["id"] and item["routeId"]}
     selected = row["plan"].get("routeId")
     api = row["api"]["costUsd"]
     result = []
@@ -512,24 +548,28 @@ def _plan_rows(row: dict | None, routes: dict) -> list[dict]:
             "planIntervalEligible": item["planIntervalEligible"],
             "usdPerRun": api / multiple if api is not None and multiple > 0 else None,
             "selected": item["routeId"] == selected,
+            "planRank": (ranked.get(item["routeId"]) or {}).get("rank"),
+            "planValue": (ranked.get(item["routeId"]) or {}).get("value"),
         })
     result.sort(key=lambda plan: (not plan["selected"], plan["usdPerRun"] is None, plan["usdPerRun"] or 0, plan["id"]))
     return result
 
 
-def _scenario_doc(v3: dict, model_id: str) -> dict:
+def _scenario_doc(v3: dict, model_id: str, plan_row: str | None = None) -> dict:
     scenarios = v3.get("scenarios") or {}
     if scenarios.get("status") != "current":
         return {"status": scenarios.get("status"), "api": [], "plan": []}
     result = {"status": "current"}
     for basis in ("api", "plan"):
         result[basis] = []
+        # O48: the Plan streams rank plan rows; a model page shows its own plan row (its selected route).
+        key = plan_row if basis == "plan" else model_id
         for run in scenarios["results"][basis]:
             base = {"stratum": run["stratum"], "kernel": "endpoint-heavy" if run["alternative"] else "primary", "targetProfile": run.get("targetProfile")}
             # E167: a transfer-dependent row is declared unevaluable in the transfers-off Plan streams.
-            reason = next((item["reason"] for item in run.get("excluded", []) if item["row"] == model_id), None)
-            if model_id in run["rows"]:
-                result[basis].append({**base, "unevaluable": None, **{key: run["rows"][model_id][key]["share"] for key in ("top1", "top3", "frontier")}})
+            reason = next((item["reason"] for item in run.get("excluded", []) if item["row"] == key), None)
+            if key in run["rows"]:
+                result[basis].append({**base, "unevaluable": None, **{event: run["rows"][key][event]["share"] for event in ("top1", "top3", "frontier")}})
             elif reason:
                 result[basis].append({**base, "unevaluable": reason, "top1": None, "top3": None, "frontier": None})
     return result
@@ -567,8 +607,8 @@ def _model_doc(source: dict, entry: dict, row: dict | None, inputs: dict, curren
             "selectionReason": row["plan"]["selectionReason"] if row else None,
             "planAmount": row["plan"]["amount"] if row else None,
         },
-        "plans": _plan_rows(row, routes),
-        "scenarios": _scenario_doc(v3, model_id),
+        "plans": _plan_rows(row, routes, v3.get("planRows", [])),
+        "scenarios": _scenario_doc(v3, model_id, (row or {}).get("planRowId")),
         "intervals": {"api": entry["frontierStatus"]["api"], "plan": None},
         "history": model_history(inputs["history"], current, model_id),
         "frontier": {
@@ -900,7 +940,7 @@ def changelog_page(bundle: Bundle) -> dict:
 FAQ_TEMPLATE = (
     ("How is the value score calculated?", "Cost carries a fixed {cost:.0f}% of the value score and quality the rest. The cost score compares what each configuration costs to run the SDLC cost basket once, on a log scale against frozen anchors, so equal cost ratios count equally. Quality is the weighted mean of eleven benchmark leaves on fixed 0-100 anchors."),
     ("What happens when a benchmark has no result for a model?", "Only configurations with all eleven benchmark results are ranked, so every ranked model is scored on the same benchmarks. A result Artificial Analysis has not run comes from another party's run of the same benchmark on the exact configuration, then from the model provider's published result. A configuration still missing one after a logged exhaustive search is listed with the gap, not ranked. A configuration without a cost gets no value score."),
-    ("What is the difference between the API ranking and the Plan ranking?", "Both price the same SDLC basket. The API ranking uses Artificial Analysis' cost at API rates. The Plan ranking divides it by the selected subscription route's Value Multiple, the API-priced usage a plan delivers per dollar of fee at full utilisation; a model without an admitted route falls back to API cost, flagged."),
+    ("What is the difference between the API ranking and the Plan ranking?", "Both price the same SDLC basket. The API ranking uses Artificial Analysis' cost at API rates. The Plan ranking divides it by a subscription route's Value Multiple, the API-priced usage a plan delivers per dollar of fee at full utilisation, and lists one row per configuration and plan; a model without an admitted route falls back to API cost, flagged."),
     ("What do the evidence grades mean?", "Measured values come from the benchmark owner or a controlled account measurement. Estimates are concordant end-user reports, and assumptions are owner-authorised transfers of one model's measured multiple to another."),
     ("Why is a model not ranked?", "The ranked cohort is fixed policy: configurations on Artificial Analysis' Intelligence-versus-cost frontier or near it, and every configuration with exact DeepSWE and Bug Hunt results, each effort as its own row. A cohort configuration missing any of the eleven benchmarks after an exhaustive search is listed with the gap, not ranked. Other models still have pages with what we hold."),
 )

@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 20,
-      "plan": 21
+      "plan": 65
     },
     "overall": {
       "api": 49.18861232541037,
@@ -235,7 +235,7 @@
     "planUsd": 3.0788872443607778,
     "fallback": null,
     "route": {
-      "id": "claude-pro-common-opus55-assumption",
+      "id": "claude-pro-claude-haiku-5-5-high-common-opus55-assumption",
       "planLabel": "Claude Pro $20 · common Claude assumption",
       "planFeeUsd": 20,
       "valueMultiple": 58.9,
@@ -335,9 +335,9 @@
       "additionalCashUsd": 0.0,
       "grossCashUsd": 20.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "claude-pro-common-opus55-assumption",
+      "measurementObjectId": "claude-pro-claude-haiku-5-5-high-common-opus55-assumption",
       "capacitySolutionId": null,
-      "cashObjectId": "claude-pro-common-opus55-assumption:month cash",
+      "cashObjectId": "claude-pro-claude-haiku-5-5-high-common-opus55-assumption:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
@@ -347,7 +347,7 @@
   },
   "plans": [
     {
-      "id": "claude-pro-common-opus55-assumption",
+      "id": "claude-pro-claude-haiku-5-5-high-common-opus55-assumption",
       "planLabel": "Claude Pro $20 · common Claude assumption",
       "planFeeUsd": 20,
       "valueMultiple": 58.9,
@@ -359,10 +359,12 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 3.0788872443607778,
-      "selected": true
+      "selected": true,
+      "planRank": 65,
+      "planValue": 51.54717520038593
     },
     {
-      "id": "claude-max20x-common-opus55-assumption",
+      "id": "claude-max20x-claude-haiku-5-5-high-common-opus55-assumption",
       "planLabel": "Claude Max 20x $200 · common Claude assumption",
       "planFeeUsd": 200,
       "valueMultiple": 58.63,
@@ -374,10 +376,12 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 3.0930659848686646,
-      "selected": false
+      "selected": false,
+      "planRank": 66,
+      "planValue": 51.53569102221523
     },
     {
-      "id": "claude-max5x-common-opus55-assumption",
+      "id": "claude-max5x-claude-haiku-5-5-high-common-opus55-assumption",
       "planLabel": "Claude Max 5x $100 · common Claude assumption",
       "planFeeUsd": 100,
       "valueMultiple": 57.25,
@@ -389,7 +393,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 3.1676237326261973,
-      "selected": false
+      "selected": false,
+      "planRank": 68,
+      "planValue": 51.47615562417556
     }
   ],
   "scenarios": {
@@ -520,7 +526,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 20,
-        "plan": 21
+        "plan": 65
       }
     }
   ],

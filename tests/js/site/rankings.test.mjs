@@ -572,3 +572,16 @@ test('noise band column prints the rank range a row cannot be told apart from (O
   assert.equal(columnValue(model, 'band', 'plan'), 4);
   assert.equal(columnValue({}, 'band', 'plan'), null);
 });
+
+test('a Plan band on an owner-named transfer is marked (I28) and the Plan basis lists plan rows (O48)', async () => {
+  const { bandText, modelsFor, rowKey } = await import('../../../valuerank/site/assets/js/rankings.js');
+  const model = { band: { plan: [2, 5], api: [1, 1] }, bandExcludesTransfer: true };
+  assert.equal(bandText(model, 'plan'), '2–5†');
+  assert.equal(bandText(model, 'api'), '1');
+  const data = { models: [{ slug: 'a' }], planModels: [{ slug: 'a', key: 'a@pro' }, { slug: 'a', key: 'a@max' }] };
+  assert.equal(modelsFor(data, 'plan'), data.planModels);
+  assert.equal(modelsFor(data, 'api'), data.models);
+  assert.equal(modelsFor({ models: data.models }, 'plan'), data.models);
+  assert.equal(rowKey(data.planModels[1]), 'a@max');
+  assert.equal(rowKey(data.models[0]), 'a');
+});

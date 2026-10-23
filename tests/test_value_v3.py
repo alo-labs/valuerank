@@ -124,7 +124,8 @@ def searched(*model_ids) -> dict:
     """O36: an exhaustive search logged for every leaf of the given fixture rows, so incomplete rows are listed, not errors."""
 
     base = documents()["leafEvidence"]
-    return {**base, "searches": [{"modelId": model_id, "leaf": leaf.key, "searchedOn": DAY.isoformat()} for model_id in model_ids for leaf in q.LEAVES]}
+    return {**base, "searches": [{"modelId": model_id, "leaf": leaf.key, "searchedOn": DAY.isoformat(),
+                                  "openWeb": {"queries": [f"{model_id} {leaf.key}"], "candidates": []}} for model_id in model_ids for leaf in q.LEAVES]}
 
 
 def assembled(**overrides):
@@ -261,7 +262,8 @@ def test_score_ranks_gates_disclosures_and_intervals():
     assert rows["c"]["quality"]["status"] == "scored" and rows["a"]["plan"]["selectionReason"] == "only remaining eligible route"
     assert rows["a"]["aaCostCaveat"].startswith("A has higher pricing") and rows["b"]["aaCostCaveat"] is None
     assert output["gates"]["hold"] is False and output["intervals"]["api"]["status"] == "evaluated"
-    assert output["intervals"]["plan"]["universe"] == ["b"]
+    # O48: the Plan basis ranks plan rows, "<configuration>@<plan>".
+    assert output["intervals"]["plan"]["universe"] == ["b@plan-b"]
     assert output["costInfluence"]["api"]["commonWorkload"]["panel"] == ["a", "b"]
     manifest = {item["rule"]: item["status"] for item in output["manifest"]}
     assert manifest["subset scoring (O17)"] == "fired" and manifest["Plan exploratory label (E61)"] == "fired"
@@ -991,16 +993,16 @@ def test_core_plan_streams_run_with_transfers_off():
     result, frozen = scored(planRoutes=routes)
     rows = {row["id"]: row for row in result["rows"]}
     assert v.transfer_dependent(rows["a"]) and not v.transfer_dependent(rows["b"]) and not v.transfer_dependent(rows["c"])
-    assert [item.row for item in v.scenario_panel(result, "plan")] == ["a", "b"]
-    assert [item.row for item in v.scenario_panel(result, "plan", transfers=False)] == ["b"]
+    assert [item.row for item in v.scenario_panel(result, "plan")] == ["a@plan-a", "b@plan-b"]
+    assert [item.row for item in v.scenario_panel(result, "plan", transfers=False)] == ["b@plan-b"]
     assert [item.row for item in v.scenario_panel(result, "api", transfers=False)] == [item.row for item in v.scenario_panel(result, "api")]
     assert v.transfers_on("S0") and not any(v.transfers_on(stratum) for stratum in ("S1", "S2", "S1M"))
     document = v.run_scenarios(result, frozen, n=50, seed=3)
     runs = {(run["stratum"], run["alternative"]): run for run in document["results"]["plan"]}
-    assert runs[("S0", False)]["transfers"] == "on (the displayed record)" and runs[("S0", False)]["excluded"] == [] and "a" in runs[("S0", False)]["rows"]
+    assert runs[("S0", False)]["transfers"] == "on (the displayed record)" and runs[("S0", False)]["excluded"] == [] and "a@plan-a" in runs[("S0", False)]["rows"]
     for key in (("S1", False), ("S2", False), ("S1", True), ("S1M", False)):
-        assert runs[key]["transfers"] == "off" and runs[key]["excluded"] == [{"row": "a", "reason": v.TRANSFER_EXCLUSION}]
-        assert list(runs[key]["rows"]) == ["b"]
+        assert runs[key]["transfers"] == "off" and runs[key]["excluded"] == [{"row": "a@plan-a", "reason": v.TRANSFER_EXCLUSION}]
+        assert list(runs[key]["rows"]) == ["b@plan-b"]
     assert all("transfers" not in run and "excluded" not in run for run in document["results"]["api"])
     assert document["inputHash"] != v.run_scenarios(*scored(), n=50, seed=3)["inputHash"]
 
@@ -1583,6 +1585,28 @@ def test_incomplete_configurations_are_listed_not_ranked_and_need_a_logged_searc
         v.check_leaf_searches([{"id": "x", "missing": ["deepswe"]}], {}, DAY)
 
 
+def test_listed_frontier_family_search_needs_a_resolved_open_web_step():
+    """I28: a frontier family's search logs open-web queries; each candidate is registered or rejected with a reason."""
+
+    row = [{"id": "x", "missing": ["frontierCode"]}]
+    registry = {"frontierCode": ["Artificial Analysis", "Cognition"]}
+    search = {"modelId": "x", "leaf": "frontierCode", "searchedOn": "2026-10-19"}
+
+    def check(open_web):
+        documents = {"leafEvidence": {"searches": [dict(search, openWeb=open_web)], "sourceRegistry": registry}}
+        v.check_leaf_searches(row, documents, DAY, frozenset({"x"}))
+
+    v.check_leaf_searches(row, {"leafEvidence": {"searches": [search]}}, DAY)  # not a frontier family: no step needed
+    check({"queries": ["x frontiercode"], "candidates": [{"url": "u", "resolution": "reject", "reason": "different effort"},
+                                                           {"url": "w", "publisher": "Cognition", "resolution": "register", "reason": "added 2026-10-19"}]})
+    with pytest.raises(ValueError, match=r"x: the frontierCode search logs no open-web discovery step \(I28\)"):
+        check(None)
+    with pytest.raises(ValueError, match=r"candidate u for frontierCode is unresolved"):
+        check({"queries": ["q"], "candidates": [{"url": "u", "resolution": "reject"}]})
+    with pytest.raises(ValueError, match=r"candidate u for frontierCode awaits its registry addition"):
+        check({"queries": ["q"], "candidates": [{"url": "u", "publisher": "Blog", "resolution": "register", "reason": "same version"}]})
+
+
 def test_sampling_noise_per_leaf_and_rank_separability():
     """O39: plug-in binomial noise from each leaf's task count, GDPval-AA from its assumed rating interval, Omniscience
     from its +1/0/-1 question shares; the separability diagnostic counts adjacent ranks apart by more than that noise."""
@@ -1591,7 +1615,10 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     assert v.sampling_sd("gdpval", q.Observation(55.0), {}) == pytest.approx(26.0 / 1.96 / 20.0)
     ternary = v.sampling_sd("omniscience", q.Observation(60.0), {"accuracy": 0.5, "hallucinationRate": 0.4})
     assert ternary == pytest.approx(100 * ((0.5 + 0.2 - 0.3 ** 2) / 6000) ** 0.5 / 2)
-    assert v.sampling_sd("omniscience", q.Observation(60.0), {}) == pytest.approx(100 * (0.24 / 6000) ** 0.5)
+    jeffreys = 3600.5 / 6001
+    assert v.sampling_sd("omniscience", q.Observation(60.0), {}) == pytest.approx(100 * (jeffreys * (1 - jeffreys) / 6000) ** 0.5)
+    # I28: a 0% or 100% score keeps a positive spread under the (k + 1/2) / (n + 1) proportion.
+    assert v.sampling_sd("critpt", q.Observation(0.0), {}) == pytest.approx(100 * ((0.5 / 71) * (70.5 / 71) / 70) ** 0.5)
     result, frozen = scored()
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
@@ -1646,3 +1673,49 @@ def test_noise_margin_companion_and_quality_margin():
     entry = v.displayed_cheapest(result, frozen, "api", margin)["bars"][0]
     assert entry["margin"]["level"] == pytest.approx(entry["level"] + margin)
     assert "margin" not in v.displayed_cheapest(result, frozen, "api")["bars"][0]
+
+
+def test_plan_rows_rank_every_plan_and_share_their_configuration():
+    """O48: one Plan row per configuration and plan, the comparator choosing within a plan; rows of one configuration
+    share quality and API cost, every scenario draw and a band, and the configuration keeps its selected route's row."""
+
+    routes = documents()["planRoutes"]
+    routes["routes"][0]["plan"] = "Plan One"
+    routes["routes"].append({"id": "plan-a2", "plan": "Plan Two", "valueMultiple": 4.0, "valueMultipleKind": "controlled_account_workload_projection",
+                             "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10", "allocationRegime": "single-model allocation"})
+    result, frozen = scored(planRoutes=routes)
+    variants = {row["id"]: row for row in v.plan_variants(result)["rows"]}
+    assert set(variants) == {"a@plan-one", "a@plan-two", "b@plan-b", "c@api"}
+    assert variants["a@plan-one"]["representative"] and not variants["a@plan-two"]["representative"]
+    assert variants["c@api"]["representative"] and variants["c@api"]["plan"]["fallback"] in (None, "api")
+    assert variants["a@plan-two"]["plan"]["costUsd"] == pytest.approx(variants["a@plan-one"]["plan"]["costUsd"] * 10.0 / 4.0)
+    output = v.score(result, frozen)
+    plan_rows = {row["id"]: row for row in output["planRows"]}
+    rows = {row["id"]: row for row in output["rows"]}
+    assert rows["a"]["planRowId"] == "a@plan-one" and rows["a"]["planScore"]["rank"] == plan_rows["a@plan-one"]["rank"]
+    assert plan_rows["a@plan-one"]["value"] > plan_rows["a@plan-two"]["value"] and plan_rows["a@plan-two"]["plan"] == "Plan Two"
+    assert output["planRowRule"] == v.PLAN_ROW_RULE
+    # One configuration's plan rows share every draw: the cost ratio between them holds in each scenario.
+    panel = v.scenario_panel(result, "plan")
+    assert {item.meta["group"] for item in panel if item.row.startswith("a@")} == {"a"}
+    import random
+    scenario = scenarios.draw_scenario(panel, "S1", random.Random(5))
+    (cost_one, quality_one), (cost_two, quality_two) = scenario["a@plan-one"], scenario["a@plan-two"]
+    assert quality_one == quality_two and cost_two == pytest.approx(cost_one * 10.0 / 4.0)
+    # Bands: a row of the band's first configuration on another plan stays in its band.
+    sd = {"a": 1.0, "b": 1.0}
+    of = {"a@1": "a", "a@2": "a", "b@1": "b"}
+    assert v.rank_bands([(60.0, "a@1"), (50.0, "a@2"), (59.0, "b@1")], sd, of) == {"a@1": [1, 3], "a@2": [1, 3], "b@1": [1, 3]}
+    assert v.rank_bands([(60.0, "a@1"), (50.0, "b@1")], sd, of) == {"a@1": [1, 1], "b@1": [2, 2]}
+    separability = output["diagnostics"]["rankSeparability"]["plan"]
+    assert set(separability["bands"]) <= set(plan_rows)
+
+
+def test_costed_bar_ladder_drops_rows_without_a_cost():
+    """I28: the ladder over scored rows alone, beside the frozen ladder that keeps costless full-benchmark rows."""
+
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    ladder = output["diagnostics"]["costedBarLadder"]
+    costless = sorted(row["id"] for row in output["rows"] if row["api"]["value"] is None)
+    assert ladder["excluded"] == costless and ladder["population"] == len(output["rows"]) - len(costless)

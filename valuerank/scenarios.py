@@ -295,8 +295,14 @@ def draw_scenario(rows: list[RowInputs], stratum: str, rng: random.Random, *, al
     if stratum not in STRATA:
         raise ValueError(f"unknown stratum: {stratum}")
     weights = hierarchical_weights(rng) if stratum == "S2" else nominal_weights()
-    scenario = {}
+    scenario, shared = {}, {}
     for row in rows:
+        group = row.meta.get("group")
+        if group is not None and group in shared:
+            # O48: plan rows of one configuration share its quality and API-cost draws; only the plan's multiple differs.
+            quality, base = shared[group]
+            scenario[row.row] = (base * row.meta["costRatio"], quality)
+            continue
         heavy = alternative if alternative_rows is None else row.row in alternative_rows
         values = {key: kernel.draw(rng, use_alternative=heavy) for key, kernel in row.leaves.items()}
         if stratum == "S0":
@@ -309,7 +315,10 @@ def draw_scenario(rows: list[RowInputs], stratum: str, rng: random.Random, *, al
                     low, high = (ranges or {}).get(leaf.key, (0.0, 100.0))
                     values[leaf.key] = Kernel("uniform", (low, high), "endpoint-heavy", IDENTIFICATION_CONVENTION).draw(rng, use_alternative=heavy)
             quality = sum(weights[key] * values[key] for key in weights) / 100.0
-        scenario[row.row] = (row.cost.draw(rng, use_alternative=heavy), quality)
+        cost = row.cost.draw(rng, use_alternative=heavy)
+        scenario[row.row] = (cost, quality)
+        if group is not None:
+            shared[group] = (quality, cost / row.meta["costRatio"])
     return scenario
 
 

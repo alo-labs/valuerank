@@ -378,6 +378,16 @@ def policy_bar_text(policy, facts):
     return head + f"{text}; cheapest at or above it on the API main workload: {answer} ({result['comparison']})."
 
 
+def costed_ladder_text(diagnostic, facts):
+    """I28: the ladder over scored rows alone, beside the frozen ladder whose population keeps costless rows by choice."""
+
+    head = "- **Ladder over scored rows (I28, sensitivity; the frozen ladder stays primary):** the bar population keeps full-benchmark rows that have no cost"
+    if not diagnostic["excluded"]:
+        return head + "; today every such row has a cost, so the ladder is unchanged."
+    ladder = " / ".join(f"{level:.1f}" for level in diagnostic["levels"]) or "unavailable"
+    return head + f" ({facts.labels(diagnostic['excluded'])}); without them ({diagnostic['population']} rows) the ladder (headline, lower quartile, upper quartile) would be {ladder}."
+
+
 def family_primary_text(diagnostic, facts):
     """E205: the ladder and anchors with one row per family, beside the frozen ones (a diagnostic)."""
 
@@ -558,6 +568,42 @@ def leaders(facts):
     return "; ".join(parts) + f"; {quality['name']} leads on quality."
 
 
+def plan_rows_table(facts):
+    """O48: the Plan ranking itself, one row per configuration and plan."""
+
+    result = facts.v3["diagnostics"]["rankSeparability"]["plan"]["bands"]
+    transferred = set(facts.v3["diagnostics"]["rankSeparability"]["planAssumedRouteRows"])
+    rows = []
+    for item in sorted(facts.v3["planRows"], key=lambda item: (item["rank"] is None, item["rank"] or 0, item["id"])):
+        if item["rank"] is None:
+            continue
+        band = result.get(item["id"])
+        band_label = DASH if band is None else (f"{band[0]}" if band[0] == band[1] else f"{band[0]}–{band[1]}") + ("†" if item["id"] in transferred else "")
+        rows.append([rank_text(item["rank"]), facts.label(item["configurationId"]), item["plan"] or "API-cost fallback (no admitted plan)",
+                     DASH if item["multiple"] is None else f"{item['multiple']:g}×", usd(item["costUsd"]), fnum(item["value"], 1), fnum(item["quality"], 1),
+                     item["grade"] or "fallback", band_label])
+    return ("\n\n### Plan ranking: every plan (O48)\n\n" + PLAN_ROW_TEXT + "\n\n"
+            + markdown_table(["Plan rank", "Configuration", "Plan", "Value Multiple", "Plan cost (USD per basket run)", "Plan value", "Quality", "Route evidence", "Noise band"],
+                             rows, numeric={0, 3, 4, 5, 6}))
+
+
+PLAN_ROW_TEXT = ("The Plan ranking has one row per configuration and subscription plan (owner decision O48): each plan on which the configuration "
+                 "has an admitted route, with that plan's route chosen by the official comparator; a configuration with no admitted route keeps one "
+                 "API-cost row. Rows of one configuration share its quality and API cost and differ only by the plan's Value Multiple. The table above "
+                 "shows each configuration's own plan row (its selected route).")
+
+
+def open_web_text(step):
+    """E240: a search's open-web discovery step, as queries, candidates and their resolutions."""
+
+    if not step:
+        return DASH
+    candidates = step.get("candidates", [])
+    registered = sum(1 for item in candidates if item["resolution"] == "register")
+    return (f"{step.get('searchedOn', '')}: {len(step['queries'])} queries, {len(candidates)} candidates "
+            f"({registered} registered, {len(candidates) - registered} rejected)")
+
+
 def readme(facts):
     v3, method = facts.v3, facts.method
     admitted = [item["label"] for item in method["basket"]["admitted"]]
@@ -596,13 +642,13 @@ def readme(facts):
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, and every ranked configuration has all {len(q.LEAVES)} for its exact configuration (O36): a leaf AA has not run comes from another party's run of the same benchmark, then from the model provider's published result, and a configuration still missing one after a logged exhaustive search is listed, not ranked. The Plan ranking divides the basket's API cost by the selected subscription route's Value Multiple at full utilisation, and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates, scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} benchmark leaves on fixed 0–100 anchors, and every ranked configuration has all {len(q.LEAVES)} for its exact configuration (O36): a leaf AA has not run comes from another party's run of the same benchmark, then from the model provider's published result, and a configuration still missing one after a logged exhaustive search is listed, not ranked. The Plan ranking divides the basket's API cost by a subscription route's Value Multiple at full utilisation, with one row per configuration and plan (O48), and uses the API cost, flagged, when no route is admitted.{exploratory}
 
 {leaders(facts)}
 
 {markdown_table(['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API value', 'Quality', 'Quality coverage', 'API cost (USD per basket run)', 'Plan cost (USD per basket run)', 'Plan route', 'Flags', 'Noise band (Plan / API)'], table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
 
-Values are rounded for display; ranks are competition ranks (equal values share the better rank).{separability_text(facts)}
+Values are rounded for display; ranks are competition ranks (equal values share the better rank). The Plan rank is that of the configuration's own plan row (its selected route) in the Plan ranking of every plan below.{separability_text(facts)}{plan_rows_table(facts)}
 
 {legend}
 
@@ -771,13 +817,13 @@ Quality is the weighted mean of the leaves observed for the exact configuration,
 
 {markdown_table(['Leaf', 'Group', 'Weight in quality', 'Weight in value', 'Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
 
-Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within {LEAF_SEARCH_DAYS} days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
+Only configurations with every leaf are ranked (O36). A leaf is taken, in order, from AA (or the benchmark's own primary source), from a newer AA capture, from another party that ran the same benchmark version on the exact configuration (Cognition for FrontierCode, tbench.ai for Terminal-Bench), then from the model provider's published result. A row with a provider-claimed leaf competes in the interval outputs but earns no label of its own (E233). A configuration still missing a leaf after an exhaustive search logged within {LEAF_SEARCH_DAYS} days of the cutoff is listed with its missing leaves and search, not ranked; a required frontier family is listed the same way (O38). For a listed frontier or near-frontier family the search also logs an open-web discovery step: its queries and every candidate result, each resolved by a dated registry addition or a dated rejection with its reason, and the build fails on an unresolved candidate (E240). Every gap fill and search is in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 
 Coverage is the observed share of quality weight. A row is **provisional** when coverage is below {q.MIN_COVERAGE:.0%}, fewer than {q.MIN_SWE_LEAVES} software-engineering leaves are observed, observed software-engineering weight is below {q.MIN_SWE_WEIGHT:.0%}, or a leaf weighing {q.REQUIRED_LEAF_WEIGHT:.0f}% or more of quality (DeepSWE) is missing. Provisional rows are ranked and flagged; there is no quality floor (O8). Missing leaves are never filled; the interval outputs treat each one as anywhere in 0–100.
 
 ## Plan basis
 
-Plan cost = basket API cost ÷ the Value Multiple of the selected subscription route, at full utilisation. A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged. Each Plan row publishes its fee period, the cash paid and the selected multiple's amount (multiple × gross cash), typed by what the measurement establishes (E166): measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer (with its donor), or identified target-workload capacity; API-fallback rows publish none.
+Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full utilisation. **The Plan ranking has one row per configuration and plan (owner decision O48)**: every plan on which the configuration has an eligible route, each plan's route chosen by the comparator below among that plan's candidates; rows of one configuration share its quality and API cost and differ only by the plan's multiple, share every scenario draw, and are told apart by any value gap; a configuration's own Plan figures (the main table, model pages, and the Plan diagnostics that rebuild anchors or move evidence) are those of its selected route's plan row. Every route record names one model and one plan (O45). A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model, **reports** (at least two independent, comparable end-user reports concordant within 20%), owner-named **assumptions** (a measured multiple transferred to another model, labelled), and **diagnostic** evidence, which is shown but never ranked. Two owner-authorised classes sit beside them: GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figure on every ChatGPT plan (a figure that names a model without an effort binds to its unsuffixed, max row), and every other GPT row takes the lower of the two figures per plan as a labelled assumption (O45); each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling — the tier's monthly credits valued at Xiaomi's API rate for that model over the list fee — labelled provider-derived and not a measurement (O46), because Xiaomi prices credits at parity with its API and no end-user measurement of a V2.6 billing period exists. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged. Each Plan row publishes its fee period, the cash paid and the selected multiple's amount (multiple × gross cash), typed by what the measurement establishes (E166): measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer (with its donor), or identified target-workload capacity; API-fallback rows publish none.
 
 **Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today {yield_['pointIdentified']} of {yield_['rows']} Plan rows are point-identified and {yield_['setIdentified']} set-identified, so the Plan ranking is {'labelled exploratory' if yield_['exploratory'] else 'not labelled exploratory'}. A measured-only Plan view (`{measured['id']}`) re-runs the selection over {measured['admission']}, without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
@@ -796,7 +842,7 @@ Plan cost = basket API cost ÷ the Value Multiple of the selected subscription r
 
 {streams}
 
-S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39)** redraws every leaf with plug-in binomial noise from its published task count (DeepSWE 113, FrontierCode 100, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs, AA-Omniscience's 6,000 questions scored +1/0/−1), with GDPval-AA drawn from its displayed rating interval read as a 95% normal interval (an assumption). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. From the same noise the ranking prints a **noise band** beside each rank (O42): rows in value order join the current band while their value is not separable from the band's first row (1.96 × √(SD_i² + SD_j²), with analytic quality-leaf SDs; cost is not drawn), otherwise they start a new one, so every row is inseparable from its band's first row and adjacent rows in different bands may also be inseparable. Shared tasks correlate two rows' errors and narrow the true threshold (separable adjacent ranks at correlations 0.3 and 0.6 are published), while omitted sources widen it (run-to-run and harness variance, AA's single cost run, owner-named transfer error on the Plan basis); the net direction is not established. Each bar also has a **noise-margin companion** (O44): the cheapest configuration whose displayed quality clears the bar by at least the quality noise margin, 1.96 × √2 × the median row's quality SD. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
+S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39)** redraws every leaf with plug-in binomial noise from its published task count (the proportion taken as (k + ½)/(n + 1), so a 0% or 100% score keeps a positive spread) (DeepSWE 113, FrontierCode 100, Terminal-Bench 66, AutomationBench-AA 657, AA-LCR 100, SciCode 288, HLE 2,158, CritPt 70, Bug Hunt's 105 bugs, AA-Omniscience's 6,000 questions scored +1/0/−1), with GDPval-AA drawn from its displayed rating interval read as a 95% normal interval (an assumption). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. From the same noise the ranking prints a **noise band** beside each rank (O42): rows in value order join the current band while their value is not separable from the band's first row (1.96 × √(SD_i² + SD_j²), with analytic quality-leaf SDs; cost is not drawn), otherwise they start a new one, so every row is inseparable from its band's first row and adjacent rows in different bands may also be inseparable. Shared tasks correlate two rows' errors and narrow the true threshold (separable adjacent ranks at correlations 0.3 and 0.6 are published), while omitted sources widen it (run-to-run and harness variance, AA's single cost run, owner-named transfer error on the Plan basis); the net direction is not established. Each bar also has a **noise-margin companion** (O44): the cheapest configuration whose displayed quality clears the bar by at least the quality noise margin, 1.96 × √2 × the median row's quality SD. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner-named transfers off (E167): a row whose selected route is a transfer is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. {interval_notes}A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
 
 {not_quantified}
 
@@ -1109,10 +1155,14 @@ def band_text(facts, row_id):
     """O42: the row's band of ranks it cannot be separated from under benchmark sampling noise, Plan then API."""
 
     result = facts.v3["diagnostics"]["rankSeparability"]
+    # O48: a configuration's Plan band is that of its own plan row (its selected route); a plan row ID is used as is.
+    plan_row = next((row.get("planRowId") for row in facts.v3["rows"] if row["id"] == row_id), row_id)
     parts = []
     for basis in ("plan", "api"):
-        band = result[basis]["bands"].get(row_id)
-        parts.append(DASH if band is None else (f"{band[0]}" if band[0] == band[1] else f"{band[0]}–{band[1]}"))
+        key = plan_row if basis == "plan" else row_id
+        band = result[basis]["bands"].get(key)
+        mark = "†" if basis == "plan" and band is not None and key in result["planAssumedRouteRows"] else ""
+        parts.append(DASH if band is None else (f"{band[0]}" if band[0] == band[1] else f"{band[0]}–{band[1]}") + mark)
     return " / ".join(parts)
 
 
@@ -1141,7 +1191,9 @@ def separability_text(facts):
             f"{plan['adjacentPairs']} adjacent Plan ranks do. Its net direction is not established: every configuration is scored on the same tasks, which "
             f"correlates their errors and narrows the true threshold (API {grid(api)}; Plan {grid(plan)}), while sources it leaves out widen it (run-to-run and "
             f"harness variance, AA's single cost run and, for the {len(result['planAssumedRouteRows'])} Plan rows on owner-named transfers, the transfer's error). "
-            "The noise band column groups each row with the band's first row it cannot be told apart from (O42); the S1T scenario shares in [scores.md](scores.md) "
+            "The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner-named "
+            f"transfer and excludes its error: a transferred multiple can be wrong by a factor of about {plan['costTolerance']:.1f} before the row's value moves by the "
+            "median threshold (a tolerance, not an estimate of the transfer's error). The S1T scenario shares in [scores.md](scores.md) "
             "show each row's rank-1 and top-3 frequencies under that noise.")
 
 
@@ -1210,6 +1262,7 @@ def cost_diagnostics_markdown(facts):
         lines.append(f"- **Frontier-families anchors (E187, diagnostic):** {frontier['status']}.")
     lines.append(policy_bar_text(frontier["bar"], facts))
     lines.append(family_primary_text(diagnostics["familyPrimary"], facts))
+    lines.append(costed_ladder_text(diagnostics["costedBarLadder"], facts))
     lines.append(bar_currency_text(facts.v3["barCurrency"]))
     lines.append(mix_check_text(facts.v3["rows"]))
     lines.append(observed_range_text(facts.v3["observedRangeBars"], facts))
@@ -1343,7 +1396,8 @@ def raw_data(facts):
         for item in facts.leaf_evidence["supplements"] if item["modelId"] in ranked_ids
     ]
     search_rows = [
-        [facts.names.get(item["modelId"], item["modelId"]), LEAF_LABELS[item["leaf"]], item["searchedOn"], item["result"], len(item.get("sources") or []), item.get("notes") or DASH]
+        [facts.names.get(item["modelId"], item["modelId"]), LEAF_LABELS[item["leaf"]], item["searchedOn"], item["result"], len(item.get("sources") or []),
+         open_web_text(item.get("openWeb")), item.get("notes") or DASH]
         for item in facts.leaf_evidence["searches"]
     ]
     bundle = v3["evidenceBundle"]
@@ -1368,7 +1422,7 @@ Leaves a ranked configuration takes from beyond its primary source, in the order
 
 Exhaustive searches for the leaves a cohort configuration still lacks (each within {LEAF_SEARCH_DAYS} days of the cutoff; the configuration is listed, not ranked). The sources searched are in [data/leaf_evidence.json](data/leaf_evidence.json).
 
-{markdown_table(['Configuration', 'Leaf', 'Searched', 'Result', 'Sources checked', 'Notes'], search_rows, numeric={4})}
+{markdown_table(['Configuration', 'Leaf', 'Searched', 'Result', 'Sources checked', 'Open-web discovery (E240)', 'Notes'], search_rows, numeric={4})}
 
 ## Basket cost components
 

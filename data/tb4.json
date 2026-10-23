@@ -1,21 +1,21 @@
 {
   "schemaVersion": "valuerank-terminal-bench-v1",
   "version": "4.0",
-  "observedAt": "2026-10-17T19:25:15Z",
+  "observedAt": "2026-10-23T05:35:48Z",
   "source": {
     "publisher": "Terminal-Bench / Harbor",
     "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
     "renderedUrl": "https://www.tbench.ai/",
     "homepage": "https://www.tbench.ai/",
     "tasksUrl": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks",
-    "captureSha256": "0333da6cf85bfaca737b08c53fb3bf3207affeae43e69b4a4ee2a38583f17581",
+    "captureSha256": "e824ab89ed8a4173e5002af2d442e17703e5e065ec883d810358b068ebf0317d",
     "capturePath": "data/tb4-scrape.json",
     "captureMethod": "rendered leaderboard snapshot",
-    "capturedAt": "2026-10-17T19:17:55.033Z"
+    "capturedAt": "2026-10-23T05:35:48.623Z"
   },
   "rowN": 23,
   "rowsWithoutCostN": 1,
-  "cohortN": 49,
+  "cohortN": 51,
   "matchedN": 13,
   "missingModels": [
     "Kimi K3",
@@ -53,7 +53,9 @@
     "Claude Sonnet 5.5 (high)",
     "Claude Sonnet 5.5 (medium)",
     "Claude Sonnet 5.5 (low)",
-    "Grok 4.6 (xhigh)"
+    "Grok 4.6 (xhigh)",
+    "DeepSeek V4.1 Flash 1017",
+    "MiniMax-M3.1-Flash"
   ],
   "rankingAvailableN": 14,
   "rankingMissingModels": [
@@ -91,7 +93,9 @@
     "Claude Sonnet 5.5 (high)",
     "Claude Sonnet 5.5 (medium)",
     "Claude Sonnet 5.5 (low)",
-    "Grok 4.6 (xhigh)"
+    "Grok 4.6 (xhigh)",
+    "DeepSeek V4.1 Flash 1017",
+    "MiniMax-M3.1-Flash"
   ],
   "providerClaimN": 1,
   "providerClaims": [
@@ -282,7 +286,7 @@
       "uncertaintyPct": 3.5,
       "releaseDate": "Aug 26, 2026",
       "tokens": "2.9B",
-      "costUsd": 2900.0,
+      "costUsd": 100.0,
       "cohortModelId": null
     },
     {

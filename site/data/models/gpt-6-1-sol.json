@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 5,
-      "plan": 7
+      "plan": 20
     },
     "overall": {
       "api": 56.733170269823354,
@@ -233,12 +233,12 @@
     "planUsd": 117.68127216138434,
     "fallback": null,
     "route": {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "id": "chatgpt-pro500-gpt61sol-semianalysis",
+      "planLabel": "ChatGPT Pro 500 $500 · GPT-6.1 Sol",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "measured",
-      "evidenceLabel": "Provisional assumption",
+      "evidenceLabel": "Controlled account measurement / workload projection",
       "sourceModel": "GPT-6.1 Sol",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06"
@@ -334,15 +334,15 @@
       "amountKind": "measured-workload capacity",
       "amountTarget": "measured-workload capacity",
       "amountUsd": 5386.0,
-      "derivation": "measurement record: its recorded numerator U_obs = M_obs x F_obs (applied estimate)",
+      "derivation": "measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection)",
       "feePeriod": "month",
       "subscriptionCashUsd": 500,
       "additionalCashUsd": 0.0,
       "grossCashUsd": 500.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "chatgpt-pro500-common-semianalysis-assumption",
+      "measurementObjectId": "chatgpt-pro500-gpt61sol-semianalysis",
       "capacitySolutionId": null,
-      "cashObjectId": "chatgpt-pro500-common-semianalysis-assumption:month cash",
+      "cashObjectId": "chatgpt-pro500-gpt61sol-semianalysis:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
@@ -352,64 +352,72 @@
   },
   "plans": [
     {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "id": "chatgpt-pro500-gpt61sol-semianalysis",
+      "planLabel": "ChatGPT Pro 500 $500 · GPT-6.1 Sol",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 117.68127216138434,
-      "selected": true
+      "selected": true,
+      "planRank": 20,
+      "planValue": 57.6702193441556
     },
     {
-      "id": "chatgpt-pro100-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $100 · common GPT assumption",
-      "planFeeUsd": 100,
+      "id": "chatgpt-plus-gpt61sol-semianalysis",
+      "planLabel": "ChatGPT Plus $20 · GPT-6.1 Sol",
+      "planFeeUsd": 20,
       "valueMultiple": 10.55,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 120.15759845710257,
-      "selected": false
+      "selected": false,
+      "planRank": 21,
+      "planValue": 57.61816884973862
     },
     {
-      "id": "chatgpt-pro200-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $200 · common GPT assumption",
+      "id": "chatgpt-pro100-gpt61sol-semianalysis",
+      "planLabel": "ChatGPT Pro 100 $100 · GPT-6.1 Sol",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 120.15759845710257,
+      "selected": false,
+      "planRank": 21,
+      "planValue": 57.61816884973862
+    },
+    {
+      "id": "chatgpt-pro200-gpt61sol-semianalysis",
+      "planLabel": "ChatGPT Pro 200 $200 · GPT-6.1 Sol",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement / workload projection",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 121.65668557796855,
-      "selected": false
-    },
-    {
-      "id": "chatgpt-plus-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-      "planFeeUsd": 20,
-      "valueMultiple": 8.1,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 156.5015634225225,
-      "selected": false
+      "selected": false,
+      "planRank": 25,
+      "planValue": 57.58717791930179
     }
   ],
   "scenarios": {
@@ -465,9 +473,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0432,
-        "top3": 0.3431,
-        "frontier": 0.3784
+        "top1": 0.0433,
+        "top3": 0.3433,
+        "frontier": 0.3782
       }
     ],
     "plan": [
@@ -486,7 +494,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 1.0
       },
       {
@@ -495,7 +503,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0003,
-        "top3": 1.0,
+        "top3": 0.0005,
         "frontier": 1.0
       },
       {
@@ -504,7 +512,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 1.0
       },
       {
@@ -513,7 +521,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 1.0,
+        "top3": 0.0,
         "frontier": 1.0
       },
       {
@@ -521,8 +529,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2811,
-        "top3": 1.0,
+        "top1": 0.2807,
+        "top3": 0.2947,
         "frontier": 1.0
       }
     ]
@@ -572,7 +580,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 5,
-        "plan": 7
+        "plan": 20
       }
     }
   ],

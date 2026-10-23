@@ -9,36 +9,36 @@ Value = 25% × cost score + 75% × quality. Costs are USD per basket run; the co
 | Configuration | Plan rank | Plan value | Plan cost score | API rank | API value | API cost score | Quality | Quality coverage | Workload |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 1 | 59.46 | 44.32 | 13 | 51.37 | 11.96 | 64.50 | 100% | main |
-| [GPT-6.1 Sol (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-xhigh/) | 2 | 59.08 | 51.61 | 1 | 58.76 | 50.34 | 61.57 | 100% | main |
-| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 3 | 58.68 | 43.69 | 14 | 50.49 | 10.96 | 63.67 | 100% | main |
-| [Claude Sonnet 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-xhigh/) | 4 | 58.64 | 56.28 | 11 | 52.29 | 30.86 | 59.43 | 100% | main |
-| [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 5 | 57.99 | 53.27 | 4 | 57.91 | 52.97 | 59.56 | 100% | main |
-| [GPT-6.1 Sol (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-medium/) | 6 | 57.91 | 56.03 | 2 | 58.23 | 57.33 | 58.54 | 100% | main |
-| [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 7 | 57.67 | 47.34 | 5 | 56.73 | 43.59 | 61.11 | 100% | main |
-| [Claude Sonnet 5.5 (high)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-high/) | 8 | 57.60 | 64.48 | 10 | 52.44 | 43.84 | 55.31 | 100% | main |
-| [GPT-6.1 Sol (low)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-low/) | 9 | 54.29 | 59.51 | 7 | 55.12 | 62.84 | 52.55 | 100% | main |
-| [Claude Sonnet 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-medium/) | 10 | 54.23 | 69.82 | 18 | 49.85 | 52.28 | 49.03 | 100% | main |
-| [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 11 | 53.32 | 42.79 | 12 | 51.72 | 36.39 | 56.83 | 100% | main |
-| [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 12 | 53.22 | 45.03 | 29 | 45.23 | 13.08 | 55.95 | 100% | main |
-| [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 13 | 52.99 | 69.89 | 6 | 55.33 | 79.25 | 47.36 | 100% | main |
-| [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 14 | 52.92 | 28.77 | 15 | 50.41 | 18.74 | 60.97 | 100% | main |
-| [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 15 | 52.87 | 35.27 | 16 | 50.18 | 24.51 | 58.74 | 100% | main |
-| [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 16 | 52.56 | 79.00 | 19 | 49.51 | 66.80 | 43.75 | 100% | main |
-| [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 17 | 52.20 | 43.46 | 3 | 57.93 | 66.40 | 55.11 | 100% | subset |
-| [Claude Sonnet 5.5 (low)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-low/) | 18 | 51.64 | 72.17 | 23 | 47.59 | 56.00 | 44.79 | 100% | main |
-| [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 19 | 51.62 | 13.06 | 8 | 55.10 | 26.97 | 64.47 | 100% | main |
-| [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 20 | 51.60 | 61.13 | 9 | 52.67 | 65.39 | 48.42 | 100% | main |
-| [Claude Haiku 5.5 (high)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-high/) | 21 | 51.55 | 83.77 | 20 | 49.19 | 74.33 | 40.81 | 100% | main |
-| [Claude Fable 5.1 (max)](https://valuerank.alolabs.dev/models/claude-fable-5-1/) | 22 | 51.47 | 26.89 | 24 | 46.90 | 8.62 | 59.66 | 100% | main |
-| [Claude Haiku 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-medium/) | 23 | 50.87 | 88.36 | 21 | 49.17 | 81.60 | 38.37 | 100% | main |
-| [Claude Haiku 5.5 (max)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-max/) | 24 | 49.80 | 66.97 | 30 | 45.00 | 47.77 | 44.08 | 100% | main |
-| [Claude Haiku 5.5 (low)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-low/) | 25 | 49.11 | 93.07 | 22 | 48.10 | 89.04 | 34.45 | 100% | main |
-| [Muse Spark 1.3 (max)](https://valuerank.alolabs.dev/models/muse-spark-1-3/) | 26 | 46.15 | 15.78 | 17 | 50.02 | 31.26 | 56.27 | 100% | main |
-| [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 27 | 43.37 | 6.93 | 28 | 45.96 | 17.27 | 55.52 | 100% | main |
-| [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 28 | 42.67 | 14.36 | 27 | 46.34 | 29.02 | 52.11 | 100% | main |
-| [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 29 | 42.41 | 18.66 | 25 | 46.70 | 35.81 | 50.32 | 100% | main |
-| [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 30 | 41.01 | 28.16 | 26 | 46.68 | 50.84 | 45.29 | 100% | main |
-| [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 31 | 38.94 | 9.06 | 31 | 41.83 | 20.63 | 48.90 | 100% | main |
+| [GPT-6.1 Sol (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-xhigh/) | 4 | 59.08 | 51.61 | 1 | 58.76 | 50.34 | 61.57 | 100% | main |
+| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 7 | 58.68 | 43.69 | 14 | 50.49 | 10.96 | 63.67 | 100% | main |
+| [Claude Sonnet 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-xhigh/) | 9 | 58.64 | 56.28 | 11 | 52.29 | 30.86 | 59.43 | 100% | main |
+| [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 14 | 57.99 | 53.27 | 4 | 57.91 | 52.97 | 59.56 | 100% | main |
+| [GPT-6.1 Sol (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-medium/) | 16 | 57.91 | 56.03 | 2 | 58.23 | 57.33 | 58.54 | 100% | main |
+| [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 20 | 57.67 | 47.34 | 5 | 56.73 | 43.59 | 61.11 | 100% | main |
+| [Claude Sonnet 5.5 (high)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-high/) | 23 | 57.60 | 64.48 | 10 | 52.44 | 43.84 | 55.31 | 100% | main |
+| [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 29 | 54.37 | 34.58 | 15 | 50.41 | 18.74 | 60.97 | 100% | main |
+| [GPT-6.1 Sol (low)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-low/) | 30 | 54.29 | 59.51 | 7 | 55.12 | 62.84 | 52.55 | 100% | main |
+| [Claude Sonnet 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-medium/) | 33 | 54.23 | 69.82 | 18 | 49.85 | 52.28 | 49.03 | 100% | main |
+| [GPT-6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-sol/) | 39 | 53.32 | 42.79 | 12 | 51.72 | 36.39 | 56.83 | 100% | main |
+| [Claude Opus 5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5/) | 42 | 53.22 | 45.03 | 29 | 45.23 | 13.08 | 55.95 | 100% | main |
+| [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 45 | 52.99 | 69.89 | 6 | 55.33 | 79.25 | 47.36 | 100% | main |
+| [GPT-5.6 Sol (max)](https://valuerank.alolabs.dev/models/gpt-5-6-sol/) | 49 | 52.87 | 35.27 | 16 | 50.18 | 24.51 | 58.74 | 100% | main |
+| [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 53 | 52.56 | 79.00 | 19 | 49.51 | 66.80 | 43.75 | 100% | main |
+| [Claude Sonnet 5.5 (low)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5-low/) | 58 | 51.64 | 72.17 | 23 | 47.59 | 56.00 | 44.79 | 100% | main |
+| [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 59 | 51.63 | 41.18 | 3 | 57.93 | 66.40 | 55.11 | 100% | subset |
+| [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 61 | 51.62 | 13.06 | 8 | 55.10 | 26.97 | 64.47 | 100% | main |
+| [GPT-5.6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-5-6-luna/) | 62 | 51.60 | 61.13 | 9 | 52.67 | 65.39 | 48.42 | 100% | main |
+| [Claude Haiku 5.5 (high)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-high/) | 65 | 51.55 | 83.77 | 20 | 49.19 | 74.33 | 40.81 | 100% | main |
+| [Claude Fable 5.1 (max)](https://valuerank.alolabs.dev/models/claude-fable-5-1/) | 69 | 51.47 | 26.89 | 24 | 46.90 | 8.62 | 59.66 | 100% | main |
+| [Claude Haiku 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-medium/) | 75 | 50.87 | 88.36 | 21 | 49.17 | 81.60 | 38.37 | 100% | main |
+| [Claude Haiku 5.5 (max)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-max/) | 78 | 49.80 | 66.97 | 30 | 45.00 | 47.77 | 44.08 | 100% | main |
+| [Claude Haiku 5.5 (low)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-low/) | 81 | 49.11 | 93.07 | 22 | 48.10 | 89.04 | 34.45 | 100% | main |
+| [Muse Spark 1.3 (max)](https://valuerank.alolabs.dev/models/muse-spark-1-3/) | 84 | 46.15 | 15.78 | 17 | 50.02 | 31.26 | 56.27 | 100% | main |
+| [Grok 4.7 (xhigh)](https://valuerank.alolabs.dev/models/grok-4-7/) | 85 | 43.37 | 6.93 | 28 | 45.96 | 17.27 | 55.52 | 100% | main |
+| [GLM-5.3 (max)](https://valuerank.alolabs.dev/models/glm-5-3/) | 86 | 42.67 | 14.36 | 27 | 46.34 | 29.02 | 52.11 | 100% | main |
+| [Gemini 3.8 Flash (high)](https://valuerank.alolabs.dev/models/gemini-3-8-flash/) | 87 | 42.41 | 18.66 | 25 | 46.70 | 35.81 | 50.32 | 100% | main |
+| [DeepSeek V4 Pro (max)](https://valuerank.alolabs.dev/models/deepseek-v4-pro/) | 88 | 41.01 | 28.16 | 26 | 46.68 | 50.84 | 45.29 | 100% | main |
+| [Qwen3.8 Max](https://valuerank.alolabs.dev/models/qwen3-8-max/) | 89 | 38.94 | 9.06 | 31 | 41.83 | 20.63 | 48.90 | 100% | main |
 | [Muse Wonder Full (max)](https://valuerank.alolabs.dev/models/muse-wonder-full/) | — | — | — | — | — | — | 64.39 | 100% | — |
 
 ## Not ranked
@@ -77,16 +77,16 @@ Each leaf's score z on its fixed 0–100 anchors; "—" marks a leaf with no eli
 | GPT-6.1 Sol (medium) | 72.0 | 27.6 | 50.2 | 48.0 | 47.5 | 62.6 | 70.0 | 83.3 | 49.9 | 53.2 | 27.7 | 58.54 | no |
 | GPT-6.1 Sol (max) | 69.6 | 42.2 | 49.1 | 56.1 | 54.7 | 64.9 | 70.8 | 83.0 | 52.9 | 54.2 | 31.7 | 61.11 | no |
 | Claude Sonnet 5.5 (high) | 66.7 | 32.7 | 44.3 | 43.9 | 52.5 | 59.4 | 60.5 | 78.0 | 45.8 | 53.7 | 24.6 | 55.31 | no |
+| GPT-6 Astra (max) | 67.6 | 42.9 | 47.0 | 59.1 | 53.6 | 68.5 | 71.7 | 80.7 | 54.7 | 56.5 | 31.7 | 60.97 | no |
 | GPT-6.1 Sol (low) | 67.6 | 21.4 | 45.5 | 30.8 | 40.7 | 52.6 | 68.8 | 84.0 | 47.4 | 53.2 | 24.9 | 52.55 | no |
 | Claude Sonnet 5.5 (medium) | 65.5 | 22.2 | 29.3 | 29.8 | 41.2 | 54.9 | 60.0 | 76.3 | 39.8 | 52.9 | 16.9 | 49.03 | no |
 | GPT-6 Sol (max) | 69.0 | 27.9 | 49.3 | 43.9 | 50.4 | 61.6 | 63.6 | 83.7 | 47.9 | 57.6 | 30.9 | 56.83 | no |
 | Claude Opus 5 (max) | 62.5 | 25.7 | 48.0 | 49.0 | 61.1 | 56.6 | 68.5 | 79.3 | 54.9 | 56.4 | 29.1 | 55.95 | no |
 | GPT-6 Luna (max) | 63.7 | 17.4 | 41.9 | 12.6 | 46.6 | 53.2 | 50.3 | 83.3 | 38.5 | 54.6 | 19.4 | 47.36 | no |
-| GPT-6 Astra (max) | 67.6 | 42.9 | 47.0 | 59.1 | 53.6 | 68.5 | 71.7 | 80.7 | 54.7 | 56.5 | 31.7 | 60.97 | no |
 | GPT-5.6 Sol (max) | 72.3 | 41.4 | 47.5 | 39.9 | 55.4 | 60.1 | 61.0 | 84.0 | 49.5 | 57.1 | 32.3 | 58.74 | no |
 | Claude Haiku 5.5 (xhigh) | 49.0 | 17.4 | 45.5 | 29.3 | 50.7 | 36.0 | 53.0 | 78.3 | 42.7 | 51.7 | 22.6 | 43.75 | no |
-| MiMo-V2.6-Pro | 71.9 | 17.1 | 45.4 | 34.8 | 59.2 | 58.6 | 54.2 | 86.3 | 49.4 | 60.9 | 26.6 | 55.11 | no |
 | Claude Sonnet 5.5 (low) | 61.9 | 18.1 | 26.4 | 20.7 | 33.8 | 49.4 | 59.7 | 76.0 | 36.2 | 49.1 | 11.4 | 44.79 | no |
+| MiMo-V2.6-Pro | 71.9 | 17.1 | 45.4 | 34.8 | 59.2 | 58.6 | 54.2 | 86.3 | 49.4 | 60.9 | 26.6 | 55.11 | no |
 | Gemini 4 Argon (high) | 78.8 | 38.8 | 43.5 | 57.1 | 56.2 | 77.5 | 71.2 | 79.7 | 57.1 | 61.8 | 27.1 | 64.47 | no |
 | GPT-5.6 Luna (max) | 66.4 | 29.8 | 39.8 | 11.6 | 48.0 | 50.2 | 44.9 | 83.7 | 39.5 | 53.6 | 20.6 | 48.42 | no |
 | Claude Haiku 5.5 (high) | 46.3 | 15.2 | 43.6 | 21.7 | 45.9 | 33.7 | 52.9 | 77.3 | 37.3 | 48.7 | 18.6 | 40.81 | no |
@@ -116,16 +116,16 @@ USD at API rates for the exact configuration; "—" marks a component without an
 | GPT-6.1 Sol (medium) | $213.52 | — | — | $42.26 | $50.86 | $33.75 | $128.97 | $40.51 | $2.68 | $19.02 | $531.56 | none |
 | GPT-6.1 Sol (max) | $470.90 | $81.00 | — | $210.45 | $196.57 | $41.99 | $195.01 | $120.30 | $12.50 | $19.94 | $1,267.66 | none |
 | Claude Sonnet 5.5 (high) | $374.36 | — | — | $297.64 | $151.47 | $40.86 | $205.39 | $144.29 | $4.61 | $29.39 | $1,248.00 | none |
+| GPT-6 Astra (max) | $2,262.53 | $422.00 | $133.00 | $864.69 | $996.49 | $207.58 | $1,048.30 | $560.88 | $66.89 | $99.73 | $6,107.09 | none |
 | GPT-6.1 Sol (low) | $151.14 | — | — | $16.12 | $23.10 | $33.41 | $104.75 | $25.27 | $2.43 | $18.99 | $375.21 | none |
 | Claude Sonnet 5.5 (medium) | $187.48 | — | — | $126.68 | $69.91 | $38.14 | $172.20 | $104.16 | $3.90 | $29.16 | $731.63 | none |
 | GPT-6 Sol (max) | $905.89 | — | $38.00 | $238.81 | $280.84 | $42.54 | $235.06 | $264.22 | $12.24 | $19.82 | $1,999.41 | none |
 | Claude Opus 5 (max) | $3,269.11 | — | — | $1,619.19 | $1,488.52 | $108.57 | $864.64 | $1,273.08 | $33.90 | $76.11 | $8,733.13 | none |
 | GPT-6 Luna (max) | $53.30 | $9.00 | — | $15.47 | $19.66 | $2.85 | $23.91 | $15.59 | $1.06 | $1.02 | $132.87 | none |
-| GPT-6 Astra (max) | $2,262.53 | $422.00 | $133.00 | $864.69 | $996.49 | $207.58 | $1,048.30 | $560.88 | $66.89 | $99.73 | $6,107.09 | none |
 | GPT-5.6 Sol (max) | $1,925.06 | — | $106.00 | $365.84 | $618.22 | $92.85 | $638.90 | $534.15 | $22.95 | $40.16 | $4,238.14 | none |
 | Claude Haiku 5.5 (xhigh) | $184.98 | $16.00 | — | $33.29 | $20.26 | $2.73 | $18.14 | $30.38 | $0.77 | $1.53 | $292.07 | none |
-| MiMo-V2.6-Pro | — | $18.00 | — | $34.60 | $35.47 | $2.40 | $27.77 | $28.91 | $2.25 | $4.74 | $136.13 | Coding Agent Index |
 | Claude Sonnet 5.5 (low) | $146.38 | — | — | $73.03 | $45.90 | $37.23 | $158.19 | $84.80 | $3.73 | $29.14 | $578.39 | none |
+| MiMo-V2.6-Pro | — | $18.00 | — | $34.60 | $35.47 | $2.40 | $27.77 | $28.91 | $2.25 | $4.74 | $136.13 | Coding Agent Index |
 | Gemini 4 Argon (high) | $1,770.70 | $670.00 | — | $530.33 | $400.23 | $25.93 | $399.89 | $447.49 | $30.44 | $23.64 | $3,628.64 | none |
 | GPT-5.6 Luna (max) | $132.72 | — | — | $35.95 | $24.18 | $5.68 | $59.91 | $56.06 | $2.67 | $2.09 | $319.25 | none |
 | Claude Haiku 5.5 (high) | $110.50 | — | — | $20.29 | $9.59 | $2.26 | $14.91 | $21.88 | $0.43 | $1.50 | $181.35 | none |
@@ -152,25 +152,25 @@ The Plan amount is the selected multiple times the cash paid for the fee period 
 | Configuration | Selected route | Plan amount | Basket runs per fee period | Identification | Plan cost (USD per basket run) | Flags | Selection reason |
 |---|---|---|---|---|---:|---|---|
 | Claude Sonnet 5.5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 0.13 per month | unidentified | $159.15 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6.1 Sol (xhigh) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 6.51 per month | unidentified | $76.79 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6.1 Sol (xhigh) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 6.51 per month | unidentified | $76.79 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Opus 5.5 (max) | Claude Pro $20 · Opus 5.5 (58.9×, measured) | $1,178 per month: measured-workload capacity | 0.12 per month | unidentified | $169.60 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Sonnet 5.5 (xhigh) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 0.42 per month | unidentified | $48.15 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6.1 Sol (high) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 7.69 per month | unidentified | $65.03 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6.1 Sol (medium) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 10.13 per month | unidentified | $49.35 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6.1 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, measured) | $5,386 per month: measured-workload capacity | 4.25 per month | unidentified | $117.68 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6.1 Sol (high) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 7.69 per month | unidentified | $65.03 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6.1 Sol (medium) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 10.13 per month | unidentified | $49.35 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6.1 Sol (max) | ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured) | $5,386 per month: measured-workload capacity | 4.25 per month | unidentified | $117.68 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Sonnet 5.5 (high) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 0.94 per month | unidentified | $21.19 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6.1 Sol (low) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 14.35 per month | unidentified | $34.83 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Astra (max) | ChatGPT Pro 200 $200 · GPT-6 Astra (14.485×, measured) | $2,897 per month: measured-workload capacity | 0.47 per month | unidentified | $421.61 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6.1 Sol (low) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 14.35 per month | unidentified | $34.83 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Sonnet 5.5 (medium) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 1.61 per month | unidentified | $12.42 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 2.69 per month | unidentified | $185.61 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Sol (max) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 2.69 per month | unidentified | $185.61 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Opus 5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 0.13 per month | unidentified | $148.27 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 40.54 per month | unidentified | $12.33 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| GPT-6 Astra (max) | ChatGPT Plus $20 · common GPT assumption (8.1×, measured) | $162 per month: measured-workload capacity | 0.03 per month | unidentified | $753.96 | workload-unmatched; valuation basis unverified | higher evidence grade |
-| GPT-5.6 Sol (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 1.27 per month | unidentified | $393.44 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-6 Luna (max) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 40.54 per month | unidentified | $12.33 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-5.6 Sol (max) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 1.27 per month | unidentified | $393.44 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Haiku 5.5 (xhigh) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 4.03 per month | unidentified | $4.96 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| MiMo-V2.6-Pro | MiMo · provisional 1.5x assumption (1.5×, assumption) | fee not established: assumed API-equivalent consumption (owner-named transfer) | — | unidentified | $90.75 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | only remaining eligible route |
 | Claude Sonnet 5.5 (low) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 2.04 per month | unidentified | $9.82 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| MiMo-V2.6-Pro | MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption) | $118 per month: assumed API-equivalent consumption (owner-named transfer) | 0.87 per month | unidentified | $115.28 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified; observed-usage multiple; full utilisation not established | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Gemini 4 Argon (high) | — | — | — | — | $3,628.64 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| GPT-5.6 Luna (max) | ChatGPT Pro $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) | 16.87 per month | unidentified | $29.64 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
+| GPT-5.6 Luna (max) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 16.87 per month | unidentified | $29.64 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Haiku 5.5 (high) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 6.50 per month | unidentified | $3.08 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Fable 5.1 (max) | Claude Max $100 · Fable 5.1 (12.73×, measured) | $1,273 per month: measured-workload capacity | 0.11 per month | unidentified | $909.71 | workload-unmatched; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | Claude Haiku 5.5 (medium) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 10.29 per month | unidentified | $1.94 | workload-unmatched; owner-named transfer (assumption); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
@@ -190,30 +190,30 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 
 | Configuration | Admissible pairs | Unidentified | Pairs (multiple, status) | Leave-selected-out choice |
 |---|---:|---:|---|---|
-| Claude Sonnet 5.5 (max) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 59.45) |
-| GPT-6.1 Sol (xhigh) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 59.03) |
+| Claude Sonnet 5.5 (max) | 3 | 3 | claude-pro-claude-sonnet-5-5-common-opus55-assumption (58.9×, selected); claude-max20x-claude-sonnet-5-5-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-sonnet-5-5-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-sonnet-5-5-common-opus55-assumption (58.63×, value 59.45) |
+| GPT-6.1 Sol (xhigh) | 4 | 4 | chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6.1-sol-xhigh-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6.1-sol-xhigh-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6.1-sol-xhigh-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-6.1-sol-xhigh-common-gpt-assumption (10.55×, value 59.03) |
 | Claude Opus 5.5 (max) | 3 | 3 | claude-pro-opus55-semianalysis (58.9×, selected); claude-max20x-opus55-semianalysis (58.63×, not selected by the comparator); claude-max5x-opus55-semianalysis (57.25×, not selected by the comparator) | claude-max20x-opus55-semianalysis (58.63×, value 58.67) |
-| Claude Sonnet 5.5 (xhigh) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 58.63) |
-| GPT-6.1 Sol (high) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 57.93) |
-| GPT-6.1 Sol (medium) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 57.86) |
-| GPT-6.1 Sol (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 57.62) |
-| Claude Sonnet 5.5 (high) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 57.59) |
-| GPT-6.1 Sol (low) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 54.24) |
-| Claude Sonnet 5.5 (medium) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 54.22) |
-| GPT-6 Sol (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 53.27) |
-| Claude Opus 5 (max) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 53.21) |
-| GPT-6 Luna (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 52.94) |
-| GPT-6 Astra (max) | 4 | 4 | chatgpt-plus-common-semianalysis-assumption (8.1×, selected); chatgpt-pro500-common-semianalysis-assumption (10.772×, not selected by the comparator); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator) | chatgpt-pro500-common-semianalysis-assumption (10.772×, value 53.63) |
-| GPT-5.6 Sol (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 52.82) |
-| Claude Haiku 5.5 (xhigh) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 52.55) |
-| MiMo-V2.6-Pro | 1 | 1 | mimo-provisional-user-assumption (1.5×, selected) | none: the row would fall back to API cost (O13) |
-| Claude Sonnet 5.5 (low) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 51.62) |
-| GPT-5.6 Luna (max) | 4 | 4 | chatgpt-pro500-common-semianalysis-assumption (10.772×, selected); chatgpt-pro100-common-semianalysis-assumption (10.55×, not selected by the comparator); chatgpt-pro200-common-semianalysis-assumption (10.42×, not selected by the comparator); chatgpt-plus-common-semianalysis-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-common-semianalysis-assumption (10.55×, value 51.55) |
-| Claude Haiku 5.5 (high) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 51.54) |
+| Claude Sonnet 5.5 (xhigh) | 3 | 3 | claude-pro-claude-sonnet-5-5-xhigh-common-opus55-assumption (58.9×, selected); claude-max20x-claude-sonnet-5-5-xhigh-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-sonnet-5-5-xhigh-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-sonnet-5-5-xhigh-common-opus55-assumption (58.63×, value 58.63) |
+| GPT-6.1 Sol (high) | 4 | 4 | chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption (10.55×, value 57.93) |
+| GPT-6.1 Sol (medium) | 4 | 4 | chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption (10.55×, value 57.86) |
+| GPT-6.1 Sol (max) | 4 | 4 | chatgpt-pro500-gpt61sol-semianalysis (10.772×, selected); chatgpt-plus-gpt61sol-semianalysis (10.55×, not selected by the comparator); chatgpt-pro100-gpt61sol-semianalysis (10.55×, not selected by the comparator); chatgpt-pro200-gpt61sol-semianalysis (10.42×, not selected by the comparator) | chatgpt-plus-gpt61sol-semianalysis (10.55×, value 57.62) |
+| Claude Sonnet 5.5 (high) | 3 | 3 | claude-pro-claude-sonnet-5-5-high-common-opus55-assumption (58.9×, selected); claude-max20x-claude-sonnet-5-5-high-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-sonnet-5-5-high-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-sonnet-5-5-high-common-opus55-assumption (58.63×, value 57.59) |
+| GPT-6 Astra (max) | 4 | 4 | chatgpt-pro200-gpt6astra-semianalysis (14.485×, selected); chatgpt-pro500-gpt6astra-semianalysis (13.91×, not selected by the comparator); chatgpt-pro100-gpt6astra-semianalysis (13.22×, not selected by the comparator); chatgpt-plus-gpt6astra-semianalysis (8.1×, not selected by the comparator) | chatgpt-pro500-gpt6astra-semianalysis (13.91×, value 54.27) |
+| GPT-6.1 Sol (low) | 4 | 4 | chatgpt-pro500-gpt-6.1-sol-low-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6.1-sol-low-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6.1-sol-low-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6.1-sol-low-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-6.1-sol-low-common-gpt-assumption (10.55×, value 54.24) |
+| Claude Sonnet 5.5 (medium) | 3 | 3 | claude-pro-claude-sonnet-5-5-medium-common-opus55-assumption (58.9×, selected); claude-max20x-claude-sonnet-5-5-medium-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-sonnet-5-5-medium-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-sonnet-5-5-medium-common-opus55-assumption (58.63×, value 54.22) |
+| GPT-6 Sol (max) | 4 | 4 | chatgpt-pro500-gpt-6-sol-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6-sol-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6-sol-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6-sol-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-6-sol-common-gpt-assumption (10.55×, value 53.27) |
+| Claude Opus 5 (max) | 3 | 3 | claude-pro-claude-opus-5-common-opus55-assumption (58.9×, selected); claude-max20x-claude-opus-5-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-opus-5-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-opus-5-common-opus55-assumption (58.63×, value 53.21) |
+| GPT-6 Luna (max) | 4 | 4 | chatgpt-pro500-gpt-6-luna-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6-luna-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6-luna-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6-luna-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-6-luna-common-gpt-assumption (10.55×, value 52.94) |
+| GPT-5.6 Sol (max) | 4 | 4 | chatgpt-pro500-gpt-5.6-sol-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-5.6-sol-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-5.6-sol-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-5.6-sol-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-5.6-sol-common-gpt-assumption (10.55×, value 52.82) |
+| Claude Haiku 5.5 (xhigh) | 3 | 3 | claude-pro-claude-haiku-5-5-common-opus55-assumption (58.9×, selected); claude-max20x-claude-haiku-5-5-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-haiku-5-5-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-haiku-5-5-common-opus55-assumption (58.63×, value 52.55) |
+| Claude Sonnet 5.5 (low) | 3 | 3 | claude-pro-claude-sonnet-5-5-low-common-opus55-assumption (58.9×, selected); claude-max20x-claude-sonnet-5-5-low-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-sonnet-5-5-low-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-sonnet-5-5-low-common-opus55-assumption (58.63×, value 51.62) |
+| MiMo-V2.6-Pro | 4 | 4 | mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling (1.1808×, selected); mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling (1.0944×, not selected by the comparator); mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling (0.99×, not selected by the comparator); mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling (0.984×, not selected by the comparator) | mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling (1.0944×, value 51.45) |
+| GPT-5.6 Luna (max) | 4 | 4 | chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-5.6-luna-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-5.6-luna-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-5.6-luna-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-5.6-luna-common-gpt-assumption (10.55×, value 51.55) |
+| Claude Haiku 5.5 (high) | 3 | 3 | claude-pro-claude-haiku-5-5-high-common-opus55-assumption (58.9×, selected); claude-max20x-claude-haiku-5-5-high-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-haiku-5-5-high-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-haiku-5-5-high-common-opus55-assumption (58.63×, value 51.54) |
 | Claude Fable 5.1 (max) | 2 | 2 | claude-max5x-fable51-semianalysis (12.73×, selected); claude-max20x-fable51-semianalysis (12.425×, not selected by the comparator) | claude-max20x-fable51-semianalysis (12.425×, value 51.41) |
-| Claude Haiku 5.5 (medium) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 50.85) |
-| Claude Haiku 5.5 (max) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 49.79) |
-| Claude Haiku 5.5 (low) | 3 | 3 | claude-pro-common-opus55-assumption (58.9×, selected); claude-max20x-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-common-opus55-assumption (58.63×, value 49.10) |
+| Claude Haiku 5.5 (medium) | 3 | 3 | claude-pro-claude-haiku-5-5-medium-common-opus55-assumption (58.9×, selected); claude-max20x-claude-haiku-5-5-medium-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-haiku-5-5-medium-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-haiku-5-5-medium-common-opus55-assumption (58.63×, value 50.85) |
+| Claude Haiku 5.5 (max) | 3 | 3 | claude-pro-claude-haiku-5-5-max-common-opus55-assumption (58.9×, selected); claude-max20x-claude-haiku-5-5-max-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-haiku-5-5-max-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-haiku-5-5-max-common-opus55-assumption (58.63×, value 49.79) |
+| Claude Haiku 5.5 (low) | 3 | 3 | claude-pro-claude-haiku-5-5-low-common-opus55-assumption (58.9×, selected); claude-max20x-claude-haiku-5-5-low-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-haiku-5-5-low-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-haiku-5-5-low-common-opus55-assumption (58.63×, value 49.10) |
 
 ### Measured-only Plan view
 
@@ -222,8 +222,8 @@ Admission: exact-route measurement candidates of grade controlled or concordant 
 | Configuration | Status | Route | Plan cost | Value | Rank |
 |---|---|---|---:|---:|---:|
 | Claude Opus 5.5 (max) | measured, target-workload unmatched | claude-pro-opus55-semianalysis | $169.60 | 58.68 | 1 |
-| GPT-6.1 Sol (max) | measured, target-workload unmatched | chatgpt-pro500-common-semianalysis-assumption | $117.68 | 57.67 | 2 |
-| GPT-6 Astra (max) | measured, target-workload unmatched | chatgpt-plus-common-semianalysis-assumption | $753.96 | 52.92 | 3 |
+| GPT-6.1 Sol (max) | measured, target-workload unmatched | chatgpt-pro500-gpt61sol-semianalysis | $117.68 | 57.67 | 2 |
+| GPT-6 Astra (max) | measured, target-workload unmatched | chatgpt-pro200-gpt6astra-semianalysis | $421.61 | 54.37 | 3 |
 | Claude Fable 5.1 (max) | measured, target-workload unmatched | claude-max5x-fable51-semianalysis | $909.71 | 51.47 | 4 |
 | Claude Haiku 5.5 (high) | no measured route | — | — | — | — |
 | Claude Haiku 5.5 (low) | no measured route | — | — | — | — |
@@ -258,17 +258,17 @@ Admission: exact-route measurement candidates of grade controlled or concordant 
 
 References: each workload's measured-only rows with complete cost evidence are the references: c_L = cheapest / 2, c_H = dearest x 2 (diagnostic only; the official anchors are unchanged). Status: evaluated.
 
-- Workload `9a0d376cc6080f3c`: measured anchors $58.84 to $1,507.92 from Claude Opus 5.5 (max), GPT-6 Astra (max), GPT-6.1 Sol (max); anchor ratio 25.6 against the official 22070.1. Official Plan anchors are set by Claude Haiku 5.5 (low) (owner-named transfer) at the low end and Grok 4.7 (xhigh) (API-cost fallback) at the high end.
-- Workload `1453a9a0576b02ea`: measured-evidence calibration unavailable (fewer than two measured references); measured rows none. Official Plan anchors are set by Claude Haiku 5.5 (low) (owner-named transfer) at the low end and Qwen3.8 Max (API-cost fallback) at the high end.
+- Workload `9a0d376cc6080f3c`: measured anchors $58.84 to $843.23 from Claude Opus 5.5 (max), GPT-6 Astra (max), GPT-6.1 Sol (max); anchor ratio 14.3 against the official 22070.1. Official Plan anchors are set by claude-haiku-5-5-low@claude-pro (not in the current table) at the low end and grok-4.7@api (not in the current table) at the high end.
+- Workload `1453a9a0576b02ea`: measured-evidence calibration unavailable (fewer than two measured references); measured rows none. Official Plan anchors are set by claude-haiku-5-5-low@claude-pro (not in the current table) at the low end and qwen3.8-max@api (not in the current table) at the high end.
 
 | Configuration | Value on official Plan anchors | Value on measured anchors | Rank change |
 |---|---:|---:|---:|
-| Claude Fable 5.1 (max) | 51.47 | 48.64 | 0 |
-| Claude Opus 5.5 (max) | 58.68 | 64.60 | 1 |
-| GPT-6 Astra (max) | 52.92 | 51.07 | 0 |
-| GPT-6.1 Sol (max) | 57.67 | 65.49 | -1 |
+| Claude Fable 5.1 (max) | 51.47 | 44.75 | 0 |
+| Claude Opus 5.5 (max) | 58.68 | 62.82 | 1 |
+| GPT-6 Astra (max) | 54.37 | 52.24 | 0 |
+| GPT-6.1 Sol (max) | 57.67 | 64.33 | -1 |
 
-Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 7.82 points.
+Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 6.72 points.
 
 ## Interval outputs
 
@@ -598,7 +598,7 @@ Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined i
 | GPT-5.6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
 | GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.5% |
 | GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
@@ -633,10 +633,10 @@ Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined i
 | GPT-5.6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-5.6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.6% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.7% |
 | GPT-6 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 76.0% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.1% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 75.9% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.2% |
 | GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 34.3% |
 | GPT-6.1 Sol (medium) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 84.1% |
 | GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 92.4% |
@@ -654,7 +654,7 @@ Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined i
 | Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
 | Claude Haiku 5.5 (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
 | Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 95.8% |
+| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 95.7% |
 | Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 6.2% |
 | Claude Opus 5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) | 0.0% | 0.0% | 3.1% | 0.0% | 0.0% | 19.9% |
@@ -662,7 +662,7 @@ Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined i
 | Claude Sonnet 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 51.4% | 100.0% | 100.0% | 47.5% |
 | Claude Sonnet 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 7.0% |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 7.1% |
 | DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-5.6 Luna (max) | 100.0% | 100.0% | 99.2% | 100.0% | 100.0% | 68.9% |
@@ -676,7 +676,7 @@ Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined i
 | GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.5% |
 | GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 77.4% |
 | Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 85.3% |
+| Gemini 4 Argon (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 85.2% |
 | Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
 | Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -688,11 +688,11 @@ Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined i
 | Claude Fable 5.1 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.74 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
 | Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.01 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
 | Claude Haiku 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
-| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.89 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
+| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.89 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
 | Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
 | Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
 | Claude Opus 5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
-| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
 | Claude Sonnet 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 0.92 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
 | Claude Sonnet 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
 | Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.77 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
@@ -701,162 +701,382 @@ Frequencies over 10,000 scenarios per run (seed 20261021); streams are defined i
 | DeepSeek V4 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
 | GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
 | GPT-5.6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
-| GPT-5.6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
+| GPT-5.6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
 | GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) |
 | GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
-| GPT-6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.06 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
+| GPT-6 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.06 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
 | GPT-6.1 Sol (high) | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
 | GPT-6.1 Sol (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
 | GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.78 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
 | GPT-6.1 Sol (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
 | GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
 | Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
-| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) |
 | Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) |
 | Muse Spark 1.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.17 (+0.00) |
 | Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (max), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (xhigh), Claude Opus 5 (max), Claude Sonnet 5.5 (high), Claude Sonnet 5.5 (low), Claude Sonnet 5.5 (max), Claude Sonnet 5.5 (medium), Claude Sonnet 5.5 (xhigh), GPT-5.6 Luna (max), GPT-5.6 Sol (max), GPT-6 Luna (max), GPT-6 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh) depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner-named transfers off (E167): claude-haiku-5-5-high@claude-max-20x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-low@claude-max-20x, claude-haiku-5-5-low@claude-max-5x, claude-haiku-5-5-low@claude-pro, claude-haiku-5-5-max@claude-max-20x, claude-haiku-5-5-max@claude-max-5x, claude-haiku-5-5-max@claude-pro, claude-haiku-5-5-medium@claude-max-20x, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-haiku-5-5@claude-max-20x, claude-haiku-5-5@claude-max-5x, claude-haiku-5-5@claude-pro, claude-opus-5@claude-max-20x, claude-opus-5@claude-max-5x, claude-opus-5@claude-pro, claude-sonnet-5-5-high@claude-max-20x, claude-sonnet-5-5-high@claude-max-5x, claude-sonnet-5-5-high@claude-pro, claude-sonnet-5-5-low@claude-max-20x, claude-sonnet-5-5-low@claude-max-5x, claude-sonnet-5-5-low@claude-pro, claude-sonnet-5-5-medium@claude-max-20x, claude-sonnet-5-5-medium@claude-max-5x, claude-sonnet-5-5-medium@claude-pro, claude-sonnet-5-5-xhigh@claude-max-20x, claude-sonnet-5-5-xhigh@claude-max-5x, claude-sonnet-5-5-xhigh@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-5.6-luna@chatgpt-plus, gpt-5.6-luna@chatgpt-pro-100, gpt-5.6-luna@chatgpt-pro-200, gpt-5.6-luna@chatgpt-pro-500, gpt-5.6-sol@chatgpt-plus, gpt-5.6-sol@chatgpt-pro-100, gpt-5.6-sol@chatgpt-pro-200, gpt-5.6-sol@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6-sol@chatgpt-plus, gpt-6-sol@chatgpt-pro-100, gpt-6-sol@chatgpt-pro-200, gpt-6-sol@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-plus, gpt-6.1-sol-low@chatgpt-pro-100, gpt-6.1-sol-low@chatgpt-pro-200, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-sol-xhigh@chatgpt-plus, gpt-6.1-sol-xhigh@chatgpt-pro-100, gpt-6.1-sol-xhigh@chatgpt-pro-200, gpt-6.1-sol-xhigh@chatgpt-pro-500 depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
 |---|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (high) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — | — |
-| Claude Opus 5 (max) | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 71.9% |
-| Claude Sonnet 5.5 (high) | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | — | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | — | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.0% | — | — | — | — | — |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | — | — | — | — | — |
-| GPT-6 Sol (max) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 28.1% |
-| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 0.0% | — | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-fable-5-1@claude-max-20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-fable-5-1@claude-max-5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-haiku-5-5-high@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-pro | 0.0% | — | — | — | — | — |
+| claude-opus-5-5@claude-max-20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-opus-5-5@claude-max-5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-opus-5-5@claude-pro | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 71.8% |
+| claude-opus-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-opus-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-opus-5@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-pro | 100.0% | — | — | — | — | — |
+| deepseek-v4-pro@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gemini-3.8-flash@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gemini-4-argon@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| glm-5.3@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-5.6-luna@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6-astra@chatgpt-plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6-astra@chatgpt-pro-100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6-astra@chatgpt-pro-200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| gpt-6-astra@chatgpt-pro-500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6-luna@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol@chatgpt-plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6.1-sol@chatgpt-pro-100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6.1-sol@chatgpt-pro-200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6.1-sol@chatgpt-pro-500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 28.1% |
+| grok-4.7@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| muse-spark-1-3@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| qwen3.8-max@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: rank 3 or better
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
 |---|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 15.7% |
-| Claude Haiku 5.5 (high) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 0.0% | — | — | — | — | — |
-| Claude Opus 5 (max) | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Sonnet 5.5 (high) | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | — | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | — | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.0% | — | — | — | — | — |
-| GPT-6 Astra (max) | 0.0% | 100.0% | 99.5% | 100.0% | 100.0% | 67.2% |
-| GPT-6 Luna (max) | 0.0% | — | — | — | — | — |
-| GPT-6 Sol (max) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.5% | 0.0% | 0.0% | 17.1% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-fable-5-1@claude-max-20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-fable-5-1@claude-max-5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-haiku-5-5-high@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-pro | 0.0% | — | — | — | — | — |
+| claude-opus-5-5@claude-max-20x | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 72.7% |
+| claude-opus-5-5@claude-max-5x | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 70.4% |
+| claude-opus-5-5@claude-pro | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 72.9% |
+| claude-opus-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-opus-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-opus-5@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-20x | 100.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-5x | 100.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-pro | 100.0% | — | — | — | — | — |
+| deepseek-v4-pro@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gemini-3.8-flash@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gemini-4-argon@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| glm-5.3@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-5.6-luna@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6-astra@chatgpt-plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6-astra@chatgpt-pro-100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| gpt-6-astra@chatgpt-pro-200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
+| gpt-6-astra@chatgpt-pro-500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
+| gpt-6-luna@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol@chatgpt-plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 27.2% |
+| gpt-6.1-sol@chatgpt-pro-100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 27.2% |
+| gpt-6.1-sol@chatgpt-pro-200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6.1-sol@chatgpt-pro-500 | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 29.5% |
+| grok-4.7@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| muse-spark-1-3@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| qwen3.8-max@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: on the frontier
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
 |---|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.4% |
-| Claude Haiku 5.5 (high) | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 100.0% | — | — | — | — | — |
-| Claude Opus 5 (max) | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 86.9% |
-| Claude Sonnet 5.5 (high) | 100.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 100.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 100.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 100.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 100.0% | — | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GLM-5.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-5.6 Luna (max) | 0.0% | — | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.0% | — | — | — | — | — |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.6% |
-| GPT-6 Luna (max) | 100.0% | — | — | — | — | — |
-| GPT-6 Sol (max) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) | 100.0% | — | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (medium) | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 100.0% | — | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 100.0% | 84.6% | 100.0% | 100.0% | 61.1% |
-| Grok 4.7 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Muse Spark 1.3 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Qwen3.8 Max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-fable-5-1@claude-max-20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-fable-5-1@claude-max-5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.5% |
+| claude-haiku-5-5-high@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-pro | 100.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-pro | 100.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-pro | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-pro | 100.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-haiku-5-5@claude-pro | 100.0% | — | — | — | — | — |
+| claude-opus-5-5@claude-max-20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-opus-5-5@claude-max-5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| claude-opus-5-5@claude-pro | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 86.9% |
+| claude-opus-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-opus-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-opus-5@claude-pro | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-pro | 100.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-pro | 100.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-pro | 100.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-pro | 100.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-20x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-5x | 0.0% | — | — | — | — | — |
+| claude-sonnet-5-5@claude-pro | 100.0% | — | — | — | — | — |
+| deepseek-v4-pro@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gemini-3.8-flash@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gemini-4-argon@api | 0.0% | 100.0% | 84.6% | 100.0% | 100.0% | 61.1% |
+| glm-5.3@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-5.6-luna@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6-astra@chatgpt-plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6-astra@chatgpt-pro-100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6-astra@chatgpt-pro-200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.6% |
+| gpt-6-astra@chatgpt-pro-500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6-luna@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-500 | 100.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-500 | 100.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-500 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-plus | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-100 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-200 | 0.0% | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-500 | 100.0% | — | — | — | — | — |
+| gpt-6.1-sol@chatgpt-plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6.1-sol@chatgpt-pro-100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6.1-sol@chatgpt-pro-200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| gpt-6.1-sol@chatgpt-pro-500 | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| grok-4.7@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| muse-spark-1-3@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| qwen3.8-max@api | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
 |---|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.1 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.75 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
-| Claude Haiku 5.5 (high) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (low) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (max) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Opus 5 (max) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
-| Claude Sonnet 5.5 (high) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (low) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (medium) | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) | 0.00 (+0.00) | — | — | — | — | — |
-| DeepSeek V4 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
-| GLM-5.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
-| GPT-5.6 Luna (max) | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-5.6 Sol (max) | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
-| GPT-6 Luna (max) | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Sol (max) | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Sol (high) | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Sol (low) | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.79 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
-| GPT-6.1 Sol (medium) | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | — | — | — | — | — |
-| Gemini 3.8 Flash (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
-| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) |
-| Grok 4.7 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) |
-| Muse Spark 1.3 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.19 (+0.00) |
-| Qwen3.8 Max | 0.00 (+0.00) | 0.00 (+0.00) | 0.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
+| claude-fable-5-1@claude-max-20x | 0.00 (+0.00) | 0.00 (+0.00) | 0.75 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
+| claude-fable-5-1@claude-max-5x | 0.00 (+0.00) | 0.00 (+0.00) | 0.75 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
+| claude-haiku-5-5-high@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-high@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-low@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-max@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5-medium@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-haiku-5-5@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-opus-5-5@claude-max-20x | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| claude-opus-5-5@claude-max-5x | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| claude-opus-5-5@claude-pro | 0.00 (+0.00) | 0.00 (+0.00) | 0.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| claude-opus-5@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-opus-5@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-opus-5@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-high@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-low@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-medium@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5-xhigh@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-20x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5@claude-max-5x | 0.00 (+0.00) | — | — | — | — | — |
+| claude-sonnet-5-5@claude-pro | 0.00 (+0.00) | — | — | — | — | — |
+| deepseek-v4-pro@api | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
+| gemini-3.8-flash@api | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
+| gemini-4-argon@api | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) |
+| glm-5.3@api | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
+| gpt-5.6-luna@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-5.6-luna@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-5.6-sol@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-astra@chatgpt-plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| gpt-6-astra@chatgpt-pro-100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| gpt-6-astra@chatgpt-pro-200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| gpt-6-astra@chatgpt-pro-500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.76 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
+| gpt-6-luna@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-luna@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-sol@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6-sol@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-high@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-low@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-medium@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-plus | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-100 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-200 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol-xhigh@chatgpt-pro-500 | 0.00 (+0.00) | — | — | — | — | — |
+| gpt-6.1-sol@chatgpt-plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.79 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| gpt-6.1-sol@chatgpt-pro-100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.79 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| gpt-6.1-sol@chatgpt-pro-200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.79 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| gpt-6.1-sol@chatgpt-pro-500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.79 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| grok-4.7@api | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.17 (+0.00) |
+| muse-spark-1-3@api | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
+| qwen3.8-max@api | 0.00 (+0.00) | 0.00 (+0.00) | 0.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
 
 ### Named S2 specification branches
 
@@ -879,27 +1099,28 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 ## Diagnostics
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
-- **Rank separability (O39, independent-task approximation):** median separation 3.34 value points (API) and 3.35 (Plan); separable adjacent ranks: API 0 of 30, Plan 0 of 30. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row; AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate.
+- **Rank separability (O39, independent-task approximation):** median separation 3.34 value points (API) and 3.32 (Plan); separable adjacent ranks: API 0 of 30, Plan 28 of 88. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row; AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate.
 - **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234): Kendall tau 0.73 (interval 0.41 to 1.00) on 10 rows. Cognition minus AA: mean +2.5 points, largest 11.8.
-- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — GPT-6.1 Sol (xhigh) (FrontierCode 1.1); GPT-6.1 Sol (high) (FrontierCode 1.1); GPT-6.1 Sol (medium) (FrontierCode 1.1); GPT-5.6 Sol (max) (FrontierCode 1.1); GPT-6 Sol (max) (FrontierCode 1.1); MiMo-V2.6-Pro (DeepSWE v1.1); GPT-6.1 Sol (low) (FrontierCode 1.1); GPT-5.6 Luna (max) (FrontierCode 1.1); Claude Opus 5 (max) (FrontierCode 1.1) — API 11 rows move; largest move 6 (MiMo-V2.6-Pro); Plan 15 rows move; largest move 8 (MiMo-V2.6-Pro).
+- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — GPT-6.1 Sol (xhigh) (FrontierCode 1.1); GPT-6.1 Sol (high) (FrontierCode 1.1); GPT-6.1 Sol (medium) (FrontierCode 1.1); GPT-5.6 Sol (max) (FrontierCode 1.1); GPT-6 Sol (max) (FrontierCode 1.1); MiMo-V2.6-Pro (DeepSWE v1.1); GPT-6.1 Sol (low) (FrontierCode 1.1); GPT-5.6 Luna (max) (FrontierCode 1.1); Claude Opus 5 (max) (FrontierCode 1.1) — API 11 rows move; largest move 6 (MiMo-V2.6-Pro); Plan 17 rows move; largest move 7 (MiMo-V2.6-Pro).
 - **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset 2.5 points — API quality 55.3: GPT-6.1 Sol (medium) in all three; API quality 47.4: GPT-6 Luna (max) in all three; API quality 59.6: GPT-6.1 Sol (high) as published, GPT-6.1 Sol (high) with the fills removed, GPT-6.1 Sol (xhigh) with third-party fills lowered by the offset; Plan quality 55.3: Claude Sonnet 5.5 (high) in all three; Plan quality 47.4: GPT-6 Luna (max) in all three; Plan quality 59.6: GPT-6.1 Sol (high) as published, GPT-6.1 Sol (high) with the fills removed, GPT-6.1 Sol (xhigh) with third-party fills lowered by the offset.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.71 (interval 0.57 to 0.83) on 32 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.59 (interval 0.39 to 0.76) on 31 rows.
-- **Quality-substitution value agreement (Plan):** quality-substitution value agreement, plan basis (matched-panel sensitivity): Kendall tau 0.61 (interval 0.40 to 0.77) on 31 rows.
+- **Quality-substitution value agreement (Plan):** quality-substitution value agreement, plan basis (matched-panel sensitivity): Kendall tau 0.63 (interval 0.43 to 0.77) on 31 rows.
 - **Disjoint-evidence agreement:** disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking): Kendall tau 0.66 (interval 0.51 to 0.79) on 32 rows.
 - **Quality source shares:** AA-run 90%, independent 10%.
 - **Non-discriminating leaves:** none.
 - **Group drift:** estimated; flagged: knowledge.
 - **Omniscience abstention sensitivity** (z_pen = max(0, I)): 12 rows move; largest move 2 (Claude Fable 5.1 (max), Claude Haiku 5.5 (low), DeepSeek V4 Pro (max), Gemini 4 Argon (high), GPT-5.6 Luna (max), GPT-6 Luna (max), Grok 4.7 (xhigh), MiMo-V2.6-Pro).
-- **GDPval-AA logistic sensitivity** (z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed): API 26 rows move; largest move 5 (Grok 4.7 (xhigh)); Plan 19 rows move; largest move 6 (Claude Fable 5.1 (max)).
+- **GDPval-AA logistic sensitivity** (z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed): API 26 rows move; largest move 5 (Grok 4.7 (xhigh)); Plan 19 rows move; largest move 7 (Claude Fable 5.1 (max)).
 - **Anchor stability:** trimmed anchors (P10 / 2 and P90 x 2 (diagnostic only)) give $85.83 to $14,213.29; 19 rows move; largest move 9 (Claude Haiku 5.5 (medium)).
 
 - **Basket readiness (E22):** priced leaves cover 67% of nominal quality weight (AutomationBench-AA, DeepSWE v1.1, GDPval-AA v2.1, AA-LCR v1.1, SciCode, Terminal-Bench 4.0 (AA run)); pending components: FrontierCode, ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 30 rows evaluated; flagged far from the median ratio: Claude Haiku 5.5 (max).
 - **Matched-cost diagnostic (E55):** evaluated at 50% priced quality weight; basket/matched cost-order reversals with separated intervals: 14; rank-gap warnings: 2.
-- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 8 frontier and near-frontier references move API 12 rows move; largest move 7 (Claude Haiku 5.5 (medium), Claude Opus 5.5 (max)) (value points per cost doubling 3.04 vs 2.74 frozen); Plan 26 rows move; largest move 7 (Claude Haiku 5.5 (high)) (value points per cost doubling 2.17 vs 1.73 frozen).
+- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 8 frontier and near-frontier references move API 12 rows move; largest move 7 (Claude Haiku 5.5 (medium), Claude Opus 5.5 (max)) (value points per cost doubling 3.04 vs 2.74 frozen); Plan 24 rows move; largest move 7 (Claude Haiku 5.5 (high)) (value points per cost doubling 2.17 vs 1.73 frozen).
 - **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 61.0 over 9 configurations; cheapest at or above it on the API main workload: GPT-6.1 Sol (xhigh) (confirmed) (compares 6 configurations that can qualify).
-- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (20 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 55.9 / 48.9 / 61.0 against 55.3 / 47.4 / 59.6 frozen; anchors rebuilt from its 17 references move API 12 rows move; largest move 7 (Claude Haiku 5.5 (medium), Claude Opus 5.5 (max)) (value points per cost doubling 3.04 vs 2.74 frozen); Plan 19 rows move; largest move 5 (Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-6 Astra (max)) (value points per cost doubling 2.02 vs 1.73 frozen).
+- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (20 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 55.9 / 48.9 / 61.0 against 55.3 / 47.4 / 59.6 frozen; anchors rebuilt from its 17 references move API 12 rows move; largest move 7 (Claude Haiku 5.5 (medium), Claude Opus 5.5 (max)) (value points per cost doubling 3.04 vs 2.74 frozen); Plan 16 rows move; largest move 5 (Gemini 4 Argon (high)) (value points per cost doubling 2.02 vs 1.73 frozen).
+- **Ladder over scored rows (I28, sensitivity; the frozen ladder stays primary):** the bar population keeps full-benchmark rows that have no cost (Muse Wonder Full (max)); without them (31 rows) the ladder (headline, lower quartile, upper quartile) would be 55.3 / 47.4 / 59.4.
 - **Bar currency (E207, informational):** rows reaching each frozen bar: quality 55.3: 17 of 32; quality 47.4: 25 of 32; quality 59.6: 9 of 32; the current population would freeze 55.3 / 47.4 / 59.6; lifetime until the next anchor re-freeze or methodology version, whichever comes first; no staleness flag.
 - **Token mix (E208):** 1 selected routes: mix not reported: the measurement publishes no token-category shares; 23 selected routes: mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed.
 - **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 55.3: 15 can qualify, 14 confirmed; GPT-6.1 Sol (medium) confirmed cheapest; quality 47.4: 22 can qualify, 21 confirmed; possibly cheapest GPT-5.6 Luna (max), GPT-6 Luna (max); quality 59.6: 7 can qualify, 6 confirmed; possibly cheapest GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high).
@@ -913,36 +1134,36 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 
 | Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
 |---|---|---|---:|
-| Coding Agent Index | 21 rows move; largest move 9 (Claude Haiku 5.5 (max)) | 12 rows move; largest move 6 (Claude Sonnet 5.5 (low)) | 2.47 |
-| AA-Briefcase | 9 rows move; largest move 2 (Claude Sonnet 5.5 (medium), GPT-5.6 Luna (max), GPT-5.6 Sol (max)) | 13 rows move; largest move 3 (Claude Sonnet 5.5 (high)) | 2.73 |
+| Coding Agent Index | 21 rows move; largest move 9 (Claude Haiku 5.5 (max)) | 11 rows move; largest move 6 (Claude Sonnet 5.5 (low)) | 2.47 |
+| AA-Briefcase | 9 rows move; largest move 2 (Claude Sonnet 5.5 (medium), GPT-5.6 Luna (max), GPT-5.6 Sol (max)) | 14 rows move; largest move 3 (Claude Sonnet 5.5 (high)) | 2.73 |
 | GDPval-AA | 2 rows move; largest move 1 (Gemini 4 Argon (high), GPT-6.1 Sol (low)) | 8 rows move; largest move 3 (Claude Fable 5.1 (max), Gemini 4 Argon (high)) | 2.75 |
-| GDP.pdf | 3 rows move; largest move 2 (GPT-6 Luna (max)) | no rank changes | 2.68 |
-| AutomationBench-AA | 13 rows move; largest move 2 (DeepSeek V4 Pro (max)) | 6 rows move; largest move 1 (Claude Fable 5.1 (max), Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-5.6 Luna (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium)) | 2.68 |
-| Terminal-Bench 4.0 (AA Index run) | 8 rows move; largest move 2 (DeepSeek V4 Pro (max), Gemini 4 Argon (high)) | 11 rows move; largest move 2 (GPT-5.6 Luna (max)) | 2.68 |
+| GDP.pdf | 3 rows move; largest move 2 (GPT-6 Luna (max)) | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6.1 Sol (low)) | 2.68 |
+| AutomationBench-AA | 13 rows move; largest move 2 (DeepSeek V4 Pro (max)) | 9 rows move; largest move 2 (GPT-6 Astra (max)) | 2.68 |
+| Terminal-Bench 4.0 (AA Index run) | 8 rows move; largest move 2 (DeepSeek V4 Pro (max), Gemini 4 Argon (high)) | 10 rows move; largest move 2 (Claude Sonnet 5.5 (medium), GPT-5.6 Luna (max)) | 2.68 |
 | SciCode | 3 rows move; largest move 2 (Gemini 4 Argon (high)) | no rank changes | 2.68 |
 | AA-LCR | 2 rows move; largest move 2 (Gemini 4 Argon (high), GPT-6 Luna (max)) | no rank changes | 2.67 |
 
 ### Subset rows: paired bridge and missing spend (E10, E173)
 
-- **MiMo-V2.6-Pro** (subset without Coding Agent Index): Coding Agent Index is 40% of the full basket (median; 9% to 80% over 30 rows). Scored on its own subset anchors, the direction of its subset effect is not known. Paired bridge on the 30 full rows: API: the full rows' values change by -0.50 points (median; -2.32 to 3.39), 15 rows move; largest move 9 (Claude Haiku 5.5 (max)); Plan: the full rows' values change by -0.38 points (median; -1.19 to 2.04), 12 rows move; largest move 6 (Claude Sonnet 5.5 (low)).
+- **MiMo-V2.6-Pro** (subset without Coding Agent Index): Coding Agent Index is 40% of the full basket (median; 9% to 80% over 30 rows). Scored on its own subset anchors, the direction of its subset effect is not known. Paired bridge on the 30 full rows: API: the full rows' values change by -0.50 points (median; -2.32 to 3.39), 15 rows move; largest move 9 (Claude Haiku 5.5 (max)); Plan: the full rows' values change by -0.38 points (median; -1.19 to 2.04), 11 rows move; largest move 6 (Claude Sonnet 5.5 (low)).
 
 ### Deletion sensitivity
 
 | Branch | Retained nominal weight | Status | API rank changes | Plan rank changes |
 |---|---:|---|---|---|
-| leave-out:deepswe | 70% | evaluated | 28 rows move; largest move 8 (GPT-5.6 Luna (max)) | 29 rows move; largest move 10 (Claude Fable 5.1 (max)) |
-| leave-out:bugHunt | 90% | evaluated | 15 rows move; largest move 3 (Claude Fable 5.1 (max), GPT-5.6 Sol (max)) | 18 rows move; largest move 3 (MiMo-V2.6-Pro) |
-| leave-out:frontierCode | 90% | evaluated | 21 rows move; largest move 3 (Claude Sonnet 5.5 (low), Claude Sonnet 5.5 (medium)) | 18 rows move; largest move 3 (Claude Haiku 5.5 (xhigh), Gemini 4 Argon (high), GPT-6 Astra (max)) |
-| leave-out:terminalBench | 90% | evaluated | 24 rows move; largest move 6 (GPT-6 Astra (max)) | 24 rows move; largest move 8 (GPT-5.6 Luna (max)) |
-| leave-out:gdpval | 90% | evaluated | 18 rows move; largest move 3 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (medium)) | 20 rows move; largest move 3 (Claude Opus 5 (max), Claude Opus 5.5 (max), GPT-6.1 Sol (medium)) |
-| leave-out:automationBench | 90% | evaluated | 12 rows move; largest move 5 (Claude Haiku 5.5 (xhigh)) | 12 rows move; largest move 5 (Claude Haiku 5.5 (xhigh)) |
-| leave-out:omniscience | 90% | evaluated | 15 rows move; largest move 2 (Claude Fable 5.1 (max), DeepSeek V4 Pro (max), Gemini 3.8 Flash (high), GLM-5.3 (max), GPT-5.6 Sol (max)) | 19 rows move; largest move 4 (Claude Sonnet 5.5 (low)) |
-| leave-out:lcr | 95% | evaluated | 8 rows move; largest move 2 (Gemini 4 Argon (high), GPT-5.6 Luna (max)) | 13 rows move; largest move 3 (Claude Fable 5.1 (max)) |
-| leave-out:hle | 98% | evaluated | 6 rows move; largest move 1 (DeepSeek V4 Pro (max), Gemini 3.8 Flash (high), Gemini 4 Argon (high), GPT-6.1 Sol (high), GPT-6.1 Sol (low), MiMo-V2.6-Pro) | 2 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (xhigh)) |
-| leave-out:scicode | 98% | evaluated | 6 rows move; largest move 1 (Claude Opus 5.5 (max), Gemini 4 Argon (high), GPT-6 Astra (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), MiMo-V2.6-Pro) | 6 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (low), Claude Sonnet 5.5 (xhigh), Gemini 4 Argon (high), GPT-6 Astra (max), GPT-6 Luna (max)) |
-| leave-out:critpt | 98% | evaluated | 4 rows move; largest move 1 (Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Gemini 4 Argon (high), GPT-6.1 Sol (low)) | 4 rows move; largest move 1 (Claude Fable 5.1 (max), Claude Haiku 5.5 (high), Claude Sonnet 5.5 (low), Gemini 4 Argon (high)) |
+| leave-out:deepswe | 70% | evaluated | 28 rows move; largest move 8 (GPT-5.6 Luna (max)) | 28 rows move; largest move 10 (Claude Fable 5.1 (max)) |
+| leave-out:bugHunt | 90% | evaluated | 15 rows move; largest move 3 (Claude Fable 5.1 (max), GPT-5.6 Sol (max)) | 20 rows move; largest move 3 (MiMo-V2.6-Pro) |
+| leave-out:frontierCode | 90% | evaluated | 21 rows move; largest move 3 (Claude Sonnet 5.5 (low), Claude Sonnet 5.5 (medium)) | 14 rows move; largest move 3 (Claude Haiku 5.5 (xhigh), Gemini 4 Argon (high)) |
+| leave-out:terminalBench | 90% | evaluated | 24 rows move; largest move 6 (GPT-6 Astra (max)) | 25 rows move; largest move 8 (GPT-5.6 Luna (max)) |
+| leave-out:gdpval | 90% | evaluated | 18 rows move; largest move 3 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (medium)) | 21 rows move; largest move 3 (Claude Opus 5.5 (max), GPT-6.1 Sol (medium)) |
+| leave-out:automationBench | 90% | evaluated | 12 rows move; largest move 5 (Claude Haiku 5.5 (xhigh)) | 11 rows move; largest move 5 (Claude Haiku 5.5 (medium), Claude Sonnet 5.5 (low)) |
+| leave-out:omniscience | 90% | evaluated | 15 rows move; largest move 2 (Claude Fable 5.1 (max), DeepSeek V4 Pro (max), Gemini 3.8 Flash (high), GLM-5.3 (max), GPT-5.6 Sol (max)) | 17 rows move; largest move 5 (Claude Sonnet 5.5 (low)) |
+| leave-out:lcr | 95% | evaluated | 8 rows move; largest move 2 (Gemini 4 Argon (high), GPT-5.6 Luna (max)) | 12 rows move; largest move 4 (Claude Fable 5.1 (max)) |
+| leave-out:hle | 98% | evaluated | 6 rows move; largest move 1 (DeepSeek V4 Pro (max), Gemini 3.8 Flash (high), Gemini 4 Argon (high), GPT-6.1 Sol (high), GPT-6.1 Sol (low), MiMo-V2.6-Pro) | 5 rows move; largest move 2 (MiMo-V2.6-Pro) |
+| leave-out:scicode | 98% | evaluated | 6 rows move; largest move 1 (Claude Opus 5.5 (max), Gemini 4 Argon (high), GPT-6 Astra (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), MiMo-V2.6-Pro) | 5 rows move; largest move 2 (Gemini 4 Argon (high)) |
+| leave-out:critpt | 98% | evaluated | 4 rows move; largest move 1 (Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Gemini 4 Argon (high), GPT-6.1 Sol (low)) | 5 rows move; largest move 2 (Gemini 4 Argon (high)) |
 | leave-source-out:Artificial Analysis | 10% | not identifiable under the coverage rule | — | — |
-| basket-scope | 87% | evaluated | 16 rows move; largest move 2 (Claude Fable 5.1 (max), DeepSeek V4 Pro (max), Gemini 3.8 Flash (high), GLM-5.3 (max), GPT-5.6 Sol (max), GPT-6 Astra (max)) | 18 rows move; largest move 3 (Claude Opus 5 (max), Claude Sonnet 5.5 (high), GPT-5.6 Luna (max), MiMo-V2.6-Pro) |
+| basket-scope | 87% | evaluated | 16 rows move; largest move 2 (Claude Fable 5.1 (max), DeepSeek V4 Pro (max), Gemini 3.8 Flash (high), GLM-5.3 (max), GPT-5.6 Sol (max), GPT-6 Astra (max)) | 17 rows move; largest move 4 (GPT-5.6 Luna (max)) |
 
 ### Cost-component removal (Terminal-Bench 4.0 (AA Index run): evaluated)
 
@@ -950,8 +1171,8 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 |---|---|---|
 | api | cost-component removal, original anchors | 6 rows move; largest move 2 (Claude Fable 5.1 (max), DeepSeek V4 Pro (max)) |
 | api | alternative workload, recalibrated anchors | 8 rows move; largest move 2 (DeepSeek V4 Pro (max), Gemini 4 Argon (high)) |
-| plan | cost-component removal, original anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 9 rows move; largest move 2 (GPT-5.6 Luna (max)) |
-| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 11 rows move; largest move 2 (GPT-5.6 Luna (max)) |
+| plan | cost-component removal, original anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 8 rows move; largest move 2 (Claude Sonnet 5.5 (medium), GPT-5.6 Luna (max)) |
+| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 10 rows move; largest move 2 (Claude Sonnet 5.5 (medium), GPT-5.6 Luna (max)) |
 
 ## Release gates
 

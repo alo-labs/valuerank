@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 2,
-      "plan": 6
+      "plan": 16
     },
     "overall": {
       "api": 58.23450255720285,
@@ -233,8 +233,8 @@
     "planUsd": 49.346653228486176,
     "fallback": null,
     "route": {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "assumption",
@@ -333,20 +333,20 @@
       "additionalCashUsd": 0.0,
       "grossCashUsd": 500.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "chatgpt-pro500-common-semianalysis-assumption",
+      "measurementObjectId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
       "capacitySolutionId": null,
-      "cashObjectId": "chatgpt-pro500-common-semianalysis-assumption:month cash",
+      "cashObjectId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
-      "donorRouteId": null,
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
       "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
     }
   },
   "plans": [
     {
-      "id": "chatgpt-pro500-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $500 · common GPT assumption",
+      "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "assumption",
@@ -357,11 +357,13 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 49.346653228486176,
-      "selected": true
+      "selected": true,
+      "planRank": 16,
+      "planValue": 57.908965006673256
     },
     {
-      "id": "chatgpt-pro100-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $100 · common GPT assumption",
+      "id": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "grade": "assumption",
@@ -372,11 +374,13 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 50.38503777983441,
-      "selected": false
+      "selected": false,
+      "planRank": 18,
+      "planValue": 57.856914512256274
     },
     {
-      "id": "chatgpt-pro200-common-semianalysis-assumption",
-      "planLabel": "ChatGPT Pro $200 · common GPT assumption",
+      "id": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "grade": "assumption",
@@ -387,10 +391,12 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 51.013641898008935,
-      "selected": false
+      "selected": false,
+      "planRank": 19,
+      "planValue": 57.82592358181944
     },
     {
-      "id": "chatgpt-plus-common-semianalysis-assumption",
+      "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
       "planLabel": "ChatGPT Plus $20 · common GPT assumption",
       "planFeeUsd": 20,
       "valueMultiple": 8.1,
@@ -402,7 +408,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 65.62495661447569,
-      "selected": false
+      "selected": false,
+      "planRank": 28,
+      "planValue": 57.1963906373492
     }
   ],
   "scenarios": {
@@ -459,7 +467,7 @@
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.2768,
-        "top3": 0.8413,
+        "top3": 0.8408,
         "frontier": 0.9954
       }
     ],
@@ -533,7 +541,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 2,
-        "plan": 6
+        "plan": 16
       }
     }
   ],

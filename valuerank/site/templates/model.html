@@ -91,7 +91,7 @@
   {%- if page.plans %}
   <div class="table-wrap" tabindex="0" role="region" aria-label="Plan routes table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Route</th><th scope="col" class="col-num">Fee (USD)</th><th scope="col" class="col-num">Value Multiple</th><th scope="col" class="col-num">Plan cost per basket run</th><th scope="col" class="col-num">Plan rank</th></tr></thead>
       <tbody>
         {%- for r in page.plans %}
         <tr{% if r.selected %} class="row-selected" aria-label="Selected route"{% endif %}>
@@ -99,6 +99,7 @@
           <td class="cell-num">{{ usd(r.planFeeUsd, 0) }}</td>
           <td class="cell-num">{{ num(r.valueMultiple, 2) }}&times;</td>
           <td class="cell-num">{{ usd(r.usdPerRun, 2) }}</td>
+          <td class="cell-num">{{ r.planRank if r.planRank is not none else "—" }}</td>
         </tr>
         {%- endfor %}
       </tbody>

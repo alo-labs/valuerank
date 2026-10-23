@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "benchmark": "Bug Hunt Bench",
-  "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
-  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/combined-scoreboard.csv",
-  "capturedAt": "2026-10-21T06:30:00Z",
-  "sha256": "fcf4b396c46fa07ad8bb0836ddaa1eb227fae776e356f78f03df482033d5e987",
+  "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/combined-scoreboard.csv",
+  "capturedAt": "2026-10-23T05:37:06Z",
+  "sha256": "1636e4e08269a5d9b57214438f030374fb2b127cfe88cbb100734ac0195f490b",
   "purpose": "Every row of the owner's combined scoreboard at the pinned commit, so the build can check that every configuration with an exact AA DeepSWE result and a Bug Hunt result is in the roster (owner decision O31).",
   "rows": [
     {
@@ -966,6 +966,56 @@
       "model": "DeepSeek V4.1 Flash 1017 (low effort) - mean of 5",
       "harness": "Claude Code / DeepSeek API",
       "fixedOf105": 34.4
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 7",
+      "harness": "Claude Code / DeepSeek API",
+      "fixedOf105": 39.1
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7",
+      "harness": "DeepSeek Harness / DeepSeek API",
+      "fixedOf105": 42.7
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort, DeepSeek Harness) - mean of 5",
+      "harness": "DeepSeek Harness / DeepSeek API",
+      "fixedOf105": 39.2
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (low effort, DeepSeek Harness) - mean of 5",
+      "harness": "DeepSeek Harness / DeepSeek API",
+      "fixedOf105": 34.8
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort, Pi) - mean of 5",
+      "harness": "Pi / DeepSeek API",
+      "fixedOf105": 42.2
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort, Pi) - mean of 5",
+      "harness": "Pi / DeepSeek API",
+      "fixedOf105": 40.4
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (low effort, Pi) - mean of 5",
+      "harness": "Pi / DeepSeek API",
+      "fixedOf105": 33.8
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (max effort, OpenCode) - mean of 5",
+      "harness": "OpenCode / DeepSeek API",
+      "fixedOf105": 37.6
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (high effort, OpenCode) - mean of 5",
+      "harness": "OpenCode / DeepSeek API",
+      "fixedOf105": 36.6
+    },
+    {
+      "model": "DeepSeek V4.1 Flash 1017 (low effort, OpenCode) - mean of 5",
+      "harness": "OpenCode / DeepSeek API",
+      "fixedOf105": 32.8
     }
   ]
 }

@@ -380,7 +380,44 @@ def test_band_and_listed_indicative_texts():
     """O42 bands print as a rank range (or one rank); O41's table is omitted when nothing is listed."""
 
     class Facts:
-        v3 = {"listedIndicative": [], "diagnostics": {"rankSeparability": {"plan": {"bands": {"x": [3, 3]}}, "api": {"bands": {"x": [1, 4]}}}}}
+        # O48: a configuration's Plan band is its own plan row's; I28: a band resting on a transfer is marked.
+        v3 = {"listedIndicative": [], "rows": [{"id": "x", "planRowId": "x@pro"}],
+              "diagnostics": {"rankSeparability": {"plan": {"bands": {"x@pro": [3, 3], "y@pro": [2, 4]}}, "api": {"bands": {"x": [1, 4]}},
+                                                   "planAssumedRouteRows": ["y@pro"]}}}
 
     assert ed.listed_indicative_text(Facts) == ""
     assert ed.band_text(Facts, "x") == "3 / 1–4" and ed.band_text(Facts, "y") == "— / —"
+    assert ed.band_text(Facts, "y@pro") == "2–4† / —"
+
+
+def test_open_web_plan_row_and_costed_ladder_texts():
+    """E240's discovery step, O48's plan-row table and I28's ladder sensitivity."""
+
+    assert ed.open_web_text(None) == "—"
+    step = {"searchedOn": "2026-10-23", "queries": ["q1", "q2"], "candidates": [{"resolution": "reject"}, {"resolution": "register"}]}
+    assert ed.open_web_text(step) == "2026-10-23: 2 queries, 2 candidates (1 registered, 1 rejected)"
+
+    class Facts:
+        v3 = {"planRows": [
+            {"id": "x@pro", "configurationId": "x", "plan": "Pro", "multiple": 2.5, "costUsd": 4.0, "value": 61.0, "quality": 70.0, "grade": "controlled", "rank": 1},
+            {"id": "y@api", "configurationId": "y", "plan": None, "multiple": None, "costUsd": 9.0, "value": 50.0, "quality": 60.0, "grade": None, "rank": 2},
+            {"id": "z@api", "configurationId": "z", "plan": None, "multiple": None, "costUsd": None, "value": None, "quality": 60.0, "grade": None, "rank": None},
+        ], "diagnostics": {"rankSeparability": {"plan": {"bands": {"x@pro": [1, 2]}}, "planAssumedRouteRows": ["x@pro"]}}}
+
+        @staticmethod
+        def label(model_id):
+            return model_id.upper()
+
+    table = ed.plan_rows_table(Facts)
+    assert "| 1 | X | Pro | 2.5× | $4.00 | 61.0 | 70.0 | controlled | 1–2† |" in table
+    assert "| 2 | Y | API-cost fallback (no admitted plan) | — | $9.00 | 50.0 | 60.0 | fallback | — |" in table and "| Z |" not in table
+
+    class Labels:
+        @staticmethod
+        def labels(ids):
+            return ", ".join(ids)
+
+    assert ed.costed_ladder_text({"excluded": [], "population": 3, "levels": []}, Labels).endswith("the ladder is unchanged.")
+    assert ed.costed_ladder_text({"excluded": ["w"], "population": 2, "levels": [50.0, 40.0, 60.0]}, Labels).endswith(
+        "(w); without them (2 rows) the ladder (headline, lower quartile, upper quartile) would be 50.0 / 40.0 / 60.0.")
+    assert "would be unavailable" in ed.costed_ladder_text({"excluded": ["w"], "population": 1, "levels": []}, Labels)

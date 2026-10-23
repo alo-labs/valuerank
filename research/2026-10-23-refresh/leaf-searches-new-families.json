@@ -1,0 +1,298 @@
+{
+  "searches": [
+    {
+      "modelId": "deepseek-v4-1-flash-1017",
+      "leaf": "deepswe",
+      "searchedOn": "2026-10-23",
+      "result": "found",
+      "sources": [
+        "https://api-docs.deepseek.com/news/news261017 (DeepSeek release post 2026-10-17; chart image 'DeepSWE v1.1 Pass@1 vs. cost per task ... mini-swe-v2 harness' labels DeepSeek V41 Flash-1017 'max - 77.0%'; benchmark-table image 'DeepSWE v1.1 77.0')",
+        "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017 (provider model card: DeepSWE v1.1 77.0, Mini-SWE-V2 harness; commits 2026-10-17)",
+        "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash (September build card, 74.2 at max effort: different model version, not used)",
+        "https://api-docs.deepseek.com/ (docs front page and /updates: deepseek-flash now served by DeepSeek-V4.1-Flash-1017; no benchmark values)",
+        "data/aa_deepswe.json (AA 2026-10-17T19:26:26Z capture, 42 configurations: no V4.1 Flash 1017 row; DeepSeek V4 Flash 0731 and V4 Pro 0813 only; AA withdrew DeepSWE in Coding Agent Index v2.0)",
+        "https://deepswe.datacurve.ai/ (live 2026-10-23, 113 tasks, updated September 22, 2026; no V4.1 / 1017 row; changelog last entry Sep 3, 2026)"
+      ],
+      "notes": "A provider-published result on the exact configuration and benchmark version EXISTS: DeepSeek reports DeepSWE v1.1 = 77.0 (Pass@1 %) for DeepSeek V4.1 Flash 1017 at max effort, on its mini-swe-v2 harness, in its release post dated 2026-10-17 (chart label 'max - 77.0%', average cost about USD 0.19 per task; table footnote 'DeepSWE was evaluated using the Mini-SWE-V2 framework') and on its Hugging Face card (77.0, Mini-SWE-V2 harness). Published before the cutoff. Neither registered primary source has the row: AA's last DeepSWE capture (2026-10-17) predates the model's row and AA has since withdrawn DeepSWE; Datacurve's board (updated 2026-09-22) has no V4.1 or 1017 entry. So the registered-source order (AA, benchmark owner) yields nothing and the provider result is the last-resort fill. Caveats: provider-run and not independently reproduced; harness is DeepSeek's mini-swe-v2, not Datacurve's mini-swe-agent board harness; the value is read from an image on the release post (and as text on the card); the card itself states no effort (the release-post chart labels max, AA plots the model at max, and the September V4.1 Flash card says all its results use max). The 1017 build's published points are low, high and max only. Not applied to any data file by this search.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "queries": [
+          "DeepSeek V4.1 Flash 1017 DeepSWE score",
+          "DeepSeek-V4.1-Flash-1017 DeepSWE Datacurve leaderboard independent evaluation mini-swe-agent (extended)",
+          "DeepSeek V4.1 Flash 1017 DeepSWE 评测 77.0 第三方 复现",
+          "Datacurve DeepSWE leaderboard update October 2026 new models added DeepSeek MiniMax",
+          "Epoch AI DeepSWE benchmark hub DeepSeek V4.1 Flash MiniMax M3.1 Flash",
+          "WebFetch: deepswe.datacurve.ai (live render; 21/28 Best rows, updated September 22, 2026) and deepswe.datacurve.ai/changelog (latest entry Sep 3, 2026)",
+          "WebFetch/curl: api-docs.deepseek.com/news/news261017 (text, plus both chart/table images read: v4.1_261017_perf_cost_en.png, v4.1_261017_benchmark_table_en.png)",
+          "curl: huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/raw/main/README.md and commits API; huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/raw/main/README.md",
+          "WebFetch: benchmarklist.com/models/deepseek-deepseek-v4.1-flash-1017/, benchlm.ai/compare/deepseek-v4-1-flash-vs-minimax-m3-1-flash, datalearner.com DeepSeek-V4.1-Flash-1017 page (via search)"
+        ],
+        "candidates": [
+          {
+            "url": "https://api-docs.deepseek.com/news/news261017",
+            "publisher": "DeepSeek (model provider; registered last-resort source)",
+            "published": "2026-10-17",
+            "reports": "DeepSeek's own release post carries a chart image 'DeepSWE v1.1 Pass@1 vs. cost per task' (alt/caption: 'tested with the mini-swe-v2 harness'; image header 'Harness: mini_swe_v2'). The DeepSeek V41 Flash-1017 curve has three points, low, high and max; the max point is labelled 'DeepSeek V41 Flash-1017 max - 77.0%' at roughly USD 0.19 average cost per task (low about 72.6%, high about 73.0%, read from the image). The same release's benchmark-table image lists 'DeepSWE v1.1 77.0' for DeepSeek-V4.1-Flash-1017 with the footnote 'DeepSWE was evaluated using the Mini-SWE-V2 framework'. Chart footer: 'Public: DeepSWE v1.1 leaderboard, mini-swe-agent harness, data 2026-09-22' (for the competitor points).",
+            "resolution": "register",
+            "reason": "Model-provider result for the exact model version (V4.1 Flash 1017), benchmark version (DeepSWE v1.1), effort (max, labelled on the chart; AA plots this model at max) and metric (Pass@1 %), published 2026-10-17 before the cutoff. The provider is already the registered last-resort source for this leaf, so this is a valid fill of the leaf. Caveats for the editor: provider-run on DeepSeek's mini-swe-v2 harness (not Datacurve's board and not AA's harness); the number sits in an image, the page text does not state the value; no per-task method beyond the harness name, not independently reproduced. The three DeepSWE points shown for the 1017 build are low, high and max only."
+          },
+          {
+            "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "publisher": "DeepSeek (model provider; registered last-resort source)",
+            "published": "2026-10-17",
+            "reports": "Model card README (raw, fetched 2026-10-23): benchmark table row 'DeepSWE v1.1 | 77.0 (DS-V4.1-Flash-1017) | 74.2 (DS-V4.1-Flash) | 67.5 (K3) | 66.9 (GLM-5.3) | 73.0 (GPT-5.6 Sol) | 74.0 (Opus 5)'; note 'We use the Claude Code harness for Terminal-Bench 4.0 and the Mini-SWE-V2 harness for DeepSWE v1.1.' The card states no effort and no sample count. HF commit history: initial commit 2026-10-17T02:40:38Z, 'Release DeepSeek-V4.1-Flash-1017' 2026-10-17T05:46:55Z (only commits).",
+            "resolution": "register",
+            "reason": "Same provider result as the release post (77.0, DeepSWE v1.1, Mini-SWE-V2 harness), on the provider's own card; the effort is not stated on this card but is labelled max on the release-post chart (and the earlier V4.1 Flash card states all results use max effort, reasoning_effort=100). Published before the cutoff. Not an unregistered-party finding; recorded as the provider fill."
+          },
+          {
+            "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+            "publisher": "DeepSeek (model provider)",
+            "published": "2026-09-10",
+            "reports": "Model card for the September V4.1 Flash build: DeepSWE v1.1 (Resolved) 74.2 at max effort (reasoning_effort=100); scaffold table (Claude Code 69.8, Codex 65.6, OpenCode 65.5, Pi 66.2, mini-SWE 74.2, DSH Minimal 72.6, DSH Standard 70.5, DSH PTC 67.6); N=8 samples per task.",
+            "resolution": "reject",
+            "reason": "different model version (DeepSeek V4.1 Flash, 2026-09-10; not the 1017 build)"
+          },
+          {
+            "url": "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1 (data/aa_deepswe.json, captured 2026-10-17T19:26:26Z)",
+            "publisher": "Artificial Analysis (registered)",
+            "published": "2026-10-17",
+            "reports": "AA Coding Agent Index v1.5 DeepSWE v1.1 capture, 42 configurations: DeepSeek rows are only 'DeepSeek V4 Flash 0731 (max, Codex)' and 'DeepSeek V4 Pro 0813 (max, Codex)'. No DeepSeek V4.1 Flash 1017 or V4.1 Flash row (the model was released the same day, after the capture's content). AA withdrew DeepSWE from the Coding Agent Index in v2.0 (October 2026; recorded in this refresh's notes).",
+            "resolution": "reject",
+            "reason": "different model version (V4 Flash 0731 and V4 Pro 0813 are other versions; AA has no 1017 row and no longer publishes DeepSWE)"
+          },
+          {
+            "url": "https://deepswe.datacurve.ai/",
+            "publisher": "Datacurve (DeepSWE owner; registered)",
+            "published": "2026-09-22",
+            "reports": "Live render 2026-10-23: '113 tasks, updated September 22, 2026', Best view 21/28 models (all-effort view 57/70 configs). Only DeepSeek rows: deepseek-v4-flash [max] 53%+-4% ($0.46) and deepseek-v4-pro [max] 63%+-6% ($1.67). Changelog's latest entry is Sep 3, 2026 (GPT-6 Astra); no DeepSeek V4.1 or 1017 entry.",
+            "resolution": "reject",
+            "reason": "different model version (deepseek-v4-flash is V4 Flash, not V4.1 Flash 1017); no row exists for the exact model on the owner's board"
+          },
+          {
+            "url": "https://benchmarklist.com/models/deepseek-deepseek-v4.1-flash-1017/",
+            "publisher": "Benchmarklist (aggregator)",
+            "published": "2026-10-17",
+            "reports": "DeepSWE 1.1 = 77.0% Pass@1, thinking mode 'max', date 2026-10-17, source DeepSeek announcement, marked self-reported ('most state no effort or harness').",
+            "resolution": "reject",
+            "reason": "relay of a registered source (the DeepSeek announcement)"
+          },
+          {
+            "url": "https://www.datalearner.com/ai-models/pretrained-models/deepseek-v4-1-flash-1017/analysis",
+            "publisher": "DataLearner (aggregator)",
+            "published": null,
+            "reports": "DeepSWE 77 (rank 4 of 101), mode 'tools', thinking effort 'unknown'; says data is taken from the official release first.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (DeepSeek release)"
+          },
+          {
+            "url": "https://benchlm.ai/compare/deepseek-v4-1-flash-vs-minimax-m3-1-flash",
+            "publisher": "BenchLM (aggregator; page updated 2026-10-20)",
+            "published": "2026-10-20",
+            "reports": "DeepSWE 77.0% for DeepSeek V4.1 Flash 1017 (and 73.7% for MiniMax M3.1 Flash); no attribution, effort or date per row.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (provider tables)"
+          },
+          {
+            "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+            "publisher": "MiniMax (competitor model provider)",
+            "published": "2026-10-23",
+            "reports": "MiniMax's benchmark table lists DeepSeek V4.1 Flash-1017 at DeepSWE v1.1 77.0 and DeepSeek V4.1 Flash at 74.2; MiniMax's launch-chart image also plots DeepSeek V4.1 Flash-1017 low/high/max (max about 77%) with footer 'Public model data: DeepSWE v1.1 leaderboard, as of 2026-09-22; evaluation harness: mini-swe-agent'.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (figures equal DeepSeek's own published 77.0; no separate run by MiniMax is stated)"
+          },
+          {
+            "url": "https://www.orcarouter.ai/blog/minimax-m3-1-flash-benchmarks-vs-deepseek-v4-1-flash",
+            "publisher": "OrcaRouter, SmartScope, DEV Community, venturebeat.com, techjacksolutions.com, aimlapi.com, myclaw.ai (blogs/news)",
+            "published": "2026-10-19",
+            "reports": "Repeat DeepSeek's vendor-reported DeepSWE v1.1 77.0 for V4.1 Flash 1017 ('vendor-reported on each lab's own harness'); one post cites a Datacurve board with Muse Spark 1.3 at 75.40 ahead of 'DeepSeek V4.1 Flash' 74.20, which is the September build.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (provider table); the 74.20 figure is a different model version"
+          }
+        ],
+        "result": "found"
+      }
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "deepswe",
+      "searchedOn": "2026-10-23",
+      "result": "found",
+      "sources": [
+        "https://www.minimax.io/blog/minimax-m31f (MiniMax launch post 2026-10-19: 'It achieves 73.7% on DeepSWE v1.1'; chart image labels MiniMax-M3.1-Flash high 68.1%, xhigh 72.1%, max 73.7%, harness mini-swe-agent)",
+        "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash (provider card, first commit 2026-10-23T03:37:20Z, before the cutoff: DeepSWE v1.1 73.7; 'mini-SWE-agent 2.4.5, 512K context')",
+        "https://agent.minimax.io/tools/m3.1-flash (MiniMax guide: '73.7%' on DeepSWE v1.1, five effort levels with Max the default recommendation; no effort tied to the number)",
+        "https://www.minimax.io/news (index: no further M3.1 Flash release notes; the old /news/minimax-m31-flash URL is 404)",
+        "https://deepswe.datacurve.ai/ (live 2026-10-23: no MiniMax row; changelog last entry Sep 3, 2026)",
+        "data/aa_deepswe.json (AA 2026-10-17 capture: no MiniMax row; model released 2026-10-19) and https://artificialanalysis.ai/models/minimax-m3-1-flash (no DeepSWE value; AA withdrew DeepSWE)"
+      ],
+      "notes": "A provider-published result on the exact configuration and benchmark version EXISTS: MiniMax reports DeepSWE v1.1 = 73.7% for MiniMax-M3.1-Flash at max effort (launch-post chart label 'max 73.7%'; also high 68.1% and xhigh 72.1%), harness mini-swe-agent (card: version 2.4.5, 512K context), average cost per task about USD 0.25-0.28 (read from the chart). Launch post dated 2026-10-19; Hugging Face card first committed 2026-10-23T03:37:20Z; both before the cutoff 2026-10-23T05:38:13Z. The model post-dates AA's last DeepSWE capture (2026-10-17) and Datacurve's board (updated 2026-09-22) has no MiniMax row, so the registered AA and owner sources yield nothing and the provider result is the last-resort fill. Caveats: provider-run, not independently reproduced; effort is taken from the chart label (post text and card give none); AA's page says only 'reasoning version' (VentureBeat reports AA's Index at maximum effort), so the match of AA's configuration to max rests on that and on MiniMax naming max the default. Not applied to any data file by this search.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "queries": [
+          "MiniMax-M3.1-Flash DeepSWE benchmark",
+          "MiniMax-M3.1-Flash release minimax.io news benchmark DeepSWE 73.7",
+          "MiniMax M3.1 Flash 发布 DeepSWE 推理强度 max 73.7 官方",
+          "minimax.io news \"M3.1 Flash\" MiniMax official announcement benchmarks reasoning effort (extended)",
+          "MiniMax M3.1 Flash DeepSWE 第三方评测 复现 Datacurve",
+          "reddit MiniMax M3.1 Flash DeepSWE independent run mini-swe-agent result resolved",
+          "Datacurve DeepSWE leaderboard update October 2026 new models added DeepSeek MiniMax",
+          "Epoch AI DeepSWE benchmark hub DeepSeek V4.1 Flash MiniMax M3.1 Flash",
+          "WebFetch/curl: minimax.io/blog/minimax-m31f (official launch post 2026-10-19; three benchmark images read: DeepSWE, Agents' Last Exam, Automation-Bench), agent.minimax.io/tools/m3.1-flash, huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash (raw README and commits API), minimax.io/news (index)",
+          "WebFetch: deepswe.datacurve.ai and /changelog, artificialanalysis.ai/models/minimax-m3-1-flash, venturebeat.com M3.1 Flash article, datalearner.com MiniMax M3.1 Flash page, pingwest.com/w/318541, aimlapi.com review, digitalapplied.com review"
+        ],
+        "candidates": [
+          {
+            "url": "https://www.minimax.io/blog/minimax-m31f",
+            "publisher": "MiniMax (model provider; registered last-resort source)",
+            "published": "2026-10-19",
+            "reports": "Official launch post: 'It achieves 73.7% on DeepSWE v1.1, placing it alongside top models.' Its image 'DeepSWE v1.1 Score vs. Cost per Task (USD)' plots MiniMax-M3.1-Flash at high 68.1%, xhigh 72.1% and max 73.7% (average cost per task about USD 0.25-0.28, read from the image); footer: 'Public model data: DeepSWE v1.1 leaderboard, as of 2026-09-22; evaluation harness: mini-swe-agent. Costs converted at 1 USD = 6.6862 CNY.' The post text states no effort or harness.",
+            "resolution": "register",
+            "reason": "Model-provider result for the exact model, benchmark version (DeepSWE v1.1), effort max (chart label 'max 73.7%') and metric (score %), published 2026-10-19 before the cutoff. The provider is already the registered last-resort source, so this is a valid fill of the leaf. Caveats: provider-run on mini-swe-agent (version 2.4.5, 512K context per the card), not independently reproduced; the effort is read from the chart label, not the post text; AA's page for this model says only 'the reasoning version' (AA's 42 Index is described by VentureBeat as at maximum reasoning effort, and MiniMax's guide names max the default recommendation), so AA's plotted configuration is taken to be max."
+          },
+          {
+            "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+            "publisher": "MiniMax (model provider; registered last-resort source)",
+            "published": "2026-10-23",
+            "reports": "Model card: 'DeepSWE v1.1 73.7' in the benchmark table (MiniMax M3.1 Flash; DeepSeek V4.1 Flash-1017 77.0, V4.1 Flash 74.2, K3 67.5, GLM-5.3 66.9, GPT-5.6 Sol 73.0, Opus 5 74.0); Evaluation Notes: 'DeepSWE v1.1: mini-SWE-agent 2.4.5, 512K context.' No effort stated for the row; inference section lists reasoning_effort low, medium, high, xhigh, max. HF commit history: single commit 'Init MiniMaxAI/MiniMax-M3.1-Flash' at 2026-10-23T03:37:20Z (about 2 hours before the cutoff 05:38:13Z).",
+            "resolution": "register",
+            "reason": "Same provider result (73.7) with a named harness version, on the provider's own card, first committed 2026-10-23T03:37:20Z, before the cutoff. Effort for the row is not stated on the card; the launch-post chart labels 73.7 as max. Recorded as the provider fill alongside the launch post (which carries the effort label and the earlier date)."
+          },
+          {
+            "url": "https://www.minimax.io/blog/minimax-m31f (high 68.1% and xhigh 72.1% points on the same chart)",
+            "publisher": "MiniMax (model provider)",
+            "published": "2026-10-19",
+            "reports": "Other efforts of the same model on the same chart: high 68.1%, xhigh 72.1%.",
+            "resolution": "reject",
+            "reason": "different effort (high and xhigh are not the plotted configuration, which is max)"
+          },
+          {
+            "url": "https://www.datalearner.com/ai-models/pretrained-models/1114",
+            "publisher": "DataLearner (aggregator)",
+            "published": "2026-10-19",
+            "reports": "DeepSWE v1.1 (tools): High 68.10 (rank 35/106), Extra-High 72.10 (19/106), Max 73.70 (10/106); lists the self-reported 73.7% from MiniMax's release blog; says harness and reasoning effort are not stated in the blog.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (values equal MiniMax's own chart)"
+          },
+          {
+            "url": "https://deepswe.datacurve.ai/",
+            "publisher": "Datacurve (DeepSWE owner; registered)",
+            "published": "2026-09-22",
+            "reports": "Live render 2026-10-23: updated September 22, 2026, 113 tasks; no MiniMax row of any model; changelog (latest Sep 3, 2026) never mentions MiniMax.",
+            "resolution": "reject",
+            "reason": "not the exact configuration (no MiniMax row exists on the owner's board)"
+          },
+          {
+            "url": "https://artificialanalysis.ai/models/minimax-m3-1-flash",
+            "publisher": "Artificial Analysis (registered)",
+            "published": "2026-10-23",
+            "reports": "AA model page payload (2026-10-23 capture): no DeepSWE value (AA withdrew DeepSWE from the Coding Agent Index in v2.0); FrontierCode 38.58%, Terminal-Bench 4.0 25.76%; 'This page shows the reasoning version of this model.'",
+            "resolution": "reject",
+            "reason": "not a score (AA publishes no DeepSWE value for this model)"
+          },
+          {
+            "url": "https://venturebeat.com/technology/minimaxs-new-m3-1-flash-beats-deepseek-and-opus-5-on-a-key-business-benchmark-at-lower-cost-but-with-a-high-hallucination-rate",
+            "publisher": "VentureBeat",
+            "published": "2026-10-19",
+            "reports": "Relays MiniMax's '73.7% on DeepSWE v1.1'; states AA's Index score applies at maximum reasoning effort.",
+            "resolution": "reject",
+            "reason": "relay of a registered source (MiniMax launch post)"
+          },
+          {
+            "url": "https://www.pingwest.com/w/318541",
+            "publisher": "PingWest, DigitalToday, Beijing Business Today, WoShiPM, iFeng, 36Kr (news)",
+            "published": "2026-10-20",
+            "reports": "Repeat 'DeepSWE v1.1 73.7%' from MiniMax's announcement; no effort or harness stated.",
+            "resolution": "reject",
+            "reason": "relay of a registered source"
+          },
+          {
+            "url": "https://aimlapi.com/blog/minimax-m3-1-flash-review",
+            "publisher": "AIMLAPI, DigitalApplied, TechJack Solutions, myclaw.ai, eesel.ai, OrcaRouter, benchlm.ai, llm-stats.com, benchmarklist.com (reviews/aggregators)",
+            "published": "2026-10-19",
+            "reports": "Repeat MiniMax's 73.7 (launch table transcription, 'MiniMax-reported; harnesses not stated'); eesel.ai says the model trails DeepSeek on DeepSWE (73.7 vs 77.0) and gives no run of its own; no independent mini-swe-agent run found.",
+            "resolution": "reject",
+            "reason": "relay of a registered source"
+          }
+        ],
+        "result": "found"
+      }
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "bugHunt",
+      "searchedOn": "2026-10-23",
+      "result": "not found",
+      "sources": [
+        "https://github.com/phuryn/bug-hunt-bench (main = 46802fc312b6fd467b0baee519df05693f120232, 2026-10-19T12:02:52+02:00; all 139 files listed, results/combined-scoreboard.csv, scoreboard.csv, run-notes.md (1573 lines), notes.md: 0 MiniMax rows; only MiniMax artifacts are two minimax-m2.7 effort-dial probe logs from 2026-09-12)",
+        "https://bughunt.productcompass.pm/data/benchmark.json (updated 2026-10-19; 0 MiniMax runs)",
+        "https://bughunt.productcompass.pm/ (client-rendered; no run rows in the fetched page)",
+        "https://www.minimax.io/blog/minimax-m31f and https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash (provider launch post and card: no Bug Hunt Bench result)",
+        "data/bug_hunt_scoreboard.json (project capture at 46802fc: 202 rows, no MiniMax row)"
+      ],
+      "notes": "Bug Hunt Bench's owner has published no MiniMax-M3.1-Flash run (the model was released 2026-10-19, the board and repo main date from 2026-10-19 12:02 CEST). The provider's launch post and model card carry no Bug Hunt Bench result, so the last-resort provider fill does not exist either. No other party reports a Bug Hunt score for this model: BenchLM shows 'Coming soon'. The repo's only MiniMax files are M2.7 effort-dial probes, a different model version. Limitation: the GitHub API was not reachable for this session (repository not enabled), so open issues or pull requests in the repo could not be listed; the pinned commit's files and the site's benchmark.json were inspected directly. Repeat the search on the next refresh.",
+      "openWeb": {
+        "searchedOn": "2026-10-23",
+        "queries": [
+          "MiniMax-M3.1-Flash Bug Hunt Bench",
+          "\"Bug Hunt Bench\" MiniMax M3.1 Flash OR \"MiniMax-M3\" results (extended)",
+          "Bug Hunt Bench MiniMax 评测 bug-hunt-bench M3.1 Flash",
+          "Pawel Huryn Bug Hunt Bench new model results October 2026 DeepSeek V4.1 Flash 1017 MiniMax",
+          "git ls-remote https://github.com/phuryn/bug-hunt-bench (main = 46802fc312b6fd467b0baee519df05693f120232, 2026-10-19T12:02:52+02:00); blob-less clone, git ls-tree of all 139 files; grep -i minimax over results/*.csv, run-notes.md, benchmark.json, notes.md",
+          "curl: bughunt.productcompass.pm/data/benchmark.json (updated 2026-10-19; 'minimax' 0 matches; no m3 matches) and raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md (1573 lines; 0 MiniMax matches)",
+          "WebFetch: bughunt.productcompass.pm/ (client-rendered, no run rows), benchlm.ai/compare/deepseek-v4-1-flash-vs-minimax-m3-1-flash, benchlm.ai/compare/glm-5-3-flash-vs-minimax-m3-1-flash; GitHub API (blocked by the session proxy: repository not enabled), so issues/PRs of the repo could not be listed"
+        ],
+        "candidates": [
+          {
+            "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+            "publisher": "Product Compass (Pawel Huryn), Bug Hunt Bench owner (registered)",
+            "published": "2026-10-19",
+            "reports": "Board data updated 2026-10-19: no row for any MiniMax model (0 matches for 'minimax'). Nearest rows are MiMo, GLM-5.3 Flash and DeepSeek V4.1 Flash 1017.",
+            "resolution": "reject",
+            "reason": "not the exact configuration (no MiniMax-M3.1-Flash row exists on the owner's board)"
+          },
+          {
+            "url": "https://github.com/phuryn/bug-hunt-bench/tree/46802fc312b6fd467b0baee519df05693f120232/results/effort-dial-probes",
+            "publisher": "Product Compass / phuryn (GitHub repo at pinned commit)",
+            "published": "2026-09-12",
+            "reports": "Only MiniMax artifacts at main: results/effort-dial-probes/20260912-minimaxm27-openrouter.txt and ...-n5.txt, effort-dial probes of minimax/minimax-m2.7 via OpenRouter ('The arm itself asserts NO tier'). They test whether a reasoning dial exists; they report no Bug Hunt score and no run row.",
+            "resolution": "reject",
+            "reason": "different model version (MiniMax M2.7, not M3.1 Flash) and not a score"
+          },
+          {
+            "url": "https://benchlm.ai/compare/deepseek-v4-1-flash-vs-minimax-m3-1-flash",
+            "publisher": "BenchLM (aggregator; page updated 2026-10-20)",
+            "published": "2026-10-20",
+            "reports": "Bug Hunt Bench row: DeepSeek V4.1 Flash 1017 '39.1 fixes' (the owner's Claude Code mean-of-7 row); MiniMax M3.1 Flash 'Coming soon' (no score). Related BenchLM pages mark the MiniMax entry 'not directly comparable' and not ranked on the public coding lane.",
+            "resolution": "reject",
+            "reason": "not a score (no MiniMax value published; 'Coming soon' placeholder)"
+          },
+          {
+            "url": "https://www.mindstudio.ai/blog/minimax-m3-1-flash-mcode-hands-on/",
+            "publisher": "MindStudio (blog)",
+            "published": null,
+            "reports": "Hands-on test of the MiniMax M3.1 Flash preview in M-Code, including a 'SQL bug hunt' task where the model found a boundary-date bug; no benchmark score.",
+            "resolution": "reject",
+            "reason": "not a score (an anecdotal task, not Bug Hunt Bench; also a preview build)"
+          },
+          {
+            "url": "https://www.minimax.io/blog/minimax-m31f",
+            "publisher": "MiniMax (model provider)",
+            "published": "2026-10-19",
+            "reports": "Launch post and the Hugging Face card benchmark table (14 rows: Automation-Bench, BankerToolBench, Terminal Bench 4.0, DeepSWE v1.1, OSWorld 2.0, and so on) contain no Bug Hunt Bench row.",
+            "resolution": "reject",
+            "reason": "not a score (provider publishes no Bug Hunt result)"
+          },
+          {
+            "url": "https://www.besthub.dev/articles/deepseek-harness-outperforms-claude-code-on-bug-hunt-bench-with-v4-1-flash-1017-7656a8d7e1d0",
+            "publisher": "BestHub, explainx.ai (news)",
+            "published": "2026-10-19",
+            "reports": "Coverage of the owner's Bug Hunt Bench results for DeepSeek V4.1 Flash 1017 only; no MiniMax model mentioned.",
+            "resolution": "reject",
+            "reason": "not a score (no MiniMax result reported)"
+          }
+        ],
+        "result": "not found"
+      }
+    }
+  ]
+}

@@ -1411,5 +1411,19 @@
     "url": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
     "variant": "grok-4-6-xhigh",
     "note": "Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row. Selected configuration: Grok 4.6 (xhigh), which has an exact AA DeepSWE result and a matched exact Bug Hunt result. The Grok 4.6 family's other roster entry is Grok 4.6 (medium), tracked unranked; no result is transferred between efforts."
+  },
+  {
+    "id": "deepseek-v4-1-flash-1017",
+    "displayName": "DeepSeek V4.1 Flash 1017",
+    "url": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+    "variant": "deepseek-v4-1-flash-1017",
+    "note": "Refresh 2026-10-23 (owner decision O47, cutoff moved to this capture): near-frontier family on AA's rendered Intelligence Index vs. total-cost chart observed 2026-10-23 (DeepSeek V4.1 Flash 1017 (max), Index 45, USD 444.60, 3 points below GPT-6.1 Sol (medium) at its cost); added under the AGENTS.md near-frontier rule. Selected configuration: DeepSeek V4.1 Flash 1017 (max), AA's only configuration of this model version. No result is transferred from DeepSeek V4.1 Flash or DeepSeek V4 Flash 0731, which are other versions."
+  },
+  {
+    "id": "minimax-m3-1-flash",
+    "displayName": "MiniMax-M3.1-Flash",
+    "url": "https://artificialanalysis.ai/models/minimax-m3-1-flash",
+    "variant": "minimax-m3-1-flash",
+    "note": "Refresh 2026-10-23 (owner decision O47, cutoff moved to this capture): near-frontier family on AA's rendered Intelligence Index vs. total-cost chart observed 2026-10-23 (MiniMax-M3.1-Flash, Index 43, USD 283.18, 3 points below MiMo-V2.6-Pro at its cost); added under the AGENTS.md near-frontier rule. Selected configuration: MiniMax-M3.1-Flash, AA's only configuration of this model. No result is transferred from MiniMax-M3 or other MiniMax versions."
   }
 ]
