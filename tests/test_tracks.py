@@ -39,7 +39,7 @@ def test_track_records_attach_their_source_and_score_only_in_their_ranking():
 
 def test_a_published_standard_error_is_the_leaf_noise():
     assert v.sampling_sd("vibeCode", q.Observation(90.0), {"stderr": 1.5}) == 1.5
-    # E264: LiveBench 2.0 Overall is the mean of seven categories, each a binomial share of its published task count.
+    # E264, O67: LiveBench 2.0 Overall is the release's weighted mean of seven categories (unit weights here), each a binomial share of its published task count.
     categories = {name: 50.0 for name in v.LIVEBENCH_CATEGORY_TASKS}
     variance = sum(((0.5 * n + 0.5) / (n + 1)) * (1 - (0.5 * n + 0.5) / (n + 1)) / n for n in v.LIVEBENCH_CATEGORY_TASKS.values())
     assert v.sampling_sd("livebench2Overall", q.Observation(50.0), {"categories": categories}) == pytest.approx(100 * variance ** 0.5 / 7)
@@ -78,3 +78,13 @@ def test_ai_coding_daily_noise_has_a_narrow_reading():
     wide = v.sampling_sd("aiCodingDaily", q.Observation(50.0), {})
     narrow = v.sampling_sd("aiCodingDaily", q.Observation(50.0), {}, tasks_of={**v.SAMPLING_TASKS, "aiCodingDaily": v.AICD_NARROW_TASKS})
     assert wide == pytest.approx(100 * (3.5 / 7 * (1 - 3.5 / 7) / 6) ** 0.5) and narrow == pytest.approx(100 * (30.5 / 61 * (1 - 30.5 / 61) / 60) ** 0.5)
+
+
+def test_livebench_noise_uses_the_release_weights():
+    """O67: the weighted Overall's noise weights each category draw by the release's weight."""
+
+    categories = {name: 50.0 for name in v.LIVEBENCH_CATEGORY_TASKS}
+    weights = {name: 1.0 for name in v.LIVEBENCH_CATEGORY_TASKS} | {"long_agentic": 2.0, "coding": 1.5, "design": 1.5}
+    unit = v.sampling_sd("livebench2Overall", q.Observation(50.0), {"categories": categories})
+    weighted = v.sampling_sd("livebench2Overall", q.Observation(50.0), {"categories": categories, "weights": weights})
+    assert weighted != unit and weighted > 0

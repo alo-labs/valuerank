@@ -248,3 +248,9 @@ def test_excluded_configurations_partition_into_five_classes():
     assert figures["excluded.nearFamilyPoints"] == "GPT-6 Astra (xhigh)"
     with pytest.raises(f.FigureError, match="do not partition"):
         f.family_figures(SCORES, excluded | {"not-in-the-cohort"}, order)
+
+
+def test_a_model_name_with_digits_is_not_a_count():
+    names = f.known_names(SCORES)
+    assert f.lint("Shown on the Claude Haiku 5.5 rows.", names, f.configuration_names(SCORES), "2026-10-25") == []
+    assert f.lint("Shown on 12 rows.", names, f.configuration_names(SCORES), "2026-10-25")

@@ -230,7 +230,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
                  **({"weights": record["weights"]} if record.get("weights") else {}),
                  **({"note": record["note"]} if record.get("note") else {}),
                  # I50 M2: a board that lists the configuration more than once names its selection and the other rows.
-                 **({"selection": record["selection"], "alternates": record["alternates"]} if record.get("alternates") else {})},
+                 **({"selection": record["selection"], "alternates": record["alternates"]} if record.get("alternates") else {}),
+                 **({"cutoffDayRow": record["cutoffDayRow"]} if record.get("cutoffDayRow") else {})},
                 "sweTracks", f"records[modelId={model_id}, leaf={leaf.key}].value")
     for leaf in q.LEAVES:
         entry = (supplements or {}).get((model_id, leaf.key))

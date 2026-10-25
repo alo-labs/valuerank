@@ -747,7 +747,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `7e41fb02b14d6008628956290c72501b8e4bf2bd31ce59b22457f9f85f55c935`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `f55f10b2f6c4db1c0d9d6914f582f237ae3fad72f7497cf7a428d0ab7218f9ec`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -758,14 +758,14 @@ Bundle hash `7e41fb02b14d6008628956290c72501b8e4bf2bd31ce59b22457f9f85f55c935`: 
 | costCharts | `data/aa/cost_charts_capture.json` | `32ffe791efffe4eb918f786bbbf62ecd8055aa2ccd34e8a9cbf0588b9ac1132e` | 2026-10-25T09:55:32.879Z | scripts/capture-aa-cost-charts.js |
 | configurationMap | `data/v3_configuration_map.json` | `554cb718f93d417df82ee3b8dcf0e827c41d49db504bf157334ad3cae57de0ea` | 2026-10-25 | editorial pinning from the research capture |
 | codingAgentsManifest | `data/aa/coding_agents_manifest.json` | `8329ba171929e11012047c0411d936c435415f15b89990910f067bf01fc29a42` | — | editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64) |
-| frontierCapture | `data/aa_frontier_capture.json` | `fe010fe4a624d1fa13309e5256c1c44a073280640db13490447be9199b566b87` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
+| frontierCapture | `data/aa_frontier_capture.json` | `43d8587dbd42051070854f4bd96886779f3cb00f9324b6a39d88c84e3b7b8630` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `871ff30c9613bbf5fe81d22b61cbd429ea7fe11587b77e0285765c817ee195d1` | — | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `621695b6104795ce5810bb230d17422bb657010acc8a97e4d77b1fece10cd3a3` | 2026-10-25T10:44:11Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
 | planRoutes | `data/plan_cost_routes.json` | `24ce9946272da82d2c058d07cc5be74619b8f7519c5988400574d22af1b5e8cc` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `9be099828d530cc4ad2294d6fdf6ff03a3d94cc5530e8d6ef3279133491930bd` | 2026-10-23T06:26:23Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | leafEvidence | `data/leaf_evidence.json` | `e7e31c0f4ae8bf333b61f24614f46470df7a62a9b6b48dfb7c090030a90ee853` | 2026-10-23 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | — | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
-| sweTracks | `data/swe_tracks.json` | `922f5893228eb02fed2c0e81a8a3a8d617c0be4ddd186ec76fde9df16e81801d` | 2026-10-25T10:44:11Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
+| sweTracks | `data/swe_tracks.json` | `7c2004f14fc233efb067d2bc42f78069cfd965935b047e8bb250079868856fe5` | 2026-10-25T10:44:11Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
 | anchors | `data/v3_frozen.json` | `d4f3bb4b769b2fcfc1b5c5847f67b396c6a386d7db4b17f99dffa9321e480cfc` | 2026-10-25 | valuerank.value_v3 freeze |
 | anchors:aicd | `data/v3_frozen_aicd.json` | `04a9d0fa638df44b005021793675bb333bc3aa40fd14dec9b706efbd7688bd41` | 2026-10-25 | valuerank.value_v3 freeze |
 

@@ -214,6 +214,9 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         cross = section["diagnostics"]["frontierCodeCrossSource"]
         figures[f"{track}.fillEffect.mean"] = f"{weights['frontierCode'] / 100 * cross['meanOffset']:.2f}"
         figures[f"{track}.fillEffect.max"] = f"{weights['frontierCode'] / 100 * cross['maxAbsOffset']:.2f}"
+    # O69: rows dated on the cutoff's day, placed before the cutoff by the board's relative age, disclosed.
+    figures["cutoffDayRows"] = series([f"{names.get(record['modelId'], record['modelId'])} on {tracks['sources'][record['leaf']]['publisher'].split(' (')[0]}"
+                                       for record in tracks["records"] if record.get("cutoffDayRow")]) or "none"
     # I50 M2: configurations a board lists twice, with the row the selection rule chose.
     tracks_records = [record for record in tracks["records"] if record.get("alternates")]
     figures["duplicateRows"] = series([f"{names.get(record['modelId'], record['modelId'])} on {tracks['sources'][record['leaf']]['publisher'].split(' (')[0]} "
@@ -428,6 +431,9 @@ def lint(source: str, names: list[str], configurations: list[str] = (), release_
                 for constant in RULE_CONSTANTS:
                     undated = undated.replace(constant, "")
                 counts = [match.group(0) for match in _COUNT.finditer(undated)]
+                # A name with digits ("Claude Haiku 5.5 rows") is not a count of rows.
+                for name in names:
+                    undated = undated.replace(name, "")
                 if not _FIXTURE.search(sentence):
                     counts += [match.group(0) for match in _COUNTED.finditer(_NOT_A_FIGURE.sub("", undated))]
                 if counts:

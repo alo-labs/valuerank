@@ -34,3 +34,17 @@ def test_selection_prefers_the_bug_hunt_harness_then_the_latest_date_then_stops(
 def test_the_real_board_selects_deepseeks_harness_row():
     chosen = tracks.select_aicd("deepseek-v4-1-flash-1017", "Deepseek-V4.1-Flash-1017 (Max)", tracks.aicd_rows())
     assert chosen["row"]["harness"] == "DeepSeek Harness" and tracks.aicd_points(chosen["row"]) == 52.24
+
+
+def test_row_dates_follow_o69():
+    """O69: a row after the cutoff's day stops; a cutoff-day row needs a recorded instant before the cutoff."""
+
+    cutoff = "2026-10-25T09:56:47Z"
+    assert tracks.check_row_date({"model": "M", "harness": "H", "tested": "2026-10-24"}, cutoff) is None
+    assert "placed at 2026-10-25T00:58:00Z" in tracks.check_row_date({"model": "Kimi K3.1 Pro (Max)", "harness": "OpenCode", "tested": "2026-10-25"}, cutoff)
+    for row, message in (({"model": "M", "harness": "H", "tested": "2026-10-26"}, "after the cutoff's day"),
+                         ({"model": "M", "harness": "H", "tested": "2026-10-25"}, "without a recorded instant")):
+        with pytest.raises(ValueError, match=message):
+            tracks.check_row_date(row, cutoff)
+    with pytest.raises(ValueError, match="without a recorded instant"):
+        tracks.check_row_date({"model": "Kimi K3.1 Pro (Max)", "harness": "OpenCode", "tested": "2026-10-25"}, "2026-10-25T00:30:00Z")

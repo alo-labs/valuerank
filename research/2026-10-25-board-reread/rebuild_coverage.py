@@ -86,7 +86,7 @@ def other() -> dict:
         key = board["key"]
         if key in LIVEBENCH_KEYS:
             column = LIVEBENCH_KEYS[key]
-            board.update(version="LiveBench 2.0 release 20261023", updated="2026-10-24", readAt=READ_AT,
+            board.update(version="LiveBench 2.0 release 20261023", updated="2026-10-23", readAt=READ_AT,
                          sourceUrl="https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)")
             for model_id, cell in board["coverage"].items():
                 if cell["status"] not in ("exact", "plausible"):

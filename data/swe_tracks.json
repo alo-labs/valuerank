@@ -33,7 +33,8 @@
     "livebench2Overall": {
       "benchmark": "LiveBench 2.0 Overall (release 2026-10-23)",
       "publisher": "LiveBench",
-      "updated": "2026-10-24",
+      "updated": "2026-10-23",
+      "updatedBasis": "the site's displayed release date ('23 October 2026'); the release CSV's HTTP Last-Modified is 2026-10-24",
       "url": "https://livebench.ai/data/20261023/table.csv",
       "harness": "LiveBench's own, one run per model at its top effort",
       "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
@@ -705,7 +706,8 @@
       "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[kimi-k3-1-pro]",
       "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used.",
       "harness": "OpenCode",
-      "tested": "2026-10-25"
+      "tested": "2026-10-25",
+      "cutoffDayRow": "dated on the cutoff's day; placed at 2026-10-25T00:58:00Z (the board showed 'tested 9 hours ago' at 2026-10-25T09:58Z), before the cutoff 2026-10-25T09:56:47Z (O69)"
     }
   ]
 }

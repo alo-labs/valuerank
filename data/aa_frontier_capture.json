@@ -59,12 +59,16 @@
     },
     {
       "family": "MiMo-V2.6-Flash",
-      "efforts": [],
+      "efforts": [
+        "none"
+      ],
       "frontier_configurations": 1
     },
     {
       "family": "MiMo-V2.6-Pro",
-      "efforts": [],
+      "efforts": [
+        "none"
+      ],
       "frontier_configurations": 1
     },
     {
@@ -78,22 +82,29 @@
       "frontier_configurations": 4
     },
     {
+      "fallback": "with fallback",
       "family": "Claude Opus 5.5",
       "efforts": [
         "high",
         "xhigh",
         "max"
       ],
-      "frontier_configurations": 3,
-      "fallback": "with fallback"
+      "frontier_configurations": 3
     },
     {
+      "family": "Kimi K3.1 Pro",
+      "efforts": [
+        "none"
+      ],
+      "frontier_configurations": 1
+    },
+    {
+      "fallback": "with fallback",
       "family": "Claude Sonnet 5.5",
       "efforts": [
         "max"
       ],
-      "frontier_configurations": 1,
-      "fallback": "with fallback"
+      "frontier_configurations": 1
     }
   ],
   "near_frontier_policy": {

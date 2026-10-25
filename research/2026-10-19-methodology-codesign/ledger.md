@@ -1556,3 +1556,16 @@ Asked whether O60 should also test each row's own date (AI Coding Daily states i
 - L7 (adopted): the draft names the pinned LiveBench URL and that the default page still shows 2026-10-14.
 - L8 (adopted): wording.
 - Round status (O56): not clean (four Mediums). Draft r117.
+
+## Internal review I59 (Claude Sonnet 5.5, effort xhigh, on r117) — adopted, modified or rejected
+- M1 (adopted; E90 amended, editor decision): the draft said both that the release scores the moved 2026-10-25 GDPval-AA ratings and that a refit is flagged while the frozen value is kept. The engine has always scored the rating on AA's page at the capture, which is the value the pinned Index integrates, and AGENTS.md takes leaves from AA; E90 now says so, drops the freeze premise (contradicted by the 2026-10-25 move) and states that a move between captures is disclosed in the refresh's ledger entry and E90, never a score change beyond the new rating. The reviewer's owner question Q1 is resolved by that existing rule, not asked.
+- L1 (adopted): "about 0.2 z points" (the largest move is 0.205 z).
+- L2 (adopted, build changed): O69 is enforced in the added-leaf build (`build_swe_tracks.check_row_date`): a row dated after the cutoff's day stops the build, a cutoff-day row needs a recorded instant before the cutoff and carries `cutoffDayRow`, and the draft's disclosure is a figure. Q2 (a cutoff-day row whose age places it after the cutoff) follows from O69's own condition: it stops the build; not asked.
+- L3 (adopted): LiveBench's source date is the site's displayed release date (2026-10-23), with the CSV's HTTP date recorded beside it.
+- L4 (adopted): only the two Vals leaf boards were re-read; the wording says so.
+- L5 (adopted): Kimi K3.1 Pro joins the next end-user report search; its O66 effort assumption is listed among the known limitations.
+- L6 (adopted): the Haiku cost caveat is cited from the current rows, not hand-typed dates.
+- L7 (adopted, data changed): the 18 pre-O51 "defer" roster decisions are retired; reconciliation and build pass without them (every plotted effort is its own row under O51).
+- L8 (adopted, data changed): the capture's `family_groups` include Kimi K3.1 Pro (8 frontier families).
+- L9 (adopted): wording, a test comment, "(O54, O66)" in the generated cohort text, and the r117 history entry. The figures check no longer counts the digits of a model name ("Claude Haiku 5.5 rows") as a count (a false positive in the check, fixed there).
+- Round status (O56): not clean (one Medium). Draft r118.

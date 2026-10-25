@@ -1341,7 +1341,7 @@ def plotted_names_text(facts):
     state = facts.scores["aaPlottedNames"]
     return (f"AA plots {series(state['withFallback'])} only \"with fallback\", and every other cohort family ({series(state['withoutFallback'])}) without it; "
             "a third-party record matches by model and effort, and the build stops if AA plots one model and effort both ways (E214). "
-            f"AA plots {series(state['noEffort'])} with no effort (O54).")
+            f"AA plots {series(state['noEffort'])} with no effort (O54, O66).")
 
 
 def source_clocks_text(facts):

@@ -36,7 +36,8 @@ LEAVES = {
     # _overall_weights), to two decimals. The configuration match is the coverage capture's (one LiveBench row per model,
     # at its top effort); the categories come from the release table.
     "livebench2Overall": ("livebench2-coding", "other", {
-        "benchmark": "LiveBench 2.0 Overall (release 2026-10-23)", "publisher": "LiveBench", "updated": "2026-10-24",
+        "benchmark": "LiveBench 2.0 Overall (release 2026-10-23)", "publisher": "LiveBench", "updated": "2026-10-23",
+        "updatedBasis": "the site's displayed release date ('23 October 2026'); the release CSV's HTTP Last-Modified is 2026-10-24",
         "url": "https://livebench.ai/data/20261023/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
         "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
         "unit": "percent",
@@ -90,6 +91,25 @@ def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict
     return {"row": picked[0], "rule": rule, "alternates": [row for row in rows if row is not picked[0]]}
 
 
+# O69 (2026-10-25): O60 is a board-level test; a row dated on the cutoff's day stands only with a recorded instant, from
+# the board's relative age, before the cutoff, and it is disclosed. A row dated after the cutoff's day never counts.
+CUTOFF_DAY_ROWS = {("Kimi K3.1 Pro (Max)", "OpenCode"): ("2026-10-25T00:58:00Z", "the board showed 'tested 9 hours ago' at 2026-10-25T09:58Z")}
+
+
+def check_row_date(row: dict, cutoff: str) -> str | None:
+    """O69: the row's date against the release cutoff; returns the disclosure for a cutoff-day row."""
+
+    day = cutoff[:10]
+    if row["tested"] > day:
+        raise ValueError(f"{row['model']} ({row['harness']}) is dated {row['tested']}, after the cutoff's day (O69)")
+    if row["tested"] < day:
+        return None
+    instant, basis = CUTOFF_DAY_ROWS.get((row["model"], row["harness"]), (None, None))
+    if instant is None or instant >= cutoff:
+        raise ValueError(f"{row['model']} ({row['harness']}) is dated on the cutoff's day without a recorded instant before the cutoff (O69)")
+    return f"dated on the cutoff's day; placed at {instant} ({basis}), before the cutoff {cutoff} (O69)"
+
+
 def aicd_points(row: dict) -> float:
     return round(float(row["laravel"]) + float(row["react"]) + float(row["edge"]), 2)
 
@@ -105,6 +125,7 @@ def main() -> None:
     table = {row["model"]: row for row in csv.DictReader((READ / "livebench" / "table-20261023.csv").open())}
     weights = json.loads((READ / "livebench" / "weights-20261023.json").read_text())
     board = aicd_rows()
+    cutoff = json.loads((ROOT / "data" / "aa" / "aa_v432_snapshot.json").read_text())["capturedAt"]  # the release cutoff (O65)
     records, sources = [], {}
     for leaf, (key, origin, meta) in LEAVES.items():
         sources[leaf] = {**meta, "capturedAt": captured[origin]}
@@ -135,6 +156,8 @@ def main() -> None:
                     record["value"] = aicd_points(chosen["row"])
                     record["harness"] = chosen["row"]["harness"]
                     record["tested"] = chosen["row"]["tested"]
+                    if disclosure := check_row_date(chosen["row"], cutoff):
+                        record["cutoffDayRow"] = disclosure
                     if chosen["alternates"]:
                         record["selection"] = f"one of {len(chosen['alternates']) + 1} rows for this configuration, chosen by {chosen['rule']} (I50 M2)"
                         record["alternates"] = [{"harness": row["harness"], "tested": row["tested"], "value": aicd_points(row)}
