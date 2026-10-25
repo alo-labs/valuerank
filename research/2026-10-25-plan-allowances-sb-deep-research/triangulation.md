@@ -41,7 +41,8 @@ $200 for all input, cache-write and cache-read traffic of ~120 agents. In every 
 30M output tokens imply ≈$2,000 for the run, or ≈$2,860/week at 70%. The reporter's own token count therefore does not
 reproduce the reporter's dollar figure. A tool that omits workflow subagents would produce exactly this gap, a failure
 mode another user documented for Claude Code's per-session counter [18]. **Ruling: eligibility challenged.** The figure
-is indicative only, following the stage-1 precedent for figures that do not reproduce from the reporter's own numbers.
+is indicative only, following the stage-1 precedent for figures that do not reproduce from the reporter's own numbers. With the pure-Opus ledgers' 16.5–22.8% output share, the run would be
+$2.6–3.6k and the week $3.8–5.2k. Even tomm3hshipp's mixed-week 29.9% gives ≈$2.0k for the run.
 The verdict is unchanged, because P1 also holds NicoAica's $1,294–1,681 [13] against Kanttz $2,578–2,920 [10] (≥1.53×),
 and Kanttz against Last_Lab_3627 ($2,045) is already 1.26×.
 
