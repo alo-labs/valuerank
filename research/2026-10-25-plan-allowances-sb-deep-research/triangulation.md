@@ -102,3 +102,12 @@ C-5 Wokey "no change" (aggregate, to 10-19) against the post-10-17 tightening: t
 Partition and schema claims: A2 [15] and B2 [30] for the provider-side facts. Report-level values are C/D user
 evidence by nature, which O11 anticipates by requiring two concordant independent reports. Single-source items are
 labelled as such in the report.
+
+## T8 (added in DR-REFINE after critique cycle 2). OpenAI Pro 200 → Pro 500 upgrade entitlement error
+Vanja Petreski quotes an OpenAI support e-mail [52]: "an error prevented your weekly Codex and Work usage allowance from
+increasing. Your account kept the allowance from your previous plan … We corrected the error on October 16", with
+$1,000 (25,000 credits) of compensation. The upgrade was on 2026-10-04. A Reddit post of 2026-10-20 (r/codex 1xay01g)
+shows a similar admission. u/DhAdaptive's Pro $500 figure [22] was measured on 2026-10-09, the day of a 20× → Pro 500
+upgrade. At 0.90–0.95× of his 20× value it matches "kept the allowance from your previous plan". **Ruling: excluded**
+under eligibility condition 5 (provider-acknowledged accounting fault). totorofly [28] is flagged (upgrade history
+unknown). Grade C2: a named author quoting a provider e-mail, scope unverified.
