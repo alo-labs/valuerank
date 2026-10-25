@@ -3,8 +3,33 @@
   "query": "O71 stage 3: user reports of API-priced plan allowances per model x tier (O11 test)",
   "mode": "deep",
   "started_at": "2026-10-25T14:35:10.528776+00:00",
-  "finished_at": null,
-  "assumptions": [],
+  "finished_at": "2026-10-25T15:06:30.361740+00:00",
+  "assumptions": [
+    {
+      "assumption_id": "asm_0a1b2c01",
+      "text": "API list prices as fixed in the stage files apply to every conversion",
+      "materiality": "high",
+      "status": "user_confirmed"
+    },
+    {
+      "assumption_id": "asm_0a1b2c02",
+      "text": "Stage-2 eligibility (seven conditions) and reporting rules remain the operative reading of O11",
+      "materiality": "high",
+      "status": "user_confirmed"
+    },
+    {
+      "assumption_id": "asm_0a1b2c03",
+      "text": "Reporter tooling (ccusage, OTel, LiteLLM) prices tokens correctly at list unless shown otherwise",
+      "materiality": "medium",
+      "status": "implicit"
+    },
+    {
+      "assumption_id": "asm_0a1b2c04",
+      "text": "A provider statement or support e-mail is public evidence of a schema change; one user's impression is not",
+      "materiality": "medium",
+      "status": "evidence_validated"
+    }
+  ],
   "provider_config": {
     "primary": "WebSearch+WebFetch+curl (fallback)",
     "scholarly": null
@@ -33,7 +58,35 @@
     "intent_class": "factual",
     "portals_attempted": [],
     "portals_succeeded": [],
-    "fallback_reason": "search-cli unavailable; non-landscape run, portals not used"
+    "fallback_reason": "search-cli unavailable; non-landscape run, portals not used",
+    "channels_succeeded": [
+      "Bluesky public API",
+      "HN Algolia",
+      "arctic-shift Reddit API",
+      "YouTube search-result snippets",
+      "Qiita API",
+      "Bilibili search API",
+      "locdd (LINUX DO mirror)",
+      "Google AI forum search",
+      "OpenAI forum search + thread read",
+      "GitHub issues via WebFetch",
+      "WebSearch"
+    ],
+    "channels_failed": [
+      "YouTube watch pages/transcripts (bot check, not circumvented)",
+      "X (HTTP 402)",
+      "nitter (challenge)",
+      "Zhihu (403)",
+      "LINUX DO search (403)",
+      "Xiaohongshu (redirect)",
+      "grep.app (429)",
+      "web.archive.org (timeout)",
+      "Task/Agent tool for helper agents (not available)"
+    ],
+    "sources_registered": 55,
+    "evidence_spans": 69,
+    "avg_credibility": 53.6,
+    "deep_budget_min_avg_credibility": 70
   },
   "prior_stages": [
     "/home/user/valuerank/research/2026-10-25-plan-allowances/stage1-*.md",
