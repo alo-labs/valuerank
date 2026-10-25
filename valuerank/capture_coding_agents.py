@@ -50,13 +50,14 @@ def flight_values(text: str) -> list:
 
 
 def configuration_rows(values: list) -> list[dict]:
-    """Configuration objects (``displayLabel`` with ``sums`` and ``mean``), first occurrence per id."""
+    """Configuration objects (an ``id`` and ``displayLabel`` with costs or evaluations), first occurrence per id; a row
+    without costs is kept (I56 M1) so the reviewed manifest (O64) sees every row AA lists."""
 
     rows: dict[str, dict] = {}
 
     def walk(value):
         if isinstance(value, dict):
-            if "displayLabel" in value and "sums" in value and "mean" in value and value.get("id"):
+            if "displayLabel" in value and value.get("id") and ("sums" in value or "mean" in value or "evals" in value):
                 rows.setdefault(value["id"], value)
             for child in value.values():
                 walk(child)
@@ -72,6 +73,15 @@ def _number(value):
     return value if isinstance(value, (int, float)) and not isinstance(value, bool) else None
 
 
+def safety_record(safety: dict) -> dict:
+    """O63: blocked attempts (AA's hard stops) and attempts finished by a fallback model, with the fallback models."""
+
+    models = sorted({link.get("releaseName") or link.get("model") for refusal in safety.get("refusals") or []
+                     if refusal.get("outcome") == "fallback" for link in refusal.get("chain") or []} - {None})
+    return {"refused": safety.get("refusedAttemptCount"), "blocked": safety.get("hardStopAttemptCount"),
+            "fallback": safety.get("fallbackAttemptCount"), "fallbackModels": models}
+
+
 def configuration_record(row: dict) -> dict:
     """The fields ValueRank keeps for one configuration, with the implied priced-task count."""
 
@@ -80,13 +90,16 @@ def configuration_record(row: dict) -> dict:
     display = row.get("display") or {}
     components = []
     for evaluation in row.get("evals") or []:
+        safety = evaluation.get("safety") or {}
         components.append(
             {
                 "name": evaluation.get("datasetIndexName"),
                 "dataset": evaluation.get("refDatasetName"),
                 "weight": evaluation.get("weight"),
-                "attempts": (evaluation.get("safety") or {}).get("attemptCount"),
+                "attempts": safety.get("attemptCount"),
                 "reward": (evaluation.get("mean") or {}).get("reward"),
+                # O63: AA's safety-refusal outcomes, disclosed and flagged, never a cost or quality change.
+                "safety": safety_record(safety),
             }
         )
     return {
@@ -96,6 +109,7 @@ def configuration_record(row: dict) -> dict:
         "model": display.get("model"),
         "isDefault": bool(row.get("isDefault")),
         "isUnavailable": bool(row.get("isUnavailable")),
+        "isRouter": bool(row.get("isRouter")),
         "indexScore": _number(row.get("indexScore")),
         "totalCostUsd": total,
         "meanCostPerTaskUsd": mean,

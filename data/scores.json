@@ -14253,6 +14253,15 @@
         "effort": "max",
         "aaSlug": "claude-sonnet-5-5",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "flagged",
+          "attempts": 870,
+          "blocked": 0,
+          "fallback": 45,
+          "fallbackModels": [
+            "Claude Opus 4.8"
+          ]
+        },
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -15039,6 +15048,13 @@
         "effort": "max",
         "aaSlug": "deepseek-v4-1-flash-1017",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "none",
+          "attempts": 870,
+          "blocked": 0,
+          "fallback": 0,
+          "fallbackModels": []
+        },
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -15689,6 +15705,16 @@
         "effort": "max",
         "aaSlug": "claude-opus-5-5",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "flagged",
+          "attempts": 870,
+          "blocked": 0,
+          "fallback": 76,
+          "fallbackModels": [
+            "Claude Opus 4.8",
+            "Claude Opus 5"
+          ]
+        },
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -16484,6 +16510,13 @@
         "effort": "max",
         "aaSlug": "gpt-6-1-sol",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "flagged",
+          "attempts": 870,
+          "blocked": 15,
+          "fallback": 0,
+          "fallbackModels": []
+        },
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -17301,6 +17334,13 @@
         "effort": "high",
         "aaSlug": "gemini-4-argon",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "none",
+          "attempts": 869,
+          "blocked": 0,
+          "fallback": 0,
+          "fallbackModels": []
+        },
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -17949,6 +17989,13 @@
         "effort": "max",
         "aaSlug": "gpt-6-astra",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "flagged",
+          "attempts": 870,
+          "blocked": 13,
+          "fallback": 0,
+          "fallbackModels": []
+        },
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -18776,6 +18823,7 @@
         "effort": null,
         "aaSlug": "mimo-v2-6-pro",
         "configurationMapped": true,
+        "agentSafety": null,
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -19579,6 +19627,15 @@
         "effort": "max",
         "aaSlug": "claude-haiku-5-5",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "flagged",
+          "attempts": 870,
+          "blocked": 0,
+          "fallback": 3,
+          "fallbackModels": [
+            "Claude Opus 5"
+          ]
+        },
         "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -20363,6 +20420,13 @@
         "effort": "max",
         "aaSlug": "gpt-6-luna",
         "configurationMapped": true,
+        "agentSafety": {
+          "status": "none",
+          "attempts": 870,
+          "blocked": 0,
+          "fallback": 0,
+          "fallbackModels": []
+        },
         "aaCostCaveat": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -28884,7 +28948,7 @@
         {
           "key": "codingAgents",
           "artifact": "data/aa/coding_agents_capture.json",
-          "sha256": "ce4cfb8ac8a0909e0201fa5710f97f3fa3901e889fbda3bcc77497ec7d306a66",
+          "sha256": "83efc5ac9def13f98c994b8b0759f05b931a9e5987aea684167b286b043a2edc",
           "capturedAt": "2026-10-23T05:31:41Z",
           "extractor": "valuerank.capture_coding_agents"
         },
@@ -28898,9 +28962,16 @@
         {
           "key": "configurationMap",
           "artifact": "data/v3_configuration_map.json",
-          "sha256": "5b31e5993c9e614eb9909718465f2dbf7e9e7ecdacb33454d06c2ac3642d5167",
+          "sha256": "64845d210a4acb31c1032e7c8b57bee0403e6b1cdb8426e1295dc1d40246a049",
           "capturedAt": "2026-10-23",
           "extractor": "editorial pinning from the research capture"
+        },
+        {
+          "key": "codingAgentsManifest",
+          "artifact": "data/aa/coding_agents_manifest.json",
+          "sha256": "8329ba171929e11012047c0411d936c435415f15b89990910f067bf01fc29a42",
+          "capturedAt": null,
+          "extractor": "editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64)"
         },
         {
           "key": "frontierCapture",
@@ -28973,7 +29044,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "178e3f1ea9aa14a2f94c08e69424c2a463425f0d9b704e8188e187e2bc97677b",
+      "bundleHash": "52bd888352339da35c4799b554f736f5acdf1f84539a486dd62a46f6b8d831e7",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -35412,6 +35483,13 @@
           "effort": "max",
           "aaSlug": "deepseek-v4-1-flash-1017",
           "configurationMapped": true,
+          "agentSafety": {
+            "status": "none",
+            "attempts": 870,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          },
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -35994,6 +36072,13 @@
           "effort": "high",
           "aaSlug": "gemini-4-argon",
           "configurationMapped": true,
+          "agentSafety": {
+            "status": "none",
+            "attempts": 869,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          },
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -36568,6 +36653,7 @@
           "effort": "high",
           "aaSlug": "gpt-6-1-sol-high",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -37297,6 +37383,7 @@
           "effort": "high",
           "aaSlug": "claude-opus-5-5-high",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -37992,6 +38079,7 @@
           "effort": null,
           "aaSlug": "mimo-v2-6-pro",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -38722,6 +38810,7 @@
           "effort": "medium",
           "aaSlug": "claude-opus-5-5-medium",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -39417,6 +39506,7 @@
           "effort": "medium",
           "aaSlug": "gpt-6-1-sol-medium",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -40146,6 +40236,7 @@
           "effort": "high",
           "aaSlug": "gpt-6-astra-high",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -40879,6 +40970,13 @@
           "effort": "max",
           "aaSlug": "gpt-6-luna",
           "configurationMapped": true,
+          "agentSafety": {
+            "status": "none",
+            "attempts": 870,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          },
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -41623,6 +41721,7 @@
           "effort": "high",
           "aaSlug": "claude-haiku-5-5-high",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -42318,6 +42417,7 @@
           "effort": "xhigh",
           "aaSlug": "gpt-6-luna-xhigh",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -43047,6 +43147,7 @@
           "effort": "medium",
           "aaSlug": "claude-haiku-5-5-medium",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -43742,6 +43843,7 @@
           "effort": "high",
           "aaSlug": "gpt-6-luna-high",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -44471,6 +44573,7 @@
           "effort": "medium",
           "aaSlug": "gpt-6-luna-medium",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -45200,6 +45303,7 @@
           "effort": "low",
           "aaSlug": "gpt-5-6-luna-low",
           "configurationMapped": true,
+          "agentSafety": null,
           "aaCostCaveat": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -54806,7 +54910,7 @@
           {
             "key": "codingAgents",
             "artifact": "data/aa/coding_agents_capture.json",
-            "sha256": "ce4cfb8ac8a0909e0201fa5710f97f3fa3901e889fbda3bcc77497ec7d306a66",
+            "sha256": "83efc5ac9def13f98c994b8b0759f05b931a9e5987aea684167b286b043a2edc",
             "capturedAt": "2026-10-23T05:31:41Z",
             "extractor": "valuerank.capture_coding_agents"
           },
@@ -54820,9 +54924,16 @@
           {
             "key": "configurationMap",
             "artifact": "data/v3_configuration_map.json",
-            "sha256": "5b31e5993c9e614eb9909718465f2dbf7e9e7ecdacb33454d06c2ac3642d5167",
+            "sha256": "64845d210a4acb31c1032e7c8b57bee0403e6b1cdb8426e1295dc1d40246a049",
             "capturedAt": "2026-10-23",
             "extractor": "editorial pinning from the research capture"
+          },
+          {
+            "key": "codingAgentsManifest",
+            "artifact": "data/aa/coding_agents_manifest.json",
+            "sha256": "8329ba171929e11012047c0411d936c435415f15b89990910f067bf01fc29a42",
+            "capturedAt": null,
+            "extractor": "editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64)"
           },
           {
             "key": "frontierCapture",
@@ -54895,7 +55006,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "178e3f1ea9aa14a2f94c08e69424c2a463425f0d9b704e8188e187e2bc97677b",
+        "bundleHash": "52bd888352339da35c4799b554f736f5acdf1f84539a486dd62a46f6b8d831e7",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

@@ -104,9 +104,10 @@ def test_an_admitted_workload_change_is_a_migration():
     changed = copy.deepcopy(docs)
     # E267: the record is derived from the capture, so b loses it only when AA drops it; coverage falls below admission.
     changed["codingAgents"]["configurations"] = [item for item in changed["codingAgents"]["configurations"] if item["label"] != "Agent - B (max)"]
+    changed["codingAgentsManifest"]["rows"].pop("Agent - B (max)")  # O64: the reviewed manifest records the removal
     current = {"configurations": CONFIGURATIONS, "documents": changed, "published": previous["published"]}
     result = sb.bridge(previous, current, frozen, DAY)
-    assert result["status"] == sb.MIGRATION and result["rows"] == {} and "codingAgents" in result["changedFields"]["tokenUse"]
+    assert result["status"] == sb.MIGRATION and result["rows"] == {} and "codingAgents" in result["changedFields"]["tokenUse"] and "codingAgentsManifest" in result["changedFields"]["tokenUse"]
 
 
 def test_other_build_errors_propagate(monkeypatch):

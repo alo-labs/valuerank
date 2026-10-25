@@ -25,23 +25,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.485706666666667
+          "reward": 0.485706666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 371,
-          "reward": 0.551075268817204
+          "reward": 0.551075268817204,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.560606060606061
+          "reward": 0.560606060606061,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "e17ee3a79eab160154a92f31c6c2b1fa",
@@ -60,23 +79,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.408156
+          "reward": 0.408156,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.443548387096774
+          "reward": 0.443548387096774,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.146464646464646
+          "reward": 0.146464646464646,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "5c82a7985b08f35190cc0db574fd1773",
@@ -95,23 +133,50 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.488864666666667
+          "reward": 0.488864666666667,
+          "safety": {
+            "refused": 2,
+            "blocked": 0,
+            "fallback": 2,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.663978494623656
+          "reward": 0.663978494623656,
+          "safety": {
+            "refused": 46,
+            "blocked": 0,
+            "fallback": 46,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.575757575757576
+          "reward": 0.575757575757576,
+          "safety": {
+            "refused": 28,
+            "blocked": 0,
+            "fallback": 28,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "2a2fed494e0d1343b14efe96e6bc3669",
@@ -130,23 +195,44 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.473697666666667
+          "reward": 0.473697666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.338709677419355
+          "reward": 0.338709677419355,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.308080808080808
+          "reward": 0.308080808080808,
+          "safety": {
+            "refused": 3,
+            "blocked": 0,
+            "fallback": 3,
+            "fallbackModels": [
+              "Claude Opus 5"
+            ]
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "f8b3c23615b8b60e23364c27e8494d6d",
@@ -165,23 +251,47 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.559670666666667
+          "reward": 0.559670666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.658602150537634
+          "reward": 0.658602150537634,
+          "safety": {
+            "refused": 52,
+            "blocked": 0,
+            "fallback": 52,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.631313131313131
+          "reward": 0.631313131313131,
+          "safety": {
+            "refused": 24,
+            "blocked": 0,
+            "fallback": 24,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "1630d319b5e4dc5183cb88a2b2af1646",
@@ -200,23 +310,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.448103
+          "reward": 0.448103,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.561827956989248
+          "reward": 0.561827956989248,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.166666666666667
+          "reward": 0.166666666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "9983e10d68576074ad63407d0ca81e4b",
@@ -235,23 +364,46 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.476034
+          "reward": 0.476034,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.64247311827957
+          "reward": 0.64247311827957,
+          "safety": {
+            "refused": 39,
+            "blocked": 0,
+            "fallback": 39,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.661616161616162
+          "reward": 0.661616161616162,
+          "safety": {
+            "refused": 6,
+            "blocked": 0,
+            "fallback": 6,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "06c2cfad6e3aba9000f2dd5e429d4407",
@@ -270,23 +422,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.404771666666667
+          "reward": 0.404771666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.586021505376344
+          "reward": 0.586021505376344,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.303030303030303
+          "reward": 0.303030303030303,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "ef847aa89b4f0471ffe5275ba2f11771",
@@ -305,23 +476,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.525960666666667
+          "reward": 0.525960666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.610215053763441
+          "reward": 0.610215053763441,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 197,
-          "reward": 0.282828282828283
+          "reward": 0.282828282828283,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "34e0f78892fac8fd39aff6595d04610e",
@@ -340,23 +530,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.492953666666667
+          "reward": 0.492953666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.591397849462366
+          "reward": 0.591397849462366,
+          "safety": {
+            "refused": 13,
+            "blocked": 13,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.555555555555555
+          "reward": 0.555555555555555,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "c54a3c8e7e89d5a784e98211605eaa53",
@@ -375,23 +584,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.395494666666667
+          "reward": 0.395494666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.381720430107527
+          "reward": 0.381720430107527,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.156565656565657
+          "reward": 0.156565656565657,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "3897d72a57138fd2e2353367570b4b37",
@@ -410,23 +638,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.494074
+          "reward": 0.494074,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.599462365591398
+          "reward": 0.599462365591398,
+          "safety": {
+            "refused": 15,
+            "blocked": 15,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.53030303030303
+          "reward": 0.53030303030303,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "24c98f188d41522a849006ac453fdebe",
@@ -445,23 +692,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.465483666666667
+          "reward": 0.465483666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.615591397849462
+          "reward": 0.615591397849462,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.308080808080808
+          "reward": 0.308080808080808,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "fe6df4d0f0b5360790e73d6d8830d7a0",
@@ -480,23 +746,50 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.516455333333333
+          "reward": 0.516455333333333,
+          "safety": {
+            "refused": 2,
+            "blocked": 0,
+            "fallback": 2,
+            "fallbackModels": [
+              "Claude Opus 5"
+            ]
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.682795698924731
+          "reward": 0.682795698924731,
+          "safety": {
+            "refused": 42,
+            "blocked": 0,
+            "fallback": 42,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 197,
-          "reward": 0.560606060606061
+          "reward": 0.560606060606061,
+          "safety": {
+            "refused": 19,
+            "blocked": 0,
+            "fallback": 19,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
         }
-      ]
+      ],
+      "isRouter": true
     },
     {
       "id": "736e1c6006fd243c9cc384b61c478e97",
@@ -515,23 +808,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.536293333333333
+          "reward": 0.536293333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.682795698924731
+          "reward": 0.682795698924731,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.626262626262626
+          "reward": 0.626262626262626,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": true
     },
     {
       "id": "dabb064c01568bc018ba730cc39c4a96",
@@ -550,23 +862,45 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.490158666666667
+          "reward": 0.490158666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.602150537634409
+          "reward": 0.602150537634409,
+          "safety": {
+            "refused": 25,
+            "blocked": 0,
+            "fallback": 25,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "GPT-5.6 Sol"
+            ]
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.5
+          "reward": 0.5,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": true
     },
     {
       "id": "a92c8b68f37df782f0e978e0e302b023",
@@ -585,23 +919,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.435540666666667
+          "reward": 0.435540666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.629032258064516
+          "reward": 0.629032258064516,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.333333333333333
+          "reward": 0.333333333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "88c83705811535bca8ee000bfd3a256c",
@@ -620,23 +973,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.430936
+          "reward": 0.430936,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.599462365591398
+          "reward": 0.599462365591398,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.212121212121212
+          "reward": 0.212121212121212,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "accfbb12d349c0f2c93547ce814534b2",
@@ -655,23 +1027,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.202672
+          "reward": 0.202672,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.376344086021506
+          "reward": 0.376344086021506,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.0353535353535354
+          "reward": 0.0353535353535354,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "f09fd629724ff1b103982a6158d00183",
@@ -690,23 +1081,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.467030333333333
+          "reward": 0.467030333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.586021505376344
+          "reward": 0.586021505376344,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.318181818181818
+          "reward": 0.318181818181818,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "d843fce803ff4f84ababc47040306116",
@@ -725,23 +1135,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 299,
-          "reward": 0.225401
+          "reward": 0.225401,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.508064516129032
+          "reward": 0.508064516129032,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.0555555555555556
+          "reward": 0.0555555555555556,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "52f72f7f3393c5edf92b32326e7a678d",
@@ -760,23 +1189,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.463915333333333
+          "reward": 0.463915333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.615591397849462
+          "reward": 0.615591397849462,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.47979797979798
+          "reward": 0.47979797979798,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "047ef12b001416f72e30e1ad633988e2",
@@ -795,23 +1243,42 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.487332333333333
+          "reward": 0.487332333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.688172043010753
+          "reward": 0.688172043010753,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.590909090909091
+          "reward": 0.590909090909091,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     },
     {
       "id": "96d7404e06194027474a6cc3bb31c068",
@@ -830,25 +1297,50 @@
           "dataset": "frontiercode-v1.1",
           "weight": 0.333333333333333,
           "attempts": 300,
-          "reward": 0.482473666666667
+          "reward": 0.482473666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "swe-atlas-qna",
           "dataset": "datasets/swe-atlas-qna",
           "weight": 0.333333333333333,
           "attempts": 372,
-          "reward": 0.586021505376344
+          "reward": 0.586021505376344,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         },
         {
           "name": "terminal-bench-v4",
           "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
           "weight": 0.333333333333333,
           "attempts": 198,
-          "reward": 0.398989898989899
+          "reward": 0.398989898989899,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
         }
-      ]
+      ],
+      "isRouter": false
     }
   ],
   "indexVersion": "Coding Agent Index v2.0 (FrontierCode v1.1 Main, Terminal-Bench 4.0, SWE-Atlas-QnA-AA; DeepSWE v1.1 removed)",
-  "note": "Coding Agent Index v2.0 capture (FrontierCode v1.1 Main, Terminal-Bench 4.0, SWE-Atlas-QnA-AA; DeepSWE v1.1 removed; owner decision O50), a pipeline input: valuerank/basket.py prices its 290 required tasks from each pinned record's mean cost per task. capturedAt is the time of the HTTPS fetch."
+  "note": "Coding Agent Index v2.0 capture (FrontierCode v1.1 Main, Terminal-Bench 4.0, SWE-Atlas-QnA-AA; DeepSWE v1.1 removed; owner decision O50), a pipeline input: valuerank/basket.py prices its 290 required tasks from each pinned record's mean cost per task. capturedAt is the time of the HTTPS fetch.",
+  "safetyCapture": {
+    "artifact": "research/2026-10-23-coding-agents-safety/coding-agents-page-2026-10-23T2215Z.html",
+    "readAt": "2026-10-23T22:15:00Z",
+    "responseSha256": "b38fa79c3550bf50bc115b592da02631788c1bfa5c5076a291ee407c58ec5067",
+    "rule": "Owner decision O63 (2026-10-23): AA's safety-refusal outcomes (blocked attempts, attempts finished by a fallback model) are disclosed and flagged, never a cost or quality change. Copied from this read of the page only because every row id, label, cost, score and attempt count equals the pinned capture's."
+  }
 }

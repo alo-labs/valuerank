@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-25",
+  "capture": "data/aa/coding_agents_capture.json",
+  "rule": "Owner decision O64 (2026-10-25): every Coding Agent Index row AA lists is registered here by AA's row id, either as the exact record of one cohort configuration or as not a cohort configuration with a reason. A captured row whose id is absent, whose label differs, or a registered row AA no longer lists stops the build until this manifest is reviewed; the label grammar of E267 is a cross-check, and any disagreement with it also stops the build.",
+  "rows": {
+    "ee454ece0aab8dacb7127770643dcb6b": {
+      "label": "Antigravity CLI - Gemini 4 Argon (high)",
+      "classification": "exact",
+      "configurationId": "gemini-4-argon"
+    },
+    "e17ee3a79eab160154a92f31c6c2b1fa": {
+      "label": "Antigravity SDK - Gemini 3.8 Flash (high)",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "5c82a7985b08f35190cc0db574fd1773": {
+      "label": "Claude Code - Fable 5.1 (max) (with fallback)",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "2a2fed494e0d1343b14efe96e6bc3669": {
+      "label": "Claude Code - Haiku 5.5 (max)",
+      "classification": "exact",
+      "configurationId": "claude-haiku-5-5-max"
+    },
+    "f8b3c23615b8b60e23364c27e8494d6d": {
+      "label": "Claude Code - Opus 5.5 (max)",
+      "classification": "exact",
+      "configurationId": "claude-opus-5-5"
+    },
+    "1630d319b5e4dc5183cb88a2b2af1646": {
+      "label": "Claude Code - Qwen3.8 Max",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "9983e10d68576074ad63407d0ca81e4b": {
+      "label": "Claude Code - Sonnet 5.5 (max)",
+      "classification": "exact",
+      "configurationId": "claude-sonnet-5-5"
+    },
+    "06c2cfad6e3aba9000f2dd5e429d4407": {
+      "label": "Claude Code - Step 5 Preview ({'subagents': True})",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "ef847aa89b4f0471ffe5275ba2f11771": {
+      "label": "Codex - DeepSeek V4.1 Flash ({'reasoning_effort': 'max'})",
+      "classification": "other",
+      "reason": "a different release: DeepSeek V4.1 Flash through the deepseek-v4-flash alias, not the ranked DeepSeek V4.1 Flash 1017 (E188)"
+    },
+    "34e0f78892fac8fd39aff6595d04610e": {
+      "label": "Codex - GPT-6 Astra (max)",
+      "classification": "exact",
+      "configurationId": "gpt-6-astra"
+    },
+    "c54a3c8e7e89d5a784e98211605eaa53": {
+      "label": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+      "classification": "exact",
+      "configurationId": "gpt-6-luna"
+    },
+    "3897d72a57138fd2e2353367570b4b37": {
+      "label": "Codex - GPT-6.1 Sol (max)",
+      "classification": "exact",
+      "configurationId": "gpt-6.1-sol"
+    },
+    "24c98f188d41522a849006ac453fdebe": {
+      "label": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})",
+      "classification": "exact",
+      "configurationId": "deepseek-v4-1-flash-1017"
+    },
+    "fe6df4d0f0b5360790e73d6d8830d7a0": {
+      "label": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "classification": "other",
+      "reason": "AA router row: two models in one agent (never exact, E267)"
+    },
+    "736e1c6006fd243c9cc384b61c478e97": {
+      "label": "Devin Fusion CLI - Claude Opus 5.5 Max + GPT-6 Luna High",
+      "classification": "other",
+      "reason": "AA router row: two models in one agent (never exact, E267)"
+    },
+    "dabb064c01568bc018ba730cc39c4a96": {
+      "label": "Devin Fusion CLI - GPT-6 Astra XHigh + SWE-2 Medium",
+      "classification": "other",
+      "reason": "AA router row: two models in one agent (never exact, E267)"
+    },
+    "a92c8b68f37df782f0e978e0e302b023": {
+      "label": "Grok Build - Grok 4.7 (xhigh)",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "88c83705811535bca8ee000bfd3a256c": {
+      "label": "Kimi Code CLI - Kimi K3",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "accfbb12d349c0f2c93547ce814534b2": {
+      "label": "Mirror - Beam 1.0",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "f09fd629724ff1b103982a6158d00183": {
+      "label": "Muse Code - Muse Spark 1.3 (max)",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "d843fce803ff4f84ababc47040306116": {
+      "label": "Muse Code - Muse Spark Open (xhigh)",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "52f72f7f3393c5edf92b32326e7a678d": {
+      "label": "Muse Code - Muse Wonder (max)",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "047ef12b001416f72e30e1ad633988e2": {
+      "label": "Muse Code - Muse Wonder Full (max)",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    },
+    "96d7404e06194027474a6cc3bb31c068": {
+      "label": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
+      "classification": "other",
+      "reason": "model outside the cohort (O51)"
+    }
+  }
+}

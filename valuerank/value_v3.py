@@ -632,41 +632,52 @@ def exact_agent_records(configuration: dict, agent_records) -> list[str]:
     return sorted(found)
 
 
-def _normalised(text: str) -> str:
-    return " " + " ".join(re.sub(r"[^0-9a-z]+", " ", text.casefold()).split()) + " "
+def agent_safety(record: dict | None) -> dict | None:
+    """O63 (owner decision, 2026-10-25): blocked attempts (AA's hard stops) and attempts a fallback model finished, summed
+    over the record's components, with the fallback models. Disclosed and flagged; never a cost or quality change."""
+
+    if record is None:
+        return None
+    safeties = [component.get("safety") for component in record.get("components") or []]
+    if any(safety is None for safety in safeties):
+        return {"status": "not captured"}
+    attempts = sum(component.get("attempts") or 0 for component in record["components"])
+    blocked = sum(safety["blocked"] or 0 for safety in safeties)
+    fallback = sum(safety["fallback"] or 0 for safety in safeties)
+    return {"status": "flagged" if blocked or fallback else "none", "attempts": attempts, "blocked": blocked, "fallback": fallback,
+            "fallbackModels": sorted({model for safety in safeties for model in safety["fallbackModels"]})}
 
 
-def unclassified_agent_labels(configurations: list[dict], agent_records, register: dict) -> list[str]:
-    """E267 (I55 M1): every captured label that mentions a cohort model's name (compared ignoring case, spacing and
-    punctuation) must be classified: an exact record of a cohort configuration, a label naming two models, a strictly
-    read record of another effort of a cohort model, or a reviewed entry in the register of labels that name a different
-    model. Whatever is left is a label form E267 does not read, and the build stops, so no form is ever silently dropped."""
+def check_agent_manifest(captured: list[dict], manifest: dict) -> None:
+    """O64 (I56 M1): a closed world. Every Coding Agent Index row AA lists is registered by its row id in the reviewed
+    manifest; a new row, a changed label, a row AA no longer lists or two rows sharing a label stops the build."""
 
-    names = {}
-    for configuration in configurations:
-        family = configuration.get("family") or configuration["name"]
-        for name in (family, family.removeprefix("Claude ")):
-            names.setdefault(name, set()).add(configuration.get("effort"))
-    exact = {label for configuration in configurations for label in exact_agent_records(configuration, agent_records)}
-    left = []
-    for label in agent_records:
-        if not any(_normalised(name) in _normalised(label) for name in names):
-            continue
-        parsed = parse_agent_label(label)
-        other_effort = parsed is not None and parsed["model"] in names and (
-            parsed["effort"] is not None or None in names[parsed["model"]])
-        if label in exact or " + " in label or other_effort or label in register:
-            continue
-        left.append(label)
-    return sorted(left)
+    rows = manifest["rows"]
+    labels = [record["label"] for record in captured]
+    if duplicates := sorted({label for label in labels if labels.count(label) > 1}):
+        raise ValueError(f"AA lists more than one Coding Agent Index row under the label(s) {duplicates} (O64)")
+    problems = [f"{record['label']!r} (id {record['id']}) is not in the manifest" for record in captured if record["id"] not in rows]
+    problems += [f"id {record['id']} is registered as {rows[record['id']]['label']!r} but AA now labels it {record['label']!r}"
+                 for record in captured if record["id"] in rows and rows[record["id"]]["label"] != record["label"]]
+    problems += [f"{row['label']!r} (id {row_id}) is registered but AA no longer lists it" for row_id, row in rows.items()
+                 if row_id not in {record["id"] for record in captured}]
+    if problems:
+        raise ValueError("review the Coding Agent Index manifest (O64): " + "; ".join(problems))
 
 
-def agent_record_for(configuration: dict, mapping: dict, agent_records) -> str | None:
+def agent_record_for(configuration: dict, mapping: dict, agent_records, manifest: dict | None = None) -> str | None:
     """E267 (I50 H1, I51 M1, I52 M1): the configuration's Coding Agent Index record is derived from the capture: its one
     exact record. A pin is only a recorded choice among several exact records; a pin that is not an exact record, or
     several exact records with no pin, stops the build. No pin can price a row from another configuration's record."""
 
     exact = exact_agent_records(configuration, agent_records)
+    if manifest is not None:
+        # O64: the reviewed manifest decides; the E267 grammar is a cross-check, and any disagreement stops the build.
+        registered = sorted(row["label"] for row in manifest["rows"].values()
+                            if row["classification"] == "exact" and row.get("configurationId") == configuration["id"])
+        if registered != exact:
+            raise ValueError(f"{configuration['id']}: the manifest registers {registered} as its Coding Agent Index record(s) "
+                             f"but the E267 grammar reads {exact} (O64)")
     pin = (mapping.get(configuration["id"]) or {}).get(basket.CODING_AGENT_INDEX)
     if pin is not None and pin not in exact:
         raise ValueError(f"{configuration['id']}: its Coding Agent Index pin {pin!r} is not an exact record; exact: {exact} (E267)")
@@ -683,11 +694,9 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     agent_records = {item["label"]: item for item in documents["codingAgents"]["configurations"]}
     chart_rows = {item["slug"]: {row["model"]: row for row in item["rows"]} for item in documents["costCharts"]["evaluations"]}
     mapping = documents["configurationMap"]["rows"]
-    register = documents["configurationMap"].get("agentLabelRegister") or {}
-    if unread := unclassified_agent_labels(configurations, agent_records, register):
-        raise ValueError(f"Coding Agent Index label(s) {unread} mention a cohort model but are in no form E267 reads; read them, "
-                         "or record them in the configuration map's agentLabelRegister as naming a different model (E267)")
-    agent_labels = {configuration["id"]: agent_record_for(configuration, mapping, agent_records) for configuration in configurations}
+    manifest = documents["codingAgentsManifest"]
+    check_agent_manifest(documents["codingAgents"]["configurations"], manifest)
+    agent_labels = {configuration["id"]: agent_record_for(configuration, mapping, agent_records, manifest) for configuration in configurations}
     # E208: a route inherits the token-category mix its source publishes for the measured workload.
     sources = documents["planRoutes"].get("sourceEvidence") or {}
     routes = [
@@ -766,6 +775,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "components": components,
             "indexReconciliation": reconciliation,
             "configurationMapped": model_id in mapping,
+            # O63: AA's safety-refusal outcomes on the row's Coding Agent Index record, disclosed and flagged only.
+            "agentSafety": agent_safety(agent_records.get(agent_labels[model_id])),
             "routeSelection": plan_routes.route_selection(candidates),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window),
         })
@@ -2337,6 +2348,7 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
         "effort": row.get("effort"),
         "aaSlug": row["aaSlug"],
         "configurationMapped": row["configurationMapped"],
+        "agentSafety": row.get("agentSafety"),
         # E141: AA's own note on what its cost omits (e.g. a long-context surcharge), shown as a cost caveat.
         "aaCostCaveat": caveat,
         "valuation": valuation_contract(caveat),
@@ -2869,6 +2881,7 @@ EVIDENCE_FILES = {
     "codingAgents": ("aa/coding_agents_capture.json", "valuerank.capture_coding_agents"),
     "costCharts": ("aa/cost_charts_capture.json", "scripts/capture-aa-cost-charts.js"),
     "configurationMap": ("v3_configuration_map.json", "editorial pinning from the research capture"),
+    "codingAgentsManifest": ("aa/coding_agents_manifest.json", "editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64)"),
     "frontierCapture": ("aa_frontier_capture.json", "browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201)"),
     "roster": ("aa_mapping.json", "editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51)"),
     "bugHuntScoreboard": ("bug_hunt_scoreboard.json", "the owner's combined scoreboard at the pinned commit (O31 roster check)"),

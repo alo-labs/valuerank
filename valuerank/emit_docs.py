@@ -514,6 +514,21 @@ def common_leaf_text(diagnostic, facts):
             f"rows reaching each bar: {reach}; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: {flagged}.")
 
 
+def agent_safety_text(rows):
+    """O63: AA's safety-refusal outcomes on each ranked row's Coding Agent Index record (disclosed and flagged only)."""
+
+    flagged = []
+    for row in rows:
+        safety = row.get("agentSafety") or {}
+        if safety.get("status") != "flagged":
+            continue
+        parts = [f"{safety['blocked']} blocked" if safety["blocked"] else None,
+                 f"{safety['fallback']} finished by {' or '.join(safety['fallbackModels'])}" if safety["fallback"] else None]
+        flagged.append(f"{row['name']} ({', '.join(part for part in parts if part)} of {safety['attempts']} attempts)")
+    return ("- **Coding Agent Index safety refusals (O63, flagged; costs and scores unchanged):** "
+            + ("; ".join(flagged) if flagged else "none") + ".")
+
+
 def harness_by_leaf_text(facts):
     """E227: the agent or harness each harness-run leaf was scored on, by cohort rows (each lab's model in its own agent)."""
 
@@ -1462,6 +1477,7 @@ def cost_diagnostics_markdown(facts):
     lines.append(required_scores_text(facts.v3["requiredMissingScores"], facts))
     lines.append(common_leaf_text(diagnostics["commonLeaf"], facts))
     lines.append(harness_by_leaf_text(facts))
+    lines.append(agent_safety_text(facts.v3["rows"]))
     bridge_lines = []
     for bridge in diagnostics["subsetBridges"]:
         missing = "; ".join(

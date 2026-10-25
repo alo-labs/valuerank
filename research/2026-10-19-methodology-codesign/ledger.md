@@ -1501,3 +1501,18 @@ For AI Coding Daily (the one added-leaf board run on several harnesses): the row
 - L2 (adopted): E189's withholding names the one-configuration Plan stratum.
 - L3 (recorded for the owner report): the Plan-basis dispersion statistics count plan rows, so a configuration with more plans weighs more (max-effort Plan allocation 28.2% over plan rows, 68.6% over one row per configuration). The plan rows are the ranking's units under O48; whether these diagnostics should weight per configuration, as E258 does for separability, is an owner question for the convergence report.
 - Round status (O56): not clean (one Medium). Draft r114.
+
+## Owner decision O63 (2026-10-25): Coding Agent Index safety refusals
+Asked how AA's newly published safety-refusal outcomes count (GPT-6.1 Sol (max) 15 and GPT-6 Astra (max) 13 blocked attempts of 870; Claude Opus 5.5 (max) 76, Sonnet 5.5 (max) 45 and Haiku 5.5 (max) 3 attempts finished by a fallback model), the owner chose "Disclose, flag, no score change": a blocked or fallback attempt is not a declined task under O27. The capture keeps each evaluation's refused, blocked and fallback counts and fallback models (`capture_coding_agents.safety_record`); the pinned capture gained them from the 2026-10-23T22:15Z read of the page after every row id, label, cost, score and attempt count was checked equal (`research/2026-10-23-coding-agents-safety/add_safety.py`); each row publishes `agentSafety`, flagged rows are listed in scores.md, and no cost or score changes.
+
+## Owner decision O64 (2026-10-25): a closed-world Coding Agent Index manifest
+Asked whether a refresh may stop on an unregistered AA row (as E225 does for Terminal-Bench agents), the owner chose "Yes, stop until registered". `data/aa/coding_agents_manifest.json` registers every AA row by id as an exact record of one cohort configuration or as not a cohort configuration with a reason; the build stops on a new row, a changed label, a vanished row or a duplicated label (`value_v3.check_agent_manifest`), and on any disagreement between the manifest and the E267 grammar for a cohort configuration. The name-matching classifier of I55 and its register are removed; the capture keeps unpriced rows too.
+
+## Internal review I56 (Claude Sonnet 5.5, effort xhigh, on r114) — adopted, modified or rejected
+- M1 (adopted by O64): the I55 classification was still a text heuristic; I56 showed labels that passed it and dropped a row ("+" inside an agent name, separator-free model names, a duplicate label with a new id, rows the capture discarded). Seven rounds on this mechanism end with a closed world: AA's rows are registered by id and any change stops the refresh.
+- M2 (adopted by O63, wording changed): the draft said the Coding Agent Index costs carry "no AA missing- or declined-task marker" while the build reads none; it now says the cost is complete by construction (AA's per-task mean × 290; the agent page carries no declined marker) and that blocked and fallback attempts are flagged under O63.
+- L1–L2 (resolved by O64): the register and the cohort difference between commands no longer exist; the manifest check covers every captured row whatever the cohort.
+- L3 (adopted): the cost-source bullet is split into the manifest, the grammar cross-check and the safety disclosure.
+- L4 (adopted): "both display" for two tied names.
+- Recommendations: the manifest (adopted), record continuity (the vanished-row stop), safety counts (adopted).
+- Round status (O56): not clean (two Mediums). Draft r115.

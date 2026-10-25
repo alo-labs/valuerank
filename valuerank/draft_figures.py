@@ -135,7 +135,8 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         "aa.cheapestPlottedCost": f"{min(item['total_cost_usd'] for item in capture['points']):,.2f}",
         # E195: rendered-frontier points whose rounded tooltip Index ties (I44 L3).
         "aa.frontierIndexTies": "; ".join(
-            f"{series(sorted(item['model_name'] for item in capture['frontier'] if item['intelligence_index_display'] == index))} all display {index}"
+            f"{series(sorted(item['model_name'] for item in capture['frontier'] if item['intelligence_index_display'] == index))} "
+        f"{'both' if sum(1 for item in capture['frontier'] if item['intelligence_index_display'] == index) == 2 else 'all'} display {index}"
             for index in sorted({item["intelligence_index_display"] for item in capture["frontier"]})
             if sum(1 for item in capture["frontier"] if item["intelligence_index_display"] == index) > 1) or "none",
     }
@@ -344,7 +345,7 @@ def render(text: str, scores: dict, manifest: dict) -> str:
 
 # A "today" sentence may still hold numbers that are not current-release figures: names, versions, decision tags, dates
 # and the rule constants below. Everything else must be a placeholder.
-RULE_CONSTANTS = ("above 100%", "more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 60 points", "> 5 points", "40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
+RULE_CONSTANTS = ("above 100%", "more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 60 points", "> 5 points", "40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "× 290", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
                   "factor-2", "factor of 2", "tolerance 0.5 px", "two-thirds", "30 days", "7 days", "45 days", "0.5 W_g", "1.5 W_g")
 _NOT_A_FIGURE = re.compile(
     r"\b[OEIL]\d+\b|\br\d+\b|\b\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?\b|\b\d{2}:\d{2}(:\d{2})?Z\b"

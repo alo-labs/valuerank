@@ -624,6 +624,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 49.2, with the mean score their missing leaves would need: MiMo-V2.6-Pro (no missing leaf; reporting precision only).
 - **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of cohort rows have (none), API no rank changes; Plan no rank changes; rows reaching each bar: quality 49.2: 8 → 8; quality 38.0: 12 → 12; quality 57.2: 5 → 5; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: none.
 - **Harness by leaf (E227):** Terminal-Bench: mini-SWE-agent 15; Bug Hunt: Codex CLI 8, Claude Code 4, Antigravity CLI 1, Claude Code / Anthropic-compatible shim 1, DeepSeek Harness / DeepSeek API 1; AI Coding Daily: Codex CLI 8, Claude Code 4, DeepSeek Harness 1, Devin 1, OpenCode 1.
+- **Coding Agent Index safety refusals (O63, flagged; costs and scores unchanged):** none.
 
 ### Leave-one-component-out cost family (E172)
 
@@ -1110,6 +1111,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 64.3, with the mean score their missing leaves would need: Gemini 4 Argon (high) (no missing leaf; reporting precision only).
 - **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of cohort rows have (none), API no rank changes; Plan no rank changes; rows reaching each bar: quality 64.3: 5 → 5; quality 54.2: 7 → 7; quality 65.0: 3 → 3; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: none.
 - **Harness by leaf (E227):** Terminal-Bench: mini-SWE-agent 9; Bug Hunt: Claude Code 3, Codex CLI 3, Antigravity CLI 1, Claude Code / Anthropic-compatible shim 1, DeepSeek Harness / DeepSeek API 1.
+- **Coding Agent Index safety refusals (O63, flagged; costs and scores unchanged):** Claude Sonnet 5.5 (45 finished by Claude Opus 4.8 of 870 attempts); Claude Opus 5.5 (76 finished by Claude Opus 4.8 or Claude Opus 5 of 870 attempts); GPT-6.1 Sol (15 blocked of 870 attempts); GPT-6 Astra (13 blocked of 870 attempts); Claude Haiku 5.5 (max) (3 finished by Claude Opus 5 of 870 attempts).
 
 ### Leave-one-component-out cost family (E172)
 

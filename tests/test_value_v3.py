@@ -114,7 +114,23 @@ def documents(**overrides) -> dict:
         ], "searches": [], "sourceRegistry": REGISTRY},
     }
     base.update(overrides)
+    if "codingAgentsManifest" not in overrides:
+        base["codingAgentsManifest"] = fixture_manifest(base["codingAgents"])
     return base
+
+
+def fixture_manifest(capture: dict) -> dict:
+    """O64: the fixture's reviewed manifest; each record gets an id (its label) and "Agent - X (max)" is X's exact record."""
+
+    rows = {}
+    for record in capture["configurations"]:
+        record.setdefault("id", record["label"])
+        parsed = v.parse_agent_label(record["label"])
+        model = (parsed or {}).get("model") or ""
+        exact = parsed is not None and parsed["effort"] == "max" and len(model) == 1
+        rows[record["id"]] = {"label": record["label"], **({"classification": "exact", "configurationId": model.lower()} if exact
+                                                          else {"classification": "other", "reason": "fixture"})}
+    return {"rows": rows}
 
 
 CONFIGURATIONS = [
@@ -614,6 +630,7 @@ def write_world(root: Path) -> Path:
         "aa/coding_agents_capture.json": documents()["codingAgents"],
         "aa/cost_charts_capture.json": documents()["costCharts"],
         "v3_configuration_map.json": documents()["configurationMap"],
+        "aa/coding_agents_manifest.json": documents()["codingAgentsManifest"],
         "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}, "searchCutoff": "2026-10-19", "searchLog": [{"searchedOn": "2026-10-19"}]}},
         "price_records.json": documents()["priceRecords"],
         "leaf_evidence.json": documents()["leafEvidence"],
@@ -1822,7 +1839,7 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     assert [v.agent_record_for(row, pins, records) for row in (ds, luna, fable, mimo, flash)] == [
         "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})", None, "Claude Code - Fable 5.1 (max) (with fallback)",
         "Claude Code - MiMo-V2.6-Pro", None]
-    assert v.unclassified_agent_labels([odd], records, {}) == ["Odd - X (max) ({'reasoning_effort': 'low'})"]  # unreadable, not skipped
+    assert v.parse_agent_label("Odd - X (max) ({'reasoning_effort': 'low'})") is None  # a disagreeing pair never reads
     assert v.agent_record_for(ds, {}, records) == "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"
     for row, pin in ((ds, "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (max)"), (luna, "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)"),
                      (flash, "Kimi Code CLI - MiMo-V2.6-Flash (high)")):
@@ -1836,12 +1853,6 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     luna_real = "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})"
     assert v.parse_agent_label(luna_real) == {"agent": "Codex", "model": "GPT-6 Luna", "effort": "max"}
     assert v.agent_record_for(luna, {}, {luna_real: {}}) == luna_real
-    disagreeing = "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'low'})"
-    assert v.unclassified_agent_labels([luna], {disagreeing: {}}, {}) == [disagreeing]
-    assert v.unclassified_agent_labels([luna], {disagreeing: {}}, {disagreeing: "reviewed: a different model"}) == []
-    # A strictly read other effort, and an effort-less label for a model whose configurations all carry an effort.
-    assert v.unclassified_agent_labels([luna], {"Codex - GPT-6 Luna (high)": {}}, {}) == []
-    assert v.unclassified_agent_labels([luna], {"Codex - GPT-6 Luna": {}}, {}) == ["Codex - GPT-6 Luna"]
     # O54: MiMo-V2.6-Pro's record at high is exact too.
     assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]
 
@@ -1861,38 +1872,65 @@ def test_frontiercode_cross_source_joins_cognition_on_family_and_effort():
 
 
 
-def test_no_perturbation_of_a_real_agent_label_is_silently_dropped():
-    """E267 (I55 M1): every form of a real cohort label other than the label itself stops the build or still reads exactly."""
+def test_the_manifest_registers_every_aa_row_and_matches_the_grammar():
+    """O64 (I56 M1): the real manifest covers every captured row and agrees with the E267 grammar for every cohort row."""
 
     from valuerank.paths import DATA
-    capture = {item["label"]: item for item in json.loads((DATA / "aa" / "coding_agents_capture.json").read_text())["configurations"]}
+    captured = json.loads((DATA / "aa" / "coding_agents_capture.json").read_text())["configurations"]
+    manifest = json.loads((DATA / "aa" / "coding_agents_manifest.json").read_text())
+    v.check_agent_manifest(captured, manifest)
+    records = {item["label"]: item for item in captured}
     scores = json.loads((DATA / "scores.json").read_text())
-    ranked = {row["id"] for row in scores["v3"]["rows"]} | {row["id"] for row in scores["v3Tracks"]["aicd"]["rows"]}
-    configurations = [{"id": m["id"], "name": m["name"], "family": m.get("family") or m["name"], "effort": m.get("aaVariant")}
-                      for m in scores["models"] if m["id"] in ranked]
-    assert v.unclassified_agent_labels(configurations, capture, {}) == []
-    real = sorted({label for configuration in configurations for label in v.exact_agent_records(configuration, capture)})
-    assert len(real) >= 8
-    perturb = (lambda l: l.replace(" (", "("), lambda l: l.replace(" - ", " -  ", 1), lambda l: l.replace("(", "[").replace(")", "]"),
-               lambda l: l + " - preview", lambda l: l.replace("(max)", "((max))"), lambda l: l + "(with fallback)",
-               lambda l: l.replace(" - ", " \u2013 ", 1), lambda l: l.lower(), lambda l: l + "\n", lambda l: l.replace("(max)", "(Max)"),
-               lambda l: l.replace(" (max)", " XHigh"), lambda l: l + " ", lambda l: l.replace(" ", "  "))
-    for label in real:
-        for change in perturb:
-            mutated = change(label)
-            if mutated == label:
-                continue
-            records = {**{key: value for key, value in capture.items() if key != label}, mutated: {}}
-            reads = any(mutated in v.exact_agent_records(configuration, records) for configuration in configurations)
-            assert reads or v.unclassified_agent_labels(configurations, records, {}) == [mutated], mutated
+    for model in scores["models"]:
+        if model.get("aaFrontierTier"):
+            configuration = {"id": model["id"], "name": model["name"], "family": model.get("family") or model["name"], "effort": model.get("aaVariant")}
+            v.agent_record_for(configuration, {}, records, manifest)
 
 
-def test_an_unread_label_naming_a_cohort_model_stops_assembly_unless_registered():
-    """E267 (I55 M1): the build stops on a label it cannot classify; the reviewed register clears it."""
+def test_any_change_to_aa_rows_stops_the_build_until_the_manifest_is_reviewed():
+    """O64 (I56 M1): a new row, a changed label, a vanished row or two rows sharing a label all stop the build."""
 
+    captured = [{"id": "1", "label": "Agent - A (max)"}, {"id": "2", "label": "Agent - B (max)"}]
+    manifest = {"rows": {"1": {"label": "Agent - A (max)", "classification": "exact", "configurationId": "a"},
+                         "2": {"label": "Agent - B (max)", "classification": "other", "reason": "outside the cohort"}}}
+    v.check_agent_manifest(captured, manifest)
+    for changed, message in (([*captured, {"id": "3", "label": "Claude Code + MCP - A (Max)"}], "is not in the manifest"),
+                             ([captured[0], {"id": "2", "label": "Agent - B2 (max)"}], "but AA now labels it"),
+                             ([captured[0]], "AA no longer lists it"),
+                             ([*captured, {"id": "4", "label": "Agent - A (max)"}], "more than one Coding Agent Index row")):
+        with pytest.raises(ValueError, match=message):
+            v.check_agent_manifest(changed, manifest)
+
+
+def test_the_manifest_and_the_grammar_must_agree():
+    """O64: the manifest decides; the E267 grammar is a cross-check, and a disagreement stops the build."""
+
+    a = {"id": "a", "name": "A (max)", "family": "A", "effort": "max"}
+    records = {"Agent - A (max)": {}, "Agent - A [max]": {}}
+    agree = {"rows": {"1": {"label": "Agent - A (max)", "classification": "exact", "configurationId": "a"},
+                      "2": {"label": "Agent - A [max]", "classification": "other", "reason": "reviewed"}}}
+    assert v.agent_record_for(a, {}, records, agree) == "Agent - A (max)"
+    unread = {"rows": {"2": {"label": "Agent - A [max]", "classification": "exact", "configurationId": "a"}}}
+    with pytest.raises(ValueError, match=r"a: the manifest registers \['Agent - A \[max\]'\].*grammar reads \['Agent - A \(max\)'\]"):
+        v.agent_record_for(a, {}, records, unread)
+    with pytest.raises(ValueError, match="the manifest registers \\[\\]"):
+        v.agent_record_for(a, {}, records, {"rows": {}})
+
+
+def test_assembly_reads_the_manifest():
     agents = documents()["codingAgents"]
-    agents["configurations"].append({"label": "Agent - A [max]", "meanCostPerTaskUsd": 1.0, "components": []})
-    with pytest.raises(ValueError, match=r"\['Agent - A \[max\]'\] mention a cohort model"):
-        v.assemble(CONFIGURATIONS, documents(codingAgents=agents), release_day=DAY)
-    mapping = {**documents()["configurationMap"], "agentLabelRegister": {"Agent - A [max]": "reviewed: names a different model"}}
-    assert v.assemble(CONFIGURATIONS, documents(codingAgents=agents, configurationMap=mapping), release_day=DAY)["rows"]
+    agents["configurations"].append({"id": "new", "label": "Claude Code + MCP - A (Max)", "meanCostPerTaskUsd": 1.0, "components": []})
+    manifest = fixture_manifest(documents()["codingAgents"])
+    with pytest.raises(ValueError, match="review the Coding Agent Index manifest"):
+        v.assemble(CONFIGURATIONS, documents(codingAgents=agents, codingAgentsManifest=manifest), release_day=DAY)
+
+
+def test_agent_safety_sums_blocked_and_fallback_attempts():
+    """O63: disclosed and flagged, never a cost or quality change."""
+
+    record = {"components": [{"attempts": 300, "safety": {"blocked": 2, "fallback": 0, "fallbackModels": []}},
+                             {"attempts": 372, "safety": {"blocked": 0, "fallback": 5, "fallbackModels": ["B"]}}]}
+    assert v.agent_safety(record) == {"status": "flagged", "attempts": 672, "blocked": 2, "fallback": 5, "fallbackModels": ["B"]}
+    assert v.agent_safety(None) is None and v.agent_safety({"components": [{"attempts": 1}]}) == {"status": "not captured"}
+    clean = {"components": [{"attempts": 1, "safety": {"blocked": 0, "fallback": None, "fallbackModels": []}}]}
+    assert v.agent_safety(clean)["status"] == "none"

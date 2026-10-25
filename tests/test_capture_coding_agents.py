@@ -58,14 +58,17 @@ def test_flight_values_skip_lines_that_are_not_json():
     assert cca.flight_values(text) == [{"a": 1}, ["x", {"y": 2}]]
 
 
-def test_configuration_rows_dedupe_by_id_and_require_cost_blocks():
+def test_configuration_rows_dedupe_by_id_and_keep_unpriced_rows():
+    """I56 M1: a row without costs is kept, so the manifest (O64) sees every row AA lists."""
+
     first = row("a1", "Agent - Model (max)")
     duplicate = dict(first, displayLabel="duplicate label ignored")
     no_sums = {"id": "b2", "displayLabel": "No sums", "mean": {}}
+    label_only = {"id": "c3", "displayLabel": "A label in navigation"}
     no_id = row("", "No id")
-    values = [{"rows": [first, no_sums]}, ["$", {"benchmarkRows": [duplicate, no_id]}], "scalar"]
+    values = [{"rows": [first, no_sums, label_only]}, ["$", {"benchmarkRows": [duplicate, no_id]}], "scalar"]
     rows = cca.configuration_rows(values)
-    assert [item["displayLabel"] for item in rows] == ["Agent - Model (max)"]
+    assert [item["displayLabel"] for item in rows] == ["Agent - Model (max)", "No sums"]
 
 
 def test_configuration_record_keeps_costs_and_implied_task_count():
@@ -75,8 +78,10 @@ def test_configuration_record_keeps_costs_and_implied_task_count():
     assert record["totalCostUsd"] == 468.7 and record["meanCostPerTaskUsd"] == 1.554
     assert record["pricedTaskCount"] == round(468.7 / 1.554, 6)
     assert record["components"] == [
-        {"name": "deep-swe-v1.1", "dataset": "datacurve/deep-swe-1-1@1", "weight": 1 / 3, "attempts": 339, "reward": 0.7}
+        {"name": "deep-swe-v1.1", "dataset": "datacurve/deep-swe-1-1@1", "weight": 1 / 3, "attempts": 339, "reward": 0.7,
+         "safety": {"refused": None, "blocked": None, "fallback": None, "fallbackModels": []}}
     ]
+    assert record["isRouter"] is False
 
 
 def test_configuration_record_without_costs_or_display_falls_back():
@@ -87,7 +92,17 @@ def test_configuration_record_without_costs_or_display_falls_back():
     assert record["agent"] == "Agent" and record["model"] is None
     assert record["totalCostUsd"] is None and record["meanCostPerTaskUsd"] is None
     assert record["pricedTaskCount"] is None and record["indexScore"] is None
-    assert record["components"] == [{"name": "x", "dataset": None, "weight": None, "attempts": None, "reward": None}]
+    assert record["components"] == [{"name": "x", "dataset": None, "weight": None, "attempts": None, "reward": None,
+                                     "safety": {"refused": None, "blocked": None, "fallback": None, "fallbackModels": []}}]
+
+
+def test_safety_record_keeps_blocked_fallback_and_fallback_models():
+    """O63: blocked attempts (hard stops) and fallback attempts, with the models that finished them."""
+
+    safety = {"refusedAttemptCount": 5, "hardStopAttemptCount": 2, "fallbackAttemptCount": 3,
+              "refusals": [{"outcome": "fallback", "chain": [{"releaseName": "Model B"}, {"model": "model-c"}]},
+                           {"outcome": "hard_stop", "chain": [{"releaseName": "Ignored"}]}, {"outcome": "fallback", "chain": [{}]}]}
+    assert cca.safety_record(safety) == {"refused": 5, "blocked": 2, "fallback": 3, "fallbackModels": ["Model B", "model-c"]}
 
 
 def test_configuration_record_with_zero_mean_has_no_task_count():
